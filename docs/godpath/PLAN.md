@@ -7,6 +7,16 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
+2026-10-16 Market God deed: turn food value into delivered nonfood goods in
+a real paid cart, resident or river trade. The living buyer/resident seller
+earns a personal first receipt. Unredeemed credit, XP counters, news, free
+grants and food purchases cannot substitute. No kill, gear-tier quota or new
+price is introduced. Five authored deeds now replace their proxies; five
+remain. Full build/day80 and existing active gods stay. Read
+../../evidence/2026-10-16/market-exchange-audit.md before interpreting changed
+god dates or viability; declared Hoarder/Dealer policies remain separate
+from the standard four and can make correlated decisions on the same seed.
+
 2026-10-16 Ward deed: carry a real hostile wound intended for another known
 living person, then both leave that fight alive. Actual Aegis, Leech and
 named field Bodyguard/Aegis callers record the outcome; withdrawal qualifies.
@@ -63,7 +73,7 @@ Job -> track -> **class** -> **god** -> Table.
 | Subclass verbs (walls, pulls, pushes, swaps, blink, heals, pins, bribes, broadcast, command, stoke, guard, feed camp) | `src/js/godpath.js` (`do` on a data action) | built, 27 new abilities |
 | Class recognition, player + villager, one function | `godpath.js recognizeClass` | built; sheet line in `app.js` |
 | Offers lean to the path | `godpath.js shapeOffers` (player, villager, gift sheets); `villager-build.js buildPathLean` | built |
-| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay, Apex and Ward; legacy proxies for six remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
+| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay, Apex, Ward and Market God; legacy proxies for five remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
 | Table never reads godhood | `scripts/godpath/ladder.js` | enforced |
 
 ## Checks

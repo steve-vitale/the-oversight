@@ -23789,6 +23789,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }[pick.id] || { name: pick.label, kg: 0.3 };
       itemBy.units = 1; itemBy.kcalEach = 0;
       s.inventory.push(itemBy);
+      this.recordMarketExchange(buyerId, { route: 'river', role: 'buyer', partner: 'river_trader',
+        item: 'river:' + pick.id, price: pick.price, packKcal: fromPack, pantryKcal: fromPantry, tabKcal: 0 }, itemBy);
       rt.greeted = true;
       this._evTrustAll(2);
       this.say(`🤝 Done. The ${pick.label.toLowerCase()} is yours — ${pick.price} kcal of trade-goods, a day-part of haggling, and a fair deal honestly struck. (Village trust +2. The river notes that Haven trades fair.)`);

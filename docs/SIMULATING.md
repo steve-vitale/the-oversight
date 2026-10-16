@@ -1,5 +1,19 @@
 # Simulating The Oversight — how to measure a change
 
+Market exchange (2026-10-16): `test-market-deed.js` is discovered by
+quick/full checks and proves real payment/delivery, buyer/seller ownership,
+load/succession and ordinary ceremonies. Use the four standard policies
+plus separately named merchant-hoarder/merchant-dealer cohorts. Do not pool
+same-seed strategy samples as independent worlds. The dated
+market-exchange audit records full changed-hash indices and a scalable replay
+rule: every changed row/metric/build identity and every baseline/candidate
+Market God exposure, plus first/last remaining
+changed-hash case per policy/cohort. Unreplayed hashes remain unclassified;
+do not assume metadata-only changes. Replays must match whole balanced
+observations and full hashes. Large plans are compressed, source-keyed jobs
+resume unchanged, and the seven raw collector/comparator files travel with
+reconstructions. See ../evidence/2026-10-16/market-exchange-audit.md.
+
 Ward protection (2026-10-16): automatically discovered
 `scripts/godpath/test-aegis-recipient.js` and `test-ward-deed.js` test actual
 recipient damage, person-owned outcomes and save/load with one harness each.

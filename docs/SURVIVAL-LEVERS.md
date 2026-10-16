@@ -43,6 +43,19 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Market God access (2026-10-16): its authored paid food-to-goods outcome
+replaces the legacy synergy/class10-day fallback. A real early trade can
+permit an otherwise complete build at80; a class that never trades cannot
+substitute elapsed time. Neither direction automatically improves/regresses
+the game. Actual prices, food spent, Haggle/preservation value, XP and full
+build/day80 stay. Buyer and living resident seller share person-owned credit;
+it is not nourishment, income inventory or pantry standing. Read the separate
+standard and declared Miser16/64 contrasts in
+../evidence/2026-10-16/market-exchange-audit.md. Earlier god access in screen4
+coexists with earlier community loss; screen1234 loses the old proxy-based
+ascension. Investigate paths and opportunity rather than restoring a wait
+proxy, forcing a death or compensating with free food.
+
 Ward protection (2026-10-16): distinguish two levers. Aegis now admits the
 player as an NPC's actual protected ally and composes the redirected hit
 once for the protector, before the intended recipient's armor/history.

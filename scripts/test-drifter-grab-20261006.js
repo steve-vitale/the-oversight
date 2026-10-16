@@ -14,28 +14,17 @@
 //   - 'distant-village-relives': leaving a distant village and returning days
 //     later re-runs catch-up (village.day advances, turf visibly worked).
 // Run: node scripts/test-drifter-grab-20261006.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
- 'src/js/convoTopics.js', 'src/js/journal.js', 'src/js/party.js', 'src/js/party-formal.js',
- 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js', 'src/js/perceive.js',
- 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js',
- 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/ledger.js',
- 'src/js/villager-agency.js', 'src/js/codex-people.js', 'src/js/membership.js',
- 'src/js/hierarchy.js', 'src/js/debug-scenarios.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+// Load the same complete, seeded engine as current simulations. The old
+// partial eval loader used unseeded roster/village generation, so identical
+// source could alternate between a stable pantry and a changing one.
+const H = require('./sim-harness');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
   if (cond) { pass++; } else { fail++; console.log(`FAIL ${name}${extra ? ' — ' + extra : ''}`); }
 }
 const said = [];
-Game.say = (t) => { said.push(String(t)); };
-Game.sysSay = (t) => { said.push('[SYS] ' + String(t)); };
 function rig(seq) { const o = Math.random; let i = 0; Math.random = () => seq[i++ % seq.length]; return () => { Math.random = o; }; }
 function stepToward(tx, ty) {
   const axes = [];
@@ -77,7 +66,9 @@ function campNight() {
 }
 
 (async () => {
-  await Game.init();
+  ({ Game } = await H.loadGame({ seed: 7 }));
+  Game.say = (t) => { said.push(String(t)); };
+  Game.sysSay = (t) => { said.push('[SYS] ' + String(t)); };
 
   // --- 1. homecoming for the day-1 drifter ---
   {

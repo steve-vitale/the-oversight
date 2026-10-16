@@ -1,5 +1,13 @@
 # Agent lanes (2026-10-15)
 
+Codex Market deed unit (2026-10-16): narrow betrayal.js paid goods delivery
+receipts, game.js's river completion caller, miser.god.deed and matching
+validation/ontology/docs/evidence. No prices, stock, XP, kit ordering or Muse
+region/nomad behavior changes. Existing drifter test's partial unseeded loader
+is replaced with one shared seeded harness after a full-suite flake; all11
+assertions stay. See ../evidence/2026-10-16/market-exchange-audit.md. Five god
+proxies, Garden/reactor questions and natural Finale/Network remain open.
+
 Codex Ward unit (2026-10-16): narrow godpath.js/game.js Aegis recipient and
 damage-route correction, authored Undying Ward receipt, matching field
 observation/data/validation and dated three-arm measurement. Field RNG count,

@@ -97,7 +97,7 @@ for (const pid of PATH_IDS) {
 }
 const far = (GP.retired || {}).farstrider;
 const outcomeDeeds = PATH_IDS.map(pid => paths[pid]?.god?.deed).filter(Boolean);
-T.ok('authored outcome deeds declare a wired event, dawn rule and objective', outcomeDeeds.length > 0 && outcomeDeeds.every(d => ['death_refused', 'relay_office', 'apex_hunt', 'ward_rescue'].includes(d.event) && typeof d.afterDawn === 'boolean' && typeof d.hint === 'string' && d.hint.trim()));
+T.ok('authored outcome deeds declare a wired event, dawn rule and objective', outcomeDeeds.length > 0 && outcomeDeeds.every(d => ['death_refused', 'relay_office', 'apex_hunt', 'ward_rescue', 'market_exchange'].includes(d.event) && typeof d.afterDawn === 'boolean' && typeof d.hint === 'string' && d.hint.trim()));
 T.ok('the leftover capstone (farstrider) is retired and folded into a subclass, with a reason',
   !!(far && far.foldedInto && paths[far.foldedInto.path] && paths[far.foldedInto.path].subclasses[far.foldedInto.subclass] && far._retired));
 

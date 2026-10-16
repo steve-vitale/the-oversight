@@ -38,6 +38,7 @@
 //   - confrontScammer(vis, s) / resolveConfront(vis, s, how)
 //   - hawkerOffer(vid) / hawkerBuy(vid)
 //   - creditGoodsTrade(who, consideration) -> completed paid goods practice for an actual living bearer/resident; uses the shared capped trade deed
+//   - recordMarketExchange(who, receipt, delivered) -> first personal paid food-to-goods outcome after real delivery, without old-counter backfill
 //   - goodsTradePrice(basePrice, seller?) -> current buyer's effective quote, without mutating cached stock; same quote used for display, payment and practice
 //   - visitorHtml()
 //   - visitorDaily()
@@ -3336,6 +3337,43 @@
     if ((me ? this.state.scholar.health : (v.health || {})[vid] ?? 100) <= 0) return 0;
     return this.creditDeed(me ? 'player' : vid, 'trade');
   },
+  // Actual goods and payment settle first. A quote, unspent tab or XP counter
+  // cannot invent this accomplishment; buyer and resident seller share it.
+  recordMarketExchange(who, receipt, delivered) {
+    const s = this.state.scholar, v = this.state.village;
+    const vid = who === 'player' ? this.villagerId : who, person = vid && this.vpOf(vid);
+    if (this.over || !person || person.id !== vid || person.dead ||
+        (vid === this.villagerId ? s.health <= 0 : !(v.roster || []).includes(vid) || (v.health || {})[vid] <= 0)) return false;
+    if (!receipt || !['cart', 'resident', 'river'].includes(receipt.route) ||
+        !['buyer', 'seller'].includes(receipt.role) || !receipt.partner || receipt.partner === vid ||
+        !Number.isFinite(receipt.price) || receipt.price <= 0 ||
+        !['packKcal', 'tabKcal', 'pantryKcal'].every(k => Number.isFinite(receipt[k]) && receipt[k] >= 0) ||
+        receipt.packKcal + receipt.tabKcal + receipt.pantryKcal <= 0 ||
+        !delivered || !(s.inventory || []).includes(delivered) || !(delivered.units > 0) || delivered.kcalEach > 0) return false;
+    const known = receipt.route === 'river'
+      ? ['river:knife', 'river:salt', 'river:rope'].includes(receipt.item)
+      : delivered.itemId === receipt.item && (this.data.items || []).some(i => i.id === receipt.item && !(i.kcalEach > 0));
+    if (!known) return false;
+    if (receipt.route === 'cart') {
+      const trader = (v.visitors || []).find(x => x.id === receipt.partner);
+      if (!trader || trader.dead) return false;
+    }
+    if (receipt.route === 'resident') {
+      const other = this.vpOf(receipt.partner);
+      if (!other || other.id !== receipt.partner || other.dead || !(v.roster || []).includes(other.id) ||
+          (other.id === this.villagerId ? s.health <= 0 : (v.health || {})[other.id] <= 0)) return false;
+    }
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[vid] || (books[vid] = {});
+    if (book.market_exchange) return false;
+    book.market_exchange = { day: s.day || 0, route: receipt.route, role: receipt.role,
+      partner: receipt.partner, item: receipt.item, price: receipt.price,
+      packKcal: receipt.packKcal, tabKcal: receipt.tabKcal, pantryKcal: receipt.pantryKcal };
+    const last = (this.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { this.tele('godpath_deed', { t, who: vid, event: 'market_exchange', day: s.day || 0,
+      route: receipt.route, role: receipt.role, item: receipt.item }); }
+    catch (e) { console.warn('[godpath] goods exchange', e); }
+    return true;
+  },
   goodsTradePrice(basePrice, seller) {
     if (!Number.isFinite(basePrice) || basePrice <= 0) return basePrice;
     let price = this.modTarget ? this.modTarget('trade.price_mult', basePrice, {}) : basePrice;
@@ -3369,6 +3407,7 @@
       ware.scam.ledgerId = entry.id;
     }
     try { this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1; } catch (e) {}
+    let marketItem = null;
     if (ware.kind === 'food') {
       const day = (this.state.scholar || {}).day || 0;
       const entry = { itemId: ware.itemId, name: ware.name, units: ware.units || 1, kcalEach: ware.kcalEach || 300,
@@ -3381,7 +3420,13 @@
       (this.state.scholar.inventory = this.state.scholar.inventory || []).push(entry);
     } else {
       const def = (this.data.items || []).find(i => i.id === ware.itemId) || {};
-      (this.state.scholar.inventory = this.state.scholar.inventory || []).push({ itemId: ware.itemId, name: ware.name, units: 1, kcalEach: 0, kg: ware.kg != null ? ware.kg : (def.kg || 0.8) });
+      marketItem = { itemId: ware.itemId, name: ware.name, units: 1, kcalEach: 0, kg: ware.kg != null ? ware.kg : (def.kg || 0.8) };
+      (this.state.scholar.inventory = this.state.scholar.inventory || []).push(marketItem);
+    }
+    if (marketItem) {
+      const paid = { route: 'resident', item: ware.itemId, price, packKcal: pay.paid, tabKcal: 0, pantryKcal: 0 };
+      this.recordMarketExchange(buyerId, { ...paid, role: 'buyer', partner: vid }, marketItem);
+      this.recordMarketExchange(vid, { ...paid, role: 'seller', partner: buyerId }, marketItem);
     }
     const took = pay.taken.map(t => `${t.units}× ${t.name}`).join(', ');
     this.say(`Done — the ${ware.name} is yours for ${took}. ${this.displayName(vid)} pockets the food with a merchant's neat hands.`);
@@ -3566,8 +3611,10 @@
       w.scam.ledgerId = entry.id;
     }
     try { this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1; } catch (e) {}
+    let marketItem = null;
     if (w.kind === 'alien') {
       const granted = this.alienLootGrant(w.itemId);
+      marketItem = granted && granted.entry;
       // tier lie rides on the granted item — revealed at first use
       if (w.scam && w.scam.kind === 'tier_lie' && granted && granted.entry) {
         granted.entry.scamTierLie = true;
@@ -3590,7 +3637,8 @@
       this.say(`Done. The ${w.name} ${w.units > 1 ? `(${w.units} rations)` : ''} ${w.units > 1 ? 'are' : 'is'} yours —${tabNote}${took ? ' ' + took : ''} for ${w.units > 1 ? 'them' : 'it'}. "Eat well on the road."`);
     } else if (w.kind === 'tool') {
       const def = (this.data.items || []).find(i => i.id === w.itemId) || {};
-      (this.state.scholar.inventory = this.state.scholar.inventory || []).push({ itemId: w.itemId, name: w.name, units: 1, kcalEach: 0, kg: def.kg || 0.8 });
+      marketItem = { itemId: w.itemId, name: w.name, units: 1, kcalEach: 0, kg: def.kg || 0.8 };
+      (this.state.scholar.inventory = this.state.scholar.inventory || []).push(marketItem);
       this.say(`Done. The ${w.name} is yours —${tabNote}${took ? ' ' + took : ''} for it. Good steel has a way of paying for itself.`);
     } else {
       // news: real village names from the world, a road tip, word spreads
@@ -3602,6 +3650,8 @@
         ? `${vis.name} sketches a map in the dirt: "${named.join(' — ')}. Three days if the road's kind. There's orchards gone wild halfway; eat your fill, nobody's claimed them." Word of Haven travels a little further, too.`
         : `${vis.name} sketches a map in the dirt: "Two villages down the river — you'll smell their smoke before you see them. There's orchards gone wild halfway; eat your fill, nobody's claimed them." Word of Haven travels a little further, too.`);
     }
+    if (marketItem) this.recordMarketExchange(buyerId, { route: 'cart', role: 'buyer',
+      partner: vis.id, item: w.itemId, price: quotedPrice, packKcal: pay.paid, tabKcal: tabUsed, pantryKcal: 0 }, marketItem);
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
     try { this.tickAction(8); } catch (e) {}
     try { this.creditGoodsTrade && this.creditGoodsTrade(buyerId, quotedPrice); } catch (e) { console.warn('[tracks] cart purchase', e); }

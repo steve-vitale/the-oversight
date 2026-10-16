@@ -8,6 +8,14 @@ Prepared titan/coalition campaign evidence is separate from natural reachability
 
 ## Forty-context map
 
+2026-10-16 Market fitting deed: paid goods delivery now replaces its old
+age/synergy proxy for both buyer and living resident seller. This is earned
+access, not a new god action or proof that sponsorship/quartermaster scale
+promises are complete. The prepared native tier3 care-item purchase/use and
+ordinary player/NPC ceremonies are caller proof; natural availability and
+survival tradeoffs use separate declared Miser cohorts. See
+../../evidence/2026-10-16/market-exchange-audit.md.
+
 2026-10-16 Ward prerequisite/deed: actual NPC Aegis can protect the bearer;
 redirected damage is composed once for the actual protector. Real carried
 wounds plus both-person living exit are observed in tactical Aegis/Leech

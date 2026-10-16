@@ -9,6 +9,18 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Market God fitting deed (2026-10-16): paid cart/resident/river exchanges now
+record personal food-to-goods outcomes after actual delivery. Finished
+physical food, preserved trade value, tab and communal payment stay distinct;
+real resident sellers qualify too. Quotes, free grants, news, food purchases,
+failed delivery and old counters do not substitute. Existing gods and full
+build/day80 gates stay. Five authored deeds/five proxies now remain; see
+../evidence/2026-10-16/market-exchange-audit.md for36 actual-caller/load/ceremony
+checks, native paid tier3 care-item use and source-bound standard plus declared
+Miser measurements. Preserve the community warnings rather than treating a
+different god date as an automatic improvement. Garden/reactor questions and
+natural Finale/Network remain open.
+
 Ward protection (2026-10-16): fourth authored deed requires a real hostile
 wound carried for another known living person, then both surviving the fight.
 Actual withdrawal qualifies. Six god proxies remain. Separate Aegis-only and
@@ -609,7 +621,14 @@ post-production requests; legacy missing data remains unknown. Targeted
 of need self-supplied and only eight days where every NPC requests food.
 This does not settle Garden's seven-day threshold, continuous membership or
 the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
-- **Current authored deeds:** four now have real outcomes: Unkillable, Voice,
+- **Current authored deeds:** five now have real outcomes: Unkillable, Voice,
+  Apex, Ward and Market God. Market requires a completed paid exchange of
+  food value for delivered nonfood goods; actual living resident seller and
+  buyer receive their own first receipt. There is no combat requirement or
+  new tier/quantity quota. See ../evidence/2026-10-16/market-exchange-audit.md
+  for current measurements, attribution, prepared caller/native proof and
+  limitations. Five proxies remain; Garden/reactor questions are unchanged.
+- **Earlier Ward implementation:** four then had real outcomes: Unkillable, Voice,
   Apex and Undying Ward. Ward requires a real hostile wound carried for
   another known living person, followed by both surviving the fight; an
   actual withdrawal can qualify. Six proxies remain. No kill, arbitrary
@@ -843,6 +862,23 @@ See ../evidence/2026-10-16/garden-recipient-audit.md.
 - **Never trust 8 seeds.**
 
 ## 3. Known issues (small, logged)
+
+Market phone follow-up (2026-10-16): the purchased tier3 Nanite swarm is
+usable outside combat and heals50 immediately through the generic item
+handler, while its baseEffect says "over3 turns". Keep actual timing and
+text distinct; this unit changes neither. Resident hawker payment removes
+the buyer's real pack food but does not credit a modeled seller food store,
+despite "pockets the food" narration. New Market seller receipts certify
+completed sale participation, not income inventory or nutrition. Audit
+these existing timing/economic-model gaps separately; see
+../evidence/2026-10-16/market-exchange-audit.md.
+
+Drifter fixture follow-up (2026-10-16): test-drifter-grab now uses one shared
+seeded complete harness rather than a partial unseeded eval loader. Its11
+assertions are unchanged and pass on both frozen Game arms. The earlier
+full-suite pantry-equality failure and standalone before/current passes
+remain in the market-exchange evidence. Other legacy fixtures below remain
+open; this does not certify every village-return scenario.
 
 Legacy test fixtures (2026-10-16): drifter-grab can assert a village return
 that combat prevented (same pre-evaluation seeds2/9 on both unchanged loaded
