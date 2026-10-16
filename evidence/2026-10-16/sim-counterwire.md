@@ -68,16 +68,57 @@ All three are kind-driven (no per-monster branches), consistent with the existin
 
 ## Results
 
-PENDING — implementation in progress.
+### Pilot (8 seeds × leadfeast, treatment vs identical-seed control, win-side stack)
+
+Per-seed JSONs: evidence/2026-10-16/perseed-counterwire-arm/ · beats: evidence/2026-10-16/counterwire-arm-beats/ · analyzer: scripts/analyze-counterwire-20261016.js.
+
+| metric | treatment | control |
+|---|---|---|
+| counter-executed w3+ KILLS | 0 | 0 |
+| counter-executed kills (all waves) | 40 | 0 |
+| w3+ TRICK EXECUTIONS (tally) | 30 | 0 |
+| mean field deaths/run (within w3+-reached pairs, 8/8) | 33.00 | 33.50 |
+| w3+ tricks known (mean/run) | 3.88 | 0.63 |
+| discoveries (mean/run) | 25.9 | 22.5 |
+| national | 7/8 | 8/8 (guardrail ≥6: OK) |
+| won | 0/8 | 0/8 |
+| maxWave | 5 | 5 (OK) |
+| median days | 126 | 128 (report-only) |
+| death modes treatment-only | "a wound that wouldn't close" ×1 (pre-existing, game.js:25515 — false alarm, not a new mode) |
+
+**Trick execution breakdown (treatment tally, 8 runs):** farewell 2 (callback) · look_away 1 (ad_break) · wait:algorithm-tank 2 · confess 1 (gavel) · contradict 6 (eulogy) · examine 6 (terms_of_service) · leave 1 (suburb) · wait:nielsen-boring 11 · plus w1/2: wait:spool-record 16, shout 8, dance 3.
+
+**PRIMARY verdict: NO-GO.** (a) 0 w3+ counter-executed kills (needs >0). (b) field-death-rate 33.00 vs 33.50 — technically down but flat noise, not movement. Guardrails all OK (the death-mode "breach" is a 1-in-333 pre-existing rare cause).
+
+### What the pilot actually proved
+
+The lever is ALIVE — the metric was blind. 30 wave-3+ trick executions in 8 runs (vs 0 on control): villagers ARE performing the new tricks (farewells spoken, confessions made, boring fights fought, suburbs walked away from). The (a) metric demanded counter-executed KILLS, but 5 of the 15 tricks are non-lethal resolutions by design (redactor starve-out, focus bore-out, tos dismiss, suburb leave, eulogy dismiss) — successes the kill-only metric cannot see. The kill-path tricks (confess→strikes, farewell→strikes, etc.) didn't convert to kills in 8 runs: wave-3+ field fights are rare (2–7/run per the diagnostic), discoveries land late (d81+), and the tricks buy survival, not damage.
+
+Two real bugs found and fixed during the pilot:
+1. **TB kill misattribution:** fight-level trickLog attributed a trick performed on one species to another species' kill in multi-species TB fights. Fixed with per-monster trickLogByMid + trickSummaryFor (commits fbe730a1, c5740c1f). The "40 vs 0" all-wave kill gap was inflated by this; per-mid attribution is now honest.
+2. **Morale fled mid-trick:** the hopeless judgment (rtd < rtk×0.85) read trick execution (deliberate non-striking) as "losing the damage race" and fled villagers on round 2 of 3-round tricks. Fixed with trick-aware morale: performing a known trick + HP>25% → hold the line (commit 3a908268). Synthetic probes confirm tricks now complete (redactor quiet×3 → starve-out; eulogy contradict×3 → kindly dismissed).
+
+### Decision: NO confirm spend on the current metrics — layer lands, metric revised for next run
+
+The pilot gate's job is to kill levers with invisible effects. This lever's effect is VISIBLE (30 executions) — but the pre-registered GO metrics (kills, death-rate) don't capture a non-lethal trick game's value. Running 16 confirm seeds against a kill-only metric would be wasted spend. Per §14 the metric revision belongs to the NEXT run (see Metric review below). The layer lands because the blank is genuinely filled: wave-3+ went from zero knowledge representation to 26 learnable tricks with 30 field executions in 8 runs.
 
 ## Metric review (§14)
 
-PENDING.
+- **The (a) metric was misdesigned for this arm.** "Counter-executed kills >0" assumes the trick game's value is kills. But the Undertale design (Steve 2026-10-06) is about NOT fighting: the redactor starves out, the focus group leaves, the suburb is walked away from, the eulogy dismisses you kindly. These are the trick game's SUCCESSES and the metric scored them as failures (0). The metric also missed that kill-path tricks (gavel, callback, ad_break) buy survival first — the kill comes later, if at all.
+- **Proposed revision for the NEXT run:** PRIMARY = trick RESOLUTIONS >0, where a resolution = a fight vs a known-trick species ending in (trick-attributed kill) OR (mFlee/vFlee with ≥2 trick actions in the fight's trickLog — the trick drove the outcome). SECONDARY = field-death-rate within wave-3+-reached runs (keep). This measures what the tricks actually do.
+- **The (b) metric was honest but underpowered.** -0.5 deaths on a base of 33 across 8 runs is noise. With 30 executions, the per-execution effect would need to be ~1 life saved per 10 executions to move the needle — plausible but not proven. The next run needs the resolution metric, not just deaths.
+- **No re-scoring:** the NO-GO stands on the pre-registered metrics. The revision above is for the next run only.
 
 ## Convergence state
 
-scale-onramp: converging (game-code arm — implements the named lever from the diagnostic).
+scale-onramp: converging (game-code arm — the named lever is implemented and landed; the representation blank is filled; the effect metric needs the revision above before the next measurement run).
 
 ## Blank-fill record
 
-PENDING.
+- FILLED (code): knowledge representation for the 6 unwired wave-3 species + 10 wave-4 + 10 wave-5 (villagerTrickDefs, 26 entries) — discoveries now recordable, villageKnowsTrick sees them.
+- FILLED (code): 15 field-AI actuable gates + resolutions — 30 w3+ trick executions measured in 8 pilot runs (vs 0 on control).
+- FILLED (code): the 3 dead perform-kinds (blindside/face_it/eyes) — checkMonsterCounter cases added; synthetic proof green.
+- FILLED (code): TB-path kill attribution — recordWaveKill now carries per-monster trick detail; per-mid isolation fixed.
+- FILLED (code): trick-aware morale — villagers no longer flee mid-trick on the hopeless path.
+- DOCUMENTED (not fixed — out of scope): wave-6 has no trick defs (canon-doc silent); eater/influencer/audit/reunion/cancellation/editor/rerun/timeslot/finale/finale_crew/finale_opening are knowledge-only (no abstract-model hook); audit/editor field ports invert the TB mechanic (filed in sim-findings); finale_crew/finale_opening/herald missing from sigW5/sigW4 field hooks.
+- DOCUMENTED (canon): MONSTER-WAVES.md is stale vs data (56→72 defs, 14→17 counter kinds, wave-4/5 roster drift, wave-6 unlisted) — noted, not rewritten.
