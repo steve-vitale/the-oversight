@@ -1,0 +1,17 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('campaign-preparer'),P=require('../policies/campaign-preparer');
+(async()=>{const G=await K.load({seed:7});let s,ctx;
+ const nuts=(units=10)=>({name:'Prepared hickory nuts (in shell)',plantId:'hickory_nut',foodKind:'nut',foodState:'in_shell',hiddenKcal:200,kcalEach:0,edible:false,units,kg:.1,spoilDay:9999,harvestShares:{prepared_person:1}});
+ function fresh(){G.tbfight=null;G.pendingEncounter=null;G.over=false;K.newRun(G);s=G.state.scholar;s.day=85;s.health=100;s.kcal=2400;s.dayTicks=0;s.inventory=[nuts()];ctx={};}
+ fresh();const item=s.inventory[0];P.preparePack(G,ctx);T.ok('actual public shelling turns a carried harvest into paid 75-percent food',item.foodState==='shelled'&&item.kcalEach===150&&item.units===10&&s.dayTicks===4&&ctx.campaignPrepKcal===1500);T.ok('shelling preserves physical source and units',item.harvestShares.prepared_person===1&&item.units===10);
+ s.inventory.push(nuts());P.preparePack(G,ctx);T.ok('repeated hooks cannot shell a second batch in the same person-day',s.inventory[1].foodState==='in_shell'&&ctx.campaignPrepShells===1);s.day++;P.preparePack(G,ctx);T.ok('the next day has its own paid preparation budget',s.inventory[1].foodState==='shelled'&&ctx.campaignPrepShells===2);
+ fresh();s.inventory[0].bonded=true;P.preparePack(G,ctx);T.ok('bonded food is not consumed as a supply input',s.inventory[0].foodState==='in_shell'&&!ctx.campaignPrepShells);
+ fresh();s.inventory[0].spoilDay=1;P.preparePack(G,ctx);T.ok('spoiled nuts cannot become useful rations',s.inventory[0].kcalEach===0&&!ctx.campaignPrepShells);
+ fresh();s.kcal=1799;P.preparePack(G,ctx);T.ok('the worker keeps the real meal reserve',s.dayTicks===0&&!ctx.campaignPrepShells);
+ fresh();s.health=49;P.preparePack(G,ctx);T.ok('an injured worker does not take on extra prep',s.dayTicks===0&&!ctx.campaignPrepShells);
+ fresh();s.dayTicks=385;P.preparePack(G,ctx);T.ok('late-day work is bounded',s.inventory[0].foodState==='in_shell'&&!ctx.campaignPrepShells);
+ fresh();G.pendingEncounter={kind:'prepared'};P.preparePack(G,ctx);T.ok('pending encounters retain control of play',s.inventory[0].foodState==='in_shell'&&!ctx.campaignPrepShells);G.pendingEncounter=null;
+ fresh();const old=G.villagerId;ctx._campaignPrep={person:'predecessor',day:s.day,sorted:true,shelled:true};P.preparePack(G,ctx);T.ok('a successor gets their own person-day budget',ctx._campaignPrep.person===old&&ctx.campaignPrepShells===1);
+ fresh();s.inventory=[];s.insideHaven=true;G.state.village.roster=[G.villagerId];G.state.codex.plants.hickory_nut={level:1};G.addUnknownToLump(G.data.plants.find(p=>p.id==='hickory_nut'),10,s.day,s.inventory,{[G.villagerId]:1});const pantryBefore=G.pantryKcal(),givesBefore=G.state.village.gives?.[G.villagerId]||0;P.preparePack(G,ctx);T.ok('the opaque bag follows native stage, counter sort, shell and shelving',!s.inventory.length&&!s.prepStash.length&&ctx.campaignPrepSorts===1&&ctx.campaignPrepStages===1&&ctx.campaignPrepStoredKcal===1500&&G.pantryKcal()-pantryBefore===1500&&s.dayTicks===12);T.ok('shelving never invents contribution credit',(G.state.village.gives?.[G.villagerId]||0)===givesBefore);
+ fresh();s.inventory=[{name:'Prepared opaque bag',foodState:'unknown',units:1,lump:{},kg:.1,spoilDay:9999}];s.insideHaven=false;G.map.px=0;G.map.py=0;P.preparePack(G,ctx);T.ok('the policy cannot identify a carried bag away from camp',!ctx.campaignPrepSorts);
+ T.done();})().catch(e=>{console.error(e.stack);process.exitCode=1;});

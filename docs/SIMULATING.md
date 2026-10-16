@@ -1,5 +1,18 @@
 # Simulating The Oversight — how to measure a change
 
+Preparation coverage (2026-10-16): `campaigner-preparer` is a separate opt-in
+cohort over campaigner-rations. It shells one real carried/counter nut batch
+per person/day, stages opaque pack harvests before camp sorting, and uses the
+native bulk shelving action only when its finished batches are safe. Keep
+processed physical kcal, pantry storage, `gives` credit and campaign funding
+separate. The discarded direct-pack-sort draft used an API combination absent
+from the phone UI; its source-bound results are historical, not human-route
+proof. Run campaign-audit with campaigner,campaigner-rations,campaigner-preparer
+and compare the explicit campaigner-rations:campaigner-preparer pair. The
+automatically discovered14-check test and dated audit retain native costs,
+limits, controls and adverse metrics:
+../evidence/2026-10-16/campaign-preparer-audit.md.
+
 Opt-in ration experiment (2026-10-16): `campaigner-rations` adds honest public
 access/credit/weight checks and known-target food retention, with its own
 `campaignRation*` counters. It is a failed campaign-funding hypothesis: more

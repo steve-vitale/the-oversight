@@ -41,6 +41,27 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Harvest preparation (2026-10-16): **retain opt-in coverage; no default
+adoption or campaign-success claim**. campaigner-preparer uses actual Pack
+shelling and native counter stage/sort/shell/put-away, with the existing75%
+yield and4/8-tick costs. Added work is bounded by person/day,1800kcal,50HP
+and the early work window. Extra action time can change NPC activity, danger,
+food, contributions, offers and progression. The direct-pack-sort API draft
+is discarded as human-route evidence; retain its separate source/report.
+Physical processed kcal, stored food and contribution credit must remain
+distinct: the actual shelf action adds food but no `gives` credit. Never
+invent that credit in a controller. At16 seeds wins12->15 coexist with first
+bearer day60 survival9->8, classes11->9 and contest/show gear16->15. This
+does not make preparation a default or establish campaign funding. Final14
+actual-verb checks, full960/960, source-bound screens/disjoint holdouts and
+prepared native cost proof: ../evidence/2026-10-16/campaign-preparer-audit.md.
+Disjoint64 wins48->47 and entries48->48 include a real two-door Table loss
+(insufficient terror, then hollow Relay grounding), not automatic regression.
+Invitation57->53, deaths96->101, earned T3+ gear64->62 and NPC-class exposure
+warnings still need review. More processed food does not erase them; both
+strategies make zero campaign starts. Early community endings at26/35 explain
+the two missing-good-gear endpoints without proving inadequate reward rates.
+
 Campaign ration strategy (2026-10-16): **retain as an opt-in diagnostic;
 reject as a successful campaign strategy**. `campaigner-rations` prices
 public withdrawals against positive own contribution credit, remaining

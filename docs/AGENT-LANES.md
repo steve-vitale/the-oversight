@@ -14,6 +14,15 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Harvest preparation (2026-10-16): Codex owns the separately registered
+campaign-preparer.js controller and its actual-verb tests/probes. Runtime,
+default policies, balance collector/contract and Muse's region/nomad lane
+stay fixed. Discard the direct-pack-sort draft as native-play evidence; the
+final helper stages before counter sorting, shells actual batches and shelves
+through the real public bulk action. Food generation and contribution credit
+are separate measurements. See ../evidence/2026-10-16/campaign-preparer-audit.md;
+this does not complete natural army logistics or Finale/Network coverage.
+
 Campaign ration follow-up (2026-10-16): Codex owns the optional
 campaign-rations.js strategy, campaigner registration and narrowly opt-in
 competent donation reserve hook. Runtime, default strategies, regions and

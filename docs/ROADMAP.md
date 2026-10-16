@@ -9,6 +9,21 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Harvest preparation (2026-10-16): the opt-in campaigner-preparer closes a
+measured zero-shelling gap using real Pack/counter verbs; native staged
+harvest proof yields1500kcal at12 ticks, without contribution credit.14
+checks and full960/960 pass. Keep the rejected direct-pack-sort API draft
+separate from the native-route candidate. The16-screen's wins12->15 do not
+cancel day60 survival, class, NPC-population and contest/show gear warnings.
+See ../evidence/2026-10-16/campaign-preparer-audit.md for the all23-metric
+disjoint experiment and next earned-supply/credit questions. Runtime and
+defaults stay fixed; natural army completion and seven god deeds stay open.
+Disjoint64 has wins48->47, entries48->48, invitations57->53 and earned T3+
+gear64->62. One actual Table sitting loses its Feared bargain then its Relay
+fallback; preserve the meaningful loss. The new helper produces food but
+still makes zero campaign starts. Investigate earned supply/standing rather
+than loosening the Table, army costs or exile.
+
 Campaign rations (2026-10-16): a separate opt-in strategy respects public
 access, contribution credit, meal allowance and village reserves, and retains
 known army rations through ordinary donation. Full959/959 and browser paid

@@ -91,6 +91,20 @@ observed public actions for peer claims.
 
 ## Adding a policy
 
+`campaigner-preparer` layers bounded food preparation onto campaigner-rations.
+With at least1800 banked kcal,50HP and dayTicks<=384, it shells at most one
+real carried/counter batch per person/day. At a usable camp it may stage opaque
+pack food, sort one counter bag using a resident's public general knowledge,
+and put away finished safe food. It never reads an opaque bag's species to
+choose a sorter. Both native staging and bulk shelving keep their real scope;
+the controller cannot choose a private single-item shelving API. Dangerous
+finished neighbors block bulk shelving. Existing base sorting/work still runs.
+Counters `campaignPrepSorts/Shells/Stages` describe calls/transforms;
+`campaignPrepKcal` records newly edible kcal, and `campaignPrepStoredKcal`
+records actual pantry growth. None is contribution credit or campaign victory.
+Keep this opt-in and compare against campaigner-rations in the same source
+panel, retaining original campaigner as a separate engagement reference.
+
 `campaigner-rations` is an opt-in diagnostic based on campaigner. It requires
 actual public pantry access, positive own contribution credit after a whole
 unit, room under the ordinary fed line after all same-day voluntary takes,
