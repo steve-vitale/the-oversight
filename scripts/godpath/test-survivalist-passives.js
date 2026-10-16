@@ -104,13 +104,27 @@ const K = require('./lib'), T = K.reporter('survivalist-passives');
   T.ok('a field receipt cannot be applied to another person', G.settleFieldFight(other, { vTaken: 40, healthSettlement: { who: id, start: 50, end: 10 } }, 'test') === false && v.health[other] === 70);
   for (const scene of ['wild', 'contest']) {
     fresh(['molt', 'second_wind']); v.health = { [id]: 1 };
+    // A sealed arena no longer permits the old learn-first escape after
+    // rescue. Prove survivor settlement with a real finishing blow instead:
+    // one fatal opening, Molt, then a survivable hit and the actual kill.
+    const sceneDef = scene === 'contest' ? { ...def, hp: [1, 1], pack: 1, attacks: [], attack: { damage: [60, 60], accuracy: 1 } } : def;
     const original = G.fieldFight; let played;
-    G.fieldFight = function (who, ignored, entity, opts) { played = original.call(this, who, def, entity, { ...opts, rng: () => 0.5 }); return played; };
+    G.fieldFight = function (who, ignored, entity, opts) { played = original.call(this, who, sceneDef, entity, { ...opts, rng: () => 0.5 }); return played; };
     try {
       if (scene === 'wild') G.resolveWildMonsterEncounter(id, { id: 'hushwolf', hp: 5000, maxHp: 5000, tx: 4, ty: 4 });
       else G._cxBlood(id, { id: 'pit', variant: 'standard' }, {});
     } finally { G.fieldFight = original; }
     T.ok(scene + ' actual caller preserves returned survivor HP after real Molt', played.vHpLeft > 0 && /\(Molt\)/.test(played.log.join('\n')) && v.health[id] === played.vHpLeft && played.healthSettlement.applied && v.roster.includes(id));
+    if (scene === 'contest') T.ok('sealed Molt survivor earns the finishing kill instead of a learning escape', played.outcome === 'vKill' && !played.fleeLearn);
   }
+  // The former 5000-HP contest fixture survived by exploiting the learning
+  // escape. Keep that hard case too: rescue is not permanent invulnerability.
+  fresh(['molt', 'second_wind']); v.health = { [id]: 1 };
+  const fieldOriginal = G.fieldFight; let hardFight, hardVerdict;
+  G.fieldFight = function (who, ignored, entity, opts) { hardFight = fieldOriginal.call(this, who, def, entity, { ...opts, rng: () => 0.5 }); return hardFight; };
+  try { hardVerdict = G._cxBlood(id, { id: 'pit', variant: 'standard' }, {}); }
+  finally { G.fieldFight = fieldOriginal; }
+  T.ok('hopeless sealed fight still records the real Molt before a later death', /\(Molt\)/.test(hardFight.log.join('\n')) && hardFight.outcome === 'vDie' && !hardFight.fleeLearn);
+  T.ok('the later arena death settles once on the actual person', hardVerdict.outcome === 'died' && hardFight.healthSettlement.applied && v.health[id] === 0 && !v.roster.includes(id));
   T.done();
 })().catch(e => { console.error(e.stack); process.exitCode = 1; });

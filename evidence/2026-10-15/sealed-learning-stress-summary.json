@@ -1,0 +1,60 @@
+{
+  "interpretation": "Prepared isolated guard build, returned field outcomes before caller settlement, not natural campaign survival.",
+  "beforeSource": "6a72dfa1f7332f82a3901ecb55fce55fa1af59f2c8baeb9e5ab2f3f33e254745",
+  "afterSource": "5e620ff22a706c8ba4cb8e2f2382bb1fb8017eeef1818bc31b99957295680aae",
+  "probeDigest": "75c5c9fedbe2808db22da77f44fb16cd466f8ca263a08196656033ab2266d2ea",
+  "matchedInitialStates": 128,
+  "cohorts": [
+    {
+      "monster": "review_drone",
+      "pairs": 64,
+      "before": {
+        "vDie": 18,
+        "vFlee": 46
+      },
+      "after": {
+        "vDie": 64
+      },
+      "recordChanges": 46,
+      "stateChanges": 46,
+      "learningEscapesBefore": 46,
+      "learningEscapesAfter": 0,
+      "meanHPBefore": 21.125,
+      "meanHPAfter": 0,
+      "meanHungerBefore": 10,
+      "meanHungerAfter": 10,
+      "meanCoinSpentBefore": 14.65625,
+      "meanCoinSpentAfter": 18.90625,
+      "deathRateDelta": 0.71875,
+      "deathInterval95": [
+        0.609375,
+        0.828125
+      ]
+    },
+    {
+      "monster": "hushwolf",
+      "pairs": 64,
+      "before": {
+        "mFlee": 64
+      },
+      "after": {
+        "mFlee": 64
+      },
+      "recordChanges": 0,
+      "stateChanges": 0,
+      "learningEscapesBefore": 0,
+      "learningEscapesAfter": 0,
+      "meanHPBefore": 89.09375,
+      "meanHPAfter": 89.09375,
+      "meanHungerBefore": 10,
+      "meanHungerAfter": 10,
+      "meanCoinSpentBefore": 186,
+      "meanCoinSpentAfter": 186,
+      "deathRateDelta": 0,
+      "deathInterval95": [
+        0,
+        0
+      ]
+    }
+  ]
+}

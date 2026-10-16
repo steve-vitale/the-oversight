@@ -1020,7 +1020,9 @@
           rec.intent = 'engage'; rec.intentWhy = 'good-exchange';
           rec.log.push(vName + ' reads the fight — the odds are good. Committing to the kill.');
         }
-        if (rec.intent === 'learn' && round >= 3 && !winning && !rec.outcome) {
+        // Learning can justify a wild withdrawal, not an exit through a
+        // sealed contest gate. The fight/judges must settle that commitment.
+        if (rec.intent === 'learn' && !opts.noFlee && round >= 3 && !winning && !rec.outcome) {
           rec.outcome = 'vFlee'; rec.fleeLearn = true; rec.fleeHpFrac = vHp / vHpMax;
           rec.log.push(vName + ' has seen enough — withdraws to report back. (Learn-first: not winnable, not worth the blood.)');
           break;

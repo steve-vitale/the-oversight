@@ -477,8 +477,10 @@ physical wolf outcomes, HP, wounds, guard depletion and food, not a single
 win rate. `mFlee`, `vFlee`, `vDie` and `vKill` are distinct field outcomes.
 
 The result precedes the normal caller's later wound settlement and is not
-campaign survival. `opts.noFlee=true` still permits an existing learn-first
-withdrawal in this engine; retain that actual result and investigate its
-sealed-contest contract separately. Do not replace it with death or victory.
+campaign survival. Historical market-beam arms permit a learn-first withdrawal
+despite `opts.noFlee=true`; the separate sealed-learning correction prevents
+that exit. Retain old results under their original source. A vFlee result at
+the fifteen-round cap with judges=true is a legitimate judged loss, not an
+escape. Never relabel old withdrawals as deaths or victories.
 The probe checks root/probe stability and fails on stderr. See the dated
 market-beam audit for exact inputs and these limits.

@@ -49,9 +49,12 @@ contest rule, audience reaction, judged advantage or mercy choice.
    inherited ability effects and generic combat still exist. Implement real,
    readable choices/counterplay rather than flat unearned win bonuses. Retain
    reward eligibility, costs, losable contests and actor parity.
-5. The prepared Market guard cohort requests `opts.noFlee=true`, but actual
-   learn-first field logic still returns vFlee. Reproduce and repair this
-   sealed-contest mismatch separately, retaining the current raw outcomes.
+5. Sealed learning withdrawal is now repaired separately from the guard:
+   noFlee prevents the voluntary learning exit, while the fifteen-round
+   judges and wild learning withdrawals remain. Actual public pit/gauntlet/
+   siege and Molt survival/later-death proofs pass. Historical guard outputs
+   retain their old escapes; see dated sealed-learning-audit.md. A legal
+   judges loss can still use vFlee, so inspect its judges flag.
 6. Finish natural campaign/Network reachability separately. A prepared god or
    12x12 fight can prove a contract but cannot certify a naturally earned run.
 
