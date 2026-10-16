@@ -18,6 +18,30 @@
       return p.reduce((a, it) => a + ((it.kcalEach || 0) * (it.units || 1)), 0);
     } catch (e) { return 0; }
   }
+  // tributeKcal(amount): the tribute ships are REAL — remove whole units
+  // from the pantry shelves until `amount` kcal are gone (rounds up to whole
+  // units; food doesn't come in fractions). Keeps the pantryKcal compat
+  // counter honest (same contract as game.js). Returns kcal actually removed.
+  function tributeKcal(amount) {
+    try {
+      const v = Game.state.village || {};
+      const pantry = v.pantry || [];
+      let need = amount, removed = 0;
+      for (const item of pantry.slice()) {
+        if (need <= 0) break;
+        const kcalEach = item.kcalEach || 0;
+        const units = item.units || 0;
+        if (kcalEach <= 0 || units <= 0) continue;
+        const takeUnits = Math.min(units, Math.ceil(need / kcalEach));
+        item.units = units - takeUnits;
+        if (item.units <= 0) pantry.splice(pantry.indexOf(item), 1);
+        const got = takeUnits * kcalEach;
+        need -= got; removed += got;
+      }
+      v.pantryKcal = pantry.reduce((t, i) => t + ((i.kcalEach || 0) * (i.units || 1)), 0);
+      return removed;
+    } catch (e) { return 0; }
+  }
   // The relay's person: the highest-trust villager. A name, not a number.
   function relayPerson() {
     try {
@@ -45,6 +69,17 @@
       }
       return cost;
     };
+  }
+
+  // The price, named in the ending: if the walk took the relay's person,
+  // the final says their name aloud. (journey-endgame r14: prices are real.)
+  function relayTakenLine(T) {
+    try {
+      const rt = (T || {}).relayTaken;
+      if (!rt || !rt.name) return '';
+      if (rt.buyback) return ` ${rt.name} serves the relay a season — and the village will hold you to the promise of their return.`;
+      return ` ${rt.name} walks with the relay now — the price, named and paid.`;
+    } catch (e) { return ''; }
   }
 
   const DEF = {
@@ -85,7 +120,18 @@
         choices: [
           {
             id: 'harvest', label: 'A full harvest. (20,000 kcal)',
-            effects: payOrStall({ paid: 3 }, () => pantryKcal() < 20000, 'the pantry is too thin — the shelves would be bare and the table knows it'),
+            effects: function (T) {
+              const wasCovered = !!T.longRoadCovered;
+              const eff = payOrStall({ paid: 3 }, () => pantryKcal() < 20000, 'the pantry is too thin — the shelves would be bare and the table knows it')(T);
+              const justCovered = !wasCovered && !!T.longRoadCovered;
+              if (!eff.fail && !justCovered) {
+                // REAL PRICE (journey-endgame r14): the ships load — the
+                // pantry feels it. Long Road covering the price is the only
+                // way out; the walk's generosity is not free.
+                T.tributePaid = tributeKcal(20000);
+              }
+              return eff;
+            },
             say: function (T) { return T.longRoadCovered ? ['The walk covers it — somehow, the harvest stretches. You don\'t ask how. Some prices pay themselves when the cause is just.'] : ['A full harvest. The ships load heavy. Haven\'s shelves echo. The table notes the price paid without flinching — and recalculates what "enough" means.']; },
           },
           { id: 'half', label: 'Half. The walk eats light.', effects: { paid: 2 }, say: ['Half. The walk eats light; Haven eats tonight. The table accepts — it has learned that humans do arithmetic with their hearts, and the math still works.'] },
@@ -103,11 +149,43 @@
           return [
             {
               id: 'name', label: `Name ${rp.name}.`,
-              effects: payOrStall({ paid: 3 }, () => !rp.id, 'there is no one left to name'),
+              effects: function (T) {
+                const wasCovered = !!T.longRoadCovered;
+                const eff = payOrStall({ paid: 3 }, () => !rp.id, 'there is no one left to name')(T);
+                const justCovered = !wasCovered && !!T.longRoadCovered;
+                if (!eff.fail && !justCovered && rp.id) {
+                  // REAL PRICE (journey-endgame r14): the relay gets its
+                  // hands — the named villager leaves the roster via the
+                  // removal choke point (exiles ledger, positions, hygiene).
+                  try { if (Game.removeVillager) Game.removeVillager(rp.id, 'relay'); } catch (e) {}
+                  T.relayTaken = { id: rp.id, name: rp.name };
+                }
+                return eff;
+              },
               say: [`You name ${rp.name}. They nod — they've known since the price list slid across. The relay gets its hands. The village loses its steadiest. Some prices you pay forever, in installments of grief.`],
             },
             { id: 'noone', label: 'No one. The walk keeps everyone.', effects: { dignity: 1, paid: -1 }, say: ['"No one." The table\'s price for the walk rises — it will take the difference elsewhere. But the village walks whole, and wholeness is a kind of wealth the table can\'t count.'] },
-            { id: 'buyback', label: 'Name them — and buy them back later.', effects: { paid: 1 }, say: [`You name ${rp.name}, with terms: a season's service, then return. The table agrees — it loves contracts the way you love food. A promise is planted: you'll be back for them. (The village will hold you to it.)`] },
+            {
+              id: 'buyback', label: 'Name them — and buy them back later.',
+              effects: function (T) {
+                if (!rp.id) return { fail: 'there is no one left to name' };
+                // REAL PRICE (journey-endgame r14): they go now — and the
+                // promise is planted as a real open promise the village
+                // will hold you to (tablePromiseTally reads it).
+                try { if (Game.removeVillager) Game.removeVillager(rp.id, 'relay'); } catch (e) {}
+                T.relayTaken = { id: rp.id, name: rp.name, buyback: true };
+                try {
+                  const v = Game.state.village || {};
+                  v.promises = v.promises || {};
+                  v.promises['relay-buyback'] = {
+                    text: `Bring ${rp.name} back from the relay — a season's service, then return.`,
+                    kept: undefined, day: (Game.state.scholar || {}).day | 0,
+                  };
+                } catch (e) {}
+                return { paid: 1 };
+              },
+              say: [`You name ${rp.name}, with terms: a season's service, then return. The table agrees — it loves contracts the way you love food. A promise is planted: you'll be back for them. (The village will hold you to it.)`],
+            },
           ];
         },
       },
@@ -162,11 +240,11 @@
     },
     finals: {
       light: [
-        { id: 'walk', label: 'Walk away.', outcome: ['Humanity walks — poorer, whole, free. The cameras follow for years: the long shot of small figures leaving the light, carrying their food and their dead and their songs. The highest-rated footage in galactic history. Nobody owns it. The prices are paid. The door stays ajar.'] },
+        { id: 'walk', label: 'Walk away.', outcome: function (T) { return ['Humanity walks — poorer, whole, free. The cameras follow for years: the long shot of small figures leaving the light, carrying their food and their dead and their songs. The highest-rated footage in galactic history. Nobody owns it. The prices are paid. The door stays ajar.' + relayTakenLine(T)]; } },
         { id: 'terms', label: 'Name your terms anyway.', outcome: ['Defiance with a contract. They sign. They hate signing. Humanity stays free and gets the trade routes too, because you refused to choose between dignity and dinner. The table learns a new word: no. It practices it badly for a century.'] },
       ],
       dark: [
-        { id: 'walk', label: 'Walk away.', outcome: ['Humanity walks — and the road behind is salt and ash. The cameras follow: the long shot of small figures leaving the light, and behind them, nothing worth taking. The galaxy learns the other meaning of "no." The village walks close together, and doesn\'t talk about the smoke.'] },
+        { id: 'walk', label: 'Walk away.', outcome: function (T) { return ['Humanity walks — and the road behind is salt and ash. The cameras follow: the long shot of small figures leaving the light, and behind them, nothing worth taking. The galaxy learns the other meaning of "no." The village walks close together, and doesn\'t talk about the smoke.' + relayTakenLine(T)]; } },
         { id: 'terms', label: 'Name your terms anyway.', outcome: ['You name terms from the ashes: everything, on your word, or nothing. They sign — what else can they do? The table learns "no" the way you taught it: total. Humanity is free, rich, and alone with what it did to leave.'] },
       ],
     },
