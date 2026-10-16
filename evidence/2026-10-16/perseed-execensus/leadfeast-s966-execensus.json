@@ -1,0 +1,193 @@
+{
+ "seed": 966,
+ "policyId": "leadfeast",
+ "arm": "execensus",
+ "repo": "/home/hatch/workspace/worktrees/sim-execensus",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1)",
+ "days": 150,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 59,
+ "fieldDeaths": 48,
+ "playerDeaths": 11,
+ "deathCauses": {
+  "villager combat": 10,
+  "monster": 11,
+  "combat": 36,
+  "Sweeps Week": 1,
+  "the night": 1
+ },
+ "trickTally": {
+  "shout": 2,
+  "wait:spool-record": 3,
+  "dance": 2,
+  "wait:nielsen-boring": 3
+ },
+ "nNodeWitnessReports": 4,
+ "nodeWitnessBySpecies": {
+  "suburb": 1,
+  "eater": 1,
+  "reunion": 1,
+  "spoiler": 1
+ },
+ "nNodeWitnessDiscovered": 2,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 114,
+   "id": "eater"
+  },
+  {
+   "day": 122,
+   "id": "reunion"
+  }
+ ],
+ "nFieldFights": 246,
+ "nTbFights": 39,
+ "nWaveKillTricks": 12,
+ "witnessLearnings": [
+  {
+   "learnId": "L229-eater",
+   "seq": 229,
+   "day": 114,
+   "id": "eater",
+   "trick": "eater",
+   "trickText": "Poison the meal",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "poison"
+   ]
+  },
+  {
+   "learnId": "L247-reunion",
+   "seq": 247,
+   "day": 122,
+   "id": "reunion",
+   "trick": "reunion",
+   "trickText": "Do something you have never done",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:reunion-novel"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L229-eater",
+   "day": 114,
+   "id": "eater",
+   "trick": "eater",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "verdict": "traced",
+   "summary": {
+    "conditions-never-met": 2
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 230,
+     "day": 114,
+     "path": "field",
+     "vid": "onni_korhonen",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 237,
+     "day": 118,
+     "path": "field",
+     "vid": "zoe_adams",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    }
+   ],
+   "tbFights": []
+  },
+  {
+   "learnId": "L247-reunion",
+   "day": 122,
+   "id": "reunion",
+   "trick": "reunion",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "verdict": "traced",
+   "summary": {
+    "conditions-never-met": 1,
+    "tb-n/a": 3
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 249,
+     "day": 122,
+     "path": "field",
+     "vid": "daniyar_askarov",
+     "outcome": "vDie",
+     "rounds": 2,
+     "trickLog": [],
+     "evals": 2,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 2x, never fired"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 252,
+     "day": 123,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 253,
+     "day": 123,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 254,
+     "day": 123,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 2
+}

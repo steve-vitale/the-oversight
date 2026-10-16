@@ -1,0 +1,116 @@
+{
+ "seed": 968,
+ "policyId": "belongfeast",
+ "arm": "execensus",
+ "repo": "/home/hatch/workspace/worktrees/sim-execensus",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1)",
+ "days": 92,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 4,
+ "wave4Reached": 1,
+ "wave5Reached": 0,
+ "deaths": 30,
+ "fieldDeaths": 19,
+ "playerDeaths": 11,
+ "deathCauses": {
+  "villager combat": 6,
+  "combat": 16,
+  "monster": 5,
+  "the night": 1,
+  "alien": 1,
+  "starvation": 1
+ },
+ "trickTally": {
+  "wait:spool-record": 17,
+  "wait:redactor-quiet": 4
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "reunion": 1
+ },
+ "nNodeWitnessDiscovered": 0,
+ "nodeWitnessDiscovered": [],
+ "nFieldFights": 141,
+ "nTbFights": 23,
+ "nWaveKillTricks": 3,
+ "witnessLearnings": [
+  {
+   "learnId": "L146-reunion",
+   "seq": 146,
+   "day": 74,
+   "id": "reunion",
+   "trick": "reunion",
+   "trickText": "Do something you have never done",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:reunion-novel"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L146-reunion",
+   "day": 74,
+   "id": "reunion",
+   "trick": "reunion",
+   "wave": 4,
+   "via": "observed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "conditions-never-met": 2,
+    "tb-n/a": 1
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 148,
+     "day": 74,
+     "path": "field",
+     "vid": "ethan_hunt",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 155,
+     "day": 79,
+     "path": "field",
+     "vid": "visjoin_67",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 157,
+     "day": 80,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 1
+}

@@ -1,0 +1,116 @@
+{
+ "seed": 967,
+ "policyId": "belongfeast",
+ "arm": "execensus",
+ "repo": "/home/hatch/workspace/worktrees/sim-execensus",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1)",
+ "days": 128,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 4,
+ "wave4Reached": 1,
+ "wave5Reached": 0,
+ "deaths": 40,
+ "fieldDeaths": 33,
+ "playerDeaths": 7,
+ "deathCauses": {
+  "expedition": 2,
+  "villager combat": 12,
+  "monster": 12,
+  "combat": 14
+ },
+ "trickTally": {
+  "wait:buffering-still": 31,
+  "wait:algorithm-tank": 11
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "congregation": 1
+ },
+ "nNodeWitnessDiscovered": 0,
+ "nodeWitnessDiscovered": [],
+ "nFieldFights": 127,
+ "nTbFights": 17,
+ "nWaveKillTricks": 1,
+ "witnessLearnings": [
+  {
+   "learnId": "L130-congregation",
+   "seq": 130,
+   "day": 112,
+   "id": "congregation",
+   "trick": "congregation",
+   "trickText": "Argue theology — make it engage",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "argue"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L130-congregation",
+   "day": 112,
+   "id": "congregation",
+   "trick": "congregation",
+   "wave": 4,
+   "via": "observed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "conditions-never-met": 3
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 133,
+     "day": 115,
+     "path": "field",
+     "vid": "visjoin_111",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 136,
+     "day": 115,
+     "path": "field",
+     "vid": "visjoin_111",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 139,
+     "day": 119,
+     "path": "field",
+     "vid": "app_mgpsphg2164",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

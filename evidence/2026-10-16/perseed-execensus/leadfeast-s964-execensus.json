@@ -1,0 +1,81 @@
+{
+ "seed": 964,
+ "policyId": "leadfeast",
+ "arm": "execensus",
+ "repo": "/home/hatch/workspace/worktrees/sim-execensus",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1)",
+ "days": 102,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 4,
+ "wave4Reached": 1,
+ "wave5Reached": 0,
+ "deaths": 34,
+ "fieldDeaths": 25,
+ "playerDeaths": 9,
+ "deathCauses": {
+  "villager combat": 9,
+  "combat": 17,
+  "monster": 6,
+  "expedition": 1,
+  "The Algorithm": 1
+ },
+ "trickTally": {
+  "wait:redactor-quiet": 28,
+  "wait:spool-record": 3,
+  "farewell": 3
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "reunion": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 87,
+   "id": "reunion"
+  }
+ ],
+ "nFieldFights": 161,
+ "nTbFights": 23,
+ "nWaveKillTricks": 3,
+ "witnessLearnings": [
+  {
+   "learnId": "L164-reunion",
+   "seq": 164,
+   "day": 87,
+   "id": "reunion",
+   "trick": "reunion",
+   "trickText": "Do something you have never done",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:reunion-novel"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L164-reunion",
+   "day": 87,
+   "id": "reunion",
+   "trick": "reunion",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "verdict": "no-opportunity",
+   "summary": {},
+   "execs": 0,
+   "fights": [],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

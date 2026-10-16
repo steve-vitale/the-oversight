@@ -1,0 +1,209 @@
+{
+ "seed": 961,
+ "policyId": "leadfeast",
+ "arm": "execensus",
+ "repo": "/home/hatch/workspace/worktrees/sim-execensus",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1)",
+ "days": 140,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 50,
+ "fieldDeaths": 47,
+ "playerDeaths": 3,
+ "deathCauses": {
+  "villager combat": 7,
+  "combat": 31,
+  "monster": 12
+ },
+ "trickTally": {
+  "wait:spool-record": 3,
+  "farewell": 1,
+  "bad_note": 7
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "network_note": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 128,
+   "id": "network_note"
+  }
+ ],
+ "nFieldFights": 184,
+ "nTbFights": 18,
+ "nWaveKillTricks": 15,
+ "witnessLearnings": [
+  {
+   "learnId": "L183-network_note",
+   "seq": 183,
+   "day": 128,
+   "id": "network_note",
+   "trick": "network_note",
+   "trickText": "Give it bad notes",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "bad_note"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L183-network_note",
+   "day": 128,
+   "id": "network_note",
+   "trick": "network_note",
+   "wave": 5,
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "verdict": "traced",
+   "summary": {
+    "flee": 5,
+    "trick fired but failed": 2
+   },
+   "execs": 7,
+   "fights": [
+    {
+     "seq": 184,
+     "day": 128,
+     "path": "field",
+     "vid": "nora_wilson",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "bad_note"
+     ],
+     "evals": 2,
+     "fires": 1,
+     "firedTokens": [
+      "bad_note"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 191,
+     "day": 130,
+     "path": "field",
+     "vid": "dmitri_sokolov",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "bad_note"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "bad_note"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 192,
+     "day": 133,
+     "path": "field",
+     "vid": "dmitri_sokolov",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "bad_note"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "bad_note"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 194,
+     "day": 134,
+     "path": "field",
+     "vid": "luis_fernandez",
+     "outcome": "vDie",
+     "rounds": 2,
+     "trickLog": [
+      "bad_note"
+     ],
+     "evals": 2,
+     "fires": 1,
+     "firedTokens": [
+      "bad_note"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    },
+    {
+     "seq": 197,
+     "day": 136,
+     "path": "field",
+     "vid": "chloe_dubois",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "bad_note"
+     ],
+     "evals": 2,
+     "fires": 1,
+     "firedTokens": [
+      "bad_note"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 198,
+     "day": 137,
+     "path": "field",
+     "vid": "dmitri_sokolov",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "bad_note"
+     ],
+     "evals": 2,
+     "fires": 1,
+     "firedTokens": [
+      "bad_note"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 201,
+     "day": 138,
+     "path": "field",
+     "vid": "chloe_dubois",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "bad_note"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "bad_note"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

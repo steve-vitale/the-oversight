@@ -1,0 +1,148 @@
+{
+ "seed": 968,
+ "policyId": "leadfeast",
+ "arm": "execensus",
+ "repo": "/home/hatch/workspace/worktrees/sim-execensus",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1)",
+ "days": 144,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 46,
+ "fieldDeaths": 36,
+ "playerDeaths": 10,
+ "deathCauses": {
+  "villager combat": 8,
+  "combat": 23,
+  "contest": 1,
+  "expedition": 1,
+  "monster": 13
+ },
+ "trickTally": {
+  "wait:redactor-quiet": 8,
+  "wait:nielsen-boring": 18
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "editor": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 124,
+   "id": "editor"
+  }
+ ],
+ "nFieldFights": 239,
+ "nTbFights": 24,
+ "nWaveKillTricks": 7,
+ "witnessLearnings": [
+  {
+   "learnId": "L246-editor",
+   "seq": 246,
+   "day": 124,
+   "id": "editor",
+   "trick": "editor",
+   "trickText": "Contradict yourself — break the cut",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "continuity"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L246-editor",
+   "day": 124,
+   "id": "editor",
+   "trick": "editor",
+   "wave": 5,
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "verdict": "traced",
+   "summary": {
+    "conditions-never-met": 5
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 247,
+     "day": 124,
+     "path": "field",
+     "vid": "sofia_chen",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 259,
+     "day": 127,
+     "path": "field",
+     "vid": "yuki_mori",
+     "outcome": "vDie",
+     "rounds": 2,
+     "trickLog": [],
+     "evals": 2,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 2x, never fired"
+    },
+    {
+     "seq": 260,
+     "day": 130,
+     "path": "field",
+     "vid": "tashi_sherpa",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 261,
+     "day": 130,
+     "path": "field",
+     "vid": "tashi_sherpa",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 263,
+     "day": 142,
+     "path": "field",
+     "vid": "app_mgpspioi575",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

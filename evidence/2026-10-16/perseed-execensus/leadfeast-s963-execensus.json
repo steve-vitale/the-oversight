@@ -1,0 +1,82 @@
+{
+ "seed": 963,
+ "policyId": "leadfeast",
+ "arm": "execensus",
+ "repo": "/home/hatch/workspace/worktrees/sim-execensus",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1)",
+ "days": 71,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 4,
+ "wave4Reached": 1,
+ "wave5Reached": 0,
+ "deaths": 34,
+ "fieldDeaths": 23,
+ "playerDeaths": 11,
+ "deathCauses": {
+  "expedition": 1,
+  "villager combat": 11,
+  "Choir Toad": 1,
+  "ambush": 1,
+  "combat": 13,
+  "monster": 7
+ },
+ "trickTally": {
+  "shout": 2,
+  "wait:redactor-quiet": 9,
+  "farewell": 1
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "belltoad": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 25,
+   "id": "belltoad"
+  }
+ ],
+ "nFieldFights": 78,
+ "nTbFights": 18,
+ "nWaveKillTricks": 2,
+ "witnessLearnings": [
+  {
+   "learnId": "L30-belltoad",
+   "seq": 30,
+   "day": 25,
+   "id": "belltoad",
+   "trick": "shout",
+   "trickText": "shout — Break the chorus",
+   "wave": 1,
+   "store": "monsterCounters",
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "shout"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L30-belltoad",
+   "day": 25,
+   "id": "belltoad",
+   "trick": "shout",
+   "wave": 1,
+   "via": "node-witnessed",
+   "witnessSourced": "pure",
+   "verdict": "no-opportunity",
+   "summary": {},
+   "execs": 0,
+   "fights": [],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}
