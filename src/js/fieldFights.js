@@ -444,6 +444,8 @@
           rec.outcome = 'evade';
           rec.vHpLeft = vHp; rec.mHpLeft = members[0].hp;
           rec.log.push(vName + ' saw the ' + mName + ' in time and gave it room.');
+          try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); }
+          catch (e) { console.warn('[godpath] field evasion deed', e); }
           return rec;
         }
         rec.log.push(vName + ' walks straight into the ' + mName + '. No avoiding it.');
@@ -1208,6 +1210,8 @@
       try { if (GPf && GPf.finishFieldApexHunt) GPf.finishFieldApexHunt(this, vid, huntOpening, rec,
         { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (allyIn && allyHp > 0) }); }
       catch (e) { console.warn('[godpath] field hunt outcome', e); }
+      try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); }
+      catch (e) { console.warn('[godpath] field escape deed', e); }
       try { if (GPf && GPf.finishFieldWardRescue) GPf.finishFieldWardRescue(this, vid, wardCarries, rec,
         { id: allyVid, alive: helpCalled && allyIn && allyHp > 0 }); }
       catch (e) { console.warn('[godpath] field protection outcome', e); }

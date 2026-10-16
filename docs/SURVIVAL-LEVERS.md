@@ -4,6 +4,30 @@ Steve, 2026-10-15: "Winning shouldn’t be easy. A reduction in win rate is caus
 
 ## How to use this register
 
+Between gate (2026-10-16, needs-eyes): a fresh monster's opening HP must
+exceed the escaping person's full HP capacity, and both must remain alive
+when that individual leaves. This compares capacity, not current wounds or
+an overall gear/power score. The existing NPC human-capacity floor100 avoids
+turning the formal30HP proxy into an easier deed. No kill, generic surviving
+fight counter, class age or paid evasion tap qualifies. Real pre-contact
+field evasion can qualify; sealed/judged results cannot. A player going
+through a door does not save people left outside or lend them the deed.
+Receipts stay with the actual person across saves/succession; old active
+gods and class/payoff/four-magic/day80 gates remain. No movement, pursuit,
+food, damage, enemy, kit or policy price is adjusted. Inspect all23 metrics
+and both directions of win movement in the dated Between audit. This gate
+does not establish full Drifter viability or finish god-scale/parity work.
+
+Between's16/64 panels preserve aggregate wins/deaths/community losses, but
+holdout caregiver10018 loses proxy godhood, wins94 instead of131 and loses
+player tier3+ gear/contest-show gear. The old run earned contest gear83/86/88,
+before94, so shorter observation alone does not explain the gap. Population,
+hunger, class exposure, intake and ability use also move without a scorecard
+watch. Investigate actual non-god
+contest conditions, favor, rewards and reward-to-use routes at common days;
+do not call the earlier win an improvement or automatically buff prizes.
+See ../evidence/2026-10-16/between-deed-audit.md and its exact whole-state pair.
+
 Shepherd care gate (2026-10-16, needs-eyes):
 `godpaths.paths.caregiver.god.deed.criticalFraction = 0.25` defines critical
 health relative to the actual body maximum. A successful other-person heal

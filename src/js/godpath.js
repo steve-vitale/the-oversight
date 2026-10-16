@@ -15,6 +15,7 @@
 //   - finishFieldWardRescue(game, actor, carries, result, ally) -> the same canonical-person protection outcome from actual field diversion
 //   - godpathDeedHint(who) -> objective/progress only for a known class, until ascension
 //   - noteCareRescue(actor, patient, before, after, maxHp, via, scene) -> actual other-person rescue, awaiting both people's survival at a later dawn
+//   - finishTacticalEscape(game, fight, fighter?) / finishFieldEscape(game, vid, opening, result, sealed) -> actual individual living flight from a fresh above-capacity monster
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
 //   - shapeOffers(choices, pool, who, opts) -> offers with >=1 on the recognised path (else >=1 on the holder's job path within opts.jobWindow) and distinct roles where possible
@@ -308,6 +309,40 @@
     const id = fighter.kind === 'player' ? game.villagerId : fighter.villagerId;
     const person = id && game.vpOf(id);
     return person && person.id === id && !person.dead ? id : null;
+  }
+  function recordOutmatchedEscape(game, actor, capacity, prey, via, scene) {
+    const s = game.state.scholar, v = game.state.village, person = actor && game.vpOf(actor);
+    if (game.over || !person || person.id !== actor || person.dead || !prey?.full ||
+        !game.data.monsters.some(m => m.id === prey.monster) ||
+        !Number.isFinite(capacity) || !(capacity > 0) || !Number.isFinite(prey.hp) || !(prey.hp > capacity)) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+    if (book.outmatched_escape) return;
+    book.outmatched_escape = { day: s.day, monster: prey.monster, actorMaxHp: capacity, openingHp: prey.hp, via, scene };
+    const last = (game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { game.tele('godpath_deed', { t, who: actor, event: 'outmatched_escape', day: s.day, monster: prey.monster, via, scene }); }
+    catch (e) { warn('escape deed', e); }
+  }
+  function finishTacticalEscape(game, f, fighter) {
+    if (!f || f.noFlee || game.state.arenaContest) return;
+    const h = f._gpApexHunt;
+    // An old save without opening evidence cannot invent this history.
+    if (!h || h.version !== 1) return;
+    observeApexHunt(game, f);
+    for (const a of h.actors) {
+      const body = f.fighters.find(x => x.key === a.key);
+      if (!body || (fighter && body !== fighter) || !body.fled || !body.alive || !(body.hp > 0) ||
+          body._echoed || wardPerson(game, body) !== a.id) continue;
+      for (const prey of h.prey) {
+        // A defeated enemy is not an escape; pursuers that broke off may live.
+        if (!f.fighters.some(m => m.kind === 'monster' && game.tbSnakeLineageKey(m) === prey.key && m.alive && m.hp > 0)) continue;
+        recordOutmatchedEscape(game, a.id, a.maxHp, prey, 'withdrawal', 'tactical');
+      }
+    }
+  }
+  function finishFieldEscape(game, vid, opening, result, sealed) {
+    if (!opening || sealed || result.judges || !(result.vHpLeft > 0) || !(result.mHpLeft > 0) ||
+        !['evade', 'vFlee'].includes(result.outcome)) return;
+    recordOutmatchedEscape(game, vid, opening.actorMaxHp, opening.prey, result.outcome, 'field');
   }
   function careLiving(game, id) {
     const person = id && game.vpOf(id);
@@ -1833,6 +1868,7 @@
   };
 
   S.Godpath = {
+    finishTacticalEscape, finishFieldEscape,
     noteWardCarry, finishWardRescues, finishFieldWardRescue,
     beginApexHunt, observeApexHunt, finishApexHunt, finishFieldApexHunt,
     data, abilityPaths, classify, holderMagicIds, recognizeClass, godpathClass, classLine,

@@ -1,5 +1,15 @@
 # God scale: caller audit and remaining proof
 
+Between deed follow-up (2026-10-16): actual individual tactical retreat,
+barrier flight and field evasion/withdrawal can earn the person's first
+outmatched_escape receipt. A known fresh monster opened above that person's
+full HP capacity and is still alive at exit; sealed judges, empty actions,
+dead people and stranded companions cannot qualify.34 actual-caller/save/
+ceremony checks and prepared native phone barrier exit cover the route.
+Existing phase/aggro strength, food prices and broad scale effects are not
+expanded here. See the dated Between audit for natural evidence and all23
+paired metrics. Seven deeds/three proxies remain.
+
 Shepherd outcome follow-up (2026-10-16): actual Mending critical recovery,
 allied Lifeline fatal-fall rescue and ordinary camp healer rounds now enqueue
 person-owned care. Both known people must survive a later real dawn before

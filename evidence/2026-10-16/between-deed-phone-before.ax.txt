@@ -1,0 +1,63 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 512 ticks to dawn.":
+  - text: day 85 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: Winter · Eastern Woodlands
+  - 'generic "The day''s budget: 0 of 512 used. Everything you do costs a little of the day."':
+    - generic: 512 left today
+  - generic: 🏠
+  - generic: 🏠
+  - generic: 🔥
+  - generic: 🏠
+  - generic: 🏠
+  - generic: 🏠
+  - generic: ⛺
+  - generic: 🌿
+  - generic: 🌱
+  - generic: 🌿
+  - generic: 🌱
+  - generic: 🌿
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - text: The Moderator
+  - text: · 3 move · 1 act
+  - button "⚔ Strike" [disabled]
+  - button "👁 Study"
+  - button "📢 Shout"
+  - button "🍖 Offer"
+  - button "⏸ Wait"
+  - generic: ⚡
+  - 'button "⚡ Come Get Some — Target a blinded monster within 3 tiles: it lurches toward your position on its next move. Reposition the threat without touching it. (20 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder" [disabled]'
+  - button "⚡ Blink — Teleport up to 3 tiles. No turn spent. Twice per fight. (40 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"
+  - generic: "📺 SYSTEM: \"COMBAT! THE MODERATOR! The gamblers lean in. ROUND 1 — FIGHT!\""
+  - generic "Health":
+    - generic: ❤ 100
+  - generic "Food (you)":
+    - generic: 🍽 2400/2400 kcal
+  - generic "Hydration":
+    - generic: 💧 100% · 2L clean
+  - 'generic "Pack: 1400 kcal carried"':
+    - generic: 🎒 2.3/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "Codex (3)"
+- complementary:
+  - text: PREPARED DRIFTER — NATIVE BARRIER EXIT
+  - button "Prepare escape" [active]
+  - button "Read escape"
+  - button "Save and load"
+  - generic: day 85; actor gen_0o56bks; health 100; deed null; fight none; hint Escape a fresh monster that begins with more health than your full capacity. Leave it alive, and leave alive yourself.

@@ -21,7 +21,7 @@
 | **1. Job** | Who you were before: your occupation | `characterGen` occupations | Gives **human skills** and a **starting lean** in the tracks (a nurse starts with craft and social XP) |
 | **2. Playstyle** | What you actually do | 5 **tracks**, shared by player and villagers: combat, field, social, craft, strange | Deeds give track XP. About 8 natural level-ups per run, each a pick 1 of 3 **magic** abilities from that track's kit, plus a few gifts, all competing for **6 slots** |
 | **3. Class** | The build your abilities add up to | The **god path** each ability belongs to (10 paths), plus a **subclass** (2 per path) | Recognised when your kit clearly leans one way. The System names it, diegetically |
-| **4. God** | The apex of that class | The path's capstone | Complete the class, payoff, path kit and fitting deed, day 80+; six authored deeds, four legacy proxies remain |
+| **4. God** | The apex of that class | The path's capstone | Complete the class, payoff, path kit and fitting deed, day 80+; seven authored deeds, three legacy proxies remain |
 | **5. Table** | How the run ends | Table path × god/class × light/dark; THE HOSTS with the key | Enter from Haven at day 90+; still losable |
 
 **Rules that hold the ladder together:**

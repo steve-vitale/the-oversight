@@ -34415,6 +34415,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const wouldDieNextHit = final > 0 && (t.hp || 0) <= final;
       if (!traj.hopeless && !wouldDieNextHit) return false;
       t.fled = true;
+      try { S.Godpath?.finishTacticalEscape(this, f, t); } catch (e) { console.warn('[godpath] reactive escape deed', e); }
       this.say(`${t.name} takes the hit and runs — while running still works.`);
       return true;
     },
@@ -34650,6 +34651,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             } catch (e) {}
           }
           v.fled = true;
+          try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] retreat deed', e); }
           this.say(`${v.name} sees how this ends — and runs while running still works.`);
           return;
         }
@@ -34734,6 +34736,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } else if (a.type === 'flee') {
         v.fled = true;
+        try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] flight deed', e); }
         this.say(`${v.name} runs for it!`);
       }
     },
@@ -40289,6 +40292,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
       } catch (e) {}
       f.over = true; f.result = result;
+      try { S.Godpath?.finishTacticalEscape(this, f); } catch (e) { console.warn('[godpath] escape outcome', e); }
       try { S.Godpath?.finishApexHunt(this, f, result); } catch (e) { console.warn('[godpath] hunt outcome', e); }
       try { S.Godpath?.finishWardRescues(this, f, result); } catch (e) { console.warn('[godpath] protection outcome', e); }
       // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15):

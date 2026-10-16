@@ -7,6 +7,12 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
+2026-10-16 Between deed: leave a real fresh above-capacity-HP foe alive,
+and leave alive yourself. Actual individual tactical and field flight/evasion
+counts; sealed judges, kills, tap-only casts and companions left outside do
+not. Seven authored deeds/three proxies remain. The dated Between audit
+retains tests, phone/native barrier exit and source-bound measurement.
+
 2026-10-16 Shepherd deed: actual critical recovery of another person, or
 allied Lifeline fatal-fall rescue, followed by both people's later-dawn
 survival. Real camp healer rounds provide a noncombat route. Six authored
@@ -90,7 +96,7 @@ Job -> track -> **class** -> **god** -> Table.
 | Subclass verbs (walls, pulls, pushes, swaps, blink, heals, pins, bribes, broadcast, command, stoke, guard, feed camp) | `src/js/godpath.js` (`do` on a data action) | built, 27 new abilities |
 | Class recognition, player + villager, one function | `godpath.js recognizeClass` | built; sheet line in `app.js` |
 | Offers lean to the path | `godpath.js shapeOffers` (player, villager, gift sheets); `villager-build.js buildPathLean` | built |
-| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay, Apex, Ward, Market God and Shepherd; legacy proxies for four remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
+| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay, Apex, Ward, Market God, Shepherd and Between; legacy proxies for three remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
 | Table never reads godhood | `scripts/godpath/ladder.js` | enforced |
 
 ## Checks
@@ -103,8 +109,11 @@ Job -> track -> **class** -> **god** -> Table.
 ## What's left (reconciled 2026-10-15)
 
 1. **Fitting ascension deeds and current gate measurements.** Current authored
-   gates: Unkillable, Voice, Apex, Ward, Market and Shepherd. Class age cannot
-   bypass them. Four legacy replacements remain. Shepherd adds actual critical
+   gates: Unkillable, Voice, Apex, Ward, Market, Shepherd and Between. Class age
+   cannot bypass them. Three legacy replacements remain. Between adds actual
+   individual living escape, including field pre-contact evasion, from a fresh
+   above-capacity monster left alive. No kill or sealed result substitutes.
+   Shepherd adds actual critical
    care or allied fatal-fall rescue followed by both people's later-dawn
    survival, including ordinary camp medical rounds. The25% threshold is an
    Agent-authored data lever, not a new Steve quotation. See the dated

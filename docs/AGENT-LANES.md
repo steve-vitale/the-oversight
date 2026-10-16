@@ -1,5 +1,13 @@
 # Agent lanes (2026-10-15)
 
+Codex Between deed (2026-10-16): owns narrow godpath.js individual escape
+outcome helpers, tactical game.js actual retreat/result callers, fieldFights.js
+actual evade/withdraw completion and drifter.god.deed. Reuses existing saved
+opening evidence; no new price, strength, kit, policy, region or nomad change.
+Seven authored deeds/three proxies remain. Muse may use the dated source
+bundle, paired23-metric reports and reconstruction/replay workflow. Keep
+individual flight distinct from abandoned companions and sealed judges.
+
 Codex Shepherd deed (2026-10-16): owns the narrow godpath.js care
 recorder/dawn settlement, game.js real camp-healer completion hook and
 godpaths.json caregiver deed; common tests and source-bound16/64 comparison.

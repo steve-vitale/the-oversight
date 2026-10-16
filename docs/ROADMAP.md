@@ -9,6 +9,23 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Between fitting deed (2026-10-16, needs-eyes): the actual person must leave
+alive while a fresh monster that opened above their full HP capacity still
+lives. Tactical individual retreat/barrier exits and real field evasion or
+withdrawal count; empty taps, kills, sealed arenas/judges and stranded allies
+do not. HP capacity is a transparent gate proxy, not a full combat-strength
+score. Costs, class/payoff/four-magic/day80 and existing active gods stay.
+Seven authored deeds/three proxies now remain; Garden/reactor questions are
+unchanged. Read the dated between-deed-audit.md and all23 metrics before
+another survival or class-access change. Broad scale/parity remains open.
+
+Concrete reward follow-up from that holdout: caregiver10018 wins earlier94
+instead of131 without the proxy Between, yet loses player tier3+ gear. The
+old run's contest grants83/86/88 predate94; this cannot be attributed only to
+shorter exposure. Audit actual matched-day non-god contest/favor/reward and
+reward-to-use behavior before another balance lever. It is an investigation,
+not a proved prize-delivery defect or a reason to waive a fitting deed.
+
 Shepherd care deed (2026-10-16, needs-eyes): actual other-person healing from
 at most25%HP to above25%, or a real allied Lifeline rescue, must be followed
 by both people surviving a later real dawn. Camp healer rounds provide a
@@ -643,8 +660,11 @@ post-production requests; legacy missing data remains unknown. Targeted
 of need self-supplied and only eight days where every NPC requests food.
 This does not settle Garden's seven-day threshold, continuous membership or
 the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
-- **Current authored deeds:** six now have real outcomes: Unkillable, Voice,
-  Apex, Ward, Market God and Shepherd. Shepherd requires real critical care
+- **Current authored deeds:** seven now have real outcomes: Unkillable, Voice,
+  Apex, Ward, Market God, Shepherd and Between. Between requires actual
+  individual living escape from a fresh larger-HP monster left alive; sealed
+  results and abandoned companions cannot substitute. See its dated audit.
+  Shepherd requires real critical care
   or an allied fatal-fall rescue and both people alive at a later dawn;
   camp healer rounds support noncombat caregivers. See the dated Shepherd
   audit for mixed gate effects, tests and remaining care parity gaps.
@@ -653,7 +673,7 @@ the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
   buyer receive their own first receipt. There is no combat requirement or
   new tier/quantity quota. See ../evidence/2026-10-16/market-exchange-audit.md
   for current measurements, attribution, prepared caller/native proof and
-  limitations. Four proxies remain; Garden/reactor questions are unchanged.
+  limitations. Three proxies remain; Garden/reactor questions are unchanged.
 - **Earlier Ward implementation:** four then had real outcomes: Unkillable, Voice,
   Apex and Undying Ward. Ward requires a real hostile wound carried for
   another known living person, followed by both surviving the fight; an

@@ -1,5 +1,17 @@
 # Simulating The Oversight — how to measure a change
 
+Between deed (2026-10-16): `test-between-deed.js` joins quick/full discovery.
+Use actual barrier/individual NPC flight and real field evade/vFlee callers;
+the same field result label can mean a sealed judges' decision. Reconstruct
+with between-deed-reconstruct.cjs and compare the same standard policies on
+distinct16/64 cohorts. Select every changed raw row/metric/class/god identity,
+Between exposure and first/last remaining changed hash per policy/cohort;
+select all changed hashes when at most32. Keep the rest unclassified. Exact
+whole rows, whole balanced observations, full hashes and warnings are required
+before interpreting diagnostic traces. Never treat prepared full kits or HP
+capacity alone as proof of natural all-playstyle viability. See the dated
+Between audit and verifier; raw seven-file collector bytes travel with roots.
+
 Shepherd deed (2026-10-16): `test-shepherd-deed.js` joins quick/full discovery.
 Keep real critical healing/fatal-fall rescue, pending survival, actual dawn
 completion and ceremony separate. Reconstruct either frozen arm with
