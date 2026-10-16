@@ -29609,8 +29609,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.checkWaveUnlockBeat(); } catch (e) {}
       // KILL ATTRIBUTION (2026-10-13): channel tag for telemetry — which
       // system scored this kill ('patrol' | 'wild' | 'aid-crisis' |
-      // 'contest' | 'agency' | 'player' | 'unknown'). Purely additive: no
-      // game logic reads these keys. Gated with Game._attrKills (default
+      // 'contest' | 'agency' | 'player' | 'companion' | 'unknown').
+      // 'companion' (sim-tricktag 2026-10-16, finding #405): a villager
+      // companion landed the killing blow inside the scholar's TB fight —
+      // previously mis-tagged 'player'. Purely additive: no game logic
+      // reads these keys. Gated with Game._attrKills (default
       // true) so the honesty control can run the identical sim with logging
       // off and prove byte-identical state.
       try {
@@ -34058,6 +34061,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         catch (e) { console.warn('[godpath] lifeline', e); }
       }
       if (t.hp <= 0) {
+        // TB KILL ATTRIBUTION (sim-tricktag 2026-10-16, finding #405): stamp
+        // the killing blow's source on a dying monster fighter, so the TB
+        // kill path can attribute per-fighter (companion kills were all
+        // logged by=scholar via='player'). Additive underscore field on the
+        // per-fight fighter object — no behavior change. 'p'/'player', or
+        // null sourceKey with the 'you' label (the player strike's
+        // convention), = the scholar; a villager/ally fighter key is kept
+        // verbatim and resolved at the record site. Monster-on-monster and
+        // zero-damage finishers leave it unset -> legacy fallback there.
+        // TRICKTAG_OFF=1 restores the pre-fix behavior exactly (the honesty
+        // control for the attribution det-gate). Browser-safe: process is
+        // undefined in the browser, so the stamp is always on there.
+        if (t.kind === 'monster' && final > 0 && t._tbKilledBy == null) {
+          try {
+            const _tto = (typeof process !== 'undefined' && process.env && process.env.TRICKTAG_OFF === '1');
+            if (!_tto) {
+              if (sourceKey === 'p' || sourceKey === 'player' || (sourceKey == null && sourceLabel === 'you')) t._tbKilledBy = 'p';
+              else if (sourceKey) t._tbKilledBy = sourceKey;
+            }
+          } catch (e) {}
+        }
         t.alive = false;
         // LAST RITES (god-path 2026-10-14, keeper): the fallen stand guard.
         if (t.kind === 'villager' || t.kind === 'ally') {
@@ -40410,10 +40434,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             _seenKills.add(_bk);
             // COUNTERWIRE (2026-10-16): pass the trick summary so
             // counter-executed TB kills are attributed in waveKillLog (was:
-            // no detail). Channel stays 'player' — the kill happened in the
-            // scholar's TB combat path; per-fighter last-hit attribution in
-            // TB (companion-killer quirk) remains an open blank.
-            this.recordWaveKill(m.mdef.id, this.villagerId, 'player', this.trickSummaryFor ? this.trickSummaryFor(f, m.mdef.id) : null);
+            // no detail).
+            // TRICKTAG (sim-tricktag 2026-10-16, finding #405): per-fighter
+            // last-hit attribution — a villager COMPANION landing the killing
+            // blow in the scholar's TB fight now logs by=<companion vid>,
+            // via='companion' (was: by=scholar, via='player' always). The
+            // trick summary rides along either way. Unresolvable killers
+            // (DoT ticks, monster-on-monster, godhood departures) keep the
+            // legacy tag; TRICKTAG_OFF=1 restores it for everything.
+            let _killerVid = this.villagerId, _killerVia = 'player';
+            try {
+              const _tto = (typeof process !== 'undefined' && process.env && process.env.TRICKTAG_OFF === '1');
+              const _kb = (!_tto && m._tbKilledBy) || null;
+              if (_kb && _kb !== 'p') {
+                const _kf = (f.fighters || []).find(x => x && x.key === _kb);
+                if (_kf && (_kf.kind === 'villager' || _kf.kind === 'ally') && _kf.villagerId) {
+                  _killerVid = _kf.villagerId; _killerVia = 'companion';
+                }
+              }
+            } catch (e) {}
+            this.recordWaveKill(m.mdef.id, _killerVid, _killerVia, this.trickSummaryFor ? this.trickSummaryFor(f, m.mdef.id) : null);
           }
         }
       }
