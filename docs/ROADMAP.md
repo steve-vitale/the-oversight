@@ -611,14 +611,29 @@ the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
 
 ### 4. God scale effects
 
-Garden recipient audit (2026-10-16): the current NPC daily cast fills other
+Garden feeding repair (2026-10-16): the recipient diagnosis below now has
+26 shared-kit caller/load assertions and prepared native Wait/Sleep/automatic
+load proof. Known living distinct recipients include a non-reactor player
+fed to their real fullness line, preserving larger reserves; NPC casters pay
+the same8 hunger and cannot be dead/unknown or buy an empty daily marker.
+The completed NPC meal is saved after dawn's earlier snapshot. Full955/955.
+All23 metrics and86 changed-outcome replays are in
+../evidence/2026-10-16/garden-feed-audit.md. Holdout wins46->48 /21->19 /
+26->25 /31->34 are mixed: maker invitation/entry warnings, merchant
+deaths/community/gear directions and caregiver deaths/class loss stay open.
+This is a retained correctness repair, not a balance-improvement claim.
+Continue the food-use/policy histories, broader army feeding and remaining
+god deeds/scale effects. Neither Garden's seven-day definition nor the early
+reactor question is resolved, and no food-use credit was waived.
+
+Earlier Garden recipient audit (2026-10-16): the then-current NPC daily cast fills other
 NPC bellies but omits a distinct player. Prepared source-pinned cases also
 expose stale-dead casting, duplicate fed counts and a paid zero-recipient
 harvest marker. All sampled NPC-Garden holdout cases are replayed through the
 standard driver with unchanged rows/hashes/23metrics. This establishes actual
 usage coverage plus separate prepared defects, not balance or a completed
-repair. Next implement/prove canonical living recipient settlement and compare
-survival/resource directions before adopting it. Garden's seven-day feeding
+repair. The separate repair above now proves canonical living recipient
+settlement and retains its survival/resource directions. Garden's seven-day feeding
 interpretation and the reactor question remain separate and unanswered.
 See ../evidence/2026-10-16/garden-recipient-audit.md.
 - **Recovery progress (2026-10-15):** all ten god verbs now have real
@@ -708,6 +723,16 @@ See ../evidence/2026-10-16/garden-recipient-audit.md.
 - **Never trust 8 seeds.**
 
 ## 3. Known issues (small, logged)
+
+Legacy test fixtures (2026-10-16): drifter-grab can assert a village return
+that combat prevented (same pre-evaluation seeds2/9 on both unchanged loaded
+source sets). Miser-ledger-names had an unseeded take-attribution failure,
+not reproduced by256 seeds per root; check the actual public take result and
+its access/capacity context before judging attribution. Neither test loads
+godverbs.js. Raw before/after probes and the accepted stable-source955/955
+run are in ../evidence/2026-10-16/garden-feed-audit.md. Repair truthful setup/
+action preconditions in a separate unit; do not loosen assertions, erase
+activity or quarantine a test just to get a green run.
 - World map overlay: the close button sits in an oversized empty bordered box (presentation pass B tokens). Showcase of the pass: https://claude.ai/artifact/9Vr2HxjbHyCTShDdDxkzYf (private to Steve).
 - Name cultures without a `fem` list fall back to they/them for some names (german, vietnamese, moroccan, and others): add fem lists (data only). A broader code fallback was tried and dropped — it shifts seeded RNG.
 - Lifeseed grammar: "X's grandchildren Yarina" (one name for a plural relation), first-person lines inside third-person bios ("He taught me to swim"), "still understand more than he can say" (agreement).

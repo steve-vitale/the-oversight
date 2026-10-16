@@ -61,6 +61,44 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Garden feeding settlement (2026-10-16): **retain**, needs-eyes. A living NPC
+Garden now includes the distinct living player among known resident recipients.
+Fill min(fullLine,kcalCap), preserving any larger reserve; exclude reactor
+bearers. This is an explicit fullness interpretation, not an expanded-bank
+gift. Keep200kcal/8hunger, the strict post-payment80 gate and current daily
+gates. Exclude dead/unknown NPC casters and duplicate/dead/unknown recipients;
+no recipients means no payment/harvest marker. The NPC dawn meal, its payment
+and day marker are now saved together after the earlier endDay snapshot.
+No physical food, harvest provenance, feast-use or authored deed is invented.
+
+In64 disjoint holdouts per policy, wins46->48 /21->19 /26->25 /31->34,
+entries46->48 /21->19 /26->25 /31->35, deaths88->88 /86->84 /52->53 /43->46,
+community losses14->13 /24->24 /26->27 /17->15 (capable/maker/merchant/caregiver).
+Player named-class access38->39 /49->52 /44->45 /45->44; earned good gear
+64->64 /64->64 /63->62 /64->64. Early survival and national scale do not change.
+Maker invitation/entry warnings remain; merchant deaths/community/gear and
+caregiver deaths/class directions remain even where automated tolerances do
+not flag them. The16-seed screen separately has maker deaths14->18 and class
+access13->12, and caregiver community3->4. No overall balance improvement.
+
+All43 changed discrete-outcome cases replay exactly in both arms (86 replays,
+all23 metrics). Maker loses10003/10004/10018/10047 and gains10010/10025; the
+lost runs end without the food-use deed, not with a losing played finale.
+10018 also loses its community on116. Merchant10014 changes from win90 to
+community loss145. Caregiver gains five wins and loses10032/10062; more wins
+coexist with more deaths. Merchant10009 still wins93 instead of101 but loses
+its T3+ gear receipt: the day92 prize becomes gravity_well (not weapon/armor),
+and later show/contest gear differs. Preserve this reward/exposure direction;
+do not increase prizes or grant a food deed to recover an aggregate rate.
+
+The unsaved preliminary candidate is not adopted. Its additional two load
+assertions fail; final ordinary endDay auto-load retains day86/2400kcal/paid
+marker. The snapshot repair leaves all screen/holdout rows and23 metrics equal
+to that candidate, with different full hashes (save sequence is retained).
+26 caller assertions, native Wait/Sleep/automatic-load proof, raw panels,
+reconstruction and all tradeoffs: ../evidence/2026-10-16/garden-feed-audit.md.
+Army logistics, NPC reactor diets, contests and eight authored deeds remain open.
+
 Garden recipient diagnosis (2026-10-16): **unresolved repair**, no survival
 lever changed. Current200-kcal NPC casting pays8 hunger but excludes the
 player in addition to the actual holder. Prepared player reserve300 remains

@@ -327,14 +327,32 @@
   function vGodRec(vid) { try { return ((Game.state.village || {}).npcGodhood || {})[vid] || null; } catch (e) { return null; } }
 
   // ---------------- day verbs (player; villagers via godDaily) ----------------
+  function gardenResident(id) {
+    const v = Game.state.village || {}, p = Game.getPerson(id);
+    return !!(id && (v.roster || []).includes(id) && p && !p.dead &&
+      (id !== Game.villagerId || Game.state.scholar.health > 0));
+  }
+  function gardenRecipients(who) {
+    const holder = who === 'player' ? Game.villagerId : who;
+    return [...new Set((Game.state.village.roster || []))].filter(id =>
+      id !== holder && gardenResident(id) &&
+      (id !== Game.villagerId || (!Game.hasAbility('fusion_reactor') && Math.min(Game.fullLine(), Game.kcalCap()) > 0)));
+  }
   function feedMultitude(who) {
     const v = Game.state.village || {}, s = Game.state.scholar || {};
-    const ids = (v.roster || []).filter(id => id !== Game.villagerId && id !== who && !((Game.vpOf && Game.vpOf(id)) || {}).dead);
+    const ids = gardenRecipients(who);
     let fed = 0;
     for (const id of ids) {
+      if (id === Game.villagerId) {
+        // A meal fills the person, not their expanded war chest. A reactor's
+        // food ceiling receives no food; stronger reserves stay intact.
+        s.kcal = Math.max(s.kcal || 0, Math.min(Game.fullLine(), Game.kcalCap()));
+        fed++;
+        continue;
+      }
       try { const n = Game.npcNeeds(id); if (n) { n.hunger = 0; fed++; } } catch (e) { warn('feed needs', e); }
     }
-    v.harvestDay = s.day || 0;
+    if (fed) v.harvestDay = s.day || 0;
     return fed;
   }
   const DAY_IMPL = {
@@ -411,7 +429,7 @@
     }
     if (f && !f.over) return { ok: false, why: 'Not in the middle of a fight.' };
     if (act.perDay && ((s._godDay || {})[actionId]) === dayKey()) return { ok: false, why: `${act.name}: once a day.` };
-    if (actionId === 'feed_multitude' && !(Game.state.village.roster || []).some(id => id !== Game.villagerId && !((Game.vpOf && Game.vpOf(id)) || {}).dead)) {
+    if (actionId === 'feed_multitude' && !gardenRecipients('player').length) {
       return { ok: false, why: 'No one in camp to feed.' };
     }
     if (actionId === 'name_price') {
@@ -843,13 +861,17 @@
       }
       // villager gardens feed Haven when it's hungry (same verb, their belly pays)
       const day = s.day || 0;
-      for (const vid of (v.roster || [])) {
-        if (vid === game.villagerId || holderGod(vid) !== 'living_garden' || v.harvestDay === day) continue;
+      for (const vid of new Set(v.roster || [])) {
+        if (vid === game.villagerId || !gardenResident(vid) || holderGod(vid) !== 'living_garden' || v.harvestDay === day) continue;
+        const recipients = gardenRecipients(vid);
+        if (!recipients.length) continue;
         const C = { isP: false, vid, name: game.displayName ? game.displayName(vid) : vid };
         let need = false;
         try {
           const tier = game.villageFoodTier ? game.villageFoodTier() : 'secure';
-          need = tier !== 'abundant' || (v.roster || []).some(id => ((game.npcNeeds(id) || {}).hunger || 0) >= 50);
+          need = tier !== 'abundant' || recipients.some(id => id === game.villagerId
+            ? (s.kcal || 0) <= Math.min(game.fullLine(), game.kcalCap()) / 2
+            : ((game.npcNeeds(id) || {}).hunger || 0) >= 50);
         } catch (e) { warn('garden need', e); }
         const kcal = ((godPlay('living_garden').actions || [])[0] || {}).cost ? godPlay('living_garden').actions[0].cost.kcal : 200;
         if (!need || !canPay(C, kcal)) continue;
@@ -857,6 +879,9 @@
         const fed = feedMultitude(vid);
         game.say(`${C.name} kneels and asks. The land answers: ${fed} bellies full in Haven today. (Feed the Multitude)`);
         tele('god_verb', { god: 'living_garden', verb: 'feed_multitude', who: vid, fed });
+        // endDay's ordinary snapshot predates this dawn hook. Persist the
+        // paid meal and day marker together, after both have settled.
+        if (fed) { try { game.save(); } catch (e) { warn('garden save', e); } }
       }
     } catch (e) { warn('godDaily', e); }
   }

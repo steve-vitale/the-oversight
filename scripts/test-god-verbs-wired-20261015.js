@@ -457,6 +457,10 @@ const T = K.reporter('test-god-verbs-wired-20261015');
     clearGods();
     Game.tbfight = null;
     ascendVillager(vidA, 'living_garden');
+    // Earlier fatal-refusal scenes can leave this prepared caster dead.
+    // A daily god verb requires its actual living person, like other actors.
+    Game.getPerson(vidA).dead = false;
+    T.ok('Garden daily fixture has a living resident caster', v.roster.includes(vidA) && !Game.getPerson(vidA).dead);
     for (const id of roster0) needs(id, 60);
     v.harvestDay = -1;
     quiet(() => GV.godDaily(Game));

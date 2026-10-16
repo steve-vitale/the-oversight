@@ -121,8 +121,20 @@ Job -> track -> **class** -> **god** -> Table.
    once, with no duplicate-self grant or personal3x stacking. Four source
    arms isolate identity from recipient changes; full944/944 passes. See
    ../../evidence/2026-10-16/apex-identity-audit.md. This does not finish Voice,
-   brawler/Garden recipient parity, far formal companion body/gear parity
+   brawler/Garden recipient parity at that point, far formal companion body/gear parity
    or natural titan/Network play.
+   Garden's separate recipient follow-up now includes a distinct living
+   non-reactor player at their fed line, preserves higher reserves and the
+   NPC caster's200kcal/8hunger payment, and excludes dead/unknown casters or
+   duplicate/invalid diners. Dawn's automatic snapshot now retains the paid
+   meal/day marker.26 caller/load checks, native Wait/Sleep/automatic-load,
+   full955/955 and source-bound16/64 comparisons are in
+   ../../evidence/2026-10-16/garden-feed-audit.md. Maker invitation/entry,
+   merchant gear/community/death and caregiver death/class directions stay
+   open; no win-only verdict. This does not author the Garden deed or prove
+   marching rations, NPC reactor diets, all god-action validity or contests.
+   Other God daily callbacks also run after the original endDay snapshot;
+   their automatic-load cost/recovery contracts need separate caller proof.
    Hoarder's Interest now has a shared dawn payout for living resident NPC
    holders, using their own build and the existing2.5/5percent rates,1000kcal
    threshold and pantry cap. Saved canonical person/day receipts cover

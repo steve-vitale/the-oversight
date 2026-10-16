@@ -14,12 +14,21 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
-Garden recipient diagnosis (2026-10-16): Codex audits godverbs.js's existing
+Garden feeding repair (2026-10-16): Codex owns godverbs.js's canonical living
+NPC caster/recipient boundary, player fullness at min(fullLine,kcalCap), and
+post-payment dawn snapshot. Preserve stronger reserves, reactor restrictions,
+200kcal/8hunger and existing daily gates. No physical harvest/deed receipts,
+price, policy, observer or region changes. Shared-kit and native Wait/Sleep/load
+proof and full multimetric tradeoffs: ../evidence/2026-10-16/garden-feed-audit.md.
+The prior diagnostic remains immutable. Broader army logistics and authored
+Garden/other god deeds remain open.
+
+Earlier Garden recipient diagnosis (2026-10-16): Codex audited godverbs.js's existing
 daily feeding/payment boundary through source-pinned prepared calls and every
 holdout cohort with sampled NPC Garden exposure. This unit changes no runtime,
 policy, food amount or seven-day deed. Preserve the measured player omission,
 stale-dead caster, duplicate count and zero-recipient marker observations before
-a separate recipient/food-settlement repair. See the dated garden-recipient audit.
+the separate recipient/food-settlement repair above. See the dated garden-recipient audit.
 
 Table entry ownership (2026-10-16): Codex owns table.js's public entry
 guard and the native Haven seat button's readiness/reason. Match actual

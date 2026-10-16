@@ -1,0 +1,140 @@
+  ok   three villagers to test with
+  ok   the god-verb module is loaded and registered
+
+One-Person Army: Turn the Pain
+  ok   player ascends through the ceremony
+  ok   the verb is on the fight action bar
+  ok   before any wound it is refused (nothing to give back)
+  ok   WEAKNESS: a beam wound feeds no pain (pool = the bleeding wounds only)
+  ok   the verb fires through useAbility
+  ok   the monster takes the whole pool back, uncapped (>= the pool)
+  ok   it cost 150 kcal of food
+  ok   once per fight: a second Turn the Pain is refused
+  ok   PARTY: below half HP, the allies near you are rallied
+  ok   TITAN: against a titan the blow also returns what it did to your allies
+  ok   a villager ascends the same way
+  ok   the villager casts it on their own turn (tbVillagerAbility)
+  ok   the villager gives their pain back (>= 14)
+  ok   the villager paid from their belly (150 kcal = +6 hunger)
+
+Undying Ward: Take the Wound
+  ok   a big hit on an ally lands on the Ward instead
+  ok   each redirect costs 60 kcal
+  ok   a redirected wound cannot drop the Ward below 1 HP
+  ok   three strains: the Ward collapses (loses a whole turn)
+  ok   after the collapse the ally takes their own wounds
+  ok   WEAKNESS: monsters aim at the Ward over a nearer ally
+  ok   WEAKNESS: the Ward heals itself at half mid-fight (+20 -> +10)
+  ok   a villager Ward takes the ally's wound
+  ok   the villager Ward paid from their belly (+2 hunger)
+  ok   villager Ward protects the player by the same rule
+  ok   the villager Ward collapses out of the fight at three strains
+
+Apex Predator: Choose the Terms
+  ok   Ambush fires before the first blow
+  ok   every foe loses its first turn; the next strike is x3
+  ok   it cost 120 kcal
+  ok   the terms are set once: Range is refused now
+  ok   Range fires
+  ok   the foe is driven back to 4 tiles
+  ok   from 2+ tiles your strikes hit x1.5
+  ok   WEAKNESS: contact ends the terms (x1.5 gone once it reaches you)
+  ok   Ground fires
+  ok   TITAN: Ground roots even a titan (2 rounds); you dodge +25%
+  ok   after the first round the terms are refused
+  ok   a villager hunter chooses the terms on round 1 (free, then acts)
+  ok   their ambush: the foe loses a turn, their next strike x3
+  ok   paid from their belly (+5 hunger)
+
+Shepherd of the Dead: Raise Echo
+  ok   the fallen ally rises as an echo at full HP
+  ok   the death is real and final (off the roster, in the fallen)
+  ok   it cost 150 kcal
+  ok   the echo hits x2
+  ok   once per fight: the second fallen ally stays down
+  ok   after 3 rounds the echo fades for good
+  ok   an echo struck down breaks apart without dying twice
+  ok   ARMY/TITAN: in a titan fight every fallen ally rises (100 kcal each after the first)
+  ok   WEAKNESS: no living Shepherd on the field, no echo
+  ok   a villager Shepherd raises the echo
+  ok   paid from their belly (+6 hunger)
+
+The Between: Phase Out
+  ok   a big hit passes through empty air
+  ok   it cost 100 kcal
+  ok   WEAKNESS: phasing is a retreat (moved away, hold broken)
+  ok   once per fight: the next big hit lands
+  ok   PARTY: the Between draws the fire (aimed at first)
+  ok   TITAN: against a titan the phase covers every hit from it that round
+  ok   a villager phases out of a big hit
+  ok   paid from their belly (+4 hunger)
+
+All-Seeing: No Lies
+  ok   Read Them Aloud fires
+  ok   it cost 100 kcal
+  ok   allies slip about half the blows (they hear it called)
+  ok   WEAKNESS: the holder is still fragile (no dodge from the reading)
+  ok   your strikes on a foe winding up hit x1.5
+  ok   No Lies cannot see through deception on an empty stomach
+  ok   NO LIES: a villager's lie is never live to the All-Seeing
+  ok   daily sight pays food once, before revealing truth
+  ok   later lies that day do not charge the same faculty twice
+  ok   at dawn you know the lie (a doubt with the truth)
+  ok   COST: the liar feels your gaze (-1 trust a day)
+  ok   NO LIES: an ambush built on a lie never springs
+  ok   a villager reads the fight aloud
+  ok   ...and the player (their ally) slips blows
+
+Voice of the Relay: Speak and Be Heard
+  ok   Rally Cry fires
+  ok   every ally is emboldened, next strikes x1.5; every foe hesitates
+  ok   it cost 120 kcal
+  ok   each word costs grounding
+  ok   Be Heard (out of a fight) fires once a day
+  ok   every Haven villager hears it (+trust) for 150 kcal
+  ok   ...and every fight today starts rallied (the ally's first turn)
+  ok   a villager Voice cries the rally on their turn
+  ok   WEAKNESS: the Voice falls and the network goes dark (allies stunned)
+
+Unkillable: Phoenix
+  ok   the player rises out of someone else's ash (no clause held)
+  ok   a villager burned for it
+  ok   it cost 500 kcal
+  ok   WEAKNESS: no fuel, no fire: starving, the death sticks
+  ok   a villager Unkillable crawls out of the ash (alive at 1 HP, out of the fight)
+  ok   ...and someone else burned
+
+Market God: Buy Passage, Name Your Price, the Guard
+  ok   Buy Passage fires in the fight grid
+  ok   the monster takes the coin and leaves
+  ok   it cost the wave price (1000) plus the haggle
+  ok   WEAKNESS: the big ones don't haggle (titans refuse)
+  ok   the Gilded Guard eats a claw
+  ok   WEAKNESS: the coins never stop a beam
+  ok   Name Your Price (no target: the market picks the weapon you lack)
+  ok   once a day
+  ok   dawn: the day verbs refresh and the Audit collects at 3 markers
+  ok   a villager Market God buys passage when it goes badly
+  ok   paid from their belly (1000 kcal price + the 40 kcal haggle = +42 hunger)
+  ok   the villager carries the coins too (a hit absorbed)
+
+Living Garden: Feed the Multitude
+  ok   Feed the Multitude fires out of a fight
+  ok   every Haven villager eats their fill
+  ok   it cost 200 kcal and fed you nothing (does not skip dinner)
+  ok   once a day
+  ok   PARTY: Haven fights fed (overcharged)
+  ok   TITAN: a coalition blade from away hits fed too (x1.25)
+  ok   WEAKNESS: not a fighter (your strikes x0.8)
+  ok   WEAKNESS: monsters go for the garden first
+  ok   Garden daily fixture has a living resident caster
+  ok   a villager garden feeds Haven at dawn when it is hungry
+  ok   ...from their own belly, never into it (+8 hunger)
+
+wiring
+  ok   a non-god has no god verbs on the bar
+  ok   a non-god cannot fire one
+  ok   an empty garden action refuses before food is spent
+  ok   a real endDay runs the dawn god tick (Name Your Price is back)
+
+test-god-verbs-wired-20261015: 116 passed, 0 failed, 0 todo (phase 0)

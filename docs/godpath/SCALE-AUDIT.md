@@ -39,9 +39,22 @@ contest rule, audience reaction, judged advantage or mercy choice.
 | Voice of the Relay | rally_cry commands/rallies allies; daily be_heard arms player and later NPC participants at their first real own turn | Same morale and hesitation hooks apply on the field | Open: a dedicated performance-contest realization | Daily receipt/expiry/save proof: daily-voice-audit.md; natural-holder timing gap remains. Same-day allied-village communication promise needs actual caller proof |
 | Unkillable | phoenix refusal uses a real off-field living victim and food | Same lethal-hit refusal can trigger in titan combat | Open: dedicated endurance-contest realization beyond inherited lethal refusal where wired | Inherited personal refusal; a complete coalition/Network continuation must be proved |
 | Market God | name_price brings an actual item; tactical buy_passage removes one eligible foe | Explicit titan refusal; buying time requires another eligible foe | Open: risky judge sponsorship | Strategic quartermaster role open; inherited guard/passage in combat. Field guard beam weakness corrected separately |
-| Living Garden | feedMultitude clears other NPC hunger; day's harvest arms fighting allies | Same fed/overcharge hook reaches coalition fighters | Open: dedicated feast-contest realization | Dawn village feed exists; exact fifty-mouth coverage, bearer-as-recipient parity and marching consumption need proof |
+| Living Garden | feedMultitude clears distinct other resident hunger, including a living non-reactor player to their fed line; caster pays; day's harvest arms fighting allies | Same fed/overcharge hook reaches coalition fighters | Open: dedicated feast-contest realization | Paid dawn/load recipient proof: garden-feed-audit.md; exact fifty-mouth coverage and marching consumption remain open |
 
 ## Concrete gaps to take next
+
+Garden feeding settlement (2026-10-16): the recipient/caster diagnosis below
+now has a separate repair. Distinct known living residents receive a meal;
+NPC casting includes a living non-reactor player at their existing fed line,
+preserves a higher reserve and never fills an expanded war chest. A caster
+does not eat their own gift. Dead/unknown NPC holders, duplicate people and
+zero-recipient daily commitments are rejected. Keep200kcal/8hunger, strict
+post-payment80 refusal and existing daily gates. The dawn hook now saves the
+settled NPC payment, meal and marker after the earlier endDay snapshot.
+26 actual-caller assertions and prepared native Sleep/automatic-load proof
+are in ../../evidence/2026-10-16/garden-feed-audit.md, with adverse metrics.
+This does not implement fifty-mouth march consumption, actual food inventory,
+NPC reactor diets, contest powers or the seven-day authored Garden deed.
 
 Garden recipient follow-up (2026-10-16): the source-bound diagnosis is in
 ../../evidence/2026-10-16/garden-recipient-audit.md. Prepared same-verb calls
@@ -81,8 +94,9 @@ No food amount, daily effect or authored Garden deed is changed by the audit.
    strike/rally effects and a resumable scheduler. Brawler wound rally and
    NPC Voice collapse include the player; see the two support audits above
    for actual damage, expiry, action choice and lost-action proofs.
-   `feedMultitude` excludes Game.villagerId even when its holder is an NPC.
-   Audit their actual recipient consumers/resource settlement separately.
+   `feedMultitude` previously excluded Game.villagerId even for an NPC holder.
+   The Garden settlement follow-up above now proves actual recipients and
+   paid dawn persistence, retaining the original price and adverse metrics.
    Far formal-party injection still uses a30HP helper without the nearby
    builder's complete body/gear fields. That is another open parity contract,
    not repaired merely by removing duplicate identities.

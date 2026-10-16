@@ -1,5 +1,20 @@
 # Simulating The Oversight — how to measure a change
 
+Garden feeding (2026-10-16): `scripts/godpath/test-garden-feeding.js` runs
+automatically in quick/full discovery. Run it before freezing campaign roots.
+Verify automatic dawn snapshots as well as manual save-then-load: the first
+24-check candidate passed while an ordinary
+endDay load lost its meal/payment. The final26-check proof catches that gap.
+The source-bound before/draft/final experiment retains984 worker results:
+328 exact-source reused Table-entry baselines and656 new jobs, plus86 separate
+paired outcome replays. All43 holdout cases changing discrete progression,
+access, gear, early survival, death or community outcomes are selected by a
+fixed list; all23 metrics and continuous exposure remain in the complete reports.
+Do not pool screens, holdouts, preliminary candidates or conditional replays.
+Save sequence remains in full gameplay hashes; unchanged23-metric sets do not
+prove all state equal. See `evidence/2026-10-16/garden-feed-audit.md` for
+reconstruction with original collector bytes and the accepted full955 check.
+
 Table entry ownership proof (2026-10-16):
 `scripts/godpath/test-table-entry.js` runs automatically in quick/full discovery.
 It exercises real earned deeds, actual native rendering/binding, stale clicks,
