@@ -9,6 +9,7 @@
 //   - tableScene()
 //   - tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14)
 //   - tableActive()
+//   - tableEntryBlock()
 //   - chooseTableOption(id)
 //   - tableStartPath(pathId)
 //   - tableChoose(choiceId)
@@ -497,6 +498,16 @@
         try { this.save(); } catch (e) {}
       } catch (e) { console.warn('tableAnnounce', e); }
     },
+    // The live Haven-panel action cannot take ownership from another scene.
+    // Keep the panel's existing full-integration remote access, not the
+    // narration helper's approximate distance-to-Haven test.
+    tableEntryBlock() {
+      if (this.over || this.won) return 'This expedition has ended.';
+      if (this.state.activeContest) return 'Finish the current contest before taking your seat.';
+      if (this.inCombat() || this.state.scholar.monster) return 'Finish the current encounter before taking your seat.';
+      if (this.havenStoresAccess() === 'none') return 'Return to Haven to take your seat.';
+      return '';
+    },
     // tablePreview(): the run as priced TODAY (recomputed live). null when
     // the table isn't available. ready = the seat can be taken now.
     tablePreview() {
@@ -512,7 +523,8 @@
         // OVERTIME (2026-10-14): the live price shows the waiting cost.
         let ot = null;
         try { ot = this.overtimeStanding ? this.overtimeStanding() : null; } catch (e) { console.warn('tablePreview overtime', e); }
-        return { seat: seat.seat, doors, day, ready: true, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
+        const why = this.tableEntryBlock();
+        return { seat: seat.seat, doors, day, ready: !why, why, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
       } catch (e) { console.warn('tablePreview', e); return null; }
     },
     // tableTakeSeat(): the player sits — this locks the seat (tableScene);
@@ -520,8 +532,11 @@
     tableTakeSeat() {
       const pv = this.tablePreview();
       if (!pv) return { ok: false, msg: '' };
+      const why = this.tableEntryBlock();
+      if (why) return { ok: false, msg: why };
+      if (!pv.ready) return { ok: false, msg: pv.why };
       this.tableScene();
-      return { ok: true };
+      return { ok: !!this.progState().tableDone, msg: this.progState().tableDone ? '' : 'Your seat could not be taken. Your case is still being priced.' };
     },
 
     // tableOfferPaths: path selection modal. Earned paths are choices;

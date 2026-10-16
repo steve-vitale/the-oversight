@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><base href="/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0f0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Oversight">
+<title>The Oversight</title>
+<link rel="manifest" href="manifest.json?v=d1aca0ba-20261014-052409">
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="stylesheet" href="src/css/main.css?v=d1aca0ba-20261014-052409">
+</head>
+<body>
+<div id="update-banner" class="hidden">&#11015; A new version is ready &mdash; <b>tap to update</b></div>
+<div id="app">
+  <!-- Screens are swapped by app.js -->
+  <main id="screen"></main>
+  <div id="sheet-root"></div>
+  <div id="toast" class="hidden"></div>
+</div>
+<script src="src/js/engine/state.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/engine/modifiers.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/engine/calories.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/engine/day.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/engine/forage.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/engine/combat.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/audio-registry.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/game.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/encounters.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/conversation.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/convo-mood.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/convoTopics.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/convo-wants.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/convo-dialogue.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/convo-beats.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/convo-scene.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/voice-piper.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/voice-system.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/examine.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/equipment.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/journal.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/party.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/party-formal.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/truth.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/galactic-cast.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/contests.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/broadcast.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/contestEngine.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/alienPlayers.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/storage.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/perceive.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/carexplore.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/justice.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/food.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/betrayal.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/corpses.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/corruption.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/lifeseed.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/spawn-knack.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/trial-deeds.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/practice-deeds.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/tracks.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/villager-build.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/progression.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/waveLedger.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/standing.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/feastBuff.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/ledger.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/abilityActions.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/buildarounds.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/foodPower.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/monsterBehaviors.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/partyTactics.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/sigW3a.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/statusEffects.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/sigW3b.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/metaProgression.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/sigW3c.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/sigW4.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/sigW5.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/villager-agency.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/fieldFights.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/party-wiring.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/party-bond.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/villager-objectives.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/villager-mapmem.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/codex-people.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/membership.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/havenGrowth.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/hierarchy.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/scaleDiscovery.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/comms.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/pods.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/titans.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/finale-campaign.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/godhood.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/pantheon.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/records.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table-feared.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table-indispensable.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table-beloved.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table-witness.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table-assimilated.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table-defiant.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/relay-ext.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/relay-dialogue.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/table-relay.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/safetynets.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/villageAgency.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/memdepth.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/overtime.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/network-campaign.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/debug-scenarios.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/keepsakes.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/skill-teaching.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/world.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/godpath.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/godverbs.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/endingKey.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/telemetry-hooks.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/feel.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/build.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/whereAreWe.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/drama.js?v=d1aca0ba-20261014-052409"></script>
+    <script src="src/js/move-anim.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/presentation.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/sprites.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/tile-scenes.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/app.js?v=d1aca0ba-20261014-052409"></script>
+<script src="src/js/feel-audio.js?v=d1aca0ba-20261014-052409"></script>
+<script>
+/* PWA update flow (v2): version.json is the source of truth, NOT the service
+   worker. The SW exists only for offline caching — updates no longer depend on
+   the SW install/waiting/skipWaiting handover, which stalls silently on iOS.
+   On launch, on foreground resume, and every minute we fetch version.json
+   with cache:'no-store' plus a cache-buster; if it differs from the running
+   BUILD_VERSION we show the banner. Tapping it unregisters all SWs, wipes all
+   caches, and navigates to a cache-busted URL — the new version loads no
+   matter what state the old SW is in. Every step reports progress; failures
+   show retry + a manual fallback. Works even where SWs are unsupported. */
+(function () {
+  var banner = document.getElementById('update-banner');
+  var state = 'idle'; // idle | available | working | failed
+  var remoteVersion = null;
+  var failCount = 0;
+
+  function isNewer(local, remote) {
+    if (!remote || remote === local) return false;
+    function ts(v) { var m = /-(\d{8})-(\d{6})$/.exec(v || ''); return m ? m[1] + m[2] : null; }
+    var a = ts(local), b = ts(remote);
+    if (a && b) return b >= a; // same-second double commit still counts
+    return true; // unparseable: any difference counts as newer
+  }
+
+  function show(html) { banner.innerHTML = html; banner.classList.remove('hidden'); }
+
+  var PENDING_HTML = '&#9203; New version isn&rsquo;t ready to download yet &mdash; <b>tap to check again</b>.';
+
+  // Steve 2026-10-06: version.json goes live on push, but GitHub Pages can
+  // lag minutes behind. The new build is only "available" when its files are
+  // actually downloadable — otherwise tap -> reload-old -> banner-again loops
+  // forever with a banner that never dismisses. Every script URL in the
+  // served index.html is cache-busted with the version tag, so the new tag's
+  // presence there proves the new build is live.
+  function assetsLive(remote) {
+    var url = 'index.html?t=' + Date.now().toString(36);
+    return fetch(url, { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) return false;
+      return r.text();
+    }).then(function (text) {
+      return typeof text === 'string' && text.indexOf(remote) !== -1;
+    }).catch(function () { return false; });
+  }
+
+  function check() {
+    var local = window.BUILD_VERSION || '';
+    var url = 'version.json?t=' + Date.now().toString(36);
+    return fetch(url, { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      var remote = (j && j.version) || '';
+      if (!isNewer(local, remote)) return false;
+      return assetsLive(remote).then(function (live) {
+        if (!live) {
+          // Not downloadable yet — stay silent (or keep the pending notice).
+          // The 15-min / foreground re-check is the auto-retry.
+          if (state !== 'pending') state = 'idle';
+          return false;
+        }
+        remoteVersion = remote;
+        state = 'available';
+        failCount = 0;
+        show('&#11015; A new version is ready &mdash; <b>tap to update</b>');
+        return true;
+      });
+    }).catch(function () { return false; }); // offline: stay silent
+  }
+
+  function apply() {
+    if (state === 'working') return;
+    state = 'working';
+    show('&#9203; Downloading new version&hellip;');
+    // Steve 2026-10-06: re-verify assets are live before navigating.
+    // CDN can lag version.json; navigating to stale files causes the
+    // "new version isn't available" pending loop.
+    if (remoteVersion) {
+      assetsLive(remoteVersion).then(function(live) {
+        if (!live) {
+          show('&#9203; New files are still propagating&hellip; waiting&hellip;');
+          // Retry in 10s
+          setTimeout(function() {
+            state = 'available'; // allow re-tap
+            apply();
+          }, 10000);
+          return;
+        }
+        // Assets confirmed live - proceed with update
+        doApply();
+      });
+      return;
+    }
+    doApply();
+  }
+  function doApply() {
+    // Bulletproof: every async step races a timeout, and navigation is
+    // GUARANTEED via backstop timer. iOS can hang getRegistrations() or
+    // caches.delete() forever — we never wait on them.
+    var navigated = false;
+    function go() {
+      if (navigated) return; navigated = true;
+      show('&#8635; Reloading into the new version&hellip;');
+      try {
+        var u = new URL(window.location.href);
+        u.search = '';
+        u.searchParams.set('v', remoteVersion || Date.now().toString(36));
+        window.location.href = u.toString();
+      } catch (e) {
+        try { window.location.reload(); } catch (e2) { fail(); }
+      }
+    }
+    function withTimeout(p, ms) {
+      return Promise.race([p, new Promise(function (res) { setTimeout(res, ms); })]);
+    }
+    try {
+      var cleanups = [];
+      if ('serviceWorker' in navigator) {
+        cleanups.push(withTimeout(
+          navigator.serviceWorker.getRegistrations().then(function (regs) {
+            return withTimeout(Promise.all(regs.map(function (r) {
+              return withTimeout(r.unregister().catch(function () {}), 2000);
+            })), 2500);
+          }).catch(function () {}), 3000));
+      }
+      if ('caches' in window) {
+        cleanups.push(withTimeout(
+          caches.keys().then(function (ks) {
+            return withTimeout(Promise.all(ks.map(function (k) {
+              return withTimeout(caches.delete(k).catch(function () {}), 2000);
+            })), 2500);
+          }).catch(function () {}), 3000));
+      }
+      withTimeout(Promise.all(cleanups), 7000).then(go).catch(go);
+      // Absolute backstop: navigate in 8s no matter what hangs.
+      setTimeout(go, 8000);
+    } catch (e) { go(); }
+    function withTimeout(p, ms) {
+      return Promise.race([p, new Promise(function (res) { setTimeout(res, ms); })]);
+    }
+    // Steve 2026-10-06: DO NOT wipe caches before navigation - causes black screen
+    // on iOS PWA. Just navigate; the new version's files are cache-busted by URL,
+    // so they'll load fresh. Old caches get cleaned on next launch.
+    try {
+      setTimeout(go, 500); // Brief delay to show "Reloading..." message
+    } catch (e) { go(); }
+  }
+
+  function fail() {
+    state = 'failed';
+    failCount++;
+    if (failCount >= 2) {
+      show('&#9888; Auto-update failed. Delete the home-screen app and re-add it from Safari, then <b>tap to retry</b>.');
+    } else {
+      show('&#9888; Update didn&rsquo;t work &mdash; <b>tap to retry</b>');
+    }
+  }
+
+  banner.addEventListener('click', function () {
+    if (state === 'available' || state === 'failed') apply();
+    else if (state === 'pending') check(); // manual re-check: way out of the stuck state
+  });
+
+  // Clean the cache-buster param after an update navigation.
+  // Recovery (Steve 2026-10-06): if we navigated here FOR an update (?v=X)
+  // but we're still on the old build, the new files weren't downloadable
+  // yet. Say so plainly instead of showing a tappable banner that loops.
+  // Tapping the notice re-checks — the way out of the stuck state.
+  try {
+    var u0 = new URL(window.location.href);
+    // Clean old URL params (legacy)
+    if (u0.searchParams.has('v') || u0.searchParams.has('fresh')) {
+      u0.search = '';
+      window.history.replaceState(null, '', u0.toString());
+    }
+    // Check sessionStorage for expected version (new robust method)
+    var attempted = null;
+    try { attempted = sessionStorage.getItem('oversight_expect_version'); } catch (e) {}
+    if (!attempted) attempted = u0.searchParams.get('v'); // fallback to URL
+    if (attempted && /^[0-9a-f]{7}-\d{8}-\d{6}$/.test(attempted)) {
+      if (attempted !== (window.BUILD_VERSION || '')) {
+        state = 'pending';
+        show(PENDING_HTML);
+      } else {
+        // Update succeeded - show confirmation briefly
+        // (Steve 2026-10-06: make updates verifiable)
+        try {
+          sessionStorage.setItem('oversight_just_updated', attempted);
+        } catch (e) {}
+      }
+    }
+    // Show update confirmation if we just updated
+    try {
+      var justUpdated = sessionStorage.getItem('oversight_just_updated');
+      if (justUpdated && justUpdated === (window.BUILD_VERSION || '')) {
+        sessionStorage.removeItem('oversight_just_updated');
+        // The banner will show briefly to confirm
+        state = 'idle';
+        show('&#9989; Updated to build ' + justUpdated.substring(0, 7));
+        setTimeout(function() {
+          if (state === 'idle') banner.classList.add('hidden');
+        }, 3000);
+      }
+    } catch (e) {}
+  } catch (e) {}
+
+  // Exposed for the build-tag tap in app.js and console debugging.
+  window.__oversightUpdate = { check: check, apply: apply };
+
+  // SW registration is for offline caching only now.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+
+  check();
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') check();
+  });
+  setInterval(function () { check(); }, 60 * 1000); // Steve 2026-10-06: 1 min, fast iteration
+})();
+</script>
+<aside style="position:fixed;top:0;left:0;right:0;z-index:100005;background:#17232b;color:white;font:12px/1.3 system-ui;padding:6px"><b>PREPARED NATIVE HAVEN TABLE ENTRY</b><br><button id="te-safe">Prepare safe Haven</button><button id="te-fight">Real fight</button><button id="te-contest">Real contest, stale block</button><button id="te-render">Render actual block</button><button id="te-reload">Save and reload</button><div id="te-status"></div><div id="te-panel" aria-label="Actual Haven Table block"></div></aside><script>
+const teRender=new Function('Game','esc',"let html=\"\";\n              try {\n                const tp = Game.tablePreview ? Game.tablePreview() : null;\n                if (tp) {\n                  const doors = tp.doors.length ? tp.doors.map(esc).join(', ') : 'none yet';\n                  // OVERTIME (2026-10-14): the waiting cost, shown where the seat is.\n                  let otLine = '';\n                  if (tp.overtime) otLine += `<br>⏱ <b>OVERTIME ×${tp.overtime}</b> — reruns hit harder, raids come sooner. Standing −${tp.standingCost}${tp.losses ? ` (${tp.losses} lost)` : ''}.`;\n                  try { const ns = Game.networkStatus ? Game.networkStatus() : null; if (ns) otLine += `<br>${esc(ns)}`; } catch (e) { console.warn('network status html', e); }\n                  if (tp.key) otLine += `<br>🍽️ <b>The key is yours:</b> every door now ends with THE HOSTS.`;\n                  html += `<div style=\"margin-top:4px\"><p class=\"small\">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.${otLine}<br>` +\n                    `<button class=\"btn sm\" data-table-seat${tp.ready ? '' : ' disabled'}>◈ Take your seat</button>${tp.why ? `<br>${esc(tp.why)}` : ''}` +\n                    `</p></div>`;\n                }\n              } catch (e) { console.warn('table seat html', e); }\n\nreturn html;"),teBind=new Function('Game','document','refresh',"    document.querySelectorAll('[data-table-seat]').forEach(b => b.onclick = () => { const r = Game.tableTakeSeat(); if (r && !r.ok && r.msg) Game.say(r.msg); refresh(); });");
+function teRead(){const G=Scattering.Game,s=G.state.scholar,p=G.progState();document.getElementById('te-status').textContent='day '+s.day+'; kcal '+s.kcal+'; combat '+G.inCombat()+'; contest '+!!G.state.activeContest+'; seated '+!!p.tableDone+'; phase '+(p.table?.phase||'none')+'; ending key '+!!p.table?.endingKey+'; access '+G.havenStoresAccess();}
+function teRefresh(){window.dispatchEvent(new CustomEvent('tb-turn',{detail:{phase:'player'}}));tePanel();}
+function tePanel(){const G=Scattering.Game;document.getElementById('te-panel').innerHTML=teRender(G,x=>G.escHtml(x));teBind(G,document,teRefresh);teRead();}
+document.getElementById('te-safe').onclick=()=>{const G=Scattering.Game;G.tbfight=null;G.over=false;G.won=false;G.genRoster('Columbus, Ohio');G.newGame('Columbus, Ohio',null,G.generatedRoster[0].id);G.depart();const s=G.state.scholar,v=G.state.village,p=G.progState();s.day=100;s.health=100;s.kcal=1800;s.integration=40;s.insideHaven=true;s.monster=null;s.knackChosen=true;s.knackChoices=null;s.abilityChoices=null;s.relicChoices=null;s.abilities=[];G.state.systemArrived=true;G.state.systemAnimationShown=true;G.state.networkLive=true;G.map.px=v.px??4;G.map.py=v.py??4;G.genDetail(G.map.px,G.map.py);G.playerTile().type='haven';p.arc=4;p.tableWaiting=true;p.tableDone=false;p.table={};p.sentimentTaught=true;p.feastSurgeUsed=true;p.crises={raid:true,illness:true};p.deeds={wavesFaced:{},contestsSurvived:2};for(const[w,n]of [[1,4],[2,4],[3,3]])for(const m of G.data.monsters.filter(m=>m.wave===w).slice(0,n))p.deeds.wavesFaced[m.id]=w;v.pantry=[{name:'Prepared stores',units:100,kcalEach:500,spoilDay:9999,kg:0.1,safe:true}];G.save();teRefresh();};
+document.getElementById('te-contest').onclick=()=>{const G=Scattering.Game;G.contestInterruption(G.data.contests.find(c=>c.id==='moot'),['player']);teRead();};
+document.getElementById('te-fight').onclick=()=>{const G=Scattering.Game,s=G.state.scholar,v=G.state.village,roster=v.roster.slice();s.monster={id:'review_drone',mx:4,my:4};s.mx=3;s.my=4;v.roster=[];G.startCombat('review_drone');v.roster=roster;tePanel();};
+document.getElementById('te-render').onclick=tePanel;document.getElementById('te-reload').onclick=()=>{const G=Scattering.Game;G.save();G.load(G.state.runKey);teRefresh();};
+</script></body>
+</html>

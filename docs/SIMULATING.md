@@ -1,5 +1,18 @@
 # Simulating The Oversight — how to measure a change
 
+Table entry ownership proof (2026-10-16):
+`scripts/godpath/test-table-entry.js` runs automatically in quick/full discovery.
+It exercises real earned deeds, actual native rendering/binding, stale clicks,
+encounter/contest settlement, Haven access, real load and Table's own trial.
+Before changing entry rules, read `docs/TABLE.md` and the survival decision log.
+The reproducible paired evidence is `evidence/2026-10-16/table-entry-audit.md`.
+Baseline campaigns are exact-source reused fraying-after results, explicitly
+328 retained prior jobs plus328 new candidate jobs, not656 new campaigns.
+All18 changed holdout hashes are replayed in both arms against the same raw
+collector. Keep a refusal distinct from missing invitation, deed eligibility,
+unresolved bot activity and losing a played finale. Do not recover win rates
+by forcing settlement, clearing exile or weakening the entry boundary.
+
 The simulator is the best tool we have for answering "what does this lever
 actually do?" This page is the short manual. The audit behind it is
 `evidence/2026-10-14/simulator-audit.md`.

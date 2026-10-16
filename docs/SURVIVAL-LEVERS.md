@@ -61,6 +61,36 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Table entry ownership (2026-10-16): **retain**, needs-eyes. Entry timing/access
+is a survival lever: it decides when ambient pressure stops and which story
+owns an existing activity. Apply actual Haven-panel access to the public action,
+including existing remote access and exclusion of exile. Refuse pending/live
+encounters, active contests and ended runs without cost or ending commitment.
+No combat stats, food prices, deed bars, invitation cadence, policy or collector
+changes. Table's own trials remain real fights.
+
+All64 screen rows/hashes/23 metrics match. In64 disjoint cases per policy,
+capable wins48->46, entries49->46, deaths86->88, community12->14; maker
+21->21/21->21/86->86/24->24; merchant26->26/26->26/52->52/26->26;
+caregiver31->31/32->31/43->43/16->17 (wins/entries/deaths/community).
+Capable low-food exposure .026200->.027772 and mean living NPCs8.41866->8.39167
+remain beside good gear63->64; caregiver low food .008396->.008675 also stays.
+Early survival, player class and contest/show gear access do not change.
+Read all23 metrics and eligibility in the raw reports, not just these counts.
+
+All18 changed holdout hashes replay exactly in both arms. Capable10016/10026
+previously seated while exiled despite no native panel access; they now end
+village-lost/day99 and village-dead/day103. Capable10045 gains a death while
+waiting for a pending rerun encounter but still wins. Caregiver10024 previously
+resolved a losing Table story while rerun was pending; it now ends village-lost
+on110 with that encounter unresolved. Capable10061 still loses its siege
+without overlapping Table ownership. Other changed cases settle then enter.
+These are explained access/timing costs, not proof of improved balance or a
+reason to make winning easier. Exile recovery and unresolved bot encounters
+remain separate audits. Prepared native phone tests prove busy refusals,
+real contest resolution, successful seating and save/load, not natural viability.
+Evidence: ../evidence/2026-10-16/table-entry-audit.md.
+
 Invitation-window correction (2026-10-16): no survival/game lever changes.
 The provisional fraying follow-up's ready seat at the150-step endpoint did
 not prove a missing checkArc caller. The last check saw2 late-wave encounters;

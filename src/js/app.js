@@ -16877,7 +16877,7 @@
                   try { const ns = Game.networkStatus ? Game.networkStatus() : null; if (ns) otLine += `<br>${esc(ns)}`; } catch (e) { console.warn('network status html', e); }
                   if (tp.key) otLine += `<br>🍽️ <b>The key is yours:</b> every door now ends with THE HOSTS.`;
                   html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.${otLine}<br>` +
-                    `<button class="btn sm" data-table-seat>◈ Take your seat</button>` +
+                    `<button class="btn sm" data-table-seat${tp.ready ? '' : ' disabled'}>◈ Take your seat</button>${tp.why ? `<br>${esc(tp.why)}` : ''}` +
                     `</p></div>`;
                 }
               } catch (e) { console.warn('table seat html', e); }

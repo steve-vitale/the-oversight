@@ -14,6 +14,15 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Table entry ownership (2026-10-16): Codex owns table.js's public entry
+guard and the native Haven seat button's readiness/reason. Match actual
+havenStoresAccess, including full-integration remote access and exile.
+Refuse ended runs, pending/live encounters and active contests; recheck on
+click without spending food or locking an ending. Internal scene construction
+and Table's own trials remain. Evidence: ../evidence/2026-10-16/table-entry-audit.md.
+Retain capable entry/community warnings; no win-recovery tuning. This resolves
+the pending overlap audit below. Muse's region/nomad lane is untouched.
+
 Table opportunity windows (2026-10-16): Codex owns the separate pinned-panel
 diagnostic CLI and its continuation/neutrality guards. It changes no runtime,
 policy or23-metric contract. The ready-but-uninvited endpoint in capable10050

@@ -55,6 +55,20 @@ papered over.
 
 ## The seat: full / lesser / none
 
+Public entry ownership (2026-10-16): `tableEntryBlock()` applies existing
+native Haven-panel access (`havenStoresAccess`): physically inside Haven,
+or existing full-integration remote access; exiles have neither. A narration's
+near-Haven radius does not grant panel access. Preserving remote access is an
+implementation interpretation marked needs-eyes. Ended/won expeditions,
+pending/live encounters and any active contest must settle before entry.
+An eligible invited day90+ bearer still sees the real price, with `ready:false`
+and a reason while busy/inaccessible. The native button disables and shows
+that reason; `tableTakeSeat` rechecks stale clicks. Refusal spends no food,
+starts no scene and locks no ending. Success requires actual commitment.
+Internal scene construction remains available for authored scenes/debug tests;
+Table's own opt-in fights remain playable. Proof and campaign tradeoffs:
+../evidence/2026-10-16/table-entry-audit.md.
+
 `tableSeat()` prices the invitation. The 2026-10-10 deed gate
 (`deedGateReady()`) becomes the **full seat** — national/global scale,
 all wave bars (5/5/4/3/2 distinct fought), 3+ contests survived, 3+

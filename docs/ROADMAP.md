@@ -9,6 +9,21 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Table public entry (2026-10-16): the pending overlap audit below is resolved
+by a shared entry reason, preview readiness and click-time recheck. It matches
+actual Haven-panel access (full-integration remote access remains), refuses
+exile/ended runs and pending/live encounters or contests, and preserves real
+Table trials. All16 screen cases per policy are unchanged. In64 disjoint
+holdouts, capable wins48->46, entries49->46, deaths86->88 and community
+losses12->14; caregiver entries32->31/community16->17. Both lost wins were
+exiled public-action bypasses; caregiver10024 had an unresolved rerun encounter.
+Retain these warnings, without cost/deed/policy changes to recover old rates.
+Every18 changed full-hash case has matching before/after replays. Native
+phone stale-click, fight/contest, settled entry and save/load proof:
+../evidence/2026-10-16/table-entry-audit.md. Remaining follow-up: inspect
+exile recovery/access messaging and the policy's unresolved pending encounter;
+do not infer all exiles should gain a seat or force fights for measurement.
+
 Voice preparation policy (2026-10-16): four opt-in voice-ready cohorts now
 price the known daily word against food, own humanity and progressive-trust
 need, and can prepare before existing visible hunt/raid actions. Same-source

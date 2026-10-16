@@ -1,0 +1,73 @@
+
+1. Days 1-6: grounded feedback, no System chrome
+  ok   hit/crit/miss/hurt/kill/weather/death -> grounded variants
+  ok   every pre-System call went to grounded (no System-styled method)
+  ok   grounded sounds: hurt thud, miss whoosh, rain
+  ok   System-flavoured kinds stay still before day 7 (broadcast, commentary, hero, signature, flash, integration)
+  ok   a real day-1 strike draws a grounded hit (not the System starburst)
+  ok   fleeing a fight plays the grounded flee (dust + footsteps)
+
+2. After day 7: the System variants return
+  ok   critHit/playerHurt go to the System methods
+
+3. Payoff moments: drama + audioEvent through real paths
+  ok   ascension ceremony (godhood.js): drama moment 'ascension' + audio 'ascensionRise'
+  ok   ascension carries the god form (MYTHIC_SPRITES) and the 5 beats
+  ok   class recognition (godpath recognizeClass): drama moment 'classRecognized' + audio 'classChime'
+  ok   level-up sheet opens (tracks pumpLevelUps): drama moment 'levelUpOpen' + audio 'levelUpFlourish'
+  ok   keepsake flashback (progression playFlashback): drama moment 'flashback' + audio 'flashbackWarm'
+  ok   the flashback is human-styled (grounded), never System
+  ok   keepsake level-up (keepsakes keepsakeLevelBeat): drama moment 'keepsakeLevel' + audio 'keepsakeGlow'
+  ok   keepsake L1: the flashback IS the moment (no second card)
+  ok   feast (game hostFeast): drama moment 'feast' + audio 'feastFire'
+  ok   a refused feast (one a day) plays nothing
+  ok   titan entry: sting + the titan's own voice
+  ok   titan phase change at two thirds
+  ok   no repeat inside the same third
+  ok   titan kill: the fall
+  ok   Table feedback fixture has a valid public entry context
+  ok   Table entry: drama moment 'tableEnter' + audio 'tableEnterSting'
+  ok   Table lock-in (a door chosen): drama moment 'tableLock' + audio 'tableLockIn'
+  ok   ...and the first beat pulses
+  ok   Table loss: drama moment 'tableLose' + audio 'tableLoseSting'
+  ok   Table win: drama moment 'tableWin' + audio 'tableWinSting'
+  ok   day-7 arrival sting (the cinematic itself is the visual)
+  ok   arrival beats map to the recorded System lines (sys-day7)
+  ok   every arrival voice id exists in the manifest with an MP3 on disk
+
+3b. System-styled moments wait for day 7; human ones do not
+  ok   ascension/titan refused pre-System, nothing drawn or heard
+  ok   flashback/feast play pre-System, grounded
+
+4. The 27 god-path abilities: data-driven visual + cue
+  ok   FEEL_VERBS covers all 27 subclass abilities, each real in abilities.json
+  ok   every active verb (data `do`) has an effect
+  ok   each active verb has its own distinct visual
+  ok   useAbility(raise_earth) -> wall on the grid + verbCue
+  ok   the wall is placed between player and target (positions from the live fight)
+  ok   a passive fires on its narration tag, once per round
+
+5. Reduced motion + grounded look in the real drama.js (DOM stub)
+  ok   motion on: grounded crit animates (dfx-g-thud) and the System crit bursts (drama-hit)
+  ok   motion on: the board shakes
+  ok   grounded crit carries no System cyan or System words
+  ok   reducedMotion() reads the in-game toggle
+  ok   reduced motion: every effect is a calm fade (drama-calm), no burst/scale classes
+  ok   reduced motion: no shake
+  ok   calm moments still say what happened (the card is there, as a fade)
+
+6. Haptics: feature-detected, setting-gated
+  ok   no navigator.vibrate -> unsupported, haptic() is a no-op
+  ok   supported + no setting -> on by default
+  ok   setting off -> nothing vibrates
+  ok   setting on -> death buzzes its pattern
+  ok   a real hit taken buzzes through the drama dispatcher
+  ok   pattern exists: hurt
+  ok   pattern exists: crit
+  ok   pattern exists: death
+  ok   pattern exists: levelUp
+  ok   pattern exists: ascension
+  ok   pattern exists: arrival
+  ok   moments respect the setting too
+
+feedback-moments: 57 passed, 0 failed, 0 todo (phase 0)
