@@ -1,0 +1,29 @@
+=== seed 8401 day 120 — conversation with Petra (petra_novak) ===
+occupation=glazier temperament=steady trust=27 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:a_deflect, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Consider it a project, then. Project: laugh. I'm assigning us both. Good talking."
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything about anyone?"
+THEM: "Huh. Let me think about that." "Henry? An emergency dispatcher, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [goon] "Who told you that?"
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

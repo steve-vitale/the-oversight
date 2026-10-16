@@ -1,0 +1,27 @@
+=== seed 8406 day 100 — conversation with Jack (gen_b5gg862) ===
+occupation=Social worker temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you believe in — Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it. You'd know about that."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Did you hear? Mateo just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

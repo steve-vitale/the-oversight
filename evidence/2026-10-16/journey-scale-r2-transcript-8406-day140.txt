@@ -1,0 +1,18 @@
+=== seed 8406 day 140 — conversation with Jack (gen_b5gg862) ===
+occupation=Social worker temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about your read on people here — we wandered off it. 'Their friendliness thins — still there, just held at arm's length.'"
+(turn0 choices: alive:want:curious, invite_party, ask:you, ask:goal, ask:personal, ask:gossip, skill_teach:silver_tongue, confront:d_vzpx07r, leave, silence)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Have you ever hurt someone? Since all this started."
+(want=curious stage=1)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "that stray dog — the one that bit two people — lets Mateo touch it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

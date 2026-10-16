@@ -1,0 +1,26 @@
+=== seed 8403 day 100 — conversation with Olivia (gen_yb3q106) ===
+occupation=plumber temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone? You'd know about that."
+(turn0 choices: ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Okay. That's — I need a minute. A long minute."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

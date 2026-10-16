@@ -1,0 +1,31 @@
+=== seed 8407 day 80 — conversation with Naran (naran_tumen) ===
+occupation=bus driver temperament=dry trust=20 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About your plan here — So what's your plan here? Just... get through it?"
+(turn0 choices: ans:q_plan:a_survive, ans:q_plan:a_lead, ans:q_plan:a_find, ans:q_plan:a_quiet, deflect_q, leave, silence)
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "Four fires, one head — and the head is us. The speakers rode in and... I still can't quite believe it."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same as always: we endure."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "And... scene. Good talk."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

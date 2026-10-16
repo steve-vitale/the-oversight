@@ -1,0 +1,27 @@
+=== seed 8406 day 120 — conversation with Jack (gen_b5gg862) ===
+occupation=Social worker temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "My cut needs a second pair of hands. Will you help me clean it? I mean it."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_vzpx07r)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. Just... be straight with me."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Maypop — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=ask_favor stage=3 resolution=promised

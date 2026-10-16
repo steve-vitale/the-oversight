@@ -1,0 +1,26 @@
+=== seed 8405 day 80 — conversation with Enrique (visjoin_74) ===
+occupation=Butcher temperament=restless trust=24 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but tell me you've got food to spare. I'm going hungry here. I can't keep going like this. Give it time."
+(turn0 choices: alive:want:ask_favor, alive:event:mourning, dlg:help, dlg:details, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's been days since a real meal. I can't pull my weight like this. Anything you can spare, I'll make it stretch."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Weerachai died... I keep expecting to see Weerachai at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I sleep in short shifts. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Weerachai. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Okay I really have to move now or I'll explode — talk soon!"
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,32 @@
+=== seed 8405 day 100 — conversation with Brendan (visjoin_94) ===
+occupation=truck driver temperament=prickly trust=20 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the kindest thing someone's done for you — What's the kindest thing someone's done for you out here?"
+(turn0 choices: ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:a_deflect, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Look. Kindness compounds. I'm keeping track — mentally. It's a good ledger."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "They took Enrique — Pattern Hunger, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I pace while thinking. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I pace while thinking and stay ready."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "That's enough sharing for one day. Maybe one week."
+want final: id=curious stage=3 resolution=engaged

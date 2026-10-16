@@ -1,0 +1,18 @@
+=== seed 8403 day 120 — conversation with Olivia (gen_yb3q106) ===
+occupation=plumber temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "So what's your plan here? Just... get through it?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_plan:a_survive, ans:q_plan:a_lead, ans:q_plan:a_find, ans:q_plan:a_quiet, deflect_q, leave, silence)
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "cuts close faster when Emma wraps them. Don't ask me how."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I... should go."
+want final: id=curious stage=3 resolution=engaged

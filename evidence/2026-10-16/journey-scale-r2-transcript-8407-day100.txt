@@ -1,0 +1,27 @@
+=== seed 8407 day 100 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something from your old life that's actually useful here? No time to waste."
+(turn0 choices: ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Nothing's wasted. Not really. It all comes back around."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Maya talks to the garden. The garden listens. I've seen it, friend."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I should get back to it — but this was nice."
+want final: id=curious stage=3 resolution=engaged

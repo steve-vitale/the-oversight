@@ -1,0 +1,23 @@
+=== seed 8403 day 80 — conversation with Olivia (gen_yb3q106) ===
+occupation=plumber temperament=withdrawn trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "The pantry's nearly bare. Forage with me tomorrow? I know the old burn east of camp."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "Another day like today and we're choosing who eats. I know the old burn east of camp — come with me and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Then it’s set. The old burn east of camp, dawn. Pack light — we move fast."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "...I need to go be quiet for a while."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised
