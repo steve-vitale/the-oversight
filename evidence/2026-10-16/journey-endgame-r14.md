@@ -63,7 +63,7 @@ Branch read dark (5 vs 1) with reasons voiced ("The dark road is open"). Dark ab
 **Proof:** `scripts/test-defiant-real-prices-20261016.js` — RED on pristine (3 failures: pantry 30000→30000, roster 12→12, no relayTaken), GREEN 4/4 post-fix (pantry 30000→10000, roster 12→11, relayTaken recorded, meters accumulate). Patch round-trip, no stash.
 **Integration:** full dark defiant walk re-run post-fix — won, final names Miles. Post-win, Miles is gone from the roster (the price is visible).
 
-**Regressions:** (pending check.js --quick result)
+**Regressions:** `node scripts/check.js --quick` → 96 passed, 2 failed — the SAME 2 pre-existing where-are-we fails as r13/HEAD (stranger conversation 'where' offers), unrelated to this change. No regressions.
 
 ## People check (SENSE-TESTING LAW) — post-win conversations (dark win, s5)
 
