@@ -114,3 +114,35 @@ are not an automatic benefit; paired losses and new community failures remain
 visible in the evidence. All 256 earn tier-3+ gear; neither Miser subclass
 appears. See ../evidence/2026-10-15/trade-progression-audit.md. Earlier caregiver
 community and capable challenge questions remain open.
+
+## Effective goods prices and store credit
+
+Haggle's existing trade.price_mult=0.75 reduces what a buyer owes for goods.
+The cart and resident hawker now share betrayal.js goodsTradePrice for display,
+spoken offer, payment and scam receipt; river goods already use the modifier.
+A positive quote rounds once to whole kcal (minimum one); free wares remain
+free. An existing confrontation discount multiplies the same quote. Cached
+stock keeps its original price, so reopening cannot compound the reduction.
+
+This reduces physical food spent on gear only when whole-unit payment permits;
+traderPay still rounds to whole food units and preserved-food valuation is
+unchanged. Store credit pays first, with full rollback if the remainder fails.
+A fully tab-funded purchase is still a paid exchange and now receives the
+existing capped social deed. This practice correction is a second lever in
+the same commerce repair; do not attribute every campaign difference to Haggle.
+Haggle's 30-kcal daily metabolism, route income multiplier, sale appraisals,
+base ware prices, offer kits and all XP/class thresholds are unchanged.
+
+See ../evidence/2026-10-15/haggle-audit.md for frozen runtime failures, matched
+23-metric panels, retained quote/payment phone proof and coverage limits.
+Miser access and peaceful campaign viability remain separate open questions;
+zero sampled use cannot establish that the discounted ability is balanced.
+
+2026-10-15 decision: retain the existing discount contract and full paid-tab
+practice. At 64 matched seeds per policy all 23 metrics, 256 campaign rows
+and full gameplay hashes are identical; wins remain 55/21/25/23 and community
+losses 8/18/14/18. The 16 merchant replays per arm have one Haggle offer but
+no holder. Prepared 100-kcal portions save food; cooked 500-kcal portions
+still spend two units at both 800 and 600 quotes. No class access change or
+affected-build balance claim. Investigate offer/choice coverage next, keeping
+the bot's raw-price affordability gate separate from runtime economics.

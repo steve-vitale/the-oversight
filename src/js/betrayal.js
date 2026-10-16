@@ -38,6 +38,7 @@
 //   - confrontScammer(vis, s) / resolveConfront(vis, s, how)
 //   - hawkerOffer(vid) / hawkerBuy(vid)
 //   - creditGoodsTrade(who, consideration) -> completed paid goods practice for an actual living bearer/resident; uses the shared capped trade deed
+//   - goodsTradePrice(basePrice, seller?) -> current buyer's effective quote, without mutating cached stock; same quote used for display, payment and practice
 //   - visitorHtml()
 //   - visitorDaily()
 // rules:
@@ -3335,6 +3336,12 @@
     if ((me ? this.state.scholar.health : (v.health || {})[vid] ?? 100) <= 0) return 0;
     return this.creditDeed(me ? 'player' : vid, 'trade');
   },
+  goodsTradePrice(basePrice, seller) {
+    if (!Number.isFinite(basePrice) || basePrice <= 0) return basePrice;
+    let price = this.modTarget ? this.modTarget('trade.price_mult', basePrice, {}) : basePrice;
+    if (seller && seller.confrontDiscount && seller.confrontDiscount < 1) price *= seller.confrontDiscount;
+    return Math.max(1, Math.round(price));
+  },
   // hawkerBuy(vid): buy the villager's offered ware. Same payment rails.
   hawkerBuy(vid) {
     const buyerId = this.villagerId;
@@ -3344,7 +3351,7 @@
     const person = { id: vid, name: this.displayName(vid) };
     // seed their appraisal brain if needed (for future sell-side)
     // (villagers appraise via traderAppraise with traderKnows seeded lazily)
-    let price = ware.price;
+    const price = this.goodsTradePrice(ware.price);
     const pay = this.traderPay(price);
     if (!pay.ok) {
       this.say(`${this.displayName(vid)} shakes their head. "${price} kcal of finished food — and you're about ${pay.short} short. Come back with a full pack."`);
@@ -3355,10 +3362,10 @@
     if (ware.scam && !ware.scam.discovered) {
       if (ware.scam.kind === 'overprice' && savvy >= 3) {
         ware.scam.discovered = true;
-        this.say(`(You've bought enough to know: ${ware.scam.truePrice} is honest for this. They're asking ${ware.price}.)`);
+        this.say(`(You've bought enough to know: ${this.goodsTradePrice(ware.scam.truePrice)} is honest for this. They're asking ${price}.)`);
       }
       const entry = this.recordScam(this.displayName(vid), vid, ware.scam.kind, ware.name);
-      entry.paid = ware.price; entry.discovered = !!ware.scam.discovered;
+      entry.paid = price; entry.discovered = !!ware.scam.discovered;
       ware.scam.ledgerId = entry.id;
     }
     try { this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1; } catch (e) {}
@@ -3526,8 +3533,8 @@
     // before the pack does. If the pack can't cover the remainder, the tab
     // spend is rolled back — no partial purchases.
     // CONFRONTATION DISCOUNT: shamed hawkers cut prices until they leave.
-    let price = w.price;
-    if (vis.confrontDiscount && vis.confrontDiscount < 1) price = Math.max(1, Math.round(price * vis.confrontDiscount));
+    const quotedPrice = this.goodsTradePrice(w.price, vis);
+    let price = quotedPrice;
     const tabUsed = Math.min(vis.credit || 0, price);
     vis.credit = (vis.credit || 0) - tabUsed;
     price -= tabUsed;
@@ -3535,7 +3542,7 @@
     if (price > 0) pay = this.traderPay(price);
     if (!pay.ok) {
       vis.credit = (vis.credit || 0) + tabUsed; // roll back
-      this.say(`${vis.name} shakes their head. "${w.price} kcal of finished food for the ${w.name} — and you're about ${pay.short} short${tabUsed ? ` even after your ${tabUsed} tab` : ''}. The smoked stuff counts extra, if you've got any."`);
+      this.say(`${vis.name} shakes their head. "${quotedPrice} kcal of finished food for the ${w.name} — and you're about ${pay.short} short${tabUsed ? ` even after your ${tabUsed} tab` : ''}. The smoked stuff counts extra, if you've got any."`);
       return null;
     }
     w.sold = true;
@@ -3547,14 +3554,14 @@
     if (w.scam && !w.scam.discovered) {
       if (w.scam.kind === 'overprice' && savvy >= 3) {
         w.scam.discovered = true;
-        this.say(`(You've bought enough on the road to know: ${w.scam.truePrice} is the honest price for this. They're asking ${w.price}.)`);
+        this.say(`(You've bought enough on the road to know: ${this.goodsTradePrice(w.scam.truePrice, vis)} is the honest price for this. They're asking ${quotedPrice}.)`);
       } else if (w.scam.kind === 'tier_lie' && savvy >= 5) {
         w.scam.discovered = true;
         this.say(`(The "tier ${w.scam.advertisedTier}" sigil looks painted on. Your gut says tier ${w.scam.trueTier}, tops.)`);
       }
       // ledger it either way — a sharp villager may notice later
       const entry = this.recordScam(vis.name, vis.id, w.scam.kind, w.name);
-      entry.paid = w.price; entry.advertisedTier = w.scam.advertisedTier;
+      entry.paid = quotedPrice; entry.advertisedTier = w.scam.advertisedTier;
       entry.discovered = !!w.scam.discovered;
       w.scam.ledgerId = entry.id;
     }
@@ -3597,7 +3604,7 @@
     }
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
     try { this.tickAction(8); } catch (e) {}
-    try { this.creditGoodsTrade && this.creditGoodsTrade(buyerId, price); } catch (e) { console.warn('[tracks] cart purchase', e); }
+    try { this.creditGoodsTrade && this.creditGoodsTrade(buyerId, quotedPrice); } catch (e) { console.warn('[tracks] cart purchase', e); }
     return true;
   },
   // visitorHtml: the Haven panel block. Traders get the cart UI; other
@@ -3631,7 +3638,7 @@
           this.visitorWares(vis).map((w, i) => {
             let spr = '';
             try { const f = window.Scattering && window.Scattering.itemSpriteHtml; if (f && w.itemId) spr = f({ id: w.itemId }); } catch (e) {}
-            return `<span class="small">· ${spr}<b>${w.name}</b> — ${w.price} kcal${w.kg ? ` · ${w.kg} kg` : ''}${w.sold ? ' <i>(sold)</i>' : ` <button class="btn ghost sm" data-ware-buy="${vis.id}:${i}">Buy</button>`}<br><span style="opacity:.7">${w.blurb}</span></span>`;
+            return `<span class="small">· ${spr}<b>${w.name}</b> — ${this.goodsTradePrice(w.price, vis)} kcal${w.kg ? ` · ${w.kg} kg` : ''}${w.sold ? ' <i>(sold)</i>' : ` <button class="btn ghost sm" data-ware-buy="${vis.id}:${i}">Buy</button>`}<br><span style="opacity:.7">${w.blurb}</span></span>`;
           }).join('<br>');
       }
       if (this.tradeSpirit(vis) > 0 && vis.selling) {

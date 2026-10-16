@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "330db9f7389700494def2a9479f7ae8cb61b0414",
+  "runtimeAssertions": 20,
+  "frozenRuntime": {
+    "pass": 9,
+    "fail": 11
+  },
+  "screenCases": 64,
+  "confirmationCases": 256,
+  "changedConfirmationStates": 0,
+  "verifiedCacheRows": 512,
+  "balancedControlJobs": 16,
+  "observedReplays": 32,
+  "deedNeutralPairs": 2,
+  "policies": [
+    {
+      "policy": "capable",
+      "n": 64,
+      "changedStates": 0,
+      "changedRows": 0,
+      "wins": [
+        55,
+        55
+      ],
+      "entries": [
+        57,
+        57
+      ],
+      "deaths": [
+        90,
+        90
+      ],
+      "communityLosses": [
+        8,
+        8
+      ],
+      "goodGear": [
+        64,
+        64
+      ]
+    },
+    {
+      "policy": "maker",
+      "n": 64,
+      "changedStates": 0,
+      "changedRows": 0,
+      "wins": [
+        21,
+        21
+      ],
+      "entries": [
+        22,
+        22
+      ],
+      "deaths": [
+        52,
+        52
+      ],
+      "communityLosses": [
+        18,
+        18
+      ],
+      "goodGear": [
+        64,
+        64
+      ]
+    },
+    {
+      "policy": "merchant",
+      "n": 64,
+      "changedStates": 0,
+      "changedRows": 0,
+      "wins": [
+        25,
+        25
+      ],
+      "entries": [
+        25,
+        25
+      ],
+      "deaths": [
+        42,
+        42
+      ],
+      "communityLosses": [
+        14,
+        14
+      ],
+      "goodGear": [
+        64,
+        64
+      ]
+    },
+    {
+      "policy": "caregiver",
+      "n": 64,
+      "changedStates": 0,
+      "changedRows": 0,
+      "wins": [
+        23,
+        23
+      ],
+      "entries": [
+        25,
+        25
+      ],
+      "deaths": [
+        45,
+        45
+      ],
+      "communityLosses": [
+        18,
+        18
+      ],
+      "goodGear": [
+        64,
+        64
+      ]
+    }
+  ],
+  "merchant": {
+    "before": {
+      "cases": 16,
+      "haggleOffered": 1,
+      "haggleHeldPeople": 0,
+      "tradeCredits": 31
+    },
+    "after": {
+      "cases": 16,
+      "haggleOffered": 1,
+      "haggleHeldPeople": 0,
+      "tradeCredits": 31
+    }
+  },
+  "quick": [
+    165,
+    165
+  ],
+  "full": [
+    937,
+    937
+  ],
+  "ontologySystems": 111,
+  "wired": "New goodsTradePrice has real callers; same pre-existing recentTrauma remains unwired in both roots.",
+  "decision": "Retain existing Haggle price contract and paid-tab practice; no sampled campaign movement or natural affected-Haggle balance claim. Miser access remains open.",
+  "artifactHashRule": "SHA-256; text canonical LF, gzip/png exact bytes",
+  "artifactSha256": {
+    "haggle-audit.md": "10a9ef86c1d7c06e3bfc6c119b1222e80750489d9ee5ccbb755dd793ee5d7c3d",
+    "haggle-confirm-after.json.gz": "91a150cb8dd373404f59317126d4156d8c38c507d63e77640d3d2a7a3ecda84f",
+    "haggle-confirm-before.json.gz": "8cf94efd0b5faab1efa702980697a7131a8b212df2207ddf0f4b613128b4acc4",
+    "haggle-confirmation.json": "63fee255a1cb9423dda3921dd2a756fc020fe1682e4b71eb1ddba2be0998f1b0",
+    "haggle-confirmation.md": "99d1eb66aebac243a87c5132ebdf5f131536047b692d0ec579aaddf1f9f36753",
+    "haggle-food-units-after.json": "d5f0b9974b73fc9a9d39870869acc3029fc96d7e13f23c5b2e220df2e7d2d8ad",
+    "haggle-food-units-before.json": "ae175888124c3351f615d7c2c501a64c194115cea3af4a476e7285fcf2f60cf6",
+    "haggle-food-units.cjs": "513f92b85d7198735f74b5a3c3a831358a585dc9ff06351885aaa9be3de7b253",
+    "haggle-full.txt": "a5844368055dcc29e5a78b6eabf18c71a6596a5a4fab32691b903213f527b1d9",
+    "haggle-observer-proofs.json.gz": "c161c4faa47e81bc218b8a573367301065e217323cd7e089736c8c75ddb62006",
+    "haggle-phone-dom.txt": "2d4bd771dee1cb223cf1342f4478dad335c066750b6392c57ad8ef5e5847abb4",
+    "haggle-phone-fixture.cjs": "7d0c83963cbd412cdaea43c7078979b70020fd7e9a99a209582326b89c833f07",
+    "haggle-phone-paid.png": "a2af7bce7f9b37925a4fac33af0aa3db337ebdbbac433306dafaa47a732f7b80",
+    "haggle-phone-quote.png": "3f8d7144f2af4ac1b13c4c7e892ab1b23e4c1a4a0bc4f9ce455a960f0968baa6",
+    "haggle-quick.txt": "cdcc744a434d74bb950103af2b3a053fb398d24eebe1d812052b507b9fb479f9",
+    "haggle-replays.json.gz": "0e01804a9d9fd91f5497c11808631206eb9d2f6c91cb1b861a5c93dfeb0c5d20",
+    "haggle-runtime-after.txt": "3c205ba4207c5c70d6a5280897ad0ba0c5c2e8ffff79f0a0ed42a311a8a81bd7",
+    "haggle-runtime-before.txt": "cb0b86586401f5110e67e956ec0c110b632620830d9c402c235d568a67e899ca",
+    "haggle-screen-after.json.gz": "f6450f50e3ed353e3f7888f9efac29d9dfa8a38d0a7c58510b531187d16f6a6e",
+    "haggle-screen-before.json.gz": "8c45757dc84a5dc6395a341f607553673f8337d9535d047030464a4e6ef8b853",
+    "haggle-screen.json": "3ae899673d385a1328cb5dfccc2091ffe5a55c6a48ba1282e45b76e7a93cdaa6",
+    "haggle-screen.md": "aab5e6463ee59f159b75672cc56d22c4d582e8b318316a891c79d469005a563b",
+    "haggle-sources.json.gz": "5a20a3b398a80abc81ee837d3cd528a6a96dc94d8b0129ee6c35b3bc28f7cb28",
+    "haggle-summary.json": "b5ffa09bd4131b072a37929fd2a899ea6841a666265ac8f95e59c692072edd24",
+    "haggle-wired-before.txt": "6249e96b0760eede605231bdfeeb961dba9bd22006465bf6a7a72e387cd2127d",
+    "haggle-wired.txt": "172d074890da9cf2ecfc43a0cb99281048fdd6a4483dea786ad3b9bca69cd7fc"
+  }
+}

@@ -4821,7 +4821,8 @@
           const scamHint = ware.scam && this.tradeSavvy() >= 4
             ? (ware.scam.kind === 'overprice' ? ' (steep, for what it is)' : ' (something about this feels off)')
             : '';
-          done(`"${ware.blurb}" ${this.displayName(vid)} shows you the ${ware.name} — ${ware.price} kcal of finished food${ware.kg ? ` (${ware.kg} kg — you can feel the heft)` : ''}${scamHint}.`, '"Got anything to trade?"');
+          const price = this.goodsTradePrice ? this.goodsTradePrice(ware.price) : ware.price;
+          done(`"${ware.blurb}" ${this.displayName(vid)} shows you the ${ware.name} — ${price} kcal of finished food${ware.kg ? ` (${ware.kg} kg — you can feel the heft)` : ''}${scamHint}.`, '"Got anything to trade?"');
         }
       } else if (choiceId === 'hawker_yes') {
         c.pendingHawk = null;

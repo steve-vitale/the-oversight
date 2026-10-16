@@ -484,3 +484,12 @@ the fifteen-round cap with judges=true is a legitimate judged loss, not an
 escape. Never relabel old withdrawals as deaths or victories.
 The probe checks root/probe stability and fails on stderr. See the dated
 market-beam audit for exact inputs and these limits.
+
+Commerce contract checks: run `node scripts/godpath/test-haggle-commerce.js`
+for actual cart and resident-conversation quotes/payment, tab-first rollback,
+fully credited paid practice, free gifts, receipts and the existing river
+discount. New routes using finished-food payment should share the effective
+buyer quote with their display/receipt and credit the whole settled value,
+including earned store credit. Preserve whole-food-unit payment semantics.
+Run matched panels before making the ability more available; prepared slotted
+Haggle proves a caller, not naturally earned class viability.
