@@ -178,3 +178,8 @@ registered death, successful load and the communications tick. It reuses the
 normal removal/appointment path, preserves live/refusing holders, and leaves
 the job for the next person to claim. Source, runtime, phone and independent
 matched-panel evidence are in relay-office-audit.md; no region/nomad edit.
+
+Relay clock correction (2026-10-15): Codex takes the narrow relay-ext.js
+per-person/day upkeep guard. The existing comms part clock remains unchanged;
+old progress/unlocks are preserved. Measure this against the completed office
+lifetime candidate, separately from prices and policy changes.

@@ -1248,7 +1248,7 @@ The village relay as a PLAYABLE path — "enter the matrix". The Bearer may clai
 **Provides:** claimRelay(), relayHeldByBearer(), relayTableLink(), relayProbe(), relayReroute(mode), relayDeepen(), relayCommune(), relayHas(abilId), relayGrant(abilId), relayTranslate(concept), relaySanctuary(), relayAdvocate(vid), relayRewrite(), relaySkim(), relaySight(), relayCarry(), relayBackfire(), relayTick()
 
 **Rules:**
-—
+- upkeep_is_daily: grounding, service progress and periodic holder beats advance once per actual person/calendar day; saved receipts survive reload and same-day reclaims. Communications still run each part. (code: relayTick)
 
 **Consumes:** switchboard(), switchboardAvailable(), appointSwitchboard(), sysBond(), addSysBond(), grounding(), addGrounding() (table.js — runtime calls, safe post-load), relayLean(), addRelayLean() (relay-dialogue.js — runtime calls, safe post-load), integrationStage(), say, sysSay, recordMoment(), save()
 

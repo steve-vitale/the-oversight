@@ -25,6 +25,8 @@
 //   - sysBond(), addSysBond(), grounding(), addGrounding() (table.js — runtime calls, safe post-load)
 //   - relayLean(), addRelayLean() (relay-dialogue.js — runtime calls, safe post-load)
 //   - integrationStage(), say, sysSay, recordMoment(), save()
+// rules:
+//   - upkeep_is_daily: grounding, service progress and periodic holder beats advance once per actual person/calendar day; saved receipts survive reload and same-day reclaims. Communications still run each part. (code: relayTick)
 // Appended IIFE (comms.js's own IIFE is closed) — assigns onto Game directly.
 // Load AFTER comms.js and table.js.
 (function () {
@@ -403,7 +405,16 @@
     relayTick() {
       try {
         if (!this.relayHeldByBearer()) return;
-        const rs = rstate(); rs.holderDays++;
+        const rs = rstate(), day = (this.state.scholar || {}).day || 0, person = this.villagerId;
+        if (!person) return;
+        // commsTick runs every part. Upkeep and service progress are daily,
+        // with a receipt for the actual person: reloads and same-day reclaims
+        // cannot charge again, and a new bearer owes their own day's service.
+        // Preserve legacy counters/unlocks; never infer past calendar days.
+        const charged = rs.upkeepDayByPerson || (rs.upkeepDayByPerson = {});
+        if (charged[person] === day) return;
+        charged[person] = day;
+        rs.holderDays = (rs.holderDays || 0) + 1;
         // The wires erode you: -1 grounding/day while held. Human verbs
         // build it back — the two-way cost, ticking.
         if (typeof this.addGrounding === 'function') this.addGrounding(-1, 'holding the relay');
@@ -419,7 +430,7 @@
           this.say('◈ THE SYSTEM — "BEARER. THE WIRES HAVE QUESTIONS. COME TALK WHEN THE FIRE IS LOW." (Commune — it wants a conversation.)');
         }
         this.relayUnlockCheck();
-      } catch (e) {}
+      } catch (e) { console.warn('[relay] daily upkeep', e); }
     },
   };
 

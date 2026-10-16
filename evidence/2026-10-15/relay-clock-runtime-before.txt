@@ -1,0 +1,21 @@
+  FAIL four actual communications ticks on one day charge one grounding
+  FAIL one calendar day grants one service-day credit
+  FAIL a later calendar day charges and progresses again
+  FAIL same-person same-day release and reclaim cannot multiply upkeep or progress
+  ok   the actual load succeeds with a saved upkeep receipt
+  FAIL reloading the same day cannot charge or progress twice
+  ok   actual succession produces another person and an unclaimed role
+  FAIL a new bearer claiming on the same day owes their own daily upkeep
+  ok   no occupied office creates no daily service record
+  ok   an NPC-held office does not bill the player for personal Relay upkeep
+  FAIL the real advancePart caller retains both world parts while billing once
+  FAIL Deep Listen is not earned from three parts of one day
+  FAIL seven calendar service days cost seven grounding and seven credits
+  ok   Deep Listen unlocks through actual daily service
+  FAIL the three-day System request runs twice across seven days
+  FAIL the weekly holder beat runs once across seven days
+  FAIL legacy progress and unlocked abilities are preserved without fabricated prior dates
+  FAIL calendar day zero is also charged once
+
+relay-upkeep-clock: 5 passed, 13 failed, 0 todo (phase 0)
+failing: four actual communications ticks on one day charge one grounding | one calendar day grants one service-day credit | a later calendar day charges and progresses again | same-person same-day release and reclaim cannot multiply upkeep or progress | reloading the same day cannot charge or progress twice | a new bearer claiming on the same day owes their own daily upkeep | the real advancePart caller retains both world parts while billing once | Deep Listen is not earned from three parts of one day | seven calendar service days cost seven grounding and seven credits | the three-day System request runs twice across seven days | the weekly holder beat runs once across seven days | legacy progress and unlocked abilities are preserved without fabricated prior dates | …+1 more

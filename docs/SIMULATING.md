@@ -423,3 +423,36 @@ claimed-but-dead post cannot be mistaken for a bot ignoring a live opportunity.
 The lifetime comparison uses the authored-deed candidate as its baseline;
 do not collapse it with the prior class-age-to-office change. See
 `evidence/2026-10-15/relay-office-audit.md`.
+
+
+## Fixed calendar windows and competing endings
+
+After a valid game-only comparison, run:
+
+```text
+node scripts/balance-windows.js <before.json.gz> <after.json.gz> <windows.json>
+```
+
+This read-only report uses the same strict contract, policies, flags, harness,
+Node and case identity checks as the scorecard. It does not change collector
+lineage or require recollecting an otherwise valid panel. Default windows are
+calendar days 2-30, 31-60, 61-90, 91-120, 121-150 (the usual first sample is day 2).
+Each metric includes only cases with every day observed in both arms and valid
+values on every such day. Missing dates are listed by case; unknown metric
+pairs remain explicit. Means are per-case daily means, then equally weighted
+across eligible pairs. These are conditional complete-window diagnostics, not
+unbiased full-cohort survival estimates or a replacement balance verdict.
+
+Boundary counts include actual community loss, won, other terminal, observed
+at the boundary, and unobserved at the boundary. A Table ending competes with
+later observation; it never supplies hypothetical village survival or death.
+Driver caps can stop before calendar day 150 and remain unobserved there.
+Do not dismiss community warnings because a selected surviving subset looks
+healthy. Keep raw panels, input hashes and all exclusions beside the scorecard.
+`test-balance-windows.js` runs automatically in quick/full checks and tests
+unequal horizons, terminal outcomes, holes, unknown values and identity failure.
+
+The Relay service probe also records raw grounding, accumulated service,
+per-person charged day and pending System conversation at actual snapshots.
+These fields diagnose clock/opportunity changes; they are not a new progress
+receipt or a substitute for matching the original campaign row and state hash.

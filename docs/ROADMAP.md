@@ -556,3 +556,5 @@ the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
 | World | `docs/WORLD-REGIONS.md` |
 | Table | `docs/TABLE.md` |
 | Kin canon | `docs/KIN.md` (the Taken are off-world; scattered kin are on Earth; both exist) |
+
+2026-10-15 Relay clock follow-up: actual daily upkeep/service is guarded per person/day, with legacy progress retained. See `../evidence/2026-10-15/relay-clock-audit.md`. Independent 64-seed panels remain mixed: investigate caregiver late community losses and increased capable wins; no automatic maximize-wins tuning. Fixed-window/competing-ending tooling is available in `scripts/balance-windows.js`. Eight other authored deeds and the broader roadmap remain open.

@@ -18,7 +18,7 @@ const arg=(k,d)=>{const i=process.argv.indexOf('--'+k);return i<0?d:process.argv
   const base=S.POLICY_REGISTRY[policy];if(!base)throw Error('Unknown policy '+policy);
   let G,ctx;const calls=[],samples=[],availableDays=new Set();let availabilityChecks=0;
   const snapshot=g=>{const s=g.state.scholar,v=g.state.village;return {day:s.day,bearer:g.villagerId,networkLive:!!g.state.networkLive,
-    pantryKcal:(v.pantry||[]).reduce((n,i)=>n+(i.kcalEach||0)*(i.units??1),0),burnHistory:(v.burnHistory||[]).slice(),roleProduction:v.contribLog?.[g.state.switchboard?.holderId]||null,roster:(v.roster||[]).slice(),holder:g.state.switchboard?.holderId||null,holderDeathDay:v.deathSeen?.[g.state.switchboard?.holderId]??null,holderFallen:(v.fallen||[]).some(x=>x.villagerId===g.state.switchboard?.holderId),playerClass:s.godpath||null,
+    grounding:Number.isFinite(s.grounding)?s.grounding:null,relayProgress:Number.isFinite(s.relay?.holderDays)?s.relay.holderDays:null,chargedDay:s.relay?.upkeepDayByPerson?.[g.villagerId]??null,systemWantsTalk:s.relay?.systemWantsTalk??null,pantryKcal:(v.pantry||[]).reduce((n,i)=>n+(i.kcalEach||0)*(i.units??1),0),burnHistory:(v.burnHistory||[]).slice(),roleProduction:v.contribLog?.[g.state.switchboard?.holderId]||null,roster:(v.roster||[]).slice(),holder:g.state.switchboard?.holderId||null,holderDeathDay:v.deathSeen?.[g.state.switchboard?.holderId]??null,holderFallen:(v.fallen||[]).some(x=>x.villagerId===g.state.switchboard?.holderId),playerClass:s.godpath||null,
     npcSocialites:Object.entries(v.npcGodpath||{}).filter(([id,c])=>c.path==='socialite'&&!c.lapsed).map(([id,c])=>({id,since:c.since})),
     playerGods:s.godhood?.active||[]};};
   const sample=g=>samples.push(JSON.parse(JSON.stringify(snapshot(g))));

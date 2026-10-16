@@ -119,3 +119,5 @@ with draft integration PR https://github.com/steve-vitale/the-oversight/pull/1.
 Its branch-specific use instructions and balance-sharing.md evidence preserve
 master's policy baseline and disclose the shared game's existing red checks.
 The complete feature branch passed quick 154/154 and full 926/926.
+
+For exposure-sensitive changes, add `balance-windows.js` to the retained comparison: conditional matched calendar windows, missing-day case lists and competing endings. See SIMULATING.md. This diagnostic cannot clear the full scorecard or infer survival after the Table.

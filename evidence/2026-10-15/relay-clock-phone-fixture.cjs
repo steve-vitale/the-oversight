@@ -1,0 +1,7 @@
+const fs=require('fs');let html=fs.readFileSync('index.html','utf8').replace('<head>','<head><base href="/">');
+html=html.replace('</body>',`<div style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#17241d;color:white;padding:5px;font:12px sans-serif"><b>PREPARED RELAY CLOCK TEST</b><button id="clock-prepare">Prepare and save</button><div id="clock-proof"></div></div><script>
+const clockG=Scattering.Game;
+function clockProof(){const s=clockG.state?.scholar;if(!s)return;document.getElementById('clock-proof').textContent='Day '+s.day+' | Ticks '+s.dayTicks+' | Grounding '+clockG.grounding()+' | Service '+(s.relay?.holderDays||0)+' | '+(clockG.state.switchboard?.holderId===clockG.villagerId?'your Relay':'vacant');}
+document.getElementById('clock-prepare').onclick=()=>{const G=clockG;G.tbfight=null;G.over=false;G.genRoster('Columbus, Ohio');G.newGame('Columbus, Ohio',null,G.generatedRoster[0].id);G.depart();const s=G.state.scholar,v=G.state.village;G.state.systemArrived=true;G.state.systemAnimationShown=true;s.knackChoices=[];s.knackChosen=true;s.health=100;s.day=85;s.dayTicks=120;s.kcal=2400;s.grounding=100;s.mx=4;s.my=4;s.insideHaven=true;G.map.px=v.px??4;G.map.py=v.py??4;G.state.networkLive=true;G.state.pendingSwitchboard={day:s.day};G.save();G.debugRefresh();clockProof();};
+document.addEventListener('click',()=>setTimeout(clockProof,100),true);
+</script></body>`);fs.writeFileSync('.git/relay-clock-phone.html',html);
