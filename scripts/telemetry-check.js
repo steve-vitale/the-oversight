@@ -44,6 +44,11 @@ function parseArgs(argv) {
 }
 
 function getPath(obj, dot) {
+  if (obj == null) return undefined;
+  // Baselines are written by --update-baseline as flat dotted keys
+  // ({"qa.askedTotal": 784}); the literal key wins so a baseline
+  // round-trips. Otherwise fall through to nested-path lookup.
+  if (Object.prototype.hasOwnProperty.call(obj, dot)) return obj[dot];
   let cur = obj;
   for (const part of dot.split('.')) {
     if (cur == null) return undefined;
