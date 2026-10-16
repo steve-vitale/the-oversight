@@ -1,0 +1,27 @@
+=== seed 8502 day 30 — conversation with Morris (gen_swri0gt) ===
+occupation=army medic temperament=fidgety trust=79 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Oh! Oh — Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Consider it a project, then. Project: laugh. I'm assigning us both."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Nikos ate something last month that should've killed them. They're fine. — ask anyone!"
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged

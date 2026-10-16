@@ -1,0 +1,29 @@
+=== seed 8502 day 20 — conversation with Natalie (gen_lo7fwu0) ===
+occupation=Sailor temperament=bold trust=50 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About Ashley?"
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. I'm listening."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my sister, Ashley. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Carol is gone and the world just... continues. That's the part I can't stand."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I tend the fire without being asked. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I've got fires to light — metaphorical ones. Mostly."
+(want=seek_taken stage=3)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=promised

@@ -1,0 +1,18 @@
+=== seed 8504 day 30 — conversation with Monique (gen_8hitwxl) ===
+occupation=blacksmith temperament=intense trust=63 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I still haven't found anyone. Any chance?"
+(turn0 choices: agency:ask_expedition, alive:event:naming, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: Their voice loosens. The guardedness thins.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Go. Think about what I said. Really think."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,32 @@
+=== seed 8503 day 30 — conversation with Caroline (gen_w85fxhk) ===
+occupation=street artist temperament=warm trust=88 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "I tried the Spicebush like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, alive:want:curious, alive:event:tension, dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What scares you most about what's happening? The real answer."
+(want=curious stage=1)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Fear's information. Listen to what it's telling you, then decide."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Everyone's choosing sides and pretending they aren't. I hate it."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I memorize the stars when the fire gets loud. Everyone's got a tell. That's mine."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We need something to DO together. Joint work fixes more than joint talking."
+(want=curious stage=2)
+closing line: "I'm rooting for you. Whatever you're working on. Just so you know."
+want final: id=curious stage=3 resolution=engaged

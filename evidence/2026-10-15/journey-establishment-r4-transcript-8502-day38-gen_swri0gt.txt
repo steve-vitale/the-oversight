@@ -1,0 +1,15 @@
+=== seed 8502 day 38 — conversation with Morris (gen_swri0gt) ===
+occupation=army medic temperament=fidgety trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about the last time you laughed — that was 8 days back. Still on your mind? 'Consider it a project, then. Project: laugh. I'm assigning us both.'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Wait, also — Ruth talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

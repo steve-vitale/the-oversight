@@ -1,0 +1,24 @@
+=== seed 8501 day 38 — conversation with Vito (gen_dlvzapw) ===
+occupation=programmer temperament=withdrawn trust=81 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+(turn0 choices: ans:q_theory:a_aliens, ans:q_theory:a_test, ans:q_theory:a_shrug, deflect_q, leave, silence)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Did you hear? Stan just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "...I'm going to go. This was... fine. It was fine."
+want final: id=curious stage=3 resolution=engaged

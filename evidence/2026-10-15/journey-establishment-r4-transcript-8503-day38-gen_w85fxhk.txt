@@ -1,0 +1,27 @@
+=== seed 8503 day 38 — conversation with Caroline (gen_w85fxhk) ===
+occupation=street artist temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about what's been happening — that was 8 days back. Still on your mind? 'We need something to DO together. Joint work fixes more than joint talking.' That's the whole of it."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, more, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I talk to both sides. It hasn't exploded yet."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

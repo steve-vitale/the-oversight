@@ -1,0 +1,15 @@
+=== seed 8503 day 30 — conversation with Violet (gen_5d29d7q) ===
+occupation=welder temperament=gentle trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but tell me you've got food to spare. I'm going hungry here. My hands shake when I try to work."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:ask_favor, dlg:help, alive:event:tension, dlg:details, dlg:cant, recap, dlg:subject, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's been days since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "I'll be here if you need. No rush, ever."
+want final: id=ask_favor stage=3 resolution=promised

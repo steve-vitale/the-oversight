@@ -1,0 +1,31 @@
+=== seed 8504 day 30 — conversation with Guadalupe (gen_det8oon) ===
+occupation=HVAC tech temperament=earnest trust=49 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? I know who took the extra rations but won't say. Not that it matters."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence, confront:d_2tx6oiv)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_taken stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "I mean this — Honest. I'll take honest over certain every time."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Why are you telling me this?"
+THEM: "I wish there was more to tell. That's it."
+(want=seek_taken stage=0)
+YOU: [teach] "Let me show you something."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=0)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=seek_taken stage=0)
+YOU: [teach] "Let me show you something."
+THEM: "...Sorry, lost my train of thought."
+(want=seek_taken stage=0)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They relax, a fraction. This is going well.
+(want=seek_taken stage=0)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Anyway — I should get going."
+(want=seek_taken stage=0)
+want final: id=seek_taken stage=3 resolution=unestablished

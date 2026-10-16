@@ -1,0 +1,32 @@
+=== seed 8504 day 38 — conversation with Monique (gen_8hitwxl) ===
+occupation=blacksmith temperament=intense trust=82 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all. No time to waste."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Bulldozer — Lowers its head, paws the earth. It hunts by day — watch the open ground."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Baobab. Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Short version — Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my grandfather, Michael. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Bittersweet Nightshade — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+closing line: "Don't waste what we talked about."
+want final: id=seek_taken stage=3 resolution=promised

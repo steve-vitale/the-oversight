@@ -1,0 +1,31 @@
+=== seed 8501 day 20 — conversation with Vito (gen_dlvzapw) ===
+occupation=programmer temperament=withdrawn trust=51 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I'm feverish, a cut gone hot and angry. can you do anything? Just... be straight with me."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_qi3ih8j)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. I mean it."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's not just the cut anymore, it's in the blood, I can feel it climbing. I need someone who knows wounds."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "You don't know what that means to me. Thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Yeah?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Yeah?"
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,21 @@
+=== seed 8503 day 38 — conversation with Violet (gen_5d29d7q) ===
+occupation=welder temperament=gentle trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Hey — I found some American Hazelnut today. You were right, it was right where you said."
+(turn0 choices: alive:want:ask_favor, alive:event:tension, dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "No, really, it's fine. Forget I even asked."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "Can't right now."
+THEM: "Oh — no, it's fine. Already handled. But thanks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Go gently, okay?"
+want final: id=ask_favor stage=3 resolution=deflected
