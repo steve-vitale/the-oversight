@@ -7,6 +7,15 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
+2026-10-16 care prerequisite: actual NPC Mending planning includes the bearer;
+the verb uses distinct living present allies. Tactical Lifeline now reaches
+the bearer after their own death-refusal/Phoenix priority. Only known living
+distinct holders count; charges belong to canonical people and survive load,
+including the existing level3 second rescue.26 caller/load proofs and native
+prepared Wait/cast/hit/load/exhaustion are in
+../../evidence/2026-10-16/caregiver-support-audit.md. This does not author the
+Shepherd deed or complete NPC care payoff/field/army parity. Five proxies stay.
+
 2026-10-16 Market God deed: turn food value into delivered nonfood goods in
 a real paid cart, resident or river trade. The living buyer/resident seller
 earns a personal first receipt. Unredeemed credit, XP counters, news, free

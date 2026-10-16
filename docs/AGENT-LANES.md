@@ -1,5 +1,13 @@
 # Agent lanes (2026-10-15)
 
+Codex caregiver-support prerequisite (2026-10-16): narrow godpath.js Mending
+target/planner and canonical support-holder/charge logic; game.js player
+Lifeline caller and saved charges. No ability prices, amounts, kits, god
+deeds, region/nomad or field-body changes. See
+../evidence/2026-10-16/caregiver-support-audit.md for26 caller checks, native
+proof, full967/967, current-source panels and known remaining care work.
+Shepherd's fitting outcome stays next; five deeds remain.
+
 Codex Market deed unit (2026-10-16): narrow betrayal.js paid goods delivery
 receipts, game.js's river completion caller, miser.god.deed and matching
 validation/ontology/docs/evidence. No prices, stock, XP, kit ordering or Muse

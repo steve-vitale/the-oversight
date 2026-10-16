@@ -8,6 +8,14 @@ Prepared titan/coalition campaign evidence is separate from natural reachability
 
 ## Forty-context map
 
+2026-10-16 caregiver prerequisite: actual NPC Mending can select a nearby
+wounded bearer, and tactical Lifeline now anchors the bearer after personal
+refusal priority. Canonical personal limits survive load; dead/unknown/
+departed/duplicate bodies cannot supply the passive. This is pre-god care
+wiring, not a Shepherd authored deed, field/army rescue model or dedicated
+contest effect. Existing NPC deepening/payoff and field-helper body models
+remain separate. See ../../evidence/2026-10-16/caregiver-support-audit.md.
+
 2026-10-16 Market fitting deed: paid goods delivery now replaces its old
 age/synergy proxy for both buyer and living resident seller. This is earned
 access, not a new god action or proof that sponsorship/quartermaster scale

@@ -1,5 +1,17 @@
 # Simulating The Oversight — how to measure a change
 
+Caregiver support (2026-10-16): `test-caregiver-support.js` automatically joins
+quick/full checks and uses one shared harness for real NPC casts, lethal hits,
+personal-refusal priority, canonical charge ownership and actual save/load.
+Use caregiver-support-reconstruct.cjs to rebuild either frozen source. The
+dated comparison retains all changed hashes when there are at most32 in a
+cohort; above that, replay every changed row/metric, any Lifeline exposure or
+changed care-event count, plus first/last changed hash per policy. Retain the
+full index and classify unreplayed hashes as unknown. See
+../evidence/2026-10-16/caregiver-support-audit.md; whole balanced observations
+and hashes must match before interpreting a trace. Raw collector bytes and
+cache fingerprints remain part of the proof, including saved empty fields.
+
 Market exchange (2026-10-16): `test-market-deed.js` is discovered by
 quick/full checks and proves real payment/delivery, buyer/seller ownership,
 load/succession and ordinary ceremonies. Use the four standard policies

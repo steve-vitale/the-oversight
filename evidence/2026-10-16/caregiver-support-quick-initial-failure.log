@@ -1,0 +1,21 @@
+check.js: 195 scripts, 4 parallel (quick)
+.................................................................................................................................F.................................................................
+
+  FAIL scripts/test-godpath-unified-20261014.js (exit 1, 1.3s)
+        ok   classify: a tie names no class
+        ok   classify ignores skills (classes are magic)
+        ok   the same function names a villager "Bulwark of the Undying Ward"
+        ok   buildPathLean (the buildScore hook) leans on-path
+        ok   buildScore (with the lean) never scores an ability they don't know
+      
+      wiring
+        FAIL check-wired: nothing in godpath.js is unwired —   UNWIRED alliesOf  (src/js/godpath.js:627)
+        ok   the capable bot has a plan for every new combat verb
+      
+      test-godpath-unified-20261014: 46 passed, 1 failed, 0 todo (phase 0)
+      failing: check-wired: nothing in godpath.js is unwired
+
+  WARN functions in src/js/godpath.js with no caller (wire them or mark `// wired-exempt: why`):
+  UNWIRED alliesOf  (src/js/godpath.js:627)
+
+check.js: 194 passed, 1 failed in 47s

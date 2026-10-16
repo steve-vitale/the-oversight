@@ -1,0 +1,27 @@
+  FAIL healthy NPC planner chooses an adjacent wounded player
+  FAIL the real NPC heal syncs the player body and pays existing food cost
+  ok   a distant player cannot trigger a phantom healing turn
+  ok   food-ineligible NPC cannot buy a real heal
+  FAIL the caster heals themself instead of a departed player
+  FAIL a living NPC anchors the player through a real lethal hit
+  FAIL the saving holder owns a canonical per-fight charge
+  ok   one NPC cannot supply a second life in the same fight
+  ok   existing personal death refusal keeps priority over allied Lifeline
+  ok   existing NPC-to-NPC protection still holds at its original1HP
+  FAIL actual save/load restores the canonical spent charge
+  FAIL reloading cannot mint another use for the same holder
+  ok   prepared deepening uses the real level3 reader
+  ok   existing level3 player Lifeline keeps its10HP rescue
+  FAIL a second level3 rescue remains available after loading
+  FAIL level3 still stops after the second rescue
+  FAIL a replacement body key cannot reset the same persons charge
+  FAIL a departed player cannot anchor a remaining ally
+  ok   a departed NPC cannot anchor the player
+  FAIL a stale living fighter cannot lend a dead persons power
+  FAIL an unidentified support body cannot invent a living holder
+  ok   a duplicate bearer body cannot turn Lifeline into self-refusal
+  ok   an old snapshot without the new map still loads
+  ok   missing old charge history is not fabricated
+
+caregiver-support: 11 passed, 13 failed, 0 todo (phase 0)
+failing: healthy NPC planner chooses an adjacent wounded player | the real NPC heal syncs the player body and pays existing food cost | the caster heals themself instead of a departed player | a living NPC anchors the player through a real lethal hit | the saving holder owns a canonical per-fight charge | actual save/load restores the canonical spent charge | reloading cannot mint another use for the same holder | a second level3 rescue remains available after loading | level3 still stops after the second rescue | a replacement body key cannot reset the same persons charge | a departed player cannot anchor a remaining ally | a stale living fighter cannot lend a dead persons power | …+1 more

@@ -8022,6 +8022,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             godpathWardRescues: f._gpWardRescues || null,
             godpathUses: f._gpUses || null,
             godpathVillagerUses: f._gpVUses || null,
+            godpathLifelineUses: f._lifelineUsedBy || null,
+            godpathLifelineUsed: f._lifelineUsed || 0,
             terraform: f.terraform || {},
             // BELLTOAD CHORUS (break-it r3): the delayed pack is per-fight
             // state — dropping it on save let a mid-fight reload save-scum
@@ -8495,6 +8497,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             _gpWardRescues: tbS.godpathWardRescues || null,
             _gpUses: tbS.godpathUses || null,
             _gpVUses: tbS.godpathVillagerUses || null,
+            _lifelineUsedBy: tbS.godpathLifelineUses || null,
+            _lifelineUsed: tbS.godpathLifelineUsed || 0,
             round: tbS.round || 1,
             over: false, result: null,
             terraform: tbS.terraform || {},
@@ -39922,6 +39926,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.maybeCheatDeath()) {
           p.hp = this.state.scholar.health;
           if (p.hp > 0) { p.alive = true; this.say('You refuse to stay down. The fight goes on.'); return false; }
+        }
+        // A distinct living ally can hold the same Lifeline for the bearer.
+        // Personal refusals and a pending player Phoenix link keep priority.
+        const link = this.state.phoenixLink;
+        if (!link || link.bearerIsPlayer === false) {
+          try {
+            if (S.Godpath?.allyWouldFall(this, p) && p.hp > 0) {
+              p.alive = true;
+              this.state.scholar.health = p.hp;
+              return false;
+            }
+          } catch (e) { console.warn('[godpath] player lifeline', e); }
         }
         this.tbEnd('lost');
         return true;

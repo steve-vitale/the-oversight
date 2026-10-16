@@ -9,6 +9,17 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Caregiver support prerequisite (2026-10-16): the NPC Mending planner now
+sees the distinct nearby player; its ally list excludes departed targets.
+Tactical Lifeline can anchor the bearer after personal death refusals, with
+the same living-person eligibility and canonical per-person charge cap.
+Save/load preserves spent charges and level3's second use.26 real-caller
+checks, prepared native Wait/mend/lethal-hit/load/exhaustion proof and
+full967/967 pass. See ../evidence/2026-10-16/caregiver-support-audit.md for
+source-bound16/64 measurement and scope. This repairs care callers before
+authoring Shepherd's outcome; five god deeds remain, and Garden/reactor plus
+natural Finale/Network questions are unchanged.
+
 Market God fitting deed (2026-10-16): paid cart/resident/river exchanges now
 record personal food-to-goods outcomes after actual delivery. Finished
 physical food, preserved trade value, tab and communal payment stay distinct;
@@ -862,6 +873,14 @@ See ../evidence/2026-10-16/garden-recipient-audit.md.
 - **Never trust 8 seeds.**
 
 ## 3. Known issues (small, logged)
+
+Caregiver prerequisite follow-up (2026-10-16): the new player Lifeline route
+inherits the generic "You stays standing" wording; fix that agreement in a
+future text pass. NPC Lifeline currently uses the level1 representation;
+NPC deepening and Battlefield Grace's full actor/bonus-action/winded flow
+remain separate care work. This prerequisite does not implement Shepherd's
+fitting deed or the field/army care model. See
+../evidence/2026-10-16/caregiver-support-audit.md for actual scope and proofs.
 
 Market phone follow-up (2026-10-16): the purchased tier3 Nanite swarm is
 usable outside combat and heals50 immediately through the generic item

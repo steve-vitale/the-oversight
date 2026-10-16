@@ -43,6 +43,20 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Caregiver support (2026-10-16): measure two opposing effects together. A
+healthy NPC now recognizes an adjacent hurt player as a Mending target and
+pays the existing60-kcal nominal/2-hunger NPC cost; player Mending still pays
+60kcal. Actual NPC Lifeline can save the bearer, preserving personal refusal
+and player Phoenix priority. This increases support reach. Canonical per-person
+charge caps now survive save/load and replacement body keys; dead, unknown,
+departed and duplicate support bodies cannot lend Lifeline. This removes
+unearned rescues. Keep1HP/once, level2's10HP, level3's twice and existing
+daily metabolic terms. Those deepening checks cover the player; NPCs retain
+their current level1 representation. New saves retain counts; missing old history remains
+unknown rather than invented. Read the separate source-bound16/64 evidence
+in ../evidence/2026-10-16/caregiver-support-audit.md before interpreting wins,
+deaths or resource changes. No Shepherd deed or difficulty target changed.
+
 Market God access (2026-10-16): its authored paid food-to-goods outcome
 replaces the legacy synergy/class10-day fallback. A real early trade can
 permit an otherwise complete build at80; a class that never trades cannot

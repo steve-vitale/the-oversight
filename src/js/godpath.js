@@ -624,7 +624,6 @@
     try { return C.isP ? !!(Game.hasAbility && Game.hasAbility(id)) : !!(Game.npcHasAbility && Game.npcHasAbility(C.vid, id)); }
     catch (e) { warn('hasC', e); return false; }
   }
-  function alliesOf(f, C) { return liveAllies(f).filter(x => x !== C.p); }
   function say(C, pl, vl) { Game.say(C.isP ? pl : vl); }
   function syncPos(C) {
     try {
@@ -748,8 +747,7 @@
       let base = rint(amt[0], amt[1]);
       try { if (C.isP) base = Math.round(Game.modTarget('healing.amount', base, {})); } catch (e) { warn('heal mod', e); }
       let t = target ? Game.tbFighter(target) : null;
-      const cands = alliesOf(f, C).filter(x => cheb(x, p) <= reach && x.hp < x.maxHp);
-      if (!C.isP) { const pp = Game.tbFighter('p'); if (pp && pp.alive && cheb(pp, p) <= reach && pp.hp < pp.maxHp) cands.push(pp); }
+      const cands = Game.tbOtherAllies(p).filter(x => cheb(x, p) <= reach && x.hp < x.maxHp);
       if (!t || (t !== p && cands.indexOf(t) < 0)) {
         const pFrac = p.hp / (p.maxHp || 100);
         const worst = cands.slice().sort((x, y) => (x.hp / x.maxHp) - (y.hp / y.maxHp))[0];
@@ -1063,7 +1061,7 @@
     pull: (I) => (I.n < 1 && I.hp > 0.6 && I.mons.some(m => cheb(m, I.v) > 1 && cheb(m, I.v) <= 4) && (I.v._nextStrikes || I.mons.length >= 2) ? 5 : null),
     push: (I) => (I.mons.filter(m => cheb(m, I.v) <= 2).length >= 1 && (I.hp < 0.7 || I.mons.length >= 2) ? 7.5 : null),
     pack: (I) => (I.n < 1 && I.strong ? 6.5 : null),
-    heal: (I) => (I.hp < 0.5 || I.allies.some(a => cheb(a, I.v) <= 1 && a.hp / (a.maxHp || 1) < 0.4) ? 7 : null),
+    heal: (I) => (I.hp < 0.5 || Game.tbOtherAllies(I.v).some(a => cheb(a, I.v) <= 1 && a.hp / (a.maxHp || 1) < 0.4) ? 7 : null),
     blink: (I) => (I.hp < 0.35 && I.d <= 1 ? 8 : null),
     swap: (I) => (I.n < 1 && I.mons.some(m => m.telegraph && cheb(m, I.v) <= 3 && (Game.fighterSize ? Game.fighterSize(m) : 1) <= 1) ? 7 : null),
     foresee: (I) => (I.n < 1 && (I.hasProphecy || I.mons.some(m => m.telegraph)) ? 5.5 : null),
@@ -1513,12 +1511,18 @@
   function sideHolders(game, f, id, except) {
     const out = [];
     try {
+      const seen = new Set();
+      const add = (fighter, isP) => {
+        if (!fighter || fighter === except || !fighter.alive || fighter.fled || !(fighter.hp > 0)) return;
+        const vid = isP ? game.villagerId : fighter.villagerId;
+        const person = vid && game.vpOf(vid);
+        if (!person || person.id !== vid || person.dead || seen.has(vid) || (!isP && vid === game.villagerId)) return;
+        seen.add(vid);
+        if (isP ? game.hasAbility && game.hasAbility(id) : game.npcHasAbility && game.npcHasAbility(vid, id)) out.push({ f: fighter, isP });
+      };
       const p = game.tbFighter && game.tbFighter('p');
-      if (p && p.alive && p !== except && game.hasAbility && game.hasAbility(id)) out.push({ f: p, isP: true });
-      for (const x of liveAllies(f)) {
-        if (x === except || !x.villagerId) continue;
-        if (game.npcHasAbility && game.npcHasAbility(x.villagerId, id)) out.push({ f: x, isP: false });
-      }
+      add(p, true);
+      for (const x of liveAllies(f)) add(x, false);
     } catch (e) { warn('sideHolders', e); }
     return out;
   }
@@ -1540,7 +1544,7 @@
       for (const h of hs) {
         const L = h.isP ? game.abilityLevel('lifeline') : 1;
         const max = L >= 3 ? 2 : 1;
-        const k = h.f.key;
+        const k = h.isP ? game.villagerId : h.f.villagerId;
         if ((f._lifelineUsedBy[k] || 0) >= max) continue;
         f._lifelineUsedBy[k] = (f._lifelineUsedBy[k] || 0) + 1;
         f._lifelineUsed = (f._lifelineUsed || 0) + 1;

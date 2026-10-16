@@ -1,0 +1,26 @@
+  ok   healthy NPC planner chooses an adjacent wounded player
+  ok   the real NPC heal syncs the player body and pays existing food cost
+  ok   a distant player cannot trigger a phantom healing turn
+  ok   food-ineligible NPC cannot buy a real heal
+  ok   the caster heals themself instead of a departed player
+  ok   a living NPC anchors the player through a real lethal hit
+  ok   the saving holder owns a canonical per-fight charge
+  ok   one NPC cannot supply a second life in the same fight
+  ok   existing personal death refusal keeps priority over allied Lifeline
+  ok   existing NPC-to-NPC protection still holds at its original1HP
+  ok   actual save/load restores the canonical spent charge
+  ok   reloading cannot mint another use for the same holder
+  ok   prepared deepening uses the real level3 reader
+  ok   existing level3 player Lifeline keeps its10HP rescue
+  ok   a second level3 rescue remains available after loading
+  ok   level3 still stops after the second rescue
+  ok   a replacement body key cannot reset the same persons charge
+  ok   a departed player cannot anchor a remaining ally
+  ok   a departed NPC cannot anchor the player
+  ok   a stale living fighter cannot lend a dead persons power
+  ok   an unidentified support body cannot invent a living holder
+  ok   a duplicate bearer body cannot turn Lifeline into self-refusal
+  ok   an old snapshot without the new map still loads
+  ok   missing old charge history is not fabricated
+
+caregiver-support: 24 passed, 0 failed, 0 todo (phase 0)
