@@ -3917,6 +3917,17 @@
         }
         c.exchanges = (c.exchanges || 0) + 1;
       } catch (e) {}
+      // SHARED WIND-DOWN ENFORCEMENT (journey-social r18 2026-10-16): the
+      // energy budget binds every verb, not just the base tail — the dry
+      // streak can spend the budget on a betrayal beat, and without this
+      // the winddown never queues (transcript-caught: 14-deep deflection
+      // streaks on repeated betrayal: choices). Follows the dlg: pattern.
+      try {
+        if (typeof this.convoMaybeWinddown === 'function') {
+          const wd = this.convoMaybeWinddown(vid);
+          if (wd) return wd;
+        }
+      } catch (e) {}
       return { line, choices: this.convoChoices(vid), ended: false, transcript: (c.transcript || []).slice() };
     };
     if (act === 'run' || act === 'talk' || act === 'fight') {

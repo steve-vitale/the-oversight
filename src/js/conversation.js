@@ -821,6 +821,7 @@
     },
 
     sayLine(vid, line, opts) {
+
       const c = this.convoGet(vid);
       const t = String(line == null ? '' : line);
       if (!t) return null;
@@ -972,6 +973,29 @@
       // Speaks what was ACTUALLY spoken (useChunks: the fallback when the
       // primary was no-repeat-blocked), never the blocked line.
       try { for (const chunk of useChunks) this.convoSpeakLine(vid, chunk, opts); } catch (e) {}
+      // DRY STREAK + WIND-DOWN (journey-social r18 2026-10-16): count
+      // consecutive deflection speeches — however they were produced. The
+      // sayLine fallbacks (dry / self-repeat) are one source, but the dlg:
+      // handlers (convo-dialogue.js) also draw the deflection pool directly
+      // when a beat is blocked, bypassing the fallback path — counting only
+      // fallbacks missed those and left 14-deep streaks. Three deflection
+      // speeches in a row means the conversation has genuinely run dry: a
+      // real person winds down here ("I should get back to it"), not a
+      // fourth "lost my train of thought". Spend the energy budget so the
+      // EXISTING convoMaybeWinddown machinery closes it naturally (queued
+      // goodbye, continuer reveal, natural end) — all its gates still apply
+      // (pendingQ, heldAsk, relationship-age winddown lines, spurn rules).
+      // Any real beat resets the count. Silence (null first) leaves it.
+
+      if (first && this.convoIsDeflectionLine(first)) {
+        c.fallbackStreak = (c.fallbackStreak || 0) + 1;
+
+        if (c.fallbackStreak >= 3 && c.active && !c.winddownQueued && !c.windingDown) {
+          c.budget = Math.min(c.budget, c.exchanges);
+        }
+      } else if (first) {
+        c.fallbackStreak = 0;
+      }
       return first;
     },
 
@@ -4241,6 +4265,10 @@
       // per-sitting ledgers, or the cycle never restarts and the old cap
       // logic collapses to verbatim.
       c.selfRepeatLines = 0;
+      // DRY STREAK (journey-social r18 2026-10-16): fresh sitting, fresh
+      // dry count — a previous conversation's dry spell must not cut the
+      // new one short.
+      c.fallbackStreak = 0;
       // DRY LINES (journey-social r16 2026-10-15): the dry pool's own comment
       // says "past 9 uses in one conversation" — but the counter never
       // reset, so it was per-RUN: after 9 lifetime dry uses a villager went
