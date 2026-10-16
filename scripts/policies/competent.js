@@ -1129,6 +1129,11 @@ function forageTripSeedFirst(Game, ctx) {
 
 // Donate the haul: identified edible inventory food goes to the pantry.
 // (The seed was already sown by trySow; the player keeps a 1-day buffer.)
+function policyFoodReserve(Game,ctx,baseline){
+  if(typeof ctx?.foodReserveKcal!=='function')return baseline;
+  try{const requested=ctx.foodReserveKcal(Game,baseline);return Number.isFinite(requested)?Math.max(baseline,requested):baseline;}
+  catch(e){console.warn('[policy] food reservation',e);return baseline;}
+}
 function donateHaul(Game, ctx) {
   try {
     const s = Game.state.scholar;
@@ -1142,6 +1147,7 @@ function donateHaul(Game, ctx) {
       const deep = Game.pantryKcalLive && Game.pantryKcalLive() >= Math.max(16000, (v.roster || []).length * 1600);
       if (deep && (v.visitors || []).some(vis => vis.entrepreneurial)) keep += 3600;
     }
+    keep=policyFoodReserve(Game,ctx,keep);
     let packKcal = (s.inventory || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
     const inv = s.inventory || [];
     for (let i = inv.length - 1; i >= 0; i--) {
@@ -2462,6 +2468,10 @@ const competent = {
         const inv = s.inventory || [];
         for (let i = inv.length - 1; i >= 0; i--) {
           if ((inv[i].kcalEach || 0) > 0 && inv[i].foodState !== 'raw') {
+            if(typeof ctx.foodReserveKcal==='function'){
+              const keep=policyFoodReserve(Game,ctx,cap),stock=inv.reduce((n,it)=>n+(it.kcalEach||0)*(it.units||1),0);
+              if(stock-(inv[i].kcalEach||0)*(inv[i].units||1)<keep)continue;
+            }
             try { Game.donateToPantry(i); ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; break; } catch (e) {}
           }
         }

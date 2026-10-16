@@ -1,5 +1,17 @@
 # Simulating The Oversight — how to measure a change
 
+Opt-in ration experiment (2026-10-16): `campaigner-rations` adds honest public
+access/credit/weight checks and known-target food retention, with its own
+`campaignRation*` counters. It is a failed campaign-funding hypothesis: more
+Table wins accompany zero campaign calls/fights across16/64 seeds. Keep the
+original campaigner and campaigner-control; do not call it a better campaign
+bot. `test-campaign-rations.js` joins quick/full discovery automatically.
+Run `campaign-audit.js --policies campaigner,campaigner-rations --n 16 --days 240`
+with explicit `--out`, then `campaign-scorecard.js --report <report> --pairs campaigner:campaigner-rations --out <prefix>`.
+Use disjoint explicit `--seeds` and retain all23 metrics, controls and jobs.
+See ../evidence/2026-10-16/campaign-rations-audit.md for reconstruction,
+conditional full-state replays and the next productive-supply question.
+
 Natural campaign measurement (2026-10-16): `campaign-audit.js` schema2 now
 uses the shared balanced observer with exact `rawRow`, all23 metrics and
 bounded first/last blockage snapshots. Observer-off and ordinary-balanced

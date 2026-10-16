@@ -1,0 +1,20 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('campaign-rations'),R=require('../policies/campaign-rations'),C=require('../policies/competent');
+(async()=>{const G=await K.load({seed:7});let s,v,ctx,me;
+ const meal=(units,kcal=500,kg=.1)=>({name:'Prepared rations',foodState:'ready',safe:true,edible:true,units,kcalEach:kcal,kg,spoilDay:9999});
+ function fresh(){G.tbfight=null;G.pendingEncounter=null;G.over=false;K.newRun(G);s=G.state.scholar;v=G.state.village;me=G.villagerId;s.day=85;s.health=100;s.kcal=2400;s.inventory=[];s.abilities=[];s.insideHaven=true;s.exiled=false;s.integration=5;G.state.systemArrived=true;v.pantry=[meal(200)];v.gives={[me]:100000};v.takes={[me]:0};v.takeHist={[me]:[]};ctx={campaignTarget:'herald'};}
+ fresh();s.exiled=true;let calls=0;const take=G.takeFromPantry;G.takeFromPantry=function(){calls++;return take.apply(this,arguments);};R.provision(G,ctx,12400);T.ok('exile refuses before any public withdrawal',calls===0&&R.food(G)===0&&ctx.campaignRationAccessBlocked===1);G.takeFromPantry=take;
+ fresh();s.insideHaven=false;R.provision(G,ctx,12400);T.ok('an ordinary non-reactor bearer actually enters the hall before withdrawing',s.insideHaven&&R.food(G)>0&&ctx.campaignRationHallEntries===1);T.ok('withdrawals pay real stock and contribution ledger',G.pantryKcal()+R.food(G)===100000&&v.takes[me]===R.food(G));T.ok('extra army draws respect one ordinary daily fed line',R.food(G)<=G.fullLine()&&ctx.campaignRationTakenKcal===R.food(G));const paid=R.food(G);R.provision(G,ctx,12400);T.ok('a repeated hook cannot reset the daily allowance',R.food(G)===paid);
+ fresh();v.gives[me]=500;R.provision(G,ctx,12400);T.ok('a whole unit cannot cross through zero contribution credit',R.food(G)===0&&v.takes[me]===0);
+ fresh();v.gives[me]=0;s.insideHaven=false;R.provision(G,ctx,12400);T.ok('no credit avoids even a pointless supply entry',!s.insideHaven&&R.food(G)===0);
+ fresh();v.takeHist[me]=[{day:85,kcal:G.fullLine()}];R.provision(G,ctx,12400);T.ok('ordinary survival withdrawals count against the same daily meal allowance',R.food(G)===0);
+ fresh();v.pantry=[meal(20)];const stock=G.pantryKcal();R.provision(G,ctx,12400);T.ok('the village keeps its two-day reserve',G.pantryKcal()>=Math.min(stock,2*G.villageDailyNeed()));
+ fresh();s.inventory=[{name:'Prepared ballast',units:1,kg:100}];R.provision(G,ctx,12400);T.ok('a full pack triggers no phantom ration gain',R.food(G)===0&&!ctx.campaignRationTransferRefused);
+ fresh();v.pantry.unshift(meal(10,100,2));let firstKcal=null;G.takeFromPantry=function(index){if(firstKcal===null)firstKcal=v.pantry[index].kcalEach;return take.apply(this,arguments);};R.provision(G,ctx,12400);G.takeFromPantry=take;T.ok('funded withdrawals prefer useful calorie density',firstKcal===500&&R.food(G)>0);
+ fresh();s.inventory=[meal(5)];R.provision(G,ctx,2000);T.ok('already owned rations require no withdrawal or reserve payment',!ctx.campaignProvisionKcal&&R.food(G)===2500);
+ fresh();ctx.campaignRationPlan={person:me,titan:'herald',target:12400};s.inventory=[meal(10),meal(10),meal(10)];ctx.foodReserveKcal=(g,b)=>R.reserve(g,ctx,b);C.donateHaul(G,ctx);T.ok('the actual donation routine retains a known army ration',R.food(G)>=12400&&ctx.donated===undefined);
+ fresh();s.inventory=[meal(10),meal(10),meal(10)];C.donateHaul(G,ctx);T.ok('without an opt-in callback the ordinary haul still feeds the village',ctx.donated>0&&R.food(G)<12400);
+ fresh();ctx.campaignRationPlan={person:me,titan:'herald',target:12400};v.pantry=[meal(1)];T.ok('a hungry village restores the normal personal reserve',R.reserve(G,ctx,2400)===2400);
+ fresh();ctx.campaignRationPlan={person:'old-bearer',titan:'herald',target:12400};T.ok('a predecessor cannot impose an unreviewed new-person reserve',R.reserve(G,ctx,2400)===2400);
+ fresh();s.inventory=[{...meal(20),spoilDay:1},{...meal(20),bonded:true},{...meal(20),units:0},meal(2)];T.ok('ration estimates exclude spoiled, bonded and empty stacks',R.food(G)===1000);
+ T.done();})().catch(e=>{console.error(e.stack);process.exitCode=1;});

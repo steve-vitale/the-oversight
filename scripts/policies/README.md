@@ -91,6 +91,24 @@ observed public actions for peer claims.
 
 ## Adding a policy
 
+`campaigner-rations` is an opt-in diagnostic based on campaigner. It requires
+actual public pantry access, positive own contribution credit after a whole
+unit, room under the ordinary fed line after all same-day voluntary takes,
+real carry capacity and two nominal days of village food. It retains owned
+food toward a publicly announced campaign's current ration need through both
+competent donation paths, only for the current bearer and while village stock
+permits. The shared `ctx.foodReserveKcal(Game,baseline)` callback defaults to
+the unchanged ordinary donation behavior; it cannot lower the base reserve.
+Real transfers still pay every game cost. Exile is respected, not repaired.
+
+This strategy fails to finance any campaign calls/fights across16 and64 seeds.
+Keep it for diagnosis, not as the default or a claim of optimal human play.
+Higher Table wins mainly coincide with avoiding this campaign exposure; a
+causal explanation for every outcome needs its replay. Use campaign-audit
+and campaign-scorecard's explicit campaigner:campaigner-rations pair. See
+evidence/2026-10-16/campaign-rations-audit.md. Do not pool this named strategy
+with game-only lever measurements or change source digests to compare them.
+
 The opt-in `capable-voice-ready`, `maker-voice-ready`, `merchant-voice-ready`
 and `caregiver-voice-ready` inherit their named base's work, offers, combat,
 contest and pending choices. Optional ctx.godDayIntent and ctx.beforeKnownFight

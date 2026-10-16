@@ -41,6 +41,31 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Campaign ration strategy (2026-10-16): **retain as an opt-in diagnostic;
+reject as a successful campaign strategy**. `campaigner-rations` prices
+public withdrawals against positive own contribution credit, remaining
+same-day ordinary fed-line allowance, real access/weight and a two-day
+nominal village-food reserve. It retains owned campaign food in both normal
+donation paths only after a publicly announced target and while the village
+has that reserve. These are conservative policy preferences, not new game
+rules or guarantees of standing. Ordinary survival takes still use the base
+policy. Spoilage and actual nourishment remain separate from nominal stock.
+
+Army upkeep still spends1000 physical pack kcal per blade/day; promises,
+banked nourishment and pantry totals cannot substitute. Food retention changes
+donations, contribution, trust, recruitment, danger exposure, progression and
+later random histories. At16 seeds campaigner->rations wins9->12, deaths24->24,
+communities6->4, player class14->11; disjoint64 wins37->48, deaths108->96,
+communities26->16, classes40->40. The candidate never calls/recruits or fights
+a campaign in either cohort. Higher wins therefore do not establish campaign
+viability. Seed4 reaches its first council with zero gifts and88155 prior
+withdrawal kcal: the conservative credit budget prevents campaign taking,
+and its own work never funds the plan. No exact contribution-to-exile causal
+claim follows. Keep the original default/control. Next measure an explicitly
+productive earned-supply strategy before changing costs, gates or enemies.
+All23 metrics,254 cohort/control workers, exact compatibility and outcome
+replays: ../evidence/2026-10-16/campaign-rations-audit.md.
+
 Natural campaign baseline (2026-10-16): no runtime/policy lever is changed.
 The audit now prices the existing campaign strategy with all23 metrics,
 neutral controls and actual public withdrawal evidence. At16 paired seeds,

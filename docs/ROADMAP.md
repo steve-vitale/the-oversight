@@ -9,6 +9,17 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Campaign rations (2026-10-16): a separate opt-in strategy respects public
+access, contribution credit, meal allowance and village reserves, and retains
+known army rations through ordinary donation. Full959/959 and browser paid
+transfer proof pass. It fails its campaign hypothesis:16-screen and64-disjoint
+holdout have zero calls/fights, despite wins9->12 and37->48. Keep the original
+default; higher wins are not success. Source-bound all23 metrics, compatibility,
+reconstruction and selected outcome traces are in
+../evidence/2026-10-16/campaign-rations-audit.md. Next measure productive earned
+physical supply, standing and day-by-day army spending before tuning any game
+cost. Natural Finale/Network completion and seven fitting deeds remain open.
+
 Natural campaigns (2026-10-16): the existing audit now shares the23-metric
 observer and exact standard rows, neutral/ordinary-driver controls,
 source-keyed cache/resume and bounded blockage snapshots.17 workflow checks

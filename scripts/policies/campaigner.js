@@ -85,7 +85,7 @@ function approach(G, ctx, m) {
   if (G.tbfight) { ctx.campaignFight = G.tbfight; bump(ctx, 'FightsStarted'); return true; }
   return false;
 }
-function road(G, ctx) {
+function road(G, ctx, options = {}) {
   if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest) return;
   try {
     const acts = G.titanSelfActions(), st = G.state.titans || {}, camps = st.campaigns || {};
@@ -102,9 +102,9 @@ function road(G, ctx) {
     const def = G.titanDef(tid), node = tid === 'the_network' && started ? G.networkCurrentNode() : null;
     const need = node ? (node.piece === 'heart' ? (def.campaign.heartMinSurvivors || 10) : (def.campaign.floor || 5)) : def.minAllies;
     const count = () => m ? (m.allies || []).length + G.titanHavenBlades(m).length : 0;
-    provision(G, ctx, Math.max(need, count()) * 1000 + 2400);
+    (options.provision || provision)(G, ctx, Math.max(need, count()) * 1000 + 2400);
     // Do not create a hungry army just to watch it disperse at dawn.
-    if (food(G) < Math.max(need, count()) * 1000 + 1200) { bump(ctx, 'FoodBlocked'); return; }
+    if ((options.food || food)(G) < Math.max(need, count()) * 1000 + 1200) { bump(ctx, 'FoodBlocked'); return; }
     const call = acts.find(a => a.id === 'titan:call:' + tid || a.id === 'titan:reinforce:' + tid);
     const last = ctx._campaignCalls || (ctx._campaignCalls = {});
     if (canRecruit && call && (last[tid] == null || day(G) - last[tid] >= 7)) {
@@ -133,14 +133,18 @@ function road(G, ctx) {
     approach(G, ctx, goal);
   } catch (e) { (ctx.notes || (ctx.notes = [])).push('campaign road: ' + e.message); bump(ctx, 'Errors'); }
 }
-function make(id, enabled) {
+function make(id, enabled, rations = null) {
   const p = { ...capable, id, desc: 'capable survival with late-game waiting; ' + (enabled ? 'public-action coalition campaigns' : 'matched campaign control') };
   for (const hook of ['setup', 'upkeep', 'daily', 'fight', 'contest', 'pending']) p[hook] = (G, ctx) => env(() => {
+    if (rations) {
+      ctx.foodReserveKcal = (g, baseline) => rations.reserve(g, ctx, baseline);
+      if (hook === 'daily' || hook === 'upkeep') rations.prepare(G, ctx);
+    }
     if (enabled && G.tbfight && (G.state.titans || {})._fight) ctx.campaignFight = G.tbfight;
     const r = capable[hook] && capable[hook](G, ctx);
-    if (enabled && (hook === 'upkeep' || hook === 'daily')) road(G, ctx);
+    if (enabled && (hook === 'upkeep' || hook === 'daily')) road(G, ctx, rations || undefined);
     return r;
   });
   return p;
 }
-module.exports = { campaigner: make('campaigner', true), 'campaigner-control': make('campaigner-control', false), road, provision, outfit, approach, target, food };
+module.exports = { campaigner: make('campaigner', true), 'campaigner-control': make('campaigner-control', false), 'campaigner-rations': make('campaigner-rations', true, require('./campaign-rations')), road, provision, outfit, approach, target, food };

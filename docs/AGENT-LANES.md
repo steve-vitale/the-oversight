@@ -14,6 +14,15 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Campaign ration follow-up (2026-10-16): Codex owns the optional
+campaign-rations.js strategy, campaigner registration and narrowly opt-in
+competent donation reserve hook. Runtime, default strategies, regions and
+nomad stay fixed. This is an experimental failed-funding cohort, not adoption
+based on its higher wins: no campaign starts in16/64 seeds. See
+../evidence/2026-10-16/campaign-rations-audit.md; Muse may use the named cohort
+and shared23-metric campaign workflow directly. Productive earned supply and
+natural Finale/Network remain unresolved.
+
 Natural campaign measurement (2026-10-16): Codex owns campaign-audit.js's
 shared-observer bridge, exact raw rows, neutral controls, bounded blockage
 snapshots/cache, and campaign-scorecard.js's named-strategy comparison.
