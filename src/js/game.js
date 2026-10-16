@@ -28437,7 +28437,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (s.daysLeft <= 0) {
           delete v.sick[vid];
           const mendOf = sickName(s) || 'the fever';
-          this.say(`🤒 ${nm(vid)} is on the mend — ${mendOf} broke.`);
+          // AMBIENT VOICE r1 (2026-10-16, sim-findings #394): the recovery
+          // line rotates through 4 verb-phrase renderings, picked by a pure
+          // (villager-id, day) function — never R() (findings #263/#264).
+          // The mendOf slot keeps the knowledge gate: the true disease name
+          // only when the village knows it, else 'the fever'.
+          var _mendLine = `🤒 ${nm(vid)} is on the mend — ${mendOf} broke.`;
+          try {
+            var _mendPool = (this.ambientBeats ? this.ambientBeats().mend : null);
+            if (_mendPool && _mendPool.length >= 3 && this.ambientPick)
+              _mendLine = _mendPool[this.ambientPick(vid, 'mend', _mendPool.length)](nm(vid), mendOf);
+          } catch (e) {}
+          this.say(_mendLine);
           try { if (this.remember) this.remember(vid, 'recovered', 'survived ' + (sickName(s) || s.name)); } catch (e) {}
         }
       }

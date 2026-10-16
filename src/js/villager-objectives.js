@@ -68,9 +68,101 @@
   var pick = function (a) { return a[Math.floor(R() * a.length)]; };
   var clampN = function (n) { return Math.max(0, Math.min(8, n)); }; // 9x9 world
 
+  // AMBIENT VOICE POOLS (2026-10-16, sim-findings #394): the single-template
+  // indoor beats (REST / EAT / HAVEN_CHORE fire|repair|cook|sweep, the teach-
+  // less "finds" beat, the VISIT beat) each get 4 verb-phrase renderings.
+  // Variant 0 is always the original line verbatim. Steve's voice: plain,
+  // specific, human, no purple prose. Knowledge-gating is untouched — the
+  // call sites keep their playerAtHaven gates; only the wording rotates.
+  var AMBIENT_BEATS = {
+    rest: [
+      function (nm) { return `😴 ${nm} is sleeping by the fire.`; },
+      function (nm) { return `😴 ${nm} is out by the fire, wrapped tight in their blanket, breathing slow.`; },
+      function (nm) { return `😴 ${nm} claimed the warm spot by the fire. Dead asleep.`; },
+      function (nm) { return `😴 ${nm} is asleep sitting up against the woodpile, chin on their chest.`; },
+    ],
+    eat: [
+      function (nm) { return `🍲 ${nm} is eating by the fire — not talking, just eating.`; },
+      function (nm) { return `🍲 ${nm} is hunched over their bowl by the fire, eating like it matters.`; },
+      function (nm) { return `🍲 ${nm} eats quiet by the fire, scraping the bowl clean with their thumb.`; },
+      function (nm) { return `🍲 ${nm} has their bowl and their own thoughts. Neither one is being shared.`; },
+    ],
+    chore_fire: [
+      function (nm) { return `${nm} is tending the fire, coaxing it steady.`; },
+      function (nm) { return `${nm} is feeding the fire one stick at a time, watching the flame take.`; },
+      function (nm) { return `${nm} is down by the firepit, nudging coals back into the middle.`; },
+      function (nm) { return `${nm} is crouched over the embers, blowing soft, one hand blocking the draft.`; },
+    ],
+    chore_repair: [
+      function (nm) { return `${nm} is mending something by the door — patient work.`; },
+      function (nm) { return `${nm} is stitching a tear shut by the door light, squinting at every stitch.`; },
+      function (nm) { return `${nm} is patching a seam with a scrap of cloth, knot after careful knot.`; },
+      function (nm) { return `${nm} sits by the door re-lacing a strap, testing each pull before the next.`; },
+    ],
+    chore_cook: [
+      function (nm) { return `${nm} is working the cookpot, tasting, adjusting.`; },
+      function (nm) { return `${nm} is at the cookpot, tasting off the spoon, frowning, adding a pinch of something.`; },
+      function (nm) { return `${nm} is stirring the pot slow, fishing out a bone to check the meat.`; },
+      function (nm) { return `${nm} is over the cookpot, blowing on a spoonful before it goes back in.`; },
+    ],
+    chore_sweep: [
+      function (nm) { return `${nm} is sweeping the hall. Someone has to.`; },
+      function (nm) { return `${nm} is sweeping ash and grit out through the door, steady strokes.`; },
+      function (nm) { return `${nm} is working the broom along the hall floor, slow and thorough.`; },
+      function (nm) { return `${nm} is sweeping the corners out, muttering at the dust.`; },
+    ],
+    finds: [
+      function (nm) { return `📖 ${nm} is going over their finds, re-tying the bundle.`; },
+      function (nm) { return `📖 ${nm} is sorting their finds, setting each one in its place before the bundle gets tied.`; },
+      function (nm) { return `📖 ${nm} has their finds spread out on a cloth, re-tying the bundle tighter.`; },
+      function (nm) { return `📖 ${nm} is re-packing the bundle, checking each thing twice before it goes back in.`; },
+    ],
+    visit: [
+      function (nm, t2) { return `💬 ${nm} is sitting with ${t2}, talking low. Not business. Just people.`; },
+      function (nm, t2) { return `💬 ${nm} and ${t2} are hunched over the fire together, voices too low to catch.`; },
+      function (nm, t2) { return `💬 ${nm} is with ${t2}, talking the way people do when nobody else is listening.`; },
+      function (nm, t2) { return `💬 ${nm} has ${t2}'s ear — quiet talk, the kind that doesn't need an audience.`; },
+    ],
+    // mend: the sick-recovery line in game.js (sick tick). Variant 0 is the
+    // original verbatim. The `of` slot keeps the knowledge gate: the true
+    // disease name only when the village knows it, else 'the fever'.
+    mend: [
+      function (nm, of) { return `🤒 ${nm} is on the mend — ${of} broke.`; },
+      function (nm, of) { return `🤒 ${nm} made it through the worst of it — ${of} finally broke.`; },
+      function (nm, of) { return `🤒 ${nm} is sitting up again. Whatever ${of} was, it let go.`; },
+      function (nm, of) { return `🤒 ${nm} is back on their feet — ${of} ran its course.`; },
+    ],
+  };
+
   var DIRS8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
 
   var methods = {
+
+    // ---------- AMBIENT VOICE ----------
+    // ambientPick (2026-10-16, sim-findings #394): deterministic variant
+    // rotation for the single-template indoor beats and the sick-recovery
+    // line. A pure function of (villager id, key, day) via _hashStr — NEVER
+    // R(): the ambient block draws RNG (findings #263/#264) and any
+    // draw-count change shifts downstream sims and breaks the det-gate.
+    ambientPick(vid, key, n) {
+      var d = 0;
+      try { d = (this.state.scholar || {}).day || 0; } catch (e) {}
+      return this._hashStr(String(vid) + '|' + String(key) + '|' + d) % n;
+    },
+    // ambientBeats: the voice pools (module-scope AMBIENT_BEATS).
+    ambientBeats() { return AMBIENT_BEATS; },
+    // ambientLine: render one beat's current variant. Returns null for an
+    // unknown key so the chore branch keeps its old "unknown chore = silent"
+    // behavior. Never throws — voice must not break the tick. Call sites
+    // null-guard before say (never print "null").
+    ambientLine(key, vid, nm, arg) {
+      var pool = null;
+      try { pool = (this.ambientBeats() || {})[key]; } catch (e) {}
+      if (!pool || !pool.length) return null;
+      var i = 0;
+      try { i = this.ambientPick(vid, key, pool.length); } catch (e) {}
+      try { return pool[i](nm, arg); } catch (e) { return null; }
+    },
 
     // ---------- STATE ----------
     objState() {
@@ -773,18 +865,11 @@
         var nm = 'Someone';
         try { nm = this.displayName(rid); } catch (e) {}
         if (o.kind === 'REST') {
-          if (playerAtHaven) this.say(`😴 ${nm} is sleeping by the fire.`);
+          if (playerAtHaven) { var _rl = this.ambientLine('rest', rid, nm); if (_rl) this.say(_rl); }
         } else if (o.kind === 'EAT') {
           // visible hunger, answered: they went to the hall and ate
-          if (playerAtHaven && R() < 0.5) this.say(`🍲 ${nm} is eating by the fire — not talking, just eating.`);
+          if (playerAtHaven && R() < 0.5) { var _el = this.ambientLine('eat', rid, nm); if (_el) this.say(_el); }
         } else if (o.kind === 'HAVEN_CHORE') {
-          var lines = {
-            fire: `${nm} is tending the fire, coaxing it steady.`,
-            repair: `${nm} is mending something by the door — patient work.`,
-            teach: null, // handled below
-            cook: `${nm} is working the cookpot, tasting, adjusting.`,
-            sweep: `${nm} is sweeping the hall. Someone has to.`,
-          };
           if (o.chore === 'teach') {
             // LONGSIM agency r2 (2026-10-11): the teach chore is real
             // teaching now. A villager who knows the wild shows a villager
@@ -822,10 +907,11 @@
             } else if (playerAtHaven) {
               // no learner in earshot: they review their own finds, and the
               // line says that — never claims a lesson was given.
-              this.say(`📖 ${nm} is going over their finds, re-tying the bundle.`);
+              this.say(this.ambientLine('finds', rid, nm) || `📖 ${nm} is going over their finds, re-tying the bundle.`);
             }
-          } else if (lines[o.chore] && playerAtHaven) {
-            this.say(lines[o.chore]);
+          } else if (o.chore !== 'teach' && playerAtHaven) {
+            var _choreLine = this.ambientLine('chore_' + o.chore, rid, nm);
+            if (_choreLine) this.say(_choreLine);
           }
         } else if (o.kind === 'VISIT' && o.targetVid) {
           // indoor social call: the visit happens at home
@@ -839,7 +925,8 @@
               if (playerAtHaven) {
                 var tname2 = 'someone';
                 try { tname2 = this.displayName(o.targetVid); } catch (e) {}
-                this.say(`💬 ${nm} is sitting with ${tname2}, talking low. Not business. Just people.`);
+                var _vl = this.ambientLine('visit', rid, nm, tname2);
+                if (_vl) this.say(_vl);
               }
             } catch (e) {}
           }
