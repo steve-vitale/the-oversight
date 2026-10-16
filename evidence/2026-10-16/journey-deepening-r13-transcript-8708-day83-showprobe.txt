@@ -1,0 +1,32 @@
+=== seed 8708 day 83 — conversation with Nikos (nikos_papadopoulos) ===
+occupation=aquarium keeper temperament=gentle trust=75 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "It's quiet today. Wrong kind of quiet. ...sorry."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask? Doesn't matter now."
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "Juan is gone and the world just... continues. That's the part I can't stand."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Yeah, that was me. I walked away from Haven once. Didn't look back. That is all."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Be kind to yourself, okay?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "You want to know about that? Okay." "I'm collecting skills like they're currency — making do today, something else tomorrow."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want, as it were?"
+(want=seek_comfort stage=0)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=seek_comfort stage=0)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=seek_comfort stage=3 resolution=unestablished

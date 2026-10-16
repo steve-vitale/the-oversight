@@ -1,0 +1,21 @@
+=== seed 8708 day 45 — conversation with Juan (gen_yjv2nxz) ===
+occupation=truck driver temperament=bold trust=87 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "What's this about? We never finished talking about the gossip — we wandered off it. 'Did you hear? Quinn just walked away from Haven. Didn't look back.'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Between us — I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright — I've got things to do and so do you. Make it count."
+want final: id=curious stage=3 resolution=engaged

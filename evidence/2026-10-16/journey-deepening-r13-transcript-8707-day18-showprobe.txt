@@ -1,0 +1,32 @@
+=== seed 8707 day 18 — conversation with Ryan (gen_3jlgqhf) ===
+occupation=exterminator temperament=intense trust=32 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "This matters — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: dlg:cant, dlg:help, teach, dlg:more, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You saw it too, right? Pattern Hunger. Tell me I didn't imagine the lights."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "You didn't hear it from me, but Jorge's story doesn't hold. A Rancher, back before."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Huh. Let me think about that." "Hah. I keep thinking about what I left behind. Then I get hungry and stop thinking."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Hm."
+(want=seek_taken stage=1)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Huh. Let me think about that." "Don't laugh. A sky that goes quiet."
+(want=seek_taken stage=1)
+closing line: "Go. Think about what I said. Really think."
+want final: id=seek_taken stage=3 resolution=unresolved

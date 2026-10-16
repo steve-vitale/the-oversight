@@ -1,0 +1,32 @@
+=== seed 8704 day 98 — conversation with Nikos (nikos_papadopoulos) ===
+occupation=aquarium keeper temperament=gentle trust=43 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. That is all."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "They took me. Pattern Hunger — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Be kind to yourself, okay?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Wei touch it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Makes sense to me."
+(want=curious stage=2)
+YOU: [ask:personal] "Your story. Go."
+THEM: "You want to know about that? Okay." "You ever get a song stuck in your head with no way to play it? It's a special kind of torture. No pressure, though."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? ...if that makes sense."
+(want=curious stage=2)
+closing line: "Go easy today, okay? The world's hard enough."
+want final: id=curious stage=3 resolution=engaged

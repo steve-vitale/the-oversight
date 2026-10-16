@@ -1,0 +1,21 @@
+=== seed 8702 day 80 — conversation with Amy (gen_q06uznh) ===
+occupation=Social worker temperament=intense trust=88 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the worst thing you've done — What's the worst thing you've done since the sky changed?"
+(turn0 choices: ans:q_guilty:a_tell, ans:q_guilty:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "The math doesn't add up out here. Be kind to yourself about the remainders."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Nancy just walked away from Haven. Didn't look back. Do you understand?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

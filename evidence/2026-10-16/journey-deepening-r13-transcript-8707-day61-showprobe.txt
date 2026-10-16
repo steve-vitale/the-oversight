@@ -1,0 +1,32 @@
+=== seed 8707 day 61 — conversation with Bakhyt (gen_utw4ju7) ===
+occupation=Firefighter temperament=anxious trust=70 dead=false mood=grieving
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About Zhandos? …if that makes sense."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It drops its head and paws the earth — once, twice — and the dust comes up in a wall. Dustboar, every time. It hunts by day — watch the open ground."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Sodom Apple. Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. I'm listening."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Not that it matters."
+(want=seek_taken stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "We lost Sari and Luis this week. I keep setting out extra portions. Stupid."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You're doing fine."
+(want=seek_taken stage=1)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=seek_taken stage=3 resolution=unresolved

@@ -1,0 +1,32 @@
+=== seed 8705 day 80 — conversation with Chantal (chantal_mukendi) ===
+occupation=Pharmacist temperament=steady trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Have you — sorry. I keep thinking about them. You'd know about that."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, confront:d_amkqiqa, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "I'm not saying there's anything wrong with Ines. I'm just saying I sleep better with them on the other side of the fire."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "The System gave me patching people up. I asked for a sandwich. We don't always get what we ask for."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? ...sorry."
+(want=seek_comfort stage=0)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Good question." "Being the last one awake." Said flat, like something rehearsed in the dark.
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? That is all."
+(want=seek_comfort stage=0)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_comfort stage=0)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_comfort stage=3 resolution=unestablished

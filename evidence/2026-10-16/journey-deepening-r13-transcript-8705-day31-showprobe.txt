@@ -1,0 +1,32 @@
+=== seed 8705 day 31 — conversation with Chantal (chantal_mukendi) ===
+occupation=Pharmacist temperament=steady trust=38 dead=false mood=steady
+want: share_news (stage 1)
+
+THEM: "You'll never guess what I saw by the treeline."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:share_news, dlg:more, dlg:react, dlg:doubt, recap, dlg:invite, teach, dlg:subject, confront:d_amkqiqa, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=share_news stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Kyle? A welder, back before. Solid person."
+(want=share_news stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "If I may — Short version: I don't know. Long version: also that, but slower."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=share_news stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "What's this about? The others think I've got it together. Cute. Very cute."
+(want=share_news stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=share_news stage=1)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "You want to know about that? Okay." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=share_news stage=1)
+closing line: "Good. That's settled, then. Onward."
+want final: id=share_news stage=3 resolution=unresolved

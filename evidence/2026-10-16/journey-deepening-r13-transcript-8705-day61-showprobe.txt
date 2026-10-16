@@ -1,0 +1,32 @@
+=== seed 8705 day 61 — conversation with Razan (gen_ipht9ha) ===
+occupation=infantry soldier temperament=warm trust=72 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Will you help me clean it?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bitter Leaf. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lotus. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Cassava. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "You saw it too, right? Duel. Tell me I didn't imagine the lights."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+closing line: "Take care of yourself, yeah? I mean it."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,27 @@
+=== seed 8706 day 60 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=71 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Could you take a look? You'd know about that."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence, confront:d_cgn2k1h)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. I mean it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Not that it matters."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Good question." "Did you hear? Pablo just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Huh. Let me think about that." "I've told you everything I know about that."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Go easy today, okay? The world's hard enough."
+want final: id=ask_favor stage=3 resolution=unresolved

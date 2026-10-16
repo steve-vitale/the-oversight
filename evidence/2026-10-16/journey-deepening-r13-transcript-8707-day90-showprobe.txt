@@ -1,0 +1,32 @@
+=== seed 8707 day 90 — conversation with Bakhyt (gen_utw4ju7) ===
+occupation=Firefighter temperament=anxious trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About Zhandos?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took me. Hardened Duel — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Yeah, that was me. I walked away from Haven once. Didn't look back. Rest when you can."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "You want to know about that? Okay." "You ever get a song stuck in your head with no way to play it? It's a special kind of torture."
+(want=seek_taken stage=1)
+closing line: "Take care of yourself."
+want final: id=seek_taken stage=3 resolution=unresolved

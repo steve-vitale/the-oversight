@@ -1,0 +1,32 @@
+=== seed 8703 day 51 — conversation with Chen (gen_fivtpfq) ===
+occupation=exterminator temperament=anxious trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you think happened to us — I've been turning something over. What do YOU think actually happened to us?"
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, ans:q_theory:a_aliens, ans:q_theory:a_test, ans:q_theory:a_shrug, deflect_q, leave, silence)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "Greta is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "People are saying things. About you. ...I'd watch how you act around the fire."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Makes sense to me."
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "I used to complain about Columbus, Ohio traffic. I'd kill for traffic. Orderly, honking traffic."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? That's my read."
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "Waking up with someone else's name." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8702 day 87 — conversation with Amy (gen_q06uznh) ===
+occupation=Social worker temperament=intense trust=89 dead=false mood=cheerful
+want: curious (stage 0)
+
+THEM: "Can I be honest? We never finished talking about themselves — we wandered off it, 4 days back. 'That's me, I guess. What's on your mind? Take your time with it.' We still owe what scares them a proper ending, too."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "The Confession. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Thabo touch it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I need you to hear that."
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "That's all I've got on that one. For now."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Just... be straight with me."
+(want=curious stage=2)
+closing line: "Don't waste what we talked about."
+want final: id=curious stage=3 resolution=engaged

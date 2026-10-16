@@ -1,0 +1,32 @@
+=== seed 8704 day 49 — conversation with Eli (gen_upgd1jp) ===
+occupation=trail crew lead temperament=dry trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Have you — sorry. I keep thinking about them."
+(turn0 choices: agency:ask_expedition, dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind? Seen worse."
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "Since Carlos died... I keep expecting to see Carlos at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Nikos is back. Walked in like they'd never left. — or so they tell me."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "Your story. Go."
+THEM: "You want to know about that? Okay." "I miss small talk. Real small talk, about weather that didn't matter and shows I hadn't seen. I mean it."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "You want to know about that? Okay." "Being forgotten." A pause. "Stupid, maybe. But there it is."
+(want=seek_comfort stage=0)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 8702 day 52 — conversation with Thabo (thabo_maseko) ===
+occupation=taxi driver temperament=dry trust=84 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Are you going to stay? With us. For real."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_stay:a_tell, ans:q_stay:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "They took me. Duel — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Did you hear? Lorena just walked away from Haven. Didn't look back. I mean it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "I've started talking to myself. Myself gives good advice, mostly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Good question." "Losing another one." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "I'm going to go stare at something else now."
+want final: id=curious stage=3 resolution=engaged

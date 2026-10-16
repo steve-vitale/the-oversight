@@ -1,0 +1,32 @@
+=== seed 8703 day 29 — conversation with Mateo (mateo_alvarez) ===
+occupation=barber temperament=bold trust=47 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+(turn0 choices: agency:ask_field, ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "They took me. The Blood Tithe — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Give it time."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Chen just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Seen worse."
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "The trick to making do is confidence. The trick to confidence is making do. Circular, but it works, friend."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Just... be straight with me."
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

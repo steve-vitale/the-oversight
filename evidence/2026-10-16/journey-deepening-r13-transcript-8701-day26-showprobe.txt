@@ -1,0 +1,32 @@
+=== seed 8701 day 26 — conversation with Terry (gen_rtt4l7m) ===
+occupation=musician temperament=warm trust=63 dead=false mood=cold
+want: curious (stage 1, fromSeed)
+
+THEM: "About your useful old-life skills — What's something from your old life that's actually useful here, friend?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Since Yuki died... I keep expecting to see Yuki at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Ivy just walked away from Haven. Didn't look back. Just... be straight with me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "I keep the good moments in a mental box. Today goes in the box. Just so you know."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Let's move."
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "You want to know about that? Okay." "The smell of smoke that is not a fire." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8703 day 40 — conversation with Hunter (gen_b4yuwm4) ===
+occupation=journalist temperament=steady trust=87 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "Honestly, It's quiet today. Wrong kind of quiet."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Last time things were different. They always are." "We lost Liam and Rosa this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Yeah, that was me. I walked away from Haven once. Didn't look back. ...sorry."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "You want to know about that? Okay." "I've been watching how making do works out here. It's different from before. Everything's different from before."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "Good question." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=ask_favor stage=0)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=unestablished

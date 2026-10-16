@@ -1,0 +1,32 @@
+=== seed 8706 day 66 — conversation with Axel (gen_s3amr7n) ===
+occupation=ESL teacher temperament=dry trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Axel sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, party_name, confront:d_b3pp67c)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "No, really, it's fine. Forget I even asked."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Good question." "Did you hear? Amanda just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Good question." "I've been watching how making do works out here. It's different from before. Everything's different from before."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? I mean it."
+(want=ask_favor stage=2)
+closing line: "I'm going to go stare at something else now."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,32 @@
+=== seed 8708 day 44 — conversation with Juan (gen_yjv2nxz) ===
+occupation=truck driver temperament=bold trust=89 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You said you don't recognize the person in your head anymore. Still a stranger to yourself?"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different. No point pretending otherwise."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "Last time things were different. They always are." "They took you — The Quiet Room, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Mark my words."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Did you hear? Quinn just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "That's the whole story. Short version, long version — same ending."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? That's the truth of it."
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

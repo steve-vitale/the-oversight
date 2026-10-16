@@ -1,0 +1,24 @@
+=== seed 8706 day 79 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=85 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "I tried the White Oak Acorns like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:curious, dlg:more, dlg:react, dlg:doubt, recap, dlg:invite, dlg:subject, confront:d_cgn2k1h, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "You want to know about that? Okay." "People are talking about me. Take it for what it's worth."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=0)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "You want to know about that? Okay." "My brain's buffering on that one. Ask me when it's loaded."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=0)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 8706 day 72 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=71 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+(turn0 choices: ans:q_theory:a_aliens, ans:q_theory:a_test, ans:q_theory:a_shrug, deflect_q, leave, silence)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "They took me. The Wrong Map — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Jada is back. Walked in like they'd never left. You'd know about that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up, friend?"
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "I've gotten good at reading faces. Out here, faces say what words won't. Let's move."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "You want to know about that? Okay." "Children going quiet." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+closing line: "Anyway. I'm glad we talked. Really."
+want final: id=curious stage=3 resolution=engaged

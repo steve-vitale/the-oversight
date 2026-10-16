@@ -1,0 +1,32 @@
+=== seed 8702 day 19 — conversation with Amy (gen_q06uznh) ===
+occupation=Social worker temperament=intense trust=40 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it. Don't look away from this."
+(turn0 choices: ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, deflect_q, leave, silence)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "The Echo. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? I mean it."
+(want=curious stage=2)
+YOU: [ask:gossip] "Anyone saying anything interesting?"
+THEM: "Huh. Let me think about that." "Hear me out — Ava is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? No rush."
+(want=curious stage=2)
+YOU: [ask:personal] "Tell me about yourself — the parts you don't tell everyone."
+THEM: "You want to know about that? Okay." "Do you ever wonder what the aliens eat? Like, do they have potlucks?"
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "Go. Think about what I said. Really think."
+want final: id=curious stage=3 resolution=engaged

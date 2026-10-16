@@ -1,0 +1,32 @@
+=== seed 8703 day 20 — conversation with Hunter (gen_b4yuwm4) ===
+occupation=journalist temperament=steady trust=59 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "Bottom line: That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "They took me. The Informant — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "that stray dog — the one that bit two people — lets Liam touch it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "Sleep's the real currency now. I'm rich in dreams and broke in rest."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "Huh. Let me think about that." "A sky that goes quiet." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

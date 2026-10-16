@@ -1,0 +1,32 @@
+=== seed 8708 day 80 — conversation with Juan (gen_yjv2nxz) ===
+occupation=truck driver temperament=bold trust=89 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can we talk?" Juan doesn't wait for an answer. "We need to discuss how things are run here."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: A pause. When they speak again, it's about something else entirely.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "When's the last time you really laughed?"
+(want=curious stage=2)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You want to know what I did in the raid? I stood down tick at the treeline — it ran. Don't call it brave. Call it awake."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [goon] "And then?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

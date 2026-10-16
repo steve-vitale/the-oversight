@@ -1,0 +1,27 @@
+=== seed 8705 day 45 — conversation with Omar (omar_farouk) ===
+occupation=piano tuner temperament=dry trust=54 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What got you through the first week? The very first days."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time. I mean it."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "The first week's behind us. That counts for something. That counts for a lot."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying when they think I'm not listening?"
+THEM: "You want to know about that? Okay." "Someone should talk to Chloe. Not me, though. But what do I know."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Do try to stay alive. The paperwork otherwise is murder."
+want final: id=curious stage=3 resolution=engaged

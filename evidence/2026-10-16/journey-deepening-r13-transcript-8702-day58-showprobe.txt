@@ -1,0 +1,32 @@
+=== seed 8702 day 58 — conversation with Mara (mara_vasquez) ===
+occupation=army medic temperament=intense trust=77 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? At night I count the stars and name them after people."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. Hm."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "They took me. The Exchange — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Ursula just walked away from Haven. Didn't look back. I mean it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "This matters — Do you think we'll look back on this and call it the good old days? God, I hope not."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+closing line: "Don't forget what we talked about. I won't."
+want final: id=curious stage=3 resolution=engaged

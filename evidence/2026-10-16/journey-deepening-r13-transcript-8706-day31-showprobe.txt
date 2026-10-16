@@ -1,0 +1,30 @@
+=== seed 8706 day 31 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=48 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? I've been sneaking out at night. I'm ashamed and I can't stop."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_cgn2k1h)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "I left. Walked back in like I'd never left, apparently. That is all."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Just... be straight with me."
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "You want to know about that? Okay." "Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Seen worse."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Thank you for listening. Really listening. That's rare."
+want final: id=curious stage=3 resolution=engaged

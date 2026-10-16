@@ -1,0 +1,32 @@
+=== seed 8707 day 34 — conversation with Mara (mara_vasquez) ===
+occupation=army medic temperament=intense trust=50 dead=false mood=steady
+want: seek_comfort (stage 1, fromSeed)
+
+THEM: "About whatever's been weighing on me — Do you ever — no. Never mind." They don't look away, though. They want you to ask.
+(turn0 choices: alive:thread:lately, dlg:cant, dlg:invite, teach, dlg:comfort, dlg:empathize, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_comfort stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Last time things were different. They always are." "You saw it too, right? Duel. Tell me I didn't imagine the lights."
+(want=seek_comfort stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_comfort stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Sari is back. Walked in like they'd never left."
+(want=seek_comfort stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_comfort stage=1)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "You want to know about that? Okay." "Here's what I think — You ever notice how quiet it gets out here at night? Like the world's holding its breath."
+(want=seek_comfort stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=seek_comfort stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Worth considering."
+(want=seek_comfort stage=1)
+closing line: "Think about it. Really think. Then come find me."
+want final: id=seek_comfort stage=3 resolution=unresolved

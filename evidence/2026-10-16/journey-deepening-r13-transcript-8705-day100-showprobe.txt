@@ -1,0 +1,32 @@
+=== seed 8705 day 100 — conversation with Ursula (ursula_weber) ===
+occupation=Mortician temperament=gentle trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether they can trust you — Can I trust you? I mean really."
+(turn0 choices: ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "They took me. Who Ate It? — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Can I be honest? Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Howard? A Beekeeper, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "Some days I'm a mortician who survived. Some days I'm just... surviving. Both count."
+(want=curious stage=2)
+closing line: "Go gently, okay?"
+want final: id=curious stage=3 resolution=engaged

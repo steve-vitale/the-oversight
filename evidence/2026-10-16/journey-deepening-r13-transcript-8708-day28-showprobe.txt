@@ -1,0 +1,32 @@
+=== seed 8708 day 28 — conversation with Nikos (nikos_papadopoulos) ===
+occupation=aquarium keeper temperament=gentle trust=40 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "You look handy. What did you do with your hands, before?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Since Judith died... I keep expecting to see Judith at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? I mean it."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Practical view: Juan sees in the dark. Not well — but better than you. Better than me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up, friend?"
+(want=curious stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "You want to know about that? Okay." "I keep my pack ready. Old aquarium keeper habit — always be ready to leave the office."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Good question." "Don't laugh. Footsteps that stop."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

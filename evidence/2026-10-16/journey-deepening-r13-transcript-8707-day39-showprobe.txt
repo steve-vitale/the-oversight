@@ -1,0 +1,32 @@
+=== seed 8707 day 39 — conversation with Ryan (gen_3jlgqhf) ===
+occupation=exterminator temperament=intense trust=87 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Well now — We never finished talking about what's been happening — we wandered off it, 7 days back. 'Sure — what's on your mind?'"
+(turn0 choices: agency:ask_expedition, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, more, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You'd know about that."
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Yeah, that was me. I walked away from Haven once. Didn't look back. Not that it matters."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Just... be straight with me."
+(want=seek_taken stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "Huh. I answered that once — back when the answer was simpler." "Wheel of Teeth. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Huh. Let me think about that." "The nights are the hardest. Days, you're busy. Nights, you're just... with it all."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=seek_taken stage=0)
+closing line: "We're done here. For now."
+want final: id=seek_taken stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 8705 day 93 — conversation with Howard (gen_qk0ymwh) ===
+occupation=Beekeeper temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What got you through the first week? The very first days…"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Right. Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "They took me. Pattern Hunger — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Chloe is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "Being a beekeeper feels like a past life. Sometimes I wonder if I dreamed it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Huh. Let me think about that." "Being a burden." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

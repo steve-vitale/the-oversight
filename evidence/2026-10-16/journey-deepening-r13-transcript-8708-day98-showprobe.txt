@@ -1,0 +1,32 @@
+=== seed 8708 day 98 — conversation with Leo (leo_martin) ===
+occupation=trail crew lead temperament=restless trust=90 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you make of all this — What do you make of all this? Really."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Mesquite. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Jimsonweed. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Pokeweed. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "What's this about? Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Have you ever hurt someone? Since all this started."
+(want=curious stage=2)
+closing line: "Right — things to do, always things to do."
+want final: id=curious stage=3 resolution=engaged

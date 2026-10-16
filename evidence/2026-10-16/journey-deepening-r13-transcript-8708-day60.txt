@@ -1,0 +1,32 @@
+=== seed 8708 day 60 — conversation with Juan (gen_yjv2nxz) ===
+occupation=truck driver temperament=bold trust=87 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the talking-to-strangers part — ...Hi. Sorry. I'm not good at the talking-to-strangers part."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_quiet:a_kind, ans:q_quiet:a_help, ans:q_quiet:a_leave, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took Nikos — The Pit, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [goon] "And then?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+closing line: "Right. Back to it."
+want final: id=curious stage=3 resolution=engaged

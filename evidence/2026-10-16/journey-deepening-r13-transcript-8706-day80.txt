@@ -1,0 +1,18 @@
+=== seed 8706 day 80 — conversation with Axel (gen_s3amr7n) ===
+occupation=ESL teacher temperament=dry trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about that favor — that was 14 days back. Still on your mind? 'Forget I said anything. What did you want?' We still owe the gossip a proper ending, too."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, silence, party_name, confront:d_b3pp67c)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=ask_favor stage=0)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's handled. Really — it is. I appreciate you asking, though."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "Can't right now."
+THEM: "Oh — no, it's fine. Already handled. But thanks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Well. That was conversation."
+want final: id=ask_favor stage=3 resolution=deflected

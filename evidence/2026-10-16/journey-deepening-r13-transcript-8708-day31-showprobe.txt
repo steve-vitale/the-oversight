@@ -1,0 +1,32 @@
+=== seed 8708 day 31 — conversation with Juan (gen_yjv2nxz) ===
+occupation=truck driver temperament=bold trust=64 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Why do you ask? Judith and I never did finish talking about the gossip — that was 13 days back. You weren't there for that one — Judith was. Want to hear where it left off? 'Take it with salt. What did you want to ask?' We still owe what's been happening a proper ending, too."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? You'd know about that."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "You asked me that before. It's a different question now." "The Secret Deck. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "I've started talking to myself. Myself gives good advice, mostly!"
+(want=curious stage=2)
+closing line: "Remember what we said. Hold me to it."
+want final: id=curious stage=3 resolution=engaged

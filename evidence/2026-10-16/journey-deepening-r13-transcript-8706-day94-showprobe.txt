@@ -1,0 +1,24 @@
+=== seed 8706 day 94 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=91 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Have you — sorry. I keep thinking about them. Anyway."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, confront:d_cgn2k1h, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Did you hear? Amanda just walked away from Haven. Didn't look back."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "So what's your deal?"
+THEM: "You want to know about that? Okay." "That's the whole of it. The director's cut adds nothing."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? That means something."
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "Sorry. I need a minute."
+want final: id=seek_comfort stage=3 resolution=unestablished

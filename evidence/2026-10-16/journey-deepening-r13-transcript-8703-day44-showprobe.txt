@@ -1,0 +1,32 @@
+=== seed 8703 day 44 — conversation with Benoit (benoit_lambert) ===
+occupation=Baker temperament=prickly trust=52 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether they can trust you — Can I trust you? I mean really."
+(turn0 choices: ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Rosa is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? There. Said it."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "The way I read it — Chen is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "Good question." "You're one of the good ones. Don't make me regret saying that out loud." "There. You wanted honest."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "Good question." "The ground giving way underfoot." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "We're done here. Don't make it weird."
+want final: id=curious stage=3 resolution=engaged

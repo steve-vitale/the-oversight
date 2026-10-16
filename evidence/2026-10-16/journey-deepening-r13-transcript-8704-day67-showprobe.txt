@@ -1,0 +1,32 @@
+=== seed 8704 day 67 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=76 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "What's the worst thing you've done since the sky changed?"
+(turn0 choices: ans:q_guilty:a_tell, ans:q_guilty:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "They took me. Hardened The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Tomas touch it. Be kind to yourself, okay?"
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? It'll pass."
+(want=curious stage=2)
+YOU: [ask:personal] "Your story. Go."
+THEM: "You want to know about that? Okay." "I'm from Chengdu, China. The plants here don't look like home. I'm learning. Slowly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want, as it were?"
+(want=curious stage=2)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Good question." "Don't laugh. Never seeing home again."
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

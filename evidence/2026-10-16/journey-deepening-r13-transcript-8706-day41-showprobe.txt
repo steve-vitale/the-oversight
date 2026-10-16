@@ -1,0 +1,32 @@
+=== seed 8706 day 41 — conversation with Axel (gen_s3amr7n) ===
+occupation=ESL teacher temperament=dry trust=91 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you? Just... be straight with me."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:commit, party_name, dlg:cant, recap, teach, dlg:subject, confront:d_b3pp67c, leave)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "You want to know about that? Okay." "Wei? A Beekeeper, back before. Solid person."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "You want to know about that? Okay." "Sleep's the real currency now. I'm rich in dreams and broke in rest."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Extremely normal, all of it."
+(want=ask_favor stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=ask_favor stage=2)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=stated

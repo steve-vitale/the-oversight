@@ -1,0 +1,32 @@
+=== seed 8702 day 66 — conversation with Mara (mara_vasquez) ===
+occupation=army medic temperament=intense trust=83 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I'm achy and wrung out, barely keeping food down. I need help. Please."
+(turn0 choices: alive:thread:secret, alive:thread:lately, dlg:help, dlg:details, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Worth considering."
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "They took me. Lie Detector — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You'd know about that."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Ava is back. Walked in like they'd never left. Makes sense to me."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "The way I read it — I used to need noise to sleep. Now I need silence and I can't find enough of it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Don't look away from this."
+(want=ask_favor stage=1)
+YOU: [ask:fears] "What scares you?"
+THEM: "Huh. Let me think about that." "Don't laugh. The quiet ones watching from the treeline."
+(want=ask_favor stage=1)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=unresolved

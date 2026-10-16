@@ -1,0 +1,32 @@
+=== seed 8701 day 30 — conversation with Ruth (gen_fm9t0ha) ===
+occupation=trail crew lead temperament=bold trust=25 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I'm past hungry — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party, confront:d_ir39ckb)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? It'll pass."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "I'll tell you plain — that stray dog — the one that bit two people — lets Terry touch it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "The trick to finding food is confidence. The trick to confidence is finding food. Circular, but it works."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Doesn't matter now."
+(want=ask_favor stage=1)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Good question." "The fire going out — and now losing people. That one isn't abstract anymore."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Seen worse."
+(want=ask_favor stage=1)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=unresolved

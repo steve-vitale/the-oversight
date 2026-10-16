@@ -1,0 +1,32 @@
+=== seed 8707 day 80 — conversation with Mara (mara_vasquez) ===
+occupation=army medic temperament=intense trust=72 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask this, but whatever this is, it's getting worse — I'm achy and wrung out, barely keeping food down. I need help. Please."
+(turn0 choices: dlg:details, dlg:cant, teach, alive:want:ask_favor, dlg:help, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Do you understand?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You saw it too, right? Hardened Duel. Tell me I didn't imagine the lights."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Did you hear? Thao just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "We've officially talked this one to death. Pour one out."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "Huh. Let me think about that." "You're one of the good ones. Don't make me regret saying that out loud." "That's where we are."
+(want=ask_favor stage=1)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=unresolved

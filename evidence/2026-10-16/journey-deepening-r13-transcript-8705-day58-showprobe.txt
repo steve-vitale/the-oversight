@@ -1,0 +1,32 @@
+=== seed 8705 day 58 — conversation with Howard (gen_qk0ymwh) ===
+occupation=Beekeeper temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "Impress Us. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? But what do I know."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "Can I be honest? I think about who I was in Columbus, Ohio and it feels like reading about a stranger."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

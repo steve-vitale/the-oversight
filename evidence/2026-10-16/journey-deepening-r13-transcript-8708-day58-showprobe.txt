@@ -1,0 +1,32 @@
+=== seed 8708 day 58 — conversation with Nikos (nikos_papadopoulos) ===
+occupation=aquarium keeper temperament=gentle trust=56 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "Here's what I think — God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took me. The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Did you hear? Juan just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? ...if that makes sense."
+(want=curious stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "Why do you ask? I've decided the monsters are just wildlife with better PR. Don't quote me."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Can I be honest? I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "That helped. Thank you for sitting with me."
+want final: id=curious stage=3 resolution=engaged

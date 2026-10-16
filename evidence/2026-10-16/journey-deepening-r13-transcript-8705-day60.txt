@@ -1,0 +1,27 @@
+=== seed 8705 day 60 — conversation with Ines (ines_duarte) ===
+occupation=florist temperament=warm trust=77 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Can I trust you? I mean really. Just... be straight with me."
+(turn0 choices: ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast. How are you holding up, though?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Howard sees in the dark. Not well — but better than you. Better than me. You doing okay?"
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

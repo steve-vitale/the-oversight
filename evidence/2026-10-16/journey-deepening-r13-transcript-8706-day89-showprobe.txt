@@ -1,0 +1,32 @@
+=== seed 8706 day 89 — conversation with Axel (gen_s3amr7n) ===
+occupation=ESL teacher temperament=dry trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Axel sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, silence, party_name, confront:d_b3pp67c)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "All sorted. Some things just work out."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? But what do I know."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "You want to know about that? Okay." "Wei told you that?" Axel gives you a long look. "Then Wei told you wrong. A Beekeeper — that's the one I know."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Good question." "I tell myself Columbus, Ohio is still there. It helps on the bad nights."
+(want=ask_favor stage=2)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=stated
