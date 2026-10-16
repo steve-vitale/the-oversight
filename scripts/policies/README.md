@@ -91,6 +91,26 @@ observed public actions for peer claims.
 
 ## Adding a policy
 
+The opt-in `capable-voice-ready`, `maker-voice-ready`, `merchant-voice-ready`
+and `caregiver-voice-ready` inherit their named base's work, offers, combat,
+contest and pending choices. Optional ctx.godDayIntent and ctx.beforeKnownFight
+callbacks let them price Be Heard without replacing game methods or NPC brains.
+They preserve a post-word max(500kcal,40% bank) and75 own humanity, use known
+god prices, and require a living other member with progressive-trust room for
+a social cast. At ordinary+2,90+ trust is not useful room. Unknown prices/trust
+do not become free power or invented need. Known-fight callbacks prepare at
+an existing hunt approach or actual raid help choice; no additional hunt,
+contest forecast or early God grant is introduced. Other daily god choices
+stay as before. Meter/trust inputs use existing game state APIs; exact native
+HUD readability is a separate question, not established by these policies.
+
+Use all four originals as controls. Run `policy-scorecard.js` for explicitly
+mapped same-panel strategy pairs, not balance-panel's game-only comparator.
+The fixed16-screen/64-disjoint-holdout experiment and named tradeoffs are in
+`evidence/2026-10-16/voice-policy-audit.md`. They remain opt-in; no total-win
+target justifies default adoption. Preserve cohort identity, region, time,
+source and contract when sharing results with Muse.
+
 1. Copy `kind.js` (smallest layering example).
 2. Build on `competent` via `Object.assign({}, competent, {...})` unless you
    genuinely need a different base — say why in the header.

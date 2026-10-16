@@ -1,0 +1,21 @@
+'use strict';
+const fs=require('fs'),z=require('zlib'),path=require('path'),K=require('./lib'),T=K.reporter('policy-scorecard'),{comparePolicies}=require('../policy-scorecard');
+const panel=JSON.parse(z.gunzipSync(fs.readFileSync(path.join(K.ROOT,'evidence/2026-10-16/daily-voice-after-panel.json.gz'))));
+const pairs=[['capable','maker'],['merchant','caregiver']],r=comparePolicies(panel,pairs);
+T.ok('real complete same-source panel supports explicitly named strategy pairs',r.experimentKind==='paired-policy-strategy'&&r.errors.length===0&&r.policies.length===2&&r.policies.every(p=>p.cases===64&&p.metrics.length===23&&p.control!==p.candidate));
+T.ok('strategy report preserves the original control and candidate win measurements',r.policies[0].metrics.find(m=>m.id==='won').before===57/64&&r.policies[0].metrics.find(m=>m.id==='won').after===18/64);
+function invalid(label,edit,selected=pairs){const p=JSON.parse(JSON.stringify(panel));edit(p);T.ok(label,comparePolicies(p,selected).decision==='invalid');}
+invalid('missing cases cannot produce a strategy verdict',p=>p.rows.pop());
+invalid('an unsupported panel protocol cannot produce a strategy verdict',p=>p.schemaVersion=99);
+invalid('duplicate cases cannot produce a strategy verdict',p=>p.rows[1]=p.rows[0]);
+invalid('unproven observer neutrality cannot produce a strategy verdict',p=>p.validity.neutrality=[]);
+invalid('changed sources cannot produce a strategy verdict',p=>p.validity.sourcesStable=false);
+invalid('altered source manifest cannot produce a strategy verdict',p=>p.sources['src/js/godverbs.js']='invented');
+invalid('different metric contract cannot produce a strategy verdict',p=>p.contractDigest='old-contract');
+invalid('runtime warnings cannot produce a strategy verdict',p=>p.rows[0].warnings.push('unresolved'));
+invalid('missing metrics cannot silently become unknown values',p=>delete p.rows[0].metrics.lowFood);
+invalid('invalid metric values cannot silently become unknown values',p=>p.rows[0].metrics.lowFood='unknown');
+invalid('one strategy cannot be both control and candidate',()=>{},[['capable','capable']]);
+invalid('a paired identity cannot be silently reused',()=>{},[['capable','maker'],['maker','merchant']]);
+invalid('unknown strategy names cannot produce a comparison',()=>{},[['capable','missing']]);
+T.done();

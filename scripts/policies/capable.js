@@ -1073,6 +1073,7 @@ function deedHunt(Game, ctx) {
     // with no grid position is not approached (startCombat would stack
     // everyone on one tile).
     if (here.mx == null || here.my == null) { bump(ctx, 'capHuntNoPos'); ctx._capFeastCommit = false; return; }
+    if (ctx.beforeKnownFight) ctx.beforeKnownFight(Game, { kind: 'deed', monster: here.id });
     const sx = () => (Game.state.scholar.mx != null ? Game.state.scholar.mx : 4), sy = () => (Game.state.scholar.my != null ? Game.state.scholar.my : 4);
     const near = () => Math.max(Math.abs(here.mx - sx()), Math.abs(here.my - sy())) <= 1;
     if (!near()) {
@@ -1193,9 +1194,10 @@ function raidCall(Game, ctx) {
     let stage = 0;
     try { stage = Game.integrationStage ? Game.integrationStage() : 0; } catch (e) { stage = 0; }
     let tier = null;
-    if (cries.length) { tier = 'cry'; Game.callForHelp('cry', { abilityId: cries[0].id }); }
-    else if (!(Game.aidRoadHot && Game.aidRoadHot())) { tier = 'runner'; Game.callForHelp('runner'); }
-    else if (stage >= 2) { tier = 'system'; Game.callForHelp('system'); }
+    const prepare = () => { if (ctx.beforeKnownFight) ctx.beforeKnownFight(Game, { kind: 'raid' }); };
+    if (cries.length) { prepare(); tier = 'cry'; Game.callForHelp('cry', { abilityId: cries[0].id }); }
+    else if (!(Game.aidRoadHot && Game.aidRoadHot())) { prepare(); tier = 'runner'; Game.callForHelp('runner'); }
+    else if (stage >= 2) { prepare(); tier = 'system'; Game.callForHelp('system'); }
     const c2 = Game.aidCrisis ? Game.aidCrisis() : null;
     if (tier && c2 && (c2.calls || []).length > n0) { bump(ctx, 'capAidCalls'); bumpMap(ctx, 'capAidByTier', tier); }
   } catch (e) { note(ctx, 'raidCall: ' + e.message); }
@@ -1234,6 +1236,7 @@ function godDay(Game, ctx) {
     if (!Game.godActivatables || Game.inCombat()) return;
     for (const a of Game.godActivatables()) {
       if (!a.available || a.combat) continue;
+      if (ctx.godDayIntent && !ctx.godDayIntent(Game, a)) continue;
       if (Game.useAbility('god', a.actionId)) bump(ctx, 'capGodDayUses');
       if (Game.over || Game.inCombat()) break;
     }

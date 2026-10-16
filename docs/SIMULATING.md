@@ -316,6 +316,31 @@ parity remains open.
 
 ## Maintaining measurement
 
+Strategy experiments on one source: use `scripts/policy-scorecard.js` with
+explicit control:candidate pairs. It keeps the23 existing metric contracts,
+requires complete same-source panels, passing neutrality and no warnings,
+and labels results as strategies. Do not relabel a policy choice as a game-only
+balance change or weaken balance-panel's policy/harness mismatch guard.
+
+```text
+node scripts/policy-scorecard.js --panel <panel.json.gz> --pairs capable:capable-voice-ready,maker:maker-voice-ready,merchant:merchant-voice-ready,caregiver:caregiver-voice-ready --out <report-prefix>
+```
+
+The voice-ready cohorts retain their base's work/offer/encounter choices.
+Their explicit preference keeps at least max(500kcal,40% of bank) and75 own
+grounding immediately after Be Heard. It does not promise those reserves
+after subsequent combat, travel or other abilities. Social casts need a known
+living other member below the progressive ceiling (ordinary+2 stops at90).
+Callbacks run only at already chosen visible hunt/raid actions; contest
+interruptions are not forecast or bypassed. Meter/trust inputs are game API
+state, not proof that native HUD exposes every exact value. Keep defaults
+as controls and use disjoint holdouts; the dated voice-policy audit records
+the fixed plan, source, warnings, opportunity windows and named losses.
+
+Quick/full discovers test-voice-preparation.js and test-policy-scorecard.js.
+Maintain actual paid action/recipient proof, resource boundaries, real raid
+caller, inherited playstyle handlers and invalid strategy-panel guards together.
+
 Daily Voice upkeep: `scripts/godpath/test-daily-voice.js` runs automatically
 in quick/full. Preserve actual paid action → real constructor/turn entry →
 damage/expiry → save/reload, plus late/dead/fled/hostile/self-alias cases.

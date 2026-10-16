@@ -50,6 +50,7 @@ try { POLICY_REGISTRY['oraclev2'] = require('./policies/oracleV2').oraclev2 || r
 try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catch (e) { console.warn('capable policy failed to load: ' + e.message); }
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
 for (const id of ['merchant', 'maker', 'caregiver']) POLICY_REGISTRY[id] = require('./policies/livelihood')[id];
+for (const id of ['capable-voice-ready', 'maker-voice-ready', 'merchant-voice-ready', 'caregiver-voice-ready']) POLICY_REGISTRY[id] = require('./policies/voice-preparation')[id];
 for (const id of ['merchant-hoarder', 'merchant-dealer']) POLICY_REGISTRY[id] = require('./policies/miser-intent')[id];
 for (const id of ['campaigner', 'campaigner-control']) POLICY_REGISTRY[id] = require('./policies/campaigner')[id];
 for (const id of ['covenanter', 'charterer', 'peer-control']) POLICY_REGISTRY[id] = require('./policies/peer-league')[id];

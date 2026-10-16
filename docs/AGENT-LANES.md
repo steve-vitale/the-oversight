@@ -14,6 +14,12 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Voice preparation experiment (2026-10-16): Codex owns optional capable
+policy intent/known-fight callbacks, four opt-in voice-ready cohorts and
+the same-panel paired-policy scorecard. Default work/offer/encounter choices
+and all runtime/data stay fixed. Keep these as named strategies, not a game
+buff or new defaults. See ../evidence/2026-10-16/voice-policy-audit.md.
+
 Daily Voice (2026-10-16): Codex owns godverbs.js's shared first-own-turn
 daily rally hook for player/NPC recipients and its save/expiry proof. Keep
 the existing150kcal/five-grounding daily price and three active turns. The

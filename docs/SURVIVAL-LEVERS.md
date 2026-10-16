@@ -61,6 +61,20 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Voice preparation strategy (2026-10-16): no game lever changes. Named opt-in
+cohorts keep40%/500kcal and75 humanity after the word, decline zero ordinary
+trust benefit at90+, and can pay before a chosen visible encounter. These
+are strategy preferences, not new hunger/grounding gates for humans. Costs,
+progressive trust, full-conversion threshold and current food rules are reused.
+Other actions can spend the retained resources later. In64 disjoint holdouts,
+wins51→50 /20→23 /26→27 /31→33 and deaths86→84 /83→82 /59→59 /41→36
+(capable/maker/merchant/caregiver). Community losses12→13 /26→25 /27→25 /
+19→18; class and good-gear access are unchanged. Preserve capable's one
+extra community loss, caregiver's small low-health increase and the changed
+win rates beside resource gains. Keep original defaults and named strategies
+available; do not call the larger total a game-balance improvement. See
+../evidence/2026-10-16/voice-policy-audit.md for all23 metrics and loss replays.
+
 Daily Voice recipients (2026-10-16): Be Heard's unchanged150kcal and five
 grounding now buy the existing daily rally for the player as well as NPCs.
 Four counters are set before the ordinary own-turn decrement, preserving

@@ -9,6 +9,27 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Voice preparation policy (2026-10-16): four opt-in voice-ready cohorts now
+price the known daily word against food, own humanity and progressive-trust
+need, and can prepare before existing visible hunt/raid actions. Same-source
+strategy-pair reports retain all23 metrics. The16-seed screen and64 disjoint
+holdouts are in ../evidence/2026-10-16/voice-policy-audit.md; original controls
+stay default. Capable loses one holdout win and has one additional community
+loss while other strategies gain wins: keep the tradeoffs, not an overall
+optimization verdict. The two lost holdout wins (capable/caregiver10036) retain
+the original reactor bearer without the feast-use deed, while controls die and
+their successors reach the Table. This reinforces the existing reactor question;
+do not force death or waive its gate. Contest
+interruptions and broader god/titan/Network policy coverage remain open.
+
+New runtime finding from the preparation audit: a player crossing into fraying
+calls bumpTrust(null,-2). Real roster trust stays unchanged while v.trust.null
+becomes8 (or decreases further). The average-trust reader includes all values.
+Audit the intended social price and remove the phantom key deliberately in
+a separate runtime/save compatibility unit; no penalty repair is hidden in
+this strategy experiment. Native exact humanity/trust readout coverage also
+needs separate UI audit; the prepared phone readouts are diagnostic.
+
 Daily Voice (2026-10-16): real player turn entry now receives the existing
 paid day's rally, with finite own-turn expiry, saved recipient gate and
 late-NPC parity. Shared-kit and native phone proof are in
