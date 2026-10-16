@@ -2588,45 +2588,6 @@ const competent = {
       if (ctx._fightObj !== f) {
         ctx._fightObj = f;
         dpsRaceInit(ctx); // DPS-race assessment (scale-wall r1): snapshot the race baseline
-        // LEARNFIGHT (scale-onramp learn-vs-fight 2026-10-16, via
-        // ctx._learnFight — set only by the learnfight wrapper when
-        // LEARNFIGHT=1): Steve's LEARN-VS-FIGHT default — when an
-        // undiscovered wave-3+ trick-carrier comes to the village, the
-        // scholar's default is LEARN, not FIGHT: give ground and watch
-        // instead of engaging blade-first. The engine's own survived-
-        // encounter funnel teaches (noteScholarTrickObservation on the
-        // fled end); the layer invents no knowledge. The withdrawal
-        // PERSISTS across turns (ctx._lfWitnessFight): a single flee()
-        // only starts the walk to the edge — without persistence the
-        // base fights normally from turn 2 and the "witness" is a lie
-        // (seed 161: narrated witness, then killed the spool anyway).
-        // PARTY-AWARE (finding #353): the wrapper never sets _learnFight
-        // while villagers are committed to this fight (and clears it if
-        // they join mid-withdrawal), so this never abandons villagers
-        // mid-fight — witness, don't flee; hold when they're committed.
-        // Gate off = the block below, byte-identical.
-        if (ctx._learnFight) {
-          try {
-            let _lfMid = null;
-            try {
-              for (const _m of (f.fighters || [])) {
-                if (!_m || _m.kind !== 'monster' || ((_m.hp || 0) <= 0)) continue;
-                const _mm = _m.monsterId || ((_m.mdef || {}).id) || null;
-                if (_mm) { _lfMid = _mm; break; }
-              }
-            } catch (e) {}
-            let _lfName = 'the beast';
-            try { if (_lfMid && Game.monsterDisplayName) _lfName = Game.monsterDisplayName(_lfMid) || _lfName; } catch (e) {}
-            // the display name may already carry its article ("The Terms of
-            // Service") — never compose "the The X".
-            try { if (!/^(the|a|an)\s/i.test(_lfName)) _lfName = 'the ' + _lfName; } catch (e) {}
-            Game.say(`You don't meet ${_lfName} blade-first — not tonight. You give ground instead, watching it all the way: how it moves, how it breathes, where its eyes go. Learning, not fighting. (witness posture)`);
-            ctx.lfWitnessed = (ctx.lfWitnessed || 0) + 1;
-            ctx._lfWitnessFight = f;
-            const fr = flee();
-            if (fr) return true;
-          } catch (e) {}
-        }
         // FIGHT-ASSESS (longsim scale-wall r3, gate COMPETENT_FIGHT_ASSESS=1):
         // knowledge-gated damage-race assessment at turn 1, full HP —
         // proactive disengage of a lost race, instead of the legacy
@@ -2677,18 +2638,6 @@ const competent = {
           }
         } catch (e) {}
       }
-      // LEARNFIGHT WITHDRAWAL (persist): a witness-fight's disengage spans
-      // turns — keep giving ground until the fight ends or the mark clears
-      // (the wrapper clears _learnFight if villagers join, the trick is
-      // learned, or the scholar drops below 50% — then the base owns the
-      // fight again). No re-narration: the turn-1 beat said it.
-      if (ctx._lfWitnessFight === f && ctx._learnFight) {
-        try {
-          const fr = flee();
-          if (fr) return true;
-        } catch (e) {}
-      }
-      if (ctx._lfWitnessFight && ctx._lfWitnessFight !== f) ctx._lfWitnessFight = null;
       // COURTKILL (scale-wall r18 arm 1, via ctx._huntCommit): committed wave-3
       // hunts hold to 12% — the r16 finding says these are winnable
       // attritions and cheat-death usually holds (103/104); fleeing at 35%
