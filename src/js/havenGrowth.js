@@ -517,9 +517,14 @@
         }
       } catch (e) {}
       // defenders: healthy villagers at home. Real fights, not rolls.
+      // SHELTER (2026-10-16): sheltered villagers do not come out to meet
+      // raiders — the muster discipline is "outlast it," not "feed it."
+      // The honest cost is the existing linger path below: unmet raiders
+      // gorge nightly until driven off. Lives vs pantry, legible.
       const defenders = (v.roster || []).filter(id =>
         id !== this.villagerId &&
         !(v.away && v.away[id]) &&
+        !(this.isSheltered && this.isSheltered(id)) &&
         ((v.health || {})[id] === undefined || (v.health || {})[id] > 40));
       // FACILITATION (journey-endgame r7 2026-10-13): tableFacilitate('shield')
       // promises "the village's fights will spend others first" — shielded

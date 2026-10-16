@@ -6080,6 +6080,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (leadVid === this.villagerId) continue;
         if (!(v.roster || []).includes(leadVid)) { delete v.taskLeads[task]; continue; }
         if ((v.assignments || {})[leadVid]) continue;
+        // SHELTER (2026-10-16): a mustered lead is inside, not working their domain.
+        if (this.isSheltered && this.isSheltered(leadVid)) continue;
         try { this.resolveOneAssignment(leadVid, { task }); } catch (e) {}
       }
       const asg = v.assignments || {};
@@ -6092,6 +6094,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const a = asg[vid];
         // must be alive and still in roster
         if (!(v.roster || []).includes(vid)) { delete asg[vid]; continue; }
+        // SHELTER (2026-10-16): mustered villagers are inside, not working.
+        // The assignment is KEPT (not deleted) — they resume it on release.
+        // This is the verb's honest cost: shelter trades production for lives.
+        if (this.isSheltered && this.isSheltered(vid)) continue;
         // PARTY-BOND (2026-10-12): fitness gate at resolution too — wounds
         // happen mid-part, and task leads assign themselves. Under 40 HP,
         // outdoor work becomes rest. Honest, narrated.
@@ -18170,7 +18176,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const m of [...this.worldMonsters()]) {
         if (m.tx === this.map.px && m.ty === this.map.py) continue; // your fight is yours
         let npcIds = [];
-        try { npcIds = this.npcsOnNode(m.tx, m.ty).filter(id => (v.roster || []).includes(id)); } catch (e) {}
+        // SHELTER (2026-10-16): sheltered villagers are behind the barricaded
+        // hall door — not on the grounds to be jumped. The muster beat finally
+        // has a mechanism (sim-siegeroster 2026-10-15: "narration without a mechanism").
+        try { npcIds = this.npcsOnNode(m.tx, m.ty).filter(id => (v.roster || []).includes(id) && !(this.isSheltered && this.isSheltered(id))); } catch (e) {}
         if (!npcIds.length) continue;
         if (Math.random() > 0.5) continue; // not every tick is a bloodbath
         const vid = npcIds[Math.floor(Math.random() * npcIds.length)];

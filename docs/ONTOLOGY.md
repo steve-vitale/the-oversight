@@ -1332,6 +1332,19 @@ In-world discovery of the scale ladder — traveler word, villager mentions, Sys
 
 **Consumes:** state.otherVillages, state.scholar.day
 
+### shelter (`shelter.js`)
+The shelter/evacuate verb — engine-honest villager protection during apex threats (sim-siegeroster 2026-10-15: the muster beat fired and read well but moved nothing because no verb existed to move villagers off a threatened tile). shelterVillagers() moves villagers to Haven, inside the hall, behind a barricaded door: the wild router cannot jump them, the raid draft cannot spend them, duties skip them (they are mustered, not working). The cost is legible — lost production while sheltered, and unmet raiders linger and gorge (the existing havenGrowth mechanic). Release returns them to agency; inside is home, their own duties move them back out.
+
+**Provides:** shelterThreatNearHaven(), shelterVillagers(vids, opts), shelterEveryoneBut(exceptVids, opts), releaseShelter(vids), shelterAllClear(), isSheltered(vid), shelteredVillagers()
+
+**Rules:**
+- engine_honest_movement: sheltering moves real node state (npcSetNode) and the real door sub-state (npcSetInside) — never narration alone (code: shelter.js — shelterVillagers)
+- protection_is_mechanical: the wild jump, raid draft, and duty loops each exclude sheltered villagers by flag read, not by beat text (code: shelter.js — isSheltered; game.js — villagerMonsterTick; havenGrowth.js — havenRaidTick; game.js — duty loops)
+- shelter_has_cost: sheltered villagers perform no duties and still eat — over-sheltering starves the village through lost production, which is the policy's episode-length pressure, not a verb bug (code: shelter.js — duty skip)
+- scholar_never_auto_sheltered: the verb skips the player's villager id — the scholar is the player's, never mustered by policy (code: shelter.js — shelterVillagers)
+
+**Consumes:** —
+
 ### signature-wave3a (`sigW3a.js`)
 Wave-3 batch-A signature combat mechanics (Steve 2026-10-10): The Redactor (point-then-redact cycle with decoy/quiet counterplay), Gavel (trial with mid-trial motions + frontal sound-block shield), The Focus Group (audible visible ratings, damageable mouth-head parts, marking eye-heads, boredom walkout). Hooks register into MonsterBehaviorHooks; player verbs are tracked via light wraps; damage modifiers route through one tbDamage wrap. Telegraph honesty: every telegraph states the real next effect.
 
