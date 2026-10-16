@@ -2739,7 +2739,11 @@
   // Speaks once, clearly — the original's "Nothing raw to cook" is swallowed
   // when the fire actually cooked something.
   const origCookAll = G.cookAll;
-  G.cookAll = function () {
+  G.cookAll = function (container) {
+    // BATCH SCOPE (design call 6, 2026-10-16): the container threads through
+    // the whole wrapper — fuel check, spoilage sweep, meat/plant pipeline,
+    // blind-cook scaling. Defaults to the pack, exactly as before.
+    const inv = container || this.state.scholar.inventory || [];
     // TENT FIRE COUNTS (break-it camps-8 2026-10-09): the interior tent fire
     // is a real fire — cookInTent cooks on it. nearFire() only sees grid
     // cells; without this the tent-room Cook button (shown when the fire pan
@@ -2754,8 +2758,7 @@
     // dies mid-batch downgrades every batch outcome one step, same fiction.
     // No fuel burns when there's nothing to cook.
     const knowsCook = this.knowsTechnique('cook');
-    const inv0 = this.state.scholar.inventory || [];
-    const anyCookable = inv0.some(i => i && (i.rawKcal ||
+    const anyCookable = inv.some(i => i && (i.rawKcal ||
       (i.foodKind === 'meat' && (i.foodState === 'cleaned' || i.undercooked)) ||
       (i.foodKind === 'plant' && i.needsCooking && i.diseaseRisk)));
     const fuelDied = anyCookable && this.consumeCookFire(16) === 'died';
@@ -2764,15 +2767,15 @@
     const origSay = this.say;
     this.say = (m) => captured.push(String(m));
     // snapshot legacy raw items so messy cooking can scale what orig cooked
-    const rawBefore = new Set((this.state.scholar.inventory || []).filter(i => i.rawKcal));
+    const rawBefore = new Set(inv.filter(i => i.rawKcal));
     let r;
-    try { r = origCookAll.call(this); } finally { this.say = origSay; this._cookAllFuelDied = null; }
+    try { r = origCookAll.call(this, container); } finally { this.say = origSay; this._cookAllFuelDied = null; }
     if (fuelDied) captured.push('The fire dies halfway through the batch — everything comes out scorched and uneven, a step worse than it should be.');
     const origCooked = captured.some(m => m.startsWith('Cooked '));
     // FOOD REALITY: cooking is a technique. Blind attempts work but uneven
     // (85%) — and teach. Specialists (askSpecialist) do it better.
     if (!knowsCook) {
-      for (const item of (this.state.scholar.inventory || [])) {
+      for (const item of inv) {
         if (rawBefore.has(item) && !item.rawKcal) {
           item.kcalEach = Math.round((item.kcalEach || 0) * 0.85);
         }
@@ -2802,17 +2805,16 @@
     // boundary like every other player-side guard (cookFood, preserveFood,
     // askSpecialist). Discard honestly — "leave it for the flies".
     {
-      const binv = this.state.scholar.inventory || [];
-      for (let ri = binv.length - 1; ri >= 0; ri--) {
-        const rit = binv[ri];
+      for (let ri = inv.length - 1; ri >= 0; ri--) {
+        const rit = inv[ri];
         if (rit && rit.foodKind === 'meat' && (rit.foodState === 'cleaned' || rit.undercooked)
             && this.isSpoiled && this.isSpoiled(rit)) {
           captured.push(`The ${rit.name} went bad — cooking won't save it. You leave it for the flies.`);
-          binv.splice(ri, 1);
+          inv.splice(ri, 1);
         }
       }
     }
-    for (const item of (this.state.scholar.inventory || [])) {
+    for (const item of inv) {
       if (item.foodKind === 'meat' && (item.foodState === 'cleaned' || item.undercooked)) {
         const mId = (item.plantId || '').replace(/^meat_/, '');
         const isMon = this.monsterMeatGated(mId);

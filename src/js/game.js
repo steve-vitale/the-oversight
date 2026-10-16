@@ -14038,10 +14038,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return anyFire && lasts;
     },
 
-    // cookAll: cook everything raw in inventory (at a fire).
+    // cookAll: cook everything raw in a container (default: your pack) at a fire.
     // COSTS WATER: 1L per item. Beans and rice need water. No pots, just fire + water.
     // Tradeoff: spend water, get safe + more calories. Or eat raw and risk sickness.
-    cookAll() {
+    // BATCH SCOPE (design call 6, 2026-10-16): the batch verb sees the
+    // container it's pointed at — the single-item cookFood already took one,
+    // the batch didn't. Counter batch buttons pass the stash.
+    cookAll(container) {
+      const inv = container || this.state.scholar.inventory || [];
       // camp_cook: L1 half water + 10% kcal, L2 no water, L3 +25% kcal.
       const cookLvl = this.abilityLevel('camp_cook');
       const waterMult = cookLvl >= 2 ? 0 : cookLvl >= 1 ? 0.5 : 1;
@@ -14055,7 +14059,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let batchOutcome = this.cookOutcome(true);
       if (this._cookAllFuelDied) batchOutcome = this.downgradeOutcome(batchOutcome);
       let n = 0, waterUsed = 0, wellUsed = 0;
-      for (const item of (this.state.scholar.inventory || [])) {
+      for (const item of inv) {
         if (item.rawKcal) {
           // needs water? 1L per UNIT (5 beans = 5L), discounted by camp_cook.
           const needsWater = item.needsCooking; // beans, rice

@@ -14376,6 +14376,24 @@
       html += `</p>`;
     }
     html += `<p class="small"><button class="btn ghost sm" data-stash-stage>Stage unprocessed</button> <button class="btn ghost sm" data-stash-putaway>Put away finished food</button>`;
+    // BATCH VERBS (design call 6, 2026-10-16): the counter is the mission
+    // board — the batch forms act on the STASH, with honest counts of what
+    // the verb will actually touch (spoiled items are dropped by the verb,
+    // so they don't count). Pack batch buttons keep acting on the pack.
+    try {
+      const spoiled = (it) => { try { return Game.isSpoiled(it); } catch (e) { return false; } };
+      const nClean = stash.filter(it => it && it.foodState === 'carcass' && !spoiled(it)).length;
+      const nCook = stash.filter(it => it && (it.rawKcal ||
+        (it.foodKind === 'meat' && (it.foodState === 'cleaned' || it.undercooked) && !spoiled(it)) ||
+        (it.foodKind === 'plant' && it.needsCooking && it.diseaseRisk))).length;
+      const nSmoke = stash.filter(it => it && it.foodKind === 'meat' &&
+        (it.foodState === 'cleaned' || it.foodState === 'cooked') && !spoiled(it)).length;
+      const nRender = stash.filter(it => it && it.foodKind === 'fat' && it.foodState === 'raw' && !spoiled(it)).length;
+      if (nClean) html += ` <button class="btn ghost sm" data-stash-cleanall>Clean all (${nClean})</button>`;
+      if (nCook) html += ` <button class="btn ghost sm" data-stash-cookall>Cook all (${nCook})</button>`;
+      if (nSmoke) html += ` <button class="btn ghost sm" data-stash-smokeall>Smoke all (${nSmoke})</button>`;
+      if (nRender) html += ` <button class="btn ghost sm" data-stash-renderall>Render all (${nRender})</button>`;
+    } catch (e) {}
     // PEMMICAN (break-it food 2026-10-09): the known PRESERVATION.md gap —
     // render/pemmican were never wired for the counter path. The engine
     // takes a container; the UI just never passed the stash. Now it does.
@@ -14973,6 +14991,13 @@
     // PRESERVATION.md gap — engine took a container, UI never passed it.
     slot.querySelectorAll('[data-stash-render]').forEach(b => b.onclick = rewire(() => Game.renderFat(+b.dataset.stashRender, stashOf()), 'Rendered.'));
     slot.querySelectorAll('[data-stash-pemmican]').forEach(b => b.onclick = rewire(() => Game.makePemmican(stashOf()), 'Pemmican made.'));
+    // BATCH VERBS (design call 6, 2026-10-16): the batch forms act on the
+    // stash counter — the engine already took containers for clean/smoke/
+    // render; cookAll grew one in this change.
+    slot.querySelectorAll('[data-stash-cleanall]').forEach(b => b.onclick = rewire(() => Game.cleanCarcass(undefined, stashOf()), 'Cleaned.'));
+    slot.querySelectorAll('[data-stash-cookall]').forEach(b => b.onclick = rewire(() => Game.cookAll(stashOf()), 'Cooked.'));
+    slot.querySelectorAll('[data-stash-smokeall]').forEach(b => b.onclick = rewire(() => Game.preserveFood(undefined, stashOf()), 'Smoked.'));
+    slot.querySelectorAll('[data-stash-renderall]').forEach(b => b.onclick = rewire(() => Game.renderFat(undefined, stashOf()), 'Rendered.'));
     slot.querySelectorAll('[data-stash-asksmoke]').forEach(b => b.onclick = rewire(() => Game.askSpecialist(b.dataset.vid, +b.dataset.stashAsksmoke, stashOf(), 'preserver'), 'A specialist handles it.'));
     slot.querySelectorAll('[data-equip-w]').forEach(b => b.onclick = rewire(() => {
       // GEAR SLOTS (Steve 2026-10-07): route to melee or ranged by item type.
