@@ -1,0 +1,27 @@
+=== seed 8501 day 140 — conversation with Vito (gen_dlvzapw) ===
+occupation=programmer temperament=withdrawn trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I still haven't found anyone. Any chance?"
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, dlg:subject, confront:d_bsapmu4, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Liam is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Liam said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Liam's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=promised

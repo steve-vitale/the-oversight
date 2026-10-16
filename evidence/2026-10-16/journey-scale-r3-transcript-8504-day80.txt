@@ -1,0 +1,27 @@
+=== seed 8504 day 80 — conversation with Ivy (ivy_wang) ===
+occupation=journalist temperament=cautious trust=18 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you still sing — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing. That is all."
+(turn0 choices: ans:q_song:a_yes, ans:q_song:a_no, ans:q_song:a_deflect, ans:q_song:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Good question." "Did you hear? Pavel just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

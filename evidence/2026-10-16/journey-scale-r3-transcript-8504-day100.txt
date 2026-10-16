@@ -1,0 +1,24 @@
+=== seed 8504 day 100 — conversation with Ivy (ivy_wang) ===
+occupation=journalist temperament=cautious trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you believe in — Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Maybe — Did you hear? Catalina just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Careful out there. I mean it."
+want final: id=curious stage=3 resolution=engaged

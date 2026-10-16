@@ -1,0 +1,27 @@
+=== seed 8504 day 120 — conversation with Franziska (visjoin_101) ===
+occupation=Sailor temperament=dry trust=57 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether they can trust you — Can I trust you? I mean really. Allegedly."
+(turn0 choices: ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Trust is slow out here. That's fine. Slow things last."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Can I be honest? Did you hear? Rose just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "File that under 'productive.' Loosely defined."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,21 @@
+=== seed 8507 day 100 — conversation with Denise (gen_1m9pcvs) ===
+occupation=electrician temperament=prickly trust=88 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's the worst thing you've done since the sky changed? Don't make me repeat it."
+(turn0 choices: agency:ask_expedition, ans:q_guilty:a_tell, ans:q_guilty:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "You want to know about that? Okay." "Victor is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Go on. I've got... things."
+want final: id=curious stage=3 resolution=engaged

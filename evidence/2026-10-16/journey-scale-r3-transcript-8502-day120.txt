@@ -1,0 +1,24 @@
+=== seed 8502 day 120 — conversation with Stan (stan_kowalski) ===
+occupation=exterminator temperament=dry trust=46 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Is there someone here you don't trust? Be honest."
+(turn0 choices: ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Thabo touch it."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged

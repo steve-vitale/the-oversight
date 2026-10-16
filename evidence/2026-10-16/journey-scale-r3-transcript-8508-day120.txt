@@ -1,0 +1,23 @@
+=== seed 8508 day 120 — conversation with Amanda (app_mgpsphif719) ===
+occupation=carpenter temperament=withdrawn trust=31 dead=false mood=steady
+want: just_company (stage 0)
+
+THEM: "Can we talk?" Amanda sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=just_company stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Fatima? A paramedic, back before. Solid person. Take your time with it."
+(want=just_company stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=just_company stage=0)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=just_company stage=0)
+YOU: [goon] "And?"
+THEM: "They're already drifting away. "Later."
+(want=just_company stage=0)
+YOU: (leave)
+want final: id=just_company stage=3 resolution=unestablished

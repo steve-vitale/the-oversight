@@ -1,0 +1,24 @@
+=== seed 8503 day 120 — conversation with Moana (gen_mj4d5ft) ===
+occupation=emergency dispatcher temperament=stoic trust=91 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "The brain keeps what it needs. I wonder what it's keeping from all this."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Zandile? A carpenter, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

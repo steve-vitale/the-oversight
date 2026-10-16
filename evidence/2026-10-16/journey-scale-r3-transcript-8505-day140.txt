@@ -1,0 +1,32 @@
+=== seed 8505 day 140 — conversation with Omar (omar_farouk) ===
+occupation=piano tuner temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the creek water run — we got it handled. Thanks anyway."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:ask_favor, alive:event:mourning, dlg:help, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "All sorted. Some things just work out."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Sam is gone and Deirdre is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I retie every loose knot in passing. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I retie every loose knot in passing for Deirdre, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [goon] "Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=2)
+closing line: "Sorry. I need a minute."
+want final: id=ask_favor stage=3 resolution=stated

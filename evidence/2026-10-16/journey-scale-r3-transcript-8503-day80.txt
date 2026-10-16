@@ -1,0 +1,32 @@
+=== seed 8503 day 80 — conversation with Zandile (app_mgpsphif31) ===
+occupation=carpenter temperament=anxious trust=23 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone? …if that makes sense."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, ans:q_alone_time:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days. ...sorry, I'm spiraling."
+(want=curious stage=2)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "The whole fire was arguing about Drum-Belly last night — what to even CALL it. 'Big Loud' got shouted down. What's your vote?"
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I'm staying out of the naming fight. For now. Someone always gets precious about their pick."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We'll land on something. We always do — usually the loudest person's idea."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My vote? I'm keeping it to myself until the shouting stops."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

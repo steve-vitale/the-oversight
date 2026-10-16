@@ -202,7 +202,7 @@ function regionalPlay(Game, ctx) {
     for (const link of links) {
       if (!link || link.status !== 'active') continue;
       const lid = link.id;
-      if (link.pendingDefenseCall) {
+      if (link.pendingDefense) {
         const canSend = popAlive() >= 5;
         try {
           if (Game.answerDefenseCall) Game.answerDefenseCall(lid, canSend ? 'send' : 'refuse');

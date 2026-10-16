@@ -1,0 +1,24 @@
+=== seed 8508 day 80 — conversation with Judith (gen_5b8ftfj) ===
+occupation=bush pilot temperament=bold trust=89 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: agency:ask_expedition, ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Here's the thing — Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Esther talks to the garden. The garden listens. I've seen it. No point pretending otherwise."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Remember what I said. And I'll remember what you said. Deal?"
+want final: id=curious stage=3 resolution=engaged

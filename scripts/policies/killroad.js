@@ -99,7 +99,7 @@ function killroadCourtship(Game, ctx) {
           ctx.tended = (ctx.tended || 0) + 1;
         }
       }
-      if (link.pendingDefenseCall && Game.answerDefenseCall) {
+      if (link.pendingDefense && Game.answerDefenseCall) {
         const canSend = popAlive(Game) >= 5;
         try { Game.answerDefenseCall(link.id, canSend ? 'send' : 'refuse'); } catch (e) {}
         ctx.defenseCalls = (ctx.defenseCalls || 0) + 1;

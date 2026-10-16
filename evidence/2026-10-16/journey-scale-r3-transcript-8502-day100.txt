@@ -1,0 +1,32 @@
+=== seed 8502 day 100 — conversation with Aroha (aroha_ngata) ===
+occupation=comic shop owner temperament=warm trust=19 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(turn0 choices: ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, deflect_q, leave, silence)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "We should collect funny things. Like firewood. Stockpile them for winter."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Since Natalie died... I keep expecting to see Natalie at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Natalie said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody says Natalie's name right yet. We will. Give it a few days."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Natalie is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=curious stage=3 resolution=engaged

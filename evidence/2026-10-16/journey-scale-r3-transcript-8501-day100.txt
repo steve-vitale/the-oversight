@@ -1,0 +1,27 @@
+=== seed 8501 day 100 — conversation with Vito (gen_dlvzapw) ===
+occupation=programmer temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before. I'm listening."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Desmond is back. Walked in like they'd never left. You're doing fine."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "...I'm going to go. This was... fine. It was fine."
+want final: id=curious stage=3 resolution=engaged

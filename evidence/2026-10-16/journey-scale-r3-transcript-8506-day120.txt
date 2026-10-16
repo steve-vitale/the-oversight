@@ -1,0 +1,30 @@
+=== seed 8506 day 120 — conversation with Xavier (xavier_dubois) ===
+occupation=lawyer temperament=dry trust=33 dead=false mood=hungry
+want: curious (stage 0, fromSeed)
+
+THEM: "Can we talk?" Xavier sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: A beat. Then, as if shaking something off:
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Do you believe in anything? Now, I mean. After everything."
+(want=curious stage=2)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it. You'd know about that."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Belief's personal. But thanks for saying yours out loud. That takes guts. — comedy."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying when they think I'm not listening?"
+THEM: "You want to know about that? Okay." "I left. Walked back in like I'd never left, apparently."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged

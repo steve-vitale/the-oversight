@@ -73,7 +73,7 @@ function courtship(Game, ctx) {
     for (const link of links) {
       if (!link || link.status !== 'active') continue;
       const lid = link.id;
-      if (link.pendingDefenseCall && Game.answerDefenseCall) {
+      if (link.pendingDefense && Game.answerDefenseCall) {
         const canSend = popAlive(Game) >= 5;
         try { Game.answerDefenseCall(lid, canSend ? 'send' : 'refuse'); } catch (e) {}
         ctx.defenseCalls = (ctx.defenseCalls || 0) + 1;

@@ -1,0 +1,31 @@
+=== seed 8506 day 100 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=20 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About your plan here — So what's your plan here? Just... get through it?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_plan:a_survive, ans:q_plan:a_lead, ans:q_plan:a_find, ans:q_plan:a_quiet, deflect_q, leave, silence)
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest. You know?"
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "...You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Is there someone here you don't trust? Be honest."
+(want=curious stage=2)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Since Irving died... I keep expecting to see Irving at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I braid grass while listening to plans. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "...I need to go be quiet for a while."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

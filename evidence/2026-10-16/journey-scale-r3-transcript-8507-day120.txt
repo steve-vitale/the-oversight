@@ -1,0 +1,24 @@
+=== seed 8507 day 120 — conversation with Denise (gen_1m9pcvs) ===
+occupation=electrician temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "You want to know about that? Okay." "Lucas? A Police officer, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

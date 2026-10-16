@@ -1,0 +1,24 @@
+=== seed 8508 day 140 — conversation with Esther (gen_o9pgjc2) ===
+occupation=Pharmacist temperament=withdrawn trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. That is all."
+(turn0 choices: dlg:more, dlg:commit, dlg:cant, dlg:help, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my younger brother, Brendan. Went up in the Taking. He cried when the dog died. Boring, they said. I keep his jacket. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [goon] "Keep going."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=seek_taken stage=3 resolution=promised

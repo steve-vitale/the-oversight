@@ -1,0 +1,27 @@
+=== seed 8503 day 140 — conversation with Luis (luis_fernandez) ===
+occupation=mason temperament=steady trust=71 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you make of all this — What do you make of all this? Really."
+(turn0 choices: ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "I left. Walked back in like I'd never left, apparently."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I should — yeah. Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8508 day 100 — conversation with Esther (gen_o9pgjc2) ===
+occupation=Pharmacist temperament=withdrawn trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About Brendan?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's my younger brother, Brendan. Went up in the Taking. He cried when the dog died. Boring, they said. I keep his jacket. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Ella is gone and the world just... continues. That's the part I can't stand."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I greet everyone by name each morning at odd hours now. Whatever gets me to morning."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody says Ella's name right yet. We will. Give it a few days."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=3)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=promised
