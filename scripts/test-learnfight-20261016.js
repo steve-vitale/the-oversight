@@ -335,6 +335,53 @@ async function main() {
       ok('wrapper+extension: party hold end-to-end (no witness)', (ctx.lfWitnessed || 0) === 0 && ctx.lfHeld === 1,
         `ret=${r} lfWitnessed=${ctx.lfWitnessed} lfHeld=${ctx.lfHeld}`);
     }
+    // (f) WITHDRAWAL PERSISTS: turn 2 of the same witness-fight keeps
+    // fleeing (no strike, no re-narration). The seed-161 bug was a
+    // one-turn flee followed by normal combat (narrated witness, then
+    // killed the spool anyway) — a strike spy catches the regression:
+    // the old code strikes on turn 2, the fixed code never does.
+    {
+      const g = mkGame({ fighters: [MON('spool')] });
+      let strikes = 0;
+      g.tbPlayerStrike = () => { strikes++; return true; };
+      const ctx = { _learnFight: true };
+      const r1 = COMP.competent.fight(g, ctx);
+      const saidAfterT1 = g.said.length;
+      // turn 2: same fight object, wrapper still marks _learnFight
+      ctx._learnFight = true;
+      const r2 = COMP.competent.fight(g, ctx);
+      ok('extension: turn-1 witness fires', r1 === true && ctx.lfWitnessed === 1, `ret=${r1}`);
+      ok('extension: turn-2 keeps withdrawing (handled, no re-narration, NO strike)',
+        r2 === true && ctx.lfWitnessed === 1 && g.said.length === saidAfterT1 && strikes === 0,
+        `ret=${r2} lfWitnessed=${ctx.lfWitnessed} said=${g.said.length}/${saidAfterT1} strikes=${strikes}`);
+      ok('extension: witness-fight handle held', ctx._lfWitnessFight === g.tbfight, '');
+    }
+    // (g) WITHDRAWAL STOPS when the wrapper clears the mark mid-fight
+    // (villager joined): the base owns the fight again — on this stub the
+    // base strikes the adjacent monster (not outmatched, healthy). A
+    // strike spy distinguishes "fell through to base" from "kept
+    // withdrawing".
+    {
+      const g = mkGame({ fighters: [MON('spool', { mx: 5, my: 4 })] });
+      let strikes = 0;
+      g.tbPlayerStrike = () => { strikes++; return true; };
+      const ctx = { _learnFight: true };
+      COMP.competent.fight(g, ctx); // turn 1: witness fires (flee, no strike)
+      const strikesAfterT1 = strikes;
+      ctx._learnFight = false; // wrapper cleared it (villager joined)
+      COMP.competent.fight(g, ctx); // turn 2: base takes over, strikes
+      ok('extension: turn-1 witness does not strike', strikesAfterT1 === 0, `strikes=${strikesAfterT1}`);
+      ok('extension: withdrawal stops when mark clears (base strikes)', strikes > strikesAfterT1,
+        `strikes=${strikes} after t1=${strikesAfterT1}`);
+    }
+    // (h) STALE HANDLE: a new fight object clears the old witness handle.
+    {
+      const g = mkGame({ fighters: [MON('spool')] });
+      const ctx = { _learnFight: true, _lfWitnessFight: { id: 'old-fight' } };
+      COMP.competent.fight(g, ctx);
+      ok('extension: stale witness handle cleared on new fight', ctx._lfWitnessFight === g.tbfight,
+        '');
+    }
   });
 
   // ----- 8. det-gate: gate-off byte-identical to the naked base -----
