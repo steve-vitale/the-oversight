@@ -849,6 +849,7 @@ THE GOD VERBS IN PLAY (2026-10-15). Steve: "Paint a path towards functional godh
 **Provides:** holderGod(who) -> god id for 'player' or a villager id (the first ascension), or null, fighterGod(fighter) -> god id of a fight participant on our side, or null, godPlay(godId) -> the god's play data (godpaths.json god.play), godActionDef(actionId) / godActionReady(actionId) / godActivatables() -> the 'god' pseudo-ability for useAbility and the action bar, godVillagerCast(game, v) -> a villager god's verb on their turn (wraps tbVillagerAbility, before the subclass verbs), godDaily(game) -> dawn: day verbs refresh, Gilded Guard regen, the Audit, No Lies' knowing and its trust price, villager gardens
 
 **Rules:**
+- ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
 - same_function: every verb runs for the player or a villager fighter through one implementation (code: actor, VERB_IMPL)
 - food_powered: every verb pays kcal (player) or belly (villager, kcal/25 hunger, refused at hunger >= 80); the player's hunger gate (500 kcal) applies to passives too (code: canPay, pay)
 - weakness_enforced: brawler beams feed no pain; ward is the priority target and self-heals at half; hunter terms end on contact; between phases are retreats; all-seeing's foresight never covers the holder; voice's fall stuns the field; phoenix needs fuel; market coins never stop beams and titans never haggle; garden hits soft and draws aim (code: preHit, damageMult wrap, termsContact, addHealth wrap)
@@ -1148,6 +1149,7 @@ Party system. Companions travel and fight with you.
 **Provides:** inviteToParty(vid), dismissFromParty(vid), partyState(), partyMembers(), inParty(vid), partyCap(), partyFull(), partyTrustFloor(), travelingWith(), placePartyAtPlayer(), partyHud(), togglePartyPanel(), isPartyPanelOpen(), partyMemberStatus(vid), partyPanelHTML(), allyStripHTML()
 
 **Rules:**
+- one_bearer_body: party and traveling companions exclude the current bearer by canonical ID, including after succession; each person enters a tactical party only once (code: partyMembers, travelingWith, startCombat wrap)
 - party_panel_truth: member status via displayName (knowledge-gated); HP from v.health (persistent, default/cap 100) or the live fighter in combat; conditions from real tracked state only (v.sick; hp-derived hurt/critical<=20) (code: partyMemberStatus, partyPanelHTML, Steve 2026-10-09)
 - ally_strip: in-combat ally strip uses the enemy line's visual language; downed allies greyed with X, never silently dropped (code: allyStripHTML, Steve 2026-10-09)
 

@@ -9,6 +9,21 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Canonical companion/Apex parity (2026-10-16): a real succession replay
+exposed the current person entering fights again as an NPC from stale
+positions/party membership. Normal monster, alien and formal-party/betrayal
+constructors now use distinct canonical people and exclude the bearer.
+Apex's real NPC ally opening reaches the player's actual strike state;
+borrowed2x and personal3x are one opening, not6x. Raw legacy arrays remain
+readable. Runtime14 identity /21 ambush assertions, native phone succession
+and scheduled NPC Wait -> Strike proofs pass; quick172/172, full944/944.
+Four retained source arms separate the rejected clone-assisted candidate,
+identity-only repair and final recipient repair. The64-seed identity panel
+keeps merchant/community and caregiver/access tradeoffs under review; no
+compensating buff or win quota. See ../evidence/2026-10-16/apex-identity-audit.md.
+Voice/brawler player-recipient gaps, Garden's interpretation, far formal
+companion body/gear parity and natural titan/Network coverage remain open.
+
 Field brawler weakness (2026-10-16): Turn the Pain now uses actual landed
 field wounds minus light, matching the tactical beam exclusion. Final
 post-mitigation harm determines the counter; ally hits are separate. A

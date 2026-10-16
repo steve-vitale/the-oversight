@@ -1,0 +1,17 @@
+  FAIL party membership excludes self and duplicate/stale entries
+  FAIL traveling companions exclude self and deduplicate real members
+  ok   reading current membership preserves raw legacy arrays
+  FAIL the player is never reported as their own companion
+  FAIL actual monster combat has only one current bearer body
+  FAIL a real far-away formal companion still joins exactly once
+  FAIL the injected companion still receives a real initiative entry
+  FAIL actual betrayal combat cannot create a loyal clone of the player
+  FAIL betrayal keeps the real hostile and distinct loyal companion
+  ok   real succession takes the body of a former companion
+  FAIL the successor cannot remain their own formal or traveling companion
+  FAIL the next real fight after succession has one body per canonical person — {"successor":"gen_5ypak97","people":["gen_5ypak97","gen_5ypak97","gen_9a5n95m"],"party":["gen_5ypak97","gen_9a5n95m"]}
+  FAIL the real alien constructor also excludes the successor alias — ["gen_5ypak97","gen_5ypak97","gen_9a5n95m"]
+  FAIL duplicate roster entries do not consume the nearest-companion quota — ["gen_oqn093r","gen_oqn093r","gen_oqn093r","gen_as8e3jh","gen_as8e3jh"]
+
+party-bearer-identity: 2 passed, 12 failed, 0 todo (phase 0)
+failing: party membership excludes self and duplicate/stale entries | traveling companions exclude self and deduplicate real members | the player is never reported as their own companion | actual monster combat has only one current bearer body | a real far-away formal companion still joins exactly once | the injected companion still receives a real initiative entry | actual betrayal combat cannot create a loyal clone of the player | betrayal keeps the real hostile and distinct loyal companion | the successor cannot remain their own formal or traveling companion | the next real fight after succession has one body per canonical person | the real alien constructor also excludes the successor alias | duplicate roster entries do not consume the nearest-companion quota

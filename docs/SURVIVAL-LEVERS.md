@@ -260,6 +260,50 @@ create returnable light or posthumous casts. Hunger still blocks payment.
 Read ../evidence/2026-10-16/field-pain-audit.md for all per-policy metrics,
 actual exposure, full-suite triage, source roots and phone proof.
 
+## Canonical companions and the allied ambush opening
+
+2026-10-16: retain the actual one-body correction. After succession the new
+bearer can remain in old raw party/follower arrays and NPC positions. Both
+normal monster and alien constructors previously admitted that same person
+as a second NPC body; the formal-party boundary also lacked the canonical
+player ID. Membership/travel getters now return distinct roster companions
+excluding the bearer, and constructors deduplicate before nearest-four
+selection/injection. Genuine companions keep their existing entry rules,
+stats and gear. Raw saved arrays are preserved. This changes real party
+capacity, invitations, travel, initiative, available helpers and later
+food/knowledge/choice histories after succession; it is not only a damage
+or health lever. It can help or hurt a particular run. Never compensate for
+the loss of an artificial second body by raising survival numbers.
+
+Apex's separate recipient correction gives a distinct living player the
+same existing2x next strike as an NPC ally, stored in scholar._nextStrikes
+so the actual player damage pipeline consumes it once. NPC caster3x,
+ally2x,120kcal data price (normal NPC rounding:5 hunger), round-one/first-blow
+gates, one-use limits and food payment stay. Existing armed strikes are
+preserved. The player still chooses their action. A personal3x opening
+replaces a tagged borrowed2x opening, matching the NPC's single opening;
+it does not multiply to6x. Unused tagged ally charges clear at fight end
+without deleting later unrelated commitments.
+
+The initial candidate is rejected despite an apparent caregiver44 benefit:
+its NPC caster was the current player's own canonical person, and an input50
+strike became300 after2x/3x stacking. That is not ally viability evidence.
+The final identity-only versus final-Apex comparison has all256 rows,
+23-metric sets and full gameplay hashes equal. Proper natural ally exposure
+is therefore not established by this sample; native prepared scheduled-turn
+proof and21 actual-caller assertions establish the recipient contract.
+
+Original -> identity-only/final,64 per policy: capable wins55->56,
+deaths92->93, community8->7; maker18->18/57->57/19->20;
+merchant25->24/44->45/14->17; caregiver24->23/49->48/16->16.
+First-bearer day60 survival stays34/53/57/54. Caregiver Table invitation/entry
+26->24 and named-class50->48 remain review signals. Capable earned T3+
+gear64->63, with the missing case a corpse Death Mask on48 (both win90).
+Contest/show access stays252/256, craft/trade T3+ remains unsampled.
+All23 metrics and selected adverse/favorable/class/gear tails are retained;
+no holdout or small causal balance claim. See the dated apex-identity audit.
+Eight fitting deeds and broader scale/parity work remain open.
+
 ## Introductory choice and reactor timing
 
 The shared loader leaves choices to policies; capable currently omits the

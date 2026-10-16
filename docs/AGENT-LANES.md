@@ -14,6 +14,16 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Apex/canonical-person follow-up (2026-10-16): Codex takes the narrow party.js
+membership/travel getters and combat injection boundary, plus the matching
+game.js/encounters.js nearest-companion constructors after caregiver44
+proved the current bearer was also a stale formal companion and NPC god
+caster. Measure that identity repair separately from Apex's NPC-to-player
+opening recipient. The initial ally candidate is rejected: its sole changed
+natural campaign paid a duplicate self and stacked2x with personal3x. Keep
+exact initial source/panels; do not call that outcome viability evidence.
+No regional/nomad file is touched. Costs, gates and real companion kits stay.
+
 Hoarder payoff parity (2026-10-15): Codex takes only buildarounds.js daily
 interest and its own-build path count. Living resident NPC holders now use
 the player's existing rates/threshold/cap; canonical saved person/day receipts

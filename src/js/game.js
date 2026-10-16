@@ -29682,7 +29682,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const vpos = (this.state.village && this.state.village.positions) || {};
       const roster = (this.state.village && this.state.village.roster) || [];
       const candidates = [];
-      for (const rid of roster) {
+      for (const rid of new Set(roster)) {
+        if (rid === this.villagerId) continue;
         const pos = vpos[rid];
         if (!pos) continue;
         const d = Math.max(Math.abs(pos.mx - px), Math.abs(pos.my - py));

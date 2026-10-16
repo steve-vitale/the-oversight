@@ -93,6 +93,17 @@ Job -> track -> **class** -> **god** -> Table.
    and paid runtime proofs (`test-god-verbs-wired-20261015.js`). Reconcile all
    subclass active verbs and passive hooks too; the old blanket claim that
    villagers cannot use any new verb is no longer the current state.
+   Canonical companion/Apex follow-up (2026-10-16): actual succession could
+   leave the bearer as an NPC fighter too. Monster/alien and formal-party
+   constructors now exclude the bearer and duplicate IDs; getters preserve
+   legacy raw arrays but expose only real companions.14 runtime assertions
+   and native phone succession prove it.21 Apex assertions plus native
+   Wait -> NPC opening -> player Strike prove an actual player ally gets2x
+   once, with no duplicate-self grant or personal3x stacking. Four source
+   arms isolate identity from recipient changes; full944/944 passes. See
+   ../../evidence/2026-10-16/apex-identity-audit.md. This does not finish Voice,
+   brawler/Garden recipient parity, far formal companion body/gear parity
+   or natural titan/Network play.
    Hoarder's Interest now has a shared dawn payout for living resident NPC
    holders, using their own build and the existing2.5/5percent rates,1000kcal
    threshold and pantry cap. Saved canonical person/day receipts cover

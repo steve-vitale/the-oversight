@@ -1,0 +1,16 @@
+  ok   party membership excludes self and duplicate/stale entries
+  ok   traveling companions exclude self and deduplicate real members
+  ok   reading current membership preserves raw legacy arrays
+  ok   the player is never reported as their own companion
+  ok   actual monster combat has only one current bearer body
+  ok   a real far-away formal companion still joins exactly once
+  ok   the injected companion still receives a real initiative entry
+  ok   actual betrayal combat cannot create a loyal clone of the player
+  ok   betrayal keeps the real hostile and distinct loyal companion
+  ok   real succession takes the body of a former companion
+  ok   the successor cannot remain their own formal or traveling companion
+  ok   the next real fight after succession has one body per canonical person
+  ok   the real alien constructor also excludes the successor alias
+  ok   duplicate roster entries do not consume the nearest-companion quota
+
+party-bearer-identity: 14 passed, 0 failed, 0 todo (phase 0)

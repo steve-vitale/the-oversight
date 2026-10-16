@@ -15,6 +15,7 @@
 //   - Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs)
 //   - Scattering.combat.nearestEnemy (monster aim)
 // rules:
+//   - ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
 //   - same_function: every verb runs for the player or a villager fighter through one implementation (code: actor, VERB_IMPL)
 //   - food_powered: every verb pays kcal (player) or belly (villager, kcal/25 hunger, refused at hunger >= 80); the player's hunger gate (500 kcal) applies to passives too (code: canPay, pay)
 //   - weakness_enforced: brawler beams feed no pain; ward is the priority target and self-heals at half; hunter terms end on contact; between phases are retreats; all-seeing's foresight never covers the holder; voice's fall stuns the field; phoenix needs fuel; market coins never stop beams and titans never haggle; garden hits soft and draws aim (code: preHit, damageMult wrap, termsContact, addHealth wrap)
@@ -211,13 +212,28 @@
       g.terms = { kind, key: p.key, broken: false };
       if (kind === 'ambush') {
         const mult = P.ambushMult || 3;
-        if (C.isP) { const s = Game.state.scholar; s.ambushReady = { mult: Math.max(mult, (s.ambushReady && s.ambushReady.mult) || 0) }; }
+        if (C.isP) {
+          const s = Game.state.scholar;
+          // An ally's opening and your own opening are the same ambush,
+          // just as the NPC caster replaces their borrowed next strike.
+          if (s._nextStrikes && s._nextStrikes._apexAlly) delete s._nextStrikes;
+          s.ambushReady = { mult: Math.max(mult, (s.ambushReady && s.ambushReady.mult) || 0) };
+        }
         else p._nextStrikes = { mult, n: 1, label: 'AMBUSH' };
         for (const m of mons) m.hesitate = Math.max(m.hesitate || 0, 1);
         let armed = 0;
-        for (const a of liveOurs(f)) { if (a === p || a.kind === 'player') continue; if (!a._nextStrikes) { a._nextStrikes = { mult: P.allyAmbushMult || 2, n: 1, label: 'AMBUSH' }; armed++; } }
+        for (const a of liveOurs(f)) {
+          const allyId = a.kind === 'player' ? Game.villagerId : a.villagerId;
+          if (a === p || (allyId && allyId === (C.isP ? Game.villagerId : C.vid))) continue;
+          // Player strikes consume scholar state, NPC strikes fighter state.
+          // Do not displace an already armed opening or other next strikes.
+          const hold = a.kind === 'player' ? Game.state.scholar : a;
+          if (hold._nextStrikes || hold.ambushReady) continue;
+          hold._nextStrikes = { mult: P.allyAmbushMult || 2, n: 1, label: 'AMBUSH' }; armed++;
+          if (a.kind === 'player') hold._nextStrikes._apexAlly = true;
+        }
         line(C, `You chose this fight before it knew it was one. Nothing sees you; every foe loses its first turn, and your next strike hits x${mult}.${armed ? ` ${armed} all${armed === 1 ? 'y strikes' : 'ies strike'} from cover too.` : ''} (Choose the Terms: Ambush)`,
-          `${C.name} chose this fight before it knew it was one: every foe loses its first turn, and their next strike hits x${mult}. (Choose the Terms: Ambush)`);
+          `${C.name} chose this fight before it knew it was one: every foe loses its first turn, and their next strike hits x${mult}.${armed ? ` ${armed} all${armed === 1 ? 'y strikes' : 'ies strike'} from cover too.` : ''} (Choose the Terms: Ambush)`);
       } else if (kind === 'range') {
         const want = P.rangeDist || 4;
         let moved = 0;
@@ -901,7 +917,11 @@
   const _te = Game.tbEnd;
   if (typeof _te === 'function') {
     Game.tbEnd = function () {
-      try { const f = this.tbfight; if (f && f._gv) fadeEchoes(this, f, true); } catch (e) { warn('tbEnd echoes', e); }
+      try {
+        const f = this.tbfight, s = (this.state || {}).scholar;
+        if (f && s && s._nextStrikes && s._nextStrikes._apexAlly) delete s._nextStrikes;
+        if (f && f._gv) fadeEchoes(this, f, true);
+      } catch (e) { warn('tbEnd gods', e); }
       return _te.apply(this, arguments);
     };
   }

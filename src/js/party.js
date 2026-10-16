@@ -19,6 +19,7 @@
 //   - partyPanelHTML()
 //   - allyStripHTML()
 // rules:
+//   - one_bearer_body: party and traveling companions exclude the current bearer by canonical ID, including after succession; each person enters a tactical party only once (code: partyMembers, travelingWith, startCombat wrap)
 //   - party_panel_truth: member status via displayName (knowledge-gated); HP from v.health (persistent, default/cap 100) or the live fighter in combat; conditions from real tracked state only (v.sick; hp-derived hurt/critical<=20) (code: partyMemberStatus, partyPanelHTML, Steve 2026-10-09)
 //   - ally_strip: in-combat ally strip uses the enemy line's visual language; downed allies greyed with X, never silently dropped (code: allyStripHTML, Steve 2026-10-09)
 // consumes:
@@ -68,7 +69,7 @@
 
     partyMembers() {
       const v = this.partyState();
-      return (v.party || []).filter(id => (v.roster || []).includes(id));
+      return [...new Set(v.party || [])].filter(id => id !== this.villagerId && (v.roster || []).includes(id));
     },
 
     inParty(vid) {
@@ -92,7 +93,7 @@
     travelingWith() {
       const v = this.partyState();
       const set = new Set([...this.partyMembers(), ...(v.followers || [])]);
-      return [...set].filter(id => (v.roster || []).includes(id));
+      return [...set].filter(id => id !== this.villagerId && (v.roster || []).includes(id));
     },
 
     // ---------- SYSTEM ARRIVAL: PARTY UNLOCK ----------
@@ -1148,7 +1149,8 @@
       const f = this.tbfight;
       if (f && !f.betrayal) {
         // Party members are WITH you — they join even beyond the 4-square radius.
-        const existing = new Set(f.fighters.map(x => x.villagerId).filter(Boolean));
+        const existing = new Set([this.villagerId, ...f.fighters.map(x => x.villagerId).filter(Boolean)]);
+        let joined = false;
         const detail = this.genDetail(this.map.px, this.map.py);
         const px = this.state.scholar.mx ?? 4, py = this.state.scholar.my ?? 4;
         for (const pid of this.partyMembers()) {
@@ -1164,8 +1166,10 @@
             ai: ptemp === 'bold' ? 'brave' : ptemp === 'cautious' ? 'cautious' : 'helpful',
             helped: false,
           });
+          existing.add(pid);
+          joined = true;
         }
-        if (f.fighters.some(x => x.kind === 'villager' && !existing.has(x.villagerId))) {
+        if (joined) {
           f.order = (globalThis.Scattering.combat || {}).turnOrder
             ? globalThis.Scattering.combat.turnOrder(f.fighters)
             : f.fighters.map(x => x.key);

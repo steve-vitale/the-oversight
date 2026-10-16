@@ -19,7 +19,7 @@ contest rule, audience reaction, judged advantage or mercy choice.
 | --- | --- | --- | --- | --- |
 | One-Person Army | postHit rallies nearby allies after wounds | turn_the_pain adds that titan's damage to allies; beam exclusion tracked tactically | Open: crowd counting scars has no dedicated god-specific contest rule established | Inherited rally/retaliation; separate breach objective open |
 | Undying Ward | preHit redirects a large/lethal ally hit, costs food, strain collapse | Same redirect sees large foes and real coalition fighters | Open: dedicated audience response to taking another's blow | Inherited redirect; off-screen field ally protection still needs proof |
-| Apex Predator | terms arms allies for ambush and moves/roots foes; NPC-to-player terms parity still needs audit | Same ground/root hook accepts titans | Open: a dedicated accuracy-contest realization | Inherited combat terms; strategic scouting/marks open |
+| Apex Predator | Ambush now arms a distinct living player ally through the real scholar strike state, as well as NPC allies; personal and borrowed openings do not stack6x. Range/ground move/root foes | Same ground/root hook accepts titans | Open: a dedicated accuracy-contest realization | Inherited combat terms; strategic scouting/marks open |
 | Shepherd of the Dead | onAllyFell raises one paid echo; fadeEchoes ends it | titanFight permits additional paid echoes | Open: a dedicated sparing/mercy choice that moves the crowd | Inherited echo hooks on coalition losses; natural army campaign coverage incomplete |
 | The Between | preHit phases the holder; phaseRetreat changes position | Phase suppresses that titan's additional hits in the same round | Open: dedicated race/chase realization | Strategic runner between camps open; holder's personal combat phase inherited |
 | All-Seeing | no_lies/readAloud reveals intent; preHit offers allies a dodge, not the holder | Same reader names titan intent | Open: dedicated strategy/bluff realization | Inherited intent reading; separate coalition map/planning benefit open |
@@ -45,11 +45,20 @@ contest rule, audience reaction, judged advantage or mercy choice.
    a fatal blow before the field round's normal death check. Runtime22/22
    and prepared real browser fights prove the contracts; natural access and
    larger scale/strategic effects remain distinct. See dated field-pain-audit.md.
-3. Audit true player/NPC recipients of party powers and daily nourishment.
-   `liveOurs` includes the bearer, but some command/terms loops explicitly skip
-   player-kind actors; `feedMultitude` always excludes Game.villagerId even when
-   its holder is an NPC. These are source findings needing outcome tests and
-   actual resource settlement, not authority to invent free food quantities.
+3. Apex's NPC-to-player Ambush opening is repaired with21 actual-caller
+   assertions and native scheduled NPC-turn -> player Strike proof. The
+   apparent natural gain in the first candidate was a duplicate of the
+   current person casting as an NPC after succession, then stacking its
+   borrowed2x with personal3x. That candidate is rejected. The identity repair
+   covers normal monster, alien and formal-party/betrayal constructors and
+   preserves raw legacy membership arrays. See dated apex-identity-audit.md
+   for four source arms, all metrics and remaining exposure limits.
+   Voice command and brawler rally still explicitly skip player-kind allies;
+   `feedMultitude` excludes Game.villagerId even when its holder is an NPC.
+   Audit their actual recipient consumers/resource settlement separately.
+   Far formal-party injection still uses a30HP helper without the nearby
+   builder's complete body/gear fields. That is another open parity contract,
+   not repaired merely by removing duplicate identities.
 4. Dedicated noncombat contest promises remain open. Search of contests.js and
    contestEngine.js establishes no explicit mapping from these ten god IDs;
    inherited ability effects and generic combat still exist. Implement real,

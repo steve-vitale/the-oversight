@@ -2674,7 +2674,10 @@
       var vpos = (this.state.village && this.state.village.positions) || {};
       var roster = (this.state.village && this.state.village.roster) || [];
       var cands = [];
+      var seenCompanions = new Set([this.villagerId]);
       for (var i = 0; i < roster.length; i++) {
+        if (seenCompanions.has(roster[i])) continue;
+        seenCompanions.add(roster[i]);
         var pos = vpos[roster[i]];
         if (!pos) continue;
         var d = Math.max(Math.abs(pos.mx - px), Math.abs(pos.my - py));
