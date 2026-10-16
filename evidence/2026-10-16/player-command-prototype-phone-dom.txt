@@ -1,0 +1,62 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 512 ticks to dawn.":
+  - text: day 85 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: Winter · Eastern Woodlands
+  - 'generic "The day''s budget: 0 of 512 used. Everything you do costs a little of the day."':
+    - generic: 512 left today
+  - img "Peyton":
+    - text: Peyton
+  - img "Fiona":
+    - text: Fiona
+  - text: Lorenzo
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - text: Performance Review
+  - text: · 3 move · 1 act
+  - text: 🛡
+  - generic: 🧍 Fiona
+  - text: ·
+  - generic: 🧍 Peyton
+  - button "⚔ Strike"
+  - button "👁 Study"
+  - button "📢 Shout"
+  - button "📢 Rally"
+  - button "🗣️ War cry"
+  - button "🍖 Offer"
+  - button "⏸ Wait"
+  - generic: ⚡
+  - button "⚡ Field Medicinesustain — Heal 20 HP (real wounds — Price cuts are missing mass, knit ~10/night). Once per day part. (140 kcal)" [disabled]
+  - generic: "📺 SYSTEM: \"ROUND 2!\""
+  - generic "Health":
+    - generic: ❤ 100
+  - generic "Food (you)":
+    - generic: 🍽 1200/2400 kcal
+  - generic "Hydration":
+    - generic: 💧 100% · 2L clean
+  - 'generic "Pack: 0 kcal carried"':
+    - generic: 🎒 2/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "Codex (3)"
+- complementary:
+  - text: PREPARED COMMAND PROOF · granted builds
+  - button "Prepare Voice"
+  - button "Prepare Crowd Moves"
+  - button "Read turn" [active]
+  - button "Save and reload"
+  - generic: Round 2; current p; bonus false; rally 0; charge null; NPC hunger 13; AI player 0; chosen strikes 0; caster turns 1; foe turns 1

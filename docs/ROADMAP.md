@@ -9,14 +9,23 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Player-controlled commands (2026-10-16): NPC Voice and Crowd Moves now hand
+the player an actual bonus turn, then resume after the caster without losing
+the ordinary player turn. Sync/async paths and save/load retain the handoff
+and spent cast gates; stale callbacks cannot advance a different loaded fight.
+Live Broadcast and nearby Rally Aura now include distinct living player allies.
+Read ../evidence/2026-10-16/player-command-audit.md for runtime/phone proof,
+source-bound campaign measurements and remaining limits. Daily Voice support
+and NPC grounding cost parity remain open; this is not complete Voice parity.
+
 God support recipient repair (2026-10-16): wounded NPC One-Person Army holders
 can rally the nearby living player; actual player strikes/abilities consume
 the existing raw +4 convention, with finite own-turn expiry. Fallen NPC Voice
 holders impose the same lost action on the player as other allies. Canonical
 self aliases cannot receive their own ally effect. Runtime/phone and matched
-campaign evidence: ../evidence/2026-10-16/god-support-audit.md. Active Voice
-commands and class broadcast/aura still need a player-controlled action path;
-this repair does not complete the support roadmap.
+campaign evidence: ../evidence/2026-10-16/god-support-audit.md. That passive
+repair left active commands and class broadcast/aura for the follow-up above;
+the broader support roadmap remains open.
 The same audit retains a legacy-test isolation debt: hunter-ecology's minnow
 setup can exhaust its branches before the gate assertion. Four deterministic
 seeds reproduce it identically before/after; preserve the assertion and fix
@@ -58,8 +67,9 @@ Four retained source arms separate the rejected clone-assisted candidate,
 identity-only repair and final recipient repair. The64-seed identity panel
 keeps merchant/community and caregiver/access tradeoffs under review; no
 compensating buff or win quota. See ../evidence/2026-10-16/apex-identity-audit.md.
-Voice/brawler player-recipient gaps, Garden's interpretation, far formal
-companion body/gear parity and natural titan/Network coverage remain open.
+The dated god-support and player-command audits address the initial tactical
+Voice/brawler recipient gaps. Garden's interpretation, far formal companion
+body/gear parity and natural titan/Network coverage remain open.
 
 Field brawler weakness (2026-10-16): Turn the Pain now uses actual landed
 field wounds minus light, matching the tactical beam exclusion. Final

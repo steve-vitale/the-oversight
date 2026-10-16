@@ -1,0 +1,93 @@
+{
+  "cases": 256,
+  "jobsPerArm": 260,
+  "changed": [
+    "src/js/app.js",
+    "src/js/game.js",
+    "src/js/godpath.js",
+    "src/js/godverbs.js"
+  ],
+  "rowsEqual": 256,
+  "hashesEqual": 244,
+  "metricsEqual": 256,
+  "changedCases": [
+    {
+      "policy": "capable",
+      "seed": 777
+    },
+    {
+      "policy": "caregiver",
+      "seed": 11
+    },
+    {
+      "policy": "caregiver",
+      "seed": 29
+    },
+    {
+      "policy": "caregiver",
+      "seed": 1234
+    },
+    {
+      "policy": "maker",
+      "seed": 5
+    },
+    {
+      "policy": "maker",
+      "seed": 17
+    },
+    {
+      "policy": "maker",
+      "seed": 19
+    },
+    {
+      "policy": "maker",
+      "seed": 33
+    },
+    {
+      "policy": "maker",
+      "seed": 38
+    },
+    {
+      "policy": "maker",
+      "seed": 42
+    },
+    {
+      "policy": "merchant",
+      "seed": 7
+    },
+    {
+      "policy": "merchant",
+      "seed": 40
+    }
+  ],
+  "neutrality": [
+    {
+      "policy": "capable",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "maker",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "merchant",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "caregiver",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    }
+  ],
+  "sourceBase": "b52905e060341ca0d2231b7ef68c11f364e224ff",
+  "screenRows": 64,
+  "screenIsSubset": true,
+  "independentHoldout": false
+}

@@ -1,0 +1,45 @@
+  ok   actual NPC Voice caller grants a player-controlled extra turn before the foe
+  ok   the handoff neither duplicates fighters nor changes the normal turn order
+  ok   NPC pays the existing120kcal-equivalent once, player pays no caster food
+  ok   player was never passed to NPC AI and no attack was selected for them
+  ok   real player strike state receives two1.5x strikes and own-turn rally duration
+  ok   native player Strike consumes one actual Rally Cry charge
+  ok   finishing the bonus resumes after its caster and preserves the normal player turn
+  ok   the second real player strike consumes the final charge
+  ok   a spent NPC Voice cast cannot refill the charge on its next turn
+  ok   unfunded NPC Voice grants no bonus or strike charge
+  ok   an already commanded NPC cannot recursively command the player
+  ok   canonical recipient selector deduplicates people and excludes own aliases
+  ok   self aliases and detached callers cannot enqueue a player turn
+  ok   a foe cannot grant an allied player command
+  ok   fled player cannot receive a command
+  ok   dead player cannot receive a command
+  ok   actual NPC Crowd Moves planner counts player among its existing two-ally threshold
+  ok   class command pays existing80kcal-equivalent and gives no god strike bonus
+  ok   the fellow NPC still takes its actual commanded turn
+  ok   class planner retains its two-ally preference rather than forcing a weaker cast
+  ok   actual NPC Live Broadcast now counts and rallies the player
+  ok   actual fight constructor gives nearby player the NPC Rally Aura
+  ok   real save/load restores an in-progress bonus turn
+  ok   reload retains cursor, paid gate, rally and remaining player strikes
+  ok   reloaded bonus resumes after caster without replaying it
+  ok   reload cannot re-arm the spent command
+  ok   class command use limit survives the bonus-turn reload
+  FAIL dropping an obsolete saved fighter preserves the bonus player cursor outside slot zero
+  ok   pending handoff survives save/load and is delivered once
+  ok   fight end clears only its unused tagged Relay strike charge
+  ok   fight end preserves a later unrelated strike commitment
+  ok   a full stun consumes the bonus turn without removing the next ordinary turn
+  ok   separate earned commands are queued, not collapsed into one
+  ok   a queued second command is delivered before normal order advances
+  ok   a last-in-round caster grants a bonus before wrapping, then preserves the next normal turn
+  ok   a removed caster resumes at the next surviving actor rather than replaying or skipping it
+  ok   ending the fight during a bonus clears its tagged charge and leaves no live handoff
+  ok   player Crowd Moves still commands NPC allies, pays80 and never commands itself
+  ok   async scheduler hands control to player with no enemy timer running
+  ok   stale async generation cannot advance during the bonus choice
+  ok   async bonus completion resumes one foe turn and the next normal player turn
+  ok   an old fight callback cannot advance a loaded fight with the same generation
+
+player-command-turns: 41 passed, 1 failed, 0 todo (phase 0)
+failing: dropping an obsolete saved fighter preserves the bonus player cursor outside slot zero

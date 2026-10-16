@@ -1,0 +1,13 @@
+'use strict';
+// Passive call receipts and final state. One shared harness per process.
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),root=path.resolve(process.argv[2]),policy=process.argv[3],seed=Number(process.argv[4]),out=process.argv[5];
+const H=require(path.join(root,'scripts/sim-harness')),S=require(path.join(root,'scripts/sweep-compare')),observer=require(path.join(__dirname,'../../scripts/balance-panel')),gear=require(path.join(__dirname,'../../scripts/gear-usage-audit'));
+const base=S.POLICY_REGISTRY[policy],calls=[];let G,O;
+if(!base||!Number.isSafeInteger(seed)||!out)throw Error('Expected root policy seed out.json.gz');
+S.POLICY_REGISTRY[policy]={...base,setup(g,ctx){G=g;O=observer.install(g);
+  for(const name of ['tbCommandPlayer','tbBeginCommandedPlayerTurn']){const fn=g[name];if(!fn)continue;g[name]=function(...args){const day=this.state.scholar.day,round=this.tbfight?.round,source=args[0]?.key;const result=fn.apply(this,args);if(result)calls.push({name,day,round,source,bonus:!!this.tbfight?.playerCommandReturn});return result;};}
+  const tele=g.tele;g.tele=function(type,data){if(type==='godpath_verb'||type==='god_verb')calls.push({name:'tele',day:this.state.scholar.day,type,data:JSON.parse(JSON.stringify(data||{}))});return tele.apply(this,arguments);};
+  const strike=g.tbPlayerStrike;g.tbPlayerStrike=function(...args){const f=this.tbfight,p=this.tbFighter('p'),t=this.tbFighter(args[0]),charge=this.state.scholar._nextStrikes?JSON.parse(JSON.stringify(this.state.scholar._nextStrikes)):null,buff=p?.rallyBuff,bonus=!!f?.playerCommandReturn,hp=t?.hp;const result=strike.apply(this,args);if(result&&(bonus||buff||charge))calls.push({name:'playerStrike',day:this.state.scholar.day,bonus,buff,charge,hpBefore:hp,hpAfter:t?.hp});return result;};
+  if(base.setup)return base.setup(g,ctx);
+},daily(g,ctx){const result=base.daily&&base.daily(g,ctx);O.sample();return result;}};
+H.quietLog(()=>S.runComparison({seeds:[seed],policies:[policy],days:150,origin:'Columbus, Ohio'})).then(report=>{const row=report.runs[0],hash=gear.gameplayHash(G.state),measured=O.finish(row);if(hash!==gear.gameplayHash(G.state))throw Error('Observer mutated final state');const sourceDigest=crypto.createHash('sha256').update(JSON.stringify(observer.manifest(root))).digest('hex');const result={root,policy,seed,sourceDigest,row,stateHash:hash,calls,state:G.state,metrics:measured.metrics};fs.writeFileSync(out,z.gzipSync(JSON.stringify(result)+'\n'));console.log(JSON.stringify({policy,seed,stateHash:hash,commands:calls.filter(c=>c.name!=='tele'&&c.name!=='playerStrike').length}));}).catch(e=>{console.error(e.stack);process.exitCode=1;});

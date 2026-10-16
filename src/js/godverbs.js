@@ -278,7 +278,7 @@
     // Voice of the Relay
     rally_cry(fi) {
       const C = actor(fi), f = Game.tbfight, p = C.p, P = godPlay('voice_of_the_relay');
-      const allies = liveOurs(f).filter(x => x !== p && x.kind !== 'player');
+      const allies = Game.tbOtherAllies(p);
       if (!allies.length && C.isP) { Game.say('No one in the fight to hear you. (Rally Cry)'); return false; }
       const rr = P.rallyRounds || 3;
       for (const m of liveMons(f)) m.hesitate = Math.max(m.hesitate || 0, 1);
@@ -286,8 +286,10 @@
         `${C.name} speaks and every ally hears it at once. Every foe hesitates. (Speak and Be Heard)`);
       for (const v of allies) {
         v.rallyBuff = Math.max(v.rallyBuff || 0, rr); v.rallied = Math.max(v.rallied || 0, rr);
-        v._nextStrikes = { mult: P.strikeMult || 1.5, n: 2, label: 'RALLY CRY' };
+        const hold = v.kind === 'player' ? Game.state.scholar : v;
+        hold._nextStrikes = { mult: P.strikeMult || 1.5, n: 2, label: 'RALLY CRY', ...(v.kind === 'player' ? { _relayAlly: true } : {}) };
         if (!v.alive || v.fled) continue;
+        if (v.kind === 'player') { Game.tbCommandPlayer(p, 'Speak and Be Heard'); continue; }
         try { v._gpCommanded = true; Game.tbVillagerTurn(v); } catch (e) { warn('rally turn', e); } finally { delete v._gpCommanded; }
         if (Game.tbEndCheck && Game.tbEndCheck()) break;
       }
@@ -527,7 +529,7 @@
         if (act && !GV(f).truth && liveOurs(f).length >= 2) return tryCast('no_lies', 'no_lies', act, null);
       } else if (gid === 'voice_of_the_relay') {
         const act = actBy('rally_cry');
-        if (act && liveOurs(f).filter(x => x !== v && x.kind !== 'player').length >= 1) return tryCast('rally_cry', 'rally_cry', act, null);
+        if (act && Game.tbOtherAllies(v).length >= 1) return tryCast('rally_cry', 'rally_cry', act, null);
       } else if (gid === 'market_god') {
         const act = actBy('buy_passage');
         if (act && hp < 0.35 && near && d <= 2 && !isTitanish(near)) return tryCast('buy_passage', 'buy_passage', act, near.key);
@@ -929,6 +931,7 @@
       try {
         const f = this.tbfight, s = (this.state || {}).scholar;
         if (f && s && s._nextStrikes && s._nextStrikes._apexAlly) delete s._nextStrikes;
+        if (f && s && s._nextStrikes && s._nextStrikes._relayAlly) delete s._nextStrikes;
         if (f && f._gv) fadeEchoes(this, f, true);
       } catch (e) { warn('tbEnd gods', e); }
       return _te.apply(this, arguments);

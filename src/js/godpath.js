@@ -690,7 +690,7 @@
       const fans = (a.fans || 2) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
       if (C.isP) s.fans = Math.min(50, (s.fans || 0) + fans);
       const rounds = Math.min(5, Math.round(((a.rally || 2) + (lvlC(C, ab.id) >= 2 ? 1 : 0)) * mult));
-      const allies = alliesOf(f, C);
+      const allies = Game.tbOtherAllies(C.p);
       for (const v of allies) v.rallyBuff = Math.max(v.rallyBuff || 0, rounds);
       if (lvlC(C, ab.id) >= 3) for (const m of liveMons(f)) m.hesitate = Math.max(m.hesitate || 0, 1);
       if (C.isP) Game.sysSay && Game.sysSay(`📺 "WE'RE LIVE!" +${fans} fans (${s.fans} watching).${allies.length ? ` ${allies.length} all${allies.length === 1 ? 'y hears' : 'ies hear'} your voice: emboldened for ${rounds} rounds.` : ''}${mult > 1 ? ` (Crowd Favorite: x${mult.toFixed(1)})` : ''} (Live Broadcast)`);
@@ -699,14 +699,18 @@
     },
     command(a, ab, target, actor) {
       const C = actorCtx(actor), f = Game.tbfight;
-      const allies = alliesOf(f, C);
+      const allies = Game.tbOtherAllies(C.p);
       if (!allies.length) { if (C.isP) Game.say('No one to command. (The Crowd Moves needs allies in the fight.)'); return false; }
       say(C, `You say one word. Everyone hears "NOW." (The Crowd Moves: ${allies.length} extra turn${allies.length === 1 ? '' : 's'}.)`,
         `${C.name} says one word. Everyone hears "NOW." (The Crowd Moves: ${allies.length} extra turn${allies.length === 1 ? '' : 's'}.)`);
       for (const v of allies) {
         if (!v.alive || v.fled) continue;
-        try { v._gpCommanded = true; Game.tbVillagerTurn(v); } catch (e) { warn('command turn', e); } finally { delete v._gpCommanded; }
-        if (lvlC(C, ab.id) >= 2 && v.alive) v.hp = Math.min(v.maxHp, v.hp + 5);
+        if (v.kind === 'player') Game.tbCommandPlayer(C.p, 'The Crowd Moves');
+        else { try { v._gpCommanded = true; Game.tbVillagerTurn(v); } catch (e) { warn('command turn', e); } finally { delete v._gpCommanded; } }
+        if (lvlC(C, ab.id) >= 2 && v.alive) {
+          if (v.kind === 'player') Game.addHealth(5);
+          else v.hp = Math.min(v.maxHp, v.hp + 5);
+        }
         if (Game.tbEndCheck && Game.tbEndCheck()) return true;
       }
       return true;
@@ -914,8 +918,8 @@
     blink: (I) => (I.hp < 0.35 && I.d <= 1 ? 8 : null),
     swap: (I) => (I.n < 1 && I.mons.some(m => m.telegraph && cheb(m, I.v) <= 3 && (Game.fighterSize ? Game.fighterSize(m) : 1) <= 1) ? 7 : null),
     foresee: (I) => (I.n < 1 && (I.hasProphecy || I.mons.some(m => m.telegraph)) ? 5.5 : null),
-    broadcast: (I) => (I.n < 1 && I.allies.length >= 1 ? 5 : null),
-    command: (I) => (I.n < 1 && I.allies.length >= 2 ? 7 : null),
+    broadcast: (I) => (I.n < 1 && Game.tbOtherAllies(I.v).length >= 1 ? 5 : null),
+    command: (I) => (I.n < 1 && Game.tbOtherAllies(I.v).length >= 2 ? 7 : null),
     empower: (I) => (!I.v._nextStrikes && I.d <= 1 ? 6 : null),
     guard: (I) => (I.n < 1 && !I.v._absorb && I.d <= 2 && I.hp < 0.8 ? 6 : null),
     bribe: (I) => (I.n < 1 && I.near && I.d <= 2 && !isTitanish(I.near) && (I.hp < 0.6 || I.mons.length >= 2) ? 6.5 : null),
@@ -1539,7 +1543,7 @@
           const L = h.isP ? this.abilityLevel('rally_aura') : 1;
           const rad = L >= 3 ? 5 : 3;
           const rounds = L >= 2 ? 3 : 2;
-          const near = liveAllies(f).filter(v => v !== h.f && cheb(v, h.f) <= rad);
+          const near = this.tbOtherAllies(h.f).filter(v => cheb(v, h.f) <= rad);
           for (const v of near) { v.rallyBuff = Math.max(v.rallyBuff || 0, rounds); v.rallied = Math.max(v.rallied || 0, rounds); }
           if (near.length) this.say(`People stand straighter near ${h.isP ? 'you' : h.f.name}: ${near.length} all${near.length === 1 ? 'y starts' : 'ies start'} this fight emboldened. (Rally Aura)`);
         }

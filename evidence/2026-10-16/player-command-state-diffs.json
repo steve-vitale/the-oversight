@@ -1,0 +1,4381 @@
+[
+  {
+    "policy": "capable",
+    "seed": 777,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 5617.9649,
+        "after": 5380.4595
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 80,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 81,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 80,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 81,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      }
+    ]
+  },
+  {
+    "policy": "caregiver",
+    "seed": 11,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {
+            "m_0": 227
+          },
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 6962.9649,
+        "after": 7269.1056
+      }
+    ],
+    "callsBefore": [],
+    "callsAfter": []
+  },
+  {
+    "policy": "caregiver",
+    "seed": 1234,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {
+            "p:rally_cry": 1
+          },
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": {}
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 8162.3109,
+        "after": 8246.9816
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 80,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 81,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 83,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 84,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 85,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 87,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 89,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 91,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_ek0exqj",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_ek0exqj",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 93,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 95,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 97,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 98,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 100,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 100,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 101,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 103,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 104,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 106,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 107,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 110,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 111,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 112,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 114,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 115,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 116,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 117,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 118,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 119,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 120,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 121,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 123,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 124,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 125,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 127,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 128,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 129,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 129,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 2
+        }
+      },
+      {
+        "name": "tele",
+        "day": 129,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 130,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 131,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 132,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 133,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 134,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 135,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 136,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 137,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 138,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 140,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 1
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 80,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 81,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 83,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 84,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 85,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 87,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 89,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 91,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_ek0exqj",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_ek0exqj",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 93,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 95,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 97,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 98,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 100,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 100,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 101,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 103,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 104,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 106,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 107,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 109,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 110,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 111,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 112,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 114,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 115,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 116,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 117,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 7
+        }
+      },
+      {
+        "name": "tele",
+        "day": 118,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 119,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 120,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 121,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 123,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 124,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 125,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 127,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 128,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 6
+        }
+      },
+      {
+        "name": "tele",
+        "day": 129,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 129,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 2
+        }
+      },
+      {
+        "name": "tele",
+        "day": 129,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 130,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 131,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 132,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 133,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 134,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 135,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 136,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 137,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 138,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "be_heard",
+          "who": "player",
+          "heard": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 140,
+        "type": "god_verb",
+        "data": {
+          "god": "voice_of_the_relay",
+          "verb": "rally_cry",
+          "who": "player",
+          "allies": 1
+        }
+      }
+    ]
+  },
+  {
+    "policy": "caregiver",
+    "seed": 29,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 12780.0673,
+        "after": 12887.9874
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 68,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_p1tq69w",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 68,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "sari_wulandari",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 72,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 73,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_60r4zjf",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "diana_osei",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "diana_osei",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_p1tq69w",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "diana_osei",
+          "field": true
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 68,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_p1tq69w",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 68,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "sari_wulandari",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 72,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 73,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_60r4zjf",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 82,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "miguel_santos",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "diana_osei",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "diana_osei",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_p1tq69w",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "diana_osei",
+          "field": true
+        }
+      }
+    ]
+  },
+  {
+    "policy": "maker",
+    "seed": 17,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 8440.7546,
+        "after": 8648.8969
+      }
+    ],
+    "callsBefore": [],
+    "callsAfter": []
+  },
+  {
+    "policy": "maker",
+    "seed": 19,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {
+            "p": 2
+          },
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": {
+          "v_visjoin_88": {}
+        }
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 11516.9359,
+        "after": 11838.4915
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 61,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 61,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 61,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 64,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "god_verb",
+        "data": {
+          "god": "the_between",
+          "verb": "phase_out",
+          "who": "player",
+          "negated": 72
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 61,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 61,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 61,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 64,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "leo_martin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "god_verb",
+        "data": {
+          "god": "the_between",
+          "verb": "phase_out",
+          "who": "player",
+          "negated": 72
+        }
+      }
+    ]
+  },
+  {
+    "policy": "maker",
+    "seed": 33,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": false,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 9575.5985,
+        "after": 9497.7822
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 34,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_g6namr0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 37,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_g6namr0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 80,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_jm9wtz6",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 81,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_jm9wtz6",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 123,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 123,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 130,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 130,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "the_crowd_moves",
+          "verb": "command"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 141,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 141,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 145,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 34,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_g6namr0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 37,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_g6namr0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 80,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_jm9wtz6",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 81,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_jm9wtz6",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 123,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 123,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 130,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 130,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "the_crowd_moves",
+          "verb": "command"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 141,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 141,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 145,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "tashi_sherpa",
+          "field": true
+        }
+      }
+    ]
+  },
+  {
+    "policy": "maker",
+    "seed": 38,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {
+            "p:no_lies": 1
+          },
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": {
+            "key": "p"
+          },
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 17861.5482,
+        "after": 18216.4771
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 62,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_q0a68f0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 67,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "owen_smith",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 78,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "owen_smith",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 87,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies_ambush",
+          "who": "player"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_q0a68f0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_q0a68f0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies",
+          "who": "player"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 103,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "onni_korhonen",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 111,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 115,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 125,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "vasyl_shevchenko",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 125,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "vasyl_shevchenko",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies",
+          "who": "player"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 144,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies",
+          "who": "player"
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 62,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_q0a68f0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 67,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "owen_smith",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 78,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "owen_smith",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 87,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies_ambush",
+          "who": "player"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 90,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_q0a68f0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_q0a68f0",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies",
+          "who": "player"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 103,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "onni_korhonen",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 111,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 115,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 125,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "vasyl_shevchenko",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 125,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "vasyl_shevchenko",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 126,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "nina_petrova",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 139,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies",
+          "who": "player"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 144,
+        "type": "god_verb",
+        "data": {
+          "god": "all_seeing",
+          "verb": "no_lies",
+          "who": "player"
+        }
+      }
+    ]
+  },
+  {
+    "policy": "maker",
+    "seed": 42,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 8208.1949,
+        "after": 7799.6306
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 40,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ethan_hunt",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 42,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "blink",
+          "verb": "blink"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 42,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "blink",
+          "verb": "blink"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 43,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "blink",
+          "verb": "blink"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 91,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 93,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 95,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 97,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 98,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 100,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 101,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 103,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 104,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 106,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 107,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "static_toss",
+          "verb": "kit_static",
+          "who": "visjoin_53"
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 40,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ethan_hunt",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 42,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "blink",
+          "verb": "blink"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 42,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "blink",
+          "verb": "blink"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 43,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "blink",
+          "verb": "blink"
+        }
+      },
+      {
+        "name": "tele",
+        "day": 91,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 93,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 94,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 95,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 3
+        }
+      },
+      {
+        "name": "tele",
+        "day": 96,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 97,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 98,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 99,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 100,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 101,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 102,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 103,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 104,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 4
+        }
+      },
+      {
+        "name": "tele",
+        "day": 106,
+        "type": "god_verb",
+        "data": {
+          "god": "living_garden",
+          "verb": "feed_multitude",
+          "who": "player",
+          "fed": 5
+        }
+      },
+      {
+        "name": "tele",
+        "day": 107,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "static_toss",
+          "verb": "kit_static",
+          "who": "visjoin_53"
+        }
+      }
+    ]
+  },
+  {
+    "policy": "maker",
+    "seed": 5,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 9798.1279,
+        "after": 8893.5572
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 51,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "turncoat",
+          "verb": "turncoat",
+          "who": "stan_kowalski",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 91,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "fear_aura",
+          "verb": "fear_aura",
+          "who": "gen_gjfwgcj",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "fear_aura",
+          "verb": "fear_aura",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "turncoat",
+          "verb": "turncoat",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "turncoat",
+          "verb": "turncoat",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 51,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "turncoat",
+          "verb": "turncoat",
+          "who": "stan_kowalski",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 91,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 105,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "fear_aura",
+          "verb": "fear_aura",
+          "who": "gen_gjfwgcj",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 108,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "fear_aura",
+          "verb": "fear_aura",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 113,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "pavel_dubinin",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "turncoat",
+          "verb": "turncoat",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 122,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "turncoat",
+          "verb": "turncoat",
+          "who": "gen_2jnri07",
+          "field": true
+        }
+      }
+    ]
+  },
+  {
+    "policy": "merchant",
+    "seed": 40,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {},
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 0,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 6726.7872,
+        "after": 6614.527
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ursula_weber",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ursula_weber",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ursula_weber",
+          "field": true
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ursula_weber",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ursula_weber",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 92,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "ursula_weber",
+          "field": true
+        }
+      }
+    ]
+  },
+  {
+    "policy": "merchant",
+    "seed": 7,
+    "diff": [
+      {
+        "path": "state.run.tbfight.playerCommands",
+        "after": []
+      },
+      {
+        "path": "state.run.tbfight.playerCommandReturn",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godVerbs",
+        "after": {
+          "uses": {
+            "p:raise_echo": 1
+          },
+          "beam": {},
+          "titanPain": {},
+          "rallied": {},
+          "phased": {},
+          "strains": {},
+          "collapsed": {},
+          "echoes": 1,
+          "terms": null,
+          "truth": null,
+          "firstBlow": true,
+          "saidHeal": false
+        }
+      },
+      {
+        "path": "state.run.tbfight.godpathUses",
+        "after": null
+      },
+      {
+        "path": "state.run.tbfight.godpathVillagerUses",
+        "after": null
+      },
+      {
+        "path": "state.pacing.lastTs",
+        "before": 6422.9296,
+        "after": 6142.8605
+      }
+    ],
+    "callsBefore": [
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_26jxd2x",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "god_verb",
+        "data": {
+          "god": "shepherd_of_the_dead",
+          "verb": "raise_echo",
+          "who": "player",
+          "echo": "ava_garcia",
+          "titan": false
+        }
+      },
+      {
+        "name": "tele",
+        "day": 95,
+        "type": "god_verb",
+        "data": {
+          "god": "shepherd_of_the_dead",
+          "verb": "raise_echo",
+          "who": "player",
+          "echo": "visjoin_74",
+          "titan": false
+        }
+      }
+    ],
+    "callsAfter": [
+      {
+        "name": "tele",
+        "day": 86,
+        "type": "godpath_verb",
+        "data": {
+          "ability": "rage",
+          "verb": "rage",
+          "who": "gen_26jxd2x",
+          "field": true
+        }
+      },
+      {
+        "name": "tele",
+        "day": 88,
+        "type": "god_verb",
+        "data": {
+          "god": "shepherd_of_the_dead",
+          "verb": "raise_echo",
+          "who": "player",
+          "echo": "ava_garcia",
+          "titan": false
+        }
+      },
+      {
+        "name": "tele",
+        "day": 95,
+        "type": "god_verb",
+        "data": {
+          "god": "shepherd_of_the_dead",
+          "verb": "raise_echo",
+          "who": "player",
+          "echo": "visjoin_74",
+          "titan": false
+        }
+      }
+    ]
+  }
+]

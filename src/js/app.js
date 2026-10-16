@@ -17127,7 +17127,7 @@
     // life-and-death info — the phoenix beats need you to SEE who's hurt.
     // Rendered only when allies are actually in the fight.
     const _allyStrip = (Game.allyStripHTML ? Game.allyStripHTML() : '') || '';
-    return `<div class="combat-enemies" style="font-size:12px;opacity:.85;margin:0 6px 4px">${enemyLine} <span style="opacity:.6">· ${p.moveLeft || 0} move · ${p.acted ? 0 : 1} act</span></div>` +
+    return `<div class="combat-enemies" style="font-size:12px;opacity:.85;margin:0 6px 4px">${enemyLine} <span style="opacity:.6">· ${tf.playerCommandReturn ? 'extra turn · ' : ''}${p.moveLeft || 0} move · ${p.acted ? 0 : 1} act</span></div>` +
     (_allyStrip ? `<div class="combat-allies" style="font-size:12px;opacity:.9;margin:0 6px 4px">${_allyStrip}</div>` : '') +
     `<div class="selfbar">
       <button class="self-btn" id="c-strike" title="${esc(wname)} — range ${wrange}" ${(!adj.length || p.acted) ? 'disabled' : ''}>⚔ Strike${adj.length > 1 ? '…' : ''}</button>
@@ -17241,7 +17241,7 @@
     // Narration lives in the unified narration box. Actions live in the
     // combined actions area. This is just the compact header.
     return `
-      <div class="combat-strip"><div class="cs-line"><span>⚔</span> ${monRows} <span class="cs-turn">${turnLine}</span></div>${intelLine}
+      <div class="combat-strip"><div class="cs-line"><span>⚔</span> ${monRows} <span class="cs-turn">${yourTurn && tf.playerCommandReturn ? 'extra turn · ' : ''}${turnLine}</span></div>${intelLine}
       </div>`;
   }
 

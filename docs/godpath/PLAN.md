@@ -10,9 +10,11 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 2026-10-16 support follow-up: NPC brawler wound rally and fallen Voice weakness
 now reach distinct living player allies under the existing terms. Player rally
 has a real damage consumer and finite own-turn lifetime. See
-../../evidence/2026-10-16/god-support-audit.md. Active commands still need a
-player-controlled extra action; class broadcast/aura and daily Voice support
-remain separate open work. Never substitute NPC AI for that player choice.
+../../evidence/2026-10-16/god-support-audit.md. The subsequent
+../../evidence/2026-10-16/player-command-audit.md closes tactical command,
+broadcast and aura player recipients with a real controlled bonus turn.
+Daily Voice support and NPC grounding cost parity remain open. Never
+substitute NPC AI for a player choice.
 
 2026-10-16 follow-up: formal companion body/gear parity remains open. The
 retained repair passes28 focused assertions and native phone escape, but

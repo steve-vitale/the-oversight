@@ -8011,6 +8011,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // re-sorted by speed instead of their appended position. Persist
             // the live order verbatim; load() restores it.
             order: Array.isArray(f.order) ? f.order.slice() : null,
+            // A commanded player turn pauses the normal cursor. Keep both
+            // the handoff and spent casts: reload must not grant a new cast.
+            playerCommands: f.playerCommands || [],
+            playerCommandReturn: f.playerCommandReturn || null,
+            godVerbs: f._gv || null,
+            godpathUses: f._gpUses || null,
+            godpathVillagerUses: f._gpVUses || null,
             terraform: f.terraform || {},
             // BELLTOAD CHORUS (break-it r3): the delayed pack is per-fight
             // state — dropping it on save let a mid-fight reload save-scum
@@ -8453,7 +8460,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } else {
           const fkeys = new Set(fighters.map(f => f.key));
           let order = Array.isArray(tbS.order) ? tbS.order.filter(k => fkeys.has(k)) : [];
-          if (droppedGhosts > 0 || droppedCorrupt > 0 || !order.length) {
+          const commanded = !!tbS.playerCommandReturn || (Array.isArray(tbS.playerCommands) && tbS.playerCommands.length > 0);
+          if (((droppedGhosts > 0 || droppedCorrupt > 0) && !commanded) || !order.length) {
             // ghosts/corrupt dropped or pre-order save: rebuild. turnIdx restarts the
             // round rather than pointing into a reshuffled deck.
             order = (typeof S !== 'undefined' && S.combat && S.combat.turnOrder)
@@ -8466,11 +8474,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           let turnIdx = (droppedGhosts > 0 || droppedCorrupt > 0 || !Array.isArray(tbS.order)) ? 0 : (tbS.turnIdx || 0);
           if (turnIdx >= order.length) turnIdx = 0;
+          // A repaired order must still return an active bonus to the player.
+          if (tbS.playerCommandReturn && order.includes('p')) turnIdx = order.indexOf('p');
           this.tbfight = {
             id: tbS.id || ('f' + Date.now().toString(36) + '_' + Math.floor(Math.random() * 1e9).toString(36)),
             fighters,
             order,
             turnIdx,
+            playerCommands: Array.isArray(tbS.playerCommands) ? tbS.playerCommands : [],
+            playerCommandReturn: tbS.playerCommandReturn || null,
+            _gv: tbS.godVerbs || null,
+            _gpUses: tbS.godpathUses || null,
+            _gpVUses: tbS.godpathVillagerUses || null,
             round: tbS.round || 1,
             over: false, result: null,
             terraform: tbS.terraform || {},
@@ -8541,6 +8556,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (tbS.pendingPack && tbS.pendingPack.count > 0) {
             const pmdef = (this.data.monsters || []).find(m => m.id === tbS.pendingPack.id);
             if (pmdef) this._pendingPack = { id: pmdef.id, count: tbS.pendingPack.count, mdef: pmdef };
+          }
+          if (this.tbfight.playerCommands.length && !this.tbfight.playerCommandReturn) {
+            const savedOrder = Array.isArray(tbS.order) ? tbS.order : [];
+            const savedIdx = tbS.turnIdx || 0;
+            this.tbBeginCommandedPlayerTurn({ key: savedOrder[savedIdx], next: savedOrder.slice(savedIdx + 1) });
           }
           } // end else: fighters.length > 0
         }
@@ -30117,6 +30137,58 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const c = this.tbCurrent();
       return !!(c && c.kind === 'player');
     },
+    // Canonical other people, shared by support verbs. A stale NPC alias of
+    // the current bearer is never a second recipient or an AI-driven player.
+    tbOtherAllies(actor) {
+      const f = this.tbfight;
+      if (!f || f.over || !actor || !actor.alive || actor.fled || !['player','villager','ally'].includes(actor.kind)) return [];
+      const who = actor.kind === 'player' ? this.villagerId : actor.villagerId;
+      const seen = new Set(who ? ['person:' + who] : ['fighter:' + actor.key]);
+      return f.fighters.filter(x => {
+        if (x === actor || !x.alive || x.fled || !['player','villager','ally'].includes(x.kind)) return false;
+        if (x.kind !== 'player' && x.villagerId === this.villagerId) return false;
+        const id = x.kind === 'player' ? this.villagerId : x.villagerId;
+        const key = id ? 'person:' + id : 'fighter:' + x.key;
+        if (seen.has(key)) return false;
+        seen.add(key); return true;
+      });
+    },
+    tbCommandPlayer(actor, label) {
+      const f = this.tbfight, p = this.tbFighter('p');
+      if (!f || f.over || !actor || !['villager','ally'].includes(actor.kind) ||
+          !f.fighters.includes(actor) || !this.tbOtherAllies(actor).includes(p) ||
+          !f.order.includes('p')) return false;
+      (f.playerCommands || (f.playerCommands = [])).push({ source: actor.key, label });
+      return true;
+    },
+    tbResumeCommandedTurn() {
+      const f = this.tbfight, r = f && f.playerCommandReturn;
+      if (!r) return;
+      // Keys survive speed changes, reinforcement insertion and save/load.
+      let idx = f.order.indexOf(r.key);
+      if (idx < 0) {
+        const next = (r.next || []).find(key => f.order.includes(key));
+        idx = next ? f.order.indexOf(next) - 1 : f.order.length - 1;
+      }
+      f.turnIdx = idx; delete f.playerCommandReturn;
+    },
+    tbBeginCommandedPlayerTurn(resume) {
+      const f = this.tbfight, p = this.tbFighter('p');
+      if (!f || f.over || f.playerCommandReturn || !f.playerCommands?.length) return false;
+      if (!p || !p.alive || p.fled || !f.order.includes('p')) { f.playerCommands = []; return false; }
+      const command = f.playerCommands.shift();
+      f.playerCommandReturn = resume || { key: f.order[f.turnIdx], next: f.order.slice(f.turnIdx + 1) };
+      f.turnIdx = f.order.indexOf('p'); f.actingKey = null;
+      // The current async step returns without scheduling another tick. A
+      // stale callback cannot advance while the player chooses this turn.
+      f.asyncGen = (f.asyncGen || 0) + 1; f.asyncRunning = false;
+      this.say(`${command.label || 'An ally calls NOW'} — your extra turn. Choose your move.`);
+      this.tbBeginTurn();
+      if (this.tbfight === f && !f.over && this.tbIsPlayerTurn() &&
+          typeof window !== 'undefined' && typeof window.dispatchEvent === 'function' && typeof CustomEvent === 'function')
+        window.dispatchEvent(new CustomEvent('tb-turn', { detail: { phase: 'player' } }));
+      return true;
+    },
     // GRID SIZE (Steve 2026-10-11): per-fight grid dimensions. Titan fights
     // use 12x12 (144 cells); normal fights use 9x9. World map is always 9x9.
     tbGridSize() {
@@ -32848,6 +32920,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbAdvance() {
       const f = this.tbfight;
       if (!f || f.over) return;
+      this.tbResumeCommandedTurn();
+      if (this.tbBeginCommandedPlayerTurn()) return;
       let guard = 0;
       while (guard++ < 60) {
         // FIGHT-ENDED-MID-LOOP (journey-scale r3 2026-10-11): tbEnd nulls
@@ -32887,6 +32961,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.tbMonsterTurn(c);
         }
         if (this.tbEndCheck()) return;
+        if (this.tbBeginCommandedPlayerTurn()) return;
       }
     },
     // STEPPED COMBAT (Steve 2026-10-06): async turn pacing for dramatic cadence.
@@ -32914,6 +32989,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const f = this.tbfight;
       if (!f || f.over) { if (f) f.asyncRunning = false; return; }
       if (gen !== undefined && (f.asyncGen || 0) !== gen) return; // stale chain — a newer one (or a load) superseded it
+      this.tbResumeCommandedTurn();
+      if (this.tbBeginCommandedPlayerTurn()) return;
       // DEAD-SKIP CAP (break-it r3): skipping dead/fled fighters used to
       // recurse with no bound — a fight held open with no live fighters
       // (belltoad chorus) overflowed the stack. Walk at most one full round
@@ -32978,11 +33055,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           else this.tbMonsterTurn(c);
         } catch (e) {}
         if (this.tbEndCheck()) { f.actingKey = null; f.asyncRunning = false; return; }
-        setTimeout(() => { this.tbAdvanceOneAsync(gen); }, 550);
+        if (this.tbBeginCommandedPlayerTurn()) return;
+        setTimeout(() => { if (this.tbfight === f) this.tbAdvanceOneAsync(gen); }, 550);
         return;
       }
       // A full round with nobody able to act (chorus hold): tick again.
-      if (!this.tbEndCheck()) setTimeout(() => { this.tbAdvanceOneAsync(gen); }, 550);
+      if (!this.tbEndCheck()) setTimeout(() => { if (this.tbfight === f) this.tbAdvanceOneAsync(gen); }, 550);
       else { f.actingKey = null; f.asyncRunning = false; }
     },
 // SNAKE MOVEMENT (Steve 2026-10-05): ducks in a row.

@@ -61,6 +61,20 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Player command turns (2026-10-16): retain existing NPC Voice120kcal-equivalent
+and Crowd Moves80kcal-equivalent prices and use limits. Their distinct living
+player ally can now choose an extra move/action turn before normal order
+continues. This is a survival advantage financed by the caster; the chosen
+player ability still pays its normal food cost. A bonus turn ticks statuses
+and rally like other own turns, and a full stun can consume it. Voice grants
+the existing next-two-strikes1.5x commitment in the player's real strike state;
+it replaces the previous commitment like the existing NPC effect. Class
+broadcast/aura player recipients use existing rates, range and duration.
+Save/load preserves spent casts rather than refunding the advantage. Actual
+NPC grounding erosion is still missing and remains a cost-parity audit,
+not an implied waiver. See ../evidence/2026-10-16/player-command-audit.md
+for all metrics, state differences, prepared phone choices and exposure limits.
+
 NPC support recipient audit (2026-10-16): retain the existing brawler wound
 threshold, range, once-per-fight guard, three-turn duration and raw +4 rally
 damage. Apply those terms to a distinct nearby living player as well as NPC

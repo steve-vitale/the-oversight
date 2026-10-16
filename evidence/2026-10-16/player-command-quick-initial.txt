@@ -1,0 +1,18 @@
+check.js: 175 scripts, 4 parallel (quick)
+............................................................................................................F..................................................................
+
+  FAIL scripts/test-godpath-villagers-20261014.js (exit 1, 0.6s)
+        ok   without the subclass payoff, no god (the payoff gate holds)
+        ok   setup: Stalker named, Trophy Room is not in the field kit
+        ok   a named class's payoff is offered on another track's sheet
+        ok   ...with the class still on the sheet's other offers (one swap)
+        ok   villager: the same payoff lean (same function)
+      
+      wiring
+        ok   fieldFights calls fieldBegin/fieldAct/fieldStrike/fieldIncoming/fieldCheatDeath/fieldAllyDown/fieldAllyShare
+        ok   game.js calls villagerStrikeMult and absorbVillagerHit
+      
+      test-godpath-villagers-20261014: 56 passed, 1 failed, 0 todo (phase 0)
+      failing: The Crowd Moves: every other ally takes an extra turn now
+
+check.js: 174 passed, 1 failed in 38s

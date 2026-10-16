@@ -12,9 +12,10 @@ Prepared titan/coalition campaign evidence is separate from natural reachability
 distinct nearby living player; real player damage and finite own-turn duration
 honor the existing flags. NPC Voice collapse now includes the player's full
 lost action. Prepared runtime/phone and standard-cohort limitations are in
-../../evidence/2026-10-16/god-support-audit.md. Active Voice command, daily
-Voice support, class broadcast/aura and broader forty-context proof remain
-open. Do not infer their completion from this passive recipient correction.
+../../evidence/2026-10-16/god-support-audit.md. The subsequent
+../../evidence/2026-10-16/player-command-audit.md proves tactical player
+command handoffs and class broadcast/aura recipients. Daily Voice support,
+NPC grounding cost parity and broader forty-context proof remain open.
 
 All named functions below are in src/js/godverbs.js unless another module is
 named. **Inherited** means a shared tactical fight hook can apply to coalition
@@ -61,9 +62,10 @@ contest rule, audience reaction, judged advantage or mercy choice.
    covers normal monster, alien and formal-party/betrayal constructors and
    preserves raw legacy membership arrays. See dated apex-identity-audit.md
    for four source arms, all metrics and remaining exposure limits.
-   Voice command still explicitly skips player-kind allies. Brawler wound
-   rally and NPC Voice collapse now include the player; see the support
-   evidence above for actual damage, expiry and lost-action proofs.
+   Voice command now includes a player-controlled bonus turn, with finite
+   strike/rally effects and a resumable scheduler. Brawler wound rally and
+   NPC Voice collapse include the player; see the two support audits above
+   for actual damage, expiry, action choice and lost-action proofs.
    `feedMultitude` excludes Game.villagerId even when its holder is an NPC.
    Audit their actual recipient consumers/resource settlement separately.
    Far formal-party injection still uses a30HP helper without the nearby

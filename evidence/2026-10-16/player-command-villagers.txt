@@ -1,0 +1,73 @@
+  ok   three villagers to test with
+
+the 14 combat verbs, cast by a villager
+  ok   Landslide: cast spends the turn
+  ok   Landslide: the monster was thrown away from the villager
+  ok   Landslide: villager paid 80 kcal from their belly (+3 hunger)
+  ok   telemetry names the villager as caster
+  ok   perFight 1: no second Landslide this fight
+  ok   Raise Earth: a villager raises a real wall on the grid
+  ok   Pack Hunt: the monster is pinned and harried
+  ok   Mending Hands: a hurt villager heals themself
+  ok   Bribe: the monster backs off and hesitates
+  ok   Sweetener held by the villager: the bribed monster turns
+  ok   Stoke: free (no turn) and arms the next 2 strikes
+  ok   Stoke: villagerStrikeMult reads it (x1.6, times the food overcharge)
+  ok   Coin Guard on a villager absorbs a real tbDamage hit
+  ok   Foresight: a villager reads the fight
+  ok   Prophecy held by the villager: ~35% of blows miss while Foresight runs
+  ok   Switcheroo: a wind-up is answered by swapping places
+  ok   Blink: a cornered villager teleports away (no turn)
+  ok   Gravity Well: outnumbered, the villager pulls monsters in
+  ok   Live Broadcast: allies emboldened
+  ok   The Crowd Moves: two NPC allies act and the player receives a controlled third turn
+  ok   Aegis Link: a healthy villager links to a hurt one
+  ok   the linked ally's hit lands on the linker
+
+food powers villager casts
+  ok   a hungry villager (hunger 79) cannot burn 80 kcal: no cast
+  ok   a starving pantry: villagers conserve every calorie
+
+passives apply to whoever holds them
+  ok   Lifeline held by a villager: a falling ally holds at 1
+  ok   Ember Heart held by a villager: they stand back up at 20%
+  ok   Back from the Brink: their next 3 strikes x1.5
+  ok   the furnace cost food (600 kcal = +24 hunger)
+  ok   Last Rites held by a villager: a fallen ally guards them (2 hits)
+  ok   Misdirection held by a villager: +50% into a confused monster
+  ok   ...and nothing into a clear-headed one
+  ok   Rally Aura held by a villager: allies near them start emboldened
+
+off-screen field fights
+  ok   field: Landslide / Pack Hunt / Coin Guard / Stoke narrate in the fight log
+  ok   field: a held kit wins more and dies less than none
+  ok   field: casts reach telemetry with the villager as caster
+
+the whole kit off-screen + food is fuel for villagers too
+  ok   data modifiers held by a villager: strikes x1.3, dodge +15%, armor +30
+  ok   field: Static Toss / Cheese Wheel / Rage / Bird Strike / Pocket Sand run off-screen
+  ok   detection held by a villager: the awareness roll reads bird_whisperer (+0.2) and beast_calm (x0.75 noticed)
+  ok   a well-fed villager hits x1.25 (the player's overcharge)
+  ok   a hungry villager hits x1
+  ok   a starving pantry feeds no one's power
+  ok   tb: a well-fed villager's strike carries the overcharge
+  ok   tb: Static Toss cast by a villager hits a monster within 3
+  ok   tb: Turncoat turns two monsters on each other
+  ok   tb: adrenaline_control (combat.strike_damage x1.3) on a villager's strike
+
+ascension: the lived-in deed (rules.capstone.deedClassDays)
+  ok   data: deedClassDays is set and the payoff + deed gates stay on
+  ok   class named: Stalker of the Apex Predator
+  ok   held 9 days: the deed is not yet done (no synergy)
+  ok   held 10 days: the lived-in deed completes the god (payoff + 4 + class + day 80+)
+  ok   without the subclass payoff, no god (the payoff gate holds)
+  ok   setup: Stalker named, Trophy Room is not in the field kit
+  ok   a named class's payoff is offered on another track's sheet
+  ok   ...with the class still on the sheet's other offers (one swap)
+  ok   villager: the same payoff lean (same function)
+
+wiring
+  ok   fieldFights calls fieldBegin/fieldAct/fieldStrike/fieldIncoming/fieldCheatDeath/fieldAllyDown/fieldAllyShare
+  ok   game.js calls villagerStrikeMult and absorbVillagerHit
+
+test-godpath-villagers-20261014: 57 passed, 0 failed, 0 todo (phase 0)

@@ -277,6 +277,41 @@ use the retained daily samples for time-window diagnosis before attributing a
 population difference to one cause. Opportunity funnels and fixed early/mid/late
 windows are explicit follow-up work in the plan.
 
+## Player-controlled command turns
+
+Run `node scripts/godpath/test-player-command-turns.js` for NPC Voice/Crowd
+Moves support. The shared-kit proof covers actual paid NPC callers, both
+steppers, real player Strike, save/load, spent cast limits, stale callbacks,
+status loss, ordinary-turn preservation, broadcast and actual-entry Rally Aura.
+It is automatically discovered by quick/full checks. Keep it current whenever
+changing commands, combat turn order, status ticks or fight serialization.
+
+Support code uses `tbOtherAllies(actor)` for distinct living recipients.
+For a player recipient, queue `tbCommandPlayer(actor, label)` and let the
+driver hand over after the caster returns and settles its food/use gate.
+Never call `tbVillagerTurn(player)` or enter a player turn inside an unfinished
+NPC cast. The bonus uses the normal player choices and status/action costs;
+finish it through the normal action/Wait path. Do not replace the normal
+player turn or advance foes while a human is choosing. Persist the queue,
+return cursor and spent casts together. Async callbacks must retain both the
+original fight identity and generation. If load repairs the order after
+dropping an obsolete fighter, an active bonus must still select the player
+by key; slot0 can belong to a faster foe.
+
+The dated player-command audit includes a passive replay tool:
+
+```text
+node evidence/2026-10-16/player-command-probe.cjs <root> <policy> <seed> <out.json.gz>
+```
+
+One process loads one shared harness. Compare its row, full final-state hash
+and23 metrics with the corresponding panel before using its call receipts.
+Raw state includes known pacing diagnostics excluded by the standard hash;
+do not mistake those timestamps for gameplay effects. Calls trace that named
+replay, not every run in a panel. Prepared bonus turns and unchanged campaign
+metrics cannot prove natural NPC acquisition, usefulness or complete Voice
+cost parity. See the dated audit for the remaining daily/grounding gaps.
+
 ## Maintaining measurement
 
 NPC eligibility revision (2026-10-16): new panels correlate NPC classes/gods

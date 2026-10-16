@@ -1,0 +1,13 @@
+  FAIL actual NPC Voice caller grants a player-controlled extra turn before the foe
+  ok   the handoff neither duplicates fighters nor changes the normal turn order
+  FAIL NPC pays the existing120kcal-equivalent once, player pays no caster food
+  FAIL player was never passed to NPC AI and no attack was selected for them
+  FAIL real player strike state receives two1.5x strikes and own-turn rally duration
+  FAIL native player Strike consumes one actual Rally Cry charge
+  FAIL finishing the bonus resumes after its caster and preserves the normal player turn
+  ok   the second real player strike consumes the final charge
+  FAIL a spent NPC Voice cast cannot refill the charge on its next turn
+  ok   unfunded NPC Voice grants no bonus or strike charge
+  ok   an already commanded NPC cannot recursively command the player
+TypeError: G.tbOtherAllies is not a function
+    at C:\Users\Steve\oversight\.git\player-command-before\scripts\godpath\test-player-command-turns.js:37:86

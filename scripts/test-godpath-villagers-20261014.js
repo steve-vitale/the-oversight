@@ -158,7 +158,7 @@ const T = K.reporter('test-godpath-villagers-20261014');
     const says = K.captureSays(Game);
     const r = cast(A);
     says.restore();
-    T.ok('The Crowd Moves: every other ally takes an extra turn now', r === true && says.some(l => /The Crowd Moves: 2 extra turns/.test(l)), says.filter(l => /Crowd/.test(l)).join(' | '));
+    T.ok('The Crowd Moves: two NPC allies act and the player receives a controlled third turn', r === true && says.some(l => /The Crowd Moves: 3 extra turns/.test(l)) && Game.tbfight.playerCommands?.length === 1, says.filter(l => /Crowd/.test(l)).join(' | '));
     void B; void C;
   }
   {
