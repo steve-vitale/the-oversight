@@ -431,15 +431,32 @@
           // always found [] and the acute mourning lines fell back to the
           // nameless variants even with a fresh named corpse on the ground.
           const corpses = (typeof this.corpses === 'function') ? this.corpses() : (this.state.corpses || []);
-          const recent = corpses[corpses.length - 1];
+          // MULTI-MOURNING (journey-succession r16 2026-10-16): the old read
+          // named only the single last corpse — with 2-3 fresh villager
+          // corpses the village grieved one at a time, and a later monster
+          // corpse displaced the dead entirely (probe: "Since Dustboar
+          // died..." with two dead villagers unmentioned). Name every fresh
+          // SAPIENT corpse (corpseIsPerson: 'person' + 'villager' kinds;
+          // dayDied within the 3-day acute window); monsters are never
+          // mourned by name.
+          const _mday = (this.state.scholar || {}).day || 0;
+          const _isPerson = (typeof this.corpseIsPerson === 'function')
+            ? (c) => { try { return this.corpseIsPerson(c); } catch (e) { return false; } }
+            : (c) => c && (c.kind === 'person' || c.kind === 'villager');
+          const _fresh = corpses.filter(c => c && _isPerson(c) &&
+            (_mday - (c.dayDied || 0)) >= 0 && (_mday - (c.dayDied || 0)) <= 3);
           // MOURNING NAME (journey crisis r8 2026-10-12): firstRef, never
           // split(' ')[0] — the split truncated stranger descriptors
           // ("A person, maybe 40s, with a scarred cheek") to the bare "A"
           // (transcript-verified: "Since A died..."). firstRef is
           // knowledge-gated per viewer and never collapses to "A".
-          let nm = null;
-          try { if (recent && recent.villagerId && typeof this.firstRef === 'function') nm = this.firstRef(recent.villagerId) || null; } catch (e) {}
-          if (!nm && recent) nm = String(recent.name || recent.villagerId || 'someone');
+          const _names = [];
+          for (const c of _fresh) {
+            let nm = null;
+            try { if (c.villagerId && typeof this.firstRef === 'function') nm = this.firstRef(c.villagerId) || null; } catch (e) {}
+            if (!nm) nm = String(c.name || c.villagerId || 'someone');
+            if (nm && _names.indexOf(nm) < 0) _names.push(nm);
+          }
           // SICKNESS DEATH (journey crisis r8 2026-10-14): when the fresh
           // corpse died of disease, the mourning lines name the sickness —
           // sense-tested, the village grieved its outbreak dead generically
@@ -447,10 +464,15 @@
           // honest ("the sickness"), never the disease true name.
           let sickDeath = false;
           try {
+            const recent = _fresh[_fresh.length - 1];
             const cause = String((recent && recent.cause) || '');
             sickDeath = /sick|gutrot|wound_fever|trembles|trichinosis|lockjaw|tick fever|gut rot/i.test(cause) || cause === 'disease';
           } catch (e) {}
-          return { kind: 'mourning', name: nm, sickDeath };
+          // ev.name stays the single most-recent reference (the {mname}
+          // substitution reads it); ev.names carries the full fresh list
+          // for the multi-name line templates. No fresh villager corpses:
+          // the nameless variants (grief is real, the body isn't found).
+          return { kind: 'mourning', name: _names.length ? _names[_names.length - 1] : null, names: _names, sickDeath };
         }
         // MANTLE MEMORY (journey crisis r4 2026-10-12): the village talks
         // about a dead bearer longer than the 3-day acute grief — the mantle
@@ -1045,16 +1067,30 @@
           ];
         }
         case 'mourning': {
-          const lines = ev.name
-            ? ['"Since ' + ev.name + ' died... I keep expecting to see ' + ev.name + ' at the fire. Stupid."',
-               '"' + ev.name + ' is gone and the world just... continues. That\'s the part I can\'t stand."']
-            : ['"We lost someone. I keep setting out an extra portion. Stupid."',
+          // MULTI-MOURNING (journey-succession r16 2026-10-16): ev.names
+          // carries every fresh villager corpse; single-name behavior and
+          // tone are preserved exactly, multi-name gets its own templates.
+          const mnames = (ev.names && ev.names.length) ? ev.names : (ev.name ? [ev.name] : []);
+          let mlines;
+          if (mnames.length >= 2) {
+            const mlist = mnames.length === 2 ? mnames[0] + ' and ' + mnames[1]
+              : mnames.slice(0, -1).join(', ') + ' and ' + mnames[mnames.length - 1];
+            const mgone = mnames.length === 2 ? mnames[0] + ' is gone and ' + mnames[1] + ' is gone'
+              : mnames.slice(0, -1).join(' is gone, ') + ' is gone, and ' + mnames[mnames.length - 1] + ' is gone';
+            mlines = ['"We lost ' + mlist + ' this week. I keep setting out extra portions. Stupid."',
+              '"' + mgone + ' and the world just... continues. That\'s the part I can\'t stand."'];
+          } else if (mnames.length === 1) {
+            mlines = ['"Since ' + mnames[0] + ' died... I keep expecting to see ' + mnames[0] + ' at the fire. Stupid."',
+               '"' + mnames[0] + ' is gone and the world just... continues. That\'s the part I can\'t stand."'];
+          } else {
+            mlines = ['"We lost someone. I keep setting out an extra portion. Stupid."',
                '"Grief doesn\'t schedule itself. It just shows up at dinner."'];
+          }
           // SICKNESS DEATH (journey crisis r8 2026-10-14): the village names
           // what took them — the outbreak and the grief are one story.
-          if (ev.sickDeath && ev.name) lines.push(
-            '"The sickness took ' + ev.name + '. I keep washing my hands like it\'ll bring them back. Stupid."');
-          return lines;
+          if (ev.sickDeath && mnames.length) mlines.push(
+            '"The sickness took ' + mnames[mnames.length - 1] + '. I keep washing my hands like it\'ll bring them back. Stupid."');
+          return mlines;
         }
         case 'threat':
           return ['"That thing — ' + (ev.note || 'by the treeline') + '. I keep seeing it when I blink."',
