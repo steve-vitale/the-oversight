@@ -61,3 +61,7 @@ is automatically a regression. See balance-challenge-audit.md for the new
 contract, current tests (shared quick 95/97), preserved historical limitations
 and both roots' fresh observer-neutral proofs. SURVIVAL-LEVERS.md is the
 maintained register and decision log. Existing shared game failures remain.
+
+## Calendar diagnostics (2026-10-15)
+
+Read `balance-windows-sharing.md` for the newly shared read-only tool, 13 passing counterexamples, full-suite results (822/48), and the reproduced CRLF legacy vest-test failure. No gameplay/collector/contract change.

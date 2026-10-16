@@ -156,3 +156,5 @@ invalidate changed inputs automatically. Never compare different policy or
 harness revisions as if only the game changed. Resume/shard instructions are
 in SIMULATING.md. Keep all tooling shared with the other agent before using
 it as a balance gate. No local Git hook installation is required.
+
+For exposure-sensitive comparisons, retain `balance-windows.js` output alongside the full scorecard. Read SIMULATING.md: complete-window subsets are conditional and cannot clear community warnings. Its counterexample tests run automatically in quick/full checks.

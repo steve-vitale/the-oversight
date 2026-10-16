@@ -140,3 +140,5 @@ Master can lack metrics supported on Codex's gameplay branch (for example,
 food-intake receipts). Unknown measurements are a review item, not a zero.
 The calibration evidence describes its recorded runtime hashes, not regional
 master. Use a fresh screen on the actual region/job you are developing.
+
+For exposure-sensitive changes, add `balance-windows.js`: conditional matched calendar windows, exact missing-day lists and competing endings. See SIMULATING.md. This diagnostic does not clear scorecard warnings or infer post-Table survival. The tool can read valid paired panels from another gameplay checkout; it makes no gameplay changes to this tooling branch.
