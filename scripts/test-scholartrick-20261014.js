@@ -214,7 +214,7 @@ const Game = globalThis.Scattering.Game;
   const v2 = Game.noteVillagerTrickObservation('somevillager', 'bulldozer');
   ok(v2 === true, 'villager second observation: discovered');
   const vbeat = sayLines.join('\n');
-  ok(vbeat.includes('You did the thing — and it worked.'), 'villager viaLine UNCHANGED ("You did the thing — and it worked.")');
+  ok(vbeat.includes('Two survived encounters — the fire has a theory.'), 'villager viaLine (sim-wave3ledger 2026-10-16: was the scholar\'s "You did the thing" — misattributed the village\'s learning; now the fire\'s theory)');
   ok(villagerDiscoveries === 1 && scholarDiscoveries === 0, 'tele via=observed (not scholar-observed)');
   ok(Game.noteVillagerTrickObservation('player', 'hummice') === false, "villager wrapper still excludes 'player'");
   ok(Game.noteScholarTrickObservation('nonexistent_mid') === false, 'unknown mid -> false, no crash');

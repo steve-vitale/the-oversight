@@ -30483,9 +30483,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // per monster type. Zero gameplay effect.
         try { this.tele('counter_discovered', { id: mid, via: via }); } catch (e) {}
         const c = mdef.counter;
+        // SENSE (sim-wave3ledger 2026-10-16): the non-lethal villager
+        // observation channel (via='observed') used to fall through to
+        // "You did the thing" — misattributing the village's learning to
+        // the scholar. Two survived encounters is the fire having a theory,
+        // not the scholar doing the trick.
         const viaLine = via === 'taught' ? 'Someone at the haven knew the trick.'
           : via === 'scholar-observed' ? 'You lived to tell it — twice — and now you see the pattern.'
           : via === 'node-witnessed' ? 'The village pieced it together from a death someone lived to report.'
+          : via === 'observed' ? 'Two survived encounters — the fire has a theory.'
           : 'You did the thing — and it worked.';
         this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${c.trick}. ${c.reveal} (${viaLine})`);
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${c.trick} — ${c.reveal}`); } catch (e) {}
