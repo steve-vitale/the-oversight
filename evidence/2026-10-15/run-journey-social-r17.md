@@ -103,7 +103,7 @@ goal 453, skills 377.
 
 Six villages, 31 dead. The competent villages held together (8–12 alive);
 1207/socialite wiped on day 56 (14 fallen — a death spiral the +10d tail
-couldn't outrun). The bearer <redacted> 13 times across the pilot; succession held
+couldn't outrun). The bearer died 13 times across the pilot; succession held
 every time, twice choosing the rumor target (highest trust). What they knew:
 villagers grieve out loud (r16's thread, still firing), debate monster names
 at the fire ("Drum-Belly"... "Loud-Eyes" shouted down), report the sick row
