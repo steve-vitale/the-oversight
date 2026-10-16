@@ -1,0 +1,32 @@
+=== seed 8604 day 76 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=52 dead=false mood=cheerful
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about what's been happening — that was 8 days back. Still on your mind? 'Sure — what's on your mind? I mean it.'"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, more)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Well. Honestly? I think about it more than I say."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Maya? An ER nurse, back before. Solid person."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "The way I read it — I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Worth considering."
+(want=ask_favor stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "They took me. The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? You'd know about that."
+(want=ask_favor stage=0)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "We've officially talked this one to death. Pour one out."
+(want=ask_favor stage=0)
+closing line: "Do try to stay alive. The paperwork otherwise is murder."
+want final: id=ask_favor stage=3 resolution=unestablished

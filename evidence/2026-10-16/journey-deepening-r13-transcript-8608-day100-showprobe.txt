@@ -1,0 +1,32 @@
+=== seed 8608 day 100 — conversation with Dieter (gen_ap1gnuv) ===
+occupation=Sailor temperament=earnest trust=91 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Could you clean it out for me? Please."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bamboo Shoot. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Can I just say — Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took you — The Guest, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Elijah is back. Walked in like they'd never left."
+(want=ask_favor stage=1)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unresolved

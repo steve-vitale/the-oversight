@@ -1,0 +1,27 @@
+=== seed 8602 day 56 — conversation with Caleb (gen_ilcbmww) ===
+occupation=community gardener temperament=fidgety trust=49 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Mm. Take your walks. I'll cover for you. Everyone needs somewhere to be alone with it."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Nino just walked away from Haven. Didn't look back. Right. Right."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

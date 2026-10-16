@@ -1,0 +1,30 @@
+=== seed 8603 day 82 — conversation with Gilberto (gen_s3nko3e) ===
+occupation=Mushroom grower temperament=fidgety trust=90 dead=false mood=hungry
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway. Simple as that."
+(turn0 choices: agency:ask_expedition, alive:want:ask_favor, dlg:help, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's handled. Really — it is. I appreciate you asking, though."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Burdock — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [goon] "Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Purslane — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "Can't right now."
+THEM: "Oh — no, it's fine. Already handled. But thanks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=ask_favor stage=3 resolution=deflected

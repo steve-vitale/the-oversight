@@ -1,0 +1,31 @@
+=== seed 8604 day 40 — conversation with Michael (gen_53y4uyl) ===
+occupation=trail crew lead temperament=stoic trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the creek water run — I still haven't found anyone. Any chance?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Burdock — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Yeah?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Yeah?"
+THEM: "I should get back to it."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,27 @@
+=== seed 8601 day 83 — conversation with Daniyar (daniyar_askarov) ===
+occupation=paramedic temperament=gentle trust=35 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you make of all this? Really. ...if that makes sense."
+(turn0 choices: ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "I turn it over and over. Maybe the answer's in the turning, not the landing."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "What's this about? People are talking about Meera. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

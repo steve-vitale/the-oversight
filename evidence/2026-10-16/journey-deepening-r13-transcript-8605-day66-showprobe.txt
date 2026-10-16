@@ -1,0 +1,32 @@
+=== seed 8605 day 66 — conversation with Tomoko (gen_hdxmw97) ===
+occupation=community gardener temperament=anxious trust=87 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Is there someone here you don't trust? Be honest."
+(turn0 choices: ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Hah. Claire is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I mean it."
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "Being a community gardener taught me one useful thing: how to look busy while thinking."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "Huh. Let me think about that." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "You want to know about that? Okay." "Don't laugh. The second winter."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

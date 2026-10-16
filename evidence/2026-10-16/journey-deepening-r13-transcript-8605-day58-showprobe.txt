@@ -1,0 +1,32 @@
+=== seed 8605 day 58 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Can I just say — Please — have you got anything to spare? Anything? I can't keep going like this."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. Simple as that."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "The Moot. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Ruth? A librarian, back before. Solid person."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "I'm from Columbus, Ohio. The plants here don't look like home. I'm learning. Slowly."
+(want=ask_favor stage=1)
+closing line: "Good. That's settled, then. Onward."
+want final: id=ask_favor stage=3 resolution=unresolved

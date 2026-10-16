@@ -1,0 +1,21 @@
+=== seed 8601 day 86 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=58 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "What got you through the first week? The very first days. That's the truth of it."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Did you hear? Oscar just walked away from Haven. Didn't look back. Seen worse."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

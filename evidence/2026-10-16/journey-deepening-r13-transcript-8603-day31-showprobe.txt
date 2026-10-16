@@ -1,0 +1,32 @@
+=== seed 8603 day 31 — conversation with Elif (elif_demir) ===
+occupation=hotel housekeeper temperament=prickly trust=37 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_read:a_honest, ans:q_read:a_name, ans:q_read:a_none, ans:q_read:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Hah. Same. But keep your eyes open — some people here are performing, not surviving."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "They took me. The Blood Tithe — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Jovan just walked away from Haven. Didn't look back. Give it time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? You'd know about that."
+(want=curious stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "You want to know about that? Okay." "You're alright. I think. Ask me again in a week." "There. You wanted honest."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Huh. Let me think about that." "The dark between the trees." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

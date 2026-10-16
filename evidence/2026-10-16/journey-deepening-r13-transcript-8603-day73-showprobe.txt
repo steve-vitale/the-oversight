@@ -1,0 +1,27 @@
+=== seed 8603 day 73 — conversation with Elif (elif_demir) ===
+occupation=hotel housekeeper temperament=prickly trust=60 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "You said the most useful thing you learned is being hungry and going anyway. Still the lesson?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took me. Hardened The Blood Tithe — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Andres is back. Walked in like they'd never left."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "That's enough sharing for one day. Maybe one week."
+want final: id=ask_favor stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 8601 day 74 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=71 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Has this changed you? Like, fundamentally?"
+(turn0 choices: agency:ask_field, ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "It plants a sign in the ground around you. That's the The Landlord telling you it's about to move. It hunts by day — watch the open ground."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "No sound. That's the Night Court telling you it's about to move. It hunts at night — give the dark a wide berth."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bamboo Shoot. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Goldenrod. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Purslane. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "The old you got you here. The new you keeps you here. Both count."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You saw it too, right? Duel. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

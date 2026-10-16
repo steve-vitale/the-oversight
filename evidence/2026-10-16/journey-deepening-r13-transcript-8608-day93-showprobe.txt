@@ -1,0 +1,32 @@
+=== seed 8608 day 93 — conversation with Sari (sari_wulandari) ===
+occupation=postal worker temperament=steady trust=91 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This cut — I can't clean it properly one-handed. Will you help me clean it?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "You asked me that before. It's a different question now." "You saw it too, right? Duel. Tell me I didn't imagine the lights."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "People are talking about me. Take it for what it's worth."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Not that it matters."
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Good question." "I'm collecting skills like they're currency — making do today, something else tomorrow."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=1)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unresolved

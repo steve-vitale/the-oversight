@@ -1,0 +1,32 @@
+=== seed 8601 day 65 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=51 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Well. Any regrets? The real kind, not the small stuff."
+(turn0 choices: ans:q_regret:a_tell, ans:q_regret:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "They took me. The Wrong Map — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Worth considering."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Rahul is back. Walked in like they'd never left. — or so they tell me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Funny how that works."
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "Don't mind me. I'm having a whole argument in my head and losing. Not that it matters."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? That's my read."
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Good question." "A voice in the dark, calling a name." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

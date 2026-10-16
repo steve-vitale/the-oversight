@@ -1,0 +1,30 @@
+=== seed 8601 day 80 — conversation with Oscar (gen_i2jftig) ===
+occupation=blacksmith temperament=warm trust=86 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones. You know?"
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested. Anyway, that's me."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+(want=curious stage=2)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Daniyar ate something last month that should've killed them. They're fine."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

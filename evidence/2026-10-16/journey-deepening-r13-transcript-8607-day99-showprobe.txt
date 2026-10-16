@@ -1,0 +1,32 @@
+=== seed 8607 day 99 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Have you — sorry. I keep thinking about them."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "I — yeah. It helps, hearing that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "You're kind. Don't let this place change that. Anyway."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there. ...sorry."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that."
+(want=seek_comfort stage=2)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=engaged

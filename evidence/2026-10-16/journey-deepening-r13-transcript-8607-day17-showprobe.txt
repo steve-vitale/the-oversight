@@ -1,0 +1,32 @@
+=== seed 8607 day 17 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "It's quiet today. Wrong kind of quiet. Doesn't matter now."
+(turn0 choices: agency:ask_field, dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind? Makes sense to me."
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Since Anel died... I keep expecting to see Anel at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Anyway."
+(want=seek_comfort stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Sanne talks to the garden. The garden listens. I've seen it. Gotta keep moving."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Can't sit still, you know?"
+(want=seek_comfort stage=0)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "You want to know about that? Okay." "You're family now. Chosen family — the kind that actually counts." "That's where we are."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_comfort stage=0)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=unestablished

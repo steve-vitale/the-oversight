@@ -1,0 +1,32 @@
+=== seed 8603 day 43 — conversation with Andres (gen_zmbew3a) ===
+occupation=mason temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "The Witness. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Tāwhiri just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? It'll pass."
+(want=curious stage=2)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "You want to know about that? Okay." "You're family now. Chosen family — the kind that actually counts." "Don't make me say it twice."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Good question." "The fire going out." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "Thanks. I think. I'm going to go process that somewhere quiet."
+want final: id=curious stage=3 resolution=engaged

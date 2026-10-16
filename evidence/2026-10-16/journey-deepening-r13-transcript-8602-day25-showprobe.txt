@@ -1,0 +1,32 @@
+=== seed 8602 day 25 — conversation with Barbara (gen_c9g2w7h) ===
+occupation=HVAC tech temperament=mischievous trust=90 dead=false mood=cheerful
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About Joshua?"
+(turn0 choices: betrayal:site:case_10, betrayal:witnesses:case_10, betrayal:investigate:case_10, betrayal:letlie:case_10, betrayal:vote_guilty:case_10, betrayal:vote_acquit:case_10, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_ojmwj4r)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "People are talking about Abdulkarim. Take it for what it's worth."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? What's the worst that happens."
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "My hands know things my brain hasn't caught up to yet. Muscle memory from hVAC tech days."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Huh. Let me think about that." "Never seeing home again." A pause. "Stupid, maybe. But there it is."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Told you."
+(want=seek_taken stage=1)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=unresolved

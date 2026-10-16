@@ -1,0 +1,21 @@
+=== seed 8602 day 87 — conversation with Barbara (gen_c9g2w7h) ===
+occupation=HVAC tech temperament=mischievous trust=91 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're staying — Are you going to stay? With us. For real."
+(turn0 choices: agency:ask_expedition, ans:q_stay:a_tell, ans:q_stay:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Staying's a choice you make daily. I'll keep making it if you do. Funny how that works."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

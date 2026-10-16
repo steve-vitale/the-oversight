@@ -1,0 +1,27 @@
+=== seed 8603 day 63 — conversation with Andres (gen_zmbew3a) ===
+occupation=mason temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about what you're hoping for — we wandered off it, 3 days back. 'Small hopes are the load-bearing kind. Keep collecting them.'"
+(turn0 choices: betrayal:accept, betrayal:decline, invite_party, alive:want:curious, ask:lately, ask:goal, ask:gossip, ask:spread_rumor, theorize, teach, skill_learn:preserve_food, skill_teach:weather_read, leave, silence)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "Beastmaster. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." Andres snorts. "Tāwhiri said that? Please. An army medic — I knew them from before. The story doesn't survive five minutes of scrutiny."
+(want=curious stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Mahua — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

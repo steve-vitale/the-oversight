@@ -1,0 +1,18 @@
+=== seed 8604 day 80 — conversation with Gilberto (gen_ebaqk6e) ===
+occupation=musician temperament=gentle trust=90 dead=false mood=cheerful
+want: ask_favor (stage 1)
+
+THEM: "Real talk — The pantry's nearly bare. Forage with me tomorrow? I know the east treeline."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence, confront:d_pb5a2h8)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "Another day like today and we're choosing who eats. I know the east treeline — come with me and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Then it’s set. The east treeline, first light. Pack light — we move fast."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=promised

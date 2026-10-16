@@ -1,0 +1,27 @@
+=== seed 8602 day 67 — conversation with Barbara (gen_c9g2w7h) ===
+occupation=HVAC tech temperament=mischievous trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "My cut needs a second pair of hands. Could you clean it out for me? Please."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_ojmwj4r)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? I mean it."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "We've officially talked this one to death. Pour one out."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unresolved

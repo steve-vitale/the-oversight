@@ -1,0 +1,32 @@
+=== seed 8604 day 97 — conversation with Dale (dale_hoffman) ===
+occupation=rail conductor temperament=dry trust=41 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Are you angry? At whoever did this. At the sky. At anything. You'd know about that."
+(turn0 choices: ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful. — or so they tell me."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "You saw it too, right? Hardened The Exchange. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Sure — Did you hear? Everett just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? But what do I know."
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "I've decided the monsters are just wildlife with better PR. Don't quote me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

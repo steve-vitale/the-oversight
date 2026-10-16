@@ -1,0 +1,27 @@
+=== seed 8602 day 96 — conversation with Yara (yara_haddad) ===
+occupation=interpreter temperament=cautious trust=36 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Has this changed you? Like, fundamentally? You'd know about that."
+(turn0 choices: ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "The old you got you here. The new you keeps you here. Both count. That's the whole of it."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Changed or revealed? I go back and forth. Maybe both. Could be wrong, though."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "People are talking about Sanne. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. We'll see how it goes."
+want final: id=curious stage=3 resolution=engaged

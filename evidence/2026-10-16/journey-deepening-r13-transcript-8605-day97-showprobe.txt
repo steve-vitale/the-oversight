@@ -1,0 +1,32 @@
+=== seed 8605 day 97 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? You'd know about that."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "You asked me that before. It's a different question now." "Hardened The Guest. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Tell me — Honest. I'll take honest over certain every time."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? I really mean that."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "Hah. Amy says I talk too much. Amy is right. I'm still going to finish this story."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? I hope that helps."
+(want=ask_favor stage=2)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=stated

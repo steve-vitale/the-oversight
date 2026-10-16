@@ -1,0 +1,27 @@
+=== seed 8607 day 97 — conversation with Giulia (giulia_bianchi) ===
+occupation=crossing guard temperament=warm trust=62 dead=false mood=grieving
+want: repay (stage 1, fromSeed)
+
+THEM: "You said you'd help with the creek water run. ...It's done now. Forget it."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:memory:promise_broken, alive:want:repay, dlg:react, dlg:cant, dlg:help, recap, dlg:subject, confront:d_b0mezqb, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "Good. Then we're square." They look lighter for it.
+(want=repay stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Fiona died... I keep expecting to see Fiona at the fire. Stupid."
+(want=repay stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I sharpen sticks down to nothing at odd hours now. Whatever gets me to morning."
+(want=repay stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Fiona's name right yet. We will. Give it a few days."
+(want=repay stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm picking up Fiona's share of the work. Someone should, and it might as well be me."
+(want=repay stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=repay stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute."
+want final: id=repay stage=3 resolution=engaged

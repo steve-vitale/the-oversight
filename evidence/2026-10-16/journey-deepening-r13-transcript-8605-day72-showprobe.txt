@@ -1,0 +1,21 @@
+=== seed 8605 day 72 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About how this changed you — Has this changed you? Like, fundamentally?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "The old you got you here. The new you keeps you here. Both count."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Changed or revealed? I go back and forth. Maybe both."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Did you hear? Milo just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged

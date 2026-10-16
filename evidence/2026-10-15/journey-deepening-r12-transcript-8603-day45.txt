@@ -1,0 +1,27 @@
+=== seed 8603 day 45 — conversation with Ivan (gen_y0atfoa) ===
+occupation=infantry soldier temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Ivan sits down near you. "Just... talk. Like people used to."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, silence, party_name, confront:d_04rg2k5)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. Funny how that works."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Please — have you got anything to spare? Anything? My hands shake when I try to work."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Here's what I think — I go back and forth. Ask me tomorrow, I'll say different."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

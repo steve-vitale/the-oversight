@@ -1,0 +1,32 @@
+=== seed 8602 day 81 — conversation with Khanyisile (visjoin_76) ===
+occupation=Mushroom grower temperament=fidgety trust=21 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Maypop — I keep thinking about what you said. I'm seeing it everywhere now. Sorry, what was the question."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:memory:promise_broken, alive:want:curious, dlg:more, dlg:react, recap, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=0)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "You saw it too, right? Windfall. Tell me I didn't imagine the lights."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [ask:gossip] "Heard anything about anyone?"
+THEM: "Good question." Khanyisile snorts. "Lauren said that? Please. A trail crew lead — I knew them from before. The story doesn't survive five minutes of scrutiny."
+(want=curious stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Well now — You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "I realize I don't actually know you. Who are you?"
+THEM: "You want to know about that? Okay." "I've started rating sunsets. Tonight's a seven. Yesterday was a nine, no notes."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

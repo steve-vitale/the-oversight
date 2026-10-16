@@ -1,0 +1,32 @@
+=== seed 8606 day 16 — conversation with Nikos (nikos_papadopoulos) ===
+occupation=aquarium keeper temperament=gentle trust=24 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "I feel like — Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You saw it too, right? Windfall. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Watch yourself around Gertrude. I can't tell you why. Just... watch."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Makes sense to me."
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "I wonder if Athens, Greece misses me. Stupid. Places don't miss people. ...Do they?"
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Thank you for listening. Really listening. That's rare."
+want final: id=curious stage=3 resolution=engaged

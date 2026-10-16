@@ -1,0 +1,18 @@
+=== seed 8604 day 91 — conversation with Gilberto (gen_ebaqk6e) ===
+occupation=musician temperament=gentle trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's the kindest thing someone's done for you out here, as it were?"
+(turn0 choices: ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together. Just... be straight with me."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Yara touch it."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I'll... I'll be around. If you need anything. Anything at all."
+want final: id=curious stage=3 resolution=engaged

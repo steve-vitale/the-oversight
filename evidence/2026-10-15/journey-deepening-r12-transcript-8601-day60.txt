@@ -1,0 +1,21 @@
+=== seed 8601 day 60 — conversation with Thao (gen_k1p68gh) ===
+occupation=street artist temperament=fidgety trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This cut — I can't clean it properly one-handed. Could you take a look?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Alright. Back to it."
+want final: id=ask_favor stage=3 resolution=promised

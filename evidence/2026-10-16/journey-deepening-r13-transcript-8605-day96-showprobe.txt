@@ -1,0 +1,21 @@
+=== seed 8605 day 96 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What scares you most about what's happening? The real answer."
+(turn0 choices: ans:q_system_fear:a_tell, ans:q_system_fear:a_vague, ans:q_system_fear:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Fear's information. Listen to what it's telling you, then decide."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "People need to stop whispering about Claire. They've done nothing wrong."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

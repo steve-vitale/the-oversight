@@ -1,0 +1,32 @@
+=== seed 8602 day 79 — conversation with Lauren (gen_3amavv8) ===
+occupation=trail crew lead temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you think happened to us — I've been turning something over. What do YOU think actually happened to us?"
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, ans:q_theory:a_aliens, ans:q_theory:a_test, ans:q_theory:a_shrug, deflect_q, leave, silence)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "We'll figure it out. Or we won't, and we'll survive anyway. Both are fine."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Mia just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "Some days I'm a trail crew lead who survived. Some days I'm just... surviving. Both count."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? What could go wrong."
+(want=curious stage=2)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "Good question." "You're family now. Chosen family — the kind that actually counts." "That's where we are."
+(want=curious stage=2)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

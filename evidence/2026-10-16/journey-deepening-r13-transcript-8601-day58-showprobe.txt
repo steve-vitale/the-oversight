@@ -1,0 +1,24 @@
+=== seed 8601 day 58 — conversation with Rahul (gen_0oboqcw) ===
+occupation=community gardener temperament=intense trust=87 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "We never did finish talking about what was on their mind — that was 13 days back. Still on your mind? 'It's my spouse, Tom. Was taken at the Scattering. I tell everyone they were the interesting one. I need that…'"
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=seek_taken stage=0)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's my spouse, Tom. Was taken at the Scattering. I tell everyone they were the interesting one. I need that to be true. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=seek_taken stage=3 resolution=promised

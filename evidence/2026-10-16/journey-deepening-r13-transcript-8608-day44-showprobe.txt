@@ -1,0 +1,32 @@
+=== seed 8608 day 44 — conversation with Dieter (gen_ap1gnuv) ===
+occupation=Sailor temperament=earnest trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all. Just... be straight with me."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Here's what I think — My take? We're not going to like the answer, whatever it is."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? You'd know about that."
+(want=seek_taken stage=1)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "They took you — The Secret Deck, on the screens. The whole fire watched. Nobody knew where to look."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Elijah touch it."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Simple as that."
+(want=seek_taken stage=1)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Good question." "I wonder if Columbus, Ohio misses me. Stupid. Places don't miss people. ...Do they?"
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=1)
+closing line: "Don't be a stranger."
+want final: id=seek_taken stage=3 resolution=unresolved

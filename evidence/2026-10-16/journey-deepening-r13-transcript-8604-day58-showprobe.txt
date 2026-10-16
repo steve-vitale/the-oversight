@@ -1,0 +1,32 @@
+=== seed 8604 day 58 — conversation with Dale (dale_hoffman) ===
+occupation=rail conductor temperament=dry trust=30 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Will you help me clean it?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. — comedy."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "They took me. Hollow Belly — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Maya is back. Walked in like they'd never left."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "People ask what I did before. I was a rail conductor. Now I'm... whatever today needs."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unresolved

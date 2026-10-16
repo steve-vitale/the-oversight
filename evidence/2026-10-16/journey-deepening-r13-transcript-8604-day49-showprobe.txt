@@ -1,0 +1,32 @@
+=== seed 8604 day 49 — conversation with Gilberto (gen_ebaqk6e) ===
+occupation=musician temperament=gentle trust=89 dead=false mood=grieving
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the food I needed — we got it handled. Thanks anyway. Good talking."
+(turn0 choices: alive:want:ask_favor, alive:event:mourning, dlg:help, dlg:cant, teach, dlg:subject, confront:d_pb5a2h8, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's handled. Really — it is. I appreciate you asking, though."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Kyle is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Kyle said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Kyle's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Burdock — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: [goon] "Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=2)
+closing line: "...Thanks for being here. That's all."
+want final: id=ask_favor stage=3 resolution=stated

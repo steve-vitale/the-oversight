@@ -1,0 +1,32 @@
+=== seed 8604 day 25 — conversation with Kyle (gen_mnhpijo) ===
+occupation=Vintner temperament=mischievous trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what day it is — What day is it? ...Do you still count? I lost track days ago. Not that it matters."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "They took you — Riddle Me This, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You'd know about that."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Maya is back. Walked in like they'd never left. It'll be fun, probably."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? You know?"
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "You know what I miss? Columbus, Ohio rain. Specific rain. I'm allowed to be specific. — or so they tell me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged

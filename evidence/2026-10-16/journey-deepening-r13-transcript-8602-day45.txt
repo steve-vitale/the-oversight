@@ -1,0 +1,24 @@
+=== seed 8602 day 45 — conversation with Barbara (gen_c9g2w7h) ===
+occupation=HVAC tech temperament=mischievous trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "We never did finish talking about the gossip — that was 11 days back. Still on your mind? 'That's what I heard, anyway. What's up?' We still owe your story a proper ending, too."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, silence, confront:d_ojmwj4r)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Watch this — Short version: I don't know. Long version: also that, but slower."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Bulldozer — Lowers its head, paws the earth. It hunts by day — watch the open ground."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=seek_taken stage=0)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=seek_taken stage=3 resolution=unestablished

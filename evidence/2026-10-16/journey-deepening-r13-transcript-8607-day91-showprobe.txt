@@ -1,0 +1,27 @@
+=== seed 8607 day 91 — conversation with Giulia (giulia_bianchi) ===
+occupation=crossing guard temperament=warm trust=71 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "We're down to 0 liters of clean water. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_b0mezqb)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "0 liters. That's today's drinking water, and then we're boiling creek water and hoping. The creek's a twenty-minute walk — with two of us it's one trip, not three."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: "...Actually, forget it."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "I should get back to it — but this was nice."
+want final: id=ask_favor stage=3 resolution=promised

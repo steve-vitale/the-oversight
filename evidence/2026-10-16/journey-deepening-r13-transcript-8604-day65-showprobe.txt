@@ -1,0 +1,30 @@
+=== seed 8604 day 65 — conversation with Gilberto (gen_ebaqk6e) ===
+occupation=musician temperament=gentle trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: You said you'd earn it, not that I should just hand it over. Fair. I'm watching — and so far, so good.
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:ask_favor, dlg:more, dlg:doubt, recap, dlg:invite, teach, dlg:subject, confront:d_pb5a2h8, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "All sorted. Some things just work out."
+(want=ask_favor stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "Can't right now."
+THEM: "Oh — no, it's fine. Already handled. But thanks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=deflected

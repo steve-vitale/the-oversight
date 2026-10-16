@@ -1,0 +1,27 @@
+=== seed 8607 day 51 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Hey — I found some Ghost Pipe today. You were right, it was right where you said. That's my read."
+(turn0 choices: alive:want:curious, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "Last time things were different. They always are." "They took you — Sweet Tooth, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Giulia? You're imagining things. They're perfectly pleasant."
+(want=curious stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested. You'd know about that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8604 day 82 — conversation with Gilberto (gen_ebaqk6e) ===
+occupation=musician temperament=gentle trust=77 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Did you hear? Michael just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "Back home I was a musician. The skills don't transfer, but the stubbornness does."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? No pressure, though."
+(want=curious stage=2)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "You want to know about that? Okay." "Don't laugh. Footsteps that stop."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? You'd know about that."
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

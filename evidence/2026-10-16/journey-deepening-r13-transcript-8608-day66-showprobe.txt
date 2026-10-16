@@ -1,0 +1,32 @@
+=== seed 8608 day 66 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=64 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About the talking-to-strangers part — ...Hi. Sorry. I'm not good at the talking-to-strangers part."
+(turn0 choices: ans:q_quiet:a_kind, ans:q_quiet:a_help, ans:q_quiet:a_leave, deflect_q, leave, silence)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Why do you ask? You're alright. ...We're alright. Saying it out loud helps, I think."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Sari? A postal worker, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Between us — My take? We're not going to like the answer, whatever it is."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "Don't eat anything Elijah hasn't looked at first. That's my rule. It's a good rule."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

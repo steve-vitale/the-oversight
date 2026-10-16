@@ -1,0 +1,27 @@
+=== seed 8608 day 23 — conversation with George (gen_46cjtep) ===
+occupation=Rancher temperament=withdrawn trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you? Take your time with it."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, confront:d_rzg0f0r, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "People are talking about Tymish. Take it for what it's worth."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "...I'm going to go. This was... fine. It was fine."
+want final: id=ask_favor stage=3 resolution=stated

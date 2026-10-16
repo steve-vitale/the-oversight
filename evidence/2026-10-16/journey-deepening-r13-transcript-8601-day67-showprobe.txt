@@ -1,0 +1,27 @@
+=== seed 8601 day 67 — conversation with Greta (greta_hansen) ===
+occupation=Sailor temperament=bold trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "Come, sit — God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Small hopes are the load-bearing kind. Keep collecting them."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Nia's story has a fresh coat of paint." Greta taps the table. "Scrape it off and you get a tailor. Just don't scrape it in front of them."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to it. Things don't do themselves."
+want final: id=curious stage=3 resolution=engaged

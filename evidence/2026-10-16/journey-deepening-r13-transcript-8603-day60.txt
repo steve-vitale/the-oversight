@@ -1,0 +1,29 @@
+=== seed 8603 day 60 — conversation with Andres (gen_zmbew3a) ===
+occupation=mason temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Small hopes are the load-bearing kind. Keep collecting them."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Chantal is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [goon] "What else did you hear?"
+THEM: "I should go. You know where to find me."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

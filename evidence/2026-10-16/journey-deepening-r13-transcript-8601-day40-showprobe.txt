@@ -1,0 +1,32 @@
+=== seed 8601 day 40 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=41 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "You asked me that before. It's a different question now." "You saw it too, right? Bring Us Something Interesting. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Oscar is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "You know what I miss? Amritsar, Punjab, India rain. Specific rain. I'm allowed to be specific."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "Alright. Back to it. Things don't do themselves."
+want final: id=curious stage=3 resolution=engaged

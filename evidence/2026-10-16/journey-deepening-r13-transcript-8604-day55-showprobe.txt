@@ -1,0 +1,32 @@
+=== seed 8604 day 55 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=46 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Could you take a look?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took me. Hardened The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Funny thing — Kyle is back. Walked in like they'd never left."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Funny how that works."
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "Practical view: Some days I'm a dentist who survived. Some days I'm just... surviving. Both count."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? That's my read."
+(want=ask_favor stage=1)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unresolved

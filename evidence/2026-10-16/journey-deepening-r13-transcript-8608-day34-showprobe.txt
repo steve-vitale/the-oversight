@@ -1,0 +1,32 @@
+=== seed 8608 day 34 — conversation with Sari (sari_wulandari) ===
+occupation=postal worker temperament=steady trust=51 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop. Makes sense to me."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Look — Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "They took me. The Auction — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Joaquim is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Huh. Let me think about that." "I've been watching how making do works out here. It's different from before. Everything's different from before."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Alright. Back to it."
+want final: id=curious stage=3 resolution=engaged

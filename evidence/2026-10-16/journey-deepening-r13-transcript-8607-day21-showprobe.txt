@@ -1,0 +1,32 @@
+=== seed 8607 day 21 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "The Sorting. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Did you hear? Sanne just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? That is all."
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "Being a burden." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+closing line: "I've got somewhere to be. Everywhere to be. You know how it is."
+want final: id=curious stage=3 resolution=engaged

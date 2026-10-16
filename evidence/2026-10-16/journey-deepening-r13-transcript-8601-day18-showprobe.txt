@@ -1,0 +1,32 @@
+=== seed 8601 day 18 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=12 dead=false mood=cheerful
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — still need hands. Are you in?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Seen worse."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "They took me. The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Did you hear? Thao just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "The System gave me patching people up. I asked for a sandwich. We don't always get what we ask for."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=2)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=stated

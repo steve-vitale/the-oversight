@@ -1,0 +1,21 @@
+=== seed 8607 day 65 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about the worst thing you've done — we wandered off it, 6 days back. 'No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts.'"
+(turn0 choices: betrayal:accept, betrayal:decline, invite_party, alive:thread:taughtref, alive:want:curious, ask:lately, ask:goal, ask:gossip, ask:spread_rumor, skill_learn:wound_care, skill_teach:gossip_network, leave, silence)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "The Echo. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Worth considering."
+(want=curious stage=0)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Did you hear? Sihol just walked away from Haven. Didn't look back."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=0)
+YOU: (leave)
+closing line: "Talk later? I'm already thinking about three other things."
+want final: id=curious stage=3 resolution=unestablished

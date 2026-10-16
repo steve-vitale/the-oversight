@@ -1,0 +1,32 @@
+=== seed 8602 day 54 — conversation with Barbara (gen_c9g2w7h) ===
+occupation=HVAC tech temperament=mischievous trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence, confront:d_ojmwj4r)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Between us — Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Sure — Lauren? A trail crew lead, back before. Solid person."
+(want=seek_taken stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Trust me."
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "I've said all I know. The rest is just guessing."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_taken stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "...Actually, forget it."
+(want=seek_taken stage=1)
+closing line: "Don't be a stranger."
+want final: id=seek_taken stage=3 resolution=unresolved

@@ -1,0 +1,27 @@
+=== seed 8607 day 19 — conversation with Ivy (ivy_wang) ===
+occupation=journalist temperament=cautious trust=20 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, ans:q_before_skill:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset. Just... be straight with me."
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something shutters in their face. Tread carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Permit me: People are paranoid. Giulia hasn't done a thing."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,27 @@
+=== seed 8605 day 45 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=cold
+want: curious (stage 1)
+
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(turn0 choices: ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, deflect_q, leave, silence)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "We should collect funny things. Like firewood. Stockpile them for winter."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "You didn't hear it from me, but Claire's story doesn't hold. A lawyer, back before."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

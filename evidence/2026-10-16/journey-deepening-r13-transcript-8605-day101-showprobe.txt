@@ -1,0 +1,32 @@
+=== seed 8605 day 101 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about what scares you most — we wandered off it, 5 days back. 'Fear's information. Listen to what it's telling you, then decide.'"
+(turn0 choices: invite_party, alive:want:curious, ask:lately, ask:you, ask:goal, ask:personal, ask:gossip, skill_learn:animal_behavior, skill_teach:gossip_network, leave, silence)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(want=curious stage=1)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "We should do something fun. Deliberately. Like medicine."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "What's this about? Ruth?" Amy lowers their voice. "Between us — they're not a roofer. They're a librarian. Don't say who told you."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say. Not that it matters."
+(want=curious stage=2)
+YOU: [goon] "Whoa — go on."
+THEM: "What day is it? ...Do you still count? I lost track days ago."
+(want=curious stage=2)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [goon] "Whoa — go on."
+THEM: "Days, weeks — we'll make new names for them if we have to."
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

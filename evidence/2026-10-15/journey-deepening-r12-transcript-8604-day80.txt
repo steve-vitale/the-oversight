@@ -1,0 +1,27 @@
+=== seed 8604 day 80 — conversation with Michael (gen_53y4uyl) ===
+occupation=trail crew lead temperament=stoic trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About how this changed you — Has this changed you? Like, fundamentally?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "The old you got you here. The new you keeps you here. Both count."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Watch yourself around Nikolai. I can't tell you why. Just... watch."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to it."
+want final: id=curious stage=3 resolution=engaged

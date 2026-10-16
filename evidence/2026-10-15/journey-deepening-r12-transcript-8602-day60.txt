@@ -1,0 +1,30 @@
+=== seed 8602 day 60 — conversation with Caleb (gen_ilcbmww) ===
+occupation=community gardener temperament=fidgety trust=88 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing. It'll pass."
+(turn0 choices: agency:ask_field, ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: A shadow crosses the ground — growing fast. Glasswing Darter, every time. It hunts by day — watch the open ground."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Its shadow detaches from the branch-shadow and slides across the ground toward you — a straight black lane… That's the Nevermore telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=curious stage=1)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Small hopes are the load-bearing kind. Keep collecting them."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Mm. Cathrine is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,27 @@
+=== seed 8602 day 45 — conversation with Lauren (gen_3amavv8) ===
+occupation=trail crew lead temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you make of all this — What do you make of all this? Really."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "Carlos sees in the dark. Not well — but better than you. Better than me. What could go wrong."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

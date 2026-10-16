@@ -1,0 +1,30 @@
+=== seed 8603 day 84 — conversation with Andres (gen_zmbew3a) ===
+occupation=mason temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Is there someone here you don't trust? Be honest."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took you — The Secret Deck, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Tāwhiri? They told you they were a tailor? Huh." Andres looks away. "Tāwhiri was an army medic. Everyone knew."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Give it time."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Aconite (Monkshood) — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I need some air. Alone air. You understand."
+want final: id=curious stage=3 resolution=engaged

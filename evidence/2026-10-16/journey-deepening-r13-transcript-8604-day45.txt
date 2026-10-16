@@ -1,0 +1,32 @@
+=== seed 8604 day 45 — conversation with Everett (gen_bups42g) ===
+occupation=truck driver temperament=fidgety trust=49 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: agency:ask_field, dlg:more, dlg:commit, dlg:cant, dlg:help, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's my younger brother, Sayat. Went up in the Taking. He cried when the dog died. Boring, they said. I keep his jacket. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "He lowers the crown. That's the Rut King telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Feral Paddy Rice. Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=3)
+YOU: [teach] "Let me show you something."
+THEM: You show them Burdock — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [goon] "Yeah?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=seek_taken stage=3)
+YOU: [teach] "Let me show you something."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=seek_taken stage=3 resolution=promised

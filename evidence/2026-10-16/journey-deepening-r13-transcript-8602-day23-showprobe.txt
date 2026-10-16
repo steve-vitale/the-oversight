@@ -1,0 +1,32 @@
+=== seed 8602 day 23 — conversation with Barbara (gen_c9g2w7h) ===
+occupation=HVAC tech temperament=mischievous trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. Not that it matters."
+(turn0 choices: dlg:more, dlg:commit, dlg:cant, dlg:help, teach, dlg:subject, confront:d_ojmwj4r, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Lauren just walked away from Haven. Didn't look back."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Funny how that works."
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "Does Columbus, Ohio ever cross your mind at the wrong moment? Mine picks dinnertime."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? You'd know about that."
+(want=seek_taken stage=1)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "You want to know about that? Okay." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=1)
+closing line: "Good talk."
+want final: id=seek_taken stage=3 resolution=unresolved

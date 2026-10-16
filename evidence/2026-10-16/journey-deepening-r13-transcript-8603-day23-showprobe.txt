@@ -1,0 +1,32 @@
+=== seed 8603 day 23 — conversation with Tāwhiri (gen_g0wekfu) ===
+occupation=army medic temperament=stoic trust=18 dead=false mood=steady
+want: share_news (stage 1)
+
+THEM: "Have you heard? No? Good, I get to tell you first."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, confront:d_qk3e0n8)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? I mean it."
+(want=share_news stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Did you hear? Andres just walked away from Haven. Didn't look back."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=share_news stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "What's this about? My tailor training covered a lot. 'Post-apocalyptic foraging' was not on the syllabus." A beat too long on that answer.
+(want=share_news stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Practical view: I go back and forth. Ask me tomorrow, I'll say different."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Just... be straight with me."
+(want=share_news stage=1)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "Good question." "Honestly? I'm still making up my mind about you." "That's where we are."
+(want=share_news stage=1)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=share_news stage=3 resolution=unresolved

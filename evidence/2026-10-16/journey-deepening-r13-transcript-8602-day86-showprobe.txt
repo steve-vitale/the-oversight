@@ -1,0 +1,32 @@
+=== seed 8602 day 86 — conversation with Varvara (app_mgpsphgb952) ===
+occupation=nurse temperament=prickly trust=30 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:a_deflect, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days. Don't make me repeat it."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Since Lauren died... I keep expecting to see Lauren at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Happy?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Khanyisile? A Mushroom grower, back before. Solid person. Just... be straight with me."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "What? Everyone's got a take. Mine's just the one I can live with."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "You want to know about that? Okay." "You're alright. I think. Ask me again in a week." "There. You wanted honest."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=curious stage=3 resolution=engaged

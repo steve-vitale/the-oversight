@@ -1,0 +1,27 @@
+=== seed 8601 day 31 — conversation with Thao (gen_k1p68gh) ===
+occupation=street artist temperament=fidgety trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "I tried the Staghorn Sumac like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, dlg:more, dlg:react, recap, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=seek_taken stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_taken stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Ginkgo Nut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=0)
+YOU: [goon] "I'm listening, I promise."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=seek_taken stage=0)
+YOU: [dlg:react] "Huh."
+THEM: "So." They look at the fire for a moment.
+(want=seek_taken stage=0)
+YOU: [dlg:react] "Yeah."
+THEM: "Anyway." A small smile.
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=seek_taken stage=3 resolution=unestablished

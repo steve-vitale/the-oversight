@@ -1,0 +1,15 @@
+=== seed 8603 day 65 — conversation with Ivan (gen_y0atfoa) ===
+occupation=infantry soldier temperament=restless trust=90 dead=false mood=steady
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the food I needed — we got it handled. Thanks anyway."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:thread:lately, party_name, alive:want:ask_favor, dlg:help, dlg:cant, recap, confront:d_04rg2k5, leave)
+YOU: [dlg:help] "How can I help?"
+THEM: "All sorted. Some things just work out."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "Can't right now."
+THEM: "Oh — no, it's fine. Already handled. But thanks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Right — things to do, always things to do."
+want final: id=ask_favor stage=3 resolution=deflected

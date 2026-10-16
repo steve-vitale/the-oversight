@@ -1,0 +1,15 @@
+=== seed 8601 day 60 — conversation with Rahul (gen_0oboqcw) ===
+occupation=community gardener temperament=intense trust=87 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "You take those walks that don't need to happen. Still breathing your own air?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=seek_taken stage=3 resolution=unestablished

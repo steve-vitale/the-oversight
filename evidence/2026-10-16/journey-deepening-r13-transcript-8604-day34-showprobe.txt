@@ -1,0 +1,32 @@
+=== seed 8604 day 34 — conversation with Chantal (chantal_mukendi) ===
+occupation=Pharmacist temperament=steady trust=28 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — still need hands. Are you in? That's where we are."
+(turn0 choices: dlg:commit, dlg:cant, teach, dlg:subject, confront:d_sileops, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Did you hear? Michael just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I won't forget that."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "Permit me: Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "You want to know about that? Okay." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Good question." "The quiet ones watching from the treeline." A pause. "Stupid, maybe. But there it is."
+(want=ask_favor stage=2)
+closing line: "Good talking. We'll figure it out."
+want final: id=ask_favor stage=3 resolution=stated

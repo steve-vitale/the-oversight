@@ -1,0 +1,30 @@
+=== seed 8601 day 55 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=27 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "I tried the Jewelweed like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: agency:ask_field, alive:want:curious, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(want=curious stage=1)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "We should collect funny things. Like firewood. Stockpile them for winter."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Meera is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright — I've got things to do and so do you. Make it count."
+want final: id=curious stage=3 resolution=engaged

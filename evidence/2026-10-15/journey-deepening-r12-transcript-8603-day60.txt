@@ -1,0 +1,12 @@
+=== seed 8603 day 60 — conversation with Ivan (gen_y0atfoa) ===
+occupation=infantry soldier temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, dlg:commit, dlg:cant, recap, dlg:subject, confront:d_04rg2k5, leave, silence, party_name)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=promised

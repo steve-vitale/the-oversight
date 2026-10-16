@@ -1,0 +1,32 @@
+=== seed 8601 day 51 — conversation with Greta (greta_hansen) ===
+occupation=Sailor temperament=bold trust=90 dead=false mood=cheerful
+want: ask_favor (stage 1)
+
+THEM: "Please — I can't shake it. I'm achy and wrung out, barely keeping food down. I need help. Please. Rest when you can."
+(turn0 choices: alive:want:ask_favor, dlg:help, dlg:details, dlg:cant, recap, teach, dlg:subject, confront:d_ish0lg9, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Did you hear? Rahul just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "Every morning I wake up surprised. Like part of me still expects the old world."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "Ask me again in a week. The answer might be better."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Huh. Let me think about that." "Don't laugh. Teeth coming loose for no reason."
+(want=ask_favor stage=1)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=unresolved

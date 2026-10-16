@@ -1,0 +1,32 @@
+=== seed 8601 day 38 — conversation with Rahul (gen_0oboqcw) ===
+occupation=community gardener temperament=intense trust=88 dead=false mood=cheerful
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway. I mean it."
+(turn0 choices: agency:ask_field, alive:want:ask_favor, alive:event:mourning, dlg:help, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's handled. Really — it is. I appreciate you asking, though."
+(want=ask_favor stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Isabella died... I keep expecting to see Isabella at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I clean up other people's messes quietly at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Isabella's name right yet. We will. Give it a few days."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=stated

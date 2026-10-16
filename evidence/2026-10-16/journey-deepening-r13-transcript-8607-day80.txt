@@ -1,0 +1,18 @@
+=== seed 8607 day 80 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Is there someone here you don't trust? Be honest."
+(turn0 choices: agency:ask_expedition, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Sanne talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I can't sit still anymore. But this was good. Quick, but good."
+want final: id=curious stage=3 resolution=engaged

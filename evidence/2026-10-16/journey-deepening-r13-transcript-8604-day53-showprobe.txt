@@ -1,0 +1,32 @@
+=== seed 8604 day 53 — conversation with Chantal (chantal_mukendi) ===
+occupation=Pharmacist temperament=steady trust=55 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, confront:d_sileops, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Then it’s set. The ridge above the creek, before the dew dries. Two packs between us."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Kyle died... I keep expecting to see Kyle at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I pace while thinking. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Kyle's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Burdock — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=promised

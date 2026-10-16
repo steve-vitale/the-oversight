@@ -1,0 +1,32 @@
+=== seed 8601 day 72 — conversation with Greta (greta_hansen) ===
+occupation=Sailor temperament=bold trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Could you take a look?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_ish0lg9)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Hah. Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Mark my words."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Just... be straight with me."
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "Someone told me Aarhus, Denmark is gone. Someone else told me it's fine. I believe neither."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Not that it matters."
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=1)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unresolved

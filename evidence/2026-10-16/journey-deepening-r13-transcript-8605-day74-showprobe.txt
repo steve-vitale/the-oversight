@@ -1,0 +1,27 @@
+=== seed 8605 day 74 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about how this changed you — we wandered off it, 2 days back. 'Changed or revealed? I go back and forth. Maybe both.' Just... be straight with me."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different. You'd know about that."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Are you going to stay? With us. For real."
+(want=curious stage=2)
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Claire? A lawyer, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Look — I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

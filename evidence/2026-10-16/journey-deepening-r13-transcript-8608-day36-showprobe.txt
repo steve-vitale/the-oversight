@@ -1,0 +1,32 @@
+=== seed 8608 day 36 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=42 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This cut — I can't clean it properly one-handed. Could you take a look?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_igclnm4)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? How are you holding up, though?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Joaquim is back. Walked in like they'd never left."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Good question." "Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real. You doing okay?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Simple as that."
+(want=ask_favor stage=1)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "You want to know about that? Okay." "You're alright. I think. Ask me again in a week." "I'm glad you asked, actually."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=unresolved

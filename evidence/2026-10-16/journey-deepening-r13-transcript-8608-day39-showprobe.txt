@@ -1,0 +1,32 @@
+=== seed 8608 day 39 — conversation with Omar (omar_farouk) ===
+occupation=piano tuner temperament=dry trust=35 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Any regrets? The real kind, not the small stuff."
+(turn0 choices: ans:q_regret:a_tell, ans:q_regret:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "They took me. Cooking With Teeth — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Did you hear? Yuki just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "The hardest part isn't the hunger or the cold. It's not knowing if anyone else made it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Good question." "Never seeing home again." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

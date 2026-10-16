@@ -1,0 +1,32 @@
+=== seed 8608 day 17 — conversation with Oscar (gen_0u6brky) ===
+occupation=emergency dispatcher temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can we talk?" Oscar sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence, confront:d_2map8wa)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. That's the whole of it."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "You want to know about that? Okay." "I've started talking to myself when I work. Keeps the rhythm. You probably do it too. Not that it matters."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "You want to know about that? Okay." "You're family now. Chosen family — the kind that actually counts." "That's where we are."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "You want to know about that? Okay." "Losing another one." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

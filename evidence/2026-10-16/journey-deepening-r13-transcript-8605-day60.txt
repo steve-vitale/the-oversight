@@ -1,0 +1,31 @@
+=== seed 8605 day 60 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "They took you — The Moot, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [goon] "What happened next?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=curious stage=2)
+YOU: [goon] "What happened next?"
+THEM: "I should get back to it."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

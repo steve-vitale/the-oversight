@@ -1,0 +1,21 @@
+=== seed 8604 day 74 — conversation with Gilberto (gen_ebaqk6e) ===
+occupation=musician temperament=gentle trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "If I may — I tried the Dandelion like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: alive:thread:secret, alive:want:ask_favor, dlg:more, dlg:doubt, dlg:invite, dlg:subject, confront:d_pb5a2h8, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's handled. Really — it is. I appreciate you asking, though."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "Not right now, sorry."
+THEM: "Oh — no, it's fine. Already handled. But thanks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=deflected

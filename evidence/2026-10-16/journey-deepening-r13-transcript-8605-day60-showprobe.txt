@@ -1,0 +1,24 @@
+=== seed 8605 day 60 — conversation with Claire (gen_vhe4gtj) ===
+occupation=lawyer temperament=fidgety trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: dlg:commit, dlg:cant, teach, dlg:subject, confront:d_4lbdi7t, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Yeah?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Maracujá (Passion Fruit) — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=promised

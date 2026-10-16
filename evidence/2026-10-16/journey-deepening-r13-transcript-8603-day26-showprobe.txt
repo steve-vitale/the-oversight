@@ -1,0 +1,24 @@
+=== seed 8603 day 26 — conversation with Ivan (gen_y0atfoa) ===
+occupation=infantry soldier temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm past hungry — do you have anything to eat? Anything at all? My hands shake when I try to work."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, silence, party_name, confront:d_04rg2k5)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "I haven't eaten right in days. I can't pull my weight like this. Anything you can spare, I'll make it stretch."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Jovan is back. Walked in like they'd never left."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "I gotta go DO something. This was good though!"
+want final: id=ask_favor stage=3 resolution=stated

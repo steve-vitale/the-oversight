@@ -1065,6 +1065,50 @@
       } catch (e) { return false; }
     },
 
+    // ACK LINES (journey-deepening r13 2026-10-16): thinking-aloud preamble
+    // chunks the engine prepends to beats — topic acks (convo-wants.js),
+    // the t2changeLine "it's different now" variants (convoTopics.js), the
+    // personal "Me? Okay.". Delivery, not content: when a thread snippet is
+    // noted from the final voiced line, the acks must not be quoted back as
+    // the "memory" of the topic (transcript-caught: 'Huh. Let me think about
+    // that." "You asked me that before. It's a different question now."
+    // "The Witness. They…' as the memory of "what's been happening" — a
+    // stitched fragment of fillers standing in front of the content).
+    convoAckLines() {
+      return [
+        'Good question.',
+        'Huh. Let me think about that.',
+        'You want to know about that? Okay.',
+        'Me? Okay.',
+        "You asked me that before. It's a different question now.",
+        'Last time things were different. They always are.',
+        'Huh. I answered that once — back when the answer was simpler.',
+      ];
+    },
+    // convoStripAcks: remove leading ack chunks from a spoken line before
+    // noting it as a thread snippet. Tolerates a voice-opener prefix inside
+    // the chunk (voiceLine may lead the whole line with one). Non-ack
+    // first chunks (narration, single-chunk lines) stop the strip — the
+    // line is kept whole.
+    convoStripAcks(line) {
+      try {
+        let t = String(line == null ? '' : line);
+        const ACKS = this.convoAckLines();
+        const OPENS = ['Look — ', "Here's the thing: ", 'Oh! ', 'You know what — ',
+          'Well — ', 'Funny thing: ', 'If I may — ', 'Permit me: ', 'I… ', '…',
+          'Honestly, ', 'Well, ', 'Look. ', 'Let me be straight — '];
+        for (let guard = 0; guard < 4; guard++) {
+          const m = /^"((?:[^"\\]|\\.)*)"\s*/.exec(t.trim());
+          if (!m) break;
+          let inner = m[1];
+          for (const o of OPENS) { if (inner.indexOf(o) === 0) { inner = inner.slice(o.length); break; } }
+          if (ACKS.indexOf(inner) < 0) break;
+          t = t.trim().slice(m[0].length);
+        }
+        return t;
+      } catch (e) { return line; }
+    },
+
     convoGet(vid) {
       const v = this.state.village;
       v.conv = v.conv || {};
@@ -1396,7 +1440,10 @@
       try {
         const c = this.convoGet(vid);
         this.convoNoteTopic(vid, thread, this.convoTopicLabel(vid, thread));
-        const clean = clipSnippet(line, 110);
+        // R13 (journey-deepening 2026-10-16): strip thinking-aloud acks
+        // before clipping — the snippet is the memory of the topic's
+        // CONTENT, not the delivery wrappers.
+        const clean = clipSnippet(this.convoStripAcks(line), 110);
         c.threadLog = c.threadLog || [];
         const last = c.threadLog[c.threadLog.length - 1];
         if (clean && (!last || last.thread !== thread || last.snippet !== clean)) {

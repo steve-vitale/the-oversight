@@ -1,0 +1,27 @@
+=== seed 8602 day 61 — conversation with Carlos (carlos_diaz) ===
+occupation=Fisherman temperament=prickly trust=89 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About the most useful thing you've learned — What's the most useful thing you've learned since we got here?"
+(turn0 choices: agency:ask_field, ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+(want=curious stage=2)
+YOU: [goon] "I'm here. Go on."
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Nino touch it."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=curious stage=3 resolution=engaged

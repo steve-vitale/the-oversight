@@ -1,0 +1,27 @@
+=== seed 8607 day 59 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the worst thing you've done — What's the worst thing you've done since the sky changed?"
+(turn0 choices: agency:ask_field, ans:q_guilty:a_tell, ans:q_guilty:a_vague, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=1)
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "The Witness. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Sanne talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Anyway, I should move."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

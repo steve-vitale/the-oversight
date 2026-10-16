@@ -1,0 +1,27 @@
+=== seed 8607 day 75 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now? Anyway, I should move."
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Can I be honest? Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. Can't sit still, you know?"
+(want=curious stage=2)
+YOU: [goon] "Good question. What do YOU think?"
+THEM: "What's something you're good at that nobody here knows about?"
+(want=curious stage=2)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Morgan is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Okay! Moving again. Can't sit still."
+want final: id=curious stage=3 resolution=engaged

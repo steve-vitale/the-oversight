@@ -1,0 +1,27 @@
+=== seed 8607 day 45 — conversation with Kofi (gen_lv97gf1) ===
+occupation=appliance repair tech temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You wanted one full night's sleep — no waking up listening. Had it yet?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Dandelion. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Right — things to do, always things to do."
+want final: id=curious stage=3 resolution=engaged
