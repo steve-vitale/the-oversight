@@ -59,6 +59,16 @@ console.log(`mean field deaths/run within reached pairs: treatment=${dT.toFixed(
 console.log(`w3+ tricks known (mean/run): treatment=${mean(rows.map(r => r.t.nW3TricksKnown)).toFixed(2)} control=${mean(rows.map(r => r.c.nW3TricksKnown)).toFixed(2)}`);
 console.log(`discoveries (mean/run): treatment=${mean(rows.map(r => r.t.nDiscovered)).toFixed(1)} control=${mean(rows.map(r => r.c.nDiscovered)).toFixed(1)}`);
 
+// trick executions (tally counts every performed trick action, not just kills)
+const tallyT = {};
+for (const r of rows) { for (const [k, v] of Object.entries(r.t.trickTally || {})) tallyT[k] = (tallyT[k] || 0) + v; }
+const tallyC = {};
+for (const r of rows) { for (const [k, v] of Object.entries(r.c.trickTally || {})) tallyC[k] = (tallyC[k] || 0) + v; }
+const w3keys = (t) => Object.entries(t).filter(([k]) => /redactor|gavel|focus|tos|callback|adbreak|strike|suburb|eulogy|algorithm|congregation|nielsen|spoiler|bad_note|prone|confess|bore|examine|farewell|look_away|meet_demand|leave|contradict|argue/.test(k));
+console.log('trick executions (tally, treatment): ' + JSON.stringify(tallyT));
+console.log('w3+ trick executions (tally, treatment): ' + JSON.stringify(Object.fromEntries(w3keys(tallyT))));
+console.log('w3+ trick executions (tally, control): ' + JSON.stringify(Object.fromEntries(w3keys(tallyC))));
+
 // guardrails
 const natT = sum(rows.map(r => r.t.national)), natC = sum(rows.map(r => r.c.national));
 const wonT = sum(rows.map(r => r.t.won)), wonC = sum(rows.map(r => r.c.won));
