@@ -1,0 +1,28 @@
+  ok   the public counter has a finished-food pickup
+  ok   the real counter renderer exposes the paid food action
+  ok   the real UI handler invokes the public food route
+  ok   successful pickup moves the actual whole batch and pays two ticks
+  ok   own counter pickup is not a pantry donation or withdrawal
+  ok   pickup preserves calorie, risk, spoilage and source metadata
+  ok   an empty repeated pickup cannot print food or time
+  ok   partial pickup respects real pack room including water
+  ok   splitting preserves the same proportional harvest sources
+  ok   a full pack leaves the remaining batch intact
+  ok   a requested quantity leaves the rest on the counter
+  ok   explicit zero stock never becomes a singleton
+  ok   nonfinite stock cannot fund a real transfer
+  ok   invalid quantities and indices preserve stock and time
+  ok   unknown cannot bypass the finished-food route
+  ok   unfinished cannot bypass the finished-food route
+  ok   bonded cannot bypass the finished-food route
+  ok   material cannot bypass the finished-food route
+  ok   inedible cannot bypass the finished-food route
+  ok   wilderness cannot reach the counter
+  ok   the private camp counter works without communal credit
+  ok   finished runs cannot collect food
+  ok   actual live combat refuses counter pickup
+  ok   actual save/load preserves picked food without duplicating the counter
+  ok   real shelling can become carried travel food without a pantry round trip
+  ok   pickup uses the actual modified incremental carry weight
+
+prep-food-pickup: 26 passed, 0 failed, 0 todo (phase 0)

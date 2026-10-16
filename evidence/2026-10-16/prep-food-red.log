@@ -1,0 +1,29 @@
+  FAIL the public counter has a finished-food pickup
+  FAIL the real counter renderer exposes the paid food action
+  FAIL the real UI handler invokes the public food route
+  FAIL successful pickup moves the actual whole batch and pays two ticks
+  ok   own counter pickup is not a pantry donation or withdrawal
+  FAIL pickup preserves calorie, risk, spoilage and source metadata
+  ok   an empty repeated pickup cannot print food or time
+  FAIL partial pickup respects real pack room including water
+  FAIL splitting preserves the same proportional harvest sources
+  FAIL a full pack leaves the remaining batch intact
+  FAIL a requested quantity leaves the rest on the counter
+  ok   explicit zero stock never becomes a singleton
+  ok   nonfinite stock cannot fund a real transfer
+  ok   invalid quantities and indices preserve stock and time
+  ok   unknown cannot bypass the finished-food route
+  ok   unfinished cannot bypass the finished-food route
+  ok   bonded cannot bypass the finished-food route
+  ok   material cannot bypass the finished-food route
+  ok   inedible cannot bypass the finished-food route
+  ok   wilderness cannot reach the counter
+  FAIL the private camp counter works without communal credit
+  ok   finished runs cannot collect food
+  ok   actual live combat refuses counter pickup
+  FAIL actual save/load preserves picked food without duplicating the counter
+  FAIL real shelling can become carried travel food without a pantry round trip
+  FAIL pickup uses the actual modified incremental carry weight
+
+prep-food-pickup: 13 passed, 13 failed, 0 todo (phase 0)
+failing: the public counter has a finished-food pickup | the real counter renderer exposes the paid food action | the real UI handler invokes the public food route | successful pickup moves the actual whole batch and pays two ticks | pickup preserves calorie, risk, spoilage and source metadata | partial pickup respects real pack room including water | splitting preserves the same proportional harvest sources | a full pack leaves the remaining batch intact | a requested quantity leaves the rest on the counter | the private camp counter works without communal credit | actual save/load preserves picked food without duplicating the counter | real shelling can become carried travel food without a pantry round trip | …+1 more

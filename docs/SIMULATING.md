@@ -743,3 +743,16 @@ deliberate transfer routes share settlement only after actual storage succeeds;
 do not add player rewards to internal pantryAdd production/NPC prizes.
 Absence of trust census rows after trust-object replacement is unknown coverage,
 not zero activity; inspect actual per-call snapshots and pending receipt.
+
+Finished counter food pickup (2026-10-16): `node scripts/godpath/test-prep-food-pickup.js`
+covers native renderer/handler, real shelling -> carried food, weight/water/
+modifiers, conservation and true save/load. It joins automatic quick/full
+discovery. Before adding it to a policy, preserve the unchanged runtime-route
+panel and compare a separately named strategy with campaign-scorecard; do not
+pretend a policy revision is Game-only. See the dated prep-food audit/verifier.
+
+Windows legacy full-check setup: some old proofs shell out to POSIX grep
+with quoting/pipes. In the check process, put the installed Git usr/bin on
+PATH and set ComSpec to the installed Git bin/bash.exe. Do not loosen tests
+or quarantine them because cmd.exe parses those commands differently. This
+is check-runner setup, not a gameplay flag or a persistent host setting.

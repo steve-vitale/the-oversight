@@ -67,3 +67,10 @@ must earn meaningful rewards — that's the whole point of the ladder.
   tackle inflation removed (tackle reads water = chance, not fatter fish);
   gill net uses 12 -> 16 (half-applied DEPLETION change); Butcher's Friend
   relic wired (was dead, card lied).
+
+2026-10-16: finished private counter food now has a native **Pack food
+(2 ticks)** action, separate from **Put away finished food** (communal gift).
+Packing preserves actual calories, source/risk/expiry and respects modified
+carry capacity including water; it earns no gift or eating credit. Real
+shelling -> pickup -> load and partial/refusal tests are in
+`scripts/godpath/test-prep-food-pickup.js`. See the dated prep-food audit.

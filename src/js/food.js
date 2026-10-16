@@ -5,6 +5,7 @@
 //   - foodMarker()
 //   - cleanCarcass()
 //   - takePrepMaterial(idx, qty)
+//   - takePrepFood(idx, qty)
 //   - carcassToMeat()
 //   - cookFood()
 //   - renderFat()
@@ -2327,6 +2328,35 @@
       else it.units = available - n;
       this.say(`Took ${n} × ${it.name || it.material} from the counter into your pack. (2 ticks)`);
       if (this.noteHideHandled) this.noteHideHandled(taken);
+      return this.tickAction(2) || this.status();
+    },
+
+    // Own finished counter food can travel without becoming a communal gift.
+    takePrepFood(idx, qty) {
+      if (this.over) return null;
+      if (this.inCombat && this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      if (!this.atCamp()) { this.say('Your counter is back at camp.'); return null; }
+      const s = this.state.scholar, stash = s.prepStash || [];
+      idx = Number(idx);
+      const it = Number.isInteger(idx) && idx >= 0 ? stash[idx] : null;
+      if (!it || !this.isFinishedFood(it) || it.bonded || (this.isKeepsake && this.isKeepsake(it))) {
+        this.say('Choose finished food from the counter.'); return null;
+      }
+      const available = it.units ?? 1;
+      const wanted = qty == null ? available : Math.floor(Number(qty));
+      if (!Number.isFinite(available) || available <= 0 || !Number.isFinite(wanted) || wanted <= 0) {
+        this.say('No food to pack.'); return null;
+      }
+      // Match the pack's real weight, including water and weight modifiers.
+      const kg = it.kg > 0 ? it.kg : 0.1;
+      const unitWeight = kg * this.modTarget('carry.weight_mult', 1);
+      const fits = Math.max(0, Math.floor((this.packCapacity() - this.packWeight() + 1e-9) / unitWeight));
+      const n = Math.min(available, wanted, fits);
+      if (!(n > 0)) { this.say('Too heavy. Lighten your pack first.'); return null; }
+      (s.inventory || (s.inventory = [])).push({ ...it, units: n, kg });
+      if (n === available) stash.splice(idx, 1);
+      else it.units = available - n;
+      this.say(`Packed ${n} × ${it.name || 'finished food'} from the counter. (2 ticks)`);
       return this.tickAction(2) || this.status();
     },
 

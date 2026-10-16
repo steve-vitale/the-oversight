@@ -14364,6 +14364,9 @@
     if (it.material && (it.units ?? 1) > 0 && !it.bonded) {
       html += `<button class="btn ghost sm" data-stash-material="${idx}">Take to pack (2 ticks)</button>`;
     }
+    if (Game.isFinishedFood(it) && (it.units ?? 1) > 0 && !it.bonded) {
+      html += `<button class="btn ghost sm" data-stash-food="${idx}">Pack food (2 ticks)</button>`;
+    }
     if (it.lump) {
       html += `<button class="btn ghost sm" data-stash-sort="${idx}">Sort the bag</button>`;
       try {
@@ -14931,6 +14934,7 @@
     const stashOf = () => Game.prepStash();
     slot.querySelectorAll('[data-stash-stage]').forEach(b => b.onclick = rewire(() => Game.stageForPrep(), 'Staged.'));
     slot.querySelectorAll('[data-stash-material]').forEach(b => b.onclick = rewire(() => Game.takePrepMaterial(+b.dataset.stashMaterial), null));
+    slot.querySelectorAll('[data-stash-food]').forEach(b => b.onclick = rewire(() => Game.takePrepFood(+b.dataset.stashFood), null));
     slot.querySelectorAll('[data-stash-putaway]').forEach(b => b.onclick = rewire(() => Game.putAwayFinished(), null));
     slot.querySelectorAll('[data-stash-sort]').forEach(b => b.onclick = rewire(() => Game.sortBag(null, +b.dataset.stashSort, stashOf()), 'Sorted.'));
     slot.querySelectorAll('[data-stash-sortask]').forEach(b => b.onclick = rewire(() => Game.sortBag(b.dataset.vid, +b.dataset.stashSortask, stashOf()), 'Sorted.'));

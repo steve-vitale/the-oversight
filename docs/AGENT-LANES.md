@@ -390,3 +390,9 @@ actual-transfer settlement, skill-practice rollback and once-per-unsettled-gift
 return receipt. No policy, army price, Table difficulty or regional/nomad change.
 See the dated counter-gift audit and complete source-bound three-arm panels;
 Muse may use the published branch and common measurement workflow.
+
+Finished counter food pickup (2026-10-16): Codex owns the narrow food.js
+public pickup and app.js counter row/handler plus shared-kit proof. No campaign
+policy, production, costs beyond the existing2-tick material-pickup convention,
+Table/army prices or Muse region/nomad changes. Measure strategy uptake as
+a separate axis after this independently sourced runtime route repair.

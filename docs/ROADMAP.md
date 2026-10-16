@@ -9,6 +9,17 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Finished counter food pickup (2026-10-16): the actual Pack sheet now offers
+Pack food (2 ticks), moving a real finished private batch into carried rations
+without a pantry donation/withdrawal. Weight (including water/modifiers),
+spoilage, risks and harvester shares remain real.26 caller/UI/save assertions,
+quick190/190 and full962/962 pass. Standard16/four-policy and disjoint64
+retain identical320 rows/all23 metrics/full gameplay hashes; defaults never
+call the new route. Native Shell -> Pack costs6 ticks for1500 carried kcal,
+with pantry/trust/credit unchanged. See ../evidence/2026-10-16/prep-food-audit.md.
+Next measure a separately named public-action retained-ration strategy; natural
+army funding/completion and seven authored deeds remain open.
+
 Counter gift settlement (2026-10-16): completed counter deposits now earn the
 same deliberate-gift credit as Pack donations; automatic stock does not. Modern
 Generous practice revokes correctly across promotion, and a saved pending-gift
