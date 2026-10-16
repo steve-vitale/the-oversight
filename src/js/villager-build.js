@@ -565,6 +565,12 @@
         s.godhood = ((v.npcGodhood || {})[newId]) || { recognized: {}, active: [] };
         // god-path class: a person's, like godhood (godpath.js recognizeClass)
         s.godpath = ((v.npcGodpath || {})[newId]) || null;
+        // Humanity belongs to the person, not the inherited office. Preserve
+        // legacy scholar grounding for the departing body; zero is real.
+        const humanity = this.state.groundingByPerson || (this.state.groundingByPerson = {});
+        humanity[oldId] = s.grounding == null ? 100 : Math.max(0, Math.min(100, s.grounding | 0));
+        s.grounding = Number.isFinite(humanity[newId]) ? Math.max(0, Math.min(100, humanity[newId] | 0)) : 100;
+        delete humanity[newId]; // the current body uses scholar.grounding
         // knowledge into the Codex (never lowers what the Codex knew)
         const know = ((v.npcKnow || {})[newId]) || {};
         const cx = this.state.codex = this.state.codex || {};

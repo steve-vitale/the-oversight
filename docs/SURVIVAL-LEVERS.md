@@ -61,6 +61,27 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Personal grounding (2026-10-16): humanity follows the person across succession,
+not the inherited office. Current bearer remains scholar.grounding; other
+people use state.groundingByPerson, default100, including explicit zero.
+NPC Rally Cry now pays the same existing five grounding as a player Voice,
+alongside its unchanged120kcal-equivalent food and once-per-fight turn cost.
+Completed Voice autosaves retain food, humanity, effects and use gates.
+Paid shared feasts restore3 to each distinct actual human diner when at least
+two eat together; an online reactor host does not eat. A finite plant/monster
+lesson restores2 to its actual NPC teacher; actual new Table plant teaching
+restores2 to the player. Repeat/empty/absent lessons cannot farm it. These are
+the existing documented recovery rates, now wired to receipts.
+
+Thresholds75/50/25 and multipliers1/.9/.75/.6 stay unchanged. The existing
+feasted multiplier consumes grounding; the ordinary topped-up1.25x overcharge
+does not. NPCs still lack the corresponding feast-state consumer and full
+social reaction parity. Do not impose a new blanket NPC damage penalty to
+pretend those paths exist. Kept-favor/grief recovery wiring remains open.
+The paid human-diner interpretation and succession balance need feel review.
+See ../evidence/2026-10-16/grounding-audit.md for matched outcomes, named
+loss investigation, source identity and phone proof; no win quota applies.
+
 Player command turns (2026-10-16): retain existing NPC Voice120kcal-equivalent
 and Crowd Moves80kcal-equivalent prices and use limits. Their distinct living
 player ally can now choose an extra move/action turn before normal order
@@ -71,8 +92,9 @@ the existing next-two-strikes1.5x commitment in the player's real strike state;
 it replaces the previous commitment like the existing NPC effect. Class
 broadcast/aura player recipients use existing rates, range and duration.
 Save/load preserves spent casts rather than refunding the advantage. Actual
-NPC grounding erosion is still missing and remains a cost-parity audit,
-not an implied waiver. See ../evidence/2026-10-16/player-command-audit.md
+NPC grounding erosion was missing in that historical unit; the personal
+grounding follow-up above closes it without claiming complete parity.
+See ../evidence/2026-10-16/player-command-audit.md
 for all metrics, state differences, prepared phone choices and exposure limits.
 
 NPC support recipient audit (2026-10-16): retain the existing brawler wound

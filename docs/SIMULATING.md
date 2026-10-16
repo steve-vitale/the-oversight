@@ -310,9 +310,23 @@ Raw state includes known pacing diagnostics excluded by the standard hash;
 do not mistake those timestamps for gameplay effects. Calls trace that named
 replay, not every run in a panel. Prepared bonus turns and unchanged campaign
 metrics cannot prove natural NPC acquisition, usefulness or complete Voice
-cost parity. See the dated audit for the remaining daily/grounding gaps.
+cost parity. That dated audit predates the personal grounding follow-up;
+daily Voice support and full NPC feast/social parity remain open.
 
 ## Maintaining measurement
+
+Grounding upkeep: `node scripts/godpath/test-grounding-person.js` is discovered
+by quick/full checks. Keep legacy/current-bearer storage, per-person history,
+zero, village replacement, actual succession, paid Voice saves, finite lessons
+and real feast/retry paths covered together. Do not reset an NPC to100 when
+they become the bearer or infer full NPC feast/social parity from a counter.
+Receipt-only telemetry must not advance the harness clock: Date.now also
+supplies generated IDs. Grounding reuses the last recorded timestamp with
+current day/part; its focused test rejects an added clock read. Preserve
+diagnostic arms when discovering a confound, then rerun corrected panels.
+Historical source-bound verification and reconstruction are documented in
+`evidence/2026-10-16/grounding-audit.md`. Compare all contracted metrics by
+playstyle; a win decline requests investigation and judgment, not a buff.
 
 NPC eligibility revision (2026-10-16): new panels correlate NPC classes/gods
 with a distinct, known living roster resident who is not the current bearer

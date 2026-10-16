@@ -14,12 +14,20 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Personal grounding (2026-10-16): Codex owns table.js's actor grounding store,
+villager-build.js's mantle transfer, godverbs.js's actual speaker cost and paid
+Voice save settlement. Narrow game.js shared-feast and villager-agency.js
+finite-teaching receipt hooks restore the documented humanity rates. No
+region/nomad logic, NPC relationship currency, blanket damage multiplier or
+food price change. Evidence: ../evidence/2026-10-16/grounding-audit.md.
+
 Player command turns (2026-10-16): Codex owns the core sync/async handoff,
 cursor resume and save/load gates for NPC Voice/Crowd Moves commands. The
 player chooses the bonus action; NPC AI never chooses it. The shared canonical
 recipient selector also serves Live Broadcast and Rally Aura. Preserve food
-costs, use limits, original order and normal player turns. NPC Voice grounding
-cost and daily Voice support are still separate gaps. See
+costs, use limits, original order and normal player turns. The personal
+grounding follow-up above closes the NPC Voice erosion gap; daily Voice
+support remains separate. See
 ../evidence/2026-10-16/player-command-audit.md.
 
 God support recipients (2026-10-16): Codex owns the narrow godverbs.js

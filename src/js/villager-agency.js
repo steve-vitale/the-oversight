@@ -845,6 +845,7 @@
         if (actuallyTaught) {
           try { this.bumpTrust(vid, 2); } catch (e) {}
           try { this.recordDeed(vid, 'taught', `${nm} taught you something from the wild.`, 1); } catch (e) {}
+          if ((taughtMid || taughtPlant) && typeof this.addGrounding === 'function') this.addGrounding(2, 'teaching', vid);
         }
         // TRANSCRIPT (longsim agency 2026-10-11): agency turns bypassed the
         // convoTurn wrapper, so teaching conversations left no trace in the

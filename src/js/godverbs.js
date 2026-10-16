@@ -279,7 +279,9 @@
     rally_cry(fi) {
       const C = actor(fi), f = Game.tbfight, p = C.p, P = godPlay('voice_of_the_relay');
       const allies = Game.tbOtherAllies(p);
-      if (!allies.length && C.isP) { Game.say('No one in the fight to hear you. (Rally Cry)'); return false; }
+      if (!allies.length) { if (C.isP) Game.say('No one in the fight to hear you. (Rally Cry)'); return false; }
+      // Charge the actual speaker before commanded turns can pass the mantle.
+      if (P.grounding) Game.addGrounding(-P.grounding, 'the voice', C.isP ? Game.villagerId : C.vid);
       const rr = P.rallyRounds || 3;
       for (const m of liveMons(f)) m.hesitate = Math.max(m.hesitate || 0, 1);
       line(C, `You speak and every ally hears it at once. ${allies.length} act${allies.length === 1 ? 's' : ''} NOW, emboldened. Every foe hesitates. (Speak and Be Heard)`,
@@ -293,7 +295,6 @@
         try { v._gpCommanded = true; Game.tbVillagerTurn(v); } catch (e) { warn('rally turn', e); } finally { delete v._gpCommanded; }
         if (Game.tbEndCheck && Game.tbEndCheck()) break;
       }
-      if (C.isP && P.grounding) { try { Game.addGrounding && Game.addGrounding(-P.grounding, 'the voice'); } catch (e) { warn('grounding', e); } }
       tele('god_verb', { god: 'voice_of_the_relay', verb: 'rally_cry', who: C.isP ? 'player' : C.vid, allies: allies.length });
       return true;
     },
@@ -405,7 +406,7 @@
         if ((f.round || 1) > 1 || g.firstBlow) return { ok: false, why: 'The terms are set before the first blow.' };
       }
       if (actionId === 'buy_passage' && !liveMons(f).some(m => !isTitanish(m))) return { ok: false, why: 'The big ones don\'t haggle.' };
-      if (actionId === 'rally_cry' && !liveOurs(f).some(x => x.kind !== 'player')) return { ok: false, why: 'No one in the fight to hear you.' };
+      if (actionId === 'rally_cry' && !Game.tbOtherAllies(p).length) return { ok: false, why: 'No one in the fight to hear you.' };
       return { ok: true };
     }
     if (f && !f.over) return { ok: false, why: 'Not in the middle of a fight.' };
@@ -429,11 +430,16 @@
       const p = Game.tbFighter('p');
       const impl = act.terms ? VERB_IMPL.terms : VERB_IMPL[actionId];
       if (!impl) { warn('no impl for ' + actionId); return false; }
+      if (a.godId === 'voice_of_the_relay') {
+        markUsed(f, p, actionId);
+        if (act.cost && act.cost.turn) p.acted = true;
+      }
       r = impl(p, act, target);
-      if (r !== false) markUsed(f, p, act.terms ? 'terms' : actionId);
+      if (r !== false && a.godId !== 'voice_of_the_relay') markUsed(f, p, act.terms ? 'terms' : actionId);
     } else {
       const impl = DAY_IMPL[actionId];
       if (!impl) { warn('no day impl for ' + actionId); return false; }
+      if (a.godId === 'voice_of_the_relay' && act.perDay) { const s = Game.state.scholar; (s._godDay || (s._godDay = {}))[actionId] = dayKey(); }
       r = impl(target);
       if (r !== false && act.perDay) { const s = Game.state.scholar; s._godDay = s._godDay || {}; s._godDay[actionId] = dayKey(); }
     }
@@ -472,6 +478,17 @@
   };
   Object.assign(Game, methods);
 
+  // Grounding can save during a Voice effect. Persist the complete accepted
+  // action after its turn/effects settle, not only that intermediate snapshot.
+  const _voiceUse = Game.useAbility;
+  Game.useAbility = function (abilityId, actionId) {
+    const r = _voiceUse.apply(this, arguments);
+    if (r === true && abilityId === 'god' && /^(rally_cry|be_heard)$/.test(actionId) && !this.over && !this.won) {
+      try { this.save(); } catch (e) { warn('settled Voice save', e); }
+    }
+    return r;
+  };
+
   // engine bridge: impls + prechecks for useAbility('god', id)
   const IMPLS = globalThis.AbilityActionImpls;
   const PRE = globalThis.AbilityActionPrechecks;
@@ -507,11 +524,16 @@
         if (act.perFight && used(f, v, k) >= act.perFight) return false;
         const kcal = (act.cost && act.cost.kcal) || 40;
         if (!canPay(C, kcal)) return false;
+        const voice = id === 'rally_cry';
+        const needs = voice && C.vid && game.npcNeeds ? game.npcNeeds(C.vid) : null;
+        const beforeHunger = needs && needs.hunger;
+        if (voice) { markUsed(f, v, k); pay(C, kcal); }
         const r = VERB_IMPL[implKey](v, act, target);
-        markUsed(f, v, k);
-        if (r === false) return false;
-        pay(C, kcal);
+        if (!voice) markUsed(f, v, k);
+        if (r === false) { if (voice && needs) needs.hunger = beforeHunger; return false; }
+        if (!voice) pay(C, kcal);
         try { game.npcWitnessAbility && game.npcWitnessAbility('god_' + gid, liveOurs(f).map(a => a.villagerId).filter(Boolean), C.vid); } catch (e) { warn('witness', e); }
+        if (voice && !game.over && !game.won) { try { game.save(); } catch (e) { warn('settled NPC Voice save', e); } }
         return (act.cost && act.cost.turn) ? true : 'free';
       };
       if (gid === 'one_person_army') {

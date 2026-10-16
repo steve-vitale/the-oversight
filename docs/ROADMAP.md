@@ -9,6 +9,12 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Personal grounding (2026-10-16): actual speaker costs, person-owned succession,
+paid shared-feast recovery and finite knowledge-transfer recovery are wired.
+The cost/save/retry proof runs in the normal quick/full check. Read
+../evidence/2026-10-16/grounding-audit.md before importing: preserve its
+multimetric tradeoffs and explicit NPC feast/social and grief/favor gaps.
+
 Player-controlled commands (2026-10-16): NPC Voice and Crowd Moves now hand
 the player an actual bonus turn, then resume after the caster without losing
 the ordinary player turn. Sync/async paths and save/load retain the handoff
@@ -16,7 +22,8 @@ and spent cast gates; stale callbacks cannot advance a different loaded fight.
 Live Broadcast and nearby Rally Aura now include distinct living player allies.
 Read ../evidence/2026-10-16/player-command-audit.md for runtime/phone proof,
 source-bound campaign measurements and remaining limits. Daily Voice support
-and NPC grounding cost parity remain open; this is not complete Voice parity.
+remains open; the personal grounding follow-up closes NPC Voice erosion,
+not full NPC social/food-conversion parity.
 
 God support recipient repair (2026-10-16): wounded NPC One-Person Army holders
 can rally the nearby living player; actual player strikes/abilities consume

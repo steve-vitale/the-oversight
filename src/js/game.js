@@ -27781,6 +27781,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.recordHarvestDraw(this.villagerId, drawn, 'feast', hostNourishment, servingShare);
       }
       // the feast is communal: everyone who ate together warms to each other.
+      // A paid shared ritual restores humanity, including NPC participants.
+      // Cold reactor seats and absent/dead people receive no meal receipt.
+      const humanGuests = [...new Set(showed)].filter(vid => {
+        const person = this.getPerson(vid);
+        return vid !== this.villagerId && person && !person.dead && !(this.npcHasAbility && this.npcHasAbility(vid, 'fusion_reactor'));
+      });
+      const humanHost = !(this.fusionReactorOnline && this.fusionReactorOnline());
+      if (spent > 0 && humanGuests.length + (humanHost ? 1 : 0) >= 2 && typeof this.addGrounding === 'function') {
+        for (const vid of [...humanGuests, ...(humanHost ? [this.villagerId] : [])]) this.addGrounding(3, 'shared feast', vid, { save: false });
+      }
       try {
         for (let i = 0; i < showed.length; i++) for (let j = i + 1; j < showed.length; j++) {
           if (this.bondAdd) this.bondAdd(showed[i], showed[j], 1, 'feast');

@@ -304,6 +304,17 @@ ability slots; stored on `scholar.relayAbils`):
 grief (+4), KEPT favor obligations (+5 — the favor system is the
 humanity anchor), teaching (+2).
 
+Runtime status,2026-10-16: current bearer retains scholar.grounding; other
+people use state.groundingByPerson and carry their own value into the mantle.
+Paid shared feasts with at least two actual human diners now restore3 per
+distinct diner. Real finite NPC plant/monster teaching restores2 to the
+teacher; Table teaching requires actual new plant knowledge before restoring2
+to the player. Voice's existing five-point cast cost now reaches the actual
+NPC speaker too. Kept-favor/comforted-grief recovery above remains design
+intent awaiting receipt wiring. The player feasted multiplier is an existing
+consumer; full NPC feast/social effects are not implemented by the personal
+counter. See ../evidence/2026-10-16/grounding-audit.md and SURVIVAL-LEVERS.md.
+
 **Tiers and mechanical effects** (not flavor):
 - 100–75 GROUNDED: full food conversions. Villagers easy around you.
 - 74–50 FRAYING: food conversions ×0.9 (feastedMult × 0.9 — the dark
