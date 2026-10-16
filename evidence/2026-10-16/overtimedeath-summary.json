@@ -1,0 +1,805 @@
+{
+ "nRuns": 16,
+ "attribution": {
+  "total": 193,
+  "buckets": {
+   "a": 28,
+   "b": 162,
+   "c": 3,
+   "d": 0
+  },
+  "byPhase": {
+   "post-invite-outside-rerun": {
+    "a": 0,
+    "b": 94,
+    "c": 1,
+    "d": 0
+   },
+   "post-invite-in-rerun": {
+    "a": 28,
+    "b": 68,
+    "c": 2,
+    "d": 0
+   }
+  },
+  "subC": {
+   "unknown": 2,
+   "starvation": 1
+  }
+ },
+ "rates": {
+  "pre-invite": {
+   "days": 1318,
+   "vCombat": 94,
+   "vAll": 123,
+   "mCombat": 281,
+   "vCombatPerDay": 0.07132018209408195,
+   "vAllPerDay": 0.09332321699544764
+  },
+  "post-invite-in-rerun": {
+   "days": 249,
+   "vCombat": 63,
+   "vAll": 65,
+   "mCombat": 33,
+   "vCombatPerDay": 0.25301204819277107,
+   "vAllPerDay": 0.26104417670682734
+  },
+  "post-invite-outside-rerun": {
+   "days": 296,
+   "vCombat": 65,
+   "vAll": 66,
+   "mCombat": 29,
+   "vCombatPerDay": 0.2195945945945946,
+   "vAllPerDay": 0.22297297297297297
+  }
+ },
+ "subPhases": {
+  "never-offered(wait)": {
+   "days": 205,
+   "vCombat": 39,
+   "vAll": 39
+  },
+  "offered(d90+)": {
+   "days": 340,
+   "vCombat": 89,
+   "vAll": 92
+  }
+ },
+ "ladder": [
+  {
+   "seed": 181,
+   "policy": "belongfeast",
+   "days": 111,
+   "end": "village-lost",
+   "inviteDay": 68,
+   "maxTier": 3,
+   "tierHit": {
+    "1": 97,
+    "2": 104,
+    "3": 111
+   },
+   "vDeaths": 12,
+   "deathsByTier": {
+    "0": 9,
+    "1": 1,
+    "2": 2
+   },
+   "rerunShare": 2
+  },
+  {
+   "seed": 292,
+   "policy": "belongfeast",
+   "days": 43,
+   "end": "village-lost",
+   "inviteDay": null,
+   "maxTier": 0,
+   "tierHit": {},
+   "vDeaths": 8,
+   "deathsByTier": {
+    "0": 8
+   },
+   "rerunShare": 0
+  },
+  {
+   "seed": 403,
+   "policy": "belongfeast",
+   "days": 127,
+   "end": "village-lost",
+   "inviteDay": 83,
+   "maxTier": 5,
+   "tierHit": {
+    "1": 97,
+    "2": 104,
+    "3": 111,
+    "4": 118,
+    "5": 125
+   },
+   "vDeaths": 17,
+   "deathsByTier": {
+    "0": 8,
+    "1": 1,
+    "2": 1,
+    "4": 3,
+    "5": 4
+   },
+   "rerunShare": 2
+  },
+  {
+   "seed": 514,
+   "policy": "belongfeast",
+   "days": 172,
+   "end": "village-lost",
+   "inviteDay": 93,
+   "maxTier": 6,
+   "tierHit": {
+    "1": 100,
+    "2": 107,
+    "3": 114,
+    "4": 121,
+    "5": 128,
+    "6": 135
+   },
+   "vDeaths": 17,
+   "deathsByTier": {
+    "0": 4,
+    "1": 1,
+    "2": 2,
+    "3": 2,
+    "4": 1,
+    "6": 7
+   },
+   "rerunShare": 5
+  },
+  {
+   "seed": 625,
+   "policy": "belongfeast",
+   "days": 35,
+   "end": "village-lost",
+   "inviteDay": null,
+   "maxTier": 0,
+   "tierHit": {},
+   "vDeaths": 8,
+   "deathsByTier": {
+    "0": 8
+   },
+   "rerunShare": 0
+  },
+  {
+   "seed": 736,
+   "policy": "belongfeast",
+   "days": 147,
+   "end": "village-lost",
+   "inviteDay": 139,
+   "maxTier": 1,
+   "tierHit": {
+    "1": 146
+   },
+   "vDeaths": 25,
+   "deathsByTier": {
+    "0": 25
+   },
+   "rerunShare": 0
+  },
+  {
+   "seed": 847,
+   "policy": "belongfeast",
+   "days": 180,
+   "end": "survived",
+   "inviteDay": 172,
+   "maxTier": 1,
+   "tierHit": {
+    "1": 179
+   },
+   "vDeaths": 10,
+   "deathsByTier": {
+    "0": 10
+   },
+   "rerunShare": 0
+  },
+  {
+   "seed": 958,
+   "policy": "belongfeast",
+   "days": 105,
+   "end": "village-lost",
+   "inviteDay": 72,
+   "maxTier": 2,
+   "tierHit": {
+    "1": 97,
+    "2": 104
+   },
+   "vDeaths": 19,
+   "deathsByTier": {
+    "0": 16,
+    "1": 2,
+    "2": 1
+   },
+   "rerunShare": 1
+  },
+  {
+   "seed": 181,
+   "policy": "leadfeast",
+   "days": 118,
+   "end": "village-lost",
+   "inviteDay": 56,
+   "maxTier": 4,
+   "tierHit": {
+    "1": 97,
+    "2": 104,
+    "3": 111,
+    "4": 118
+   },
+   "vDeaths": 17,
+   "deathsByTier": {
+    "0": 11,
+    "1": 1,
+    "2": 3,
+    "3": 1,
+    "4": 1
+   },
+   "rerunShare": 3
+  },
+  {
+   "seed": 292,
+   "policy": "leadfeast",
+   "days": 114,
+   "end": "village-lost",
+   "inviteDay": 89,
+   "maxTier": 3,
+   "tierHit": {
+    "1": 97,
+    "2": 104,
+    "3": 111
+   },
+   "vDeaths": 20,
+   "deathsByTier": {
+    "0": 14,
+    "1": 1,
+    "2": 4,
+    "3": 1
+   },
+   "rerunShare": 2
+  },
+  {
+   "seed": 403,
+   "policy": "leadfeast",
+   "days": 107,
+   "end": "village-lost",
+   "inviteDay": 47,
+   "maxTier": 2,
+   "tierHit": {
+    "1": 97,
+    "2": 104
+   },
+   "vDeaths": 21,
+   "deathsByTier": {
+    "0": 16,
+    "1": 4,
+    "2": 1
+   },
+   "rerunShare": 2
+  },
+  {
+   "seed": 514,
+   "policy": "leadfeast",
+   "days": 107,
+   "end": "village-lost",
+   "inviteDay": 56,
+   "maxTier": 2,
+   "tierHit": {
+    "1": 97,
+    "2": 104
+   },
+   "vDeaths": 19,
+   "deathsByTier": {
+    "0": 13,
+    "1": 2,
+    "2": 4
+   },
+   "rerunShare": 4
+  },
+  {
+   "seed": 625,
+   "policy": "leadfeast",
+   "days": 109,
+   "end": "village-lost",
+   "inviteDay": 65,
+   "maxTier": 2,
+   "tierHit": {
+    "1": 97,
+    "2": 104
+   },
+   "vDeaths": 17,
+   "deathsByTier": {
+    "0": 13,
+    "1": 3,
+    "2": 1
+   },
+   "rerunShare": 0
+  },
+  {
+   "seed": 736,
+   "policy": "leadfeast",
+   "days": 156,
+   "end": "village-lost",
+   "inviteDay": 117,
+   "maxTier": 5,
+   "tierHit": {
+    "1": 124,
+    "2": 131,
+    "3": 138,
+    "4": 145,
+    "5": 152
+   },
+   "vDeaths": 18,
+   "deathsByTier": {
+    "0": 8,
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "5": 4
+   },
+   "rerunShare": 4
+  },
+  {
+   "seed": 847,
+   "policy": "leadfeast",
+   "days": 127,
+   "end": "village-lost",
+   "inviteDay": null,
+   "maxTier": 0,
+   "tierHit": {},
+   "vDeaths": 12,
+   "deathsByTier": {
+    "0": 12
+   },
+   "rerunShare": 0
+  },
+  {
+   "seed": 958,
+   "policy": "leadfeast",
+   "days": 105,
+   "end": "village-lost",
+   "inviteDay": 69,
+   "maxTier": 2,
+   "tierHit": {
+    "1": 97,
+    "2": 104
+   },
+   "vDeaths": 14,
+   "deathsByTier": {
+    "0": 14
+   },
+   "rerunShare": 0
+  }
+ ],
+ "daysPerTier": {
+  "0": 1601,
+  "1": 83,
+  "2": 64,
+  "3": 35,
+  "4": 23,
+  "5": 16,
+  "6": 38
+ },
+ "deathsPerTier": {
+  "0": 189,
+  "1": 17,
+  "2": 20,
+  "3": 6,
+  "4": 7,
+  "5": 8,
+  "6": 7
+ },
+ "wall": {
+  "national": 12,
+  "table": 13,
+  "wins": 0,
+  "wave4": 13,
+  "wave5": 7,
+  "medianSurvival": 112.5,
+  "exiled": 0
+ },
+ "perRun": [
+  {
+   "seed": 181,
+   "policy": "belongfeast",
+   "days": 111,
+   "end": "village-lost",
+   "inviteDay": 68,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 56,
+   "buckets": {
+    "a": 2,
+    "b": 54,
+    "c": 0,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 67,
+    "post-invite-in-rerun": 15,
+    "post-invite-outside-rerun": 29
+   }
+  },
+  {
+   "seed": 292,
+   "policy": "belongfeast",
+   "days": 43,
+   "end": "village-lost",
+   "inviteDay": null,
+   "seat": null,
+   "sittings": 0,
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "maxWave": 2,
+   "nDeaths": 15,
+   "buckets": {
+    "a": 0,
+    "b": 11,
+    "c": 4,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 43,
+    "post-invite-in-rerun": 0,
+    "post-invite-outside-rerun": 0
+   }
+  },
+  {
+   "seed": 403,
+   "policy": "belongfeast",
+   "days": 127,
+   "end": "village-lost",
+   "inviteDay": 83,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 47,
+   "buckets": {
+    "a": 3,
+    "b": 41,
+    "c": 3,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 82,
+    "post-invite-in-rerun": 31,
+    "post-invite-outside-rerun": 14
+   }
+  },
+  {
+   "seed": 514,
+   "policy": "belongfeast",
+   "days": 172,
+   "end": "village-lost",
+   "inviteDay": 93,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 33,
+   "buckets": {
+    "a": 6,
+    "b": 26,
+    "c": 1,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 92,
+    "post-invite-in-rerun": 73,
+    "post-invite-outside-rerun": 7
+   }
+  },
+  {
+   "seed": 625,
+   "policy": "belongfeast",
+   "days": 35,
+   "end": "village-lost",
+   "inviteDay": null,
+   "seat": null,
+   "sittings": 0,
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "maxWave": 3,
+   "nDeaths": 17,
+   "buckets": {
+    "a": 0,
+    "b": 14,
+    "c": 3,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 35,
+    "post-invite-in-rerun": 0,
+    "post-invite-outside-rerun": 0
+   }
+  },
+  {
+   "seed": 736,
+   "policy": "belongfeast",
+   "days": 147,
+   "end": "village-lost",
+   "inviteDay": 139,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 40,
+   "buckets": {
+    "a": 0,
+    "b": 40,
+    "c": 0,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 138,
+    "post-invite-in-rerun": 2,
+    "post-invite-outside-rerun": 7
+   }
+  },
+  {
+   "seed": 847,
+   "policy": "belongfeast",
+   "days": 180,
+   "end": "survived",
+   "inviteDay": 172,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 36,
+   "buckets": {
+    "a": 0,
+    "b": 35,
+    "c": 1,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 171,
+    "post-invite-in-rerun": 2,
+    "post-invite-outside-rerun": 7
+   }
+  },
+  {
+   "seed": 958,
+   "policy": "belongfeast",
+   "days": 105,
+   "end": "village-lost",
+   "inviteDay": 72,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 44,
+   "buckets": {
+    "a": 1,
+    "b": 42,
+    "c": 1,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 71,
+    "post-invite-in-rerun": 9,
+    "post-invite-outside-rerun": 25
+   }
+  },
+  {
+   "seed": 181,
+   "policy": "leadfeast",
+   "days": 118,
+   "end": "village-lost",
+   "inviteDay": 56,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 38,
+   "buckets": {
+    "a": 3,
+    "b": 35,
+    "c": 0,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 55,
+    "post-invite-in-rerun": 22,
+    "post-invite-outside-rerun": 41
+   }
+  },
+  {
+   "seed": 292,
+   "policy": "leadfeast",
+   "days": 114,
+   "end": "village-lost",
+   "inviteDay": 89,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 43,
+   "buckets": {
+    "a": 3,
+    "b": 37,
+    "c": 3,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 88,
+    "post-invite-in-rerun": 18,
+    "post-invite-outside-rerun": 8
+   }
+  },
+  {
+   "seed": 403,
+   "policy": "leadfeast",
+   "days": 107,
+   "end": "village-lost",
+   "inviteDay": 47,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 41,
+   "buckets": {
+    "a": 2,
+    "b": 38,
+    "c": 1,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 46,
+    "post-invite-in-rerun": 11,
+    "post-invite-outside-rerun": 50
+   }
+  },
+  {
+   "seed": 514,
+   "policy": "leadfeast",
+   "days": 107,
+   "end": "village-lost",
+   "inviteDay": 56,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 33,
+   "buckets": {
+    "a": 4,
+    "b": 29,
+    "c": 0,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 55,
+    "post-invite-in-rerun": 11,
+    "post-invite-outside-rerun": 41
+   }
+  },
+  {
+   "seed": 625,
+   "policy": "leadfeast",
+   "days": 109,
+   "end": "village-lost",
+   "inviteDay": 65,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 41,
+   "buckets": {
+    "a": 0,
+    "b": 37,
+    "c": 4,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 64,
+    "post-invite-in-rerun": 13,
+    "post-invite-outside-rerun": 32
+   }
+  },
+  {
+   "seed": 736,
+   "policy": "leadfeast",
+   "days": 156,
+   "end": "village-lost",
+   "inviteDay": 117,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 54,
+   "buckets": {
+    "a": 4,
+    "b": 50,
+    "c": 0,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 116,
+    "post-invite-in-rerun": 33,
+    "post-invite-outside-rerun": 7
+   }
+  },
+  {
+   "seed": 847,
+   "policy": "leadfeast",
+   "days": 127,
+   "end": "village-lost",
+   "inviteDay": null,
+   "seat": null,
+   "sittings": 0,
+   "national": 1,
+   "table": 0,
+   "wins": 0,
+   "maxWave": 3,
+   "nDeaths": 26,
+   "buckets": {
+    "a": 0,
+    "b": 18,
+    "c": 8,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 127,
+    "post-invite-in-rerun": 0,
+    "post-invite-outside-rerun": 0
+   }
+  },
+  {
+   "seed": 958,
+   "policy": "leadfeast",
+   "days": 105,
+   "end": "village-lost",
+   "inviteDay": 69,
+   "seat": "lesser",
+   "sittings": 0,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 33,
+   "buckets": {
+    "a": 0,
+    "b": 30,
+    "c": 3,
+    "d": 0
+   },
+   "phaseDays": {
+    "pre-invite": 68,
+    "post-invite-in-rerun": 9,
+    "post-invite-outside-rerun": 28
+   }
+  }
+ ]
+}
