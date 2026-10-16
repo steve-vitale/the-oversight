@@ -157,7 +157,28 @@
         try {
           const vv = this.state.village || {};
           vv.deathSeen = vv.deathSeen || {};
-          if (vv.deathSeen[opts.villagerId]) return null;
+          if (vv.deathSeen[opts.villagerId]) {
+            // TELEFLAG (2026-10-16, sim-findings #400/#403): key player deaths
+            // BEFORE the no-op decision. A villager-death path can register the
+            // scholar's death before playerDeath does (observed belongfeast-s529):
+            // the guard then no-ops playerDeath's registerDeath call and the
+            // death tele would never carry player:true. Record the flag before
+            // the no-op: repair the already-fired death tele in place so it
+            // carries player:true. Still exactly one registration, one corpse,
+            // one fallen entry, one death tele — no double-counting. (The sim
+            // harness's live death capture reads player lazily off the tele
+            // record, so the repair is visible to harness teles too.)
+            if (opts.player) {
+              try {
+                const tel = this.state.telemetry || [];
+                for (let i = tel.length - 1; i >= 0; i--) {
+                  const e = tel[i];
+                  if (e && e.type === 'death' && String(e.who) === String(opts.villagerId)) { e.player = true; break; }
+                }
+              } catch (e2) {}
+            }
+            return null;
+          }
           vv.deathSeen[opts.villagerId] = (this.state.scholar || {}).day || 0;
         } catch (e) {}
       }

@@ -275,13 +275,30 @@ async function runDays(Game, policy, opts) {
   const _liveDeaths = [];
   const _origTele = Game.tele;
   Game.tele = function (type, data) {
+    let r;
+    try { r = _origTele.apply(this, arguments); } catch (e) { throw e; }
     try {
       if (type === 'death') {
         const s0 = (this.state && this.state.scholar) || {};
-        _liveDeaths.push({ day: s0.day || 0, kind: data && data.kind, who: data && data.who, cause: data && data.cause, player: !!(data && data.player) });
+        // TELEFLAG (2026-10-16, sim-findings #400/#403): read player LAZILY off
+        // the tele record. corpses.js registerDeath can repair a death tele's
+        // player flag in place after the fire (double-registration race: a
+        // villager-death path wins, playerDeath's call no-ops on the guard) —
+        // a snapshot here would freeze the pre-repair value and the harness
+        // would keep undercounting player deaths. day/kind/who/cause never
+        // change after the fire; only player can be repaired.
+        const tel = (this.state && this.state.telemetry) || [];
+        const rec = tel.length ? tel[tel.length - 1] : null;
+        const entry = { day: s0.day || 0, kind: data && data.kind, who: data && data.who, cause: data && data.cause };
+        if (rec && rec.type === 'death' && String(rec.who) === String(entry.who)) {
+          Object.defineProperty(entry, 'player', { enumerable: true, configurable: true, get: function () { return !!rec.player; } });
+        } else {
+          entry.player = !!(data && data.player);
+        }
+        _liveDeaths.push(entry);
       }
     } catch (e) {}
-    return _origTele.apply(this, arguments);
+    return r;
   };
   global.__policyRandom = mulberry32((((((opts.manifest && opts.manifest.seed) || Game.__simSeed || 1)) * 2654435761) ^ 0x5eed) >>> 0);
   const samples = { pop: [], pantry: [], knowledge: [], trust: [], deaths: [], villagers: [],
