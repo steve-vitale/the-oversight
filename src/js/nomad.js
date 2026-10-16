@@ -199,7 +199,7 @@
       const abandoned = runwayDays < 7;
       // The party musters first: the village's new leader must be a stayer,
       // never someone walking the road (nomad-reachability 2026-10-15: the
-      // old order appointed the leader from all non-bearer <redacted> then
+      // old order appointed the leader from all non-bearer villagers then
       // mustered the party from the same pool, so the leader could be
       // drafted — the epilogue praised them for holding the village while
       // they starved on the road).

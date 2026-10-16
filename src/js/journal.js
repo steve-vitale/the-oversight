@@ -272,7 +272,7 @@
     },
 
     // peopleJournal: entries for the Codex screen, met-order.
-    // THE BEARER <redacted> THE PAGE (journey-succession r14 2026-10-15): this used
+    // THE BEARER = THE PAGE (journey-succession r14 2026-10-15): this used
     // to filter the player character OUT, so the new bearer could never
     // re-read their own backstory after the orientation beat scrolled by
     // (r12 blank — a silent identity gap Steve's rules forbid). You know

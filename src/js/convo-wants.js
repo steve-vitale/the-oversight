@@ -568,7 +568,7 @@
         if (!need) return null; // no real need — the want can't open
         // INHERITED ASK (journey-succession 2026-10-11): the predecessor's
         // released favor is still the live ask — the NPC re-asks the new
-        // Bearer <redacted> it, naming the predecessor, never pretending the
+        // Bearer about it, naming the predecessor, never pretending the
         // ask is new. Same need kind required; a changed need is a new ask
         // (the old favor goes moot, the follow-up says so honestly).
         try {

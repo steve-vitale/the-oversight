@@ -65,7 +65,7 @@
   // and used abilities are read live; scene text carries {tokens} that
   // relayOpenScene substitutes. Scenes whose premise isn't true carry a
   // `needs` gate — the commune rotation skips them (they cycle back later,
-  // when the Bearer <redacted> the locket / learned the ability / done the deed).
+  // when the Bearer has the locket / learned the ability / done the deed).
   function invItems() {
     try { return (Game.state.scholar || {}).inventory || []; } catch (e) { return []; }
   }
@@ -76,7 +76,7 @@
     } catch (e) {}
     return null;
   }
-  // keepsakeName: a sentimental keepsake the Bearer <redacted> carries — or null.
+  // keepsakeName: a sentimental keepsake the Bearer actually carries — or null.
   function keepsakeName() {
     try {
       const inv = invItems();
@@ -137,7 +137,7 @@
   // Choice fields: id, label, lean (nudge, |n|<=10), ground (+/- grounding),
   // bond (+sysBond), say[] (outcome lines), plant (a thread for later).
   // Optional `needs`: a () => boolean gate — the scene only fires when its
-  // premise is true of the actual Bearer <redacted> pickNext walks past blocked scenes.
+  // premise is true of the actual Bearer before pickNext walks past blocked scenes.
   const SCENES = {
     // ---- The curiosity ladder: the first five communes (kept from the
     // original relayCommune — the System learning caretaking, one question
@@ -283,7 +283,7 @@
     },
     'chk-sanctuary': {
       track: 'checkin',
-      // Only accuses the Bearer <redacted> a closed room if they actually made one.
+      // Only accuses the Bearer of a closed room if they actually made one.
       // (Sense 2026-10-11: was asserting a Sanctuary the player never learned.)
       needs: function () { try { return Game.relayHas('sanctuary'); } catch (e) { return false; } },
       sys: [
@@ -304,7 +304,7 @@
     },
     'chk-argument': {
       track: 'checkin',
-      // Only confronts the Bearer <redacted> rewriting if they actually rewrote.
+      // Only confronts the Bearer about rewriting if they actually rewrote.
       // (Sense 2026-10-11: was asserting edits a fresh relay-holder never made.)
       needs: function () { try { return rewriteUses() > 0; } catch (e) { return false; } },
       sys: [
@@ -359,7 +359,7 @@
     // ---- LIGHT chain: teach it grief, food, joy — make it more human.
     'light-locket': {
       track: 'light',
-      // The Bearer <redacted> carries a Brass Locket — the scene is about a real
+      // The Bearer actually carries a Brass Locket — the scene is about a real
       // keepsake, not an invented one. (Sense 2026-10-11.)
       needs: function () { try { return Game.hasItem('locket'); } catch (e) { return false; } },
       sys: [
@@ -474,7 +474,7 @@
 
   // pickNext: walk a scene rotation from startIdx, taking the first scene
   // whose `needs` gate passes. Blocked scenes are consumed — they cycle back
-  // around later, when the Bearer <redacted> have the locket / learned the ability /
+  // around later, when the Bearer does have the locket / learned the ability /
   // done the deed. A fallback always exists (most scenes have no gate), so
   // the commune is never stranded.
   function pickNext(list, startIdx) {

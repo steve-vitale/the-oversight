@@ -346,7 +346,7 @@
           // Honest timeline: "N days back" for stale threads, no leaked
           // internal "(last time)" note for recent ones.
           // INHERITED THREAD (journey-succession 2026-10-11): name whose
-          // thread it was — the menu must not offer the new Bearer <redacted>
+          // thread it was — the menu must not offer the new Bearer someone
           // else's unfinished business as their own.
           const predL = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
           const label2 = predL ? (ago > 1 ? `"${predL}'s unfinished — ${label}, ${ago} days back."` : `"${predL}'s unfinished — ${label}."`)

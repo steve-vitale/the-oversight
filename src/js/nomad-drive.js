@@ -34,7 +34,7 @@
 //   - member_perspective: a party member's reunion is their scene (third person, their voice); they decide changed-choices by seeded hash (code: reunionScene, memberDecide; nomad-drive.js applies the outcomes)
 //   - hostile_fight: a hostile party-kin reunion the member won't walk away from is a real blow-by-blow fieldFight, seeker vs kin — never an outcome table (code: fightKin)
 //   - seeker_gone: a dead or departed seeker's pending kin release; released kin close their legs but never block all-found (code: releaseGoneSeekers)
-//   - real_choice: a 'changed' reunion of the BEARER's own kin holds road.pendingChoice open with exactly ask/leave/fight; ask/leave are spoken scenes (nomad-scenes.choiceLines), fight is a real blow-by-blow DUEL (the bearer <redacted> the kin through fieldFight) — vKill changes the road outcome to 'grave', mFlee brings the kin home FORCED ('alive'), vDie/vFlee leave it 'changed' (code: chooseReunion, duelKin, fightKin)
+//   - real_choice: a 'changed' reunion of the BEARER's own kin holds road.pendingChoice open with exactly ask/leave/fight; ask/leave are spoken scenes (nomad-scenes.choiceLines), fight is a real blow-by-blow DUEL (the bearer fights the kin through fieldFight) — vKill changes the road outcome to 'grave', mFlee brings the kin home FORCED ('alive'), vDie/vFlee leave it 'changed' (code: chooseReunion, duelKin, fightKin)
 //   - road_default: an unanswered choice auto-resolves to leave at the next tick — never a prompt, deterministic for sims (code: maybeReunion)
 //   - moved_on: the kin relocates to a new deterministic region (never the leg's, never the landing); the trail resets to vague (code: moveKinOn)
 //   - joined_kin: alive joins the party as a companion (kin: id, road.companions); companions never bear the Codex (code: resolveReunion, nomad.js isCompanion)
@@ -367,7 +367,7 @@
     },
 
     // fightKin(fighterId, name, opts): a 'changed' reunion come to blows —
-    // bearer <redacted> or seeker vs their kin. One real blow-by-blow bout through
+    // bearer alone or seeker vs their kin. One real blow-by-blow bout through
     // fieldFight with the kin's real attack kit — never an outcome table.
     // Reads rec.outcome (the engine's real record), never phantom fields.
     // Returns the bout's outcome tag: 'vKill' | 'mFlee' | 'vDie' | 'vFlee' |
@@ -472,7 +472,7 @@
     },
 
     // duelKin(name, kind, leg, relation, opts): the FIGHT choice — a DUEL.
-    // The bearer <redacted> up alone against their kin (it's personal); the rest
+    // The bearer steps up alone against their kin (it's personal); the rest
     // of the party is there to run the kin down if they break. One real
     // blow-by-blow bout through fightKin — never an outcome table. The result
     // changes the road outcome:
@@ -480,9 +480,9 @@
     //   - mFlee: the kin breaks; the party runs them down and brings them
     //     home FORCED -> 'alive' as a companion (forced: true). A reunion,
     //     but not the one anyone walked all this way for.
-    //   - vDie: the bearer <redacted> -> nomadKill (the mantle stays in the
+    //   - vDie: the bearer dies -> nomadKill (the mantle stays in the
     //     party); the kin flees in horror -> 'changed'.
-    //   - vFlee/evade: the bearer <redacted> down -> 'changed', bloodied, and
+    //   - vFlee/evade: the bearer goes down -> 'changed', bloodied, and
     //     lighter in the packs.
     // opts.rng seeds the fight (proofs); the live path passes none.
     duelKin(name, kind, leg, relation, opts) {

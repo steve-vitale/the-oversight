@@ -15254,7 +15254,7 @@
         }
       }
       // ALIEN (break-it disease 2026-10-10): alien-pool conditions are real
-      // conditions the Bearer <redacted> — the min-max building blocks — but no earthly
+      // conditions the Bearer carries — the min-max building blocks — but no earthly
       // medicine diagnoses, eases, or cures them, so they get a readable row
       // (name, what it does, the transformation) and NO treatment buttons.
       // The honest note says why.
