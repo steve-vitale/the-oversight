@@ -98,17 +98,24 @@
     // COUNTER EXECUTION (2026-10-13): the village knows this beast's trick —
     // perform it. Same beats the player gets, same costs, same caps (parity,
     // Steve 2026-10-13 — no NPC advantage). fctx: {round, vHp, vHpMax, lead,
-    // rec, vp}. Returns null when the kind needs a grid/telegraph/segments
-    // the abstract model lacks — those are documented as un-actuatable,
-    // never faked.
+    // rec, vp, members}. Returns null when the kind needs a grid/telegraph/
+    // segments the abstract model lacks — those are documented as
+    // un-actuatable, never faked.
     // ACTUABLE: shout (belltoad, hummice), offer_food (lockpick_raccoon),
-    // spool feed-waits, chorus dance, buffering stand-still.
-    // UN-ACTUATABLE: move_windup/move_x2/sidestep/keep_distance (need grid),
+    // spool feed-waits, chorus dance, buffering stand-still; COUNTERWIRE
+    // (2026-10-16): redactor quiet-starve, gavel confess, focus_group bore-out,
+    // terms_of_service examine/loophole, callback farewell, ad_break look-away,
+    // strike meet-demand, suburb leave, eulogy contradict, algorithm tank,
+    // congregation argue, nielsen fight-boring, spoiler prone, network_note
+    // bad-note.
+    // UN-ACTUABLE: move_windup/move_x2/sidestep/keep_distance (need grid),
     // strike_windup/strike_recovery/strike_first (need telegraph state),
     // strike_nonhead (needs segments), fresh_weapon (needs mid-fight swap),
     // wait vs heckler/moderator (shame/mute not in field model),
-    // terms_of_service/gavel/callback/ad_break/focus_group/redactor
-    // (need reading/viewership/ritual/adds — documented in evidence).
+    // blindside/face_it/eyes (no shadow-side/facing/called-shots off-screen),
+    // eater/influencer/audit/reunion/cancellation/editor/rerun/timeslot/finale/
+    // finale_crew/finale_opening (need poison/adds/audience/journal/abilities/
+    // venue/sacrifice — documented in evidence/2026-10-16/sim-counterwire.md).
     villagerTrickAction: function (vid, mdef, fctx) {
       try {
         var mid = mdef.id;
@@ -116,6 +123,8 @@
         var knownSig = !!((this.state.villagerTricks || {})[mid]);
         if (!known12 && !knownSig) return null;
         var rec = fctx.rec || {};
+        var members = fctx.members || [];
+        var msig = (members[0] || {});
         // ---- waves 1-2: the counter field ----
         if (known12 && mdef.counter) {
           var kind = mdef.counter.kind;
@@ -155,6 +164,92 @@
           if (mid === 'buffering' && fctx.vHp < fctx.vHpMax * 0.6) {
             // Stand still — it aims where you'll be. Whiff.
             return { type: 'wait', why: 'buffering-still' };
+          }
+          // ---- COUNTERWIRE (2026-10-16): the unwired six ----
+          if (mid === 'redactor' && (rec.redactorQuiet | 0) < 3) {
+            // Go quiet — starve the redaction. Two quiet turns thin its
+            // attacks; a third starves it out. (Striking feeds it: every
+            // wound gets un-written, so the quiet IS the fight.)
+            return { type: 'wait', why: 'redactor-quiet' };
+          }
+          if (mid === 'gavel' && msig.sigG && msig.sigG.trial) {
+            // Confess first — out loud, where everyone can hear. The verdict
+            // falls lighter; the confession stays on the record.
+            return { type: 'confess', why: 'gavel-confess' };
+          }
+          if (mid === 'focus_group') {
+            // Be deliberately boring — three rounds and the murmur loses
+            // interest and LEAVES. (Striking is entertainment.)
+            return { type: 'bore', why: 'focus-boring' };
+          }
+          if (mid === 'terms_of_service') {
+            // READ IT — spend turns examining; the loophole clause dismisses
+            // it outright. (Striking the scroll just adds to the bill.)
+            return { type: 'examine', why: 'tos-read' };
+          }
+          if (mid === 'callback' && !rec.trickMourned) {
+            // The funeral: speak to it AS the person, say the goodbye
+            // properly, and it loses coherence — the face can't borrow a
+            // swing from someone who's been mourned.
+            return { type: 'farewell', why: 'callback-funeral' };
+          }
+          if (mid === 'ad_break' && (fctx.round % 4 === 0) && !rec.trickUnwatched) {
+            // Look away when the break runs — the ad's power is that you
+            // WATCH. Unwatched, the healing never lands.
+            return { type: 'look_away', why: 'adbreak-unwatched' };
+          }
+          // ---- COUNTERWIRE (2026-10-16): wave-4 counterplay ----
+          if (mid === 'strike' && !rec.trickStoodDown && fctx.vHp < fctx.vHpMax * 0.6 &&
+              this.villagerHasFood && this.villagerHasFood(vid)) {
+            // Meet ONE demand — do the work yourself, manually, at real cost
+            // (1 food + the action). The picket stands down a round.
+            // Reactive (hurting), not an opening — parity with shout.
+            return { type: 'meet_demand', why: 'strike-demand' };
+          }
+          if (mid === 'suburb' && fctx.round === 1) {
+            // You can't kill a suburb — LEAVE. Navigation is victory; the
+            // fight is a timer. The correct move, round one.
+            return { type: 'leave', why: 'suburb-leave' };
+          }
+          if (mid === 'eulogy') {
+            // Contradict the narration with your actions: it says you run,
+            // you advance. Three true contradictions and the story dismisses
+            // you kindly.
+            return { type: 'contradict', why: 'eulogy-contradict' };
+          }
+          if (mid === 'algorithm' && !(rec.algorithmTank > 0)) {
+            // Lose on purpose — tank the prediction. Two rounds of
+            // deliberately soft predictions, then strike while the model is
+            // mushy. (The hook halves its damage while the tank holds.)
+            return { type: 'wait', why: 'algorithm-tank' };
+          }
+          if (mid === 'congregation' && (fctx.round % 3 === 0)) {
+            // Argue theology — it MUST engage, bound by liturgy. Argued the
+            // round before the beam, the beam never falls.
+            return { type: 'argue', why: 'congregation-heresy' };
+          }
+          // ---- COUNTERWIRE (2026-10-16): wave-5 counterplay ----
+          if (mid === 'nielsen') {
+            var _niR = 40;
+            try { _niR = (rec.sigW5 && rec.sigW5.niR != null) ? rec.sigW5.niR : 40; } catch (e) {}
+            // FIGHT BORING — the smallest, dullest actions starve it of
+            // viewers. Boring until the eye closes (ratings <= 10), then
+            // strike while it's shut. (The hook already rewards dealing
+            // nothing with -6 ratings/round; this gate just chooses it.)
+            if (_niR > 10) return { type: 'wait', why: 'nielsen-boring' };
+          }
+          if (mid === 'spoiler' && !rec.trickProne) {
+            var _spN = 0;
+            try { _spN = (rec.sigW5 && rec.sigW5.spN) || 0; } catch (e) {}
+            // Fulfill the spoiler on YOUR terms: fall PRONE, deliberately,
+            // the round before the announcement comes due (spN%4===3 — the
+            // flag must be set before the monster phase evaluates it).
+            if (_spN % 4 === 3) return { type: 'prone', why: 'spoiler-prone' };
+          }
+          if (mid === 'network_note' && !rec.badNotePlanted) {
+            // Give it BAD notes — plant ‘the wolf should be SMALLER’ and the
+            // memo 'fixes' the enemy into uselessness on the next buff note.
+            return { type: 'bad_note', why: 'networknote-badnote' };
           }
         }
         return null;
@@ -708,6 +803,17 @@
                   if (typeof _sig5 === 'number') total = _sig5;
                 }
               } catch (e) {}
+              // COUNTERWIRE (2026-10-16): the redactor starves. Two
+              // consecutive quiet turns thin its attacks (halved) — the
+              // third starves it out (handled in the wait resolution).
+              // Defensive disruption, never a damage buff.
+              try {
+                if (mdef.id === 'redactor' && (rec.redactorQuiet | 0) >= 2 && total > 0) {
+                  var _preR = total;
+                  total = Math.floor(total / 2);
+                  rec.log.push(vName + '\u2019s quiet starves the redaction — the ' + mName + '\u2019s attacks come thin. ' + _preR + ' \u2192 ' + total + '.');
+                }
+              } catch (e) {}
               // COUNTER EXECUTION (2026-10-13): the villager's trick disrupts.
               // PARITY — these are defensive disruptions, never damage buffs.
               // Shout: the bellow broke the sonic attack — halved.
@@ -824,7 +930,7 @@
             // action: no strike that round), same caps. Parity, no advantage.
             var trickAct = null;
             try {
-              trickAct = this.villagerTrickAction(vid, mdef, { round: round, vHp: vHp, vHpMax: vHpMax, lead: lead, rec: rec, vp: vp });
+              trickAct = this.villagerTrickAction(vid, mdef, { round: round, vHp: vHp, vHpMax: vHpMax, lead: lead, rec: rec, vp: vp, members: members });
             } catch (e) { trickAct = null; }
             // GOD-PATH VERB (parity 2026-10-14): free verbs (Foresight, Coin
             // Guard, Stoke) ride along; a turn verb spends the action.
@@ -876,6 +982,27 @@
                   // The sigW3b port records rec.mDealt delta; 0 dealt = the
                   // replay is silence. Feeding it nothing IS the trick.
                   rec.log.push('R' + round + ': ' + vName + ' gives the spool nothing — waits, breathes, checks a strap. (Feeding it silence.)');
+                } else if (trickAct.why === 'redactor-quiet') {
+                  // REDACTOR: go quiet. Two quiet turns thin its attacks;
+                  // a third starves it out (starve-out lands here, in the
+                  // villager phase — the fight simply ends).
+                  rec.redactorQuiet = (rec.redactorQuiet || 0) + 1;
+                  rec.log.push('R' + round + ': ' + vName + ' goes quiet — no strikes, no shouts, nothing to redact. (' + rec.redactorQuiet + '/3)');
+                  if (rec.redactorQuiet >= 3) {
+                    rec.outcome = 'mFlee';
+                    rec.log.push('R' + round + ': the Redactor starves — nothing left to redact. It folds out of the fight. (Starved out.)');
+                  }
+                } else if (trickAct.why === 'algorithm-tank') {
+                  // ALGORITHM: lose on purpose. Two rounds of deliberately
+                  // soft predictions (its damage halved in sigW4FieldMonster
+                  // while the tank holds), then strike while the model is mushy.
+                  rec.algorithmTank = 2;
+                  rec.log.push('R' + round + ': ' + vName + ' stands there and takes it soft — deliberately. (Tanking the prediction.)');
+                } else if (trickAct.why === 'nielsen-boring') {
+                  // NIELSEN: FIGHT BORING. The smallest, dullest action —
+                  // the hook already converts dealing nothing into -6
+                  // ratings/round; the eye closes at 0.
+                  rec.log.push('R' + round + ': ' + vName + ' does the smallest, dullest thing. Somewhere, a ratings graph sags. (Fighting boring.)');
                 } else {
                   rec.trickStill = 1; // buffering: it aims where you'll be — whiff
                   rec.log.push('R' + round + ': ' + vName + ' stands perfectly still. Gives it nothing to predict.');
@@ -883,6 +1010,86 @@
               } else if (trickAct.type === 'dance') {
                 rec.trickDance = 1; // the downbeat kick catches air
                 rec.log.push('R' + round + ': ' + vName + ' dances on the downbeat.');
+              } else if (trickAct.type === 'confess') {
+                // GAVEL: confess first — out loud, where everyone can hear.
+                // Costs the action; the verdict falls lighter (halved in
+                // sigFieldGavel). Witnesses remember: the confession is on
+                // the record (state counter, readable by sims/gossip).
+                rec.trickConfess = 1;
+                try { this.state.gavelConfessions = (this.state.gavelConfessions || 0) + 1; } catch (e) {}
+                rec.log.push('R' + round + ': ' + vName + ' confesses first — out loud, where everyone can hear. The gavel pauses. (The confession is on the record.)');
+              } else if (trickAct.type === 'bore') {
+                // FOCUS GROUP: be deliberately boring. Three consecutive
+                // boring rounds and the murmur loses interest and LEAVES.
+                rec.focusBore = (rec.focusBore || 0) + 1;
+                var _boreLines = ['recites bus schedules. The eye-heads droop.', 'counts ceiling tiles. A mouth-head yawns.', 'describes paint drying, in detail. The murmur thins.'];
+                rec.log.push('R' + round + ': ' + vName + ' is deliberately boring — ' + _boreLines[Math.min(2, rec.focusBore - 1)] + ' (' + rec.focusBore + '/3)');
+                if (rec.focusBore >= 3) {
+                  rec.outcome = 'mFlee';
+                  rec.log.push('R' + round + ': the murmur drifts off — nobody is watching. They LEAVE. (Bored out of the room.)');
+                }
+              } else if (trickAct.type === 'examine') {
+                // TERMS OF SERVICE: READ IT. Two examining turns and the
+                // loophole clause surfaces — the scroll dismisses itself.
+                rec.tosRead = (rec.tosRead || 0) + 1;
+                rec.log.push('R' + round + ': ' + vName + ' reads the fine print — squinting at the crawling clauses. (' + rec.tosRead + '/2)');
+                if (rec.tosRead >= 2) {
+                  rec.outcome = 'mFlee';
+                  rec.log.push('R' + round + ': ' + vName + ' finds it — the loophole clause. \u2018...hereby DISMISSED.\u2019 The scroll folds itself away.');
+                }
+              } else if (trickAct.type === 'farewell') {
+                // CALLBACK: the funeral. Speak to it AS the person, say the
+                // goodbye properly — it loses coherence (face-shift bonus
+                // disabled in sigW3cFieldRound for the rest of the fight).
+                rec.trickMourned = 1;
+                rec.log.push('R' + round + ': ' + vName + ' speaks to the face — as THEM, the way they laughed — and says the goodbye properly. The face loses coherence.');
+              } else if (trickAct.type === 'look_away') {
+                // AD BREAK: the ad's power is that you WATCH. Look away on
+                // the break round — unwatched, the healing never lands
+                // (consumed in sigW3cFieldRound).
+                rec.trickUnwatched = 1;
+                rec.log.push('R' + round + ': ' + vName + ' looks away. The break runs to dead air.');
+              } else if (trickAct.type === 'meet_demand') {
+                // STRIKE: meet ONE demand — do the grid's job yourself,
+                // manually and costly. Costs 1 real food + the action; the
+                // picket stands down a round (consumed in sigW4FieldMonster).
+                var _mfood = (this.villagerSpendFood ? this.villagerSpendFood(vid) : null) || 'food';
+                rec.trickStoodDown = 1;
+                rec.log.push('R' + round + ': ' + vName + ' does the grid\u2019s job — manually, with ' + _mfood + '. The picket stands down a round. (Scabbing.)');
+              } else if (trickAct.type === 'leave') {
+                // SUBURB: you can't kill it — LEAVE. Navigation is victory;
+                // the fight is a timer. vFlee = walked out alive (the
+                // correct move, narrated).
+                rec.outcome = 'vFlee';
+                rec.fleeWise = true;
+                rec.log.push('R' + round + ': ' + vName + ' reads the sterile streets — you can\u2019t kill a suburb. They walk out. (Navigation is victory.)');
+              } else if (trickAct.type === 'contradict') {
+                // EULOGY: contradict the narration with your actions — it
+                // says you run, you advance. Each contradiction restores a
+                // verse (consumed in sigW4FieldMonster); three true
+                // contradictions and the story dismisses you kindly.
+                rec.trickContradict = 1;
+                var _conLines = ['it says ' + vName + ' runs — ' + vName + ' advances.', 'it says ' + vName + ' falters — ' + vName + ' stands straighter.', 'it says ' + vName + ' begs — ' + vName + ' laughs.'];
+                var _conN = (rec.eulogyContradicts || 0);
+                rec.log.push('R' + round + ': ' + vName + ' contradicts the narration — ' + _conLines[Math.min(2, _conN)]);
+              } else if (trickAct.type === 'argue') {
+                // CONGREGATION: heresy — argue theology; bound by liturgy,
+                // it MUST engage the argument instead of the beam (consumed
+                // in sigW4FieldMonster on the beam round).
+                rec.trickArgue = 1;
+                rec.log.push('R' + round + ': ' + vName + ' argues theology — transubstantiation, the liturgy of the lost. It MUST engage.');
+              } else if (trickAct.type === 'prone') {
+                // SPOILER: fulfill the prophecy on YOUR terms — fall prone,
+                // deliberately. The announcement is satisfied cheaply; the
+                // voiceover gains no weight (consumed in sigW5FieldMonster).
+                rec.trickProne = 1;
+                rec.log.push('R' + round + ': ' + vName + ' falls PRONE — deliberately, on their own terms. The prophecy is satisfied cheaply.');
+              } else if (trickAct.type === 'bad_note') {
+                // NETWORK NOTE: give it BAD notes — plant ‘the wolf should
+                // be SMALLER’; the next buff note misfires into uselessness
+                // (consumed in sigW5FieldMonster).
+                rec.trickBadNote = 1; rec.badNotePlanted = 1;
+                rec.log.push('R' + round + ': ' + vName + ' leans to the memo: \u2018the wolf should be SMALLER.\u2019 It writes it down.');
               }
             } else if (!abMedicated && vHasAb('field_medicine') && vHp > 0 && vHp < vHpMax * 0.6) {
               abMedicated = true;

@@ -1408,7 +1408,14 @@
           return total;
         }
         if (st.spN % 4 === 0) {
-          if ((st.spDealt || 0) - (st.spMark || 0) >= 0) {
+          // COUNTERWIRE (2026-10-16): fulfill the spoiler on YOUR terms — a
+          // villager who fell prone deliberately (rec.trickProne, set the
+          // round before) satisfies the prophecy cheaply. The voiceover
+          // gains no weight. Costs the action; the flag is consumed here.
+          if (rec.trickProne) {
+            rec.trickProne = 0;
+            rec.log.push('R' + round + ': the announced thing happened — cheaply, on ' + vName + '\u2019s terms. Prone, deliberate. The voiceover finds nothing to fatten on.');
+          } else if ((st.spDealt || 0) - (st.spMark || 0) >= 0) {
             // the villager bled (any damage window counts off-screen) —
             // the announcement gains weight either way out here; the
             // villager's only answer is to end it fast.
@@ -1478,6 +1485,15 @@
       // writes — villagers can't read, so the notes land.
       st.nnN = (st.nnN || 0) + 1;
       if (st.nnN % 2 === 0) {
+        // COUNTERWIRE (2026-10-16): give it BAD notes — a villager who
+        // planted ‘the wolf should be SMALLER’ (rec.trickBadNote) makes
+        // the memo 'fix' the enemy into uselessness. The buff never lands;
+        // the flag is consumed here.
+        if (rec.trickBadNote) {
+          rec.trickBadNote = 0;
+          rec.log.push('R' + round + ': NOTE: ‘THE WOLF SHOULD BE SMALLER’ — the memo ‘fixes’ it into uselessness. The lasers never arrive.');
+          return total;
+        }
         rec.log.push('R' + round + ': NOTE: "THE WOLF SHOULD HAVE LASERS NOW" — and then it does. (+25%.)');
         return Math.round(total * 1.25);
       }

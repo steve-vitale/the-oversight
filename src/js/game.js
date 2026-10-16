@@ -30366,7 +30366,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const mdef = (this.data.monsters || []).find(m => m.id === mid);
         const ctr = mdef && mdef.counter;
         if (!ctr) return false;
-        if ((this.state.monsterCounters || {})[mid]) return false; // known already
         const p = this.tbFighter('p');
         if (!p || !p.alive) return false;
         let hit = false;
@@ -30387,8 +30386,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           case 'strike_first': hit = ev.type === 'strike' && !!ev.firstStrike; break;
           case 'strike_nonhead': hit = ev.type === 'strike' && ((ev.target && ev.target.segmentIndex) | 0) > 0; break;
           case 'fresh_weapon': hit = ev.type === 'strike' && !!ev.freshWeapon; break;
+          // COUNTERWIRE (2026-10-16): the three dead perform-kinds. sunback's
+          // shadow-side nuance is not engine-observable (no sun vector in TB)
+          // — the reveal text teaches it; the discovery fires on the arch-move.
+          // sweeps_week: backing away slow without fleeing (gaze held).
+          // cliffhanger: the called-shot nuance lives in the reveal text;
+          // the engine observes the strike on the lunge.
+          case 'blindside': hit = ev.type === 'move' && !!ev.windup; break;
+          case 'face_it': hit = ev.type === 'move' && !ev.closer; break;
+          case 'eyes': hit = ev.type === 'strike' && !!ev.windup; break;
         }
+        // COUNTERWIRE (2026-10-16): TB kill attribution. The trick was
+        // PERFORMED whether or not it was already known — discovery is
+        // one-time, performance is per-fight. Log the performance BEFORE the
+        // known-check (which only gates discovery). Fight-local only (f is
+        // discarded at tbEnd); det-gate verified byte-identical trajectories.
+        try { if (hit) { (f.trickLog || (f.trickLog = [])).push(ctr.kind); } } catch (e) {}
         if (!hit) return false;
+        if ((this.state.monsterCounters || {})[mid]) return false; // known already
         return this.discoverMonsterCounter(mid, ev.via || 'trick');
       } catch (e) { return false; }
     },
@@ -30428,14 +30443,52 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return null;
       } catch (e) { return null; }
     },
-    // villagerTrickDefs(): wave-3 signature counterplay as village-learnable
-    // tricks. The signature mechanics are engine-real (sigW3a/b/c); this is
-    // the FIGHT-AI knowledge only — wiring to the ledger convention
-    // (monsterCounters scoring) is the signature workers' call, not this
-    // module's. Only the actuable subset is listed; the rest is documented
-    // in the arm's evidence as un-actuatable in the abstract field model.
+    // villagerTrickDefs(): wave-3+ signature counterplay as village-learnable
+    // tricks. The signature mechanics are engine-real (sigW3a/b/c, sigW4,
+    // sigW5); this is the FIGHT-AI knowledge only — wiring to the ledger
+    // convention (monsterCounters scoring) is a deliberate NO (see the
+    // counterwire arm's scoring decision, evidence/2026-10-16/sim-counterwire.md:
+    // the reward is fight-lethality reduction, not ledger points — waves 2-3
+    // bars are the only ledger consumers, so w3+ ledger points would be dead
+    // currency). Every entry is canon-faithful: trick + reveal are sourced
+    // from the species' `weaknesses` data + the signature engine mechanics.
+    // Discovery: the non-lethal observed channel (_trickObservation — two
+    // survived encounters) records into state.villagerTricks; villageKnowsTrick
+    // unifies this with the waves-1-2 ledger convention for the field AI.
+    // Wave-6: canon-doc silent, no entries (documented blank).
     villagerTrickDefs() {
       return {
+        // ---- wave 3: the unwired six (engine-real signatures, zero knowledge
+        // representation before the counterwire arm) ----
+        redactor: { trick: 'Go quiet — starve the redaction', reveal: 'It redacts the loudest thing first, and the handles point a full round before the redaction lands. Go quiet for two turns and its attacks come thin; a third quiet turn starves it out of the fight. (Striking feeds it — every wound gets un-written.)' },
+        gavel: { trick: 'Confess first — take the lighter verdict', reveal: 'It accuses, waits a full round, then the verdict falls. Confess first — out loud, where everyone can hear — and the verdict falls lighter. But witnesses remember the confession; it is on the record.' },
+        focus_group: { trick: 'Be boring — bore them out of the room', reveal: 'The murmur loves violence one round and is bored by it the next. Be deliberately boring for three rounds — recite bus schedules, count ceiling tiles — and they lose interest and LEAVE. (Striking is entertainment; every swing is a review.)' },
+        terms_of_service: { trick: 'Read the fine print — find the loophole', reveal: 'Clauses write themselves and unanswered ones auto-accept, the penalties landing unread. Spend turns examining the scroll and you will find the loophole clause that dismisses it outright. (Striking the scroll just gives it more to bill you for.)' },
+        callback: { trick: 'Say the goodbye — properly, out loud', reveal: 'It wears someone you buried. Every few rounds the face shifts and borrows their swing. Speak to it AS them — say the goodbye properly, out loud — and it loses coherence; the face cannot borrow a swing from someone who has been mourned.' },
+        ad_break: { trick: 'Look away when the break runs', reveal: 'Every fourth round it runs the break — repositions, knits itself back together, and WATCHES you watch. Look away. The ad\u2019s power is that you watch; unwatched, the break is just dead air and the healing never lands.' },
+        // ---- wave 4: counterplay concepts from weaknesses + sigW4 ----
+        congregation: { trick: 'Argue theology — make it engage', reveal: 'It is bound by liturgy: argue theology with it and it MUST engage the argument instead of the beam. (The offer is genuine — that is what makes it a monster. Refuse the absolution; argue the doctrine.)' },
+        strike: { trick: 'Meet one demand — buy a quiet round', reveal: 'The demands are honest and the schedule is announced. Meet ONE demand — do the work yourself, manually, at real cost — and the picket stands down a round. (Scabbing buys the breather; the strike does not end.)' },
+        influencer: { trick: 'Kill the followers first', reveal: 'The followers sharpen the Ratio — every one of them is damage. Kill the followers and it is just a person with good lighting. (Ratio-ing it is a popularity contest; starving its audience is a plan.)' },
+        audit: { trick: 'Be inefficient on purpose', reveal: 'It taxes your best trick on audit day — read the clipboard, know the schedule, and front-load everything between the announced rounds. When the auditors come, be deliberately, visibly inefficient: it cannot tax what does not optimize.' },
+        reunion: { trick: 'Do something you have never done', reveal: 'It only knows your past — every move you ever made, worn like your face. Do something you have never done and it has nothing to wear. Novelty is literally the weapon; repetition is the uniform it dresses you in.' },
+        suburb: { trick: 'Leave. Navigation is victory', reveal: 'You cannot kill a suburb — the fight is a timer and the Property Tax is the clock. LEAVE. Navigation is victory. (If you must stay: bring the wild inside — a plant, a stray, a rumor — it is sterile and it cannot cope.)' },
+        eulogy: { trick: 'Contradict the narration', reveal: 'It is a STORY and stories need listeners — it narrates you faltering, and the verses count down. Contradict it with your actions: it says you run, you advance. Three true contradictions and the story dismisses you kindly. (It says you falter — do not.)' },
+        algorithm: { trick: 'Lose on purpose — tank the prediction', reveal: 'It is about the NEXT action, not your history — the predictable get countered. Lose on purpose: stand there and take the soft prediction for two rounds and its model goes mushy. (The most engaging thing is an upset; be the upset.)' },
+        eater: { trick: 'Poison the meal', reveal: 'It cannot tell good food from bad — it gorges, it does not chew, and it eats the grid first, you second. Feed it spoiled or diseased meat and watch it vomit out the fight. (Or starve the field: burn your own crops and deny it fuel. Guard the pantry — always.)' },
+        herald: { trick: 'Read the omens — reposition freely', reveal: 'It announces everything — read the omens. It is slow: reposition freely, never trade blows standing still. (It is a tutorial — the real test comes later. Learn it here, cheap.)' },
+        // ---- wave 5: counterplay concepts from weaknesses + sigW5 ----
+        cancellation: { trick: 'Go off-script', reveal: 'It can only cancel what is IN the script — the stamp descends for three rounds before it falls. Go off-script: improvise, use your abilities in ways never intended, and there is nothing to cancel. (Or spend audience favor — the audience can overrule a cancellation. The stamp is slow; you have time.)' },
+        editor: { trick: 'Contradict yourself — break the cut', reveal: 'Every third round the scissors cut your swing — it never happened. Do two contradictory things and it cannot cut cleanly; the film strips show the swing coming and there is nothing coherent to snip. (What is cut is not GONE — it is on the cutting-room floor. Go back for it.)' },
+        rerun: { trick: 'Win fast — or write between takes', reveal: 'Every fifth round the take rewinds and it comes back fresh, remembering. Win FAST — kill it within five rounds, the one honest stat check — or leave messages for yourself in the journal between resets: writing persists when nothing else does. (Between takes the set is visible — hit the rigging.)' },
+        spoiler: { trick: 'Fall prone — deliberately', reveal: 'It must tell the truth — and when it announces you will bleed in three rounds, fulfill the spoiler on YOUR terms: fall PRONE, deliberately, when the round comes. The prophecy is satisfied cheaply and the voiceover finds nothing to fatten on.' },
+        timeslot: { trick: 'Be boring enough to get bumped', reveal: 'The venues rotate and the guide shows it coming — the burning building hits harder than the green room. Be so boring the show bumps you to a better slot. (Or own the venue: every venue has a native. Befriend it — or be from somewhere worse.)' },
+        nielsen: { trick: 'Fight boring', reveal: 'The gaze scales with the crowd — every flashy hit is ratings. FIGHT BORING: the smallest, dullest actions starve it of viewers, and at zero ratings the eye closes. (If you must be watched, be watched on your terms: strike when the eye is shut.)' },
+        finale: { trick: 'End it first', reveal: 'Three rounds after the title card rises, it falls — unavoidable. Villagers cannot feed it the sacrifice out here; they can only END IT FIRST. The DPS race, honest: kill it before the card lands or do not fight it at all.' },
+        finale_crew: { trick: 'Kill the crew first', reveal: 'It is the venue, not the show — end it fast, before the ratings climb. Kill the crew and the finale fights part two without its production staff: no lighting, no rigging, no second takes.' },
+        finale_opening: { trick: 'Meet it while it is still arriving', reveal: 'It is still ARRIVING — the Herald taught you: what arrives can be met. Hit it in the arrival, before the credits finish rolling, or feed the credits the sacrifice. (Do not let it finish arriving.)' },
+        network_note: { trick: 'Give it bad notes', reveal: 'It is support — it takes suggestions. Plant a terrible idea (\u2018the wolf should be SMALLER\u2019) and the memo \u2018fixes\u2019 the enemy into uselessness: the lasers never arrive. (Or kill it first — the rare correct focus-the-buffoon call.)' },
+        // ---- the previously-wired three (kept) ----
         spool: { trick: 'Feed it nothing', reveal: 'It records your strikes and plays them back. Give it waits and heals while it records and the replay is silence.' },
         chorus_line: { trick: 'Dance on the downbeat', reveal: 'The kick only lands on beat 4 of the 4/4 count. Dance and it catches air — but dancing is your whole turn.' },
         buffering: { trick: 'Stand still', reveal: 'It aims where you will be. Give it nothing to predict and it whiffs.' },
@@ -40225,7 +40278,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const _bk = this.tbSnakeLineageKey(m);
             if (_seenKills.has(_bk)) continue;
             _seenKills.add(_bk);
-            this.recordWaveKill(m.mdef.id, this.villagerId, 'player');
+            // COUNTERWIRE (2026-10-16): pass the trick summary so
+            // counter-executed TB kills are attributed in waveKillLog (was:
+            // no detail). Channel stays 'player' — the kill happened in the
+            // scholar's TB combat path; per-fighter last-hit attribution in
+            // TB (companion-killer quirk) remains an open blank.
+            this.recordWaveKill(m.mdef.id, this.villagerId, 'player', this.trickSummary ? this.trickSummary(f) : null);
           }
         }
       }

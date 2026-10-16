@@ -690,9 +690,16 @@
       var face = sigPickFace(G);
       if (round === 1) log('R1: It wears ' + face.name + '\'s face. The eyes don\'t track. (' + ctx.vName + ' knew that walk — and knows they\'re dead.)');
       if (round % 3 === 0) {
-        var b = ctx.lroll([10, 18]);
-        sigFx.mDmgBonus += b;
-        log('R' + round + ': the face shifts — ' + face.name + '\'s stance. It borrows their swing (+' + b + ').');
+        // COUNTERWIRE (2026-10-16): the funeral — a villager who said the
+        // goodbye properly (rec.trickMourned) broke its coherence. The face
+        // won't borrow a swing from someone who's been mourned.
+        if (rec.trickMourned) {
+          log('R' + round + ': the face tries to shift — and can\u2019t. ' + ctx.vName + '\u2019s goodbye holds. (No borrowed swing.)');
+        } else {
+          var b = ctx.lroll([10, 18]);
+          sigFx.mDmgBonus += b;
+          log('R' + round + ': the face shifts — ' + face.name + '\u2019s stance. It borrows their swing (+' + b + ').');
+        }
       }
     } else if (id === 'buffering') {
       sigFx.vMiss = true; // the mirage: strikes land on the bright frame
@@ -704,12 +711,21 @@
       }
     } else if (id === 'ad_break') {
       if (round % 4 === 0) {
-        var members = ctx.members || [];
-        var lead = members[0];
-        if (lead && lead.hp > 0) {
-          var heal = Math.round((lead.maxHp || 300) * 0.06);
-          lead.hp = Math.min(lead.maxHp || 9999, lead.hp + heal);
-          log('R' + round + ': ⏸ AD BREAK ▓▓▓▓ (4/4) — it repositions and heals +' + heal + ', and ' + ctx.vName + ' watches.');
+        // COUNTERWIRE (2026-10-16): look away — the ad's power is that you
+        // WATCH. A villager who looked away (rec.trickUnwatched) starves the
+        // break: dead air, no heal. The flag is consumed here (one break,
+        // one look-away).
+        if (rec.trickUnwatched) {
+          rec.trickUnwatched = 0;
+          log('R' + round + ': ⏸ AD BREAK ▓▓▓▓ (4/4) — ' + ctx.vName + ' looks away. Dead air. Nothing heals.');
+        } else {
+          var members = ctx.members || [];
+          var lead = members[0];
+          if (lead && lead.hp > 0) {
+            var heal = Math.round((lead.maxHp || 300) * 0.06);
+            lead.hp = Math.min(lead.maxHp || 9999, lead.hp + heal);
+            log('R' + round + ': ⏸ AD BREAK ▓▓▓▓ (4/4) — it repositions and heals +' + heal + ', and ' + ctx.vName + ' watches.');
+          }
         }
       }
     }

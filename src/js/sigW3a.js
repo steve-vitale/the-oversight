@@ -849,6 +849,14 @@
         return true;
       }
       var dmg = opts.lroll([40, 60]);
+      // COUNTERWIRE (2026-10-16): the confession is on the record — a
+      // villager who confessed first takes the lighter verdict. The flag
+      // persists until a verdict consumes it (the record outlives the trial).
+      if (rec.trickConfess) {
+        dmg = Math.floor(dmg / 2);
+        rec.trickConfess = 0;
+        rec.log.push('R' + opts.round + ': the verdict falls LIGHTER — ' + opts.vName + ' confessed first. But witnesses remember the confession. (' + dmg + ')');
+      }
       ctx.vHp -= dmg; rec.vTaken += dmg;
       rec.log.push('R' + opts.round + ': 🔨 THE VERDICT FALLS: "' + S.trial.crime + '" — GUILTY. ' + opts.vName + ' takes ' + dmg + '.');
       S.trial = null; S.cool = 2;

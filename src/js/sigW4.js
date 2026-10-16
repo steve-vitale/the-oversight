@@ -867,9 +867,23 @@
       var vName = ctx.vName || 'Someone';
       // Simplified signatures: the core threat, narrated once.
       if (id === 'congregation' && round % 3 === 1) {
-        say(this, '🔔 The Congregation rings — ' + vName + ' refuses the absolution and takes the beam instead.');
-        total += lroll([50, 70]);
-      } else if (id === 'strike' && round % 4 === 1) {
+        // COUNTERWIRE (2026-10-16): heresy — a villager who argued theology
+        // the round before (rec.trickArgue) forced it to engage the argument.
+        // Bound by liturgy, it spends the beam-round on the debate instead.
+        if (rec.trickArgue) {
+          rec.trickArgue = 0;
+          say(this, '⛪ The Congregation turns from the beam to the argument — ' + vName + ' cited the liturgy of the lost. It MUST engage. (No beam.)');
+        } else {
+          say(this, '🔔 The Congregation rings — ' + vName + ' refuses the absolution and takes the beam instead.');
+          total += lroll([50, 70]);
+        }
+      } else if (id === 'strike' && rec.trickStoodDown) {
+        // COUNTERWIRE (2026-10-16): one demand met — the picket stands down
+        // the round. The villager did the grid's job themselves (1 food +
+        // the action, paid in the trick resolution). No attack this round.
+        rec.trickStoodDown = 0;
+        say(this, '🐀 The Strike stands down — one demand met, the picket holds its signs and waits. (Scabbed quiet.)');
+        total = 0;
         say(this, '🐀 The Strike posts demands — ' + vName + ' scabs through the shutdown, half strength.');
         total = Math.round(total * 0.5);
       } else if (id === 'influencer') {
@@ -886,14 +900,42 @@
         say(this, '🏘️ The Suburb hums comfort at ' + vName + ' — Property Tax for resisting.');
         total += lroll([35, 55]);
       } else if (id === 'eulogy') {
-        var versesLeft = 5 - Math.floor(round / 2);
-        if (versesLeft <= 0) {
+        // COUNTERWIRE (2026-10-16): contradict the narration. Verses tick
+        // down every 2 rounds (matches the old 5-floor(round/2) formula); a
+        // villager's contradiction (rec.trickContradict) restores one verse.
+        // Three true contradictions and the story dismisses the villager
+        // kindly — routed, no loot, a better ending. Unknowing villagers
+        // keep the old countdown exactly.
+        st.euV = (st.euV == null ? 5 : st.euV);
+        if (round % 2 === 0 && st.euLastRound !== round) { st.euV--; st.euLastRound = round; }
+        if (rec.trickContradict) {
+          rec.trickContradict = 0;
+          st.euV = Math.min(5, st.euV + 1);
+          rec.eulogyContradicts = (rec.eulogyContradicts || 0) + 1;
+          say(this, '📖 ' + vName + ' contradicts the story — a verse restored (' + st.euV + ' remain, ' + rec.eulogyContradicts + '/3 true contradictions).');
+          if (rec.eulogyContradicts >= 3) {
+            rec.outcome = 'mFlee';
+            say(this, '📖 Three true contradictions — the Eulogy closes the book kindly. ' + vName + ' is dismissed, not eulogized. (A better ending.)');
+          }
+        }
+        if (!rec.outcome && st.euV <= 0) {
           say(this, '📖 The Eulogy finishes — ' + vName + ' dies as narrated. (The village will remember the story.)');
           total += 9999;
-        } else say(this, '📖 The Eulogy narrates: "' + vName + ' faltered." (' + versesLeft + ' verses remain.)');
+        } else if (!rec.outcome) {
+          say(this, '📖 The Eulogy narrates: "' + vName + ' faltered." (' + st.euV + ' verses remain.)');
+        }
       } else if (id === 'algorithm') {
-        say(this, '🖱️ The Algorithm trailers its next move at ' + vName + ' — the predictable get countered.');
-        total += lroll([45, 65]);
+        // COUNTERWIRE (2026-10-16): lose on purpose — a villager tanking
+        // the prediction (rec.algorithmTank rounds left) feeds the model
+        // mush. Its hits land soft (halved) while the tank holds.
+        if ((rec.algorithmTank | 0) > 0) {
+          rec.algorithmTank--;
+          total = Math.round(total * 0.5);
+          say(this, '🖱️ The Algorithm predicts a fighter and finds ' + vName + ' standing still — soft prediction. Its model goes mushy. (halved)');
+        } else {
+          say(this, '🖱️ The Algorithm trailers its next move at ' + vName + ' — the predictable get countered.');
+          total += lroll([45, 65]);
+        }
       } else if (id === 'eater') {
         var growth = Math.floor(round / 2) * 15;
         say(this, '👄 The Eater gorges on the field — +' + growth + ' damage growth. (' + vName + ' should have poisoned the meal.)');
