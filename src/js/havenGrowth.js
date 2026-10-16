@@ -228,6 +228,12 @@
       } catch (e) {}
       v.havenGrowth = v.havenGrowth || {};
       const hg = v.havenGrowth;
+      // Villagers talk about the open invitation (sim-seatvoice 2026-10-16,
+      // the #372 blank — filed 2026-10-15, confirmed on the winning
+      // substrate: the village's mouths never mention the open invitation;
+      // all seat pressure is top-down). Tier-independent: the table
+      // outranks the building.
+      try { this.tableWaitTalk(); } catch (e) {}
       const tier = this.havenTier();
       // The System dangles the next tier once it has arrived to do the dangling.
       if (this.state.systemArrived && tier < 3 && !hg['barAnnounced' + (tier + 1)]) {
@@ -330,6 +336,92 @@
         if (!line) return;
         this.say(`🗣️ ${sName} to ${lName}, by the fire: ${line}`);
         this.seedGossip('haven_need', { who: speaker, need: m.key }, [speaker, listener]);
+      } catch (e) {}
+    },
+
+    // tableTalkRand: the narration stream for table-wait talk. A tiny
+    // deterministic PRNG seeded per-day from a string hash — a pure
+    // function of game state. Voice beats must NEVER draw from Math.random:
+    // the shared stream feeds mechanics, and a narration draw would shift
+    // every downstream draw and perturb trajectories. With this stream the
+    // fix is provably trajectory-neutral (pair-sweep: byte-identical
+    // day-hashes vs control).
+    tableTalkRand(salt) {
+      let h = 2166136261;
+      const s = String(salt);
+      for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+      let a = h >>> 0;
+      return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    },
+
+    // tableWaitTalk: villagers talk about the open invitation, by the fire.
+    // The #372 blank (sim-seatpath 2026-10-15; confirmed on the winning
+    // substrate by sim-seatvoice 2026-10-16): across 717 open-invite dawns
+    // and 16 winning-substrate runs, ZERO villager-voiced beats mentioned
+    // the open invitation — the village talked about everything around the
+    // table (the audience, the fear, the coming thing) but never the
+    // invitation itself. The pressure was all top-down (System OVERTIME,
+    // Herald raids, realm-trust hits).
+    //
+    // Voice-only: this.say() narration + a rate-limit day marker. No
+    // seedGossip (the gossip tick draws RNG and moves REP — not provably
+    // neutral), no Math.random draws (tableTalkRand above), no state the
+    // engine decides on. The lines rhyme with the convoTableOpener pools
+    // (conversation.js) — the village's mouths and the conversation UI now
+    // speak the same fiction. Knowledge-gated per canon: the invitation is
+    // a public System announcement, so the gate is the engine's own
+    // tableWaiting; speaker/listener render with the same name-known vs
+    // full-descriptor rule as havenNeedGossip ("If you don't know, it
+    // doesn't show").
+    tableWaitTalk() {
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (!pg || !pg.tableWaiting || pg.tableDone) return; // no open invitation
+        const v = this.state.village || {};
+        const hg = v.havenGrowth || {};
+        const day = (this.state.scholar || {}).day || 1;
+        if (day - (hg.lastTableTalkDay || 0) < 4) return; // cooldown: no nagging
+        // Salt mixes the run's own scholar id: the firing pattern varies
+        // run to run (no cross-run "same line on the same day"), while
+        // staying a pure function of game state (trajectory-neutral).
+        const rnd = this.tableTalkRand('tabletalk:' + day + ':' + (this.villagerId || ''));
+        if (rnd() >= 0.22) return;
+        const roster = (v.roster || []).filter(id => id !== this.villagerId);
+        if (roster.length < 2) return;
+        const speaker = roster[Math.floor(rnd() * roster.length)];
+        let listener = roster[Math.floor(rnd() * roster.length)];
+        if (listener === speaker) listener = roster[(roster.indexOf(speaker) + 1) % roster.length];
+        // Person reference: name-known/post-System → first name; unknown →
+        // the FULL descriptor, unsplit (the sim-villagevoice "A" fix).
+        const refOf = (vid) => {
+          try {
+            if (this.state.systemArrived || this.nameKnown(vid)) {
+              return String(this.npcName(vid)).split(' ')[0];
+            }
+          } catch (e) {}
+          try {
+            let d = this.personDescriptor(vid);
+            if (/^A /.test(d)) d = 'a' + d.slice(1);
+            return d;
+          } catch (e) {}
+          return 'someone';
+        };
+        const pool = [
+          '"The table\'s set. The ring of pale light — it\'s just sitting there. Waiting on them. What do you think they\'ll tell it?"',
+          '"Nobody\'s sleeping. The sky is waiting and nobody knows what to do with their hands."',
+          '"Did you see their faces? Too many angles. I keep wondering what they want from us."',
+          '"It waits. We wait. Somebody should check the snares — the table doesn\'t fill the pantry."',
+          '"It eats while we deliberate. The Herald feeds on our stores and we\'re supposed to just... wait?"',
+          '"Why them? ...Sorry. It\'s just sitting there, and they\'re the one who has to sit in it."',
+        ];
+        const line = pool[Math.floor(rnd() * pool.length)];
+        hg.lastTableTalkDay = day;
+        this.say(`🗣️ ${refOf(speaker)} to ${refOf(listener)}, by the fire: ${line}`);
       } catch (e) {}
     },
 
