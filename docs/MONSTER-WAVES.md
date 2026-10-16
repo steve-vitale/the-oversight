@@ -332,3 +332,52 @@ known kills score 2 ledger points instead of 1 (perTypeCap 2, never less than
   157, `get(...).forEach is not a function`) before validating anything —
   wave-3/4/5 entries were validated by `scripts/schema-check-wave35-20261010.py`
   (mirrors the validator's logic) instead.
+
+## Combat readiness gates the standing unlock (design call #4, 2026-10-16)
+
+Standing opens the wave door; combat readiness decides whether the village
+walks through. The 2026-10-15 faced-experience deferral (distinct wave-(w-1)
+types faced, fleeing counted) was retired: it measured *exposure*, not
+capability — a village could flee three wave-3 monsters and be "ready" for
+wave 4 (damage 35–95, HP 850–1500, pierce 0.2–0.5) while unarmored, unarmed,
+trickless, and bloodless. Steve's 2026-10-10 reversal of 8730921c had
+already ruled that engagements don't unlock waves.
+
+`Game.waveCombatReadiness(w)` (src/js/standing.js) reads four named bars
+from LIVE village state — never a policy lever, never a fake number:
+
+- **ARMORED** — living roster fighters with armor *worn* at P ≥ demand
+  (`S.equipment.armorOf`; the scholar via `armorBonus()`). Packs don't count.
+- **ARMED** — living roster fighters with a weapon *to hand* (equipped
+  melee/ranged, or a weapon item carried in their pack).
+- **TRICKS** — counters known under the `monsterCounterKnown` convention
+  (waves 3–5 are deliberately counter-less, so this is a learning signal).
+- **VETERANS** — living roster members with a recorded kill of a wave-(w-1)+
+  monster in `state.waveKillLog`. Survivors of combat — fleeing records
+  nothing. (Kills are the hard proof; per-fighter non-kill participation is
+  not tracked anywhere in state.)
+
+Demand (`standingCfg().readyDemand` — sim starting points, not canon; Steve
+can overrule):
+
+| | armored | armor P | armed | tricks | veterans |
+|---|---|---|---|---|---|
+| wave 4 | 4 | ≥15 | 5 | 3 | 2 (killed wave-3+) |
+| wave 5 | 6 | ≥20 | 7 | 4 | 3 (killed wave-4+) |
+
+While any bar is short, `villageStandingTotal()` holds at t4-1/t5-1 and the
+wave stays out of `monsterWavePool()` — the door is open, the village hasn't
+walked through. Unreadiness is never silent: the hold beat names the short
+bars ("armor the village (0 of 4 fighters armored); put weapons in hands
+(0 of 5 armed); ...") with the existing initial + 7-day reminder cadence,
+and `standingLine()` names the HELD wave. The wave's *title* is never named
+in the hold (knowledge-gate discipline) — the bar is the fiction: the
+village knows it's not ready; the scouts report the horde. The plenty cap
+(bread alone can't buy the fifth draft) and the monotonic peak ratchet are
+unchanged. Waves 1–3 are never readiness-gated.
+
+Tests: `scripts/test-readiness-20261016.js` (RED→GREEN: the fled-but-unready
+bread-road village unlocks wave 4 on pristine code, holds at wave 3 after
+the fix, releases when geared), `scripts/test-readinessv3-20261015.js`
+(rebuilt on the new bars: deferral, plenty cap, ratchet, waves 1–3, win
+floor). Evidence: `evidence/2026-10-16/designcalls/04-readiness.md`.

@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 // scripts/test-readinessgate-20261015.js — READINESS GATE v2 proof.
+// SUPERSEDED 2026-10-16 (design call #4): v2's faced-experience bar was
+// retired and replaced by the combat-capability representation
+// (waveCombatReadiness). Kept for the experiment record
+// (evidence/2026-10-15/sim-readinessgate2.md); see
+// scripts/test-readiness-20261016.js for the live proof.
 // sim-readinessgate (2026-10-15): re-drafted on the readinessbind diagnostic
 // (evidence/2026-10-15/sim-readinessbind.md). v1's kill/counter/armor bar was
 // killed: kill/counter covariates degenerate on diplomacy/plenty roads,

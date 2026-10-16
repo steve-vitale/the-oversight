@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 // scripts/test-plentycap-proof-20261015.js — sim-plentycap proof test.
+// SUPERSEDED 2026-10-16 (design call #4): the env-variant experiment it
+// proves was killed, and its Phase-1-on-HEAD assertions target the retired
+// faced-experience bar — they will FAIL on current HEAD by design. Do not
+// run; kept for the experiment record (evidence/2026-10-15/sim-plentycap.md).
 // The v3 readiness gate's two teeth are env-selectable (STANDING_VARIANT:
 // 'both' (default, v3 as landed), 'faced-only' (cap tooth off), 'cap-only'
 // (faced tooth off)). This script proves each tooth BINDS on pristine

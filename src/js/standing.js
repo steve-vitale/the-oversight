@@ -8,6 +8,8 @@
 //   - standingLine()
 //   - _linkRegionalPlus()
 //   - waveUnlockReady()
+//   - waveCombatReadiness()
+//   - _readinessBarLine()
 //   - standingDeferral()
 //   - standingPlentyCappedTotal()
 //   - _standingPeakWave()
@@ -19,7 +21,7 @@
 //   - standing_sim_tuning: true (code: standing.js — point values and thresholds are sim starting points per the 2026-10-13 spec, not canon; tune on measured evidence.)
 //   - standing_villager_kills_count: true (code: standing.js — the war source reads waveLedgerPoints, which scores player AND villager kills (recordWaveKill). A mayor whose villagers do the killing earns war standing.)
 //   - standing_regional_plus: true (code: standing.js — the diplomacy source counts only SEASONED REGIONAL+ links: a link participates in a regional-scale polity (LEAD realm via polityOf('haven'), BELONG realm via polityOf(primary), seasoned covenant/trade league). A lone seasoned bond with a splinter village is courtship, not regional power — it scores 0. 2026-10-14 design call, Steve can overrule.)
-//   - standing_readiness_gate: true (code: standing.js — villageStandingTotal() gates the unlock number: (1) faced-experience deferral — wave 4 needs readyFacedW3 distinct wave-3 types faced blow-by-blow (waveEngaged; fleeing counts), wave 5 needs readyFacedW4 wave-4 types, else the total holds at t4-1/t5-1; (2) plenty cap — plenty counts at most plentyCapT5 toward the T5 bar, else held at t5-1; (3) monotonic peak ratchet — _standingPeakWave floors the total at the released wave's threshold forever. Thresholds are sim starting points (sim-readinessgate2 spec, 2026-10-15), not canon — Steve can overrule. Armor P and trust are OUT of the bar by diagnostic evidence.)
+//   - standing_readiness_gate: true (code: standing.js — villageStandingTotal() gates the unlock number: (1) COMBAT-READINESS DEFERRAL (design call #4, 2026-10-16) — waveUnlockReady() reads waveCombatReadiness(): four named bars from LIVE village state — armor WORN (S.equipment.armorOf / armorBonus for the scholar), weapons TO HAND (meleeWeaponOf/rangedWeaponOf equipped or a weapon item carried), counters KNOWN (the monsterCounterKnown convention), VETERANS alive (living roster members with a wave-(w-1)+ kill in state.waveKillLog). The old faced-experience bar (distinct wave-(w-1) types faced, fleeing counted) measured EXPOSURE, not capability — a village could flee its way into a war it can't fight — so it was replaced, not stacked (Steve's 2026-10-10 reversal of 8730921c already said engagements don't unlock waves). Demands live in standingCfg().readyDemand — sim starting points, not canon; Steve can overrule. (2) plenty cap — plenty counts at most plentyCapT5 toward the T5 bar, else held at t5-1; (3) monotonic peak ratchet — _standingPeakWave floors the total at the released wave's threshold forever.)
 //   - standing_no_silent_gates: true (code: standing.js — every hold/cap is named: standingLine() appends HELD/capped notes, _standingHoldBeat() fires the System beat (initial + 7-day reminders for deferrals, one-time for the cap), _standingReleaseBeat() announces the opening.)
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
@@ -37,10 +39,21 @@
         t5: 200,              // wave 5 unlocks (+ wave-4 faced)
         feastQualityMin: 1,
         feastLogCap: 60,
-        // READINESS GATE (sim-readinessgate2 spec, 2026-10-15 — sim starting
-        // points, not canon; Steve can overrule):
-        readyFacedW3: 3,      // distinct wave-3 types faced blow-by-blow to release wave 4
-        readyFacedW4: 2,      // distinct wave-4 types faced blow-by-blow to release wave 5
+        // COMBAT READINESS (design call #4, 2026-10-16 — sim starting
+        // points, not canon; Steve can overrule). The demand each new
+        // draft makes of the village's real fighting strength:
+        // armored = living roster fighters with armor WORN at P>=armorP
+        //   (S.equipment.armorOf; scholar via armorBonus)
+        // armed   = living roster fighters with a weapon TO HAND
+        //   (equipped melee/ranged, or a weapon item carried)
+        // tricks  = counters known (the monsterCounterKnown convention)
+        // veterans= living roster members with a recorded kill of a
+        //   wave-(w-1)+ monster in state.waveKillLog (survivors of combat —
+        //   fleeing records nothing here)
+        readyDemand: {
+          4: { armored: 4, armorP: 15, armed: 5, tricks: 3, veterans: 2 },
+          5: { armored: 6, armorP: 20, armed: 7, tricks: 4, veterans: 3 },
+        },
         plentyCapT5: 100,     // plenty counts at most this toward the T5 bar
       };
     },
@@ -125,20 +138,20 @@
     // villageStandingTotal: the GATED number the unlock gate reads.
     // Missing module/data reads as 0 — never unlocks by accident.
     //
-    // READINESS GATE (sim-readinessgate2 spec, 2026-10-15; rebuild v3):
+    // READINESS GATE (design call #4, 2026-10-16):
     // three layers on the honest breakdown, all in this function so
     // unlockedWave() in game.js stays untouched (it is the only engine
     // reader):
     //   1. PLENTY CAP — plenty counts at most plentyCapT5 toward the T5
     //      bar: raw >= t5 but capped < t5 holds the total at t5-1
     //      (one-time System beat). Bread alone cannot buy the fifth draft.
-    //   2. FACED-EXPERIENCE DEFERRAL — wave 4 releases only after
-    //      readyFacedW3 distinct wave-3 types are faced blow-by-blow
-    //      (waveEngaged: fleeing counts, you stood on the grid), wave 5
-    //      after readyFacedW4 wave-4 types. While deferred the total holds
-    //      at t4-1 / t5-1, with the hold beat + weekly reminders naming
-    //      the bar. The war-road-native signal; reachable on diplomacy /
-    //      plenty roads (unlike kills/counters). No silent gates.
+    //   2. COMBAT-READINESS DEFERRAL — wave 4 releases only when the
+    //      village's real fighting strength meets the draft's demand
+    //      (waveCombatReadiness: armored/armed/tricks/veterans bars read
+    //      from live village state). While deferred the total holds at
+    //      t4-1 / t5-1, with the hold beat + weekly reminders naming the
+    //      short bars. The old faced-experience bar is retired: fleeing
+    //      three monsters is exposure, not readiness. No silent gates.
     //   3. MONOTONIC PEAK RATCHET — once the gated total releases wave w,
     //      _standingPeakWave records it and the effective total never
     //      drops below that wave's threshold again: a broken link can't
@@ -177,26 +190,136 @@
         try { return (this.villageStanding().total | 0) || 0; } catch (e2) { return 0; }
       }
     },
-    // waveUnlockReady(w): the faced-experience bar — distinct wave-(w-1)
-    // types faced blow-by-blow (waveEngaged: fleeing counts, you stood on
-    // the grid). Waves 1-3 are unchanged (never gated); unknown waves fail
-    // closed. Thresholds are sim starting points (2026-10-15 spec), not canon.
+    // waveCombatReadiness(w): the real combat-readiness representation
+    // (design call #4, 2026-10-16). Standing opens the wave door; this
+    // decides whether the village walks through. Four named bars, all read
+    // from LIVE village state — never a policy lever, never a fake number.
+    // Fail-closed: any read error returns not-ready (never unlocks by
+    // accident). Waves 1-3 are never gated.
+    waveCombatReadiness(w) {
+      const unready = (short) => ({ wave: w, ready: false, armored: 0, armed: 0, tricks: 0, veterans: 0, demand: null, short });
+      try {
+        if (w === 1 || w === 2 || w === 3) return { wave: w, ready: true, armored: 0, armed: 0, tricks: 0, veterans: 0, demand: null, short: [] };
+        const cfg = this.standingCfg();
+        const dem = (cfg.readyDemand && cfg.readyDemand[w]) || null;
+        if (!dem || (w !== 4 && w !== 5)) return unready(['unknown-wave']);
+        const S = (typeof globalThis !== 'undefined' && globalThis.Scattering) || {};
+        const eq = S.equipment || null;
+        const itemDefs = (this.data && this.data.items) || [];
+        const roster = ((this.state && this.state.village && this.state.village.roster) || []);
+        const scholarId = this.villagerId;
+        const vpCache = {};
+        const vpOfId = (vid) => {
+          if (vid === scholarId) return null;
+          if (!(vid in vpCache)) {
+            let vp = null;
+            try { vp = (typeof this.vpOf === 'function') ? this.vpOf(vid) : null; } catch (e) { vp = null; }
+            vpCache[vid] = vp;
+          }
+          return vpCache[vid];
+        };
+        const isLiving = (vid) => {
+          if (vid === scholarId) return true; // the scholar is the current adventurer
+          const vp = vpOfId(vid);
+          return !!(vp && !vp.dead);
+        };
+        const carriesWeapon = (items) => {
+          for (const e of (items || [])) {
+            const iid = (typeof e === 'string') ? e : (e && (e.itemId || e.id));
+            if (!iid) continue;
+            const def = itemDefs.find(d => d && d.id === iid);
+            if (def && def.weapon) return true;
+          }
+          return false;
+        };
+        let armored = 0, armed = 0;
+        for (const vid of roster) {
+          if (!isLiving(vid)) continue;
+          if (vid === scholarId) {
+            // Scholar: the player-facing readers (state.scholar.equipped /
+            // inventory, not the vp record).
+            let ap = 0, wp = false;
+            try { ap = (typeof this.armorBonus === 'function') ? (this.armorBonus() | 0) : 0; } catch (e) { ap = 0; }
+            try { const ew = (typeof this.equippedWeapon === 'function') ? this.equippedWeapon() : null; wp = !!(ew && !ew.unarmed); } catch (e) { wp = false; }
+            if (!wp) { try { wp = carriesWeapon((this.state && this.state.scholar && this.state.scholar.inventory) || []); } catch (e) { wp = false; } }
+            if (ap >= (dem.armorP | 0)) armored++;
+            if (wp) armed++;
+            continue;
+          }
+          const vp = vpOfId(vid);
+          if (!vp) continue;
+          let ap = 0;
+          try { ap = (eq && typeof eq.armorOf === 'function') ? (eq.armorOf(vp, itemDefs) || 0) : 0; } catch (e) { ap = 0; }
+          if (ap >= (dem.armorP | 0)) armored++;
+          let wp = false;
+          try { wp = !!(eq && ((typeof eq.meleeWeaponOf === 'function' && eq.meleeWeaponOf(vp)) || (typeof eq.rangedWeaponOf === 'function' && eq.rangedWeaponOf(vp)))); } catch (e) { wp = false; }
+          if (!wp) { try { wp = carriesWeapon(vp.items); } catch (e) { wp = false; } }
+          if (wp) armed++;
+        }
+        let tricks = 0;
+        try {
+          const mc = (this.state && this.state.monsterCounters) || {};
+          for (const mid of Object.keys(mc)) {
+            if (typeof this.monsterCounterKnown === 'function' && this.monsterCounterKnown(mid)) tricks++;
+          }
+        } catch (e) { tricks = 0; }
+        let veterans = 0;
+        try {
+          const log = (this.state && this.state.waveKillLog) || [];
+          const seen = new Set();
+          for (const e of log) {
+            if (!e || !e.by || ((e.w | 0) < (w - 1))) continue;
+            if (!isLiving(e.by)) continue;
+            seen.add(e.by);
+          }
+          veterans = seen.size;
+        } catch (e) { veterans = 0; }
+        const short = [];
+        if (armored < (dem.armored | 0)) short.push('armor');
+        if (armed < (dem.armed | 0)) short.push('weapons');
+        if (tricks < (dem.tricks | 0)) short.push('tricks');
+        if (veterans < (dem.veterans | 0)) short.push('veterans');
+        return { wave: w, ready: short.length === 0, armored, armed, tricks, veterans, demand: dem, short };
+      } catch (e) {
+        try { console.warn('[waveCombatReadiness] read failed, failing closed:', e && e.message); } catch (e2) {}
+        return unready(['read-error']);
+      }
+    },
+    // _readinessBarLine(rd): the honest bar readout for hold beats and the
+    // standing line — names exactly what the village lacks, in the village's
+    // own terms. Knowledge-gated: the wave's TITLE is never named here
+    // (that's waveUnlockBeat's job when the draft actually lands); the BAR
+    // is the fiction — the village knows it's not ready, the scouts report
+    // the horde.
+    _readinessBarLine(rd) {
+      try {
+        const dem = (rd && rd.demand) || {};
+        const bits = [];
+        if ((rd.short || []).includes('armor')) bits.push(`armor the village (${rd.armored | 0} of ${dem.armored | 0} fighters armored)`);
+        if ((rd.short || []).includes('weapons')) bits.push(`put weapons in hands (${rd.armed | 0} of ${dem.armed | 0} armed)`);
+        if ((rd.short || []).includes('tricks')) bits.push(`learn their tricks (${rd.tricks | 0} of ${dem.tricks | 0} known)`);
+        if ((rd.short || []).includes('veterans')) bits.push(`blood your fighters (${rd.veterans | 0} of ${dem.veterans | 0} veterans)`);
+        return bits.length ? bits.join('; ') : 'the village stands ready';
+      } catch (e) { return 'the village is not ready'; }
+    },
+    // waveUnlockReady(w): the readiness bar the deferral layers read.
+    // Design call #4 (2026-10-16) rebuilt it on combat CAPABILITY
+    // (waveCombatReadiness). The old faced-experience bar (distinct
+    // wave-(w-1) types faced, fleeing counted) measured exposure, not
+    // readiness — a village could flee its way into a war it can't fight.
+    // Waves 1-3 are unchanged (never gated); unknown waves fail closed.
     waveUnlockReady(w) {
       try {
-        const cfg = this.standingCfg();
-        if (w === 4) {
-          const need = (cfg.readyFacedW3 | 0) || 3;
-          const faced = (typeof this.waveEngaged === 'function') ? (this.waveEngaged(3) | 0) : 0;
-          return { wave: 4, ready: faced >= need, faced, need };
+        if (w === 1 || w === 2 || w === 3) {
+          return { wave: w, ready: true, armored: 0, armed: 0, tricks: 0, veterans: 0, demand: null, short: [] };
         }
-        if (w === 5) {
-          const need = (cfg.readyFacedW4 | 0) || 2;
-          const faced = (typeof this.waveEngaged === 'function') ? (this.waveEngaged(4) | 0) : 0;
-          return { wave: 5, ready: faced >= need, faced, need };
-        }
-        if (w === 1 || w === 2 || w === 3) return { wave: w, ready: true, faced: 0, need: 0 };
-        return { wave: w, ready: false, faced: 0, need: 0 };
-      } catch (e) { return { wave: w, ready: false, faced: 0, need: 0 }; }
+        if (w !== 4 && w !== 5) return { wave: w, ready: false, armored: 0, armed: 0, tricks: 0, veterans: 0, demand: null, short: ['unknown-wave'] };
+        const r = this.waveCombatReadiness(w);
+        return { wave: w, ready: !!r.ready, armored: r.armored | 0, armed: r.armed | 0, tricks: r.tricks | 0, veterans: r.veterans | 0, demand: r.demand || null, short: r.short || [] };
+      } catch (e) {
+        try { console.warn('[waveUnlockReady] failed, failing closed:', e && e.message); } catch (e2) {}
+        return { wave: w, ready: false, armored: 0, armed: 0, tricks: 0, veterans: 0, demand: null, short: ['read-error'] };
+      }
     },
     // standingPlentyCappedTotal(): plenty counts at most plentyCapT5 toward
     // the T5 bar. The honest capped number — the gate's T5 trigger.
@@ -219,12 +342,13 @@
         const peak = this._standingPeakWave();
         if (peak >= w) return { wave: w, deferred: false, grandfathered: true, peak };
         const s = this.villageStanding(), raw = (s.total | 0) || 0;
+        const barsOf = (rd) => ({ armored: rd.armored | 0, armed: rd.armed | 0, tricks: rd.tricks | 0, veterans: rd.veterans | 0, short: rd.short || [], demand: rd.demand || null });
         if (w === 4) {
           const rd = this.waveUnlockReady(4);
-          return { wave: 4, deferred: raw >= t4 && !rd.ready, ready: rd.ready, faced: rd.faced, need: rd.need, raw, threshold: t4, grandfathered: false };
+          return { wave: 4, deferred: raw >= t4 && !rd.ready, ready: rd.ready, bars: barsOf(rd), raw, threshold: t4, grandfathered: false };
         }
         const capped = this.standingPlentyCappedTotal(), rd = this.waveUnlockReady(5);
-        return { wave: 5, deferred: capped >= t5 && !rd.ready, ready: rd.ready, faced: rd.faced, need: rd.need, raw, capped, threshold: t5, grandfathered: false };
+        return { wave: 5, deferred: capped >= t5 && !rd.ready, ready: rd.ready, bars: barsOf(rd), raw, capped, threshold: t5, grandfathered: false };
       } catch (e) { return none; }
     },
     // _standingPeakWave(): highest wave the gated total has released.
@@ -251,7 +375,7 @@
         if (last != null && day - last < 7) return;
         this.state._standingDeferBeat[key] = day;
         const first = (last == null);
-        const n = h.rd.need, f = h.rd.faced;
+        const bars = this._readinessBarLine(h.rd);
         if (h.kind === 'defer4') {
           // KNOWLEDGE GATE (2026-10-15): this hold can bite before wave 3
           // unlocks (bread road: standing hits t4 early), so the wave-4
@@ -263,23 +387,23 @@
           let w3 = false;
           try {
             const wl = (typeof this.waveLedgerCfg === 'function') ? this.waveLedgerCfg() : {};
-            const bars = (wl && wl.barsPerWave) || {};
+            const barsCfg = (wl && wl.barsPerWave) || {};
             const dN = wl.dayFloor != null ? wl.dayFloor : 25;
-            const need2 = (bars[2] | 0) || 4;
+            const need2 = (barsCfg[2] | 0) || 4;
             const pts2 = (typeof this.waveLedgerPoints === 'function') ? (this.waveLedgerPoints(2) | 0) : 0;
             w3 = day >= dN && pts2 >= need2;
           } catch (e) {}
           say(first
             ? (w3
-              ? '📡 The next act is not for strangers. Face what hunts you now — stand on the grid with the Final Draft, more than once, more than one kind.'
-              : '📡 The next act is not for strangers. Face what hunts you now — stand on the grid, more than once, more than one kind.')
+              ? `📡 The next act is not for strangers. The village must be ready to FIGHT the Final Draft — ${bars}.`
+              : `📡 The next act is not for strangers. The village must be ready to FIGHT it — ${bars}.`)
             : (w3
-              ? `📡 The next act is still waiting. Stand on the grid with the Final Draft — ${f} of ${n} kinds faced.`
-              : `📡 The next act is still waiting. Stand on the grid and face what hunts you — ${f} of ${n} kinds faced.`));
+              ? `📡 The next act is still waiting — ${bars}.`
+              : `📡 The next act is still waiting. Stand ready to fight it — ${bars}.`));
         } else {
           say(first
-            ? "📡 The fifth draft stays in the wings. Stand before the Mirror Draft's champions — more than once, more than one kind — and the Producers will take notice."
-            : `📡 The fifth draft stays in the wings. Stand before the Mirror Draft's champions — ${f} of ${n} kinds faced.`);
+            ? `📡 The fifth draft stays in the wings. The Producers want a village that can fight them — ${bars}.`
+            : `📡 The fifth draft stays in the wings — ${bars}.`);
         }
       } catch (e) {}
     },
@@ -306,11 +430,11 @@
         if (raw >= t5 && capped < t5 && peak < 5) notes.push(`bread capped at ${(cfg.plentyCapT5 | 0) || 100} toward wave 5`);
         if (raw >= t4 && !this.waveUnlockReady(4).ready && peak < 4) {
           const rd = this.waveUnlockReady(4);
-          notes.push(`HELD at wave 3: the Mirror Draft wants scars (${rd.faced}/${rd.need} wave-3 kinds faced)`);
+          notes.push(`HELD at wave 3: not ready to fight the next draft (${this._readinessBarLine(rd)})`);
         }
         if (capped >= t5 && !this.waveUnlockReady(5).ready && peak < 5) {
           const rd = this.waveUnlockReady(5);
-          notes.push(`HELD at wave 4: the fifth draft waits (${rd.faced}/${rd.need} wave-4 kinds faced)`);
+          notes.push(`HELD at wave 4: the fifth draft waits (${this._readinessBarLine(rd)})`);
         }
         if (peak >= 4 && raw < (peak >= 5 ? t5 : t4)) notes.push(`wave ${peak} held open (standing floor)`);
         if (notes.length) line += ' — ' + notes.join('; ');
