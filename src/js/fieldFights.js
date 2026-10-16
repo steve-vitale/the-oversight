@@ -1196,6 +1196,18 @@
             var rtk = mlead.hp / Math.max(1, vDpr);  // rounds to drop the lead
             var rtd = vHp / Math.max(1, mDpr);       // rounds until the villager drops
             hopeless = rtd < rtk * 0.85;              // losing before the lead falls — slow bleeds count (loosened 2026-10-13, was 0.6)
+            // COUNTERWIRE (2026-10-16): trick-aware morale. A villager
+            // performing a KNOWN trick (rec.trickLog non-empty) is not
+            // losing the damage race — they are playing the trick's game
+            // (redactor quiet, eulogy contradict...), which deliberately
+            // skips strikes. Calling that hopeless fled them mid-trick.
+            // They hold the line while they have the HP to see it through
+            // (>25%); below that, normal morale applies. Death (vHp<=0) is
+            // still honest and separate.
+            if (hopeless && rec.trickLog && rec.trickLog.length && vHp > vHpMax * 0.25) {
+              hopeless = false;
+              rec.log.push(vName + ' holds the line — working the trick, not the damage race.');
+            }
             winning = rtk <= rtd * 1.1;              // drops the lead first (or trades)
             if (winning) rec.everWinning = true;
             if (hopeless) rec.everHopeless = true;
