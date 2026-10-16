@@ -255,6 +255,24 @@
       var dist = 1 + Math.floor(R() * maxD);
       var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
       var d = pick(dirs);
+      // APEXROUTE (2026-10-16): don't aim the expedition at remembered-hot
+      // ground when the pantry holds — take a cold way out at the same
+      // distance. Hungry villages walk straight; no cold way → keep the
+      // original (routing never strands).
+      try {
+        if (this.apexRouteOn && this.apexRouteOn() && this.apexPantryOk()) {
+          var _etx = Math.max(0, Math.min(8, hx + d[0] * dist));
+          var _ety = Math.max(0, Math.min(8, hy + d[1] * dist));
+          if (this.apexPathHeat(hx, hy, _etx, _ety) > 0) {
+            var _ed = this.apexColdDir(hx, hy, dist);
+            if (_ed) {
+              d = _ed;
+              var _as = this.state.village.apexStats || (this.state.village.apexStats = {});
+              _as.reroute = (_as.reroute | 0) + 1;
+            }
+          }
+        }
+      } catch (e) {}
       var tx = Math.max(0, Math.min(8, hx + d[0] * dist)); // 9x9 world (2026-10-07)
       var ty = Math.max(0, Math.min(8, hy + d[1] * dist)); // 9x9 world (2026-10-07)
       var duration = 8 + Math.floor(R() * 13); // 2-5 days of parts
@@ -307,6 +325,29 @@
       if (nx !== ex.tx || ny !== ex.ty) {
         nx += Math.sign(ex.tx - nx); ny += Math.sign(ex.ty - ny);
         nx = Math.max(0, Math.min(8, nx)); ny = Math.max(0, Math.min(8, ny)); // 9x9 world (2026-10-07)
+        // APEXROUTE (2026-10-16): mid-expedition, give a remembered-hot next
+        // tile room — sidestep to cold ground costing at most one extra tile
+        // toward the target. No cold sidestep → walk through (never strand).
+        try {
+          if (this.apexRouteOn && this.apexRouteOn() && this.apexPantryOk() && this.apexHeatAt(nx, ny) > 0) {
+            var _D8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
+            var _curD = Math.max(Math.abs(ex.tx - nx), Math.abs(ex.ty - ny));
+            var _best = null, _bestD = Infinity;
+            for (var _si = 0; _si < _D8.length; _si++) {
+              var _cx = Math.max(0, Math.min(8, node.nx + _D8[_si][0]));
+              var _cy = Math.max(0, Math.min(8, node.ny + _D8[_si][1]));
+              if (_cx === node.nx && _cy === node.ny) continue;
+              if (this.apexHeatAt(_cx, _cy) > 0) continue;
+              var _cd = Math.max(Math.abs(ex.tx - _cx), Math.abs(ex.ty - _cy));
+              if (_cd <= _curD + 1 && _cd < _bestD) { _bestD = _cd; _best = [_cx, _cy]; }
+            }
+            if (_best) {
+              nx = _best[0]; ny = _best[1];
+              var _as4 = this.state.village.apexStats || (this.state.village.apexStats = {});
+              _as4.sidestep = (_as4.sidestep | 0) + 1;
+            }
+          }
+        } catch (e) {}
         try { this.npcSetNode(vid, nx, ny); } catch (e) {}
         var key = nx + ',' + ny;
         a.stats[vid].nodes[key] = true;
@@ -333,6 +374,20 @@
     // The old flat death/hurt/evade/kill rolls are gone. The pre-fight
     // awareness check ("saw it, gave it room") stays — it decides contact,
     // not outcome. Once steel is crossed, the fight decides.
+    // APEXROUTE (2026-10-16): the survivor's report for agency expeditions.
+    // A villager who SAW a wave-4/5 apex and lived (evaded, stood it down,
+    // fled the fight) tells the village where — recorded at their current
+    // node. Kills remove the monster; the dead told no tale.
+    apexNote(vid, m) {
+      try {
+        // gate FIRST: zero trace when off (npcNode lazily creates state).
+        if (!this.apexRouteOn || !this.apexRouteOn()) return;
+        if (!this.recordApexSighting) return;
+        const n = this.npcNode ? this.npcNode(vid) : null;
+        if (!n) return;
+        this.recordApexSighting(n.nx, n.ny, m && m.id, vid);
+      } catch (e) {}
+    },
     expeditionMonster(vid, dist, playerAtHaven) {
       // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the world
       // holds its breath — expeditions meet nothing out there. The village
@@ -371,6 +426,7 @@
         a.know[vid].monsters++;
         a.xp[vid].tracking += 2 * (st.potential[vid] ? 2 : 1);
         st.exped[vid].encounters.push('evaded ' + (m.id || 'it'));
+        this.apexNote(vid, m); // APEXROUTE: saw it, gave it room — the village hears where
         return;
       }
       // contact: they fought. Fighting teaches, whatever the ending.
@@ -426,11 +482,13 @@
         // Evades are just sightings — they stay flavor, never knowledge.
         if (m.id && a.know[vid].fought.indexOf(m.id) === -1) a.know[vid].fought.push(m.id);
         st.exped[vid].encounters.push('stood down ' + (m.id || 'it') + ' (' + fightNote + ')');
+        this.apexNote(vid, m); // APEXROUTE: stood it down — the village hears where
         this.recordDeed(vid, 'stood_down', `${nm} stood down ${mName} and kept walking. ${fightNote}.`, 4);
         return;
       }
       if (rec.outcome === 'vDie') return this.expedDeath(vid, mName, nm, playerAtHaven);
       // vFlee: real wounds from the real fight, then the hurt pipeline
+      if (rec.outcome === 'vFlee') this.apexNote(vid, m); // APEXROUTE: fought it, fled it — the village hears where
       try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
       return this.expedHurt(vid, mName + ' (' + fightNote + ')', nm);
     },

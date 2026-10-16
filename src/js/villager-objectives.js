@@ -391,6 +391,26 @@
       o.tx = clampN(hx + d[0] * dist);
       o.ty = clampN(hy + d[1] * dist);
       if (o.tx === hx && o.ty === hy) { o.tx = clampN(hx + 1); }
+      // APEXROUTE (2026-10-16): the village remembers where apexes were
+      // seen. Reroute the errand to cold ground at the same distance when
+      // the pantry holds — the mission continues, around the hot ground.
+      // Hungry villages walk straight (food missions win); no cold way →
+      // keep the original (routing never strands). Tightness is a radius,
+      // so a same-distance new direction keeps the leash honest.
+      try {
+        if (this.apexRouteOn && this.apexRouteOn() && this.apexPantryOk() &&
+            (o.purpose === 'forage' || o.purpose === 'water' || o.purpose === 'traps' || o.purpose === 'explore') &&
+            this.apexPathHeat(hx, hy, o.tx, o.ty) > 0) {
+          var _cd = Math.max(Math.abs(o.tx - hx), Math.abs(o.ty - hy));
+          var _nd = this.apexColdDir(hx, hy, _cd);
+          if (_nd) {
+            o.tx = clampN(hx + _nd[0] * _cd); o.ty = clampN(hy + _nd[1] * _cd);
+            if (o.tx === hx && o.ty === hy) { o.tx = clampN(hx + 1); }
+            var _as = this.state.village.apexStats || (this.state.village.apexStats = {});
+            _as.reroute = (_as.reroute | 0) + 1;
+          }
+        }
+      } catch (e) {}
       return o;
     },
     // VISIT target: someone they actually know — same fire-group, or someone
@@ -459,6 +479,19 @@
       if (temp === 'cautious' || temp === 'withdrawn') score += 1;
       if (temp === 'bold' || temp === 'restless') score -= 1;
       try { if (this.npcGoal(vid) === 'escape') score -= 2; } catch (e) {} // the desperate don't count danger
+      // APEXROUTE (2026-10-16): fresh apex sightings on the walk add danger —
+      // the village gives known-hot ground room when the pantry holds. Weight
+      // follows the predator census (eater 3 > reunion 2 > others 1, capped).
+      try {
+        if (this.apexRouteOn && this.apexRouteOn() && this.apexPantryOk()) {
+          var _ah = this.apexPathHeat(hx, hy, tx, ty);
+          if (_ah > 0) {
+            score += Math.min(3, _ah);
+            var _as2 = this.state.village.apexStats || (this.state.village.apexStats = {});
+            _as2.heat = (_as2.heat | 0) + 1;
+          }
+        }
+      } catch (e) {}
       if (score < 0) score = 0;
       var verdict = score <= 1 ? 'go' : score <= 3 ? 'ask' : score <= 5 ? 'tighten' : 'defer';
       return { score: score, verdict: verdict };
