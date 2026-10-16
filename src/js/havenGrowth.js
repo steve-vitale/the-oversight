@@ -445,6 +445,21 @@
       return this.havenTier() >= 3 ? 5 : 3;
     },
 
+    // crisisWaveOf: the wave of a raider, for the aid-crisis tier. World-
+    // monster entities NEVER carry .wave (spawnWorldMonster builds
+    // id/hp/tiles only) — the wave lives in the data def, looked up by id
+    // (the raidshieldWaveOf / apexpredators speciesOf recipe). Def is
+    // authoritative; an entity-carried .wave is ignored. Unknown ids and
+    // nulls default to 1 — the old behavior, never worse.
+    crisisWaveOf(m) {
+      try {
+        const defs = (this.data && this.data.monsters) || [];
+        const def = defs.find(d => d && d.id === (m || {}).id);
+        if (def && (def.wave | 0)) return (def.wave | 0);
+      } catch (e) {}
+      return 1;
+    },
+
     // ---------- raids: what the palisade defends against ----------
     // Reactive, never a schedule: the woods must be thick (3+ world monsters)
     // and the pantry must smell (3,000+ kcal). ~18%/day when ripe, ≥7 days
@@ -510,8 +525,13 @@
       // or drifts 'moved-on' on the 6-day valve.
       try {
         if (this.raiseAidCrisis) {
+          // CRISISTIER (2026-10-16, finding #420): read the raiders' waves
+          // from the data defs via crisisWaveOf — m.wave is never on the
+          // entity, so max(m.wave||1) raised every raid crisis as tier 1 and
+          // the call-for-help chain's wave>=3 apex penalty (score -10,
+          // comms.js aidAskVillage) never applied to apex raids.
           let wmax = 1;
-          for (const m of raiders) { try { wmax = Math.max(wmax, m.wave || 1); } catch (e) {} }
+          for (const m of raiders) { try { wmax = Math.max(wmax, this.crisisWaveOf(m)); } catch (e) {} }
           const crisis = this.raiseAidCrisis(names, wmax);
           if (crisis) crisis.raiders = true;
         }
