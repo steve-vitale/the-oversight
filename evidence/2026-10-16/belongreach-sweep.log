@@ -1,0 +1,36 @@
+  PASS control: layer-live markers honest — br=false seat=false defer=true
+  PASS control: run completes — days=15
+  PASS control: expected policy id — belongfeast-windefer
+  PASS armed: layer-live markers honest — br=true seat=false defer=true
+  PASS armed: run completes — days=15
+  PASS armed: expected policy id — belongfeast-windefer
+SMOKE gate green.
+  [control belongfeast s181] days=112 end=village-lost nat=1 wave=5 w4d=67 w5=1 w5d=98 table=1 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s181] days=113 end=village-lost nat=1 wave=4 w4d=67 w5=0 w5d=null table=1 wins=0 hunts=1 live=1 engaged=0 exiled=0
+  [control belongfeast s292] days=44 end=village-lost nat=0 wave=2 w4d=null w5=0 w5d=null table=0 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s292] days=44 end=village-lost nat=0 wave=2 w4d=null w5=0 w5d=null table=0 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [control belongfeast s403] days=128 end=village-lost nat=0 wave=4 w4d=83 w5=0 w5d=null table=1 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s403] days=144 end=village-lost nat=0 wave=5 w4d=83 w5=1 w5d=127 table=1 wins=0 hunts=1 live=0 engaged=0 exiled=0
+  [control belongfeast s514] days=172 end=village-lost nat=1 wave=4 w4d=92 w5=0 w5d=null table=1 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s514] days=182 end=survived nat=1 wave=4 w4d=92 w5=0 w5d=null table=1 wins=0 hunts=1 live=1 engaged=0 exiled=0
+  [control belongfeast s625] days=36 end=village-lost nat=0 wave=3 w4d=null w5=0 w5d=null table=0 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s625] days=36 end=village-lost nat=0 wave=3 w4d=null w5=0 w5d=null table=0 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [control belongfeast s736] days=148 end=village-lost nat=1 wave=4 w4d=88 w5=0 w5d=null table=1 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s736] days=134 end=village-lost nat=1 wave=4 w4d=88 w5=0 w5d=null table=1 wins=0 hunts=5 live=14 engaged=1 exiled=0
+  [control belongfeast s847] days=182 end=survived nat=1 wave=4 w4d=171 w5=0 w5d=null table=1 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s847] days=182 end=survived nat=1 wave=4 w4d=171 w5=0 w5d=null table=1 wins=0 hunts=1 live=1 engaged=0 exiled=0
+  [control belongfeast s958] days=106 end=village-lost nat=1 wave=4 w4d=72 w5=0 w5d=null table=1 wins=0 hunts=0 live=0 engaged=0 exiled=0
+  [armed belongfeast s958] days=100 end=village-lost nat=1 wave=4 w4d=72 w5=0 w5d=null table=1 wins=0 hunts=0 live=0 engaged=0 exiled=0
+
+== belongreach sweep summary (pre-seat stack, belong road, road-aware gate) ==
+control: n=8 w5=1/8 wins=0 national=5/8 table=6/8 wave4=6/8 exiled=0/8 medianSurv(all)=120.0d hunts=0 live=0 engaged=0 bloodFights=0 facingFights=0
+armed: n=8 w5=1/8 wins=0 national=5/8 table=6/8 wave4=6/8 exiled=0/8 medianSurv(all)=123.5d hunts=9 live=17 engaged=1 bloodFights=21 facingFights=8
+PRIMARY: belong wave-5 unlocks armed 1/8 vs control 1/8 (bar: armed >= control+2) → NO-GO
+SECONDARY paired unlock-day deltas (armed−control, both-unlocked pairs n=0):
+  one-sided (not in mean): s181:belongfeast a=null c=98 s403:belongfeast a=127 c=null
+  MEAN DELTA = NaN (no both-unlocked pairs — a finding, not a failure)
+EXERCISE GATE: armed engagements=1 (need ≥10 or this is no-contact, not a null)
+control wave-5 unlock days: s181:belongfeast=d98
+armed wave-5 unlock days: s403:belongfeast=d127
+control death modes: combatx133, villager combatx67, monsterx53, expeditionx18, sicknessx4, a wound that wouldn't closex2, the nightx2, dehydrationx2, contestx2, ambushx1, starvationx1, lockjawx1, Spoolx1, the expeditionx1
+armed death modes: combatx156, villager combatx70, monsterx29, expeditionx17, sicknessx5, contestx4, a wound that wouldn't closex4, ambushx1, starvationx1, lockjawx1, the expeditionx1, dehydrationx1
