@@ -7597,6 +7597,47 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.pantryKcal = v.pantry.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
     },
 
+    // PANTRY GRANULARITY — DEFAULT DEPOSIT (Steve 2026-10-08; leak closed
+    // 2026-10-16): every item entering the pantry from outside arrives in
+    // pieces of at most pieceKcal (default 500). No fractionating at eat
+    // time — the pieces arrive small. This is the default deposit path for
+    // all external food (hauls, donations, transfers); the haul-distribution
+    // and donation paths used to push slabs straight in, bypassing the
+    // stockPantry split and handing the meal logic 2000+-kcal atoms.
+    // Pieces at or under the cap pass through unchanged — never recombined
+    // upward. All fields (spoilDay, safety, risks, foodKind...) ride on
+    // every piece, so nothing is laundered; stacksMatch merges split pieces
+    // into matching stacks.
+    depositPantryPieces(v, src, pieceKcal) {
+      v.pantry = v.pantry || [];
+      const cap = Math.max(1, Math.round(pieceKcal || 500));
+      const perUnit = Math.round(src.kcalEach || 0);
+      const units = Math.max(0, Math.round(src.units || 0));
+      if (perUnit <= 0 || units <= 0) return 0;
+      const srcKg = Number(src.kg) || 0;
+      let deposited = 0;
+      const place = (kcalEach, kgShare) => {
+        const piece = Object.assign({}, src, {
+          kcalEach, units: 1, kg: Math.max(0.01, kgShare),
+        });
+        const existing = (this.stacksMatch && v.pantry.find(p => this.stacksMatch(p, piece))) || null;
+        if (existing) existing.units += 1;
+        else v.pantry.push(piece);
+        deposited += kcalEach;
+      };
+      for (let u = 0; u < units; u++) {
+        let rem = perUnit;
+        while (rem > 0) {
+          const pk = Math.min(cap, rem);
+          // weight follows the calories proportionally — total kg preserved
+          place(pk, srcKg * (pk / perUnit));
+          rem -= pk;
+        }
+      }
+      v.pantryKcal = v.pantry.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
+      return deposited;
+    },
+
     returnToVillage() {
       // walking onto the Haven tile: the loop closes. what you carried feeds the village.
       // no day advance here — endDay owns the clock. this is just coming home.
@@ -7773,7 +7814,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // FULL PROCESSING STATE (break-it food 2026-10-09): same toxin-
           // laundering class as pantryAdd — poisonRisk/wellMade/burnt were
           // silently washed. Same field contract as takeFromPantry's takenStack.
-          vv.pantry.push({ name: item.name || 'Foraged food', plantId: item.plantId,
+          // PANTRY GRANULARITY DEFAULT (2026-10-16): hauls deposit through the
+          // piece splitter — no slabs enter the pantry from the trail.
+          this.depositPantryPieces(vv, { name: item.name || 'Foraged food', plantId: item.plantId,
             kcalEach: item.kcalEach, units: item.units,
             spoilDay: item.spoilDay ?? 9999, unit: item.unit,
             safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
@@ -7783,7 +7826,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             needsCooking: item.needsCooking, rawKcal: item.rawKcal, cookedKcal: item.cookedKcal,
             // TRICHINOSIS (break-it food 2026-10-10): the homecoming pool
             // never washes worms — same contract as takenStack.
-            parasiteRisk: item.parasiteRisk });
+            parasiteRisk: item.parasiteRisk }, 500);
         }
         // first return: someone explains the pooling. after that, it's understood.
         if (!vv.pooledFoodExplained && give.length) {
@@ -7928,7 +7971,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // was the same toxin-laundering class as pantryAdd — poisonRisk,
         // diseaseRisk and the rest silently washed on the way into the old
         // village's pantry. Same field contract as takeFromPantry's takenStack.
-        ov.pantry.push({ name: item.name || 'Foraged food', plantId: item.plantId,
+        // PANTRY GRANULARITY DEFAULT (2026-10-16): same split as the haven
+        // haul — no slabs enter any pantry from the trail.
+        this.depositPantryPieces(ov, { name: item.name || 'Foraged food', plantId: item.plantId,
           kcalEach: item.kcalEach, units: item.units, spoilDay: item.spoilDay ?? 9999,
           unit: item.unit, safe: item.safe !== false, kg: item.kg || 0.2,
           foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
@@ -7938,7 +7983,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           cookedKcal: item.cookedKcal, burnt: item.burnt, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): exile amends don't wash
           // worms either — same field contract as takenStack.
-          parasiteRisk: item.parasiteRisk });
+          parasiteRisk: item.parasiteRisk }, 500);
       }
       s.inventory = (s.inventory || []).filter(i => !giveSet.has(i));
       const givenKcal = Math.round(give.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 0), 0));
@@ -14083,12 +14128,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           donated.granaryDays = (donated.granaryDays || 0) + b;
         }
       } catch (e) {}
-      const existing = v.pantry.find(p => this.stacksMatch(p, donated));
-      if (existing) {
-        existing.units += (item.units || 1);
-      } else {
-        v.pantry.push(donated);
-      }
+      // PANTRY GRANULARITY DEFAULT (2026-10-16): donations split like every
+      // other deposit — the helper merges split pieces into matching stacks.
+      this.depositPantryPieces(v, donated, 500);
       // remove from inventory
       this.state.scholar.inventory.splice(idx, 1);
       // TRUST: giving builds it. generous: the System's gift. Donating gives 2x trust.
