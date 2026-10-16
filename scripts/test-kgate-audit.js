@@ -149,14 +149,20 @@ function skipped(name, note) { skip++; console.log(`SKIP ${name}${note ? ' — '
   });
   if (!truthful) { skipped('F5 whoTag names true occupation', 'no truthful villager with occupation'); }
   else {
+    // ER occurs inside person: a substring is not an occupation disclosure.
+    truthful.formerOccupation = 'ER nurse'; truthful.pro = 'they';
     const tag = Game.whoTag(truthful.id);
-    const occWord = String(truthful.formerOccupation).toLowerCase().split(/[\s(]/)[0];
+    ok('F5 fixture has not learned the occupation', !(Game.journalPerson(truthful.id) || {}).occupation);
     ok('F5: whoTag does not name the true occupation pre-knowledge (betrayal.js:147)',
-      !tag.toLowerCase().includes(occWord),
+      !/,\s*the\s+/i.test(tag),
       `whoTag(${truthful.id}) = "${tag}" leaks "${truthful.formerOccupation}"`);
+    Game.journalLearn(truthful.id, 'occupation', truthful.formerOccupation, { how: 'told' });
+    const learnedTag = Game.whoTag(truthful.id);
+    ok('F5: actual journal learning reveals the earned occupation descriptor',
+      learnedTag.toLowerCase().includes(', the er nurse'), learnedTag);
   }
 
   console.log(`\nkgate-audit: ${pass} pass, ${fail} fail, ${skip} skip`);
-  console.log('All green — these asserts guard the fixed knowledge gates against regressions.');
+  console.log(fail ? 'Knowledge-gate assertions failed; see findings above.' : 'All green — these asserts guard the fixed knowledge gates against regressions.');
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error('HARNESS ERROR', e); process.exit(2); });
