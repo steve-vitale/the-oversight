@@ -407,6 +407,10 @@
       st.materials[mat] -= n;
       this.addMaterial(mat, n);
       this.stashLog('take', def.name, n);
+      // HIDE-HANDLING BEAT (armor L1 2026-10-16): rawhide from the stash into
+      // your hands is handling the material — teaches hide_armor L1 (seen).
+      // Fires once (L0 only).
+      try { if (mat === 'hide' && this.noteHideHandled) this.noteHideHandled({ material: 'hide' }); } catch (e) {}
       // SOCIAL: the ledger remembers. Takers who never give are noticed.
       const v = this.state.village, vid = this.state.scholar.villagerId;
       const led = this._stashLedgers(vid);

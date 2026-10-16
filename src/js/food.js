@@ -600,10 +600,15 @@
           // pack. Cleaning the village stash's carcass used to teleport
           // its hide into your pockets — theft should be a deliberate take,
           // not a side effect of labor.
-          inv.push({
+          // HIDE-HANDLING BEAT (armor L1 2026-10-16): butchering is the primary
+          // hide path — your hands on the raw hide teaches hide_armor L1
+          // (seen), same beat as corpse loot. Fires once (L0 only).
+          const matItem = {
             material: mk, units: n2, name: (matName[mk] || mk) + (n2 > 1 ? 's' : ''),
             kcalEach: 0, spoilDay: 9999, kg: (matKg[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): matKg is per-item; the old *n2 total bricked the pack.
-          });
+          };
+          inv.push(matItem);
+          try { if (mk === 'hide' && this.noteHideHandled) this.noteHideHandled(matItem); } catch (e) {}
           got.push(n2 + ' ' + (matName[mk] || mk).toLowerCase() + (n2 > 1 ? 's' : ''));
         }
         if (got.length) this.say('Butchering yields: ' + got.join(', ') + '.');

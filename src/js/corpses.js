@@ -23,7 +23,11 @@
 //   - the_village_brings_its_bearer_home: the death beat's "somebody else starts digging" is real — one day after the bearer's death the village recovers the body to the fire and digs the grave (v.pendingBurials, fired from endDay). The death pack rides home on the corpse; the filling of the grave is the successor's (code: recoverBearer, Steve's loot-as-action law untouched)
 //   - sapient_dead_carry_their_gear: villager corpses hold the dead person's actual carried + stashed gear as the lootable death pack — nothing auto-transfers (code: generatePossessions, Steve 2026-10-09)
 //   - sentimentals_die_with_them: sentimental items are buried with the body, never lootable, and grant no bond to non-owners (code: generatePossessions, Steve 2026-10-09)
-//   - hide_handling_teaches: taking an animal hide (per-item or batch loot) teaches hide_armor L1 — handling the material teaches the shape, breaking the hide_armor circular dependency (code: noteHideHandled, 2026-10-13)
+//   - hide_handling_teaches: taking an animal hide (corpse loot per-item or
+//     batch, butchering a carcass, taking rawhide from the stash) teaches
+//     hide_armor L1 — handling the material teaches the shape, breaking the
+//     hide_armor circular dependency (code: noteHideHandled, 2026-10-13;
+//     predicate + butcher/stash wiring 2026-10-16)
 //   - ash_pile: a phoenix victim's corpse is flagged ash -- no body, no decay, no disease, no trauma (ashes aren't gross); carried gear ONLY (never stashed) as the lootable pack; pocketing it fires loot_ash (amplified theft; worse still when the bearer takes their own victim's gear); the ash description states the village norm (code: phoenixAshDeath/phoenixAshGearPack in game.js, Steve 2026-10-09)
 // consumes:
 //   - state.corpses
@@ -487,14 +491,18 @@
     },
 
     // noteHideHandled(it): the hide-handling beat (armor discovery
-    // 2026-10-13). Called from both corpse-take paths. An animal hide in
-    // your hands teaches hide_armor L1 — you've SEEN the material up close
-    // and the shape of armor suggests itself. Same gates as every recipe:
+    // 2026-10-13). Called from every hide-handling path: corpse loot
+    // (per-item/batch), butchering (food.js carcassToMeat), stash take
+    // (storage.js takeMaterial). An animal hide in your hands teaches
+    // hide_armor L1 — you've SEEN the material up close and the shape of
+    // armor suggests itself. Same gates as every recipe:
     // L1 is a blind 35% attempt with materials at risk; a successful blind
     // craft teaches L2 (your hands learn). One system, no parallel track.
+    // Hides come as corpse loot (plantId 'animal_hide') or butchered/stash
+    // material (material 'hide') — both are the same rawhide.
     noteHideHandled(it) {
       try {
-        if (!it || it.plantId !== 'animal_hide') return;
+        if (!it || (it.plantId !== 'animal_hide' && it.material !== 'hide')) return;
         const rk = ((this.state.codex || {}).recipes || {})['hide_armor'] || {};
         if ((rk.level || 0) >= 1) return;
         if (this.grantKnowledge) this.grantKnowledge('recipe', 'hide_armor', 1, { type: 'witnessed' });
