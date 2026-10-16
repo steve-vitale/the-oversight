@@ -163,4 +163,24 @@ Neither measured global placement is retained. The two-starter arm moves Hoarder
 
 Haggle-only standard outcomes, before->candidate: capable wins55->54/deaths90->84/community8->7; maker21->25/52->68/18->20; merchant25->24/42->44/14->20; caregiver23->29/45->44/18->19. Capable named-class cases45->38; maker first-bearer day60 survival53->47 and death exposure increases. Focused-strategy first60 stays60/64 while their deaths increase. These are separate review signals; more wins or more Miser endings do not cancel them. Player class coverage across six cohorts remains14 observed subclasses, with Phantom no longer sampled and Dealer newly sampled; this is not proof either is impossible.
 
-The shared Node setup leaves the early knack unanswered, and passive/resource-rich builds can still lack food-thesis deeds for the actual lesser seat. Fix and measure those policy/setup gaps before further human-viability claims or broad balancing. The visible Hoarder's Interest day caller uses the player; NPC payoff parity needs a runtime proof. Source/flags,23metrics, screen/confirmation, representative tails and locked-frame/current-bearer distinction: ../evidence/2026-10-15/miser-intent-audit.md. No win quota, no new price/metabolism/threshold parameter, no NPC grants or automatic gate relaxation.
+The current capable policy leaves the early knack unanswered, and passive/resource-rich builds can still lack food-thesis deeds for the actual lesser seat. Fix and measure those policy gaps before further human-viability claims or broad balancing. The visible Hoarder's Interest day caller uses the player; NPC payoff parity needs a runtime proof. Source/flags,23metrics, screen/confirmation, representative tails and locked-frame/current-bearer distinction: ../evidence/2026-10-15/miser-intent-audit.md. No win quota, no new price/metabolism/threshold parameter, no NPC grants or automatic gate relaxation.
+
+## Introductory choice and reactor timing
+
+The shared loader leaves choices to policies; capable currently omits the
+introductory knack. A public-choice correction fills the real first slot and
+changes later drafts, class recognition, luck history and reactor timing.
+The16-seed/four-policy screen has mixed survival/community/ending outcomes,
+not a game-only verdict. It is retained as an unadopted candidate because
+the existing two-seed40-day food-deed proof fails: both bearers install the
+reactor before earning the feast-use deed and later receive real feast-buff
+refusals. Candidate quick167/168 and full939/940 are recorded, not hidden.
+
+The reactor currently trades metabolism and steady1.25x power for an
+irreversible feast ceiling. The Table still requires actual food-powered use;
+earlier earned credit, a prior buff and succession must be distinguished
+from an early reactor bearer earning new credit. No price, survival, slot,
+reactor or Table parameter changed in the published game. The open design
+question and exact evidence are in OPEN-QUESTIONS.md and
+../evidence/2026-10-15/knack-policy-audit.md. Win changes alone do not decide
+whether to adopt this correction or change that tradeoff.

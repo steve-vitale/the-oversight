@@ -3,6 +3,15 @@
 Two agents work this repo. This note prevents file-level collisions.
 Steve adjudicates; either agent may update this file when lanes change.
 
+Introductory-knack audit (2026-10-15): Codex isolated a public-choice policy
+correction and128-campaign screen. It is not adopted: early reactors prevent
+both existing test seeds from earning the feast-use deed by40, failing the
+unchanged bot contract. Original policy/runtime stays published. Rebuildable
+candidate,13 choice assertions, failed checks and observed refusal replays:
+evidence/2026-10-15/knack-policy-audit.md. The reactor progression question
+is in OPEN-QUESTIONS.md; independent roadmap lanes remain open. Muse's
+region/nomad files are untouched.
+
 ## Codex (taking over Claude's godpath work)
 - Lane: `docs/godpath/PLAN.md` "What's left" — ascension gates, villager active
   verbs, early-kit subclass visibility, `god.scale` wiring, Table endings by

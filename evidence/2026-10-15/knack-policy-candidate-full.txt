@@ -1,0 +1,20 @@
+check.js: 940 scripts, 6 parallel
+............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................F...............................................................
+
+  FAIL scripts/test-capable-bot-20261014.js (exit 1, 5.6s)
+        ok   fight resolved by the end of daily
+      
+      short sims: 2 seeds x 40 days
+        ok   runs completed
+        ok   game days keep pace with loop days (no fight left live at sleep)
+        FAIL food deeds (sentimentTaught + feastSurgeUsed) earned in >= 1 run by day 40 — 0
+        ok   contest choices taken by scoring
+        ok   conversations held in-sim
+        ok   no policy-side errors
+      
+      test-capable-bot-20261014: 24 passed, 1 failed, 0 todo (phase 0)
+      failing: food deeds (sentimentTaught + feastSurgeUsed) earned in >= 1 run by day 40
+
+  slowest: scripts/test-simopt-trajectory-20261010.js 45s, scripts/test-travel-r8.js 43s, scripts/test-break-alien-20261010-r11.js 31s
+
+check.js: 939 passed, 1 failed in 178s

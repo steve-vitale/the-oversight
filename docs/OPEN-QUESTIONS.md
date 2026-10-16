@@ -23,3 +23,22 @@ Exact continuous membership and the bearer energy budget remain separate.
 See evidence/2026-10-15/garden-demand-audit.md. Do not infer the deed from donations, gardening XP or pooled sources.
 See evidence/2026-10-15/garden-coverage-audit.md. This question does not block
 that independent experiment or other roadmap work.
+
+## 2026-10-15: Reactor acquired before the food-use deed
+
+Codex asked whether a character who earns the reactor early should still
+have a real food-powered route to the Table's food-use deed, or whether the
+restriction should remain and its tradeoff be taught. No answer is recorded.
+The current runtime stays in place: an online reactor refuses feast buffs,
+cannot be removed, and does not waive the Table's food-use deed. Death and
+succession are different from that bearer earning the deed. Existing food
+credit earned before installation remains valid.
+
+This became visible while correcting the capable policy's unanswered
+introductory knack. Natural seed42 and1234 replays install the reactor on
+days19 and29, then receive real feast-buff refusals on days26/40 and33.
+Neither earns the food-use deed by day40, breaking the existing bot test.
+The candidate policy and its13 passing choice assertions are retained as
+evidence, not adopted or hidden by relaxing that test. See
+../evidence/2026-10-15/knack-policy-audit.md. This question does not block
+independent roadmap work.

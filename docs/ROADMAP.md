@@ -9,6 +9,16 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Introductory-choice audit (2026-10-15): the loader correctly leaves choices
+to policies; capable omits the real knack sheet. A source-bound correction
+and128-campaign policy screen are retained, not adopted: both existing
+40-day test seeds acquire the feast-blocking reactor early, so the unchanged
+food-deed assertion fails. Resolve the reactor/food-use progression question
+in OPEN-QUESTIONS.md before adopting it. Preserve the candidate failure;
+do not tune win rate or weaken the test to hide it. Exact reconstruction,
+all metrics and natural replays: ../evidence/2026-10-15/knack-policy-audit.md.
+Other godpath, NPC parity and regional work remains available.
+
 **Measurement priority (Steve, 2026-10-15):** optimize against a balanced set
 of telemetry, not win rate alone. Winning should be difficult; win-rate
 changes prompt investigation in either direction, not an automatic regression
