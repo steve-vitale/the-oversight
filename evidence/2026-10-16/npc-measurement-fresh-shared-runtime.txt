@@ -1,0 +1,32 @@
+  ok   real NPC recognition emits a class for the eligible resident
+  ok   prepared dead holder also exercises the actual class telemetry producer
+  ok   sampling does not mutate gameplay
+  ok   real succession takes the previously measured resident
+  ok   second real succession takes the previously sampled unclassed NPC
+  ok   terminal observation does not mutate gameplay
+  ok   daily living identities deduplicate roster and include both definition fallbacks
+  ok   duplicate roster entries remain a diagnostic instead of extra mouths
+  ok   unknown and dead roster people remain explicit
+  ok   daily living count measures distinct known residents
+  ok   living NPC count remains unknown when any sampled roster person lacks a definition
+  ok   class fraction also remains unknown with incomplete roster coverage
+  ok   hunger counts actual distinct known needs
+  ok   eligible real class recognition is retained
+  ok   self, dead, departed and unknown class maps are excluded
+  ok   an actual recognition event for a dead holder is excluded too
+  ok   self, dead, departed and unknown god maps are excluded
+  ok   duplicate active-god records do not multiply holder exposure
+  ok   each rejected class record has its actual eligibility reason
+  ok   each rejected god record has its actual eligibility reason
+  ok   the new bearer never counts as a current NPC holder
+  ok   a real earlier NPC class remains historical access after succession
+  ok   having once been an NPC cannot turn a later player-only class into NPC access
+  ok   sampled denominator identities are retained for review
+  ok   fully known denominator gives a real zero rather than null
+  ok   background-only living population is one despite duplicate roster
+  ok   a current bearer alias alone cannot imply NPC god availability
+  ok   finite NPC fractions stay within zero and one
+  ok   known-only terminal control is also observationally pure
+  ok   a same-day terminal overwrite cannot erase earlier unknown NPC coverage
+
+balance-npc-eligibility: 30 passed, 0 failed, 0 todo (phase 0)

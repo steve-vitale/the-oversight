@@ -138,6 +138,13 @@ of capable/maker/merchant/caregiver; use 64 and independent holdouts for
 small-effect claims. Add named region/job cohorts for the lane under test.
 These mixed policies do not establish pacifist viability.
 
+NPC progression counts require eligibility at the observation: known living
+resident, canonical ID different from the current bearer. Read npcExposure
+and its unknown/exclusion fields before treating an NPC build as naturally
+available. Old reports scanned stale maps; preserve them as historical and
+rerun both roots under the current collector/contract. Sampled holder-days
+are coverage, not proof an ability was used or useful.
+
 Review every policy's survival, community, resources, progression and earned
 gear metrics. Win-rate changes in either direction require investigation, not
 an automatic regression/improvement verdict. Winning should be difficult.

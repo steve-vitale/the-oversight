@@ -71,4 +71,15 @@ metric = S.compareMetric([1,0,0,0,0,0,0,0], [0,1,1,0,0,0,0,0], win, 'challenge-w
 T.ok('uncertain material win movement remains an investigation watch', metric.status === 'change_watch');
 metric = S.compareMetric(Array(8).fill(1), Array(8).fill(1), win, 'unchanged');
 T.ok('unchanged wins make no difficulty claim', metric.status === 'descriptive');
+let exposure = require('../balance-features').summarize(featurePanel)[0].npcExposure;
+T.ok('legacy NPC exposure remains unknown rather than fabricated zero', exposure.measuredRuns === 0 && exposure.eligiblePersonDays === null && exposure.holderDays === null);
+const exposurePanel = panel();
+for (const r of exposurePanel.rows) {
+  r.gear = copy(featurePanel.rows[0].gear); r.classes = r.gods = { player: [], npc: ['hunter/stalker'] }; r.endings = [];
+  r.npcExposure = { schemaVersion: 1, sampledIdentities: ['a'], unknownIdentities: [], days: [{ day: 85, eligible: ['a'], unknown: [], duplicateRosterEntries: 1,
+    classes: [{ who: 'a', build: 'hunter/stalker' }, { who: 'a', build: 'hunter/stalker' }], gods: [], excludedBuildRecords: { classes: { currentBearer: 1 }, gods: {} } }] };
+}
+exposure = require('../balance-features').summarize(exposurePanel)[0].npcExposure;
+T.ok('NPC holder-day census deduplicates each person/day/build and retains exclusions', exposure.holderDays.classes['hunter/stalker'].holderDays === 8 && exposure.holderDays.classes['hunter/stalker'].runs === 8 && exposure.excludedBuildRecordSamples.classes.currentBearer === 8);
+T.ok('class access fraction has an explicit eligibility and unknown-coverage contract', S.contract.metrics.find(m => m.id === 'npcClassAccess').unit.includes('unknown roster makes value null'));
 T.done();

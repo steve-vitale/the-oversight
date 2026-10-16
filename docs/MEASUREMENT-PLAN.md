@@ -34,6 +34,18 @@ Measurement has three layers:
 
 ## Metric contracts
 
+NPC eligibility revision,2026-10-16: `classes.npc`/`gods.npc` now require a
+known living resident other than the current bearer when observed. The
+NPC-class fraction intersects those eligible class identities with its
+daily/terminal sampled resident denominator; incomplete roster definitions
+make the fraction null, including unknown history hidden by a later same-day
+snapshot. `npcExposure` and the feature census retain eligibility,
+exclusion reasons and sampled holder-days, so a raw map record cannot certify
+natural availability. Earlier legitimate NPC access remains historical after
+succession; current player-only activity does not count as NPC activity.
+The23 keys remain, but the NPC contract/observer lineage changes. Historical
+panels must not be compared directly to this revision as a gameplay change.
+
 `scripts/balance-metrics.json` versions the practical regression thresholds,
 units, direction and interpretation. `won` has neutral direction with
 `reviewChanges: true`: an absolute paired change above 0.02 triggers

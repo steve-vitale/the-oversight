@@ -1,0 +1,493 @@
+check.js: 871 scripts, 8 parallel
+.............F.........................F..F......F.....FF....F.....F.......F.................................FF....F......F...................................................F...............................F....F..F...............................................................F..................................F..................................................................FF................................................FF.FF..F...FF............FF.......................F..............................F...................................F............................F...................F.............F...................F........F........F...............................F.F.............F..............................................F...........F...........F.............................F...........................................................F.............
+
+  FAIL scripts/proof-combat-survival-20261013.js (exit 1, 2.1s)
+        PASS ad-hoc mdef reads behaviors-table fleeAt fallback
+        PASS ad_sponsor still flees hostless (hook, unchanged)
+        PASS hostile (mdef-less) does not throw at the flee line
+      
+      [seed 7] P5 healer rounds threshold
+        PASS villager at 60 HP gets rounds
+      
+      [seed 7] P6 helpful AI strikes when adjacent
+        PASS adjacent helpful → strike
+        PASS close-in helpful → strike
+      
+      [seed 7] 20 passed, 1 failed
+
+  FAIL scripts/test-aid-comms-20261010.js (exit 1, 2.6s)
+        PASS baseless confrontation backfires
+        PASS false accusation costs trust
+        PASS national: regional switchboard
+        PASS global: national voice
+        PASS world watches: a name the planet knows
+        PASS stage is a label, not a tree
+      
+      ### 10. debug scenario
+        PASS aid-crisis scenario runs
+        PASS scenario stages a real crisis + link
+      
+      ==== aid-comms: 69 passed, 2 failed (seed 777010) ====
+
+  FAIL scripts/test-animal-cues-20261008.js (exit 1, 0.4s)
+      FAIL [seed 1] cue coverage for behavior 'fearless' — animal=indian_gray_mongoose cue=null
+      FAIL [seed 1] cue coverage for behavior 'opportunist' — animal=golden_jackal cue=null
+      FAIL [seed 1] cue coverage for behavior 'mischievous' — animal=rhesus_macaque cue=null
+      FAIL [seed 1] cue coverage for behavior 'browser' — animal=sika_deer cue=null
+      FAIL [seed 1] cue coverage for behavior 'flusher' — animal=ringneck_pheasant cue=null
+      FAIL [seed 1] cue coverage for behavior 'troop' — animal=japanese_macaque cue=null
+      FAIL [seed 1] cue coverage for behavior 'grubber' — animal=common_carp cue=null
+      FAIL [seed 1] cue coverage for behavior 'cruiser' — animal=crucian_carp cue=null
+      FAIL [seed 1] cue coverage for behavior 'drifter' — animal=japanese_eel cue=null
+      FAIL [seed 1] cue fires for known animals — 91/108
+      
+      === 76 passed, 15 failed ===
+
+  FAIL scripts/test-attack-visuals.js (exit 1, 0.2s)
+      Pattern types found: charge, rush, beam, burst, direct, line, ambush, single, lunge
+      FAIL: pattern 'lunge' has a visual class | missing visual for lunge
+      
+      === RESULTS: 26 pass, 1 fail ===
+
+  FAIL scripts/test-audio-catfishlure-proof.js (exit 1, 0.4s)
+        ok   surviving catfishLure runs clean against mocked WebAudio
+        ok   breathing pulse: 220Hz sine osc
+        ok   breath LFO: 0.7Hz sine feeding a gain (the patient swell)
+        ok   underwater voice: lowpass at 900Hz
+        ok   the glug: bandpass 300Hz Q=4
+        ok   THE GRASP: suction drags lowpass 800→150
+        ok   grasp scheduled at t+1.5 (the lure, then the grab)
+        ok   thump lands at grasp+0.55 (q+0.55, vol 0.4)
+        ok   warrantyCall has zero references in src/
+        FAIL app.js syntax valid — node --check failed
+      
+      17 passed, 1 failed
+
+  FAIL scripts/test-audio-pattern-honesty.js (exit 1, 0.2s)
+      patterns in use: ambush, beam, burst, charge, direct, line, lunge, rush, single
+      PASS pattern=ambush windup=(fallthrough) (ambush) resolve=ambushSnap (ambush) beamFlag tele=false impact=false
+      PASS pattern=beam windup=beamTechWindup (beam) resolve=droneBeam (beam) beamFlag tele=true impact=true
+      PASS pattern=burst windup=burstWindup (burst) resolve=burstDetonate (burst) beamFlag tele=false impact=false
+      PASS pattern=charge windup=chargeWindup (charge) resolve=chargeImpact (charge) beamFlag tele=false impact=false
+      PASS pattern=direct windup=lockonTick (direct) resolve=lockonHit (direct) beamFlag tele=false impact=false
+      PASS pattern=line windup=lineWindup (line) resolve=lineStrike (line) beamFlag tele=false impact=false
+      FAIL pattern=lunge windup falls through dispatch
+      PASS pattern=rush windup=rushWindup (rush) resolve=rushHit (rush) beamFlag tele=false impact=false
+      PASS pattern=single windup=diveWindup (single) resolve=diveImpact (single) beamFlag tele=false impact=false
+      
+      1 pattern(s) wind up and resolve in different voice families.
+
+  FAIL scripts/test-bal-waves-20261010.js (exit 1, 0.6s)
+      bal-waves proof: 28 passed, 3 failed
+      FAIL: w4 standing lane (4 w3 kills = 100) unlocks — uw=3
+      FAIL: w4 war path (ledger full, village rank) unlocks via standing — uw=3
+      FAIL: w5 standing lane (200 + w4 faced) unlocks — uw=3
+
+  FAIL scripts/test-blitz-audiolab.js (exit 1, 0.2s)
+      FAIL: every monster has a Lab entry: rut_king
+      FAIL: every monster has a Lab entry: living_wire
+      FAIL: every monster has a Lab entry: anaconda_empress
+      FAIL: every monster has a Lab entry: dustboar
+      FAIL: every monster has a Lab entry: sunback
+      FAIL: every monster has a Lab entry: sweeps_week
+      FAIL: every monster has a Lab entry: cliffhanger
+      FAIL: every monster has a Lab entry: sanjun
+      FAIL: every monster has a Lab entry: drumbelly_tanuki
+      FAIL: exactly one entry per monster (62 entries vs 72 monsters)
+      
+      613 pass, 11 fail
+
+  FAIL scripts/test-blitz-scaledisc.js (exit 1, 1.0s)
+        ◈ SYSTEM: "Ooh. NEIGHBORS. You know what neighbors are for? STORYLINES. Go knock — worst case, it's CONTENT. Best case? The show gets BIGGER."
+        📓 Codex: The System noticed the neighbors, and wants storylines.
+        🧳 A trader lingers after the meal — your fire eats well, and word travels with full bellies. "East, past the river — three fires walk as ONE now. They've got a speaker for SPEAKERS. Thought you sho
+        🧳 The trader lowers their voice. "And further still — FOUR fires under one head. They call it a REALM. Tribute flows uphill like a river; I saw the grain carts with my own eyes." They won't say mor
+        📺 SYSTEM: "📡 The Mirror Draft is still waiting. Stand on the grid with the Final Draft — 0 of 3 kinds faced."
+        Catalina, at the fire, not quite believing it: "Speakers rode in, ate our grain, and called us a realm. A REALM. I keep saying it to hear how it sounds."
+        ◈ SYSTEM: "Oh. OH. Do you feel that? That's the whole PLANET leaning in. ...There's a table, little fires. A big one. Far away. And it is LOOKING at you. Give it a season worth judging."
+      ----- END TRANSCRIPT -----
+      
+        PASS transcript printed for human review
+      
+      1 FAILURES
+
+  FAIL scripts/test-break-counters-20261011.js (exit 1, 0.6s)
+      == BREAK-IT counters proof, SEED 20261011 ==
+        FAIL: deadcode: 30 counter defs (15 w1 + 15 w2) — got 40
+        FAIL: deadcode: every def kind is a supported trick kind
+      == RESULT: 45 passed, 2 failed ==
+
+  FAIL scripts/test-audio-real-20261013.js (exit 1, 9.5s)
+        FAIL: wave2.modNotice: src/audio/wave2/mod-notice.mp3 has no ATTRIBUTION.md entry
+        FAIL: wave2.landlordClaim: src/audio/wave2/landlord-claim.mp3 has no ATTRIBUTION.md entry
+        FAIL: wave2.kiteUnfold: src/audio/wave2/kite-unfold.mp3 has no ATTRIBUTION.md entry
+      -- resolveHook spot checks --
+        ok: resolveHook(bufferStall) -> kind=signature placeholder=false
+        ok: resolveHook(weaponSwing) -> kind=weapon placeholder=false
+        ok: resolveHook(staticCry) -> kind=wave2 placeholder=false
+        ok: resolveHook(boarNotice) -> kind=animal placeholder=false
+      
+      checked: 46 placeholder:false, 20 placeholder:true entries
+      
+      RESULT: FAIL (47 failures)
+
+  FAIL scripts/test-break-contests-20261010.js (exit 1, 3.4s)
+        hopeless fight vs voice_mimic_radio: no-cheer flee 12/12, cheer flee 12/12, cheer death 0/12
+      
+      ### DEAD-CODE D1 — contests.js is wired: loaded in index.html, every def called
+        116 defs, all called
+      
+      ### DEAD-CODE D2 — every pool contest resolves to real phases
+      
+      ### DEAD-CODE D3 — bespoke death lines + watch beats for every pool contest
+      
+      ==== RESULT seed=424242: 49 passed, 1 failed ====
+      failures:
+       - H3 cheer moves outcomes somewhere (it is read by the engine)
+
+  FAIL scripts/test-break-food4-20261009.js (exit 1, 1.0s)
+      
+      -- dead-code: fixed systems are wired --
+        ok   eatCannibal reachable (eatOne routes meat_human)
+        ok   eatStashOne reachable (prep counter)
+        ok   askSpecialist reachable
+        ok   whoOptions reachable
+        ok   generatePossessions reachable
+        ok   _forkNewHaven reachable
+        ok   index.html loads corruption.js
+        ok   index.html loads food.js
+      
+      27 passed, 3 failed
+
+  FAIL scripts/test-break-monsters3-fieldfights-20261008.js (exit 1, 2.3s)
+        PASS game.js router has no standoff branch
+        PASS villager-agency.js has no standoff branch
+      == 7. awareness honesty: the silence is the weapon ==
+        PASS novice tracker almost never spots the hushwolf first (<10%)
+        PASS tracking pays: veteran spots it far more often
+        PASS bulldozer easier to spot than hushwolf at equal tracking
+      == 8. wins still cost, and the fight is still hard ==
+        PASS strong+armed vs bulldozer: wins some real fights
+        PASS no free wins: every win cost blood in the record
+        PASS Highbeam Deer: 0 solo kills in 100 (benchmark holds)
+      
+      23 passed, 1 failed
+
+  FAIL scripts/test-combat-r2-hp-routing-20261008.js (exit 1, 0.4s)
+      --- R4. field_medicine heals the fighter ---
+        PASS R4 fighter healed +20
+        PASS R4 scholar synced
+      --- R5. out-of-combat behavior unchanged ---
+        PASS R5 heal clamps normally out of combat
+        PASS R5 damage floors at 0 out of combat
+      --- R6. trade_of_blows HP cost hits the fighter (sibling sweep) ---
+        PASS R6 HP cost deducted from the fighter
+        PASS R6 scholar synced
+        PASS R6 would-kill cost refused
+      
+      15 passed, 1 failed
+
+  FAIL scripts/test-contend-arc-20261012.js (exit 1, 0.2s)
+      FAIL syntax src/js/game.js
+
+  FAIL scripts/test-contender-engager-20261012.js (exit 1, 0.3s)
+      FAIL syntax src/js/game.js
+
+  FAIL scripts/test-detective-observe-wariness-20261008d.js (exit 1, 0.4s)
+      FAIL found a liar to watch "11 villagers"
+      RESULT: 1 FAILURES
+
+  FAIL scripts/test-dps-race-r1.js (exit 1, 1.6s)
+      PASS A: the race projection is sane (fewer rounds to die than to kill) — {"turn":7,"dealtPerStrike":13,"takenPerTurn":8,"roundsToKill":9.7,"roundsToDie":7.3,"php":58}
+      PASS A: the player survives the disengagement — gameOver=false
+      B: dpsFled=0 monsterHp=5 gameOver=false
+      PASS B: no dpsFled on the won race — dpsFled=0
+      FAIL B: the monster dies — monsterHp=5
+      PASS B: the player lives — gameOver=false
+      C: dpsFled=0 dpsWindows=0 gameOver=false
+      PASS C: gate off => no dpsFled — dpsFled=0
+      PASS C: gate off => no assessment windows ran — dpsWindows=0
+      D: dpsFled=0 barrierPushes=1 fightEnded=true gameOver=false
+      PASS D: the scholar pushes through the barrier (not a no-op edge walk) — barrierPushes=1
+      PASS D: the lost race ends with the scholar alive — ended=true gameOver=false
+
+  FAIL scripts/test-feed-goal-forage-r7.js (exit 1, 0.6s)
+      gate (pantry 5000): feed FORAGE 110/300, control 0/300
+      weight (pantry 3000): feed FORAGE 183/400, control 163/400
+      RED: feed weight bonus must clear noise: 183 vs 163 (need >5pp gap)
+
+  FAIL scripts/test-fifthlink-r26-20261014.js (exit 1, 0.7s)
+      ok R0-copy-fidelity — leadcourt.js still carries the 20000 tend gate this test replicates
+      ok R1-baseline-decays — trust 24 -> 14 (thin tribute ticks, no tends at pantry 15000)
+      FAIL R2-gate-off-is-fourthlink: unset gate exports fourthlink itself
+      ok R1-net-negative — delta -10 < 0 — the race is lost without the layer
+
+  FAIL scripts/test-hunter-break-20261010-worms.js (exit 1, 0.5s)
+        FAIL E2 marker tells the ignorant to cook it through — "smoked ✓"
+        PASS E2 marker does not leak the worm name to the ignorant — "smoked ✓"
+        FAIL E2 L4 knower sees the worm warning — "smoked ✓"
+        PASS E3 one checkTraps call = at most one catch per trap — 1 carcasses
+        PASS E3 uses decrement once per catch (10 -> 9) — uses=9
+        PASS E3 shyness rises once per catch (level 1) — {"level":1,"day":1}
+        PASS E3 catch message names the catch — 🪤 TRAP: Your Snare here caught a Cottontail Rabbit! About 800 kcal on the bone — clean it quickly (knife). It rots fast
+        PASS E4 no silent corner/panic turns — 0 silent of 8
+        PASS E4 no silent chase turns — 0 silent of 2
+        PASS E4 pursued chase reaches a decisive state (escaped or winded) — still bolting after 2 turns
+      
+      6 FAILURES: E1 setup: smoked bear meat has live parasiteRisk; E1 bars carry the worms (parasiteRisk survives pemmican); E1 eating a wormy bar contracts trichinosis; E2 marker does not print a bare smo
+
+  FAIL scripts/test-hunter-attack-20261009.js (exit 1, 0.5s)
+      == D. TRAP ECONOMY ==
+        PASS wire snare: trap set — none
+        PASS wire snare: wire consumed — wire units before=1
+        PASS wire snare: improvised 2 uses — uses=2
+        PASS snare set: costs 16 ticks — 16
+        PASS trap: 1 catch -> uses 1, carcass in pack — uses=1
+        PASS trap: 2nd catch breaks it (uses exhausted) — trap still there
+        PASS trap: undefined uses backfilled to recipe (10), decremented on catch — uses=9
+      == F. PREY-AI DATA PROBE ==
+        PASS flee-capable prey all have sane notice/stamina — 0 bad
+      
+      1 FAILURES: bear: trichinosis attached (canon: bear carries it)
+
+  FAIL scripts/test-hunter-dress-20261009.js (exit 1, 0.5s)
+        PASS deer: byproduct parts granted (card promise)
+      == D4. NO-KNIFE PATH (the ability's value) ==
+        PASS no knife in pack (precondition)
+        PASS knifeless: ability still dresses (its value), as cleaned meat
+        PASS knifeless: no instant kcal
+      == D5/D6. REGRESSION: no carcass / charred carcass ==
+        PASS no carcass: refused
+        PASS no carcass: no cost paid
+        PASS charred: refused (charred excluded)
+        PASS charred: no cost paid
+      
+      1 FAILURES: bear: trichinosis risk attached (canon: only cooked clears it)
+
+  FAIL scripts/test-hunter-ecology-20261008.js (exit 1, 0.6s)
+      FAIL  net breaks after 12 catches — nets left=1
+      FAIL  breakage is announced
+      FAIL  fish stock depleted by the net — chub left=30
+      
+      17 passed, 3 failed
+
+  FAIL scripts/test-hunter-net-print-20261009.js (exit 1, 0.5s)
+        PASS E1 bluegill gross is 150, never >= 300
+        FAIL E1 bluegill gross == 150 — gross=undefined
+        FAIL E1 bluegill gross < old 300 floor — gross=undefined
+        empty-water dawn1 net msgs: ["Your gill net here sits empty — fished out, or nothing moving in this water. Try another creek."]
+        PASS E2 empty water is announced (once, not silent) — 1 msgs
+        PASS E2 not nagged every dawn — 0 msgs
+        PASS E2 net survives the quiet (not broken) — uses=16
+        FAIL E3 net uses decrement per fish of the haul (16 -> 13) — uses=16
+        pemmican: 760 in -> 737 out (97.0% retention)
+        PASS E4 retention ~97% (0.94-1.0), never prints — 97.0%
+      
+      6 FAILURES: E1 net pays the species gross exactly (chub), E1 carcass is the real species, not generic "fish", E1 catch message names the species, E1 bluegill gross == 150, E1 bluegill gross < old 300 
+
+  FAIL scripts/test-hunter-yield-20261010.js (exit 1, 0.4s)
+        ok   fresh gill net has 16 uses
+      
+      [softlock] snare-wire trap set with no tools array
+        ok   setTrap via wire does not throw when scholar.tools is undefined
+        ok   the improvised snare lands on the tile
+      
+      [honesty] Butcher's Friend relic is live
+        ok   butchers_friend +15% reaches the yield pipeline (card is not dead)
+      
+      12 passed, 1 failed
+      FAILURES:
+       - forced line catch yields a carcass
+
+  FAIL scripts/test-fourthlink-20261014.js (exit 1, 9.1s)
+      ok R1-days-identical — bare d60 vs inst d60
+      ok R1-standing-identical — bare 102 vs inst 102
+      ok R1-links-identical — bare 3 vs inst 3
+      ok R2-gate-off-is-leadcourt — unset gate exports leadcourt itself
+      ok R3-proposals-recorded — 3 proposals
+      ok R3-window-recorded — 60 window rows, 34 open days, 33 cap-blocked days
+      ok R3-roll-recorded — 3 links formed, 3 seasoned
+      ok R3-tends-recorded — 17 tends
+      FAIL G1-gate-on-differs: gated policy is a distinct object
+
+  FAIL scripts/test-journey-deepening-fixes-20261011.js (exit 1, 1.2s)
+      FAIL: [seed 20261011] D5 fourth stay deepens (grief named) :: "Some nights I'm fine. Tonight I'm not. That's the whole story."
+      FAIL: [seed 777] D5 fourth stay deepens (grief named) :: "Some nights I'm fine. Tonight I'm not. That's the whole story."
+      FAIL: [seed 424242] D5 fourth stay deepens (grief named) :: "Some nights I'm fine. Tonight I'm not. That's the whole story."
+      
+      612 passed, 3 failed — see FAIL lines above
+
+  FAIL scripts/test-kgate-audit.js (exit 1, 0.4s)
+      FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null
+      
+      kgate-audit: 10 pass, 1 fail, 0 skip
+      All green — these asserts guard the fixed knowledge gates against regressions.
+
+  FAIL scripts/test-leadership-pools-20261012.js (exit 1, 0.5s)
+      FAIL syntax src/js/game.js
+
+  FAIL scripts/test-monster-math-premise-20261013.js (exit 1, 0.1s)
+      PASS T1 beam has windup
+        PASS T1 beam has fireTurns
+        PASS T1 beam has cooldownTurns
+        PASS T1 beam is sweepable (dodgeable by movement)
+        PASS T2 wave-1 damage attacks counted
+        FAIL T2 telegraphed share documented (16/23; 7 designed-untelegraphed) — 28/42 telegraphed; untelegraphed: hushwolf|Silent Rush, lockpick_raccoon|Disassemble, speedbump_turtle|Snap Decision, nightli
+        FAIL T2 no unexpected untelegraphed attacks — dustboar|Tusk Rake, sunback|Tail Sweep, sweeps_week|Sweeps Pounce, cliffhanger|Death Roll, sanjun|Raking Claws, drumbelly_tanuki|Belly-Drum Thunderclap,
+        PASS T3 wave-2 telegraphed share >= 70%
+        PASS T4 gallowdeer HP is [150,170] (benchmark, untouched)
+        PASS T5 antler-thrash Steve-design citation present
+      
+      8 passed, 2 failed
+
+  FAIL scripts/test-petition-moot-afterlife-20261012.js (exit 1, 0.4s)
+      FAIL syntax src/js/villageAgency.js
+
+  FAIL scripts/test-quest-knowledge-gate-20261007.js (exit 1, 0.6s)
+      [FAIL] questPlantRef hides the true name when unknown — "3 Dandelions"
+         [OK] questPlantRef names the plant once learned — "3 Dandelions"
+         [OK] no quest offer names an unlearned plant (60 offers) — 3 offers, types: visit:creek
+         [OK] no bring-quest is offered for an unlearned plant — offered types: visit:creek
+         [OK] learned plant unlocks its bring-quest, named honestly — A person, maybe 60s, with weathered hands needs 3 Dandelions. "For tea. For morale. For re
+         [OK] bring-quest completes on identified haul (+500 kcal pantry) — activeQuest=cleared
+      
+      === 5/6 checks green ===
+
+  FAIL scripts/test-renegans-20261014.js (exit 1, 1.1s)
+      ok R1-layer-deleted — layer absent (killed arm) — inert by deletion, nothing to gate
+      ok R2-beat-staged-real — successionCrisis -> grace, beat staged
+      ok R2-haircut-applied — trust 24 -> 16 (-8 succession haircut)
+      ok R2-baseline-lets-expire — beat expired unanswered; engine said the silence answered
+      FAIL R2-expiry-costs-6: trust 16 -> 8 (-6 expiry)
+
+  FAIL scripts/test-sharcensus-20261014.js (exit 1, 1.8s)
+      PHASE RED (pristine engine — the measurement gap must be real)
+        ok raw returns observed — n=10
+        ok RED gap: raw returns attribute nothing — coverage=0.0% (need <80% for the gap to be real)
+        ok RED gap: trust invisible in raw returns — no trust field — the trust->sharing channel is unmeasurable pristine
+        ok RED gap: exile skip invisible — severed gen_tzq5 left no trace in raw returns
+      RED CONFIRMED: 10 raw meal returns, 0 attributable — the instrument fills a real gap.
+      PHASE GREEN (instrument installed — attribution must work)
+        ok one row per meal attempt (rows + withheld skips = npcs) — rows=10 withheld=1 npcs=11
+        ok every row names a real engine path — 10/10
+        ok exile skip recorded as nonmember-withheld
+        FAIL away villager took the away-pack path — self-fed
+      PROOF FAILED: proof failed: away villager took the away-pack path
+
+  FAIL scripts/test-social-animals-20261008.js (exit 1, 0.8s)
+        PASS slow clean-miss observed and has no "bolt"
+         clean-miss reads: Missed! A domed shape in the leaves, ancient and unhurried draws into its shell — the slowest dodge in history, and it worked. It doesn't flee; it barely even hurries. (-100 kcal)
+        PASS slow unit paths verified regardless
+      
+      -- PLAYED: feel pass --
+         panther (known) cue: The birds going silent is your only warning. If you can see it, it's already too close. Hunt it by sound — or not at all.
+        PASS panther cue is the stealthy coaching
+         deer run down: winded after 1 turn(s)
+         winded reads: A large brown quadruped, white tail raised in alarm is winded — sides heaving, head low. Now's your chance.
+        PASS deer reaches winded with narration
+      
+      ==== 26 passed, 1 failed ====
+
+  FAIL scripts/test-social-gossip-20261011.js (exit 1, 0.5s)
+      FAIL syntax src/js/game.js
+
+  FAIL scripts/test-social-play-20261008.js (exit 1, 1.3s)
+         [OK  ] petition: there are other villages in the world — Vila Esperança · Remanso Verde · São João do Lago
+         > You're not at Vila Esperança yet — walk to their fire first. Petition happens face to face.
+         [OK  ] petition: ask Vila Esperança for a place: the game said something (no silent action)
+         [OK  ] petition: the village answers, honestly, either way — result=false
+         [OK  ] petition: the gift is never silently swallowed — no gift line
+         [OK  ] petition: rejected → still exiled, still has the walk
+      
+      ==== SUMMARY ====
+      seed=20261008 · assertions: 79 passed, 1 failed
+      
+      FAILURES:
+        ✗ liars: more than one branch of human behavior seen
+
+  FAIL scripts/test-sprites-monsters-20261006.js (exit 1, 0.2s)
+      FAIL: rut_king has calm 
+      FAIL: rut_king has aggro 
+      FAIL: dustboar has calm 
+      FAIL: dustboar has aggro 
+      FAIL: sunback has calm 
+      FAIL: sunback has aggro 
+      FAIL: sweeps_week has calm 
+      FAIL: sweeps_week has aggro 
+      FAIL: cliffhanger has calm 
+      FAIL: cliffhanger has aggro 
+      
+      871 passed, 12 failed
+
+  FAIL scripts/test-sprites-valid-20261014.js (exit 1, 0.3s)
+      FAIL: dustboar calm != aggro 
+      FAIL: sunback calm sprite 
+      FAIL: sunback aggro sprite 
+      FAIL: sunback calm != aggro 
+      FAIL: sweeps_week calm sprite 
+      FAIL: sweeps_week aggro sprite 
+      FAIL: sweeps_week calm != aggro 
+      FAIL: cliffhanger calm sprite 
+      FAIL: cliffhanger aggro sprite 
+      FAIL: cliffhanger calm != aggro 
+      items: 120 own sprites, 95 use the documented UNKNOWN_ITEM parcel
+      1556 passed, 216 failed
+
+  FAIL scripts/test-succession-proto-20261014.js (exit 1, 1.3s)
+      ok R1-layer-deleted — layer absent (killed arm) — inert by deletion, nothing to gate
+      ok R2-beat-staged-real — successionCrisis -> grace, beat staged
+      ok R2-haircut-applied — trust 24 -> 16 (-8 succession haircut)
+      ok R2-baseline-lets-expire — beat expired unanswered; engine said the silence answered
+      FAIL R2-expiry-costs-6: trust 16 -> 8 (-6 expiry)
+
+  FAIL scripts/test-trapline-20261011.js (exit 1, 5.2s)
+      FAIL E2 trapline caps at 2 held traps — held=1
+      FAIL E3 workTrapline crafts the snare
+      FAIL E3 workTraplineSet sets the trap on the wild tile
+      FAIL E3 ctx.trapsSet counted — got undefined
+      FAIL E3b the crafted trap stays held (not consumed) — held=0
+      FAIL E3b gate cleared: sets on wild ground — got undefined
+      FAIL E4 trap is set
+      FAIL E4 dawn check catches game on stocked ground — carcasses=0
+      FAIL E4 uses decrement on catch — uses=undefined
+      FAIL E4 trap shyness tracks catches
+      
+      17 passed, 12 failed (seed 20261011)
+
+  FAIL scripts/test-trust-news-witnesses-20261011.js (exit 1, 0.4s)
+      FAIL syntax src/js/villager-agency.js
+
+  FAIL scripts/test-vest-tracker-20261010.js (exit 1, 0.8s)
+      FAIL: trackVests not found in driver
+
+  FAIL scripts/test-wave5-confirm-20261013.js (exit 1, 1.7s)
+        PASS fresh waveEngaged(4) is 0
+        PASS 10 major feasts = 200 plenty
+        PASS standing total 200
+      FAIL T5 standing WITHOUT w4 faced -> wave 4, not 5
+        PASS w4 faced reads the deed feed
+      FAIL standing>=200 + w4 faced -> wave 5
+      FAIL G2 standing>=200, no faced -> still wave 4
+      FAIL gate reads deed feed only (kill alone != faced)
+        PASS 3 w3 kills = 75 standing (below T4)
+        PASS standing<100 -> wave 3 max
+      
+      12 passed, 1 failed
+
+  FAIL scripts/test-where-are-we-20261014.js (exit 1, 1.0s)
+        ok   every calendar season has a label and known/late/guess lines
+        ok   every climate family has a rough description and visitor lines
+        ok   every playable region has its own local lines
+        ok   wet/dry calendar: "The dry · Sahel and the Savanna"
+        ok   wet/dry rough line
+      
+      [W9] wiring
+        ok   app.js day header (expHeadHTML) renders Game.whereLine()
+        ok   index.html loads whereAreWe.js
+      
+      test-where-are-we: 45 passed, 2 failed
+      failing: stranger conversation offers 'where' | stranger says a flavour line from the data
+
+  slowest: scripts/test-simopt-trajectory-20261010.js 68s, scripts/test-deterministic-clock-20261014.js 67s, scripts/test-travel-r8.js 57s
+
+check.js: 824 passed, 47 failed in 202s
