@@ -1,0 +1,52 @@
+  PASS control: layer-live markers honest — id=belongfeast holdLog=false
+  PASS control: run completes — days=15
+  PASS armed: layer-live markers honest — id=belongfeast holdLog=true
+  PASS armed: run completes — days=15
+SMOKE gate green.
+  PASS det-gate (control): 40d rerun byte-identical — n=40/40
+  PASS det-gate (armed): 40d rerun byte-identical — n=40/40
+DET gate green.
+  [control belongfeast s982] d=75 end=village-lost starv=0 starvedDays=2 nat=0 wave=4 arc=4 held=0 aid=4 feasts=6
+  [armed belongfeast s982] d=75 end=village-lost starv=0 starvedDays=4 nat=0 wave=4 arc=4 held=3 aid=4 feasts=5
+  [control belongfeast s983] d=128 end=village-lost starv=0 starvedDays=2 nat=1 wave=4 arc=4 held=0 aid=3 feasts=11
+  [armed belongfeast s983] d=134 end=village-lost starv=0 starvedDays=5 nat=1 wave=4 arc=4 held=1 aid=2 feasts=11
+  [control belongfeast s984] d=182 end=survived starv=0 starvedDays=4 nat=1 wave=4 arc=4 held=0 aid=3 feasts=15
+  [armed belongfeast s984] d=182 end=survived starv=0 starvedDays=0 nat=1 wave=5 arc=4 held=2 aid=2 feasts=17
+  [control belongfeast s985] d=137 end=village-lost starv=1 starvedDays=4 nat=1 wave=4 arc=4 held=0 aid=3 feasts=8
+  [armed belongfeast s985] d=137 end=village-lost starv=1 starvedDays=4 nat=1 wave=4 arc=4 held=0 aid=3 feasts=8
+  [control belongfeast s986] d=97 end=village-lost starv=0 starvedDays=4 nat=1 wave=4 arc=4 held=0 aid=5 feasts=8
+  [armed belongfeast s986] d=150 end=village-lost starv=0 starvedDays=5 nat=1 wave=4 arc=4 held=2 aid=3 feasts=12
+  [control belongfeast s987] d=159 end=village-lost starv=0 starvedDays=9 nat=1 wave=5 arc=4 held=0 aid=6 feasts=16
+  [armed belongfeast s987] d=112 end=village-lost starv=0 starvedDays=2 nat=1 wave=4 arc=4 held=2 aid=1 feasts=12
+  [control belongfeast s988] d=173 end=village-lost starv=0 starvedDays=3 nat=1 wave=4 arc=4 held=0 aid=5 feasts=16
+  [armed belongfeast s988] d=173 end=village-lost starv=0 starvedDays=3 nat=1 wave=4 arc=4 held=0 aid=5 feasts=16
+  [control belongfeast s989] d=136 end=village-lost starv=0 starvedDays=0 nat=1 wave=5 arc=4 held=0 aid=0 feasts=16
+  [armed belongfeast s989] d=175 end=village-lost starv=0 starvedDays=3 nat=1 wave=4 arc=4 held=1 aid=1 feasts=19
+  [control leadfeast s982] d=123 end=village-lost starv=0 starvedDays=4 nat=1 wave=5 arc=4 held=0 aid=2 feasts=7
+  [armed leadfeast s982] d=117 end=village-lost starv=0 starvedDays=4 nat=1 wave=5 arc=4 held=2 aid=2 feasts=7
+  [control leadfeast s983] d=166 end=village-lost starv=0 starvedDays=3 nat=1 wave=5 arc=4 held=0 aid=0 feasts=11
+  [armed leadfeast s983] d=166 end=village-lost starv=0 starvedDays=3 nat=1 wave=5 arc=4 held=0 aid=0 feasts=11
+  [control leadfeast s984] d=110 end=village-lost starv=0 starvedDays=2 nat=1 wave=5 arc=4 held=0 aid=1 feasts=10
+  [armed leadfeast s984] d=110 end=village-lost starv=0 starvedDays=2 nat=1 wave=5 arc=4 held=0 aid=1 feasts=10
+  [control leadfeast s985] d=118 end=village-lost starv=0 starvedDays=6 nat=1 wave=5 arc=4 held=0 aid=1 feasts=10
+  [armed leadfeast s985] d=118 end=village-lost starv=0 starvedDays=6 nat=1 wave=5 arc=4 held=0 aid=1 feasts=10
+  [control leadfeast s986] d=74 end=village-lost starv=0 starvedDays=2 nat=0 wave=2 arc=3 held=0 aid=2 feasts=6
+  [armed leadfeast s986] d=74 end=village-lost starv=0 starvedDays=2 nat=0 wave=2 arc=3 held=0 aid=2 feasts=6
+  [control leadfeast s987] d=171 end=village-lost starv=0 starvedDays=5 nat=1 wave=5 arc=4 held=0 aid=0 feasts=10
+  [armed leadfeast s987] d=171 end=village-lost starv=0 starvedDays=5 nat=1 wave=5 arc=4 held=0 aid=0 feasts=10
+  [control leadfeast s988] d=117 end=village-lost starv=0 starvedDays=0 nat=1 wave=5 arc=4 held=0 aid=0 feasts=10
+  [armed leadfeast s988] d=117 end=village-lost starv=0 starvedDays=0 nat=1 wave=5 arc=4 held=0 aid=0 feasts=10
+  [control leadfeast s989] d=182 end=survived starv=0 starvedDays=0 nat=1 wave=4 arc=3 held=0 aid=0 feasts=12
+  [armed leadfeast s989] d=182 end=survived starv=0 starvedDays=0 nat=1 wave=4 arc=3 held=0 aid=0 feasts=12
+
+== drawvol sweep summary ==
+control: n=16 starvation=1 starvedDays=50 (PRIMARY) national=14/16 medianSurv=132.0d maxSurv=182d freshRot=8994k (476/vday) table=14/16 wave4=15/16 wave5=8/16 wins=0/16 exiled=0/16 arc2=16/16 arc3=16/16 arc4=14/16 fourRealm=0/16 obl=1645k aid=54k(aidGives=35) feast=396k(feasts=172) held=0
+armed: n=16 starvation=1 starvedDays=48 (PRIMARY) national=14/16 medianSurv=135.5d maxSurv=182d freshRot=8987k (468/vday) table=14/16 wave4=15/16 wave5=7/16 wins=0/16 exiled=0/16 arc2=16/16 arc3=16/16 arc4=14/16 fourRealm=0/16 obl=1786k aid=41k(aidGives=27) feast=398k(feasts=176) held=13
+ENGAGEMENT: armed holds=13 total, 13 with fd<6 (bar >= 8)
+VERBS-ALIVE: control aid+feast=207, armed=203 (bar >= 50% of control = 103.5)
+control death causes: combat:378 villager combat:132 monster:111 expedition:11 sickness:10 a wound that wouldn't close:7 the phoenix link:6 contest:5 ambush:2 starvation:1 the night:1 Spool:1 dehydration:1 lockjaw:1 The Algorithm:1
+armed death causes: combat:392 villager combat:133 monster:114 expedition:12 sickness:8 contest:7 a wound that wouldn't close:7 lockjaw:2 ambush:2 starvation:1 Choir Toad:1 Spool:1 dehydration:1 The Algorithm:1
+belongfeast: starvation control=1 armed=1 | starvedDays control=28 armed=26
+leadfeast: starvation control=0 armed=0 | starvedDays control=22 armed=22
+paired starvedDays deltas (armed-control): belongfeast/s982:+2 belongfeast/s983:+3 belongfeast/s984:-4 belongfeast/s985:+0 belongfeast/s986:+1 belongfeast/s987:-7 belongfeast/s988:+0 belongfeast/s989:+3 leadfeast/s982:+0 leadfeast/s983:+0 leadfeast/s984:+0 leadfeast/s985:+0 leadfeast/s986:+0 leadfeast/s987:+0 leadfeast/s988:+0 leadfeast/s989:+0
+EXIT=0
