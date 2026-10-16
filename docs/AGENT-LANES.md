@@ -14,6 +14,16 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Formal companion body audit (2026-10-16): Codex measured only party.js's
+formal-only monster and loyal betrayal entry snapshots. Actual no-hit escape
+overwrites77 or9 world HP with30; worn gear is omitted. A28-assertion repair
+and520 standard jobs are retained, not adopted: the existing food-deed bot
+test fails as early reactor histories change. Runtime/policies/tests are
+restored exactly. See formal-companion-audit.md and the existing reactor
+question. Entry radius, placement, initiative, hostile betrayer model, costs
+and Muse region/nomad files remain unchanged. Do not import the candidate as
+a green gameplay fix; reconstruct and resolve the progression contract first.
+
 Apex/canonical-person follow-up (2026-10-16): Codex takes the narrow party.js
 membership/travel getters and combat injection boundary, plus the matching
 game.js/encounters.js nearest-companion constructors after caregiver44

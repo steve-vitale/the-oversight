@@ -1,0 +1,55 @@
+diff --git a/src/js/party.js b/src/js/party.js
+index 876f2c23..b76abbfa 100644
+--- a/src/js/party.js
++++ b/src/js/party.js
+@@ -47,6 +47,26 @@
+   // member-status popover. UI-only state — lives here, not in the save.
+   let partyPanelOpen = false;
+ 
++  // Same body as a nearby companion in game.js. Formal membership changes
++  // who joins, not their wounds, adult capacity or actually worn equipment.
++  // Preserve the existing nearby entry clamp (minimum1, default100); this
++  // does not change living-roster eligibility or the hostile betrayal model.
++  function partyCombatBody(game, vid) {
++    let person = game.vpOf(vid);
++    if (!person || !person.id) person = (game.data.background_survivors || []).find(p => p.id === vid);
++    const current = (game.state.village.health || {})[vid];
++    const hp = Math.max(1, Math.round(current !== undefined ? current : 100));
++    const body = { hp, maxHp: Math.max(hp, 100), wbonus: 0, varmor: 0 };
++    const equipment = (globalThis.Scattering || {}).equipment;
++    if (equipment && person) {
++      try {
++        body.wbonus = equipment.weaponBonusOf(person, game.data.items);
++        body.varmor = equipment.armorOf(person, game.data.items);
++      } catch (e) { console.warn('[party] companion equipment', e); }
++    }
++    return body;
++  }
++
+   const methods = {
+ 
+     // ---------- STATE ----------
+@@ -646,13 +666,12 @@
+       // Loyal party members fight WITH you — against their former companion.
+       for (const pid of this.partyMembers()) {
+         if (pid === vid) continue;
+-        const pvp = this.vpOf(pid);
+         const ptemp = this.npcTemper(pid);
+         const pspot = freeSpotNear(px - 1, py + 1);
+         fighters.push({
+           key: 'v_' + pid, kind: 'villager', villagerId: pid,
+           name: this.displayName(pid), emoji: '🧍',
+-          hp: 30, maxHp: 30, speed: this.villagerSpeed(pid), mx: pspot.x, my: pspot.y,
++          ...partyCombatBody(this, pid), speed: this.villagerSpeed(pid), mx: pspot.x, my: pspot.y,
+           alive: true, fled: false,
+           ai: ptemp === 'bold' ? 'brave' : ptemp === 'cautious' ? 'cautious' : 'helpful',
+           helped: false,
+@@ -1160,7 +1179,7 @@
+           f.fighters.push({
+             key: 'v_' + pid, kind: 'villager', villagerId: pid,
+             name: this.displayName(pid), emoji: '🧍',
+-            hp: 30, maxHp: 30, speed: this.villagerSpeed(pid),
++            ...partyCombatBody(this, pid), speed: this.villagerSpeed(pid),
+             mx: pos ? pos.mx : px, my: pos ? pos.my : py,
+             alive: true, fled: false,
+             ai: ptemp === 'bold' ? 'brave' : ptemp === 'cautious' ? 'cautious' : 'helpful',

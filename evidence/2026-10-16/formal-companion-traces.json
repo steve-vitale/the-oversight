@@ -1,0 +1,958 @@
+[
+  {
+    "policy": "capable",
+    "seed": 9,
+    "arms": {
+      "before": {
+        "won": 0,
+        "driverIterations": 51,
+        "finalCalendarDay": 49,
+        "lastDailySample": 49,
+        "endReason": "village-lost",
+        "playerDeaths": [
+          {
+            "day": 45,
+            "cause": "combat"
+          }
+        ],
+        "endings": [],
+        "exposure": {
+          "constructors": {
+            "startCombat": 12,
+            "apStartEncounter": 1,
+            "startBetrayalCombat": 1
+          },
+          "formalBodies": 51,
+          "formalMissingPosition": 40,
+          "formalBeyondFour": 0
+        }
+      },
+      "after": {
+        "won": 1,
+        "driverIterations": 92,
+        "finalCalendarDay": 90,
+        "lastDailySample": 90,
+        "endReason": "over-other",
+        "playerDeaths": [],
+        "endings": [
+          {
+            "type": "table_failed",
+            "day": 90,
+            "bearer": "gen_wb2vrje",
+            "data": {
+              "path": "feared",
+              "branch": "light",
+              "reason": "the closing bargain needs terror 4+, but you carried only 3"
+            }
+          },
+          {
+            "type": "table_won",
+            "day": 90,
+            "bearer": "gen_wb2vrje",
+            "data": {
+              "track": "social",
+              "godpath": null,
+              "subclass": null,
+              "god": null,
+              "moral": "light",
+              "titanFinale": "none",
+              "endingKey": null,
+              "path": "assimilated",
+              "branch": "light",
+              "seat": "lesser",
+              "key": false,
+              "hosts": false,
+              "overtime": 0,
+              "ending": "track:social",
+              "endingLevel": "track",
+              "endingKind": "coda",
+              "buildPlayed": null
+            }
+          }
+        ],
+        "exposure": {
+          "constructors": {
+            "startCombat": 10,
+            "apStartEncounter": 0,
+            "startBetrayalCombat": 0
+          },
+          "formalBodies": 40,
+          "formalMissingPosition": 31,
+          "formalBeyondFour": 0
+        }
+      }
+    },
+    "firstEntryDifference": [
+      {
+        "day": 12,
+        "name": "startCombat",
+        "position": [
+          8,
+          8
+        ],
+        "bodies": [
+          {
+            "key": "v_gen_s0xnq9z",
+            "id": "gen_s0xnq9z",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 74,
+            "position": null
+          },
+          {
+            "key": "v_gen_grvjliy",
+            "id": "gen_grvjliy",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 85,
+            "position": null
+          },
+          {
+            "key": "v_gen_papjm26",
+            "id": "gen_papjm26",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 88,
+            "position": null
+          }
+        ]
+      },
+      {
+        "day": 12,
+        "name": "startCombat",
+        "position": [
+          8,
+          8
+        ],
+        "bodies": [
+          {
+            "key": "v_gen_s0xnq9z",
+            "id": "gen_s0xnq9z",
+            "kind": "villager",
+            "hp": 74,
+            "maxHp": 100,
+            "wbonus": 12,
+            "varmor": 5,
+            "alive": true,
+            "fled": false,
+            "worldHP": 74,
+            "position": null
+          },
+          {
+            "key": "v_gen_grvjliy",
+            "id": "gen_grvjliy",
+            "kind": "villager",
+            "hp": 85,
+            "maxHp": 100,
+            "wbonus": 0,
+            "varmor": 0,
+            "alive": true,
+            "fled": false,
+            "worldHP": 85,
+            "position": null
+          },
+          {
+            "key": "v_gen_papjm26",
+            "id": "gen_papjm26",
+            "kind": "villager",
+            "hp": 88,
+            "maxHp": 100,
+            "wbonus": 0,
+            "varmor": 4,
+            "alive": true,
+            "fled": false,
+            "worldHP": 88,
+            "position": null
+          }
+        ]
+      }
+    ],
+    "firstDailyDifference": [
+      {
+        "day": 13,
+        "bearer": "gen_wb2vrje",
+        "hp": 100,
+        "kcal": 1618,
+        "hydration": 86,
+        "party": [
+          "gen_s0xnq9z",
+          "gen_grvjliy",
+          "gen_papjm26"
+        ],
+        "roster": [
+          "gen_wb2vrje",
+          "gen_crz0uw6",
+          "gen_s0xnq9z",
+          "gen_grvjliy",
+          "gen_papjm26",
+          "gen_hppzh50",
+          "leo_martin",
+          "yara_haddad",
+          "emma_larsen",
+          "ines_duarte",
+          "sanne_bakker",
+          "jovan_milic"
+        ],
+        "pantry": 44219,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      },
+      {
+        "day": 13,
+        "bearer": "gen_wb2vrje",
+        "hp": 100,
+        "kcal": 1618,
+        "hydration": 86,
+        "party": [
+          "gen_s0xnq9z",
+          "gen_grvjliy",
+          "gen_papjm26"
+        ],
+        "roster": [
+          "gen_wb2vrje",
+          "gen_crz0uw6",
+          "gen_s0xnq9z",
+          "gen_grvjliy",
+          "gen_papjm26",
+          "gen_hppzh50",
+          "leo_martin",
+          "yara_haddad",
+          "emma_larsen",
+          "ines_duarte",
+          "sanne_bakker",
+          "jovan_milic"
+        ],
+        "pantry": 44689,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      }
+    ]
+  },
+  {
+    "policy": "maker",
+    "seed": 35,
+    "arms": {
+      "before": {
+        "won": 1,
+        "driverIterations": 89,
+        "finalCalendarDay": 90,
+        "lastDailySample": 90,
+        "endReason": "over-other",
+        "playerDeaths": [],
+        "endings": [
+          {
+            "type": "table_won",
+            "day": 90,
+            "bearer": "gen_lkbx6bh",
+            "data": {
+              "track": "social",
+              "godpath": "hunter",
+              "subclass": "stalker",
+              "god": "apex_predator",
+              "moral": "light",
+              "titanFinale": "none",
+              "endingKey": null,
+              "path": "relay",
+              "branch": "light",
+              "seat": "lesser",
+              "key": false,
+              "hosts": false,
+              "overtime": 0,
+              "ending": "god:apex_predator",
+              "endingLevel": "god",
+              "endingKind": "coda",
+              "buildPlayed": null
+            }
+          }
+        ],
+        "exposure": {
+          "constructors": {
+            "startCombat": 7,
+            "apStartEncounter": 1,
+            "startBetrayalCombat": 0
+          },
+          "formalBodies": 28,
+          "formalMissingPosition": 10,
+          "formalBeyondFour": 0
+        }
+      },
+      "after": {
+        "won": 0,
+        "driverIterations": 116,
+        "finalCalendarDay": 118,
+        "lastDailySample": 117,
+        "endReason": "village-dead",
+        "playerDeaths": [
+          {
+            "day": 53,
+            "cause": "combat"
+          },
+          {
+            "day": 56,
+            "cause": "combat"
+          },
+          {
+            "day": 76,
+            "cause": "combat"
+          }
+        ],
+        "endings": [],
+        "exposure": {
+          "constructors": {
+            "startCombat": 10,
+            "apStartEncounter": 2,
+            "startBetrayalCombat": 0
+          },
+          "formalBodies": 39,
+          "formalMissingPosition": 36,
+          "formalBeyondFour": 0
+        }
+      }
+    },
+    "firstEntryDifference": [
+      {
+        "day": 33,
+        "name": "startCombat",
+        "position": [
+          8,
+          0
+        ],
+        "bodies": [
+          {
+            "key": "v_gen_ze9bp8l",
+            "id": "gen_ze9bp8l",
+            "kind": "villager",
+            "hp": 100,
+            "maxHp": 100,
+            "wbonus": 0,
+            "varmor": 0,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": {
+              "mx": 7,
+              "my": 2
+            }
+          },
+          {
+            "key": "v_greta_hansen",
+            "id": "greta_hansen",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 92,
+            "position": null
+          },
+          {
+            "key": "v_gen_ktqra5f",
+            "id": "gen_ktqra5f",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 77,
+            "position": null
+          },
+          {
+            "key": "v_gen_zjl1d7k",
+            "id": "gen_zjl1d7k",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": null
+          }
+        ]
+      },
+      {
+        "day": 33,
+        "name": "startCombat",
+        "position": [
+          8,
+          0
+        ],
+        "bodies": [
+          {
+            "key": "v_gen_ze9bp8l",
+            "id": "gen_ze9bp8l",
+            "kind": "villager",
+            "hp": 100,
+            "maxHp": 100,
+            "wbonus": 0,
+            "varmor": 0,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": {
+              "mx": 7,
+              "my": 2
+            }
+          },
+          {
+            "key": "v_greta_hansen",
+            "id": "greta_hansen",
+            "kind": "villager",
+            "hp": 92,
+            "maxHp": 100,
+            "wbonus": 0,
+            "varmor": 8,
+            "alive": true,
+            "fled": false,
+            "worldHP": 92,
+            "position": null
+          },
+          {
+            "key": "v_gen_ktqra5f",
+            "id": "gen_ktqra5f",
+            "kind": "villager",
+            "hp": 77,
+            "maxHp": 100,
+            "wbonus": 35,
+            "varmor": 2,
+            "alive": true,
+            "fled": false,
+            "worldHP": 77,
+            "position": null
+          },
+          {
+            "key": "v_gen_zjl1d7k",
+            "id": "gen_zjl1d7k",
+            "kind": "villager",
+            "hp": 100,
+            "maxHp": 100,
+            "wbonus": 8,
+            "varmor": 12,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": null
+          }
+        ]
+      }
+    ],
+    "firstDailyDifference": [
+      {
+        "day": 34,
+        "bearer": "gen_lkbx6bh",
+        "hp": 92.92777777777778,
+        "kcal": 2370,
+        "hydration": 92,
+        "party": [
+          "gen_ze9bp8l",
+          "greta_hansen",
+          "gen_ktqra5f",
+          "gen_zjl1d7k"
+        ],
+        "roster": [
+          "gen_lkbx6bh",
+          "gen_ze9bp8l",
+          "gen_cpw7a9u",
+          "gen_bzh9p93",
+          "gen_zjl1d7k",
+          "gen_ktqra5f",
+          "greta_hansen",
+          "katarina_novak",
+          "jorge_silva",
+          "zoe_adams",
+          "rosa_mendez"
+        ],
+        "pantry": 129926,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      },
+      {
+        "day": 34,
+        "bearer": "gen_lkbx6bh",
+        "hp": 92.92777777777778,
+        "kcal": 2370,
+        "hydration": 86,
+        "party": [
+          "gen_ze9bp8l",
+          "greta_hansen",
+          "gen_ktqra5f",
+          "gen_zjl1d7k"
+        ],
+        "roster": [
+          "gen_lkbx6bh",
+          "gen_ze9bp8l",
+          "gen_cpw7a9u",
+          "gen_bzh9p93",
+          "gen_zjl1d7k",
+          "gen_ktqra5f",
+          "greta_hansen",
+          "katarina_novak",
+          "jorge_silva",
+          "zoe_adams",
+          "rosa_mendez"
+        ],
+        "pantry": 142072,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      }
+    ]
+  },
+  {
+    "policy": "merchant",
+    "seed": 29,
+    "arms": {
+      "before": {
+        "won": 0,
+        "driverIterations": 150,
+        "finalCalendarDay": 151,
+        "lastDailySample": 150,
+        "endReason": "survived",
+        "playerDeaths": [],
+        "endings": [],
+        "exposure": {
+          "constructors": {
+            "startCombat": 4,
+            "apStartEncounter": 0,
+            "startBetrayalCombat": 0
+          },
+          "formalBodies": 16,
+          "formalMissingPosition": 11,
+          "formalBeyondFour": 0
+        }
+      },
+      "after": {
+        "won": 0,
+        "driverIterations": 150,
+        "finalCalendarDay": 147,
+        "lastDailySample": 146,
+        "endReason": "survived",
+        "playerDeaths": [
+          {
+            "day": 32,
+            "cause": "combat"
+          }
+        ],
+        "endings": [],
+        "exposure": {
+          "constructors": {
+            "startCombat": 9,
+            "apStartEncounter": 0,
+            "startBetrayalCombat": 0
+          },
+          "formalBodies": 39,
+          "formalMissingPosition": 24,
+          "formalBeyondFour": 1
+        }
+      }
+    },
+    "firstEntryDifference": [
+      {
+        "day": 10,
+        "name": "startCombat",
+        "position": [
+          0,
+          1
+        ],
+        "bodies": [
+          {
+            "key": "v_sari_wulandari",
+            "id": "sari_wulandari",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": null
+          },
+          {
+            "key": "v_miguel_santos",
+            "id": "miguel_santos",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": null
+          },
+          {
+            "key": "v_gen_p1tq69w",
+            "id": "gen_p1tq69w",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": null,
+            "position": null
+          }
+        ]
+      },
+      {
+        "day": 10,
+        "name": "startCombat",
+        "position": [
+          0,
+          1
+        ],
+        "bodies": [
+          {
+            "key": "v_sari_wulandari",
+            "id": "sari_wulandari",
+            "kind": "villager",
+            "hp": 100,
+            "maxHp": 100,
+            "wbonus": 12,
+            "varmor": 17,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": null
+          },
+          {
+            "key": "v_miguel_santos",
+            "id": "miguel_santos",
+            "kind": "villager",
+            "hp": 100,
+            "maxHp": 100,
+            "wbonus": 0,
+            "varmor": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 100,
+            "position": null
+          },
+          {
+            "key": "v_gen_p1tq69w",
+            "id": "gen_p1tq69w",
+            "kind": "villager",
+            "hp": 100,
+            "maxHp": 100,
+            "wbonus": 5,
+            "varmor": 4,
+            "alive": true,
+            "fled": false,
+            "worldHP": null,
+            "position": null
+          }
+        ]
+      }
+    ],
+    "firstDailyDifference": [
+      {
+        "day": 11,
+        "bearer": "gen_ucl275r",
+        "hp": 100,
+        "kcal": 1213,
+        "hydration": 84,
+        "party": [
+          "sari_wulandari",
+          "miguel_santos",
+          "gen_p1tq69w"
+        ],
+        "roster": [
+          "gen_ucl275r",
+          "gen_nhn8xqp",
+          "gen_651ttnx",
+          "gen_p1tq69w",
+          "gen_60r4zjf",
+          "gen_x8ubqb2",
+          "valeria_quispe",
+          "chantal_mukendi",
+          "mara_vasquez",
+          "miguel_santos",
+          "sari_wulandari",
+          "diana_osei"
+        ],
+        "pantry": 48771,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      },
+      {
+        "day": 11,
+        "bearer": "gen_ucl275r",
+        "hp": 100,
+        "kcal": 1003,
+        "hydration": 84,
+        "party": [
+          "sari_wulandari",
+          "miguel_santos",
+          "gen_p1tq69w"
+        ],
+        "roster": [
+          "gen_ucl275r",
+          "gen_nhn8xqp",
+          "gen_651ttnx",
+          "gen_p1tq69w",
+          "gen_60r4zjf",
+          "gen_x8ubqb2",
+          "valeria_quispe",
+          "chantal_mukendi",
+          "mara_vasquez",
+          "miguel_santos",
+          "sari_wulandari",
+          "diana_osei"
+        ],
+        "pantry": 54225,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      }
+    ]
+  },
+  {
+    "policy": "caregiver",
+    "seed": 42,
+    "arms": {
+      "before": {
+        "won": 0,
+        "driverIterations": 150,
+        "finalCalendarDay": 149,
+        "lastDailySample": 148,
+        "endReason": "survived",
+        "playerDeaths": [
+          {
+            "day": 18,
+            "cause": "starvation"
+          },
+          {
+            "day": 141,
+            "cause": "combat"
+          }
+        ],
+        "endings": [],
+        "exposure": {
+          "constructors": {
+            "startCombat": 6,
+            "apStartEncounter": 0,
+            "startBetrayalCombat": 0
+          },
+          "formalBodies": 25,
+          "formalMissingPosition": 17,
+          "formalBeyondFour": 0
+        }
+      },
+      "after": {
+        "won": 0,
+        "driverIterations": 117,
+        "finalCalendarDay": 118,
+        "lastDailySample": 117,
+        "endReason": "village-dead",
+        "playerDeaths": [],
+        "endings": [],
+        "exposure": {
+          "constructors": {
+            "startCombat": 6,
+            "apStartEncounter": 0,
+            "startBetrayalCombat": 0
+          },
+          "formalBodies": 21,
+          "formalMissingPosition": 19,
+          "formalBeyondFour": 0
+        }
+      }
+    },
+    "firstEntryDifference": [
+      {
+        "day": 13,
+        "name": "startCombat",
+        "position": [
+          0,
+          0
+        ],
+        "bodies": [
+          {
+            "key": "v_meera_reddy",
+            "id": "meera_reddy",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 76,
+            "position": null
+          },
+          {
+            "key": "v_gen_mvrwauv",
+            "id": "gen_mvrwauv",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 86,
+            "position": null
+          },
+          {
+            "key": "v_gen_9c4arqx",
+            "id": "gen_9c4arqx",
+            "kind": "villager",
+            "hp": 30,
+            "maxHp": 30,
+            "alive": true,
+            "fled": false,
+            "worldHP": 77,
+            "position": null
+          }
+        ]
+      },
+      {
+        "day": 13,
+        "name": "startCombat",
+        "position": [
+          0,
+          0
+        ],
+        "bodies": [
+          {
+            "key": "v_meera_reddy",
+            "id": "meera_reddy",
+            "kind": "villager",
+            "hp": 76,
+            "maxHp": 100,
+            "wbonus": 12,
+            "varmor": 3,
+            "alive": true,
+            "fled": false,
+            "worldHP": 76,
+            "position": null
+          },
+          {
+            "key": "v_gen_mvrwauv",
+            "id": "gen_mvrwauv",
+            "kind": "villager",
+            "hp": 86,
+            "maxHp": 100,
+            "wbonus": 0,
+            "varmor": 12,
+            "alive": true,
+            "fled": false,
+            "worldHP": 86,
+            "position": null
+          },
+          {
+            "key": "v_gen_9c4arqx",
+            "id": "gen_9c4arqx",
+            "kind": "villager",
+            "hp": 77,
+            "maxHp": 100,
+            "wbonus": 12,
+            "varmor": 5,
+            "alive": true,
+            "fled": false,
+            "worldHP": 77,
+            "position": null
+          }
+        ]
+      }
+    ],
+    "firstDailyDifference": [
+      {
+        "day": 13,
+        "bearer": "gen_gy4sunp",
+        "hp": 98.52777777777777,
+        "kcal": 1260,
+        "hydration": 100,
+        "party": [
+          "meera_reddy",
+          "gen_mvrwauv",
+          "gen_9c4arqx",
+          "aria_thompson"
+        ],
+        "roster": [
+          "gen_gy4sunp",
+          "gen_tzq5j74",
+          "gen_mvrwauv",
+          "gen_9c4arqx",
+          "gen_5fn1xgf",
+          "gen_eu2oi70",
+          "ethan_hunt",
+          "jesse_cortez",
+          "oliver_moore",
+          "aria_thompson",
+          "ruby_callaghan"
+        ],
+        "pantry": 53241,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      },
+      {
+        "day": 13,
+        "bearer": "gen_gy4sunp",
+        "hp": 94.52777777777777,
+        "kcal": 1000,
+        "hydration": 100,
+        "party": [
+          "meera_reddy",
+          "gen_mvrwauv",
+          "gen_9c4arqx"
+        ],
+        "roster": [
+          "gen_gy4sunp",
+          "gen_tzq5j74",
+          "gen_mvrwauv",
+          "gen_9c4arqx",
+          "gen_5fn1xgf",
+          "gen_eu2oi70",
+          "meera_reddy",
+          "ethan_hunt",
+          "jesse_cortez",
+          "oliver_moore",
+          "aria_thompson",
+          "ruby_callaghan"
+        ],
+        "pantry": 53241,
+        "class": null,
+        "gods": {
+          "recognized": {},
+          "active": [],
+          "hinted": {},
+          "capstoneUsed": {}
+        }
+      }
+    ]
+  }
+]

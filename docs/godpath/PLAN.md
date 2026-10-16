@@ -7,6 +7,13 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
+2026-10-16 follow-up: formal companion body/gear parity remains open. The
+retained repair passes28 focused assertions and native phone escape, but
+fails the existing food-deed smoke test. Gameplay/tests stay at the green
+baseline; do not waive the assertion or silently grant reactor food credit.
+See ../../evidence/2026-10-16/formal-companion-audit.md for the exact candidate,
+all23 metrics over64 seeds/policy, reconstruction and remaining contracts.
+
 Job -> track -> **class** -> **god** -> Table.
 
 | Piece | Where | State |

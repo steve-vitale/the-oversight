@@ -4,6 +4,13 @@ Steve, 2026-10-15: "Yes, let’s create a more balanced set of measuring telemet
 
 ## Decision rule
 
+Worked example: the [formal companion body audit](../evidence/2026-10-16/formal-companion-audit.md)
+finds more wins in every policy and fewer named classes in every policy.
+The local repair passes its targeted runtime/phone proofs but fails an
+existing progression test. It stays unadopted with exact candidate sources,
+raw panels and failure retained; neither win gains nor a prepared proof
+clear the broader contracts. The observer/policies remain identical.
+
 Winning should be difficult. Win rate is a measure of challenge, not an
 objective to maximize. A material change in either direction requires
 investigation and consideration; fewer wins are not automatically a regression,

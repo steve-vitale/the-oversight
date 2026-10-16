@@ -1,0 +1,86 @@
+'use strict';
+const K = require('./lib'), T = K.reporter('formal-companion-body');
+(async () => {
+  const G = await K.load({ seed: 36 }), E = globalThis.Scattering.equipment;
+  const gear = { melee: { itemId: 'hunting_spear' }, torso: { itemId: 'leather_jacket' } };
+  function scene(kind, hp = 77, equipped = {}) {
+    G.tbfight = null; G._lastBetrayal = null; G.over = false;
+    K.newRun(G); G.state.systemArrived = true;
+    const s = G.state.scholar, v = G.state.village;
+    const ids = v.roster.filter(id => id !== G.villagerId && G.npcAge(id) >= 18);
+    const id = ids[0], person = G.vpOf(id);
+    s.day = 85; s.kcal = 4000; s.health = 100; s.mx = 2; s.my = 4;
+    v.positions = {};
+    for (const who of v.roster) v.positions[who] = { mx: 8, my: 8 };
+    v.positions[id] = kind === 'near' ? { mx: 2, my: 3 } : { mx: 8, my: 8 };
+    v.party = kind === 'near' ? [] : [G.villagerId, id, id, ...(kind === 'loyal' ? [ids[1]] : [])];
+    v.health = { [id]: hp }; person.equipped = structuredClone(equipped);
+    v.npcAbilities = {}; v.npcKnacks = {}; v.npcSynergies = {};
+    G.npcNeeds(id).hunger = 20;
+    // Snapshot actual entry before any opening AI damage. Scheduler behavior
+    // is a separate audit; damage, strikes and settlement below use real code.
+    const advance = G.tbAdvance; G.tbAdvance = () => {};
+    try {
+      if (kind === 'loyal') G.startBetrayalCombat(ids[1]);
+      else { s.monster = { id: 'review_drone', mx: 6, my: 4 }; G.startCombat('review_drone'); }
+    } finally { G.tbAdvance = advance; }
+    const f = G.tbfight, ally = f.fighters.find(x => x.kind === 'villager' && x.villagerId === id);
+    const foe = f.fighters.find(x => x.kind === 'monster' || x.kind === 'hostile');
+    return { id, person, v, f, ally, foe };
+  }
+  const body = c => [c.ally.hp, c.ally.maxHp, c.ally.wbonus, c.ally.varmor];
+  const ordinary = body(scene('near', 77, gear));
+  for (const kind of ['far', 'loyal']) {
+    let c = scene(kind, 77, gear);
+    T.ok(kind + ': actual constructor carries the same wounded body and gear as a nearby person', JSON.stringify(body(c)) === JSON.stringify(ordinary), JSON.stringify(body(c)));
+    T.ok(kind + ': worn weapon and armor reach the real fighter', c.ally.wbonus === E.weaponBonusOf(c.person, G.data.items) && c.ally.wbonus > 0 && c.ally.varmor === E.armorOf(c.person, G.data.items) && c.ally.varmor > 0);
+    T.ok(kind + ': canonical person joins once despite raw duplicate/self party entries', c.f.fighters.filter(x => x.villagerId === c.id).length === 1 && !c.f.fighters.some(x => x.kind === 'villager' && x.villagerId === G.villagerId));
+    G.tbEnd('fled');
+    T.ok(kind + ': unharmed real escape preserves 77 world HP', c.v.health[c.id] === 77, c.v.health[c.id]);
+    c = scene(kind, 9);
+    T.ok(kind + ': critical wounds enter as nine HP rather than healing to thirty', c.ally.hp === 9 && c.ally.maxHp === 100, JSON.stringify(body(c)));
+    G.tbEnd('fled');
+    T.ok(kind + ': unharmed critical escape preserves nine world HP', c.v.health[c.id] === 9, c.v.health[c.id]);
+    c = scene(kind, 77);
+    G.tbDamage(c.ally.key, 20, 'prepared physical injury', c.foe.key, { undodgeable: true });
+    const wounded = c.ally.hp;
+    G.tbEnd('fled');
+    T.ok(kind + ': actual landed wound settles the same 57 HP to the world', wounded === 57 && c.v.health[c.id] === 57, `${wounded}/${c.v.health[c.id]}`);
+    c = scene(kind, 100);
+    const bare = G.tbDamage(c.ally.key, 20, 'prepared physical injury', c.foe.key, { undodgeable: true });
+    c = scene(kind, 100, gear);
+    const armored = G.tbDamage(c.ally.key, 20, 'prepared physical injury', c.foe.key, { undodgeable: true });
+    T.ok(kind + ': worn armor reduces actual physical damage', armored > 0 && armored < bare, `${armored}/${bare}`);
+    c = scene(kind, 100, gear);
+    c.ally.ai = 'brave'; c.ally.mx = 2; c.ally.my = 4;
+    c.foe.mx = 3; c.foe.my = 4; c.foe.hp = c.foe.maxHp = 100;
+    const combat = globalThis.Scattering.combat, roll = combat.roll, ranges = [];
+    combat.roll = function (range) { ranges.push([...range]); return roll.apply(this, arguments); };
+    try { G.tbVillagerTurn(c.ally); } finally { combat.roll = roll; }
+    const wb = Math.round(E.weaponBonusOf(c.person, G.data.items) / 2);
+    T.ok(kind + ': actual melee strike rolls the worn weapon bonus', c.ally._dealt > 0 && wb > 0 && ranges.some(r => r[0] === 4 + wb && r[1] === 8 + wb), JSON.stringify({ ranges, landed: c.ally._dealt, wb }));
+    c = scene(kind, 77, gear);
+    c.v.npcAbilities[c.id] = ['molt'];
+    G.tbDamage(c.ally.key, 999, 'prepared fatal hit', c.foe.key, { undodgeable: true });
+    T.ok(kind + ': actual Molt restores body capacity and pays gear loss', c.ally.alive && c.ally.hp === 100 && Object.keys(c.person.equipped).length === 0 && c.ally.wbonus === 0 && c.ally.varmor === 0);
+    G.tbEnd('fled');
+    T.ok(kind + ': rescued body settles to its real hundred HP', c.v.health[c.id] === 100, c.v.health[c.id]);
+    c = scene(kind, 77);
+    G.tbDamage(c.ally.key, 999, 'prepared fatal hit', c.foe.key, { undodgeable: true });
+    G.tbEnd('fled');
+    T.ok(kind + ': actual fatal injury persists death rather than restoring the body', c.v.health[c.id] === 0 && !c.v.roster.includes(c.id));
+    c = scene(kind, undefined);
+    // scene's default is77; remove the saved health and construct again.
+    delete c.v.health[c.id]; G.tbfight = null;
+    const advance = G.tbAdvance; G.tbAdvance = () => {};
+    try {
+      if (kind === 'loyal') G.startBetrayalCombat(c.f.betrayer);
+      else G.startCombat('review_drone');
+    } finally { G.tbAdvance = advance; }
+    const unsaved = G.tbfight.fighters.find(x => x.kind === 'villager' && x.villagerId === c.id);
+    T.ok(kind + ': missing saved health uses the same existing hundred-HP default', unsaved.hp === 100 && unsaved.maxHp === 100);
+    c = scene(kind, 120);
+    T.ok(kind + ': above-normal saved health and capacity are not truncated', c.ally.hp === 120 && c.ally.maxHp === 120);
+  }
+  T.done();
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

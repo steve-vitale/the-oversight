@@ -42,3 +42,13 @@ The candidate policy and its13 passing choice assertions are retained as
 evidence, not adopted or hidden by relaxing that test. See
 ../evidence/2026-10-15/knack-policy-audit.md. This question does not block
 independent roadmap work.
+
+2026-10-16 additional evidence for the **same pending reactor question**:
+matching formal companions to their real bodies/gear also changes the
+40-day smoke-test histories. Seed42's baseline dies of starvation on18,
+shows the successor on19 and earns the food-use deed on27; the candidate keeps the first bearer,
+installs a reactor on15 and has no food-use credit by40. Seed1234 remains
+without credit in both arms. Observer-on/off test results/full hashes match.
+The28-assertion repair is retained, not adopted, because the unchanged test
+fails. See ../evidence/2026-10-16/formal-companion-audit.md. This adds evidence;
+it neither records a new answer nor requests another confirmation.

@@ -1,0 +1,42 @@
+
+1. real flee exits the fight
+  ok   flee decided
+  ok   pushed through the barrier
+  ok   fight exited (not just walked to the edge)
+  ok   left the node havenward
+  ok   no policy errors
+
+2. abilities fire in combat through useAbility
+  ok   capAbilityUses > 0
+  ok   ability_used telemetry > 0
+  ok   hunger gate respected (no use at kcal 300)
+
+3. choices are scored, not option 0
+  ok   offer scoring: synergy leg echo_location beats game_sense
+  ok   upkeep took the synergy leg (not card 0)
+  ok   Table seat taken when tablePreview().ready
+  ok   Table seat NOT taken before day 90 (ready=false)
+  ok   trial by combat scored below every other beat
+  ok   path scored by earned strength, not position
+
+4. a conversation is held (real turns), target by need
+  ok   held at least one conversation
+  ok   real exchanges taken (deepTurns > 0)
+
+5. competent.beastStrikeTarget steps within moveLeft
+  ok   moved
+  ok   destination within this turn's 3 squares (was 5 away: "Too far" no-op)
+
+6. no fight left live at bedtime (sleep would refuse: a lost game day)
+  ok   fight resolved by the end of daily
+
+short sims: 2 seeds x 40 days
+  ok   runs completed
+  ok   game days keep pace with loop days (no fight left live at sleep)
+  FAIL food deeds (sentimentTaught + feastSurgeUsed) earned in >= 1 run by day 40 — 0
+  ok   contest choices taken by scoring
+  ok   conversations held in-sim
+  ok   no policy-side errors
+
+test-capable-bot-20261014: 24 passed, 1 failed, 0 todo (phase 0)
+failing: food deeds (sentimentTaught + feastSurgeUsed) earned in >= 1 run by day 40

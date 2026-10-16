@@ -1,0 +1,31 @@
+  FAIL far: actual constructor carries the same wounded body and gear as a nearby person — [30,30,null,null]
+  FAIL far: worn weapon and armor reach the real fighter
+  ok   far: canonical person joins once despite raw duplicate/self party entries
+  FAIL far: unharmed real escape preserves 77 world HP — 30
+  FAIL far: critical wounds enter as nine HP rather than healing to thirty — [30,30,null,null]
+  FAIL far: unharmed critical escape preserves nine world HP — 30
+  FAIL far: actual landed wound settles the same 57 HP to the world — 10/10
+  FAIL far: worn armor reduces actual physical damage — 20/20
+  FAIL far: actual melee strike rolls the worn weapon bonus — {"ranges":[[4,8]],"landed":10,"wb":15}
+  FAIL far: actual Molt restores body capacity and pays gear loss
+  FAIL far: rescued body settles to its real hundred HP — 30
+  ok   far: actual fatal injury persists death rather than restoring the body
+  FAIL far: missing saved health uses the same existing hundred-HP default
+  FAIL far: above-normal saved health and capacity are not truncated
+  FAIL loyal: actual constructor carries the same wounded body and gear as a nearby person — [30,30,null,null]
+  FAIL loyal: worn weapon and armor reach the real fighter
+  ok   loyal: canonical person joins once despite raw duplicate/self party entries
+  FAIL loyal: unharmed real escape preserves 77 world HP — 30
+  FAIL loyal: critical wounds enter as nine HP rather than healing to thirty — [30,30,null,null]
+  FAIL loyal: unharmed critical escape preserves nine world HP — 30
+  FAIL loyal: actual landed wound settles the same 57 HP to the world — 10/10
+  FAIL loyal: worn armor reduces actual physical damage — 20/20
+  FAIL loyal: actual melee strike rolls the worn weapon bonus — {"ranges":[[4,8]],"landed":9,"wb":15}
+  FAIL loyal: actual Molt restores body capacity and pays gear loss
+  FAIL loyal: rescued body settles to its real hundred HP — 30
+  ok   loyal: actual fatal injury persists death rather than restoring the body
+  FAIL loyal: missing saved health uses the same existing hundred-HP default
+  FAIL loyal: above-normal saved health and capacity are not truncated
+
+formal-companion-body: 4 passed, 24 failed, 0 todo (phase 0)
+failing: far: actual constructor carries the same wounded body and gear as a nearby person | far: worn weapon and armor reach the real fighter | far: unharmed real escape preserves 77 world HP | far: critical wounds enter as nine HP rather than healing to thirty | far: unharmed critical escape preserves nine world HP | far: actual landed wound settles the same 57 HP to the world | far: worn armor reduces actual physical damage | far: actual melee strike rolls the worn weapon bonus | far: actual Molt restores body capacity and pays gear loss | far: rescued body settles to its real hundred HP | far: missing saved health uses the same existing hundred-HP default | far: above-normal saved health and capacity are not truncated | …+12 more

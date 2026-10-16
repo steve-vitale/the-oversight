@@ -9,6 +9,18 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Formal companion body audit (2026-10-16): actual far/formal-only and loyal
+betrayal helpers still enter at30HP without worn gear, and unharmed escape
+can overwrite77 or9 saved HP with30. A repair passes28 focused assertions
+and the native phone barrier exit, but is **not adopted**: full checks retain
+one food-deed failure as early-reactor histories change. All four64-seed
+policies gain wins while named-class access falls; no win-rate verdict or
+compensating tuning. Exact candidate sources,520 standard jobs, neutral
+diagnostics and reconstruction are in
+../evidence/2026-10-16/formal-companion-audit.md. Published gameplay and tests
+remain the prior green baseline. The existing reactor question, companion
+entry/initiative contracts and other independent roadmap work remain open.
+
 Canonical companion/Apex parity (2026-10-16): a real succession replay
 exposed the current person entering fights again as an NPC from stale
 positions/party membership. Normal monster, alien and formal-party/betrayal

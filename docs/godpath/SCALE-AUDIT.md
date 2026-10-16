@@ -59,6 +59,12 @@ contest rule, audience reaction, judged advantage or mercy choice.
    Far formal-party injection still uses a30HP helper without the nearby
    builder's complete body/gear fields. That is another open parity contract,
    not repaired merely by removing duplicate identities.
+   The formal-only/loyal betrayal repair is now source-bound and measured
+   (formal-companion-audit.md,520 standard jobs), but remains unadopted:
+   the unchanged food-deed test fails under earlier reactor histories.
+   Its28-assertion runtime proof and phone escape are preserved; do not call
+   the published30HP model fixed. Late initiative reset, missing-position
+   placement, alien formal-entry rules and the hostile betrayer are separate.
 4. Dedicated noncombat contest promises remain open. Search of contests.js and
    contestEngine.js establishes no explicit mapping from these ten god IDs;
    inherited ability effects and generic combat still exist. Implement real,
