@@ -493,3 +493,9 @@ buyer quote with their display/receipt and credit the whole settled value,
 including earned store credit. Preserve whole-food-unit payment semantics.
 Run matched panels before making the ability more available; prepared slotted
 Haggle proves a caller, not naturally earned class viability.
+
+### Observe actual build choices
+
+`node scripts/godpath/deed-screen.js --root <root> --n 16 --policies merchant --choices 1 --par 4 --out <json>` adds the passive `scripts/lib/build-choice-observer.js`. It records only evaluations and decisions the shared brain already makes; it never asks for another score, knowledge query, random draw, clock tick or game telemetry event. Extra NPC scoring can itself plan a target and consume RNG, so do not use it as an observer. Retain the current observer against both roots and a matching `--observe 0` control; match result rows and full gameplay hashes to the balanced panel. The source manifest includes the helper.
+
+`buildDecide` records both player/NPC plans. Player `chooseAbility`/`keepAbilities` records the public choice call, including actual offered scores when that same sheet was evaluated. For distinct choice counts use NPC buildDecide plus player choose/keep, excluding duplicate player buildDecide records. `result.pick` is a decision, not proof of delivery; returned null can be normal. Compare actual held samples/callers separately. Nested target-planning evaluations are tagged onSheet=false. Unscored choices have no inferred scores; prior sheets/days do not lend scores to them. Logs cap at5000 per run and expose dropped; nonzero truncation is incomplete evidence.

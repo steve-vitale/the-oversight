@@ -18,7 +18,7 @@ async function child() {
   const id = arg('policy', 'capable'), base = registry[id];
   if (!base) throw new Error('Unknown policy ' + id);
   const people = new Map(), ascensions = [], outcomes = [], tableTrace = [], foodUses = [], offers = { player: {}, npc: {} }, heldPeople = { player: {}, npc: {} };
-  let G, gardenCoverage;
+  let G, gardenCoverage, buildChoices;
   const intakeDays = new Map();
   const sampleIntake = g => {
     for (const [day, book] of Object.entries(g.state.village.harvestIntake || {})) {
@@ -58,6 +58,7 @@ async function child() {
     setup(g, ctx) {
       G = g;
       if (arg('observe', '1') !== '0') {
+        if (arg('choices', '0') === '1') buildChoices = require('../lib/build-choice-observer').install(G);
         gardenCoverage = require('../lib/garden-coverage').install(G);
         const credit = G.creditDeed;
         G.creditDeed = function (who, deed) {
@@ -118,7 +119,7 @@ async function child() {
       if (c.classOk || c.kit >= 3) p.gates[god.id] = { kit: c.kit, need: c.needKit, payoff: c.coreHit, deed: c.synergy, day: c.dayOk, complete: c.complete };
     }
   }
-  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, offers, heldPeople, tableTrace, foodUses, gardenCoverage: gardenCoverage || null, people: rows, intakeDays: [...intakeDays.values()].sort((a, b) => a.day - b.day) }) + '\n');
+  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, offers, heldPeople, buildChoices: buildChoices ? { decisions: buildChoices.decisions, dropped: buildChoices.dropped } : null, tableTrace, foodUses, gardenCoverage: gardenCoverage || null, people: rows, intakeDays: [...intakeDays.values()].sort((a, b) => a.day - b.day) }) + '\n');
 }
 function sourceManifest() {
   const out = {};
@@ -129,7 +130,7 @@ function sourceManifest() {
   } }
   walk(path.join(root, 'src')); walk(path.join(root, 'scripts/policies'));
   for (const file of ['index.html', 'scripts/sim-harness.js', 'scripts/sweep-compare.js']) out[file] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n/g, '\n')).digest('hex');
-  for (const [key, file] of [['observer/deed-screen.js', __filename], ['observer/garden-coverage.js', path.join(__dirname, '../lib/garden-coverage.js')]]) out[key] = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  for (const [key, file] of [['observer/deed-screen.js', __filename], ['observer/garden-coverage.js', path.join(__dirname, '../lib/garden-coverage.js')], ['observer/build-choice-observer.js', path.join(__dirname, '../lib/build-choice-observer.js')]]) out[key] = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
   return out;
 }
 async function main() {
@@ -141,7 +142,7 @@ async function main() {
     while (next < jobs.length) {
       const j = jobs[next++];
       const row = await new Promise((resolve, reject) => {
-        const p = cp.spawn(process.execPath, [__filename, '--child', '--root', root, '--seed', String(j.seed), '--policy', j.policy, '--days', arg('days', '150'), '--observe', arg('observe', '1')], { cwd: root });
+        const p = cp.spawn(process.execPath, [__filename, '--child', '--root', root, '--seed', String(j.seed), '--policy', j.policy, '--days', arg('days', '150'), '--observe', arg('observe', '1'), '--choices', arg('choices', '0')], { cwd: root });
         let out = '', err = ''; p.stdout.on('data', x => { out += x; }); p.stderr.on('data', x => { err += x; }); p.on('error', reject);
         p.on('close', code => { try { if (code) throw new Error(err); resolve(JSON.parse(out.split('@@DEED@@').pop())); } catch (e) { reject(new Error(j.policy + '/' + j.seed + ': ' + e.message)); } });
       }); rows.push(row); process.stdout.write('.');

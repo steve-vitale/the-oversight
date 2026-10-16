@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "6266cb423e30141dda518bdb9ef781ef877cd978",
+  "candidateDisposition": "not retained; final game matches before arm",
+  "retainedChange": "Passive build-choice observer, deed-screen optional integration, tests/docs/evidence",
+  "screenCases": 64,
+  "confirmationCases": 256,
+  "metricsPerPolicy": 23,
+  "verifiedCacheRows": 512,
+  "balancedControlJobs": 16,
+  "observedReplayRows": 48,
+  "choiceOffControls": 2,
+  "observerAssertions": 9,
+  "candidateOfferProof": {
+    "pass": 6,
+    "fail": 0
+  },
+  "baselineOfferProof": {
+    "pass": 3,
+    "fail": 3,
+    "expected": true
+  },
+  "candidateQuick": [
+    166,
+    166
+  ],
+  "candidateFull": [
+    938,
+    938
+  ],
+  "finalQuick": [
+    166,
+    166
+  ],
+  "finalFull": [
+    938,
+    938
+  ],
+  "unreplayedTransitions": "115 listed win/community transitions; representative tails and merchant16 replays, not exhaustive causal coverage.",
+  "decision": "Placement alone increases offers but no Miser class/pick in measured cohort; restore baseline pending knowledge-bound intent and economic-value experiment. Win movement is not an automatic regression.",
+  "artifactHashRule": "SHA-256; text canonical LF, gzip exact bytes",
+  "artifactSha256": {
+    "miser-access-audit.md": "c4ee2460b9b1aac685f63ea859d5225ebb30442e9b12e748bb7e84dc7ebcda54",
+    "miser-access-candidate-full.txt": "3119cfbc68823d1981acc5a9387f6714a03cbcddd7e871fd990e26855ab7bfc9",
+    "miser-access-candidate-quick.txt": "01b3f4a42545b14a0a64380344c7c9828bee94aa7335d433b8f6e21b8b2321b5",
+    "miser-access-choice-runtime.txt": "92932592024dbaf61b39c8389686616a3ec2eccca500ec10ffae36a8d0259cbe",
+    "miser-access-confirm-after.json.gz": "59adb595723a2d94a8e00f97026360d591ff592442d9807b19f8e66f9aded9f4",
+    "miser-access-confirm-before.json.gz": "ad225faf991fc679e9aeb38835ab7fe342856cfb42b65a7c914642943448542b",
+    "miser-access-confirmation.json": "b75d1ef880dc7bb38e2ca28ca46cb00b7681c6ce9fc963070b5c70440fa15476",
+    "miser-access-confirmation.md": "d101fbfba09872e2d8782fcbbf4e43db71076db5739acce755af92392f7eda24",
+    "miser-access-full.txt": "4f1d3048ef9dcf6232e93cadc58a10d5aab80636607594577a43367087c4f816",
+    "miser-access-observer-proofs.json.gz": "f960cce0067d55d2561ceaa99612a98e69cc61843b0e28267d1bcc4a4a69f407",
+    "miser-access-offer-proof.cjs": "5370c44a694a40c915102d1ed84000c96795ec41d4d89c7dc9b0d2db152e4812",
+    "miser-access-quick.txt": "3ee653a6abb960875c7192033239601b4f08ab655f12b9eec347c1eba1f3736b",
+    "miser-access-replays.json.gz": "9407689640a207da514a1cdd3faa72367cce62b139f75ded260528b4074cdc77",
+    "miser-access-runtime-after.txt": "298632fdc949eab5952ddded53ce069eeaae0bd6097996fed6681e117fd0f835",
+    "miser-access-runtime-before.txt": "51653a004c1f94b84031e376da61d5e63525b394c0e2a32745c610e57ffdcbec",
+    "miser-access-screen-after.json.gz": "cc70f5ebe839bf1e3010c8b0ce1809af41ee04a285aac76ce5f662459213d43a",
+    "miser-access-screen-before.json.gz": "88aa3d5353ceb7af91516ee8b607065da3ba0da7a227b4c22628453273e4a89a",
+    "miser-access-screen.json": "2a3b7ac0700e7bfcdb46cbf750d6042375af9c425128d29ff61c578f2d03f827",
+    "miser-access-screen.md": "867a61d9c8283015487e4b645c9d380c2fa865b7cea5610295402e7d714333e2",
+    "miser-access-sources.json.gz": "f413a4e6e2525aba6f0f21d856ae1f2c4b1504517955e8d75e528db2f4b7134a",
+    "miser-access-summary.json": "ebfab5ab70db865c2e0b9d43b20d4c6fb069dfbebbe06b2d5ca5de09e91e0bd1",
+    "miser-access-transitions.json": "e6de5115e65fc8e9088328e6daf317f912bea5e3dcc6afd37a75a94e7b56af68",
+    "miser-access-windows.json": "f8c4ffcd8e167c0d5fc26eaa81e82648ee6989b9dc811879628c3f0b385cef07"
+  }
+}

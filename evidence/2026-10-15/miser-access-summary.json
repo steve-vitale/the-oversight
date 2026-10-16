@@ -1,0 +1,373 @@
+{
+  "verifiedCacheRows": 512,
+  "balancedControlJobs": 16,
+  "observedReplays": 48,
+  "choiceOffControls": 2,
+  "policies": [
+    {
+      "policy": "capable",
+      "n": 64,
+      "changedStates": 64,
+      "wins": [
+        55,
+        47
+      ],
+      "entries": [
+        57,
+        47
+      ],
+      "deaths": [
+        90,
+        76
+      ],
+      "communityLosses": [
+        8,
+        10
+      ],
+      "namedPlayerClasses": [
+        45,
+        37
+      ],
+      "miserCases": [
+        0,
+        0
+      ]
+    },
+    {
+      "policy": "maker",
+      "n": 64,
+      "changedStates": 64,
+      "wins": [
+        21,
+        30
+      ],
+      "entries": [
+        22,
+        30
+      ],
+      "deaths": [
+        52,
+        68
+      ],
+      "communityLosses": [
+        18,
+        13
+      ],
+      "namedPlayerClasses": [
+        53,
+        47
+      ],
+      "miserCases": [
+        0,
+        0
+      ]
+    },
+    {
+      "policy": "merchant",
+      "n": 64,
+      "changedStates": 64,
+      "wins": [
+        25,
+        27
+      ],
+      "entries": [
+        25,
+        29
+      ],
+      "deaths": [
+        42,
+        51
+      ],
+      "communityLosses": [
+        14,
+        14
+      ],
+      "namedPlayerClasses": [
+        46,
+        46
+      ],
+      "miserCases": [
+        0,
+        0
+      ]
+    },
+    {
+      "policy": "caregiver",
+      "n": 64,
+      "changedStates": 64,
+      "wins": [
+        23,
+        27
+      ],
+      "entries": [
+        25,
+        28
+      ],
+      "deaths": [
+        45,
+        40
+      ],
+      "communityLosses": [
+        18,
+        17
+      ],
+      "namedPlayerClasses": [
+        49,
+        43
+      ],
+      "miserCases": [
+        0,
+        0
+      ]
+    }
+  ],
+  "merchant": {
+    "before": {
+      "cases": 16,
+      "offered": {
+        "player": {
+          "hoarder": 0,
+          "haggle": 1
+        },
+        "npc": {
+          "hoarder": 1,
+          "haggle": 0
+        }
+      },
+      "held": {
+        "player": {
+          "hoarder": 0,
+          "haggle": 0
+        },
+        "npc": {
+          "hoarder": 0,
+          "haggle": 0
+        }
+      },
+      "tradeCredits": 31,
+      "loggedDecisionRecords": 650,
+      "distinctMiserChoices": {
+        "player": 1,
+        "npc": 1
+      },
+      "miserPicked": 0,
+      "kept": 0,
+      "examples": [
+        {
+          "seed": 4,
+          "source": "chooseAbility",
+          "day": 75,
+          "person": "gen_xi7tp1p",
+          "role": "player",
+          "offers": [
+            "leech",
+            "fear_aura",
+            "haggle"
+          ],
+          "held": [
+            "translator",
+            "scream_cheese",
+            "loud_chewer",
+            "crowd_favorite",
+            "cheese_wheel",
+            "green_thumb"
+          ],
+          "scores": [
+            {
+              "id": "leech",
+              "onSheet": true,
+              "without": null,
+              "score": 8
+            },
+            {
+              "id": "fear_aura",
+              "onSheet": true,
+              "without": null,
+              "score": 17
+            },
+            {
+              "id": "haggle",
+              "onSheet": true,
+              "without": null,
+              "score": 6
+            }
+          ],
+          "result": {
+            "pick": "fear_aura",
+            "keep": false,
+            "replace": "green_thumb"
+          },
+          "returned": "null"
+        }
+      ]
+    },
+    "after": {
+      "cases": 16,
+      "offered": {
+        "player": {
+          "hoarder": 8,
+          "haggle": 25
+        },
+        "npc": {
+          "hoarder": 34,
+          "haggle": 51
+        }
+      },
+      "held": {
+        "player": {
+          "hoarder": 0,
+          "haggle": 0
+        },
+        "npc": {
+          "hoarder": 0,
+          "haggle": 0
+        }
+      },
+      "tradeCredits": 32,
+      "loggedDecisionRecords": 669,
+      "distinctMiserChoices": {
+        "player": 32,
+        "npc": 74
+      },
+      "miserPicked": 0,
+      "kept": 9,
+      "examples": [
+        {
+          "seed": 7,
+          "source": "chooseAbility",
+          "day": 37,
+          "person": "gen_z7f1x9s",
+          "role": "player",
+          "offers": [
+            "battlefield_grace",
+            "haggle",
+            "leech"
+          ],
+          "held": [
+            "translator",
+            "scream_cheese",
+            "mending_hands",
+            "lifeline"
+          ],
+          "scores": [
+            {
+              "id": "battlefield_grace",
+              "onSheet": true,
+              "without": null,
+              "score": 15.5
+            },
+            {
+              "id": "haggle",
+              "onSheet": true,
+              "without": null,
+              "score": 4
+            },
+            {
+              "id": "leech",
+              "onSheet": true,
+              "without": null,
+              "score": 6
+            }
+          ],
+          "result": {
+            "pick": "battlefield_grace",
+            "keep": false,
+            "replace": null
+          },
+          "returned": "null"
+        },
+        {
+          "seed": 42,
+          "source": "chooseAbility",
+          "day": 39,
+          "person": "gen_gy4sunp",
+          "role": "player",
+          "offers": [
+            "loud_chewer",
+            "crowd_favorite",
+            "haggle"
+          ],
+          "held": [
+            "green_thumb",
+            "echo_location",
+            "scream_cheese",
+            "bird_whisperer",
+            "third_eye",
+            "lucky_rock"
+          ],
+          "scores": [
+            {
+              "id": "loud_chewer",
+              "onSheet": true,
+              "without": null,
+              "score": 8
+            },
+            {
+              "id": "crowd_favorite",
+              "onSheet": true,
+              "without": null,
+              "score": 5.5
+            },
+            {
+              "id": "haggle",
+              "onSheet": true,
+              "without": null,
+              "score": 3.5
+            }
+          ],
+          "result": {
+            "pick": "loud_chewer",
+            "keep": false,
+            "replace": "scream_cheese"
+          },
+          "returned": "null"
+        },
+        {
+          "seed": 99,
+          "source": "chooseAbility",
+          "day": 45,
+          "person": "gen_yyw6c67",
+          "role": "player",
+          "offers": [
+            "loud_chewer",
+            "crowd_favorite",
+            "haggle"
+          ],
+          "held": [
+            "green_thumb",
+            "echo_location",
+            "scream_cheese",
+            "dowsing",
+            "cornucopia"
+          ],
+          "scores": [
+            {
+              "id": "loud_chewer",
+              "onSheet": true,
+              "without": null,
+              "score": 8
+            },
+            {
+              "id": "crowd_favorite",
+              "onSheet": true,
+              "without": null,
+              "score": 5.5
+            },
+            {
+              "id": "haggle",
+              "onSheet": true,
+              "without": null,
+              "score": 3.5
+            }
+          ],
+          "result": {
+            "pick": "loud_chewer",
+            "keep": false,
+            "replace": null
+          },
+          "returned": "null"
+        }
+      ]
+    }
+  }
+}

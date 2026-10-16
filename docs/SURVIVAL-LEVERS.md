@@ -146,3 +146,11 @@ no holder. Prepared 100-kcal portions save food; cooked 500-kcal portions
 still spend two units at both 800 and 600 quotes. No class access change or
 affected-build balance claim. Investigate offer/choice coverage next, keeping
 the bot's raw-price affordability gate separate from runtime economics.
+
+## Miser starter placement
+
+The rejected Social-kit experiment moved existing Hoarder/Haggle from8/10 to5/6, preserving the first four entries and every other relative order. Crowd Favorite/Turncoat moved to7/8. The published order is restored: Hoarder8, Haggle10. The candidate changed initial availability for both players and NPCs; it did not grant abilities, raise XP, shrink the three-ability class threshold or enlarge the offer window. Existing role look-ahead and emerging/named-path behavior still apply; the first six are not an absolute bound on every shaped sheet.
+
+Costs under test: Hoarder adds75 daily kcal and multiplies trust gain by0.8 while adding10kg carry; Haggle adds30 daily kcal, reduces buyer quotes by25% and increases existing route income by25%. These are existing values, not new buffs. Stronger economic payoffs stay deep initially, but a genuinely earned named class can still offer its payoff across tracks under the existing rule. Earlier access can displace other social tools and alter food demand, survival, class/god diversity and challenge. Read the retained miser-access audit before tuning another lever.
+
+2026-10-15 decision: do not retain this placement-only candidate. Across64 seeds per policy it forms no Miser class. Merchant16 replays have33 player/85 NPC starter appearances but zero picks in106 distinct actual decisions. Wins move55->47 /21->30 /25->27 /23->27; deaths90->76 /52->68 /42->51 /45->40; community losses8->10 /18->13 /14->14 /18->17. Maker first-bearer day60 survival falls53->45 while wins rise. These are distinct costs/outcomes, not a win-rate verdict. No human or focused-Miser-policy viability claim; inspect actual economic value/knowledge/choice before repeating an offer-only intervention. Retained raw panels, windows and representative adverse/favorable tails: ../evidence/2026-10-15/miser-access-audit.md.
