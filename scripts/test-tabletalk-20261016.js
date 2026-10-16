@@ -28,7 +28,13 @@
 const fs = require('fs');
 const path = require('path');
 const REDMODE = process.env.REDMODE === '1';
-const REDFILE = path.join(process.env.HOME || '/home/hatch', 'workspace', 'tabletalk-red.json');
+// RED baseline hashes live in the evidence dir (checked in); the legacy
+// ~/workspace path is kept as a fallback for older runs. (Coordinator
+// repair 2026-10-16: the RED file was generated outside the worktree and
+// went missing after the worker's run, breaking the GREEN re-proof.)
+const REDFILE_EVIDENCE = path.join(__dirname, '..', 'evidence', '2026-10-16', 'tabletalk-red-baseline.json');
+const REDFILE_LEGACY = path.join(process.env.HOME || '/home/hatch', 'workspace', 'tabletalk-red.json');
+const REDFILE = fs.existsSync(REDFILE_EVIDENCE) ? REDFILE_EVIDENCE : REDFILE_LEGACY;
 const SRC = path.join(__dirname, '..', 'src', 'js', 'havenGrowth.js');
 
 let pass = 0, fail = 0;
