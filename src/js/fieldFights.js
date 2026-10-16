@@ -94,6 +94,17 @@
         return t.length ? t.join(',') : null;
       } catch (e) { return null; }
     },
+    // trickSummaryFor(f, mid): COUNTERWIRE (2026-10-16) — the TB-path
+    // per-monster trick summary. checkMonsterCounter logs performances
+    // per species (f.trickLogByMid); a trick performed on one species in a
+    // multi-species fight must not attribute to another's kill.
+    trickSummaryFor: function (f, mid) {
+      try {
+        if (!f || !mid) return null;
+        var per = (f.trickLogByMid || {})[mid];
+        return (per && per.length) ? per.join(',') : null;
+      } catch (e) { return null; }
+    },
     // villagerTrickAction(vid, mdef, fctx) -> {type, why} or null
     // COUNTER EXECUTION (2026-10-13): the village knows this beast's trick —
     // perform it. Same beats the player gets, same costs, same caps (parity,

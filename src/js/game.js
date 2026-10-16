@@ -30399,9 +30399,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // COUNTERWIRE (2026-10-16): TB kill attribution. The trick was
         // PERFORMED whether or not it was already known — discovery is
         // one-time, performance is per-fight. Log the performance BEFORE the
-        // known-check (which only gates discovery). Fight-local only (f is
+        // known-check (which only gates discovery). Per-MONSTER (f.trickLogByMid)
+        // — a fight can hold several species and a trick performed on one
+        // must not attribute to another's kill. Fight-local only (f is
         // discarded at tbEnd); det-gate verified byte-identical trajectories.
-        try { if (hit) { (f.trickLog || (f.trickLog = [])).push(ctr.kind); } } catch (e) {}
+        try { if (hit) { var _tlbm = f.trickLogByMid || (f.trickLogByMid = {}); (_tlbm[mid] || (_tlbm[mid] = [])).push(ctr.kind); } } catch (e) {}
         if (!hit) return false;
         if ((this.state.monsterCounters || {})[mid]) return false; // known already
         return this.discoverMonsterCounter(mid, ev.via || 'trick');
@@ -40283,7 +40285,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // no detail). Channel stays 'player' — the kill happened in the
             // scholar's TB combat path; per-fighter last-hit attribution in
             // TB (companion-killer quirk) remains an open blank.
-            this.recordWaveKill(m.mdef.id, this.villagerId, 'player', this.trickSummary ? this.trickSummary(f) : null);
+            this.recordWaveKill(m.mdef.id, this.villagerId, 'player', this.trickSummaryFor ? this.trickSummaryFor(f, m.mdef.id) : null);
           }
         }
       }
