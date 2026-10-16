@@ -118,15 +118,16 @@
     // terms_of_service examine/loophole, callback farewell, ad_break look-away,
     // strike meet-demand, suburb leave, eulogy contradict, algorithm tank,
     // congregation argue, nielsen fight-boring, spoiler prone, network_note
-    // bad-note.
+    // bad-note; APEXHOOK (2026-10-16): eater poison, influencer focus_followers,
+    // audit inefficient, reunion improvise (wait:reunion-novel), editor
+    // continuity, cancellation offscript.
     // UN-ACTUABLE: move_windup/move_x2/sidestep/keep_distance (need grid),
     // strike_windup/strike_recovery/strike_first (need telegraph state),
     // strike_nonhead (needs segments), fresh_weapon (needs mid-fight swap),
     // wait vs heckler/moderator (shame/mute not in field model),
     // blindside/face_it/eyes (no shadow-side/facing/called-shots off-screen),
-    // eater/influencer/audit/reunion/cancellation/editor/rerun/timeslot/finale/
-    // finale_crew/finale_opening (need poison/adds/audience/journal/abilities/
-    // venue/sacrifice — documented in evidence/2026-10-16/sim-counterwire.md).
+    // rerun/timeslot/finale/finale_crew/finale_opening (need journal/venue/
+    // sacrifice — documented in evidence/2026-10-16/sim-counterwire.md).
     villagerTrickAction: function (vid, mdef, fctx) {
       try {
         var mid = mdef.id;
@@ -262,6 +263,52 @@
             // memo 'fixes' the enemy into uselessness on the next buff note.
             return { type: 'bad_note', why: 'networknote-badnote' };
           }
+          // ---- APEXHOOK (2026-10-16): the apex-killer subset. The 0815Z
+          // counterwire arm left these knowledge-only ("no abstract-model
+          // hook"); the apexpredators diagnostic named them the teeth
+          // killing villages. Each gate is canon-faithful from the
+          // species' weaknesses + signature mechanics.
+          if (mid === 'eater' && this.villagerHasSpoiledFood && this.villagerHasSpoiledFood(vid)) {
+            // Poison the meal — it can't tell good food from bad. Feed it
+            // the spoiled meal and it vomits out of the fight. Fresh food
+            // would just feed it (the gate refuses: no spoiled, no trick).
+            return { type: 'poison', why: 'eater-poison' };
+          }
+          if (mid === 'influencer') {
+            // Kill the followers first — each focus takes one fan-creature
+            // out, shrinking the Ratio buff (consumed in sigW4FieldMonster).
+            var _inFol = 0;
+            try {
+              var _st4i = rec.sigW4 || {};
+              _inFol = Math.max(0, Math.min(4, Math.floor(fctx.round / 2)) - (_st4i.inFolKilled | 0));
+            } catch (e) {}
+            if (_inFol > 0) return { type: 'focus_followers', why: 'influencer-followers' };
+          }
+          if (mid === 'audit' && (fctx.round % 3 === 0)) {
+            // Be inefficient ON PURPOSE — audit day. Deliberate jank: the
+            // clipboard finds nothing to tax (consumed in sigW4FieldMonster).
+            return { type: 'inefficient', why: 'audit-jank' };
+          }
+          if (mid === 'reunion') {
+            // Do something you have never done — novelty breaks the mirror.
+            // When the strikes are about to wear thin (2 thrown, last was a
+            // strike), improvise instead of throwing the weakened third.
+            var _rStrikes = rec.strikesThrown | 0;
+            var _rAk = rec.actionKinds || [];
+            var _rLast = _rAk.length ? _rAk[_rAk.length - 1] : 'strike';
+            if (_rStrikes >= 2 && _rLast === 'strike') return { type: 'wait', why: 'reunion-novel' };
+          }
+          if (mid === 'editor' || mid === 'cancellation') {
+            // Contradict yourself / go off-script — break the pattern. When
+            // the last two actions were both strikes (a script forming),
+            // do something unexpected instead.
+            var _pAk = rec.actionKinds || [];
+            if (_pAk.length >= 2 && _pAk[_pAk.length - 1] === 'strike' && _pAk[_pAk.length - 2] === 'strike') {
+              return mid === 'editor'
+                ? { type: 'continuity', why: 'editor-continuity' }
+                : { type: 'offscript', why: 'cancellation-offscript' };
+            }
+          }
         }
         return null;
       } catch (e) { return null; }
@@ -288,6 +335,46 @@
         }
         return false;
       } catch (e) { return false; }
+    },
+    // villagerHasSpoiledFood(vid): honest spoiled-food check for the eater's
+    // 'poison the meal' trick — mirrors villagerHasFood's kcalEach>0 test,
+    // but the meal must be SPOILED (isSpoiled). The eater can't tell good
+    // food from bad, but the poison has to be IN the meal — fresh food just
+    // feeds it.
+    villagerHasSpoiledFood: function (vid) {
+      try {
+        var vp = ((this.data.villagers || []).find(function (x) { return x.id === vid; }) ||
+                  (this.data.background_survivors || []).find(function (x) { return x.id === vid; })) || {};
+        var items = vp.items || [];
+        for (var i = 0; i < items.length; i++) {
+          var ent = items[i];
+          if (!ent || typeof ent === 'string') continue;
+          if ((ent.kcalEach || 0) > 0 && this.isSpoiled && this.isSpoiled(ent)) return true;
+        }
+        return false;
+      } catch (e) { return false; }
+    },
+    // villagerSpendSpoiledFood(vid): consume 1 unit of spoiled food.
+    // Returns the food name or null.
+    villagerSpendSpoiledFood: function (vid) {
+      try {
+        var vp = null;
+        var vl = this.data.villagers || [];
+        for (var vi = 0; vi < vl.length; vi++) if (vl[vi].id === vid) vp = vl[vi];
+        if (!vp) { var bs = this.data.background_survivors || []; for (var bi = 0; bi < bs.length; bi++) if (bs[bi].id === vid) vp = bs[bi]; }
+        if (!vp || !vp.items) return null;
+        for (var i = 0; i < vp.items.length; i++) {
+          var ent = vp.items[i];
+          if (!ent || typeof ent === 'string') continue;
+          if ((ent.kcalEach || 0) > 0 && this.isSpoiled && this.isSpoiled(ent)) {
+            var nm = ent.name || 'spoiled food';
+            ent.units = (ent.units || 1) - 1;
+            if (ent.units <= 0) vp.items.splice(i, 1);
+            return nm;
+          }
+        }
+        return null;
+      } catch (e) { return null; }
     },
     // villagerSpendFood(vid): consume 1 unit of the first food found.
     // Returns the food name or null.
@@ -964,7 +1051,13 @@
             }
             if (gpOut && gpOut.consumed) {
               // the verb was the action this round (narrated in fieldAct)
+              // APEXHOOK (2026-10-16): track the verb for the editor/
+              // cancellation pattern checks.
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
             } else if (trickAct) {
+              // APEXHOOK (2026-10-16): track the trick verb for the editor/
+              // cancellation pattern checks (a trick is never 'strike').
+              try { (rec.actionKinds || (rec.actionKinds = [])).push(trickAct.type); } catch (e) {}
               // KILL ATTRIBUTION (2026-10-13): per-run trick-execution tally.
               // Non-persisted (Game._trickTally), gated with _attrKills — never
               // touches RNG, logic, or save state.
@@ -1014,6 +1107,12 @@
                   // the hook already converts dealing nothing into -6
                   // ratings/round; the eye closes at 0.
                   rec.log.push('R' + round + ': ' + vName + ' does the smallest, dullest thing. Somewhere, a ratings graph sags. (Fighting boring.)');
+                } else if (trickAct.why === 'reunion-novel') {
+                  // REUNION (apexhook): do something you have never done.
+                  // Novelty breaks the mirror — it has nothing to wear. The
+                  // strike count resets; the worn-thin strikes are forgotten.
+                  rec.strikesThrown = 0;
+                  rec.log.push('R' + round + ': ' + vName + ' does something they have never done — stands on one foot and recites a poem mid-fight. The Reunion falters; it has nothing to wear. (Novelty.)');
                 } else {
                   rec.trickStill = 1; // buffering: it aims where you'll be — whiff
                   rec.log.push('R' + round + ': ' + vName + ' stands perfectly still. Gives it nothing to predict.');
@@ -1101,12 +1200,49 @@
                 // (consumed in sigW5FieldMonster).
                 rec.trickBadNote = 1; rec.badNotePlanted = 1;
                 rec.log.push('R' + round + ': ' + vName + ' leans to the memo: \u2018the wolf should be SMALLER.\u2019 It writes it down.');
+              } else if (trickAct.type === 'poison') {
+                // EATER (apexhook): poison the meal. It can't tell good food
+                // from bad — it gorges on the spoiled meal and VOMITS out of
+                // the fight. Non-lethal by design (the trick is the meal,
+                // not the kill).
+                var _pfood = (this.villagerSpendSpoiledFood ? this.villagerSpendSpoiledFood(vid) : null) || 'spoiled meat';
+                rec.outcome = 'mFlee';
+                rec.log.push('R' + round + ': ' + vName + ' hurls ' + _pfood + ' — rancid, crawling. The Eater gorges, gags, and VOMITS out of the fight. (Poisoned meal.)');
+                break;
+              } else if (trickAct.type === 'focus_followers') {
+                // INFLUENCER (apexhook): kill the followers first. The
+                // villager spends the round hunting fan-creatures — each
+                // focus takes one out, shrinking the Ratio buff (consumed
+                // in sigW4FieldMonster via st.inFolKilled).
+                var _st4f = rec.sigW4 || (rec.sigW4 = {});
+                _st4f.inFolKilled = (_st4f.inFolKilled | 0) + 1;
+                rec.log.push('R' + round + ': ' + vName + ' ignores the ring light and hunts the followers — a phone clatters, a fan-creature drops. (' + _st4f.inFolKilled + ' down.)');
+              } else if (trickAct.type === 'inefficient') {
+                // AUDIT (apexhook): be inefficient ON PURPOSE. Deliberate,
+                // visible jank on audit day — the clipboard finds nothing to
+                // tax. Clears any pending tax; the flag is consumed in
+                // sigW4FieldMonster.
+                rec.trickInefficient = 1;
+                rec.auditTaxRounds = 0;
+                rec.log.push('R' + round + ': ' + vName + ' is deliberately inefficient — fumbles the grip, dawdles, does everything the slow way. (Nothing to tax.)');
+              } else if (trickAct.type === 'continuity') {
+                // EDITOR (apexhook): contradict yourself — break the cut. Do
+                // something utterly unexpected so the film doesn't match; the
+                // scissors can't cut cleanly (consumed in the strike block
+                // via rec.actionKinds).
+                rec.log.push('R' + round + ': ' + vName + ' does something utterly unexpected — mid-fight, inexplicable. The film strips flutter, confused. (Continuity error.)');
+              } else if (trickAct.type === 'offscript') {
+                // CANCELLATION (apexhook): go off-script. Improvise — use the
+                // round in a way never intended. There is no script to cancel
+                // (consumed in sigW5FieldMonster via rec.actionKinds).
+                rec.log.push('R' + round + ': ' + vName + ' goes off-script — improvises, wild and unplanned. There is nothing to cancel.');
               }
             } else if (!abMedicated && vHasAb('field_medicine') && vHp > 0 && vHp < vHpMax * 0.6) {
               abMedicated = true;
               var _mh = Math.min(20, vHpMax - vHp);
               vHp += _mh;
               rec.log.push('R' + round + ': ' + vName + ' stops mid-fight and binds the wound — field medicine, +' + _mh + ' HP.');
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('heal'); } catch (e) {}
             // ABILITY — PATIENT AIM (take_aim): the patient hunter's call.
             // Full health, fresh monster: spend this turn going still. The
             // next strike is 2.5x and cannot miss — the exposure is the
@@ -1114,6 +1250,7 @@
             } else if (!abAimed && vHasAb('patient_aim') && !abAim && vHp >= vHpMax && lead.hp > lead.maxHp * 0.5) {
               abAimed = true; abAim = true;
               rec.log.push('R' + round + ': ' + vName + ' goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)');
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('aim'); } catch (e) {}
             } else {
               var vd = lroll([4 + wb, 8 + wb]); // tactical formula, verbatim
               var abNote = '';
@@ -1137,6 +1274,40 @@
               if (!abDebtSettled && vHasAb('trade_of_blows') && abLastRoundTaken > 20) {
                 abDebtSettled = true; vd = Math.round(vd * 1.5); abNote += ' (debt settled 1.5x)';
               }
+              // APEXHOOK (2026-10-16): the apex-trick villager-damage effects.
+              // The sigW4/sigW5 ports arm flags on the rec; the effects land
+              // HERE, on the villager's strike (their "best trick") — the
+              // honest port of the TB mechanics. Defensive disruptions, never
+              // damage buffs (parity).
+              // EDITOR: the cut — the swing hits the cutting-room floor. But
+              // a villager who did something contradictory (last action not a
+              // strike) breaks continuity — the scissors can't cut cleanly.
+              if (rec.editorCuts) {
+                rec.editorCuts = 0;
+                var _akE = rec.actionKinds || [];
+                var _lastE = _akE.length ? _akE[_akE.length - 1] : 'strike';
+                if (_lastE !== 'strike') {
+                  rec.log.push('R' + round + ': CUT — but the film doesn\u2019t match. ' + vName + ' did something unexpected; the scissors can\u2019t cut cleanly. (Continuity error.)');
+                } else {
+                  vd = 0;
+                  rec.log.push('R' + round + ': CUT — ' + vName + '\u2019s swing hits the cutting-room floor. It never happened.');
+                }
+              }
+              // CANCELLATION: under review — the tricks are un-taught.
+              if (rec.cancelStrip) { vd = Math.round(vd * 0.7); abNote += ' (under review — un-taught)'; }
+              // AUDIT: the tax — best trick at half strength.
+              if ((rec.auditTaxRounds | 0) > 0) { rec.auditTaxRounds--; vd = Math.round(vd / 2); abNote += ' (audited — half strength)'; }
+              // REUNION: the mirror — repeated strikes wear thin (TB:
+              // 0.85^(n-2) for the nth strike, n>=3). Novelty (the
+              // wait:reunion-novel trick) resets the count.
+              if (mdef.id === 'reunion' && (rec.strikesThrown | 0) >= 3) {
+                vd = Math.max(1, Math.round(vd * Math.pow(0.85, (rec.strikesThrown | 0) - 2)));
+                abNote += ' (mirrored — worn thin)';
+              }
+              // APEXHOOK: track the strike for the reunion mirror + the
+              // editor/cancellation pattern checks.
+              try { (rec.actionKinds || (rec.actionKinds = [])).push('strike'); } catch (e) {}
+              rec.strikesThrown = (rec.strikesThrown | 0) + 1;
               if (gpF) { try { var _vd0 = vd; vd = GPf.fieldStrike(gpF, vd, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound })); if (vd !== _vd0) abNote += ' (x' + (vd / Math.max(1, _vd0)).toFixed(1) + ')'; } catch (e) { console.warn('[godpath] fieldStrike', e); } }
               lead.hp -= vd; rec.mDealt += vd;
               if (lead.hp <= 0) lead.alive = false;

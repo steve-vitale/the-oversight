@@ -1355,27 +1355,47 @@
       let total = (typeof ctx.total === 'number') ? ctx.total : 0;
       const vName = ctx.vName || 'Someone';
       if (id === 'cancellation') {
-        // the stamp descends 3 rounds, then falls: the villager's tricks
-        // get un-taught — their damage drops 30% for the rest of the fight.
+        // APEXHOOK (2026-10-16): HONEST PORT of the TB mechanic (fixes the
+        // inversion filed as sim-findings #408's class — the old branch put
+        // 0.7x on the MONSTER's damage while narrating the villager's tricks
+        // un-taught). The stamp descends 3 rounds, then falls: the VILLAGER's
+        // tricks get un-taught — their damage drops 30% for the rest of the
+        // fight (rec.cancelStrip, consumed in the villager-strike section).
+        // But it can only cancel what's IN the script — a villager who
+        // improvised (the last 3 action kinds not all identical, via the
+        // 'offscript' trick or natural variety) has no script to cancel.
         st.cxN = (st.cxN || 0) + 1;
-        if (st.cxStrip) total = Math.round(total * 0.7);
         if (st.cxN % 4 === 0 && !st.cxStrip) {
-          st.cxStrip = true;
-          rec.log.push('R' + round + ': THE STAMP FALLS on ' + vName + ' — their best tricks: UNDER REVIEW. (Their hits -30% from here.)');
+          var _akC = rec.actionKinds || [];
+          var _last3 = _akC.slice(-3);
+          var _script = _last3.length === 3 && _last3[0] === _last3[1] && _last3[1] === _last3[2];
+          if (_script) {
+            st.cxStrip = true; rec.cancelStrip = 1;
+            rec.log.push('R' + round + ': THE STAMP FALLS on ' + vName + ' — their best tricks: UNDER REVIEW. (Their hits -30% from here.)');
+          } else {
+            rec.log.push('R' + round + ': THE STAMP FALLS — on empty air. ' + vName + ' has no script to cancel. (Off-script.)');
+          }
         } else if (!st.cxStrip) {
           rec.log.push('R' + round + ': the stamp descends over ' + vName + ' (' + (st.cxN % 4) + '/3). Red ink.');
         }
         return total;
       }
       if (id === 'editor') {
-        // every 3rd round the scissors cut the villager's swing — it never
-        // happened. Allies cut from the floor walk back in on their own.
+        // APEXHOOK (2026-10-16): HONEST PORT of the TB mechanic (fixes the
+        // inversion filed as sim-findings #408 — the old branch zeroed the
+        // MONSTER's damage while narrating the villager's swing cut). Every
+        // 3rd round the scissors cut the VILLAGER's swing — it never happened
+        // (rec.editorCuts, consumed in the villager-strike section: vd=0).
+        // The film strips show the swing coming a round ahead — a villager
+        // who does something contradictory (last action not a strike, via the
+        // 'continuity' trick or natural variety) breaks continuity and the
+        // cut can't land cleanly.
         st.edN = (st.edN || 0) + 1;
         if (st.edN % 3 === 0) {
-          rec.log.push('R' + round + ': CUT — ' + vName + '\'s swing hits the cutting-room floor. It never happened.');
-          return 0;
+          rec.editorCuts = 1;
+          rec.log.push('R' + round + ': the scissors poise — ' + vName + '\'s swing is measured for the cut.');
         }
-        if (st.edN % 3 === 2) rec.log.push('R' + round + ': the film strips show ' + vName + '\'s swing, next. (A round to do something about it.)');
+        else if (st.edN % 3 === 2) rec.log.push('R' + round + ': the film strips show ' + vName + '\'s swing, next. (A round to do something about it.)');
         else rec.log.push('R' + round + ': the editor\'s scissors snip — measuring ' + vName + '.');
         return total;
       }

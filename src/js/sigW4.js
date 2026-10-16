@@ -887,15 +887,46 @@
         say(this, '🐀 The Strike posts demands — ' + vName + ' scabs through the shutdown, half strength.');
         total = Math.round(total * 0.5);
       } else if (id === 'influencer') {
-        var fol = Math.min(4, Math.floor(round / 2));
-        say(this, '📱 The Influencer\'s ' + fol + ' followers sharpen the Ratio against ' + vName + '.');
-        total += fol * 6;
+        // APEXHOOK (2026-10-16): a villager who knows the trick hunts the
+        // followers first — each 'focus_followers' trick action kills one
+        // (st.inFolKilled, set in the fieldFight resolution). The buff
+        // shrinks; at zero followers it's just a person with good lighting.
+        var fol = Math.max(0, Math.min(4, Math.floor(round / 2)) - (st.inFolKilled | 0));
+        if (fol > 0) {
+          say(this, '📱 The Influencer\'s ' + fol + ' followers sharpen the Ratio against ' + vName + '.');
+          total += fol * 6;
+        } else {
+          say(this, '📱 The Influencer stands alone — no followers left. Just a person with good lighting.');
+        }
       } else if (id === 'audit' && round % 3 === 0) {
-        say(this, '🧾 Audit day — ' + vName + '\'s best trick is taxed. Half strength.');
-        total = Math.round(total * 0.5);
+        // APEXHOOK (2026-10-16): HONEST PORT of the TB mechanic (fixes the
+        // inversion filed as sim-findings #408 — the old branch halved the
+        // MONSTER's damage while narrating the villager's trick taxed).
+        // Audit day taxes the VILLAGER's best trick (their strike): half
+        // strength for 2 rounds (rec.auditTaxRounds, consumed in the
+        // villager-strike section). A villager who was deliberately
+        // inefficient (rec.trickInefficient, the 'inefficient' trick action)
+        // gives the clipboard nothing to tax.
+        if (rec.trickInefficient) {
+          rec.trickInefficient = 0;
+          say(this, '🧾 Audit day — ' + vName + ' is deliberately, visibly inefficient. The clipboard finds nothing to tax.');
+        } else {
+          say(this, '🧾 Audit day — ' + vName + '\'s best trick is taxed. Half strength.');
+          rec.auditTaxRounds = 2;
+        }
       } else if (id === 'reunion') {
-        say(this, '👥 The Reunion wears ' + vName + '\'s own moves — the familiar ones land soft.');
-        total = Math.round(total * 0.8);
+        // APEXHOOK (2026-10-16): the mirror (replaces the 0.8x placeholder
+        // that softened the monster — the TB mechanic wears the VILLAGER's
+        // repeated verbs thin). The weakening lands in the villager-strike
+        // section (0.85^(n-2) on the nth strike, n>=3, verbatim from the TB
+        // damage wrap); this branch narrates the wearing. Novelty (the
+        // wait:reunion-novel trick) resets the count — it has nothing to wear.
+        var _rS = (rec.strikesThrown | 0);
+        if (_rS >= 2) {
+          say(this, '👥 The Reunion wears ' + vName + '\'s strikes — the familiar ones land soft. (Do something you have never done.)');
+        } else {
+          say(this, '👥 The Reunion watches ' + vName + ' — learning their moves.');
+        }
       } else if (id === 'suburb' && round % 2 === 1) {
         say(this, '🏘️ The Suburb hums comfort at ' + vName + ' — Property Tax for resisting.');
         total += lroll([35, 55]);
