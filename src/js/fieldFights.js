@@ -5,6 +5,7 @@
 //   - fieldFight(vid, mdef, m, opts)
 //   - settleFieldFight(vid, rec, cause) -> applies an NPC fight health result once; preserves gross damage for logs
 // rules:
+//   - market_beam_weakness: pass the actual selected attack and its beam component to fieldIncoming; Gilded Guard can stop physical antlers, never beam damage. No extra RNG. (code: fieldFight)
 //   - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). Villager initiative uses villagerSpeed (age, wounds, temperament — 2..4), not a flat 3. (code: fieldFight, 2026-10-13)
 //   - volley: a ranged weapon + real ammo opens the fight at range before round 1 — shots = min(ammo, clamp(1+floor(range/monster speed),1,4)), each shot costs 1 ammo, hit chance 0.85-0.06xrange (+tracking), damage lroll([4+wbR,8+wbR]) on the lead; the volley can drive the pack off (mBreak) or drop the lead (vKill). Supersedes the 2026-10-09 "range is meaningless" rule. (code: fieldFight, blitz-combatstats 2026-10-13)
 //   - morale: flee is driven by wounds + bravery + temperament, never a flat roll. (code: fieldFight)
@@ -655,7 +656,7 @@
               // MULTI-MOVE (2026-10-12): the monster's real kit, not just the
               // legacy slot — villagers face the same varied fight. Range
               // conditions are abstracted off-screen; hp-gates are honored.
-              var rDmgRange = dmgRange, rAtkName = atkName;
+              var rDmgRange = dmgRange, rAtkName = atkName, rAttack = mdef.attack || {};
               try {
                 var _kit = (mdef.attacks && mdef.attacks.length ? mdef.attacks : []).filter(function(a){ return a && a.name && a.damage; });
                 if (_kit.length > 1) {
@@ -671,7 +672,7 @@
                   for (_k = 0; _k < _pool.length; _k++) _tot += (_pool[_k].weight || 1);
                   var _r = RR() * _tot, _c = _pool[0];
                   for (_k = 0; _k < _pool.length; _k++) { _r -= (_pool[_k].weight || 1); if (_r <= 0) { _c = _pool[_k]; break; } }
-                  rAtkName = _c.name;
+                  rAtkName = _c.name; rAttack = _c;
                   rDmgRange = (_c.damage && _c.damage.length === 2) ? _c.damage : dmgRange;
                 }
               } catch (e) {}
@@ -773,7 +774,11 @@
                 rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
               }
               if (!hittingAlly && gpF && total > 0) {
-                try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round })); } catch (e) { console.warn('[godpath] incoming', e); }
+                // Preserve the selected attack, not just the species' default.
+                // The deer adds a separate physical antler hit to its beam.
+                // Coin shields may stop that part, never the light itself.
+                var beamDamage = /beam|sweep/i.test(String((rAttack.pattern || {}).type || '')) || /beam|\bray\b|laser|glare|searchlight/i.test(rAtkName) ? Math.min(d, total) : 0;
+                try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round, attack: rAttack, beamDamage: beamDamage })); } catch (e) { console.warn('[godpath] incoming', e); }
               }
               if (!hittingAlly && varmor > 0 && total > 0) {
                 // ARMOR (Steve 2026-10-09): diminishing-returns curve,

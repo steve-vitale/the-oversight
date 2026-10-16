@@ -142,3 +142,5 @@ Job -> track -> **class** -> **god** -> Table.
    Prepared 595-case/70-choice proofs, actual mobile play and matched natural
    screens are in `evidence/2026-10-15/coda-audit.md`. Optional bespoke path
    beats/overrides remain optional; narrative feel needs Steve's eyes.
+
+Scale caller inventory (2026-10-15): `SCALE-AUDIT.md` maps all forty promised contexts and distinguishes inherited tactical hooks from strategic/contest gaps. The off-screen Market God beam weakness is corrected with real mixed/physical controls; see `../../evidence/2026-10-15/market-beam-audit.md`. This does not complete the scale or eight remaining deed requirements.

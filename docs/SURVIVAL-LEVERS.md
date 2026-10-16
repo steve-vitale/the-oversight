@@ -75,3 +75,11 @@ region and flags; contract/observer; all outcome movements and coverage; causal
 traces and human playtest; decision/reason; unresolved questions and next test.
 
 Relay timing is a survival lever: `src/js/relay-ext.js` charges the actual bearer once per calendar day, advances service/unlocks and schedules System conversations on that cadence. `commsTick` still runs each part for other communications. Saved per-person/day receipts prevent reload/reclaim charges; a different bearer owes their own day. Legacy progress is preserved rather than retroactively divided or refunded.
+
+## God-scale protection contracts
+
+Gilded Guard (`godhood.js`, `godverbs.js`): four coins with 50 damage capacity each; one regenerates at dawn. It buys protection against physical hits, not beams. The field caller now passes the selected attack and the beam component rather than treating a beam-plus-antlers total as all shieldable. These are existing values, not new balance targets. See `godpath/SCALE-AUDIT.md` for promised scale effects and unverified parity/contest behavior.
+
+2026-10-15 decision: retain the existing beam weakness across tactical and field fights. Prepared real field calls prove beam bypass and retained antler protection; no beam strength, armor, coin capacity or regeneration price changes. See `../evidence/2026-10-15/market-beam-audit.md` for matched panels and coverage limits. Reduced NPC protection here is a contract correction requiring affected-cohort review, not a win-rate target or evidence that every god is balanced.
+
+Measured guard outcomes: all 256 standard campaign rows/states remain identical, but none samples a Market God. In the separate prepared 64-pair drone cohort, returned field deaths are 16 -> 18 (exploratory paired interval for rate delta [-0.140625, 0.203125]); mean ending HP 36.89 -> 21.125. The physical wolf control is identical. Early learn-first withdrawal still bypasses noFlee in the existing model; these are not settled campaign deaths. Keep that issue and affected-build balance open rather than tuning to the old death count.

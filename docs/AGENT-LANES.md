@@ -183,3 +183,5 @@ Relay clock correction (2026-10-15): Codex takes the narrow relay-ext.js
 per-person/day upkeep guard. The existing comms part clock remains unchanged;
 old progress/unlocks are preserved. Measure this against the completed office
 lifetime candidate, separately from prices and policy changes.
+
+Market scale/parity correction (2026-10-15): Codex takes the narrow fieldFights.js selected-attack context and godverbs.js off-screen Gilded Guard weakness. Actual beams bypass coins as they already do tactically; separate physical antlers remain shieldable. No beam damage/coin price or region/nomad change.

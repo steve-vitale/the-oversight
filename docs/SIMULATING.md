@@ -456,3 +456,29 @@ The Relay service probe also records raw grounding, accumulated service,
 per-person charged day and pending System conversation at actual snapshots.
 These fields diagnose clock/opportunity changes; they are not a new progress
 receipt or a substitute for matching the original campaign row and state hash.
+
+
+## Prepared Market guard cohort
+
+When standard campaigns do not sample a Market God, isolate the protection
+contract without claiming full-build viability:
+
+```text
+node scripts/godpath/probe-market-guard.js --root <root> --panel <matching-standard-panel.json.gz> --n 64 --par 4 --out <guard.json.gz>
+```
+
+The panel binds root source, Node, flags and default Columbus origin. Each
+seed/monster gets one separate shared harness and private combat RNG. The NPC
+has prepared godhood, 100 HP, 10 hunger, no abilities/skills and ordinary
+generated equipment; real monster data rolls a fresh full-health body. Retain
+both roots' reports, probe/shared-kit sources and initial-state hashes. Reject
+nonfinite fight outcomes or mismatched starting states. Compare drone and
+physical wolf outcomes, HP, wounds, guard depletion and food, not a single
+win rate. `mFlee`, `vFlee`, `vDie` and `vKill` are distinct field outcomes.
+
+The result precedes the normal caller's later wound settlement and is not
+campaign survival. `opts.noFlee=true` still permits an existing learn-first
+withdrawal in this engine; retain that actual result and investigate its
+sealed-contest contract separately. Do not replace it with death or victory.
+The probe checks root/probe stability and fails on stderr. See the dated
+market-beam audit for exact inputs and these limits.

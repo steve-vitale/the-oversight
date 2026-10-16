@@ -656,6 +656,7 @@ Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, re
 **Provides:** fieldFight(vid, mdef, m, opts), settleFieldFight(vid, rec, cause) -> applies an NPC fight health result once; preserves gross damage for logs
 
 **Rules:**
+- market_beam_weakness: pass the actual selected attack and its beam component to fieldIncoming; Gilded Guard can stop physical antlers, never beam damage. No extra RNG. (code: fieldFight)
 - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). Villager initiative uses villagerSpeed (age, wounds, temperament — 2..4), not a flat 3. (code: fieldFight, 2026-10-13)
 - volley: a ranged weapon + real ammo opens the fight at range before round 1 — shots = min(ammo, clamp(1+floor(range/monster speed),1,4)), each shot costs 1 ammo, hit chance 0.85-0.06xrange (+tracking), damage lroll([4+wbR,8+wbR]) on the lead; the volley can drive the pack off (mBreak) or drop the lead (vKill). Supersedes the 2026-10-09 "range is meaningless" rule. (code: fieldFight, blitz-combatstats 2026-10-13)
 - morale: flee is driven by wounds + bravery + temperament, never a flat roll. (code: fieldFight)

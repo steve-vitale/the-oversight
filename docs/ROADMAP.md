@@ -558,3 +558,7 @@ the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
 | Kin canon | `docs/KIN.md` (the Taken are off-world; scattered kin are on Earth; both exist) |
 
 2026-10-15 Relay clock follow-up: actual daily upkeep/service is guarded per person/day, with legacy progress retained. See `../evidence/2026-10-15/relay-clock-audit.md`. Independent 64-seed panels remain mixed: investigate caregiver late community losses and increased capable wins; no automatic maximize-wins tuning. Fixed-window/competing-ending tooling is available in `scripts/balance-windows.js`. Eight other authored deeds and the broader roadmap remain open.
+
+God-scale audit (2026-10-15): `docs/godpath/SCALE-AUDIT.md` records all forty promised contexts, current callers and unproved strategic/contest behavior. The field Market God guard now shares the existing beam weakness while retaining physical antler protection; evidence in `../evidence/2026-10-15/market-beam-audit.md`. Natural coverage and broader parity/scale completion remain open.
+
+Confirmed follow-up from the Market guard cohort: fieldFights.js learn-first withdrawal ignores `opts.noFlee` even after narrating a closed gate. Seed 2 at 3 HP returns vFlee in the prepared drone cohort. Preserve these old raw outcomes, then repair and measure this sealed-contest contract separately; do not interpret arena escape as a death or a win. The real source caller and full records are in market-beam-audit.md / stress reports.

@@ -1139,7 +1139,14 @@
             }
           }
           if (G.god === 'market_god' && S.Godhood && S.Godhood.guardAbsorb) {
-            const gr = S.Godhood.guardAbsorb({ godhood: vGodRec(G.vid) }, total);
+            // Tactical hits already carry _gvBeamHit. Field fights carry
+            // the actual beam component explicitly, including mixed antlers.
+            const beam = Math.max(0, Math.min(total, c.beamDamage || 0));
+            if (beam > 0 && !G.gv.beamSaid) {
+              G.gv.beamSaid = true;
+              c.log.push('  the light passes straight through the coins. Wealth does not stop a beam. (Gilded Guard)');
+            }
+            const gr = S.Godhood.guardAbsorb({ godhood: vGodRec(G.vid) }, total - beam);
             if (gr.absorbed > 0) { c.log.push('  coins flash: the Gilded Guard takes ' + gr.absorbed + '.'); total -= gr.absorbed; }
           }
         }
