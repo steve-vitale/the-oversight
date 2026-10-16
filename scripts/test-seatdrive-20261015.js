@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 // test-seatdrive-20261015.js — proof for the seat-taking driver
-// (flesh-out loop ARM 3, 2026-10-15, sim-seatdrive).
+// (flesh-out loop ARM 3, 2026-10-15, sim-seatdrive; GATE FLIPPED
+// 2026-10-16, sim-seatdefault: default-ON, SEATDRIVE=0 opts out).
 //
 // scripts/policies/seatdrive.js is the missing DRIVER the wincensus named:
 // on current master the table sits only via tableTakeSeat() (Steve
@@ -9,14 +10,18 @@
 // win-side layers (winpursuit drain + windefer discipline) operate on a
 // modal that never exists (15/16 invitations, 0 sittings, wins 0/16).
 //
-// REAL-RED: constructed invited-but-unseated fixtures against the REAL
-// engine (no stubs — tablePreview/tableTakeSeat/tableScene all run):
-//   D1 gate-off: the wrapped policy's daily takes NO seat (the census
+// 2026-10-16 GATE FLIP (sim-seatdefault): default-ON. The old det-gate
+// pinned "unset delegates byte-identically"; the new truth is pinned
+// below, assertion for assertion:
+//   D1 opt-out: SEATDRIVE=0 on the fixture takes NO seat (the census
 //      finding, reproduced in-fixture). The seat-taken assertion FAILS
 //      here — that failure is the RED.
 //   D2 gate-on: SEATDRIVE=1 on the same fixture construction -> the seat
 //      IS taken (sdSeatTaken=1, tableDone set, the paths modal pending
 //      for the drain). GREEN.
+//   D2b unset: SEATDRIVE unset behaves byte-identically to explicit
+//      SEATDRIVE=1 (default-ON) — the fixture-level form of the
+//      determinism-equivalence primary.
 // Guard classification (#294): exiled and joinedVillage fixtures ->
 // sdGuardRefused=1, sdSeatAttempts=0, no sitting. Scholar-dead fixture ->
 // sdNoScholar=1, no attempt. None of these count as failed attempts.
@@ -127,17 +132,17 @@ async function main() {
       SD.scholarAlive(Game) && SD.canPropose(Game), '');
   }
 
-  // ----- D1: gate OFF — the wrapped daily takes no seat (the RED) -----
+  // ----- D1: opt-out (SEATDRIVE=0) — the wrapped daily takes no seat -----
   {
     const Game = await invitedFixture(22);
-    await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: undefined }), async () => {
+    await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: '0' }), async () => {
       const ctx = {};
       await quietLog(async () => { SD.leadseat.daily(Game, ctx); });
-      ok('D1 gate-off: no sitting without the layer (tableDone stays false)', !seatTakenNow(Game), '');
-      ok('D1 gate-off: no table modal pending', !modalPending(Game), '');
-      ok('D1 gate-off: no seat counters fire', !(ctx.sdSeatTaken || ctx.sdSeatAttempts || ctx.sdPreviewSeen), JSON.stringify(ctx));
-      // The seat-taken assertion FAILS on the unwrapped chain — the RED.
-      ok('D1 RED: seat-taken assertion fails without the driver', (ctx.sdSeatTaken | 0) !== 1, '');
+      ok('D1 opt-out: no sitting with SEATDRIVE=0 (tableDone stays false)', !seatTakenNow(Game), '');
+      ok('D1 opt-out: no table modal pending', !modalPending(Game), '');
+      ok('D1 opt-out: no seat counters fire', !(ctx.sdSeatTaken || ctx.sdSeatAttempts || ctx.sdPreviewSeen), JSON.stringify(ctx));
+      // The seat-taken assertion FAILS on the opted-out chain — the RED.
+      ok('D1 RED: seat-taken assertion fails with the driver off', (ctx.sdSeatTaken | 0) !== 1, '');
     });
   }
 
@@ -159,6 +164,24 @@ async function main() {
         'answers=' + ctx.tableAnswers + ' won=' + !!Game.won);
       ok('D2 gate-on: no guard refusal, no failure', !(ctx.sdGuardRefused || ctx.sdSeatFailed), '');
     });
+  }
+
+  // ----- D2b: unset (default-ON) — byte-identical fixture behavior to SEATDRIVE=1 -----
+  {
+    const mkFixture = async () => invitedFixture(22);
+    const runFixtureDaily = async (env, Game) => {
+      const ctx = {};
+      await withEnv(Object.assign({}, SUBSTRATE, env), async () => {
+        await quietLog(async () => { SD.leadseat.daily(Game, ctx); });
+      });
+      return { ctx, taken: seatTakenNow(Game), kind: ctx.sdSeatKind, attempts: (ctx.sdSeatAttempts | 0) | 0, answers: (ctx.tableAnswers | 0) };
+    };
+    const g1 = await mkFixture(); const r1 = await runFixtureDaily({ SEATDRIVE: '1' }, g1);
+    const g2 = await mkFixture(); const r2 = await runFixtureDaily({ SEATDRIVE: undefined }, g2);
+    ok('D2b unset: seat taken under default-ON', r2.taken === true, 'taken=' + r2.taken);
+    ok('D2b unset: byte-identical fixture outcome to explicit SEATDRIVE=1',
+      r1.taken === r2.taken && r1.kind === r2.kind && r1.attempts === r2.attempts && r1.answers === r2.answers,
+      JSON.stringify({ r1, r2 }));
   }
 
   // ----- guard classification (#294): exiled -----
@@ -204,15 +227,21 @@ async function main() {
     });
   }
 
-  // ----- layerOn honesty -----
+  // ----- layerOn honesty (default-ON as of 2026-10-16) -----
   {
     withEnv({ SEATDRIVE: '1' }, () => ok('layerOn true when SEATDRIVE=1', SD.layerOn() === true, ''));
-    withEnv({ SEATDRIVE: undefined }, () => ok('layerOn false when unset', SD.layerOn() === false, ''));
+    withEnv({ SEATDRIVE: undefined }, () => ok('layerOn true when unset (default-ON)', SD.layerOn() === true, ''));
+    withEnv({ SEATDRIVE: '0' }, () => ok('layerOn false when SEATDRIVE=0', SD.layerOn() === false, ''));
+    withEnv({ SEATDRIVE: 'yes' }, () => ok('layerOn true for other values', SD.layerOn() === true, ''));
   }
 
-  // ----- det-gate: gate-off purity, 16/16 identical trajectories -----
+  // ----- det-gate (2026-10-16: pins the NEW gate truth, assertion for assertion) -----
+  // (a) OPT-OUT PURITY: SEATDRIVE=0 wrapped vs the identical composition
+  //     WITHOUT the wrapper — 16/16 byte-identical trajectories.
+  // (b) DEFAULT-ON EQUIVALENCE (the PRIMARY): unset vs explicit
+  //     SEATDRIVE=1, same wrapper — 16/16 byte-identical trajectories.
   {
-    const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10)) : [11, 22, 33, 44, 55, 66, 77, 88]).filter(Number.isFinite);
+    const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10)) : [181, 292, 403, 514, 625, 736, 847, 958]).filter(Number.isFinite);
     const DAYS = parseInt(process.env.DAYS || '60', 10);
     const PIDS = ['leadfeast', 'belongfeast'];
     const naked = (pid) => pid === 'leadfeast'
@@ -232,18 +261,23 @@ async function main() {
       const r = await quietLog(async () => runDays(Game, w, { days: DAYS, sampleEvery: 1 }));
       return { hashes, days: r.days, endReason: r.endReason };
     }
-    let det = 0, detFails = [];
+    const optoutFails = [], defonFails = [];
     for (const pid of PIDS) {
       for (const seed of SEEDS) {
-        const a = await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: undefined }), () => hashesFor(seed, wrapped(pid)));
-        const b = await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: undefined }), () => hashesFor(seed, naked(pid)));
-        const sameLen = a.hashes.length === b.hashes.length;
-        const same = sameLen && a.hashes.every((h, i) => h === b.hashes[i]);
-        if (same) { det++; }
-        else detFails.push(`${pid} s${seed}: len ${a.hashes.length} vs ${b.hashes.length}`);
+        // (a) opt-out purity: SEATDRIVE=0 wrapped vs naked
+        const a = await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: '0' }), () => hashesFor(seed, wrapped(pid)));
+        const b = await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: '0' }), () => hashesFor(seed, naked(pid)));
+        if (!(a.hashes.length === b.hashes.length && a.hashes.every((h, i) => h === b.hashes[i])))
+          optoutFails.push(`${pid} s${seed}: len ${a.hashes.length} vs ${b.hashes.length}`);
+        // (b) default-ON equivalence (PRIMARY): unset vs explicit '1'
+        const c = await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: undefined }), () => hashesFor(seed, wrapped(pid)));
+        const d = await withEnv(Object.assign({}, SUBSTRATE, { SEATDRIVE: '1' }), () => hashesFor(seed, wrapped(pid)));
+        if (!(c.hashes.length === d.hashes.length && c.hashes.every((h, i) => h === d.hashes[i])))
+          defonFails.push(`${pid} s${seed}: len ${c.hashes.length} vs ${d.hashes.length}`);
       }
     }
-    ok(`det-gate: ${det}/16 identical gate-off trajectories`, detFails.length === 0, detFails.join('; ').slice(0, 200));
+    ok('det-gate (a): opt-out purity 16/16 identical (SEATDRIVE=0 == naked)', optoutFails.length === 0, optoutFails.join('; ').slice(0, 200));
+    ok('det-gate (b) PRIMARY: default-ON equivalence 16/16 identical (unset == SEATDRIVE=1)', defonFails.length === 0, defonFails.join('; ').slice(0, 200));
   }
 
   // ----- SMOKE: one 20d armed run, markers honest -----

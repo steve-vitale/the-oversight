@@ -36,15 +36,21 @@
 // COMPOSITION: withSeatDrive wraps the windefer-wrapped tribfloor base
 // (the same stack the census measured). Seat first at dawn, then the
 // windefer daily drains the modal with the hold discipline, then the base.
-// Env-gated SEATDRIVE=1 (default OFF — unset delegates byte-identically;
-// the proof's det-gate pins that).
+// DEFAULT-ON (2026-10-16, sim-seatdefault): the driver is part of the
+// court's competence now, not an experiment — layerOn() reads
+// process.env.SEATDRIVE !== '0', so unset (or any value but '0') drives
+// the seat, and SEATDRIVE=0 opts OUT to pure delegation. The proof's
+// det-gate pins the opt-out: SEATDRIVE=0 delegates byte-identically to
+// the unwrapped stack, and unset is byte-identical to explicit SEATDRIVE=1.
 //
 // POLICY-SIDE ONLY — zero src/js changes.
 'use strict';
 const TF = require('./tribfloor');
 const WD = require('./windefer');
 
-function layerOn() { return process.env.SEATDRIVE === '1'; }
+// Default-ON (2026-10-16): the driver ships with the stack. SEATDRIVE=0
+// is the only opt-out (pure delegation to the wrapped policy).
+function layerOn() { return process.env.SEATDRIVE !== '0'; }
 
 function gday(Game) { try { return (Game.state.scholar || {}).day || 0; } catch (e) { return 0; } }
 
@@ -121,12 +127,12 @@ function withSeatDrive(base, id, desc) {
 const leadseat = withSeatDrive(
   WD.withWinDefer(TF.leadfeast, 'leadfeast-windefer', 'leadfeast + win-side layers (WINPURSUIT=1 + WINDEFER=1) over the tribfloor base'),
   'leadfeast-windefer',
-  'leadfeast-windefer + seatdrive (SEATDRIVE=1): takes the table seat when the invitation is pending, then the win-side layers drive the modal'
+  'leadfeast-windefer + seatdrive (default-ON; SEATDRIVE=0 opts out): takes the table seat when the invitation is pending, then the win-side layers drive the modal'
 );
 const belongseat = withSeatDrive(
   WD.withWinDefer(TF.belongfeast, 'belongfeast-windefer', 'belongfeast + win-side layers (WINPURSUIT=1 + WINDEFER=1) over the tribfloor base'),
   'belongfeast-windefer',
-  'belongfeast-windefer + seatdrive (SEATDRIVE=1): takes the table seat when the invitation is pending, then the win-side layers drive the modal'
+  'belongfeast-windefer + seatdrive (default-ON; SEATDRIVE=0 opts out): takes the table seat when the invitation is pending, then the win-side layers drive the modal'
 );
 
 module.exports = {
