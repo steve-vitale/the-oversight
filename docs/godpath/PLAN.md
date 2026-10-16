@@ -7,7 +7,15 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
-2026-10-16 care prerequisite: actual NPC Mending planning includes the bearer;
+2026-10-16 Shepherd deed: actual critical recovery of another person, or
+allied Lifeline fatal-fall rescue, followed by both people's later-dawn
+survival. Real camp healer rounds provide a noncombat route. Six authored
+deeds/four proxies now remain; class/payoff/four-magic/day80 gates stay.
+See ../../evidence/2026-10-16/shepherd-deed-audit.md for32 checks, full968,
+natural source-bound cases and mixed23-metric panels. Threshold25% is an
+Agent-authored lever. Broad NPC care payoff/field/army parity remains open.
+
+Earlier2026-10-16 care prerequisite: actual NPC Mending planning includes the bearer;
 the verb uses distinct living present allies. Tactical Lifeline now reaches
 the bearer after their own death-refusal/Phoenix priority. Only known living
 distinct holders count; charges belong to canonical people and survive load,
@@ -82,7 +90,7 @@ Job -> track -> **class** -> **god** -> Table.
 | Subclass verbs (walls, pulls, pushes, swaps, blink, heals, pins, bribes, broadcast, command, stoke, guard, feed camp) | `src/js/godpath.js` (`do` on a data action) | built, 27 new abilities |
 | Class recognition, player + villager, one function | `godpath.js recognizeClass` | built; sheet line in `app.js` |
 | Offers lean to the path | `godpath.js shapeOffers` (player, villager, gift sheets); `villager-build.js buildPathLean` | built |
-| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay, Apex, Ward and Market God; legacy proxies for five remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
+| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay, Apex, Ward, Market God and Shepherd; legacy proxies for four remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
 | Table never reads godhood | `scripts/godpath/ladder.js` | enforced |
 
 ## Checks
@@ -95,8 +103,13 @@ Job -> track -> **class** -> **god** -> Table.
 ## What's left (reconciled 2026-10-15)
 
 1. **Fitting ascension deeds and current gate measurements.** Current authored
-   gates: Unkillable's actual refusal/next dawn, and the Voice's current Relay
-   service. Class age cannot bypass either. Eight legacy replacements remain.
+   gates: Unkillable, Voice, Apex, Ward, Market and Shepherd. Class age cannot
+   bypass them. Four legacy replacements remain. Shepherd adds actual critical
+   care or allied fatal-fall rescue followed by both people's later-dawn
+   survival, including ordinary camp medical rounds. The25% threshold is an
+   Agent-authored data lever, not a new Steve quotation. See the dated
+   shepherd-deed-audit.md for32 checks, full968 and mixed16/64-panel signals.
+   Earlier Relay evidence:
    Relay runtime/phone proofs and matched 16/64-seed panels are in
    `evidence/2026-10-15/relay-deed-audit.md`. The service replay exposed a
    dead predecessor retaining the post and blocking later holders. Office

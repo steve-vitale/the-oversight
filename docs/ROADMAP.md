@@ -9,7 +9,18 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
-Caregiver support prerequisite (2026-10-16): the NPC Mending planner now
+Shepherd care deed (2026-10-16, needs-eyes): actual other-person healing from
+at most25%HP to above25%, or a real allied Lifeline rescue, must be followed
+by both people surviving a later real dawn. Camp healer rounds provide a
+noncombat route; no extra magic slot or fee is required. The threshold is an
+Agent-authored data lever, not a quote from Steve. Class/payoff/four-magic and
+day80 gates remain. Six authored deeds/four proxies now remain. Full968 and
+32 focused checks pass. Both16/64 panels require review; do not compensate
+their mixed survival/class/ending signals with a buff. See
+../evidence/2026-10-16/shepherd-deed-audit.md for all23 metrics and exact
+replays. Garden/reactor questions and broad NPC care parity remain open.
+
+Earlier caregiver support prerequisite (2026-10-16): the NPC Mending planner now
 sees the distinct nearby player; its ally list excludes departed targets.
 Tactical Lifeline can anchor the bearer after personal death refusals, with
 the same living-person eligibility and canonical per-person charge cap.
@@ -632,13 +643,17 @@ post-production requests; legacy missing data remains unknown. Targeted
 of need self-supplied and only eight days where every NPC requests food.
 This does not settle Garden's seven-day threshold, continuous membership or
 the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
-- **Current authored deeds:** five now have real outcomes: Unkillable, Voice,
-  Apex, Ward and Market God. Market requires a completed paid exchange of
+- **Current authored deeds:** six now have real outcomes: Unkillable, Voice,
+  Apex, Ward, Market God and Shepherd. Shepherd requires real critical care
+  or an allied fatal-fall rescue and both people alive at a later dawn;
+  camp healer rounds support noncombat caregivers. See the dated Shepherd
+  audit for mixed gate effects, tests and remaining care parity gaps.
+  Market requires a completed paid exchange of
   food value for delivered nonfood goods; actual living resident seller and
   buyer receive their own first receipt. There is no combat requirement or
   new tier/quantity quota. See ../evidence/2026-10-16/market-exchange-audit.md
   for current measurements, attribution, prepared caller/native proof and
-  limitations. Five proxies remain; Garden/reactor questions are unchanged.
+  limitations. Four proxies remain; Garden/reactor questions are unchanged.
 - **Earlier Ward implementation:** four then had real outcomes: Unkillable, Voice,
   Apex and Undying Ward. Ward requires a real hostile wound carried for
   another known living person, followed by both surviving the fight; an

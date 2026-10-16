@@ -14,6 +14,7 @@
 //   - noteWardCarry(game, fight, actor, ally, wound, sourceKey, via), finishWardRescues(game, fight, result) -> real carried wound and both-person living exit
 //   - finishFieldWardRescue(game, actor, carries, result, ally) -> the same canonical-person protection outcome from actual field diversion
 //   - godpathDeedHint(who) -> objective/progress only for a known class, until ascension
+//   - noteCareRescue(actor, patient, before, after, maxHp, via, scene) -> actual other-person rescue, awaiting both people's survival at a later dawn
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
 //   - shapeOffers(choices, pool, who, opts) -> offers with >=1 on the recognised path (else >=1 on the holder's job path within opts.jobWindow) and distinct roles where possible
@@ -174,7 +175,8 @@
       (isPlayer(who) ? s.health > 0 : ((v.health || {})[vid] == null || v.health[vid] > 0)));
     const now = day == null ? s.day || 0 : day;
     return { complete: !!(rec && living && (!deed.afterDawn || now > rec.day)),
-      observed: !!rec, day: rec ? rec.day : null, hint: deed.hint };
+      observed: !!rec, pending: deed.event === 'care_survived' && !!(v.godpathCareWatch || {})[vid]?.length,
+      day: rec ? rec.day : null, hint: deed.hint };
   }
   function godpathDeedHint(who) {
     const cl = godpathClass(who);
@@ -186,7 +188,7 @@
     if (g && ((g.active || []).includes(god.id) || (g.recognized || {})[god.id])) return null;
     const status = godpathDeedStatus(who, god.id);
     return status.complete ? 'Deed fulfilled. Your build and the day still matter.'
-      : status.observed ? (god.deed.pendingHint || god.deed.hint) : god.deed.hint;
+      : (status.observed || status.pending) ? (god.deed.pendingHint || god.deed.hint) : god.deed.hint;
   }
   // Called only after an actual lethal-hit refusal, never from an ability tap
   // or an XP event. The first receipt is enough; no repeat-use grinding.
@@ -306,6 +308,47 @@
     const id = fighter.kind === 'player' ? game.villagerId : fighter.villagerId;
     const person = id && game.vpOf(id);
     return person && person.id === id && !person.dead ? id : null;
+  }
+  function careLiving(game, id) {
+    const person = id && game.vpOf(id);
+    if (!person || person.id !== id || person.dead) return false;
+    const body = game.tbfight?.fighters.find(f => wardPerson(game, f) === id);
+    if (body && (!body.alive || body.fled || !(body.hp > 0))) return false;
+    return id === game.villagerId ? game.state.scholar.health > 0
+      : ((game.state.village.health || {})[id] ?? 100) > 0;
+  }
+  // Only successful real callers enqueue care. Status reads cannot settle it.
+  function noteCareRescue(game, actor, patient, before, after, maxHp, via, scene) {
+    const s = game.state.scholar, v = game.state.village;
+    const fraction = data()?.paths?.caregiver?.god?.deed?.criticalFraction;
+    if (game.over || actor === patient || !careLiving(game, actor) || !careLiving(game, patient) ||
+        !Number.isFinite(after) || !(after > 0) || !Number.isFinite(maxHp) || !(maxHp > 0)) return;
+    if (via !== 'lifeline' && !(Number.isFinite(before) && before > 0 && before <= maxHp * fraction && after > maxHp * fraction && after > before)) return;
+    if (v.godpathDeeds?.[actor]?.care_survived) return;
+    const watches = v.godpathCareWatch || (v.godpathCareWatch = {}), pending = watches[actor] || (watches[actor] = []);
+    if (!pending.some(r => r.patient === patient && r.day === s.day))
+      pending.push({ patient, day: s.day, before, after, maxHp, via, scene });
+  }
+  function finishCareWatch(game) {
+    const s = game.state.scholar, v = game.state.village, watches = v.godpathCareWatch;
+    if (!watches) return false;
+    let changed = false;
+    for (const [actor, pending] of Object.entries(watches)) {
+      const future = [];
+      for (const r of pending) {
+        if (!(s.day > r.day)) { future.push(r); continue; }
+        changed = true;
+        if (!careLiving(game, actor) || !careLiving(game, r.patient) || v.godpathDeeds?.[actor]?.care_survived) continue;
+        const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+        book.care_survived = { ...r, fulfilledDay: s.day };
+        const last = (game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+        try { game.tele('godpath_deed', { t, who: actor, event: 'care_survived', day: s.day, patient: r.patient, via: r.via, scene: r.scene }); }
+        catch (e) { warn('care deed', e); }
+      }
+      if (future.length && !v.godpathDeeds?.[actor]?.care_survived) watches[actor] = future;
+      else delete watches[actor];
+    }
+    return changed;
   }
   function recordWardRescue(actor, ally, via, scene, wound, day) {
     const s = Game.state.scholar, v = Game.state.village;
@@ -764,6 +807,7 @@
       t.hp = Math.min(t.maxHp, t.hp + base);
       if (t.kind === 'player') { try { Game.state.scholar.health = Math.max(0, t.hp); } catch (e) { warn('heal sync', e); } }
       const healed = t.hp - before;
+      noteCareRescue(Game, wardPerson(Game, p), wardPerson(Game, t), before, t.hp, t.maxHp, 'mending_hands', 'battle');
       if (C.isP) { try { const BA = S.buildarounds; if (BA && BA.onHeal) BA.onHeal(Game, t.key, healed, Math.max(0, base - healed)); } catch (e) { warn('onHeal', e); } }
       const tn = t.kind === 'player' ? 'your' : (t === p ? 'their own' : `${t.name}'s`);
       say(C, `Your hands find ${t.name}'s wound and it closes under them: +${healed} HP. (Mending Hands)`,
@@ -1549,6 +1593,11 @@
         f._lifelineUsedBy[k] = (f._lifelineUsedBy[k] || 0) + 1;
         f._lifelineUsed = (f._lifelineUsed || 0) + 1;
         t.hp = L >= 2 ? Math.min(10, t.maxHp || 10) : 1;
+        // The player caller syncs their body immediately after this return.
+        // Its health may still be zero here, so record after that sync below.
+        if (t.kind === 'player') game.state.scholar.health = t.hp;
+        t.alive = true;
+        noteCareRescue(game, k, wardPerson(game, t), 0, t.hp, t.maxHp, 'lifeline', 'battle');
         game.say(`${t.name} should be down. The thread between ${h.isP ? 'you' : h.f.name} and ${t.name} pulls taut, and holds: ${t.name} stays standing at ${t.hp} HP. (Lifeline)`);
         try { game.tele && game.tele('godpath_lifeline', { who: h.isP ? 'player' : h.f.villagerId, saved: t.villagerId || t.key }); } catch (e) { warn('tele lifeline', e); }
         return true;
@@ -1642,6 +1691,7 @@
     classLine(who) { return classLine(who); },
     godpathDeedStatus(who, godId, day) { return godpathDeedStatus(who, godId, day); },
     godpathDeedHint(who) { return godpathDeedHint(who); },
+    noteCareRescue(actor, patient, before, after, maxHp, via, scene) { return noteCareRescue(this, actor, patient, before, after, maxHp, via, scene); },
     pathLean(who, abilityId, opts) { return pathLean(who, abilityId, opts); },
     shapeOffers(choices, pool, who, opts) { return shapeOffers(choices, pool, who, opts); },
     kitSheet(cands, who, track, level) { return kitSheet(cands, who, track, level); },
@@ -1671,6 +1721,7 @@
     Game.endDay = function () {
       const r = _ed.apply(this, arguments);
       try {
+        const careChanged = !this.over && this.state && finishCareWatch(this);
         if (!this.over && this.state && this.state.systemArrived) {
           this.checkPlayerGodhoodAscension();
           const v = this.state.village || {};
@@ -1680,6 +1731,9 @@
             this.checkVillagerGodhoodAscension(vid);
           }
         }
+        // Core endDay saved before this wrapper. Persist settlement and any
+        // resulting ceremony together so Continue cannot replay a pending deed.
+        if (careChanged) this.save();
       } catch (e) { warn('dawn check', e); }
       return r;
     };

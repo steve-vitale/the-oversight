@@ -1,5 +1,13 @@
 # Agent lanes (2026-10-15)
 
+Codex Shepherd deed (2026-10-16): owns the narrow godpath.js care
+recorder/dawn settlement, game.js real camp-healer completion hook and
+godpaths.json caregiver deed; common tests and source-bound16/64 comparison.
+Six authored deeds/four proxies remain. Muse may use this branch's shared
+observer and frozen replay workflow; retain the critical-fraction and later
+dawn gates and report all23 metrics. Regions/nomad and broad care parity stay
+separate. See the dated shepherd-deed-audit.md and SURVIVAL-LEVERS.md.
+
 Codex caregiver-support prerequisite (2026-10-16): narrow godpath.js Mending
 target/planner and canonical support-holder/charge logic; game.js player
 Lifeline caller and saved charges. No ability prices, amounts, kits, god

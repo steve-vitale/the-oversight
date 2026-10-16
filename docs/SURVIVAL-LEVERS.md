@@ -4,6 +4,28 @@ Steve, 2026-10-15: "Winning shouldn’t be easy. A reduction in win rate is caus
 
 ## How to use this register
 
+Shepherd care gate (2026-10-16, needs-eyes):
+`godpaths.paths.caregiver.god.deed.criticalFraction = 0.25` defines critical
+health relative to the actual body maximum. A successful other-person heal
+must cross out of it; Lifeline must actually prevent the other's fatal fall.
+Both people must then be alive at a later real dawn. Human camp rounds retain
+their15HP/day and no new fee, and permit a noncombat route; Mending retains
+its existing cost/range and Lifeline its per-person fight cap. A small heal
+that leaves someone critical, self-care, class age and synergy do not qualify.
+The first receipt stays with the caregiver through saves/succession. Existing
+active gods remain; class/payoff/four-magic/day80 gates still apply.25% is an
+Agent-authored design choice. Do not lower it to recover a win quota.
+
+Paired16/64 panels show mixed gate effects. Holdout wins capable48→47,
+maker20→21, merchant23→22, caregiver34→34; deaths88→89/82→79/56→57/45→43;
+community losses13→14/21→20/28→28/15→15. Maker class access has a
+regression_watch. Screen maker deaths18→20/community4→5 and caregiver
+wins9→8 also require consideration. Retain these with all23 metrics, natural
+rescue traces, source-bound controls and the remaining unclassified hashes
+in ../evidence/2026-10-16/shepherd-deed-audit.md. No compensating food, combat,
+enemy or reward change is included. Broad care payoff/field/army parity and
+natural opportunity denominators remain open.
+
 Use this with MEASUREMENT-PLAN.md and SIMULATING.md before changing survival,
 progression or reward costs. These are existing mechanisms and places to
 investigate, not instructions to buff them. Exact values belong in runtime/data;

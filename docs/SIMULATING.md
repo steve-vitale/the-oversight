@@ -1,5 +1,18 @@
 # Simulating The Oversight — how to measure a change
 
+Shepherd deed (2026-10-16): `test-shepherd-deed.js` joins quick/full discovery.
+Keep real critical healing/fatal-fall rescue, pending survival, actual dawn
+completion and ceremony separate. Reconstruct either frozen arm with
+shepherd-deed-reconstruct.cjs. Its comparison retains every changed row or
+metric, class/god identity, Shepherd/Lifeline exposure and first/last remaining
+changed hash per policy/cohort; all changed hashes are retained when at most32.
+Full hashes and whole balanced observations must match before interpreting
+replays. Keep all other changed hashes unclassified, including saved ledgers,
+telemetry and save sequence. Do not infer natural rescue from a prepared kit.
+Run the dated verifier with `--collector-root` pointing at a reconstructed
+arm if future collector bytes differ. The source bundle carries the raw seven
+collector files and32-check validation. See the dated Shepherd audit.
+
 Caregiver support (2026-10-16): `test-caregiver-support.js` automatically joins
 quick/full checks and uses one shared harness for real NPC casts, lethal hits,
 personal-refusal priority, canonical charge ownership and actual save/load.

@@ -1,5 +1,16 @@
 # God scale: caller audit and remaining proof
 
+Shepherd outcome follow-up (2026-10-16): actual Mending critical recovery,
+allied Lifeline fatal-fall rescue and ordinary camp healer rounds now enqueue
+person-owned care. Both known people must survive a later real dawn before
+the deed completes.32 shared-kit checks include both ceremonies, no self-care,
+own-refusal priority and actual pending/completed saves. The phone uses a
+labeled prepared four-magic/one-earned-slot kit; it proves native noncombat
+Wait/Sleep/Continue, not acquisition or broad viability. See the dated
+Shepherd audit for natural source-bound traces and mixed23-metric panels.
+Battlefield Grace NPC attribution, field/army care parity and prospective
+opportunity denominators remain separate work. Six deeds/four proxies now.
+
 2026-10-15. Read with PLAN.md, godpaths.json `god.scale` / `god.play`, and the
 source-bound market-beam audit. This inventories the forty promised contexts;
 source wiring is not campaign balance, usefulness or complete parity proof.

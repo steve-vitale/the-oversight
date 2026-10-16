@@ -7007,6 +7007,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!worst) return null;
       s.healerRoundsDay = s.day;
       v.health[worst] = Math.min(100, worstHp + 15);
+      try {
+        const caregiver = healer === 'You' ? this.villagerId : this.campHealerVid();
+        this.noteCareRescue && this.noteCareRescue(caregiver, worst, worstHp, v.health[worst], 100, 'healer_rounds', 'camp');
+      } catch (e) { console.warn('healer rounds care deed', e); }
       let nm = 'Someone';
       try { nm = this.displayName ? this.displayName(worst).split(' ')[0] : nm; } catch (e) {}
       this.say(`🩹 ${healer === 'You' ? 'You make' : healer + ' makes'} rounds — ${nm} gets bound up properly. (${worstHp} → ${v.health[worst]} HP)`);
