@@ -27,6 +27,23 @@
 //
 // Sim-harness rules honored: Math.random seeded BEFORE eval (the harness
 // does it), full src/js list via the harness, no Game.save stub.
+
+// KILL-PROTOCOL INFO-SKIP (coordinator repair 2026-10-16): the fieldports
+// layer was reverted to zero trace per the kill protocol (killed at pilot) —
+// src/js/sigW4.js no longer carries the herald port. INFO-SKIP instead of
+// failing on the absent lever. The 35/35 RED->GREEN record stands pre-kill
+// (evidence/2026-10-16/sim-fieldports.md).
+(function () {
+  const fs0 = require('fs');
+  const path0 = require('path');
+  try {
+    const s4 = fs0.readFileSync(path0.join(__dirname, '..', 'src', 'js', 'sigW4.js'), 'utf8');
+    if (s4.indexOf('raises its trumpet') === -1) {
+      console.log('SKIP test-fieldports-20261016 (lever reverted per kill protocol — herald port absent from src/js/sigW4.js)');
+      process.exit(0);
+    }
+  } catch (e) {}
+})();
 'use strict';
 const fs = require('fs');
 const path = require('path');
