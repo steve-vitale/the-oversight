@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "bc4abde11bc1d1c8d2ec0c970de6c67eed60abb1",
+  "sourceDelta": [
+    "src/js/buildarounds.js",
+    "src/js/game.js",
+    "src/data/abilities.json"
+  ],
+  "fingerprintedSourceFiles": 207,
+  "verifiedDistinctJobs": 735,
+  "uniqueCampaignRows": 720,
+  "matchedFinalPairs": 320,
+  "screenIsSubset": true,
+  "balancedNeutralPairs": 15,
+  "diagnosticJobs": 16,
+  "neutralDiagnosticPairs": 8,
+  "reconstructedControlJobs": 6,
+  "runtime": {
+    "before": {
+      "passed": 17,
+      "failed": 16
+    },
+    "after": {
+      "passed": 33,
+      "failed": 0
+    },
+    "initial": {
+      "passed": 30,
+      "failed": 0
+    }
+  },
+  "quick": {
+    "passed": 169,
+    "failed": 0
+  },
+  "full": {
+    "passed": 941,
+    "failed": 0
+  },
+  "decision": "retain_functional_correction_with_review_signals",
+  "independentHoldout": false,
+  "artifacts": {
+    "cornucopia-after-panel.json.gz": "b55ccbc9c5ec644b20aeedab13a0fefe49fb64f2cfeaf73a5700e12d2e81223d",
+    "cornucopia-audit.md": "c7f069bdf279da329fa04f740580c957a2bb609af8921298034712b011266f87",
+    "cornucopia-before-panel.json.gz": "aefa4f3d6a711aa644bf516631b14207434ac67a2d6ab913308902bc0d64d54d",
+    "cornucopia-census.json": "6302f77ed9f99590b86c2b6fe472c73b5e2010ceadff8b166aab2958b4edfdc7",
+    "cornucopia-confirmation.json": "be9417e22649c2419a09c33144b63b9a52c9a9624e25cc24967928ab8e47ff2d",
+    "cornucopia-confirmation.md": "3ea2fbc56b9c0792452268cd37f28d0d0d70bd181f6fa50d957b645c4e597e92",
+    "cornucopia-final-runtime-after.txt": "b99b4f814cc2ffffd70be60f1a6397459495228dd2d297a8af3b2ff152e7122a",
+    "cornucopia-final-runtime-before.txt": "bb00ff8f56c543242e9a8789ebde14084f016d5a1583d296851cea60129ae61d",
+    "cornucopia-initial-before-panel.json.gz": "98ec5e510ee4e1bb56b0038549d0991d577e5baff10bb6f5ee8d49a823c10bd6",
+    "cornucopia-initial-final-quick.txt": "46de0b07d24aa753b50957dbc5a398dadd1e2a933cabea1fe5caceec1c7fa553",
+    "cornucopia-initial-full.txt": "65dec59286d7be8e3d1f23aeee8d79037b447108a5dae8bbbcb0a5057bf4576f",
+    "cornucopia-initial-panel.json.gz": "4dc70541130acee8b75f680c7f40abe192556ff98660666a3fa8d0dead99aeab",
+    "cornucopia-initial-phone-dom.txt": "a576fd0629ba3e2c758ea31e702a9d243bfc93591b68f17fa74d950d555ba7a5",
+    "cornucopia-initial-phone.jpg": "cdf9d666bc1ec6a08e28bd33b5613dd1b72b27f30bba5a9f3e85f8ae5f098f67",
+    "cornucopia-initial-runtime-after.txt": "55a9f2e03495383d185a46353bdb0ee6f58734b427d012b7be1e323fa0e5bc58",
+    "cornucopia-initial-runtime-before.txt": "d92281fa520ff98b0fe94f484603bcfad4f0359db479ce286f03ddcc79fd9ffa",
+    "cornucopia-initial-screen.json": "0e9442a669b30642dee23cf438f3c7a2731a91f8fa1790bc5d492a9e8c4eab1c",
+    "cornucopia-initial-screen.md": "167c2a1c51b9da3d577f70d0240413ee2e4e72c36df34086b4a1fab5e91740c0",
+    "cornucopia-jobs.json.gz": "14281930dab33c131b3c445290aeae61f0074d66f675dc7d14c255b64503cd33",
+    "cornucopia-pack-phone-dom.txt": "039cb8f7a457947038ba09e5fd56da58c6ed1eececb0b5ac6f04a5cb905e1b6b",
+    "cornucopia-pack-phone.jpg": "c1a719da042f918a2c6dd4b20224a8b5700ab47f4ef8516872d1563b1f1beece",
+    "cornucopia-phone-dom.txt": "dcf0423297fd306bcd7f6b6a5a6cd8a91c103c623e6e41ea6eb48ded267be4b2",
+    "cornucopia-phone-fixture.cjs": "08308d1681ae9a3c0c903d3bbf9379afe1d5db6389ef448ed00b0cf4151f00e6",
+    "cornucopia-phone.jpg": "eecb1cc8b5c601f4d017b27e03b99962dd3d995ce3723a9d531413bc9a4cbf95",
+    "cornucopia-publish-quick.txt": "027894b77e515b93383646dcfa63e4ef3594ce7d105d1f969ed8c5ebe942028a",
+    "cornucopia-reconstruct.cjs": "54b60d1829bd9663e2ad8a6871568dcf2153659bd4ca4bbcd69f1a84cb0219a2",
+    "cornucopia-reconstructed-controls.json.gz": "ef536b10a99817028b91ea76b79d8f7a26cd1a2d8b0ead96ea564a003ffe3590",
+    "cornucopia-replay-after-capable777-off.json.gz": "486a9564278326debc1618c53a21ed0971759bc72033377663b38c1a6aae3eb6",
+    "cornucopia-replay-after-capable777.json.gz": "539d25eb21baae4a0b795dbb86240c2e6eeccffc9d3e52d7fde339d74ae3eeec",
+    "cornucopia-replay-after-caregiver8-off.json.gz": "53701e482710bb98c4d0129b0284c1e2697f88b7c6e2180ca30f39f48ac1bbde",
+    "cornucopia-replay-after-caregiver8.json.gz": "a2ad8a754f924b030331744ad8f1c99a702692332577bb2885302888cd5bdf27",
+    "cornucopia-replay-after-garden-feeder41-off.json.gz": "f3e3545af8d3953360c3045eee2887502aadcd549ccc452dcb44227c4c2f7de6",
+    "cornucopia-replay-after-garden-feeder41.json.gz": "13e4f33f76aecc00495774e4d35b096b884c31b24691799cb9a6671fce7da5aa",
+    "cornucopia-replay-after-maker7-off.json.gz": "35ae4820382c04945b953c6dd2c7c410835f9dc8e9e138faed0adda41763ed84",
+    "cornucopia-replay-after-maker7.json.gz": "3f4770f8a982f2ba208cfc84a246798c8c1ca9a5f4a2da665b080b318dfdf532",
+    "cornucopia-replay-before-capable777-off.json.gz": "d52ecc64589169968d24e942e0957c1886e165f8ca65d96e4951ebf7c33f8c19",
+    "cornucopia-replay-before-capable777.json.gz": "f024a66b109e32b98ef6e55716b0e8639dd1f3bd9dc47f4d82a5e321ff1f85f4",
+    "cornucopia-replay-before-caregiver8-off.json.gz": "30f4497614823ccce4a9e847c79336bf61ebf9299a1416e5d9140a9e1da5a9dd",
+    "cornucopia-replay-before-caregiver8.json.gz": "8ef61c69fdedb92b6d6183402835beef1896cf2687114546cdb1e5c7b35c9f52",
+    "cornucopia-replay-before-garden-feeder41-off.json.gz": "14efeca888ac2ba9e85bd438da0ca036eb68bf9d117e3bf7208a2e71d1479bc0",
+    "cornucopia-replay-before-garden-feeder41.json.gz": "7fc8b0214d2ddaa90ec764fd95f0b7ab42582a651ef951b6de0b8ace4b584803",
+    "cornucopia-replay-before-maker7-off.json.gz": "db207ae920d42146951d275b8e9c7dbc4012c3229108ec3d9639a179352f0840",
+    "cornucopia-replay-before-maker7.json.gz": "f87904edce3a6eb303430f1e9b0d17841c59ad61dde36792e473c091410fcefc",
+    "cornucopia-replay.cjs": "e2a91d911e32a72b7516de35454d7e7bda708ba92869772f5460b1e8e53caaff",
+    "cornucopia-reset-phone-dom.txt": "9a6019905ad03d21fcae2b0955129ce076589f735ce512900256e79aec6f958d",
+    "cornucopia-restored-runtime.txt": "b99b4f814cc2ffffd70be60f1a6397459495228dd2d297a8af3b2ff152e7122a",
+    "cornucopia-review.json": "c2b1afe97e09299514813d00c4c15245caac6b2e69e56e6445ad242c5a4ed7ce",
+    "cornucopia-sources.json.gz": "94b82180c6dc22fb7c7b13d5fcd3a9cebbde864479ac11d74d0106990242a77c",
+    "cornucopia-verify.cjs": "88d4c86d09f74276a54b89f98970bf0c8e9cafb29d759b3615b436871b7b8f73",
+    "cornucopia-walking-after16-panel.json.gz": "9bbee742607ef3c19ac766a615fb49b4b56e1d185ed74f69a234c249176c3fc7",
+    "cornucopia-walking-full.txt": "8bd4155d825d0b251fb4acc6eb53672d8cda32544ed247c6806a8d996332149b",
+    "cornucopia-walking-ontology.txt": "def51681e17f49ce7a9572f4183d5dfc2201bbe34dbf6f036bfd628b5af9659d",
+    "cornucopia-walking-quick.txt": "ffbaa34ba91fb5eca69d2c7daab2dbe871ad910b60b8903a7ddd6c62350a2ff9",
+    "cornucopia-walking-screen.json": "0e9442a669b30642dee23cf438f3c7a2731a91f8fa1790bc5d492a9e8c4eab1c",
+    "cornucopia-walking-screen.md": "167c2a1c51b9da3d577f70d0240413ee2e4e72c36df34086b4a1fab5e91740c0",
+    "cornucopia-walking-wired.txt": "a3b4fc017b309603bc5e552c6691ee05c4b5c0f27638c708b7854c4dcc23a21f"
+  }
+}

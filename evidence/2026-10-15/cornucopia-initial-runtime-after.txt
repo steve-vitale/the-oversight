@@ -1,0 +1,32 @@
+  ok   control uses the real sweep and yields six known units
+  ok   a nonholder creates no canonical streak
+  ok   reading a held payoff does not allocate streak state
+  ok   first and second successful sweeps receive15 and30percent before rounding
+  ok   gathering consumes the actual16tick action cost
+  ok   eleven consecutive gathers cap at ten stacks and2.5x
+  ok   the capped bonus reaches actual stored plant units
+  ok   bonus harvest retains the real canonical source
+  ok   other paid work breaks the chain
+  ok   an empty failed gather breaks the chain
+  ok   wood-only gathering earns materials without plant streak credit
+  ok   a refused full-pack gather resets without free food or time
+  ok   an empty ruin is not a forage streak
+  ok   extra unknown plants stay unnamed in the same lump
+  ok   real save/load preserves that persons chain
+  ok   a successor reads their own canonical chain, never the predecessors
+  ok   dawn breaks the plant chain
+  ok   a combat interruption breaks the plant chain
+  ok   NPC duty generates the same15percent actual pantry bonus
+  ok   NPC duty bonus retains its own harvest source
+  ok   an NPCs other duty breaks their own chain
+  ok   NPC work does not grant a payoff or streak to the player
+  ok   adjacent NPC plant gathering applies its own first bonus
+  ok   consecutive NPC gathers advance independently
+  ok   NPC rest/movement breaks that actors chain
+  ok   actual returning forager receives460 real kcal at15percent
+  ok   actual node travel breaks the NPC chain
+  ok   a legacy unscoped player counter remains readable before interruption
+  ok   legacy player history cannot become the next bearers own chain
+  ok   an actual tactical party fight interrupts its NPC participants
+
+cornucopia-wired: 30 passed, 0 failed, 0 todo (phase 0)

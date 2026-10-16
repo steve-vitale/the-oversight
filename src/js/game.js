@@ -6293,7 +6293,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // cycle. The 0.3 fallback (stripped turf, scraps) stays: pressure,
         // not a kill switch.
         const vigorMult = this.vigorYieldMult(dep.avgVigor);
-        const kcal = Math.round(R(300, 600) * eff * (dep.depleted > 0 ? vigorMult : 0.3));
+        const BAForage = S.buildarounds;
+        if (BAForage) BAForage.onForage(this, true, vid);
+        const cornucopia = BAForage ? BAForage.forageMult(this, vid) : 1;
+        const kcal = Math.round(R(300, 600) * eff * (dep.depleted > 0 ? vigorMult : 0.3) * cornucopia);
         // less to find when the land is stripped — scarcity is real
         this.stockPantry(kcal, 'Foraged food', { harvestShares: this.harvestOrigin(vid) });
         let landNote = '';
@@ -11191,7 +11194,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // animals, and villagers move on their own schedule (or when you ACT).
       // But steps ACCUMULATE: every TICKS_PER_BATCH ticks, NPCs take a batch turn.
       this.ensureVillagerPositions();
-      this.tickAction(1);
+      this.tickAction(1, { moving: true });
       return true;
     },
 
@@ -11200,8 +11203,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // knowledge sticks: once you know, you know.
     // ACTION CLOCK: a successful interact costs 1 tick (a glance is time-only, 0 effort).
     cellInteract(cx, cy) {
+      const priorForage = ((this.state.village.cornucopia || {})[this.villagerId] || {}).sequence || 0;
       const r = this._cellInteract(cx, cy);
-      if (r) this.tickAction(1);
+      const foraged = (((this.state.village.cornucopia || {})[this.villagerId] || {}).sequence || 0) > priorForage;
+      // The interaction's extra tick belongs to its actual delegated gather.
+      if (r) this.tickAction(1, { foraging: foraged });
       return r;
     },
     _cellInteract(cx, cy) {
@@ -12646,7 +12652,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.monsterTurn(); this.animalTurn();
       this.ensureVillagerPositions();
       // ACTION CLOCK: one step = 1 tick. The beat you feel per step IS the cost.
-      this.tickAction(1);
+      this.tickAction(1, { moving: true });
       // AMBIENT TICKS (Steve 2026-10-09): tiny per-step attach chance in
       // woods/thicket. Narrated + a visible status — never silent. The tiny
       // ones are atmosphere; the map-visible alien tick is the monster fight.
@@ -14983,8 +14989,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             this.npcSetNode(rid, hx, hy);
             delete v.away[rid];
             const first = this.displayName(rid);
+            if (away.purpose !== 'forage' && S.buildarounds) S.buildarounds.onForage(this, false, rid);
             if (away.purpose === 'forage') {
-              const kcal = 200 + Math.floor(Math.random() * 400);
+              const BAForage = S.buildarounds;
+              if (BAForage) BAForage.onForage(this, true, rid);
+              const cornucopia = BAForage ? BAForage.forageMult(this, rid) : 1;
+              const kcal = Math.round((200 + Math.floor(Math.random() * 400)) * cornucopia);
               this.stockPantry(kcal, 'Foraged food', { harvestShares: this.harvestOrigin(rid) });
               // Only announce if you're at Haven to see it.
               if (this.map.px === hx && this.map.py === hy) {
@@ -17744,6 +17754,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       n = Math.max(0, Math.round(n || 1));
       if (!n) return undefined;
+      if (!(opts && (opts.foraging || opts.moving)) && S.buildarounds) S.buildarounds.onForage(this, false);
       // GLASSWING TRAP: shadow grows on ANY action, not just movement
       if (s.gwTrap) this.gwTrapTick();
       // save migration: moveClock → actionClock
@@ -19012,10 +19023,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const adj = nearestCell((c, cx, cy) =>
           FORAGEABLE(c, cx, cy) && Math.max(Math.abs(cx - pos.mx), Math.abs(cy - pos.my)) <= 1);
         if (adj) {
+          let cornucopia = 1;
+          if (S.buildarounds && this.npcHasAbility(rid, 'cornucopia')) {
+            const pid = this.cellPlantSpecies(t, adj.cx, adj.cy, adj.cell);
+            const plant = this.data.plants.find(p => p.id === pid);
+            S.buildarounds.onForage(this, !!plant, rid);
+            if (plant) cornucopia = S.buildarounds.forageMult(this, rid);
+          }
           t.detailRegrow = t.detailRegrow || {};
           t.detailRegrow[adj.cx + ',' + adj.cy] = { day: this.state.scholar.day + 2, was: adj.cell };
           if (adj.cell === 'plant') detail[adj.cy][adj.cx] = 'dirt'; // picked clean, like yours
-          n.hunger = Math.max(0, n.hunger - 25);
+          n.hunger = Math.max(0, n.hunger - 25 * cornucopia);
           n.energy = Math.max(0, (n.energy || 0) - 3);
           // they eat some, bring some home for the village
           // WORK VISIBLE (Steve 2026-10-07): kids watch grown-ups work.
@@ -19023,7 +19041,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // reads it for the learn-by-watching beat.
           ctx.worked = ctx.worked || {};
           ctx.worked[rid] = true;
-          if (Math.random() < 0.4) this.stockPantry(80 + Math.floor(Math.random() * 120), 'Foraged food');
+          if (Math.random() < 0.4) this.stockPantry(Math.round((80 + Math.floor(Math.random() * 120)) * cornucopia), 'Foraged food');
           announce(`${name} forages ${greenName(adj.cell)}.`);
           return;
         }
@@ -23996,6 +24014,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // refusal below. Same class as the clearBlockage/beginPathWalk/
       // travelTo combat guards: refuse, loudly.
       if (kind !== 'drink' && kind !== 'rest' && this.inCombat && this.inCombat()) {
+        if (kind === 'forage' && S.buildarounds) S.buildarounds.onForage(this, false);
         this.say('Not mid-fight — finish it first.');
         return null;
       }
@@ -24038,6 +24057,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // ruin is just loot. The old 10%-after-loot-exhausted roll meant
         // ~0.1 books per run; books never fed breadth.
         if (t.type === 'ruin') {
+          if (S.buildarounds) S.buildarounds.onForage(this, false);
           if (!t.bookChecked) {
             t.bookChecked = true;
             if (this.data.books.length && Math.random() < 0.30) {
@@ -24121,7 +24141,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // ACTION CLOCK: searching a ruin = 2 chunks (64 ticks). 100 kcal effort above.
           return this.tickAction(64) || this.status();
         }
-        if (!S.forage.canForage(t)) { this.say('Nothing left to take here today.'); return null; }
+        if (!S.forage.canForage(t)) { if (S.buildarounds) S.buildarounds.onForage(this, false); this.say('Nothing left to take here today.'); return null; }
         // AREA SWEEP (Steve): forage is an area action, not a tile action. One
         // press works the patch around you — your cell + the 8 around it. The
         // yield is whatever's actually there; the game knows every species,
@@ -24159,6 +24179,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           harvested.push({ x: cx, y: cy, cell: c, plantId: pid, plant });
         }
         if (!harvested.length) {
+          if (S.buildarounds) S.buildarounds.onForage(this, false);
           // PATCH HONESTY (forager loop 2026-10-05): the sweep found nothing,
           // but the tile may still have green patches elsewhere. Don't send
           // the player off ground that still has food — point at the next patch.
@@ -24179,6 +24200,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // the real options; repeats stay short. Fifty identical lectures is
         // chores, not guidance.
         if (!this.canCarry(estKg)) {
+          if (S.buildarounds) S.buildarounds.onForage(this, false);
           const streak = (this._packFullStreak || 0) + 1;
           this._packFullStreak = streak;
           this.say(streak === 1
@@ -24187,6 +24209,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           return null;
         }
         this._packFullStreak = 0;
+        const BAForage = S.buildarounds;
+        if (BAForage) BAForage.onForage(this, harvested.some(h => !!h.plantId));
+        const cornucopia = BAForage ? BAForage.forageMult(this) : 1;
         // DEPLETION 2026-10-10: the sweep works the land through the one
         // path — sustainable takes are free, stripping/scraping wounds vigor.
         // Your hands read the ground as they work it, and your take counts
@@ -24240,7 +24265,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let units = 3 + Math.floor(Math.random() * 3); // 3-5 per cell: a sweep, not a strip
           // MULTITOOL (Steve 2026-10-05): "+1 to foraging yields" — honest now.
           const toolMult = this.hasItem('multitool') ? 1.25 : 1.0;
-          units = Math.ceil(units * levelMult * thumbMult * toolMult * modYieldMult);
+          units = Math.ceil(units * levelMult * thumbMult * toolMult * modYieldMult * cornucopia);
           // deeper knowledge accrues only for identified plants — handling
           // unknowns teaches care, not parts. Depth is per handling SESSION
           // (see PER-SWEEP KNOWLEDGE PACING above), not per cell.
@@ -24541,7 +24566,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // EVERYONE ACTS (Steve 2026-10-07): your action is your turn —
       // each NPC on this node then takes one action, in roster order.
       try { this.villagerTurn(); } catch (e) {}
-      return this.tickAction(ticks) || this.status();
+      return this.tickAction(ticks, { foraging: kind === 'forage' }) || this.status();
     },
 
     checkQuest(kind) {

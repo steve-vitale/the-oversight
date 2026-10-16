@@ -159,6 +159,17 @@ Foodpower test failures now retain ontology subprocess stderr; no runtime edits.
 
 ## Shared balanced simulation tooling (2026-10-15)
 
+Cornucopia caller exception (2026-10-16): Codex takes buildarounds.js and
+the narrow game.js forage/clock callers, plus abilities.json's one matching
+description. The existing15percent steps/cap stay; walking between depleted
+patches preserves the chain, other work/failures/combat/dawn break it.
+Native cellInteract adds its usual tick without clearing its own gather.
+No region/nomad/agency file or global offer/XP/slot/food price changes.
+Full941/941 passes. Read cornucopia-audit.md for mixed64-seed outcomes,
+the rejected native-flow candidate and source reconstruction before
+comparing Muse simulations. Broader food-model/parity and fitting deeds
+remain open; the shared measurement draft's existing red suite is unchanged.
+
 Codex is publishing `codex/balanced-measurement` based on Muse's shared
 `master` at 15614d03. It contains tools, measurement evidence and instructions
 only. No regional or godpath runtime files are copied from Codex's game branch.

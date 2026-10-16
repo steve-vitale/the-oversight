@@ -14,9 +14,21 @@ player. It now pays actual living resident NPC holders with their own build,
 the same existing rate/threshold/cap and a saved once-per-person/day guard.
 Prepared runtime, native phone Sleep/save/reload, matched campaign panels
 and their limits are in ../evidence/2026-10-15/interest-parity-audit.md.
-Natural NPC acquisition and other payoff parity are still open. The caller
-scan also reproduces two existing unwired Cornucopia hooks; investigate
-their actual forage callers next. No universal wiring/viability claim.
+Natural NPC acquisition and other payoff parity are still open.
+
+Cornucopia caller repair (2026-10-16): real player plant sweeps, resident
+forage duties, adjacent plant gathers and returning foragers now use their
+own saved chain and actual yield. Walking between finite patches preserves
+focus; failed gathering, other work, combat and dawn reset it. Existing
+15percent steps/cap150percent remain. The native cell interaction's extra
+tick is included, with no time discount. Runtime33/33, quick169/169 and
+full941/941 pass; buildarounds has zero static unwired functions. These
+checks do not establish universal parity. The64-seed/five-policy comparison
+retains maker Table/access and survival tradeoffs for review; no win quota
+or compensating buff. Exact rejected initial candidate, final sources,
+735 verified campaign/control jobs, native phone proof and limits:
+../evidence/2026-10-15/cornucopia-audit.md. Eight fitting deeds, broader
+passives and the pending reactor/food-use decision remain open.
 
 Introductory-choice audit (2026-10-15): the loader correctly leaves choices
 to policies; capable omits the real knack sheet. A source-bound correction

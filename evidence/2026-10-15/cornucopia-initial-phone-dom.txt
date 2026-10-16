@@ -1,0 +1,56 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 495 ticks to dawn.":
+  - text: day 1 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: Autumn · Eastern Woodlands
+  - 'generic "The day''s budget: 17 of 512 used. Everything you do costs a little of the day."':
+    - generic: 495 left today
+  - text: Jian
+  - button "👁 deep grove · grove lush ground · dandelion country Something about this spot feels... used. Lived in. ▾ details":
+    - generic: 👁 deep grove · grove
+    - generic: lush ground · dandelion country
+    - text: Something about this spot feels... used. Lived in.
+    - generic: ▾ details
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - generic "Tap for full map": 📍 deep grove
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - generic: "You work the patch with practiced hands: 6× Dandelion (270 kcal). This patch is picked clean — it'll recover in a few days."
+  - generic "Health":
+    - generic: ❤ 100
+  - generic "Food (you) — banked war chest":
+    - generic: 🍽 3940/2400 kcal (+1540 banked)
+  - generic "Hydration":
+    - generic: 💧 100% · 2L clean
+  - 'generic "Pack: 270 kcal carried"':
+    - generic: 🎒 2.6/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "🎒 Pack"
+  - button "🧬 You"
+  - button "😴 Sleep"
+  - button "⏳ Wait"
+  - button "🗺️ Map"
+  - button "settings": ⚙️
+  - heading "DEEP GROVE" [level=3]
+  - paragraph: Nut trees
+  - paragraph: Tap a square to see what you can do there.
+  - button "Codex (4)"
+- complementary:
+  - text: PREPARED CORNUCOPIA PHONE PROOF · grants ability + known patches; skips intro UI; not natural progression
+  - button "Prepare finite plant patches"
+  - button "Read current chain" [active]
+  - text: Streak 0 · multiplier 1.00 · ticks 17 · known plant units 6. Read only; patches never replenished.

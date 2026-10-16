@@ -99,8 +99,15 @@ Job -> track -> **class** -> **god** -> Table.
    repetition, load and succession; same opening stock avoids roster-order
    compounding. Runtime22/22 and native phone Sleep/reload are proved in
    interest-parity-audit.md. This does not complete NPC access or all passive
-   parity. The module wiring scan still finds Cornucopia onForage and
-   forageMult without callers on baseline and candidate; audit those next.
+   parity. Cornucopia's two missing callers are now repaired (2026-10-16):
+   player plant sweeps and actual NPC duty/adjacent/return routes use their
+   own saved chain. Walking keeps focus; other work, failures, combat and
+   dawn reset. The public cell wrapper is covered over finite patches;
+   runtime33/33, quick169/169 and full941/941 pass. The five-policy64-seed
+   panel remains review_required (maker access/death tradeoffs); no win-only
+   verdict or compensating tuning. See cornucopia-audit.md for retained
+   sources, rejected first implementation and native phone proof. This
+   does not author Garden's deed or complete all NPC food/provenance models.
    NPC Second Wind/Molt automatic activation now covers tactical, field and
    actual world damage, with personal cooldowns and truthful field survivor
    HP settlement (`survivalist-passive-audit.md`). Full active/passive and

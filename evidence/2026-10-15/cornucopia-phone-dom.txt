@@ -1,0 +1,62 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 456 ticks to dawn.":
+  - text: day 1 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: Autumn · Eastern Woodlands
+  - 'generic "The day''s budget: 56 of 512 used. Everything you do costs a little of the day."':
+    - generic: 456 left today
+  - text: Mason
+  - button "👁 orchard ruin · grove lush ground · dandelion country The ground here looks disturbed. Worth a closer look. ▾ details":
+    - generic: 👁 orchard ruin · grove
+    - generic: lush ground · dandelion country
+    - text: The ground here looks disturbed. Worth a closer look.
+    - generic: ▾ details
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - generic "Tap for full map": 📍 orchard ruin
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - generic: ⚡
+  - button "⚡ Read Sign — Study tracks, scat, browse lines. Learn what's been here, how long ago, which direction. (40 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"
+  - 'button "⚡ Line Up Clean Shot — Take extra time lining up the shot. Your next hunting strike lands more reliably — and when it lands, it''s clean: the animal doesn''t suffer. (15 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"'
+  - button "⚡ Track — Follow tracks. Find where an animal went, how many, how long ago. (40 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"
+  - button "⚡ Follow Blood Trail — Track a wounded animal to its location. Reveals direction and distance. (25 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"
+  - generic: 📋 Dale needs 3 Dandelions. "For tea. For morale. For reasons."
+  - paragraph: 📋 Dale needs 3 Dandelions. "For tea. For morale. For reasons."
+  - generic "Health":
+    - generic: ❤ 100
+  - generic "Food (you) — banked war chest":
+    - generic: 🍽 3810/2400 kcal (+1410 banked)
+  - generic "Hydration":
+    - generic: 💧 100% · 2L clean
+  - 'generic "Pack: 900 kcal carried"':
+    - generic: 🎒 4/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "🎒 Pack"
+  - button "🧬 You"
+  - button "😴 Sleep"
+  - button "⏳ Wait"
+  - button "🗺️ Map"
+  - button "settings": ⚙️
+  - heading "ORCHARD RUIN" [level=3]
+  - paragraph: Nut trees
+  - paragraph: Tap a square to see what you can do there.
+  - button "Codex (3)"
+- complementary:
+  - text: PREPARED CORNUCOPIA PHONE PROOF · grants ability + known patches; skips intro UI; not natural progression
+  - button "Prepare finite plant patches"
+  - button "Read current chain" [active]
+  - text: Streak 3 · multiplier 1.45 · ticks 56 · known plant units 20. Read only; patches never replenished.

@@ -161,6 +161,7 @@ Build-around ability engine (Steve 2026-10-14 ability coherency rework). The 10 
 - never_silent: state changes that matter narrate via say() (code: onStrikeHit)
 - assembly_gated: build-arounds are weak alone — full power needs 2+ same-path abilities (code: baPathCount)
 - interest_holder_parity: each living resident holder earns once per person/day from the same opening pantry, using their own build and the shared pantry cap (code: onDayTick)
+- cornucopia_gathers: real plant gathers advance a canonical person's streak before yield; walking keeps the chain, failed gathering, other work, combat and dawn break it (code: onForage / forageMult)
 
 **Consumes:** —
 

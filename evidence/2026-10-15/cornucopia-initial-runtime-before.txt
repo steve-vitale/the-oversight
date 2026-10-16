@@ -1,0 +1,33 @@
+  ok   control uses the real sweep and yields six known units
+  ok   a nonholder creates no canonical streak
+  FAIL reading a held payoff does not allocate streak state
+  FAIL first and second successful sweeps receive15 and30percent before rounding — {"first":6,"second":6}
+  ok   gathering consumes the actual16tick action cost
+  FAIL eleven consecutive gathers cap at ten stacks and2.5x
+  FAIL the capped bonus reaches actual stored plant units — 6
+  ok   bonus harvest retains the real canonical source
+  FAIL other paid work breaks the chain
+  ok   an empty failed gather breaks the chain
+  ok   wood-only gathering earns materials without plant streak credit
+  ok   a refused full-pack gather resets without free food or time
+  ok   an empty ruin is not a forage streak
+  FAIL extra unknown plants stay unnamed in the same lump — 4
+  FAIL real save/load preserves that persons chain
+  ok   a successor reads their own canonical chain, never the predecessors
+  ok   dawn breaks the plant chain
+  ok   a combat interruption breaks the plant chain
+  FAIL NPC duty generates the same15percent actual pantry bonus — {"pantry":310,"raw":309.88125}
+  ok   NPC duty bonus retains its own harvest source
+  ok   an NPCs other duty breaks their own chain
+  ok   NPC work does not grant a payoff or streak to the player
+  FAIL adjacent NPC plant gathering applies its own first bonus — 65
+  FAIL consecutive NPC gathers advance independently
+  ok   NPC rest/movement breaks that actors chain
+  FAIL actual returning forager receives460 real kcal at15percent — 400
+  ok   actual node travel breaks the NPC chain
+  ok   a legacy unscoped player counter remains readable before interruption
+  FAIL legacy player history cannot become the next bearers own chain
+  ok   an actual tactical party fight interrupts its NPC participants
+
+cornucopia-wired: 18 passed, 12 failed, 0 todo (phase 0)
+failing: reading a held payoff does not allocate streak state | first and second successful sweeps receive15 and30percent before rounding | eleven consecutive gathers cap at ten stacks and2.5x | the capped bonus reaches actual stored plant units | other paid work breaks the chain | extra unknown plants stay unnamed in the same lump | real save/load preserves that persons chain | NPC duty generates the same15percent actual pantry bonus | adjacent NPC plant gathering applies its own first bonus | consecutive NPC gathers advance independently | actual returning forager receives460 real kcal at15percent | legacy player history cannot become the next bearers own chain

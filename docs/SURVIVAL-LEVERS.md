@@ -192,6 +192,49 @@ panels, all metrics and remaining Cornucopia wiring gaps. Static Interest
 description/deepening copy also needs reconciliation with the existing
 assembly-based runtime; no level-scaling promise is newly implemented here.
 
+## Cornucopia: gathered food and interrupted focus
+
+2026-10-16 decision: retain the actual forage caller repair, with needs-eyes
+review of walking between patches. Previously onForage/forageMult had no
+game callers. A successful plant sweep now advances before yield:
+1.15x,1.30x,...,2.50x at ten successes; rounding follows each existing
+route (player plant units round upward, NPC duty/trip kcal round normally).
+The first gather benefits. Real NPC duty/adjacent/away-return routes use
+the holder's own chain; it is not copied from the player. Duty/trip food
+still uses the existing abstract ecology model, including duty scraps on
+stripped ground. Adjacent NPC hunger relief and random surplus scale
+together; the pre-existing personal-work/provenance abstraction remains.
+
+Walking preserves focus because an actual sweep depletes a finite patch.
+Failed gathering, full-pack refusal, wood/ruin-only work, other paid work,
+combat or dawn break the chain. The native cell interaction still costs
+its extra tick; movement still costs its normal ticks and can trigger
+world activity. Saved canonical-person state prevents inherited legacy
+streaks on succession. Unknown plants remain unnamed. Rates, ability
+prices/metabolism, XP, class/slot/offer/Table gates and pack prechecks are
+unchanged; this is not a general carry-capacity correction.
+
+This changes survival through actual food, hunger-driven NPC decisions,
+ecology and subsequent random histories. The new adjacent-holder species
+lookup can resolve lazy species using real RNG. Do not attribute all later
+combat/ending differences to calories alone. The first implementation passed
+the full suite yet failed the public Forage button and spatial chain; it
+was rejected and its exact source/proof retained.
+
+At64 matched seeds each: capable wins55->55/deaths90->92/community8->8;
+maker21->18/52->57/18->19; merchant25->25/42->44/14->14;
+caregiver23->24/45->49/18->16; garden-feeder36->37/47->48/8->8.
+First-bearer day60 survival is unchanged except caregiver53->54; maker
+remains53. Earned T3+ gear remains319/320, contest/show gear316->315,
+craft/trade T3+ remains unsampled. All23 metrics are retained, not netted
+against wins. Maker invitations/entries22->19 remain review signals;
+no independent holdout or causal small-effect claim is made. Retain the
+functional correction without relaxing difficulty or adding food to hit a
+win target. Revisit focused forager/NPC opportunities and the changed tails
+when the pending introductory-choice policy question is resolved.
+See ../evidence/2026-10-15/cornucopia-audit.md for exact roots, raw panels,
+census, matched replay controls and finite-patch native phone proof.
+
 ## Introductory choice and reactor timing
 
 The shared loader leaves choices to policies; capable currently omits the
