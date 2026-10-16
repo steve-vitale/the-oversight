@@ -2588,6 +2588,36 @@ const competent = {
       if (ctx._fightObj !== f) {
         ctx._fightObj = f;
         dpsRaceInit(ctx); // DPS-race assessment (scale-wall r1): snapshot the race baseline
+        // LEARNFIGHT (scale-onramp learn-vs-fight 2026-10-16, via
+        // ctx._learnFight — set only by the learnfight wrapper when
+        // LEARNFIGHT=1): Steve's LEARN-VS-FIGHT default — when an
+        // undiscovered wave-3+ trick-bearer comes to the village, the
+        // scholar's default is LEARN, not FIGHT: witness from safety
+        // instead of engaging blade-first. The engine's own survived-
+        // encounter funnel teaches (noteScholarTrickObservation on the
+        // fled end); the layer invents no knowledge. PARTY-AWARE
+        // (finding #353): the wrapper never sets _learnFight while
+        // villagers are committed to this fight, so this never abandons
+        // villagers mid-fight — witness, don't flee; hold when they're
+        // committed. Gate off = the block below, byte-identical.
+        if (ctx._learnFight) {
+          try {
+            let _lfMid = null;
+            try {
+              for (const _m of (f.fighters || [])) {
+                if (!_m || _m.kind !== 'monster' || ((_m.hp || 0) <= 0)) continue;
+                const _mm = _m.monsterId || ((_m.mdef || {}).id) || null;
+                if (_mm) { _lfMid = _mm; break; }
+              }
+            } catch (e) {}
+            let _lfName = 'the beast';
+            try { if (_lfMid && Game.monsterDisplayName) _lfName = Game.monsterDisplayName(_lfMid) || _lfName; } catch (e) {}
+            Game.say(`You don't meet the ${_lfName} blade-first — not tonight. You watch it from the treeline instead: how it moves, how it breathes, where its eyes go. Learning, not fighting. (witness posture)`);
+            ctx.lfWitnessed = (ctx.lfWitnessed || 0) + 1;
+            const fr = flee();
+            if (fr) return true;
+          } catch (e) {}
+        }
         // FIGHT-ASSESS (longsim scale-wall r3, gate COMPETENT_FIGHT_ASSESS=1):
         // knowledge-gated damage-race assessment at turn 1, full HP —
         // proactive disengage of a lost race, instead of the legacy
