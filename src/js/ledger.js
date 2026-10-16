@@ -970,6 +970,20 @@
           const verb = vouchers.length === 1 ? 'speaks' : 'speak';
           this.say(`At the grave, ${vnames.join(', ')}${extra} ${verb} for ${newFirst} — "${oldFirst} trusted them. We saw it. Give them the fire's hearing." The village listens.`);
         }
+        // SUCCESSOR'S OWN RECORD (journey-succession r15 2026-10-16): the
+        // inheritance formula's own-record term (own*0.4) was invisible in
+        // the fiction — the handoff named only the dead bearer's trust in
+        // them ("Cameron trusted them"), or nothing at all when nobody
+        // vouched. When the successor stood real with the village as a
+        // villager, say so: the fire knew these hands before the Codex came.
+        if (own >= 40) {
+          const spro = newChar.pro || 'they';
+          const poss = spro === 'she' ? 'Her' : spro === 'he' ? 'His' : 'Their';
+          const line = own >= 70
+            ? `The fire knew ${newFirst} before the Codex did — ${poss.toLowerCase()} name already carried weight here.`
+            : `The fire knew ${newFirst} — solid ground, earned at this fire.`;
+          this.say(line);
+        }
       } catch (e) {}
       // MANTLE HANDOFF RECORD (journey-succession 2026-10-11): the village is
       // the protagonist — conversational continuity must survive the bearer,
