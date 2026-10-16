@@ -851,7 +851,7 @@
           c.node = { x: hx, y: hy };
           c.mx = 4; c.my = 4;
           c.recovered = true;
-          c.deathKnown = true; // the village told the new Bearer <redacted> home
+          c.deathKnown = true; // the village told the new Bearer they'd brought the body home
           const first = String(p.name || 'them').split(' ')[0];
           this.say(`That night, they bring ${first} home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.`);
           try { this.recordMoment(`${p.name || 'The bearer'} was brought home. The village dug the grave.`); } catch (e2) {}
