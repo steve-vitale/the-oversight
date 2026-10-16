@@ -134,7 +134,30 @@
       if (j.stage === 0 && heat >= 25) {
         j.stage = 1;
         this.say('Something has shifted. Conversations stop when you approach the fire. Nobody meets your eyes for long.');
-        try { if (this.journalNote) this.journalNote('village', 'mood', 'The village has gone quiet around me. I know why.'); } catch (e) {}
+        try {
+          if (this.journalNote) {
+            // FICTIONGATE (sim-fictiongate-b 2026-10-16, #385/#391): the
+            // cold shoulder's "I know why" internalizes a charge the
+            // village's own bowls manufactured whenever the dated-voluntary
+            // ledger is clean. Gate the honest line on the dated ledger
+            // agreeing — trailing-7d voluntary net < 0 (the freeloader-clock
+            // reading over the dated takeHist/giveHist; succession resets
+            // both at ledger.js:841-844). When the heat is meal-driven the
+            // scholar honestly does NOT know why, and says so. VOICE ONLY:
+            // stage, heat, timing, the say line, and the journalNote dedup
+            // are untouched.
+            let honest = true; // fallback: the pre-fix line when the ledger is unreadable
+            try {
+              if (typeof this.takeRate7 === 'function' && typeof this.giveRate7 === 'function') {
+                const net7 = (this.giveRate7(this.villagerId) - this.takeRate7(this.villagerId)) * 7;
+                honest = net7 < 0;
+              }
+            } catch (e) {}
+            this.journalNote('village', 'mood', honest
+              ? 'The village has gone quiet around me. I know why.'
+              : "The village has gone quiet around me. I don't know why — I've eaten only what was set before me.");
+          }
+        } catch (e) {}
         return;
       }
       // STAGE 1 -> 2: confrontation
