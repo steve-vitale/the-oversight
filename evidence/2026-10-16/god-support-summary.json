@@ -1,0 +1,114 @@
+{
+  "cases": 256,
+  "jobsPerArm": 260,
+  "changed": [
+    "src/js/game.js",
+    "src/js/godverbs.js"
+  ],
+  "rowsEqual": 256,
+  "hashesEqual": 256,
+  "metricsEqual": 256,
+  "neutrality": [
+    {
+      "policy": "capable",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "maker",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "merchant",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "caregiver",
+      "seed": 7,
+      "match": true,
+      "warnings": 0
+    }
+  ],
+  "exposure": [
+    {
+      "policy": "capable",
+      "holders": {
+        "shepherd_of_the_dead": {
+          "runs": 2,
+          "holderDays": 4,
+          "holderIdentitiesAcrossRuns": 2
+        },
+        "living_garden": {
+          "runs": 13,
+          "holderDays": 229,
+          "holderIdentitiesAcrossRuns": 14
+        },
+        "apex_predator": {
+          "runs": 3,
+          "holderDays": 20,
+          "holderIdentitiesAcrossRuns": 3
+        }
+      }
+    },
+    {
+      "policy": "maker",
+      "holders": {
+        "living_garden": {
+          "runs": 35,
+          "holderDays": 1580,
+          "holderIdentitiesAcrossRuns": 46
+        },
+        "apex_predator": {
+          "runs": 3,
+          "holderDays": 64,
+          "holderIdentitiesAcrossRuns": 3
+        },
+        "shepherd_of_the_dead": {
+          "runs": 2,
+          "holderDays": 55,
+          "holderIdentitiesAcrossRuns": 2
+        }
+      }
+    },
+    {
+      "policy": "merchant",
+      "holders": {
+        "living_garden": {
+          "runs": 27,
+          "holderDays": 833,
+          "holderIdentitiesAcrossRuns": 32
+        },
+        "apex_predator": {
+          "runs": 6,
+          "holderDays": 182,
+          "holderIdentitiesAcrossRuns": 7
+        }
+      }
+    },
+    {
+      "policy": "caregiver",
+      "holders": {
+        "living_garden": {
+          "runs": 36,
+          "holderDays": 1148,
+          "holderIdentitiesAcrossRuns": 43
+        },
+        "shepherd_of_the_dead": {
+          "runs": 5,
+          "holderDays": 156,
+          "holderIdentitiesAcrossRuns": 5
+        },
+        "apex_predator": {
+          "runs": 5,
+          "holderDays": 165,
+          "holderIdentitiesAcrossRuns": 7
+        }
+      }
+    }
+  ]
+}

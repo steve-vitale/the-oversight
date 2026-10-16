@@ -9,6 +9,19 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+God support recipient repair (2026-10-16): wounded NPC One-Person Army holders
+can rally the nearby living player; actual player strikes/abilities consume
+the existing raw +4 convention, with finite own-turn expiry. Fallen NPC Voice
+holders impose the same lost action on the player as other allies. Canonical
+self aliases cannot receive their own ally effect. Runtime/phone and matched
+campaign evidence: ../evidence/2026-10-16/god-support-audit.md. Active Voice
+commands and class broadcast/aura still need a player-controlled action path;
+this repair does not complete the support roadmap.
+The same audit retains a legacy-test isolation debt: hunter-ecology's minnow
+setup can exhaust its branches before the gate assertion. Four deterministic
+seeds reproduce it identically before/after; preserve the assertion and fix
+the setup in its own test-maintenance unit rather than hiding a red result.
+
 NPC measurement eligibility (2026-10-16): the balanced observer now correlates
 NPC class/god records with a known living resident other than the current
 bearer, resolves saved/background people, and deduplicates roster IDs. New

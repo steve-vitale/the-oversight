@@ -14,6 +14,13 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+God support recipients (2026-10-16): Codex owns the narrow godverbs.js
+One-Person Army wound rally and NPC Voice collapse recipient paths, plus
+game.js player rally consumption and own-turn expiry. Keep canonical self
+aliases out. Voice's active extra-turn command and class broadcast/aura remain
+open; never send the player through NPC AI to simulate a player choice.
+No regional/nomad files or policy choices belong to this unit.
+
 NPC measurement eligibility (2026-10-16): Codex takes the shared balanced
 observer, NPC contract wording, exposure census and their proof maintenance.
 Correlate class/god observations with a known living resident who is not the

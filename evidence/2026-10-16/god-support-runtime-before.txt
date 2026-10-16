@@ -1,0 +1,30 @@
+  FAIL actual wounded NPC brawler hit rallies the nearby living player
+  ok   the same hit rallies the fellow NPC and excludes the holder
+  ok   a second wound cannot refresh the once-per-fight rally
+  ok   above-half-health hit does not rally
+  ok   distant player gets no rally
+  ok   fled player gets no rally
+  ok   dead player gets no rally
+  ok   canonical self alias cannot rally its own player body
+  FAIL legacy player melee source receives existing raw +4 rally
+  FAIL explicit player ability source receives existing raw +4 rally
+  ok   unattributed environmental damage gets no player rally
+  ok   an explicit empty source key is not normalized into player melee
+  ok   zero damage does not become a hit
+  ok   dead player cannot source rally damage
+  ok   fled player cannot source rally damage
+  ok   existing NPC source retains its raw +4
+  ok   rally does not amplify player friendly backlash
+  FAIL real player Strike consumes the source convention and lands +4 — {"ordinary":7,"rallied":7}
+  FAIL actual player turn entry expires both rally flags in three own turns
+  ok   expired rally restores ordinary damage
+  FAIL actual NPC Voice death stuns the player for a full action and clears rally
+  ok   the existing fellow NPC death weakness remains
+  FAIL player turn entry consumes the stun and requests exactly one skip
+  ok   the following player turn restores choice and movement
+  FAIL real scheduler passes the lost turn and returns control on the next round — {"playerEntries":1,"current":"p","acted":false}
+  ok   a fled player is not stunned by Voice collapse
+  ok   canonical self alias cannot impose its own ally collapse on the player
+
+god-support-player: 19 passed, 8 failed, 0 todo (phase 0)
+failing: actual wounded NPC brawler hit rallies the nearby living player | legacy player melee source receives existing raw +4 rally | explicit player ability source receives existing raw +4 rally | real player Strike consumes the source convention and lands +4 | actual player turn entry expires both rally flags in three own turns | actual NPC Voice death stuns the player for a full action and clears rally | player turn entry consumes the stun and requests exactly one skip | real scheduler passes the lost turn and returns control on the next round

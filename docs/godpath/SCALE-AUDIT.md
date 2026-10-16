@@ -8,6 +8,14 @@ Prepared titan/coalition campaign evidence is separate from natural reachability
 
 ## Forty-context map
 
+2026-10-16 support follow-up: One-Person Army's wound rally now includes the
+distinct nearby living player; real player damage and finite own-turn duration
+honor the existing flags. NPC Voice collapse now includes the player's full
+lost action. Prepared runtime/phone and standard-cohort limitations are in
+../../evidence/2026-10-16/god-support-audit.md. Active Voice command, daily
+Voice support, class broadcast/aura and broader forty-context proof remain
+open. Do not infer their completion from this passive recipient correction.
+
 All named functions below are in src/js/godverbs.js unless another module is
 named. **Inherited** means a shared tactical fight hook can apply to coalition
 actors; it does not prove the extra strategic role described in the prose.
@@ -53,7 +61,9 @@ contest rule, audience reaction, judged advantage or mercy choice.
    covers normal monster, alien and formal-party/betrayal constructors and
    preserves raw legacy membership arrays. See dated apex-identity-audit.md
    for four source arms, all metrics and remaining exposure limits.
-   Voice command and brawler rally still explicitly skip player-kind allies;
+   Voice command still explicitly skips player-kind allies. Brawler wound
+   rally and NPC Voice collapse now include the player; see the support
+   evidence above for actual damage, expiry and lost-action proofs.
    `feedMultitude` excludes Game.villagerId even when its holder is an NPC.
    Audit their actual recipient consumers/resource settlement separately.
    Far formal-party injection still uses a30HP helper without the nearby

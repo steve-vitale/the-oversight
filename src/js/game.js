@@ -30147,6 +30147,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const c = this.tbCurrent();
       if (!c) return;
       if (c.kind === 'player') {
+        // Rally lasts for own turns, as it does in tbVillagerTurn. Consume
+        // time even when a full stun costs this turn's action.
+        if ((c.rallyBuff || 0) > 0) c.rallyBuff -= 1;
+        if ((c.rallied || 0) > 0) c.rallied -= 1;
         // TAKE AIM EXPOSURE (break-it combat r6 2026-10-09): "enemies hit
         // easier until your next turn" — the exposure ticks down as the new
         // turn begins. The 2.5x aim itself persists until the shot is taken.
@@ -33293,8 +33297,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // rep's speech still only SETS it on monsters; the war cry only sets
       // it on our side. The hook just honors the flag wherever it lives.)
       try {
-        const src = sourceKey ? this.tbFighter(sourceKey) : null;
-        if (src && (src.kind === 'monster' || src.kind === 'ally' || src.kind === 'villager') && (src.rallyBuff || 0) > 0 && final > 0) {
+        // Melee uses ('you', null); abilities normally use source key 'p'.
+        const src = sourceKey ? this.tbFighter(sourceKey) :
+          (sourceKey == null && sourceLabel === 'you' ? this.tbFighter('p') : null);
+        const playerRally = src && src.kind === 'player' && src.alive && !src.fled &&
+          (t.kind === 'monster' || t.kind === 'hostile');
+        if (src && (src.kind === 'monster' || src.kind === 'ally' || src.kind === 'villager' || playerRally) && (src.rallyBuff || 0) > 0 && final > 0) {
           final += 4;
         }
       } catch (e) {}

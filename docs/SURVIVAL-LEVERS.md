@@ -61,6 +61,19 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+NPC support recipient audit (2026-10-16): retain the existing brawler wound
+threshold, range, once-per-fight guard, three-turn duration and raw +4 rally
+damage. Apply those terms to a distinct nearby living player as well as NPC
+allies. Expire player rally on own-turn entry, including skipped turns. Player
+rally applies to sourced foe damage, before existing food multiplication; it
+does not amplify environmental damage or friendly backlash. In exchange, a
+fallen NPC Voice now costs the player one full turn and clears rally, matching
+the existing NPC weakness. Neither improvement nor penalty sets a win target.
+Prepared runtime and phone proofs establish the affected paths; standard
+cohort exposure and remaining command gaps are recorded in
+../evidence/2026-10-16/god-support-audit.md. Read that evidence before using
+campaign outcomes to infer natural availability or changing survival costs.
+
 | Date / lever | Observations | Decision and remaining question |
 | --- | --- | --- |
 | 2026-10-16, formal companion body and gear | [Audit](../evidence/2026-10-16/formal-companion-audit.md): matching actual HP/capacity/worn gear passes28 runtime assertions.64 paired seeds/policy: wins56→60 /18→22 /24→25 /23→35; named-class access48→45 /55→48 /46→43 /48→42. Maker deaths57→58 and first-bearer60-day survival53→50 need review. A food-deed smoke test passes on base but fails on the candidate: seed42 keeps its original bearer and installs a reactor before spending its feast surge. | **Unadopted candidate; published gameplay restored.** Preserve the existing progression assertion and pending reactor/food-use decision. Higher wins do not cancel build/access warnings or prove appropriate challenge. No HP, enemy, cost, offer or policy tuning; do not treat restoring the measured baseline as endorsement of the30HP bug. |

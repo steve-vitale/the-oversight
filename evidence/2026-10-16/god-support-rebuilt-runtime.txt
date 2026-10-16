@@ -1,0 +1,29 @@
+  ok   actual wounded NPC brawler hit rallies the nearby living player
+  ok   the same hit rallies the fellow NPC and excludes the holder
+  ok   a second wound cannot refresh the once-per-fight rally
+  ok   above-half-health hit does not rally
+  ok   distant player gets no rally
+  ok   fled player gets no rally
+  ok   dead player gets no rally
+  ok   canonical self alias cannot rally its own player body
+  ok   legacy player melee source receives existing raw +4 rally
+  ok   explicit player ability source receives existing raw +4 rally
+  ok   unattributed environmental damage gets no player rally
+  ok   an explicit empty source key is not normalized into player melee
+  ok   zero damage does not become a hit
+  ok   dead player cannot source rally damage
+  ok   fled player cannot source rally damage
+  ok   existing NPC source retains its raw +4
+  ok   rally does not amplify player friendly backlash
+  ok   real player Strike consumes the source convention and lands +4
+  ok   actual player turn entry expires both rally flags in three own turns
+  ok   expired rally restores ordinary damage
+  ok   actual NPC Voice death stuns the player for a full action and clears rally
+  ok   the existing fellow NPC death weakness remains
+  ok   player turn entry consumes the stun and requests exactly one skip
+  ok   the following player turn restores choice and movement
+  ok   real scheduler passes the lost turn and returns control on the next round
+  ok   a fled player is not stunned by Voice collapse
+  ok   canonical self alias cannot impose its own ally collapse on the player
+
+god-support-player: 27 passed, 0 failed, 0 todo (phase 0)

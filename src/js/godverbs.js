@@ -662,15 +662,24 @@
       const P = godPlay('one_person_army');
       if ((t.hp || 0) / Math.max(1, t.maxHp || 100) < (P.partyRallyAt || 0.5)) {
         g.rallied[t.key] = true;
-        const near = liveOurs(f).filter(x => x !== t && x.kind !== 'player' && cheb(x, t) <= 3);
+        const holderId = t.kind === 'player' ? game.villagerId : t.villagerId;
+        const near = liveOurs(f).filter(x => x !== t &&
+          !(holderId && holderId === (x.kind === 'player' ? game.villagerId : x.villagerId)) && cheb(x, t) <= 3);
         for (const v of near) { v.rallyBuff = Math.max(v.rallyBuff || 0, P.partyRallyRounds || 3); v.rallied = Math.max(v.rallied || 0, P.partyRallyRounds || 3); }
         if (near.length) game.say(`${near.length} all${near.length === 1 ? 'y sees' : 'ies see'} ${t.kind === 'player' ? 'you' : t.name} bleed and come in harder for it. (The One-Person Army)`);
       }
     }
     // THE SINGLE POINT OF FAILURE (Voice of the Relay): the network goes dark.
     if (tg === 'voice_of_the_relay' && wasAlive && !t.alive) {
-      const field = liveOurs(f).filter(x => x !== t && x.kind !== 'player');
-      for (const v of field) { v.stunned = Math.max(v.stunned || 0, 1); v.rallyBuff = 0; }
+      const holderId = t.kind === 'player' ? game.villagerId : t.villagerId;
+      const field = liveOurs(f).filter(x => x !== t &&
+        !(holderId && holderId === (x.kind === 'player' ? game.villagerId : x.villagerId)));
+      for (const v of field) {
+        v.stunned = Math.max(v.stunned || 0, 1); v.rallyBuff = 0;
+        // NPC stun loses an action. The player needs the existing full-turn
+        // flag too; ordinary player stun only prevents movement.
+        if (v.kind === 'player') v.stunFull = Math.max(v.stunFull || 0, 1);
+      }
       if (field.length) game.say(`The voice everyone was listening for stops. ${field.length} all${field.length === 1 ? 'y freezes' : 'ies freeze'}, waiting for a word that doesn't come. (Voice of the Relay: the network goes dark)`);
     }
   }
