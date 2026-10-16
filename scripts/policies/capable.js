@@ -633,8 +633,11 @@ function chooseOffers(Game, ctx) {
     // otherwise keep what we have.
     const isLevelUp = String(ch[0].src || '').indexOf('level_up:') === 0;
     const slotsFull = ((Game.state.scholar || {}).abilities || []).length >= (Game.abilitySlots ? Game.abilitySlots() : 6);
+    // Named experimental player strategies may declare an on-sheet intent.
+    // The ordinary policy and the game's shared/NPC build brain stay intact.
+    const intent = fallback => typeof ctx.offerIntent === 'function' ? ctx.offerIntent(Game, ch, fallback) || fallback : fallback;
     if (isLevelUp && slotsFull && Game.keepAbilities && brain) {
-      const d = Game.buildDecide('player', ch.map(c => c.id));
+      const d = intent(Game.buildDecide('player', ch.map(c => c.id)));
       if (d.pick && d.replace) { Game.chooseAbility(d.pick, d.replace); bump(ctx, 'capLevelUpReplaced'); bumpMap(ctx, 'capOfferPicks', d.pick); }
       else { Game.keepAbilities(); bump(ctx, 'capLevelUpKept'); }
       return;
@@ -657,7 +660,8 @@ function chooseOffers(Game, ctx) {
       bumpMap(ctx, 'capOfferPicks', best.o.id);
       return;
     }
-    Game.chooseAbility(best.o.id);
+    const chosen = intent({ pick: best.o.id }).pick || best.o.id;
+    Game.chooseAbility(chosen);
     if (isLevelUp) bump(ctx, 'capLevelUpPicked');
     if ((Game.state.scholar || {}).abilityChoices === ch) { // engine refused (no free slot): the offer waits
       ctx._capOfferSig = JSON.stringify(ch.map(c => c.id)); ctx._capOfferDay = day(Game);
@@ -665,8 +669,8 @@ function chooseOffers(Game, ctx) {
       return;
     }
     bump(ctx, 'capOffersChosen');
-    if (best.o.id !== ch[0].id) bump(ctx, 'capOffersNotFirst');
-    bumpMap(ctx, 'capOfferPicks', best.o.id);
+    if (chosen !== ch[0].id) bump(ctx, 'capOffersNotFirst');
+    bumpMap(ctx, 'capOfferPicks', chosen);
   } catch (e) { note(ctx, 'chooseOffers: ' + e.message); }
 }
 // KEEPSAKES (2026-10-14, Steve: keepsakes compete with accessory gear and
@@ -1281,4 +1285,4 @@ function capableSummary(ctx) {
   return out;
 }
 
-module.exports = { capable, capableSummary, threatFlee, treatLockjaw, raidCall, godDay, havenEscape, havenExitDir, drawOutmatched, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
+module.exports = { capable, capableSummary, chooseOffers, threatFlee, treatLockjaw, raidCall, godDay, havenEscape, havenExitDir, drawOutmatched, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };

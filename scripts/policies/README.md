@@ -96,3 +96,11 @@ observed public actions for peer claims.
    genuinely need a different base — say why in the header.
 3. Document the behavior AND what it measures in the header comment.
 4. One file, deterministic, guarded. Add a row to the table above.
+
+## Miser build-intent cohorts
+
+merchant-hoarder and merchant-dealer inherit merchant's food, public trade, care, travel, defensive combat and Table controller. They add only a declared ability-choice preference. The optional ctx.offerIntent callback in capable.chooseOffers receives actual shown offers and the generic proposed pick/swap/keep; absent callbacks preserve the ordinary policy. New cohorts never replace Game.buildScore/buildDecide or the NPC brain.
+
+Only offered or currently held magic definitions are inspected. Miser offers rank100, preferred subclass+20, payoff+4 or enabler+2; stable sheet order breaks ties. Free slots prefer the highest ranked shown Miser. Full level-up slots first replace the weakest known off-path incumbent (never the reactor), otherwise upgrade only a lower-preference Miser. A generic off-path pick that would remove earned Miser core is declined. This is a committed preference, can occupy all six slots, and has real defence/food/opportunity costs; it is not an optimal-human policy or a guarantee of the named subclass. Full gifts still obey the real swap gate.
+
+Use --policies merchant,merchant-hoarder,merchant-dealer in balance-panel or deed-screen. Compare the same policy files and flags on both game roots. For a strategy comparison on one game, keep it separately labelled; never relabel strategy change as a game-only regression. Count the class at the actual Table ending as well as ever-class, and track the reactor, succession, food, community and gear sources. Share source-bound roots with Muse; the older balanced-measurement game lacks the published paid-trade/Haggle repairs and must not be treated as the same runtime.
