@@ -1,0 +1,208 @@
+{
+  "verifiedCacheRows": 512,
+  "balancedControlJobs": 16,
+  "observedReplays": 52,
+  "deedNeutralPairs": 2,
+  "merchant": {
+    "before": {
+      "merchantCases": 16,
+      "peopleWithTrade": 0,
+      "tradeCredits": 0,
+      "miserOffers": {
+        "player": {
+          "taste_vision": 8,
+          "haggle": 1
+        },
+        "npc": {
+          "taste_vision": 2,
+          "hoarder": 1
+        }
+      }
+    },
+    "after": {
+      "merchantCases": 16,
+      "peopleWithTrade": 10,
+      "tradeCredits": 31,
+      "miserOffers": {
+        "player": {
+          "taste_vision": 8,
+          "haggle": 1
+        },
+        "npc": {
+          "taste_vision": 2,
+          "hoarder": 1
+        }
+      }
+    }
+  },
+  "transitions": [
+    {
+      "policy": "maker",
+      "seed": 6,
+      "before": {
+        "won": 1,
+        "end": "over-other",
+        "day": 144
+      },
+      "after": {
+        "won": 0,
+        "end": "survived",
+        "day": 151
+      }
+    },
+    {
+      "policy": "maker",
+      "seed": 11,
+      "before": {
+        "won": 0,
+        "end": "survived",
+        "day": 151
+      },
+      "after": {
+        "won": 1,
+        "end": "over-other",
+        "day": 130
+      }
+    },
+    {
+      "policy": "maker",
+      "seed": 12,
+      "before": {
+        "won": 0,
+        "end": "village-lost",
+        "day": 107
+      },
+      "after": {
+        "won": 0,
+        "end": "survived",
+        "day": 151
+      }
+    },
+    {
+      "policy": "maker",
+      "seed": 13,
+      "before": {
+        "won": 0,
+        "end": "village-lost",
+        "day": 140
+      },
+      "after": {
+        "won": 0,
+        "end": "survived",
+        "day": 151
+      }
+    },
+    {
+      "policy": "maker",
+      "seed": 18,
+      "before": {
+        "won": 0,
+        "end": "survived",
+        "day": 152
+      },
+      "after": {
+        "won": 0,
+        "end": "village-lost",
+        "day": 128
+      }
+    },
+    {
+      "policy": "maker",
+      "seed": 19,
+      "before": {
+        "won": 0,
+        "end": "village-lost",
+        "day": 138
+      },
+      "after": {
+        "won": 0,
+        "end": "survived",
+        "day": 149
+      }
+    },
+    {
+      "policy": "maker",
+      "seed": 49,
+      "before": {
+        "won": 0,
+        "end": "survived",
+        "day": 149
+      },
+      "after": {
+        "won": 0,
+        "end": "village-lost",
+        "day": 131
+      }
+    },
+    {
+      "policy": "merchant",
+      "seed": 3,
+      "before": {
+        "won": 1,
+        "end": "over-other",
+        "day": 128
+      },
+      "after": {
+        "won": 0,
+        "end": "survived",
+        "day": 151
+      }
+    },
+    {
+      "policy": "merchant",
+      "seed": 6,
+      "before": {
+        "won": 0,
+        "end": "survived",
+        "day": 147
+      },
+      "after": {
+        "won": 0,
+        "end": "village-lost",
+        "day": 125
+      }
+    },
+    {
+      "policy": "merchant",
+      "seed": 11,
+      "before": {
+        "won": 0,
+        "end": "survived",
+        "day": 149
+      },
+      "after": {
+        "won": 1,
+        "end": "over-other",
+        "day": 90
+      }
+    },
+    {
+      "policy": "merchant",
+      "seed": 23,
+      "before": {
+        "won": 0,
+        "end": "village-lost",
+        "day": 100
+      },
+      "after": {
+        "won": 1,
+        "end": "over-other",
+        "day": 108
+      }
+    },
+    {
+      "policy": "merchant",
+      "seed": 37,
+      "before": {
+        "won": 0,
+        "end": "survived",
+        "day": 150
+      },
+      "after": {
+        "won": 1,
+        "end": "over-other",
+        "day": 150
+      }
+    }
+  ]
+}

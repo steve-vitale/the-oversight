@@ -187,3 +187,5 @@ lifetime candidate, separately from prices and policy changes.
 Market scale/parity correction (2026-10-15): Codex takes the narrow fieldFights.js selected-attack context and godverbs.js off-screen Gilded Guard weakness. Actual beams bypass coins as they already do tactically; separate physical antlers remain shieldable. No beam damage/coin price or region/nomad change.
 
 Sealed-contest correction (2026-10-15): Codex takes fieldFights.js learn-first withdrawal versus noFlee, actual contest-caller proofs and the existing Molt settlement fixture. Wild withdrawal, named monsters, prices and regional/nomad files stay outside this correction. Measure independently from the preceding Market guard weakness.
+
+Paid-goods progression (2026-10-15): Codex takes the shared tracks.json trade deed and betrayal.js actor helper, completed cart/hawker receipts in betrayal.js, and the narrow game.js river-goods completion hook. One shared social XP/day, actual paid exchanges only, including resident sellers; no kit reorder, inferred NPC transactions or regional/nomad edits. Knowledge barter and institutional trade are separate models, not claimed complete here.

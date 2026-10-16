@@ -144,3 +144,5 @@ Job -> track -> **class** -> **god** -> Table.
    beats/overrides remain optional; narrative feel needs Steve's eyes.
 
 Scale caller inventory (2026-10-15): `SCALE-AUDIT.md` maps all forty promised contexts and distinguishes inherited tactical hooks from strategic/contest gaps. The off-screen Market God beam weakness is corrected with real mixed/physical controls; see `../../evidence/2026-10-15/market-beam-audit.md`. This does not complete the scale or eight remaining deed requirements.
+
+Miser access audit (2026-10-15): paid goods transactions previously raised trade-savvy but never track XP. Cart/hawker/river completion now credits one shared social practice per person/day, including a real resident seller. This does not reorder kits or author a god deed. The independent 64 x four panel still samples neither Miser class; 16 merchant replays show only 31 actual credits and sparse Miser offers. See `../../evidence/2026-10-15/trade-progression-audit.md`; deep kit placement remains a separate experiment.

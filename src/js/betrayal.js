@@ -37,9 +37,11 @@
 //   - playerPackKcal() / playerPackSpend(kcal)
 //   - confrontScammer(vis, s) / resolveConfront(vis, s, how)
 //   - hawkerOffer(vid) / hawkerBuy(vid)
+//   - creditGoodsTrade(who, consideration) -> completed paid goods practice for an actual living bearer/resident; uses the shared capped trade deed
 //   - visitorHtml()
 //   - visitorDaily()
 // rules:
+//   - paid_goods_practice: successful paid cart purchases/sales and resident hawker sales credit the same capped trade deed; quotes, gifts and failed calls do not (code: hawkerBuy, traderSell, visitorBuyWare)
 //   - betrayal_requires_motive: true (code: betrayal.js)
 //   - bonds_form_in_run: true (code: betrayal.js — bondAdd; meals/visits/feasts build, grievances decay, +6/pair/day cap, no bonds with the dead/gone)
 //   - switchboard_talker_cost: appointing the village's best talker to the relay weakens moots — trial swing -8 while they hold the office (code: betrayal.js — tallyVotes, switchboardTalkerCost)
@@ -3321,8 +3323,21 @@
     }
     return ware;
   },
+  // Call only after payment and delivery settle. Quotes, gifts, refused
+  // calls and passive trade routes are not practice. Caller snapshots the
+  // actual buyer before a time cost can pass the mantle to another person.
+  creditGoodsTrade(who, consideration) {
+    if (!Number.isFinite(consideration) || consideration <= 0 || !this.creditDeed) return 0;
+    const me = who === 'player' || who === this.villagerId;
+    const vid = me ? this.villagerId : who, v = this.state.village;
+    const person = vid && this.vpOf ? this.vpOf(vid) : null;
+    if (!person || person.dead || (!me && !(v.roster || []).includes(vid))) return 0;
+    if ((me ? this.state.scholar.health : (v.health || {})[vid] ?? 100) <= 0) return 0;
+    return this.creditDeed(me ? 'player' : vid, 'trade');
+  },
   // hawkerBuy(vid): buy the villager's offered ware. Same payment rails.
   hawkerBuy(vid) {
+    const buyerId = this.villagerId;
     const v = this.state.village || {};
     const ware = (v.hawkerStock || {})[vid];
     if (!ware || ware.sold) return null;
@@ -3366,6 +3381,7 @@
     // SOCIAL: a villager who scams YOU faces the village, not the road.
     // Discovery lands via scamDaily remarks; trust does the punishing.
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
+    try { if (this.creditGoodsTrade) { this.creditGoodsTrade(buyerId, price); this.creditGoodsTrade(vid, price); } } catch (e) { console.warn('[tracks] hawker trade', e); }
     return true;
   },
   // traderSellStock(vis): pack food stacks with appraisals, for the sell view.
@@ -3376,6 +3392,7 @@
   // traderSell(visId, packIdx): sell the whole stack. The price lands on the
   // trader's tab as credit toward his wares.
   traderSell(visId, packIdx) {
+    const sellerId = this.villagerId;
     const v = this.state.village;
     const vis = (v.visitors || []).find(x => x.id === visId);
     if (!vis || this.tradeSpirit(vis) <= 0) return null;
@@ -3394,6 +3411,7 @@
     this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1;
     this.say(`${ap.line} Done — ${units}× ${name} for ${total} kcal on your tab.`);
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
+    try { this.creditGoodsTrade && this.creditGoodsTrade(sellerId, total); } catch (e) { console.warn('[tracks] cart sale', e); }
     return true;
   },
   // ---------- 8b. THE TRADER'S CART (Steve 2026-10-06) ----------
@@ -3497,6 +3515,7 @@
     return { ok: true, taken, paid: taken.reduce((t, x) => t + x.kcal, 0) };
   },
   visitorBuyWare(visId, idx) {
+    const buyerId = this.villagerId;
     const v = this.state.village;
     const vis = (v.visitors || []).find(x => x.id === visId);
     if (!vis || this.tradeSpirit(vis) <= 0) return null;
@@ -3578,6 +3597,7 @@
     }
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
     try { this.tickAction(8); } catch (e) {}
+    try { this.creditGoodsTrade && this.creditGoodsTrade(buyerId, price); } catch (e) { console.warn('[tracks] cart purchase', e); }
     return true;
   },
   // visitorHtml: the Haven panel block. Traders get the cart UI; other

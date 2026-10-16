@@ -91,3 +91,26 @@ Measured guard outcomes: all 256 standard campaign rows/states remain identical,
 2026-10-15 decision: retain the closed gate and investigate its costs, without lowering beast strength or restoring an escape to recover previous survival. In the isolated ordinary-kit Market guard drone cohort, field deaths rise 18 -> 64/64 and learning escapes 46 -> 0; the physical wolf control remains identical. This is a deliberately unprepared, guard-only fixture, not a complete god build or naturally earned campaign. See `../evidence/2026-10-15/sealed-learning-audit.md` for standard panels, uncertainty, caller and phone proofs. Historical market-beam reports are not rewritten.
 
 Sealed-gate confirmation: all 256 matched standard campaign rows/final states and all 23 per-policy metrics remain identical; wins remain 55/21/23/23, community losses 8/19/14/18. This does not clear earlier Relay tradeoffs. The affected drone fixture death-rate delta +0.71875 has exploratory interval [0.609375, 0.828125], with no holdout and no natural full-build claim. Actual public watched-contest settlement and save/load persistence are independently proved.
+
+
+## Paid goods and progression
+
+`tracks.json` trade deed: one social XP per actual person/calendar day. Only
+settled paid cart purchases/sales, resident hawker sales and river-goods barter
+call betrayal.js creditGoodsTrade. Failed payment, empty/sold stock, free gifts,
+unknown/dead people and passive trade routes do not practice a skill. A resident
+seller uses the same event/value/cap as the buyer. The buyer's identity is
+captured before time costs; death/succession cannot transfer the accomplishment.
+Existing NPC daily caps carry into the mantle. There is no inferred NPC trade,
+kit reorder, price/reward change or new ascension deed. Knowledge barter and
+institutional route settlement are separate models, not claimed complete here.
+
+2026-10-15 decision: retain honest paid practice; investigate class access
+separately. At 64 matched seeds per policy: wins 55->55 / 21->21 / 23->25 /
+23->23; player deaths 90->90 / 59->52 / 46->42 / 45->45; community losses 8->8 /
+19->18 / 14->14 / 18->18. Merchant win movement is a neutral review watch
+(delta +0.03125, exploratory interval [-0.03125, 0.09375]). More merchant wins
+are not an automatic benefit; paired losses and new community failures remain
+visible in the evidence. All 256 earn tier-3+ gear; neither Miser subclass
+appears. See ../evidence/2026-10-15/trade-progression-audit.md. Earlier caregiver
+community and capable challenge questions remain open.

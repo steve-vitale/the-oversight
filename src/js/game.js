@@ -23658,6 +23658,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // tradeRiverTrader(goodId): a day-part of haggling. Three goods; pick, or
     // let the trader size up what Haven needs most.
     tradeRiverTrader(goodId) {
+      const buyerId = this.villagerId;
       const s = this.state.scholar;
       const rt = s.riverTrader;
       if (!rt || rt.day !== (s.day || 1)) { this.say('The trader\'s gone — downriver, by the smell of it.'); return null; }
@@ -23703,6 +23704,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       rt.greeted = true;
       this._evTrustAll(2);
       this.say(`🤝 Done. The ${pick.label.toLowerCase()} is yours — ${pick.price} kcal of trade-goods, a day-part of haggling, and a fair deal honestly struck. (Village trust +2. The river notes that Haven trades fair.)`);
+      try { this.creditGoodsTrade && this.creditGoodsTrade(buyerId, pick.price); } catch (e) { console.warn('[tracks] river goods trade', e); }
       return true;
     },
     // snubRiverTrader: free. But the river remembers.

@@ -1,0 +1,25 @@
+  FAIL trade is a data-authored capped social deed
+  ok   real paid cart purchase grants the item and spends food
+  FAIL that completed transaction earns one social XP
+  FAIL replaying a sold ware cannot award XP
+  FAIL buy and sale share one daily practice cap
+  FAIL a real sale on a later day earns another credit
+  ok   unfunded purchase fails without XP or partial payment
+  ok   empty sale and unknown trader cannot award practice
+  ok   a free cart grant is not paid trade practice
+  ok   real resident hawker purchase completes
+  FAIL both living participants receive the same credit
+  FAIL sold hawker replay cannot train either participant
+  FAIL a second paid hawker trade retains both daily caps
+  FAIL real save/load preserves buyer and seller daily caps
+  ok   unfunded hawker sale trains neither actor
+  FAIL real river goods barter pays food and earns practice
+  FAIL river and cart trading use the same daily cap
+  ok   unfunded river barter awards no practice
+  ok   unknown people and invalid consideration cannot gain practice
+  ok   a dead resident cannot receive trade practice
+  FAIL real succession carries the seller XP and daily cap into the bearer role
+  ok   a death during the real purchase time cost cannot credit the successor
+
+trade-progression: 10 passed, 12 failed, 0 todo (phase 0)
+failing: trade is a data-authored capped social deed | that completed transaction earns one social XP | replaying a sold ware cannot award XP | buy and sale share one daily practice cap | a real sale on a later day earns another credit | both living participants receive the same credit | sold hawker replay cannot train either participant | a second paid hawker trade retains both daily caps | real save/load preserves buyer and seller daily caps | real river goods barter pays food and earns practice | river and cart trading use the same daily cap | real succession carries the seller XP and daily cap into the bearer role
