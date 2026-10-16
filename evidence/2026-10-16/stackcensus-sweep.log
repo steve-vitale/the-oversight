@@ -1,0 +1,38 @@
+  [belongfeast s1501] d=116 end=village-lost starvedDays=11 nat=1 wave=4 arc=4
+  [belongfeast s1502] d=147 end=village-lost starvedDays=3 nat=0 wave=5 arc=4
+  [belongfeast s1503] d=106 end=village-lost starvedDays=2 nat=1 wave=5 arc=4
+  [belongfeast s1504] d=140 end=village-lost starvedDays=5 nat=1 wave=4 arc=4
+  [belongfeast s1505] d=175 end=village-lost starvedDays=2 nat=1 wave=4 arc=4
+  [belongfeast s1506] d=96 end=village-lost starvedDays=7 nat=0 wave=3 arc=4
+  [belongfeast s1507] d=112 end=village-lost starvedDays=11 nat=1 wave=4 arc=4
+  [belongfeast s1508] d=62 end=village-lost starvedDays=2 nat=0 wave=4 arc=4
+  [leadfeast s1501] d=151 end=survived starvedDays=0 nat=1 wave=3 arc=3
+  [leadfeast s1502] d=94 end=village-lost starvedDays=3 nat=1 wave=5 arc=4
+  [leadfeast s1503] d=75 end=village-lost starvedDays=2 nat=0 wave=4 arc=4
+  [leadfeast s1504] d=181 end=village-lost starvedDays=4 nat=1 wave=4 arc=4
+  [leadfeast s1505] d=157 end=village-lost starvedDays=2 nat=1 wave=5 arc=4
+  [leadfeast s1506] d=53 end=village-lost starvedDays=2 nat=0 wave=2 arc=3
+  [leadfeast s1507] d=155 end=village-lost starvedDays=22 nat=1 wave=5 arc=4
+  [leadfeast s1508] d=89 end=village-lost starvedDays=7 nat=1 wave=5 arc=4
+
+== STACKING CENSUS: thin-day (fd<6) drawdown-outflow events ==
+thin-day events: n=68 across 16 runs; unattributed=0
+ATTRIBUTION (PRIMARY): 100.0% (bar >= 95%)
+  OBLIGATED: n=30 kcal=250k (75.6% of thin-day outflow kcal)
+  DISCRETIONARY-ONLY: n=36 kcal=71k (21.5% of thin-day outflow kcal)
+  STACKED: n=2 kcal=10k (2.9% of thin-day outflow kcal)
+  sub-channels (kcal):
+    DISCRETIONARY-ONLY:single: n=36 kcal=71k
+    OBLIGATED:obligated-only: n=30 kcal=250k
+    STACKED:stackBind: n=1 kcal=3k
+    STACKED:stackOblHeavy: n=1 kcal=7k
+  STACKED:stackBind margin — n=1 days, discretionary kcal through the bind=2k (0.5% of thin-day outflow kcal)
+  road belongfeast: events=51 kcal=278k | stacked-bind: n=0 discKcal=0k
+  road leadfeast: events=17 kcal=53k | stacked-bind: n=1 discKcal=2k
+  fd band 1-3: events=25 | stacked-bind n=1
+  fd band 3-6: events=31 | stacked-bind n=0
+  top stackBind days (sense targets): leadfeast/s1504/d35 fd1.75 obl=1610 aid=0 feast=1600
+
+== wall numbers ==
+n=16 national=11/16 table=14/16 wins=0/16 exiled=0/16 wave4=13/16 wave5=6/16 arc2=16/16 arc3=16/16 arc4=14/16 fourRealm=0/16 medianSurv=114.0d maxSurv=181d starvedDays=85
+death causes: combat:327 villager combat:136 monster:85 expedition:25 sickness:17 starvation:11 a wound that wouldn't close:6 contest:4 the thing with headlights for eyes, standing too still:2 Choir Toad:2 dehydration:2 ambush:2 The Spoiler:1 The Focus Group:1 The Eulogy:1 Inspiration:1
