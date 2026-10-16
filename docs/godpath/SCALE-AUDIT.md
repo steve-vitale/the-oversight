@@ -43,6 +43,13 @@ contest rule, audience reaction, judged advantage or mercy choice.
 
 ## Concrete gaps to take next
 
+Apex authored-deed follow-up (2026-10-16): formal NPCs injected after the
+constructor now retain opening Pack Hunt ownership/full capacity, so their
+actual paid kill can earn their own deed. Natural caregiver10045 and native
+scheduled NPC/load proof: ../../evidence/2026-10-16/apex-party-audit.md.
+This closes the initial Apex deed's formal-caster gap, not the separate
+formal30HP/gear model or the forty-context scale requirements.
+
 Garden feeding settlement (2026-10-16): the recipient/caster diagnosis below
 now has a separate repair. Distinct known living residents receive a meal;
 NPC casting includes a living non-reactor player at their existing fed line,
@@ -121,5 +128,5 @@ No food amount, daily effect or authored Garden deed is changed by the audit.
    12x12 fight can prove a contract but cannot certify a naturally earned run.
 
 No existing recognized god is removed and no new ascension quota is inferred.
-Eight fitting authored deeds remain open; the Garden interpretation question
+Seven fitting authored deeds remain open; the Garden interpretation question
 is recorded in OPEN-QUESTIONS.md and does not block these independent contracts.

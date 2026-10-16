@@ -14,6 +14,15 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Apex formal-caster follow-up (2026-10-16): Codex owns only godpath.js's saved
+formal opening ownership/capacity and enrollment of actual injected actors.
+Keep party HP/gear, initiative, placement, costs and all other gods fixed.
+18 caller/load checks, actual scheduled NPC mobile casting, unchanged320
+campaign rows/all23 metrics and30 exact diagnostic replays are in
+../evidence/2026-10-16/apex-party-audit.md. This closes the prior deed's formal
+caster limitation; the separate formal body model and other reinforcements
+remain open. Muse's world/region/nomad work stays separate.
+
 Apex fitting deed (2026-10-16): Codex owns godpath.js's person-owned fresh,
 stronger-prey receipt, real tactical opening/damage/outcome and saved encounter
 ledger, plus fieldFights.js's actual living kill settlement. Stalker can hunt

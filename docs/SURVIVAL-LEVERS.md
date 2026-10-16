@@ -41,6 +41,16 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Apex formal ownership follow-up (2026-10-16): encounter-opening party/talent
+and full-capacity evidence now lets an actual later formal NPC earn their
+paid pack hunt. This changes personal credit, not companion30HP/gear,
+initiative, costs, prey threshold or god power. Standard16 and disjoint64
+per policy keep every row/all23 metrics unchanged. One natural first receipt
+moves to an earlier qualifying fight on the same day;13 other full-state
+differences are saved ledger metadata. Retain the preceding Apex access and
+survival tradeoffs. See ../evidence/2026-10-16/apex-party-audit.md for30 exact
+diagnostic replays and native scheduled NPC proof; this is no balance verdict.
+
 Apex authored hunt (2026-10-16, needs-eyes): ascension access now requires a
 personal actual fresh monster kill above opening full-body HP, either solo
 or with opening-held Pack Hunt actually paid/called on that prey and every

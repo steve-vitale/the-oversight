@@ -222,13 +222,22 @@
   function beginApexHunt(game, f) {
     if (!f || f._gpApexHunt) return;
     const side = (f.fighters || []).filter(huntSide), prey = new Map();
+    // Formal companions enter through party.js after the core constructor.
+    // Read their existing ownership now, before any turn can teach a talent;
+    // only an actual later fighter can use this saved opening evidence.
+    const village = game.state.village, openingCompanions = {};
+    for (const id of new Set(village.party || [])) {
+      if (!id || id === game.villagerId || !(village.roster || []).includes(id)) continue;
+      openingCompanions[id] = { pack: holderMagicIds(id).includes('pack_hunt'),
+        maxHp: Math.max(100, village.health?.[id] || 0) };
+    }
     for (const m of (f.fighters || [])) {
       if (m.kind !== 'monster' || !m.mdef || !m.alive || m.fled || !(m.hp > 0)) continue;
       const key = game.tbSnakeLineageKey(m), old = prey.get(key);
       if (old) { old.hp += m.hp; old.full = old.full && m.hp === m.maxHp; }
       else prey.set(key, { key, monster: m.mdef.id, hp: m.hp, full: m.hp === m.maxHp });
     }
-    f._gpApexHunt = { version: 1, lost: false, present: side.map(x => x.key), prey: [...prey.values()],
+    f._gpApexHunt = { version: 1, lost: false, openingCompanions, present: side.map(x => x.key), prey: [...prey.values()],
       actors: side.map(x => { const id = huntPerson(game, x); return { key: x.key, id,
         // A distant human companion's legacy30HP proxy is not their body's
         // full capacity. Field fights use the same100HP human floor.
@@ -250,7 +259,12 @@
     }
     const side = (f.fighters || []).filter(huntSide);
     for (const x of side) {
-      if (!h.present.includes(x.key)) h.present.push(x.key);
+      if (!h.present.includes(x.key)) {
+        h.present.push(x.key);
+        const id = huntPerson(game, x), opening = h.openingCompanions?.[id];
+        if (id && opening) h.actors.push({ key: x.key, id,
+          maxHp: Math.max(opening.maxHp, x.maxHp || 0), pack: opening.pack, usedPack: [] });
+      }
       if (!x.alive || x.fled || !(x.hp > 0) || x._echoed) h.lost = true;
     }
     for (const key of h.present) if (!side.some(x => x.key === key)) h.lost = true;

@@ -7,6 +7,14 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
+2026-10-16 Apex formal ownership: the prior audit's formal-caster limitation
+is closed by a saved encounter-opening ownership/capacity snapshot, then
+enrollment of actual injected NPC bodies. Later talent acquisition and old
+missing evidence still earn nothing.18 real caller/load checks, native
+scheduled NPC/kill/load proof, full957/957 and identical320 rows/all23 metrics:
+../../evidence/2026-10-16/apex-party-audit.md. Formal30HP/gear and broader
+reinforcement/scale work remain separate; no survival parameter changed.
+
 2026-10-16 Apex deed: actual fresh monster kills replace its class-age/synergy
 proxy. Opening prey HP must exceed the hunter's full-body maximum. Solo and
 actually paid Pack Hunt routes preserve both subclass fantasies; supported

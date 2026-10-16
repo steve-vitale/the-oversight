@@ -1,5 +1,14 @@
 # Simulating The Oversight — how to measure a change
 
+Apex formal entry (2026-10-16): `scripts/godpath/test-apex-party-deed.js`
+automatically joins quick/full discovery. It covers actual party injection,
+paid NPC verbs, opening ownership/capacity, old evidence and load before/after
+payment. Compare full hashes even when all23 metrics and rows stay unchanged:
+the apex-party audit's14 cases separate13 saved-metadata differences from
+one corrected first-hunt provenance. Its28 full-state and2 richer opportunity
+replays match the frozen panel hashes. Rebuild with the bundled raw collector;
+do not suppress the new ledger from gameplay hashes.
+
 Apex authored deed (2026-10-16): `scripts/godpath/test-apex-deed.js` is found
 automatically by quick/full checks. It uses one shared harness and real
 tactical/field callers, including the post-constructor door-wound restore,

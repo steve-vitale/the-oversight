@@ -9,6 +9,18 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Apex formal-caster follow-up (2026-10-16): the constructor now saves formal
+companions' opening Pack Hunt ownership/full capacity before party.js inserts
+their bodies. Actual paid later casting can earn their personal deed; later
+learning, wounds or old missing evidence cannot substitute. No body/gear,
+initiative, cost or Table change.18 checks, full957/957 and native scheduled
+NPC Wait/cast/load/real-kill proof pass. All320 standard/disjoint holdout
+rows and23 metrics are unchanged. A natural day60 formal caster now earns
+the earlier341HP Chorus Line kill rather than the later159HP Moderator;
+their ascension80 and win97 stay. See ../evidence/2026-10-16/apex-party-audit.md
+for all14 changed hashes and30 source-matched diagnostic replays. Continue
+seven deeds and scale work; the separate formal30HP model remains open.
+
 Apex fitting deed (2026-10-16): real fresh stronger-prey kills now replace
 the Hunter's class-age/synergy shortcut. Solo supports Stalker; Beastmaster
 uses its opening-held, actually paid Pack Hunt with all allied fighters alive

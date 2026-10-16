@@ -1,0 +1,6 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),dir=process.argv[2]||__dirname,read=n=>JSON.parse(z.gunzipSync(fs.readFileSync(path.join(dir,n)))),plan=JSON.parse(fs.readFileSync(path.join(dir,'apex-party-replay-plan.json')));
+function normalized(state){const s=JSON.parse(JSON.stringify(state));if(s.pacing)for(const k of ['lastTs','dayMinutes','totalMin'])delete s.pacing[k];return s;}
+function differences(a,b,p='',out=[]){if(JSON.stringify(a)===JSON.stringify(b))return out;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))differences(a[k],b[k],p?p+'.'+k:k,out);}else out.push({path:p,...(a===undefined?{}:{before:a}),...(b===undefined?{}:{after:b})});return out;}
+const cases=plan.cases.map(c=>{const b=read('apex-party-trace-before-'+c.policy+'-'+c.seed+'.json.gz'),a=read('apex-party-trace-after-'+c.policy+'-'+c.seed+'.json.gz');return{...c,rowEqual:JSON.stringify(b.row)===JSON.stringify(a.row),metricsEqual:JSON.stringify(b.metrics)===JSON.stringify(a.metrics),beforeHash:b.stateHash,afterHash:a.stateHash,differences:differences(normalized(b.state),normalized(a.state))};});
+console.log(JSON.stringify({selection:plan.selection,cases},null,2));
