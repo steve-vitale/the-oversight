@@ -851,8 +851,17 @@
       // were said). A repeated invitation reads as insistence, not a
       // parrot bug.
       const inviteAct = !!(opts && opts.inviteBeat);
-      const selfBlocked = !inviteAct && c.saidLines.indexOf(key) !== -1;
-      const runBlocked = !inviteAct && !selfBlocked && runLedger.indexOf(key) !== -1;
+      // STRUCTURAL BEATS (journey-social r17 2026-10-15): resume openers,
+      // recap lines and thread-resume responses are conversation GRAMMAR,
+      // not content — two villagers using the same structural beat in one
+      // day is not parroting (defect 7's target). They skip the run-ledger
+      // block, which was turning every post-first resume into a dry-line
+      // deflection (transcript-caught across 6 pilot runs: the resume
+      // machinery's filler loop). The per-sitting ledger still applies, so
+      // true same-conversation repeats keep the honest "I just said" path.
+      const structural = !!(opts && opts.structural);
+      const selfBlocked = !inviteAct && !structural && c.saidLines.indexOf(key) !== -1;
+      const runBlocked = !inviteAct && !structural && !selfBlocked && runLedger.indexOf(key) !== -1;
       // THIS-SITTING vs OLDER (journey-social r16 2026-10-15): saidLines is
       // never reset between sittings (endConvo/startConvo leave it — the
       // pools rely on the persistence), so "self-blocked" conflates "said
@@ -882,7 +891,18 @@
       // line (per-conversation cycling, never verbatim); only true
       // self-repeats keep the caller's "I just said" fallback.
       let useChunks = chunks;
+      // FELL-BACK (journey-social r17 2026-10-15): tracks whether the
+      // primary line was no-repeat-blocked. Fallback chunks are meta-speech
+      // ("lost my train of thought"), not thread content — they must not be
+      // ledgered as the thread's last beat (transcript-caught: the resume
+      // opener quoting dry lines as the unfinished topic). Mirrored onto
+      // c._sayFellBack for the convoTurn tail, which otherwise ledgers the
+      // unspoken primary as a beat.
+      let fellBack = false;
+      c._sayFellBack = false;
       if (selfBlocked || runBlocked) {
+        fellBack = true;
+        c._sayFellBack = true;
         if (runBlocked || (selfBlocked && !convoBlocked)) {
           // Another villager said it recently, or THIS villager said it in
           // an earlier sitting — the "I just said" accusation would be a
@@ -905,16 +925,18 @@
         c.saidLines.push(key);
         c.saidLinesConvo = c.saidLinesConvo || [];
         c.saidLinesConvo.push(key);
-        runLedger.push(key);
-        // WINDOW, not run-history (journey-social 2026-10-11): the ledger is
-        // a backstop against ADJACENT parroting (defect 7: "Lena and David
-        // must not speak the same line verbatim") — the pools + freshness do
-        // the real work. A 400-entry whole-run window exhausted the shared
-        // pools (favor wants, recaps, mood beats are legitimately reused
-        // across villagers and days) and ate ~40% of npc beats. 48 entries
-        // ≈ the current + previous few conversations: adjacent NPCs can't
-        // parrot each other, day-old lines can breathe again.
-        if (runLedger.length > 48) runLedger.splice(0, runLedger.length - 48);
+        if (!structural) {
+          runLedger.push(key);
+          // WINDOW, not run-history (journey-social 2026-10-11): the ledger is
+          // a backstop against ADJACENT parroting (defect 7: "Lena and David
+          // must not speak the same line verbatim") — the pools + freshness do
+          // the real work. A 400-entry whole-run window exhausted the shared
+          // pools (favor wants, recaps, mood beats are legitimately reused
+          // across villagers and days) and ate ~40% of npc beats. 48 entries
+          // ≈ the current + previous few conversations: adjacent NPCs can't
+          // parrot each other, day-old lines can breathe again.
+          if (runLedger.length > 48) runLedger.splice(0, runLedger.length - 48);
+        }
       }
       let first = null;
       for (const chunk of useChunks) {
@@ -939,7 +961,11 @@
       // though the dialogue layer intercepts dlg: choices before convoTurn.
       // Paginated chunks note each beat (the full line's beats, in order) —
       // the ACTUALLY SPOKEN chunks (fallback when the primary was blocked).
-      try { for (const chunk of useChunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
+      // R17 (journey-social 2026-10-15): NOT the fallback chunks — dry-line
+      // and self-repeat fallbacks are meta-speech, not thread content.
+      // Noting them made deflections the thread's "last beat", which the
+      // resume opener then quoted as the unfinished topic.
+      try { if (!fellBack) for (const chunk of useChunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
       // VOICED DIALOGUE (Steve 2026-10-11): speak each NPC beat in the
       // villager's own deterministic voice (voice-piper.js). Fire-and-forget;
       // mute/unlock/setting/foreign gates live inside convoSpeakLine.
@@ -973,17 +999,7 @@
     // signal.
     convoDryLine(vid) {
       const c = this.convoGet(vid);
-      const DRY = [
-        '"...Sorry, lost my train of thought."',
-        '"Hm. Never mind — go on."',
-        '"...Actually, forget it."',
-        '"...Where was I? Gone. Ask me something else."',
-        '"Huh. That went clean out of my head."',
-        '"...No, it\'s not coming back. What were you saying?"',
-        '"Lost it. The thought, I mean. Go on."',
-        '"...Sorry — that one slipped away from me."',
-        '"Eh. Wasn\'t important. Probably."',
-      ];
+      const DRY = this.convoDeflectionLines().slice(0, 9);
       const used = c.dryLines || 0;
       if (used >= DRY.length) return null;
       c.dryLines = used + 1;
@@ -1008,14 +1024,45 @@
     // same as sayLine's fallback rule). Counter resets in startConvo.
     convoSelfRepeatLine(vid) {
       const c = this.convoGet(vid);
-      const POOL = [
+      const POOL = this.convoDeflectionLines().slice(9);
+      const used = c.selfRepeatLines || 0;
+      c.selfRepeatLines = used + 1;
+      return POOL[used % POOL.length];
+    },
+
+    // DEFLECTION LINES (journey-social r17 2026-10-15): the dry-line and
+    // self-repeat fallback pools are META-SPEECH ("lost my train of
+    // thought") — an honest admission that the beat didn't land, not
+    // thread content. Central list so the thread ledger can refuse to
+    // record them as "the last thing said" on a thread (transcript-caught:
+    // resume openers quoting "...Sorry, lost my train of thought." as the
+    // unfinished topic, and snippet-less ghost threads resuming as
+    // unfinished business). convoDryLine draws the first 9, the
+    // self-repeat pool the last 3.
+    convoDeflectionLines() {
+      return [
+        '"...Sorry, lost my train of thought."',
+        '"Hm. Never mind — go on."',
+        '"...Actually, forget it."',
+        '"...Where was I? Gone. Ask me something else."',
+        '"Huh. That went clean out of my head."',
+        '"...No, it\'s not coming back. What were you saying?"',
+        '"Lost it. The thought, I mean. Go on."',
+        '"...Sorry — that one slipped away from me."',
+        '"Eh. Wasn\'t important. Probably."',
         '"I just said — did you miss it?"',
         '"I just told you — what else is on your mind?"',
         '"We\'ve covered this one. Ask me something else."',
       ];
-      const used = c.selfRepeatLines || 0;
-      c.selfRepeatLines = used + 1;
-      return POOL[used % POOL.length];
+    },
+    convoIsDeflectionLine(text) {
+      try {
+        // Snippets are stored quote-stripped (clipSnippet); spoken lines
+        // carry their dialogue quotes. Normalize both before comparing.
+        const t = String(text == null ? '' : text).trim().replace(/^"+|"+$/g, '');
+        if (!t) return false;
+        return this.convoDeflectionLines().some(d => d.replace(/^"+|"+$/g, '') === t);
+      } catch (e) { return false; }
     },
 
     convoGet(vid) {
@@ -1285,6 +1332,12 @@
     // content and read as fabricated shared history.
     convoThreadOpen(vid, tid, label, why, snippet) {
       if (!tid || tid === 'small' || tid === 'nonverbal' || tid === 'request') return;
+      // R17 (journey-social 2026-10-15): a thread with no real beat is a
+      // ghost — planting it manufactures "we never finished X" from nothing
+      // (transcript-caught: deflection-only threads resuming as unfinished
+      // business, then dead-ending every resume into more deflections).
+      // No content, no plant. Extends the LEDGER GATE principle above.
+      if (!snippet) return;
       // LEDGER GATE (convo rebuild 2026-10-11): no backing event, no plant.
       if (!this.convoThreadBacked(vid, tid)) return;
       try {
@@ -1543,8 +1596,15 @@
       // ...neighbors.""). Single quotes nest cleanly; the snippet text
       // itself is untouched.
       if (o.snippet) {
-        const sq = String(o.snippet).replace(/^"+|"+$/g, '');
-        inner += ` '${sq}'`;
+        // R17 (journey-social 2026-10-15): never quote a deflection as the
+        // "memory" — the sayLine hook no longer notes fallback chunks, so no
+        // new deflection snippets are planted; this guards threads planted
+        // before the fix (transcript-caught: "...Sorry, lost my train of
+        // thought." quoted as the unfinished topic).
+        if (!this.convoIsDeflectionLine(o.snippet)) {
+          const sq = String(o.snippet).replace(/^"+|"+$/g, '');
+          inner += ` '${sq}'`;
+        }
       }
       const others = open.filter(x => x.tid !== o.tid);
       if (others.length && Math.random() < 0.5) {
@@ -1553,7 +1613,9 @@
         inner += ` We still owe ${about} a proper ending, too.`;
       }
       const line = this.voiceLine(vid, `"${inner}"`);
-      return { line, thread: o.tid };
+      // R17: the resume opener is structural grammar — exempt from the
+      // run-ledger block (consumed at emission in startConvo).
+      return { line, thread: o.tid, structural: true };
     },
 
     // ---------- 4. COHERENCE: recap ----------
@@ -4314,7 +4376,9 @@
           }
         }
       } catch (e) {}
-      this.sayLine(vid, opLine);
+      // R17: a resume opener is structural grammar — sayLine exempts it
+      // from the run-ledger block (op.structural set by convoResumeOpener).
+      this.sayLine(vid, opLine, op && op.structural ? { structural: true } : undefined);
       // INVITATION HONESTY (journey landing r7 2026-10-12): the lure is a
       // diegetic act — sayLine's inviteBeat exemption keeps it spoken even
       // when another villager used the same lure recently (or this one did
@@ -4534,6 +4598,11 @@
       const mood = this.npcMood(vid);
       let line = null, youSaid = null;
       const done = (l, you) => { line = l; youSaid = you || null; };
+      // STRUCTURAL TURN (journey-social r17 2026-10-15): resume/recap beats
+      // are conversation grammar, not content — exempt from the run-ledger
+      // block (see sayLine's structural flag). Set by the branch before
+      // done(), consumed at emission below.
+      let structuralTurn = false;
       // answeredReactive: this turn engaged their direct question — the
       // follow-up logic must not fire. extraQ: a formal question that lands
       // as a second beat in the same turn (rq_personal -> real question).
@@ -4776,6 +4845,9 @@
           const resumeLine = beat || (predT
             ? `"About ${label} — that was ${predT}'s thread. We never did get back to that."`
             : `"About ${label} — yeah, we never did get back to that."`);
+          // R17: the generic fallback is structural grammar (exempt from the
+          // run-ledger block); a real beat keeps full ledger protection.
+          structuralTurn = !beat;
           done(resumeLine,
             predT ? `"About ${label} — that was ${predT}'s thread. We never finished."` : `"About ${label} — we never finished."`);
         } else if (akind === 'memory') {
@@ -4972,6 +5044,8 @@
         // player can always ask what the conversation is actually about.
         // The recap re-anchors from the thread log; the thread continues.
         // (Menu insertion is the sibling's lane: Game.convoRecapChoice(vid).)
+        // R17: structural beat — exempt from the run-ledger block.
+        structuralTurn = true;
         done(this.convoRecapLine(vid), '"Wait — what were we talking about?"');
       } else if (choiceId.indexOf('ask:') === 0) {
         const topic = choiceId.slice(4);
@@ -5453,7 +5527,7 @@
           if (composed) line = composed;
         }
       } catch (e) {}
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid) }) || line;
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
@@ -5620,7 +5694,10 @@
       // LEDGER (Steve 2026-10-07): the turn's beat lands on the current
       // thread — topic memory + subject-change detection. (dlg: turns speak
       // through sayLine instead; both collapse consecutive duplicates.)
-      try { this.convoNoteBeat(vid, c.thread, line); } catch (e) {}
+      // R17 (journey-social 2026-10-15): a no-repeat-blocked turn spoke a
+      // fallback (or nothing) — the unspoken primary must not be ledgered
+      // as a beat. c._sayFellBack is set by sayLine above.
+      try { if (!c._sayFellBack) this.convoNoteBeat(vid, c.thread, line); } catch (e) {}
       return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
     },
 
