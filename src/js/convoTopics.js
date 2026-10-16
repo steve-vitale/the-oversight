@@ -374,6 +374,32 @@
             self: (_lc.ids || []).indexOf(vid) >= 0, ids: (_lc.ids || []).slice() };
         }
       } catch (e) { showEv = null; }
+      // CARE MEMORY (journey crisis r18 2026-10-16): the healer arc was
+      // conversationally invisible — villagerCareTick narrates "X sits with
+      // Y" and books 'tended' on the medic, but no lately kind surfaced it
+      // (gratitude's scan only matches promise_kept|gift|comforted|ally|
+      // mediated; 13 pilot transcripts carried zero care mentions). The
+      // patient remembers being sat with ('tended_by', medic id in extra);
+      // the medic remembers sitting with someone ('tended', patient id).
+      // Window 7 days (the defense tail). Computed up here; the priority
+      // chain returns it below the sick row and the village's politics —
+      // the outbreak is the village's business while it burns; after it
+      // passes, the village remembers who sat with whom.
+      let careEv = null;
+      try {
+        const _myMem = (typeof this.t2mem === 'function' ? this.t2mem(vid) : []) || [];
+        const _tb = _myMem.find(m => m.t === 'tended_by' && m.medic &&
+          (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
+        if (_tb) careEv = { kind: 'care', self: true, medic: _tb.medic };
+        else {
+          const _td = _myMem.find(m => m.t === 'tended' && m.patient &&
+            (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
+          if (_td) careEv = { kind: 'care', self: false, patient: _td.patient };
+        }
+        const _cu = _myMem.find(m => m.t === 'cured' &&
+          (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
+        if (_cu) careEv = { kind: 'care', self: true, cured: true };
+      } catch (e) { careEv = null; }
       try {
         // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
         // naming debate is the talk of the fire — it surfaces here with the
@@ -521,6 +547,12 @@
         }).length;
         if (hungry > 2) return { kind: 'hunger', n: hungry };
         const good = mem.find(m => /promise_kept|gift|comforted|ally|mediated/i.test(m.t || ''));
+        // CARE RETURN (journey crisis r18 2026-10-16): the care arc's lately
+        // slot. Below fresh grief, the mantle, the table, severe AND mild
+        // bodily crisis, and village politics (the sick row outranks the
+        // sitting-with while people are still down) — above generic
+        // gratitude and cheer.
+        if (careEv) return careEv;
         if (good) return { kind: 'gratitude', mem: good };
         if ((v.cheer || 0) > 0) return { kind: 'cheer' };
       } catch (e) {}
@@ -1170,6 +1202,30 @@
         case 'hunger':
           return ['"My stomach\'s been talking louder than me lately. ' + (ev.n || 'Several') + ' of us are running on empty."',
             '"Hunger makes people strange. Watch for it — in me, too."'];
+        case 'care': {
+          // CARE (journey crisis r18 2026-10-16): the village remembers who
+          // sat with whom through the fever. Names knowledge-gated via
+          // firstRef (the r8/r17 pattern). The cured variant is the patient
+          // cured by the player's hands — the curer is always 'you'.
+          if (ev.cured) return [
+            '"I was gone — burning up, nothing left. You pulled me back. I don\'t have words for that."',
+            '"The fever had me and you didn\'t leave. That\'s the whole story."',
+          ];
+          if (ev.self) {
+            let who = 'someone';
+            try { if (ev.medic && typeof this.firstRef === 'function') who = this.firstRef(ev.medic) || 'someone'; } catch (e) {}
+            return [
+              '"' + who + ' sat with me through the worst of it — cool cloth, bitter tea, watching my breathing. I don\'t forget that."',
+              '"When the fever had me, ' + who + ' stayed. That\'s what I keep coming back to."',
+            ];
+          }
+          let pat = 'them';
+          try { if (ev.patient && typeof this.firstRef === 'function') pat = this.firstRef(ev.patient) || 'them'; } catch (e) {}
+          return [
+            '"I sat with ' + pat + ' through the fever — cool cloth, bitter tea. Someone had to, and I know what to do."',
+            '"' + pat + ' was burning up. I did what I could. That\'s the job."',
+          ];
+        }
         case 'gratitude':
           return ['"Someone helped me recently. I\'m still turning it over — people don\'t do that for nothing, out here. Or maybe they do now."'];
         case 'cheer':

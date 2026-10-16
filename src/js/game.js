@@ -28578,7 +28578,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (!target) break;
           v.sick[target].daysLeft -= 1;
           tendedThisTick.add(target);
-          try { if (this.remember) this.remember(mid, 'tended', 'tended ' + nm(target) + ' through the fever'); } catch (e) {}
+          try { if (this.remember) this.remember(mid, 'tended', 'tended ' + nm(target) + ' through the fever', { patient: target }); } catch (e) {}
+          // CARE MEMORY (journey crisis r18 2026-10-16): the patient remembers
+          // being sat with — pre-fix the care arc was conversationally
+          // invisible (no lately kind surfaced it; 13 pilot transcripts
+          // carried zero care mentions). medic id in extra for
+          // knowledge-gated naming in talk.
+          try { if (this.remember) this.remember(target, 'tended_by', 'tended through the fever by ' + nm(mid), { medic: mid }); } catch (e) {}
           if (Math.random() < 0.25) this.say(`${nm(mid)} sits with ${nm(target)} — cool cloth, bitter tea, watching the breathing.`);
         }
       }

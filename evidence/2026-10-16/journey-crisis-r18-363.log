@@ -1,0 +1,359 @@
+[SETUP] seed 363: oracleV2 establishing 15d...
+[TEND] d5 Emma: tended Evdokia through the fever
+[TEND] d5 Emma: tended Dmitri through the fever
+[TEND] d6 Emma: tended Dmitri through the fever
+[TEND] d7 Emma: tended Lucas through the fever
+[TEND] d7 Emma: tended Lucas through the fever
+[TEND] d8 Emma: tended Lucas through the fever
+[TEND] d8 Emma: tended Evdokia through the fever
+[TEND] d10 Emma: tended Lucas through the fever
+[TEND] d10 Emma: tended Lucas through the fever
+[TEND] d11 Emma: tended Lucas through the fever
+[TEND] d11 Emma: tended Angela through the fever
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+[TEND] d12 Emma: tended Angela through the fever
+[PLAYER-TREATVILLAGER] d13 on Angela (triage)
+[TEND] d14 Emma: tended Angela through the fever
+[TEND] d14 Emma: tended Angela through the fever
+[DIAGNOSIS] d14 lockjaw on scholar (by Emma)
+[CURE] d15 lockjaw cured on scholar via triage
+[ESTABLISHED] d17 pop=11
+[MEDICS] NONE
+[OUTBREAK] d17 staged on Eduardo, Pedro, Angela, Evdokia, Nandi
+[DAWN] d22 pop=10 sick=4 tends=14 diag=1 cures=1 eases=2
+[RECOVERY] d26 Eduardo recovered
+[RECOVERY] d26 Pedro recovered
+[RECOVERY] d26 Angela recovered
+[RECOVERY] d26 Evdokia recovered
+[DAWN] d26 pop=9 sick=0 tends=14 diag=1 cures=1 eases=2
+[DAWN] d32 pop=8 sick=0 tends=14 diag=1 cures=1 eases=2
+## MID — talking to Eduardo (sick=no)
+[latelyKind=mourning]
+> [betrayal:accept] undefined
+YOU: "Sure."
+NPC: You walk to the tree line with Eduardo. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+
+> [ans:q_quiet:a_kind] undefined
+YOU: "Neither am I, honestly."
+NPC: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+
+> [invite_party] undefined
+YOU: "Want to come with me?"
+NPC: "Alright. But I'm not carrying your stuff."
+
+> [alive:event:mourning] undefined
+YOU: "What’s going on out there?"
+NPC: "Rowan is gone and the world just... continues. That's the part I can't stand."
+
+> [alive:thread:want] undefined
+YOU: "About the talking-to-strangers part — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+
+> [alive:thread:lately] undefined
+YOU: "About what's been happening — we never finished."
+NPC: "I keep turning over the last thing Rowan said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+
+> [dlg:more] undefined
+YOU: "Tell me more."
+NPC: "Nobody says Rowan's name right yet. We will. Give it a few days."
+
+> [dlg:more] undefined
+NPC: "I check the treeline every hour for Rowan, now. Feels right. Feels like the least I can do."
+NPC: "Okay. We'll pick this up later."
+
+> [dlg:more] undefined
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "...Sorry, lost my train of thought."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "Sure."
+NPC: You walk to the tree line with Eduardo. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: "Neither am I, honestly."
+NPC: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+YOU: "Want to come with me?"
+NPC: "Alright. But I'm not carrying your stuff."
+YOU: "What’s going on out there?"
+NPC: "Rowan is gone and the world just... continues. That's the part I can't stand."
+YOU: "About the talking-to-strangers part — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+YOU: "About what's been happening — we never finished."
+NPC: "I keep turning over the last thing Rowan said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+YOU: "Tell me more."
+NPC: "Nobody says Rowan's name right yet. We will. Give it a few days."
+YOU: "Tell me more."
+NPC: "I check the treeline every hour for Rowan, now. Feels right. Feels like the least I can do."
+NPC: "Okay. We'll pick this up later."
+YOU: "Tell me more."
+NPC: "I wish there was more to tell. That's it."
+NPC: "Good talk. I feel like I know you a little better now."
+NPC: They're smiling as you go. "Come back anytime."
+[DAWN] d37 pop=7 sick=1 tends=14 diag=1 cures=1 eases=2
+[RECOVERY] d42 Eduardo recovered
+[DAWN] d42 pop=9 sick=0 tends=14 diag=1 cures=1 eases=2
+[DAWN] d47 pop=9 sick=0 tends=14 diag=1 cures=1 eases=2
+[DAWN] d52 pop=9 sick=1 tends=14 diag=1 cures=1 eases=2
+[RECOVERY] d57 Eduardo recovered
+[DAWN] d57 pop=9 sick=0 tends=14 diag=1 cures=1 eases=2
+[DEATHS] 5: Emma d15(monster); Nandi d17(monster); Rowan d25(combat); Rafael d26(monster); Pedro d35(combat)
+## RECOVERED — talking to Eduardo (sick=no)
+[latelyKind=table]
+> [gq:yn:yes] undefined
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them. I mean it."
+
+> [alive:want:ask_favor] undefined
+YOU: "Is there something you need? Really."
+NPC: "I can't reach this properly. Could you take a look?"
+
+> [gq:yn:yes] undefined
+YOU: "Yes."
+NPC: They nod, satisfied — like a piece just clicked into place.
+
+> [dlg:help] undefined
+YOU: "How can I help?"
+NPC: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+
+> [dlg:commit] undefined
+YOU: "I'll do it."
+NPC: "Careful with it. And — thank you."
+
+> [alive:event:table] undefined
+YOU: "What’s going on out there?"
+NPC: "Huh. I answered that once — back when the answer was simpler." "They say the table's coming. For us. I keep thinking about what we'd even bring to it."
+
+> [alive:thread:want] undefined
+YOU: "About that favor — we never finished."
+NPC: "I just said — did you miss it?"
+
+> [recap] undefined
+NPC: "We started on that favor, then got onto what's been happening."
+NPC: "Anyway — I should get going."
+
+> [alive:thread:lately] undefined
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "...Sorry, lost my train of thought."
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them. I mean it."
+YOU: "Is there something you need? Really."
+NPC: "I can't reach this properly. Could you take a look?"
+YOU: "Yes."
+NPC: They nod, satisfied — like a piece just clicked into place.
+YOU: "How can I help?"
+NPC: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+YOU: "I'll do it."
+NPC: "Careful with it. And — thank you."
+YOU: "What’s going on out there?"
+NPC: "Huh. I answered that once — back when the answer was simpler." "They say the table's coming. For us. I keep thinking about what we'd even bring to it."
+YOU: "About that favor — we never finished."
+NPC: "I just said — did you miss it?"
+YOU: "Wait — what were we talking about?"
+NPC: "We started on that favor, then got onto what's been happening."
+NPC: "Anyway — I should get going."
+YOU: "About what's been happening — we never finished."
+NPC: "About what's been happening — yeah, we never did get back to that."
+NPC: "Come find me when you have a moment."
+NPC: "Hm. Never mind — go on."
+## RECOVERED — talking to Angela (sick=no)
+[latelyKind=table]
+> [gq:yn:yes] undefined
+YOU: "Yes."
+NPC: "Good. Good to know I'm not the only one seeing it."
+
+> [dlg:help] undefined
+YOU: "How can I help?"
+NPC: "Do the math with me: 2 liters, 8 people. That's not tomorrow's water. The creek's a twenty-minute walk — with two of us it's one trip, not three."
+
+> [dlg:commit] undefined
+YOU: "I'll do it."
+NPC: "Dawn, then. Bring something to carry — and thank you."
+
+> [alive:event:table] undefined
+YOU: "What’s going on out there?"
+NPC: "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+
+> [gq:yn:yes] undefined
+YOU: "Yes."
+NPC: "Knew it. You've got good instincts for this stuff."
+
+> [alive:thread:want] undefined
+YOU: "About that favor — we never finished."
+NPC: "I just said — did you miss it?"
+
+> [recap] undefined
+YOU: "Wait — what were we talking about?"
+NPC: "Still on what's been happening."
+
+> [alive:thread:lately] undefined
+NPC: "I keep my eyes down when I pass it. Respect, maybe. Fear, probably. Both."
+NPC: "I should get back to it."
+
+> [dlg:more] undefined
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "I asked Pedro about the creek water run — Pedro's gone. Still need hands. Are you in?"
+YOU: "Yes."
+NPC: "Good. Good to know I'm not the only one seeing it."
+YOU: "How can I help?"
+NPC: "Do the math with me: 2 liters, 8 people. That's not tomorrow's water. The creek's a twenty-minute walk — with two of us it's one trip, not three."
+YOU: "I'll do it."
+NPC: "Dawn, then. Bring something to carry — and thank you."
+YOU: "What’s going on out there?"
+NPC: "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+YOU: "Yes."
+NPC: "Knew it. You've got good instincts for this stuff."
+YOU: "About that favor — we never finished."
+NPC: "I just said — did you miss it?"
+YOU: "Wait — what were we talking about?"
+NPC: "Still on what's been happening."
+YOU: "About what's been happening — we never finished."
+NPC: "I keep my eyes down when I pass it. Respect, maybe. Fear, probably. Both."
+NPC: "I should get back to it."
+YOU: "Tell me more."
+NPC: "Whatever door it is — it'll still be there tomorrow. That's the worst part. The patience."
+NPC: "First light. Don't sleep through it."
+NPC: They're smiling as you go. "Come back anytime."
+## WELL — talking to Evdokia (sick=no)
+[latelyKind=table]
+> [nv:nod] undefined
+YOU: (gesture)
+NPC: «Договорились.» — Owen translates: "Agreed." They nod back, slowly. "Fuck you."
+
+> [nv:nod] undefined
+YOU: (gesture)
+NPC: «Именно так. Ты прав.» — Owen translates: "Exactly so. You're right." They nod back, slowly.
+
+> [nv:nod] undefined
+YOU: (gesture)
+NPC: «Это правда.» — Owen translates: "It's true." They nod back, slowly.
+
+> [nv:nod] undefined
+YOU: (gesture)
+NPC: «Да, да, точно.» — Owen translates: "Yes, yes, exactly." They nod back, slowly.
+
+> [nv:nod] undefined
+NPC: «Да, да, точно.» — Owen translates: "Yes, yes, exactly." They nod back, slowly.
+YOU: (gesture)
+
+> [nv:nod] undefined
+YOU: (gesture)
+YOU: (gesture)
+
+> [nv:nod] undefined
+YOU: (gesture)
+NPC: «Договорились.» — Owen translates: "Agreed." They nod back, slowly.
+
+> [nv:nod] undefined
+NPC: «Договорились.» — Owen translates: "Agreed." They nod back, slowly.
+YOU: (gesture)
+
+> [nv:nod] undefined
+YOU: (gesture)
+YOU: (gesture)
+
+> [nv:nod] undefined
+YOU: (gesture)
+YOU: (gesture)
+
+> [nv:nod] undefined
+YOU: (gesture)
+YOU: (gesture)
+
+> [nv:nod] undefined
+YOU: (gesture)
+YOU: (gesture)
+
+
+### FULL TRANSCRIPT
+YOU: (Evdokia speaks only 🇷🇺 Russian. No shared words at all — just eyes, hands, and patience.)
+NPC: «Что это за место? Где мы?»
+YOU: (gesture)
+NPC: «Договорились.» — Owen translates: "Agreed." They nod back, slowly. "Fuck you."
+YOU: (gesture)
+NPC: «Именно так. Ты прав.» — Owen translates: "Exactly so. You're right." They nod back, slowly.
+YOU: (gesture)
+NPC: «Это правда.» — Owen translates: "It's true." They nod back, slowly.
+YOU: (gesture)
+NPC: «Да, да, точно.» — Owen translates: "Yes, yes, exactly." They nod back, slowly.
+YOU: (gesture)
+YOU: (gesture)
+YOU: (gesture)
+NPC: «Договорились.» — Owen translates: "Agreed." They nod back, slowly.
+YOU: (gesture)
+YOU: (gesture)
+YOU: (gesture)
+YOU: (gesture)
+YOU: (gesture)
+NPC: "Right. Go on, then."
+NPC: "This was good." They mean it.
+## WELL — talking to Desmond (sick=no)
+[latelyKind=table]
+> [agency:ask_field] undefined
+YOU: "Teach me something from the wild."
+NPC: "There's more, but that's for another fire."
+
+> [ans:q_believe:a_tell] undefined
+YOU: "I believe we get through this. I have to. The alternative doesn't work."
+NPC: "That's not naive. That's load-bearing. Hold onto it. Just saying!"
+
+> [ask:lately] undefined
+YOU: "What's weighing on you right now?"
+NPC: "Good question." "They say the table's coming. For us. I keep thinking about what we'd even bring to it."
+
+> [alive:thread:want] undefined
+YOU: "About what you believe in — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+
+> [invite_party] undefined
+YOU: "Want to come with me?"
+NPC: "Alright. But I'm not carrying your stuff."
+
+> [alive:thread:lately] undefined
+YOU: "About what's been happening — we never finished."
+NPC: "I greet everyone by name each morning when I think about what it wants from us. It wants something. Everything wants something."
+
+> [alive:event:table] undefined
+YOU: "What’s going on out there?"
+NPC: "...Sorry, lost my train of thought."
+
+> [gq:yn:yes] undefined
+YOU: "Yes."
+NPC: "Wait, wait — Yeah. Thought so — and I'm glad it's you saying it."
+
+> [dlg:more] undefined
+NPC: "I greet everyone by name each morning and practice what I'd say. In case it ever asks me. It won't. Still."
+NPC: "Okay I really have to move now or I'll explode — talk soon!"
+
+> [dlg:more] undefined
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "About what you believe in — Do you believe in anything? Now, I mean. After everything. Anyway, I should move."
+YOU: "Teach me something from the wild."
+NPC: "There's more, but that's for another fire."
+YOU: "I believe we get through this. I have to. The alternative doesn't work."
+NPC: "That's not naive. That's load-bearing. Hold onto it. Just saying!"
+YOU: "What's weighing on you right now?"
+NPC: "Good question." "They say the table's coming. For us. I keep thinking about what we'd even bring to it."
+YOU: "About what you believe in — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+YOU: "Want to come with me?"
+NPC: "Alright. But I'm not carrying your stuff."
+YOU: "About what's been happening — we never finished."
+NPC: "I greet everyone by name each morning when I think about what it wants from us. It wants something. Everything wants something."
+YOU: "What’s going on out there?"
+NPC: "...Sorry, lost my train of thought."
+YOU: "Yes."
+NPC: "Wait, wait — Yeah. Thought so — and I'm glad it's you saying it."
+YOU: "Tell me more."
+NPC: "I greet everyone by name each morning and practice what I'd say. In case it ever asks me. It won't. Still."
+NPC: "Okay I really have to move now or I'll explode — talk soon!"
+YOU: "Tell me more."
+NPC: "That's... pretty much all of it, honestly."
+NPC: "Good talk. I feel like I know you a little better now."
+NPC: "Hm. Never mind — go on."
+[CARRY] outbreak 4/5, care 1/5
+[SUMMARY] tends=14 diagnoses=1 cures=1 eases=2 recoveries=6 sickDeaths=0
