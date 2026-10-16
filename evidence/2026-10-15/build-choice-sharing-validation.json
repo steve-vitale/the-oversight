@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "f1ab62c7dc390fe0293b32571b846cf7953ad31a",
+  "upstreamPrimaryCommit": "e928d576c25f76c1fa018e9e94de829b79d48e09",
+  "runtimeAssertions": 9,
+  "quick": {
+    "pass": 97,
+    "fail": 2,
+    "total": 99
+  },
+  "full": {
+    "pass": 820,
+    "fail": 51,
+    "total": 871
+  },
+  "priorFull": {
+    "pass": 822,
+    "fail": 48,
+    "total": 870,
+    "evidence": "balance-windows-shared-full.txt"
+  },
+  "addedFailures": [
+    "scripts/test-drifter-joinstay.js",
+    "scripts/test-enter-building-guard.js",
+    "scripts/test-item-use.js",
+    "scripts/test-moot-justice-aftermath.js"
+  ],
+  "removedFailures": [
+    "scripts/test-past-deflect-gate.js"
+  ],
+  "frozenLegacyReproductions": [
+    {
+      "test": "test-drifter-joinstay.js",
+      "seed": 2,
+      "signatureMatched": true
+    },
+    {
+      "test": "test-enter-building-guard.js",
+      "seed": 3,
+      "signatureMatched": true
+    },
+    {
+      "test": "test-item-use.js",
+      "seed": 24,
+      "signatureMatched": true
+    },
+    {
+      "test": "test-moot-justice-aftermath.js",
+      "seed": 16,
+      "signatureMatched": true
+    },
+    {
+      "test": "test-past-deflect-gate.js",
+      "seed": 1,
+      "signatureMatched": true
+    }
+  ],
+  "naturalObserverControl": {
+    "policy": "merchant",
+    "seed": 7,
+    "matchingRow": true,
+    "matchingFullStateHash": true,
+    "decisionRecords": 41,
+    "dropped": 0,
+    "warnings": 0
+  },
+  "runtimeAndBalancedCoreChanged": false,
+  "artifactHashRule": "SHA-256; text canonical LF, gzip exact bytes",
+  "artifactSha256": {
+    "build-choice-sharing-audit.md": "69ab5360a605e8a84dfb2d9affbcd677ecd11a8055a00742e6aa7f573946ce5d",
+    "build-choice-sharing-full.txt": "a231380d0793575dcf803366fffa231d573bbc91304fb175f926cff884592551",
+    "build-choice-sharing-legacy-probe.cjs": "828742fbe6c2a7dc9ddeddd1e854001d85723bf6cae67fbb5b35392ef6420668",
+    "build-choice-sharing-legacy-seed.cjs": "054a18daef13d065d474e890d8007e953cd86795efa139baefccb71dfbbaa52e",
+    "build-choice-sharing-probe.cjs": "8e8d46e7a8a3ec892a416f420149fd09bc46f84f215bdffcba6a4b664ecca028",
+    "build-choice-sharing-proofs.json.gz": "06e6507ebb55508044539950a06cb3766cfb20d9e8f0b25b1545f398cddd4969",
+    "build-choice-sharing-quick.txt": "025c138ab23239920566fd4fef2473efb61214a35908b75a14ae6527bbe7e4b4",
+    "build-choice-sharing-runtime.txt": "92932592024dbaf61b39c8389686616a3ec2eccca500ec10ffae36a8d0259cbe"
+  },
+  "sharedSourceSha256": {
+    "scripts/lib/build-choice-observer.js": "c7bc91b47c64f638d708ba8a6a0475d8f5df3c20fb5c04052b1e8eef82229f1a",
+    "scripts/godpath/test-build-choice-observer.js": "cafa30885d51400a2f280473643a55423ab47d560fac308a9f93135f3fb6b53b"
+  }
+}

@@ -213,3 +213,11 @@ Do not dismiss community warnings because a selected surviving subset looks
 healthy. Keep raw panels, input hashes and all exclusions beside the scorecard.
 `test-balance-windows.js` runs automatically in quick/full checks and tests
 unequal horizons, terminal outcomes, holes, unknown values and identity failure.
+
+### Passive build-choice evidence (shared with Codex)
+
+`const observation = require('./scripts/lib/build-choice-observer').install(Game)` wraps only actual existing buildScore/buildDecide/chooseAbility/keepAbilities calls; inspect observation.decisions and observation.dropped, then observation.restore(). It does not evaluate extra abilities, ask knowledge questions, draw random numbers, read the clock or emit game telemetry. That matters because extra NPC scoring can plan a target and consume luck. Primary codex/resume-claude integrates it into deed-screen --choices1; this shared branch keeps the helper standalone and does not import primary game/region alternatives.
+
+Retain helper/driver source hashes, flags and an observer-off control; require identical result rows and full gameplay hashes before using traces. Count distinct actual calls as NPC buildDecide plus player chooseAbility/keepAbilities; exclude duplicate player buildDecide records. Pick is an intention, not a delivery receipt. Returned null is normal for some real choices. Scores tagged onSheet=false include nested target-planning evaluations; later unscored sheets do not inherit earlier scores. Logs cap at5000 per run with explicit dropped: nonzero means incomplete evidence. Run node scripts/godpath/test-build-choice-observer.js; no game tuning or measurement-core revision is implied.
+
+Source and 16/64-seed rejected Miser-access evidence: primary commit e928d576, evidence/2026-10-15/miser-access-audit.md. The offer-only candidate was not retained; test a knowledge-bound deliberate Miser strategy separately from generic build preference.
