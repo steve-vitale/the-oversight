@@ -1,0 +1,191 @@
+{
+ "policy": "belongfeast",
+ "seed": 547,
+ "days": 172,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "entered": 0,
+ "maxArc": 3,
+ "maxWave": 3,
+ "deaths": {
+  "villager:monster": 2,
+  "monster:villager combat": 5,
+  "player:combat": 3,
+  "monster:combat": 7,
+  "monster:expedition": 3,
+  "person:alien": 2,
+  "player:sickness": 1
+ },
+ "rearm": {
+  "on": true,
+  "errors": [],
+  "successions": 3,
+  "nSuccessors": 3,
+  "rearms": [
+   {
+    "vid": "gen_ewjlafg",
+    "mantleDay": 16,
+    "armDay": 18,
+    "rearmed": true,
+    "latency": 2,
+    "cumNet": -5617,
+    "voluntaryNet": -1152,
+    "voluntaryNet7": -1152,
+    "volArmDay": null,
+    "mealKcal": 4465,
+    "volTakeKcal": 1152,
+    "mealShare": 0.795,
+    "coldAgreement": false,
+    "coldFiringDay": 23,
+    "coldVn7": 0,
+    "coldVn": -1152,
+    "driver": "meal",
+    "attributed": true,
+    "attribNotes": []
+   },
+   {
+    "vid": "gen_8ijd90w",
+    "mantleDay": 159,
+    "armDay": 162,
+    "rearmed": true,
+    "latency": 3,
+    "cumNet": -5435,
+    "voluntaryNet": -3195,
+    "voluntaryNet7": -3195,
+    "volArmDay": null,
+    "mealKcal": 2240,
+    "volTakeKcal": 3195,
+    "mealShare": 0.412,
+    "coldAgreement": null,
+    "coldFiringDay": null,
+    "coldVn7": null,
+    "coldVn": null,
+    "driver": "meal",
+    "attributed": true,
+    "attribNotes": []
+   },
+   {
+    "vid": "lucas_brown",
+    "mantleDay": 164,
+    "armDay": 167,
+    "rearmed": true,
+    "latency": 3,
+    "cumNet": -5267,
+    "voluntaryNet": -3060,
+    "voluntaryNet7": -3060,
+    "volArmDay": null,
+    "mealKcal": 2207,
+    "volTakeKcal": 3060,
+    "mealShare": 0.419,
+    "coldAgreement": true,
+    "coldFiringDay": 169,
+    "coldVn7": -20251,
+    "coldVn": -20251,
+    "driver": "meal",
+    "attributed": true,
+    "attribNotes": []
+   }
+  ],
+  "coldShoulder": {
+   "nFirings": 3,
+   "firings": [
+    {
+     "day": 14,
+     "vid": "gen_cg6uecm",
+     "heat": 25,
+     "cumNet": -15408,
+     "voluntaryNet": -750,
+     "voluntaryNet7": 0,
+     "mealShare": 0.951,
+     "agreed7": false,
+     "agreedCum": true
+    },
+    {
+     "day": 23,
+     "vid": "gen_ewjlafg",
+     "heat": 25,
+     "cumNet": -16221,
+     "voluntaryNet": -1152,
+     "voluntaryNet7": 0,
+     "mealShare": 0.929,
+     "agreed7": false,
+     "agreedCum": true
+    },
+    {
+     "day": 169,
+     "vid": "lucas_brown",
+     "heat": 25,
+     "cumNet": -22458,
+     "voluntaryNet": -20251,
+     "voluntaryNet7": -20251,
+     "mealShare": 0.098,
+     "agreed7": true,
+     "agreedCum": true
+    }
+   ],
+   "nAgreed7": 1,
+   "nDisagreed7": 2,
+   "agreementRate7": 0.3333333333333333
+  },
+  "beats": [
+   {
+    "kind": "say",
+    "day": 14,
+    "vid": "gen_cg6uecm",
+    "text": "Something has shifted. Conversations stop when you approach the fire. Nobody meets your eyes for long."
+   },
+   {
+    "kind": "journal",
+    "day": 14,
+    "vid": "gen_cg6uecm",
+    "text": "The village has gone quiet around me. I know why."
+   },
+   {
+    "kind": "say",
+    "day": 23,
+    "vid": "gen_ewjlafg",
+    "text": "Something has shifted. Conversations stop when you approach the fire. Nobody meets your eyes for long."
+   },
+   {
+    "kind": "journal",
+    "day": 23,
+    "vid": "gen_ewjlafg",
+    "text": "The village has gone quiet around me. I know why."
+   },
+   {
+    "kind": "say",
+    "day": 169,
+    "vid": "lucas_brown",
+    "text": "Something has shifted. Conversations stop when you approach the fire. Nobody meets your eyes for long."
+   },
+   {
+    "kind": "journal",
+    "day": 169,
+    "vid": "lucas_brown",
+    "text": "The village has gone quiet around me. I know why."
+   }
+  ],
+  "aggregate": {
+   "nRearmEvents": 3,
+   "nAttributed": 3,
+   "attributionRate": 1,
+   "nMealDriven": 3,
+   "nVolDriven": 0,
+   "mealDrivenShare": 1,
+   "latency": {
+    "min": 2,
+    "max": 3,
+    "median": 3,
+    "hist": [
+     2,
+     3,
+     3
+    ]
+   },
+   "neverVolArm": 3
+  }
+ }
+}

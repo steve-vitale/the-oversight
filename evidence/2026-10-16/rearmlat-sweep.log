@@ -1,0 +1,79 @@
+-- leadfeast s103
+-- leadfeast s214
+-- leadfeast s325
+-- leadfeast s436
+-- leadfeast s547
+-- leadfeast s658
+-- leadfeast s769
+-- leadfeast s880
+-- belongfeast s103
+-- belongfeast s214
+-- belongfeast s325
+-- belongfeast s436
+-- belongfeast s547
+-- belongfeast s658
+-- belongfeast s769
+-- belongfeast s880
+
+sweep wall: 1202s for 16 runs
+
+policy/seed | days | W | nat | tbl | exl | wave | nRe | nAttr | meal | latMed | nCS | agree
+leadfeast/103 | 110 | 0 | 1 | 1 | 0 | 5 | 6 | 6 | 6 | 2 | 6 | 0.67
+leadfeast/214 | 127 | 0 | 1 | 1 | 0 | 5 | 5 | 5 | 5 | 2 | 5 | 0.80
+leadfeast/325 | 145 | 0 | 1 | 1 | 0 | 5 | 5 | 5 | 4 | 2 | 6 | 0.67
+leadfeast/436 | 73 | 0 | 0 | 1 | 0 | 5 | 6 | 6 | 5 | 3 | 3 | 0.67
+leadfeast/547 | 111 | 0 | 1 | 1 | 0 | 5 | 6 | 6 | 5 | 2 | 5 | 0.20
+leadfeast/658 | 130 | 0 | 1 | 1 | 0 | 5 | 8 | 8 | 8 | 2 | 6 | 0.33
+leadfeast/769 | 90 | 0 | 1 | 1 | 0 | 5 | 3 | 3 | 3 | 2 | 4 | 0.50
+leadfeast/880 | 123 | 0 | 1 | 1 | 0 | 5 | 8 | 8 | 8 | 2 | 7 | 0.43
+belongfeast/103 | 104 | 0 | 1 | 1 | 0 | 4 | 7 | 7 | 6 | 2 | 5 | 0.60
+belongfeast/214 | 116 | 0 | 1 | 1 | 0 | 4 | 3 | 3 | 3 | 2 | 3 | 0.67
+belongfeast/325 | 180 | 0 | 1 | 1 | 0 | 4 | 11 | 11 | 11 | 2 | 9 | 0.67
+belongfeast/436 | 180 | 0 | 1 | 1 | 0 | 5 | 10 | 10 | 10 | 3 | 7 | 0.00
+belongfeast/547 | 172 | 0 | 1 | 0 | 0 | 3 | 3 | 3 | 3 | 3 | 3 | 0.33
+belongfeast/658 | 115 | 0 | 1 | 1 | 0 | 4 | 7 | 7 | 7 | 2 | 3 | 0.67
+belongfeast/769 | 110 | 0 | 1 | 1 | 0 | 5 | 3 | 3 | 3 | 2 | 4 | 0.75
+belongfeast/880 | 140 | 0 | 0 | 1 | 0 | 4 | 8 | 8 | 8 | 3 | 5 | 0.40
+
+POOLED: {
+ "nRuns": 16,
+ "primary": {
+  "nRearmEvents": 99,
+  "nAttributed": 99,
+  "rate": 1,
+  "go": true
+ },
+ "latencyDist": {
+  "min": 1,
+  "max": 7,
+  "median": 2,
+  "hist": {
+   "1": 3,
+   "2": 59,
+   "3": 32,
+   "4": 4,
+   "7": 1
+  }
+ },
+ "drivers": {
+  "mealDriven": 95,
+  "voluntaryDriven": 4,
+  "mealShare": 0.9595959595959596
+ },
+ "coldShoulder": {
+  "nFirings": 81,
+  "nAgreed7": 41,
+  "agreementRate7": 0.5061728395061729
+ },
+ "wall": {
+  "national": 14,
+  "table": 15,
+  "wins": 0,
+  "exiled": 0,
+  "wave4": 15,
+  "wave5": 10,
+  "medianSurvival": 123,
+  "maxSurvival": 180
+ }
+}
+EXIT=0
