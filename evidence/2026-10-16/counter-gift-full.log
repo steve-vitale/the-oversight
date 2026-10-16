@@ -1,0 +1,20 @@
+check.js: 961 scripts, 4 parallel
+............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................F....................................................................................................................................................
+
+  FAIL scripts/test-trustgain-20261014.js (exit 1, 2.8s)
+        PASS R10: channel present: gain:food-deed
+        PASS R10: channel present: gain:rep-drift
+      == GREEN on honest run: seed 11 leadcourt 20d ==
+        PASS honest: run completed
+        PASS honest: census captured writes
+        PASS honest: ranked table non-empty
+        PASS honest: per-100vd computable
+        PASS honest: scholar lineage sampled daily
+        PASS R11: honest run fully classified (no other: channels)
+        honest run channels: gain:rep-drift +61/0 x61 | gain:assignment-deed +60/0 x60 | gain:social-away +39/0 x38 | gain:work-deed +22/0 x22 | gain:forage-deed +20/0 x20 | gain:monster-deed +20/0 x11 | ga
+      
+      24 passed, 4 failed
+
+  slowest: scripts/test-simopt-trajectory-20261010.js 76s, scripts/test-deterministic-clock-20261014.js 37s
+
+check.js: 960 passed, 1 failed in 335s

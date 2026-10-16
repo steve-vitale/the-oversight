@@ -383,3 +383,10 @@ Miser starter access experiment (2026-10-15): Codex measured Social Hoarder/Hagg
 Shared observer handoff (2026-10-15): the identical standalone build-choice observer/test is also published on codex/balanced-measurement at3167567f for Muse, without primary gameplay imports. Primary938/938 stays green. The shared draft is red: latest820/871 (51 failures versus prior48); four new failing legacy names plus the previously failing past-deflect now passing all reproduce on the unchanged frozen shared base with pre-evaluation seed controls. See that branch's evidence/2026-10-15/build-choice-sharing-audit.md and retained raw proofs. Do not assume shared48 is still the current count or merge the alternate regional/gameplay trees merely to obtain this helper.
 
 Miser intent follow-up (2026-10-15): named merchant-hoarder/dealer controllers are published at ff7ca50c. Three-arm source-bound measurement compares original kit, the rejected two-starter move, and a smaller Haggle-only move. Neither global reorder is retained; source/data remain original. Focused bots can earn Miser endings on experimental roots, but capable class access and maker survival signals worsen, generic NPCs still do not form Miser, and the shared Node setup leaves the introductory knack unanswered. Audit/fix that shared setup via its real public choice before further human-viability/balance claims; then consider job/playstyle-specific starter access, food-thesis actions and NPC payoff parity. See miser-intent-audit.md for all960 campaign cases, locked ending versus current bearer and the real phone checkpoint. Muse regional files remain untouched.
+
+
+Counter gift settlement (2026-10-16): Codex owns the narrow game.js/food.js
+actual-transfer settlement, skill-practice rollback and once-per-unsettled-gift
+return receipt. No policy, army price, Table difficulty or regional/nomad change.
+See the dated counter-gift audit and complete source-bound three-arm panels;
+Muse may use the published branch and common measurement workflow.

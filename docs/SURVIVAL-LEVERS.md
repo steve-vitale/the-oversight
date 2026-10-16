@@ -25,6 +25,7 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 | Lever and source | Survival mechanism and tradeoff | Evidence to inspect before changing it |
 | --- | --- | --- |
+| Deliberate pantry gifts and return settlement: `game.js` `_creditPantryGift`, single/bulk take; `food.js` `putAwayFinished` | Actual finished counter transfers now earn the same calorie/history/trust/practice settlement as Pack gifts. An explicit pending receipt preserves the first5 trust cost, avoids repeated costs without a new gift, and survives load. Ordinary debt/theft, physical stock and army upkeep retain their rules. | Inspect new gift vs settled receipt, exact transferred kcal, promotion rollback, per-call trust and actual borrowing. Capped nominal trust can exceed actual clamped gain (open follow-up). All23 metrics and rejected cap-guard evidence: dated counter-gift audit. |
 | Body capacity and wounds: `src/js/game.js` `maxHealth`, `health.max_add`; modifier data in `src/data/abilities.json` | More capacity gives damage headroom; blood-price wounds lower the effective ceiling. Healing must obey that ceiling. Acquisition and wound recovery matter as much as the number. | HP before fatal hits, heal waste, wounds, acquisition day, first-bearer survival and player/NPC parity. Do not raise all health to compensate for one bad encounter. |
 | Formal companion body snapshots: `src/js/party.js` loyal betrayal and late monster injection | Published helpers still replace actual HP with30 and omit worn weapon/armor; escape persists that surrogate body. Matching nearby capacity also changes death-refusal recovery and subsequent succession, gear, food and build histories. | [Measured, unadopted repair](../evidence/2026-10-16/formal-companion-audit.md). Keep the28-assertion proof, real77→30 and77→77 phone escapes, all23 metrics and the food-use failure. Placement/initiative and hostile betrayal are separate contracts; do not tune health to recover a win quota. |
 | Enemy pressure, wave/spawn pacing and party size: `src/js/game.js`, `src/js/engine/combat.js` | Damage, armor, initiative and encounter density change both burst danger and recovery time. World wave and actual fighting party can produce different risk. | Cause-specific deaths, encounters per exposed day, wave, party, pre-fight HP and escapes. Historical duel anchors in BALANCING.md are dated controls, not fixed loss-rate targets. |
@@ -40,6 +41,18 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 | Policy choices, **experimental rather than runtime balance**: `scripts/policies/`, explicit captured flags | Risk selection, crafting, feeding and public-stakes reading change measured outcomes without changing the game. Example: capable's beam flee/resistance and read-stakes settings. | Identical policies/flags on both roots for a game-only comparison. Publish a separately named cohort for changed strategy. Bot ignorance is not evidence that the game needs easier rules. |
 
 ## Decision procedure and upkeep
+
+Counter gift settlement (2026-10-16): completed counter deposits now earn the
+same deliberate-gift credit as Pack donations; automatic stock does not. Modern
+Generous practice revokes correctly across promotion, and a saved pending-gift
+receipt preserves the first five-trust return charge without repeating it on
+later unrelated meals.25 focused checks and full961/961 pass. All23 metrics and
+three source-bound contrasts remain review-required: named16 wins15->10,
+community1->5; disjoint64 wins47->49, deaths101->105 and national55->53.
+No win quota or difficulty softening; zero natural campaign starts persists.
+See ../evidence/2026-10-16/counter-gift-audit.md for raw panels, rejected
+intermediate evidence, phone/save/load proof, reconstruction and cap-ledger
+limitation. Seven deeds and earned army funding remain open.
 
 Harvest preparation (2026-10-16): **retain opt-in coverage; no default
 adoption or campaign-success claim**. campaigner-preparer uses actual Pack

@@ -58,6 +58,7 @@
 //   - removeWorldMonster(m)
 //   - emit(text, surface) -> the one text stream: each line pushed once with a surface tag (narration|feedback|toast|bubble|dialogue|contest|person); say() = emit(text,'narration')
 //   - normalizeLogEntries(arr) -> lift legacy bare-string log entries to tagged entries
+//   - _creditPantryGift(item, kcal) -> settle an actual deliberate player pantry deposit; never automatic stock
 //   - nearestWorldMonster(tx, ty) -> monster | null
 //   - worldMonsterCap() -> int (3 base, 5 arrived, 8 deep, +1 night)
 //   - maintainWorldMonsters(), wanderWorldMonsters(), villagerMonsterTick(), worldTick() (living-world step on tile entry)
@@ -14110,7 +14111,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // RELIC BOND: non-transferable. A bonded relic in a stranger's hands is just stuff.
       if (item.bonded) { this.say(`That's yours. Not the village's. You can't give away your ${item.name}.`); return null; }
       const v = this.state.village;
-      const vid = this.state.scholar.villagerId;
       // add to pantry
       v.pantry = v.pantry || [];
       // FUNGIBILITY (break-it food 2026-10-08): merge only into a truly
@@ -14142,12 +14142,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // remove from inventory
       this.state.scholar.inventory.splice(idx, 1);
+      this._creditPantryGift(item, kcal);
+      return null;
+    },
+    // Only after a real deliberate transfer, from pack or prep counter.
+    // Internal pantryAdd/stock production and NPC prizes are not player gifts.
+    _creditPantryGift(item, kcal) {
+      if (!item || !Number.isFinite(kcal) || kcal <= 0) return null;
+      const v = this.state.village, vid = this.state.scholar.villagerId;
       // TRUST: giving builds it. generous: the System's gift. Donating gives 2x trust.
       const genLvl = this.abilityLevel('generous');
       const genMult = genLvl >= 1 ? 2 : 1;
       v.trust = v.trust || {}; v.gives = v.gives || {};
       v.gives[vid] = (v.gives[vid] || 0) + kcal;
       try { this.recordGiveHist(vid, kcal); } catch (e) {} // r9: dated gives for the fair-share net rate
+      // An actual gift has one return charge even at capped trust/practice.
+      // Lifetime gives alone cannot tell us whether it was already settled.
+      v.givePending = v.givePending || {};
+      v.givePending[vid] = true;
       const trustGain = this.trustGainProgressive(vid, Math.min(10, Math.floor(kcal / 500)) * genMult);
       // NOTE (miser loop 2026-10-07): explicit undefined check — the old
       // `(v.trust[vid] || 15)` resurrected a zero-trust villager to 15+gain
@@ -14171,9 +14183,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (kcal >= 200) {
         const sch = this.state.scholar;
         const gab = (sch.backgroundAbilities || []).find(a => a.id === 'generous') ||
-                    (sch.abilities || []).find(a => a.id === 'generous');
+                    (sch.abilities || []).find(a => a.id === 'generous') ||
+                    ((this.state.codex || {}).skills || {})[this.abilitySkillId('generous')];
+        const practiceOwed = gab && gab.level < 3;
         this.gainAbilityXP('generous', 1);
-        if (gab && gab.level < 3) {
+        if (practiceOwed) {
           v.giveXP = v.giveXP || {};
           v.giveXP[vid] = (v.giveXP[vid] || 0) + 1;
         }
@@ -14578,9 +14592,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.giveXP = v.giveXP || {};
         const owedXB = v.giveXP[vid] || 0;
         if (owedXB > 0) { this.loseAbilityXP('generous', owedXB); v.giveXP[vid] = 0; }
-        const curB = v.trust[vid] === undefined ? 15 : v.trust[vid];
-        v.trust[vid] = Math.max(0, curB - 5);
-        this.say('You took back what you gave. They noticed. Trust -5.');
+        // Settle a new gift once. Older saves can still prove an unsettled
+        // gift through their positive reward ledgers; never invent a pending
+        // return from lifetime gives after the rewards have been cleared.
+        if ((v.givePending && v.givePending[vid]) || owedB > 0 || owedXB > 0) {
+          v.givePending = v.givePending || {};
+          v.givePending[vid] = false;
+          const curB = v.trust[vid] === undefined ? 15 : v.trust[vid];
+          v.trust[vid] = Math.max(0, curB - 5);
+          this.say('You took back what you gave. They noticed. Trust -5.');
+        }
       }
       this.say(`Packed: ${taken.join(', ')}. (${this.fmtKcal(totalKcal)}, ${totalKg.toFixed(1)} kg)`);
       return null;
@@ -14682,9 +14703,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.giveXP = v.giveXP || {};
         const owedXP = v.giveXP[vid] || 0;
         if (owedXP > 0) { this.loseAbilityXP('generous', owedXP); v.giveXP[vid] = 0; }
-        const cur = v.trust[vid] === undefined ? 15 : v.trust[vid];
-        v.trust[vid] = Math.max(0, cur - 5);
-        this.say('You took back what you gave. They noticed. Trust -5.');
+        if ((v.givePending && v.givePending[vid]) || owed > 0 || owedXP > 0) {
+          v.givePending = v.givePending || {};
+          v.givePending[vid] = false;
+          const cur = v.trust[vid] === undefined ? 15 : v.trust[vid];
+          v.trust[vid] = Math.max(0, cur - 5);
+          this.say('You took back what you gave. They noticed. Trust -5.');
+        }
       }
       // add to inventory (merge if same)
       const inv = this.state.scholar.inventory;
@@ -22899,6 +22924,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       const ab = (s.backgroundAbilities || []).find(a => a.id === abilityId) ||
                  (s.abilities || []).find(a => a.id === abilityId);
+      if (!ab && this.isSkillLane(abilityId) && n > 0) {
+        const entry = ((this.state.codex || {}).skills || {})[this.abilitySkillId(abilityId)];
+        if (!entry || !(entry.level >= 1)) return;
+        let left = Math.floor(n);
+        while (left > 0) {
+          const cur = entry.xp || 0;
+          if (cur >= left) { entry.xp = cur - left; break; }
+          left -= cur;
+          if (entry.level <= 1) { entry.xp = 0; break; }
+          entry.level--;
+          // Reconstruct the real6/12-use threshold when a promotion's
+          // gift is revoked; preserve the earlier legitimate practice.
+          entry.xp = entry.level === 1 ? 6 : 12;
+        }
+        this.recomputeActiveSynergies();
+        return;
+      }
       if (!ab || !(n > 0)) return;
       let left = Math.floor(n);
       while (left > 0 && ab.level >= 1) {

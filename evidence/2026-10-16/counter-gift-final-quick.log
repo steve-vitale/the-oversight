@@ -1,0 +1,18 @@
+check.js: 189 scripts, 4 parallel (quick)
+..............F..............................................................................................................................................................................
+
+  FAIL scripts/godpath/test-counter-gift.js (exit 1, 1.1s)
+        ok   internal pantryAdd rewards or production never credit the current player
+        ok   credit never launders food risks or harvest ownership
+        ok   the promotion-causing gift is still owed in the current skill lane
+        ok   taking the gift back revokes trust and only its skill practice
+        ok   a mastery-causing gift is also recorded before the level changes
+        ok   bulk take-back unwinds the mastery step without erasing prior practice
+        ok   the actual granary clock still unwinds when counter food is retrieved
+        ok   actual completed shelf credit survives the real save/load boundary
+        ok   ordinary pack donation/take-back cycles cannot print migrated skill mastery
+        ok   cycling keeps physical food and conditional trust honest
+      TypeError: rankChannels(...).some is not a function
+          at C:\Users\Steve\oversight\scripts\godpath\test-counter-gift.js:18:388
+
+check.js: 188 passed, 1 failed in 63s

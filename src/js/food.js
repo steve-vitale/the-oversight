@@ -2531,7 +2531,12 @@
           stash.splice(i, 1);
           continue;
         }
-        if (!this.isFinishedFood(it)) continue;
+        if (!this.isFinishedFood(it) || (it.units ?? 1) <= 0) continue;
+        if (it.bonded) {
+          this.say(`That's yours. Not the village's. You can't give away your ${it.name}.`);
+          blocked++;
+          continue;
+        }
         // PANTRY CAP (break-it food 2026-10-08): pantryAdd enforces the cap
         // and reports; a full pantry leaves the batch on the counter —
         // honestly, not silently vanished, not overfilled.
@@ -2540,8 +2545,10 @@
           blocked++;
           continue;
         }
-        kcal += (it.kcalEach || 0) * (it.units || 1);
+        const transferred = (it.kcalEach || 0) * (it.units || 1);
+        kcal += transferred;
         stash.splice(i, 1);
+        this._creditPantryGift(it, transferred);
         n++;
       }
       if (n) this.say(`Put away: ${n} finished batch${n > 1 ? 'es' : ''} (${this.fmtKcal ? this.fmtKcal(kcal) : kcal + ' kcal'}) → pantry. The counter breathes.`);

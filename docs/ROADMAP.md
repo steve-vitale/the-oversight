@@ -9,6 +9,18 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Counter gift settlement (2026-10-16): completed counter deposits now earn the
+same deliberate-gift credit as Pack donations; automatic stock does not. Modern
+Generous practice revokes correctly across promotion, and a saved pending-gift
+receipt preserves the first five-trust return charge without repeating it on
+later unrelated meals.25 focused checks and full961/961 pass. All23 metrics and
+three source-bound contrasts remain review-required: named16 wins15->10,
+community1->5; disjoint64 wins47->49, deaths101->105 and national55->53.
+No win quota or difficulty softening; zero natural campaign starts persists.
+See ../evidence/2026-10-16/counter-gift-audit.md for raw panels, rejected
+intermediate evidence, phone/save/load proof, reconstruction and cap-ledger
+limitation. Seven deeds and earned army funding remain open.
+
 Harvest preparation (2026-10-16): the opt-in campaigner-preparer closes a
 measured zero-shelling gap using real Pack/counter verbs; native staged
 harvest proof yields1500kcal at12 ticks, without contribution credit.14

@@ -1,0 +1,42 @@
+== R1 (RED): fresh census, no acts — silence ==
+  PASS R1: zero writes before any act
+  PASS R1: zero progressive rows before any act
+  PASS R1: zero link rows before any act
+== R2 (GREEN): bumpTrust gain ==
+  PASS R2: gain row recorded
+  PASS R2: bumpTrust reason captured
+== R3 (GREEN): bumpTrust loss ==
+  PASS R3: drain row recorded
+== R4 (GREEN): donateToPantry — unload gives ==
+  PASS R4: donate write, caller donateToPantry
+  PASS R4: progressive row base>0
+== R5 (GREEN): takeFromPantry sting — penalty drain ==
+  PASS R5: sting row, caller takeFromPantry, delta -2
+== R6 (GREEN): comfort — grief beat ==
+  PASS R6: comfort fired
+  PASS R6: comfort write, channel grief-comfort, delta>0
+== R7 (GREEN): giveFood — food deed ==
+  PASS R7: giveFood fired
+  PASS R7: giveFood write, delta>0
+== R8 (GREEN): applyRep — rep drift ==
+  PASS R8: applyRep write, delta>0
+== R9 (GREEN): _trustGain — link currency (separate) ==
+  PASS R9: link gain recorded in linkGains, not village writes
+  PASS R9: no village-trust write leaked for the link gain
+== R10 (GREEN): classification covers all writes ==
+  PASS R10: every engine write classified to a named channel
+  PASS R10: channel present: gain:donate-unload
+  PASS R10: channel present: drain:pantry-take-sting
+  PASS R10: channel present: gain:grief-comfort
+  PASS R10: channel present: gain:food-deed
+  PASS R10: channel present: gain:rep-drift
+== GREEN on honest run: seed 11 leadcourt 20d ==
+  PASS honest: run completed
+  PASS honest: census captured writes
+  PASS honest: ranked table non-empty
+  PASS honest: per-100vd computable
+  PASS honest: scholar lineage sampled daily
+  PASS R11: honest run fully classified (no other: channels)
+  honest run channels: gain:rep-drift +61/0 x61 | gain:assignment-deed +60/0 x60 | gain:social-away +39/0 x38 | gain:work-deed +22/0 x22 | gain:forage-deed +20/0 x20 | gain:monster-deed +20/0 x11 | gain:objective-tick +6/0 x6 | gain:mentor-slot +4/0 x1
+
+28 passed, 0 failed

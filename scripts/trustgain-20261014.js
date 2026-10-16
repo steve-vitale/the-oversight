@@ -60,7 +60,7 @@ function callerName(skipExtra) {
     // caller (giveFood, makeAmends, comfort...) and its `name` field.
     // Seeing through it keeps write rows and progressive rows on the
     // same engine caller. The name field is captured separately (wrap 5).
-    'resolveConsequence']);
+    'resolveConsequence', '_creditPantryGift']);
   if (skipExtra) for (const s of skipExtra) skip.add(s);
   const fs = frames(skip);
   if (!fs.length) return '?';
@@ -243,6 +243,7 @@ const CHANNELS = {
   askSupport: 'gain:favor-support',         // game.js askSupport (+5)
   confrontGossip: 'gain:confrontation-gossip', // game.js confrontGossip (+4)
   donateToPantry: 'gain:donate-unload',     // game.js donateToPantry (kcal/500, x2 generous)
+  putAwayFinished: 'gain:counter-unload',   // real deliberate counter transfer, same gift settlement
   applyRep: 'gain:rep-drift',               // game.js applyRep (direct-witness trust ripple)
   abilityOnAcquire: 'gain:ability-unlock',  // game.js abilityOnAcquire
   evStranger: 'gain:event-stranger',        // game.js evStranger

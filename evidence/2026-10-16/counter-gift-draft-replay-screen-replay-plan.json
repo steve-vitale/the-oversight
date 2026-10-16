@@ -1,0 +1,58 @@
+{
+  "selection": "Every changed complete gameplay hash, regardless of metric direction; no-change panels retain a neutral case instead. Conditional diagnostics, not independent worlds.",
+  "cases": [
+    {
+      "policy": "caregiver",
+      "seed": 8,
+      "changedMetrics": []
+    },
+    {
+      "policy": "maker",
+      "seed": 8,
+      "changedMetrics": []
+    }
+  ],
+  "proof": {
+    "policy": "caregiver",
+    "seed": 8,
+    "changedMetrics": []
+  },
+  "jobs": [
+    {
+      "policy": "caregiver",
+      "seed": 8,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "caregiver",
+      "seed": 8,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 8,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 8,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "caregiver",
+      "seed": 8,
+      "arm": "before",
+      "mode": "0"
+    },
+    {
+      "policy": "caregiver",
+      "seed": 8,
+      "arm": "after",
+      "mode": "0"
+    }
+  ]
+}

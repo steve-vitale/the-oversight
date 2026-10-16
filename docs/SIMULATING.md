@@ -730,3 +730,16 @@ Miser intent cohorts: merchant-hoarder / merchant-dealer declare on-sheet abilit
 A read-only natural checkpoint can be replayed in the browser without calling save/syncRun during the sim (these can consume clock-derived identifiers). Retain a matching complete result/fullstatehash first; reconstruct save serialization into a copy. Explicitly label imports and any presentation flags suppressed for browser inspection. Use a fresh local origin and check the actual save result instead of bypassing stale-save protection. The current capable policy leaves the introductory knack unanswered, and the Node run leaves arrival presentation unacknowledged; a phone replay is not proof of identical human early-game setup.
 
 Introductory-choice audit: ../evidence/2026-10-15/knack-policy-audit.md retains an experimental public-choice correction,13 passing prepared assertions and a128-campaign policy screen. It is not adopted: the existing food-deed test fails when both test seeds acquire the feast-blocking reactor early. Keep that failure visible and resolve the progression tradeoff before changing the default. setupGame must leave choices to policies, including idle controls. A policy revision is a separate experimental axis; the game-only comparator correctly rejects it. Do not rewrite source identities or cache keys to obtain a game-balance verdict.
+
+
+Counter gift settlement (2026-10-16): `node scripts/godpath/test-counter-gift.js`
+checks real Pack/counter deposits, refused/empty/internal stock, promotion
+rollback, save/load and single/bulk return cycles. check.js discovers it
+automatically. The dated counter-gift audit provides four reconstructible
+arms, source-bound full-state replay plans and three complete comparisons.
+Use `node evidence/2026-10-16/counter-gift-verify.cjs --current` while on that
+source; omit --current to verify historical retained evidence later. New
+deliberate transfer routes share settlement only after actual storage succeeds;
+do not add player rewards to internal pantryAdd production/NPC prizes.
+Absence of trust census rows after trust-object replacement is unknown coverage,
+not zero activity; inspect actual per-call snapshots and pending receipt.

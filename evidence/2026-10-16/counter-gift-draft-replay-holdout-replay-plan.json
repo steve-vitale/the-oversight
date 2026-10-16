@@ -1,0 +1,188 @@
+{
+  "selection": "Every changed complete gameplay hash, regardless of metric direction; no-change panels retain a neutral case instead. Conditional diagnostics, not independent worlds.",
+  "cases": [
+    {
+      "policy": "capable",
+      "seed": 10027,
+      "changedMetrics": []
+    },
+    {
+      "policy": "caregiver",
+      "seed": 10032,
+      "changedMetrics": []
+    },
+    {
+      "policy": "maker",
+      "seed": 10018,
+      "changedMetrics": [
+        "livingNpcs",
+        "lowFood",
+        "lowHealth",
+        "npcHungry",
+        "npcClassAccess",
+        "usefulIntake",
+        "bearerChanges",
+        "abilityAccepted"
+      ]
+    },
+    {
+      "policy": "maker",
+      "seed": 10020,
+      "changedMetrics": [
+        "won",
+        "entered",
+        "table",
+        "playerDeaths",
+        "playerDeaths100Days",
+        "communityLost",
+        "livingNpcs",
+        "lowFood",
+        "lowHealth",
+        "npcHungry",
+        "npcClassAccess",
+        "usefulIntake",
+        "bearerChanges",
+        "abilityAccepted"
+      ]
+    },
+    {
+      "policy": "maker",
+      "seed": 10042,
+      "changedMetrics": [
+        "playerDeaths",
+        "playerDeaths100Days",
+        "communityLost",
+        "livingNpcs",
+        "lowFood",
+        "lowWater",
+        "npcHungry",
+        "npcClassAccess",
+        "usefulIntake",
+        "bearerChanges",
+        "abilityAccepted"
+      ]
+    },
+    {
+      "policy": "maker",
+      "seed": 10062,
+      "changedMetrics": [
+        "livingNpcs",
+        "lowFood",
+        "lowWater",
+        "lowHealth",
+        "npcHungry",
+        "npcClassAccess",
+        "usefulIntake",
+        "abilityAccepted"
+      ]
+    },
+    {
+      "policy": "merchant",
+      "seed": 10062,
+      "changedMetrics": []
+    }
+  ],
+  "proof": {
+    "policy": "capable",
+    "seed": 10027,
+    "changedMetrics": []
+  },
+  "jobs": [
+    {
+      "policy": "capable",
+      "seed": 10027,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "capable",
+      "seed": 10027,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "caregiver",
+      "seed": 10032,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "caregiver",
+      "seed": 10032,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10018,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10018,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10020,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10020,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10042,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10042,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10062,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "maker",
+      "seed": 10062,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "merchant",
+      "seed": 10062,
+      "arm": "before",
+      "mode": "1"
+    },
+    {
+      "policy": "merchant",
+      "seed": 10062,
+      "arm": "after",
+      "mode": "1"
+    },
+    {
+      "policy": "capable",
+      "seed": 10027,
+      "arm": "before",
+      "mode": "0"
+    },
+    {
+      "policy": "capable",
+      "seed": 10027,
+      "arm": "after",
+      "mode": "0"
+    }
+  ]
+}
