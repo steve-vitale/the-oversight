@@ -11,6 +11,9 @@
 //   - announceHavenBar(tier)
 //   - havenNeedGossip(next)
 //   - havenRaidTick()
+//   - lingeringRaiders()
+//   - answerLingerer(how)
+//   - lingererSortie()
 //   - raidPillage(v, kcal)
 //   - hearthStretch()
 //   - granarySpoilBonus(foodState)
@@ -21,6 +24,7 @@
 //   - discoverable: System announces each tier bar post-arrival, Haven panel shows the live meter, villagers gossip the shortfall (code: havenGrowth.js — announceHavenBar, havenGrowthMeter + app.js havenGrowthHTML, havenNeedGossip)
 //   - reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 raiders, +1 above 12k pantry kcal and +1 above 24k, cap 5)
 //   - raid_raises_crisis: a raid raises an aid crisis reactively (the village looks to you; four call-for-help options said aloud). Raiders nobody meets LINGER at the treeline and gorge nightly (havenGrowthDaily) until driven off — the persistent threat the comms chain exists for. (code: havenRaidTick, 2026-10-10)
+//   - lingerers_fought_not_rolled: wave-4/5 lingerers are answered by "Endure it" (the default — the 6-day 'moved-on' valve) or a real costly played sortie (mustered fighters, real rations, real fieldFights — villagers can die). Never a flat button/roll. (code: lingererSortie, answerLingerer; design call #8, 2026-10-16)
 //   - cap_ceiling: havenPopCap is the ceiling; intake reads it via housingCap (code: havenGrowth.js — havenPopCap; membership.js — housingCap takes max(shelters, 12+4*havenTier()))
 //   - no_consumption: reaching a tier does not eat the stockpile (code: havenGrowth.js — havenTierUp sets v.havenTier only; stores untouched)
 // consumes:
@@ -222,7 +226,10 @@
           try { got = this.raidPillage(v, take); } catch (e) {}
           let mn = 'it';
           try { mn = (this.monsterDisplayName && this.monsterDisplayName(m.id)) || 'it'; } catch (e) {}
-          this.say(`🌙 Night. The lingering ${mn} gorges at the treeline — ${Math.round(got).toLocaleString()} kcal gone from the stores. Drive it off, or call for help.`);
+          // LINGERER ANSWER (design call #8, 2026-10-16, Steve): "Endure it"
+          // is the honest default — name it and its price. The sortie is the
+          // other answer, on the beats panel while they linger.
+          this.say(`🌙 Night. The lingering ${mn} gorges at the treeline — ${Math.round(got).toLocaleString()} kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.`);
         }
         try { if (this.syncMonsterAlias) this.syncMonsterAlias(); } catch (e) {}
       } catch (e) {}
@@ -614,9 +621,142 @@
       return true;
     },
 
+    // ---------- THE LINGERER ANSWER (design call #8, 2026-10-16, Steve) ----------
+    // Wave-4/5 lingerers (monsters that won't leave the treeline) are answered
+    // by "Endure it" (the default — the 6-day 'moved-on' valve) or a REAL
+    // costly played sortie — never a flat button/roll. The sortie musters real
+    // fighters, spends real rations, and plays real fieldFights blow-by-blow:
+    // villagers can die. (Canon: "Monster encounters are fought, not rolled",
+    // Steve 2026-10-08.) Not routed through aidFight: it would replace the
+    // mustered party with foreign allies mid-sortie and resolve the crisis
+    // after the first kill — the sortie is the village's own fight.
+    lingeringRaiders() {
+      try {
+        const ms = this.worldMonsters ? this.worldMonsters() : [];
+        return ms.filter(m => m && m.lingering && (m.hp || 0) > 0);
+      } catch (e) { console.warn('lingeringRaiders', e); return []; }
+    },
+
+    // answerLingerer: the beats-panel choice. 'endure' is the explicit default
+    // (doing nothing was always the same answer); 'sortie' pays the price.
+    answerLingerer(how) {
+      if (how === 'endure') {
+        const day = (this.state.scholar || {}).day || 0;
+        this.state.lingererBeatDay = day;
+        this.say(`You endure it. The treeline holds its shape against the dark; the stores take the night's cut. (They'll drift off within ~6 nights — the gorge is the price of waiting.)`);
+        return 'endured';
+      }
+      if (how === 'sortie') return this.lingererSortie();
+      return null;
+    },
+
+    lingererSortie() {
+      const raiders = this.lingeringRaiders();
+      if (!raiders.length) {
+        this.say('Nothing holds the treeline. (No lingerers to sortie against.)');
+        return { ok: false, why: 'none' };
+      }
+      // MUSTER: real fighters, never the player. Two besides-you minimum —
+      // a lone villager against a treeline monster is a funeral, not a sortie.
+      let muster = [];
+      try { muster = this._musterAway ? this._musterAway(3, 'defense') : []; } catch (e) { console.warn('lingererSortie muster', e); }
+      if (muster.length < 2) {
+        this.say(`Not enough fighters to send — a sortie needs at least two besides you, and the bench is bare. (Endure it, or call for help.)`);
+        return { ok: false, why: 'no-fighters' };
+      }
+      const leader = muster[0], allyVids = muster.slice(1);
+      const refName = (id) => { try { return this.firstRef ? this.firstRef(id) : this.displayName(id); } catch (e) { return 'Someone'; } };
+      const partyNames = muster.map(refName).join(', ');
+      // RESOURCES: a day's marching rations per fighter, real food, said aloud.
+      const rationEach = 2000, cost = rationEach * muster.length;
+      let paid = 0;
+      try { paid = this._removePantryKcal ? (this._removePantryKcal(cost) || 0) : 0; } catch (e) { console.warn('lingererSortie rations', e); }
+      this.say(`⚔️ SORTIE — ${partyNames} take up arms and a day's rations (${Math.round(paid).toLocaleString()} kcal from the stores) and walk out to the treeline. Nobody's coming back the same.`);
+      // THE FIGHTS: one played fieldFight per lingerer, in turn — the same
+      // blow-by-blow engine as every villager-vs-monster meeting. The party
+      // leader fights wounded from the last one; a fallen leader breaks it.
+      let broke = false, cleared = 0;
+      for (const m of raiders.slice()) {
+        if (!m.lingering || (m.hp || 0) <= 0) continue;
+        const mdef = (this.data.monsters || []).find(x => x.id === m.id) || {};
+        let mName = 'something';
+        try { mName = this.monsterNoun ? this.monsterNoun(mdef.id) : (mdef.name || 'something'); } catch (e) { console.warn('lingererSortie noun', e); }
+        let rec = null;
+        try { rec = this.fieldFight(leader, mdef, m, { allies: allyVids.length, allyVids: allyVids.slice() }); }
+        catch (e) { console.warn('lingererSortie fight', e); }
+        if (!rec || !rec.outcome) continue;
+        let summary = `${refName(leader)} fought the ${mName}`;
+        try { summary = this.fieldFightSummary ? this.fieldFightSummary(rec, refName(leader), mName) : summary; } catch (e) { console.warn('lingererSortie summary', e); }
+        if (rec.outcome === 'vKill') {
+          try { this.hurtVillager(leader, rec.vTaken, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          try { this.recordWaveKill(m.id, leader, 'sortie', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) { console.warn('lingererSortie ledger', e); }
+          let lootNote = '';
+          try {
+            const dropId = this.villagerKillLoot ? this.villagerKillLoot(leader, mdef) : null;
+            if (dropId) {
+              const ldef = (this.data.items || []).find(d => d.id === dropId) || {};
+              lootNote = ` Took ${ldef.name || 'something strange'} off the body.`;
+              if (this.villagerGearUp) this.villagerGearUp(leader, false);
+            }
+          } catch (e) { console.warn('lingererSortie loot', e); }
+          try {
+            const corpse = this.registerDeath({
+              kind: 'monster', monsterId: m.id, monsterName: mdef.name,
+              name: this.monsterDisplayName ? this.monsterDisplayName(m.id) : (mdef.name || 'the beast'),
+              descriptor: this.monsterDisplayName ? this.monsterDisplayName(m.id) : null,
+              node: { x: m.tx, y: m.ty }, mx: m.mx, my: m.my,
+              cause: 'sortie combat', killerId: leader, witnesses: muster.slice(),
+            });
+            const meat = this.monsterCarcassEntries ? this.monsterCarcassEntries(mdef) : [];
+            if (corpse && meat.length) for (const me of meat) corpse.items.push(me);
+            try { if (corpse && this.mapmemRemember) this.mapmemRemember(leader, corpse); } catch (e2) { console.warn('lingererSortie mapmem', e2); }
+          } catch (e) { console.warn('lingererSortie corpse', e); }
+          try { this.removeWorldMonster(m); } catch (e) { console.warn('lingererSortie remove', e); }
+          cleared++;
+          this.say(`⚔️ ${summary}${lootNote} The carcass is out there — haul it home before it rots.`);
+          try { this.villageEvent('victory'); } catch (e) { console.warn('lingererSortie event', e); }
+          try { this.bumpTrust(leader, 5); } catch (e) { console.warn('lingererSortie trust', e); }
+          try { this.remember(leader, 'hero', 'drove the ' + mName + ' off the treeline in a sortie'); } catch (e) { console.warn('lingererSortie memory', e); }
+        } else if (rec.outcome === 'mFlee') {
+          try { this.hurtVillager(leader, rec.vTaken, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          // DRIVEN OFF: it leaves the treeline — the gorge stops. It's still
+          // out there in the world (the entity persists), just not besieging.
+          m.lingering = false;
+          cleared++;
+          this.say(`⚔️ ${summary} It breaks and runs — the treeline is clear of it. It's still out there, somewhere.`);
+          try { this.bumpTrust(leader, 3); } catch (e) { console.warn('lingererSortie trust', e); }
+        } else if (rec.outcome === 'vFlee') {
+          try { this.hurtVillager(leader, rec.vTaken, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          this.say(`⚔️ ${summary} — the party falls back to the palisade, dragging their nerve with them. The treeline holds.`);
+          try { this.bumpTrust(leader, -2); } catch (e) { console.warn('lingererSortie trust', e); }
+          broke = true; break;
+        } else if (rec.outcome === 'vDie') {
+          // lethal through the real death pipeline (hurtVillager routes it)
+          try { this.hurtVillager(leader, 500, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          this.say(`⚔️ ${refName(leader)} faced the ${mName} at the treeline... and didn't come back. The party carries the body home. The sortie is over.`);
+          try { this.villageEvent('death'); } catch (e) { console.warn('lingererSortie event', e); }
+          try { this.bumpTrust(leader, -2); } catch (e) { console.warn('lingererSortie trust', e); }
+          broke = true; break;
+        }
+      }
+      // AFTERMATH: treeline clear of lingerers = the door answered.
+      const still = this.lingeringRaiders();
+      if (!still.length) {
+        const crisis = this.aidCrisis ? this.aidCrisis() : null;
+        if (crisis && !crisis.resolved && crisis.raiders) {
+          this.say('The treeline is quiet. No shapes in the dark.');
+          try { this.resolveAidCrisis('fought'); } catch (e) { console.warn('lingererSortie resolve', e); }
+        } else {
+          this.say('The treeline is quiet. No shapes in the dark.');
+        }
+      } else if (!broke) {
+        this.say(`${still.length} still hold${still.length === 1 ? 's' : ''} the treeline — the gorge goes on. (Endure it, or send another sortie.)`);
+      }
+      return { ok: true, cleared, broke, remaining: still.length, paid };
+    },
+
     // raidPillage: raiders eat from the real pantry (best-fit draw, discarded).
-    raidPillage(v, kcal) {
-      v = v || this.state.village;
+    raidPillage(v, kcal) {      v = v || this.state.village;
       if (!v || kcal <= 0) return 0;
       let taken = 0;
       try {

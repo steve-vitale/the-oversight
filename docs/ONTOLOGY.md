@@ -838,7 +838,7 @@ The god-path runtime (2026-10-14 redesign, Steve: "Gods are rough representative
 ### havenGrowth (`havenGrowth.js`)
 Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, Steve 2026-10-10). Resource-based, System-announced, never deed-based, never calendar. Each tier visibly improves the Haven and grants real mechanics. The raid system gives the Palisade something to defend against.
 
-**Provides:** havenTier(), havenPopCap(), havenStores(), havenGrowthMeter(), havenGrowthDaily(), havenTierUp(), announceHavenBar(tier), havenNeedGossip(next), havenRaidTick(), raidPillage(v, kcal), hearthStretch(), granarySpoilBonus(foodState), famineGraceDays()
+**Provides:** havenTier(), havenPopCap(), havenStores(), havenGrowthMeter(), havenGrowthDaily(), havenTierUp(), announceHavenBar(tier), havenNeedGossip(next), havenRaidTick(), lingeringRaiders(), answerLingerer(how), lingererSortie(), raidPillage(v, kcal), hearthStretch(), granarySpoilBonus(foodState), famineGraceDays()
 
 **Rules:**
 - resource_based: tiers unlock on stockpile thresholds only (code: havenGrowth.js — havenGrowthDaily checks havenStores() vs HAVEN_TIERS req; no deed, calendar, or knowledge reads anywhere in the tier path)
@@ -846,6 +846,7 @@ Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, 
 - discoverable: System announces each tier bar post-arrival, Haven panel shows the live meter, villagers gossip the shortfall (code: havenGrowth.js — announceHavenBar, havenGrowthMeter + app.js havenGrowthHTML, havenNeedGossip)
 - reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 raiders, +1 above 12k pantry kcal and +1 above 24k, cap 5)
 - raid_raises_crisis: a raid raises an aid crisis reactively (the village looks to you; four call-for-help options said aloud). Raiders nobody meets LINGER at the treeline and gorge nightly (havenGrowthDaily) until driven off — the persistent threat the comms chain exists for. (code: havenRaidTick, 2026-10-10)
+- lingerers_fought_not_rolled: wave-4/5 lingerers are answered by "Endure it" (the default — the 6-day 'moved-on' valve) or a real costly played sortie (mustered fighters, real rations, real fieldFights — villagers can die). Never a flat button/roll. (code: lingererSortie, answerLingerer; design call #8, 2026-10-16)
 - cap_ceiling: havenPopCap is the ceiling; intake reads it via housingCap (code: havenGrowth.js — havenPopCap; membership.js — housingCap takes max(shelters, 12+4*havenTier()))
 - no_consumption: reaching a tier does not eat the stockpile (code: havenGrowth.js — havenTierUp sets v.havenTier only; stores untouched)
 

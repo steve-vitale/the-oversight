@@ -326,6 +326,19 @@
         const cryBtn = (() => { try { const abs = Game.aidCryAbilities ? (Game.aidCryAbilities() || []) : []; return abs.length ? ` <button class="btn sm ghost" data-beat="aid:cry:${abs[0].id || abs[0]}">Ability cry (${esc(abs[0].name || abs[0].id || abs[0])})</button>` : ''; } catch (e) { return ''; } })();
         out.push(`<div class="statrow beat-open">🚨 <b>${esc(ac.name || 'A crisis')}</b> at the door — call for help: <button class="btn sm" data-beat="aid:runner">Send a runner</button> <button class="btn sm ghost" data-beat="aid:signal">Light the signal fire</button> <button class="btn sm ghost" data-beat="aid:system">System relay</button>${cryBtn}</div>`);
       }
+      // LINGERER ANSWER (design call #8, 2026-10-16): lingerers at the treeline
+      // get their honest choice — Endure it (the default) or a costly sortie.
+      // The "Endure it" button dismisses the row for the day; doing nothing was
+      // always the same answer.
+      try {
+        const ling = (Game.lingeringRaiders ? Game.lingeringRaiders() : []).filter(Boolean);
+        const lday = (Game.state.scholar || {}).day || 0;
+        if (ling.length && (Game.state.lingererBeatDay || 0) !== lday) {
+          const lnames = ling.map(m => { try { const d = (Game.data.monsters || []).find(x => x.id === m.id) || {}; return Game.monsterNoun ? Game.monsterNoun(d.id) : (d.name || 'something'); } catch (e) { return 'something'; } });
+          const lnm = [...new Set(lnames)].join(', ');
+          out.push(`<div class="statrow beat-open">⚔️ <b>${esc(lnm)}</b> hold${ling.length === 1 ? 's' : ''} the treeline — gorging nightly. <button class="btn sm ghost" data-beat="lingerer:endure">Endure it</button> <button class="btn sm" data-beat="lingerer:sortie">Send a sortie (fighters, rations, real risk)</button></div>`);
+        }
+      } catch (e) { console.warn('lingerer beat', e); }
       // SAFETY NETS (2026-10-10): System aid quests, crisis relief, and
       // neighbor aid flows — every open beat gets its honest answer buttons.
       // (pendingSystemFavor was engine-only: the System asked, the player had
@@ -16316,6 +16329,7 @@
         if (spec[1] === 'cry') Game.callForHelp('cry', { abilityId: spec[2] });
         else Game.callForHelp(spec[1]);
       }
+      else if (kind === 'lingerer') Game.answerLingerer(spec[1]);
       // SAFETY NETS (2026-10-10): aid quests, relief, neighbor aid flows,
       // and the System favor collection — all engine, now all answerable.
       else if (kind === 'aq') {
