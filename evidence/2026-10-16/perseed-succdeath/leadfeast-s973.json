@@ -1,0 +1,232 @@
+{
+ "policy": "leadfeast",
+ "seed": 973,
+ "days": 149,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "wins": 0,
+ "exiled": 0,
+ "entered": 0,
+ "maxArc": 4,
+ "maxWave": 5,
+ "deaths": {
+  "monster:expedition": 1,
+  "monster:villager combat": 7,
+  "player:combat": 5,
+  "monster:combat": 28,
+  "villager:monster": 4,
+  "villager:sickness": 6,
+  "villager:a wound that wouldn't close": 1,
+  "player:dehydration": 1
+ },
+ "succdeath": {
+  "on": true,
+  "errors": [],
+  "successions": [
+   {
+    "vid": "gen_wmtpe1l",
+    "name": "Ming",
+    "initial": true,
+    "mantleDay": 1,
+    "exitDay": 34,
+    "exitType": "death",
+    "cause": "combat",
+    "causeClass": "combat",
+    "daysInOffice": 33,
+    "fast": false,
+    "reArmedBeforeDeath": true,
+    "stateSource": "row",
+    "state": {
+     "day": 33,
+     "cumNet": -57381,
+     "voluntaryNet": -21089,
+     "voluntaryNet7": -6589,
+     "mealShare": 0.632,
+     "mealKcal": 36292,
+     "volTakeKcal": 21089,
+     "cumTakes": 57381
+    }
+   },
+   {
+    "vid": "gen_zi9w0t4",
+    "name": "Cheyenne",
+    "initial": false,
+    "mantleDay": 34,
+    "exitDay": 132,
+    "exitType": "death",
+    "cause": "dehydration",
+    "causeClass": "starvation",
+    "daysInOffice": 98,
+    "fast": false,
+    "reArmedBeforeDeath": true,
+    "stateSource": "row",
+    "state": {
+     "day": 132,
+     "cumNet": -96598,
+     "voluntaryNet": -2153,
+     "voluntaryNet7": -400,
+     "mealShare": 0.978,
+     "mealKcal": 94445,
+     "volTakeKcal": 2153,
+     "cumTakes": 96598
+    }
+   },
+   {
+    "vid": "ethan_hunt",
+    "name": "Ethan",
+    "initial": false,
+    "mantleDay": 132,
+    "exitDay": 133,
+    "exitType": "death",
+    "cause": "combat",
+    "causeClass": "combat",
+    "daysInOffice": 1,
+    "fast": true,
+    "reArmedBeforeDeath": false,
+    "stateSource": "fresh-book",
+    "state": {
+     "day": 133,
+     "cumNet": 0,
+     "voluntaryNet": 0,
+     "voluntaryNet7": 0,
+     "mealShare": null,
+     "mealKcal": 0,
+     "volTakeKcal": 0,
+     "cumTakes": 0
+    },
+    "attributed": true,
+    "attribNotes": []
+   },
+   {
+    "vid": "visjoin_109",
+    "name": "Bandar",
+    "initial": false,
+    "mantleDay": 133,
+    "exitDay": 141,
+    "exitType": "death",
+    "cause": "combat",
+    "causeClass": "combat",
+    "daysInOffice": 8,
+    "fast": false,
+    "reArmedBeforeDeath": true,
+    "stateSource": "row",
+    "state": {
+     "day": 140,
+     "cumNet": -16537,
+     "voluntaryNet": -1172,
+     "voluntaryNet7": 0,
+     "mealShare": 0.929,
+     "mealKcal": 15365,
+     "volTakeKcal": 1172,
+     "cumTakes": 16537
+    }
+   },
+   {
+    "vid": "ivy_wang",
+    "name": "Ivy",
+    "initial": false,
+    "mantleDay": 141,
+    "exitDay": 145,
+    "exitType": "death",
+    "cause": "combat",
+    "causeClass": "combat",
+    "daysInOffice": 4,
+    "fast": false,
+    "reArmedBeforeDeath": true,
+    "stateSource": "row",
+    "state": {
+     "day": 144,
+     "cumNet": -10705,
+     "voluntaryNet": -1600,
+     "voluntaryNet7": -1600,
+     "mealShare": 0.851,
+     "mealKcal": 9105,
+     "volTakeKcal": 1600,
+     "cumTakes": 10705
+    }
+   },
+   {
+    "vid": "app_mgpspit735",
+    "name": "Nomthandazo",
+    "initial": false,
+    "mantleDay": 145,
+    "exitDay": 148,
+    "exitType": "death",
+    "cause": "combat",
+    "causeClass": "combat",
+    "daysInOffice": 3,
+    "fast": false,
+    "reArmedBeforeDeath": true,
+    "stateSource": "row",
+    "state": {
+     "day": 147,
+     "cumNet": -9795,
+     "voluntaryNet": -4750,
+     "voluntaryNet7": -4750,
+     "mealShare": 0.515,
+     "mealKcal": 5045,
+     "volTakeKcal": 4750,
+     "cumTakes": 9795
+    }
+   },
+   {
+    "vid": "visjoin_127",
+    "name": "Hadija",
+    "initial": false,
+    "mantleDay": 148,
+    "exitDay": null,
+    "exitType": null,
+    "cause": null,
+    "causeClass": null,
+    "daysInOffice": 2,
+    "fast": false,
+    "reArmedBeforeDeath": null,
+    "stateSource": null,
+    "state": null
+   }
+  ],
+  "aggregate": {
+   "nSuccessions": 7,
+   "nExited": 6,
+   "nCensored": 1,
+   "daysInMantleMedian": 8,
+   "daysInMantleMin": 1,
+   "daysInMantleMax": 98,
+   "nFast": 1,
+   "nFastAttributed": 1,
+   "attributionRate": 1,
+   "go": true,
+   "causeClasses": {
+    "combat": 1
+   },
+   "fastShares": {
+    "combat": 1,
+    "hunger": 0,
+    "other": 0
+   },
+   "fastReArmedBeforeDeath": 0,
+   "fastFreshBook": 1,
+   "officeExits": 0
+  }
+ },
+ "_fast": [
+  {
+   "vid": "ethan_hunt",
+   "name": "Ethan",
+   "initial": false,
+   "mantleDay": 132,
+   "exitDay": 133,
+   "exitType": "death",
+   "cause": "combat",
+   "causeClass": "combat",
+   "attributed": true,
+   "reArmedBeforeDeath": false,
+   "stateSource": "fresh-book",
+   "cumNet": 0,
+   "voluntaryNet": 0,
+   "voluntaryNet7": 0,
+   "mealShare": null
+  }
+ ]
+}
