@@ -191,3 +191,63 @@ kills instead — the metric moved mid-judgment.)
   regenerate the tables and stamp a dated CORRECTION note — never silently
   re-issue.
 - Guardrails are metrics too: a GO met with a guardrail breached is NO-GO.
+
+### 14a. Kill verdict taxonomy (Steve 2026-10-16 — "question the underlying assumptions")
+
+A KILL is not a single verdict. Every killed arm MUST classify its kill in
+the evidence file's verdict section, using one or more of:
+
+- **CONCEPT-DEAD**: the mechanism was staged, the metric was fair, and the
+  concept failed on its merits. Do not retry without a new mechanism.
+  (Example: learnfight — withdrawal from hostile trick-bearers is
+  structurally lethal; the funnel moved but the price was wrong.)
+- **METRIC-BROKEN**: the bar was unachievable, mis-scoped, or measured noise
+  — the pilot could not have passed regardless of the concept's merit.
+  The arm returns to the queue with a corrected pre-registration; this is
+  a NEW run, not a re-score. (Examples: monstermeat-b — bar 30x the pool,
+  flagged by the pre-pilot probe; fieldports — metric conflated mechanism
+  with contact; feastexposure — guardrail miss on n=8 perturbation with no
+  mechanism.)
+- **SUBSTRATE-MISSING**: the engine does not stage what the arm needs
+  (unwired witnesses, missing verb, truncated horizon). The arm BLOCKS on
+  the substrate being built, then re-runs. Do not run more arms against a
+  missing substrate. (Examples: witnesslearn — node-mate witnesses never
+  wired; siegeroster — muster beat fires but no shelter verb exists;
+  counterres — seat driver truncates the trick game before it matures.)
+
+The taxonomy is the anti-waste rule: a METRIC-BROKEN or SUBSTRATE-MISSING
+kill that gets filed as CONCEPT-DEAD buries a live idea. When in doubt
+between CONCEPT-DEAD and the other two, the autopsy's mechanism section
+decides: if no mechanism for the failure was found in the arm's own logic,
+it is not CONCEPT-DEAD.
+
+### 14b. Pre-pilot substrate checklist (Steve 2026-10-16)
+
+Before spending a pilot, verify the engine actually stages what the arm
+needs. All four checks run BEFORE the sweep; a failed check blocks the
+pilot until fixed (fixing the pre-registration before the run is not
+re-scoring — re-scoring only happens after numbers are observed):
+
+1. **Contact**: does the phenomenon occur on the measurement substrate?
+   (Probe: does the target species spawn field fights? Do witnesses exist
+   at kill sites? If the probe shows zero contact, the pilot measures
+   nothing — fix the substrate or the scope first.)
+2. **Pool sizing**: is the addressable pool within an order of magnitude of
+   the bar? (Probe the pool BEFORE pre-registering the threshold; set the
+   bar as a multiple of the pool, not an absolute figure pulled from nowhere.
+   The monstermeat-b 30x-pool kill was a foregone conclusion — wasteful.)
+3. **Verb existence**: does the engine have the verb the arm's mechanism
+   needs? (If the arm narrates defense, the engine must be able to move
+   villagers to safety. Narration without mechanism is theater — the
+   siegeroster finding.)
+4. **Horizon fit**: does the measurement window contain the phenomenon?
+   (If the trick game needs d81+ and the substrate wins at d89, the pilot
+   is eight days wide — the counterres finding.)
+
+### 14c. Roster measurement rule (Steve 2026-10-16)
+
+Survival and defense arms MUST pre-register villager (non-scholar) combat
+deaths as a co-primary alongside any scholar metric. The scale wall lives
+in the roster, not the scholar: siegedef2r protected the scholar (2 vs 5
+deaths) while the village died around them (d120, d97 village-dead) — a
+scholar-only metric cannot see the wall it claims to measure.
