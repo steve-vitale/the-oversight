@@ -1,0 +1,9045 @@
+{
+ "label": "crumbguard-pilot-control",
+ "seeds": [
+  101,
+  202,
+  303,
+  404
+ ],
+ "pids": [
+  "leadcourt",
+  "belongseek"
+ ],
+ "days": 180,
+ "agg": {
+  "n": 8,
+  "mealDays": 11074,
+  "pathCounts": {
+   "pantry-fresh": 1052,
+   "away-pack": 627,
+   "self-fed": 9365,
+   "desperation-spoiled": 24,
+   "away-pack-empty": 6
+  },
+  "starvedDays": 19,
+  "starvePathCounts": {
+   "empty-pantry": 14,
+   "away-pack-empty": 2,
+   "away-pack-short": 1,
+   "spoiled-insufficient": 2
+  },
+  "attributionCoverage": 1,
+  "starvedMeanTrust": 79.9,
+  "fedMeanTrust": 59.5,
+  "starvedFullPantryShare": 0.053,
+  "tookKcal": 689158,
+  "gaveKcal": 5813298,
+  "medianDaysAll": 180,
+  "deathCauses": {
+   "monster": 28,
+   "combat": 101,
+   "expedition": 15,
+   "villager combat": 75,
+   "a wound that wouldn't close": 2,
+   "dehydration": 2,
+   "ambush": 2,
+   "contest": 4,
+   "sickness": 1,
+   "White Noise": 1,
+   "starvation": 5
+  },
+  "byPolicy": {
+   "leadcourt": {
+    "n": 4,
+    "won": 0,
+    "medianDays": 180,
+    "maxDays": 180,
+    "national": 3,
+    "table": 0,
+    "maxWave": 4,
+    "hungryDays": 3
+   },
+   "belongseek": {
+    "n": 4,
+    "won": 0,
+    "medianDays": 180,
+    "maxDays": 180,
+    "national": 3,
+    "table": 0,
+    "maxWave": 3,
+    "hungryDays": 3
+   }
+  }
+ },
+ "rows": [
+  {
+   "policy": "leadcourt",
+   "seed": 101,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 3,
+   "maxArc": 3,
+   "maxRank": "global",
+   "national": 1,
+   "table": 0,
+   "deaths": {
+    "monster": 1,
+    "combat": 8,
+    "expedition": 3,
+    "villager combat": 4
+   },
+   "hungryDays": 0,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 11,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 12,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 13,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 14,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 15,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 16,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 17,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 18,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 19,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 7
+    },
+    {
+     "day": 20,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 7
+    },
+    {
+     "day": 21,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 22,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 23,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 24,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 25,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 26,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 27,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 28,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 29,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 30,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 31,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 32,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 33,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 34,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 35,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 36,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 37,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 38,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 39,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 40,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 41,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 42,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 43,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 44,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 45,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 46,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 47,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 48,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 49,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 50,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 51,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 52,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 53,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 54,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 55,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 56,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 57,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 58,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 59,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 60,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 61,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 62,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 63,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 64,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 65,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 46
+    },
+    {
+     "day": 66,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 67,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 68,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 69,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 70,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 71,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 72,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 73,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 48
+    },
+    {
+     "day": 74,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 50
+    },
+    {
+     "day": 75,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 50
+    },
+    {
+     "day": 76,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 50
+    },
+    {
+     "day": 77,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 50
+    },
+    {
+     "day": 78,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 51
+    },
+    {
+     "day": 79,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 51
+    },
+    {
+     "day": 80,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 81,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 82,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 83,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 84,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 85,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 86,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 87,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 88,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 89,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 90,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 91,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 92,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 93,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 94,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 95,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 96,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 97,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 98,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 99,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 100,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 101,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 102,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 103,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 104,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 105,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 55
+    },
+    {
+     "day": 106,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 55
+    },
+    {
+     "day": 107,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 55
+    },
+    {
+     "day": 108,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 55
+    },
+    {
+     "day": 109,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 55
+    },
+    {
+     "day": 110,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 55
+    },
+    {
+     "day": 111,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 112,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 113,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 114,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 115,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 116,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 117,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 118,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 58
+    },
+    {
+     "day": 119,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 58
+    },
+    {
+     "day": 120,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 59
+    },
+    {
+     "day": 121,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 59
+    },
+    {
+     "day": 122,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 59
+    },
+    {
+     "day": 123,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 59
+    },
+    {
+     "day": 124,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 125,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 126,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 127,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 128,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 129,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 130,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 131,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 132,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 133,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 134,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 60
+    },
+    {
+     "day": 135,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 61
+    },
+    {
+     "day": 136,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 61
+    },
+    {
+     "day": 137,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 62
+    },
+    {
+     "day": 138,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 62
+    },
+    {
+     "day": 139,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 62
+    },
+    {
+     "day": 140,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 62
+    },
+    {
+     "day": 141,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 62
+    },
+    {
+     "day": 142,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 62
+    },
+    {
+     "day": 143,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 63
+    },
+    {
+     "day": 144,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 63
+    },
+    {
+     "day": 145,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 64
+    },
+    {
+     "day": 146,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 64
+    },
+    {
+     "day": 147,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 64
+    },
+    {
+     "day": 148,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 64
+    },
+    {
+     "day": 149,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 150,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 151,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 152,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 153,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 154,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 155,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 156,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 157,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 158,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 159,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 160,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 161,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 162,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 163,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 164,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 165,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 166,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 167,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 168,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 169,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 170,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 171,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 172,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 173,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 174,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 175,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 176,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 177,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 68
+    },
+    {
+     "day": 178,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 68
+    },
+    {
+     "day": 179,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 68
+    },
+    {
+     "day": 180,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 69
+    },
+    {
+     "day": 181,
+     "vid": "gen_6lx1lxl",
+     "name": "Pedro",
+     "path": "player-parity",
+     "trust": 69
+    }
+   ],
+   "rows": 1666
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 202,
+   "days": 47,
+   "gameDays": 48,
+   "endReason": "village-lost",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 3,
+   "maxArc": 3,
+   "maxRank": "regional",
+   "national": 0,
+   "table": 0,
+   "deaths": {
+    "villager combat": 7,
+    "combat": 14,
+    "monster": 3,
+    "expedition": 1,
+    "a wound that wouldn't close": 2
+   },
+   "hungryDays": 3,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 11,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 12,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 13,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 14,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 15,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 16,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 17,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 18,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 10
+    },
+    {
+     "day": 19,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 6
+    },
+    {
+     "day": 20,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 21,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 22,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 23,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 24,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 25,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 26,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 27,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 28,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 29,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 30,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 33
+    },
+    {
+     "day": 31,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 32,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 33,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 34,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 35,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 36,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 37,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 38,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 39,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 40,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 41,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 42,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 43,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 44,
+     "vid": "gen_ew1zxrh",
+     "name": "Ramiro",
+     "path": "player-parity",
+     "trust": 31
+    },
+    {
+     "day": 45,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 46,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 47,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 48,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 56
+    }
+   ],
+   "rows": 417
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 303,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 3,
+   "maxArc": 3,
+   "maxRank": "national",
+   "national": 1,
+   "table": 0,
+   "deaths": {
+    "dehydration": 1,
+    "ambush": 1,
+    "villager combat": 11,
+    "combat": 9,
+    "monster": 1,
+    "expedition": 2,
+    "contest": 1,
+    "sickness": 1,
+    "White Noise": 1
+   },
+   "hungryDays": 0,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 11,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 12,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 13,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 14,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 15,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 16,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 17,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 18,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 19,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 20,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 21,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 22,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 23,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 24,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 13
+    },
+    {
+     "day": 25,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 13
+    },
+    {
+     "day": 26,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 9
+    },
+    {
+     "day": 27,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 9
+    },
+    {
+     "day": 28,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 9
+    },
+    {
+     "day": 29,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 5
+    },
+    {
+     "day": 30,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 5
+    },
+    {
+     "day": 31,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 32,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 33,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 34,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 35,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 36,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 37,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 38,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 1
+    },
+    {
+     "day": 39,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 40,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 41,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 42,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 43,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 44,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 45,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 46,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 47,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 48,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 49,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 50,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 51,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 52,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 44
+    },
+    {
+     "day": 53,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 54,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 55,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 56,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 57,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 58,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 59,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 60,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 61,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 62,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 63,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 64,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 65,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 66,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 67,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 68,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 69,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 70,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 71,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 72,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 73,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 74,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 75,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 76,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 77,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 78,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 79,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 80,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 81,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 82,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 83,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 84,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 85,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 86,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 87,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 88,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 89,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 90,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 91,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 92,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 93,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 94,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 95,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 96,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 97,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 98,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 42
+    },
+    {
+     "day": 99,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 100,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 101,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 102,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 103,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 104,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 105,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 106,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 107,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 108,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 109,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 110,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 111,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 112,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 113,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 114,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 115,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 116,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 117,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 118,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 119,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 120,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 121,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 122,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 123,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 124,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 125,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 126,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 127,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 128,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 129,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 130,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 131,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 132,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 133,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 134,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 135,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 136,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 137,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 138,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 139,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 140,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 141,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 142,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 143,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 144,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 145,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 146,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 147,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 148,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 149,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 150,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 151,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 152,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 153,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 154,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 155,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 156,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 157,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 158,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 159,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 160,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 161,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 162,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 163,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 164,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 165,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 166,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 167,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 168,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 169,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 170,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 171,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 172,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 173,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 174,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 175,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 176,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 177,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 178,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 179,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 180,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 181,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 0
+    }
+   ],
+   "rows": 1432
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 404,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 4,
+   "maxArc": 3,
+   "maxRank": "national",
+   "national": 1,
+   "table": 0,
+   "deaths": {
+    "villager combat": 9,
+    "combat": 10,
+    "expedition": 2,
+    "monster": 3
+   },
+   "hungryDays": 0,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 11,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 12,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 13,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 14,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 15,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 16,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 17,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 18,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 9
+    },
+    {
+     "day": 19,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 20,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 21,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 22,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 23,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 24,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 25,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 26,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 27,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 28,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 29,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 30,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 31,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 32,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 33,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 34,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 35,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 36,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 37,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 38,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 39,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 40,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 41,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 42,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 43,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 44,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 45,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 46,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 47,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 48,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 49,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 50,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 51,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 52,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 53,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 54,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 55,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 56,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 57,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 58,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 59,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 60,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 61,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 62,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 63,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 64,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 65,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 66,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 67,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 68,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 69,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 70,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 71,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 72,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 73,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 74,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 75,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 76,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 77,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 78,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 79,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 80,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 81,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 82,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 83,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 84,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 85,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 86,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 87,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 88,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 89,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 90,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 91,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 92,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 40
+    },
+    {
+     "day": 93,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 94,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 95,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 96,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 97,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 38
+    },
+    {
+     "day": 98,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 99,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 100,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 101,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 102,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 103,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 104,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 105,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 106,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 107,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 36
+    },
+    {
+     "day": 108,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 34
+    },
+    {
+     "day": 109,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 32
+    },
+    {
+     "day": 110,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 32
+    },
+    {
+     "day": 111,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 32
+    },
+    {
+     "day": 112,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 32
+    },
+    {
+     "day": 113,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 32
+    },
+    {
+     "day": 114,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 32
+    },
+    {
+     "day": 115,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 30
+    },
+    {
+     "day": 116,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 28
+    },
+    {
+     "day": 117,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 28
+    },
+    {
+     "day": 118,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 28
+    },
+    {
+     "day": 119,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 26
+    },
+    {
+     "day": 120,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 26
+    },
+    {
+     "day": 121,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 26
+    },
+    {
+     "day": 122,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 26
+    },
+    {
+     "day": 123,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 124,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 125,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 126,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 127,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 128,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 129,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 130,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 131,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 132,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 133,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 134,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 135,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 136,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 24
+    },
+    {
+     "day": 137,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 138,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 139,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 140,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 141,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 142,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 143,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 144,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 145,
+     "vid": "gen_42jopmu",
+     "name": "Sam",
+     "path": "player-parity",
+     "trust": 22
+    },
+    {
+     "day": 146,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 25
+    },
+    {
+     "day": 147,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 148,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 149,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 150,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 151,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 152,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 153,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 154,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 155,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 156,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 157,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 158,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 159,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 160,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 161,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 162,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 163,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 164,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 165,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 166,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 167,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 168,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 169,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 170,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 171,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 172,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 173,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 174,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 175,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 176,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 177,
+     "vid": "gen_bx18xn4",
+     "name": "Jerónimo",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 178,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 179,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 180,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 181,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 53
+    }
+   ],
+   "rows": 1759
+  },
+  {
+   "policy": "belongseek",
+   "seed": 101,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 2,
+   "maxArc": 3,
+   "maxRank": "global",
+   "national": 1,
+   "table": 0,
+   "deaths": {
+    "monster": 1,
+    "combat": 8,
+    "villager combat": 5,
+    "contest": 1,
+    "expedition": 1
+   },
+   "hungryDays": 0,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 11,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 12,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 13,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 14,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 15,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 16,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 17,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 18,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 19,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 7
+    },
+    {
+     "day": 20,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 7
+    },
+    {
+     "day": 21,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 7
+    },
+    {
+     "day": 22,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 1
+    },
+    {
+     "day": 23,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 1
+    },
+    {
+     "day": 24,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 1
+    },
+    {
+     "day": 25,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 26,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 27,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 28,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 29,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 30,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 31,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 32,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 33,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 34,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 35,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 36,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 37,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 38,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 39,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 40,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 41,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 42,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 43,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 44,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 45,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 46,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 47,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 48,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 49,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 50,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 51,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 52,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 53,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 54,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 55,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 56,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 57,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 58,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 59,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 60,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 61,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 62,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 63,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 64,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 65,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 66,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 67,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 68,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 69,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 70,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 71,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 72,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 73,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 74,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 75,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 76,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 77,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 78,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 79,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 80,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 81,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 82,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 83,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 84,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 85,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 86,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 87,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 88,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 89,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 90,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 91,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 92,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 93,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 94,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 95,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 96,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 97,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 98,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 99,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 100,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 101,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 102,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 103,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 104,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 105,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 106,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 107,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 108,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 109,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 110,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 111,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 112,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 113,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 114,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 115,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 116,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 117,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 118,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 119,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 120,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 121,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 122,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 123,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 124,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 125,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 126,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 127,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 128,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 129,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 130,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 131,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 132,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 133,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 134,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 135,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 136,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 137,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 138,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 139,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 140,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 141,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 142,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 143,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 144,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 145,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 146,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 147,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 148,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 149,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 150,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 151,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 152,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 153,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 154,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 155,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 156,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 157,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 158,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 159,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 160,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 161,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 162,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 163,
+     "vid": "gen_71fzibm",
+     "name": "Ananya",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 164,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 165,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 166,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 167,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 168,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 169,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 170,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 171,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 172,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 56
+    },
+    {
+     "day": 173,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 59
+    },
+    {
+     "day": 174,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 59
+    },
+    {
+     "day": 175,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 35
+    },
+    {
+     "day": 176,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 177,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 178,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 179,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 180,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 181,
+     "vid": "gen_p729qo2",
+     "name": "Kobby",
+     "path": "player-parity",
+     "trust": 0
+    }
+   ],
+   "rows": 1753
+  },
+  {
+   "policy": "belongseek",
+   "seed": 202,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 3,
+   "maxArc": 3,
+   "maxRank": "regional",
+   "national": 0,
+   "table": 0,
+   "deaths": {
+    "villager combat": 14,
+    "combat": 12,
+    "expedition": 4,
+    "contest": 1,
+    "monster": 10
+   },
+   "hungryDays": 0,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_6ugrhu7",
+     "name": "Miles",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 11,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 12,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 13,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 14,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 15,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 16,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 17,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 20
+    },
+    {
+     "day": 18,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 10
+    },
+    {
+     "day": 19,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 6
+    },
+    {
+     "day": 20,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 21,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 22,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 23,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 24,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 25,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 26,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 27,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 28,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 29,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 30,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 31,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 32,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 33,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 34,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 35,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 36,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 37,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 38,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 39,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 40,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 41,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 42,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 43,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 44,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 45,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 46,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 47,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 48,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 49,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 50,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 51,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 52,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 53,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 54,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 55,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 56,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 57,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 58,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 59,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 60,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 61,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 62,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 63,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 64,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 65,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 66,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 67,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 68,
+     "vid": "gen_swgdwy4",
+     "name": "Darnell",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 69,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 70,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 71,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 72,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 73,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 74,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 75,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 76,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 77,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 78,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 79,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 80,
+     "vid": "owen_smith",
+     "name": "Owen",
+     "path": "player-parity",
+     "trust": 57
+    },
+    {
+     "day": 81,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 82,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 83,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 84,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 85,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 86,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 87,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 88,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 89,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 90,
+     "vid": "gen_xftq6fp",
+     "name": "Samuel",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 91,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 92,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 93,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 94,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 95,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 96,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 97,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 85
+    },
+    {
+     "day": 98,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 85
+    },
+    {
+     "day": 99,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 85
+    },
+    {
+     "day": 100,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 101,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 102,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 103,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 104,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 105,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 106,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 107,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 108,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 109,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 110,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 111,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 112,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 113,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 114,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 115,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 116,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 117,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 118,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 119,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 120,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 121,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 122,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 123,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 124,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 125,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 126,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 127,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 128,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 129,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 130,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 131,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 132,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 133,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 134,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 135,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 136,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 137,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 138,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 139,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 140,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 141,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 142,
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "path": "player-parity",
+     "trust": 88
+    },
+    {
+     "day": 143,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 144,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 145,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 146,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 147,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 148,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 149,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 150,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 151,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 152,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 153,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 154,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 155,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 156,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 157,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 158,
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "path": "player-parity",
+     "trust": 90
+    },
+    {
+     "day": 159,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 160,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 161,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 162,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 163,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 164,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 165,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 166,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 167,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 168,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 169,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 170,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 171,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 172,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 173,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 174,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 175,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 176,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 177,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 178,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 179,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 180,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 181,
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "path": "player-parity",
+     "trust": 84
+    }
+   ],
+   "rows": 1612
+  },
+  {
+   "policy": "belongseek",
+   "seed": 303,
+   "days": 114,
+   "gameDays": 115,
+   "endReason": "village-lost",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 3,
+   "maxArc": 3,
+   "maxRank": "national",
+   "national": 1,
+   "table": 0,
+   "deaths": {
+    "dehydration": 1,
+    "ambush": 1,
+    "villager combat": 10,
+    "monster": 4,
+    "combat": 14,
+    "expedition": 2,
+    "starvation": 5
+   },
+   "hungryDays": 3,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_gbpcx1w",
+     "name": "Naomi",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 11,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 12,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 13,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 14,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 15,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 16,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 17,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 18,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 19,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 20,
+     "vid": "ruby_callaghan",
+     "name": "Ruby",
+     "path": "player-parity",
+     "trust": 17
+    },
+    {
+     "day": 21,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 22,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 23,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 24,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 25,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 26,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 27,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 28,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 29,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 30,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 31,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 32,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 33,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 34,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 35,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 36,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 37,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 38,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 39,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 40,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 41,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 42,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 43,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 44,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 45,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 46,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 47,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 48,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 49,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 50,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 51,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 52,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 53,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 54,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 55,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 56,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 57,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 58,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 59,
+     "vid": "gen_jzv7lch",
+     "name": "Isaac",
+     "path": "player-parity",
+     "trust": 43
+    },
+    {
+     "day": 60,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 61,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 62,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 63,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 65
+    },
+    {
+     "day": 64,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 65,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 66
+    },
+    {
+     "day": 66,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 67,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 68,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 69,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 70,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 71,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 72,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 67
+    },
+    {
+     "day": 73,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 69
+    },
+    {
+     "day": 74,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 69
+    },
+    {
+     "day": 75,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 69
+    },
+    {
+     "day": 76,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 69
+    },
+    {
+     "day": 77,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 70
+    },
+    {
+     "day": 78,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 70
+    },
+    {
+     "day": 79,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 71
+    },
+    {
+     "day": 80,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 71
+    },
+    {
+     "day": 81,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 71
+    },
+    {
+     "day": 82,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 71
+    },
+    {
+     "day": 83,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 73
+    },
+    {
+     "day": 84,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 85,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 86,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 87,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 88,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 89,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 90,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 91,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 92,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 93,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 94,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 95,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 96,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 97,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 98,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 99,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 100,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 101,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 102,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 103,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 77
+    },
+    {
+     "day": 104,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 77
+    },
+    {
+     "day": 105,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 77
+    },
+    {
+     "day": 106,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 107,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 108,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 109,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 110,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 111,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 79
+    },
+    {
+     "day": 112,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 113,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 71
+    },
+    {
+     "day": 114,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 61
+    },
+    {
+     "day": 115,
+     "vid": "gen_79zz23a",
+     "name": "Madison",
+     "path": "player-parity",
+     "trust": 61
+    }
+   ],
+   "rows": 866
+  },
+  {
+   "policy": "belongseek",
+   "seed": 404,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "wins": 0,
+   "exiled": 0,
+   "waveReach": 3,
+   "maxArc": 3,
+   "maxRank": "global",
+   "national": 1,
+   "table": 0,
+   "deaths": {
+    "villager combat": 15,
+    "combat": 26,
+    "monster": 5,
+    "contest": 1
+   },
+   "hungryDays": 0,
+   "skips": [
+    {
+     "day": 1,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 2,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 3,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 4,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 5,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 6,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 7,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 8,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 9,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 10,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 11,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 12,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 13,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 14,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 15,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 16,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 17,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 15
+    },
+    {
+     "day": 18,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 9
+    },
+    {
+     "day": 19,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 3
+    },
+    {
+     "day": 20,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 21,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 22,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 23,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 24,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 25,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 26,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 27,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 28,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 29,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 30,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 31,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 32,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 33,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 34,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 35,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 36,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 37,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 38,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 39,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 40,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 41,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 42,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 43,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 44,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 45,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 46,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 47,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 48,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 49,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 50,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 51,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 52,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 53,
+     "vid": "gen_qowk2ll",
+     "name": "Aria",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 54,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 55,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 56,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 57,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 58,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 52
+    },
+    {
+     "day": 59,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 60,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 61,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 62,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 53
+    },
+    {
+     "day": 63,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 64,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 65,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 66,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 67,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 68,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 69,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 70,
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "path": "player-parity",
+     "trust": 54
+    },
+    {
+     "day": 71,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 74
+    },
+    {
+     "day": 72,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 73,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 74,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 75,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 76,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 77,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 78,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 75
+    },
+    {
+     "day": 79,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 80,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 81,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 82,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 83,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 84,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 85,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 86,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 87,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 88,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 89,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 90,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 91,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 92,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 93,
+     "vid": "gen_w1o4t2f",
+     "name": "Ingrid",
+     "path": "player-parity",
+     "trust": 76
+    },
+    {
+     "day": 94,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 95,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 96,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 97,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 98,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 99,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 100,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 101,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 102,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 103,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 104,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 105,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 106,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 107,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 108,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 109,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 110,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 111,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 112,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 113,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 114,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 115,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 116,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 117,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 118,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 119,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 120,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 121,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 122,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 123,
+     "vid": "amina_diallo",
+     "name": "Amina",
+     "path": "player-parity",
+     "trust": 84
+    },
+    {
+     "day": 124,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 125,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 126,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 127,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 128,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 129,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 130,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 131,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 132,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 133,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 134,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 135,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 136,
+     "vid": "gen_7lfch21",
+     "name": "Jayden",
+     "path": "player-parity",
+     "trust": 86
+    },
+    {
+     "day": 137,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 138,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 139,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 140,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 141,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 142,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 143,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 144,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 145,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 146,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 147,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 148,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 149,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 87
+    },
+    {
+     "day": 150,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 7
+    },
+    {
+     "day": 151,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 7
+    },
+    {
+     "day": 152,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 153,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 154,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 155,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 156,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 157,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 158,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 159,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 160,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 161,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 162,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 163,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 164,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 165,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 166,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 167,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 168,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 1
+    },
+    {
+     "day": 169,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 170,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 171,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 172,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 173,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 174,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 175,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 176,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 177,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 178,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 179,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 180,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    },
+    {
+     "day": 181,
+     "vid": "caleb_jones",
+     "name": "Caleb",
+     "path": "player-parity",
+     "trust": 0
+    }
+   ],
+   "rows": 1569
+  }
+ ],
+ "when": "2026-10-16T12:39:02.704Z"
+}
