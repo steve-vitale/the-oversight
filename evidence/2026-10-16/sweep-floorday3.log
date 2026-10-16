@@ -1,0 +1,49 @@
+  PASS control: layer-live markers honest — id=floorday3belong floor=2
+  PASS control: run completes — days=15
+  PASS armed: layer-live markers honest — id=floorday3belong floor=3
+  PASS armed: run completes — days=15
+SMOKE gate green.
+  PASS det-gate (control): 40d rerun byte-identical — n=40/40
+  PASS det-gate (armed): 40d rerun byte-identical — n=40/40
+DET gate green.
+  [control belongfeast s201] d=145 end=village-lost starv=0 nat=1 wave=4 table=1 rot=155k aid=0 feasts=4 gates=0
+  [armed belongfeast s201] d=145 end=village-lost starv=0 nat=1 wave=4 table=1 rot=155k aid=0 feasts=4 gates=0
+  [control belongfeast s202] d=129 end=village-lost starv=0 nat=0 wave=4 table=1 rot=70k aid=0 feasts=6 gates=0
+  [armed belongfeast s202] d=129 end=village-lost starv=0 nat=0 wave=4 table=1 rot=70k aid=0 feasts=6 gates=0
+  [control belongfeast s203] d=49 end=village-lost starv=0 nat=0 wave=2 table=0 rot=3k aid=0 feasts=2 gates=0
+  [armed belongfeast s203] d=49 end=village-lost starv=0 nat=0 wave=2 table=0 rot=3k aid=0 feasts=2 gates=0
+  [control belongfeast s204] d=130 end=village-lost starv=0 nat=1 wave=5 table=1 rot=265k aid=0 feasts=7 gates=0
+  [armed belongfeast s204] d=130 end=village-lost starv=0 nat=1 wave=5 table=1 rot=265k aid=0 feasts=7 gates=0
+  [control belongfeast s205] d=182 end=survived starv=0 nat=1 wave=4 table=1 rot=504k aid=0 feasts=11 gates=0
+  [armed belongfeast s205] d=182 end=survived starv=0 nat=1 wave=4 table=1 rot=504k aid=0 feasts=11 gates=0
+  [control belongfeast s206] d=94 end=village-lost starv=0 nat=0 wave=4 table=1 rot=451k aid=0 feasts=5 gates=0
+  [armed belongfeast s206] d=94 end=village-lost starv=0 nat=0 wave=4 table=1 rot=451k aid=0 feasts=5 gates=0
+  [control belongfeast s207] d=155 end=village-lost starv=0 nat=1 wave=4 table=1 rot=582k aid=0 feasts=7 gates=0
+  [armed belongfeast s207] d=155 end=village-lost starv=0 nat=1 wave=4 table=1 rot=582k aid=0 feasts=7 gates=0
+  [control belongfeast s208] d=75 end=village-lost starv=0 nat=0 wave=4 table=1 rot=178k aid=0 feasts=5 gates=0
+  [armed belongfeast s208] d=75 end=village-lost starv=0 nat=0 wave=4 table=1 rot=178k aid=0 feasts=5 gates=0
+  [control leadfeast s201] d=129 end=village-lost starv=0 nat=1 wave=5 table=1 rot=295k aid=9 feasts=7 gates=20
+  [armed leadfeast s201] d=129 end=village-lost starv=0 nat=1 wave=5 table=1 rot=295k aid=9 feasts=7 gates=20
+  [control leadfeast s202] d=83 end=village-lost starv=0 nat=1 wave=5 table=1 rot=63k aid=5 feasts=1 gates=14
+  [armed leadfeast s202] d=83 end=village-lost starv=0 nat=1 wave=5 table=1 rot=63k aid=5 feasts=1 gates=14
+  [control leadfeast s203] d=153 end=village-lost starv=0 nat=1 wave=5 table=1 rot=465k aid=10 feasts=4 gates=25
+  [armed leadfeast s203] d=153 end=village-lost starv=0 nat=1 wave=5 table=1 rot=465k aid=10 feasts=4 gates=25
+  [control leadfeast s204] d=148 end=village-lost starv=0 nat=1 wave=5 table=1 rot=537k aid=3 feasts=7 gates=31
+  [armed leadfeast s204] d=148 end=village-lost starv=0 nat=1 wave=5 table=1 rot=537k aid=3 feasts=7 gates=31
+  [control leadfeast s205] d=66 end=village-lost starv=0 nat=0 wave=5 table=1 rot=102k aid=4 feasts=3 gates=9
+  [armed leadfeast s205] d=66 end=village-lost starv=0 nat=0 wave=5 table=1 rot=102k aid=4 feasts=3 gates=9
+  [control leadfeast s206] d=115 end=village-lost starv=0 nat=1 wave=5 table=1 rot=512k aid=7 feasts=7 gates=8
+  [armed leadfeast s206] d=115 end=village-lost starv=0 nat=1 wave=5 table=1 rot=512k aid=7 feasts=7 gates=8
+  [control leadfeast s207] d=99 end=village-lost starv=0 nat=1 wave=4 table=1 rot=202k aid=12 feasts=5 gates=4
+  [armed leadfeast s207] d=99 end=village-lost starv=0 nat=1 wave=4 table=1 rot=202k aid=12 feasts=5 gates=4
+  [control leadfeast s208] d=116 end=village-lost starv=0 nat=1 wave=5 table=1 rot=348k aid=8 feasts=6 gates=6
+  [armed leadfeast s208] d=116 end=village-lost starv=0 nat=1 wave=5 table=1 rot=348k aid=8 feasts=6 gates=6
+
+== floorday3 sweep summary ==
+control: n=16 starvation=0 (PRIMARY) national=11/16 medianSurv=122.5d freshRot=4733k (302/vday) table=15/16 wave4=15/16 wave5=8/16 wins=0/16 exiled=0/16 aid=58 feasts=87 gates=117
+armed: n=16 starvation=0 (PRIMARY) national=11/16 medianSurv=122.5d freshRot=4733k (302/vday) table=15/16 wave4=15/16 wave5=8/16 wins=0/16 exiled=0/16 aid=58 feasts=87 gates=117
+control death causes: combat:348 villager combat:140 monster:130 expedition:23 contest:4 a wound that wouldn't close:4 The Audit:3 a toad like a war drum, throat swelling:2 sickness:2 ambush:2
+armed death causes: combat:348 villager combat:140 monster:130 expedition:23 contest:4 a wound that wouldn't close:4 The Audit:3 a toad like a war drum, throat swelling:2 sickness:2 ambush:2
+starvation belongfeast: control=0 armed=0
+starvation leadfeast: control=0 armed=0
+paired starvation deltas (armed-control): belongfeast/s201:+0 belongfeast/s202:+0 belongfeast/s203:+0 belongfeast/s204:+0 belongfeast/s205:+0 belongfeast/s206:+0 belongfeast/s207:+0 belongfeast/s208:+0 leadfeast/s201:+0 leadfeast/s202:+0 leadfeast/s203:+0 leadfeast/s204:+0 leadfeast/s205:+0 leadfeast/s206:+0 leadfeast/s207:+0 leadfeast/s208:+0
