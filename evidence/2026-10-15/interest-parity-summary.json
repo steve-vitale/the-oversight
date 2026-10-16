@@ -1,0 +1,121 @@
+{
+  "verifiedCampaignRows": 768,
+  "uniqueMatchedCases": 384,
+  "screenSubsetRows": 192,
+  "balancedControlJobs": 24,
+  "sameRows": 384,
+  "sameMetrics": 384,
+  "sameFullHashes": 378,
+  "changedFinalHashes": [
+    {
+      "policy": "merchant-dealer",
+      "seed": 4,
+      "before": "6c443d07fee69c2d25c4769f20a8110dc7cbe2af3bfe217b5b3e7b8507fb9bcf",
+      "after": "c5669ad03ece5eea3cfbcbcefd53aba4db6b2d0b7c725c745ce7b7170814fe53"
+    },
+    {
+      "policy": "merchant-dealer",
+      "seed": 15,
+      "before": "6be7c1b1611e84da24d61c787bc9ba2b8678a1e7021f0c1d8f1858c355ca89f7",
+      "after": "93f2c71b00d066028499a98f7fcf52cb84707e5603256462886c02a5bee0b32a"
+    },
+    {
+      "policy": "merchant-dealer",
+      "seed": 1234,
+      "before": "aec69682bf87cf8e380f95210aee00e58b3adaa7f69b88efe960a71a6db93ccf",
+      "after": "70a1cf39e53714f63604858138d08dca5d1c9e008c467afb1c610e423590d7f1"
+    },
+    {
+      "policy": "merchant-hoarder",
+      "seed": 4,
+      "before": "6c443d07fee69c2d25c4769f20a8110dc7cbe2af3bfe217b5b3e7b8507fb9bcf",
+      "after": "c5669ad03ece5eea3cfbcbcefd53aba4db6b2d0b7c725c745ce7b7170814fe53"
+    },
+    {
+      "policy": "merchant-hoarder",
+      "seed": 15,
+      "before": "6be7c1b1611e84da24d61c787bc9ba2b8678a1e7021f0c1d8f1858c355ca89f7",
+      "after": "93f2c71b00d066028499a98f7fcf52cb84707e5603256462886c02a5bee0b32a"
+    },
+    {
+      "policy": "merchant-hoarder",
+      "seed": 1234,
+      "before": "414933a63228947778bf5caf191f110fdf2de3d1b05fda09d1ca29290053a9cf",
+      "after": "cbe1c66643fa6ce5d98983e1004a124a025369931ce869c0c340aad0d272a7b6"
+    }
+  ],
+  "naturalReplayJobs": 12,
+  "preparedReplayJobs": 4,
+  "neutralDiagnosticPairs": 6,
+  "pairedDailyStatesRemovingOnlyInterestLedger": 588,
+  "preferenceFinalStateEquivalence": [
+    {
+      "arm": "before",
+      "seed": 4,
+      "fullStateHash": "6c443d07fee69c2d25c4769f20a8110dc7cbe2af3bfe217b5b3e7b8507fb9bcf"
+    },
+    {
+      "arm": "before",
+      "seed": 15,
+      "fullStateHash": "6be7c1b1611e84da24d61c787bc9ba2b8678a1e7021f0c1d8f1858c355ca89f7"
+    },
+    {
+      "arm": "after",
+      "seed": 4,
+      "fullStateHash": "c5669ad03ece5eea3cfbcbcefd53aba4db6b2d0b7c725c745ce7b7170814fe53"
+    },
+    {
+      "arm": "after",
+      "seed": 15,
+      "fullStateHash": "93f2c71b00d066028499a98f7fcf52cb84707e5603256462886c02a5bee0b32a"
+    }
+  ],
+  "sourceDelta": [
+    "src/js/buildarounds.js"
+  ],
+  "naturalNpcAcquisition": "Not established by these selected replays or the campaign metric panel",
+  "policies": [
+    {
+      "policy": "capable",
+      "n": 64,
+      "wins": 55,
+      "playerDeaths": 90,
+      "communityLost": 8
+    },
+    {
+      "policy": "maker",
+      "n": 64,
+      "wins": 21,
+      "playerDeaths": 52,
+      "communityLost": 18
+    },
+    {
+      "policy": "merchant",
+      "n": 64,
+      "wins": 25,
+      "playerDeaths": 42,
+      "communityLost": 14
+    },
+    {
+      "policy": "caregiver",
+      "n": 64,
+      "wins": 23,
+      "playerDeaths": 45,
+      "communityLost": 18
+    },
+    {
+      "policy": "merchant-hoarder",
+      "n": 64,
+      "wins": 28,
+      "playerDeaths": 36,
+      "communityLost": 12
+    },
+    {
+      "policy": "merchant-dealer",
+      "n": 64,
+      "wins": 28,
+      "playerDeaths": 36,
+      "communityLost": 12
+    }
+  ]
+}

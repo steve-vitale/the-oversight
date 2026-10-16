@@ -9,6 +9,15 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Hoarder payoff parity (2026-10-15): the existing dawn hook paid only the
+player. It now pays actual living resident NPC holders with their own build,
+the same existing rate/threshold/cap and a saved once-per-person/day guard.
+Prepared runtime, native phone Sleep/save/reload, matched campaign panels
+and their limits are in ../evidence/2026-10-15/interest-parity-audit.md.
+Natural NPC acquisition and other payoff parity are still open. The caller
+scan also reproduces two existing unwired Cornucopia hooks; investigate
+their actual forage callers next. No universal wiring/viability claim.
+
 Introductory-choice audit (2026-10-15): the loader correctly leaves choices
 to policies; capable omits the real knack sheet. A source-bound correction
 and128-campaign policy screen are retained, not adopted: both existing

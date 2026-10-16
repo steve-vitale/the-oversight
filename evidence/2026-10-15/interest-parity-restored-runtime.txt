@@ -1,0 +1,24 @@
+  ok   no holder creates no interest state or food
+  ok   unassembled player retains the existing2.5percent real payout
+  ok   assembled player retains the existing5percent real payout
+  ok   repeated same-day calls cannot compound another payout
+  ok   a later dawn compounds from its new opening stock
+  ok   NPC alone earns2.5percent using their own build, not the players
+  ok   assembled NPC earns the same5percent without a player holder
+  ok   interest is real food without invented harvest provenance
+  ok   saved payout receipt names its canonical NPC and paid amount
+  ok   three holders use the same opening stock, not roster-order compounding
+  ok   roster reordering cannot earn again
+  ok   actual save/load preserves the same-day payout guard
+  ok   mantle change cannot pay the same canonical NPC again
+  ok   a dead roster holder generates no interest
+  ok   a departed holders stale ability record generates no interest
+  ok   the current bearer cannot also earn from a stale NPC build
+  ok   the existing1000kcal threshold also applies to NPCs
+  ok   the threshold is inclusive and produces real50kcal
+  ok   actual food clips at the same shared pantry capacity
+  ok   making room later the same day cannot draw a second payment
+  ok   real endDay invokes the payoff once at the next dawn
+  ok   actual dawn food movement equals the clipped NPC interest
+
+hoarder-interest-parity: 22 passed, 0 failed, 0 todo (phase 0)

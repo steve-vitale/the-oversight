@@ -93,6 +93,14 @@ Job -> track -> **class** -> **god** -> Table.
    and paid runtime proofs (`test-god-verbs-wired-20261015.js`). Reconcile all
    subclass active verbs and passive hooks too; the old blanket claim that
    villagers cannot use any new verb is no longer the current state.
+   Hoarder's Interest now has a shared dawn payout for living resident NPC
+   holders, using their own build and the existing2.5/5percent rates,1000kcal
+   threshold and pantry cap. Saved canonical person/day receipts cover
+   repetition, load and succession; same opening stock avoids roster-order
+   compounding. Runtime22/22 and native phone Sleep/reload are proved in
+   interest-parity-audit.md. This does not complete NPC access or all passive
+   parity. The module wiring scan still finds Cornucopia onForage and
+   forageMult without callers on baseline and candidate; audit those next.
    NPC Second Wind/Molt automatic activation now covers tactical, field and
    actual world damage, with personal cooldowns and truthful field survivor
    HP settlement (`survivalist-passive-audit.md`). Full active/passive and
@@ -149,4 +157,4 @@ Miser access audit (2026-10-15): paid goods transactions previously raised trade
 
 Miser placement experiment (2026-10-15): moving only Hoarder/Haggle to Social5/6 did not form either Miser class in256 campaigns. Merchant16 actual-choice observation shows106 distinct starter-containing decisions and zero starter picks, despite118 player/NPC starter offer appearances. The candidate is not retained; original8/10 order restored. Mixed survival, community and Table effects are preserved rather than judged by wins alone. New passive choice observer is shared via deed-screen --choices1; next test explicit knowledge-bound Miser intent/economic value separately from generic build preferences. See ../../evidence/2026-10-15/miser-access-audit.md.
 
-Declared Miser strategies (2026-10-15): original kit yields3 Miser-class campaigns/64 per focused preference, zero Miser ending frames; generic policies still yield none. Two-starter and Haggle-only experimental kits each yield3 locked Miser ending frames/64 per strategy. Those are correlated policy/seed samples, not six independent worlds. Global kit changes are not retained: the Haggle-only arm loses capable named-class access45->38 and maker first-bearer day60 survival53->47 while maker wins rise21->25. All960 campaign rows,23metrics, controls and representative replays are retained in ../../evidence/2026-10-15/miser-intent-audit.md. The native phone replay shows an earned day75 Hoarder build; the reactor and suppressed early UI prompts are explicit. Fix the shared setup's unanswered introductory knack before further broad tuning, then investigate job/playstyle-specific access and real food-thesis opportunities; NPC interest parity and eight fitting deeds remain open.
+Declared Miser strategies (2026-10-15): original kit yields3 Miser-class campaigns/64 per focused preference, zero Miser ending frames; generic policies still yield none. Two-starter and Haggle-only experimental kits each yield3 locked Miser ending frames/64 per strategy. Those are correlated policy/seed samples, not six independent worlds. Global kit changes are not retained: the Haggle-only arm loses capable named-class access45->38 and maker first-bearer day60 survival53->47 while maker wins rise21->25. All960 campaign rows,23metrics, controls and representative replays are retained in ../../evidence/2026-10-15/miser-intent-audit.md. The native phone replay shows an earned day75 Hoarder build; the reactor and suppressed early UI prompts are explicit. Fix the shared setup's unanswered introductory knack before further broad tuning, then investigate job/playstyle-specific access and real food-thesis opportunities; Daily interest payoff parity is now repaired; natural NPC access, other passives and eight fitting deeds remain open.

@@ -163,7 +163,34 @@ Neither measured global placement is retained. The two-starter arm moves Hoarder
 
 Haggle-only standard outcomes, before->candidate: capable wins55->54/deaths90->84/community8->7; maker21->25/52->68/18->20; merchant25->24/42->44/14->20; caregiver23->29/45->44/18->19. Capable named-class cases45->38; maker first-bearer day60 survival53->47 and death exposure increases. Focused-strategy first60 stays60/64 while their deaths increase. These are separate review signals; more wins or more Miser endings do not cancel them. Player class coverage across six cohorts remains14 observed subclasses, with Phantom no longer sampled and Dealer newly sampled; this is not proof either is impossible.
 
-The current capable policy leaves the early knack unanswered, and passive/resource-rich builds can still lack food-thesis deeds for the actual lesser seat. Fix and measure those policy gaps before further human-viability claims or broad balancing. The visible Hoarder's Interest day caller uses the player; NPC payoff parity needs a runtime proof. Source/flags,23metrics, screen/confirmation, representative tails and locked-frame/current-bearer distinction: ../evidence/2026-10-15/miser-intent-audit.md. No win quota, no new price/metabolism/threshold parameter, no NPC grants or automatic gate relaxation.
+The current capable policy leaves the early knack unanswered, and passive/resource-rich builds can still lack food-thesis deeds for the actual lesser seat. Fix and measure those policy gaps before further human-viability claims or broad balancing. The subsequent interest-parity audit repairs the player-only daily caller; natural NPC access and other payoff parity remain open. Source/flags,23metrics, screen/confirmation, representative tails and locked-frame/current-bearer distinction: ../evidence/2026-10-15/miser-intent-audit.md. No win quota, no new price/metabolism/threshold parameter, no NPC grants or automatic gate relaxation.
+
+## Hoarder's Interest holder parity
+
+Related payoff correction (2026-10-15): Hoarder's Interest previously paid
+only the player despite actual NPC ownership. Living resident NPC holders
+now earn from the shared pantry using their own path assembly:2.5percent
+alone or5percent with two Miser-path abilities. Opening stock must reach
+1000kcal; actual food stays within the existing pantry capacity. Each person
+earns once per game day, with a saved canonical-ID receipt that survives
+load and becoming the player. Multiple holders calculate from the same
+opening stock rather than paying interest on another holder's same-dawn
+interest; limited room is allocated in canonical-ID order. No rate, cap,
+threshold, XP, offer, ability-slot or Table parameter changed. Interest is
+magic food, not an attributed personal harvest. Existing player exile or
+remote-pantry semantics remain outside this correction.
+
+Prepared runtime22/22 and the phone's actual Sleep/save/reload prove the
+payment. Natural access is distinct from payoff correctness. The prepared
+merchant seed7 earns204,018kcal through55 positive payouts from one NPC;
+another21 eligible receipts are capacity-blocked. It still loses its village
+on138 versus baseline135. Declared ability records can outlive membership or
+eligibility, so their presence is not a successful payout denominator.
+That is a stress case, not a human-viability or win-improvement
+claim. Read ../evidence/2026-10-15/interest-parity-audit.md for source-bound
+panels, all metrics and remaining Cornucopia wiring gaps. Static Interest
+description/deepening copy also needs reconciliation with the existing
+assembly-based runtime; no level-scaling promise is newly implemented here.
 
 ## Introductory choice and reactor timing
 

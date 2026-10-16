@@ -1,0 +1,53 @@
+'use strict';
+// Prepared holders and pantry, real hook / endDay / save / mantle callers.
+const K=require('./lib'),T=K.reporter('hoarder-interest-parity');
+(async()=>{
+ const saves=new Map();global.localStorage={getItem:k=>saves.get(String(k))??null,setItem:(k,x)=>saves.set(String(k),String(x)),removeItem:k=>saves.delete(String(k)),key:i=>[...saves.keys()][i]??null,get length(){return saves.size;}};
+ const G=await K.load({seed:7}),BA=globalThis.Scattering.buildarounds;let s,v,me,npc,other;
+ function fresh(kcal=10000){G.tbfight=null;G.over=false;K.newRun(G);s=G.state.scholar;v=G.state.village;me=G.villagerId;[npc,other]=v.roster.filter(id=>id!==me);s.day=85;s.health=100;s.kcal=3000;G.state.systemArrived=true;v.npcAbilities={};s.abilities=[];v.pantry=[];G.stockPantry(kcal,'Prepared stores');}
+ const held=ids=>{K.openSlots(G,6);for(const id of ids)K.giveAbility(G,id);};
+ fresh();const untouched=JSON.stringify(v);BA.onDayTick(G);
+ T.ok('no holder creates no interest state or food',JSON.stringify(v)===untouched&&G.pantryKcal()===10000);
+ fresh();held(['hoarders_interest']);BA.onDayTick(G);
+ T.ok('unassembled player retains the existing2.5percent real payout',G.pantryKcal()===10250&&v.hoarderInterest?.paid[me]?.rate===0.025);
+ fresh();held(['hoarders_interest','hoarder']);BA.onDayTick(G);
+ T.ok('assembled player retains the existing5percent real payout',G.pantryKcal()===10500&&v.hoarderInterest?.paid[me]?.kcal===500);
+ const first=G.pantryKcal();BA.onDayTick(G);
+ T.ok('repeated same-day calls cannot compound another payout',G.pantryKcal()===first&&Object.keys(v.hoarderInterest?.paid||{}).length===1);
+ s.day++;BA.onDayTick(G);
+ T.ok('a later dawn compounds from its new opening stock',G.pantryKcal()===11025&&v.hoarderInterest?.opening===10500);
+ fresh();v.npcAbilities[npc]=['hoarders_interest'];held(['hoarder','haggle']);BA.onDayTick(G);
+ T.ok('NPC alone earns2.5percent using their own build, not the players',G.pantryKcal()===10250&&v.hoarderInterest?.paid[npc]?.rate===0.025);
+ fresh();v.npcAbilities[npc]=['hoarders_interest','hoarder'];BA.onDayTick(G);
+ T.ok('assembled NPC earns the same5percent without a player holder',G.pantryKcal()===10500&&v.hoarderInterest?.paid[npc]?.rate===0.05);
+ T.ok('interest is real food without invented harvest provenance',v.pantry.filter(i=>i.name==="Hoarder's interest").reduce((n,i)=>n+i.kcalEach*i.units,0)===500&&v.pantry.filter(i=>i.name==="Hoarder's interest").every(i=>!i.harvestShares));
+ T.ok('saved payout receipt names its canonical NPC and paid amount',Object.keys(v.hoarderInterest?.paid||{}).join()===npc&&v.hoarderInterest.paid[npc].kcal===500&&v.hoarderInterest.day===85);
+ fresh();held(['hoarders_interest','hoarder']);v.npcAbilities[npc]=['hoarders_interest'];v.npcAbilities[other]=['hoarders_interest','haggle'];BA.onDayTick(G);
+ T.ok('three holders use the same opening stock, not roster-order compounding',G.pantryKcal()===11250&&Object.keys(v.hoarderInterest?.paid||{}).length===3);
+ const total=G.pantryKcal();v.roster.reverse();BA.onDayTick(G);
+ T.ok('roster reordering cannot earn again',G.pantryKcal()===total);
+ const saved=G.save();const key=G.state.runKey;const loaded=G.load(key);s=G.state.scholar;v=G.state.village;BA.onDayTick(G);
+ T.ok('actual save/load preserves the same-day payout guard',saved&&loaded&&G.pantryKcal()===total&&Object.keys(v.hoarderInterest?.paid||{}).length===3,JSON.stringify({saved,loaded:!!loaded,total,pantry:G.pantryKcal(),ledger:v.hoarderInterest}));
+ G.playerDeath('prepared interest succession');const successor=G.villagerId,afterDeath=G.pantryKcal();BA.onDayTick(G);
+ T.ok('mantle change cannot pay the same canonical NPC again',successor!==me&&G.pantryKcal()===afterDeath&&v.hoarderInterest?.paid[successor]!=null);
+ fresh();v.npcAbilities[npc]=['hoarders_interest','hoarder'];G.vpOf(npc).dead=true;BA.onDayTick(G);
+ T.ok('a dead roster holder generates no interest',G.pantryKcal()===10000&&!v.hoarderInterest);
+ fresh();v.npcAbilities[npc]=['hoarders_interest','hoarder'];v.roster=v.roster.filter(id=>id!==npc);BA.onDayTick(G);
+ T.ok('a departed holders stale ability record generates no interest',G.pantryKcal()===10000&&!v.hoarderInterest);
+ fresh();v.npcAbilities[me]=['hoarders_interest','hoarder'];BA.onDayTick(G);
+ T.ok('the current bearer cannot also earn from a stale NPC build',G.pantryKcal()===10000&&!v.hoarderInterest);
+ fresh(999);v.npcAbilities[npc]=['hoarders_interest','hoarder'];BA.onDayTick(G);
+ T.ok('the existing1000kcal threshold also applies to NPCs',G.pantryKcal()===999&&Object.keys(v.hoarderInterest?.paid||{}).length===0);
+ fresh(1000);v.npcAbilities[npc]=['hoarders_interest','hoarder'];BA.onDayTick(G);
+ T.ok('the threshold is inclusive and produces real50kcal',G.pantryKcal()===1050);
+ fresh();const cap=G.pantryCapKcal();v.pantry=[];G.stockPantry(cap-10,'Near full');v.npcAbilities[npc]=['hoarders_interest','hoarder'];BA.onDayTick(G);
+ T.ok('actual food clips at the same shared pantry capacity',G.pantryKcal()===cap&&v.hoarderInterest?.paid[npc]?.kcal===10);
+ G._removePantryKcal(1000);const afterTake=G.pantryKcal();BA.onDayTick(G);
+ T.ok('making room later the same day cannot draw a second payment',G.pantryKcal()===afterTake);
+ fresh();v.npcAbilities[npc]=['hoarders_interest','hoarder'];const original=BA.onDayTick;let calls=0,opening,closing;
+ BA.onDayTick=function(g){calls++;opening=g.pantryKcal();const r=original.call(this,g);closing=g.pantryKcal();return r;};
+ try{G.endDay();}finally{BA.onDayTick=original;}
+ T.ok('real endDay invokes the payoff once at the next dawn',calls===1&&s.day===86&&v.hoarderInterest?.day===86);
+ T.ok('actual dawn food movement equals the clipped NPC interest',closing-opening===v.hoarderInterest?.paid[npc]?.kcal&&closing>opening);
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

@@ -1,0 +1,25 @@
+  ok   no holder creates no interest state or food
+  FAIL unassembled player retains the existing2.5percent real payout
+  FAIL assembled player retains the existing5percent real payout
+  FAIL repeated same-day calls cannot compound another payout
+  FAIL a later dawn compounds from its new opening stock
+  FAIL NPC alone earns2.5percent using their own build, not the players
+  FAIL assembled NPC earns the same5percent without a player holder
+  FAIL interest is real food without invented harvest provenance
+  FAIL saved payout receipt names its canonical NPC and paid amount
+  FAIL three holders use the same opening stock, not roster-order compounding
+  FAIL roster reordering cannot earn again
+  FAIL actual save/load preserves the same-day payout guard — {"saved":true,"loaded":true,"total":10500,"pantry":11576}
+  FAIL mantle change cannot pay the same canonical NPC again
+  ok   a dead roster holder generates no interest
+  ok   a departed holders stale ability record generates no interest
+  ok   the current bearer cannot also earn from a stale NPC build
+  ok   the existing1000kcal threshold also applies to NPCs
+  FAIL the threshold is inclusive and produces real50kcal
+  FAIL actual food clips at the same shared pantry capacity
+  ok   making room later the same day cannot draw a second payment
+  FAIL real endDay invokes the payoff once at the next dawn
+  FAIL actual dawn food movement equals the clipped NPC interest
+
+hoarder-interest-parity: 6 passed, 16 failed, 0 todo (phase 0)
+failing: unassembled player retains the existing2.5percent real payout | assembled player retains the existing5percent real payout | repeated same-day calls cannot compound another payout | a later dawn compounds from its new opening stock | NPC alone earns2.5percent using their own build, not the players | assembled NPC earns the same5percent without a player holder | interest is real food without invented harvest provenance | saved payout receipt names its canonical NPC and paid amount | three holders use the same opening stock, not roster-order compounding | roster reordering cannot earn again | actual save/load preserves the same-day payout guard | mantle change cannot pay the same canonical NPC again | …+4 more

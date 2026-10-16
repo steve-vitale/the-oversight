@@ -13,6 +13,18 @@ is in OPEN-QUESTIONS.md; independent roadmap lanes remain open. Muse's
 region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
+
+Hoarder payoff parity (2026-10-15): Codex takes only buildarounds.js daily
+interest and its own-build path count. Living resident NPC holders now use
+the player's existing rates/threshold/cap; canonical saved person/day receipts
+prevent repeat and mantle payouts. All holders calculate from the same dawn
+opening stock. Prepared runtime22/22, public phone Sleep/save/reload and
+matched source-bound campaigns are retained in interest-parity-audit.md.
+Other passives and Muse regional files remain outside this change. The
+wiring audit also reproduces pre-existing Cornucopia onForage/forageMult
+missing callers on both roots; audit those next, without treating module
+wiring as universally green.
+
 - Lane: `docs/godpath/PLAN.md` "What's left" — ascension gates, villager active
   verbs, early-kit subclass visibility, `god.scale` wiring, Table endings by
   class/god x light/dark.

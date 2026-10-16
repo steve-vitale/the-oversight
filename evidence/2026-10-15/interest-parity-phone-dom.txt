@@ -1,0 +1,171 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 512 ticks to dawn.":
+  - text: day 21 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: Autumn · Eastern Woodlands
+  - 'generic "The day''s budget: 0 of 512 used. Everything you do costs a little of the day."':
+    - generic: 512 left today
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - text: Raul
+  - text: David
+  - generic: ⬛
+  - generic: ⬛
+  - generic: 🛏️
+  - text: Tashi
+  - generic: 🛏️
+  - generic: ⬛
+  - generic: ⬛
+  - text: Greta
+  - generic: ⬛
+  - generic: ⬛
+  - text: Ashley
+  - text: Pavel
+  - generic: ⬛
+  - generic: ⬛
+  - generic: 🔥
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: 🚪
+  - text: Leonardo
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - text: Charlotte
+  - text: Nelson
+  - text: Grace
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - button "👁 Haven · Haven home ▾ details":
+    - generic: 👁 Haven · Haven
+    - generic: home
+    - generic: ▾ details
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - generic "Tap for full map": 📍 Haven
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - generic: "nearby:"
+  - button "Talk ↖"
+  - button "Warm hands ↙"
+  - generic: Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 396 kcal conserved. By the fire. Good enough.)
+  - generic "Health":
+    - generic: ❤ 100
+  - generic "Food (you)":
+    - generic: 🍽 2076/2400 kcal
+  - generic "Hydration":
+    - generic: 💧 36% · 3L clean
+  - 'generic "Pack: 1400 kcal carried"':
+    - generic: 🎒 4.1/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "🎒 Pack"
+  - button "🧬 You"
+  - button "😴 Sleep"
+  - button "⏳ Wait"
+  - button "🗺️ Map"
+  - button "settings": ⚙️
+  - heading "🏠 HAVEN — 12 souls" [level=3]
+  - paragraph: The fire is lit. Someone is mending something. It smells like smoke and rain.
+  - paragraph: "Pantry: 46.7 Mcal (about 8 days at this burn)"
+  - paragraph: "💧 Water: 0L clean / 0L dirty"
+  - button "Take from pantry"
+  - paragraph: 📦 Village stash (counted carefully. trust is thin here)
+  - generic: Wood log — 0 in stash
+  - generic: Branch — 0 in stash
+  - generic: Stone — 0 in stash
+  - generic: Plant fiber — 0 in stash
+  - generic: Cloth — 0 in stash
+  - generic: Charcoal — 0 in stash
+  - generic: Wooden cup — 0 in stash
+  - generic: Stick — 0 in stash
+  - generic: Vine — 0 in stash
+  - generic: Bark strip — 0 in stash
+  - generic: Rawhide — 0 in stash
+  - paragraph: "🔧 Spare tools: no spare tools"
+  - paragraph: "⚔️ Armory: no weapons"
+  - paragraph: "💊 Pharmacy: no medicine"
+  - paragraph: Nothing yet. The stash is new.
+  - button "📍 Caches"
+  - button "🍖 Host a feast (4,400 kcal)"
+  - paragraph:
+    - text: 😴 the hall floor · +30 health · energy restored
+    - text: By the fire. Good enough.
+    - text: ⚠️ Tonight will cost you — the night burns ~2200 kcal and you haven't eaten enough today and the night drinks ~48 hydration (hot day, hard work). Eat and drink before you sleep, or the spiral starts at midnight.
+  - paragraph:
+    - text: "🏠 Membership: 12/12 housed · ⚠ FULL"
+    - text: "Membership means: Pantry share · Codex · \"One of ours\" · Cast"
+  - heading "🛖 Haven growth — Haven (cap 12)" [level=3]
+  - paragraph: A camp with a name. Twelve mouths, one fire.
+  - paragraph: "Next: The Longhouse (cap 16)"
+  - generic: "food stored: 46,725 / 8,000 ✓"
+  - generic: "wood: 10 / 12"
+  - paragraph:
+    - text: Population cap 16 — four more mouths under the roof.
+    - text: "Longhouse hearth: village meals stretch 10% further (less food burned daily)."
+    - text: Pantry capacity +25% — room for the bigger village.
+  - button "🔨 Build shelter (+2, 10 wood)"
+  - paragraph: "Remote applications:"
+  - paragraph:
+    - text: "📨 Zoltan Nagy — mushroom grower · \"Word travels: Haven takes people in. I'm people.\""
+    - text: You've heard bad things. Another mouth the pantry can't feed. They'd sleep rough.
+    - button "Accept"
+    - button "Turn away"
+  - paragraph: 12 mouths need 23,435/day · the village brings in 73 · shortfall 23,362/day
+  - paragraph:
+    - text: Who's pulling weight (today vs their own capacity)
+    - text: 💪 Charlotte · 💪 Booker · 👍 Raul · 💪 Nelson · 💪 Leonardo · 👍 Theo · 💪 Pavel · 💪 Greta · 💪 David · 💪 Tashi · 💪 Grace
+  - paragraph: "Haven survives when: Codex 10 (3) · Pantry 8.0 Mcal+ (46.7 Mcal)"
+  - paragraph: Tap a person in the grid to talk. They're living their lives.
+  - paragraph: 🟢 Ashley Katz — carpenter (100)
+  - paragraph: 🟢 Charlotte — musician (100)
+  - paragraph: 🟢 Booker — electrician (100)
+  - paragraph: 🟢 Raul — Sailor (100)
+  - paragraph: 🟢 Nelson — infantry soldier (100)
+  - paragraph: 🟢 Leonardo — Chef (100)
+  - paragraph: 🟢 Theo — trail crew lead (100)
+  - paragraph: 🟢 Pavel — bush pilot (100)
+  - paragraph: 🟢 Greta — Sailor (100)
+  - paragraph: 🟢 David — plumber (100)
+  - paragraph: 🟢 Tashi — arborist (95)
+  - paragraph: 🟢 Grace — ESL teacher (95)
+  - paragraph: "Also here:"
+  - paragraph: 📋 No one assigned. Tap a person → Assign task to direct them.
+  - button "Codex (3)"
+- complementary:
+  - text: PREPARED NPC INTEREST PROOF · candidate runtime · grants NPC powers and pantry; skips intro UI; not natural progression
+  - button "Prepare NPC interest fixture"
+  - button "Read saved payout receipt" [active]
+  - text: "Day 21 · opening 44,500 kcal · Charlotte: 2,225 kcal (5%) · real pantry 46,725 kcal. Saved receipt, read only."

@@ -21,16 +21,18 @@
 //   - fight_scoped: per-fight state lives on the fight object, discarded at fight end (code: fightState)
 //   - never_silent: state changes that matter narrate via say() (code: onStrikeHit)
 //   - assembly_gated: build-arounds are weak alone — full power needs 2+ same-path abilities (code: baPathCount)
+//   - interest_holder_parity: each living resident holder earns once per person/day from the same opening pantry, using their own build and the shared pantry cap (code: onDayTick)
 (function (global) {
   'use strict';
 
   // Count held abilities on a path (for assembly gating).
-  function baPathCount(game, path) {
+  function baPathCount(game, path, who) {
     try {
       // An evolved ability counts as its root (evolvedFrom keeps the lineage).
       // ABILITY LANES (2026-10-14): known skill-lane abilities (a human
       // haymaker, ambush...) still count toward their path — one helper.
-      const held = (typeof game.ownedAbilityIds === 'function') ? game.ownedAbilityIds()
+      const held = who && who !== game.villagerId ? game.npcOwnedIds(who)
+        : (typeof game.ownedAbilityIds === 'function') ? game.ownedAbilityIds()
         : (game.state.scholar.abilities || []).map(a => (a && (a.evolvedFrom || a.id)) || a);
       const data = game.data.abilities || [];
       return held.filter(id => {
@@ -276,21 +278,38 @@
         if (bs && game.hasAbility && game.hasAbility('trophy_room')) bs.trophyMark = null;
       } catch (e) { console.warn('[buildarounds] trophy reset:', e && e.message); }
       try {
-        if (!game.hasAbility || !game.hasAbility('hoarders_interest')) return;
-        let pantry = 0;
-        try { pantry = game.pantryKcal ? game.pantryKcal() : 0; } catch (e) {}
-        if (pantry < 1000) return;
-        const rate = baPathCount(game, 'miser') >= 2 ? 0.05 : 0.025;
-        // Real food into the real pantry (stockPantry), within the pantry cap.
-        const room = game.pantryCapKcal ? Math.max(0, game.pantryCapKcal() - pantry) : Infinity;
-        const interest = Math.min(Math.round(pantry * rate), room);
-        if (interest <= 0) {
-          game.say(`HOARDER'S INTEREST: the bins are full — nowhere to put the interest.`);
-          return;
-        }
-        game.stockPantry(interest, "Hoarder's interest");
-        game.say(`HOARDER'S INTEREST: your stores earned ${interest} kcal overnight. Patience pays.`);
-      } catch (e) {}
+          const v = game.state.village, me = game.villagerId;
+          if (!v) return;
+          const holders = new Set();
+          if (game.hasAbility && game.hasAbility('hoarders_interest')) holders.add(me || 'player');
+          for (const id of (v.roster || [])) {
+            if (id === me || !game.npcHasAbility || !game.npcHasAbility(id, 'hoarders_interest')) continue;
+            const person = game.vpOf(id);
+            if (person && !person.dead) holders.add(id);
+          }
+          if (!holders.size) return;
+          const day = game.state.scholar.day;
+          // Canonical-person receipts persist through save/load and succession.
+          // Shared opening stock avoids interest-on-interest within one dawn.
+          let ledger = v.hoarderInterest;
+          if (!ledger || ledger.day !== day) ledger = v.hoarderInterest = { day, opening: game.pantryKcal(), paid: {} };
+          if (ledger.opening < 1000) return;
+          for (const who of Array.from(holders).sort()) {
+            if (Object.prototype.hasOwnProperty.call(ledger.paid, who)) continue;
+            const rate = baPathCount(game, 'miser', who === 'player' ? null : who) >= 2 ? 0.05 : 0.025;
+            const requested = Math.round(ledger.opening * rate);
+            const room = game.pantryCapKcal ? Math.max(0, Math.floor(game.pantryCapKcal() - game.pantryKcal())) : Infinity;
+            const interest = Math.min(requested, room);
+            ledger.paid[who] = { rate, requested, kcal: interest };
+            if (interest <= 0) {
+              if (who === me || who === 'player') game.say(`HOARDER'S INTEREST: the bins are full — nowhere to put the interest.`);
+              continue;
+            }
+            game.stockPantry(interest, "Hoarder's interest");
+            if (who === me || who === 'player') game.say(`HOARDER'S INTEREST: your stores earned ${interest} kcal overnight. Patience pays.`);
+            else game.say(`${game.displayName(who)} watches the bins. The stores have grown by ${interest} kcal overnight.`);
+          }
+        } catch (e) { console.warn('[buildarounds] interest:', e && e.message); }
     },
 
     // CORNUCOPIA (forager): forage streaks → yield.
