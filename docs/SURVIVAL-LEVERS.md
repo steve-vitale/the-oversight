@@ -61,6 +61,18 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Invitation-window correction (2026-10-16): no survival/game lever changes.
+The provisional fraying follow-up's ready seat at the150-step endpoint did
+not prove a missing checkArc caller. The last check saw2 late-wave encounters;
+a third followed it. Two fixed additional iterations let the ordinary day151
+check issue the invitation; no win appears in that window. Preserve the original
+bounded23-metric comparisons and their adverse directions. Do not increase
+ending access to cancel a cutoff. Same-source replay, explicit continuation,
+observer controls and native daily transition proof:
+../evidence/2026-10-16/invitation-audit.md. Table entry overlapping an existing
+player contest/combat is a separate boundary audit, not an ambient-pressure
+or general survivability buff.
+
 Fraying social price (2026-10-16): retain the repair of the existing -2 tier
 crossing reaction to distinct living other current residents, plus null-ID
 guard and reserved-key load cleanup. This is a needs-eyes interpretation of

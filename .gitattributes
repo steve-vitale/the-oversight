@@ -22,3 +22,7 @@ evidence/2026-10-16/minnow-fixture-*.cjs text eol=lf
 evidence/2026-10-16/minnow-fixture-*.log -text
 evidence/2026-10-16/knowledge-fixture-*.cjs text eol=lf
 evidence/2026-10-16/knowledge-fixture-*.log -text
+evidence/2026-10-16/invitation-*.cjs text eol=lf
+# Preserve verbatim runner indentation, including indented blank output lines.
+evidence/2026-10-16/invitation-*.log -text whitespace=-blank-at-eol
+evidence/2026-10-16/invitation-*-ax.txt whitespace=-blank-at-eol

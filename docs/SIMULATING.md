@@ -316,6 +316,28 @@ parity remains open.
 
 ## Maintaining measurement
 
+Before calling a ready end-state seat a progression defect, use the separate
+window diagnostic. It replays selected cases against an exact-source complete
+panel, then adds a fixed number of driver iterations with the same policy and
+flags. The extension must match the original instrumented-call prefix and its
+plain observer-on/off controls. It never calls checkArc for the bot.
+
+```text
+node scripts/table-opportunity-audit.js --root <root> --panel <panel.json.gz> --cases capable:10050 --extend 2 --out <diagnostic.json.gz> --jobs 4
+```
+
+`--extend` is1..30 loop iterations, not guaranteed calendar days. Keep its
+outcomes separate from the original panel and never extend until a desired win
+appears. Classification distinguishes an unavailable seat, already invited/
+entered, ordinary daily catch-up, changed earlier history and a still-uninvited
+ready seat needing investigation. `entryOverlaps` records an actual successful
+public seat call during combat/contest separately; it does not call that an
+ambient-pause failure. Unknowns remain unknown. Full row/hash/23-metric checks,
+source/probe identity, warnings and observer neutrality are required. Examples
+and limitations: ../evidence/2026-10-16/invitation-audit.md. The29-check proof
+is discovered by quick/full; collector/contract changes require refreshing its
+retained fixture along with the existing measurement proofs.
+
 Fraying trust upkeep: `scripts/godpath/test-fraying-trust.js` runs in quick/full.
 Keep actual paid Voice boundaries, per-resident eligibility, same-band/retry/
 recovery behavior and real old-save load/roundtrip checks together. Do not

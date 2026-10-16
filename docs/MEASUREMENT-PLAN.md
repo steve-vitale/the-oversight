@@ -19,6 +19,14 @@ counterplay, preparation and access remain fair for each playstyle. Survival
 and resource warnings also prompt review, not an automatic buff or revert.
 Record accepted tradeoffs in [the survival lever register](SURVIVAL-LEVERS.md).
 
+Endpoint readiness is not an opportunity window. A post-run forced progress
+check can expose a ready seat without proving a missing runtime caller.
+Use `scripts/table-opportunity-audit.js` (SIMULATING.md) to compare the exact
+original case with fixed ordinary continuation, without pooling horizons.
+The capable10050 follow-up received its invitation through the existing next
+daily check and still had no win in the extended window. Keep a challenge
+outcome distinct from a proven softlock.
+
 Use a vector of outcomes, never one weighted score. Keep results separate
 for capable, maker, merchant and caregiver. An aggregate improvement cannot
 cancel a regression in one playstyle, food security, survival or gear access.

@@ -33,13 +33,18 @@ community losses. Full NPC social parity, ongoing conversation effects,
 living-speaker reaction names and native exact humanity/trust cost feedback
 remain open; prepared phone readouts are diagnostic.
 
-New invitation catch-up finding: capable10050 in the fraying confirmation
-finishes with an actual ready lesser seat (stage3, national, waves13/11/3,
-13 contests,4 crises, food deeds) but stays arc3 without invitation. Calling
-checkArc once after that campaign yields arc4/waiting immediately without
-changing kcal. The neutral gate snapshots and separately labelled mutating
-diagnostic are in fraying-audit.md. Trace the missing reactive caller in its
-own unit; do not lower deed gates or restore the phantom social price.
+Invitation follow-up resolved as a horizon cutoff: all daily checks in
+capable10050 ran. The last saw2 late-wave encounters; the third was recorded
+afterward, before the150-step run stopped with combat active. An unchanged
+152-step run reaches the ordinary day151 check and receives its invitation.
+It still has no win at that cutoff. No missing caller was established and no
+gameplay change is justified by the endpoint mutation. Reusable pinned-window
+diagnostics and native Wait/Sleep/load proof: ../evidence/2026-10-16/invitation-audit.md.
+Keep the original23-metric fraying reports unchanged. A separate actual issue
+to audit: capable10061 enters Table paths while combat and a player contest
+are already active; tableActive is true afterward, so this is an entry-boundary
+overlap, not evidence that the ambient pause predicate excludes paths. Verify
+native entry/from-Haven rules before a dedicated repair.
 
 Daily Voice (2026-10-16): real player turn entry now receives the existing
 paid day's rally, with finite own-turn expiry, saved recipient gate and

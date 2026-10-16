@@ -14,6 +14,13 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Table opportunity windows (2026-10-16): Codex owns the separate pinned-panel
+diagnostic CLI and its continuation/neutrality guards. It changes no runtime,
+policy or23-metric contract. The ready-but-uninvited endpoint in capable10050
+resolves at the next ordinary daily check; no caller repair is adopted.
+Active combat/contest overlapping Table entry is a separate pending boundary
+audit. Muse's region/nomad lane is untouched.
+
 Fraying trust follow-up (2026-10-16): Codex owns table.js's existing player
 tier-crossing reaction, game.js null-recipient guard and narrow old-save
 phantom cleanup. No NPC relationship currency, ongoing conversation tax,
