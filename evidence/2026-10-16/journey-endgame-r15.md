@@ -110,7 +110,8 @@ Notes for r16:
 
 ## Regressions
 
-- `node scripts/check.js --quick`: 96 passed, 1 failed (216s) — the 1 failure is PRE-EXISTING and unrelated: `scripts/probe-feed-where-20261014.js` requires `./policies/succbrake`, deleted by the sibling's kill commit a60273ad ("sim-succbrake ... KILLED AT PILOT ... Layer deleted per kill protocol") which left the require dangling. Not my lane (flesh-out loop's probe) — documented, not fixed. The 2 stranger-conversation assertion fails in test-where-are-we are the known pre-existing ones (r13/r14). My change is tooling-only (scripts/, policies/) — the green list can't be affected.
+- `node scripts/check.js --quick`: 96 passed, 1 failed (216s) — the 1 failure is `scripts/test-sprites-valid-20261014.js` (216 failing sprite assertions: region plants like acorn_pedunculate_oak/beechnut/crab_apple/hawthorn plus dustboar/sunback/sweeps_week/cliffhanger calm/aggro pairs). PRE-EXISTING relative to this run and unrelated: it was green on the 2026-10-14 green list; this worktree's base includes the region-content-wave1 sprite merge (15614d03), and the test has zero references to any r15 file (verified: no require of mootlaw/r15 driver/proof test; my commits are tooling-only in scripts/+evidence/). A sibling-lane breakage to flag, not mine to fix. (Correction 2026-10-16: an earlier draft of this note misattributed the failure to probe-feed-where's dangling succbrake require — that crash is real standalone but probe-feed-where is NOT on the green list, so it isn't check.js's failure. The sprite test is.)
+- `scripts/test-r15-probe-fixes-20261016.js`: 23/23 green on seeds 48, 37, 5 (bearer RED→GREEN: old expr null, new expr returns the name; schema keys emitted; staging refusals present).
 - `scripts/test-r15-probe-fixes-20261016.js`: 23/23 green on seeds 48, 37, 5 (bearer RED→GREEN: old expr null, new expr returns the name; schema keys emitted; staging refusals present).
 
 ## Files
