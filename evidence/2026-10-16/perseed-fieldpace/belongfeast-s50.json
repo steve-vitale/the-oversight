@@ -1,0 +1,186 @@
+{
+ "seed": 50,
+ "policyId": "belongfeast",
+ "mode": "fieldpace",
+ "days": 101,
+ "gameDays": 102,
+ "endReason": "village-lost",
+ "won": false,
+ "inviteDay": 86,
+ "maxWave": 4,
+ "national": 0,
+ "table": 1,
+ "wins": 0,
+ "exiled": 0,
+ "summary": {
+  "wave45Deaths": 2,
+  "monsterVerbVillagerDeaths": 4,
+  "attributionRate": 0.5,
+  "orkShareW4": 1,
+  "orkShareW5": null,
+  "roundHistW4": {
+   "1": 2
+  },
+  "roundHistW5": {},
+  "nW4": 2,
+  "nW5": 0,
+  "nW6": 0,
+  "medianFightRoundsW45": 1,
+  "nFightsW45": 5,
+  "topKillers": [
+   [
+    "algorithm",
+    2
+   ]
+  ],
+  "channelSplit": {
+   "RAID": 1,
+   "EXPEDITION": 1,
+   "WILD-ENCOUNTER": 0,
+   "unattributed": 0
+  },
+  "residueN": 2,
+  "residueReasons": {
+   "monster-death-no-fieldfight-record": 1,
+   "wave45-field-death-but-no-vDie-fight-record": 1
+  },
+  "playerDeaths": 0
+ },
+ "fights": [
+  {
+   "day": 91,
+   "vid": "gen_6bgeeur",
+   "allyVids": [],
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vFlee",
+   "vTaken": 80,
+   "player": false
+  },
+  {
+   "day": 92,
+   "vid": "petra_novak",
+   "allyVids": [],
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vFlee",
+   "vTaken": 79,
+   "player": false
+  },
+  {
+   "day": 92,
+   "vid": "petra_novak",
+   "allyVids": [],
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vDie",
+   "vTaken": 81,
+   "player": false
+  },
+  {
+   "day": 93,
+   "vid": "gen_6bgeeur",
+   "allyVids": [],
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vDie",
+   "vTaken": 65,
+   "player": false
+  },
+  {
+   "day": 93,
+   "vid": "visjoin_50",
+   "allyVids": [],
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 4,
+   "outcome": "vFlee",
+   "vTaken": 85,
+   "player": false
+  }
+ ],
+ "deaths": [
+  {
+   "day": 92,
+   "name": "Petra",
+   "vid": "petra_novak",
+   "wave": 4,
+   "mId": "algorithm",
+   "killer": "algorithm",
+   "roundOfDeath": 1,
+   "oneRoundKill": true,
+   "fightRounds": 1,
+   "channel": "EXPEDITION"
+  },
+  {
+   "day": 93,
+   "name": "Tariq",
+   "vid": "gen_6bgeeur",
+   "wave": 4,
+   "mId": "algorithm",
+   "killer": "algorithm",
+   "roundOfDeath": 1,
+   "oneRoundKill": true,
+   "fightRounds": 1,
+   "channel": "RAID"
+  }
+ ],
+ "residue": [
+  {
+   "day": 76,
+   "vid": "gen_vfcrn5b",
+   "name": "Deborah",
+   "cause": "monster",
+   "via": "wild",
+   "src": "EXPEDITION",
+   "monsterId": "terms_of_service",
+   "waveByMonsterId": 3,
+   "reason": "monster-death-no-fieldfight-record"
+  },
+  {
+   "day": 93,
+   "vid": "visjoin_50",
+   "name": "Ashley",
+   "cause": "monster",
+   "via": "wild",
+   "src": "RAID",
+   "monsterId": "algorithm",
+   "waveByMonsterId": 4,
+   "reason": "wave45-field-death-but-no-vDie-fight-record"
+  }
+ ],
+ "examples": [
+  {
+   "day": 92,
+   "vid": "petra_novak",
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 1,
+   "vTaken": 81,
+   "log": [
+    "Petra has Bow but no arrows — the string stays drawn, useless.",
+    "Petra's gear absorbs 26.",
+    "R1: Recommended For You hits Petra for 81 (0 left)",
+    "R1: Petra stands there and takes it soft — deliberately. (Tanking the prediction.)"
+   ]
+  },
+  {
+   "day": 93,
+   "vid": "gen_6bgeeur",
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 1,
+   "vTaken": 65,
+   "log": [
+    "Tariq has Crude bow but no arrows — the string stays drawn, useless.",
+    "Tariq's gear absorbs 29.",
+    "R1: Engagement hits Tariq for 65 (0 left)",
+    "R1: Tariq stands there and takes it soft — deliberately. (Tanking the prediction.)"
+   ]
+  }
+ ]
+}

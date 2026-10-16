@@ -1,0 +1,237 @@
+{
+ "seed": 46,
+ "policyId": "belongfeast",
+ "mode": "fieldpace",
+ "days": 70,
+ "gameDays": 71,
+ "endReason": "village-lost",
+ "won": false,
+ "inviteDay": 53,
+ "maxWave": 4,
+ "national": 0,
+ "table": 1,
+ "wins": 0,
+ "exiled": 0,
+ "summary": {
+  "wave45Deaths": 3,
+  "monsterVerbVillagerDeaths": 7,
+  "attributionRate": 0.42857142857142855,
+  "orkShareW4": 0.6666666666666666,
+  "orkShareW5": null,
+  "roundHistW4": {
+   "1": 2,
+   "2": 1
+  },
+  "roundHistW5": {},
+  "nW4": 3,
+  "nW5": 0,
+  "nW6": 0,
+  "medianFightRoundsW45": 2,
+  "nFightsW45": 5,
+  "topKillers": [
+   [
+    "eulogy",
+    3
+   ]
+  ],
+  "channelSplit": {
+   "RAID": 0,
+   "EXPEDITION": 3,
+   "WILD-ENCOUNTER": 0,
+   "unattributed": 0
+  },
+  "residueN": 4,
+  "residueReasons": {
+   "monster-death-no-field-context": 1,
+   "monster-death-no-fieldfight-record": 2,
+   "wave45-field-death-but-no-vDie-fight-record": 1
+  },
+  "playerDeaths": 0
+ },
+ "fights": [
+  {
+   "day": 60,
+   "vid": "tariq_mahmood",
+   "allyVids": [],
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 2,
+   "outcome": "vFlee",
+   "vTaken": 90,
+   "player": false
+  },
+  {
+   "day": 60,
+   "vid": "ruby_callaghan",
+   "allyVids": [],
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 2,
+   "outcome": "vFlee",
+   "vTaken": 59,
+   "player": false
+  },
+  {
+   "day": 61,
+   "vid": "gen_9devh3b",
+   "allyVids": [],
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vDie",
+   "vTaken": 39,
+   "player": false
+  },
+  {
+   "day": 61,
+   "vid": "app_mgpsphhb797",
+   "allyVids": [],
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vDie",
+   "vTaken": 56,
+   "player": false
+  },
+  {
+   "day": 61,
+   "vid": "ruby_callaghan",
+   "allyVids": [],
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 2,
+   "outcome": "vDie",
+   "vTaken": 73,
+   "player": false
+  }
+ ],
+ "deaths": [
+  {
+   "day": 61,
+   "name": "Michael",
+   "vid": "gen_9devh3b",
+   "wave": 4,
+   "mId": "eulogy",
+   "killer": "eulogy",
+   "roundOfDeath": 1,
+   "oneRoundKill": true,
+   "fightRounds": 1,
+   "channel": "EXPEDITION"
+  },
+  {
+   "day": 61,
+   "name": "Paulo",
+   "vid": "app_mgpsphhb797",
+   "wave": 4,
+   "mId": "eulogy",
+   "killer": "eulogy",
+   "roundOfDeath": 1,
+   "oneRoundKill": true,
+   "fightRounds": 1,
+   "channel": "EXPEDITION"
+  },
+  {
+   "day": 61,
+   "name": "Ruby",
+   "vid": "ruby_callaghan",
+   "wave": 4,
+   "mId": "eulogy",
+   "killer": "eulogy",
+   "roundOfDeath": 2,
+   "oneRoundKill": false,
+   "fightRounds": 2,
+   "channel": "EXPEDITION"
+  }
+ ],
+ "residue": [
+  {
+   "day": 22,
+   "vid": "gen_xkpo74t",
+   "name": "Daniil",
+   "cause": "monster",
+   "via": null,
+   "src": "WILD-ENCOUNTER",
+   "monsterId": null,
+   "waveByMonsterId": null,
+   "reason": "monster-death-no-field-context"
+  },
+  {
+   "day": 31,
+   "vid": "marcus_webb",
+   "name": "Marcus",
+   "cause": "monster",
+   "via": "wild",
+   "src": "EXPEDITION",
+   "monsterId": "gallowdeer",
+   "waveByMonsterId": 1,
+   "reason": "monster-death-no-fieldfight-record"
+  },
+  {
+   "day": 38,
+   "vid": "gen_4yehwek",
+   "name": "Deirdre",
+   "cause": "monster",
+   "via": "wild",
+   "src": "EXPEDITION",
+   "monsterId": "hushwolf",
+   "waveByMonsterId": 1,
+   "reason": "monster-death-no-fieldfight-record"
+  },
+  {
+   "day": 60,
+   "vid": "tariq_mahmood",
+   "name": "Tariq",
+   "cause": "monster",
+   "via": "wild",
+   "src": "RAID",
+   "monsterId": "eulogy",
+   "waveByMonsterId": 4,
+   "reason": "wave45-field-death-but-no-vDie-fight-record"
+  }
+ ],
+ "examples": [
+  {
+   "day": 61,
+   "vid": "gen_9devh3b",
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 1,
+   "vTaken": 39,
+   "log": [
+    "Michael has Crude bow but no arrows — the string stays drawn, useless.",
+    "R1: Michael contradicts the narration — it says Michael runs — Michael advances.",
+    "Michael's gear absorbs 8.",
+    "R1: Epitaph hits Michael for 39 (0 left)"
+   ]
+  },
+  {
+   "day": 61,
+   "vid": "app_mgpsphhb797",
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 1,
+   "vTaken": 56,
+   "log": [
+    "R1: Paulo contradicts the narration — it says Paulo runs — Paulo advances.",
+    "Paulo's gear absorbs 8.",
+    "R1: Final Chapter hits Paulo for 56 (0 left)"
+   ]
+  },
+  {
+   "day": 61,
+   "vid": "ruby_callaghan",
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 2,
+   "vTaken": 73,
+   "log": [
+    "R1: Ruby contradicts the narration — it says Ruby runs — Ruby advances.",
+    "Ruby's gear absorbs 22.",
+    "R1: Final Chapter hits Ruby for 37 (29 left)",
+    "R2: Ruby contradicts the narration — it says Ruby falters — Ruby stands straighter.",
+    "Ruby's gear absorbs 21.",
+    "R2: Final Chapter hits Ruby for 36 (0 left)"
+   ]
+  }
+ ]
+}

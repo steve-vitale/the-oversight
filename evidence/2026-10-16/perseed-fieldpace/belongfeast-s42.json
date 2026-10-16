@@ -1,0 +1,195 @@
+{
+ "seed": 42,
+ "policyId": "belongfeast",
+ "mode": "fieldpace",
+ "days": 130,
+ "gameDays": 132,
+ "endReason": "village-lost",
+ "won": false,
+ "inviteDay": 80,
+ "maxWave": 4,
+ "national": 1,
+ "table": 1,
+ "wins": 0,
+ "exiled": 0,
+ "summary": {
+  "wave45Deaths": 1,
+  "monsterVerbVillagerDeaths": 4,
+  "attributionRate": 0.25,
+  "orkShareW4": 0,
+  "orkShareW5": null,
+  "roundHistW4": {
+   "2": 1
+  },
+  "roundHistW5": {},
+  "nW4": 1,
+  "nW5": 0,
+  "nW6": 0,
+  "medianFightRoundsW45": 1,
+  "nFightsW45": 7,
+  "topKillers": [
+   [
+    "reunion",
+    1
+   ]
+  ],
+  "channelSplit": {
+   "RAID": 1,
+   "EXPEDITION": 0,
+   "WILD-ENCOUNTER": 0,
+   "unattributed": 0
+  },
+  "residueN": 3,
+  "residueReasons": {
+   "monster-death-no-fieldfight-record": 2,
+   "wave45-field-death-but-no-vDie-fight-record": 1
+  },
+  "playerDeaths": 0
+ },
+ "fights": [
+  {
+   "day": 82,
+   "vid": "gen_5fn1xgf",
+   "allyVids": [],
+   "mId": "reunion",
+   "wave": 4,
+   "rounds": 0,
+   "outcome": "evade",
+   "vTaken": 0,
+   "player": false
+  },
+  {
+   "day": 96,
+   "vid": "gen_5fn1xgf",
+   "allyVids": [],
+   "mId": "reunion",
+   "wave": 4,
+   "rounds": 2,
+   "outcome": "vDie",
+   "vTaken": 105,
+   "player": false
+  },
+  {
+   "day": 103,
+   "vid": "aria_thompson",
+   "allyVids": [],
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vFlee",
+   "vTaken": 46,
+   "player": false
+  },
+  {
+   "day": 120,
+   "vid": "victor_lopez",
+   "allyVids": [],
+   "mId": "audit",
+   "wave": 4,
+   "rounds": 2,
+   "outcome": "vFlee",
+   "vTaken": 106,
+   "player": false
+  },
+  {
+   "day": 123,
+   "vid": "tom_baker",
+   "allyVids": [],
+   "mId": "eulogy",
+   "wave": 4,
+   "rounds": 2,
+   "outcome": "vFlee",
+   "vTaken": 76,
+   "player": false
+  },
+  {
+   "day": 123,
+   "vid": "app_mgpsphi4953",
+   "allyVids": [],
+   "mId": "reunion",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vFlee",
+   "vTaken": 65,
+   "player": false
+  },
+  {
+   "day": 131,
+   "vid": "visjoin_104",
+   "allyVids": [],
+   "mId": "algorithm",
+   "wave": 4,
+   "rounds": 1,
+   "outcome": "vFlee",
+   "vTaken": 97,
+   "player": false
+  }
+ ],
+ "deaths": [
+  {
+   "day": 96,
+   "name": "Rosa",
+   "vid": "gen_5fn1xgf",
+   "wave": 4,
+   "mId": "reunion",
+   "killer": "reunion",
+   "roundOfDeath": 2,
+   "oneRoundKill": false,
+   "fightRounds": 2,
+   "channel": "RAID"
+  }
+ ],
+ "residue": [
+  {
+   "day": 18,
+   "vid": "gen_tzq5j74",
+   "name": "Patricia",
+   "cause": "monster",
+   "via": "wild",
+   "src": "EXPEDITION",
+   "monsterId": "hushwolf",
+   "waveByMonsterId": 1,
+   "reason": "monster-death-no-fieldfight-record"
+  },
+  {
+   "day": 103,
+   "vid": "oliver_moore",
+   "name": "Oliver",
+   "cause": "monster",
+   "via": "wild",
+   "src": "RAID",
+   "monsterId": "callback",
+   "waveByMonsterId": 3,
+   "reason": "monster-death-no-fieldfight-record"
+  },
+  {
+   "day": 120,
+   "vid": "victor_lopez",
+   "name": "Victor",
+   "cause": "monster",
+   "via": "wild",
+   "src": "RAID",
+   "monsterId": "audit",
+   "waveByMonsterId": 4,
+   "reason": "wave45-field-death-but-no-vDie-fight-record"
+  }
+ ],
+ "examples": [
+  {
+   "day": 96,
+   "vid": "gen_5fn1xgf",
+   "mId": "reunion",
+   "wave": 4,
+   "rounds": 2,
+   "vTaken": 105,
+   "log": [
+    "R1: Rosa strikes for 8 (1192 left)",
+    "Rosa's gear absorbs 19.",
+    "R1: Your Move hits Rosa for 58 (34 left)",
+    "R2: Rosa strikes for 9 (1183 left)",
+    "Rosa's gear absorbs 16.",
+    "R2: Your Move hits Rosa for 47 (0 left)"
+   ]
+  }
+ ]
+}
