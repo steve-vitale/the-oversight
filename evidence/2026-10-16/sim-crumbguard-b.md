@@ -5,6 +5,14 @@ crumbs/floor1 region ONLY; plus a no-op refactor of the league-granary
 famine draw to share the same burn helper — byte-verified by det-gate).
 Worktree: sim-crumbguard-b. Run: fleshout-loop-b-20261016T1056Z.
 
+**STATUS 2026-10-16 (redirect): KILLED at pilot on the old substrate; premise
+MOOT on the new substrate (0152a2ce).** Steve's 2026-10-16 ruling closed the
+pantry granularity leak at the root (depositPantryPieces: all external
+deposits split to <=500-kcal pieces by default) — the crumb-guard lever's
+entire premise (guarding multi-thousand-kcal whole-piece takes) no longer
+binds. The lever is moot — a result, not a failure. game.js is zero-trace;
+evidence + instruments retained.
+
 Named next from this morning's KILLED sim-crumbs-b (evidence committed in
 this tree: evidence/2026-10-16/sim-crumbs-b.md). Steve's 2026-10-14 ruling
 on finding #121 stands: hungry villagers take the FULL piece, no
@@ -75,6 +83,12 @@ empty-pantry starvations in the dying tail).
 
 ## Pilot (16 runs: seeds 101/202/303/404 x {leadcourt,belongseek} x {control,armed}, CRUMBFLOOR=1 gate, FEASTSCALE_R13=1 SEATDRIVE=0, 180d death-aware)
 
+**SUPERSEDED 2026-10-16 by the substrate change (0152a2ce).** This pilot ran
+on the pre-fix substrate (base 3fd8e4d3, pantry slabs up to 2,813 kcal
+reachable via the haul leak). Its results are not decision-relevant on the
+new substrate and were NOT re-run — the premise probe below replaces them.
+Retained as the historical record of why the guarded variant was killed.
+
 Run by the adopting worker 2026-10-16 (the dead run left 7 partial census
 files; all 16 runs were re-run fresh in chunks for clean OUT rows — control
 leadcourt s101/s202 re-ran byte-deterministic). Analyzer:
@@ -98,7 +112,50 @@ scripts/analyze-crumbguard-20261016.js. Raw: evidence/2026-10-16/crumbguard-pilo
 - Freeloader-manufacture probe (scripts/probe-freeload-20261016.js): armed leadcourt s101 — Pedro reached freeloader **stage 2 (warning)** mid-run; control s101 had zero staged villagers; Pedro died. The guard's whole-piece over-feeding pushes honest villagers' 7-day net take rate above their fair share (drainBeyondCapacity: netRate7 > fairShare), staging them for gossip -> warning -> vote. Theft is allowed and socially punished by design — but here the "theft" is the engine over-feeding a hungry villager, and the punishment lands on an honest person. s404 armed showed no staging: the mechanism is real but not universal.
 - Tail ledgers (armed s101): Nora ate 56,355/54,899 need, Sam 77,292/75,114, Dale 54,636/53,140 — systematic over-feeding, the guard's fingerprint in the books.
 
-## Metric review (§14)
+## Premise verdict (2026-10-16 redirect — new substrate, 0152a2ce)
+
+**VERDICT: MOOT.** Probe: scripts/probe-premise-20261016.js — ALL GREEN (11/11)
+on rebased master (30db20e5, includes 0152a2ce), pristine game.js, no guard
+installed. The question: can a whole-piece take at the floor1 break still
+drain a pantry dangerously — is the killed sim-crumbs-b mechanism (two
+2,813-kcal takes draining 5,626 kcal to 0 in one day) still reachable?
+
+1. The s88 slabs through the new choke point: 2 x 2,813-kcal deposits via
+   depositPantryPieces arrive as **12 pieces, max 500 kcal**, all 5,626 kcal
+   preserved (no calorie loss, honest split 500/500/500/500/500/313 per slab).
+2. Worst-case whole-piece take at the floor1 break: **500 kcal** — 8.9% of
+   the s88-shaped pantry, not a drain.
+3. Draining the 5,626-kcal pantry via floor1-break whole-piece takes needs
+   **12 takes** — an order of magnitude above the killed mechanism's 2.
+4. The floor1 refusal still fires on pristine (want=1218 vs 4x500:
+   taken=1000, 218 need unmet, 1000 fresh left, shortOfFresh=false) — the
+   ruled-on bug exists on the new substrate, **defanged** not fixed. A
+   hungry villager is refused 218 kcal with food in the pantry; the cost
+   of taking the full piece is now bounded at 500 kcal instead of 2,813.
+5. The freeloader-manufacture cost mode (this arm's pilot finding) is
+   structurally closed too: per-take over-feed at the break is strictly
+   < 500 kcal (old regime: up to 2,813), and the fair-share clock trips
+   drainBeyondCapacity only above 2000 kcal/day net sustained — unreachable
+   via <500/day takes when the meal structure draws once per day.
+
+The guarded-vs-unguarded difference is negligible on the honest substrate:
+the most the guard could ever save is a <500-kcal take it refuses, and the
+most the literal take could ever cost is a <500-kcal over-feed. The lever's
+premise does not bind. No pilot re-run — there is nothing left to measure.
+
+## Metric review (§14) — addendum 2026-10-16
+
+5. **Steve's 2026-10-16 ruling resolves finding #414's question.**
+   The crumb-guard arm asked "how do we tune the distribution floor so a
+   full piece gets taken when a villager is hungry without the lethal
+   marginal-pantry cost?" Steve's answer: don't tune the take — close the
+   granularity leak. With pieces <=500 kcal by default, the whole-piece
+   take IS the full piece AND the bounded piece; the floor1 break's worst
+   case is a 500-kcal over-feed, which the pantry and the fair-share clock
+   both absorb. Root cause first, new systems last. The #121 no-fractionating
+   rule now implements itself through piece size — no guard, no gate, no
+   lever needed. This is the honest statement: the lever is moot because
+   the design got simpler, which is a result, not a failure.
 
 1. **The primary's coverage gate was wrong.** The header gated adjudication on control starvedDays >= 8 (total). Control hit 19 — but ALL of it was empty-pantry/away-pack/spoiled-insufficient; crumbs-left starvation (the bug regime the lever targets) was 0. The primary GO (19 -> 10) is therefore spurious: the reduction came from trajectory divergence (armed belongseek s303 died at 89d of combat before starvation could accumulate vs control's 114d empty-pantry tail), not from the guard fixing anything. **Proposed revision for the next run:** the primary is adjudicable only when control crumbs-left starvedDays >= 4 (a mechanism-coverage gate, not a totals gate). Totals without the bug regime are noise.
 2. **The medianDays guardrail caught a real cost the primary couldn't see.** The guard drains ~100k+ extra kcal/run from the pantry via whole-piece over-feeding (52-65 takes/run x ~2,000 kcal), and — worse — manufactures freeloader evidence (s101: Pedro stage 2). The guardrail did its job.
