@@ -2612,7 +2612,10 @@ const competent = {
             } catch (e) {}
             let _lfName = 'the beast';
             try { if (_lfMid && Game.monsterDisplayName) _lfName = Game.monsterDisplayName(_lfMid) || _lfName; } catch (e) {}
-            Game.say(`You don't meet the ${_lfName} blade-first — not tonight. You watch it from the treeline instead: how it moves, how it breathes, where its eyes go. Learning, not fighting. (witness posture)`);
+            // the display name may already carry its article ("The Terms of
+            // Service") — never compose "the The X".
+            try { if (!/^(the|a|an)\s/i.test(_lfName)) _lfName = 'the ' + _lfName; } catch (e) {}
+            Game.say(`You don't meet ${_lfName} blade-first — not tonight. You watch it from the treeline instead: how it moves, how it breathes, where its eyes go. Learning, not fighting. (witness posture)`);
             ctx.lfWitnessed = (ctx.lfWitnessed || 0) + 1;
             const fr = flee();
             if (fr) return true;
