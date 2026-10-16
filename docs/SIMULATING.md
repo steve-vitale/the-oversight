@@ -279,6 +279,33 @@ windows are explicit follow-up work in the plan.
 
 ## Maintaining measurement
 
+NPC eligibility revision (2026-10-16): new panels correlate NPC classes/gods
+with a distinct, known living roster resident who is not the current bearer
+at the observation. Definitions resolve villagers, saved rosterChars, then
+background survivors; roster IDs are deduplicated. Class events are filtered
+at their real event time, so a genuine earlier NPC class survives succession
+as historical access, but a later player-only build does not become NPC access.
+The NPC-class fraction uses identities observed at daily/terminal samples.
+Unknown identity history is retained for the whole run, even if a later
+same-day snapshot overwrites the earlier daily detail; any such unknown
+history makes that fraction null. The living-NPC mean is null if a retained
+per-day population sample has an unknown definition. A zero-HP record alone is not declared dead: canonical person.dead is
+the life flag, matching the resident definition. Known-needs hunger keeps its
+explicit partial denominator, counting each person once per sample.
+
+`npcExposure` retains per-day eligible/unknown/dead IDs, real class/god holders,
+duplicate roster counts and excluded map-record reasons. It keeps the last
+daily/terminal snapshot for a calendar day, not continuous exposure. Class
+recognition events may establish historical access between snapshots; they do
+not invent holder-days. `balance-features.js` reports coverage and sampled
+holder-days, labeling legacy exposure unknown. Old NPC map scans can include
+self/dead/departed records. Keep those reports historical and rerun both roots
+with the same current observer/contract before interpreting a change. This
+revision changes measurement, not NPC builds or gameplay difficulty.
+
+Source-bound results, reconstruction and the shared branch's disclosed
+validation limits: `evidence/2026-10-16/npc-measurement-audit.md`.
+
 The shared quick/full check discovers `scripts/godpath/test-measurement-workflow.js`.
 It checks contract structure, actual metric coverage, source fingerprints and
 sampled observer neutrality in a retained real panel. It does not rerun costly

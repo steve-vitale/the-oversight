@@ -1,0 +1,33 @@
+  ok   real NPC recognition emits a class for the eligible resident
+  ok   prepared dead holder also exercises the actual class telemetry producer
+  ok   sampling does not mutate gameplay
+  ok   real succession takes the previously measured resident
+  ok   second real succession takes the previously sampled unclassed NPC
+  ok   terminal observation does not mutate gameplay
+  FAIL daily living identities deduplicate roster and include both definition fallbacks
+  FAIL duplicate roster entries remain a diagnostic instead of extra mouths
+  FAIL unknown and dead roster people remain explicit
+  FAIL daily living count measures distinct known residents
+  ok   living NPC count remains unknown when any sampled roster person lacks a definition
+  FAIL class fraction also remains unknown with incomplete roster coverage
+  FAIL hunger counts actual distinct known needs — 1
+  ok   eligible real class recognition is retained
+  FAIL self, dead, departed and unknown class maps are excluded
+  FAIL an actual recognition event for a dead holder is excluded too
+  FAIL self, dead, departed and unknown god maps are excluded
+  FAIL duplicate active-god records do not multiply holder exposure
+  FAIL each rejected class record has its actual eligibility reason
+  FAIL each rejected god record has its actual eligibility reason
+  FAIL the new bearer never counts as a current NPC holder
+  FAIL a real earlier NPC class remains historical access after succession
+  FAIL having once been an NPC cannot turn a later player-only class into NPC access
+  FAIL sampled denominator identities are retained for review
+  FAIL fully known denominator gives a real zero rather than null
+  FAIL background-only living population is one despite duplicate roster
+  FAIL a current bearer alias alone cannot imply NPC god availability
+  FAIL finite NPC fractions stay within zero and one
+  ok   known-only terminal control is also observationally pure
+  FAIL a same-day terminal overwrite cannot erase earlier unknown NPC coverage
+
+balance-npc-eligibility: 9 passed, 21 failed, 0 todo (phase 0)
+failing: daily living identities deduplicate roster and include both definition fallbacks | duplicate roster entries remain a diagnostic instead of extra mouths | unknown and dead roster people remain explicit | daily living count measures distinct known residents | class fraction also remains unknown with incomplete roster coverage | hunger counts actual distinct known needs | self, dead, departed and unknown class maps are excluded | an actual recognition event for a dead holder is excluded too | self, dead, departed and unknown god maps are excluded | duplicate active-god records do not multiply holder exposure | each rejected class record has its actual eligibility reason | each rejected god record has its actual eligibility reason | …+9 more

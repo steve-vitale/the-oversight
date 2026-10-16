@@ -30,7 +30,32 @@ function summarize(panel) {
       for (const role of ['player', 'npc']) { for (const id of r.classes[role]) add(role + 'Classes', id); for (const id of r.gods[role]) add(role + 'Gods', id); }
       for (const key of new Set(r.endings.filter(e => e.type === 'table_won').map(e => [e.path || 'unknown', e.godpath || 'none', e.subclass || 'none', e.moral || 'unknown'].join('/')))) add('winningEndings', key);
     }
-    return { policy, runs: rows.length, completeMethodCoverage, features, recipes, sources, distributions };
+    const observed = rows.filter(r => r.npcExposure?.schemaVersion === 1 && Array.isArray(r.npcExposure.sampledIdentities) && Array.isArray(r.npcExposure.unknownIdentities)), holderDays = { classes: {}, gods: {} }, excluded = { classes: {}, gods: {} };
+    let eligiblePersonDays = 0, unknownPersonDays = 0, duplicateRosterEntries = 0;
+    for (const r of observed) {
+      const perRun = { classes: new Map(), gods: new Map() };
+      for (const d of r.npcExposure.days) {
+        eligiblePersonDays += d.eligible.length; unknownPersonDays += d.unknown.length; duplicateRosterEntries += d.duplicateRosterEntries;
+        for (const type of ['classes', 'gods']) {
+          for (const [reason, n] of Object.entries(d.excludedBuildRecords[type])) excluded[type][reason] = (excluded[type][reason] || 0) + n;
+          for (const h of d[type]) {
+            if (!perRun[type].has(h.build)) perRun[type].set(h.build, { days: new Set(), people: new Set() });
+            const b = perRun[type].get(h.build); b.days.add(d.day + '\0' + h.who); b.people.add(h.who);
+          }
+        }
+      }
+      for (const type of ['classes', 'gods']) for (const [id, b] of perRun[type]) {
+        const total = holderDays[type][id] || (holderDays[type][id] = { runs: 0, holderDays: 0, holderIdentitiesAcrossRuns: 0 });
+        total.runs++; total.holderDays += b.days.size; total.holderIdentitiesAcrossRuns += b.people.size;
+      }
+    }
+    const npcExposure = { measuredRuns: observed.length, missingRuns: rows.length - observed.length,
+      sampledIdentitiesAcrossRuns: observed.length ? observed.reduce((n, r) => n + r.npcExposure.sampledIdentities.length, 0) : null,
+      unknownIdentitiesAcrossRuns: observed.length ? observed.reduce((n, r) => n + r.npcExposure.unknownIdentities.length, 0) : null,
+      eligiblePersonDays: observed.length ? eligiblePersonDays : null, unknownPersonDays: observed.length ? unknownPersonDays : null,
+      duplicateRosterEntries: observed.length ? duplicateRosterEntries : null, excludedBuildRecordSamples: observed.length ? excluded : null,
+      holderDays: observed.length ? holderDays : null };
+    return { policy, runs: rows.length, completeMethodCoverage, features, recipes, sources, distributions, npcExposure };
   });
 }
 function markdown(report) {
@@ -42,7 +67,9 @@ function markdown(report) {
     for (const r of p.recipes) lines.push(`| ${r.id} | ${r.knownRuns} | ${r.readyRuns} | ${r.attempts} | ${r.successes} | ${r.status} |`);
     lines.push('', '### Earned rewards by recipient/source', '', '| Source | Units | Tier-3+ weapon/armor units |', '| --- | ---: | ---: |');
     for (const [key, s] of Object.entries(p.sources).sort()) lines.push(`| ${key} | ${s.units} | ${s.tier3WeaponArmor} |`);
-    lines.push('', 'Class/god distributions count runs observing each build; a run may observe several. Ending bins count unique winning builds per run.', '', '```json', JSON.stringify(p.distributions, null, 2), '```', '');
+    lines.push('', '### NPC eligibility and sampled build exposure', '',
+      `${p.npcExposure.measuredRuns}/${p.runs} runs retain eligibility. Missing legacy exposure is unknown, never zero. Holder-days count distinct eligible people at the last daily/terminal snapshot per calendar day; these are samples, not continuous exposure or proof of useful effects. Exclusions count map records per sample, not distinct people.`, '', '```json', JSON.stringify(p.npcExposure, null, 2), '```', '',
+      'Class/god distributions count runs observing each build; a run may observe several. Current NPC observations require a known living resident other than the current bearer at the time. Legacy rows without eligibility may include stale/self records. Ending bins count unique winning builds per run.', '', '```json', JSON.stringify(p.distributions, null, 2), '```', '');
   }
   return lines.join('\n');
 }

@@ -9,6 +9,18 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+NPC measurement eligibility (2026-10-16): the balanced observer now correlates
+NPC class/god records with a known living resident other than the current
+bearer, resolves saved/background people, and deduplicates roster IDs. New
+npcExposure and feature-census holder-days separate actual sampled holders
+from stale/self records. All256 retained standard rows, full hashes and23
+scalar metrics are unchanged; NPC god distributions are corrected in55 runs.
+Runtime30/30, scorecard30/30, maintenance8/8, primary full945/945. Identical
+tooling and a branch-specific neutral proof are shared for Muse; its game
+still has legacy failures, explicitly retained and controlled. Read
+../evidence/2026-10-16/npc-measurement-audit.md before interpreting old NPC
+availability claims. No gameplay, policy, win target or survival lever changed.
+
 Formal companion body audit (2026-10-16): actual far/formal-only and loyal
 betrayal helpers still enter at30HP without worn gear, and unharmed escape
 can overwrite77 or9 saved HP with30. A repair passes28 focused assertions

@@ -14,6 +14,14 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+NPC measurement eligibility (2026-10-16): Codex takes the shared balanced
+observer, NPC contract wording, exposure census and their proof maintenance.
+Correlate class/god observations with a known living resident who is not the
+current bearer at that observation; deduplicate roster and resolve actual
+background/rosterChars definitions. Preserve historical panels as their old
+lineage. Publish the same tooling for Muse without importing gameplay or
+changing its regional/nomad files. No survival parameter or policy change.
+
 Formal companion body audit (2026-10-16): Codex measured only party.js's
 formal-only monster and loyal betrayal entry snapshots. Actual no-hit escape
 overwrites77 or9 world HP with30; worn gear is omitted. A28-assertion repair

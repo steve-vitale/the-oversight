@@ -17,27 +17,59 @@ function manifest(root) {
   return out;
 }
 function install(G) {
-  const census = gear.install(G), days = new Map(), intake = new Map(), bearerIds = new Set(), npcIds = new Set(), npcClassIds = new Set();
+  const census = gear.install(G), days = new Map(), npcDays = new Map(), intake = new Map(), bearerIds = new Set(), npcIds = new Set(), unknownNpcIds = new Set(), npcClassIds = new Set();
   census.startingTier = null; // Not sampled by this observer; starting gear is never earned.
   census.observedMethods = Object.keys(gear.METHODS); // Preserve the denominator, including zero-call methods.
   const classes = { player: new Set(), npc: new Set() }, gods = { player: new Set(), npc: new Set() }, events = {}, endings = [], errors = [];
   let firstDeath = null, accepted = 0;
   const initial = G.villagerId;
-  const rememberClass = (role, rec, vid) => { if (rec?.path && !rec.lapsed) { classes[role].add(rec.path + '/' + rec.subclass); if (role === 'npc') npcClassIds.add(vid); } };
+  // Read canonical definitions directly. No knowledge/build/needs helpers:
+  // those can initialize state or consume RNG while answering a query.
+  function npcSnapshot() {
+    const v = G.state.village, roster = new Set(v.roster || []), people = new Map();
+    for (const p of G.data.villagers || []) if (p?.id && !people.has(p.id)) people.set(p.id, p);
+    for (const [id, p] of Object.entries(v.rosterChars || {})) if (p?.id === id && !people.has(id)) people.set(id, p);
+    for (const p of G.data.background_survivors || []) if (p?.id && !people.has(p.id)) people.set(p.id, p);
+    const reason = id => id === G.villagerId ? 'currentBearer' : !roster.has(id) ? 'notResident' : !people.has(id) ? 'unknownPerson' : people.get(id).dead ? 'deadPerson' : null;
+    const ids = [...roster].filter(id => !reason(id));
+    return { ids, eligible: new Set(ids), reason,
+      unknown: [...roster].filter(id => reason(id) === 'unknownPerson'),
+      dead: [...roster].filter(id => reason(id) === 'deadPerson'),
+      duplicateRosterEntries: (v.roster || []).length - roster.size };
+  }
+  const rememberClass = (role, rec, vid, eligible) => {
+    if (rec?.path && !rec.lapsed) {
+      if (role === 'npc' && !(eligible || npcSnapshot().eligible).has(vid)) return;
+      classes[role].add(rec.path + '/' + rec.subclass);
+      if (role === 'npc') npcClassIds.add(vid);
+    }
+  };
   function sample() {
     const s = G.state.scholar, v = G.state.village;
+    const npcs = npcSnapshot(), npcBuilds = { classes: [], gods: [] }, excluded = { classes: {}, gods: {} };
     bearerIds.add(G.villagerId); rememberClass('player', s.godpath, G.villagerId);
-    for (const [vid, rec] of Object.entries(v.npcGodpath || {})) rememberClass('npc', rec, vid);
+    for (const [vid, rec] of Object.entries(v.npcGodpath || {})) {
+      if (!rec?.path || rec.lapsed) continue;
+      const why = npcs.reason(vid);
+      if (why) { excluded.classes[why] = (excluded.classes[why] || 0) + 1; continue; }
+      rememberClass('npc', rec, vid, npcs.eligible); npcBuilds.classes.push({ who: vid, build: rec.path + '/' + rec.subclass });
+    }
     for (const id of (s.godhood || {}).active || []) gods.player.add(id);
-    for (const rec of Object.values(v.npcGodhood || {})) for (const id of rec.active || []) gods.npc.add(id);
-    const roster = (v.roster || []).filter(id => id !== G.villagerId);
-    const people = new Map((G.data.villagers || []).map(p => [p.id, p]));
-    const living = roster.filter(id => people.has(id) && !people.get(id).dead);
+    for (const [vid, rec] of Object.entries(v.npcGodhood || {})) {
+      if (!rec?.active?.length) continue;
+      const why = npcs.reason(vid);
+      if (why) { excluded.gods[why] = (excluded.gods[why] || 0) + 1; continue; }
+      for (const id of new Set(rec.active)) { gods.npc.add(id); npcBuilds.gods.push({ who: vid, build: id }); }
+    }
+    const living = npcs.ids;
     for (const id of living) npcIds.add(id);
+    for (const id of npcs.unknown) unknownNpcIds.add(id);
     const needs = living.map(id => v.needs?.[id]).filter(n => Number.isFinite(n?.hunger));
     days.set(s.day, { day: s.day, bearer: G.villagerId, kcal: s.kcal, health: s.health, hydration: s.hydration,
-      livingNpcs: living.length, unknownRosterPeople: roster.filter(id => !people.has(id)).length,
+      livingNpcs: living.length, unknownRosterPeople: npcs.unknown.length,
       knownNeeds: needs.length, hungryNpcs: needs.filter(n => n.hunger >= 80).length });
+    npcDays.set(s.day, { day: s.day, bearer: G.villagerId, eligible: living.slice().sort(), unknown: npcs.unknown.sort(), dead: npcs.dead.sort(),
+      duplicateRosterEntries: npcs.duplicateRosterEntries, classes: npcBuilds.classes, gods: npcBuilds.gods, excludedBuildRecords: excluded });
     for (const [day, book] of Object.entries(v.harvestIntake || {})) {
       let kcal = 0, nourishment = 0; const routes = {};
       for (const r of Object.values(book)) {
@@ -68,6 +100,8 @@ function install(G) {
     const kcal = food.reduce((n, d) => n + d.kcal, 0), nourishment = food.reduce((n, d) => n + d.nourishment, 0);
     const survival = day => firstDeath != null && firstDeath <= day ? 0 : G.state.scholar.day > day ? 1 : null;
     return { gear: census, observerErrors: errors, samples: sampled, intake: food, events, endings,
+      npcExposure: { schemaVersion: 1, identityRule: 'known-living-resident-not-current-bearer', sampledIdentities: [...npcIds].sort(),
+        unknownIdentities: [...unknownNpcIds].sort(), classIdentities: [...npcClassIds].filter(id => npcIds.has(id)).sort(), days: [...npcDays.values()] },
       classes: Object.fromEntries(Object.entries(classes).map(([r, ids]) => [r, [...ids].sort()])), gods: Object.fromEntries(Object.entries(gods).map(([r, ids]) => [r, [...ids].sort()])),
       metrics: { won: row.won, entered: row.entered, table: row.table, national: row.national,
         survival30: survival(30), survival60: survival(60), playerDeaths, playerDeaths100Days: ratio(playerDeaths * 100, row.gameDays),
@@ -75,7 +109,7 @@ function install(G) {
         livingNpcs: sampled.some(d => d.unknownRosterPeople) ? null : score.mean(sampled.map(d => d.livingNpcs)),
         lowFood: distress('kcal', 500), lowWater: distress('hydration', 25), lowHealth: distress('health', 25),
         npcHungry: ratio(sampled.reduce((n, d) => n + d.hungryNpcs, 0), sampled.reduce((n, d) => n + d.knownNeeds, 0)),
-        classAccess: classes.player.size ? 1 : 0, npcClassAccess: ratio([...npcClassIds].filter(id => npcIds.has(id)).length, npcIds.size),
+        classAccess: classes.player.size ? 1 : 0, npcClassAccess: unknownNpcIds.size ? null : ratio([...npcClassIds].filter(id => npcIds.has(id)).length, npcIds.size),
         goodGear: good.length ? 1 : 0, contestShowGear: good.some(g => ['contest', 'show'].includes(g.source)) ? 1 : 0,
         craftTradeGear: good.some(g => ['craft', 'trade'].includes(g.source)) ? 1 : 0, corpseGear: good.some(g => g.source.startsWith('corpse-')) ? 1 : 0,
         usefulIntake: ratio(nourishment, kcal), bearerChanges: Math.max(0, bearerIds.size - 1), abilityAccepted: accepted } };
