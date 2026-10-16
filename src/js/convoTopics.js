@@ -362,6 +362,18 @@
           tableEv = { kind: 'table', phase: (pg && pg.tableWaiting && !active) ? 'waiting' : 'sitting', seat };
         }
       } catch (e) { tableEv = null; }
+      // SHOW MEMORY (journey crisis r17 2026-10-15): a televised grab within
+      // the 7-day window. Computed up here so the naming debate can yield to
+      // it (a System abduction outshouts the naming argument) and so the
+      // priority chain below can return it in place.
+      let showEv = null;
+      try {
+        const _lc = (v || {}).lastContest;
+        if (_lc && (day - (_lc.day || 0)) >= 0 && (day - (_lc.day || 0)) <= 7) {
+          showEv = { kind: 'show', name: _lc.name || 'a contest',
+            self: (_lc.ids || []).indexOf(vid) >= 0, ids: (_lc.ids || []).slice() };
+        }
+      } catch (e) { showEv = null; }
       try {
         // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
         // naming debate is the talk of the fire — it surfaces here with the
@@ -376,8 +388,10 @@
         // outlet; the debate resumes when the transformation passes.
         // YIELDS to the table (r11): the System's summons outranks the
         // naming argument.
+        // YIELDS to a fresh show (r17): a televised grab outshouts the
+        // naming argument — the cameras took people yesterday.
         if (typeof this.monsterNamingActive === 'function' && this.monsterNamingActive() &&
-            !(outbreak && outbreak.severe) && !weirdness && !tableEv) {
+            !(outbreak && outbreak.severe) && !weirdness && !tableEv && !showEv) {
           const entries = this.state.codex.monsters || {};
           const mid = Object.keys(entries).find(k => {
             const e = entries[k];
@@ -458,9 +472,24 @@
         // Sickness kills; transformations unnerve — when both are live, the
         // severe one wins, otherwise the outbreak (existing behavior).
         if (outbreak || weirdness) {
-          if (weirdness && (!outbreak || (weirdness.severe && !outbreak.severe))) return weirdness;
+          // Severe bodily horror outranks the broadcast (r17): villagers
+          // actively dying or transforming outshout even the System's cameras.
+          const severeW = weirdness && weirdness.severe && (!outbreak || !outbreak.severe);
+          const severeO = outbreak && outbreak.severe;
+          if (severeW) return weirdness;
+          if (severeO) return outbreak;
+          // A fresh televised grab outshouts MILD bodily news (r17): two
+          // people with gut cramps don't outshout the cameras taking people.
+          if (showEv) return showEv;
+          if (weirdness && !outbreak) return weirdness;
           return outbreak;
         }
+        // SHOW RETURN (r17): the precomputed showEv rides here — below fresh
+        // grief, the mantle, the table, and SEVERE bodily crisis; above the
+        // village's own politics and the naming debate it already displaced
+        // above. Window 7 days (the defense tail). The participant gets the
+        // first-person variant.
+        if (showEv) return showEv;
         // REALM (journey scale r1 2026-10-15): the court sat or the oath was
         // sworn and the village knows — but after the one-shot echo beat
         // (scaleDiscovery._sdNationalBeatEcho), conversations never carried
@@ -1049,6 +1078,30 @@
           return [
             '"Have you seen ' + who + '? ' + wdesc + '. Since the strange meat. Nobody taught them that."',
             areChanging + who + ' — ' + wdesc + '. The fire keeps going quiet when they walk up."',
+          ];
+        }
+        case 'show': {
+          // SHOW (journey crisis r17 2026-10-15): the village talks about the
+          // grab. The participant gets the first-person variant; bystanders
+          // name the taken (firstRef, knowledge-gated). The contest name is
+          // the System's own title — the village heard it announced.
+          const cname = ev.name || 'a contest';
+          if (ev.self) return [
+            '"They took me. ' + cname + ' — up there, on the screens, in front of everyone. I\'m still turning it over."',
+            '"You saw it too, right? ' + cname + '. Tell me I didn\'t imagine the lights."',
+          ];
+          let taken = 'some of us';
+          try {
+            const _names = (ev.ids || [])
+              .filter(id => id && id !== 'player' && id !== vid)
+              .map(id => { try { return this.firstRef(id); } catch (e) { return null; } })
+              .filter(Boolean);
+            if (_names.length) taken = _names.slice(0, 2).join(' and ');
+            else if ((ev.ids || []).indexOf('player') >= 0 || (ev.ids || []).indexOf(this.villagerId) >= 0) taken = 'you';
+          } catch (e) {}
+          return [
+            '"They took ' + taken + ' — ' + cname + ', on the screens. The whole fire watched. Nobody knew where to look."',
+            '"' + cname + '. They just... took ' + taken + '. Came back like nothing happened. It wasn\'t nothing."',
           ];
         }
         case 'table': {

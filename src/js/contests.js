@@ -2102,6 +2102,17 @@
       variant: contest.variant || null,
       pilot: isPilot,
     };
+    // SHOW MEMORY (journey crisis r17 2026-10-15): the grab is the village's
+    // business — fireContest's own announcement promises "The village will
+    // talk about this for days", but the lately system had no contest kind,
+    // so a televised abduction was conversationally invisible 2 days later
+    // (transcript-verified: a sick villager taken for Hide and Seek talked
+    // only cramps; latelyKind=outbreak). Plant the village-level memory;
+    // t2LatelyEvent surfaces it as kind 'show' for a 7-day window.
+    try {
+      const _vv = this.state.village || {};
+      _vv.lastContest = { day: (this.state.scholar || {}).day || 1, name: contest.name || contest.id, ids: ids.slice() };
+    } catch (e) {}
   };
 
   // Name list for multi-take announcements: "Mara", "Mara and Tove",
