@@ -1,5 +1,19 @@
 #!/usr/bin/env node
 'use strict';
+// KILL PROTOCOL (2026-10-16: pilot NO-GO 1.176 vs 0.70): the lever is
+// reverted — src/js/game.js no longer carries apexRouteOn. INFO-SKIP
+// instead of crashing on the missing lever.
+(function () {
+  const fs = require('fs');
+  const path = require('path');
+  try {
+    const gj = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'game.js'), 'utf8');
+    if (gj.indexOf('apexRouteOn') === -1) {
+      console.log('SKIP test-apexroute-20261016 (lever reverted per kill protocol — apexRouteOn absent from src/js/game.js)');
+      process.exit(0);
+    }
+  } catch (e) {}
+})();
 // test-apexroute-20261016.js — proof for the apexroute lever (sim-apexroute,
 // 2026-10-16, scale-onramp axis): engine-side villager apex-avoidance routing.
 //
