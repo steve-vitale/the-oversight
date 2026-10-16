@@ -14,6 +14,12 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Fraying trust follow-up (2026-10-16): Codex owns table.js's existing player
+tier-crossing reaction, game.js null-recipient guard and narrow old-save
+phantom cleanup. No NPC relationship currency, ongoing conversation tax,
+region/nomad files or policy/measurement contract changes belong to this unit.
+Keep the exact-source paired campaigns and compatibility proof with the fix.
+
 Voice preparation experiment (2026-10-16): Codex owns optional capable
 policy intent/known-fight callbacks, four opt-in voice-ready cohorts and
 the same-panel paired-policy scorecard. Default work/offer/encounter choices

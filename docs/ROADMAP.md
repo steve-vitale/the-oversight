@@ -22,13 +22,24 @@ their successors reach the Table. This reinforces the existing reactor question;
 do not force death or waive its gate. Contest
 interruptions and broader god/titan/Network policy coverage remain open.
 
-New runtime finding from the preparation audit: a player crossing into fraying
-calls bumpTrust(null,-2). Real roster trust stays unchanged while v.trust.null
-becomes8 (or decreases further). The average-trust reader includes all values.
-Audit the intended social price and remove the phantom key deliberately in
-a separate runtime/save compatibility unit; no penalty repair is hidden in
-this strategy experiment. Native exact humanity/trust readout coverage also
-needs separate UI audit; the prepared phone readouts are diagnostic.
+Fraying follow-up (2026-10-16): the existing crossing's null/-2 call now charges
+each distinct known living other current resident. Real load removes only the
+old phantom null trust key, without charging a loaded bearer. This needs-eyes
+interpretation preserves thresholds/costs and is separate from the strategy
+experiment. All23 metrics and changed-ending replays are in
+../evidence/2026-10-16/fraying-audit.md: capable invitation/entry warnings,
+maker/caregiver death increases and merchant class loss remain beside lower
+community losses. Full NPC social parity, ongoing conversation effects,
+living-speaker reaction names and native exact humanity/trust cost feedback
+remain open; prepared phone readouts are diagnostic.
+
+New invitation catch-up finding: capable10050 in the fraying confirmation
+finishes with an actual ready lesser seat (stage3, national, waves13/11/3,
+13 contests,4 crises, food deeds) but stays arc3 without invitation. Calling
+checkArc once after that campaign yields arc4/waiting immediately without
+changing kcal. The neutral gate snapshots and separately labelled mutating
+diagnostic are in fraying-audit.md. Trace the missing reactive caller in its
+own unit; do not lower deed gates or restore the phantom social price.
 
 Daily Voice (2026-10-16): real player turn entry now receives the existing
 paid day's rally, with finite own-turn expiry, saved recipient gate and
@@ -487,12 +498,13 @@ the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
   25 -> 28 (capable/maker/merchant/caregiver). Maker community losses rise
   19 -> 25; all six new cases replay exactly and actual new role choices
   are recorded. This remains an open balance investigation, not a reason to
-  restore dead holders. Next: a separate public-goal/food/grounding-aware
-  policy experiment, with held-out seeds and equal-time exposure checks.
-  First settle the reproduced existing Relay clock mismatch: code promises
-  daily upkeep but the part hook charges 100 -> 96 grounding across four
-  calls on one day. See relay-office-clock-probe.cjs / relay-office-clock.json;
-  measure that correction independently before tuning prices or policy.
+  restore dead holders. The separate Relay clock audit now guards actual
+  upkeep/service per person/day; see ../evidence/2026-10-15/relay-clock-audit.md.
+  The opt-in voice-policy experiment now tests public-goal/food/grounding-aware
+  preparation with disjoint holdouts and common observed case-day windows;
+  see ../evidence/2026-10-16/voice-policy-audit.md. It preserves original
+  defaults and does not establish continuous equal person-time exposure.
+  Continue the named late community-loss and broader god/scale investigations.
 - **Earlier Unkillable implementation:** Unkillable has the first authored outcome deed: really refuse a
   fatal blow through your own survival magic, then reach a later dawn alive.
   Per-person receipts and a known-class objective are wired and tested.

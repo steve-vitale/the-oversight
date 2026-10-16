@@ -13,8 +13,11 @@ has a real damage consumer and finite own-turn lifetime. See
 ../../evidence/2026-10-16/god-support-audit.md. The subsequent
 ../../evidence/2026-10-16/player-command-audit.md closes tactical command,
 broadcast and aura player recipients with a real controlled bonus turn.
-Daily Voice support and NPC grounding cost parity remain open. Never
-substitute NPC AI for a player choice.
+The daily-voice audit now proves the paid player's finite own-turn daily
+rally; the grounding audit proves actual speaker costs and person-owned meters.
+See ../../evidence/2026-10-16/daily-voice-audit.md and grounding-audit.md.
+Full NPC social/food-conversion parity and the broader scale-context proof
+remain open. Never substitute NPC AI for a player choice.
 
 2026-10-16 follow-up: formal companion body/gear parity remains open. The
 retained repair passes28 focused assertions and native phone escape, but

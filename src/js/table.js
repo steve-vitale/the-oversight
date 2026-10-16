@@ -303,7 +303,13 @@
         const n1 = names[0] || 'Mara', n2 = names[1] || 'the old ones';
         if (falling && to === 'fraying') {
           this.say(`${n1} keeps a half-step of distance at the fire now. Not fear — not yet. Just... distance. "You've been up at the relay late," they say, and don't ask what you found.`);
-          this.bumpTrust && this.bumpTrust(null, -2, 'grounding fraying');
+          // This is each living resident's reaction to the bearer. Null is
+          // not a global recipient: it creates a phantom trust-map entry.
+          for (const id of new Set(v.roster || [])) {
+            if (id === this.villagerId) continue;
+            const person = this.getPerson(id);
+            if (person && !person.dead) this.bumpTrust(id, -2, 'grounding fraying');
+          }
         } else if (falling && to === 'estranged') {
           this.say(`The gossip has changed its grammar around you. ${n2} talk about you the way they talk about weather — something that happens, not someone who chooses. A child asked what your laugh sounds like. Nobody could quite remember.`);
           this.say(`Your small-talk comes out in the System's register now — clean, total, wrong. You hear yourself do it. You don't stop.`);

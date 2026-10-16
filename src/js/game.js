@@ -7214,6 +7214,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     bumpTrust(vid, n, reason) {
+      if (typeof vid !== 'string' || !vid) return;
       const v = this.state.village;
       v.trust = v.trust || {};
       // unset defaults to 10, but a real 0 must stay 0 — `|| 10` used to
@@ -8177,6 +8178,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // expedition either.
       if (!s || !s.run || !s.scholar || !s.run.map) return false;
       this.state = s;
+      // Fraying used to call bumpTrust(null,-2), creating a fake person.
+      // Remove that reserved key only; never charge real residents on load.
+      if (s.village && s.village.trust) delete s.village.trust.null;
       // BROADCAST FRAME (break-it shows r3 2026-10-10): a mid-show save keeps
       // state.broadcast live (the modal restores from activeContest's stored
       // phases), but the TV-frame CSS class is DOM-only — broadcastStart set

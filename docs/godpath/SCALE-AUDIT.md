@@ -14,8 +14,12 @@ honor the existing flags. NPC Voice collapse now includes the player's full
 lost action. Prepared runtime/phone and standard-cohort limitations are in
 ../../evidence/2026-10-16/god-support-audit.md. The subsequent
 ../../evidence/2026-10-16/player-command-audit.md proves tactical player
-command handoffs and class broadcast/aura recipients. Daily Voice support,
-NPC grounding cost parity and broader forty-context proof remain open.
+command handoffs and class broadcast/aura recipients. The later
+../../evidence/2026-10-16/daily-voice-audit.md proves the player's finite daily
+rally; grounding-audit.md proves actual NPC speaker cost and personal meters.
+Broader forty-context proof and full NPC social/food-conversion parity remain
+open. These focused repairs do not establish natural campaign usefulness in
+every promised context.
 
 All named functions below are in src/js/godverbs.js unless another module is
 named. **Inherited** means a shared tactical fight hook can apply to coalition

@@ -315,6 +315,18 @@ intent awaiting receipt wiring. The player feasted multiplier is an existing
 consumer; full NPC feast/social effects are not implemented by the personal
 counter. See ../evidence/2026-10-16/grounding-audit.md and SURVIVAL-LEVERS.md.
 
+Fraying follow-up,2026-10-16: the existing downward crossing into fraying
+now applies its -2 trust to each distinct known living other current resident,
+instead of a phantom null person. Re-entering that tier can charge again;
+remaining in it, recovery and loading do not charge. This crossing interpretation
+is marked needs-eyes; the conversation-open/estranged/hollow mechanics below
+remain design intent beyond the current tier dialogue and food multipliers.
+NPC grounding still has no invented penalty to the bearer's standing.
+Loading removes only the old reserved `trust.null` entry, without replaying a
+crossing or changing real stored relationships. The existing event mean then
+reads the remaining map normally; its broader historical membership semantics
+are unchanged. Evidence: ../evidence/2026-10-16/fraying-audit.md.
+
 **Tiers and mechanical effects** (not flavor):
 - 100–75 GROUNDED: full food conversions. Villagers easy around you.
 - 74–50 FRAYING: food conversions ×0.9 (feastedMult × 0.9 — the dark

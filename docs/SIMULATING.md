@@ -316,6 +316,14 @@ parity remains open.
 
 ## Maintaining measurement
 
+Fraying trust upkeep: `scripts/godpath/test-fraying-trust.js` runs in quick/full.
+Keep actual paid Voice boundaries, per-resident eligibility, same-band/retry/
+recovery behavior and real old-save load/roundtrip checks together. Do not
+retroactively charge a loaded bearer or broaden the reserved-key migration
+into a rewrite of real relationship history. The dated fraying audit reuses
+only original-control jobs with an exact before-root source-manifest match;
+candidate policies/observer/contract stay identical.
+
 Strategy experiments on one source: use `scripts/policy-scorecard.js` with
 explicit control:candidate pairs. It keeps the23 existing metric contracts,
 requires complete same-source panels, passing neutrality and no warnings,

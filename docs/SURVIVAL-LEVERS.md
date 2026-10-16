@@ -61,6 +61,21 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Fraying social price (2026-10-16): retain the repair of the existing -2 tier
+crossing reaction to distinct living other current residents, plus null-ID
+guard and reserved-key load cleanup. This is a needs-eyes interpretation of
+the old null recipient, not an added ongoing conversation tax. Never charge
+old saves retroactively. In64 disjoint cases per policy, wins51→48 /20→21 /
+26→26 /31→31; deaths86→86 /83→86 /59→52 /41→43; community losses12→12 /
+26→24 /27→26 /19→16. Capable invitation/entry warnings remain for review.
+Maker loses one contest/show gear case; merchant loses one named-class case.
+Overall good-gear access and early bearer survival are unchanged, but caregiver
+low-food/HP exposure rises slightly. Do not cancel those directions with fewer
+community losses or tune to regain wins. Full23-metric reports, changed-ending
+replays, legacy-save boundaries and UI-readout limits:
+../evidence/2026-10-16/fraying-audit.md. NPC social parity and conversation
+effects remain separate work.
+
 Voice preparation strategy (2026-10-16): no game lever changes. Named opt-in
 cohorts keep40%/500kcal and75 humanity after the word, decline zero ordinary
 trust benefit at90+, and can pay before a chosen visible encounter. These
