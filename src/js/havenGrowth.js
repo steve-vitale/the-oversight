@@ -297,8 +297,30 @@
         const speaker = roster[Math.floor(R() * roster.length)];
         let listener = roster[Math.floor(R() * roster.length)];
         if (listener === speaker) listener = roster[(roster.indexOf(speaker) + 1) % roster.length];
-        const sName = String(this.displayName(speaker)).split(' ')[0];
-        const lName = String(this.displayName(listener)).split(' ')[0];
+        // Person reference that never collapses an unknown villager to "A"
+        // and never writes state. Name-known/post-System → first name.
+        // Unknown → the FULL descriptor, unsplit (knowledge-gating: what the
+        // player would actually perceive — "If you don't know, it doesn't
+        // show"). 2026-10-16 sim-villagevoice finding: the old
+        // split(' ')[0] turned "A woman, maybe 40s, with a shaved head"
+        // into "A". (Game.firstRef was tried first — its whoTag path calls
+        // journalPerson, which CREATES state.codex.people stubs: a render
+        // writing state, caught by the det-gate. personDescriptor is
+        // render-pure; its personLooks memo is shared with the old path.)
+        const refOf = (vid) => {
+          try {
+            if (this.state.systemArrived || this.nameKnown(vid)) {
+              return String(this.npcName(vid)).split(' ')[0];
+            }
+          } catch (e) {}
+          try { return this.personDescriptor(vid); } catch (e) {}
+          return 'someone';
+        };
+        const sName = refOf(speaker);
+        let lName = refOf(listener);
+        // Mid-sentence the descriptor's leading "A" reads wrong ("to A
+        // woman") — lowercase it in the listener slot.
+        if (/^A /.test(lName)) lName = 'a' + lName.slice(1);
         const fmt = (n) => Math.round(n).toLocaleString();
         let line = '';
         if (m.key === 'food') line = `"The pantry's the thing. We don't raise ${next.name} on empty shelves — ${fmt(m.have)} of ${fmt(m.req)} kcal."`;
