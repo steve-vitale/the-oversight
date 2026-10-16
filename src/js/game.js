@@ -31680,7 +31680,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // the gamblers react, style points are tracked. Combat becomes a show.
     sysSay(text) {
       if (!this.state.systemArrived) return;
-      this.say(`📺 SYSTEM: "${text}"`);
+      // SINGLE-PREFIX (journey-establishment r10 2026-10-16): the "📺 SYSTEM:"
+      // wrapper already marks the voice — a leading 📺 in the text doubled it
+      // (the pilot episode rendered as 📺 SYSTEM: "📺 Ahem. Testing...").
+      // Strip one leading 📺 for display only; the voice lookup below still
+      // receives the original text so pre-generated MP3 matching is unchanged.
+      const shown = String(text == null ? '' : text).replace(/^📺\s*/, '');
+      this.say(`📺 SYSTEM: "${shown}"`);
       // SYSTEM VOICE (Steve 2026-10-12): the System's fixed ElevenLabs line
       // plays when this exact text has a pre-generated MP3. Fire-and-forget:
       // the text never waits on audio, and text without a twin stays silent.
