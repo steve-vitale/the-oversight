@@ -376,9 +376,19 @@ console.log('== KINDS ==');
     // trickLog performance recording (known trick still logs the performance)
     mkfight('sunback');
     Game.state.monsterCounters = { sunback: true };
-    Game.tbfight.trickLog = [];
+    Game.tbfight.trickLogByMid = {};
     Game.checkMonsterCounter('sunback', { type: 'move', windup: true, via: 'trick' });
-    res.trickLogKnown = (Game.tbfight.trickLog || []).join(',');
+    res.trickLogKnown = ((Game.tbfight.trickLogByMid || {}).sunback || []).join(',');
+    // per-monster isolation: a trick on one species must not attribute to another's kill
+    mkfight('sunback');
+    Game.state.monsterCounters = {};
+    Game.tbfight.fighters.push({ key: 'm_1', kind: 'monster', alive: true, mdef: Game.data.monsters.find(m => m.id === 'dustboar'), telegraph: null });
+    Game.tbfight.trickLogByMid = {};
+    Game.checkMonsterCounter('sunback', { type: 'move', windup: true, via: 'trick' });
+    res.perMidSunback = ((Game.tbfight.trickLogByMid || {}).sunback || []).join(',');
+    res.perMidDustboar = ((Game.tbfight.trickLogByMid || {}).dustboar || []).join(',');
+    res.sumFor = Game.trickSummaryFor(Game.tbfight, 'sunback');
+    res.sumForOther = Game.trickSummaryFor(Game.tbfight, 'dustboar');
     Game.tbfight = null;
     out.r = res;
   `);
@@ -388,7 +398,9 @@ console.log('== KINDS ==');
   ok(r.faceHit === true && r.faceKnown === true, 'face_it (sweeps_week): backing away discovers');
   ok(r.faceApproach === false, 'face_it: approaching does NOT discover');
   ok(r.eyesHit === true && r.eyesKnown === true, 'eyes (cliffhanger): strike-on-lunge discovers');
-  ok(r.trickLogKnown === 'blindside', `f.trickLog records the performance even when known (got '${r.trickLogKnown}')`);
+  ok(r.trickLogKnown === 'blindside', `f.trickLogByMid records the performance even when known (got '${r.trickLogKnown}')`);
+  ok(r.perMidSunback === 'blindside' && r.perMidDustboar === '' && r.sumFor === 'blindside' && r.sumForOther === null,
+    'per-monster attribution: sunback trick does not leak to dustboar kill');
 }
 
 // ---------- TBATTR ----------
