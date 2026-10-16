@@ -125,7 +125,15 @@ function withRand(seq, fn) { let i = 0; Math.random = () => (i < seq.length ? se
     const s = fresh();
     Game.learnRecipe('minnow_trap', 3); Game.learnRecipe('fish_weir', 3);
     Game.playerTile().type = 'forest_floor';
-    craftOk('minnow_trap');
+    // Test placement, not the85% crafting roll: two paid failures can spend
+    // all6 fixture branches before a trap exists. Make one real trap with
+    // a controlled successful roll, and prove its actual material/time price.
+    const branches = () => s.inventory.filter(i => i.material === 'branch').reduce((n, i) => n + i.units, 0);
+    const b0 = branches(), ticks0 = s.dayTicks || 0;
+    const made = withRand([0], () => Game.craft('minnow_trap')); say();
+    ok('dry-land fixture actually crafts a minnow trap', !!made && (s.tools || []).some(t => t.recipeId === 'minnow_trap'));
+    ok('minnow fixture pays three branches', branches() === b0 - 3);
+    ok('minnow fixture pays crafting time', (s.dayTicks || 0) - ticks0 === 32);
     const r1 = Game.setTrap('minnow_trap'); const m1 = say();
     ok('minnow trap refused on dry land', r1 === null && /needs water/i.test(m1), m1.slice(0, 80));
     Game.playerTile().type = 'creek';

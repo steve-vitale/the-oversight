@@ -76,10 +76,12 @@ self aliases cannot receive their own ally effect. Runtime/phone and matched
 campaign evidence: ../evidence/2026-10-16/god-support-audit.md. That passive
 repair left active commands and class broadcast/aura for the follow-up above;
 the broader support roadmap remains open.
-The same audit retains a legacy-test isolation debt: hunter-ecology's minnow
-setup can exhaust its branches before the gate assertion. Four deterministic
-seeds reproduce it identically before/after; preserve the assertion and fix
-the setup in its own test-maintenance unit rather than hiding a red result.
+Hunter-ecology's minnow fixture debt is now repaired separately. The real
+successful craft is controlled and its three-branch/32-tick costs are asserted
+before the unchanged dry-land gate check. All four formerly failing seeds pass;
+disabling the actual water guard still fails the placement assertion. See
+../evidence/2026-10-16/minnow-fixture-audit.md for source-bound replay and mutation
+control. No gameplay rule or assertion was loosened, and no test quarantined.
 
 NPC measurement eligibility (2026-10-16): the balanced observer now correlates
 NPC class/god records with a known living resident other than the current
