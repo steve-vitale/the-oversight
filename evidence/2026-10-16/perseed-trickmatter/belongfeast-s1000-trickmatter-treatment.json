@@ -1,0 +1,78 @@
+{
+ "seed": 1000,
+ "policyId": "belongfeast",
+ "arm": "trickmatter",
+ "armId": "treatment",
+ "fightopen": 1,
+ "fightopenSelective": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1 + FIGHTOPEN_SELECTIVE=1",
+ "days": 161,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 49,
+ "fieldDeaths": 38,
+ "playerDeaths": 11,
+ "deathCauses": {
+  "villager combat": 13,
+  "expedition": 2,
+  "monster": 10,
+  "combat": 22,
+  "contest": 2
+ },
+ "trickTally": {
+  "farewell": 7,
+  "wait:spool-record": 3,
+  "shout": 2
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "nielsen": 1
+ },
+ "nNodeWitnessDiscovered": 0,
+ "nodeWitnessDiscovered": [],
+ "nFieldFights": 244,
+ "nTbFights": 30,
+ "nWaveKillTricks": 6,
+ "witnessLearnings": [
+  {
+   "learnId": "L208-nielsen",
+   "seq": 208,
+   "day": 130,
+   "id": "nielsen",
+   "trick": "nielsen",
+   "trickText": "Fight boring",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:nielsen-boring"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L208-nielsen",
+   "day": 130,
+   "id": "nielsen",
+   "trick": "nielsen",
+   "wave": 5,
+   "via": "observed",
+   "witnessSourced": "shared",
+   "verdict": "no-opportunity",
+   "summary": {},
+   "execs": 0,
+   "fights": [],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

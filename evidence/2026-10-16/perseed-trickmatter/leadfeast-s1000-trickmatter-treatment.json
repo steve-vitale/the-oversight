@@ -1,0 +1,126 @@
+{
+ "seed": 1000,
+ "policyId": "leadfeast",
+ "arm": "trickmatter",
+ "armId": "treatment",
+ "fightopen": 1,
+ "fightopenSelective": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1 + FIGHTOPEN_SELECTIVE=1",
+ "days": 142,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 48,
+ "fieldDeaths": 39,
+ "playerDeaths": 9,
+ "deathCauses": {
+  "villager combat": 12,
+  "combat": 26,
+  "expedition": 1,
+  "a wound that wouldn't close": 1,
+  "monster": 7,
+  "sickness": 1
+ },
+ "trickTally": {
+  "examine": 24,
+  "farewell": 4,
+  "wait:nielsen-boring": 3
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "nielsen": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 123,
+   "id": "nielsen"
+  }
+ ],
+ "nFieldFights": 187,
+ "nTbFights": 30,
+ "nWaveKillTricks": 2,
+ "witnessLearnings": [
+  {
+   "learnId": "L196-nielsen",
+   "seq": 196,
+   "day": 123,
+   "id": "nielsen",
+   "trick": "nielsen",
+   "trickText": "Fight boring",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:nielsen-boring"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L196-nielsen",
+   "day": 123,
+   "id": "nielsen",
+   "trick": "nielsen",
+   "wave": 5,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 1,
+    "trick fired but failed": 1
+   },
+   "execs": 2,
+   "fights": [
+    {
+     "seq": 197,
+     "day": 123,
+     "path": "field",
+     "vid": "omar_farouk",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "wait:nielsen-boring",
+      "wait:nielsen-boring"
+     ],
+     "evals": 2,
+     "fires": 2,
+     "firedTokens": [
+      "wait:nielsen-boring",
+      "wait:nielsen-boring"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 199,
+     "day": 124,
+     "path": "field",
+     "vid": "omar_farouk",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:nielsen-boring"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:nielsen-boring"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

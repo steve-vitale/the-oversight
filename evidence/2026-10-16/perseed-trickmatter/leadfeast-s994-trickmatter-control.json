@@ -1,0 +1,78 @@
+{
+ "seed": 994,
+ "policyId": "leadfeast",
+ "arm": "trickmatter",
+ "armId": "control",
+ "fightopen": 1,
+ "fightopenSelective": 0,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1",
+ "days": 180,
+ "endReason": "survived",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 56,
+ "fieldDeaths": 55,
+ "playerDeaths": 1,
+ "deathCauses": {
+  "villager combat": 5,
+  "combat": 26,
+  "monster": 2,
+  "sickness": 2,
+  "a wound that wouldn't close": 2,
+  "expedition": 19
+ },
+ "trickTally": {
+  "shout": 4,
+  "wait:redactor-quiet": 3
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "spool": 1
+ },
+ "nNodeWitnessDiscovered": 0,
+ "nodeWitnessDiscovered": [],
+ "nFieldFights": 208,
+ "nTbFights": 11,
+ "nWaveKillTricks": 10,
+ "witnessLearnings": [
+  {
+   "learnId": "L216-spool",
+   "seq": 216,
+   "day": 179,
+   "id": "spool",
+   "trick": "spool",
+   "trickText": "Feed it nothing",
+   "wave": 3,
+   "store": "villagerTricks",
+   "via": "observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:spool-record"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L216-spool",
+   "day": 179,
+   "id": "spool",
+   "trick": "spool",
+   "wave": 3,
+   "via": "observed",
+   "witnessSourced": "shared",
+   "verdict": "no-opportunity",
+   "summary": {},
+   "execs": 0,
+   "fights": [],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

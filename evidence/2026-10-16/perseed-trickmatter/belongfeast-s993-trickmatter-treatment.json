@@ -1,0 +1,202 @@
+{
+ "seed": 993,
+ "policyId": "belongfeast",
+ "arm": "trickmatter",
+ "armId": "treatment",
+ "fightopen": 1,
+ "fightopenSelective": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1 + FIGHTOPEN_SELECTIVE=1",
+ "days": 146,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 46,
+ "fieldDeaths": 37,
+ "playerDeaths": 9,
+ "deathCauses": {
+  "villager combat": 10,
+  "monster": 8,
+  "combat": 26,
+  "dehydration": 1,
+  "contest": 1
+ },
+ "trickTally": {
+  "examine": 14,
+  "farewell": 21,
+  "wait:redactor-quiet": 5,
+  "wait:spool-record": 12
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "spool": 1
+ },
+ "nNodeWitnessDiscovered": 0,
+ "nodeWitnessDiscovered": [],
+ "nFieldFights": 166,
+ "nTbFights": 29,
+ "nWaveKillTricks": 2,
+ "witnessLearnings": [
+  {
+   "learnId": "L161-spool",
+   "seq": 161,
+   "day": 119,
+   "id": "spool",
+   "trick": "spool",
+   "trickText": "Feed it nothing",
+   "wave": 3,
+   "store": "villagerTricks",
+   "via": "observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:spool-record"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L161-spool",
+   "day": 119,
+   "id": "spool",
+   "trick": "spool",
+   "wave": 3,
+   "via": "observed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 6
+   },
+   "execs": 6,
+   "fights": [
+    {
+     "seq": 162,
+     "day": 119,
+     "path": "field",
+     "vid": "visjoin_88",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:spool-record"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:spool-record"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 163,
+     "day": 119,
+     "path": "field",
+     "vid": "visjoin_88",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:spool-record"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:spool-record"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 165,
+     "day": 120,
+     "path": "field",
+     "vid": "visjoin_112",
+     "outcome": "vFlee",
+     "rounds": 5,
+     "trickLog": [
+      "wait:spool-record",
+      "wait:spool-record",
+      "wait:spool-record"
+     ],
+     "evals": 5,
+     "fires": 3,
+     "firedTokens": [
+      "wait:spool-record",
+      "wait:spool-record",
+      "wait:spool-record"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 166,
+     "day": 120,
+     "path": "field",
+     "vid": "visjoin_112",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:spool-record"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:spool-record"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 168,
+     "day": 123,
+     "path": "field",
+     "vid": "visjoin_112",
+     "outcome": "vFlee",
+     "rounds": 5,
+     "trickLog": [
+      "wait:spool-record",
+      "wait:spool-record",
+      "wait:spool-record"
+     ],
+     "evals": 5,
+     "fires": 3,
+     "firedTokens": [
+      "wait:spool-record",
+      "wait:spool-record",
+      "wait:spool-record"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 171,
+     "day": 129,
+     "path": "field",
+     "vid": "visjoin_112",
+     "outcome": "vFlee",
+     "rounds": 4,
+     "trickLog": [
+      "wait:spool-record",
+      "wait:spool-record",
+      "wait:spool-record"
+     ],
+     "evals": 4,
+     "fires": 3,
+     "firedTokens": [
+      "wait:spool-record",
+      "wait:spool-record",
+      "wait:spool-record"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

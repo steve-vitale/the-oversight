@@ -1,0 +1,324 @@
+{
+ "seed": 990,
+ "policyId": "leadfeast",
+ "arm": "trickmatter",
+ "armId": "treatment",
+ "fightopen": 1,
+ "fightopenSelective": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1 + FIGHTOPEN_SELECTIVE=1",
+ "days": 180,
+ "endReason": "survived",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 62,
+ "fieldDeaths": 58,
+ "playerDeaths": 4,
+ "deathCauses": {
+  "villager combat": 13,
+  "combat": 34,
+  "monster": 9,
+  "expedition": 5,
+  "contest": 1
+ },
+ "trickTally": {
+  "wait:spool-record": 19,
+  "farewell": 10,
+  "wait:redactor-quiet": 80,
+  "shout": 4,
+  "wait:buffering-still": 60,
+  "examine": 4
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "buffering": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 109,
+   "id": "buffering"
+  }
+ ],
+ "nFieldFights": 472,
+ "nTbFights": 24,
+ "nWaveKillTricks": 9,
+ "witnessLearnings": [
+  {
+   "learnId": "L269-buffering",
+   "seq": 269,
+   "day": 109,
+   "id": "buffering",
+   "trick": "buffering",
+   "trickText": "Stand still",
+   "wave": 3,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:buffering-still"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L269-buffering",
+   "day": 109,
+   "id": "buffering",
+   "trick": "buffering",
+   "wave": 3,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 6,
+    "trick fired but failed": 1,
+    "tb-n/a": 2
+   },
+   "execs": 7,
+   "fights": [
+    {
+     "seq": 270,
+     "day": 109,
+     "path": "field",
+     "vid": "gen_g89hhfg",
+     "outcome": "vFlee",
+     "rounds": 15,
+     "trickLog": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "evals": 15,
+     "fires": 14,
+     "firedTokens": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 271,
+     "day": 109,
+     "path": "field",
+     "vid": "gen_g89hhfg",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:buffering-still"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:buffering-still"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 281,
+     "day": 116,
+     "path": "field",
+     "vid": "gen_g89hhfg",
+     "outcome": "vFlee",
+     "rounds": 15,
+     "trickLog": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "evals": 15,
+     "fires": 15,
+     "firedTokens": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 302,
+     "day": 123,
+     "path": "field",
+     "vid": "xavier_dubois",
+     "outcome": "vFlee",
+     "rounds": 15,
+     "trickLog": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "evals": 15,
+     "fires": 14,
+     "firedTokens": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 379,
+     "day": 147,
+     "path": "field",
+     "vid": "thabo_maseko",
+     "outcome": "mFlee",
+     "rounds": 15,
+     "trickLog": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "evals": 15,
+     "fires": 14,
+     "firedTokens": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 421,
+     "day": 157,
+     "path": "field",
+     "vid": "gen_b8hp95j",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:buffering-still"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:buffering-still"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    },
+    {
+     "seq": 432,
+     "day": 159,
+     "path": "field",
+     "vid": "xavier_dubois",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:buffering-still"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:buffering-still"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 304,
+     "day": 124,
+     "path": "tb",
+     "result": "won",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 460,
+     "day": 171,
+     "path": "tb",
+     "result": "routed",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 1
+}

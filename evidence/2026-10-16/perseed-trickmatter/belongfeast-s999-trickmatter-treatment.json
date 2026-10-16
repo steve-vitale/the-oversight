@@ -1,0 +1,95 @@
+{
+ "seed": 999,
+ "policyId": "belongfeast",
+ "arm": "trickmatter",
+ "armId": "treatment",
+ "fightopen": 1,
+ "fightopenSelective": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1 + FIGHTOPEN_SELECTIVE=1",
+ "days": 180,
+ "endReason": "survived",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 43,
+ "fieldDeaths": 31,
+ "playerDeaths": 12,
+ "deathCauses": {
+  "combat": 29,
+  "villager combat": 7,
+  "expedition": 4,
+  "a wound that wouldn't close": 1,
+  "monster": 1,
+  "dehydration": 1
+ },
+ "trickTally": {
+  "farewell": 4,
+  "wait:redactor-quiet": 6
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "spool": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 97,
+   "id": "spool"
+  }
+ ],
+ "nFieldFights": 205,
+ "nTbFights": 37,
+ "nWaveKillTricks": 2,
+ "witnessLearnings": [
+  {
+   "learnId": "L129-spool",
+   "seq": 129,
+   "day": 97,
+   "id": "spool",
+   "trick": "spool",
+   "trickText": "Feed it nothing",
+   "wave": 3,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:spool-record"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L129-spool",
+   "day": 97,
+   "id": "spool",
+   "trick": "spool",
+   "wave": 3,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "tb-n/a": 1
+   },
+   "execs": 0,
+   "fights": [],
+   "tbFights": [
+    {
+     "seq": 132,
+     "day": 98,
+     "path": "tb",
+     "result": "won",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 1
+}
