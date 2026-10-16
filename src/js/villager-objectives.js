@@ -1076,6 +1076,23 @@
         // in the pantry as safe food (only known-safe meat was hauled), and
         // the village eats it through the normal meal system — closing the
         // loop the r12 run showed rotting open.
+        // HAUL-UNREVEALED (Steve 2026-10-16): unknown flesh arrives as
+        // 0-kcal testable items, NOT as pantry kcal. The knowledge law holds:
+        // it is not food until someone runs the cautious test.
+        var hu = null;
+        try { hu = ho.haulUnknown || null; ho.haulUnknown = null; } catch (e) {}
+        if (hu && hu.length) {
+          var vv = this.state.village;
+          vv.pantry = vv.pantry || [];
+          for (var hui = 0; hui < hu.length; hui++) {
+            var hup = hu[hui];
+            var hexist = (this.stacksMatch && vv.pantry.find(function (p) { return this.stacksMatch(p, hup); }.bind(this))) || null;
+            if (hexist) hexist.units = (hexist.units || 1) + (hup.units || 1);
+            else vv.pantry.push(hup);
+          }
+          if (playerAtHaven) this.say(`🥩 ${nm} is back with strange meat: unknown flesh in the pantry. "Test it cautiously before anyone eats."`);
+          try { this.bumpTrust(vid, 1); } catch (e) {}
+        }
         var hk = 0, hn = 'Hauled meat';
         try {
           var ho = this.objOf(vid);

@@ -320,7 +320,10 @@
         } catch (e) {}
         if (!corpse) continue;
         if (!this.mapmemMeatItem(corpse)) continue;
-        if (!this.mapmemFoodKnown(corpse)) continue;
+        // HAUL-UNREVEALED (Steve 2026-10-16): no mapmemFoodKnown gate here.
+        // Villagers target unknown flesh too — the knowledge law gates eating,
+        // not hauling. (The at-the-body check in mapmemHaulAt handles the
+        // unknown-flesh path.)
         var daysLeft = Math.max(0, s.spoilBy - day);
         var urgency = 1 + 2 * (1 - Math.min(1, daysLeft / 3)); // spoiling tomorrow ≈ 3x
         var score = (s.estKcal * urgency) / (1 + dist);
@@ -363,9 +366,43 @@
         o.state = 'returning'; return false;
       }
       if (!this.mapmemFoodKnown(corpse)) {
-        // learned since the memory was written? re-check at the body.
-        if (playerHere) this.say(`🥩 ${nm} looks the carcass over and backs off. "Don't know what that is. Not risking it."`);
-        o.state = 'returning'; return false;
+        // HAUL-UNREVEALED (Steve 2026-10-16): villagers haul unknown flesh.
+        // The knowledge law still gates EATING (0 kcal, not edible until
+        // tested) — but transport is not consumption. The hauled flesh
+        // arrives as "unknown flesh" and the cautious-test loop
+        // (testMonsterMeat) is how it gets revealed — the same try/test/
+        // reveal loop as every other food. "How else do they get it to
+        // revealed?" — by bringing it home and trying it.
+        var umid = corpse.monsterId || null;
+        var ugross = meat.hiddenKcal || 0;
+        var unet = Math.round(ugross * HAUL_YIELD);
+        var uunits = Math.max(1, Math.round(unet / 500));
+        var uper = Math.round(unet / uunits);
+        var uitem = {
+          name: 'Unknown flesh',
+          foodKind: 'meat', foodState: 'cleaned',
+          plantId: umid ? ('meat_' + umid) : 'meat_unknown',
+          edible: false, kcalEach: 0, hiddenKcal: ugross,
+          units: uunits, unit: 'portion',
+          kg: Math.max(0.01, (Number(meat.kg) || 0.5) * HAUL_YIELD),
+          prep: '⚠️ Unknown flesh. You have no idea if this is food or poison. Test it cautiously, or ask someone who knows.',
+          diseaseRisk: 'rawMeat',
+        };
+        meat.units = 0; // taken
+        var uemptied = !(corpse.items || []).some(function (it) { return (it.units == null ? 1 : it.units) > 0; });
+        if (uemptied) corpse.looted = true;
+        o.haulUnknown = [uitem];
+        o.haulName = (o.haulLabel || 'Strange meat');
+        o.state = 'returning';
+        try {
+          var umem = this.mapmemOf(vid);
+          umem.sites = umem.sites.filter(function (s) { return s.ref !== corpse.id; });
+        } catch (e) {}
+        if (playerHere) {
+          this.say(`🥩 ${nm} works the carcass over, wrapping the strange meat. "Don't know what this is. Someone at the fire will — or we'll learn the hard way." (Unknown flesh, heading home.)`);
+        }
+        try { this.bumpTrust(vid, 1); } catch (e) {}
+        return true;
       }
       var gross = meat.hiddenKcal || 0;
       var net = Math.round(gross * HAUL_YIELD);
