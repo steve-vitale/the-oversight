@@ -33,7 +33,10 @@ function mulberry32(a) {
 }
 Math.random = mulberry32(12012);
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\\\"]*\\.js' index.html | head -80", { cwd: ROOT }).toString().split('\n')
+// (2026-10-16) load the FULL index.html script list per the AGENTS.md harness
+// standard -- head -80 went stale when shelter.js landed, pushing table-feared.js
+// to #81 and hiding Game.tableTrialResume from this harness.
+const order = execSync("grep -o 'src/js/[^\\\"]*\\.js' index.html ", { cwd: ROOT }).toString().split('\n')
   .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
 global.window = global;
 global.document = { getElementById: () => null, createElement: () => ({ textContent: '', innerHTML: '', style: {}, setAttribute() {}, appendChild() {} }), head: { appendChild() {} }, body: {} };
