@@ -1,0 +1,171 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 512 ticks to dawn.":
+  - text: day 85 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: Winter · Eastern Woodlands
+  - 'generic "The day''s budget: 0 of 512 used. Everything you do costs a little of the day."':
+    - generic: 512 left today
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: 🛏️
+  - text: Greta
+  - generic: 🛏️
+  - generic: ⬛
+  - generic: ⬛
+  - text: Daniyar
+  - generic: ⬛
+  - generic: ⬛
+  - text: Olivia
+  - text: Stella
+  - text: Brooklyn
+  - generic: ⬛
+  - generic: ⬛
+  - generic: 🔥
+  - text: Laura
+  - text: Quinn
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - text: Mia
+  - text: Esteban
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - text: Jayden
+  - text: Marta
+  - text: Dmitri
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - generic: ⬛
+  - button "👁 Haven · Haven home Stella — They are by the fire, watching it. ▾ details":
+    - generic: 👁 Haven · Haven
+    - generic: home
+    - text: Stella — They are by the fire, watching it.
+    - generic: ▾ details
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - generic "Tap for full map": 📍 Haven
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - generic: "nearby:"
+  - button "Talk ↖"
+  - button "Warm hands ↙"
+  - generic: ⚡
+  - button "⚡ Field Dress — Break down a carcass into usable meat plus hide, sinew, bone. Your Field Dressing skill wastes less of the carcass — this is the deliberate work of breaking it down. (40 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder" [disabled]
+  - button "⚡ Read the Beast — Study an animal. Learn if it's hungry, afraid, aggressive, or sick. (80 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"
+  - button "⚡ Field Medicinesustain — Heal 20 HP (real wounds — Price cuts are missing mass, knit ~10/night). Once per day part. (140 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder" [disabled]
+  - generic: — DAY 1 DAWN — The world wakes. Animals are active.
+  - generic "Health":
+    - generic: ❤ 100
+  - generic "Food (you)":
+    - generic: 🍽 2400/2400 kcal
+  - generic "Hydration":
+    - generic: 💧 100%
+  - 'generic "Pack: 0 kcal carried"':
+    - generic: 🎒 1/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "🎒 Pack"
+  - button "🧬 You"
+  - button "😴 Sleep"
+  - button "⏳ Wait"
+  - button "🗺️ Map"
+  - button "settings": ⚙️
+  - heading "🏠 HAVEN — 12 souls" [level=3]
+  - paragraph: Morning in Haven. Twelve people, one fire, no plan beyond today.
+  - paragraph: "Pantry: 100.0 Mcal (about 4 days at this burn)"
+  - paragraph: "💧 Water: 25L clean / 0L dirty"
+  - button "Take from pantry"
+  - paragraph: 📦 Village stash (counted carefully. trust is thin here)
+  - generic: Wood log — 0 in stash
+  - generic: Branch — 0 in stash
+  - generic: Stone — 0 in stash
+  - generic: Plant fiber — 0 in stash
+  - generic: Cloth — 0 in stash
+  - generic: Charcoal — 0 in stash
+  - generic: Wooden cup — 0 in stash
+  - generic: Stick — 0 in stash
+  - generic: Vine — 0 in stash
+  - generic: Bark strip — 0 in stash
+  - generic: Rawhide — 0 in stash
+  - paragraph: "🔧 Spare tools: no spare tools"
+  - paragraph: "⚔️ Armory: no weapons"
+  - paragraph: "💊 Pharmacy: no medicine"
+  - paragraph: Nothing yet. The stash is new.
+  - button "📍 Caches"
+  - button "🍖 Host a feast (4,800 kcal)"
+  - paragraph:
+    - text: 😴 the hall floor · +30 health · energy restored
+    - text: By the fire. Good enough.
+  - paragraph:
+    - text: "🏠 Membership: 12/12 housed · ⚠ FULL"
+    - text: "Membership means: Pantry share · Codex · \"One of ours\" · Cast"
+  - heading "🛖 Haven growth — Haven (cap 12)" [level=3]
+  - paragraph: A camp with a name. Twelve mouths, one fire.
+  - paragraph: "Next: The Longhouse (cap 16)"
+  - generic: "food stored: 100,000 / 8,000 ✓"
+  - generic: "wood: 10 / 12"
+  - paragraph:
+    - text: Population cap 16 — four more mouths under the roof.
+    - text: "Longhouse hearth: village meals stretch 10% further (less food burned daily)."
+    - text: Pantry capacity +25% — room for the bigger village.
+  - button "🔨 Build shelter (+2, 10 wood)"
+  - paragraph: 12 mouths need 800/day · the village brings in 0 · shortfall 800/day
+  - paragraph: "Haven survives when: Codex 10 (5) · Pantry 8.0 Mcal+ (100.0 Mcal)"
+  - paragraph: Tap a person in the grid to talk. They're living their lives.
+  - paragraph: 🟢 Brooklyn Kelleher — Veterinarian (100)
+  - paragraph: 🟢 Stella — mechanic (100)
+  - paragraph: 🟢 Jayden — exterminator (100)
+  - paragraph: 🟢 Marta — roofer (100)
+  - paragraph: 🟢 Laura — Chef (100)
+  - paragraph: 🟢 Esteban — plumber (100)
+  - paragraph: 🟢 Daniyar — paramedic (100)
+  - paragraph: 🟢 Olivia — Social worker (100)
+  - paragraph: 🟢 Dmitri — appliance repair tech (100)
+  - paragraph: 🟢 Mia — community gardener (100)
+  - paragraph: 🟢 Quinn — bartender (100)
+  - paragraph: 🟢 Greta — Sailor (100)
+  - paragraph: "Also here:"
+  - paragraph: 📋 No one assigned. Tap a person → Assign task to direct them.
+  - button "Codex (5)"
+- generic "Prepared proof controls"
+- paragraph: Prepared harvest/knowledge and known12400kcal army plan; exact strategy preparation helper, ordinary public verbs. No natural acquisition or campaign completion claim.
+- button "Prepare counter harvest"
+- button "Run known army preparation"
+- button "Read proof state" [active]
+- button "Save and load proof"
+- generic: "{ \"day\": 85, \"ticks\": 0, \"pack\": [ { \"plantId\": null, \"lumpForm\": \"nuts\", \"name\": \"unknown nuts\", \"units\": 10, \"unit\": \"handful\", \"foodKind\": \"plant\", \"foodState\": \"unknown\", \"edible\": false, \"kcalEach\": 0, \"kg\": 0.1, \"spoilDay\": 145, \"lump\": { \"hickory_nut\": { \"units\": 10, \"day\": 85, \"harvestShares\": { \"gen_c39bcce\": 1 } } }, \"prep\": \"Lumped together the way you gathered them. No telling what's what out here — sort it at camp with someone who knows plants.\" } ], \"counter\": [], \"pantry\": 100000, \"gives\": 0, \"takes\": 0, \"trust\": 20, \"strategy\": null, \"saveStatus\": \"true\" }"
+- paragraph: Food e3f373a6c0751db3f8a6c26a36af592e926c6bbd9c16eaa50339ca991e2b751f
+- paragraph: App 4c96731f8349eea7d4bd88667e2a42e75bee8ed0f25c61c43c90c3308bf8d23a

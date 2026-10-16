@@ -1,0 +1,16 @@
+check.js: 191 scripts, 4 parallel (quick)
+...........F...................................................................................................................................................................................
+
+  FAIL scripts/godpath/test-campaign-quartermaster.js (exit 1, 0.6s)
+      ok   actual known-target preparation produces carried physical food
+        ok   the strategy uses the native whole-batch pickup rather than an unexposed quantity
+        ok   shelling and pickup pay their real six ticks
+        ok   private retention neither takes nor donates communal stock
+        ok   repeated hooks do not reset the per-person/day work budget
+        ok   the published preparer still shelves the same batch for actual gift credit
+        ok   missing plan/reserve restores the ordinary sharing route
+        ok   predecessor plan/reserve restores the ordinary sharing route
+      TypeError: Cannot read properties of undefined (reading 'slain')
+          at C:\Users\Steve\oversight\scripts\godpath\test-campaign-quartermaster.js:7:230
+
+check.js: 190 passed, 1 failed in 45s

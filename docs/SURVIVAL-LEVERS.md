@@ -43,6 +43,18 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Retained army-ration strategy (2026-10-16): new opt-in campaigner-quartermaster
+uses the native whole-batch counter pickup toward its current known plan,
+with the existing village reserve and paid work.16 caller checks and full963/963
+pass. Same-source16/64 comparison retains all23 metrics: screen wins10->11,
+holdout49->46, Table entries50->47 and community losses13->16. One real natural
+Herald victory occurs in holdout10062 with18 named allies on round22; Finale/
+Network remains open. Use report fights/resolved, not the explicit-approach CLI
+counter (which misses movement-triggered entry). Seed2 reveals17 recruits
+exceeding its minimum-force food budget; native refusal exposes imperfect sorter
+choice. Keep the strategy experimental. Source/rebuild/controls/diagnosis:
+../evidence/2026-10-16/quartermaster-audit.md.
+
 Finished counter food pickup (2026-10-16): the actual Pack sheet now offers
 Pack food (2 ticks), moving a real finished private batch into carried rations
 without a pantry donation/withdrawal. Weight (including water/modifiers),

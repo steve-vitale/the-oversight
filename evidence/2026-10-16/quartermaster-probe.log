@@ -1,0 +1,280 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  {
+    classes: {
+      npc: [
+        'forager/gardener'
+      ],
+...
+            samplesWith: {
++             berries: 28,
+-             berries: 7,
+              ingredientSets: 0,
+              preservedMeat: 0,
+              rawFat: 0,
+              renderedFat: 0,
+              smokableMeat: 0
+...
+        renderKnownSamples: 0,
++       samples: 361
+-       samples: 91
+      },
+      recipeAccess: {
+        bark_armor: {
++         knownSamples: 358,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 1
+        },
+        cloth: {
++         knownSamples: 361,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 3
+        },
+        hunting_spear: {
++         knownSamples: 34,
+-         knownSamples: 10,
+          materialsReadySamples: 0,
+          maxLevel: 1
+        },
+        sharpened_stick: {
++         knownSamples: 34,
++         materialsReadySamples: 34,
+-         knownSamples: 10,
+-         materialsReadySamples: 10,
+          maxLevel: 1
+        },
+        snare: {
++         knownSamples: 354,
+-         knownSamples: 90,
+          materialsReadySamples: 0,
+          maxLevel: 1
+        },
+        stone_knife: {
++         knownSamples: 361,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 3
+        },
+        water_filter: {
++         knownSamples: 361,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 3
+        }
+      },
+      show: {
+...
+      goodGear: 1,
++     livingNpcs: 7.222222222222222,
+-     livingNpcs: 7.179775280898877,
+      lowFood: 0,
++     lowHealth: 0.044444444444444446,
++     lowWater: 0.011111111111111112,
+-     lowHealth: 0.0449438202247191,
+-     lowWater: 0.011235955056179775,
+      national: 1,
+      npcClassAccess: 0.045454545454545456,
++     npcHungry: 0.08461538461538462,
+-     npcHungry: 0.08607198748043818,
+      playerDeaths100Days: 0,
+      playerDeaths: 0,
+      survival30: 1,
+      survival60: 1,
+      table: 1,
+...
+          classes: [],
++         day: 1,
++         dead: [],
++         duplicateRosterEntries: 0,
++         eligible: [
++           'david_kim',
++           'gen_34g5uz6',
++           'gen_9sa6fmt',
++           'gen_iwqsmey',
++           'gen_iyzpqba',
++           'gen_z2a6hp1',
++           'katarina_novak',
++           'mia_andersson',
++           'miguel_santos',
++           'sigrun_eiriksdottir',
++           'stan_kowalski'
++         ],
++         excludedBuildRecords: {
++           classes: {},
++           gods: {}
++         },
++         gods: [],
++         unknown: []
++       },
++       {
++         bearer: 'gen_1esyub4',
++         classes: [],
+          day: 2,
+          dead: [],
+          duplicateRosterEntries: 0,
+          eligible: [
+            'david_kim',
+...
+        bearer: 'gen_1esyub4',
++       day: 1,
++       health: 100,
++       hungryNpcs: 0,
++       hydration: 100,
++       kcal: 2190,
++       knownNeeds: 11,
++       livingNpcs: 11,
++       unknownRosterPeople: 0
++     },
++     {
++       bearer: 'gen_1esyub4',
+        day: 2,
+        health: 96.61111111111111,
+        hungryNpcs: 0,
+        hydration: 36,
+        kcal: 2310,
+
+    at C:\Users\Steve\oversight\evidence\2026-10-16\quartermaster-probe.cjs:5:279
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  {
+    classes: {
+      npc: [
+        'forager/gardener'
+      ],
+...
+            samplesWith: {
++             berries: 28,
+-             berries: 7,
+              ingredientSets: 0,
+              preservedMeat: 0,
+              rawFat: 0,
+              renderedFat: 0,
+              smokableMeat: 0
+...
+        renderKnownSamples: 0,
++       samples: 361
+-       samples: 91
+      },
+      recipeAccess: {
+        bark_armor: {
++         knownSamples: 358,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 1
+        },
+        cloth: {
++         knownSamples: 361,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 3
+        },
+        hunting_spear: {
++         knownSamples: 34,
+-         knownSamples: 10,
+          materialsReadySamples: 0,
+          maxLevel: 1
+        },
+        sharpened_stick: {
++         knownSamples: 34,
++         materialsReadySamples: 34,
+-         knownSamples: 10,
+-         materialsReadySamples: 10,
+          maxLevel: 1
+        },
+        snare: {
++         knownSamples: 354,
+-         knownSamples: 90,
+          materialsReadySamples: 0,
+          maxLevel: 1
+        },
+        stone_knife: {
++         knownSamples: 361,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 3
+        },
+        water_filter: {
++         knownSamples: 361,
+-         knownSamples: 91,
+          materialsReadySamples: 0,
+          maxLevel: 3
+        }
+      },
+      show: {
+...
+      goodGear: 1,
++     livingNpcs: 7.222222222222222,
+-     livingNpcs: 7.179775280898877,
+      lowFood: 0,
++     lowHealth: 0.044444444444444446,
++     lowWater: 0.011111111111111112,
+-     lowHealth: 0.0449438202247191,
+-     lowWater: 0.011235955056179775,
+      national: 1,
+      npcClassAccess: 0.045454545454545456,
++     npcHungry: 0.08461538461538462,
+-     npcHungry: 0.08607198748043818,
+      playerDeaths100Days: 0,
+      playerDeaths: 0,
+      survival30: 1,
+      survival60: 1,
+      table: 1,
+...
+          classes: [],
++         day: 1,
++         dead: [],
++         duplicateRosterEntries: 0,
++         eligible: [
++           'david_kim',
++           'gen_34g5uz6',
++           'gen_9sa6fmt',
++           'gen_iwqsmey',
++           'gen_iyzpqba',
++           'gen_z2a6hp1',
++           'katarina_novak',
++           'mia_andersson',
++           'miguel_santos',
++           'sigrun_eiriksdottir',
++           'stan_kowalski'
++         ],
++         excludedBuildRecords: {
++           classes: {},
++           gods: {}
++         },
++         gods: [],
++         unknown: []
++       },
++       {
++         bearer: 'gen_1esyub4',
++         classes: [],
+          day: 2,
+          dead: [],
+          duplicateRosterEntries: 0,
+          eligible: [
+            'david_kim',
+...
+        bearer: 'gen_1esyub4',
++       day: 1,
++       health: 100,
++       hungryNpcs: 0,
++       hydration: 100,
++       kcal: 2190,
++       knownNeeds: 11,
++       livingNpcs: 11,
++       unknownRosterPeople: 0
++     },
++     {
++       bearer: 'gen_1esyub4',
+        day: 2,
+        health: 96.61111111111111,
+        hungryNpcs: 0,
+        hydration: 36,
+        kcal: 2310,
+
+    at C:\Users\Steve\oversight\evidence\2026-10-16\quartermaster-probe.cjs:5:279

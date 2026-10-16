@@ -156,3 +156,26 @@ merchant-hoarder and merchant-dealer inherit merchant's food, public trade, care
 Only offered or currently held magic definitions are inspected. Miser offers rank100, preferred subclass+20, payoff+4 or enabler+2; stable sheet order breaks ties. Free slots prefer the highest ranked shown Miser. Full level-up slots first replace the weakest known off-path incumbent (never the reactor), otherwise upgrade only a lower-preference Miser. A generic off-path pick that would remove earned Miser core is declined. This is a committed preference, can occupy all six slots, and has real defence/food/opportunity costs; it is not an optimal-human policy or a guarantee of the named subclass. Full gifts still obey the real swap gate.
 
 Use --policies merchant,merchant-hoarder,merchant-dealer in balance-panel or deed-screen. Compare the same policy files and flags on both game roots. For a strategy comparison on one game, keep it separately labelled; never relabel strategy change as a game-only regression. Count the Table's locked build/coda, the current bearer's class and ever-class separately: the priced frame can outlive its original bearer. Track the reactor, succession, food, community and gear sources. Share source-bound roots with Muse; the older balanced-measurement game lacks the published paid-trade/Haggle repairs and must not be treated as the same runtime.
+
+## Campaign quartermaster experiment
+
+`campaigner-quartermaster` inherits campaigner-rations and the preparer's
+bounded public sorting/shelling. With a current unfinished army plan and the
+existing nominal two-day village reserve, it packs whole safe finished counter
+batches toward that target; surplus still goes to the pantry. It pays the
+real pickup cost and retains ordinary donation/withdrawal rules. The optional
+preparePack retainKcal argument is absent for campaigner-preparer, whose
+behavior is proved unchanged. Registration adds no new default.
+
+Measure real carried food, recruited faces, daily upkeep, actual report
+`fights`/`resolved` and all23 metrics. The CLI's explicit-approach counter misses
+movement-triggered fights. One natural Herald win in64 does not establish
+Finale/Network completion or make holdout losses irrelevant. Keep the source-
+bound experiment and native sorter refusal in the dated quartermaster audit.
+
+Dependency: this strategy requires the actual `takePrepFood` runtime route
+published at abfc6d33 and its tests. Use the complete frozen source bundle to
+reproduce this evidence. When porting to Muse's different Game branch, first
+verify that public route and its real UI/capacity/save contract there, then
+collect a fresh baseline. Copying only the policy does not make older Game
+sources equivalent to this experiment.

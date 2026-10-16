@@ -396,3 +396,10 @@ public pickup and app.js counter row/handler plus shared-kit proof. No campaign
 policy, production, costs beyond the existing2-tick material-pickup convention,
 Table/army prices or Muse region/nomad changes. Measure strategy uptake as
 a separate axis after this independently sourced runtime route repair.
+
+Retained army-ration strategy (2026-10-16): Codex owns campaign-quartermaster.js,
+the opt-in preparePack retainKcal option, registration and16 actual-caller
+assertions. No Game/data/collector/default-strategy change. One natural paid
+Herald win is verified, but holdout Table/community warnings remain. Muse may
+use the named cohort and actual report fight receipts; keep its regional/nomad
+lane separate. See the dated quartermaster audit.

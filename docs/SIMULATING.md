@@ -756,3 +756,20 @@ with quoting/pipes. In the check process, put the installed Git usr/bin on
 PATH and set ComSpec to the installed Git bin/bash.exe. Do not loosen tests
 or quarantine them because cmd.exe parses those commands differently. This
 is check-runner setup, not a gameplay flag or a persistent host setting.
+
+Retained army-ration strategy (2026-10-16): compare campaigner-preparer and
+campaigner-quartermaster on one frozen source with campaign-audit, then
+campaign-scorecard --pairs campaigner-preparer:campaigner-quartermaster. The
+new helper uses only the native whole-batch pickup, not its API quantity option.
+Its16 focused assertions are automatically discovered. Retain per-person work
+budgets, actual carried kcal, village reserves, upkeep and actual recruitment
+size; lifetime packed kcal is not current army funding. See the dated
+quartermaster audit and verifier for all23 metrics, seed2 and10062 traces.
+
+Campaign coverage must use each raw report row's `fights` and `resolved` receipts
+(with their actual titan mark, allies and result). The CLI currently sums
+`campaignFightsStarted`, an explicit-approach policy counter; a fight triggered
+by movement can be absent from that convenience count. Quartermaster10062
+records an18-ally Herald entry and round22 victory while that counter prints0.
+Do not classify it as no fight, NPC kill or fabricated settlement from the
+counter alone. Preserve the frozen collector identity when comparing evidence.

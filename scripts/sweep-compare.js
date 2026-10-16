@@ -54,6 +54,7 @@ for (const id of ['capable-voice-ready', 'maker-voice-ready', 'merchant-voice-re
 for (const id of ['merchant-hoarder', 'merchant-dealer']) POLICY_REGISTRY[id] = require('./policies/miser-intent')[id];
 for (const id of ['campaigner', 'campaigner-control', 'campaigner-rations']) POLICY_REGISTRY[id] = require('./policies/campaigner')[id];
 POLICY_REGISTRY['campaigner-preparer'] = require('./policies/campaign-preparer').preparer;
+POLICY_REGISTRY['campaigner-quartermaster'] = require('./policies/campaign-quartermaster').quartermaster;
 for (const id of ['covenanter', 'charterer', 'peer-control']) POLICY_REGISTRY[id] = require('./policies/peer-league')[id];
 
 POLICY_REGISTRY['garden-feeder'] = require('./policies/garden-feeder').feeder;

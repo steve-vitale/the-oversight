@@ -3,8 +3,9 @@
 // carried/counter food, using the native stage/sort/shell/put-away sequence.
 // No hidden lump species, free stock, technique, time or contribution grants.
 const base=require('./campaigner')['campaigner-rations'];
+const rations=require('./campaign-rations');
 function available(G){const s=G.state.scholar;return !G.over&&!G.tbfight&&!G.pendingEncounter&&!G.state.activeContest&&s.kcal>=1800&&s.health>=50&&(s.dayTicks||0)<=384;}
-function preparePack(G,ctx){
+function preparePack(G,ctx,options={}){
  if(!available(G))return;
  const s=G.state.scholar,person=G.villagerId,day=s.day;
  let budget=ctx._campaignPrep;
@@ -44,8 +45,21 @@ function preparePack(G,ctx){
  const finished=stash.filter(it=>G.isFinishedFood(it)&&!G.isSpoiled(it));
  // Native put-away is bulk: do not slip a dangerous neighboring batch in.
  if(finished.length&&!finished.some(it=>it.bonded||it.safe===false||it.undercooked||it.poisonRisk||it.parasiteRisk||it.diseaseRisk||/human/i.test(String(it.plantId||'')+' '+String(it.name||'')))){
-  budget.stored=true;const before=G.pantryKcal();G.putAwayFinished();
-  ctx.campaignPrepStoredKcal=(ctx.campaignPrepStoredKcal||0)+Math.max(0,G.pantryKcal()-before);
+  budget.stored=true;
+  const retain=Number.isFinite(options.retainKcal)?Math.max(0,options.retainKcal):0;
+  if(retain>0)for(const item of finished){
+   if(!stillHere()||rations.food(G)>=retain)break;
+   const ix=stash.indexOf(item);if(ix<0)continue;
+   const before=rations.food(G);G.takePrepFood(ix); // Same whole-batch button as the native Pack sheet.
+   const gained=Math.max(0,rations.food(G)-before);
+   if(gained){ctx.campaignPrepPickups=(ctx.campaignPrepPickups||0)+1;ctx.campaignPrepPackedKcal=(ctx.campaignPrepPackedKcal||0)+gained;}
+   else ctx.campaignPrepPackRefusals=(ctx.campaignPrepPackRefusals||0)+1;
+  }
+  if(retain>0&&!stillHere())return;
+  if(retain===0||stash.some(it=>G.isFinishedFood(it)&&!G.isSpoiled(it))){
+   const before=G.pantryKcal();G.putAwayFinished();
+   ctx.campaignPrepStoredKcal=(ctx.campaignPrepStoredKcal||0)+Math.max(0,G.pantryKcal()-before);
+  }
  }
 }
 const preparer={...base,id:'campaigner-preparer',desc:'campaigner-rations plus bounded native Pack/counter sorting, shelling and shelving per person/day'};
