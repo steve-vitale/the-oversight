@@ -1,0 +1,561 @@
+{
+ "nRuns": 16,
+ "primary": {
+  "population": 74,
+  "share": {
+   "RAID": 21,
+   "EXPEDITION": 51,
+   "WILD-ENCOUNTER": 2,
+   "unattributed": 0
+  },
+  "attributed": 74,
+  "attrRate": 1,
+  "go": true
+ },
+ "rates": {
+  "post-invite-outside-rerun": {
+   "days": 270,
+   "per": {
+    "RAID": {
+     "n": 10,
+     "perDay": 0.037037037037037035
+    },
+    "EXPEDITION": {
+     "n": 27,
+     "perDay": 0.1
+    },
+    "WILD-ENCOUNTER": {
+     "n": 2,
+     "perDay": 0.007407407407407408
+    },
+    "unattributed": {
+     "n": 0,
+     "perDay": 0
+    }
+   }
+  },
+  "post-invite-in-rerun": {
+   "days": 260,
+   "per": {
+    "RAID": {
+     "n": 11,
+     "perDay": 0.04230769230769231
+    },
+    "EXPEDITION": {
+     "n": 24,
+     "perDay": 0.09230769230769231
+    },
+    "WILD-ENCOUNTER": {
+     "n": 0,
+     "perDay": 0
+    },
+    "unattributed": {
+     "n": 0,
+     "perDay": 0
+    }
+   }
+  },
+  "pre-invite": {
+   "days": 1338,
+   "per": {
+    "RAID": {
+     "n": 0,
+     "perDay": 0
+    },
+    "EXPEDITION": {
+     "n": 20,
+     "perDay": 0.014947683109118086
+    },
+    "WILD-ENCOUNTER": {
+     "n": 0,
+     "perDay": 0
+    },
+    "unattributed": {
+     "n": 0,
+     "perDay": 0
+    }
+   }
+  }
+ },
+ "viaBreak": {
+  "wild|raid=0": 51,
+  "wild|raid=1": 21,
+  "agency-expedition|raid=0": 2
+ },
+ "causeBreak": {
+  "monster": 72,
+  "The Congregation": 1,
+  "The Focus Group": 1
+ },
+ "crisisAudit": {
+  "RAID": {
+   "open": 16,
+   "raiders": 16
+  },
+  "EXPEDITION": {
+   "open": 0,
+   "raiders": 0
+  },
+  "WILD-ENCOUNTER": {
+   "open": 0,
+   "raiders": 0
+  }
+ },
+ "raidMonsterIds": {
+  "strike": 1,
+  "eulogy": 3,
+  "reunion": 7,
+  "algorithm": 1,
+  "eater": 3,
+  "spool": 1,
+  "rerun": 1,
+  "editor": 1,
+  "redactor": 1,
+  "cancellation": 2
+ },
+ "travelDays": [
+  {
+   "seed": 205,
+   "policy": "belongfeast",
+   "nTravelDays": 176,
+   "totalLegs": 579,
+   "days": 180
+  },
+  {
+   "seed": 246,
+   "policy": "belongfeast",
+   "nTravelDays": 59,
+   "totalLegs": 189,
+   "days": 60
+  },
+  {
+   "seed": 321,
+   "policy": "belongfeast",
+   "nTravelDays": 60,
+   "totalLegs": 247,
+   "days": 62
+  },
+  {
+   "seed": 412,
+   "policy": "belongfeast",
+   "nTravelDays": 75,
+   "totalLegs": 327,
+   "days": 76
+  },
+  {
+   "seed": 523,
+   "policy": "belongfeast",
+   "nTravelDays": 143,
+   "totalLegs": 509,
+   "days": 144
+  },
+  {
+   "seed": 634,
+   "policy": "belongfeast",
+   "nTravelDays": 154,
+   "totalLegs": 529,
+   "days": 155
+  },
+  {
+   "seed": 745,
+   "policy": "belongfeast",
+   "nTravelDays": 92,
+   "totalLegs": 324,
+   "days": 93
+  },
+  {
+   "seed": 856,
+   "policy": "belongfeast",
+   "nTravelDays": 132,
+   "totalLegs": 479,
+   "days": 134
+  },
+  {
+   "seed": 205,
+   "policy": "leadfeast",
+   "nTravelDays": 179,
+   "totalLegs": 663,
+   "days": 180
+  },
+  {
+   "seed": 246,
+   "policy": "leadfeast",
+   "nTravelDays": 124,
+   "totalLegs": 392,
+   "days": 125
+  },
+  {
+   "seed": 321,
+   "policy": "leadfeast",
+   "nTravelDays": 115,
+   "totalLegs": 441,
+   "days": 118
+  },
+  {
+   "seed": 412,
+   "policy": "leadfeast",
+   "nTravelDays": 96,
+   "totalLegs": 401,
+   "days": 97
+  },
+  {
+   "seed": 523,
+   "policy": "leadfeast",
+   "nTravelDays": 113,
+   "totalLegs": 437,
+   "days": 114
+  },
+  {
+   "seed": 634,
+   "policy": "leadfeast",
+   "nTravelDays": 102,
+   "totalLegs": 303,
+   "days": 103
+  },
+  {
+   "seed": 745,
+   "policy": "leadfeast",
+   "nTravelDays": 108,
+   "totalLegs": 381,
+   "days": 109
+  },
+  {
+   "seed": 856,
+   "policy": "leadfeast",
+   "nTravelDays": 117,
+   "totalLegs": 445,
+   "days": 118
+  }
+ ],
+ "wall": {
+  "national": 11,
+  "table": 13,
+  "wins": 0,
+  "wave4": 13,
+  "wave5": 6,
+  "medianSurvival": 116,
+  "exiled": 0
+ },
+ "perRun": [
+  {
+   "seed": 205,
+   "policy": "belongfeast",
+   "days": 180,
+   "end": "survived",
+   "inviteDay": null,
+   "national": 1,
+   "table": 0,
+   "wins": 0,
+   "maxWave": 3,
+   "nDeaths": 14,
+   "postInviteMonsterVerb": 0,
+   "postInviteSrcShare": {
+    "RAID": 0,
+    "EXPEDITION": 0,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 246,
+   "policy": "belongfeast",
+   "days": 60,
+   "end": "village-lost",
+   "inviteDay": null,
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "maxWave": 2,
+   "nDeaths": 15,
+   "postInviteMonsterVerb": 0,
+   "postInviteSrcShare": {
+    "RAID": 0,
+    "EXPEDITION": 0,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 321,
+   "policy": "belongfeast",
+   "days": 62,
+   "end": "village-lost",
+   "inviteDay": null,
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "maxWave": 2,
+   "nDeaths": 15,
+   "postInviteMonsterVerb": 0,
+   "postInviteSrcShare": {
+    "RAID": 0,
+    "EXPEDITION": 0,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 412,
+   "policy": "belongfeast",
+   "days": 76,
+   "end": "village-lost",
+   "inviteDay": 49,
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 29,
+   "postInviteMonsterVerb": 2,
+   "postInviteSrcShare": {
+    "RAID": 0,
+    "EXPEDITION": 2,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 523,
+   "policy": "belongfeast",
+   "days": 144,
+   "end": "village-lost",
+   "inviteDay": 107,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 55,
+   "postInviteMonsterVerb": 6,
+   "postInviteSrcShare": {
+    "RAID": 1,
+    "EXPEDITION": 5,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 634,
+   "policy": "belongfeast",
+   "days": 155,
+   "end": "village-lost",
+   "inviteDay": 65,
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 58,
+   "postInviteMonsterVerb": 13,
+   "postInviteSrcShare": {
+    "RAID": 4,
+    "EXPEDITION": 9,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 745,
+   "policy": "belongfeast",
+   "days": 93,
+   "end": "village-lost",
+   "inviteDay": 53,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 29,
+   "postInviteMonsterVerb": 5,
+   "postInviteSrcShare": {
+    "RAID": 1,
+    "EXPEDITION": 3,
+    "WILD-ENCOUNTER": 1,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 856,
+   "policy": "belongfeast",
+   "days": 134,
+   "end": "village-lost",
+   "inviteDay": 104,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 42,
+   "postInviteMonsterVerb": 7,
+   "postInviteSrcShare": {
+    "RAID": 1,
+    "EXPEDITION": 6,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 205,
+   "policy": "leadfeast",
+   "days": 180,
+   "end": "survived",
+   "inviteDay": 136,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 27,
+   "postInviteMonsterVerb": 0,
+   "postInviteSrcShare": {
+    "RAID": 0,
+    "EXPEDITION": 0,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 246,
+   "policy": "leadfeast",
+   "days": 125,
+   "end": "village-lost",
+   "inviteDay": 80,
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 4,
+   "nDeaths": 34,
+   "postInviteMonsterVerb": 2,
+   "postInviteSrcShare": {
+    "RAID": 2,
+    "EXPEDITION": 0,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 321,
+   "policy": "leadfeast",
+   "days": 118,
+   "end": "village-lost",
+   "inviteDay": 94,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 39,
+   "postInviteMonsterVerb": 4,
+   "postInviteSrcShare": {
+    "RAID": 2,
+    "EXPEDITION": 1,
+    "WILD-ENCOUNTER": 1,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 412,
+   "policy": "leadfeast",
+   "days": 97,
+   "end": "village-lost",
+   "inviteDay": 74,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 36,
+   "postInviteMonsterVerb": 4,
+   "postInviteSrcShare": {
+    "RAID": 1,
+    "EXPEDITION": 3,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 523,
+   "policy": "leadfeast",
+   "days": 114,
+   "end": "village-lost",
+   "inviteDay": 62,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 59,
+   "postInviteMonsterVerb": 12,
+   "postInviteSrcShare": {
+    "RAID": 4,
+    "EXPEDITION": 8,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 634,
+   "policy": "leadfeast",
+   "days": 103,
+   "end": "village-lost",
+   "inviteDay": 63,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 33,
+   "postInviteMonsterVerb": 5,
+   "postInviteSrcShare": {
+    "RAID": 1,
+    "EXPEDITION": 4,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 745,
+   "policy": "leadfeast",
+   "days": 109,
+   "end": "village-lost",
+   "inviteDay": 83,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 26,
+   "postInviteMonsterVerb": 6,
+   "postInviteSrcShare": {
+    "RAID": 1,
+    "EXPEDITION": 5,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  },
+  {
+   "seed": 856,
+   "policy": "leadfeast",
+   "days": 118,
+   "end": "village-lost",
+   "inviteDay": 79,
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "maxWave": 5,
+   "nDeaths": 46,
+   "postInviteMonsterVerb": 8,
+   "postInviteSrcShare": {
+    "RAID": 3,
+    "EXPEDITION": 5,
+    "WILD-ENCOUNTER": 0,
+    "unattributed": 0
+   },
+   "attributionRate": 1
+  }
+ ]
+}
