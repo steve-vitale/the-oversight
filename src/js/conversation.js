@@ -1672,7 +1672,17 @@
         // new deflection snippets are planted; this guards threads planted
         // before the fix (transcript-caught: "...Sorry, lost my train of
         // thought." quoted as the unfinished topic).
-        if (!this.convoIsDeflectionLine(o.snippet)) {
+        // R18 (journey-landing 2026-10-16): never quote a RESUME OPENER as
+        // the "memory" either — the snippet is the thread's last NPC beat,
+        // and when that beat was itself a resume opener the quote nests
+        // scaffolding inside scaffolding (transcript-caught, seed-64 probe:
+        // "We never finished talking about X — we wandered off it. 'We
+        // never finished talking about X — we wandered off it. ...'").
+        // The template's signature phrase never appears in real content,
+        // so matching it is a clean structural test. The thread still
+        // resumes (label + whyLine); only the nested quote is dropped.
+        const isResumeOpener = /never (did )?finish(ed)? talking about/i.test(o.snippet || '');
+        if (!this.convoIsDeflectionLine(o.snippet) && !isResumeOpener) {
           const sq = String(o.snippet).replace(/^"+|"+$/g, '');
           inner += ` '${sq}'`;
         }
@@ -2397,7 +2407,15 @@
         // list with the last line so the cycle never opens with an
         // immediate repeat. Cross-key memory is untouched — one thread
         // still never resurfaces in another.
-        const last = (c.said[key] || []).slice(-1);
+        // R18 MEMORY WINDOW (journey-landing r18 2026-10-16): seeding with
+        // only the last line let the reshuffle repeat a distinctive line
+        // 3 turns later (comfort pool: "You're kind. Don't let this place
+        // change that." twice in one sitting, seed-64 probe). Keep the
+        // last 3 lines — a real person wouldn't repeat a distinctive line
+        // within 3 turns. Capped at pool.length - 1 so small pools still
+        // cycle instead of collapsing to null.
+        const keep = Math.max(1, Math.min(3, (pool || []).length - 1));
+        const last = (c.said[key] || []).slice(-keep);
         c.said[key] = last;
         l = this.convoPick(vid, key, pool);
       }
