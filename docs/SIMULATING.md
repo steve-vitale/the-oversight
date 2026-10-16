@@ -1,5 +1,19 @@
 # Simulating The Oversight — how to measure a change
 
+Natural campaign measurement (2026-10-16): `campaign-audit.js` schema2 now
+uses the shared balanced observer with exact `rawRow`, all23 metrics and
+bounded first/last blockage snapshots. Observer-off and ordinary-balanced
+controls must match. `--seeds`, `--proof-seeds`, `--jobs`, `--origin`, `--region`
+and source/flag/Node-keyed `--cache` make shards and resumes repeatable.
+Run `node scripts/campaign-audit.js --n 16 --days 240 --jobs 8 --out .git/campaign.json.gz`,
+then `node scripts/campaign-scorecard.js --report .git/campaign.json.gz --out .git/campaign-score`.
+This is an explicitly named strategy comparison, not a runtime lever.
+The normal quick/full test `test-campaign-measurement.js` rejects stale
+collector/contracts, mixed cases and corrupt caches. Read
+`evidence/2026-10-16/campaign-balanced-audit.md` for current natural coverage,
+all metrics and source-bound pantry access/exile diagnostics. Do not equate
+nominal pantry stock or a generic FoodBlocked counter with spendable supply.
+
 Apex formal entry (2026-10-16): `scripts/godpath/test-apex-party-deed.js`
 automatically joins quick/full discovery. It covers actual party injection,
 paid NPC verbs, opening ownership/capacity, old evidence and load before/after

@@ -41,6 +41,18 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Natural campaign baseline (2026-10-16): no runtime/policy lever is changed.
+The audit now prices the existing campaign strategy with all23 metrics,
+neutral controls and actual public withdrawal evidence. At16 paired seeds,
+control->campaigner wins13->9, deaths21->24 and community losses3->6, despite
+more named-class coverage; lower-food reserves also warn. Nominal pantry stock
+is not access: seed4 has461 successful campaign withdrawals followed by503
+failed campaign attempts after exile. These data do not authorize free food,
+looser exile, easier titans or a higher withdrawal cap. Investigate access,
+contribution/standing and ration sustainability as a separately measured
+strategy. Read ../evidence/2026-10-16/campaign-balanced-audit.md; the screen
+does not prove a causal explanation for every outcome or natural Network viability.
+
 Apex formal ownership follow-up (2026-10-16): encounter-opening party/talent
 and full-capacity evidence now lets an actual later formal NPC earn their
 paid pack hunt. This changes personal credit, not companion30HP/gear,

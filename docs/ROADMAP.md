@@ -9,6 +9,21 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Natural campaigns (2026-10-16): the existing audit now shares the23-metric
+observer and exact standard rows, neutral/ordinary-driver controls,
+source-keyed cache/resume and bounded blockage snapshots.17 workflow checks
+and full958/958 pass. Current16-seed campaigner/control at240 iterations:
+seven real Herald fights/five kills, no Finale or Network start; overtime
+does reach6. Wins13->9, deaths21->24, communities3->6 and low-food exposure
+.0071->.0387 require review, not easier-game tuning. Seed4 public withdrawal
+traces distinguish early ordinary hall refusals from461 successful campaign
+takes followed by503 no-transfer campaign attempts after exile. Next inspect
+access/standing and sustainable ration funding in a separate policy experiment;
+do not simply raise the80-call cap or waive exile. Reproducible72 cohort
+workers, cached resume,23 metrics and diagnostics:
+../evidence/2026-10-16/campaign-balanced-audit.md. Runtime/policy choices and
+Muse's region/nomad files are unchanged; natural end-to-end completion is open.
+
 Apex formal-caster follow-up (2026-10-16): the constructor now saves formal
 companions' opening Pack Hunt ownership/full capacity before party.js inserts
 their bodies. Actual paid later casting can earn their personal deed; later

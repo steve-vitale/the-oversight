@@ -40,3 +40,7 @@ evidence/2026-10-16/apex-deed-*-ax.txt whitespace=-blank-at-eol
 evidence/2026-10-16/apex-party-*.cjs text eol=lf
 evidence/2026-10-16/apex-party-*.log -text whitespace=-blank-at-eol
 evidence/2026-10-16/apex-party-*-ax.txt whitespace=-blank-at-eol
+# Campaign collector identity pins its exact raw bytes across checkouts.
+scripts/campaign-audit.js -text whitespace=cr-at-eol,-blank-at-eol
+evidence/2026-10-16/campaign-balanced-*.cjs text eol=lf
+evidence/2026-10-16/campaign-balanced-*.log -text whitespace=-blank-at-eol

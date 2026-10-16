@@ -14,6 +14,14 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Natural campaign measurement (2026-10-16): Codex owns campaign-audit.js's
+shared-observer bridge, exact raw rows, neutral controls, bounded blockage
+snapshots/cache, and campaign-scorecard.js's named-strategy comparison.
+No game/policy/Muse-world changes are included. The current72-worker
+diagnostic screen and2 neutral pantry traces locate access/exile versus
+nominal supply; use ../evidence/2026-10-16/campaign-balanced-audit.md before
+a separate provision-policy experiment. Natural Finale/Network remains open.
+
 Apex formal-caster follow-up (2026-10-16): Codex owns only godpath.js's saved
 formal opening ownership/capacity and enrollment of actual injected actors.
 Keep party HP/gear, initiative, placement, costs and all other gods fixed.
