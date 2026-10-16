@@ -5347,7 +5347,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     // canMakeAmends: the amends gate — app.js's button and makeAmends itself.
     // The worst-rep-axis lane is the old one; the new lane is a broken word
-    // from the CURRENT Bearer <redacted> breaking a promise only ever moved trust (-15),
+    // from the CURRENT bearer, breaking a promise only ever moved trust (-15),
     // never rep dims, so the old lane never fired for it and Steve's
     // "amends reopen immediately" was unreachable in real play.
     canMakeAmends(vid) {
@@ -41303,7 +41303,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return false;
       }
       // PHOENIX CANNOT BURN PHOENIX (Steve 2026-10-09): unspent-clause
-      // holders are excluded from the victim pool. (The Bearer <redacted> own
+      // holders are excluded from the victim pool. (The bearer's own
       // clause is revoked below, after the pool is built -- id !== vid
       // already excludes them here.)
       const living = (v.roster || []).filter(id => id !== vid && !(this.vpOf(id) || {}).dead && !this.npcHasAbility(id, 'phoenix_clause'));
