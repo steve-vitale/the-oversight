@@ -39,3 +39,7 @@ Pre-seat courtship substrate throughout (wins 0/16 by design); telemetry LOUD li
 - safe-commit.sh post-commit stale index: `git read-tree HEAD` resync before trusting status or rebasing (AGENTS.md lesson, reproduced exactly).
 - Mid-landing master movement (playtest journey-establishment r7): rebase per branch + merge --ff-only, exit codes checked unpiped. First drawvol merge failed fast-forward (crumbdefault landed first) — rebased and re-merged clean.
 - Loop A's claim file (fleshout-20261016T1526Z, scale-onramp) still present but their run appears dead (no lock, all tree heartbeats >15min stale, no tree writes 1h40m+); left their claim and trees untouched. This run's axis (food-economy) did not conflict.
+
+## Correction (18:26Z, post-landing)
+
+Loop A's new run (fleshout-20261016T1715Z, live since 17:46Z) reports their old 1526Z workers were still alive with file writes 17:10–17:24Z — my run-start assessment "no tree writes 1h40m+" was wrong (I checked directory mtimes, which miss content-only writes). The dead-per-guard call was still correct at the time (no lock file, all three tree heartbeats >15min stale — sim-trickpack's 16:58 hb was 21min old), and loop A recovered cleanly with zero file overlap vs my landings (their deconfliction note explicitly cites this run's claim). Their three old trees were never touched by this run. The methodological lesson: heartbeat freshness and the lock are the authoritative liveness signals — directory mtime is not evidence of inactivity.
