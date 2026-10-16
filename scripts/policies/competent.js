@@ -6,6 +6,15 @@
 const idle = require('./idle');
 const { vinebank } = require('./vinebank'); // materials-banking arm (VINEBANK=1, default OFF)
 
+// DAWNREFUSE (refusal-spam fix 2026-10-15): per-dawn refusal-voice flags.
+// When the scholar's hands can't reach the pantry, every iteration of the
+// guard loop in competentEat would voice the engine's honest refusal
+// ("The pantry is in the hall. Your hands are not.") — ~40-50 identical
+// beats per dawn. The flag records the last scholar-day each Game object
+// was refused on, so the voice fires once per dawn; a WeakMap keyed on the
+// Game object keeps sequential seeds in one process from leaking flags.
+const _dawnRefusedDays = new WeakMap();
+
 // Eat like someone who knows the disease roster (DISEASES.md): cooked/safe
 // food first, never human meat (trembles — cooking doesn't kill prions),
 // never raw meat (trichinosis/gutrot). Re-scans each take since indices shift.
@@ -22,6 +31,25 @@ function competentEat(Game) {
     // even with a full pack — making the player a net drain.
     try { Game.eat(); } catch (e) {}
     if (s.kcal >= Game.kcalCap() * trig) return;
+    // DAWNREFUSE (2026-10-15, refusal-spam fix): VOICE ONLY. When the hands
+    // can't reach the pantry (havenStoresAccess()==='none') every take in
+    // the guard loop below would be refused anyway — the engine voices
+    // honestly, returns null, changes no state. So refuse ONCE per dawn
+    // and skip the loop. Game-code take verbs are untouched; the take
+    // behavior (refused draws) is unchanged. Re-checked every upkeep call,
+    // so a scholar who steps inside mid-dawn takes normally.
+    if (process.env.DAWNREFUSE_GATE !== '0') {
+      let handsBlocked = false;
+      try { handsBlocked = !!(Game.havenStoresAccess && Game.havenStoresAccess() === 'none'); } catch (e) {}
+      if (handsBlocked) {
+        const day = (Game.state && Game.state.scholar && Game.state.scholar.day) || 0;
+        if (_dawnRefusedDays.get(Game) !== day) {
+          _dawnRefusedDays.set(Game, day);
+          try { Game.say('The pantry is in the hall. Your hands are not.'); } catch (e) {}
+        }
+        return;
+      }
+    }
     let guard = 0;
     while (s.kcal < Game.kcalCap() * 0.95 && guard++ < 20) {
       const pantry = vv.pantry || [];
@@ -2692,5 +2720,5 @@ const competent = {
   },
 };
 
-module.exports = { competent, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, competentEat, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
 
