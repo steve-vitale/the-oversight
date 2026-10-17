@@ -122,18 +122,16 @@ The pilot's beat capture was contaminated: my HS_BEAT_RE also matched the engine
 - The median-survival guardrail (≥ control-10d) passed at +10d (172 vs 162). Per the #223 precedent, movement away from harm doesn't fire the guardrail.
 - Metric lesson (carrying forward): pre-register the volume-sanity check AND a heterogeneity-aware primary (paired median, not just aggregate ratio) for any future drawdown arm. An aggregate ratio on 16 heterogeneous pairs is noisy.
 
+## Coordinator note response (root-cause-first, 2026-10-17)
+
+The sibling sim-flowrate-b diagnostic found villagers already doing flow-aware forage stand-down in-beat. Verified: this is the engine's PRODTHROTTLE (2026-10-13), and it IS the real substrate — my layer was designed as its scholar-side complement, not a duplicate.
+
+- **What verb fires it**: `resolveOneAssignment(vid, a)` (game.js:6249) — the duty-assignment resolver. When a villager's assigned task is forage/garden/fish and the throttle is engaged, the task is swapped to a round-robin alt (wood/water/stone) and re-resolved; the villager does real alt work (own haul + trust). Voiced beat + `v.throttleRedirects` counter.
+- **What gates it**: `prodThrottleEngaged()` (game.js:14468) = `pantryFreshDays() > 4` AND `hungryStreak < 3` (the hunger exemption). One truth — my layer reused it directly rather than defining a parallel pin.
+- **Why it doesn't move the rot needle**: (1) It engages LATE — the pantry already holds >4 fresh-days; fresh shelves are ~2 days, so the rot is the existing overhang burning off and stopping inflow doesn't remove it. (2) It covers ONLY duty assignments — not the scholar's own trips (23-46k kcal/run on throttle days, the gap my killed layer targeted), and not the ambient meal-loop surplus to the extent it comes from non-duty production. (3) In equilibrium the throttle is a stabilizer, not a drain — inflow ≈ outflow, the pantry stays pinned.
+
+**Design implication**: a future stand-down arm should be GATE-TUNING on the prodthrottle (e.g., engage earlier at >3 fresh-days, or cover the scholar via the same gate) rather than a new verb. The scholar-side gap is real (my pilot: 1167 stand-down days, 0.80x rate, no harm) but needs a recalibrated bar. The engine's beat copy ("leaves the forage standing... the wild will keep") is the established voice — my layer echoed its register deliberately.
+
 ## Convergence state
 
 **killed** (NO-GO on the engaged primary — 0.799x vs the 0.75x bar). The food-economy axis is not converged. The scholar-stand-down direction is promising (~0.80x, no harm, engaged at volume) and documented for a future arm with a recalibrated bar. The #444 line now points to: (a) waste-rate metrics that handle pantry-shrink, (b) the racks-channel (scholar eats preserved → guard lifts → more smoking) as a named mechanism.
-
-## Wall numbers (every run)
-
-## Village assessment (plain words)
-
-## Sense-testing (SENSE-TESTING LAW — read, not counted)
-
-## Blanks filled / documented
-
-## Metric review (§14)
-
-## Convergence state
