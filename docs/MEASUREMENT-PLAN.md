@@ -186,3 +186,9 @@ summarizeHarnessRevision use the same validation/declaration and conditional
 coverage. Keep collector/contract, origins, horizons, seed lists and policy
 labels matched. A changed measurement observer needs a new shared baseline,
 not an exception disguised as a controller revision.
+
+Coordination check (2026-10-16): the three standard balanced panel/scorecard/
+metric-contract files are absent on freshly fetched main/master6f134de2.
+The published package is available on codex/balanced-measurement; adoption
+is not confirmed. See AGENT-LANES.md. Reconcile against the newer Muse
+journey/simulation substrate before presenting a shared current baseline.

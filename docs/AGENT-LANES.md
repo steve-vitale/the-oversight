@@ -1,5 +1,20 @@
 # Agent lanes (2026-10-15)
 
+Coordination refresh (2026-10-16): remote main/master was read at6f134de2
+(batch ship,2026-10-16T23:25:30Z). It contains newer Muse journey/simulation
+work (including defense-call wiring and aid/feast/wave-ledger experiments),
+but scripts/balance-panel.js, scripts/lib/balance-scorecard.js and
+scripts/balance-metrics.json are absent there. The old lane document on that
+tip still says Codex was unreachable; that historical status is obsolete.
+Codex's published work is on codex/resume-claude; the portable measurement
+package is on codex/balanced-measurement. Publication is not confirmed Muse
+adoption, and absence on main does not prove absence on every Muse working
+branch. Reconcile shared measurement against Muse's current tip next, with
+a fresh baseline and its actual driver/controller contracts. Do not merge
+regional datasets or claim newer Muse work is absent based on this branch's
+older roadmap. Region/nomad/weather ownership remains Muse's.
+
+
 Named Explorer strategy experiment (2026-10-16, needs-eyes): optional
 explorer-cartographer/explorer-seer controllers answer their own real opening
 knack and separate shown-build preference from bounded empirical fieldwork.
