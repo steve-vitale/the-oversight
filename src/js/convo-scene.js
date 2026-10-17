@@ -330,73 +330,13 @@
       const items = [];
       const day = (this.state.scholar || {}).day || 0;
       try {
-        // 1. OPEN THREADS: unfinished business, resumable. Not the current
-        // thread — that's already the menu (thread coherence).
-        const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
-        for (const o of open) {
-          if (!o || !o.tid || o.tid === scene.beat.thread) continue;
-          // LEDGER GATE (convo rebuild 2026-10-11, Steve: fix structurally):
-          // an option may only reference a ledger entry that actually exists.
-          // taughtref threads require a real teaching event — no entry, no
-          // option. This is the structural kill for the phantom
-          // "that lesson they offered (last time)".
-          if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) continue;
-          const label = o.label || o.tid;
-          const ago = Math.max(0, day - (o.day || day));
-          // Honest timeline: "N days back" for stale threads, no leaked
-          // internal "(last time)" note for recent ones.
-          // INHERITED THREAD (journey-succession 2026-10-11): name whose
-          // thread it was — the menu must not offer the new Bearer someone
-          // else's unfinished business as their own.
-          const predL = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
-          const label2 = predL ? (ago > 1 ? `"${predL}'s unfinished — ${label}, ${ago} days back."` : `"${predL}'s unfinished — ${label}."`)
-            : (ago > 1 ? `"We never finished — ${label}, ${ago} days back."` : `"We never finished — ${label}."`);
-          items.push({
-            kind: 'thread', tid: o.tid,
-            id: 'alive:thread:' + o.tid,
-            label: label2,
-            temper: 'neutral',
-          });
-          if (items.length >= 2) break;
-        }
-        // 2. FRESH MEMORIES: things that happened between you, worth naming.
-        // Only memory types with a human label — the ledger is continuity,
-        // not a database dump.
-        const mem = (((this.state.village || {}).memory || {})[vid]) || [];
-        const seen = {};
-        for (let i = mem.length - 1; i >= 0 && items.length < 4; i--) {
-          const m = mem[i];
-          const about = m && this.convoMemoryAbout(m.t);
-          if (!about || seen[m.t]) continue;
-          if (day - (m.day || 0) > 7) continue; // stale grief isn't alive
-          seen[m.t] = true;
-          items.push({
-            kind: 'memory', memType: m.t,
-            id: 'alive:memory:' + m.t,
-            label: `"About ${about}..."`,
-            temper: 'neutral',
-          });
-        }
-        // 3. WANT-DRIVEN QUESTIONS: the want surfaces as a question, not a
-        // menu item — "Questions come from character" (Principle 9).
-        // PRINCIPLE 12 OVERRIDE (convo rebuild 2026-10-11, Steve): the old
-        // rule barred tier-'new' strangers from deep wants. Strangers ask
-        // real questions too — no gate here.
-        if (scene.want && (scene.want.stage || 0) < 2 && !scene.beat.questionHangs) {
-          const WANT_Q = {
-            ask_favor: '"Is there something you need? Really."',
-            share_news: '"What\'s the word? What should I know?"',
-            comfort: '"You seem off. Want to talk about it?"',
-            curious: '"What do you want to know? Ask me anything."',
-            repay: '"I owe you. Let me make it right — what do you need?"',
-            just_company: '"Want some company? No agenda."',
-          };
-          const wq = WANT_Q[scene.want.id];
-          if (wq) {
-            items.push({ kind: 'want', wantId: scene.want.id, id: 'alive:want:' + scene.want.id, label: wq, temper: 'kind' });
-          }
-        }
-        // 4. WORLD EVENTS: the lately system — live events cut the queue.
+        // 1. WORLD EVENTS: the lately system — live events cut the queue.
+        // (journey crisis r21 2026-10-17): this block was #4 (last); the
+        // menu pipeline takes only the first 3 alive items, so any villager
+        // with 3+ threads/memories/want ahead of the event never got the
+        // on-ramp — the event that "cuts the queue" was dead last in it
+        // (r20's Declan/Deiker asymmetry: same 'mourning' event, one convo
+        // offered the choice, the other didn't). Events genuinely lead now.
         if (typeof this.t2LatelyEvent === 'function') {
           const ev = this.t2LatelyEvent(vid);
           if (ev && ev.kind) {
@@ -437,6 +377,72 @@
             if (EV_LABELS[ev.kind]) {
               items.push({ kind: 'event', eventKind: ev.kind, id: 'alive:event:' + ev.kind, label: EV_LABELS[ev.kind], temper: 'neutral' });
             }
+          }
+        }
+        // 2. OPEN THREADS: unfinished business, resumable. Not the current
+        // thread — that's already the menu (thread coherence).
+        const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
+        for (const o of open) {
+          if (!o || !o.tid || o.tid === scene.beat.thread) continue;
+          // LEDGER GATE (convo rebuild 2026-10-11, Steve: fix structurally):
+          // an option may only reference a ledger entry that actually exists.
+          // taughtref threads require a real teaching event — no entry, no
+          // option. This is the structural kill for the phantom
+          // "that lesson they offered (last time)".
+          if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) continue;
+          const label = o.label || o.tid;
+          const ago = Math.max(0, day - (o.day || day));
+          // Honest timeline: "N days back" for stale threads, no leaked
+          // internal "(last time)" note for recent ones.
+          // INHERITED THREAD (journey-succession 2026-10-11): name whose
+          // thread it was — the menu must not offer the new Bearer someone
+          // else's unfinished business as their own.
+          const predL = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+          const label2 = predL ? (ago > 1 ? `"${predL}'s unfinished — ${label}, ${ago} days back."` : `"${predL}'s unfinished — ${label}."`)
+            : (ago > 1 ? `"We never finished — ${label}, ${ago} days back."` : `"We never finished — ${label}."`);
+          items.push({
+            kind: 'thread', tid: o.tid,
+            id: 'alive:thread:' + o.tid,
+            label: label2,
+            temper: 'neutral',
+          });
+          if (items.length >= 2) break;
+        }
+        // 3. FRESH MEMORIES: things that happened between you, worth naming.
+        // Only memory types with a human label — the ledger is continuity,
+        // not a database dump.
+        const mem = (((this.state.village || {}).memory || {})[vid]) || [];
+        const seen = {};
+        for (let i = mem.length - 1; i >= 0 && items.length < 4; i--) {
+          const m = mem[i];
+          const about = m && this.convoMemoryAbout(m.t);
+          if (!about || seen[m.t]) continue;
+          if (day - (m.day || 0) > 7) continue; // stale grief isn't alive
+          seen[m.t] = true;
+          items.push({
+            kind: 'memory', memType: m.t,
+            id: 'alive:memory:' + m.t,
+            label: `"About ${about}..."`,
+            temper: 'neutral',
+          });
+        }
+        // 4. WANT-DRIVEN QUESTIONS: the want surfaces as a question, not a
+        // menu item — "Questions come from character" (Principle 9).
+        // PRINCIPLE 12 OVERRIDE (convo rebuild 2026-10-11, Steve): the old
+        // rule barred tier-'new' strangers from deep wants. Strangers ask
+        // real questions too — no gate here.
+        if (scene.want && (scene.want.stage || 0) < 2 && !scene.beat.questionHangs) {
+          const WANT_Q = {
+            ask_favor: '"Is there something you need? Really."',
+            share_news: '"What\'s the word? What should I know?"',
+            comfort: '"You seem off. Want to talk about it?"',
+            curious: '"What do you want to know? Ask me anything."',
+            repay: '"I owe you. Let me make it right — what do you need?"',
+            just_company: '"Want some company? No agenda."',
+          };
+          const wq = WANT_Q[scene.want.id];
+          if (wq) {
+            items.push({ kind: 'want', wantId: scene.want.id, id: 'alive:want:' + scene.want.id, label: wq, temper: 'kind' });
           }
         }
       } catch (e) {}

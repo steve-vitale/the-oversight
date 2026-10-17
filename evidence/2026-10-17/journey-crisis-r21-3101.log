@@ -1,0 +1,267 @@
+[SETUP] seed 3101: oracleV2 establishing 15d...
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+--- CENSUS (established), day 18, Bearer: Aki ---
+  Patrick [paramedic]
+  Aaliyah [social_worker] HP98 SICK(tick fever)
+  Tangaroa [mushroom_grower] HP82
+  Nikau [trail_crew]
+  Elif [hotel housekeeper]
+  Petra [glazier] HP80
+  Sigrun [night security guard]
+  Aki [fisherman]
+  Ava [artist]
+  fallen (recent): Theo d6 (dehydration); Tariq d10 (combat)
+  pantry: 31,678 kcal | mustered: false | world monsters: 14
+[SIEGE] staging congregation (something) near Haven
+[MUSTER] d18: 📯 MUSTER — scouts report The Congregation hunting near Haven, and it is beyond us. Everyone inside. No one walks the treeline alone — the g
+## MID-SIEGE d19 — talking to Patrick
+OPEN CHOICES (12): [betrayal:accept] "Sure. Walk with me? I want another pair of eyes on something." | [betrayal:decline] "Not this time." | [alive:event:mourning] "How are you holding up? About... them." | [alive:want:ask_favor] "Is there something you need? Really." | [dlg:help] "How can I help?" | [dlg:cant] "Not right now, sorry." | [recap] "Wait — what were we talking about?" | [teach] "Here, I know this one — let me show you." | [dlg:subject] "Can I ask you something else?" | [confront:d_kzdgync] "You said something odd the other day. Let's talk about it." | [leave] "Actually — never mind." | [silence] "..."
+TURN-CHOICES: betrayal:accept, betrayal:decline, alive:event:mourning, alive:want:ask_favor, dlg:help, dlg:cant, recap, teach, dlg:subject, confront:d_kzdgync, leave, silence
+> YOU PICK [dlg:help] 
+YOU: "How can I help?"
+NPC: "No, really, it's fine. Forget I even asked."
+
+TURN-CHOICES: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:cant, recap, teach, dlg:subject, confront:d_kzdgync, leave, silence
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: You walk to the tree line with Patrick. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+
+TURN-CHOICES: alive:event:mourning, dlg:cant, recap, teach, dlg:subject, confront:d_kzdgync, leave, silence
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Since Elif died... I keep expecting to see Elif at the fire. Stupid."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About that favor — we never finished."
+NPC: "All sorted. Some things just work out."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "Sleep's gone strange. I memorize the stars at odd hours now. Whatever gets me to morning."
+
+> YOU PICK [goon] 
+YOU: "And then?"
+NPC: "That's enough for now. It'll percolate."
+
+> YOU PICK [dlg:more] 
+(conversation ended by the engine)
+FINAL: want=ask_favor resolution=stated
+
+### FULL TRANSCRIPT
+NPC: "Never mind the food I needed — we got it handled. Thanks anyway."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "How can I help?"
+NPC: "No, really, it's fine. Forget I even asked."
+YOU: "Sure."
+NPC: You walk to the tree line with Patrick. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: "What’s going on out there?"
+NPC: "Since Elif died... I keep expecting to see Elif at the fire. Stupid."
+YOU: "About that favor — we never finished."
+NPC: "All sorted. Some things just work out."
+YOU: "About what's been happening — we never finished."
+NPC: "Sleep's gone strange. I memorize the stars at odd hours now. Whatever gets me to morning."
+YOU: "And then?"
+NPC: "That's enough for now. It'll percolate."
+YOU: "Tell me more."
+NPC: "We bury, we grieve, we keep going. There's no step four."
+NPC: "...Sorry, lost my train of thought."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: muster=false siege=false mourn=true
+## MID-SIEGE d19 — talking to Aaliyah
+OPEN CHOICES (8): [dlg:comfort] "Are you okay?" | [dlg:empathize] "I hear you." | [dlg:askwhy] "Want to talk about it?" | [dlg:invite] "Want to come with us?" | [dlg:subject] "Can I ask you something else?" | [confront:d_5nu32ru] "You said something odd the other day. Let's talk about it." | [leave] "Actually — never mind." | [silence] "..."
+TURN-CHOICES: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, confront:d_5nu32ru, leave, silence
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that. ...anyway, where was I."
+
+TURN-CHOICES: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, confront:d_5nu32ru, leave, silence
+> YOU PICK [dlg:empathize] 
+YOU: "That sounds really hard."
+NPC: "I — yeah. It helps, hearing that. Doesn't matter now."
+
+TURN-CHOICES: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, confront:d_5nu32ru, leave, silence
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Okay so — Thanks. ...Thanks for saying that."
+
+> YOU PICK [dlg:empathize] 
+YOU: "That sounds really hard."
+NPC: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there. It'll pass."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+
+> YOU PICK [dlg:empathize] 
+YOU: "That sounds really hard."
+NPC: "You know what — Most days I don't think about it. Today I am. Appreciate you noticing."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+
+> YOU PICK [dlg:empathize] 
+YOU: "That sounds really hard."
+NPC: "Thanks. ...Thanks for saying that."
+
+> YOU PICK [goon] 
+YOU: "I'm here. Go on."
+NPC: "Anyway — I should get going."
+
+> YOU PICK [dlg:comfort] 
+(conversation ended by the engine)
+FINAL: want=seek_taken resolution=unestablished
+
+### FULL TRANSCRIPT
+NPC: "Have you — sorry. I keep thinking about them."
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that. ...anyway, where was I."
+YOU: "That sounds really hard."
+NPC: "I — yeah. It helps, hearing that. Doesn't matter now."
+YOU: "Are you okay?"
+NPC: "Okay so — Thanks. ...Thanks for saying that."
+YOU: "That sounds really hard."
+NPC: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there. It'll pass."
+YOU: "Are you okay?"
+NPC: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: "That sounds really hard."
+NPC: "You know what — Most days I don't think about it. Today I am. Appreciate you noticing."
+YOU: "Are you okay?"
+NPC: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: "That sounds really hard."
+NPC: "Thanks. ...Thanks for saying that."
+YOU: "I'm here. Go on."
+NPC: "Anyway — I should get going."
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: muster=false siege=false mourn=false
+[ALLCLEAR] d21
+--- CENSUS (mid-siege), day 25, Bearer: Patrick ---
+  Patrick [paramedic]
+  Tangaroa [mushroom_grower] HP31
+  Petra [glazier] HP81
+  Sigrun [night security guard]
+  Ava [artist] HP81
+  visjoin_22 [?]
+  fallen (recent): Theo d6 (dehydration); Tariq d10 (combat); Elif d18 (monster); Aki d21 (combat); Aaliyah d21 (combat); Nikau d25 (contest)
+  pantry: 26,581 kcal | mustered: false | world monsters: 10
+[SIEGE] threat removed d25 — watching the all-clear
+--- CENSUS (end), day 61, Bearer: Tangaroa ---
+  Tangaroa [mushroom_grower]
+  Petra [glazier]
+  Sigrun [night security guard] HP87
+  Ava [artist] HP83
+  visjoin_22 [?] HP95 SICK(tick fever)
+  visjoin_45 [?] HP86
+  fallen (recent): Theo d6 (dehydration); Tariq d10 (combat); Elif d18 (monster); Aki d21 (combat); Aaliyah d21 (combat); Nikau d25 (contest); Patrick d32 (combat)
+  pantry: 12,366 kcal | mustered: false | world monsters: 10
+## END d61 — talking to Petra
+OPEN CHOICES (7): [betrayal:accept] "Sure. Walk with me? I want another pair of eyes on something." | [betrayal:decline] "Not this time." | [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah." | [ans:q_stay:a_vague] "I don't know yet. I'm still deciding what 'staying' means." | [deflect_q] (change the subject) | [leave] "I should go." | [silence] "..."
+TURN-CHOICES: betrayal:accept, betrayal:decline, ans:q_stay:a_tell, ans:q_stay:a_vague, deflect_q, leave, silence
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: At the tree line the ground is torn up. Something was here, recently, and it wasn't careful. Petra's hand finds your sleeve. You leave together, faster than you came.
+
+TURN-CHOICES: ans:q_stay:a_tell, ans:q_stay:a_vague, deflect_q, leave, silence
+> YOU PICK [ans:q_stay:a_tell] 
+YOU: "Yeah. I am. I didn't expect to say that, but yeah."
+NPC: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+
+TURN-CHOICES: goon, invite_party, alive:event:show, ask:lately, ask:you, ask:goal, ask:personal, teach, skill_learn:herbal_medicine, skill_teach:track_read, leave, silence
+> YOU PICK [ask:lately] 
+YOU: "What's new with you? Anything good, bad, or weird?"
+NPC: "Huh. Let me think about that." "They took you — The Confession, on the screens. The whole fire watched. Nobody knew where to look."
+
+> YOU PICK [alive:event:show] 
+YOU: "What’s going on out there?"
+NPC: "The Confession. They just... took you. Came back like nothing happened. It wasn't nothing."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About whether you're staying — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+
+> YOU PICK [goon] 
+YOU: "Go on."
+NPC: "Anyway — I should get back to it. Good talking, though."
+
+> YOU PICK [invite_party] 
+(conversation ended by the engine)
+FINAL: want=curious resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "About whether you're staying — Are you going to stay? With us. For real."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "Sure."
+NPC: At the tree line the ground is torn up. Something was here, recently, and it wasn't careful. Petra's hand finds your sleeve. You leave together, faster than you came.
+YOU: "Yeah. I am. I didn't expect to say that, but yeah."
+NPC: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+YOU: "What's new with you? Anything good, bad, or weird?"
+NPC: "Huh. Let me think about that." "They took you — The Confession, on the screens. The whole fire watched. Nobody knew where to look."
+YOU: "What’s going on out there?"
+NPC: "The Confession. They just... took you. Came back like nothing happened. It wasn't nothing."
+YOU: "About whether you're staying — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+YOU: "Go on."
+NPC: "Anyway — I should get back to it. Good talking, though."
+YOU: "Want to come with me?"
+NPC: "Alright. But I'm not carrying your stuff."
+NPC: "Good talk. I feel like I know you a little better now."
+NPC: "...Sorry, lost my train of thought."
+
+CARRY-FLAGS: muster=false siege=false mourn=false
+## END d61 — talking to Sigrun
+OPEN CHOICES (9): [betrayal:accept] "Sure. Walk with me? I want another pair of eyes on something." | [betrayal:decline] "Not this time." | [gq:yn:yes] "Yes." | [gq:yn:no] "No." | [gq:yn:unsure] "I don't know." | [gq:yn:honest_pass] "I'd rather not say." | [agree] "You're right." | [invite_party] "You're coming with me." | [silence] "..."
+TURN-CHOICES: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence
+> YOU PICK [gq:yn:yes] 
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them."
+
+TURN-CHOICES: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, dlg:more, dlg:react, recap, dlg:invite, teach, dlg:subject, leave, silence
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: You walk to the tree line with Sigrun. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+
+TURN-CHOICES: alive:event:show, alive:want:ask_favor, dlg:more, dlg:react, recap, dlg:invite, teach, dlg:subject, leave, silence
+> YOU PICK [alive:event:show] 
+YOU: "What’s going on out there?"
+NPC: "They took you — The Confession, on the screens. The whole fire watched. Nobody knew where to look."
+
+> YOU PICK [alive:thread:secret] 
+YOU: "About their secret — we never finished."
+NPC: "About their secret — yeah, we never did get back to that."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "Same weather, different day. I keep notes."
+
+> YOU PICK [goon] 
+YOU: "And then?"
+NPC: "Okay. That's — I need a minute. A long minute."
+
+> YOU PICK [dlg:more] 
+(conversation ended by the engine)
+FINAL: want=ask_favor resolution=unestablished
+
+### FULL TRANSCRIPT
+NPC: "Can I tell you something? Before the scattering, I stole from someone who trusted me. I think about it every day."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them."
+YOU: "Sure."
+NPC: You walk to the tree line with Sigrun. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: "What’s going on out there?"
+NPC: "They took you — The Confession, on the screens. The whole fire watched. Nobody knew where to look."
+YOU: "About their secret — we never finished."
+NPC: "About their secret — yeah, we never did get back to that."
+YOU: "About what's been happening — we never finished."
+NPC: "Same weather, different day. I keep notes."
+YOU: "And then?"
+NPC: "Okay. That's — I need a minute. A long minute."
+YOU: "Tell me more."
+NPC: "We'll see what the treeline brings. We always do."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: muster=false siege=true mourn=false
