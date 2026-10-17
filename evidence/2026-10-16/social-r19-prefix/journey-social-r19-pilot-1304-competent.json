@@ -1,0 +1,498 @@
+{
+ "seed": 1304,
+ "policy": "competent",
+ "daycap": 60,
+ "ms": 45720,
+ "endDay": 63,
+ "alive": 11,
+ "fallen": 5,
+ "convos": 483,
+ "goalWantConvos": 335,
+ "requestConvos": 17,
+ "naturalConvos": 472,
+ "threadCounts": {
+  "want": 331,
+  "lately": 308,
+  "neighbors": 47,
+  "skills": 45,
+  "others": 61,
+  "request": 17,
+  "recall": 146,
+  "you": 30,
+  "fears": 42,
+  "grief": 14,
+  "secret": 15,
+  "advice": 31,
+  "oldworld": 19,
+  "systemtake": 17,
+  "loved": 38,
+  "goal": 14
+ },
+ "qa": {
+  "asked": 126,
+  "answered": 126,
+  "recalls": 75
+ },
+ "qa.askedTotal": 126,
+ "qa.answeredTotal": 126,
+ "qa.recallHits": 75,
+ "end.day": 63,
+ "end.alive": 11,
+ "opener": {
+  "convos": 483,
+  "deflected": 59,
+  "mismatched": 59,
+  "byThread": {
+   "want": 32,
+   "recall": 16,
+   "grief": 2,
+   "request": 9
+  }
+ },
+ "grief": {
+  "tagged": 21,
+  "carry": 7,
+  "files": [
+   "grief-1304-competent-day11-Roman.txt",
+   "grief-1304-competent-day11-Natalie.txt",
+   "grief-1304-competent-day11-Ellis.txt",
+   "grief-1304-competent-day12-Roman.txt",
+   "grief-1304-competent-day12-Natalie.txt",
+   "grief-1304-competent-day12-Ellis.txt",
+   "grief-1304-competent-day19-Natalie.txt",
+   "grief-1304-competent-day19-Oscar.txt",
+   "grief-1304-competent-day19-James.txt",
+   "grief-1304-competent-day20-Natalie.txt",
+   "grief-1304-competent-day20-Oscar.txt",
+   "grief-1304-competent-day20-James.txt",
+   "grief-1304-competent-day24-Oscar.txt",
+   "grief-1304-competent-day24-James.txt",
+   "grief-1304-competent-day24-Ava.txt",
+   "grief-1304-competent-day25-Oscar.txt",
+   "grief-1304-competent-day25-James.txt",
+   "grief-1304-competent-day25-Ava.txt",
+   "grief-1304-competent-day55-Oscar.txt",
+   "grief-1304-competent-day55-James.txt",
+   "grief-1304-competent-day55-Ava.txt"
+  ]
+ },
+ "deflect": {
+  "lines": 2492,
+  "npcLines": 5394,
+  "maxStreak": 9
+ },
+ "talkRequests": {
+  "fired": 5,
+  "answered": 5,
+  "firedIds": [
+   "Aroha",
+   "Miguel",
+   "Ava",
+   "Hannah",
+   "Oscar"
+  ]
+ },
+ "rumor": {
+  "planted": true,
+  "plantError": null,
+  "target": "Natalie",
+  "hearer": "Oscar",
+  "repBefore": 0,
+  "repAfter": -38,
+  "repDelta": -38,
+  "trustBefore": 84,
+  "trustAfter": 73,
+  "trustDelta": -11,
+  "trace": [
+   {
+    "day": 20,
+    "ev": "planted",
+    "rep": {
+     "generous": 0,
+     "brave": 0,
+     "honest": -15,
+     "competent": 100
+    },
+    "trust": 84,
+    "heard": 1,
+    "distortion": 0
+   },
+   {
+    "day": 20,
+    "ev": "tick",
+    "rep": {
+     "generous": 0,
+     "brave": 0,
+     "honest": -15,
+     "competent": 100
+    },
+    "trust": 84,
+    "gossipEntries": 1,
+    "heard": 1,
+    "heardNames": [
+     "Oscar"
+    ],
+    "distortion": 0
+   },
+   {
+    "day": 21,
+    "ev": "tick",
+    "rep": {
+     "generous": -20,
+     "brave": 0,
+     "honest": -17,
+     "competent": 100
+    },
+    "trust": 88,
+    "gossipEntries": 1,
+    "heard": 5,
+    "heardNames": [
+     "Oscar",
+     "James",
+     "Natalie",
+     "Ava",
+     "Miguel"
+    ],
+    "distortion": 4
+   },
+   {
+    "day": 22,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 90,
+    "gossipEntries": 1,
+    "heard": 8,
+    "heardNames": [
+     "Oscar",
+     "James",
+     "Natalie",
+     "Ava",
+     "Miguel",
+     "Aroha",
+     "Hannah",
+     "Boris"
+    ],
+    "distortion": 7
+   },
+   {
+    "day": 23,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 24,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 25,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 26,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 27,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 28,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 29,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 30,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 31,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 32,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 33,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 73,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 34,
+    "ev": "tick",
+    "rep": {
+     "generous": -38,
+     "brave": -1,
+     "honest": -24,
+     "competent": 100
+    },
+    "trust": 73,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   }
+  ]
+ },
+ "mootsFired": 0,
+ "mootFiles": [],
+ "moots": [],
+ "deaths": [
+  {
+   "day": 10,
+   "name": "Miriam Sesay",
+   "role": "welder",
+   "cause": "Choir Toad",
+   "killer": null
+  },
+  {
+   "day": 18,
+   "name": "Dorothy Bondarenko",
+   "role": "pilot",
+   "cause": "combat",
+   "killer": null
+  },
+  {
+   "day": 18,
+   "name": "Ellis Lewis",
+   "role": "roofer",
+   "cause": "a wound that wouldn't close",
+   "killer": null
+  },
+  {
+   "day": 23,
+   "name": "Roman Romano",
+   "role": "carpenter",
+   "cause": "combat",
+   "killer": null
+  },
+  {
+   "day": 53,
+   "name": "Hannah Kim",
+   "role": "chef",
+   "cause": "a wound that wouldn't close",
+   "killer": null
+  }
+ ],
+ "census": {
+  "alive": [
+   {
+    "name": "Oscar",
+    "role": "locksmith"
+   },
+   {
+    "name": "James",
+    "role": "carpenter"
+   },
+   {
+    "name": "Ava",
+    "role": "artist"
+   },
+   {
+    "name": "Miguel",
+    "role": "dockworker"
+   },
+   {
+    "name": "Aroha",
+    "role": "comic shop owner"
+   },
+   {
+    "name": "Boris",
+    "role": "blacksmith"
+   },
+   {
+    "name": "Omar",
+    "role": "piano tuner"
+   },
+   {
+    "name": "Sofia",
+    "role": "gardener"
+   },
+   {
+    "name": "Ines",
+    "role": "florist"
+   },
+   {
+    "name": "Liam",
+    "role": "farmer"
+   }
+  ],
+  "dead": [
+   {
+    "name": "Miriam Sesay",
+    "role": "welder",
+    "day": 10,
+    "cause": "Choir Toad",
+    "killer": null
+   },
+   {
+    "name": "Dorothy Bondarenko",
+    "role": "pilot",
+    "day": 18,
+    "cause": "combat",
+    "killer": null
+   },
+   {
+    "name": "Ellis Lewis",
+    "role": "roofer",
+    "day": 18,
+    "cause": "a wound that wouldn't close",
+    "killer": null
+   },
+   {
+    "name": "Roman Romano",
+    "role": "carpenter",
+    "day": 23,
+    "cause": "combat",
+    "killer": null
+   },
+   {
+    "name": "Hannah Kim",
+    "role": "chef",
+    "day": 53,
+    "cause": "a wound that wouldn't close",
+    "killer": null
+   }
+  ],
+  "playerDeaths": [
+   {
+    "day": 18,
+    "prevBearer": "gen_4igb2i5",
+    "prevName": "Dorothy"
+   },
+   {
+    "day": 23,
+    "prevBearer": "gen_73161lk",
+    "prevName": "Roman"
+   }
+  ]
+ },
+ "endReason": "survived"
+}

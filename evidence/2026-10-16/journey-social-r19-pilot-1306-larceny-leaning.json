@@ -1,0 +1,609 @@
+{
+ "seed": 1306,
+ "policy": "larceny-leaning",
+ "daycap": 60,
+ "ms": 64979,
+ "endDay": 56,
+ "alive": 10,
+ "fallen": 2,
+ "convos": 564,
+ "goalWantConvos": 394,
+ "requestConvos": 2,
+ "naturalConvos": 551,
+ "threadCounts": {
+  "want": 359,
+  "lately": 276,
+  "skills": 26,
+  "neighbors": 32,
+  "nonverbal": 8,
+  "recall": 217,
+  "oldworld": 19,
+  "goal": 124,
+  "small": 18,
+  "you": 31,
+  "secret": 17,
+  "fears": 27,
+  "cheer": 1,
+  "others": 24,
+  "grief": 19,
+  "advice": 24,
+  "systemtake": 14,
+  "loved": 17,
+  "taughtref": 5,
+  "request": 2
+ },
+ "qa": {
+  "asked": 193,
+  "answered": 193,
+  "recalls": 163
+ },
+ "qa.askedTotal": 193,
+ "qa.answeredTotal": 193,
+ "qa.recallHits": 163,
+ "end.day": 56,
+ "end.alive": 10,
+ "opener": {
+  "convos": 564,
+  "deflected": 0,
+  "mismatched": 0,
+  "byThread": {}
+ },
+ "grief": {
+  "tagged": 9,
+  "carry": 4,
+  "files": [
+   "grief-1306-larceny-leaning-day14-Sandra.txt",
+   "grief-1306-larceny-leaning-day14-Rafael.txt",
+   "grief-1306-larceny-leaning-day14-James.txt",
+   "grief-1306-larceny-leaning-day18-Sandra.txt",
+   "grief-1306-larceny-leaning-day18-James.txt",
+   "grief-1306-larceny-leaning-day18-Teshome.txt",
+   "grief-1306-larceny-leaning-day19-Sandra.txt",
+   "grief-1306-larceny-leaning-day19-James.txt",
+   "grief-1306-larceny-leaning-day19-Teshome.txt"
+  ]
+ },
+ "deflect": {
+  "lines": 3089,
+  "npcLines": 6456,
+  "maxStreak": 9
+ },
+ "talkRequests": {
+  "fired": 2,
+  "answered": 2,
+  "firedIds": [
+   "Yuki",
+   "Sandra"
+  ]
+ },
+ "rumor": {
+  "planted": true,
+  "plantError": null,
+  "target": "Sandra",
+  "hearer": "James",
+  "repBefore": -42,
+  "repAfter": -100,
+  "repDelta": -58,
+  "trustBefore": 65,
+  "trustAfter": 71,
+  "trustDelta": 6,
+  "trace": [
+   {
+    "day": 20,
+    "ev": "planted",
+    "rep": {
+     "generous": -42,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -59
+    },
+    "trust": 65,
+    "heard": 1,
+    "distortion": 0
+   },
+   {
+    "day": 20,
+    "ev": "tick",
+    "rep": {
+     "generous": -42,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -59
+    },
+    "trust": 65,
+    "gossipEntries": 1,
+    "heard": 1,
+    "heardNames": [
+     "James"
+    ],
+    "distortion": 0
+   },
+   {
+    "day": 21,
+    "ev": "tick",
+    "rep": {
+     "generous": -77,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -64
+    },
+    "trust": 56,
+    "gossipEntries": 1,
+    "heard": 8,
+    "heardNames": [
+     "James",
+     "Ingrid",
+     "Boris",
+     "Mara",
+     "Sandra",
+     "Teshome",
+     "Ines",
+     "Yuki"
+    ],
+    "distortion": 7
+   },
+   {
+    "day": 22,
+    "ev": "tick",
+    "rep": {
+     "generous": -84,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -64
+    },
+    "trust": 60,
+    "gossipEntries": 1,
+    "heard": 9,
+    "heardNames": [
+     "James",
+     "Ingrid",
+     "Boris",
+     "Mara",
+     "Sandra",
+     "Teshome",
+     "Ines",
+     "Yuki",
+     "Mia"
+    ],
+    "distortion": 8
+   },
+   {
+    "day": 23,
+    "ev": "tick",
+    "rep": {
+     "generous": -84,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -64
+    },
+    "trust": 64,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 24,
+    "ev": "tick",
+    "rep": {
+     "generous": -84,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -75
+    },
+    "trust": 72,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 25,
+    "ev": "tick",
+    "rep": {
+     "generous": -84,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -80
+    },
+    "trust": 77,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 26,
+    "ev": "tick",
+    "rep": {
+     "generous": -84,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -80
+    },
+    "trust": 66,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 27,
+    "ev": "tick",
+    "rep": {
+     "generous": -86,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -96
+    },
+    "trust": 73,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 28,
+    "ev": "tick",
+    "rep": {
+     "generous": -86,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -96
+    },
+    "trust": 77,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 29,
+    "ev": "tick",
+    "rep": {
+     "generous": -86,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -96
+    },
+    "trust": 81,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 30,
+    "ev": "tick",
+    "rep": {
+     "generous": -86,
+     "brave": 0,
+     "honest": -100,
+     "competent": 99,
+     "trustworthy": -100
+    },
+    "trust": 85,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 31,
+    "ev": "tick",
+    "rep": {
+     "generous": -88,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 59,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 32,
+    "ev": "tick",
+    "rep": {
+     "generous": -85,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 64,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 33,
+    "ev": "tick",
+    "rep": {
+     "generous": -85,
+     "brave": 0,
+     "honest": -100,
+     "competent": 98,
+     "trustworthy": -100
+    },
+    "trust": 69,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 34,
+    "ev": "tick",
+    "rep": {
+     "generous": -85,
+     "brave": 0,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 73,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   }
+  ]
+ },
+ "mootsFired": 13,
+ "mootFiles": [
+  "1306-larceny-leaning-moot-1.txt",
+  "1306-larceny-leaning-moot-2.txt",
+  "1306-larceny-leaning-moot-3.txt",
+  "1306-larceny-leaning-moot-4.txt",
+  "1306-larceny-leaning-moot-5.txt",
+  "1306-larceny-leaning-moot-6.txt",
+  "1306-larceny-leaning-moot-7.txt",
+  "1306-larceny-leaning-moot-8.txt",
+  "1306-larceny-leaning-moot-9.txt",
+  "1306-larceny-leaning-moot-10.txt",
+  "1306-larceny-leaning-moot-11.txt",
+  "1306-larceny-leaning-moot-12.txt",
+  "1306-larceny-leaning-moot-13.txt"
+ ],
+ "moots": [
+  {
+   "caseId": "case_1",
+   "day": 11,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Giuseppe"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_2",
+   "day": 16,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_3",
+   "day": 19,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_4",
+   "day": 23,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_5",
+   "day": 26,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_6",
+   "day": 29,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_7",
+   "day": 32,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_8",
+   "day": 35,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_9",
+   "day": 39,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_10",
+   "day": 43,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_11",
+   "day": 47,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_12",
+   "day": 50,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_13",
+   "day": 53,
+   "charge": "theft",
+   "accuser": "Teshome",
+   "accused": [
+    "Manik"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  }
+ ],
+ "deaths": [
+  {
+   "day": 12,
+   "name": "Giuseppe Singh",
+   "role": "soldier",
+   "cause": "combat",
+   "killer": null
+  },
+  {
+   "day": 17,
+   "name": "Rafael",
+   "role": "locksmith",
+   "cause": "monster",
+   "killer": null
+  }
+ ],
+ "census": {
+  "alive": [
+   {
+    "name": "Sandra",
+    "role": "firefighter"
+   },
+   {
+    "name": "James",
+    "role": "physical_therapist"
+   },
+   {
+    "name": "Teshome",
+    "role": "truck_driver"
+   },
+   {
+    "name": "Ingrid",
+    "role": "physical_therapist"
+   },
+   {
+    "name": "Ines",
+    "role": "florist"
+   },
+   {
+    "name": "Boris",
+    "role": "blacksmith"
+   },
+   {
+    "name": "Yuki",
+    "role": "librarian"
+   },
+   {
+    "name": "Mara",
+    "role": "army_medic"
+   },
+   {
+    "name": "Mia",
+    "role": "gardener"
+   }
+  ],
+  "dead": [
+   {
+    "name": "Giuseppe Singh",
+    "role": "soldier",
+    "day": 12,
+    "cause": "combat",
+    "killer": null
+   },
+   {
+    "name": "Rafael",
+    "role": "locksmith",
+    "day": 17,
+    "cause": "monster",
+    "killer": null
+   }
+  ],
+  "playerDeaths": [
+   {
+    "day": 13,
+    "prevBearer": "gen_a942knc",
+    "prevName": "Giuseppe"
+   }
+  ]
+ },
+ "endReason": "survived"
+}

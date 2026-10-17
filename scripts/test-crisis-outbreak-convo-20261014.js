@@ -1,5 +1,8 @@
 #!/usr/bin/env node
-// test-crisis-outbreak-convo-20261014.js — PROOF for the crisis-leg r8 blanks
+// test-crisis-outbreak-convo-20261014.js
+// 2026-10-16 (journey-social r19): staged corpses now carry kind:'villager'
+// + dayDied — the r16 succession change (base) restricts fresh-mourning to
+// sapient-kind corpses (corpseIsPerson), which broke the kind-less staging. — PROOF for the crisis-leg r8 blanks
 // (journey-crisis r8, 2026-10-14).
 //
 // BEFORE (sense-tested on 4 outbreak sims + full transcripts):
@@ -129,7 +132,7 @@ async function main() {
     const a = adult(Game, ids);
     const healthy = adult(Game, ids.filter(x => x !== a));
     Game.state.village.grief = 2;
-    try { Game.state.corpses = [{ villagerId: a, name: 'Test Villager', cause: 'gutrot' }]; } catch (e) {}
+    try { Game.state.corpses = [{ villagerId: a, kind: 'villager', name: 'Test Villager', cause: 'gutrot', dayDied: (Game.state.scholar || {}).day || 1 }]; } catch (e) {}
     const ev = Game.t2LatelyEvent(healthy);
     ok('disease corpse flags sickDeath', ev && ev.kind === 'mourning' && ev.sickDeath === true, JSON.stringify(ev));
     const openers = Game.t2gen_lately(healthy) || [];
@@ -142,7 +145,7 @@ async function main() {
     const a = adult(Game, ids);
     const healthy = adult(Game, ids.filter(x => x !== a));
     Game.state.village.grief = 2;
-    try { Game.state.corpses = [{ villagerId: a, name: 'Test Villager', cause: 'combat' }]; } catch (e) {}
+    try { Game.state.corpses = [{ villagerId: a, kind: 'villager', name: 'Test Villager', cause: 'combat', dayDied: (Game.state.scholar || {}).day || 1 }]; } catch (e) {}
     const ev = Game.t2LatelyEvent(healthy);
     ok('combat death has no sickDeath flag', ev && ev.kind === 'mourning' && !ev.sickDeath, JSON.stringify(ev));
   }

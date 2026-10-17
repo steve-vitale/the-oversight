@@ -1,0 +1,731 @@
+{
+ "seed": 1304,
+ "policy": "larceny-leaning",
+ "daycap": 60,
+ "ms": 36109,
+ "endDay": 62,
+ "alive": 8,
+ "fallen": 8,
+ "convos": 502,
+ "goalWantConvos": 386,
+ "requestConvos": 30,
+ "naturalConvos": 497,
+ "threadCounts": {
+  "want": 367,
+  "lately": 231,
+  "neighbors": 24,
+  "skills": 18,
+  "others": 27,
+  "request": 30,
+  "recall": 106,
+  "you": 57,
+  "secret": 11,
+  "fears": 23,
+  "small": 1,
+  "grief": 18,
+  "advice": 5,
+  "ambush": 8,
+  "goal": 19,
+  "oldworld": 6
+ },
+ "qa": {
+  "asked": 76,
+  "answered": 76,
+  "recalls": 60
+ },
+ "qa.askedTotal": 76,
+ "qa.answeredTotal": 76,
+ "qa.recallHits": 60,
+ "end.day": 62,
+ "end.alive": 8,
+ "opener": {
+  "convos": 502,
+  "deflected": 108,
+  "mismatched": 108,
+  "byThread": {
+   "want": 81,
+   "recall": 3,
+   "grief": 2,
+   "request": 22
+  }
+ },
+ "grief": {
+  "tagged": 27,
+  "carry": 9,
+  "files": [
+   "grief-1304-larceny-leaning-day15-Roman.txt",
+   "grief-1304-larceny-leaning-day15-Natalie.txt",
+   "grief-1304-larceny-leaning-day15-Ellis.txt",
+   "grief-1304-larceny-leaning-day16-Roman.txt",
+   "grief-1304-larceny-leaning-day16-Natalie.txt",
+   "grief-1304-larceny-leaning-day16-Ellis.txt",
+   "grief-1304-larceny-leaning-day21-Roman.txt",
+   "grief-1304-larceny-leaning-day21-Natalie.txt",
+   "grief-1304-larceny-leaning-day21-Ellis.txt",
+   "grief-1304-larceny-leaning-day35-Roman.txt",
+   "grief-1304-larceny-leaning-day35-Natalie.txt",
+   "grief-1304-larceny-leaning-day35-Ellis.txt",
+   "grief-1304-larceny-leaning-day39-Roman.txt",
+   "grief-1304-larceny-leaning-day39-Ellis.txt",
+   "grief-1304-larceny-leaning-day39-Miriam.txt",
+   "grief-1304-larceny-leaning-day43-Roman.txt",
+   "grief-1304-larceny-leaning-day43-Ellis.txt",
+   "grief-1304-larceny-leaning-day43-Miriam.txt",
+   "grief-1304-larceny-leaning-day47-Roman.txt",
+   "grief-1304-larceny-leaning-day47-Ellis.txt",
+   "grief-1304-larceny-leaning-day47-Ava.txt",
+   "grief-1304-larceny-leaning-day51-Ava.txt",
+   "grief-1304-larceny-leaning-day51-Aroha.txt",
+   "grief-1304-larceny-leaning-day51-Boris.txt",
+   "grief-1304-larceny-leaning-day52-Ava.txt",
+   "grief-1304-larceny-leaning-day52-Aroha.txt",
+   "grief-1304-larceny-leaning-day52-Boris.txt"
+  ]
+ },
+ "deflect": {
+  "lines": 2794,
+  "npcLines": 5366,
+  "maxStreak": 9
+ },
+ "talkRequests": {
+  "fired": 4,
+  "answered": 4,
+  "firedIds": [
+   "Aroha",
+   "Miriam",
+   "Miguel",
+   "Ellis"
+  ]
+ },
+ "rumor": {
+  "planted": true,
+  "plantError": null,
+  "target": "Roman",
+  "hearer": "Natalie",
+  "repBefore": -46,
+  "repAfter": -100,
+  "repDelta": -54,
+  "trustBefore": 40,
+  "trustAfter": 55,
+  "trustDelta": 15,
+  "trace": [
+   {
+    "day": 20,
+    "ev": "planted",
+    "rep": {
+     "generous": -46,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -73
+    },
+    "trust": 40,
+    "heard": 1,
+    "distortion": 0
+   },
+   {
+    "day": 20,
+    "ev": "tick",
+    "rep": {
+     "generous": -46,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -73
+    },
+    "trust": 40,
+    "gossipEntries": 1,
+    "heard": 1,
+    "heardNames": [
+     "Natalie"
+    ],
+    "distortion": 0
+   },
+   {
+    "day": 21,
+    "ev": "tick",
+    "rep": {
+     "generous": -88,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -91
+    },
+    "trust": 46,
+    "gossipEntries": 1,
+    "heard": 9,
+    "heardNames": [
+     "Natalie",
+     "Roman",
+     "Ellis",
+     "Miriam",
+     "James",
+     "Ava",
+     "Miguel",
+     "Aroha",
+     "Boris"
+    ],
+    "distortion": 8
+   },
+   {
+    "day": 22,
+    "ev": "tick",
+    "rep": {
+     "generous": -88,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -91
+    },
+    "trust": 50,
+    "gossipEntries": 1,
+    "heard": 9,
+    "heardNames": [
+     "Natalie",
+     "Roman",
+     "Ellis",
+     "Miriam",
+     "James",
+     "Ava",
+     "Miguel",
+     "Aroha",
+     "Boris"
+    ],
+    "distortion": 8
+   },
+   {
+    "day": 23,
+    "ev": "tick",
+    "rep": {
+     "generous": -88,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -91
+    },
+    "trust": 56,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 24,
+    "ev": "tick",
+    "rep": {
+     "generous": -88,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 60,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 25,
+    "ev": "tick",
+    "rep": {
+     "generous": -88,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 64,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 26,
+    "ev": "tick",
+    "rep": {
+     "generous": -90,
+     "brave": -6,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 56,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 27,
+    "ev": "tick",
+    "rep": {
+     "generous": -90,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 61,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 28,
+    "ev": "tick",
+    "rep": {
+     "generous": -90,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 65,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 29,
+    "ev": "tick",
+    "rep": {
+     "generous": -90,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 69,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 30,
+    "ev": "tick",
+    "rep": {
+     "generous": -90,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 73,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 31,
+    "ev": "tick",
+    "rep": {
+     "generous": -92,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 62,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 32,
+    "ev": "tick",
+    "rep": {
+     "generous": -92,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 66,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 33,
+    "ev": "tick",
+    "rep": {
+     "generous": -92,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 71,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 34,
+    "ev": "tick",
+    "rep": {
+     "generous": -92,
+     "brave": 1,
+     "honest": -100,
+     "competent": 100,
+     "trustworthy": -100
+    },
+    "trust": 75,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   }
+  ]
+ },
+ "mootsFired": 15,
+ "mootFiles": [
+  "1304-larceny-leaning-moot-1.txt",
+  "1304-larceny-leaning-moot-2.txt",
+  "1304-larceny-leaning-moot-3.txt",
+  "1304-larceny-leaning-moot-4.txt",
+  "1304-larceny-leaning-moot-5.txt",
+  "1304-larceny-leaning-moot-6.txt",
+  "1304-larceny-leaning-moot-7.txt",
+  "1304-larceny-leaning-moot-8.txt",
+  "1304-larceny-leaning-moot-9.txt",
+  "1304-larceny-leaning-moot-10.txt",
+  "1304-larceny-leaning-moot-11.txt",
+  "1304-larceny-leaning-moot-12.txt",
+  "1304-larceny-leaning-moot-13.txt",
+  "1304-larceny-leaning-moot-14.txt",
+  "1304-larceny-leaning-moot-15.txt"
+ ],
+ "moots": [
+  {
+   "caseId": "case_1",
+   "day": 10,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Dorothy"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_5",
+   "day": 16,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_7",
+   "day": 20,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_8",
+   "day": 23,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_12",
+   "day": 26,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_15",
+   "day": 30,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_24",
+   "day": 34,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_28",
+   "day": 37,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_29",
+   "day": 40,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_30",
+   "day": 44,
+   "charge": "theft",
+   "accuser": "Miguel",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_31",
+   "day": 47,
+   "charge": "theft",
+   "accuser": "Ava",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_32",
+   "day": 50,
+   "charge": "theft",
+   "accuser": "Roman",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_33",
+   "day": 53,
+   "charge": "theft",
+   "accuser": "Boris",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_34",
+   "day": 57,
+   "charge": "theft",
+   "accuser": "Ava",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  },
+  {
+   "caseId": "case_35",
+   "day": 61,
+   "charge": "theft",
+   "accuser": "Eva",
+   "accused": [
+    "Hannah"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null
+  }
+ ],
+ "deaths": [
+  {
+   "day": 14,
+   "name": "Dorothy Bondarenko",
+   "role": "pilot",
+   "cause": "lockjaw",
+   "killer": null
+  },
+  {
+   "day": 19,
+   "name": "Oscar",
+   "role": "locksmith",
+   "cause": "sickness",
+   "killer": null
+  },
+  {
+   "day": 33,
+   "name": "James",
+   "role": "carpenter",
+   "cause": "sickness",
+   "killer": null
+  },
+  {
+   "day": 37,
+   "name": "Natalie",
+   "role": "mason",
+   "cause": "sickness",
+   "killer": null
+  },
+  {
+   "day": 41,
+   "name": "Miguel Santos",
+   "role": "dockworker",
+   "cause": "a wound that wouldn't close",
+   "killer": null
+  },
+  {
+   "day": 45,
+   "name": "Miriam",
+   "role": "welder",
+   "cause": "sickness",
+   "killer": null
+  },
+  {
+   "day": 49,
+   "name": "Roman",
+   "role": "carpenter",
+   "cause": "sickness",
+   "killer": null
+  },
+  {
+   "day": 50,
+   "name": "Ellis Lewis",
+   "role": "roofer",
+   "cause": "a wound that wouldn't close",
+   "killer": null
+  }
+ ],
+ "census": {
+  "alive": [
+   {
+    "name": "Ava",
+    "role": "artist"
+   },
+   {
+    "name": "Aroha",
+    "role": "comic shop owner"
+   },
+   {
+    "name": "Boris",
+    "role": "blacksmith"
+   },
+   {
+    "name": "Sigrun",
+    "role": "night security guard"
+   },
+   {
+    "name": "Elijah",
+    "role": "social_worker"
+   },
+   {
+    "name": "Lena",
+    "role": "er_nurse"
+   },
+   {
+    "name": "Eva",
+    "role": "esl_teacher"
+   }
+  ],
+  "dead": [
+   {
+    "name": "Dorothy Bondarenko",
+    "role": "pilot",
+    "day": 14,
+    "cause": "lockjaw",
+    "killer": null
+   },
+   {
+    "name": "Oscar",
+    "role": "locksmith",
+    "day": 19,
+    "cause": "sickness",
+    "killer": null
+   },
+   {
+    "name": "James",
+    "role": "carpenter",
+    "day": 33,
+    "cause": "sickness",
+    "killer": null
+   },
+   {
+    "name": "Natalie",
+    "role": "mason",
+    "day": 37,
+    "cause": "sickness",
+    "killer": null
+   },
+   {
+    "name": "Miguel Santos",
+    "role": "dockworker",
+    "day": 41,
+    "cause": "a wound that wouldn't close",
+    "killer": null
+   },
+   {
+    "name": "Miriam",
+    "role": "welder",
+    "day": 45,
+    "cause": "sickness",
+    "killer": null
+   },
+   {
+    "name": "Roman",
+    "role": "carpenter",
+    "day": 49,
+    "cause": "sickness",
+    "killer": null
+   },
+   {
+    "name": "Ellis Lewis",
+    "role": "roofer",
+    "day": 50,
+    "cause": "a wound that wouldn't close",
+    "killer": null
+   }
+  ],
+  "playerDeaths": [
+   {
+    "day": 14,
+    "prevBearer": "gen_4igb2i5",
+    "prevName": "Dorothy"
+   }
+  ]
+ },
+ "endReason": "survived"
+}

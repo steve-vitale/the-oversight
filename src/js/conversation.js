@@ -1010,6 +1010,30 @@
       if (!v.convoRunLines) v.convoRunLines = [];
       return v.convoRunLines;
     },
+    // convoWouldBlock (journey-social r19 2026-10-16): PURE predicate — would
+    // sayLine no-repeat-block this line right now? Mirrors sayLine's block
+    // decision (self ledger + run ledger, first-chunk key) without emitting
+    // or ledgering. The opener chain uses it to SKIP a blocked candidate and
+    // fall through to the next one: a real person with a blocked opener
+    // picks a different line, not "...Sorry, lost my train of thought."
+    // (r19 M1: 18.8% of driven openers were dry-replaced, all thread-
+    // mismatched.) Structural/invite-exempt beats never block — callers
+    // must not ask about those.
+    convoWouldBlock(vid, line) {
+      if (line == null) return false;
+      const c = this.convoGet(vid);
+      if (!c) return false;
+      let key = String(line);
+      try { key = this.convoSplitBeats(line)[0].trim(); } catch (e) {}
+      if (!key) return false;
+      const said = c.saidLines || [];
+      if (said.indexOf(key) !== -1) return true;
+      try {
+        const rl = (typeof this.convoRunLedger === 'function') ? this.convoRunLedger() : [];
+        if (rl && rl.indexOf(key) !== -1) return true;
+      } catch (e) {}
+      return false;
+    },
 
     // convoDryLine: honest dry lines for run-ledger blocks. The line was
     // swallowed because ANOTHER villager said it recently — the speaker
@@ -1400,12 +1424,11 @@
     // content and read as fabricated shared history.
     convoThreadOpen(vid, tid, label, why, snippet) {
       if (!tid || tid === 'small' || tid === 'nonverbal' || tid === 'request') return;
-      // R17 (journey-social 2026-10-15): a thread with no real beat is a
-      // ghost — planting it manufactures "we never finished X" from nothing
-      // (transcript-caught: deflection-only threads resuming as unfinished
-      // business, then dead-ending every resume into more deflections).
-      // No content, no plant. Extends the LEDGER GATE principle above.
-      if (!snippet) return;
+      // R19 (journey-social 2026-10-16): "real beat" needs content, not just
+      // truthiness — micro-fillers ("Hm.") passed the R17 gate and got
+      // quoted as memories. The plant contract is no ghost threads,
+      // whatever the caller passes.
+      if (!this.convoSnippetIsRealBeat(snippet)) return;
       // LEDGER GATE (convo rebuild 2026-10-11): no backing event, no plant.
       if (!this.convoThreadBacked(vid, tid)) return;
       try {
@@ -1424,6 +1447,26 @@
       } catch (e) {}
     },
 
+    // convoGriefOpenerPool (journey-social r19 2026-10-16): the acute-grief
+    // opener pool. Was 2 lines — undersized for a village-wide beat: with
+    // 12 villagers grieving at once, the run-ledger blocked repeat speakers
+    // and the per-life pool exhausted after one death, muting every later
+    // death's grief (r19 M2 root cause). 8 lines: still once-per-line-per-
+    // life (no spam), but a second death in the same run still has words.
+    // Plain-spoken, matching the original two; no naming (the lately
+    // mourning lines own the named dead via firstRef).
+    convoGriefOpenerPool() {
+      return [
+        '"Have you — sorry. I keep thinking about them."',
+        '"It\'s quiet today. Wrong kind of quiet."',
+        '"I keep expecting to see them by the fire. Then I remember."',
+        '"Don\'t mind me. Today\'s just heavy."',
+        '"We gave them a good burial. Doesn\'t feel like enough, does it?"',
+        '"I don\'t know what to do with my hands today."',
+        '"Every laugh out there feels wrong today. Then I feel wrong for thinking it."',
+        '"They\'d tell me to keep working. So I\'m working. That\'s the whole plan."',
+      ];
+    },
     // convoLastThreadSnippet: the last NPC-spoken beat landed on a thread in
     // the live conversation (deepening r11 2026-10-15). threadLog only
     // records beats the NPC landed (convoNoteBeat / convoNoteSpokenBeat), so
@@ -1435,11 +1478,34 @@
         const log = (c && c.threadLog) || [];
         for (let i = log.length - 1; i >= 0; i--) {
           if (log[i] && log[i].thread === tid && log[i].snippet) {
-            return clipSnippet(log[i].snippet, 110);
+            // R19 (journey-social 2026-10-16): the memory quote must be a
+            // real beat — a thread whose last beat was filler ("Hm.") but
+            // had substance earlier quotes the substance, not the filler.
+            // A thread with no substantive beat at all yields null, and the
+            // plant-time gate treats it as the ghost it is.
+            if (this.convoSnippetIsRealBeat(log[i].snippet)) {
+              return clipSnippet(log[i].snippet, 110);
+            }
           }
         }
       } catch (e) {}
       return null;
+    },
+    // convoSnippetIsRealBeat (journey-social r19 2026-10-16): is this
+    // snippet a memory worth quoting? The R17 "real beat" gate tested
+    // truthiness — micro-fillers ("Hm.", "So.", "Anyway.") passed and got
+    // quoted as memories ("we never finished talking about what scares
+    // them — we wandered off it. 'Hm.'"). A real beat is not a deflection
+    // line, not resume scaffolding, and carries a proposition (>= 4 words;
+    // a dropped quote is harmless — the resume still names the thread —
+    // while a quoted filler is the bug).
+    convoSnippetIsRealBeat(sn) {
+      if (!sn) return false;
+      const t = String(sn).replace(/^["'“”\s]+|["'“”\s.,!?;:—-]+$/g, '').trim();
+      if (!t || t.split(/\s+/).length < 4) return false;
+      try { if (this.convoIsDeflectionLine(sn)) return false; } catch (e) {}
+      if (/never (did )?finish(ed)? talking about|never did get back to|we left it|we wandered off|proper ending/i.test(sn)) return false;
+      return true;
     },
 
     convoThreadResolve(vid, tid) {
@@ -1681,8 +1747,10 @@
         // The template's signature phrase never appears in real content,
         // so matching it is a clean structural test. The thread still
         // resumes (label + whyLine); only the nested quote is dropped.
-        const isResumeOpener = /never (did )?finish(ed)? talking about/i.test(o.snippet || '');
-        if (!this.convoIsDeflectionLine(o.snippet) && !isResumeOpener) {
+        // R19 (journey-social 2026-10-16): the quote must be a real beat —
+        // the old guard missed micro-fillers ("Hm.") and resume-scaffolding
+        // phrasings ("never did get back to that").
+        if (this.convoSnippetIsRealBeat(o.snippet)) {
           const sq = String(o.snippet).replace(/^"+|"+$/g, '');
           inner += ` '${sq}'`;
         }
@@ -2359,7 +2427,7 @@
     // deprioritized, so shared pools don't recycle visibly across speakers.
     // Falls back to per-villager-fresh, then to anything, then null.
     // Returns the line, or null when the pool is genuinely exhausted.
-    convoPick(vid, key, pool) {
+    convoPick(vid, key, pool, hard) {
       const c = this.convoGet(vid);
       c.said[key] = c.said[key] || [];
       const allSaid = [];
@@ -2386,6 +2454,19 @@
           if (unf.length) pickPool = unf;
         }
       } catch (e) {}
+      // HARD MODE (journey-social r19 2026-10-16): the caller is selecting
+      // an opener with fallbacks behind it (convoOpening). A line that
+      // would be blocked at emission must return null so the caller falls
+      // through to the next candidate — never a dry opener. Default stays
+      // a preference: mid-conversation beats have no fallbacks.
+      if (hard) {
+        const self = this;
+        const ok = pickPool.filter(l => {
+          try { return !self.convoWouldBlock(vid, l); } catch (e) { return true; }
+        });
+        if (!ok.length) return null;
+        pickPool = ok;
+      }
       const line = pickPool[Math.floor(Math.random() * pickPool.length)];
       c.said[key].push(line);
       try { this.noteVillageLine(line); } catch (e) {}
@@ -2454,8 +2535,15 @@
       // used to pre-empt it intermittently, stranding the request.)
       const treq = (v.talkRequests || {})[vid];
       if (treq && !treq.delivered) {
-        treq.delivered = true;
-        return { line: this.renderTalkLine(String(treq.line).replace(/ \(Talk to .*?\.\)$/, ''), vid), thread: 'request' };
+        const tline = this.renderTalkLine(String(treq.line).replace(/ \(Talk to .*?\.\)$/, ''), vid);
+        // OPENER SKIP (journey-social r19 2026-10-16): a run-blocked request
+        // opener must not go dry — and must NOT mark delivered, or the
+        // reason they came to talk is stranded. The request stays pending
+        // and fires next conversation (the 48-entry ledger slides).
+        if (!this.convoWouldBlock(vid, tline)) {
+          treq.delivered = true;
+          return { line: tline, thread: 'request' };
+        }
       }
 
       // 2. THE TABLE SITS (journey-endgame r11 2026-10-14): the most
@@ -2465,8 +2553,18 @@
       // Talk requests keep priority (#1): they came to you for a reason.
       // Once per villager per sitting; never a loop.
       try {
+        const cc0 = this.convoGet(vid);
+        const prevRemarked = cc0 ? cc0.tableRemarked : undefined;
         const top = this.convoTableOpener(vid);
-        if (top) return top;
+        if (top) {
+          // OPENER SKIP (r19): a run-blocked table remark must not go dry —
+          // restore the once-per flag so it fires next conversation.
+          if (this.convoWouldBlock(vid, top.line)) {
+            if (cc0) cc0.tableRemarked = prevRemarked;
+          } else {
+            return top;
+          }
+        }
       } catch (e) {}
 
       // 3. UNFINISHED BUSINESS — a seed from last time opens the conversation.
@@ -2474,6 +2572,10 @@
       // is consumed by the resolution at endConvo (or expiry after 7 days).
       if (want && want.fromSeed && want.def) {
         const opener = this.convoWantOpener(vid, want);
+        // OPENER SKIP (r19): compute the full voiced opener BEFORE the
+        // stage/mood side effects — a blocked seed opener falls through to
+        // the next candidate with the seed still planted (it fires next
+        // conversation), never a dry line.
         if (opener && opener.line) {
           // QUOTE HYGIENE (dialogue rethink, Steve 2026-10-07): the old
           // composition left a stray quote — the opener keeps its own layer.
@@ -2509,12 +2611,18 @@
           // FAVOR FOLLOW-UP (convo favor system 2026-10-11): the favor
           // opener may have already established the ask (stage 2, menu goes
           // straight to commit/deflect). Don't downgrade it.
-          if ((c.want.stage || 0) < 1) c.want.stage = 1; // surfaced
-          // UNFINISHED BUSINESS (dialog rethink Phase 1, Steve 2026-10-08):
-          // seed-driven conversations open one mood band cooler. Whatever
-          // was left hanging, it wasn't nothing — the air is heavier.
-          if (typeof this.convoMoodShift === 'function') this.convoMoodShift(vid, -1);
-          return { line: this.voiceLine(vid, seedLine), thread: 'want', wantId: want.id };
+          const seedVLine = this.voiceLine(vid, seedLine);
+          if (this.convoWouldBlock(vid, seedVLine)) {
+            // Blocked: fall through — seed stays planted, side effects
+            // deferred, next conversation resumes it.
+          } else {
+            if ((c.want.stage || 0) < 1) c.want.stage = 1; // surfaced
+            // UNFINISHED BUSINESS (dialog rethink Phase 1, Steve 2026-10-08):
+            // seed-driven conversations open one mood band cooler. Whatever
+            // was left hanging, it wasn't nothing — the air is heavier.
+            if (typeof this.convoMoodShift === 'function') this.convoMoodShift(vid, -1);
+            return { line: seedVLine, thread: 'want', wantId: want.id };
+          }
         }
       }
 
@@ -2542,10 +2650,11 @@
           }
         } catch (e) {}
         if (!acuteNeed) {
-          const l = this.convoPick(vid, 'grief', [
-            '"Have you — sorry. I keep thinking about them."',
-            '"It\'s quiet today. Wrong kind of quiet."',
-          ]);
+          // OPENER SKIP (r19): hard filter — when the pool is ledger-
+          // blocked (the whole village grieving at once), fall through
+          // rather than dry-open. The pool slot is NOT consumed on a skip;
+          // the villager grieves next conversation.
+          const l = this.convoPick(vid, 'grief', this.convoGriefOpenerPool(), true);
           if (l) return { line: this.voiceLine(vid, l), thread: 'grief' };
         }
       }
@@ -2578,8 +2687,14 @@
           }
         } catch (e) {}
         if (!acuteNeed && trust >= 40 && proto.secret && !c.secretShared && Math.random() < 0.2) {
-          c.secretShared = true;
-          return { line: this.voiceLine(vid, `"Can I tell you something? ${proto.secret}"`), thread: 'secret' };
+          const sline = this.voiceLine(vid, `"Can I tell you something? ${proto.secret}"`);
+          // OPENER SKIP (r19): never burn the once-per-secret flag on a
+          // blocked line — the secret keeps for a conversation that can
+          // actually speak it.
+          if (!this.convoWouldBlock(vid, sline)) {
+            c.secretShared = true;
+            return { line: sline, thread: 'secret' };
+          }
         }
       }
 
@@ -2594,7 +2709,6 @@
       // teaching event, no opener — the invariant is structural, not gated.
       const taught = this.playerTaughtPlants ? this.playerTaughtPlants(vid) : [];
       if (taught.length > 0 && !c.taughtMentioned && Math.random() < 0.4) {
-        c.taughtMentioned = true;
         const pid = taught[Math.floor(Math.random() * taught.length)];
         const plant = (this.data.plants || []).find(p => p.id === pid);
         const pname = plant ? plant.name : 'that plant';
@@ -2603,8 +2717,13 @@
           `"I tried the ${pname} like you showed me. Didn't poison anyone, so that's a win."`,
           `"${pname} — I keep thinking about what you said. I'm seeing it everywhere now."`,
         ];
-        const tr = this.convoPick(vid, 'taughtref', refs) || refs[0];
-        return { line: this.voiceLine(vid, tr), thread: 'taughtref' };
+        // OPENER SKIP (r19): hard filter — the mention keeps for a
+        // conversation that can speak it; the flag is not burned on a skip.
+        const tr = this.convoPick(vid, 'taughtref', refs, true);
+        if (tr) {
+          c.taughtMentioned = true;
+          return { line: this.voiceLine(vid, tr), thread: 'taughtref' };
+        }
       }
 
       // 2. They remember what you told them. Being remembered feels real.
@@ -2625,12 +2744,18 @@
         const qid = qd.id;
         const ans = c.answered && c.answered[qid];
         if (!ans || ans === 'honest_pass' || (c.recalled && c.recalled[qid])) continue;
-        c.recalled[qid] = true;
         const answerDef = (qd.answers || []).find(a => a.id === ans);
         if (answerDef && answerDef.honest_opt_out) continue;
         const rec = (qd.recalls && qd.recalls[ans]) || (!qd.recalls ? qd.recall : null);
         if (!rec) continue;
-        return { line: String(rec).replaceAll('{region}', regionRecall), thread: 'recall' };
+        const rline = String(rec).replaceAll('{region}', regionRecall);
+        // OPENER SKIP (r19): a run-blocked memory must not go dry — and
+        // must not burn this question's once-per flag. Try the next
+        // question's memory; the skipped one fires next conversation.
+        if (this.convoWouldBlock(vid, rline)) continue;
+        c.recalled = c.recalled || {};
+        c.recalled[qid] = true;
+        return { line: rline, thread: 'recall' };
       }
       // 3. THE WANT — the spine of the conversation (convo rebuild 2026-10-11,
       // Steve). Every conversation opens with something the NPC wants: a
@@ -2642,25 +2767,28 @@
       if (want && want.def && !want.fromSeed) {
         const opener = this.convoWantOpener(vid, want);
         if (opener && opener.line) {
-          c.want.stage = 1; // surfaced, in the opening beats
-          return { line: this.voiceLine(vid, opener.line), thread: 'want', wantId: want.id };
+          const wline = this.voiceLine(vid, opener.line);
+          // OPENER SKIP (r19): a run-blocked want opener falls through to
+          // the next candidate — the want stays live at stage 0 and
+          // resurfaces next conversation (or as a seed), never a dry line.
+          if (!this.convoWouldBlock(vid, wline)) {
+            c.want.stage = 1; // surfaced, in the opening beats
+            return { line: wline, thread: 'want', wantId: want.id };
+          }
         }
       }
       // 4. Fallbacks — the village's weather, their goal, small talk. These
       // only run when no want was selected (shouldn't happen) or its opener
       // failed. The want is the default; these are the safety net.
       if ((v.grief || 0) > 0) {
-        const l = this.convoPick(vid, 'grief', [
-          '"Have you — sorry. I keep thinking about them."',
-          '"It\'s quiet today. Wrong kind of quiet."',
-        ]);
+        const l = this.convoPick(vid, 'grief', this.convoGriefOpenerPool(), true);
         if (l) return { line: this.voiceLine(vid, l), thread: 'grief' };
       }
       if ((v.cheer || 0) > 0 && Math.random() < 0.5) {
         const l = this.convoPick(vid, 'cheer', [
           '"Good day, huh? Almost feels normal."',
           '"People are smiling. I forgot what that looked like."',
-        ]);
+        ], true);
         if (l) return { line: this.voiceLine(vid, l), thread: 'cheer' };
       }
       // 5. What they want, said plainly — if they trust you enough to say it.
@@ -2668,7 +2796,12 @@
         : (temp === 'warm' || temp === 'gentle') ? 25 : 35;
       if (goalDef && trust >= shareAt) {
         const l = this.convoPick(vid, 'goal', this.convoGoalLines(goal, goalDef));
-        if (l) return { line: this.voiceLine(vid, this.fillTalkLine(l, vp)), thread: 'goal' };
+        if (l) {
+          const gline = this.voiceLine(vid, this.fillTalkLine(l, vp));
+          // OPENER SKIP (r19): check the final filled line — placeholders
+          // can shift the ledger key.
+          if (!this.convoWouldBlock(vid, gline)) return { line: gline, thread: 'goal' };
+        }
       }
       // 6. Contextual small talk — mood, temperament, reputation. Never repeated.
       const pool = [];
@@ -2704,7 +2837,10 @@
       const l = this.convoPick(vid, 'small', this.voicePool(vid, pool));
       if (l) {
         const filled = this.fillTalkLine(l, vp);
-        return { line: voiced.has(l) ? filled : this.voiceLine(vid, filled), thread: 'small' };
+        const sline = voiced.has(l) ? filled : this.voiceLine(vid, filled);
+        // OPENER SKIP (r19): last content candidate — a blocked small-talk
+        // line falls through to the reopeners below, not a dry line.
+        if (!this.convoWouldBlock(vid, sline)) return { line: sline, thread: 'small' };
       }
       // Reopeners: the small-talk well is dry, but you've talked before —
       // a familiar line beats a loop. (Previously dead data; now wired in.)
