@@ -197,7 +197,14 @@ they just count ghosts now. Coherent, and the cost is visible.
    on both arms (no wins on the pre-seat substrate, as expected). Baseline
    NOT rolled forward — the schemas don't align and my run adds no
    national/table/exiled signal.
-4. **Proof re-verified on the rebased base** (substrate lesson): see below.
+4. **Proof re-verified on the rebased base** (substrate lesson): after the
+   sweep, master moved cfaab2f9 → 7a573e1b (3 sibling commits: journey r8,
+   sim-cookdrive2-b killed, journey r20 — none touched standing.js). The arm
+   rebased cleanly onto 7a573e1b and scripts/test-vetshape-20261017.js was
+   re-run: 16/16 GREEN, det-gate byte-identical on all 4 combos against the
+   pristine baseline. No substrate shift within this instrument's scope;
+   the sweep-time commit (cfaab2f9) stands as recorded in every per-seed
+   JSON.
 
 ## Convergence
 
