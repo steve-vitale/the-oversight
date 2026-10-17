@@ -572,6 +572,163 @@
       return 'You\'re exiled. They watch you from the fire, hands on whatever\'s sharp. Take nothing.';
     },
 
+    // EXILE COLD SHOULDER — SOCIAL CONSEQUENCES (Steve 2026-10-17, journey-social r20).
+    // Exile was enforced logistically only (guards, pantry denial, uprising) while
+    // the village kept chatting with the exile (Oct-12 r7: 51 full conversations
+    // post-exile; conversation.js had no exile gate). The ruling: the social layer —
+    // villagers refuse social engagement with the exiled by default; close
+    // friends/family may break the cold shoulder at a trust cost. Not full lockout;
+    // amends stays possible. This module is the initiation gate: conversation.js
+    // startConvo and the talk-request paths call in here. One choke point, not
+    // scattered checks. Sibling of justiceExileGuards (the logistical refusal).
+    justiceExileSociallyCut() {
+      const s = this.state.scholar || {};
+      return !!(this.justiceExiled() || s.exiled);
+    },
+
+    // Who counts as close enough to break the shoulder. There is no family
+    // registry between the scholar and villagers (kin are backstory keepsakes,
+    // not live ties — verified 2026-10-17: no v.relations anywhere); the live
+    // signals are trust and run-formed bonds:
+    //   - trust >= 40: the codebase's standing "close" line (mootAccuserAftermath).
+    //   - pairAffinity >= 25: a shared friend group (+25) or a strong bond.
+    //   - bond depth >= 2: sediment of a sustained relationship — the family-like tie.
+    justiceExileLoyalty(vid) {
+      try {
+        const v = this.state.village || {};
+        const trust = ((v.trust || {})[vid] === undefined) ? 10 : (v.trust || {})[vid];
+        if (trust >= 40) return { loyal: true, why: 'trust', score: trust };
+        let aff = 0;
+        try { aff = (typeof this.pairAffinity === 'function') ? this.pairAffinity(vid, this.villagerId) : 0; } catch (e) { aff = 0; }
+        if (aff >= 25) return { loyal: true, why: 'bond', score: aff };
+        let depth = 0;
+        try { const b = (typeof this.bondGet === 'function') ? this.bondGet(vid, this.villagerId) : null; depth = (b && b.depth) || 0; } catch (e) { depth = 0; }
+        if (depth >= 2) return { loyal: true, why: 'bond', score: 20 + depth };
+      } catch (e) { /* fall through to not-loyal */ }
+      return { loyal: false, why: null, score: 0 };
+    },
+
+    // Resolve one social approach to the exiled scholar. Returns
+    // {refused:true, broke:false, line} or {refused:false, broke:true, line}.
+    // Refusal beats read human (fear, duty, awkwardness — the NPC wants
+    // something: safety, standing, or a clean conscience), never a menu.
+    // A break opens the conversation but costs the breaker real standing:
+    // -10 trust, a witness beat, village gossip, and a memory — the village
+    // notices, so the cost is visible in state AND transcript, never silent.
+    // The closest friend can't stay away: each loyal villager's FIRST approach
+    // breaks deterministically; later approaches roll (temperament-weighted).
+    // The -10 erosion is real — a 45-trust friend drops to 35 and refuses
+    // next time. Loyalty spends itself.
+    justiceExileColdResolve(vid) {
+      const v = this.state.village || {};
+      v.exileCold = v.exileCold || {};
+      const day = (this.state.scholar || {}).day || 1;
+      const rec = v.exileCold[vid] || (v.exileCold[vid] = { n: 0, day: 0, broke: 0 });
+      const R = Math.random;
+      const pick = (arr) => arr[Math.floor(R() * arr.length)];
+      let dn = '';
+      try { dn = String(this.displayName(vid) || 'them'); } catch (e) { dn = 'them'; }
+      // Strangers are descriptors, not names — the whole descriptor is the
+      // honest short form ("A person, maybe 20s"), same rule as feastPlan.
+      const first = /^an? /i.test(dn) ? dn : dn.split(' ')[0];
+      const temper = (() => { try { return this.npcTemper(vid); } catch (e) { return null; } })();
+      const trust = (((v.trust || {})[vid] === undefined) ? 10 : (v.trust || {})[vid]);
+
+      // A talk request made BEFORE the sentence: the moment still happened,
+      // even if the talk can't. Mark it delivered so it doesn't strand —
+      // and the refusal names what died.
+      let hadRequest = false;
+      try {
+        const treq = (v.talkRequests || {})[vid];
+        if (treq && !treq.delivered) { treq.delivered = true; hadRequest = true; }
+      } catch (e) { hadRequest = false; }
+
+      const loyalty = (typeof this.justiceExileLoyalty === 'function')
+        ? this.justiceExileLoyalty(vid) : { loyal: false };
+      const repeat = (rec.day === day && rec.n >= 1);
+      rec.n += 1; rec.day = day;
+
+      const REFUSE = [
+        `"Don't." ${first} doesn't raise their voice. "Please — if they see me talking to you, I'm next to nothing here. I can't." They leave fast, not looking back.`,
+        `"The moot spoke, and I was standing right there." ${first}'s voice stays level; keeping it level is clearly costing them. "I don't get to un-speak it over small talk. Go on, now."`,
+        `${first} sees you coming and suddenly has somewhere else to be — not cruel, just elsewhere. The fire doesn't stop them. The sentence does.`,
+        `"Not today." ${first} won't meet your eyes for long. "Maybe not any day, until —. Just. Not today."`,
+      ];
+      const REFUSE_ANGRY = [
+        `"You did this." ${first} doesn't bother lowering their voice. "Don't make the rest of us carry it too."`,
+      ];
+      const REFUSE_TORN = [
+        `"I want to — you know I want to." ${first}'s jaw works. "But they'd see. And then where would I be? Make it right. If you ever can, make it right."`,
+      ];
+      const REFUSE_REQUEST = [
+        `${first} asked to talk — that was before the sentence. Now they look at the ground instead. Whatever it was, it dies unsaid.`,
+      ];
+      const REFUSE_REPEAT = [
+        `${first} shakes their head. Not today — not while the sentence stands.`,
+        `Still exiled, still here. ${first} turns away.`,
+      ];
+      const BREAK = [
+        `${first} glances over their shoulder — twice — then sits, too close and too fast. "Quickly. Before someone sees."`,
+        `"You're supposed to be gone." But ${first} is already sitting down, voice dropped low. "Talk fast. This costs me."`,
+      ];
+
+      const sayRefusal = (line) => {
+        try { this.say(line); } catch (e) { /* narration is best-effort; the return carries it */ }
+        return { refused: true, broke: false, vid, line };
+      };
+
+      if (!loyalty.loyal) {
+        if (hadRequest) return sayRefusal(pick(REFUSE_REQUEST));
+        if (repeat) return sayRefusal(pick(REFUSE_REPEAT));
+        if (trust <= 5) return sayRefusal(pick(REFUSE_ANGRY));
+        return sayRefusal(pick(REFUSE));
+      }
+      // Loyal: the first approach breaks — the closest friend can't stay away.
+      // After that, temperament decides: the bold risk it, the cautious mostly don't.
+      let breaks = rec.broke === 0;
+      if (!breaks) {
+        let p = 0.5;
+        if (temper === 'bold') p += 0.2;
+        else if (temper === 'cautious' || temper === 'withdrawn') p -= 0.2;
+        breaks = R() < Math.max(0.1, Math.min(0.9, p));
+      }
+      if (!breaks) {
+        if (hadRequest) return sayRefusal(pick(REFUSE_REQUEST));
+        if (repeat) return sayRefusal(pick(REFUSE_REPEAT));
+        return sayRefusal(pick(REFUSE_TORN));
+      }
+      // THE BREAK: the conversation opens — at a price.
+      rec.broke += 1;
+      const line = pick(BREAK);
+      try { this.say(line); } catch (e) { /* best-effort */ }
+      try { this.bumpTrust(vid, -10, 'broke the cold shoulder for the exiled'); } catch (e) { /* the trust cost must not crash the scene */ }
+      // Visible: someone sees, the village hears, the record keeps it.
+      try {
+        const others = ((v.roster || []).filter(id => id !== vid && id !== this.villagerId));
+        const wit = others.length ? others[Math.floor(R() * others.length)] : null;
+        if (wit) {
+          let wdn = ''; try { wdn = String(this.displayName(wit) || 'someone'); } catch (e) { wdn = 'someone'; }
+          const wfirst = /^an? /i.test(wdn) ? wdn : wdn.split(' ')[0];
+          this.say(`Across the fire, ${wfirst} watches. Their mouth tightens. They'll remember this.`);
+        }
+        this.seedGossip('exile_shoulder_broken', { loyal: 6, trustworthy: -8, who: vid }, others.slice(0, 4));
+      } catch (e) { /* witness/gossip is garnish, not load-bearing */ }
+      try { this.remember(vid, 'broke_cold_shoulder', 'talked to you while you were exiled — and the village saw'); } catch (e) { /* best-effort */ }
+      return { refused: false, broke: true, vid, line };
+    },
+
+    // True when the scholar's exile should stop THIS villager seeking them out
+    // for a chat (talk requests, pull-ins): exiled, and not close enough to
+    // break the shoulder. Close friends/family still might come — and pay the
+    // price when the scholar answers (the startConvo gate applies the cost).
+    justiceExileCutsTalk(vid) {
+      try {
+        if (typeof this.justiceExileSociallyCut !== 'function' || !this.justiceExileSociallyCut()) return false;
+        if (typeof this.justiceExileLoyalty !== 'function') return true;
+        return !this.justiceExileLoyalty(vid).loyal;
+      } catch (e) { return false; }
+    },
+
     // VILLAGE UPRISING (Steve 2026-10-05): the village comes at you with numbers.
     // This is the end of the justice ladder — stage 4. You've stolen, attacked,
     // refused exile. Now they come. Anyone who still trusts you fights at your side.

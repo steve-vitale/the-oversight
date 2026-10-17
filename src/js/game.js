@@ -16764,7 +16764,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         // THEY COME TO YOU: "can we talk?" — they've heard something, want
         // something, or are worried. You're not always the initiator.
-        if (Math.random() < 0.16) {
+        // EXILE COLD SHOULDER (Steve 2026-10-17): the exiled don't get sought
+        // out for chats. Close friends/family still might — and pay the price
+        // when you answer (the startConvo gate applies the trust cost).
+        if (Math.random() < 0.16 && !((typeof this.justiceExileCutsTalk === 'function') && this.justiceExileCutsTalk(rid))) {
           const reason = this.talkReason(rid);
           if (reason) {
             stepToward(); done();
@@ -18662,13 +18665,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           `"Don't just stand there — you've got opinions, right?"`,
         ];
         const who = Math.random() < 0.5 ? a : b;
-        this.say(`👂 ${this.displayName(who)} ${invites[Math.floor(Math.random() * invites.length)]}`);
-        // they actually want to talk: use the existing talk-request system
-        // so the player sees "can we talk?" on their person card.
-        try {
-          v.talkRequests = v.talkRequests || {};
-          v.talkRequests[who] = { line: `__NAME__ wants you to join the conversation.`, day: this.state.scholar.day };
-        } catch (e) {}
+        // EXILE COLD SHOULDER (Steve 2026-10-17): no pulling the exiled into
+        // the circle — unless they're close enough to break the shoulder.
+        // The overheard lines above still land; eavesdropping isn't social
+        // engagement.
+        const cut = (typeof this.justiceExileCutsTalk === 'function') && this.justiceExileCutsTalk(who);
+        if (!cut) {
+          this.say(`👂 ${this.displayName(who)} ${invites[Math.floor(Math.random() * invites.length)]}`);
+          // they actually want to talk: use the existing talk-request system
+          // so the player sees "can we talk?" on their person card.
+          try {
+            v.talkRequests = v.talkRequests || {};
+            v.talkRequests[who] = { line: `__NAME__ wants you to join the conversation.`, day: this.state.scholar.day };
+          } catch (e) {}
+        }
       }
       // Overhearing sharp minds teaches a little. The village is a classroom
       // you didn't enroll in.

@@ -13249,8 +13249,13 @@
   // When the conversation ends, the normal one-screen view returns.
   function openChat(vid) {
     inlineView = null;
+    const st = Game.startConvo(vid);
+    // EXILE COLD SHOULDER (Steve 2026-10-17): a refused talk isn't a
+    // conversation — the refusal was already narrated via say(); opening the
+    // chat view on it would render an empty box (dialogueBoxHTML bails on
+    // inactive convos). Stay on the main view so the refusal reads.
+    if (st && st.refused) { refresh(); return; }
     chatView = { vid: vid, thinking: null, thinkingToken: 0, msgIndex: 0 };
-    Game.startConvo(vid);
     // startConvo resets the transcript — the opening lands after a beat.
     armChatThinking(vid, 0, null, true);
     refresh();

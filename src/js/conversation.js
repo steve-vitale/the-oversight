@@ -4455,6 +4455,25 @@
         try { this.say(`${this.displayName(vid)} isn't here anymore.`); } catch (e) {}
         return null;
       }
+      // EXILE COLD SHOULDER (Steve 2026-10-17, journey-social r20): the exiled
+      // don't get conversations. Villagers refuse by default; close
+      // friends/family may break the shoulder at a trust cost. The gate sits
+      // at initiation — the one choke point — so every path in (Talk button,
+      // talk requests, sim drivers) hits it before any state is written or
+      // any cost charged. A refusal returns the talkTo shape with ended:true
+      // (no conversation record is touched); a break flags the record below
+      // and falls through to the normal open.
+      let _exileBroke = false;
+      try {
+        if (typeof this.justiceExileSociallyCut === 'function' && this.justiceExileSociallyCut()) {
+          const res = (typeof this.justiceExileColdResolve === 'function')
+            ? this.justiceExileColdResolve(vid) : null;
+          if (res && res.refused && !res.broke) {
+            return { line: res.line || null, choices: [], transcript: [], ended: true, refused: true, broke: false, vid };
+          }
+          if (res && res.broke) _exileBroke = true;
+        }
+      } catch (e) { _exileBroke = false; /* a broken gate must not break talking */ }
       const c = this.convoGet(vid);
       c.active = true; c.exchanges = 0; c.budget = this.convoBudget(vid);
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
@@ -4489,6 +4508,10 @@
       // and "one lesson per conversation" means per conversation.
       c.teachSkill = null; c.learnedOnce = false; c.learnedWhat = null;
       c.over = false; c.offeredHelp = false; c.askedTopics = [];
+      // EXILE COLD SHOULDER: per-sitting reset; the initiation gate above
+      // sets it when a loyal villager breaks the shoulder.
+      c.exileBreak = false;
+      if (_exileBroke) c.exileBreak = true;
       c.qCount = 0; c.theorized = [];
       // PENDINGQ DODGE-LAPSE (socialite r12 2026-10-10): counts consecutive
       // silence-dodges of a hanging bespoke question (see convoPendingQDodge).
@@ -4685,7 +4708,9 @@
         this.sayLine(vid, seed);
         c.traderMentioned = true;
       }
-      return { line: opLine, choices: this.convoChoices(vid), transcript: c.transcript.slice(), ended: false };
+      // EXILE COLD SHOULDER: carry the break flag on the return so callers
+      // (and sim drivers) can tell a broken-shoulder open from a normal one.
+      return { line: opLine, choices: this.convoChoices(vid), transcript: c.transcript.slice(), ended: false, refused: false, broke: !!c.exileBreak, vid };
     },
 
     // convoGoonLabel: the continuer, voiced per person/mood/thread — or a
