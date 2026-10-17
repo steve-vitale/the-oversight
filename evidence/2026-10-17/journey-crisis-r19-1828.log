@@ -1,0 +1,567 @@
+[SETUP] seed 1828 (sortie): oracleV2 establishing...
+[FIGHT] Nina vs belltoad — hp undefined -> 36
+[HEAL] day 3: rounds treated Nina
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+[DEATH] Carl d4 cause=starvation (SCHOLAR)
+[FIGHT] Cesar vs cliffhanger — hp 98 -> 74
+[DEATH] Vasyl d10 cause=dehydration (SCHOLAR)
+[FIGHT] Tashi vs anaconda_empress — hp 100 -> 41
+[HEAL] day 11: rounds treated Tashi
+[HEAL] day 12: rounds treated Tashi
+[FIGHT] Autumn vs hushwolf — hp undefined -> 14
+[FIGHT] Aisling vs hushwolf — hp undefined -> 100
+[FIGHT] Cesar vs cliffhanger — hp 92 -> 92
+[FIGHT] Autumn vs cliffhanger — hp 14 -> 14
+[HEAL] day 13: rounds treated Autumn
+--- CENSUS (established), day 14, Bearer: Emma ---
+  Autumn [chef] HP32
+  Aisling [esl_teacher]
+  Cesar [fishing_guide] HP95
+  Marthe [rancher]
+  Piyamas [carpenter]
+  Nina [mechanic]
+  Emma [veterinarian]
+  Tashi [arborist] HP80 SICK(tick fever)
+  Raj [pharmacist]
+  Rosa [line_cook]
+  fallen (recent): Carl d4 (starvation); Vasyl d10 (dehydration)
+  pantry: 25,338 kcal | world monsters: 12 | lingering: 0
+[GATE] day 14: pantry=25338 (extra 0d), monsters=12
+[AID] crisis raised day 14: Murkcap, Cliffhanger, The Anaconda Empress, Highbeam Deer, H (wave 1)
+[FIGHT] Marthe vs murkcap (RAID) — hp 100 -> 51
+[FIGHT] Piyamas vs cliffhanger (RAID) — hp 100 -> 100
+[FIGHT] Nina vs anaconda_empress (RAID) — hp 100 -> 100
+[FIGHT] Raj vs gallowdeer (RAID) — hp 100 -> 56
+[FIGHT] Rosa vs hushwolf (RAID) — hp 100 -> 100
+[RAID] day 14 FIRED (monsters=12, pantry=25338, CONTROLLED)
+[RAID] raid1 FIRED after 6 night(s); playerAtHaven=true
+--- CENSUS (raid1 night), day 14, Bearer: Emma ---
+  Autumn [chef] HP32
+  Aisling [esl_teacher]
+  Cesar [fishing_guide] HP95
+  Marthe [rancher] HP51
+  Piyamas [carpenter]
+  Nina [mechanic]
+  Emma [veterinarian]
+  Tashi [arborist] HP80 SICK(tick fever)
+  Raj [pharmacist] HP56
+  Rosa [line_cook]
+  fallen (recent): Carl d4 (starvation); Vasyl d10 (dehydration)
+  pantry: 25,338 kcal | world monsters: 12 | lingering: 0
+[PLAYER] pendingEncounter vs murkcap — FACING IT
+[BEAT] fireCrisis('breach') day 14
+[PLAYER] fight done: hp undefined -> undefined
+[AID] crisis live — player calls for a RUNNER (real competent move)
+[AID] callForHelp('runner') → "sent"
+[BEAT] fireCrisis('the-siege') day 14
+[AID] crisis resolved day 14: fought
+[FIGHT] Raj vs hushwolf — hp 81 -> 81
+[FIGHT] Raj vs hushwolf — hp 81 -> 81
+[HEAL] day 14: rounds treated Autumn
+[HEAL] day 15: rounds treated Autumn
+[DEATH] Emma d17 cause=combat (SCHOLAR)
+[FIGHT] Aisling vs murkcap — hp 100 -> 100
+--- CENSUS (raid1 +6d), day 20, Bearer: Autumn ---
+  Autumn [chef]
+  Aisling [esl_teacher]
+  Cesar [fishing_guide]
+  Marthe [rancher] HP94
+  Piyamas [carpenter]
+  Nina [mechanic]
+  Tashi [arborist] HP94
+  Raj [pharmacist] HP99
+  Rosa [line_cook]
+  fallen (recent): Carl d4 (starvation); Vasyl d10 (dehydration); Emma d17 (combat)
+  pantry: 36,149 kcal | world monsters: 14 | lingering: 0
+[AID] lingering=0 aidCrisis=null
+## MID-SIEGE defender — talking to Marthe
+OPEN CHOICES (6): [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know." | [ans:q_change:a_vague] "Everyone says it has. I'm not sure I believe them." | [ans:q_change:honest_pass] "I'd rather not say." | [deflect_q] (change the subject) | [leave] "I should go." | [silence] "..."
+> YOU PICK [ans:q_change:a_tell] 
+YOU: "I don't recognize the person in my head anymore. I think that's good? I don't know."
+NPC: "The old you got you here. The new you keeps you here. Both count."
+
+> YOU PICK [ask:lately] 
+YOU: "What's new with you? Anything good, bad, or weird?"
+NPC: "Good question." "Since Emma died... I keep expecting to see Emma at the fire. Stupid."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About how this changed you — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+
+> YOU PICK [invite_party] 
+YOU: "Want to come with me?"
+NPC: "Not right now. I've got my own things to handle."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "I keep turning over the last thing Emma said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Emma is gone and the world just... continues. That's the part I can't stand."
+
+> YOU PICK [dlg:more] 
+YOU: "Tell me more."
+NPC: "I'm picking up Emma's share of the work. Someone should, and it might as well be me."
+
+> YOU PICK [dlg:more] 
+NPC: "That's the whole of it. Sorry."
+NPC: "I should let you go. Be well, okay?"
+
+> YOU PICK [dlg:react] 
+(conversation ended by the engine)
+FINAL: want=curious resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "Has this changed you? Like, fundamentally, as it were?"
+NPC: Marthe has an edge today — something curdled.
+YOU: "I don't recognize the person in my head anymore. I think that's good? I don't know."
+NPC: "The old you got you here. The new you keeps you here. Both count."
+YOU: "What's new with you? Anything good, bad, or weird?"
+NPC: "Good question." "Since Emma died... I keep expecting to see Emma at the fire. Stupid."
+YOU: "About how this changed you — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+YOU: "Want to come with me?"
+NPC: "Not right now. I've got my own things to handle."
+YOU: "About what's been happening — we never finished."
+NPC: "I keep turning over the last thing Emma said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+YOU: "What’s going on out there?"
+NPC: "Emma is gone and the world just... continues. That's the part I can't stand."
+YOU: "Tell me more."
+NPC: "I'm picking up Emma's share of the work. Someone should, and it might as well be me."
+YOU: "Tell me more."
+NPC: "That's the whole of it. Sorry."
+NPC: "I should let you go. Be well, okay?"
+YOU: "Huh."
+NPC: They nod slowly, not quite done, not quite continuing.
+NPC: "Good talk. I feel like I know you a little better now."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: siege=false mourn=true wound=false namedFallen=true
+## MID-SIEGE other — talking to Aisling
+OPEN CHOICES (9): [agency:ask_field] "Teach me something from the wild." | [gq:yn:yes] "Yes." | [gq:yn:no] "No." | [gq:yn:unsure] "I don't know." | [gq:yn:honest_pass] "I'd rather not say." | [joke] "Ha — yeah." | [invite_party] "You're coming with me." | [silence] "..." | [confront:d_v5x8a3v] "You said something odd the other day. Let's talk about it."
+> YOU PICK [gq:yn:yes] 
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them. That's the whole of it."
+
+> YOU PICK [dlg:help] 
+YOU: "How can I help?"
+NPC: "It's my brother, Jason. Went up in the Taking with the boring half. He was the funniest person I knew. Their metrics are broken. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+
+> YOU PICK [agency:ask_field] 
+YOU: "Teach me something from the wild."
+NPC: "There's more, but that's for another fire."
+
+> YOU PICK [dlg:commit] 
+YOU: "I'll do it."
+NPC: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Since Emma died... I keep expecting to see Emma at the fire. Stupid."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About what was on their mind — we never finished."
+NPC: "I just said — did you miss it?"
+
+> YOU PICK [recap] 
+YOU: "Wait — what were we talking about?"
+NPC: "Hah. We started on what was on their mind, then got onto what's been happening."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "Sleep's gone strange. I clean up other people's messes quietly at odd hours now. Whatever gets me to morning."
+
+> YOU PICK [dlg:more] 
+NPC: "Nobody says Emma's name right yet. We will. Give it a few days."
+NPC: "Alright — I should get back to it."
+
+> YOU PICK [dlg:more] 
+(conversation ended by the engine)
+FINAL: want=seek_taken resolution=promised
+
+### FULL TRANSCRIPT
+NPC: "You talk to it -- the System. Have you ever asked? About Jason? Happy?"
+NPC: "...Sorry, lost my train of thought."
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them. That's the whole of it."
+YOU: "How can I help?"
+NPC: "It's my brother, Jason. Went up in the Taking with the boring half. He was the funniest person I knew. Their metrics are broken. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: "Teach me something from the wild."
+NPC: "There's more, but that's for another fire."
+YOU: "I'll do it."
+NPC: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: "What’s going on out there?"
+NPC: "Since Emma died... I keep expecting to see Emma at the fire. Stupid."
+YOU: "About what was on their mind — we never finished."
+NPC: "I just said — did you miss it?"
+YOU: "Wait — what were we talking about?"
+NPC: "Hah. We started on what was on their mind, then got onto what's been happening."
+YOU: "About what's been happening — we never finished."
+NPC: "Sleep's gone strange. I clean up other people's messes quietly at odd hours now. Whatever gets me to morning."
+YOU: "Tell me more."
+NPC: "Nobody says Emma's name right yet. We will. Give it a few days."
+NPC: "Alright — I should get back to it."
+YOU: "Tell me more."
+NPC: "My part? I remember them. Someone has to do it properly."
+NPC: "If it answers -- you'll tell me? Whatever it says. I can take it."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: siege=false mourn=true wound=false namedFallen=true
+[AWAY] traveling out for the away-case raid...
+[AWAY] playerAtHaven=false (travel ok: true)
+[AID] crisis raised day 20: Loud-Eyes, Highbeam Deer, belltoad, Cliffhanger, Hushpuppy (wave 1)
+[FIGHT] Aisling vs murkcap (RAID) — hp 100 -> 100
+[FIGHT] Cesar vs gallowdeer (RAID) — hp 100 -> 64
+[FIGHT] Marthe vs belltoad (RAID) — hp 94 -> 14
+[FIGHT] Piyamas vs cliffhanger (RAID) — hp 100 -> 100
+[FIGHT] Nina vs hushwolf (RAID) — hp 100 -> 100
+[RAID] day 20 FIRED (monsters=14, pantry=36149, CONTROLLED)
+[RAID] raid2 FIRED after 2 night(s); playerAtHaven=false
+[AWAY] fired=true playerAtHaven=false pantry 36149 -> 36149
+[AWAY] awayNews: ["🩸 The belltoad mauled Marthe (-80 health) over 2 rounds. They're lucky to be breathing.","⚔️ Piyamas stared down the Cliffhanger and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.","⚔️ Nina stared down the Hushpuppy and it backed off — 0 rounds, not a scratch on them. It's still out there, somewhere.","🐗 RAID at Haven last night — 5 raiders hit the pantry."]
+[AID] crisis resolved day 20: fought
+[FIGHT] Cesar vs belltoad — hp 89 -> 1
+[BEAT] fireCrisis('first-grave') day 20
+[DEATH] Cesar d20 cause=monster
+[FIGHT] Cesar vs gallowdeer — hp 1 -> 0 (DIED)
+[HEAL] day 20: rounds treated Marthe
+[FIGHT] Aisling vs belltoad — hp 100 -> 100
+[FIGHT] Piyamas vs murkcap — hp 100 -> 100
+[HEAL] day 21: rounds treated Marthe
+[FIGHT] Nina vs hushwolf — hp 100 -> 100
+[FIGHT] Nina vs hushwolf — hp 100 -> 100
+[FIGHT] Tashi vs hushwolf — hp 100 -> 100
+[DEATH] Autumn d25 cause=dehydration (SCHOLAR)
+[FIGHT] Tashi vs belltoad — hp 100 -> 100
+[FIGHT] Piyamas vs white_noise_heron — hp 87 -> 67
+[FIGHT] Piyamas vs belltoad — hp 67 -> 67
+[HEAL] day 28: rounds treated Piyamas
+[FIGHT] Tashi vs gallowdeer — hp 100 -> 71
+[AID] crisis raised day 31: Headlight Harry, Headlight Harry, belltoad, Ugly-Eyes, The A (wave 1)
+[FIGHT] Marthe vs gallowdeer (RAID) — hp 98 -> 49
+[FIGHT] Piyamas vs gallowdeer (RAID) — hp 91 -> 49
+[FIGHT] Nina vs belltoad (RAID) — hp 99 -> 99
+[FIGHT] Tashi vs hushwolf (RAID) — hp 74 -> 74
+[FIGHT] Raj vs anaconda_empress (RAID) — hp 100 -> 100
+[RAID] day 31 FIRED (monsters=15, pantry=26094, natural)
+[HEAL] day 31: rounds treated Marthe
+[DEATH] Aisling d32 cause=combat (SCHOLAR)
+[DEATH] Marthe d32 cause=combat (SCHOLAR)
+[AID] crisis resolved day 32: fought
+[FIGHT] Ones vs hushwolf — hp 90 -> 90
+[HEAL] day 32: rounds treated Piyamas
+[HEAL] day 38: rounds treated Ones
+[FIGHT] Ava vs mirrormoth — hp 100 -> 80
+[AID] crisis raised day 46: belltoad, The Anaconda Empress, Cliffhanger, Ugly-Eyes, Ugly (wave 1)
+[FIGHT] Nina vs belltoad (RAID) — hp 100 -> 100
+[FIGHT] Tashi vs anaconda_empress (RAID) — hp 95 -> 95
+[FIGHT] Raj vs cliffhanger (RAID) — hp 100 -> 100
+[FIGHT] Ones vs hushwolf (RAID) — hp 100 -> 100
+[FIGHT] Farid vs hushwolf (RAID) — hp undefined -> 46
+[RAID] day 46 FIRED (monsters=13, pantry=28457, natural)
+[HEAL] day 46: rounds treated Farid
+[DEATH] Rosa d47 cause=combat (SCHOLAR)
+[AID] crisis resolved day 47: fought
+[FIGHT] Ones vs belltoad — hp 100 -> 100
+[FIGHT] Ava vs cliffhanger — hp 86 -> 86
+[HEAL] day 47: rounds treated Farid
+[FIGHT] Farid vs alien_tick — hp 85 -> 41
+[FIGHT] Ones vs belltoad — hp 100 -> 100
+[HEAL] day 49: rounds treated Farid
+[FIGHT] Ava vs hushwolf — hp 95 -> 95
+[HEAL] day 50: rounds treated Farid
+[FIGHT] Vincent vs belltoad — hp undefined -> 100
+[DEATH] Raj d54 cause=monster
+[FIGHT] Raj vs understudy — hp 100 -> 0 (DIED)
+[FIGHT] Tashi vs belltoad — hp 98 -> 98
+[FIGHT] Ava vs hushwolf — hp 100 -> 100
+[FIGHT] Nina vs hushwolf — hp 100 -> 100
+[FIGHT] Ones vs hushwolf — hp 100 -> 100
+[FIGHT] Tashi vs moderator — hp 98 -> 72
+--- CENSUS (end), day 56, Bearer: Piyamas ---
+  Piyamas [carpenter]
+  Nina [mechanic]
+  Tashi [arborist] HP75
+  app_mgpsphhn910 [?]
+  farid_ahmed [?] HP92
+  ava_garcia [?]
+  visjoin_50 [?]
+  app_mgpspi2h392 [?]
+  fallen (recent): Carl d4 (starvation); Vasyl d10 (dehydration); Emma d17 (combat); Cesar d20 (monster); Autumn d25 (dehydration); Aisling d32 (combat); Marthe d32 (combat); Rosa d47 (combat); Raj d54 (monster)
+  pantry: 31,369 kcal | world monsters: 15 | lingering: 0
+## END defender — talking to Nina
+OPEN CHOICES (8): [alive:want:ask_favor] "Is there something you need? Really." | [alive:event:mourning] "How are you holding up? About... them." | [dlg:help] "How can I help?" | [dlg:cant] "Can't right now." | [teach] "Watch — this is useful." | [dlg:subject] "Can I ask you something else?" | [leave] "Actually — never mind." | [silence] "..."
+> YOU PICK [dlg:help] 
+YOU: "How can I help?"
+NPC: "No, really, it's fine. Forget I even asked."
+
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Raj is gone and the world just... continues. That's the part I can't stand."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About that favor — we never finished."
+NPC: "It's handled. Really — it is. I appreciate you asking, though."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "I keep turning over the last thing Raj said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+
+> YOU PICK [dlg:more] 
+YOU: "Tell me more."
+NPC: "Nobody says Raj's name right yet. We will. Give it a few days."
+
+> YOU PICK [dlg:more] 
+NPC: "I'm picking up Raj's share of the work. Someone should, and it might as well be me."
+NPC: "I should go. You know where to find me."
+
+> YOU PICK [dlg:more] 
+(conversation ended by the engine)
+FINAL: want=ask_favor resolution=stated
+
+### FULL TRANSCRIPT
+NPC: "Never mind the food I needed — we got it handled. Thanks anyway."
+YOU: "How can I help?"
+NPC: "No, really, it's fine. Forget I even asked."
+YOU: "What’s going on out there?"
+NPC: "Raj is gone and the world just... continues. That's the part I can't stand."
+YOU: "About that favor — we never finished."
+NPC: "It's handled. Really — it is. I appreciate you asking, though."
+YOU: "About what's been happening — we never finished."
+NPC: "I keep turning over the last thing Raj said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+YOU: "Tell me more."
+NPC: "Nobody says Raj's name right yet. We will. Give it a few days."
+YOU: "Tell me more."
+NPC: "I'm picking up Raj's share of the work. Someone should, and it might as well be me."
+NPC: "I should go. You know where to find me."
+YOU: "Tell me more."
+NPC: "I wish there was more to tell. That's it."
+NPC: "...Sorry, lost my train of thought."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: siege=false mourn=true wound=false namedFallen=true
+## END other — talking to Tashi
+OPEN CHOICES (10): [betrayal:accept] "Sure. Walk my trap line with me? Extra hands, extra eyes." | [betrayal:decline] "Not this time." | [dlg:comfort] "Hey — you alright?" | [dlg:empathize] "I hear you." | [dlg:askwhy] "What happened?" | [recap] "Wait — what were we talking about?" | [dlg:invite] "Want to come with us?" | [dlg:subject] "Can I ask you something else?" | [leave] "Actually — never mind." | [silence] "..."
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: It's quiet at the trap line. Tashi doesn't say much. Sometimes that's the whole point.
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that. Doesn't matter now."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Most days I don't think about it. Today I am. Appreciate you noticing."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "I — yeah. It helps, hearing that. That's the priority."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Thanks. ...Thanks for saying that."
+
+> YOU PICK [dlg:comfort] 
+NPC: "You're kind. Don't let this place change that."
+NPC: "I've got things to see to. Don't be a stranger."
+
+> YOU PICK [dlg:comfort] 
+(conversation ended by the engine)
+FINAL: want=seek_comfort resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "Bottom line: They'd tell me to keep working. So I'm working. That's the whole plan."
+NPC: "Walk my trap line with me? Extra hands, extra eyes."
+NPC: Tashi has an edge today — something curdled.
+YOU: "Sure."
+NPC: It's quiet at the trap line. Tashi doesn't say much. Sometimes that's the whole point.
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that. Doesn't matter now."
+YOU: "Are you okay?"
+NPC: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: "Are you okay?"
+NPC: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: "Are you okay?"
+NPC: "Most days I don't think about it. Today I am. Appreciate you noticing."
+YOU: "Are you okay?"
+NPC: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+YOU: "Are you okay?"
+NPC: "I — yeah. It helps, hearing that. That's the priority."
+YOU: "Are you okay?"
+NPC: "Thanks. ...Thanks for saying that."
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that."
+NPC: "I've got things to see to. Don't be a stranger."
+YOU: "Are you okay?"
+NPC: "Thanks for... you know. Just listening."
+NPC: "...Sorry, lost my train of thought."
+
+CARRY-FLAGS: siege=false mourn=false wound=false namedFallen=false
+## END other — talking to Ones
+OPEN CHOICES (11): [agency:ask_field] "Teach me something from the wild." | [betrayal:accept] "Sure. Help me haul something back? Too much for one." | [betrayal:decline] "Not this time." | [dlg:comfort] "Are you okay?" | [dlg:empathize] "Yeah. I get it." | [dlg:askwhy] "Do you want to tell me?" | [recap] "Wait — what were we talking about?" | [dlg:invite] "Want to come with us?" | [dlg:subject] "Can I ask you something else?" | [leave] "Actually — never mind." | [silence] "..."
+> YOU PICK [agency:ask_field] 
+YOU: "Teach me something from the wild."
+NPC: "There's more, but that's for another fire."
+
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: Ones has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Hah. I — yeah. It helps, hearing that."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Hm. Never mind — go on."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Most days I don't think about it. Today I am. Appreciate you noticing. ...anyway, where was I."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that. Anyway."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Sure — Thanks. ...Thanks for saying that."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "...Actually, forget it."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "...Where was I? Gone. Ask me something else."
+
+> YOU PICK [dlg:comfort] 
+NPC: "I — yeah. It helps, hearing that."
+NPC: "Okay. We'll pick this up later."
+
+> YOU PICK [dlg:comfort] 
+(conversation ended by the engine)
+FINAL: want=seek_comfort resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "Don't mind me. Today's just heavy."
+NPC: "Help me haul something back? Too much for one."
+NPC: "...Sorry, lost my train of thought."
+YOU: "Teach me something from the wild."
+NPC: "There's more, but that's for another fire."
+YOU: "Sure."
+NPC: Ones has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: "Are you okay?"
+NPC: "Hah. I — yeah. It helps, hearing that."
+YOU: "Are you okay?"
+NPC: "Hm. Never mind — go on."
+YOU: "Are you okay?"
+NPC: "Most days I don't think about it. Today I am. Appreciate you noticing. ...anyway, where was I."
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that. Anyway."
+YOU: "Are you okay?"
+NPC: "Sure — Thanks. ...Thanks for saying that."
+YOU: "Are you okay?"
+NPC: "...Actually, forget it."
+YOU: "Are you okay?"
+NPC: "...Where was I? Gone. Ask me something else."
+YOU: "Are you okay?"
+NPC: "I — yeah. It helps, hearing that."
+NPC: "Okay. We'll pick this up later."
+YOU: "Are you okay?"
+NPC: "Oh! Oh — Most days I don't think about it. Today I am. Appreciate you noticing."
+NPC: "Huh. That went clean out of my head."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: siege=false mourn=true wound=false namedFallen=false
+## END other — talking to Farid
+OPEN CHOICES (11): [betrayal:accept] "Sure. Come see what I found. You won't believe it." | [betrayal:decline] "Not this time." | [alive:want:ask_favor] "Is there something you need? Really." | [alive:event:mourning] "How are you holding up? About... them." | [dlg:help] "What do you need?" | [dlg:cant] "Not right now, sorry." | [recap] "Wait — what were we talking about?" | [teach] "Watch — this is useful." | [dlg:subject] "Can I ask you something else?" | [leave] "Actually — never mind." | [silence] "..."
+> YOU PICK [dlg:help] 
+YOU: "How can I help?"
+NPC: "All sorted. Some things just work out."
+
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: Farid shows you where they go to think. "Don't tell the others. Everyone needs one place."
+
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Since Raj died... I keep expecting to see Raj at the fire. Stupid."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About that favor — we never finished."
+NPC: "...Sorry, lost my train of thought."
+
+> YOU PICK [dlg:cant] 
+YOU: "I can't right now."
+NPC: "Oh — no, it's fine. Already handled. But thanks."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "I braid grass while listening to plans. It doesn't bring anyone back. It just keeps my hands from shaking."
+
+> YOU PICK [alive:memory:deflected] 
+YOU: "About what I asked before..."
+NPC: “Yeah. I remember. ...It’s okay. Really.”
+
+> YOU PICK [dlg:more] 
+YOU: "Tell me more."
+NPC: "The fire feels smaller without Raj. The rest of us will have to be bigger."
+
+> YOU PICK [dlg:more] 
+YOU: "Tell me more."
+NPC: "I braid grass while listening to plans for Raj, now. Feels right. Feels like the least I can do."
+
+> YOU PICK [dlg:more] 
+NPC: "That's the whole of it. Sorry."
+NPC: "Let me sit with all that. We'll pick it up later."
+
+> YOU PICK [dlg:react] 
+(conversation ended by the engine)
+FINAL: want=ask_favor resolution=deflected
+
+### FULL TRANSCRIPT
+NPC: "Never mind the food I needed — we got it handled. Thanks anyway. Just... be straight with me."
+NPC: "Come see what I found. You won't believe it."
+YOU: "How can I help?"
+NPC: "All sorted. Some things just work out."
+YOU: "Sure."
+NPC: Farid shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: "What’s going on out there?"
+NPC: "Since Raj died... I keep expecting to see Raj at the fire. Stupid."
+YOU: "About that favor — we never finished."
+NPC: "...Sorry, lost my train of thought."
+YOU: "I can't right now."
+NPC: "Oh — no, it's fine. Already handled. But thanks."
+YOU: "About what's been happening — we never finished."
+NPC: "I braid grass while listening to plans. It doesn't bring anyone back. It just keeps my hands from shaking."
+YOU: "About what I asked before..."
+NPC: “Yeah. I remember. ...It’s okay. Really.”
+YOU: "Tell me more."
+NPC: "The fire feels smaller without Raj. The rest of us will have to be bigger."
+YOU: "Tell me more."
+NPC: "I braid grass while listening to plans for Raj, now. Feels right. Feels like the least I can do."
+YOU: "Tell me more."
+NPC: "That's the whole of it. Sorry."
+NPC: "Let me sit with all that. We'll pick it up later."
+YOU: "Yeah."
+NPC: "So." They look at the fire for a moment.
+NPC: "...It's fine, really. Already handled."
+NPC: "Hm. Never mind — go on."
+
+CARRY-FLAGS: siege=true mourn=true wound=false namedFallen=true
+[SUMMARY] seed 1828: raids=4 raidFights=20 defenderDeaths=0 villagerCombatDeaths=2 aidRaised=4 aidCalls=1 allyFights=0 healerRounds=16 convos=6 anomalies=0

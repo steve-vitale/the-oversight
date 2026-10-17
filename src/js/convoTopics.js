@@ -390,11 +390,11 @@
         const _myMem = (typeof this.t2mem === 'function' ? this.t2mem(vid) : []) || [];
         const _tb = _myMem.find(m => m.t === 'tended_by' && m.medic &&
           (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
-        if (_tb) careEv = { kind: 'care', self: true, medic: _tb.medic };
+        if (_tb) careEv = { kind: 'care', self: true, medic: _tb.medic, wound: !!_tb.wound };
         else {
           const _td = _myMem.find(m => m.t === 'tended' && m.patient &&
             (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
-          if (_td) careEv = { kind: 'care', self: false, patient: _td.patient };
+          if (_td) careEv = { kind: 'care', self: false, patient: _td.patient, wound: !!_td.wound };
         }
         const _cu = _myMem.find(m => m.t === 'cured' &&
           (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
@@ -1243,10 +1243,29 @@
           // sat with whom through the fever. Names knowledge-gated via
           // firstRef (the r8/r17 pattern). The cured variant is the patient
           // cured by the player's hands — the curer is always 'you'.
+          // WOUND VARIANT (journey crisis r19 2026-10-16): healerRounds books
+          // the same kinds with wound:true for combat-wound tending — the
+          // lines stay wound-flavored (bound up / cut), never fever.
           if (ev.cured) return [
             '"I was gone — burning up, nothing left. You pulled me back. I don\'t have words for that."',
             '"The fever had me and you didn\'t leave. That\'s the whole story."',
           ];
+          if (ev.wound) {
+            if (ev.self) {
+              let who = 'someone';
+              try { if (ev.medic && typeof this.firstRef === 'function') who = this.firstRef(ev.medic) || 'someone'; } catch (e) {}
+              return [
+                '"' + who + ' bound up my cut proper — cleaned it, wrapped it tight. I don\'t forget that."',
+                '"When I was bleeding, ' + who + ' stayed and did the work. That\'s what I keep coming back to."',
+              ];
+            }
+            let pat = 'them';
+            try { if (ev.patient && typeof this.firstRef === 'function') pat = this.firstRef(ev.patient) || 'them'; } catch (e) {}
+            return [
+              '"I bound up ' + pat + ' — cleaned it out, wrapped it tight. Someone had to, and I know what to do."',
+              '"' + pat + ' was bleeding. I did what I could. That\'s the job."',
+            ];
+          }
           if (ev.self) {
             let who = 'someone';
             try { if (ev.medic && typeof this.firstRef === 'function') who = this.firstRef(ev.medic) || 'someone'; } catch (e) {}

@@ -7005,6 +7005,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const hid = this.campHealerVid ? this.campHealerVid() : null;
         if (hid && this.creditDeed) this.creditDeed(hid, 'healing');
       } catch (e) {}
+      // WOUND-CARE MEMORY (journey crisis r19 2026-10-16): the r18 care-memory
+      // fix covered disease tending (villagerCareTick) but combat-wound
+      // tending stayed conversationally invisible — 75 healer-rounds events
+      // in the r19 pilot, zero memories, zero convo mentions. The patient
+      // remembers being bound up; the healer remembers the binding. The
+      // existing 'care' lately kind surfaces both (wound-variant lines).
+      try {
+        const _hid2 = healer === 'You' ? this.villagerId : (this.campHealerVid ? this.campHealerVid() : null);
+        if (this.remember) {
+          this.remember(worst, 'tended_by', 'bound up by ' + (healer === 'You' ? 'you' : healer), { medic: _hid2, wound: true });
+          if (_hid2) this.remember(_hid2, 'tended', 'bound up ' + nm, { patient: worst, wound: true });
+        }
+      } catch (e) {}
       return worst;
     },
 
