@@ -1,0 +1,32 @@
+=== seed 8805 day 23 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=23 dead=false mood=cheerful
+want: share_news (stage 1)
+
+THEM: "Have you heard? No? Good, I get to tell you first. — anyway."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=share_news stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=share_news stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "They took me. The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=share_news stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Klaus just walked away from Haven. Didn't look back. ...yeah."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=share_news stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "I used to complain about Oslo, Norway traffic. I'd kill for traffic. Orderly, honking traffic."
+(want=share_news stage=1)
+closing line: "Take care of yourself."
+want final: id=share_news stage=3 resolution=unresolved

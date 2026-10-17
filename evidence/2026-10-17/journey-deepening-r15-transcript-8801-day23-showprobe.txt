@@ -1,0 +1,32 @@
+=== seed 8801 day 23 — conversation with Juan (gen_9pt2kju) ===
+occupation=Rancher temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about the gossip — we wandered off it, 3 days back. 'Take it with salt. What did you want to ask?' We still owe your story a proper ending, too."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Good talking."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "Sweet Tooth. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bamboo Shoot. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Ginkgo Nut. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Someone should talk to Vasyl. Not me, though."
+(want=curious stage=2)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=curious stage=3 resolution=engaged

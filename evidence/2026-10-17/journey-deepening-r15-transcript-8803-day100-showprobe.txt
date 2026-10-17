@@ -1,0 +1,24 @@
+=== seed 8803 day 100 — conversation with Jack (gen_0mje8q6) ===
+occupation=welder temperament=earnest trust=90 dead=false mood=steady
+want: seek_taken (stage 0, fromSeed)
+
+THEM: Somewhere out there is better. It has to be. The alternative is unthinkable.
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:more, dlg:react, dlg:doubt, recap, dlg:invite, dlg:subject, confront:d_85rf3tv, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Did you hear? Jerome just walked away from Haven. Didn't look back. You know?"
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? I really mean that."
+(want=seek_taken stage=0)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "That's the whole of it. The director's cut adds nothing."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? That matters to me."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=seek_taken stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 8806 day 96 — conversation with Nathan (nathan_lee) ===
+occupation=HVAC tech temperament=cautious trust=53 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "…Can I tell you something? I have been lying about my age — I'm younger than I look."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence, confront:d_yy6lnaz)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I… You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask? …sorry."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "The way I read it — Did you hear? Ruby just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. Just... be straight with me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "I keep thinking about what I left behind. Then I get hungry and stop thinking."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "Huh. Let me think about that." "Don't laugh. Still water that should be moving."
+(want=curious stage=2)
+closing line: "I'm glad we talked. I think. I'm still deciding."
+want final: id=curious stage=3 resolution=engaged

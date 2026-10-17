@@ -1,0 +1,32 @@
+=== seed 8801 day 25 — conversation with Yue (gen_d3ihz0u) ===
+occupation=farmer temperament=bold trust=80 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: agency:ask_field, ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Did you hear? Juan just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "I'm collecting skills like they're currency — finding food today, something else tomorrow."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "Ask me again in a week. The answer might be better."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+closing line: "Good talk. Now let's go be useful."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 8802 day 60 — conversation with Enrique (gen_933bzyr) ===
+occupation=mechanic temperament=fidgety trust=90 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "Have you ever hurt someone? Since all this started."
+(turn0 choices: ans:q_fight:a_tell, ans:q_fight:a_vague, ans:q_fight:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "They took you — The Moot, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Sassafras — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Alright. Catch you later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

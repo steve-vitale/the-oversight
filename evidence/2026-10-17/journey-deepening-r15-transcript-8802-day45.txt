@@ -1,0 +1,26 @@
+=== seed 8802 day 45 — conversation with Enrique (gen_933bzyr) ===
+occupation=mechanic temperament=fidgety trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about what's been happening — we wandered off it, 5 days back. 'Yeah? What's up? That's my read.'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, more)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Here's what I think — I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I memorize the stars. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I memorize the stars and stay ready."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,18 @@
+=== seed 8802 day 24 — conversation with Fernando (gen_2vq96we) ===
+occupation=street artist temperament=withdrawn trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "I tried the Dandelion like you showed me. Didn't poison anyone, so that's a win. No time to waste."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:ask_favor, alive:thread:want, dlg:more, dlg:react, dlg:doubt, recap, dlg:invite, dlg:subject, confront:d_m5t8kfz, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? ...never mind."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Did you hear? Dzifa just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unestablished

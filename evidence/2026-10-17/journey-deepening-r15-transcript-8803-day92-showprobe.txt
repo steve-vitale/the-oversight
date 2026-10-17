@@ -1,0 +1,24 @@
+=== seed 8803 day 92 — conversation with Jack (gen_0mje8q6) ===
+occupation=welder temperament=earnest trust=90 dead=false mood=hungry
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: alive:thread:gossip, alive:thread:personal, dlg:more, dlg:commit, dlg:cant, dlg:help, dlg:subject, confront:d_85rf3tv, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Can I just say — Jerome sees in the dark. Not well — but better than you. Better than me."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "I found a gray hair today. I'm choosing to call it wisdom frost."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_taken stage=1)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=unresolved

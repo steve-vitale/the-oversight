@@ -1,0 +1,32 @@
+=== seed 8803 day 17 — conversation with Desmond (desmond_clarke) ===
+occupation=sign painter temperament=restless trust=23 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About where you're from — Where are you from — originally? Before all this. Just saying!"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_origin:a_tell, ans:q_origin:a_vague, ans:q_origin:a_deflect, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Since Guadalupe died... I keep expecting to see Guadalupe at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Hah. Did you hear? Chantal just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "Good question." "Honestly? I'm still making up my mind about you." "That's where we are."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? I really think so."
+(want=curious stage=2)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=curious stage=3 resolution=engaged

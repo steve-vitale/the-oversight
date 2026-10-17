@@ -1,0 +1,32 @@
+=== seed 8801 day 61 — conversation with Shanice (gen_ipfuwdw) ===
+occupation=locksmith temperament=fidgety trust=48 dead=false mood=grieving
+want: repay (stage 1, fromSeed)
+
+THEM: "You said you'd help with the food I needed. ...It's done now. Forget it, as it were."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:react, alive:thread:lately, alive:memory:promise_broken, dlg:cant, dlg:help, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Doesn't matter now."
+(want=repay stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "Wilhelm is gone and the world just... continues. That's the part I can't stand."
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? I mean it."
+(want=repay stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Don't repeat this, but Yue's story doesn't hold. A farmer, back before. Not what they told you. ...anyway, where was I."
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Just... be straight with me."
+(want=repay stage=1)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "The fire's the real leader here. We just orbit it and pretend we're in charge. Anyway."
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? That is all."
+(want=repay stage=1)
+YOU: [ask:fears] "What scares you?"
+THEM: "Good question." "Children going quiet — and now losing people. That one isn't abstract anymore."
+(want=repay stage=1)
+closing line: "Sorry. I need a minute."
+want final: id=repay stage=3 resolution=unresolved

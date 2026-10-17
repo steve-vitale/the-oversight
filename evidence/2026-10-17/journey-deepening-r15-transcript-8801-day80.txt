@@ -1,0 +1,18 @@
+=== seed 8801 day 80 — conversation with Shanice (gen_ipfuwdw) ===
+occupation=locksmith temperament=fidgety trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about the gossip — we wandered off it, 3 days back. 'I've got theories. Most of them are just fear with better lighting.'"
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=ask_favor stage=0)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=unestablished

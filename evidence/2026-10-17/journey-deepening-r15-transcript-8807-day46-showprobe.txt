@@ -1,0 +1,32 @@
+=== seed 8807 day 46 — conversation with Petra (petra_novak) ===
+occupation=glazier temperament=steady trust=42 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about each other — we left it mid-thought, 2 days back. 'Sure — what's on your mind?'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, more, silence, confront:d_wedjc6v)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Wei? A Beekeeper, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Huh. Let me think about that." "I've decided the monsters are just wildlife with better PR. Don't quote me. Just... be straight with me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Huh. Let me think about that." "The smell of smoke that is not a fire." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

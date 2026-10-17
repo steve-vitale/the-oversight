@@ -1,0 +1,32 @@
+=== seed 8806 day 47 — conversation with Scott (gen_oo79plo) ===
+occupation=roofer temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: betrayal:accept, betrayal:decline, alive:thread:lately, alive:thread:gossip, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "They took you — Hardened The Confession, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Ruby is back. Walked in like they'd never left."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? You know?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Huh. Let me think about that." "That's the whole of it. The director's cut adds nothing."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? That matters to me."
+(want=ask_favor stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "You want to know about that? Okay." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=ask_favor stage=2)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=stated

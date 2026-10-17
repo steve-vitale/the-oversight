@@ -1,0 +1,32 @@
+=== seed 8807 day 44 — conversation with Petra (petra_novak) ===
+occupation=glazier temperament=steady trust=43 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what scares you most — What scares you most about what's happening? The real answer."
+(turn0 choices: ans:q_system_fear:a_tell, ans:q_system_fear:a_vague, ans:q_system_fear:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Did you hear? Milo just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? One step at a time."
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Good question." "My glazier training covered a lot. 'Post-apocalyptic foraging' was not on the syllabus."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "You want to know about that? Okay." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

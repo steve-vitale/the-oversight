@@ -1,0 +1,32 @@
+=== seed 8806 day 39 — conversation with Nathan (nathan_lee) ===
+occupation=HVAC tech temperament=cautious trust=36 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid. Could be wrong, though."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Did you hear? Stan just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Makes sense to me."
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "Maybe — If we get through this, I'm never complaining about Mondays again. Sworn oath."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "Good question." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? ...at least, that's how it looks to me."
+(want=curious stage=2)
+closing line: "Alright. Think about what I said. I'll be thinking about what you said."
+want final: id=curious stage=3 resolution=engaged

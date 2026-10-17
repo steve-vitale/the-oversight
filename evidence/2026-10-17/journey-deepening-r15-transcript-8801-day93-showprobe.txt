@@ -1,0 +1,27 @@
+=== seed 8801 day 93 — conversation with Vasyl (vasyl_shevchenko) ===
+occupation=infantry soldier temperament=withdrawn trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Ghost Pipe — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: alive:want:ask_favor, dlg:more, dlg:react, dlg:doubt, dlg:invite, teach, dlg:subject, confront:d_scwfgcs, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? …if that makes sense."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Yue told you that?" Vasyl gives you a long look. "Then Yue told you wrong. From Beijing, China — that's the one I know."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested. Makes sense to me."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Bamboo Shoot — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Ginkgo Nut — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unestablished

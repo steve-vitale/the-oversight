@@ -1,0 +1,32 @@
+=== seed 8805 day 52 — conversation with Malinali (gen_95jxxp0) ===
+occupation=plumber temperament=steady trust=53 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "We gave them a good burial. Doesn't feel like enough, does it?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. Anyway."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind? Take your time with it."
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Since Aitana died... I keep expecting to see Aitana at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? I mean it."
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Emma? A Veterinarian, back before. Solid person."
+(want=seek_comfort stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Now — Honestly? I think about it more than I say."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? That's where we are."
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "Back home I was a plumber. Doesn't mean much now, does it? Means something. Just not much. Not that it matters."
+(want=seek_comfort stage=0)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=seek_comfort stage=3 resolution=unestablished

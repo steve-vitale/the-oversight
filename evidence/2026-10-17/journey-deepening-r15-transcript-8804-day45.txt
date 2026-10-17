@@ -1,0 +1,29 @@
+=== seed 8804 day 45 — conversation with Lamar (gen_pbvg8a0) ===
+occupation=programmer temperament=stoic trust=90 dead=false mood=cheerful
+want: seek_taken (stage 0)
+
+THEM: "We never did finish talking about what scares them — that was 13 days back. Still on your mind? 'The laughter that sounds almost human." A pause. "Stupid, maybe. But there it is.'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, more, confront:d_zodfvky)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "When it gets bad, I clean up other people's messes quietly. It doesn't help, exactly. It gives my hands something to do while my head catches up."
+(want=seek_taken stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Some fears you outgrow. This one grew up with me."
+(want=seek_taken stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I try not to think about what I'd do. Thinking about it feels like inviting it."
+(want=seek_taken stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=seek_taken stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "...Sorry, lost my train of thought."
+(want=seek_taken stage=2)
+YOU: [goon] "What else scares you?"
+THEM: "I should go. You know where to find me."
+(want=seek_taken stage=2)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=engaged

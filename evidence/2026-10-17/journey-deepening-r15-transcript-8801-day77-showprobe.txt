@@ -1,0 +1,32 @@
+=== seed 8801 day 77 — conversation with Shanice (gen_ipfuwdw) ===
+occupation=locksmith temperament=fidgety trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — do you have anything to eat? Anything at all? My hands shake when I try to work."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? No time to waste."
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "The Long Odds. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Maya? An ER nurse, back before. Solid person."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "I keep thinking about Columbus, Ohio. Not missing it, exactly. Just... checking that I still remember it right."
+(want=ask_favor stage=1)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unresolved

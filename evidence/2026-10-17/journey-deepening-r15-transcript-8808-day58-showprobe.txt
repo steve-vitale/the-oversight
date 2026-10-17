@@ -1,0 +1,32 @@
+=== seed 8808 day 58 — conversation with Ella (ella_johnson) ===
+occupation=ESL teacher temperament=dry trust=47 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Have you — sorry. I keep thinking about them."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "Since Petra died... I keep expecting to see Petra at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Don't repeat this, but Victor's story doesn't hold. A fishing guide, back before. Not what they told you. I mean it."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "Your story. Go."
+THEM: "Good question." "I don't know you. But you're here, so... we figure it out."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Life's funny that way."
+(want=seek_comfort stage=0)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "Good question." "You're alright. I think. Ask me again in a week." "Make of that what you will."
+(want=seek_comfort stage=0)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=unestablished

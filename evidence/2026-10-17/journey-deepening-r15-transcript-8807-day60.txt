@@ -1,0 +1,21 @@
+=== seed 8807 day 60 — conversation with Milo (gen_q8d4u7p) ===
+occupation=mechanic temperament=fidgety trust=59 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: agency:ask_expedition, alive:event:tension, dlg:more, dlg:commit, dlg:cant, dlg:help, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's my mother, Patricia. Was taken at the Scattering. The boring half. She made soup from nothing and they called that boring. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=seek_taken stage=3 resolution=promised

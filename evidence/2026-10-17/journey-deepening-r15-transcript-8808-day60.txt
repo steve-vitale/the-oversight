@@ -1,0 +1,24 @@
+=== seed 8808 day 60 — conversation with Victor (gen_ipeigkf) ===
+occupation=fishing guide temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can we talk?" Victor sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence, confront:d_0br8ipi)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=seek_taken stage=0)
+YOU: [ask:personal] "Your story. Go."
+THEM: "Huh. Let me think about that." "The others look to me for finding food. Fine. Someone has to know something. No time to waste."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "What else?"
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "That tracks."
+THEM: "Well." A breath. "That's where things stand."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "That tracks."
+THEM: "Anyway." A small smile.
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Later."
+want final: id=seek_taken stage=3 resolution=unestablished

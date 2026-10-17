@@ -1,0 +1,32 @@
+=== seed 8805 day 85 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=83 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "It's quiet today. Wrong kind of quiet."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "We lost Klaus and Nathan this week. I keep setting out extra portions. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Malinali is back. Walked in like they'd never left. Anyway."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "Your story. Go."
+THEM: "Huh. Let me think about that." "That's... yeah, that's everything I've got on that."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "I'm glad you asked, actually."
+(want=seek_comfort stage=0)
+closing line: "Talking helps. A little. Thank you."
+want final: id=seek_comfort stage=3 resolution=unestablished

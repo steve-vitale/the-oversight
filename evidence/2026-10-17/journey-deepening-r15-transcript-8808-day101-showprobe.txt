@@ -1,0 +1,32 @@
+=== seed 8808 day 101 — conversation with Daniyar (daniyar_askarov) ===
+occupation=paramedic temperament=gentle trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I asked Miriam about the sickness I'm fighting — Miriam's gone. Still need hands. Are you in?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "Somchai is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Your story. Go."
+THEM: "You want to know about that? Okay." "Sleep's the real currency now. I'm rich in dreams and broke in rest."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+closing line: "That helped. Thank you for sitting with me."
+want final: id=ask_favor stage=3 resolution=unresolved

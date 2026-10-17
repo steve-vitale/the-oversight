@@ -1,0 +1,32 @@
+=== seed 8805 day 100 — conversation with Malinali (gen_95jxxp0) ===
+occupation=plumber temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I still haven't found anyone. Any chance?"
+(turn0 choices: betrayal:accept, betrayal:decline, alive:thread:lately, alive:thread:gossip, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took you — The Long Odds, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Did you hear? Henry just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Huh. Let me think about that." "That's the whole of it. The director's cut adds nothing."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? You'd know about that."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=stated

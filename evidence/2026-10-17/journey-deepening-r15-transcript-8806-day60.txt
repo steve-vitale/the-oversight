@@ -1,0 +1,18 @@
+=== seed 8806 day 60 — conversation with Scott (gen_oo79plo) ===
+occupation=roofer temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you? Good talking."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:thread:you, alive:thread:goal, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=promised

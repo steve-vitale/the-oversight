@@ -1,0 +1,31 @@
+=== seed 8804 day 19 — conversation with Rafael (rafael_torres) ===
+occupation=roofer temperament=restless trust=42 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "We never finished talking about what's been happening — we wandered off it, 3 days back. 'Sure — what's on your mind?' We still owe what scares them a proper ending, too. Funny how that works."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, more, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Sure — You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? I mean it."
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Did you hear? James just walked away from Haven. Didn't look back."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Last time things were different. They always are." "Felicia is gone and Ha-yoon is gone and the world just... continues. That's the part I can't stand."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_comfort stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "Okay. We'll pick this up later."
+(want=seek_comfort stage=0)
+want final: id=seek_comfort stage=3 resolution=unestablished

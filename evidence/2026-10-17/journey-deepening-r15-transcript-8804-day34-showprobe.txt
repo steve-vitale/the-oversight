@@ -1,0 +1,30 @@
+=== seed 8804 day 34 — conversation with Rafael (rafael_torres) ===
+occupation=roofer temperament=restless trust=56 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Hey — I found some Dandelion today. You were right, it was right where you said. Can't sit still, you know?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Worth considering."
+(want=ask_favor stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You saw it too, right? The Blood Tithe. Tell me I didn't imagine the lights."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Gotta keep moving."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Did you hear? Lamar just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Okay! Moving! Talk later — probably while moving!"
+want final: id=ask_favor stage=3 resolution=unestablished

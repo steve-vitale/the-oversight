@@ -1,0 +1,31 @@
+=== seed 8807 day 32 — conversation with Tariq (tariq_mahmood) ===
+occupation=electrician temperament=prickly trust=28 dead=false mood=steady
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway. Seen worse."
+(turn0 choices: alive:want:ask_favor, alive:event:mourning, dlg:help, dlg:cant, teach, dlg:subject, confront:d_1awwsh6, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Salma is back. Walked in like they'd never left. Hm."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "Yeah — I keep the good moments in a mental box. Today goes in the box. Just so you know."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "I've got things to do. People to avoid. You know."
+(want=ask_favor stage=1)
+want final: id=ask_favor stage=3 resolution=unresolved

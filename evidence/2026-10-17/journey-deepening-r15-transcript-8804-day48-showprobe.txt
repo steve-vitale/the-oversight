@@ -1,0 +1,32 @@
+=== seed 8804 day 48 — conversation with Eli (gen_xa4d5j4) ===
+occupation=farmer temperament=mischievous trust=91 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Will you help me clean it?"
+(turn0 choices: agency:ask_expedition, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "James is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Worth considering."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." Eli snorts. "Lamar said that? Please. A programmer — I knew them from before. The story doesn't survive five minutes of scrutiny."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? What's the worst that happens."
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "I keep thinking about what I left behind. Then I get hungry and stop thinking. Anyway."
+(want=ask_favor stage=1)
+closing line: "Talking helps. A little. Thank you."
+want final: id=ask_favor stage=3 resolution=unresolved

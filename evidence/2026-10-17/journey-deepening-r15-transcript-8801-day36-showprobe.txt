@@ -1,0 +1,32 @@
+=== seed 8801 day 36 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=60 dead=false mood=grieving
+want: curious (stage 0, fromSeed)
+
+THEM: "Have you — sorry. I keep thinking about them."
+(turn0 choices: agency:ask_field, ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Here's the thing — Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind? That's the truth of it."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Morgan is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "that stray dog — the one that bit two people — lets Juan touch it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? No point pretending otherwise."
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "I tell myself Amritsar, Punjab, India is still there. It helps on the bad nights. Not that it matters."
+(want=curious stage=2)
+closing line: "...Thanks for being here. That's all."
+want final: id=curious stage=3 resolution=engaged

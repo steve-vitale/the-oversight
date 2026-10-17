@@ -1,0 +1,32 @@
+=== seed 8807 day 18 — conversation with Hayden (gen_6xi4npc) ===
+occupation=community gardener temperament=gentle trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Will you help me clean it?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "They took you — Impress Us, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Milo is back. Walked in like they'd never left."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? ...if that makes sense."
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "I tell myself Columbus, Ohio is still there. It helps on the bad nights."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+closing line: "Go easy today, okay? The world's hard enough."
+want final: id=ask_favor stage=3 resolution=unresolved

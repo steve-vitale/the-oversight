@@ -1,0 +1,32 @@
+=== seed 8805 day 74 — conversation with Malinali (gen_95jxxp0) ===
+occupation=plumber temperament=steady trust=68 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Could you clean it out for me? Please."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Just... be straight with me."
+(want=ask_favor stage=1)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "Last time things were different. They always are." "You saw it too, right? Duel. Tell me I didn't imagine the lights."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Devon just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "Let's see — My plumber instincts keep firing at the wrong things. Old wiring, new world."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+closing line: "Good talking. We'll figure it out."
+want final: id=ask_favor stage=3 resolution=unresolved

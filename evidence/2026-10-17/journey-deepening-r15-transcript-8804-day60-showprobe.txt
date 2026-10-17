@@ -1,0 +1,27 @@
+=== seed 8804 day 60 — conversation with Lamar (gen_pbvg8a0) ===
+occupation=programmer temperament=stoic trust=90 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "Please — do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence, confront:d_zodfvky)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? That's the priority."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Geovanny just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "We should name this place. 'Camp' is what you call somewhere you're leaving."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,30 @@
+=== seed 8808 day 45 — conversation with Victor (gen_ipeigkf) ===
+occupation=fishing guide temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Thandiwe, friend?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence, confront:d_0br8ipi)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my mother, Thandiwe. Was taken at the Scattering. The boring half. She made soup from nothing and they called that boring. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [goon] "And?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Dandelion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Thanks for listening. I mean that."
+want final: id=seek_taken stage=3 resolution=promised

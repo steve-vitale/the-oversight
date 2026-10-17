@@ -1,0 +1,30 @@
+=== seed 8803 day 81 — conversation with Jack (gen_0mje8q6) ===
+occupation=welder temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: alive:want:ask_favor, dlg:help, dlg:details, dlg:cant, dlg:subject, confront:d_85rf3tv, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Jerome just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Simple as that."
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real. That's the whole of it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Good question." "Don't laugh. The river changing course."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=ask_favor stage=3 resolution=unresolved

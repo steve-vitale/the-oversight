@@ -1,0 +1,32 @@
+=== seed 8806 day 72 — conversation with Scott (gen_oo79plo) ===
+occupation=roofer temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Stinging Nettle — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: alive:thread:lately, alive:want:ask_favor, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "They took you — The Sorting, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Nathan? A HVAC tech, back before. Solid person."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "I could keep talking, but I'd just be repeating myself with more hand gestures."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=0)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unestablished

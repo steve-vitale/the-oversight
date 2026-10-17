@@ -1,0 +1,32 @@
+=== seed 8807 day 25 — conversation with Hayden (gen_6xi4npc) ===
+occupation=community gardener temperament=gentle trust=91 dead=false mood=cold
+want: curious (stage 0)
+
+THEM: "We never finished talking about what's been happening — we wandered off it, 7 days back. 'Sure — what's on your mind?' We still owe that favor a proper ending, too."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, more, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say. That's the priority."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? That is all."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Riwai is back. Walked in like they'd never left. No time to waste."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "They took you — The Box, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? No pressure, though."
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "I'm collecting skills like they're currency — patching people up today, something else tomorrow."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "I'll be here if you need. No rush, ever."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8805 day 89 — conversation with Malinali (gen_95jxxp0) ===
+occupation=plumber temperament=steady trust=90 dead=false mood=cheerful
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking. No rush."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "Nathan is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Good question." "If we get through this, I'm never complaining about Mondays again. Sworn oath."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "Footsteps that stop." A pause. "Stupid, maybe. But there it is."
+(want=ask_favor stage=2)
+closing line: "Alright. Back to work."
+want final: id=ask_favor stage=3 resolution=stated

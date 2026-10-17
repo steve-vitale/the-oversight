@@ -1,0 +1,12 @@
+=== seed 8805 day 60 — conversation with Klaus (gen_wp8eyi8) ===
+occupation=Rancher temperament=withdrawn trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking. Makes sense to me."
+(turn0 choices: dlg:commit, dlg:cant, dlg:subject, confront:d_9hxxypr, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=promised

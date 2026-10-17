@@ -1,0 +1,32 @@
+=== seed 8802 day 80 — conversation with Enrique (gen_933bzyr) ===
+occupation=mechanic temperament=fidgety trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Fernando and I never did finish talking about what's been happening — that was 14 days back. You weren't there for that one — Fernando was. Want to hear where it left off? 'The Guest. They just... took you. Came back like nothing happened. It wasn't nothing.' We still owe their secret a proper ending, too."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. Doesn't matter now."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Anyway."
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Did you hear? Sanne just walked away from Haven. Didn't look back. ...sorry."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "Maya is gone and the world just... continues. That's the part I can't stand."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Huh. Let me think about that." "I don't have more words for it. Some things just are."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_comfort stage=0)
+closing line: "Talking helps. A little. Thank you."
+want final: id=seek_comfort stage=3 resolution=unestablished

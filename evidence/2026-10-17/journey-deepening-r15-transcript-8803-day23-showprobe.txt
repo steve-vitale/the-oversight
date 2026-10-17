@@ -1,0 +1,32 @@
+=== seed 8803 day 23 — conversation with Jack (gen_0mje8q6) ===
+occupation=welder temperament=earnest trust=48 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, confront:d_85rf3tv, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Good talking."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying when they think I'm not listening?"
+THEM: "Huh. Let me think about that." "Franco? A glazier, back before. Solid person."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "I want to know you better. The real you."
+THEM: "Good question." "I'm from Columbus, Ohio. The plants here don't look like home. I'm learning. Slowly."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Good question." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,32 @@
+=== seed 8801 day 42 — conversation with Juan (gen_9pt2kju) ===
+occupation=Rancher temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What day is it? ...Do you still count? I lost track days ago."
+(turn0 choices: agency:ask_expedition, ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "They took me. Duel — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "You ever notice Vasyl? ...I don't know what to make of that. Nobody does."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "I've decided the monsters are just wildlife with better PR. Don't quote me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "I'm rooting for you. Whatever you're working on. Just so you know."
+want final: id=curious stage=3 resolution=engaged

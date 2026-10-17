@@ -1,0 +1,32 @@
+=== seed 8802 day 55 — conversation with Enrique (gen_933bzyr) ===
+occupation=mechanic temperament=fidgety trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You said you were furious. Most days. Still carrying it?"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Sorry, what was the question."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "The Moot. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Wait, also — I'm not saying there's anything wrong with Benoit. I'm just saying I sleep better with them on the other side of the fire."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "Being a mechanic taught me one useful thing: how to look busy while thinking. ...anyway, where was I."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

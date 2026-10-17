@@ -1,0 +1,32 @@
+=== seed 8803 day 19 — conversation with Gerald (gen_ek0fky9) ===
+occupation=infantry soldier temperament=prickly trust=57 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Don't mind me. Today's just heavy."
+(turn0 choices: agency:ask_expedition, dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "Since Lorenzo died... I keep expecting to see Lorenzo at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Franco just walked away from Haven. Didn't look back. Ha. Funny."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "You want to know about that? Okay." "You're one of the good ones. Don't make me regret saying that out loud." "There. You wanted honest."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Not that it matters."
+(want=seek_comfort stage=0)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "You want to know about that? Okay." "The fire going out." Said flat, like something rehearsed in the dark.
+(want=seek_comfort stage=0)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=unestablished

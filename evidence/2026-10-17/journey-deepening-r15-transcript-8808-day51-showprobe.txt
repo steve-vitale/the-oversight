@@ -1,0 +1,32 @@
+=== seed 8808 day 51 — conversation with Victor (gen_ipeigkf) ===
+occupation=fishing guide temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:more, dlg:commit, dlg:cant, dlg:help, recap, dlg:subject, confront:d_0br8ipi, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Jordan? They told you they were from Denver? Huh." Victor looks away. "Jordan was from Columbus, Ohio. Everyone knew, as it were."
+(want=seek_taken stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Your story. Go."
+THEM: "Huh. Let me think about that." "I keep thinking about what I left behind. Then I get hungry and stop thinking."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? I mean it."
+(want=seek_taken stage=1)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Huh. Let me think about that." "Never seeing home again." A pause. "Stupid, maybe. But there it is."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=1)
+closing line: "I'll be here if you need. No rush, ever."
+want final: id=seek_taken stage=3 resolution=unresolved

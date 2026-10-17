@@ -1,0 +1,32 @@
+=== seed 8801 day 47 — conversation with Juan (gen_9pt2kju) ===
+occupation=Rancher temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Hey — I found some Ghost Pipe today. You were right, it was right where you said, friend."
+(turn0 choices: agency:ask_expedition, alive:thread:want, alive:thread:lately, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? You'd know about that."
+(want=curious stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "Last time things were different. They always are." "The Sorting. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? How are you holding up, though?"
+(want=curious stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Yue told you that?" Juan gives you a long look. "Then Yue told you wrong. A farmer — that's the one I know. Simple as that."
+(want=curious stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Here's the thing: I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "I've gotten good at reading faces. Out here, faces say what words won't."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Anyway, that's me."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

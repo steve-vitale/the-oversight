@@ -1,0 +1,27 @@
+=== seed 8808 day 80 — conversation with Cheyenne (gen_ml97tps) ===
+occupation=lawyer temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you believe in anything? Now, I mean. After everything. Worth considering."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "Belief's personal. But thanks for saying yours out loud. That takes guts."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Did you hear? Adaeze just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

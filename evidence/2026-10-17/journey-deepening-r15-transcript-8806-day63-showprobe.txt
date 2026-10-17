@@ -1,0 +1,32 @@
+=== seed 8806 day 63 — conversation with Nathan (nathan_lee) ===
+occupation=HVAC tech temperament=cautious trust=42 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Any regrets? The real kind, not the small stuff."
+(turn0 choices: ans:q_regret:a_tell, ans:q_regret:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Regrets are just love with nowhere to go. That's what I tell myself, anyway."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Here's what I think — Did you hear? Catalina just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "Do you think we'll look back on this and call it the good old days? God, I hope not. Not that it matters."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. I mean it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

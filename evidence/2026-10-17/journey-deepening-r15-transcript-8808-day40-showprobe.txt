@@ -1,0 +1,32 @@
+=== seed 8808 day 40 — conversation with Ella (ella_johnson) ===
+occupation=ESL teacher temperament=dry trust=40 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before. We all learn."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "Colleen is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Did you hear? Victor just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Your story. Go."
+THEM: "Good question." "The hardest part isn't the hunger or the cold. It's not knowing if anyone else made it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? You'll see."
+(want=curious stage=2)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Huh. Let me think about that." "Don't laugh. Children going quiet."
+(want=curious stage=2)
+closing line: "File that under 'productive.' Loosely defined."
+want final: id=curious stage=3 resolution=engaged

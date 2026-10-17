@@ -1,0 +1,32 @@
+=== seed 8808 day 46 — conversation with Jordan (gen_ezoib1u) ===
+occupation=emergency dispatcher temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? Before the scattering, I said something cruel. I think about it every day."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_cjshlxz)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Adaeze? You're imagining things. They're perfectly pleasant. You'd know about that."
+(want=seek_taken stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is. Worth considering."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=0)
+YOU: [ask:personal] "Your story. Go."
+THEM: "Good question." "You ever get a song stuck in your head with no way to play it? It's a special kind of torture."
+(want=seek_taken stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_taken stage=0)
+closing line: "Thank you for listening. Really listening. That's rare."
+want final: id=seek_taken stage=3 resolution=unestablished

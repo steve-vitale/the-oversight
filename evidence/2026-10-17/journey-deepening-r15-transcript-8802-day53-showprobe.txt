@@ -1,0 +1,32 @@
+=== seed 8802 day 53 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=75 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: Everything's broken — bodies, tools, people. I fix things. It's what I'm for.
+(turn0 choices: ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind? Seen worse."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Oh! that stray dog — the one that bit two people — lets Enrique touch it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? No point pretending otherwise."
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "I'll tell you plain — I keep thinking about what I left behind. Then I get hungry and stop thinking."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Mark my words."
+(want=curious stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "Ask me again in a week. The answer might be better."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? It'll pass."
+(want=curious stage=2)
+closing line: "Good talk. Now let's go DO something."
+want final: id=curious stage=3 resolution=engaged

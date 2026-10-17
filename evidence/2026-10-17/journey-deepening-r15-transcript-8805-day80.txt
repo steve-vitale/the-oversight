@@ -1,0 +1,31 @@
+=== seed 8805 day 80 — conversation with Klaus (gen_wp8eyi8) ===
+occupation=Rancher temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: The System is a locked door. I'm collecting keys.
+(turn0 choices: agency:ask_field, ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "I… Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I interrogate the world instead of praying to it. Different strategy, same silence."
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Every 'why' I can't answer goes on the list. The list is long. It'll get longer."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "People think I'm chasing answers. I'm chasing the right questions."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I asked the sky a question this morning. It didn't answer. I'm keeping a list."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "Whatever did this — it had a reason. Reasons can be found. That's what I believe."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "...I need to go be quiet for a while."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged
