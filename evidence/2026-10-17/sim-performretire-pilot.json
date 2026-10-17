@@ -1,0 +1,1349 @@
+{
+ "seeds": [
+  9941,
+  9942,
+  9943,
+  9944,
+  9945,
+  9946,
+  9947,
+  9948
+ ],
+ "days": 180,
+ "verdict": {
+  "primary_perfDeathsDiff": 7,
+  "primary_bar": -3,
+  "primary_go": false,
+  "secondary_routedRateDiff": 0.0094,
+  "secondary_direction_ok": true,
+  "fledRateDiff_honest": 0.1024,
+  "fledRate_direction_ok": true
+ },
+ "guard": {
+  "attr_armed": 86,
+  "attr_control": 126,
+  "attr_ok": false,
+  "national_armed": 9,
+  "national_control": 8,
+  "national_ok": true,
+  "medianDays_armed": 168,
+  "medianDays_control": 180,
+  "medianDays_ok": false,
+  "deathCauses_armed": [
+   "combat",
+   "contest",
+   "dehydration",
+   "starvation",
+   "the night"
+  ],
+  "deathCauses_control": [
+   "combat",
+   "contest",
+   "dehydration",
+   "lockjaw",
+   "sickness",
+   "starvation",
+   "the night"
+  ]
+ },
+ "sum": {
+  "control": {
+   "n": 16,
+   "perfFights": 128,
+   "perfDeaths": 11,
+   "routedViaTrick": 25,
+   "fledViaTrick": 0,
+   "retires": 0,
+   "attr": 126,
+   "national": 8,
+   "table": 14,
+   "wins": 0,
+   "exiled": 0,
+   "sDeaths": 108,
+   "sCombat": 92,
+   "vDeaths": 172,
+   "vCombat": 92,
+   "lost": 8,
+   "days": [
+    30,
+    30,
+    109,
+    116,
+    118,
+    124,
+    143,
+    163,
+    180,
+    180,
+    180,
+    180,
+    180,
+    180,
+    180,
+    180
+   ],
+   "deathCauses": {
+    "combat": 92,
+    "contest": 9,
+    "sickness": 1,
+    "the night": 2,
+    "starvation": 2,
+    "dehydration": 1,
+    "lockjaw": 1
+   },
+   "perfSurvivalRate": 0.9141,
+   "routedRate": 0.1953,
+   "fledRate": 0,
+   "medianDays": 180
+  },
+  "armed": {
+   "n": 16,
+   "perfFights": 127,
+   "perfDeaths": 18,
+   "routedViaTrick": 26,
+   "fledViaTrick": 13,
+   "retires": 83,
+   "attr": 86,
+   "national": 9,
+   "table": 14,
+   "wins": 0,
+   "exiled": 0,
+   "sDeaths": 121,
+   "sCombat": 108,
+   "vDeaths": 179,
+   "vCombat": 108,
+   "lost": 10,
+   "days": [
+    30,
+    30,
+    82,
+    91,
+    98,
+    113,
+    118,
+    137,
+    168,
+    179,
+    180,
+    180,
+    180,
+    180,
+    180,
+    180
+   ],
+   "deathCauses": {
+    "combat": 108,
+    "dehydration": 2,
+    "contest": 7,
+    "starvation": 2,
+    "the night": 2
+   },
+   "perfSurvivalRate": 0.8583,
+   "routedRate": 0.2047,
+   "fledRate": 0.1024,
+   "medianDays": 168
+  }
+ },
+ "rows": [
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9941,
+   "days": 30,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 2,
+   "perfFights": 0,
+   "perfDeaths": 0,
+   "perfSurvived": 0,
+   "perfSurvivalRate": null,
+   "routedViaTrick": 0,
+   "routedRate": null,
+   "fledViaTrick": 0,
+   "fledRate": null,
+   "retires": 0,
+   "attr": 0,
+   "attrW12": 0,
+   "attrByVia": {},
+   "attrByWave": {},
+   "scholarDeaths": 1,
+   "scholarCombatDeaths": 1,
+   "scholarDeathCauses": {
+    "combat": 1
+   },
+   "villagerDeaths": 2,
+   "villagerCombatDeaths": 1
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9942,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 10,
+   "perfDeaths": 2,
+   "perfSurvived": 8,
+   "perfSurvivalRate": 0.8,
+   "routedViaTrick": 0,
+   "routedRate": 0,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 9,
+   "attrW12": 9,
+   "attrByVia": {
+    "player": 9
+   },
+   "attrByWave": {
+    "w1": 9
+   },
+   "scholarDeaths": 6,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6
+   },
+   "villagerDeaths": 7,
+   "villagerCombatDeaths": 6
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9943,
+   "days": 163,
+   "endReason": "village-lost",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 8,
+   "perfDeaths": 0,
+   "perfSurvived": 8,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 4,
+   "routedRate": 0.5,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 5,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 4,
+    "contest": 1
+   },
+   "attrByWave": {
+    "w1": 4,
+    "w2": 1
+   },
+   "scholarDeaths": 6,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6
+   },
+   "villagerDeaths": 11,
+   "villagerCombatDeaths": 6
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9944,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 6,
+   "perfDeaths": 0,
+   "perfSurvived": 6,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.1667,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 6,
+   "attrW12": 6,
+   "attrByVia": {
+    "player": 6
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 3
+   },
+   "scholarDeaths": 12,
+   "scholarCombatDeaths": 9,
+   "scholarDeathCauses": {
+    "combat": 9,
+    "contest": 2,
+    "sickness": 1
+   },
+   "villagerDeaths": 18,
+   "villagerCombatDeaths": 9
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9945,
+   "days": 124,
+   "endReason": "village-lost",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 9,
+   "perfDeaths": 0,
+   "perfSurvived": 9,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 2,
+   "routedRate": 0.2222,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 8,
+   "attrW12": 8,
+   "attrByVia": {
+    "player": 8
+   },
+   "attrByWave": {
+    "w1": 5,
+    "w2": 3
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7,
+    "the night": 1
+   },
+   "villagerDeaths": 10,
+   "villagerCombatDeaths": 7
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9946,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 9,
+   "perfDeaths": 1,
+   "perfSurvived": 8,
+   "perfSurvivalRate": 0.8889,
+   "routedViaTrick": 3,
+   "routedRate": 0.3333,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 11,
+   "attrW12": 11,
+   "attrByVia": {
+    "companion": 1,
+    "player": 10
+   },
+   "attrByWave": {
+    "w1": 7,
+    "w2": 4
+   },
+   "scholarDeaths": 4,
+   "scholarCombatDeaths": 3,
+   "scholarDeathCauses": {
+    "combat": 3,
+    "contest": 1
+   },
+   "villagerDeaths": 15,
+   "villagerCombatDeaths": 3
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9947,
+   "days": 143,
+   "endReason": "village-lost",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 10,
+   "perfDeaths": 1,
+   "perfSurvived": 9,
+   "perfSurvivalRate": 0.9,
+   "routedViaTrick": 1,
+   "routedRate": 0.1,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 8,
+   "attrW12": 8,
+   "attrByVia": {
+    "player": 8
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 5
+   },
+   "scholarDeaths": 2,
+   "scholarCombatDeaths": 2,
+   "scholarDeathCauses": {
+    "combat": 2
+   },
+   "villagerDeaths": 13,
+   "villagerCombatDeaths": 2
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 9948,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 5,
+   "perfDeaths": 0,
+   "perfSurvived": 5,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.2,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 5,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 5
+   },
+   "attrByWave": {
+    "w1": 4,
+    "w2": 1
+   },
+   "scholarDeaths": 7,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "starvation": 1,
+    "combat": 6
+   },
+   "villagerDeaths": 11,
+   "villagerCombatDeaths": 6
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9941,
+   "days": 30,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 2,
+   "perfFights": 0,
+   "perfDeaths": 0,
+   "perfSurvived": 0,
+   "perfSurvivalRate": null,
+   "routedViaTrick": 0,
+   "routedRate": null,
+   "fledViaTrick": 0,
+   "fledRate": null,
+   "retires": 0,
+   "attr": 0,
+   "attrW12": 0,
+   "attrByVia": {},
+   "attrByWave": {},
+   "scholarDeaths": 1,
+   "scholarCombatDeaths": 1,
+   "scholarDeathCauses": {
+    "combat": 1
+   },
+   "villagerDeaths": 2,
+   "villagerCombatDeaths": 1
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9942,
+   "days": 180,
+   "endReason": "survived",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 12,
+   "perfDeaths": 1,
+   "perfSurvived": 11,
+   "perfSurvivalRate": 0.9167,
+   "routedViaTrick": 2,
+   "routedRate": 0.1667,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 11,
+   "attrW12": 11,
+   "attrByVia": {
+    "player": 11
+   },
+   "attrByWave": {
+    "w1": 6,
+    "w2": 5
+   },
+   "scholarDeaths": 5,
+   "scholarCombatDeaths": 5,
+   "scholarDeathCauses": {
+    "combat": 5
+   },
+   "villagerDeaths": 5,
+   "villagerCombatDeaths": 5
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9943,
+   "days": 118,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 5,
+   "perfDeaths": 0,
+   "perfSurvived": 5,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.2,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 2,
+    "w2": 2
+   },
+   "scholarDeaths": 6,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6
+   },
+   "villagerDeaths": 9,
+   "villagerCombatDeaths": 6
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9944,
+   "days": 180,
+   "endReason": "survived",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 4,
+   "perfFights": 12,
+   "perfDeaths": 1,
+   "perfSurvived": 11,
+   "perfSurvivalRate": 0.9167,
+   "routedViaTrick": 2,
+   "routedRate": 0.1667,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 16,
+   "attrW12": 15,
+   "attrByVia": {
+    "player": 14,
+    "wild": 1,
+    "contest": 1
+   },
+   "attrByWave": {
+    "w1": 12,
+    "w2": 3,
+    "w3": 1
+   },
+   "scholarDeaths": 12,
+   "scholarCombatDeaths": 11,
+   "scholarDeathCauses": {
+    "combat": 11,
+    "dehydration": 1
+   },
+   "villagerDeaths": 15,
+   "villagerCombatDeaths": 11
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9945,
+   "days": 109,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 13,
+   "perfDeaths": 2,
+   "perfSurvived": 11,
+   "perfSurvivalRate": 0.8462,
+   "routedViaTrick": 1,
+   "routedRate": 0.0769,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 11,
+   "attrW12": 11,
+   "attrByVia": {
+    "player": 11
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 8
+   },
+   "scholarDeaths": 7,
+   "scholarCombatDeaths": 5,
+   "scholarDeathCauses": {
+    "combat": 5,
+    "contest": 2
+   },
+   "villagerDeaths": 10,
+   "villagerCombatDeaths": 5
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9946,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 15,
+   "perfDeaths": 1,
+   "perfSurvived": 14,
+   "perfSurvivalRate": 0.9333,
+   "routedViaTrick": 6,
+   "routedRate": 0.4,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 15,
+   "attrW12": 15,
+   "attrByVia": {
+    "player": 15
+   },
+   "attrByWave": {
+    "w1": 13,
+    "w2": 2
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7,
+    "the night": 1
+   },
+   "villagerDeaths": 11,
+   "villagerCombatDeaths": 7
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9947,
+   "days": 116,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 4,
+   "perfDeaths": 1,
+   "perfSurvived": 3,
+   "perfSurvivalRate": 0.75,
+   "routedViaTrick": 0,
+   "routedRate": 0,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 6,
+   "attrW12": 6,
+   "attrByVia": {
+    "player": 4,
+    "contest": 2
+   },
+   "attrByWave": {
+    "w2": 3,
+    "w1": 3
+   },
+   "scholarDeaths": 11,
+   "scholarCombatDeaths": 9,
+   "scholarDeathCauses": {
+    "combat": 9,
+    "lockjaw": 1,
+    "contest": 1
+   },
+   "villagerDeaths": 16,
+   "villagerCombatDeaths": 9
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 9948,
+   "days": 180,
+   "endReason": "survived",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 4,
+   "perfFights": 10,
+   "perfDeaths": 1,
+   "perfSurvived": 9,
+   "perfSurvivalRate": 0.9,
+   "routedViaTrick": 1,
+   "routedRate": 0.1,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 0,
+   "attr": 11,
+   "attrW12": 11,
+   "attrByVia": {
+    "player": 9,
+    "companion": 1,
+    "contest": 1
+   },
+   "attrByWave": {
+    "w1": 6,
+    "w2": 5
+   },
+   "scholarDeaths": 12,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "starvation": 1,
+    "contest": 3,
+    "combat": 8
+   },
+   "villagerDeaths": 17,
+   "villagerCombatDeaths": 8
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9941,
+   "days": 30,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 2,
+   "perfFights": 0,
+   "perfDeaths": 0,
+   "perfSurvived": 0,
+   "perfSurvivalRate": null,
+   "routedViaTrick": 0,
+   "routedRate": null,
+   "fledViaTrick": 0,
+   "fledRate": null,
+   "retires": 0,
+   "attr": 0,
+   "attrW12": 0,
+   "attrByVia": {},
+   "attrByWave": {},
+   "scholarDeaths": 1,
+   "scholarCombatDeaths": 1,
+   "scholarDeathCauses": {
+    "combat": 1
+   },
+   "villagerDeaths": 2,
+   "villagerCombatDeaths": 1
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9942,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 9,
+   "perfDeaths": 4,
+   "perfSurvived": 5,
+   "perfSurvivalRate": 0.5556,
+   "routedViaTrick": 1,
+   "routedRate": 0.1111,
+   "fledViaTrick": 1,
+   "fledRate": 0.1111,
+   "retires": 8,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 3,
+    "wild": 1
+   },
+   "attrByWave": {
+    "w2": 1,
+    "w1": 3
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7,
+    "dehydration": 1,
+    "contest": 1
+   },
+   "villagerDeaths": 9,
+   "villagerCombatDeaths": 7
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9943,
+   "days": 179,
+   "endReason": "village-lost",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 8,
+   "perfDeaths": 0,
+   "perfSurvived": 8,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 3,
+   "routedRate": 0.375,
+   "fledViaTrick": 1,
+   "fledRate": 0.125,
+   "retires": 2,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 1
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "combat": 8
+   },
+   "villagerDeaths": 13,
+   "villagerCombatDeaths": 8
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9944,
+   "days": 113,
+   "endReason": "village-lost",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 8,
+   "perfDeaths": 1,
+   "perfSurvived": 7,
+   "perfSurvivalRate": 0.875,
+   "routedViaTrick": 2,
+   "routedRate": 0.25,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 5,
+   "attr": 8,
+   "attrW12": 8,
+   "attrByVia": {
+    "player": 6,
+    "wild": 1,
+    "agency": 1
+   },
+   "attrByWave": {
+    "w1": 5,
+    "w2": 3
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "combat": 8,
+    "contest": 1
+   },
+   "villagerDeaths": 14,
+   "villagerCombatDeaths": 8
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9945,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 14,
+   "perfDeaths": 3,
+   "perfSurvived": 11,
+   "perfSurvivalRate": 0.7857,
+   "routedViaTrick": 4,
+   "routedRate": 0.2857,
+   "fledViaTrick": 2,
+   "fledRate": 0.1429,
+   "retires": 10,
+   "attr": 7,
+   "attrW12": 7,
+   "attrByVia": {
+    "player": 6,
+    "agency": 1
+   },
+   "attrByWave": {
+    "w2": 3,
+    "w1": 4
+   },
+   "scholarDeaths": 12,
+   "scholarCombatDeaths": 12,
+   "scholarDeathCauses": {
+    "combat": 12
+   },
+   "villagerDeaths": 14,
+   "villagerCombatDeaths": 12
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9946,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 12,
+   "perfDeaths": 1,
+   "perfSurvived": 11,
+   "perfSurvivalRate": 0.9167,
+   "routedViaTrick": 5,
+   "routedRate": 0.4167,
+   "fledViaTrick": 2,
+   "fledRate": 0.1667,
+   "retires": 9,
+   "attr": 5,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 5
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 2
+   },
+   "scholarDeaths": 14,
+   "scholarCombatDeaths": 12,
+   "scholarDeathCauses": {
+    "starvation": 1,
+    "combat": 12,
+    "contest": 1
+   },
+   "villagerDeaths": 17,
+   "villagerCombatDeaths": 12
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9947,
+   "days": 137,
+   "endReason": "village-lost",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 7,
+   "perfDeaths": 0,
+   "perfSurvived": 7,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.1429,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 3,
+   "attr": 6,
+   "attrW12": 6,
+   "attrByVia": {
+    "player": 6
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 3
+   },
+   "scholarDeaths": 2,
+   "scholarCombatDeaths": 2,
+   "scholarDeathCauses": {
+    "combat": 2
+   },
+   "villagerDeaths": 11,
+   "villagerCombatDeaths": 2
+  },
+  {
+   "policy": "performretire-lead",
+   "gate": "1",
+   "seed": 9948,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 6,
+   "perfDeaths": 0,
+   "perfSurvived": 6,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.1667,
+   "fledViaTrick": 1,
+   "fledRate": 0.1667,
+   "retires": 3,
+   "attr": 5,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 5
+   },
+   "attrByWave": {
+    "w1": 5
+   },
+   "scholarDeaths": 5,
+   "scholarCombatDeaths": 4,
+   "scholarDeathCauses": {
+    "combat": 4,
+    "contest": 1
+   },
+   "villagerDeaths": 15,
+   "villagerCombatDeaths": 4
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9941,
+   "days": 30,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 0,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 2,
+   "perfFights": 0,
+   "perfDeaths": 0,
+   "perfSurvived": 0,
+   "perfSurvivalRate": null,
+   "routedViaTrick": 0,
+   "routedRate": null,
+   "fledViaTrick": 0,
+   "fledRate": null,
+   "retires": 0,
+   "attr": 0,
+   "attrW12": 0,
+   "attrByVia": {},
+   "attrByWave": {},
+   "scholarDeaths": 1,
+   "scholarCombatDeaths": 1,
+   "scholarDeathCauses": {
+    "combat": 1
+   },
+   "villagerDeaths": 2,
+   "villagerCombatDeaths": 1
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9942,
+   "days": 180,
+   "endReason": "survived",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 11,
+   "perfDeaths": 5,
+   "perfSurvived": 6,
+   "perfSurvivalRate": 0.5455,
+   "routedViaTrick": 0,
+   "routedRate": 0,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 10,
+   "attr": 11,
+   "attrW12": 11,
+   "attrByVia": {
+    "player": 9,
+    "wild": 1,
+    "contest": 1
+   },
+   "attrByWave": {
+    "w1": 9,
+    "w2": 2
+   },
+   "scholarDeaths": 12,
+   "scholarCombatDeaths": 11,
+   "scholarDeathCauses": {
+    "combat": 11,
+    "contest": 1
+   },
+   "villagerDeaths": 14,
+   "villagerCombatDeaths": 11
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9943,
+   "days": 118,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 5,
+   "perfDeaths": 0,
+   "perfSurvived": 5,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.2,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 1,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 2,
+    "w2": 2
+   },
+   "scholarDeaths": 6,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6
+   },
+   "villagerDeaths": 9,
+   "villagerCombatDeaths": 6
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9944,
+   "days": 91,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 10,
+   "perfDeaths": 0,
+   "perfSurvived": 10,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 2,
+   "routedRate": 0.2,
+   "fledViaTrick": 3,
+   "fledRate": 0.3,
+   "retires": 7,
+   "attr": 5,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 5
+   },
+   "attrByWave": {
+    "w1": 5
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "dehydration": 1,
+    "combat": 6,
+    "contest": 1
+   },
+   "villagerDeaths": 10,
+   "villagerCombatDeaths": 6
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9945,
+   "days": 98,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 9,
+   "perfDeaths": 0,
+   "perfSurvived": 9,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.1111,
+   "fledViaTrick": 1,
+   "fledRate": 0.1111,
+   "retires": 6,
+   "attr": 7,
+   "attrW12": 7,
+   "attrByVia": {
+    "player": 7
+   },
+   "attrByWave": {
+    "w2": 7
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "combat": 8,
+    "the night": 1
+   },
+   "villagerDeaths": 14,
+   "villagerCombatDeaths": 8
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9946,
+   "days": 82,
+   "endReason": "village-lost",
+   "national": 0,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 10,
+   "perfDeaths": 3,
+   "perfSurvived": 7,
+   "perfSurvivalRate": 0.7,
+   "routedViaTrick": 3,
+   "routedRate": 0.3,
+   "fledViaTrick": 0,
+   "fledRate": 0,
+   "retires": 7,
+   "attr": 5,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 5
+   },
+   "attrByWave": {
+    "w1": 4,
+    "w2": 1
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "starvation": 1,
+    "combat": 7,
+    "the night": 1
+   },
+   "villagerDeaths": 11,
+   "villagerCombatDeaths": 7
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9947,
+   "days": 168,
+   "endReason": "village-lost",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 10,
+   "perfDeaths": 0,
+   "perfSurvived": 10,
+   "perfSurvivalRate": 1,
+   "routedViaTrick": 1,
+   "routedRate": 0.1,
+   "fledViaTrick": 1,
+   "fledRate": 0.1,
+   "retires": 8,
+   "attr": 8,
+   "attrW12": 8,
+   "attrByVia": {
+    "player": 8
+   },
+   "attrByWave": {
+    "w2": 3,
+    "w1": 5
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "combat": 8,
+    "contest": 1
+   },
+   "villagerDeaths": 13,
+   "villagerCombatDeaths": 8
+  },
+  {
+   "policy": "performretire-belong",
+   "gate": "1",
+   "seed": 9948,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "table": 1,
+   "wins": 0,
+   "exiled": 0,
+   "maxWave": 3,
+   "perfFights": 8,
+   "perfDeaths": 1,
+   "perfSurvived": 7,
+   "perfSurvivalRate": 0.875,
+   "routedViaTrick": 1,
+   "routedRate": 0.125,
+   "fledViaTrick": 1,
+   "fledRate": 0.125,
+   "retires": 4,
+   "attr": 7,
+   "attrW12": 7,
+   "attrByVia": {
+    "player": 6,
+    "wild": 1
+   },
+   "attrByWave": {
+    "w1": 4,
+    "w2": 3
+   },
+   "scholarDeaths": 7,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7
+   },
+   "villagerDeaths": 11,
+   "villagerCombatDeaths": 7
+  }
+ ]
+}
