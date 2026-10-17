@@ -33,6 +33,12 @@ const { execSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const HARNESS = path.join(ROOT, 'scripts', 'sim-harness.js');
 const LAYER = path.join(ROOT, 'scripts', 'policies', 'understudy.js');
+// Post-kill: the layer was deleted zero-trace per the kill protocol.
+// The proof INFO-SKIPs on the absent layer (established pattern).
+if (!fs.existsSync(LAYER)) {
+  console.log('INFO-SKIP: understudy.js layer absent (killed at pilot) — proof not applicable');
+  process.exit(0);
+}
 const REPO = require(LAYER);
 
 let pass = 0, fail = 0;
