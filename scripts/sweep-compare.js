@@ -49,6 +49,16 @@ try { POLICY_REGISTRY['oraclev2'] = require('./policies/oracleV2').oraclev2 || r
 // real flee, combat abilities, scored choices, held talks, the Table.
 try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catch (e) { console.warn('capable policy failed to load: ' + e.message); }
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
+// grieftrib (sim-grieftrib 2026-10-17): the grief-tribute negotiation layer
+// (scripts/policies/grieftrib.js, GRIEFTRIB=1 env-gated, default OFF).
+// Registered under its own ids so the balanced panel can run the
+// courtship-road before/after pair.
+try {
+  const GT = require('./policies/grieftrib');
+  POLICY_REGISTRY['grieftrib-lead'] = GT.leadfeast;
+  POLICY_REGISTRY['grieftrib-belo'] = GT.belongfeast;
+} catch (e) { console.warn('grieftrib policies failed to load: ' + e.message); }
+
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
