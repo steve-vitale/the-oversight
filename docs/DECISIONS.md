@@ -972,3 +972,15 @@ Reverses "conversation is the one acceptable full-screen interruption." Talking 
 
 ## 2026-10-05 — Unbreakable structures (Steve)
 Havens are the ONLY unbreakable structures. (Plus alien structures, when they exist.) Everything else — trees, walls, rocks, bushes — can be destroyed by monsters. The Bulldozer smashes through; the world remembers.
+
+## 2026-10-17 — Shared measurement + drift cap (Steve)
+Steve: "we can't keep doing such uncoordinated work" — Codex's branch had
+drifted ~3,470 commits ahead of master. Two rulings: (1) both agents adopt
+the balanced-measurement package (`scripts/balance-panel.js`,
+`scripts/gear-usage-audit.js`, `scripts/lib/balance-scorecard.js`,
+`scripts/balance-metrics.json`) as the shared before/after instrument —
+`docs/MEASUREMENT.md` §15; the panel is the instrument, §14 (pre-registered
+metrics bind) remains the judge; contract changes are a Steve-call.
+(2) Drift cap: no agent branch goes ~200 commits / 7 days past master
+without a reconcile (rebase + land in reviewable pieces); panel case caches
+never commit. Recorded in `docs/AGENT-LANES.md`.

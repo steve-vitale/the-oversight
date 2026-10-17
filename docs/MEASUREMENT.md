@@ -251,3 +251,42 @@ deaths as a co-primary alongside any scholar metric. The scale wall lives
 in the roster, not the scholar: siegedef2r protected the scholar (2 vs 5
 deaths) while the village died around them (d120, d97 village-dead) — a
 scholar-only metric cannot see the wall it claims to measure.
+
+## 15. Balanced comparison panels — the shared instrument (Steve 2026-10-17)
+
+The before/after comparison now runs through one shared instrument instead
+of each loop's ad-hoc sweep output: `scripts/balance-panel.js` builds paired
+panels (identical seeds, matched options, observation-neutrality proofs) and
+`scripts/lib/balance-scorecard.js` compares two panels against the 23-metric
+contract in `scripts/balance-metrics.json` (digest-pinned: panels built under
+different contract digests are mechanically rejected as incomparable).
+
+The panel is the INSTRUMENT, not the judge. §14 still binds: the run's
+pre-registered primary metric and GO threshold decide GO/NO-GO. A panel
+status (`no_material_signal`, `review_required`, `regression_signal`) is
+evidence — it never overrides the pre-registered verdict, and a
+`review_required` on a secondary metric is an investigation note for the
+evidence file, not a license to re-score the run.
+
+- Build: `node scripts/balance-panel.js --out <panel-dir> --seeds <csv>
+  --policies <csv> --days <horizon>` on the base commit, then again with the
+  lever applied. Compare: `node scripts/balance-panel.js compare --before
+  <base-panel.json.gz> --after <lever-panel.json.gz> --out <prefix>`;
+  attach the resulting `.md` to the evidence file.
+- Pass `--policies` explicitly: the panel's default policy names do not exist
+  on master (use the loop's own policies, e.g. `competent,winseek`).
+- Validity: a panel with validity errors is not evidence — repair and rerun.
+  The ONE waivable error is `Policy/harness changed` when the lever itself
+  is a policy-side change: waive it only when the changed file is exactly
+  the lever's file, and record the waiver in the evidence file.
+- Commit the panel summary only: `panel.json.gz` + the compare `.md`/`.json`.
+  NEVER commit the `cases/` cache (thousands of per-case archives) — it is
+  reproducible from seeds + digests. Cache bloat is what turned one agent's
+  branch into 18k committed files.
+- Confirmation sizing: the contract calls 64 seeds confirmation-sized; loop
+  pilots (8) and confirms (12–16) report "screen only" under the panel and
+  remain the loop standard. Do not burn 64-seed confirms by default.
+- The contract is versioned (`schemaVersion` + digest). Changing a metric,
+  tolerance, or direction is a Steve-call; both agents adopt the same digest
+  or their panels cannot be compared. The scorecard enforces this — it is
+  the mechanical end of the coordination rule in docs/AGENT-LANES.md.
