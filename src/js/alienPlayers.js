@@ -1881,7 +1881,13 @@
         if (per.disposition === 'sadistic') {
           lines.push(vname + ' says: "That ' + per.name + '... I don\'t like the way it looks at you. Be careful."');
         } else if (per.disposition === 'benevolent') {
-          lines.push(vname + ' says: "Someone\'s been leaving food out. Good food. Don\'t ask me how I know it wasn\'t one of us."');
+          // BENEVOLENT-VOICE (sim-findings #440, loop B sim-ambientfix-b
+          // 2026-10-17): the benevolent-pilot line was one verbatim
+          // template across all speakers and both pilots — one voice
+          // wearing eight faces. Now the line varies per pilot persona
+          // (name + drop spot + 4-voice pool); see apPilotFoodLine.
+          // VOICE ONLY: no gates, no rates, no RNG draws change.
+          lines.push(this.apPilotFoodLine(vid, pid, per, apSeen));
         }
       }
 
@@ -1890,6 +1896,55 @@
         return true;
       }
       return false;
+    },
+
+    // ---------- benevolent-pilot food gossip (sim-findings #440) ----------
+    // #440 (loop B sim-trig6-b sense-read 2026-10-17): the benevolent-pilot
+    // line was one verbatim template across all speakers and both pilots —
+    // one voice wearing eight faces. Each KNOWN pilot now gets its own
+    // 4-variant pool (variant 0 = the original line verbatim). The pilot is
+    // NAMED — a known alien with a name deserves a name in the gossip — and
+    // each pilot's drop spot comes from their own canon (Wren's hollow
+    // caches, Old Tam's fire-pit jerky — src/data/alienPlayers.json
+    // helpLines/backstories). Meaning is preserved in every variant: food
+    // keeps showing up from outside, and the speaker knows it wasn't one of
+    // us. VOICE ONLY: selection is a pure function of (speaker vid, pilot
+    // id, day) via this._hashStr — never R()/Math.random() (findings
+    // #263/#264: any RNG draw-count change shifts downstream sims and fails
+    // the det-gate). Per-speaker dedup: a villager never repeats their own
+    // line about a pilot until all four are said (CONVERSATIONS.md: no
+    // repeats, ever — apSeen is keyed vname|pid|line so the general-pool
+    // reset is untouched).
+    apPilotFoodLine: function (vid, pid, per, apSeen) {
+      var vname = 'Someone';
+      try { vname = this.displayName(vid) || 'Someone'; } catch (e) {}
+      var pname = (per && per.name) || 'the watcher';
+      var spot = 'by the old path';
+      if (pid === 'wren') spot = 'by the hollow';
+      else if (pid === 'old_tam') spot = 'by the fire pit';
+      var pool = [
+        function () { return 'says: "Someone\'s been leaving food out. Good food. Don\'t ask me how I know it wasn\'t one of us."'; },
+        function () { return 'says: "' + pname + ' again. There was food ' + spot + ' this morning — good food. Don\'t ask me how I know it wasn\'t one of us."'; },
+        function () { return 'mutters: "Found a parcel ' + spot + '. Dried meat, clean water. That has ' + pname + ' written all over it."'; },
+        function () { return 'whispers: "Someone\'s been leaving food out, and ' + pname + ' won\'t admit a thing. Don\'t ask me how I know it wasn\'t one of us."'; },
+      ];
+      var n = pool.length, day = 0, i = 0;
+      try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+      try { i = this._hashStr(String(vid) + '|' + String(pid) + '|' + day) % n; } catch (e) {}
+      if (apSeen) {
+        var t;
+        for (t = 0; t < n; t++) {
+          var cand = pool[(i + t) % n]();
+          if (!apSeen[vname + '|' + String(pid) + '|' + cand]) { i = (i + t) % n; break; }
+        }
+        if (t >= n) {
+          // said them all — reset this villager's pilot pool, keep the pick
+          for (var k in apSeen) if (k.indexOf(vname + '|' + String(pid) + '|') === 0) delete apSeen[k];
+        }
+      }
+      var line = pool[i]();
+      if (apSeen) apSeen[vname + '|' + String(pid) + '|' + line] = 1;
+      return vname + ' ' + line;
     },
 
     // ---------- NPC connections ----------
