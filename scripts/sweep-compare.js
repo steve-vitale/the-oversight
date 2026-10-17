@@ -59,6 +59,17 @@ try {
   POLICY_REGISTRY['grieftrib-belo'] = GT.belongfeast;
 } catch (e) { console.warn('grieftrib policies failed to load: ' + e.message); }
 
+// treeline (sim-treeline, 2026-10-17, scale-onramp): the treeline-raid answer
+// layer over the seatdrive courtship stack. Control ids are the bare stack
+// (TREELINE unset → pure delegation); armed ids are the wrapped stack
+// (TREELINE=1). For the §15 balance panel before/after comparison.
+try {
+  const _sd = require('./policies/seatdrive'), _tl = require('./policies/treeline');
+  POLICY_REGISTRY['treeline-control-lead'] = _sd.leadseat;
+  POLICY_REGISTRY['treeline-control-belong'] = _sd.belongseat;
+  POLICY_REGISTRY['treeline-armed-lead'] = _tl.leadfeastTreeline;
+  POLICY_REGISTRY['treeline-armed-belong'] = _tl.belongfeastTreeline;
+} catch (e) {}
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
