@@ -1228,6 +1228,21 @@
     Game.cellInteract(cx, cy);
   }
 
+  // GARDEN TAP (2026-10-17): haven-panel garden buttons. The gate is
+  // re-checked at tap time (Game.gardenGate); a gated tap says WHY aloud —
+  // no silent dead-ends. Enabled taps run the real action, same as the
+  // cell-action buttons.
+  function gardenTap(action) {
+    let gate = { ok: true };
+    try { gate = Game.gardenGate(action) || gate; } catch (e) {}
+    if (!gate.ok) { Game.say(gate.reason || 'Not now.'); refresh(); return; }
+    if (action === 'sow') { openSowSheet(); return; }
+    if (action === 'tend') { Game.tendGarden(); refresh(); return; }
+    if (action === 'harvest') { Game.harvestGarden(); refresh(); return; }
+    if (action === 'make') { Game.makePlot(); refresh(); return; }
+    refresh();
+  }
+
   // SOW SHEET (depletion 2026-10-10): seed choice is knowledge — the player
   // picks which crop to sow, with honest growth times. Seed-eligible: L1+
   // gardenable plants with 2+ units, OR guided plants (a gardener on duty
@@ -16323,6 +16338,10 @@
     document.querySelectorAll('[data-stash-tool]').forEach(b => b.onclick = () => { Game.takeTool(b.dataset.stashTool); refresh(); });
     document.querySelectorAll('[data-stash-weapon]').forEach(b => b.onclick = () => { Game.takeWeapon(b.dataset.stashWeapon); refresh(); });
     document.querySelectorAll('[data-stash-med]').forEach(b => b.onclick = () => { Game.takeMedicine(b.dataset.stashMed); refresh(); });
+    // GARDEN (2026-10-17): the haven panel's garden strip. Gated actions name
+    // their gate aloud on tap — no silent dead-ends. (The strip label
+    // already names the gate; the tap speaks it.)
+    document.querySelectorAll('[data-garden]').forEach(b => b.onclick = () => gardenTap(b.dataset.garden));
     // Visitors (Haven panel). Trade opens the cart; ware buys are real exchanges.
     document.querySelectorAll('[data-visitor-act]').forEach(b => b.onclick = () => { Game.visitorInteract(b.dataset.visitorAct, b.dataset.how); refresh(); });
     // RIVER TRADER (parity 2026-10-10): the day-21 trader's feed/trade/snub
@@ -16894,6 +16913,13 @@
       <p class="small"><i>${v.atmos}</i></p>
       <p class="small">Pantry: ${Game.fmtKcal(st.pantryKcal)} (${st.pantryDays >= 999 ? 'holding steady — the village feeds itself' : `about ${Game.pluralize(st.pantryDays, 'day')} at this burn`})${st.hungryDays ? ' · ⚠ HUNGRY day ' + st.hungryDays : ''}</p>
       <p class="small">💧 Water: ${st.waterClean}L clean / ${st.waterDirty}L dirty</p>
+      ${(() => {
+        // GARDEN STRIP (2026-10-17): plots are tile annotations with no cell
+        // coords ("behind the hall") — they render here, in the haven panel,
+        // not on the grid. Game.gardenStripHtml owns the section; the
+        // buttons below are wired by data-garden. GUARDED: absent = nothing.
+        try { return Game.gardenStripHtml(); } catch (e) { return ''; }
+      })()}
       ${(() => {
         // STORES GATE (Steve 2026-10-04): the pantry and village stash are
         // physical — inside the hall, or via the System at Full Integration.
@@ -18057,6 +18083,11 @@
             }
           }
         }
+        // SET-TRAP MARKER (2026-10-17): your traps are physically there — a
+        // set trap marks its cell. Game.trapMarkerAt owns the HTML; the cell
+        // just hosts it. Corner badge, underfoot, never covers the entity.
+        // GUARDED: if absent, nothing renders.
+        try { g += Game.trapMarkerAt(cx, cy) || ''; } catch (e) {}
         const _lane = Game.tbBeamLaneCells ? Game.tbBeamLaneCells() : null;
         const _ghost = Game.tbBeamPrevLaneCells ? Game.tbBeamPrevLaneCells() : null;
         const _live = Game.tbBeamIsFiring ? Game.tbBeamIsFiring() : false;
@@ -18614,8 +18645,15 @@
             }
           } catch (e) {}
           const _svgValid = _svgOut && _svgOut.length > 100 && _svgOut.indexOf('#0d120d') === -1;
+          // BRIDGE BADGE (2026-10-17): your bridge is physically there —
+          // lashed logs over the gap. Game.bridgeBadgeHTML owns the badge;
+          // the tile just hosts it (position:relative anchors the corner).
+          // GUARDED: if absent, nothing renders.
+          let _bridgeBadge = '';
+          try { _bridgeBadge = Game.bridgeBadgeHTML(x, y) || ''; } catch (e) {}
+          const _tilePos = _bridgeBadge ? ' style="position:relative"' : '';
           if (_svgValid) {
-            html += `<div class="tile" data-x="${x}" data-y="${y}">${_svgOut}</div>`;
+            html += `<div class="tile" data-x="${x}" data-y="${y}"${_tilePos}>${_svgOut}${_bridgeBadge}</div>`;
           } else {
             // Fallback: bright biome DIV with emoji
             const _terrain = {
@@ -18629,7 +18667,7 @@
               ruin: ['#9a9a9a', '🏚️'],
             };
             const _t = _terrain[_ttype] || _terrain['meadow'];
-            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_pal(_ttype) || _t[0]};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">${_t[1]}</div></div>`;
+            html += `<div class="tile" data-x="${x}" data-y="${y}"${_tilePos}><div style="background:${_pal(_ttype) || _t[0]};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">${_t[1]}</div>${_bridgeBadge}</div>`;
           }
           continue;
         }

@@ -20212,8 +20212,147 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
     },
 
-    // gardenNudgeTick(): the village notices the land thinning before you do.
-    // When the near grounds go thin and there's little/no garden, a farmer
+    // gardenStatus(): pure data for the haven panel's garden strip. Plots
+    // have no cell coords ("behind the hall"), so they render in the panel,
+    // not on the grid. Names are knowledge-gated via plantCalledName —
+    // "if you don't know, it doesn't show."
+    gardenStatus() {
+      const plots = this.gardenPlots();
+      const day = (this.state.scholar || {}).day || 0;
+      const live = plots.filter(p => p.pid && !p.dead);
+      const empty = plots.filter(p => !p.pid && !p.dead);
+      const dead = plots.filter(p => p.dead);
+      const lines = live.map(p => {
+        const plant = (this.data.plants || []).find(x => x.id === p.pid) || {};
+        let name = plant.name || p.pid;
+        try { if (this.plantCalledName) name = this.plantCalledName(p.pid); } catch (e) {}
+        let state = 'growing';
+        try {
+          if (this.plotRipe(p, day)) state = 'ripe';
+          else {
+            const growth = this.gardenGrowthDays(plant.form);
+            const left = growth - (day - (p.plantedDay || 0));
+            state = left > 0 ? `ripe in ${left}d` : 'maturing';
+          }
+        } catch (e) {}
+        const thirsty = (day - (p.lastTend || 0) >= 1) ? ' · thirsty' : '';
+        return `${name} (${state}${thirsty})`;
+      });
+      let ripe = 0, needsTend = 0;
+      for (const p of live) {
+        try { if (this.plotRipe(p, day)) ripe++; } catch (e) {}
+        if (day - (p.lastTend || 0) >= 1) needsTend++;
+      }
+      return { count: plots.length, live: live.length, empty: empty.length,
+               dead: dead.length, ripe, needsTend, lines };
+    },
+
+    // gardenGate(action): honest gates for the haven panel's garden buttons.
+    // Returns {ok, reason, short} — no silent dead-ends; every gate names
+    // itself. The seed-stock gate stays (sowOptions), but says WHY.
+    gardenGate(action) {
+      const plots = this.gardenPlots();
+      const day = (this.state.scholar || {}).day || 0;
+      const live = plots.filter(p => p.pid && !p.dead);
+      const empty = plots.filter(p => !p.pid && !p.dead);
+      if (action === 'make') {
+        if (plots.length >= 6)
+          return { ok: false, short: '6 plots max',
+                   reason: 'Six plots is all the ground behind the hall can hold. Tend what you have.' };
+        return { ok: true };
+      }
+      if (action === 'sow') {
+        if (!empty.length)
+          return { ok: false, short: 'no empty plot',
+                   reason: 'No empty plot — make a new one first.' };
+        let opts = [];
+        try { opts = this.sowOptions() || []; } catch (e) {}
+        if (!opts.length)
+          return { ok: false, short: 'no seed stock',
+                   reason: 'No seed stock — forage 2+ units of a known gardenable plant (shoots, berries, roots).' };
+        return { ok: true };
+      }
+      if (action === 'tend') {
+        if (!live.length)
+          return { ok: false, short: 'nothing planted',
+                   reason: 'Nothing planted — sow first.' };
+        if (!live.some(p => day - (p.lastTend || 0) >= 1))
+          return { ok: false, short: 'tended today',
+                   reason: 'Tended today — the soil is still dark from this morning.' };
+        return { ok: true };
+      }
+      if (action === 'harvest') {
+        let ripe = false;
+        try { ripe = live.some(p => this.plotRipe(p, day)); } catch (e) {}
+        if (!ripe)
+          return { ok: false, short: 'nothing ripe',
+                   reason: 'Nothing ripe — the garden is growing, not giving. Check back.' };
+        return { ok: true };
+      }
+      return { ok: false, short: 'unknown', reason: 'Unknown garden action.' };
+    },
+
+    // gardenStripHtml(): the haven panel's garden section. Buttons carry
+    // data-garden attrs; app.js wires them. Gated buttons name their gate
+    // in the label (short) and aloud on tap (reason) — no silent dead-ends.
+    gardenStripHtml() {
+      const esc = s => String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      let gs;
+      try { gs = this.gardenStatus(); } catch (e) { return ''; }
+      const head = gs.count === 0
+        ? `<p class="small" style="margin-top:8px"><b>🌱 Garden:</b> no plots yet — break ground behind the hall.</p>`
+        : `<p class="small" style="margin-top:8px"><b>🌱 Garden:</b> ${gs.count} plot${gs.count > 1 ? 's' : ''}` +
+          (gs.lines.length ? ` · ${esc(gs.lines.join(' · '))}` : '') +
+          (gs.empty ? ` · ${gs.empty} empty` : '') +
+          (gs.dead ? ` · ${gs.dead} dead` : '') + `</p>`;
+      const btn = (action, label) => {
+        let gate = { ok: true };
+        try { gate = this.gardenGate(action) || gate; } catch (e) {}
+        if (gate.ok) return `<button class="btn sm" data-garden="${action}">${esc(label)}</button>`;
+        return `<button class="btn sm ghost" data-garden="${action}" title="${esc(gate.reason || '')}">${esc(label)} (${esc(gate.short || 'not now')})</button>`;
+      };
+      const btns = gs.count === 0
+        ? btn('make', 'Make a garden plot')
+        : btn('make', 'Make a garden plot') + ' ' +
+          btn('sow', 'Sow seeds') + ' ' +
+          btn('tend', 'Tend the garden') + ' ' +
+          btn('harvest', 'Harvest the garden');
+      return head + `<div class="btnrow" style="margin:4px 0">${btns}</div>`;
+    },
+
+    // trapMarkerAt(cx, cy): the grid renderer's trap badge. Your traps are
+    // physically there — a set trap marks its cell. Diegetic, ungated (you
+    // set it, you know it). Corner badge: underfoot, never covering the
+    // entity. Inline styles — no CSS touch (precedent: glasswing trap).
+    trapMarkerAt(cx, cy) {
+      let traps = [];
+      try {
+        const t = this.playerTile();
+        traps = (t && t.traps) || [];
+      } catch (e) { return ''; }
+      const trap = traps.find(tp => tp && tp.mx === cx && tp.my === cy);
+      if (!trap) return '';
+      let name = 'trap';
+      try {
+        const r = (this.data.recipes || []).find(x => x.id === trap.recipeId);
+        if (r && r.name) name = r.name;
+      } catch (e) {}
+      const esc = s => String(s == null ? '' : s).replace(/"/g, '&quot;');
+      return `<span style="position:absolute;right:1px;bottom:1px;font-size:13px;line-height:1;pointer-events:none" title="Your ${esc(name)} — set, waiting">🪤</span>`;
+    },
+
+    // bridgeBadgeHTML(x, y): the world-map bridge badge. Your bridge is
+    // physically there — lashed logs over the gap. '' when unbridged.
+    bridgeBadgeHTML(x, y) {
+      let t = null;
+      try { t = this.tileAt(x, y); } catch (e) { return ''; }
+      if (!t || !t.bridged) return '';
+      return `<span style="position:absolute;right:2px;bottom:2px;font-size:14px;line-height:1;pointer-events:none" title="Your bridge — lashed and holding">🌉</span>`;
+    },
+
+    // gardenNudgeTick(): the village notices the land thinning before you do.    // When the near grounds go thin and there's little/no garden, a farmer
     // or gardener says so OUT LOUD (throttled: once per 5 days) — the
     // counter-play is discoverable in-fiction, not just in the panel. They
     // don't break ground themselves (that's the leader's call); they ask.
