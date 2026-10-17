@@ -23,6 +23,15 @@
 // Usage: node scripts/test-harvstop-20261017.js            (RED then GREEN)
 //        SEED=4501 node scripts/test-harvstop-20261017.js   (seed shift)
 'use strict';
+// KILL-PROTOCOL INFO-SKIP (2026-10-17): the harvstop layer was deleted per
+// kill protocol (pilot NO-GO 0.799x vs 0.75x bar); the proof skips cleanly
+// when the layer is absent so the retained instrument stays runnable.
+try {
+  require('fs').accessSync(require('path').join(__dirname, 'policies', 'harvstop.js'));
+} catch (e) {
+  console.log('INFO-SKIP: harvstop layer absent (killed at pilot) — nothing to prove.');
+  process.exit(0);
+}
 process.env.LEANWINTER_LIB = '1';
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { leadfeast, belongfeast } = require('./policies/feastscale');
