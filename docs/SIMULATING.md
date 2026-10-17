@@ -858,3 +858,22 @@ by movement can be absent from that convenience count. Quartermaster10062
 records an18-ally Herald entry and round22 victory while that counter prints0.
 Do not classify it as no fight, NPC kill or fabricated settlement from the
 counter alone. Preserve the frozen collector identity when comparing evidence.
+## Explorer knowledge audit (2026-10-16)
+
+The reusable measurement contract remains all23 metrics per policy; win
+changes trigger investigation in either direction. The dated
+`evidence/2026-10-16/explorer-deed-audit.md` preserves five frozen arms,
+separate memory/deed effects, locked replay selection and unknown coverage.
+Run its `explorer-deed-verify.cjs` before reusing the retained results.
+Use `explorer-deed-final-summary.cjs --check` and
+`explorer-deed-analyze.cjs --check` for read-only recomputation. Later Game
+changes require a fresh named source bundle/panel; do not overwrite a frozen
+root or mix different policies/collectors as a Game-only comparison.
+
+`scripts/godpath/test-explorer-{deed,assignment,testing}.js` and
+`test-mantle-plant-knowledge.js` use the common harness and ordinary check.js
+discovery. Keep one harness per Node process. New firsthand identification
+or teaching callers must update the person-owned attribution and real-caller
+tests together. Raw store writes, gifts/books, inherited memory and partial
+unnamed knowledge cannot substitute. Prepared native gear/ascension is a
+route proof; measure natural opportunity and delivery/use separately.

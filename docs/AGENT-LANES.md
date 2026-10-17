@@ -1,5 +1,18 @@
 # Agent lanes (2026-10-15)
 
+Codex Explorer deed (2026-10-16, needs-eyes): personal firsthand plant
+discovery followed by a landed true lesson, plus the actual speaker argument
+and personal plant-memory transfer at the mantle.75 caller assertions and
+full976/quick204 pass. Five frozen arms retain both omitted-caller drafts,
+memory-only separation and the final cautious-test/NPC experiment correction.
+All23 metrics and mixed survival/class warnings remain; final standard
+All-Seeing access is zero/320, so natural playstyle viability stays open.
+Prepared final native test→teach→dawn→gift→erased-state/load passes with4/4
+slots. See ../evidence/2026-10-16/explorer-deed-audit.md and its sealed
+verification command. Eight authored deeds/two proxies now remain; Garden
+and reactor questions are unchanged. No price, XP, kit, policy, region or
+nomad change. Muse may use the published branch and common simulation hooks.
+
 Codex All-Seeing ambush prerequisite (2026-10-16): owns only godverbs.js's
 personal paid sight and existing springAmbush wrapper. Actual scheduled NPC
 deceptive invitations now use the holder's own food and faculty; ordinary

@@ -9,6 +9,19 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Explorer deed (2026-10-16, needs-eyes): personally discover a plant, then
+land its true identity with a distinct new learner. Real sorting, field
+examination, assigned forage and empirical tests count; inherited memory,
+books and false/partial/redundant teaching do not. Successor plant memory
+also now follows the actual person without free XP or a discovery receipt.
+Eight authored deeds/two proxies remain.75 caller checks, full976/quick204,
+five-arm all23-metric panels and prepared final native test/teach/dawn/gift/
+erased-state/load are documented in the dated explorer-deed-audit.md.
+Standard All-Seeing access is zero/320 and survival/class warnings remain;
+next audit a declared Explorer strategy and natural opportunities, without
+relaxing difficulty to restore wins. Garden/reactor human questions and the
+All-Seeing contest/army and NPC investigation work remain open.
+
 All-Seeing ambush prerequisite (2026-10-16): a real NPC-targeted plot used
 ordinary victim simulation even when its target held No Lies. The existing
 springAmbush caller now lets that known living person pay the unchanged

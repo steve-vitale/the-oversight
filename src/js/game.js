@@ -16057,7 +16057,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (!teachers.length) continue;
           const teacher = teachers[Math.floor(Math.random() * teachers.length)];
           const learner = learnersW[Math.floor(Math.random() * learnersW.length)];
-          if (this.villagerLearnsPlant(learner, pid, 'word of mouth')) {
+          if (this.villagerLearnsPlant(learner, pid, 'word of mouth', teacher)) {
             if (Math.random() < 0.3) {
               // BELIEVED NAME (break-it knowledge 2026-10-09 r2): the narrator
               // speaks to the player in the player's terms.

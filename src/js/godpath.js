@@ -156,6 +156,114 @@
     return (rec && !rec.lapsed) ? lineFor(rec) : null;
   }
 
+  // Fieldwork and a landed true lesson belong to people, not the office's
+  // Codex. These private frames follow actual callers without making an
+  // ordinary knowledge-store write into a discovery or a teaching event.
+  let knowledgeFrame = null;
+  function knowledgePerson(id) {
+    return !!(id && !Game.over && (Game.state.village.roster || []).includes(id) && careLiving(Game, id));
+  }
+  function noteFieldDiscovery(id, pid) {
+    const v = Game.state.village;
+    if (!knowledgePerson(id) || v.godpathDeeds?.[id]?.field_truth_shared) return;
+    const people = v.godpathFieldDiscoveries || (v.godpathFieldDiscoveries = {});
+    const own = people[id] || (people[id] = {});
+    if (!own[pid]) own[pid] = { day: Game.state.scholar.day, source: 'fieldwork' };
+  }
+  function noteFieldSharing(actor, recipient, pid, via) {
+    const v = Game.state.village, discovery = v.godpathFieldDiscoveries?.[actor]?.[pid];
+    if (!discovery || actor === recipient || !knowledgePerson(actor) || !knowledgePerson(recipient) ||
+        v.away?.[actor] || v.away?.[recipient] ||
+        (actor !== Game.villagerId && recipient !== Game.villagerId && v.wrongAbout?.[actor]?.[pid]) ||
+        (recipient !== Game.villagerId && v.wrongAbout?.[recipient]?.[pid]) ||
+        v.godpathDeeds?.[actor]?.field_truth_shared) return;
+    if (actor === Game.villagerId) {
+      const e = Game.state.codex.plants?.[pid];
+      if (!e || !(e.level >= 1) || e.wrongAs || e.wrongPid) return;
+    }
+    if (recipient === Game.villagerId) {
+      const e = Game.state.codex.plants?.[pid];
+      if (!e || !(e.level >= 1) || e.wrongAs || e.wrongPid) return;
+    }
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+    book.field_truth_shared = { day: Game.state.scholar.day, plant: pid, recipient, discoveredDay: discovery.day, discoverySource: discovery.source, via };
+    delete v.godpathFieldDiscoveries[actor];
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: actor, event: 'field_truth_shared', ...book.field_truth_shared }); }
+    catch (e) { warn('field knowledge deed', e); }
+  }
+  for (const name of ['sortBag', 'testCautiously', 'villagerExperimentBeat', 'villagerCuriousExamine', 'resolveOneAssignment', 'firesideTeaching', 'teachPlant', 'convoTurn', 'spreadPlantKnowledge']) {
+    const original = Game[name];
+    if (typeof original !== 'function') continue;
+    Game[name] = function (who, choice) {
+      if (name === 'convoTurn' && choice !== 'teach') return original.apply(this, arguments);
+      if (name === 'resolveOneAssignment' && choice?.task !== 'forage') return original.apply(this, arguments);
+      const previous = knowledgeFrame;
+      const kind = name === 'villagerExperimentBeat' ? 'experiment' : name === 'testCautiously' ? 'testing'
+        : name === 'spreadPlantKnowledge' ? 'word' : name === 'firesideTeaching' ? 'fireside' : name === 'convoTurn' ? 'conversation'
+        : name === 'villagerCuriousExamine' || name === 'resolveOneAssignment' || (name === 'sortBag' && who == null) ? 'fieldwork' : 'lesson';
+      knowledgeFrame = { kind, actor: ['fireside', 'word', 'experiment'].includes(kind) ? null : kind === 'testing' || kind === 'conversation' || (name === 'sortBag' && who == null) ? Game.villagerId : who };
+      if (name === 'resolveOneAssignment') {
+        knowledgeFrame.beforeShared = new Set(Object.keys(Game.state.village.sharedKnowledge || {}));
+        knowledgeFrame.beforeKnown = new Set(this.plantsKnownBy(who));
+      }
+      try { return original.apply(this, arguments); }
+      finally { knowledgeFrame = previous; }
+    };
+  }
+  // Assigned foragers publish their new field result before synchronising
+  // personal knowledge. The System feed can teach that person in between,
+  // making the later fieldwork write redundant. Attribute the actual new
+  // result before that feed; never reconstruct one from an old shared map.
+  const _fieldKnowledgeFlow = Game.flowVillageKnowledge;
+  if (typeof _fieldKnowledgeFlow === 'function') Game.flowVillageKnowledge = function () {
+    const frame = knowledgeFrame;
+    try {
+      if (frame?.beforeShared && frame.beforeKnown) {
+        for (const [pid, entry] of Object.entries(Game.state.village.sharedKnowledge || {})) {
+          if (!frame.beforeShared.has(pid) && !frame.beforeKnown.has(pid) && entry.discoveredBy === frame.actor)
+            noteFieldDiscovery(frame.actor, pid);
+        }
+      }
+    } catch (e) { warn('assigned field discovery', e); }
+    return _fieldKnowledgeFlow.apply(this, arguments);
+  };
+  const _knowledgeCredit = Game.creditDeed;
+  if (typeof _knowledgeCredit === 'function') Game.creditDeed = function (who, deed) {
+    if (knowledgeFrame?.kind === 'fireside' && deed === 'teaching') knowledgeFrame.actor = who;
+    if (knowledgeFrame?.kind === 'experiment' && deed === 'crafting') knowledgeFrame.actor = who;
+    return _knowledgeCredit.apply(this, arguments);
+  };
+  // The public experiment selects and credits its actual tester before
+  // naming the result for the watching player. Its later personal-store
+  // sync may be redundant if that tester was also the immediate witness.
+  const _experimentIdentify = Game.identifyPlant;
+  if (typeof _experimentIdentify === 'function') Game.identifyPlant = function (pid, source) {
+    const frame = knowledgeFrame, actor = frame?.kind === 'experiment' && frame.actor;
+    const newToTester = actor && source === 'tested' && !this.plantKnownBy(actor, pid);
+    const result = _experimentIdentify.apply(this, arguments);
+    if (result === true && newToTester) {
+      try { noteFieldDiscovery(actor, pid); noteFieldSharing(actor, Game.villagerId, pid, 'experiment'); }
+      catch (e) { warn('public experimental discovery', e); }
+    }
+    return result;
+  };
+  const _knowledgeLearn = Game.villagerLearnsPlant;
+  if (typeof _knowledgeLearn === 'function') Game.villagerLearnsPlant = function (who, pid, source, teacher) {
+    const frame = knowledgeFrame;
+    if (!frame) return _knowledgeLearn.apply(this, arguments);
+    const known = this.plantKnownBy(who, pid), result = _knowledgeLearn.apply(this, arguments);
+    if (result !== true || known || !knowledgePerson(who)) return result;
+    try {
+      if (frame.kind === 'fieldwork' && frame.actor === who && source === 'fieldwork') noteFieldDiscovery(who, pid);
+      if (frame.kind === 'testing' && frame.actor === who && ['fieldwork', 'tested'].includes(source)) noteFieldDiscovery(who, pid);
+      const channel = { fieldwork: 'observed', fireside: 'fireside', conversation: 'player-taught', lesson: 'taught', word: 'word of mouth' }[frame.kind];
+      const actor = frame.kind === 'word' ? teacher : frame.actor;
+      if (source === channel && actor && actor !== who) noteFieldSharing(actor, who, pid, source);
+    } catch (e) { warn('field knowledge outcome', e); }
+    return result;
+  };
+
   // A deed belongs to a person, not to the bearer office. Reading a missing
   // old-save ledger never creates one or invents accomplishments.
   function godpathDeedStatus(who, godId, day) {
@@ -176,7 +284,8 @@
       (isPlayer(who) ? s.health > 0 : ((v.health || {})[vid] == null || v.health[vid] > 0)));
     const now = day == null ? s.day || 0 : day;
     return { complete: !!(rec && living && (!deed.afterDawn || now > rec.day)),
-      observed: !!rec, pending: deed.event === 'care_survived' && !!(v.godpathCareWatch || {})[vid]?.length,
+      observed: !!rec, pending: deed.event === 'care_survived' ? !!(v.godpathCareWatch || {})[vid]?.length
+        : deed.event === 'field_truth_shared' && !!Object.keys(v.godpathFieldDiscoveries?.[vid] || {}).length,
       day: rec ? rec.day : null, hint: deed.hint };
   }
   function godpathDeedHint(who) {

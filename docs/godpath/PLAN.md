@@ -5,6 +5,21 @@ Read `docs/godpath/STEVE-ANSWERS.md` first (it outranks this file), then
 abilities transforming in the slot) was retired by the unified design below.
 Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
+## Explorer completion checkpoint (2026-10-16, needs-eyes)
+
+Explorer now uses personal firsthand plant discovery followed by a true
+identity lesson landed with a distinct new learner. Actual cautious tests,
+NPC public experiments and assigned forage are included with sorting and
+field study. Successor plant knowledge follows its actual person without
+minting discovery or XP. Eight authored deeds/two legacy proxies remain.
+Read ../../evidence/2026-10-16/explorer-deed-audit.md:75 caller assertions,
+full976/quick204, five frozen arms and all23 metrics retain mixed survival
+and class warnings. Standard All-Seeing access remains zero/320; prepared
+native noncombat test/teach/dawn/gift/load is not natural viability evidence.
+Next distinguish a deliberate Explorer strategy from generic policy usage.
+NPC investigation, contest/army promises, Garden diet and reactor-versus-
+food-use remain open. Earlier dated checkpoints below are historical.
+
 2026-10-16 All-Seeing prerequisite: actual NPC deceptive plots now respect
 the target's own paid No Lies, with personal daily ownership through the
 mantle.26 caller/load checks, native Wait/dawn/load proof and full972 pass;

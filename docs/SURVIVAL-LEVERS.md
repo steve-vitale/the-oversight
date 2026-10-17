@@ -4,6 +4,29 @@ Steve, 2026-10-15: "Winning shouldn’t be easy. A reduction in win rate is caus
 
 ## How to use this register
 
+Explorer and succession memory (2026-10-16, needs-eyes): All-Seeing now
+requires a personal firsthand plant discovery and a real true lesson to a
+distinct new learner. Sorting, field study, assigned forage and completed
+empirical testing count through their actual callers. Memories imported at
+the mantle are knowledge, not fieldwork; the successor keeps their own
+unfinished discovery but cannot borrow another person's. Imports mint no
+XP/integration/witness event and preserve honest mistakes/correct writing.
+This changes named food/preparation knowledge and downstream policy choices,
+so it is measured separately from the authored god gate. All class/payoff/
+four-magic/day80, food costs, slots, prices and Table difficulty remain.
+
+Holdout before→final wins44→49/21→22/25→25/33→32, deaths76→79/85→81/54→60/
+41→46 and community losses12→8/23→20/24→25/16→14. Maker class access47→44
+remains a warning. Capable screen instead wins16→14 while deaths23→27;
+seed1 wins in both but deaths1→5 after the memory repair, first importing
+Ethan Hunt's three personal plant names at the shared day43 succession.
+Investigate these forks; no compensating food, reward or god buff is justified
+by win direction alone. Standard final All-Seeing access zero/320 remains an
+access signal. Prepared noncombat native ascension/gift/load proves a route,
+not its natural frequency or reward adequacy. Read all23 metrics, conditional
+windows, exact selected cases and unclassified hashes in the dated
+explorer-deed-audit.md. Garden diet and reactor/food-use questions stay open.
+
 All-Seeing ambush parity (2026-10-16): the target of a real deceptive
 invitation may use their own No Lies before ordinary ambush simulation.
 NPC holders now get this existing player protection. Known living resident,
