@@ -1,0 +1,597 @@
+{
+ "label": "journey-endgame-r15",
+ "policy": "belongseat-tablefail",
+ "seed": 8916,
+ "cascade": false,
+ "days": 186,
+ "endReason": "over-other",
+ "seatBest": "none",
+ "bestRank": "national",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  187
+ ],
+ "waitingEver": true,
+ "waitingDay": 187,
+ "doneDay": null,
+ "downgradeDay": null,
+ "doors": [
+  {
+   "day": 187,
+   "door": "path:beloved",
+   "strength": 100,
+   "why": "Viewership 21, fan favor 93 — the galaxy's favorite, by the numbers.",
+   "offered": [
+    "path:feared",
+    "path:beloved",
+    "path:assimilated",
+    "path:defiant",
+    "path:relay"
+   ],
+   "seatAtPick": "lesser",
+   "weak": true,
+   "cascade": false
+  }
+ ],
+ "downgrades": [],
+ "failEvents": [],
+ "failSteer": [
+  {
+   "day": 187,
+   "kind": "door",
+   "from": "path:feared",
+   "to": "path:beloved"
+  },
+  {
+   "day": 187,
+   "kind": "beat",
+   "path": "beloved",
+   "beat": 0,
+   "from": "beat:hunter",
+   "to": "beat:funny"
+  },
+  {
+   "day": 187,
+   "kind": "beat",
+   "path": "beloved",
+   "beat": 1,
+   "from": "beat:song",
+   "to": "beat:build"
+  }
+ ],
+ "driverErr": null,
+ "seatDriveErr": null,
+ "won": 1,
+ "wonDetail": {
+  "track": "combat",
+  "godpath": null,
+  "subclass": null,
+  "god": null,
+  "moral": "dark",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "beloved",
+  "branch": "dark",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "track:combat",
+  "endingLevel": "track",
+  "endingKind": "coda",
+  "buildPlayed": "default"
+ },
+ "table": {
+  "phase": "done",
+  "path": "beloved",
+  "branch": "dark",
+  "doors": [],
+  "weakened": 0,
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 187,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "combat",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 187,
+   "ev": "table_path",
+   "data": {
+    "path": "beloved",
+    "branch": "dark"
+   }
+  },
+  {
+   "day": 187,
+   "ev": "table_won",
+   "data": {
+    "track": "combat",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": "dark",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "beloved",
+    "branch": "dark",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "track:combat",
+    "endingLevel": "track",
+    "endingKind": "coda",
+    "buildPlayed": "default"
+   }
+  }
+ ],
+ "rungHistory": [],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "contests": 0,
+   "crises": 0,
+   "rank": "village",
+   "stage": 1,
+   "foodDeeds": false
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 11,
+   "w2": 0,
+   "w3": 0,
+   "contests": 2,
+   "crises": 3,
+   "rank": "village",
+   "stage": 2,
+   "foodDeeds": true
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 13,
+   "w2": 3,
+   "w3": 0,
+   "contests": 6,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 70,
+   "seat": "none",
+   "w1": 14,
+   "w2": 6,
+   "w3": 0,
+   "contests": 10,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 85,
+   "seat": "none",
+   "w1": 14,
+   "w2": 8,
+   "w3": 0,
+   "contests": 11,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 95,
+   "seat": "none",
+   "w1": 14,
+   "w2": 8,
+   "w3": 0,
+   "contests": 13,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 105,
+   "seat": "none",
+   "w1": 15,
+   "w2": 8,
+   "w3": 0,
+   "contests": 14,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 115,
+   "seat": "none",
+   "w1": 15,
+   "w2": 9,
+   "w3": 0,
+   "contests": 16,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 125,
+   "seat": "none",
+   "w1": 15,
+   "w2": 9,
+   "w3": 1,
+   "contests": 18,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 135,
+   "seat": "none",
+   "w1": 15,
+   "w2": 9,
+   "w3": 2,
+   "contests": 19,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 145,
+   "seat": "none",
+   "w1": 15,
+   "w2": 9,
+   "w3": 2,
+   "contests": 20,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 155,
+   "seat": "none",
+   "w1": 15,
+   "w2": 9,
+   "w3": 2,
+   "contests": 21,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 165,
+   "seat": "none",
+   "w1": 16,
+   "w2": 9,
+   "w3": 2,
+   "contests": 23,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 175,
+   "seat": "none",
+   "w1": 16,
+   "w2": 9,
+   "w3": 2,
+   "contests": 26,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 185,
+   "seat": "none",
+   "w1": 16,
+   "w2": 9,
+   "w3": 2,
+   "contests": 27,
+   "crises": 4,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  }
+ ],
+ "census": [
+  {
+   "name": "Miguel",
+   "alive": true,
+   "occ": "dockworker"
+  },
+  {
+   "name": "Emma",
+   "alive": true,
+   "occ": "Veterinarian"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 10,
+   "kind": "villager",
+   "who": "catalina_reyes",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 36,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 37,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "kind": "monster",
+   "who": "glasswing",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 43,
+   "kind": "villager",
+   "who": "gen_lsd53bn",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "understudy",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 57,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 61,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 63,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 64,
+   "kind": "villager",
+   "who": "gen_voku63a",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 78,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 78,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 100,
+   "kind": "monster",
+   "who": "sunbasker",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 106,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 107,
+   "kind": "villager",
+   "who": "theo_lindqvist",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 113,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 119,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 120,
+   "kind": "monster",
+   "who": "chorus_line",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 122,
+   "kind": "monster",
+   "who": "gallowdeer",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 128,
+   "kind": "villager",
+   "who": "gen_agbnwz0",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 134,
+   "kind": "villager",
+   "who": "gen_b0r0h3f",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 138,
+   "kind": "villager",
+   "who": "gen_n0opezx",
+   "cause": "dehydration",
+   "player": true
+  },
+  {
+   "day": 140,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 151,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 158,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 160,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 166,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 170,
+   "kind": "villager",
+   "who": "mateo_alvarez",
+   "cause": "dehydration",
+   "player": true
+  },
+  {
+   "day": 173,
+   "kind": "monster",
+   "who": "redactor",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 174,
+   "kind": "villager",
+   "who": "giulia_bianchi",
+   "cause": "the night",
+   "player": true
+  },
+  {
+   "day": 180,
+   "kind": "villager",
+   "who": "visjoin_141",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 184,
+   "kind": "villager",
+   "who": "oliver_moore",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 185,
+   "kind": "villager",
+   "who": "visjoin_143",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 186,
+   "kind": "villager",
+   "who": "gen_tv41673",
+   "cause": "combat",
+   "player": true
+  }
+ ],
+ "ms": 2588
+}

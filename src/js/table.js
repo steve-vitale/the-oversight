@@ -434,6 +434,9 @@
       }
       pg.tableDone = true;
       T.seat = seat.seat; T.phase = 'paths'; T.path = null;
+      // A new sitting: no door has failed yet (the downgrade cycle-breaker
+      // in tableFail tracks per-sitting failures here).
+      T.failedDoors = [];
 
       // ENDINGS BY BUILD (Steve 2026-10-14): "The ending you can win is set
       // as you enter the table." The build half of the ending key locks
@@ -754,8 +757,16 @@
       const failDef = (def && def.failure) || {};
       T.phase = 'downgrade';
       T.weakened = (T.weakened | 0) + 1;
+      // DOWNGRADE CYCLE-BREAKER (journey-endgame r15 2026-10-17): a failed
+      // door is spent — the table never re-offers a door you already failed,
+      // so a run that fails every door resolves at rock-bottom instead of
+      // cycling the same doors forever. (TABLE.md law 4: failure RESOLVES
+      // the story, never deletes the run.) Failed doors reset per sitting
+      // (tableScene).
+      const failed = T.failedDoors || (T.failedDoors = []);
+      if (T.path && failed.indexOf(T.path) < 0) failed.push(T.path);
       this.say(`◈ THE TABLE FALTERS — ${reason}. ${(failDef.beat) || 'The ring dims. The faces confer. The offer changes.'}`);
-      const remaining = this.tableEarnedPaths().filter(p => p.earned && p.id !== T.path);
+      const remaining = this.tableEarnedPaths().filter(p => p.earned && failed.indexOf(p.id) < 0);
       if (!remaining.length) {
         // No path left: the honest rock-bottom — Assimilated on the
         // table's terms, or the walk with nothing. The story still ends.
@@ -766,7 +777,8 @@
         // A failed Assimilated walk is already the rock bottom (losable since
         // 2026-10-14, Steve: "they can't lose their scenario no matter what
         // path" was a defect): it ends plainly instead of looping back in.
-        const ad = T.path === 'assimilated' ? null : pathDef('assimilated');
+        // (Cycle-breaker: an already-failed Assimilated is not re-offered.)
+        const ad = (T.path === 'assimilated' || failed.indexOf('assimilated') >= 0) ? null : pathDef('assimilated');
         if (ad) {
           T.path = 'assimilated'; T.phase = 'challenge'; T.beat = 0; T.meters = {};
           try { if (this.endingKeyEnter) this.endingKeyEnter('assimilated', T.branch); } catch (e) { console.warn('table ending key rock-bottom', e); }

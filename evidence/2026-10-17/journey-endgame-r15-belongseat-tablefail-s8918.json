@@ -1,0 +1,461 @@
+{
+ "label": "journey-endgame-r15",
+ "policy": "belongseat-tablefail",
+ "seed": 8918,
+ "cascade": false,
+ "days": 89,
+ "endReason": "over-other",
+ "seatBest": "lesser",
+ "bestRank": "national",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  90
+ ],
+ "waitingEver": true,
+ "waitingDay": 78,
+ "doneDay": null,
+ "downgradeDay": null,
+ "doors": [
+  {
+   "day": 90,
+   "door": "path:assimilated",
+   "strength": 45,
+   "why": "Always open. The table takes anyone — that's what makes it a trap, and what makes it safe.",
+   "offered": [
+    "path:feared",
+    "path:beloved",
+    "path:assimilated",
+    "path:defiant",
+    "path:relay"
+   ],
+   "seatAtPick": "lesser",
+   "weak": true,
+   "cascade": false
+  }
+ ],
+ "downgrades": [
+  {
+   "day": 90,
+   "to": "downgrade:relay",
+   "weakened": 1
+  }
+ ],
+ "failEvents": [
+  {
+   "day": 90,
+   "path": "assimilated",
+   "reason": "the intake scan found what you were carrying before you'd decided what it was, and filed you under furniture"
+  }
+ ],
+ "failSteer": [
+  {
+   "day": 90,
+   "kind": "door",
+   "from": "path:feared",
+   "to": "path:assimilated"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "assimilated",
+   "beat": 1,
+   "from": "beat:citizen",
+   "to": "beat:build"
+  },
+  {
+   "day": 90,
+   "kind": "downgrade",
+   "from": "downgrade:feared",
+   "to": "downgrade:relay"
+  }
+ ],
+ "driverErr": null,
+ "seatDriveErr": null,
+ "won": 1,
+ "wonDetail": {
+  "track": "field",
+  "godpath": null,
+  "subclass": null,
+  "god": null,
+  "moral": "grey",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "relay",
+  "branch": "grey",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": "default"
+ },
+ "table": {
+  "phase": "done",
+  "path": "relay",
+  "branch": "grey",
+  "doors": [],
+  "weakened": 1,
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 90,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "assimilated",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_failed",
+   "data": {
+    "path": "assimilated",
+    "branch": "light",
+    "reason": "the intake scan found what you were carrying before you'd decided what it was, a"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "relay",
+    "branch": "grey"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_won",
+   "data": {
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": "grey",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "relay",
+    "branch": "grey",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": "default"
+   }
+  }
+ ],
+ "rungHistory": [
+  {
+   "day": 80,
+   "seat": "lesser",
+   "detail": "15/6/3w c8 cr3 national st3 fd1"
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "detail": "15/6/3w c9 cr3 national st3 fd1"
+  },
+  {
+   "day": 90,
+   "seat": "lesser",
+   "detail": "15/6/4w c9 cr3 national st3 fd1"
+  }
+ ],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "contests": 0,
+   "crises": 0,
+   "rank": "village",
+   "stage": 1,
+   "foodDeeds": false
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 11,
+   "w2": 2,
+   "w3": 0,
+   "contests": 2,
+   "crises": 3,
+   "rank": "village",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 15,
+   "w2": 5,
+   "w3": 0,
+   "contests": 3,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 70,
+   "seat": "none",
+   "w1": 15,
+   "w2": 6,
+   "w3": 2,
+   "contests": 7,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "w1": 15,
+   "w2": 6,
+   "w3": 3,
+   "contests": 9,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  }
+ ],
+ "census": [
+  {
+   "name": "Maureen",
+   "alive": true,
+   "occ": "Mortician"
+  },
+  {
+   "name": "Kelsey",
+   "alive": true,
+   "occ": "Baker"
+  },
+  {
+   "name": "Elijah",
+   "alive": true,
+   "occ": "Social worker"
+  },
+  {
+   "name": "Ethan",
+   "alive": true,
+   "occ": "trail crew lead"
+  },
+  {
+   "name": "Tom",
+   "alive": true,
+   "occ": "truck driver"
+  },
+  {
+   "name": "Nepia",
+   "alive": true,
+   "occ": "tailor"
+  },
+  {
+   "name": "Wilson",
+   "alive": true,
+   "occ": "Fisherman"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 5,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 10,
+   "kind": "villager",
+   "who": "gen_6jgtsaj",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 11,
+   "kind": "monster",
+   "who": "nightlight_catfish",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 28,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "mirror_stag",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 36,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 38,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 41,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 45,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 45,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 53,
+   "kind": "villager",
+   "who": "gen_2ksfmx4",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 57,
+   "kind": "villager",
+   "who": "amina_diallo",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 58,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 59,
+   "kind": "villager",
+   "who": "vasyl_shevchenko",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "villager",
+   "who": "nora_wilson",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 69,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "villager",
+   "who": "david_kim",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 80,
+   "kind": "villager",
+   "who": "gen_x8hjl90",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 83,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 89,
+   "kind": "villager",
+   "who": "gen_eo3apqc",
+   "cause": "monster",
+   "player": false
+  }
+ ],
+ "ms": 1670
+}

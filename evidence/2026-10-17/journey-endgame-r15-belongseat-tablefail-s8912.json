@@ -1,0 +1,453 @@
+{
+ "label": "journey-endgame-r15",
+ "policy": "belongseat-tablefail",
+ "seed": 8912,
+ "cascade": false,
+ "days": 89,
+ "endReason": "over-other",
+ "seatBest": "lesser",
+ "bestRank": "national",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  90
+ ],
+ "waitingEver": true,
+ "waitingDay": 86,
+ "doneDay": null,
+ "downgradeDay": null,
+ "doors": [
+  {
+   "day": 90,
+   "door": "path:feared",
+   "strength": 100,
+   "why": "27 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked.",
+   "offered": [
+    "path:feared",
+    "path:beloved",
+    "path:assimilated",
+    "path:defiant",
+    "path:relay"
+   ],
+   "seatAtPick": "lesser",
+   "weak": true,
+   "cascade": false
+  }
+ ],
+ "downgrades": [
+  {
+   "day": 90,
+   "to": "downgrade:relay",
+   "weakened": 1
+  }
+ ],
+ "failEvents": [
+  {
+   "day": 90,
+   "path": "feared",
+   "reason": "you played your hand before the fear was in the room, and the demonstration underwhelmed"
+  }
+ ],
+ "failSteer": [
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "feared",
+   "beat": 0,
+   "from": "beat:kill",
+   "to": "beat:fire"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "feared",
+   "beat": 1,
+   "from": "beat:lean",
+   "to": "beat:build"
+  },
+  {
+   "day": 90,
+   "kind": "downgrade",
+   "from": "downgrade:beloved",
+   "to": "downgrade:relay"
+  }
+ ],
+ "driverErr": null,
+ "seatDriveErr": null,
+ "won": 1,
+ "wonDetail": {
+  "track": "field",
+  "godpath": null,
+  "subclass": null,
+  "god": null,
+  "moral": "grey",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "relay",
+  "branch": "grey",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": "default"
+ },
+ "table": {
+  "phase": "done",
+  "path": "relay",
+  "branch": "grey",
+  "doors": [],
+  "weakened": 1,
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 90,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "feared",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_failed",
+   "data": {
+    "path": "feared",
+    "branch": "light",
+    "reason": "you played your hand before the fear was in the room, and the demonstration unde"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "relay",
+    "branch": "grey"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_won",
+   "data": {
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": "grey",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "relay",
+    "branch": "grey",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": "default"
+   }
+  }
+ ],
+ "rungHistory": [
+  {
+   "day": 85,
+   "seat": "lesser",
+   "detail": "15/9/3w c9 cr3 national st3 fd1"
+  },
+  {
+   "day": 90,
+   "seat": "lesser",
+   "detail": "15/9/3w c9 cr3 national st3 fd1"
+  }
+ ],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 3,
+   "w2": 0,
+   "w3": 0,
+   "contests": 0,
+   "crises": 0,
+   "rank": "village",
+   "stage": 1,
+   "foodDeeds": false
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 11,
+   "w2": 1,
+   "w3": 0,
+   "contests": 3,
+   "crises": 2,
+   "rank": "village",
+   "stage": 3,
+   "foodDeeds": false
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 13,
+   "w2": 3,
+   "w3": 0,
+   "contests": 5,
+   "crises": 2,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": false
+  },
+  {
+   "day": 70,
+   "seat": "none",
+   "w1": 13,
+   "w2": 6,
+   "w3": 1,
+   "contests": 7,
+   "crises": 2,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "w1": 15,
+   "w2": 9,
+   "w3": 3,
+   "contests": 9,
+   "crises": 3,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  }
+ ],
+ "census": [
+  {
+   "name": "Lene",
+   "alive": true,
+   "occ": "fishing guide"
+  },
+  {
+   "name": "Yuki",
+   "alive": true,
+   "occ": "librarian"
+  },
+  {
+   "name": "Ivy",
+   "alive": true,
+   "occ": "journalist"
+  },
+  {
+   "name": "Adaeze",
+   "alive": true,
+   "occ": "ESL teacher"
+  },
+  {
+   "name": "Nathan",
+   "alive": true,
+   "occ": "HVAC tech"
+  },
+  {
+   "name": "Ruth",
+   "alive": true,
+   "occ": "librarian"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 13,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 39,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 39,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "villager",
+   "who": "gen_6iegtv2",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 57,
+   "kind": "monster",
+   "who": "memory_projector",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 64,
+   "kind": "villager",
+   "who": "gen_cdjmvz8",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 71,
+   "kind": "villager",
+   "who": "gen_sng9zxp",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "nightlight_catfish",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 78,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 82,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 82,
+   "kind": "villager",
+   "who": "gen_s6spplq",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 85,
+   "kind": "person",
+   "who": "gen_1dn64b8",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 85,
+   "kind": "monster",
+   "who": "chorus_line",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 86,
+   "kind": "villager",
+   "who": "farid_ahmed",
+   "cause": "sickness",
+   "player": false
+  }
+ ],
+ "ms": 1743
+}

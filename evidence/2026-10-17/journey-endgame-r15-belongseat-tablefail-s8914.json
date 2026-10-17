@@ -1,0 +1,429 @@
+{
+ "label": "journey-endgame-r15",
+ "policy": "belongseat-tablefail",
+ "seed": 8914,
+ "cascade": false,
+ "days": 89,
+ "endReason": "over-other",
+ "seatBest": "lesser",
+ "bestRank": "national",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  90
+ ],
+ "waitingEver": true,
+ "waitingDay": 81,
+ "doneDay": null,
+ "downgradeDay": null,
+ "doors": [
+  {
+   "day": 90,
+   "door": "path:beloved",
+   "strength": 93,
+   "why": "Viewership 26, fan favor 42 — the galaxy's favorite, by the numbers.",
+   "offered": [
+    "path:feared",
+    "path:beloved",
+    "path:assimilated",
+    "path:defiant",
+    "path:relay"
+   ],
+   "seatAtPick": "lesser",
+   "weak": true,
+   "cascade": false
+  }
+ ],
+ "downgrades": [],
+ "failEvents": [],
+ "failSteer": [
+  {
+   "day": 90,
+   "kind": "door",
+   "from": "path:feared",
+   "to": "path:beloved"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "beloved",
+   "beat": 0,
+   "from": "beat:hunter",
+   "to": "beat:funny"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "beloved",
+   "beat": 1,
+   "from": "beat:song",
+   "to": "beat:build"
+  }
+ ],
+ "driverErr": null,
+ "seatDriveErr": null,
+ "won": 1,
+ "wonDetail": {
+  "track": "craft",
+  "godpath": "forager",
+  "subclass": "feaster",
+  "god": "living_garden",
+  "moral": "dark",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "beloved",
+  "branch": "dark",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": "god:living_garden"
+ },
+ "table": {
+  "phase": "done",
+  "path": "beloved",
+  "branch": "dark",
+  "doors": [],
+  "weakened": 0,
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 90,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "craft",
+    "godpath": "forager",
+    "subclass": "feaster",
+    "god": "living_garden",
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "beloved",
+    "branch": "dark"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_won",
+   "data": {
+    "track": "craft",
+    "godpath": "forager",
+    "subclass": "feaster",
+    "god": "living_garden",
+    "moral": "dark",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "beloved",
+    "branch": "dark",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": "god:living_garden"
+   }
+  }
+ ],
+ "rungHistory": [
+  {
+   "day": 85,
+   "seat": "lesser",
+   "detail": "17/9/5w c7 cr4 national st3 fd1"
+  },
+  {
+   "day": 90,
+   "seat": "lesser",
+   "detail": "17/9/5w c7 cr4 national st3 fd1"
+  }
+ ],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 6,
+   "w2": 0,
+   "w3": 0,
+   "contests": 0,
+   "crises": 0,
+   "rank": "village",
+   "stage": 2,
+   "foodDeeds": false
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 14,
+   "w2": 4,
+   "w3": 0,
+   "contests": 2,
+   "crises": 3,
+   "rank": "village",
+   "stage": 3,
+   "foodDeeds": false
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 17,
+   "w2": 7,
+   "w3": 0,
+   "contests": 4,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 70,
+   "seat": "none",
+   "w1": 17,
+   "w2": 7,
+   "w3": 1,
+   "contests": 6,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "w1": 17,
+   "w2": 9,
+   "w3": 5,
+   "contests": 7,
+   "crises": 4,
+   "rank": "national",
+   "stage": 3,
+   "foodDeeds": true
+  }
+ ],
+ "census": [
+  {
+   "name": "Odette",
+   "alive": true,
+   "occ": "Butcher"
+  },
+  {
+   "name": "Ivy",
+   "alive": true,
+   "occ": "journalist"
+  },
+  {
+   "name": "Zoe",
+   "alive": true,
+   "occ": "journalist"
+  },
+  {
+   "name": "Carlos",
+   "alive": true,
+   "occ": "Fisherman"
+  },
+  {
+   "name": "Saida",
+   "alive": true,
+   "occ": "cook"
+  },
+  {
+   "name": "Sonia",
+   "alive": true,
+   "occ": "Vintner"
+  },
+  {
+   "name": "Priya",
+   "alive": true,
+   "occ": "interpreter"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 3,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 4,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 9,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 10,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "monster",
+   "who": "bulldozer",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 16,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "villager",
+   "who": "gen_faect1t",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "union_rep",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "villager",
+   "who": "petra_novak",
+   "cause": "a wound that wouldn't close",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 43,
+   "kind": "monster",
+   "who": "landlord",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 45,
+   "kind": "villager",
+   "who": "vasyl_shevchenko",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "monster",
+   "who": "warranty_caller",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 62,
+   "kind": "villager",
+   "who": "gen_7mdk9fg",
+   "cause": "a wound that wouldn't close",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 67,
+   "kind": "villager",
+   "who": "marcus_webb",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 73,
+   "kind": "villager",
+   "who": "gen_2apizyq",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 78,
+   "kind": "villager",
+   "who": "gen_6e6g69b",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 80,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 81,
+   "kind": "villager",
+   "who": "gen_efznt9b",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 85,
+   "kind": "monster",
+   "who": "warranty_caller",
+   "cause": "combat",
+   "player": false
+  }
+ ],
+ "ms": 1712
+}

@@ -1,0 +1,559 @@
+{
+ "label": "journey-endgame-r15",
+ "policy": "belongseat-tablefail",
+ "seed": 8921,
+ "cascade": true,
+ "days": 89,
+ "endReason": "over-other",
+ "seatBest": "lesser",
+ "bestRank": "national",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  90
+ ],
+ "waitingEver": true,
+ "waitingDay": 78,
+ "doneDay": null,
+ "downgradeDay": null,
+ "doors": [
+  {
+   "day": 90,
+   "door": "path:feared",
+   "strength": 100,
+   "why": "28 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked.",
+   "offered": [
+    "path:feared",
+    "path:beloved",
+    "path:assimilated",
+    "path:defiant",
+    "path:relay"
+   ],
+   "seatAtPick": "lesser",
+   "weak": true,
+   "cascade": true
+  }
+ ],
+ "downgrades": [
+  {
+   "day": 90,
+   "to": "downgrade:defiant",
+   "weakened": 1
+  },
+  {
+   "day": 90,
+   "to": "downgrade:assimilated",
+   "weakened": 2
+  },
+  {
+   "day": 90,
+   "to": "downgrade:relay",
+   "weakened": 3
+  },
+  {
+   "day": 90,
+   "to": "downgrade:beloved",
+   "weakened": 4
+  }
+ ],
+ "failEvents": [
+  {
+   "day": 90,
+   "path": "feared",
+   "reason": "you played your hand before the fear was in the room, and the demonstration underwhelmed"
+  },
+  {
+   "day": 90,
+   "path": "defiant",
+   "reason": "you tried to pay the price your own way before the table believed you could, and the walk stalled at the door"
+  },
+  {
+   "day": 90,
+   "path": "assimilated",
+   "reason": "the intake scan found what you were carrying before you'd decided what it was, and filed you under furniture"
+  },
+  {
+   "day": 90,
+   "path": "relay",
+   "reason": "you pushed your own pattern into the wires before the console knew your hands, and the System quarantined it"
+  }
+ ],
+ "failSteer": [
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "feared",
+   "beat": 0,
+   "from": "beat:kill",
+   "to": "beat:fire"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "feared",
+   "beat": 1,
+   "from": "beat:lean",
+   "to": "beat:build"
+  },
+  {
+   "day": 90,
+   "kind": "downgrade",
+   "from": "downgrade:beloved",
+   "to": "downgrade:defiant"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "defiant",
+   "beat": 0,
+   "from": "beat:harvest",
+   "to": "beat:half"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "defiant",
+   "beat": 1,
+   "from": "beat:name",
+   "to": "beat:build"
+  },
+  {
+   "day": 90,
+   "kind": "downgrade",
+   "from": "downgrade:beloved",
+   "to": "downgrade:assimilated"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "assimilated",
+   "beat": 1,
+   "from": "beat:citizen",
+   "to": "beat:build"
+  },
+  {
+   "day": 90,
+   "kind": "downgrade",
+   "from": "downgrade:beloved",
+   "to": "downgrade:relay"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "relay",
+   "beat": 0,
+   "from": "beat:probe",
+   "to": "beat:commune"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "relay",
+   "beat": 1,
+   "from": "beat:probe",
+   "to": "beat:build"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "beloved",
+   "beat": 0,
+   "from": "beat:hunter",
+   "to": "beat:funny"
+  },
+  {
+   "day": 90,
+   "kind": "beat",
+   "path": "beloved",
+   "beat": 1,
+   "from": "beat:song",
+   "to": "beat:build"
+  }
+ ],
+ "driverErr": null,
+ "seatDriveErr": null,
+ "won": 1,
+ "wonDetail": {
+  "track": "field",
+  "godpath": null,
+  "subclass": null,
+  "god": null,
+  "moral": "dark",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "beloved",
+  "branch": "dark",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": "default"
+ },
+ "table": {
+  "phase": "done",
+  "path": "beloved",
+  "branch": "dark",
+  "doors": [],
+  "weakened": 4,
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 90,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "feared",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_failed",
+   "data": {
+    "path": "feared",
+    "branch": "light",
+    "reason": "you played your hand before the fear was in the room, and the demonstration unde"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "defiant",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_failed",
+   "data": {
+    "path": "defiant",
+    "branch": "light",
+    "reason": "you tried to pay the price your own way before the table believed you could, and"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "assimilated",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_failed",
+   "data": {
+    "path": "assimilated",
+    "branch": "light",
+    "reason": "the intake scan found what you were carrying before you'd decided what it was, a"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "relay",
+    "branch": "grey"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_failed",
+   "data": {
+    "path": "relay",
+    "branch": "grey",
+    "reason": "you pushed your own pattern into the wires before the console knew your hands, a"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "beloved",
+    "branch": "dark"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_won",
+   "data": {
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": "dark",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "beloved",
+    "branch": "dark",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": "default"
+   }
+  }
+ ],
+ "rungHistory": [
+  {
+   "day": 80,
+   "seat": "lesser",
+   "detail": "16/9/3w c7 cr3 regional st3 fd1"
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "detail": "16/9/3w c7 cr3 regional st3 fd1"
+  },
+  {
+   "day": 90,
+   "seat": "lesser",
+   "detail": "16/9/3w c7 cr3 national st3 fd1"
+  }
+ ],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 2,
+   "w2": 0,
+   "w3": 0,
+   "contests": 0,
+   "crises": 0,
+   "rank": "village",
+   "stage": 1,
+   "foodDeeds": false
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 9,
+   "w2": 3,
+   "w3": 0,
+   "contests": 2,
+   "crises": 3,
+   "rank": "village",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 12,
+   "w2": 6,
+   "w3": 0,
+   "contests": 4,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 70,
+   "seat": "none",
+   "w1": 15,
+   "w2": 9,
+   "w3": 1,
+   "contests": 6,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "w1": 16,
+   "w2": 9,
+   "w3": 3,
+   "contests": 7,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  }
+ ],
+ "census": [
+  {
+   "name": "Brayden",
+   "alive": true,
+   "occ": "mason"
+  },
+  {
+   "name": "Mateo",
+   "alive": true,
+   "occ": "ESL teacher"
+  },
+  {
+   "name": "Penelope",
+   "alive": true,
+   "occ": "Mortician"
+  },
+  {
+   "name": "Gopal",
+   "alive": true,
+   "occ": "Dentist"
+  },
+  {
+   "name": "Adaeze",
+   "alive": true,
+   "occ": "ESL teacher"
+  },
+  {
+   "name": "Ruth",
+   "alive": true,
+   "occ": "librarian"
+  },
+  {
+   "name": "Grace",
+   "alive": true,
+   "occ": "ESL teacher"
+  },
+  {
+   "name": "Jorge",
+   "alive": true,
+   "occ": "Rancher"
+  },
+  {
+   "name": "Jesse",
+   "alive": true,
+   "occ": "line cook"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 14,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 14,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "speedbump_turtle",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "villager",
+   "who": "gen_r5b9rmn",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "villager",
+   "who": "gen_shqbfht",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 19,
+   "kind": "monster",
+   "who": "bulldozer",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "landlord",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "monster",
+   "who": "warranty_caller",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 37,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 43,
+   "kind": "villager",
+   "who": "farid_ahmed",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 44,
+   "kind": "monster",
+   "who": "memory_projector",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 54,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 58,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 72,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "combat",
+   "player": false
+  }
+ ],
+ "ms": 1370
+}
