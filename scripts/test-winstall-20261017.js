@@ -84,31 +84,35 @@ async function t3_detgate() {
 
 async function t4_drainoff_marker() {
   // On this sweep's env (WINDEFER unset — asserted by the sweep), the modal
-  // drain never runs. Find a sitting run in the det-gate window: seat days
-  // on the seatblow substrate start at d48, so 100d catches several sits.
-  const probes = [
-    ['leadseat', 5201], ['leadseat', 5202], ['leadseat', 5205], ['leadseat', 5206], ['leadseat', 5208],
-    ['belongseat', 5201], ['belongseat', 5203], ['belongseat', 5205], ['belongseat', 5206],
-  ];
-  let checked = 0;
-  for (const [policyId, seed] of probes) {
-    const r = await runWinstall(seed, policyId, { days: 100, instrumented: true, writeJson: false });
-    assert.strictEqual(r.instrumentErrors, 0, `${policyId} s${seed}: instrument errors`);
+  // drain never runs. Pin the drain-off marker on the SWEEP'S OWN sitting
+  // runs (deterministic — reads the measured per-seed JSONs, no fresh probes).
+  // COORDINATOR REPAIR 2026-10-17: the original t4 re-probed fresh 100d runs
+  // expecting sits "from d48" — but measured sit days are 90–119, and
+  // cross-process trajectory divergence (sim-findings #104) meant fresh
+  // probes didn't reproduce sits in-window (0/9 sat in the coordinator's
+  // re-run). Re-probing timing is the wrong way to pin a marker the sweep
+  // already measured. The drain's own counter (ctx.tableAnswers) is only
+  // ever initialized inside winseek's tableRoad — null means tableRoad
+  // NEVER RAN on this run (0 would mean "ran, answered nothing").
+  // chooseCallsN==0 is the independent engine-side confirm.
+  const fs = require('fs');
+  const path = require('path');
+  const dir = path.join(__dirname, '..', 'evidence', '2026-10-17', 'perseed-winstall');
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.json') && !f.includes('probe'));
+  assert.ok(files.length >= 16, `expected >=16 per-seed JSONs, found ${files.length}`);
+  let sitting = 0;
+  for (const f of files.sort()) {
+    const r = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
     if (r.sitN > 0) {
-      // The drain's own counter (ctx.tableAnswers) is only ever initialized
-      // inside winseek's tableRoad — null means tableRoad NEVER RAN on this
-      // run, the strongest drain-off marker (0 would mean "ran, answered
-      // nothing"). chooseCallsN==0 is the independent engine-side confirm.
-      assert.strictEqual(r.tableAnswers, null, `${policyId} s${seed}: tableRoad ran (tableAnswers=${r.tableAnswers}) — WINDEFER should be off`);
-      assert.strictEqual(r.chooseCallsN, 0, `${policyId} s${seed}: chooseTableOption fired (${r.chooseCallsN}) — WINDEFER should be off`);
-      assert.strictEqual(r.stall, 'modal-unanswered', `${policyId} s${seed}: stall=${r.stall}`);
-      checked++;
-      console.log(`  t4 drain-off ${policyId}-s${seed}: sit@${r.sitDay} answers=0 choose=0 stall=modal-unanswered`);
-      if (checked >= 3) break;
+      sitting++;
+      assert.strictEqual(r.tableAnswers, null, `${f}: tableRoad ran (tableAnswers=${r.tableAnswers}) — WINDEFER should be off`);
+      assert.strictEqual(r.chooseCallsN, 0, `${f}: chooseTableOption fired (${r.chooseCallsN}) — WINDEFER should be off`);
+      assert.strictEqual(r.stall, 'modal-unanswered', `${f}: stall=${r.stall}`);
+      console.log(`  t4 drain-off ${f}: sit@${r.sitDay} answers=null choose=0 stall=modal-unanswered`);
     }
   }
-  assert.ok(checked >= 1, 'no sitting run found in the 100d probe window — cannot pin the drain-off marker');
-  console.log(`  t4 drain-off marker: green on ${checked} sitting run(s) (drain never answered)`);
+  assert.ok(sitting >= 1, 'no sitting run in the sweep per-seed data — cannot pin the drain-off marker');
+  console.log(`  t4 drain-off marker: green on ${sitting} sweep sitting run(s) (drain never answered)`);
 }
 
 async function t5_smoke() {
