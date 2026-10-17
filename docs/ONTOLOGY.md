@@ -402,7 +402,7 @@ Dialogue rethink Phase 2 (Steve 2026-10-08) — the Scene pipeline. One scene st
 ### convo-wants (`convo-wants.js`)
 Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 
-**Provides:** convoSelectWant(vid) -> want object, convoWantOpener(vid, want) -> {line, thread}, convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit'), convoWantMenu(vid) -> menu options for the live want, convoWantCloseLine(vid) -> goodbye beat for the resolution, convoFavorHash(vid, ctx) -> uint (per-instance variation key: stable person key + day + seq — never the ID string, which embeds Date.now()), convoResolveWant(vid, how) -> plants seeds for unfinished business, convoPlantSeed(vid, seed) / convoCheckSeeds(vid), convoQuestionTopic(qid) -> noun phrase for a bespoke question ("About <phrase> — <question>"), convoQuestionDef(qid) -> the bespoke question def by id (characterGen convo questions), convoWantNews(vid) / convoWantWarning(vid) -> real content beats
+**Provides:** convoSelectWant(vid) -> want object, convoWantOpener(vid, want) -> {line, thread}, convoWantStaleOpener(vid, want) -> reframe line when all fresh variants are ledger-blocked, convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit'), convoWantMenu(vid) -> menu options for the live want, convoWantCloseLine(vid) -> goodbye beat for the resolution, convoFavorHash(vid, ctx) -> uint (per-instance variation key: stable person key + day + seq — never the ID string, which embeds Date.now()), convoResolveWant(vid, how) -> plants seeds for unfinished business, convoPlantSeed(vid, seed) / convoCheckSeeds(vid), convoQuestionTopic(qid) -> noun phrase for a bespoke question ("About <phrase> — <question>"), convoQuestionDef(qid) -> the bespoke question def by id (characterGen convo questions), convoWantNews(vid) / convoWantWarning(vid) -> real content beats
 
 **Rules:**
 - want_driven: every conversation selects one NPC want at start; the want shapes the opening and provides beats (code: convoSelectWant, Steve 2026-10-06)
@@ -411,6 +411,7 @@ Want-driven conversation architecture. Every conversation selects one NPC want i
 - beat_acknowledgment: NPC beats must acknowledge the player's last utterance before delivering new content — no non-sequiturs (code: convoComposeBeat, Steve 2026-10-06)
 - seeds: unresolved wants plant seeds; next conversation opens with the seed (code: convoPlantSeed/convoCheckSeeds, Steve 2026-10-06)
 - arc: want stages 0 (selected) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoWantEngage/convoResolveWant, Steve 2026-10-06)
+- stale_opener: a long-lived want's opener variants all end up ledger-blocked eventually (convoPickCycle resets on exhaustion — never null). When they do, the want reframes via def.staleOpener(vid) (or the generic convoWantStaleOpener) instead of going mute — thread 'want'. Engagement stays thread-coherent: only the want's own thread ('want'/'small') engages it (code: convoOpening, convo-dialogue dlg:more/askwhy/comfort, gap-closure 2026-10-17)
 
 **Consumes:** village.villagers, state.convos, npcNeeds (hunger/fear/social/energy)
 
