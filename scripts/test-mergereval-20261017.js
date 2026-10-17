@@ -101,21 +101,30 @@ async function sectionFixed() {
     check('fixed own-shape: merges (1 stack, 5 units), delta==400', delta === 400 && r === 400 && stacks.length === 1 && stacks[0].units === 5, `delta=${delta} r=${r} stacks=${stacks.length} units=${stacks[0] && stacks[0].units}`);
   }
   // G4: conservation across many mixed deposits is exact (0.00%)
+  // NOTE (2026-10-17 coordinator repair): the landed phantomfood remainder-carry
+  // (v._surplusRemainder, Math.floor((rem+give)/200)) is active on this base, so the
+  // per-give expectation is the carry-aware deposit, not Math.round(g/200)*200.
+  // The remainder is preserved on the village, never lost — conservation holds
+  // across the whole sequence, and the final remainder (< 200) is asserted, not hidden.
   {
     const { Game, v } = await freshGame(9204);
-    let nominal = 0, delta = 0;
+    let expected = 0, delta = 0, rem = 0;
     const gives = [400, 200, 800, 610, 150, 200, 1000, 390];
     for (const g of gives) {
       // rotate resident piece sizes to force mixed merges
       v.pantry.push({ name: 'Foraged food', kcalEach: [300, 150, 500, 250][gives.indexOf(g) % 4], units: 1, spoilDay: v.day + 3, safe: true, kg: 0.05 });
+      const total = rem + g;
+      const dep = Math.floor(total / 200) * 200;
+      rem = total - dep;
       const before = Game.pantryKcal();
       const r = Game.stockSurplus(v, g);
       delta += Game.pantryKcal() - before;
-      nominal += Math.round(g / 200) * 200; // nominal unit-kcal the pantry should gain
-      if (r !== Math.round(g / 200) * 200) check(`fixed mixed: return matches unit-kcal for give ${g}`, false, `r=${r}`);
+      expected += dep;
+      if (r !== dep) check(`fixed mixed: return matches carry-aware deposit for give ${g}`, false, `r=${r} dep=${dep}`);
     }
-    const err = Math.abs(delta - nominal);
-    check('fixed mixed: conservation exact (0.00%)', err === 0, `delta=${delta} nominal=${nominal} err=${err}`);
+    const err = Math.abs(delta - expected);
+    check('fixed mixed: conservation exact (0.00%)', err === 0, `delta=${delta} expected=${expected} err=${err}`);
+    check('fixed mixed: remainder preserved, not lost', (Number(v._surplusRemainder) || 0) === rem, `rem=${v._surplusRemainder} expected=${rem}`);
   }
   // G5: the merge is unvoiced — stockSurplus never says anything
   {
