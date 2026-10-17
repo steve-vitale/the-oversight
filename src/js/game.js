@@ -26998,6 +26998,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return best;
     },
 
+    // _phantomFoodFixOff(): legacy-gate for the det-gate proof (node only).
+    // PHANTOMFOOD_FIX=0 -> stockSurplus takes the pristine Math.round path,
+    // byte-for-byte, so gate-off trajectories prove the fix is the only
+    // delta. Default ON everywhere (browser: no process -> fix on).
+    _phantomFoodFixOff() {
+      try { return typeof process !== 'undefined' && process.env && process.env.PHANTOMFOOD_FIX === '0'; }
+      catch (e) { return false; }
+    },
+
     // stockSurplus(v, give): a villager's shared surplus into the pantry as
     // real items. FRESH STACKS KEEP THEIR OWN CLOCK (BUG 2026-10-06): a haul
     // only merges into a stack whose spoilDay matches today's fresh clock;
@@ -27010,12 +27019,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (give <= 0) return 0;
       v.pantry = v.pantry || [];
       const freshDay = v.day + 3;
-      // ROUNDING HONESTY (break-it food r5 2026-10-11): Math.ceil minted up to
-      // +199 phantom kcal per surplus — a 1-kcal share deposited a whole
-      // 200-kcal unit, and the bias was always upward (measured ~+5000 over
-      // 50 small surpluses). Round to the nearest whole unit: symmetric error,
-      // no systematic inflation. A crumb that rounds to zero is eaten, not stored.
-      let newUnits = Math.round(give / 200); // ~200 kcal per unit
+      // REMAINDER-CARRY (phantomfood-b 2026-10-17, reconciled onto the
+      // capdoor-landed master in the sim-phantomrerun-b re-run): the
+      // 2026-10-11 "rounding honesty" Math.round fix still minted
+      // systematic phantom: gives in [100,200) round UP to a whole
+      // 200-kcal unit (~+72/call, +6,731 over 93 calls/12d on wasterate
+      // seed 4301) because the observed give distribution is NOT symmetric
+      // around the .5 boundary — and crumbs <100 kcal silently evaporated
+      // instead of being stored. Now the village carries its sub-unit
+      // surplus remainder (v._surplusRemainder, always < 200 kcal, a plain
+      // number on the village: survives save/load, lazy-inits on legacy
+      // saves, and never enters the deterministic trajectory hash, which
+      // reads pantry kcal only): whole 200-kcal units emit, the fraction
+      // waits for the next share. Both dishonesties die in one mechanism;
+      // over a run the only residual is the final remainder (< 200 kcal),
+      // never systematic inflation.
+      let newUnits;
+      if (this._phantomFoodFixOff()) {
+        // LEGACY (det-gate only): the pristine Math.round path.
+        newUnits = Math.round(give / 200); // ~200 kcal per unit
+      } else {
+        const total = (Number(v._surplusRemainder) || 0) + give;
+        newUnits = Math.floor(total / 200);
+        v._surplusRemainder = total - newUnits * 200;
+      }
       if (newUnits <= 0) return 0;
       // PANTRY CAP (break-it food r5): the surplus is a pantry writer like any
       // other — the cap binds here too. pantryAdd was the only capped door;
