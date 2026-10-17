@@ -14,6 +14,15 @@
 //   (the known contest-ID entropy issue, scripts/det-gate.js header).
 // PART D — SMOKE: 2 seeds x 2 policies x {control,armed}, 12d, no exceptions.
 //
+// Post-kill repair (2026-10-17, loop B): the layer scripts/policies/shelltask-b.js
+// was deleted per the kill protocol (sim-shellrevive-b KILLED at pilot on
+// engagement — evidence/2026-10-17/sim-shellrevive-b.md). With no layer there
+// is nothing to prove; skip honestly instead of crashing on require.
+try { require.resolve('./policies/shelltask-b'); }
+catch (e) {
+  console.log('INFO-SKIP: shelltask layer absent (killed at pilot, sim-shellrevive-b); status in evidence/2026-10-17/sim-shellrevive-b.md');
+  process.exit(0);
+}
 // Usage: node scripts/test-shelltask-b.js
 'use strict';
 const path = require('path');
