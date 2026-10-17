@@ -46,6 +46,13 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
+// Snapshot evidence dirs BEFORE requiring the sweep module: the assertion
+// below must test that require() CREATES nothing, not that the dirs are
+// absent (they exist on disk once the arm's own evidence lands, which made
+// the old absence-assertion fail permanently post-landing).
+const _evDirs = ['perseed-pathchoice', 'pathchoice-beats']
+  .map(d => path.join(ROOT, 'evidence', '2026-10-17', d));
+const _evBefore = _evDirs.map(d => fs.existsSync(d));
 const PC = require(path.join(ROOT, 'scripts', 'pathchoice-20261017'));
 const TF = require(path.join(ROOT, 'scripts', 'policies', 'tribfloor'));
 const WD = require(path.join(ROOT, 'scripts', 'policies', 'windefer'));
@@ -67,7 +74,8 @@ const ok = (name, cond, detail) => {
     JSON.stringify(PC.PATH_IDS) === JSON.stringify(['feared', 'indispensable', 'beloved', 'witness', 'assimilated', 'defiant', 'relay']));
   ok('policyFor exported + explicit stack string', typeof PC.policyFor === 'function' && /withSeatDrive/.test(PC.EXPLICIT_STACK));
   ok('requiring the sweep module did not create evidence dirs',
-    !fs.existsSync(path.join(ROOT, 'evidence', '2026-10-17', 'perseed-pathchoice')));
+    _evDirs.every((d, i) => fs.existsSync(d) === _evBefore[i]),
+    'no new dirs vs pre-require snapshot');
 
   console.log('== METHOD-NOTE (env != driver) ==');
   // RED by construction: seatdrive.layerOn() is consulted ONLY inside
