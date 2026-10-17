@@ -1,0 +1,87 @@
+-- belongfeast seed 9925 control
+-- belongfeast seed 9925 armed
+-- belongfeast seed 9926 control
+-- belongfeast seed 9926 armed
+-- belongfeast seed 9927 control
+-- belongfeast seed 9927 armed
+-- belongfeast seed 9928 control
+-- belongfeast seed 9928 armed
+
+wrote evidence/2026-10-17/sim-grieftrib-chunkD.json (8 runs, -31852584s)
+
+=== SUMMARY (pre-registered verdict) ===
+{
+ "control": {
+  "n": 4,
+  "grabsLanded": 12,
+  "subTermsMaxMean": 11250,
+  "gtStaged": 0,
+  "gtGift": 0,
+  "gtVisit": 0,
+  "tributePaidTotal": 422494,
+  "leverageLandings": 12,
+  "brokenSub": 3,
+  "subTrustMean": 34,
+  "national": 3,
+  "table": 4,
+  "wins": 0,
+  "w4": 0,
+  "w5": 0,
+  "medSurv": 168.5,
+  "exiled": 0,
+  "starveDeaths": 0,
+  "deathModes": {
+   "villager": 34,
+   "ambush": 2,
+   "dehydration": 2,
+   "combat": 162,
+   "expedition": 11,
+   "monster": 19,
+   "contest": 2,
+   "a": 2,
+   "sickness": 2,
+   "Big": 1,
+   "Hushpuppy": 1
+  }
+ },
+ "armed": {
+  "n": 4,
+  "grabsLanded": 0,
+  "subTermsMaxMean": 5000,
+  "gtStaged": 29,
+  "gtGift": 33,
+  "gtVisit": 1,
+  "tributePaidTotal": 366733,
+  "leverageLandings": 0,
+  "brokenSub": 3,
+  "subTrustMean": 89.8,
+  "national": 4,
+  "table": 4,
+  "wins": 0,
+  "w4": 1,
+  "w5": 0,
+  "medSurv": 180,
+  "exiled": 0,
+  "starveDeaths": 1,
+  "deathModes": {
+   "villager": 30,
+   "ambush": 2,
+   "dehydration": 2,
+   "combat": 122,
+   "expedition": 9,
+   "contest": 1,
+   "monster": 10,
+   "a": 1,
+   "Big": 1,
+   "Hushpuppy": 1,
+   "starvation": 1
+  }
+ }
+}
+
+SUBSTRATE control belongfeast grabs landed: 12 -> OK (grief present)
+PRIMARY belongfeast subTermsMax mean: control=11250 armed=5000 ratio=0.44 <= 0.75 -> GO
+GUARD national armed >= control-2: 4 >= 1 -> OK
+GUARD broken subordinate links armed <= control: 3 <= 3 -> OK
+GUARD sub trust mean armed >= control-5: 89.8 >= 29 -> OK
+GUARD no new death mode at n>=3: OK

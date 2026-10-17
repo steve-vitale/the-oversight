@@ -1,0 +1,91 @@
+-- leadfeast seed 9925 control
+-- leadfeast seed 9925 armed
+-- leadfeast seed 9926 control
+-- leadfeast seed 9926 armed
+-- leadfeast seed 9927 control
+-- leadfeast seed 9927 armed
+-- leadfeast seed 9928 control
+-- leadfeast seed 9928 armed
+
+wrote evidence/2026-10-17/sim-grieftrib-chunkB.json (8 runs, -31852584s)
+
+=== SUMMARY (pre-registered verdict) ===
+{
+ "control": {
+  "n": 4,
+  "grabsLanded": 0,
+  "subTermsMaxMean": 0,
+  "gtStaged": 0,
+  "gtGift": 0,
+  "gtVisit": 0,
+  "tributePaidTotal": 425915,
+  "leverageLandings": 4,
+  "brokenSub": 0,
+  "subTrustMean": 0,
+  "national": 4,
+  "table": 4,
+  "wins": 0,
+  "w4": 1,
+  "w5": 0,
+  "medSurv": 180,
+  "exiled": 0,
+  "starveDeaths": 1,
+  "deathModes": {
+   "villager": 42,
+   "ambush": 2,
+   "dehydration": 2,
+   "monster": 19,
+   "combat": 136,
+   "expedition": 7,
+   "thirst": 1,
+   "alien": 1,
+   "Choir": 1,
+   "contest": 4,
+   "Hushpuppy": 1,
+   "starvation": 1,
+   "the": 1
+  }
+ },
+ "armed": {
+  "n": 4,
+  "grabsLanded": 0,
+  "subTermsMaxMean": 0,
+  "gtStaged": 0,
+  "gtGift": 0,
+  "gtVisit": 0,
+  "tributePaidTotal": 425915,
+  "leverageLandings": 4,
+  "brokenSub": 0,
+  "subTrustMean": 0,
+  "national": 4,
+  "table": 4,
+  "wins": 0,
+  "w4": 1,
+  "w5": 0,
+  "medSurv": 180,
+  "exiled": 0,
+  "starveDeaths": 1,
+  "deathModes": {
+   "villager": 42,
+   "ambush": 2,
+   "dehydration": 2,
+   "monster": 19,
+   "combat": 136,
+   "expedition": 7,
+   "thirst": 1,
+   "alien": 1,
+   "Choir": 1,
+   "contest": 4,
+   "Hushpuppy": 1,
+   "starvation": 1,
+   "the": 1
+  }
+ }
+}
+
+SUBSTRATE control belongfeast grabs landed: 0 -> INCONCLUSIVE — no grief substrate on control seeds
+PRIMARY belongfeast subTermsMax mean: control=0 armed=0 ratio=0.00 <= 0.75 -> INCONCLUSIVE
+GUARD national armed >= control-2: 4 >= 2 -> OK
+GUARD broken subordinate links armed <= control: 0 <= 0 -> OK
+GUARD sub trust mean armed >= control-5: 0 >= -5 -> OK
+GUARD no new death mode at n>=3: OK
