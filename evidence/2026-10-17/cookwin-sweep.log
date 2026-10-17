@@ -1,0 +1,86 @@
+  PASS leadfeast/control: smoke instrument live — resolutions=10
+  PASS leadfeast/control: S0 recorded — S0=47250
+  PASS leadfeast/control: run completes — days=15
+  PASS leadfeast/control: no laundering at convert time — laundered=0
+  PASS leadfeast/control: smoke conservation |rel|<=3% — rel=0.00%
+  PASS leadfeast/armed: smoke instrument live — resolutions=10
+  PASS leadfeast/armed: S0 recorded — S0=47250
+  PASS leadfeast/armed: run completes — days=15
+  PASS leadfeast/armed: no laundering at convert time — laundered=0
+  PASS leadfeast/armed: smoke conservation |rel|<=3% — rel=0.00%
+  PASS belongfeast/control: smoke instrument live — resolutions=10
+  PASS belongfeast/control: S0 recorded — S0=47250
+  PASS belongfeast/control: run completes — days=15
+  PASS belongfeast/control: no laundering at convert time — laundered=0
+  PASS belongfeast/control: smoke conservation |rel|<=3% — rel=0.00%
+  PASS belongfeast/armed: smoke instrument live — resolutions=10
+  PASS belongfeast/armed: S0 recorded — S0=47250
+  PASS belongfeast/armed: run completes — days=15
+  PASS belongfeast/armed: no laundering at convert time — laundered=0
+  PASS belongfeast/armed: smoke conservation |rel|<=3% — rel=0.00%
+SMOKE gate green.
+  PASS det-gate (leadfeast/armed, instrumented): 40d rerun byte-identical — n=40/40
+  PASS det-gate (belongfeast/armed, instrumented): 40d rerun byte-identical — n=40/40
+Instrument DET gate green.
+  [control leadfeast s4701] d=117 end=village-lost w34=0 w12=126497 launder=0 wr=0.36607 nat=1 wave=3 starv=0
+  [control leadfeast s4702] d=116 end=village-lost w34=0 w12=98986 launder=0 wr=0.19581 nat=1 wave=3 starv=0
+  [control leadfeast s4703] d=148 end=village-lost w34=0 w12=113213 launder=0 wr=0.03808 nat=1 wave=3 starv=0
+  [control leadfeast s4704] d=143 end=village-lost w34=0 w12=97221 launder=0 wr=0.21717 nat=1 wave=3 starv=1
+  [control leadfeast s4705] d=139 end=village-lost w34=0 w12=113219 launder=0 wr=0.27317 nat=1 wave=3 starv=0
+  [control leadfeast s4706] d=147 end=village-lost w34=0 w12=100735 launder=0 wr=0.21138 nat=1 wave=4 starv=0
+  [control leadfeast s4707] d=182 end=survived w34=0 w12=190756 launder=0 wr=0.07844 nat=1 wave=3 starv=1
+  [control leadfeast s4708] d=100 end=village-lost w34=0 w12=100185 launder=0 wr=0.19276 nat=1 wave=3 starv=0
+  [armed leadfeast s4701] d=113 end=village-lost w34=2941 w12=120706 launder=0 wr=0.36593 nat=1 wave=3 starv=0
+  [armed leadfeast s4702] d=90 end=village-lost w34=11939 w12=74016 launder=0 wr=0.23266 nat=1 wave=3 starv=1
+  [armed leadfeast s4703] d=182 end=survived w34=46106 w12=85727 launder=0 wr=0.17169 nat=1 wave=3 starv=0
+  [armed leadfeast s4704] d=138 end=village-lost w34=38114 w12=110305 launder=0 wr=0.19622 nat=1 wave=3 starv=0
+  [armed leadfeast s4705] d=65 end=village-lost w34=3594 w12=46992 launder=0 wr=0.26883 nat=0 wave=2 starv=0
+  [armed leadfeast s4706] d=118 end=village-lost w34=308 w12=78520 launder=0 wr=0.32511 nat=1 wave=3 starv=0
+  [armed leadfeast s4707] d=182 end=survived w34=38562 w12=168715 launder=0 wr=0.30798 nat=1 wave=3 starv=0
+  [armed leadfeast s4708] d=182 end=survived w34=11773 w12=209988 launder=0 wr=0.23438 nat=1 wave=3 starv=0
+  [control belongfeast s4701] d=169 end=village-lost w34=0 w12=193501 launder=0 wr=0.2572 nat=1 wave=3 starv=0
+  [control belongfeast s4702] d=182 end=survived w34=0 w12=203752 launder=0 wr=0.07635 nat=0 wave=3 starv=0
+  [control belongfeast s4703] d=178 end=village-lost w34=0 w12=169131 launder=0 wr=0.05887 nat=1 wave=3 starv=0
+  [control belongfeast s4704] d=98 end=village-lost w34=0 w12=138679 launder=0 wr=0.17141 nat=0 wave=3 starv=1
+  [control belongfeast s4705] d=182 end=survived w34=0 w12=200150 launder=0 wr=0.26923 nat=1 wave=3 starv=0
+  [control belongfeast s4706] d=182 end=survived w34=0 w12=288182 launder=0 wr=0.53895 nat=1 wave=3 starv=0
+  [control belongfeast s4707] d=182 end=survived w34=0 w12=238627 launder=0 wr=0.10278 nat=1 wave=3 starv=0
+  [control belongfeast s4708] d=121 end=village-lost w34=0 w12=147543 launder=0 wr=0.11765 nat=1 wave=3 starv=0
+  [armed belongfeast s4701] d=182 end=survived w34=33889 w12=243785 launder=0 wr=0.38845 nat=1 wave=3 starv=0
+  [armed belongfeast s4702] d=182 end=survived w34=85601 w12=139001 launder=0 wr=0.07867 nat=1 wave=3 starv=0
+  [armed belongfeast s4703] d=48 end=village-lost w34=47806 w12=4651 launder=0 wr=0 nat=0 wave=2 starv=3
+  [armed belongfeast s4704] d=182 end=survived w34=91123 w12=131316 launder=0 wr=0.06703 nat=0 wave=3 starv=0
+  [armed belongfeast s4705] d=182 end=survived w34=4146 w12=153612 launder=0 wr=0.31971 nat=1 wave=3 starv=0
+  [armed belongfeast s4706] d=182 end=survived w34=1555 w12=278652 launder=0 wr=0.56693 nat=1 wave=3 starv=0
+  [armed belongfeast s4707] d=182 end=survived w34=34809 w12=167943 launder=0 wr=0.10951 nat=1 wave=3 starv=0
+  [armed belongfeast s4708] d=156 end=village-lost w34=68990 w12=107249 launder=0 wr=0.11402 nat=1 wave=3 starv=0
+
+== cookwin sweep summary ==
+PRIMARY paired-median fresh waste-rate ratio (armed/control): 1.0454 (GO <= 0.85)
+  per-pair: improved=6 worsened=10 null=0
+    leadfeast s4701: ratio=1.028 aDays=113 cDays=117 aW34=2941 cW34=0 aStarv=0 cStarv=0
+    leadfeast s4702: ratio=1.378 aDays=90 cDays=116 aW34=11939 cW34=0 aStarv=1 cStarv=0
+    leadfeast s4703: ratio=3.864 aDays=182 cDays=148 aW34=46106 cW34=0 aStarv=0 cStarv=0
+    leadfeast s4704: ratio=0.953 aDays=138 cDays=143 aW34=38114 cW34=0 aStarv=0 cStarv=1
+    leadfeast s4705: ratio=2.226 aDays=65 cDays=139 aW34=3594 cW34=0 aStarv=0 cStarv=0
+    leadfeast s4706: ratio=2.174 aDays=118 cDays=147 aW34=308 cW34=0 aStarv=0 cStarv=0
+    leadfeast s4707: ratio=3.261 aDays=182 cDays=182 aW34=38562 cW34=0 aStarv=0 cStarv=1
+    leadfeast s4708: ratio=0.598 aDays=182 cDays=100 aW34=11773 cW34=0 aStarv=0 cStarv=0
+    belongfeast s4701: ratio=1.188 aDays=182 cDays=169 aW34=33889 cW34=0 aStarv=0 cStarv=0
+    belongfeast s4702: ratio=1.035 aDays=182 cDays=182 aW34=85601 cW34=0 aStarv=0 cStarv=0
+    belongfeast s4703: ratio=0.000 aDays=48 cDays=178 aW34=47806 cW34=0 aStarv=3 cStarv=0
+    belongfeast s4704: ratio=0.251 aDays=182 cDays=98 aW34=91123 cW34=0 aStarv=0 cStarv=1
+    belongfeast s4705: ratio=1.369 aDays=182 cDays=182 aW34=4146 cW34=0 aStarv=0 cStarv=0
+    belongfeast s4706: ratio=1.056 aDays=182 cDays=182 aW34=1555 cW34=0 aStarv=0 cStarv=0
+    belongfeast s4707: ratio=0.998 aDays=182 cDays=182 aW34=34809 cW34=0 aStarv=0 cStarv=0
+    belongfeast s4708: ratio=0.699 aDays=156 cDays=121 aW34=68990 cW34=0 aStarv=0 cStarv=0
+VOLUME SANITY: armed w34=521256 vs control w34=0 (ratio infx; GO >=2x AND >=30k aggregate)
+GUARDRAILS: starvation armed=4 control=3 (armed <= control+2)
+  national armed=13 control=14 (armed >= control-2)
+  median survival armed=182.0d control=147.5d (armed >= control-10d)
+  halfRationRate median armed=0.380 control=0.288
+  death cls armed={"NON-HUNGER":692,"STARVATION":4,"WATER-DEHYDRATION":1} control={"NON-HUNGER":646,"STARVATION":3,"WATER-DEHYDRATION":2} newModes=[]
+  laundering at convert time: armed items=0 (must be 0)
+WALL control: n=16 wins=0/16 national=14/16 table=15/16 w1=16/16 w2=16/16 w3=16/16 w4=1/16 w5=0/16 arc2=16/16 arc3=16/16 arc4=15/16 fourRealm=0/16 median=147.5d max=182d counters=441 mantle=0 mantleSurv30=0
+WALL armed: n=16 wins=0/16 national=13/16 table=13/16 w1=16/16 w2=16/16 w3=14/16 w4=0/16 w5=0/16 arc2=16/16 arc3=16/16 arc4=13/16 fourRealm=0/16 median=182.0d max=182d counters=439 mantle=9 mantleSurv30=9
+SWEEP_EXIT=0
