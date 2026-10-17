@@ -7,9 +7,20 @@ const rows = [];
 for (const f of files) rows.push(...JSON.parse(fs.readFileSync(f, 'utf8')));
 
 // buckets: villager deaths by cause category; player deaths; monster kills
+// SCHOLAR FLAG (gap-closure 2026-10-17): tele('death') records carry
+// player:true (boolean, since the 2026-10-13 deathattr fix) — NOT d.scholar,
+// which never existed on the record. The old check silently bucketed every
+// scholar death as a villager death and the "player deaths by cause"
+// section always printed empty. Same convention as succhain-lib's
+// isBearerDeath (player flag first, kind fallback).
+function isScholarDeath(d) {
+  if (!d) return false;
+  if (d.player === true) return true;
+  return /player|scholar/i.test(String(d.kind || ''));
+}
 function cat(d) {
   if (d.kind === 'monster') return 'monster-killed'; // monsters killed BY villagers
-  if (d.scholar) return d.cause === 'combat' ? 'PLAYER-combat' : 'PLAYER-' + d.cause;
+  if (isScholarDeath(d)) return d.cause === 'combat' ? 'PLAYER-combat' : 'PLAYER-' + d.cause;
   const c = d.cause || '?';
   if (/combat|monster|ambush/i.test(c)) return 'V-combat';
   if (/starvation|hunger/i.test(c)) return 'V-starvation';
@@ -48,7 +59,7 @@ for (const r of rows) for (const d of r.deaths) { if ((d.day || 1) <= 30) { earl
 console.log('\nearly (d1-30) per run:', Object.fromEntries(Object.entries(early).map(([k, v]) => [k, (v / runs).toFixed(2)])));
 // player deaths by cause
 const pd = {};
-for (const r of rows) for (const d of r.deaths) if (d.scholar) pd[d.cause] = (pd[d.cause] || 0) + 1;
+for (const r of rows) for (const d of r.deaths) if (isScholarDeath(d)) pd[d.cause] = (pd[d.cause] || 0) + 1;
 console.log('player deaths:', JSON.stringify(pd), 'per run:', (Object.values(pd).reduce((a,b)=>a+b,0)/runs).toFixed(2));
 // monster kills by wave
 const mw = {};
