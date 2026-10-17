@@ -162,10 +162,15 @@
     // ambientBeats: the voice pools (module-scope AMBIENT_BEATS).
     ambientBeats() { return AMBIENT_BEATS; },
     // eatBeatLine (sim-prosefix-b, #438): the EAT beat voices today's
-    // company honestly — who the villager actually sat with (today's
-    // 'ate with' meal memories, carrying the ateWith vid from logSitting).
-    // The companion goes through displayName (strangers stay descriptors —
-    // knowledge gating untouched). Deterministic given state: no RNG draws.
+    // company honestly. Two sources, in order: (1) today's 'ate with' meal
+    // memory (carrying the ateWith vid from logSitting) — present when the
+    // linger already wrote it; (2) who's at the hall eating RIGHT NOW —
+    // fellow EAT-objective holders are indoor at the hall this part
+    // (objPick sets state 'indoor'; the beat fires in the same tick).
+    // Without company it renders the honest quiet, never the old
+    // private-bowl assertion. The companion goes through displayName
+    // (strangers stay descriptors — knowledge gating untouched).
+    // Deterministic given state: no RNG draws.
     eatBeatLine(rid, nm) {
       var comp = null;
       try {
@@ -178,8 +183,19 @@
             break;
           }
         }
-      } catch (e3) { comp = null; }
-      try { return this.ambientLine('eat', rid, nm, comp); } catch (e4) { return null; }
+        if (!comp && typeof this.objState === 'function') {
+          var os = this.objState();
+          for (var vid in os) {
+            if (vid === rid) continue;
+            var o = os[vid];
+            if (o && o.kind === 'EAT' && o.state === 'indoor') {
+              try { comp = this.displayName(vid); } catch (e3) { comp = null; }
+              if (comp) break;
+            }
+          }
+        }
+      } catch (e4) { comp = null; }
+      try { return this.ambientLine('eat', rid, nm, comp); } catch (e5) { return null; }
     },
     // ambientLine: render one beat's current variant. Returns null for an
     // unknown key so the chore branch keeps its old "unknown chore = silent"

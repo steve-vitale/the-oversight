@@ -28,7 +28,10 @@ function ok(cond, name, extra) {
   if (!cond) fails.push(name);
 }
 function headFile(p) {
-  return execSync(`git -C "${ROOT}" show HEAD:${p}`, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  // RED characterization pins the PRISTINE base (56340dda, the tree this
+  // work started from) — not HEAD, which carries the fix after commit.
+  const ref = process.env.PROSEFIX_BASE || '56340dda';
+  return execSync(`git -C "${ROOT}" show ${ref}:${p}`, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
 }
 
 // ---------------- PART 0: RED characterization (pre-fix tree) ----------------
@@ -38,13 +41,13 @@ function part0() {
   const foodHead = headFile('src/js/food.js');
   const objHead = headFile('src/js/villager-objectives.js');
   // #437: no state-driven feast emotion on the old tree — one fixed string.
-  ok(!/feastEmotionBit/.test(gameHead), 'RED-437: HEAD game.js has no feastEmotionBit (single fixed opener)');
+  ok(!/feastEmotionBit/.test(gameHead), 'RED-437: 56340dda game.js has no feastEmotionBit (single fixed opener)');
   ok(/Somebody laughs so hard they cry\. For one evening, nobody is surviving/.test(gameHead),
-    'RED-437: HEAD feast opener is the verbatim fixed line');
+    'RED-437: 56340dda feast opener is the verbatim fixed line');
   // #439: no first-voicing ledger on the old tree — full mutter every time.
-  ok(!/_spoilVoice/.test(foodHead), 'RED-439: HEAD food.js has no _spoilVoice ledger (full mutter fires every voicing)');
+  ok(!/_spoilVoice/.test(foodHead), 'RED-439: 56340dda food.js has no _spoilVoice ledger (full mutter fires every voicing)');
   // #438: the old bowl beat asserts private eating.
-  ok(/Neither one is being shared/.test(objHead), 'RED-438: HEAD eat pool asserts private eating');
+  ok(/Neither one is being shared/.test(objHead), 'RED-438: 56340dda eat pool asserts private eating');
 }
 
 // ---------------- PART A: GREEN fixtures ----------------
@@ -149,9 +152,9 @@ async function partA() {
       // companion on record — the rendered line must name them.
       let e2e = null;
       for (let d = 1; d <= 120 && !e2e; d++) {
+        Game.state.scholar.day = d;
         for (const vid of roster) {
           if (Game.ambientPick(vid, 'eat', 4) === 3) {
-            Game.state.scholar.day = d;
             vv.memory[vid] = [{ t: 'meal', day: d, note: 'ate with X', ateWith: b }];
             const nm = String((Game.getPerson(vid) || {}).name || 'V').split(' ')[0];
             const rendered = Game.eatBeatLine(vid, nm);
@@ -162,6 +165,25 @@ async function partA() {
       }
       Game.state.scholar.day = day;
       ok(!!e2e, 'A-438: variant-3 with company names the co-eater end-to-end', String(e2e).slice(0, 80));
+      // fellow-hall-eater path: no meal memory, but another villager holds
+      // the EAT objective indoor right now -> the beat names them.
+      vv.memory[a] = [];
+      let hallE2e = null;
+      try {
+        const os = Game.objState();
+        for (const vid of roster) { os[vid] = { kind: 'idle', state: 'done' }; }
+        os[a] = { kind: 'EAT', state: 'indoor' };
+        os[b] = { kind: 'EAT', state: 'indoor' };
+        for (let d = 1; d <= 120 && !hallE2e; d++) {
+          Game.state.scholar.day = d;
+          if (Game.ambientPick(a, 'eat', 4) === 3) {
+            const rendered = Game.eatBeatLine(a, nmA);
+            if (rendered && rendered.includes(String(Game.displayName(b)))) hallE2e = rendered;
+          }
+        }
+      } catch (e) {}
+      Game.state.scholar.day = day;
+      ok(!!hallE2e, 'A-438: fellow hall-eater named when no linger memory yet', String(hallE2e).slice(0, 80));
       // no memory: honest solo line, no false assertion
       vv.memory[a] = [];
       const line2 = Game.eatBeatLine(a, nmA);
