@@ -450,10 +450,34 @@
           // ("A person, maybe 40s, with a scarred cheek") to the bare "A"
           // (transcript-verified: "Since A died..."). firstRef is
           // knowledge-gated per viewer and never collapses to "A".
+          // BEARER-DEATH NAME (journey succession r20 2026-10-16): the r8
+          // firstRef fix also gated the dead BEARER behind
+          // village-knownNames, so a pre-System bearer death mourned "the
+          // man in his 20s" — hiding the player's own prior incarnation's
+          // name from the player. The bearer isn't a stranger: match the
+          // corpse against the lineage's bearer-death entry and use the
+          // recorded true name (playerDeath records oldName); strangers
+          // keep the firstRef path above. The /^(the|a|an)$/ guard keeps
+          // the old 'the scholar' fallback from rendering as "Since the
+          // died..." — the r8 bug class, in reverse.
+          let _bearerVid = null;
+          try {
+            const _lin = (typeof this.lineage === 'function') ? (this.lineage() || []) : [];
+            const _last = _lin[_lin.length - 1];
+            if (_last && _last.cause && !_last.outcome && _last.villagerId) _bearerVid = _last.villagerId;
+          } catch (e) {}
           const _names = [];
           for (const c of _fresh) {
             let nm = null;
-            try { if (c.villagerId && typeof this.firstRef === 'function') nm = this.firstRef(c.villagerId) || null; } catch (e) {}
+            if (c.villagerId && _bearerVid && c.villagerId === _bearerVid && c.name) {
+              try {
+                const _tok = String(c.name).split(' ')[0] || null;
+                if (_tok && !/^(the|a|an)$/i.test(_tok)) nm = _tok;
+              } catch (e) {}
+            }
+            if (!nm) {
+              try { if (c.villagerId && typeof this.firstRef === 'function') nm = this.firstRef(c.villagerId) || null; } catch (e) {}
+            }
             if (!nm) nm = String(c.name || c.villagerId || 'someone');
             if (nm && _names.indexOf(nm) < 0) _names.push(nm);
           }
@@ -489,12 +513,25 @@
             if (last && last.cause && !last.outcome) {
               const since = day - (last.day || 0);
               if (since >= 0 && since <= 10) {
-                // MOURNING NAME (journey crisis r8 2026-10-12): same
-                // firstRef-not-split fix as the corpse branch above —
-                // lineage entries now carry the dead bearer's villagerId.
+                // MOURNING NAME (journey succession r20 2026-10-16): the r8
+                // firstRef fix gated the dead bearer's name behind
+                // village-knownNames — a pre-System bearer death mourned
+                // "the man in his 20s", hiding the player's own prior
+                // incarnation from the player. The lineage IS the village's
+                // memory of its mantle-bearers ("the village remembers its
+                // own mantle-bearers", ledger.js): this branch only fires
+                // for bearer deaths, and playerDeath records the true name
+                // (oldName), never a stranger descriptor — so the r8
+                // "A"-truncation concern doesn't apply here. firstRef stays
+                // the fallback; the /^(the|a|an)$/ guard keeps the old
+                // 'the scholar' fallback from rendering "Since the died...".
                 let nm2 = null;
-                try { if (last.villagerId && typeof this.firstRef === 'function') nm2 = this.firstRef(last.villagerId) || null; } catch (e) {}
-                if (!nm2) nm2 = String(last.name || 'someone');
+                try {
+                  const _tok = String(last.name || '').split(' ')[0] || null;
+                  if (_tok && !/^(the|a|an)$/i.test(_tok)) nm2 = _tok;
+                } catch (e) {}
+                try { if (!nm2 && last.villagerId && typeof this.firstRef === 'function') nm2 = this.firstRef(last.villagerId) || null; } catch (e) {}
+                if (!nm2) nm2 = 'someone';
                 if (nm2) return { kind: 'mourning', name: nm2, bearer: true };
               }
             }

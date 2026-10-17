@@ -1,0 +1,406 @@
+--- CENSUS (pre-death), day 14, Bearer: Chester ---
+  Kennedy [police_officer] HP39
+  Chester [line_cook] <= BEARER
+  Renee [fisherman] HP98
+  Wei [programmer]
+  Rafael [roofer]
+  David [plumber] HP89
+  Nikolai [welder] HP78
+  Brian [zookeeper]
+  Somchai [bike messenger]
+  Adaeze [esl_teacher]
+  fallen (recent): Barbara d11 (combat)
+  pantry: 21,000 kcal | codex plants: 15 | scholar abilities: 1
+PRE-DEATH: bearer=Chester abilities=1 plants=15 pop=10
+MANTLE: {"passed":true,"newBearer":"Renee","oldBearer":"Chester","lineageEntry":true,"lineageName":"Chester Kulkarni","corpseFound":true,"deathPackItems":9,"pendingBurials":1,"successorAbilities":1,"successorAbilitiesKeptOld":0}
+BURIAL by day 20: true (pendingBurials=0)
+--- CENSUS (mid (day ~20)), day 20, Bearer: Renee ---
+  Kennedy [police_officer] HP42
+  Renee [fisherman] <= BEARER
+  Wei [programmer] HP97
+  Rafael [roofer] HP82
+  David [plumber] HP52
+  Nikolai [welder] HP57
+  Brian [zookeeper]
+  Somchai [bike messenger] HP67
+  Adaeze [esl_teacher]
+  fallen (recent): Barbara d11 (combat); Chester d14 (the expedition)
+  pantry: 13,100 kcal | codex plants: 15 | scholar abilities: 1
+--- CENSUS (end (day ~27)), day 27, Bearer: Renee ---
+  Kennedy [police_officer] HP60
+  Renee [fisherman] <= BEARER
+  Wei [programmer]
+  Rafael [roofer] HP91
+  David [plumber] HP73
+  Nikolai [welder] HP60
+  Brian [zookeeper] HP94
+  Somchai [bike messenger] HP72
+  Adaeze [esl_teacher]
+  fallen (recent): Barbara d11 (combat); Chester d14 (the expedition)
+  pantry: 11,600 kcal | codex plants: 16 | scholar abilities: 3
+M2: 0/3 convos carry the death/new-person
+
+## fresh-grief (day 14) — successor talking to Kennedy
+OPEN CHOICES (7): [ans:q_night:a_yes] "I heard them too." | [ans:q_night:a_no] "Slept fine." | [ans:q_night:a_joke] "Just the wind. Probably." | [ans:q_night:honest_pass] "I'd rather not say." | [deflect_q] (change the subject) | [leave] "I should go." | [silence] "..."
+> YOU PICK [ans:q_night:a_yes] 
+YOU: "I heard them too."
+NPC: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+
+> YOU PICK [goon] 
+YOU: "Take your time."
+NPC: The air goes tight. Their eyes narrow, just slightly.
+
+> YOU PICK [goon] 
+YOU: "Take your time."
+NPC: "If you hear it again — wake me. I mean that. Nobody listens alone."
+
+> YOU PICK [alive:event:naming] 
+YOU: "What’s going on out there?"
+NPC: "The whole fire was arguing about Hummice last night — what to even CALL it. 'Big Ugly' got shouted down. What's your vote?"
+
+> YOU PICK [goon] 
+YOU: "Go on."
+NPC: They hear the warmth in it. They're not ready to let it in.
+
+> YOU PICK [goon] 
+YOU: "Go on."
+NPC: "Sorry — I asked you something there." What's your vote?
+
+> YOU PICK [gq:open:take] 
+YOU: "What do you think?"
+NPC: "Everyone's got a take. Mine's just the one I can live with. I hope that helps."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About how you slept — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+
+> YOU PICK [goon] 
+YOU: "Take your time."
+NPC: The tension eases back to something ordinary.
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "I have opinions about the name. I am saving them for when they count."
+
+> YOU PICK [goon] 
+YOU: "Go on."
+NPC: They relax, a fraction. This is going well.
+
+> YOU PICK [goon] 
+YOU: "Go on."
+NPC: "I should get back to it."
+
+FINAL: want=curious resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "About how you slept — Did you sleep? I kept hearing things out past the treeline. That's the whole of it."
+YOU: "I heard them too."
+NPC: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+YOU: "Take your time."
+NPC: The air goes tight. Their eyes narrow, just slightly.
+YOU: "Take your time."
+NPC: "If you hear it again — wake me. I mean that. Nobody listens alone."
+YOU: "What’s going on out there?"
+NPC: "The whole fire was arguing about Hummice last night — what to even CALL it. 'Big Ugly' got shouted down. What's your vote?"
+YOU: "Go on."
+NPC: They hear the warmth in it. They're not ready to let it in.
+YOU: "Go on."
+NPC: "Sorry — I asked you something there." What's your vote?
+YOU: "What do you think?"
+NPC: "Everyone's got a take. Mine's just the one I can live with. I hope that helps."
+YOU: "About how you slept — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+YOU: "Take your time."
+NPC: The tension eases back to something ordinary.
+YOU: "About what's been happening — we never finished."
+NPC: "I have opinions about the name. I am saving them for when they count."
+YOU: "Go on."
+NPC: They relax, a fraction. This is going well.
+YOU: "Go on."
+NPC: "I should get back to it."
+NPC: "Good talk. I feel like I know you a little better now."
+
+CARRY-FLAGS: mourn=false namedMourn=false newPerson=false
+
+
+## settling (day 20) — successor talking to Wei
+OPEN CHOICES (8): [alive:want:ask_favor] "Is there something you need? Really." | [alive:event:mourning] "How are you holding up? About... them." | [dlg:help] "How can I help?" | [dlg:cant] "Not right now, sorry." | [teach] "Here, I know this one — let me show you." | [dlg:subject] "Can I ask you something else?" | [leave] "Actually — never mind." | [silence] "..."
+> YOU PICK [alive:want:ask_favor] 
+YOU: "Is there something you need? Really."
+NPC: "No, really — it's handled. Thanks for asking, though."
+
+> YOU PICK [alive:want:ask_favor] 
+YOU: "Is there something you need? Really."
+NPC: "I just said — did you miss it?"
+
+> YOU PICK [alive:want:ask_favor] 
+YOU: "Is there something you need? Really."
+NPC: "I just told you — what else is on your mind?"
+
+> YOU PICK [alive:want:ask_favor] 
+YOU: "Is there something you need? Really."
+NPC: "We've covered this one. Ask me something else."
+
+> YOU PICK [alive:want:ask_favor] 
+YOU: "Is there something you need? Really."
+NPC: "I just said — did you miss it?"
+
+> YOU PICK [alive:want:ask_favor] 
+NPC: "I just told you — what else is on your mind?"
+NPC: "...I need to go be quiet for a while."
+
+> YOU PICK [alive:want:ask_favor] 
+(conversation ended by the engine)
+FINAL: want=ask_favor resolution=unresolved
+
+### FULL TRANSCRIPT
+NPC: "Never mind the food I needed — we got it handled. Thanks anyway. No time to waste."
+YOU: "Is there something you need? Really."
+NPC: "No, really — it's handled. Thanks for asking, though."
+YOU: "Is there something you need? Really."
+NPC: "I just said — did you miss it?"
+YOU: "Is there something you need? Really."
+NPC: "I just told you — what else is on your mind?"
+YOU: "Is there something you need? Really."
+NPC: "We've covered this one. Ask me something else."
+YOU: "Is there something you need? Really."
+NPC: "I just said — did you miss it?"
+YOU: "Is there something you need? Really."
+NPC: "I just told you — what else is on your mind?"
+NPC: "...I need to go be quiet for a while."
+YOU: "Is there something you need? Really."
+NPC: "We've covered this one. Ask me something else."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: mourn=false namedMourn=false newPerson=false
+
+
+## two-weeks-on (day 27) — successor talking to Kennedy
+OPEN CHOICES (9): [betrayal:accept] "Sure. Come see what I found. You won't believe it." | [betrayal:decline] "Not this time." | [gq:open:take] "What do you think?" | [gq:open:unsure] "I don't know yet." | [gq:open:honest_pass] "I'd rather not say." | [joke] "Ha — yeah." | [invite_party] "You're coming with me." | [silence] "..." | [confront:d_vv6p4oc] "You said something odd the other day. Let's talk about it."
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: You walk to the hollow with Kennedy. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+
+> YOU PICK [gq:open:take] 
+YOU: "What do you think?"
+NPC: "You really want my take? ...Yeah. Okay. I think we're being tested."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About how you slept — we never finished."
+NPC: "...Sorry, lost my train of thought."
+
+> YOU PICK [goon] 
+YOU: "Go on."
+NPC: "So what's your plan here? Just... get through it?"
+
+> YOU PICK [ans:q_plan:a_survive] 
+YOU: "One day at a time."
+NPC: "Honest. I can work with honest."
+
+> YOU PICK [invite_party] 
+YOU: "Want to come with me?"
+NPC: "Not right now. I've got my own things to handle."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "We'll see what the treeline brings. We always do."
+
+> YOU PICK [alive:thread:recall] 
+YOU: "About that personal stuff — we never finished."
+NPC: "About that personal stuff — yeah, we never did get back to that."
+
+> YOU PICK [goon] 
+YOU: "Yeah?"
+NPC: "Alright. Catch you later."
+
+> YOU PICK [goon] 
+YOU: "Yeah?"
+NPC: A pause. When they speak again, it's about something else entirely.
+
+> YOU PICK [goon] 
+YOU: "Yeah?"
+NPC: "What got you through the first week? The very first days."
+
+> YOU PICK [ans:q_first_week:a_shock] 
+(conversation ended by the engine)
+FINAL: want=curious resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "You heard the sounds past the treeline too, that night. They haven't stopped, have they?"
+NPC: "Come see what I found. You won't believe it."
+YOU: "Sure."
+NPC: You walk to the hollow with Kennedy. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: "What do you think?"
+NPC: "You really want my take? ...Yeah. Okay. I think we're being tested."
+YOU: "About how you slept — we never finished."
+NPC: "...Sorry, lost my train of thought."
+YOU: "Go on."
+NPC: "So what's your plan here? Just... get through it?"
+YOU: "One day at a time."
+NPC: "Honest. I can work with honest."
+YOU: "Want to come with me?"
+NPC: "Not right now. I've got my own things to handle."
+YOU: "About what's been happening — we never finished."
+NPC: "We'll see what the treeline brings. We always do."
+YOU: "About that personal stuff — we never finished."
+NPC: "About that personal stuff — yeah, we never did get back to that."
+YOU: "Yeah?"
+NPC: "Alright. Catch you later."
+YOU: "Yeah?"
+NPC: A pause. When they speak again, it's about something else entirely.
+YOU: "Yeah?"
+NPC: "What got you through the first week? The very first days."
+YOU: "Honestly? Shock. Just kept moving."
+NPC: "Shock's underrated. It's the body's way of buying you time."
+NPC: "Hm. Never mind — go on."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: mourn=false namedMourn=false newPerson=false
+
+
+--- SAY LINES (mantle-relevant) ---
+d2: 📓 Journal: jotted down what they said (A person, maybe 50s, with a buzz cut).
+d2: 📓 Journal: jotted down what they said (A person, maybe 30s).
+d2: 📓 Journal: learned their name (Adaeze).
+d2: 📓 Journal: learned their name (Rafael).
+d2: 📓 Journal: learned their name (Kennedy).
+d2: 📓 Journal: A traveler passed through yesterday, talking about a village to the southwest called Thornfield.
+d2: 📓 Journal: The Longhouse raised. Population cap now 16.
+d2: 📓 Journal: the man in his 60s taught the person in their 20s Steady Hands.
+d2: 📓 Journal: Rafael taught the person in their 30s, the veterinarian Soft Step.
+d3: 📓 Journal: jotted down what they said (Kennedy).
+d3: 📓 Journal: jotted down what they said (A person, maybe 30s).
+d3: Journal: Deep shade. The floor keeps its secrets.
+d3: 📓 Journal: you UNDERSTAND **Green Thumb, Literally**. It resonates with: something unnamed, something unnamed.
+d3: You walk back into Haven. 3 Codex entries. The village is glad to see you.
+d3: 📓 Journal: learned their name (Renee).
+d3: 📓 Journal: learned their name (David).
+d3: 📓 Journal: learned their name (Iker).
+d3: The Journal notes it: White Oak Acorns — cook it, or else. (David tested it.)
+d4: 📓 Journal: jotted down what they said (Renee).
+d4: Movement — a waddling opossum, playing dead (badly).
+d4: 👁 You know this one's trick: it plays dead. Don't fall for it — or do, and be ready when it wakes.
+d4: Journal: Deep shade. The floor keeps its secrets.
+d4: You walk back into Haven. 4 Codex entries. The village is glad to see you.
+d4: 📓 Journal: learned their name (Nikolai).
+d4: You catch fragments by the fire — Rafael telling Kennedy about A man, maybe 30s, with calloused knuckles. Half of it's true anymore. You're not sure which half.
+d5: You walk back into Haven. 5 Codex entries. The village is glad to see you.
+d5: 📓 Journal: learned their name (Chester).
+d5: Renee brought you a sample. The Journal grows.
+d6: Movement — a thick-bodied rattlesnake, chevron bands, the tail a blur of dry sound.
+d6: You walk back into Haven. 7 Codex entries. The village is glad to see you.
+d7: ⚔️ Iker stood down the two knobs on glass-still water and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere.
+d7: You walk back into Haven. 7 Codex entries. The village is glad to see you.
+d7: 📓 Journal: Counter: Hit it while it folds — The Wing Flash only fires FORWARD — it must face you. Circle while it folds its wings and hit it before the wings open. It can't flash what's behind it.
+d7: 📓 Journal: Hannah Kim applied remotely.
+d7: 📻 "Why do the small humans keep putting organic matter in their FACE-HOLES? We built you a fusion pellet! ...You BURIED it. WHY did you bury the pellet?!"
+d7: 📖 Your journal shimmers — handwriting dissolving into interface. It talks now. It remembers everything.
+d7: 🧑‍🤝‍🧑 The village gathers. Everyone's journal is changing. Everyone hears the voice. Chester grabs your arm. "Tell me you hear that too."
+d7: 📚 Village knowledge: Kennedy taught everyone about Amla. The Codex grows without you lifting a finger.
+d7: 📚 Village knowledge: Iker taught everyone about Lotus Root. The Codex grows without you lifting a finger.
+d7: SYSTEM: Catalogued. The Codex grows teeth.
+d8: 📓 Codex: Counter: Buy it off — It steals FIRST and fights second — but it CANNOT resist food. OFFER FOOD in the fight: it drops your things mid-scamper for the meal. A bribe is cheaper than a chase.
+d8: ⚔️ Kennedy stood down the Lockpick and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere.
+d8: You walk back into Haven. 10 Codex entries. The village is glad to see you.
+d8: Wei looks at the pantry, then at the Codex, then at you. "We’re going to make it." Haven will survive — because someone learned the land, and wrote it down. One less thing to fear.
+d8: 📋 SYSTEM QUEST: "Teach us? Show us a plant you know COMPLETELY (Codex L3) — 10 candidates in your notes. We will watch very closely. Reward: integration."
+d8: 📓 Codex: a curious wanderer arrived (curious).
+d9: You walk back into Haven. 10 Codex entries. The village is glad to see you.
+d9: You catch fragments by the fire — Kennedy telling Chester about Adaeze. Half of it's true anymore. You're not sure which half.
+d9: 📚 Village knowledge: Renee taught everyone about Groundnut. The Codex grows without you lifting a finger.
+d9: 📚 Village knowledge: Iker taught everyone about Gum Acacia. The Codex grows without you lifting a finger.
+d9: 📚 Village knowledge: Brian taught everyone about Wild Carrot. The Codex grows without you lifting a finger.
+d9: Kennedy is showing everyone Amla by the fire. "See the leaves? Like that. Don't mix it up." The Codex grows — the human way.
+d9: 📓 Codex: Chester taught Iker Food Preservation.
+d10: 📖 The Codex settles deeper into you. It knows things before you do now. Deaths, especially — it will tell you itself.
+d10: 📖 The Codex turns a page on its own. Hummice is dead. You didn't ask. It knew.
+d10: You walk back into Haven. 13 Codex entries. The village is glad to see you.
+d10: 📖 The Codex turns a page on its own. Lockpick is dead. You didn't ask. It knew.
+d10: 📓 Codex: Counter: Bellow at the choir — The Swarm Hum stacks while you stand in it — but the hum needs the choir. SHOUT and the bellow scatters it. Raw noise, no words, all lungs.
+d10: 📓 Codex: The System noticed the neighbors, and wants storylines.
+d10: 📓 Codex: Cliffhanger, The Anaconda Empress, The Mountain Lord, Lockpick at the door, day 10.
+d10: 📓 Codex: Counter: Go for the eyes — When it lunges, strike the EYES or the soft palate inside the mouth — the armored hide shrugs off everything else. Never fight it in the water; that's its studio. On land, get beside it: it turns like a bus.
+d10: 📚 Village knowledge: Iker taught everyone about Egusi Melon. The Codex grows without you lifting a finger.
+d10: 📖 The Codex turns a page on its own. Iker Lerma is dead. You didn't ask. It knew.
+d10: ◈ CRISIS — THE FIRST GRAVE. Iker is dead. The village digs its first grave, and everyone understands at once: this place can kill you. It just did.
+d10: 📓 Codex: The old argument between Brian and Iker ended — one of them is gone.
+d11: 📓 Codex: Kennedy — jotted down what they said. Filed.
+d11: 📖 Codex: Death Roll — locks onto one target — moving won't dodge it. You won't forget this.
+d11: 📖 Codex: Cliffhanger Drag — locks onto one target — moving won't dodge it. You won't forget this.
+d11: 📖 The Codex turns a page on its own. Barbara OConnor is dead. You didn't ask. It knew.
+d11: 🕯️ Barbara OConnor is dead — combat. The village stops. Somebody screams. Somebody else starts digging.
+d11: The Codex doesn't pause for grief. Chester blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.
+d11: 🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"
+d11: 📖 The Codex turns a page: Barbara OConnor, 11 days. The mantle passes to Chester Kulkarni.
+d11: 📓 Codex: Wei proposed relief (raid), day 11.
+d11: You catch fragments by the fire — Adaeze telling David about you. Half of it's true anymore. You're not sure which half.
+d11: 📓 Codex: Counter: Stand tall and shout — When it crouches to pounce, STAND TALL and SHOUT — bang metal, wave your arms, be loud and enormous. It expects prey to flee. Be the thing that doesn't, and the pounce dies unlaunched.
+d11: ⚔️ Iker stood down the Anaconda Empress and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere.
+d11: ⚔️ Nikolai stood down the Mountain Lord and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere.
+d11: You walk back into Haven. 14 Codex entries. The village is glad to see you.
+d11: It's settled. The village is calling it "Big Loud." The Codex keeps it.
+d11: Renee is showing everyone Groundnut by the fire. "See the leaves? Like that. Don't mix it up." The Codex grows — the human way.
+d11: 📓 Codex: Rafael taught Adaeze Soft Step.
+d12: 📓 Codex: Renee — jotted down what they said. Filed.
+d12: 📓 Codex: The System offered an aid quest (learn), day 12.
+d12: You walk back into Haven. 14 Codex entries. The village is glad to see you.
+d12: That night, they bring Barbara home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.
+d12: 📋 SYSTEM QUEST: "We've been thinking. You know things we don't. Teach us? Show us a plant you know COMPLETELY (Codex L3). We will watch very closely, which is our entire personality."
+d12: Iker is showing everyone Gum Acacia by the fire. "See the leaves? Like that. Don't mix it up." The Codex grows — the human way.
+d12: 🌙 Raid — Ashford came in the night from the southeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)
+d13: 📓 Codex: Counter: Strike the head as it coils — When the coils start to wrap, don't pull away — strike the head and eyes. It will release to protect them. On land it is slow and heavy; it needs the water to be the Empress. Never let it get a second wrap.
+d13: You walk back into Haven. 14 Codex entries. The village is glad to see you.
+d13: It's settled. The village is calling it "Big Loud." The Codex keeps it.
+d13: 📚 Village knowledge: Somchai taught everyone about Chickweed. The Codex grows without you lifting a finger.
+d13: 📓 Codex: Somchai taught me Mesquite (fireside).
+d13: 📓 Codex: Wei discovered Tells (tells).
+d14: 📖 The Codex turns a page on its own. Chester Kulkarni is dead. You didn't ask. It knew.
+d14: 🕯️ Chester Kulkarni is dead — the expedition. The village stops. Somebody screams. Somebody else starts digging.
+d14: The Codex doesn't pause for grief. Renee blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.
+d14: 🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"
+d14: 📖 The Codex turns a page: Chester Kulkarni, 14 days. The mantle passes to Renee Myers.
+d14: 📓 Codex: you UNDERSTAND **Diplomatic Incident**. It resonates with: something unnamed.
+d14: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d14: It's settled. The village is calling it "Big Ugly." The Codex keeps it.
+d14: Brian is showing everyone Wild Carrot by the fire. "See the leaves? Like that. Don't mix it up." The Codex grows — the human way.
+d14: 📓 Codex: Adaeze taught Somchai Soft Step.
+d15: 📓 Codex: Adaeze — jotted down what they said. Filed.
+d15: You catch fragments by the fire — Kennedy telling Rafael about himself. Half of it's true anymore. You're not sure which half.
+d15: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d15: That night, they bring Chester home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.
+d16: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d16: 📓 Codex: Rafael taught Wei Soft Step.
+d17: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d17: 📓 Codex: Rafael taught David Soft Step.
+d17: 🌙 Raid — Ashford came in the night from the southeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)
+d18: ⚔️ Nikolai stood down the Hushpuppy and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere.
+d18: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d18: 📋 SYSTEM QUEST: "We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish."
+d18: (The System learned SOMETHING. You're not sure what. Neither is it. That's the deal.)
+d19: 📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.
+d19: ⚔️ Somchai stood down the Hushpuppy and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere.
+d19: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d19: 📖 The Codex turns a page on its own. Hushpuppy is dead. You didn't ask. It knew.
+d20: You catch fragments by the fire — Adaeze telling Brian about Wei. Half of it's true anymore. You're not sure which half.
+d20: ⚔️ Rafael stood down the Big Loud and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere.
+d20: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d21: 📓 Codex: The village has gone quiet around me. I don't know why — I've eaten only what was set before me.
+d21: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d22: 👂 Overheard — Wei: "If the System wanted us dead we'd be dead. So what does it want instead?"
+d22: You walk back into Haven. 15 Codex entries. The village is glad to see you.
+d23: SYSTEM: Codex and inventory overlay online.
+d23: 📓 Codex: you've heard of **Night Eyes**. Someone, somewhere, can do this. Now you know its name.
+d23: 📓 Codex: you've heard of **Trophy Room**. Someone, somewhere, can do this. Now you know its name.
+d23: SYSTEM: Catalogued. The Codex grows teeth.
+d23: You catch fragments by the fire — David telling Rafael about Brian. Half of it's true anymore. You're not sure which half.
+d23: 📓 Codex: you UNDERSTAND **Lucky Rock**.
+d23: You walk back into Haven. 16 Codex entries. The village is glad to see you.
+d23: It's settled. The village is calling it "Big Ugly." The Codex keeps it.
+d24: You walk back into Haven. 16 Codex entries. The village is glad to see you.
+d24: 🌙 Raid — Emberhold came in the night from the west. They carried off ~1500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)
+d24: 🌙 Raid — Ashford came in the night from the southeast. They carried off ~1250 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)
+d25: You walk back into Haven. 16 Codex entries. The village is glad to see you.
+d25: You catch fragments by the fire — Nikolai telling Wei about himself. Half of it's true anymore. You're not sure which half.
+d25: 📋 SYSTEM QUEST: "Teach us? Show us a plant you know COMPLETELY (Codex L3) — 15 candidates in your notes. We will watch very closely. Reward: integration."
+d26: You walk back into Haven. 16 Codex entries. The village is glad to see you.
+d26: 📓 Codex: Hank of Thornfield raids Haven's treeline — demands ~2,000 kcal.
