@@ -4,6 +4,7 @@
 // provides:
 //   - convoSelectWant(vid) -> want object
 //   - convoWantOpener(vid, want) -> {line, thread}
+//   - convoWantStaleOpener(vid, want) -> reframe line when all fresh variants are ledger-blocked
 //   - convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit')
 //   - convoWantMenu(vid) -> menu options for the live want
 //   - convoWantCloseLine(vid) -> goodbye beat for the resolution
@@ -20,6 +21,7 @@
 //   - beat_acknowledgment: NPC beats must acknowledge the player's last utterance before delivering new content — no non-sequiturs (code: convoComposeBeat, Steve 2026-10-06)
 //   - seeds: unresolved wants plant seeds; next conversation opens with the seed (code: convoPlantSeed/convoCheckSeeds, Steve 2026-10-06)
 //   - arc: want stages 0 (selected) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoWantEngage/convoResolveWant, Steve 2026-10-06)
+//   - stale_opener: a long-lived want's opener variants all end up ledger-blocked eventually (convoPickCycle resets on exhaustion — never null). When they do, the want reframes via def.staleOpener(vid) (or the generic convoWantStaleOpener) instead of going mute — thread 'want'. Engagement stays thread-coherent: only the want's own thread ('want'/'small') engages it (code: convoOpening, convo-dialogue dlg:more/askwhy/comfort, gap-closure 2026-10-17)
 // consumes:
 //   - village.villagers
 //   - state.convos
@@ -1101,7 +1103,11 @@
         } catch (e) { return 0; }
       },
       opener(vid) {
-        try { this.convoGet(vid).takenWantDay = (Game.state.scholar || {}).day || 0; } catch (e) {}
+        // NOTE (gap-closure 2026-10-17): opener() is pure — it must not
+        // consume the takenWantDay gate. It runs even when the opener is
+        // ledger-skipped, which used to burn the 3-day gate on a
+        // conversation where the want never surfaced. The gate is set in
+        // onSurfaced, below — only when the opener actually speaks.
         const kin = (this.takenKinOf(vid) || [])[0] || {};
         const first = (kin.name || 'them').split(' ')[0];
         return Game.convoPickCycle(vid, 'want:taken:open', [
@@ -1109,6 +1115,35 @@
           `"You talk to it -- the System. Have you ever asked? About the taken -- about ${first}?"`,
           '"I keep dreaming about rows of pods. Humming. Tell me I\'m not the only one."',
         ]);
+      },
+      staleOpener(vid) {
+        // STATE-AWARE REFRAME (gap-closure 2026-10-17): when every fresh
+        // opener variant is ledger-blocked, the want reframes instead of
+        // going permanently mute. Promised vs unpromised changes what they
+        // say — the promise is the live thread.
+        try {
+          const kin = (this.takenKinOf(vid) || [])[0] || {};
+          const first = (kin.name || 'them').split(' ')[0];
+          const v = this.state.village || {};
+          const promised = v.takenPromises && v.takenPromises[vid];
+          const key = 'want:taken:stale';
+          if (promised) return Game.convoPickCycle(vid, key, [
+            `"You said you'd ask about the pods. Have you? About ${first} — I need to know if you heard anything."`,
+            `"About ${first} — did the System answer? I keep thinking about the humming."`,
+          ]);
+          return Game.convoPickCycle(vid, key, [
+            `"${first} — I keep coming back to it. The pods, humming. Do you think they're still in there?"`,
+            `"I dreamed about the pods again. ${first}'s face. Tell me I'm not the only one who hears the humming."`,
+            `"About the taken — about ${first}. I can't stop turning it over. Have you heard anything new?"`,
+          ]);
+        } catch (e) { console.warn('[convo] seek_taken staleOpener', e); return null; }
+      },
+      onSurfaced(vid) {
+        // The never-twice-in-three-days gate starts when the want actually
+        // surfaces (fresh opener or stale reframe) — never on a skipped
+        // opener. SENTINEL FIX (journey landing r15 2026-10-14) preserved.
+        try { this.convoGet(vid).takenWantDay = (Game.state.scholar || {}).day || 0; }
+        catch (e) { console.warn('[convo] takenWantDay', e); }
       },
       engageBeat(vid) {
         const kin = (this.takenKinOf(vid) || [])[0] || {};
@@ -1534,6 +1569,20 @@
       try { line = want.def.opener.call(this, vid); } catch (e) { line = null; }
       if (!line) return null;
       return { line, thread: 'want', wantId: want.id };
+    },
+
+    // convoWantStaleOpener(vid, want): last-resort reframe when every fresh
+    // opener variant is ledger-blocked (convoPickCycle resets on exhaustion
+    // — it never returns null — so a long-lived want's variants all end up
+    // in the no-repeat ledgers eventually). Names the want plainly; defs
+    // with real content define staleOpener(vid) instead (see seek_taken).
+    // Still ledger-checked by the caller — a blocked stale line falls
+    // through honestly. (gap-closure 2026-10-17)
+    convoWantStaleOpener(vid, want) {
+      try {
+        const words = String((want && want.id) || "what's on my mind").replace(/_/g, ' ');
+        return `"About ${words} — I keep turning it over."`;
+      } catch (e) { console.warn('[convo] staleOpener generic', e); return null; }
     },
 
     // convoWantEngage: PURE state transition for the want arc — no speech.

@@ -2617,6 +2617,11 @@
             // deferred, next conversation resumes it.
           } else {
             if ((c.want.stage || 0) < 1) c.want.stage = 1; // surfaced
+            // SURFACED (gap-closure 2026-10-17): the want spoke — defs with
+            // an onSurfaced hook (seek_taken's 3-day gate) start it here,
+            // never on a skipped opener.
+            try { if (want.def.onSurfaced) want.def.onSurfaced.call(this, vid); }
+            catch (e) { console.warn('[convo] onSurfaced', e); }
             // UNFINISHED BUSINESS (dialog rethink Phase 1, Steve 2026-10-08):
             // seed-driven conversations open one mood band cooler. Whatever
             // was left hanging, it wasn't nothing — the air is heavier.
@@ -2773,7 +2778,33 @@
           // resurfaces next conversation (or as a seed), never a dry line.
           if (!this.convoWouldBlock(vid, wline)) {
             c.want.stage = 1; // surfaced, in the opening beats
+            try { if (want.def.onSurfaced) want.def.onSurfaced.call(this, vid); }
+            catch (e) { console.warn('[convo] onSurfaced', e); }
             return { line: wline, thread: 'want', wantId: want.id };
+          }
+          // STALE OPENER (gap-closure 2026-10-17): every fresh variant is
+          // ledger-blocked — a long-lived want (seek_taken at trust 100 on
+          // day 100) would otherwise go permanently mute: the goal fallback
+          // hijacks the topic every conversation while the want stays
+          // "live" but can never surface. Reframe instead: the NPC names
+          // what's still on their mind. Defs supply state-aware reframes
+          // via staleOpener(vid); the generic fallback names the want
+          // plainly. Still ledger-checked — a blocked stale line falls
+          // through honestly.
+          let sline = null;
+          try {
+            sline = (typeof want.def.staleOpener === 'function')
+              ? want.def.staleOpener.call(this, vid)
+              : this.convoWantStaleOpener(vid, want);
+          } catch (e) { console.warn('[convo] staleOpener', e); sline = null; }
+          if (sline) {
+            const vsline = this.voiceLine(vid, sline);
+            if (!this.convoWouldBlock(vid, vsline)) {
+              c.want.stage = 1; // surfaced, in the opening beats
+              try { if (want.def.onSurfaced) want.def.onSurfaced.call(this, vid); }
+              catch (e) { console.warn('[convo] onSurfaced', e); }
+              return { line: vsline, thread: 'want', wantId: want.id };
+            }
           }
         }
       }

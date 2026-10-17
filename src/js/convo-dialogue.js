@@ -193,8 +193,13 @@
           if (said) {
             c.threadDryFor = null; // thread is alive — clear any stale dry marker
             // Beat composition: the beat acknowledges what was just said.
-            // Engaging with the thread engages the want behind it.
-            this.convoWantEngage(vid, 'engage');
+            // THREAD-COHERENT ENGAGEMENT (gap-closure 2026-10-17): engaging
+            // with the thread engages the want behind it — but only when the
+            // thread IS the want's. A goal-thread "tell me more" must not
+            // engage a live want that never surfaced (seek_taken went
+            // ledger-mute behind blocked openers, then resolved 'engaged'
+            // on 8 turns of legacy-goal content it never touched).
+            if (!c.thread || c.thread === 'want' || c.thread === 'small') this.convoWantEngage(vid, 'engage');
             // Trust: engaging builds it. SCENE (Phase 2): through the resolver.
             try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
             return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
@@ -279,8 +284,13 @@
         ]) || '"Thanks. ...Thanks for saying that."';
         const line = this.voiceLine ? this.voiceLine(vid, raw) : raw;
         this.sayLine(vid, line, { tag: 'comfort' });
-        // Comforting them engages their want (seek_comfort -> comforted).
-        this.convoWantEngage(vid, 'engage');
+        // Comforting them engages their want (seek_comfort -> comforted) —
+        // but only when the comfort is FOR the want: the want's own thread,
+        // or a comfort-kind want. Comforting a goal-thread NPC must not
+        // engage an unrelated live want (same false-engagement class as
+        // dlg:more — gap-closure 2026-10-17).
+        { const cw = (c.want && c.want.id) || null;
+          if (!c.thread || c.thread === 'want' || c.thread === 'small' || cw === 'seek_comfort') this.convoWantEngage(vid, 'engage'); }
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -296,7 +306,10 @@
         this.sayLine(vid, composed);
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:askwhy' }); } catch (e) {}
-        this.convoWantEngage(vid, 'engage');
+        // THREAD-COHERENT ENGAGEMENT (gap-closure 2026-10-17): "what
+        // happened?" continues the thread's story — it engages the live want
+        // only when the thread IS the want's (same guard as dlg:more).
+        if (!c.thread || c.thread === 'want' || c.thread === 'small') this.convoWantEngage(vid, 'engage');
         return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
