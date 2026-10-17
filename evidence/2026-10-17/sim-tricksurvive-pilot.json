@@ -1,0 +1,983 @@
+{
+ "preRegistration": "see scripts/sweep-tricksurvive-20261017.js header",
+ "summary": {
+  "control": {
+   "n": 16,
+   "attr": 93,
+   "attrW12": 92,
+   "national": 9,
+   "won": 0,
+   "surv": [
+    180,
+    114,
+    104,
+    180,
+    180,
+    180,
+    151,
+    127,
+    165,
+    136,
+    91,
+    113,
+    139,
+    180,
+    180,
+    154
+   ],
+   "sDeaths": 134,
+   "sCombat": 117,
+   "vCombat": 118,
+   "invites": 0,
+   "yields": 0,
+   "deathCauses": {
+    "combat": 117,
+    "contest": 7,
+    "dehydration": 4,
+    "sickness": 1,
+    "starvation": 3,
+    "the expedition": 2
+   },
+   "medianSurv": 154
+  },
+  "armed": {
+   "n": 16,
+   "attr": 54,
+   "attrW12": 53,
+   "national": 10,
+   "won": 0,
+   "surv": [
+    180,
+    180,
+    180,
+    124,
+    180,
+    180,
+    180,
+    180,
+    147,
+    180,
+    129,
+    129,
+    109,
+    180,
+    180,
+    180
+   ],
+   "sDeaths": 83,
+   "sCombat": 72,
+   "vCombat": 82,
+   "invites": 54,
+   "yields": 51,
+   "deathCauses": {
+    "combat": 72,
+    "starvation": 1,
+    "sickness": 2,
+    "contest": 4,
+    "dehydration": 3,
+    "the night": 1
+   },
+   "medianSurv": 180
+  }
+ },
+ "go": false,
+ "guardrails": {
+  "gSDeaths": true,
+  "gNational": true,
+  "gSurv": true,
+  "newModes": [
+   "the night"
+  ]
+ },
+ "rows": [
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3701,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 12,
+   "attrW12": 12,
+   "attrByVia": {
+    "player": 11,
+    "wild": 1
+   },
+   "attrByWave": {
+    "w1": 10,
+    "w2": 2
+   },
+   "scholarDeaths": 7,
+   "scholarCombatDeaths": 5,
+   "scholarDeathCauses": {
+    "combat": 5,
+    "contest": 2
+   },
+   "villagerCombatDeaths": 5,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3702,
+   "days": 114,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 2,
+    "w2": 2
+   },
+   "scholarDeaths": 7,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7
+   },
+   "villagerCombatDeaths": 7,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3703,
+   "days": 104,
+   "endReason": "village-lost",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 2,
+    "w2": 2
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7,
+    "dehydration": 1
+   },
+   "villagerCombatDeaths": 7,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3704,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 7,
+   "attrW12": 7,
+   "attrByVia": {
+    "player": 7
+   },
+   "attrByWave": {
+    "w1": 5,
+    "w2": 2
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "combat": 8
+   },
+   "villagerCombatDeaths": 8,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3705,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 1,
+    "w2": 3
+   },
+   "scholarDeaths": 11,
+   "scholarCombatDeaths": 9,
+   "scholarDeathCauses": {
+    "combat": 9,
+    "sickness": 1,
+    "contest": 1
+   },
+   "villagerCombatDeaths": 9,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3706,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 10,
+   "attrW12": 10,
+   "attrByVia": {
+    "player": 9,
+    "agency": 1
+   },
+   "attrByWave": {
+    "w1": 7,
+    "w2": 3
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 9,
+   "scholarDeathCauses": {
+    "combat": 9
+   },
+   "villagerCombatDeaths": 9,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3707,
+   "days": 151,
+   "endReason": "village-lost",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 3,
+   "attrW12": 3,
+   "attrByVia": {
+    "player": 3
+   },
+   "attrByWave": {
+    "w1": 1,
+    "w2": 2
+   },
+   "scholarDeaths": 5,
+   "scholarCombatDeaths": 4,
+   "scholarDeathCauses": {
+    "dehydration": 1,
+    "combat": 4
+   },
+   "villagerCombatDeaths": 4,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "leadfeast",
+   "gate": "0",
+   "seed": 3708,
+   "days": 127,
+   "endReason": "village-lost",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 3,
+   "attrW12": 3,
+   "attrByVia": {
+    "player": 3
+   },
+   "attrByWave": {
+    "w1": 2,
+    "w2": 1
+   },
+   "scholarDeaths": 10,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7,
+    "starvation": 2,
+    "contest": 1
+   },
+   "villagerCombatDeaths": 7,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3701,
+   "days": 165,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 7,
+   "attrW12": 7,
+   "attrByVia": {
+    "player": 5,
+    "wild": 1,
+    "contest": 1
+   },
+   "attrByWave": {
+    "w2": 2,
+    "w1": 5
+   },
+   "scholarDeaths": 10,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "combat": 8,
+    "contest": 1,
+    "the expedition": 1
+   },
+   "villagerCombatDeaths": 8,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3702,
+   "days": 136,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 1
+   },
+   "scholarDeaths": 11,
+   "scholarCombatDeaths": 11,
+   "scholarDeathCauses": {
+    "combat": 11
+   },
+   "villagerCombatDeaths": 11,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3703,
+   "days": 91,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 3,
+   "attrW12": 3,
+   "attrByVia": {
+    "player": 3
+   },
+   "attrByWave": {
+    "w1": 3
+   },
+   "scholarDeaths": 4,
+   "scholarCombatDeaths": 3,
+   "scholarDeathCauses": {
+    "combat": 3,
+    "contest": 1
+   },
+   "villagerCombatDeaths": 3,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3704,
+   "days": 113,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 3,
+    "contest": 1
+   },
+   "attrByWave": {
+    "w1": 3,
+    "w2": 1
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 9,
+   "scholarDeathCauses": {
+    "combat": 9
+   },
+   "villagerCombatDeaths": 10,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3705,
+   "days": 139,
+   "endReason": "village-lost",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 5,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 5
+   },
+   "attrByWave": {
+    "w1": 2,
+    "w2": 3
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6,
+    "starvation": 1,
+    "the expedition": 1
+   },
+   "villagerCombatDeaths": 6,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3706,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 11,
+   "attrW12": 11,
+   "attrByVia": {
+    "player": 10,
+    "contest": 1
+   },
+   "attrByWave": {
+    "w1": 7,
+    "w2": 4
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 8,
+   "scholarDeathCauses": {
+    "combat": 8,
+    "contest": 1
+   },
+   "villagerCombatDeaths": 8,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3707,
+   "days": 180,
+   "endReason": "survived",
+   "national": 0,
+   "won": 0,
+   "maxWave": 4,
+   "attr": 6,
+   "attrW12": 5,
+   "attrByVia": {
+    "player": 5,
+    "wild": 1
+   },
+   "attrByWave": {
+    "w1": 4,
+    "w2": 1,
+    "w3": 1
+   },
+   "scholarDeaths": 6,
+   "scholarCombatDeaths": 5,
+   "scholarDeathCauses": {
+    "dehydration": 1,
+    "combat": 5
+   },
+   "villagerCombatDeaths": 5,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "belongfeast",
+   "gate": "0",
+   "seed": 3708,
+   "days": 154,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 6,
+   "attrW12": 6,
+   "attrByVia": {
+    "player": 6
+   },
+   "attrByWave": {
+    "w2": 2,
+    "w1": 4
+   },
+   "scholarDeaths": 12,
+   "scholarCombatDeaths": 11,
+   "scholarDeathCauses": {
+    "combat": 11,
+    "dehydration": 1
+   },
+   "villagerCombatDeaths": 11,
+   "tsInvitesOk": 0,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3701,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 1,
+   "attrW12": 1,
+   "attrByVia": {
+    "player": 1
+   },
+   "attrByWave": {
+    "w2": 1
+   },
+   "scholarDeaths": 5,
+   "scholarCombatDeaths": 4,
+   "scholarDeathCauses": {
+    "combat": 4,
+    "starvation": 1
+   },
+   "villagerCombatDeaths": 5,
+   "tsInvitesOk": 4,
+   "tsYields": 2
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3702,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 7,
+   "attrW12": 7,
+   "attrByVia": {
+    "player": 6,
+    "wild": 1
+   },
+   "attrByWave": {
+    "w2": 3,
+    "w1": 4
+   },
+   "scholarDeaths": 6,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6
+   },
+   "villagerCombatDeaths": 6,
+   "tsInvitesOk": 3,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3703,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 12,
+   "attrW12": 12,
+   "attrByVia": {
+    "companion": 2,
+    "player": 7,
+    "wild": 3
+   },
+   "attrByWave": {
+    "w1": 8,
+    "w2": 4
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 9,
+   "scholarDeathCauses": {
+    "combat": 9
+   },
+   "villagerCombatDeaths": 9,
+   "tsInvitesOk": 4,
+   "tsYields": 24
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3704,
+   "days": 124,
+   "endReason": "village-lost",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 3,
+   "attrW12": 3,
+   "attrByVia": {
+    "companion": 2,
+    "wild": 1
+   },
+   "attrByWave": {
+    "w1": 3
+   },
+   "scholarDeaths": 5,
+   "scholarCombatDeaths": 5,
+   "scholarDeathCauses": {
+    "combat": 5
+   },
+   "villagerCombatDeaths": 6,
+   "tsInvitesOk": 5,
+   "tsYields": 4
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3705,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 0,
+   "attrW12": 0,
+   "attrByVia": {},
+   "attrByWave": {},
+   "scholarDeaths": 7,
+   "scholarCombatDeaths": 5,
+   "scholarDeathCauses": {
+    "combat": 5,
+    "sickness": 1,
+    "contest": 1
+   },
+   "villagerCombatDeaths": 5,
+   "tsInvitesOk": 3,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3706,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 2,
+   "attr": 0,
+   "attrW12": 0,
+   "attrByVia": {},
+   "attrByWave": {},
+   "scholarDeaths": 2,
+   "scholarCombatDeaths": 2,
+   "scholarDeathCauses": {
+    "combat": 2
+   },
+   "villagerCombatDeaths": 2,
+   "tsInvitesOk": 2,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3707,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 4,
+   "attrW12": 4,
+   "attrByVia": {
+    "player": 4
+   },
+   "attrByWave": {
+    "w1": 4
+   },
+   "scholarDeaths": 3,
+   "scholarCombatDeaths": 2,
+   "scholarDeathCauses": {
+    "dehydration": 1,
+    "combat": 2
+   },
+   "villagerCombatDeaths": 2,
+   "tsInvitesOk": 3,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-lead",
+   "gate": "1",
+   "seed": 3708,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 2,
+   "attrW12": 1,
+   "attrByVia": {
+    "contest": 1,
+    "wild": 1
+   },
+   "attrByWave": {
+    "w1": 1,
+    "w3": 1
+   },
+   "scholarDeaths": 4,
+   "scholarCombatDeaths": 3,
+   "scholarDeathCauses": {
+    "combat": 3,
+    "contest": 1
+   },
+   "villagerCombatDeaths": 4,
+   "tsInvitesOk": 2,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3701,
+   "days": 147,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 2,
+   "attrW12": 2,
+   "attrByVia": {
+    "player": 2
+   },
+   "attrByWave": {
+    "w2": 1,
+    "w1": 1
+   },
+   "scholarDeaths": 8,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7,
+    "contest": 1
+   },
+   "villagerCombatDeaths": 11,
+   "tsInvitesOk": 8,
+   "tsYields": 3
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3702,
+   "days": 180,
+   "endReason": "survived",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 9,
+   "attrW12": 9,
+   "attrByVia": {
+    "companion": 3,
+    "player": 6
+   },
+   "attrByWave": {
+    "w2": 8,
+    "w1": 1
+   },
+   "scholarDeaths": 5,
+   "scholarCombatDeaths": 4,
+   "scholarDeathCauses": {
+    "contest": 1,
+    "combat": 4
+   },
+   "villagerCombatDeaths": 4,
+   "tsInvitesOk": 2,
+   "tsYields": 12
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3703,
+   "days": 129,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 6,
+   "attrW12": 6,
+   "attrByVia": {
+    "wild": 1,
+    "player": 4,
+    "companion": 1
+   },
+   "attrByWave": {
+    "w1": 1,
+    "w2": 5
+   },
+   "scholarDeaths": 7,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6,
+    "dehydration": 1
+   },
+   "villagerCombatDeaths": 8,
+   "tsInvitesOk": 5,
+   "tsYields": 3
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3704,
+   "days": 129,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 2,
+   "attrW12": 2,
+   "attrByVia": {
+    "player": 2
+   },
+   "attrByWave": {
+    "w2": 2
+   },
+   "scholarDeaths": 6,
+   "scholarCombatDeaths": 6,
+   "scholarDeathCauses": {
+    "combat": 6
+   },
+   "villagerCombatDeaths": 6,
+   "tsInvitesOk": 5,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3705,
+   "days": 109,
+   "endReason": "village-lost",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 1,
+   "attrW12": 1,
+   "attrByVia": {
+    "player": 1
+   },
+   "attrByWave": {
+    "w1": 1
+   },
+   "scholarDeaths": 9,
+   "scholarCombatDeaths": 7,
+   "scholarDeathCauses": {
+    "combat": 7,
+    "sickness": 1,
+    "the night": 1
+   },
+   "villagerCombatDeaths": 8,
+   "tsInvitesOk": 2,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3706,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 2,
+   "attr": 1,
+   "attrW12": 1,
+   "attrByVia": {
+    "player": 1
+   },
+   "attrByWave": {
+    "w1": 1
+   },
+   "scholarDeaths": 1,
+   "scholarCombatDeaths": 1,
+   "scholarDeathCauses": {
+    "combat": 1
+   },
+   "villagerCombatDeaths": 1,
+   "tsInvitesOk": 2,
+   "tsYields": 2
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3707,
+   "days": 180,
+   "endReason": "survived",
+   "national": 0,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 2,
+   "attrW12": 2,
+   "attrByVia": {
+    "player": 2
+   },
+   "attrByWave": {
+    "w1": 1,
+    "w2": 1
+   },
+   "scholarDeaths": 2,
+   "scholarCombatDeaths": 1,
+   "scholarDeathCauses": {
+    "dehydration": 1,
+    "combat": 1
+   },
+   "villagerCombatDeaths": 1,
+   "tsInvitesOk": 1,
+   "tsYields": 0
+  },
+  {
+   "policy": "tricksurvive-belong",
+   "gate": "1",
+   "seed": 3708,
+   "days": 180,
+   "endReason": "survived",
+   "national": 1,
+   "won": 0,
+   "maxWave": 3,
+   "attr": 2,
+   "attrW12": 2,
+   "attrByVia": {
+    "player": 2
+   },
+   "attrByWave": {
+    "w1": 1,
+    "w2": 1
+   },
+   "scholarDeaths": 4,
+   "scholarCombatDeaths": 4,
+   "scholarDeathCauses": {
+    "combat": 4
+   },
+   "villagerCombatDeaths": 4,
+   "tsInvitesOk": 3,
+   "tsYields": 1
+  }
+ ]
+}
