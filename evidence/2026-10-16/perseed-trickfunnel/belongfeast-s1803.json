@@ -1,0 +1,419 @@
+{
+ "seed": 1803,
+ "policyId": "belongfeast",
+ "arm": "census",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1, SEATDRIVE=0 explicit; NODEWITNESS unset)",
+ "days": 57,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave3Reached": 1,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 32,
+ "fieldDeaths": 27,
+ "playerDeaths": 5,
+ "deathCauses": {
+  "expedition": 4,
+  "villager combat": 5,
+  "combat": 15,
+  "tick": 1,
+  "monster": 1,
+  "sickness": 3,
+  "experiment": 1,
+  "a wound that wouldn't close": 2
+ },
+ "nTbFights": 14,
+ "nFunnelRows": 8,
+ "nUnattributed": 0,
+ "kinds": {
+  "move_windup": {
+   "contact": 1,
+   "known_at_start": 0,
+   "condition_met": 1,
+   "performed": 1,
+   "kill_attributed": 0,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "gallowdeer": 1
+   }
+  },
+  "strike_windup": {
+   "contact": 2,
+   "known_at_start": 1,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 2,
+   "dismissed": 1,
+   "unattributed": 0,
+   "species": {
+    "mirrormoth": 1,
+    "anaconda_empress": 1
+   }
+  },
+  "eyes": {
+   "contact": 1,
+   "known_at_start": 1,
+   "condition_met": 1,
+   "performed": 1,
+   "kill_attributed": 1,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "cliffhanger": 1
+   }
+  },
+  "shout": {
+   "contact": 2,
+   "known_at_start": 0,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 2,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "belltoad": 1,
+    "sanjun": 1
+   }
+  },
+  "strike_recovery": {
+   "contact": 1,
+   "known_at_start": 1,
+   "condition_met": 1,
+   "performed": 1,
+   "kill_attributed": 1,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "giant_mosquito": 1
+   }
+  },
+  "wait": {
+   "contact": 1,
+   "known_at_start": 0,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "moderator": 1
+   }
+  }
+ },
+ "rows": [
+  {
+   "fightSeq": 1,
+   "day": 9,
+   "started": true,
+   "result": "lost",
+   "mid": "gallowdeer",
+   "kind": "move_windup",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 1,
+   "discovered_in_fight": 1,
+   "condition_met": 1,
+   "n_hits": 1,
+   "performed": 1,
+   "n_perfs": 1,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 2,
+   "day": 29,
+   "started": true,
+   "result": "won",
+   "mid": "mirrormoth",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 3,
+   "day": 32,
+   "started": true,
+   "result": "won",
+   "mid": "cliffhanger",
+   "kind": "eyes",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 1,
+   "performed": 1,
+   "n_perfs": 1,
+   "kill_attributed": 1,
+   "attr_by": "gen_lp786m7",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 4,
+   "day": 36,
+   "started": true,
+   "result": "won",
+   "mid": "belltoad",
+   "kind": "shout",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 5,
+   "day": 36,
+   "started": true,
+   "result": "won",
+   "mid": "giant_mosquito",
+   "kind": "strike_recovery",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 1,
+   "performed": 1,
+   "n_perfs": 1,
+   "kill_attributed": 1,
+   "attr_by": "gen_lp786m7",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 8,
+   "day": 45,
+   "started": true,
+   "result": "won",
+   "mid": "sanjun",
+   "kind": "shout",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 9,
+   "day": 45,
+   "started": true,
+   "result": "routed",
+   "mid": "anaconda_empress",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 1,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 14,
+   "day": 59,
+   "started": true,
+   "result": "lost",
+   "mid": "moderator",
+   "kind": "wait",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0
+  }
+ ],
+ "nCheckCalls": 286,
+ "nHits": 3,
+ "nDiscoveries": 17,
+ "discoveries": [
+  {
+   "seq": 0,
+   "day": 3,
+   "id": "mirrormoth",
+   "via": "taught"
+  },
+  {
+   "seq": 0,
+   "day": 7,
+   "id": "cliffhanger",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 9,
+   "id": "gallowdeer",
+   "via": "trick"
+  },
+  {
+   "seq": 1,
+   "day": 10,
+   "id": "hummice",
+   "via": "taught"
+  },
+  {
+   "seq": 1,
+   "day": 11,
+   "id": "nightlight_catfish",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 11,
+   "id": "ducks_in_a_row",
+   "via": "taught"
+  },
+  {
+   "seq": 1,
+   "day": 12,
+   "id": "alien_tick",
+   "via": "taught"
+  },
+  {
+   "seq": 1,
+   "day": 17,
+   "id": "murkcap",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 17,
+   "id": "hushwolf",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 20,
+   "id": "nightcourt",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 26,
+   "id": "voice_mimic_radio",
+   "via": "taught"
+  },
+  {
+   "seq": 1,
+   "day": 27,
+   "id": "giant_mosquito",
+   "via": "taught"
+  },
+  {
+   "seq": 2,
+   "day": 29,
+   "id": "glasswing",
+   "via": "taught"
+  },
+  {
+   "seq": 3,
+   "day": 33,
+   "id": "bright_idea",
+   "via": "observed"
+  },
+  {
+   "seq": 5,
+   "day": 36,
+   "id": "belltoad",
+   "via": "taught"
+  },
+  {
+   "seq": 9,
+   "day": 45,
+   "id": "sanjun",
+   "via": "taught"
+  },
+  {
+   "seq": 11,
+   "day": 51,
+   "id": "redactor",
+   "via": "scholar-observed"
+  }
+ ],
+ "monsterCounters": [
+  "mirrormoth",
+  "cliffhanger",
+  "gallowdeer",
+  "hummice",
+  "nightlight_catfish",
+  "ducks_in_a_row",
+  "alien_tick",
+  "murkcap",
+  "hushwolf",
+  "nightcourt",
+  "voice_mimic_radio",
+  "giant_mosquito",
+  "glasswing",
+  "bright_idea",
+  "belltoad",
+  "sanjun"
+ ],
+ "nSayBeats": 172
+}

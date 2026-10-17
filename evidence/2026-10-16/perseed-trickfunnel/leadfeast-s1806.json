@@ -1,0 +1,664 @@
+{
+ "seed": 1806,
+ "policyId": "leadfeast",
+ "arm": "census",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1, SEATDRIVE=0 explicit; NODEWITNESS unset)",
+ "days": 130,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave3Reached": 1,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 38,
+ "fieldDeaths": 34,
+ "playerDeaths": 4,
+ "deathCauses": {
+  "villager combat": 10,
+  "monster": 6,
+  "combat": 19,
+  "expedition": 1,
+  "the expedition": 1,
+  "starvation": 1
+ },
+ "nTbFights": 17,
+ "nFunnelRows": 14,
+ "nUnattributed": 0,
+ "kinds": {
+  "strike_windup": {
+   "contact": 4,
+   "known_at_start": 4,
+   "condition_met": 2,
+   "performed": 2,
+   "kill_attributed": 2,
+   "survived": 3,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "drumbelly_tanuki": 2,
+    "anaconda_empress": 2
+   }
+  },
+  "move_x2": {
+   "contact": 3,
+   "known_at_start": 0,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 2,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "landlord": 1,
+    "warranty_caller": 1,
+    "review_drone": 1
+   }
+  },
+  "keep_distance": {
+   "contact": 1,
+   "known_at_start": 0,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 1,
+   "dismissed": 1,
+   "unattributed": 0,
+   "species": {
+    "bright_idea": 1
+   }
+  },
+  "fresh_weapon": {
+   "contact": 1,
+   "known_at_start": 1,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "understudy": 1
+   }
+  },
+  "sidestep": {
+   "contact": 1,
+   "known_at_start": 0,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "white_noise_heron": 1
+   }
+  },
+  "move_windup": {
+   "contact": 2,
+   "known_at_start": 0,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 2,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "glasswing": 1,
+    "gallowdeer": 1
+   }
+  },
+  "strike_recovery": {
+   "contact": 2,
+   "known_at_start": 1,
+   "condition_met": 2,
+   "performed": 2,
+   "kill_attributed": 2,
+   "survived": 2,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "giant_mosquito": 2
+   }
+  }
+ },
+ "rows": [
+  {
+   "fightSeq": 1,
+   "day": 16,
+   "started": true,
+   "result": "won",
+   "mid": "drumbelly_tanuki",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 2,
+   "performed": 1,
+   "n_perfs": 2,
+   "kill_attributed": 1,
+   "attr_by": "gen_gr6x9dy",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 2,
+   "day": 27,
+   "started": true,
+   "result": "lost",
+   "mid": "anaconda_empress",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 3,
+   "day": 34,
+   "started": true,
+   "result": "won",
+   "mid": "anaconda_empress",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 4,
+   "day": 34,
+   "started": true,
+   "result": "won",
+   "mid": "landlord",
+   "kind": "move_x2",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 5,
+   "day": 41,
+   "started": true,
+   "result": "routed",
+   "mid": "bright_idea",
+   "kind": "keep_distance",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 1,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 6,
+   "day": 46,
+   "started": true,
+   "result": "won",
+   "mid": "drumbelly_tanuki",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 1,
+   "performed": 1,
+   "n_perfs": 1,
+   "kill_attributed": 1,
+   "attr_by": "hannah_kim",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 7,
+   "day": 46,
+   "started": true,
+   "result": "won",
+   "mid": "understudy",
+   "kind": "fresh_weapon",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 8,
+   "day": 48,
+   "started": true,
+   "result": "won",
+   "mid": "white_noise_heron",
+   "kind": "sidestep",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 9,
+   "day": 55,
+   "started": true,
+   "result": "won",
+   "mid": "warranty_caller",
+   "kind": "move_x2",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 12,
+   "day": 73,
+   "started": true,
+   "result": "won",
+   "mid": "glasswing",
+   "kind": "move_windup",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 13,
+   "day": 73,
+   "started": true,
+   "result": "won",
+   "mid": "giant_mosquito",
+   "kind": "strike_recovery",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 1,
+   "discovered_in_fight": 1,
+   "condition_met": 1,
+   "n_hits": 1,
+   "performed": 1,
+   "n_perfs": 1,
+   "kill_attributed": 1,
+   "attr_by": "hannah_kim",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 15,
+   "day": 96,
+   "started": true,
+   "result": "lost",
+   "mid": "review_drone",
+   "kind": "move_x2",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 16,
+   "day": 104,
+   "started": true,
+   "result": "won",
+   "mid": "giant_mosquito",
+   "kind": "strike_recovery",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 2,
+   "performed": 1,
+   "n_perfs": 2,
+   "kill_attributed": 1,
+   "attr_by": "carlos_diaz",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 17,
+   "day": 111,
+   "started": true,
+   "result": "won",
+   "mid": "gallowdeer",
+   "kind": "move_windup",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  }
+ ],
+ "nCheckCalls": 133,
+ "nHits": 6,
+ "nDiscoveries": 32,
+ "discoveries": [
+  {
+   "seq": 0,
+   "day": 7,
+   "id": "anaconda_empress",
+   "via": "observed"
+  },
+  {
+   "seq": 0,
+   "day": 8,
+   "id": "living_wire",
+   "via": "taught"
+  },
+  {
+   "seq": 0,
+   "day": 13,
+   "id": "drumbelly_tanuki",
+   "via": "observed"
+  },
+  {
+   "seq": 0,
+   "day": 15,
+   "id": "sweeps_week",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 19,
+   "id": "mirrormoth",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 21,
+   "id": "sanjun",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 21,
+   "id": "hushwolf",
+   "via": "taught"
+  },
+  {
+   "seq": 1,
+   "day": 24,
+   "id": "hummice",
+   "via": "taught"
+  },
+  {
+   "seq": 2,
+   "day": 28,
+   "id": "lockpick_raccoon",
+   "via": "observed"
+  },
+  {
+   "seq": 2,
+   "day": 28,
+   "id": "moderator",
+   "via": "observed"
+  },
+  {
+   "seq": 2,
+   "day": 33,
+   "id": "understudy",
+   "via": "observed"
+  },
+  {
+   "seq": 4,
+   "day": 34,
+   "id": "landlord",
+   "via": "taught"
+  },
+  {
+   "seq": 4,
+   "day": 35,
+   "id": "paparazzo",
+   "via": "taught"
+  },
+  {
+   "seq": 4,
+   "day": 37,
+   "id": "union_rep",
+   "via": "observed"
+  },
+  {
+   "seq": 5,
+   "day": 41,
+   "id": "alien_tick",
+   "via": "taught"
+  },
+  {
+   "seq": 5,
+   "day": 43,
+   "id": "bright_idea",
+   "via": "taught"
+  },
+  {
+   "seq": 5,
+   "day": 44,
+   "id": "speedbump_turtle",
+   "via": "observed"
+  },
+  {
+   "seq": 8,
+   "day": 48,
+   "id": "white_noise_heron",
+   "via": "taught"
+  },
+  {
+   "seq": 8,
+   "day": 51,
+   "id": "callback",
+   "via": "observed"
+  },
+  {
+   "seq": 8,
+   "day": 53,
+   "id": "voice_mimic_radio",
+   "via": "observed"
+  },
+  {
+   "seq": 9,
+   "day": 55,
+   "id": "warranty_caller",
+   "via": "taught"
+  },
+  {
+   "seq": 10,
+   "day": 65,
+   "id": "murkcap",
+   "via": "observed"
+  },
+  {
+   "seq": 10,
+   "day": 71,
+   "id": "gavel",
+   "via": "observed"
+  },
+  {
+   "seq": 13,
+   "day": 73,
+   "id": "giant_mosquito",
+   "via": "trick"
+  },
+  {
+   "seq": 13,
+   "day": 73,
+   "id": "nightlight_catfish",
+   "via": "taught"
+  },
+  {
+   "seq": 13,
+   "day": 74,
+   "id": "glasswing",
+   "via": "taught"
+  },
+  {
+   "seq": 13,
+   "day": 88,
+   "id": "spool",
+   "via": "observed"
+  },
+  {
+   "seq": 13,
+   "day": 94,
+   "id": "terms_of_service",
+   "via": "observed"
+  },
+  {
+   "seq": 13,
+   "day": 94,
+   "id": "ad_break",
+   "via": "observed"
+  },
+  {
+   "seq": 15,
+   "day": 101,
+   "id": "redactor",
+   "via": "observed"
+  },
+  {
+   "seq": 17,
+   "day": 111,
+   "id": "gallowdeer",
+   "via": "taught"
+  },
+  {
+   "seq": 17,
+   "day": 116,
+   "id": "heckler",
+   "via": "observed"
+  }
+ ],
+ "monsterCounters": [
+  "anaconda_empress",
+  "living_wire",
+  "drumbelly_tanuki",
+  "sweeps_week",
+  "mirrormoth",
+  "sanjun",
+  "hushwolf",
+  "hummice",
+  "lockpick_raccoon",
+  "moderator",
+  "understudy",
+  "landlord",
+  "paparazzo",
+  "union_rep",
+  "alien_tick",
+  "bright_idea",
+  "speedbump_turtle",
+  "white_noise_heron",
+  "voice_mimic_radio",
+  "warranty_caller",
+  "murkcap",
+  "giant_mosquito",
+  "nightlight_catfish",
+  "glasswing",
+  "gallowdeer",
+  "heckler"
+ ],
+ "nSayBeats": 502
+}

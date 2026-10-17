@@ -1,0 +1,654 @@
+{
+ "seed": 1805,
+ "policyId": "leadfeast",
+ "arm": "census",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1, SEATDRIVE=0 explicit; NODEWITNESS unset)",
+ "days": 180,
+ "endReason": "survived",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave3Reached": 1,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 42,
+ "fieldDeaths": 36,
+ "playerDeaths": 6,
+ "deathCauses": {
+  "villager combat": 6,
+  "monster": 7,
+  "combat": 28,
+  "lockjaw": 1
+ },
+ "nTbFights": 30,
+ "nFunnelRows": 14,
+ "nUnattributed": 0,
+ "kinds": {
+  "keep_distance": {
+   "contact": 3,
+   "known_at_start": 2,
+   "condition_met": 1,
+   "performed": 1,
+   "kill_attributed": 1,
+   "survived": 3,
+   "dismissed": 2,
+   "unattributed": 0,
+   "species": {
+    "nightlight_catfish": 1,
+    "bright_idea": 1,
+    "murkcap": 1
+   }
+  },
+  "wait": {
+   "contact": 1,
+   "known_at_start": 0,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "moderator": 1
+   }
+  },
+  "move_x2": {
+   "contact": 2,
+   "known_at_start": 1,
+   "condition_met": 1,
+   "performed": 1,
+   "kill_attributed": 1,
+   "survived": 2,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "review_drone": 2
+   }
+  },
+  "sidestep": {
+   "contact": 3,
+   "known_at_start": 1,
+   "condition_met": 1,
+   "performed": 1,
+   "kill_attributed": 1,
+   "survived": 3,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "white_noise_heron": 1,
+    "dustboar": 1,
+    "nevermore": 1
+   }
+  },
+  "strike_lead": {
+   "contact": 2,
+   "known_at_start": 2,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 2,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "hushwolf": 2
+   }
+  },
+  "strike_windup": {
+   "contact": 2,
+   "known_at_start": 2,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 2,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "anaconda_empress": 1,
+    "mirrormoth": 1
+   }
+  },
+  "fresh_weapon": {
+   "contact": 1,
+   "known_at_start": 1,
+   "condition_met": 0,
+   "performed": 0,
+   "kill_attributed": 0,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0,
+   "species": {
+    "understudy": 1
+   }
+  }
+ },
+ "rows": [
+  {
+   "fightSeq": 1,
+   "day": 14,
+   "started": true,
+   "result": "won",
+   "mid": "nightlight_catfish",
+   "kind": "keep_distance",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 1,
+   "performed": 1,
+   "n_perfs": 1,
+   "kill_attributed": 1,
+   "attr_by": "gen_372mji2",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 2,
+   "day": 27,
+   "started": true,
+   "result": "lost",
+   "mid": "moderator",
+   "kind": "wait",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 0,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 3,
+   "day": 34,
+   "started": true,
+   "result": "won",
+   "mid": "review_drone",
+   "kind": "move_x2",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 4,
+   "day": 41,
+   "started": true,
+   "result": "routed",
+   "mid": "bright_idea",
+   "kind": "keep_distance",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 1,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 5,
+   "day": 48,
+   "started": true,
+   "result": "won",
+   "mid": "white_noise_heron",
+   "kind": "sidestep",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 6,
+   "day": 55,
+   "started": true,
+   "result": "won",
+   "mid": "review_drone",
+   "kind": "move_x2",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 3,
+   "performed": 1,
+   "n_perfs": 3,
+   "kill_attributed": 1,
+   "attr_by": "gen_3td1zwo",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 11,
+   "day": 83,
+   "started": true,
+   "result": "won",
+   "mid": "dustboar",
+   "kind": "sidestep",
+   "contact": 1,
+   "known_at_start": 0,
+   "known_at_end": 0,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 15,
+   "day": 114,
+   "started": true,
+   "result": "won",
+   "mid": "hushwolf",
+   "kind": "strike_lead",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 16,
+   "day": 115,
+   "started": true,
+   "result": "won",
+   "mid": "hushwolf",
+   "kind": "strike_lead",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 22,
+   "day": 144,
+   "started": true,
+   "result": "won",
+   "mid": "nevermore",
+   "kind": "sidestep",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 1,
+   "n_hits": 1,
+   "performed": 1,
+   "n_perfs": 1,
+   "kill_attributed": 1,
+   "attr_by": "amina_diallo",
+   "attr_via": "player",
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 23,
+   "day": 144,
+   "started": true,
+   "result": "won",
+   "mid": "anaconda_empress",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 24,
+   "day": 145,
+   "started": true,
+   "result": "won",
+   "mid": "mirrormoth",
+   "kind": "strike_windup",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 25,
+   "day": 146,
+   "started": true,
+   "result": "won",
+   "mid": "understudy",
+   "kind": "fresh_weapon",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 0,
+   "unattributed": 0
+  },
+  {
+   "fightSeq": 26,
+   "day": 157,
+   "started": true,
+   "result": "routed",
+   "mid": "murkcap",
+   "kind": "keep_distance",
+   "contact": 1,
+   "known_at_start": 1,
+   "known_at_end": 1,
+   "discovered_in_fight": 0,
+   "condition_met": 0,
+   "n_hits": 0,
+   "performed": 0,
+   "n_perfs": 0,
+   "kill_attributed": 0,
+   "attr_by": null,
+   "attr_via": null,
+   "survived": 1,
+   "dismissed": 1,
+   "unattributed": 0
+  }
+ ],
+ "nCheckCalls": 225,
+ "nHits": 5,
+ "nDiscoveries": 31,
+ "discoveries": [
+  {
+   "seq": 0,
+   "day": 4,
+   "id": "nevermore",
+   "via": "observed"
+  },
+  {
+   "seq": 0,
+   "day": 7,
+   "id": "nightlight_catfish",
+   "via": "observed"
+  },
+  {
+   "seq": 0,
+   "day": 9,
+   "id": "murkcap",
+   "via": "observed"
+  },
+  {
+   "seq": 0,
+   "day": 11,
+   "id": "gallowdeer",
+   "via": "observed"
+  },
+  {
+   "seq": 0,
+   "day": 13,
+   "id": "cliffhanger",
+   "via": "observed"
+  },
+  {
+   "seq": 0,
+   "day": 13,
+   "id": "anaconda_empress",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 14,
+   "id": "sweeps_week",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 16,
+   "id": "lockpick_raccoon",
+   "via": "taught"
+  },
+  {
+   "seq": 1,
+   "day": 20,
+   "id": "hushwolf",
+   "via": "observed"
+  },
+  {
+   "seq": 1,
+   "day": 23,
+   "id": "giant_mosquito",
+   "via": "taught"
+  },
+  {
+   "seq": 1,
+   "day": 26,
+   "id": "heckler",
+   "via": "observed"
+  },
+  {
+   "seq": 2,
+   "day": 27,
+   "id": "understudy",
+   "via": "observed"
+  },
+  {
+   "seq": 3,
+   "day": 34,
+   "id": "review_drone",
+   "via": "taught"
+  },
+  {
+   "seq": 3,
+   "day": 40,
+   "id": "union_rep",
+   "via": "observed"
+  },
+  {
+   "seq": 5,
+   "day": 48,
+   "id": "white_noise_heron",
+   "via": "taught"
+  },
+  {
+   "seq": 5,
+   "day": 49,
+   "id": "bright_idea",
+   "via": "taught"
+  },
+  {
+   "seq": 5,
+   "day": 52,
+   "id": "mirrormoth",
+   "via": "taught"
+  },
+  {
+   "seq": 9,
+   "day": 76,
+   "id": "living_wire",
+   "via": "observed"
+  },
+  {
+   "seq": 9,
+   "day": 76,
+   "id": "buffering",
+   "via": "observed"
+  },
+  {
+   "seq": 10,
+   "day": 77,
+   "id": "redactor",
+   "via": "observed"
+  },
+  {
+   "seq": 10,
+   "day": 78,
+   "id": "rut_king",
+   "via": "observed"
+  },
+  {
+   "seq": 11,
+   "day": 83,
+   "id": "dustboar",
+   "via": "taught"
+  },
+  {
+   "seq": 11,
+   "day": 87,
+   "id": "drumbelly_tanuki",
+   "via": "observed"
+  },
+  {
+   "seq": 11,
+   "day": 89,
+   "id": "gavel",
+   "via": "observed"
+  },
+  {
+   "seq": 13,
+   "day": 103,
+   "id": "spool",
+   "via": "observed"
+  },
+  {
+   "seq": 15,
+   "day": 114,
+   "id": "ad_break",
+   "via": "observed"
+  },
+  {
+   "seq": 17,
+   "day": 122,
+   "id": "callback",
+   "via": "observed"
+  },
+  {
+   "seq": 18,
+   "day": 131,
+   "id": "nielsen",
+   "via": "observed"
+  },
+  {
+   "seq": 25,
+   "day": 147,
+   "id": "chorus_line",
+   "via": "observed"
+  },
+  {
+   "seq": 29,
+   "day": 177,
+   "id": "landlord",
+   "via": "observed"
+  },
+  {
+   "seq": 29,
+   "day": 177,
+   "id": "memory_projector",
+   "via": "observed"
+  }
+ ],
+ "monsterCounters": [
+  "nevermore",
+  "nightlight_catfish",
+  "murkcap",
+  "gallowdeer",
+  "cliffhanger",
+  "anaconda_empress",
+  "sweeps_week",
+  "lockpick_raccoon",
+  "hushwolf",
+  "giant_mosquito",
+  "heckler",
+  "understudy",
+  "review_drone",
+  "union_rep",
+  "white_noise_heron",
+  "bright_idea",
+  "mirrormoth",
+  "living_wire",
+  "rut_king",
+  "dustboar",
+  "drumbelly_tanuki",
+  "landlord",
+  "memory_projector"
+ ],
+ "nSayBeats": 736
+}
