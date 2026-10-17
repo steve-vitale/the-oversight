@@ -1,0 +1,131 @@
+{
+ "seed": 1913,
+ "policyId": "belongfeast",
+ "arm": "pyrrhic-verify",
+ "condition": "control",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1, TRIBFLOOR off, SEATDRIVE=0 explicit; NODEWITNESS unset) + pyrrhic fix OFF (runtime no-op)",
+ "gameCommit": "7683f49399c39f1a7ce70c93ca2c61847c9a832f",
+ "days": 180,
+ "endReason": "survived",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "nTbFights": 15,
+ "nPerf": 6,
+ "nAttr": 1,
+ "nUnattr": 5,
+ "nReverse": 0,
+ "nPyrrhic": 1,
+ "nPyrrhicAttr": 0,
+ "nPyrrhicUnattr": 1,
+ "classCounts": {
+  "b2": 3,
+  "a2": 1,
+  "b1": 1
+ },
+ "pyrrhicRows": [
+  {
+   "seq": 4,
+   "day": 29,
+   "result": "lost",
+   "mid": "ducks_in_a_row",
+   "kind": "strike_nonhead",
+   "nPerfs": 4,
+   "pAlive": 0,
+   "midDead": 6,
+   "midAlive": 8,
+   "killAttributed": 0,
+   "wklSame": []
+  }
+ ],
+ "codexStages": {
+  "ducks_in_a_row": "slain"
+ },
+ "villageSlain": {
+  "ducks_in_a_row": 1
+ },
+ "fights": [
+  {
+   "cls": "b2",
+   "sub": "target-fled",
+   "note": "monsters routed, none of this mid died in the fight",
+   "seq": 1,
+   "day": 8,
+   "result": "routed",
+   "mid": "hushwolf",
+   "kind": "strike_lead",
+   "nPerfs": 2,
+   "pAlive": 1,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "a2",
+   "sub": "path-drop",
+   "note": "monster died but result=lost forfeits the per-kill ledger (pyrrhic/design-forfeit)",
+   "seq": 4,
+   "day": 29,
+   "result": "lost",
+   "mid": "ducks_in_a_row",
+   "kind": "strike_nonhead",
+   "nPerfs": 4,
+   "pAlive": 0,
+   "midDead": 6,
+   "midAlive": 8,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "b2",
+   "sub": "target-fled",
+   "note": "monsters routed, none of this mid died in the fight",
+   "seq": 5,
+   "day": 36,
+   "result": "routed",
+   "mid": "nightcourt",
+   "kind": "move_x2",
+   "nPerfs": 1,
+   "pAlive": 1,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "b1",
+   "sub": "performer-died",
+   "note": "scholar dead, monster alive at tbEnd",
+   "seq": 13,
+   "day": 169,
+   "result": "lost",
+   "mid": "voice_mimic_radio",
+   "kind": "keep_distance",
+   "nPerfs": 3,
+   "pAlive": 0,
+   "midDead": 0,
+   "midAlive": 2,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "b2",
+   "sub": "target-fled",
+   "note": "monsters routed, none of this mid died in the fight",
+   "seq": 14,
+   "day": 171,
+   "result": "routed",
+   "mid": "heckler",
+   "kind": "wait",
+   "nPerfs": 1,
+   "pAlive": 1,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  }
+ ]
+}

@@ -1,0 +1,131 @@
+{
+ "seed": 1911,
+ "policyId": "belongfeast",
+ "arm": "pyrrhic-verify",
+ "condition": "control",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1, TRIBFLOOR off, SEATDRIVE=0 explicit; NODEWITNESS unset) + pyrrhic fix OFF (runtime no-op)",
+ "gameCommit": "7683f49399c39f1a7ce70c93ca2c61847c9a832f",
+ "days": 155,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "nTbFights": 41,
+ "nPerf": 11,
+ "nAttr": 6,
+ "nUnattr": 5,
+ "nReverse": 0,
+ "nPyrrhic": 1,
+ "nPyrrhicAttr": 0,
+ "nPyrrhicUnattr": 1,
+ "classCounts": {
+  "b1": 3,
+  "b2": 1,
+  "a2": 1
+ },
+ "pyrrhicRows": [
+  {
+   "seq": 24,
+   "day": 101,
+   "result": "lost",
+   "mid": "ducks_in_a_row",
+   "kind": "strike_nonhead",
+   "nPerfs": 4,
+   "pAlive": 0,
+   "midDead": 5,
+   "midAlive": 9,
+   "killAttributed": 0,
+   "wklSame": []
+  }
+ ],
+ "codexStages": {
+  "ducks_in_a_row": "observed"
+ },
+ "villageSlain": {
+  "ducks_in_a_row": 0
+ },
+ "fights": [
+  {
+   "cls": "b1",
+   "sub": "performer-died",
+   "note": "scholar dead, monster alive at tbEnd",
+   "seq": 4,
+   "day": 42,
+   "result": "lost",
+   "mid": "paparazzo",
+   "kind": "move_windup",
+   "nPerfs": 2,
+   "pAlive": 0,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "b1",
+   "sub": "performer-died",
+   "note": "scholar dead, monster alive at tbEnd",
+   "seq": 7,
+   "day": 51,
+   "result": "lost",
+   "mid": "moderator",
+   "kind": "wait",
+   "nPerfs": 1,
+   "pAlive": 0,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "b2",
+   "sub": "target-fled",
+   "note": "monsters routed, none of this mid died in the fight",
+   "seq": 9,
+   "day": 57,
+   "result": "routed",
+   "mid": "hushwolf",
+   "kind": "strike_lead",
+   "nPerfs": 2,
+   "pAlive": 1,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "b1",
+   "sub": "performer-died",
+   "note": "scholar dead, monster alive at tbEnd",
+   "seq": 13,
+   "day": 73,
+   "result": "lost",
+   "mid": "paparazzo",
+   "kind": "move_windup",
+   "nPerfs": 1,
+   "pAlive": 0,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "a2",
+   "sub": "path-drop",
+   "note": "monster died but result=lost forfeits the per-kill ledger (pyrrhic/design-forfeit)",
+   "seq": 24,
+   "day": 101,
+   "result": "lost",
+   "mid": "ducks_in_a_row",
+   "kind": "strike_nonhead",
+   "nPerfs": 4,
+   "pAlive": 0,
+   "midDead": 5,
+   "midAlive": 9,
+   "killAttributed": 0,
+   "wklSame": []
+  }
+ ]
+}
