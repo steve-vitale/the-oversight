@@ -9,6 +9,19 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Contest win accounting (2026-10-16): actual phase choices could award
+contestWin before judgment, duplicating wins and crediting failed moots.
+Phase cues now defer to existing terminal victory settlement; other
+notability, XP, rates, costs and policies stay.21 real-caller checks plus10
+passive-observer checks pass; full971 is green. The source-bound16/64 panels
+are mixed and retain death/class/gear warnings. See the dated
+contest-credit-audit.md. New scripts/contest-reward-audit.js records actual
+public choices, participant versus prize recipient, requested tiers and real
+delivery without game queries. Prepared native non-god six-win→tier3 Phase
+blade→Equip→erased-live-state/load is proved; natural cadence/viability is
+not established by that fixture. Keep the seven authored deeds/three proxies
+and Garden/reactor questions open.
+
 Between fitting deed (2026-10-16, needs-eyes): the actual person must leave
 alive while a fresh monster that opened above their full HP capacity still
 lives. Tactical individual retreat/barrier exits and real field evasion or
@@ -19,7 +32,7 @@ Seven authored deeds/three proxies now remain; Garden/reactor questions are
 unchanged. Read the dated between-deed-audit.md and all23 metrics before
 another survival or class-access change. Broad scale/parity remains open.
 
-Concrete reward follow-up from that holdout: caregiver10018 wins earlier94
+Earlier reward follow-up from that holdout: caregiver10018 wins earlier94
 instead of131 without the proxy Between, yet loses player tier3+ gear. The
 old run's contest grants83/86/88 predate94; this cannot be attributed only to
 shorter exposure. Audit actual matched-day non-god contest/favor/reward and

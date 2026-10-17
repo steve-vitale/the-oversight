@@ -4,6 +4,27 @@ Steve, 2026-10-15: "Winning shouldn’t be easy. A reduction in win rate is caus
 
 ## How to use this register
 
+Contest win-credit correction (2026-10-16): authored phase
+`do.notability: contestWin` is a cue, not a settled victory. Only the existing
+actual winner settlement now adds its one mark. Losing or nonterminal phases
+do not mint it. No historical ledger is reset or inferred. This affects the
+existing broadcast thresholds3/6 real wins (tier2/3),8-win apex eligibility,
+casting weight and later contest/fan rewards. Favor thresholds40/70 and100,
+item chances, risk, XP and all prices remain unchanged. NPC result credit
+remains actual-outcome based. The fixed ledger changes downstream RNG paths;
+do not equate fewer marks with less earned activity.
+
+Matched64 holdout wins47→44/21→21/22→25/34→33, deaths89→76/79→85/57→54/43→41,
+community losses14→12/20→23/28→24/15→16 (capable/maker/merchant/caregiver).
+Class access, maker survival/community and tier3 gear warnings remain.
+The16 screen instead has capable wins12→16 with deaths18→23: higher wins
+also require review. All23 metrics, conditional fixed-calendar windows,
+adverse/favorable exact cases and actual prize requests/deliveries are in
+../evidence/2026-10-16/contest-credit-audit.md. Retain the factual accounting
+repair without a compensating prize or survival buff. The prepared phone
+earns and equips tier3 gear without godhood after six real noncombat wins;
+its repeated schedule is not a natural opportunity denominator.
+
 Between gate (2026-10-16, needs-eyes): a fresh monster's opening HP must
 exceed the escaping person's full HP capacity, and both must remain alive
 when that individual leaves. This compares capacity, not current wounds or

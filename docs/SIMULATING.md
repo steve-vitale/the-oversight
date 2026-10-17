@@ -1,5 +1,28 @@
 # Simulating The Oversight — how to measure a change
 
+Contest reward tracing (2026-10-16): use
+`node scripts/contest-reward-audit.js --root <frozen> --policy caregiver
+--seed 10018 --out <fresh.json.gz>`. One harness per process; parallelize
+different outputs. It records actual choices, terminal outcomes, explicit
+prize recipient, requested tier/chance and delivered item. No helper queries,
+RNG draws or clock reads. `--observe 0` disables only this diagnostic trace;
+the standard balanced observer stays on for whole-result comparison.
+`--from-day/--to-day` filter by method-entry day; default is all actual days,
+including actions crossing the150-day driver horizon. Filters and truncation
+are explicit; dropped/error records invalidate a full-trace claim.
+
+Pin the211-entry game/policy/harness manifest plus raw seven standard
+collector files and the two diagnostic programs. Compare whole raw row,
+balanced observation and full hash before interpretation. The dated
+contest-credit source bundle carries those files, focused tests and the
+calendar-window helper. Its rule selects every changed row/metric/build/god
+identity or contest/show/fan delivery, plus first/last remaining changed hash
+per policy/cohort (all hashes when at most32). Unselected hashes stay unknown.
+The separate watch selection is first lost win, gained win and lost gear per
+policy/cohort, deduplicated; these are diagnostic cases, not extra independent
+samples. Use the dated verifier with a reconstructed --collector-root after
+future tooling changes. Both proof tests join quick/full discovery.
+
 Between deed (2026-10-16): `test-between-deed.js` joins quick/full discovery.
 Use actual barrier/individual NPC flight and real field evade/vFlee callers;
 the same field result label can mean a sealed judges' decision. Reconstruct

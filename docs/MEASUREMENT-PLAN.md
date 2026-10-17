@@ -4,6 +4,17 @@ Steve, 2026-10-15: "Yes, let’s create a more balanced set of measuring telemet
 
 ## Decision rule
 
+Contest credit example (2026-10-16): a phase cue was counted before actual
+judgment, so six victories could produce ten win marks and a failed moot
+could produce one. Correcting the ledger changes casting and reward
+eligibility, with mixed23-metric panels. Preserve adverse class/gear and
+community signals while retaining a factual repair; do not compensate with
+an unmeasured buff. The source-bound contest-credit audit includes exact
+terminal→tier request→recipient delivery traces, source/collector fingerprints,
+diagnostic-off controls and a prepared non-god native reward-to-equipment
+route. Conditional calendar windows do not erase competing endings or turn
+selected diagnostic cases into independent samples.
+
 Worked example: the [formal companion body audit](../evidence/2026-10-16/formal-companion-audit.md)
 finds more wins in every policy and fewer named classes in every policy.
 The local repair passes its targeted runtime/phone proofs but fails an

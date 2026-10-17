@@ -4500,7 +4500,10 @@
       try { this.leadShift('unity', d.unity); } catch (e) {}
       log.push(`unity +${d.unity}`);
     }
-    if (d.notability) {
+    // A phase is an attempt, not a victory. Some authored climax choices
+    // carry a contestWin cue before a judgment that can still fail. The
+    // terminal winner path owns that one mark (and its reward eligibility).
+    if (d.notability && d.notability !== 'contestWin') {
       this.addNotability('player', d.notability);
       log.push(`noted: ${d.notability}`);
     }

@@ -1,5 +1,13 @@
 # Agent lanes (2026-10-15)
 
+Codex contest-credit unit (2026-10-16): narrow contests.js phase win-cue
+guard,21 real-caller checks, passive contest-reward observer/CLI with10 checks,
+source-bound16/64 measurements and reward-to-use phone proof. No risk, prize
+rate, XP, cost, policy, region or nomad change. Muse can use the public CLI
+and reconstruction/verifier workflow; keep all23 warnings, explicit recipient
+identity, real versus recorded wins, common calendar windows and unknowns.
+See the dated contest-credit-audit.md. Seven deeds/three proxies remain.
+
 Codex Between deed (2026-10-16): owns narrow godpath.js individual escape
 outcome helpers, tactical game.js actual retreat/result callers, fieldFights.js
 actual evade/withdraw completion and drifter.god.deed. Reuses existing saved
