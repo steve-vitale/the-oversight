@@ -101,11 +101,39 @@
     }
     scholar.kcal -= need;
     scholar.hydration -= hydrationBurn(scholar, opts);
+    // MANTLE (sim-spiralgate-b 2026-10-17): the mantle passes mid-run by
+    // mutating the scholar object in place (mantleBecome, ledger.js
+    // playerDeath) — "you become that villager" (Steve 2026-10-14). The
+    // hunger ledger is per-PERSON body state, not office state: a new
+    // bearer is a new stomach, so their first hungry night restarts at
+    // the honest framing instead of inheriting the dead bearer's spiral.
+    // (Without this, succession mid-streak re-fires the day-1 alarm blank
+    // for the successor — observed: giulia hn=3 -> nino hn=4 + alarm.)
+    if (scholar._hungerVid !== scholar.villagerId) {
+      scholar._hungerVid = scholar.villagerId;
+      scholar.hungerNights = 0;
+    }
     if (scholar.kcal < 0) {
       const deficit = -scholar.kcal;
       scholar.health -= Math.min(20, 2 + deficit / 180);
       scholar.energy = Math.max(0, scholar.energy - 25);
-      warnings.push('STARVING: health and energy falling. The spiral has started.');
+      // SPIRALGATE (sim-spiralgate-b 2026-10-17, sim-findings #457): the
+      // "spiral has started" framing is an alarm, not a first-tick report —
+      // it used to fire on day 1 while the village was still establishing,
+      // teaching panic instead of the system. The hunger STATE is always
+      // narrated honestly (no silent actions); only the spiral framing
+      // gates, behind the SECOND CONSECUTIVE starving night of the same
+      // bearer. Consecutive, because the spiral is a sustained process —
+      // a fed night between hunger nights breaks it in fiction (the body
+      // ate) and in mechanics (no starvation damage that night). The mantle
+      // stamp above restarts the count for a new bearer.
+      const hungryNights = (scholar.hungerNights || 0) + 1;
+      scholar.hungerNights = hungryNights;
+      if (hungryNights >= 2) {
+        warnings.push('STARVING: health and energy falling. The spiral has started.');
+      } else {
+        warnings.push('STARVING: health and energy falling. You went to bed on an empty stomach.');
+      }
       // TRIVIAL-DEFICIT HONESTY (journey-succession r14 2026-10-15): a tiny
       // deficit on a full belly is not starvation — the day already did the
       // killing (seed 722: the bearer slept at 1 HP after a raid with kcal
@@ -115,7 +143,12 @@
       if (!killedBy && scholar.health <= 0)
         killedBy = deficit >= STARVATION_THRESHOLD ? 'starvation' : 'the night';
     } else if (scholar.kcal < STARVATION_THRESHOLD) {
+      // Not a starving night (no damage taken) — the spiral's narrative
+      // counter breaks here, same as any fed night.
+      scholar.hungerNights = 0;
       warnings.push('WARNING: reserves critical. Eat tomorrow or the spiral begins.');
+    } else {
+      scholar.hungerNights = 0;
     }
     if (scholar.hydration <= 0) {
       scholar.hydration = 0;
