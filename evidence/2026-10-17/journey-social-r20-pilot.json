@@ -1,0 +1,880 @@
+{
+ "seeds": [
+  1404,
+  1405,
+  1406
+ ],
+ "policies": [
+  "competent",
+  "larceny-leaning"
+ ],
+ "daycap": 60,
+ "runs": [
+  {
+   "seed": 1404,
+   "policy": "competent",
+   "endDay": 47,
+   "alive": 11,
+   "fallen": 1,
+   "convos": 613,
+   "goalWantConvos": 471,
+   "requestConvos": 6,
+   "naturalConvos": 609,
+   "treqFired": 5,
+   "treqAnswered": 5,
+   "rumorRepDelta": -45,
+   "rumorTrustDelta": 19,
+   "mootsFired": 0,
+   "playerDeaths": 0,
+   "openerDeflected": 0,
+   "openerMismatched": 0,
+   "griefCarry": 4,
+   "griefTagged": 6,
+   "griefBindCarry": 3,
+   "griefBindTagged": 4,
+   "ladderThefts": 0,
+   "ladderMaxHeat": 25,
+   "ladderEndStage": 1,
+   "ladderCrimes": 0,
+   "ladderCrimesByType": {},
+   "ladderTransitions": [
+    {
+     "day": 14,
+     "from": 0,
+     "to": 1,
+     "heat": 25
+    }
+   ],
+   "ladderMootDemandedDay": null,
+   "ladderConfrontedBy": null,
+   "ladderConfrontedDay": null,
+   "playerMoots": []
+  },
+  {
+   "seed": 1404,
+   "policy": "larceny-leaning",
+   "endDay": 62,
+   "alive": 9,
+   "fallen": 3,
+   "convos": 566,
+   "goalWantConvos": 367,
+   "requestConvos": 4,
+   "naturalConvos": 564,
+   "treqFired": 4,
+   "treqAnswered": 4,
+   "rumorRepDelta": -67,
+   "rumorTrustDelta": 29,
+   "mootsFired": 14,
+   "playerDeaths": 1,
+   "openerDeflected": 0,
+   "openerMismatched": 0,
+   "griefCarry": 11,
+   "griefTagged": 18,
+   "griefBindCarry": 4,
+   "griefBindTagged": 5,
+   "ladderThefts": 15,
+   "ladderMaxHeat": 153,
+   "ladderEndStage": 3,
+   "ladderCrimes": 16,
+   "ladderCrimesByType": {
+    "theft": 15,
+    "murder": 1
+   },
+   "ladderTransitions": [
+    {
+     "day": 6,
+     "from": 0,
+     "to": 1,
+     "heat": 25
+    },
+    {
+     "day": 10,
+     "from": 1,
+     "to": 2,
+     "heat": 53
+    },
+    {
+     "day": 12,
+     "from": 2,
+     "to": 3,
+     "heat": 60
+    },
+    {
+     "day": 45,
+     "from": 3,
+     "to": 4,
+     "heat": 138
+    },
+    {
+     "day": 53,
+     "from": 4,
+     "to": 3,
+     "heat": 138
+    }
+   ],
+   "ladderMootDemandedDay": 12,
+   "ladderConfrontedBy": "Zoe",
+   "ladderConfrontedDay": 10,
+   "playerMoots": [
+    {
+     "caseId": "case_2",
+     "openedDay": 12,
+     "day": 14,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 7,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-2.txt"
+    },
+    {
+     "caseId": "case_4",
+     "openedDay": 15,
+     "day": 18,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 10,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-3.txt"
+    },
+    {
+     "caseId": "case_9",
+     "openedDay": 19,
+     "day": 21,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 8,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-4.txt"
+    },
+    {
+     "caseId": "case_10",
+     "openedDay": 22,
+     "day": 25,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 10,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-5.txt"
+    },
+    {
+     "caseId": "case_15",
+     "openedDay": 26,
+     "day": 28,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 9,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-6.txt"
+    },
+    {
+     "caseId": "case_16",
+     "openedDay": 29,
+     "day": 31,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 9,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-7.txt"
+    },
+    {
+     "caseId": "case_17",
+     "openedDay": 32,
+     "day": 34,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 8,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-8.txt"
+    },
+    {
+     "caseId": "case_18",
+     "openedDay": 35,
+     "day": 38,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 8,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-9.txt"
+    },
+    {
+     "caseId": "case_22",
+     "openedDay": 39,
+     "day": 41,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 8,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-10.txt"
+    },
+    {
+     "caseId": "case_26",
+     "openedDay": 42,
+     "day": 44,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 9,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-11.txt"
+    },
+    {
+     "caseId": "case_32",
+     "openedDay": 49,
+     "day": 52,
+     "charge": "murder",
+     "accuser": "Kathleen",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-12.txt"
+    },
+    {
+     "caseId": "case_36",
+     "openedDay": 53,
+     "day": 56,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-13.txt"
+    },
+    {
+     "caseId": "case_37",
+     "openedDay": 57,
+     "day": 60,
+     "charge": "theft",
+     "accuser": "Zoe",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 7,
+      "living": 9,
+      "met": true
+     },
+     "file": "1404-larceny-leaning-moot-14.txt"
+    }
+   ]
+  },
+  {
+   "seed": 1405,
+   "policy": "competent",
+   "endDay": 62,
+   "alive": 8,
+   "fallen": 4,
+   "convos": 483,
+   "goalWantConvos": 358,
+   "requestConvos": 3,
+   "naturalConvos": 469,
+   "treqFired": 2,
+   "treqAnswered": 2,
+   "rumorRepDelta": -46,
+   "rumorTrustDelta": 18,
+   "mootsFired": 0,
+   "playerDeaths": 1,
+   "openerDeflected": 0,
+   "openerMismatched": 0,
+   "griefCarry": 11,
+   "griefTagged": 15,
+   "griefBindCarry": 10,
+   "griefBindTagged": 12,
+   "ladderThefts": 0,
+   "ladderMaxHeat": 25,
+   "ladderEndStage": 1,
+   "ladderCrimes": 0,
+   "ladderCrimesByType": {},
+   "ladderTransitions": [
+    {
+     "day": 19,
+     "from": 0,
+     "to": 1,
+     "heat": 25
+    }
+   ],
+   "ladderMootDemandedDay": null,
+   "ladderConfrontedBy": null,
+   "ladderConfrontedDay": null,
+   "playerMoots": []
+  },
+  {
+   "seed": 1405,
+   "policy": "larceny-leaning",
+   "endDay": 55,
+   "alive": 8,
+   "fallen": 4,
+   "convos": 475,
+   "goalWantConvos": 312,
+   "requestConvos": 3,
+   "naturalConvos": 457,
+   "treqFired": 3,
+   "treqAnswered": 3,
+   "rumorRepDelta": -2,
+   "rumorTrustDelta": -25,
+   "mootsFired": 14,
+   "playerDeaths": 2,
+   "openerDeflected": 0,
+   "openerMismatched": 0,
+   "griefCarry": 17,
+   "griefTagged": 18,
+   "griefBindCarry": 15,
+   "griefBindTagged": 15,
+   "ladderThefts": 14,
+   "ladderMaxHeat": 130,
+   "ladderEndStage": 4,
+   "ladderCrimes": 14,
+   "ladderCrimesByType": {
+    "theft": 14
+   },
+   "ladderTransitions": [
+    {
+     "day": 8,
+     "from": 0,
+     "to": 2,
+     "heat": 53
+    },
+    {
+     "day": 10,
+     "from": 2,
+     "to": 3,
+     "heat": 60
+    },
+    {
+     "day": 55,
+     "from": 3,
+     "to": 4,
+     "heat": 130
+    }
+   ],
+   "ladderMootDemandedDay": 10,
+   "ladderConfrontedBy": "Rafael",
+   "ladderConfrontedDay": 8,
+   "playerMoots": [
+    {
+     "caseId": "case_3",
+     "openedDay": 10,
+     "day": 12,
+     "charge": "theft",
+     "accuser": "Rafael",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 8,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-2.txt"
+    },
+    {
+     "caseId": "case_7",
+     "openedDay": 13,
+     "day": 15,
+     "charge": "theft",
+     "accuser": "Rafael",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 9,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-3.txt"
+    },
+    {
+     "caseId": "case_10",
+     "openedDay": 16,
+     "day": 19,
+     "charge": "theft",
+     "accuser": "Rafael",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 7,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-4.txt"
+    },
+    {
+     "caseId": "case_11",
+     "openedDay": 20,
+     "day": 22,
+     "charge": "theft",
+     "accuser": "Rafael",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-5.txt"
+    },
+    {
+     "caseId": "case_14",
+     "openedDay": 26,
+     "day": 29,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-7.txt"
+    },
+    {
+     "caseId": "case_15",
+     "openedDay": 30,
+     "day": 33,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 5,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-8.txt"
+    },
+    {
+     "caseId": "case_16",
+     "openedDay": 34,
+     "day": 36,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-9.txt"
+    },
+    {
+     "caseId": "case_17",
+     "openedDay": 37,
+     "day": 39,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 5,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-10.txt"
+    },
+    {
+     "caseId": "case_18",
+     "openedDay": 40,
+     "day": 43,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-11.txt"
+    },
+    {
+     "caseId": "case_19",
+     "openedDay": 44,
+     "day": 46,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 7,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-12.txt"
+    },
+    {
+     "caseId": "case_20",
+     "openedDay": 47,
+     "day": 50,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-13.txt"
+    },
+    {
+     "caseId": "case_21",
+     "openedDay": 51,
+     "day": 54,
+     "charge": "theft",
+     "accuser": "Jovan",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 8,
+      "met": true
+     },
+     "file": "1405-larceny-leaning-moot-14.txt"
+    }
+   ]
+  },
+  {
+   "seed": 1406,
+   "policy": "competent",
+   "endDay": 52,
+   "alive": 10,
+   "fallen": 2,
+   "convos": 600,
+   "goalWantConvos": 388,
+   "requestConvos": 4,
+   "naturalConvos": 593,
+   "treqFired": 5,
+   "treqAnswered": 5,
+   "rumorRepDelta": -45,
+   "rumorTrustDelta": 33,
+   "mootsFired": 0,
+   "playerDeaths": 1,
+   "openerDeflected": 1,
+   "openerMismatched": 1,
+   "griefCarry": 6,
+   "griefTagged": 9,
+   "griefBindCarry": 5,
+   "griefBindTagged": 8,
+   "ladderThefts": 0,
+   "ladderMaxHeat": 25,
+   "ladderEndStage": 1,
+   "ladderCrimes": 0,
+   "ladderCrimesByType": {},
+   "ladderTransitions": [
+    {
+     "day": 14,
+     "from": 0,
+     "to": 1,
+     "heat": 25
+    },
+    {
+     "day": 18,
+     "from": 1,
+     "to": 0,
+     "heat": 0
+    },
+    {
+     "day": 24,
+     "from": 0,
+     "to": 1,
+     "heat": 25
+    }
+   ],
+   "ladderMootDemandedDay": null,
+   "ladderConfrontedBy": null,
+   "ladderConfrontedDay": null,
+   "playerMoots": []
+  },
+  {
+   "seed": 1406,
+   "policy": "larceny-leaning",
+   "endDay": 62,
+   "alive": 9,
+   "fallen": 6,
+   "convos": 487,
+   "goalWantConvos": 325,
+   "requestConvos": 5,
+   "naturalConvos": 478,
+   "treqFired": 5,
+   "treqAnswered": 5,
+   "rumorRepDelta": -20,
+   "rumorTrustDelta": -2,
+   "mootsFired": 11,
+   "playerDeaths": 1,
+   "openerDeflected": 0,
+   "openerMismatched": 0,
+   "griefCarry": 9,
+   "griefTagged": 27,
+   "griefBindCarry": 7,
+   "griefBindTagged": 17,
+   "ladderThefts": 19,
+   "ladderMaxHeat": 138,
+   "ladderEndStage": 4,
+   "ladderCrimes": 9,
+   "ladderCrimesByType": {
+    "theft": 9
+   },
+   "ladderTransitions": [
+    {
+     "day": 5,
+     "from": 0,
+     "to": 1,
+     "heat": 25
+    },
+    {
+     "day": 8,
+     "from": 1,
+     "to": 2,
+     "heat": 55
+    },
+    {
+     "day": 9,
+     "from": 2,
+     "to": 3,
+     "heat": 63
+    },
+    {
+     "day": 18,
+     "from": 3,
+     "to": 0,
+     "heat": 0
+    },
+    {
+     "day": 21,
+     "from": 0,
+     "to": 1,
+     "heat": 25
+    },
+    {
+     "day": 26,
+     "from": 1,
+     "to": 2,
+     "heat": 55
+    },
+    {
+     "day": 27,
+     "from": 2,
+     "to": 3,
+     "heat": 48
+    },
+    {
+     "day": 31,
+     "from": 3,
+     "to": 1,
+     "heat": 55
+    },
+    {
+     "day": 34,
+     "from": 1,
+     "to": 2,
+     "heat": 55
+    },
+    {
+     "day": 36,
+     "from": 2,
+     "to": 3,
+     "heat": 63
+    },
+    {
+     "day": 39,
+     "from": 3,
+     "to": 2,
+     "heat": 63
+    },
+    {
+     "day": 41,
+     "from": 2,
+     "to": 3,
+     "heat": 70
+    },
+    {
+     "day": 60,
+     "from": 3,
+     "to": 1,
+     "heat": 100
+    },
+    {
+     "day": 61,
+     "from": 1,
+     "to": 4,
+     "heat": 100
+    }
+   ],
+   "ladderMootDemandedDay": 9,
+   "ladderConfrontedBy": "Salvador",
+   "ladderConfrontedDay": 8,
+   "playerMoots": [
+    {
+     "caseId": "case_1",
+     "openedDay": 9,
+     "day": 11,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 9,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-1.txt"
+    },
+    {
+     "caseId": "case_2",
+     "openedDay": 12,
+     "day": 15,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 9,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-2.txt"
+    },
+    {
+     "caseId": "case_8",
+     "openedDay": 27,
+     "day": 30,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-4.txt"
+    },
+    {
+     "caseId": "case_9",
+     "openedDay": 30,
+     "day": 33,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-5.txt"
+    },
+    {
+     "caseId": "case_10",
+     "openedDay": 35,
+     "day": 38,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 7,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-6.txt"
+    },
+    {
+     "caseId": "case_11",
+     "openedDay": 40,
+     "day": 43,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 5,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-7.txt"
+    },
+    {
+     "caseId": "case_12",
+     "openedDay": 44,
+     "day": 47,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-8.txt"
+    },
+    {
+     "caseId": "case_13",
+     "openedDay": 48,
+     "day": 51,
+     "charge": "theft",
+     "accuser": "Salvador",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 6,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-9.txt"
+    },
+    {
+     "caseId": "case_14",
+     "openedDay": 52,
+     "day": 55,
+     "charge": "theft",
+     "accuser": "Farid",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 5,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-10.txt"
+    },
+    {
+     "caseId": "case_15",
+     "openedDay": 56,
+     "day": 59,
+     "charge": "theft",
+     "accuser": "Tariq",
+     "resolution": "acquitted",
+     "quorum": {
+      "present": 5,
+      "living": 9,
+      "met": true
+     },
+     "file": "1406-larceny-leaning-moot-11.txt"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2458 @@
+{
+ "seed": 1406,
+ "policy": "larceny-leaning",
+ "daycap": 60,
+ "ms": 45413,
+ "endDay": 62,
+ "alive": 9,
+ "fallen": 6,
+ "convos": 487,
+ "goalWantConvos": 325,
+ "requestConvos": 5,
+ "naturalConvos": 478,
+ "threadCounts": {
+  "want": 305,
+  "skills": 17,
+  "personal": 5,
+  "neighbors": 27,
+  "others": 26,
+  "oldworld": 16,
+  "nonverbal": 9,
+  "recall": 149,
+  "lately": 230,
+  "secret": 15,
+  "you": 26,
+  "fears": 18,
+  "small": 13,
+  "goal": 56,
+  "grief": 44,
+  "request": 5,
+  "advice": 20,
+  "systemtake": 1,
+  "loved": 2,
+  "cheer": 1
+ },
+ "qa": {
+  "asked": 126,
+  "answered": 126,
+  "recalls": 106
+ },
+ "qa.askedTotal": 126,
+ "qa.answeredTotal": 126,
+ "qa.recallHits": 106,
+ "end.day": 62,
+ "end.alive": 9,
+ "opener": {
+  "convos": 487,
+  "deflected": 0,
+  "mismatched": 0,
+  "byThread": {}
+ },
+ "grief": {
+  "tagged": 27,
+  "carry": 9,
+  "bindTagged": 17,
+  "bindCarry": 7,
+  "files": [
+   "grief-1406-larceny-leaning-day18-Theo.txt",
+   "grief-1406-larceny-leaning-day18-Erin.txt",
+   "grief-1406-larceny-leaning-day18-Salvador.txt",
+   "grief-1406-larceny-leaning-day19-Theo.txt",
+   "grief-1406-larceny-leaning-day19-Erin.txt",
+   "grief-1406-larceny-leaning-day19-Salvador.txt",
+   "grief-1406-larceny-leaning-day30-Salvador.txt",
+   "grief-1406-larceny-leaning-day30-Krystian.txt",
+   "grief-1406-larceny-leaning-day30-Tariq.txt",
+   "grief-1406-larceny-leaning-day31-Salvador.txt",
+   "grief-1406-larceny-leaning-day31-Krystian.txt",
+   "grief-1406-larceny-leaning-day31-Tariq.txt",
+   "grief-1406-larceny-leaning-day39-Salvador.txt",
+   "grief-1406-larceny-leaning-day39-Krystian.txt",
+   "grief-1406-larceny-leaning-day39-Tariq.txt",
+   "grief-1406-larceny-leaning-day40-Salvador.txt",
+   "grief-1406-larceny-leaning-day40-Krystian.txt",
+   "grief-1406-larceny-leaning-day40-Tariq.txt",
+   "grief-1406-larceny-leaning-day53-Krystian.txt",
+   "grief-1406-larceny-leaning-day53-Tariq.txt",
+   "grief-1406-larceny-leaning-day53-Owen.txt",
+   "grief-1406-larceny-leaning-day54-Krystian.txt",
+   "grief-1406-larceny-leaning-day54-Tariq.txt",
+   "grief-1406-larceny-leaning-day54-Owen.txt",
+   "grief-1406-larceny-leaning-day58-Krystian.txt",
+   "grief-1406-larceny-leaning-day58-Tariq.txt",
+   "grief-1406-larceny-leaning-day58-Farid.txt"
+  ]
+ },
+ "deflect": {
+  "lines": 2406,
+  "npcLines": 5406,
+  "maxStreak": 9
+ },
+ "talkRequests": {
+  "fired": 5,
+  "answered": 5,
+  "firedIds": [
+   "Erin",
+   "Maya",
+   "Salvador",
+   "Farid",
+   "Maram"
+  ]
+ },
+ "rumor": {
+  "planted": true,
+  "plantError": null,
+  "target": "Theo",
+  "hearer": "Erin",
+  "repBefore": -80,
+  "repAfter": -100,
+  "repDelta": -20,
+  "trustBefore": 53,
+  "trustAfter": 51,
+  "trustDelta": -2,
+  "trace": [
+   {
+    "day": 20,
+    "ev": "planted",
+    "rep": {
+     "generous": -80,
+     "brave": -12,
+     "honest": -100,
+     "competent": 70,
+     "trustworthy": -75
+    },
+    "trust": 53,
+    "heard": 1,
+    "distortion": 0
+   },
+   {
+    "day": 20,
+    "ev": "tick",
+    "rep": {
+     "generous": -80,
+     "brave": -12,
+     "honest": -100,
+     "competent": 70,
+     "trustworthy": -75
+    },
+    "trust": 53,
+    "gossipEntries": 1,
+    "heard": 1,
+    "heardNames": [
+     "Erin"
+    ],
+    "distortion": 0
+   },
+   {
+    "day": 21,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 78,
+     "trustworthy": -75
+    },
+    "trust": 42,
+    "gossipEntries": 1,
+    "heard": 5,
+    "heardNames": [
+     "Erin",
+     "Theo",
+     "Salvador",
+     "Krystian",
+     "Farid"
+    ],
+    "distortion": 4
+   },
+   {
+    "day": 22,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 85,
+     "trustworthy": -75
+    },
+    "trust": 47,
+    "gossipEntries": 1,
+    "heard": 9,
+    "heardNames": [
+     "Erin",
+     "Theo",
+     "Salvador",
+     "Krystian",
+     "Farid",
+     "Sam",
+     "Tariq",
+     "Owen",
+     "Maya"
+    ],
+    "distortion": 8
+   },
+   {
+    "day": 23,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 24,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 25,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 26,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 27,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 28,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 29,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 30,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 31,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 32,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 33,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   },
+   {
+    "day": 34,
+    "ev": "tick",
+    "rep": {
+     "generous": -100,
+     "brave": -12,
+     "honest": -100,
+     "competent": 92,
+     "trustworthy": -75
+    },
+    "trust": 51,
+    "gossipEntries": 0,
+    "heard": null,
+    "heardNames": null,
+    "distortion": null
+   }
+  ]
+ },
+ "mootsFired": 11,
+ "mootFiles": [
+  "1406-larceny-leaning-moot-1.txt",
+  "1406-larceny-leaning-moot-2.txt",
+  "1406-larceny-leaning-moot-3.txt",
+  "1406-larceny-leaning-moot-4.txt",
+  "1406-larceny-leaning-moot-5.txt",
+  "1406-larceny-leaning-moot-6.txt",
+  "1406-larceny-leaning-moot-7.txt",
+  "1406-larceny-leaning-moot-8.txt",
+  "1406-larceny-leaning-moot-9.txt",
+  "1406-larceny-leaning-moot-10.txt",
+  "1406-larceny-leaning-moot-11.txt"
+ ],
+ "moots": [
+  {
+   "caseId": "case_1",
+   "day": 11,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Robin"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 9,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_2",
+   "day": 15,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Robin"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 9,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_7",
+   "day": 22,
+   "charge": "ambush",
+   "accuser": null,
+   "accused": [
+    "Theo",
+    "Erin",
+    "Farid"
+   ],
+   "resolution": "exile",
+   "playerVote": "guilty",
+   "isPlayerCase": false,
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_8",
+   "day": 30,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_9",
+   "day": 33,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_10",
+   "day": 38,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 7,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_11",
+   "day": 43,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 5,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_12",
+   "day": 47,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_13",
+   "day": 51,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_14",
+   "day": 55,
+   "charge": "theft",
+   "accuser": "Farid",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 5,
+    "living": 9,
+    "met": true
+   }
+  },
+  {
+   "caseId": "case_15",
+   "day": 59,
+   "charge": "theft",
+   "accuser": "Tariq",
+   "accused": [
+    "Ethan"
+   ],
+   "resolution": "acquitted",
+   "playerVote": null,
+   "isPlayerCase": true,
+   "quorum": {
+    "present": 5,
+    "living": 9,
+    "met": true
+   }
+  }
+ ],
+ "playerMoots": [
+  {
+   "caseId": "case_1",
+   "openedDay": 9,
+   "day": 11,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 9,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-1.txt"
+  },
+  {
+   "caseId": "case_2",
+   "openedDay": 12,
+   "day": 15,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 9,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-2.txt"
+  },
+  {
+   "caseId": "case_8",
+   "openedDay": 27,
+   "day": 30,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-4.txt"
+  },
+  {
+   "caseId": "case_9",
+   "openedDay": 30,
+   "day": 33,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-5.txt"
+  },
+  {
+   "caseId": "case_10",
+   "openedDay": 35,
+   "day": 38,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 7,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-6.txt"
+  },
+  {
+   "caseId": "case_11",
+   "openedDay": 40,
+   "day": 43,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 5,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-7.txt"
+  },
+  {
+   "caseId": "case_12",
+   "openedDay": 44,
+   "day": 47,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-8.txt"
+  },
+  {
+   "caseId": "case_13",
+   "openedDay": 48,
+   "day": 51,
+   "charge": "theft",
+   "accuser": "Salvador",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 6,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-9.txt"
+  },
+  {
+   "caseId": "case_14",
+   "openedDay": 52,
+   "day": 55,
+   "charge": "theft",
+   "accuser": "Farid",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 5,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-10.txt"
+  },
+  {
+   "caseId": "case_15",
+   "openedDay": 56,
+   "day": 59,
+   "charge": "theft",
+   "accuser": "Tariq",
+   "resolution": "acquitted",
+   "quorum": {
+    "present": 5,
+    "living": 9,
+    "met": true
+   },
+   "file": "1406-larceny-leaning-moot-11.txt"
+  }
+ ],
+ "ladder": {
+  "thefts": 19,
+  "maxHeat": 138,
+  "endHeat": 100,
+  "endStage": 4,
+  "transitions": [
+   {
+    "day": 5,
+    "from": 0,
+    "to": 1,
+    "heat": 25
+   },
+   {
+    "day": 8,
+    "from": 1,
+    "to": 2,
+    "heat": 55
+   },
+   {
+    "day": 9,
+    "from": 2,
+    "to": 3,
+    "heat": 63
+   },
+   {
+    "day": 18,
+    "from": 3,
+    "to": 0,
+    "heat": 0
+   },
+   {
+    "day": 21,
+    "from": 0,
+    "to": 1,
+    "heat": 25
+   },
+   {
+    "day": 26,
+    "from": 1,
+    "to": 2,
+    "heat": 55
+   },
+   {
+    "day": 27,
+    "from": 2,
+    "to": 3,
+    "heat": 48
+   },
+   {
+    "day": 31,
+    "from": 3,
+    "to": 1,
+    "heat": 55
+   },
+   {
+    "day": 34,
+    "from": 1,
+    "to": 2,
+    "heat": 55
+   },
+   {
+    "day": 36,
+    "from": 2,
+    "to": 3,
+    "heat": 63
+   },
+   {
+    "day": 39,
+    "from": 3,
+    "to": 2,
+    "heat": 63
+   },
+   {
+    "day": 41,
+    "from": 2,
+    "to": 3,
+    "heat": 70
+   },
+   {
+    "day": 60,
+    "from": 3,
+    "to": 1,
+    "heat": 100
+   },
+   {
+    "day": 61,
+    "from": 1,
+    "to": 4,
+    "heat": 100
+   }
+  ],
+  "crimesByType": {
+   "theft": 9
+  },
+  "crimesTotal": 9,
+  "confrontedBy": "Salvador",
+  "confrontedDay": 8,
+  "mootDemandedDay": 9,
+  "playerCaseDays": [
+   {
+    "caseId": "case_1",
+    "day": 9,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_1",
+    "day": 12,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_1",
+    "day": 13,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_1",
+    "day": 14,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_1",
+    "day": 15,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_1",
+    "day": 16,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_2",
+    "day": 12,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_2",
+    "day": 16,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 27,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_8",
+    "day": 31,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 32,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 33,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 34,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 30,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_9",
+    "day": 34,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 35,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 35,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 36,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 36,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 37,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 37,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 38,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 38,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 39,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 39,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 35,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_10",
+    "day": 39,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 40,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 40,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 40,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 41,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 41,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 41,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 42,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 42,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 42,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 43,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 43,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 43,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 44,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 44,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 44,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 40,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_11",
+    "day": 44,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 45,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 45,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 45,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 45,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 46,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 46,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 46,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 46,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 47,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 47,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 47,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 47,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 48,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 48,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 48,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 48,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 44,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_12",
+    "day": 48,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 49,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 49,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 49,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 49,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 49,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 50,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 50,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 50,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 50,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 50,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 51,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 51,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 51,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 51,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 51,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 52,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 52,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 52,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 52,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 52,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 48,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_13",
+    "day": 52,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 53,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 53,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 53,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 53,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 53,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 53,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 54,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 54,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 54,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 54,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 54,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 54,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 55,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 55,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 55,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 55,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 55,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 55,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 56,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 56,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 56,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 56,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 56,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 56,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_14",
+    "day": 52,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_14",
+    "day": 56,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 57,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 57,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 57,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 57,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 57,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 57,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_14",
+    "day": 57,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 58,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 58,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 58,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 58,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 58,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 58,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_14",
+    "day": 58,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 59,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 59,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 59,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 59,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 59,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 59,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_14",
+    "day": 59,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_14",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_15",
+    "day": 56,
+    "ev": "opened"
+   },
+   {
+    "caseId": "case_15",
+    "day": 60,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_14",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_15",
+    "day": 61,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_8",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_9",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_10",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_11",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_12",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_13",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_14",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   },
+   {
+    "caseId": "case_15",
+    "day": 62,
+    "ev": "resolved:acquitted"
+   }
+  ],
+  "snapshots": [
+   {
+    "day": 2,
+    "heat": 0,
+    "stage": 0,
+    "crimes": 0,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 3,
+    "heat": 0,
+    "stage": 0,
+    "crimes": 0,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 4,
+    "heat": 15,
+    "stage": 0,
+    "crimes": 1,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 5,
+    "heat": 25,
+    "stage": 1,
+    "crimes": 1,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 6,
+    "heat": 40,
+    "stage": 1,
+    "crimes": 2,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 7,
+    "heat": 40,
+    "stage": 1,
+    "crimes": 2,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 8,
+    "heat": 55,
+    "stage": 2,
+    "crimes": 3,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 9,
+    "heat": 63,
+    "stage": 3,
+    "crimes": 4,
+    "mootDemanded": true,
+    "pendingConfront": false,
+    "confrontRefused": true,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 10,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 5,
+    "mootDemanded": true,
+    "pendingConfront": false,
+    "confrontRefused": true,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 11,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 5,
+    "mootDemanded": true,
+    "pendingConfront": false,
+    "confrontRefused": true,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 12,
+    "heat": 100,
+    "stage": 3,
+    "crimes": 7,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 13,
+    "heat": 100,
+    "stage": 3,
+    "crimes": 7,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 14,
+    "heat": 115,
+    "stage": 3,
+    "crimes": 8,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 15,
+    "heat": 130,
+    "stage": 3,
+    "crimes": 9,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 16,
+    "heat": 138,
+    "stage": 3,
+    "crimes": 10,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 18,
+    "heat": 0,
+    "stage": 0,
+    "crimes": 0,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 18,
+    "heat": 0,
+    "stage": 0,
+    "crimes": 0,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 19,
+    "heat": 10,
+    "stage": 0,
+    "crimes": 0,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 20,
+    "heat": 10,
+    "stage": 0,
+    "crimes": 0,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 21,
+    "heat": 25,
+    "stage": 1,
+    "crimes": 1,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 22,
+    "heat": 25,
+    "stage": 1,
+    "crimes": 1,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 23,
+    "heat": 25,
+    "stage": 1,
+    "crimes": 1,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 24,
+    "heat": 40,
+    "stage": 1,
+    "crimes": 1,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 25,
+    "heat": 40,
+    "stage": 1,
+    "crimes": 1,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 26,
+    "heat": 55,
+    "stage": 2,
+    "crimes": 2,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 27,
+    "heat": 48,
+    "stage": 3,
+    "crimes": 2,
+    "mootDemanded": true,
+    "pendingConfront": false,
+    "confrontRefused": true,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 28,
+    "heat": 48,
+    "stage": 3,
+    "crimes": 2,
+    "mootDemanded": true,
+    "pendingConfront": false,
+    "confrontRefused": true,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 29,
+    "heat": 48,
+    "stage": 3,
+    "crimes": 2,
+    "mootDemanded": true,
+    "pendingConfront": false,
+    "confrontRefused": true,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 30,
+    "heat": 48,
+    "stage": 3,
+    "crimes": 2,
+    "mootDemanded": true,
+    "pendingConfront": false,
+    "confrontRefused": true,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 31,
+    "heat": 55,
+    "stage": 1,
+    "crimes": 3,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 32,
+    "heat": 55,
+    "stage": 1,
+    "crimes": 3,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 33,
+    "heat": 55,
+    "stage": 1,
+    "crimes": 3,
+    "mootDemanded": false,
+    "pendingConfront": false,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 34,
+    "heat": 55,
+    "stage": 2,
+    "crimes": 3,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 35,
+    "heat": 70,
+    "stage": 2,
+    "crimes": 4,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 36,
+    "heat": 63,
+    "stage": 3,
+    "crimes": 4,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 37,
+    "heat": 63,
+    "stage": 3,
+    "crimes": 4,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 38,
+    "heat": 63,
+    "stage": 3,
+    "crimes": 4,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 39,
+    "heat": 63,
+    "stage": 2,
+    "crimes": 4,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 40,
+    "heat": 78,
+    "stage": 2,
+    "crimes": 5,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 41,
+    "heat": 70,
+    "stage": 3,
+    "crimes": 5,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 42,
+    "heat": 70,
+    "stage": 3,
+    "crimes": 5,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 43,
+    "heat": 70,
+    "stage": 3,
+    "crimes": 5,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 44,
+    "heat": 63,
+    "stage": 3,
+    "crimes": 5,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 45,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 6,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 46,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 6,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 47,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 6,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 48,
+    "heat": 70,
+    "stage": 3,
+    "crimes": 6,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 49,
+    "heat": 70,
+    "stage": 3,
+    "crimes": 6,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 50,
+    "heat": 70,
+    "stage": 3,
+    "crimes": 6,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 51,
+    "heat": 85,
+    "stage": 3,
+    "crimes": 7,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 52,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 7,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 53,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 7,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 54,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 7,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 55,
+    "heat": 78,
+    "stage": 3,
+    "crimes": 7,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 56,
+    "heat": 85,
+    "stage": 3,
+    "crimes": 8,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 57,
+    "heat": 85,
+    "stage": 3,
+    "crimes": 8,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 58,
+    "heat": 85,
+    "stage": 3,
+    "crimes": 8,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 59,
+    "heat": 85,
+    "stage": 3,
+    "crimes": 8,
+    "mootDemanded": true,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": true
+   },
+   {
+    "day": 60,
+    "heat": 100,
+    "stage": 1,
+    "crimes": 9,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 61,
+    "heat": 100,
+    "stage": 4,
+    "crimes": 9,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   },
+   {
+    "day": 62,
+    "heat": 100,
+    "stage": 4,
+    "crimes": 9,
+    "mootDemanded": false,
+    "pendingConfront": true,
+    "confrontRefused": false,
+    "playerCaseOpen": false
+   }
+  ]
+ },
+ "justiceBeats": [
+  {
+   "day": 7,
+   "text": "⚖ Salvador corners you by the stores, voice low. \"Count it with me. Right now. If I'm wrong I'll say so in front of everyone.\""
+  },
+  {
+   "day": 9,
+   "text": "⚖ Salvador waited two days for your answer. None came. \"Silence is an answer too.\""
+  },
+  {
+   "day": 9,
+   "text": "⚖ Salvador stands slowly. \"Silence had its chance. The thefts goes to the fire now — all of it, in the open, where silence doesn't count as an answer.\""
+  },
+  {
+   "day": 12,
+   "text": "⚖ Salvador corners you by the stores, voice low. \"Count it with me. Right now. If I'm wrong I'll say so in front of everyone.\""
+  },
+  {
+   "day": 12,
+   "text": "⚖ Salvador raises their voice so the whole fire hears. \"No more quiet words! The thefts get a moot — tonight, in the open, everyone.\""
+  },
+  {
+   "day": 16,
+   "text": "⚖ Salvador blocks your path. \"We need to talk about the stores. About what you've been taking.\" A few others are watching, not approaching. \"Make it right, or leave. Your call.\""
+  },
+  {
+   "day": 16,
+   "text": "⚖ Salvador doesn't bother with preamble. \"A moot. The thefts. In the open.\""
+  },
+  {
+   "day": 25,
+   "text": "⚖ Salvador won't look at you. \"The stores. I covered for you once — told them it was a miscount. Don't make me a liar too.\""
+  },
+  {
+   "day": 27,
+   "text": "⚖ Salvador waited two days for your answer. None came. \"Silence is an answer too.\""
+  },
+  {
+   "day": 27,
+   "text": "⚖ Salvador stands slowly. \"Silence had its chance. The thefts goes to the fire now — all of it, in the open, where silence doesn't count as an answer.\""
+  },
+  {
+   "day": 34,
+   "text": "⚖ Salvador corners you by the stores, voice low. \"Count it with me. Right now. If I'm wrong I'll say so in front of everyone.\""
+  },
+  {
+   "day": 35,
+   "text": "⚖ Salvador won't meet your eyes. \"I was going to talk to you. It's past that now. The moot hears the thefts — in the open.\""
+  },
+  {
+   "day": 39,
+   "text": "⚖ Salvador won't look at you. \"The stores. I covered for you once — told them it was a miscount. Don't make me a liar too.\""
+  },
+  {
+   "day": 40,
+   "text": "⚖ Salvador doesn't bother with preamble. \"A moot. The thefts. In the open.\""
+  },
+  {
+   "day": 44,
+   "text": "⚖ Salvador corners you by the stores, voice low. \"Count it with me. Right now. If I'm wrong I'll say so in front of everyone.\""
+  },
+  {
+   "day": 44,
+   "text": "⚖ Salvador raises their voice so the whole fire hears. \"No more quiet words! The thefts get a moot — tonight, in the open, everyone.\""
+  },
+  {
+   "day": 48,
+   "text": "⚖ Salvador won't look at you. \"The stores. I covered for you once — told them it was a miscount. Don't make me a liar too.\""
+  },
+  {
+   "day": 48,
+   "text": "⚖ Salvador won't meet your eyes. \"I was going to talk to you. It's past that now. The moot hears the thefts — in the open.\""
+  },
+  {
+   "day": 52,
+   "text": "⚖ Salvador won't look at you. \"The stores. I covered for you once — told them it was a miscount. Don't make me a liar too.\""
+  },
+  {
+   "day": 52,
+   "text": "⚖ \"It's past asking,\" The village says. \"The fire hears the thefts — tonight, in the open.\""
+  },
+  {
+   "day": 56,
+   "text": "⚖ Tariq corners you by the stores, voice low. \"Count it with me. Right now. If I'm wrong I'll say so in front of everyone.\""
+  },
+  {
+   "day": 56,
+   "text": "⚖ Tariq won't meet your eyes. \"I was going to talk to you. It's past that now. The moot hears the thefts — in the open.\""
+  },
+  {
+   "day": 60,
+   "text": "⚖ Grace blocks your path. \"We need to talk about the stores. About what you've been taking.\" A few others are watching, not approaching. \"Make it right, or leave. Your call.\""
+  },
+  {
+   "day": 60,
+   "text": "⚖ Grace doesn't bother with preamble. \"A moot. What you've done. In the open.\""
+  }
+ ],
+ "deaths": [
+  {
+   "day": 16,
+   "name": "Robin Holmes",
+   "role": "exterminator",
+   "cause": "sickness",
+   "killer": null
+  },
+  {
+   "day": 17,
+   "name": "Ramandeep Chauhan",
+   "role": "firefighter",
+   "cause": "combat",
+   "killer": null
+  },
+  {
+   "day": 29,
+   "name": "Sam",
+   "role": "bartender",
+   "cause": "monster",
+   "killer": null
+  },
+  {
+   "day": 38,
+   "name": "Maya",
+   "role": "er_nurse",
+   "cause": "monster",
+   "killer": null
+  },
+  {
+   "day": 52,
+   "name": "Salvador",
+   "role": "paramedic",
+   "cause": "combat",
+   "killer": null
+  },
+  {
+   "day": 56,
+   "name": "Owen Smith",
+   "role": "hunting_guide",
+   "cause": "a wound that wouldn't close",
+   "killer": null
+  }
+ ],
+ "census": {
+  "alive": [
+   {
+    "name": "Krystian",
+    "role": "police_officer"
+   },
+   {
+    "name": "Tariq",
+    "role": "electrician"
+   },
+   {
+    "name": "Farid",
+    "role": "locksmith"
+   },
+   {
+    "name": "Grace",
+    "role": "mechanic"
+   },
+   {
+    "name": "Maram",
+    "role": "programmer"
+   },
+   {
+    "name": "Asli",
+    "role": "line_cook"
+   },
+   {
+    "name": "Amerigo",
+    "role": "truck_driver"
+   },
+   {
+    "name": "Luis",
+    "role": "mason"
+   }
+  ],
+  "dead": [
+   {
+    "name": "Robin Holmes",
+    "role": "exterminator",
+    "day": 16,
+    "cause": "sickness",
+    "killer": null
+   },
+   {
+    "name": "Ramandeep Chauhan",
+    "role": "firefighter",
+    "day": 17,
+    "cause": "combat",
+    "killer": null
+   },
+   {
+    "name": "Sam",
+    "role": "bartender",
+    "day": 29,
+    "cause": "monster",
+    "killer": null
+   },
+   {
+    "name": "Maya",
+    "role": "er_nurse",
+    "day": 38,
+    "cause": "monster",
+    "killer": null
+   },
+   {
+    "name": "Salvador",
+    "role": "paramedic",
+    "day": 52,
+    "cause": "combat",
+    "killer": null
+   },
+   {
+    "name": "Owen Smith",
+    "role": "hunting_guide",
+    "day": 56,
+    "cause": "a wound that wouldn't close",
+    "killer": null
+   }
+  ],
+  "playerDeaths": [
+   {
+    "day": 18,
+    "prevBearer": "gen_mtxt5rw",
+    "prevName": "Robin"
+   }
+  ]
+ },
+ "endReason": "survived"
+}

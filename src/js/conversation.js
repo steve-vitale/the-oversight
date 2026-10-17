@@ -1010,6 +1010,29 @@
       if (!v.convoRunLines) v.convoRunLines = [];
       return v.convoRunLines;
     },
+    // convoAnswerReactLine (journey-social r20 2026-10-17): the voiced
+    // acknowledgment for a player's answer, with the r19 opener pattern
+    // applied to the two-candidate pool [specific react, generic "Huh.
+    // Okay."]. A run-blocked specific react falls back to the generic
+    // rather than going dry; if the generic is blocked too, sayLine's
+    // normal handling dry-replaces it (honest). The fallback is voiced
+    // through fillTalkLine only (no voiceLine cycle step): the extra
+    // discourse-marker draw would perturb the villager's mannerism cycle
+    // for a line that is pure acknowledgment. Kept as a method (not
+    // inline) so the emission site stays a one-liner and the fallback is
+    // unit-testable.
+    convoAnswerReactLine(vid, react) {
+      const voiced = (txt) => {
+        try { return this.voiceLine(vid, this.fillTalkLine(txt, this.vpOf(vid))); }
+        catch (e) { return txt; }
+      };
+      const specific = voiced(react);
+      try {
+        if (!this.convoWouldBlock(vid, specific)) return specific;
+      } catch (e) {}
+      try { return this.fillTalkLine('"Huh. Okay."', this.vpOf(vid)); }
+      catch (e) { return '"Huh. Okay."'; }
+    },
     // convoWouldBlock (journey-social r19 2026-10-16): PURE predicate — would
     // sayLine no-repeat-block this line right now? Mirrors sayLine's block
     // decision (self ledger + run ledger, first-chunk key) without emitting
@@ -4964,6 +4987,13 @@
         const regionNow = (this.homeRegion || (this.state.scholar || {}).homeRegion) || 'there';
         react = react.replaceAll('{region}', regionNow);
         const saidLabel = ad && ad.label ? String(ad.label).replaceAll('{region}', regionNow) : null;
+        // ANSWERED-LISTENING (journey-social r20 2026-10-17): the player
+        // answered a direct question — the acknowledgment must not go dry.
+        // A run-blocked specific react falls back to the generic
+        // acknowledgment (first unblocked wins — the r19 opener pattern);
+        // dry only when both are blocked. Transcript-caught: Rafael asks
+        // "So what's your plan here?", the player answers, the blocked
+        // react dry-replaced to "...Sorry, lost my train of thought."
         // HONEST WEIGHT (dialog rethink Phase 1, Steve 2026-10-08): honest
         // words land. Data answers may carry trust/mood; honest-hard and
         // cruel tempers move the relationship and mark escalation.
@@ -4980,7 +5010,7 @@
           escalate: atemper === 'cruel' || atemper === 'honest-hard',
           name: 'answer:' + qid + ':' + aid,
         });
-        done(this.voiceLine(vid, this.fillTalkLine(react, this.vpOf(vid))), saidLabel);
+        done(this.convoAnswerReactLine(vid, react), saidLabel);
         this.remember(vid, 'you_said', qid + '=' + aid);
         // FOLLOW-UP BEAT: answering a real question sometimes earns a second
         // beat — their thought continues instead of terminating. Not every
