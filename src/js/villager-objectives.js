@@ -281,6 +281,23 @@
         o.partsLeft = 1 + Math.floor(R() * 2);
         return o;
       }
+      // DAWN-AFTER-KILL (r13 2026-10-17): a fresh unrevealed-flesh kill is
+      // time-critical knowledge — it rots in ~3 days, and the weighted chore
+      // lottery almost never picks HAUL inside that window (r12: 0-1 takes
+      // across 6 pilots despite 1-3 offer-days/seed). A person who knows
+      // fresh meat is out there goes and gets it; they don't enter a chore
+      // lottery. After the body-first gates (rest/eat), a remembered corpse
+      // killed yesterday/today with unrevealed flesh and a feasible haul
+      // takes the HAUL objective directly. mapmemHaulCandidate still
+      // enforces feasibility, range, and the no-dogpile cap; objDanger
+      // still gates the actual departure.
+      var freshHaul = null;
+      try { freshHaul = this.mapmemHaulCandidate ? this.mapmemHaulCandidate(vid, hx, hy) : null; } catch (e) {}
+      if (freshHaul && this.objFreshKillUnrevealed(freshHaul.ref)) {
+        o.kind = 'HAUL';
+        this.objHaulFromSite(vid, hx, hy, o, freshHaul);
+        return o;
+      }
       // THEY WANT TO WIN (parity 2026-10-14, Steve: "villagers need to act
       // in smart ways, including towards getting good gear and builds. They
       // want to win as well." / "they need to seek knowledge about the
@@ -429,29 +446,7 @@
         o.purpose = 'explore'; dist = 1 + Math.floor(R() * Math.max(1, maxD));
         o.partsLeft = 3 + Math.floor(R() * 4); o.tightness = dist;
       } else if (chosen.kind === 'HAUL') {
-        // HAUL: go back for the remembered carcass. The target is a real
-        // remembered node, not a random direction — this is the cross-node
-        // objective. They tell the hall where they're going (gossip spread:
-        // listeners gain the memory secondhand).
-        var hs = chosen.site;
-        o.purpose = 'haul'; o.state = 'ready'; o.indoor = false;
-        o.tx = hs.nx; o.ty = hs.ny;
-        o.targetRef = hs.ref; o.haulLabel = hs.label; o.haulSite = hs;
-        var hdist = this.objDist(hx, hy, hs.nx, hs.ny);
-        o.tightness = Math.max(1, hdist);
-        o.partsLeft = 2 * hdist + 3;
-        o.targetVid = null; o.companion = null;
-        try {
-          var _mates = (v.roster || []).filter(function (id) {
-            if (id === vid) return false;
-            try { var _self = this.villagerId; if (id === _self) return false; } catch (e) {}
-            try { var nd = this.npcNode(id); return !!(nd && nd.nx === hx && nd.ny === hy); }
-            catch (e) { return false; }
-          }, this);
-          for (var _ti = 0; _ti < Math.min(2, _mates.length); _ti++) {
-            try { this.mapmemTell(vid, _mates[_ti]); } catch (e) {}
-          }
-        } catch (e) {}
+        this.objHaulFromSite(vid, hx, hy, o, chosen.site);
         return o;
       } else { // HAVEN_CHORE
         o.purpose = 'chore'; o.indoor = true; o.state = 'indoor';
@@ -480,6 +475,56 @@
       o.tx = clampN(hx + d[0] * dist);
       o.ty = clampN(hy + d[1] * dist);
       if (o.tx === hx && o.ty === hy) { o.tx = clampN(hx + 1); }
+      return o;
+    },
+    // objFreshKillUnrevealed(ref) (r13 2026-10-17): true when the corpse was
+    // killed yesterday or today AND its flesh is still unrevealed. The
+    // dawn-after-kill prioritization fires only on time-critical knowledge —
+    // a stale kill keeps the lottery path, revealed meat keeps no offer.
+    objFreshKillUnrevealed(ref) {
+      var day = 0;
+      try { day = this.state.scholar.day || 0; } catch (e) {}
+      var corpses = [];
+      try { corpses = this.corpses ? this.corpses() : []; } catch (e) {}
+      for (var i = 0; i < corpses.length; i++) {
+        var c = corpses[i];
+        if (!c || c.id !== ref) continue;
+        var age = day - (c.dayDied || 0);
+        if (age < 0 || age > 1) return false;
+        var known = false;
+        try { known = !!(this.mapmemFoodKnown && this.mapmemFoodKnown(c)); } catch (e) {}
+        return !known;
+      }
+      return false;
+    },
+    // objHaulFromSite(vid, hx, hy, o, site) (r13 2026-10-17): build the HAUL
+    // objective for a remembered carcass site. Extracted from the lottery
+    // path so the dawn-after-kill prioritization builds byte-identical
+    // objectives. The caller sets o.kind = 'HAUL' first.
+    objHaulFromSite(vid, hx, hy, o, site) {
+      var v = this.state.village;
+      // HAUL: go back for the remembered carcass. The target is a real
+      // remembered node, not a random direction — this is the cross-node
+      // objective. They tell the hall where they're going (gossip spread:
+      // listeners gain the memory secondhand).
+      o.purpose = 'haul'; o.state = 'ready'; o.indoor = false;
+      o.tx = site.nx; o.ty = site.ny;
+      o.targetRef = site.ref; o.haulLabel = site.label; o.haulSite = site;
+      var hdist = this.objDist(hx, hy, site.nx, site.ny);
+      o.tightness = Math.max(1, hdist);
+      o.partsLeft = 2 * hdist + 3;
+      o.targetVid = null; o.companion = null;
+      try {
+        var _mates = (v.roster || []).filter(function (id) {
+          if (id === vid) return false;
+          try { var _self = this.villagerId; if (id === _self) return false; } catch (e) {}
+          try { var nd = this.npcNode(id); return !!(nd && nd.nx === hx && nd.ny === hy); }
+          catch (e) { return false; }
+        }, this);
+        for (var _ti = 0; _ti < Math.min(2, _mates.length); _ti++) {
+          try { this.mapmemTell(vid, _mates[_ti]); } catch (e) {}
+        }
+      } catch (e) {}
       return o;
     },
     // VISIT target: someone they actually know — same fire-group, or someone
