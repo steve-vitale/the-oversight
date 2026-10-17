@@ -1,0 +1,500 @@
+{
+ "label": "journey-endgame-r14",
+ "policy": "belongseat-tableplay",
+ "seed": 8902,
+ "days": 93,
+ "endReason": "over-other",
+ "seatBest": "none",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  94
+ ],
+ "waitingEver": true,
+ "waitingDay": 94,
+ "doneDay": null,
+ "doors": [
+  {
+   "day": 94,
+   "door": "path:beloved",
+   "strength": 100,
+   "why": "Viewership 33.74872287694499, fan favor 32 — the galaxy's favorite, by the numbers.",
+   "offered": [
+    "path:beloved",
+    "path:assimilated",
+    "path:relay",
+    "path:defiant",
+    "path:feared"
+   ],
+   "seatAtPick": "lesser"
+  }
+ ],
+ "steerErr": null,
+ "doorErr": null,
+ "holdSkips": 0,
+ "won": 1,
+ "wonDetail": {
+  "track": "field",
+  "godpath": null,
+  "subclass": null,
+  "god": null,
+  "moral": "dark",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "beloved",
+  "branch": "dark",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": null
+ },
+ "table": {
+  "phase": "done",
+  "path": "beloved",
+  "branch": "dark",
+  "doors": [],
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 94,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 94,
+   "ev": "table_path",
+   "data": {
+    "path": "beloved",
+    "branch": "dark"
+   }
+  },
+  {
+   "day": 94,
+   "ev": "table_won",
+   "data": {
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": "dark",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "beloved",
+    "branch": "dark",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": null
+   }
+  }
+ ],
+ "rungHistory": [],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 5,
+   "w2": 0,
+   "w3": 0,
+   "contests": 0,
+   "crises": 0,
+   "rank": "village",
+   "stage": 1,
+   "foodDeeds": false
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 12,
+   "w2": 0,
+   "w3": 0,
+   "contests": 2,
+   "crises": 3,
+   "rank": "village",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 14,
+   "w2": 3,
+   "w3": 0,
+   "contests": 4,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 70,
+   "seat": "none",
+   "w1": 15,
+   "w2": 6,
+   "w3": 0,
+   "contests": 7,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 85,
+   "seat": "none",
+   "w1": 15,
+   "w2": 7,
+   "w3": 1,
+   "contests": 8,
+   "crises": 3,
+   "rank": "global",
+   "stage": 3,
+   "foodDeeds": true
+  }
+ ],
+ "census": [
+  {
+   "name": "Salvatore",
+   "alive": true,
+   "occ": "Beekeeper"
+  },
+  {
+   "name": "Hank",
+   "alive": true,
+   "occ": "ER nurse"
+  },
+  {
+   "name": "Benoit",
+   "alive": true,
+   "occ": "Baker"
+  },
+  {
+   "name": "Priya",
+   "alive": true,
+   "occ": "emergency dispatcher"
+  },
+  {
+   "name": "Elena",
+   "alive": true,
+   "occ": "Baker"
+  },
+  {
+   "name": "Sam",
+   "alive": true,
+   "occ": "bartender"
+  },
+  {
+   "name": "Greta",
+   "alive": true,
+   "occ": "Sailor"
+  },
+  {
+   "name": "Mara",
+   "alive": true,
+   "occ": "army medic"
+  },
+  {
+   "name": "Marcus",
+   "alive": true,
+   "occ": "electrician"
+  },
+  {
+   "name": "Sriyono",
+   "alive": true,
+   "occ": "farmer"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 17,
+   "kind": "villager",
+   "who": "xavier_dubois",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "glasswing",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 24,
+   "kind": "villager",
+   "who": "gen_gzgx2wn",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "monster",
+   "who": "rut_king",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 36,
+   "kind": "person",
+   "who": "ines_duarte",
+   "cause": "alien",
+   "player": false
+  },
+  {
+   "day": 36,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 37,
+   "kind": "villager",
+   "who": "gen_sfkh2w0",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 42,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 44,
+   "kind": "monster",
+   "who": "speedbump_turtle",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 44,
+   "kind": "monster",
+   "who": "speedbump_turtle",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 53,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 58,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 69,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 72,
+   "kind": "monster",
+   "who": "statickite",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 79,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 83,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 86,
+   "kind": "monster",
+   "who": "mirror_stag",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 87,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 87,
+   "kind": "villager",
+   "who": "gen_3c6qqjp",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 92,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 93,
+   "kind": "villager",
+   "who": "gen_otd91mg",
+   "cause": "combat",
+   "player": true
+  }
+ ],
+ "ms": 1537
+}

@@ -1,0 +1,469 @@
+{
+ "label": "journey-endgame-r14",
+ "policy": "belongseat-tableplay",
+ "seed": 8906,
+ "days": 89,
+ "endReason": "over-other",
+ "seatBest": "lesser",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  90
+ ],
+ "waitingEver": true,
+ "waitingDay": 63,
+ "doneDay": null,
+ "doors": [
+  {
+   "day": 90,
+   "door": "path:feared",
+   "strength": 100,
+   "why": "30 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked.",
+   "offered": [
+    "path:feared",
+    "path:beloved",
+    "path:assimilated",
+    "path:defiant",
+    "path:relay"
+   ],
+   "seatAtPick": "lesser"
+  }
+ ],
+ "steerErr": null,
+ "doorErr": null,
+ "holdSkips": 0,
+ "won": 1,
+ "wonDetail": {
+  "track": "craft",
+  "godpath": "caregiver",
+  "subclass": "healer",
+  "god": "shepherd_of_the_dead",
+  "moral": "light",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "feared",
+  "branch": "light",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": null
+ },
+ "table": {
+  "phase": "done",
+  "path": "feared",
+  "branch": "light",
+  "doors": [],
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 90,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "craft",
+    "godpath": "caregiver",
+    "subclass": "healer",
+    "god": "shepherd_of_the_dead",
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "feared",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_won",
+   "data": {
+    "track": "craft",
+    "godpath": "caregiver",
+    "subclass": "healer",
+    "god": "shepherd_of_the_dead",
+    "moral": "light",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": null
+   }
+  }
+ ],
+ "rungHistory": [
+  {
+   "day": 70,
+   "seat": "lesser",
+   "detail": "16/8/4w c5 cr3 regional st3 fd1"
+  },
+  {
+   "day": 80,
+   "seat": "lesser",
+   "detail": "16/9/4w c5 cr3 regional st3 fd1"
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "detail": "16/9/4w c5 cr3 regional st3 fd1"
+  },
+  {
+   "day": 90,
+   "seat": "lesser",
+   "detail": "16/9/5w c6 cr3 regional st3 fd1"
+  }
+ ],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 9,
+   "w2": 0,
+   "w3": 0,
+   "contests": 0,
+   "crises": 2,
+   "rank": "village",
+   "stage": 2,
+   "foodDeeds": false
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 15,
+   "w2": 3,
+   "w3": 0,
+   "contests": 2,
+   "crises": 3,
+   "rank": "village",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 16,
+   "w2": 5,
+   "w3": 0,
+   "contests": 3,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 70,
+   "seat": "lesser",
+   "w1": 16,
+   "w2": 8,
+   "w3": 4,
+   "contests": 5,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "w1": 16,
+   "w2": 9,
+   "w3": 4,
+   "contests": 5,
+   "crises": 3,
+   "rank": "regional",
+   "stage": 3,
+   "foodDeeds": true
+  }
+ ],
+ "census": [
+  {
+   "name": "Ernesto",
+   "alive": true,
+   "occ": "Veterinarian"
+  },
+  {
+   "name": "Nathan",
+   "alive": true,
+   "occ": "HVAC tech"
+  },
+  {
+   "name": "Ava",
+   "alive": true,
+   "occ": "street artist"
+  },
+  {
+   "name": "Abylai",
+   "alive": true,
+   "occ": "Wild food forager"
+  },
+  {
+   "name": "Devon",
+   "alive": true,
+   "occ": "programmer"
+  },
+  {
+   "name": "Mara",
+   "alive": true,
+   "occ": "army medic"
+  },
+  {
+   "name": "Rosa",
+   "alive": true,
+   "occ": "line cook"
+  },
+  {
+   "name": "Lorenzo",
+   "alive": true,
+   "occ": "carpenter"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 6,
+   "kind": "monster",
+   "who": "glasswing",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 9,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 20,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 22,
+   "kind": "villager",
+   "who": "gen_wirabzg",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 28,
+   "kind": "villager",
+   "who": "gen_vyx65vs",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "memory_projector",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 34,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 35,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 36,
+   "kind": "monster",
+   "who": "speedbump_turtle",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 43,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 43,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 46,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "monster",
+   "who": "glasswing",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 53,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 53,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 54,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 55,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 57,
+   "kind": "villager",
+   "who": "zoe_adams",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 59,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 64,
+   "kind": "villager",
+   "who": "catalina_reyes",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 64,
+   "kind": "villager",
+   "who": "david_kim",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 64,
+   "kind": "villager",
+   "who": "gen_m01u6pb",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 66,
+   "kind": "monster",
+   "who": "mirror_stag",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 72,
+   "kind": "villager",
+   "who": "gen_nm7ndn4",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 72,
+   "kind": "villager",
+   "who": "gen_yue5k52",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 72,
+   "kind": "villager",
+   "who": "benoit_lambert",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 79,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 81,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 84,
+   "kind": "monster",
+   "who": "white_noise_heron",
+   "cause": "combat",
+   "player": false
+  }
+ ],
+ "ms": 1775
+}
