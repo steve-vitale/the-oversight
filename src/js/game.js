@@ -27002,8 +27002,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // real items. FRESH STACKS KEEP THEIR OWN CLOCK (BUG 2026-10-06): a haul
     // only merges into a stack whose spoilDay matches today's fresh clock;
     // otherwise it lands as a new stack with a fresh clock.
+    // RETURNS the kcal actually stored (sim-capdoor-b 2026-10-17, #453):
+    // 0 when the cap door refuses the whole share, partial when room < give.
+    // The caller (villagerMealDay) records the ledger from this return when
+    // the CAPDOOR lever is on; the return itself changes nothing when off.
     stockSurplus(v, give) {
-      if (give <= 0) return;
+      if (give <= 0) return 0;
       v.pantry = v.pantry || [];
       const freshDay = v.day + 3;
       // ROUNDING HONESTY (break-it food r5 2026-10-11): Math.ceil minted up to
@@ -27012,20 +27016,47 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // 50 small surpluses). Round to the nearest whole unit: symmetric error,
       // no systematic inflation. A crumb that rounds to zero is eaten, not stored.
       let newUnits = Math.round(give / 200); // ~200 kcal per unit
-      if (newUnits <= 0) return;
+      if (newUnits <= 0) return 0;
       // PANTRY CAP (break-it food r5): the surplus is a pantry writer like any
       // other — the cap binds here too. pantryAdd was the only capped door;
       // this one overfilled silently (same class as the r3 putAwayFinished fix).
       try {
         const cap = this.pantryCapKcal();
         const room = cap - this.pantryKcal();
-        if (room <= 0) return;
+        if (room <= 0) return 0;
         newUnits = Math.min(newUnits, Math.floor(room / 200));
-        if (newUnits <= 0) return;
+        if (newUnits <= 0) return 0;
       } catch (e) {}
       const existing = v.pantry.find(p => p.name === 'Foraged food' && p.spoilDay === freshDay);
-      if (existing) existing.units += newUnits;
-      else v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: newUnits, spoilDay: freshDay, safe: true, kg: 0.2 });
+      // KCAL-HONEST RETURN (sim-capdoor-b 2026-10-17): the merge above must
+      // land in a same-clock stack, but stockPantry also writes 'Foraged
+      // food' stacks at other kcalEach values (pieceMax splits) — merging
+      // 200-kcal units into one revalues them at the resident kcalEach
+      // (measured: pantry gained 100-300 per nominal 200). The RETURN is the
+      // kcal the pantry actually gained, never the nominal unit count — the
+      // ledger records what the village received. (The revaluation itself is
+      // a separate blank, filed in sim-findings; this return keeps the
+      // ledger honest about it either way.)
+      let storedKcal;
+      if (existing) { existing.units += newUnits; storedKcal = newUnits * (existing.kcalEach || 200); }
+      else {
+        v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: newUnits, spoilDay: freshDay, safe: true, kg: 0.2 });
+        storedKcal = newUnits * 200;
+      }
+      return storedKcal;
+    },
+
+    // capDoorBeat(first, offered, stored): the refusal beat. VOICE ONLY —
+    // pure reads of its args, zero RNG draws, zero state writes (prosefix-b
+    // precedent). Fires only for meaningful refusals (>=200 kcal); smaller
+    // crumbs are eaten without a line. The beat names the honest facts: the
+    // share offered, what fit, and where the rest went.
+    capDoorBeat(first, offered, stored) {
+      const o = Math.round(offered).toLocaleString('en-US');
+      const s = Math.round(stored).toLocaleString('en-US');
+      if ((stored | 0) > 0)
+        return `${first} carries ${o} kcal of surplus to the pantry — only ${s} kcal fit. The rest stays with ${first}; eaten at the fire instead of stored.`;
+      return `${first} carries ${o} kcal of surplus to the pantry — it's full. The share stays with ${first}; eaten at the fire instead of stored.`;
     },
 
     // drawSpoiled(v, want, exposure): desperation — spoiled stacks, eaten
@@ -27593,10 +27624,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // a fed villager is content; hunger eases with what they actually ate
       n.hunger = Math.max(0, n.hunger - Math.round((ate / need) * 70));
       // surplus: shared by trust, into the pantry as real items
-      let gave = 0;
+      // CAP-DOOR GATE (sim-capdoor-b 2026-10-17, #453): refuse-with-voice
+      // lever, default OFF. When ON the pantry cap refuses honestly — the
+      // ledger records only kcal actually stored, the villager eats their
+      // refused share (conservation: no kcal destroyed), and the refusal is
+      // voiced, never silent. When OFF this block is the exact statements
+      // that were here before.
+      let capdoorOn = false;
+      try { capdoorOn = (typeof process !== 'undefined' && process.env && process.env.CAPDOOR === '1'); } catch (e) {}
+      let gave = 0, stored = 0, refused = 0;
       if (produced > need) {
         gave = (produced - need) * trustFactor;
-        if (gave > 0) this.stockSurplus(v, gave);
+        if (gave > 0) stored = this.stockSurplus(v, gave) || 0;
+        if (capdoorOn && gave > 0) {
+          // the share stays theirs: refused kcal are eaten, never stored,
+          // never silently evaporated.
+          refused = Math.max(0, Math.round(gave) - Math.round(stored));
+          if (refused > 0) {
+            n.hunger = Math.max(0, n.hunger - Math.round((refused / need) * 70));
+            if (refused >= 200) {
+              const first = String((person && person.name) || 'Someone').split(' ')[0];
+              try { this.say(this.capDoorBeat(first, gave, stored)); } catch (e) {}
+            }
+          }
+        }
       }
       // CONTRIBUTION FLOWS (break-it food 2026-10-09): the freeloader
       // pipeline judges takes vs gives — but villager takes were never
@@ -27606,7 +27657,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // real flows: pantry/pack draws as takes, shared surplus as gives.
       v.takes = v.takes || {}; v.gives = v.gives || {};
       v.takes[vid] = (v.takes[vid] || 0) + Math.round(pile.taken);
-      v.gives[vid] = (v.gives[vid] || 0) + Math.round(gave);
+      // CAP-DOOR (sim-capdoor-b): the ledger records what the village
+      // actually received. Off: gaveRec === gave, the exact statement as before.
+      const gaveRec = capdoorOn ? stored : gave;
+      v.gives[vid] = (v.gives[vid] || 0) + Math.round(gaveRec);
       // FAIR-SHARE RATE (longsim scale-wall r9 2026-10-13, lever 5): the
       // freeloader's clock judges the trailing-7-day NET rate, so every
       // villager — not just the player — needs dated histories. The daily
@@ -27615,12 +27669,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // norm (~2000 kcal/day), a communal meal can never trip it — the norm
       // absorbs it. Only taking MORE than your share, sustained, is evidence.
       try { if (pile.taken > 0) this.recordTakeHist(vid, Math.round(pile.taken)); } catch (e) {}
-      try { if (gave > 0) this.recordGiveHist(vid, Math.round(gave)); } catch (e) {}
+      // CAP-DOOR (sim-capdoor-b): the dated history records the stored
+      // amount too. Off: gaveRec === gave, the exact statement as before.
+      try { if (gaveRec > 0) this.recordGiveHist(vid, Math.round(gaveRec)); } catch (e) {}
       // starvation is slow, and it has a face: the unfed fade
       // FASTING (crisis 2026-10-11): a voluntary gorge-fast is a rhythm
       // choice, not deprivation — hunger carries to tomorrow. No health
       // hit and no hungry-night line for a fast they chose.
-      if (ate < need * 0.6 && !fasting) {
+      // CAP-DOOR (sim-capdoor-b): a villager who ate their refused share is
+      // not unfed — the starvation judgment reads true intake. Off: ateAll === ate.
+      const ateAll = capdoorOn ? (ate + refused) : ate;
+      if (ateAll < need * 0.6 && !fasting) {
         v.health[vid] = Math.max(0, health - 8);
         if (Math.random() < 0.3 && this.playerAtHaven()) {
           const first = String(person.name || 'Someone').split(' ')[0];
