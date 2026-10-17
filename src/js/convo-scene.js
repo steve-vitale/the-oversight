@@ -412,6 +412,27 @@
               // world event — an explicit choice, since alien quirks have no
               // want-system backstop carrying them.
               weirdness: '"People are changing. Have you noticed?"',
+              // MUSTER (journey crisis r20 2026-10-17): the 'muster' lately
+              // kind needs its on-ramp — without an EV_LABELS entry the
+              // choice is never offered and the kind is conversationally
+              // unreachable (the r18 'care' gap, same class).
+              muster: '"About the muster — everyone inside, the door barred. How are you holding up?"',
+              // CARE (journey crisis r18/r19 2026-10-16): completing the
+              // on-ramp the care fix intended — the 'care' lately kind had
+              // no EV_LABELS entry, so tending the sick was still unaskable
+              // in live convos. Same one-line pattern.
+              care: '"Who\'s been sitting with the sick? How are they doing?"',
+              // ON-RAMP COMPLETION (journey crisis r20 2026-10-17): the
+              // lately kinds below all have dialogue handlers
+              // (t2gen_lately cases) but no EV_LABELS entry — they win the
+              // priority chain, block lower kinds (including muster/threat),
+              // and offer NO choice. Unlabeled kinds are unfireable beats.
+              defense: '"The defense — how did it go out there?"',
+              outbreak: '"The sickness going around — how bad is it?"',
+              show: '"The show — did you see it?"',
+              realm: '"The realm beyond — what\'s happening out there?"',
+              gratitude: '"Someone helped you. Tell me about it."',
+              cheer: '"You seem in good spirits. What\'s the occasion?"',
             };
             if (EV_LABELS[ev.kind]) {
               items.push({ kind: 'event', eventKind: ev.kind, id: 'alive:event:' + ev.kind, label: EV_LABELS[ev.kind], temper: 'neutral' });

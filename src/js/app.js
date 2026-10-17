@@ -326,6 +326,26 @@
         const cryBtn = (() => { try { const abs = Game.aidCryAbilities ? (Game.aidCryAbilities() || []) : []; return abs.length ? ` <button class="btn sm ghost" data-beat="aid:cry:${abs[0].id || abs[0]}">Ability cry (${esc(abs[0].name || abs[0].id || abs[0])})</button>` : ''; } catch (e) { return ''; } })();
         out.push(`<div class="statrow beat-open">🚨 <b>${esc(ac.name || 'A crisis')}</b> at the door — call for help: <button class="btn sm" data-beat="aid:runner">Send a runner</button> <button class="btn sm ghost" data-beat="aid:signal">Light the signal fire</button> <button class="btn sm ghost" data-beat="aid:system">System relay</button>${cryBtn}</div>`);
       }
+      // SHELTER MUSTER (2026-10-17, journey crisis r20): while the village
+      // is mustered the Haven panel shows the state — and the player can
+      // stand down early (their call, their risk). A threat stood down by
+      // the player offers the re-muster button instead of re-firing.
+      try {
+        const _v = st.village || {};
+        if (_v.shelterMustered) {
+          const _n = (Game.shelteredVillagers ? Game.shelteredVillagers().length : 0);
+          const _th = esc(_v.shelterMustered.threat || 'something');
+          out.push(`<div class="statrow beat-open">🚪 <b>Mustered:</b> ${_n} inside, the hall door barred — ${_th} hunts the treeline. Nobody walks out tonight. <button class="btn sm ghost" data-beat="shelter:standdown">📯 Stand down (release everyone)</button></div>`);
+        } else {
+          let _thr = null;
+          try { _thr = Game.shelterThreatNearHaven ? Game.shelterThreatNearHaven() : null; } catch (e) { _thr = null; }
+          if (_thr && _thr.monster && _thr.monster.shelterStoodDown) {
+            let _noun = _thr.name || 'something';
+            try { _noun = (Game.monsterNoun ? Game.monsterNoun(_thr.monster.id) : _noun) || _noun; } catch (e) {}
+            out.push(`<div class="statrow beat-open">🚪 <b>Stood down:</b> ${esc(_noun)} hunts the treeline and the village is out in it — your call. <button class="btn sm ghost" data-beat="shelter:muster">🚪 Muster everyone inside</button></div>`);
+          }
+        }
+      } catch (e) {}
       // LINGERER ANSWER (design call #8, 2026-10-16): lingerers at the treeline
       // get their honest choice — Endure it (the default) or a costly sortie.
       // The "Endure it" button dismisses the row for the day; doing nothing was
@@ -16330,6 +16350,13 @@
         else Game.callForHelp(spec[1]);
       }
       else if (kind === 'lingerer') Game.answerLingerer(spec[1]);
+      // SHELTER MUSTER (2026-10-17, journey crisis r20): manual stand-down
+      // (the player's call, their risk) and re-muster (clears the
+      // stand-down stamp and re-runs the episode check).
+      else if (kind === 'shelter') {
+        if (spec[1] === 'standdown') Game.shelterStandDown();
+        else if (spec[1] === 'muster') Game.shelterMuster();
+      }
       // SAFETY NETS (2026-10-10): aid quests, relief, neighbor aid flows,
       // and the System favor collection — all engine, now all answerable.
       else if (kind === 'aq') {

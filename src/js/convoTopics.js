@@ -400,6 +400,17 @@
           (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
         if (_cu) careEv = { kind: 'care', self: true, cured: true };
       } catch (e) { careEv = null; }
+      // MUSTER (journey crisis r20 2026-10-17): the village remembers the
+      // muster — sheltering behind the barred hall door while the horde
+      // hunts the treeline (shelter.js books 'mustered' + threat noun on
+      // every sheltered villager). Window 7 days (the defense tail).
+      let musterEv = null;
+      try {
+        const _myMem2 = (typeof this.t2mem === 'function' ? this.t2mem(vid) : []) || [];
+        const _mu = _myMem2.find(m => m.t === 'mustered' && m.threat &&
+          (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
+        if (_mu) musterEv = { kind: 'muster', self: true, threat: _mu.threat };
+      } catch (e) { musterEv = null; }
       try {
         // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
         // naming debate is the talk of the fire — it surfaces here with the
@@ -612,6 +623,10 @@
         // sitting-with while people are still down) — above generic
         // gratitude and cheer.
         if (careEv) return careEv;
+        // MUSTER (journey crisis r20): the shared story — behind the barred
+        // door while the horde hunts. Below care (personal tenderness
+        // outranks the collective), above gratitude and cheer.
+        if (musterEv) return musterEv;
         if (good) return { kind: 'gratitude', mem: good };
         if ((v.cheer || 0) > 0) return { kind: 'cheer' };
       } catch (e) {}
@@ -1316,6 +1331,23 @@
           return [
             '"I sat with ' + pat + ' through the fever — cool cloth, bitter tea. Someone had to, and I know what to do."',
             '"' + pat + ' was burning up. I did what I could. That\'s the job."',
+          ];
+        }
+        case 'muster': {
+          // MUSTER (journey crisis r20 2026-10-17): the shared story — the
+          // village behind the barred hall door while the horde hunts.
+          // The threat noun was knowledge-gated at booking (monsterNoun);
+          // active vs past is read live from the episode flag.
+          let active = false;
+          try { active = !!((this.state.village || {}).shelterMustered); } catch (e) {}
+          const th = ev.threat || 'something';
+          if (active) return [
+            '"We\'re behind the hall door with it barred — ' + th + ' hunts the treeline. We outlast it. That\'s the whole plan."',
+            '"Nobody walks the treeline while ' + th + ' is out there. Inside, door barred, we wait it out."',
+          ];
+          return [
+            '"When ' + th + ' came hunting near Haven, we got everyone inside and barred the hall door. Nobody walked the treeline that night."',
+            '"I\'ll remember that night — the whole village behind one barred door, listening to ' + th + ' hunt. We outlasted it."',
           ];
         }
         case 'gratitude':

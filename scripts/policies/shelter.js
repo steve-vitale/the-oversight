@@ -38,25 +38,14 @@ function musterBeat(Game, threatName) {
   } catch (e) {}
 }
 
-// musterCheck: the episode manager. Called from upkeep.
+// musterCheck: the episode manager. 2026-10-17 (journey crisis r20): the
+// game owns the episode now (src/js/shelter.js — shelterMusterCheck, fired
+// daily from progDaily). The policy delegates — no double beats, no double
+// musters. SHELTER=1 keeps working for bot arms: the game musters, the
+// policy just mirrors the episode flag into ctx.
 function musterCheck(Game, ctx) {
-  let threat = null;
-  try { threat = Game.shelterThreatNearHaven ? Game.shelterThreatNearHaven() : null; } catch (e) { threat = null; }
-  if (threat && !ctx._shelterMustered) {
-    // Threat arrived: beat + verb.
-    musterBeat(Game, threat.name);
-    let n = 0;
-    try { n = Game.shelterEveryoneBut([], { reason: 'muster', threatName: threat.name }); } catch (e) { n = 0; }
-    ctx._shelterMustered = true;
-    ctx._shelterMusters = (ctx._shelterMusters || 0) + 1;
-    ctx._shelterSheltered = n;
-  } else if (!threat && ctx._shelterMustered) {
-    // Threat gone: the verb releases everyone and narrates the all-clear
-    // (single beat, verb-owned — no double narration).
-    try { Game.shelterAllClear(); } catch (e) {}
-    ctx._shelterMustered = false;
-    ctx._shelterStandDowns = (ctx._shelterStandDowns || 0) + 1;
-  }
+  try { if (Game.shelterMusterCheck) Game.shelterMusterCheck(); } catch (e) {}
+  ctx._shelterMustered = !!(((Game.state || {}).village || {}).shelterMustered);
 }
 
 function withShelter(base, id, desc) {

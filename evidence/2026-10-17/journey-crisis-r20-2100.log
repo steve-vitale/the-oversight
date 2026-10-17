@@ -1,0 +1,278 @@
+[SETUP] seed 2100: oracleV2 establishing 15d...
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+--- CENSUS (established), day 17, Bearer: Peiyu ---
+  Lily [sailor] HP79
+  Peiyu [locksmith]
+  Omolara [rancher]
+  Owen [hunting_guide] HP99
+  Lucas [police_officer] HP93
+  Raj [pharmacist]
+  Elif [hotel housekeeper] HP78
+  Elijah [social_worker] HP91
+  fallen (recent): Klaus d7 (monster); Anna d10 (starvation); Hannah d11 (monster); Angela d14 (combat)
+  pantry: 14,739 kcal | mustered: false | world monsters: 16
+[SIEGE] staging congregation (something) near Haven
+[MUSTER] d17: 📯 MUSTER — scouts report The Congregation hunting near Haven, and it is beyond us. Everyone inside. No one walks the treeline alone — the g
+## MID-SIEGE d18 — talking to Lily
+OPEN CHOICES (6): [gq:open:take] "What do you think?" | [gq:open:unsure] "I don't know yet." | [gq:open:honest_pass] "I'd rather not say." | [joke] "Ha — yeah." | [invite_party] "Come with me. I could use you." | [silence] "..."
+TURN-CHOICES: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence
+> YOU PICK [gq:open:take] 
+YOU: "What do you think?"
+NPC: "Short version: I don't know. Long version: also that, but slower."
+
+TURN-CHOICES: alive:memory:feast, alive:want:ask_favor, goon, dlg:help, dlg:details, dlg:cant, recap, teach, dlg:subject, leave, silence
+> YOU PICK [dlg:help] 
+YOU: "How can I help?"
+NPC: "I did the count twice. The count doesn't change. I know the north treeline by the fallen oak — come with me and we'll fill packs before dark."
+
+TURN-CHOICES: alive:memory:feast, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence
+> YOU PICK [alive:memory:feast] 
+YOU: "About the feast..."
+NPC: “That feast — real food, firelight. I still think about it.”
+
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Since Angela died... I keep expecting to see Angela at the fire. Stupid."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About that favor — we never finished."
+NPC: "I just said — did you miss it?"
+
+> YOU PICK [goon] 
+YOU: "Hm. Let me think — go on, first."
+NPC: "Okay, that's my quota of socializing."
+
+> YOU PICK [alive:thread:lately] 
+(conversation ended by the engine)
+FINAL: want=ask_favor resolution=stated
+
+### FULL TRANSCRIPT
+NPC: "Why do you ask? Pantry's thin and getting thinner. Forage with me tomorrow? I know the north treeline by the fallen oak."
+YOU: "What do you think?"
+NPC: "Short version: I don't know. Long version: also that, but slower."
+YOU: "How can I help?"
+NPC: "I did the count twice. The count doesn't change. I know the north treeline by the fallen oak — come with me and we'll fill packs before dark."
+YOU: "About the feast..."
+NPC: “That feast — real food, firelight. I still think about it.”
+YOU: "What’s going on out there?"
+NPC: "Since Angela died... I keep expecting to see Angela at the fire. Stupid."
+YOU: "About that favor — we never finished."
+NPC: "I just said — did you miss it?"
+YOU: "Hm. Let me think — go on, first."
+NPC: "Okay, that's my quota of socializing."
+YOU: "About what's been happening — we never finished."
+NPC: "Sleep's gone strange. I do push-ups at dawn at odd hours now. Whatever gets me to morning."
+NPC: "...Sorry, lost my train of thought."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: muster=false siege=true mourn=true
+## MID-SIEGE d18 — talking to Omolara
+OPEN CHOICES (11): [agency:ask_expedition] "What did you see out there?" | [betrayal:accept] "Sure. Help me haul something back? Too much for one." | [betrayal:decline] "Not this time." | [gq:yn:yes] "Yes." | [gq:yn:no] "No." | [gq:yn:unsure] "I don't know." | [gq:yn:honest_pass] "I'd rather not say." | [agree] "You're right." | [invite_party] "Come with me. I could use you." | [silence] "..." | [confront:d_om15fc2] "You said something odd the other day. Let's talk about it."
+TURN-CHOICES: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_om15fc2
+> YOU PICK [gq:yn:yes] 
+YOU: "Yes."
+NPC: They nod, satisfied — like a piece just clicked into place.
+
+TURN-CHOICES: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:event:mourning, goon, dlg:more, dlg:commit, dlg:cant, dlg:help, recap, teach, dlg:subject, confront:d_om15fc2, leave, silence
+> YOU PICK [dlg:help] 
+YOU: "How can I help?"
+NPC: "It's my older sister, Iolanda. Was taken. She raised me more than our mother did. Boring. That is what they wrote down. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+
+TURN-CHOICES: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, confront:d_om15fc2, leave, silence
+> YOU PICK [agency:ask_expedition] 
+YOU: "What did you see out there?"
+NPC: "a spring that runs clear — I'll show you on the map sometime. It's real."
+
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: At the cache spot the ground is torn up. Something was here, recently, and it wasn't careful. Omolara's hand finds your sleeve. You leave together, faster than you came.
+
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Angela is gone and the world just... continues. That's the part I can't stand."
+
+> YOU PICK [alive:thread:want] 
+YOU: "About what was on their mind — we never finished."
+NPC: "I just said — did you miss it?"
+
+> YOU PICK [goon] 
+YOU: "Hm. Let me think — go on, first."
+NPC: "I've got fires to light — metaphorical ones. Mostly."
+
+> YOU PICK [alive:thread:lately] 
+(conversation ended by the engine)
+FINAL: want=seek_taken resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "Have you heard anything? About the taken. The pods. Anything at all."
+NPC: "Help me haul something back? Too much for one."
+YOU: "Yes."
+NPC: They nod, satisfied — like a piece just clicked into place.
+YOU: "How can I help?"
+NPC: "It's my older sister, Iolanda. Was taken. She raised me more than our mother did. Boring. That is what they wrote down. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: "What did you see out there?"
+NPC: "a spring that runs clear — I'll show you on the map sometime. It's real."
+YOU: "Sure."
+NPC: At the cache spot the ground is torn up. Something was here, recently, and it wasn't careful. Omolara's hand finds your sleeve. You leave together, faster than you came.
+YOU: "What’s going on out there?"
+NPC: "Angela is gone and the world just... continues. That's the part I can't stand."
+YOU: "About what was on their mind — we never finished."
+NPC: "I just said — did you miss it?"
+YOU: "Hm. Let me think — go on, first."
+NPC: "I've got fires to light — metaphorical ones. Mostly."
+YOU: "About what's been happening — we never finished."
+NPC: "I check everyone's shoes for wear. It doesn't bring anyone back. It just keeps my hands from shaking."
+NPC: "Thanks for listening. Most people change the subject."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: muster=false siege=false mourn=true
+--- CENSUS (mid-siege), day 24, Bearer: Omolara ---
+  Lily [sailor] SHELTERED
+  Omolara [rancher] SHELTERED
+  Owen [hunting_guide] SHELTERED
+  Lucas [police_officer] SHELTERED
+  Raj [pharmacist] SHELTERED
+  Elif [hotel housekeeper] HP94 SHELTERED
+  Elijah [social_worker] HP90 SHELTERED
+  henry_zhang [?]
+  pavel_dubinin [?] HP70
+  fallen (recent): Klaus d7 (monster); Anna d10 (starvation); Hannah d11 (monster); Angela d14 (combat); Peiyu d18 (combat); Mia d23 (monster)
+  pantry: 11,029 kcal | mustered: true | world monsters: 17
+[SIEGE] threat removed d24 — watching the all-clear
+[ALLCLEAR] d24
+--- CENSUS (end), day 60, Bearer: Owen ---
+  Lily [sailor]
+  Owen [hunting_guide] HP99
+  Lucas [police_officer]
+  Raj [pharmacist]
+  Elif [hotel housekeeper] HP80
+  Elijah [social_worker]
+  henry_zhang [?]
+  pavel_dubinin [?] HP82
+  fallen (recent): Klaus d7 (monster); Anna d10 (starvation); Hannah d11 (monster); Angela d14 (combat); Peiyu d18 (combat); Mia d23 (monster); Omolara d58 (combat)
+  pantry: 23,174 kcal | mustered: false | world monsters: 16
+## END d60 — talking to Lily
+OPEN CHOICES (7): [dlg:comfort] "You alright?" | [dlg:empathize] "That sounds really hard." | [dlg:askwhy] "What happened?" | [dlg:invite] "Want to come with us?" | [dlg:subject] "Can I ask you something else?" | [leave] "Actually — never mind." | [silence] "..."
+TURN-CHOICES: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that."
+
+TURN-CHOICES: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence
+> YOU PICK [dlg:empathize] 
+YOU: "That sounds really hard."
+NPC: "Most days I don't think about it. Today I am. Appreciate you noticing."
+
+TURN-CHOICES: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+
+> YOU PICK [dlg:empathize] 
+YOU: "That sounds really hard."
+NPC: "Thanks. ...Thanks for saying that."
+
+> YOU PICK [dlg:comfort] 
+YOU: "Are you okay?"
+NPC: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+
+> YOU PICK [dlg:empathize] 
+YOU: "That sounds really hard."
+NPC: "I — yeah. It helps, hearing that."
+
+> YOU PICK [goon] 
+YOU: "I'm here. Go on."
+NPC: "I've got things to do. People to avoid. You know."
+
+> YOU PICK [dlg:comfort] 
+(conversation ended by the engine)
+FINAL: want=seek_comfort resolution=engaged
+
+### FULL TRANSCRIPT
+NPC: "I keep expecting to see them by the fire. Then I remember."
+YOU: "Are you okay?"
+NPC: "You're kind. Don't let this place change that."
+YOU: "That sounds really hard."
+NPC: "Most days I don't think about it. Today I am. Appreciate you noticing."
+YOU: "Are you okay?"
+NPC: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+YOU: "That sounds really hard."
+NPC: "Thanks. ...Thanks for saying that."
+YOU: "Are you okay?"
+NPC: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: "That sounds really hard."
+NPC: "I — yeah. It helps, hearing that."
+YOU: "I'm here. Go on."
+NPC: "I've got things to do. People to avoid. You know."
+YOU: "Are you okay?"
+NPC: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+NPC: "Thanks for... you know. Just listening."
+NPC: "...Sorry, lost my train of thought."
+
+CARRY-FLAGS: muster=false siege=false mourn=false
+## END d60 — talking to Lucas
+OPEN CHOICES (10): [betrayal:accept] "Sure. Walk with me? I want another pair of eyes on something." | [betrayal:decline] "Not this time." | [alive:event:mourning] "How are you holding up? About... them." | [dlg:commit] "Count me in." | [dlg:cant] "I'm sorry, I can't." | [recap] "Wait — what were we talking about?" | [teach] "Here, I know this one — let me show you." | [dlg:subject] "Can I ask you something else?" | [leave] "Actually — never mind." | [silence] "..."
+TURN-CHOICES: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence
+> YOU PICK [betrayal:accept] 
+YOU: "Sure."
+NPC: You walk to the tree line with Lucas. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+
+TURN-CHOICES: alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence
+> YOU PICK [alive:event:mourning] 
+YOU: "What’s going on out there?"
+NPC: "Omolara is gone and the world just... continues. That's the part I can't stand."
+
+TURN-CHOICES: alive:thread:want, goon, dlg:more, dlg:react, recap, dlg:invite, teach, dlg:subject, leave, silence
+> YOU PICK [alive:thread:want] 
+YOU: "About that favor — we never finished."
+NPC: "Another day like today and we're choosing who eats. Meet me at the north treeline by the fallen oak and we'll fill packs before dark."
+
+> YOU PICK [alive:thread:lately] 
+YOU: "About what's been happening — we never finished."
+NPC: "I braid grass while listening to plans. It doesn't bring anyone back. It just keeps my hands from shaking."
+
+> YOU PICK [dlg:more] 
+YOU: "Tell me more."
+NPC: "Nobody says Omolara's name right yet. We will. Give it a few days."
+
+> YOU PICK [dlg:react] 
+YOU: "Huh."
+NPC: "Anyway." A small smile.
+
+> YOU PICK [dlg:more] 
+YOU: "Tell me more."
+NPC: "I braid grass while listening to plans for Omolara, now. Feels right. Feels like the least I can do."
+
+> YOU PICK [goon] 
+YOU: "Keep going."
+NPC: "Anyway — I should get back to it. Good talking, though."
+
+> YOU PICK [dlg:more] 
+(conversation ended by the engine)
+FINAL: want=ask_favor resolution=stated
+
+### FULL TRANSCRIPT
+NPC: "I asked Omolara about the pantry run — Omolara's gone. Still need hands. Are you in? Not that it matters."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "Sure."
+NPC: You walk to the tree line with Lucas. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: "What’s going on out there?"
+NPC: "Omolara is gone and the world just... continues. That's the part I can't stand."
+YOU: "About that favor — we never finished."
+NPC: "Another day like today and we're choosing who eats. Meet me at the north treeline by the fallen oak and we'll fill packs before dark."
+YOU: "About what's been happening — we never finished."
+NPC: "I braid grass while listening to plans. It doesn't bring anyone back. It just keeps my hands from shaking."
+YOU: "Tell me more."
+NPC: "Nobody says Omolara's name right yet. We will. Give it a few days."
+YOU: "Huh."
+NPC: "Anyway." A small smile.
+YOU: "Tell me more."
+NPC: "I braid grass while listening to plans for Omolara, now. Feels right. Feels like the least I can do."
+YOU: "Keep going."
+NPC: "Anyway — I should get back to it. Good talking, though."
+YOU: "Tell me more."
+NPC: "I wish there was more to tell. That's it."
+NPC: "...Sorry, lost my train of thought."
+NPC: "Hm. Never mind — go on."
+
+CARRY-FLAGS: muster=false siege=true mourn=true

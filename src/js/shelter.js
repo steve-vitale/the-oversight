@@ -2,13 +2,16 @@
 // system: shelter
 // description: The shelter/evacuate verb — engine-honest villager protection during apex threats (sim-siegeroster 2026-10-15: the muster beat fired and read well but moved nothing because no verb existed to move villagers off a threatened tile). shelterVillagers() moves villagers to Haven, inside the hall, behind a barricaded door: the wild router cannot jump them, the raid draft cannot spend them, duties skip them (they are mustered, not working). The cost is legible — lost production while sheltered, and unmet raiders linger and gorge (the existing havenGrowth mechanic). Release returns them to agency; inside is home, their own duties move them back out.
 // provides:
-//   - shelterThreatNearHaven()
+//   - shelterThreatNearHaven(radius)
 //   - shelterVillagers(vids, opts)
 //   - shelterEveryoneBut(exceptVids, opts)
 //   - releaseShelter(vids)
 //   - shelterAllClear()
 //   - isSheltered(vid)
 //   - shelteredVillagers()
+//   - shelterMusterCheck()
+//   - shelterMuster()
+//   - shelterStandDown()
 // rules:
 //   - engine_honest_movement: sheltering moves real node state (npcSetNode) and the real door sub-state (npcSetInside) — never narration alone (code: shelter.js — shelterVillagers)
 //   - protection_is_mechanical: the wild jump, raid draft, and duty loops each exclude sheltered villagers by flag read, not by beat text (code: shelter.js — isSheltered; game.js — villagerMonsterTick; havenGrowth.js — havenRaidTick; game.js — duty loops)
@@ -19,12 +22,18 @@
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
 
-  // Threat gate: a wave-4+ world monster within 2 tiles (Chebyshev) of Haven.
-  // Reuses the siegeroster gate (evidence/2026-10-15/sim-siegeroster.md) —
-  // the beat proved the gate reads true; the verb gives it teeth.
-  function shelterThreatNearHaven() {
+  // Threat gate: a wave-4+ world monster within `radius` tiles (Chebyshev)
+  // of Haven. Reuses the siegeroster gate (evidence/2026-10-15/sim-siegeroster.md)
+  // — the beat proved the gate reads true; the verb gives it teeth.
+  // HYSTERESIS (2026-10-17, journey crisis r20): the muster fires at radius
+  // 2 but only stands down past radius 3 — a monster pacing just outside
+  // the gate reads as "gone" to a hair-trigger and the village unbars into
+  // a raid the same dawn (seed 2100: all-clear at dist 3, Omolara drafted
+  // and killed that night). We don't unbar while it's still pacing out there.
+  function shelterThreatNearHaven(radius) {
     const v = this.state.village;
     if (!v) return null;
+    const r = (radius === undefined || radius === null) ? 2 : radius;
     const hx = v.px ?? 4, hy = v.py ?? 4;
     let worst = null;
     let monsters = [];
@@ -38,7 +47,7 @@
       } catch (e) { /* data lookup failed — treat as wave 1, still check distance */ }
       if (wave < 4) continue;
       const dist = Math.max(Math.abs((m.tx ?? hx) - hx), Math.abs((m.ty ?? hy) - hy));
-      if (dist > 2) continue;
+      if (dist > r) continue;
       if (!worst || wave > worst.wave) worst = { monster: m, wave, dist, name: mName };
     }
     return worst;
@@ -122,6 +131,87 @@
     return n;
   }
 
+  // GAME-SIDE MUSTER (2026-10-17, journey crisis r20): the episode manager.
+  // The village musters ITSELF — no bot policy needed. Called daily from
+  // progDaily (wrapped below, ahead of the havenGrowth raid tick so the
+  // muster precedes the draft). The muster beat is the scouts' report —
+  // threat named via monsterNoun (knowledge-gated), never the true name.
+  // Design calls (mine — Steve overrules):
+  // - AUTO-muster, not a player button: wave-4+ vs villagers is a 1-2-round
+  //   death (siegeroster diagnosis) — people don't wait for orders to get
+  //   inside. The player's interesting calls remain: sortie vs endure
+  //   (lingerer answers) and early stand-down (their risk).
+  // - A threat the player stood down for is NOT re-mustered (stamped on the
+  //   monster instance — a new threat re-musters). shelterMuster() clears
+  //   the stamps: the player re-mustering on purpose.
+  function shelterMusterCheck() {
+    const v = this.state.village;
+    if (!v || !v.roster) return { mustered: false };
+    const mustered = !!v.shelterMustered;
+    // HYSTERESIS: muster at radius 2, stand down only past radius 3.
+    let threat = null;
+    try { threat = this.shelterThreatNearHaven ? this.shelterThreatNearHaven(mustered ? 3 : 2) : null; } catch (e) { threat = null; }
+    if (threat && threat.monster && threat.monster.shelterStoodDown) threat = null;
+    const day = (this.state.scholar || {}).day || 0;
+    if (threat && !mustered) {
+      let noun = threat.name || 'something';
+      try { noun = (typeof this.monsterNoun === 'function' ? this.monsterNoun(threat.monster.id) : noun) || noun; } catch (e) {}
+      this.say(`📯 MUSTER — scouts report ${noun} hunting near Haven, and it is beyond us. Everyone inside. No one walks the treeline alone — the garden crews double up, the hunters stand down. We outlast it.`);
+      let n = 0;
+      try { n = this.shelterEveryoneBut([], { reason: 'muster', threatName: noun, quiet: true }); } catch (e) { n = 0; }
+      v.shelterMustered = { since: day, threat: noun };
+      // The village remembers the muster — the lately system carries it
+      // (convoTopics.js 'muster' kind). Every sheltered villager lived it.
+      try {
+        for (const vid of this.shelteredVillagers()) {
+          if (this.remember) this.remember(vid, 'mustered', 'mustered inside — ' + noun + ' hunts the treeline', { threat: noun });
+        }
+      } catch (e) {}
+      return { mustered: true, n };
+    } else if (!threat && mustered) {
+      try { this.shelterAllClear(); } catch (e) {}
+      delete v.shelterMustered;
+      return { mustered: false };
+    }
+    return { mustered };
+  }
+
+  // Manual re-muster (Haven panel): clears stand-down stamps, then runs the
+  // episode check. No threat, no muster — honest.
+  function shelterMuster() {
+    const v = this.state.village;
+    if (!v) return 0;
+    try {
+      for (const m of (this.worldMonsters() || [])) {
+        if (m && m.shelterStoodDown) delete m.shelterStoodDown;
+      }
+    } catch (e) {}
+    const r = this.shelterMusterCheck ? this.shelterMusterCheck() : null;
+    return (r && r.n) || 0;
+  }
+
+  // Manual stand-down (Haven panel): the player's call, their risk. Releases
+  // everyone and stamps THIS threat stood-down so dawn doesn't re-muster
+  // behind their back. A new threat still musters.
+  function shelterStandDown() {
+    const v = this.state.village;
+    if (!v || !v.shelterMustered) return 0;
+    let threat = null;
+    try { threat = this.shelterThreatNearHaven ? this.shelterThreatNearHaven() : null; } catch (e) {}
+    if (threat && threat.monster) threat.monster.shelterStoodDown = true;
+    let n = 0;
+    try { n = this.shelterAllClear({ quiet: true }); } catch (e) { n = 0; }
+    delete v.shelterMustered;
+    if (n > 0) {
+      let noun = 'the threat';
+      try {
+        noun = threat ? ((typeof this.monsterNoun === 'function' ? this.monsterNoun(threat.monster.id) : null) || threat.name || noun) : noun;
+      } catch (e) {}
+      this.say(`You give the word — the hall door unbars and the village files back out, eyes on the treeline. ${noun} still hunts out there; the muster waits on your word now.`);
+    }
+    return n;
+  }
+
   const methods = {
     shelterThreatNearHaven,
     shelterVillagers,
@@ -130,6 +220,21 @@
     shelterAllClear,
     isSheltered,
     shelteredVillagers,
+    shelterMusterCheck,
+    shelterMuster,
+    shelterStandDown,
   };
   Object.assign(Game, methods);
+
+  // DAILY MUSTER (2026-10-17): the village musters itself. This wrap chains
+  // after havenGrowth's progDaily wrap (shelter.js loads later), so the
+  // muster check runs BEFORE the raid tick — the muster precedes the draft.
+  try {
+    const _progDaily = Game.progDaily;
+    Game.progDaily = function () {
+      try { this.shelterMusterCheck(); } catch (e) {}
+      const r = _progDaily ? _progDaily.apply(this, arguments) : undefined;
+      return r;
+    };
+  } catch (e) {}
 })();

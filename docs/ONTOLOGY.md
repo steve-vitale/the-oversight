@@ -1337,7 +1337,7 @@ In-world discovery of the scale ladder — traveler word, villager mentions, Sys
 ### shelter (`shelter.js`)
 The shelter/evacuate verb — engine-honest villager protection during apex threats (sim-siegeroster 2026-10-15: the muster beat fired and read well but moved nothing because no verb existed to move villagers off a threatened tile). shelterVillagers() moves villagers to Haven, inside the hall, behind a barricaded door: the wild router cannot jump them, the raid draft cannot spend them, duties skip them (they are mustered, not working). The cost is legible — lost production while sheltered, and unmet raiders linger and gorge (the existing havenGrowth mechanic). Release returns them to agency; inside is home, their own duties move them back out.
 
-**Provides:** shelterThreatNearHaven(), shelterVillagers(vids, opts), shelterEveryoneBut(exceptVids, opts), releaseShelter(vids), shelterAllClear(), isSheltered(vid), shelteredVillagers()
+**Provides:** shelterThreatNearHaven(radius), shelterVillagers(vids, opts), shelterEveryoneBut(exceptVids, opts), releaseShelter(vids), shelterAllClear(), isSheltered(vid), shelteredVillagers(), shelterMusterCheck(), shelterMuster(), shelterStandDown()
 
 **Rules:**
 - engine_honest_movement: sheltering moves real node state (npcSetNode) and the real door sub-state (npcSetInside) — never narration alone (code: shelter.js — shelterVillagers)
