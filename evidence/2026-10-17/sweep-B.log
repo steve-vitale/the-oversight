@@ -1,0 +1,78 @@
+  [vetrel-lead s1255] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=1 schD=3 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [vetrel-lead s1256] d=180 survived compW3=1 w4=0 vet2pk=1 w3k=3 schD=3 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [vetrel-lead s1257] d=180 survived compW3=2 w4=0 vet2pk=0 w3k=4 schD=5 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [vetrel-lead s1258] d=180 survived compW3=1 w4=0 vet2pk=0 w3k=2 schD=3 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [vetrel-belong s1255] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=1 schD=7 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [vetrel-belong s1256] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=0 schD=2 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [vetrel-belong s1257] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=1 schD=5 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [vetrel-belong s1258] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=3 schD=4 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [yieldwin-lead s1255] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=1 schD=3 ywY=0 ywKR=0 ywSR=0 ywFB=0
+  [yieldwin-lead s1256] d=180 survived compW3=1 w4=0 vet2pk=0 w3k=1 schD=2 ywY=0 ywKR=0 ywSR=0 ywFB=2
+  [yieldwin-lead s1257] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=1 schD=3 ywY=0 ywKR=0 ywSR=0 ywFB=3
+  [yieldwin-lead s1258] d=180 survived compW3=1 w4=0 vet2pk=0 w3k=1 schD=2 ywY=0 ywKR=0 ywSR=0 ywFB=1
+  [yieldwin-belong s1255] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=1 schD=5 ywY=0 ywKR=0 ywSR=0 ywFB=1
+  [yieldwin-belong s1256] d=180 survived compW3=0 w4=0 vet2pk=0 w3k=1 schD=1 ywY=0 ywKR=0 ywSR=0 ywFB=1
+  [yieldwin-belong s1257] d=180 survived compW3=1 w4=0 vet2pk=0 w3k=1 schD=1 ywY=0 ywKR=0 ywSR=0 ywFB=2
+  [yieldwin-belong s1258] d=160 village-dead compW3=0 w4=0 vet2pk=0 w3k=0 schD=6 ywY=0 ywKR=0 ywSR=0 ywFB=2
+
+SUMMARY: {
+ "control": {
+  "n": 8,
+  "companionW3": 4,
+  "w4": 0,
+  "vet2peak": 1,
+  "national": 0,
+  "surv": [
+   180,
+   180,
+   180,
+   180,
+   180,
+   180,
+   180,
+   180
+  ],
+  "scholarDeaths": 32,
+  "deaths": {
+   "unknown": 8
+  },
+  "yw": {
+   "firstBlood": 0,
+   "yields": 0,
+   "killRangeHolds": 0,
+   "stealRefusals": 0
+  },
+  "medianSurv": 180
+ },
+ "armed": {
+  "n": 8,
+  "companionW3": 3,
+  "w4": 0,
+  "vet2peak": 0,
+  "national": 0,
+  "surv": [
+   180,
+   180,
+   180,
+   180,
+   180,
+   180,
+   180,
+   160
+  ],
+  "scholarDeaths": 23,
+  "deaths": {
+   "unknown": 8
+  },
+  "yw": {
+   "firstBlood": 12,
+   "yields": 0,
+   "killRangeHolds": 0,
+   "stealRefusals": 0
+  },
+  "medianSurv": 180
+ }
+}
+PRIMARY: armed companionW3=3 control companionW3=4 ratio=0.75 bars(>=1.5x AND >=6) -> NO-GO (KILL)
+wrote evidence/2026-10-17/sim-yieldwin-pilot-B.json
+SWEEP_B_EXIT=0

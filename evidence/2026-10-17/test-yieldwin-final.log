@@ -1,0 +1,25 @@
+  PASS V1 gate-off (YIELDWIN unset): pure delegation — delegated=1 waited=0
+  PASS V2 YIELDWIN=1 without VETREL=1: pure delegation — delegated=1
+  PASS V3 companion-first: round-1 hold, wrapper handles — waited=1 delegated=0 firstBlood=1
+  PASS V3b companion-first fires once per fight — firstBlood=1 extraWaits=0
+  PASS V3c companion-first mirrors hunt commit (vet=false, nonvet=true) — vet=false nonvet=true
+  PASS V4 early yield at 35%: scholar holds (tbPlayerWait) — waited=1 yields=1
+  PASS V5 above window (45%): delegates, scholar softens — delegated=1
+  PASS V6 non-veteran scholar: no yield, delegates — delegated=1
+  PASS V7 anti-steal: 7th turn holds, steal refused — holds=6 refusals=1 delegated=0
+  PASS V8 window close: delegates and exhausts vetrel yield counter — delegated=1 vetrelExhausted=true
+  PASS V8b closed window stays closed — extraWaits=0
+  PASS V9 scholar hurting: no hold, delegates — delegated=1
+  PASS V10 hurt companion: delegates to vetrel survival — delegated=1
+
+fixtures: 13 pass, 0 fail
+  PASS V11a det-gate: gate-off yieldwin-lead byte-identical to vetrel-lead (s204) — len=1655
+  PASS V11b det-gate: gate-off yieldwin-belong byte-identical to vetrel-belong (s315) — len=1597
+  PASS V11c det-gate: gate-on deterministic (identical armed 60d)
+  info V11d seed s204: no divergence in 60d
+  info V11d seed s315: ENGAGED (armed != gate-off)
+  info V11d seed s122: no divergence in 60d
+  PASS V11d det-gate: gate-ON engages on real fights (>=1 of 3 seeds diverges) — engaged=1/3
+
+17 pass, 0 fail
+PROOF_EXIT=0
