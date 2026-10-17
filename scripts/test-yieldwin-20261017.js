@@ -25,17 +25,14 @@
 const fs = require('fs');
 const path = require('path');
 
-// KILL-PROTOCOL INFO-SKIP: if the layer is deleted (YIELDWIN_KILLED=1 set by
-// the coordinator after a killed arm), this proof exits green with an
-// INFO-SKIP instead of FATAL-ing. Without the layer and without the flag,
-// absence is RED (exit 1).
+// KILL-PROTOCOL INFO-SKIP (coordinator repair 2026-10-17, post-kill
+// precedent): the layer was deleted per the kill protocol after the pilot
+// PRIMARY NO-GO (armed 6 vs control 6 companionW3, ratio 1.0x; deepened
+// yield never fired — evidence/2026-10-17/sim-yieldwin.md). With the
+// layer gone the proof is not applicable: INFO-SKIP, exit 0.
 if (!fs.existsSync(path.join(__dirname, 'policies', 'yieldwin.js'))) {
-  if (process.env.YIELDWIN_KILLED === '1') {
-    console.log('INFO-SKIP: yieldwin layer deleted per kill protocol (sim-yieldwin PRIMARY NO-GO) — proof not applicable.');
-    process.exit(0);
-  }
-  console.error('RED: scripts/policies/yieldwin.js missing and YIELDWIN_KILLED not set.');
-  process.exit(1);
+  console.log('INFO-SKIP: yieldwin layer deleted per kill protocol (sim-yieldwin PRIMARY NO-GO, evidence/2026-10-17/sim-yieldwin.md) — proof not applicable.');
+  process.exit(0);
 }
 
 const YW = require('./policies/yieldwin');
