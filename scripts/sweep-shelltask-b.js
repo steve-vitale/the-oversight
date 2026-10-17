@@ -76,6 +76,15 @@ async function oneRun(seed, policyId, arm) {
         t.shellLog.push({ day: ctx._stShellDay != null ? ctx._stShellDay : gday(G),
           kcal: num((G.state.scholar || {}).kcal), cumShelledKcal: ctx.stShelledKcal || 0 });
       }
+      // SHELLED KCAL ON STARVATION DAYS (sim-shellrevive-b corrected
+      // primary): credit each firing's converted kcal to the starv-day
+      // bucket when the scholar was genuinely hungry (kcal < 500) at firing.
+      const prev = t._prevShelledKcal || 0, now = ctx.stShelledKcal || 0;
+      if (now > prev) {
+        const starv = (((G.state || {}).scholar || {}).kcal || 99999) < 500;
+        if (starv) t.shelledKcalStarvDays = (t.shelledKcalStarvDays || 0) + (now - prev);
+        t._prevShelledKcal = now;
+      }
       t.shelledKcalTotal = ctx.stShelledKcal || 0;
     } catch (e) { t.errors++; }
   };
@@ -128,7 +137,17 @@ async function oneRun(seed, policyId, arm) {
     starvationDeaths: t.deaths.filter(d => d.cls === 'STARVATION').length,
     playerStarvationDeaths: t.deaths.filter(d => d.cls === 'STARVATION' && d.player).length,
     causeCounts, clsCounts,
-    shellDays: t.shellLog.length, shelledKcal: t.shelledKcalTotal || 0, shelledDayEatKcal,
+    shellDays: t.shellLog.length, shelledKcal: t.shelledKcalTotal || 0,
+    shelledKcalStarvDays: t.shelledKcalStarvDays || 0,
+    shelledDayEatKcal,
+    scholarPantryTakes: (() => { try {
+      // PURE-GAIN EXONERATION (sim-shellrevive-b corrected primary): the
+      // scholar's cumulative pantry draws in kcal (v.takes[vid] is written
+      // by Game.takeFromPantry). The shelling must not divert village food:
+      // paired displacement (control - armed) must be >= 0.
+      const vv = Game.state.village || {}, s = Game.state.scholar || {};
+      return ((vv.takes || {})[s.villagerId]) || 0;
+    } catch (e) { return null; } })(),
     instrumentErrors: t.errors | 0,
   };
   fs.mkdirSync(OUT, { recursive: true });
