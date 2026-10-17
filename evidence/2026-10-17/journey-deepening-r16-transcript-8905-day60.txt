@@ -1,0 +1,21 @@
+=== seed 8905 day 60 — conversation with August (gen_zbj7ngn) ===
+occupation=army medic temperament=earnest trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: agency:ask_expedition, alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening."
+THEM: They give you the benefit of the doubt. This time.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=ask_favor stage=3 resolution=promised

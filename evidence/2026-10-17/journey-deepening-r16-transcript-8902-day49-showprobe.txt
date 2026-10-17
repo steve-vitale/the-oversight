@@ -1,0 +1,32 @@
+=== seed 8902 day 49 — conversation with Eric (gen_3c6qqjp) ===
+occupation=ESL teacher temperament=intense trust=58 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Look — We never did finish talking about what was on their mind — that was 13 days back. Still on your mind? 'Forget I said anything. What did you want? Simple as that.'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Here's the thing: My take? We're not going to like the answer, whatever it is."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took you — Riddle Me This, on the screens. The whole fire watched. Nobody knew where to look."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "This matters — Sam is back. Walked in like they'd never left."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I mean it."
+(want=seek_taken stage=0)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "Being an eSL teacher feels like a past life. Sometimes I wonder if I dreamed it."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=seek_taken stage=0)
+closing line: "Think about what I said."
+want final: id=seek_taken stage=3 resolution=unestablished

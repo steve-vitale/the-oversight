@@ -1,0 +1,27 @@
+=== seed 8904 day 60 — conversation with Karaitiana (gen_0300cur) ===
+occupation=bartender temperament=fidgety trust=93 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About the talking-to-strangers part — ...Hi. Sorry. I'm not good at the talking-to-strangers part. ...anyway, where was I."
+(turn0 choices: agency:ask_field, deflect_q, ans:q_quiet:a_kind, ans:q_quiet:a_help, ans:q_quiet:a_leave, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=1)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [goon] "Take your time."
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Adaeze talks to the garden. The garden listens. I've seen it. I mean it."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute."
+want final: id=curious stage=3 resolution=engaged

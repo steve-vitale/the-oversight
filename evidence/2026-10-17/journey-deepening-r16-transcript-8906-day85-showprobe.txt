@@ -1,0 +1,32 @@
+=== seed 8906 day 85 — conversation with Norman (gen_yue5k52) ===
+occupation=bush pilot temperament=warm trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different. I mean it."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took me. Gauntlet — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? How are you holding up, though?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Good question." "Don't repeat this, but David's story doesn't hold. A plumber, back before. Not what they told you. That's the whole of it."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Not that it matters."
+(want=seek_taken stage=1)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Huh. Let me think about that." "I've wrung that topic dry. It squeaked."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Simple as that."
+(want=seek_taken stage=1)
+closing line: "Take care of yourself, yeah? I mean it."
+want final: id=seek_taken stage=3 resolution=unresolved

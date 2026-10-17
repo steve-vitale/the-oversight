@@ -1,0 +1,24 @@
+=== seed 8902 day 60 — conversation with Eric (gen_3c6qqjp) ===
+occupation=ESL teacher temperament=intense trust=70 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all. That's the whole of it."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Bottom line: Short version: I don't know. Long version: also that, but slower."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my aunt, Nicole. Went in the Taking. She laughed like a screen door in a windstorm. Boring. Right. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Maypop — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [goon] "I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=seek_taken stage=3 resolution=promised

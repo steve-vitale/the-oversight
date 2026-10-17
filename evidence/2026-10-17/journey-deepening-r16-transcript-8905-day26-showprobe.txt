@@ -1,0 +1,32 @@
+=== seed 8905 day 26 — conversation with August (gen_zbj7ngn) ===
+occupation=army medic temperament=earnest trust=77 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Priya is gone and the world just... continues. That's the part I can't stand."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? I mean it."
+(want=seek_comfort stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "I mean this — Did you hear? Elif just walked away from Haven. Didn't look back."
+(want=seek_comfort stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "You know what's weird? I'm an army medic — was an army medic — and none of that prepared me for any of this."
+(want=seek_comfort stage=0)
+closing line: "Talking helps. A little. Thank you."
+want final: id=seek_comfort stage=3 resolution=unestablished

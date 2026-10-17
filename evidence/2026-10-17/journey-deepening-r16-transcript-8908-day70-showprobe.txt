@@ -1,0 +1,32 @@
+=== seed 8908 day 70 — conversation with Kennedy (gen_nwiclmf) ===
+occupation=Dentist temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Hey — I found some Sorghum today. You were right, it was right where you said."
+(turn0 choices: alive:event:show, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "Sweet Tooth. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Someone should talk to Priya. Not me, though."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=0)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "Same story, different day. The ending hasn't changed."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "You want to know about that? Okay." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=seek_taken stage=0)
+closing line: "Go easy today, okay? The world's hard enough."
+want final: id=seek_taken stage=3 resolution=unestablished

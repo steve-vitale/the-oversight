@@ -1,0 +1,32 @@
+=== seed 8904 day 47 — conversation with Jorge (gen_x5ub8q0) ===
+occupation=physical therapy aide temperament=intense trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Jorge glances around first. "People are saying things. About you. Is any of it true?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_ku82oe8)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Did you hear? Dorothy just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Don't look away from this."
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "Tell you what — You ever notice how quiet it gets out here at night? Like the world's holding its breath."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Between us — I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=1)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=unresolved

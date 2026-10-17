@@ -1,0 +1,32 @@
+=== seed 8906 day 17 — conversation with Catalina (catalina_reyes) ===
+occupation=fishing guide temperament=bold trust=49 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: Did you see what I brought back? Tell the others. Please — tell them.
+(turn0 choices: agency:ask_field, betrayal:site:case_3, betrayal:witnesses:case_3, betrayal:investigate:case_3, betrayal:letlie:case_3, betrayal:vote_guilty:case_3, betrayal:vote_acquit:case_3, ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Hushpuppy — No telegraph you can hear. It hunts at night — give the dark a wide berth."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "It crouches low, tail lashing once, twice. That's the The Mountain Lord telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Pineapple. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that. That's the whole of it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "They took me. Duel — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

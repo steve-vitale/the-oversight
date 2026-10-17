@@ -1,0 +1,32 @@
+=== seed 8905 day 65 — conversation with August (gen_zbj7ngn) ===
+occupation=army medic temperament=earnest trust=90 dead=false mood=steady
+want: repay (stage 1, fromSeed)
+
+THEM: "You said you'd help with this wound. ...It's done now. Forget it."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:want:repay, alive:event:show, dlg:react, dlg:cant, dlg:help, recap, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? No time to waste."
+(want=repay stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "The Witness. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=repay stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Daniel talks to the garden. The garden listens. I've seen it."
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I hope that helps."
+(want=repay stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "My army medic instincts keep firing at the wrong things. Old wiring, new world."
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=repay stage=1)
+YOU: [ask:fears] "What scares you?"
+THEM: "You want to know about that? Okay." "Being a burden." Said flat, like something rehearsed in the dark.
+(want=repay stage=1)
+closing line: "Take care of yourself."
+want final: id=repay stage=3 resolution=unresolved

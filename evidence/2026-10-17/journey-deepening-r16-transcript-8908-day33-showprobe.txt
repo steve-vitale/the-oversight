@@ -1,0 +1,32 @@
+=== seed 8908 day 33 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter temperament=steady trust=46 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "I keep expecting to see them by the fire. Then I remember."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind? Not that it matters."
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Camila is gone and the world just... continues. That's the part I can't stand."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "that stray dog — the one that bit two people — lets Dat touch it."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "I've been watching how making do works out here. It's different from before. Everything's different from before."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Simple as that."
+(want=seek_comfort stage=0)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Good question." "The smell of smoke that is not a fire — and now losing people. That one isn't abstract anymore."
+(want=seek_comfort stage=0)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=unestablished

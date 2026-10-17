@@ -1,0 +1,32 @@
+=== seed 8904 day 67 — conversation with Karaitiana (gen_0300cur) ===
+occupation=bartender temperament=fidgety trust=93 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about the talking-to-strangers part — we wandered off it, 7 days back. 'Their tone levels out — courteous, careful, further away.'!"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, alive:event:mourning, dlg:help, dlg:cant, recap, teach, alive:want:ask_favor, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "We lost Adaeze and Brian this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "People are talking about me. Take it for what it's worth."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Doesn't matter now."
+(want=ask_favor stage=0)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "We should stick together. Twelve strangers is better than one stranger. Math."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=0)
+closing line: "...Thanks for being here. That's all."
+want final: id=ask_favor stage=3 resolution=unestablished

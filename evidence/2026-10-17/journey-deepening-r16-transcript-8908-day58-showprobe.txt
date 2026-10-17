@@ -1,0 +1,32 @@
+=== seed 8908 day 58 — conversation with Kennedy (gen_nwiclmf) ===
+occupation=Dentist temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Khaya, as it were?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong, friend."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You saw it too, right? The Pit. Tell me I didn't imagine the lights."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Makes sense to me."
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "People are talking about Benoit. Take it for what it's worth."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=1)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Good question." "If I may — The fire's the real leader here. We just orbit it and pretend we're in charge."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Worth considering."
+(want=seek_taken stage=1)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=unresolved

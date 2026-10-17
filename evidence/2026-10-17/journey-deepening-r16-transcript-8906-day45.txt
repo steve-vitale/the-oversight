@@ -1,0 +1,32 @@
+=== seed 8906 day 45 — conversation with Norman (gen_yue5k52) ===
+occupation=bush pilot temperament=warm trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Jada and I never did finish talking about what was on their mind — that was 12 days back. You weren't there for that one — Jada was. Want to hear where it left off? 'Forget I said anything. What did you want?' We still owe the gossip a proper ending, too."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Tell me — Fair enough. I'd rather hear that than a confident lie."
+(want=seek_taken stage=0)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my grandfather, Marcus. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Sassafras — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Common Plantain — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=3)
+closing line: "This was nice. Don't be a stranger — we're ten people, it's hard."
+want final: id=seek_taken stage=3 resolution=promised

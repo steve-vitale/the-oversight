@@ -1,0 +1,32 @@
+=== seed 8907 day 45 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=41 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Will you help me clean it?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "...Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "We lost Lyubov, Aaliyah and Theo this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Tonje talks to the garden. The garden listens. I've seen it. I won't forget that."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Good question." "You're alright. I think. Ask me again in a week." "Don't make me say it twice."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? …if that makes sense."
+(want=ask_favor stage=1)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=unresolved

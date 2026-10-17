@@ -1,0 +1,32 @@
+=== seed 8906 day 33 — conversation with Norman (gen_yue5k52) ===
+occupation=bush pilot temperament=warm trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Marcus? Rest when you can."
+(turn0 choices: betrayal:site:case_10, betrayal:witnesses:case_10, betrayal:investigate:case_10, betrayal:letlie:case_10, betrayal:vote_guilty:case_10, betrayal:vote_acquit:case_10, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "The Confession. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? You're doing fine."
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Elias? A blacksmith, back before. Solid person."
+(want=seek_taken stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Just... be straight with me."
+(want=seek_taken stage=1)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real."
+(want=seek_taken stage=1)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=seek_taken stage=3 resolution=unresolved

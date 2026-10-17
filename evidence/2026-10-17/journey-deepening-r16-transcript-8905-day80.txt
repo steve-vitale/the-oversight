@@ -1,0 +1,21 @@
+=== seed 8905 day 80 — conversation with August (gen_zbj7ngn) ===
+occupation=army medic temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I haven't eaten right in days. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

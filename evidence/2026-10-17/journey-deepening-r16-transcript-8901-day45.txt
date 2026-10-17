@@ -1,0 +1,27 @@
+=== seed 8901 day 45 — conversation with Rocco (gen_7175snj) ===
+occupation=locksmith temperament=stoic trust=90 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're angry — Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, deflect_q, leave, silence, party_name)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Feel it, then use it. That's the whole trick. I'm still learning it myself. That is all."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "They took you — The Moot, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "I see."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

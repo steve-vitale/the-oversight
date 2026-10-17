@@ -1,0 +1,32 @@
+=== seed 8902 day 101 — conversation with Ines (ines_duarte) ===
+occupation=florist temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before. You doing okay?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. Just... be straight with me."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You saw it too, right? Hardened The Pit. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Mm. Hank is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Good question." "We should stick together. Twelve strangers is better than one stranger. Math. Simple as that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? How are you holding up, though?"
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "The fire going out." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "Anyway. I'm glad we talked. Really."
+want final: id=curious stage=3 resolution=engaged

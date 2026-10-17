@@ -1,0 +1,32 @@
+=== seed 8906 day 44 — conversation with Catalina (catalina_reyes) ===
+occupation=fishing guide temperament=bold trust=100 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before. Anyway, that's me."
+(turn0 choices: agency:ask_expedition, ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. Mark my words."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "Jada is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Let me be straight — Did you hear? Benoit just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I mean it."
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "Fishing guide — that was me. Feels like reading someone else's biography."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8908 day 43 — conversation with Benoit (benoit_lambert) ===
+occupation=Baker temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something you're good at that nobody here knows about?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Can I be honest? Everyone's got a hidden card. I'm keeping a mental deck of this whole village."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Here's what I think — I'm not saying there's anything wrong with Priya. I'm just saying I sleep better with them on the other side of the fire."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Sassafras — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8908 day 61 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter temperament=steady trust=56 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "You saw it too, right? Hide and Seek. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Someone should talk to Priya. Not me, though."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "New rule: whoever complains about the food cooks tomorrow. Watch the complaints vanish."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "Good question." "You're one of the good ones. Don't make me regret saying that out loud." "That's where we are."
+(want=curious stage=2)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

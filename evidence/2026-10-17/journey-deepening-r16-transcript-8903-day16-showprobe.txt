@@ -1,0 +1,32 @@
+=== seed 8903 day 16 — conversation with Gertrude (gen_di7uqgf) ===
+occupation=mechanic temperament=bold trust=46 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the sickness I'm fighting — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Since Marta died... I keep expecting to see Marta at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying when they think I'm not listening?"
+THEM: "Huh. Let me think about that." "Sigrun? A night security guard, back before. Solid person."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? ...sorry."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "I want to know you better. The real you."
+THEM: "Huh. Let me think about that." "I keep my pack ready. Old mechanic habit — always be ready to leave the office."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? You know?"
+(want=ask_favor stage=2)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=stated

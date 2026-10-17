@@ -1,0 +1,32 @@
+=== seed 8903 day 83 — conversation with Mia (mia_andersson) ===
+occupation=community gardener temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You told me about that kitchen — morning light, three years old. Have any other memories come back since?"
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Last time things were different. They always are." "You saw it too, right? The Blood Tithe. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? That's the whole of it."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Did you hear? Sigrun just walked away from Haven. Didn't look back. Cool, cool."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "You want to know about that? Okay." "What's this about? I keep the good moments in a mental box. Today goes in the box. Just so you know."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 8904 day 33 — conversation with Caitlin (gen_6mwo06a) ===
+occupation=Rancher temperament=withdrawn trust=90 dead=false mood=grieving
+want: ask_favor (stage 0, fromSeed)
+
+THEM: "Can we talk?" Caitlin glances around first. "People are saying things. About you. Is any of it true?"
+(turn0 choices: agency:ask_expedition, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Huh. I answered that once — back when the answer was simpler." "Vasyl is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Did you hear? Adaeze just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Forget it."
+(want=ask_favor stage=0)
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=0)
+YOU: [teach] "Watch. This matters."
+THEM: "...I need to go be quiet for a while."
+(want=ask_favor stage=0)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=unestablished

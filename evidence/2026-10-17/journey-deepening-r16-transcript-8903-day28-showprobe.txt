@@ -1,0 +1,32 @@
+=== seed 8903 day 28 — conversation with Silas (gen_4zkozuo) ===
+occupation=musician temperament=anxious trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? …if that makes sense."
+(want=seek_taken stage=1)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "They took you — The Echo, on the screens. The whole fire watched. Nobody knew where to look."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? That's my read."
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Did you hear? Dipa just walked away from Haven. Didn't look back."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=1)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "You want to know about that? Okay." "As a musician, I learned to improvise the hard way. Turns out 'hard way' was just practice."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_taken stage=1)
+closing line: "Good. That's settled, then. Onward."
+want final: id=seek_taken stage=3 resolution=unresolved

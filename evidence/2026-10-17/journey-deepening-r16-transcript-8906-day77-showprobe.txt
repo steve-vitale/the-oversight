@@ -1,0 +1,32 @@
+=== seed 8906 day 77 — conversation with David (david_kim) ===
+occupation=plumber temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway."
+(turn0 choices: alive:want:ask_favor, alive:event:show, dlg:help, dlg:cant, teach, dlg:subject, confront:d_a1io8vx, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "Norman? A bush pilot, back before. Solid person."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "You want to know about that? Okay." "My plumber instincts keep firing at the wrong things. Old wiring, new world."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "Good question." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You'd know about that."
+(want=ask_favor stage=1)
+closing line: "I'm glad we talked. I think. I'm still deciding."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,32 @@
+=== seed 8908 day 45 — conversation with Dat (gen_v959xs4) ===
+occupation=Police officer temperament=sardonic trust=73 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=1)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "Love that for us — God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Last time things were different. They always are." "You saw it too, right? Pattern Hunger. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Caleb touch it. Funny how that works."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "You want to know about that? Okay." "My police officer training covered a lot. 'Post-apocalyptic foraging' was not on the syllabus."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

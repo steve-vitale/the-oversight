@@ -1,0 +1,32 @@
+=== seed 8907 day 47 — conversation with Petra (petra_novak) ===
+occupation=glazier temperament=steady trust=59 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — still need hands. Are you in?"
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "We lost Theo, Tonje, Zoltan and Ruth this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? That's the whole of it."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Nadia? A radio DJ, back before. Solid person. One step at a time."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "Do you think we'll look back on this and call it the good old days? God, I hope not."
+(want=ask_favor stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=2)
+closing line: "I should — yeah. Later."
+want final: id=ask_favor stage=3 resolution=stated

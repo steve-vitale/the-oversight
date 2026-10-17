@@ -1,0 +1,32 @@
+=== seed 8901 day 21 — conversation with Rocco (gen_7175snj) ===
+occupation=locksmith temperament=stoic trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, party_name, dlg:commit, dlg:cant, recap, dlg:subject, leave)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "The Long Odds. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I memorize the stars. It passes the time. The time passes anyway."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same as always: we endure."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I memorize the stars and stay ready."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Catalina is back. Walked in like they'd never left."
+(want=ask_favor stage=2)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=stated

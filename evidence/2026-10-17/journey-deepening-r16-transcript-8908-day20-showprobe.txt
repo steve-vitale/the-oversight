@@ -1,0 +1,32 @@
+=== seed 8908 day 20 — conversation with Dat (gen_v959xs4) ===
+occupation=Police officer temperament=sardonic trust=42 dead=false mood=hungry
+want: curious (stage 0, fromSeed)
+
+THEM: "Can we talk? Have you seen anyone on the roads? Anyone at all? I'm asking everyone."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "What's this about? Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "They took me. Duel — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Huh. Let me think about that." "Practical view: You ever notice Priya? ...I don't know what to make of that. Nobody does."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? I'm sure it'll be fine."
+(want=curious stage=2)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Huh. Let me think about that." "I keep the good moments in a mental box. Today goes in the box. Just so you know."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Good talking. We'll figure it out."
+want final: id=curious stage=3 resolution=engaged

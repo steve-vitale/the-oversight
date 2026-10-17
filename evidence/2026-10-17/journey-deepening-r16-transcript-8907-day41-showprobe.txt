@@ -1,0 +1,32 @@
+=== seed 8907 day 41 — conversation with Aaliyah (gen_pdvn87l) ===
+occupation=mechanic temperament=gentle trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Will you help me clean it?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? No pressure, though."
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took me. The Blood Tithe — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "People are talking about me. Take it for what it's worth."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? You know?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "Can I be honest? Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong, as it were."
+(want=ask_favor stage=1)
+closing line: "Go easy today, okay? The world's hard enough."
+want final: id=ask_favor stage=3 resolution=unresolved

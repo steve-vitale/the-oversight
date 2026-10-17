@@ -1,0 +1,32 @@
+=== seed 8906 day 23 — conversation with Ernesto (gen_mf3hdkh) ===
+occupation=Veterinarian temperament=withdrawn trust=60 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Could you take a look?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "They took me. Cooking With Teeth — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? It'll pass."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Benoit just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "You want to know about that? Okay." "You're one of the good ones. Don't make me regret saying that out loud." "Don't make me say it twice."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+closing line: "Okay. Bye. This was — fine. It was fine."
+want final: id=ask_favor stage=3 resolution=unresolved

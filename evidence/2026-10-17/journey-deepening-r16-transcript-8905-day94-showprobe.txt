@@ -1,0 +1,32 @@
+=== seed 8905 day 94 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=68 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing. You'd know about that."
+(turn0 choices: ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid. I'm listening."
+(want=curious stage=2)
+YOU: [goon] "Take your time."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "I've decided the monsters are just wildlife with better PR. Don't quote me. Not that it matters."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "You want to know about that? Okay." "You're one of the good ones. Don't make me regret saying that out loud." "I'm glad you asked, actually."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up, friend?"
+(want=curious stage=2)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=curious stage=3 resolution=engaged

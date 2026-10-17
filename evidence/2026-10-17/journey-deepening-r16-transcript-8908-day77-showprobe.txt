@@ -1,0 +1,32 @@
+=== seed 8908 day 77 — conversation with Kennedy (gen_nwiclmf) ===
+occupation=Dentist temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "We never finished talking about themselves — we wandered off it, 7 days back. 'Same story, different day. The ending hasn't changed.' No pressure, though."
+(turn0 choices: dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want, friend?"
+(want=seek_taken stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "The Iron Pantry. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Tathagata? They told you they were a butcher? Huh." Kennedy looks away. "Tathagata was a Chef. Everyone knew."
+(want=seek_taken stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=0)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "You want to know about that? Okay." "Everything I know about that fits in a thimble. You've seen the thimble."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=seek_taken stage=0)
+closing line: "Thanks for listening. I mean that."
+want final: id=seek_taken stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 8907 day 43 — conversation with Tonje (gen_has247c) ===
+occupation=bush pilot temperament=fidgety trust=67 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "My wound needs a second pair of hands. Will you help me clean it?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? ...sorry."
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Lyubov is gone and Aaliyah is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Petra? A glazier, back before. Solid person."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is. Anyway."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "We should name this place. 'Camp' is what you call somewhere you're leaving."
+(want=ask_favor stage=1)
+closing line: "Talking helps. A little. Thank you."
+want final: id=ask_favor stage=3 resolution=unresolved

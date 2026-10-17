@@ -1,0 +1,32 @@
+=== seed 8908 day 72 — conversation with Tathagata (gen_3x56l1y) ===
+occupation=Chef temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Consider it a project, then. Project: laugh. I'm assigning us both."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "The way I read it — Did you hear? Ruth just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "Can I be honest? You ever notice how quiet it gets out here at night? Like the world's holding its breath."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Worth considering."
+(want=curious stage=2)
+closing line: "I'm going to go stare at something else now."
+want final: id=curious stage=3 resolution=engaged

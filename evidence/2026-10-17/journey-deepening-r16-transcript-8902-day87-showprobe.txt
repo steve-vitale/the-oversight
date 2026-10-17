@@ -1,0 +1,32 @@
+=== seed 8902 day 87 — conversation with Priya (priya_nair) ===
+occupation=emergency dispatcher temperament=intense trust=90 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "You look handy. What did you do with your hands, before?"
+(turn0 choices: ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment. Anyway, that's me."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "Huh. I answered that once — back when the answer was simpler." "They took me. The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "This matters — Hank told you that?" Priya gives you a long look. "Then Hank told you wrong. An ER nurse — that's the one I know."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I mean it."
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "Being an emergency dispatcher taught me one useful thing: how to look busy while thinking."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

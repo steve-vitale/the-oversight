@@ -1,0 +1,32 @@
+=== seed 8905 day 79 — conversation with Adaeze (adaeze_nwosu) ===
+occupation=ESL teacher temperament=anxious trust=51 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Look — Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "They took me. Hardened The Blood Tithe — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "August asked me about you. A lot of questions. Friendly ones. Too friendly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "I keep a mental list of everyone who's still kind. It's longer than you'd think."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Good question." "Don't laugh. Forgetting faces."
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

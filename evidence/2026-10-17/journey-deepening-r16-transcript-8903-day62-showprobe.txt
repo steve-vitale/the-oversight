@@ -1,0 +1,32 @@
+=== seed 8903 day 62 — conversation with Silas (gen_4zkozuo) ===
+occupation=musician temperament=anxious trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Staghorn Sumac — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: alive:want:ask_favor, alive:event:show, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "Hardened The Echo. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Mia is back. Walked in like they'd never left. ...sorry, I'm spiraling."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "You want to know about that? Okay." "I just — I keep a mental list of everyone who's still kind. It's longer than you'd think."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Worth considering."
+(want=ask_favor stage=0)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "Don't laugh. Teeth coming loose for no reason."
+(want=ask_favor stage=0)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=ask_favor stage=3 resolution=unestablished

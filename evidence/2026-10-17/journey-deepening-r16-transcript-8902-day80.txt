@@ -1,0 +1,21 @@
+=== seed 8902 day 80 — conversation with Eric (gen_3c6qqjp) ===
+occupation=ESL teacher temperament=intense trust=87 dead=false mood=steady
+want: seek_taken (stage 0, fromSeed)
+
+THEM: "What's this about? Hey — I found some Greenbrier Shoots today. You were right, it was right where you said."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with. Just... be straight with me."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "Huh."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=seek_taken stage=0)
+YOU: [dlg:react] "Huh."
+THEM: "Anyway." A small smile.
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Think about it. Really think. Then come find me."
+want final: id=seek_taken stage=3 resolution=unestablished

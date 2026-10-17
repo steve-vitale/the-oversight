@@ -1,0 +1,32 @@
+=== seed 8904 day 21 — conversation with Sandra (gen_eczoa4g) ===
+occupation=roofer temperament=prickly trust=65 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now?"
+(turn0 choices: deflect_q, ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back. Just... be straight with me."
+(want=curious stage=2)
+YOU: [goon] "Take your time."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Take your time."
+THEM: "Dreams are the one place they can't touch. Guard them."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Jorge ate something last month that should've killed them. They're fine. There. Said it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Hm."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Blackberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Maypop — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=curious stage=3 resolution=engaged

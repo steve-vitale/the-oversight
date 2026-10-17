@@ -1,0 +1,32 @@
+=== seed 8901 day 55 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=81 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now? Rest when you can."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Did you hear? Catalina just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Not that it matters."
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "Why do you ask? I've been watching how making do works out here. It's different from before. Everything's different from before."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? Just... be straight with me."
+(want=curious stage=2)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "You want to know about that? Okay." "You're family now. Chosen family — the kind that actually counts." "I'm glad you asked, actually."
+(want=curious stage=2)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=curious stage=3 resolution=engaged

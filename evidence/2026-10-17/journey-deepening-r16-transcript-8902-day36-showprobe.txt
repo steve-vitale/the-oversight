@@ -1,0 +1,32 @@
+=== seed 8902 day 36 — conversation with Eric (gen_3c6qqjp) ===
+occupation=ESL teacher temperament=intense trust=50 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Simple as that."
+(want=seek_taken stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "They took you — The Vigil, on the screens. The whole fire watched. Nobody knew where to look."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Hank? They told you they were a surgeon? Huh." Eric looks away. "Hank was an ER nurse. Everyone knew. Do you understand?"
+(want=seek_taken stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say. Don't look away from this."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=1)
+closing line: "We're just getting started, you and I. Remember that."
+want final: id=seek_taken stage=3 resolution=unresolved

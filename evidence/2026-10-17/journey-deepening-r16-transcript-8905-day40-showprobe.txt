@@ -1,0 +1,32 @@
+=== seed 8905 day 40 — conversation with August (gen_zbj7ngn) ===
+occupation=army medic temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about grief — that was 14 days back. Still on your mind? 'Sorry — I got lost in it for a second. What did you want to ask?' We still owe what's been happening a proper ending, too."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "They took me. The Blood Tithe — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You'd know about that."
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Hah. Daniel? A bush pilot, back before. Solid person."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting. That matters to me."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+closing line: "Alright. Back to work."
+want final: id=ask_favor stage=3 resolution=unestablished

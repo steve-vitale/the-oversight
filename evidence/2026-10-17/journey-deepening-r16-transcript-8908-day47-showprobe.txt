@@ -1,0 +1,32 @@
+=== seed 8908 day 47 — conversation with Kennedy (gen_nwiclmf) ===
+occupation=Dentist temperament=gentle trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you make of all this? Really."
+(turn0 choices: ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Wheel of Teeth. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Did you hear? Dat just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? No pressure, though."
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "You want to know about that? Okay." "Someone told me Columbus, Ohio is gone. Someone else told me it's fine. I believe neither. Be kind to yourself, okay?"
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? ...if that makes sense."
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "Waking up alone." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+closing line: "That helped. Thank you for sitting with me."
+want final: id=curious stage=3 resolution=engaged

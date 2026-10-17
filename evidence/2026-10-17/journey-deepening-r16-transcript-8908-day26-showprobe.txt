@@ -1,0 +1,32 @@
+=== seed 8908 day 26 — conversation with Hector (gen_buwnqy5) ===
+occupation=street artist temperament=mischievous trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the talking-to-strangers part — ...Hi. Sorry. I'm not good at the talking-to-strangers part. What's the worst that happens."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, ans:q_quiet:a_kind, ans:q_quiet:a_help, ans:q_quiet:a_leave, deflect_q, leave, silence)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "The Alibi Chain. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Good question." "Hah. I'm not saying there's anything wrong with Priya. I'm just saying I sleep better with them on the other side of the fire."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Huh. Let me think about that." "Don't mind me. I'm having a whole argument in my head and losing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Huh. Let me think about that." "A sky that goes quiet." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

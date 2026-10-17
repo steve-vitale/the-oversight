@@ -1,0 +1,29 @@
+=== seed 8904 day 45 — conversation with Leo (leo_martin) ===
+occupation=trail crew lead temperament=restless trust=27 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "What's this about? Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Sandra is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Sandra said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Moving! But — good talk! More later!"
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

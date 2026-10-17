@@ -1,0 +1,32 @@
+=== seed 8902 day 23 — conversation with Hank (gen_tkz3dch) ===
+occupation=ER nurse temperament=cautious trust=39 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you? ...at least, that's how it looks to me."
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, confront:d_sotd3t2, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? I mean it."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "What's this about? Did you hear? Zinoviy just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting. …sorry."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Just... be straight with me."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "I found a gray hair today. I'm choosing to call it wisdom frost."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? …if that makes sense."
+(want=ask_favor stage=2)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+closing line: "I'm glad we talked. I think. I'm still deciding."
+want final: id=ask_favor stage=3 resolution=stated

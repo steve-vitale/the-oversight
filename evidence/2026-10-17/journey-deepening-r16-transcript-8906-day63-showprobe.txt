@@ -1,0 +1,32 @@
+=== seed 8906 day 63 — conversation with Norman (gen_yue5k52) ===
+occupation=bush pilot temperament=warm trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I can't shake it. I'm achy and wrung out, barely keeping food down. I need help. Please."
+(turn0 choices: alive:want:ask_favor, dlg:help, alive:event:show, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "The Sorting. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Good question." "People need to stop whispering about Catalina. They've done nothing wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? You doing okay?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Huh. Let me think about that." "Listen — The nights are the hardest. Days, you're busy. Nights, you're just... with it all."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:fears] "What scares you?"
+THEM: "You want to know about that? Okay." "The quiet ones watching from the treeline." A pause. "Stupid, maybe. But there it is."
+(want=ask_favor stage=1)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,32 @@
+=== seed 8908 day 86 — conversation with Tathagata (gen_3x56l1y) ===
+occupation=Chef temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're angry — Are you angry? At whoever did this. At the sky. At anything. That's my read."
+(turn0 choices: ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Funny thing — Feel it, then use it. That's the whole trick. I'm still learning it myself."
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Good question." "You know what's weird? I'm a chef — was a chef — and none of that prepared me for any of this. Makes sense to me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Hah. Dat? A Police officer, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged
