@@ -55,6 +55,11 @@ try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite |
 // entries.
 try { const f = require('./policies/feastscale'); POLICY_REGISTRY['leadfeast'] = f.leadfeast; POLICY_REGISTRY['belongfeast'] = f.belongfeast; } catch (e) {}
 try { const p = require('./policies/perfsurvive'); POLICY_REGISTRY['perfsurvive-lead'] = p.perfsurviveLead; POLICY_REGISTRY['perfsurvive-belong'] = p.perfsurviveBelong; } catch (e) {}
+// helpcost instrument (flesh-out loop 2026-10-17, sim-helpcost): the
+// aid-engaging helpcall stack + the cost-accounting observation layer, for
+// the §15 balanced-panel before/after (gate-off vs HELPCALL=1). Additive;
+// zero behavior change to existing entries.
+try { const h = require('./policies/helpcost'); POLICY_REGISTRY['leadcost'] = h.leadCost; POLICY_REGISTRY['belongcost'] = h.belongCost; } catch (e) {}
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
