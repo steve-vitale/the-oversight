@@ -267,9 +267,20 @@
         try {
           const log = (this.state && this.state.waveKillLog) || [];
           const seen = new Set();
+          // VETSHAPE instrument (sim-vetshape, 2026-10-17, scale-onramp):
+          // default OFF. OFF = pristine behavior (living killers only) —
+          // byte-identical; the det-gate in scripts/test-vetshape-20261017.js
+          // pins that. ON (VETSHAPE=1) = the "bar changes shape" instrument
+          // for Steve's #427 readiness-gate call (named next from
+          // evidence/2026-10-17/sim-wave4census.md): count DISTINCT KILLER
+          // VIDS with wave-(w-1)+ kills in the same waveKillLog the gate
+          // already reads, living-OR-DEAD. Demand unchanged (2 for wave 4,
+          // 3 for wave 5). NOT a game change: the default stays
+          // 2-living-veterans until Steve rules.
+          const killShape = ((typeof process !== 'undefined' && process.env && process.env.VETSHAPE) === '1');
           for (const e of log) {
             if (!e || !e.by || ((e.w | 0) < (w - 1))) continue;
-            if (!isLiving(e.by)) continue;
+            if (!killShape && !isLiving(e.by)) continue;
             seen.add(e.by);
           }
           veterans = seen.size;

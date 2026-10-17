@@ -1,0 +1,363 @@
+{
+ "run": "sim-vetshape",
+ "sweepCommit": "cfaab2f976590fe438e67504e6c08840095355de",
+ "seeds": [
+  2210317,
+  2320419,
+  2430521,
+  2540623,
+  2650727,
+  2760829,
+  2870931,
+  2981033
+ ],
+ "policies": [
+  "leadfeast",
+  "belongfeast"
+ ],
+ "arms": {
+  "control": {
+   "n": 16,
+   "w4unlocks": 1,
+   "starvDeaths": 12,
+   "medianDays": 182,
+   "causes": {
+    "expedition": 31,
+    "monster": 61,
+    "villager combat": 127,
+    "sickness": 11,
+    "combat": 327,
+    "starvation": 12,
+    "White Noise": 1,
+    "alien": 3,
+    "lockjaw": 3,
+    "a wound that wouldn't close": 9,
+    "ambush": 2,
+    "The Mountain Lord": 1,
+    "The Understudy": 1,
+    "the night": 2,
+    "contest": 6,
+    "Choir Toad": 2,
+    "Ugly-Eyes": 1,
+    "Nevermore": 1
+   }
+  },
+  "armed": {
+   "n": 16,
+   "w4unlocks": 4,
+   "starvDeaths": 12,
+   "medianDays": 182,
+   "causes": {
+    "expedition": 31,
+    "monster": 61,
+    "villager combat": 125,
+    "sickness": 11,
+    "combat": 316,
+    "starvation": 12,
+    "White Noise": 1,
+    "alien": 2,
+    "lockjaw": 3,
+    "a wound that wouldn't close": 8,
+    "ambush": 2,
+    "The Mountain Lord": 1,
+    "The Understudy": 1,
+    "the night": 1,
+    "contest": 6,
+    "Choir Toad": 2,
+    "Ugly-Eyes": 1,
+    "Nevermore": 1,
+    "The Congregation": 1
+   }
+  }
+ },
+ "rows": [
+  {
+   "seed": 2210317,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 131,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2320419,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 28,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 2
+  },
+  {
+   "seed": 2430521,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": true,
+   "starv": 0
+  },
+  {
+   "seed": 2540623,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2650727,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 46,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 4
+  },
+  {
+   "seed": 2760829,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2870931,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 172,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 1
+  },
+  {
+   "seed": 2981033,
+   "policyId": "leadfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2210317,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2320419,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 28,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 2
+  },
+  {
+   "seed": 2430521,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2540623,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2650727,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 44,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 3
+  },
+  {
+   "seed": 2760829,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2870931,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2981033,
+   "policyId": "belongfeast",
+   "arm": "control",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2210317,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 131,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2320419,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 28,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 2
+  },
+  {
+   "seed": 2430521,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": true,
+   "starv": 0
+  },
+  {
+   "seed": 2540623,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2650727,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 46,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 4
+  },
+  {
+   "seed": 2760829,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2870931,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 172,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 1
+  },
+  {
+   "seed": 2981033,
+   "policyId": "leadfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2210317,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2320419,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 28,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 2
+  },
+  {
+   "seed": 2430521,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": true,
+   "starv": 0
+  },
+  {
+   "seed": 2540623,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2650727,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 44,
+   "endReason": "village-lost",
+   "w4": false,
+   "starv": 3
+  },
+  {
+   "seed": 2760829,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 155,
+   "endReason": "village-lost",
+   "w4": true,
+   "starv": 0
+  },
+  {
+   "seed": 2870931,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": false,
+   "starv": 0
+  },
+  {
+   "seed": 2981033,
+   "policyId": "belongfeast",
+   "arm": "armed",
+   "days": 180,
+   "endReason": "survived",
+   "w4": true,
+   "starv": 0
+  }
+ ]
+}
