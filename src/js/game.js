@@ -11979,24 +11979,49 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tendVillager(vid) {
       const v = this.state.village || {};
       const rec = (v.sick || {})[vid];
-      if (!rec) { this.say('They\'re not sick.'); return null; }
+      // WOUND CARE (journey landing r20 2026-10-17): a wound is not a
+      // sickness, but it still needs hands. The heal_help favor ("help with
+      // this wound") had NO keep path for a plain wound -- not sick (so no
+      // tend/treat), not in a comfort-eligible mood (so no words-keep) --
+      // an unkeepable vow, the exact trap promiseHelp deflects against.
+      // Cleaning and wrapping a wound is a real 32-tick deed, same as
+      // sitting with the sick, and keeps 'heal' promises the same way.
+      // Wound-first: rec is undefined for a wound, so the sick branches
+      // below must not run (they touch rec.daysLeft).
+      let wound = false;
+      try {
+        const vh = (this.state.village.health || {});
+        const hp = (vh[vid] !== undefined) ? vh[vid] : 100;
+        wound = !rec && hp < 70;
+      } catch (e) {}
+      if (!rec && !wound) { this.say('They\'re not sick.'); return null; }
       this.tickAction(32);
       let first = 'They';
       try { const p = this.getPerson(vid); if (p && p.name) first = String(p.name).split(' ')[0]; } catch (e) {}
-      const skilled = this.hasAbility('herbal_remedy') || this.hasAbility('field_medicine') || this.hasAbility('triage');
-      if (skilled) {
-        rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 2);
-        rec.severity = Math.max(1, (rec.severity || 1) - 1);
-        this.say(`You tend ${first} properly \u2014 cool cloth, the right tea, watching the breathing. They rest easier. (Skilled care: recovery shortened.)`);
+      if (wound) {
+        try {
+          const vh2 = (this.state.village.health || (this.state.village.health = {}));
+          const cur = (vh2[vid] !== undefined) ? vh2[vid] : 100;
+          vh2[vid] = Math.min(100, cur + 25);
+        } catch (e) {}
+        this.say(`You clean ${first}'s wound properly -- boiled water, a steady hand, wrapped tight. It'll have a chance now.`);
       } else {
-        rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 1);
-        this.say(`You sit with ${first} \u2014 cool cloth, water when they wake. It's not medicine, but it's not nothing.`);
+        const skilled = this.hasAbility('herbal_remedy') || this.hasAbility('field_medicine') || this.hasAbility('triage');
+        if (skilled) {
+          rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 2);
+          rec.severity = Math.max(1, (rec.severity || 1) - 1);
+          this.say(`You tend ${first} properly \u2014 cool cloth, the right tea, watching the breathing. They rest easier. (Skilled care: recovery shortened.)`);
+        } else {
+          rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 1);
+          this.say(`You sit with ${first} \u2014 cool cloth, water when they wake. It's not medicine, but it's not nothing.`);
+        }
       }
       // KEEP PATH (crisis leg 2026-10-11): tending is a real 32-tick act of
-      // care — it keeps 'heal' promises the way treatVillager does. Sitting
-      // with the sick is doing something, not saying something.
+      // care -- it keeps 'heal' promises the way treatVillager does. Sitting
+      // with the sick -- or cleaning a wound -- is doing something, not
+      // saying something.
       try { this.checkPromises('heal', vid); } catch (e) {}
-      // TENDED (2026-10-13): sitting with someone's fever is intimate —
+      // TENDED (2026-10-13): sitting with someone's fever is intimate --
       // the village's bond machinery never noticed. +3, same as a deep talk.
       try { if (this.bondAdd) this.bondAdd(this.villagerId, vid, 3, 'tended'); } catch (e) {}
       return null;

@@ -685,6 +685,144 @@ function deepTalk(Game, ctx) {
   } catch (e) {}
 }
 
+// KEEP YOUR WORD (journey landing r20 2026-10-17): the policy accepted
+// favors and broke every one (r19: favorKept 0, favorBroken 5; r20
+// baseline seeds 70-73: 0/5 kept, -15 trust each). A competent player
+// who makes a promise keeps it. Each morning, scan open promises and
+// work the per-person kinds with real acts. Broadcast kinds
+// (fight/task/travel) keep through the policy's normal daily acts
+// (fights, resolveAssignments, travel) and need no extra move — they're
+// counted, not chased. Nearest deadline first: favor obligations rot in
+// 1-3 days, not the 7-day promise window.
+function promiseDaysLeft(Game, p, today) {
+  if (!p) return 99;
+  if (p.favorDeadline != null) return p.favorDeadline - today;
+  return 7 - (today - (p.day || 0)); // the 7-day promise window
+}
+function keepPromiseFood(Game, ctx, vid) {
+  // Don't starve yourself keeping your word — but a thin pack isn't an
+  // excuse when you manage the pantry. A competent leader draws from the
+  // store to feed someone they promised: the food is real and the take is
+  // tracked like any other.
+  const countUnits = () => {
+    let u = 0;
+    const inv = (Game.state.scholar || {}).inventory || [];
+    for (const it of inv) {
+      if ((it.kcalEach || 0) > 0 && (it.units || 0) > 0 && !it.bonded) u += it.units;
+    }
+    return u;
+  };
+  try {
+    const s = Game.state.scholar || {};
+    if (countUnits() < 3) {
+      // Thin pack? Step inside and draw from the pantry you manage — the
+      // promise is to share food, and the store is real food. Enter and
+      // exit in one move so the rest of the day never sees the inside
+      // state; both verbs are engine-guarded (no mid-fight use, haven node
+      // only, honest refusals). The take is tracked like any other: the
+      // village may notice the draw (-2), but keeping your word (+15) is
+      // the bigger truth — a competent leader does that math.
+      try {
+        const v = Game.state.village || {};
+        ctx.promiseDrawGuard = { atHaven: !!Game.playerAtHaven(), inside: !!((Game.state.scholar || {}).insideHaven) };
+        let entered = false;
+        if (Game.playerAtHaven() && !Game.state.scholar.insideHaven &&
+            !Game.inCombat() && !Game.over) {
+          entered = !!Game.enterBuilding();
+        }
+        if (entered) {
+          const pantry = v.pantry || [];
+          let took = 0;
+          // Two passes: prepared food first, raw only if that's all there is.
+          for (let pass = 0; pass < 2 && took < 3; pass++) {
+            for (let i = pantry.length - 1; i >= 0 && took < 3; i--) {
+              const it = pantry[i];
+              if (!it || (it.kcalEach || 0) <= 0 || (it.units || 0) <= 0) continue;
+              if (pass === 0 && it.foodState === 'raw') continue;
+              try { Game.takeFromPantry(i); took++; } catch (e) { break; }
+            }
+          }
+          if (took) ctx.promisePantryDraws = (ctx.promisePantryDraws || 0) + took;
+          try { Game.exitBuilding(); } catch (e) {}
+        }
+      } catch (e) {}
+    }
+    const units = countUnits();
+    if (units < 2) { ctx.promiseFoodSkipped = (ctx.promiseFoodSkipped || 0) + 1; ctx.promiseFoodSkipUnits = units; ctx.promiseFoodSkipKcal = Math.round(s.kcal || 0); return; } // keep one for yourself
+    if ((s.kcal || 0) < 500) { ctx.promiseFoodSkipped = (ctx.promiseFoodSkipped || 0) + 1; ctx.promiseFoodSkipUnits = units; ctx.promiseFoodSkipKcal = Math.round(s.kcal || 0); return; }
+    const r = Game.giveFood(vid, 'meal'); // 'meal' is the honest default
+    if (r) ctx.promiseFoodKept = (ctx.promiseFoodKept || 0) + 1;
+  } catch (e) { ctx.keepPromiseErr = String(e && e.message).slice(0, 80); }
+}
+function keepPromiseSocial(Game, ctx, vid) {
+  // A real conversation (substantive, 3+ exchanges) keeps belong/
+  // understand promises — the engine's bar, not a hello-goodbye.
+  // pickTalkChoice never takes commit choices, so this can't mint new
+  // promises while keeping old ones.
+  try {
+    holdConversation(Game, ctx, vid);
+    ctx.promiseSocialTried = (ctx.promiseSocialTried || 0) + 1;
+  } catch (e) { ctx.keepPromiseErr = String(e && e.message).slice(0, 80); }
+}
+function keepPromiseHeal(Game, ctx, vid) {
+  // Ladder: real medicine when able, tending when they're sick or wounded
+  // (wound care is a real deed since r20), words (through the honest 40
+  // talk cap) when there's nothing to treat.
+  try {
+    const v = Game.state.village || {};
+    const sick = !!((v.sick || {})[vid]);
+    let wounded = false;
+    try {
+      const vh = ((Game.state.village || {}).health || {});
+      const hp = (vh[vid] !== undefined) ? vh[vid] : 100;
+      wounded = !sick && hp < 70;
+    } catch (e) {}
+    const s = Game.state.scholar || {};
+    const healAb = ['herbal_remedy', 'field_medicine', 'triage'].find(a => {
+      try { return Game.hasAbility(a) && Game.abilityLevel(a) >= 2; } catch (e) { return false; }
+    });
+    if (sick && healAb && (s.kcal || 0) >= 150) {
+      Game.treatVillager(vid, healAb);
+      ctx.promiseHealTreated = (ctx.promiseHealTreated || 0) + 1;
+    } else if (sick || wounded) {
+      Game.tendVillager(vid); // 32 ticks of real care (sick or wound)
+      ctx.promiseHealTended = (ctx.promiseHealTended || 0) + 1;
+    } else if (Game.comfort) {
+      Game.comfort(vid, 'silent'); // words-keep: presence, capped like all words
+      ctx.promiseHealComforted = (ctx.promiseHealComforted || 0) + 1;
+    }
+  } catch (e) { ctx.keepPromiseErr = String(e && e.message).slice(0, 80); }
+}
+function keepPromises(Game, ctx) {
+  try {
+    const v = Game.state.village || {};
+    const promises = v.promises || {};
+    const today = (Game.state.scholar || {}).day || 0;
+    const open = [];
+    for (const [vid, p] of Object.entries(promises)) {
+      if (!p || p.kept === true || p.kept === 'broken' || p.kept === 'released') continue;
+      let alive = true;
+      try { const per = Game.getPerson(vid); alive = !!(per && !per.dead); } catch (e) {}
+      if (!alive) continue;
+      const kind = (Game.promiseKeepKind && p.goal) ? Game.promiseKeepKind(p.goal) : null;
+      if (!kind) continue;
+      open.push({ vid, kind, left: promiseDaysLeft(Game, p, today) });
+    }
+    if (!open.length) return;
+    open.sort((a, b) => a.left - b.left);
+    for (const o of open) {
+      if (Game.over) break;
+      try {
+        if (o.kind === 'food') keepPromiseFood(Game, ctx, o.vid);
+        else if (o.kind === 'social') keepPromiseSocial(Game, ctx, o.vid);
+        else if (o.kind === 'heal') keepPromiseHeal(Game, ctx, o.vid);
+        else ctx['promiseOpen_' + o.kind] = (ctx['promiseOpen_' + o.kind] || 0) + 1;
+      } catch (e) { ctx.keepPromiseErr = String(e && e.message).slice(0, 80); }
+    }
+    ctx.promiseScans = (ctx.promiseScans || 0) + 1;
+  } catch (e) { ctx.keepPromisesErr = String(e && e.message).slice(0, 80); }
+}
+
 // Forage as a matter of course: a competent citizen works the land daily,
 // not just when the ledger screams. The old gate (pantry < 25000) meant the
 // player never foraged while the starting pantry looked fine — living off
@@ -2409,6 +2547,10 @@ const competent = {
         ctx.thirstHome = (ctx.thirstHome || 0) + 1;
       }
     } catch (e) { ctx.thirstHomeErr = String(e && e.message).slice(0, 80); }
+    // KEEP YOUR WORD (journey landing r20): obligations before outings —
+    // a competent player handles their promises first, from the morning
+    // buffer, before the day's travel scatters everyone.
+    keepPromises(Game, ctx);
     const rec = recovering(Game, ctx);
     if (rec) recoverStep(Game, ctx);
     // the honest food run: forage, sort the haul at camp, sow seed first,
@@ -2486,6 +2628,13 @@ const competent = {
     } catch (e) {}
     const known = Object.keys((Game.state.codex || {}).plants || {}).length;
     ctx.knownPlants = known;
+    // KEEP YOUR WORD, EVENING PASS (journey landing r20): promises made
+    // during the day's conversations are first visible now — a 1-day
+    // favor deadline means tonight, not tomorrow morning. keepPromises is
+    // idempotent: kept promises are skipped, open ones retried; the pack
+    // holds the day's haul for food promises the morning buffer couldn't
+    // cover, and a villager who was away all morning may be back.
+    keepPromises(Game, ctx);
     // EAT THE DAY'S HAUL (longsim food r2 2026-10-11): daily forages AFTER
     // the last upkeep, so the upkeep's competentEat never sees the fresh
     // haul — the player was sleeping (and starving) on foraged food still
@@ -2735,5 +2884,5 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, competentEat, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
 
