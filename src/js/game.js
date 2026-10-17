@@ -42801,6 +42801,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!v || !vid) return [];
       return ((v.taughtByPlayer || {})[vid] || []).slice();
     },
+    // cyclePick(key, pool): draw WITHOUT replacement — the pool cycles in a
+    // varying order and never repeats a line until every line has been said
+    // once. Same convention as the convo engine's generic-pool cycling
+    // (CONVERSATIONS.md). Session-scoped on the Game object, never in
+    // save state.
+    cyclePick(key, pool) {
+      try {
+        this._cyclePools = this._cyclePools || {};
+        let bag = this._cyclePools[key];
+        const valid = Array.isArray(bag) && bag.length && bag.length <= pool.length &&
+          bag.every(i => Number.isInteger(i) && i >= 0 && i < pool.length);
+        if (!valid) bag = pool.map((_, i) => i);
+        const at = Math.floor(Math.random() * bag.length);
+        const idx = bag.splice(at, 1)[0];
+        this._cyclePools[key] = bag.length ? bag : pool.map((_, i) => i);
+        return pool[idx];
+      } catch (e) {
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+    },
     identifyPlant(pid, source, teacherName) {
       const p = this.data.plants.find(x => x.id === pid);
       if (!p || this.plantKnown(pid)) return false;
@@ -42852,13 +42872,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SYSTEM VOICE GATE: before the System arrives (Day 7), identification is
       // diegetic only — people, tasting, books. The overlay never speaks first.
       if (this.state.systemArrived) {
-        const sys = [
+        // SYSTEM QUIP CYCLE (journey landing r21): random pick repeated the
+        // same quip verbatim up to 5x in one arrival stream. cyclePick draws
+        // without replacement — no repeat until the pool is exhausted.
+        this.say(this.cyclePick('sysQuip:identifyPlant', [
           'SYSTEM: Naming things. Very human. The audience approves.',
           'SYSTEM: Oh! It has a NAME. You all love names.',
           'SYSTEM: Catalogued. The Codex grows teeth.',
           'SYSTEM: Identification complete. You are 0.3% less lost.',
-        ];
-        this.say(sys[Math.floor(Math.random() * sys.length)]);
+        ]));
       }
       // THE VILLAGE LEARNS — SLOWLY (Steve 2026-10-05): knowledge used to hit
       // 60% of the village instantly. Now word of mouth is word of mouth: at
