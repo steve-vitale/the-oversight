@@ -21,9 +21,11 @@
 // scholar intake is instrumented at eat() (inventory deltas, pure read + call-through)
 // plus the scholar's own nightly villageMeal share (flag-attributed pantryDraw).
 //
-// NOTE (2026-10-17): this file was rewritten from the session record after a
-// service restart deleted the original. The census outputs (evidence/
-// 2026-10-17/perseed-rackschannel/*.json) survived and are the record of the run.
+// NOTE (2026-10-17): a near-duplicate of this file briefly existed as
+// scripts/diag-rackchannel-20261017.js (typo'd name) — the original working
+// name from the census run. The typo'd copy was removed; this correctly-
+// spelled file is canonical. The census outputs (evidence/
+// 2026-10-17/perseed-rackschannel/*.json) are the record of the run.
 //
 // Usage:
 //   FEASTSCALE_R13=1 SEATDRIVE=0 node scripts/diag-rackchannel-20261017.js        # 8-run census
