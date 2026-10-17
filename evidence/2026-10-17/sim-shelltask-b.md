@@ -127,6 +127,17 @@ control 24. Per MEASUREMENT.md §14 the miss binds — NO-GO, never re-scored
 mid-run. The layer (scripts/policies/shelltask-b.js) is deleted zero-trace;
 instruments + evidence kept and committed.
 
+## Telemetry deviation check
+
+`telemetry-check.js` vs scale-wall.json baseline ({national:12, table:16,
+wins:16, exiled:0}): one LOUD line — "wins disappeared: baseline 16 ->
+current 0 (n=32 files)". Hand-verified per the schema-gap finding: wins are
+0/16 on BOTH arms identically (control and armed). The 7001-7008 corpus on
+the pre-seat courtship road caps at wave 3 (wave4 0/32 both sides) — wins are
+a corpus/substrate property, not an arm effect. The layer changed nothing
+about win reachability. National (18/32 vs baseline 12) and table (18/32 vs
+16) did not fire; exiled 0 = 0.
+
 ## Metric review (mandatory)
 
 The pooled starvation guardrail (armed <= control on 16 runs) proved too
