@@ -389,7 +389,16 @@
         // entry), and the killer remembers where. Kills are resources.
         try {
           var _kn = this.npcNode ? this.npcNode(vid) : null;
-          if (this.mapmemNoteKill && _kn) this.mapmemNoteKill(vid, m, _kn);
+          var _carried = null;
+          if (this.mapmemNoteKill && _kn) _carried = this.mapmemNoteKill(vid, m, _kn);
+          // (r12 2026-10-17): the killer butchered on the spot — the meat
+          // rides home in the expedition's pack, not on a corpse the rot
+          // beats. Unknown flesh arrives as 0-kcal testable, per the
+          // knowledge law.
+          if (_carried && st.exped[vid]) {
+            st.exped[vid].meat = st.exped[vid].meat || [];
+            st.exped[vid].meat.push(_carried);
+          }
         } catch (e) {}
         // KILL LOOT (Steve 2026-10-09): the killer loots the body — the
         // System's gift goes in their pack and they re-equip on the spot.
@@ -551,6 +560,31 @@
       if (total > 0) {
         try { this.stockPantry(total, 'Expedition haul'); } catch (e) {}
       }
+      // (r12 2026-10-17): the killer's butchered meat comes home too.
+      // Known-safe meat feeds the pantry; unrevealed flesh arrives as
+      // 0-kcal testable items — the knowledge law holds, transport is not
+      // consumption, and the cautious-test loop can now see field meat.
+      var meatKcal = 0, meatUnknown = 0;
+      try {
+        for (var mi = 0; mi < ((ex.meat || []).length); mi++) {
+          var mm = ex.meat[mi];
+          if (!mm) continue;
+          if (mm.kcal) meatKcal += mm.kcal;
+          for (var ui = 0; ui < ((mm.unknown || []).length); ui++) {
+            var uitem = mm.unknown[ui];
+            var vv = this.state.village;
+            vv.pantry = vv.pantry || [];
+            var hexist = null;
+            try {
+              hexist = (this.stacksMatch && vv.pantry.find(function (p) { return this.stacksMatch(p, uitem); }.bind(this))) || null;
+            } catch (e2) {}
+            if (hexist) hexist.units = (hexist.units || 1) + (uitem.units || 1);
+            else vv.pantry.push(uitem);
+            meatUnknown++;
+          }
+        }
+        if (meatKcal > 0) this.stockPantry(meatKcal, 'Expedition meat');
+      } catch (e) {}
       var dist = ex.dist || 1;
       if (dist >= 4) this.recordDeed(vid, 'mapped_far', `${nm} walked farther than anyone's gone and came back with the map in their head.`, 3);
       // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
@@ -559,6 +593,8 @@
       if (playerAtHaven) {
         var bits = [];
         if (total > 0) bits.push(`+${total} kcal for the pantry`);
+        if (meatKcal > 0) bits.push(`+${meatKcal} kcal of meat`);
+        if (meatUnknown > 0) bits.push(`strange meat (unknown flesh — test it cautiously)`);
         if ((ex.encounters || []).length) bits.push(`${ex.encounters.length} ${ex.encounters.length === 1 ? 'story' : 'stories'}`);
         if (a.scars[vid].length) bits.push('a new scar');
         var suffix = bits.length ? ` (${bits.join(', ')})` : '. "Nothing out there but weather."';

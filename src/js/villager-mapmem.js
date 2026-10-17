@@ -209,6 +209,9 @@
     // to leave no body at all — the meat vanished. Now the body is really
     // there (registerDeath, node override), on the real rot clock, with the
     // real meat entry. The killer remembers it; that's the first memory.
+    // (r12 2026-10-17): the killer is standing on the corpse — they butcher
+    // on the spot and carry the meat (returned for the expedition's pack).
+    // A round trip from haven can't beat the 3-day rot for wild kills.
     mapmemNoteKill(vid, m, node) {
       if (!m || !node) return null;
       var corpse = null;
@@ -235,8 +238,11 @@
         }
       } catch (e) {}
       if (!corpse) return null;
-      try { return this.mapmemRemember(vid, corpse); } catch (e) {}
-      return null;
+      try { this.mapmemRemember(vid, corpse); } catch (e) {}
+      // butcher on the spot — the killer carries it home
+      var carried = null;
+      try { carried = this.mapmemButcherForCarry ? this.mapmemButcherForCarry(vid, corpse) : null; } catch (e) {}
+      return carried;
     },
 
     // ---------- GOSSIP SPREAD ----------
@@ -285,9 +291,13 @@
     // Fresh, known-food, within range, not already being hauled. Scored by
     // value × urgency / distance — a big carcass spoiling tomorrow beats a
     // small one with days left.
-    mapmemBestHaul(vid, hx, hy) {
+    // mapmemHaulSites(vid, hx, hy): remembered corpse sites ranked best-first
+    // by the value × urgency / distance score. Each carries _dist and
+    // _daysLeft for the offer predicate. (r12: extracted from mapmemBestHaul
+    // so the candidate can fall through past doomed/gated sites.)
+    mapmemHaulSites(vid, hx, hy) {
       var sites = this.mapmemPurge(vid);
-      if (!sites.length) return null;
+      if (!sites.length) return [];
       var maxD = 1;
       try { maxD = Math.max(1, this.npcMaxDist(vid)); } catch (e) {}
       var day = 0;
@@ -303,7 +313,7 @@
           }
         }
       } catch (e) {}
-      var best = null, bestScore = 0;
+      var ranked = [];
       for (var i = 0; i < sites.length; i++) {
         var s = sites[i];
         if (s.kind !== 'corpse') continue;
@@ -327,9 +337,120 @@
         var daysLeft = Math.max(0, s.spoilBy - day);
         var urgency = 1 + 2 * (1 - Math.min(1, daysLeft / 3)); // spoiling tomorrow ≈ 3x
         var score = (s.estKcal * urgency) / (1 + dist);
-        if (score > bestScore) { bestScore = score; best = s; }
+        ranked.push({ site: s, dist: dist, daysLeft: daysLeft, score: score });
       }
-      return best;
+      ranked.sort(function (a, b) { return b.score - a.score; });
+      return ranked;
+    },
+
+    mapmemBestHaul(vid, hx, hy) {
+      var ranked = [];
+      try { ranked = this.mapmemHaulSites(vid, hx, hy); } catch (e) {}
+      return ranked.length ? ranked[0].site : null;
+    },
+
+    // mapmemHaulCandidate(vid, hx, hy): the HAUL objective offer. Returns the
+    // remembered corpse site if a haul should be offered this pick, else null.
+    //
+    // (r12 2026-10-17 — the r11 blank, probe-verified): the old gate was
+    // famine-only (pantry < 5000 || hunger > 50), so in a competent village
+    // (pantry 50k+) the candidate was NEVER offered — the substrate worked
+    // (killers remembered corpses, bestHaul found targets) but no objective
+    // ever fired. The haul feeds the KNOWLEDGE economy (Steve 2026-10-16:
+    // hauling is how unknown flesh reaches the cautious-test loop), so the
+    // offer now has two channels: the famine gate (as before — a hungry
+    // village hauls any meat) AND the knowledge channel (unrevealed monster
+    // flesh is new knowledge worth a trip even with a full pantry; the
+    // estKcal/distance score in bestHaul still decides whether the trip is
+    // worth it). Known-safe meat with a full pantry stays un-offered.
+    mapmemHaulCandidate(vid, hx, hy) {
+      var ranked = [];
+      try { ranked = this.mapmemHaulSites ? this.mapmemHaulSites(vid, hx, hy) : []; } catch (e) {}
+      if (!ranked.length) return null;
+      var day = 0;
+      try { day = this.state.scholar.day || 0; } catch (e) {}
+      var pantry = 0, hunger = 0;
+      try { pantry = this.pantryKcalLive ? this.pantryKcalLive(this.state.village) : 0; } catch (e) {}
+      try { hunger = (this.npcNeeds ? (this.npcNeeds(vid) || {}) : {}).hunger || 0; } catch (e) {}
+      var corpses = [];
+      try { corpses = this.corpses ? this.corpses() : []; } catch (e) {}
+      // best-first; the first site that is both feasible and wanted wins.
+      // (A doomed best site must not block a feasible second-best.)
+      for (var ri = 0; ri < ranked.length; ri++) {
+        var site = ranked[ri].site, dist = ranked[ri].dist;
+        // TRIP FEASIBILITY (r12): don't offer a haul the rot beats. The round
+        // trip runs (2*dist+3) parts ≈ /3 days; the meat must survive until
+        // the villager gets there. A doomed haul wastes the trip and the meat.
+        var sleft = Math.max(0, site.spoilBy - day);
+        if (sleft < (2 * dist + 3) / 3) continue;
+        if (pantry < 5000 || hunger > 50) return site;
+        // knowledge channel: is this site's meat still unrevealed?
+        for (var i = 0; i < corpses.length; i++) {
+          if (corpses[i] && corpses[i].id === site.ref) {
+            if (this.mapmemFoodKnown && !this.mapmemFoodKnown(corpses[i])) return site;
+            break;
+          }
+        }
+      }
+      return null;
+    },
+
+    // mapmemButcherForCarry(vid, corpse): butcher carcass-state meat on the
+    // spot, for carrying (not a haul objective). Returns
+    // {kcal, unknown: [items], label} — known-safe meat as kcal, unrevealed
+    // monster flesh as 0-kcal testable items (the knowledge law holds:
+    // transport is not consumption). Marks the corpse looted when emptied.
+    // (r12 2026-10-17): the expedition killer is standing on the corpse —
+    // they butcher now and carry it home on return. The HAUL objective
+    // covers kills near haven; this covers kills in the wild where the
+    // 3-day rot beats any round trip from haven.
+    mapmemButcherForCarry(vid, corpse) {
+      if (!corpse) return null;
+      var out = { kcal: 0, unknown: [], label: 'meat' };
+      var items = corpse.items || [];
+      var tookAny = false;
+      for (var i = 0; i < items.length; i++) {
+        var meat = items[i];
+        if (!meat || (meat.units == null ? 1 : meat.units) <= 0) continue;
+        if (meat.foodKind !== 'meat' || meat.foodState !== 'carcass') continue;
+        var mid = String(meat.plantId || '').replace(/^meat_/, '');
+        var known = false;
+        try { known = this.mapmemFoodKnown ? this.mapmemFoodKnown({ kind: corpse.kind, monsterId: mid }) : false; } catch (e) {}
+        // belltoad legs gate on their own part id
+        if (!known && mid) {
+          try { known = !!(this.monsterFoodSafe && this.monsterFoodSafe(mid)); } catch (e) {}
+        }
+        var gross = meat.hiddenKcal || 0;
+        if (!known && mid && corpse.kind === 'monster') {
+          var unet = Math.round(gross * HAUL_YIELD);
+          var uunits = Math.max(1, Math.round(unet / 500));
+          out.unknown.push({
+            name: 'Unknown flesh',
+            foodKind: 'meat', foodState: 'cleaned',
+            plantId: 'meat_' + mid, edible: false, kcalEach: 0, hiddenKcal: gross,
+            units: uunits, unit: 'portion',
+            kg: Math.max(0.01, (Number(meat.kg) || 0.5) * HAUL_YIELD),
+            prep: '⚠️ Unknown flesh. You have no idea if this is food or poison. Test it cautiously, or ask someone who knows.',
+            diseaseRisk: 'rawMeat',
+          });
+          out.label = 'strange meat';
+        } else {
+          out.kcal += Math.round(gross * HAUL_YIELD);
+          out.label = 'meat';
+        }
+        meat.units = 0; // taken
+        tookAny = true;
+      }
+      if (!tookAny) return null;
+      var emptied = !items.some(function (it) { return (it.units == null ? 1 : it.units) > 0; });
+      if (emptied) { try { corpse.looted = true; } catch (e) {} }
+      // the memory served its purpose — drop it (fresh kills make new ones)
+      try {
+        var mem = this.mapmemOf(vid);
+        mem.sites = mem.sites.filter(function (s) { return s.ref !== corpse.id; });
+      } catch (e) {}
+      try { this.bumpTrust(vid, 1); } catch (e) {}
+      return out;
     },
 
     // ---------- THE HAUL ----------

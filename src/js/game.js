@@ -17058,6 +17058,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       }
+      // (r12 2026-10-17 — completing the haul pipeline): hauled unknown
+      // flesh lands in the village PANTRY, not the scholar's pack, so the
+      // cautious protocol must also see pantry flesh. Same honest protocol,
+      // same attribution — the meat is at the fire, and someone tries it.
+      // Inventory targets keep priority (what you carried in, you watch).
+      if (!pid && !meatIt) {
+        const pan = (this.state.village || {}).pantry || [];
+        for (const it of pan) {
+          if (it && it.foodKind === 'meat' && it.edible === false) {
+            const mid = String(it.plantId || '').replace(/^meat_/, '');
+            if (mid && !this.monsterFoodSafe(mid)) { meatIt = it; meatMid = mid; break; }
+          }
+        }
+      }
       if (!pid && !meatIt) return;
       // tester: someone at haven with food in their background, else anyone
       // (a little randomness so it's not always the same person).
@@ -42633,6 +42647,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
       reveal(this.state.scholar.inventory);
       reveal(this.state.scholar.prepStash);
+      // (r12 2026-10-17): hauled unknown flesh lives in the village pantry —
+      // the reveal must reach it too, or the haul pipeline dead-ends in
+      // 0-kcal clutter. Same honest reveal as the other food containers.
+      try { reveal((this.state.village || {}).pantry); } catch (e) {}
     },
     plantLevel(pid) {
       const e = (this.state.codex.plants || {})[pid];

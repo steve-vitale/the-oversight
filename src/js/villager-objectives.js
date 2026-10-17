@@ -352,12 +352,28 @@
       // TRAPS — only hands that know the wire. (knowledge-gated)
       if (vp.knowsSnare) cands.push({ kind: 'TRAPS', w: 1.6 });
       // HAUL — map memory (villager-mapmem 2026-10-13): a remembered corpse
-      // with known-safe meat, when the village needs food. Objectives that
-      // carry past whatever node they're on — kills as resources.
+      // with meat. Offered through mapmemHaulCandidate (r12 2026-10-17):
+      // the famine gate plus the knowledge channel (unrevealed monster
+      // flesh is worth a trip even with a full pantry — the cautious-test
+      // loop only ever sees field meat if someone brings it home).
       var haulSite = null;
-      try { haulSite = this.mapmemBestHaul ? this.mapmemBestHaul(vid, hx, hy) : null; } catch (e) {}
-      if (haulSite && (pantry < 5000 || (n.hunger || 0) > 50)) {
-        cands.push({ kind: 'HAUL', w: 1 + Math.min(3, haulSite.estKcal / 2000), site: haulSite });
+      try { haulSite = this.mapmemHaulCandidate ? this.mapmemHaulCandidate(vid, hx, hy) : null; } catch (e) {}
+      if (haulSite) {
+        // KNOWLEDGE VALUE (r12): unrevealed flesh is worth more than its
+        // kcal — the trip buys the village a new food. Weight the unknown
+        // so the knowledge channel actually gets chosen, not just offered.
+        var haulKnow = false;
+        try {
+          var hcs = this.corpses ? this.corpses() : [];
+          for (var hci = 0; hci < hcs.length; hci++) {
+            if (hcs[hci] && hcs[hci].id === haulSite.ref) {
+              haulKnow = !!(this.mapmemFoodKnown && !this.mapmemFoodKnown(hcs[hci]));
+              break;
+            }
+          }
+        } catch (e) {}
+        var hw = 1 + Math.min(3, haulSite.estKcal / 2000) + (haulKnow ? 1.5 : 0);
+        cands.push({ kind: 'HAUL', w: hw, site: haulSite });
       }
       // VISIT — go find someone specific. Social, uses real familiarity.
       // Tight goals: don't cross the world for a chat — the target must be
