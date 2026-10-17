@@ -1520,6 +1520,21 @@
     // their own, tribute moves). The snap survives only for the neglected:
     // trust under 20 with no upkeep for 14+ days. Death + neglect kills;
     // death alone doesn't.
+    // _griefLeverage: the x1.5 grief-leverage grab, capped. Grief is
+    // leverage — twice per link. The third grab is refused aloud (the
+    // caller voices it): the table has heard the grief card before.
+    // Returns true when the grab landed. (gap-closure 2026-10-17: uncapped
+    // stacking compounded 5k→35k/week across five primary-speaker deaths
+    // in one season — the exponent, not the fiction, was the bug. The
+    // GRIEF COALESCES guard covers burst deaths inside the mourning
+    // window; this covers the slow burn across a season.)
+    _griefLeverage(link) {
+      var grabs = link.griefGrabs || 0;
+      if (grabs >= 2) return false;
+      link.griefGrabs = grabs + 1;
+      link.tributeKcalPerWeek = Math.round(link.tributeKcalPerWeek * 1.5);
+      return true;
+    },
     successionCrisis(linkId) {
       var links = this.hierarchyState();
       var link = null;
@@ -1576,9 +1591,13 @@
       this._markMourning(link);
       if (link.subordinate === HOME) {
         // their leverage grows in our chaos: they install their own
-        link.tributeKcalPerWeek = Math.round(link.tributeKcalPerWeek * 1.5);
-        this._linkNote(link, 'succession', 'They installed their own speaker. Tribute up to ' + link.tributeKcalPerWeek.toLocaleString() + '.');
-        this.say(`With Haven grieving, ${this._ovName(other)} installs their own speaker at the table. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.`);
+        if (this._griefLeverage(link)) {
+          this._linkNote(link, 'succession', 'They installed their own speaker. Tribute up to ' + link.tributeKcalPerWeek.toLocaleString() + '.');
+          this.say(`With Haven grieving, ${this._ovName(other)} installs their own speaker at the table. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.`);
+        } else {
+          this._linkNote(link, 'succession', 'They installed their own speaker — but the grief card is spent. Tribute unchanged at ' + link.tributeKcalPerWeek.toLocaleString() + '.');
+          this.say(`With Haven grieving again, ${this._ovName(other)} installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. The link holds — it was never with one person.`);
+        }
       } else {
         // our subordinate tests whether we hold — they smell the weakness
         // and press the tribute DOWN while the chair is empty. The old -10
@@ -1654,9 +1673,13 @@
         this._linkNote(link, 'succession', 'Their speaker died; Haven renegotiated in the chaos. The link holds to the village.');
         this.say(`Word comes: ${this._ovName(other)}'s speaker is dead. In the chaos, Haven renegotiates — tribute down to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. The link holds: it was never with one person. They grieve; the gains wait.`);
       } else {
-        link.tributeKcalPerWeek = Math.round(link.tributeKcalPerWeek * 1.5);
-        this._linkNote(link, 'succession', 'Haven installed its own speaker at their table. The link holds to the village.');
-        this.say(`Their speaker is dead. Haven installs its own at ${this._ovName(other)}'s table — the empire's manners. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. They grieve; the link holds.`);
+        if (this._griefLeverage(link)) {
+          this._linkNote(link, 'succession', 'Haven installed its own speaker at their table. The link holds to the village.');
+          this.say(`Their speaker is dead. Haven installs its own at ${this._ovName(other)}'s table — the empire's manners. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. They grieve; the link holds.`);
+        } else {
+          this._linkNote(link, 'succession', 'Haven installed its own speaker — but the grief card is spent. Tribute unchanged at ' + link.tributeKcalPerWeek.toLocaleString() + '.');
+          this.say(`Their speaker is dead. Haven installs its own at ${this._ovName(other)}'s table — the empire's manners. But the grief card is spent; the table has heard it before. Tribute stays at ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. They grieve; the link holds.`);
+        }
       }
       if (link.trust < 20 && this._linkNeglected(link)) {
         this.say('In the chaos, the neglected link snaps — no tribute, no deeds, no one left who kept it. Nobody meant it. That\'s how these things go.');
@@ -1754,8 +1777,11 @@
       link.trust = Math.max(0, link.trust - 6);
       var lever = '';
       if (pr && pr.sub) {
-        link.tributeKcalPerWeek = Math.round(link.tributeKcalPerWeek * 1.5);
-        lever = ` ${onm} installs their own speaker at the table after all — tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. Grief became leverage, and they knew it would.`;
+        if (this._griefLeverage(link)) {
+          lever = ` ${onm} installs their own speaker at the table after all — tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. Grief became leverage, and they knew it would.`;
+        } else {
+          lever = ` ${onm} installs their own speaker at the table after all — but the grief card is spent; the table has heard it before. Tribute stays at ${link.tributeKcalPerWeek.toLocaleString()} kcal/week.`;
+        }
       }
       this._linkNote(link, 'renegotiation', (chosen ? 'Haven let the silence answer' : 'Seven days of silence answered for Haven') + ' (trust -6).' + (pr && pr.sub ? ' Tribute leverage landed: ' + link.tributeKcalPerWeek.toLocaleString() + ' kcal/week.' : ''));
       this.say(`${chosen ? 'Haven lets the silence answer.' : 'Seven days of silence, and the silence answered for Haven.'} ${onm}'s new speaker reads it plainly. (Trust -6.)${lever}`);
