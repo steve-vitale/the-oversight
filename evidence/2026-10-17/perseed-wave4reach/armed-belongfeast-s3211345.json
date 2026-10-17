@@ -1,0 +1,73 @@
+{
+ "run": "sim-wave4reach",
+ "axis": "scale-onramp",
+ "seed": 3211345,
+ "policyId": "belongfeast",
+ "arm": "armed",
+ "vetrel": 1,
+ "vetshape": 1,
+ "sweepCommit": "c477ba34553af65b0fa6816ec408cbb0d9aa6152",
+ "substrate": {
+  "FEASTSCALE_R13": 1,
+  "TRIBFLOOR": 1,
+  "SUCCGRACE": 1,
+  "RAIDDENSITY": 1,
+  "WINPURSUIT": 1,
+  "WINDEFER": 1,
+  "SEATDRIVE": 0
+ },
+ "days": 180,
+ "gameDays": 160,
+ "endReason": "survived",
+ "won": 0,
+ "maxWaveUnlocked": 4,
+ "reachedNational": 0,
+ "standingPeakWave": 4,
+ "standingTotal": 360,
+ "firstW4Day": 81,
+ "bindingBars": [
+  "veterans"
+ ],
+ "bindingSnapshot": {
+  "day": 80,
+  "armored": 7,
+  "armed": 8,
+  "tricks": 21,
+  "veterans": 1,
+  "short": [
+   "veterans"
+  ]
+ },
+ "readiness4": {
+  "ready": false,
+  "armored": 1,
+  "armed": 4,
+  "tricks": 24,
+  "veterans": 3,
+  "short": [
+   "armor",
+   "weapons"
+  ]
+ },
+ "vetrelEngagement": {
+  "invites": 5,
+  "hunts": 14,
+  "huntLegs": 25,
+  "huntFights": 9,
+  "yields": 0,
+  "breakoffs": 0,
+  "rescues": 0
+ },
+ "deaths": {
+  "total": 61,
+  "starv": 0,
+  "byCause": {
+   "expedition": 5,
+   "villager combat": 6,
+   "combat": 44,
+   "The Heckler": 1,
+   "monster": 5
+  }
+ },
+ "dayHashes": 180
+}

@@ -1,0 +1,44 @@
+sweep-time master commit: c477ba34553af65b0fa6816ec408cbb0d9aa6152
+  [-31847123s] control leadfeast s3091141: days=177 end=village-lost w3- starv=0 nat=0
+  [0s] control leadfeast s3101243: days=144 end=village-lost w3- starv=0 nat=1
+  [1s] control leadfeast s3211345: days=180 end=survived w3- starv=0 nat=1
+  [-1s] control leadfeast s3321447: days=98 end=village-lost w3- starv=0 nat=1
+  [1s] control leadfeast s3431549: days=174 end=village-lost w3- starv=0 nat=1
+  [-1s] control leadfeast s3541651: days=180 end=survived w3- starv=0 nat=1
+  [-0s] control leadfeast s3651753: days=180 end=survived w3- starv=0 nat=1
+  [-0s] control leadfeast s3761855: days=157 end=village-lost w3- starv=0 nat=1
+  [-2s] control belongfeast s3091141: days=25 end=village-lost w3- starv=3 nat=0
+  [1s] control belongfeast s3101243: days=85 end=village-lost w3- starv=0 nat=0
+  [0s] control belongfeast s3211345: days=147 end=village-lost w3- starv=0 nat=1
+  [-1s] control belongfeast s3321447: days=99 end=village-lost w3- starv=1 nat=0
+  [1s] control belongfeast s3431549: days=149 end=village-lost w3- starv=0 nat=0
+  [-0s] control belongfeast s3541651: days=180 end=survived w3- starv=0 nat=1
+  [-0s] control belongfeast s3651753: days=180 end=survived W4 unlock@111 bind=[veterans] starv=0 nat=1
+  [-0s] control belongfeast s3761855: days=157 end=village-lost w3- starv=0 nat=1
+  [-0s] armed leadfeast s3091141: days=180 end=survived w3- starv=0 nat=0
+  [1s] armed leadfeast s3101243: days=180 end=survived w3- starv=0 nat=1
+  [-0s] armed leadfeast s3211345: days=180 end=survived W4 unlock@60 bind=[veterans] starv=0 nat=1
+  [-1s] armed leadfeast s3321447: days=180 end=survived w3- starv=0 nat=0
+  [1s] armed leadfeast s3431549: days=180 end=survived w3- starv=0 nat=1
+  [-1s] armed leadfeast s3541651: days=180 end=survived w3- starv=0 nat=1
+  [0s] armed leadfeast s3651753: days=180 end=survived w3- starv=0 nat=1
+  [-0s] armed leadfeast s3761855: days=180 end=survived w3- starv=0 nat=1
+  [-1s] armed belongfeast s3091141: days=25 end=village-lost w3- starv=3 nat=0
+  [1s] armed belongfeast s3101243: days=150 end=village-lost W4 unlock@88 bind=[veterans] starv=0 nat=1
+  [1s] armed belongfeast s3211345: days=180 end=survived W4 unlock@81 bind=[veterans] starv=0 nat=0
+  [-1s] armed belongfeast s3321447: days=180 end=survived w3- starv=0 nat=0
+  [1s] armed belongfeast s3431549: days=180 end=survived w3- starv=0 nat=1
+  [-1s] armed belongfeast s3541651: days=180 end=survived w3- starv=0 nat=1
+  [1s] armed belongfeast s3651753: days=147 end=village-lost w3- starv=0 nat=0
+  [-0s] armed belongfeast s3761855: days=180 end=survived W4 unlock@106 bind=[veterans] starv=0 nat=1
+
+== SUMMARY ==
+control: n=16 w4-unlocks=1 starv=4 national=11 medianDays=158
+  causes: {"villager combat":148,"ambush":2,"expedition":34,"sickness":6,"combat":421,"monster":72,"the night":1,"dehydration":2,"contest":11,"Old Ugly":1,"Big-Eyes":1,"starvation":4,"the phoenix link":7,"The Heckler":1,"lockjaw":1}
+  unlocks: [{"seed":3651753,"policyId":"belongfeast","day":111,"bind":["veterans"]}]
+  binding bars: {"veterans":1}
+armed: n=16 w4-unlocks=4 starv=3 national=10 medianDays=110
+  causes: {"villager combat":132,"ambush":2,"expedition":36,"sickness":7,"combat":171,"monster":51,"contest":9,"dehydration":3,"alien":3,"Big-Eyes":1,"Hushpuppy":1,"starvation":3,"the phoenix link":10,"The Heckler":1,"lockjaw":1,"the night":1,"a wound that wouldn't close":1}
+  unlocks: [{"seed":3211345,"policyId":"leadfeast","day":60,"bind":["veterans"]},{"seed":3101243,"policyId":"belongfeast","day":88,"bind":["veterans"]},{"seed":3211345,"policyId":"belongfeast","day":81,"bind":["veterans"]},{"seed":3761855,"policyId":"belongfeast","day":106,"bind":["veterans"]}]
+  binding bars: {"veterans":4}
+PRIMARY: armed-control = 3 (GO needs >= +3)

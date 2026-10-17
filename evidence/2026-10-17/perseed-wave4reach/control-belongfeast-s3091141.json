@@ -1,0 +1,72 @@
+{
+ "run": "sim-wave4reach",
+ "axis": "scale-onramp",
+ "seed": 3091141,
+ "policyId": "belongfeast",
+ "arm": "control",
+ "vetrel": 0,
+ "vetshape": 0,
+ "sweepCommit": "c477ba34553af65b0fa6816ec408cbb0d9aa6152",
+ "substrate": {
+  "FEASTSCALE_R13": 1,
+  "TRIBFLOOR": 1,
+  "SUCCGRACE": 1,
+  "RAIDDENSITY": 1,
+  "WINPURSUIT": 1,
+  "WINDEFER": 1,
+  "SEATDRIVE": 0
+ },
+ "days": 25,
+ "gameDays": 26,
+ "endReason": "village-lost",
+ "won": 0,
+ "maxWaveUnlocked": 1,
+ "reachedNational": 0,
+ "standingPeakWave": 0,
+ "standingTotal": 20,
+ "firstW4Day": null,
+ "bindingBars": null,
+ "bindingSnapshot": {
+  "day": 26,
+  "armored": 2,
+  "armed": 7,
+  "tricks": 6,
+  "veterans": 0,
+  "short": [
+   "armor",
+   "veterans"
+  ]
+ },
+ "readiness4": {
+  "ready": false,
+  "armored": 2,
+  "armed": 5,
+  "tricks": 6,
+  "veterans": 0,
+  "short": [
+   "armor",
+   "veterans"
+  ]
+ },
+ "vetrelEngagement": {
+  "invites": 0,
+  "hunts": 0,
+  "huntLegs": 0,
+  "huntFights": 0,
+  "yields": 0,
+  "breakoffs": 0,
+  "rescues": 0
+ },
+ "deaths": {
+  "total": 11,
+  "starv": 3,
+  "byCause": {
+   "villager combat": 3,
+   "ambush": 1,
+   "expedition": 1,
+   "sickness": 3,
+   "starvation": 3
+  }
+ },
+ "dayHashes": 25
+}
