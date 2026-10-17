@@ -1,0 +1,29 @@
+=== seed 8707 day 120 — conversation with Carlos (carlos_diaz) ===
+occupation=Fisherman temperament=prickly trust=31 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About how this changed you — Has this changed you? Like, fundamentally?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_change:a_deflect, deflect_q, ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_change:a_deflect] "I'm too busy surviving to have an identity crisis."
+THEM: "The crisis will wait. It's patient. It'll be there when you're ready."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Did you hear? Bakhyt just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Right. Done. Don't look so relieved."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

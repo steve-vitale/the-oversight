@@ -1,0 +1,27 @@
+=== seed 8705 day 120 — conversation with Chantal (chantal_mukendi) ===
+occupation=Pharmacist temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Ursula ate something last month that should've killed them. They're fine."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8707 day 80 — conversation with Ryan (gen_3jlgqhf) ===
+occupation=exterminator temperament=intense trust=89 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Listen to me — I hate to ask, but tell me you've got food to spare. I'm going hungry here. I can't keep going like this."
+(turn0 choices: agency:ask_field, dlg:details, dlg:cant, teach, alive:want:ask_favor, dlg:help, dlg:subject, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's been days since a real meal. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "It crouches low, tail lashing once, twice. That's the The Mountain Lord telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Porcini. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lemongrass. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Burdock — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,27 @@
+=== seed 8703 day 100 — conversation with Sam (sam_wilson) ===
+occupation=bartender temperament=restless trust=35 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest. Funny how that works."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Can I just — Eyes open, mouth shut. That's the policy. For now."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying when they think I'm not listening?"
+THEM: "Huh. Let me think about that." "Did you hear? Grace just walked away from Haven. Didn't look back. Can't sit still, you know?"
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Right — things to do, always things to do."
+want final: id=curious stage=3 resolution=engaged

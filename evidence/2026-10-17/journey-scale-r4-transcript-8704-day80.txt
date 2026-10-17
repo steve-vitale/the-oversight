@@ -1,0 +1,32 @@
+=== seed 8704 day 80 — conversation with Eli (gen_upgd1jp) ===
+occupation=trail crew lead temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: Someday I'll walk into a place and my shoulders will drop. That's the place.
+(turn0 choices: agency:ask_field, ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "I want a door I can close. Not to keep people out — just to know I could."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "Someone saved me a seat by the fire yesterday without thinking. That's the closest I've felt."
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Home isn't a place. It's people who notice when you're quiet. I'm collecting those."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "Four walls and a roof and I'd make it a home in a week. Watch me."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I rearranged the bunks again last night. Nobody noticed. That's fine — it felt right for an hour."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "I'm not running from anything. I'm running toward the feeling of arriving."
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

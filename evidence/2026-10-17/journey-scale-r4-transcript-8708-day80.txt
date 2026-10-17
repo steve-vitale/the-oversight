@@ -1,0 +1,26 @@
+=== seed 8708 day 80 — conversation with Benoit (benoit_lambert) ===
+occupation=Baker temperament=prickly trust=21 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the funniest thing you've seen — Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(turn0 choices: ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, deflect_q, leave, silence)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Did you hear? Raj just walked away from Haven. Didn't look back…"
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Okay, that's my quota of socializing."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8706 day 80 — conversation with Axel (gen_s3amr7n) ===
+occupation=ESL teacher temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:ask_favor, alive:event:mourning, dlg:help, dlg:cant, recap, teach, dlg:subject, confront:d_ap7nmak, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "No, really, it's fine. Forget I even asked."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Carolina is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I clean up other people's messes quietly at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Carolina. The rest of us will have to be bigger."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [goon] "Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=2)
+closing line: "...Thanks for being here. That's all."
+want final: id=ask_favor stage=3 resolution=stated

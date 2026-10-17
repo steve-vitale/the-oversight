@@ -1,0 +1,32 @@
+=== seed 8702 day 100 — conversation with Amy (gen_q06uznh) ===
+occupation=Social worker temperament=intense trust=89 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the worst thing you've done — What's the worst thing you've done since the sky changed? Take your time with it."
+(turn0 choices: ans:q_guilty:a_tell, ans:q_guilty:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Between us — Did you hear? Sofia just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. No rush."
+(want=curious stage=2)
+YOU: [goon] "What else did you hear?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=curious stage=2)
+YOU: [goon] "What else did you hear?"
+THEM: "What's the kindest thing someone's done for you out here?"
+(want=curious stage=2)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [goon] "What else did you hear?"
+THEM: "Kindness compounds. I'm keeping track — mentally. It's a good ledger."
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

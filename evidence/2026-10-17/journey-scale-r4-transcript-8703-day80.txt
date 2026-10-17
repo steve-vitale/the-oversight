@@ -1,0 +1,27 @@
+=== seed 8703 day 80 — conversation with Hunter (gen_b4yuwm4) ===
+occupation=journalist temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What got you through the first week? The very first days. I mean it."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Hah. Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "The first week's behind us. That counts for something. That counts for a lot."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Did you hear? Benoit just walked away from Haven. Didn't look back. That is all."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,27 @@
+=== seed 8705 day 140 — conversation with Fikri (app_mgpspihu410) ===
+occupation=farmer temperament=gentle trust=48 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Sure — What day is it? ...Do you still count? I lost track days ago."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Days, weeks — we'll make new names for them if we have to."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Dale just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Thanks for listening. I mean that."
+want final: id=curious stage=3 resolution=engaged

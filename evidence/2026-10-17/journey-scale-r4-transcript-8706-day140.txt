@@ -1,0 +1,15 @@
+=== seed 8706 day 140 — conversation with Axel (gen_s3amr7n) ===
+occupation=ESL teacher temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What got you through the first week? The very first days. Just... be straight with me."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Well — Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Did you hear? Valeria just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

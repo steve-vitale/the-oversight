@@ -1,0 +1,18 @@
+=== seed 8702 day 120 — conversation with Amy (gen_q06uznh) ===
+occupation=Social worker temperament=intense trust=89 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now? I mean it."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "I left. Walked back in like I'd never left, apparently. I need you to hear that."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Go. Think about what I said. Really think."
+want final: id=curious stage=3 resolution=engaged

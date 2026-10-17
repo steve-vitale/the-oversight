@@ -1,0 +1,26 @@
+=== seed 8703 day 120 — conversation with Benoit (benoit_lambert) ===
+occupation=Baker temperament=prickly trust=90 dead=false mood=hungry
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+(turn0 choices: alive:want:ask_favor, dlg:help, dlg:cant, teach, dlg:subject, confront:d_txnvp7m, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "No, really, it's fine. Forget I even asked."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Sassafras — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Spicebush — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Okay, that's my quota of socializing."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

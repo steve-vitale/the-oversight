@@ -1,0 +1,24 @@
+=== seed 8706 day 120 — conversation with Axel (gen_s3amr7n) ===
+occupation=ESL teacher temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what day it is — What day is it? ...Do you still count? I lost track days ago."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Days, weeks — we'll make new names for them if we have to. Allegedly."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Yeah, that was me. I walked away from Haven once. Didn't look back. Not that it matters."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Do try to stay alive. The paperwork otherwise is murder."
+want final: id=curious stage=3 resolution=engaged

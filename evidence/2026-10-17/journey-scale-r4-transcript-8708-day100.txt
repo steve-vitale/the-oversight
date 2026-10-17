@@ -1,0 +1,31 @@
+=== seed 8708 day 100 — conversation with Tom (gen_3ofrom4) ===
+occupation=roofer temperament=anxious trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Can I be honest? They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence, confront:d_7nfemws)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_comfort stage=0)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "You're kind. Don't let this place change that. …if that makes sense."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing. Does that make sense?"
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "I — yeah. It helps, hearing that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Okay, but what about Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "I should go. You know where to find me."
+(want=seek_comfort stage=2)
+want final: id=seek_comfort stage=3 resolution=engaged
