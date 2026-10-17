@@ -1,0 +1,50 @@
+{
+ "schemaVersion": 1,
+ "schema": "foragelead-wall/1",
+ "seed": 7628,
+ "policy": "leadfeast",
+ "substrate": "courtship FEASTSCALE_R13=1 SEATDRIVE=0",
+ "days": 122,
+ "metrics": {
+  "national": 1,
+  "table": 1,
+  "wins": 0,
+  "maxArc": 4,
+  "maxWave": 3,
+  "exiled": 0,
+  "starvedDays": 2,
+  "deaths": 28,
+  "deathCauses": {
+   "villager combat": 10,
+   "expedition": 3,
+   "starvation": 1,
+   "thirst": 1,
+   "combat": 10,
+   "monster": 3
+  },
+  "medianSurvival": null
+ },
+ "forageAudit": {
+  "forageKcal": 92951,
+  "inflowKcal": 136114,
+  "forageShareOfInflow": 0.6828908121133755,
+  "byBucket": {
+   "ambient:villageLives": {
+    "events": 68,
+    "kcal": 33624
+   },
+   "ambient:away-forage": {
+    "events": 149,
+    "kcal": 58602
+   },
+   "ambient:self-forage": {
+    "events": 5,
+    "kcal": 725
+   }
+  },
+  "dutyForageResolutions": 82,
+  "taskleadForageResolutions": 82,
+  "dutyForageAssignAttempts": 0,
+  "unclassified": 0
+ }
+}

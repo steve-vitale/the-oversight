@@ -1,0 +1,125 @@
+{
+ "schema": "foragelead-corpus/1",
+ "runs": 32,
+ "seeds": [
+  7621,
+  7622,
+  7623,
+  7624,
+  7625,
+  7626,
+  7627,
+  7628,
+  7631,
+  7632,
+  7633,
+  7634,
+  7635,
+  7636,
+  7637,
+  7638
+ ],
+ "buckets": {
+  "ambient:away-forage": {
+   "events": 3043,
+   "kcal": 1214905,
+   "foragers": 0
+  },
+  "ambient:self-forage": {
+   "events": 141,
+   "kcal": 20009,
+   "foragers": 81
+  },
+  "ambient:villageLives": {
+   "events": 2719,
+   "kcal": 1425375,
+   "foragers": 232
+  },
+  "tasklead:forage": {
+   "events": 87,
+   "kcal": 42528,
+   "foragers": 3
+  }
+ },
+ "unclassified": 0,
+ "dutyForageByVia": {
+  "tasklead|forage->stone": 478,
+  "tasklead|forage->water": 415,
+  "tasklead|forage->wood": 402,
+  "tasklead|forage": 87
+ },
+ "policyForageAssignAttempts": 0,
+ "taskLeads": {
+  "sampledDays": 475,
+  "leadDays": 165,
+  "forageLeadDays": 72,
+  "leadTasks": {
+   "water": 97,
+   "garden": 78,
+   "forage": 72,
+   "cook": 133,
+   "fish": 107
+  }
+ },
+ "forageShareOfInflow": 0.5312370031723069,
+ "forageKcal": 2702817,
+ "inflowKcal": 5087780,
+ "kcalPerForagerDay": {
+  "ambient:self-forage": {
+   "kcal": 20009,
+   "foragerDays": 141
+  },
+  "ambient:villageLives": {
+   "kcal": 1362175,
+   "foragerDays": 2043
+  },
+  "tasklead:forage": {
+   "kcal": 42528,
+   "foragerDays": 35
+  }
+ },
+ "wall": {
+  "national": 23,
+  "table": 30,
+  "wins": 0,
+  "wave4": 0,
+  "wave5": 0,
+  "exiled": 0,
+  "medianSurvival": 157,
+  "maxSurvival": 180,
+  "starvedDays": 96,
+  "deathCauses": {
+   "bad belly": 2,
+   "villager combat": 290,
+   "monster": 130,
+   "a wound that wouldn't close": 7,
+   "starvation": 12,
+   "expedition": 48,
+   "combat": 955,
+   "contest": 34,
+   "Ad Break": 1,
+   "sickness": 15,
+   "thirst": 3,
+   "Choir Toad": 1,
+   "The Focus Group": 1,
+   "the night": 2,
+   "alien": 1,
+   "wound_fever": 1,
+   "lockjaw": 1,
+   "ambush": 1,
+   "The Callback": 1,
+   "dehydration": 1,
+   "the expedition": 1,
+   "mosquito": 1,
+   "The Paparazzo": 2,
+   "The Loud Beast": 1
+  }
+ },
+ "senseCandidates": [
+  "leadfeast-7638|95",
+  "leadfeast-7633|67",
+  "leadfeast-7636|98",
+  "belongfeast-7622|124",
+  "belongfeast-7634|101"
+ ]
+}

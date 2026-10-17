@@ -1,0 +1,55 @@
+{
+ "schemaVersion": 1,
+ "schema": "foragelead-wall/1",
+ "seed": 7634,
+ "policy": "leadfeast",
+ "substrate": "courtship FEASTSCALE_R13=1 SEATDRIVE=0",
+ "days": 57,
+ "metrics": {
+  "national": 0,
+  "table": 1,
+  "wins": 0,
+  "maxArc": 4,
+  "maxWave": 3,
+  "exiled": 0,
+  "starvedDays": 2,
+  "deaths": 31,
+  "deathCauses": {
+   "expedition": 1,
+   "villager combat": 6,
+   "combat": 14,
+   "monster": 2,
+   "The Paparazzo": 1,
+   "a wound that wouldn't close": 2,
+   "sickness": 5
+  },
+  "medianSurvival": null
+ },
+ "forageAudit": {
+  "forageKcal": 55467,
+  "inflowKcal": 125490,
+  "forageShareOfInflow": 0.4420033468802295,
+  "byBucket": {
+   "ambient:villageLives": {
+    "events": 35,
+    "kcal": 21626
+   },
+   "ambient:away-forage": {
+    "events": 41,
+    "kcal": 16269
+   },
+   "ambient:self-forage": {
+    "events": 3,
+    "kcal": 421
+   },
+   "tasklead:forage": {
+    "events": 33,
+    "kcal": 17151
+   }
+  },
+  "dutyForageResolutions": 100,
+  "taskleadForageResolutions": 100,
+  "dutyForageAssignAttempts": 0,
+  "unclassified": 0
+ }
+}
