@@ -29894,6 +29894,61 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
 
+    // PYRRHIC-KILL ATTRIBUTION (sim-pyrrhic 2026-10-17, fixing the a2
+    // path-drop from evidence/2026-10-17/sim-attrcensus.md): a monster died
+    // in a fight the scholar LOST — killed on the dying tick, so tbEnd
+    // declared 'lost' ("if you're dead, the fight is lost, even if you took
+    // it with you") and the per-kill ledger never ran. The village killed
+    // the beast and must learn something: the waveKillLog entry (+ trick),
+    // the codex 'slain' stage, and the villageSlain teaching count.
+    // DELIBERATELY NOT HERE (hard boundary, steve-call pending):
+    //  - scoreLedgerKill — wave-unlock DEEDS for pyrrhic kills need Steve's
+    //    ruling. Pyrrhic kills score nothing toward wave bars.
+    //  - state.waveKills counts, wave4Slain, checkWaveUnlockBeat — unlock
+    //    feeders; untouched.
+    //  - tbKillRewards — loot/carcass stay forfeit on 'lost' (deliberate
+    //    lost-forfeit design; tbEnd's _kills list stays won/routed-only).
+    //  - queueKillerTale — the tale machinery is for living killers'
+    //    reports; the codex/villageSlain already carry the village's
+    //    learning.
+    recordPyrrhicKill(monsterId, killerVid, via, detail) {
+      const mdef = this.data.monsters.find(m => m.id === monsterId);
+      if (!mdef) return;
+      const wave = mdef.wave || 1;
+      // The village learns together — same villageSlain teaching channel as
+      // recordWaveKill (1+ slain unlocks the askAbout 'beasttricks' topic).
+      this.state.villageSlain = this.state.villageSlain || {};
+      this.state.villageSlain[monsterId] = (this.state.villageSlain[monsterId] || 0) + 1;
+      // Monster Codex — 'slain' surfaces the BEASTS entry and the counter
+      // hint (MONSTER-WAVES.md: "slaying a monster surfaces its
+      // counter.hint"). Defensive: a codex bug never breaks the kill path.
+      try {
+        if (typeof this.ensureMonsterEntry === 'function') {
+          const _ce = this.ensureMonsterEntry(monsterId);
+          if (_ce) _ce.stage = 'slain';
+        }
+      } catch (e) {}
+      // KILL ATTRIBUTION — the waveKillLog entry, mirroring recordWaveKill's
+      // telemetry block (same _attrKills gate, same 1000-entry cap, same
+      // per-channel counters) so pyrrhic kills join the same census.
+      try {
+        if (this._attrKills !== false) {
+          const _log = this.state.waveKillLog || (this.state.waveKillLog = []);
+          if (_log.length < 1000) {
+            _log.push({
+              d: (this.state.scholar || {}).day || 0,
+              mid: monsterId, w: wave,
+              by: killerVid || null, via: via || 'unknown',
+              trick: detail || null,
+            });
+          }
+          const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
+          const _k = (via || 'unknown') + '.w' + wave;
+          _byCh[_k] = (_byCh[_k] || 0) + 1;
+        }
+      } catch (e) {}
+    },
+
     // WAVE RATIO (Steve 2026-10-06): which wave a fresh spawn belongs to.
     // Single source of truth for the 60%-newest-wave ratios — used by both
     // castMonster (wanderer/contest casting) and checkEncounter (tile-entry
@@ -40691,7 +40746,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // no ledger, no codex 'slain', no carcass, no loot, and the routed
       // narration lied "No meat, no trophy" about bodies at your feet.
       // 'fled' stays forfeit: you abandoned the field — the meat with it.
-      if (result === 'won' || result === 'routed') {
+      // 'lost' (sim-pyrrhic 2026-10-17): the scholar died but a beast died
+      // too — the pyrrhic kill. The per-kill ledger still learns (a2
+      // path-drop, evidence/2026-10-17/sim-attrcensus.md): waveKillLog entry
+      // (+ trick), codex 'slain', villageSlain teaching count — via
+      // recordPyrrhicKill, which scores NO wave-unlock deeds and pays NO
+      // loot/carcass (both stay forfeit on 'lost' by deliberate design).
+      if (result === 'won' || result === 'routed' || result === 'lost') {
         // Record kills by wave for unlock gates. ONE BODY = ONE KILL
         // (break-it monsters r6 2026-10-10; lineage-hardened break-it combat
         // 2026-10-10): snake segments are one creature — the loops below
@@ -40728,7 +40789,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 }
               }
             } catch (e) {}
-            this.recordWaveKill(m.mdef.id, _killerVid, _killerVia, this.trickSummaryFor ? this.trickSummaryFor(f, m.mdef.id) : null);
+            // PYRRHIC-KILL ATTRIBUTION (sim-pyrrhic 2026-10-17): the fight is
+            // lost — "if you're dead, the fight is lost, even if you took it
+            // with you" — but the village killed the beast and must learn
+            // something. recordPyrrhicKill writes the waveKillLog entry (+
+            // trick), the codex 'slain', and the villageSlain count. It does
+            // NOT call scoreLedgerKill (wave-unlock deeds for pyrrhic kills
+            // need Steve's ruling — steve-call, evidence/2026-10-17/
+            // sim-pyrrhic.md) and it never reaches tbKillRewards (the _kills
+            // list below stays won/routed-only) — loot/carcass stay forfeit.
+            if (result === 'lost') {
+              this.recordPyrrhicKill(m.mdef.id, _killerVid, _killerVia, this.trickSummaryFor ? this.trickSummaryFor(f, m.mdef.id) : null);
+            } else {
+              this.recordWaveKill(m.mdef.id, _killerVid, _killerVia, this.trickSummaryFor ? this.trickSummaryFor(f, m.mdef.id) : null);
+            }
           }
         }
       }

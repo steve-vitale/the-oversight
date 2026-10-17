@@ -1,0 +1,99 @@
+{
+ "seed": 1809,
+ "policyId": "leadfeast",
+ "arm": "pyrrhic",
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1, SEATDRIVE=0 explicit; NODEWITNESS unset) + pyrrhic-kill attribution fix",
+ "gameCommit": "cfaab2f976590fe438e67504e6c08840095355de",
+ "days": 96,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 0,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "nTbFights": 15,
+ "nPerf": 6,
+ "nAttr": 4,
+ "nUnattr": 2,
+ "nReverse": 1,
+ "nPyrrhicUnattr": 0,
+ "classCounts": {
+  "b1": 2
+ },
+ "pyrrhicFixed": [],
+ "codexStages": {
+  "belltoad": "slain",
+  "gallowdeer": "observed"
+ },
+ "villageSlain": {
+  "belltoad": 1,
+  "gallowdeer": 0
+ },
+ "detGate": {
+  "compared": true,
+  "pass": false,
+  "fails": [
+   "days 45 -> 96",
+   "nTbFights 5 -> 15",
+   "nPerf 2 -> 6",
+   "new unattr row seq10/memory_projector not in control"
+  ]
+ },
+ "fights": [
+  {
+   "cls": "b1",
+   "sub": "performer-died",
+   "note": "scholar dead, monster alive at tbEnd",
+   "seq": 1,
+   "day": 13,
+   "result": "lost",
+   "mid": "gallowdeer",
+   "kind": "move_windup",
+   "nPerfs": 2,
+   "pAlive": 0,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "b1",
+   "sub": "performer-died",
+   "note": "scholar dead, monster alive at tbEnd",
+   "seq": 3,
+   "day": 28,
+   "result": "lost",
+   "mid": "gallowdeer",
+   "kind": "move_windup",
+   "nPerfs": 2,
+   "pAlive": 0,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 0,
+   "wklSame": []
+  },
+  {
+   "cls": "c1",
+   "sub": "reverse-artifact",
+   "note": "kill attributed with zero perfs — ±1d join over-attribution",
+   "seq": 10,
+   "day": 81,
+   "result": "routed",
+   "mid": "memory_projector",
+   "kind": "move_windup",
+   "nPerfs": 0,
+   "pAlive": 1,
+   "midDead": 0,
+   "midAlive": 1,
+   "killAttributed": 1,
+   "wklSame": [
+    {
+     "d": 81,
+     "trick": "move_windup",
+     "by": "elif_demir",
+     "via": "player"
+    }
+   ]
+  }
+ ]
+}
