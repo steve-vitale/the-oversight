@@ -48,18 +48,35 @@ how drift compounds silently.
    invalid — the scorecard rejects it mechanically. Arguments about "whose
    numbers" end at the digest.
 2. **Drift cap.** No agent branch goes more than ~200 commits ahead of
-   master, or 7 days, without a reconcile: rebase onto master, land in
-   reviewable pieces through the normal worktree + `--ff-only` flow. A
-   branch past the cap stops new work until it reconciles.
+   master, or 7 days, without a reconcile: rebase onto master when a merge
+   base exists (file-port in reviewable groups when histories are disjoint
+   — rebase is impossible without a common ancestor), land through the
+   normal worktree + `--ff-only` flow. A branch past the cap stops new work
+   until it reconciles.
 3. **Cache hygiene.** Panel `cases/` caches and other per-run archives never
    commit. Commit `panel.json.gz` + compare reports only.
 4. **This file is the surface.** Pending reconciles and lane changes get
    noted here by either agent; Steve adjudicates disputes.
 
-### Pending reconcile (2026-10-17)
-- `codex/resume-claude` ~3,470 commits ahead of master: needs a dedicated
-  reconcile pass (rebase, drop/`.gitignore` the ~18.8k cache archives, land
-  the 69 `src/js` + 36 `scripts/policies` + 22 `src/data` files of real
-  divergence in reviewable pieces). Not started — scoping is the next step.
+### Pending reconcile (2026-10-17, scoped 2026-10-17)
+- `codex/resume-claude`: 3,470 commits on a DISJOINT history — master's
+  history was rebuilt 2026-10-16 (new root 6f134de2), so there is no merge
+  base and rebase is impossible. Reconcile = file-port only; never merge or
+  ship the branch wholesale.
+  - Tree diff vs master: 20,333 files; 18,270 are committed panel-cache
+    archives under evidence/2026-10-15|16|17 (droppable and reproducible —
+    Codex should drop them and .gitignore the pattern).
+  - Real divergence ~2,063 files: 83 scripts/godpath (their lane —
+    reviewable as a group), 69 src/js (only godpath.js/godhood.js are
+    theirs; the other 67 — game.js, conversation.js, fieldFights.js,
+    villageAgency.js, … — are cross-lane into Muse's lane), 36
+    scripts/policies (shared instrument territory — policy edits trip the
+    panel's validity check), 22 src/data (godpaths.json/table-endings.json
+    theirs; 20 cross-lane), 19 docs, 706 evidence (informational, keep on
+    branch).
+  - Order: (0) Codex drops the 18,270 cache files; (1) in-lane group ports
+    with review; (2) cross-lane files triaged one group at a time, each with
+    a panel before/after per MEASUREMENT.md §15 — Steve adjudicates
+    disputes. Not started.
 - `codex/balanced-measurement`: measurement package ported to master
   2026-10-17 (commit e7440ed0); branch itself needs no further action.
