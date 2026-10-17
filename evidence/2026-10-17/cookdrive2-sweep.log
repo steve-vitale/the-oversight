@@ -1,0 +1,21 @@
+cookdrive2 sweep: seeds=4801,4802,4803,4804,4805,4806,4807,4808 policies=leadfeast,belongfeast sides=control,armed days=180
+  PASS leadfeast/control: drive counter live — cookRes=4 fires=4 skips=0
+  PASS leadfeast/control: S0 recorded — S0=47250
+  PASS leadfeast/control: run completes — days=15
+  PASS leadfeast/control: smoke conservation |rel|<=3% — rel=0.00%
+  PASS leadfeast/armed: drive counter live — cookRes=4 fires=4 skips=0
+  PASS leadfeast/armed: S0 recorded — S0=47250
+  PASS leadfeast/armed: run completes — days=15
+  PASS leadfeast/armed: smoke conservation |rel|<=3% — rel=0.00%
+  PASS belongfeast/control: drive counter live — cookRes=4 fires=4 skips=0
+  PASS belongfeast/control: S0 recorded — S0=47250
+  PASS belongfeast/control: run completes — days=15
+  PASS belongfeast/control: smoke conservation |rel|<=3% — rel=0.00%
+  PASS belongfeast/armed: drive counter live — cookRes=4 fires=4 skips=0
+  PASS belongfeast/armed: S0 recorded — S0=47250
+  PASS belongfeast/armed: run completes — days=15
+  PASS belongfeast/armed: smoke conservation |rel|<=3% — rel=0.00%
+SMOKE gate green.
+  [control leadfeast s4801] d=41 end=village-lost wr=0.00000 cookRes=14 fires=14 skips=0 nat=0 wave=2 starv=4
+  [armed leadfeast s4801] d=41 end=village-lost wr=0.00000 cookRes=14 fires=14 skips=0 nat=0 wave=2 starv=4
+  [control leadfeast s4802] d=182 end=survived wr=0.47761 cookRes=163 fires=163 skips=0 nat=1 wave=3 starv=0
