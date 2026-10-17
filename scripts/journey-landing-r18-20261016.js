@@ -1,70 +1,82 @@
 #!/usr/bin/env node
-// Journey leg: LANDING (days 1-14) R18 — finish r17's interrupted run.
-// R17 (2026-10-15/16) was interrupted mid-worker: its probe harness landed on
-// a tangled branch, its WIP (convo-wants taken-line clarification, competent
-// policy extension, where-are-we fixture guard) never landed, and its
-// test-w4-nopin.js duplicate contained an infinite-loop footgun (unpinned
-// region + landing-relative tier fixture; fixed by deleting the duplicate and
-// adding a spin guard to the green test). R18 rescues the WIP (cherry-picked,
-// conflict-resolved against the DAWNREFUSE fix, proof test 47/47 green),
-// then re-runs r17's protocol on fresh seeds.
-// R18 asks: (a) do the r16 revised metrics (V1'/V4'/V5') confirm on fresh
-// seeds with the pinned policy? (b) under a repeat-sitting policy, do the
-// mourning and seek_taken beats fire NATURALLY (no env-gated pick override),
-// as the proof-green instruments say they should?
+// Journey leg: LANDING (days 1-14) R18 — pantry-granularity substrate
+// re-check + V1'' (journal-holder exclusion) + MEASUREMENT §14c roster
+// co-primary.
+// R17 (2026-10-15) confirmed the revised metrics on fresh seeds: V1' GO by
+// V1'' (Yuki's coverage 7/13 as current bearer — the meal-loop parity
+// exclusion follows the mantle), V2/V3/V4'/V5' GO, seek_taken 2/12 natural
+// on repeat-sit, 0 near-dupes. Landed since r17 (all 2026-10-16):
+//   - 0152a2ce: pantry granularity leak CLOSED — depositPantryPieces splits
+//     ALL external deposits (hauls, donations, transfers) to <=500-kcal
+//     pieces (Steve's ruling). Proof 17/17 GREEN on this tip.
+//   - 76a40da5: haul-unrevealed — villagers haul unknown monster meat as
+//     0-kcal 'Unknown flesh' testable items (knowledge gates eating, not
+//     hauling; Steve's ruling). Proof 7/7 GREEN on this tip.
+//   - f32bfd9e: MEASUREMENT.md §§14a-c — kill verdict taxonomy, pre-pilot
+//     substrate checklist, roster measurement rule.
+// R18 asks: on the new substrate, does the fortnight's food economy stay
+// sane (no crumb explosion, no split-traceable starvation, unknown flesh
+// arrives honest/testable), and do the r17 metrics hold (now V1'')?
 //
 // Pre-registered (docs/MEASUREMENT.md sections 9-12, 14):
-//   Question: do the r16 revised metrics confirm on fresh seeds, and do
-//     mourning + seek_taken fire naturally under repeat-sitting?
-//   Interesting / GO gate: V1' GO on >=3/4 seeds; >=1 natural fire of
-//     (mourning | seek_taken) on the REPEAT probe seed; 0 near-dupes
-//     across >=8 transcripts; sense-check of the social-r17 repair.
-//   Seeds: 58, 59, 60, 61 (fresh, pinned) + 62 (REPEAT_SIT probe).
-//   Horizon: 14 days, death-aware stop (leg window; dead village stops +10d tail max).
+//   Question: does the pantry-granularity + haul-unrevealed substrate keep
+//     the landing fortnight sane, and do V1''/V4'/V5' hold on fresh seeds?
+//   Interesting / GO gate: V1'' GO on >=3/4 seeds; 0 starvation deaths
+//     traceable to piece-splitting; pantry piece-counts bounded (splits
+//     land at/near the 500 cap, stacksMatch merges); unknown-flesh hauls
+//     arrive honest (0 kcal, edible=false, hiddenKcal preserved, testable);
+//     >=1 natural fire of (mourning | seek_taken) on the REPEAT probe seed;
+//     0 near-dupes across >=8 transcripts; sense-check of the social-r18
+//     wind-down repair in the landing window.
+//   Seeds: 60, 61, 62, 63 (fresh, pinned) + 64 (REPEAT_SIT probe).
+//   Horizon: 14 days, death-aware stop.
 //   Policy: competent, PINNED (continuity r14-r17); probe: competent +
 //     REPEAT_SIT=1 (prefer already-talked villagers) + MOURN_PROBE=1.
-//   Pilot sizing note (MEASUREMENT §9 deviation): §9 sizes the pilot at 8
-//     seeds for ~3s lever sims. A landing seed is a full 14-day playthrough
-//     with real conversations (~5-10 min under load) — 8 seeds would blow
-//     the run budget. This leg's established protocol (r14-r17) is 4+1;
-//     r18 keeps it and expands only on a clean GO.
 //   Binding metrics:
-//     V1' autonomy — every living non-scholar villager logs production on
-//       >= (observed villager-days − 2); <10% of villager-days hunger >90.
+//     V1'' autonomy — every living villager who is NOT holding the journal
+//       logs production on >= (their observed non-journal villager-days - 2);
+//       observed days counted per-villager (alive AND not the journal
+//       holder); <10% of villager-days hunger >90.
 //     V2 work — villager production covers >=40% of the village's 14-day
 //       kcal draw on >=3 seeds.
 //     V3 structure — >=1 emergent social tie/seed: trust >=40 pair, a
 //       convened moot, or a villager-to-villager favor recorded.
 //     V4' people — >=8 transcripts sense-read, 0 fabric-history flags,
 //       0 within-conversation near-dupes; grief exercised >=1 sitting
-//       (probe instrument: seed 62 REPEAT_SIT + MOURN_PROBE).
+//       (probe instrument: seed 64 REPEAT_SIT + MOURN_PROBE).
 //     V5' regression — water fills>0 + boils>0 per seed; 0 death mislabels;
-//       >=6 social names/seed pre-System; proof-green instruments:
-//       test-seek-taken-second-sit-20261014 + test-mourning-name-r8 re-run
-//       on current tip; natural fires measured separately on the probe.
-//     V6 winnable — villages alive at day 14.
-//   Canon read: CANON.md; DIRECTIVES.md (no silent actions, knowledge gates,
-//     feel over math); PARTY.md (villager treatment); CONVERSATIONS.md
-//     (dialogue quality bar). No new canon invented.
+//       >=6 social names/seed pre-System; proof-green instruments re-run
+//       on current tip (granularity 17/17, haul-unrevealed 7/7 — verified
+//       pre-flight; seek-taken + mourning proof tests re-run here).
+//     V6 winnable + §14c roster — villages alive at day 14; villager
+//       (non-scholar) combat deaths recorded as co-primary.
+//     G1 granularity (question-form, NOT a GO number): do deposit splits
+//       keep pantry piece counts bounded? is any starvation traceable to
+//       the split? does unknown flesh arrive honest and testable?
+//   Canon read: CANON.md; PRESERVATION.md (food ladder — splitting must
+//     not launder or destroy kcal); DIRECTIVES.md (no silent actions,
+//     knowledge gates, feel over math); PARTY.md (villager treatment);
+//     CONVERSATIONS.md (dialogue quality bar). No new canon invented.
 //
-// Usage: SEEDS=58,59,60,61 node scripts/journey-landing-r18-20261016.js
-// Probe: SEEDS=62 REPEAT_SIT=1 MOURN_PROBE=1 node scripts/journey-landing-r18-20261016.js
+// Usage: SEEDS=60,61,62,63 node scripts/journey-landing-r18-20261016.js
+// Probe: SEEDS=64 REPEAT_SIT=1 MOURN_PROBE=1 node scripts/journey-landing-r18-20261016.js
 // Outputs route to OUTDIR (env) or the goal evidence dir — never /tmp
 // (service restarts wipe /tmp mid-run, 2026-10-14).
+
 
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const { loadGame, setupGame, driveFights, driveContests } = require('./sim-harness');
 const { competent } = require('./policies/competent');
-const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [58, 59, 60, 61]);
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [60, 61, 62, 63]);
 const DAYS = parseInt(process.env.DAYS || '14', 10);
 const FAVOR_ACCEPT = process.env.FAVOR_ACCEPT !== '0'; // R15: default ON —
 // the landing leg's KIN question needs the seek_taken commit path exercised
 // (takenPromises + podRemember). Set FAVOR_ACCEPT=0 to get r14 behavior.
 const OUTDIR = process.env.OUTDIR ||
   path.join(process.env.HOME || '/home/hatch',
-    'workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-10-16');
+    'workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-10-16/landing-r18');
 try { fs.mkdirSync(OUTDIR, { recursive: true }); } catch (e) {}
 
 // ---- text-stream capture (loadGame silences Game.say; we keep the silence) ----
@@ -81,6 +93,7 @@ function feastScan(line) {
   if (FEAST_SPAM_RE.test(s)) { MET.feastedSpamLines++; _spamRun++; }
   if (FEAST_DRAW_RE.test(s)) MET.feastDraws++;
   if (VILLAGER_FEAST_PUSH_RE.test(s)) MET.villagerFeastPush++;
+  if (/unknown flesh in the pantry/i.test(s)) MET.unknownFleshHauls++;
 }
 function cap(line) {
   if (line == null) return;
@@ -122,6 +135,8 @@ const MET = {
   feastDraws: 0, feastedCombatUses: 0,
   villagerFeastPush: 0,
   starvationDeaths: 0,
+  // r18: haul-unrevealed substrate
+  unknownFleshHauls: 0,
   // r9 gossip/information telemetry
   gossipAsks: 0, gossipRenders: 0, gossipNoNews: 0,
   rumorPlanted: 0, tellbeastAsks: 0, namebeastAsks: 0,
@@ -411,13 +426,16 @@ function runConversation(seed, day, vid, nvSit) {
     // when one line's core contains another's (>=40 chars). Exact dupes
     // are counted above; this catches wrapper-hidden repeats only.
     const normCore = (t) => String(t || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
-    const cores = themT.map(normCore).filter(c => c.length >= 40);
+    // r18 fix: keep (line, core) pairs — filtering cores alone breaks the
+    // themT index alignment and misattributes the pair (caught on the
+    // seed-64 probe: reported a deflection line, hid the real comfort repeat).
+    const pairs = themT.map(t => ({ line: t, core: normCore(t) })).filter(p => p.core.length >= 40);
     const nearDupes = [];
-    for (let i = 0; i < cores.length; i++) {
-      for (let j = i + 1; j < cores.length; j++) {
-        if (cores[i] === cores[j]) continue;
-        if (cores[i].indexOf(cores[j]) !== -1 || cores[j].indexOf(cores[i]) !== -1) {
-          nearDupes.push(`${themT[i].slice(0, 80)} ⟷ ${themT[j].slice(0, 80)}`);
+    for (let i = 0; i < pairs.length; i++) {
+      for (let j = i + 1; j < pairs.length; j++) {
+        if (pairs[i].core === pairs[j].core) continue;
+        if (pairs[i].core.indexOf(pairs[j].core) !== -1 || pairs[j].core.indexOf(pairs[i].core) !== -1) {
+          nearDupes.push(`${pairs[i].line.slice(0, 80)} ⟷ ${pairs[j].line.slice(0, 80)}`);
         }
       }
     }
@@ -715,6 +733,8 @@ async function runSeed(seed) {
     }
   } catch (e) { console.log('chooseAbility wrap ERROR: ' + (e && e.message)); }
   const series = [];
+  const mantleLog = []; // r18: journal passes {day, from, to} (V1'')
+  let lastHolder = null;
   const transcriptFiles = [];
   let overAt = null;
   let lastSday = null, frozenIters = 0;
@@ -856,14 +876,33 @@ async function runSeed(seed) {
     } catch (e) {}
     return {
       day: gday(), pantryKcal: pantryKcal(), pop: popAlive(),
+      // r18: journal holder (V1'') + pantry piece histogram (G1 granularity)
+      journalHolder: (() => { try { return Game.villagerId || null; } catch (e) { return null; } })(),
+      pantryPieces: (() => {
+        try {
+          const p = (Game.state.village && Game.state.village.pantry) || [];
+          let totalKcal = 0, n = 0; const kcals = [];
+          let unknownFlesh = 0, unknownHidden = 0;
+          for (const it of p) {
+            const ke = it.kcalEach || 0, u = it.units || 1;
+            totalKcal += ke * u; n += u;
+            for (let i = 0; i < u; i++) kcals.push(ke);
+            if (/unknown flesh/i.test(it.name || '')) {
+              unknownFlesh += u; unknownHidden += (it.hiddenKcal || 0) * u;
+            }
+          }
+          kcals.sort((a, b) => a - b);
+          return {
+            pieces: n, totalKcal: Math.round(totalKcal),
+            medianKcalEach: kcals.length ? kcals[Math.floor(kcals.length / 2)] : 0,
+            maxKcalEach: kcals.length ? kcals[kcals.length - 1] : 0,
+            unknownFleshUnits: unknownFlesh,
+            unknownFleshHiddenKcal: Math.round(unknownHidden),
+          };
+        } catch (e) { return null; }
+      })(),
       deaths: deathsSoFar().map(d => ({ day: d.day, who: d.who, cause: d.cause })),
       villagerDay,
-      // R18 SUCCESSION FIX: track the current bearer per snapshot. V1' must
-      // exclude whoever IS the player that day (the meal loop's PARITY rule
-      // skips them, so their contribLog legitimately freezes) and pro-rate
-      // the dead by days alive. Before, the successor and the dead were
-      // scored against the full horizon — V1' NO-GO'd on healthy villages.
-      bearer: (() => { try { return Game.villagerId || null; } catch (e) { return null; } })(),
       mealTotals: (() => { try { const v = Game.state.village || {}; return { ate: Math.round(v.lastEat || 0), gave: Math.round(v.lastGive || 0) }; } catch (e) { return null; } })(),
       scholarKcal: Math.round((Game.state.scholar && Game.state.scholar.kcal) || 0),
       scholarHp: Math.round((Game.state.scholar && Game.state.scholar.health) || 0),
@@ -966,6 +1005,18 @@ async function runSeed(seed) {
       sysWas = sysNow;
       const snap = daySnapshot();
       series.push(snap);
+      // r18: mantle tracking — the journal holder can change when the
+      // bearer dies (V1'': the meal-loop parity exclusion follows the
+      // mantle, so autonomy coverage must too).
+      try {
+        const holder = snap.journalHolder || null;
+        if (lastHolder !== null && holder !== lastHolder) {
+          mantleLog.push({ day: snap.day, from: lastHolder, to: holder,
+            fromName: vname(lastHolder), toName: vname(holder) });
+          console.log(`*** MANTLE PASS day ${snap.day}: ${vname(lastHolder)} -> ${vname(holder)}`);
+        }
+        lastHolder = holder;
+      } catch (e) {}
       checkStarvationDeaths(snap);
       // r9: day-3 rumor plant — the player starts a 'generous' rumor about a
       // villager (social verb, drama-grade). Then gossip machinery is watched
@@ -1088,6 +1139,18 @@ async function runSeed(seed) {
   fs.writeFileSync(censusPath, JSON.stringify({
     seed, spawn, systemDay, systemFile, transcriptFiles, series, census, overAt,
     starvAutopsies,
+    // r18: mantle pass log (V1'') + pantry granularity series (G1)
+    mantleLog,
+    granularity: {
+      day14: series.length ? series[series.length - 1].pantryPieces : null,
+      pieceSeries: series.map(x => ({ day: x.day,
+        pieces: x.pantryPieces && x.pantryPieces.pieces,
+        totalKcal: x.pantryPieces && x.pantryPieces.totalKcal,
+        median: x.pantryPieces && x.pantryPieces.medianKcalEach,
+        max: x.pantryPieces && x.pantryPieces.maxKcalEach,
+        unknownFlesh: x.pantryPieces && x.pantryPieces.unknownFleshUnits,
+        unknownHidden: x.pantryPieces && x.pantryPieces.unknownFleshHiddenKcal })),
+    },
     wateR14: Object.assign({}, WATER, { fillDays: Array.from(WATER.fillDays) }),
     deaths13: DEATHS,
     folTelemetry: FOL, abilityOfferLog,
@@ -1146,14 +1209,14 @@ async function runSeed(seed) {
       const needState = { hunger: [], fear: [], social: [], energy: [] };
       let hungOver90 = 0, hungReadings = 0;
       for (const snap of series) {
-        // R18: the bearer that day is the player (meal-loop PARITY skips
-        // them); the dead are pro-rated by days alive, not the horizon.
-        const bearer = snap.bearer || null;
         for (const vd of (snap.villagerDay || [])) {
           if (vd.dead) continue;
-          const b = by[vd.id] || (by[vd.id] = { id: vd.id, name: vd.name, days: new Set(), produced: 0, expected: 0, trusts: [], plantsEnd: null, daysAlive: 0, daysAsBearer: 0 });
-          b.daysAlive++;
-          if (bearer && vd.id === bearer) b.daysAsBearer++;
+          const b = by[vd.id] || (by[vd.id] = { id: vd.id, name: vd.name, days: new Set(), obs: new Set(), produced: 0, expected: 0, trusts: [], plantsEnd: null });
+          // r18 V1'': the journal holder is the player — their meal-loop
+          // parity exclusion follows the mantle, so observed days exclude
+          // holder days (per-villager, since the mantle can pass mid-run).
+          const isHolder = snap.journalHolder != null && vd.id === snap.journalHolder;
+          if (!isHolder) b.obs.add(snap.day);
           if (vd.logDay != null) {
             const k = vd.logDay;
             if (!b.days.has(k)) {
@@ -1162,7 +1225,7 @@ async function runSeed(seed) {
               b.expected += vd.expected || 0;
             }
           }
-          if (vd.needs) {
+          if (vd.needs && !isHolder) {
             for (const kk of ['hunger', 'fear', 'social', 'energy']) if (vd.needs[kk] != null) needState[kk].push(vd.needs[kk]);
             if (vd.needs.hunger != null) { hungReadings++; if (vd.needs.hunger > 90) hungOver90++; }
           }
@@ -1170,20 +1233,15 @@ async function runSeed(seed) {
           if (vd.plants != null) b.plantsEnd = vd.plants;
         }
       }
-      const perVillager = Object.values(by).map(b => {
-        // V1' denominator: days the villager was alive AND not the bearer.
-        // A pure bearer (daysAsBearer === daysAlive) is exempt (denominator 0).
-        const denom = Math.max(0, b.daysAlive - b.daysAsBearer);
-        return {
-          id: b.id, name: b.name, coverageDays: b.days.size,
-          produced: Math.round(b.produced), expected: Math.round(b.expected),
-          effort: b.expected > 0 ? +(b.produced / b.expected).toFixed(3) : null,
-          trustEnd: b.trusts.length ? b.trusts[b.trusts.length - 1] : null,
-          plantsEnd: b.plantsEnd,
-          daysAlive: b.daysAlive, daysAsBearer: b.daysAsBearer, v1Denom: denom,
-          v1Pass: denom === 0 || b.days.size >= Math.max(0, denom - 2),
-        };
-      });
+      const perVillager = Object.values(by).map(b => ({
+        id: b.id, name: b.name, coverageDays: b.days.size,
+        observedDays: b.obs.size,
+        v1ppPass: b.days.size >= b.obs.size - 2,
+        produced: Math.round(b.produced), expected: Math.round(b.expected),
+        effort: b.expected > 0 ? +(b.produced / b.expected).toFixed(3) : null,
+        trustEnd: b.trusts.length ? b.trusts[b.trusts.length - 1] : null,
+        plantsEnd: b.plantsEnd,
+      }));
       const totProd = perVillager.reduce((t, x) => t + x.produced, 0);
       const totExp = perVillager.reduce((t, x) => t + x.expected, 0);
       const obsDays = series.length;
