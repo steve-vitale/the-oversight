@@ -984,3 +984,13 @@ metrics bind) remains the judge; contract changes are a Steve-call.
 (2) Drift cap: no agent branch goes ~200 commits / 7 days past master
 without a reconcile (rebase + land in reviewable pieces); panel case caches
 never commit. Recorded in `docs/AGENT-LANES.md`.
+
+## 2026-10-17 — Exile gets social consequences (Steve)
+Steve: "Social consequences too." Exile was enforced logistically only
+(guards, pantry denial, uprising) while the village kept chatting and
+feasting with the exile (51 conversations, 22 feasts post-exile in the
+2026-10-16 playtest). Ruling: add the social layer — cold shoulders with
+loyalty exceptions (option 1 of the 2026-10-16 proposal): villagers refuse
+social engagement with the exiled by default, close friends/family may
+break the cold shoulder at a trust cost. Not full lockout; amends remain
+possible.
