@@ -684,6 +684,37 @@
           else this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
         }
       }
+      // REACTOR SEAT HONESTY (journey-endgame r14 2026-10-17): a fusion-reactor
+      // bearer can never mark feastSurgeUsed — grantFeastBuff refuses while the
+      // reactor is online ("the engine that never hungers never feasts"), and
+      // the pellet never comes out ("death is the only uninstall"). So the
+      // lesser seat's food-thesis deed is permanently uncompletable for this
+      // bearer: Arc IV never fires, the table never comes, and the run sits at
+      // arc 3 in silence for 100+ days — a no-silent-actions violation. Say it
+      // aloud once, naming the pellet and the missing deeds. The mantle
+      // passing to hungrier hands is the honest out: a new bearer can feast.
+      if (want >= 3 && (s.day || 0) >= 90 && seatNow === 'none' && !pg.reactorSeatTold) {
+        let online = false;
+        try { online = (typeof this.fusionReactorOnline === 'function') && !!this.fusionReactorOnline(); } catch (e) {}
+        if (online) {
+          pg.reactorSeatTold = true;
+          let detail = {};
+          try { detail = (((typeof this.tableSeat === 'function') ? this.tableSeat() : null) || {}).detail || {}; } catch (e) {}
+          const miss = [];
+          if ((detail.w1 | 0) < 4) miss.push('wave-1 monsters faced');
+          if ((detail.w2 | 0) < 4) miss.push('wave-2 monsters faced');
+          if ((detail.w3 | 0) < 3) miss.push('wave-3 monsters faced');
+          if ((detail.contestsN | 0) < 2) miss.push('contests survived');
+          if ((detail.crisesN | 0) < 2) miss.push('crises weathered');
+          const rk = detail.rank || 'village';
+          if (!(rk === 'regional' || rk === 'national' || rk === 'global')) miss.push('a regional standing');
+          if ((detail.stage | 0) < 2) miss.push('deeper integration');
+          if (!detail.foodDeeds) miss.push('the food-thesis deeds (no feast can carry the surge while the pellet hums)');
+          const missTxt = miss.length ? ' The ledger still wants: ' + miss.join('; ') + '.' : '';
+          this.say('◈ THE TABLE — the ring of pale light flickers at the edge of the sky... and does not come. The System does not apologize this time. "WE PRICED THE RUN. NO HUNGER ON THE RECORD — THE PELLET HUMS WHERE THE FIRE SHOULD BE. NO FEAST, NO SURGE, NOTHING HERE WE CAN PRICE. A COLD SPOT AT EVERY TABLE: THE WORDS WERE ON THE WRAPPER."' + missTxt + ' The mantle may pass to hungrier hands; the table will still be here.');
+          try { this.save(); } catch (e) {}
+        }
+      }
       if (want > pg.arc) {
         pg.arc = want;
         // ARC DAY (bal-scale 2026-10-10): the System leans in when the

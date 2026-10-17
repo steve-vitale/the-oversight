@@ -67,7 +67,7 @@
       if (score < 6) return { earned: false, strength: 0, why: `The audience doesn't know you yet (showmanship+protected ${score}, needs 6).` };
       if (vw < 12 && ff <= 0) return { earned: false, strength: 0, why: 'No audience — the show isn\'t watching and no fan club carries your name.' };
       const strength = Math.min(100, 20 + (vw | 0) + ((L.showmanship | 0) * 2) + Math.min(20, ff));
-      return { earned: true, strength, why: `Viewership ${vw}, fan favor ${ff} — the galaxy's favorite, by the numbers.` };
+      return { earned: true, strength, why: `Viewership ${Math.round(vw)}, fan favor ${ff} — the galaxy's favorite, by the numbers.` };
     },
     abilities: {
       shared: [
