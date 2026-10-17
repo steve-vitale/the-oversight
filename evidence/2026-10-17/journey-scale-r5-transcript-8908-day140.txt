@@ -1,0 +1,31 @@
+=== seed 8908 day 140 — conversation with Farid (farid_ahmed) ===
+occupation=locksmith temperament=cautious trust=33 dead=false mood=steady
+want: just_company (stage 1)
+
+THEM: "Hey. Got a minute? No reason. Just — hey."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=just_company stage=1)
+YOU: [dlg:more] "What's on your mind?"
+THEM: "This is nice. Just — being around people. I forget how much I need it."
+(want=just_company stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Tathagata died... I keep expecting to see Tathagata at the fire. Stupid."
+(want=just_company stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I count portions out loud before eating. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=just_company stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=just_company stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I count portions out loud before eating for Tathagata, now. Feels right. Feels like the least I can do."
+(want=just_company stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=just_company stage=2)
+YOU: [goon] "And then?"
+THEM: "Alright — carefully, now. Both of us."
+(want=just_company stage=2)
+want final: id=just_company stage=3 resolution=engaged

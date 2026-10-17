@@ -1,0 +1,18 @@
+=== seed 8908 day 100 — conversation with Kennedy (gen_nwiclmf) ===
+occupation=Dentist temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Khaya?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my nephew, Khaya. Went with his father in the Taking. The System says the little ones are cozy. I do not know what cozy means at that scale. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=seek_taken stage=3 resolution=promised

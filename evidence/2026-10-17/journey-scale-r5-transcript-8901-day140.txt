@@ -1,0 +1,27 @@
+=== seed 8901 day 140 — conversation with Miles (gen_d8f4sp5) ===
+occupation=street artist temperament=anxious trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday. No rush."
+(turn0 choices: ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "We should do something fun. Deliberately. Like medicine."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Grace? An ESL teacher, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested. It'll keep."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

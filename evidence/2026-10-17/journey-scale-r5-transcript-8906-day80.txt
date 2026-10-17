@@ -1,0 +1,26 @@
+=== seed 8906 day 80 — conversation with Elias (gen_m01u6pb) ===
+occupation=blacksmith temperament=stoic trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all. Done."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with. That means something."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my grandfather, Rostislav. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Sassafras — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=seek_taken stage=3)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I should get back to it."
+(want=seek_taken stage=3)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=promised

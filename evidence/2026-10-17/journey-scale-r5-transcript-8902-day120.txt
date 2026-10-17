@@ -1,0 +1,27 @@
+=== seed 8902 day 120 — conversation with Zinoviy (gen_otd91mg) ===
+occupation=plumber temperament=prickly trust=94 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's the kindest thing someone's done for you out here?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It doesn't move. Speedbump, every time. It hunts by day — watch the open ground."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Senegal Date Palm. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "I mean — That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Kindness compounds. I'm keeping track — mentally. It's a good ledger."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "I left. Walked back in like I'd never left, apparently."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

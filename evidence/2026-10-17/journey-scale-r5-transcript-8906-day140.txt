@@ -1,0 +1,32 @@
+=== seed 8906 day 140 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=28 dead=false mood=steady
+want: share_news (stage 1)
+
+THEM: "Okay, so — something happened this morning."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:want:share_news, alive:event:mourning, dlg:more, dlg:react, recap, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody's saying it out loud, but everyone's thinking about Elias. The quiet ones worst."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+(want=share_news stage=2)
+YOU: [dlg:more] "What happened?"
+THEM: "That's everything I've got. You know as much as I do now."
+(want=share_news stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Elias died... I keep expecting to see Elias at the fire. Stupid."
+(want=share_news stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Elias said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=share_news stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Elias. The rest of us will have to be bigger."
+(want=share_news stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Elias's share of the work. Someone should, and it might as well be me."
+(want=share_news stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=share_news stage=2)
+closing line: "Take care of yourself. I mean that."
+want final: id=share_news stage=3 resolution=engaged

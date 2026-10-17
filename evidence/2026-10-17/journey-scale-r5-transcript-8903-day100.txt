@@ -1,0 +1,18 @@
+=== seed 8903 day 100 — conversation with Silas (gen_4zkozuo) ===
+occupation=musician temperament=anxious trust=90 dead=false mood=cheerful
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Mouna?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Can I be honest? Fair enough. I'd rather hear that than a confident lie."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my older sister, Mouna. Was taken. She raised me more than our mother did. Boring. That is what they wrote down. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=seek_taken stage=3 resolution=promised

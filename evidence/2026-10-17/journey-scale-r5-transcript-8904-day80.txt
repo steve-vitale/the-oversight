@@ -1,0 +1,24 @@
+=== seed 8904 day 80 — conversation with Dale (dale_hoffman) ===
+occupation=rail conductor temperament=dry trust=29 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Well. Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_believe:a_deflect, deflect_q, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, leave, silence)
+YOU: [ans:q_believe:a_deflect] "Belief is for people with spare energy."
+THEM: "Ouch. Fair, though. I'll believe enough for both of us."
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything about anyone?"
+THEM: "Good question." "Did you hear? Vasyl just walked away from Haven. Didn't look back. Extremely normal, all of it."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Do try to stay alive. The paperwork otherwise is murder."
+want final: id=curious stage=3 resolution=engaged

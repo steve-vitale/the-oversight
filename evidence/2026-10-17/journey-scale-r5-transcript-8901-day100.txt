@@ -1,0 +1,18 @@
+=== seed 8901 day 100 — conversation with Miles (gen_d8f4sp5) ===
+occupation=street artist temperament=anxious trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in? Just thinking out loud."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Mugwort — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=ask_favor stage=3 resolution=promised

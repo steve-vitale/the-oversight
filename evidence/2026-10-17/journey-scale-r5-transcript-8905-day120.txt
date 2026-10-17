@@ -1,0 +1,29 @@
+=== seed 8905 day 120 — conversation with Dede (app_mgpspilz860) ===
+occupation=hunter temperament=mischievous trust=45 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party, confront:d_uvgjps7)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "I haven't eaten right in days. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Elijah is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I wake before anyone else at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Elijah. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Alright. Catch you later."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

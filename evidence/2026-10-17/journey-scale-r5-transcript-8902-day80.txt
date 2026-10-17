@@ -1,0 +1,27 @@
+=== seed 8902 day 80 — conversation with Eric (gen_3c6qqjp) ===
+occupation=ESL teacher temperament=intense trust=88 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? I can't keep going like this. No time to waste."
+(turn0 choices: agency:ask_expedition, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "What's this about? You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I haven't eaten right in days. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Groundnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Maypop — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=promised

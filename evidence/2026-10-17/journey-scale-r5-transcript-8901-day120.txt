@@ -1,0 +1,18 @@
+=== seed 8901 day 120 — conversation with Miles (gen_d8f4sp5) ===
+occupation=street artist temperament=anxious trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I still haven't found anyone. Any chance? Just... be straight with me."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Dandelion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talking. We'll figure it out."
+want final: id=ask_favor stage=3 resolution=promised
