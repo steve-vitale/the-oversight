@@ -4,6 +4,28 @@ Steve, 2026-10-15: "Winning shouldn’t be easy. A reduction in win rate is caus
 
 ## How to use this register
 
+All-Seeing ambush parity (2026-10-16): the target of a real deceptive
+invitation may use their own No Lies before ordinary ambush simulation.
+NPC holders now get this existing player protection. Known living resident,
+own active god, real funding and fed-holder gates apply. The unchanged60-kcal
+faculty costs the player60 reserve kcal; the existing NPC payment convention
+rounds60/25 to2 hunger, with projected hunger strictly below80 and no new
+unpaid faculty in a starving community. Already-paid sight still needs a
+fed holder (player at least500 kcal; NPC below80 hunger). One personal
+payment/day follows the godhood record through succession; a different
+bearer cannot borrow it. Legacy player paid-day markers remain readable;
+their missing historical owner cannot be reconstructed. Foiled plots are
+terminal and idempotent. Private NPC sight adds no bearer Codex evidence.
+
+No direct-attack immunity, NPC truth economy, contest auto-win, price or
+policy change is included. Matched16 and disjoint64 x four policies retain
+all320 raw rows and all23 metric vectors;18 changed full hashes contain
+only personal paid-day metadata, with36 exact replays and no unclassified
+hashes. No NPC All-Seeing was sampled, so this is no natural survival-effect
+estimate. Prepared real calls/native Wait-dawn and erased-live-state/load
+prove the new boundary. See ../evidence/2026-10-16/allseeing-ambush-audit.md.
+Keep the prior death/community/class/gear warnings and hard, losable Table.
+
 Contest win-credit correction (2026-10-16): authored phase
 `do.notability: contestWin` is a cue, not a settled victory. Only the existing
 actual winner settlement now adds its one mark. Losing or nonterminal phases

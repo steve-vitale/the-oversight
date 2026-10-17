@@ -5,6 +5,15 @@ Read `docs/godpath/STEVE-ANSWERS.md` first (it outranks this file), then
 abilities transforming in the slot) was retired by the unified design below.
 Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
+2026-10-16 All-Seeing prerequisite: actual NPC deceptive plots now respect
+the target's own paid No Lies, with personal daily ownership through the
+mantle.26 caller/load checks, native Wait/dawn/load proof and full972 pass;
+all320 standard rows/all23 metrics are unchanged. No sampled NPC All-Seeing
+means the prepared result cannot establish natural access or survival effect.
+The Explorer knowledge deed, NPC investigation and contest/army promises
+remain open; seven authored deeds/three proxies and Garden/reactor questions
+stay. See ../../evidence/2026-10-16/allseeing-ambush-audit.md.
+
 ## The design (built)
 
 2026-10-16 Between deed: leave a real fresh above-capacity-HP foe alive,

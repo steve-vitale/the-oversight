@@ -9,6 +9,19 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+All-Seeing ambush prerequisite (2026-10-16): a real NPC-targeted plot used
+ordinary victim simulation even when its target held No Lies. The existing
+springAmbush caller now lets that known living person pay the unchanged
+daily sight price and decline the deception. A foiled plot settles once;
+personal payment follows the same person through the mantle.26 caller/load/
+succession checks, full972 and prepared native Wait/dawn/erased-state/load
+proof pass. All320 standard rows/all23 metrics stay identical;36 exact
+replays classify all18 changed hashes as payment metadata. There is no
+sampled NPC All-Seeing in that panel, so prepared parity is not natural
+access/frequency evidence. Explorer's fitting deed, NPC investigation and
+the promised contest/army effects remain open. See the dated
+allseeing-ambush-audit.md; seven authored deeds/three proxies stay.
+
 Contest win accounting (2026-10-16): actual phase choices could award
 contestWin before judgment, duplicating wins and crediting failed moots.
 Phase cues now defer to existing terminal victory settlement; other
@@ -664,6 +677,15 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   Optional bespoke beats/overrides are not a missing-coda backlog.
 
 ### 3. God deeds (replace the placeholder)
+
+Explorer prerequisite (2026-10-16): actual paid NPC No Lies now foils the
+same deceptive invitation as the player; it does not earn an ascension deed.
+The current truth confrontation is bearer-facing, and no shared NPC
+investigation outcome has been established by this repair. Do not use a
+player Codex doubt, a class-age proxy, or godhood's own automatic sight as
+proof that an ordinary NPC earned Explorer's fitting knowledge deed.
+See ../evidence/2026-10-16/allseeing-ambush-audit.md. Garden/reactor questions
+remain unchanged; independent fitting knowledge outcomes still need work.
 
 Actual NPC food-demand diagnostic (2026-10-15): meal settlement now returns
 its computed need, personal production and actual communal request without

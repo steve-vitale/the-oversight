@@ -1,5 +1,15 @@
 # Agent lanes (2026-10-15)
 
+Codex All-Seeing ambush prerequisite (2026-10-16): owns only godverbs.js's
+personal paid sight and existing springAmbush wrapper. Actual scheduled NPC
+deceptive invitations now use the holder's own food and faculty; ordinary
+danger remains when unfunded. No NPC Codex, truth-confrontation, contest,
+army, deed, policy or Muse world/region/nomad change.26 caller/load/mantle
+checks and prepared native Wait/dawn/erased-state/load proof pass. All320
+standard rows and23-metric vectors stay identical; all18 changed full hashes
+are exactly classified as personal payment metadata. See the dated
+allseeing-ambush-audit.md. Seven authored deeds/three proxies remain.
+
 Codex contest-credit unit (2026-10-16): narrow contests.js phase win-cue
 guard,21 real-caller checks, passive contest-reward observer/CLI with10 checks,
 source-bound16/64 measurements and reward-to-use phone proof. No risk, prize

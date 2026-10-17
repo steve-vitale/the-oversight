@@ -800,16 +800,26 @@
   }
 
   // Sight is a daily, food-powered faculty; an empty stomach sees ordinary lies.
-  function sightReady() {
-    if (holderGod('player') !== 'all_seeing') return false;
-    const s = Game.state.scholar, day = s.day || 0;
-    if ((s.kcal || 0) < HUNGER_GATE_KCAL) return false;
-    if (s._godSightDay === day) return true;
+  function sightReady(who = 'player') {
+    const s = Game.state.scholar, v = Game.state.village || {}, day = s.day || 0;
+    const isP = who === 'player' || who === Game.villagerId;
+    const id = isP ? Game.villagerId : who, person = Game.vpOf(id);
+    if (!id || !person || person.id !== id || person.dead ||
+        (isP ? !(s.health > 0) : (!(v.roster || []).includes(id) || (v.health || {})[id] <= 0))) return false;
+    if (holderGod(isP ? 'player' : id) !== 'all_seeing') return false;
+    // The godhood record follows the actual person through the mantle.
+    // Keep old player saves' daily marker, without sharing new payments
+    // with a different bearer who happens to hold the same god that day.
+    const rec = isP ? s.godhood : vGodRec(id), C = { isP, vid: isP ? null : id };
+    if (isP ? (s.kcal || 0) < HUNGER_GATE_KCAL : (Game.npcNeeds(id).hunger || 0) >= V_HUNGER_GATE) return false;
+    const paidDay = isP && rec._godSightDay == null && (!s._godSightPerson || s._godSightPerson === id)
+      ? s._godSightDay : rec._godSightDay;
+    if (paidDay === day) return true;
     const cost = godPlay('all_seeing').dailyKcal || 60;
-    const C = { isP: true };
     if (!canPay(C, cost)) return false;
-    pay(C, cost); s._godSightDay = day;
-    Game.say(`(No Lies: the day's sight burns ${cost} kcal.)`);
+    pay(C, cost); rec._godSightDay = day;
+    if (isP) { s._godSightDay = day; s._godSightPerson = id; }
+    if (isP) Game.say(`(No Lies: the day's sight burns ${cost} kcal.)`);
     return true;
   }
 
@@ -1077,12 +1087,16 @@
   if (typeof _sa === 'function') {
     Game.springAmbush = function (plot) {
       try {
-        if (plot && this.isPlayer && this.isPlayer(plot.target) && sightReady()) {
-          plot.sprung = true; plot.active = false; plot.foiled = true;
+        if (plot && plot.foiled && plot.resolved) return { ambush: false, foiled: true, plot };
+        if (plot && !plot.sprung && !plot.resolved && plot.active !== false && sightReady(plot.target)) {
+          plot.sprung = true; plot.active = false; plot.foiled = true; plot.resolved = true;
+          const isP = this.isPlayer(plot.target);
           const who = this.displayName ? this.displayName(plot.leader) : plot.leader;
-          this.say(`👁 You see it the moment the invitation is made: ${who} and the others, the places they'd stand. You don't go. (No Lies: an ambush that needs a lie never springs)`);
-          try { this.addDoubt && this.addDoubt(plot.leader, 'observation', `${who} planned to ambush you.`, ['No Lies: you saw the plot'], { eventBacked: true }); } catch (e) { warn('ambush doubt', e); }
-          tele('god_verb', { god: 'all_seeing', verb: 'no_lies_ambush', who: 'player' });
+          if (isP) {
+            this.say(`👁 You see it the moment the invitation is made: ${who} and the others, the places they'd stand. You don't go. (No Lies: an ambush that needs a lie never springs)`);
+            try { this.addDoubt && this.addDoubt(plot.leader, 'observation', `${who} planned to ambush you.`, ['No Lies: you saw the plot'], { eventBacked: true }); } catch (e) { warn('ambush doubt', e); }
+          } else this.say(`👁 ${this.displayName(plot.target)} declines ${who}'s invitation. (No Lies)`);
+          tele('god_verb', { god: 'all_seeing', verb: 'no_lies_ambush', who: isP ? 'player' : plot.target });
           return { ambush: false, foiled: true, plot };
         }
       } catch (e) { warn('springAmbush', e); }
