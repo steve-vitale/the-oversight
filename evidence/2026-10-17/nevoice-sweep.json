@@ -1,0 +1,99 @@
+{
+ "label": "nevoice-pilot",
+ "seeds": [
+  6101,
+  6102,
+  6103,
+  6104,
+  6105,
+  6106,
+  6107,
+  6108
+ ],
+ "policies": [
+  "leadfeast",
+  "belongfeast"
+ ],
+ "sides": [
+  "control",
+  "armed"
+ ],
+ "days": 180,
+ "substrate": "FEASTSCALE_R13=1 SEATDRIVE=0 both sides; NOTHINGEDIBLE_GATE=0 both sides (policy-side gate off); engine voice gate OFF on control, ON on armed",
+ "when": "2026-10-17T20:31:33.697Z",
+ "pooled": {
+  "control": {
+   "n": 16,
+   "nothingBeats": 898,
+   "nothingDays": 71,
+   "nothingMaxPerDay": 105,
+   "starveDeaths": 7,
+   "medianDays": 147,
+   "national": 12,
+   "table": 13,
+   "won": 0,
+   "exiled": 0,
+   "wave4": 0,
+   "wave5": 0,
+   "deaths": {
+    "expedition": 35,
+    "villager combat": 128,
+    "the expedition": 1,
+    "combat": 462,
+    "monster": 81,
+    "lockjaw": 2,
+    "Gavel": 2,
+    "alien": 4,
+    "contest": 13,
+    "Choir Toad": 1,
+    "ambush": 1,
+    "starvation": 7,
+    "a wound that wouldn't close": 9,
+    "The Living Wire": 1,
+    "sickness": 4,
+    "dehydration": 3,
+    "the night": 2,
+    "Glasswing Darter": 1
+   }
+  },
+  "armed": {
+   "n": 16,
+   "nothingBeats": 71,
+   "nothingDays": 71,
+   "nothingMaxPerDay": 1,
+   "starveDeaths": 7,
+   "medianDays": 147,
+   "national": 12,
+   "table": 13,
+   "won": 0,
+   "exiled": 0,
+   "wave4": 0,
+   "wave5": 0,
+   "deaths": {
+    "expedition": 35,
+    "villager combat": 128,
+    "the expedition": 1,
+    "combat": 462,
+    "monster": 81,
+    "lockjaw": 2,
+    "Gavel": 2,
+    "alien": 4,
+    "contest": 13,
+    "Choir Toad": 1,
+    "ambush": 1,
+    "starvation": 7,
+    "a wound that wouldn't close": 9,
+    "The Living Wire": 1,
+    "sickness": 4,
+    "dehydration": 3,
+    "the night": 2,
+    "Glasswing Darter": 1
+   }
+  }
+ },
+ "go": {
+  "verdict": "GO",
+  "detail": "PRIMARY dup-beats 827->0 (100.0% reduction, GO>=90%): true; SPEC armed max/day=1 (<=1): true; det-gate 16/16 byte-identical: true; beats 71 vs 898 over 71 vs 71 starvation days; starveDeaths 7 vs 7 (<=ctrl+2): true; national 12 vs 12 (>=ctrl-2): true; table 13 vs 13 (>=ctrl-2): true; won 0 vs 0 (<=2 diff): true; new death modes: none: true; wave4 0 vs 0; wave5 0 vs 0 (REPORT-ONLY); median 147d vs 147d (REPORT-ONLY)"
+ },
+ "prereg": "PRIMARY duplicate nothing-edible beats (beyond first/day/pair) drop >=90%; SPEC armed max/day<=1 + first-voice byte-identical; guardrails: det-gate 16/16 byte-identical, national>=ctrl-2, table>=ctrl-2, starveDeaths<=ctrl+2, won diff<=2, no new death mode n>=3; wave4/5 + median REPORT-ONLY"
+}

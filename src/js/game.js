@@ -25252,9 +25252,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const _mealWhat = _mealNames.length <= 2 ? _mealNames.join(' and ')
         : _mealNames.slice(0, -1).join(', ') + ', and ' + _mealNames[_mealNames.length - 1];
       const _mealBeat = (ate > 0 && _mealNames.length) ? `You eat ${_mealWhat} (${ate} kcal).` : `You eat (${ate} kcal).`;
-      this.say(ate > 0 ? _mealBeat + bankNote + spoilNote
-                       : (nothingEdible ? 'Nothing edible.' + inedibleNote + spoilNote
-                       : (scholar.inventory.length ? 'You are full enough.' + spoilNote : 'Nothing to eat. The pantry of your pack is empty.' + spoilNote)));
+      // NOTHING-EDIBLE VOICE GATE (narration 2026-10-17, sim-nothingedible-voice-b,
+      // finding #473): the guard-loop spam class — this full inventory-list beat
+      // fired byte-identical up to 105x in a single day when pack-eating is
+      // re-attempted on a starvation day. Voice it once per day: the first
+      // hearing carries the full inventory + prep hint (the honest information);
+      // repeats within the same day are suppressed (a repeat would be
+      // byte-identical spam, so there is no fallback line — the day's telling
+      // stands). NOTHINGEDIBLE_VOICEGATE='0' disables the gate (testing only;
+      // in the browser it is always on). The day flag lives off-state on the
+      // Game object — saves and state fingerprints are untouched: voice only,
+      // never behavior. Scope: this pack-eat beat only.
+      let _nothingEdibleMsg = null;
+      if (nothingEdible) {
+        const _vgOff = (typeof process !== 'undefined' && process.env && process.env.NOTHINGEDIBLE_VOICEGATE === '0');
+        const _day = scholar.day || 0;
+        if (_vgOff || this._nothingEdibleDay !== _day) {
+          this._nothingEdibleDay = _day;
+          _nothingEdibleMsg = 'Nothing edible.' + inedibleNote + spoilNote;
+        }
+        // else: already told today — the repeat is suppressed (#473).
+      }
+      if (_nothingEdibleMsg !== null) this.say(_nothingEdibleMsg);
+      else if (!nothingEdible) this.say(ate > 0 ? _mealBeat + bankNote + spoilNote
+                       : (scholar.inventory.length ? 'You are full enough.' + spoilNote : 'Nothing to eat. The pantry of your pack is empty.' + spoilNote));
+      // (nothingEdible && suppressed): deliberately silent — today's full
+      // telling already fired; the pack state is unchanged.
       // loud_chewer: eating is 2x louder. Monsters hear you. But +5 energy — morale is real.
       if (ate > 0) {
         scholar.energy = Math.min(100, scholar.energy + 5);
