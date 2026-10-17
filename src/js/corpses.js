@@ -517,9 +517,19 @@
       const units = it.units || 1;
       const kg = (it.kg || 0.3) * units;
       if (this.canCarry && !this.canCarry(kg)) { this.say("Too heavy — your pack can't take it."); return null; }
+      // THE WEIGHT, NAMED (journey-succession r22 2026-10-17): the per-item
+      // button fired the trauma number silently, like the batch path did —
+      // only the search verb named the dead. Name them once, first touch.
+      const wasTouched = !!c._touched;
       this._corpseTakeStack(c, it);
       const nm = this.itemDisplayName ? this.itemDisplayName(it) : (it.name || 'it');
       this.say(`Taken: ${nm} x${units}.`);
+      if (!wasTouched && !c.ash && this.corpseIsPerson(c)) {
+        const known = this.nameKnown ? this.nameKnown(c.villagerId) : true;
+        const who = known ? this.displayName(c.villagerId) : 'them';
+        const trauma = this.corpseTrauma(c, {});
+        this.say(`You take ${String(nm).toLowerCase()} from ${who}. Your hands know what they did. (+${trauma} trauma)`);
+      }
       if (!c.items.some(i => (i.units == null ? 1 : i.units) > 0)) {
         c.looted = true;
         this.say(c.ash ? 'The ashes are picked clean. Nothing left but grey.' : 'The body is stripped. What\'s left isn\'t worth taking.');
@@ -545,6 +555,13 @@
       const taken = [], left = [];
       let skipped = 0, humanSkipped = 0;
       const items = c.items || [];
+      // THE WEIGHT, NAMED (journey-succession r22 2026-10-17): the per-item
+      // path names the dead and the weight ("You take X from Marco. Your
+      // hands know what they did."); the batch path fired the trauma number
+      // silently. One deliberate decision deserves the same honesty — name
+      // them once, on the first touch. Ash keeps its own voice (in
+      // _corpseFirstTouch); a corpse already touched per-item keeps that one.
+      const wasTouched = !!c._touched;
       for (let idx = 0; idx < items.length; idx++) {
         const it = items[idx];
         if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
@@ -557,6 +574,12 @@
         taken.push({ name: nm(it), units, kcalEach: it.kcalEach || 0 });
       }
       if (taken.length) this.say('Taken: ' + taken.map(t => `${t.name} x${t.units}`).join(', ') + '.');
+      if (taken.length && !wasTouched && !c.ash && this.corpseIsPerson(c)) {
+        const known = this.nameKnown ? this.nameKnown(c.villagerId) : true;
+        const who = known ? this.displayName(c.villagerId) : 'them';
+        const trauma = this.corpseTrauma(c, {});
+        this.say(`You take ${taken.map(t => String(t.name).toLowerCase()).join(', ')} from ${who}. Your hands know what they did. (+${trauma} trauma)`);
+      }
       if (left.length) this.say('Too heavy for the rest — left where it lies: ' + left.map(t => `${t.name} x${t.units}`).join(', ') + '.');
       if (humanSkipped > 0) this.say('Left the human meat. Trembles has no cure.');
       if (!taken.length && !left.length) this.say('Nothing worth taking.');
@@ -844,6 +867,15 @@
         this.say(`Burying the ${st.id} dead was honest work, and it cost you. Fever by nightfall. (-${st.diseaseDmg} health)`);
       }
       this.say(`You bury ${who}. A marker, of sorts. The village will know where. (+${trauma} trauma)`);
+      // GRAVE GOODS, NAMED (journey-succession r22 2026-10-17): the unlooted
+      // death pack goes into the ground with the body — always the mechanic,
+      // never the fiction. The burial said nothing about the 4–22 items
+      // vanishing with them. Name what the earth keeps.
+      const kept = (c.items || []).filter(i => i && (i.units == null ? 1 : i.units) > 0);
+      if (kept.length) {
+        const names = kept.map(i => String(this.itemDisplayName ? this.itemDisplayName(i) : (i.name || 'something')).toLowerCase()).join(', ');
+        this.say(`What they carried goes into the ground with them: ${names}. The village leaves the dead their things.`);
+      }
       try { this.observe('bury_dead', { target: c.villagerId }); } catch (e) {}
       if (this.tickAction) this.tickAction(16);
       return true;

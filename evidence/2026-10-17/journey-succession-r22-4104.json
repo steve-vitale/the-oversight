@@ -1,0 +1,830 @@
+{
+  "seed": 4104,
+  "loot": false,
+  "notes": [
+    "control: policy looting suppressed for corpse corpse_16_azaimw"
+  ],
+  "anomalies": [],
+  "mantle": {
+    "passed": true,
+    "oldFirst": "Cheryl",
+    "newFirst": "Sofia",
+    "oldTrust": 15,
+    "newTrustAtPass": 31,
+    "lineageEntry": true,
+    "corpseFound": true,
+    "packItems": 3
+  },
+  "lootEvent": null,
+  "packD40": {
+    "found": true,
+    "id": "corpse_16_azaimw",
+    "buried": true,
+    "looted": false,
+    "recovered": false,
+    "stage": "bones",
+    "items": [
+      {
+        "name": "Vine",
+        "units": 1
+      },
+      {
+        "name": "Vine",
+        "units": 1
+      },
+      {
+        "name": "Fan care package (unopened)",
+        "units": 1
+      }
+    ]
+  },
+  "convos": [
+    {
+      "day": 17,
+      "partner": "Jamal",
+      "text": "## mourner-d17 — bearer <redacted> to Jamal\n> YOU PICK [agency:ask_field] \nYOU: \"Teach me something from the wild.\"\nNPC: \"There's more, but that's for another fire.\"\n\n> YOU PICK [ans:q_useful:a_hunger] \nYOU: \"How to be hungry and keep going anyway.\"\nNPC: \"Okay, okay — The fundamental skill. Everything else is decoration.\"\n\n> YOU PICK [invite_party] \nYOU: \"Want to come with me?\"\nNPC: \"Someone should watch your back. Might as well be me.\"\n\n> YOU PICK [alive:event:mourning] \nYOU: \"What’s going on out there?\"\nNPC: \"Cheryl is gone and the world just... continues. That's the part I can't stand.\"\n\n> YOU PICK [alive:thread:want] \nYOU: \"About the most useful thing you've learned — we never finished.\"\nNPC: \"Huh. I wouldn't have guessed that about you.\"\n\n> YOU PICK [alive:thread:lately] \nYOU: \"About what's been happening — we never finished.\"\nNPC: \"I memorize the stars. It doesn't bring anyone back. It just keeps my hands from shaking.\"\n\n> YOU PICK [dlg:more] \nYOU: \"Tell me more.\"\nNPC: \"The fire feels smaller without Cheryl. The rest of us will have to be bigger.\"\n\n> YOU PICK [dlg:more] \nNPC: \"I memorize the stars for Cheryl, now. Feels right. Feels like the least I can do.\"\nNPC: \"Alright — I should get back to it.\"\n\n> YOU PICK [dlg:more] \n(conversation ended by the engine)\n\n### FULL TRANSCRIPT\nNPC: \"About the most useful thing you've learned — What's the most useful thing you've learned since we got here? Anyway.\"\nYOU: \"Teach me something from the wild.\"\nNPC: \"There's more, but that's for another fire.\"\nYOU: \"How to be hungry and keep going anyway.\"\nNPC: \"Okay, okay — The fundamental skill. Everything else is decoration.\"\nYOU: \"Want to come with me?\"\nNPC: \"Someone should watch your back. Might as well be me.\"\nYOU: \"What’s going on out there?\"\nNPC: \"Cheryl is gone and the world just... continues. That's the part I can't stand.\"\nYOU: \"About the most useful thing you've learned — we never finished.\"\nNPC: \"Huh. I wouldn't have guessed that about you.\"\nYOU: \"About what's been happening — we never finished.\"\nNPC: \"I memorize the stars. It doesn't bring anyone back. It just keeps my hands from shaking.\"\nYOU: \"Tell me more.\"\nNPC: \"The fire feels smaller without Cheryl. The rest of us will have to be bigger.\"\nYOU: \"Tell me more.\"\nNPC: \"I memorize the stars for Cheryl, now. Feels right. Feels like the least I can do.\"\nNPC: \"Alright — I should get back to it.\"\nYOU: \"Tell me more.\"\nNPC: \"That's... pretty much all of it, honestly.\"\nNPC: \"Good talk. I feel like I know you a little better now.\"\nNPC: \"This was good.\" They mean it.\n\nCARRY-FLAGS: mourn=true namedMourn=true packMention=false want=curious",
+      "flags": {
+        "mournCarry": true,
+        "namedMourn": true,
+        "packMention": false,
+        "want": "curious"
+      }
+    }
+  ],
+  "sayLines": [
+    {
+      "day": 2,
+      "text": "📓 Journal: learned their name (Sofia)."
+    },
+    {
+      "day": 2,
+      "text": "📓 Journal: learned their name (Giulia)."
+    },
+    {
+      "day": 2,
+      "text": "📓 Journal: learned their name (Jamal)."
+    },
+    {
+      "day": 2,
+      "text": "📓 Journal: The Longhouse raised. Population cap now 16."
+    },
+    {
+      "day": 3,
+      "text": "You catch fragments by the fire — A man, maybe 40s, with grey-streaked hair telling A person, maybe 60s about A man, maybe 30s. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 3,
+      "text": "Journal: Deep shade. The floor keeps its secrets."
+    },
+    {
+      "day": 3,
+      "text": "📓 Journal: you UNDERSTAND **Green Thumb, Literally**. It resonates with: something unnamed, something unnamed."
+    },
+    {
+      "day": 3,
+      "text": "You walk back into Haven. 3 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 3,
+      "text": "📓 Journal: learned their name (Theo)."
+    },
+    {
+      "day": 3,
+      "text": "📓 Journal: learned their name (Qiang)."
+    },
+    {
+      "day": 3,
+      "text": "📓 Journal: A traveler passed through yesterday, talking about a village to the southeast called Ashford."
+    },
+    {
+      "day": 4,
+      "text": "You catch fragments by the fire — A man, maybe 60s, with ink-stained fingers telling A man, maybe 60s, with calloused knuckles about Jamal. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 4,
+      "text": "Journal: Open ground by water — the onion beds."
+    },
+    {
+      "day": 4,
+      "text": "You walk back into Haven. 4 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 4,
+      "text": "📓 Journal: learned their name (Scott)."
+    },
+    {
+      "day": 4,
+      "text": "📓 Journal: learned their name (Dmitri)."
+    },
+    {
+      "day": 4,
+      "text": "📓 Journal: Lena Ruiz applied remotely."
+    },
+    {
+      "day": 4,
+      "text": "Qiang has been asking about the strange leaves all week — \"but what IS it?\" Tonight, an answer. Dmitri is showing everyone Chickweed by the fire. \"See the leaves? Like that. Don't mix it up.\" The journal grows — the human way."
+    },
+    {
+      "day": 4,
+      "text": "📓 Journal: Jamal proposed relief (sickness), day 4."
+    },
+    {
+      "day": 5,
+      "text": "You catch fragments by the fire — Theo telling A man, maybe 60s, with calloused knuckles about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 5,
+      "text": "Journal updated: a twining vine in wet ground with brownish pea-flowers and strings of round tubers underground grows here too — better than chickweed."
+    },
+    {
+      "day": 5,
+      "text": "You walk back into Haven. 4 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 5,
+      "text": "📓 Journal: learned their name (Tashi)."
+    },
+    {
+      "day": 5,
+      "text": "📓 Journal: A man, maybe 40s, with a crooked nose taught me Feral Rice (fireside)."
+    },
+    {
+      "day": 5,
+      "text": "The Journal notes it: Groundnut — cook it, or else. (Theo tested it.)"
+    },
+    {
+      "day": 6,
+      "text": "You walk back into Haven. 6 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 7,
+      "text": "You catch fragments by the fire — Qiang telling Jamal about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 7,
+      "text": "You walk back into Haven. 7 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 7,
+      "text": "📻 \"Why do the small humans keep putting organic matter in their FACE-HOLES? We built you a fusion pellet! ...You BURIED it. WHY did you bury the pellet?!\""
+    },
+    {
+      "day": 7,
+      "text": "📖 Your journal shimmers — handwriting dissolving into interface. It talks now. It remembers everything."
+    },
+    {
+      "day": 7,
+      "text": "🧑‍🤝‍🧑 The village gathers. Everyone's journal is changing. Everyone hears the voice. Sofia grabs your arm. \"Tell me you hear that too.\""
+    },
+    {
+      "day": 7,
+      "text": "📚 Village knowledge: Giulia taught everyone about Peepal Fig. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 7,
+      "text": "📖 LEARNED: Keeping Morale (Level 2). Rituals matter: shared meals, stories, songs. You're not just feeding bodies."
+    },
+    {
+      "day": 7,
+      "text": "🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Scrounger, Keeping Morale. Your Codex overflows."
+    },
+    {
+      "day": 8,
+      "text": "👂 Overheard — Theo: \"If the System wanted us dead we'd be dead. So what does it want instead?\""
+    },
+    {
+      "day": 8,
+      "text": "You walk back into Haven. 8 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 8,
+      "text": "📚 Village knowledge: Tashi taught everyone about Knotweed Shoot. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 8,
+      "text": "📚 Village knowledge: Tashi taught everyone about Goldenrod. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 9,
+      "text": "📖 The Codex settles deeper into you. It knows things before you do now. Deaths, especially — it will tell you itself."
+    },
+    {
+      "day": 9,
+      "text": "📖 The Codex turns a page on its own. Lockpick is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 9,
+      "text": "You walk back into Haven. 10 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 9,
+      "text": "Giulia looks at the pantry, then at the Codex, then at you. \"We’re going to make it.\" Haven will survive — because someone learned the land, and wrote it down. One less thing to fear."
+    },
+    {
+      "day": 9,
+      "text": "📖 The Codex turns a page on its own. Hummice is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 9,
+      "text": "📓 Codex: Counter: Buy it off — It steals FIRST and fights second — but it CANNOT resist food. OFFER FOOD in the fight: it drops your things mid-scamper for the meal. A bribe is cheaper than a chase."
+    },
+    {
+      "day": 9,
+      "text": "You catch fragments by the fire — Sofia telling Theo about Jamal. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 9,
+      "text": "📚 Village knowledge: Theo taught everyone about African Wild Rice. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 9,
+      "text": "SYSTEM: Catalogued. The Codex grows teeth."
+    },
+    {
+      "day": 9,
+      "text": "📚 Village knowledge: Qiang taught everyone about Gum Acacia. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 9,
+      "text": "📚 Village knowledge: Dmitri taught everyone about Neem. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 9,
+      "text": "Tashi is showing everyone Knotweed Shoot by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way."
+    },
+    {
+      "day": 9,
+      "text": "SYSTEM: Catalogued. The Codex grows teeth."
+    },
+    {
+      "day": 9,
+      "text": "Scott brought you a sample. The Codex grows."
+    },
+    {
+      "day": 10,
+      "text": "📓 Codex: The System offered an aid quest (learn), day 10."
+    },
+    {
+      "day": 10,
+      "text": "You walk back into Haven. 14 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 10,
+      "text": "📓 Codex: Counter: Bellow at the choir — The Swarm Hum stacks while you stand in it — but the hum needs the choir. SHOUT and the bellow scatters it. Raw noise, no words, all lungs."
+    },
+    {
+      "day": 10,
+      "text": "📓 Codex: The System noticed the neighbors, and wants storylines."
+    },
+    {
+      "day": 10,
+      "text": "📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 14 candidates in your notes. We will watch very closely. Reward: integration.\""
+    },
+    {
+      "day": 10,
+      "text": "★ IDENTIFIED: Deadly Nightshade. A tall plant with purple bell flowers and shiny black cherry-like berries. Uses unknown — harvest, taste, and learn."
+    },
+    {
+      "day": 10,
+      "text": "SYSTEM: Catalogued. The Codex grows teeth."
+    },
+    {
+      "day": 10,
+      "text": "Sofia was watching. Now they know Deadly Nightshade too."
+    },
+    {
+      "day": 10,
+      "text": "📚 Village knowledge: Giulia taught everyone about Deadly Nightshade. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 10,
+      "text": "💛 The Field suture kit is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)"
+    },
+    {
+      "day": 10,
+      "text": "💛 The Grandfather's Rope is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)"
+    },
+    {
+      "day": 10,
+      "text": "💛 The Carpenter's square is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)"
+    },
+    {
+      "day": 11,
+      "text": "Cheryl showed Jamal the Deadly Nightshade — \"remember it.\" Word gets around."
+    },
+    {
+      "day": 11,
+      "text": "You walk back into Haven. 15 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 11,
+      "text": "📓 Codex: a weathered trader arrived (trader)."
+    },
+    {
+      "day": 11,
+      "text": "Tashi is showing everyone Goldenrod by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way."
+    },
+    {
+      "day": 11,
+      "text": "The garden: your untended Purslane drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+    },
+    {
+      "day": 11,
+      "text": "The garden: your untended Purslane drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+    },
+    {
+      "day": 12,
+      "text": "Giulia showed Scott the Deadly Nightshade — \"remember it.\" Word gets around."
+    },
+    {
+      "day": 12,
+      "text": "Sofia showed Kojo the Deadly Nightshade — \"remember it.\" Word gets around."
+    },
+    {
+      "day": 12,
+      "text": "⚔️ Giulia stood down the Lockpick and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 12,
+      "text": "You walk back into Haven. 15 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 12,
+      "text": "It's settled. The village is calling it \"Ugly-Eyes.\" The Codex keeps it."
+    },
+    {
+      "day": 12,
+      "text": "📋 SYSTEM QUEST: \"We've been thinking. You know things we don't. Teach us? Show us a plant you know COMPLETELY (Codex L3). We will watch very closely, which is our entire personality.\""
+    },
+    {
+      "day": 12,
+      "text": "Fireside lesson: Giulia passes around Deadly Nightshade. Someone asks a dumb question. Nobody minds. That's how you learn."
+    },
+    {
+      "day": 13,
+      "text": "You catch fragments by the fire — Qiang telling Sofia about Theo. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 13,
+      "text": "You walk back into Haven. 15 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 13,
+      "text": "📓 Codex: Jamal taught Tashi Diplomatic Incident."
+    },
+    {
+      "day": 14,
+      "text": "You walk back into Haven. 15 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 14,
+      "text": "It's settled. The village is calling it \"The Ugly Beast.\" The Codex keeps it."
+    },
+    {
+      "day": 14,
+      "text": "Qiang is showing everyone Gum Acacia by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way."
+    },
+    {
+      "day": 14,
+      "text": "The garden: your untended Purslane drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+    },
+    {
+      "day": 14,
+      "text": "The garden: your untended Purslane drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+    },
+    {
+      "day": 15,
+      "text": "📓 Codex: Jamal — jotted down what they said. Filed."
+    },
+    {
+      "day": 15,
+      "text": "📓 Codex: The village has gone quiet around me. I don't know why — I've eaten only what was set before me."
+    },
+    {
+      "day": 15,
+      "text": "📓 Codex: Counter: Strike the taut drum — When the belly swells drum-taut, STRIKE — the stretched skin is thin as a drumhead and the thunderclap backfires, stunning it senseless. Hit the drum, not the drummer."
+    },
+    {
+      "day": 15,
+      "text": "⚔️ Giulia stood down the Drum-Belly and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 15,
+      "text": "You walk back into Haven. 15 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 15,
+      "text": "Jamal brought you a sample. The Codex grows."
+    },
+    {
+      "day": 16,
+      "text": "📖 The Codex turns a page on its own. Cheryl Ford is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 16,
+      "text": "🕯️ Cheryl Ford is dead — the expedition. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 16,
+      "text": "The Codex doesn't pause for grief. Sofia blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+    },
+    {
+      "day": 16,
+      "text": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+    },
+    {
+      "day": 16,
+      "text": "📖 The Codex turns a page: Cheryl Ford, 16 days. The mantle passes to Sofia Chen."
+    },
+    {
+      "day": 16,
+      "text": "You catch fragments by the fire — Jamal telling Dmitri about themself. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 16,
+      "text": "You walk back into Haven. 16 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 17,
+      "text": "📓 Codex: you UNDERSTAND **Diplomatic Incident**. It resonates with: something unnamed."
+    },
+    {
+      "day": 17,
+      "text": "You bury Cheryl. A marker, of sorts. The village will know where. (+5 trauma)"
+    },
+    {
+      "day": 17,
+      "text": "You walk back into Haven. 16 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 17,
+      "text": "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free."
+    },
+    {
+      "day": 17,
+      "text": "📖 The Codex turns a page on its own. Henry is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 17,
+      "text": "◈ CRISIS — THE FIRST GRAVE. Henry is dead. The village digs its first grave, and everyone understands at once: this place can kill you. It just did."
+    },
+    {
+      "day": 17,
+      "text": "Taken: Sharpened stick x1, Wool socks x1, Flannel Shirt x1, Running Shoes x1, Trail mix x1, Seedkeeper's Grimoire x1."
+    },
+    {
+      "day": 17,
+      "text": "The body is stripped. What's left isn't worth taking."
+    },
+    {
+      "day": 18,
+      "text": "You catch fragments by the fire — Jamal telling Onni about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 18,
+      "text": "⚔️ Tashi stood down the Hushpuppy and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 18,
+      "text": "⚔️ Scott stood down the Hushpuppy and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 18,
+      "text": "You walk back into Haven. 16 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 18,
+      "text": "📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\""
+    },
+    {
+      "day": 19,
+      "text": "You walk back into Haven. 16 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 19,
+      "text": "You catch fragments by the fire — Scott telling Qiang about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 19,
+      "text": "SYSTEM: Codex and inventory overlay online."
+    },
+    {
+      "day": 19,
+      "text": "💛 You hold Wedding Ring. Breathe. The shaking eases. (−12 trauma)"
+    },
+    {
+      "day": 19,
+      "text": "📚 Village knowledge: Qiang taught everyone about Muscadine Grapes. The Codex grows without you lifting a finger."
+    },
+    {
+      "day": 19,
+      "text": "Tashi has been asking about the strange leaves all week — \"but what IS it?\" Tonight, an answer. Qiang is showing everyone Muscadine Grapes by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way."
+    },
+    {
+      "day": 20,
+      "text": "💛 You hold Wedding Ring. Breathe. The shaking eases. (−12 trauma)"
+    },
+    {
+      "day": 20,
+      "text": "You walk back into Haven. 17 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 20,
+      "text": "📓 Codex: Hushpuppy, Sweeps Week, Drum-Belly, Hushpuppy, Hushpuppy at the door, day 20."
+    },
+    {
+      "day": 21,
+      "text": "📖 Codex: Harass — locks onto one target — moving won't dodge it. You won't forget this."
+    },
+    {
+      "day": 21,
+      "text": "You catch fragments by the fire — Onni telling Dmitri about Jamal. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 21,
+      "text": "You catch fragments by the fire — Tashi telling Kojo about Dmitri. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 21,
+      "text": "⚔️ Kojo stood down the Sweeps Week and kept walking — 7 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 21,
+      "text": "You walk back into Haven. 17 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 21,
+      "text": "📓 Codex: Rosa of Stonebridge begs food at Haven's fire."
+    },
+    {
+      "day": 21,
+      "text": "📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 15 candidates in your notes. We will watch very closely. Reward: integration.\""
+    },
+    {
+      "day": 21,
+      "text": "SYSTEM: Catalogued. The Codex grows teeth."
+    },
+    {
+      "day": 21,
+      "text": "Dmitri brought you a sample. The Codex grows."
+    },
+    {
+      "day": 22,
+      "text": "📓 Codex: you UNDERSTAND **Dowsing**. It resonates with: something unnamed."
+    },
+    {
+      "day": 22,
+      "text": "You catch fragments by the fire — Tashi telling Theo about Dmitri. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 22,
+      "text": "You walk back into Haven. 18 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 22,
+      "text": "📓 Codex: Ashford split (cannibal). The Red Table formed; 3 petition at Haven's fire."
+    },
+    {
+      "day": 22,
+      "text": "📓 Codex: 3 petitioners from Ashford (cannibal): June Ibrahim, Amara Ford, Ellis Baker."
+    },
+    {
+      "day": 22,
+      "text": "🌿 Deadly Nightshade — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+    },
+    {
+      "day": 22,
+      "text": "💡 Deadly Nightshade: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+    },
+    {
+      "day": 23,
+      "text": "📓 Codex: Counter: Never show it your back — FACE IT — or paint eyes on the back of your head — and it hesitates. It wants the ambush, not the fight. Never turn, never run; running is prey. Hold its gaze and back away slow."
+    },
+    {
+      "day": 23,
+      "text": "You walk back into Haven. 18 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 23,
+      "text": "You catch fragments by the fire — Scott telling Kojo about Dmitri. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 23,
+      "text": "Tashi brought you a sample. The Codex grows."
+    },
+    {
+      "day": 24,
+      "text": "You catch fragments by the fire — Jamal telling Onni about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 24,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 24,
+      "text": "It's settled. The village is calling it \"Loud-Eyes.\" The Codex keeps it."
+    },
+    {
+      "day": 25,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 25,
+      "text": "🧳 Word from Ashford: Tariq was killed — Oscar did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+    },
+    {
+      "day": 25,
+      "text": "💛 The Wedding Ring is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)"
+    },
+    {
+      "day": 25,
+      "text": "💛 The Dispatcher's headset is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)"
+    },
+    {
+      "day": 26,
+      "text": "You catch fragments by the fire — Onni telling Scott about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 26,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 27,
+      "text": "You catch fragments by the fire — Jamal telling Theo about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 27,
+      "text": "⚔️ Scott stood down the Loud-Eyes and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 27,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 28,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 29,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 29,
+      "text": "📓 Codex: Counter: Step off the line — When it unfolds, SIDESTEP — it commits to the line and can't correct. Watch the water, not the bird: it strikes where you were standing, never where you are."
+    },
+    {
+      "day": 30,
+      "text": "You catch fragments by the fire — Jamal telling Tashi about Onni. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 30,
+      "text": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+      "day": 30,
+      "text": "📺 Jamal brought down Drum-Belly. Together. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 30,
+      "text": "You catch fragments by the fire — Jamal telling Onni about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 30,
+      "text": "⚔️ Giulia stood down the White Noise and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 30,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 31,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 32,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 32,
+      "text": "📓 Codex: you've heard of **Beard Moss**. Someone, somewhere, can do this. Now you know its name."
+    },
+    {
+      "day": 32,
+      "text": "📓 Codex: Scott chose Beard Moss (beard_moss) at Craft 1."
+    },
+    {
+      "day": 33,
+      "text": "You catch fragments by the fire — Dmitri telling Onni about Theo. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 33,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 33,
+      "text": "It's settled. The village is calling it \"Big Ugly.\" The Codex keeps it."
+    },
+    {
+      "day": 34,
+      "text": "You catch fragments by the fire — Tashi telling Dmitri about himself. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 34,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 35,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 35,
+      "text": "📓 Codex: Theo taught Jamal Steady Hands."
+    },
+    {
+      "day": 36,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 36,
+      "text": "You catch fragments by the fire — Dmitri telling Scott about you. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 37,
+      "text": "You walk back into Haven. 19 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 37,
+      "text": "Theo brought you a sample. The Codex grows."
+    },
+    {
+      "day": 37,
+      "text": "🌙 Raid — Ashford came in the night from the southeast. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 38,
+      "text": "You catch fragments by the fire — Giulia telling Kojo about Scott. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 38,
+      "text": "You walk back into Haven. 20 Codex entries. The village is glad to see you."
+    },
+    {
+      "day": 39,
+      "text": "Edible but lean. The old taboo itches; hunger doesn't care. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+      "day": 39,
+      "text": "📺 Jamal brought down Loud-Eyes. Together. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 39,
+      "text": "You catch fragments by the fire — Giulia telling Kojo about Dmitri. Half of it's true anymore. You're not sure which half."
+    },
+    {
+      "day": 39,
+      "text": "⚔️ Jamal stood down the Murkcap and kept walking — 6 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 39,
+      "text": "⚔️ Kojo stood down the Ugly Beast and kept walking — 1 round, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 39,
+      "text": "⚔️ Dmitri stood down the Living Wire and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 39,
+      "text": "⚔️ Onni stood down the Cliffhanger and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 39,
+      "text": "You walk back into Haven. 20 Codex entries. The village is glad to see you."
+    }
+  ],
+  "m1": false,
+  "m2": null,
+  "m3": {
+    "buried": true,
+    "gearNamed": false,
+    "items": [
+      "Vine",
+      "Vine",
+      "Fan care package (unopened)"
+    ]
+  },
+  "m4": 1,
+  "burial": {
+    "ok": true,
+    "traumaBefore": 8,
+    "traumaAfter": 13,
+    "packItemsBuried": [
+      "Vine",
+      "Vine",
+      "Fan care package (unopened)"
+    ],
+    "burialSay": [
+      "You bury Cheryl. A marker, of sorts. The village will know where. (+5 trauma)"
+    ],
+    "gearNamed": false
+  }
+}
