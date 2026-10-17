@@ -15,6 +15,53 @@ const { vinebank } = require('./vinebank'); // materials-banking arm (VINEBANK=1
 // Game object keeps sequential seeds in one process from leaking flags.
 const _dawnRefusedDays = new WeakMap();
 
+// NOTHINGEDIBLE (nothing-edible guard-loop spam fix 2026-10-17, finding #473):
+// per-day pack-eat voice flags. When the scholar's pack holds no edible food,
+// every competentEat re-attempt voices the engine's full-inventory
+// "Nothing edible. (<list> — not food yet: <prep hint>.)" beat byte-identical
+// again — up to 105 in a single day (feastvoice census 2026-10-17). The flag
+// records the last scholar-day each Game object heard it plus the pack state
+// at that moment; a re-attempt with an unchanged pack is skipped (the engine
+// would voice the same beat and move no state — same voice-only doctrine as
+// DAWNREFUSE). A changed pack (forage haul, pantry take, aid parcel)
+// re-attempts honestly. Env kill: NOTHINGEDIBLE_GATE='0' restores the old
+// path (default ON). WeakMap keyed on the Game object so sequential seeds in
+// one process don't leak flags.
+const _packNothingDays = new WeakMap();
+
+// Pack fingerprint: name|units|kcalEach|foodState|edible-flag per stack, in
+// pack order. Recomputed AFTER the attempt so the engine's spoil-purge is
+// part of the recorded state.
+function _packStateKey(Game) {
+  try {
+    const inv = ((Game.state || {}).scholar || {}).inventory || [];
+    return inv.map(i => [i && i.name, (i && i.units) || 0, (i && i.kcalEach) || 0,
+      (i && i.foodState) || '', i && i.edible === false ? '0' : '1'].join('|')).join(';');
+  } catch (e) { return ''; }
+}
+function _packHasEdibleFood(Game) {
+  try {
+    const inv = ((Game.state || {}).scholar || {}).inventory || [];
+    return inv.some(i => i && (i.kcalEach || 0) > 0 && (i.units || 0) > 0 && i.edible !== false);
+  } catch (e) { return false; }
+}
+// VOICE ONLY. Gate the policy's pack-eat re-attempt on what the last attempt
+// established: if it left a pack with nothing edible and the pack is
+// unchanged, the engine's beat would be identical — skip the call. Any pack
+// change (or a new day) re-arms the attempt.
+function packEatOnce(Game) {
+  if (process.env.NOTHINGEDIBLE_GATE === '0') { try { Game.eat(); } catch (e) {} return; }
+  let day = 0;
+  try { day = (Game.state && Game.state.scholar && Game.state.scholar.day) || 0; } catch (e) {}
+  const key = _packStateKey(Game);
+  const rec = _packNothingDays.get(Game);
+  if (rec && rec.day === day && rec.key === key) return; // already heard it today on this pack
+  try { Game.eat(); } catch (e) {}
+  try {
+    if (!_packHasEdibleFood(Game)) _packNothingDays.set(Game, { day, key: _packStateKey(Game) });
+  } catch (e) {}
+}
+
 // Eat like someone who knows the disease roster (DISEASES.md): cooked/safe
 // food first, never human meat (trembles — cooking doesn't kill prions),
 // never raw meat (trichinosis/gutrot). Re-scans each take since indices shift.
@@ -29,7 +76,10 @@ function competentEat(Game) {
     // HONEST EATING (bal-survival 2026-10-10): eat from the PACK first
     // (your foraged food), pantry second. The old code took from the pantry
     // even with a full pack — making the player a net drain.
-    try { Game.eat(); } catch (e) {}
+    // NOTHINGEDIBLE (2026-10-17): once the day's pack-eat has heard
+    // "nothing edible" on an unchanged pack, don't re-attempt — the engine
+    // would voice the identical beat again. Game-code eat verb untouched.
+    packEatOnce(Game);
     if (s.kcal >= Game.kcalCap() * trig) return;
     // DAWNREFUSE (2026-10-15, refusal-spam fix): VOICE ONLY. When the hands
     // can't reach the pantry (havenStoresAccess()==='none') every take in
@@ -67,7 +117,10 @@ function competentEat(Game) {
       }
       if (best < 0 || bestScore < 0) break;
       try { Game.takeFromPantry(best); } catch (e) { break; }
-      try { Game.eat(); } catch (e) { break; }
+      // NOTHINGEDIBLE (2026-10-17): same gate — a take that added nothing to
+      // the pack leaves the "nothing edible" verdict standing; a successful
+      // take changes the pack key and re-arms the attempt honestly.
+      try { packEatOnce(Game); } catch (e) { break; }
     }
   } catch (e) {}
 }
@@ -2884,5 +2937,5 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
 
