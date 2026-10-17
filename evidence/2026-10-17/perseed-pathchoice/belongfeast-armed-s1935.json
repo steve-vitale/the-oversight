@@ -1,0 +1,122 @@
+{
+ "seed": 1935,
+ "policyId": "belongfeast",
+ "side": "armed",
+ "stack": "SD.withSeatDrive(WD.withWinDefer(TF.{leadfeast,belongfeast})) + WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1",
+ "days": 89,
+ "gameDays": 90,
+ "endReason": "over-other",
+ "invitations": 1,
+ "sittings": 1,
+ "answers": 5,
+ "doorAnswers": 1,
+ "pathStarts": {
+  "feared": 1
+ },
+ "branchStarts": {
+  "feared:light": 1
+ },
+ "downgradeFails": 0,
+ "announcedDay": 44,
+ "seatDay": 90,
+ "seatKind": "lesser",
+ "exposedMax": 0,
+ "exposedFinal": 0,
+ "exposedChanges": [
+  {
+   "day": 2,
+   "exposed": 0
+  }
+ ],
+ "won": 1,
+ "rank": "global",
+ "tableSeat": "lesser",
+ "everTable": true,
+ "doorEvents": [
+  {
+   "day": 90,
+   "chosen": "feared",
+   "chosenIndex": 0,
+   "branch": "light",
+   "offered": [
+    "feared",
+    "beloved",
+    "assimilated",
+    "defiant",
+    "relay"
+   ],
+   "offeredFirst": true,
+   "earnedSnapshot": [
+    {
+     "id": "feared",
+     "earned": true,
+     "strength": 100,
+     "why": "30 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked."
+    },
+    {
+     "id": "indispensable",
+     "earned": false,
+     "strength": 0,
+     "why": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+    },
+    {
+     "id": "beloved",
+     "earned": true,
+     "strength": 100,
+     "why": "Viewership 34.15509999999999, fan favor 30 — the galaxy's favorite, by the numbers."
+    },
+    {
+     "id": "witness",
+     "earned": false,
+     "strength": 0,
+     "why": "You didn't keep the list (0 exposures on record — the trial needs 3)."
+    },
+    {
+     "id": "assimilated",
+     "earned": true,
+     "strength": 45,
+     "why": "Always open. The table takes anyone — that's what makes it a trap, and what makes it safe."
+    },
+    {
+     "id": "defiant",
+     "earned": true,
+     "strength": 36,
+     "why": "Defiance 4 on the record. The 'no' is earned."
+    },
+    {
+     "id": "relay",
+     "earned": true,
+     "strength": 40,
+     "why": "Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0)"
+    }
+   ],
+   "exposedAtDoor": 0,
+   "witnessWhy": "You didn't keep the list (0 exposures on record — the trial needs 3).",
+   "drainInputs": {
+    "frame": "the Table",
+    "optionCount": 5,
+    "options": [
+     "path:feared",
+     "path:beloved",
+     "path:assimilated",
+     "path:defiant",
+     "path:relay"
+    ]
+   },
+   "cfDoor": "indispensable",
+   "cfDoorWalks": 0,
+   "cfOffered": false,
+   "cfOfferedDoor": "beloved",
+   "cfOfferedWalks": 0,
+   "optionsRaw": [
+    "path:feared",
+    "path:beloved",
+    "path:assimilated",
+    "path:defiant",
+    "path:relay"
+   ],
+   "outcome": "won"
+  }
+ ],
+ "downgrades": []
+}
