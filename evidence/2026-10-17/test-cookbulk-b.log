@@ -1,0 +1,46 @@
+PART A — gate-logic units
+  ok   cookableItems finds rawKcal beans
+  ok   cookableItems ignores ready berries
+  ok   cookableItems skips spoiled
+  ok   readyFood finds berries, not beans
+  ok   leanCookDay: hungry + counter beans
+  ok   leanCookDay: not hungry
+  ok   leanCookDay: ready food in pack
+  ok   leanCookDay: nothing cookable
+  ok   timeToSpare: mid-day
+  ok   timeToSpare: day nearly spent
+  ok   knowsCookable gate respected
+  ok   fireHere gate respected
+  ok   layerOn: default OFF
+  ok   splitForWater: one affordable pot + remainder
+  ok   splitForWater: affordable stack untouched
+  ok   cookPass: gate-off inert
+PART B — RED->GREEN fixture (upkeep-level, lean camp state)
+  ok   RED: base upkeep leaves counter beans raw
+  ok   GREEN: layer batch-cooks the counter beans
+  ok   GREEN: firing counted on ctx
+  ok   GREEN: once/day guard holds
+  ok   gate-off: wrapped upkeep leaves beans raw
+PART C — det-gate (wrapped COOKBULK-unset vs unwrapped base, 60d)
+  ok   s7901 belongfeast: wrapped-off byte-identical to base
+  ok   s7901 leadfeast: wrapped-off byte-identical to base
+  ok   s7902 belongfeast: wrapped-off byte-identical to base
+  ok   s7902 leadfeast: wrapped-off byte-identical to base
+  ok   s7903 belongfeast: wrapped-off byte-identical to base
+  ok   s7903 leadfeast: wrapped-off byte-identical to base
+  ok   s7904 belongfeast: wrapped-off byte-identical to base
+  ok   s7904 leadfeast: wrapped-off byte-identical to base
+  ok   s7905 belongfeast: wrapped-off byte-identical to base
+  ok   s7905 leadfeast: wrapped-off byte-identical to base
+  ok   s7906 belongfeast: wrapped-off byte-identical to base
+  ok   s7906 leadfeast: wrapped-off byte-identical to base
+  ok   s7907 belongfeast: wrapped-off byte-identical to base
+  ok   s7907 leadfeast: wrapped-off byte-identical to base
+  ok   s7908 belongfeast: wrapped-off byte-identical to base
+  ok   s7908 leadfeast: wrapped-off byte-identical to base
+  ok   det-gate: no layer-attributable divergence
+PART D — SMOKE (2 seeds x 2 policies x {control,armed}, 12d)
+  ok   SMOKE: 8/8 short runs completed without exceptions
+
+PROOF GREEN: 23 passed, 0 failed
+PROOF-EXIT=0
