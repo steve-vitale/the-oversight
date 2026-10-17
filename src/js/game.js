@@ -27054,21 +27054,35 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         newUnits = Math.min(newUnits, Math.floor(room / 200));
         if (newUnits <= 0) return 0;
       } catch (e) {}
-      const existing = v.pantry.find(p => p.name === 'Foraged food' && p.spoilDay === freshDay);
-      // KCAL-HONEST RETURN (sim-capdoor-b 2026-10-17): the merge above must
-      // land in a same-clock stack, but stockPantry also writes 'Foraged
-      // food' stacks at other kcalEach values (pieceMax splits) — merging
-      // 200-kcal units into one revalues them at the resident kcalEach
-      // (measured: pantry gained 100-300 per nominal 200). The RETURN is the
-      // kcal the pantry actually gained, never the nominal unit count — the
-      // ledger records what the village received. (The revaluation itself is
-      // a separate blank, filed in sim-findings; this return keeps the
-      // ledger honest about it either way.)
-      let storedKcal;
-      if (existing) { existing.units += newUnits; storedKcal = newUnits * (existing.kcalEach || 200); }
-      else {
-        v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: newUnits, spoilDay: freshDay, safe: true, kg: 0.2 });
-        storedKcal = newUnits * 200;
+      // MERGE GATE (sim-mergereval-b 2026-10-17, #455): units merging into a
+      // stack is fungibility — it must use the established stacksMatch gate
+      // (food.js, Steve 2026-10-08), not name+spoilDay alone. The old find
+      // merged 200-kcal units into ANY same-clock 'Foraged food' stack,
+      // silently revaluing them at the resident kcalEach (measured ±100-600
+      // kcal/call), while stockPantry writes such stacks at piece sizes up
+      // to pieceMax 500. Now the units join only a truly identical stack
+      // (200 kcalEach, same clock); otherwise they land as their own
+      // fresh-clock 200-kcal stack. Conservation is exact; nothing here is
+      // voiced (the merge never had a line); the return is always the kcal
+      // the pantry actually gained, never nominal units — the ledger stays
+      // honest either way.
+      // LEGACY PATH: MERGEREVAL=0 (node only) takes the old name+spoilDay
+      // find for det-gate/proof comparisons. Default ON everywhere
+      // (browser: no process -> fix on).
+      const unit200 = { name: 'Foraged food', kcalEach: 200, units: 1, spoilDay: freshDay, safe: true, kg: 0.2 };
+      let storedKcal = newUnits * 200;
+      let _legacyMerge = false;
+      try { _legacyMerge = typeof process !== 'undefined' && process.env && process.env.MERGEREVAL === '0'; }
+      catch (e) {}
+      if (_legacyMerge) {
+        // PRISTINE (pre-2026-10-17 form): name+spoilDay merge, kcal-honest return.
+        const existing = v.pantry.find(p => p.name === 'Foraged food' && p.spoilDay === freshDay);
+        if (existing) { existing.units += newUnits; storedKcal = newUnits * (existing.kcalEach || 200); }
+        else v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: newUnits, spoilDay: freshDay, safe: true, kg: 0.2 });
+      } else {
+        const existing = (this.stacksMatch && v.pantry.find(p => this.stacksMatch(p, unit200))) || null;
+        if (existing) existing.units += newUnits;
+        else v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: newUnits, spoilDay: freshDay, safe: true, kg: 0.2 });
       }
       return storedKcal;
     },
