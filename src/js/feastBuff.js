@@ -392,11 +392,15 @@
       } catch (e) {}
     },
 
-    // noteFeastedCombatUse: the buff's first real combat use — a player
-    // strike or an ability resolved while feasted and in combat. Marks
-    // feastSurgeUsed (Arc IV deed-gate requirement) and spends the devotion
-    // arming. Idempotent. A feast that warms no blades marks nothing and
-    // spends nothing — the devotion stays armed for the next feast.
+    // noteFeastedCombatUse: the buff's first real combat use — a strike or
+    // an ability resolved while feasted and in combat. Marks feastSurgeUsed
+    // (Arc IV deed-gate requirement) and spends the devotion arming.
+    // Idempotent. A feast that warms no blades marks nothing and spends
+    // nothing — the devotion stays armed for the next feast.
+    // SEATBLOW-OPEN (Steve 2026-10-17): the deed is banked by whoever's blow
+    // lands first — the scholar ('p') or a villager ('v:<villagerId>', set
+    // via _feastUseSource by the tbDamage hook). Per-villager deed shares
+    // read from prog.feastSurgeBy.
     noteFeastedCombatUse() {
       try {
         if (!this.inCombat || !this.inCombat()) return;
@@ -404,7 +408,12 @@
         const b = s.feastBuff;
         if (!b || b.used) return;
         b.used = true;
-        if (s.prog) { s.prog.feastSurge = false; s.prog.feastSurgeUsed = true; }
+        if (s.prog) {
+          s.prog.feastSurge = false;
+          s.prog.feastSurgeUsed = true;
+          try { s.prog.feastSurgeBy = this._feastUseSource || 'p'; } catch (e) {}
+        }
+        this._feastUseSource = null;
         try { this.save(); } catch (e) {}
       } catch (e) {}
     },

@@ -34073,17 +34073,54 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // a topped-up fighter (kcal >= 75% cap) hits ×1.25 without a feast.
       // abilityPowerMult() takes the max with feastedMult — one true number,
       // never stacked. Only the feast marks devotion use.
+      // SEATBLOW-OPEN (Steve 2026-10-17, decision #441/#445 "Food deeds: open
+      // the gate"): a villager fighter's own blow (kind 'villager' — the
+      // companions who walk the TB grid beside you) carries the feast too
+      // when the village is feasted, and banks the food deed on first real
+      // use. Fuel parity is per-belly: the striker's own hunger (the same
+      // ≤25 bar as godpath's villagerPowerMult), never the scholar's bank.
+      // Kind 'ally' stays out — foreign allies weren't at the village feast
+      // and carry no hunger state. Narration names the striker, so a
+      // villager's feasted blow reads as a person fighting, not a log line.
       try {
         const _fk = t && t.kind;
         const _ps = sourceKey === 'p' || (sourceLabel === 'you' && (sourceKey == null));
-        if (_ps && (_fk === 'monster' || _fk === 'hostile') && final > 0 &&
+        let _vs = null;
+        if (!_ps && sourceKey) {
+          try {
+            const _src = this.tbFighter(sourceKey);
+            if (_src && _src.kind === 'villager' && _src.villagerId) _vs = _src;
+          } catch (e) {}
+        }
+        if ((_ps || _vs) && (_fk === 'monster' || _fk === 'hostile') && final > 0 &&
             typeof this.abilityPowerMult === 'function') {
-          const _pm = this.abilityPowerMult();
           const _feasted = (typeof this.feastedActive === 'function' && this.feastedActive());
+          let _pm;
+          if (_ps) {
+            _pm = this.abilityPowerMult(); // scholar path: unchanged semantics
+          } else {
+            _pm = 1;
+            // The village feast covers the village's blades.
+            if (_feasted && typeof this.feastedMult === 'function') _pm = this.feastedMult();
+            // Fuel parity through the striker's own belly — one true number,
+            // never stacked (godpath villagerPowerMult: hunger ≤ 25, not starving).
+            try {
+              const _GPs = (globalThis.Scattering || {}).Godpath;
+              if (_GPs && typeof _GPs.villagerPowerMult === 'function') {
+                _pm = Math.max(_pm, _GPs.villagerPowerMult(this, _vs.villagerId));
+              }
+            } catch (e) {}
+          }
           if (_pm > 1) {
             final = Math.round(final * _pm);
-            this.say(_feasted ? `FEASTED ×${_pm}: the feast was the weapon.` : `OVERCHARGED ×${_pm} (well-fed): food is fuel.`);
-            if (_feasted && typeof this.noteFeastedCombatUse === 'function') this.noteFeastedCombatUse();
+            const _vn = _vs ? String(_vs.name || 'A villager') : '';
+            this.say(_feasted
+              ? (_vs ? `FEASTED ×${_pm}: ${_vn}'s blow carries the feast.` : `FEASTED ×${_pm}: the feast was the weapon.`)
+              : (_vs ? `OVERCHARGED ×${_pm} (well-fed): ${_vn} fights on a full belly.` : `OVERCHARGED ×${_pm} (well-fed): food is fuel.`));
+            if (_feasted && typeof this.noteFeastedCombatUse === 'function') {
+              try { this._feastUseSource = _vs ? ('v:' + _vs.villagerId) : 'p'; } catch (e) {}
+              this.noteFeastedCombatUse();
+            }
           }
         }
       } catch (e) {}
