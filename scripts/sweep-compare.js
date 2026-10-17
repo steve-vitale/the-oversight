@@ -49,27 +49,12 @@ try { POLICY_REGISTRY['oraclev2'] = require('./policies/oracleV2').oraclev2 || r
 // real flee, combat abilities, scored choices, held talks, the Table.
 try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catch (e) { console.warn('capable policy failed to load: ' + e.message); }
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
-// grieftrib (sim-grieftrib 2026-10-17): the grief-tribute negotiation layer
-// (scripts/policies/grieftrib.js, GRIEFTRIB=1 env-gated, default OFF).
-// Registered under its own ids so the balanced panel can run the
-// courtship-road before/after pair.
-try {
-  const GT = require('./policies/grieftrib');
-  POLICY_REGISTRY['grieftrib-lead'] = GT.leadfeast;
-  POLICY_REGISTRY['grieftrib-belo'] = GT.belongfeast;
-} catch (e) { console.warn('grieftrib policies failed to load: ' + e.message); }
-
-// treeline (sim-treeline, 2026-10-17, scale-onramp): the treeline-raid answer
-// layer over the seatdrive courtship stack. Control ids are the bare stack
-// (TREELINE unset → pure delegation); armed ids are the wrapped stack
-// (TREELINE=1). For the §15 balance panel before/after comparison.
-try {
-  const _sd = require('./policies/seatdrive'), _tl = require('./policies/treeline');
-  POLICY_REGISTRY['treeline-control-lead'] = _sd.leadseat;
-  POLICY_REGISTRY['treeline-control-belong'] = _sd.belongseat;
-  POLICY_REGISTRY['treeline-armed-lead'] = _tl.leadfeastTreeline;
-  POLICY_REGISTRY['treeline-armed-belong'] = _tl.belongfeastTreeline;
-} catch (e) {}
+// perfsurvive pilot (flesh-out loop 2026-10-17, finding #433): the
+// pre-seat courtship policies + the companion-screen layer, for the §15
+// balanced-panel before/after. Additive; zero behavior change to existing
+// entries.
+try { const f = require('./policies/feastscale'); POLICY_REGISTRY['leadfeast'] = f.leadfeast; POLICY_REGISTRY['belongfeast'] = f.belongfeast; } catch (e) {}
+try { const p = require('./policies/perfsurvive'); POLICY_REGISTRY['perfsurvive-lead'] = p.perfsurviveLead; POLICY_REGISTRY['perfsurvive-belong'] = p.perfsurviveBelong; } catch (e) {}
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
