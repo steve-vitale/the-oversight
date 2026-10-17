@@ -77,7 +77,14 @@ async function main() {
     const rc = Game.state.village.rosterChars;
     const ids = others().filter(id => rc[id]);
     for (const t of [2, 1, 0]) {
+      // SPIN GUARD (journey landing r18 2026-10-16): the tier fixture assumes
+      // the pinned landing (na_eastern_woodlands, where Ohio/Kyiv/Hanoi map to
+      // local/visitor/stranger). If the pin ever slips, re-homing converges
+      // nowhere and the old unbounded while spun forever (W3, seed 20261014).
+      // Fail loudly instead of hanging.
+      let guard = 0;
       while (byTier(t).length < 2) {
+        if (++guard > 40) throw new Error('tier fixture did not converge for tier ' + t + ' (landing pin slipped?)');
         const counts = { 2: byTier(2).length, 1: byTier(1).length, 0: byTier(0).length };
         const donor = ids.find(id => counts[Game.placeTellTier(id)] > 2);
         if (!donor) throw new Error('roster too small for the tier fixture');

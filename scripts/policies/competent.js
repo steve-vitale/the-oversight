@@ -2387,22 +2387,28 @@ const competent = {
     // Outward legs (stoneRun's frontier pushes, forage trips, counterPlay,
     // workTrapline) are skipped while recovering() is true; haven chores
     // below (sort, donate, teach, talk) still run.
-    // THIRST HOME (tuning 2026-10-15, with COMPETENT_ROUTE_AROUND): no water
-    // carried and hydration low -> walk home and drink before anything else.
-    // The bot sat on a trail tile for 6 days at hydration 0 with a fed belly
-    // while the cistern held clean water (seeds 2026, 43): recovering() only
-    // reads kcal and hp. The game says "DEHYDRATED: find and treat water
-    // today." — a human listens.
-    if (routeAroundOn()) {
-      try {
-        const s = Game.state.scholar;
-        if ((s.hydration || 0) < 45 && !(s.water || []).length && !Game.playerAtHaven()) {
+    // THIRST HOME (tuning 2026-10-15; r18 2026-10-16: ungated from
+    // COMPETENT_ROUTE_AROUND): no water carried and hydration low -> drink
+    // if the tile offers water, else walk home and drink before anything
+    // else. The bot used to sit on a trail tile for days at hydration 0
+    // while the cistern held clean water (seeds 2026, 43; r18 seed 58 died
+    // of dehydration on day 11 the same way): recovering() only reads kcal
+    // and hp. The game says "DEHYDRATED: find and treat water today." — a
+    // human listens. Gating this behind the experimental routing flag meant
+    // every non-flagged run could die of thirst; the walk itself is safe
+    // without routeAround (walkTo just stops at blockages).
+    try {
+      const s = Game.state.scholar;
+      if ((s.hydration || 0) < 45 && !(s.water || []).length && !Game.playerAtHaven()) {
+        drinkSafe(Game, ctx); // this tile may offer water — drink before walking
+        const s2 = Game.state.scholar;
+        if ((s2.hydration || 0) < 45 && !(s2.water || []).length) {
           walkTo(Game, DIR_FLEE_HAVEN.x, DIR_FLEE_HAVEN.y);
           drinkSafe(Game, ctx);
-          ctx.thirstHome = (ctx.thirstHome || 0) + 1;
         }
-      } catch (e) { ctx.thirstHomeErr = String(e && e.message).slice(0, 80); }
-    }
+        ctx.thirstHome = (ctx.thirstHome || 0) + 1;
+      }
+    } catch (e) { ctx.thirstHomeErr = String(e && e.message).slice(0, 80); }
     const rec = recovering(Game, ctx);
     if (rec) recoverStep(Game, ctx);
     // the honest food run: forage, sort the haul at camp, sow seed first,
