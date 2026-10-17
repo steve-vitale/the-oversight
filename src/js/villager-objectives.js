@@ -85,7 +85,17 @@
       function (nm) { return `🍲 ${nm} is eating by the fire — not talking, just eating.`; },
       function (nm) { return `🍲 ${nm} is hunched over their bowl by the fire, eating like it matters.`; },
       function (nm) { return `🍲 ${nm} eats quiet by the fire, scraping the bowl clean with their thumb.`; },
-      function (nm) { return `🍲 ${nm} has their bowl and their own thoughts. Neither one is being shared.`; },
+      // SHARING (sim-prosefix-b, #438): the old variant asserted private
+      // eating ("Neither one is being shared") while the village runs
+      // communal bowls (villageMeal, mealLog sittings, logSitting's
+      // "lingered over the fire together"). Now it names today's company —
+      // the ateWith vid stamped on the meal memory by logSitting, voiced
+      // through displayName so strangers stay descriptors (knowledge
+      // gating untouched) — and when nobody sat with them it says that
+      // honestly instead of claiming a private bowl.
+      function (nm, comp) { return comp
+        ? `🍲 ${nm} eats with ${comp} — bowls side by side, talk low.`
+        : `🍲 ${nm} eats by the fire, slow, watching the flames.`; },
     ],
     chore_fire: [
       function (nm) { return `${nm} is tending the fire, coaxing it steady.`; },
@@ -151,6 +161,26 @@
     },
     // ambientBeats: the voice pools (module-scope AMBIENT_BEATS).
     ambientBeats() { return AMBIENT_BEATS; },
+    // eatBeatLine (sim-prosefix-b, #438): the EAT beat voices today's
+    // company honestly — who the villager actually sat with (today's
+    // 'ate with' meal memories, carrying the ateWith vid from logSitting).
+    // The companion goes through displayName (strangers stay descriptors —
+    // knowledge gating untouched). Deterministic given state: no RNG draws.
+    eatBeatLine(rid, nm) {
+      var comp = null;
+      try {
+        var mem = (((this.state || {}).village || {}).memory || {})[rid] || [];
+        var day = ((this.state || {}).scholar || {}).day || 0;
+        for (var i = mem.length - 1; i >= 0; i--) {
+          var e = mem[i];
+          if (e && e.t === 'meal' && e.day === day && e.ateWith) {
+            try { comp = this.displayName(e.ateWith); } catch (e2) { comp = null; }
+            break;
+          }
+        }
+      } catch (e3) { comp = null; }
+      try { return this.ambientLine('eat', rid, nm, comp); } catch (e4) { return null; }
+    },
     // ambientLine: render one beat's current variant. Returns null for an
     // unknown key so the chore branch keeps its old "unknown chore = silent"
     // behavior. Never throws — voice must not break the tick. Call sites
@@ -894,8 +924,11 @@
         if (o.kind === 'REST') {
           if (playerAtHaven) { var _rl = this.ambientLine('rest', rid, nm); if (_rl) this.say(_rl); }
         } else if (o.kind === 'EAT') {
-          // visible hunger, answered: they went to the hall and ate
-          if (playerAtHaven && R() < 0.5) { var _el = this.ambientLine('eat', rid, nm); if (_el) this.say(_el); }
+          // visible hunger, answered: they went to the hall and ate.
+          // SHARING (sim-prosefix-b, #438): the beat names today's company
+          // (or the honest quiet when nobody sat with them) — never the
+          // old private-bowl assertion.
+          if (playerAtHaven && R() < 0.5) { var _el = this.eatBeatLine(rid, nm); if (_el) this.say(_el); }
         } else if (o.kind === 'HAVEN_CHORE') {
           if (o.chore === 'teach') {
             // LONGSIM agency r2 (2026-10-11): the teach chore is real

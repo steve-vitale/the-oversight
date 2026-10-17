@@ -2307,6 +2307,42 @@
     // Relics and keepsakes don't rot. The VILLAGE PANTRY rots too (forager
     // loop 2026-10-06): it's the village's business, so the village sweeps it
     // — announced in the village's voice, and pantryKcal re-derived so rotten
+    // spoilVoiceLine (sim-prosefix-b, #439): the pantry-spoil voicing. The
+    // full smoke-rack teaching ("Should've smoked that...") fired
+    // byte-identical on every spoil voicing (~989 times per sweep). Now the
+    // teaching lands on the FIRST full voicing per run; repeats stay
+    // condensed (the thrown-out list, no mutter). When the player already
+    // knows smoking, a short mutter rotates deterministically among 3
+    // variants. VOICE ONLY: the per-run ledger (v._spoilVoice) is read and
+    // bumped here; no mechanic, no timing, no RNG draws.
+    spoilVoiceLine(names) {
+      const vv = (this.state || {}).village || {};
+      const sv = (vv._spoilVoice = vv._spoilVoice || { taught: 0, mutters: 0 });
+      const MUTTERS = [
+        'Someone mutters about the smoke rack going cold.',
+        'Someone kicks the ash pile. The smoke rack stays empty.',
+        'The smoke rack gets a long look. Nobody says anything this time.',
+      ];
+      let line;
+      if (this.knowsTechnique('preserve')) {
+        line = `The village threw out spoiled stores: ${names}. ${MUTTERS[sv.mutters % MUTTERS.length]} (pantry)`;
+        sv.mutters++;
+      } else if (!sv.taught) {
+        const cast = (typeof this._beatCast === 'function') ? this._beatCast(1) : [];
+        const who = cast[0] ? this.displayName(cast[0]) : 'Someone';
+        // FIRST full voicing: the teaching, verbatim from the original line.
+        // The _beatCast draw stays on this path only (findings #263/#264:
+        // moving it would change RNG draw counts and fail the det-gate).
+        line = `The village threw out spoiled stores: ${names}. ${who} mutters: "Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there." (pantry)`;
+        sv.taught = 1;
+      } else {
+        // repeat voicings: the teaching was delivered; the loss is named,
+        // nothing more. The _beatCast draw is preserved on this path too.
+        const cast = (typeof this._beatCast === 'function') ? this._beatCast(1) : [];
+        line = `The village threw out spoiled stores: ${names}. (pantry)`;
+      }
+      return line;
+    },
     // food never counts as security. Before this, expired pantry stacks sat
     // forever and villagers ate them at full value: phantom calories.
     sweepSpoiled() {
@@ -2346,20 +2382,15 @@
       }
       if (lostPantry.length) {
         // LEGIBILITY: the village names the loss in its own voice AND the fix.
-        // When the player already knows smoking, the village just mutters;
-        // when they don't, a real roster villager teaches it outright.
         // (journey landing r2 2026-10-11: the old line hardcoded "Old Mara" —
         // the F2 fixed-cast phantom class; no Mara exists in the generated
         // 12-person roster. Beats name real villagers via _beatCast, same
         // as the F2 arrival/homecoming beats.)
+        // SPOIL VOICE (sim-prosefix-b, #439): the full teaching fired
+        // byte-identical on every voicing. spoilVoiceLine keeps the teaching
+        // on the first full voicing per run and condenses repeats.
         const names = [...new Set(lostPantry)].join(', ');
-        if (this.knowsTechnique('preserve')) {
-          this.say(`The village threw out spoiled stores: ${names}. Someone mutters about the smoke rack going cold. (pantry)`);
-        } else {
-          const cast = (typeof this._beatCast === 'function') ? this._beatCast(1) : [];
-          const who = cast[0] ? this.displayName(cast[0]) : 'Someone';
-          this.say(`The village threw out spoiled stores: ${names}. ${who} mutters: "Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there." (pantry)`);
-        }
+        this.say(this.spoilVoiceLine(names));
       }
       // CORPSE ROT (Steve 2026-10-06): meat left on a body rots there.
       // Unlooted doesn't mean preserved — the clock runs on corpse

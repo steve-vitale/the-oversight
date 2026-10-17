@@ -27728,6 +27728,42 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) { plan.menu = []; }
       return plan;
     },
+    // feastEmotionBit (sim-prosefix-b, #437): the feast's emotional register,
+    // chosen from honest state. The old line ("Somebody laughs so hard they
+    // cry. For one evening, nobody is surviving — they're just together.")
+    // fired byte-identical at every feast — a harvest feast, a lean winter
+    // feast, and a feast three days after a funeral all read the same. Now:
+    // a grieving village gets the mourning register; a thin table (quality
+    // 0) gets the quiet register; the pantry-days left after the feast
+    // choose harvest (>=20d, the original line verbatim), comfortable, or
+    // lean (winter shades the lean register). The named facts (host, menu,
+    // kcal cost) are voiced by the caller and are untouched.
+    // VOICE ONLY: pure reads (grief, burnHistory, season), zero RNG draws,
+    // zero state writes.
+    feastEmotionBit(day, spent, have, quality) {
+      const OLD = 'Somebody laughs so hard they cry. For one evening, nobody is surviving — they\'re just together.';
+      try {
+        const v = (this.state || {}).village || {};
+        if ((v.grief || 0) > 0)
+          return 'The laughter stays low — somebody\'s seat is empty, and everybody sees it. For one evening, grief sits at the fire with them instead of standing over them.';
+        if ((quality | 0) <= 0)
+          return 'Nobody talks much. It isn\'t plenty — but it\'s warm, and everybody\'s here.';
+        let burn = 0;
+        try {
+          const hist = (v.burnHistory || []).filter(x => x > 0);
+          if (hist.length) burn = hist.reduce((a, b) => a + b, 0) / hist.length;
+        } catch (e) {}
+        if (!(burn > 0)) burn = (((v.roster || []).length) || 1) * 1000;
+        const days = ((have || 0) - (spent || 0)) / burn;
+        let se = '';
+        try { se = (typeof this.season === 'function') ? (this.season(day).id || '') : ''; } catch (e) {}
+        if (days >= 20) return OLD; // the harvest register: the original line, kept verbatim
+        if (days < 5) return /winter/i.test(se)
+          ? 'Nobody says what this cost — everybody knows, and winter is listening. For one evening, the pantry is lighter and the people are not.'
+          : 'Nobody says what this cost — everybody knows. For one evening, the pantry is lighter and the people are not.';
+        return 'Somebody tells the story again, the one everybody already knows. For one evening, hunger feels like a rumor.';
+      } catch (e) { return OLD; }
+    },
     hostFeast(opts) {
       opts = opts || {};
       const plan = this.feastPlan();
@@ -27929,7 +27965,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const dawnWord = (typeof this.feastDawnWord === 'function') ? this.feastDawnWord() : 'dawn';
       const surgeBit = surgeSpent ? ` The channeled keepsake feeds the feast — the feast was the weapon, and the surge rides the fire until ${dawnWord}, spent only when the blades are warmed. (FEAST SURGE ×${surgeSpent} armed)` : '';
       const tvBit = televised ? ' 📺' : '';
-      this.say(`🍖 FEAST${tvBit} — ${hostName} opens the pantry wide: ${menuBit}. ${names.join(', ')}${more} eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−${spent.toLocaleString()} kcal from the pantry)${skippedBit}${surgeBit}`);
+      // FEAST VOICE (sim-prosefix-b, #437): the emotional register is honest
+      // state — see feastEmotionBit. The named facts (host, menu, kcal) are
+      // voiced here and are untouched; only the emotional sentence varies.
+      const feastEmotion = (() => {
+        try { return this.feastEmotionBit(day, spent, plan.have, qualityGated); }
+        catch (e) { return 'Somebody laughs so hard they cry. For one evening, nobody is surviving — they\'re just together.'; }
+      })();
+      this.say(`🍖 FEAST${tvBit} — ${hostName} opens the pantry wide: ${menuBit}. ${names.join(', ')}${more} eat until the fire burns low. ${feastEmotion} (−${spent.toLocaleString()} kcal from the pantry)${skippedBit}${surgeBit}`);
       let _gr = null;
       try {
         _gr = (typeof this.grantFeastBuff === 'function') ? this.grantFeastBuff(feast) : null;
@@ -27991,8 +28034,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { const p = this.getPerson(vid); if (p) nm = String(p.name).split(' ')[0]; } catch (e) {}
         const n = this.npcNeeds(vid);
         n.social = Math.min(100, (n.social || 0) + 3);
-        this.remember(vid, 'meal', 'ate with ' + oname);
-        try { this.remember(o.vid, 'meal', 'ate with ' + nm); } catch (e) {}
+        // SHARING (sim-prosefix-b, #438): stamp the co-eater's vid on the meal
+        // memory so the EAT beat can name today's company honestly. The note
+        // text is unchanged; the field is additive and unread by anything else.
+        this.remember(vid, 'meal', 'ate with ' + oname, { ateWith: o.vid });
+        try { this.remember(o.vid, 'meal', 'ate with ' + nm, { ateWith: vid }); } catch (e) {}
         // BONDS (pacing build 2026-10-10): lingering over the fire together
         // builds villager↔villager warmth. +2 per shared lingering meal.
         try { if (this.bondAdd) this.bondAdd(vid, o.vid, 2, 'lingering meal'); } catch (e) {}
