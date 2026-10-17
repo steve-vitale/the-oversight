@@ -994,3 +994,12 @@ loyalty exceptions (option 1 of the 2026-10-16 proposal): villagers refuse
 social engagement with the exiled by default, close friends/family may
 break the cold shoulder at a trust cost. Not full lockout; amends remain
 possible.
+
+## 2026-10-17 — Steve's decision batch (10 briefs answered)
+1. **Food deeds: open the gate (#441/#445).** Villagers' blows bank food deeds — the `_ps` gate at game.js:33661 (scholar-only) opens. But Steve questioned the measurement: "are we measuring the right thing there? Other people in the village might get luckier or play more optimally than the player." The deed metric needs rethinking once NPCs compete.
+2. **NPC seat competition (#448): direction yes, mechanism open.** Steve wants NPCs competing for the top spot and is open to the player being outshone — but whether NPCs determine seat-taking is undecided. Held tension: NPC-taken seats complicate the long-survival challenge and Easter egg boss (which assume the player's persistence). Design thread, not an implementation order.
+3. **Moots: forgiveness allowed.** The 35/35 acquittal dynamic stands; forgiveness explicitly allowed. Belief keeps outweighing evidence.
+4. **Trick gates: do NOT align to fight shape (#411).** Gate-widening / round-1 forms rejected as the fix for the gate/fight-shape mismatch. The execution arm finds another route or accepts win-truncation.
+5. **Witness: build the exposure source (#316/#317).** Make the witness door earnable — moot verbs, kept lists, or ambient/player exposure mechanics moving ledger.exposed. Bar stays 3 until the source exists.
+6. **Wave 6: the Easter-egg road (#410).** Wave 6+ is the long-survival challenge path to the final boss — waves past 5, very very hard, no specific plans yet; Steve invited the scaffold (landed in docs/MONSTER-WAVES.md).
+Unanswered — defaults stand: #340 ledger stays cumulative; muster-vs-grief stays grief-first; grief cap stays 2; pyrrhic deeds stay forfeit; door tie-break stays beloved-first.

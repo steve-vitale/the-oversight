@@ -224,6 +224,41 @@ as any death — "unkillable means unkillable." `maybeCheatDeath()` is the
 single death choke point; no bypass exists. A random villager burns in the
 ash-death; the villager pool is the cap.
 
+## Wave 6+: The Long Night (SCAFFOLD — Steve 2026-10-17)
+
+Steve: wave 6 was the plan for the Easter-egg long-survival challenge and
+its boss monster — waves past 5 escalating toward "another sort of final
+boss," very very hard. No specific plans yet; this section scaffolds the
+shape for the loops to build against. Finding #410 closed as scaffolded —
+sims may now include wave 6.
+
+The fiction: the village that survives wave 5 and keeps refusing the table
+becomes the show's problem — the System can't end what won't die, so it
+stops calibrating and starts *sieging*. Wave 6+ is not a new draft, it's
+the siege: the same escalation logic that produced waves 1–5, pointed at a
+village the audience refuses to let go. The long-survival road is the
+alternative to sitting — the village that keeps surviving gets the siege,
+and the siege leads to the egg.
+
+Shape (scaffold — numbers TBD by sims):
+- Past wave 5 the waves keep coming, each harder than the last, no
+  plateau. The escalation is open-ended; the village sets the pace by
+  surviving.
+- The network monsters already in the code (network_tower, network_limb,
+  network_heart) are wave 6's heralds — the System's infrastructure made
+  fauna. Scouts and siegebreakers for what comes after.
+- The final boss waits at the end of the long-survival road — "another
+  sort of final boss," distinct from the wave-5 Producers (who fight the
+  narrative; the final boss fights the *village*). Very very hard by
+  design: a multi-phase siege, not a duel. Details TBD.
+- The Easter egg is the prize at the end of the long-survival challenge.
+  Details TBD.
+
+Builder constraints: wave-6+ bands sit ABOVE wave 5's (damage 50–130, HP
+1000–2200 are the floor, not the ceiling); the doom-countdown ruling
+holds (unkillable means unkillable); readiness gates still apply — the
+siege is survivable-in-principle, never a scripted wipe.
+
 ## Monster counters (waves 1–2, 2026-10-10)
 
 Steve 2026-10-06: "I loved undertale — reward players for learning and
