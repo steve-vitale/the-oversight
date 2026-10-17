@@ -1,0 +1,7 @@
+'use strict';
+const fs=require('fs'),path=require('path'),out=path.resolve(process.argv[2]||'.git/harness-knack-phone.html');
+const fixture=String.raw`<aside style="position:fixed;top:0;left:0;right:0;z-index:100005;background:#17232b;color:white;font:12px/1.4 system-ui;padding:6px"><b>REAL OPENING — NO PRESELECTED KNACK</b><br><button id="hk-start">Start ordinary run</button><button id="hk-read">Read opening</button><button id="hk-load">Save and load</button><div id="hk-status"></div></aside><script>
+let hkLoad=null;function hkRead(){const G=Scattering.Game,s=G.state.scholar;document.getElementById('hk-status').textContent='person '+G.displayName(G.villagerId)+'; day '+s.day+'; knack chosen '+!!s.knackChosen+'; live choices '+JSON.stringify((s.knackChoices||[]).map(c=>c.id))+'; abilities '+JSON.stringify((s.abilities||[]).map(a=>({id:a.id,latent:a.latent})))+'; slots '+G.abilitySlots()+'; explicit load '+hkLoad;}
+document.getElementById('hk-start').onclick=()=>{const G=Scattering.Game;G.genRoster('Columbus, Ohio');G.newGame('Columbus, Ohio',null,G.generatedRoster[0].id);G.depart();hkLoad=null;G.debugRefresh();hkRead();};document.getElementById('hk-read').onclick=hkRead;document.getElementById('hk-load').onclick=()=>{const G=Scattering.Game;G.save();hkLoad=G.load(G.state.runKey);G.debugRefresh();hkRead();};
+</script>`;
+fs.writeFileSync(out,fs.readFileSync('index.html','utf8').replace('<head>','<head><base href="/">').replace('</body>',fixture+'</body>'));console.log(out);

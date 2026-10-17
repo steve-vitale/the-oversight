@@ -52,6 +52,7 @@ try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite |
 for (const id of ['merchant', 'maker', 'caregiver']) POLICY_REGISTRY[id] = require('./policies/livelihood')[id];
 for (const id of ['capable-voice-ready', 'maker-voice-ready', 'merchant-voice-ready', 'caregiver-voice-ready']) POLICY_REGISTRY[id] = require('./policies/voice-preparation')[id];
 for (const id of ['merchant-hoarder', 'merchant-dealer']) POLICY_REGISTRY[id] = require('./policies/miser-intent')[id];
+for (const id of ['explorer-seer', 'explorer-cartographer']) POLICY_REGISTRY[id] = require('./policies/explorer-intent')[id];
 for (const id of ['campaigner', 'campaigner-control', 'campaigner-rations']) POLICY_REGISTRY[id] = require('./policies/campaigner')[id];
 POLICY_REGISTRY['campaigner-preparer'] = require('./policies/campaign-preparer').preparer;
 POLICY_REGISTRY['campaigner-quartermaster'] = require('./policies/campaign-quartermaster').quartermaster;

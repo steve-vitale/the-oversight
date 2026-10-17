@@ -34,6 +34,15 @@ function terminalAt(r, samples, day) {
 }
 function summarize(before, after, windows = defaults) {
   const validity = score.comparePanels(before, after);
+  return summarizeValidated(before, after, windows, validity);
+}
+function summarizeHarnessRevision(before, after, declaration, windows = defaults) {
+  return summarizeValidated(before, after, windows, require('./lib/harness-comparison').compareHarnessRevision(before, after, declaration));
+}
+function summarizePolicyRevision(before, after, declaration, windows = defaults) {
+  return summarizeValidated(before, after, windows, require('./lib/policy-comparison').comparePolicyRevision(before, after, declaration));
+}
+function summarizeValidated(before, after, windows, validity) {
   if (validity.decision === 'invalid') throw Error(validity.errors.join('; '));
   for (const w of windows) if (w.length !== 2 || !w.every(Number.isInteger) || w[0] < 0 || w[1] < w[0]) throw Error('Invalid calendar window');
   const bm = new Map(before.rows.map(r => [key(r), r]));
@@ -41,6 +50,7 @@ function summarize(before, after, windows = defaults) {
   const indexes = new Map([...before.rows, ...after.rows].map(r => [r, indexSamples(r)]));
   return { schemaVersion: 1, interpretation: 'Conditional complete paired calendar windows; diagnostic only. No imputation, survival extrapolation, or balance verdict.',
     scorecardDecision: validity.decision, beforeSource: before.sourceDigest, afterSource: after.sourceDigest,
+    ...(validity.comparisonKind ? { comparisonKind: validity.comparisonKind, methodologyReason: validity.reason, changedSources: validity.changedSources } : {}),
     units: { livingNpcs: 'people', lowFood: 'fraction of sampled days below 500 kcal', lowWater: 'fraction below 25 hydration', lowHealth: 'fraction below 25 health', hungryNpcFraction: 'mean daily fraction of NPCs with known needs hungry' },
     policies: after.options.policies.map(policy => {
       const pairs = after.rows.filter(r => r.row.policy === policy).map(a => ({ b: bm.get(key(a)), a }));
@@ -76,4 +86,4 @@ if (require.main === module) {
     console.log(JSON.stringify({ out, policies: result.policies.map(p => ({ policy: p.policy, completePairs: p.windows.map(w => w.completePairs) })) }));
   } catch (e) { console.error(e.message); process.exitCode = 1; }
 }
-module.exports = { summarize, terminalAt };
+module.exports = { summarize, summarizeHarnessRevision, summarizePolicyRevision, terminalAt };

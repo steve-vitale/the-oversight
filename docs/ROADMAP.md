@@ -1,5 +1,19 @@
 # ROADMAP: what's built, what's next, how to do it
 
+Named Explorer strategy experiment (2026-10-16, needs-eyes): optional
+explorer-cartographer/explorer-seer controllers answer their own real opening
+knack and separate shown-build preference from bounded empirical fieldwork.
+Shared loader/default policies and Game/data remain unchanged. Source-pinned
+16/64 contrasts retain all23 metrics and mixed death/community/class/gear/win
+signals;480 exact named replays cover every changed contrast hash. Natural
+All-Seeing cases are Cartographers; the labels mostly share trajectories, so
+Seer/all-playstyle viability is not established. The rejected shared-loader
+candidate, red suite and640 exact replay references remain diagnostic only.
+See ../evidence/2026-10-16/explorer-intent-opening-audit.md and its reconstruct/
+verify commands. Eight authored deeds/two proxies and Garden/reactor questions
+remain. Muse keeps regions/nomad/weather; publication is not pull confirmation.
+
+
 *For Muse (and any agent). Updated 2026-10-15. The early-October roadmap
 is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 

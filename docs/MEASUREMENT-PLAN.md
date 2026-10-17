@@ -1,5 +1,19 @@
 # Balanced measurement plan
 
+Named Explorer strategy experiment (2026-10-16, needs-eyes): optional
+explorer-cartographer/explorer-seer controllers answer their own real opening
+knack and separate shown-build preference from bounded empirical fieldwork.
+Shared loader/default policies and Game/data remain unchanged. Source-pinned
+16/64 contrasts retain all23 metrics and mixed death/community/class/gear/win
+signals;480 exact named replays cover every changed contrast hash. Natural
+All-Seeing cases are Cartographers; the labels mostly share trajectories, so
+Seer/all-playstyle viability is not established. The rejected shared-loader
+candidate, red suite and640 exact replay references remain diagnostic only.
+See ../evidence/2026-10-16/explorer-intent-opening-audit.md and its reconstruct/
+verify commands. Eight authored deeds/two proxies and Garden/reactor questions
+remain. Muse keeps regions/nomad/weather; publication is not pull confirmation.
+
+
 Steve, 2026-10-15: "Yes, let’s create a more balanced set of measuring telemetry we can optimize from. Don’t simply look at win rate, we need to make sure many key metrics aren’t regressing. Plan this out and make repeatable and scalable."
 
 ## Decision rule
@@ -159,3 +173,16 @@ master's policy baseline and disclose the shared game's existing red checks.
 The complete feature branch passed quick 154/154 and full 926/926.
 
 For exposure-sensitive changes, add `balance-windows.js` to the retained comparison: conditional matched calendar windows, missing-day case lists and competing endings. See SIMULATING.md. This diagnostic cannot clear the full scorecard or infer survival after the Table.
+
+Explicit methodology comparisons (2026-10-16): Game-only comparisons continue
+to reject changed controller/harness inputs. For a declared controller
+experiment, use scripts/lib/policy-comparison.js comparePolicyRevision with
+{reason,changes:{[file]:{before:sourceHash,after:sourceHash}}}. It permits only
+policy files and their registry; the broader explicit harness revision lane
+is for diagnosis of simulation-method changes. Both preserve every input
+identity and all23 metrics. No digest rewriting or scalar optimization. The
+existing balance-windows APIs summarizePolicyRevision and
+summarizeHarnessRevision use the same validation/declaration and conditional
+coverage. Keep collector/contract, origins, horizons, seed lists and policy
+labels matched. A changed measurement observer needs a new shared baseline,
+not an exception disguised as a controller revision.

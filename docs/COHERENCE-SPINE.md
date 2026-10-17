@@ -1,5 +1,16 @@
 # The Coherence Spine — how every progression feature fits
 
+Named Explorer access (2026-10-16, policy experiment): the separate shown-build
+and bounded-fieldwork controllers now produce natural Cartographer All-Seeing
+ascensions in five of64 holdout worlds per preference label. The two labels
+usually share trajectories; Seer access is not proved. Default policies and
+Game rules are unchanged, so this does not supersede the historical zero/320
+standard result. Mixed survival/class/gear/win signals and personal/successor
+deeds are in evidence/2026-10-16/explorer-intent-opening-audit.md from repository
+root. Eight authored deeds/two proxies remain. NPC investigation, contest/army
+scale effects, Garden diet and early-reactor food-use questions stay open.
+
+
 *2026-10-14. Built from Steve's direct words (`docs/godpath/STEVE-ANSWERS.md`).*
 
 > "We need all these features coherent. Gods are rough representatives of

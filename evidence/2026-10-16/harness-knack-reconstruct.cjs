@@ -1,0 +1,7 @@
+'use strict';
+// Diagnostic only: do not install this rejected candidate into the live tree.
+// Usage: node .../harness-knack-reconstruct.cjs after NEW_EMPTY_ROOT
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib'),crypto=require('crypto'),assert=require('assert'),[arm,outArg]=process.argv.slice(2),dir=__dirname,repo=path.resolve(dir,'../..'),out=path.resolve(outArg||'.git/harness-knack-rejected-independent'),read=n=>JSON.parse(z.gunzipSync(fs.readFileSync(path.join(dir,n)))),sha=b=>crypto.createHash('sha256').update(b).digest('hex'),bundle=read('harness-knack-sources.json.gz');
+assert(bundle.arms[arm],'Use before or after');assert(!fs.existsSync(out),'Destination must not exist');fs.mkdirSync(out,{recursive:true});cp.execFileSync('git',['archive',bundle.baseCommit,'-o',out+'.tar','src','scripts','docs','index.html','.gitattributes'],{cwd:repo});cp.execFileSync('tar',['-xf',out+'.tar','-C',out]);
+for(const files of [bundle.arms[arm].files,read('harness-knack-methodology-sources.json.gz').files])for(const[n,f]of Object.entries(files)){const b=Buffer.from(f.base64,'base64');assert.strictEqual(sha(b),f.sha256,n);fs.mkdirSync(path.dirname(path.join(out,n)),{recursive:true});fs.writeFileSync(path.join(out,n),b);}
+assert.deepStrictEqual(require('../../scripts/balance-panel').manifest(out),bundle.arms[arm].sources);console.log('Reconstructed rejected harness diagnostic',arm,'211 inputs:',out);

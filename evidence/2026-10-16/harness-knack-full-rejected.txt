@@ -1,0 +1,34 @@
+check.js: 977 scripts, 4 parallel
+.....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................F..........................................................................................................................................................................................................................................................................................................................................................................................................................F................................................................
+
+  FAIL scripts/test-gorgedrive-20261014.js (exit 1, 8.6s)
+        info: invited companion: NONE (rolls refused)
+        ok: GREEN: pendingEncounter set
+        ok: GREEN: pendingMonsterId is the lingering monster (got cancellation)
+        ok: GREEN: exactly one engagement counted
+        ok: GREEN: scholar marched to the monster tile first
+        ok: GREEN: real player combat started (tbfight live)
+        ok: GREEN: lingering entity removed from world at fight start
+        ok: GREEN: fight ended
+        ok: GREEN: no gorge line after the answer
+        ok: GREEN: march-out beat read in the transcript (no silent actions)
+      PART 3b — wrapper invokes the layer when ON (drift-robust)
+      FAIL: 3b: wrapper drove an engagement within 3 dailies (took 3)
+
+  FAIL scripts/test-capable-bot-20261014.js (exit 1, 8.1s)
+        ok   fight resolved by the end of daily
+      
+      short sims: 2 seeds x 40 days
+        ok   runs completed
+        ok   game days keep pace with loop days (no fight left live at sleep)
+        FAIL food deeds (sentimentTaught + feastSurgeUsed) earned in >= 1 run by day 40 — 0
+        ok   contest choices taken by scoring
+        ok   conversations held in-sim
+        ok   no policy-side errors
+      
+      test-capable-bot-20261014: 24 passed, 1 failed, 0 todo (phase 0)
+      failing: food deeds (sentimentTaught + feastSurgeUsed) earned in >= 1 run by day 40
+
+  slowest: scripts/test-simopt-trajectory-20261010.js 59s, scripts/test-break-alien-20261010-r11.js 53s, scripts/test-deterministic-clock-20261014.js 50s
+
+check.js: 975 passed, 2 failed in 394s

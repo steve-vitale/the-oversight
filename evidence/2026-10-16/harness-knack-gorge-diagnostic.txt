@@ -1,0 +1,28 @@
+PART 0 — module + gate
+  ok: gorgeDrive exported
+  ok: policyForRun exported
+  ok: gate OFF when GORGEDRIVE unset
+  ok: gate ON when GORGEDRIVE=1
+PART 1 — RED (gate off): no engagement, pristine gorge beat
+  ok: RED: no pendingEncounter with gate off
+  ok: RED: gorgeEngagements stays 0 with gate off
+  ok: RED: lingering entity untouched with gate off
+  ok: RED: gorge beat fires pristine (instrument sees the say-line)
+PART 2 — NON-AGGRESSION: gate-off wrapped == raw leadfeast
+  ok: both runs produced hashes (20)
+  ok: gate-off wrapped policy byte-identical to raw leadfeast over 20d
+PART 3 — GREEN (gate on): honest engagement, gorge stops
+  info: day=27 systemArrived=true codexUnlocked=true
+  info: invited companion: NONE (rolls refused)
+  ok: GREEN: pendingEncounter set
+  ok: GREEN: pendingMonsterId is the lingering monster (got cancellation)
+  ok: GREEN: exactly one engagement counted
+  ok: GREEN: scholar marched to the monster tile first
+  ok: GREEN: real player combat started (tbfight live)
+  ok: GREEN: lingering entity removed from world at fight start
+  ok: GREEN: fight ended
+  ok: GREEN: no gorge line after the answer
+  ok: GREEN: march-out beat read in the transcript (no silent actions)
+PART 3b — wrapper invokes the layer when ON (drift-robust)
+GORGECTX {"ctx":{"soothed":1,"_devChanDay":27,"devotionChannels":1,"forageTrips":8,"_cpDay":27,"fishStaffed":1,"cookStaffed":1,"_trapDay":27,"talked":3,"knownPlants":21,"courtAccords":2,"_tribHist":[{"day":27,"kcal":1500},{"day":27,"kcal":1600}],"tended":2,"_leadCool":{"village_3":27},"proposedLead":1,"gorgeDaysSaw":3,"_gorgeAns":{},"gorgeInvitesRefused":4,"gorgeHeldAlone":3},"over":false,"health":100,"kcal":2380,"day":27,"party":[],"pending":false,"position":[4,4],"haven":[null,null]}
+FAIL: 3b: wrapper drove an engagement within 3 dailies (took 3)

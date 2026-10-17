@@ -1,0 +1,7 @@
+'use strict';
+// Usage: node .../explorer-intent-opening-reconstruct.cjs both NEW_EMPTY_ROOT
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib'),crypto=require('crypto'),assert=require('assert'),[arm,outArg]=process.argv.slice(2),dir=__dirname,repo=path.resolve(dir,'../..'),out=path.resolve(outArg||'.git/explorer-intent-independent'),read=n=>JSON.parse(z.gunzipSync(fs.readFileSync(path.join(dir,n)))),sha=b=>crypto.createHash('sha256').update(b).digest('hex'),bundle=read('explorer-intent-opening-sources.json.gz'),supp=read('explorer-intent-opening-measurement-sources.json.gz');
+assert(bundle.arms[arm],'Use control, build or both');assert(!fs.existsSync(out),'Destination must not exist');assert.strictEqual(sha(fs.readFileSync(path.join(dir,supp.predecessor.file))),supp.predecessor.sha256);
+fs.mkdirSync(out,{recursive:true});const archive=out+'.tar';cp.execFileSync('git',['archive',bundle.baseCommit,'-o',archive,'src','scripts','docs','index.html','.gitattributes'],{cwd:repo});cp.execFileSync('tar',['-xf',archive,'-C',out]);
+for(const files of [bundle.arms[arm].files,supp.files])for(const[n,f]of Object.entries(files)){const b=Buffer.from(f.base64,'base64');assert.strictEqual(sha(b),f.sha256,n);fs.mkdirSync(path.dirname(path.join(out,n)),{recursive:true});fs.writeFileSync(path.join(out,n),b);}
+assert.deepStrictEqual(require('../../scripts/balance-panel').manifest(out),bundle.arms[arm].sources);console.log('Reconstructed',arm,'212 gameplay inputs plus pinned validation overlay:',out);

@@ -179,3 +179,20 @@ reproduce this evidence. When porting to Muse's different Game branch, first
 verify that public route and its real UI/capacity/save contract there, then
 collect a fresh baseline. Copying only the policy does not make older Game
 sources equivalent to this experiment.
+
+## Named Explorer policies (2026-10-16)
+
+`explorer-cartographer` and `explorer-seer` inherit capable, choose their own
+real introductory knack and prefer shown Explorer abilities. Bounded empirical
+fieldwork and actual Haven conversations seek their own truthful discovery
+lesson. They are mixed strategies, not certified pacifists or independent
+subclass success samples. Do not put their opening choice in the shared
+loader; idle policies must keep unanswered prompts. All Game rules, default
+strategies and Muse region/nomad work stay fixed.
+
+See `evidence/2026-10-16/explorer-intent-opening-audit.md` from repository root.
+Use the same raw collector/contract in both roots, fresh baselines, matched
+16/64 seeds and explicit `comparePolicyRevision` /
+`balanceWindows.summarizePolicyRevision` declarations. Ordinary Game-only
+comparisons must reject changed policy inputs. Never rewrite source hashes
+to bypass that rejection. Fieldwork budgets are policy levers, not Game buffs.

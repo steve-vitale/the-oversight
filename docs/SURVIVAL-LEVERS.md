@@ -1,5 +1,19 @@
 # Survival levers and balance decisions
 
+Named Explorer strategy experiment (2026-10-16, needs-eyes): optional
+explorer-cartographer/explorer-seer controllers answer their own real opening
+knack and separate shown-build preference from bounded empirical fieldwork.
+Shared loader/default policies and Game/data remain unchanged. Source-pinned
+16/64 contrasts retain all23 metrics and mixed death/community/class/gear/win
+signals;480 exact named replays cover every changed contrast hash. Natural
+All-Seeing cases are Cartographers; the labels mostly share trajectories, so
+Seer/all-playstyle viability is not established. The rejected shared-loader
+candidate, red suite and640 exact replay references remain diagnostic only.
+See ../evidence/2026-10-16/explorer-intent-opening-audit.md and its reconstruct/
+verify commands. Eight authored deeds/two proxies and Garden/reactor questions
+remain. Muse keeps regions/nomad/weather; publication is not pull confirmation.
+
+
 Steve, 2026-10-15: "Winning shouldn’t be easy. A reduction in win rate is cause for investigation and consideration not automatically assuming it’s a regression. Keep documentation on our levers that impact survival."
 
 ## How to use this register
@@ -783,3 +797,14 @@ reactor or Table parameter changed in the published game. The open design
 question and exact evidence are in OPEN-QUESTIONS.md and
 ../evidence/2026-10-15/knack-policy-audit.md. Win changes alone do not decide
 whether to adopt this correction or change that tradeoff.
+
+Named Explorer policy levers (2026-10-16): explicit opening choice, shown-only
+path preference, protected incumbents, at most three unsuccessful study days,
+60HP/1200kcal/320-used-tick guards, and up to two real Haven conversations.
+These change decisions/exposure, not Game strength, reward rates or difficulty.
+Preserve separate control/build/both roots when tuning them. The measured
+holdout shows fewer deaths and community losses alongside lost wins or gear;
+no single rate authorizes adoption or a compensating buff. Introductory choice
+belongs to each policy, never to every loader user. Native System arrival
+presentation is still late in the imported simulation checkpoint; do not
+present this as a fully human-equivalent progression chronology.
