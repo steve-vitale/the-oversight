@@ -117,10 +117,25 @@
     }
     if (delta < 0 && rec > 0 && !c.moodGraceUsed) {
       c.moodGraceUsed = true;
-      c.moodBeat = this.convoPickCycle(vid, 'moodgrace', [
+      // BOND SURFACE (journey-social r22 2026-10-18): a sedimented
+      // friendship (depth >= 2) absorbs the cooling move as the
+      // relationship it is — not as 5-day recency. Same 'moodgrace' ledger
+      // key, so the beat still fires once per conversation.
+      let gracePool = [
         'That could have stung. They let it pass — you\'ve been kind before.',
         'They give you the benefit of the doubt. This time.',
-      ]) || 'They give you the benefit of the doubt. This time.';
+      ];
+      try {
+        const bnd = (typeof this.bondGet === 'function') ? this.bondGet(this.villagerId, vid) : null;
+        if (bnd && (bnd.depth || 0) >= 2) {
+          gracePool = [
+            'That could have stung. They\'ve known you long enough to let it pass.',
+            'A friend doesn\'t flinch at one sharp word. They let it go.',
+          ];
+        }
+      } catch (e) {}
+      c.moodBeat = this.convoPickCycle(vid, 'moodgrace', gracePool)
+        || 'They give you the benefit of the doubt. This time.';
       return this.convoMoodBand(vid);
     }
     const before = bandOf(c.mood || 0);

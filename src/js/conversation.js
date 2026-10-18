@@ -2857,6 +2857,35 @@
           if (!this.convoWouldBlock(vid, gline)) return { line: gline, thread: 'goal' };
         }
       }
+      // BOND SURFACE (journey-social r22 2026-10-18): sedimented relationships
+      // color the chit-chat — a depth-2 friend and a depth-(-1) rival don't
+      // open like strangers. Tried once (ledger-checked, OPENER-SKIP
+      // pattern), then falls through to the general pool. Every commitment
+      // above (talk request, table, unfinished business, grief, secrets,
+      // taught-refs, recalls, wants, goal-share) keeps priority — a bond
+      // tints the small talk, it never hijacks it. Feeling-level only: the
+      // bond record stores no event history, so no line may name a specific
+      // shared event (no fabricated memories).
+      try {
+        const bnd = (typeof this.bondGet === 'function') ? this.bondGet(this.villagerId, vid) : null;
+        const bdepth = (bnd && bnd.depth) || 0;
+        const bondPool = bdepth >= 2 ? (cg.bondWarm || []) : bdepth <= -1 ? (cg.bondCold || []) : null;
+        if (bondPool && bondPool.length) {
+          // era filter (same rule as the general pool below: pre-day-7, no
+          // System references — it hasn't arrived). eraOk is defined further
+          // down; don't reference it here (TDZ).
+          const sysUpB = !!this.state.systemArrived;
+          const eraPool = bondPool.filter(l => sysUpB || !/\bSystem\b/.test(String(l)));
+          const bl = this.convoPick(vid, 'small', eraPool, true);
+          if (bl) {
+            const bfilled = this.fillTalkLine(bl, vp);
+            const bline = this.voiceLine(vid, bfilled);
+            // BOND ENTRY BEAT (r22): the opener WAS the bond line — the
+            // entry beat in startConvo must not double-mark it.
+            if (!this.convoWouldBlock(vid, bline)) { c.bondOpened = true; return { line: bline, thread: 'small' }; }
+          }
+        }
+      } catch (e) {}
       // 6. Contextual small talk — mood, temperament, reputation. Never repeated.
       const pool = [];
       const push = (arr, w) => { for (const x of (arr || [])) for (let i = 0; i < (w || 1); i++) pool.push(x); };
@@ -4537,6 +4566,10 @@
       // makes any non-acknowledgment choice. The uncapped mood residue in
       // endConvo only lingers on a substantive conversation.
       c.substantive = false;
+      // BOND SURFACE (journey-social r22 2026-10-18): per-sitting reset —
+      // set by the stage-6 bond preamble when the opener itself was a bond
+      // line (the entry beat must not double-mark it).
+      c.bondOpened = false;
       // RUMOR (fix 2026-10-07): the drama verb is per-conversation, not
       // per-lifetime — rumorDone must reset here like teachSkill/offeredHelp,
       // or the second rumor with the same person dangles at the prompt with
@@ -4711,6 +4744,35 @@
         const dn = this.convoDriftNote(vid);
         if (dn) {
           this.sayLine(vid, dn);
+        }
+      } catch (e) {}
+      // BOND ENTRY BEAT (journey-social r22 2026-10-18): sedimented
+      // relationships are visible the moment they see you — a depth-2
+      // friend and a depth-(-1) rival don't open like strangers. One short
+      // stage-direction beat after the opener (the drift-note pattern
+      // above), skipped when the opener itself was already a bond line
+      // (c.bondOpened, set by the stage-6 preamble). ONCE PER DAY: the
+      // beat marks the day's greeting, not every sitting. A ledger-blocked
+      // beat stays SILENT — the dry-line fallback ("...lost my train of
+      // thought") would be a non-sequitur here, since nothing was
+      // attempted conversationally. Feeling-level narration, never a
+      // claimed event — the bond record stores no event history.
+      try {
+        if (!c.bondOpened) {
+          const today = (this.state.scholar || {}).day || 0;
+          if (c.bondBeatDay !== today) {
+            const bb = (typeof this.bondGet === 'function') ? this.bondGet(this.villagerId, vid) : null;
+            const bd = (bb && bb.depth) || 0;
+            if (bd >= 2 || bd <= -1) {
+              const bcg = (this.data.characterGen || {}).convo || {};
+              const bpool = bd >= 2 ? (bcg.bondBeatWarm || []) : (bcg.bondBeatCold || []);
+              const beat = this.convoPickCycle(vid, 'bondbeat', bpool);
+              if (beat && !this.convoWouldBlock(vid, beat)) {
+                this.sayLine(vid, beat);
+                c.bondBeatDay = today;
+              }
+            }
+          }
         }
       } catch (e) {}
       // SEEDING: knowledge traders mention their trade in conversation — the

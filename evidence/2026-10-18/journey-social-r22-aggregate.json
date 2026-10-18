@@ -1,0 +1,883 @@
+{
+ "seeds": [
+  1501,
+  1502,
+  1503
+ ],
+ "daycap": 60,
+ "runs": 3,
+ "m1": [
+  {
+   "seed": 1501,
+   "favBonds": [
+    {
+     "name": "James",
+     "v": -11,
+     "depth": 0,
+     "trust": 37
+    },
+    {
+     "name": "Theo",
+     "v": 95,
+     "depth": 3,
+     "trust": 93
+    }
+   ]
+  },
+  {
+   "seed": 1502,
+   "favBonds": [
+    {
+     "name": "Sam",
+     "v": 93,
+     "depth": 3,
+     "trust": 76
+    },
+    {
+     "name": "Liam",
+     "v": 0,
+     "depth": 0,
+     "trust": 2
+    }
+   ]
+  },
+  {
+   "seed": 1503,
+   "favBonds": [
+    {
+     "name": "Diana",
+     "v": 0,
+     "depth": 0,
+     "trust": 57
+    },
+    {
+     "name": "Elijah",
+     "v": 10,
+     "depth": 0,
+     "trust": 92
+    }
+   ]
+  }
+ ],
+ "m2": [
+  {
+   "seed": 1501,
+   "outBonds": [
+    {
+     "name": "Wilson",
+     "v": -46,
+     "depth": -1,
+     "trust": 40
+    },
+    {
+     "name": "Jerome",
+     "v": -69,
+     "depth": -2,
+     "trust": 73
+    }
+   ],
+   "grievances": 25
+  },
+  {
+   "seed": 1502,
+   "outBonds": [
+    {
+     "name": "Odongo",
+     "v": -61,
+     "depth": -2,
+     "trust": 3
+    },
+    {
+     "name": "Ashley",
+     "v": -46,
+     "depth": -1,
+     "trust": 45
+    }
+   ],
+   "grievances": 23
+  },
+  {
+   "seed": 1503,
+   "outBonds": [
+    {
+     "name": "Patricia",
+     "v": 4,
+     "depth": 0,
+     "trust": 0
+    },
+    {
+     "name": "Adaeze",
+     "v": 28,
+     "depth": 1,
+     "trust": 40
+    }
+   ],
+   "grievances": 31
+  }
+ ],
+ "m3": [
+  {
+   "seed": 1501,
+   "npcPairs": [
+    {
+     "a": "Barbara",
+     "b": "Wilson",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Violet",
+     "b": "Barbara",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Violet",
+     "b": "Owen",
+     "v": 40,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "seed": 1502,
+   "npcPairs": [
+    {
+     "a": "Odongo",
+     "b": "Chloe",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Ashley",
+     "b": "James",
+     "v": 54,
+     "depth": 2
+    },
+    {
+     "a": "Hayden",
+     "b": "Sam",
+     "v": 50,
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "seed": 1503,
+   "npcPairs": [
+    {
+     "a": "June",
+     "b": "Patricia",
+     "v": 92,
+     "depth": 3
+    },
+    {
+     "a": "June",
+     "b": "Riana",
+     "v": 70,
+     "depth": 2
+    },
+    {
+     "a": "Riana",
+     "b": "Maya",
+     "v": 46,
+     "depth": 1
+    }
+   ]
+  }
+ ],
+ "m5": [
+  {
+   "seed": 1501,
+   "endDay": 39,
+   "alive": 9
+  },
+  {
+   "seed": 1502,
+   "endDay": 52,
+   "alive": 10
+  },
+  {
+   "seed": 1503,
+   "endDay": 58,
+   "alive": 7
+  }
+ ],
+ "bondSurface": [
+  {
+   "seed": 1501,
+   "warmConvos": 0,
+   "coldConvos": 2,
+   "beatWarmConvos": 4,
+   "beatColdConvos": 8,
+   "graceBeats": 2,
+   "convos": 59,
+   "kindWarm": 4,
+   "hostileCold": 10
+  },
+  {
+   "seed": 1502,
+   "warmConvos": 0,
+   "coldConvos": 2,
+   "beatWarmConvos": 7,
+   "beatColdConvos": 4,
+   "graceBeats": 1,
+   "convos": 59,
+   "kindWarm": 7,
+   "hostileCold": 6
+  },
+  {
+   "seed": 1503,
+   "warmConvos": 0,
+   "coldConvos": 0,
+   "beatWarmConvos": 4,
+   "beatColdConvos": 6,
+   "graceBeats": 2,
+   "convos": 55,
+   "kindWarm": 4,
+   "hostileCold": 6
+  }
+ ],
+ "crossings": [
+  {
+   "a": "Ethel",
+   "b": "Theo",
+   "th": 25,
+   "dir": "+",
+   "v": 25,
+   "depth": 1,
+   "day": 12,
+   "seed": 1501
+  },
+  {
+   "a": "Ethel",
+   "b": "Jerome",
+   "th": 25,
+   "dir": "-",
+   "v": -29,
+   "depth": -1,
+   "day": 14,
+   "seed": 1501
+  },
+  {
+   "a": "Barbara",
+   "b": "Wilson",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 20,
+   "seed": 1501
+  },
+  {
+   "a": "Ethel",
+   "b": "Wilson",
+   "th": 25,
+   "dir": "-",
+   "v": -28,
+   "depth": -1,
+   "day": 20,
+   "seed": 1501
+  },
+  {
+   "a": "Ethel",
+   "b": "Jerome",
+   "th": 50,
+   "dir": "-",
+   "v": -54,
+   "depth": -2,
+   "day": 21,
+   "seed": 1501
+  },
+  {
+   "a": "Violet",
+   "b": "Owen",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 22,
+   "seed": 1501
+  },
+  {
+   "a": "Violet",
+   "b": "Barbara",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 23,
+   "seed": 1501
+  },
+  {
+   "a": "Ethel",
+   "b": "Theo",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 24,
+   "seed": 1501
+  },
+  {
+   "a": "Wilson",
+   "b": "Theo",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 26,
+   "seed": 1501
+  },
+  {
+   "a": "Violet",
+   "b": "Barbara",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 32,
+   "seed": 1501
+  },
+  {
+   "a": "Ethel",
+   "b": "Theo",
+   "th": 75,
+   "dir": "+",
+   "v": 76,
+   "depth": 3,
+   "day": 32,
+   "seed": 1501
+  },
+  {
+   "a": "Barbara",
+   "b": "Theo",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 35,
+   "seed": 1501
+  },
+  {
+   "a": "Wilson",
+   "b": "Owen",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 36,
+   "seed": 1501
+  },
+  {
+   "a": "Barbara",
+   "b": "Wilson",
+   "th": 50,
+   "dir": "+",
+   "v": 54,
+   "depth": 2,
+   "day": 37,
+   "seed": 1501
+  },
+  {
+   "a": "Barbara",
+   "b": "Owen",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 39,
+   "seed": 1501
+  },
+  {
+   "a": "Aubrey",
+   "b": "Liam",
+   "th": 25,
+   "dir": "+",
+   "v": 27,
+   "depth": 1,
+   "day": 14,
+   "seed": 1502
+  },
+  {
+   "a": "Liam",
+   "b": "Sam",
+   "th": 25,
+   "dir": "+",
+   "v": 25,
+   "depth": 1,
+   "day": 28,
+   "seed": 1502
+  },
+  {
+   "a": "Liam",
+   "b": "Odongo",
+   "th": 25,
+   "dir": "-",
+   "v": -29,
+   "depth": -1,
+   "day": 30,
+   "seed": 1502
+  },
+  {
+   "a": "Hayden",
+   "b": "Ashley",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 30,
+   "seed": 1502
+  },
+  {
+   "a": "Ashley",
+   "b": "James",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 30,
+   "seed": 1502
+  },
+  {
+   "a": "Odongo",
+   "b": "Chloe",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 30,
+   "seed": 1502
+  },
+  {
+   "a": "James",
+   "b": "Paul",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 34,
+   "seed": 1502
+  },
+  {
+   "a": "Liam",
+   "b": "Ashley",
+   "th": 25,
+   "dir": "-",
+   "v": -28,
+   "depth": -1,
+   "day": 35,
+   "seed": 1502
+  },
+  {
+   "a": "Hayden",
+   "b": "Sam",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 36,
+   "seed": 1502
+  },
+  {
+   "a": "Hayden",
+   "b": "Daniyar",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 37,
+   "seed": 1502
+  },
+  {
+   "a": "Liam",
+   "b": "Sam",
+   "th": 50,
+   "dir": "+",
+   "v": 51,
+   "depth": 2,
+   "day": 38,
+   "seed": 1502
+  },
+  {
+   "a": "Sam",
+   "b": "Daniyar",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 42,
+   "seed": 1502
+  },
+  {
+   "a": "Ashley",
+   "b": "Odongo",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 44,
+   "seed": 1502
+  },
+  {
+   "a": "Liam",
+   "b": "Odongo",
+   "th": 50,
+   "dir": "-",
+   "v": -51,
+   "depth": -2,
+   "day": 46,
+   "seed": 1502
+  },
+  {
+   "a": "Liam",
+   "b": "Sam",
+   "th": 75,
+   "dir": "+",
+   "v": 77,
+   "depth": 3,
+   "day": 46,
+   "seed": 1502
+  },
+  {
+   "a": "Ashley",
+   "b": "James",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 48,
+   "seed": 1502
+  },
+  {
+   "a": "Odongo",
+   "b": "Chloe",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 48,
+   "seed": 1502
+  },
+  {
+   "a": "Ashley",
+   "b": "Paul",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 50,
+   "seed": 1502
+  },
+  {
+   "a": "Hayden",
+   "b": "James",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 51,
+   "seed": 1502
+  },
+  {
+   "a": "Hayden",
+   "b": "Sam",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 51,
+   "seed": 1502
+  },
+  {
+   "a": "June",
+   "b": "Patricia",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 15,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Patricia",
+   "th": 25,
+   "dir": "-",
+   "v": -32,
+   "depth": -1,
+   "day": 20,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Elijah",
+   "th": 25,
+   "dir": "+",
+   "v": 25,
+   "depth": 1,
+   "day": 24,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Adaeze",
+   "th": 25,
+   "dir": "-",
+   "v": -30,
+   "depth": -1,
+   "day": 26,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Riana",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 26,
+   "seed": 1503
+  },
+  {
+   "a": "Patricia",
+   "b": "Riana",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 27,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Jinhai",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 29,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Patricia",
+   "th": 50,
+   "dir": "-",
+   "v": -52,
+   "depth": -2,
+   "day": 30,
+   "seed": 1503
+  },
+  {
+   "a": "Diana",
+   "b": "Adaeze",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 33,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Patricia",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 34,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Maya",
+   "th": 25,
+   "dir": "-",
+   "v": -27,
+   "depth": -1,
+   "day": 35,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Adaeze",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 36,
+   "seed": 1503
+  },
+  {
+   "a": "Riana",
+   "b": "Maya",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 36,
+   "seed": 1503
+  },
+  {
+   "a": "Riana",
+   "b": "Ines",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 36,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Elijah",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 42,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Riana",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 42,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Elijah",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 43,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Maya",
+   "th": 50,
+   "dir": "-",
+   "v": -54,
+   "depth": -2,
+   "day": 45,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Adaeze",
+   "th": 50,
+   "dir": "-",
+   "v": -54,
+   "depth": -2,
+   "day": 46,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Giulia",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 46,
+   "seed": 1503
+  },
+  {
+   "a": "Patricia",
+   "b": "Jinhai",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 46,
+   "seed": 1503
+  },
+  {
+   "a": "June",
+   "b": "Patricia",
+   "th": 75,
+   "dir": "+",
+   "v": 76,
+   "depth": 3,
+   "day": 49,
+   "seed": 1503
+  },
+  {
+   "a": "Riana",
+   "b": "Jinhai",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 50,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Patricia",
+   "th": 75,
+   "dir": "-",
+   "v": -80,
+   "depth": -3,
+   "day": 51,
+   "seed": 1503
+  },
+  {
+   "a": "Riana",
+   "b": "Elijah",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 52,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Elijah",
+   "th": 75,
+   "dir": "+",
+   "v": 76,
+   "depth": 3,
+   "day": 56,
+   "seed": 1503
+  },
+  {
+   "a": "Rocco",
+   "b": "Maya",
+   "th": 75,
+   "dir": "-",
+   "v": -81,
+   "depth": -3,
+   "day": 56,
+   "seed": 1503
+  },
+  {
+   "a": "Patricia",
+   "b": "Giulia",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 56,
+   "seed": 1503
+  },
+  {
+   "a": "Riana",
+   "b": "Adaeze",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 57,
+   "seed": 1503
+  }
+ ]
+}
