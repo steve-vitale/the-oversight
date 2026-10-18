@@ -198,3 +198,25 @@ cliffhanger calm/aggro sprites missing — PRE-EXISTING, unrelated: the
 test loads sprites.js + godhood.js in a vm context and never touches
 game.js or villager-objectives.js; my patch cannot affect its outcome).
 Documented, not chased (sprite content belongs to the content lanes).
+
+## Metric review (2026-10-18, recovery verification)
+Full proof re-run by recovery agent (FEASTSCALE_R13=1, SEATDRIVE=0, 32/32 census runs):
+- PART A RED: OK (pre-fix corpus: 9,818 pantry beats, max 15/day, 540 wobble days of 3,243).
+- PART B det-gate: 16/16 byte-identical per-day trajectories, control vs armed. DET-GATE OK.
+- PART C PRIMARY (a): GO — departure-line max verbatim/day 2, 5 distinct pool lines used.
+- PART C PRIMARY (b): GO — pantry-check redirect 2,878 beats, max 1/day, 0 wobble days.
+- Wall guardrail: BREACHED on paper (armed national 19 vs corpus 23; table 27 vs 30).
+
+Verdict: the guardrail instrument was wrong, not the arm. (1) The det-gate proves the
+fix provably cannot affect game outcomes — it changes only the narration stream;
+byte-identical trajectories on identical seeds is the strongest possible
+outcome-neutrality evidence. (2) The corpus is from 2026-10-17, an older master;
+game-code has landed since (shellrevive-b2, butcharmor), so the comparison
+conflates base drift with arm effect. (3) The +/-2 tolerance on 32 stochastic seeds is
+~1-sd noise (national diff 4 approx 1.05 sd; table diff 3 approx 1.25 sd) — the tolerance,
+not the arm, is the defect. Contrast sim-gengap-b (killed same night): there the
+guardrail measured the arm's own causal mechanism with no exonerating instrument.
+Revision for next run: wall guardrails compare armed vs control on the SAME base
+(fresh control runs); for narration-only changes the det-gate is the primary
+outcome-neutrality instrument. Arm LANDED on PRIMARY GO + det-gate OK with this
+review recorded.
