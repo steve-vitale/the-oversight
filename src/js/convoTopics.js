@@ -371,7 +371,11 @@
         const _lc = (v || {}).lastContest;
         if (_lc && (day - (_lc.day || 0)) >= 0 && (day - (_lc.day || 0)) <= 7) {
           showEv = { kind: 'show', name: _lc.name || 'a contest',
-            self: (_lc.ids || []).indexOf(vid) >= 0, ids: (_lc.ids || []).slice() };
+            self: (_lc.ids || []).indexOf(vid) >= 0, ids: (_lc.ids || []).slice(),
+            // SHOW-DEATH (journey crisis r23 2026-10-18): the taken who died
+            // on camera (recorded by _cxKillContestant) — the lines grieve
+            // the outcome, not just the abduction.
+            died: (_lc.died || []).slice() };
         }
       } catch (e) { showEv = null; }
       // CARE MEMORY (journey crisis r18 2026-10-16): the healer arc was
@@ -1223,10 +1227,45 @@
           // grab. The participant gets the first-person variant; bystanders
           // name the taken (firstRef, knowledge-gated). The contest name is
           // the System's own title — the village heard it announced.
+          // SHOW-DEATH (journey crisis r23 2026-10-18): when a taken villager
+          // DIED on camera (ev.died, recorded by _cxKillContestant), the lines
+          // grieve the outcome — never the abduction alone, and never "came
+          // back like nothing happened" for someone who didn't come back
+          // (transcript-verified 2026-10-18).
           const cname = ev.name || 'a contest';
-          if (ev.self) return [
-            '"They took me. ' + cname + ' — up there, on the screens, in front of everyone. I\'m still turning it over."',
-            '"You saw it too, right? ' + cname + '. Tell me I didn\'t imagine the lights."',
+          let _diedNames = [];
+          let _diedN = 0;
+          try {
+            const _diedIds = (ev.died || []).filter(id => id && id !== 'player');
+            _diedN = _diedIds.length;
+            _diedNames = _diedIds
+              .map(id => { try { return this.firstRef(id); } catch (e) { return null; } })
+              .filter(Boolean).slice(0, 2);
+          } catch (e) {}
+          const _dn = _diedNames.length ? _diedNames.join(' and ') : null;
+          if (ev.self) {
+            // A survivor of a multi-take where someone died beside them.
+            // (The dead never talk — self-dead is impossible here.)
+            if (_diedN && _dn) return [
+              '"I was there — ' + cname + ', on the screens. ' + _dn + ' didn\'t make it back. I\'m still turning it over."',
+              '"The whole fire watched. ' + _dn + ' is gone. The cameras kept rolling."',
+            ];
+            if (_diedN) return [
+              '"I was there — ' + cname + '. Not everyone came back. I\'m still turning it over."',
+              '"The whole fire watched. The cameras kept rolling."',
+            ];
+            return [
+              '"They took me. ' + cname + ' — up there, on the screens, in front of everyone. I\'m still turning it over."',
+              '"You saw it too, right? ' + cname + '. Tell me I didn\'t imagine the lights."',
+            ];
+          }
+          if (_diedN && _dn) return [
+            '"They took ' + _dn + ' — ' + cname + ', on the screens. ' + (_diedN > 1 ? 'Neither came home' : 'They didn\'t come home') + '."',
+            '"The whole fire watched ' + cname + '. ' + _dn + ' is gone — the cameras kept rolling."',
+          ];
+          if (_diedN) return [
+            '"They took some of us — ' + cname + ', on the screens. Not everyone came home."',
+            '"The screens showed everything. The fire\'s quieter tonight."',
           ];
           let taken = 'some of us';
           try {

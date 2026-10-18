@@ -2111,7 +2111,14 @@
     // t2LatelyEvent surfaces it as kind 'show' for a 7-day window.
     try {
       const _vv = this.state.village || {};
-      _vv.lastContest = { day: (this.state.scholar || {}).day || 1, name: contest.name || contest.id, ids: ids.slice() };
+      _vv.lastContest = { day: (this.state.scholar || {}).day || 1, name: contest.name || contest.id, ids: ids.slice(),
+        // SHOW-DEATH (journey crisis r23 2026-10-18): the grab is only the
+        // first half of the story — when a taken villager dies on camera,
+        // _cxKillContestant records their id here so the 'show' lately lines
+        // can grieve the outcome, not just the abduction (transcript-verified
+        // 2026-10-18: "Came back like nothing happened" for a villager who
+        // didn't come back at all).
+        died: [] };
     } catch (e) {}
   };
 
@@ -6002,6 +6009,19 @@
       if (pid && pid !== 'player' && this.fireCrisis)
         this.fireCrisis('blood-on-air', { name: this.displayName(pid) });
     } catch (e3) {}
+    // SHOW-DEATH (journey crisis r23 2026-10-18): the village's show memory
+    // (v.lastContest, planted by fireContest) drives the 'show' lately lines
+    // — but it recorded only the grab. Record the dead on it too (only when
+    // they were taken for THIS contest: ids are the taken), so the village
+    // talks about the death, not just the abduction.
+    try {
+      const _vv = this.state.village || {};
+      const _lc = _vv.lastContest;
+      if (_lc && Array.isArray(_lc.ids) && _lc.ids.indexOf(pid) >= 0) {
+        _lc.died = _lc.died || [];
+        if (_lc.died.indexOf(pid) < 0) _lc.died.push(pid);
+      }
+    } catch (eD) {}
   };
   // GOSSIP AFTERMATH (Steve 2026-10-08): contest news travels by mouth, not
   // broadcast — the village talks about who went, who won, who died, who
