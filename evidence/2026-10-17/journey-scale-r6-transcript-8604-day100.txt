@@ -1,0 +1,30 @@
+=== seed 8604 day 100 — conversation with Michael (gen_53y4uyl) ===
+occupation=trail crew lead temperament=stoic trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Hey — I found some Wild Black Cherry today. You were right, it was right where you said."
+(turn0 choices: agency:ask_field, alive:event:show, alive:want:curious, dlg:more, dlg:react, dlg:doubt, dlg:invite, teach, dlg:subject, confront:d_nqz5sn6, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "So what's your plan here? Just... get through it?"
+(want=curious stage=1)
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Plans change. But having one — even a bad one — beats drifting."
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "I've started noticing who eats first and who waits. Tells you everything about a person. That's all."
+(want=curious stage=2)
+YOU: [dlg:more] "What else?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

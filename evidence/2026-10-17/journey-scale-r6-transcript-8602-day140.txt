@@ -1,0 +1,24 @@
+=== seed 8602 day 140 — conversation with Abdulkarim (gen_uc0u1jj) ===
+occupation=Veterinarian temperament=stoic trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I dreamed about the pods again. Abdulmohsen's face. Tell me I'm not the only one who hears the humming."
+(turn0 choices: alive:event:defense, dlg:more, dlg:commit, dlg:cant, dlg:help, teach, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my grandfather, Abdulmohsen. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=promised

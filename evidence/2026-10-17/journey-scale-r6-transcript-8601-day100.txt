@@ -1,0 +1,32 @@
+=== seed 8601 day 100 — conversation with Oscar (gen_i2jftig) ===
+occupation=blacksmith temperament=warm trust=91 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Oscar sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence, confront:d_tfg8mzt)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Please — tell me you've got food to spare. I'm running on empty here. I can't keep going like this."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Greta is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Greta said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I taste the water before the others drink for Greta, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=3)
+closing line: "Anyway. I'm glad we talked. Really."
+want final: id=ask_favor stage=3 resolution=promised

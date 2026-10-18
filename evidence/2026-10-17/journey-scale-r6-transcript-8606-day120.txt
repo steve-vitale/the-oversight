@@ -1,0 +1,27 @@
+=== seed 8606 day 120 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something from your old life that's actually useful here?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Between us — Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Nothing's wasted. Not really. It all comes back around. Give it time."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Word is you know what you're doing out there."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

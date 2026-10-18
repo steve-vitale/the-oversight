@@ -1,0 +1,27 @@
+=== seed 8605 day 120 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something from your old life that's actually useful here?"
+(turn0 choices: ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Nothing's wasted. Not really. It all comes back around."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "What's this about? Did you hear? Jorge just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talking. We'll figure it out."
+want final: id=curious stage=3 resolution=engaged

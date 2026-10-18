@@ -1,0 +1,15 @@
+=== seed 8603 day 80 — conversation with Ivan (gen_y0atfoa) ===
+occupation=infantry soldier temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in? Anyway, I should move."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, alive:event:show, party_name, dlg:commit, dlg:cant, recap, dlg:subject, leave)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "I can't sit still anymore. But this was good. Quick, but good."
+want final: id=ask_favor stage=3 resolution=promised

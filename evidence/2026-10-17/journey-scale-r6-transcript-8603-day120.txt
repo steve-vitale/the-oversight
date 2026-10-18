@@ -1,0 +1,32 @@
+=== seed 8603 day 120 — conversation with Ella (ella_johnson) ===
+occupation=ESL teacher temperament=dry trust=23 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the most useful thing you've learned — What's the most useful thing you've learned since we got here?"
+(turn0 choices: ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, deflect_q, leave, silence)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "We're all students of the same hard school. Share your notes sometime. Funny how that works."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "The Vigil. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged

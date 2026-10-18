@@ -1,0 +1,18 @@
+=== seed 8608 day 100 — conversation with Oscar (gen_0u6brky) ===
+occupation=emergency dispatcher temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Small hopes are the load-bearing kind. Keep collecting them."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Did you hear? Tymish just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

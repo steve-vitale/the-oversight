@@ -1,0 +1,29 @@
+=== seed 8602 day 120 — conversation with Leonid (app_mgpsphib120) ===
+occupation=farmer temperament=dry trust=62 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Can I trust you? I mean really."
+(turn0 choices: ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "Abdulkarim? A Veterinarian, back before. Solid person. Extremely normal, all of it."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Alright — I should get back to it."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

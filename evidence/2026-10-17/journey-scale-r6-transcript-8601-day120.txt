@@ -1,0 +1,32 @@
+=== seed 8601 day 120 — conversation with Morgan (visjoin_115) ===
+occupation=Pharmacist temperament=anxious trust=21 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're good at — What's something you're good at that nobody here knows about?"
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, ans:q_skill:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Everyone's got a hidden card. I'm keeping a mental deck of this whole village."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "They took Daniyar and Brian — The Lottery, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

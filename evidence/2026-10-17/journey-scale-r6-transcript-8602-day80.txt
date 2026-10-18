@@ -1,0 +1,29 @@
+=== seed 8602 day 80 — conversation with Lauren (gen_3amavv8) ===
+occupation=trail crew lead temperament=sardonic trust=94 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Any regrets? The real kind, not the small stuff. I'm sure it'll be fine."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, ans:q_regret:a_tell, ans:q_regret:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Wait, wait — Regrets are just love with nowhere to go. That's what I tell myself, anyway."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "I can help — Did you hear? Abdulkarim just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

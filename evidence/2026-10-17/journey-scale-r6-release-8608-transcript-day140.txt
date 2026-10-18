@@ -1,0 +1,21 @@
+=== seed 8608 day 140 — conversation with Oscar (gen_0u6brky) ===
+occupation=emergency dispatcher temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're angry — Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Feel it, then use it. That's the whole trick. I'm still learning it myself."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Hm. Did you hear? George just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,24 @@
+=== seed 8603 day 100 — conversation with Ivan (gen_y0atfoa) ===
+occupation=infantry soldier temperament=restless trust=90 dead=false mood=grieving
+want: seek_taken (stage 0, fromSeed)
+
+THEM: "Can we talk?" Ivan glances around first. "People are saying things. About you. Is any of it true?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, silence, party_name)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "People are saying things. About you. ...I'd watch how you act around the fire."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's the whole of it. Sorry."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=seek_taken stage=0)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_taken stage=3 resolution=unestablished

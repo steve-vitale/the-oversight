@@ -1,0 +1,27 @@
+=== seed 8601 day 80 — conversation with Oscar (gen_i2jftig) ===
+occupation=blacksmith temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the worst thing you've done — What's the worst thing you've done since the sky changed? Anyway — how are YOU doing?"
+(turn0 choices: ans:q_guilty:a_tell, ans:q_guilty:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "The math doesn't add up out here. Be kind to yourself about the remainders."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Real talk — Did you hear? Maya just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say. Good talking."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

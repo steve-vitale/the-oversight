@@ -1,0 +1,27 @@
+=== seed 8606 day 80 — conversation with Gertrude (gen_gujngnq) ===
+occupation=interpreter temperament=mischievous trust=90 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "Bottom line: I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [goon] "Take your time."
+THEM: The conversation cools to something businesslike.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Word is you know what you're doing out there."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=curious stage=3 resolution=engaged

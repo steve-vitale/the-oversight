@@ -1,0 +1,15 @@
+=== seed 8608 day 120 — conversation with Oscar (gen_0u6brky) ===
+occupation=emergency dispatcher temperament=earnest trust=90 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "What's something you're good at that nobody here knows about?"
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Did you hear? Yuki just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

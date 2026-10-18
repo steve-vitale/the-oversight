@@ -1,0 +1,32 @@
+=== seed 8606 day 100 — conversation with Ryan (visjoin_87) ===
+occupation=Pharmacist temperament=dry trust=22 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're good at — What's something you're good at that nobody here knows about?"
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:a_deflect, ans:q_skill:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "The Moot. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Burdock — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged

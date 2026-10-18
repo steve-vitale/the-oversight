@@ -1,0 +1,24 @@
+=== seed 8608 day 80 — conversation with Oscar (gen_0u6brky) ===
+occupation=emergency dispatcher temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Is there someone here you don't trust? Be honest."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Did you hear? Dieter just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talking. We'll figure it out."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,24 @@
+=== seed 8602 day 100 — conversation with Lauren (gen_3amavv8) ===
+occupation=trail crew lead temperament=sardonic trust=94 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're good at — What's something you're good at that nobody here knows about? Just... be straight with me."
+(turn0 choices: agency:ask_expedition, ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Everyone's got a hidden card. I'm keeping a mental deck of this whole village."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Mia is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,15 @@
+=== seed 8605 day 100 — conversation with Amy (gen_8pm0e1k) ===
+occupation=Wild food forager temperament=earnest trust=91 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Come, sit — I hate to ask, but tell me you've got food to spare. I'm running on empty here. My hands shake when I try to work."
+(turn0 choices: alive:event:show, alive:want:ask_favor, dlg:help, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's been days since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=ask_favor stage=3 resolution=promised
