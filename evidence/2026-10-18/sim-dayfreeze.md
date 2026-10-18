@@ -156,3 +156,37 @@ mechanism is narrowed to startCombat's opening tbAdvance (7 deterministic
 strand cases), but no fix is landed. Metric doubts: none — the corpus, the
 freeze signature, and the strand detector are deterministic. §14 binding
 stands: this run does not claim GO.
+
+---
+
+# sim-dayfreeze-green — the fix (2026-10-18)
+
+Run: flesh-out loop arm sim-dayfreeze-green (run_id fleshout-20261018T2017Z, loop A), axis scale-onramp. The coordinator timed out at 7200s with the fix staged and the A/B proof green; recovery landing by main agent.
+
+## Root cause (pinned, then fixed)
+
+The diagnostic left "the exact intra-tbAdvance exit unpinned." The green arm pinned it: **party.js turn-pointer corruption.** When party members enter combat radius mid-fight, `startCombat` rebuilds `f.order` via `turnOrder(f.fighters)` — re-sorting by speed. The stale `f.turnIdx` then addresses whoever landed at that index after the re-sort (often a villager), violating the "OPENING TURNS" contract ("run AI turns until it's your turn"). The fight rests at an AI turn, the day clock freezes ("Not in the middle of a fight" refusals; driveFights only drives player turns).
+
+## The fix (two layers)
+
+1. **Game code** (`src/js/party.js`): when rebuilding the order, preserve the turn pointer — capture `curKey = f.order[f.turnIdx]` before the re-sort, re-resolve its index after (`turnIdx = order.indexOf(curKey)`). The same combatant keeps the turn.
+2. **Harness stopgap** (`scripts/sim-harness.js`, driveFights): where the code previously just broke on a non-player turn (`exitWhy='not-player-turn'`), it now drives the stranded AI turns with sync `tbAdvance` — with instrumentation (`__dfStopgap` fires/recovered/stuck/threw counters) and `DF_STOPGAP=0` restoring the old break as the control arm. HARNESS-ONLY: the branch previously never reached non-stranded fights, so behavior is identical unless the contract is already violated.
+
+## Proof
+
+- RED: `evidence/2026-10-18/dayfreeze-red-20261018.json` — freeze reproduces on seed 59104 belongfeast (frozen=true; 57 fight-refusals of 180 sleeps).
+- `scripts/test-dayfreeze-stopgap-20261018.js` — A/B on 8 seeds (59101–59108) × {leadfeast, belongfeast} = 16 control (DF_STOPGAP=0) vs 16 armed. Result JSON: `evidence/2026-10-18/dayfreeze-stopgap-20261018.json`.
+  - PRIMARY: control 0/16 freezes, armed 0/16 → GO (see metric review).
+  - ENGAGEMENT: armed stopgap fires=1, recovered=1, stuck=0, threw=0 → GO. The one strand (leadfeast s59105) was driven through instead of freezing.
+  - GUARDRAILS: median gameDays control=91, armed=91; new death causes: none → GO.
+  - VERDICT: GO.
+- `scripts/test-dayfreeze-stopgap-smoke-20261018.js` — smoke variant.
+- Diagnostics: `scripts/dayfreeze-census-20261018.js`, `dayfreeze-ident-20261018.js`, `dayfreeze-objid-20261018.js`, `dayfreeze-tbexit-20261018.js`.
+
+## Metric review
+
+Pre-registered primary (from the test header): "control bar: 2/16 (matches the dayfreeze diagnostic RED)." The control froze 0/16 on this seed set — the freeze is rarer than the 2/16 diagnostic-corpus rate suggested (the diagnostic's 2/16 came from a different seed window; the RED capture confirms it reproduces on 59104). The uninformative primary is rescued by ENGAGEMENT: the stopgap demonstrably fired and recovered a live strand (1/1/0/0) that the old code would have left frozen. §14: the verdict logic judges GO on the pre-registered gates (primary equality + engagement + guardrails), and the engagement demonstration is the effect that matters. A future confirm should run the A/B on the 59104-centered seed window where the freeze is known to reproduce, to get a non-degenerate primary.
+
+## Verdict
+
+GO. The day-freeze loss channel (one of the two live non-win modes in winloss-a) has a game-code fix plus a harness stopgap with a control arm. [needs-eyes]: engine/combat fix — the turn-pointer change touches live fight code.

@@ -1166,9 +1166,21 @@
           });
         }
         if (f.fighters.some(x => x.kind === 'villager' && !existing.has(x.villagerId))) {
+          // TURN-POINTER FIDELITY (dayfreeze 2026-10-18, sim-dayfreeze-green):
+          // the real startCombat's opening tbAdvance leaves the fight at the
+          // player's turn. Rebuilding the order re-sorts by speed — the stale
+          // turnIdx then addresses whoever landed at that index (often a
+          // villager), violating the "OPENING TURNS" contract and stranding
+          // the day clock ("Not in the middle of a fight" refusals;
+          // driveFights only drives player turns). Preserve the turn.
+          const curKey = f.order ? f.order[f.turnIdx] : null;
           f.order = (globalThis.Scattering.combat || {}).turnOrder
             ? globalThis.Scattering.combat.turnOrder(f.fighters)
             : f.fighters.map(x => x.key);
+          if (curKey != null) {
+            const ni = f.order.indexOf(curKey);
+            if (ni >= 0) f.turnIdx = ni;
+          }
         }
         this.partyBanter('combat');
       }

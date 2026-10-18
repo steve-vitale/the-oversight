@@ -731,7 +731,43 @@ function driveFightsImpl(Game, policy, ctx) {
         p.moveLeft = 0; p.acted = true;
         Game.tbAfterPlayerAction();
       } catch (e) { exitWhy = 'default-turn-threw'; break; }
-    } else { exitWhy = 'not-player-turn'; break; }
+    } else if (process.env.DF_STOPGAP === '0') { exitWhy = 'not-player-turn'; break; } else {
+      // DAYFREEZE STOPGAP (2026-10-18, sim-dayfreeze-green): startCombat's
+      // opening tbAdvance can strand a LIVE fight at an AI turn — the
+      // "OPENING TURNS" contract ("run AI turns until it's your turn",
+      // game.js) is violated in 7 deterministic cases on the winseat corpus
+      // (evidence/2026-10-18/sim-dayfreeze.md). The game-code root cause is
+      // unpinned; until it lands, drive the stranded AI turns here with the
+      // sync tbAdvance so the sim's day clock doesn't freeze. HARNESS-ONLY:
+      // this branch previously just broke, so no non-stranded fight ever
+      // reaches this code — behavior is identical unless the contract is
+      // already violated. tbAdvance never acts FOR the player: it stops at
+      // the player turn (tbBeginTurn) or ends the fight.
+      // DF_STOPGAP=0 restores the old break (control arm for A/B).
+      try {
+        const st = (Game.__dfStopgap || (Game.__dfStopgap = { fires: 0, recovered: 0, stuck: 0, threw: 0 }));
+        st.fires++;
+        Game.tbAdvance();
+        const f1 = Game.tbfight;
+        if (!f1 || f1.over || Game.tbIsPlayerTurn()) { st.recovered++; }
+        else {
+          // Still live at a non-player turn after a full tbAdvance: the
+          // contract violation is state-deterministic, not transient — a
+          // second call would strand the same way. Break loudly; the
+          // no-progress guard below would only spin on it.
+          st.stuck++;
+          try { (ctx.notes || (ctx.notes = [])).push('driveFights: stopgap tbAdvance left live fight at non-player turn (stall)'); } catch (e2) {}
+          exitWhy = 'ai-turn-stall'; break;
+        }
+      } catch (e) {
+        try {
+          const st2 = (Game.__dfStopgap || (Game.__dfStopgap = { fires: 0, recovered: 0, stuck: 0, threw: 0 }));
+          st2.threw++;
+          (ctx.notes || (ctx.notes = [])).push('driveFights: stopgap tbAdvance threw: ' + (e && e.message));
+        } catch (e2) {}
+        exitWhy = 'tbAdvance-threw'; break;
+      }
+    }
     const s = sig();
     if (s === lastSig) { if (++still > 10) { try { (ctx.notes || (ctx.notes = [])).push('driveFights: no progress for 10 rounds, breaking'); } catch (e2) {} exitWhy = 'no-progress'; break; } }
     else { still = 0; lastSig = s; }
