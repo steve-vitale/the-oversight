@@ -1,0 +1,26 @@
+=== seed 9502 day 80 — conversation with Hank (gen_533oqmq) ===
+occupation=Chef temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking. Seen worse."
+(turn0 choices: alive:event:show, alive:want:ask_favor, dlg:help, dlg:details, dlg:cant, teach, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "I haven't eaten right in days. I can't pull my weight like this. Anything you can spare, I'll make it stretch."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Sassafras — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Common Plantain — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Gotta run. Literally. Bye!"
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

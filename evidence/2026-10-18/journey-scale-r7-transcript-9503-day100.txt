@@ -1,0 +1,24 @@
+=== seed 9503 day 100 — conversation with Paola (gen_okin5re) ===
+occupation=Pharmacist temperament=fidgety trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Hey — I found some Ghost Pipe today. You were right, it was right where you said."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, dlg:invite, dlg:more, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I'm going hungry — have you got anything to spare? Anything? I can't keep going like this."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with. Sorry, what was the question."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I haven't eaten right in days. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

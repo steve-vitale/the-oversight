@@ -1,0 +1,27 @@
+=== seed 9505 day 140 — conversation with Ernesto (gen_ej05ov8) ===
+occupation=Dentist temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "I tried the Ghost Pipe like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: agency:ask_field, alive:want:curious, alive:event:show, dlg:invite, dlg:more, dlg:react, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "When's the last time you really laughed?"
+(want=curious stage=1)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "They took you — The Maw, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged

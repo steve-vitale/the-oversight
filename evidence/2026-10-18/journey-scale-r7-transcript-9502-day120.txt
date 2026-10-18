@@ -1,0 +1,12 @@
+=== seed 9502 day 120 — conversation with Hank (gen_533oqmq) ===
+occupation=Chef temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Right — things to do, always things to do."
+want final: id=ask_favor stage=3 resolution=promised

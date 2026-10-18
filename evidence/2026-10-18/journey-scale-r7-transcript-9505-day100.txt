@@ -1,0 +1,29 @@
+=== seed 9505 day 100 — conversation with Ernesto (gen_ej05ov8) ===
+occupation=Dentist temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you still sing — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+(turn0 choices: ans:q_song:a_yes, ans:q_song:a_no, ans:q_song:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going. I mean it."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You feel that? The air before a storm. That's the village right now."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [goon] "And then?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [goon] "And then?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=curious stage=2)
+YOU: [goon] "And then?"
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

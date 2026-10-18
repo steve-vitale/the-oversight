@@ -1,0 +1,32 @@
+=== seed 9505 day 80 — conversation with Ernesto (gen_ej05ov8) ===
+occupation=Dentist temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Any regrets? The real kind, not the small stuff."
+(turn0 choices: agency:ask_field, ans:q_regret:a_tell, ans:q_regret:a_vague, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "He lowers the crown. That's the Rut King telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Good King Henry. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "They took me. Windfall — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I count portions out loud before eating. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same as always: we endure."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+closing line: "Well. That was conversation."
+want final: id=curious stage=3 resolution=engaged

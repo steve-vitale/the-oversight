@@ -1,0 +1,26 @@
+=== seed 9504 day 120 — conversation with Willow (gen_zttk19l) ===
+occupation=zookeeper temperament=anxious trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Zeyu?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_4jd2iey)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. Think, then act."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's my uncle, Zeyu. Was taken. He could fix anything. Anything. I wonder what they even measure. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Blackberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Yarrow — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=3)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Okay. We'll pick this up later."
+(want=seek_taken stage=3)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=promised

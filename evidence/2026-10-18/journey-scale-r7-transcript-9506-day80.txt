@@ -1,0 +1,29 @@
+=== seed 9506 day 80 — conversation with Deirdre (gen_x6g8rh5) ===
+occupation=taxi driver temperament=cautious trust=90 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Antonella and Aki this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Aki said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody says Aki's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I retie every loose knot in passing for Aki, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=3)
+YOU: [goon] "What happened next?"
+THEM: "Okay. We'll pick this up later."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

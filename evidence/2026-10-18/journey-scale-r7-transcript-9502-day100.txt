@@ -1,0 +1,15 @@
+=== seed 9502 day 100 — conversation with Hank (gen_533oqmq) ===
+occupation=Chef temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — tell me you've got food to spare. I'm going hungry here. My hands shake when I try to work."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, dlg:help, dlg:cant, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's been days since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "I can't sit still anymore. But this was good. Quick, but good."
+want final: id=ask_favor stage=3 resolution=promised

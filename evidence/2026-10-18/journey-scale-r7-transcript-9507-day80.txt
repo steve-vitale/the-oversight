@@ -1,0 +1,31 @@
+=== seed 9507 day 80 — conversation with Raj (raj_patel) ===
+occupation=Pharmacist temperament=cautious trust=22 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs."
+(turn0 choices: alive:want:ask_favor, dlg:help, alive:event:mourning, dlg:details, dlg:cant, teach, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "I did the count twice. The count doesn't change. Nobody's worked the north treeline by the fallen oak in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Done. The north treeline by the fallen oak, before the dew dries. Pack and knife. We travel light."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Blanca is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I braid grass while listening to plans at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I'm picking up Blanca's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: "Alright — carefully, now. Both of us."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

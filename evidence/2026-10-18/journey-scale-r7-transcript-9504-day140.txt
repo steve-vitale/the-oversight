@@ -1,0 +1,27 @@
+=== seed 9504 day 140 — conversation with Willow (gen_zttk19l) ===
+occupation=zookeeper temperament=anxious trust=91 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "What's this about? Blackberry — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party, confront:d_4jd2iey)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=seek_comfort stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=seek_comfort stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Last time things were different. They always are." "Since Amelia died... I keep expecting to see Amelia at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_comfort stage=0)
+YOU: [dlg:react] "I see."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=seek_comfort stage=0)
+YOU: [dlg:react] "Huh."
+THEM: "Anyway." A small smile.
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=seek_comfort stage=3 resolution=unestablished
