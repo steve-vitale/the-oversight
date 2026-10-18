@@ -1,0 +1,32 @@
+=== seed 9001 day 85 — conversation with Ethan (ethan_hunt) ===
+occupation=trail crew lead temperament=bold trust=92 dead=false mood=cold
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I still haven't found anyone. Any chance?"
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? That's the truth of it."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You saw it too, right? The Pit. Tell me I didn't imagine the lights."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Mark my words."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Did you hear? Rabah just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "You want to know about that? Okay." "I wonder if Manchester, England misses me. Stupid. Places don't miss people. ...Do they?"
+(want=ask_favor stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=2)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=stated

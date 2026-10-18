@@ -1,0 +1,32 @@
+=== seed 9002 day 50 — conversation with Zuri (gen_rkt8dp4) ===
+occupation=truck driver temperament=steady trust=80 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about themselves — we wandered off it, 5 days back. 'Anyway. What did you want? One step at a time.' We still owe the gossip a proper ending, too."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? This isn't new."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "Penelope is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." Zuri snorts. "Hassan said that? Please. From Karachi, Pakistan — I knew them from before. The story doesn't survive five minutes of scrutiny."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "Look — Do you think we'll look back on this and call it the good old days? God, I hope not."
+(want=curious stage=2)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 9001 day 90 — conversation with Regina (gen_rd50jvn) ===
+occupation=carpenter temperament=cautious trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about the gossip — that was 13 days back. Still on your mind? 'You really want my take? ...Yeah. Okay. I think we're being tested.'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took you — The Echo, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "Henry is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Good question." "I could keep talking, but I'd just be repeating myself with more hand gestures."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+closing line: "Well. We'll see how it goes."
+want final: id=curious stage=3 resolution=engaged

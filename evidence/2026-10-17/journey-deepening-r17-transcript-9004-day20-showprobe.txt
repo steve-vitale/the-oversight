@@ -1,0 +1,32 @@
+=== seed 9004 day 20 — conversation with Carolina (gen_z5c0z6u) ===
+occupation=programmer temperament=restless trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence, confront:d_6fl1b01)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Silke is back. Walked in like they'd never left. Can't sit still, you know?"
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. Not that it matters."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=1)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Sassafras — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=1)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Groundnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=1)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Blackberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=1)
+closing line: "Take care of yourself."
+want final: id=seek_taken stage=3 resolution=unresolved

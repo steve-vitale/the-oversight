@@ -1,0 +1,32 @@
+=== seed 9002 day 31 — conversation with Penelope (gen_pvkcbqy) ===
+occupation=plumber temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about each other — that was 10 days back. Still on your mind? 'Sure — what's on your mind?' We still owe your story a proper ending, too. Worth considering."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, more, silence, confront:d_j8rz86s)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Sure — My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Something's off with Valentina. I mentioned it to the others and they went quiet, which tells you everything. That's where we are."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "So what's your deal?"
+THEM: "You want to know about that? Okay." "Do you ever wonder what the aliens eat? Like, do they have potlucks?"
+(want=ask_favor stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=0)
+YOU: [ask:fears] "What scares you?"
+THEM: "Huh. Let me think about that." "The person they become when angry." A pause. "Stupid, maybe. But there it is."
+(want=ask_favor stage=0)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unestablished

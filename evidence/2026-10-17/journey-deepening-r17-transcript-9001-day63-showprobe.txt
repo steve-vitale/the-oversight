@@ -1,0 +1,32 @@
+=== seed 9001 day 63 — conversation with Regina (gen_rd50jvn) ===
+occupation=carpenter temperament=cautious trust=90 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "Sure — DeShawn and I never did finish talking about the gossip — that was 14 days back. You weren't there for that one — DeShawn was. Want to hear where it left off? '…Yeah, that was me. I walked away from Haven once. Didn't look back.' We still owe your story a proper ending, too."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "We lost Erik and DeShawn this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Aroha? A comic shop owner, back before. Solid person."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "You want to know about that? Okay." "I'm talked out on that topic. It's not you. It's the topic."
+(want=ask_favor stage=0)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=unestablished

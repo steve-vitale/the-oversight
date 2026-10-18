@@ -1,0 +1,29 @@
+=== seed 9001 day 60 — conversation with Regina (gen_rd50jvn) ===
+occupation=carpenter temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: Regina wants you to join the conversation.
+(turn0 choices: agency:ask_field, invite_party, alive:event:defense, alive:thread:lately, alive:want:ask_favor, ask:lately, ask:you, ask:goal, teach, skill_learn:wound_care, skill_teach:old_world_cache, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I can't reach this properly. Could you take a look?"
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. Just my read."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "Do go on."
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

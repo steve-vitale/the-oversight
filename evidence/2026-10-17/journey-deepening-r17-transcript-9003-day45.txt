@@ -1,0 +1,27 @@
+=== seed 9003 day 45 — conversation with Aaliyah (gen_4jyy7wh) ===
+occupation=community gardener temperament=sardonic trust=90 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About the most useful thing you've learned — What's the most useful thing you've learned since we got here? What could go wrong."
+(turn0 choices: agency:ask_field, deflect_q, ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Woodland Strawberry. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Did you hear? Amal just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

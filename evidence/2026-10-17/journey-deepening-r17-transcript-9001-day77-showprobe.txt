@@ -1,0 +1,32 @@
+=== seed 9001 day 77 — conversation with Regina (gen_rd50jvn) ===
+occupation=carpenter temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about each other — we left it mid-thought, 5 days back. 'You're family now. Chosen family — the kind that actually counts." "That's where we are.' We still owe your story a proper ending, too."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:thread:lately, dlg:more, dlg:react, recap, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took you — Hardened Riddle Me This, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Ethan? A trail crew lead, back before. Solid person."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Good question." "I got nothing new. The well's dry, the bucket's empty, the rope broke."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=0)
+closing line: "This stays between us, right? Right."
+want final: id=ask_favor stage=3 resolution=unestablished

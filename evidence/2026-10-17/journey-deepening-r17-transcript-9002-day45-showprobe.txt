@@ -1,0 +1,32 @@
+=== seed 9002 day 45 — conversation with Zuri (gen_rkt8dp4) ===
+occupation=truck driver temperament=steady trust=59 dead=false mood=grieving
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway. That's the whole of it."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:want:ask_favor, dlg:help, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Simple as that."
+(want=ask_favor stage=1)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Landon is gone and Penelope is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? That's where we are."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Did you hear? Mateo just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "People ask what I did before. I was a truck driver. Now I'm... whatever today needs."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? One step at a time."
+(want=ask_favor stage=1)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Huh. Let me think about that." "The fire going out — and now losing people. That one isn't abstract anymore."
+(want=ask_favor stage=1)
+closing line: "Sorry. I need a minute."
+want final: id=ask_favor stage=3 resolution=unresolved

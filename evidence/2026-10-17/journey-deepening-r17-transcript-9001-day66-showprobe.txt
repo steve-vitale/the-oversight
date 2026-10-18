@@ -1,0 +1,32 @@
+=== seed 9001 day 66 — conversation with Ethan (ethan_hunt) ===
+occupation=trail crew lead temperament=bold trust=95 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I hate to ask twice, but it's still open. Will you? Anyway, that's me."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Good talking."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Since DeShawn died... I keep expecting to see DeShawn at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Performance Review — A red line draws itself across the ground. It hunts by day — watch the open ground."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "People are talking about Regina. Take it for what it's worth. You know?"
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Let me be straight — Honestly? I think about it more than I say."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? No point pretending otherwise."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "I used to need noise to sleep. Now I need silence and I can't find enough of it."
+(want=ask_favor stage=2)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=stated

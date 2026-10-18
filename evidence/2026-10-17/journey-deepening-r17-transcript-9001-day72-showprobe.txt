@@ -1,0 +1,32 @@
+=== seed 9001 day 72 — conversation with Regina (gen_rd50jvn) ===
+occupation=carpenter temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Spicebush — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: alive:event:mourning, alive:thread:lately, dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "You asked me that before. It's a different question now." "Since DeShawn died... I keep expecting to see DeShawn at the fire. Stupid."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Could be wrong, though."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Did you hear? Aroha just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? ...if that helps."
+(want=ask_favor stage=0)
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "Let's file that under 'discussed' and move on with our lives."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=0)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "That's where we are."
+(want=ask_favor stage=0)
+closing line: "I should get back. Stay sharp out there."
+want final: id=ask_favor stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 9004 day 101 — conversation with Henry (henry_zhang) ===
+occupation=emergency dispatcher temperament=cautious trust=90 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Tumelo is gone, Carolina is gone, Araceli is gone, and Alonso is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Probably — Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "I keep a mental list of everyone who's still kind. It's longer than you'd think."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=0)
+YOU: [ask:fears] "What scares you?"
+THEM: "Huh. Let me think about that." "Being forgotten." Said flat, like something rehearsed in the dark.
+(want=ask_favor stage=0)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=unestablished

@@ -1,0 +1,21 @@
+=== seed 9004 day 84 — conversation with Carolina (gen_z5c0z6u) ===
+occupation=programmer temperament=restless trust=90 dead=false mood=hungry
+want: curious (stage 0, fromSeed)
+
+THEM: Carolina wants you to join the conversation.
+(turn0 choices: invite_party, alive:event:show, alive:want:curious, ask:goal, ask:gossip, ask:spread_rumor, skill_learn:track_read, skill_teach:field_dressing, confront:d_6fl1b01, leave, silence)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=1)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Silke just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

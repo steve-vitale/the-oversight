@@ -1,0 +1,27 @@
+=== seed 9001 day 80 — conversation with Joaquín (app_mgpspik4166) ===
+occupation=carpenter temperament=anxious trust=26 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did with your hands — You look handy. What did you do with your hands, before? Probably fine. Probably."
+(turn0 choices: ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Hands remember things the head forgets. Watch what yours do when you're not thinking. Think, then act."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "Regina? A carpenter, back before. Solid person…"
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

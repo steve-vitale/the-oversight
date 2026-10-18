@@ -1,0 +1,32 @@
+=== seed 9003 day 93 — conversation with Brian (brian_otieno) ===
+occupation=zookeeper temperament=gentle trust=90 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether they can trust you — Can I trust you? I mean really. Just... be straight with me."
+(turn0 choices: deflect_q, ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "Between us — That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [goon] "Take your time."
+THEM: The conversation cools to something businesslike.
+(want=curious stage=2)
+YOU: [goon] "Take your time."
+THEM: "Trust is slow out here. That's fine. Slow things last."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "James? A carpenter, back before. Solid person. That's the priority."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Can I be honest? I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? No time to waste."
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "I keep thinking about what I left behind. Then I get hungry and stop thinking."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? That is all."
+(want=curious stage=2)
+closing line: "Sorry. I need a minute."
+want final: id=curious stage=3 resolution=engaged

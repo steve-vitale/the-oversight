@@ -1,0 +1,32 @@
+=== seed 9001 day 41 — conversation with Regina (gen_rd50jvn) ===
+occupation=carpenter temperament=cautious trust=56 dead=false mood=steady
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — You'll never guess what I saw by the treeline."
+(turn0 choices: agency:ask_field, alive:event:show, alive:want:share_news, dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=share_news stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "They took you — Hardened The Guest, on the screens. The whole fire watched. Nobody knew where to look."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=share_news stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It doesn't move. Big-Eyes, every time. It hunts by day — watch the open ground."
+(want=share_news stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It goes perfectly still and arches its back to the sun. Sunback, every time. It hunts by day — watch the open ground."
+(want=share_news stage=1)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "You didn't hear it from me, but Erik's story doesn't hold. A Chef, back before."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=share_news stage=1)
+YOU: [ask:personal] "So what's your deal?"
+THEM: "Good question." "I keep a mental list of everyone who's still kind. It's longer than you'd think. You'd know about that."
+(want=share_news stage=1)
+closing line: "Later."
+want final: id=share_news stage=3 resolution=unresolved

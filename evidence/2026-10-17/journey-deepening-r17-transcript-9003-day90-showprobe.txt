@@ -1,0 +1,32 @@
+=== seed 9003 day 90 — conversation with James (james_okonkwo) ===
+occupation=carpenter temperament=steady trust=69 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+(turn0 choices: deflect_q, ans:q_read:a_honest, ans:q_read:a_name, ans:q_read:a_none, ans:q_read:honest_pass, leave, silence)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "You saw it too, right? Hardened Siege. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Nikos? An aquarium keeper, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "The hardest part isn't the hunger or the cold. It's not knowing if anyone else made it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

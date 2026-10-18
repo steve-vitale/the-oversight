@@ -1,0 +1,32 @@
+=== seed 9002 day 81 — conversation with Zuri (gen_rkt8dp4) ===
+occupation=truck driver temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about who you left behind — we wandered off it. 'Between us — They're out there. Hold onto that. It's the truest thing we've got.'"
+(turn0 choices: invite_party, alive:event:show, alive:thread:recall, alive:want:curious, ask:lately, ask:you, ask:goal, teach, skill_learn:track_read, skill_teach:old_world_cache, offer_help, leave, silence)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "They took me. Who Ate It? — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Honestly, Something's off with Mateo. I mentioned it to the others and they went quiet, which tells you everything."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "That's all I've got on that one. For now."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "That's where we are."
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

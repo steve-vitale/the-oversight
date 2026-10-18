@@ -1,0 +1,32 @@
+=== seed 9003 day 23 — conversation with Naran (naran_tumen) ===
+occupation=bus driver temperament=dry trust=48 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Interesting — ...Hi. Sorry. I'm not good at the talking-to-strangers part."
+(turn0 choices: betrayal:accept, betrayal:decline, deflect_q, ans:q_quiet:a_kind, ans:q_quiet:a_help, ans:q_quiet:a_leave, leave, silence)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You saw it too, right? The Cache. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Did you hear? Brian just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Not that it matters."
+(want=curious stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Good question." "You know what I miss? Ulaanbaatar, Mongolia rain. Specific rain. I'm allowed to be specific. Allegedly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=curious stage=2)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Huh. Let me think about that." "Don't laugh. The laughter that sounds almost human."
+(want=curious stage=2)
+closing line: "I'm going to go stare at something else now."
+want final: id=curious stage=3 resolution=engaged

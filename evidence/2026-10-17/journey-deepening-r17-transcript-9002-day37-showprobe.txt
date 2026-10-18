@@ -1,0 +1,32 @@
+=== seed 9002 day 37 — conversation with Hassan (hassan_ali) ===
+occupation=Butcher temperament=steady trust=44 dead=false mood=grieving
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — Okay, so — something happened this morning. Anyway."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:want:share_news, dlg:more, dlg:react, dlg:doubt, recap, dlg:invite, teach, dlg:subject, confront:d_wckfd0s, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Doesn't matter now."
+(want=share_news stage=1)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Good question." "People are talking about Valentina. Take it for what it's worth. Simple as that."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Give it time."
+(want=share_news stage=1)
+YOU: [ask:personal] "So what's your deal?"
+THEM: "Good question." "I used to need noise to sleep. Now I need silence and I can't find enough of it."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=share_news stage=1)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "You want to know about that? Okay." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=share_news stage=1)
+YOU: [ask:fears] "What scares you?"
+THEM: "Huh. Let me think about that." "The ground giving way underfoot." Said flat, like something rehearsed in the dark.
+(want=share_news stage=1)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=share_news stage=3 resolution=unresolved

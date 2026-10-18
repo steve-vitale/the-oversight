@@ -1,0 +1,32 @@
+=== seed 9004 day 69 — conversation with Silke (gen_5qhkxye) ===
+occupation=Sailor temperament=bold trust=87 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? My hands shake when I try to work."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party, confront:d_03zfxx6)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Did you hear? Wanjiru just walked away from Haven. Didn't look back. Good talking."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "If we get through this, I'm never complaining about Mondays again. Sworn oath."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? No point pretending otherwise."
+(want=ask_favor stage=1)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Good question." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=ask_favor stage=1)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=unresolved

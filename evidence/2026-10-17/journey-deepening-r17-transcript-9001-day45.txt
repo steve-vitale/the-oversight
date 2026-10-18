@@ -1,0 +1,29 @@
+=== seed 9001 day 45 — conversation with Regina (gen_rd50jvn) ===
+occupation=carpenter temperament=cautious trust=79 dead=false mood=steady
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — Have you heard? No? Good, I get to tell you first."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=share_news stage=1)
+YOU: [dlg:more] "What happened?"
+THEM: "Okay, so — Erik. Turns out they weren't what they said — they're a chef. Don't say I told you."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's everything I've got. You know as much as I do now."
+(want=share_news stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Spicebush — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=share_news stage=2)
+YOU: [goon] "Do go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=share_news stage=2)
+YOU: [goon] "Do go on."
+THEM: "Okay. We'll pick this up later."
+(want=share_news stage=2)
+YOU: (leave)
+want final: id=share_news stage=3 resolution=engaged

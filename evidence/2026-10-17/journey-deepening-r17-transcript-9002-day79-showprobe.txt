@@ -1,0 +1,32 @@
+=== seed 9002 day 79 — conversation with Zuri (gen_rkt8dp4) ===
+occupation=truck driver temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You told me yes, once. No details. I haven't forgotten. I just don't ask."
+(turn0 choices: alive:event:show, alive:want:curious, dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "Sweet Tooth. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Jorge is back. Walked in like they'd never left. Think, then act."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=0)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "You ever notice how quiet it gets out here at night? Like the world's holding its breath."
+(want=curious stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want? This isn't new."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

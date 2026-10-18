@@ -1,0 +1,32 @@
+=== seed 9003 day 80 — conversation with Naran (naran_tumen) ===
+occupation=bus driver temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:help, dlg:cant, recap, teach, alive:want:ask_favor, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Anyway."
+(want=ask_favor stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "You asked me that before. It's a different question now." "Since Yua died... I keep expecting to see Yua at the fire. Stupid."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? I mean it."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Nikos is back. Walked in like they'd never left. Life's funny that way."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "The System gave me making do. I asked for a sandwich. We don't always get what we ask for."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "You want to know about that? Okay." "You're family now. Chosen family — the kind that actually counts." "Make of that what you will."
+(want=ask_favor stage=1)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=unresolved
