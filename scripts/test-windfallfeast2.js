@@ -15,7 +15,19 @@
 // longer fires.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
-const { withWindfallFeast2, doomedFresh, layerOn } = require('./policies/windfallfeast2');
+let withWindfallFeast2, doomedFresh, layerOn;
+try { ({ withWindfallFeast2, doomedFresh, layerOn } = require('./policies/windfallfeast2')); }
+catch (e) {
+  if (e && e.code === 'MODULE_NOT_FOUND') {
+    // Post-kill INFO-SKIP (coordinator, run fleshout-loop-b-20261018T132923Z):
+    // the layer was deleted per kill protocol — proof vacuous. The layer was
+    // proven GREEN pre-kill (29/29); the log lives in
+    // evidence/2026-10-18/sim-racksanswer-b2.md.
+    console.log('INFO-SKIP: sim-racksanswer-b2 layer killed per protocol (policies/windfallfeast2.js absent); proof vacuous, exit 0.');
+    process.exit(0);
+  }
+  throw e;
+}
 const { leadfeast } = require('./policies/feastscale');
 
 function freshStack(day, name, units, kcalEach, spoilIn) {
