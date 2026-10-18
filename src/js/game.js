@@ -15162,9 +15162,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               if (this.map.px === hx && this.map.py === hy) {
                 this.say(`${first} came back. They don't say where they went.`);
               }
-            } else if (away.purpose === 'water' || away.purpose === 'traps' || away.purpose === 'visit' || away.purpose === 'guard') {
+            } else if (away.purpose === 'water' || away.purpose === 'traps' || away.purpose === 'visit' || away.purpose === 'guard' || away.purpose === 'haul') {
               // OBJECTIVES (villager-objectives.js): new purposes from the
               // objective system. Effects + honest return lines live there.
+              // (r22: 'haul' was missing — the entire HAUL return branch in
+              // objReturnEffect, including the HAUL-UNREVEALED pantry deposit,
+              // was dead code; completed carcass hauls never landed.)
               try { this.objReturnEffect(rid, away.purpose); } catch (e) {}
             }
             // 'leave' purpose with no return: they're gone. The village notices.

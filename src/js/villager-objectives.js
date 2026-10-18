@@ -997,6 +997,15 @@
           try {
             var ast = this.agencyState();
             if (!(ast.exped && ast.exped[rid])) {
+              // CARRIED-HAUL GUARD (r22): a 'returning' haul whose away-return
+              // never fired still carries meat — deposit it before the re-pick
+              // orphans it on the new objective. (r22 probe: haulUnknown stuck
+              // on a replaced EAT objective, never deposited, never tested —
+              // the wild haul→pantry→test arc broke here.)
+              if (o.state === 'returning' && o.purpose === 'haul' && this.objReturnEffect) {
+                try { this.objReturnEffect(rid, 'haul'); } catch (e) {}
+                o = this.objOf(rid);
+              }
               if (!o.kind || o.kind === 'idle' || o.state === 'done' || o.state === 'returning') this.objPick(rid, hx, hy);
             }
           } catch (e) {}
@@ -1248,6 +1257,10 @@
         // HAUL-UNREVEALED (Steve 2026-10-16): unknown flesh arrives as
         // 0-kcal testable items, NOT as pantry kcal. The knowledge law holds:
         // it is not food until someone runs the cautious test.
+        // (r22: `ho` was declared AFTER this use — hoisted undefined, the
+        // try/catch swallowed the TypeError, and hu was always null. The
+        // unknown-flesh deposit never fired even when this branch ran.)
+        var ho = this.objOf(vid);
         var hu = null;
         try { hu = ho.haulUnknown || null; ho.haulUnknown = null; } catch (e) {}
         if (hu && hu.length) {
@@ -1264,7 +1277,6 @@
         }
         var hk = 0, hn = 'Hauled meat';
         try {
-          var ho = this.objOf(vid);
           hk = ho.haulKcal || 0; hn = ho.haulName || hn;
           ho.haulKcal = 0; // deposited — don't double-count on re-return
         } catch (e) {}
