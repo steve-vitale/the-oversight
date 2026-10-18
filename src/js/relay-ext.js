@@ -408,7 +408,7 @@
         // build it back — the two-way cost, ticking.
         if (typeof this.addGrounding === 'function') this.addGrounding(-1, 'holding the relay');
         if (rs.holderDays % 7 === 0) {
-          const v = (this.data.villagers || []).filter(x => x.id !== this.villagerId)[0] || {};
+          const v = (this.data.villagers || []).filter(x => x.id !== this.villagerId && !x.dead)[0] || {};
           const n = ((v.name || 'Mara').split(' ')[0]);
           this.say(`${n} watches you at the relay console. "You look tired," they say, and mean something else. The village sees the change even when you don't.`);
         }

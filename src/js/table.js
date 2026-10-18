@@ -269,7 +269,7 @@
         const order = { grounded: 0, fraying: 1, estranged: 2, hollow: 3 };
         const falling = (order[to] | 0) > (order[from] | 0);
         const v = this.state.village || {};
-        const names = (this.data.villagers || []).filter(x => x.id !== this.villagerId).slice(0, 3).map(x => (x.name || 'someone').split(' ')[0]);
+        const names = (this.data.villagers || []).filter(x => x.id !== this.villagerId && !x.dead).slice(0, 3).map(x => (x.name || 'someone').split(' ')[0]);
         const n1 = names[0] || 'Mara', n2 = names[1] || 'the old ones';
         if (falling && to === 'fraying') {
           this.say(`${n1} keeps a half-step of distance at the fire now. Not fear — not yet. Just... distance. "You've been up at the relay late," they say, and don't ask what you found.`);

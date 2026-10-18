@@ -892,6 +892,21 @@
         routed: 0, delayed: 0, edited: 0, skimmed: 0, log: [],
         mootVoiceLost: !!c.isTalker, lastLeadDay: -1,
       };
+      // FACILITATION (journey-endgame r17 2026-10-18): handing them the
+      // relay is the 'relay' facilitation act (TABLE.md). Track it HERE,
+      // at the verb — the Haven UI (app.js) and policies appoint through
+      // this verb, never through tableFacilitate, so the architect's
+      // credit was silently lost (the epilogue played OUTSHONE for
+      // deliberately facilitated villagers). tableFacilitate('relay')
+      // also calls this verb; the acts list is idempotent.
+      try {
+        const T = (typeof this.tableState === 'function') ? this.tableState() : null;
+        if (T) {
+          T.facilitated = T.facilitated || {};
+          const f = T.facilitated[vid] || (T.facilitated[vid] = { acts: [] });
+          if (f.acts.indexOf('relay') < 0) f.acts.push('relay');
+        }
+      } catch (e) {}
       // The appointment beat is answered — clear the pending flag.
       try { this.state.pendingSwitchboard = null; } catch (e) {}
       try { this.tickAction(16); } catch (e) {}
