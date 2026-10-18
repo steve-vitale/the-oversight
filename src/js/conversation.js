@@ -2927,9 +2927,22 @@
       }
       // Reopeners: the small-talk well is dry, but you've talked before —
       // a familiar line beats a loop. (Previously dead data; now wired in.)
+      // BOND-AWARE (journey-social r23 2026-10-18): a rival doesn't greet
+      // you warmly on re-open either — "I'm glad it's you. I needed a
+      // friendly face." from someone at depth -2 is the same blank as the
+      // warm invite (r22 blank #1). Rivals skip the warm reopeners and
+      // fall through to the honest exhausted line below.
       if ((c.count || 0) > 1) {
-        const rl = this.convoPick(vid, 'small', cg.reopeners || []);
-        if (rl) return { line: this.voiceLine(vid, this.fillTalkLine(rl, vp)), thread: 'small' };
+        let reopenPool = cg.reopeners || [];
+        try {
+          const bnd = (typeof this.bondGet === 'function') ? this.bondGet(this.villagerId, vid) : null;
+          const bd = (bnd && bnd.depth) || 0, bv = (bnd && bnd.v) || 0;
+          if ((bd <= -1 || bv <= -25) && reopenPool.length) reopenPool = [];
+        } catch (e) {}
+        if (reopenPool.length) {
+          const rl = this.convoPick(vid, 'small', reopenPool);
+          if (rl) return { line: this.voiceLine(vid, this.fillTalkLine(rl, vp)), thread: 'small' };
+        }
       }
       // 6. Truly nothing new — said like a person, not a loop.
       const ex = this.convoPickCycle(vid, 'exh', cg.exhausted || ['"I\'ve told you everything I know."']);
@@ -4720,10 +4733,11 @@
       try {
         const inv = (this.pendingInvite && this.pendingInvite(vid)) || null;
         if (inv && !inv.spoken) {
-          const defs = (this.INVITE_DEFS && this.INVITE_DEFS()) || [];
-          const idef = defs.find(d => d.id === inv.defId) || null;
-          if (idef && idef.label) {
-            inviteBeat = idef.label;
+          // BOND-AWARE (journey-social r23): the label is resolved through
+          // inviteLabelFor so rivals speak the cold line, not the warm one.
+          const label = (typeof this.inviteLabelFor === 'function') ? this.inviteLabelFor(vid, inv) : null;
+          if (label) {
+            inviteBeat = label;
             inv.spoken = true;
           }
         }

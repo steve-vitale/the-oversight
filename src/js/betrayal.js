@@ -294,6 +294,35 @@
         { id: 'traps', label: '"Walk my trap line with me? Extra hands, extra eyes."', spot: 'the trap line' },
       ];
     },
+    // BOND-AWARE INVITE LABEL (journey-social r23 2026-10-18): a rival
+    // doesn't invite you warmly. Resolves the label actually spoken for a
+    // pending invite — the warm INVITE_DEFS label normally, the
+    // businesslike characterGen.convo.inviteCold[defId] line when the
+    // inviter's bond with the player is hostile (depth <= -1 or v <= -25,
+    // the same rival definition the r22 bond surface uses). Rivals still
+    // invite (need is need — and a hostile lure is the betrayal design's
+    // sharpest tool); the label just stops pretending at friendship.
+    // Used by BOTH the spoken beat (conversation.js startConvo) and the
+    // betrayal:accept menu below — the INVITATION HONESTY invariant
+    // (journey landing r7): the menu quotes the label verbatim, so the two
+    // can never disagree. Plot lures travel this branch too,
+    // indistinguishable by design. Feeling-level only; no fabricated
+    // events (the bond record stores no event history).
+    inviteLabelFor(vid, inv) {
+      const defs = (this.INVITE_DEFS && this.INVITE_DEFS()) || [];
+      const idef = (inv && defs.find(d => d.id === inv.defId)) || null;
+      let label = (idef && idef.label) || null;
+      try {
+        const bnd = (typeof this.bondGet === 'function') ? this.bondGet(this.villagerId, vid) : null;
+        const bd = (bnd && bnd.depth) || 0, bv = (bnd && bnd.v) || 0;
+        if (bd <= -1 || bv <= -25) {
+          const cg = (this.data && this.data.characterGen && this.data.characterGen.convo) || {};
+          const cold = (cg.inviteCold || {})[(inv && inv.defId) || ''];
+          if (cold) label = cold;
+        }
+      } catch (e) {}
+      return label;
+    },
     // daily: 0-2 NPCs get an invite idea (more once the village trusts you).
     // INVITE FLOW: once average trust passes ~15, people think of you when
     // they head out. Early game is quieter — but the betrayal design needs
@@ -3790,8 +3819,13 @@
     // pending invite
     const inv = this.pendingInvite(vid);
     if (inv) {
+      // BOND-AWARE (journey-social r23): the menu quotes the SPOKEN label
+      // verbatim (INVITATION HONESTY, journey landing r7) — resolve it
+      // through inviteLabelFor so a rival's menu matches their cold beat.
+      const spoken = (typeof this.inviteLabelFor === 'function') ? this.inviteLabelFor(vid, inv) : null;
       const def = (this.INVITE_DEFS() || []).find(d => d.id === inv.defId);
-      out.push({ id: 'betrayal:accept', label: '"Sure. ' + (def ? def.label.slice(1, -1) : 'Let\'s go.') + '"' });
+      const quoted = spoken || (def ? def.label : null);
+      out.push({ id: 'betrayal:accept', label: '"Sure. ' + (quoted ? quoted.slice(1, -1) : 'Let\'s go.') + '"' });
       out.push({ id: 'betrayal:decline', label: '"Not this time."' });
     }
     const cases = (this.betrayalState().cases || []).filter(x =>
