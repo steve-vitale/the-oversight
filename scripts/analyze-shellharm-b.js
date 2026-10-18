@@ -187,8 +187,8 @@ function writeCompare(res) {
     md += `\n`;
   }
   md += `## Pre-registered judgement (diagnostic)\n\n`;
-  const share = res.totExcessVill > 0 ? res.totTiming / res.totExcessVill : 1;
-  md += `- PRIMARY attribution share: **${(share * 100).toFixed(1)}%** (GO >= 80%): timing-attributed ${res.totTiming} of ${res.totExcessVill} excess villager-starvation deaths; residual ${res.totResidual}.\n`;
+  const share = res.totExcessVill > 0 ? res.totTiming / res.totExcessVill : null;
+  md += `- PRIMARY attribution share: **${share == null ? 'n/a (degenerate: 0 excess deaths to attribute)' : (share * 100).toFixed(1) + '%'}** (GO >= 80%): timing-attributed ${res.totTiming} of ${res.totExcessVill} excess villager-starvation deaths; residual ${res.totResidual}.\n`;
   md += `- Villager-only starvation: control ${res.rows.reduce((t, r) => t + r.cVill, 0)} -> shell ${res.rows.reduce((t, r) => t + r.sVill, 0)} -> perturb ${res.rows.reduce((t, r) => t + r.pVill, 0)}.\n`;
   fs.mkdirSync(PANEL_OUT, { recursive: true });
   fs.writeFileSync(path.join(PANEL_OUT, 'compare-shellharm-b.md'), md);
@@ -196,7 +196,11 @@ function writeCompare(res) {
 }
 
 function verdictText(res) {
-  const share = res.totExcessVill > 0 ? res.totTiming / res.totExcessVill : 1;
+  // Degenerate case first: no positive excess means there is no harm signal
+  // to attribute. Printing "TAIL-TIMING NOISE (100%)" for 0/0 mislabels the
+  // finding (caught 2026-10-18: the harm did not reproduce on the new base).
+  if (res.totExcessVill === 0) return 'HARM NOT REPRODUCED (no positive control->shell starvation delta on this base; see evidence)';
+  const share = res.totTiming / res.totExcessVill;
   if (share >= 0.8) return `TAIL-TIMING NOISE (${(share * 100).toFixed(0)}% attributed)`;
   if (res.totResidual > 0) return `UNRESOLVED-BUT-SCOPED (residual ${res.totResidual})`;
   return 'GENUINE HARM (see analysis)';
