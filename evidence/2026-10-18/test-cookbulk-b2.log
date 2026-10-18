@@ -1,0 +1,49 @@
+PART A — gate-logic units
+  ok   cookableItems finds rawKcal beans
+  ok   cookableItems skips spoiled
+  ok   cookDay: 1500kcal pool fires
+  ok   cookDay: 600kcal pool does not fire
+  ok   cookDay: not hunger-gated
+  ok   fireHere gate respected
+  ok   timeToSpare: mid-day
+  ok   timeToSpare: day nearly spent
+  ok   layerOn: default OFF
+  ok   splitForWater: one affordable pot + remainder
+  ok   hearthFirst: boils 20L dirty
+  ok   hearthFirst: honest wood cost (4 wood)
+  ok   hearthFirst: logged on ctx
+  ok   hearthFirst: no-op when no dirty water
+  ok   boilRisky: risky bottles become clean
+  ok   boilRisky: no-op with no risky water
+  ok   cookPass: gate-off inert
+PART B — RED->GREEN fixture (upkeep-level, Haven state)
+  FAIL RED: base upkeep leaves beans raw and water unboiled — beans=10u raw=true water={"clean":4,"dirty":20}
+  ok   GREEN b2: full 10u stack cooked
+  ok   GREEN b2: hearth boiled 20L at honest wood cost
+  ok   GREEN b2: firing counted on ctx
+  ok   GREEN b2: once/day guard holds
+  ok   V2BASE: only 5u cooked on 5L (water-capped)
+  ok   V2BASE: wood and dirty untouched
+  ok   gate-off: wrapped upkeep inert
+PART C — det-gate (wrapped COOKBULK_B2-unset vs unwrapped base, 60d)
+  ok   s7901 belongfeast: wrapped-off byte-identical to base
+  ok   s7901 leadfeast: wrapped-off byte-identical to base
+  ok   s7902 belongfeast: wrapped-off byte-identical to base
+  ok   s7902 leadfeast: wrapped-off byte-identical to base
+  ok   s7903 belongfeast: wrapped-off byte-identical to base
+  ok   s7903 leadfeast: wrapped-off byte-identical to base
+  ok   s7904 belongfeast: wrapped-off byte-identical to base
+  ok   s7904 leadfeast: wrapped-off byte-identical to base
+  ok   s7905 belongfeast: wrapped-off byte-identical to base
+  ok   s7905 leadfeast: wrapped-off byte-identical to base
+  ok   s7906 belongfeast: wrapped-off byte-identical to base
+  ok   s7906 leadfeast: wrapped-off byte-identical to base
+  ok   s7907 belongfeast: wrapped-off byte-identical to base
+  ok   s7907 leadfeast: wrapped-off byte-identical to base
+  ok   s7908 belongfeast: wrapped-off byte-identical to base
+  ok   s7908 leadfeast: wrapped-off byte-identical to base
+  ok   det-gate: no layer-attributable divergence
+PART D — SMOKE (2 seeds x 2 policies x {control,v2base,b2}, 12d)
+  ok   SMOKE: 12/12 short runs completed without exceptions
+
+PROOF RED: 26 passed, 1 failed
