@@ -1081,11 +1081,13 @@
         v.mantleOf.push({ from: oldId, fromName: oldName, to: newId, toName: newName, day: s.day || 0 });
         if (v.mantleOf.length > 12) v.mantleOf.shift();
         const pr = v.promises || {};
+        const _releasedNow = [];
         for (const pid of Object.keys(pr)) {
           const p = pr[pid];
           if (!p || p.kept) continue;
           p.kept = 'released';
           p.inherited = true;
+          _releasedNow.push(pid);
           try {
             const fav = (v.favorLedger || {})[pid];
             if (fav && fav.id === p.favorId && fav.state === 'promised') fav.state = 'asked';
@@ -1095,6 +1097,36 @@
             if (sd && (sd.wantId === 'repay' || (sd.favorId && sd.favorId === p.favorId))) delete v.convoSeeds[pid];
           } catch (e3) {}
         }
+        // THE OPEN BOOK (journey-succession r25 2026-10-18): the release
+        // above is silent — the successor never learns what the dead bearer
+        // owed. The ledger's designed beat (the NPC re-ask naming the
+        // predecessor, convo-wants.js INHERITED ASK) proved nearly
+        // unreachable in the r25 pilot (1/4 seeds: needs churn within days,
+        // the want economy rarely selects ask_favor first). The office
+        // inherits the KNOWLEDGE even though the obligation is released:
+        // name the unkept promises once — asker and task — the promises died
+        // with their maker (released, never broken: no dishonor), the needs
+        // didn't. What the successor does about them is theirs. Clean books:
+        // silence, as before.
+        try {
+          if (_releasedNow.length) {
+            const bits = [];
+            for (const pid of _releasedNow.slice(0, 3)) {
+              const p = pr[pid] || {};
+              // firstRef: knowledge-gated (true first name when known, else
+              // the descriptor) — never split a descriptor on spaces.
+              let who = 'someone';
+              try { who = typeof this.firstRef === 'function' ? this.firstRef(pid) : (this.displayName(pid) || 'someone'); } catch (e4) {}
+              const task = p.favorTask || p.goal || 'a promise';
+              bits.push(`${who} — ${task}`);
+            }
+            const extra = _releasedNow.length > 3 ? ` (+${_releasedNow.length - 3} more)` : '';
+            const oPro = (oldChar && oldChar.pro) || 'they';
+            const oTheir = oPro === 'she' ? 'her' : oPro === 'he' ? 'his' : 'their';
+            const nWord = _releasedNow.length === 1 ? 'one promise unkept' : `${_releasedNow.length} promises unkept`;
+            this.say(`📜 ${oldFirst}'s book stays open on the table: ${nWord} — ${bits.join('; ')}${extra}. The promises died with ${oTheir} maker; the needs didn't. What you do about them is yours to decide.`);
+          }
+        } catch (e) {}
         // STAMP (journey-succession 2026-10-11): every open thread, seed,
         // favor and memory that exists RIGHT NOW was the dead bearer's —
         // stamp it with their name. Day-granularity cannot separate a

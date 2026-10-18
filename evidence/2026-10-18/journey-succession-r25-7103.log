@@ -1,0 +1,92 @@
+--- PRE-KILL d14: bearer <redacted>, roster 12 living
+FAVOR FORCED: Donna kind=forage_help task="forage with Donna tomorrow to rebuild the pantry" commit=true promise={"kept":false,"maker":"Kevin","favorId":true}
+MANTLE: Kevin -> Anh | passed=true
+HANDOFF SAY (16 captured):
+  d14: 📖 The Codex turns a page on its own. Kevin Cruz is dead. You didn't ask. It knew.
+  d14: Nobody's talking much. The fire feels smaller tonight.
+  d14: 🕯️ Kevin Cruz is dead — the expedition. The village stops. Somebody screams. Somebody else starts digging.
+  d14: The Codex doesn't pause for grief. Anh blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.
+  d14: 📖 LEARNED: Patient Aim (Level 1). One shot. You don't take the shot unless it's the shot.
+  d14: 📖 LEARNED: Debris Shelter (Level 1). A lean-to of branches and leaves beats nothing. Dead air is insulation.
+  d14: 📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed.
+  d14: 📖 LEARNED: Wire Snares (Level 1). A loop of wire on a game trail. Simple, effective, ancient. Check at dawn.
+  d14: 📖 LEARNED: Cordage (Level 1). Twist plant fibers into string. Dogbane, nettle, yucca — strong fibers are everywhere.
+  d14: 📖 LEARNED: Field Dressing (Level 1). Break down game fast and clean. Less waste, more meat, usable parts.
+  d14: 🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"
+  d14: 📖 The Codex turns a page: Kevin Cruz, 14 days. The mantle passes to Anh Griffin.
+  d14: 🪞 You wake up somebody else. Anh Griffin, 38 — a trail crew lead.
+  d14: The village's quarrel was with Kevin — and Kevin is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.
+  d14: The fire knew Anh before the Codex did — their name already carried weight here.
+  d14: 📜 Kevin's book stays open on the table: one promise unkept — Donna — forage with Donna tomorrow to rebuild the pantry. The promises died with his maker; the needs didn't. What you do about them is yo
+M2: promise={"kept":"released","inherited":true,"maker":"Kevin"} favor={"state":"asked","inhFrom":"Kevin Cruz","kind":"forage_help"} -> GO
+
+===== TRANSCRIPT d15 (asker Donna) =====
+## reask-watch d15 — Donna on d15
+> YOU PICK [ans:q_skill:a_tell] 
+> YOU PICK [invite_party] 
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:thread:want] 
+> YOU PICK [alive:thread:lately] 
+> YOU PICK [goon] 
+> YOU PICK [goon] 
+> YOU PICK [dlg:more] 
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "About what you're good at — What's something you're good at that nobody here knows about? Take your time with it."
+YOU: "I'm better with my hands than people expect. You'll see."
+NPC: "Noted. Filing that under 'extremely useful.' The village needs that."
+YOU: "Want to come with me?"
+NPC: "Not right now. I've got my own things to handle."
+YOU: "What’s going on out there?"
+NPC: "Kevin is gone and the world just... continues. That's the part I can't stand."
+YOU: "About what you're good at — we never finished."
+NPC: "Huh. I wouldn't have guessed that about you."
+YOU: "About what's been happening — we never finished."
+NPC: "Sleep's gone strange. I save the best bite for last at odd hours now. Whatever gets me to morning."
+YOU: "Go on."
+NPC: "I should get back to it."
+YOU: "Go on."
+NPC: They settle — not warm, not cold. Just two people talking.
+YOU: "Tell me more."
+NPC: "We bury, we grieve, we keep going. There's no step four."
+NPC: "Good talk. I feel like I know you a little better now."
+
+CARRY-FLAGS: want=curious inheritedReask=false namedPredecessor=true committed=false
+
+===== TRANSCRIPT d16 (asker Donna) =====
+## reask-watch d16 — Donna on d16
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:thread:want] 
+> YOU PICK [alive:thread:lately] 
+> YOU PICK [goon] 
+> YOU PICK [dlg:more] 
+> YOU PICK [dlg:react] 
+> YOU PICK [goon] 
+> YOU PICK [dlg:react] 
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "We never finished talking about what's been happening — we left it mid-thought. 'We bury, we grieve, we keep going. There's no step four.' We still owe what you're good at a proper ending, too. Famous last words."
+YOU: "What’s going on out there?"
+NPC: "Last time things were different. They always are." "Since Kevin died... I keep expecting to see Kevin at the fire. Stupid."
+YOU: "About what you're good at — we never finished."
+NPC: "It's my mother, Susan. Was taken at the Scattering. The boring half. She made soup from nothing and they called that boring. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: "About what's been happening — we never finished."
+NPC: "About what's been happening — yeah, we never did get back to that."
+YOU: "Go on."
+NPC: They relax, a fraction. This is going well.
+YOU: "Tell me more."
+NPC: "That's... pretty much all of it, honestly."
+YOU: "I see."
+NPC: "Anyway." A small smile.
+YOU: "Go on."
+NPC: "Alright. Catch you later."
+YOU: "Huh."
+NPC: "Well." A breath. "That's where things stand."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: want=seek_taken inheritedReask=false namedPredecessor=true committed=false
+M3: re-ask never fired over 12 asker-alive days
+MISS-WHY: {"favorState":"asked","needLive":true,"currentNeedKind":"none","favorKind":"forage_help","askerAlive":true,"wantsSeen":["curious","seek_taken"]}
+TELE: {"deaths.bearer":1,"census.alive":11,"census.fallen":1,"census.integrationStage":3,"week2.deadBearerMentions":4}

@@ -1,0 +1,118 @@
+--- PRE-KILL d14: bearer <redacted>, roster 11 living
+FAVOR FORCED: Jorge kind=heal_help task="help Jorge with their injury" commit=true promise={"kept":false,"maker":"Carolina","favorId":true}
+MANTLE: Carolina -> Lamar | passed=true
+HANDOFF SAY (10 captured):
+  d14: 📖 The Codex turns a page on its own. Carolina Liang is dead. You didn't ask. It knew.
+  d14: Nobody's talking much. The fire feels smaller tonight.
+  d14: 🕯️ Carolina Liang is dead — the expedition. The village stops. Somebody screams. Somebody else starts digging.
+  d14: The Codex doesn't pause for grief. Lamar blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.
+  d14: 📖 LEARNED: Fine Woodworking (Level 1). Joints that hold without nails: mortise, tenon, and the humble dovetail.
+  d14: 🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"
+  d14: 📖 The Codex turns a page: Carolina Liang, 14 days. The mantle passes to Lamar Tkachenko.
+  d14: 🪞 You wake up somebody else. Lamar Tkachenko, 24 — a carpenter.
+  d14: The fire knew Lamar — solid ground, earned at this fire.
+  d14: 📜 Carolina's book stays open on the table: one promise unkept — Jorge — help Jorge with their injury. The promises died with their maker; the needs didn't. What you do about them is yours to decide.
+M2: promise={"kept":"released","inherited":true,"maker":"Carolina"} favor={"state":"asked","inhFrom":"Carolina Liang","kind":"heal_help"} -> GO
+
+===== TRANSCRIPT d15 (asker Jorge) =====
+## reask-watch d15 — Jorge on d15
+> YOU PICK [betrayal:accept] 
+> YOU PICK [gq:yn:yes] 
+> YOU PICK [invite_party] 
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [goon] 
+> YOU PICK [goon] 
+> YOU PICK [gq:yn:yes] 
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "Can we talk?" Jorge sits down near you. "Just... talk. Like people used to."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "Sure."
+NPC: Jorge has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: "Yes."
+NPC: "Here's the thing: Good. Good to know I'm not the only one seeing it."
+YOU: "Want to come with me?"
+NPC: "Not right now. I've got my own things to handle."
+YOU: "What’s going on out there?"
+NPC: "Leo is gone and Carolina is gone and the world just... continues. That's the part I can't stand."
+YOU: "Is there something you need? Really."
+NPC: "I asked Carolina about this wound — Carolina's gone. Still need hands. Are you in?"
+YOU: "You don't have to say it all at once."
+NPC: "Anyway — I should get back to it. Good talking, though."
+YOU: "You don't have to say it all at once."
+NPC: "Sorry — I asked you something there." Are you in?
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them. That's where we are."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: want=ask_favor inheritedReask=true namedPredecessor=true committed=false
+RE-ASK FIRED d15: I asked Carolina about this wound — Carolina's gone
+POST-REASK promise: {"kept":"released","maker":"Carolina","makerIsSuccessor":false,"deadline":15}
+
+===== TRANSCRIPT d16 (asker Jorge) =====
+## reask-watch d16 — Jorge on d16
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [alive:thread:lately] 
+> YOU PICK [alive:thread:want] 
+> YOU PICK [goon] 
+> YOU PICK [dlg:help] 
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "We never finished talking about what's been happening — we wandered off it. 'Leo is gone and Carolina is gone and the world just... continues. That's the part I can't stand.' That's the whole of it."
+YOU: "What’s going on out there?"
+NPC: "Huh. I answered that once — back when the answer was simpler." "We lost Leo and Carolina this week. I keep setting out extra portions. Stupid."
+YOU: "Is there something you need? Really."
+NPC: "I'm sorry — I'm achy and wrung out, barely keeping food down. I need help. Please."
+YOU: "About what's been happening — we never finished."
+NPC: "Nobody says Carolina's name right yet. We will. Give it a few days."
+YOU: "About that favor — we never finished."
+NPC: "I'm burning up and there's nothing left in me. Someone who knows sickness — please."
+YOU: "You don't have to say it all at once."
+NPC: "Alright, duty calls. This was a good pause."
+YOU: "How can I help?"
+NPC: "The fever's not breaking and I'm barely keeping food down. I need help — real help, not just water."
+NPC: "...Sorry, lost my train of thought."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: want=ask_favor inheritedReask=false namedPredecessor=true committed=false
+M3: re-ask FIRED d15 over 12 asker-alive days
+TELE: {"deaths.bearer":1,"census.alive":9,"census.fallen":3,"census.integrationStage":3,"week2.deadBearerMentions":4}
+
+===== RE-ASK TRANSCRIPT =====
+## reask-watch d15 — Jorge on d15
+> YOU PICK [betrayal:accept] 
+> YOU PICK [gq:yn:yes] 
+> YOU PICK [invite_party] 
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [goon] 
+> YOU PICK [goon] 
+> YOU PICK [gq:yn:yes] 
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+NPC: "Can we talk?" Jorge sits down near you. "Just... talk. Like people used to."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "Sure."
+NPC: Jorge has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: "Yes."
+NPC: "Here's the thing: Good. Good to know I'm not the only one seeing it."
+YOU: "Want to come with me?"
+NPC: "Not right now. I've got my own things to handle."
+YOU: "What’s going on out there?"
+NPC: "Leo is gone and Carolina is gone and the world just... continues. That's the part I can't stand."
+YOU: "Is there something you need? Really."
+NPC: "I asked Carolina about this wound — Carolina's gone. Still need hands. Are you in?"
+YOU: "You don't have to say it all at once."
+NPC: "Anyway — I should get back to it. Good talking, though."
+YOU: "You don't have to say it all at once."
+NPC: "Sorry — I asked you something there." Are you in?
+YOU: "Yes."
+NPC: "Right. That's what I figured — which is why I asked you, not them. That's where we are."
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: want=ask_favor inheritedReask=true namedPredecessor=true committed=false

@@ -1,0 +1,79 @@
+--- PRE-KILL d14: bearer <redacted>, roster 12 living
+FAVOR FORCED: Omar kind=water_haul task="haul water from the creek at first light with Omar" commit=true promise={"kept":false,"maker":"Kurt","favorId":true}
+MANTLE: Kurt -> Wei | passed=true
+HANDOFF SAY (13 captured):
+  d14: 📖 The Codex settles deeper into you. It knows things before you do now. Deaths, especially — it will tell you itself.
+  d14: 📖 The Codex turns a page on its own. Kurt Anderson is dead. You didn't ask. It knew.
+  d14: Nobody's talking much. The fire feels smaller tonight.
+  d14: 🕯️ Kurt Anderson is dead — the expedition. The village stops. Somebody screams. Somebody else starts digging.
+  d14: The Codex doesn't pause for grief. Wei blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.
+  d14: 📖 LEARNED: Diplomatic Incident (Level 1). Trust builds 2x faster. You're TOO good though — once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -
+  d14: 📖 LEARNED: Keeping Morale (Level 1). People need small wins. Celebrate the little things. Despair is the real killer.
+  d14: 🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"
+  d14: 📖 The Codex turns a page: Kurt Anderson, 14 days. The mantle passes to Wei Bhatt.
+  d14: 🪞 You wake up somebody else. Wei Bhatt, 48 — a musician.
+  d14: The village's quarrel was with Kurt — and Kurt is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.
+  d14: The fire knew Wei — solid ground, earned at this fire.
+  d14: 📜 Kurt's book stays open on the table: one promise unkept — Omar — haul water from the creek at first light with Omar. The promises died with their maker; the needs didn't. What you do about them is 
+M2: promise={"kept":"released","inherited":true,"maker":"Kurt"} favor={"state":"asked","inhFrom":"Kurt Anderson","kind":"water_haul"} -> GO
+
+===== TRANSCRIPT d15 (asker Omar) =====
+## reask-watch d15 — Omar on d15
+> YOU PICK [nv:nod] 
+> YOU PICK [nv:nod] 
+> YOU PICK [nv:nod] 
+> YOU PICK [nv:nod] 
+> YOU PICK [nv:nod] 
+> YOU PICK [nv:nod] 
+> YOU PICK [goon] 
+> YOU PICK [nv:nod] 
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+YOU: (Omar speaks only 🇸🇦 Arabic. No shared words at all — just eyes, hands, and patience.)
+NPC: «ما هذا المكان؟ أين نحن؟» "Shit." — they grin, proud of the one English they know.
+YOU: (gesture)
+NPC: «مضبوط، كلامك صحيح.» — Soad translates: "Spot on, your words are true." They nod back, slowly.
+YOU: (gesture)
+NPC: «اتفقنا.» — Soad translates: "Agreed." They nod back, slowly.
+YOU: (gesture)
+NPC: «هذا صحيح.» — Soad translates: "This is right." They nod back, slowly.
+YOU: (gesture)
+NPC: «نعم، نعم، بالضبط.» — Soad translates: "Yes, yes, exactly." They nod back, slowly.
+YOU: (gesture)
+YOU: (gesture)
+YOU: (watch quietly)
+NPC: A final shared look — you both feel the talk running its course.
+YOU: (gesture)
+NPC: They're smiling as you go. "Come back anytime."
+
+CARRY-FLAGS: want=none inheritedReask=false namedPredecessor=false committed=false
+
+===== TRANSCRIPT d16 (asker Omar) =====
+## reask-watch d16 — Omar on d16
+> YOU PICK [nv:nod] 
+> YOU PICK [nv:nod] 
+> YOU PICK [nv:nod] 
+> YOU PICK [goon] 
+> YOU PICK [nv:nod] 
+(conversation ended by the engine)
+
+### FULL TRANSCRIPT
+YOU: (Omar speaks only 🇸🇦 Arabic. No shared words at all — just eyes, hands, and patience.)
+NPC: «هيه... تتكلم عربي؟ لا؟ ...تباً.» (you catch 'عربي' — Arabic, 'لا' — no) "Shit." — they grin, proud of the one English they know.
+YOU: (gesture)
+NPC: "...Sorry, lost my train of thought."
+YOU: (gesture)
+NPC: "Hm. Never mind — go on."
+YOU: (gesture)
+NPC: "...Actually, forget it."
+YOU: (watch quietly)
+NPC: They glance toward their own thoughts; the exchange is winding down.
+YOU: (gesture)
+NPC: "...Where was I? Gone. Ask me something else."
+NPC: "This was good." They mean it.
+
+CARRY-FLAGS: want=none inheritedReask=false namedPredecessor=false committed=false
+M3: re-ask never fired over 12 asker-alive days
+MISS-WHY: {"favorState":"thanked","needLive":true,"currentNeedKind":"none","favorKind":"forage_help","askerAlive":true,"wantsSeen":["none","ask_favor","curious","repay"]}
+TELE: {"deaths.bearer":1,"census.alive":11,"census.fallen":1,"census.integrationStage":3,"week2.deadBearerMentions":4}
