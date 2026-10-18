@@ -1,0 +1,6609 @@
+{
+ "seed": 1502,
+ "daycap": 60,
+ "ms": 7426,
+ "endDay": 62,
+ "alive": 11,
+ "fallen": 1,
+ "outcome": null,
+ "endReason": "survived",
+ "factions": {
+  "favorites": [
+   {
+    "vid": "gen_u9no7wa",
+    "name": "Aaron",
+    "role": "carpenter",
+    "bond": {
+     "v": 100,
+     "depth": 3,
+     "day": 61,
+     "dayGain": 2
+    },
+    "trust": 100
+   },
+   {
+    "vid": "gen_dsuslyv",
+    "name": "Antônia",
+    "role": "mushroom_grower",
+    "bond": {
+     "v": 3,
+     "depth": 0,
+     "day": 7,
+     "dayGain": 3
+    },
+    "trust": 35
+   }
+  ],
+  "outsiders": [
+   {
+    "vid": "emma_larsen",
+    "name": "Emma",
+    "role": "veterinarian",
+    "bond": {
+     "v": -92,
+     "depth": -3,
+     "day": 0,
+     "dayGain": 0
+    },
+    "trust": 0
+   },
+   {
+    "vid": "elijah_scott",
+    "name": "Elijah",
+    "role": "social_worker",
+    "bond": {
+     "v": -96,
+     "depth": -3,
+     "day": 58,
+     "dayGain": 3
+    },
+    "trust": 83
+   }
+  ]
+ },
+ "crossings": [
+  {
+   "a": "Aubrey",
+   "b": "Elijah",
+   "th": 25,
+   "dir": "-",
+   "v": -31,
+   "depth": -1,
+   "day": 14
+  },
+  {
+   "a": "Aubrey",
+   "b": "Emma",
+   "th": 25,
+   "dir": "-",
+   "v": -38,
+   "depth": -1,
+   "day": 16
+  },
+  {
+   "a": "Aubrey",
+   "b": "Aaron",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 17
+  },
+  {
+   "a": "Aaron",
+   "b": "Tamika",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 17
+  },
+  {
+   "a": "Aaron",
+   "b": "Devon",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 18
+  },
+  {
+   "a": "Aubrey",
+   "b": "Tamika",
+   "th": 25,
+   "dir": "-",
+   "v": -29,
+   "depth": -1,
+   "day": 24
+  },
+  {
+   "a": "Aubrey",
+   "b": "Emma",
+   "th": 50,
+   "dir": "-",
+   "v": -50,
+   "depth": -2,
+   "day": 26
+  },
+  {
+   "a": "Aubrey",
+   "b": "Aaron",
+   "th": 50,
+   "dir": "+",
+   "v": 51,
+   "depth": 2,
+   "day": 27
+  },
+  {
+   "a": "Aubrey",
+   "b": "Elijah",
+   "th": 50,
+   "dir": "-",
+   "v": -55,
+   "depth": -2,
+   "day": 31
+  },
+  {
+   "a": "Kieran",
+   "b": "Xavier",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 31
+  },
+  {
+   "a": "Aubrey",
+   "b": "Aaron",
+   "th": 75,
+   "dir": "+",
+   "v": 75,
+   "depth": 3,
+   "day": 35
+  },
+  {
+   "a": "Tamika",
+   "b": "Emma",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 35
+  },
+  {
+   "a": "Cauã",
+   "b": "Nikos",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 36
+  },
+  {
+   "a": "Aaron",
+   "b": "Devon",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 39
+  },
+  {
+   "a": "Aubrey",
+   "b": "Tamika",
+   "th": 50,
+   "dir": "-",
+   "v": -56,
+   "depth": -2,
+   "day": 41
+  },
+  {
+   "a": "Devon",
+   "b": "Nikos",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 42
+  },
+  {
+   "a": "Aubrey",
+   "b": "Elijah",
+   "th": 75,
+   "dir": "-",
+   "v": -77,
+   "depth": -3,
+   "day": 46
+  },
+  {
+   "a": "Aaron",
+   "b": "Tamika",
+   "th": 50,
+   "dir": "+",
+   "v": 50,
+   "depth": 2,
+   "day": 48
+  },
+  {
+   "a": "Aubrey",
+   "b": "Emma",
+   "th": 75,
+   "dir": "-",
+   "v": -80,
+   "depth": -3,
+   "day": 51
+  },
+  {
+   "a": "Aubrey",
+   "b": "Tamika",
+   "th": 75,
+   "dir": "-",
+   "v": -83,
+   "depth": -3,
+   "day": 52
+  },
+  {
+   "a": "Nikos",
+   "b": "Xavier",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 52
+  },
+  {
+   "a": "Devon",
+   "b": "Emma",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 53
+  },
+  {
+   "a": "Aaron",
+   "b": "Kieran",
+   "th": 25,
+   "dir": "+",
+   "v": 28,
+   "depth": 1,
+   "day": 57
+  },
+  {
+   "a": "Nikos",
+   "b": "Emma",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 59
+  },
+  {
+   "a": "Tamika",
+   "b": "Kieran",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 61
+  },
+  {
+   "a": "Cauã",
+   "b": "Nikos",
+   "th": 50,
+   "dir": "+",
+   "v": 52,
+   "depth": 2,
+   "day": 61
+  }
+ ],
+ "bondHist": [
+  {
+   "day": 2,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "A person, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "gen_nmvw9jg": {
+     "name": "A person, maybe 60s, with grey-streaked hair",
+     "v": 0,
+     "depth": 0,
+     "trust": 6
+    },
+    "gen_5uoh5ut": {
+     "name": "A man, maybe 50s, with a limp",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "gen_dsuslyv": {
+     "name": "A woman, maybe 30s, with a crooked nose",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "elijah_scott": {
+     "name": "A man, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 6
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "A man, maybe 30s, with ink-stained fingers",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "emma_larsen": {
+     "name": "A woman, maybe 20s",
+     "v": 0,
+     "depth": 0,
+     "trust": 6
+    },
+    "xavier_dubois": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    }
+   },
+   "npcTop": []
+  },
+  {
+   "day": 3,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "A person, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "gen_nmvw9jg": {
+     "name": "A person, maybe 60s, with grey-streaked hair",
+     "v": 0,
+     "depth": 0,
+     "trust": 4
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "gen_dsuslyv": {
+     "name": "A woman, maybe 30s, with a crooked nose",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "emma_larsen": {
+     "name": "A woman, maybe 20s",
+     "v": 0,
+     "depth": 0,
+     "trust": 6
+    },
+    "xavier_dubois": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Kieran",
+     "b": "A woman, maybe 30s, with a crooked nose",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 2,
+     "depth": 0,
+     "trust": 40
+    },
+    "gen_nmvw9jg": {
+     "name": "A person, maybe 60s, with grey-streaked hair",
+     "v": 0,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_dsuslyv": {
+     "name": "A woman, maybe 30s, with a crooked nose",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": 0,
+     "depth": 0,
+     "trust": 1
+    },
+    "xavier_dubois": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Kieran",
+     "b": "A woman, maybe 30s, with a crooked nose",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 5,
+     "depth": 0,
+     "trust": 51
+    },
+    "gen_nmvw9jg": {
+     "name": "A person, maybe 60s, with grey-streaked hair",
+     "v": 0,
+     "depth": 0,
+     "trust": 2
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "gen_dsuslyv": {
+     "name": "A woman, maybe 30s, with a crooked nose",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -10,
+     "depth": 0,
+     "trust": 2
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": 0,
+     "depth": 0,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "A person, maybe 60s, with grey-streaked hair",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "A woman, maybe 30s, with a crooked nose",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 7,
+     "depth": 0,
+     "trust": 60
+    },
+    "gen_nmvw9jg": {
+     "name": "A person, maybe 60s, with grey-streaked hair",
+     "v": 0,
+     "depth": 0,
+     "trust": 3
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "gen_dsuslyv": {
+     "name": "A woman, maybe 30s, with a crooked nose",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -10,
+     "depth": 0,
+     "trust": 0
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -6,
+     "depth": 0,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 24
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "A person, maybe 60s, with grey-streaked hair",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "A woman, maybe 30s, with a crooked nose",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 7,
+     "depth": 0,
+     "trust": 69
+    },
+    "gen_nmvw9jg": {
+     "name": "A person, maybe 60s, with grey-streaked hair",
+     "v": 0,
+     "depth": 0,
+     "trust": 1
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_dsuslyv": {
+     "name": "A woman, maybe 30s, with a crooked nose",
+     "v": 3,
+     "depth": 0,
+     "trust": 26
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -10,
+     "depth": 0,
+     "trust": 12
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -6,
+     "depth": 0,
+     "trust": 1
+    },
+    "xavier_dubois": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "A person, maybe 60s, with grey-streaked hair",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "A woman, maybe 30s, with a crooked nose",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "A woman, maybe 30s, with a crooked nose",
+     "b": "Devon",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 9,
+     "depth": 0,
+     "trust": 78
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": 0,
+     "depth": 0,
+     "trust": 4
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_dsuslyv": {
+     "name": "Antônia",
+     "v": 3,
+     "depth": 0,
+     "trust": 27
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -10,
+     "depth": 0,
+     "trust": 20
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 24
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -6,
+     "depth": 0,
+     "trust": 1
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Antônia",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Antônia",
+     "b": "Devon",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 9,
+     "depth": 0,
+     "trust": 85
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_dsuslyv": {
+     "name": "Antônia",
+     "v": 3,
+     "depth": 0,
+     "trust": 27
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -10,
+     "depth": 0,
+     "trust": 26
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 24
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -6,
+     "depth": 0,
+     "trust": 1
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Antônia",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Antônia",
+     "b": "Devon",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 11,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "gen_dsuslyv": {
+     "name": "Antônia",
+     "v": 3,
+     "depth": 0,
+     "trust": 32
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -20,
+     "depth": 0,
+     "trust": 0
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -6,
+     "depth": 0,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 31
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Antônia",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Antônia",
+     "b": "Devon",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 17,
+     "depth": 0,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "gen_dsuslyv": {
+     "name": "Antônia",
+     "v": 3,
+     "depth": 0,
+     "trust": 32
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -20,
+     "depth": 0,
+     "trust": 5
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 31
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -12,
+     "depth": 0,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 34
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Antônia",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Kieran",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Antônia",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 19,
+     "depth": 0,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -20,
+     "depth": 0,
+     "trust": 5
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 31
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -12,
+     "depth": 0,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Kieran",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 19,
+     "depth": 0,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -20,
+     "depth": 0,
+     "trust": 10
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 32
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -12,
+     "depth": 0,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 21,
+     "depth": 0,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 32
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 24
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -31,
+     "depth": -1,
+     "trust": 0
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 32
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -23,
+     "depth": 0,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 21,
+     "depth": 0,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -11,
+     "depth": 0,
+     "trust": 5
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -31,
+     "depth": -1,
+     "trust": 1
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 33
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -23,
+     "depth": 0,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 23,
+     "depth": 0,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -11,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -37,
+     "depth": -1,
+     "trust": 0
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 34
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -38,
+     "depth": -1,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 26,
+     "depth": 1,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -11,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -37,
+     "depth": -1,
+     "trust": 2
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -38,
+     "depth": -1,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 39
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 28,
+     "depth": 1,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -11,
+     "depth": 0,
+     "trust": 12
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 43
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -37,
+     "depth": -1,
+     "trust": 2
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 38
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 29
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -38,
+     "depth": -1,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 39
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 30,
+     "depth": 1,
+     "trust": 93
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -20,
+     "depth": 0,
+     "trust": 8
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 45
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -37,
+     "depth": -1,
+     "trust": 9
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 38
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 30
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -38,
+     "depth": -1,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 34,
+     "depth": 1,
+     "trust": 93
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -20,
+     "depth": 0,
+     "trust": 17
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -37,
+     "depth": -1,
+     "trust": 10
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 38
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 31
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -38,
+     "depth": -1,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 34,
+     "depth": 1,
+     "trust": 93
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -20,
+     "depth": 0,
+     "trust": 23
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 51
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 29
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -43,
+     "depth": -1,
+     "trust": 2
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 32
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -44,
+     "depth": -1,
+     "trust": 13
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 41
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 38,
+     "depth": 1,
+     "trust": 94
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -20,
+     "depth": 0,
+     "trust": 29
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 52
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 32
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -43,
+     "depth": -1,
+     "trust": 2
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 34
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -44,
+     "depth": -1,
+     "trust": 15
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 41
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 40,
+     "depth": 1,
+     "trust": 95
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -20,
+     "depth": 0,
+     "trust": 35
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 54
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -43,
+     "depth": -1,
+     "trust": 8
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 41
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -44,
+     "depth": -1,
+     "trust": 16
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 42
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 42,
+     "depth": 1,
+     "trust": 95
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -29,
+     "depth": -1,
+     "trust": 30
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 58
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -43,
+     "depth": -1,
+     "trust": 8
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 41
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 39
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -44,
+     "depth": -1,
+     "trust": 16
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 42
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 44,
+     "depth": 1,
+     "trust": 96
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -29,
+     "depth": -1,
+     "trust": 34
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 61
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -43,
+     "depth": -1,
+     "trust": 17
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 42
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 39
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -44,
+     "depth": -1,
+     "trust": 17
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 43
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 48,
+     "depth": 1,
+     "trust": 97
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -29,
+     "depth": -1,
+     "trust": 41
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 64
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -49,
+     "depth": -1,
+     "trust": 2
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 43
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 39
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -50,
+     "depth": -2,
+     "trust": 3
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 43
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 51,
+     "depth": 2,
+     "trust": 97
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -29,
+     "depth": -1,
+     "trust": 50
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 66
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 39
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -49,
+     "depth": -1,
+     "trust": 11
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 44
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -50,
+     "depth": -2,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 44
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 55,
+     "depth": 2,
+     "trust": 98
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 50
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 69
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 42
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -49,
+     "depth": -1,
+     "trust": 11
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 45
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -50,
+     "depth": -2,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 44
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 57,
+     "depth": 2,
+     "trust": 99
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 62
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 71
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 45
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -49,
+     "depth": -1,
+     "trust": 13
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 45
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 49
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -50,
+     "depth": -2,
+     "trust": 5
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 45
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 22,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 61,
+     "depth": 2,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 72
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 73
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 46
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -49,
+     "depth": -1,
+     "trust": 14
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 47
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 51
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -50,
+     "depth": -2,
+     "trust": 5
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 45
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 63,
+     "depth": 2,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 80
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 75
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -55,
+     "depth": -2,
+     "trust": 9
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 49
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 51
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -56,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 45
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 67,
+     "depth": 2,
+     "trust": 93
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 77
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 49
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -55,
+     "depth": -2,
+     "trust": 10
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 50
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 51
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -56,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 47
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 69,
+     "depth": 2,
+     "trust": 94
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 89
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 79
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 51
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -55,
+     "depth": -2,
+     "trust": 21
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 51
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 53
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -56,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 73,
+     "depth": 2,
+     "trust": 96
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 81
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 52
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -55,
+     "depth": -2,
+     "trust": 21
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 57
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 53
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -56,
+     "depth": -2,
+     "trust": 3
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 22,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 75,
+     "depth": 3,
+     "trust": 98
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 83
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 58
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -65,
+     "depth": -2,
+     "trust": 4
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 59
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 57
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -56,
+     "depth": -2,
+     "trust": 3
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 24,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 79,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 89
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 87
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 60
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -65,
+     "depth": -2,
+     "trust": 4
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 61
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 57
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -62,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 26,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 81,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -38,
+     "depth": -1,
+     "trust": 88
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 64
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -65,
+     "depth": -2,
+     "trust": 10
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 65
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 61
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -62,
+     "depth": -2,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 26,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 85,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -47,
+     "depth": -1,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 66
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -65,
+     "depth": -2,
+     "trust": 10
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 67
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 65
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -62,
+     "depth": -2,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 54
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 26,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 87,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -47,
+     "depth": -1,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 66
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -65,
+     "depth": -2,
+     "trust": 14
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 67
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 67
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -62,
+     "depth": -2,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 56
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 50,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 26,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 91,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -47,
+     "depth": -1,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 68
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -65,
+     "depth": -2,
+     "trust": 14
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 71
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 67
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -62,
+     "depth": -2,
+     "trust": 6
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 58
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 50,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 26,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 93,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -56,
+     "depth": -2,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 72
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -71,
+     "depth": -2,
+     "trust": 8
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 71
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 67
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -68,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 58
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 54,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 26,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 97,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -56,
+     "depth": -2,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 76
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -71,
+     "depth": -2,
+     "trust": 8
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 71
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 67
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -68,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 58
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 28,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 99,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -56,
+     "depth": -2,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 82
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -71,
+     "depth": -2,
+     "trust": 21
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 73
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 71
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -68,
+     "depth": -2,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 58
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 28,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -65,
+     "depth": -2,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 82
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -71,
+     "depth": -2,
+     "trust": 23
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 73
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 71
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -68,
+     "depth": -2,
+     "trust": 6
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 58
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 28,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -65,
+     "depth": -2,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 84
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -71,
+     "depth": -2,
+     "trust": 25
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 73
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 71
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -68,
+     "depth": -2,
+     "trust": 10
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 60
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 46,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 28,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -65,
+     "depth": -2,
+     "trust": 89
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 84
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -77,
+     "depth": -3,
+     "trust": 22
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 75
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 75
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -74,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 62
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 46,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 36,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 30,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -65,
+     "depth": -2,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 84
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -77,
+     "depth": -3,
+     "trust": 40
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 77
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 77
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -74,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 62
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 46,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 30,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -74,
+     "depth": -2,
+     "trust": 89
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 84
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -77,
+     "depth": -3,
+     "trust": 52
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 77
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 81
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -74,
+     "depth": -2,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 66
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 50,
+     "depth": 2
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 34,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -74,
+     "depth": -2,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 86
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -77,
+     "depth": -3,
+     "trust": 61
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 77
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 81
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -74,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 66
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 50,
+     "depth": 2
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 34,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -74,
+     "depth": -2,
+     "trust": 89
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 86
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -77,
+     "depth": -3,
+     "trust": 72
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 77
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 83
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -74,
+     "depth": -2,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 68
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 50,
+     "depth": 2
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 36,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -74,
+     "depth": -2,
+     "trust": 88
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 86
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -83,
+     "depth": -3,
+     "trust": 68
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 79
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 85
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -80,
+     "depth": -3,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 68
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 50,
+     "depth": 2
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 36,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -83,
+     "depth": -3,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 86
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -83,
+     "depth": -3,
+     "trust": 77
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 81
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 85
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -80,
+     "depth": -3,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 72
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 60,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 50,
+     "depth": 2
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 40,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -83,
+     "depth": -3,
+     "trust": 88
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -83,
+     "depth": -3,
+     "trust": 83
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 83
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 89
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -80,
+     "depth": -3,
+     "trust": 6
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 74
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 62,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 54,
+     "depth": 2
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 40,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -83,
+     "depth": -3,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -83,
+     "depth": -3,
+     "trust": 91
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 83
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -80,
+     "depth": -3,
+     "trust": 6
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 74
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 62,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 54,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 42,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 80
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -92,
+     "depth": -3,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -93,
+     "depth": -3,
+     "trust": 56
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 83
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -80,
+     "depth": -3,
+     "trust": 8
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 76
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 62,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 54,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 92
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -92,
+     "depth": -3,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -93,
+     "depth": -3,
+     "trust": 67
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 83
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -86,
+     "depth": -3,
+     "trust": 2
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 78
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 64,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 94
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -92,
+     "depth": -3,
+     "trust": 88
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -93,
+     "depth": -3,
+     "trust": 76
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 87
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -86,
+     "depth": -3,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 78
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 64,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 96
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -92,
+     "depth": -3,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -90,
+     "depth": -3,
+     "trust": 88
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 89
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -86,
+     "depth": -3,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 78
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 64,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Kieran",
+     "b": "Xavier",
+     "v": 42,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 98
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -100,
+     "depth": -3,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -90,
+     "depth": -3,
+     "trust": 89
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -86,
+     "depth": -3,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 78
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 66,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 56,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -100,
+     "depth": -3,
+     "trust": 87
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -90,
+     "depth": -3,
+     "trust": 91
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -86,
+     "depth": -3,
+     "trust": 4
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 80
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 70,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 58,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -100,
+     "depth": -3,
+     "trust": 90
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -96,
+     "depth": -3,
+     "trust": 83
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -92,
+     "depth": -3,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 82
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 74,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 58,
+     "depth": 2
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 52,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 44,
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "scholar": {
+    "gen_u9no7wa": {
+     "name": "Aaron",
+     "v": 100,
+     "depth": 3,
+     "trust": 100
+    },
+    "gen_nmvw9jg": {
+     "name": "Tamika",
+     "v": -100,
+     "depth": -3,
+     "trust": 78
+    },
+    "gen_5uoh5ut": {
+     "name": "Kieran",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "gen_lzvm7it": {
+     "name": "Cauã",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "elijah_scott": {
+     "name": "Elijah",
+     "v": -96,
+     "depth": -3,
+     "trust": 83
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "devon_okafor": {
+     "name": "Devon",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "nikos_papadopoulos": {
+     "name": "Nikos",
+     "v": 0,
+     "depth": 0,
+     "trust": 91
+    },
+    "emma_larsen": {
+     "name": "Emma",
+     "v": -92,
+     "depth": -3,
+     "trust": 0
+    },
+    "xavier_dubois": {
+     "name": "Xavier",
+     "v": 0,
+     "depth": 0,
+     "trust": 82
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Aaron",
+     "b": "Devon",
+     "v": 74,
+     "depth": 2
+    },
+    {
+     "a": "Aaron",
+     "b": "Tamika",
+     "v": 58,
+     "depth": 2
+    },
+    {
+     "a": "Cauã",
+     "b": "Nikos",
+     "v": 52,
+     "depth": 2
+    },
+    {
+     "a": "Tamika",
+     "b": "Emma",
+     "v": 48,
+     "depth": 1
+    },
+    {
+     "a": "Devon",
+     "b": "Nikos",
+     "v": 46,
+     "depth": 1
+    }
+   ]
+  }
+ ],
+ "npcPairsTop": [
+  {
+   "a": "Aaron",
+   "b": "Devon",
+   "v": 74,
+   "depth": 2
+  },
+  {
+   "a": "Aaron",
+   "b": "Tamika",
+   "v": 58,
+   "depth": 2
+  },
+  {
+   "a": "Cauã",
+   "b": "Nikos",
+   "v": 52,
+   "depth": 2
+  },
+  {
+   "a": "Tamika",
+   "b": "Emma",
+   "v": 48,
+   "depth": 1
+  },
+  {
+   "a": "Devon",
+   "b": "Nikos",
+   "v": 46,
+   "depth": 1
+  },
+  {
+   "a": "Kieran",
+   "b": "Xavier",
+   "v": 42,
+   "depth": 1
+  },
+  {
+   "a": "Aaron",
+   "b": "Kieran",
+   "v": 34,
+   "depth": 1
+  },
+  {
+   "a": "Nikos",
+   "b": "Xavier",
+   "v": 30,
+   "depth": 1
+  },
+  {
+   "a": "Tamika",
+   "b": "Kieran",
+   "v": 26,
+   "depth": 1
+  },
+  {
+   "a": "Devon",
+   "b": "Emma",
+   "v": 26,
+   "depth": 1
+  }
+ ],
+ "grievances": [
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "stolen_from",
+   "severity": 20,
+   "day": 5
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 6
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "stolen_from",
+   "severity": 20,
+   "day": 10
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 11
+  },
+  {
+   "by": "Tamika",
+   "against": "Aubrey",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 14
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 14
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 14
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 15
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 15
+  },
+  {
+   "by": "Aubrey",
+   "against": "Emma",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 15
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 18
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 21
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 21
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 23
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 26
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 26
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 27
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 31
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 31
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "stolen_from",
+   "severity": 20,
+   "day": 35
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 36
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 37
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 40
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 41
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 41
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 43
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 46
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 46
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 47
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 51
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 51
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 51
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 54
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "stolen_from",
+   "severity": 20,
+   "day": 55
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 55
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 58
+  },
+  {
+   "by": "Emma",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 61
+  },
+  {
+   "by": "Elijah",
+   "against": "Aubrey",
+   "kind": "suspected_theft",
+   "severity": 12,
+   "day": 61
+  },
+  {
+   "by": "Aubrey",
+   "against": "Tamika",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 61
+  }
+ ],
+ "acts": {
+  "feeds": 57,
+  "thefts": 24,
+  "declines": 0,
+  "tends": 70,
+  "treats": 0,
+  "comforts": 0
+ },
+ "convos": 59,
+ "naturalEnds": 59,
+ "deflectAvg": 0.4,
+ "crimesByType": {
+  "theft": 24
+ },
+ "justiceStage": 2,
+ "deaths": [
+  {
+   "name": "Antônia",
+   "role": "mushroom_grower",
+   "day": 11,
+   "cause": "ambush",
+   "killerName": "Tamika"
+  }
+ ],
+ "census": {
+  "alive": [
+   {
+    "name": "Aaron",
+    "role": "carpenter",
+    "trust": 100,
+    "bond": {
+     "v": 100,
+     "depth": 3,
+     "day": 61,
+     "dayGain": 2
+    }
+   },
+   {
+    "name": "Tamika",
+    "role": "glazier",
+    "trust": 78,
+    "bond": {
+     "v": -100,
+     "depth": -3,
+     "day": 0,
+     "dayGain": 0
+    }
+   },
+   {
+    "name": "Kieran",
+    "role": "dispatcher_911",
+    "trust": 91,
+    "bond": {
+     "v": 0,
+     "depth": 0
+    }
+   },
+   {
+    "name": "Cauã",
+    "role": "pilot",
+    "trust": 90,
+    "bond": {
+     "v": 0,
+     "depth": 0
+    }
+   },
+   {
+    "name": "Elijah",
+    "role": "social_worker",
+    "trust": 83,
+    "bond": {
+     "v": -96,
+     "depth": -3,
+     "day": 58,
+     "dayGain": 3
+    }
+   },
+   {
+    "name": "Brian",
+    "role": "zookeeper",
+    "trust": 15,
+    "bond": {
+     "v": 0,
+     "depth": 0
+    }
+   },
+   {
+    "name": "Devon",
+    "role": "programmer",
+    "trust": 91,
+    "bond": {
+     "v": 0,
+     "depth": 0
+    }
+   },
+   {
+    "name": "Nikos",
+    "role": "aquarium keeper",
+    "trust": 91,
+    "bond": {
+     "v": 0,
+     "depth": 0
+    }
+   },
+   {
+    "name": "Emma",
+    "role": "veterinarian",
+    "trust": 0,
+    "bond": {
+     "v": -92,
+     "depth": -3,
+     "day": 0,
+     "dayGain": 0
+    }
+   },
+   {
+    "name": "Xavier",
+    "role": "lawyer",
+    "trust": 82,
+    "bond": {
+     "v": 0,
+     "depth": 0
+    }
+   }
+  ],
+  "dead": [
+   {
+    "name": "Antônia",
+    "role": "mushroom_grower",
+    "day": 11,
+    "cause": "ambush",
+    "killerName": "Tamika"
+   }
+  ]
+ },
+ "transcripts": 59,
+ "end.day": 62,
+ "end.alive": 11
+}

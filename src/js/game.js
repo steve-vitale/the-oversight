@@ -4100,6 +4100,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // witnesses only.
         try { this.observe('theft', { target: vid, trustMoved: true }); } catch (e) {}
         try { this.recordCrime('theft', { victim: vid, caught: true }); } catch (e) {}
+        // RIVALRY PATH (journey-social r21 2026-10-18): caught red-handed is
+        // a relationship event, not just a trust event. Before this, theft
+        // moved trust (-35) but NEVER the bond — 18 thefts across 3 runs
+        // left victim bonds at 0, so a robbed villager could never become
+        // your enemy. recordGrievance is the bond system's only negative
+        // path; it also feeds grievanceBetween -> motiveBetween (plots) and
+        // memdepth's grievance lines (narrative surface).
+        try { if (this.recordGrievance) this.recordGrievance(vid, this.villagerId, 'stolen_from', 20); } catch (e) {}
         this.say('You let go. Whatever you were reaching for stays where it was.');
         return 'caught';
       }
@@ -4133,6 +4141,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.bumpTrust(vid, -15);
           try { this.remember(vid, 'suspects_you_stealing', 'their rations went missing'); } catch (e) {}
           try { this.recordCrime('theft', { victim: vid, caught: false }); } catch (e) {}
+          // RIVALRY PATH (journey-social r21 2026-10-18): suspicion is a
+          // relationship event too — weaker than caught red-handed (the
+          // village only KNOWS if someone saw), but "their eyes keep
+          // finding you" has to land somewhere. Same machinery as above.
+          try { if (this.recordGrievance) this.recordGrievance(vid, this.villagerId, 'suspected_theft', 12); } catch (e) {}
           try { this.seedGossip('theft', { honest: -15, generous: -10 }, [vid]); } catch (e) {}
         }
       }

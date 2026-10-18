@@ -42,6 +42,8 @@
         voted_acquit: 'voting to let them walk at the moot',
         abandoned_alliance: 'walking away from the alliance',
         false_accusation: 'the false accusation at the moot',
+        stolen_from: 'stealing from their pack',
+        suspected_theft: 'the missing rations',
         voted_for_petitioners: 'voting to take the petitioners in',
         turned_away_petitioners: 'voting to turn the petitioners away',
       };

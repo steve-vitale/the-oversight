@@ -1,0 +1,5458 @@
+{
+ "seed": 1503,
+ "daycap": 60,
+ "ms": 8062,
+ "endDay": 63,
+ "alive": 8,
+ "fallen": 7,
+ "outcome": null,
+ "endReason": "survived",
+ "factions": {
+  "favorites": [
+   {
+    "vid": "luis_fernandez",
+    "name": "Luis",
+    "role": "mason",
+    "bond": {
+     "v": 2,
+     "depth": 0,
+     "day": 3,
+     "dayGain": 2
+    },
+    "trust": 68
+   },
+   {
+    "vid": "james_okonkwo",
+    "name": "James",
+    "role": "carpenter",
+    "bond": {
+     "v": 0,
+     "depth": 0
+    },
+    "trust": 2
+   }
+  ],
+  "outsiders": [
+   {
+    "vid": "gen_elkwpo2",
+    "name": "Brayden",
+    "role": "artist",
+    "bond": {
+     "v": 0,
+     "depth": 0
+    },
+    "trust": 0
+   },
+   {
+    "vid": "priya_nair",
+    "name": "Priya",
+    "role": "dispatcher_911",
+    "bond": {
+     "v": -12,
+     "depth": 0,
+     "day": 37,
+     "dayGain": 2
+    },
+    "trust": 24
+   }
+  ]
+ },
+ "crossings": [
+  {
+   "a": "Rocco",
+   "b": "James",
+   "th": 25,
+   "dir": "+",
+   "v": 25,
+   "depth": 1,
+   "day": 20
+  },
+  {
+   "a": "Rocco",
+   "b": "Priya",
+   "th": 25,
+   "dir": "-",
+   "v": -29,
+   "depth": -1,
+   "day": 22
+  },
+  {
+   "a": "Rocco",
+   "b": "James",
+   "th": 50,
+   "dir": "+",
+   "v": 51,
+   "depth": 2,
+   "day": 28
+  },
+  {
+   "a": "Rocco",
+   "b": "James",
+   "th": 75,
+   "dir": "+",
+   "v": 77,
+   "depth": 3,
+   "day": 37
+  },
+  {
+   "a": "Norberto",
+   "b": "Brian",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 44
+  },
+  {
+   "a": "Hannah",
+   "b": "Norberto",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 49
+  },
+  {
+   "a": "Hannah",
+   "b": "Priya",
+   "th": 25,
+   "dir": "+",
+   "v": 26,
+   "depth": 1,
+   "day": 59
+  }
+ ],
+ "bondHist": [
+  {
+   "day": 2,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "A person, maybe 20s, with a shaved head",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 10
+    },
+    "gen_337h1w4": {
+     "name": "A person, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "gen_t6owaq7": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "gen_6v33fpw": {
+     "name": "A person, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "elif_demir": {
+     "name": "A woman, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "priya_nair": {
+     "name": "A woman, maybe 30s",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "brian_otieno": {
+     "name": "A man, maybe 30s",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "ursula_weber": {
+     "name": "A woman, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    }
+   },
+   "npcTop": []
+  },
+  {
+   "day": 3,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "A person, maybe 20s, with a shaved head",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "gen_337h1w4": {
+     "name": "A person, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "gen_t6owaq7": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "gen_6v33fpw": {
+     "name": "A person, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "elif_demir": {
+     "name": "A woman, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 3,
+     "depth": 0,
+     "trust": 20
+    },
+    "brian_otieno": {
+     "name": "A man, maybe 30s",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "ursula_weber": {
+     "name": "A woman, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    }
+   },
+   "npcTop": []
+  },
+  {
+   "day": 4,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "A person, maybe 20s, with a shaved head",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_337h1w4": {
+     "name": "A person, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "gen_t6owaq7": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 2,
+     "depth": 0,
+     "trust": 36
+    },
+    "elif_demir": {
+     "name": "A woman, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 6,
+     "depth": 0,
+     "trust": 20
+    },
+    "brian_otieno": {
+     "name": "A man, maybe 30s",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "ursula_weber": {
+     "name": "A woman, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    }
+   },
+   "npcTop": []
+  },
+  {
+   "day": 5,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "A person, maybe 20s, with a shaved head",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_337h1w4": {
+     "name": "A person, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "gen_t6owaq7": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 2,
+     "depth": 0,
+     "trust": 37
+    },
+    "elif_demir": {
+     "name": "A woman, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 6,
+     "depth": 0,
+     "trust": 21
+    },
+    "brian_otieno": {
+     "name": "A man, maybe 30s",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "ursula_weber": {
+     "name": "A woman, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    }
+   },
+   "npcTop": [
+    {
+     "a": "A person, maybe 20s, with a shaved head",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "A person, maybe 50s",
+     "b": "A man, maybe 40s",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "A person, maybe 20s, with a shaved head",
+     "v": 0,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "gen_337h1w4": {
+     "name": "A person, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "gen_t6owaq7": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 4,
+     "depth": 0,
+     "trust": 40
+    },
+    "elif_demir": {
+     "name": "A woman, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 0,
+     "depth": 0,
+     "trust": 1
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 6,
+     "depth": 0,
+     "trust": 23
+    },
+    "brian_otieno": {
+     "name": "A man, maybe 30s",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "ursula_weber": {
+     "name": "A woman, maybe 60s",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    }
+   },
+   "npcTop": [
+    {
+     "a": "A person, maybe 20s, with a shaved head",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "A person, maybe 50s",
+     "b": "A man, maybe 40s",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "A person, maybe 20s, with a shaved head",
+     "v": 0,
+     "depth": 0,
+     "trust": 3
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "gen_337h1w4": {
+     "name": "A person, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "gen_t6owaq7": {
+     "name": "A man, maybe 40s",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 10,
+     "depth": 0,
+     "trust": 63
+    },
+    "elif_demir": {
+     "name": "A woman, maybe 50s",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 0,
+     "depth": 0,
+     "trust": 3
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 6,
+     "depth": 0,
+     "trust": 23
+    },
+    "brian_otieno": {
+     "name": "A man, maybe 30s",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Luis",
+     "b": "A woman, maybe 50s",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "A person, maybe 20s, with a shaved head",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "A person, maybe 50s",
+     "b": "A man, maybe 40s",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "A person, maybe 50s",
+     "b": "James",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": 0,
+     "depth": 0,
+     "trust": 2
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 16,
+     "depth": 0,
+     "trust": 64
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 0,
+     "depth": 0,
+     "trust": 5
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 6,
+     "depth": 0,
+     "trust": 24
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Luis",
+     "b": "Elif",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Luis",
+     "b": "Brian",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": 0,
+     "depth": 0,
+     "trust": 2
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "luis_fernandez": {
+     "name": "Luis",
+     "v": 16,
+     "depth": 0,
+     "trust": 66
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 6,
+     "depth": 0,
+     "trust": 25
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Luis",
+     "b": "Elif",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Luis",
+     "b": "Brian",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 10
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 8,
+     "depth": 0,
+     "trust": 20
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 10,
+     "depth": 0,
+     "trust": 33
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 9
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -9,
+     "depth": 0,
+     "trust": 3
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 16,
+     "depth": 0,
+     "trust": 67
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -11,
+     "depth": 0,
+     "trust": 0
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 2
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 29
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 6
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 18,
+     "depth": 0,
+     "trust": 71
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 4
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 6
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 31
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 14
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 18,
+     "depth": 0,
+     "trust": 72
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 7
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 32
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 15
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 20,
+     "depth": 0,
+     "trust": 72
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 7
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Marta",
+     "b": "Marama",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 2
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 33
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 12
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 21
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 20,
+     "depth": 0,
+     "trust": 73
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 8
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Marta",
+     "b": "Marama",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 3
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 33
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 13
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 21
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 23,
+     "depth": 0,
+     "trust": 77
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 9
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Marta",
+     "b": "Marama",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 3
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 7
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 31
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 23,
+     "depth": 0,
+     "trust": 80
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 9
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Hannah",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 9
+    },
+    "gen_9xvutl7": {
+     "name": "Marta",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 15
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 31
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 25,
+     "depth": 1,
+     "trust": 80
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 14
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Marta",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Hannah",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 0
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 14
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -20,
+     "depth": 0,
+     "trust": 24
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 27,
+     "depth": 1,
+     "trust": 86
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 15
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Hannah",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 1
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 17
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 16
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 17
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 30,
+     "depth": 1,
+     "trust": 89
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 16
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Hannah",
+     "v": 8,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 5
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 39
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 19
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 29
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 32,
+     "depth": 1,
+     "trust": 91
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 24
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 18
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Elif",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Hannah",
+     "v": 8,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -22,
+     "depth": 0,
+     "trust": 3
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 41
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 33
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 36,
+     "depth": 1,
+     "trust": 92
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 21
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Marama",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Elif",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brian",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -19,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 46
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 25
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 18
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 36
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 41,
+     "depth": 1,
+     "trust": 93
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 22
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Norberto",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Marama",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Marama",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -19,
+     "depth": 0,
+     "trust": 2
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 48
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "gen_6v33fpw": {
+     "name": "Marama",
+     "v": 0,
+     "depth": 0,
+     "trust": 8
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 21
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 44,
+     "depth": 1,
+     "trust": 94
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 28
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 22
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Norberto",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Elif",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Marama",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -19,
+     "depth": 0,
+     "trust": 6
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 51
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 24
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 36
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 48,
+     "depth": 1,
+     "trust": 95
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 30
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 22
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Norberto",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Elif",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -19,
+     "depth": 0,
+     "trust": 11
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 53
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 24
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 38
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 51,
+     "depth": 2,
+     "trust": 96
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 31
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 22
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Norberto",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Elif",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -19,
+     "depth": 0,
+     "trust": 14
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 57
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 29
+    },
+    "elif_demir": {
+     "name": "Elif",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 40
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 52,
+     "depth": 2,
+     "trust": 87
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 16
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Norberto",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Elif",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Hannah",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "scholar": {
+    "gen_elkwpo2": {
+     "name": "Brayden",
+     "v": -19,
+     "depth": 0,
+     "trust": 13
+    },
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 60
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 31
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 41
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 54,
+     "depth": 2,
+     "trust": 91
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 18
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Norberto",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Hannah",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Brayden",
+     "b": "Priya",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 68
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 33
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 34
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 56,
+     "depth": 2,
+     "trust": 84
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 18
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Ursula",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 72
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 38
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 60,
+     "depth": 2,
+     "trust": 83
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    },
+    "ursula_weber": {
+     "name": "Ursula",
+     "v": -22,
+     "depth": 0,
+     "trust": 18
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 10,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "James",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 76
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 41
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 62,
+     "depth": 2,
+     "trust": 92
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 35
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "James",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 78
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -29,
+     "depth": -1,
+     "trust": 50
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 66,
+     "depth": 2,
+     "trust": 93
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 37
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "James",
+     "v": 12,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 81
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 38
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -38,
+     "depth": -1,
+     "trust": 40
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 68,
+     "depth": 2,
+     "trust": 84
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "James",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 85
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -38,
+     "depth": -1,
+     "trust": 28
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 72,
+     "depth": 2,
+     "trust": 92
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "James",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 0,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 0,
+     "depth": 0,
+     "trust": 42
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -38,
+     "depth": -1,
+     "trust": 34
+    },
+    "james_okonkwo": {
+     "name": "James",
+     "v": 77,
+     "depth": 3,
+     "trust": 94
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Hannah",
+     "b": "James",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "James",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 44
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 6,
+     "depth": 0,
+     "trust": 38
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 37
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 20
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 12,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 45
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 6,
+     "depth": 0,
+     "trust": 42
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 41
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 22
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 27
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 12,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 10,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 46
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 6,
+     "depth": 0,
+     "trust": 42
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 41
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 22
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 32
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 12,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 47
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": 6,
+     "depth": 0,
+     "trust": 38
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 41
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 24
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 34
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 12,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 54
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 30
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 42
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 25
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 36
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 12,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 57
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 40
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 42
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 25
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 38
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 14,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 59
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 36
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 42
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 27
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 40
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 14,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 61
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 40
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 42
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 29
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 0,
+     "depth": 0,
+     "trust": 46
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 16,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 16,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 63
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 27
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 43
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 28
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 47
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 16,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 66
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 37
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 43
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 28
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 50
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 0,
+     "depth": 0,
+     "trust": 20
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 16,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 69
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 40
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 42
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 28
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 53
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 0,
+     "depth": 0,
+     "trust": 21
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 16,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 72
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 42
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 42
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 28
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 56
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 30,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 18,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 75
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 42
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 41
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 28
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 60
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 0,
+     "depth": 0,
+     "trust": 22
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 18,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 79
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 34
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 41
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 29
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 62
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 0,
+     "depth": 0,
+     "trust": 23
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 82
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 34
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 41
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 29
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 66
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 0,
+     "depth": 0,
+     "trust": 26
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 86
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 37
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 40
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 30
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 69
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 35
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 28,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 88
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 37
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 40
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 30
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 71
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 35
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 40
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 40
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 30
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 74
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 39
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 32,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 25
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 40
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 30
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 76
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 39
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 38,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 28
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 38
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 30
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 78
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 41
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 40,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 28
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 38
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 30
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 82
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 41
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 42,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 40
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 38
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 31
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 84
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 41
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 22,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 41
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 38
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 31
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 86
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 41
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 20,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -3,
+     "depth": 0,
+     "trust": 31
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 38
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 33
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 89
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 42
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 24,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -12,
+     "depth": 0,
+     "trust": 24
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 39
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 34
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 90
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 45
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 24,
+     "depth": 0
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "scholar": {
+    "gen_337h1w4": {
+     "name": "Hannah",
+     "v": 24,
+     "depth": 0,
+     "trust": 90
+    },
+    "gen_t6owaq7": {
+     "name": "Norberto",
+     "v": 18,
+     "depth": 0,
+     "trust": 90
+    },
+    "priya_nair": {
+     "name": "Priya",
+     "v": -12,
+     "depth": 0,
+     "trust": 24
+    },
+    "brian_otieno": {
+     "name": "Brian",
+     "v": 14,
+     "depth": 0,
+     "trust": 39
+    },
+    "desmond_clarke": {
+     "name": "Desmond",
+     "v": 2,
+     "depth": 0,
+     "trust": 34
+    },
+    "app_mgpsphtq486": {
+     "name": "Craig",
+     "v": 3,
+     "depth": 0,
+     "trust": 90
+    },
+    "visjoin_44": {
+     "name": "Natalia",
+     "v": 3,
+     "depth": 0,
+     "trust": 45
+    }
+   },
+   "npcTop": [
+    {
+     "a": "Norberto",
+     "b": "Brian",
+     "v": 44,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Norberto",
+     "v": 34,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Priya",
+     "v": 26,
+     "depth": 1
+    },
+    {
+     "a": "Hannah",
+     "b": "Brian",
+     "v": 24,
+     "depth": 0
+    },
+    {
+     "a": "Norberto",
+     "b": "Priya",
+     "v": 24,
+     "depth": 0
+    }
+   ]
+  }
+ ],
+ "npcPairsTop": [
+  {
+   "a": "Norberto",
+   "b": "Brian",
+   "v": 44,
+   "depth": 1
+  },
+  {
+   "a": "Hannah",
+   "b": "Norberto",
+   "v": 34,
+   "depth": 1
+  },
+  {
+   "a": "Hannah",
+   "b": "Priya",
+   "v": 26,
+   "depth": 1
+  },
+  {
+   "a": "Hannah",
+   "b": "Brian",
+   "v": 24,
+   "depth": 0
+  },
+  {
+   "a": "Norberto",
+   "b": "Priya",
+   "v": 24,
+   "depth": 0
+  },
+  {
+   "a": "Norberto",
+   "b": "Desmond",
+   "v": 24,
+   "depth": 0
+  },
+  {
+   "a": "Priya",
+   "b": "Brian",
+   "v": 22,
+   "depth": 0
+  },
+  {
+   "a": "Brian",
+   "b": "Desmond",
+   "v": 20,
+   "depth": 0
+  },
+  {
+   "a": "Desmond",
+   "b": "Craig",
+   "v": 16,
+   "depth": 0
+  },
+  {
+   "a": "Hannah",
+   "b": "Craig",
+   "v": 12,
+   "depth": 0
+  }
+ ],
+ "grievances": [
+  {
+   "by": "Brayden",
+   "against": "Rocco",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 11
+  },
+  {
+   "by": "Priya",
+   "against": "Rocco",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 11
+  },
+  {
+   "by": "Ursula",
+   "against": "Rocco",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 11
+  },
+  {
+   "by": "Brayden",
+   "against": "Rocco",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 14
+  },
+  {
+   "by": "Priya",
+   "against": "Rocco",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 14
+  },
+  {
+   "by": "Ursula",
+   "against": "Rocco",
+   "kind": "voted_guilty",
+   "severity": 22,
+   "day": 14
+  },
+  {
+   "by": "Rocco",
+   "against": "Priya",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 21
+  },
+  {
+   "by": "Rocco",
+   "against": "Priya",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 34
+  },
+  {
+   "by": "James",
+   "against": "Priya",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 41
+  },
+  {
+   "by": "James",
+   "against": "Priya",
+   "kind": "false_accusation",
+   "severity": 18,
+   "day": 61
+  }
+ ],
+ "acts": {
+  "feeds": 35,
+  "thefts": 18,
+  "declines": 0,
+  "tends": 43,
+  "treats": 0,
+  "comforts": 0
+ },
+ "convos": 46,
+ "naturalEnds": 45,
+ "deflectAvg": 0.34,
+ "crimesByType": {
+  "theft": 18
+ },
+ "justiceStage": 2,
+ "deaths": [
+  {
+   "name": "Luis",
+   "role": "mason",
+   "day": 9,
+   "cause": "ambush",
+   "killerName": "Brayden"
+  },
+  {
+   "name": "Marta",
+   "role": "mechanic",
+   "day": 20,
+   "cause": "sickness",
+   "killerName": null
+  },
+  {
+   "name": "Marama",
+   "role": "blacksmith",
+   "day": 26,
+   "cause": "thirst",
+   "killerName": null
+  },
+  {
+   "name": "Elif",
+   "role": "hotel housekeeper",
+   "day": 29,
+   "cause": "thirst",
+   "killerName": null
+  },
+  {
+   "name": "Brayden",
+   "role": "artist",
+   "day": 30,
+   "cause": "sickness",
+   "killerName": null
+  },
+  {
+   "name": "Ursula",
+   "role": "mortician",
+   "day": 32,
+   "cause": "sickness",
+   "killerName": null
+  },
+  {
+   "name": "Rocco Myers",
+   "role": "chef",
+   "day": 38,
+   "cause": "the expedition",
+   "killerName": null
+  }
+ ],
+ "census": {
+  "alive": [
+   {
+    "name": "Hannah",
+    "role": "butcher",
+    "trust": 90,
+    "bond": {
+     "v": 24,
+     "depth": 0,
+     "day": 36,
+     "dayGain": 2
+    }
+   },
+   {
+    "name": "Norberto",
+    "role": "hunting_guide",
+    "trust": 90,
+    "bond": {
+     "v": 18,
+     "depth": 0,
+     "day": 35,
+     "dayGain": 2
+    }
+   },
+   {
+    "name": "Priya",
+    "role": "dispatcher_911",
+    "trust": 24,
+    "bond": {
+     "v": -12,
+     "depth": 0,
+     "day": 37,
+     "dayGain": 2
+    }
+   },
+   {
+    "name": "Brian",
+    "role": "zookeeper",
+    "trust": 39,
+    "bond": {
+     "v": 14,
+     "depth": 0,
+     "day": 37,
+     "dayGain": 2
+    }
+   },
+   {
+    "name": "Desmond",
+    "role": "sign painter",
+    "trust": 34,
+    "bond": {
+     "v": 2,
+     "depth": 0,
+     "day": 36,
+     "dayGain": 2
+    }
+   },
+   {
+    "name": "Craig",
+    "role": "firefighter",
+    "trust": 90,
+    "bond": {
+     "v": 3,
+     "depth": 0,
+     "day": 46,
+     "dayGain": 3
+    }
+   },
+   {
+    "name": "Natalia",
+    "role": "artist",
+    "trust": 45,
+    "bond": {
+     "v": 3,
+     "depth": 0,
+     "day": 53,
+     "dayGain": 3
+    }
+   }
+  ],
+  "dead": [
+   {
+    "name": "Luis",
+    "role": "mason",
+    "day": 9,
+    "cause": "ambush",
+    "killerName": "Brayden"
+   },
+   {
+    "name": "Marta",
+    "role": "mechanic",
+    "day": 20,
+    "cause": "sickness",
+    "killerName": null
+   },
+   {
+    "name": "Marama",
+    "role": "blacksmith",
+    "day": 26,
+    "cause": "thirst",
+    "killerName": null
+   },
+   {
+    "name": "Elif",
+    "role": "hotel housekeeper",
+    "day": 29,
+    "cause": "thirst",
+    "killerName": null
+   },
+   {
+    "name": "Brayden",
+    "role": "artist",
+    "day": 30,
+    "cause": "sickness",
+    "killerName": null
+   },
+   {
+    "name": "Ursula",
+    "role": "mortician",
+    "day": 32,
+    "cause": "sickness",
+    "killerName": null
+   },
+   {
+    "name": "Rocco Myers",
+    "role": "chef",
+    "day": 38,
+    "cause": "the expedition",
+    "killerName": null
+   }
+  ]
+ },
+ "transcripts": 46,
+ "end.day": 63,
+ "end.alive": 8
+}
