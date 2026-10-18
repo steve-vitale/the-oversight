@@ -28386,7 +28386,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         let nm = 'Someone';
         try { const p = this.getPerson(vid); if (p) nm = String(p.name).split(' ')[0]; } catch (e) {}
         const n = this.npcNeeds(vid);
-        n.social = Math.min(100, (n.social || 0) + 3);
+        // COMPANY SATISFIES (journey-deepening r12 2026-10-18): lingering
+        // over the fire together IS social contact — it eases the need, for
+        // both lingerers. The old +3 had the sign backwards (company made
+        // villagers lonelier), which is why census moods skewed "lonely"
+        // for villagers eating together daily. Taste lines below no longer
+        // touch the social axis either (taste is not company).
+        n.social = Math.max(0, (n.social || 0) - 8);
+        try { const on = this.npcNeeds(o.vid); on.social = Math.max(0, (on.social || 0) - 8); } catch (e) {}
         // SHARING (sim-prosefix-b, #438): stamp the co-eater's vid on the meal
         // memory so the EAT beat can name today's company honestly. The note
         // text is unchanged; the field is additive and unread by anything else.
@@ -28406,7 +28413,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // day's drawn food. m: {exposure, prefs, cookId, items}.
     seasonMeal(v, vid, person, m) {
       const first = String(person.name || 'Someone').split(' ')[0];
-      const n = this.npcNeeds(vid);
       // CONSEQUENCES: villagers suffer what they eat, like you do
       let sickened = 0;
       try { sickened = this.villagerFoodPoisoning(v, vid, m.exposure) || 0; } catch (e) {}
@@ -28418,12 +28424,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const kind = main && main.item ? main.item.foodKind : null;
       if (kind && m.prefs) {
         if (kind === m.prefs.likes) {
-          n.social = Math.min(100, (n.social || 0) + 5);
+          // (journey-deepening r12 2026-10-18: taste no longer touches the
+          // social axis — the old +5 made a good meal lonelier, backwards.
+          // Company is credited in logSitting, where it belongs.)
           this.remember(vid, 'meal', 'loved the ' + (main.item.name || 'meal'));
           if (Math.random() < 0.25 && this.playerAtHaven())
             this.say(`${first} closes their eyes over the plate. "Now THAT is food," ${first} says.`);
         } else if (kind === m.prefs.dislikes) {
-          n.social = Math.max(0, (n.social || 0) - 5);
+          // (journey-deepening r12 2026-10-18: same — the old -5 had
+          // complaining ease loneliness, backwards. Taste is not company.)
           this.remember(vid, 'meal', 'complained about the ' + (main.item.name || 'meal'));
           if (Math.random() < 0.25 && this.playerAtHaven())
             this.say(`${first} pushes the food around the plate. "Not my favorite," ${first} mutters.`);
