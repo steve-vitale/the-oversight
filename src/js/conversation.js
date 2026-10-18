@@ -852,6 +852,15 @@
       // were said). A repeated invitation reads as insistence, not a
       // parrot bug.
       const inviteAct = !!(opts && opts.inviteBeat);
+      // DIEGETIC ACTS (journey-social r25 2026-10-18): betrayal-menu outcomes
+      // ride the same exemption as invitation beats — they are speech acts,
+      // not flavor (see betrayal.js finish()). The fixed outcome labels
+      // ('Said. Now it's theirs to carry.') fire once per case, so the run
+      // ledger false-positived them as parroting whenever two cases resolved
+      // inside the 48-entry window (transcript-caught in every pilot:
+      // tellside/askheard/bribe dry streaks). Game logic already guards true
+      // repeats, so the exemption only ever removes the false positive.
+      const diegeticAct = inviteAct || !!(opts && opts.diegeticAct);
       // STRUCTURAL BEATS (journey-social r17 2026-10-15): resume openers,
       // recap lines and thread-resume responses are conversation GRAMMAR,
       // not content — two villagers using the same structural beat in one
@@ -861,8 +870,21 @@
       // machinery's filler loop). The per-sitting ledger still applies, so
       // true same-conversation repeats keep the honest "I just said" path.
       const structural = !!(opts && opts.structural);
-      const selfBlocked = !inviteAct && !structural && c.saidLines.indexOf(key) !== -1;
-      const runBlocked = !inviteAct && !structural && !selfBlocked && runLedger.indexOf(key) !== -1;
+      // PER-SITTING SELF-BLOCK (journey-social r24 2026-10-18): the old
+      // check read the flat c.saidLines, which persists across sittings —
+      // so a goodbye / silence / subject-change line said three days ago
+      // blocked its own repeat forever and fell back to a deflection dry
+      // line ("...Sorry, lost my train of thought." AS the goodbye —
+      // transcript-caught; a 20-day probe measured 170 self-blocks, 151
+      // of them dry). The pools do NOT rely on the flat list (they cycle
+      // on per-key c.said[key] — nothing but the block check reads the
+      // flat list); the no-repeat invariant was always meant
+      // per-conversation (see the PAGINATION comment above). A villager
+      // repeating a favorite line across sittings is a person, not a
+      // parrot bug — the run ledger still stops same-day cross-villager
+      // parroting, and the per-pool picker still spaces repeats.
+      const selfBlocked = !diegeticAct && !structural && (c.saidLinesConvo || []).indexOf(key) !== -1;
+      const runBlocked = !diegeticAct && !structural && !selfBlocked && runLedger.indexOf(key) !== -1;
       // THIS-SITTING vs OLDER (journey-social r16 2026-10-15): saidLines is
       // never reset between sittings (endConvo/startConvo leave it — the
       // pools rely on the persistence), so "self-blocked" conflates "said
@@ -875,7 +897,7 @@
       // across sittings). saidLinesConvo is the per-sitting ledger (reset in
       // startConvo); only its hits keep the accusation fallback. Older
       // self-blocks get the honest dry line, like run-blocks.
-      const convoBlocked = !inviteAct && (c.saidLinesConvo || []).indexOf(key) !== -1;
+      const convoBlocked = !diegeticAct && (c.saidLinesConvo || []).indexOf(key) !== -1;
       // FALLBACK (journey-social 2026-10-11): a blocked line must never go
       // silent — "no silent actions" is a standing rule, and a blocked beat
       // with fired consequences (trust/mood/evidence) but no words reads as
@@ -1049,7 +1071,11 @@
       let key = String(line);
       try { key = this.convoSplitBeats(line)[0].trim(); } catch (e) {}
       if (!key) return false;
-      const said = c.saidLines || [];
+      // PER-SITTING (journey-social r24 2026-10-18): matches the sayLine
+      // self-block — a line said in an earlier sitting is repeatable, not
+      // blocked. (The r19 hard-mode opener fall-through keeps working: it
+      // now skips only lines said in THIS sitting.)
+      const said = c.saidLinesConvo || [];
       if (said.indexOf(key) !== -1) return true;
       try {
         const rl = (typeof this.convoRunLedger === 'function') ? this.convoRunLedger() : [];
@@ -5862,6 +5888,17 @@
         // comfortable when warm, pointed when cold. (convo-mood.js)
         const ms = typeof this.convoMoodSilence === 'function'
           ? this.convoMoodSilence(vid) : { line: '"..."', shift: 0 };
+        // MOOD-SILENCE IS GRAMMAR (journey-social r25 2026-10-18): the mood-
+        // silence line is a stage direction ("The silence stretches a beat
+        // too long"), not content — two villagers filling quiet the same way
+        // on one day is not parroting (defect 7's target was content lines).
+        // The run-ledger block was turning single silences into dry-line
+        // deflections ("...Sorry, lost my train of thought." as the answer
+        // to saying nothing — transcript-caught on fresh sittings, turn 0).
+        // Structural exemption, same as the r17 resume/recap beats: the
+        // per-sitting ledger still applies, so true same-turn repeats keep
+        // the honest "I just said" path.
+        structuralTurn = true;
         // SCENE (Phase 2): through the resolver.
         if (ms.shift) this.resolveConsequence(vid, { mood: ms.shift, temper: 'neutral', name: 'silence' });
         done(ms.line, '(say nothing)');
@@ -6211,7 +6248,14 @@
         line = this.convoPickCycle(vid, 'exit', pool);
       }
       try { line = this.convoFillPeople(line); } catch (e) {}
-      this.sayLine(vid, line);
+      // GOODBYES ARE GRAMMAR (journey-social r25 2026-10-18): the exit pools
+      // (leftexit 3 lines, temperament exits, close-tier shorthand) are
+      // closural stage directions, not content — two villagers saying
+      // "Later, then." on one day is not parroting. The run-ledger block was
+      // turning farewells into dry-line deflections (transcript-caught:
+      // "...Actually, forget it." AS the goodbye). Structural exemption,
+      // same as the r17 resume/recap beats and the r25 mood-silence turn.
+      this.sayLine(vid, line, { structural: true });
       // THE WANT'S CLOSING BEAT (convo rebuild 2026-10-11): the goodbye
       // names the resolution — promised, deflected, comforted, heeded.
       // Resolved/planted/owed, never evaporated.

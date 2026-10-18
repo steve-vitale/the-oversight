@@ -3930,7 +3930,7 @@
     const parts = choiceId.split(':');
     const act = parts[1];
     let line = null, youSaid = null;
-    const finish = (l, you, narr) => {
+    const finish = (l, you, narr, sopts) => {
       line = l; youSaid = you || null;
       try {
         if (you) c.transcript.push({ who: 'you', text: you });
@@ -3947,7 +3947,16 @@
           // transcript writer — the old direct push PLUS sayLine printed
           // every betrayal beat twice. The fallback keeps a no-repeat-blocked
           // beat from going silent.
-          line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid) }) || line;
+          // DIEGETIC ACTS (journey-social r25 2026-10-18): every betrayal-menu
+          // outcome is a speech act, not flavor — the outcome label narrates
+          // what just happened ('Said. Now it's theirs to carry.', 'The moot
+          // is called.'). The fixed labels fire once per case, so the run
+          // ledger false-positived them as parroting whenever two cases
+          // resolved inside the 48-entry window (transcript-caught in every
+          // pilot: tellside/askheard/bribe dry streaks). Game logic already
+          // guards true repeats (tellSide's toldSide, etc.). Same exemption
+          // the r24 inviteBeat gave the accept outcome.
+          line = this.sayLine(vid, line, Object.assign({ fallback: () => this.convoSelfRepeatLine(vid), diegeticAct: true }, sopts)) || line;
         }
         c.exchanges = (c.exchanges || 0) + 1;
       } catch (e) {}
@@ -3976,7 +3985,16 @@
       }
       return finish(res.line || `The moment stretches.`, act === 'run' ? '(run)' : act === 'talk' ? '(talk)' : '(fight)');
     }
-    if (act === 'accept') { const r = this.acceptInvite(vid); return finish((r && r.line) || 'You go.', '"Sure."'); }
+    if (act === 'accept') {
+      const r = this.acceptInvite(vid);
+      // DIEGETIC ACT (journey-social r24 2026-10-18): the accept outcome is
+      // the invitation's resolution — the walk happened. It rides the same
+      // no-block exemption as the spoken invite beat (INVITATION HONESTY,
+      // journey landing r7): a run-ledger-blocked outcome used to fall back
+      // to "...Sorry, lost my train of thought." right after "Sure." (the
+      // r23 dry-line wart, reproduced in the r24 pilot).
+      return finish((r && r.line) || 'You go.', '"Sure."', null, { diegeticAct: true });
+    }
     if (act === 'decline') { const l = this.declineInvite(vid); return finish(l, '"Not this time."'); }
     if (act === 'press') {
       const pres = this.pressAccomplice(parts[2], parts[3]);
