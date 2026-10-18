@@ -107,7 +107,15 @@ function observeGame(Game, t) {
       catch (e) { t.instrumentErrors++; throw e; }
       try {
         if (String(cause) === 'hunting') {
-          t.huntWounds.push({ day: gday(Game), vid, name: nameOf(Game, vid), dmg: dmg | 0 });
+          // sim-refusestaff-b: record the post-wound map value alongside
+          // the wound — the person's true declining value, for the
+          // re-staff-through-wounds instrument (finding #557). Read-only.
+          let hpAfter = null;
+          try {
+            const vh = ((Game.state || {}).village || {}).health || {};
+            hpAfter = (vh[vid] !== undefined) ? vh[vid] : null;
+          } catch (e2) { /* keep null */ }
+          t.huntWounds.push({ day: gday(Game), vid, name: nameOf(Game, vid), dmg: dmg | 0, hpAfter });
         }
       } catch (e) { t.instrumentErrors++; }
       return r;
