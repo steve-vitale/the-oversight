@@ -1,0 +1,1492 @@
+{
+ "summary": {
+  "seeds": [
+   53704,
+   53707,
+   53708,
+   55104,
+   55106,
+   56101,
+   56104,
+   56106
+  ],
+  "days": 180,
+  "pairs": 16,
+  "primary": {
+   "compW3Kills": {
+    "armed": 11,
+    "control": 12,
+    "diff": -1,
+    "GO": false
+   },
+   "w4unlocks": {
+    "armed": 0,
+    "control": 3,
+    "diff": -3,
+    "GO": false
+   },
+   "verdict": "NO-GO (KILL)"
+  },
+  "national": {
+   "armed": 14,
+   "control": 12,
+   "guardrail": ">= control-2"
+  },
+  "starveDeaths": {
+   "armed": 3,
+   "control": 2,
+   "guardrail": "<= control+1"
+  },
+  "vetDeaths": {
+   "armed": 5,
+   "control": 15
+  },
+  "medianDays": {
+   "armed": 115,
+   "control": 115,
+   "guardrail": ">= control-10"
+  },
+  "doctrineTelemetry": {
+   "armed": [
+    {
+     "vetHunts": 13,
+     "vetInvitesOk": 6,
+     "vetHuntFights": 3,
+     "cvRallies": 3,
+     "cvYields": 3,
+     "cvYieldFights": 1
+    },
+    {
+     "vetInvitesOk": 3,
+     "vetHunts": 3,
+     "vetHuntFights": 5,
+     "cvRallies": 3
+    },
+    {
+     "vetHunts": 11,
+     "vetHuntFights": 1,
+     "vetInvitesOk": 6
+    },
+    {
+     "vetHunts": 6,
+     "vetHuntFights": 2,
+     "vetInvitesOk": 6,
+     "cvYields": 2,
+     "cvYieldFights": 1,
+     "cvRallies": 1
+    },
+    {
+     "vetHunts": 10,
+     "vetInvitesOk": 5,
+     "vetHuntFights": 2,
+     "cvYields": 2,
+     "cvYieldFights": 1,
+     "cvRallies": 2,
+     "vetRescues": 1
+    },
+    {
+     "vetHunts": 16,
+     "vetInvitesOk": 7,
+     "vetHuntFights": 4,
+     "cvRallies": 2
+    },
+    {
+     "vetHunts": 10,
+     "vetInvitesOk": 8,
+     "vetHuntFights": 1,
+     "cvRallies": 1
+    },
+    {
+     "vetHunts": 16,
+     "vetInvitesOk": 6
+    },
+    {
+     "vetHunts": 16,
+     "vetInvitesOk": 5
+    },
+    {
+     "vetHunts": 18,
+     "vetInvitesOk": 10,
+     "vetHuntFights": 2,
+     "vetBreakoffs": 2,
+     "cvRallies": 2
+    },
+    {
+     "vetHunts": 20,
+     "vetInvitesOk": 7,
+     "vetHuntFights": 5,
+     "cvYields": 3,
+     "cvYieldFights": 1,
+     "cvRallies": 3,
+     "vetBreakoffs": 1
+    },
+    {
+     "vetHunts": 15,
+     "vetInvitesOk": 7,
+     "vetHuntFights": 2,
+     "cvYields": 7,
+     "cvYieldFights": 2,
+     "vetBreakoffs": 3,
+     "cvRallies": 1
+    },
+    {
+     "vetHunts": 16,
+     "vetHuntFights": 1,
+     "vetInvitesOk": 7
+    },
+    {
+     "vetHunts": 12,
+     "vetInvitesOk": 4,
+     "vetHuntFights": 2,
+     "cvYields": 3,
+     "cvYieldFights": 2,
+     "cvRallies": 2
+    },
+    {
+     "vetHunts": 13,
+     "vetInvitesOk": 4
+    },
+    {
+     "vetHunts": 14,
+     "vetInvitesOk": 5,
+     "vetHuntFights": 1,
+     "cvYields": 2,
+     "cvYieldFights": 1,
+     "cvRallies": 1
+    }
+   ]
+  }
+ },
+ "rows": [
+  {
+   "seed": 53704,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 160,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 4,
+   "w4unlock": 1,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 1,
+    "tricks": 29,
+    "veterans": 0,
+    "short": "armor|weapons|veterans",
+    "maxWave": 4
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 4,
+   "w3ByChannel": {
+    "player": 4,
+    "companion": 1
+   },
+   "deaths": 19,
+   "starveDeaths": 0,
+   "vetDeaths": 3,
+   "deathCauses": {
+    "a wound that wouldn't close": 1,
+    "combat": 13,
+    "contest": 1,
+    "monster": 4
+   },
+   "snap": {
+    "vetHunts": 21,
+    "vetInvitesOk": 9,
+    "vetHuntFights": 8,
+    "vetBreakoffs": 4
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 53704,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 127,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 5,
+    "armed": 10,
+    "tricks": 27,
+    "veterans": 1,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 2,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {
+    "companion": 2,
+    "wild": 2
+   },
+   "deaths": 7,
+   "starveDeaths": 0,
+   "vetDeaths": 1,
+   "deathCauses": {
+    "a wound that wouldn't close": 1,
+    "combat": 1,
+    "monster": 5
+   },
+   "snap": {
+    "vetHunts": 13,
+    "vetInvitesOk": 6,
+    "vetHuntFights": 3,
+    "cvRallies": 3,
+    "cvYields": 3,
+    "cvYieldFights": 1
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 53704,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 140,
+   "end": "village-lost",
+   "national": 0,
+   "table": 0,
+   "maxWave": 4,
+   "w4unlock": 1,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 3,
+    "tricks": 21,
+    "veterans": 1,
+    "short": "armor|weapons|veterans",
+    "maxWave": 4
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 1,
+   "w3ByChannel": {
+    "player": 1,
+    "companion": 1
+   },
+   "deaths": 15,
+   "starveDeaths": 0,
+   "vetDeaths": 2,
+   "deathCauses": {
+    "combat": 11,
+    "Choir Toad": 1,
+    "contest": 1,
+    "alien": 1,
+    "monster": 1
+   },
+   "snap": {
+    "vetInvitesOk": 6,
+    "vetHunts": 14,
+    "vetHuntFights": 6,
+    "vetYields": 1
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 53704,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 121,
+   "end": "village-lost",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 0,
+    "armed": 0,
+    "tricks": 23,
+    "veterans": 0,
+    "short": "armor|weapons|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 1,
+   "w3ByChannel": {
+    "player": 1
+   },
+   "deaths": 15,
+   "starveDeaths": 0,
+   "vetDeaths": 1,
+   "deathCauses": {
+    "combat": 8,
+    "Choir Toad": 1,
+    "contest": 2,
+    "alien": 1,
+    "monster": 3
+   },
+   "snap": {
+    "vetInvitesOk": 3,
+    "vetHunts": 3,
+    "vetHuntFights": 5,
+    "cvRallies": 3
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 53707,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 123,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 8,
+    "tricks": 16,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 9,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 4,
+    "alien": 2
+   },
+   "snap": {
+    "vetHunts": 11,
+    "vetHuntFights": 1,
+    "vetInvitesOk": 6
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 53707,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 123,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 8,
+    "tricks": 16,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 9,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 4,
+    "alien": 2
+   },
+   "snap": {
+    "vetHunts": 11,
+    "vetHuntFights": 1,
+    "vetInvitesOk": 6
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 53707,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 152,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 0,
+    "armed": 5,
+    "tricks": 25,
+    "veterans": 1,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {
+    "companion": 1
+   },
+   "deaths": 11,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 4,
+    "dehydration": 1,
+    "combat": 4,
+    "contest": 2
+   },
+   "snap": {
+    "vetHunts": 9,
+    "vetHuntFights": 2,
+    "vetInvitesOk": 6
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 53707,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 141,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 7,
+    "tricks": 24,
+    "veterans": 1,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {
+    "companion": 1
+   },
+   "deaths": 9,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 4,
+    "dehydration": 1,
+    "combat": 3,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 6,
+    "vetHuntFights": 2,
+    "vetInvitesOk": 6,
+    "cvYields": 2,
+    "cvYieldFights": 1,
+    "cvRallies": 1
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 53708,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 121,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 8,
+    "tricks": 23,
+    "veterans": 2,
+    "short": "armor",
+    "maxWave": 3
+   },
+   "compW3Kills": 4,
+   "scholarW3Kills": 1,
+   "w3ByChannel": {
+    "companion": 4,
+    "player": 1
+   },
+   "deaths": 11,
+   "starveDeaths": 0,
+   "vetDeaths": 3,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 6,
+    "contest": 2
+   },
+   "snap": {
+    "vetHunts": 10,
+    "vetInvitesOk": 5,
+    "vetHuntFights": 2,
+    "vetRescues": 1
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 53708,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 117,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 10,
+    "tricks": 23,
+    "veterans": 3,
+    "short": "armor",
+    "maxWave": 3
+   },
+   "compW3Kills": 3,
+   "scholarW3Kills": 2,
+   "w3ByChannel": {
+    "companion": 3,
+    "player": 2
+   },
+   "deaths": 8,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 3,
+    "contest": 2
+   },
+   "snap": {
+    "vetHunts": 10,
+    "vetInvitesOk": 5,
+    "vetHuntFights": 2,
+    "cvYields": 2,
+    "cvYieldFights": 1,
+    "cvRallies": 2,
+    "vetRescues": 1
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 53708,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 103,
+   "end": "village-lost",
+   "national": 0,
+   "table": 0,
+   "maxWave": 4,
+   "w4unlock": 1,
+   "finalReadiness": {
+    "ready": true,
+    "armored": 4,
+    "armed": 5,
+    "tricks": 18,
+    "veterans": 2,
+    "short": "NONE",
+    "maxWave": 4
+   },
+   "compW3Kills": 2,
+   "scholarW3Kills": 5,
+   "w3ByChannel": {
+    "player": 5,
+    "companion": 2
+   },
+   "deaths": 13,
+   "starveDeaths": 0,
+   "vetDeaths": 4,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 9,
+    "dehydration": 1
+   },
+   "snap": {
+    "vetHunts": 11,
+    "vetInvitesOk": 4,
+    "vetHuntFights": 7,
+    "vetRescues": 1
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 53708,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 108,
+   "end": "village-lost",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0,
+    "short": "armor|weapons|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 1,
+   "w3ByChannel": {
+    "player": 1
+   },
+   "deaths": 19,
+   "starveDeaths": 0,
+   "vetDeaths": 1,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 14,
+    "dehydration": 2
+   },
+   "snap": {
+    "vetHunts": 16,
+    "vetInvitesOk": 7,
+    "vetHuntFights": 4,
+    "cvRallies": 2
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 55104,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 89,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 9,
+    "tricks": 23,
+    "veterans": 1,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 1,
+   "w3ByChannel": {
+    "player": 1,
+    "companion": 1
+   },
+   "deaths": 6,
+   "starveDeaths": 0,
+   "vetDeaths": 1,
+   "deathCauses": {
+    "monster": 4,
+    "dehydration": 1,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 14,
+    "vetInvitesOk": 6,
+    "vetHuntFights": 2
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 55104,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 78,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 10,
+    "tricks": 21,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {
+    "companion": 1
+   },
+   "deaths": 9,
+   "starveDeaths": 0,
+   "vetDeaths": 1,
+   "deathCauses": {
+    "monster": 7,
+    "alien": 1,
+    "dehydration": 1
+   },
+   "snap": {
+    "vetHunts": 10,
+    "vetInvitesOk": 8,
+    "vetHuntFights": 1,
+    "cvRallies": 1
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 55104,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 86,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 9,
+    "tricks": 20,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 5,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 2,
+    "contest": 1,
+    "combat": 1,
+    "a wound that wouldn't close": 1
+   },
+   "snap": {
+    "vetHunts": 16,
+    "vetInvitesOk": 6
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 55104,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 86,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 9,
+    "tricks": 20,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 5,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 2,
+    "contest": 1,
+    "combat": 1,
+    "a wound that wouldn't close": 1
+   },
+   "snap": {
+    "vetHunts": 16,
+    "vetInvitesOk": 6
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 55106,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 97,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 5,
+    "armed": 10,
+    "tricks": 18,
+    "veterans": 0,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 8,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "The Anaconda Empress": 1,
+    "sickness": 2,
+    "combat": 3,
+    "monster": 1,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 16,
+    "vetInvitesOk": 5
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 55106,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 97,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 5,
+    "armed": 10,
+    "tricks": 18,
+    "veterans": 0,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 8,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "The Anaconda Empress": 1,
+    "sickness": 2,
+    "combat": 3,
+    "monster": 1,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 16,
+    "vetInvitesOk": 5
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 55106,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 105,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 5,
+    "tricks": 21,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 19,
+   "starveDeaths": 1,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "The Anaconda Empress": 1,
+    "sickness": 9,
+    "Murkcap": 1,
+    "monster": 6,
+    "starvation": 1,
+    "a wound that wouldn't close": 1
+   },
+   "snap": {
+    "vetHunts": 18,
+    "vetInvitesOk": 10,
+    "vetHuntFights": 2,
+    "vetBreakoffs": 2
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 55106,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 105,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 5,
+    "tricks": 21,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 19,
+   "starveDeaths": 1,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "The Anaconda Empress": 1,
+    "sickness": 9,
+    "Murkcap": 1,
+    "monster": 6,
+    "starvation": 1,
+    "a wound that wouldn't close": 1
+   },
+   "snap": {
+    "vetHunts": 18,
+    "vetInvitesOk": 10,
+    "vetHuntFights": 2,
+    "vetBreakoffs": 2,
+    "cvRallies": 2
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 56101,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 114,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 3,
+    "tricks": 24,
+    "veterans": 0,
+    "short": "armor|weapons|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 2,
+   "w3ByChannel": {
+    "player": 2
+   },
+   "deaths": 14,
+   "starveDeaths": 1,
+   "vetDeaths": 2,
+   "deathCauses": {
+    "combat": 5,
+    "monster": 7,
+    "alien": 1,
+    "starvation": 1
+   },
+   "snap": {
+    "vetHunts": 23,
+    "vetInvitesOk": 9,
+    "vetHuntFights": 6,
+    "vetBreakoffs": 7
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 56101,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 104,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 4,
+    "tricks": 20,
+    "veterans": 1,
+    "short": "armor|weapons|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 1,
+   "w3ByChannel": {
+    "player": 1,
+    "companion": 1
+   },
+   "deaths": 12,
+   "starveDeaths": 0,
+   "vetDeaths": 1,
+   "deathCauses": {
+    "combat": 3,
+    "monster": 7,
+    "lockjaw": 1,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 20,
+    "vetInvitesOk": 7,
+    "vetHuntFights": 5,
+    "cvYields": 3,
+    "cvYieldFights": 1,
+    "cvRallies": 3,
+    "vetBreakoffs": 1
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 56101,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 111,
+   "end": "survived",
+   "national": 0,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 4,
+    "tricks": 24,
+    "veterans": 2,
+    "short": "armor|weapons",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 2,
+   "w3ByChannel": {
+    "companion": 1,
+    "player": 2
+   },
+   "deaths": 13,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "combat": 5,
+    "monster": 5,
+    "contest": 2,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 15,
+    "vetInvitesOk": 7,
+    "vetHuntFights": 3
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 56101,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 100,
+   "end": "survived",
+   "national": 0,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 5,
+    "tricks": 26,
+    "veterans": 2,
+    "short": "armor",
+    "maxWave": 3
+   },
+   "compW3Kills": 2,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {
+    "companion": 2
+   },
+   "deaths": 11,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "combat": 5,
+    "monster": 5,
+    "contest": 1
+   },
+   "snap": {
+    "vetHunts": 15,
+    "vetInvitesOk": 7,
+    "vetHuntFights": 2,
+    "cvYields": 7,
+    "cvYieldFights": 2,
+    "vetBreakoffs": 3,
+    "cvRallies": 1
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 56104,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 115,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 4,
+    "armed": 8,
+    "tricks": 25,
+    "veterans": 0,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 9,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "ambush": 1,
+    "monster": 4,
+    "combat": 3,
+    "dehydration": 1
+   },
+   "snap": {
+    "vetHunts": 16,
+    "vetHuntFights": 1,
+    "vetInvitesOk": 7
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 56104,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 115,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 4,
+    "armed": 8,
+    "tricks": 25,
+    "veterans": 0,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 9,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "ambush": 1,
+    "monster": 4,
+    "combat": 3,
+    "dehydration": 1
+   },
+   "snap": {
+    "vetHunts": 16,
+    "vetHuntFights": 1,
+    "vetInvitesOk": 7
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 56104,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 115,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 4,
+    "armed": 7,
+    "tricks": 22,
+    "veterans": 1,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {
+    "companion": 1
+   },
+   "deaths": 10,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "ambush": 1,
+    "monster": 3,
+    "Choir Toad": 1,
+    "contest": 2,
+    "sickness": 1,
+    "a wound that wouldn't close": 1,
+    "combat": 1
+   },
+   "snap": {
+    "vetHunts": 14,
+    "vetInvitesOk": 4,
+    "vetHuntFights": 1
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 56104,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 116,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 5,
+    "armed": 8,
+    "tricks": 22,
+    "veterans": 1,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 1,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {
+    "companion": 1
+   },
+   "deaths": 9,
+   "starveDeaths": 1,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "ambush": 1,
+    "monster": 2,
+    "Choir Toad": 1,
+    "contest": 2,
+    "sickness": 1,
+    "a wound that wouldn't close": 1,
+    "starvation": 1
+   },
+   "snap": {
+    "vetHunts": 12,
+    "vetInvitesOk": 4,
+    "vetHuntFights": 2,
+    "cvYields": 3,
+    "cvYieldFights": 2,
+    "cvRallies": 2
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 56106,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 131,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 3,
+    "armed": 9,
+    "tricks": 19,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 7,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "combat": 3,
+    "monster": 2,
+    "contest": 1,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 13,
+    "vetInvitesOk": 4
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 56106,
+   "policy": "compvet-lead",
+   "armed": true,
+   "days": 131,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 3,
+    "armed": 9,
+    "tricks": 19,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 7,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "combat": 3,
+    "monster": 2,
+    "contest": 1,
+    "alien": 1
+   },
+   "snap": {
+    "vetHunts": 13,
+    "vetInvitesOk": 4
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 56106,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 106,
+   "end": "survived",
+   "national": 0,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 7,
+    "tricks": 18,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 13,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "combat": 5,
+    "contest": 2,
+    "monster": 2,
+    "dehydration": 1,
+    "alien": 2,
+    "the night": 1
+   },
+   "snap": {
+    "vetHunts": 12,
+    "vetInvitesOk": 8,
+    "vetHuntFights": 2
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 56106,
+   "policy": "compvet-belong",
+   "armed": true,
+   "days": 115,
+   "end": "survived",
+   "national": 0,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 5,
+    "tricks": 21,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "compW3Kills": 0,
+   "scholarW3Kills": 0,
+   "w3ByChannel": {},
+   "deaths": 13,
+   "starveDeaths": 1,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "combat": 4,
+    "contest": 3,
+    "monster": 2,
+    "dehydration": 1,
+    "alien": 2,
+    "starvation": 1
+   },
+   "snap": {
+    "vetHunts": 14,
+    "vetInvitesOk": 5,
+    "vetHuntFights": 1,
+    "cvYields": 2,
+    "cvYieldFights": 1,
+    "cvRallies": 1
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  }
+ ]
+}
