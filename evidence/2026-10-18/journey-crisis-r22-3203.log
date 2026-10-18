@@ -1,0 +1,239 @@
+[SETUP] seed 3203: oracleV2 establishing 15d...
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+[SIEGE] staging congregation adjacent to Haven
+[SIEGE] mustered=true d18
+[CONVOS] 3 sheltered partners, crowding each with 2 threads + 2 memories
+[MENU t0] n=8 beatPath=yes(6) ids=[betrayal:site:case_4,betrayal:witnesses:case_4,betrayal:investigate:case_4,betrayal:letlie:case_4,betrayal:vote_guilty:case_4,betrayal:vote_acquit:case_4,leave,silence]
+[MENU t1] n=8 beatPath=yes(6) ids=[betrayal:witnesses:case_4,betrayal:investigate:case_4,betrayal:letlie:case_4,betrayal:vote_guilty:case_4,betrayal:vote_acquit:case_4,dlg:invite,leave,silence]
+[MENU t2] n=8 beatPath=yes(6) ids=[betrayal:investigate:case_4,betrayal:letlie:case_4,betrayal:vote_guilty:case_4,betrayal:vote_acquit:case_4,dlg:invite,dlg:more,leave,silence]
+[MENU t3] n=8 beatPath=yes(6) ids=[betrayal:investigate:case_4,betrayal:letlie:case_4,betrayal:vote_guilty:case_4,betrayal:vote_acquit:case_4,dlg:invite,dlg:more,leave,silence]
+[MENU t4] n=8 beatPath=yes(6) ids=[betrayal:moot:case_4,betrayal:vote_guilty:case_4,betrayal:vote_acquit:case_4,dlg:invite,dlg:more,dlg:react,leave,silence]
+[MENU t5] n=8 beatPath=yes(6) ids=[betrayal:moot:case_4,betrayal:vote_guilty:case_4,betrayal:vote_acquit:case_4,dlg:invite,dlg:more,dlg:react,leave,silence]
+[MENU t6] n=8 beatPath=yes(7) ids=[betrayal:site:case_6,betrayal:witnesses:case_6,betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,dlg:invite,leave,silence]
+[MENU t7] n=8 beatPath=yes(7) ids=[betrayal:witnesses:case_6,betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,dlg:invite,goon,leave,silence]
+[MENU t8] n=8 beatPath=yes(6) ids=[betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,dlg:invite,dlg:more,dlg:react,leave,silence]
+## MID-SIEGE d18 (lately=naming) — talking to Carmine
+T1 (8): betrayal:site:case_4, betrayal:witnesses:case_4, betrayal:investigate:case_4, betrayal:letlie:case_4, betrayal:vote_guilty:case_4, betrayal:vote_acquit:case_4, leave, silence
+> YOU PICK [betrayal:site:case_4] (8 offered)
+YOU: (examine the site)
+NPC: The ground remembers.
+
+> YOU PICK [betrayal:witnesses:case_4] (8 offered)
+YOU: "Who saw us leave?"
+NPC: Names, named.
+
+> YOU PICK [betrayal:investigate:case_4] (8 offered)
+YOU: (follow the food)
+NPC: You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.
+
+> YOU PICK [betrayal:letlie:case_4] (7 offered)
+YOU: (say nothing)
+NPC: You say nothing. The silence sits at the fire with everyone else.
+
+> YOU PICK [betrayal:moot:case_4] (8 offered)
+YOU: "We settle this. Tonight."
+NPC: The moot is called. The fire gets built up.
+
+> YOU PICK [betrayal:vote_guilty:case_4] (7 offered)
+YOU: GUILTY.
+NPC: Counted.
+
+> YOU PICK [betrayal:site:case_6] (8 offered)
+YOU: (examine the site)
+NPC: "I just said — did you miss it?"
+
+> YOU PICK [betrayal:witnesses:case_6] (8 offered)
+NPC: "I just told you — what else is on your mind?"
+NPC: "Alright, love. Go do what you need to do."
+
+> YOU PICK [betrayal:investigate:case_6] (8 offered)
+(conversation ended by the engine)
+### FULL TRANSCRIPT
+NPC: "We never finished talking about About their old life — we left it hanging. 'Back home I used to keep bees, can you believe it.' We still owe About what they want a proper ending, too."
+NPC: Carmine has an edge today — something curdled.
+YOU: (examine the site)
+NPC: The ground remembers.
+YOU: "Who saw us leave?"
+NPC: Names, named.
+YOU: (follow the food)
+NPC: You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.
+YOU: (say nothing)
+NPC: You say nothing. The silence sits at the fire with everyone else.
+YOU: "We settle this. Tonight."
+NPC: The moot is called. The fire gets built up.
+YOU: GUILTY.
+NPC: Counted.
+YOU: (examine the site)
+NPC: "I just said — did you miss it?"
+YOU: "Who saw us leave?"
+NPC: "I just told you — what else is on your mind?"
+NPC: "Alright, love. Go do what you need to do."
+YOU: (follow the food)
+NPC: "We've covered this one. Ask me something else."
+NPC: "This was good." They mean it.
+
+FLAGS: {"eventLed":false,"eventFirst":false,"maxMenu":8,"musterCarry":false,"want":"unestablished","turns":9}
+[MENU t0] n=10 beatPath=no-fallback ids=[betrayal:press:case_6:gen_gx1nakb,betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t1] n=10 beatPath=no-fallback ids=[betrayal:press:case_6:gen_gx1nakb,betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t2] n=10 beatPath=no-fallback ids=[betrayal:press:case_6:gen_gx1nakb,betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t3] n=10 beatPath=no-fallback ids=[betrayal:press:case_6:gen_gx1nakb,betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t4] n=10 beatPath=no-fallback ids=[betrayal:press:case_6:gen_gx1nakb,betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t5] n=9 beatPath=no-fallback ids=[betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t6] n=9 beatPath=no-fallback ids=[betrayal:investigate:case_6,betrayal:moot:case_6,betrayal:letlie:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t7] n=10 beatPath=no-fallback ids=[betrayal:investigate:case_6,betrayal:letlie:case_6,betrayal:vote_guilty:case_6,betrayal:vote_acquit:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t8] n=10 beatPath=no-fallback ids=[betrayal:investigate:case_6,betrayal:letlie:case_6,betrayal:vote_guilty:case_6,betrayal:vote_acquit:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t9] n=9 beatPath=no-fallback ids=[betrayal:moot:case_6,betrayal:vote_guilty:case_6,betrayal:vote_acquit:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t10] n=9 beatPath=no-fallback ids=[betrayal:moot:case_6,betrayal:vote_guilty:case_6,betrayal:vote_acquit:case_6,ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+[MENU t11] n=7 beatPath=no-fallback ids=[ans:q_laugh_memory:a_tell,ans:q_laugh_memory:a_vague,ans:q_laugh_memory:a_deflect,ans:q_laugh_memory:honest_pass,deflect_q,leave,silence]
+## MID-SIEGE d18 (lately=naming) — talking to James
+T1 (10): betrayal:press:case_6:gen_gx1nakb, betrayal:investigate:case_6, betrayal:moot:case_6, betrayal:letlie:case_6, ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence
+> YOU PICK [betrayal:press:case_6:gen_gx1nakb] (10 offered)
+YOU: "Slowly."
+NPC: Done — their story has a crack in it now.
+
+> YOU PICK [betrayal:investigate:case_6] (9 offered)
+YOU: (follow the food)
+NPC: Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails.
+
+> YOU PICK [betrayal:press:case_6:gen_gx1nakb] (9 offered)
+YOU: "Slowly."
+NPC: Their story holds. You file that away.
+
+> YOU PICK [betrayal:investigate:case_6] (9 offered)
+YOU: (follow the food)
+NPC: "...Sorry, lost my train of thought."
+
+> YOU PICK [betrayal:press:case_6:gen_gx1nakb] (9 offered)
+YOU: "Slowly."
+NPC: You've walked them through it every way you know how. Their story holds — either it's true, or it's been rehearsed a lot. There's nothing more to press here.
+
+> YOU PICK [betrayal:investigate:case_6] (9 offered)
+YOU: (follow the food)
+NPC: "I just said — did you miss it?"
+
+> YOU PICK [betrayal:moot:case_6] (8 offered)
+YOU: "We settle this. Tonight."
+NPC: "Hm. Never mind — go on."
+
+> YOU PICK [betrayal:investigate:case_6] (10 offered)
+YOU: (follow the food)
+NPC: "...Actually, forget it."
+
+> YOU PICK [betrayal:letlie:case_6] (9 offered)
+YOU: (say nothing)
+NPC: "...Where was I? Gone. Ask me something else."
+
+> YOU PICK [betrayal:moot:case_6] (9 offered)
+YOU: "We settle this. Tonight."
+NPC: "Huh. That went clean out of my head."
+
+> YOU PICK [betrayal:vote_guilty:case_6] (8 offered)
+YOU: GUILTY.
+NPC: "...No, it's not coming back. What were you saying?"
+
+> YOU PICK [ans:q_laugh_memory:a_tell] (7 offered)
+YOU: "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+NPC: "Stealing joy. I like that. We should steal more of it. Thank you. Really."
+
+### FULL TRANSCRIPT
+NPC: Groups make noise. Noise gets you noticed. I work better quiet.
+YOU: "Slowly."
+NPC: Done — their story has a crack in it now.
+YOU: (follow the food)
+NPC: Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails.
+YOU: "Slowly."
+NPC: Their story holds. You file that away.
+YOU: (follow the food)
+NPC: "...Sorry, lost my train of thought."
+YOU: "Slowly."
+NPC: You've walked them through it every way you know how. Their story holds — either it's true, or it's been rehearsed a lot. There's nothing more to press here.
+YOU: (follow the food)
+NPC: "I just said — did you miss it?"
+YOU: "We settle this. Tonight."
+NPC: "Hm. Never mind — go on."
+YOU: (follow the food)
+NPC: "...Actually, forget it."
+YOU: (say nothing)
+NPC: "...Where was I? Gone. Ask me something else."
+YOU: "We settle this. Tonight."
+NPC: "Huh. That went clean out of my head."
+YOU: GUILTY.
+NPC: "...No, it's not coming back. What were you saying?"
+YOU: "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+NPC: "Stealing joy. I like that. We should steal more of it. Thank you. Really."
+NPC: "Lost it. The thought, I mean. Go on."
+NPC: "Good talk. I feel like I know you a little better now."
+NPC: They're smiling as you go. "Come back anytime."
+
+FLAGS: {"eventLed":false,"eventFirst":false,"maxMenu":10,"musterCarry":false,"want":"engaged","turns":12}
+[MENU t0] n=7 beatPath=no-fallback ids=[agency:ask_expedition,gq:yn:yes,gq:yn:no,gq:yn:unsure,gq:yn:honest_pass,joke,silence]
+[MENU t1] n=8 beatPath=no-fallback ids=[agency:ask_expedition,alive:event:naming,alive:thread:goal,alive:memory:feast,teach,goon,leave,silence]
+[MENU t2] n=7 beatPath=no-fallback ids=[agency:ask_expedition,goon,gq:open:take,gq:open:unsure,gq:open:honest_pass,silence,more]
+[MENU t3] n=8 beatPath=yes(7) ids=[agency:ask_expedition,alive:thread:goal,goon,dlg:more,dlg:react,recap,leave,silence]
+[MENU t4] n=7 beatPath=yes(7) ids=[alive:thread:goal,goon,dlg:more,dlg:react,recap,leave,silence]
+[MENU t5] n=7 beatPath=yes(6) ids=[goon,dlg:more,dlg:react,recap,dlg:subject,leave,silence]
+[MENU t6] n=6 beatPath=yes(5) ids=[dlg:more,dlg:react,recap,dlg:subject,leave,silence]
+## MID-SIEGE d18 (lately=naming) — talking to Zafar
+T1 (7): agency:ask_expedition, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, silence
+> YOU PICK [gq:yn:yes] (7 offered)
+YOU: "Yes."
+NPC: "Yeah. Thought so — and I'm glad it's you saying it."
+
+> YOU PICK [alive:event:naming] (8 offered)
+YOU: "What’s going on out there?"
+NPC: "The whole fire was arguing about Hushpuppy last night — what to even CALL it. 'Loud-Eyes' got shouted down. What's your vote?"
+
+> YOU PICK [gq:open:take] (7 offered)
+YOU: "What do you think?"
+NPC: "Short version: I don't know. Long version: also that, but slower."
+
+> YOU PICK [agency:ask_expedition] (8 offered)
+YOU: "What did you see out there?"
+NPC: "Saw things with too many joints. Give them room. That's the whole lesson."
+
+> YOU PICK [alive:thread:goal] (7 offered)
+YOU: "About About what they want — we never finished."
+NPC: "If I don't step up, someone worse will. That's not ambition, that's arithmetic."
+
+> YOU PICK [goon] (7 offered)
+YOU: "What would that look like?"
+NPC: "That's enough for now. It'll percolate."
+
+> YOU PICK [dlg:more] (6 offered)
+(conversation ended by the engine)
+### FULL TRANSCRIPT
+NPC: "Can we talk?" Zafar glances around first. "People are saying things. About you. Is any of it true?"
+NPC: Zafar seems lighter — something good landed recently.
+YOU: "Yes."
+NPC: "Yeah. Thought so — and I'm glad it's you saying it."
+YOU: "What’s going on out there?"
+NPC: "The whole fire was arguing about Hushpuppy last night — what to even CALL it. 'Loud-Eyes' got shouted down. What's your vote?"
+YOU: "What do you think?"
+NPC: "Short version: I don't know. Long version: also that, but slower."
+YOU: "What did you see out there?"
+NPC: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: "About About what they want — we never finished."
+NPC: "If I don't step up, someone worse will. That's not ambition, that's arithmetic."
+YOU: "What would that look like?"
+NPC: "That's enough for now. It'll percolate."
+YOU: "Tell me more."
+NPC: "Someone asked me what we should do yesterday. I had an answer. That felt... right."
+NPC: "...Sorry, lost my train of thought."
+
+FLAGS: {"eventLed":true,"eventFirst":false,"maxMenu":8,"musterCarry":false,"want":"unestablished","turns":7}
+
+[MENUS] 28 menus observed, max=10, sizes=[8,8,8,8,8,8,8,8,8,10,10,10,10,10,9,9,10,10,9,9,7,7,8,7,8,7,7,6]
+[VERBS] seen across convos: agency:ask_expedition, alive:event:naming, alive:memory:feast, alive:thread:goal, ans:q_laugh_memory:a_deflect, ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, betrayal:investigate:case_4, betrayal:investigate:case_6, betrayal:letlie:case_4, betrayal:letlie:case_6, betrayal:moot:case_4, betrayal:moot:case_6, betrayal:press:case_6:gen_gx1nakb, betrayal:site:case_4, betrayal:site:case_6, betrayal:vote_acquit:case_4, betrayal:vote_acquit:case_6, betrayal:vote_guilty:case_4, betrayal:vote_guilty:case_6, betrayal:witnesses:case_4, betrayal:witnesses:case_6, deflect_q, dlg:invite, dlg:more, dlg:react, dlg:subject, goon, gq:open:honest_pass, gq:open:take, gq:open:unsure, gq:yn:honest_pass, gq:yn:no, gq:yn:unsure, gq:yn:yes, joke, leave, more, recap, silence, teach
+
+#CENSUS
+  Juan [bartender]
+  Carmine [er_nurse]
+  James [paramedic]
+  Zafar [army_medic]
+  Roberto [esl_teacher]
+  Luis [mason]
+  Ava [artist]
+  Emma [veterinarian]
+  Ingrid [physical_therapist]
+  Jovan [tattoo artist]
+  Elijah [social_worker]

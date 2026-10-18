@@ -4224,7 +4224,20 @@
               if (pre.length >= 2) break;
               if (!beatMenu.some(ch => ch && ch.id === a.id)) pre.push(a);
             }
-            if (pre.length) return this.finalizeMenu(vid, pre.concat(beatMenu));
+            // ONE-SCREEN CAP (journey crisis r22 2026-10-18): this path never
+            // shared the assembly path's MAXC budget — stacked conditions
+            // (news beat + held beats + theorize + recap + teach) produced
+            // 11-choice swipe piles (r21 found-not-fixed #1). Cap the combined
+            // list at MAXC content choices, keeping the alive lead (r21) and
+            // pinning the structural 'leave' — a menu that strands the player
+            // is a dialogue-box softlock. Cuts land on the tail (discovery
+            // verbs, pool reactions); the want/goon lead is never cut.
+            // 'silence' rides after via finalizeMenu rule 4, as on every path.
+            const full = pre.length ? pre.concat(beatMenu) : (beatMenu || []).slice();
+            const isLeave = (ch) => ch && ch.id === 'leave';
+            const leaveCh = full.filter(isLeave).slice(0, 1);
+            const rest = full.filter(ch => !isLeave(ch));
+            return this.finalizeMenu(vid, rest.slice(0, Math.max(0, MAXC - leaveCh.length)).concat(leaveCh));
           } catch (e) {}
           return this.finalizeMenu(vid, beatMenu);
         }

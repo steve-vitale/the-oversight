@@ -1,0 +1,249 @@
+[SETUP] seed 3202: oracleV2 establishing 15d...
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+[SIEGE] staging congregation adjacent to Haven
+[SIEGE] mustered=true d18
+[CONVOS] 3 sheltered partners, crowding each with 2 threads + 2 memories
+[MENU t0] n=10 beatPath=yes(6) ids=[betrayal:accept,betrayal:decline,alive:event:naming,alive:thread:goal,dlg:commit,dlg:cant,recap,teach,leave,silence]
+[MENU t1] n=8 beatPath=no-fallback ids=[betrayal:accept,betrayal:decline,goon,gq:open:take,gq:open:unsure,gq:open:honest_pass,silence,more]
+[MENU t2] n=9 beatPath=yes(8) ids=[betrayal:accept,betrayal:decline,alive:thread:goal,goon,dlg:more,dlg:react,recap,leave,silence]
+[MENU t3] n=7 beatPath=yes(7) ids=[alive:thread:goal,dlg:more,dlg:react,recap,dlg:invite,leave,silence]
+[MENU t4] n=8 beatPath=yes(7) ids=[goon,dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t5] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t6] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t7] n=8 beatPath=yes(7) ids=[dlg:more,dlg:react,dlg:theorize,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t8] n=8 beatPath=yes(7) ids=[goon,dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t9] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+## MID-SIEGE d18 (lately=naming) — talking to Bridget
+T1 (10): betrayal:accept, betrayal:decline, alive:event:naming, alive:thread:goal, dlg:commit, dlg:cant, recap, teach, leave, silence
+> YOU PICK [alive:event:naming] (10 offered)
+YOU: "What’s going on out there?"
+NPC: "The whole fire was arguing about Rut King last night — what to even CALL it. 'Loud-Eyes' got shouted down. What's your vote?"
+
+> YOU PICK [gq:open:take] (8 offered)
+YOU: "What do you think?"
+NPC: "Let's see — I think the asking matters more than the answer, out here."
+
+> YOU PICK [betrayal:accept] (9 offered)
+YOU: "Sure."
+NPC: It's quiet at the tree line. Bridget doesn't say much. Sometimes that's the whole point.
+
+> YOU PICK [alive:thread:goal] (7 offered)
+YOU: "About About what they want — we never finished."
+NPC: "Everyone gets forgotten eventually. I'm negotiating for later rather than sooner."
+
+> YOU PICK [goon] (8 offered)
+YOU: "I'm here. Go on."
+NPC: Something eases in their shoulders. They're really talking to you now.
+
+> YOU PICK [dlg:more] (7 offered)
+YOU: "Tell me more."
+NPC: "I don't need a statue. I need one good story that outlives me."
+
+> YOU PICK [dlg:react] (6 offered)
+YOU: "I see."
+NPC: "Fame is just being remembered by strangers. I'll take it."
+
+> YOU PICK [dlg:more] (7 offered)
+YOU: "Tell me more."
+NPC: "Remember me kindly, or remember me loudly. Either works."
+
+> YOU PICK [goon] (7 offered)
+YOU: "I'm here. Go on."
+NPC: "Alright — I should get back to it."
+
+> YOU PICK [dlg:more] (7 offered)
+(conversation ended by the engine)
+### FULL TRANSCRIPT
+NPC: "About the food I needed — still need hands. Are you in? I won't forget that."
+NPC: "Walk with me? I want another pair of eyes on something."
+YOU: "What’s going on out there?"
+NPC: "The whole fire was arguing about Rut King last night — what to even CALL it. 'Loud-Eyes' got shouted down. What's your vote?"
+YOU: "What do you think?"
+NPC: "Let's see — I think the asking matters more than the answer, out here."
+YOU: "Sure."
+NPC: It's quiet at the tree line. Bridget doesn't say much. Sometimes that's the whole point.
+YOU: "About About what they want — we never finished."
+NPC: "Everyone gets forgotten eventually. I'm negotiating for later rather than sooner."
+YOU: "I'm here. Go on."
+NPC: Something eases in their shoulders. They're really talking to you now.
+YOU: "Tell me more."
+NPC: "I don't need a statue. I need one good story that outlives me."
+YOU: "I see."
+NPC: "Fame is just being remembered by strangers. I'll take it."
+YOU: "Tell me more."
+NPC: "Remember me kindly, or remember me loudly. Either works."
+YOU: "I'm here. Go on."
+NPC: "Alright — I should get back to it."
+YOU: "Tell me more."
+NPC: "When I'm gone, I want the story to keep my name in it. That's all."
+NPC: "...Sorry, lost my train of thought."
+NPC: "This was good." They mean it.
+
+FLAGS: {"eventLed":true,"eventFirst":true,"maxMenu":10,"musterCarry":false,"want":"stated","turns":10}
+[MENU t0] n=7 beatPath=yes(5) ids=[agency:ask_expedition,dlg:more,dlg:react,dlg:invite,dlg:subject,leave,silence]
+[MENU t1] n=8 beatPath=yes(6) ids=[agency:ask_field,dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t2] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t3] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t4] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t5] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t6] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t7] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t8] n=8 beatPath=yes(7) ids=[goon,dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+[MENU t9] n=7 beatPath=yes(6) ids=[dlg:more,dlg:react,recap,dlg:invite,dlg:subject,leave,silence]
+## MID-SIEGE d18 (lately=naming) — talking to Yesenia
+T1 (7): agency:ask_expedition, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence
+> YOU PICK [agency:ask_expedition] (7 offered)
+YOU: "What did you see out there?"
+NPC: "Watch for this: The grass stops moving the way wind moves it. Sweeps Week, every time. Dawn and dusk, that's when it's out."
+
+> YOU PICK [agency:ask_field] (8 offered)
+YOU: "Teach me something from the wild."
+NPC: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+
+> YOU PICK [dlg:more] (7 offered)
+YOU: "Tell me more."
+NPC: "Four walls and a roof and I'd make it a home in a week. Watch me."
+
+> YOU PICK [dlg:react] (6 offered)
+YOU: "I see."
+NPC: "Home's a feeling, not a place. I'm chasing the feeling. Some days I get close."
+
+> YOU PICK [dlg:more] (6 offered)
+YOU: "Tell me more."
+NPC: "Home isn't a place. It's people who notice when you're quiet. I'm collecting those."
+
+> YOU PICK [dlg:react] (6 offered)
+YOU: "Huh."
+NPC: "Every camp I make, I try to make it feel like arriving. It never quite does. Yet."
+
+> YOU PICK [dlg:more] (6 offered)
+YOU: "Tell me more."
+NPC: "I'm not running from anything. I'm running toward the feeling of arriving."
+
+> YOU PICK [dlg:react] (6 offered)
+YOU: "I see."
+NPC: They nod slowly, not quite done, not quite continuing.
+
+> YOU PICK [goon] (7 offered)
+YOU: "Take your time."
+NPC: "Gotta run. Literally. Bye!"
+
+> YOU PICK [dlg:more] (7 offered)
+(conversation ended by the engine)
+### FULL TRANSCRIPT
+NPC: "We never finished talking about About what they want — we left it hanging. 'I have been thinking about what I want from all this.' We still owe About their old life a proper ending, too."
+YOU: "What did you see out there?"
+NPC: "Watch for this: The grass stops moving the way wind moves it. Sweeps Week, every time. Dawn and dusk, that's when it's out."
+YOU: "Teach me something from the wild."
+NPC: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: "Tell me more."
+NPC: "Four walls and a roof and I'd make it a home in a week. Watch me."
+YOU: "I see."
+NPC: "Home's a feeling, not a place. I'm chasing the feeling. Some days I get close."
+YOU: "Tell me more."
+NPC: "Home isn't a place. It's people who notice when you're quiet. I'm collecting those."
+YOU: "Huh."
+NPC: "Every camp I make, I try to make it feel like arriving. It never quite does. Yet."
+YOU: "Tell me more."
+NPC: "I'm not running from anything. I'm running toward the feeling of arriving."
+YOU: "I see."
+NPC: They nod slowly, not quite done, not quite continuing.
+YOU: "Take your time."
+NPC: "Gotta run. Literally. Bye!"
+YOU: "Tell me more."
+NPC: "I rearranged the bunks again last night. Nobody noticed. That's fine — it felt right for an hour."
+NPC: They're smiling as you go. "Come back anytime."
+
+FLAGS: {"eventLed":false,"eventFirst":false,"maxMenu":8,"musterCarry":false,"want":"unestablished","turns":10}
+[MENU t0] n=7 beatPath=no-fallback ids=[agency:ask_field,gq:open:take,gq:open:unsure,gq:open:honest_pass,silence,more,confront:d_2gnxkp4]
+[MENU t1] n=10 beatPath=yes(8) ids=[agency:ask_field,goon,dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,confront:d_2gnxkp4,leave,silence]
+[MENU t2] n=9 beatPath=yes(8) ids=[goon,dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,confront:d_2gnxkp4,leave,silence]
+[MENU t3] n=9 beatPath=yes(8) ids=[goon,dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,confront:d_2gnxkp4,leave,silence]
+[MENU t4] n=9 beatPath=yes(7) ids=[dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,dlg:subject,confront:d_2gnxkp4,leave,silence]
+[MENU t5] n=9 beatPath=yes(7) ids=[dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,dlg:subject,confront:d_2gnxkp4,leave,silence]
+[MENU t6] n=9 beatPath=yes(7) ids=[dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,dlg:subject,confront:d_2gnxkp4,leave,silence]
+[MENU t7] n=9 beatPath=yes(7) ids=[dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,dlg:subject,confront:d_2gnxkp4,leave,silence]
+[MENU t8] n=9 beatPath=yes(8) ids=[goon,dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,confront:d_2gnxkp4,leave,silence]
+[MENU t9] n=9 beatPath=yes(7) ids=[dlg:more,dlg:react,dlg:doubt,recap,dlg:invite,dlg:subject,confront:d_2gnxkp4,leave,silence]
+## MID-SIEGE d18 (lately=naming) — talking to Hessa
+T1 (7): agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, more, confront:d_2gnxkp4
+> YOU PICK [gq:open:take] (7 offered)
+YOU: "What do you think?"
+NPC: "Short version: I don't know. Long version: also that, but slower. There. Said it."
+
+> YOU PICK [agency:ask_field] (10 offered)
+YOU: "Teach me something from the wild."
+NPC: "an old trapline — I'll show you on the map sometime. It's real."
+
+> YOU PICK [goon] (9 offered)
+YOU: "You don't have to say it all at once."
+NPC: Something in them almost softens — then doesn't. Not yet.
+
+> YOU PICK [dlg:more] (8 offered)
+YOU: "Tell me more."
+NPC: "Before, I worried about the dumbest things. Whether I left the stove on. Whether my boss liked me. I'd trade everything to worry about the stove again."
+
+> YOU PICK [dlg:react] (8 offered)
+YOU: "Huh."
+NPC: "I had a garden. Tomatoes, basil, the works. I talk to the plants here like they're mine. They're not. But I talk anyway."
+
+> YOU PICK [dlg:more] (8 offered)
+YOU: "Tell me more."
+NPC: "I had a dog. I think about the dog more than the apartment, the job, all of it. Just the dog."
+
+> YOU PICK [dlg:react] (8 offered)
+YOU: "I see."
+NPC: "Ask me what I miss and I'll lie. The truth is too ordinary to say out loud."
+
+> YOU PICK [dlg:more] (8 offered)
+YOU: "Tell me more."
+NPC: "Being a hunting guide meant I never had to think about where food came from. Now that's all I think about."
+
+> YOU PICK [goon] (8 offered)
+YOU: "You don't have to say it all at once."
+NPC: "Okay. We'll pick this up later."
+
+> YOU PICK [dlg:more] (9 offered)
+(conversation ended by the engine)
+### FULL TRANSCRIPT
+NPC: "What's this about? We never finished talking about About their old life — we left it hanging. 'Back home I used to keep bees, can you believe it.'"
+NPC: Hessa has an edge today — something curdled.
+NPC: "...Sorry, lost my train of thought."
+YOU: "What do you think?"
+NPC: "Short version: I don't know. Long version: also that, but slower. There. Said it."
+YOU: "Teach me something from the wild."
+NPC: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: "You don't have to say it all at once."
+NPC: Something in them almost softens — then doesn't. Not yet.
+YOU: "Tell me more."
+NPC: "Before, I worried about the dumbest things. Whether I left the stove on. Whether my boss liked me. I'd trade everything to worry about the stove again."
+YOU: "Huh."
+NPC: "I had a garden. Tomatoes, basil, the works. I talk to the plants here like they're mine. They're not. But I talk anyway."
+YOU: "Tell me more."
+NPC: "I had a dog. I think about the dog more than the apartment, the job, all of it. Just the dog."
+YOU: "I see."
+NPC: "Ask me what I miss and I'll lie. The truth is too ordinary to say out loud."
+YOU: "Tell me more."
+NPC: "Being a hunting guide meant I never had to think about where food came from. Now that's all I think about."
+YOU: "You don't have to say it all at once."
+NPC: "Okay. We'll pick this up later."
+YOU: "Tell me more."
+NPC: "Before, I was invisible. Just another face. Now everyone knows my name and I don't know if that's better or worse."
+NPC: "Hm. Never mind — go on."
+
+FLAGS: {"eventLed":false,"eventFirst":false,"maxMenu":10,"musterCarry":false,"want":"unestablished","turns":10}
+
+[MENUS] 30 menus observed, max=10, sizes=[10,8,9,7,8,7,7,8,8,7,7,8,7,7,7,7,7,7,8,7,7,10,9,9,9,9,9,9,9,9]
+[VERBS] seen across convos: agency:ask_expedition, agency:ask_field, alive:event:naming, alive:thread:goal, betrayal:accept, betrayal:decline, confront:d_2gnxkp4, dlg:cant, dlg:commit, dlg:doubt, dlg:invite, dlg:more, dlg:react, dlg:subject, dlg:theorize, goon, gq:open:honest_pass, gq:open:take, gq:open:unsure, leave, more, recap, silence, teach
+
+#CENSUS
+  Klaus [interpreter]
+  Bridget [esl_teacher]
+  Yesenia [beekeeper]
+  Hessa [hunting_guide]
+  Serik [midwife]
+  Ruth [librarian]
+  Onni [chimney sweep]
+  Nikos [aquarium keeper]
+  Caleb [firefighter]
+  Raj [pharmacist]

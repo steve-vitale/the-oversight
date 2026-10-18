@@ -1343,8 +1343,50 @@
     G.convoChoices = function (vid) {
       var base = _convoChoices ? _convoChoices.call(this, vid) : [];
       try {
-        var extra = this.agencyChoices(vid);
-        if (extra && extra.length) return extra.concat(base);
+        var extra = this.agencyChoices(vid) || [];
+        // ONE-SCREEN CAP (journey crisis r22 2026-10-18): this is the
+        // outermost convoChoices injector — every inner injection
+        // (betrayal's prepend, truth's confront splice, party-formal's
+        // splice) has already landed, and none of them shares the
+        // pipeline's MAXC budget. A live betrayal case pushed a capped
+        // 8-choice beat menu to 10 (seed 3202, r21 found-not-fixed #1
+        // class). Enforce the same contract here: 7 content + silence.
+        // Injected leads (agency/betrayal) keep priority; the trim lands
+        // on the base-content tail; 'leave' stays pinned, 'silence' last.
+        // Reactive menus (ans:/gq: — the question owns the menu, answers+2
+        // contract) are exempt: prepends there add urgency, never cut.
+        var isReactive = base.some(function (ch) {
+          var id = ch && ch.id;
+          return typeof id === 'string' && (id.indexOf('ans:') === 0 || id.indexOf('gq:') === 0);
+        });
+        if (!isReactive && (extra.length || base.length > 8)) {
+          var MAXC = 7;
+          var isSil = function (ch) { return ch && (ch.id === 'silence' || ch.id === 'nv:listen'); };
+          var isLeave = function (ch) { return ch && ch.id === 'leave'; };
+          var silence = base.filter(isSil).slice(0, 1);
+          var leave = base.filter(isLeave).slice(0, 1);
+          var content = base.filter(function (ch) { return !isSil(ch) && !isLeave(ch); });
+          // TRIM PRIORITY (kill-rule scoping 2026-10-18): the first version
+          // trimmed the raw tail and starved 'teach' from every menu on a
+          // live-betrayal seed — the exact starvation the 2026-10-07/08/12
+          // fixes rescued those verbs from. The trim now cuts the
+          // expandable middle (pool reactions, recaps, topic asks) before
+          // it touches leads and earned verbs. Priority: confrontation
+          // prepends (betrayal:/confront:) > alive/event lead (r21) > want
+          // verbs (the want leads) > earned verbs (teach/trade/skills/
+          // invites — never lose the lottery) > pool + topics.
+          var PROTECTED = /^(betrayal:|confront:|alive:|dlg:commit|dlg:cant|dlg:help|dlg:heed|dlg:stay|teach|trade|offer_help|hawker|invite_party|dlg:invite|skill_learn:|skill_teach:|agency:)/;
+          var prot = [], rest = [];
+          for (var i = 0; i < content.length; i++) {
+            var cid = content[i] && content[i].id;
+            if (typeof cid === 'string' && PROTECTED.test(cid)) prot.push(content[i]);
+            else rest.push(content[i]);
+          }
+          var room = Math.max(0, MAXC - extra.length - leave.length);
+          var kept = prot.concat(rest).slice(0, room);
+          return extra.concat(kept, leave, silence);
+        }
+        if (extra.length) return extra.concat(base);
       } catch (e) {}
       return base;
     };
