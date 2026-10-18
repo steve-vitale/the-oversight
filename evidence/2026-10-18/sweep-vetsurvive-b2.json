@@ -1,0 +1,1038 @@
+{
+ "summary": {
+  "seeds": [
+   51906,
+   51907
+  ],
+  "days": 180,
+  "pairs": 4,
+  "w4": {
+   "armed": 0,
+   "control": 0,
+   "diff": 0,
+   "GO": false
+  },
+  "national": {
+   "armed": 3,
+   "control": 3
+  },
+  "starveDeaths": {
+   "armed": 1,
+   "control": 1
+  },
+  "vetDeaths": {
+   "armed": 3,
+   "control": 2
+  },
+  "medianDays": {
+   "armed": 133,
+   "control": 133
+  },
+  "musterTelemetry": {
+   "armed": [
+    {
+     "vetHunts": 19,
+     "vetHuntFights": 3,
+     "vsScholarHoldDays": 1
+    },
+    {
+     "vetHunts": 17,
+     "vetHuntFights": 2,
+     "vsMusters": 1,
+     "vsMusteredTotal": 1
+    },
+    {
+     "vetHunts": 12
+    },
+    {
+     "vetHunts": 15
+    }
+   ]
+  }
+ },
+ "rows": [
+  {
+   "seed": 51906,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 137,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 5,
+    "tricks": 19,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "deaths": 12,
+   "starveDeaths": 0,
+   "vetDeaths": 2,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 7,
+    "alien": 1,
+    "dehydration": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 3,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 9,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 14,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 14,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 4,
+     "armed": 10,
+     "tricks": 16,
+     "veterans": 1,
+     "short": "veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 105,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 17,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 120,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 18,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 135,
+     "ready": false,
+     "armored": 2,
+     "armed": 5,
+     "tricks": 19,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 19,
+    "vetHuntFights": 3
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 51906,
+   "policy": "vetsurvive-lead",
+   "armed": true,
+   "days": 137,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 5,
+    "tricks": 19,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "deaths": 12,
+   "starveDeaths": 0,
+   "vetDeaths": 2,
+   "deathCauses": {
+    "monster": 3,
+    "combat": 7,
+    "alien": 1,
+    "dehydration": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 3,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 9,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 12,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 14,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 14,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 4,
+     "armed": 10,
+     "tricks": 16,
+     "veterans": 1,
+     "short": "veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 105,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 17,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 120,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 18,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 135,
+     "ready": false,
+     "armored": 2,
+     "armed": 5,
+     "tricks": 19,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 19,
+    "vetHuntFights": 3,
+    "vsScholarHoldDays": 1
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 51906,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 113,
+   "end": "survived",
+   "national": 0,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 7,
+    "tricks": 21,
+    "veterans": 2,
+    "short": "armor",
+    "maxWave": 3
+   },
+   "deaths": 8,
+   "starveDeaths": 1,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 2,
+    "combat": 5,
+    "starvation": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 3,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 13,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 14,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 2,
+     "armed": 7,
+     "tricks": 18,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 4,
+     "armed": 9,
+     "tricks": 20,
+     "veterans": 0,
+     "short": "veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 4,
+     "armed": 9,
+     "tricks": 20,
+     "veterans": 0,
+     "short": "veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 105,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 21,
+     "veterans": 1,
+     "short": "armor|veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 12,
+    "vetHuntFights": 2
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 51906,
+   "policy": "vetsurvive-belong",
+   "armed": true,
+   "days": 120,
+   "end": "survived",
+   "national": 0,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 4,
+    "armed": 8,
+    "tricks": 21,
+    "veterans": 1,
+    "short": "veterans",
+    "maxWave": 3
+   },
+   "deaths": 10,
+   "starveDeaths": 1,
+   "vetDeaths": 1,
+   "deathCauses": {
+    "monster": 1,
+    "combat": 8,
+    "starvation": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 3,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 13,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 14,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 2,
+     "armed": 7,
+     "tricks": 18,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 4,
+     "armed": 9,
+     "tricks": 20,
+     "veterans": 0,
+     "short": "veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 4,
+     "armed": 9,
+     "tricks": 20,
+     "veterans": 0,
+     "short": "veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 105,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 21,
+     "veterans": 1,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 120,
+     "ready": false,
+     "armored": 4,
+     "armed": 8,
+     "tricks": 21,
+     "veterans": 1,
+     "short": "veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 17,
+    "vetHuntFights": 2,
+    "vsMusters": 1,
+    "vsMusteredTotal": 1
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 51907,
+   "policy": "vetrel-lead",
+   "armed": false,
+   "days": 133,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 7,
+    "tricks": 29,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "deaths": 10,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 7,
+    "combat": 1,
+    "contest": 1,
+    "Highbeam Deer": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 0,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 1,
+     "armed": 12,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 1,
+     "armed": 9,
+     "tricks": 11,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 1,
+     "armed": 8,
+     "tricks": 17,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 3,
+     "armed": 10,
+     "tricks": 20,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 3,
+     "armed": 10,
+     "tricks": 21,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 24,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 105,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 28,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 120,
+     "ready": false,
+     "armored": 3,
+     "armed": 7,
+     "tricks": 29,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 12
+   },
+   "armKey": "control",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 51907,
+   "policy": "vetsurvive-lead",
+   "armed": true,
+   "days": 133,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 2,
+    "armed": 7,
+    "tricks": 29,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "deaths": 10,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 7,
+    "combat": 1,
+    "contest": 1,
+    "Highbeam Deer": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 0,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 1,
+     "armed": 12,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 1,
+     "armed": 9,
+     "tricks": 11,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 1,
+     "armed": 8,
+     "tricks": 17,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 3,
+     "armed": 10,
+     "tricks": 20,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 3,
+     "armed": 10,
+     "tricks": 21,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 3,
+     "armed": 9,
+     "tricks": 24,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 105,
+     "ready": false,
+     "armored": 3,
+     "armed": 8,
+     "tricks": 28,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 120,
+     "ready": false,
+     "armored": 3,
+     "armed": 7,
+     "tricks": 29,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 12
+   },
+   "armKey": "armed",
+   "policyBase": "lead"
+  },
+  {
+   "seed": 51907,
+   "policy": "vetrel-belong",
+   "armed": false,
+   "days": 100,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 8,
+    "tricks": 26,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "deaths": 7,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 4,
+    "combat": 1,
+    "The Union Rep": 1,
+    "dehydration": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 0,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 1,
+     "armed": 12,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 1,
+     "armed": 11,
+     "tricks": 12,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 2,
+     "armed": 10,
+     "tricks": 19,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 2,
+     "armed": 10,
+     "tricks": 21,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 2,
+     "armed": 8,
+     "tricks": 23,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 2,
+     "armed": 9,
+     "tricks": 25,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 15
+   },
+   "armKey": "control",
+   "policyBase": "belong"
+  },
+  {
+   "seed": 51907,
+   "policy": "vetsurvive-belong",
+   "armed": true,
+   "days": 100,
+   "end": "survived",
+   "national": 1,
+   "table": 0,
+   "maxWave": 3,
+   "w4unlock": 0,
+   "finalReadiness": {
+    "ready": false,
+    "armored": 1,
+    "armed": 8,
+    "tricks": 26,
+    "veterans": 0,
+    "short": "armor|veterans",
+    "maxWave": 3
+   },
+   "deaths": 7,
+   "starveDeaths": 0,
+   "vetDeaths": 0,
+   "deathCauses": {
+    "monster": 4,
+    "combat": 1,
+    "The Union Rep": 1,
+    "dehydration": 1
+   },
+   "trace": [
+    {
+     "d": 1,
+     "ready": false,
+     "armored": 0,
+     "armed": 6,
+     "tricks": 0,
+     "veterans": 0,
+     "short": "armor|tricks|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 15,
+     "ready": false,
+     "armored": 1,
+     "armed": 12,
+     "tricks": 5,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 1
+    },
+    {
+     "d": 30,
+     "ready": false,
+     "armored": 1,
+     "armed": 11,
+     "tricks": 12,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 45,
+     "ready": false,
+     "armored": 2,
+     "armed": 10,
+     "tricks": 19,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 2
+    },
+    {
+     "d": 60,
+     "ready": false,
+     "armored": 2,
+     "armed": 10,
+     "tricks": 21,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 75,
+     "ready": false,
+     "armored": 2,
+     "armed": 8,
+     "tricks": 23,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    },
+    {
+     "d": 90,
+     "ready": false,
+     "armored": 2,
+     "armed": 9,
+     "tricks": 25,
+     "veterans": 0,
+     "short": "armor|veterans",
+     "maxWave": 3
+    }
+   ],
+   "snap": {
+    "vetHunts": 15
+   },
+   "armKey": "armed",
+   "policyBase": "belong"
+  }
+ ]
+}
