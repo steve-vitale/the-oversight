@@ -1,0 +1,52 @@
+--- PRE-EXILE d22: bearer Dmitri, roster 9 living
+EXILED: justice={"stage":1,"exiled":true,"exileDay":22,"crimes":[]} scholarFam={"exiled":true,"drifting":false,"founding":false,"exileStartDay":22,"insideHaven":false}
+MANTLE: Dmitri -> Erich | passed=true
+POST-MANTLE: s.exiled=false s.drifting=false s.founding=false
+POST-MANTLE justice: {"stage":0,"exiled":false,"exileDay":null,"crimes":[]}
+HANDOFF SAY (14 captured):
+  d22: 📖 The Codex turns a page on its own. Dmitri Sokolov is dead. You didn't ask. It knew.
+  d22: Nobody's talking much. The fire feels smaller tonight.
+  d22: 🕯️ Dmitri Sokolov is dead — the expedition. The village stops. Somebody screams. Somebody else starts digging.
+  d22: "Dmitri's gone." Gus looks at you for a long moment. "You're not Dmitri." No heat in it. Just fact. You'll have to earn this face.
+  d22: The Codex doesn't pause for grief. Erich blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.
+  d22: 📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast.
+  d22: 📖 LEARNED: Reading People (Level 1). Microexpressions leak truth. Watch the eyes, not the mouth. People tell you who they are.
+  d22: ⚡ TECHNIQUE UNLOCKED: Deep Read! You don't just read trust — you read intent. Know what they'll do next. (Your knowledge of Reading People amplifies your open_book.)
+  d22: 🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"
+  d22: 📖 The Codex turns a page: Dmitri Sokolov, 22 days. The mantle passes to Erich Jordan.
+  d22: 🪞 You wake up somebody else. Erich Jordan, 42 — an emergency dispatcher.
+  d22: The village's quarrel was with Dmitri — and Dmitri is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.
+  d22: At the grave, Gus speaks for Erich — "Dmitri trusted them. We saw it. Give them the fire's hearing." The village listens.
+  d22: The fire knew Erich before the Codex did — his name already carried weight here.
+DOCKET VOICE lines in handoff: 1
+RECOVERY SAY (0 captured):
+COLD-SHOULDER CHECK with Gus: opened | justiceExiled()=false
+
+Deceased's closest living friend: Gus (bond 12)
+## grief-friend-d23 — bearer <redacted> to Gus
+> YOU PICK [agency:ask_field] 
+> YOU PICK [ans:q_someone:a_tell] 
+> YOU PICK [dlg:subject] 
+> YOU PICK [ask:lately] 
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:thread:grief] 
+> YOU PICK [goon] 
+> YOU PICK [goon] 
+> YOU PICK [dlg:comfort] 
+(conversation ended by the engine)
+
+## grief-other-d23 — bearer <redacted> to Marina
+> YOU PICK [betrayal:accept] 
+> YOU PICK [ans:q_night:a_yes] 
+> YOU PICK [invite_party] 
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:thread:want] 
+> YOU PICK [goon] 
+> YOU PICK [goon] 
+> YOU PICK [alive:thread:lately] 
+(conversation ended by the engine)
+
+UPRISING in d20-d35 window: none
+
+TELE: {"deaths.bearer":1,"census.alive":8,"census.fallen":4,"census.integrationStage":3,"week2.deadBearerMentions":5}
+M1 mantle=true M2 sExiledFalse=true docketClear=true M3 noUprising=true

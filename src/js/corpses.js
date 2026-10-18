@@ -521,14 +521,20 @@
       // button fired the trauma number silently, like the batch path did —
       // only the search verb named the dead. Name them once, first touch.
       const wasTouched = !!c._touched;
+      // NUMBER-AT-FIRE (journey-succession r24 2026-10-18): the trauma number
+      // must be computed BEFORE the take — _corpseFirstTouch fires
+      // addTrauma(corpseTrauma) and then observe('loot_corpse') moves trust,
+      // so a recompute after the take names a smaller number than the one
+      // that actually landed (9 fired, line said 6). r22's contract is "the
+      // trauma number is the same one _corpseFirstTouch already added."
+      const traumaAtFire = (!wasTouched && !c.ash && this.corpseIsPerson(c)) ? this.corpseTrauma(c, {}) : 0;
       this._corpseTakeStack(c, it);
       const nm = this.itemDisplayName ? this.itemDisplayName(it) : (it.name || 'it');
       this.say(`Taken: ${nm} x${units}.`);
       if (!wasTouched && !c.ash && this.corpseIsPerson(c)) {
         const known = this.nameKnown ? this.nameKnown(c.villagerId) : true;
         const who = known ? this.displayName(c.villagerId) : 'them';
-        const trauma = this.corpseTrauma(c, {});
-        this.say(`You take ${String(nm).toLowerCase()} from ${who}. Your hands know what they did. (+${trauma} trauma)`);
+        this.say(`You take ${String(nm).toLowerCase()} from ${who}. Your hands know what they did. (+${traumaAtFire} trauma)`);
       }
       if (!c.items.some(i => (i.units == null ? 1 : i.units) > 0)) {
         c.looted = true;
@@ -562,6 +568,10 @@
       // them once, on the first touch. Ash keeps its own voice (in
       // _corpseFirstTouch); a corpse already touched per-item keeps that one.
       const wasTouched = !!c._touched;
+      // NUMBER-AT-FIRE (journey-succession r24 2026-10-18): see the per-item
+      // path above — the named number must be the one _corpseFirstTouch
+      // actually fired, computed before the take moves trust.
+      const traumaAtFire = (!wasTouched && !c.ash && this.corpseIsPerson(c)) ? this.corpseTrauma(c, {}) : 0;
       for (let idx = 0; idx < items.length; idx++) {
         const it = items[idx];
         if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
@@ -577,8 +587,7 @@
       if (taken.length && !wasTouched && !c.ash && this.corpseIsPerson(c)) {
         const known = this.nameKnown ? this.nameKnown(c.villagerId) : true;
         const who = known ? this.displayName(c.villagerId) : 'them';
-        const trauma = this.corpseTrauma(c, {});
-        this.say(`You take ${taken.map(t => String(t.name).toLowerCase()).join(', ')} from ${who}. Your hands know what they did. (+${trauma} trauma)`);
+        this.say(`You take ${taken.map(t => String(t.name).toLowerCase()).join(', ')} from ${who}. Your hands know what they did. (+${traumaAtFire} trauma)`);
       }
       if (left.length) this.say('Too heavy for the rest — left where it lies: ' + left.map(t => `${t.name} x${t.units}`).join(', ') + '.');
       if (humanSkipped > 0) this.say('Left the human meat. Trembles has no cure.');

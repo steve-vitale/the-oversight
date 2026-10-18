@@ -1,0 +1,51 @@
+--- PRE-EXILE d22: bearer Gina, roster 10 living
+EXILED: justice={"stage":1,"exiled":true,"exileDay":22,"crimes":[]} scholarFam={"exiled":true,"drifting":false,"founding":false,"exileStartDay":22,"insideHaven":false}
+WALKOFF: bearer off Haven ground (wild node)
+MOOTSYNC: justice={"stage":3,"exiled":true,"exileDay":22,"crimes":[]}
+MANTLE: Gina -> Benjamin | passed=true
+POST-MANTLE: s.exiled=false s.drifting=false s.founding=false
+POST-MANTLE justice: {"stage":0,"exiled":false,"exileDay":null,"crimes":[]}
+HANDOFF SAY (10 captured):
+  d22: 📖 The Codex turns a page on its own. Gina Maldonado is dead. You didn't ask. It knew.
+  d22: 🕯️ Gina Maldonado is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.
+  d22: "Gina's gone." Jae looks at you for a long moment. "You're not Gina." No heat in it. Just fact. You'll have to earn this face.
+  d22: The Codex doesn't pause for grief. Benjamin blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.
+  d22: 🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"
+  d22: 📖 The Codex turns a page: Gina Maldonado, 22 days. The mantle passes to Benjamin Marino.
+  d22: 🪞 You wake up somebody else. Benjamin Marino, 43 — an arborist.
+  d22: The village's quarrel was with Gina — and Gina is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.
+  d22: At the grave, Jae, Catalina speak for Benjamin — "Gina trusted them. We saw it. Give them the fire's hearing." The village listens.
+  d22: The fire knew Benjamin before the Codex did — his name already carried weight here.
+DOCKET VOICE lines in handoff: 1
+RECOVERY SAY (0 captured):
+COLD-SHOULDER CHECK with Jae: opened | justiceExiled()=false
+
+Deceased's closest living friend: Lucas (bond 3)
+## grief-friend-d23 — bearer <redacted> to Lucas
+> YOU PICK [dlg:subject] 
+> YOU PICK [ask:lately] 
+> YOU PICK [alive:event:mourning] 
+> YOU PICK [alive:thread:grief] 
+> YOU PICK [dlg:comfort] 
+> YOU PICK [dlg:comfort] 
+> YOU PICK [dlg:comfort] 
+> YOU PICK [dlg:comfort] 
+> YOU PICK [dlg:comfort] 
+> YOU PICK [dlg:comfort] 
+> YOU PICK [dlg:comfort] 
+(conversation ended by the engine)
+
+## grief-other-d23 — bearer <redacted> to Jae
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [alive:want:ask_favor] 
+> YOU PICK [alive:want:ask_favor] 
+(conversation ended by the engine)
+
+UPRISING in d20-d35 window: none
+
+TELE: {"deaths.bearer":1,"census.alive":9,"census.fallen":3,"census.integrationStage":3,"week2.deadBearerMentions":3}
+M1 mantle=true M2 sExiledFalse=true docketClear=true M3 noUprising=true

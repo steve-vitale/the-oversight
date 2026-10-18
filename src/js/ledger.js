@@ -901,6 +901,31 @@
       s.trauma = 10; // the shock of stepping up
       // STATUS EFFECTS (Steve 2026-10-07): new body, no old afflictions.
       s.statuses = []; s.diseases = []; s.poisons = [];
+      // THE SENTENCE DIES WITH THE BEARER <redacted> 2026-10-18):
+      // the village's formal docket (justice stage, exile, crimes) was the
+      // case against the DEAD bearer <redacted> uprising-'lost' path already resets it
+      // ("the crimes died with the criminal" — justice.js, brawler loop
+      // 2026-10-08), but the exile-then-die-in-the-wild path never did: the
+      // innocent successor woke with s.exiled still true and a live docket,
+      // so the next justiceTick fired startVillageUprising('defied exile')
+      // against someone who was never sentenced — while justiceExiled()
+      // misfired the cold shoulders, the pantry denial, and the contest
+      // gates on the new body. The village remembers socially (gossip, the
+      // fallen roll, the lineage recorded above); the machinery stands down.
+      // The exile-family flags (drifting, founding, exileStartDay) are the
+      // old body's solo life — they end with it too.
+      let _docketLive = false;
+      try {
+        const _j = this.justiceState ? this.justiceState() : null;
+        if (_j) {
+          _docketLive = !!(_j.exiled || (_j.stage || 0) >= 1 || ((_j.crimes || []).length > 0));
+          // field list mirrors the uprising-'lost' reset (justice.js)
+          _j.stage = 0; _j.exiled = false; _j.exileDay = null; _j.crimes = [];
+          _j.confrontedBy = null; _j.confrontRefused = false; _j.pendingConfront = false;
+          _j.mootDemanded = false; _j.silenceRefused = false; _j.amendsCredit = 0; _j.warned = false;
+        }
+        s.exiled = false; s.drifting = false; s.founding = null; s.exileStartDay = null;
+      } catch (e) { console.warn('[mantle] docket reset', e); }
       s.mx = 4; s.my = 4;
       try {
         if (this.map) { this.map.px = this.state.village.px ?? 4; this.map.py = this.state.village.py ?? 4; }
@@ -952,6 +977,16 @@
         const kitClause = kit.length ? ` ${poss} hands know different work now: ${kit.join(', ')}.` : '';
         const ageClause = newChar.age ? `, ${newChar.age}` : '';
         this.say(`🪞 You wake up somebody else. ${newName}${ageClause} — ${art} ${occName}.${kitClause}`);
+      } catch (e) {}
+      // THE SENTENCE DOESN'T CROSS THE GRAVE (journey-succession r24
+      // 2026-10-18): when the docket was live at the death, name that the
+      // sentence ended with the old body — otherwise the reset above is
+      // silent and the successor never learns why the fire's wary hearing
+      // is all that's left. Clean-docket deaths: silence, as before.
+      try {
+        if (_docketLive) {
+          this.say(`The village's quarrel was with ${oldFirst} — and ${oldFirst} is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.`);
+        }
       } catch (e) {}
       try { this.recordMoment(`${oldName} died. ${newFirst} picked up the Codex.`); } catch (e) {}
       // SUCCESSOR'S OWN GRIEF (journey-succession r23 2026-10-18): the
