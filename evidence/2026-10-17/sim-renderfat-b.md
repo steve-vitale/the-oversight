@@ -233,3 +233,9 @@ cook duty eagerly and works the smoke racks. The hunger reads as a siege
   and striped_skunk carcass prose promises renderable fat but neither has
   butcher.fat (rattlesnake: {hide:1,bone:1}; skunk: none). Fiction-engine
   mismatch — content owner to fix or wire.
+
+## Re-validation on current master (2026-10-18, run fleshout-b-20261017T2320Z recovery)
+
+The census was re-run on master 213fdda2 (after haul-pipeline changes a2945cb6 "villager haul pipeline" + e85d00f0 "dawn-after-kill haul prioritization" + d9f4be55 food-deed banking). 16 runs, seeds 7911-7918 x {leadfeast,belongfeast}, FEASTSCALE_R13=1/SEATDRIVE=0, 180d.
+
+Result: renderEvents 0, pemmicanEvents 0, fat genEvents 0, genSlabs 0, renderKcal 0 — IDENTICAL to the original census. The verdict HOLDS on current master: the render ladder remains supply-starved at the kill level despite the haul-pipeline improvements. Hauling more carcasses does not create fat where the kill channel produces none.
