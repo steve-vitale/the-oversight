@@ -295,6 +295,7 @@
       // the confrontation voice — "everyone knows whose hands" is a lie when
       // the woods kept your secret.
       const known = crimes.filter(c => c.witnessed !== false);
+      const canns = known.filter(c => c.type === 'cannibalism').length;
       const murders = known.filter(c => c.type === 'murder').length;
       const attacks = known.filter(c => c.type === 'attack').length;
       const thefts = known.filter(c => c.type === 'theft').length;
@@ -316,7 +317,12 @@
       const voiceCtx = { close, wary };
       const voiceVars = { name };
       let line;
-      if (murders > 0) {
+      // CANNIBALISM NAMES ITSELF (crisis leg r24 2026-10-18): canon
+      // (docs/CORRUPTION.md) — "the charge outranks murder." The gravest
+      // charge gets its own voice, never the generic "we need to talk."
+      if (canns > 0) {
+        line = this.justiceVoicePick('confrontation', 'cannibalism', voiceCtx, voiceVars);
+      } else if (murders > 0) {
         line = this.justiceVoicePick('confrontation', 'murder', voiceCtx, voiceVars);
       } else if (attacks > 0) {
         line = this.justiceVoicePick('confrontation', 'attack', voiceCtx, voiceVars);
@@ -328,7 +334,16 @@
       // Fallback if voice data isn't loaded (shouldn't happen in production).
       if (!line) line = `${name} steps close. "We need to talk."`;
       this.say('⚖ ' + line);
-      this.say('(Find them and answer — pay restitution, or refuse. Attacking them answers too.)');
+      // NO BUY-OFF HINT WHEN THERE IS NONE (crisis leg r24 2026-10-18): where
+      // the norm is exile, the village won't take food for cannibalism — the
+      // hint must not offer restitution that justiceRespond will refuse.
+      let noPay = false;
+      if (canns > 0) {
+        try { noPay = (this.cannibalNorm ? this.cannibalNorm() : 'exile') === 'exile'; } catch (e) { noPay = true; }
+      }
+      this.say(noPay
+        ? '(Find them and answer — or refuse. They will not take food for this.)'
+        : '(Find them and answer — pay restitution, or refuse. Attacking them answers too.)');
       try { this.audioEvent('confront'); } catch (e) {}
     },
 
@@ -355,6 +370,20 @@
       const vid = j.confrontedBy;
       const name = vid ? this.displayName(vid) : 'They';
       if (choice === 'pay') {
+        // NO BUY-OFF FOR CANNIBALISM (crisis leg r24 2026-10-18): canon
+        // (docs/CORRUPTION.md) — "Healthy village → exile. ... Exile, not a
+        // trust hit." Where the norm is exile, witnessed cannibalism can't be
+        // paid away; the village won't take food for it. (Starving/corrupted
+        // villages keep the pay path — their norms price or honor it.)
+        const cannCrimes = (j.crimes || []).filter(c => c.type === 'cannibalism' && c.witnessed !== false);
+        if (cannCrimes.length) {
+          let norm = 'exile';
+          try { norm = this.cannibalNorm ? this.cannibalNorm() : 'exile'; } catch (e) {}
+          if (norm === 'exile') {
+            this.say(`${name} looks at what you offer — then steps back. "No. Not for this. You don't buy your way back from eating one of us." The food stays in your pack. The confrontation isn't over.`);
+            return { paid: 0, enough: false, refused: 'cannibalism' };
+          }
+        }
         const owed = this.justiceRestitutionOwed();
         // Plan the payment BEFORE moving anything. The fiction is they LOOK
         // at what you offer and refuse it — refused food stays in your pack.
@@ -434,10 +463,15 @@
       // what the village can prove: strongest witnessed crime on the books,
       // not yet judged. forcePlayerAccusation charges this same set — the
       // summons never gets ahead of the evidence.
-      const rank = { murder: 4, attack: 3, theft: 2, intimidation: 1 };
+      // CANNIBALISM OUTRANKS MURDER (crisis leg r24 2026-10-18): canon
+      // (docs/CORRUPTION.md). The old rank map had no cannibalism entry, so
+      // the demand voice fell back to "what you've done" for the gravest
+      // charge while the accusation named it.
+      const rank = { cannibalism: 5, murder: 4, attack: 3, theft: 2, intimidation: 1 };
       const provable = (j.crimes || []).filter(c => rank[c.type] && c.witnessed !== false && !c.caseId);
       const serious = provable.sort((a, b) => (rank[b.type] || 0) - (rank[a.type] || 0))[0];
       const chargeWord = !serious ? 'what you\'ve done' :
+        serious.type === 'cannibalism' ? 'eating one of us' :
         serious.type === 'murder' ? 'the killing' :
         serious.type === 'attack' ? 'the attack' :
         serious.type === 'theft' ? 'the thefts' : 'the threats';

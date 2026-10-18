@@ -1800,6 +1800,22 @@
     // whoTag gives 'you' for the player — fine mid-sentence, but these lines
     // START the sentence, so capitalize (was: "you pays. And stays").
     const cnameCap = cname ? cname.charAt(0).toUpperCase() + cname.slice(1) : cname;
+    // CANNIBALISM NORM (crisis leg r24 2026-10-18): canon (docs/CORRUPTION.md)
+    // — "Healthy village → exile. Discovered cannibalism fast-tracks the
+    // moot; the charge outranks murder." A cannibalism conviction where the
+    // norm is exile doesn't get bought down to weregild on a friendly belief
+    // ledger — it was never a weregild crime. Starving villages ("horror
+    // without exile") and corrupted ones keep the ladder below.
+    // (Placed after cnameCap: the block reads it — a TDZ forward reference
+    // here would be swallowed by the try/catch and silently fall through.)
+    if (charge === 'cannibalism') {
+      let norm = 'exile';
+      try { norm = this.cannibalNorm ? this.cannibalNorm() : 'exile'; } catch (e) { norm = 'exile'; }
+      if (norm === 'exile') {
+        this.say(`The oldest among them stands. The fire seems to lean in. "For eating one of us, there is one sentence. ${cnameCap} — take what you can carry and go."`);
+        return this.resolveCase(c.id, 'exile');
+      }
+    }
     if (avg < exileAt) {
       this.say(`The oldest among them stands. The fire seems to lean in. "${cnameCap} — take what you can carry and go."`);
       return this.resolveCase(c.id, 'exile');
@@ -4389,6 +4405,12 @@
       intimidation: `threatened ${vname} — put fear in them, deliberately`,
       assault: `attacked ${vname} — blood was drawn`,
       murder: `killed ${vname}. There it is. Said out loud.`,
+      // GRAVEST CHARGE GETS ITS OWN LINE (crisis leg r24 2026-10-18): the old
+      // map had no cannibalism entry, so the accuser's story for eating one
+      // of us fell back to "wronged the village."
+      cannibalism: vname === 'the village'
+        ? `ate one of us. There it is. Said out loud.`
+        : `ate ${vname} — one of us, eaten. There it is. Said out loud.`,
     };
     c.accuserStory = `${aname} says you ${lines[c.charge] || 'wronged the village'}.`;
     try {

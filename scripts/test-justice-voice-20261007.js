@@ -62,7 +62,7 @@ check('theft has 3 templates', voice.confrontation.theft.length === 3);
 check('generic has 3 templates', voice.confrontation.generic.length === 3);
 // Old summons: silence=3 (1 close), refused=8 (1 bold, 1 wary, 1 close, 4 seriousType, 1 noSerious), heat=3 (1 close)
 check('summons silence has 3', voice.summons.silence.length === 3);
-check('summons refused has 8', voice.summons.refused.length === 8);
+check('summons refused has 8', voice.summons.refused.length === 9); // r24: +1 cannibalism seriousType
 check('summons heat has 3', voice.summons.heat.length === 3);
 
 // 3. Condition equivalence: for each ctx, eligible count matches old logic
