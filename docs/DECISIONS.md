@@ -1003,3 +1003,20 @@ possible.
 5. **Witness: build the exposure source (#316/#317).** Make the witness door earnable — moot verbs, kept lists, or ambient/player exposure mechanics moving ledger.exposed. Bar stays 3 until the source exists.
 6. **Wave 6: the Easter-egg road (#410).** Wave 6+ is the long-survival challenge path to the final boss — waves past 5, very very hard, no specific plans yet; Steve invited the scaffold (landed in docs/MONSTER-WAVES.md).
 Unanswered — defaults stand: #340 ledger stays cumulative; muster-vs-grief stays grief-first; grief cap stays 2; pyrrhic deeds stay forfeit; door tie-break stays beloved-first.
+
+## 2026-10-18 — Readiness bar recalibration (Steve: "fix readiness bar")
+Steve: "Go with your gut on all design calls. List them all with your
+decision. I will correct any that need it." The dc4-readiness bar (2026-10-16)
+collapsed wave-4 unlocks 14/16 -> 0/16; its demands were "sim starting points."
+Muse's calls (his to overrule): (1) keep the combat-readiness shape — no
+revert to faced-experience (fleeing is not readiness; the bread road must not
+open a war draft); (2) w4 veterans 2 -> 1 (the single structural bind,
+98.5-100% of deferral days); (3) w4 armor 4@P15 -> 3@P10 (P=10 is the doc's
+own medium tier; armor is mortality-selected); (4) w4 armed 5 unchanged,
+(5) w4 tricks 3 unchanged (both non-binding, working as intended);
+(6) w5 {6@P20,7,4,3} -> {4@P15,6,3,2} (same philosophy, one step up);
+(7) veterans stay living-only (dead veterans are memory, not capability);
+(8) no faced-experience alternate path (would reopen the flee-to-unlock
+exploit); (9) hold beats unchanged (read demands dynamically);
+(10) ratchet/plenty-cap/waves-1-3 untouched. Result: 13/16 wave-4 on named
+seeds (was 0/16); bread-road flee-through still held. Landed b4906574d.
