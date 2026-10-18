@@ -1151,6 +1151,19 @@
         const rel = kin.relation || 'kin';
         const fate = String(kin.fate || 'went up in the Taking');
         const cap = fate.charAt(0).toUpperCase() + fate.slice(1);
+        // REPEAT-ACK (journey-scale r8 2026-10-18): the taken story is
+        // deterministic from kin data — without a memory check the NPC
+        // re-tells it byte-identical 40 days later (Paola/Willow r7
+        // transcripts: day80 = day120, no "still no news"). A real person
+        // doesn't re-tell a story they've already told you as if it were
+        // new. The said-facts ledger (Steve 2026-10-07) is the honest
+        // mechanism: first telling records the fact; repeats acknowledge it.
+        try {
+          if (this.convoFactRecalled && this.convoFactRecalled(vid, 'taken-story')) {
+            return `"Still nothing on ${first}. I told you about the pods -- I keep thinking about them. The humming. Some nights I'm sure it's a dream. Other nights I'm sure it's not."`;
+          }
+          if (this.convoSaidFact) this.convoSaidFact(vid, 'taken-story', first);
+        } catch (e) {}
         return `"It's my ${rel}, ${first}. ${cap}. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."`;
       },
       deflectBeat(vid) {
