@@ -78,3 +78,11 @@ WHY did starvation rise when food rose?
 
 ## Village assessment (plain words)
 [pending sweep]
+
+## Recovery status (2026-10-18, run fleshout-b-20261017T2320Z)
+
+This diagnostic was inherited from dead run fleshout-b-20261017T2122Z (stale-lock recovery). The 48-run sweep (7301-7308 x {leadfeast,belongfeast} x {control,shell,perturb}) is PARTIAL: 19/48 per-seed files complete on master 213fdda2+ (substrate-consistent; contaminated mid-rebase outputs were discarded and re-run).
+
+The sweep did not finish within this run's window (box overloaded, ~6h projected). The 19 completed files are committed here; the next loop-B run resumes with SEEDS/POLICIES/ARMS env targeting the missing 29.
+
+Missing (29): control s7305-s7308 (both policies), shell s7302-s7308 (both policies), perturb s7302-s7308 (both policies). [Exact missing list to be computed by the resuming run from the per-seed dir.]
