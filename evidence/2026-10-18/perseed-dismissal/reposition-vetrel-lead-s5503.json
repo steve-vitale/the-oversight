@@ -1,0 +1,242 @@
+{
+ "policy": "reposition-vetrel-lead",
+ "gate": "1",
+ "seed": 5503,
+ "days": 180,
+ "endReason": "survived",
+ "national": 1,
+ "table": 1,
+ "wins": 0,
+ "exiled": 0,
+ "nFights": 25,
+ "rows": [
+  {
+   "seq": 1,
+   "day": 10,
+   "mid": "gallowdeer",
+   "kind": "move_windup",
+   "wave": 1,
+   "result": "lost",
+   "nPerfs": 2,
+   "knownAtStart": 1,
+   "pAlive": 0,
+   "mortality": {
+    "dead": 0,
+    "alive": 1
+   },
+   "hpByMid": [
+    {
+     "hp": 133,
+     "maxHp": 162,
+     "fled": false,
+     "key": "m_0"
+    }
+   ],
+   "wklEntries": [],
+   "cls": "b1-performer-died"
+  },
+  {
+   "seq": 4,
+   "day": 34,
+   "mid": "hushwolf",
+   "kind": "strike_lead",
+   "wave": 1,
+   "result": "routed",
+   "nPerfs": 1,
+   "knownAtStart": 1,
+   "pAlive": 1,
+   "mortality": {
+    "dead": 0,
+    "alive": 1
+   },
+   "hpByMid": [
+    {
+     "hp": 5,
+     "maxHp": 64,
+     "fled": true,
+     "key": "m_0"
+    }
+   ],
+   "wklEntries": [],
+   "cls": "b2-dismissal",
+   "transcript": [
+    "The village is rattled. Everyone's jumpy — eyes on the treeline.",
+    "⚔ THE BIG BEAST! You're on your own.",
+    "Turn-based now. Tap a tile to move — speed is squares. Then act.",
+    "The woods go silent — not quiet. Silent. Like the world holding its breath. The pack is already moving. They go quiet before the rush. If the birds stop, they're already moving.",
+    "(The game is telling you something: this is bigger than one person. Talk to your companions — \"We should name this. Us.\")",
+    "💧 Silas returns with 11L of creek water. Risky until the hearth boils it.",
+    "You catch fragments by the fire — Cristina telling Ingrid about you. The story's getting bigger than what happened.",
+    "💧 Hassan returns with water: +3 clean.",
+    "🚶 David is back — found Brendan.",
+    "🌿 Greta returns from foraging the wilds: +468 kcal to the pantry.",
+    "— MIDDAY — Honest work hours. Heat builds.",
+    "(wolf's hide absorbs 2.)"
+   ]
+  },
+  {
+   "seq": 9,
+   "day": 54,
+   "mid": "gallowdeer",
+   "kind": "move_windup",
+   "wave": 1,
+   "result": "lost",
+   "nPerfs": 1,
+   "knownAtStart": 1,
+   "pAlive": 0,
+   "mortality": {
+    "dead": 0,
+    "alive": 1
+   },
+   "hpByMid": [
+    {
+     "hp": 101,
+     "maxHp": 152,
+     "fled": false,
+     "key": "m_0"
+    }
+   ],
+   "wklEntries": [],
+   "cls": "b1-performer-died"
+  },
+  {
+   "seq": 11,
+   "day": 56,
+   "mid": "sanjun",
+   "kind": "shout",
+   "wave": 1,
+   "result": "won",
+   "nPerfs": 1,
+   "knownAtStart": 1,
+   "pAlive": 1,
+   "mortality": {
+    "dead": 1,
+    "alive": 0
+   },
+   "hpByMid": [
+    {
+     "hp": 0,
+     "maxHp": 91,
+     "fled": false,
+     "key": "m_0"
+    }
+   ],
+   "wklEntries": [
+    {
+     "trick": 1,
+     "by": "hassan_ali",
+     "via": "companion",
+     "d": 56
+    }
+   ],
+   "cls": "attributed"
+  },
+  {
+   "seq": 12,
+   "day": 56,
+   "mid": "sweeps_week",
+   "kind": "face_it",
+   "wave": 1,
+   "result": "won",
+   "nPerfs": 1,
+   "knownAtStart": 1,
+   "pAlive": 1,
+   "mortality": {
+    "dead": 1,
+    "alive": 0
+   },
+   "hpByMid": [
+    {
+     "hp": 0,
+     "maxHp": 85,
+     "fled": false,
+     "key": "m_0"
+    }
+   ],
+   "wklEntries": [
+    {
+     "trick": 1,
+     "by": "gen_9p4swar",
+     "via": "player",
+     "d": 56
+    }
+   ],
+   "cls": "attributed"
+  }
+ ],
+ "unattributed": 0,
+ "instrumentErrors": 0,
+ "snapshot": {
+  "day": 110,
+  "cfg": {
+   "barsPerWave": {
+    "1": 5,
+    "2": 4,
+    "3": 4,
+    "4": 3,
+    "5": 2
+   },
+   "wave2DayFloor": 8,
+   "dayFloor": 25,
+   "pointsPerKill": 1,
+   "pointsPerCounterKill": 2,
+   "perTypeCap": 2,
+   "warPerKill": 25,
+   "t4": 100,
+   "t5": 200,
+   "plentyCapT5": 100
+  },
+  "ledgerPoints": {
+   "1": 14,
+   "2": 10,
+   "3": 2,
+   "4": 0,
+   "5": 0
+  },
+  "ledgerPerType": {
+   "1": {
+    "nightlight_catfish": 2,
+    "ducks_in_a_row": 1,
+    "hushwolf": 2,
+    "lockpick_raccoon": 1,
+    "sanjun": 2,
+    "sweeps_week": 2,
+    "mirrormoth": 2,
+    "living_wire": 2
+   },
+   "2": {
+    "heckler": 1,
+    "landlord": 1,
+    "memory_projector": 2,
+    "giant_mosquito": 2,
+    "review_drone": 1,
+    "bright_idea": 2,
+    "warranty_caller": 1
+   },
+   "3": {
+    "focus_group": 1,
+    "callback": 1
+   },
+   "4": {},
+   "5": {}
+  },
+  "standing": {
+   "war": 50,
+   "diplomacy": 102,
+   "plenty": 180
+  },
+  "gated": 199,
+  "rd4Ready": true,
+  "rd5Ready": false,
+  "peak": 4,
+  "w4faced": false,
+  "maxWave": 4
+ },
+ "scholarDeaths": 2,
+ "scholarCombatDeaths": 2,
+ "scholarDeathCauses": {
+  "combat": 2
+ },
+ "villagerDeaths": 9,
+ "villagerCombatDeaths": 2
+}
