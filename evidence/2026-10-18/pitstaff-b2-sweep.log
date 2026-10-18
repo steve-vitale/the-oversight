@@ -1,0 +1,57 @@
+leadfeast-control-9005: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-armed-9005: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-control-9006: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-armed-9006: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-control-9007: days=137 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+leadfeast-armed-9007: days=137 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+leadfeast-control-9008: days=162 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+leadfeast-armed-9008: days=162 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+leadfeast-control-9009: days=120 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-armed-9009: days=120 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-control-9010: days=67 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+leadfeast-armed-9010: days=67 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+leadfeast-control-9306: days=154 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-armed-9306: days=154 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-control-9307: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+leadfeast-armed-9307: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+
+=== corpus vs pre-registration ===
+  runs: 10/10 (armed 5, control 5)
+  ENGAGEMENT pit traps armed+set: armed=0 (bar >= 16; KILL if 0)
+  PRIMARY boar kills armed: 0 (bar >= 4); control: 0 (expected 0)
+  PRIMARY boar-meat pantry kcal armed: 0 (bar >= 5000); control: 0
+  corollary fat slabs armed: 0 (killaudit bar was >= 12); control: 0
+  GUARD trap-duty deaths: armed=0 control=0 (bar <= control+2)
+  GUARD median survival: armed=154d control=154d (bar >= control-10d)
+  GUARD new death modes on armed: none
+  wall armed: {"national":4,"table":5,"wins":0,"wave4":4,"wave5":0} control: {"national":4,"table":5,"wins":0,"wave4":4,"wave5":0}
+  errors/schemaDirty: 0/10
+belongfeast-control-9005: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-armed-9005: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-control-9006: days=126 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+belongfeast-armed-9006: days=126 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+belongfeast-control-9007: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-armed-9007: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-control-9008: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-armed-9008: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-control-9009: days=156 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+belongfeast-armed-9009: days=156 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+belongfeast-control-9010: days=126 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-armed-9010: days=126 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=0 errors=0 schemaClean=true
+belongfeast-control-9306: days=151 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+belongfeast-armed-9306: days=151 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+belongfeast-control-9307: days=180 boarKills=0 boarMeatKcal=0 pitsSet=0 fatSlabs=0 trapDeaths=0 pitL=1 errors=0 schemaClean=true
+belongfeast-armed-9307: days=180 boarKills=0 boarMeatKcal=0 pitsSet=3 fatSlabs=0 trapDeaths=2 pitL=2 errors=0 schemaClean=true
+
+=== corpus vs pre-registration ===
+  runs: 16/16 (armed 8, control 8)
+  ENGAGEMENT pit traps armed+set: armed=3 (bar >= 16; KILL if 0)
+  PRIMARY boar kills armed: 0 (bar >= 4); control: 0 (expected 0)
+  PRIMARY boar-meat pantry kcal armed: 0 (bar >= 5000); control: 0
+  corollary fat slabs armed: 0 (killaudit bar was >= 12); control: 0
+  GUARD trap-duty deaths: armed=2 control=0 (bar <= control+2)
+  GUARD median survival: armed=180d control=180d (bar >= control-10d)
+  GUARD new death modes on armed: your own pit trap
+  wall armed: {"national":8,"table":6,"wins":0,"wave4":8,"wave5":0} control: {"national":8,"table":6,"wins":0,"wave4":8,"wave5":0}
+  errors/schemaDirty: 0/16
+RESUME_EXIT=0
