@@ -1,0 +1,37 @@
+PART A — gate-logic units
+  ok   shellableNuts finds in-shell nuts
+  ok   shellableNuts ignores edible food
+  ok   leanDay: hungry + nuts only
+  ok   leanDay: not hungry
+  ok   leanDay: edible food present
+  ok   leanDay: no nuts
+  ok   timeToSpare: mid-day
+  ok   timeToSpare: day nearly spent
+  ok   layerOn: default OFF
+PART B — RED->GREEN fixture (upkeep-level, lean camp state)
+  ok   RED: base upkeep leaves nuts in shell
+  ok   GREEN: layer shells the pack batch at Haven
+  ok   GREEN: engine pack-eat eats the shelled nuts
+PART C — det-gate (wrapped SHELLCAMP-unset vs unwrapped base, 60d)
+  ok   s7001 belongfeast: wrapped-off byte-identical to base
+  ok   s7001 leadfeast: wrapped-off byte-identical to base
+  ok   s7002 belongfeast: wrapped-off byte-identical to base
+  ok   s7002 leadfeast: wrapped-off byte-identical to base
+  ok   s7003 belongfeast: wrapped-off byte-identical to base
+  ok   s7003 leadfeast: wrapped-off byte-identical to base
+  ok   s7004 belongfeast: wrapped-off byte-identical to base
+  ok   s7004 leadfeast: wrapped-off byte-identical to base
+  ok   s7005 belongfeast: wrapped-off byte-identical to base
+  ok   s7005 leadfeast: wrapped-off byte-identical to base
+  ok   s7006 belongfeast: wrapped-off byte-identical to base
+  ok   s7006 leadfeast: wrapped-off byte-identical to base
+  ok   s7007 belongfeast: wrapped-off byte-identical to base
+  ok   s7007 leadfeast: wrapped-off byte-identical to base
+  ok   s7008 belongfeast: wrapped-off byte-identical to base
+  ok   s7008 leadfeast: wrapped-off byte-identical to base
+  ok   det-gate: no layer-attributable divergence
+PART D — SMOKE (2 seeds x 2 policies x {control,armed}, 12d)
+  ok   SMOKE: 8/8 short runs completed without exceptions
+
+PROOF RESULT: 14 ok, 0 failed
+EXIT:0

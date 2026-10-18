@@ -106,8 +106,21 @@ async function partB() {
       const kcalBefore = Game.state.scholar.kcal;
       try { await quietLog(async () => { wrapped.upkeep(Game, {}); }); } catch (e) {}
       const nuts = packNutsShelled(Game);
-      const allShelled = nuts.length === 2 && nuts.every(i => i.foodState === 'shelled' && i.edible === true && (i.kcalEach || 0) > 0);
-      check('GREEN: layer shells the pack batch at Haven', allShelled, `states=${nuts.map(i => i.foodState).join(',')}`);
+      // BASE CHANGE (frozen base 01fd8945 vs the original corpus base):
+      // the base upkeep's own eat flow now eats from the pack during
+      // upkeep itself (fixture: scholar 300 -> 2390 kcal with the layer
+      // OFF, both nuts untouched). With the layer ON, the pack batch is
+      // shelled first and the same eat flow consumes the shelled nuts
+      // during upkeep (observed: 3 hickory + 1 acorn units eaten, 1
+      // shelled acorn unit remains, scholar 300 -> 2390). The
+      // discriminating assertion is therefore: no in-shell nuts remain in
+      // the pack (RED leaves both in shell — the base never shells), and
+      // any remainder is shelled+edible. The old "2 shelled items sitting
+      // uneaten" observable belonged to the old base.
+      const noInShell = nuts.length === 0 || nuts.every(i => i.foodState !== 'in_shell');
+      const remainderEdible = nuts.every(i => i.edible === true && (i.kcalEach || 0) > 0);
+      check('GREEN: layer shells the pack batch at Haven', noInShell && remainderEdible,
+        `states=${nuts.map(i => i.foodState).join(',')} kcal=${kcalBefore}->${Game.state.scholar.kcal}`);
       try { await quietLog(async () => { Game.eat(); }); } catch (e) {}
       const ate = Game.state.scholar.kcal - kcalBefore;
       check('GREEN: engine pack-eat eats the shelled nuts', ate > 500, `kcal ${kcalBefore}->${Game.state.scholar.kcal}`);
