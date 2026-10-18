@@ -42,8 +42,12 @@ crafts (pit_trap 0/8 runs in the audit).
   EXPLICIT; HUNTSTAFF unset (default OFF) both sides. SEEDS: 105101-105104
   (the killaudit's clean baseline) + 4 fresh verified-unused x
   {leadfeast,belongfeast} x {control,armed}, own in-sweep paired control,
-  identical seeds. (Fresh seeds 105201-105204 verified 0 matches across
-  all evidence/ seed lists 2026-10-16..18 before any sims.)
+  identical seeds. (Fresh seeds 105201-105204 checked against all
+  evidence/ seed lists 2026-10-16..18 before any sims: 105201/105202/
+  105203 zero matches; 105204 one substring match — a float artifact
+  (`25.271998341052047` in evidence/2026-10-17/feastvoice-b-beats/
+  leadfeast-s6107.json), not a seed usage. None of the four were ever
+  consumed — the full pilot never ran.)
 - Balanced panel compare (scripts/balance-panel.js) per §15.
 - DEATH INSTRUMENTS: capture death tele KIND and filter to
   person/villager before judging (lesson #525); snapshot v.taskLeads
