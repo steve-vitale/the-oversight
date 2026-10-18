@@ -1,0 +1,587 @@
+{
+ "label": "journey-endgame-r17",
+ "policy": "belongseat-flavors-r17",
+ "seed": 8952,
+ "arm": "control",
+ "days": 89,
+ "endReason": "over-other",
+ "seatBest": "lesser",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  90
+ ],
+ "announceDay": 90,
+ "sitDay": 90,
+ "rosterAtSitN": 9,
+ "atSit": {
+  "day": 90,
+  "seat": "lesser",
+  "doors": {
+   "feared": {
+    "earned": true,
+    "strength": 100,
+    "why": "30 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked."
+   },
+   "indispensable": {
+    "earned": false,
+    "strength": 10,
+    "why": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+   },
+   "beloved": {
+    "earned": true,
+    "strength": 84,
+    "why": "Viewership 17, fan favor 56 — the galaxy's favorite, by the numbers."
+   },
+   "witness": {
+    "earned": false,
+    "strength": 10,
+    "why": "You didn't keep the list (2 exposures on record — the trial needs 3)."
+   },
+   "assimilated": {
+    "earned": true,
+    "strength": 80,
+    "why": "Always open. The table takes anyone — that's what makes it a trap, and what makes it safe."
+   },
+   "defiant": {
+    "earned": true,
+    "strength": 58,
+    "why": "Defiance 7 on the record. The 'no' is earned."
+   },
+   "relay": {
+    "earned": true,
+    "strength": 50,
+    "why": "Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0)"
+   }
+  },
+  "standingCost": 0,
+  "overtimeTier": 0
+ },
+ "ledgerAtSit": {
+  "killed": 0,
+  "protected": 0,
+  "betrayed": 0,
+  "foodShared": 1,
+  "foodHoarded": 0,
+  "might": 88,
+  "brokerage": 3,
+  "showmanship": 9,
+  "exposed": 2,
+  "embrace": 8,
+  "defiance": 7,
+  "unified": 10,
+  "fractured": 2,
+  "contestsSurvived": 0,
+  "waveDeeds": 0,
+  "relayLean": 0,
+  "grounding": 100,
+  "groundingTier": "grounded",
+  "switchTally": {
+   "routed": 0,
+   "delayed": 0,
+   "edited": 0,
+   "skimmed": 0
+  },
+  "promiseTally": {
+   "kept": 0,
+   "broken": 0
+  }
+ },
+ "doorPicks": [],
+ "doorEntries": [
+  {
+   "day": 90,
+   "path": "feared",
+   "branch": "light",
+   "band": null,
+   "notes": [
+    "the food truth was shared"
+   ]
+  }
+ ],
+ "doorPath": "feared",
+ "doorBranch": "light",
+ "doorNotes": [
+  "the food truth was shared"
+ ],
+ "challengeBeats": 3,
+ "challengeBeatLog": [
+  {
+   "day": 90,
+   "path": "feared",
+   "beat": 0,
+   "frame": "the Feared"
+  },
+  {
+   "day": 90,
+   "path": "feared",
+   "beat": 1,
+   "frame": "the Feared"
+  },
+  {
+   "day": 90,
+   "path": "feared",
+   "beat": 2,
+   "frame": "the Feared"
+  }
+ ],
+ "doneDay": null,
+ "doors": [],
+ "downgrades": [],
+ "failEvents": [],
+ "failSteer": [],
+ "driverErr": null,
+ "seatDriveErr": null,
+ "flavorErr": null,
+ "sdSeatAttempts": 1,
+ "sdSeatTaken": 1,
+ "sdSeatDay": 90,
+ "darkThefts": 0,
+ "darkReroutes": 0,
+ "darkDeepens": 0,
+ "darkRelayClaimed": 0,
+ "commShared": 0,
+ "commRelayAppointed": 0,
+ "won": 1,
+ "wonDetail": {
+  "track": "field",
+  "godpath": null,
+  "subclass": null,
+  "god": null,
+  "moral": "light",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "feared",
+  "branch": "light",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 0,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": null
+ },
+ "table": {
+  "phase": "done",
+  "path": "feared",
+  "branch": "light",
+  "doors": [],
+  "weakened": 0,
+  "ascensions": [
+   {
+    "name": "Greta Hansen",
+    "score": 47,
+    "facilitated": false
+   }
+  ],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 90,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_path",
+   "data": {
+    "path": "feared",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 90,
+   "ev": "table_won",
+   "data": {
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": "light",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": null
+   }
+  }
+ ],
+ "rungHistory": [
+  {
+   "day": 70,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,assimilated,defiant,relay"
+  },
+  {
+   "day": 80,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,assimilated,defiant,relay"
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,assimilated,defiant,relay"
+  },
+  {
+   "day": 90,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,assimilated,defiant,relay"
+  }
+ ],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 70,
+   "seat": "lesser",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  }
+ ],
+ "census": [
+  {
+   "id": "gen_x83h913",
+   "name": "Hinemoa",
+   "alive": true,
+   "occ": "bike messenger"
+  },
+  {
+   "id": "boris_kowalski",
+   "name": "Boris",
+   "alive": true,
+   "occ": "blacksmith"
+  },
+  {
+   "id": "greta_hansen",
+   "name": "Greta",
+   "alive": true,
+   "occ": "Sailor"
+  },
+  {
+   "id": "valeria_quispe",
+   "name": "Valeria",
+   "alive": true,
+   "occ": "pottery instructor"
+  },
+  {
+   "id": "sofia_chen",
+   "name": "Sofia",
+   "alive": true,
+   "occ": "community gardener"
+  },
+  {
+   "id": "leo_martin",
+   "name": "Leo",
+   "alive": true,
+   "occ": "trail crew lead"
+  },
+  {
+   "id": "sari_wulandari",
+   "name": "Sari",
+   "alive": true,
+   "occ": "postal worker"
+  },
+  {
+   "id": "henry_zhang",
+   "name": "Henry",
+   "alive": true,
+   "occ": "emergency dispatcher"
+  },
+  {
+   "id": "app_mgpsphjw78",
+   "name": "Fernanda",
+   "alive": true,
+   "occ": "teacher"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 6,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 13,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "villager",
+   "who": "gen_dgf0wlc",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 19,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 23,
+   "kind": "villager",
+   "who": "gen_pyszyt5",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "villager",
+   "who": "gen_zupebjj",
+   "cause": "lockjaw",
+   "player": true
+  },
+  {
+   "day": 29,
+   "kind": "villager",
+   "who": "gen_4segclf",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 36,
+   "kind": "monster",
+   "who": "warranty_caller",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 43,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 44,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 44,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 45,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 50,
+   "kind": "monster",
+   "who": "glasswing",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 52,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 53,
+   "kind": "villager",
+   "who": "maya_singh",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 57,
+   "kind": "monster",
+   "who": "white_noise_heron",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 61,
+   "kind": "monster",
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 64,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 71,
+   "kind": "monster",
+   "who": "union_rep",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "kind": "monster",
+   "who": "chorus_line",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 78,
+   "kind": "villager",
+   "who": "gen_lru9a48",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 83,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 85,
+   "kind": "monster",
+   "who": "warranty_caller",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 85,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 86,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  }
+ ],
+ "ms": 1623,
+ "announceDayApprox": 70
+}
