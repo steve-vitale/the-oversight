@@ -709,7 +709,38 @@
       obj.state = 'out';
       var nm = 'Someone';
       try { nm = this.displayName(vid); } catch (e) {}
-      var purposeLine = {
+      // FOODVOICE2 (2026-10-17): the forage departure line was a single
+      // template fired verbatim per departure (up to 6/day on the corpus).
+      // A small pool in the speaker's wry-terse register; selection is a
+      // deterministic vid+day hash plus a per-day sequence kept OFF-STATE
+      // on the Game object — zero engine-RNG draws, zero game-state moves.
+      // FOODVOICE2_GATE='0' (testing only) restores the single line.
+      var purposeLine;
+      if (obj.purpose === 'forage' && !(typeof process !== 'undefined' && process.env && process.env.FOODVOICE2_GATE === '0')) {
+        var fvToday = 0;
+        try { fvToday = (this.state.scholar || {}).day || 0; } catch (e) {}
+        if (this._fvDepartDay !== fvToday) { this._fvDepartDay = fvToday; this._fvDepartSeq = 0; this._fvDepartUsed = {}; }
+        var fvPool = [
+          '"Back before dark. Probably."',
+          '"Gone looking. Don\'t wait up."',
+          '"There\'s food out there. Going to find it."',
+          '"Out for a forage. If I\'m late, start without me."',
+          '"Bringing dinner back. One way or another."',
+        ];
+        var fvKey = String(vid) + ':' + fvToday;
+        var fvH = 0;
+        for (var fvI = 0; fvI < fvKey.length; fvI++) fvH = ((fvH << 5) - fvH + fvKey.charCodeAt(fvI)) | 0;
+        var fvSeq = this._fvDepartSeq || 0;
+        this._fvDepartSeq = fvSeq + 1;
+        var fvIdx = (((fvH + fvSeq) % fvPool.length) + fvPool.length) % fvPool.length;
+        // within-day uniqueness: a village doesn't echo the same send-off
+        // twice in one day (the robotic tell was N identical lines/day).
+        var fvGuard = 0;
+        while (this._fvDepartUsed[fvIdx] && fvGuard < fvPool.length) { fvIdx = (fvIdx + 1) % fvPool.length; fvGuard++; }
+        this._fvDepartUsed[fvIdx] = 1;
+        purposeLine = 'heads out to forage. ' + fvPool[fvIdx];
+      } else {
+        purposeLine = {
         forage: 'heads out to forage. "Back before dark. Probably."',
         water: 'heads out for water. "The well won\'t fill itself."',
         traps: 'heads out to check the snares. "Wire doesn\'t lie."',
@@ -719,6 +750,7 @@
         guard: 'walks out with ' + (function () { try { return this.displayName(obj.targetVid); } catch (e) { return 'someone'; } }.call(this)) + '. "Nobody walks alone today."',
         haul: 'sets out for the ' + (obj.haulLabel || 'carcass') + '. "Meat\'s meat. Back with it or not at all."',
       }[obj.purpose] || 'heads out.';
+      }
       if (playerAtHaven) this.say((obj.companion ? '👥 ' : '') + nm + ' ' + purposeLine);
       // leaving is gossip-worthy. Two witnesses so the rumor can travel.
       try {

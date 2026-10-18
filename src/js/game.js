@@ -6278,10 +6278,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Narration + counter ONLY: no branch change, no RNG, no state
       // change beyond the log line and the ledger — the duty below
       // resolves exactly as it did before (production continues).
+      //
+      // FOODVOICE2 (2026-10-17): per-day voice gate. The pantry-check beats
+      // below fired per RESOLUTION (up to 15/day) with a fresh
+      // pantryFreshDays() recompute each time (~18->~12 within one day) —
+      // it read as the engine recomputing, not a person checking. Each
+      // beat now voices ONCE per day, with the count computed ONCE that
+      // day; the day's telling stands and repeats stay silent
+      // (sim-nothingedible-voice-b precedent). The LEDGER counters
+      // (v.throttleExemptDepth, v.throttleRedirects) still increment per
+      // occurrence — the measure stays truthful; only the VOICE is gated.
+      // The redirect branch (alt-task resolution) is untouched.
+      // FOODVOICE2_GATE='0' disables the gates (testing only; the browser
+      // always gates). Day flags live OFF-STATE on the Game object —
+      // saves and state fingerprints untouched.
+      const _fvGateOff = (typeof process !== 'undefined' && process.env && process.env.FOODVOICE2_GATE === '0');
+      let _fvToday = 0;
+      try { _fvToday = (this.state.scholar || {}).day || 0; } catch (e) {}
       if ((a.task === 'forage' || a.task === 'garden' || a.task === 'fish') && this.prodThrottleHungerExempt()) {
-        const days = this.pantryFreshDays();
-        const fromName = a.task === 'garden' ? 'harvest' : a.task === 'fish' ? 'fish nets' : 'forage';
-        this.say(`🍽️ ${first} checks the pantry before heading out — ~${Math.round(days)} days of fresh on hand, but someone has gone hungry three days running. The hungry eat first: keeps working the ${fromName} instead of turning to other work.`);
+        const fvExVoice = _fvGateOff || this._fvExemptDay !== _fvToday;
+        if (fvExVoice) {
+          let fvExDays;
+          if (_fvGateOff) { fvExDays = this.pantryFreshDays(); }
+          else { this._fvExemptDay = _fvToday; fvExDays = Math.round(this.pantryFreshDays()); this._fvExemptDays = fvExDays; }
+          const fromName = a.task === 'garden' ? 'harvest' : a.task === 'fish' ? 'fish nets' : 'forage';
+          this.say(`🍽️ ${first} checks the pantry before heading out — ~${Math.round(fvExDays)} days of fresh on hand, but someone has gone hungry three days running. The hungry eat first: keeps working the ${fromName} instead of turning to other work.`);
+        }
         v.throttleExemptDepth = (v.throttleExemptDepth || 0) + 1;
       }
 
@@ -6293,10 +6315,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if ((a.task === 'forage' || a.task === 'garden' || a.task === 'fish') && this.prodThrottleEngaged()) {
         const from = a.task;
         const alt = this.prodThrottleAltTask();
-        const days = this.pantryFreshDays();
-        const fromName = from === 'garden' ? 'harvest' : from === 'fish' ? 'fish nets' : 'forage';
-        const altName = alt === 'wood' ? 'wood run' : alt === 'water' ? 'water run' : 'stone pile';
-        this.say(`🌿 ${first} checks the pantry before heading out — the shelves are full, ~${Math.round(days)} days of fresh on hand… leaves the ${fromName} standing and turns to the ${altName} instead. The pantry can't take more; the wild will keep.`);
+        // FOODVOICE2 per-day voice gate (see header above): voice once per
+        // day, count computed once; repeats stay silent.
+        const fvRedVoice = _fvGateOff || this._fvRedDay !== _fvToday;
+        if (fvRedVoice) {
+          let fvRedDays;
+          if (_fvGateOff) { fvRedDays = this.pantryFreshDays(); }
+          else { this._fvRedDay = _fvToday; fvRedDays = Math.round(this.pantryFreshDays()); this._fvRedDays = fvRedDays; }
+          const fromName = from === 'garden' ? 'harvest' : from === 'fish' ? 'fish nets' : 'forage';
+          const altName = alt === 'wood' ? 'wood run' : alt === 'water' ? 'water run' : 'stone pile';
+          this.say(`🌿 ${first} checks the pantry before heading out — the shelves are full, ~${Math.round(fvRedDays)} days of fresh on hand… leaves the ${fromName} standing and turns to the ${altName} instead. The pantry can't take more; the wild will keep.`);
+        }
         v.throttleRedirects = (v.throttleRedirects || 0) + 1;
         a.task = alt;
         return this.resolveOneAssignment(vid, a);
