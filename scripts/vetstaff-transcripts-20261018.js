@@ -11,6 +11,13 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+// POST-KILL INFO-SKIP: the vetstaff layer was deleted per the kill protocol
+// (NO-GO on the binding primary, 2026-10-18). Kept as historical record;
+// exit 0 instead of crashing on the missing module.
+if (!fs.existsSync(path.join(__dirname, 'policies', 'vetstaff.js'))) {
+  console.log('INFO-SKIP: vetstaff-transcripts-20261018.js — layer deleted per kill protocol (NO-GO primary 2026-10-18).');
+  process.exit(0);
+}
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const TF = require('./policies/tribfloor');
 const VS = require('./policies/vetstaff');

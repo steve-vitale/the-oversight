@@ -18,6 +18,14 @@
 // (c) SMOKE: VETSTAFF=1 short run drives without errors.
 // Usage: node scripts/test-vetstaff-a-20261018.js
 'use strict';
+// POST-KILL INFO-SKIP: the vetstaff layer was deleted per the kill protocol
+// (NO-GO on the binding primary, 2026-10-18), so this proof has nothing to
+// prove. Exit 0 instead of crashing on the missing module.
+const fs0 = require('fs'), path0 = require('path');
+if (!fs0.existsSync(path0.join(__dirname, 'policies', 'vetstaff.js'))) {
+  console.log('INFO-SKIP: test-vetstaff-a-20261018.js — layer deleted per kill protocol (NO-GO primary 2026-10-18); proof vacuous.');
+  process.exit(0);
+}
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { dayHash } = require('./det-gate');
 const TF = require('./policies/tribfloor');
