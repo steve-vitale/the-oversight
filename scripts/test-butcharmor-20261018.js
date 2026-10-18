@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+// KILLED 2026-10-18 (fleshout-20261018T0715Z recovery): pilot NO-GO per binding
+// §14 — PRIMARY median deferral-armor-margin delta +0.00 pieces (bar >= +2.0),
+// 14/14 qualifying pairs; the layer fired 0-1 crafts across 16 runs
+// (engagement absent on the pre-seat substrate). Layer reverted zero-trace
+// from src/js (see evidence/2026-10-18/sim-butcharmor.md). This proof is
+// retained as an INFO-SKIP: it documents the RED->GREEN shape but was never
+// run post-kill because there is no layer left to prove.
 // scripts/test-butcharmor-20261018.js — proof for the butchering-armor lever
 // (2026-10-18, axis scale-onramp). Proves the game-code change in
 // src/js/villager-build.js (villagerHideArmorDay): the butchering→armor

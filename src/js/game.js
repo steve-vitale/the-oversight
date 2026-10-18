@@ -24672,16 +24672,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // MATERIALS: vine from bush, stick from tree — you don't just get food.
         for (const h of harvested) {
           if (h.cell === 'bush' && Math.random() < 0.3) {
-            // LACING SET-ASIDE (butchering armor 2026-10-18): when the
-            // village is actively sewing hide armor, the foraged vine goes
-            // to the village stores as lacing instead of the pack.
-            // BUTCHARMOR=0 disables (the pack path below is pristine).
-            if (this.butcharmorDivertVine && this.butcharmorDivertVine()) {
-              // diverted — beat + tele inside butcharmorDivertVine
-            } else {
-              scholar.inventory.push({ material: 'vine', units: 1, name: 'Vine', kcalEach: 0, spoilDay: 9999, kg: 0.1 });
-              this.say('You also take some vine (crafting material).');
-            }
+            scholar.inventory.push({ material: 'vine', units: 1, name: 'Vine', kcalEach: 0, spoilDay: 9999, kg: 0.1 });
+            this.say('You also take some vine (crafting material).');
           }
           if ((h.cell === 'tree' || h.cell === 'bigtree') && Math.random() < 0.4) {
             scholar.inventory.push({ material: 'stick', units: 1, name: 'Stick', kcalEach: 0, spoilDay: 9999, kg: 0.2 });
