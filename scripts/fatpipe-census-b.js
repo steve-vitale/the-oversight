@@ -44,7 +44,7 @@ const POLICIES = (process.env.POLICIES ? process.env.POLICIES.split(',').map(s =
 const DAYS = parseInt(process.env.DAYS || '180', 10);
 const SMOKE = process.env.SMOKE === '1';
 const EFF_DAYS = SMOKE ? 12 : DAYS;
-const EVID = path.join(__dirname, '..', 'evidence', '2026-10-17', 'perseed-fatpipe');
+const EVID = process.env.EVID_DIR || path.join(__dirname, '..', 'evidence', '2026-10-17', 'perseed-fatpipe');
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
 const gday = (Game) => { try { return (Game.state.scholar || {}).day || 0; } catch (e) { return 0; } };
