@@ -106,6 +106,13 @@ Haven alone. No mechanics change. `scaleRank()` → `'village'`.
     - **YOKE** — tribute +10%, trust −12 each, opinion −10. Fear is mortar.
     - **MERCY** — the yoke eases: tribute back to courtship terms (4,000 kcal/week),
       trust +8 each, opinion +10, conquered flags cleared (sabotage/revolt end).
+      The eased links hold their place in the polity for one season
+      (`mercyUntil = day+30` — "the yoke's shadow"): the trust bar is waived
+      for polity membership while the player tends them to the 40 the realm
+      stands on. Unearned at season's end, the realm dissolves aloud. Without
+      the grace the realm dissolved the next morning (+8 on 15/25 lands
+      23/33, short of 40) and the kind answer was a trap (journey-scale r7
+      2026-10-18).
     - **RELEASE** — open the cages: every conquered link breaks with honor, the
       war-realm dissolves, national stays unachieved.
   - BELONG → **The Binding**: the polity's court summons Haven's speaker. Choose:

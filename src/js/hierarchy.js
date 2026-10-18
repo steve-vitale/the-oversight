@@ -231,6 +231,13 @@
         var day = (this.state.scholar || {}).day || 0;
         if ((day - (link.day || 0)) < 30) return false;
         if (forConquest) return true;
+        // MERCY-GRACE (journey-scale r7 2026-10-18): the Iron Court's MERCY
+        // answer promises the eased links "a season" to earn the trust —
+        // the yoke's shadow holds their place in the polity for 30 days.
+        // Polity membership only; the trust itself is unchanged, and after
+        // the season the LEAD bar (40+) applies honestly — dissolve aloud
+        // if unearned. Stamped in answerNationalChoice's mercy branch.
+        if (forPolity && link.mercyUntil && day < link.mercyUntil) return true;
         // SUCCGRACE (sim-succgrace 2026-10-15, env-gated, default OFF): a
         // pending succession-grace beat holds the fire's place — the
         // verdict is delayed while the new speaker answers. Polity
@@ -2377,12 +2384,22 @@
           for (csi = 0; csi < csubs.length; csi++) {
             csubs[csi].conquered = false;
             csubs[csi].tributeKcalPerWeek = 4000;
+            // MERCY-GRACE (journey-scale r7 2026-10-18): the beat promises
+            // the eased links "a season" to earn the trust — the yoke's
+            // shadow holds their place in the polity for 30 days while the
+            // player tends them. _linkSeasoned waives the trust component
+            // for polity membership until mercyUntil; after the season the
+            // LEAD bar (trust 40+) applies honestly — dissolve aloud if
+            // unearned. Without this the realm dissolved the next morning:
+            // +8 on strike-trust 15 / terms-trust 25 lands 23/33, short of
+            // 40, and the kind answer was a trap.
+            csubs[csi].mercyUntil = day + 30;
             if (this._trustGain(csubs[csi], 8) < 8) _gr4++;
             this._nudgeOpinion(csubs[csi].subordinate, 10);
             this._linkNote(csubs[csi], 'iron-court', 'Mercy: the yoke eased — courtship terms now.');
           }
           var _gt4 = _gr4 ? ` — ${_gr4} grieving fire(s); theirs waits` : '';
-          this.say(`🕊️ The Iron Court's answer: MERCY. The yoke comes off — tribute back to courtship terms, 4,000 kcal a week, and the hatred starts to decay. ${csubNames.join(', ')} don't trust it yet. They might, in a season. (Trust +8 with each${_gt4}.)`);
+          this.say(`🕊️ The Iron Court's answer: MERCY. The yoke comes off — tribute back to courtship terms, 4,000 kcal a week, and the hatred starts to decay. ${csubNames.join(', ')} don't trust it yet. They might, in a season — the realm holds them one season on the yoke's shadow. Earn their trust to 40 by then, or it comes apart. (Trust +8 with each${_gt4}.)`);
         } else {
           // release: the realm dissolves, loudly
           for (csi = 0; csi < csubs.length; csi++) {
