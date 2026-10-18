@@ -543,7 +543,11 @@
                 } catch (e) {}
                 try { if (!nm2 && last.villagerId && typeof this.firstRef === 'function') nm2 = this.firstRef(last.villagerId) || null; } catch (e) {}
                 if (!nm2) nm2 = 'someone';
-                if (nm2) return { kind: 'mourning', name: nm2, bearer: true };
+                // SUCCESSOR'S OWN GRIEF, convo half (journey-succession r23
+                // 2026-10-18): carry the dead bearer's id so the mourning
+                // lines can acknowledge the SUCCESSOR's personal loss, not
+                // just the village's.
+                if (nm2) return { kind: 'mourning', name: nm2, bearer: true, bearerId: last.villagerId };
               }
             }
           }
@@ -1142,6 +1146,20 @@
           // what took them — the outbreak and the grief are one story.
           if (ev.sickDeath && mnames.length) mlines.push(
             '"The sickness took ' + mnames[mnames.length - 1] + '. I keep washing my hands like it\'ll bring them back. Stupid."');
+          // SUCCESSOR'S OWN GRIEF, convo half (journey-succession r23
+          // 2026-10-18): when the lately-mourning names a dead bearer <redacted>
+          // player was personally close to (bond v>=20 or depth>=1), the
+          // villager can acknowledge the PLAYER's loss — not just their own.
+          // Bearer-branch only (ev.bearerId): ordinary villager deaths keep
+          // their own voice. Hostile bonds get no line — the village doesn't pry.
+          if (ev.bearer && ev.bearerId && mnames.length === 1) {
+            try {
+              const _gb2 = this.bondGet ? this.bondGet(this.villagerId, ev.bearerId) : null;
+              if (_gb2 && (((_gb2.v || 0) >= 20) || ((_gb2.depth || 0) >= 1))) {
+                mlines.push('"I know you and ' + mnames[0] + ' were close. I\'m sorry."');
+              }
+            } catch (e) {}
+          }
           return mlines;
         }
         case 'threat':

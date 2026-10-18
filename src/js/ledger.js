@@ -954,6 +954,30 @@
         this.say(`🪞 You wake up somebody else. ${newName}${ageClause} — ${art} ${occName}.${kitClause}`);
       } catch (e) {}
       try { this.recordMoment(`${oldName} died. ${newFirst} picked up the Codex.`); } catch (e) {}
+      // SUCCESSOR'S OWN GRIEF (journey-succession r23 2026-10-18): the
+      // handoff never read the successor's personal bond with the dead
+      // bearer <redacted> (v.bonds, -100..100) — every successor woke up with the
+      // same flat shock, whether they'd just lost their closest friend or
+      // someone they couldn't stand. The bond is real measured history
+      // (shared meals, deep talks, tended wounds). Close (v>=20 or depth>=1):
+      // the grief gets named and weighs (+5 trauma — the shock plus the hole
+      // where they were; the number is named, r22 precedent). Hostile
+      // (v<=-20 or depth<=-1): the complexity gets named, the number doesn't
+      // move — relief is honest, and so is the guilt about it. Neutral:
+      // silence, as before — nothing to say.
+      try {
+        const _gb = this.bondGet ? this.bondGet(newId, oldId) : null;
+        const _bv = (_gb && _gb.v) || 0, _bd = (_gb && _gb.depth) || 0;
+        const _opro = (oldChar && oldChar.pro) || 'they';
+        const _othem = _opro === 'she' ? 'her' : _opro === 'he' ? 'him' : 'them';
+        const _otheir = _opro === 'she' ? 'her' : _opro === 'he' ? 'his' : 'their';
+        if (_bv >= 20 || _bd >= 1) {
+          s.trauma = (s.trauma || 0) + 5;
+          this.say(`You knew ${oldFirst} — not the office, the person. The fire keeps expecting ${_othem}, and so do you. That's a heavier kind of stepping up. (+5 trauma)`);
+        } else if (_bv <= -20 || _bd <= -1) {
+          this.say(`You and ${oldFirst} never found easy ground. Now their office sits on your shoulders, and the fire will watch what you do with ${_otheir} name. Relief is honest. The guilt about the relief is honest too.`);
+        }
+      } catch (e) {}
       // MANTLE TRUST INHERITANCE (blitz-succession 2026-10-13): the old rule
       // (0.6x of the predecessor's single trust entry) compounded every
       // death — late-chain bearers inherited ~zero and started socially
