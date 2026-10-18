@@ -1381,12 +1381,33 @@
     };
 
     // exposing corruption is witness-work — and truths dragged into the
-    // light have consequences: names named, eyes avoided.
+    // light have consequences: names named, eyes avoided. The exposure
+    // goes on the kept list (exposure.js) with attribution — who exposed
+    // whose bribery, when — so the Witness path's charges read real.
     const _expose = Game.exposeBribery;
     Game.exposeBribery = function (caseId, voterId) {
       const r = _expose ? _expose.call(this, caseId, voterId) : undefined;
       try {
-        if (r) { this.ledgerAdd('exposed', 2); this.exposeFallout(caseId, voterId); }
+        if (r) {
+          let briber = null, voterName = null;
+          try {
+            const c = this.getCase ? this.getCase(caseId) : null;
+            const b = c && (c.bribes || []).find(x => x.voter === voterId);
+            briber = b ? b.by : null;
+            voterName = this.displayName ? String(this.displayName(voterId) || '').split(' ')[0] : voterId;
+          } catch (e) {}
+          if (this.recordExposure) {
+            this.recordExposure({
+              kind: 'bribe',
+              accuser: this.villagerId,
+              accused: briber || voterId,
+              charge: briber ? `bought ${voterName}'s vote` : 'bribery at the moot',
+              detail: 'exposed at the moot, in public',
+              amount: 2,
+            });
+          } else { this.ledgerAdd('exposed', 2); }
+          this.exposeFallout(caseId, voterId);
+        }
       } catch (e) {}
       return r;
     };
@@ -1402,7 +1423,24 @@
         const accused = !!c && (c.playerRole === 'accused' || (c.accused || []).includes(this.villagerId));
         if (path === 'weregild') { if (!accused) { this.ledgerAdd('brokerage', 2); this.ledgerAdd('unified', 1); } }
         else if (path === 'schism') { this.ledgerAdd('fractured', 2); }
-        else if (path === 'exile') { if (!accused) { this.ledgerAdd('exposed', 1); this.ledgerAdd('unified', 1); } }
+        else if (path === 'exile') {
+          if (!accused) {
+            // the moot heard the charge and acted — a real accusation,
+            // upheld in public. Goes on the kept list (exposure.js).
+            if (this.recordExposure) {
+              const acc = (c.accused || [])[0];
+              this.recordExposure({
+                kind: 'plot',
+                accuser: 'the moot',
+                accused: acc,
+                charge: `the moot heard the charge (${c.charge || c.kind || 'plot'}) and exiled them`,
+                detail: 'convicted at the moot',
+                amount: 1,
+              });
+            } else { this.ledgerAdd('exposed', 1); }
+            this.ledgerAdd('unified', 1);
+          }
+        }
         else if (path === 'cold_war') { this.ledgerAdd('fractured', 1); }
       } catch (e) {}
       return r;

@@ -607,6 +607,16 @@ Examine action + observation memory + recognition. Looking closely at a plant is
 
 **Consumes:** state.codex.observations, state.codex.plants (plantKnown), Game.data.plants (description, taxon, seasons, tileAffinity, lookalikeNote), state.map cell species (plantSpecies/bushSpecies/tree per tile)
 
+### exposure (`exposure.js`)
+The exposure source — the village keeps the list. Every truth dragged into the light is a real, attributable event (who exposed whom for what, when), recorded on the kept list and counted on ledger.exposed. Sources: villagers naming lies (gossip + the fire-side beat), confessions (truth.js), bribery exposed at the moot (betrayal.js), moot verdicts. Never free numbers: recordExposure validates and dedupes. The Witness path (table-witness.js, exposed >= 3) reads this list.
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### feastSurge (`feastBuff.js`)
 Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build carefully"). Replaces the retired on-strike feastBurn trigger: a feast grants a buff window that decays at the durationNights-th dawn (2 dawns from 2026-10-12 — a dusk feast buys the night plus the full next day). During the window, strikes AND ability resolutions read the feasted multiplier. The devotion arming (scholar.prog.feastSurge) is the gate — the buff only grants when armed.
 

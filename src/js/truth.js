@@ -1434,8 +1434,18 @@
         lie.confessed = true;
         outcome = 'confessed';
         // TABLE INPUT (coherence audit 2026-10-14): a lie you exposed counts
-        // toward the Witness path (ledger 'exposed').
-        try { if (this.ledgerAdd) this.ledgerAdd('exposed', 1); } catch (e) { console.warn('truth exposed ledger', e); }
+        // toward the Witness path (ledger 'exposed'). Recorded on the kept
+        // list (exposure.js) — who confessed what to whom, when.
+        try {
+          if (this.recordExposure) {
+            this.recordExposure({
+              kind: 'confession', accuser: this.villagerId, accused: vid,
+              charge: `lied about ${lieField}, confessed when pressed`,
+              detail: 'confessed to the Bearer',
+              amount: 1,
+            });
+          } else if (this.ledgerAdd) this.ledgerAdd('exposed', 1);
+        } catch (e) { console.warn('truth exposed ledger', e); }
         const truthWord = lieField === 'occupation' ? `I wasn't ${/^[aeiou]/i.test(lie.told) ? 'an' : 'a'} ${lie.told}. I was ${/^[aeiou]/i.test(lie.truth) ? 'an' : 'a'} ${lie.truth}`
           : lieField === 'origin' ? `I'm not from ${lie.told}. I'm from ${lie.truth}`
           : `I don't actually want ${this.goalWantText(lie.told)}. I want ${this.goalWantText(lie.truth)}`;
@@ -1554,9 +1564,19 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       if (roll < confessP) {
         // CONFESSION — they did it, they say so. The food's gone (eaten days
         // ago); what you get is the truth, on the record, and the village
-        // hears. Theft has a social price.
+        // hears. Theft has a social price. Recorded on the kept list
+        // (exposure.js).
         outcome = 'confessed';
-        try { if (this.ledgerAdd) this.ledgerAdd('exposed', 1); } catch (e) { console.warn('truth exposed ledger', e); }
+        try {
+          if (this.recordExposure) {
+            this.recordExposure({
+              kind: 'confession', accuser: this.villagerId, accused: vid,
+              charge: `stole ${what}, confessed when pressed`,
+              detail: 'confessed to the Bearer',
+              amount: 1,
+            });
+          } else if (this.ledgerAdd) this.ledgerAdd('exposed', 1);
+        } catch (e) { console.warn('truth exposed ledger', e); }
         line = this.drawTruthLine('theftConfess', vid, { first, what });
         if (!line) line = `"It was me. ${what} — I'm sorry."`;
         this.resolveDoubt(doubtId, `confessed: stole ${what} (day ${t.day})`);

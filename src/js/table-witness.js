@@ -131,7 +131,15 @@
       {
         say: function () {
           const L = (typeof Game.ledger === 'function') ? Game.ledger() : {};
-          return [`OPENING — THE CHARGES. ${L.exposed | 0} exposures. Bribes, buried plots, rounding errors — the moots heard them first, and the moots remember. The judges sit very still. Beings of light can flinch; you're about to see it. How do you read them?`];
+          const lines = [`OPENING — THE CHARGES. ${L.exposed | 0} exposures. Bribes, buried plots, rounding errors — the moots heard them first, and the moots remember. The judges sit very still. Beings of light can flinch; you're about to see it. How do you read them?`];
+          // THE LIST IS REAL (sim-witnesource 2026-10-17): the opening
+          // charges name the actual kept-list entries — who exposed whom
+          // for what, when. No vibes; the docket is the record.
+          try {
+            const charges = (typeof Game.exposureChargeLines === 'function') ? Game.exposureChargeLines(3) : [];
+            charges.forEach(c => lines.push(c));
+          } catch (e) {}
+          return lines;
         },
         meterLine,
         choices: [
