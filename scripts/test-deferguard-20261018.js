@@ -15,6 +15,15 @@
 // (c) SMOKE: DEFERGUARD=1 short run drives without errors.
 // Usage: node scripts/test-deferguard-20261018.js
 'use strict';
+// POST-KILL INFO-SKIP (coordinator repair 2026-10-18): the deferguard layer
+// was deleted per the kill protocol (KILLED-AT-PILOT, engagement 0/16), so
+// this proof has nothing to prove. Exit 0 instead of crashing on the
+// missing module.
+const fs = require('fs'), path = require('path');
+if (!fs.existsSync(path.join(__dirname, 'policies', 'deferguard.js'))) {
+  console.log('INFO-SKIP: test-deferguard-20261018.js — layer deleted per kill protocol (KILLED-AT-PILOT 2026-10-18); proof vacuous.');
+  process.exit(0);
+}
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { dayHash } = require('./det-gate');
 const { vetrelLead } = require('./policies/vetrel');
