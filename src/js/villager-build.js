@@ -18,7 +18,11 @@
 //   - villagerNeedTrack(vid) -> the track whose level-up would bring their next target ability
 //   - villagerGearFit(vid, itemId) -> multiplier for how well an item fits their build
 //   - villagerGearDay() -> greedy daily gear allocation (own stash, gifts of spares, armory)
-//   - villagerBuildDay() -> the daily tick: gear, pending sheets
+//   - butcharmorTorsoP(p) -> worn torso protection (butchering-armor helper)
+//   - butcharmorNeedy() -> living home villagers with torsoP < 15
+//   - butcharmorDivertVine() -> forage-time lacing set-aside (butchering armor)
+//   - villagerHideArmorDay() -> bank counter hides; villagers sew hide_armor (butchering-armor last mile)
+//   - villagerBuildDay() -> the daily tick: gear, hide armor, pending sheets
 //   - pickVillagerKnack(vid, choices) -> knack id chosen by buildScore
 //   - mantleBecome(oldId, newId) -> the new bearer keeps THEIR OWN tracks, XP, abilities, skills, knowledge, godhood and gear; the predecessor's do not pass (Steve 2026-10-14: "No I don't think you should take your XP or the abilities. You become that villager.")
 // rules:
@@ -765,12 +769,178 @@
       return moved;
     },
 
+    // butcharmorTorsoP(p): worn torso protection for a villager person record.
+    butcharmorTorsoP(p) {
+      try {
+        const te = (p.equipped || {}).torso;
+        if (te && te.itemId) {
+          const d = ((this.data && this.data.items) || []).find(x => x.id === te.itemId);
+          return (d && d.armor && d.armor.protection) || 0;
+        }
+      } catch (e) {}
+      return 0;
+    },
+
+    // butcharmorNeedy(): living roster villagers at home whose torso armor
+    // is below the wave-4 qualifying bar (P>=15). The sewers' customers.
+    butcharmorNeedy() {
+      const out = [];
+      try {
+        const v = this.state.village || {};
+        for (const rid of (v.roster || [])) {
+          if (rid === this.villagerId) continue;
+          if ((v.away || {})[rid]) continue;
+          let p = null;
+          try { p = this.getPerson ? this.getPerson(rid) : null; } catch (e) {}
+          if (!p || p.dead) continue;
+          if (this.butcharmorTorsoP(p) < 15) out.push({ rid, p });
+        }
+      } catch (e) {}
+      return out;
+    },
+
+    // butcharmorDivertVine(): the trapper's lacing set-aside (butchering
+    // armor 2026-10-18). Called from the forage vine gain (game.js): when
+    // the village is actively sewing hide armor — recipe L1+, hides banked
+    // (stores + counter >= 2), a needy villager exists, lacing stock < 3 —
+    // the foraged vine goes to the village stores instead of the pack.
+    // Returns true if diverted. The vine race is same-day (forage → craft
+    // → spent), so catching the vine at the gain is the only honest moment;
+    // a dawn set-aside always finds an empty pack (measured 2026-10-18).
+    // BUTCHARMOR=0 disables.
+    butcharmorDivertVine() {
+      try {
+        if (typeof process !== 'undefined' && process && process.env && process.env.BUTCHARMOR === '0') return false;
+        const rk = (((this.state.codex || {}).recipes || {})['hide_armor']) || {};
+        if ((rk.level || 0) < 1) return false;
+        let hides = 0;
+        try {
+          hides += ((this.stashState().materials) || {}).hide || 0;
+          hides += (((this.state.scholar || {}).prepStash) || [])
+            .filter(i => i && i.material === 'hide')
+            .reduce((t, i) => t + (i.units || 0), 0);
+        } catch (e) {}
+        if (hides < 2) return false;
+        let storeVine = 0;
+        try { storeVine = ((this.stashState().materials) || {}).vine || 0; } catch (e) {}
+        if (storeVine >= 3) return false;
+        if (this.butcharmorNeedy().length === 0) return false;
+        const st = this.stashState();
+        if (!st) return false;
+        st.materials = st.materials || {};
+        st.materials.vine = (st.materials.vine || 0) + 1;
+        try { if (this.stashLog) this.stashLog('give', 'Vine', 1); } catch (e) {}
+        try { this.tele('vine_set_aside', { n: 1 }); } catch (e) {}
+        try { this.say('You set the vine aside for the village\u2019s sewers \u2014 lacing for the hides.'); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
+    },
+
+    // villagerHideArmorDay(): the butchering→armor channel's last mile
+    // (butchering armor 2026-10-18). Butchering yields hides onto the
+    // scholar's kitchen counter (prepStash), where the 2026-10-18 hide-flow
+    // census found them sitting forever (up to 69/run, 0 crafts): the hunt
+    // feeds the pantry but the hides never become armor. Two honest steps:
+    //  1. BANK: hides left on the counter move into the village stores
+    //     (the counter is the village kitchen's processing surface — the
+    //     scholar stages hauls there for the village; the meat goes to the
+    //     pantry, the hides go to the stores). No trust changes: village
+    //     labor, not a donation.
+    //  2. SEW: the village's crafters sew hide_armor for THEMSELVES from
+    //     the stores (2 hides + 1 vine each). The vine is the trapper's
+    //     contribution — vines live in the trapper's working stock and the
+    //     trapline spends them same-day, so butcharmorDivertVine() (called
+    //     from the forage vine gain in game.js) sets aside a foraged vine
+    //     for the stores at the only honest moment: when the vine is IN
+    //     HAND. Each cuirass costs the trapline a lacing: the tradeoff is
+    //     real and visible.
+    //     Same gates as the scholar's craft(): the village sews from the
+    //     scholar's codex recipe knowledge — L0 (never seen the shape): no
+    //     attempt; L1 (seen): blind 35%, materials at risk; L2+: 85%. A
+    //     successful blind sew teaches the codex L2 (the scholar watches
+    //     real hands learn — the snare-lesson/gear-discovery pattern).
+    //     Individual ownership (canon boundary, sim-findings #516): each
+    //     sewer keeps their cuirass — nothing enters a communal pile.
+    // Env gate BUTCHARMOR=0 disables (sweep control arm); default ON.
+    villagerHideArmorDay() {
+      let sewn = 0, banked = 0;
+      try {
+        if (typeof process !== 'undefined' && process && process.env && process.env.BUTCHARMOR === '0') return 0;
+        const s = this.state.scholar || {};
+        // 1. BANK the counter hides.
+        try {
+          const counter = s.prepStash || [];
+          let hides = 0;
+          for (let i = counter.length - 1; i >= 0; i--) {
+            const it = counter[i];
+            if (it && it.material === 'hide' && (it.units || 0) > 0) {
+              hides += (it.units || 0);
+              counter.splice(i, 1);
+            }
+          }
+          if (hides > 0 && this.stashState) {
+            const st = this.stashState();
+            if (st) {
+              st.materials = st.materials || {};
+              st.materials.hide = (st.materials.hide || 0) + hides;
+              banked = hides;
+              try { if (this.stashLog) this.stashLog('give', 'Rawhide', hides); } catch (e) {}
+              try { this.tele('hide_banked', { n: hides }); } catch (e) {}
+            }
+          }
+        } catch (e) { warn('hideArmor bank', e); }
+        // 2. SEW. The recipe level gates the village exactly as it gates
+        // the scholar's own craft() (game.js): L0 = no shape, no attempt.
+        const rk = (((this.state.codex || {}).recipes || {})['hide_armor']) || {};
+        const rlevel = rk.level || 0;
+        if (rlevel < 1) return sewn + banked;
+        const blind = rlevel < 2;
+        const rate = blind ? 0.35 : 0.85;
+        const eq = EQ();
+        const itemDefs = (this.data && this.data.items) || [];
+        const defOf = (id) => itemDefs.find(d => d && d.id === id) || null;
+        for (const { rid, p } of this.butcharmorNeedy()) {
+          let st = null;
+          try { st = this.stashState ? this.stashState() : null; } catch (e) {}
+          const mats = (st && st.materials) || {};
+          if ((mats.hide || 0) < 2 || (mats.vine || 0) < 1) break; // materials gate the day
+          mats.hide -= 2; mats.vine -= 1;
+          const nm = (() => { try { return this.firstRef ? this.firstRef(rid) : this.displayName(rid); } catch (e) { return 'Someone'; } })();
+          if (Math.random() < rate) {
+            const def = defOf('hide_armor');
+            p.items = p.items || [];
+            p.items.push({ itemId: 'hide_armor', name: (def && def.name) || 'Hide armor', units: 1, kg: (def && def.kg) || 2.5 });
+            try { if (eq && eq.autoEquip) eq.autoEquip(p, itemDefs); } catch (e) {}
+            sewn++;
+            try { this.tele('villager_craft', { vid: rid, item: 'hide_armor', blind: blind ? 1 : 0 }); } catch (e) {}
+            // A successful blind sew teaches the codex L2 — hands learn by
+            // doing, even watched through someone else's hands (the
+            // practice rule from craft(), game.js).
+            if (blind && this.grantKnowledge) {
+              try { this.grantKnowledge('recipe', 'hide_armor', 2, { type: 'witnessed', by: nm }); } catch (e) {}
+            }
+            try { this.say(`🪡 ${nm} laces a hide cuirass from the village stores — cut, sewn, ready to wear.`); } catch (e) {}
+          } else {
+            // Blind or honest failure: the materials are already consumed
+            // above. The woods keep them (the craft() rule).
+            try { this.tele('villager_craft_fail', { vid: rid, item: 'hide_armor' }); } catch (e) {}
+            try { this.say(`🪡 ${nm}'s cuirass comes apart — the hides and the lacing are wasted.`); } catch (e) {}
+          }
+        }
+      } catch (e) { warn('villagerHideArmorDay', e); }
+      return sewn + banked;
+    },
+
     // villagerBuildDay(): the daily tick (endDay, beside npcSynergyTick).
     villagerBuildDay() {
       try {
         // recruits who arrived after the first day get their first ability too
         try { if (this.grantVillagerKnacks) this.grantVillagerKnacks(); } catch (e) { warn('knacks', e); }
         this.villagerGearDay();
+        // HIDE ARMOR (butchering armor 2026-10-18): bank counter hides, let
+        // the village sew. Runs after the gear redistribution so sewing
+        // fills the gaps the pile couldn't.
+        try { this.villagerHideArmorDay(); } catch (e) { warn('hideArmor', e); }
         const v = this.state.village || {};
         for (const rid of (v.roster || [])) {
           if (rid === this.villagerId) continue;
