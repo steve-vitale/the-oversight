@@ -5430,7 +5430,13 @@
         }
       } else if (choiceId === 'more') {
         const beat = this.convoThreadBeat(vid);
-        done(beat || this.convoPickCycle(vid, 'exh', cg.exhausted || ['"I\'ve told you everything I know about that."']), '"Tell me more."');
+        // NULL-LINE GUARD (journey-establishment r16 2026-10-18): when the
+        // thread is dry AND the exhausted pool is fully ledger-blocked,
+        // convoPickCycle returns null and the turn spoke a literal
+        // "THEM: null" into the transcript (r15, seed 61 Wilhelm). Fall back
+        // to the dry admission, same shape as the dlg:more dry path.
+        done(beat || this.convoPickCycle(vid, 'exh', cg.exhausted || ['"I\'ve told you everything I know about that."'])
+          || '"That\'s the whole of it. Sorry."', '"Tell me more."');
       } else if (choiceId.indexOf('gq:') === 0) {
         // GENERIC ANSWER: the player answered their direct question. The
         // outcome must read as a RESPONSE — never a canned pivot (Rule 1).
@@ -5976,6 +5982,13 @@
           if (composed) line = composed;
         }
       } catch (e) {}
+      // NULL-LINE CLASS GUARD (journey-establishment r16 2026-10-18): several
+      // branches can done(null) when a pool is fully ledger-blocked
+      // (convoPickCycle -> null: winddown 'more', 'agree' agreefill, a null-text
+      // goon-held winddown beat, voiceLine nulls). A live turn must never
+      // return a null line — the phone would show an empty beat. Trail off
+      // honestly through the normal emission path below.
+      if (line == null) line = '"..."';
       line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow

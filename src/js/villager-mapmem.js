@@ -423,7 +423,10 @@
         var gross = meat.hiddenKcal || 0;
         if (!known && mid && corpse.kind === 'monster') {
           var unet = Math.round(gross * HAUL_YIELD);
-          var uunits = Math.max(1, Math.round(unet / 500));
+          // PANTRY ATOM LAW (r16 2026-10-18): ceil, not round — a single
+          // rounded unit here later reveals into a >500-kcal atom via
+          // markMonsterFoodSafe (gross 1400 -> 560, the r15 trip).
+          var uunits = Math.max(1, Math.ceil(unet / 500));
           out.unknown.push({
             name: 'Unknown flesh',
             foodKind: 'meat', foodState: 'cleaned',

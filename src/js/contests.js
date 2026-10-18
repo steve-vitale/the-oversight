@@ -5145,7 +5145,11 @@
         // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): high/extreme
         // wins are bigger highlights — the main event grows the club faster.
         const _pGain = contest.risk === 'extreme' ? 8 : contest.risk === 'high' ? 6 : 4;
-        try { if (this.apAdjustFavor) this.apAdjustFavor(_pGain, 'won ' + contest.name + ' on camera', this._cxFanLane(contest)); } catch (e) {}
+        try { if (this.apAdjustFavor) this.apAdjustFavor(_pGain, 'You won ' + contest.name + ' on camera', this._cxFanLane(contest)); } catch (e) {}
+        // GOSSIP (r16 2026-10-18): the village talks about YOUR win by name
+        // too — previously only villager wins seeded gossip, so a run of
+        // player wins left the gossip stream silent about the show.
+        try { this._cxGossip('won', 'player', contest.name); } catch (e2) {}
         try { if (this.apCarePackage) this.apCarePackage(); } catch (e) {}
         if (_grantPrize) {
           ac._prizeGranted[_grantKey] = true;
@@ -6031,7 +6035,9 @@
   // player's own fate is already on the record (notability, ledger).
   G._cxGossip = function(how, pid, contestName) {
     try {
-      if (!pid || pid === 'player') return;
+      // r16 2026-10-18: the player is gossipable too — a televised player win
+      // is the biggest news at the fire. dims.who 'player' renders as "You".
+      if (!pid) return;
       const v = this.state.village;
       v.gossip = v.gossip || [];
       const day = (this.state.scholar || {}).day || 1;
@@ -6040,7 +6046,7 @@
       const heard = [];
       const roster = (v.roster || []).filter(id => id !== this.villagerId && id !== pid);
       if (roster.length) heard.push(roster[Math.floor(Math.random() * roster.length)]);
-      v.gossip.push({ action: 'contest_' + how, dims: { who: pid }, heard,
+      v.gossip.push({ action: 'contest_' + how, dims: { who: pid, contest: contestName || null }, heard,
         distortion: 0, day, partKey, noTrust: false, source: 'contest' });
     } catch (e) {}
   };

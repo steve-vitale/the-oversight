@@ -519,7 +519,10 @@
       // elk, moose, bison all chunk the same way.)
       const yfrac = this.butcherYieldFrac(it.how, (it.plantId || '').replace(/^meat_/, ''));
       const net = Math.round(gross * yfrac);
-      const units = Math.max(1, Math.round(net / 500));
+      // PANTRY ATOM LAW (Steve 2026-10-08; journey-establishment r16
+      // 2026-10-18): no unit over 500 kcal. ceil, not round — round() minted
+      // 560s (net in 251..749 -> 1 unit) and the r15 guardrail tripped.
+      const units = Math.max(1, Math.ceil(net / 500));
       const per = Math.round(net / units);
       // MONSTER MEAT (Steve 2026-10-05): if you don't know it's safe, it doesn't show.
       // Weight is honest (kg always visible). Edibility and calories stay hidden
@@ -1124,9 +1127,10 @@
         } catch (e) {}
         const yfrac = Math.min(_specCap, 0.40 + 0.04 * spec.skill); // 44/48/52% — better hands, more meat
         // PORTION LAW (Steve 2026-10-09, bear rework): same chunking as
-        // self-clean — no 30k slabs from anyone's knife.
+        // self-clean — no 30k slabs from anyone's knife. ceil enforces the
+        // 500-kcal pantry atom (r16 2026-10-18): round() minted 616-728s.
         const net2 = Math.round(gross * yfrac);
-        const units2 = Math.max(1, Math.round(net2 / 500));
+        const units2 = Math.max(1, Math.ceil(net2 / 500));
         const per = Math.round(net2 / units2);
         // MONSTER FOOD SAFETY: the specialist's knife doesn't grant knowledge —
         // same gate as self-clean. Unknown flesh stays unknown until tested.

@@ -4591,7 +4591,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const aboutOther = heard.filter(isWho);
         if (aboutOther.length) {
           const g = aboutOther[aboutOther.length - 1];
-          const wname = this.displayName(g.dims.who);
+          // r16: a gossip entry about the player's televised win names them
+          // "You" — displayName('player') would give a stranger descriptor.
+          const wname = g.dims.who === 'player' ? 'You' : this.displayName(g.dims.who);
           // SELF-GOSSIP (journey deepening 2026-10-12): rumors travel — a
           // villager may have heard the gossip about THEIR OWN departure and
           // was rendering it third-person ("Did you hear? James just walked
@@ -4619,6 +4621,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               ? `${first}: "Yeah, that was me. Ran into the treeline when I heard the screaming. Didn't think, just ran."`
               : `${first}: "Did you hear? ${wname} ran into the treeline when they heard ${_fname} scream. Didn't hesitate."`);
           }
+          // CONTEST MEMORY (journey-establishment r16 2026-10-18): _cxGossip
+          // seeded wins/survivals/deaths with the contest name in dims.contest
+          // (the village WATCHED the show — televised outcomes are remembered
+          // by name), but the render dropped it and every outcome read as
+          // "People are talking about X." Name the show.
+          else if (g.action === 'contest_won' || g.action === 'contest_survived' || g.action === 'contest_died') {
+            const cname = (g.dims && g.dims.contest) || 'the contest';
+            let cline = null;
+            if (g.action === 'contest_won') cline = self
+              ? `${first}: "I won ${cname}. On camera. People won't shut up about it — and honestly? Neither will I."`
+              : `${first}: "Did you hear? ${wname} won ${cname} on the cameras. People are still talking about it."`;
+            else if (g.action === 'contest_survived') cline = self
+              ? `${first}: "I walked out of ${cname}. Alive. That's the whole story and it's enough."`
+              : `${first}: "${wname} walked out of ${cname}. Alive. That's the whole story and it's enough."`;
+            else cline = self
+              ? `${first}: "I didn't walk out of ${cname}."`
+              : `${first}: "They're saying ${wname} died in ${cname}. The fire was quiet last night."`;
+            this.say(cline);
+          }
           else this.say(self
             ? `${first}: "People are talking about me. Take it for what it's worth."`
             : `${first}: "People are talking about ${wname}. Take it for what it's worth."`);
@@ -4629,6 +4650,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               : g.action === 'departure' ? `They walked away from Haven. Nobody knows where they went.`
               : g.action === 'return' ? `They're back from wherever they went.`
               : g.action === 'rescue' ? `They ran into the treeline when someone screamed. Didn't hesitate.`
+              : g.action === 'contest_won' ? `Won ${((g.dims || {}).contest) || 'a contest'} on the cameras.`
+              : g.action === 'contest_survived' ? `Walked out of ${((g.dims || {}).contest) || 'a contest'} alive.`
+              : g.action === 'contest_died' ? `Died in ${((g.dims || {}).contest) || 'a contest'}.`
               : `There's talk about them going around the fire.`);
           } catch (e2) {}
           return { ok: true, gossip: g, aboutOther: g.dims.who };
@@ -42791,8 +42815,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // test order. Cleaned meat already paid the butcher's cut — the
             // standard 40% yield distributes over its ACTUAL portions, not a
             // guessed 4 (test-after-clean lost ~25% vs test-before-clean).
-            const rUnits = it.foodState === 'cleaned' ? Math.max(1, it.units || 1) : 4;
-            const per = Math.round(gross * 0.40 / rUnits); // standard yield
+            // PANTRY ATOM LAW (journey-establishment r16 2026-10-18): the
+            // reveal must not mint >500-kcal units — a hauled single-unit
+            // flesh with gross*0.40 in 501..749 produced 560s (r15 trip).
+            // Widen the portions instead of fattening one; carcass-state
+            // keeps its assumed-4 count.
+            const rNet = Math.round(gross * 0.40);
+            let rUnits = it.foodState === 'cleaned' ? Math.max(1, it.units || 1) : 4;
+            if (it.foodState === 'cleaned' && rNet > rUnits * 500) {
+              rUnits = Math.ceil(rNet / 500);
+              it.units = rUnits;
+            }
+            const per = Math.round(rNet / rUnits);
             it.edible = true;
             it.kcalEach = per;
             it.prep = '⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.';
