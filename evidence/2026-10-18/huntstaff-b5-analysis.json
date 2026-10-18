@@ -1,0 +1,207 @@
+{
+  "arm": "sim-huntstaff-b5",
+  "runId": "fleshout-loop-b-20261018T1530Z",
+  "primary": {
+    "armedBBEngagements": 15,
+    "controlBBEngagements": 0,
+    "armedBBKills": 13,
+    "threshold": 6,
+    "GO": true
+  },
+  "engagement": {
+    "armedDutiesAssigned": 73,
+    "controlHuntAssignAttempts": 0,
+    "threshold": 8,
+    "GO": true
+  },
+  "byAid": {
+    "wild_boar": {
+      "eng": 0,
+      "kills": 0,
+      "kcal": 0
+    },
+    "black_bear": {
+      "eng": 15,
+      "kills": 13,
+      "kcal": 263520
+    }
+  },
+  "bySource": {
+    "layer-staffed": 8,
+    "engine-tasklead": 7
+  },
+  "controlBySource": {
+    "layer-staffed": 0,
+    "engine-tasklead": 0
+  },
+  "guardrails": {
+    "assignedHunterDeaths_perPair": {
+      "pairs": [
+        {
+          "policy": "leadfeast",
+          "seed": 105101,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "leadfeast",
+          "seed": 105102,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "leadfeast",
+          "seed": 105103,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "leadfeast",
+          "seed": 105104,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "leadfeast",
+          "seed": 107201,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "leadfeast",
+          "seed": 107202,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "leadfeast",
+          "seed": 107203,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "leadfeast",
+          "seed": 107204,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 105101,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 105102,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 105103,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 105104,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 107201,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 107202,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 107203,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        },
+        {
+          "policy": "belongfeast",
+          "seed": 107204,
+          "armedAttrDeaths": 0,
+          "controlAttrDeaths": 0,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    "medianSurvival": {
+      "armed": 130.5,
+      "control": 130.5,
+      "GO": true
+    },
+    "newDeathModes": [
+      "hunting",
+      "Highbeam Deer",
+      "starvation"
+    ],
+    "GO_noNewDeathMode": false
+  },
+  "wall": {
+    "control": {
+      "national": 12,
+      "table": 15,
+      "wins": 0,
+      "wave4": 13,
+      "wave5": 0,
+      "arc2": 16,
+      "arc3": 16,
+      "arc4": 15,
+      "fourRealm": 0,
+      "medianSurvival": 130.5,
+      "maxSurvival": 182,
+      "exiled": 0,
+      "villagerDeathsDedup": 81
+    },
+    "armed": {
+      "national": 12,
+      "table": 13,
+      "wins": 0,
+      "wave4": 12,
+      "wave5": 0,
+      "arc2": 16,
+      "arc3": 16,
+      "arc4": 13,
+      "fourRealm": 0,
+      "medianSurvival": 130.5,
+      "maxSurvival": 182,
+      "exiled": 0,
+      "villagerDeathsDedup": 92
+    }
+  },
+  "verdicts": {
+    "primary_bbEngagements_ge6": true,
+    "engagement_assignments_ge8": true,
+    "guard_assignedHunterDeaths_pairs": true,
+    "guard_medianSurvival": true,
+    "guard_noNewDeathMode": false
+  },
+  "verdict": "NO-GO"
+}
