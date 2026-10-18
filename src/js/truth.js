@@ -265,8 +265,12 @@
       ],
       slipGoal: [
         // same gating as origin: the wanting shows, the word for it doesn't.
+        // (r14 2026-10-18: pool was 2 lines — the no-repeat recycle re-served
+        // a seen line verbatim 11 days later. 4 lines keeps the echo rare.)
         `{first} says they want {told}. But they keep doing the exact thing someone who wants something else would do — and going quiet when anyone notices.`,
         `{first} claims {told} — then spends the whole evening oriented around something they won't name. The wanting is real. The word for it isn't "{told}".`,
+        `{first} talks about wanting {told} the way people talk about weather — often, and with no plans to change it. The real wanting is somewhere they keep not looking.`,
+        `{first} says {told} is the dream. Funny how the dream never comes up when they're the one choosing what to do with an afternoon.`,
       ],
       // cache-theft confessions: the robber admits it. {what} = what was stolen.
       // Per-game no-repeat applies here too — thieves don't share a script.
