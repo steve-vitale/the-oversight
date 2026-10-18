@@ -10,7 +10,12 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const { loadGame, setupGame } = require('./sim-harness');
 
-const SEED = parseInt(process.env.SEED || '45', 10);
+const SEED = parseInt(process.env.SEED || '46', 10);
+// SEED 46 (2026-10-17, sim-gengap-b): seed 45's "global, unknown kin" fixture
+// state shifted when the occupation pool grew 55->78 (characterGen gained the
+// 23 background-survivor occupations) — at 45 the player now starts knowing a
+// kin region, so the no_known_kin gate never fires. 46 preserves every fixture
+// precondition (no_known_kin at global, >=1 scattered kin with a region).
 let pass = 0, fail = 0;
 const ok = (cond, label) => {
   if (cond) { pass++; console.log('  PASS: ' + label); }

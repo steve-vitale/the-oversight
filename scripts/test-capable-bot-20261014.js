@@ -32,7 +32,7 @@ function drive(Game, ctx, maxIter) {
 
 (async () => {
   global.__policyRandom = H.mulberry32(12345);
-  const Game = await K.load({ seed: 7 });
+  const Game = await K.load({ seed: 8 }); // seed 8 (2026-10-17, sim-gengap-b): seed 7's flee fixture stalled (5 barrier pushes, 0 exits) after the occupation pool grew 55->78 shifted the scenario RNG; 8 preserves every scenario precondition.
 
   // ---------- 1. real flee ----------
   T.section('1. real flee exits the fight');

@@ -2698,7 +2698,550 @@
       "teachTags": [],
       "intel": "social"
     }
-  ],
+  ,
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 1, "system": 2 },
+      "backstories": [
+        "{first} cut hair in the same barbershop for twelve years. The regulars came for the fade and stayed for the gossip, and {first} heard all of it.",
+        "{first} learned the trade from {their} uncle, sweeping floors before {they} were allowed near a chair. By the end {they} could do a straight-razor shave blindfolded. {They} never did, but {they} could.",
+        "{first} kept the shop open late on Fridays for the night-shift workers. {They} know every regular's head shape, marriage trouble, and favorite sports team.",
+        "{first} cut hair for eleven years, and cut out the noise too. People told the barber things they never told their families."
+      ],
+      "backstory": "{first} cut hair in the same barbershop for twelve years. The regulars came for the fade and stayed for the gossip, and {first} heard all of it.",
+      "granted": [ "steady_hands" ],
+      "trackLean": { "craft": 12, "social": 6 },
+      "pathLean": [ "socialite", "drifter" ],
+      "id": "barber",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "sentimental": [ "photo_album" ],
+        "tool": [ "grandfathers_knife" ]
+      },
+      "kcalPerDay": 2000,
+      "minAge": 18,
+      "maxAge": 75,
+      "name": "barber",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "social"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 3, "system": 1 },
+      "backstories": [
+        "{first} loaded ships for nineteen years. {They} know every knot, every crane signal, and exactly how a crate shifts before {they} get under it.",
+        "{first} worked the docks for twenty-two years and have the hands to prove it. Cargo, weather, crew. {They} could read all three by smell.",
+        "{first} spent a decade on the night gang, chaining containers in the rain. {They} learned to trust the signalman's whistle more than {their} own eyes."
+      ],
+      "backstory": "{first} loaded ships for nineteen years. {They} know every knot, every crane signal, and exactly how a crate shifts before {they} get under it.",
+      "granted": [ "brawler_instinct", "scrounger" ],
+      "trackLean": { "craft": 12, "field": 6 },
+      "pathLean": [ "brawler", "survivalist" ],
+      "id": "dockworker",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "tool": [ "rope_50ft" ]
+      },
+      "kcalPerDay": 2400,
+      "minAge": 20,
+      "maxAge": 65,
+      "name": "dockworker",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "practical"
+    },
+    {
+      "abilityWeights": { "care": 3, "fieldcraft": 1, "system": 1 },
+      "backstories": [
+        "{first} held the stop sign at Elm and Third for seventeen years. {They} know every kid's name, every parent's car, and every driver who runs the light.",
+        "{first} guarded that crossing for twenty years, rain and snow. The neighborhood kids grew up and brought their own kids to {them}.",
+        "{first} worked the school crossing for a dozen years. {They} could spot a distracted driver a block away and a scared kindergartner from farther."
+      ],
+      "backstory": "{first} held the stop sign at Elm and Third for seventeen years. {They} know every kid's name, every parent's car, and every driver who runs the light.",
+      "granted": [ "gossip_network", "bodyguard" ],
+      "trackLean": { "social": 12 },
+      "pathLean": [ "caregiver", "socialite" ],
+      "id": "crossing_guard",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "sentimental": [ "photo_album" ]
+      },
+      "kcalPerDay": 2000,
+      "minAge": 30,
+      "maxAge": 80,
+      "name": "crossing guard",
+      "plantsKnown": 1,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 1, "system": 3 },
+      "backstories": [
+        "{first} tuned pianos for thirty years, by ear and by feel. {They} can hear a pin slipping a quarter-turn before it goes.",
+        "{first} kept the concert hall's piano honest for two decades. A piano tells {them} everything if {they} listen long enough.",
+        "{first} spent twenty-five years in other people's living rooms, coaxing old uprights back to true. Steady hands and a better ear."
+      ],
+      "backstory": "{first} tuned pianos for thirty years, by ear and by feel. {They} can hear a pin slipping a quarter-turn before it goes.",
+      "granted": [ "steady_hands" ],
+      "trackLean": { "craft": 12 },
+      "pathLean": [ "miser", "drifter" ],
+      "id": "piano_tuner",
+      "itemBias": {
+        "sentimental": [ "mixtape" ],
+        "tool": [ "notebook" ]
+      },
+      "kcalPerDay": 1900,
+      "minAge": 25,
+      "maxAge": 80,
+      "name": "piano tuner",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "analytical"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 2, "system": 1 },
+      "backstories": [
+        "{first} ran the flower shop for nine years. {They} know every bloom's season, every wedding's color scheme, and how to keep roses alive a week past hope.",
+        "{first} arranged flowers for a decade, weddings mostly. {They} can read a room's mood and match it in stems before the guests arrive.",
+        "{first} worked the wholesale flower market for seven years, up at four in the morning. {They} learned which growers cut corners and which ones cut at dawn."
+      ],
+      "backstory": "{first} ran the flower shop for nine years. {They} know every bloom's season, every wedding's color scheme, and how to keep roses alive a week past hope.",
+      "granted": [  ],
+      "trackLean": { "craft": 12, "field": 6 },
+      "pathLean": [ "forager", "socialite" ],
+      "id": "florist",
+      "itemBias": {
+        "sentimental": [ "photo_album" ]
+      },
+      "kcalPerDay": 2000,
+      "minAge": 20,
+      "maxAge": 70,
+      "name": "florist",
+      "plantsKnown": 3,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 2, "system": 1 },
+      "backstories": [
+        "{first} walked the same mail route for sixteen years, rain or shine. {They} know every dog, every gate latch, and every widow on the street.",
+        "{first} carried the mail for fourteen years. {They} have delivered wedding invitations, draft notices, and one letter that took eleven years to arrive.",
+        "{first} sorted parcels at the depot for a decade before getting a route. {They} could read a bad address like a confession."
+      ],
+      "backstory": "{first} walked the same mail route for sixteen years, rain or shine. {They} know every dog, every gate latch, and every widow on the street.",
+      "granted": [ "pathfinder" ],
+      "trackLean": { "field": 12, "craft": 6 },
+      "pathLean": [ "drifter", "survivalist" ],
+      "id": "postal_worker",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "tool": [ "hiking_backpack" ]
+      },
+      "kcalPerDay": 2300,
+      "minAge": 20,
+      "maxAge": 70,
+      "name": "postal worker",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 2, "system": 2 },
+      "backstories": [
+        "{first} drove a cab for fourteen years, mostly nights. {They} know which streets flood, which bars empty out at two, and which fares tip.",
+        "{first} learned the whole city by meter. {They} kept a mental map of every shortcut, and gave tourists the long way only when asked nicely.",
+        "{first} drove through three mayors and one hurricane. The dispatch radio was {their} company; the back-seat confessions were {their} education."
+      ],
+      "backstory": "{first} drove a cab for fourteen years, mostly nights. {They} know which streets flood, which bars empty out at two, and which fares tip.",
+      "granted": [ "pathfinder", "gossip_network" ],
+      "trackLean": { "craft": 6, "social": 6 },
+      "pathLean": [ "drifter", "explorer" ],
+      "id": "taxi_driver",
+      "itemBias": {
+        "sentimental": [ "mixtape" ],
+        "tool": [ "thermos" ]
+      },
+      "kcalPerDay": 2200,
+      "minAge": 22,
+      "maxAge": 70,
+      "name": "taxi driver",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "practical"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 2, "system": 2 },
+      "backstories": [
+        "{first} walked the graveyard shift at a shipping depot for nine years. {They} know every camera blind spot and every sound a chain-link fence makes.",
+        "{first} guarded warehouses, then a museum, then a construction site. {They} learned to read people in the dark: who belongs, who is lost, who is lying.",
+        "{first} spent eleven years being paid to stay awake. {They} have watched more sunrises alone than most people have watched with anyone."
+      ],
+      "backstory": "{first} walked the graveyard shift at a shipping depot for nine years. {They} know every camera blind spot and every sound a chain-link fence makes.",
+      "granted": [ "intimidating_presence", "bodyguard" ],
+      "trackLean": { "craft": 6, "social": 6 },
+      "pathLean": [ "miser", "survivalist" ],
+      "id": "night_security_guard",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "tool": [ "thermos" ]
+      },
+      "kcalPerDay": 2100,
+      "minAge": 22,
+      "maxAge": 65,
+      "name": "night security guard",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 3, "system": 1 },
+      "backstories": [
+        "{first} rode dispatch for six years, rain or shine. {They} know every pothole and every doorman on the downtown grid.",
+        "{first} carried contracts, court papers, and once a wedding cake across town in August. {They} have never been late twice for the same client.",
+        "{first} messaged through four winters. {They} learned to read traffic like weather and to keep rolling through both."
+      ],
+      "backstory": "{first} rode dispatch for six years, rain or shine. {They} know every pothole and every doorman on the downtown grid.",
+      "granted": [ "pathfinder" ],
+      "trackLean": { "field": 12 },
+      "pathLean": [ "drifter", "explorer" ],
+      "id": "bike_messenger",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "tool": [ "hiking_backpack" ]
+      },
+      "kcalPerDay": 2400,
+      "minAge": 18,
+      "maxAge": 45,
+      "name": "bike messenger",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "practical"
+    },
+    {
+      "abilityWeights": { "care": 3, "fieldcraft": 1, "system": 1 },
+      "backstories": [
+        "{first} hosted the midnight show for seven years. {They} learned to read a caller in three words and to fill dead air like it was nothing.",
+        "{first} ran a community station out of a strip mall. {They} know everybody's cousin and half the town's secrets, and kept every one of them.",
+        "{first} did drive-time for five years, then the overnight shift by choice. {They} talk to strangers for a living and like most of them."
+      ],
+      "backstory": "{first} hosted the midnight show for seven years. {They} learned to read a caller in three words and to fill dead air like it was nothing.",
+      "granted": [ "silver_tongue", "gossip_network" ],
+      "trackLean": { "social": 12 },
+      "pathLean": [ "socialite", "drifter" ],
+      "id": "radio_dj",
+      "itemBias": {
+        "sentimental": [ "mixtape" ]
+      },
+      "kcalPerDay": 2000,
+      "minAge": 20,
+      "maxAge": 60,
+      "name": "radio DJ",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "social"
+    },
+    {
+      "abilityWeights": { "care": 3, "fieldcraft": 2, "system": 1 },
+      "backstories": [
+        "{first} guarded the city pool for four summers and the beach for two. {They} have pulled nine people out of the water and remember every one.",
+        "{first} learned rescue breathing at sixteen and have never been bored on a stand since. Watching water is {their} trade.",
+        "{first} worked the tower at the state beach for three seasons. {They} can read a rip current the way other people read headlines."
+      ],
+      "backstory": "{first} guarded the city pool for four summers and the beach for two. {They} have pulled nine people out of the water and remember every one.",
+      "granted": [ "swimmer", "triage" ],
+      "trackLean": { "field": 12 },
+      "pathLean": [ "shieldbearer", "survivalist" ],
+      "id": "lifeguard",
+      "itemBias": {
+        "tool": [ "rope_50ft" ]
+      },
+      "kcalPerDay": 2300,
+      "minAge": 17,
+      "maxAge": 50,
+      "name": "lifeguard",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 3, "system": 1 },
+      "backstories": [
+        "{first} worked the big-cat house for eight years. {They} know when a lion is bored, when it is sick, and when it is just lying.",
+        "{first} started on the reptile house, moved to primates. {They} can read an animal's mood from across the enclosure, and most people's too.",
+        "{first} kept the night watch on the hoofstock barn for five years. Feeding at 4 a.m. teaches you what patience actually costs."
+      ],
+      "backstory": "{first} worked the big-cat house for eight years. {They} know when a lion is bored, when it is sick, and when it is just lying.",
+      "granted": [  ],
+      "trackLean": { "field": 12 },
+      "pathLean": [ "forager", "survivalist" ],
+      "id": "zookeeper",
+      "itemBias": {
+        "tool": [ "binoculars" ]
+      },
+      "kcalPerDay": 2300,
+      "minAge": 21,
+      "maxAge": 65,
+      "name": "zookeeper",
+      "plantsKnown": 1,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 1, "system": 2 },
+      "backstories": [
+        "{first} taught wheel-throwing at the community studio for ten years. {They} know a student's whole week by how {their} hands shake on the clay.",
+        "{first} fired kilns for twelve years and only lost two loads. Patience is the whole trade; {they} have it in {their} hands.",
+        "{first} ran the after-school clay program for eight years. {They} learned that the kids who talk the least make the truest pots."
+      ],
+      "backstory": "{first} taught wheel-throwing at the community studio for ten years. {They} know a student's whole week by how {their} hands shake on the clay.",
+      "granted": [ "steady_hands" ],
+      "trackLean": { "craft": 12 },
+      "pathLean": [ "miser", "drifter" ],
+      "id": "pottery_instructor",
+      "kcalPerDay": 2000,
+      "minAge": 22,
+      "maxAge": 75,
+      "name": "pottery instructor",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "creative"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 1, "system": 1 },
+      "backstories": [
+        "{first} cleaned rooms at the airport hotel for thirteen years. {They} can strip a bed in ninety seconds and find anything a guest lost.",
+        "{first} worked housekeeping for fifteen years and have seen every kind of traveler. {They} know who tips, who trashes, and who cries at checkout.",
+        "{first} kept the executive floor spotless for a decade. {They} learned to be invisible, thorough, and quicker than the checkout rush."
+      ],
+      "backstory": "{first} cleaned rooms at the airport hotel for thirteen years. {They} can strip a bed in ninety seconds and find anything a guest lost.",
+      "granted": [ "scrounger" ],
+      "trackLean": { "craft": 12 },
+      "pathLean": [ "miser", "drifter" ],
+      "id": "hotel_housekeeper",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "sentimental": [ "photo_album" ]
+      },
+      "kcalPerDay": 2100,
+      "minAge": 20,
+      "maxAge": 70,
+      "name": "hotel housekeeper",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 1, "system": 2 },
+      "backstories": [
+        "{first} ran the comic shop on Main for six years. {They} know every regular's pull list and half their life stories.",
+        "{first} kept the shop alive through the streaming years. {They} could talk anyone into their first graphic novel in under five minutes.",
+        "{first} opened the shop at twenty-one and never looked back. {They} built a community out of cardboard longboxes and Friday nights."
+      ],
+      "backstory": "{first} ran the comic shop on Main for six years. {They} know every regular's pull list and half their life stories.",
+      "granted": [ "gossip_network", "diplomat" ],
+      "trackLean": { "social": 12, "craft": 6 },
+      "pathLean": [ "socialite", "miser" ],
+      "id": "comic_shop_owner",
+      "itemBias": {
+        "sentimental": [ "photo_album" ],
+        "tool": [ "notebook" ]
+      },
+      "kcalPerDay": 2000,
+      "minAge": 18,
+      "maxAge": 60,
+      "name": "comic shop owner",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "social"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 3, "system": 1 },
+      "backstories": [
+        "{first} swept chimneys for thirty-five years. {They} know every roof in the county by its flashing and every flue by its draft.",
+        "{first} climbed roofs for four decades, in ice and in August heat. {They} have never fallen, and {they} do not plan to start.",
+        "{first} learned the trade from {their} father, who learned it from his. {They} can tell what a family burns by the smell of the soot."
+      ],
+      "backstory": "{first} swept chimneys for thirty-five years. {They} know every roof in the county by its flashing and every flue by its draft.",
+      "granted": [ "scrounger", "soft_step" ],
+      "trackLean": { "craft": 12, "field": 6 },
+      "pathLean": [ "drifter", "miser" ],
+      "id": "chimney_sweep",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "tool": [ "rope_50ft" ]
+      },
+      "kcalPerDay": 2300,
+      "minAge": 20,
+      "maxAge": 75,
+      "name": "chimney sweep",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "practical"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 1, "system": 2 },
+      "backstories": [
+        "{first} tattooed for seven years, apprenticeship first. {They} know how skin takes ink in July heat and January cold, and {they} get every line right the first time.",
+        "{first} drew flash for three years before touching skin. People tell {them} their whole story while the needle is running; {they} remember most of it.",
+        "{first} worked the convention circuit for five years, twelve cities a summer. {They} learned to read what people want written on them forever."
+      ],
+      "backstory": "{first} tattooed for seven years, apprenticeship first. {They} know how skin takes ink in July heat and January cold, and {they} get every line right the first time.",
+      "granted": [ "steady_hands" ],
+      "trackLean": { "craft": 12, "social": 6 },
+      "pathLean": [ "drifter", "socialite" ],
+      "id": "tattoo_artist",
+      "itemBias": {
+        "tool": [ "notebook" ]
+      },
+      "kcalPerDay": 2000,
+      "minAge": 18,
+      "maxAge": 55,
+      "name": "tattoo artist",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "creative"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 2, "system": 1 },
+      "backstories": [
+        "{first} kept the reef tanks for nineteen years. {They} know when the water is off by looking at the corals, and the corals know {them}.",
+        "{first} ran the shark-tank crew for a decade. Calm hands, cold water, and animals that never once thanked {them}.",
+        "{first} started on the touch pools, ended on the deep reef. {They} learned that an ecosystem is just a neighborhood with better plumbing."
+      ],
+      "backstory": "{first} kept the reef tanks for nineteen years. {They} know when the water is off by looking at the corals, and the corals know {them}.",
+      "granted": [  ],
+      "trackLean": { "field": 12, "craft": 6 },
+      "pathLean": [ "forager", "survivalist" ],
+      "id": "aquarium_keeper",
+      "itemBias": {
+        "tool": [ "notebook" ]
+      },
+      "kcalPerDay": 2100,
+      "minAge": 22,
+      "maxAge": 70,
+      "name": "aquarium keeper",
+      "plantsKnown": 1,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 3, "system": 1 },
+      "backstories": [
+        "{first} climbed for the tree service for eleven years. {They} can read a limb's weight by its sway and drop it within a foot of the mark.",
+        "{first} pruned city oaks for nine years. {They} know every disease a tree gets and which ones the tree survives.",
+        "{first} did storm cleanup for six years, chainsaw first. {They} learned to work fast around widow-makers and to never rush the last cut."
+      ],
+      "backstory": "{first} climbed for the tree service for eleven years. {They} can read a limb's weight by its sway and drop it within a foot of the mark.",
+      "granted": [  ],
+      "trackLean": { "field": 12 },
+      "pathLean": [ "forager", "explorer" ],
+      "id": "arborist",
+      "itemBias": {
+        "clothing": [ "work_gloves" ],
+        "tool": [ "rope_50ft" ]
+      },
+      "kcalPerDay": 2400,
+      "minAge": 20,
+      "maxAge": 60,
+      "name": "arborist",
+      "plantsKnown": 3,
+      "teachTags": [],
+      "intel": "observant"
+    },
+    {
+      "abilityWeights": { "care": 2, "fieldcraft": 2, "system": 1 },
+      "backstories": [
+        "{first} drove the crosstown route for twenty-four years. {They} know every regular, every transfer point, and exactly where the brakes grab.",
+        "{first} drove school buses, then city buses, then the crosstown. {They} have heard every story the 6 a.m. crowd tells.",
+        "{first} kept the night bus on schedule for eighteen years. {They} know the city by its streetlights and its last-call crowds."
+      ],
+      "backstory": "{first} drove the crosstown route for twenty-four years. {They} know every regular, every transfer point, and exactly where the brakes grab.",
+      "granted": [ "pathfinder", "gossip_network" ],
+      "trackLean": { "craft": 6, "social": 6 },
+      "pathLean": [ "drifter", "socialite" ],
+      "id": "bus_driver",
+      "itemBias": {
+        "sentimental": [ "photo_album" ],
+        "tool": [ "bus_map" ]
+      },
+      "kcalPerDay": 2200,
+      "minAge": 25,
+      "maxAge": 70,
+      "name": "bus driver",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "steady"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 1, "system": 2 },
+      "backstories": [
+        "{first} ran the dry cleaner on Fifth for eighteen years. {They} know every stain, every fabric, and every customer's secrets from their pockets.",
+        "{first} pressed suits for twenty years. Steady hands, hot steam, and a memory for faces that {they} never asked to have.",
+        "{first} took over the family cleaners at thirty and ran it for twenty-six years. {They} could save a wedding dress or tell you honestly that {they} could not."
+      ],
+      "backstory": "{first} ran the dry cleaner on Fifth for eighteen years. {They} know every stain, every fabric, and every customer's secrets from their pockets.",
+      "granted": [ "steady_hands", "scrounger" ],
+      "trackLean": { "craft": 12 },
+      "pathLean": [ "miser", "drifter" ],
+      "id": "dry_cleaner",
+      "itemBias": {
+        "clothing": [ "work_gloves" ]
+      },
+      "kcalPerDay": 2000,
+      "minAge": 25,
+      "maxAge": 75,
+      "name": "dry cleaner",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "practical"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 1, "system": 3 },
+      "backstories": [
+        "{first} lettered windows and shop signs, learning from {their} grandfather's brushes. {They} have a steady hand and an eye for gold leaf.",
+        "{first} painted signs for the flea-market stalls all summer. {They} learned that a good sign sells the thing before the customer stops walking.",
+        "{first} apprenticed to an old sign painter at sixteen. Three summers of brushwork, and {they} can already lay a cleaner line than most."
+      ],
+      "backstory": "{first} lettered windows and shop signs, learning from {their} grandfather's brushes. {They} have a steady hand and an eye for gold leaf.",
+      "granted": [ "steady_hands", "diplomat" ],
+      "trackLean": { "craft": 12 },
+      "pathLean": [ "miser", "drifter" ],
+      "id": "sign_painter",
+      "itemBias": {
+        "tool": [ "notebook" ]
+      },
+      "kcalPerDay": 1900,
+      "minAge": 16,
+      "maxAge": 70,
+      "name": "sign painter",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "creative"
+    },
+    {
+      "abilityWeights": { "care": 1, "fieldcraft": 3, "system": 1 },
+      "backstories": [
+        "{first} rode the freight lines for twenty-seven years. {They} know every milepost, every hotbox smell, and every crew on the division.",
+        "{first} worked passenger rail for a decade, freight after. {They} have watched the whole country go by at sixty miles an hour.",
+        "{first} walked the train in every kind of weather for twenty years. {They} learned to read the sky, the schedule, and the crew's mood in one look."
+      ],
+      "backstory": "{first} rode the freight lines for twenty-seven years. {They} know every milepost, every hotbox smell, and every crew on the division.",
+      "granted": [ "gossip_network", "diplomat" ],
+      "trackLean": { "field": 12, "craft": 6 },
+      "pathLean": [ "drifter", "explorer" ],
+      "id": "rail_conductor",
+      "itemBias": {
+        "sentimental": [ "photo_album" ],
+        "tool": [ "thermos" ]
+      },
+      "kcalPerDay": 2300,
+      "minAge": 24,
+      "maxAge": 70,
+      "name": "rail conductor",
+      "plantsKnown": 0,
+      "teachTags": [],
+      "intel": "steady"
+    }
+],
   "originKeywords": {
     "venezuela": [
       "venezuela",
