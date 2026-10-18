@@ -1,0 +1,609 @@
+{
+ "label": "journey-endgame-r16",
+ "policy": "belongseat-overtime-wait",
+ "seed": 8931,
+ "arm": "wait",
+ "days": 110,
+ "endReason": "over-other",
+ "seatBest": "lesser",
+ "sceneFired": 1,
+ "sceneFireDays": [
+  111
+ ],
+ "waitingEver": true,
+ "waitingDay": 70,
+ "announceCount": 1,
+ "announceLost": 0,
+ "announceDay": 90,
+ "sitDay": 111,
+ "heldDays": 21,
+ "wdAnnounceLost": 0,
+ "rosterAtAnnounceN": 8,
+ "rosterAtSitN": 8,
+ "atAnnounce": {
+  "day": 90,
+  "seat": "lesser",
+  "doors": {
+   "feared": {
+    "earned": true,
+    "strength": 100,
+    "why": "27 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked."
+   },
+   "indispensable": {
+    "earned": false,
+    "strength": 0,
+    "why": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+   },
+   "beloved": {
+    "earned": true,
+    "strength": 100,
+    "why": "Viewership 29, fan favor 25 — the galaxy's favorite, by the numbers."
+   },
+   "witness": {
+    "earned": true,
+    "strength": 49,
+    "why": "3 exposures on the record. The docket is real."
+   },
+   "assimilated": {
+    "earned": true,
+    "strength": 55,
+    "why": "Always open. The table takes anyone — that's what makes it a trap, and what makes it safe."
+   },
+   "defiant": {
+    "earned": true,
+    "strength": 44,
+    "why": "Defiance 6 on the record. The 'no' is earned."
+   },
+   "relay": {
+    "earned": true,
+    "strength": 40,
+    "why": "Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0)"
+   }
+  },
+  "standingCost": 0,
+  "overtimeTier": 0
+ },
+ "atSit": {
+  "day": 111,
+  "seat": "lesser",
+  "doors": {
+   "feared": {
+    "earned": true,
+    "strength": 88,
+    "why": "31 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked."
+   },
+   "indispensable": {
+    "earned": false,
+    "strength": 0,
+    "why": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+   },
+   "beloved": {
+    "earned": true,
+    "strength": 88,
+    "why": "Viewership 29, fan favor 32 — the galaxy's favorite, by the numbers."
+   },
+   "witness": {
+    "earned": true,
+    "strength": 45,
+    "why": "4 exposures on the record. The docket is real."
+   },
+   "assimilated": {
+    "earned": true,
+    "strength": 43,
+    "why": "Always open. The table takes anyone — that's what makes it a trap, and what makes it safe."
+   },
+   "defiant": {
+    "earned": true,
+    "strength": 36,
+    "why": "Defiance 7 on the record. The 'no' is earned."
+   },
+   "relay": {
+    "earned": true,
+    "strength": 28,
+    "why": "Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0)"
+   }
+  },
+  "standingCost": 12,
+  "overtimeTier": 3
+ },
+ "deathsInWait": [],
+ "tierTicks": [
+  {
+   "day": 97,
+   "tier": 1
+  },
+  {
+   "day": 104,
+   "tier": 2
+  },
+  {
+   "day": 111,
+   "tier": 3
+  }
+ ],
+ "doneDay": null,
+ "doors": [],
+ "downgrades": [],
+ "failEvents": [],
+ "failSteer": [],
+ "driverErr": null,
+ "seatDriveErr": null,
+ "sdSeatAttempts": 1,
+ "sdSeatTaken": 1,
+ "sdSeatDay": 111,
+ "won": 1,
+ "wonDetail": {
+  "track": "field",
+  "godpath": null,
+  "subclass": null,
+  "god": null,
+  "moral": "light",
+  "titanFinale": "none",
+  "endingKey": null,
+  "path": "feared",
+  "branch": "light",
+  "seat": "lesser",
+  "key": false,
+  "hosts": false,
+  "overtime": 3,
+  "ending": "path",
+  "endingLevel": "path",
+  "endingKind": "path",
+  "buildPlayed": null
+ },
+ "table": {
+  "phase": "done",
+  "path": "feared",
+  "branch": "light",
+  "doors": [],
+  "weakened": 0,
+  "ascensions": [],
+  "facilitated": null
+ },
+ "teleTable": [
+  {
+   "day": 97,
+   "ev": "overtime_tier",
+   "data": {
+    "tier": 1
+   }
+  },
+  {
+   "day": 104,
+   "ev": "overtime_tier",
+   "data": {
+    "tier": 2
+   }
+  },
+  {
+   "day": 111,
+   "ev": "overtime_tier",
+   "data": {
+    "tier": 3
+   }
+  },
+  {
+   "day": 111,
+   "ev": "table_entered",
+   "data": {
+    "seat": "lesser",
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  {
+   "day": 111,
+   "ev": "table_path",
+   "data": {
+    "path": "feared",
+    "branch": "light"
+   }
+  },
+  {
+   "day": 111,
+   "ev": "table_won",
+   "data": {
+    "track": "field",
+    "godpath": null,
+    "subclass": null,
+    "god": null,
+    "moral": "light",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 3,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": null
+   }
+  }
+ ],
+ "rungHistory": [
+  {
+   "day": 70,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,assimilated,defiant,relay"
+  },
+  {
+   "day": 80,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,assimilated,defiant,relay"
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,assimilated,defiant,relay"
+  },
+  {
+   "day": 90,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,witness,assimilated,defiant,relay"
+  },
+  {
+   "day": 95,
+   "seat": "lesser",
+   "tier": 0,
+   "doors": "feared,beloved,witness,assimilated,defiant,relay"
+  },
+  {
+   "day": 100,
+   "seat": "lesser",
+   "tier": 1,
+   "doors": "feared,beloved,witness,assimilated,defiant,relay"
+  },
+  {
+   "day": 105,
+   "seat": "lesser",
+   "tier": 2,
+   "doors": "feared,beloved,witness,assimilated,defiant,relay"
+  },
+  {
+   "day": 110,
+   "seat": "lesser",
+   "tier": 2,
+   "doors": "feared,beloved,witness,assimilated,defiant,relay"
+  }
+ ],
+ "ladder": [
+  {
+   "day": 10,
+   "seat": "none",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 30,
+   "seat": "none",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 50,
+   "seat": "none",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 70,
+   "seat": "lesser",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 85,
+   "seat": "lesser",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 95,
+   "seat": "lesser",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  },
+  {
+   "day": 105,
+   "seat": "lesser",
+   "w1": 0,
+   "w2": 0,
+   "w3": 0
+  }
+ ],
+ "census": [
+  {
+   "id": "gen_djrpymn",
+   "name": "Harper",
+   "alive": true,
+   "occ": "line cook"
+  },
+  {
+   "id": "nathan_lee",
+   "name": "Nathan",
+   "alive": true,
+   "occ": "HVAC tech"
+  },
+  {
+   "id": "petra_novak",
+   "name": "Petra",
+   "alive": true,
+   "occ": "glazier"
+  },
+  {
+   "id": "henry_zhang",
+   "name": "Henry",
+   "alive": true,
+   "occ": "emergency dispatcher"
+  },
+  {
+   "id": "app_mgpsphjl964",
+   "name": "Damian",
+   "alive": true,
+   "occ": "farmer"
+  },
+  {
+   "id": "app_mgpsphiz897",
+   "name": "Maria",
+   "alive": true,
+   "occ": "carpenter"
+  },
+  {
+   "id": "app_mgpspihd905",
+   "name": "Diana",
+   "alive": true,
+   "occ": "cook"
+  },
+  {
+   "id": "naran_tumen",
+   "name": "Naran",
+   "alive": true,
+   "occ": "bus driver"
+  }
+ ],
+ "deaths": [
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 8,
+   "kind": "monster",
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "villager",
+   "who": "gen_8wtjgil",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "monster",
+   "who": "understudy",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 41,
+   "kind": "villager",
+   "who": "gen_djgdjkb",
+   "cause": "contest",
+   "player": true
+  },
+  {
+   "day": 41,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 43,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 51,
+   "kind": "villager",
+   "who": "gen_r04s76a",
+   "cause": "contest",
+   "player": true
+  },
+  {
+   "day": 51,
+   "kind": "monster",
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 54,
+   "kind": "monster",
+   "who": "statickite",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 55,
+   "kind": "villager",
+   "who": "jovan_milic",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 59,
+   "kind": "monster",
+   "who": "paparazzo",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 62,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 68,
+   "kind": "villager",
+   "who": "mara_vasquez",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 69,
+   "kind": "villager",
+   "who": "jesse_cortez",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 76,
+   "kind": "villager",
+   "who": "gen_3dvx978",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 85,
+   "kind": "villager",
+   "who": "gen_70en54x",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 86,
+   "kind": "monster",
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 88,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 89,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 102,
+   "kind": "monster",
+   "who": "cliffhanger",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 106,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 107,
+   "kind": "monster",
+   "who": "sweeps_week",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 107,
+   "kind": "monster",
+   "who": "white_noise_heron",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 107,
+   "kind": "monster",
+   "who": "nevermore",
+   "cause": "combat",
+   "player": false
+  }
+ ],
+ "ms": 1979
+}
