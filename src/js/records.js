@@ -126,6 +126,33 @@
     return { public: Object.keys(r.public).length, secret: Object.values(r.secret).filter(e => e.revealed).length };
   }
 
+  // championText(game, ac): resolve the records line for a won contest from
+  // what _contestEnd actually knows — the scaled contest's name and the
+  // participant (player = "You", villager = displayName). The old inline
+  // version read ac.contestName/ac.title/ac.id and ac.participantName, none
+  // of which _contestEnd ever sets, so every line fell back to the
+  // "the Bearer won a contest" placeholder — and the idempotent key
+  // ('champion_' + cname) collapsed EVERY win onto a single entry.
+  // (journey establishment r15 2026-10-18)
+  function championText(game, ac) {
+    let contest = null;
+    try { contest = game._cxScaledContest ? game._cxScaledContest(ac) : null; } catch (e) {}
+    const cname = (contest && contest.name) || (ac && (ac.contestName || ac.title)) ||
+      (ac && (ac.contestId || ac.id)) || 'a contest';
+    const isWatch = !!(ac && ac.participant && ac.participant !== 'player');
+    let who = null;
+    try {
+      who = isWatch
+        ? (game.displayName ? game.displayName(ac.participant) : ac.participant)
+        : ((game.state && game.state.scholar && (game.state.scholar.name || game.state.scholar.villagerName)) || 'You');
+    } catch (e) {}
+    return {
+      id: 'champion_' + ((ac && (ac.contestId || ac.id)) || cname),
+      who: who || 'the Bearer',
+      cname: cname,
+    };
+  }
+
   // ---- defensive hooks into real game events ----
   function wrapHook(obj, name, after) {
     try {
@@ -169,10 +196,8 @@
     wrapHook(Game, '_contestEnd', function (args) {
       try {
         if (args[1] !== 'won') return;
-        const ac = args[0] || {};
-        const cname = ac.contestName || ac.title || ac.id || 'a contest';
-        const who = (ac.participantName || (this.state && this.state.scholar && this.state.scholar.name)) || 'the Bearer';
-        notePublic(this, 'champion_' + (ac.id || cname), `${who} won ${cname} under the cameras. The village's glory, public and loud.`);
+        const r = championText(this, args[0] || {});
+        notePublic(this, r.id, `${r.who} won ${r.cname} under the cameras. The village's glory, public and loud.`);
       } catch (e) {}
     });
     // Facilitation plays: the architect's credit starts here — the door
@@ -191,6 +216,6 @@
 
   S.RunRecords = {
     notePublic, trackSecret, secretTracked, isRevealed, revealSecret,
-    architectCredit, publicLines, secretLines, recordCount,
+    architectCredit, publicLines, secretLines, recordCount, championText,
   };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
