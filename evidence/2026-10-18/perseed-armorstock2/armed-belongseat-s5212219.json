@@ -1,0 +1,98 @@
+{
+ "run": "sim-armorstock2",
+ "axis": "scale-onramp",
+ "seed": 5212219,
+ "policyId": "belongseat",
+ "arm": "armed",
+ "armorstock": 1,
+ "sweepCommit": "47fbea56f6686110aa35f524b6b02703261c6848",
+ "substrate": {
+  "FEASTSCALE_R13": 1,
+  "TRIBFLOOR": 1,
+  "SUCCGRACE": 1,
+  "RAIDDENSITY": 1,
+  "WINPURSUIT": 1,
+  "WINDEFER": 1,
+  "VETREL": 1,
+  "SEATDRIVE": "default-ON"
+ },
+ "days": 180,
+ "gameDays": 85,
+ "endReason": "survived",
+ "won": 0,
+ "national": 0,
+ "maxWaveUnlocked": 3,
+ "firstW4Day": null,
+ "standingTotal": 264,
+ "readiness4": {
+  "ready": false,
+  "armored": 1,
+  "armed": 3,
+  "tricks": 16,
+  "veterans": 0,
+  "short": [
+   "armor",
+   "weapons",
+   "veterans"
+  ]
+ },
+ "deferralSnapshot": {
+  "day": 84,
+  "armored": 1,
+  "armed": 3,
+  "tricks": 16,
+  "veterans": 0,
+  "short": [
+   "armor",
+   "weapons",
+   "veterans"
+  ]
+ },
+ "deferralDepth": [
+  {
+   "vid": "zoe_adams",
+   "scholar": true,
+   "P": 10
+  },
+  {
+   "vid": "giulia_bianchi",
+   "scholar": false,
+   "P": 30
+  },
+  {
+   "vid": "visjoin_74",
+   "scholar": false,
+   "P": 12
+  }
+ ],
+ "deferralArmorMargin": -3,
+ "armorstockCounters": {
+  "asRecovered": 0,
+  "asCrafted": 0,
+  "asReservePeak": 0,
+  "asSuccessions": 5,
+  "asCraftTries": 0,
+  "asRecoveryTries": 26,
+  "asWore": 0,
+  "asCraftFails": 0
+ },
+ "reserveNow": 0,
+ "scholarPNow": 10,
+ "deaths": {
+  "total": 28,
+  "starv": 0,
+  "villagerCombat": 22,
+  "byCause": {
+   "villager combat": 5,
+   "expedition": 2,
+   "ambush": 1,
+   "Highbeam Deer": 1,
+   "combat": 10,
+   "The Understudy": 1,
+   "alien": 3,
+   "contest": 2,
+   "dehydration": 1,
+   "monster": 2
+  }
+ }
+}

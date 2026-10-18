@@ -1,0 +1,107 @@
+{
+ "run": "sim-armorstock2",
+ "axis": "scale-onramp",
+ "seed": 5432423,
+ "policyId": "belongseat",
+ "arm": "armed",
+ "armorstock": 1,
+ "sweepCommit": "47fbea56f6686110aa35f524b6b02703261c6848",
+ "substrate": {
+  "FEASTSCALE_R13": 1,
+  "TRIBFLOOR": 1,
+  "SUCCGRACE": 1,
+  "RAIDDENSITY": 1,
+  "WINPURSUIT": 1,
+  "WINDEFER": 1,
+  "VETREL": 1,
+  "SEATDRIVE": "default-ON"
+ },
+ "days": 89,
+ "gameDays": 90,
+ "endReason": "over-other",
+ "won": 1,
+ "national": 0,
+ "maxWaveUnlocked": 3,
+ "firstW4Day": null,
+ "standingTotal": 270,
+ "readiness4": {
+  "ready": false,
+  "armored": 3,
+  "armed": 6,
+  "tricks": 17,
+  "veterans": 0,
+  "short": [
+   "armor",
+   "veterans"
+  ]
+ },
+ "deferralSnapshot": {
+  "day": 90,
+  "armored": 3,
+  "armed": 6,
+  "tricks": 17,
+  "veterans": 0,
+  "short": [
+   "armor",
+   "veterans"
+  ]
+ },
+ "deferralDepth": [
+  {
+   "vid": "yuki_mori",
+   "scholar": true,
+   "P": 45
+  },
+  {
+   "vid": "app_mgpsphki948",
+   "scholar": false,
+   "P": 22
+  },
+  {
+   "vid": "dmitri_sokolov",
+   "scholar": false,
+   "P": 9
+  },
+  {
+   "vid": "xavier_dubois",
+   "scholar": false,
+   "P": 7
+  },
+  {
+   "vid": "jovan_milic",
+   "scholar": false,
+   "P": 47
+  },
+  {
+   "vid": "visjoin_88",
+   "scholar": false,
+   "P": 3
+  }
+ ],
+ "deferralArmorMargin": -1,
+ "armorstockCounters": {
+  "asRecovered": 2,
+  "asCrafted": 0,
+  "asReservePeak": 2,
+  "asSuccessions": 5,
+  "asCraftTries": 0,
+  "asRecoveryTries": 2,
+  "asWore": 3,
+  "asCraftFails": 0
+ },
+ "reserveNow": 0,
+ "scholarPNow": 45,
+ "deaths": {
+  "total": 35,
+  "starv": 0,
+  "villagerCombat": 30,
+  "byCause": {
+   "expedition": 2,
+   "villager combat": 7,
+   "combat": 16,
+   "monster": 8,
+   "dehydration": 1,
+   "contest": 1
+  }
+ }
+}

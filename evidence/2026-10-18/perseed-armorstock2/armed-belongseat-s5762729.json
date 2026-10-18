@@ -1,0 +1,105 @@
+{
+ "run": "sim-armorstock2",
+ "axis": "scale-onramp",
+ "seed": 5762729,
+ "policyId": "belongseat",
+ "arm": "armed",
+ "armorstock": 1,
+ "sweepCommit": "47fbea56f6686110aa35f524b6b02703261c6848",
+ "substrate": {
+  "FEASTSCALE_R13": 1,
+  "TRIBFLOOR": 1,
+  "SUCCGRACE": 1,
+  "RAIDDENSITY": 1,
+  "WINPURSUIT": 1,
+  "WINDEFER": 1,
+  "VETREL": 1,
+  "SEATDRIVE": "default-ON"
+ },
+ "days": 82,
+ "gameDays": 60,
+ "endReason": "village-lost",
+ "won": 0,
+ "national": 0,
+ "maxWaveUnlocked": 3,
+ "firstW4Day": null,
+ "standingTotal": 80,
+ "readiness4": {
+  "ready": false,
+  "armored": 4,
+  "armed": 7,
+  "tricks": 21,
+  "veterans": 0,
+  "short": [
+   "veterans"
+  ]
+ },
+ "deferralSnapshot": {
+  "day": 60,
+  "armored": 3,
+  "armed": 6,
+  "tricks": 21,
+  "veterans": 0,
+  "short": [
+   "armor",
+   "veterans"
+  ]
+ },
+ "deferralDepth": [
+  {
+   "vid": "emma_larsen",
+   "scholar": true,
+   "P": 16
+  },
+  {
+   "vid": "david_kim",
+   "scholar": false,
+   "P": 8
+  },
+  {
+   "vid": "omar_farouk",
+   "scholar": false,
+   "P": 30
+  },
+  {
+   "vid": "app_mgpspib3940",
+   "scholar": false,
+   "P": 4
+  },
+  {
+   "vid": "somchai_prasert",
+   "scholar": false,
+   "P": 47
+  },
+  {
+   "vid": "app_mgpspigf755",
+   "scholar": false,
+   "P": 6
+  }
+ ],
+ "deferralArmorMargin": -1,
+ "armorstockCounters": {
+  "asRecovered": 1,
+  "asCrafted": 0,
+  "asReservePeak": 1,
+  "asSuccessions": 3,
+  "asCraftTries": 0,
+  "asRecoveryTries": 1,
+  "asWore": 2,
+  "asCraftFails": 0
+ },
+ "reserveNow": 0,
+ "scholarPNow": 16,
+ "deaths": {
+  "total": 28,
+  "starv": 0,
+  "villagerCombat": 25,
+  "byCause": {
+   "villager combat": 7,
+   "combat": 13,
+   "monster": 5,
+   "alien": 2,
+   "contest": 1
+  }
+ }
+}
