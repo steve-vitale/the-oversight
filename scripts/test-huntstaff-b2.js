@@ -30,8 +30,8 @@ let HS;
 try {
   HS = require('./policies/huntstaff');
 } catch (e) {
-  console.error('FAIL: scripts/policies/huntstaff.js absent — the b2 re-run requires the rebuilt layer.');
-  process.exit(1);
+  console.log('INFO-SKIP: scripts/policies/huntstaff.js absent — layer killed zero-trace per NO-GO verdict (sim-huntstaff-b2, 2026-10-18). Proof was ALL GREEN pre-kill.');
+  process.exit(0);
 }
 
 function fakeGame(opts) {

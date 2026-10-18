@@ -120,3 +120,28 @@ pre-registration, fresh seeds.
 (TO BE FILLED — pre-registration above binds; results below the line.)
 
 ---
+
+## Results (32/32 runs complete, 2026-10-18)
+
+Sweep: seeds 7811-7818 x {leadfeast,belongfeast} x {armed,control}, 180d death-aware, FEASTSCALE_R13=1/SEATDRIVE=0, base 213fdda2 (recovery run; original worker base 262523ef moved twice — d9f4be55 food deeds, e85d00f0 haul prioritization; full re-sweep on current master for substrate consistency).
+
+**PRIMARY (engagement): GO** — 151 hunt-duty assignments fired (bar ≥8), 8/8 seeds engaged (bar ≥4), control 0. Instrument cross-check: 153 resolves, 104 kills, 306,589 kcal meat into pantries. The mechanism engages broadly and puts real food in the pipeline.
+
+**GUARDRAILS:**
+- starvation deaths: armed 1 vs control 2 (bar ≤4): PASS
+- villager deaths: armed 615 vs control 564 (bar ≤ control): **MISS** (+51)
+- new death mode: no MODE-level novelty (armed modes ⊆ control modes at the mode level; the analyzer's flagged strings are monster names, not modes): PASS
+- national: armed 14/16 vs control 11/16 (bar ≥ control-2): PASS
+- survival (CORRECTED GATE): mean paired Δ = +11.5d (bar |mean| ≤20d): PASS. The corrected gate works — the b pilot's false-fire is fixed.
+
+**HUNTER-FATE instrument (findings #508/#509):** 0 hunt-attributable deaths among 151 assigned hunters. Hunter-occupation deaths: armed 12 vs control 9. Assigned hunters die of ordinary combat/monster causes days after assignment, not on hunts. The layer does not get hunters killed.
+
+**VERDICT: NO-GO — villager deaths guardrail MISS.** Per MEASUREMENT.md §14 every-gate rule, the miss binds. The +51 villager deaths (+9%) with 0 hunt-attributable among them suggests the layer's cost is indirect (hunters pulled from village defense? or combat noise). The hunter-fate instrument exonerates direct hunt deaths but does not exonerate the layer. Layer deleted zero-trace per kill protocol; evidence + instruments kept.
+
+**Metric review:** The corrected |mean Δ|≤20d survival gate performed as designed (11.5d PASS, no false-fire). The villager-deaths guardrail (armed ≤ control) is a count gate on a noisy substrate — but unlike the b-pilot median gate, this miss is not metric-broken on its face: +51 deaths with a mechanism (hunter absence from defense) is a plausible harm signal, and the hunter-fate instrument was built to distinguish exposure from layer-harm. The instrument says hunters don't die ON hunts; it does not say the village doesn't miss them. A future re-attempt needs a defense-coverage instrument, not just a fate instrument.
+
+**Wall (pre-seat):** national 14/16 armed vs 11/16 control, table 14/16 both, wins 0/16 both, wave-4 1/16 vs 0/16, median survival 169.5d vs 150.5d. The food-economy wall is unmoved by hunt staffing.
+
+## Sense-test
+
+Leadfeast-7818 d182 (armed): the village's hunting talk has an actor — assignments name the hunter, kills name the prey, the System watches. The fiction is coherent: a village that staffs its hunters eats more meat. The deaths read as ordinary village life (combat, monsters), not as the hunt going wrong — which is why the +51 is unsettling: the harm, if real, is invisible in the fiction.
