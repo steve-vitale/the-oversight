@@ -1,0 +1,11 @@
+=== seed 9101 day 60 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "What day is it? ...Do you still count? I lost track days ago."
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

@@ -5129,7 +5129,15 @@
         // FOLLOW-UP BEAT: answering a real question sometimes earns a second
         // beat — their thought continues instead of terminating. Not every
         // time; people don't monologue after every answer.
-        if (qd && qd.follow && Math.random() < 0.5) {
+        // DEEPER (playtest deepening r18 2026-10-18, #541): the curious
+        // bespoke questions carry a `deeper` beat — the NPC's own substantive
+        // stake in their question. It queues RELIABLY (not the 50% follow
+        // lottery): answering a real question earns a real exchange, and the
+        // thread continues on the continuer instead of going dry after one
+        // react. When deeper exists it replaces the follow roll on this path.
+        if (qd && qd.deeper) {
+          extraLine = this.voiceLine(vid, this.fillTalkLine(qd.deeper, this.vpOf(vid)));
+        } else if (qd && qd.follow && Math.random() < 0.5) {
           extraLine = this.voiceLine(vid, this.fillTalkLine(qd.follow, this.vpOf(vid)));
         }
         }

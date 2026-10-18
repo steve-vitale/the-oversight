@@ -7104,6 +7104,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // KNOWLEDGE-GATED: the patrol report names what the village calls it —
       // descriptor until named, never the System's true name for free.
       const mName = this.monsterNoun(mdef.id);
+      // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class): never
+      // compose "the "+monsterNoun blindly — proper names keep their casing.
+      const mPhrase = this.articlePhrase ? this.articlePhrase(mName) : mName;
       // PARTY-UP (Steve 2026-10-09): the outdoor crew is out there together —
       // a jumped patroller can call for help instead of fleeing alone.
       // PARTY WIRING (Steve 2026-10-12): the trusted answer first — a
@@ -7129,7 +7132,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
       let rec = pViaAid ? this.aidFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids.slice() }) : null;
       if (!rec) { pViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
-      const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought the ${mName}`;
+      const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought ${mPhrase}`;
       const killCorpse = () => {
         // the carcass stays where it died — same as your kills, same as the
         // villager field-fight router. Loot it, clean it, cook it, or lose it
@@ -7197,7 +7200,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (rec.outcome === 'vDie') {
         // lethal through the real death pipeline (hurtVillager routes it)
         try { this.hurtVillager(vid, 500, 'monster'); } catch (e) {}
-        this.say(`⚔️ ${first} faced the ${mName}... and didn't come back. The village mourns. (Leadership has stakes.)`);
+        this.say(`⚔️ ${first} faced ${mPhrase}... and didn't come back. The village mourns. (Leadership has stakes.)`);
         this.villageEvent('death');
         this.bumpTrust(vid, -2);
       }
@@ -11150,7 +11153,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             hp: fled.hp, maxHp: fled.maxHp,
           });
           delete this.state.fledMonsters[fmKey];
-          this.say(`You find it — the ${this.monsterNoun(fled.id)} didn't get far. It's still running scared.`);
+          // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class).
+          this.say(`You find it — ${this.articlePhrase ? this.articlePhrase(this.monsterNoun(fled.id)) : 'the ' + this.monsterNoun(fled.id)} didn't get far. It's still running scared.`);
         }
       } catch (e) {}
       // (Animal parking happens BEFORE the position update above — the live
@@ -17180,6 +17184,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const mdef = (this.data.monsters || []).find(m => m.id === meatMid) || {};
       let mname = 'something';
       try { mname = this.monsterNoun ? this.monsterNoun(meatMid) : 'something'; } catch (e) {}
+      // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542): village
+      // names keep casing ("The Loud Beast") — never compose "the " blindly.
+      const mflesh = (this.articlePhrase ? this.articlePhrase(mname) : 'the ' + mname) + ' flesh';
       const toxic = !!(mdef.toxicFlesh || meatMid === 'belltoad');
       if (toxic) {
         try { this.hurtVillager(tester, 15, 'experiment'); } catch (e) {}
@@ -17188,14 +17195,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         e.foodSafe = false; e.foodTested = 'poison'; e.foodTestedBy = tester;
         this.state.codex.monsters[meatMid] = e;
         meatIt.prep = '☠️ POISON. Tested, the hard way. Never eat this.';
-        this.say(`${tname} sets aside time with the ${mname} flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. "NOT food," they gasp. "Poison." The ${this.journalName()} notes it in grim letters. You will not make this mistake twice — ${tname} already made it for you.`);
+        this.say(`${tname} sets aside time with ${mflesh}. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. "NOT food," they gasp. "Poison." The ${this.journalName()} notes it in grim letters. You will not make this mistake twice — ${tname} already made it for you.`);
       } else {
         this.markMonsterFoodSafe(meatMid, 'tested');
         try {
           const e2 = this.state.codex.monsters[meatMid] || {};
           e2.foodTestedBy = tester; this.state.codex.monsters[meatMid] = e2;
         } catch (e) {}
-        this.say(`${tname} sets aside time with the ${mname} flesh. Look, smell, touch — then the smallest taste, and wait. An hour passes. Calm stomach. Another hour. Nothing. "It's food," ${tname} tells the fire. "You know it in your gut. Literally." The ${this.journalName()} notes it.`);
+        this.say(`${tname} sets aside time with ${mflesh}. Look, smell, touch — then the smallest taste, and wait. An hour passes. Calm stomach. Another hour. Nothing. "It's food," ${tname} tells the fire. "You know it in your gut. Literally." The ${this.journalName()} notes it.`);
       }
     },
 
@@ -20517,6 +20524,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       return n;
     },
+    // articlePhrase(noun, cap): sentence-safe article composition for a
+    // monsterNoun or monsterDisplayName value. (playtest deepening r18
+    // 2026-10-18, backlog #542 from landing r22: "the The Loud Beast flesh".)
+    // monsterNoun strips leading articles and lowercases descriptors ("toad
+    // like a war drum") but keeps proper/village names' casing ("The Loud
+    // Beast"); monsterDisplayName returns RAW values whose descriptors still
+    // carry their articles ("the toad like a war drum", "a dog-shaped
+    // silence"). Callers that blindly prepend "the " produce "the The Loud
+    // Beast", "the the toad like a war drum", "fought the The Loud Beast"
+    // (fieldFights 2026-10-11 fixed one site; game.js:31247 fixed another —
+    // this is the class fix). Normalize: strip any leading article, then
+    // "the "+bare for lowercase descriptors, bare for proper-cased names.
+    // cap=true capitalizes the first letter (sentence starts: "The toad
+    // like a war drum is dead").
+    articlePhrase(noun, cap) {
+      let n = String(noun == null ? '' : noun);
+      // Strip a LOWERCASE leading article only ("the toad like a war drum",
+      // "a dog-shaped silence") — it's the descriptor's grammar, not the
+      // name. A CAPITALIZED first word is the name itself: village coinage
+      // ("The Loud Beast") and System names ("The Redactor") keep standing.
+      if (/^(the|a|an)\s+/.test(n) && n.charAt(0) === n.charAt(0).toLowerCase()) {
+        n = n.replace(/^(the|a|an)\s+/, '');
+      }
+      if (!n) n = 'something';
+      let phrase = (n.charAt(0) === n.charAt(0).toLowerCase()) ? 'the ' + n : n;
+      if (cap) phrase = phrase.charAt(0).toUpperCase() + phrase.slice(1);
+      return phrase;
+    },
     // refreshMeatNames(mid): when the village names a monster (or the System
     // arrives and names everything), meat already in packs updates — the same
     // reveal the plant system does via refreshItemNames. If you don't know, it
@@ -20966,13 +21001,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               }
               const mn = this.monsterNoun(prior.id);
               const something = /^something\b/i.test(mn);
+              // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class):
+              // proper names keep casing ("The Loud Beast") — never "the The".
+              const mnp = (this.articlePhrase && !something) ? this.articlePhrase(mn) : mn;
               if (!fled) this.removeWorldMonster(prior);
               if (something) this.say(fled
                 ? 'The impact drives something off into the dark — bolting, still out there. The wings are HERE.'
                 : 'The impact scatters something into the dark — driven off by bigger wings.');
               else this.say(fled
-                ? `The impact drives the ${mn} off — it bolts for the treeline, still out there. The wings are HERE.`
-                : `The impact scatters the ${mn} — driven off by bigger wings, gone into the dark.`);
+                ? `The impact drives ${mnp} off — it bolts for the treeline, still out there. The wings are HERE.`
+                : `The impact scatters ${mnp} — driven off by bigger wings, gone into the dark.`);
             }
           } catch (e) {}
           this.spawnWorldMonster({ id: trap.monsterId }, this.map.px, this.map.py, { mx: trap.tileX, my: trap.tileY, beamPhase: 'grounded',
@@ -31170,7 +31208,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: vid }); } catch (e) {}
         if (firstPerson && obs[mid] < 2) {
           // The scholar's own notebook: a first sighting is never silent.
-          this.say(`You lived to tell it — the ${this.monsterDisplayName(mid)}'s moves are burned into your memory. (${obs[mid]}/2 — one more survived encounter and you'll have its trick.)`);
+          // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class):
+          // monsterDisplayName keeps coined names' casing ("The Focus Group").
+          this.say(`You lived to tell it — ${this.articlePhrase ? this.articlePhrase(this.monsterDisplayName(mid)) : 'the ' + this.monsterDisplayName(mid)}'s moves are burned into your memory. (${obs[mid]}/2 — one more survived encounter and you'll have its trick.)`);
           try { if (this.journalNote) this.journalNote('monsters', mid, `Sighting ${obs[mid]}/2: survived an encounter.`); } catch (e) {}
         }
         if (obs[mid] < 2) return false;

@@ -722,7 +722,11 @@
         why = 'a quiet night — the steadfast take it';
       }
       for (const pid of pids)
-        results[pid] = { outcome: pid === winner ? 'won' : 'lost', detail: why, log: pid === winner ? [`${stats[pid].name} wins the ${contest.name}. ${why}.`] : [] };
+        // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class):
+        // contest names carry their own articles ("The Pit", "The Moot") —
+        // never compose "the " blindly. articlePhrase keeps coined names
+        // standing ("wins The Pit") and adds "the" for bare ones.
+        results[pid] = { outcome: pid === winner ? 'won' : 'lost', detail: why, log: pid === winner ? [`${stats[pid].name} wins ${this.articlePhrase ? this.articlePhrase(contest.name) : 'the ' + contest.name}. ${why}.`] : [] };
       return results;
     },
 

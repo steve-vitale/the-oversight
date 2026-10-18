@@ -483,7 +483,9 @@
       var day = 0;
       try { day = this.state.scholar.day || 0; } catch (e) {}
       if (!meat || (meat.spoilDay != null && day > meat.spoilDay)) {
-        if (playerHere) this.say(`🥩 ${nm} finds the ${o.haulLabel || 'carcass'} — too far gone. "Not touching that. Nobody should."`);
+        // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class):
+        // haulLabel is monsterDisplayName — proper names keep casing.
+        if (playerHere) this.say(`🥩 ${nm} finds ${this.articlePhrase ? this.articlePhrase(o.haulLabel || 'carcass') : 'the ' + (o.haulLabel || 'carcass')} — too far gone. "Not touching that. Nobody should."`);
         o.state = 'returning'; return false;
       }
       if (!this.mapmemFoodKnown(corpse)) {
@@ -539,7 +541,8 @@
         mem.sites = mem.sites.filter(function (s) { return s.ref !== corpse.id; });
       } catch (e) {}
       if (playerHere && net > 0) {
-        this.say(`🥩 ${nm} butchers the ${o.haulLabel || 'carcass'} — working fast, wasting little. (+${net} kcal of meat, heading home.)`);
+        // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class).
+        this.say(`🥩 ${nm} butchers ${this.articlePhrase ? this.articlePhrase(o.haulLabel || 'carcass') : 'the ' + (o.haulLabel || 'carcass')} — working fast, wasting little. (+${net} kcal of meat, heading home.)`);
       } else if (playerHere) {
         this.say(`🥩 ${nm} works the carcass over — barely anything worth taking.`);
       }

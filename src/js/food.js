@@ -1505,11 +1505,15 @@
       // KNOWLEDGE-GATED: the cautious test never speaks the true name — the
       // flesh is named by what the village calls it, descriptor until named.
       const mname = this.monsterNoun ? this.monsterNoun(mid) : 'something';
+      // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542): monsterNoun
+      // keeps village/true names' casing ("The Loud Beast") — composing "the "
+      // in front doubles the article. articlePhrase normalizes both sources.
+      const mflesh = (this.articlePhrase ? this.articlePhrase(mname) : 'the ' + mname) + ' flesh';
       if (this.monsterFoodSafe(mid)) {
         this.say('You already know this one is food.');
         return null;
       }
-      this.say(`You set aside time with the ${mname} flesh. Look, smell, touch — then the smallest taste, and wait. This is how you learn without dying.`);
+      this.say(`You set aside time with ${mflesh}. Look, smell, touch — then the smallest taste, and wait. This is how you learn without dying.`);
       this.tickAction(8);
       // Is this monster's flesh actually safe? Check the monster definition.
       // Most are edible; some (belltoad, etc.) are toxic.
@@ -1519,7 +1523,7 @@
         const s = this.state.scholar;
         s.energy = Math.max(0, (s.energy || 100) - 30);
         this.say('Your tongue goes numb. Your stomach heaves. NOT food — the lesson is learned the hard way. (-30 energy)');
-        this.say(`The Codex notes: the ${mname} flesh is POISON. You will not make this mistake twice.`);
+        this.say(`The Codex notes: ${mflesh} is POISON. You will not make this mistake twice.`);
         // Mark as known-poison (not safe, but known — UI can show "poison, not food").
         if (!this.state.codex.monsters) this.state.codex.monsters = {};
         const e = this.state.codex.monsters[mid] || {};

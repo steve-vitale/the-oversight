@@ -573,7 +573,7 @@
           // off (havenGrowthDaily). The crisis threat, made persistent —
           // this is the situation the call-for-help chain exists for.
           m.lingering = true;
-          this.say(`Nobody met the ${mname(m)} — it's still out there at the treeline. It'll gorge every night until it's driven off.`);
+          this.say(`Nobody met ${this.articlePhrase(mname(m))} — it's still out there at the treeline. It'll gorge every night until it's driven off.`);
         }
       }
       // the player: without a palisade, one raider can reach a sleeper.
@@ -681,11 +681,13 @@
         const mdef = (this.data.monsters || []).find(x => x.id === m.id) || {};
         let mName = 'something';
         try { mName = this.monsterNoun ? this.monsterNoun(mdef.id) : (mdef.name || 'something'); } catch (e) { console.warn('lingererSortie noun', e); }
+        // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class).
+        const mPhrase = this.articlePhrase ? this.articlePhrase(mName) : mName;
         let rec = null;
         try { rec = this.fieldFight(leader, mdef, m, { allies: allyVids.length, allyVids: allyVids.slice() }); }
         catch (e) { console.warn('lingererSortie fight', e); }
         if (!rec || !rec.outcome) continue;
-        let summary = `${refName(leader)} fought the ${mName}`;
+        let summary = `${refName(leader)} fought ${mPhrase}`;
         try { summary = this.fieldFightSummary ? this.fieldFightSummary(rec, refName(leader), mName) : summary; } catch (e) { console.warn('lingererSortie summary', e); }
         if (rec.outcome === 'vKill') {
           try { this.hurtVillager(leader, rec.vTaken, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
@@ -733,7 +735,7 @@
         } else if (rec.outcome === 'vDie') {
           // lethal through the real death pipeline (hurtVillager routes it)
           try { this.hurtVillager(leader, 500, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
-          this.say(`⚔️ ${refName(leader)} faced the ${mName} at the treeline... and didn't come back. The party carries the body home. The sortie is over.`);
+          this.say(`⚔️ ${refName(leader)} faced ${mPhrase} at the treeline... and didn't come back. The party carries the body home. The sortie is over.`);
           try { this.villageEvent('death'); } catch (e) { console.warn('lingererSortie event', e); }
           try { this.bumpTrust(leader, -2); } catch (e) { console.warn('lingererSortie trust', e); }
           broke = true; break;

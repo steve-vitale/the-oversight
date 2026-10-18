@@ -526,23 +526,27 @@
       const roll = Math.random();
       let result, detail;
       const names = teamVids.map(id => this.displayName(id));
+      // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class): mname is
+      // monsterDisplayName (raw; descriptors carry articles, proper names keep
+      // casing) — never compose "the "+mname blindly.
+      const mphrase = (cap) => (this.articlePhrase ? this.articlePhrase(mname, cap) : mname);
       if (ratio > 1.5 || (ratio > 1.0 && roll < 0.7)) {
         result = 'won';
         const hurt = roll < 0.3 ? teamVids[Math.floor(Math.random() * n)] : null;
-        detail = `${names.join(', ')} brought down the ${mname}${hurt ? ` — ${this.displayName(hurt)} is hurt, but walking` : ', clean'}.`;
+        detail = `${names.join(', ')} brought down ${mphrase()}${hurt ? ` — ${this.displayName(hurt)} is hurt, but walking` : ', clean'}.`;
       } else if (ratio > 0.7) {
         result = 'costly';
         const hurt = teamVids[Math.floor(Math.random() * n)];
-        detail = `They killed it. It cost them: ${this.displayName(hurt)} is badly hurt. The ${mname} is dead; so nearly was someone.`;
+        detail = `They killed it. It cost them: ${this.displayName(hurt)} is badly hurt. ${mphrase(true)} is dead; so nearly was someone.`;
       } else {
         result = 'lost';
         const dead = roll < 0.5 ? teamVids[Math.floor(Math.random() * n)] : null;
         if (dead) {
           const dname = this.displayName(dead);
-          detail = `The ${mname} was too much. ${dname} didn't come back.`;
+          detail = `${mphrase(true)} was too much. ${dname} didn't come back.`;
           this.applySplitDeath(dead, mname);
         } else {
-          detail = `They couldn't hold it — ${names.join(', ')} ${n > 1 ? 'fled' : 'fled'}, hurt and lucky to be breathing. The ${mname} is still out there.`;
+          detail = `They couldn't hold it — ${names.join(', ')} ${n > 1 ? 'fled' : 'fled'}, hurt and lucky to be breathing. ${mphrase(true)} is still out there.`;
         }
       }
       this.say(`📣 Elsewhere: ${detail}`);

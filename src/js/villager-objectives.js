@@ -748,7 +748,10 @@
         explore: 'wanders off. "I want to see what\'s out there."',
         leave: 'walks away from Haven. They don\'t look back.',
         guard: 'walks out with ' + (function () { try { return this.displayName(obj.targetVid); } catch (e) { return 'someone'; } }.call(this)) + '. "Nobody walks alone today."',
-        haul: 'sets out for the ' + (obj.haulLabel || 'carcass') + '. "Meat\'s meat. Back with it or not at all."',
+        // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class):
+        // haulLabel is monsterDisplayName — proper names keep casing ("The
+        // Loud Beast"), descriptors carry articles. Never "the The X".
+        haul: 'sets out for ' + (this.articlePhrase ? this.articlePhrase(obj.haulLabel || 'carcass') : 'the ' + (obj.haulLabel || 'carcass')) + '. "Meat\'s meat. Back with it or not at all."',
       }[obj.purpose] || 'heads out.';
       }
       if (playerAtHaven) this.say((obj.companion ? '👥 ' : '') + nm + ' ' + purposeLine);
@@ -1132,9 +1135,12 @@
         return `📖 ${tnm} is showing ${lnm} the snare — the loop, the trigger stick, where the run narrows between the roots. "Opossum trails. Check at dawn. Always."`;
       }
       var pname = (lesson && lesson.plantName) || 'something from the wild';
-      // descriptors already carry their article ("a tree with...")
+      // descriptors already carry their article ("a tree with...", "the giant
+      // tree with...") — keep them as-is. (playtest deepening r18 2026-10-18,
+      // #542 class: the old /^(a|an)/ check missed "the"-descriptors and
+      // composed "the the giant tree...".)
       var pnameArt = pname;
-      try { pnameArt = (/^(a|an)\s/i.test(pname)) ? pname : 'the ' + pname; } catch (e) {}
+      try { pnameArt = (/^(a|an|the)\s/i.test(pname)) ? pname : 'the ' + pname; } catch (e) {}
       var need = lesson ? lesson.need : null;
       if (need === 'wound') return `📖 ${tnm} is showing ${lnm} ${pnameArt} — which leaves to press on a wound.`;
       if (need === 'hunger') return `📖 ${tnm} is showing ${lnm} ${pnameArt} — where it grows, what's safe to eat.`;

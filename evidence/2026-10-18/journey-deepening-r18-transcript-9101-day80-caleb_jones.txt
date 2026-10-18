@@ -1,0 +1,11 @@
+=== seed 9101 day 80 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "About whether you've hurt someone — Have you ever hurt someone? Since all this started. That's where we are."
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

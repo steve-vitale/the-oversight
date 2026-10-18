@@ -1173,8 +1173,11 @@
       } catch (e) {}
       var pname = pid, pnameArt = pid;
       try { pname = this.plantDisplayName ? this.plantDisplayName(pid) : pid; } catch (e) {}
-      // descriptors already carry their article ("a tree with...")
-      try { pnameArt = (/^(a|an)\s/i.test(pname)) ? pname : 'the ' + pname; } catch (e) {}
+      // descriptors already carry their article ("a tree with...", "the giant
+      // tree with...") — keep them as-is. (playtest deepening r18 2026-10-18,
+      // #542 class: the old /^(a|an)/ check missed "the"-descriptors and
+      // composed "the the giant tree...".)
+      try { pnameArt = (/^(a|an|the)\s/i.test(pname)) ? pname : 'the ' + pname; } catch (e) {}
       // SENSE: firstRef, never split(' ')[0] — a stranger descriptor's first
       // word is bare "A" ("A taught A"), but firstRef gives the
       // distinguishing descriptor ("the woman in her 30s").
