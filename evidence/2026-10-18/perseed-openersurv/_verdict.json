@@ -1,0 +1,63 @@
+{
+ "arm": "openersurv",
+ "bar": 6,
+ "runs": 32,
+ "runsByArm": {
+  "armed": 16,
+  "control": 16
+ },
+ "answerable": false,
+ "pooled": 0,
+ "wave4Runs": 6,
+ "learnings": {
+  "armed": 0,
+  "control": 0
+ },
+ "pool": {
+  "armed": {
+   "n": 0,
+   "fired": 0,
+   "cnm": 0,
+   "byCls": {},
+   "vDie": 0,
+   "vKill": 0,
+   "vFlee": 0,
+   "mFlee": 0,
+   "killTrick": 0,
+   "rounds": []
+  },
+  "control": {
+   "n": 0,
+   "fired": 0,
+   "cnm": 0,
+   "byCls": {},
+   "vDie": 0,
+   "vKill": 0,
+   "vFlee": 0,
+   "mFlee": 0,
+   "killTrick": 0,
+   "rounds": []
+  }
+ },
+ "gates": {
+  "deathDelta": 0,
+  "killDelta": 0,
+  "condMetArmed": null
+ },
+ "waveKillTrickDelta": 0,
+ "medianSurvival": {
+  "armed": 180,
+  "control": 180
+ },
+ "national": {
+  "armed": 11,
+  "control": 11
+ },
+ "table": {
+  "armed": 10,
+  "control": 10
+ },
+ "treatmentOnlyCauses": [],
+ "verdict": "INCONCLUSIVE",
+ "reason": "pool 0 < 6 or wave-4 runs 6 < 4 (substrate still missing)"
+}

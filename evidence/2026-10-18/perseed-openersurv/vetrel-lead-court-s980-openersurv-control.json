@@ -1,0 +1,155 @@
+{
+ "seed": 980,
+ "policyId": "vetrel-lead-court",
+ "arm": "openersurv",
+ "armId": "control",
+ "fightopen": 0,
+ "substrate": "pre-seat courtship + VETREL (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1, VETREL=1) + FIGHTOPEN=0",
+ "days": 53,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 3,
+ "wave4Reached": 0,
+ "wave5Reached": 0,
+ "deaths": 27,
+ "fieldDeaths": 24,
+ "playerDeaths": 3,
+ "deathCauses": {
+  "a toad like a war drum, throat swelling": 1,
+  "villager combat": 7,
+  "expedition": 1,
+  "combat": 15,
+  "monster": 1,
+  "dehydration": 1,
+  "starvation": 1
+ },
+ "trickTally": {
+  "wait:buffering-still": 15,
+  "wait:spool-record": 11
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "buffering": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 38,
+   "id": "buffering"
+  }
+ ],
+ "nFieldFights": 91,
+ "nTbFights": 15,
+ "nWaveKillTricks": 2,
+ "waveKillTricks": [
+  {
+   "d": 43,
+   "mid": "dustboar",
+   "w": 1,
+   "by": "gen_fvggsu6",
+   "via": "player",
+   "trick": "sidestep"
+  },
+  {
+   "d": 54,
+   "mid": "voice_mimic_radio",
+   "w": 2,
+   "by": "yara_haddad",
+   "via": "player",
+   "trick": "keep_distance"
+  }
+ ],
+ "witnessLearnings": [
+  {
+   "learnId": "L69-buffering",
+   "seq": 69,
+   "day": 38,
+   "id": "buffering",
+   "trick": "buffering",
+   "trickText": "Stand still",
+   "wave": 3,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:buffering-still"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L69-buffering",
+   "day": 38,
+   "id": "buffering",
+   "trick": "buffering",
+   "wave": 3,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 1,
+    "tb-n/a": 1
+   },
+   "execs": 1,
+   "fights": [
+    {
+     "seq": 71,
+     "day": 38,
+     "path": "field",
+     "vid": "wanjiru_kamau",
+     "outcome": "vFlee",
+     "rounds": 15,
+     "trickLog": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "evals": 15,
+     "fires": 15,
+     "firedTokens": [
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still",
+      "wait:buffering-still"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 76,
+     "day": 41,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 1
+}
