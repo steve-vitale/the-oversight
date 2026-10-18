@@ -50,9 +50,19 @@
         // veterans= living roster members with a recorded kill of a
         //   wave-(w-1)+ monster in state.waveKillLog (survivors of combat —
         //   fleeing records nothing here)
+        // RECALIBRATED 2026-10-18 (Steve: "fix readiness bar" — design calls
+        // mine, his to overrule). The 2026-10-16 starting points collapsed
+        // wave-4 unlocks 14/16 -> 0/16 on the named seeds: veterans bound
+        // 98.5-100% of deferral days (median village maxes at 1 living
+        // wave-3 killer vs demand 2) and armor co-bound ~60% (median 2 @
+        // P>=15 vs demand 4; armor is mortality-selected — 34/47 armored
+        // died in the draft they unlocked). The combat-readiness SHAPE is
+        // kept (Steve's intent stands: fleeing is not readiness, the bread
+        // road must not open a war draft) — only the numbers move, to what
+        // a competent combat-invested village can actually field.
         readyDemand: {
-          4: { armored: 4, armorP: 15, armed: 5, tricks: 3, veterans: 2 },
-          5: { armored: 6, armorP: 20, armed: 7, tricks: 4, veterans: 3 },
+          4: { armored: 3, armorP: 10, armed: 5, tricks: 3, veterans: 1 },
+          5: { armored: 4, armorP: 15, armed: 6, tricks: 3, veterans: 2 },
         },
         plentyCapT5: 100,     // plenty counts at most this toward the T5 bar
       };
@@ -274,9 +284,9 @@
           // for Steve's #427 readiness-gate call (named next from
           // evidence/2026-10-17/sim-wave4census.md): count DISTINCT KILLER
           // VIDS with wave-(w-1)+ kills in the same waveKillLog the gate
-          // already reads, living-OR-DEAD. Demand unchanged (2 for wave 4,
-          // 3 for wave 5). NOT a game change: the default stays
-          // 2-living-veterans until Steve rules.
+          // already reads, living-OR-DEAD. Demand now 1 for wave 4, 2 for
+          // wave 5 (2026-10-18 recalibration). NOT a game change: the
+          // default stays living-veterans until Steve rules.
           const killShape = ((typeof process !== 'undefined' && process.env && process.env.VETSHAPE) === '1');
           for (const e of log) {
             if (!e || !e.by || ((e.w | 0) < (w - 1))) continue;

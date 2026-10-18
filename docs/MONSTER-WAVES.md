@@ -397,13 +397,13 @@ can overrule):
 
 | | armored | armor P | armed | tricks | veterans |
 |---|---|---|---|---|---|
-| wave 4 | 4 | ≥15 | 5 | 3 | 2 (killed wave-3+) |
-| wave 5 | 6 | ≥20 | 7 | 4 | 3 (killed wave-4+) |
+| wave 4 | 3 | ≥10 | 5 | 3 | 1 (killed wave-3+) |
+| wave 5 | 4 | ≥15 | 6 | 3 | 2 (killed wave-4+) |
 
 While any bar is short, `villageStandingTotal()` holds at t4-1/t5-1 and the
 wave stays out of `monsterWavePool()` — the door is open, the village hasn't
 walked through. Unreadiness is never silent: the hold beat names the short
-bars ("armor the village (0 of 4 fighters armored); put weapons in hands
+bars ("armor the village (0 of 3 fighters armored); put weapons in hands
 (0 of 5 armed); ...") with the existing initial + 7-day reminder cadence,
 and `standingLine()` names the HELD wave. The wave's *title* is never named
 in the hold (knowledge-gate discipline) — the bar is the fiction: the
