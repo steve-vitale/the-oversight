@@ -1,0 +1,42 @@
+sweep-time master commit: 262523ef07f23fc1b641833360e15c8c62b019a4
+  [-31882817s] control leadfeast s4101117: days=164 end=village-lost w3- deferMargin=-2 starv=0
+  [-0s] control leadfeast s4211219: days=180 end=survived w3- deferMargin=-1 starv=1
+  [-0s] control leadfeast s4321321: days=180 end=survived w3- deferMargin=-3 starv=0
+  [-1s] control leadfeast s4431423: days=180 end=survived w3- deferMargin=-3 starv=2
+  [-0s] control leadfeast s4541525: days=62 end=village-lost w3- deferMargin=-2 starv=8
+  [2s] control leadfeast s4651627: days=180 end=survived w3- deferMargin=-3 starv=0
+  [-1s] control leadfeast s4761729: days=159 end=village-lost w3- deferMargin=-3 starv=0
+  [0s] control leadfeast s4871831: days=152 end=village-lost w3- deferMargin=-3 starv=0
+  [-0s] control belongfeast s4101117: days=180 end=survived w3- deferMargin=0 starv=0
+  [0s] control belongfeast s4211219: days=180 end=survived w3- deferMargin=-3 starv=1
+  [-1s] control belongfeast s4321321: days=137 end=village-lost w3- deferMargin=-3 starv=0
+  [1s] control belongfeast s4431423: days=180 end=survived w3- deferMargin=-3 starv=0
+  [-0s] control belongfeast s4541525: days=153 end=village-lost w3- deferMargin=-3 starv=2
+  [1s] control belongfeast s4651627: days=180 end=survived w3- deferMargin=-2 starv=0
+  [-0s] control belongfeast s4761729: days=174 end=village-lost w3- deferMargin=-3 starv=0
+  [-1s] control belongfeast s4871831: days=121 end=village-lost w3- deferMargin=-4 starv=2
+  [0s] armed leadfeast s4101117: days=122 end=village-lost w3- deferMargin=-3 starv=0
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module './policies/armorstock'
+Require stack:
+- /home/hatch/workspace/worktrees/sim-armorstock/scripts/resume-armorstock-20261018.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/sim-armorstock/scripts/resume-armorstock-20261018.js:39:12)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/hatch/workspace/worktrees/sim-armorstock/scripts/resume-armorstock-20261018.js'
+  ]
+}
+
+Node.js v24.20.0

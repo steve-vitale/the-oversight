@@ -1,0 +1,509 @@
+{
+ "run": "sim-armorstock-census",
+ "axis": "scale-onramp",
+ "seed": 4211219,
+ "policyId": "leadfeast",
+ "arm": "control",
+ "sweepCommit": "262523ef07f23fc1b641833360e15c8c62b019a4",
+ "substrate": {
+  "FEASTSCALE_R13": 1,
+  "TRIBFLOOR": 1,
+  "SUCCGRACE": 1,
+  "RAIDDENSITY": 1,
+  "WINPURSUIT": 1,
+  "WINDEFER": 1,
+  "SEATDRIVE": 0
+ },
+ "days": 180,
+ "gameDays": 182,
+ "endReason": "survived",
+ "won": 0,
+ "national": 0,
+ "tableWaiting": true,
+ "maxWaveUnlocked": 3,
+ "firstW4Day": null,
+ "standingTotal": 512,
+ "readiness4": {
+  "ready": false,
+  "armored": 3,
+  "armed": 7,
+  "tricks": 29,
+  "veterans": 1,
+  "short": [
+   "armor",
+   "veterans"
+  ]
+ },
+ "deferralCensus": {
+  "day": 181,
+  "armored": 3,
+  "armed": 7,
+  "tricks": 29,
+  "veterans": 1,
+  "short": [
+   "armor",
+   "veterans"
+  ],
+  "perVillagerP": [
+   {
+    "vid": "gen_avl77un",
+    "name": "Minh",
+    "P": 0,
+    "demandMet": false
+   },
+   {
+    "vid": "sigrun_eiriksdottir",
+    "name": "Sigrun",
+    "P": 10,
+    "demandMet": false
+   },
+   {
+    "vid": "henry_zhang",
+    "name": "Henry",
+    "P": 7,
+    "demandMet": false
+   },
+   {
+    "vid": "naran_tumen",
+    "name": "Naran",
+    "P": 40,
+    "demandMet": true
+   },
+   {
+    "vid": "daniyar_askarov",
+    "name": "Daniyar",
+    "P": 9,
+    "demandMet": false
+   },
+   {
+    "vid": "theo_lindqvist",
+    "name": "Theo",
+    "P": 17,
+    "demandMet": true
+   },
+   {
+    "vid": "wanjiru_kamau",
+    "name": "Wanjiru",
+    "P": 8,
+    "demandMet": false
+   }
+  ]
+ },
+ "deferralAttributed": true,
+ "stockSeries": [
+  {
+   "day": 30,
+   "scholarWornP": 42,
+   "scholarPackTrophy": 0,
+   "scholarPackTrophyIds": [],
+   "villagerWornTrophy": 2,
+   "villagerPackTrophy": 2,
+   "totalTrophy": 5,
+   "perVillagerP": [
+    {
+     "vid": "gen_avl77un",
+     "name": "Minh",
+     "P": 0,
+     "demandMet": false
+    },
+    {
+     "vid": "gen_ba6ptrc",
+     "name": "Yusuf",
+     "P": 4,
+     "demandMet": false
+    },
+    {
+     "vid": "gen_034v9d7",
+     "name": "Dilnaz",
+     "P": 4,
+     "demandMet": false
+    },
+    {
+     "vid": "sigrun_eiriksdottir",
+     "name": "Sigrun",
+     "P": 10,
+     "demandMet": false
+    },
+    {
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "P": 36,
+     "demandMet": true
+    },
+    {
+     "vid": "henry_zhang",
+     "name": "Henry",
+     "P": 7,
+     "demandMet": false
+    },
+    {
+     "vid": "naran_tumen",
+     "name": "Naran",
+     "P": 40,
+     "demandMet": true
+    },
+    {
+     "vid": "hannah_kim",
+     "name": "Hannah",
+     "P": 5,
+     "demandMet": false
+    },
+    {
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "P": 9,
+     "demandMet": false
+    }
+   ],
+   "trophyIds": [
+    "worn:alien_boots",
+    "vpack:alien_boots",
+    "worn:adaptive_dermis",
+    "vpack:adaptive_dermis",
+    "sworn:swat_vest"
+   ]
+  },
+  {
+   "day": 60,
+   "scholarWornP": 42,
+   "scholarPackTrophy": 0,
+   "scholarPackTrophyIds": [],
+   "villagerWornTrophy": 2,
+   "villagerPackTrophy": 2,
+   "totalTrophy": 5,
+   "perVillagerP": [
+    {
+     "vid": "gen_avl77un",
+     "name": "Minh",
+     "P": 0,
+     "demandMet": false
+    },
+    {
+     "vid": "gen_ba6ptrc",
+     "name": "Yusuf",
+     "P": 4,
+     "demandMet": false
+    },
+    {
+     "vid": "gen_034v9d7",
+     "name": "Dilnaz",
+     "P": 4,
+     "demandMet": false
+    },
+    {
+     "vid": "sigrun_eiriksdottir",
+     "name": "Sigrun",
+     "P": 10,
+     "demandMet": false
+    },
+    {
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "P": 36,
+     "demandMet": true
+    },
+    {
+     "vid": "henry_zhang",
+     "name": "Henry",
+     "P": 7,
+     "demandMet": false
+    },
+    {
+     "vid": "naran_tumen",
+     "name": "Naran",
+     "P": 40,
+     "demandMet": true
+    },
+    {
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "P": 9,
+     "demandMet": false
+    }
+   ],
+   "trophyIds": [
+    "worn:alien_boots",
+    "vpack:alien_boots",
+    "worn:adaptive_dermis",
+    "vpack:adaptive_dermis",
+    "sworn:swat_vest"
+   ]
+  },
+  {
+   "day": 90,
+   "scholarWornP": 5,
+   "scholarPackTrophy": 0,
+   "scholarPackTrophyIds": [],
+   "villagerWornTrophy": 2,
+   "villagerPackTrophy": 2,
+   "totalTrophy": 4,
+   "perVillagerP": [
+    {
+     "vid": "gen_avl77un",
+     "name": "Minh",
+     "P": 0,
+     "demandMet": false
+    },
+    {
+     "vid": "gen_034v9d7",
+     "name": "Dilnaz",
+     "P": 4,
+     "demandMet": false
+    },
+    {
+     "vid": "sigrun_eiriksdottir",
+     "name": "Sigrun",
+     "P": 10,
+     "demandMet": false
+    },
+    {
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "P": 36,
+     "demandMet": true
+    },
+    {
+     "vid": "henry_zhang",
+     "name": "Henry",
+     "P": 7,
+     "demandMet": false
+    },
+    {
+     "vid": "naran_tumen",
+     "name": "Naran",
+     "P": 40,
+     "demandMet": true
+    },
+    {
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "P": 9,
+     "demandMet": false
+    }
+   ],
+   "trophyIds": [
+    "worn:alien_boots",
+    "vpack:alien_boots",
+    "worn:adaptive_dermis",
+    "vpack:adaptive_dermis"
+   ]
+  },
+  {
+   "day": 120,
+   "scholarWornP": 5,
+   "scholarPackTrophy": 0,
+   "scholarPackTrophyIds": [],
+   "villagerWornTrophy": 2,
+   "villagerPackTrophy": 2,
+   "totalTrophy": 4,
+   "perVillagerP": [
+    {
+     "vid": "gen_avl77un",
+     "name": "Minh",
+     "P": 0,
+     "demandMet": false
+    },
+    {
+     "vid": "gen_034v9d7",
+     "name": "Dilnaz",
+     "P": 4,
+     "demandMet": false
+    },
+    {
+     "vid": "sigrun_eiriksdottir",
+     "name": "Sigrun",
+     "P": 10,
+     "demandMet": false
+    },
+    {
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "P": 36,
+     "demandMet": true
+    },
+    {
+     "vid": "henry_zhang",
+     "name": "Henry",
+     "P": 7,
+     "demandMet": false
+    },
+    {
+     "vid": "naran_tumen",
+     "name": "Naran",
+     "P": 40,
+     "demandMet": true
+    },
+    {
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "P": 9,
+     "demandMet": false
+    }
+   ],
+   "trophyIds": [
+    "worn:alien_boots",
+    "vpack:alien_boots",
+    "worn:adaptive_dermis",
+    "vpack:adaptive_dermis"
+   ]
+  },
+  {
+   "day": 150,
+   "scholarWornP": 37,
+   "scholarPackTrophy": 0,
+   "scholarPackTrophyIds": [],
+   "villagerWornTrophy": 2,
+   "villagerPackTrophy": 2,
+   "totalTrophy": 5,
+   "perVillagerP": [
+    {
+     "vid": "gen_avl77un",
+     "name": "Minh",
+     "P": 0,
+     "demandMet": false
+    },
+    {
+     "vid": "sigrun_eiriksdottir",
+     "name": "Sigrun",
+     "P": 10,
+     "demandMet": false
+    },
+    {
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "P": 36,
+     "demandMet": true
+    },
+    {
+     "vid": "henry_zhang",
+     "name": "Henry",
+     "P": 7,
+     "demandMet": false
+    },
+    {
+     "vid": "naran_tumen",
+     "name": "Naran",
+     "P": 40,
+     "demandMet": true
+    },
+    {
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "P": 9,
+     "demandMet": false
+    },
+    {
+     "vid": "theo_lindqvist",
+     "name": "Theo",
+     "P": 17,
+     "demandMet": true
+    },
+    {
+     "vid": "wanjiru_kamau",
+     "name": "Wanjiru",
+     "P": 8,
+     "demandMet": false
+    }
+   ],
+   "trophyIds": [
+    "worn:alien_boots",
+    "vpack:alien_boots",
+    "worn:adaptive_dermis",
+    "vpack:adaptive_dermis",
+    "sworn:swat_vest"
+   ]
+  },
+  {
+   "day": 180,
+   "scholarWornP": 36,
+   "scholarPackTrophy": 0,
+   "scholarPackTrophyIds": [],
+   "villagerWornTrophy": 1,
+   "villagerPackTrophy": 1,
+   "totalTrophy": 3,
+   "perVillagerP": [
+    {
+     "vid": "gen_avl77un",
+     "name": "Minh",
+     "P": 0,
+     "demandMet": false
+    },
+    {
+     "vid": "sigrun_eiriksdottir",
+     "name": "Sigrun",
+     "P": 10,
+     "demandMet": false
+    },
+    {
+     "vid": "henry_zhang",
+     "name": "Henry",
+     "P": 7,
+     "demandMet": false
+    },
+    {
+     "vid": "naran_tumen",
+     "name": "Naran",
+     "P": 40,
+     "demandMet": true
+    },
+    {
+     "vid": "daniyar_askarov",
+     "name": "Daniyar",
+     "P": 9,
+     "demandMet": false
+    },
+    {
+     "vid": "theo_lindqvist",
+     "name": "Theo",
+     "P": 17,
+     "demandMet": true
+    },
+    {
+     "vid": "wanjiru_kamau",
+     "name": "Wanjiru",
+     "P": 8,
+     "demandMet": false
+    }
+   ],
+   "trophyIds": [
+    "worn:adaptive_dermis",
+    "vpack:adaptive_dermis",
+    "sworn:alien_boots"
+   ]
+  }
+ ],
+ "acquisitions": [
+  {
+   "id": "alien_boots",
+   "firstDay": 30,
+   "firstLoc": "worn"
+  },
+  {
+   "id": "adaptive_dermis",
+   "firstDay": 30,
+   "firstLoc": "worn"
+  },
+  {
+   "id": "swat_vest",
+   "firstDay": 30,
+   "firstLoc": "sworn"
+  }
+ ],
+ "crafts": {
+  "hide_armor": 0,
+  "bark_armor": 0,
+  "other": 191
+ },
+ "deaths": {
+  "total": 38,
+  "starv": 1,
+  "byCause": {
+   "villager combat": 7,
+   "starvation": 1,
+   "combat": 25,
+   "monster": 1,
+   "contest": 1,
+   "expedition": 3
+  }
+ }
+}
