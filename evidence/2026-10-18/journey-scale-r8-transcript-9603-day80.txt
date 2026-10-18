@@ -1,0 +1,29 @@
+=== seed 9603 day 80 — conversation with Hong (app_mgpspil3493) ===
+occupation=farmer temperament=dry trust=23 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — still need hands. Are you in? Makes sense to me."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, teach, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Emily is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I sharpen sticks down to nothing at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody says Emily's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I sharpen sticks down to nothing for Emily, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: "And... scene. Good talk."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

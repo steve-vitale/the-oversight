@@ -1,0 +1,32 @@
+=== seed 9601 day 100 — conversation with Brian (brian_otieno) ===
+occupation=zookeeper temperament=gentle trust=25 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I'm running on empty — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. I mean it."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I haven't eaten right in days. I can't pull my weight like this. Anything you can spare, I'll make it stretch."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Omar is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I taste the water before the others drink at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Omar. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Omar's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=3)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=promised

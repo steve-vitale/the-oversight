@@ -1,0 +1,29 @@
+=== seed 9606 day 140 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=48 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "About ask favor — I keep turning it over, friend."
+(turn0 choices: alive:want:ask_favor, dlg:help, alive:event:show, dlg:details, dlg:cant, recap, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's been too long since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pokeweed — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: "I could talk all day, but — go on. We'll talk more."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

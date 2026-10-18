@@ -1,0 +1,32 @@
+=== seed 9605 day 80 — conversation with David (gen_nk5tgip) ===
+occupation=sign painter temperament=warm trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "About the taken — about Bill. I can't stop turning it over. Have you heard anything new? You doing okay?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "He lowers the crown. That's the Rut King telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Brazil Nuts. Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Colocasia (Arbi). Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my brother, Bill. Went up in the Taking with the boring half. He was the funniest person I knew. Their metrics are broken. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Burdock — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+closing line: "Later."
+want final: id=seek_taken stage=3 resolution=promised

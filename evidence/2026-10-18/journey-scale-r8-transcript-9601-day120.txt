@@ -1,0 +1,29 @@
+=== seed 9601 day 120 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=87 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About how you slept — Did you sleep? I kept hearing things out past the treeline."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_night:a_yes, ans:q_night:a_no, ans:q_night:a_joke, ans:q_night:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Ji is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Ji said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Ji. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm picking up Ji's share of the work. Someone should, and it might as well be me."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Okay — I need to move. But I'm glad we talked."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,31 @@
+=== seed 9608 day 80 — conversation with Reagan (gen_i01i9o5) ===
+occupation=emergency dispatcher temperament=fidgety trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all. Sorry, what was the question."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. Let's move."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's my brother, Sam. Went up in the Taking with the boring half. He was the funniest person I knew. Their metrics are broken. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Blackberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Burdock — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "I should go. You know where to find me."
+(want=seek_taken stage=3)
+want final: id=seek_taken stage=3 resolution=promised

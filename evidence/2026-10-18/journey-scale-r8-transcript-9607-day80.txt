@@ -1,0 +1,32 @@
+=== seed 9607 day 80 — conversation with Werner (gen_rcrw595) ===
+occupation=aquarium keeper temperament=anxious trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop. Not that it matters."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: Whining, closing. Mosquito, every time. Dawn and dusk, that's when it's out."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. Seen worse."
+(want=curious stage=2)
+YOU: [dlg:more] "Does anyone else know?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Yarrow — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

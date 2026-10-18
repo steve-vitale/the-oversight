@@ -1,0 +1,27 @@
+=== seed 9602 day 140 — conversation with Lena (lena_ruiz) ===
+occupation=ER nurse temperament=steady trust=91 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether they can trust you — Can I trust you? I mean really."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Xavier died... I keep expecting to see Xavier at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Sleep's gone strange. I sit apart to eat at odd hours now. Whatever gets me to morning."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Xavier. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

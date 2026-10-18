@@ -1,0 +1,32 @@
+=== seed 9606 day 120 — conversation with Adaeze (adaeze_nwosu) ===
+occupation=ESL teacher temperament=anxious trust=91 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Why do you ask? Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's been days since a real meal. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Zoe died... I keep expecting to see Zoe at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I count portions out loud before eating. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm picking up Zoe's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+closing line: "Talking helps. A little. Thank you."
+want final: id=ask_favor stage=3 resolution=promised

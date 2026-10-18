@@ -1,0 +1,32 @@
+=== seed 9604 day 100 — conversation with Hinewai (gen_21d3wjn) ===
+occupation=hunting guide temperament=earnest trust=91 dead=false mood=hungry
+want: ask_favor (stage 0, fromSeed)
+
+THEM: "Can we talk?" Hinewai sits down near you. "Just... talk. Like people used to."
+(turn0 choices: agency:ask_expedition, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. That's the whole of it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Never mind this wound — we got it handled. Thanks anyway."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's handled. Really — it is. I appreciate you asking, though."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Ming is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Sleep's gone strange. I oil boots on rest days at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody says Ming's name right yet. We will. Give it a few days."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I oil boots on rest days for Ming, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=ask_favor stage=3 resolution=stated

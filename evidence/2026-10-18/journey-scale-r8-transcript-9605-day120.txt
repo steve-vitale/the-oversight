@@ -1,0 +1,32 @@
+=== seed 9605 day 120 — conversation with Raniera (visjoin_114) ===
+occupation=Beekeeper temperament=gentle trust=31 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I feel like — I can't reach this properly. Could you clean it out for me? Please."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. ...if that makes sense."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and David were close. I'm sorry."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I greet everyone by name each morning. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without David. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm picking up David's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=3)
+closing line: "Thank you for listening. Really listening. That's rare."
+want final: id=ask_favor stage=3 resolution=promised

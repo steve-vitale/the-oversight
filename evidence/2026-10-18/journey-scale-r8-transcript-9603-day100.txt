@@ -1,0 +1,31 @@
+=== seed 9603 day 100 — conversation with Marcus (marcus_webb) ===
+occupation=electrician temperament=bold trust=36 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the creek water run — still need hands. Are you in? No point pretending otherwise."
+(turn0 choices: agency:ask_field, alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Ghada, Tom, Hong and Roisin this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Roisin said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Roisin. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: "I've got fires to light — metaphorical ones. Mostly."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised
