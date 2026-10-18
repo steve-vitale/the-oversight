@@ -1,65 +1,302 @@
 {
  "seed": 8951,
  "arm": "trial",
- "days": 210,
- "over": false,
- "won": false,
- "endDay": 212,
+ "days": 90,
+ "over": true,
+ "won": true,
+ "endDay": 91,
  "table": {
-  "phase": null,
-  "path": null,
-  "branch": null,
+  "phase": "done",
+  "path": "feared",
+  "branch": "light",
   "doors": [],
-  "weakened": 0
+  "weakened": 1
  },
  "m": {
-  "doorPicks": [],
-  "doorEntries": [],
-  "beatSteers": [],
-  "trialEvents": [],
+  "doorPicks": [
+   {
+    "day": 90,
+    "want": "feared",
+    "offer": [
+     "feared",
+     "beloved",
+     "assimilated",
+     "defiant",
+     "relay"
+    ]
+   }
+  ],
+  "doorEntries": [
+   {
+    "day": 90,
+    "path": "feared",
+    "branch": "light",
+    "band": null,
+    "lean": 0,
+    "grounding": 100,
+    "notes": [
+     "the food truth was shared"
+    ]
+   }
+  ],
+  "beatSteers": [
+   {
+    "day": 90,
+    "beat": 1,
+    "pick": "beat:trial"
+   }
+  ],
+  "trialEvents": [
+   {
+    "tag": "start",
+    "day": 90,
+    "bearer": "theo_lindqvist",
+    "weakened": 0,
+    "beat": 1,
+    "phase": "challenge",
+    "terror": 4
+   },
+   {
+    "tag": "resume",
+    "day": 90,
+    "bearer": "gen_6erujmx",
+    "result": "lost",
+    "weakened": 0,
+    "beat": 1,
+    "phase": "challenge",
+    "terror": 4
+   }
+  ],
   "finals": [],
   "failEvents": [],
-  "announceDay": null,
-  "waitingDay": null,
+  "announceDay": 90,
+  "waitingDay": 79,
   "doneDay": null,
-  "atSit": null,
-  "atAnnounce": null,
-  "ledgerAtSit": null,
-  "sitSceneDay": null,
-  "leanAtDoor": null,
-  "rungHistory": [],
+  "atSit": {
+   "day": 90,
+   "seat": "lesser",
+   "doors": {
+    "feared": {
+     "earned": true,
+     "strength": 100,
+     "why": "30 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked."
+    },
+    "indispensable": {
+     "earned": false,
+     "strength": 0,
+     "why": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+    },
+    "beloved": {
+     "earned": true,
+     "strength": 100,
+     "why": "Viewership 29, fan favor 37 — the galaxy's favorite, by the numbers."
+    },
+    "witness": {
+     "earned": false,
+     "strength": 0,
+     "why": "You didn't keep the list (1 exposures on record — the trial needs 3)."
+    },
+    "assimilated": {
+     "earned": true,
+     "strength": 60,
+     "why": "Always open. The table takes anyone — that's what makes it a trap, and what makes it safe."
+    },
+    "defiant": {
+     "earned": true,
+     "strength": 40,
+     "why": "Defiance 5 on the record. The 'no' is earned."
+    },
+    "relay": {
+     "earned": true,
+     "strength": 40,
+     "why": "Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0)"
+    }
+   },
+   "standingCost": 0,
+   "overtimeTier": 0
+  },
+  "atAnnounce": {
+   "day": 90,
+   "seat": "lesser",
+   "doors": {
+    "feared": {
+     "earned": true,
+     "strength": 100,
+     "why": "30 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked."
+    },
+    "indispensable": {
+     "earned": false,
+     "strength": 0,
+     "why": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+    },
+    "beloved": {
+     "earned": true,
+     "strength": 100,
+     "why": "Viewership 29, fan favor 37 — the galaxy's favorite, by the numbers."
+    },
+    "witness": {
+     "earned": false,
+     "strength": 0,
+     "why": "You didn't keep the list (1 exposures on record — the trial needs 3)."
+    },
+    "assimilated": {
+     "earned": true,
+     "strength": 60,
+     "why": "Always open. The table takes anyone — that's what makes it a trap, and what makes it safe."
+    },
+    "defiant": {
+     "earned": true,
+     "strength": 40,
+     "why": "Defiance 5 on the record. The 'no' is earned."
+    },
+    "relay": {
+     "earned": true,
+     "strength": 40,
+     "why": "Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0)"
+    }
+   },
+   "standingCost": 0,
+   "overtimeTier": 0
+  },
+  "ledgerAtSit": {
+   "killed": 0,
+   "protected": 0,
+   "betrayed": 0,
+   "foodShared": 1,
+   "foodHoarded": 0,
+   "might": 117,
+   "showmanship": 18,
+   "exposed": 1,
+   "embrace": 6,
+   "defiance": 5
+  },
+  "sitSceneDay": 90,
+  "leanAtDoor": {
+   "lean": 0,
+   "grounding": 100
+  },
+  "rungHistory": [
+   {
+    "day": 80,
+    "seat": "lesser",
+    "tier": 0,
+    "doors": "feared,beloved,assimilated,defiant,relay"
+   },
+   {
+    "day": 85,
+    "seat": "lesser",
+    "tier": 0,
+    "doors": "feared,beloved,assimilated,defiant,relay"
+   },
+   {
+    "day": 90,
+    "seat": "lesser",
+    "tier": 0,
+    "doors": "feared,beloved,assimilated,defiant,relay"
+   }
+  ],
   "flavor": {
    "greyRelayClaimed": false,
    "greyReroutes": 0
   },
-  "wonTele": null,
-  "entered": null,
-  "challengeBeats": []
+  "wonTele": {
+   "day": 91,
+   "data": {
+    "track": "field",
+    "godpath": "forager",
+    "subclass": "gardener",
+    "god": null,
+    "moral": "light",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "path",
+    "endingLevel": "path",
+    "endingKind": "path",
+    "buildPlayed": null
+   }
+  },
+  "entered": {
+   "day": 90,
+   "data": {
+    "seat": "lesser",
+    "track": "field",
+    "godpath": "forager",
+    "subclass": "gardener",
+    "god": null,
+    "moral": null,
+    "titanFinale": "none",
+    "endingKey": null
+   }
+  },
+  "challengeBeats": [
+   {
+    "day": 90,
+    "path": "feared",
+    "beat": 0,
+    "frame": "the Feared"
+   },
+   {
+    "day": 90,
+    "path": "feared",
+    "beat": 1,
+    "frame": "the Feared"
+   },
+   {
+    "day": 90,
+    "path": "feared",
+    "beat": 2,
+    "frame": "the Feared"
+   }
+  ]
  },
  "census": [
   {
-   "id": "visjoin_149",
-   "name": "Moise",
+   "id": "gen_6erujmx",
+   "name": "Ashanti",
    "alive": true,
-   "occ": "Vintner"
+   "occ": "street artist"
   },
   {
-   "id": "visjoin_186",
-   "name": "Megersa",
+   "id": "gen_h8ktuvf",
+   "name": "Rachel",
    "alive": true,
-   "occ": "taxi driver"
+   "occ": "locksmith"
   },
   {
-   "id": "visjoin_190",
-   "name": "Austin",
+   "id": "gen_a7v0jzv",
+   "name": "Shaun",
    "alive": true,
-   "occ": "emergency dispatcher"
+   "occ": "Beekeeper"
   },
   {
-   "id": "visjoin_194",
-   "name": "Turlough",
+   "id": "omar_farouk",
+   "name": "Omar",
    "alive": true,
    "occ": "piano tuner"
+  },
+  {
+   "id": "dmitri_sokolov",
+   "name": "Dmitri",
+   "alive": true,
+   "occ": "appliance repair tech"
+  },
+  {
+   "id": "sam_wilson",
+   "name": "Sam",
+   "alive": true,
+   "occ": "bartender"
+  },
+  {
+   "id": "yara_haddad",
+   "name": "Yara",
+   "alive": true,
+   "occ": "interpreter"
   }
  ]
 }
