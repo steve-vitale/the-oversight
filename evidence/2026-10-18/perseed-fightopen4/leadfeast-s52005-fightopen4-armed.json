@@ -1,0 +1,132 @@
+{
+ "seed": 52005,
+ "policyId": "leadfeast",
+ "arm": "fightopen4",
+ "armId": "armed",
+ "fightopen": 1,
+ "substrate": "readiness (VETREL=1 REPOSITION=1 NODEWITNESS=1 + FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1, SEATDRIVE=0 explicit) + FIGHTOPEN=1",
+ "days": 151,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 4,
+ "wave4Reached": 1,
+ "wave5Reached": 0,
+ "deaths": 49,
+ "fieldDeaths": 40,
+ "playerDeaths": 9,
+ "deathCauses": {
+  "combat": 34,
+  "villager combat": 10,
+  "monster": 5
+ },
+ "trickTally": {
+  "wait:redactor-quiet": 23,
+  "wait:spool-record": 3,
+  "contradict": 2
+ },
+ "nNodeWitnessReports": 2,
+ "nodeWitnessBySpecies": {
+  "influencer": 1,
+  "reunion": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 105,
+   "id": "influencer"
+  }
+ ],
+ "nFieldFights": 212,
+ "nTbFights": 32,
+ "nWaveKillTricks": 4,
+ "witnessLearnings": [
+  {
+   "learnId": "L218-influencer",
+   "seq": 218,
+   "day": 105,
+   "id": "influencer",
+   "trick": "influencer",
+   "trickText": "Kill the followers first",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "focus_followers"
+   ]
+  },
+  {
+   "learnId": "L237-reunion",
+   "seq": 237,
+   "day": 119,
+   "id": "reunion",
+   "trick": "reunion",
+   "trickText": "Do something you have never done",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "scholar-observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:reunion-novel"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L218-influencer",
+   "day": 105,
+   "id": "influencer",
+   "trick": "influencer",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "tb-n/a": 2
+   },
+   "execs": 0,
+   "fights": [],
+   "tbFights": [
+    {
+     "seq": 225,
+     "day": 111,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 230,
+     "day": 115,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  },
+  {
+   "learnId": "L237-reunion",
+   "day": 119,
+   "id": "reunion",
+   "trick": "reunion",
+   "wave": 4,
+   "via": "scholar-observed",
+   "witnessSourced": "shared",
+   "verdict": "no-opportunity",
+   "summary": {},
+   "execs": 0,
+   "fights": [],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 2
+}
