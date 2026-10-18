@@ -367,7 +367,10 @@
         cands.push({ kind: 'WATER', w: ww });
       }
       // TRAPS — only hands that know the wire. (knowledge-gated)
-      if (vp.knowsSnare) cands.push({ kind: 'TRAPS', w: 1.6 });
+      // PIT KNOWLEDGE (pitknowledge 2026-10-18): pit-knowing hands work the
+      // line too — their return runs the pit (see objReturnEffect). With
+      // PITKNOWLEDGE=0 knowsPit is never set, so this reads exactly as before.
+      if (vp.knowsSnare || vp.knowsPit) cands.push({ kind: 'TRAPS', w: 1.6 });
       // HAUL — map memory (villager-mapmem 2026-10-13): a remembered corpse
       // with meat. Offered through mapmemHaulCandidate (r12 2026-10-17):
       // the famine gate plus the knowledge channel (unrevealed monster
@@ -1084,6 +1087,9 @@
                 // watching the wire lesson learns its shape — recipe L1.
                 // Same regard gate as the TRAPS-return teach beat.
                 if (lesson.topic === 'snare') { try { this.snareLessonOverhear(rid, true); } catch (e) {} }
+                // PIT OVERHEAR (pitknowledge 2026-10-18): the pit lesson's
+                // overhear — same regard gate as the snare's.
+                if (lesson.topic === 'pit') { try { this.pitLessonOverhear(rid, true); } catch (e) {} }
               }
             } else if (playerAtHaven) {
               // no learner in earshot: they review their own finds, and the
@@ -1134,6 +1140,11 @@
       if (lesson && lesson.topic === 'snare') {
         return `📖 ${tnm} is showing ${lnm} the snare — the loop, the trigger stick, where the run narrows between the roots. "Opossum trails. Check at dawn. Always."`;
       }
+      // PIT KNOWLEDGE (pitknowledge 2026-10-18): the pit lesson's own line —
+      // the depth, the stakes, the marked ground.
+      if (lesson && lesson.topic === 'pit') {
+        return `📖 ${tnm} is showing ${lnm} the pit trap — the depth, the sharpened stakes at the bottom, where the game trail runs. "Brush it over with leaves. And mark it well — your own pit will take you too."`;
+      }
       var pname = (lesson && lesson.plantName) || 'something from the wild';
       // descriptors already carry their article ("a tree with...", "the giant
       // tree with...") — keep them as-is. (playtest deepening r18 2026-10-18,
@@ -1179,6 +1190,38 @@
       } catch (e) { return false; }
     },
 
+    // pitLessonOverhear — the player's cut of a witnessed pit lesson
+    // (pitknowledge 2026-10-18). Watching real hands lay out a pit teaches
+    // the shape of it: recipe L1 (seen — blind 35% craft, materials at risk).
+    // Same regard gate as the snare overhear (trust 15+; strangers don't hand
+    // over their craft), only while L0, only when the channel is on. The
+    // overhear never teaches L2: your hands learn by doing (a successful
+    // blind craft), not by watching.
+    pitLessonOverhear(teacherVid, playerAtHaven) {
+      try {
+        if (!this.pitKnowledgeOn || !this.pitKnowledgeOn()) return false;
+        var atHaven = playerAtHaven;
+        if (atHaven === undefined) {
+          var _v = this.state.village || {};
+          atHaven = (this.map.px === (_v.px ?? 4) && this.map.py === (_v.py ?? 4));
+        }
+        if (!atHaven) return false;
+        var tvp = this.vpOf ? this.vpOf(teacherVid) : null;
+        if (!tvp || !tvp.knowsPit) return false;
+        var tr = 10;
+        try { var _t = (this.state.village.trust || {})[teacherVid]; if (_t !== undefined) tr = _t; } catch (e) {}
+        if (tr < 15) return false;
+        var rk = ((this.state.codex || {}).recipes || {})['pit_trap'] || {};
+        if ((rk.level || 0) >= 1) return false;
+        var nm = 'Someone';
+        try { nm = this.firstRef ? this.firstRef(teacherVid) : this.displayName(teacherVid); } catch (e) {}
+        if (this.grantKnowledge) this.grantKnowledge('recipe', 'pit_trap', 1, { type: 'witnessed', by: nm });
+        this.say(`🪤 You watch ${nm} walk someone through the pit trap — the depth, the sharpened stakes at the bottom, where the game trail runs. "Brush it over with leaves. And mark it well — your own pit will take you too." Your hands don't know it yet. Your eyes do.`);
+        try { this.tele('pit_overhear', { teacher: teacherVid }); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
+    },
+
     // ---------- 6. RETURN EFFECTS for the new purposes ----------
     // The base return block handles forage/explore/leave; these extend it.
     // Called from the base return path (surgical hook in npcNodeTravel).
@@ -1195,18 +1238,61 @@
         if (playerAtHaven) this.say(`💧 ${nm} returns with water: +${n} clean.`);
         try { this.bumpTrust(vid, 1, 'hauled clean water home'); } catch (e) {}
       } else if (purpose === 'traps') {
+        var _vp = null;
+        try { _vp = this.vpOf ? this.vpOf(vid) : null; } catch (e) {}
+        // PIT KNOWLEDGE (pitknowledge 2026-10-18): the return reads the
+        // villager's own hands. The snare line needs knowsSnare (before this
+        // channel, TRAPS implied it — the gate keeps that exact); the pit
+        // line needs knowsPit and the channel on. PITKNOWLEDGE=0 leaves
+        // knowsPit unset on every profile, so both gates read as before.
+        var _knowsSnare = !!(_vp && _vp.knowsSnare);
+        var _knowsPit = !!((this.pitKnowledgeOn && this.pitKnowledgeOn()) && _vp && _vp.knowsPit);
         var _caught = false, _kcal = 0;
-        if (R() < 0.4) {
+        if (_knowsSnare && R() < 0.4) {
           _caught = true;
           _kcal = 100 + Math.floor(R() * 300);
           try { this.stockPantry(_kcal, 'Snared meat'); } catch (e) {}
           if (playerAtHaven) this.say(`🪤 ${nm} is back from the snares: +${_kcal} kcal to the pantry.`);
-        } else if (playerAtHaven) {
+        } else if (playerAtHaven && _knowsSnare) {
           this.say(`🪤 ${nm} is back. "Snares were empty. They'll keep."`);
         }
         // SIM TELEMETRY (trapline 2026-10-13): NPC trapline activity per
         // return — measurement infrastructure, zero gameplay effect.
         try { this.tele('npc_trap', { vid: vid, caught: _caught, kcal: _kcal }); } catch (e) {}
+        // PIT LINE (pitknowledge 2026-10-18): a trapper who knows the pit
+        // works one — abstract like the snare roll above, not a tile trap.
+        // 18% a return; species from the pit_trap table (recipes.json); the
+        // haul is the carried share of a big carcass (400–1000 kcal), named
+        // by species. A pit catch the player witnesses teaches the shape of
+        // the pit (recipe L1) — the checkTraps learnability beat, through the
+        // village's own hands instead of yours: the witnessed-catch bootstrap
+        // that doesn't need a first pit of your own. No wound roll — they
+        // know the craft (the goring beat in checkTraps is for YOUR pit).
+        var _pitKcal = 0, _pitSpecies = null;
+        if (_knowsPit && R() < 0.18) {
+          var _pitTable = ['white_tailed_deer', 'white_tailed_deer', 'wild_boar', 'raccoon', 'opossum'];
+          try {
+            var _pitR = (this.data.recipes || []).find(function (r) { return r.id === 'pit_trap'; });
+            if (_pitR && _pitR.catches && _pitR.catches.length) _pitTable = _pitR.catches;
+          } catch (e) {}
+          _pitSpecies = _pitTable[Math.floor(R() * _pitTable.length)];
+          var _pitAn = null;
+          try { _pitAn = (this.data.animals || []).find(function (a) { return a.id === _pitSpecies; }); } catch (e) {}
+          var _pitName = (_pitAn && _pitAn.name) || _pitSpecies;
+          _pitKcal = 400 + Math.floor(R() * 601);
+          try { this.stockPantry(_pitKcal, 'Pit meat (' + _pitName + ')'); } catch (e) {}
+          if (playerAtHaven) this.say(`🪤 ${nm} is back from the pit line: ${_pitName} in the pit — +${_pitKcal} kcal to the pantry.`);
+          try { this.tele('npc_pit', { vid: vid, species: _pitSpecies, kcal: _pitKcal }); } catch (e) {}
+          try {
+            var _pitRk = ((this.state.codex || {}).recipes || {})['pit_trap'] || {};
+            if (playerAtHaven && ((_pitRk.level || 0) < 1) && this.grantKnowledge) {
+              this.grantKnowledge('recipe', 'pit_trap', 1, { type: 'witnessed', by: nm });
+              this.say(`Watching ${nm} work the pit — the depth, the stakes, the brushed-over leaves — you finally see the shape of it. You could dig one now.`);
+            }
+          } catch (e) {}
+        } else if (playerAtHaven && _knowsPit) {
+          this.say(`🪤 ${nm} is back from the pit line. "Pit was quiet. They'll keep."`);
+        }
         // TRAP TEACHING (structural 2026-10-10): a hunter who knows the wire
         // can SHOW you — once, and only if you've earned their regard (trust
         // 15+; strangers don't hand over their craft). Watching real hands
@@ -1215,14 +1301,31 @@
         // channel; this is its trapping beat. Fires on the witnessed return,
         // never silently.
         try {
-          var _vp = this.vpOf ? this.vpOf(vid) : null;
           var _rk = ((this.state.codex || {}).recipes || {})['snare'] || {};
           var _tr = (this.state.village.trust || {})[vid];
           if (_tr === undefined) _tr = 10;
-          if (playerAtHaven && _vp && _vp.knowsSnare && ((_rk.level || 0) < 1) && !_vp.taughtSnare && _tr >= 15) {
+          if (playerAtHaven && _knowsSnare && ((_rk.level || 0) < 1) && !_vp.taughtSnare && _tr >= 15) {
             _vp.taughtSnare = true;
             if (this.grantKnowledge) this.grantKnowledge('recipe', 'snare', 1, { type: 'taught', by: nm });
             this.say(`🪤 ${nm} catches you watching the snares come off the line. "...Want to actually SEE one?" They show you — the loop, the trigger stick, where the run narrows between the roots. "Opossum trails. Check at dawn. Always." Your hands don't know it yet. Your eyes do.`);
+          }
+        } catch (e) {}
+        // PIT TEACHING (pitknowledge 2026-10-18): the same regard gate for
+        // the pit — a trapper who knows it can SHOW you, once, and only if
+        // you've earned their regard (trust 15+; strangers don't hand over
+        // their craft). Watching real hands lay out a pit teaches the shape
+        // of it: recipe L1 (seen — blind 35% craft, materials at risk). Word
+        // of mouth is the canon pre-codex channel; this is its pit beat.
+        // Fires on the witnessed return, never silently.
+        try {
+          var _pitRk2 = ((this.state.codex || {}).recipes || {})['pit_trap'] || {};
+          var _tr2 = (this.state.village.trust || {})[vid];
+          if (_tr2 === undefined) _tr2 = 10;
+          if (playerAtHaven && _knowsPit && ((_pitRk2.level || 0) < 1) && !_vp.taughtPit && _tr2 >= 15) {
+            _vp.taughtPit = true;
+            if (this.grantKnowledge) this.grantKnowledge('recipe', 'pit_trap', 1, { type: 'taught', by: nm });
+            this.say(`🪤 ${nm} catches you watching the pit line. "...Want to actually SEE one?" They walk you out to it — the depth, the sharpened stakes at the bottom, where the game trail runs. "Brush it over with leaves. And mark it well — your own pit will take you too." Your hands don't know it yet. Your eyes do.`);
+            try { this.tele('pit_teach', { teacher: vid }); } catch (e) {}
           }
         } catch (e) {}
         try { this.bumpTrust(vid, 1, 'worked the snare line'); } catch (e) {} // NOTE: the teaching gate

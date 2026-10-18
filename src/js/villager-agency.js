@@ -1115,6 +1115,56 @@
           }
         }
       } catch (e) {}
+      // PIT APPRENTICESHIP (pitknowledge 2026-10-18): the same word-of-mouth
+      // for the pit — a villager who knows it can hand it on to a fellow
+      // villager who doesn't. Same regard gate (trust 15+), once per learner,
+      // need-driven (hungry or novice), recorded like every real lesson, and
+      // gated on the channel flag. More pit-knowing hands means more pit
+      // lines worked — and more chances the player witnesses one.
+      try {
+        var _pitOn = (this.pitKnowledgeOn && this.pitKnowledgeOn()) ? true : false;
+        var _ptvp = this.vpOf ? this.vpOf(teacherVid) : null;
+        var _plvp = this.vpOf ? this.vpOf(learnerVid) : null;
+        if (_pitOn && _ptvp && _ptvp.knowsPit && _plvp && !_plvp.knowsPit && !_plvp.pitTaught) {
+          var _pttr = 10;
+          try { var __pt = (this.state.village.trust || {})[teacherVid]; if (__pt !== undefined) _pttr = __pt; } catch (e) {}
+          if (_pttr >= 15) {
+            var _phungry = false, _pnovice = false;
+            try { _phungry = (this.npcNeeds(learnerVid).hunger || 0) >= 60; } catch (e) {}
+            try {
+              var _plag = this.agencyOf ? this.agencyOf(learnerVid) : null;
+              var _plxp = _plag && _plag.xp ? _plag.xp[learnerVid] : null;
+              _pnovice = !_plxp || (_plxp.tracking || 0) < 8;
+            } catch (e) {}
+            if (_phungry || _pnovice) {
+              if (R() < 0.85) {
+                _plvp.knowsPit = true;
+                _plvp.pitTaught = true;
+                var _pday = 0;
+                try { _pday = this.state.scholar.day || 0; } catch (e) {}
+                var _pneed = _phungry ? 'hunger' : 'novice';
+                st.lessons[learnerVid] = st.lessons[learnerVid] || [];
+                st.lessons[learnerVid].push({ from: teacherVid, topic: 'pit', day: _pday, need: _pneed });
+                try {
+                  var _pla = this.agencyOf(learnerVid);
+                  _pla.xp[learnerVid].tracking += 1;
+                  this.agencyTierCheck(learnerVid, false);
+                } catch (e) {}
+                var _ptnm = 'Someone', _plnm = 'someone';
+                try { _ptnm = this.firstRef ? this.firstRef(teacherVid) : this.displayName(teacherVid); } catch (e) {}
+                try { _plnm = this.firstRef ? this.firstRef(learnerVid) : this.displayName(learnerVid); } catch (e) {}
+                var _pdeed = _pneed === 'hunger'
+                  ? `${_ptnm} taught ${_plnm} the pit trap — the depth, the stakes, where the game trail runs. Meat for the hungry.`
+                  : `${_ptnm} showed ${_plnm} the pit trap — the depth, the stakes, where the game trail runs. The beginner's pit.`;
+                try { this.recordDeed(teacherVid, 'taught', _pdeed, 1); } catch (e) {}
+                try { this.tele('pit_lesson', { teacher: teacherVid, learner: learnerVid, need: _pneed }); } catch (e) {}
+                return { taught: true, learner: learnerVid, topic: 'pit', need: _pneed };
+              }
+              return { taught: false, failed: true };
+            }
+          }
+        }
+      } catch (e) {}
       var tKnown = [], lKnown = [];
       try { tKnown = this.plantsKnownBy ? this.plantsKnownBy(teacherVid) : []; } catch (e) {}
       try { lKnown = this.plantsKnownBy ? this.plantsKnownBy(learnerVid) : []; } catch (e) {}

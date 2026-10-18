@@ -1256,7 +1256,11 @@
           // must reach the profile. The hunting guide's knowsSnare was dropped
           // here, leaving the whole villager-traps system (TRAPS objective,
           // ranging bonus, teaching beats) dormant — no villager ever qualified.
+          // PIT KNOWLEDGE (pitknowledge 2026-10-18): trapper occupations carry
+          // the pit too (knowsPit) — the pit-teach beats below read it. Gated:
+          // PITKNOWLEDGE=0 leaves profiles pit-free for the det-gate control.
           knowsSnare: !!occ.knowsSnare,
+          knowsPit: this.pitKnowledgeOn() ? !!occ.knowsPit : false,
           candidate: candidate !== false, pro,
           // APPEARANCE (Steve 2026-10-06): the sprite is generated FROM the
           // person. gender follows the name (nameGender computed above);
@@ -1536,7 +1540,9 @@
         // TRAP REACHABILITY (structural 2026-10-10): seed-hydrated villagers
         // keep their occupation's trap knowledge too (same dropped wire as the
         // generated path above).
+        // PIT KNOWLEDGE (pitknowledge 2026-10-18): same carry for knowsPit.
         knowsSnare: !!occ.knowsSnare,
+        knowsPit: this.pitKnowledgeOn() ? !!occ.knowsPit : false,
         candidate: false, pro,
         gender: s.gender || (pro === 'she' ? 'f' : pro === 'he' ? 'm' : 'x'),
         skinTone: s.skinTone || this.appearanceFor(origin, parsed.tags).skinTone,
@@ -2703,6 +2709,13 @@
       // Hunters start knowing the snare. Others must learn.
       if (occ.knowsSnare) {
         this.state.codex.recipes['snare'] = { level: 3 };
+      }
+      // PIT KNOWLEDGE (pitknowledge 2026-10-18): trappers start knowing the
+      // pit — background, like the snare above. A hunting guide dug pits
+      // before the Scattering; the shape is in their hands, not in a book.
+      // Gated: PITKNOWLEDGE=0 keeps the control substrate pit-free.
+      if (this.pitKnowledgeOn() && occ.knowsPit) {
+        this.state.codex.recipes['pit_trap'] = { level: 3, via: 'background', learnedDay: 0 };
       }
       // Everyone knows the sharp rock. Knapping a working edge is the oldest
       // technology there is — the recipe is universal, the stone still has to
@@ -17578,6 +17591,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // (Steve 2026-10-07): 35 scattered grant sites with 12 distinct patterns unified here.
     // Like identifyPlant for plants and learnSkill for skills — now one dispatcher.
     //
+    // pitKnowledgeOn (pitknowledge 2026-10-18): feature flag for the pit-trap
+    // knowledge channel (trapper NPCs who know the pit). PITKNOWLEDGE=0
+    // disables every reader — profiles carry no knowsPit, no pit beats fire —
+    // so sims can run a byte-identical control substrate. Default ON everywhere
+    // (browser: no process -> on).
+    pitKnowledgeOn() {
+      try { return !(typeof process !== 'undefined' && process.env && process.env.PITKNOWLEDGE === '0'); }
+      catch (e) { return true; }
+    },
+
     // domain: 'plant' | 'animal' | 'recipe' | 'technique' | 'skill'
     //   ('tree'/'monster' removed break-it knowledge 2026-10-10: the branches
     //   were never called — tree knowledge flows through carexplore.js and
