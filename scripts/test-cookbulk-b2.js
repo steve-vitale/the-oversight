@@ -299,6 +299,19 @@ async function partD() {
 }
 
 (async () => {
+  // Post-kill INFO-SKIP repair (coordinator, run fleshout-loop-b-20261018T132923Z):
+  // the sim-cookbulk-b2 layer was deleted per kill protocol, so the proof's
+  // RED->GREEN fixtures are vacuous on this tree. The layer was proven
+  // GREEN pre-kill (25/25 A+B, 16/16 det-gate, 12/12 smoke); the log lives in
+  // evidence/2026-10-18/sim-cookbulk-b2.md.
+  try { require.resolve('./policies/cookbulk-b2'); }
+  catch (e) {
+    if (e && e.code === 'MODULE_NOT_FOUND') {
+      console.log('INFO-SKIP: sim-cookbulk-b2 layer killed per protocol (policies/cookbulk-b2.js absent); proof vacuous, exit 0.');
+      process.exit(0);
+    }
+    throw e;
+  }
   await partA();
   await partB();
   if (process.env.SKIP_CD) { console.log('\n(PROOF AB-ONLY)'); console.log(`PROOF ${fail === 0 ? 'GREEN' : 'RED'}: ${pass} passed, ${fail} failed`); process.exit(fail === 0 ? 0 : 1); }
