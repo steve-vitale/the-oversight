@@ -1,0 +1,32 @@
+=== seed 9502 day 100 — conversation with Lillian (gen_ahc11lj) ===
+occupation=electrician temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Sassafras — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: alive:event:show, alive:want:curious, dlg:more, dlg:react, recap, dlg:invite, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What's your first memory? Like, ever. The earliest thing."
+(want=curious stage=1)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Here's what I think — Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Mine's Columbus, Ohio, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "They took Quinn — The Blood Tithe, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do push-ups at dawn. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

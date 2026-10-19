@@ -1,0 +1,18 @@
+=== seed 9502 day 80 — conversation with Lillian (gen_ahc11lj) ===
+occupation=electrician temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something you're good at that nobody here knows about?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Sassafras — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Common Plantain — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,24 @@
+=== seed 9905 day 100 — conversation with Chris (gen_9p88bl9) ===
+occupation=lawyer temperament=warm trust=56 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Mayapple — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

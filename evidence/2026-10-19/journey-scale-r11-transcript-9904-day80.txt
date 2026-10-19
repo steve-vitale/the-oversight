@@ -1,0 +1,26 @@
+=== seed 9904 day 80 — conversation with Felix (app_mgpsphkp790) ===
+occupation=teacher temperament=fidgety trust=16 dead=false mood=steady
+want: share_news (stage 1)
+
+THEM: "What's this about? Okay, so — something happened this morning."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Oh! Oh — Honestly? I think about it more than I say."
+(want=share_news stage=1)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody's saying it out loud, but everyone's thinking about Tyrone. The quiet ones worst."
+(want=share_news stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Okay, so — Elena. Elena? A Baker, back before. Solid person. Don't say I told you."
+(want=share_news stage=2)
+YOU: [dlg:more] "What happened?"
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's everything I've got. You know as much as I do now."
+(want=share_news stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Alright. Catch you later."
+(want=share_news stage=2)
+YOU: (leave)
+want final: id=share_news stage=3 resolution=engaged

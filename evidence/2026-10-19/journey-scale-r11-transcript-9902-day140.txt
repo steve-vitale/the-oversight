@@ -1,0 +1,31 @@
+=== seed 9902 day 140 — conversation with Enzo (visjoin_129) ===
+occupation=Veterinarian temperament=earnest trust=33 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: "Can we talk?" Enzo sits down near you. "Just... talk. Like people used to."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "They took Ivy — Hardened The Echo, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Anyway — I should get going."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

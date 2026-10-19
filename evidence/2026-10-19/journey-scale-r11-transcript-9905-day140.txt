@@ -1,0 +1,27 @@
+=== seed 9905 day 140 — conversation with Chris (gen_9p88bl9) ===
+occupation=lawyer temperament=warm trust=62 dead=false mood=steady
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway. That is all."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:want:ask_favor, dlg:help, dlg:cant, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "All sorted. Some things just work out."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Dante is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Sleep's gone strange. I rinse the cup twice at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=stated

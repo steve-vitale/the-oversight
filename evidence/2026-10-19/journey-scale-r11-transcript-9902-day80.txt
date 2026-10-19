@@ -1,0 +1,31 @@
+=== seed 9902 day 80 — conversation with Keltoum (visjoin_68) ===
+occupation=zookeeper temperament=intense trust=22 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? I can't keep going like this. Not that it matters."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's been days since a real meal. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Aishwarya is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Aishwarya said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Aishwarya. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I check the treeline every hour for Aishwarya, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "That's enough for now. It'll percolate."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

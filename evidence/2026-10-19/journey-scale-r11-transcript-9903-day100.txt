@@ -1,0 +1,21 @@
+=== seed 9903 day 100 — conversation with Hugo (gen_gpag799) ===
+occupation=Fisherman temperament=gentle trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? At night I talk to someone who isn't there anymore."
+(turn0 choices: agency:ask_expedition, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Bottom line: Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "...Wow."
+THEM: "Well." A breath. "That's where things stand."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "I won't tell."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Go gently, okay?"
+want final: id=seek_taken stage=3 resolution=unestablished

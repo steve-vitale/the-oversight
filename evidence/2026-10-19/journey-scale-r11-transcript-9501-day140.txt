@@ -1,0 +1,21 @@
+=== seed 9501 day 140 — conversation with Oliver (oliver_moore) ===
+occupation=Veterinarian temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? I know who took the extra rations but won't say. — comedy."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=curious stage=2)
+YOU: [dlg:more] "Does anyone else know?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "Okay."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "I won't tell."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That was conversation."
+want final: id=curious stage=3 resolution=engaged

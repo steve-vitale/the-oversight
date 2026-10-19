@@ -1,0 +1,23 @@
+=== seed 9501 day 80 — conversation with Carmen (app_mgpsphrk492) ===
+occupation=carpenter temperament=withdrawn trust=35 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Tell me — Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs."
+(turn0 choices: alive:want:ask_favor, dlg:help, alive:event:show, dlg:cant, teach, confront:d_0p9wk2z, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "I did the count twice. The count doesn't change. Nobody's worked the north treeline by the fallen oak in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Done. The north treeline by the fallen oak, before the dew dries. Bring a pack."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: "Okay. That's — I need a minute. A long minute."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

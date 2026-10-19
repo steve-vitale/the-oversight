@@ -1,0 +1,26 @@
+=== seed 9507 day 100 — conversation with Jesse (jesse_cortez) ===
+occupation=line cook temperament=withdrawn trust=31 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "We gave them a good burial. Doesn't feel like enough, does it?"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence, confront:d_4wbp5wb)
+YOU: [gq:open:take] "What do you think?"
+THEM: "...Sorry — My take? We're not going to like the answer, whatever it is."
+(want=seek_comfort stage=0)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Tell you what — Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "What's this about? Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Sure — You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "They're already drifting away. "Later."
+(want=seek_comfort stage=2)
+YOU: (leave)
+want final: id=seek_comfort stage=3 resolution=engaged
