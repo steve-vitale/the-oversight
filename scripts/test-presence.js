@@ -216,6 +216,56 @@ console.log('C: real-harness gates');
   const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
   const TF = require(path.join(REPO, 'scripts', 'policies', 'tribfloor'));
 
+  // ---------- V: villager-veteran metric (the §14-revised confirm primary) ----------
+  // One definition, three consumers: the sweep writes villagerVeterans, the
+  // analyzer judges on it, and this section pins it against the engine.
+  // Definition: distinct living non-scholar vids with a wave-3+ kill in
+  // state.waveKillLog = Game.waveCombatReadiness(4).veterans EXCLUDING the
+  // scholar vid (the confirm's metric-review finding: control's 3 veterans
+  // were all scholar-veterans; presence's 4 were all villager-veterans).
+  console.log('V: villager-veteran metric (revised primary definition)');
+  const AN2 = require(path.join(REPO, 'scripts', 'sweep-presence2-analyze'));
+  let vpass = 0, vfail = 0;
+  const vcheck = (n, c, d) => { if (c) { vpass++; console.log(`  PASS ${n}${d ? ' — ' + d : ''}`); } else { vfail++; console.log(`  FAIL ${n}${d ? ' — ' + d : ''}`); } };
+  {
+    const { Game: GV } = await loadGame({ seed: 417, mode: 'presence2-proof' });
+    await quietLog(async () => { await setupGame(GV); });
+    const rosterV = ((GV.state.village || {}).roster || []);
+    const fightersV = rosterV.filter(v => v !== GV.villagerId).filter(v => { try { const vp = GV.vpOf(v); return vp && !vp.dead; } catch (e) { return false; } });
+    vcheck('V fixture has 3+ fighters', fightersV.length >= 3, `fighters=${fightersV.length}`);
+    const [vA, vB, vC] = fightersV;
+    try { GV.vpOf(vB).dead = true; } catch (e) { vcheck('V kill vB', false, String(e)); }
+    GV.state.waveKillLog = [
+      { d: 50, mid: 'spool', w: 3, by: vA, via: 'agency' },   // living w3 killer -> counts
+      { d: 51, mid: 'gavel', w: 3, by: vA, via: 'agency' },   // dup killer -> still one
+      { d: 52, mid: 'redactor', w: 3, by: vB, via: 'agency' },// dead -> excluded
+      { d: 53, mid: 'hushwolf', w: 1, by: vC, via: 'agency' },// wave-1 kill -> excluded
+      { d: 54, mid: 'static', w: 2, by: vC, via: 'agency' },  // wave-2 kill -> excluded
+      { d: 55, mid: 'ad_break', w: 3, by: GV.villagerId, via: 'agency' }, // scholar -> engine counts, metric excludes
+    ];
+    const rv4 = GV.waveCombatReadiness(4);
+    vcheck('V engine veterans(4) = vA + scholar', rv4.veterans === 2, `veterans=${rv4.veterans}`);
+    vcheck('V villagerVeterans = vA only (scholar excluded)', AN2.villagerVeterans(GV) === 1, `vv=${AN2.villagerVeterans(GV)}`);
+    // A scholar wave-4 kill must not leak into the villager metric.
+    GV.state.waveKillLog.push({ d: 56, mid: 'congregation', w: 4, by: GV.villagerId, via: 'agency' });
+    vcheck('V scholar w4 kill excluded from villager metric', AN2.villagerVeterans(GV) === 1);
+    vcheck('V engine veterans(4) unchanged (scholar already counted)', GV.waveCombatReadiness(4).veterans === 2);
+    // A dead killer with a wave-4 kill stays excluded (VETSHAPE off).
+    GV.state.waveKillLog.push({ d: 57, mid: 'strike', w: 4, by: vB, via: 'agency' });
+    vcheck('V dead w4 killer excluded from villager metric', AN2.villagerVeterans(GV) === 1);
+  }
+  // The revised primary's judge predicates (the SAME functions the verdict
+  // rests on): presence >= control + 2 on the 16-run corpus.
+  vcheck('V judgePrimary GO at exactly +2', AN2.judgePrimary(10, 12) === true);
+  vcheck('V judgePrimary NO-GO at +1', AN2.judgePrimary(10, 11) === false);
+  vcheck('V judgePrimary GO from zero control', AN2.judgePrimary(0, 2) === true);
+  vcheck('V judgePrimary NO-GO below bar from zero', AN2.judgePrimary(0, 1) === false);
+  vcheck('V primary bar is +2 (VET_BAR)', AN2.VET_BAR === 2, `VET_BAR=${AN2.VET_BAR}`);
+  vcheck('V judgeJoin GO at 1.5x boundary', AN2.judgeJoin(0.25, 0.375) === true);
+  vcheck('V judgeJoin NO-GO below 1.5x', AN2.judgeJoin(0.25, 0.374) === false);
+  console.log(`\nV: ${vpass} pass, ${vfail} fail`);
+  if (vfail) { console.error('FATAL: villager-veteran metric checks failed'); process.exit(1); }
+
   // C1 det-gate: gate-off byte-identical to tribfloor (2 seeds x 60d).
   async function traj(seed, policy, env) {
     const old = process.env.PRESENCE;
