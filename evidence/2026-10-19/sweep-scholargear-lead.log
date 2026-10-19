@@ -1,0 +1,27 @@
+SWEEP ARM=control (SCHOLARGEAR=unset) seeds=63801,63802,63803,63804,63805,63806,63807,63808 policies=leadfeast days=180
+  ok control/leadfeast/s63801 days=96 end=village-lost wave=4 ierr=0 tooHeavy=375 sgDays=0 wornNew=0 stash=0
+  ok control/leadfeast/s63802 days=104 end=village-lost wave=4 ierr=0 tooHeavy=10 sgDays=0 wornNew=0 stash=0
+  ok control/leadfeast/s63803 days=163 end=village-lost wave=4 ierr=0 tooHeavy=150 sgDays=0 wornNew=0 stash=0
+  ok control/leadfeast/s63804 days=146 end=village-lost wave=4 ierr=0 tooHeavy=0 sgDays=0 wornNew=0 stash=0
+  ok control/leadfeast/s63805 days=74 end=village-lost wave=4 ierr=0 tooHeavy=20 sgDays=0 wornNew=0 stash=0
+  ok control/leadfeast/s63806 days=125 end=village-lost wave=4 ierr=0 tooHeavy=0 sgDays=0 wornNew=0 stash=0
+SWEEP ARM=control (SCHOLARGEAR=unset) seeds=63807,63808 policies=leadfeast days=180
+  ok control/leadfeast/s63807 days=125 end=village-lost wave=4 ierr=0 tooHeavy=1 sgDays=0 wornNew=0 stash=0
+  ok control/leadfeast/s63808 days=80 end=village-lost wave=4 ierr=0 tooHeavy=9 sgDays=0 wornNew=0 stash=0
+SWEEP DONE arms=control bad=0
+SWEEP ARM=armed (SCHOLARGEAR=1) seeds=63801,63802,63803,63804,63805,63806,63807,63808 policies=leadfeast days=180
+  ok armed/leadfeast/s63801 days=111 end=village-lost wave=4 ierr=0 tooHeavy=148 sgDays=110 wornNew=107 stash=5
+  ok armed/leadfeast/s63802 days=64 end=village-lost wave=3 ierr=0 tooHeavy=83 sgDays=63 wornNew=24 stash=3
+  ok armed/leadfeast/s63803 days=80 end=village-lost wave=2 ierr=0 tooHeavy=64 sgDays=79 wornNew=56 stash=3
+  ok armed/leadfeast/s63804 days=76 end=village-lost wave=4 ierr=0 tooHeavy=2 sgDays=75 wornNew=26 stash=3
+SWEEP ARM=armed (SCHOLARGEAR=1) seeds=63801,63802,63803,63804,63805,63806,63807,63808 policies=leadfeast days=180
+  ok armed/leadfeast/s63801 days=85 end=village-lost wave=3 ierr=0 tooHeavy=67 sgDays=84 wornNew=75 stash=4
+  ok armed/leadfeast/s63802 days=62 end=village-lost wave=3 ierr=0 tooHeavy=0 sgDays=60 wornNew=16 stash=2
+  ok armed/leadfeast/s63803 days=119 end=village-lost wave=3 ierr=0 tooHeavy=420 sgDays=118 wornNew=92 stash=2
+  ok armed/leadfeast/s63804 days=81 end=village-lost wave=4 ierr=0 tooHeavy=1 sgDays=80 wornNew=29 stash=2
+  ok armed/leadfeast/s63805 days=107 end=village-lost wave=3 ierr=0 tooHeavy=890 sgDays=106 wornNew=93 stash=2
+  ok armed/leadfeast/s63806 days=93 end=village-lost wave=4 ierr=0 tooHeavy=75 sgDays=92 wornNew=67 stash=2
+  ok armed/leadfeast/s63807 days=104 end=village-lost wave=4 ierr=0 tooHeavy=6 sgDays=103 wornNew=31 stash=2
+  ok armed/leadfeast/s63808 days=145 end=village-lost wave=4 ierr=0 tooHeavy=143 sgDays=144 wornNew=66 stash=2
+SWEEP DONE arms=armed bad=0
+LEAD-ARMED-EXIT=0
