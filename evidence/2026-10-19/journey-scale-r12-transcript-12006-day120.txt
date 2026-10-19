@@ -1,0 +1,26 @@
+=== seed 12006 day 120 — conversation with Boris (boris_kowalski) ===
+occupation=blacksmith temperament=steady trust=46 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Castor Bean — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Burdock — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

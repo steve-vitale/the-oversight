@@ -1,0 +1,30 @@
+=== seed 12007 day 140 — conversation with Sam (gen_8u2kegr) ===
+occupation=arborist temperament=warm trust=91 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Come here — Please — do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, silence, party_name)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "It's been too long since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I could talk all day, but — go on. We'll talk more."
+(want=ask_favor stage=1)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=unresolved
+!! VERBATIM REPEATS: "I just said — did you miss it?" || "I just told you — what else is on your mind?"

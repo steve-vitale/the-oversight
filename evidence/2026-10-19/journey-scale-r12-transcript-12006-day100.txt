@@ -1,0 +1,32 @@
+=== seed 12006 day 100 — conversation with Tashi (tashi_sherpa) ===
+occupation=arborist temperament=steady trust=28 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your plan here — So what's your plan here? Just... get through it? Simple as that."
+(turn0 choices: ans:q_plan:a_survive, ans:q_plan:a_lead, ans:q_plan:a_find, ans:q_plan:a_quiet, deflect_q, leave, silence)
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Mine's simple: learn one useful thing a week. This week it's making do. A plan's just a direction you argue with."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "The Blood Tithe. They just... took Stan. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 12010 day 140 — conversation with Nathan (nathan_lee) ===
+occupation=HVAC tech temperament=cautious trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what got you through the first week — What got you through the first week? The very first days."
+(turn0 choices: ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Practical view: Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "…Spite, mostly. Pure, clean spite at the sky. Then someone shared food with me and the spite turned into something else. I still don't have a word for the something else."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "The Pit. They just... took Chloe. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I sit apart to eat. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+closing line: "I should get back. Stay sharp out there."
+want final: id=curious stage=3 resolution=engaged

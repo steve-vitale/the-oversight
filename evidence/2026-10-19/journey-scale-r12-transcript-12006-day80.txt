@@ -1,0 +1,32 @@
+=== seed 12006 day 80 — conversation with Luke (gen_3lnfjya) ===
+occupation=carpenter temperament=stoic trust=90 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About how this changed you — Has this changed you? Like, fundamentally?"
+(turn0 choices: ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "The old you got you here. The new you keeps you here. Both count. You'll see."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "I used to be a carpenter who worried about being on time. Now I worry about being alive. Same worry, bigger font. So yes — and also no."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Riddle Me This. They just... took Mateo. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I clean up other people's messes quietly. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same as always: we endure."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+closing line: "Alright. Back to it."
+want final: id=curious stage=3 resolution=engaged

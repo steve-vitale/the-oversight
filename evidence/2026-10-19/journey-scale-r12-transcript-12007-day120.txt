@@ -1,0 +1,32 @@
+=== seed 12007 day 120 — conversation with Sam (gen_8u2kegr) ===
+occupation=arborist temperament=warm trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Sam sits down near you. "Just... talk. Like people used to."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, silence, party_name)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. How are you holding up, though?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "Have you heard what they're calling Dustboar? Sam is pushing 'The Loud Beast'. Everyone's got a name for it and nobody agrees."
+(want=ask_favor stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. Simple as that."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "Names are for when it's dead or known. Right now it's neither, so I write everything down instead."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "We'll land on something. We always do — usually the loudest person's idea."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "My vote? I'm keeping it to myself until the shouting stops."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=0)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=ask_favor stage=3 resolution=unestablished

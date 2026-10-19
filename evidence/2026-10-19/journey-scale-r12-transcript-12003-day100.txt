@@ -1,0 +1,32 @@
+=== seed 12003 day 100 — conversation with Ricardo (gen_o9k52vc) ===
+occupation=Social worker temperament=gentle trust=91 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I'm feverish, a cut gone hot and angry. Will you help me?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence, confront:d_v1opj0f)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. Don't waste it."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "The cut's gone hot and it's spreading — I can feel it moving. Clean it out, wrap it tight, please. Before it turns."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Javier and Omar this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Omar said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody says Omar's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I check the treeline every hour for Omar, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=promised

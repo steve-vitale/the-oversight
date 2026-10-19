@@ -1,0 +1,23 @@
+=== seed 12005 day 100 — conversation with Hilda (gen_xus2yhv) ===
+occupation=postal worker temperament=withdrawn trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "Still nothing on Eric. I told you about the pods -- I keep thinking about them. The humming. Some nights I'm sure it's a dream. Other nights I'm sure it's not."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Chickweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [goon] "Yeah?"
+THEM: "Alright — I should get back to it."
+(want=seek_taken stage=3)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=promised

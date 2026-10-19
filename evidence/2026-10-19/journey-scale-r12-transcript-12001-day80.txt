@@ -1,0 +1,32 @@
+=== seed 12001 day 80 — conversation with Everett (gen_s9bfc5s) ===
+occupation=Rancher temperament=anxious trust=88 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the kindest thing someone's done for you — What's the kindest thing someone's done for you out here?"
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Sunbasker — Its scales go from dull brown to molten gold. It hunts by day — watch the open ground."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "White Noise — The heron is gone. Dawn and dusk, that's when it's out."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged
