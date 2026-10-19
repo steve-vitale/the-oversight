@@ -1,0 +1,15 @@
+=== seed 13001 day 100 — conversation with Arlo (gen_u0gkqc1) ===
+occupation=dockworker temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+(turn0 choices: alive:event:realm, alive:want:ask_favor, dlg:help, dlg:cant, confront:d_i7ui02a, recap, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "No, really, it's fine. Forget I even asked."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "Can't right now."
+THEM: "Oh — no, it's fine. Already handled. But thanks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Alright. Think about what I said. I'll be thinking about what you said."
+want final: id=ask_favor stage=3 resolution=deflected

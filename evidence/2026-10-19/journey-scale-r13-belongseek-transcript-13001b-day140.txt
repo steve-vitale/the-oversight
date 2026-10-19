@@ -1,0 +1,12 @@
+=== seed 13001 day 140 — conversation with Arlo (gen_u0gkqc1) ===
+occupation=dockworker temperament=cautious trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the kindest thing someone's done for you — What's the kindest thing someone's done for you out here?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Careful out there. I mean it."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 13001 day 120 — conversation with Arlo (gen_u0gkqc1) ===
+occupation=dockworker temperament=cautious trust=90 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: Back before, I was nobody special. This is my chance to be someone who matters.
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "Okay — here's one small useful thing I know. Watch."
+THEM: They watch, intent, then try it themselves. "Huh. That actually works." A grin — student and teacher trade places for a minute.
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Back home I was invisible. Here, someone might actually see me. I need that to be true."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "It's not about them believing in me. It's about me believing it first."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "Just... if you see me do something well, say so. I know how that sounds. I don't care."
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Doubt me all you want. I'm used to it. It's fuel."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "Back home nobody noticed me. Here — here I could be someone. I need that to be true."
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "I should go. Before I overthink this conversation too."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

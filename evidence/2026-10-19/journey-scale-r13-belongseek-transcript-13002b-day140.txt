@@ -1,0 +1,30 @@
+=== seed 13002 day 140 — conversation with Mia (mia_andersson) ===
+occupation=community gardener temperament=warm trust=1 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I still haven't found anyone. Any chance?"
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:commit, alive:event:mourning, dlg:cant, teach, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Nikos died... I keep expecting to see Nikos at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I check everyone's shoes for wear. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Nikos's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=promised
