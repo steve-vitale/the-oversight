@@ -1,3 +1,12 @@
+Settings Done regression (2026-10-19): run
+`evidence/2026-10-19/release-settings-phone-replay-r1.js` through the existing
+`run-release-contact2-browser-r1.cjs` runner at both736/844 heights on a
+disposable loopback origin. It covers title Settings before an expedition,
+Done/reopen with persisted audio, and in-game pad change/Done/return to board
+without time or kcal use. The ordinary field replay alone did not cover title
+Settings; mocks must include the absent-expedition boundary. See
+`evidence/2026-10-19/release-settings-audit-r1.md`.
+
 # Mobile playtesting before release
 
 Earned gear/cart route (2026-10-19): release-gear-phone-replay-r1.js imports

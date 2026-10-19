@@ -1,0 +1,14 @@
+async page => {
+ const height=page.viewportSize().height,base=new URL(page.url()).origin,trace=[],errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ async function tap(selector){await page.locator(selector).first().tap();await page.waitForTimeout(200)}
+ async function snap(label){const row=await page.evaluate(label=>({label,overlay:!!document.getElementById('settings-overlay'),doneWired:!!document.getElementById('set-done')?.onclick,padDisabled:document.getElementById('set-dpad-side')?.disabled,scroll:[scrollX,scrollY,document.documentElement.scrollHeight],state:Scattering.Game.state?{ticks:Scattering.Game.state.scholar.dayTicks,kcal:Scattering.Game.state.scholar.kcal,side:Scattering.Game.dpadSide()}:null}),label);trace.push(row);if(row.state&&(row.scroll[0]||row.scroll[1]||row.scroll[2]>height+1))throw Error('Outer phone scroll');return row}
+ await page.reload();await page.waitForLoadState('networkidle');await tap('#b-settings');const title=await snap('Title Settings');if(!title.doneWired||!title.padDisabled)throw Error('Title settings not initialized');
+ await page.locator('#set-vol').fill('40');await tap('#set-done');if((await snap('Title Done')).overlay)throw Error('Title Done did not close');
+ await tap('#b-settings');if(await page.locator('#set-vol').inputValue()!=='40')throw Error('Volume did not persist');await tap('#set-done');
+ const key=await page.evaluate(async()=>{const f=await(await fetch('/evidence/2026-10-19/release-gear-craft-fixture-r2.json')).json();for(const[k,v]of Object.entries(f.storage))localStorage.setItem(k,v);return Object.keys(f.storage).find(k=>k.startsWith('scattering-save-v1-'))});
+ await page.goto(base);await page.waitForLoadState('networkidle');await tap('[data-load="'+key+'"]');await tap('[data-field-panel="menu"]');await tap('[data-lm="settings"]');const before=await snap('Expedition Settings');if(!before.doneWired||before.padDisabled)throw Error('Expedition controls unavailable');
+ await page.locator('#set-dpad-side').selectOption('left');await tap('#set-done');const after=await snap('Expedition Done after changing pad');if(after.overlay||after.state.side!=='left'||after.state.ticks!==before.state.ticks||after.state.kcal!==before.state.kcal)throw Error('Close changed time or lost setting');
+ await tap('[data-lm="settings"]');if(await page.locator('#set-dpad-side').inputValue()!=='left')throw Error('Pad side did not persist');await tap('#set-done');await tap('[data-field-close]');const board=await snap('Returned to playable board');if(board.overlay||!await page.locator('.ord-dpad').isVisible())throw Error('Board not usable');
+ if(errors.length)throw Error(JSON.stringify(errors));return{height,trace,errors,networkFailures:[],scope:'Real title and prepared expedition; native touch Done; settings persist without time/resource use'};
+}

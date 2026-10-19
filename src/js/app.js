@@ -15509,8 +15509,15 @@
       + `<p class="small" style="opacity:.45;text-align:center;margin:16px 12px 0">build ${esc(window.BUILD_VERSION || 'dev')}</p>`
       + `</div>`;
     document.body.appendChild(ov);
+    // Closing must be wired before any optional control is initialized.
+    ov.addEventListener('click', (e) => { if (e.target === ov) closeSettings(); });
+    document.getElementById('set-done').onclick = () => { closeSettings(); Game.uiBlip(); };
     const padSide = document.getElementById('set-dpad-side');
-    padSide.value = Game.dpadSide();
+    // Pad placement belongs to the current expedition, which does not exist
+    // on the title screen. Audio/voice settings remain available there.
+    padSide.disabled = !Game.state;
+    padSide.value = Game.state ? Game.dpadSide() : 'right';
+    if (!Game.state) padSide.title = 'Available during an expedition';
     padSide.onchange = (e) => { Game.setDpadSide(e.target.value); refresh(); };
     const paint = () => {
       const m = !!(Game.audio && Game.audio.isMuted && Game.audio.isMuted());
@@ -15529,8 +15536,6 @@
       };
       paintBus('set-vol-sfx', 'sfx'); paintBus('set-vol-music', 'music'); paintBus('set-vol-voice', 'voice');
     };
-    ov.addEventListener('click', (e) => { if (e.target === ov) closeSettings(); });
-    document.getElementById('set-done').onclick = () => { try { Game.uiBlip(); } catch (e) {} closeSettings(); };
     const slider = document.getElementById('set-vol');
     if (slider) slider.oninput = () => {
       try {

@@ -106,6 +106,7 @@ const busCalls = [];
 let dlCalls = 0;
 let padSide = 'right', refreshes = 0;
 const fakeGame = {
+  state: { settings: {} },
   dpadSide: () => padSide,
   setDpadSide: side => { padSide = side; },
   audio: {
@@ -174,6 +175,15 @@ vm.runInContext(fns + '\nopenSettings();', ctx);
   // Static: mute row relabeled, download wiring present in source.
   ok(SRC.includes('>Mute all<'), 'mute toggle relabeled "Mute all" (was ambiguous "Sound")');
   ok(SRC.includes("id=\"set-dlrow\""), 'download row id present');
+
+  // The real title screen has no expedition. Its settings must still finish
+  // wiring; a stub that always returns a side previously hid this failure.
+  fakeGame.state = null;
+  fakeGame.dpadSide = () => { throw new Error('No expedition'); };
+  vm.runInContext('openSettings();', ctx);
+  ok(byId('set-dpad-side').disabled === true, 'title disables expedition-only pad placement');
+  ok(typeof byId('set-done').onclick === 'function', 'title Settings wires Done without a running expedition');
+  ok(typeof byId('set-vol').oninput === 'function', 'title Settings still wires audio controls');
 
   console.log(`\n==== FINAL: ${pass} passed, ${fail} failed ====`);
   process.exit(fail ? 1 : 0);
