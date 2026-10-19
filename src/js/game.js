@@ -4497,6 +4497,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return { ok: true, goal };
       }
       if (topic === 'gossip') {
+        // GOSSIP WALK-DOWN (journey landing r28 2026-10-19): the r28 gossip
+        // thread path lets the player ask "tell me more" repeatedly — the
+        // salience-first picks below always served heard[heard.length-1], so
+        // the SAME rumor re-rendered (transcript-verified: Rafael d11 heard
+        // "Victor just walked away from Haven" three times in one sitting).
+        // opts.skipSigs carries per-conversation served gossip signatures
+        // (from convoGossipBeat); picks walk back to the freshest UNSERVED
+        // item, and the pool honestly dries out (idle admission) when
+        // everything's been said — pools never repeat.
+        const skipSigs = (opts && opts.skipSigs) || [];
+        const gossipSig = (g) => 'gossip:' + (g.action || '') + '|' +
+          (((g.dims) || {}).who || '') + '|' + (g.partKey || ('d' + (g.day || 0)));
+        const freshGossip = (arr) => {
+          for (let i = arr.length - 1; i >= 0; i--)
+            if (skipSigs.indexOf(gossipSig(arr[i])) === -1) return arr[i];
+          return null;
+        };
         // PEOPLE TALK ABOUT EACH OTHER: before the generic gossip, NPCs share
         // what they know about specific villagers — and sometimes what they
         // say contradicts a lie. (npcGossipAbout lives in truth.js; guarded.)
@@ -4520,7 +4537,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               const gg = this.npcGossipAbout(vid, target);
               if (gg && gg.line) {
                 this.say(`${first} lowers their voice. ${gg.line}`);
-                return { ok: true, gossipAbout: target };
+                return { ok: true, gossipAbout: target, gossipSig: 'about:' + target };
               }
             }
           }
@@ -4532,6 +4549,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           id !== vid && id !== this.villagerId && this.npcDark(id));
         if (darkIds.length && Math.random() < 0.45) {
           const did = darkIds[Math.floor(Math.random() * darkIds.length)];
+          if (skipSigs.indexOf('dark:' + did) === -1) {
           const dk = this.npcDark(did);
           const dname = this.displayName(did);
           let line;
@@ -4571,7 +4589,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 ? `People are uneasy about them. Nobody can say why, exactly.`
                 : `Someone warned me about them. Quietly. Like it cost them to say it.`);
           } catch (e) {}
-          return { ok: true, darkGossip: true };
+          return { ok: true, darkGossip: true, darkId: did, gossipSig: 'dark:' + did };
+          } // else: this dark rumor was already served this conversation — fall through (walk-down)
         }
         const heard = (this.state.village.gossip || []).filter(g => (g.heard || []).includes(vid));
         if (!heard.length) {
@@ -4587,13 +4606,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const isNeg = (g) => !isWho(g) && Object.entries(g.dims || {}).some(([k, val]) => typeof val === 'number' && val < -3);
         const negHeard = heard.filter(isNeg);
         if (negHeard.length) {
-          const g = negHeard[negHeard.length - 1];
+          const g = freshGossip(negHeard); // walk-down: don't re-serve the same scandal
+          if (g) {
           this.say(`${first} lowers their voice. "People are saying things. About you. ...I'd watch how you act around the fire."`);
-          return { ok: true, gossip: g };
+          return { ok: true, gossip: g, gossipSig: gossipSig(g) };
+          }
         }
         const aboutOther = heard.filter(isWho);
         if (aboutOther.length) {
-          const g = aboutOther[aboutOther.length - 1];
+          const g = freshGossip(aboutOther); // walk-down: next unsaid rumor, not the same one
+          if (g) {
           // r16: a gossip entry about the player's televised win names them
           // "You" — displayName('player') would give a stranger descriptor.
           const wname = g.dims.who === 'player' ? 'You' : this.displayName(g.dims.who);
@@ -4658,7 +4680,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               : g.action === 'contest_died' ? `Died in ${((g.dims || {}).contest) || 'a contest'}.`
               : `There's talk about them going around the fire.`);
           } catch (e2) {}
-          return { ok: true, gossip: g, aboutOther: g.dims.who };
+          return { ok: true, gossip: g, aboutOther: g.dims.who, gossipSig: gossipSig(g) };
+          } // else: all rumors about others already said this conversation — fall through
         }
         // share the freshest remaining gossip, with their distortion.
         // HONEST RENDERING (journey deepening 2026-10-11): this branch used
@@ -4667,7 +4690,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // Render the actual gossip: the strongest positive dim, exaggerated
         // as the story travels (distortion >= 2 = third retelling and beyond,
         // per the seedGossip contract: "she's giving away all the supplies").
-        const g = heard[heard.length - 1];
+        const g = freshGossip(heard);
+        if (!g) { // walk-down: every gossip this villager has heard was already said — honestly dry
+          const idle = [`"Quiet lately. Too quiet, maybe."`, `"Nothing new. Which is new, if you think about it."`, `"People are keeping to themselves."`];
+          this.say(`${first}: ${idle[Math.floor(Math.random() * idle.length)]}`);
+          return { ok: true, none: true };
+        }
         const gdims = (g && g.dims) || {};
         const dimKeys = ['generous', 'brave', 'honest', 'competent', 'trustworthy'];
         let gTop = null, gTopV = 0;
@@ -4693,7 +4721,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const gLine = gTop ? (gDist >= 2 ? gBig[gTop] : gPlain[gTop])
           : `"Word is you're doing right by people. Keep it up."`;
         this.say(`${first}: ${gLine}`);
-        return { ok: true, gossip: g };
+        return { ok: true, gossip: g, gossipSig: gossipSig(g) };
       }
       if (topic === 'village') {
         const vg = this.state.village;

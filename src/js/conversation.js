@@ -3143,11 +3143,15 @@
 
     // convoGossipBeat: one gossip beat from the gossip engine, captured
     // into a speakable line. Shared by the ask:gossip topic and by thread
-    // resumptions/follow-ups (convoThreadBeat). Returns the raw line (may be
-    // '' when the engine said nothing); the caller voices. The gossip engine
-    // always speaks at least its honest dry admission ("Quiet lately. Too
-    // quiet, maybe."), so a resume beat is never a lie.
-    convoGossipBeat(vid) {
+    // resumptions/follow-ups (convoThreadBeat). Returns { line, sig } — the
+    // raw line (may be '' when the engine said nothing; the caller voices)
+    // and the gossip entry signature (null when the engine honestly declined
+    // or the beat wasn't an entry). Callers record sigs on the conversation
+    // and pass them back as skipSigs so a repeated "tell me more" walks the
+    // pool (walk-down, landing r28) instead of re-serving the same rumor.
+    // The gossip engine always speaks at least its honest dry admission
+    // ("Quiet lately. Too quiet, maybe."), so a resume beat is never a lie.
+    convoGossipBeat(vid, skipSigs) {
       // THE SOCIALITE'S VERB: "heard anything about anyone?" The gossip
       // engine lives in askAbout (game.js) and says its beats directly —
       // capture them so the conversation flow can display the line.
@@ -3155,7 +3159,8 @@
       const said = [];
       const origSay = this.say;
       this.say = (t) => { said.push(String(t)); };
-      try { this.askAbout(vid, 'gossip', { inConvo: true }); } catch (e) {}
+      let res = null;
+      try { res = this.askAbout(vid, 'gossip', { inConvo: true, skipSigs: skipSigs || [] }); } catch (e) {}
       this.say = origSay;
       // QUOTE HYGIENE (fix 2026-10-07): askAbout formats beats as
       // `Name: "line"` (or `Name lowers their voice. "..."`) for the
@@ -3180,7 +3185,7 @@
                      .replace(new RegExp('^' + nm + '\\s+lowers their voice\\.\\s*'), '');
         }
       } catch (e) { line = said.join(' '); }
-      return line;
+      return { line, sig: (res && res.gossipSig) || null };
     },
 
     convoThreadBeat(vid) {
@@ -3220,8 +3225,16 @@
       // (transcript-verified r27, Christian d34). The engine honestly
       // declines when the pool is dry ("Quiet lately. Too quiet, maybe."),
       // so the beat is content, never a lie.
+      // WALK-DOWN (landing r28 2026-10-19): the salience-first engine
+      // re-served the same rumor on every follow-up (Rafael d11: "Victor
+      // just walked away from Haven" three times in one sitting). Served
+      // sigs accumulate on the conversation and pass back as skipSigs, so
+      // "tell me more" walks older gossip instead of repeating.
       else if (t === 'gossip') {
-        l = this.voiceLine(vid, this.convoGossipBeat(vid)) || null;
+        const skip = c.gossipServedSigs || [];
+        const beat = this.convoGossipBeat(vid, skip) || {};
+        if (beat.sig) c.gossipServedSigs = skip.concat([beat.sig]);
+        l = this.voiceLine(vid, beat.line) || null;
       }
       // TOPIC PACK (Steve 2026-10-06): generated topic beats.
       else if (this.topic2Has && this.topic2Has(t)) l = this.topic2Beat(vid);
@@ -3385,10 +3398,12 @@
         // THE SOCIALITE'S VERB: "heard anything about anyone?" The gossip
         // engine lives in askAbout (game.js); convoGossipBeat captures its
         // beats into a speakable line. (askedTopics already gates this to
-        // once per conversation.)
-        const line = this.convoGossipBeat(vid);
+        // once per conversation.) Record the served sig so follow-up
+        // "tell me more" walks the pool instead of repeating (walk-down).
+        const beat = this.convoGossipBeat(vid) || {};
+        if (beat.sig) c.gossipServedSigs = (c.gossipServedSigs || []).concat([beat.sig]);
         c.thread = 'gossip'; c.depth = 1;
-        return this.voiceLine(vid, line) || exh();
+        return this.voiceLine(vid, beat.line) || exh();
       }
       if (topic === 'spread_rumor') {
         // THE DRAMA VERB: start a rumor about someone. Two-step: pick target, then rumor type.
@@ -4653,6 +4668,13 @@
       // per-sitting ledgers, or the cycle never restarts and the old cap
       // logic collapses to verbatim.
       c.selfRepeatLines = 0;
+      // GOSSIP WALK-DOWN (landing r28 2026-10-19): the served-gossip sigs are
+      // PER-SITTING, like saidLinesConvo — a resumed gossip thread in a new
+      // sitting honestly re-delivers its headline gossip (the r28 resume
+      // intent); within one sitting, "tell me more" walks the pool instead
+      // of repeating. Reset here so a resume doesn't inherit the last
+      // sitting's served list and dry out on arrival.
+      c.gossipServedSigs = [];
       // DRY STREAK (journey-social r18 2026-10-16): fresh sitting, fresh
       // dry count — a previous conversation's dry spell must not cut the
       // new one short.

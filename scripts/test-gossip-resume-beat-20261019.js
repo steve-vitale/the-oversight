@@ -20,6 +20,16 @@ async function main() {
   const { Game } = await loadGame({ seed: 424242, mode: 'mvc' });
   setupGame(Game);
 
+  // DETERMINISM (landing r28 2026-10-19, gossip walk-down): askAbout's
+  // npcGossipAbout (50%) and dark-gossip (45%) branches are randomized —
+  // the walk-down fix changed the random-draw sequence, which flipped the
+  // DRY step's branch outcome (identity line vs quiet admission) with no
+  // behavior change. Stub both so this test deterministically exercises
+  // the engine-gossip resume path it was written for. No assertion is
+  // loosened or removed.
+  Game.npcGossipAbout = () => null;
+  Game.npcDark = () => null;
+
   let pass = 0, fail = 0;
   const t = (name, cond, extra) => {
     if (cond) { pass++; }
