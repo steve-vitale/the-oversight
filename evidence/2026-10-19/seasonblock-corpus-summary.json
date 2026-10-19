@@ -1,0 +1,1439 @@
+{
+ "seeds": [
+  64201,
+  64202,
+  64203,
+  64204,
+  64205,
+  64206,
+  64207,
+  64208
+ ],
+ "stalls": {
+  "64201": {
+   "policy": "belongfeast",
+   "gameDays": 86,
+   "endReason": "village-lost",
+   "def5ever": null,
+   "dipEver": false,
+   "successions": [
+    {
+     "day": 20,
+     "from": "?",
+     "to": "gen_3lb6qfr"
+    },
+    {
+     "day": 26,
+     "from": "gen_3lb6qfr",
+     "to": "diana_osei"
+    },
+    {
+     "day": 45,
+     "from": "diana_osei",
+     "to": "gen_l9eoos7"
+    },
+    {
+     "day": 47,
+     "from": "gen_l9eoos7",
+     "to": "gen_bzd3gb7"
+    },
+    {
+     "day": 48,
+     "from": "gen_bzd3gb7",
+     "to": "ines_duarte"
+    },
+    {
+     "day": 50,
+     "from": "ines_duarte",
+     "to": "carlos_diaz"
+    },
+    {
+     "day": 59,
+     "from": "carlos_diaz",
+     "to": "sigrun_eiriksdottir"
+    },
+    {
+     "day": 67,
+     "from": "sigrun_eiriksdottir",
+     "to": "yara_haddad"
+    },
+    {
+     "day": 86,
+     "from": "yara_haddad",
+     "to": "meera_reddy"
+    }
+   ],
+   "timeline": [
+    {
+     "id": "link_mgpsphp5909",
+     "prim": "village_0",
+     "formedDay": 20,
+     "brokenDay": 55,
+     "endTrust": 70,
+     "breakHow": "Link broken (walked).",
+     "resetName": "age-reset by v3 re-court",
+     "recourt": {
+      "day": 57,
+      "prim": "village_2",
+      "lag": 2
+     },
+     "agedDays": 5,
+     "maxAge": 34,
+     "grantedDay": null,
+     "legShare": {
+      "polity<4fires": 5
+     },
+     "legs": [
+      {
+       "day": 50,
+       "leg": "polity<4fires",
+       "trust": 66,
+       "arrears": 0,
+       "fires": 2,
+       "age": 30
+      },
+      {
+       "day": 51,
+       "leg": "polity<4fires",
+       "trust": 66,
+       "arrears": 0,
+       "fires": 2,
+       "age": 31
+      },
+      {
+       "day": 52,
+       "leg": "polity<4fires",
+       "trust": 66,
+       "arrears": 0,
+       "fires": 2,
+       "age": 32
+      },
+      {
+       "day": 53,
+       "leg": "polity<4fires",
+       "trust": 66,
+       "arrears": 0,
+       "fires": 2,
+       "age": 33
+      },
+      {
+       "day": 54,
+       "leg": "polity<4fires",
+       "trust": 70,
+       "arrears": 0,
+       "fires": 2,
+       "age": 34
+      }
+     ],
+     "succOnLife": [
+      20,
+      26,
+      45,
+      47,
+      48,
+      50
+     ]
+    },
+    {
+     "id": "link_mgpspib5159",
+     "prim": "village_2",
+     "formedDay": 57,
+     "brokenDay": null,
+     "endTrust": 15,
+     "breakHow": null,
+     "resetName": "no-break (run end or active)",
+     "recourt": null,
+     "agedDays": 0,
+     "maxAge": 29,
+     "grantedDay": null,
+     "legShare": {},
+     "legs": [],
+     "succOnLife": [
+      59,
+      67,
+      86
+     ]
+    }
+   ],
+   "verdict": {
+    "verdict": "per-bond blockers named",
+    "blocker": "village_0:polity<4fires → village_2:age-reset by v3 re-court (re-court product of the d55 walk; reached age 29 before death)",
+    "bondBlockers": [
+     {
+      "prim": "village_0",
+      "formedDay": 20,
+      "brokenDay": 55,
+      "blocker": "polity<4fires",
+      "legShare": {
+       "polity<4fires": 5
+      },
+      "recourt": {
+       "day": 57,
+       "prim": "village_2",
+       "lag": 2
+      }
+     },
+     {
+      "prim": "village_2",
+      "formedDay": 57,
+      "brokenDay": null,
+      "blocker": "age-reset by v3 re-court (re-court product of the d55 walk; reached age 29 before death)",
+      "recourt": null
+     }
+    ],
+    "unexplainedDays": 0
+   },
+   "beats": [
+    {
+     "day": 25,
+     "tag": "bond-is-young",
+     "bondAge": 5,
+     "bondPrim": "village_0",
+     "bondTrust": 56,
+     "text": "With Haven grieving, Emberhold installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict"
+    },
+    {
+     "day": 32,
+     "tag": "speaker-install",
+     "bondAge": 12,
+     "bondPrim": "village_0",
+     "bondTrust": 65,
+     "text": "Seven days of silence, and the silence answered for Haven. Emberhold's new speaker reads it plainly. (Trust -6.) Emberhold installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief becam"
+    },
+    {
+     "day": 45,
+     "tag": "speaker-install",
+     "bondAge": 25,
+     "bondPrim": "village_0",
+     "bondTrust": 62,
+     "text": "With Haven grieving, Emberhold installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+    },
+    {
+     "day": 59,
+     "tag": "bond-is-young",
+     "bondAge": 2,
+     "bondPrim": "village_2",
+     "bondTrust": 25,
+     "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdic"
+    },
+    {
+     "day": 66,
+     "tag": "speaker-install",
+     "bondAge": 9,
+     "bondPrim": "village_2",
+     "bondTrust": 30,
+     "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief bec"
+    },
+    {
+     "day": 67,
+     "tag": "bond-is-young",
+     "bondAge": 10,
+     "bondPrim": "village_2",
+     "bondTrust": 16,
+     "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdic"
+    },
+    {
+     "day": 74,
+     "tag": "speaker-install",
+     "bondAge": 17,
+     "bondPrim": "village_2",
+     "bondTrust": 17,
+     "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 11,250 kcal/week. Grief be"
+    },
+    {
+     "day": 86,
+     "tag": "speaker-install",
+     "bondAge": 29,
+     "bondPrim": "village_2",
+     "bondTrust": 15,
+     "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The lin"
+    }
+   ],
+   "beatsYoungCount": 3,
+   "beatsOlderThan21": []
+  },
+  "64202": {
+   "policy": "belongfeast",
+   "gameDays": 83,
+   "endReason": "village-lost",
+   "def5ever": null,
+   "dipEver": false,
+   "successions": [
+    {
+     "day": 20,
+     "from": "?",
+     "to": "gen_vuxvyjq"
+    },
+    {
+     "day": 50,
+     "from": "gen_vuxvyjq",
+     "to": "hannah_kim"
+    }
+   ],
+   "timeline": [
+    {
+     "id": "link_mgpsphrs583",
+     "prim": "village_2",
+     "formedDay": 20,
+     "brokenDay": 55,
+     "endTrust": 64,
+     "breakHow": "Link broken (walked).",
+     "resetName": "age-reset by v3 re-court",
+     "recourt": {
+      "day": 66,
+      "prim": "village_0",
+      "lag": 11
+     },
+     "agedDays": 5,
+     "maxAge": 34,
+     "grantedDay": null,
+     "legShare": {
+      "polity<4fires": 5
+     },
+     "legs": [
+      {
+       "day": 50,
+       "leg": "polity<4fires",
+       "trust": 64,
+       "arrears": 0,
+       "fires": 2,
+       "age": 30
+      },
+      {
+       "day": 51,
+       "leg": "polity<4fires",
+       "trust": 64,
+       "arrears": 0,
+       "fires": 2,
+       "age": 31
+      },
+      {
+       "day": 52,
+       "leg": "polity<4fires",
+       "trust": 64,
+       "arrears": 0,
+       "fires": 2,
+       "age": 32
+      },
+      {
+       "day": 53,
+       "leg": "polity<4fires",
+       "trust": 64,
+       "arrears": 0,
+       "fires": 2,
+       "age": 33
+      },
+      {
+       "day": 54,
+       "leg": "polity<4fires",
+       "trust": 64,
+       "arrears": 0,
+       "fires": 2,
+       "age": 34
+      }
+     ],
+     "succOnLife": [
+      20,
+      50
+     ]
+    },
+    {
+     "id": "link_mgpspibf83",
+     "prim": "village_0",
+     "formedDay": 66,
+     "brokenDay": null,
+     "endTrust": 68,
+     "breakHow": null,
+     "resetName": "no-break (run end or active)",
+     "recourt": null,
+     "agedDays": 0,
+     "maxAge": 17,
+     "grantedDay": null,
+     "legShare": {},
+     "legs": [],
+     "succOnLife": []
+    }
+   ],
+   "verdict": {
+    "verdict": "per-bond blockers named",
+    "blocker": "village_2:polity<4fires → village_0:age-reset by v3 re-court (re-court product of the d55 walk; reached age 17 before death)",
+    "bondBlockers": [
+     {
+      "prim": "village_2",
+      "formedDay": 20,
+      "brokenDay": 55,
+      "blocker": "polity<4fires",
+      "legShare": {
+       "polity<4fires": 5
+      },
+      "recourt": {
+       "day": 66,
+       "prim": "village_0",
+       "lag": 11
+      }
+     },
+     {
+      "prim": "village_0",
+      "formedDay": 66,
+      "brokenDay": null,
+      "blocker": "age-reset by v3 re-court (re-court product of the d55 walk; reached age 17 before death)",
+      "recourt": null
+     }
+    ],
+    "unexplainedDays": 0
+   },
+   "beats": [
+    {
+     "day": 50,
+     "tag": "speaker-install",
+     "bondAge": 30,
+     "bondPrim": "village_2",
+     "bondTrust": 64,
+     "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 7,500 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+    },
+    {
+     "day": 80,
+     "tag": "oath-summons",
+     "bondAge": 14,
+     "bondPrim": "village_0",
+     "bondTrust": 56,
+     "text": "📯 Emberhold's court summons Haven's speaker. SWEAR the oath of the realm (a gift seals it), SERVE at their court (seven days of your speaker's life), or WALK — break the link and stay a free fire, refusing the scale its"
+    }
+   ],
+   "beatsYoungCount": 0,
+   "beatsOlderThan21": []
+  },
+  "64207": {
+   "policy": "belongfeast",
+   "gameDays": 150,
+   "endReason": "village-lost",
+   "def5ever": null,
+   "dipEver": true,
+   "successions": [
+    {
+     "day": 20,
+     "from": "?",
+     "to": "gen_ublv6lc"
+    },
+    {
+     "day": 69,
+     "from": "gen_ublv6lc",
+     "to": "gen_608g3f7"
+    },
+    {
+     "day": 91,
+     "from": "gen_608g3f7",
+     "to": "gen_evh5t91"
+    },
+    {
+     "day": 92,
+     "from": "gen_evh5t91",
+     "to": "gen_3dg4klb"
+    },
+    {
+     "day": 99,
+     "from": "gen_3dg4klb",
+     "to": "jovan_milic"
+    },
+    {
+     "day": 101,
+     "from": "jovan_milic",
+     "to": "jorge_silva"
+    },
+    {
+     "day": 125,
+     "from": "jorge_silva",
+     "to": "katarina_novak"
+    },
+    {
+     "day": 132,
+     "from": "katarina_novak",
+     "to": "zoltan_nagy"
+    },
+    {
+     "day": 134,
+     "from": "zoltan_nagy",
+     "to": "chantal_mukendi"
+    },
+    {
+     "day": 137,
+     "from": "chantal_mukendi",
+     "to": "elijah_scott"
+    },
+    {
+     "day": 149,
+     "from": "elijah_scott",
+     "to": "gen_lznvlrx"
+    }
+   ],
+   "timeline": [
+    {
+     "id": "link_mgpsphps199",
+     "prim": "village_1",
+     "formedDay": 20,
+     "brokenDay": 57,
+     "endTrust": 100,
+     "breakHow": "Link broken (walked).",
+     "resetName": "age-reset by v3 re-court",
+     "recourt": {
+      "day": 57,
+      "prim": "village_2",
+      "lag": 0
+     },
+     "agedDays": 7,
+     "maxAge": 36,
+     "grantedDay": null,
+     "legShare": {
+      "polity<4fires": 7
+     },
+     "legs": [
+      {
+       "day": 50,
+       "leg": "polity<4fires",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 2,
+       "age": 30
+      },
+      {
+       "day": 51,
+       "leg": "polity<4fires",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 2,
+       "age": 31
+      },
+      {
+       "day": 52,
+       "leg": "polity<4fires",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 2,
+       "age": 32
+      },
+      {
+       "day": 53,
+       "leg": "polity<4fires",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 2,
+       "age": 33
+      },
+      {
+       "day": 54,
+       "leg": "polity<4fires",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 2,
+       "age": 34
+      },
+      {
+       "day": 55,
+       "leg": "polity<4fires",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 2,
+       "age": 35
+      },
+      {
+       "day": 56,
+       "leg": "polity<4fires",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 2,
+       "age": 36
+      }
+     ],
+     "succOnLife": [
+      20
+     ]
+    },
+    {
+     "id": "link_mgpspi63435",
+     "prim": "village_2",
+     "formedDay": 57,
+     "brokenDay": 149,
+     "endTrust": 0,
+     "breakHow": "Link broken (succession).",
+     "resetName": "age-reset by succession",
+     "recourt": null,
+     "agedDays": 62,
+     "maxAge": 91,
+     "grantedDay": 87,
+     "legShare": {
+      "granted": 26,
+      "arrears": 17,
+      "trust<40": 19
+     },
+     "legs": [
+      {
+       "day": 87,
+       "leg": "granted",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 4,
+       "age": 30
+      },
+      {
+       "day": 88,
+       "leg": "granted",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 4,
+       "age": 31
+      },
+      {
+       "day": 89,
+       "leg": "granted",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 4,
+       "age": 32
+      },
+      {
+       "day": 90,
+       "leg": "granted",
+       "trust": 100,
+       "arrears": 0,
+       "fires": 4,
+       "age": 33
+      },
+      {
+       "day": 91,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 34
+      },
+      {
+       "day": 92,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 35
+      },
+      {
+       "day": 93,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 36
+      },
+      {
+       "day": 94,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 37
+      },
+      {
+       "day": 95,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 38
+      },
+      {
+       "day": 96,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 39
+      },
+      {
+       "day": 97,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 40
+      },
+      {
+       "day": 98,
+       "leg": "granted",
+       "trust": 92,
+       "arrears": 0,
+       "fires": 4,
+       "age": 41
+      },
+      {
+       "day": 99,
+       "leg": "granted",
+       "trust": 84,
+       "arrears": 0,
+       "fires": 5,
+       "age": 42
+      },
+      {
+       "day": 100,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 43
+      },
+      {
+       "day": 101,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 44
+      },
+      {
+       "day": 102,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 45
+      },
+      {
+       "day": 103,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 46
+      },
+      {
+       "day": 104,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 47
+      },
+      {
+       "day": 105,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 48
+      },
+      {
+       "day": 106,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 49
+      },
+      {
+       "day": 107,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 50
+      },
+      {
+       "day": 108,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 51
+      },
+      {
+       "day": 109,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 52
+      },
+      {
+       "day": 110,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 53
+      },
+      {
+       "day": 111,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 54
+      },
+      {
+       "day": 112,
+       "leg": "granted",
+       "trust": 88,
+       "arrears": 0,
+       "fires": 5,
+       "age": 55
+      },
+      {
+       "day": 113,
+       "leg": "arrears",
+       "trust": 82,
+       "arrears": 11250,
+       "fires": 5,
+       "age": 56
+      },
+      {
+       "day": 114,
+       "leg": "arrears",
+       "trust": 82,
+       "arrears": 11250,
+       "fires": 5,
+       "age": 57
+      },
+      {
+       "day": 115,
+       "leg": "arrears",
+       "trust": 86,
+       "arrears": 11250,
+       "fires": 5,
+       "age": 58
+      },
+      {
+       "day": 116,
+       "leg": "arrears",
+       "trust": 86,
+       "arrears": 11250,
+       "fires": 5,
+       "age": 59
+      },
+      {
+       "day": 117,
+       "leg": "arrears",
+       "trust": 81,
+       "arrears": 11250,
+       "fires": 5,
+       "age": 60
+      },
+      {
+       "day": 118,
+       "leg": "arrears",
+       "trust": 81,
+       "arrears": 11250,
+       "fires": 5,
+       "age": 61
+      },
+      {
+       "day": 119,
+       "leg": "arrears",
+       "trust": 82,
+       "arrears": 11250,
+       "fires": 5,
+       "age": 62
+      },
+      {
+       "day": 120,
+       "leg": "arrears",
+       "trust": 76,
+       "arrears": 22500,
+       "fires": 5,
+       "age": 63
+      },
+      {
+       "day": 121,
+       "leg": "arrears",
+       "trust": 76,
+       "arrears": 22500,
+       "fires": 5,
+       "age": 64
+      },
+      {
+       "day": 122,
+       "leg": "arrears",
+       "trust": 76,
+       "arrears": 22500,
+       "fires": 5,
+       "age": 65
+      },
+      {
+       "day": 123,
+       "leg": "arrears",
+       "trust": 76,
+       "arrears": 22500,
+       "fires": 5,
+       "age": 66
+      },
+      {
+       "day": 124,
+       "leg": "arrears",
+       "trust": 76,
+       "arrears": 22500,
+       "fires": 5,
+       "age": 67
+      },
+      {
+       "day": 125,
+       "leg": "arrears",
+       "trust": 68,
+       "arrears": 22500,
+       "fires": 5,
+       "age": 68
+      },
+      {
+       "day": 126,
+       "leg": "arrears",
+       "trust": 63,
+       "arrears": 22500,
+       "fires": 5,
+       "age": 69
+      },
+      {
+       "day": 127,
+       "leg": "trust<40",
+       "trust": 37,
+       "arrears": 33750,
+       "fires": 5,
+       "age": 70
+      },
+      {
+       "day": 128,
+       "leg": "arrears",
+       "trust": 41,
+       "arrears": 33750,
+       "fires": 5,
+       "age": 71
+      },
+      {
+       "day": 129,
+       "leg": "arrears",
+       "trust": 41,
+       "arrears": 33750,
+       "fires": 5,
+       "age": 72
+      },
+      {
+       "day": 130,
+       "leg": "arrears",
+       "trust": 41,
+       "arrears": 33750,
+       "fires": 5,
+       "age": 73
+      },
+      {
+       "day": 131,
+       "leg": "trust<40",
+       "trust": 36,
+       "arrears": 33750,
+       "fires": 5,
+       "age": 74
+      },
+      {
+       "day": 132,
+       "leg": "trust<40",
+       "trust": 28,
+       "arrears": 33750,
+       "fires": 5,
+       "age": 75
+      },
+      {
+       "day": 133,
+       "leg": "trust<40",
+       "trust": 28,
+       "arrears": 33750,
+       "fires": 5,
+       "age": 76
+      },
+      {
+       "day": 134,
+       "leg": "trust<40",
+       "trust": 22,
+       "arrears": 45000,
+       "fires": 5,
+       "age": 77
+      },
+      {
+       "day": 135,
+       "leg": "trust<40",
+       "trust": 22,
+       "arrears": 45000,
+       "fires": 5,
+       "age": 78
+      },
+      {
+       "day": 136,
+       "leg": "trust<40",
+       "trust": 22,
+       "arrears": 45000,
+       "fires": 5,
+       "age": 79
+      },
+      {
+       "day": 137,
+       "leg": "trust<40",
+       "trust": 17,
+       "arrears": 45000,
+       "fires": 5,
+       "age": 80
+      },
+      {
+       "day": 138,
+       "leg": "trust<40",
+       "trust": 17,
+       "arrears": 45000,
+       "fires": 5,
+       "age": 81
+      },
+      {
+       "day": 139,
+       "leg": "trust<40",
+       "trust": 17,
+       "arrears": 45000,
+       "fires": 5,
+       "age": 82
+      },
+      {
+       "day": 140,
+       "leg": "trust<40",
+       "trust": 17,
+       "arrears": 45000,
+       "fires": 5,
+       "age": 83
+      },
+      {
+       "day": 141,
+       "leg": "trust<40",
+       "trust": 6,
+       "arrears": 56250,
+       "fires": 5,
+       "age": 84
+      },
+      {
+       "day": 142,
+       "leg": "trust<40",
+       "trust": 1,
+       "arrears": 56250,
+       "fires": 5,
+       "age": 85
+      },
+      {
+       "day": 143,
+       "leg": "trust<40",
+       "trust": 1,
+       "arrears": 56250,
+       "fires": 5,
+       "age": 86
+      },
+      {
+       "day": 144,
+       "leg": "trust<40",
+       "trust": 1,
+       "arrears": 56250,
+       "fires": 5,
+       "age": 87
+      },
+      {
+       "day": 145,
+       "leg": "trust<40",
+       "trust": 1,
+       "arrears": 56250,
+       "fires": 5,
+       "age": 88
+      },
+      {
+       "day": 146,
+       "leg": "trust<40",
+       "trust": 0,
+       "arrears": 56250,
+       "fires": 5,
+       "age": 89
+      },
+      {
+       "day": 147,
+       "leg": "trust<40",
+       "trust": 0,
+       "arrears": 56250,
+       "fires": 5,
+       "age": 90
+      },
+      {
+       "day": 148,
+       "leg": "trust<40",
+       "trust": 0,
+       "arrears": 67500,
+       "fires": 5,
+       "age": 91
+      }
+     ],
+     "succOnLife": [
+      69,
+      91,
+      92,
+      99,
+      101,
+      125,
+      132,
+      134,
+      137,
+      149
+     ]
+    }
+   ],
+   "verdict": {
+    "verdict": "per-bond blockers named",
+    "blocker": "village_1:polity<4fires → village_2:dip granted d87, held 26d, lost to trust<40; ended d149 by age-reset by succession",
+    "bondBlockers": [
+     {
+      "prim": "village_1",
+      "formedDay": 20,
+      "brokenDay": 57,
+      "blocker": "polity<4fires",
+      "legShare": {
+       "polity<4fires": 7
+      },
+      "recourt": {
+       "day": 57,
+       "prim": "village_2",
+       "lag": 0
+      }
+     },
+     {
+      "prim": "village_2",
+      "formedDay": 57,
+      "brokenDay": 149,
+      "blocker": "dip granted d87, held 26d, lost to trust<40; ended d149 by age-reset by succession",
+      "dipGrantedDay": 87,
+      "dipDays": 26,
+      "lossLeg": "trust<40",
+      "dipLost": "dip granted d87, held 26d, then lost to trust<40",
+      "legShare": {
+       "granted": 26,
+       "arrears": 17,
+       "trust<40": 19
+      },
+      "recourt": null
+     }
+    ],
+    "unexplainedDays": 0
+   },
+   "beats": [
+    {
+     "day": 69,
+     "tag": "bond-is-young",
+     "bondAge": 12,
+     "bondPrim": "village_2",
+     "bondTrust": 55,
+     "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdic"
+    },
+    {
+     "day": 71,
+     "tag": "oath-summons",
+     "bondAge": 14,
+     "bondPrim": "village_2",
+     "bondTrust": 62,
+     "text": "📯 Thornfield's court summons Haven's speaker. SWEAR the oath of the realm (a gift seals it), SERVE at their court (seven days of your speaker's life), or WALK — break the link and stay a free fire, refusing the scale it"
+    },
+    {
+     "day": 76,
+     "tag": "speaker-install",
+     "bondAge": 19,
+     "bondPrim": "village_2",
+     "bondTrust": 80,
+     "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief bec"
+    },
+    {
+     "day": 91,
+     "tag": "speaker-install",
+     "bondAge": 34,
+     "bondPrim": "village_2",
+     "bondTrust": 92,
+     "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+    },
+    {
+     "day": 99,
+     "tag": "speaker-install",
+     "bondAge": 42,
+     "bondPrim": "village_2",
+     "bondTrust": 84,
+     "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The lin"
+    },
+    {
+     "day": 124,
+     "tag": "speaker-install",
+     "bondAge": 67,
+     "bondPrim": "village_2",
+     "bondTrust": 76,
+     "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The lin"
+    },
+    {
+     "day": 132,
+     "tag": "speaker-install",
+     "bondAge": 75,
+     "bondPrim": "village_2",
+     "bondTrust": 28,
+     "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The lin"
+    },
+    {
+     "day": 149,
+     "tag": "speaker-install",
+     "bondAge": null,
+     "bondPrim": null,
+     "bondTrust": null,
+     "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The lin"
+    }
+   ],
+   "beatsYoungCount": 1,
+   "beatsOlderThan21": []
+  }
+ },
+ "leadPairs": {
+  "64201": {
+   "gameDays": 135,
+   "endReason": "village-lost",
+   "compare": {
+    "bonds": [
+     {
+      "prim": "village_0",
+      "formedDay": 25,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 110
+     },
+     {
+      "prim": "village_1",
+      "formedDay": 26,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 109
+     },
+     {
+      "prim": "village_2",
+      "formedDay": 27,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 108
+     }
+    ],
+    "dipGrantDays": [
+     57,
+     57,
+     57
+    ]
+   }
+  },
+  "64202": {
+   "gameDays": 182,
+   "endReason": "survived",
+   "compare": {
+    "bonds": [
+     {
+      "prim": "village_0",
+      "formedDay": 25,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 156
+     },
+     {
+      "prim": "village_1",
+      "formedDay": 26,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 155
+     },
+     {
+      "prim": "village_2",
+      "formedDay": 27,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 154
+     }
+    ],
+    "dipGrantDays": [
+     57,
+     57,
+     57
+    ]
+   }
+  },
+  "64203": {
+   "gameDays": 69,
+   "endReason": "village-lost",
+   "compare": {
+    "bonds": [
+     {
+      "prim": "village_0",
+      "formedDay": 25,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 44
+     },
+     {
+      "prim": "village_1",
+      "formedDay": 26,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 43
+     },
+     {
+      "prim": "village_2",
+      "formedDay": 27,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 42
+     }
+    ],
+    "dipGrantDays": [
+     57,
+     57,
+     57
+    ]
+   }
+  },
+  "64204": {
+   "gameDays": 182,
+   "endReason": "survived",
+   "compare": {
+    "bonds": [
+     {
+      "prim": "village_0",
+      "formedDay": 25,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 156
+     },
+     {
+      "prim": "village_1",
+      "formedDay": 26,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 155
+     },
+     {
+      "prim": "village_3",
+      "formedDay": 27,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 154
+     }
+    ],
+    "dipGrantDays": [
+     57,
+     57,
+     57
+    ]
+   }
+  },
+  "64205": {
+   "gameDays": 109,
+   "endReason": "village-lost",
+   "compare": {
+    "bonds": [
+     {
+      "prim": "village_1",
+      "formedDay": 25,
+      "brokenDay": null,
+      "firstDipDay": 63,
+      "maxAge": 84
+     },
+     {
+      "prim": "village_spl_29_64411",
+      "formedDay": 31,
+      "brokenDay": null,
+      "firstDipDay": 63,
+      "maxAge": 78
+     },
+     {
+      "prim": "village_spl_30_83228",
+      "formedDay": 33,
+      "brokenDay": null,
+      "firstDipDay": 63,
+      "maxAge": 76
+     }
+    ],
+    "dipGrantDays": [
+     63,
+     63,
+     63
+    ]
+   }
+  },
+  "64206": {
+   "gameDays": 22,
+   "endReason": "village-lost",
+   "compare": {
+    "bonds": [],
+    "dipGrantDays": []
+   }
+  },
+  "64207": {
+   "gameDays": 110,
+   "endReason": "village-lost",
+   "compare": {
+    "bonds": [
+     {
+      "prim": "village_1",
+      "formedDay": 25,
+      "brokenDay": null,
+      "firstDipDay": 68,
+      "maxAge": 85
+     },
+     {
+      "prim": "village_spl_34_42889",
+      "formedDay": 37,
+      "brokenDay": null,
+      "firstDipDay": 68,
+      "maxAge": 73
+     },
+     {
+      "prim": "village_0",
+      "formedDay": 38,
+      "brokenDay": null,
+      "firstDipDay": 68,
+      "maxAge": 72
+     }
+    ],
+    "dipGrantDays": [
+     68,
+     68,
+     68
+    ]
+   }
+  },
+  "64208": {
+   "gameDays": 110,
+   "endReason": "village-lost",
+   "compare": {
+    "bonds": [
+     {
+      "prim": "village_0",
+      "formedDay": 25,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 84
+     },
+     {
+      "prim": "village_1",
+      "formedDay": 26,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 83
+     },
+     {
+      "prim": "village_2",
+      "formedDay": 27,
+      "brokenDay": null,
+      "firstDipDay": 57,
+      "maxAge": 82
+     }
+    ],
+    "dipGrantDays": [
+     57,
+     57,
+     57
+    ]
+   }
+  }
+ },
+ "summary": {
+  "stallSeeds": 3,
+  "unexplainedPairs": 0
+ }
+}
