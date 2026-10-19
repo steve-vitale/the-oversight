@@ -7766,9 +7766,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // The haul below still pools (donations toward amends stay allowed).
       const estranged = !!(s.exiled || s.joinedVillage);
       if (!this.over && estranged) {
-        this.say(s.exiled
-          ? `You walk the old paths to the fire. Nobody meets your eyes. The pantry is closed to you — exile means exile. What you carry is still yours to give, if you want to start earning your way back.`
-          : `You walk the old paths to the fire. A few nods — you were one of them, once. But your bowl is at another fire now, and everybody knows it. Nobody offers you food.`);
+        if (s.exiled) {
+          // EXILE REFRAIN (crisis leg r28 2026-10-19): the old single line
+          // fired VERBATIM on every return to the Haven tile (transcript:
+          // 8 identical days). The cold shoulder is silence, not a nag:
+          // full line on the 1st return, a short variant on the 2nd, then
+          // quiet with an occasional short line every 3rd return. The amends
+          // path stays named on the returns that speak.
+          s.exileReturnCount = (s.exileReturnCount || 0) + 1;
+          const n = s.exileReturnCount;
+          if (n === 1) {
+            this.say(`You walk the old paths to the fire. Nobody meets your eyes. The pantry is closed to you — exile means exile. What you carry is still yours to give, if you want to start earning your way back.`);
+          } else if (n === 2) {
+            this.say(`The old paths, the same fire, the same averted eyes. Still exile. The way back hasn't changed: carry something worth having.`);
+          } else if (n > 3 && n % 3 === 0) {
+            this.say(`Nobody meets your eyes. You know the way by now.`);
+          }
+          // else: silence. The cold shoulder doesn't narrate itself daily.
+        } else {
+          this.say(`You walk the old paths to the fire. A few nods — you were one of them, once. But your bowl is at another fire now, and everybody knows it. Nobody offers you food.`);
+        }
         homecomingSaid = true;
       }
       if (!this.over && !estranged) {

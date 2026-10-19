@@ -1953,7 +1953,8 @@
     // the old village continues; gossip carries your name
     try { this.seedGossip('exile_' + s.day, { trustworthy: -15 }, this.npcIds().slice(0, 4)); } catch (e) {}
     s.exiled = true;
-    s.exileStartDay = s.day; // the solo clock starts now — founding takes 7+ days alone
+    s.exileStartDay = s.day;
+    s.exileReturnCount = 0; // EXILE REFRAIN (crisis leg r28): fresh exile, fresh refrain count // the solo clock starts now — founding takes 7+ days alone
     s.founding = null; // any previous founding project is gone with the old life
     // GHOST-QUEST CLOSURE (break-it social r9 2026-10-09): exile is a hard
     // reset — the giver is at the old fire, you're walking. An errand for
@@ -2171,6 +2172,7 @@
       s.exiled = true;
       s.drifting = true;
       s.exileStartDay = s.day;
+      s.exileReturnCount = 0; // EXILE REFRAIN (crisis leg r28): fresh exile, fresh refrain count
       try { this.journalNote && this.journalNote('village', 'lost', 'The village that took you in is gone — scattered or destroyed. Back on the road.'); } catch (e) {}
       this.say(`The fires went out. Whether they scattered or something worse found them, there's no one left to vote you in — just cold ground where a village was. The road takes you back. Petition somewhere else, or build your own fire.`);
       return;
@@ -2190,6 +2192,7 @@
       s.exiled = true;
       s.drifting = true;
       s.exileStartDay = s.day;
+      s.exileReturnCount = 0; // EXILE REFRAIN (crisis leg r28): fresh exile, fresh refrain count
       try { this.journalNote && this.journalNote('village', 'rejected', 'Turned away from ' + ov.name + ' after probation — back on the road.'); } catch (e) {}
       this.say(`${ov.name} votes. "We tried." They don't meet your eyes when they say it. Your bed goes to someone else's cousin. The road takes you back — petition somewhere else, or build your own fire.`);
     }
