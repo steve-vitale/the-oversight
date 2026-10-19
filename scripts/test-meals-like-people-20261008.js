@@ -112,9 +112,12 @@ const memNotes = (Game, v, id, rx) => ((v.memory || {})[id] || []).filter(m => r
     const complained = memNotes(Game, v, plantLover, /complain/);
     check('meat-lover remembers loving the meal', loved.length > 0, JSON.stringify(loved.map(m => m.note)));
     check('plant-lover complains about disliked food', complained.length > 0, JSON.stringify(complained.map(m => m.note)));
-    const n1 = Game.npcNeeds(meatLover), n2 = Game.npcNeeds(plantLover);
-    check('social moved in opposite directions', (n1.social || 0) !== (n2.social || 0) || loved.length !== complained.length,
-      'lover social=' + n1.social + ' hater social=' + n2.social);
+    // (journey-deepening r13 2026-10-18): the old "social moved in opposite
+    // directions" check asserted the pre-r12 taste->social coupling (+5
+    // loved / -5 complained). That coupling was removed on purpose (r12:
+    // taste is not company) and the social-axis decoupling is proven by
+    // test-mood-honesty-20261018.js part (b). Tastes show in memories
+    // (the two checks above), not in social need — no social assertion here.
   }
 
   console.log('3 — company is organic: co-eating happens AND eating alone happens');

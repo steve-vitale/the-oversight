@@ -28529,8 +28529,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.mealLog = v.mealLog || [];
       if (v.away && v.away[vid]) return;
       const others = v.mealLog.filter(e => e.vid !== vid && e.part === part && e.place === 'haven');
-      if (others.length && Math.random() < 0.5) {
-        const o = others[Math.floor(Math.random() * others.length)];
+      if (others.length) {
+        // RNG-STREAM (journey-deepening r13 2026-10-18): the old 50% linger
+        // lottery no longer gates satisfaction — company always counts — but
+        // the draw PATTERN is preserved exactly so the seeded sim stream is
+        // unchanged downstream. (Removing draws shifted the whole stream and
+        // flipped two unrelated seeded tests: region-engine worldKin via a
+        // day-6 dehydration death, and meals taste memories via a different
+        // self-feed draw.) When the old lottery fires, the co-eater is picked
+        // by RNG as before; when it doesn't, the first co-eater is credited
+        // deterministically (no draw) — the shared fire still counts.
+        const linger = Math.random() < 0.5;
+        const o = linger ? others[Math.floor(Math.random() * others.length)] : others[0];
         const op = this.getPerson(o.vid);
         const oname = op ? String(op.name || 'Someone').split(' ')[0] : 'someone';
         let nm = 'Someone';
@@ -28542,8 +28552,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // villagers lonelier), which is why census moods skewed "lonely"
         // for villagers eating together daily. Taste lines below no longer
         // touch the social axis either (taste is not company).
-        n.social = Math.max(0, (n.social || 0) - 8);
-        try { const on = this.npcNeeds(o.vid); on.social = Math.max(0, (on.social || 0) - 8); } catch (e) {}
+        // CENSUS RATE (journey-deepening r13 2026-10-18): the r12 sign fix
+        // was right but rate-starved — the 50% linger lottery fired ~0.8x/day
+        // for -8 against tickNeeds' +24/day accrual, so communally-embedded
+        // villagers still pinned at social=100 and read 'lonely' (r13 audits:
+        // 8 shared meals/10d, trust 90, soc 94). Now company always counts
+        // when the fire is shared, and one shared lingering meal satisfies
+        // more than a day of accrual (-32 > +24/day): villagers who eat
+        // together daily drain toward honest-steady; villagers who eat
+        // alone still climb to honest-lonely. The 22%-tick talk-seeking at
+        // social>78 keeps firing for the genuinely isolated.
+        n.social = Math.max(0, (n.social || 0) - 32);
+        try { const on = this.npcNeeds(o.vid); on.social = Math.max(0, (on.social || 0) - 32); } catch (e) {}
         // SHARING (sim-prosefix-b, #438): stamp the co-eater's vid on the meal
         // memory so the EAT beat can name today's company honestly. The note
         // text is unchanged; the field is additive and unread by anything else.
@@ -28552,7 +28572,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // BONDS (pacing build 2026-10-10): lingering over the fire together
         // builds villager↔villager warmth. +2 per shared lingering meal.
         try { if (this.bondAdd) this.bondAdd(vid, o.vid, 2, 'lingering meal'); } catch (e) {}
-        if (Math.random() < 0.3 && this.playerAtHaven())
+        // (RNG-stream: the linger-say keeps the old draw pattern — it only
+        // rolls when the lottery fired, as before.)
+        if (linger && Math.random() < 0.3 && this.playerAtHaven())
           this.say(`${nm} and ${oname} lingered over the fire together.`);
       }
       v.mealLog.push({ vid, part, place: 'haven' });

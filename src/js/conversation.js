@@ -1556,6 +1556,21 @@
       if (/never (did )?finish(ed)? talking about|never did get back to|we left it|we wandered off|proper ending/i.test(sn)) return false;
       return true;
     },
+    // convoSnippetIsHook (journey-deepening r13 2026-10-18): a teaser /
+    // invitation is a real beat (the unfinished business exists — the plant
+    // gate keeps it), but it is NOT quotable as the thread's content-memory.
+    // Transcript-caught (seed 8307): a 'show' thread planted with the NPC's
+    // invitation "Come see what I found. You won't believe it." resumed as
+    // "We never finished talking about that personal stuff — we wandered
+    // off it. 'Come see what I found. You won't believe it.'" — the
+    // UNFULFILLED INVITATION quoted as if it were the memory of the topic.
+    // A hook names no proposition; quoting it fabricates shared content.
+    // Structural test like the scaffolding guard above: invitations match
+    // a small fixed set of phrasings, never real content.
+    convoSnippetIsHook(sn) {
+      if (!sn) return false;
+      return /\bcome\s+(and\s+)?(see|look|take a look)\b|you\s+won'?t\s+believe|wait\s+(till|until)\s+you\s+(see|hear)|\bi\s+found\s+something\b|(have|got)\s+something\s+to\s+show\s+you\b|you('ve| have) got to see\b/i.test(String(sn));
+    },
 
     convoThreadResolve(vid, tid) {
       try {
@@ -1799,7 +1814,11 @@
         // R19 (journey-social 2026-10-16): the quote must be a real beat —
         // the old guard missed micro-fillers ("Hm.") and resume-scaffolding
         // phrasings ("never did get back to that").
-        if (this.convoSnippetIsRealBeat(o.snippet)) {
+        // R20 (journey-deepening r13 2026-10-18): and not a hook — a teaser
+        // invitation ("Come see what I found") is a real beat but quoting it
+        // presents the unfulfilled invitation as the thread's content-memory.
+        // The thread still resumes (label + whyLine); only the quote drops.
+        if (this.convoSnippetIsRealBeat(o.snippet) && !this.convoSnippetIsHook(o.snippet)) {
           const sq = String(o.snippet).replace(/^"+|"+$/g, '');
           inner += ` '${sq}'`;
         }
