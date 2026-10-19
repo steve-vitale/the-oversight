@@ -1,0 +1,319 @@
+{
+ "generated": "2026-10-19T18:54:02.711Z",
+ "bad": [],
+ "arms": {
+  "control": {
+   "n": 16,
+   "scholarRaidTotal": 67,
+   "scholarRaidPerRun": [
+    6,
+    4,
+    8,
+    1,
+    3,
+    5,
+    7,
+    4,
+    6,
+    1,
+    5,
+    7,
+    0,
+    7,
+    1,
+    2
+   ],
+   "scholarRaidMean": 4.1875,
+   "raidTotal": 70,
+   "raidPerRun": [
+    6,
+    4,
+    8,
+    1,
+    3,
+    5,
+    7,
+    7,
+    6,
+    1,
+    5,
+    7,
+    0,
+    7,
+    1,
+    2
+   ],
+   "raidMean": 4.375,
+   "raidByRule": {
+    "ctx:scholar-fight-at-haven": 39,
+    "ctx:aid-crisis": 31
+   },
+   "aidCrisisAtHaven": {
+    "atHaven": 30,
+    "inField": 1
+   },
+   "national": 11,
+   "table": 11,
+   "wins": 0,
+   "wave4": 13,
+   "wave5": 0,
+   "exiled": 0,
+   "medianSurvival": 97.5,
+   "surv": [
+    87,
+    165,
+    78,
+    75,
+    111,
+    163,
+    115,
+    108,
+    120,
+    182,
+    77,
+    120,
+    57,
+    87,
+    49,
+    74
+   ],
+   "starvation": 4,
+   "causeSpace": {
+    "combat": 86,
+    "contest": 4,
+    "monster": 35,
+    "ambush": 6,
+    "dehydration": 2,
+    "sickness": 10,
+    "a wound that wouldn't close": 7,
+    "starvation": 4,
+    "The Reunion": 1,
+    "Loud-Eyes": 1,
+    "lockjaw": 1,
+    "alien": 1,
+    "experiment": 3
+   },
+   "doctrine": null,
+   "unattributed": 0
+  },
+  "armed": {
+   "n": 16,
+   "scholarRaidTotal": 63,
+   "scholarRaidPerRun": [
+    5,
+    2,
+    7,
+    4,
+    3,
+    5,
+    6,
+    4,
+    3,
+    1,
+    5,
+    7,
+    0,
+    7,
+    1,
+    3
+   ],
+   "scholarRaidMean": 3.9375,
+   "raidTotal": 72,
+   "raidPerRun": [
+    5,
+    3,
+    8,
+    5,
+    3,
+    6,
+    7,
+    6,
+    4,
+    1,
+    5,
+    8,
+    0,
+    7,
+    1,
+    3
+   ],
+   "raidMean": 4.5,
+   "raidByRule": {
+    "ctx:aid-crisis": 30,
+    "ctx:scholar-fight-at-haven": 42
+   },
+   "aidCrisisAtHaven": {
+    "atHaven": 29,
+    "inField": 1
+   },
+   "national": 12,
+   "table": 11,
+   "wins": 0,
+   "wave4": 13,
+   "wave5": 0,
+   "exiled": 0,
+   "medianSurvival": 96,
+   "surv": [
+    94,
+    182,
+    80,
+    107,
+    111,
+    149,
+    86,
+    107,
+    98,
+    182,
+    77,
+    135,
+    57,
+    87,
+    49,
+    72
+   ],
+   "starvation": 4,
+   "causeSpace": {
+    "monster": 39,
+    "combat": 81,
+    "contest": 5,
+    "ambush": 6,
+    "dehydration": 4,
+    "sickness": 9,
+    "a wound that wouldn't close": 5,
+    "starvation": 4,
+    "Performance Review": 1,
+    "The Reunion": 1,
+    "lockjaw": 1,
+    "alien": 1,
+    "experiment": 3
+   },
+   "doctrine": {
+    "standDays": 119,
+    "engagements": 40,
+    "vidDaysEngaged": 40,
+    "beats": 15,
+    "runsEngaged": 10
+   },
+   "unattributed": 0
+  }
+ },
+ "primary": {
+  "controlRaid": 70,
+  "armedRaid": 72,
+  "delta": -0.02857142857142857,
+  "go": false,
+  "threshold": 0.2,
+  "pairedDeltas": [
+   {
+    "policy": "leadfeast",
+    "seed": 63901,
+    "delta": -1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63902,
+    "delta": -1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63903,
+    "delta": 0
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63904,
+    "delta": 4
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63905,
+    "delta": 0
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63906,
+    "delta": 1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63907,
+    "delta": 0
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63908,
+    "delta": -1
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63901,
+    "delta": -2
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63902,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63903,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63904,
+    "delta": 1
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63905,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63906,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63907,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63908,
+    "delta": 1
+   }
+  ],
+  "scholarContext": {
+   "control": 67,
+   "armed": 63
+  }
+ },
+ "guardrails": {
+  "wave4": {
+   "control": 13,
+   "armed": 13,
+   "pass": true,
+   "band": "±2"
+  },
+  "medianSurvival": {
+   "control": 97.5,
+   "armed": 96,
+   "pass": true,
+   "floor": "control-10d"
+  },
+  "newDeathModes": {
+   "pass": true,
+   "newCauses": []
+  },
+  "starvation": {
+   "control": 4,
+   "armed": 4,
+   "pass": true,
+   "band": "control+1"
+  },
+  "allHold": true
+ },
+ "verdict": "NO-GO (primary miss)"
+}
