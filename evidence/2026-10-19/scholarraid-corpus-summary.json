@@ -1,0 +1,312 @@
+{
+ "generated": "2026-10-19T15:19:03.237Z",
+ "bad": [],
+ "arms": {
+  "control": {
+   "n": 16,
+   "scholarRaidTotal": 100,
+   "scholarRaidPerRun": [
+    7,
+    5,
+    7,
+    5,
+    9,
+    4,
+    7,
+    3,
+    8,
+    11,
+    5,
+    1,
+    13,
+    5,
+    6,
+    4
+   ],
+   "scholarRaidMean": 6.25,
+   "raidTotal": 110,
+   "raidPerRun": [
+    8,
+    5,
+    8,
+    6,
+    9,
+    5,
+    8,
+    3,
+    9,
+    12,
+    5,
+    1,
+    13,
+    8,
+    6,
+    4
+   ],
+   "raidMean": 6.875,
+   "raidByRule": {
+    "ctx:scholar-fight-at-haven": 64,
+    "ctx:aid-crisis": 46
+   },
+   "aidCrisisAtHaven": {
+    "atHaven": 45,
+    "inField": 1
+   },
+   "national": 13,
+   "table": 13,
+   "wins": 0,
+   "wave4": 16,
+   "wave5": 0,
+   "exiled": 0,
+   "medianSurvival": 122.5,
+   "surv": [
+    96,
+    104,
+    163,
+    146,
+    74,
+    125,
+    125,
+    80,
+    103,
+    126,
+    95,
+    70,
+    121,
+    134,
+    141,
+    124
+   ],
+   "starvation": 0,
+   "causeSpace": {
+    "contest": 8,
+    "combat": 118,
+    "the night": 1,
+    "monster": 45,
+    "alien": 2,
+    "dehydration": 2,
+    "a boulder with opinions about where you're walking": 2,
+    "a wound that wouldn't close": 1,
+    "The Algorithm": 1,
+    "Hushpuppy": 1,
+    "sickness": 2,
+    "lockjaw": 2
+   },
+   "doctrine": null,
+   "unattributed": 0
+  },
+  "armed": {
+   "n": 16,
+   "scholarRaidTotal": 83,
+   "scholarRaidPerRun": [
+    1,
+    4,
+    6,
+    4,
+    9,
+    3,
+    6,
+    4,
+    6,
+    12,
+    5,
+    1,
+    9,
+    5,
+    4,
+    4
+   ],
+   "scholarRaidMean": 5.1875,
+   "raidTotal": 86,
+   "raidPerRun": [
+    1,
+    4,
+    6,
+    5,
+    9,
+    3,
+    7,
+    5,
+    6,
+    12,
+    5,
+    1,
+    9,
+    5,
+    4,
+    4
+   ],
+   "raidMean": 5.375,
+   "raidByRule": {
+    "ctx:aid-crisis": 38,
+    "ctx:scholar-fight-at-haven": 48
+   },
+   "aidCrisisAtHaven": {
+    "atHaven": 37,
+    "inField": 1
+   },
+   "national": 14,
+   "table": 12,
+   "wins": 0,
+   "wave4": 15,
+   "wave5": 0,
+   "exiled": 0,
+   "medianSurvival": 124,
+   "surv": [
+    182,
+    120,
+    135,
+    133,
+    93,
+    130,
+    145,
+    115,
+    97,
+    135,
+    92,
+    122,
+    97,
+    88,
+    163,
+    126
+   ],
+   "starvation": 1,
+   "causeSpace": {
+    "combat": 100,
+    "monster": 34,
+    "alien": 5,
+    "contest": 12,
+    "starvation": 1,
+    "a boulder with opinions about where you're walking": 2,
+    "a wound that wouldn't close": 3,
+    "The Algorithm": 1,
+    "dehydration": 2,
+    "sickness": 2,
+    "The Eulogy": 1,
+    "lockjaw": 2
+   },
+   "doctrine": {
+    "holdDays": 125,
+    "travelRefusals": 444,
+    "beats": 41,
+    "runsEngaged": 16
+   },
+   "unattributed": 0
+  }
+ },
+ "primary": {
+  "controlScholarRaid": 100,
+  "armedScholarRaid": 83,
+  "delta": 0.17,
+  "go": false,
+  "threshold": 0.3,
+  "pairedDeltas": [
+   {
+    "policy": "leadfeast",
+    "seed": 63801,
+    "delta": -6
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63802,
+    "delta": -1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63803,
+    "delta": -1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63804,
+    "delta": -1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63805,
+    "delta": 0
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63806,
+    "delta": -1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63807,
+    "delta": -1
+   },
+   {
+    "policy": "leadfeast",
+    "seed": 63808,
+    "delta": 1
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63801,
+    "delta": -2
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63802,
+    "delta": 1
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63803,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63804,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63805,
+    "delta": -4
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63806,
+    "delta": 0
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63807,
+    "delta": -2
+   },
+   {
+    "policy": "belongfeast",
+    "seed": 63808,
+    "delta": 0
+   }
+  ]
+ },
+ "guardrails": {
+  "wave4": {
+   "control": 16,
+   "armed": 15,
+   "pass": true,
+   "band": "±2"
+  },
+  "medianSurvival": {
+   "control": 122.5,
+   "armed": 124,
+   "pass": true,
+   "floor": "control-10d"
+  },
+  "newDeathModes": {
+   "pass": true,
+   "newCauses": []
+  },
+  "starvation": {
+   "control": 0,
+   "armed": 1,
+   "pass": true,
+   "band": "control+1"
+  },
+  "allHold": true
+ },
+ "verdict": "NO-GO (primary miss)"
+}
