@@ -1,0 +1,193 @@
+{
+ "generated": "2026-10-19T13:11:12.862Z",
+ "bad": [],
+ "arms": {
+  "control": {
+   "n": 16,
+   "raidTotal": 110,
+   "raidPerRun": [
+    8,
+    5,
+    8,
+    6,
+    9,
+    5,
+    8,
+    3,
+    9,
+    12,
+    5,
+    1,
+    13,
+    8,
+    6,
+    4
+   ],
+   "raidMean": 6.875,
+   "raidByRule": {
+    "ctx:scholar-fight-at-haven": 64,
+    "ctx:aid-crisis": 46
+   },
+   "aidCrisisAtHaven": {
+    "atHaven": 45,
+    "inField": 1
+   },
+   "national": 13,
+   "table": 13,
+   "wins": 0,
+   "wave4": 16,
+   "wave5": 0,
+   "exiled": 0,
+   "medianSurvival": 122.5,
+   "surv": [
+    96,
+    104,
+    163,
+    146,
+    74,
+    125,
+    125,
+    80,
+    103,
+    126,
+    95,
+    70,
+    121,
+    134,
+    141,
+    124
+   ],
+   "starvation": 0,
+   "causeSpace": {
+    "contest": 8,
+    "combat": 118,
+    "the night": 1,
+    "monster": 45,
+    "alien": 2,
+    "dehydration": 2,
+    "a boulder with opinions about where you're walking": 2,
+    "a wound that wouldn't close": 1,
+    "The Algorithm": 1,
+    "Hushpuppy": 1,
+    "sickness": 2,
+    "lockjaw": 2
+   },
+   "doctrine": null,
+   "unattributed": 0
+  },
+  "armed": {
+   "n": 16,
+   "raidTotal": 90,
+   "raidPerRun": [
+    6,
+    4,
+    6,
+    5,
+    7,
+    7,
+    6,
+    4,
+    5,
+    10,
+    6,
+    6,
+    3,
+    7,
+    4,
+    4
+   ],
+   "raidMean": 5.625,
+   "raidByRule": {
+    "ctx:aid-crisis": 40,
+    "ctx:scholar-fight-at-haven": 50
+   },
+   "aidCrisisAtHaven": {
+    "atHaven": 39,
+    "inField": 1
+   },
+   "national": 13,
+   "table": 12,
+   "wins": 0,
+   "wave4": 13,
+   "wave5": 0,
+   "exiled": 0,
+   "medianSurvival": 120.5,
+   "surv": [
+    91,
+    120,
+    145,
+    145,
+    74,
+    129,
+    144,
+    103,
+    142,
+    121,
+    99,
+    87,
+    75,
+    87,
+    163,
+    126
+   ],
+   "starvation": 0,
+   "causeSpace": {
+    "combat": 101,
+    "monster": 32,
+    "alien": 4,
+    "contest": 11,
+    "a boulder with opinions about where you're walking": 2,
+    "a wound that wouldn't close": 1,
+    "The Algorithm": 1,
+    "The Strike": 1,
+    "sickness": 2,
+    "The Eulogy": 1,
+    "dehydration": 1,
+    "Ugly-Eyes": 1,
+    "the night": 1,
+    "lockjaw": 2
+   },
+   "doctrine": {
+    "holdDays": 146,
+    "travelRefusals": 498,
+    "shelters": 146,
+    "releases": 38,
+    "runsEngaged": 16
+   },
+   "unattributed": 0
+  }
+ },
+ "primary": {
+  "controlRaid": 110,
+  "armedRaid": 90,
+  "delta": 0.18181818181818182,
+  "go": false,
+  "threshold": 0.3
+ },
+ "guardrails": {
+  "wave4": {
+   "control": 16,
+   "armed": 13,
+   "pass": false,
+   "band": "±2"
+  },
+  "medianSurvival": {
+   "control": 122.5,
+   "armed": 120.5,
+   "pass": true,
+   "floor": "control-10d"
+  },
+  "newDeathModes": {
+   "pass": true,
+   "newCauses": []
+  },
+  "starvation": {
+   "control": 0,
+   "armed": 0,
+   "pass": true,
+   "band": "control+1"
+  },
+  "allHold": false
+ },
+ "verdict": "NO-GO (primary miss)"
+}
