@@ -36,11 +36,11 @@ function validateReceipt(root,r){
  return r.height;
 }
 function update(root,files){
- const receipts=files.map(file=>{const absolute=path.resolve(file),rel=path.relative(root,absolute);if(rel.startsWith('..')||path.isAbsolute(rel))throw Error('Retain receipts inside the repo first');const bytes=fs.readFileSync(absolute),r=JSON.parse(bytes);return{path:rel.replace(/\\/g,'/'),sha256:sha(bytes),height:validateReceipt(root,r)};});
+ const receipts=files.map(file=>{const absolute=path.resolve(file),rel=path.relative(root,absolute);if(rel.startsWith('..')||path.isAbsolute(rel))throw Error('Retain receipts inside the repo first');const bytes=fs.readFileSync(absolute),r=JSON.parse(bytes);return{path:rel.replace(/\\/g,'/'),sha256:normalized(absolute),height:validateReceipt(root,r)};});
  if(receipts.length!==2||receipts.map(r=>r.height).sort().join(',')!=='736,844')throw Error('One receipt for each phone height required');
  const sources=expectedInputs(root);
  for(const rel of ['scripts/phone-frame-proof-update.js','evidence/2026-10-18/phone-frame-replay-r1.js'])sources[rel]=normalized(path.join(root,rel));
- const proof={schemaVersion:1,scope:'Chromium touch phone frame; not physical iOS/Android or installed lifecycle clearance',receipts,sources};
+ const proof={schemaVersion:1,receiptHashNormalization:'lf-v1',scope:'Chromium touch phone frame; not physical iOS/Android or installed lifecycle clearance',receipts,sources};
  const destination=path.join(root,'scripts/phone-frame-proof.json'),temporary=destination+'.tmp';
  fs.writeFileSync(temporary,JSON.stringify(proof,null,2)+'\n');fs.renameSync(temporary,destination);
  return{receipts:receipts.map(r=>r.height),inputs:Object.keys(sources).length};

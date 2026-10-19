@@ -1,5 +1,10 @@
 # Mobile playtesting before release
 
+Receipt portability2026-10-19: phone proof checksums declare lf-v1 and ignore
+only CRLF/LF conversion by Git. Real content edits, stale served scripts,
+untrusted touches and clipped/offscreen controls still fail. Do not edit a
+receipt to refresh proof: retain the real browser run and use the updater.
+
 Chat/readability smoke (2026-10-19): verify the actual hosted source before
 comparing a local screenshot with Steve's phone. The live7d27851b5 build lacked
 mountPhoneField and the bounded grid CSS; this was also a delivery gap.

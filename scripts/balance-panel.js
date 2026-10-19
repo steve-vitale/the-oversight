@@ -5,6 +5,12 @@ const fs = require('fs'), path = require('path'), cp = require('child_process'),
 const score = require('./lib/balance-scorecard'), gear = require('./gear-usage-audit'), cohorts = require('./lib/balance-cohorts');
 const arg = (name, fallback) => { const i = process.argv.indexOf('--' + name); return i < 0 ? fallback : process.argv[i + 1]; };
 const digest = x => crypto.createHash('sha256').update(x).digest('hex');
+const { normalizeSource } = require('./lib/source-text');
+const observerFiles = Object.freeze(['scripts/balance-panel.js','scripts/gear-usage-audit.js','scripts/lib/balance-scorecard.js','scripts/lib/simulation-flags.js','scripts/lib/balance-cohorts.js','scripts/lib/source-text.js']);
+function observerIdentity(root) {
+  const readText = file => normalizeSource(fs.readFileSync(path.join(root,file),'utf8'));
+  return { observerDigest:digest(observerFiles.map(readText).join('\n')), contractDigest:digest(readText('scripts/balance-metrics.json')) };
+}
 const read = file => JSON.parse(file.endsWith('.gz') ? zlib.gunzipSync(fs.readFileSync(file)) : fs.readFileSync(file, 'utf8'));
 function manifest(root) {
   const out = {};
@@ -177,9 +183,10 @@ async function run() {
   if (arg('occupation', null) != null) options.occupation = arg('occupation', null);
   if (!options.seeds.length || options.seeds.some(s => !Number.isSafeInteger(s)) || new Set(options.seeds).size !== options.seeds.length || new Set(options.policies).size !== options.policies.length || !Number.isSafeInteger(options.days) || options.days < 1) throw new Error('Invalid/duplicate cases');
   if (process.env.REGION || process.env.ORIGIN || process.env.SEEDS || process.env.POLICIES || process.env.DAYS) throw new Error('Use explicit panel options; unset legacy sweep environment overrides');
-  const observerHash = () => digest([__filename, path.join(__dirname, 'gear-usage-audit.js'), path.join(__dirname, 'lib/balance-scorecard.js'), path.join(__dirname,'lib/simulation-flags.js'), path.join(__dirname,'lib/balance-cohorts.js')].map(f => fs.readFileSync(f)).join('\n'));
+  const observerRoot = path.resolve(__dirname,'..');
+  const observerHash = () => observerIdentity(observerRoot).observerDigest;
   const observerDigest = observerHash();
-  const contractDigest = digest(fs.readFileSync(path.join(__dirname, 'balance-metrics.json'))), sourceDigest = digest(JSON.stringify(sources));
+  const contractDigest = observerIdentity(observerRoot).contractDigest, sourceDigest = digest(JSON.stringify(sources));
   const head = () => sourceHead(root);
   const sourceHeadStart = head(), proofSeeds = arg('proof-seeds', String(options.seeds[0])).split(',').map(Number);
   if (proofSeeds.some(s => !options.seeds.includes(s))) throw new Error('Proof seeds must belong to the panel');
@@ -209,7 +216,7 @@ async function run() {
   }));
   const observed = results.filter(x => x.identity.observe === '1').map(x => x.result).sort((a, b) => a.row.policy.localeCompare(b.row.policy) || a.row.seed - b.row.seed);
   const rows = observed.filter(r => !r.excluded), exclusions = observed.filter(r => r.excluded), neutrality = proofs.filter(p => p.kind !== 'selection');
-  const sourcesStable = JSON.stringify(sources) === JSON.stringify(manifest(root)) && observerDigest === observerHash() && contractDigest === digest(fs.readFileSync(path.join(__dirname, 'balance-metrics.json')));
+  const sourcesStable = JSON.stringify(sources) === JSON.stringify(manifest(root)) && observerDigest === observerHash() && contractDigest === observerIdentity(observerRoot).contractDigest;
   const panel = { schemaVersion: 1, flagCoverage:{discovered:require('./lib/simulation-flags').discover(root,sources,flagNames),rule:'Legacy flags retain explicit null defaults; additional source-declared flags enter cache inputs when set. Discovery names remain source-bound metadata, not a changed simulation setting.'}, sourceHeadStart, sourceHeadEnd: head(), sourceDigest, observerDigest, contractDigest, sources, options, validity: { sourcesStable, neutrality }, reused, rows };
   if (options.occupation != null) { panel.exclusions = exclusions; panel.validity.selection = proofs.filter(p => p.kind === 'selection'); }
   fs.writeFileSync(path.join(out, 'panel.json.gz'), zlib.gzipSync(JSON.stringify(panel) + '\n'));
@@ -231,5 +238,5 @@ function sourceHead(root) {
   if (!fs.existsSync(path.join(root, '.git'))) return null;
   return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 }
-module.exports = { install, manifest, sourceHead, intakeSnapshot };
+module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles };
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });

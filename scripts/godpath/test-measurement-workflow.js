@@ -20,7 +20,7 @@ T.ok('retained real panel matches its proof digest', sha(bytes) === proof.panelD
 T.ok('retained neutrality proof covers the current Game/controller/harness inputs',
   JSON.stringify(require('../balance-panel').manifest(root)) === JSON.stringify(panel.sources));
 T.ok('proof declares every collector and contract input rather than silently omitting one',
-  ['scripts/balance-panel.js', 'scripts/gear-usage-audit.js', 'scripts/lib/balance-scorecard.js', 'scripts/balance-metrics.json', 'scripts/lib/balance-cohorts.js'].every(f => Object.hasOwn(proof.normalizedSources, f)));
+  [...require('../balance-panel').observerFiles, 'scripts/balance-metrics.json'].every(f => Object.hasOwn(proof.normalizedSources, f)));
 T.ok('collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)',
   Object.entries(proof.normalizedSources).every(([f, hash]) => textHash(f) === hash));
 T.ok('every retained real observation emits exactly the contracted metrics, with explicit unknowns',

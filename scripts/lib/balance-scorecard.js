@@ -2,7 +2,7 @@
 const crypto = require('crypto');
 const cohorts = require('./balance-cohorts');
 const contract = require('../balance-metrics.json');
-const contractDigest = crypto.createHash('sha256').update(require('fs').readFileSync(require('path').join(__dirname, '../balance-metrics.json'))).digest('hex');
+const contractDigest = crypto.createHash('sha256').update(require('./source-text').normalizeSource(require('fs').readFileSync(require('path').join(__dirname, '../balance-metrics.json'),'utf8'))).digest('hex');
 const mean = xs => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
 const quantile = (xs, p) => { const s = xs.slice().sort((a, b) => a - b); return s.length ? s[Math.floor((s.length - 1) * p)] : null; };
 function interval(xs, key, count = contract.bootstrapSamples) {

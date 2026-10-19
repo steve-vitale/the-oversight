@@ -7,7 +7,7 @@ const OF=require('./occupation-fixtures.json');
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'oversight-cohort-')),driver=path.join(temporary,'observer'),out=path.join(temporary,'cases');
 const read=()=>JSON.parse(z.gunzipSync(fs.readFileSync(path.join(out,'panel.json.gz')))),copy=x=>JSON.parse(JSON.stringify(x));
 try{
- for(const f of ['balance-panel.js','gear-usage-audit.js','balance-metrics.json','lib/balance-scorecard.js','lib/simulation-flags.js','lib/balance-cohorts.js']){
+ for(const f of ['balance-panel.js','gear-usage-audit.js','balance-metrics.json','lib/balance-scorecard.js','lib/simulation-flags.js','lib/balance-cohorts.js','lib/source-text.js']){
   const target=path.join(driver,'scripts',f);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(K.ROOT,'scripts',f),target);
  }
  const run=occupation=>{

@@ -1,5 +1,16 @@
 # ROADMAP: what's built, what's next, how to do it
 
+Developer checkout checkpoint (2026-10-19): real Windows Git checkout now
+passes quick 241/0 and full 1013/0. Observer/contract/phone-receipt text
+identities agree across LF and CRLF while actual edits invalidate proofs.
+Include the full tracked tools directory in compact shared snapshots; the
+previous snapshot inherited stale audio-lab files. No Game/controller or
+survival tuning changed. Fireside presence has a canonical fixture and passes
+at 7/42/99; of the 24 additional contracts, 2 originally passed, 10 are
+recovered/superseded and 12 remain. See release-proof-eol-audit-r1.md in dated
+evidence. Finish those contracts and integrated journeys/lifecycle; public
+launch and physical-device evidence remain open.
+
 Phone delivery/readability2026-10-19: live7d27851b5 did not contain the compact
 frame seen in local tests. Candidate phone surfaces now permit internal chat
 scrolling, readable paged replies, one NPC speaker label, and no emptied

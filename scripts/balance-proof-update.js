@@ -2,12 +2,12 @@
 'use strict';
 // Refresh the real observer-neutral maintenance proof; never fabricate one.
 const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),B=require('./balance-panel'),contract=require('./balance-metrics.json');
-const inputs=['scripts/balance-panel.js','scripts/gear-usage-audit.js','scripts/lib/balance-scorecard.js','scripts/balance-metrics.json','scripts/lib/simulation-flags.js','scripts/lib/balance-cohorts.js'],sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const inputs=[...B.observerFiles,'scripts/balance-metrics.json'],sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 function validate(root,panel){
  if(panel.sourceDigest!==sha(JSON.stringify(panel.sources)))throw Error('Proof manifest digest is invalid');
  if(JSON.stringify(B.manifest(root))!==JSON.stringify(panel.sources))throw Error('Proof source inputs are not current');
- const observer=sha(['scripts/balance-panel.js','scripts/gear-usage-audit.js','scripts/lib/balance-scorecard.js','scripts/lib/simulation-flags.js','scripts/lib/balance-cohorts.js'].map(n=>fs.readFileSync(path.join(root,n))).join('\n'));
- if(panel.observerDigest!==observer||panel.contractDigest!==sha(fs.readFileSync(path.join(root,'scripts/balance-metrics.json'))))throw Error('Proof observer/contract inputs are not current');
+ const identity=B.observerIdentity(root);
+ if(panel.observerDigest!==identity.observerDigest||panel.contractDigest!==identity.contractDigest)throw Error('Proof observer/contract inputs are not current');
  if(!panel.rows?.length||!panel.validity?.sourcesStable||!panel.options?.policies?.length||!panel.validity.neutrality?.length||panel.validity.neutrality.some(n=>!n.match||n.warnings)||panel.options.policies.some(p=>!panel.validity.neutrality.some(n=>n.policy===p)))throw Error('Stable-source real observer-neutral proof required for every cohort');
  if(require('./lib/balance-cohorts').validate(panel).length)throw Error('Invalid played/excluded proof accounting');
  const ids=contract.metrics.map(m=>m.id).sort().join(',');

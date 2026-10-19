@@ -6,9 +6,10 @@ try{
  const stale=Object.keys(proof.sources).filter(rel=>P.normalized(path.join(K.ROOT,rel))!==proof.sources[rel]);
  T.ok('every retained browser input matches current source',stale.length===0,stale);
  T.ok('all current boot inputs are covered',Object.keys(P.expectedInputs(K.ROOT)).every(rel=>proof.sources[rel]));
+ T.ok('receipt identity declares portable text normalization',proof.receiptHashNormalization==='lf-v1');
  for(const receipt of proof.receipts){
   const bytes=fs.readFileSync(path.join(K.ROOT,receipt.path));
-  T.ok('retained receipt hash '+receipt.height,crypto.createHash('sha256').update(bytes).digest('hex')===receipt.sha256);
+  T.ok('retained receipt hash '+receipt.height,P.normalized(path.join(K.ROOT,receipt.path))===receipt.sha256);
   T.ok('actual touch, frame, stable choices and Wait/escape '+receipt.height,P.validateReceipt(K.ROOT,JSON.parse(bytes))===receipt.height);
  }
  const actual=JSON.parse(fs.readFileSync(path.join(K.ROOT,proof.receipts[0].path),'utf8'));

@@ -2,6 +2,27 @@
 
 Status: integration in progress; not cleared for public launch.
 
+Developer-checkout checkpoint (2026-10-19): quick 241/0 and full 1013/0 in
+a real Windows Git worktree with CRLF source. Portable observer/contract and
+phone-receipt identities retain source-edit invalidation. Compact snapshots
+must include tools as well as scripts and current proof receipts. A fresh
+four-policy neutral smoke preserves every state/outcome and all 23 metrics;
+this is maintenance equivalence, not broader balance clearance. Fireside
+presence's corrected canonical fixture passes at seeds 7/42/99. Twelve of
+the 24 additional legacy contracts remain. See dated
+release-proof-eol-audit-r1.md; game/UI runtime and device limits below remain.
+
+Phone preview2026-10-19: https://the-oversight-c919zpesi-steven-vitales-projects.vercel.app
+is READY from codex/phone-preview43498d1b9, an exact runtime/scripts/docs
+snapshot of local candidatecd913097e. Separate preview origin means separate
+save storage. Production main/master remain2d58c7c5. Vercel SSO protects this
+preview; the existing connection denies temporary-share access403. Hosted
+touch and Steve's real-phone evidence are still pending. Do not call local
+renders or deployment metadata hosted-playtest clearance. See dated
+release-chat-publication-r1.json. A plain archive check also exposed Git/EOL
+identity differences in retained proof hashes; verify a real checkout before
+claiming portable developer gates. Full local source history is retained.
+
 Counter/worksite checkpoint2026-10-19: local storage construction, real
 pemmican inputs, actual hide-handling knowledge and cooked counter Smoke
 are restored without replacing current strict pickup/feedback/remote-store

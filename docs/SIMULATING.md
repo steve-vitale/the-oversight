@@ -316,6 +316,14 @@ node scripts/check.js
 ```
 
 Use fresh output names. The real neutral smoke proves observation, not balance.
+Observer/contract text identities normalize CRLF to LF; the normalization
+helper is itself an observer input. Phone receipt checksums likewise declare
+lf-v1 and normalize only text line endings. Binary panels/images retain exact
+byte hashes. Source edits still invalidate proof and case-cache identity.
+Use the shared observerIdentity/observerFiles contract when making isolated
+driver fixtures. Verify a real fresh Git checkout as well as the author's
+workspace; an archive has no own Git identity. Do not re-sign old panels to
+fit a new collector. Refresh a real neutral proof after collector changes.
 Run matched16-seed screens and distinct64-seed confirmation for small balance
 changes. Retain raw case caches and immutable source bundles. To compare:
 
