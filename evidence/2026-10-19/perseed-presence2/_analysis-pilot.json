@@ -1,0 +1,88 @@
+{
+ "mode": "pilot",
+ "runs": {
+  "control": 8,
+  "presence": 8
+ },
+ "mechanism": {
+  "control": 0.3333333333333333,
+  "presence": 0.65,
+  "ratio": 1.9500000000000002,
+  "bar": 1.5,
+  "go": true,
+  "companionKills": {
+   "control": 1,
+   "presence": 4
+  },
+  "companionDamage": {
+   "control": 347,
+   "presence": 1928
+  }
+ },
+ "engagement": {
+  "runs": 8,
+  "bar": 8,
+  "go": true,
+  "goInside": 82
+ },
+ "primary": {
+  "villagerVeterans": {
+   "control": 0,
+   "presence": 2,
+   "delta": 2,
+   "bar": 2,
+   "go": true
+  },
+  "livingVeterans": {
+   "control": 1,
+   "presence": 3
+  },
+  "veterans5": {
+   "control": 0,
+   "presence": 0
+  }
+ },
+ "guardrails": {
+  "survival": {
+   "control": 135,
+   "presence": 114,
+   "go": false
+  },
+  "starvation": {
+   "control": 7,
+   "presence": 8,
+   "watchBreach": false
+  },
+  "newDeathModesRaw": [
+   "the night",
+   "The Moderator"
+  ],
+  "deathModeCategories": {
+   "control": 14,
+   "presence": 12
+  },
+  "national": {
+   "control": 4,
+   "presence": 2,
+   "go": true
+  },
+  "table": {
+   "control": 7,
+   "presence": 5,
+   "go": true
+  },
+  "wave4": {
+   "control": 5,
+   "presence": 5
+  },
+  "wave5": {
+   "control": 0,
+   "presence": 0
+  },
+  "wins": {
+   "control": 0,
+   "presence": 0
+  }
+ },
+ "verdict": "GO-TO-CONFIRM"
+}
