@@ -85,7 +85,13 @@
     t2pick(vid, key, cands) {
       const pool = (cands || []).filter(Boolean);
       if (!pool.length) return null;
-      return this.convoPick(vid, key, pool) || pool[0];
+      // NO-REPEAT (journey-social r26 2026-10-18): when the ledger has seen
+      // every candidate, return null so the caller fires its honest
+      // exhausted-pool path (topic2Ask's "I've told you everything", the
+      // beat's null). The old `|| pool[0]` re-served the verbatim line —
+      // transcript-caught: lately 'gratitude' parroted seconds apart in one
+      // conversation (s1902-deep-1-Asiri).
+      return this.convoPick(vid, key, pool);
     },
     // Event clock: advances when the run changes. Re-asking a topic after the
     // clock moves gets an honest "it's different now" — people change.
@@ -96,11 +102,13 @@
         (v.grief || 0) > 0 ? 1 : 0, this.t2mem(vid).length].join('|');
     },
     t2changeLine() {
+      // Ack lines are delivery, not content — cycling them is fine, so the
+      // fallback lives here explicitly (t2pick returns null on exhaustion).
       return this.t2pick('__change', 't2change', [
         '"You asked me that before. It\'s a different question now."',
         '"Last time things were different. They always are."',
         '"Huh. I answered that once — back when the answer was simpler."',
-      ]);
+      ]) || '"You asked me that before. It\'s a different question now."';
     },
 
     // ---------- registry ----------
@@ -915,8 +923,14 @@
       try { if (oid) nm = this.firstRef(oid); } catch (e) {}
       const ovp = oid ? this.vpOf(oid) : {};
       const oocc = (ovp && ovp.formerOccupation) || 'survivor';
+      // PRONOUN AGREEMENT (journey-social r26 2026-10-18): the occupation
+      // line hardcoded "the way they handle things" — wrong for she/he
+      // villagers ("Camila was a police officer, before... the way they
+      // handle things", transcript-caught s1902-deep-2).
+      const opro = this.t2pro ? this.t2pro(ovp, oid) : 'they';
+      const ohandle = opro === 'she' ? 'she handles' : opro === 'he' ? 'he handles' : 'they handle';
       const f1 = oid ? [
-        '"' + nm + ' was ' + (/^[aeiou]/i.test(oocc) ? 'an ' : 'a ') + oocc.toLowerCase() + ', before. You can still see it — the way they handle things."',
+        '"' + nm + ' was ' + (/^[aeiou]/i.test(oocc) ? 'an ' : 'a ') + oocc.toLowerCase() + ', before. You can still see it — the way ' + ohandle + ' things."',
         '"Here\'s a story: ' + nm + ' once ' + ['shared food without being asked', 'stayed up all night on watch so someone else could sleep', 'talked someone down from leaving'][Math.floor(Math.random() * 3)] + '. That\'s who ' + nm + ' is, when it counts."',
       ] : ['"There\'s not much more to say. People are complicated; that\'s the whole story."'];
       const f2 = [

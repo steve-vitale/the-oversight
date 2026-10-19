@@ -1061,9 +1061,87 @@
       if (best.length > 200) best = best.slice(0, 197) + '...';
       return best;
     },
+    // SECOND-PERSON REFRAME (journey-social r26 2026-10-18): doubts are
+    // voiced TO their subject — the confront menu only offers getDoubts(vid)
+    // — but observation texts are written in journal voice, third person
+    // ("Elijah has been suddenly warm toward you"). Voiced aloud that reads
+    // "I've been watching, Elijah. Elijah has been suddenly warm toward you"
+    // — the engine talking ABOUT the person TO the person (transcript-caught
+    // s1902-late-d106-Elijah). Reframe the subject's own name forms as
+    // second person when voicing. The journal text itself is untouched.
+    // Rules are ordered: (1) journal-voice "you" (the player) becomes
+    // I/me/my FIRST, while the subject is still named; (2) the subject's
+    // name forms become you/your; (3) subject pronouns they/their become
+    // you/your. In the current doubt corpus every they/their in a
+    // subject-voiced doubt refers to the subject — if a future template
+    // uses they/their for a third party, scope that template instead.
+    confrontSecondPerson(ev, vid) {
+      try {
+        let s = String(ev || '');
+        if (!s) return s;
+        const names = [];
+        const add = (x) => { if (x && x !== 'you' && x !== 'someone' && names.indexOf(x) < 0) names.push(x); };
+        try {
+          add(this.whoTag(vid)); add(this.firstRef(vid));
+          add(this.npcName(vid)); add(this.displayName(vid));
+        } catch (e) {}
+        const esc = (x) => String(x).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // Leading-name patterns tolerate the evidence-text capitalization
+        // (confrontEvidenceText uppercases the first letter): the first
+        // character matches either case.
+        const leadPat = (n) => {
+          const raw = String(n || '');
+          if (!raw) return null;
+          const f = raw[0];
+          const cls = (f.toLowerCase() === f.toUpperCase()) ? esc(f) : '[' + f.toLowerCase() + f.toUpperCase() + ']';
+          return cls + esc(raw.slice(1));
+        };
+        // (1) journal-voice player refs -> first person (corpus patterns).
+        s = s.replace(/^You wrote down\b/, 'I wrote down');
+        s = s.replace(/\bYou haven't heard\b/, "I haven't heard");
+        s = s.replace(/\btold you\b/, 'told me');
+        s = s.replace(/\bwhen you talked\b/, 'when I talked');
+        s = s.replace(/\btoward you\b/, 'toward me');
+        s = s.replace(/\byour wounds\b/, 'my wounds');
+        // (2) subject name forms -> second person.
+        for (const n of names) {
+          const lp = leadPat(n);
+          if (!lp) continue;
+          const e = esc(n);
+          s = s.replace(new RegExp('^' + lp + ' has been\\b'), "You've been");
+          s = s.replace(new RegExp('^' + lp + ' wavered\\b'), 'You wavered');
+          s = s.replace(new RegExp('^' + lp + ' confessed\\b'), "You've confessed");
+          s = s.replace(new RegExp('^' + lp + ' told me\\b'), 'You told me');
+          s = s.replace(new RegExp('^' + lp + ' said\\b'), 'You said');
+          s = s.replace(new RegExp('([.!?] )' + e + ' just said\\b'), '$1You just said');
+          s = s.replace(new RegExp('^' + lp + "'s\\b"), 'Your');
+          s = s.replace(new RegExp('says ' + e + " isn't\\b"), "says you aren't");
+          s = s.replace(new RegExp("that's what " + e + ' said\\b'), "that's what you said");
+          s = s.replace(new RegExp("haven't heard " + e + "'s own story"), "haven't heard your own story");
+        }
+        // (2b) STALE DESCRIPTOR: the doubt text may bake a pre-knowledge
+        // descriptor ("the person in their 60s, with calloused knuckles")
+        // while the villager is now name-known — the name forms above no
+        // longer match the text's leading subject. A leading descriptor +
+        // subject verb reframes the same way (confrontations only ever
+        // voice a doubt to its own subject, so a leading descriptor IS them).
+        s = s.replace(/^([Tt]he|[Aa]n?) (woman|man|person|elder|youth|child|girl|boy)\b[^.?!"]{0,80}?\b(has been|wavered|confessed|told me|said)\b/,
+          (m, art, noun, verb) => ({
+            'has been': "You've been", 'wavered': 'You wavered',
+            'confessed': "You've confessed", 'told me': 'You told me',
+            'said': 'You said',
+          }[verb] || m));
+        // (3) subject pronouns -> second person.
+        s = s.replace(/^Their story\b/, 'Your story');
+        s = s.replace(/\bThey don't want this\b/, "You don't want this");
+        s = s.replace(/\bin their pack\b/, 'in your pack');
+        s = s.replace(/\bthey were\b/, 'you were');
+        return s;
+      } catch (e) { return ev; }
+    },
     confrontWindup(vid, doubt, lie) {
       const first = this.firstRef(vid);
-      const ev = this.confrontEvidenceText(doubt);
+      const ev = this.confrontSecondPerson(this.confrontEvidenceText(doubt), vid);
       const kind = doubt.kind;
       // beat 1 — YOU speak. Per-kind opener + the gathered evidence.
       // The theft path names the sighting; the lie paths name the cover and
@@ -1945,7 +2023,10 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       const r = this.confrontDoubt(vid, doubtId);
       const youSaid = '"I need to ask you something."';
       c.transcript.push({ who: 'you', text: youSaid });
-      c.transcript.push({ who: 'them', text: r.line });
+      // NO DOUBLE-PUSH (journey-social r26 2026-10-18): sayLine below
+      // already records the NPC line in c.transcript (chunked). The old
+      // manual push here duplicated it — the transcript showed the clear
+      // line twice in a row, verbatim (s1902-late-d106-Elijah).
       while (c.transcript.length > 200) c.transcript.shift(); // HISTORY (Steve 2026-10-05): was 8 — destroyed conversation history and desynced the tap-advance. 200 keeps the whole conversation; memory is trivial.
       c.exchanges++;
       try { this.tickAction(1); } catch (e) {} // confrontation takes a moment
