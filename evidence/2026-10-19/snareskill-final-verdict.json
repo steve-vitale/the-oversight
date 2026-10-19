@@ -1,0 +1,320 @@
+{
+ "farm": {
+  "cells": {
+   "lead_armed": {
+    "n": 8,
+    "checks": 3641,
+    "catches": 1949,
+    "rate": 0.5352925020598737,
+    "kcal": 1519500,
+    "days": [
+     127,
+     180,
+     66,
+     117,
+     100,
+     161,
+     180,
+     180
+    ],
+    "endReasons": [
+     "village-lost",
+     "survived",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "survived",
+     "survived"
+    ]
+   },
+   "lead_control": {
+    "n": 8,
+    "checks": 5371,
+    "catches": 2029,
+    "rate": 0.3777695028858686,
+    "kcal": 1553800,
+    "days": [
+     131,
+     103,
+     142,
+     120,
+     79,
+     95,
+     157,
+     113
+    ],
+    "endReasons": [
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost"
+    ]
+   }
+  },
+  "pooled": {
+   "control": {
+    "n": 8,
+    "checks": 5371,
+    "catches": 2029,
+    "rate": 0.3777695028858686,
+    "kcal": 1553800,
+    "days": [
+     131,
+     103,
+     142,
+     120,
+     79,
+     95,
+     157,
+     113
+    ],
+    "endReasons": [
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost"
+    ]
+   },
+   "armed": {
+    "n": 8,
+    "checks": 3641,
+    "catches": 1949,
+    "rate": 0.5352925020598737,
+    "kcal": 1519500,
+    "days": [
+     127,
+     180,
+     66,
+     117,
+     100,
+     161,
+     180,
+     180
+    ],
+    "endReasons": [
+     "village-lost",
+     "survived",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "survived",
+     "survived"
+    ]
+   },
+   "delta": 0.15752299917400508,
+   "go": true
+  }
+ },
+ "policy": {
+  "cells": {
+   "belong_armed": {
+    "n": 8,
+    "checks": 121,
+    "catches": 48,
+    "rate": 0.39669421487603307,
+    "kcal": 39100,
+    "days": [
+     91,
+     180,
+     130,
+     135,
+     153,
+     99,
+     54,
+     180
+    ],
+    "endReasons": [
+     "village-lost",
+     "survived",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "survived"
+    ]
+   },
+   "belong_control": {
+    "n": 8,
+    "checks": 255,
+    "catches": 74,
+    "rate": 0.2901960784313726,
+    "kcal": 51400,
+    "days": [
+     91,
+     168,
+     102,
+     125,
+     99,
+     117,
+     104,
+     133
+    ],
+    "endReasons": [
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost"
+    ]
+   },
+   "lead_armed": {
+    "n": 8,
+    "checks": 66,
+    "catches": 29,
+    "rate": 0.4393939393939394,
+    "kcal": 18600,
+    "days": [
+     145,
+     163,
+     151,
+     138,
+     103,
+     139,
+     78,
+     160
+    ],
+    "endReasons": [
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost"
+    ]
+   },
+   "lead_control": {
+    "n": 8,
+    "checks": 92,
+    "catches": 32,
+    "rate": 0.34782608695652173,
+    "kcal": 22000,
+    "days": [
+     180,
+     165,
+     140,
+     134,
+     124,
+     155,
+     139,
+     155
+    ],
+    "endReasons": [
+     "survived",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost"
+    ]
+   }
+  },
+  "pooled": {
+   "control": {
+    "n": 16,
+    "checks": 347,
+    "catches": 106,
+    "rate": 0.30547550432276654,
+    "kcal": 73400,
+    "days": [
+     91,
+     168,
+     102,
+     125,
+     99,
+     117,
+     104,
+     133,
+     180,
+     165,
+     140,
+     134,
+     124,
+     155,
+     139,
+     155
+    ],
+    "endReasons": [
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "survived",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost"
+    ]
+   },
+   "armed": {
+    "n": 16,
+    "checks": 187,
+    "catches": 77,
+    "rate": 0.4117647058823529,
+    "kcal": 57700,
+    "days": [
+     91,
+     180,
+     130,
+     135,
+     153,
+     99,
+     54,
+     180,
+     145,
+     163,
+     151,
+     138,
+     103,
+     139,
+     78,
+     160
+    ],
+    "endReasons": [
+     "village-lost",
+     "survived",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "survived",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost",
+     "village-lost"
+    ]
+   },
+   "delta": 0.10628920155958638,
+   "go": true
+  }
+ }
+}
