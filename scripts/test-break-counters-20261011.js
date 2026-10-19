@@ -109,19 +109,28 @@ const counterOf = (Game, id) => {
   }
   const known = (id) => !!((Game.state.monsterCounters || {})[id]);
 
-  // ---------- 0. DEAD-CODE: 30 defs, 14 kinds, all wired ----------
+  // ---------- 0. Current authored records and discovery-kind contract ----------
   {
     const mons = Game.data.monsters || [];
     const withC = mons.filter(m => m.counter);
-    ok('deadcode: 30 counter defs (15 w1 + 15 w2)',
-      withC.length === 30 && withC.filter(m => (m.wave || 1) === 1).length === 15
-      && withC.filter(m => m.wave === 2).length === 15,
-      'got ' + withC.length);
-    const kinds = new Set(withC.map(m => m.counter.kind));
+    const originalW1 = ['bulldozer','hushwolf','gallowdeer','mirrormoth','belltoad',
+      'lockpick_raccoon','white_noise_heron','hummice','speedbump_turtle','nightlight_catfish',
+      'ducks_in_a_row','glasswing','sunbasker','nevermore','nightcourt'];
+    const regionalW1 = ['murkcap','rut_king','living_wire','anaconda_empress','dustboar',
+      'sunback','sweeps_week','cliffhanger','sanjun','drumbelly_tanuki'];
+    const originalW2 = ['voice_mimic_radio','mirror_stag','review_drone','bright_idea',
+      'memory_projector','warranty_caller','understudy','landlord','heckler','paparazzo',
+      'union_rep','moderator','statickite','giant_mosquito','alien_tick'];
+    ok('deadcode: original and authored regional counter records are retained',
+      [...originalW1, ...regionalW1].every(id => withC.some(m => m.id === id && m.wave === 1)) &&
+      originalW2.every(id => withC.some(m => m.id === id && m.wave === 2)),
+      'current definitions ' + withC.length);
+    ok('deadcode: counter records have unique monster identities',
+      new Set(withC.map(m => m.id)).size === withC.length);
     const supported = ['shout', 'offer_food', 'wait', 'move_windup', 'move_x2', 'approach',
       'sidestep', 'keep_distance', 'strike_lead', 'strike_windup', 'strike_recovery',
-      'strike_first', 'strike_nonhead', 'fresh_weapon'];
-    ok('deadcode: every def kind is a supported trick kind',
+      'strike_first', 'strike_nonhead', 'fresh_weapon', 'blindside', 'face_it', 'eyes'];
+    ok('deadcode: every def declares a supported discovery kind',
       withC.every(m => supported.includes(m.counter.kind)));
     ok('deadcode: every def has trick+hint+reveal text',
       withC.every(m => m.counter.trick && m.counter.hint && m.counter.reveal));
@@ -202,25 +211,41 @@ const counterOf = (Game, id) => {
 
   // ---------- 4. HONESTY C2: understudy fresh_weapon — the switch, not the opener ----------
   {
-    // Strike 1 with a fresh weapon must NOT discover (nothing seen yet).
-    let { m, p } = beginFight('understudy', 4, 4, 5, 4);
-    s.equipped.weapon = { name: 'spear', type: 'spear', range: 2, damage: [6, 10] };
-    strike(m.key);
-    ok('honesty/understudy: first strike with any weapon does NOT discover',
-      !known('understudy'), 'discovered=' + known('understudy'));
-    // Strike 2 with the SAME weapon must NOT discover.
-    if (!atPlayerTurn()) { try { Game.tbAdvance(); } catch (e) {} }
-    strike(m.key);
-    ok('honesty/understudy: second strike with the same weapon does NOT discover',
-      !known('understudy'));
-    // Strike with a DIFFERENT weapon — the switch — discovers.
-    if (!atPlayerTurn()) { try { Game.tbAdvance(); } catch (e) {} }
-    s.equipped.weapon = { name: 'knife', type: 'knife', range: 1, damage: [4, 7] };
-    // ensure adjacency for the knife
-    m.mx = p.mx + 1; m.my = p.my;
-    strike(m.key);
-    ok('honesty/understudy: switching weapons mid-fight discovers the trick',
-      known('understudy'), 'discovered=' + known('understudy'));
+    const { m, p } = beginFight('understudy', 4, 4, 5, 4);
+    // Prepared inventory; use the same equip verb as the pack UI. The old
+    // fixture wrote .weapon while a generated .melee slot still took priority.
+    function equipActual(id) {
+      const def = Game.data.items.find(item => item.id === id);
+      ok('honesty/understudy: real melee definition exists: ' + id,
+        !!def?.weapon && globalThis.Scattering.equipment.slotForItem(def) === 'melee');
+      s.inventory.push({ itemId: id, name: def.name, units: 1 });
+      const index = s.inventory.length - 1;
+      Game.equip(index, 'melee');
+      ok('honesty/understudy: public equip selects ' + id,
+        s.equipped.melee?.itemId === id && Game.equippedWeapon().itemId === id);
+      return def.name;
+    }
+    function hitActual() {
+      cycleToPlayerTurn();
+      ok('honesty/understudy: actual player turn is ready', atPlayerTurn() && !p.acted);
+      // Keep this prepared counter-learning sandbox adjacent and alive;
+      // it tests weapon recognition, not a campaign combat win rate.
+      m.mx = p.mx + 1; m.my = p.my;
+      ok('honesty/understudy: real strike executes', strike(m.key) === true);
+    }
+    m.hp = m.maxHp = 9000;
+    const firstName = equipActual('kitchen_knife');
+    hitActual();
+    ok('honesty/understudy: first actual weapon was recorded', (m.usSeen?.[firstName]?.count || 0) === 1);
+    ok('honesty/understudy: first strike does NOT discover', !known('understudy'));
+    hitActual();
+    ok('honesty/understudy: same weapon was recorded twice', m.usSeen?.[firstName]?.count === 2);
+    ok('honesty/understudy: second strike with same weapon does NOT discover', !known('understudy'));
+    const nextName = equipActual('stone_knife');
+    ok('honesty/understudy: selected weapon has a distinct actual name', firstName !== nextName);
+    hitActual();
+    ok('honesty/understudy: new weapon was recorded', m.usSeen?.[nextName]?.count === 1);
+    ok('honesty/understudy: public weapon switch discovers the trick', known('understudy'));
     endFight(Game);
   }
 

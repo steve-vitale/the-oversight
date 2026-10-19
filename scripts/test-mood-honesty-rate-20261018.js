@@ -21,9 +21,11 @@
 // Usage: node scripts/test-mood-honesty-rate-20261018.js
 'use strict';
 const assert = require('assert');
+const proofCase = require('./godpath/isolated-proof-cases')(['shared','alone']);
 
 async function main() {
   const { loadGame, setupGame } = require('./sim-harness');
+  if (proofCase === 'shared') {
   const { Game } = await loadGame({ seed: 4242, mode: 'mood-honesty-rate-proof', fullTelemetry: true });
   await setupGame(Game);
   const v = Game.state.village;
@@ -56,7 +58,10 @@ async function main() {
   assert(sA < 78, `FAIL(b1): daily company should end under the lonely line (got ${sA})`);
   assert(sB < 78, `FAIL(b2): co-eater should end under the lonely line (got ${sB})`);
 
+  Math.random = _rnd;
+  }
   // ---- (c) isolation: no company still climbs to honestly-lonely ----
+  if (proofCase === 'alone') {
   const { Game: G2 } = await loadGame({ seed: 4243, mode: 'mood-honesty-rate-proof2', fullTelemetry: true });
   await setupGame(G2);
   const v2 = G2.state.village;
@@ -71,7 +76,7 @@ async function main() {
   console.log(`10d alone: C 0 -> ${sC} (${G2.npcMood(c)})`);
   assert(sC > 78, `FAIL(c): eating alone 10 days should read honestly lonely (got ${sC})`);
 
-  Math.random = _rnd;
+  }
   console.log('\nALL MOOD-HONESTY-RATE PROOF ASSERTIONS PASSED');
 }
 

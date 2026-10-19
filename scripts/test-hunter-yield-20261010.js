@@ -22,9 +22,8 @@
 //   guard; butchers_friend wired to hunt.meat_yield.
 // Run: node scripts/test-hunter-yield-20261010.js [SEED]
 'use strict';
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.resolve(__dirname, '..');
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 const failures = [];
@@ -34,39 +33,9 @@ function ok(cond, name, detail) {
   console.log((cond ? '  ok  ' : '  FAIL') + ' ' + name + (detail && !cond ? ' — ' + detail : ''));
 }
 
-function mulberry32(a) {
-  return function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 const SEED = parseInt(process.env.SEED || process.argv[2] || '0xB0A910', 16);
-Math.random = mulberry32(SEED);
-
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-const FILES = ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
-  'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
-  'src/js/convo-scene.js', 'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js',
-  'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
-  'src/js/broadcast.js', 'src/js/contestEngine.js', 'src/js/alienPlayers.js', 'src/js/storage.js',
-  'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js', 'src/js/lifeseed.js',
-  'src/js/progression.js', 'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
-  'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js', 'src/js/membership.js',
-  'src/js/hierarchy.js', 'src/js/debug-scenarios.js', 'src/js/build.js'];
-for (const f of FILES) { try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); } catch (e) { console.log('EVAL FAIL', f, e.message); process.exit(2); } }
-delete global.window;
-const Game = globalThis.Scattering.Game;
 const said = [];
-Game.say = (m) => { said.push(String(m)); };
-Game.sysSay = () => {};
-Game.drama = () => {}; Game.audioEvent = () => {};
+
 
 function withForcedRandom(value, fn) {
   const real = Math.random;
@@ -75,7 +44,9 @@ function withForcedRandom(value, fn) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: SEED });
+  Game.debugRegion = 'na_eastern_woodlands';
+  Game.say = (m) => { said.push(String(m)); };
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -133,6 +104,19 @@ function withForcedRandom(value, fn) {
     const bad = catches.filter(c => (c.hiddenKcal || 0) > 200);
     ok(bad.length === 0, 'no catch exceeds its species gross (no tackle/skill inflation)',
       bad.length ? 'hiddenKcal=' + bad.map(c => c.hiddenKcal).join(',') : '');
+  }
+
+  console.log('\n[regional ecology] a forced roll cannot conjure non-native stock');
+  {
+    ok(Game.state.region === 'na_eastern_woodlands', 'species fixture landed in the eastern woodlands');
+    const t = Game.playerTile();
+    t.wildlife = { rohu: 5 }; // South Asian stock is not woodland fish.
+    ok(!Game.regionFish().includes('rohu'), 'control species is outside the regional fish pool');
+    const before = S().inventory.filter(i => i.foodState === 'carcass').length;
+    withForcedRandom(0, () => Game.fish());
+    ok(S().inventory.filter(i => i.foodState === 'carcass').length === before,
+      'forced roll yields no fish outside the regional pool');
+    ok(t.wildlife.rohu === 5, 'non-native stock remains untouched');
   }
 
   console.log('\n[honesty] net durability matches the promised 16 catches');

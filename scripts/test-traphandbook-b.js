@@ -40,7 +40,8 @@
 const assert = require('assert');
 const { loadGame, setupGame, quietLog, runDays } = require('./sim-harness');
 
-const MODE = process.argv[2] || 'fixture';
+const MODE = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : 'fixture';
+const proofCase = MODE === 'fixture' ? require('./godpath/isolated-proof-cases')(['read','craft','pit','plain']) : null;
 const BEAT_LINE = 'Your old life comes back to your hands';
 
 let passed = 0;
@@ -74,7 +75,7 @@ async function partFixture() {
   // they tested the deleted pickFieldBook weighting. The field shelf is
   // the uniform line again; nothing to assert.
   // ---- READ-1: the book teaches through grantKnowledge
-  {
+  if (proofCase === 'read') {
     const Game = await newWorld(105102); // probe: non-pit scholar here
     Game.state.codex.recipes = Game.state.codex.recipes || {};
     delete Game.state.codex.recipes.pit_trap;
@@ -92,7 +93,7 @@ async function partFixture() {
     ok('READ-1 the read narrates', /Trapper Handbook/.test(said));
   }
   // ---- CRAFT-1 (RED): the L0 refusal stands
-  {
+  if (proofCase === 'craft') {
     const Game = await newWorld(105102);
     Game.state.codex.recipes = Game.state.codex.recipes || {};
     delete Game.state.codex.recipes.pit_trap;
@@ -104,7 +105,7 @@ async function partFixture() {
     ok('CRAFT-1 refusal narrates honestly', /don't know how to make/i.test(said));
   }
   // ---- BEAT-1 (GREEN): pit-background scholar hears the line exactly once
-  {
+  if (proofCase === 'pit') {
     const { Game } = await loadGame({ seed: 105101, mode: 'traphandbook-beat', fullTelemetry: false });
     const says = [];
     const oSay = Game.say; Game.say = function (m) { says.push(String(m)); return oSay.apply(this, arguments); };
@@ -121,7 +122,7 @@ async function partFixture() {
     console.log('  beat text: ' + hits[0]);
   }
   // ---- BEAT-2 (RED): non-pit scholar never hears it
-  {
+  if (proofCase === 'plain') {
     const { Game } = await loadGame({ seed: 105101, mode: 'traphandbook-beat2', fullTelemetry: false });
     const says = [];
     const oSay = Game.say; Game.say = function (m) { says.push(String(m)); return oSay.apply(this, arguments); };

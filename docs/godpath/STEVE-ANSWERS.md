@@ -7,6 +7,17 @@ verbatim.
 
 ---
 
+## 2026-10-15 (balanced measurement and challenge)
+
+"Winning shouldn’t be easy. A reduction in win rate is cause for investigation and consideration not automatically assuming it’s a regression. Keep documentation on our levers that impact survival."
+
+"Yes, let’s create a more balanced set of measuring telemetry we can optimize from. Don’t simply look at win rate, we need to make sure many key metrics aren’t regressing. Plan this out and make repeatable and scalable."
+
+"Make sure that combat isn’t the only viable way to obtain good gear. We want to see viability in game for all playstyles. Do contests and tv shows reward enough? Auditing for any dead spots in feature usage?"
+
+See MEASUREMENT-PLAN.md, SIMULATING.md and SURVIVAL-LEVERS.md one directory up.
+
+
 ## 2026-10-15
 
 "Keep on running simulations and adjusting levers!"

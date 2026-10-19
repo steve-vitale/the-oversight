@@ -9,6 +9,7 @@
 //   - tableScene()
 //   - tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14)
 //   - tableActive()
+//   - tableEntryBlock()
 //   - chooseTableOption(id)
 //   - tableStartPath(pathId)
 //   - tableChoose(choiceId)
@@ -16,11 +17,9 @@
 //   - tableDowngradePick(pathId)
 //   - tableResolveFinal(choiceId)
 //   - tablePrompt(html, options, frame)
-//   - grounding()
-//   - groundingTier()
-//   - groundingMult()
-//   - addGrounding(n, why)
-//   - groundingReactionBeats(oldTier, newTier)
+//   - grounding(who), groundingTier(who), groundingMult(who) (person-owned humanity; current bearer or canonical villager)
+//   - addGrounding(n, why, who, opts)
+//   - groundingReactionBeats(oldTier, newTier, who)
 //   - sysBond()
 //   - addSysBond(n, why)
 //   - villagerAscensionScore(vid)
@@ -230,15 +229,19 @@
     // comforted grief, KEPT favor obligations (the favor system is the
     // humanity anchor), teaching. Tiered mechanical effects — not flavor:
     // food conversions weaken as you become what forgot food.
-    grounding() {
+    grounding(who) {
       try {
+        if (typeof who === 'string' && who !== 'player' && who !== this.villagerId) {
+          const n = (this.state.groundingByPerson || {})[who];
+          return Number.isFinite(n) ? Math.max(0, Math.min(100, n | 0)) : 100;
+        }
         const s = this.state.scholar || {};
         if (s.grounding == null) s.grounding = 100;
         return Math.max(0, Math.min(100, s.grounding | 0));
       } catch (e) { return 100; }
     },
-    groundingTier() {
-      const g = this.grounding();
+    groundingTier(who) {
+      const g = this.grounding(who);
       if (g >= 75) return 'grounded';
       if (g >= 50) return 'fraying';
       if (g >= 25) return 'estranged';
@@ -247,25 +250,43 @@
     // groundingMult: the food-conversion factor. The dark relay becomes
     // what forgot food — conversions weaken. Read by feastedMult() and any
     // food→power conversion. Always telegraphed where it's applied.
-    groundingMult() {
-      const t = this.groundingTier();
+    groundingMult(who) {
+      const t = this.groundingTier(who);
       return t === 'grounded' ? 1 : t === 'fraying' ? 0.9 : t === 'estranged' ? 0.75 : 0.6;
     },
-    addGrounding(n, why) {
+    addGrounding(n, why, who, opts) {
       try {
         const s = this.state.scholar || {};
-        const before = this.groundingTier();
-        s.grounding = Math.max(0, Math.min(100, this.grounding() + (n | 0)));
-        const after = this.groundingTier();
-        if (before !== after) this.groundingReactionBeats(before, after, why);
-        try { this.save(); } catch (e) {}
-      } catch (e) {}
+        const npc = typeof who === 'string' && who !== 'player' && who !== this.villagerId;
+        const old = this.grounding(who), before = this.groundingTier(who);
+        const value = Math.max(0, Math.min(100, old + (n | 0)));
+        if (value === old) return value;
+        if (npc) {
+          (this.state.groundingByPerson || (this.state.groundingByPerson = {}))[who] = value;
+        } else s.grounding = value;
+        const after = this.groundingTier(who);
+        if (before !== after) this.groundingReactionBeats(before, after, why, who, opts);
+        // Receipt timestamps reuse the last recorded instant. Reading the
+        // clock here would perturb seeded generated IDs in the sim harness.
+        const previous = (this.state.telemetry || []).at(-1);
+        if (this.tele) this.tele('grounding_changed', { t: Number.isFinite(previous && previous.t) ? previous.t : 0, who: npc ? who : 'player', person: npc ? who : this.villagerId, before: old, after: value, why });
+        if (!opts || opts.save !== false) this.save();
+        return value;
+      } catch (e) { console.warn('[grounding] change', e); return false; }
     },
     // groundingReactionBeats: the village's view of your humanity is a
     // LIVE readout — dialogue, gossip, fear, grief — never a hidden stat
     // revealed at the end. Villagers do not always approve.
-    groundingReactionBeats(from, to, why) {
+    groundingReactionBeats(from, to, why, who, opts) {
       try {
+        if (typeof who === 'string' && who !== 'player' && who !== this.villagerId) {
+          const name = this.displayName ? this.displayName(who) : 'Someone';
+          const order = { grounded: 0, fraying: 1, estranged: 2, hollow: 3 };
+          this.say((order[to] | 0) > (order[from] | 0)
+            ? `${name}'s words come out cleaner, colder, more like a signal than a person. Someone at the fire notices.`
+            : `${name} sounds like someone sitting at the fire again. A person, with people. The climb back is possible.`);
+          return;
+        }
         const order = { grounded: 0, fraying: 1, estranged: 2, hollow: 3 };
         const falling = (order[to] | 0) > (order[from] | 0);
         const v = this.state.village || {};
@@ -273,19 +294,25 @@
         const n1 = names[0] || 'Mara', n2 = names[1] || 'the old ones';
         if (falling && to === 'fraying') {
           this.say(`${n1} keeps a half-step of distance at the fire now. Not fear — not yet. Just... distance. "You've been up at the relay late," they say, and don't ask what you found.`);
-          this.bumpTrust && this.bumpTrust(null, -2, 'grounding fraying');
+          // This is each living resident's reaction to the bearer. Null is
+          // not a global recipient: it creates a phantom trust-map entry.
+          for (const id of new Set(v.roster || [])) {
+            if (id === this.villagerId) continue;
+            const person = this.getPerson(id);
+            if (person && !person.dead) this.bumpTrust(id, -2, 'grounding fraying');
+          }
         } else if (falling && to === 'estranged') {
           this.say(`The gossip has changed its grammar around you. ${n2} talk about you the way they talk about weather — something that happens, not someone who chooses. A child asked what your laugh sounds like. Nobody could quite remember.`);
           this.say(`Your small-talk comes out in the System's register now — clean, total, wrong. You hear yourself do it. You don't stop.`);
-          try { this.recordMoment('The village started talking about the Bearer like weather.'); } catch (e) {}
+          try { this.recordMoment('The village started talking about the Bearer like weather.'); } catch (e) { console.warn('[grounding] recovery', e); }
         } else if (falling && to === 'hollow') {
           this.say(`They grieve you while you're alive. That's the thing nobody warned you about. ${n1} set a place for you at the feast and then quietly took it away — "for whoever you were," they said, and the fire was very kind about it, which was worse.`);
-          try { this.recordMoment('The village grieved the Bearer while they lived.'); } catch (e) {}
+          try { this.recordMoment('The village grieved the Bearer while they lived.'); } catch (e) { console.warn('[grounding] recovery', e); }
         } else if (!falling) {
           this.say(`${n1} sat close at the fire again, shoulder to shoulder, like before. Human verbs. They work. The climb back is the story.`);
         }
-        try { this.save(); } catch (e) {}
-      } catch (e) {}
+        if (!opts || opts.save !== false) this.save();
+      } catch (e) { console.warn('[grounding] reaction', e); }
     },
 
     // ============ SYSBOND — the System relationship arc ============
@@ -504,6 +531,14 @@
         try { this.save(); } catch (e) {}
       } catch (e) { console.warn('tableAnnounce', e); }
     },
+    // Match the native Haven access rule and preserve the current activity.
+    tableEntryBlock() {
+      if (this.over || this.won) return 'This expedition has ended.';
+      if (this.state.activeContest) return 'Finish the current contest before taking your seat.';
+      if (this.inCombat() || this.state.scholar.monster) return 'Finish the current encounter before taking your seat.';
+      if (this.havenStoresAccess() === 'none') return 'Return to Haven to take your seat.';
+      return '';
+    },
     // tablePreview(): the run as priced TODAY (recomputed live). null when
     // the table isn't available. ready = the seat can be taken now.
     tablePreview() {
@@ -519,7 +554,8 @@
         // OVERTIME (2026-10-14): the live price shows the waiting cost.
         let ot = null;
         try { ot = this.overtimeStanding ? this.overtimeStanding() : null; } catch (e) { console.warn('tablePreview overtime', e); }
-        return { seat: seat.seat, doors, day, ready: true, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
+        const why = this.tableEntryBlock();
+        return { seat: seat.seat, doors, day, ready: !why, why, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
       } catch (e) { console.warn('tablePreview', e); return null; }
     },
     // tableTakeSeat(): the player sits — this locks the seat (tableScene);
@@ -527,8 +563,12 @@
     tableTakeSeat() {
       const pv = this.tablePreview();
       if (!pv) return { ok: false, msg: '' };
+      const why = this.tableEntryBlock();
+      if (why) return { ok: false, msg: why };
+      if (!pv.ready) return { ok: false, msg: pv.why };
       this.tableScene();
-      return { ok: true };
+      const committed = !!this.progState().tableDone;
+      return { ok: committed, msg: committed ? '' : 'Your seat could not be taken. Your case is still being priced.' };
     },
 
     // tableOfferPaths: path selection modal. Earned paths are choices;
@@ -878,7 +918,11 @@
       const s = this.state.scholar, pg = this.progState();
       this.say(`◈ ${def.name.toUpperCase()} — "${fin.label}"`);
       const outcome = typeof fin.outcome === 'function' ? fin.outcome.call(this, T) : fin.outcome;
-      this.tableEndingLines(fin.id, outcome).forEach(l => this.say(l));
+      const endingLines = this.tableEndingLines(fin.id, outcome);
+      // Retain exactly what resolved; the final screen must not reroll or
+      // reconstruct the outcome from a later build or a truncated log.
+      T.resolution = { title: def.name, finalId: fin.id, label: fin.label, lines: endingLines.slice() };
+      endingLines.forEach(l => this.say(l));
       // MUSIC (Steve 2026-10-12): endings get their bed — warm or cold.
       try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) {}
       // Epilogue: hero, facilitator, or outshone — credited honestly.
@@ -957,8 +1001,9 @@
     tableResolveHosts(def, branch) {
       const T = this.tableState();
       const s = this.state.scholar;
-      this.tableHostsLines(T.path, branch).forEach(l => this.say(l));
-      this.tableEndingLines('hosts', []).forEach(l => this.say(l));
+      const endingLines = this.tableHostsLines(T.path, branch).concat(this.tableEndingLines('hosts', []));
+      T.resolution = { title: 'THE HOSTS', finalId: 'hosts', label: branch === 'dark' ? 'The New Network' : 'An Open Table', lines: endingLines.slice() };
+      endingLines.forEach(l => this.say(l));
       try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) { console.warn('hosts music', e); }
       try { const v = this.state.village || {}; v.kidsReturned = true; v.takenReturned = true; } catch (e) { console.warn('hosts village', e); }
       try { if (this.podRemember) this.podRemember('taken-home', { via: 'network' }); } catch (e) { console.warn('hosts pods', e); }
@@ -985,10 +1030,14 @@
     tableResolveDemandPrice(price) {
       const T = this.tableState();
       const def = pathDef(T.path);
-      this.say(`◈ THE PRICE — "${price}." The table nods. The System rubs its hands.`);
+      const priceLine = `◈ THE PRICE — "${price}." The table nods. The System rubs its hands.`;
+      this.say(priceLine);
       const lines = (typeof this.podDemandCost === 'function') ? this.podDemandCost(price) : [];
-      (Array.isArray(lines) ? lines : [lines]).forEach(l => this.say(l));
-      this.tableEndingLines('poddemand', []).forEach(l => this.say(l));
+      const costLines = Array.isArray(lines) ? lines : [lines];
+      costLines.forEach(l => this.say(l));
+      const closingLines = this.tableEndingLines('poddemand', []);
+      closingLines.forEach(l => this.say(l));
+      T.resolution = { title: 'THE PODS OPEN', finalId: 'poddemand', label: 'Demanded the pods opened.', lines: [priceLine].concat(costLines, closingLines) };
       if (def) this.tableEpilogue(def, T.branch || 'light', { id: 'poddemand', label: 'Demanded the pods opened.' });
       try { this.recordMoment(`Haven's table path: ${(def || {}).name} (${T.branch}), choice: demanded the pods opened (paid ${price}).`); } catch (e) {}
       try { this.recordLegend({ outcome: 'table', frame: T.path, choice: 'demanded the pods opened' }); } catch (e) {}
@@ -1102,10 +1151,19 @@
     // prioritizes their safety). Tracked for the architect's credit.
     tableFacilitate(kind, vid) {
       try {
+        if (kind === 'teach') {
+          const v = this.state.village || {}, person = this.getPerson && this.getPerson(vid);
+          if (vid === this.villagerId || !(v.roster || []).includes(vid) || !person || person.dead || (v.away || {})[vid]) {
+            this.say('There is no living villager here to receive that lesson.'); return false;
+          }
+        }
         const T = this.tableState();
         T.facilitated = T.facilitated || {};
-        const f = T.facilitated[vid] || (T.facilitated[vid] = { acts: [] });
-        if (f.acts.indexOf(kind) < 0) f.acts.push(kind);
+        const f = T.facilitated[vid] || { acts: [] };
+        if (kind !== 'teach') {
+          if (f.acts.indexOf(kind) < 0) f.acts.push(kind);
+          T.facilitated[vid] = f;
+        }
         const sc = this.villagerAscensionScore(vid);
         if (kind === 'relay' && typeof this.appointSwitchboard === 'function') {
           this.appointSwitchboard(vid);
@@ -1129,18 +1187,23 @@
               const pid = p.id;
               if (!this.plantKnown || !this.plantKnown(pid)) continue;
               if (this.plantKnownBy && this.plantKnownBy(vid, pid, _vv)) continue;
-              if (this.villagerLearnsPlant) this.villagerLearnsPlant(vid, pid, 'player-taught');
+              if (!this.villagerLearnsPlant || !this.plantKnownBy) continue;
+              this.villagerLearnsPlant(vid, pid, 'player-taught');
+              if (!this.plantKnownBy(vid, pid, _vv)) continue;
               _vv.taughtByPlayer = _vv.taughtByPlayer || {};
               const lst = _vv.taughtByPlayer[vid] = _vv.taughtByPlayer[vid] || [];
               if (lst.indexOf(pid) === -1) lst.push(pid);
               _taughtN++;
             }
-          } catch (e) {}
-          this.say(`You teach ${sc.name} everything the relay taught you${_taughtN ? ` — ${_taughtN} green thing${_taughtN > 1 ? 's' : ''}, name by name` : ''}. Knowledge is the one gift that multiplies in the giving.`);
-          this.addGrounding(2, 'teaching');
+          } catch (e) { console.warn('[grounding] Table teaching', e); }
+          if (!_taughtN) { this.say(`${sc.name} already knows the lessons you can offer. No new lesson changes hands.`); return false; }
+          if (f.acts.indexOf(kind) < 0) f.acts.push(kind);
+          T.facilitated[vid] = f;
+          this.say(`You teach ${sc.name} ${_taughtN} green thing${_taughtN > 1 ? 's' : ''}, name by name. Knowledge is the one gift that multiplies in the giving.`);
+          this.addGrounding(2, 'teaching', this.villagerId, { save: false });
         }
-        try { this.save(); } catch (e) {}
-      } catch (e) {}
+        try { this.save(); } catch (e) { console.warn('[grounding] Table facilitation', e); }
+      } catch (e) { console.warn('[grounding] Table facilitation', e); }
     },
     // tableAscended: villagers whose ascension score clears the bar at the
     // table. Each ascension stacks bargaining power (+path strength) and

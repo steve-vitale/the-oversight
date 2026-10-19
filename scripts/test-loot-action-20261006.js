@@ -1,16 +1,7 @@
 // Proof: loot-as-action — no auto-loot, corpse has inventory, take/leave/use,
 // meat rots on the corpse. Steve 2026-10-06.
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/corpses.js',
- 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/debug-scenarios.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const { loadGame, setupGame } = require('./sim-harness');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -19,10 +10,8 @@ function ok(name, cond) {
 }
 
 (async () => {
-  await Game.init();
-  Game.genRoster('Test');
-  Game.newGame('Test', null, Game.generatedRoster[0].id);
-  Game.depart();
+  ({ Game } = await loadGame({ seed: Number(process.env.LOOT_PROOF_SEED || 20261006), mode: 'loot-action-proof' }));
+  await setupGame(Game);
   const s = Game.state.scholar;
   const invCountBefore = s.inventory.length;
 
@@ -54,7 +43,17 @@ function ok(name, cond) {
   // move player next to corpse
   s.mx = 5; s.my = 4;
   const meatIdx = found.items.findIndex(i => i.plantId === 'meat_test_beast');
-  const took = Game.corpseTakeItem(found.id, meatIdx);
+  // Keep real addHealth/wornDamage; make this prepared corpse's hazard certain.
+  // The old partial loader crashed only when its unseeded hazard roll hit.
+  const stageInfo = Game.corpseStageInfo, healthBefore = s.health;
+  Game.corpseStageInfo = function (c) { return { ...stageInfo.call(this, c), diseaseP: 1, diseaseDmg: 4 }; };
+  let took;
+  try { took = Game.corpseTakeItem(found.id, meatIdx); }
+  finally { Game.corpseStageInfo = stageInfo; }
+  ok('first-touch hazard traverses real worn damage and costs4 HP', s.health === healthBefore - 4);
+  const touchedHealth = s.health;
+  Game._corpseFirstTouch(found);
+  ok('first-touch hazard applies only once per corpse', s.health === touchedHealth);
   ok('corpseTakeItem takes the meat', !!took && took.plantId === 'meat_test_beast');
   ok('meat now in player inventory', s.inventory.some(i => i.plantId === 'meat_test_beast'));
   ok('meat removed from corpse', !found.items.some(i => (i.units || 0) > 0 && i.plantId === 'meat_test_beast'));

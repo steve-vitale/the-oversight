@@ -73,7 +73,7 @@ const K = require('./godpath/lib');
 
   // ---- the Skills panel shows pre-System ----
   T.section('Skills panel (app.js) is not System-gated');
-  const app = K.readSrc('src/js/app.js');
+  const app = require('./lib/source-text').normalizeSource(K.readSrc('src/js/app.js'));
   const i0 = app.indexOf('function renderSkillsSection()');
   const body = i0 >= 0 ? app.slice(i0, app.indexOf('\n  }\n', i0)) : '';
   T.ok('renderSkillsSection found', !!body);

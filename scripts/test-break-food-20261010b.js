@@ -66,9 +66,13 @@ function ok(name, cond, extra) {
 const says = [];
 function freshGame() {
   says.length = 0;
+  // This bear/boar food contract needs their actual woodland parasite table.
+  Game.debugRegion = 'na_eastern_woodlands';
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
+  // Isolate food transforms/storage from unrelated specialist NPC cooking.
+  Game.state.village.roster = [Game.villagerId];
   return Game.state.scholar;
 }
 // Real pipeline: black bear carcass -> cleaned meat (carries trichinosis).
@@ -77,7 +81,9 @@ function bearMeat(day) {
   const carc = Game.foodCarcass(bear, 2000, day, 'hunted'); // light: keeps the dig-up under carry weight
   const inv = [carc];
   Game.carcassToMeat(inv, 0, true);
-  return inv.find(i => i.foodKind === 'meat' && i.foodState === 'cleaned');
+  const meat = inv.find(i => i.foodKind === 'meat' && i.foodState === 'cleaned');
+  if (!meat?.parasiteRisk) console.log('Prepared bear risk diagnostic', JSON.stringify({ region: Game.state.region, day, meat, bearer: Game.villagerId }));
+  return meat;
 }
 
 (async () => {

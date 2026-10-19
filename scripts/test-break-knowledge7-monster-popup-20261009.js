@@ -81,7 +81,9 @@ async function run(seed) {
   const popupDesc = (distVal) => {
     let desc = '';
     const actions = { push() {} };
-    const mon = { id: 'hushwolf' };
+    // The real popup supplies player/world coordinates for whole-body reach.
+    const mon = { id: 'hushwolf', mx: distVal, my: 0 };
+    const px = 0, py = 0;
     const dist = distVal;
     eval(inner); // eslint-disable-line no-eval
     return desc;

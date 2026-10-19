@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "npc-eligibility-2026-10-16",
+  "revision": "market-grants-2026-10-18",
   "minimumPairs": 8,
   "confirmationSeeds": 64,
   "bootstrapSamples": 1000,
@@ -21,11 +21,11 @@
     { "id": "npcHungry", "label": "Sampled hungry NPCs (hunger at least 80)", "unit": "fraction of known NPC needs samples", "direction": "lower", "tolerance": 0.02 },
     { "id": "classAccess", "label": "Player named-class access", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },
     { "id": "npcClassAccess", "label": "Eligible NPC named-class access", "unit": "fraction of sampled known living resident NPC identities; class observed while eligible, unknown roster makes value null", "direction": "higher", "tolerance": 0.02 },
-    { "id": "goodGear", "label": "Earned player tier-3+ weapon/armor access", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },
+    { "id": "goodGear", "label": "Earned player tier-3+ weapon/armor access", "unit": "fraction; new acquisitions on instrumented routes including capstones and paid/borrowed Market deliveries; excludes starting gear and unobserved routes; acquisition does not establish retention or useful use", "direction": "higher", "tolerance": 0.02 },
     { "id": "contestShowGear", "label": "Player tier-3+ contest/show weapon/armor", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },
     { "id": "craftTradeGear", "label": "Player tier-3+ craft/trade weapon/armor", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },
     { "id": "corpseGear", "label": "Player tier-3+ corpse weapon/armor", "unit": "fraction", "direction": "neutral", "tolerance": 0 },
-    { "id": "usefulIntake", "label": "Nourishment / physical food consumed", "unit": "fraction", "direction": "neutral", "tolerance": 0 },
+    { "id": "usefulIntake", "label": "Primary nourishment / physical food consumed on instrumented routes", "unit": "ratio; reserve absorption or NPC route need equivalent; may exceed 1; versioned cumulative receipts only", "direction": "neutral", "tolerance": 0 },
     { "id": "bearerChanges", "label": "Bearer changes", "unit": "people/run", "direction": "neutral", "tolerance": 0 },
     { "id": "abilityAccepted", "label": "Accepted player ability events", "unit": "events/run, not landed effects", "direction": "neutral", "tolerance": 0 }
   ]

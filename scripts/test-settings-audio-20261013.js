@@ -104,7 +104,10 @@ const fakeWin = { BUILD_VERSION: 'test-build' };
 const busVols = { sfx: 1, music: 0.5, voice: 0.75 };
 const busCalls = [];
 let dlCalls = 0;
+let padSide = 'right', refreshes = 0;
 const fakeGame = {
+  dpadSide: () => padSide,
+  setDpadSide: side => { padSide = side; },
   audio: {
     isMuted: () => false,
     getVolume: () => 0.9,
@@ -129,11 +132,14 @@ const fakeGame = {
 };
 function esc(s) { return String(s).replace(/</g, '&lt;'); }
 
-const ctx = vm.createContext({ document: fakeDoc, window: fakeWin, Game: fakeGame, esc, console });
+const ctx = vm.createContext({ document: fakeDoc, window: fakeWin, Game: fakeGame, esc, console, refresh: () => { refreshes++; } });
 vm.runInContext(fns + '\nopenSettings();', ctx);
 
 (async () => {
   const byId = (id) => fakeDoc.getElementById(id);
+  ok(byId('set-dpad-side').value === 'right', 'pad side initializes from the current setting');
+  byId('set-dpad-side').onchange({target: {value: 'left'}});
+  ok(padSide === 'left' && refreshes === 1, 'changing Settings pad side updates the game and repaints once');
   ok(!!byId('set-vol-sfx') && !!byId('set-vol-music') && !!byId('set-vol-voice'), 'three per-type sliders rendered');
   ok(!!byId('set-vol'), 'master Volume slider still rendered');
   ok(byId('set-vol-sfxnum').textContent === '100%' && byId('set-vol-musicnum').textContent === '50%' && byId('set-vol-voicenum').textContent === '75%',

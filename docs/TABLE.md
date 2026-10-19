@@ -560,6 +560,31 @@ Exemplars (2026-10-14): codas `god:one_person_army`, `class:caregiver/keeper`,
 ending). Coverage: codas 6/70; bespoke endings 4 (optional); beats 4/675
 bespoke (+448 by template, the rest on the path default).
 
+## Current coda maintenance (2026-10-17)
+
+All70 god/subclass/track moral codas are authored locally on the current
+substrate, recovered unchanged from67f72fee. Narrow sheet/retained-story fixes
+from7751d906 preserve current main's mechanics. The actual final stores its
+resolved base outcome plus selected coda, and the ending renderer reads that
+record rather than recomputing from a later build or truncated log. The Hosts
+and pod-demand prices retain their real story/cost receipts. Legacy completed
+states without the record still render their expedition summary.
+
+Run validate-table-endings.js --todo, godpath/test-coda-coverage.js,
+godpath/test-table-ending-display.js, godpath/test-table-sheet-handoff.js and
+test-table-endings-20261014.js. New godpath proofs are discovered by quick/full
+checks. Use separate seeds7/42/20261017. The coverage proof uses real final
+choices across595 build/path/moral cases, including actual grey lean; no Game
+seat, branch, price or wipe methods are replaced. Preserve sparse fallback,
+bespoke priority, locked knowledge, escaped text and the actual replay button.
+
+Game/data changes also need a current real neutral proof and matched16/64
+panels under all23 metrics. Keep original identities/hashes and unknowns.
+Native phone verification must use actual seating, challenge and final
+controls; label prepared versus naturally earned campaign scope. Human coda
+voice/composition judgment remains needs-eyes. See the current dated
+coda-reconcile-audit.md for source, measurement, console and gate limits.
+
 ## File map
 
 - `src/js/table.js` (new): seat pricing, earned paths, branch axis,

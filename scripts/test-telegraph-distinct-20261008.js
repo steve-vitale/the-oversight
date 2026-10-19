@@ -15,7 +15,7 @@
 // Seeded (mulberry32, SEED env override) — seeded BEFORE any module eval.
 // Usage: node scripts/test-telegraph-distinct-20261008.js
 //        SEED=7 node scripts/test-telegraph-distinct-20261008.js
-const fs = require('fs');
+const fs = require('./lib/source-text');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 

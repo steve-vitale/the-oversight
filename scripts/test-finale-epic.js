@@ -83,7 +83,7 @@ function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfigh
   check('crew fight starts at 20', !!G.tbfight && !G.tbfight.over);
   const mids = G.tbfight.fighters.filter(f => f.kind === 'monster').map(f => f.mdef.id).sort();
   check('trio injected: crew + spoiler + network_note', JSON.stringify(mids) === JSON.stringify(['finale_crew', 'network_note', 'spoiler']), mids.join(','));
-  check('crew fight is 9x9 skirmish', G.tbfight.gridSize === 9);
+  check('crew coalition uses the 24x24 battlefield', G.tbfight.gridSize === 24);
   const crewAllies = G.tbfight.fighters.filter(f => f.kind === 'ally');
   check('20 allies injected', crewAllies.length === 20, 'got ' + crewAllies.length);
   check('campaign marked on _fight', (G.state.titans._fight || {}).campaign === 'finale_crew');
@@ -114,7 +114,7 @@ function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfigh
   G.state.scholar.health = 9000;
   r = G.startCombat('finale_opening');
   check('opening starts after crew', !!G.tbfight && !G.tbfight.over);
-  check('opening is 12x12', G.tbfight.gridSize === 12);
+  check('opening coalition is 24x24', G.tbfight.gridSize === 24);
   const opM = G.tbfight.fighters.find(f => f.kind === 'monster');
   check('opening fighter is the credits', opM && opM.mdef.id === 'finale_opening');
   check('18 surviving allies injected', G.tbfight.fighters.filter(f => f.kind === 'ally').length === 18);
@@ -159,7 +159,7 @@ function endFight() { try { Game.tbfight.over = true; } catch (e) {} Game.tbfigh
   G.state.scholar.health = 9000;
   r = G.startCombat('finale');
   check('heart starts (gate passed)', !!G.tbfight && !G.tbfight.over);
-  check('heart is 12x12', G.tbfight.gridSize === 12);
+  check('heart coalition is 24x24', G.tbfight.gridSize === 24);
   check('spoils granted', !!(G.tbfight.fiCrewSpoils && G.tbfight.fiCrewSpoils.redpen === 1 && G.tbfight.fiCrewSpoils.script === 1 && G.tbfight.fiCrewSpoils.badnote === 1));
   check('campaign marked finale_heart', (G.state.titans._fight || {}).campaign === 'finale_heart');
   check('_fight.titan finale (titans.js owns resolve)', (G.state.titans._fight || {}).titan === 'finale');

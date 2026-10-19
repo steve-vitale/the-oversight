@@ -9,6 +9,7 @@
 //   - patternCells(pattern, ax, ay, tx, ty)
 //   - isFoe(a, b)
 //   - nearestEnemy(fighters, f)
+//   - distanceToBody(x, y, body)
 //   - stepToward(fx, fy, tx, ty, blocked, avoidCells)
 //   - stepAway(fx, fy, tx, ty, blocked, avoidCells)
 //   - villagerDecide(f, fighters, blocked, dangerCells)
@@ -27,7 +28,7 @@
   function roll(range) { return range[0] + Math.floor(Math.random() * (range[1] - range[0] + 1)); }
   function cheb(ax, ay, bx, by) { return Math.max(Math.abs(ax - bx), Math.abs(ay - by)); }
   function key(x, y) { return x + ',' + y; }
-  function inGrid(x, y) { return x >= 0 && x <= 8 && y >= 0 && y <= 8; }
+  function inGrid(x, y, gridMax = 8) { return x >= 0 && x <= gridMax && y >= 0 && y <= gridMax; }
 
   // turnOrder: speed desc. Ties: player first, then villagers, then monsters.
   function turnOrder(fighters) {
@@ -43,7 +44,7 @@
 
   // patternCells: squares an attack will hit, given attacker pos + target pos.
   // pattern: {type, length, width, radius, range}
-  function patternCells(pattern, ax, ay, tx, ty) {
+  function patternCells(pattern, ax, ay, tx, ty, gridMax = 8) {
     const cells = [];
     const type = pattern.type;
     if (type === 'beam' || type === 'line' || type === 'charge') {
@@ -65,17 +66,17 @@
       const dx = Math.sign(ex), dy = Math.sign(ey);
       for (let i = 1; n > 0 && i <= len; i++) {
         const cx = Math.round(ax + ex * i / n), cy = Math.round(ay + ey * i / n);
-        if (!inGrid(cx, cy)) break;
+        if (!inGrid(cx, cy, gridMax)) break;
         cells.push({ cx, cy });
         // width: perpendicular spread (unchanged semantics)
         if (w > 1 && dx !== 0 && dy !== 0) {
           // diagonal beam: widen orthogonally
-          if (inGrid(cx + 1, cy)) cells.push({ cx: cx + 1, cy });
-          if (inGrid(cx, cy + 1)) cells.push({ cx, cy: cy + 1 });
+          if (inGrid(cx + 1, cy, gridMax)) cells.push({ cx: cx + 1, cy });
+          if (inGrid(cx, cy + 1, gridMax)) cells.push({ cx, cy: cy + 1 });
         } else if (w > 1) {
           const px = dy !== 0 ? 1 : 0, py = dx !== 0 ? 1 : 0;
-          if (inGrid(cx + px, cy + py)) cells.push({ cx: cx + px, cy: cy + py });
-          if (inGrid(cx - px, cy - py)) cells.push({ cx: cx - px, cy: cy - py });
+          if (inGrid(cx + px, cy + py, gridMax)) cells.push({ cx: cx + px, cy: cy + py });
+          if (inGrid(cx - px, cy - py, gridMax)) cells.push({ cx: cx - px, cy: cy - py });
         }
       }
     } else if (type === 'burst' || type === 'ambush') {
@@ -83,8 +84,14 @@
       for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
         if (cheb(0, 0, dx, dy) > r) continue;
         const cx = ax + dx, cy = ay + dy;
-        if (inGrid(cx, cy)) cells.push({ cx, cy });
+        if (inGrid(cx, cy, gridMax)) cells.push({ cx, cy });
       }
+    } else if (type === 'melee') {
+      if (inGrid(tx, ty, gridMax) && cheb(ax, ay, tx, ty) <= (pattern.reach || 1)) cells.push({ cx: tx, cy: ty });
+    } else if (type === 'lunge') {
+      // A physical leap commits to the target's current square, not a lane
+      // through everyone behind it. Movement/cover are checked at resolve.
+      if (inGrid(tx, ty, gridMax) && cheb(ax, ay, tx, ty) <= (pattern.range || 3)) cells.push({ cx: tx, cy: ty });
     } else if (type === 'single') {
       // SINGLE-TARGET (fix 2026-10-12, combat matrix): one tile — the aim
       // point. 'single' was missing here, so every monster with a 'single'
@@ -94,7 +101,7 @@
       // wave-5 Cancellation was a 1800-HP punching bag that never stamped.
       // encWantRange already treats 'single' like 'direct' (range 3); this
       // completes the circuit through the generic declare/resolve path.
-      if (inGrid(tx, ty)) cells.push({ cx: tx, cy: ty });
+      if (inGrid(tx, ty, gridMax)) cells.push({ cx: tx, cy: ty });
     }
     // dedupe
     const seen = new Set(), out = [];
@@ -108,12 +115,19 @@
     if (a.kind === 'monster' || a.kind === 'hostile') return b.kind !== 'monster' && b.kind !== 'hostile';
     return b.kind === 'monster' || b.kind === 'hostile';
   }
+  function bodySize(f) { return Number.isInteger(f.battleSize) && f.battleSize>0 && f.battleSize<=12 ? f.battleSize : Math.max(1, Math.min(3, (f.mdef && f.mdef.size) || f.size || 1)); }
+  function distanceToBody(x, y, body) {
+    return Math.max(0, body.mx - x, x - (body.mx + bodySize(body) - 1),
+      body.my - y, y - (body.my + bodySize(body) - 1));
+  }
   function nearestEnemy(fighters, f) {
     let best = null, bestD = 99;
     for (const o of fighters) {
       if (!o.alive || o.fled || o.key === f.key) continue;
       if (!isFoe(f, o)) continue;
-      const d = cheb(f.mx, f.my, o.mx, o.my);
+      const d = f.battleSize ? Math.max(0,
+        f.mx - (o.mx + bodySize(o) - 1), o.mx - (f.mx + bodySize(f) - 1),
+        f.my - (o.my + bodySize(o) - 1), o.my - (f.my + bodySize(f) - 1)) : distanceToBody(f.mx, f.my, o);
       if (d < bestD) { bestD = d; best = o; }
     }
     return best ? { f: best, d: bestD } : null;
@@ -121,12 +135,12 @@
 
   // stepToward: one step (8-dir) reducing Chebyshev distance, avoiding blocked cells.
   // blocked(x,y): callback. avoidCells: Set of "x,y" to avoid (telegraphs).
-  function stepToward(fx, fy, tx, ty, blocked, avoidCells) {
+  function stepToward(fx, fy, tx, ty, blocked, avoidCells, gridMax = 8) {
     let best = null, bestD = cheb(fx, fy, tx, ty);
     for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
       if (!dx && !dy) continue;
       const nx = fx + dx, ny = fy + dy;
-      if (!inGrid(nx, ny) || blocked(nx, ny)) continue;
+      if (!inGrid(nx, ny, gridMax) || blocked(nx, ny)) continue;
       const d = cheb(nx, ny, tx, ty);
       const danger = avoidCells && avoidCells.has(key(nx, ny));
       if (d < bestD && !danger) { bestD = d; best = { x: nx, y: ny }; }
@@ -136,19 +150,19 @@
       for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
         if (!dx && !dy) continue;
         const nx = fx + dx, ny = fy + dy;
-        if (!inGrid(nx, ny) || blocked(nx, ny)) continue;
+        if (!inGrid(nx, ny, gridMax) || blocked(nx, ny)) continue;
         if (cheb(nx, ny, tx, ty) < cheb(fx, fy, tx, ty)) { best = { x: nx, y: ny }; break; }
       }
     }
     return best;
   }
 
-  function stepAway(fx, fy, tx, ty, blocked, avoidCells) {
+  function stepAway(fx, fy, tx, ty, blocked, avoidCells, gridMax = 8) {
     let best = null, bestD = -1;
     for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
       if (!dx && !dy) continue;
       const nx = fx + dx, ny = fy + dy;
-      if (!inGrid(nx, ny) || blocked(nx, ny)) continue;
+      if (!inGrid(nx, ny, gridMax) || blocked(nx, ny)) continue;
       const d = cheb(nx, ny, tx, ty);
       const danger = avoidCells && avoidCells.has(key(nx, ny)) ? -100 : 0;
       if (d + danger > bestD) { bestD = d + danger; best = { x: nx, y: ny }; }
@@ -161,32 +175,36 @@
   // preferKey (2026-10-13): Rally's focus-fire mark — when set to a living
   // foe's key, the brave AI closes on and strikes THAT foe instead of the
   // nearest. Optional; null preserves the old behavior exactly.
-  function villagerDecide(f, fighters, blocked, dangerCells, preferKey) {
+  function villagerDecide(f, fighters, blocked, dangerCells, preferKey, gridMax = 8) {
     const moves = [];
     let fx = f.mx, fy = f.my;
     let foe = nearestEnemy(fighters, f);
     if (preferKey) {
       const pf = fighters.find(o => o.key === preferKey && o.alive && !o.fled && isFoe(f, o));
-      if (pf) foe = { f: pf, d: cheb(fx, fy, pf.mx, pf.my) };
+      if (pf) foe = { f: pf, d: distanceToBody(fx, fy, pf) };
     }
     const moveTo = (tx, ty, toward) => {
       for (let i = 0; i < f.speed; i++) {
-        const s = toward ? stepToward(fx, fy, tx, ty, blocked, dangerCells)
-                         : stepAway(fx, fy, tx, ty, blocked, dangerCells);
+        const s = toward ? stepToward(fx, fy, tx, ty, blocked, dangerCells, gridMax)
+                         : stepAway(fx, fy, tx, ty, blocked, dangerCells, gridMax);
         if (!s) break;
         fx = s.x; fy = s.y; moves.push([fx, fy]);
       }
     };
+    const distance = body => distanceToBody(fx, fy, body);
+    const moveToBody = (body, toward) => moveTo(
+      Math.max(body.mx, Math.min(fx, body.mx + bodySize(body) - 1)),
+      Math.max(body.my, Math.min(fy, body.my + bodySize(body) - 1)), toward);
     const ally = (kind) => fighters.find(o => o.alive && !o.fled && o.kind === kind && o.key !== f.key);
     const player = ally('player');
 
     if (f.ai === 'brave') {
       if (!foe) return { moves, action: { type: 'wait' } };
-      if (cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) {
+      if (distance(foe.f) <= 1) {
         return { moves, action: { type: 'strike', target: foe.f.key } };
       }
-      moveTo(foe.f.mx, foe.f.my, true);
-      const d2 = cheb(fx, fy, foe.f.mx, foe.f.my);
+      moveToBody(foe.f, true);
+      const d2 = distance(foe.f);
       if (d2 <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
       if (d2 <= 3) return { moves, action: { type: 'harry', target: foe.f.key } }; // thrown rock
       return { moves, action: { type: 'wait' } };
@@ -194,34 +212,34 @@
     if (f.ai === 'cautious') {
       // flee if hurt or if a monster is close
       if ((f.hp / f.maxHp) < 0.5 || (foe && foe.d <= 2)) {
-        if (foe) moveTo(foe.f.mx, foe.f.my, false);
+        if (foe) moveToBody(foe.f, false);
         return { moves, action: { type: 'flee' } };
       }
       // otherwise keep distance from the fight
-      if (foe && foe.d <= 4) moveTo(foe.f.mx, foe.f.my, false);
+      if (foe && foe.d <= 4) moveToBody(foe.f, false);
       return { moves, action: { type: 'wait' } };
     }
     // helpful: stick near the player, patch them up, harry monsters
     if (player && (player.hp / player.maxHp) < 0.7 && !f.helped) {
-      if (cheb(fx, fy, player.mx, player.my) <= 1) {
+      if (distance(player) <= 1) {
         return { moves, action: { type: 'help', target: player.key } };
       }
-      moveTo(player.mx, player.my, true);
-      if (cheb(fx, fy, player.mx, player.my) <= 1) return { moves, action: { type: 'help', target: player.key } };
+      moveToBody(player, true);
+      if (distance(player) <= 1) return { moves, action: { type: 'help', target: player.key } };
       return { moves, action: { type: 'wait' } };
     }
     // HELPFUL STRIKE (combat-survival 2026-10-13): adjacent to the enemy,
     // they strike — harrying for [2,4] forever read as a losing trajectory
     // and fled at 70% having contributed nothing. A strike is [4,8].
-    if (foe && cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) {
+    if (foe && distance(foe.f) <= 1) {
       return { moves, action: { type: 'strike', target: foe.f.key } };
     }
     if (foe && foe.d <= 3) {
       // close in to strike, but don't stand in telegraphs
-      moveTo(foe.f.mx, foe.f.my, true);
-      if (cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
+      moveToBody(foe.f, true);
+      if (distance(foe.f) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
     } else if (player) {
-      moveTo(player.mx, player.my, true);
+      moveToBody(player, true);
     }
     return { moves, action: { type: 'wait' } };
   }
@@ -229,6 +247,6 @@
   global.Scattering = global.Scattering || {};
   global.Scattering.combat = {
     roll, cheb, key, inGrid, turnOrder, patternCells,
-    isFoe, nearestEnemy, stepToward, stepAway, villagerDecide,
+    isFoe, nearestEnemy, distanceToBody, stepToward, stepAway, villagerDecide,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

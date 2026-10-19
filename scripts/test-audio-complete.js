@@ -6,6 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
+const regional = require('../src/js/regional-audio'); // Same dependency as production index/app.
 
 let pass = 0, fail = 0;
 const failures = [];
@@ -68,6 +69,7 @@ ok('CombatAudio extracted', !!A);
 
 // ---------- collect all fired events ----------
 const events = new Set();
+for (const hook of Object.keys(regional.specs)) events.add(hook);
 for (const f of fs.readdirSync(path.join(ROOT, 'src/js'))) {
   if (!f.endsWith('.js')) continue;
   const src = fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8');
@@ -191,7 +193,7 @@ for (const [name, floor] of Object.entries(DEEPENED_FLOORS)) {
 }
 
 console.log(`\n=== RESULTS: ${pass} pass, ${fail} fail ===`);
-console.log(`Events with real sound: ${sounded}/${eventList.length - CONTROL.size}`);
+console.log(`Sound-producing event/variant checks: ${sounded}; base event names: ${eventList.length - CONTROL.size}`);
 if (failures.length) {
   console.log('\nFailures:');
   failures.forEach(f => console.log(`  - ${f}`));

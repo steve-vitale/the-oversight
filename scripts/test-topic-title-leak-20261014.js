@@ -24,8 +24,9 @@ const EXPECTED = {
 };
 
 async function main() {
-  const { Game, loadFails } = await loadGame({ seed: 20261014, mode: 'test' });
+  const { Game, loadFails } = await loadGame({ seed: Number(process.env.SEED || 20261014), mode: 'test' });
   if (loadFails && loadFails.length) { fail('module load failures: ' + loadFails.join('; ')); return; }
+  Game.debugRegion = 'na_eastern_woodlands';
   await setupGame(Game);
   const v = Game.state.village;
   const player = Game.villagerId;
@@ -41,7 +42,7 @@ async function main() {
     if (L === EXPECTED[tid]) ok(`topicLabel(${tid}) = "${L}"`);
     else fail(`topicLabel(${tid}) = "${L}", expected "${EXPECTED[tid]}"`);
     if (L.indexOf('?') !== -1) fail(`topicLabel(${tid}) is a question: "${L}"`);
-    try { askText[tid] = String(Game.topic2Label(vid, tid) || ''); } catch (e) { askText[tid] = ''; }
+    try { askText[tid] = String(Game.topic2Label(vid, tid) || ''); } catch (e) { fail('topic2Label threw for ' + tid + ': ' + e.message); askText[tid] = ''; }
   }
 
   // 2. Full-line check: seed a threadLog with t2 threads and render the
@@ -67,9 +68,18 @@ async function main() {
   let resume = null;
   try {
     Game.convoThreadOpen(vid, 'neighbors', Game.convoTopicLabel(vid, 'neighbors'), 'changed the subject');
+    if (Game.convoTopicLedger(vid).open.some(o => o.tid === 'neighbors')) fail('missing spoken beat planted a ghost thread');
+    else ok('missing spoken beat cannot plant a ghost thread');
+    Game.convoThreadOpen(vid, 'neighbors', Game.convoTopicLabel(vid, 'neighbors'), 'changed the subject', '"Hm."');
+    if (Game.convoTopicLedger(vid).open.some(o => o.tid === 'neighbors')) fail('micro-filler planted a ghost thread');
+    else ok('micro-filler cannot plant a ghost thread');
+    const snippet = '"The next village asked us to share the creek. We should hear them out."';
+    Game.convoThreadOpen(vid, 'neighbors', Game.convoTopicLabel(vid, 'neighbors'), 'changed the subject', snippet);
     const L = Game.convoTopicLedger(vid);
     const o = (L.open || []).find(x => x.tid === 'neighbors');
     if (o) {
+      if (!String(o.snippet || '').includes('share the creek')) fail('substantive memory was not retained');
+      else ok('substantive spoken memory is retained');
       // emulate the resume line construction without forcing an opener
       const inner = `We never finished talking about ${o.label || 'the neighbors'} — we left it mid-thought.`;
       if (/[?](?![\w])/.test(inner)) fail('resume line question leak: ' + inner);
@@ -82,8 +92,8 @@ async function main() {
 
   // 3. Menus unchanged: the ASK choice text still comes from topic2Label.
   const choices = [];
-  try { Game.startConvo(vid); const ch = Game.convoChoices(vid) || []; for (const x of ch) if (x && /^ask:/.test(String(x.id || ''))) choices.push(x); } catch (e) {}
-  try { Game.endConvo(vid, 'left'); } catch (e) {}
+  try { Game.startConvo(vid); const ch = Game.convoChoices(vid) || []; for (const x of ch) if (x && /^ask:/.test(String(x.id || ''))) choices.push(x); } catch (e) { fail('menu rendering threw: ' + e.message); }
+  try { Game.endConvo(vid, 'left'); } catch (e) { fail('conversation close threw: ' + e.message); }
   const othersChoice = choices.find(x => x.id === 'ask:others');
   if (!othersChoice) ok('no ask:others choice this convo (gate, not a failure)');
   else if (/Who's on your mind/.test(String(othersChoice.label || '')))

@@ -1,14 +1,8 @@
 // Trapline tests: traps catch on ANY tile at dawn, not just the player's.
 // Regression test for the hunter-loop bug where away-tile traps never checked.
 // Usage: node scripts/test-trapline.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const H = require('./sim-harness');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -17,9 +11,7 @@ function ok(name, cond) {
 }
 
 function freshGameWithTraps() {
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
+  require('./godpath/lib').newRun(Game);
   const s = Game.state.scholar;
   Game.learnRecipe('snare', 3);
   s.inventory.push({ material: 'vine', units: 8 }, { material: 'stick', units: 8 });
@@ -58,7 +50,7 @@ function freshGameWithTraps() {
 }
 
 (async () => {
-  await Game.init();
+  ({ Game } = await H.loadGame({ seed: Number(process.env.SEED || 7), mode: 'trapline', narration: true }));
 
   // 1. away traps check at dawn (statistical: 30 dawns, both traps set)
   let awayCatches = 0, homeCatches = 0;

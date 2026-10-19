@@ -10,7 +10,7 @@
 //  3. autoEquip wears it at spawn (torso slot).
 //  4. fieldFight respects it: P=10 -> r=10/30, absorbs ~1/3 per hit.
 //
-// Seeds: 7, 42, 99 (deterministic via sim-harness mulberry32-before-eval).
+// Prepared occupation cohort, seed42; this proves spawn mechanics, not natural exposure.
 'use strict';
 const simH = require('./sim-harness');
 const { loadGame, setupGame } = simH;
@@ -23,10 +23,12 @@ function ok(cond, msg) {
 }
 
 (async () => {
+  // One shared-harness world; hydrate real occupation-controlled starters below.
+  const { Game } = await loadGame({ seed: 42, mode: 'test', fullTelemetry: false });
+  Game.debugRegion = 'na_eastern_woodlands';
+  await setupGame(Game);
   console.log('== 1. itemBias ===');
   {
-    const { Game } = await loadGame({ seed: 7, mode: 'test', fullTelemetry: false });
-    await setupGame(Game);
     const occs = (Game.data.characterGen || {}).occupations || [];
     for (const oid of OCCUPATIONS) {
       const o = occs.find(x => x.id === oid);
@@ -37,8 +39,6 @@ function ok(cond, msg) {
 
   console.log('== 2. candidates include bark_armor ==');
   {
-    const { Game } = await loadGame({ seed: 42, mode: 'test', fullTelemetry: false });
-    await setupGame(Game);
     const occs = (Game.data.characterGen || {}).occupations || [];
     for (const oid of OCCUPATIONS) {
       const o = occs.find(x => x.id === oid);
@@ -50,11 +50,14 @@ function ok(cond, msg) {
   console.log('== 3. villagers wear it at spawn ==');
   {
     let worn = 0, owned = 0;
-    for (const seed of [7, 42, 99]) {
-      const { Game } = await loadGame({ seed, mode: 'test', fullTelemetry: false });
-      await setupGame(Game);
-      for (const vid of (Game.state.village.roster || [])) {
-        const vp = (Game.data.villagers || []).find(x => x.id === vid) || {};
+    // Explicit occupation opportunity, not a promise that an arbitrary roster
+    // contains a bark-biased job. Real hydration runs genItemCandidates,
+    // choosePersonalFive and autoEquip, with the normal seeded random stream.
+    for (const occupation of OCCUPATIONS) {
+      for (let i = 0; i < 16; i++) {
+        const vp = Game.hydrateSeed({ id: 'prepared-bark-' + occupation + '-' + i,
+          name: 'Prepared woodland worker', formerOccupation: occupation, age: 35,
+          origin: 'Columbus, Ohio' });
         const has = (vp.items || []).includes('bark_armor') || (vp.stashed || []).includes('bark_armor');
         if (!has) continue;
         owned++;
@@ -62,25 +65,23 @@ function ok(cond, msg) {
         if (torso.itemId === 'bark_armor' || torso === 'bark_armor') worn++;
       }
     }
-    ok(owned > 0, `some villagers own bark_armor (${owned} across 3 seeds)`);
+    ok(owned > 0, `some villagers own bark_armor (${owned} across64 actual hydrated starters with bark-biased occupations)`);
     ok(worn > 0, `some villagers wear it at spawn (${worn}/${owned})`);
   }
 
   console.log('== 4. fieldFight respects P=10 ==');
   {
-    const { Game } = await loadGame({ seed: 99, mode: 'test', fullTelemetry: false });
-    await setupGame(Game);
     // find a villager wearing bark_armor, or force-equip one
     let vid = null;
     for (const id of (Game.state.village.roster || [])) {
-      const vp = (Game.data.villagers || []).find(x => x.id === id) || {};
+      const vp = Game.getPerson(id) || {};
       const torso = ((vp.equipped || {}).torso || {});
       if (torso.itemId === 'bark_armor' || torso === 'bark_armor') { vid = id; break; }
     }
     if (!vid) {
       // force: give first villager bark_armor and gear up
       vid = (Game.state.village.roster || [])[0];
-      const vp = (Game.data.villagers || []).find(x => x.id === vid) || {};
+      const vp = Game.getPerson(vid) || {};
       vp.items = (vp.items || []).concat(['bark_armor']);
       const S = globalThis.Scattering || {};
       if (S.equipment) S.equipment.autoEquip(vp, Game.data.items);
@@ -94,7 +95,7 @@ function ok(cond, msg) {
       if ((rec.vTaken || 0) > 0) hits++;
     }
     // direct unit check: armorOf returns 10 for the wearer
-    const vp = (Game.data.villagers || []).find(x => x.id === vid) || {};
+    const vp = Game.getPerson(vid) || {};
     const S = globalThis.Scattering || {};
     let p = 0;
     try { p = S.equipment.armorOf(vp, Game.data.items) || 0; } catch (e) {}

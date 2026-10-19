@@ -128,6 +128,11 @@ function noAlienWord(t) { return !/alien/i.test(t); }
     ok(/Whatever they're wearing stops this/i.test(H.sayText()), `seed ${seed}: F6 pre-reveal lesson is wordless but legible`);
     G.apRevealAlien('vex_marlowe', 'test');
     G.state.scholar._beamHorrorSeen = false;
+    // The first beam can really kill its target. The post-reveal narration
+    // is a separate prepared living target, not an action by a corpse.
+    G.over = false;
+    G.state.scholar.health = 100;
+    G.tbfight = { fighters: [{ key: 'p', kind: 'player', name: 'You', hp: 100, maxHp: 100, alive: true }], over: false };
     H.clearLog();
     G.apBeamHit('player', 0, "Vex's phase lance", { damageType: 'alien_beam', pid: 'vex_marlowe' });
     ok(/alien armor/i.test(H.sayText()), `seed ${seed}: F6 post-reveal horror says "alien armor"`);

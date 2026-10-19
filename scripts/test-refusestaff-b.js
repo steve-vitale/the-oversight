@@ -32,7 +32,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 
 const LANDED_SHA = '259e30160'; // sim-huntstaff-b4 GO — the landed layer
 
@@ -49,7 +49,7 @@ try {
 function landedLayer() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'hs-landed-'));
   const f = path.join(dir, 'huntstaff-landed.js');
-  const src = execSync(`git -C ${path.join(__dirname, '..')} show ${LANDED_SHA}:scripts/policies/huntstaff.js`,
+  const src = execFileSync('git', ['-C', path.join(__dirname, '..'), 'show', LANDED_SHA + ':scripts/policies/huntstaff.js'],
     { encoding: 'utf8', maxBuffer: 1 << 20 });
   fs.writeFileSync(f, src);
   return require(f);

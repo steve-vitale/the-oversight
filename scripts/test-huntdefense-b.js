@@ -27,8 +27,11 @@ function main() {
   const before = files.map(f => sha1(path.join(CORPUS, f)).slice(0, 12)).join(',');
   check('corpus has 32 per-seed files', files.length === 32, 'got ' + files.length);
 
-  const out1 = '/tmp/hd-proof-1.json';
-  const out2 = '/tmp/hd-proof-2.json';
+  // Each invocation owns its outputs; concurrent agents must not overwrite
+  // the same /tmp files while comparing determinism or corpus integrity.
+  const temp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'oversight-huntdefense-'));
+  const out1 = path.join(temp, 'proof-1.json');
+  const out2 = path.join(temp, 'proof-2.json');
   execFileSync('node', [ANALYZER, out1], { cwd: ROOT });
   execFileSync('node', [ANALYZER, out2], { cwd: ROOT });
   const b1 = fs.readFileSync(out1, 'utf8');
@@ -84,7 +87,7 @@ function main() {
   check('raid-outcome gap declared',
     /NOT MEASURABLE/.test(r.raidOutcomes), r.raidOutcomes.slice(0, 60));
 
-  try { fs.unlinkSync(out1); fs.unlinkSync(out2); } catch (e) {}
+  fs.unlinkSync(out1); fs.unlinkSync(out2); fs.rmdirSync(temp);
 
   console.log(failures === 0 ? '\nALL GREEN' : '\n' + failures + ' FAILURES');
   process.exit(failures === 0 ? 0 : 1);

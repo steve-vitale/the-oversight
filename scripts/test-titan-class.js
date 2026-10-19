@@ -12,6 +12,10 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || '20261011', 10);
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ a >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+(async () => {
+if (process.env.SKIP_TITANS) {
+  // Retain the explicit missing-module red control. Normal proof uses the
+  // shared harness and a real map, not the old mapless eval fixture.
 Math.random = mulberry32(SEED); // seeded BEFORE eval: modules capture Math.random at load
 
 global.SCATTER_DATA = {};
@@ -47,9 +51,14 @@ delete global.window;
 // declare a local const Game here; it would TDZ-shadow the eval'd modules.
 Game.data = global.SCATTER_DATA;
 
+} else {
+  const K = require('./godpath/lib');
+  global.Game = await K.load({ seed: SEED });
+  K.newRun(global.Game);
+}
 // ---- minimal world ----
 Game.state = Game.state || {};
-Game.state.scholar = { day: 40, hp: 200, maxHp: 200, inventory: [] };
+Game.state.scholar = Object.assign(Game.state.scholar || {}, { day: 40, health: 200, hp: 200, maxHp: 200, inventory: [] });
 Game.state.otherVillages = [
   { id: 'ashford', name: 'Ashford', opinion: 30, roster: [
     { id: 'ash_speaker', name: 'Mara Voss', alive: true },
@@ -70,7 +79,8 @@ Game.ledgerAdd = () => {};
 const said = [];
 Game.say = (t) => { said.push(String(t)); };
 Game.sysSay = (t) => { said.push('[SYS] ' + String(t)); };
-Game.map = { px: 4, py: 4 };
+if (!process.env.SKIP_TITANS) { Game.map.px = 4; Game.map.py = 4; }
+else Game.map = { px: 4, py: 4 };
 
 let pass = 0, fail = 0;
 function check(name, cond, extra) {
@@ -217,3 +227,5 @@ check('the turn is said aloud', said.some(t => /THE TURN/i.test(t)), said.join('
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed (seed ' + SEED + ')');
 process.exit(fail ? 1 : 0);
+
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

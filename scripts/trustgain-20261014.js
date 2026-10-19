@@ -60,7 +60,7 @@ function callerName(skipExtra) {
     // caller (giveFood, makeAmends, comfort...) and its `name` field.
     // Seeing through it keeps write rows and progressive rows on the
     // same engine caller. The name field is captured separately (wrap 5).
-    'resolveConsequence']);
+    'resolveConsequence', '_creditPantryGift']);
   if (skipExtra) for (const s of skipExtra) skip.add(s);
   const fs = frames(skip);
   if (!fs.length) return '?';
@@ -219,6 +219,7 @@ function installTrustCensus(Game) {
       census.daySamples.push({
         day: dayNow(), vid: String(vid),
         scholarTrust: tr === undefined ? null : tr,
+        writeIndex: census.writes.length, // passive exact observation boundary
         roster: (v.roster || []).length,
       });
     } catch (e) {}
@@ -243,6 +244,7 @@ const CHANNELS = {
   askSupport: 'gain:favor-support',         // game.js askSupport (+5)
   confrontGossip: 'gain:confrontation-gossip', // game.js confrontGossip (+4)
   donateToPantry: 'gain:donate-unload',     // game.js donateToPantry (kcal/500, x2 generous)
+  putAwayFinished: 'gain:counter-unload',   // actual deliberate counter transfer
   applyRep: 'gain:rep-drift',               // game.js applyRep (direct-witness trust ripple)
   abilityOnAcquire: 'gain:ability-unlock',  // game.js abilityOnAcquire
   evStranger: 'gain:event-stranger',        // game.js evStranger
@@ -268,6 +270,8 @@ const CHANNELS = {
   slotMoment: 'gain:mentor-slot',           // progression.js — mentored through the slot moment (+4)
   expeditionReturn: 'gain:expedition-return', // villager-agency.js — came back from an expedition (+1)
   npcNodeTravel: 'gain:forage-deed',        // game.js npcNodeTravel — foraged the wilds for the village (+1)
+  mapmemButcherForCarry: 'gain:haul-deed', // villager-mapmem.js — actual carcass taken for carry (+1); unknown flesh is not credited as food
+  mapmemHaulAt: 'gain:haul-deed', // actual arrival/carcass handling (+1), including unknown flesh; not a food deed
   incidents: 'gain:fireside-conflict',      // game.js conflictIncident — sided/cold-shouldered (+2/-2, mixed)
   conflictIncident: 'gain:fireside-conflict', // same, closure frame named for the fn
   npcTakeAction: 'gain:npc-chat',           // game.js npcTakeAction — NPCs chatting near you warms them toward you (+1, both ways)

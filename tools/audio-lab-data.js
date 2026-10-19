@@ -1,5 +1,5 @@
 window.AUDIO_LAB_DATA = {
- "generated": "2026-10-14T16:17:39.173Z",
+ "generated": "2026-10-17T14:19:53.699Z",
  "monsters": [
   {
    "id": "bulldozer",
@@ -845,6 +845,126 @@ window.AUDIO_LAB_DATA = {
    "source": "REUSED from finale (placeholder until THE NETWORK gets its own)",
    "license": "unknown",
    "why": "The heart of the Network: the show itself, hungering like the Finale. Reuses the title-card timer for now."
+  },
+  {
+   "id": "murkcap",
+   "name": "Murkcap",
+   "wave": 1,
+   "hook": "sporefallBreath",
+   "files": [],
+   "synth": "sporefallBreath",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "The cap breathes spores rather than roaring. A thin shimmer gives way to a low, dusty exhale: the fungal body is an air chamber, and the threat lives in the cloud."
+  },
+  {
+   "id": "rut_king",
+   "name": "Rut King",
+   "wave": 1,
+   "hook": "rutKingCharge",
+   "files": [],
+   "synth": "rutKingCharge",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "The stag claims the clearing with a long, low bellow; its charge compresses that breath into a rough descending grunt. The voice follows the rack and lungs, without adding a new attack warning."
+  },
+  {
+   "id": "living_wire",
+   "name": "The Living Wire",
+   "wave": 1,
+   "hook": "wireCrackle",
+   "files": [],
+   "synth": "wireCrackle",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "The eel is a living electrical fault in the water. A brief, dry-edged crackle bends down in pitch as the charge drains. This is a creature voice, not an extra grid telegraph or a promise of discharge timing."
+  },
+  {
+   "id": "anaconda_empress",
+   "name": "The Anaconda Empress",
+   "wave": 1,
+   "hook": "anacondaCoil",
+   "files": [],
+   "synth": "anacondaCoil",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "The empress is pressure and wet muscle rather than a mammal roar. Low friction and breath sink together as a heavy coil tightens; the sound suggests mass without announcing an otherwise hidden ambush."
+  },
+  {
+   "id": "dustboar",
+   "name": "Dustboar",
+   "wave": 1,
+   "hook": "dustboarGrunt",
+   "files": [],
+   "synth": "dustboarGrunt",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "A short, abrasive boar grunt breaks through dusty breath. The compact falling note belongs to a heavy body close to the ground; its grit distinguishes it from the long territorial stag bellow."
+  },
+  {
+   "id": "sunback",
+   "name": "Sunback",
+   "wave": 1,
+   "hook": "sunbackHiss",
+   "files": [],
+   "synth": "sunbackHiss",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "The monitor expels a high, grainy hiss over a low body tone. Its sustained breath is reptilian and dry, keeping the sun-warmed animal distinct from electrical crackle or a cat growl."
+  },
+  {
+   "id": "sweeps_week",
+   "name": "Sweeps Week",
+   "wave": 1,
+   "hook": "tigerBreath",
+   "files": [],
+   "synth": "tigerBreath",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "The tiger has a low, rough breath once combat is underway. It adds no pre-contact world warning and changes no silent ambush or grid indicator: the absence of birds remains the authored clue."
+  },
+  {
+   "id": "cliffhanger",
+   "name": "Cliffhanger",
+   "wave": 1,
+   "hook": "crocJaw",
+   "files": [],
+   "synth": "crocJaw",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "A heavy jaw closes with a brief wet clack and a low thump. The crocodile stays terse; it does not borrow a mammal roar or add a warning phase to the water ambush."
+  },
+  {
+   "id": "sanjun",
+   "name": "The Mountain Lord",
+   "wave": 1,
+   "hook": "mountainTigerGrowl",
+   "files": [],
+   "synth": "mountainTigerGrowl",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "The mountain tiger carries a higher, longer chest growl than the quiet stalker. A rough falling tone and restrained breath give it weight without changing the pounce, cover or facing rules."
+  },
+  {
+   "id": "drumbelly_tanuki",
+   "name": "Drum-Belly",
+   "wave": 1,
+   "hook": "tanukiDrum",
+   "files": [],
+   "synth": "tanukiDrum",
+   "origin": "gap",
+   "source": "Project-authored shared Web Audio voice; no field recording registered",
+   "license": "Project source (no third-party recording)",
+   "why": "Two hollow, falling drum notes make the inflated belly audible. This is the creature voice; the existing swell animation and combat windup still own the counter window and thunder timing."
   }
  ],
  "sfx": [

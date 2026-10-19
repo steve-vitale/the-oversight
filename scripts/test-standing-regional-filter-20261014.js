@@ -24,7 +24,9 @@
 // expected 0). GREEN after the fix in src/js/standing.js.
 'use strict';
 const assert = require('assert');
-const { loadGame, setupGame } = require('./sim-harness');
+const K = require('./godpath/lib');
+const { stripReadiness, prepareReadiness } = require('./lib/standing-fixture');
+let sharedGame;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -51,14 +53,16 @@ function mkBelong(Game, id, trust) {
 }
 
 async function freshGame() {
-  const { Game } = await loadGame({ seed: 90210, mode: 'standfilter-proof' });
-  await setupGame(Game);
+  const Game = sharedGame;
+  K.newRun(Game);
   Game.state.scholar.day = 60; // 30+ days old + trust 40+ => seasoned
   clearLinks(Game);
   return Game;
 }
 
 (async () => {
+  sharedGame = await K.load({ seed: Number(process.env.SEED || 90210) });
+  sharedGame.debugRegion = 'na_eastern_woodlands';
   console.log('standing-regional-filter proof');
 
   // 1. ONE lone seasoned subordinate link: NOT regional+ -> 0 diplomacy.
@@ -153,7 +157,10 @@ async function freshGame() {
     Game.state.scholar.day = 30;
     for (const id of ['voice_mimic_radio', 'mirror_stag', 'review_drone', 'bright_idea', 'memory_projector']) Game.recordWaveKill(id);
     for (const id of ['redactor', 'gavel', 'focus_group', 'spool']) Game.recordWaveKill(id);
-    ok('war path still unlocks wave 4 (4 kills = 100)', Game.villageStanding().war === 100 && Game.unlockedWave() === 4);
+    stripReadiness(Game);
+    ok('standing without live readiness holds at wave 3', Game.unlockedWave() === 3);
+    ok('real combat readiness fixture meets the wave-4 bars', prepareReadiness(Game, 4).ready);
+    ok('war path still unlocks wave 4 once ready (4 kills = 100)', Game.villageStanding().war === 100 && Game.unlockedWave() === 4);
     ok('wave 5 still locked without w4 faced', Game.unlockedWave() !== 5);
   }
 

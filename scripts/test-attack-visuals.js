@@ -37,13 +37,18 @@ async function main() {
   const monsters = Game.data.monsters || [];
   const patternTypes = new Set();
   for (const m of monsters) {
-    const ptype = (m.attack && m.attack.pattern && m.attack.pattern.type) || 'NONE';
-    patternTypes.add(ptype);
+    for (const atk of [m.attack, ...(m.attacks || [])]) {
+      const ptype = (atk && atk.pattern && atk.pattern.type) || 'NONE';
+      patternTypes.add(ptype);
+    }
   }
   console.log('Pattern types found:', [...patternTypes].join(', '));
   
   // The collector handles these (beam is handled separately by existing renderer)
-  const handled = ['burst', 'charge', 'line', 'single', 'direct', 'rush', 'ambush'];
+  // Lunge now declares a real committed aim cell; the renderer uses its
+  // existing single-target bucket. Shared-Game hit/dodge/knowledge proof lives
+  // in godpath/test-lunge-runtime.js, rather than accepting an empty telegraph.
+  const handled = ['burst', 'charge', 'line', 'single', 'direct', 'rush', 'ambush', 'lunge', 'melee'];
   for (const pt of patternTypes) {
     if (pt === 'beam' || pt === 'NONE') continue;
     ok(`pattern '${pt}' has a visual class`, handled.includes(pt), `missing visual for ${pt}`);

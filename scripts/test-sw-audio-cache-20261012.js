@@ -2,6 +2,10 @@
 // Runs the real fetch handler from sw.js against stubbed SW globals.
 'use strict';
 const fs = require('fs');
+const { execFileSync } = require('child_process');
+const offlineProof=execFileSync(process.execPath,[require('path').join(__dirname,'test-offline-assets.js')],{encoding:'utf8',maxBuffer:2e6});
+process.stdout.write(offlineProof);
+if(!/offline asset proof green:/.test(offlineProof))throw Error('offline proof did not execute');
 const src = fs.readFileSync(__dirname + '/../sw.js', 'utf8');
 
 let checks = 0, fails = 0;

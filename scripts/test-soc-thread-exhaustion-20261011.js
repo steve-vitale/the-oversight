@@ -19,50 +19,8 @@
 // Seeded BEFORE eval. Full production script list (minus DOM-only + drama).
 // Usage: node scripts/test-soc-thread-exhaustion-20261011.js [SEED=...]
 
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-const SEED = parseInt(process.env.SEED || '20261011', 10);
-
-let _s = SEED >>> 0;
-Math.random = function () {
-  _s |= 0; _s = (_s + 0x6D2B79F5) | 0;
-  let t = Math.imul(_s ^ (_s >>> 15), 1 | _s);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-};
-
-global.fetch = (f) => Promise.resolve({
-  json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
-});
-global.window = global;
-const files = [
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js',
-  'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js',
-  'src/js/contests.js', 'src/js/broadcast.js', 'src/js/contestEngine.js',
-  'src/js/alienPlayers.js', 'src/js/storage.js', 'src/js/perceive.js',
-  'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js',
-  'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/waveLedger.js',
-  'src/js/feastBuff.js', 'src/js/ledger.js', 'src/js/abilityActions.js',
-  'src/js/monsterBehaviors.js', 'src/js/partyTactics.js',
-  'src/js/sigW3a.js', 'src/js/statusEffects.js', 'src/js/sigW3b.js',
-  'src/js/metaProgression.js', 'src/js/sigW3c.js',
-  'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js',
-  'src/js/membership.js', 'src/js/havenGrowth.js', 'src/js/hierarchy.js',
-  'src/js/comms.js', 'src/js/safetynets.js', 'src/js/villageAgency.js',
-  'src/js/debug-scenarios.js', 'src/js/build.js',
-];
-for (const f of files) { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-delete global.window;
-const Game = globalThis.Scattering.Game;
-Game.emit = function (m) { return m; };
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
@@ -71,11 +29,8 @@ function ok(name, cond, extra) {
 }
 
 async function main() {
-  await Game.init();
-  Game.genDetail = () => ({});
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261011) });
+  K.newRun(Game);
 
   // Force a live mourning event (grief > 0 -> t2LatelyEvent returns mourning).
   Game.state.village.grief = 1;
@@ -83,22 +38,23 @@ async function main() {
   const roster = Game.state.village.roster.filter(id => id !== Game.villagerId);
   let vid = null, opened = null;
   for (const id of roster) {
-    try {
-      const comm = Game.npcComm ? Game.npcComm(id) : { level: 'full' };
-      if (comm.level === 'none') continue;
-    } catch (e) {}
-    const r0 = Game.startConvo(id);
-    const ids = (r0.choices || []).map(c => c.id);
+    if (Game.commLevel(id).level !== 'full') continue;
+    if (Game.t2LatelyEvent(id)?.kind !== 'mourning') continue;
+    let current = Game.startConvo(id);
+    // Follow the current offered route out of the grief opening.
+    if (current.choices.some(choice => choice.id === 'dlg:subject')) {
+      current = Game.convoTurn(id, 'dlg:subject');
+    }
+    const ids = current.choices.map(choice => choice.id);
     const pick = ids.includes('alive:event:mourning') ? 'alive:event:mourning'
       : ids.includes('ask:lately') ? 'ask:lately' : null;
     if (pick) {
-      const r1 = Game.convoTurn(id, pick);
-      if (r1 && r1.line && /grief|died|lost someone|schedule itself/i.test(r1.line)) {
-        vid = id; opened = r1;
-        break;
+      const next = Game.convoTurn(id, pick);
+      if (next?.line && Game.convoGet(id).thread === 'lately' && Game.t2LatelyEvent(id)?.kind === 'mourning') {
+        vid = id; opened = next; break;
       }
     }
-    try { Game.endConvo(id, 'done'); } catch (e) {}
+    Game.endConvo(id, 'left');
   }
   ok('a mourning lately-thread opened', !!vid, vid || 'none qualified');
   if (!vid) { console.log('SETUP FAILED'); process.exit(2); }
@@ -106,11 +62,13 @@ async function main() {
 
   // Hammer "tell me more" 8 times — past the 3 follow-up beats.
   const seen = [];
+  let retired = false;
   let dryAdmission = false;
   let r = opened;
   for (let t = 0; t < 8; t++) {
     const ids = (r.choices || []).map(c => c.id);
-    if (!ids.includes('dlg:more')) {
+    if (!K.findConvoChoice(Game,vid,'dlg:more')) {
+      retired = true;
       console.log(`turn ${t}: dlg:more retired from menu (ids: ${ids.slice(0, 6).join(',')})`);
       break;
     }
@@ -122,17 +80,23 @@ async function main() {
     }
     if (r.ended) break;
   }
-  Game.endConvo(vid, 'done');
+  ok('three substantive follow-ups plus one dry admission delivered', seen.length === 4 && dryAdmission,
+    'seen=' + seen.length + ' dry=' + dryAdmission);
+  ok('tell-me-more retires after the dry admission', retired && !K.findConvoChoice(Game,vid,'dlg:more'));
+  ok('exhausted generated thread stays dry on repeated engine queries', Array.from({ length: 8 }, () => Game.topic2Beat(vid)).every(line => line === null));
+  Game.endConvo(vid, 'left');
 
   // THE PROOF: no verbatim repeat on the player-visible surface.
-  const dupes = seen.filter((x, i) => seen.indexOf(x) !== i);
-  ok('zero verbatim repeats across 8 "tell me more" taps (player-visible)',
+  const visible = [String(opened.line), ...seen];
+  const dupes = visible.filter((x, i) => visible.indexOf(x) !== i);
+  ok('zero verbatim repeats across offered follow-ups (player-visible)',
     dupes.length === 0, dupes.slice(0, 1).join(' | ').slice(0, 120));
   ok('the thread dries honestly (dry admission spoken or menu retired)',
-    dryAdmission || seen.length <= 4,
+    dryAdmission && retired,
     `seen=${seen.length} dryAdmission=${dryAdmission}`);
   // And the transcript ledger agrees (it always did — the bug was on screen).
   const t = (Game.convoGet(vid).transcript || []).filter(e => e.who === 'them').map(e => String(e.text));
+  ok('every returned follow-up was actually recorded as speech', seen.every(line => t.includes(line)));
   const tdupes = t.filter((x, i) => t.indexOf(x) !== i);
   ok('zero verbatim repeats in the transcript ledger', tdupes.length === 0,
     tdupes.slice(0, 1).join(' | ').slice(0, 120));

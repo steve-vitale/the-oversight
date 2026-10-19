@@ -21,6 +21,7 @@
 // (Patch-file round-trip for RED, never stash.)
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
+const proofCase = require('./godpath/isolated-proof-cases')(['promise','clean','two']);
 
 let pass = 0, fail = 0;
 function ok(cond, name) {
@@ -82,6 +83,7 @@ async function handoffCase(seed, withPromise) {
 }
 
 async function main() {
+  if (proofCase === 'promise') {
   // Case 1: open promise at death -> the book is named once.
   const c1 = await handoffCase(4242, true);
   ok(c1.choseRight, 'successor chosen by trust');
@@ -101,12 +103,16 @@ async function main() {
     console.log('   LINE:', line.slice(0, 220));
   }
 
+  }
   // Case 2: clean book -> silence (old behavior preserved).
+  if (proofCase === 'clean') {
   const c2 = await handoffCase(4243, false);
   ok(c2.choseRight, 'case2: successor chosen by trust');
   ok(c2.openBook.length === 0, `case2: no open-book line on a clean book (got ${c2.openBook.length})`);
 
+  }
   // Case 3: two open promises -> both named, still one line.
+  if (proofCase === 'two') {
   const c3 = await (async () => {
     const { Game } = await loadGame({ seed: 4244, mode: 'succession-openbook-proof' });
     await setupGame(Game);
@@ -149,6 +155,7 @@ async function main() {
     console.log(`   (case3 skipped: only ${c3.askers.length} promisable NPC found — fixture, not code)`);
   }
 
+  }
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 }

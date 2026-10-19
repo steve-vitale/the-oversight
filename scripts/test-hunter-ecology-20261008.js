@@ -9,30 +9,14 @@
 //      removes one animal; empty ground gets one honest quiet line.
 //   F2 encounters.js checkAnimals (the live path) is wildlife-linked again —
 //      the 2026-10-08 rewrite had dropped game.js's ECOLOGY link.
-//   F3 gill nets have 12 uses and fish real creek_chub/bluegill populations.
+//   F3 gill nets have 16 uses and fish real creek_chub/bluegill populations.
 //   F4 setTrap costs time (pit = 96 ticks "hard labor", else 16) and refuses
 //      water traps on dry land; the dead can't set traps.
 // RNG is fully stubbed per test — no seeded flakiness.
 // Run: node scripts/test-hunter-ecology-20261008.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
- 'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
- 'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js',
- 'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
- 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
- 'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-delete global.window;
-const Game = globalThis.Scattering.Game;
-const realRand = Math.random;
+const K = require('./godpath/lib');
+const SEED = parseInt(process.env.SEED || '20261008', 10);
+let Game, realRand;
 let pass = 0, fail = 0;
 const ok = (n, c, d) => { if (c) { pass++; } else { fail++; console.log('FAIL  ' + n + (d ? ' — ' + d : '')); } };
 const say = () => { const s = (Game.log || []).map(x => x.text || x).join(' '); Game.log.length = 0; return s; };
@@ -54,7 +38,9 @@ const craftOk = id => { let m = null; for (let i = 0; i < 10 && !m; i++) m = Gam
 function withRand(seq, fn) { let i = 0; Math.random = () => (i < seq.length ? seq[i++] : 0.5); try { return fn(); } finally { Math.random = realRand; } }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: SEED, narration: true });
+  Game.debugRegion = 'na_eastern_woodlands';
+  realRand = Math.random;
 
   // ---- F1a: a catch removes one animal from the tile ----
   {
@@ -158,14 +144,19 @@ function withRand(seq, fn) { let i = 0; Math.random = () => (i < seq.length ? se
     withRand([0.01], () => Game.checkNets());
     const q = say();
     ok('no fish here: no catch', !/caught a fish/i.test(q));
-    // stocked: 12 forced catches break the net
+    // Force one fish per haul (catch=0.01, haul=0.5, species=0).
+    // Sixteen catches must exhaust exactly sixteen uses and real fish.
     t.wildlife = { creek_chub: 30 };
-    withRand([], () => { Math.random = () => 0.01; for (let i = 0; i < 12; i++) Game.checkNets(); });
-    Math.random = realRand;
+    for (let i = 0; i < 15; i++) withRand([0.01, 0.5, 0], () => Game.checkNets());
+    ok('net survives fifteen catches with one use left', t.nets.length === 1 && net.uses === 1);
+    ok('fifteen catches remove exactly fifteen fish', t.wildlife.creek_chub === 15);
+    say();
+    withRand([0.01, 0.5, 0], () => Game.checkNets());
     const brk = say();
-    ok('net breaks after 12 catches', (t.nets || []).length === 0, `nets left=${(t.nets || []).length}`);
+    ok('net breaks on its sixteenth catch', (t.nets || []).length === 0);
     ok('breakage is announced', /torn to shreds/i.test(brk));
-    ok('fish stock depleted by the net', (t.wildlife.creek_chub || 0) < 30, `chub left=${t.wildlife.creek_chub}`);
+    ok('sixteen catches remove exactly sixteen fish', t.wildlife.creek_chub === 14);
+
   }
 
   // ---- F2: encounters draw from the tile's wildlife ----

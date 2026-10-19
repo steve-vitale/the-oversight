@@ -1253,6 +1253,11 @@
       };
       if (def && def.kg != null) entry.kg = def.kg;
       if (def && def.kcalEach != null) entry.kcalEach = def.kcalEach;
+      var rewardIds = Object.values((((this.data || {}).rewardEconomy || {}).extraItems) || {}).reduce(function(a, b) { return a.concat(b); }, []);
+      if (def && (def.origin === 'alien' || rewardIds.indexOf(def.id) >= 0)) {
+        entry.alienLoot = true;
+        entry.alienEffectHidden = true;
+      }
       try {
         var s = this.state.scholar;
         s.inventory = s.inventory || [];
@@ -1278,12 +1283,24 @@
       // game.js rollAlienLoot). This path had no filter (diagnosis 2026-10-15).
       var taken = !!(this.state && this.state.fusionReactorHolder);
       var cands = items.filter(function (it) {
-        return it.origin === 'alien' && (it.tier || 1) <= t
+        var extras = ((((this.data || {}).rewardEconomy || {}).extraItems || {})[it.lootTier || it.tier || 1] || []);
+        return (it.origin === 'alien' || extras.indexOf(it.id) >= 0) && (it.lootTier || it.tier || 1) <= t
           && !it.kcalEach && it.class !== 'food'
           && !(taken && it.id === 'fusion_pellet');
-      });
+      }, this);
       if (!cands.length) return null;
-      return cands[Math.floor(Math.random() * cands.length)];
+      // Hot packages usually deliver their earned tier, while keeping the
+      // fuel/medicine curios in circulation. Removing those entirely also
+      // removed the reactor seed from established careers (18 -> 5 final
+      // bearers in the first 64-seed screen). One draw, no extra RNG call.
+      var best = Math.max.apply(null, cands.map(function(it) { return it.lootTier || it.tier || 1; }));
+      var starter = cands.filter(function(it) { return (it.lootTier || it.tier || 1) === 1; });
+      var hot = cands.filter(function(it) { return (it.lootTier || it.tier || 1) === best; });
+      var cfg = (((this.data || {}).rewardEconomy || {}).broadcast) || {};
+      var chance = best > 1 && starter.length ? ((cfg.starterGiftChance || [0, 0.45, 0.3])[best - 1] || 0) : 0;
+      var roll = Math.random();
+      if (roll < chance) return starter[Math.floor(roll / chance * starter.length)];
+      return hot[Math.min(hot.length - 1, Math.floor((roll - chance) / (1 - chance) * hot.length))];
     },
 
     // Care package: the fan club sends supplies. Quality and frequency scale
@@ -1301,7 +1318,7 @@
 
       ap.lastPackageDay = day;
       // Package quality scales with favor
-      var tier = favor >= 70 ? 3 : favor >= 40 ? 2 : 1;
+      var tier = this.broadcastRewardTier ? this.broadcastRewardTier('player') : (favor >= 70 ? 3 : favor >= 40 ? 2 : 1);
       // WACKY, NEVER DINNER (canon; break-it fame-seeker 2026-10-10): the
       // "Can labeled BEANS" (350 kcal, class food) used to be grantable
       // here — dinner wearing a joke label. The _showEnd prize filter
@@ -1338,7 +1355,11 @@
         this.say('The vault was feeling shy tonight — just the snacks. The thought is televised.');
       }
       this.say('Plus ' + kcal + ' kcal of fan-approved snacks.');
-      try { var _cap = this.kcalCap ? this.kcalCap() : 2400; this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + kcal); } catch (e) {}
+      try { var _cap = this.kcalCap ? this.kcalCap() : 2400;
+        var _nourish=Math.max(0,Math.min(kcal,_cap-(this.state.scholar.kcal || 0)));
+        this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + kcal);
+        this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:kcal,nourishment:_nourish}],'alien-food');
+      } catch (e) { console.warn('[food] alien meal failed',e); }
       return true;
     },
 
@@ -1426,7 +1447,11 @@
       this.say('🎁 You find a small bundle tucked where you\'ll find it. No one saw it left there.');
       this.say(line);
       this.say('(' + kcal + ' kcal of dried meat and clean water. Nothing traceable.)');
-      try { var _cap = this.kcalCap ? this.kcalCap() : 2400; this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + kcal); } catch (e) {}
+      try { var _cap = this.kcalCap ? this.kcalCap() : 2400;
+        var _nourish=Math.max(0,Math.min(kcal,_cap-(this.state.scholar.kcal || 0)));
+        this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + kcal);
+        this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:kcal,nourishment:_nourish}],'alien-food');
+      } catch (e) { console.warn('[food] alien meal failed',e); }
       // WREN (break-it 2026-10-08 r4): she never fights, so she had no
       // encounters and no reveal path — apKnowsAlien('wren') was forever
       // false and her introLines/signature were dead content. Her data says
@@ -1708,7 +1733,11 @@
         var kcal = 400 + Math.floor(Math.random() * 300);
         this.say('📦 A plain package, no card. Inside: real food, clean bandages, and a note in handwriting you almost recognize:');
         this.say('"Eat. Rest. They\'re watching the skies, not the ground. — a friend"');
-        try { var _cap = this.kcalCap ? this.kcalCap() : 2400; this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + kcal); } catch (e) {}
+        try { var _cap = this.kcalCap ? this.kcalCap() : 2400;
+        var _nourish=Math.max(0,Math.min(kcal,_cap-(this.state.scholar.kcal || 0)));
+        this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + kcal);
+        this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:kcal,nourishment:_nourish}],'alien-food');
+      } catch (e) { console.warn('[food] alien meal failed',e); }
         return true;
       } else {
         // NEUTRAL: weird, enthusiastic, mostly harmless
@@ -1720,7 +1749,11 @@
           ? 'The card: "' + per.name + '!! Hope you\'re doing great! Here\'s some stuff from home!"'
           : 'The card, in loopy handwriting: "Hope you\'re doing great! Here\'s some stuff from home!"'));
         this.say('Inside: snacks that taste like purple, a tiny flag, and a photo of ' + (_npk ? per.name : 'someone') + ' giving a thumbs-up.');
-        try { var _cap = this.kcalCap ? this.kcalCap() : 2400; this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + 200); } catch (e) {}
+        try { var _cap = this.kcalCap ? this.kcalCap() : 2400;
+          var _nourish=Math.max(0,Math.min(200,_cap-(this.state.scholar.kcal || 0)));
+          this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + 200);
+          this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:200,nourishment:_nourish}],'alien-food');
+        } catch (e) { console.warn('[food] alien snack failed',e); }
         return true;
       }
     },
@@ -2735,11 +2768,12 @@
     // not made — EQUIPPED in head/torso/legs/hands/shoes. Weapons and
     // accessories never count.
     // Full-body sets count per covered slot (head+torso+legs+shoes = 4).
+    // Optional holder is the actual target; omission keeps the player readout.
     // Returns array of {slot, itemId, source:'alien'}.
-    apBeamResistPieces: function () {
+    apBeamResistPieces: function (holder) {
       var pieces = [];
       try {
-        var s = this.state.scholar || {};
+        var s = holder === undefined ? (this.state.scholar || {}) : (holder || {});
         var equipped = s.equipped || {};
         // Armor slots only. 'feet' kept as legacy alias for old saves.
         var slots = ['head', 'torso', 'legs', 'hands', 'shoes', 'feet'];
@@ -2747,7 +2781,8 @@
           var slot = slots[i];
           var item = equipped[slot];
           if (!item) continue;
-          var itemId = item.itemId || item.id;
+          if (typeof item === 'object' && item.units != null && !(item.units > 0)) continue;
+          var itemId = typeof item === 'string' ? item : item.itemId || item.id;
           if (!itemId) continue;
           var def = null;
           try {
@@ -2860,8 +2895,12 @@
       // damage actually lands — tbFighter('player') is undefined and beams
       // used to announce then silently whiff (Steve 2026-10-08).
       var engineKey = (targetKey === 'player') ? 'p' : targetKey;
-      var maxHp = s.maxHp || 100;
-      var pieces = this.apBeamResistPieces();
+      var t = this.tbFighter(engineKey);
+      if (!t || !t.alive || !(t.hp > 0)) return 0;
+      var player = t.kind === 'player';
+      var maxHp = t.maxHp || (player ? s.maxHp : null) || 100;
+      var holder = player ? s : (!t._echoed && t.villagerId ? this.getPerson(t.villagerId) : t);
+      var pieces = this.apBeamResistPieces(holder);
       var n = pieces.length;
       // Base beam damage: devastating. This is the "oh shit" weapon.
       var base = Math.round(maxHp * (0.9 + Math.random() * 0.2));
@@ -2870,7 +2909,7 @@
       var final = Math.max(1, Math.round(base * mult));
       // THE "OH SHIT" MOMENT: first beam hit with no resistance.
       // The game tells you, clearly: your armor will not save you from this.
-      if (n === 0 && !s._beamHorrorSeen) {
+      if (player && n === 0 && !s._beamHorrorSeen) {
         s._beamHorrorSeen = true;
         this.say('💀 The beam doesn\'t care about your armor. It goes through like it isn\'t there.');
         // KNOWLEDGE GATE (break-it 2026-10-09 r7): "alien armor" names the
@@ -2882,10 +2921,10 @@
         this.say('💀 Your ' + this.apArmorName() + ' might as well be paper. ' + (_beamKnown ? 'You need alien armor — or something you love enough to resonate.' : 'Whatever they\'re wearing stops this. Yours doesn\'t.'));
         this.say('💀 THIS IS NOT A FAIR FIGHT. Run, or find resistant gear.');
         try { this.drama('beamHorror', s.mx, s.my); } catch (e) {}
-      } else if (n > 0 && n < 5 && !s._beamPartialSeen) {
+      } else if (player && n > 0 && n < 5 && !s._beamPartialSeen) {
         s._beamPartialSeen = true;
         this.say('◈ Your resistant gear flares — ' + n + ' ' + (n === 1 ? 'piece' : 'pieces') + ' catching the beam. It helps. It\'s not enough for a second hit.');
-      } else if (n >= 5 && !s._beamFullSeen) {
+      } else if (player && n >= 5 && !s._beamFullSeen) {
         s._beamFullSeen = true;
         this.say('◈ Your full resistant set sings — the beam breaks across it like water on stone. You can fight them now. It\'s still going to hurt.');
       }
@@ -2901,10 +2940,11 @@
       // game's most devastating attack played nothing.
       try { this.audioEvent('impact', { pattern: 'beam' }); } catch (e) {}
       try {
-        var t = this.tbFighter(engineKey);
         if (t && t.alive) {
+          final = this.wornDamage(player ? this.villagerId : t.villagerId, final, { scene: 'tactical', body: t });
           t.hp = Math.max(0, (t.hp || maxHp) - final);
-          var who = targetKey === 'player' ? 'You take' : (t.name || 'They take');
+          if (player) s.health = t.hp;
+          var who = player ? 'You take' : (t.name || 'They take');
           this.say('🔆 ' + who + ' ' + final + ' beam damage' + (n > 0 ? ' (' + n + ' resistant ' + (n === 1 ? 'piece' : 'pieces') + ' absorbing)' : ' (no resistance)') + ' — ' + sourceLabel + '.');
           if (t.hp <= 0) {
             t.alive = false;
@@ -2921,7 +2961,7 @@
             } catch (e) { console.warn('apBeamHit death', e && e.message); }
           }
         }
-      } catch (e) {}
+      } catch (e) { console.warn('apBeamHit damage', e && e.message); return 0; }
       return final;
     },
 

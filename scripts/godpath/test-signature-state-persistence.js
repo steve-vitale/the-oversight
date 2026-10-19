@@ -1,0 +1,27 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('signature-state-persistence');
+(async()=>{
+ const saves=new Map();globalThis.localStorage={getItem:k=>saves.get(k)??null,setItem:(k,v)=>saves.set(k,String(v)),removeItem:k=>saves.delete(k),key:i=>[...saves.keys()][i]??null,get length(){return saves.size}};
+ const G=await K.load({seed:Number(process.env.SEED||7),narration:true});K.newRun(G);
+ const m=K.fight(G,'speedbump_turtle',{px:3,py:4,mx:5,my:4});m.mdef=G.data.monsters.find(x=>x.id==='finale');m.monsterId='finale';m.fiCountdown=3;
+ const f=G.tbfight;f.order=['p',m.key];f.turnIdx=0;f.gridSize=12;f.tableTrial=true;
+ const state={fiCrewSpoils:{redpen:1,script:0,badnote:1},fiSkyArmed:[{x:3,y:3,radius:1}],fiCredits:2,edFloorItems:[{itemId:'stone_knife',units:1}],rrMessages:{left:'prepared'},tsVenue:'prepared',niSnap:{health:71},spBasePhp:83,bufBasePos:{x:2,y:3},cxSilence:2,sigW4verbs:['wait'],sigVerbCounts:{wait:2},spawnSeq:9};
+ Object.assign(f,state);f.asyncGen=900;
+ G.save();const key=G.state.runKey;
+ const saved=JSON.parse(saves.get(key)).run.tbfight.signatureState;
+ T.ok('actual saved fight retains its signature-state payload',Object.entries(state).every(([k,v])=>JSON.stringify(saved?.[k])===JSON.stringify(v)));
+ T.ok('real Continue accepts the saved fight',G.load(key)&&!!G.tbfight);
+ for(const[k,v]of Object.entries(state))T.ok('Continue retains '+k,JSON.stringify(G.tbfight[k])===JSON.stringify(v));
+ T.ok('ordinary titan grid survives without a coalition arena',G.tbGridSize()===12);
+ T.ok('a Table trial keeps its distinct identity',G.tbfight.tableTrial===true);
+ T.ok('transient asynchronous generation is not restored',G.tbfight.asyncGen!==900);
+ G.tbfight.tableTrial=false;const p=G.tbFighter('p');p.acted=false;
+ const html=G.sigW5CombatButtons();T.ok('earned unspent counters remain visible and spent Script stays absent',html.includes('data-finale="tbFiRedPen"')&&html.includes('data-finale="tbFiBadNote"')&&!html.includes('data-finale="tbFiLeakedScript"'));
+ T.ok('restored Red Pen pays one actual use and clears the saved danger',G.tbFiRedPen()===true&&G.tbfight.fiCrewSpoils.redpen===0&&G.tbfight.fiSkyArmed.length===0);
+ G.save();T.ok('second Continue cannot re-arm the spent counter',G.load(key)&&G.tbfight.fiCrewSpoils.redpen===0&&G.tbfight.fiSkyArmed.length===0);
+ const raw=JSON.parse(saves.get(key));raw.run.tbfight.signatureState={fighters:[],order:[],over:true,asyncGen:777,fiCrewSpoils:{redpen:0,script:0,badnote:1}};saves.set(key,JSON.stringify(raw));
+ T.ok('extension payload cannot replace core fighters/order or resume timers',G.load(key)&&G.tbfight.fighters.length>0&&G.tbfight.order.length>0&&!G.tbfight.over&&G.tbfight.asyncGen!==777);
+ const old=JSON.parse(saves.get(key));delete old.run.tbfight.signatureState;delete old.run.tbfight.tableTrial;delete old.run.tbfight.gridSize;saves.set(key,JSON.stringify(old));
+ T.ok('older saves still load without inventing crew resources',G.load(key)&&!G.tbfight.fiCrewSpoils&&!G.tbfight.tableTrial);
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1});

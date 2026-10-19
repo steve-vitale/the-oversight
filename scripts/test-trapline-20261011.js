@@ -10,7 +10,7 @@
 //   E5: non-hunter L0 refuses; L1 blind gambles only when materials plentiful
 // Usage: node scripts/test-trapline-20261011.js  (SEED env override)
 'use strict';
-const { loadGame } = require('./sim-harness');
+const K = require('./godpath/lib');
 const { workTrapline, workTraplineSet } = require('./policies/competent');
 
 const SEED = parseInt(process.env.SEED || '20261011', 10);
@@ -44,11 +44,18 @@ function wildTile(Game) {
   return null;
 }
 
+function withRoll(value, fn) {
+  const real = Math.random;
+  Math.random = () => value;
+  try { return fn(); } finally { Math.random = real; }
+}
+
 (async () => {
+  // One load per process; scenarios start fresh runs on the shared Game.
+  const Game = await K.load({ seed: SEED });
+  Game.debugRegion = 'na_eastern_woodlands';
   // ============ E1: hunter on-ramp ============
   {
-    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
-    const cg = Game.data ? null : null;
     const occ = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', 'src', 'data', 'characterGen.json'), 'utf8'))
       .occupations.find(o => o.id === 'hunting_guide');
     ok('E1 hunting_guide.knowsSnare is true', !!(occ && occ.knowsSnare));
@@ -59,24 +66,48 @@ function wildTile(Game) {
 
   // ============ E2: policy crafts ============
   {
-    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     hunterGame(Game);
     giveMats(Game, { vine: 2, stick: 2 });
     const ctx = {};
-    workTrapline(Game, ctx);
+    withRoll(0.01, () => workTrapline(Game, ctx));
     const tool = (Game.state.scholar.tools || []).find(t => t.recipeId === 'snare');
     ok('E2 policy crafts a snare (L3, materials held)', !!tool && tool.uses === 10,
       JSON.stringify(tool && { uses: tool.uses }));
     ok('E2 ctx.trapsCrafted counted', ctx.trapsCrafted === 1, 'got ' + ctx.trapsCrafted);
     ok('E2 materials consumed (1 vine + 1 stick)', matCount(Game, 'vine') === 1 && matCount(Game, 'stick') === 1);
-    // cap: second day tops up to 2, third day crafts nothing
-    const ctx2 = {};
-    workTrapline(Game, ctx2);
+    // The persistent policy context permits one attempt per actual day.
+    const remaining = matCount(Game, 'vine');
+    withRoll(0.01, () => workTrapline(Game, ctx));
+    ok('E2 same-day call does not craft twice', ctx.trapsCrafted === 1 && matCount(Game, 'vine') === remaining);
+    const day = Game.state.scholar.day;
+    Game.endDay();
+    ok('E2 actual day resolution advances the clock', Game.state.scholar.day === day + 1);
+    withRoll(0.01, () => workTrapline(Game, ctx));
     const held = (Game.state.scholar.tools || []).filter(t => t.recipeId === 'snare').length;
-    ok('E2 trapline caps at 2 held traps', held === 2, 'held=' + held);
-    const ctx3 = {};
-    workTrapline(Game, ctx3);
-    ok('E2 no third craft at cap', !ctx3.trapsCrafted);
+    ok('E2 second day tops up to two held traps', held === 2, 'held=' + held);
+    // Supply enough for a third: the cap must reject even an affordable craft.
+    giveMats(Game, { vine: 2, stick: 2 });
+    Game.endDay();
+    const beforeCap = matCount(Game, 'vine');
+    withRoll(0.01, () => workTrapline(Game, ctx));
+    ok('E2 no third craft at cap', ctx.trapsCrafted === 2 && matCount(Game, 'vine') === beforeCap);
+
+  }
+
+  // ============ E2b: a failed craft costs materials and waits a day ============
+  {
+    hunterGame(Game);
+    giveMats(Game, { vine: 3, stick: 3 });
+    const ctx = {}, before = matCount(Game, 'vine');
+    withRoll(0.999999, () => workTrapline(Game, ctx));
+    ok('E2b failed learned craft consumes one material set', matCount(Game, 'vine') === before - 1 && matCount(Game, 'stick') === 2);
+    ok('E2b failed learned craft grants no trap or success count', !(Game.state.scholar.tools || []).length && !ctx.trapsCrafted);
+    const left = matCount(Game, 'vine');
+    withRoll(0.01, () => workTrapline(Game, ctx));
+    ok('E2b same-day retry is refused after failure', matCount(Game, 'vine') === left && !ctx.trapsCrafted);
+    Game.endDay();
+    withRoll(0.01, () => workTrapline(Game, ctx));
+    ok('E2b next-day successful retry makes one real trap', ctx.trapsCrafted === 1 && (Game.state.scholar.tools || []).some(t => t.recipeId === 'snare' && t.uses === 10));
   }
 
   // ============ E3: policy sets on wild ground (split 2026-10-12) ============
@@ -85,13 +116,12 @@ function wildTile(Game) {
   // workTrapline crafts (day-end, haven) and workTraplineSet sets (on the
   // wild tile, called from the forage trip).
   {
-    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     hunterGame(Game);
     giveMats(Game, { vine: 4, stick: 4 });
     const tile = wildTile(Game);
     ok('E3 found wild ground to stand on', !!tile);
     const ctx = {};
-    workTrapline(Game, ctx); // day-end: crafts only now
+    withRoll(0.01, () => workTrapline(Game, ctx)); // day-end: crafts only now
     const crafted = (Game.state.scholar.tools || []).find(t => t.recipeId === 'snare');
     ok('E3 workTrapline crafts the snare', !!crafted);
     ok('E3 workTrapline does NOT set on its own', !(tile.traps || []).length);
@@ -105,7 +135,6 @@ function wildTile(Game) {
 
   // ============ E3b: haven refusal (the r5 bug, regression) ============
   {
-    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     hunterGame(Game);
     giveMats(Game, { vine: 4, stick: 4 });
     // stand on the haven tile (where the old daily call ran)
@@ -114,7 +143,7 @@ function wildTile(Game) {
       if (t && t.type === 'haven') { Game.map.px = x; Game.map.py = y; }
     }
     const ctx = {};
-    workTrapline(Game, ctx);
+    withRoll(0.01, () => workTrapline(Game, ctx));
     const held = (Game.state.scholar.tools || []).filter(t => t.recipeId === 'snare').length;
     workTraplineSet(Game, ctx); // must refuse at haven, like setTrap does
     const setAnywhere = [];
@@ -143,41 +172,52 @@ function wildTile(Game) {
 
   // ============ E4: dawn check catches ============
   {
-    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     hunterGame(Game);
     giveMats(Game, { vine: 4, stick: 4 });
     const tile = wildTile(Game);
     const ctx = {};
-    workTrapline(Game, ctx);       // day-end: craft
+    withRoll(0.01, () => workTrapline(Game, ctx));       // day-end: craft
     workTraplineSet(Game, ctx);    // on the wild tile: set (food r5 split)
     const trap = (tile.traps || [])[0];
     ok('E4 trap is set', !!trap);
-    tile.wildlife = { cottontail_rabbit: 50 }; // stocked ground
-    // force the 40% catch roll to hit
-    const realR = Math.random; Math.random = () => 0.01;
-    let caught = 0;
-    for (let d = 0; d < 6; d++) { Game.checkTraps(); }
-    Math.random = realR;
-    const carcasses = (Game.state.scholar.inventory || []).filter(i => i && /trapped|carcass/i.test(i.name || ''));
-    ok('E4 dawn check catches game on stocked ground', carcasses.length > 0,
-      'carcasses=' + carcasses.length);
-    const t2 = (tile.traps || [])[0];
-    ok('E4 uses decrement on catch', t2 && t2.uses < 10, 'uses=' + (t2 && t2.uses));
-    ok('E4 trap shyness tracks catches', (tile.trapShy && tile.trapShy.snare && tile.trapShy.snare.level || 0) > 0,
-      JSON.stringify(tile.trapShy && tile.trapShy.snare));
-    void caught;
+    tile.wildlife = { cottontail_rabbit: 6 }; // below the authored carrying capacity (8)
+    // Exercise the real day-end caller, controlling only its trap catch roll.
+    // Ecology runs before traps; compare the actual stock at trap-check time.
+    const checkTraps = Game.checkTraps;
+    let calls = 0, dawn;
+    Game.checkTraps = function (...args) {
+      calls++;
+      const stockBefore = tile.wildlife.cottontail_rabbit;
+      const result = withRoll(0.01, () => checkTraps.apply(this, args));
+      dawn = {
+        carcasses: (this.state.scholar.inventory || []).filter(i => i.foodState === 'carcass').length,
+        stockBefore, stock: tile.wildlife.cottontail_rabbit,
+        uses: tile.traps[0]?.uses,
+        shy: tile.trapShy?.snare?.level,
+      };
+      return result;
+    };
+    const day = Game.state.scholar.day;
+    try { Game.endDay(); } finally { Game.checkTraps = checkTraps; }
+    ok('E4 day resolution calls checkTraps exactly once', calls === 1, 'calls=' + calls);
+    ok('E4 dawn check catches one real carcass', dawn?.carcasses === 1, JSON.stringify(dawn));
+    ok('E4 catch removes one animal from real stock', dawn?.stockBefore > 0 && dawn.stock === dawn.stockBefore - 1);
+    ok('E4 uses decrement exactly once on catch', dawn?.uses === 9);
+    ok('E4 trap shyness tracks the catch', dawn?.shy === 1);
+    ok('E4 actual day resolution advances the clock', Game.state.scholar.day === day + 1);
+
   }
 
   // ============ E5: L0 refuses, L1 blind is cautious ============
   {
-    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     Game.genRoster('Columbus, Ohio');
+    Game.generatedRoster[0].occupationId = 'line_cook';
     Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
     Game.depart();
     const lvl = (((Game.state.codex || {}).recipes || {}).snare || {}).level || 0;
     giveMats(Game, { vine: 4, stick: 4 });
     const ctx = {};
-    workTrapline(Game, ctx);
+    withRoll(0.01, () => workTrapline(Game, ctx));
     const any = (Game.state.scholar.tools || []).some(t => t.recipeId === 'snare');
     ok('E5 L0 (recipe unknown): policy crafts nothing', !any && !ctx.trapsCrafted,
       'scholar recipe level=' + lvl);
@@ -191,11 +231,9 @@ function wildTile(Game) {
     ok('E5 L1 blind with 1+1 mats: no gamble', !ctx2.trapsCrafted);
     // taught L1, plentiful materials: attempts (seeded RNG hits at 35%)
     giveMats(Game, { vine: 3, stick: 3 });
-    const realR = Math.random; Math.random = () => 0.01;
     const ctx3 = {};
     const vBefore = matCount(Game, 'vine');
-    workTrapline(Game, ctx3);
-    Math.random = realR;
+    withRoll(0.01, () => workTrapline(Game, ctx3));
     const tool = (Game.state.scholar.tools || []).find(t => t.recipeId === 'snare');
     ok('E5 L1 blind with 3+3 mats: craft attempted and succeeded (seeded)',
       !!tool, 'vineBefore=' + vBefore + ' vineAfter=' + matCount(Game, 'vine'));
@@ -203,7 +241,6 @@ function wildTile(Game) {
 
   // ============ E6: widened on-ramp — rural occupations start knowing the snare ============
   {
-    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     for (const oid of ['forager', 'rancher', 'trail_crew', 'fishing_guide']) {
       Game.genRoster('Columbus, Ohio');
       Game.generatedRoster[0].occupationId = oid;

@@ -38,9 +38,11 @@ function popAlive(Game) {
 function scholarHpPct(Game) {
   try {
     const s = Game.state.scholar || {};
-    const hp = s.hp != null ? s.hp : 100;
-    return hp / Math.max(1, s.maxHp || 100);
-  } catch (e) { return 1; }
+    const hp = s.health, maxHp = Game.maxHealth();
+    // World scholars use health/maxHealth; hp/maxHp belong to fighters.
+    // Unknown or unreadable health must not authorize war from a default100.
+    return Number.isFinite(hp) && Number.isFinite(maxHp) && maxHp > 0 ? hp / maxHp : 0;
+  } catch (e) { console.warn('[warcourt] scholar health', e); return 0; }
 }
 function exiled(Game) { try { return !!((Game.state.scholar || {}).exiled); } catch (e) { return false; } }
 

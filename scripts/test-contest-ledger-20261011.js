@@ -124,6 +124,10 @@ const ok = (name, cond, detail) => {
       `detail=${JSON.stringify(pitFleeDetail.detail)}`);
   }
 
+  // Each caller needs its own living roster. Earlier sealed bouts can now
+  // honestly kill their contestants; a heal cannot resurrect a removed person.
+  Game.over = false; Game.won = false; Game.tbfight = null;
+  await H.setupGame(Game);
   // ---- path 2: hide (seeker fight) ----
   let hideKill = null, hideEngage = null;
   for (let day = 15; day < 200 && (!hideKill || !hideEngage); day++) {
@@ -161,6 +165,8 @@ const ok = (name, cond, detail) => {
     ok('hide engagement (flee) -> deed feed still records it', hideEngage.faced.includes(hideEngage.mid));
   }
 
+  Game.over = false; Game.won = false; Game.tbfight = null;
+  await H.setupGame(Game);
   // ---- path 3: beastmaster ----
   let bmKill = null;
   for (let day = 15; day < 200 && !bmKill; day++) {

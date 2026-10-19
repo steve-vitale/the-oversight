@@ -722,7 +722,7 @@
         let summary = `${refName(leader)} fought ${mPhrase}`;
         try { summary = this.fieldFightSummary ? this.fieldFightSummary(rec, refName(leader), mName) : summary; } catch (e) { console.warn('lingererSortie summary', e); }
         if (rec.outcome === 'vKill') {
-          try { this.hurtVillager(leader, rec.vTaken, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          try { this.hurtVillager(leader, rec.vTaken, 'monster', rec); } catch (e) { console.warn('lingererSortie hurt', e); }
           try { this.recordWaveKill(m.id, leader, 'sortie', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) { console.warn('lingererSortie ledger', e); }
           let lootNote = '';
           try {
@@ -752,7 +752,7 @@
           try { this.bumpTrust(leader, 5); } catch (e) { console.warn('lingererSortie trust', e); }
           try { this.remember(leader, 'hero', 'drove the ' + mName + ' off the treeline in a sortie'); } catch (e) { console.warn('lingererSortie memory', e); }
         } else if (rec.outcome === 'mFlee') {
-          try { this.hurtVillager(leader, rec.vTaken, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          try { this.hurtVillager(leader, rec.vTaken, 'monster', rec); } catch (e) { console.warn('lingererSortie hurt', e); }
           // DRIVEN OFF: it leaves the treeline — the gorge stops. It's still
           // out there in the world (the entity persists), just not besieging.
           m.lingering = false;
@@ -760,13 +760,13 @@
           this.say(`⚔️ ${summary} It breaks and runs — the treeline is clear of it. It's still out there, somewhere.`);
           try { this.bumpTrust(leader, 3); } catch (e) { console.warn('lingererSortie trust', e); }
         } else if (rec.outcome === 'vFlee') {
-          try { this.hurtVillager(leader, rec.vTaken, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          try { this.hurtVillager(leader, rec.vTaken, 'monster', rec); } catch (e) { console.warn('lingererSortie hurt', e); }
           this.say(`⚔️ ${summary} — the party falls back to the palisade, dragging their nerve with them. The treeline holds.`);
           try { this.bumpTrust(leader, -2); } catch (e) { console.warn('lingererSortie trust', e); }
           broke = true; break;
         } else if (rec.outcome === 'vDie') {
           // lethal through the real death pipeline (hurtVillager routes it)
-          try { this.hurtVillager(leader, 500, 'monster'); } catch (e) { console.warn('lingererSortie hurt', e); }
+          try { this.hurtVillager(leader, rec.vTaken, 'monster', rec); } catch (e) { console.warn('lingererSortie hurt', e); }
           this.say(`⚔️ ${refName(leader)} faced ${mPhrase} at the treeline... and didn't come back. The party carries the body home. The sortie is over.`);
           try { this.villageEvent('death'); } catch (e) { console.warn('lingererSortie event', e); }
           try { this.bumpTrust(leader, -2); } catch (e) { console.warn('lingererSortie trust', e); }

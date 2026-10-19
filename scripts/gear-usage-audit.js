@@ -14,11 +14,13 @@ const METHODS = {
   visitorWares: 'trade-stock', visitorBuyWare: 'trade', traderSell: 'trade-sale', craft: 'craft', doAction: 'action',
   tbEnd: 'combat', corpseTakeItem: 'corpse', corpseLootAll: 'corpse', readBook: 'book', preserveFood: 'preserve',
   renderFat: 'render', cleanCarcass: 'clean', takePrepMaterial: 'counter-material', makePemmican: 'pemmican', expandStorage: 'storage', donateWeapon: 'armory',
-  takeWeapon: 'armory', donateMedicine: 'pharmacy', takeMedicine: 'pharmacy', giveFood: 'care', comfort: 'care', proposeTrade: 'league',
+  takeWeapon: 'armory', donateMedicine: 'pharmacy', takeMedicine: 'pharmacy', takePrepMaterial: 'materials', giveFood: 'care', comfort: 'care', proposeTrade: 'league',
   proposeCovenant: 'league', drawLeaguePool: 'league', answerDefenseCall: 'league',
   answerTradeCall: 'league', answerCovenantCrisis: 'league', orderMember: 'party-order', networkSummon: 'network',
   _cxPrizeAbilityOffer: 'system-prize', _cxPrizeSynergyHint: 'system-prize',
   _cxPrizeKnowledgeDump: 'system-prize', _cxPrizeEvolutionAssist: 'system-prize',
+  maybeGrantCapstoneItem: 'capstone',
+  marketNamePrice: 'market',
 };
 function gameplayHash(state) {
   const comparable = JSON.parse(JSON.stringify(state));
@@ -75,7 +77,7 @@ function install(G) {
     }
     return out;
   };
-  const gained = (before, after, source, child) => {
+  const gained = (before, after, source, child, result) => {
     const totals = map => { const out = new Map(); for (const v of map.values()) out.set(v.id, (out.get(v.id) || 0) + v.n); return out; };
     const b = totals(before), a = totals(after);
     const left = new Map([...a].map(([id, n]) => [id, Math.max(0, n - (b.get(id) || 0) - (child.get(id) || 0))]));
@@ -84,7 +86,16 @@ function install(G) {
       if (!(n > 0)) continue;
       left.set(v.id, left.get(v.id) - n);
       const d = defs.get(v.id), tier = d.lootTier || d.tier || 1;
-      rec.grants.push({ day: G.state.scholar.day, source, id: v.id, who: v.who, n, tier, gear: !!(d.armor || d.weapon), beamResist: !!(d.armor || {}).beamResist });
+      rec.grants.push({ day: G.state.scholar.day, source, id: v.id, who: v.who, n, tier, gear: !!(d.armor || d.weapon), beamResist: !!(d.armor || {}).beamResist,
+        ...(source === 'market' ? { marketPayment: {
+          barterKcal: Number.isFinite(result?.paidKcal) ? result.paidKcal : null,
+          onCredit: typeof result?.marker === 'boolean' ? result.marker : null,
+          borrowed: Number.isFinite(result?.tier) ? result.tier >= 4 : null,
+          debtAfter: Number.isFinite(result?.markers) ? result.markers : null,
+          // This boundary may be called directly or inside useAbility. It
+          // observes barter, not the enclosing activation payment.
+          activationKcal: null,
+        } } : {}) });
       rec.maxTier = Math.max(rec.maxTier, tier);
     }
   };
@@ -110,7 +121,7 @@ function install(G) {
         const after = inventory();
         // Parent source subtracts the child's net increases: one item, one source.
         // Succession replaces a whole pack. It is not a combat reward.
-        if (bearer === G.villagerId) gained(before, after, source, frame.children);
+        if (bearer === G.villagerId) gained(before, after, source, frame.children, result);
         if (stack.length) for (const [k, v] of after) {
           const n = Math.max(0, v.n - ((before.get(k) || {}).n || 0));
           const par = stack[stack.length - 1].children;

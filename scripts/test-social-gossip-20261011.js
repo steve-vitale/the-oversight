@@ -6,13 +6,13 @@
 //    never repeat the same tail twice in a row (pickFresh ledger).
 // 3. Regression: gossip still moves REP only, never trust (canon: Trust != reputation).
 'use strict';
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
 // 0. syntax check on the touched file
 try {
-  execSync('node --check ' + path.join(__dirname, '..', 'src/js/game.js'), { stdio: 'pipe' });
+  execFileSync(process.execPath, ['--check', path.join(__dirname, '..', 'src/js/game.js')], { stdio: 'pipe' });
   console.log('PASS syntax src/js/game.js');
 } catch (e) { console.log('FAIL syntax src/js/game.js'); process.exit(1); }
 

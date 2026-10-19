@@ -4,6 +4,7 @@
 // keeps the takes/gives ledger honest. This is the skill-ceiling seed.
 'use strict';
 const idle = require('./idle');
+const {chooseConversationChoice}=require('./conversation-pages');
 const { vinebank } = require('./vinebank'); // materials-banking arm (VINEBANK=1, default OFF)
 const snareteach = require('./snareteach'); // teach-drive arm (SNARETEACH=1, default OFF)
 
@@ -435,6 +436,7 @@ function eveningFeast(Game, ctx) {
 // the buff is the point, a single sweep is a coin flip. (Pattern proven
 // in winseek's feastFight/feastDrawRoad.)
 function feastFightRoad(Game, ctx) {
+  if (process.env.COMPETENT_SEEK_FIGHTS === '0') return; // targeted livelihoods choose the public drive-off response
   if (!feastOn()) return; // before/after harness gate
   try {
     const s = Game.state.scholar || {}, day = s.day || 0;
@@ -632,7 +634,7 @@ function talkOn() { return process.env.COMPETENT_TALK === '1'; }
 
 // Structural menu ids: never picked mid-conversation. 'goon' ("go on") is
 // structural here too — the 5-turn cap owns continuation, not the menu.
-const TALK_STRUCTURAL = { leave: 1, goon: 1, subject: 1, 'dlg:subject': 1, deflect_q: 1, honest_pass: 1 };
+const TALK_STRUCTURAL = { leave: 1, goon: 1, subject: 1, 'dlg:subject': 1, 'menu:more':1, deflect_q: 1, honest_pass: 1 };
 
 function pickTalkChoice(choices, seen) {
   try {
@@ -702,13 +704,13 @@ function holdConversation(Game, ctx, vid) {
         let c = null;
         try { c = Game.convoGet ? Game.convoGet(vid) : null; } catch (e) {}
         if (!c || !c.active) break;
-        let choices = [];
-        try { choices = Game.convoChoices ? Game.convoChoices(vid) : []; } catch (e) {}
-        const pick = pickTalkChoice(choices || [], seen);
+        const pick = chooseConversationChoice(Game,vid,choices=>pickTalkChoice(choices,seen),ctx);
         if (!pick) break;
         seen[String(pick.id)] = 1;
-        try { Game.convoTurn(vid, pick.id); } catch (e) { break; }
-        ctx.deepTurns = (ctx.deepTurns || 0) + 1;
+        let result;
+        try { result=Game.convoTurn(vid, pick.id); } catch (e) { console.warn('[policy/conversation]',e.message); break; }
+        if(result&&!result.ignored&&!result.navigation)ctx.deepTurns = (ctx.deepTurns || 0) + 1;
+        else ctx.convoActionRefused=(ctx.convoActionRefused||0)+1;
         try {
           const c2 = Game.convoGet ? Game.convoGet(vid) : null;
           if (!c2 || !c2.active || c2.over) break;
@@ -1301,7 +1303,7 @@ function donateHaul(Game, ctx) {
     if (Game.havenStoresAccess && Game.havenStoresAccess() === 'none') return 0;
     const s = Game.state.scholar;
     const cap = Game.kcalCap ? Game.kcalCap() : 2400;
-    const keep = cap; // one day's buffer stays in the pack
+    const keep = process.env.COMPETENT_TRADE_RESERVE === '1' ? cap * 3 : cap; // targeted traders retain two extra personal days as stock
     let packKcal = (s.inventory || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
     const inv = s.inventory || [];
     for (let i = inv.length - 1; i >= 0; i--) {
@@ -1638,7 +1640,7 @@ function gearUp(Game, ctx) {
     const s = Game.state.scholar;
     if (!s) return;
     const eq = s.equipped || {};
-    const inv = s.inventory || [];
+    let inv = s.inventory || [];
     const defOf = (it) => (Game.data.items || []).find(d => d.id === (it.itemId || it.id));
     // AMMO AWARENESS (journey-scale r3 2026-10-11): a ranged weapon with no
     // ammo is a stick you hold wrong — the scale harness watched a player
@@ -1649,12 +1651,6 @@ function gearUp(Game, ctx) {
     const ammoOk = (w) => {
       try { if (!w || !w.ammo) return true; return Game.ammoCount(w.ammo) > 0; }
       catch (e) { return true; }
-    };
-    const wbonus = (slot) => {
-      const w = eq[slot];
-      if (!w) return -1;
-      const def = (Game.data.items || []).find(d => d.id === (w.itemId || w.id));
-      return ((def || {}).weapon || {}).bonus || 0;
     };
     // WEAPON SLOT ROUTING (fix 2026-10-12): route exactly like the inventory
     // UI (app.js data-equip-w) — isRangedWeapon (range > 1, which INCLUDES
@@ -1670,46 +1666,65 @@ function gearUp(Game, ctx) {
       } catch (e) {}
       return (w && w.type === 'ranged') ? 'ranged' : 'melee';
     };
-    // WEAPON: best bonus among USABLE weapons in inventory -> melee or ranged slot
-    let bestI = -1, bestB = -1, bestSlot = 'melee';
-    let dryI = -1, dryB = -1, drySlot = 'ranged', dryW = null;
-    for (let i = 0; i < inv.length; i++) {
-      const def = defOf(inv[i]);
-      if (def && def.class === 'weapon') {
+    // Compare the whole owned kit, including what is already worn. Otherwise
+    // a weak packed knife both blocks ammo crafting and displaces a better bow.
+    const weapons = () => {
+      const out = [];
+      const add = (it, fromSlot) => {
+        const def = it && defOf(it);
+        if (!def || def.class !== 'weapon' || (it.units == null ? 1 : it.units) <= 0) return;
         const w = def.weapon || {};
-        const b = w.bonus || 0;
-        const slot = weaponSlot(def, w);
-        if (ammoOk(w)) {
-          if (b > bestB) { bestB = b; bestI = i; bestSlot = slot; }
-        } else if (b > dryB) { dryB = b; dryI = i; drySlot = slot; dryW = w; }
+        out.push({ it, fromSlot, w, bonus: w.bonus || 0, slot: weaponSlot(def, w), id: it.itemId || it.id });
+      };
+      for (const slot of ['melee', 'ranged', 'weapon']) add((s.equipped || {})[slot], slot);
+      for (const it of s.inventory || []) add(it, null);
+      return out.sort((a, b) => b.bonus - a.bonus);
+    };
+    let owned = weapons(), best = owned.find(c => ammoOk(c.w));
+    const fundedRecipe = c => {
+      const recipe = (Game.data.recipes || []).find(r => r.id === c.w.ammo);
+      const level = ((((Game.state.codex || {}).recipes || {})[c.w.ammo] || {}).level || 0);
+      return recipe && level >= 1 && Object.entries(recipe.materials || {}).every(([m, n]) =>
+        (s.inventory || []).filter(it => m === 'bait' ? (it.kcalEach || 0) > 0 : it.material === m)
+          .reduce((sum, it) => sum + (it.units || 0), 0) >= n) ? recipe : null;
+    };
+    const upgrade = owned.find(c => !ammoOk(c.w) && (!best || c.bonus > best.bonus) && fundedRecipe(c));
+    if (upgrade && !Game.over && !(Game.inCombat && Game.inCombat())) {
+      const bearer = Game.villagerId, recipe = fundedRecipe(upgrade);
+      // Preserve the current trap-material banking policy.
+      const defer = vinebank.defersCraft(Game, recipe.id);
+      if (defer) {
+        ctx.vinebankDeferred = (ctx.vinebankDeferred || 0) + 1;
+        if (recipe.id === 'arrow') ctx.vinebankDeferArrow = (ctx.vinebankDeferArrow || 0) + 1;
+      } else {
+        const made = Game.craft(recipe.id);
+        if (Game.over || bearer !== Game.villagerId) return;
+        if (made) { ctx.ammoCrafts = (ctx.ammoCrafts || 0) + 1; if (recipe.id === 'arrow') ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
+        owned = weapons(); best = owned.find(c => ammoOk(c.w));
       }
     }
-    if (bestI < 0 && dryI >= 0) {
-      // best weapon is dry: a competent player makes arrows (honest fail ok)
-      // VINEBANK (materials-banking 2026-10-14): arrows eat the stick bank
-      // (stick 2 per craft) — they wait while the trapper is banking.
-      const defer = vinebank.defersCraft(Game, 'arrow');
-      if (defer) { ctx.vinebankDeferred = (ctx.vinebankDeferred || 0) + 1; ctx.vinebankDeferArrow = (ctx.vinebankDeferArrow || 0) + 1; }
-      else { try { if (Game.craft) Game.craft('arrow'); } catch (e) {} }
-      if (ammoOk(dryW)) { bestI = dryI; bestB = dryB; bestSlot = drySlot; ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
-      else ctx.dryWeaponDays = (ctx.dryWeaponDays || 0) + 1;
-    }
-    if (bestI >= 0 && bestB > wbonus(bestSlot)) {
-      try { Game.equip(bestI, bestSlot); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
-    }
-    if (bestI < 0) {
-      // nothing usable: unequip any dry ranged weapon rather than posing
-      try {
-        for (const slot of Object.keys(eq)) {
-          const cur = eq[slot]; if (!cur) continue;
-          const def = (Game.data.items || []).find(d => d.id === (cur.itemId || cur.id));
-          const w = def && def.weapon;
-          if (w && w.ammo && !ammoOk(w) && Game.unequip) {
-            try { Game.unequip(slot); ctx.unarmedDry = (ctx.unarmedDry || 0) + 1; } catch (e2) {}
+    if (best) {
+      let activeSlot = best.fromSlot;
+      if (!activeSlot) {
+        const index = (s.inventory || []).findIndex(it => it === best.it);
+        if (index >= 0) {
+          Game.equip(index, best.slot);
+          if (((s.equipped || {})[best.slot] || {}).itemId === best.id) {
+            ctx.geared = (ctx.geared || 0) + 1; activeSlot = best.slot;
           }
         }
-      } catch (e) {}
+      }
+      // The game's public weapon reader uses melee first. Take off the
+      // weaker blocker through the same public Take off action as players.
+      if (activeSlot === 'ranged' && (s.equipped || {}).melee) Game.unequip('melee');
+      if (activeSlot === 'weapon') for (const slot of ['melee', 'ranged']) if ((s.equipped || {})[slot]) Game.unequip(slot);
+    } else {
+      if (owned.some(c => c.w.ammo)) ctx.dryWeaponDays = (ctx.dryWeaponDays || 0) + 1;
+      for (const c of owned) if (c.fromSlot && c.w.ammo && !ammoOk(c.w)) {
+        Game.unequip(c.fromSlot); ctx.unarmedDry = (ctx.unarmedDry || 0) + 1;
+      }
     }
+    inv = s.inventory || [];
     // ARMOR (longsim combat r6 2026-10-12): wear the BEST armor owned, and
     // craft bark armor when the recipe is known. Two blanks closed:
     // (1) the old code equipped the FIRST armor-def item in inventory order
@@ -1783,8 +1798,7 @@ function gearUp(Game, ctx) {
               ctx.barkArmorCrafted = (ctx.barkArmorCrafted || 0) + 1;
               // re-scan: craft() replaced scholar.inventory with a new
               // filtered array — rebind the local before indexing into it.
-              inv.length = 0;
-              Array.prototype.push.apply(inv, Game.state.scholar.inventory || []);
+              inv = Game.state.scholar.inventory || [];
               abestI = -1; abestP = -1;
               for (let i = 0; i < inv.length; i++) {
                 const p = protOf(inv[i]);
@@ -2944,3 +2958,6 @@ const competent = {
 
 module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
 
+
+// The public shared gearing routine, also used by prepared policy proofs.
+module.exports.gearUp = gearUp;

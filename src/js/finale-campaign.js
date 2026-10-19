@@ -65,12 +65,13 @@
 
   function finaleCampaignPlace(titanId) {
     try {
-      var px = Game.map ? Game.map.px : 4, py = Game.map ? Game.map.py : 4;
-      var tx = Math.max(0, px + 3), ty = Math.max(0, py);
+      var site = Game.titanPlacementTile(3);
+      if (!site) { console.warn('finale placement: no free map tile'); return null; }
+      var tx = site.x, ty = site.y;
       var c = finaleCampaign();
       c.started = false; c.crew = false; c.opening = false;
       var mon = Game.spawnWorldMonster({ id: 'finale_crew' }, tx, ty, { titan: true });
-      Game.say('📺 Scouts found the broadcast tower — ' + tx + ' east of here. THE FINALE does not arrive alone: first, its crew. THE COMMERCIAL BREAK (node 1 of 3). Kill the production staff and the finale airs without a safety net — no one left to call "cut." The march needs 20 allied blades. Sound the call.');
+      Game.say('📺 Scouts found the broadcast tower — tile ' + tx + ',' + ty + '. THE FINALE does not arrive alone: first, its crew. THE COMMERCIAL BREAK (node 1 of 3). Kill the production staff and the finale airs without a safety net — no one left to call "cut." The march needs 20 allied blades. Sound the call.');
       try { if (Game.recordMoment) Game.recordMoment('The finale campaign begins: the commercial break located.'); } catch (e) {}
       return mon;
     } catch (e) { return null; }
@@ -107,13 +108,18 @@
   // already counts the gear). Said aloud.
   function finaleReinforce() {
     var before = survivors();
+    var known = {};
+    ((muster() || {}).allies || []).forEach(function (a) { known[a.villageId + ':' + a.vid] = true; });
     var ms = null;
     try { ms = Game.soundTitanCall('finale'); } catch (e) {}
     if (!ms) { Game.say('No one answers. The fires are cold.'); return null; }
     var after = survivors();
+    var joined = (ms.allies || []).filter(function (a) { return !known[a.villageId + ':' + a.vid]; });
+    if (!joined.length) { Game.say('No new blades answer. The people already marching cannot be counted twice.'); return ms; }
     try {
       var seen = {};
       (ms.allies || []).forEach(function (a) {
+        if (known[a.villageId + ':' + a.vid]) return;
         if (seen[a.villageId]) return;
         seen[a.villageId] = 1;
         var links = [];
@@ -126,7 +132,7 @@
         });
       });
     } catch (e) {}
-    Game.say('📯 The call goes out again — thinner, hoarser. ' + (after - before) + ' new blades join the march (' + before + ' → ' + after + '). The villages count their dead first. (trust −3 per answering fire — reluctance is remembered.)');
+    Game.say('📯 The call goes out again — thinner, hoarser. ' + joined.length + ' new blades join the march (' + before + ' → ' + after + '). The villages count their dead first. (trust −3 per answering fire — reluctance is remembered.)');
     try { if (Game.recordMoment) Game.recordMoment('The finale muster reinforced: ' + before + ' → ' + after + '.'); } catch (e) {}
     return ms;
   }
@@ -223,6 +229,9 @@
     if (!Game.startCombat || Game.startCombat.__finaleWrapped) return;
     var orig = Game.startCombat;
     var wrapped = function (mid) {
+      // Capture before the inner titan wrapper consumes the legacy flag.
+      // A summoned Table champion is not the open-world campaign heart.
+      var tableTrial = mid === 'finale' && (Game._tableTrialDirect || (arguments[1] && arguments[1].tableTrial));
       // ---- pre-gates ----
       if (mid === 'finale_crew') {
         var c0 = finaleCampaign();
@@ -255,6 +264,7 @@
       }
       var r = orig.apply(this, arguments);
       if (r === null || r === undefined) return r;
+      if (tableTrial) return r;
       try {
         if (mid === 'finale_crew') { finaleCrewSetup(); try { Game.audioEvent('fiCrewQuiet', {}); } catch (e2) {} }
         else if (mid === 'finale_opening') { finaleOpeningSetup(); try { Game.audioEvent('fiOpeningSting', {}); } catch (e2) {} }
@@ -343,10 +353,11 @@
 
   function finaleSpawnNext(mid, dx, label) {
     try {
-      var px = Game.map ? Game.map.px : 4, py = Game.map ? Game.map.py : 4;
-      var tx = Math.max(0, px + dx), ty = Math.max(0, py);
+      var site = Game.titanPlacementTile(dx);
+      if (!site) { console.warn('finale next node: no free map tile', mid); return null; }
+      var tx = site.x, ty = site.y;
       var mon = Game.spawnWorldMonster({ id: mid }, tx, ty, { titan: true });
-      Game.say(label + ' — ' + tx + ' east of here.');
+      Game.say(label + ' — tile ' + tx + ',' + ty + '.');
       try { if (Game.recordMoment) Game.recordMoment(label + ' located.'); } catch (e) {}
       return mon;
     } catch (e) { return null; }
@@ -403,7 +414,7 @@
       var snap = null;
       try {
         var tf = Game.state.titans && Game.state.titans._fight;
-        if (tf && tf.campaign && this.tbfight && this.tbfight.fighters) {
+        if (tf && tf.campaign && this.tbfight && this.tbfight.fighters && !(this.tableTrialFight && this.tableTrialFight())) {
           snap = {
             campaign: tf.campaign,
             result: result,
@@ -559,7 +570,7 @@
   function finaleCampaignButtons() {
     var f = null;
     try { f = Game.tbfight; } catch (e) {}
-    if (!f || f.over) return '';
+    if (!f || f.over || (Game.tableTrialFight && Game.tableTrialFight(f))) return '';
     if (!fiHeartMonster(Game)) return '';
     var sp = f.fiCrewSpoils;
     if (!sp) return '';
@@ -580,6 +591,7 @@
   }
 
   function spoilUsed(key) {
+    if (Game.tableTrialFight && Game.tableTrialFight()) return false;
     try {
       var sp = Game.tbfight.fiCrewSpoils;
       if (sp && sp[key] > 0) { sp[key]--; return true; }

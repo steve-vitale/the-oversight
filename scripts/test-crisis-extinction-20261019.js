@@ -20,17 +20,17 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const { loadGame, setupGame } = require('./sim-harness');
 
-const SEEDS = [7, 42, 99];
+const proofCase = require('./godpath/isolated-proof-cases')(['7','42','99']);
+const SEEDS = [Number(proofCase)];
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
   if (cond) { pass++; console.log('  PASS ' + name); }
   else { fail++; console.log('  FAIL ' + name + (extra ? ' — ' + extra : '')); }
 }
-// the game's own extinction count (mirrors endDay): rosterChars, not vpOf.
+// Count canonical living people; a snapshot is neither required nor sufficient.
 function livingCount(Game) {
   const v = Game.state.village || {};
-  const rc = v.rosterChars || {};
-  return (v.roster || []).filter(id => { const c = rc[id]; return c && c.alive !== false; }).length;
+  return (v.roster || []).filter(id => { const c = id && Game.vpOf(id); return c && c.id === id && !c.dead && c.alive !== false; }).length;
 }
 // build the observed ghost state: every roster id loses its person record,
 // the way the death spiral leaves them (id on roster, nobody home). The
@@ -43,10 +43,8 @@ function ghostTheVillage(Game, keepOne) {
   for (const id of ids) {
     if (id === keep) continue;
     delete rc[id];
-    try {
-      const di = (Game.data.villagers || []).findIndex(x => x && x.id === id);
-      if (di >= 0) Game.data.villagers.splice(di, 1);
-    } catch (e) {}
+    const di = (Game.data.villagers || []).findIndex(x => x && x.id === id);
+    if (di >= 0) Game.data.villagers.splice(di, 1);
   }
 }
 

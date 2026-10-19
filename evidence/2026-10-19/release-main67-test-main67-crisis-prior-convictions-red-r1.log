@@ -1,0 +1,19 @@
+== Part A: player lane — prior convictions weigh the case ==
+  baseline avgBelief (murder, no priors): -36.18181818181818
+  avgBelief with 1 prior murder weregild: -36.18181818181818 (delta 0)
+FAIL: A1 one prior conviction: delta -15 (got 0.00)
+  avgBelief with 2 priors: -36.18181818181818 (delta 0)
+FAIL: A2 two priors: delta -30 (got 0.00)
+FAIL: A5 assault prior chills murder case: delta -15 (got 0.00)
+== Part B: NPC lane — initBelief remembers too ==
+  NPC baseline avgBelief: 37.9
+  NPC avgBelief with 1 prior: 37.9 (delta 0)
+FAIL: B1 NPC prior conviction: delta -15 (got 0.00)
+== Part C: accusation openers vary ==
+  accusation openers captured: 6, distinct: 1
+  [0] The person in their 30s stands up at the fire, pointing. "This one. Murder. There — said plain — and...
+  [1] The person in their 30s stands up at the fire, pointing. "This one. Murder. There — said plain — and...
+  [2] The person in their 30s stands up at the fire, pointing. "This one. Murder. There — said plain — and...
+FAIL: C2 accusation openers vary (distinct=1, need >=2)
+
+7 passed, 5 failed

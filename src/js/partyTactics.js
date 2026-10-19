@@ -246,7 +246,7 @@
       m.mx = nx; m.my = ny;
       var pat = ((m.mdef || {}).attack || {}).pattern || { type: 'burst', radius: 2 };
       var cells = (SC.combat || {}).patternCells
-        ? SC.combat.patternCells(pat, m.mx, m.my, m.mx, m.my) : [];
+        ? this.tbPatternCells(m, pat, m.mx, m.my) : [];
       tg.cells = cells;
       var p0 = this.tbFighter('p');
       tg.threatenedPlayer = !!(p0 && p0.alive && cells.some(function (cc) {

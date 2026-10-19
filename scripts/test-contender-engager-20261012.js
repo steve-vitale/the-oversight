@@ -19,11 +19,11 @@
 //   6. Gossip fragment "X telling Y about Y" -> reflexive ("about herself").
 //   7. "What I miss most? the noise." -> capitalized ("The noise").
 'use strict';
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 
 for (const f of ['src/js/game.js', 'src/js/convoTopics.js', 'scripts/policies/contender-engager.js']) {
-  try { execSync('node --check ' + path.join(__dirname, '..', f), { stdio: 'pipe' }); }
+  try { execFileSync(process.execPath, ['--check', path.join(__dirname, '..', f)], { stdio: 'pipe' }); }
   catch (e) { console.log('FAIL syntax ' + f); process.exit(1); }
 }
 console.log('PASS syntax (3 files)');
@@ -85,7 +85,18 @@ async function findCase(pred, baseSeed) {
   }
 
   // 2. stand ground vs incompetence (comp<1.0)
-  const sc = await findCase((cid, task, comp) => comp < 1.0, baseSeed + 100);
+  // Prepared cautious leader: test the stand-ground response against real
+  // competence, instead of hoping forty fresh rosters contain this trait/job.
+  const sc = await (async () => {
+    const Game = await freshGame(baseSeed + 100), roster = Game.state.village.roster.filter(id => id !== Game.villagerId);
+    for (const cid of roster.filter(id => Game.npcGoal(id) === 'lead')) {
+      const person = Game.getPerson(cid), old = person.personality;
+      person.personality = { ...old, temperament: 'cautious' };
+      for (const task of TASKS) { const comp = Game.villagerCompetence(cid, task); if (comp < 1.0) return { Game, cid, task, comp, seed: baseSeed + 100 }; }
+      person.personality = old;
+    }
+    return null;
+  })();
   ok('found a weak contender pairing (comp<1.0)', !!sc, sc ? 'seed=' + sc.seed + ' ' + sc.task + '@' + sc.comp : '');
   if (sc) {
     const { Game, cid, task } = sc;
@@ -184,12 +195,18 @@ async function findCase(pred, baseSeed) {
     // roster to player+teller+subject so the subject is the only listener.
     const keepRoster = v.roster;
     v.roster = [Game.villagerId, teller, subject];
+    // This is a rendering proof, not a probability estimate. Force the
+    // real spread/distortion/overhear gates and retain all output assertions.
+    const random = Math.random;
+    Math.random = () => 0;
+    try {
     for (let i = 0; i < 100; i++) {
       v.gossip[0].heard = [teller];
       v.gossip[0].distortion = 1;
-      try { Game.spreadGossip(); } catch (e) { break; }
+      try { Game.spreadGossip(); } catch (e) { throw new Error('Prepared gossip failed: ' + e.message, { cause: e }); }
       if (lines.some(l => l.includes('fragments by the fire') && l.includes('telling'))) break;
     }
+    } finally { Math.random = random; }
     v.roster = keepRoster;
     const frags = lines.filter(l => l.includes('fragments by the fire') && l.includes('telling'));
     ok('fragment fired', frags.length > 0);

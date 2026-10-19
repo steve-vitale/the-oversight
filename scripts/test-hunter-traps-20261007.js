@@ -10,25 +10,8 @@
 //          honest skirt line. Same-day pits never trigger.
 // RNG is fully stubbed per test — no seeded flakiness.
 // Run: node scripts/test-hunter-traps-20261007.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
- 'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
- 'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js',
- 'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
- 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
- 'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-delete global.window;
-const Game = globalThis.Scattering.Game;
-const realRand = Math.random;
+const K = require('./godpath/lib');
+let Game, realRand;
 let pass = 0, fail = 0;
 const ok = (n, c) => { if (c) { pass++; } else { fail++; console.log('FAIL  ' + n); } };
 const say = () => { const s = (Game.log || []).map(x => x.text || x).join(' '); Game.log.length = 0; return s; };
@@ -44,12 +27,14 @@ function fresh() {
   say();
   return s;
 }
-const craftOk = id => { let m = null; for (let i = 0; i < 8 && !m; i++) m = Game.craft(id); say(); return !!m; };
+const craftOk = id => { const made = withRand([0.01], () => Game.craft(id)); say(); return !!made; };
 // stub RNG with an explicit per-call sequence, then restore
 function withRand(seq, fn) { let i = 0; Math.random = () => (i < seq.length ? seq[i++] : 0.5); try { return fn(); } finally { Math.random = realRand; } }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261007), narration: true });
+  Game.debugRegion = 'na_eastern_woodlands';
+  realRand = Math.random;
 
   // ---- FIX 1a: skunk catch, careful (box_trap L3) -> +3 scent, upwind line ----
   let s = fresh();

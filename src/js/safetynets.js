@@ -1337,20 +1337,25 @@
   // the rest goes back in the bins as real pieces. Said once per day.
   var _vmS = G.villageMeal;
   if (_vmS) G.villageMeal = function () {
-    var day = 0, ration = false, v = null;
+    var day = 0, ration = false, v = null, returned = 0;
+    var priorDeferred=this._harvestMealDeferred, priorMeal=this._harvestPantryMeal;
+    this._harvestMealDeferred=true;
+    this._harvestPantryMeal=null;
     try {
       v = this.state.village || {};
       day = (this.state.scholar || {}).day || 0;
       ration = !!(v.rationing && v.rationing.until >= day);
-    } catch (e) {}
-    var r = _vmS.apply(this, arguments);
-    try {
+      var r = _vmS.apply(this, arguments);
+      try {
       if (ration && v && (v.lastPlayerMeal || 0) > 0) {
         var give = Math.round(v.lastPlayerMeal / 2);
         if (give > 0) {
           var s = this.state.scholar;
           s.kcal = Math.max(0, (s.kcal || 0) - give);
-          if (this.stockPantry) this.stockPantry(give, 'Ration returned', { pieceKcal: 400 });
+          var meal=this._harvestPantryMeal;
+          var shares=meal?this.blendHarvestShares(meal.draw.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal}))):{};
+          if (this.stockPantry) this.stockPantry(give, 'Ration returned', { pieceKcal: 400, harvestShares:shares });
+          returned=give;
           v.lastPlayerMeal = (v.lastPlayerMeal || 0) - give;
           if (v._rationSaidDay !== day) {
             v._rationSaidDay = day;
@@ -1358,8 +1363,28 @@
           }
         }
       }
-    } catch (e) {}
-    return r;
+      } catch (e) {
+        // Preserve the original wrapper's recoverable return failure, with
+        // a warning for the simulator instead of an empty catch.
+        console.warn('[food] ration return failed',e);
+        this._harvestPantryMeal=null;
+      }
+      var pending=this._harvestPantryMeal;
+      if (pending) {
+        var consumed=Math.max(0,pending.draw.taken-returned);
+        var share=pending.draw.taken>0?consumed/pending.draw.taken:0;
+        // A cap-clipped meal may refund more than it banked. No invented
+        // nourishment: the observed primary credit minus the actual return.
+        this.recordHarvestDraw(pending.eater,pending.draw,pending.route,
+          Math.max(0,pending.nourishment-returned),share);
+      }
+      return r;
+    } finally {
+      if (priorDeferred===undefined) delete this._harvestMealDeferred;
+      else this._harvestMealDeferred=priorDeferred;
+      if (priorMeal===undefined) delete this._harvestPantryMeal;
+      else this._harvestPantryMeal=priorMeal;
+    }
   };
 
 })();

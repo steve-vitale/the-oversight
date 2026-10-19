@@ -16,14 +16,8 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js',
- 'src/js/journal.js', 'src/js/party.js', 'src/js/truth.js', 'src/js/storage.js',
- 'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/betrayal.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0, skip = 0;
 function ok(name, cond, note) {
@@ -33,7 +27,8 @@ function ok(name, cond, note) {
 function skipped(name, note) { skip++; console.log(`SKIP ${name}${note ? ' — ' + note : ''}`); }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261006), narration: true });
+  Game.debugRegion = 'na_eastern_woodlands';
   const said = [];
   const origSay = Game.say;
   Game.say = function (t) { said.push(String(t)); return origSay.call(this, t); };
@@ -157,6 +152,6 @@ function skipped(name, note) { skip++; console.log(`SKIP ${name}${note ? ' — '
   }
 
   console.log(`\nkgate-audit: ${pass} pass, ${fail} fail, ${skip} skip`);
-  console.log('All green — these asserts guard the fixed knowledge gates against regressions.');
+  if (!fail) console.log('All green — these asserts guard the fixed knowledge gates against regressions.');
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error('HARNESS ERROR', e); process.exit(2); });

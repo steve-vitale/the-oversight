@@ -46,7 +46,7 @@ function ok(cond, name, extra) {
 async function main() {
   Math.random = mulberry32(20261011);
   global.fetch = (f) => Promise.resolve({
-    json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
+    json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, decodeURIComponent(new URL(f, 'https://fixture.invalid/').pathname).slice(1)), 'utf8')))
   });
   const order = execSync(`grep -o 'src/js/[^\"'"'"']*\\.js' index.html`, { cwd: ROOT })
     .toString().split('\n')

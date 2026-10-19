@@ -102,10 +102,11 @@ function evalBeamFlag(expr, pattern) {
 const used = new Set();
 const list = Array.isArray(monsters) ? monsters : (monsters.monsters || Object.values(monsters));
 for (const m of list) {
-  const atk = (m && (m.mdef || {}).attack) || m.attack;
-  const pat = atk && atk.pattern;
-  const t = pat && (typeof pat === 'string' ? pat : pat.type);
-  if (t) used.add(t);
+  for (const atk of [(m && (m.mdef || {}).attack) || m.attack, ...(m.attacks || [])]) {
+    const pat = atk && atk.pattern;
+    const t = pat && (typeof pat === 'string' ? pat : pat.type);
+    if (t) used.add(t);
+  }
 }
 console.log('patterns in use:', [...used].sort().join(', '));
 

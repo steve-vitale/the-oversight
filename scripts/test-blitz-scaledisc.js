@@ -17,51 +17,25 @@
 //
 // RED-verified: fails on pristine (no scaleDiscovery API), green after build.
 // Run: node scripts/test-blitz-scaledisc.js (SEED env override)
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-
-function mulberry32(a) {
-  return function () {
-    a |= 0; a = a + 0x6D2B79F5 | 0;
-    var t = Math.imul(a ^ a >>> 15, 1 | a);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
-}
+const assert = require('assert');
+const H = require('./sim-harness');
 const SEED = parseInt(process.env.SEED || '424242', 10);
-Math.random = mulberry32(SEED); // seeded BEFORE eval: modules capture it at load
-
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-
-// FULL index.html order, minus DOM-only modules
-// (app.js/sprites.js/tile-scenes.js/move-anim.js/drama.js).
-const DOM_ONLY = new Set(['app.js', 'sprites.js', 'tile-scenes.js', 'move-anim.js', 'drama.js']);
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const files = [];
-for (const m of html.matchAll(/src\/js\/([a-zA-Z0-9\-\/]+\.js)/g)) {
-  if (!DOM_ONLY.has(m[1]) && !files.includes(m[1])) files.push(m[1]);
-}
-for (const f of files) {
-  try { eval(fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8')); }
-  catch (e) { console.log(`EVAL FAIL ${f}: ${e.message}`); process.exit(2); }
-}
-delete global.window;
-const Game = globalThis.Scattering.Game;
-
-let says = [];
-let discLines = []; // lines spoken by scale-discovery beats only
-let inDiscovery = false;
-const osay = Game.say.bind(Game);
-Game.say = (t) => { const s = String(t); says.push(s); if (inDiscovery) discLines.push(s); return osay(t); };
+let Game, says = [], discLines = [], inDiscovery = false;
 const clearSays = () => { says = []; discLines = []; };
-// scope the sense-test to discovery beats (the wave ledger's own "bar"
-// beats are pre-existing canon, not discovery lines)
-const _origSDDaily = Game.scaleDiscoveryDaily.bind(Game);
-Game.scaleDiscoveryDaily = (...a) => { inDiscovery = true; try { return _origSDDaily(...a); } finally { inDiscovery = false; } };
-const _origSDMoment = Game._sdFirstAccordMoment.bind(Game);
-Game._sdFirstAccordMoment = (...a) => { inDiscovery = true; try { return _origSDMoment(...a); } finally { inDiscovery = false; } };
+function installObservers() {
+  const say = Game.say;
+  Game.say = function (t) {
+    const text = String(t); says.push(text); if (inDiscovery) discLines.push(text);
+    return say.call(this, t);
+  };
+  for (const name of ['scaleDiscoveryDaily', '_sdFirstAccordMoment']) {
+    const original = Game[name];
+    Game[name] = function (...args) {
+      inDiscovery = true;
+      try { return original.apply(this, args); } finally { inDiscovery = false; }
+    };
+  }
+}
 
 let failures = 0;
 function ok(cond, label) {
@@ -87,10 +61,7 @@ function setPantry(days) {
 function pantryKcal() { try { return Game.pantryKcal(); } catch (e) { return 0; } }
 
 async function freshGame() {
-  await Game.init();
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  try { Game.depart(); } catch (e) {}
+  await H.setupGame(Game);
   Game.state.systemArrived = true; // System present (integration stage 1+)
   clearSays();
 }
@@ -98,17 +69,49 @@ async function freshGame() {
 function otherVillages() {
   return (Game.state.otherVillages || []).filter(v => v && v.id !== 'haven');
 }
-function runDiscoveryDays(fromDay, toDay) {
+function runDiscoveryDays(fromDay, toDay, conceptsOnly = false) {
   for (let d = fromDay; d <= toDay; d++) {
     setDay(d);
     Game.scaleDiscoveryDaily();
     if (Game.scaleDiscovery().region && Game.scaleDiscovery().realm &&
-        Game.scaleDiscovery().table) break;
+        (conceptsOnly || Game.scaleDiscovery().table)) break;
   }
 }
 function sd() { return Game.scaleDiscovery(); }
+// Prepared capability, not a naturally progressed campaign. Use actual
+// people, item definitions, counter learning and attributed kill receipts.
+function prepareReadiness(w3) {
+  const demand = Game.standingCfg().readyDemand[4], v = Game.state.village;
+  const n = Math.max(demand.armored, demand.armed, demand.veterans);
+  const ids = v.roster.filter(id => id !== Game.villagerId && Game.vpOf(id) &&
+    !Game.vpOf(id).dead && ((v.health || {})[id] ?? 100) > 0).slice(0, n);
+  assert.equal(ids.length, n, 'actual living villagers for prepared capability');
+  const eq = globalThis.Scattering.equipment;
+  const armor = Game.data.items.find(d => d.armor?.protection >= demand.armorP && eq.slotForItem(d) === 'torso');
+  const weapon = Game.data.items.find(d => d.weapon && eq.slotForItem(d) === 'melee');
+  assert(armor && weapon, 'actual worn armor and melee definitions');
+  for (const id of ids) {
+    const vp = Game.vpOf(id); vp.items = [weapon.id, armor.id];
+    vp.equipped = { melee: { itemId: weapon.id }, torso: { itemId: armor.id } };
+  }
+  const counters = Game.data.monsters.filter(m => m.wave === 1 && m.counter).slice(0, demand.tricks);
+  assert.equal(counters.length, demand.tricks);
+  for (const m of counters) Game.discoverMonsterCounter(m.id, 'taught');
+  for (let i = 0; i < demand.veterans; i++) Game.recordWaveKill(w3[i], ids[i], 'prepared-discovery');
+  const rd = Game.waveUnlockReady(4);
+  ok(rd.ready && rd.armored >= demand.armored && rd.armed >= demand.armed &&
+    rd.tricks >= demand.tricks && rd.veterans >= demand.veterans,
+    'actual prepared armor/weapons/knowledge/veterans satisfy readiness');
+  console.log('READINESS_RECEIPT ' + JSON.stringify({ ids, armor: armor.id, weapon: weapon.id,
+    counters: counters.map(m => m.id), readiness: rd, raw: Game.villageStanding(), released: Game.villageStandingTotal() }));
+}
+
 
 (async () => {
+  const loaded = await H.loadGame({ seed: SEED, mode: 'scale-discovery-proof', narration: true });
+  Game = loaded.Game;
+  ok(loaded.loadFails.length === 0, 'all production modules load through the shared harness');
+  installObservers();
   // ---------- RED GATE ----------
   console.log('== RED gate: the API must exist ==');
   const hasDaily = typeof Game.scaleDiscoveryDaily === 'function';
@@ -124,7 +127,7 @@ function sd() { return Game.scaleDiscovery(); }
   console.log('== (a) thriving village receives pointers ==');
   await freshGame();
   setPantry(30); // well-fed: travelers linger, villagers talk
-  runDiscoveryDays(20, 200);
+  runDiscoveryDays(20, 200, true);
   const d1 = sd();
   ok(!!(d1.region && d1.region.day), `regional discovered in-world (day ${d1.region && d1.region.day})`);
   ok(d1.region && d1.region.day >= 15, `regional discovery not before day 15 (day ${d1.region && d1.region.day})`);
@@ -138,8 +141,8 @@ function sd() { return Game.scaleDiscovery(); }
   const w2 = (Game.data.monsters || []).filter(m => m.wave === 2).slice(0, 5).map(m => m.id);
   ok(w2.length >= 5, 'test has 5 distinct wave-2 monster ids');
   w2.forEach(id => Game.scoreLedgerKill(id));
-  setDay(32); setPantry(30);
-  for (let d = 32; d <= 45 && !sd().nextAct; d++) { setDay(d); Game.scaleDiscoveryDaily(); }
+  setDay(Math.max(32, day() + 1)); setPantry(30);
+  for (let d = day(), end = d + 20; d <= end && !sd().nextAct; d++) { setDay(d); Game.scaleDiscoveryDaily(); }
   ok(!!(sd().nextAct && sd().nextAct.day), `System "next act" pointer fired at wave-3 bar (day ${sd().nextAct && sd().nextAct.day})`);
   ok(says.some(t => /next act/i.test(t) && /STAGE|stage/i.test(t)), 'next-act line names a bigger stage, not a mechanic');
 
@@ -150,14 +153,30 @@ function sd() { return Game.scaleDiscovery(); }
   const w3 = (Game.data.monsters || []).filter(m => m.wave === 3).slice(0, 4).map(m => m.id);
   ok(w3.length >= 4, 'test has 4 distinct wave-3 monster ids');
   w3.forEach(id => Game.scoreLedgerKill(id));
-  setDay(60); setPantry(30);
-  for (let d = 60; d <= 80 && !sd().nation; d++) { setDay(d); Game.scaleDiscoveryDaily(); }
+  setDay(Math.max(60, day() + 1)); setPantry(30);
+  const rawBefore = Game.villageStanding(), heldBefore = Game.villageStandingTotal();
+  ok(rawBefore.total >= Game.standingCfg().t4 && !Game.waveUnlockReady(4).ready && Game.unlockedWave() === 3,
+    'raw standing and regional flag alone leave wave4 held by readiness');
+  Game.scaleDiscoveryDaily();
+  ok(!sd().nation, 'unready regional village receives no wave4 national pitch');
+  console.log('HELD_RECEIPT ' + JSON.stringify({ raw: rawBefore, released: heldBefore, readiness: Game.waveUnlockReady(4), wave: Game.unlockedWave() }));
+  prepareReadiness(w3);
+  ok(Game.unlockedWave() === 4, 'prepared capability releases actual wave4');
+  clearSays();
+  for (let d = day(), end = d + 20; d <= end && !sd().nation; d++) { setDay(d); Game.scaleDiscoveryDaily(); }
   ok(!!(sd().nation && sd().nation.day), `System national pointer fired at wave-4 bar (day ${sd().nation && sd().nation.day})`);
+
+  ok(says.some(t => /FINALES.*NATION/.test(t)), 'national pitch names the next political step');
+  const firedDay = sd().nation && sd().nation.day;
+  clearSays(); Game.scaleDiscoveryDaily(); setDay(day() + 1); Game.scaleDiscoveryDaily();
+  console.log('NATION_RECEIPT ' + JSON.stringify({ day: day(), nation: sd().nation, echoDay: Game.state.scaleDiscover.nationEchoDay, echoSaid: Game.state.scaleDiscover.nationEchoSaid, lines: says }));
+  ok(sd().nation?.day === firedDay && !says.some(t => /FINALES.*NATION/.test(t)), 'national pitch fires once');
+  ok(Game.state.scaleDiscover.nationEchoSaid && says.some(t => /Whatever.s coming/.test(t)), 'villager echo follows the national pitch');
 
   // table discovery at national
   clearSays();
   Game.state.nationalLive = true;
-  setDay(85);
+  setDay(Math.max(85, day() + 1));
   Game.scaleDiscoveryDaily();
   ok(!!(sd().table && sd().table.day), 'table discovered in-world at national');
   ok(says.some(t => /table/i.test(t)), 'table line names the table');
@@ -203,17 +222,28 @@ function sd() { return Game.scaleDiscovery(); }
   const d3b = sd();
   ok(!d3b.region && !d3b.realm, 'starving day-40 village: still no ladder discovery (thriving gate holds)');
 
+  // Give the pre-arrival world a real neighbor opportunity, so silence
+  // cannot pass merely because every other pointer prerequisite was absent.
+  otherVillages().forEach(v => { v.generated = true; v.rumored = true; });
+  setPantry(30); setDay(day() + 1); clearSays();
+  ok(Game.integrationStage() === 0 && otherVillages().some(v => Game.knowsVillage(v)),
+    'known neighboring fire exists while the System is absent');
+  Game.scaleDiscoveryDaily();
+  ok(!says.some(t => /◈ SYSTEM/.test(t)), 'even a fed village with known neighbors gets no pre-arrival System pitch');
+
   // ---------- (d) sense-test: read every line ----------
   console.log('== (d) sense-test: the lines ==');
   await freshGame();
   setPantry(30);
   otherVillages().forEach(v => { v.generated = true; v.rumored = true; v.opinion = 20; });
-  runDiscoveryDays(15, 200);
+  runDiscoveryDays(15, 200, true);
   w2.forEach(id => Game.scoreLedgerKill(id));
-  setDay(60); Game.state.networkLive = true; Game.state.networkLiveDay = 33;
+  setDay(Math.max(60, day() + 1)); Game.scaleDiscoveryDaily();
+  Game.state.networkLive = true; Game.state.networkLiveDay = day();
   w3.forEach(id => Game.scoreLedgerKill(id));
-  for (let d = 60; d <= 80; d++) { setDay(d); Game.scaleDiscoveryDaily(); }
-  Game.state.nationalLive = true; setDay(90); Game.scaleDiscoveryDaily();
+  prepareReadiness(w3);
+  for (let d = day(), end = d + 20; d <= end; d++) { setDay(d); Game.scaleDiscoveryDaily(); }
+  Game.state.nationalLive = true; setDay(Math.max(90, day() + 1)); Game.scaleDiscoveryDaily();
   Game._formLink(otherVillages()[0].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
 
   const JARGON = /scaleRank|nationalLive|networkLive|unlock|Wave [0-9]|checklist|quest log|\bbar\b.*point/i;
@@ -223,7 +253,6 @@ function sd() { return Game.scaleDiscovery(); }
   ok(jargonHits.length === 0, 'no mechanics jargon leaks into discovery lines' +
     (jargonHits.length ? ' :: ' + jargonHits.map(t => t.slice(0, 120)).join(' || ') : ''));
   ok(!discLines.some(t => /undefined|NaN/.test(t)), 'no broken interpolations');
-  const villagerLines = discLines.filter(t => /'[^']*'/.test(t) && !/◈ SYSTEM/.test(t) && /—|:/.test(t));
   console.log(`\n----- DISCOVERY TRANSCRIPT (seed ${SEED}) -----`);
   const seen = new Set();
   for (const t of discLines) {
@@ -231,7 +260,7 @@ function sd() { return Game.scaleDiscovery(); }
     console.log('  ' + t);
   }
   console.log('----- END TRANSCRIPT -----\n');
-  ok(villagerLines.length >= 0, 'transcript printed for human review');
+  ok(discLines.length > 0 && sd().nation && sd().table, 'transcript includes actual national and Table discovery');
 
   console.log(failures === 0 ? '\nALL GREEN' : `\n${failures} FAILURES`);
   process.exit(failures === 0 ? 0 : 1);

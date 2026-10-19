@@ -49,7 +49,8 @@
     try {
       const m = tst().musters[NET];
       const roster = (Game.state.village || {}).roster || [];
-      n += ((m && m.haven) || []).filter(h => h && roster.indexOf(h.vid) >= 0).length;
+      n += Game.titanHavenBlades ? Game.titanHavenBlades(m).length
+        : ((m && m.haven) || []).filter(h => h && h.vid !== Game.villagerId && roster.indexOf(h.vid) >= 0).length;
     } catch (e) { console.warn('network haven blades', e); }
     return n;
   }

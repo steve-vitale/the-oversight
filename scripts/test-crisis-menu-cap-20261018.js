@@ -18,7 +18,8 @@
 // Run: SEED=7 node scripts/test-crisis-menu-cap-20261018.js (seeds 7/42/99)
 'use strict';
 const assert = require('assert');
-const { loadGame, setupGame } = require('./sim-harness');
+const path=require('path');
+const { loadGame, setupGame } = require(path.join(process.env.PROOF_ROOT || path.resolve(__dirname,'..'),'scripts/sim-harness'));
 
 const SEED = parseInt(process.env.SEED || '7', 10);
 const MAXC = 7; // the pipeline's content-choice budget (conversation.js buildMenu)
@@ -106,6 +107,7 @@ async function main() {
     ok('injected confrontation still leads', wids[0] === 'betrayal:accept' && wids[1] === 'betrayal:decline',
       `wids[0..1]=${wids.slice(0, 2).join(',')}`);
     ok("'leave' pinned on the wrapped menu", wids.indexOf('leave') >= 0);
+    ok('subject navigation survives injected crisis choices', wids.includes('dlg:subject'));
     ok('no duplicate ids on the wrapped menu', new Set(wids).size === wids.length);
     // The event choice (r21's lead) must survive the wrapper trim.
     ok('event choice survives the wrapper trim', wids.some(id => id === 'alive:event:mourning'),
@@ -124,6 +126,7 @@ async function main() {
 
   // Structural exit: the player is never stranded in the dialogue box.
   ok("'leave' pinned on the menu", ids.indexOf('leave') >= 0);
+  ok('subject navigation survives the beat menu cap', ids.includes('dlg:subject'));
   ok("'silence' present (finalizeMenu rule 4)", ids.indexOf('silence') >= 0);
   ok('no duplicate choice ids', new Set(ids).size === ids.length);
 

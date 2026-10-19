@@ -5,13 +5,13 @@
 // whose subordinate's fields are dry (tribute = nothing every week ->
 // -2/week via hierarchy.js linkTick), Haven's pantry pinned at 15,000 kcal
 // (below the baseline's 20,000 tend gate, inside the layer's 13500-20000
-// lower band). 28 days, real Game.linkTick + Game._renegotiationTick, no RNG
-// consumed on either side (dry tribute path has no rolls) — the race is pure
-// mechanism, identical engine state before/after.
+// lower band). 28 prepared days through real Game.linkTick and
+// Game._renegotiationTick. This mechanism fixture is not a full controller
+// campaign or a claim of identical treatment/control trajectories.
 //
 // RED PHASE (honest failure modes this must catch):
-//   R0. copy-fidelity: the baseline tend loop in this test IS leadcourt's
-//       loop (asserted against leadcourt.js source).
+//   R0. guard-fidelity: current leadcourt source still declares the 20000
+//       pantry guard reproduced by this isolated fixture (not its whole policy).
 //   R1. baseline lets it decay: leadcourt/fourthlink tends nothing at
 //       pantry 15000, so thin tribute ticks bleed the trust net-negative.
 //       (Note: for primary-Haven links each linkTick call IS a tribute
@@ -36,12 +36,13 @@ process.env.FIFTHLINK = '1';
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const { loadGame, setupGame } = require('./sim-harness');
+const K = require('./godpath/lib');
+let proofGame;
 const { fourthlink } = require('./policies/fourthlink');
 const { fifthlink, fifthlinkLayer, linkIsThin } = require('./policies/fifthlink-r26');
 
-// ---- the baseline tend loop, copied from scripts/policies/leadcourt.js ----
-// (copy-fidelity asserted against the source in R0 below)
+// Prepared reproduction of leadcourt's 20000-kcal tend guard. This is
+// not the full baseline controller; real tend/link/expiry methods still run.
 function baselineTendLoop(Game, ctx) {
   let links = [];
   try { links = Game.hierarchyState() || []; } catch (e) {}
@@ -67,8 +68,8 @@ function pinPantry(Game, kcal) {
 }
 
 async function buildRace({ trust }) {
-  const { Game } = await loadGame({ seed: 42, mode: 'fifthlink-r26-proof' });
-  await setupGame(Game);
+  if (!proofGame) proofGame = await K.load({ seed: Number(process.env.SEED || 42) });
+  const Game = proofGame; K.newRun(Game);
   // dry subordinate: empty fields, no mouths — tribute is nothing, weekly.
   Game.state.otherVillages = (Game.state.otherVillages || []).concat([
     { id: 'dryv', name: 'Dryfield', pantryKcal: 0, population: 0, day: 0, roster: [] },
@@ -107,10 +108,10 @@ async function main() {
     console.log(`ok ${name}${detail ? ' — ' + detail : ''}`);
   };
 
-  // ---- R0: the baseline loop in this test IS leadcourt's loop ----
+  // ---- R0: the prepared guard still matches current source ----
   const src = fs.readFileSync(path.join(__dirname, 'policies', 'leadcourt.js'), 'utf8');
-  ok('R0-copy-fidelity', src.includes('tendedWeek !== week && pantryKcal(Game) > 20000'),
-    'leadcourt.js still carries the 20000 tend gate this test replicates');
+  ok('R0-baseline-source-still-declares-20000-guard', src.includes('tendedWeek !== week && pantryKcal(Game) > 20000'),
+    'current source still declares the guard this prepared race reproduces');
 
   // ---- RED R1: baseline lets the thin link decay net-negative ----
   {
@@ -123,11 +124,11 @@ async function main() {
 
   // ---- RED R2: gate off = fourthlink itself (require-cache surgery, env read at load) ----
   delete process.env.FIFTHLINK;
-  for (const k of Object.keys(require.cache)) if (k.endsWith('policies/fifthlink-r26.js')) delete require.cache[k];
+  delete require.cache[require.resolve('./policies/fifthlink-r26')];
   const off = require('./policies/fifthlink-r26').fifthlink;
   ok('R2-gate-off-is-fourthlink', off === fourthlink, 'unset gate exports fourthlink itself');
   process.env.FIFTHLINK = '1';
-  for (const k of Object.keys(require.cache)) if (k.endsWith('policies/fifthlink-r26.js')) delete require.cache[k];
+  delete require.cache[require.resolve('./policies/fifthlink-r26')];
   const on = require('./policies/fifthlink-r26');
   ok('R2-gate-on-differs', on.fifthlink !== fourthlink, 'gated policy is a distinct object');
   ok('R2-armed-id', on.fifthlink.id === 'fifthlink-r26', 'armed export carries the arm id');

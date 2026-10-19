@@ -5,35 +5,8 @@
 // (b) Fighters can occupy cells 9..11 (beyond 9x9)
 // (c) findPath works across 12x12
 // (d) tbGridMax() returns 11 for titan, 8 for normal
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '20261012', 10);
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ a >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-Math.random = mulberry32(SEED);
-
-global.SCATTER_DATA = {};
-for (const f of fs.readdirSync(path.join(ROOT, 'src/data'))) {
-  if (!f.endsWith('.json')) continue;
-  try { global.SCATTER_DATA[f.replace(/\.json$/, '')] = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', f), 'utf8')); } catch (e) {}
-}
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const SKIP_DOM = /app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/;
-const files = [];
-for (const m of html.matchAll(/src="([^"?]+)\?v=/g)) {
-  const f = m[1];
-  if (f.endsWith('.js') && !SKIP_DOM.test(f)) files.push(f);
-}
-const gameIdx = files.indexOf('src/js/game.js');
-eval(fs.readFileSync(path.join(ROOT, files[gameIdx]), 'utf8'));
-global.Game = globalThis.Scattering.Game;
-files.forEach((f, i) => { if (i !== gameIdx) eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); });
-delete global.window;
-Game.data = global.SCATTER_DATA;
-
 let pass = 0, fail = 0;
 function check(name, cond, extra) {
   if (cond) { pass++; console.log('  PASS', name); }
@@ -41,10 +14,13 @@ function check(name, cond, extra) {
 }
 
 (async () => {
-  const H = require('./sim-harness.js');
-  const { Game: G } = await H.loadGame({ seed: SEED });
-  await H.setupGame(G);
-  G.depart();
+  const G = await K.load({ seed: SEED }); K.newRun(G);
+  // Prepared named living army: this isolates kit/grid mechanics, not natural recruitment.
+  const blades = (n, prefix) => {
+    const town = { id: 'kit_fire_' + prefix, name: 'Prepared kit fire', roster: Array.from({ length: n }, (_, i) => ({ id: prefix + i, name: 'Blade ' + prefix + i, age: 35, alive: true, health: 100 })) };
+    G.state.otherVillages.push(town);
+    return town.roster.map(r => ({ vid: r.id, villageId: town.id, name: r.name, hp: r.health, outfitted: [], gearValue: 0 }));
+  };
   G.say = () => {}; G.audioEvent = () => {};
 
   // (a) Normal fight: gridSize 9
@@ -59,12 +35,12 @@ function check(name, cond, extra) {
   // Muster 10 allies for Herald
   G.state.titans = G.state.titans || {};
   G.state.titans.musters = G.state.titans.musters || {};
-  const allies = []; for (let i = 0; i < 10; i++) allies.push('ally' + i);
+  const allies = blades(10, 'ally');
   G.state.titans.musters.herald = { allies, haven: [], day: 0, outfitted: {} };
   G.state.scholar.health = 9000;
   G.startCombat('herald');
-  check('titan fight gridSize 12', G.tbfight.gridSize === 12);
-  check('titan tbGridMax 11', G.tbGridMax() === 11);
+  check('coalition fight now uses the declared 24x24 scale', G.tbfight.gridSize === 24);
+  check('coalition tbGridMax is 23', G.tbGridMax() === 23);
 
   // (c) Fighter can move to cell 10,10 (beyond 9x9)
   const p = G.tbFighter('p');
@@ -79,7 +55,7 @@ function check(name, cond, extra) {
   const beyond9 = allyPositions.some(([x, y]) => x > 8 || y > 8);
   // Note: allies spawn near player (4,4), so they may not exceed 8 initially.
   // The key is that the GRID ALLOWS it, not that they start there.
-  check('grid allows beyond 9x9', G.tbGridMax() === 11);
+  check('grid allows beyond 9x9', G.tbGridMax() === 23);
 
   G.tbfight.over = true; G.tbfight = null;
 

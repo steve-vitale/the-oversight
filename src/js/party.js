@@ -19,6 +19,7 @@
 //   - partyPanelHTML()
 //   - allyStripHTML()
 // rules:
+//   - one_bearer_body: formal and traveling companions exclude the current bearer by canonical ID and deduplicate real members, including after succession (code: partyMembers, travelingWith)
 //   - party_panel_truth: member status via displayName (knowledge-gated); HP from v.health (persistent, default/cap 100) or the live fighter in combat; conditions from real tracked state only (v.sick; hp-derived hurt/critical<=20) (code: partyMemberStatus, partyPanelHTML, Steve 2026-10-09)
 //   - ally_strip: in-combat ally strip uses the enemy line's visual language; downed allies greyed with X, never silently dropped (code: allyStripHTML, Steve 2026-10-09)
 // consumes:
@@ -68,7 +69,7 @@
 
     partyMembers() {
       const v = this.partyState();
-      return (v.party || []).filter(id => (v.roster || []).includes(id));
+      return [...new Set(v.party || [])].filter(id => id !== this.villagerId && (v.roster || []).includes(id));
     },
 
     inParty(vid) {
@@ -92,7 +93,7 @@
     travelingWith() {
       const v = this.partyState();
       const set = new Set([...this.partyMembers(), ...(v.followers || [])]);
-      return [...set].filter(id => (v.roster || []).includes(id));
+      return [...set].filter(id => id !== this.villagerId && (v.roster || []).includes(id));
     },
 
     // ---------- SYSTEM ARRIVAL: PARTY UNLOCK ----------
@@ -625,38 +626,19 @@
         speed: this.playerSpeed(), mx: px, my: py,
         alive: true, fled: false, moveLeft: 0, acted: false, aimed: false,
       });
-      // The betrayer: hostile. Fights like a person — brave if bold, cautious if scared.
-      // WOUND TRUTH (break-it combat r6 2026-10-09): a betrayer you wounded
-      // and fled from is still bleeding — the village record carries their
-      // remaining HP from the last fight (stashed in the tbEnd wrapper).
-      // The old flat 40 erased your damage at no cost.
       const temp = this.npcTemper(vid);
-      const bspot = freeSpotNear(px + 2, py);
-      const _bw = (((this.state || {}).village || {}).betrayalWounds || {})[vid];
-      const _bhp = (_bw > 0) ? Math.min(40, Math.round(_bw)) : 40;
-      fighters.push({
-        key: 'h_' + vid, kind: 'hostile', villagerId: vid,
-        name: this.displayName(vid), emoji: '🔪',
-        hp: _bhp, maxHp: 40, speed: this.villagerSpeed(vid), mx: bspot.x, my: bspot.y,
-        alive: true, fled: false, moveLeft: 0, acted: false,
-        ai: temp === 'bold' ? 'brave' : temp === 'cautious' ? 'cautious' : 'brave',
-        betrayal: true,
+      const betrayer = this.tbHumanFighter(vid, 'hostile', freeSpotNear(px + 2, py), {
+        ai: temp === 'bold' ? 'brave' : temp === 'cautious' ? 'cautious' : 'brave', betrayal: true,
       });
-      // Loyal party members fight WITH you — against their former companion.
+      if (!betrayer) return null;
+      fighters.push(betrayer);
       for (const pid of this.partyMembers()) {
         if (pid === vid) continue;
-        const pvp = this.vpOf(pid);
-        const ptemp = this.npcTemper(pid);
-        const pspot = freeSpotNear(px - 1, py + 1);
-        fighters.push({
-          key: 'v_' + pid, kind: 'villager', villagerId: pid,
-          name: this.displayName(pid), emoji: '🧍',
-          hp: 30, maxHp: 30, speed: this.villagerSpeed(pid), mx: pspot.x, my: pspot.y,
-          alive: true, fled: false,
-          ai: ptemp === 'bold' ? 'brave' : ptemp === 'cautious' ? 'cautious' : 'helpful',
-          helped: false,
-        });
+        const ally = this.tbHumanFighter(pid, 'villager', freeSpotNear(px - 1, py + 1));
+        if (ally) fighters.push(ally);
       }
+      this.tbPlaceHumans(fighters, 8);
+      if (!fighters.includes(betrayer)) return null;
       // FLAG HYGIENE (flesh-out loop 2026-10-07): this fight bypasses
       // startCombat — reset per-fight combat flags or the last fight's
       // rage/trade/debt would leak in for free.
@@ -1046,7 +1028,8 @@
       }
       const d2 = Math.max(Math.abs(foe.mx - h.mx), Math.abs(foe.my - h.my));
       if (d2 <= 1) {
-        const dmg = S_combat.roll ? S_combat.roll([6, 12]) : 8;
+        const wb = Math.round((h.wbonus || 0) / 2);
+        const dmg = (S_combat.roll ? S_combat.roll([6, 12]) : 8) + wb;
         // Not cool verbs. Desperate ones.
         // NOTE on keying: templates are NAME-FREE ({n}/{t} placeholders) so
         // the fight-scoped pickFresh cycle ('humanRetaliate' on tbfight._fresh)
@@ -1143,36 +1126,24 @@
 
   const origStartCombat = Game.startCombat;
   Game.startCombat = function (monsterId) {
-    const r = origStartCombat.call(this, monsterId);
+    const r = origStartCombat.apply(this, arguments);
     try {
       const f = this.tbfight;
       if (f && !f.betrayal) {
         // Party members are WITH you — they join even beyond the 4-square radius.
         const existing = new Set(f.fighters.map(x => x.villagerId).filter(Boolean));
+        const existingKeys = new Set(f.fighters.map(x => x.key));
         const detail = this.genDetail(this.map.px, this.map.py);
         const px = this.state.scholar.mx ?? 4, py = this.state.scholar.my ?? 4;
         for (const pid of this.partyMembers()) {
           if (existing.has(pid)) continue;
           const pos = (this.state.village.positions || {})[pid];
-          const ptemp = this.npcTemper(pid);
-          f.fighters.push({
-            key: 'v_' + pid, kind: 'villager', villagerId: pid,
-            name: this.displayName(pid), emoji: '🧍',
-            hp: 30, maxHp: 30, speed: this.villagerSpeed(pid),
-            mx: pos ? pos.mx : px, my: pos ? pos.my : py,
-            alive: true, fled: false,
-            ai: ptemp === 'bold' ? 'brave' : ptemp === 'cautious' ? 'cautious' : 'helpful',
-            helped: false,
-          });
+          const ally = this.tbHumanFighter(pid, 'villager', pos || {mx:px,my:py});
+          if (ally) { f.fighters.push(ally); existing.add(pid); }
         }
-        if (f.fighters.some(x => x.kind === 'villager' && !existing.has(x.villagerId))) {
-          // TURN-POINTER FIDELITY (dayfreeze 2026-10-18, sim-dayfreeze-green):
-          // the real startCombat's opening tbAdvance leaves the fight at the
-          // player's turn. Rebuilding the order re-sorts by speed — the stale
-          // turnIdx then addresses whoever landed at that index (often a
-          // villager), violating the "OPENING TURNS" contract and stranding
-          // the day clock ("Not in the middle of a fight" refusals;
-          // driveFights only drives player turns). Preserve the turn.
+        this.tbPlaceHumans(f.fighters, this.tbGridMax());
+        if (f.fighters.some(x => !existingKeys.has(x.key))) {
+          // Keep the actor selected by the opening turn when joined allies re-sort initiative.
           const curKey = f.order ? f.order[f.turnIdx] : null;
           f.order = (globalThis.Scattering.combat || {}).turnOrder
             ? globalThis.Scattering.combat.turnOrder(f.fighters)
@@ -1305,25 +1276,9 @@
   Game.tbEnd = function (result) {
     const f = this.tbfight;
     const wasBetrayalFight = !!(f && f.betrayal);
-    // WOUND TRUTH (break-it combat r6 2026-10-09): the player's wounds persist
-    // across a fled betrayal fight (s.health syncs from the fighter) but the
-    // hostile always respawned at a flat 40 HP — beat them to 1, flee, heal,
-    // come back to a fresh 40. Your damage was erased at no cost (same class
-    // as the door-flee monster reset, fixed 2026-10-08). Stash the hostile's
-    // remaining HP on the village record; the next startBetrayalCombat honors
-    // it. Cleared when they die.
-    if (wasBetrayalFight && f) {
-      try {
-        const v = this.state.village || {};
-        v.betrayalWounds = v.betrayalWounds || {};
-        for (const h of (f.fighters || [])) {
-          if (h.kind === 'hostile' && h.villagerId) {
-            if (h.alive) v.betrayalWounds[h.villagerId] = Math.max(1, Math.round(h.hp));
-            else delete v.betrayalWounds[h.villagerId];
-          }
-        }
-      } catch (e) {}
-    }
+    // These endings bypass core tbEnd. Persist real HP before any roster
+    // removal/succession, including fled allies and direct HP-changing verbs.
+    if (f && !f.over) for (const person of f.fighters || []) this.tbSyncHumanHealth(person);
     // FLEE TRUTH (brawler loop 2026-10-08): carry who-fled into the aftermath
     // before the fight object is cleared.
     if (wasBetrayalFight && result === 'fled' && this._lastBetrayal) {

@@ -14,7 +14,7 @@
 //        via classifyBeat over all call sites; (c) SHOW_BEATS end values
 //        all in {won,lost,mixed}, lose:'' texts unreachable-but-covered.
 // Usage: node scripts/test-shows-breakit-r16-20261011.js [SEED]  (run x3 seeds)
-const fs = require('fs');
+const fs = require('./lib/source-text');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || process.argv[2] || '424242', 10);

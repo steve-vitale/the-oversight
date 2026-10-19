@@ -33,7 +33,11 @@
 'use strict';
 process.env.FOURTHLINK = '1';
 process.env.RENEGANS = '1';
-const { loadGame, setupGame } = require('./sim-harness');
+const fs = require('fs');
+const path = require('path');
+const K = require('./godpath/lib');
+const { watchRenegotiation } = require('./lib/renegotiation-fixture');
+let proofGame;
 const { fourthlink } = require('./policies/fourthlink');
 // The layer file is DELETED per the kill protocol (arm KILLED AT PILOT).
 // The GREEN phase degrades gracefully: armed-phase scenarios info-skip when
@@ -41,7 +45,7 @@ const { fourthlink } = require('./policies/fourthlink');
 // stays fully runnable. This keeps the committed proof green in-tree.
 let renegansMod = null;
 try { renegansMod = require('./policies/renegans'); }
-catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e; }
+catch (e) { if (e.code !== 'MODULE_NOT_FOUND' || fs.existsSync(path.join(__dirname, 'policies', 'renegans.js'))) throw e; }
 const layerPresent = !!renegansMod;
 const renegans = layerPresent ? renegansMod.renegans : null;
 const renegotiationAnswers = layerPresent ? renegansMod.renegotiationAnswers : null;
@@ -52,8 +56,8 @@ function pinPantry(Game, kcal) {
 }
 
 async function buildLink({ trust }) {
-  const { Game } = await loadGame({ seed: 42, mode: 'renegans-proof' });
-  await setupGame(Game);
+  if (!proofGame) proofGame = await K.load({ seed: Number(process.env.SEED || 42) });
+  const Game = proofGame; K.newRun(Game);
   Game.state.otherVillages = (Game.state.otherVillages || []).concat([
     { id: 'dryv', name: 'Dryfield', pantryKcal: 0, population: 0, day: 0, roster: [] },
   ]);
@@ -85,11 +89,11 @@ async function main() {
   // ---- RED R1: gate off = fourthlink itself (or layer absent: inert by deletion) ----
   delete process.env.RENEGANS;
   if (layerPresent) {
-    for (const k of Object.keys(require.cache)) if (k.endsWith('policies/renegans.js')) delete require.cache[k];
+    delete require.cache[require.resolve('./policies/renegans')];
     const off = require('./policies/renegans').renegans;
     ok('R1-gate-off-is-fourthlink', off === fourthlink, 'unset gate exports fourthlink itself');
   } else {
-    ok('R1-layer-deleted', true, 'layer absent (killed arm) — inert by deletion, nothing to gate');
+    ok('R1-layer-deleted', !fs.existsSync(path.join(__dirname, 'policies', 'renegans.js')), 'layer absent (killed arm) — inert by deletion, nothing to gate');
   }
 
   // ---- RED R2: the gap — baseline lets a REAL staged beat expire ----
@@ -100,17 +104,25 @@ async function main() {
     const tStaged = trustOf(Game);
     ok('R2-haircut-applied', tStaged === 16, `trust 24 -> ${tStaged} (-8 succession haircut)`);
     const ctx = {};
-    for (let d = 11; d <= 18; d++) { // 8 days: the beat expires at day 17 unanswered
-      Game.state.scholar.day = d;
-      pinPantry(Game, 15000);
-      fourthlink.daily(Game, ctx); // the baseline policy — never answers
-      Game._renegotiationTick();
-    }
+    const watch = watchRenegotiation(Game);
+    try {
+      for (let d = 11; d <= 18; d++) { // 8 days: the beat expires at day 17 unanswered
+        Game.state.scholar.day = d;
+        pinPantry(Game, 15000);
+        fourthlink.daily(Game, ctx); // the baseline policy — never answers
+        Game._renegotiationTick();
+      }
+    } finally { watch.restore(); }
     const notes = renegNotes(Game).join(' | ');
     ok('R2-baseline-lets-expire', beatOf(Game) == null && /silence answered/i.test(notes),
       'beat expired unanswered; engine said the silence answered');
-    const tEnd = trustOf(Game);
-    ok('R2-expiry-costs-6', tEnd === 10, `trust 16 -> ${tEnd} (-6 expiry)`);
+    const expiries = watch.events.filter(event => event.id === 'link_testR' && event.chosen === false);
+    ok('R2-one-real-expiry', expiries.length === 1 && expiries[0].result === 'lapsed', JSON.stringify(expiries));
+    ok('R2-expiry-costs-6', expiries.length === 1 && expiries[0].delta === -6, JSON.stringify(expiries));
+    ok('R2-expiry-not-before-seven-days', expiries.length === 1 && expiries[0].age >= 7, JSON.stringify(expiries));
+    ok('R2-no-answer-attempted', !watch.answers.some(row => row.id === 'link_testR'), JSON.stringify(watch.answers));
+    console.log('   event receipt ' + JSON.stringify({ stagedTrust: 16, netTrust: trustOf(Game), expiries,
+      history: Game.mshipState().links.find(link => link.id === 'link_testR').history }));
     ok('R2-no-answer-fired', !/met grief with grain|speaker rode out/i.test(notes), 'no answer fiction — leadcourt never clicked it');
   }
 
@@ -168,7 +180,7 @@ async function main() {
   } // end else (layer present): G1-G4
 
   delete process.env.RENEGANS;
-  console.log(`\nPROOF ${pass}/${pass} green — RED observed (baseline lets the beat expire -6), layer answers it honestly.`);
+  console.log(`\nPROOF ${pass}/${pass} green — ${layerPresent ? 'engine baseline and available policy arm checked' : 'engine baseline checked; deleted policy arm not evaluated'}.`);
 }
 
 main().catch(e => { console.error('FATAL', e); process.exit(1); });

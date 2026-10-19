@@ -1,0 +1,35 @@
+== PART A: GREEN fixtures ==
+-- devotion lane (surgeResonance >= 35, <3 mastered) --
+  PASS A-1: devotion line holds Grandma's Tin Cup — You hold Grandma's Tin Cup. Your gifts are not mastered — bu
+  FAIL A-1: devotion line for Grandma's Tin Cup carries its own memory ("poured a finger")
+  PASS A-1: devotion line for Grandma's Tin Cup keeps the beat's core
+  PASS A-1: devotion line for Grandma's Tin Cup keeps the honest buff terms
+  PASS A-1: devotion line holds Contract Quill — You hold Contract Quill. Your gifts are not mastered — but t
+  FAIL A-1: devotion line for Contract Quill carries its own memory ("terrible contract")
+  PASS A-1: devotion line for Contract Quill keeps the beat's core
+  PASS A-1: devotion line for Contract Quill keeps the honest buff terms
+  PASS A-1: devotion line holds Mixtape — You hold Mixtape. Your gifts are not mastered — but they are
+  FAIL A-1: devotion line for Mixtape carries its own memory ("FOR THE DRIVE")
+  PASS A-1: devotion line for Mixtape keeps the beat's core
+  PASS A-1: devotion line for Mixtape keeps the honest buff terms
+  PASS A-1: devotion line holds Hard Candy — You hold Hard Candy. Your gifts are not mastered — but they 
+  FAIL A-1: devotion line for Hard Candy carries its own memory ("brave dentist")
+  PASS A-1: devotion line for Hard Candy keeps the beat's core
+  PASS A-1: devotion line for Hard Candy keeps the honest buff terms
+  PASS A-1: four items -> four DISTINCT devotion lines — 4 distinct
+  FAIL A-1: generic "worn smooth by use" retired (the memory now evidences it)
+-- mastery lane (3+ mastered) --
+  FAIL A-1b: mastery line for Grandma's Tin Cup carries its own memory ("poured a finger")
+  PASS A-1b: mastery line keeps the payoff
+  FAIL A-1b: mastery line for Contract Quill carries its own memory ("terrible contract")
+  PASS A-1b: mastery line keeps the payoff
+  FAIL A-1b: mastery line for Mixtape carries its own memory ("FOR THE DRIVE")
+  PASS A-1b: mastery line keeps the payoff
+  FAIL A-1b: mastery line for Hard Candy carries its own memory ("brave dentist")
+  PASS A-1b: mastery line keeps the payoff
+  PASS A-1b: four items -> four DISTINCT mastery lines
+-- spoil mutter (knows smoking) --
+beat identity: 10 failures
+TypeError: Game._spoilMutterSpeaker is not a function
+    at partA (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-main67-beat-identity.js:101:24)
+    at async C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-main67-beat-identity.js:156:16

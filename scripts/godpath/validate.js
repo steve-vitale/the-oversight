@@ -88,6 +88,9 @@ const BANNED = [
 ];
 for (const pid of PATH_IDS) {
   const g = (paths[pid] || {}).god || {};
+  if (g.deed) T.ok(`${pid}: authored deed has a supported event and earned hint`,
+    ['relay_office', 'market_exchange', 'field_truth_shared', 'care_survived', 'outmatched_escape', 'ward_rescue', 'apex_hunt', 'death_refused'].includes(g.deed.event) && typeof g.deed.afterDawn === 'boolean' &&
+    typeof g.deed.hint === 'string' && g.deed.hint.trim().length > 0);
   const sc = g.scale || {};
   T.ok(`${pid} -> ${g.id}: one verb ("${g.verb}"), desc, cost, weakness, why, party/titan/contest/army`,
     !!(typeof g.verb === 'string' && g.verb && !/[\/;]| or /.test(g.verb) && g.desc && g.cost && g.weakness && g.why && sc.party && sc.titan && sc.contest && sc.army && g.recognition && g.mythic));

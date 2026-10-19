@@ -20,7 +20,7 @@ const RNG = {
 Math.random = RNG.next.bind(RNG);
 
 global.fetch = (f) => Promise.resolve({
-  json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))),
+  json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, decodeURIComponent(new URL(f, 'https://fixture.invalid/').pathname).slice(1)), 'utf8'))),
 });
 
 global.window = global;

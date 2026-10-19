@@ -22,7 +22,7 @@ function ok(cond, name, extra) {
 }
 
 async function main() {
-  const { Game } = await loadGame({ seed: 11, mode: 'villgate-test' });
+  const { Game } = await loadGame({ seed: Number(process.env.SEED || 11), mode: 'villgate-test' });
   await setupGame(Game);
   const v = Game.state.village;
   const hx = v.px != null ? v.px : 4, hy = v.py != null ? v.py : 4;
@@ -51,11 +51,17 @@ async function main() {
     o.companion = null; o.targetVid = null; o.tightened = false;
     return o;
   }
-  // force the engine's own no-help path: empty pharmacy, no healer
-  const origStash = Game.stashState, origHealer = Game.campHealerName, origHealerVid = Game.campHealerVid;
-  Game.stashState = () => ({ medicine: [] });
-  Game.campHealerName = () => null;
-  Game.campHealerVid = () => null;
+  // Prepare actual people and stores. Replacing a display-name reader does
+  // not remove a real doctor's ability to treat someone.
+  Game.stashState().medicine = [];
+  Game.state.scholar.abilities = [];
+  Game.state.scholar.backgroundAbilities = [];
+  Game.state.codex.skills = {};
+  Game.map.px = hx; Game.map.py = hy;
+  Game.state.scholar.insideHaven = true;
+  v.away = {}; v.party = [];
+  for (const id of roster) Game.getPerson(id).formerOccupation = 'Farmer';
+  ok(Game.campHealerId('haven') === null, 'no-help fixture has no actual healer');
 
   console.log('T1 — objHealGate exists');
   ok(typeof Game.objHealGate === 'function', 'Game.objHealGate is a function', 'typeof=' + typeof Game.objHealGate);
@@ -79,8 +85,9 @@ async function main() {
   ok(healLines.length === nBefore, 'no second narration line', `lines ${nBefore} -> ${healLines.length}`);
 
   console.log('T4 — hurt villager (40 HP), healer present: patched up, then departs');
-  Game.campHealerName = () => 'Doc';
-  Game.campHealerVid = () => vid2;
+  Game.getPerson(vid2).formerOccupation = 'Doctor';
+  Game.getPerson(vid2).name = 'Doc';
+  Game.revealName(vid2, 'prepared departure-gate doctor');
   setHp(vid, 40); clearAway(vid);
   const o4 = mkObj(vid, 'WATER', 'water');
   const r4 = Game.objDepart(vid, o4, hx, hy, false);
@@ -91,7 +98,7 @@ async function main() {
     'healer patch-up narrated', healLines.slice(-2).join(' || ') || '(none)');
 
   console.log('T5 — healthy villager (90 HP): departs, no gate friction');
-  Game.campHealerName = () => null; Game.campHealerVid = () => null;
+  Game.getPerson(vid2).formerOccupation = 'Farmer';
   setHp(vid, 90); clearAway(vid);
   const o5 = mkObj(vid, 'TRAPS', 'traps');
   const n5 = healLines.length;
@@ -116,9 +123,6 @@ async function main() {
   Game.objMaybeDepart(vid, null, true, hx, hy);
   ok(!((v.away || {})[vid]), 'sat-out villager does not depart via objMaybeDepart');
   ok(o7.state === 'ready', 'objective left alone while resting');
-
-  // restore
-  Game.stashState = origStash; Game.campHealerName = origHealer; Game.campHealerVid = origHealerVid;
 
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);

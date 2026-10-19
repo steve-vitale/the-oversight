@@ -41,14 +41,17 @@ function fakeCensus(writes, daySamples, progressive) {
 }
 
 async function main() {
+  let G2, c2;
+  ok('actual haul-arrival delta retains the physical-work channel', td.classifyDelta({caller:'mapmemHaulAt',delta:1}) === 'gain:haul-deed');
   console.log('== R1 (RED): fresh census silence ==');
   {
-    const { Game } = await loadGame({ seed: 4242, mode: 'trustdeltas-proof' });
+    const { Game } = await loadGame({ seed: 11, mode: 'trustdeltas-proof' });
     await setupGame(Game);
     const v = Game.state.village;
     v.trust = v.trust || {};
-    v.trust[Game.villagerId] = 10;
+    // Preserve the ordinary starting trust for the later honest run.
     const census = installTrustCensus(Game);
+    G2 = Game; c2 = census;
     ok('R1: zero writes before any act', census.writes.length === 0, `writes=${census.writes.length}`);
   }
 
@@ -174,10 +177,30 @@ async function main() {
   ok('R6: tickNeeds -2 -> drain:ignored-ask',
     td.classifyDelta({ delta: -2, caller: 'tickNeeds' }) === 'drain:ignored-ask');
 
+  // Exact boundaries exclude pre-bearer gains, not just the SET itself.
+  {
+    const c=fakeCensus([{day:1,vid:'B',old:10,neu:24,delta:14,caller:'applyRep'},{day:1,vid:'B',old:24,neu:30,delta:6,caller:'playerDeath'},{day:1,vid:'B',old:30,neu:28,delta:-2,caller:'takeFromPantry'}],[{day:1,vid:'B',scholarTrust:30,writeIndex:2},{day:1,vid:'B',scholarTrust:28,writeIndex:3},{day:2,vid:'B',scholarTrust:28,writeIndex:3}]);
+    const t=td.buildTenures(c,[])[0],a=td.ablateSting(t);
+    ok('exact snapshots exclude NPC-era gain and already-priced inheritance',t.writes.length===1&&t.writes[0].delta===-2);
+    ok('same-day snapshots replay the sting only once',a.replayError===0&&a.continuityErrors===0&&a.sampleBoundariesKnown);
+    ok('multiple observations count each calendar day once',a.actualDaysAbove===0&&a.ablatedDaysAbove===2&&a.gained===2);
+  }
+  {
+    const c=fakeCensus([{day:1,vid:'A',old:29,neu:31,delta:2,caller:'comfort'},{day:2,vid:'A',old:31,neu:29,delta:-2,caller:'takeFromPantry'}],[{day:1,vid:'A',scholarTrust:29,writeIndex:0},{day:2,vid:'A',scholarTrust:31,writeIndex:1},{day:3,vid:'A',scholarTrust:29,writeIndex:2}]);
+    const a=td.ablateSting(td.buildTenures(c,[])[0]);
+    ok('counterfactual and actual thresholds use matching observed moments',a.replayError===0&&a.actualDaysAbove===1&&a.ablatedDaysAbove===2&&a.gained===1);
+  }
+  {
+    const c=fakeCensus([{day:1,vid:'A',old:29,neu:31,delta:2,caller:'comfort'}],[{day:1,vid:'A',scholarTrust:31,writeIndex:1},{day:2,vid:'A',scholarTrust:29,writeIndex:0}]);
+    const t=td.buildTenures(c,[])[0],a=td.ablateSting(t);
+    ok('backward write boundaries cannot produce a counterfactual',!t.sampleBoundariesKnown&&a.invalidSampleBoundaries&&a.gained===null&&a.replayError===null);
+    t.invalidSampleBoundaries=false;t.sampleBoundariesKnown=false;t.startTrust=null;
+    const unknown=td.ablateSting(t);
+    ok('unknown legacy starting trust remains unknown',unknown.unknownStart&&unknown.gained===null&&unknown.replayError===null);
+  }
   console.log('== GREEN on honest run: seed 11 leadcourt 20d ==');
-  const { Game: G2 } = await loadGame({ seed: 11, mode: 'trustdeltas-honest' });
-  await setupGame(G2);
-  const c2 = installTrustCensus(G2);
+  // One shared harness in this process; synthetic fixtures above do not
+  // alter the real world used for this honest run.
   const policy = Object.assign({}, leadcourt);
   const origDaily = leadcourt.daily;
   policy.daily = (G, ctx) => {
@@ -202,11 +225,14 @@ async function main() {
   ok('G2: tenures built with below-classes', ten.length > 0 && ten.every(t => !!t.belowClass),
     `tenures=${ten.length} classes=${ten.map(t => t.belowClass).join(',')}`);
   let maxReplayErr = 0;
+  let boundariesValid = true;
   for (const t of ten) {
     const ab = td.ablateSting(t);
+    boundariesValid = boundariesValid && ab.sampleBoundariesKnown && ab.replayError !== null && ab.continuityErrors === 0;
     if (ab.replayError > maxReplayErr) maxReplayErr = ab.replayError;
+    if (ab.replayError) console.log("Replay diagnostic", JSON.stringify({vid:t.vid,start:t.startTrust,end:t.endTrust,days:t.days,writes:t.writes}));
   }
-  ok('G3: sting ablation replay faithful on every tenure', maxReplayErr === 0, `maxReplayErr=${maxReplayErr}`);
+  ok('G3: sting ablation replay faithful on every tenure', maxReplayErr === 0 && boundariesValid, `maxReplayErr=${maxReplayErr}; exact continuous boundaries=${boundariesValid}`);
   let huntOk = false, progOk = false;
   try { const h = td.huntPeriodicDrains(c2, scholarDayMap); huntOk = Array.isArray(h); } catch (e) { console.log('  hunt threw: ' + e.message); }
   try { const p = td.progressiveAtThreshold(c2, scholarDayMap); progOk = !!p['<30']; } catch (e) { console.log('  prog threw: ' + e.message); }

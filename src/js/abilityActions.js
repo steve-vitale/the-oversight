@@ -123,6 +123,7 @@
     // abilityActionDef: look up an action definition from abilities.json.
     // Returns {ability, action} or null.
     abilityActionDef: function (abilityId, actionId) {
+      if (abilityId === 'god' && typeof this.godActionDef === 'function') return this.godActionDef(actionId);
       // KEEPSAKE ACTIONS (Steve 2026-10-14, COHERENCE-SPINE.md): a worn L2
       // keepsake grants a combat action; its data lives in keepsakes.js.
       if (abilityId === 'keepsake' && typeof this.keepsakeActionDef === 'function') {
@@ -213,7 +214,9 @@
       }
       var _held = (abilityId === 'keepsake')
         ? !!(typeof this.keepsakeActionReady === 'function' && this.keepsakeActionReady(actionId))
-        : this.hasAbility(abilityId);
+        : abilityId === 'god'
+          ? !!(typeof this.godActionReady === 'function' && this.godActionReady(actionId))
+          : this.hasAbility(abilityId);
       if (!_held) {
         this.say('You don\'t have that ability. (' + (def.ability.name || abilityId) + ')');
         return false;
@@ -303,6 +306,9 @@
       if (fullCost.turn && typeof COST_HANDLERS !== 'undefined' && COST_HANDLERS.turn) {
         try { COST_HANDLERS.turn(this, fullCost.turn); } catch (e) {}
       }
+      // Peace can finish combat during dispatch. Retain the declared cost on
+      // that original actor without advancing a finished fight.
+      if (fullCost.turn && _pp && !this.inCombat()) _pp.acted = true;
       if (result === false) {
         if (_said === 0) this.say('Nothing happened. (' + (def.action.name || actionId) + ' fizzled.)');
       } else {
@@ -318,7 +324,7 @@
         // grant 2 XP (were 1) — they cost food/actions, they're investments.
         // Related-action grants elsewhere stay at 1 (passive).
         // Keepsake actions grow by being WORN (bond), not by ability XP.
-        if (abilityId !== 'keepsake') { try { this.gainAbilityXP(abilityId, 2); } catch (e) {} }
+        if (abilityId !== 'keepsake' && abilityId !== 'god') { try { this.gainAbilityXP(abilityId, 2); } catch (e) {} }
         // FEASTED (feast-surge rework, Worker B 2026-10-10): the feasted
         // form — the known ability, temporarily evolved. Generic framework:
         // uplift rode the damage funnels; here the data-driven twist runs.
@@ -370,7 +376,7 @@
             id: ab.id + '.' + act.id, // composite for UI
             target: 'none', // TODO: per-action target types
             name: act.name || act.id,
-            desc: act.effect || '',
+            desc: act.effect || act.desc || '',
             context: ctx,
             cost: act.cost || {},
             available: avail.ok,
@@ -620,9 +626,9 @@
         out.push({
           abilityId: 'blood_magic', actionId: null, id: 'blood_magic',
           target: 'self', name: 'Blood Price',
-          desc: '-' + bc + ' HP → +500 kcal. Your body eats itself. 2/day part; cuts knit ~10/night, body refuses past 50.',
+          desc: 'Spend ' + bc + ' HP to gain 500 kcal. Also reduces maximum HP until you recover 10 per night. Twice each part of the day; unavailable at 50 wound damage.',
           available: !bpCapped && !bpWoundRefused && (s.health || 0) > bc,
-          why: bpCapped ? 'Used twice this day part.' : (bpWoundRefused ? "Too scarred — the cuts must knit first." : 'Too weak — need ' + (bc + 1) + '+ HP.')
+          why: bpCapped ? 'Used twice this day part.' : (bpWoundRefused ? 'Recover wound damage overnight before using again.' : 'Need at least ' + (bc + 1) + ' HP.')
         });
       }
       if (hasAb('time_skip')) {
@@ -649,10 +655,19 @@
       });
       if (hasAb('field_medicine')) {
         var used = s.fieldMedDayPart === (s.day + '-' + this.dayPart);
+        var medicineDesc = 'Restore up to 20 HP. Once each part of the day.';
+        if (this.feastedActive && this.feastedActive() && this.feastedForm) {
+          var medicineTwist = this.feastedForm('field_medicine', null).twist;
+          if (medicineTwist && medicineTwist.kind === 'heal_bonus') {
+            var medicineBonus = Math.round(20 * medicineTwist.pct / 100);
+            medicineDesc = 'Restore up to ' + (20 + medicineBonus) + ' HP (20 treatment + ' + medicineBonus + ' feast bonus). Once each part of the day.';
+          }
+        }
+        if ((s.bloodPriceWound || 0) > 0) medicineDesc += ' Cannot restore maximum HP lost to Blood Price; it recovers 10 per night.';
         out.push({
           abilityId: 'field_medicine', actionId: null, id: 'field_medicine',
           target: 'self', name: 'Field Medicine',
-          desc: 'Heal 20 HP (real wounds — Price cuts are missing mass, knit ~10/night). Once per day part.',
+          desc: medicineDesc,
           available: !used && (s.health || 0) < this.maxHealth(),
           why: used ? 'Used this day part.' : 'Already at full health.', combat: true
         });
@@ -662,7 +677,7 @@
         out.push({
           abilityId: 'herbal_remedy', actionId: null, id: 'herbal_remedy',
           target: 'self', name: 'Herbal Remedy',
-          desc: 'Treat sickness with plants. Cures some, eases others — the proud ones need a diagnosis first.',
+          desc: 'Treat illness: cure some diseases and reduce symptoms of others. Some require a diagnosis first. Once per day.',
           available: sick && s.herbalDay !== s.day,
           why: !sick ? 'Not sick.' : 'Used today.'
         });
@@ -672,7 +687,7 @@
         out.push({
           abilityId: 'purify', actionId: null, id: 'purify',
           target: 'self', name: 'Purify',
-          desc: 'Neutralize poison. Charcoal and clean water.',
+          desc: 'Use magic to remove poison. Once per day.',
           available: poisoned && s.purifyDay !== s.day,
           why: !poisoned ? 'Not poisoned.' : 'Used today.'
         });
@@ -1639,9 +1654,9 @@
       var takenStack = { name: item.name, kcalEach: item.kcalEach, units: take, spoilDay: item.spoilDay, safe: item.safe, kg: item.kg, unit: item.unit || 'item',
         plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, needsCooking: item.needsCooking, prep: item.prep,
         // TRICHINOSIS (break-it food 2026-10-10): a light lift doesn't wash worms either.
-        parasiteRisk: item.parasiteRisk };
+        parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares };
       var existing = inv.find(function (it) { return game.stacksMatch(it, takenStack); });
-      if (existing) existing.units += take;
+      if (existing) { game.mergeHarvestShares(existing, takenStack, take); existing.units += take; }
       else inv.push(takenStack);
       var caught = Math.random() < 0.5;
       if (caught) {

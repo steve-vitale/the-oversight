@@ -461,6 +461,27 @@
         if (wshuf.length) push(wshuf[0], false); }
       take('clothing', 1);
 
+      // The final pool replaces the generic candidates. Its keepsakes must
+      // name the people in this biography, not relatives invented for the
+      // discarded generic pool. Use the seed's memory without inventing an
+      // age or a second, conflicting history for that person.
+      for (const id of pool) {
+        const def = byId[id];
+        if (!def || def.class !== 'sentimental' || !def.kin || def.kin === 'none') continue;
+        const person = (ls.people || []).find(p => p.relation === def.kin && p.name);
+        if (!person) continue;
+        const named = this.personalizeKeepsake(char, def, {
+          first: person.name.split(' ')[0], full: person.name, age: person.age,
+        });
+        if (!named) continue;
+        const memory = String(person.fate || '').trim();
+        char.itemPersonal = char.itemPersonal || {};
+        char.itemPersonal[id] = {
+          name: named.name,
+          flavor: memory ? `${person.name}, your ${def.kin}: ${memory}${/[.!?]$/.test(memory) ? '' : '.'}` : `${person.name}, your ${def.kin}.`,
+          kin: def.kin, kinName: person.name,
+        };
+      }
       return { pool, semantic: semCount.n };
     },
 

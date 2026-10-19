@@ -391,9 +391,14 @@ function freshGame() {
     ok('SIB5. traderAppraise uses isSpoiled', bt.includes('this.isSpoiled(it)'), 'missing');
     // source-level: pantry pushes that REBUILD from an existing item carry poisonRisk now
     const gm = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
-    const pushes = [...gm.matchAll(/\.pantry\.push\(\{[^}]*\}\)/g)].map(m => m[0]);
+    // Trail hauls now use the shared piece splitter. Inspect both real
+    // builder shapes, retaining the no-toxin-laundering field contract.
+    const pushes = [...gm.matchAll(/\.pantry\.push\(\{[^}]*\}\)|this\.depositPantryPieces\([^,]+,\s*\{[^}]*\}/g)].map(m => m[0]);
     const rebuilds = pushes.filter(p => /item\./.test(p));
     ok('SIB6. all rebuild pantry pushes carry poisonRisk', rebuilds.length > 0 && rebuilds.every(p => p.includes('poisonRisk')), `rebuilds=${rebuilds.length}`);
+    const depot = { pantry: [] };
+    Game.depositPantryPieces(depot, { name: 'prepared tainted haul', units: 2, kcalEach: 1000, kg: 2, poisonRisk: 0.4, diseaseRisk: 0.2, spoilDay: Game.state.scholar.day + 3 }, 500);
+    ok('SIB6b. actual haul splitting preserves toxins and disease on every piece', depot.pantry.length > 0 && depot.pantry.every(p => p.poisonRisk === 0.4 && p.diseaseRisk === 0.2));
     ok('SIB7. downriver smoked fish has a spoilDay', gm.includes("spoilDay: this.state.scholar.day + 30, safe: true, unit: 'fish'"), 'missing');
   }
 

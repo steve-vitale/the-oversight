@@ -106,7 +106,7 @@
         if (!this.overcharged()) return '';
         if (typeof this.feastedActive === 'function' && this.feastedActive() &&
             typeof this.feastedMult === 'function' && this.feastedMult() > OVERCHARGE_MULT) return '';
-        return `⚡ OVERCHARGED ×${OVERCHARGE_MULT} (well-fed) — food is fuel, abilities hit harder`;
+        return `OVERCHARGED · damage ×${OVERCHARGE_MULT}`;
       } catch (e) { return ''; }
     },
 
@@ -211,8 +211,17 @@
       const kc = this.abilityKcalCost(id, null);
       if ((s.kcal || 0) < kc) { this.say(`Not enough energy — need ${kc} kcal. (${id})`); return false; }
       s.kcal -= kc;
+      const healingBefore = id === 'field_medicine' ? this._feastPreHp() : null;
       const r = _activateAbility.call(this, id, target);
-      try { this.say(`(−${kc} kcal — food becomes ${String(id).replace(/_/g, ' ')}.)`); } catch (e) {}
+      const ab = ((this.data || {}).abilities || []).find(a => a.id === id);
+      const native = r === false ? 0 : (((ab || {}).legacyCost || {}).kcal || 0);
+      try {
+        if (id === 'field_medicine' && r !== false) {
+          const healingAfter = this._feastPreHp();
+          const restored = Math.max(0, (healingAfter.fighter ?? healingAfter.scholar) - (healingBefore.fighter ?? healingBefore.scholar));
+          this.say(`Field Medicine: restored ${restored} HP. (−${kc + native} kcal.)`);
+        } else this.say(`(−${kc + native} kcal — food becomes ${String(id).replace(/_/g, ' ')}.)`);
+      } catch (e) { console.warn('[foodPower] activation notice', e); }
       return r;
     } catch (e) { return _activateAbility.call(this, id, target); }
   };
@@ -238,7 +247,10 @@
     try {
       const oc = this.overchargeLine();
       for (const a of out) {
-        const kc = (a.cost && a.cost.kcal) || this.abilityKcalCost(a.abilityId, a.actionId);
+        // Show the complete unchanged activation and native treatment bill.
+        const ab = ((this.data || {}).abilities || []).find(x => x.id === (a.abilityId || a.id));
+        const native = a.actionId ? 0 : (((ab || {}).legacyCost || {}).kcal || 0);
+        const kc = ((a.cost && a.cost.kcal) || this.abilityKcalCost(a.abilityId, a.actionId)) + native;
         if (kc && !/kcal/.test(a.desc || '')) a.desc = (a.desc ? a.desc + ' ' : '') + `(${kc} kcal)`;
         if (oc && !/OVERCHARGED/.test(a.desc || '')) a.desc = (a.desc ? a.desc + ' ' : '') + oc;
       }

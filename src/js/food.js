@@ -2,6 +2,10 @@
 // system: food
 // description: Food reality system. Food must be known-edible AND in edible state. Processing changes net calories.
 // provides:
+//   - blendHarvestShares(parts) / mergeHarvestShares(target, incoming, units)
+//   - harvestOrigin(id) / captureIntakeEater(id)
+//   - recordHarvestIntake(eater, portions, route) / recordHarvestDraw(eater, draw, route, nourishment, share)
+//   - queueHarvestMeal(eater, draw, route, nourishment)
 //   - foodMarker()
 //   - cleanCarcass()
 //   - carcassToMeat()
@@ -19,6 +23,8 @@
 //   - stacksMatch()       (fungibility gate for stack merging)
 //   - spoilBonusDays()    (preservation_instinct shelf-life bonus)
 //   - isSpoiled()         (bonus-aware spoilage boundary)
+//   - isPrepMaterial(it) / takePrepMaterial(idx, units) (actual counter stock into the pack)
+//   - takePrepFood(idx, units) (finished personal counter food into the pack)
 //   - experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
 // rules:
 //   - raw_penalty: true (code: food.js)
@@ -67,6 +73,12 @@
     ? globalThis.Scattering.Game
     : (typeof Game !== 'undefined' ? Game : null);
   if (!G) return;
+  // Private meal identities bind the original living eater to this run.
+  // No lookup here hydrates a person or consumes game randomness.
+  const intakeFrames = new WeakMap();
+  const knownPerson = (game, id) => (game.data.villagers || []).find(p => p.id === id)
+    || game.state.village?.rosterChars?.[id]
+    || (game.data.background_survivors || []).find(p => p.id === id);
 
   // ---------- data ----------
 
@@ -207,12 +219,89 @@
 
     // ---------- item construction ----------
 
+    // Provenance is a weighted share, never extra food or inferred old work.
+    blendHarvestShares(parts) {
+      const out = Object.create(null); let total = 0;
+      for (const p of parts || []) {
+        const weight = p.weight;
+        if (!Number.isFinite(weight) || weight <= 0) continue;
+        total += weight;
+        const entries = Object.entries(p.item?.harvestShares || {}).filter(([,n]) => Number.isFinite(n) && n > 0 && n <= 1);
+        const sum = entries.reduce((n,[,x]) => n+x, 0);
+        for (const [id,n] of entries) out[id] = (out[id] || 0) + weight*n/Math.max(1,sum);
+      }
+      if (total > 0) for (const id of Object.keys(out)) out[id] /= total;
+      return out;
+    },
+    mergeHarvestShares(target, incoming, units) {
+      const shares = this.blendHarvestShares([{item:target,weight:target.units || 0},
+        {item:incoming,weight:units == null ? incoming.units || 0 : units}]);
+      if (Object.keys(shares).length) target.harvestShares = shares;
+      else delete target.harvestShares;
+    },
+    harvestOrigin(id) {
+      const person = id && knownPerson(this,id);
+      return person?.id === id && !person.dead ? {[id]:1} : {};
+    },
+    captureIntakeEater(id) {
+      const s=this.state?.scholar,v=this.state?.village,person=id&&knownPerson(this,id);
+      if (!s || !v || person?.id !== id || person.dead ||
+          (id===this.villagerId ? !(s.health>0) : (v.health?.[id] ?? 100)<=0)) return null;
+      const frame=Object.freeze({who:id,day:s.day || 0,role:id===this.villagerId?'player':'npc'});
+      intakeFrames.set(frame,this.state);return frame;
+    },
+    // Physical intake is recorded only at consumption. Day records are bounded;
+    // lifetime totals prevent a time skip or delayed observation losing meals.
+    recordHarvestIntake(eater, portions, route) {
+      const frame=typeof eater==='string'?this.captureIntakeEater(eater):eater;
+      if (!frame || intakeFrames.get(frame)!==this.state || typeof route!=='string' || !route) return false;
+      const accepted=(portions || []).filter(p=>Number.isFinite(p.kcal)&&p.kcal>0&&
+        (p.nourishment==null || (Number.isFinite(p.nourishment)&&p.nourishment>=0)));
+      if (!accepted.length) return false;
+      const v=this.state.village,day=frame.day,who=frame.who;
+      if (v.harvestIntakeTotals && v.harvestIntakeTotals.version!==1) {
+        console.warn('[food] unsupported intake totals version'); return false;
+      }
+      const book=v.harvestIntake || (v.harvestIntake={});
+      for (const d of Object.keys(book)) if (Number(d)<day-7) delete book[d];
+      const today=book[day] || (book[day]={});
+      const rec=today[who] || (today[who]={kcal:0,nourishment:0,harvestKcal:{},harvestNourishment:{},routes:{}});
+      const totals=v.harvestIntakeTotals || (v.harvestIntakeTotals={version:1,startedDay:day,records:0,kcal:0,nourishment:0,roles:{},actors:{},routes:{}});
+      const actor=totals.actors[who] || (totals.actors[who]={kcal:0,nourishment:0});
+      const role=totals.roles[frame.role] || (totals.roles[frame.role]={kcal:0,nourishment:0});
+      const r=rec.routes[route] || (rec.routes[route]={kcal:0,nourishment:0});
+      const lifetimeRoute=totals.routes[route] || (totals.routes[route]={kcal:0,nourishment:0});
+      for (const p of accepted) {
+        const n=p.nourishment == null ? p.kcal : p.nourishment;
+        for (const sum of [rec,totals,actor,role,r,lifetimeRoute]) { sum.kcal+=p.kcal;sum.nourishment+=n; }
+        for (const [owner,share] of Object.entries(this.blendHarvestShares([{item:p.item || {},weight:1}]))) {
+          if (knownPerson(this,owner)?.id!==owner) continue;
+          rec.harvestKcal[owner]=(rec.harvestKcal[owner] || 0)+share*p.kcal;
+          rec.harvestNourishment[owner]=(rec.harvestNourishment[owner] || 0)+share*n;
+        }
+      }
+      totals.records++;return true;
+    },
+    recordHarvestDraw(eater, draw, route, nourishment, share=1) {
+      if (!Number.isFinite(share) || share<=0 || share>1) return false;
+      const portions=(draw.items || []).map(p=>({item:p.item || {},kcal:(p.units || 0)*(p.effectiveKcal || 0)*share}));
+      const total=portions.reduce((n,p)=>n+p.kcal,0);
+      const usable=nourishment==null?total:nourishment;
+      return this.recordHarvestIntake(eater,portions.map(p=>({...p,nourishment:total>0?p.kcal*usable/total:0})),route);
+    },
+    queueHarvestMeal(eater, draw, route, nourishment) {
+      if (!this._harvestMealDeferred) return this.recordHarvestDraw(eater,draw,route,nourishment);
+      this._harvestPantryMeal={eater,route,nourishment,draw:{taken:draw.taken,items:(draw.items || []).map(p=>({
+        units:p.units,effectiveKcal:p.effectiveKcal,item:{harvestShares:p.item?.harvestShares}}))}};
+    },
+
     // A foraged plant, knowledge-gated. Unknown plants aren't food yet.
-    foodForageItem(plant, isKnown, units, kcal, day) {
+    foodForageItem(plant, isKnown, units, kcal, day, harvestShares) {
       const isNut = NUT_IDS[plant.id] || NUT_RE.test(plant.preparation || '');
       const mustCook = MUST_COOK_RE.test(plant.preparation || '');
       const base = {
         plantId: plant.id, units, kg: 0.1,
+        ...(harvestShares && Object.keys(harvestShares).length ? { harvestShares } : {}),
         unit: plant.unit, spoilDay: day + (plant.spoilageDays || 2),
       };
       if (!isKnown) {
@@ -341,7 +430,7 @@
 
     // addUnknownToLump: the game never loses track of what is what, even
     // though the player sees one opaque stack.
-    addUnknownToLump(plant, units, day, container) {
+    addUnknownToLump(plant, units, day, container, harvestShares) {
       const cont = container || this.state.scholar.inventory;
       const form = this.lumpFormOf(plant);
       const F = LUMP_FORMS[form];
@@ -359,6 +448,7 @@
       }
       const comp = lump.lump;
       const e = comp[plant.id] || { units: 0, day };
+      this.mergeHarvestShares(e, { harvestShares }, units);
       e.units += units;
       e.day = Math.min(e.day, day);
       comp[plant.id] = e;
@@ -386,6 +476,7 @@
       const notFood = (p.edibility || 'safe') === 'avoid';
       const item = {
         plantId: pid, units: e.units, kg: 0.1, unit: p.unit,
+        ...(e.harvestShares ? { harvestShares: e.harvestShares } : {}),
         spoilDay: e.day + (p.spoilageDays || 2),
         foodKind: isNut ? 'nut' : 'plant',
         foodState: isNut ? 'in_shell' : 'ready',
@@ -438,7 +529,7 @@
         if (!p) continue;
         const ix = inv.indexOf(it);
         if (ix >= 0) inv.splice(ix, 1);
-        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv);
+        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv, it.harvestShares);
         if (it.spoilDay) lump.spoilDay = Math.min(lump.spoilDay, it.spoilDay);
       }
     },
@@ -611,7 +702,8 @@
             kcalEach: 0, spoilDay: 9999, kg: (matKg[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): matKg is per-item; the old *n2 total bricked the pack.
           };
           inv.push(matItem);
-          try { if (mk === 'hide' && this.noteHideHandled) this.noteHideHandled(matItem); } catch (e) {}
+          try { if (mk === 'hide' && inv === this.state.scholar.inventory && this.noteHideHandled) this.noteHideHandled(matItem); }
+          catch (e) { console.warn('[food] butcher hide handling', e); }
           got.push(n2 + ' ' + (matName[mk] || mk).toLowerCase() + (n2 > 1 ? 's' : ''));
         }
         if (got.length) this.say('Butchering yields: ' + got.join(', ') + '.');
@@ -822,7 +914,10 @@
     // -> 3 bars. ~97% kcal retention on the meat+fat: the reward is real.
     pemmicanSets(container) {
       const inv = container || this.state.scholar.inventory;
-      const sum = (pred) => inv.reduce((a, it) => a + ((it && pred(it) && !this.isSpoiled(it)) ? (it.units || 1) : 0), 0);
+      const sum = (pred) => inv.reduce((a, it) => {
+        const units = it ? (it.units ?? 1) : 0;
+        return a + ((it && Number.isSafeInteger(units) && units > 0 && pred(it) && !this.isSpoiled(it)) ? units : 0);
+      }, 0);
       const meatU = sum(i => i.foodKind === 'meat' && i.foodState === 'preserved');
       const fatU = sum(i => i.foodKind === 'fat' && i.foodState === 'rendered');
       const berryU = sum(i => i.foodKind === 'plant' && /berr/i.test(String(i.plantId || '')) && i.edible !== false);
@@ -846,7 +941,10 @@
       const BERRY = i => i.foodKind === 'plant' && /berr/i.test(String(i.plantId || '')) && i.edible !== false;
       const sets = this.pemmicanSets(inv);
       const plan = [];
-      const rem = inv.map(it => it ? (it.units || 1) : 0); // shadow units
+      const rem = inv.map(it => {
+        const units = it ? (it.units ?? 1) : 0;
+        return Number.isSafeInteger(units) && units > 0 ? units : 0;
+      }); // shadow units, using the same real-stock rule as the batch count
       // STALE-INDEX HARDENING (forager break-it 2026-10-10): picks used to
       // carry only the ARRAY INDEX. makePemmican consumed set-by-set with
       // mid-loop splices, so a set-1 splice shifted every later set's picks:
@@ -924,7 +1022,7 @@
           const it = p.it;
           const at = inv.indexOf(it);
           if (at < 0) continue; // already gone — the plan is exact, so this shouldn't happen
-          it.units = (it.units || 1) - p.take;
+          it.units = (it.units ?? 1) - p.take;
           if (it.units <= 0) inv.splice(at, 1);
         }
         totalBars += set.bars;
@@ -933,6 +1031,7 @@
         const barRisk = wormRisk ? { id: wormRisk.id || 'trichinosis', p: wormRisk.p || 0.25, from: wormRisk.from } : null;
         inv.push({
           itemId: 'pemmican', plantId: null, foodKind: 'meat', foodState: 'pemmican',
+          harvestShares: this.blendHarvestShares(set.picks.map(p => ({ item: p.it, weight: p.kcal }))),
           edible: true, units: set.bars, unit: 'bar', kcalEach: set.kcalEach,
           spoilDay: day + 120, kg: 0.3, safe: true, // KG PER-UNIT (break-it food r4 2026-10-10): 0.3 kg per bar; the old *bars total bricked the pack.
           name: 'Pemmican',
@@ -1191,6 +1290,7 @@
               material: mk, units: n3, name: (matName2[mk] || mk) + (n3 > 1 ? 's' : ''),
               kcalEach: 0, spoilDay: 9999, kg: (matKg2[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): same fix as above.
             });
+            if (mk === 'hide' && inv === this.state.scholar.inventory && this.noteHideHandled) this.noteHideHandled(inv[inv.length - 1]);
             got2.push(n3 + ' ' + (matName2[mk] || mk).toLowerCase() + (n3 > 1 ? 's' : ''));
           }
           if (got2.length) this.say('Butchering yields: ' + got2.join(', ') + '.');
@@ -1739,7 +1839,7 @@
       const n = entry.experiments || 0;
       if (n >= 4) { this.say('Nibbling taught you everything nibbling can. Time for the full cautious test — or find someone who knows.'); return null; }
       // The nibble is real: one shoot of the plurality species, eaten.
-      const e = comp[pid];
+      const e = comp[pid], intakeEater=this.captureIntakeEater(this.villagerId);
       e.units -= 1; lump.units -= 1;
       if (e.units <= 0) delete comp[pid];
       if (lump.units <= 0) cont.splice(cont.indexOf(lump), 1);
@@ -1796,7 +1896,10 @@
         } else {
           this.say(`Another nibble. Same story: ${band} fuel. (+${kcal} kcal)`);
         }
-        s.kcal = Math.min(this.kcalCap ? this.kcalCap() : 3000, (s.kcal || 0) + kcal);
+        const cap=this.kcalCap ? this.kcalCap() : 3000;
+        const nourishment=Math.max(0,Math.min(kcal,cap-(s.kcal || 0)));
+        s.kcal = Math.min(cap, (s.kcal || 0) + kcal);
+        this.recordHarvestIntake(intakeEater,[{item:e,kcal,nourishment:this.villagerId===intakeEater?.who && s.health>0?nourishment:0}],'experiment');
       }
       entry.experiments = n + 1;
       this.say(`That\u2019s experiment ${entry.experiments} on this mystery. ${entry.experiments < 4 ? 'The full cautious test will go easier now — you\u2019ve done part of the tasting already.' : 'Nibbling has taught all it can.'}`);
@@ -1881,6 +1984,14 @@
     // EXPAND STORAGE: materials + labor. A builder halves the material cost.
     expandStorage() {
       const v = this.state.village;
+      if (this.tbfight && !this.tbfight.over) {
+        this.say('Finish the fight before building storage.');
+        return null;
+      }
+      if (!this.map || this.map.px !== (v.px ?? 4) || this.map.py !== (v.py ?? 4)) {
+        this.say('Return to Haven to expand its storage.');
+        return null;
+      }
       const tier = this.storageTier();
       const builders = this.specialistsHere('builder');
       const hasBuilder = builders.length > 0;
@@ -1897,7 +2008,7 @@
         if (count(m) < n) missing.push(`${n - count(m)} more ${m}`);
       }
       if (missing.length) {
-        this.say(`Not enough materials: ${missing.join(', ')}. (Branches, stone, vine for lashing.${hasBuilder ? ` ${builders[0].name} the ${builders[0].occupation} halves the cost.` : ' A builder would halve the cost.'})`);
+        this.say(`Not enough materials: ${missing.join(', ')}. (Branches, stone, vine for lashing.${hasBuilder ? ` ${builders[0].name}${this.specOccLabel(builders[0])} halves the cost.` : ' A builder would halve the cost.'})`);
         return null;
       }
       for (const [m, n] of Object.entries(need)) {
@@ -2012,8 +2123,17 @@
         }
         return false;
       })();
-      if (!canBolt) fleeP = Math.min(fleeP, 0.08);
+      const waterPrey = this.encWaterPrey && this.encWaterPrey(a.id);
+      // Water provides cover even in a one-cell pool; no land exit is required.
+      if (!canBolt && !waterPrey) fleeP = Math.min(fleeP, 0.08);
       if (Math.random() < fleeP) {
+        if (waterPrey) {
+          this.encHideWaterPrey(a);
+          a.boltedOnce = true; // this catch evaded a real strike
+          s.kcal = Math.max(0, s.kcal - 50); // same paid strike-evasion attempt
+          this.say('The lunge finds only water. (-50 kcal)');
+          return true;
+        }
         // NO SILENT ACTIONS (Steve 2026-10-06): the lunge costs you 50 kcal —
         // name it in the bolt text, not just in the code comment. And when it
         // saw you coming (aware ≥ 0.9 before the strike), the game coaches
@@ -2200,6 +2320,84 @@
       return s.prepStash;
     },
 
+    isPrepMaterial(it) {
+      const units = it && (it.units ?? 1);
+      return !!(it && typeof it.material === 'string' && it.material.length &&
+        Number.isSafeInteger(units) && units > 0 && !it.bonded && !it.lump &&
+        !it.foodKind && !it.rawKcal && !it.needsCooking && !(it.hiddenKcal > 0) &&
+        !(it.kcalEach > 0) && !(this.isKeepsake && this.isKeepsake(it)));
+    },
+
+    // The prep counter is personal stock, not the communal stash. Moving
+    // a portion preserves provenance/quality instead of minting addMaterial.
+    takePrepMaterial(idx, units) {
+      const refuse = why => { this.say(why); return { ok: false, why, taken: 0 }; };
+      const s = this.state.scholar;
+      if (this.over || !s || !(s.health > 0)) return refuse('You cannot pick up materials now.');
+      if ((this.inCombat && this.inCombat()) || (this.tbfight && !this.tbfight.over)) return refuse('Finish the fight before handling the counter.');
+      if (this.pendingEncounter || this.state.activeContest) return refuse('Finish what is in front of you before handling the counter.');
+      if (!this.atCamp() || (s.exiled && this.playerTile().type === 'haven')) return refuse('Your counter is back at camp. Your hands are not.');
+      const stash = s.prepStash || [];
+      if (!Array.isArray(stash) || !Array.isArray(s.inventory)) return refuse('Your counter or pack is not ready.');
+      if (!Number.isSafeInteger(idx) || idx < 0 || idx >= stash.length) return refuse('That material is no longer on the counter.');
+      const item = stash[idx];
+      if (!this.isPrepMaterial(item)) return refuse('That is not loose crafting material.');
+      if (this.isSpoiled(item)) return refuse('That material has gone bad. Taking it will not save it.');
+      const have = item.units ?? 1, requested = units === undefined ? have : units;
+      if (!Number.isSafeInteger(requested) || requested <= 0) return refuse('Choose a positive whole number of materials.');
+      if (!Number.isFinite(item.kg) || item.kg < 0) return refuse('You cannot judge how much of that will fit in your pack.');
+      const carry = this.packWeight(), cap = this.carryCapacity(), mult = this.modTarget('carry.weight_mult', 1);
+      if (![carry, cap, mult].every(Number.isFinite) || carry < 0 || cap < 0 || mult < 0) return refuse('You cannot judge the space in your pack.');
+      const unitWeight = (item.kg || 0.1) * mult; // same rule as packWeight, including water/body modifiers
+      const desired = Math.min(have, requested);
+      const fits = carry > cap ? 0 : unitWeight === 0 ? desired : Math.max(0, Math.floor((cap - carry) / unitWeight + 1e-9));
+      const taken = Math.min(desired, fits);
+      if (!taken) return refuse('Too heavy. Lighten your pack first.');
+      const moved = { ...item, units: taken };
+      s.inventory.push(moved);
+      if (taken === have) stash.splice(idx, 1); else item.units = have - taken;
+      if (this.noteHideHandled) {
+        try { this.noteHideHandled(moved); }
+        catch (e) { console.warn('[food] counter hide handling failed: ' + (e && e.message)); }
+      }
+      const name = this.itemDisplayName ? this.itemDisplayName(moved) : moved.name || 'material';
+      this.say(`You take ${taken}× ${name} from the counter and put it in your pack${taken < desired ? ' — as much as fits' : ''}.`);
+      this.tickAction(2);
+      return { ok: true, taken, remaining: have - taken, name, material: moved.material };
+    },
+
+    // Finished personal food can travel without becoming a communal gift.
+    takePrepFood(idx, units) {
+      const refuse = why => { this.say(why); return { ok: false, why, taken: 0 }; };
+      const s = this.state.scholar;
+      if (this.over || this.won || !s || !(s.health > 0)) return refuse('You cannot pack food now.');
+      if ((this.inCombat && this.inCombat()) || (this.tbfight && !this.tbfight.over)) return refuse('Finish the fight before handling the counter.');
+      if (this.pendingEncounter || this.state.activeContest) return refuse('Finish what is in front of you before handling the counter.');
+      if (!this.atCamp() || (s.exiled && this.playerTile().type === 'haven')) return refuse('Your counter is back at camp. Your hands are not.');
+      const stash = s.prepStash || [];
+      if (!Array.isArray(stash) || !Array.isArray(s.inventory)) return refuse('Your counter or pack is not ready.');
+      if (!Number.isSafeInteger(idx) || idx < 0 || idx >= stash.length) return refuse('That food is no longer on the counter.');
+      const item = stash[idx];
+      if (!this.isFinishedFood(item) || !Number.isFinite(item.kcalEach) || item.bonded || (this.isKeepsake && this.isKeepsake(item))) return refuse('Choose finished food from the counter.');
+      const have = item.units ?? 1, requested = units === undefined ? have : units;
+      if (!Number.isSafeInteger(have) || have <= 0 || !Number.isSafeInteger(requested) || requested <= 0) return refuse('Choose a positive whole number of portions.');
+      const kg = item.kg == null ? 0.1 : item.kg;
+      if (!Number.isFinite(kg) || kg < 0) return refuse('You cannot judge how much of that will fit in your pack.');
+      const carry = this.packWeight(), cap = this.carryCapacity(), mult = this.modTarget('carry.weight_mult', 1);
+      if (![carry, cap, mult].every(Number.isFinite) || carry < 0 || cap < 0 || mult < 0) return refuse('You cannot judge the space in your pack.');
+      const unitWeight = (kg || 0.1) * mult, desired = Math.min(have, requested);
+      const fits = carry > cap ? 0 : unitWeight === 0 ? desired : Math.max(0, Math.floor((cap - carry) / unitWeight + 1e-9));
+      const taken = Math.min(desired, fits);
+      if (!taken) return refuse('Too heavy. Lighten your pack first.');
+      const moved = { ...item, units: taken };
+      s.inventory.push(moved);
+      if (taken === have) stash.splice(idx, 1); else item.units = have - taken;
+      const name = this.itemDisplayName ? this.itemDisplayName(moved) : moved.name || 'finished food';
+      this.say(`You pack ${taken}× ${name} from the counter${taken < desired ? ' — as much as fits' : ''}. (2 ticks)`);
+      this.tickAction(2);
+      return { ok: true, taken, remaining: have - taken, name };
+    },
+
     // isUnprocessed: belongs on the counter, not in the pantry.
     isUnprocessed(it) {
       if (!it || !it.foodKind) return false;
@@ -2234,6 +2432,7 @@
             for (const pid of Object.keys(it.lump)) {
               const e = it.lump[pid];
               const te = target.lump[pid] || { units: 0, day: e.day };
+              this.mergeHarvestShares(te, e, e.units);
               te.units += e.units;
               te.day = Math.min(te.day, e.day);
               target.lump[pid] = te;
@@ -2266,6 +2465,7 @@
 
     // prepNeeds(it): the mission-board "needs" line — short, honest.
     prepNeeds(it) {
+      if (this.isPrepMaterial(it)) return this.isSpoiled(it) ? 'spoiled material' : 'take to your pack for crafting';
       const needs = [];
       if (it.lump) needs.push('identify — sort it');
       if (it.foodState === 'carcass') {
@@ -2368,12 +2568,14 @@
     _spoilMutterSpeaker(day) {
       try {
         const v = (this.state || {}).village || {};
-        const pool = (v.roster || []).filter(id =>
-          id !== this.villagerId && !((this.getPerson(id) || {}).dead));
+        const pool = (v.roster || []).filter(id => {
+          const person = this.getPerson(id);
+          return id !== this.villagerId && person && person.id === id && !person.dead;
+        });
         if (!pool.length) return 'Someone';
         const pick = pool[Math.abs(day || 1) % pool.length];
         return this.displayName(pick) || 'Someone';
-      } catch (e) { return 'Someone'; }
+      } catch (e) { console.warn('[food] spoil speaker', e); return 'Someone'; }
     },
     // food never counts as security. Before this, expired pantry stacks sat
     // forever and villagers ate them at full value: phantom calories.
@@ -2457,6 +2659,10 @@
 
     // putAwayFinished: batch — finished food goes to the pantry.
     putAwayFinished() {
+      if (this.havenStoresAccess && this.havenStoresAccess() === 'none') {
+        this.say('The pantry is in the hall. Your hands are not.');
+        return null;
+      }
       const stash = this.prepStash();
       let n = 0, kcal = 0, blocked = 0;
       for (let i = stash.length - 1; i >= 0; i--) {
@@ -2469,7 +2675,12 @@
           stash.splice(i, 1);
           continue;
         }
-        if (!this.isFinishedFood(it)) continue;
+        if (!this.isFinishedFood(it) || !Number.isSafeInteger(it.units ?? 1) || (it.units ?? 1) <= 0 || !Number.isFinite(it.kcalEach)) continue;
+        if (it.bonded) {
+          this.say(`That's yours. Not the village's. You can't give away your ${it.name}.`);
+          blocked++;
+          continue;
+        }
         // PANTRY CAP (break-it food 2026-10-08): pantryAdd enforces the cap
         // and reports; a full pantry leaves the batch on the counter —
         // honestly, not silently vanished, not overfilled.
@@ -2478,8 +2689,10 @@
           blocked++;
           continue;
         }
-        kcal += (it.kcalEach || 0) * (it.units || 1);
+        const transferred = it.kcalEach * (it.units ?? 1);
+        kcal += transferred;
         stash.splice(i, 1);
+        this._creditPantryGift(it, transferred);
         n++;
       }
       if (n) this.say(`Put away: ${n} finished batch${n > 1 ? 'es' : ''} (${this.fmtKcal ? this.fmtKcal(kcal) : kcal + ' kcal'}) → pantry. The counter breathes.`);
@@ -2497,11 +2710,14 @@
       if (!it || (it.kcalEach || 0) <= 0 || it.edible === false
           || this.isSpoiled(it)) { this.say('Nothing edible there.'); return null; }
       const s = this.state.scholar;
+      const eaterId = this.villagerId, intakeEater = this.captureIntakeEater(eaterId);
       // SHELLGUT (Steve 2026-10-08): armor gut — nothing ingested touches you.
       const shellgut3 = this.hasStatus && this.hasStatus('scholar', 'shellgut');
       if (it.diseaseRisk && !shellgut3 && Math.random() < it.diseaseRisk.p) {
-        s.health = Math.max(0, (s.health == null ? 100 : s.health) - it.diseaseRisk.dmg);
-        this.say(`The ${it.name} was ${it.diseaseRisk.note || 'risky'}. Fever by nightfall. (-${it.diseaseRisk.dmg} health)`);
+        const hpBefore = s.health == null ? 100 : s.health;
+        this.addHealth(-it.diseaseRisk.dmg);
+        const damage = Math.max(0, hpBefore - s.health);
+        this.say(`The ${it.name} was ${it.diseaseRisk.note || 'risky'}. Fever by nightfall. (-${damage} health)`);
       }
       // TRICHINOSIS / POISON (break-it food r4): the old counter bite rolled
       // diseaseRisk ONLY — eating raw bear meat off the prep counter skipped
@@ -2517,7 +2733,10 @@
       }
       const kcal = it.kcalEach;
       if (this.blendKcalQuality) this.blendKcalQuality(kcal, this.mealQuality ? this.mealQuality(it) : 1);
+      const nourishment = Math.max(0, Math.min(kcal, this.kcalCap() - (s.kcal || 0)));
       s.kcal = Math.min(this.kcalCap(), (s.kcal || 0) + kcal);
+      this.recordHarvestIntake(intakeEater, [{item:it,kcal,
+        nourishment:this.villagerId===eaterId && s.health>0 ? nourishment : 0}], 'counter');
       // L3 BENEFIT (break-it food r5): the level-up copy promises "+5 health
       // when eaten" — the counter bite is eating. Same grant as eat()/eatOne().
       // MEDICINE (break-it food r5): chewing medicinal plants heals — the
@@ -2624,7 +2843,7 @@
         safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
         foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
         diseaseRisk: item.diseaseRisk, needsCooking: item.needsCooking,
-        wellMade: item.wellMade,
+        wellMade: item.wellMade, harvestShares: item.harvestShares,
         // FULL PROCESSING STATE (break-it food 2026-10-09): the old subset-push
         // silently stripped poisonRisk — toxin laundering: poisoned meat came
         // back from the pantry clean, and trackMealExposure saw nothing, so
@@ -2686,6 +2905,19 @@
           label: this.knowsTechnique('preserve') ? 'Smoke it' : 'Smoke it (you\'re learning)',
           detail: `${this.nearFire() ? '' : 'NEEDS FIRE · '}16 ticks · safe · ~${smokeKcal}/portion · keeps ~${this.knowsTechnique('preserve') ? 30 : 15}d`,
           blocked: !this.nearFire() ? 'needs fire' : null,
+        });
+      } else if (it.foodKind === 'meat' && it.foodState === 'cooked') {
+        const fire = this.nearFire();
+        if (it.undercooked) opts.push({
+          id: 'cook', label: 'Finish cooking',
+          detail: `${(this.cookClassFor(it) || {}).time || 32} ticks · finish the undercooked batch; outcome depends on skill`,
+          blocked: !fire ? 'needs fire' : null,
+        });
+        const knows = this.knowsTechnique('preserve');
+        opts.push({
+          id: 'smoke', label: knows ? 'Smoke it' : "Smoke it (you're learning)",
+          detail: `16 ticks · ~${Math.round((it.kcalEach || 0) * (knows ? 0.95 : 0.80))}/portion · keeps ~${knows ? 30 : 15}d${it.undercooked || it.parasiteRisk ? ' · smoking does not finish cooking or kill parasites' : ''}`,
+          blocked: !fire ? 'needs fire' : null,
         });
       } else if (it.needsCooking) {
         opts.push({

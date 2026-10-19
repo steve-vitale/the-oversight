@@ -15,12 +15,12 @@
 //      generic "people are talking" fallback.
 //   7. Only one departure per part (seedGossip dedup unchanged).
 'use strict';
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 
 // 0. syntax check on the touched files
 for (const f of ['src/js/villager-agency.js', 'src/js/villager-objectives.js', 'src/js/game.js']) {
-  try { execSync('node --check ' + path.join(__dirname, '..', f), { stdio: 'pipe' }); }
+  try { execFileSync(process.execPath, ['--check', path.join(__dirname, '..', f)], { stdio: 'pipe' }); }
   catch (e) { console.log('FAIL syntax ' + f); process.exit(1); }
 }
 console.log('PASS syntax (3 files)');
@@ -43,7 +43,9 @@ const { loadGame, setupGame } = require('./sim-harness');
   const v = Game.state.village;
   const roster = v.roster.filter(id => id !== Game.villagerId);
   ok('roster has witnesses', roster.length >= 6, 'roster=' + roster.length);
-  const leaver = roster[0];
+  const leaver = roster.find(id => Game.npcMaxDist(id) >= 1 && Game.npcAge(id) >= 18);
+  ok('prepared expedition actor can actually travel', !!leaver);
+  v.health = v.health || {}; v.health[leaver] = 100;
   v.gossip = [];
 
   // 1. expedition departure

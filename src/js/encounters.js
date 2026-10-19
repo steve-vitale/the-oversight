@@ -366,6 +366,28 @@
     var d = this.encAnimalDef(id);
     return (d && d.behavior) || 'skittish';
   };
+  // Fish remain in water through spawn, strike evasion and ordinary movement.
+  // Explicit content metadata avoids treating frogs or turtles as fish.
+  G.encWaterPrey = function (id) {
+    var def = this.encAnimalDef(id);
+    return !!(def && def.waterAffinity === 'in');
+  };
+  G.encWaterCell = function (detail, x, y) {
+    var cell = detail[y] && detail[y][x];
+    return cell === 'water' || cell === 'creek';
+  };
+  G.encWaterSpots = function (detail) {
+    var spots = [];
+    for (var y = 1; y <= 7; y++) for (var x = 1; x <= 7; x++) {
+      if (this.encWaterCell(detail, x, y)) spots.push({ x: x, y: y });
+    }
+    return spots;
+  };
+  G.encHideWaterPrey = function (a) {
+    a.pstate = 'hiding'; a.hideTurns = 3; a.aware = 0.3;
+    this.feedback(this.encCap(this.encAnimalLabel(a)) + ' slips beneath the water. The ripples settle; wait for it to surface.');
+    this.audioEvent('animalSplash');
+  };
   // NEVER_BOLT (Steve 2026-10-06): these animals answer a miss differently.
   // The skunk's answer is the spray; the porcupine's the quills; the goose
   // and the boar end fights instead of leaving them; the bobcat is the one
@@ -420,6 +442,22 @@
       stealthy: "The birds going silent is your only warning. If you can see it, it's already too close. Hunt it by sound — or not at all.",
       still: "It doesn't move — that's the whole defense. Look for the shape that doesn't belong. It'll watch you find it.",
       unpredictable: "It decides mood by mood. Broadside and pawing means back off — the decision is the danger. Never press an animal this size.",
+      // Regional coaching describes the live approach/tool loop. It does not
+      // promise unwired troop AI, raids, circling shots or special charges.
+      forager: "Watch the feeding ground. It still bolts when alarmed; stalk within reach before committing, or set a trap.",
+      bold: "Bold is not tame. Close quietly and use the method you learned; a rushed approach still sends it running.",
+      dangerous: "Too much animal for bare hands. Bring a spear, approach quietly, and leave yourself a way out.",
+      predator: "This is a hunter too. Keep your reach: a missed strike can bring it straight at you, and close contact can maul you.",
+      flamboyant: "The display makes it visible, not easy. Stalk close with a bow, or bring snare wire instead of chasing the colors.",
+      fearless: "Small and bold, but it still runs when pressed. Stalk it, set a snare, or follow until it is winded.",
+      opportunist: "Read its feeding ground and close before it is alarmed. A trap or a ranged shot suits it better than grabbing.",
+      mischievous: "Quick hands are no reason to rush yours. Get close quietly; a trap or a patient chase beats a wild grab.",
+      browser: "Find it feeding at the thicket edge. Stalk into bow range or set a trap; don't waste the shot on an alarmed animal.",
+      flusher: "Watch the field edge before moving in. It bolts when alarmed; close quietly for the bow, or set a trap along its feeding ground.",
+      troop: "Watch the canopy and the raid trail. Take a quiet ranged approach or set a trap; grabbing is the wrong method.",
+      grubber: "Look for mud stirring in the shallows. It hides under water when threatened, then surfaces again; wait for your next attempt.",
+      cruiser: "Watch the shallow water for golden movement. A miss sends it below the surface, not into the grass. Wait for it to return.",
+      drifter: "Follow the ripple after dark. If it dives, let the water settle before trying again; a hidden eel cannot be struck.",
       wading: "It unfolds upward — one fast shot as it goes. Stalk the shallows low; it sees movement, not you."
     };
     return CUES[b] || null;
@@ -829,7 +867,7 @@
     return 'hands';
   };
   G.encMethodWords = function (m) {
-    return { snare: 'a snare', chase: 'running it down', trap: 'a trap', bow: 'a bow', spear: 'a spear', hands: 'your hands', line: 'a fishing line', stick: 'a forked stick' }[m] || m;
+    return { snare: 'a snare', chase: 'running it down', trap: 'a trap', bow: 'a bow', spear: 'a spear', hands: 'your hands', line: 'a fishing line', net: 'a fishing net', stick: 'a forked stick' }[m] || m;
   };
   // TOOL READINESS (Steve 2026-10-06): tool-gated hunting. Each hunt method
   // names what it needs: snare -> snare wire in the pack; trap -> the
@@ -860,10 +898,12 @@
       try { sk = this.skillKnown && this.skillKnown('trapping'); } catch (e) {}
       return sk || has(/trap|cage/i);
     }
-    return true;
+    // Unknown methods are not evidence of a usable tool. There is no net
+    // action/item yet; do not silently count it as hunt preparation.
+    return false;
   };
   G.encMethodToolName = function (m) {
-    return { snare: 'snare wire', trap: 'the trapping skill or a cage', line: 'a fishing line', bow: 'a bow or sling', spear: 'a spear', hands: 'your hands', chase: 'running it down', stick: 'a forked stick' }[m] || m;
+    return { snare: 'snare wire', trap: 'the trapping skill or a cage', line: 'a fishing line', net: 'a fishing net', bow: 'a bow or sling', spear: 'a spear', hands: 'your hands', chase: 'running it down', stick: 'a forked stick' }[m] || m;
   };
   // The flop. Shared by the strike path and the awareness path — one text,
   // one fiction. Pre-knowledge the player sees a dead opossum; post, they
@@ -915,6 +955,7 @@
     var s = this.state.scholar;
     if (!s.animal) return true;
     var b = this.encAnimalBehavior(a.id);
+    if (this.encWaterPrey(a.id)) return true; // food.preyReaction already submerged it
     var px = (s.mx == null ? 4 : s.mx), py = (s.my == null ? 4 : s.my);
     var detail = null;
     try { detail = this.genDetail(this.map.px, this.map.py); } catch (e) {}
@@ -972,7 +1013,7 @@
       // when you strike from its own tile "away" is undefined — it bolts in
       // place. food.js is another worker's file; fix the symptom here.)
       var px = (s.mx == null ? 4 : s.mx), py = (s.my == null ? 4 : s.my);
-      if (a.mx === px && a.my === py) {
+      if (!this.encWaterPrey(a.id) && a.mx === px && a.my === py) {
         var bd = this.encBoltDir(a, px, py);
         var detail = null;
         try { detail = this.genDetail(this.map.px, this.map.py); } catch (e) {}
@@ -1080,6 +1121,14 @@
       ax = 1 + Math.floor(Math.random() * 7); ay = 1 + Math.floor(Math.random() * 7);
       tries++;
     } while (tries < 20 && Math.max(Math.abs(ax - px), Math.abs(ay - py)) < 3);
+    if (this.encWaterPrey(animal.id)) {
+      var wet = this.encWaterSpots(this.genDetail(this.map.px, this.map.py));
+      if (!wet.length) return; // population stays local; there is no visible water
+      var farWet = wet.filter(function (p) { return Math.max(Math.abs(p.x - px), Math.abs(p.y - py)) >= 3; });
+      var pool = farWet.length ? farWet : wet;
+      var fishSpot = pool[Math.floor(Math.random() * pool.length)];
+      ax = fishSpot.x; ay = fishSpot.y;
+    }
     var cfg = this.encPreyCfg(animal.id);
     s.animal = { id: animal.id, mx: ax, my: ay, aware: 0, stamina: cfg.stamina, pstate: 'graze', edgeTurns: 0, wild: true };
     // the animal left the tile population to wander the detail grid
@@ -1194,6 +1243,24 @@
     var dist = Math.max(Math.abs(a.mx - px), Math.abs(a.my - py));
     var detail = this.genDetail(this.map.px, this.map.py);
     var ptile = this.playerTile(); // for shared tile depletion (detailRegrow)
+    var waterPrey = this.encWaterPrey(a.id);
+    if (waterPrey && !this.encWaterCell(detail, a.mx, a.my)) {
+      // Reconcile dry positions from older saves with explicit fish habitat.
+      // No catch or food is awarded; absent water returns it to local wildlife.
+      var homeWater = this.encWaterSpots(detail);
+      if (!homeWater.length) {
+        this.encReleaseAnimal(a);
+        this.feedback('The fish is no longer in sight. There is no open water here.');
+        return;
+      }
+      homeWater.sort(function (p, q) {
+        return Math.max(Math.abs(p.x - a.mx), Math.abs(p.y - a.my)) - Math.max(Math.abs(q.x - a.mx), Math.abs(q.y - a.my));
+      });
+      a.mx = homeWater[0].x; a.my = homeWater[0].y;
+      dist = Math.max(Math.abs(px - a.mx), Math.abs(py - a.my));
+    }
+    // Saved bolts are old land-state artifacts for fish. Resolve them in water.
+    if (waterPrey && a.pstate === 'bolt') { this.encHideWaterPrey(a); return; }
     var BLOCKS = { wall: 1, water: 1, bigtree: 1, tree: 1, tent: 1, fire: 1 };
     // NOISE TRACKING (Steve 2026-10-06): the woods key on sound. How loud
     // was the player's last beat? Stalk steps are crouch-quiet (the stalked
@@ -1210,7 +1277,7 @@
     function tryMove(nx, ny) {
       nx = Math.max(0, Math.min(8, nx)); ny = Math.max(0, Math.min(8, ny));
       var cell = detail[ny] && detail[ny][nx];
-      if (!BLOCKS[cell]) { a.mx = nx; a.my = ny; return true; }
+      if (waterPrey ? self.encWaterCell(detail, nx, ny) : !BLOCKS[cell]) { a.mx = nx; a.my = ny; return true; }
       return false;
     }
     // ANIMAL HUNGER helpers: graze depletes the shared world (detailRegrow),
@@ -1218,7 +1285,7 @@
     // stripped until it regrows.
     var self = this;
     function depleted(cx, cy) { return !!(ptile.detailRegrow && ptile.detailRegrow[cx + ',' + cy]); }
-    function grazeable(cell, cx, cy) { return (cell === 'plant' || cell === 'bush') && !depleted(cx, cy); }
+    function grazeable(cell, cx, cy) { return !waterPrey && (cell === 'plant' || cell === 'bush') && !depleted(cx, cy); }
     function graze() {
       for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) {
         var cx = a.mx + dx, cy = a.my + dy;
@@ -1756,6 +1823,7 @@
     // quills; the goose and the boar end fights instead of leaving them;
     // the bobcat is the one doing the hunting; the snake and the snapper
     // return early above (kept here as documentation).
+    if (waterPrey && a.aware >= 1) { this.encHideWaterPrey(a); return; }
     var boltAt = beh === 'skittish' ? 0.75 : 1;
     // ANIMAL HUNGER: starving animals hold their ground (boldBonus above).
     if ((a.hunger || 0) > 70) boltAt += boldBonus;
@@ -2090,6 +2158,7 @@
   G.encMissReact = function (a, animal) {
     var s = this.state.scholar;
     var b = (animal && animal.behavior) || '';
+    if (animal && this.encWaterPrey(animal.id)) { this.encHideWaterPrey(a); return false; }
     // OPOSSUM (Steve 2026-10-06): a swing and a miss is still a threat — it
     // does the only thing it knows. The flop is one fiction, one function.
     if (b === 'plays_dead' && a.pstate !== 'playing_dead') {
@@ -2249,7 +2318,7 @@
     // hiding: the chub and the frog are under the water — you can't hit what
     // you can't see. The crayfish is under a rock, still grabbable: reach in.
     var hb0 = (animal.behavior || '');
-    if (a.pstate === 'hiding' && (hb0 === 'aquatic' || hb0 === 'aquatic_ambush')) {
+    if (a.pstate === 'hiding' && (hb0 === 'aquatic' || hb0 === 'aquatic_ambush' || (this.encWaterPrey(a.id) && hb0 !== 'bedding'))) {
       this.feedback("It's under the water — you can't hit what you can't see. Wait it out, or move on.");
       return true;
     }
@@ -2675,6 +2744,9 @@
       var roster = (this.state.village && this.state.village.roster) || [];
       var cands = [];
       for (var i = 0; i < roster.length; i++) {
+        if (roster[i] === this.villagerId) continue;
+        var hp = ((this.state.village || {}).health || {})[roster[i]];
+        if (hp !== undefined && !(Number(hp) > 0)) continue;
         var pos = vpos[roster[i]];
         if (!pos) continue;
         var d = Math.max(Math.abs(pos.mx - px), Math.abs(pos.my - py));
@@ -2684,19 +2756,8 @@
       cands.sort(function (a, b) { return a.d - b.d; });
       for (var k = 0; k < Math.min(4, cands.length); k++) {
         var rid = cands[k].rid, vp = cands[k].pos;
-        var vdef = null;
-        try {
-          var vl = this.data.villagers || [];
-          for (var vi = 0; vi < vl.length; vi++) if (vl[vi].id === rid) { vdef = vl[vi]; break; }
-        } catch (e2) {}
-        var temp = (vdef && vdef.personality && vdef.personality.temperament) || 'steady';
-        var ai = temp === 'bold' ? 'brave' : temp === 'cautious' ? 'cautious' : 'helpful';
-        fighters.push({
-          key: 'v_' + rid, kind: 'villager', villagerId: rid,
-          name: this.displayName ? this.displayName(rid) : rid, emoji: '🧍',
-          hp: 30, maxHp: 30, speed: this.villagerSpeed(rid), mx: vp.mx, my: vp.my,
-          alive: true, fled: false, ai: ai, helped: false,
-        });
+        var ally = this.tbHumanFighter(rid, 'villager', vp);
+        if (ally) fighters.push(ally);
       }
     } catch (e) {}
     // Normalize the person-fighter for the combat engine.
@@ -2704,6 +2765,7 @@
     fighter.moveLeft = 0; fighter.acted = false;
     fighter.apTurns = 0; fighter.apSpent = 0;
     fighters.push(fighter);
+    this.tbPlaceHumans(fighters, 8);
     this.tbfight = {
       id: 'f' + Date.now().toString(36) + '_' + Math.floor(Math.random() * 1e9).toString(36),
       fighters: fighters,

@@ -25,13 +25,18 @@
 // Node harness: full src/js list via sim-harness (Math.random seeded before
 // eval), Game.save never stubbed.
 'use strict';
-const fs = require('fs');
+const fs = require('./lib/source-text');
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const leadcourt = require('./policies/leadcourt').leadcourt;
+const { spawnSync } = require('child_process');
 
 (async () => {
   let fail = 0;
   const check = (name, cond) => { console.log((cond ? 'PASS' : 'FAIL') + ' ' + name); if (!cond) fail++; };
+
+  // A second harness in the same process shares captured module globals.
+  // Keep the dawn fixture and live campaign in separate seeded processes.
+  if (!process.argv.includes('--live')) {
 
   // --- 1. static: competentEat's scoring loop has no spoilage term ---
   const src = fs.readFileSync(require('path').join(__dirname, 'policies/competent.js'), 'utf8');
@@ -57,6 +62,14 @@ const leadcourt = require('./policies/leadcourt').leadcourt;
   const after = Game.state.village.pantry || [];
   check('dawn sweep removes the spoiled stack', after.length === 1 && after[0].name === 'Dandelion greens');
   check('dawn sweep keeps the fresh stack', after.some(it => it.name === 'Dandelion greens'));
+
+  const live = spawnSync(process.execPath, [__filename, '--live'], { encoding: 'utf8', env: process.env, timeout: 110000, maxBuffer: 8e6 });
+  process.stdout.write(live.stdout || '');
+  if (live.stderr) process.stderr.write(live.stderr);
+  check('isolated live campaign proof passes', live.status === 0);
+  console.log(fail === 0 ? '\nALL GREEN' : `\n${fail} FAILURES`);
+  process.exit(fail === 0 ? 0 : 1);
+  }
 
   // --- 3. dynamic: the take instrument is live; honest sims show 0 spoiled takes ---
   const { Game: G2 } = await loadGame({ seed: 44, mode: 'proof-spoilgate-live', fullTelemetry: false });

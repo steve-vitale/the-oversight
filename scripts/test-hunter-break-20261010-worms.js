@@ -22,33 +22,10 @@
 //   E4 HELD — cornered prey: no silent turns, encounter terminates.
 //      (Steve's no-silent-turns rule vs the corner-panic branch.)
 //
-// Harness: mulberry32 seeded BEFORE eval (modules capture Math.random at
-// load), full src/js module list in index.html order minus DOM-only files
-// and drama.js, window stubbed for eval then deleted (sync combat path).
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-function mulberry32(a) { return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+// Shared harness: current browser module order, seeded RNG and frozen clock.
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '20261010', 10);
-let _rng = mulberry32(SEED);
-Math.random = () => _rng();
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-const ORDER = ['src/js/engine/state.js','src/js/engine/modifiers.js','src/js/engine/calories.js',
- 'src/js/engine/day.js','src/js/engine/forage.js','src/js/engine/combat.js',
- 'src/js/game.js','src/js/encounters.js','src/js/conversation.js','src/js/convo-mood.js',
- 'src/js/convoTopics.js','src/js/convo-wants.js','src/js/convo-dialogue.js','src/js/convo-beats.js',
- 'src/js/convo-scene.js','src/js/examine.js','src/js/equipment.js','src/js/journal.js','src/js/party.js',
- 'src/js/party-formal.js','src/js/truth.js','src/js/contests.js','src/js/contestEngine.js',
- 'src/js/alienPlayers.js','src/js/storage.js','src/js/perceive.js','src/js/carexplore.js',
- 'src/js/justice.js','src/js/food.js','src/js/betrayal.js','src/js/corpses.js','src/js/lifeseed.js',
- 'src/js/progression.js','src/js/ledger.js','src/js/abilityActions.js','src/js/monsterBehaviors.js',
- 'src/js/statusEffects.js','src/js/villager-agency.js','src/js/fieldFights.js',
- 'src/js/villager-objectives.js','src/js/codex-people.js','src/js/membership.js',
- 'src/js/hierarchy.js','src/js/debug-scenarios.js','src/js/build.js'];
-for (const f of ORDER) eval(fs.readFileSync(path.join(ROOT, f), 'utf8'));
-delete global.window;
-const Game = globalThis.Scattering.Game;
+let Game;
 
 const fails = [];
 function check(name, cond, detail) {
@@ -95,7 +72,9 @@ function smokedBearPipeline(s) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: SEED });
+  // Bear parasite expectations describe the eastern woodland food chain.
+  Game.debugRegion = 'na_eastern_woodlands';
   console.log('seed=' + SEED);
 
   // ---- E1: pemmican must not launder trichinosis ----

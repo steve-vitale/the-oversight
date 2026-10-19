@@ -17,21 +17,10 @@
 // module list in index.html order minus DOM-only files and drama.js,
 // window stubbed for eval then deleted, Math.random seeded BEFORE eval.
 // Never stubs Game.save.
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-const SEED = parseInt(process.env.SEED || '20261014', 10);
-Math.random = mulberry32(SEED);
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\"]*\\.js' index.html | head -80", { cwd: ROOT }).toString().split('\n')
-  .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
-global.window = global;
-global.document = { getElementById: () => null, createElement: () => ({ textContent: '', innerHTML: '', style: {}, setAttribute() {}, appendChild() {} }), head: { appendChild() {} }, body: {} };
-order.forEach(f => { try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); } catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); } });
-delete global.window; delete global.document;
-const Game = globalThis.Scattering.Game;
+const { loadGame } = require('./sim-harness');
+const SEED = Number(process.env.SEED || 20261014);
+let Game;
+
 
 const fails = [];
 function check(name, cond, detail) {
@@ -52,6 +41,9 @@ const freshItem = (name, kcal, daysLeft) => ({
 
 // one duty decision with an engaged pantry; returns the decision shape
 function dutyDecision(Game, vid, v, pg, streak, task) {
+  // Independent first-duty cases use distinct days. The same-day case below
+  // separately proves one voice and all three ledger occurrences.
+  Game.state.scholar.day += 1;
   v.pantry = [freshItem('Foraged food', 15000, 3)]; // ~10 fresh-days: engaged
   pg.hungryStreak = streak;
   v.throttleRedirects = 0; v.throttleExemptDepth = 0;
@@ -68,7 +60,7 @@ function dutyDecision(Game, vid, v, pg, streak, task) {
 }
 
 (async () => {
-  await Game.init();
+  Game = (await loadGame({ seed: SEED, narration: true })).Game;
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -152,7 +144,8 @@ function dutyDecision(Game, vid, v, pg, streak, task) {
     check(`streak ${streak}: landed redirect beat fires`, d.said.some(s => /leaves the forage standing/.test(s)));
   }
 
-  console.log('== 5. THE LEDGER ACCUMULATES across the night ==');
+  console.log('== 5. THE LEDGER ACCUMULATES while the daily voice stays single ==');
+  Game.state.scholar.day += 1;
   v.pantry = [freshItem('Foraged food', 15000, 3)];
   pg.hungryStreak = 3;
   v.throttleExemptDepth = 0; said.length = 0;
@@ -160,7 +153,7 @@ function dutyDecision(Game, vid, v, pg, streak, task) {
   const acc = v.throttleExemptDepth || 0;
   if (expectBeat) {
     check('[GREEN] three exempted duties -> ledger 3', acc === 3, 'exempt=' + acc);
-    check('[GREEN] three beats narrated (one per duty)', said.filter(s => /hungry eat first/.test(s)).length === 3);
+    check('[GREEN] three same-day duties narrate one beat while counting all3', said.filter(s => /hungry eat first/.test(s)).length === 1);
   } else {
     check('[RED] three stand-downs -> ledger 0', acc === 0, 'exempt=' + acc);
     check('[RED] no beats narrated', said.filter(s => /hungry eat first/.test(s)).length === 0);

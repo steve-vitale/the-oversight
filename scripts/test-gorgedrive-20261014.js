@@ -22,6 +22,8 @@
 'use strict';
 process.env.FEASTSCALE_R13 = '1';
 const assert = require('assert');
+const cp = require('child_process');
+const mode = process.argv[2];
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const gd = require('./policies/gorgedrive');
 const { leadfeast } = require('./policies/feastscale');
@@ -46,7 +48,12 @@ function injectLingering(Game) {
     if (wms[i].tx === hx && wms[i].ty === hy) wms.splice(i, 1);
   }
   const m = {
-    id: 'cancellation', tx: hx, ty: hy, mx: 4, my: 4, size: 1,
+    // A non-chaser outside its reach honestly disengages at fight start.
+    // This fixture tests engagement, so place the threat next to the actual
+    // scholar position rather than a stale hardcoded grid center.
+    id: 'cancellation', tx: hx, ty: hy,
+    mx: (Game.state.scholar.mx ?? 4) < 8 ? (Game.state.scholar.mx ?? 4) + 1 : 7,
+    my: Game.state.scholar.my ?? 4, size: 1,
     hp: 1800, maxHp: 1800, wave: 5, lingering: true,
     stance: null, fearTurns: 0, veteran: false, variant: null, lostSight: 0,
   };
@@ -55,12 +62,19 @@ function injectLingering(Game) {
   return m;
 }
 function dayHash(Game) {
-  try {
-    const s = (Game.state || {}).scholar || {}, v = (Game.state || {}).village || {};
-    return [s.day, Math.round(s.health || 0), Math.round(s.kcal || 0), (v.roster || []).length].join('|');
-  } catch (e) { return 'ERR'; }
+  return require('./gear-usage-audit').gameplayHash(Game.state);
 }
+
 async function runHashed(policy, seed, days) {
+  if (!String(mode).startsWith('hash-')) {
+    const role = policy === gd.leadfeast ? 'hash-raw' : 'hash-wrapped';
+    const r = cp.spawnSync(process.execPath, [__filename, role, String(seed), String(days)], {encoding:'utf8', env:{...process.env}, maxBuffer:4*1024*1024});
+    assert.equal(r.status, 0, r.stdout + r.stderr);
+    const line = r.stdout.split('\n').find(x => x.startsWith('@@HASHES@@'));
+    assert(line, 'isolated hash child returned its actual trajectory');
+    return JSON.parse(line.slice('@@HASHES@@'.length));
+  }
+
   const { Game } = await loadGame({ seed, mode: 'gorge-test', fullTelemetry: false });
   await setupGame(Game);
   const hashes = [];
@@ -81,6 +95,23 @@ function withEnv(k, v, fn) {
 }
 
 async function main() {
+  // A fresh process per runtime case: modules capture globals and RNG.
+  if (!mode) {
+    let total = 0;
+    for (const part of ['module','red','neutral','green','wrapper','judgment']) {
+      const r = cp.spawnSync(process.execPath, [__filename, part], {encoding:'utf8', env:{...process.env}, maxBuffer:4*1024*1024});
+      process.stdout.write(r.stdout); if (r.stderr) process.stderr.write(r.stderr);
+      assert.equal(r.status, 0, 'isolated gorge case failed: ' + part);
+      const count = /ALL GREEN: (\d+) checks passed/.exec(r.stdout); if (count) total += Number(count[1]);
+    }
+    console.log('ISOLATED_GORGE_RESULT ' + JSON.stringify({cases:6, checks:total}));
+    return;
+  }
+  if (mode.startsWith('hash-')) {
+    const hashes = await withEnv('GORGEDRIVE', undefined, () => runHashed(mode === 'hash-raw' ? gd.leadfeast : gd.policyForRun(), Number(process.argv[3]), Number(process.argv[4])));
+    console.log('@@HASHES@@' + JSON.stringify(hashes)); return;
+  }
+  if (mode === 'module') {
   console.log('PART 0 — module + gate');
   ok(typeof gd.gorgeDrive === 'function', 'gorgeDrive exported');
   ok(typeof gd.policyForRun === 'function', 'policyForRun exported');
@@ -91,6 +122,8 @@ async function main() {
     ok(gd.layerOn(), 'gate ON when GORGEDRIVE=1');
   });
 
+  }
+  if (mode === 'red') {
   console.log('PART 1 — RED (gate off): no engagement, pristine gorge beat');
   await withEnv('GORGEDRIVE', undefined, async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
@@ -116,6 +149,8 @@ async function main() {
     Game.say = origSay;
   });
 
+  }
+  if (mode === 'neutral') {
   console.log('PART 2 — NON-AGGRESSION: gate-off wrapped == raw leadfeast');
   const hA = await withEnv('GORGEDRIVE', undefined, () => runHashed(gd.leadfeast, 11, 20));
   const hB = await withEnv('GORGEDRIVE', undefined, () => runHashed(gd.policyForRun(), 11, 20));
@@ -123,6 +158,8 @@ async function main() {
   const diff = hA.findIndex((h, i) => h !== hB[i]);
   ok(diff === -1, `gate-off wrapped policy byte-identical to raw leadfeast over 20d${diff === -1 ? '' : ' (diverged day ' + diff + ')'}`);
 
+  }
+  if (mode === 'green') {
   console.log('PART 3 — GREEN (gate on): honest engagement, gorge stops');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
@@ -185,6 +222,8 @@ async function main() {
     }
   });
 
+  }
+  if (mode === 'wrapper') {
   console.log('PART 3b — wrapper invokes the layer when ON (drift-robust)');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
@@ -220,6 +259,8 @@ async function main() {
     ok(!!Game.pendingEncounter, '3b: pendingEncounter set via the wrapped policy');
   });
 
+  }
+  if (mode === 'judgment') {
   console.log('PART 4 — JUDGMENT gates');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
@@ -248,6 +289,7 @@ async function main() {
     }
   });
 
+  }
   console.log(`\nALL GREEN: ${pass} checks passed.`);
 }
 

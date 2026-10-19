@@ -1,0 +1,43 @@
+== PART A: GREEN fixtures ==
+-- devotion lane (surgeResonance >= 35, <3 mastered) --
+  PASS A-1: devotion line holds Grandma's Tin Cup — You hold Grandma's Tin Cup. Grandma drank her coffee from th
+  PASS A-1: devotion line for Grandma's Tin Cup carries its own memory ("poured a finger")
+  PASS A-1: devotion line for Grandma's Tin Cup keeps the beat's core
+  PASS A-1: devotion line for Grandma's Tin Cup keeps the honest buff terms
+  PASS A-1: devotion line holds Contract Quill — You hold Contract Quill. It has signed three leases, two loa
+  PASS A-1: devotion line for Contract Quill carries its own memory ("terrible contract")
+  PASS A-1: devotion line for Contract Quill keeps the beat's core
+  PASS A-1: devotion line for Contract Quill keeps the honest buff terms
+  PASS A-1: devotion line holds Mixtape — You hold Mixtape. Hand-labeled: 'FOR THE DRIVE.' No player. 
+  PASS A-1: devotion line for Mixtape carries its own memory ("FOR THE DRIVE")
+  PASS A-1: devotion line for Mixtape keeps the beat's core
+  PASS A-1: devotion line for Mixtape keeps the honest buff terms
+  PASS A-1: devotion line holds Hard Candy — You hold Hard Candy. Butterscotch, doled out like medals — g
+  PASS A-1: devotion line for Hard Candy carries its own memory ("brave dentist")
+  PASS A-1: devotion line for Hard Candy keeps the beat's core
+  PASS A-1: devotion line for Hard Candy keeps the honest buff terms
+  PASS A-1: four items -> four DISTINCT devotion lines — 4 distinct
+  PASS A-1: generic "worn smooth by use" retired (the memory now evidences it)
+-- mastery lane (3+ mastered) --
+  PASS A-1b: mastery line for Grandma's Tin Cup carries its own memory ("poured a finger")
+  PASS A-1b: mastery line keeps the payoff
+  PASS A-1b: mastery line for Contract Quill carries its own memory ("terrible contract")
+  PASS A-1b: mastery line keeps the payoff
+  PASS A-1b: mastery line for Mixtape carries its own memory ("FOR THE DRIVE")
+  PASS A-1b: mastery line keeps the payoff
+  PASS A-1b: mastery line for Hard Candy carries its own memory ("brave dentist")
+  PASS A-1b: mastery line keeps the payoff
+  PASS A-1b: four items -> four DISTINCT mastery lines
+-- spoil mutter (knows smoking) --
+  PASS A-2: identical strings only ever repeat from the SAME speaker (60-day sweep) — 11 distinct strings / 60 days
+  PASS A-2: day-16 mutter is voiced by its day-speaker — A woman, maybe 30s
+  PASS A-2: day-17 mutter is voiced by its day-speaker — A man, maybe 50s, with a shaved head
+  PASS A-2: day-21 mutter is voiced by its day-speaker — A man, maybe 30s
+  PASS A-2: day-76 mutter is voiced by its day-speaker — A man, maybe 30s
+  PASS A-2: deterministic given day (no RNG draws)
+  PASS A-2: same-day variants still rotate — 3 distinct
+  PASS A-2: rotation counter preserved (m4===m1)
+-- teaching / condensed paths (unchanged) --
+  PASS A-2b: FIRST voicing keeps the full teaching verbatim — A man, maybe 40s, with tattooed arms mutters: "Should've smo
+  PASS A-2b: repeat stays condensed (teaching delivered once per run) — The village threw out spoiled stores: turnips. (pantry)
+beat identity: 0 failures

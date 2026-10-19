@@ -38,48 +38,10 @@
 //  - Engine READ-ONLY. This script creates only itself + the evidence note.
 // Exit code non-zero on any assertion failure.
 // Run: node scripts/test-social-play-20261008.js   (SEED=... override)
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-const SEED = parseInt(process.env.SEED || '20261008', 10);
-let _s = SEED >>> 0;
-Math.random = function () {
-  _s |= 0; _s = (_s + 0x6D2B79F5) | 0;
-  let t = Math.imul(_s ^ (_s >>> 15), 1 | _s);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-};
-const show = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
+const { loadGame } = require('./sim-harness');
+const SEED = Number(process.env.SEED || 20261008);
+let Game;
 
-// ---- data from the worktree (worktree == main HEAD, clean, verified) ----
-const DATA_FILES = ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json',
-  'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json',
-  'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json',
-  'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json',
-  'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json',
-  // REGIONS (2026-10-14): the environment (pantry, ruins, bounty, fauna…)
-  // is regions.json data now — core data like plants.json.
-  'regions.json'];
-global.SCATTER_DATA = {};
-for (const f of DATA_FILES) global.SCATTER_DATA[f.replace('.json', '')] = JSON.parse(show('src/data/' + f));
-
-// ---- engine in index.html script order, minus DOM-only + drama.js ----
-const SCRIPTS = ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
-  'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
-  'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js',
-  'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
-  'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js', 'src/js/membership.js',
-  'src/js/hierarchy.js', 'src/js/debug-scenarios.js', 'src/js/build.js'];
-global.window = global; // equipment.js needs window at load
-for (const f of SCRIPTS) eval(show(f));
-delete global.window; // else combat goes async and the harness stalls
-const Game = globalThis.Scattering.Game;
-Game.data = global.SCATTER_DATA;
 
 // ---------- harness plumbing ----------
 const transcript = [];
@@ -102,10 +64,6 @@ function saidSomething(actionName) {
   return fresh;
 }
 const audioSeen = [];
-try {
-  const _ae = Game.audioEvent.bind(Game);
-  Game.audioEvent = (n, d) => { audioSeen.push(n); try { return _ae(n, d); } catch (e) {} };
-} catch (e) {}
 const nm = (vid) => { try { return Game.displayName(vid); } catch (e) { return vid; }; };
 function grantFood(kcalTotal, name) {
   const s = Game.state.scholar;
@@ -116,7 +74,8 @@ function grantFood(kcalTotal, name) {
 const feed = () => { const s = Game.state.scholar; s.kcal = Math.max(s.kcal || 0, 4000); s.health = Math.max(s.health || 0, 95); };
 
 (async () => {
-await Game.init();
+Game = (await loadGame({seed: SEED, narration: true})).Game;
+Game.audioEvent = n => { audioSeen.push(n); };
 note('== SEED ' + SEED + ' ==');
 
 // ================= ACT 1: MOOT — YOU STAND ACCUSED =================

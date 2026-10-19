@@ -1,0 +1,18 @@
+'use strict';
+const fs=require('fs'),path=require('path'),K=require('./lib'),T=K.reporter('phone-spectacle-bounds');
+const source=fs.readFileSync(path.join(K.ROOT,'src/js/drama.js'),'utf8').replace(/\r\n/g,'\n');
+const body=source.match(/    ensureScreen\(\) \{[\s\S]*?\n    \},/);
+if(!body)throw Error('Actual screen-effect boundary missing');
+const children=[],rect={left:22,top:92,width:346,height:320};let phone=true,field=true;
+const doc={contains:e=>children.includes(e),createElement:()=>({style:{}}),body:{appendChild:e=>children.push(e)},querySelector:s=>field&&s==='.field-layout .detail'?{getBoundingClientRect:()=>rect}:null};
+const effect=new Function('document','matchMedia','return ({'+body[0]+'});')(doc,()=>({matches:phone}));
+const sc=effect.ensureScreen();
+T.ok('actual phone screen effects use the board rectangle and clip inside it',sc.style.cssText.includes('left:22px;top:92px;width:346px;height:320px;')&&sc.style.cssText.includes('overflow:hidden'));
+T.ok('effects cannot intercept touch',sc.style.cssText.includes('pointer-events:none'));
+rect.top=100;effect.ensureScreen();
+T.ok('reused effect layer follows the current board after layout changes',children.length===1&&sc.style.cssText.includes('top:100px'));
+field=false;effect.ensureScreen();
+T.ok('dedicated story surfaces retain full-screen effects',sc.style.cssText.includes('inset:0;'));
+field=true;phone=false;effect.ensureScreen();
+T.ok('desktop screen effects retain their existing surface',sc.style.cssText.includes('inset:0;'));
+T.done();

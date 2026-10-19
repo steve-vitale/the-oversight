@@ -9,7 +9,7 @@
 //  (b) tgPlayerAlertClasses emits player-coincident shadow/lock markers
 //      (helper-level, not pixels) + renderDetail wires them into the vent marker.
 // Usage: node scripts/test-telegraph-judgment.js
-const fs = require('fs');
+const fs = require('./lib/source-text');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
@@ -65,11 +65,11 @@ function extractHelper() {
   ok('a4: unknown cue keeps the paparazzo voice', /lens steadies/.test(unknownCue), unknownCue.slice(0, 60));
   ok('a5: unknown cue has no earned coaching', !/You know this one/.test(unknownCue) && !/break line of sight/.test(unknownCue));
 
-  // Known cue / coaching untouched.
+  // Learning retains tactical knowledge without expanding the live warning.
   Game.state.codex.monsters['paparazzo'] = { patterns: { 'Flash Photography': 'x' } };
   const knownCue = Game.tbTelegraphCue(pz);
-  ok('a6: known cue still tactical (Four shots)', /Four shots/.test(knownCue), knownCue.slice(0, 120));
-  ok('a7: known cue still appends earned coaching', /You know this one: Flash Photography/.test(knownCue) && /break line of sight/.test(knownCue), knownCue.slice(0, 120));
+  ok('a6: known cue preserves the physical warning', knownCue === unknownCue, knownCue.slice(0, 120));
+  ok('a7: earned pattern remains available', Game.tbPatternKnown('paparazzo', 'Flash Photography'));
   delete Game.state.codex.monsters['paparazzo'].patterns;
 
   // ---------- (b) tgPlayerAlertClasses: player-coincident markers ----------

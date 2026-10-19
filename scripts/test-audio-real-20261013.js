@@ -50,6 +50,12 @@ function isSilentMp3(file) {
   }
 }
 
+// Registry paths are web URLs; filesystem joins use the host's separators.
+// Normalize both sides so the same attribution is found on Windows and POSIX.
+function audioKey(file) {
+  return path.posix.normalize(file.replace(/\\/g, '/'));
+}
+
 function attrFiles() {
   // Map: audio file path -> {url, license} from ATTRIBUTION.md files.
   const map = {};
@@ -79,7 +85,7 @@ function attrFiles() {
       }
       const dir = path.dirname(ap);
       for (const fn of fns) {
-        const key = path.join(dir, fn);
+        const key = audioKey(path.join(dir, fn));
         map[key] = {
           url: url,
           license: licM ? licM[1].trim() : null,
@@ -110,7 +116,7 @@ function checkEntry(kind, key, entry) {
       const silent = isSilentMp3(full);
       if (silent) { fail(`${kind}.${key}: ${f} is silent (${silent})`); continue; }
       // Attribution check.
-      const a = attr[f];
+      const a = attr[audioKey(f)];
       if (!a) { fail(`${kind}.${key}: ${f} has no ATTRIBUTION.md entry`); continue; }
       if (!a.url || !/^https?:\/\//.test(a.url)) {
         fail(`${kind}.${key}: ${f} attribution missing URL`); continue;
