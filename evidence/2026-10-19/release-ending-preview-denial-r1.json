@@ -1,0 +1,87 @@
+{
+  "error": {
+    "message": "Vercel API request failed (403: forbidden). You don't have permission to create a Preview Deployment for this Vercel project: the-oversight.",
+    "recovery": "Try an available mapped CLI fallback first for the same authorized action, with the same explicit team/project and the CLI's own credentials. If it succeeds, use its result. If it fails or no CLI fallback is available, No automatic fix is known from this response. Report the error to the user. Do not retry unchanged or assume re-authentication will fix it.",
+    "remediation": {
+      "actor": "unknown",
+      "action": "none"
+    },
+    "status": 403,
+    "code": "forbidden",
+    "operation": "POST /v13/deployments",
+    "requestId": "iad1:sfo1::b6j8d-1792436815629-142b8196f165"
+  },
+  "cliFallback": {
+    "commandTemplate": "vercel --scope {teamSlugOrId} deploy {localProjectPath} --target {target}",
+    "guidance": "Try an available mapped CLI fallback first for the same authorized action, with the same explicit team/project and the CLI's own credentials. If it succeeds, use its result. If it fails or no CLI fallback is available, No automatic fix is known from this response. Report the error to the user. Do not retry unchanged or assume re-authentication will fix it.",
+    "kind": "api",
+    "argv": [
+      "vercel",
+      "api",
+      "/v13/deployments",
+      "--method",
+      "POST"
+    ],
+    "help": "vercel deploy --help",
+    "limitations": "Same endpoint and method only after translating inputs. --input preserves JSON object bodies, not top-level arrays or primitives; use MCP for those forms. CLI authentication and default team can differ. JSONL stays text instead of MCP aggregation; response field selection, bounds and error handling differ.",
+    "nativeAlternative": {
+      "argv": [
+        "vercel",
+        "--scope",
+        "{teamSlugOrId}",
+        "deploy",
+        "{localProjectPath}",
+        "--target",
+        "{target}"
+      ],
+      "help": [
+        "vercel",
+        "deploy",
+        "--help"
+      ],
+      "limitations": "Requires local source files; verify that this path is linked to the intended project; not a translation of an API deployment body. Choose preview or production explicitly."
+    },
+    "contextBindings": {
+      "teamId": "teamId"
+    },
+    "instructions": "Replace path placeholders with URL-encoded values. Add query inputs to the URL (repeat the key for arrays; omit null/undefined), headers with --header, and a JSON object body file with --input. Preserve schema defaults and coercions; an omitted optional JSON body on POST/PUT/PATCH is {} in MCP. Set teamId explicitly when supported; a slug alone does not override the CLI default team. Preserve required inputs and scoped context. Do not use -F for query parameters or --paginate unless all pages are intended. Native alternatives have limited input/output parity.",
+    "inputs": [
+      {
+        "key": "forceNew",
+        "name": "forceNew",
+        "location": "query",
+        "required": false
+      },
+      {
+        "key": "skipAutoDetectionConfirmation",
+        "name": "skipAutoDetectionConfirmation",
+        "location": "query",
+        "required": false
+      },
+      {
+        "key": "teamId",
+        "name": "teamId",
+        "location": "query",
+        "required": false
+      },
+      {
+        "key": "slug",
+        "name": "slug",
+        "location": "query",
+        "required": false
+      },
+      {
+        "key": "requestBody",
+        "name": "requestBody",
+        "location": "body",
+        "contentType": "application/json",
+        "required": true
+      }
+    ],
+    "targetInstructions": "Fill team/project placeholders from tool inputs or route context and apply explicit scope selectors. Reuse known IDs without identity/team probes; discover only missing scope or diagnose a CLI access/not-found error. Never use a different CLI default.",
+    "context": {
+      "teamId": "team_As20UmAzoCGcqP0GYYWTloCi"
+    }
+  },
+  "error_code": "INVALID_ARGUMENT"
+}

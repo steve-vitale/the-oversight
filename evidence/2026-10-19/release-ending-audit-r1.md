@@ -55,3 +55,12 @@ neutral proof retains eight raw jobs and 249 normalized source blobs. Final
 phone frames match all 162 boot inputs; ending replays retain 11 stages per
 size. Foreign sweep-B.log remains untouched at SHA256
 d36038616ffd73218a93637c504cd3ba5b4eefb1c82335d6842388108126b722.
+
+Shared candidate: 7ffd4d2be26012bc7a87783e7307b94a406051f6 on
+codex/phone-preview, with runtime/tools identical to tested canonical
+e4d68d1742252d0abd57dd16cbb25d3dd815aba1. Main/master remain 007c4febc.
+Preview creation was denied HTTP403 by Vercel for this project; retain the
+exact denial receipt. The scoped CLI has no credentials and started a device
+login; that task-owned process was stopped without authenticating. Do not retry
+unchanged or claim a hosted preview exists. This does not prevent remaining
+local release work; physical-device and hosted-candidate clearance remain open.
