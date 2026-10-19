@@ -30270,6 +30270,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.queueKillerTale(monsterId, killerVid);
         }
       } catch (e) {}
+      // COMPANION KILLING-BLOW BEAT (sim-killbeat 2026-10-19, axis
+      // scale-onramp): the watchline's documented blank — a companion's
+      // wave-3+ killing blow inside the scholar's TB fight landed in
+      // waveKillLog/tele and the fiction never noticed. If veterans are the
+      // product, the village notices the kill. via='companion' is stamped
+      // only by the TB tricktag path (the _tbKilledBy stamp); scholar
+      // ('player') and monster kills never take this branch. Wave 3+ only.
+      // Defensive: a beat bug never breaks the kill path (ledger, codex,
+      // unlock check must all survive it).
+      try {
+        if (via === 'companion' && wave >= 3 && killerVid
+          && killerVid !== this.villagerId && killerVid !== 'player'
+          && typeof this.companionKillBeat === 'function') {
+          this.companionKillBeat(monsterId, killerVid, wave);
+        }
+      } catch (e) {}
       // WAVE LEDGER (Steve 2026-10-10): kills also score the ledger — the
       // only thing that unlocks waves now. Defensive: scoring never breaks
       // the kill path (the deed feed and beats must survive a ledger bug).
@@ -30303,6 +30319,97 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const _k = (via || 'unknown') + '.w' + wave;
           _byCh[_k] = (_byCh[_k] || 0) + 1;
         }
+      } catch (e) {}
+    },
+
+    // companionKillBeat: the fiction notices a companion's wave-3+ killing
+    // blow (sim-killbeat 2026-10-19, axis scale-onramp). The documented
+    // blank: Patrick's d140 wave-4 Congregation kill landed via 'companion'
+    // in waveKillLog/tele and nobody said a word. If veterans are the
+    // product, the village notices the kill.
+    // Shape: one System-broadcast line naming the companion (disp
+    // convention — betrayal.js: 'you' for the scholar, else displayName,
+    // whose descriptor stays intact, never a first-name split) and the
+    // knowledge-gated monster (monsterNoun — the true name never leaks),
+    // then one present-tense reaction from a living witness.
+    // Voice: the System as show host (docs/SYSTEM-VOICE.md) — bad timing
+    // scripted into the punctuation, caps on the wrong word. The 📺 SYSTEM
+    // tag is arrival-gated (identifyPlant's voice gate): pre-arrival the
+    // overlay never speaks first, so the words land without the tag.
+    // Called once per kill from recordWaveKill (the per-kill choke point —
+    // the TB loop dedupes by snake lineage, every other caller is
+    // single-call) — no duplicate fire by construction. The whole beat is
+    // exception-guarded: fiction never breaks the kill path.
+    companionKillBeat(mid, vid, wave) {
+      try {
+        const mdef = (this.data.monsters || []).find(m => m.id === mid) || {};
+        const cname = (typeof this.disp === 'function' ? this.disp(vid)
+          : (this.displayName ? this.displayName(vid) : null)) || 'Someone';
+        const mname = this.monsterNoun ? this.monsterNoun(mid) : (mdef.name || 'something');
+        // articlePhrase (playtest deepening r18): monsterNoun strips the
+        // article and lowercases descriptors — compose "put down the
+        // missing piece of the world" / "put down The Redactor" properly.
+        const mphrase = (typeof this.articlePhrase === 'function') ? this.articlePhrase(mname, false) : mname;
+        // The System saw it — which is how the village notices: the show is
+        // televised. "veteran" is established fiction (work-crew beats), and
+        // a wave-3+ companion kill is exactly what the readiness VETERANS
+        // bar counts — the fiction names the mechanic.
+        const line1 = `Oh — OH. Everybody saw that, right? ${cname} just put down ${mphrase}... on CAMERA. That's a veteran kill, folks. REMEMBER the name.`;
+        if (this.state.systemArrived) this.say(`📺 SYSTEM: "${line1}"`);
+        else this.say(line1);
+        // WITNESS (the village notices): a living fellow fighter who was
+        // there reacts — temperament-keyed, present-tense, no fabricated
+        // history (the waveDropVillagerReactions pattern). Prefer someone
+        // from the live fight; only trust this.tbfight if the killer is in
+        // it (recordWaveKill is called from non-TB paths too, where a stale
+        // tbfight would name the wrong witness). Fallback: any living
+        // non-scholar roster villager (uniform pick — Steve's rule).
+        // DEDICATED STREAM (sim-taletell convention): tale cosmetics must
+        // not consume the main Math.random stream, or the beat would
+        // perturb off/on seed comparisons downstream.
+        let TR = Math.random;
+        try { TR = this.mulberry32(this._hashStr(String(mid) + '|' + String(vid) + '|' + ((this.state.scholar || {}).day || 0))); } catch (e) {}
+        const pick = (arr) => arr[Math.floor(TR() * arr.length)];
+        let witness = null;
+        try {
+          const fs = (this.tbfight && this.tbfight.fighters) || [];
+          if (fs.some(f => f && f.villagerId === vid)) {
+            const cands = fs.filter(f => f && (f.kind === 'villager' || f.kind === 'ally')
+              && f.alive && !f.fled && f.villagerId && f.villagerId !== vid);
+            if (cands.length) witness = pick(cands).villagerId;
+          }
+        } catch (e) {}
+        if (!witness) {
+          const me = this.villagerId;
+          const ids = ((this.state.village || {}).roster || []).filter(id => {
+            if (!id || id === vid || id === me) return false;
+            let p = null;
+            try { p = this.getPerson(id); } catch (e) { return false; }
+            return !!(p && !p.dead && p.name);
+          });
+          if (ids.length) witness = pick(ids);
+        }
+        if (witness) {
+          const wname = (typeof this.disp === 'function' ? this.disp(witness)
+            : (this.displayName ? this.displayName(witness) : null)) || 'Someone';
+          const bucket = t => {
+            if (['cautious', 'anxious', 'withdrawn', 'fidgety'].includes(t)) return 'fear';
+            if (['bold', 'intense', 'restless', 'prickly'].includes(t)) return 'bold';
+            if (['dry', 'sardonic', 'mischievous'].includes(t)) return 'wry';
+            return 'steady';
+          };
+          let temp = 'steady';
+          try { temp = String((((this.getPerson(witness) || {}).personality) || {}).temperament || 'steady'); } catch (e) {}
+          const POOL = {
+            fear: [`Don't ever make them angry. That's all I'm saying.`, `I just watched something die that should not be able to die.`],
+            steady: [`The village needs to hear about this one. Tonight.`, `That's the story we tell at the fire.`],
+            bold: [`HA! Did everybody SEE that?!`, `That's how it's done. Somebody write it down.`],
+            wry: [`And here I was worried about the shopping list.`, `Note to self: let them go first next time.`],
+          };
+          const lines = POOL[bucket(temp)] || POOL.steady;
+          this.say(`${wname}: "${pick(lines)}"`);
+        }
+        try { this.tele('companion_kill_beat', { id: mid, killer: vid, wave: wave || 0 }); } catch (e) {}
       } catch (e) {}
     },
 
