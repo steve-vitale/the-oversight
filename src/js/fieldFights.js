@@ -519,6 +519,8 @@
       var vv = this.state.village || {};
       var vHpMax = 100;
       var vHp = (vv.health && vv.health[vid] !== undefined) ? vv.health[vid] : 100;
+      var vHpStart = vHp;
+      var vBeamTaken = 0; // landed light, after all defenses; not raw attack damage
       if (vHp > vHpMax) vHpMax = vHp;
       // VILLAGER COMBAT SPEED (blitz-combatstats 2026-10-13): the flat 3 was
       // a lie — villagers move at different paces. villagerSpeed derives
@@ -596,6 +598,11 @@
         var pmax = (m && pi === 0 && m.maxHp) ? m.maxHp : Math.max(php, hpDef[1] || hpDef[0]);
         members.push({ hp: php, maxHp: pmax, alive: php > 0 });
       }
+      // Original body draw, before ambush/volley/any damage. Unknown saved
+      // maxima cannot invent an unwounded encounter.
+      var huntOpening = { actorMaxHp: vHpMax, allies: Math.max(0, opts.allies || 0),
+        pack: vAbs.indexOf('pack_hunt') >= 0, lost: false, prey: { monster: mdef.id, hp: members[0].hp,
+        full: m && m.hp != null ? Number.isFinite(m.maxHp) && m.hp === m.maxHp : true } };
       rec.packCount = packN;
       var mBreak = wave >= 2 ? 0.15 : 0.25; // nastier things hold longer
 
@@ -659,6 +666,7 @@
         if (RR() < evade) {
           rec.outcome = 'evade';
           rec.vHpLeft = vHp; rec.mHpLeft = members[0].hp;
+          try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field evasion', e); }
           rec.log.push(vName + ' saw the ' + mName + ' in time and gave it room.');
           return rec;
         }
@@ -820,6 +828,7 @@
       // help is near, they shout instead of scattering. One ally answers per
       // fight — a second pair of hands, off-balance, exposed (no armor).
       var helpCalled = false, allyIn = false, allyHp = 0;
+      var wardCarries = [];
       var allyMax = 70, allyVid = null, allyName = 'Someone';
       // AID (comms 2026-10-10): allied parties already at the door join from
       // round 1 — they came to fight, not to watch. A new combatant, same as
@@ -867,7 +876,7 @@
             for (var mi = 0; mi < members.length; mi++) {
               // the lead fell earlier this round: the pack's coordination is
               // gone — the rest scatter, they don't keep swinging (2026-10-14)
-              if (members[mi].hp <= 0 || !vAlive || members[0].hp <= 0) continue;
+              if (members[mi].hp <= 0 || !vAlive || vHp <= 0 || members[0].hp <= 0) continue;
               // SIGNATURE MECHANICS (sigW3a.js, wave 3 batch A 2026-10-10):
               // the monster's real signature runs off-screen too — villagers
               // face the same fight. Consumes the member's action when it
@@ -881,7 +890,7 @@
               // MULTI-MOVE (2026-10-12): the monster's real kit, not just the
               // legacy slot — villagers face the same varied fight. Range
               // conditions are abstracted off-screen; hp-gates are honored.
-              var rDmgRange = dmgRange, rAtkName = atkName;
+              var rDmgRange = dmgRange, rAtkName = atkName, rAttack = mdef.attack || {};
               try {
                 var _kit = (mdef.attacks && mdef.attacks.length ? mdef.attacks : []).filter(function(a){ return a && a.name && a.damage; });
                 if (_kit.length > 1) {
@@ -897,7 +906,7 @@
                   for (_k = 0; _k < _pool.length; _k++) _tot += (_pool[_k].weight || 1);
                   var _r = RR() * _tot, _c = _pool[0];
                   for (_k = 0; _k < _pool.length; _k++) { _r -= (_pool[_k].weight || 1); if (_r <= 0) { _c = _pool[_k]; break; } }
-                  rAtkName = _c.name;
+                  rAtkName = _c.name; rAttack = _c;
                   rDmgRange = (_c.damage && _c.damage.length === 2) ? _c.damage : dmgRange;
                 }
               } catch (e) {}
@@ -907,6 +916,10 @@
               // adjacent IN ADDITION to the beam. Closing in has a price.
               var thrash = 0;
               if (mdef.id === 'gallowdeer') thrash = lroll([10, 16]);
+              // Keep the selected attack's light separate from physical antlers.
+              // Only landed bearer damage enters the Army pain pool.
+              var beamShare = /beam|sweep/i.test(String((rAttack.pattern || {}).type || '')) || /beam|\bray\b|laser|glare|searchlight/i.test(rAtkName)
+                ? (thrash > 0 ? d / Math.max(1, d + thrash) : 1) : 0;
               var total = d + thrash;
               // SIG W3C (2026-10-10): signature bonus damage (callback borrowed
               // swing, buffering predicted strike) — blow by blow, not a table.
@@ -995,22 +1008,27 @@
               // the problem. The beast's eye stays on them: ally hit share
               // 40% -> 10%. Honest: it doesn't reduce damage, it moves it.
               var _allyShare = 0.4;
+              var _wardAegis = !!(gpF && gpF.aegis > 0), _wardVia = null;
               if (gpF && allyIn && allyHp > 0) { try { _allyShare = GPf.fieldAllyShare(gpF, _allyShare); } catch (e) { console.warn('[godpath] ally share', e); } }
               if (vHasAb('draw_fire') && allyIn && allyHp > 0 && !abDrewFire) {
                 abDrewFire = true;
                 _allyShare = 0.1;
                 rec.log.push(vName + ' draws its eye — "Me. I\'m the problem." The beast turns.');
               }
-              var hittingAlly = allyIn && allyHp > 0 && RR() < _allyShare;
+              var _allyRoll = allyIn && allyHp > 0 ? RR() : 1;
+              var hittingAlly = allyIn && allyHp > 0 && _allyRoll < _allyShare;
+              if (_wardAegis && _allyShare === 0 && _allyRoll < 0.4) _wardVia = 'aegis_link';
               // TANK — BODYGUARD (2026-10-12): once per fight, a blow falling
               // on the ally lands on the guard instead. "Not them."
               if (hittingAlly && vHasAb('bodyguard') && !abBodyguarded) {
                 abBodyguarded = true;
                 hittingAlly = false;
+                _wardVia = 'bodyguard';
                 rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
               }
               if (!hittingAlly && gpF && total > 0) {
-                try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round })); } catch (e) { console.warn('[godpath] incoming', e); }
+                var beamDamage = beamShare > 0 ? Math.min(d, total) : 0;
+                try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round, attack: rAttack, beamDamage: beamDamage })); } catch (e) { console.warn('[godpath] incoming', e); }
               }
               if (!hittingAlly && varmor > 0 && total > 0) {
                 // ARMOR (Steve 2026-10-09): diminishing-returns curve,
@@ -1025,6 +1043,7 @@
                 total = total - absorbed;
                 rec.log.push(vName + "'s gear absorbs " + absorbed + '.');
               }
+              total = this.wornDamage(hittingAlly ? allyVid : vid, total, { rng: RR, log: rec.log, scene: 'field' });
               if (hittingAlly) {
                 allyHp -= total;
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
@@ -1032,6 +1051,7 @@
                   try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) allyHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
                 }
                 if (allyHp <= 0) {
+                  huntOpening.lost = true;
                   allyIn = false;
                   rec.log.push(allyName + ' goes down!');
                   // AID (comms 2026-10-10): a foreign ally's fall lands on the
@@ -1040,7 +1060,7 @@
                   try {
                     var _fad = (opts.foreignAllies || {})[allyVid];
                     if (_fad && this.aidAllyDown) this.aidAllyDown(_fad.villageId, _fad.face, allyName);
-                    else if (allyVid && this.hurtVillager) this.hurtVillager(allyVid, 30, 'monster');
+                    else if (allyVid && this.hurtVillager) this.hurtVillager(allyVid, 30, 'monster', this.sealDamageResult({}, [[allyVid, 30]]));
                   } catch (e) {}
                 }
               } else {
@@ -1066,11 +1086,17 @@
                   if (total < _pre2) rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)');
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
+                vBeamTaken += Math.max(0, Math.min(total, Math.round(total * beamShare)));
+                if (_wardVia && allyVid && total > 0 && mdef.id && !wardCarries.some(x => x.ally === allyVid))
+                  wardCarries.push({ ally: allyVid, via: _wardVia, wound: total, day: day });
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
               }
             }
           } else {
-            if (!vAlive) continue;
+            // Ordinary damage can exhaust HP before the round-end flag
+            // update. The dead cannot strike; existing death prevention
+            // still resolves at the end of the round, as for signature hits.
+            if (!vAlive || vHp <= 0) continue;
             var lead = null;
             for (var li = 0; li < members.length; li++) { if (members[li].hp > 0) { lead = members[li]; break; } }
             if (!lead) break;
@@ -1086,7 +1112,7 @@
             var gpOut = null;
             if (!trickAct && gpF) {
               try {
-                gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken }));
+                gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken, beamTaken: vBeamTaken }));
                 if (gpOut.vHp != null) vHp = gpOut.vHp;
                 if (gpOut.abStun) abStun += gpOut.abStun;
                 if (gpOut.dealt) rec.mDealt += gpOut.dealt;
@@ -1385,7 +1411,13 @@
           } catch (e) {}
         }
         if (vHp <= 0 && gpF) {
-          try { var _gpHp = GPf.fieldCheatDeath(gpF, gpC({ round: round })); if (_gpHp) { vHp = _gpHp; vAlive = true; } } catch (e) { console.warn('[godpath] cheat death', e); }
+          try {
+            var _gpHp = GPf.fieldCheatDeath(gpF, gpC({ round: round }));
+            if (_gpHp) {
+              vHp = _gpHp; vAlive = true;
+              if (gpF.shedGear) { wb = 0; varmor = gpF.armorAdd || 0; gpF.shedGear = false; }
+            }
+          } catch (e) { console.warn('[godpath] cheat death', e); }
         }
         if (vHp <= 0) { vAlive = false; rec.outcome = 'vDie'; break; }
         if (vHp / vHpMax < rec.minHpFrac) rec.minHpFrac = vHp / vHpMax;
@@ -1443,7 +1475,8 @@
           rec.intent = 'engage'; rec.intentWhy = 'good-exchange';
           rec.log.push(vName + ' reads the fight — the odds are good. Committing to the kill.');
         }
-        if (rec.intent === 'learn' && round >= 3 && !winning && !rec.outcome) {
+        // Learning permits wild withdrawal, never an exit from a sealed arena.
+        if (!opts.noFlee && rec.intent === 'learn' && round >= 3 && !winning && !rec.outcome) {
           rec.outcome = 'vFlee'; rec.fleeLearn = true; rec.fleeHpFrac = vHp / vHpMax;
           rec.log.push(vName + ' has seen enough — withdraws to report back. (Learn-first: not winnable, not worth the blood.)');
           break;
@@ -1632,7 +1665,15 @@
           if (_allyDied && this.noteBondGrief) this.noteBondGrief(allyVid, [vid]);
         }
       } catch (e) {}
-      return rec;
+      try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field escape', e); }
+      try { if (GPf && GPf.finishFieldWardRescue) GPf.finishFieldWardRescue(this, vid, wardCarries, rec,
+        { id: allyVid, alive: helpCalled && allyIn && allyHp > 0 }); }
+      catch (e) { console.warn('[godpath] field protection outcome', e); }
+      try { if (GPf && GPf.finishFieldApexHunt) GPf.finishFieldApexHunt(this, vid, huntOpening, rec,
+        { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (allyIn && allyHp > 0) }); }
+      catch (e) { console.warn('[godpath] field hunt outcome', e); }
+      return this.sealDamageResult(rec, [[vid, rec.vTaken,
+        vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]]);
     },
 
     // fieldFightSummary(rec, vName, mName) -> one honest sentence for gossip/news

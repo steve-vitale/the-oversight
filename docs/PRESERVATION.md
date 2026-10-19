@@ -1,5 +1,14 @@
 # The Oversight — Food Preservation Canon (Steve's design)
 
+Finished personal counter food can travel: **Pack food (2 ticks)** moves only
+what fits in the actual pack, including water and weight modifiers. The rest
+stays on the counter. Preparation, kcal, risks, spoilage and harvest ownership
+travel with it; pickup does not donate to or withdraw from the communal pantry.
+Use the actual counter at an accessible camp after resolving the current fight
+or contest. This adds no food and does not reset its clock. See
+evidence/2026-10-19/release-prep-food-audit-r1.md for current touch/save proofs;
+prepared inputs are separate from natural recipe/material availability.
+
 The ladder: **cleaned (2d) < cooked (5d) < smoked (30d) < rendered fat (90d)
 < pemmican (120d).** Longer road, better payoff. Refined and longer methods
 must earn meaningful rewards — that's the whole point of the ladder.

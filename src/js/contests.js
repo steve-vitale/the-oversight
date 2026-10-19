@@ -5,6 +5,8 @@
 //   - contestEligible() -> {eligible, ineligible, reason} (ineligible carries the legible why-out per person — dead, severed, age, gravely wounded, exiled)
 //   - _cxCountHeld(ac) -> counts one held contest per contest object at ANY terminal (end/die/refuse/arena-lost), once-guarded for multi-take verdicts
 //   - _cxWinnerShare(pname) -> the villager winner's share (pantryAdd, cap-real) for every villager-win path
+//   - broadcastRewardTier(who) -> earned prize tier from personal wins or the shared audience, independent of monster kills
+//   - _cxItemPrize(ac, contest, who) -> shared player/villager gear roll; supplies remain a separate villager prize
 //   - _cxPrizeLane(ac, contest) -> rolls the non-item prize lanes on a player win (ability offer / synergy hint / knowledge dump); the System lane alongside the loot roll's item lane
 //   - _cxPrizeAbilityOffer(contest) -> sets s.abilityChoices (1-of-3 system_offer abilities, dark/OP tiers excluded, category-biased); false when slots full / offer pending / nothing to offer
 //   - _cxPrizeSynergyHint() -> +1 discovery attempt on an undiscovered synergy whose legs are held, through the real tease/unlock path; false when nothing qualifies
@@ -149,6 +151,48 @@
 
 (function() {
   const G = globalThis.Scattering.Game;
+
+  // A quiet specialist can become a main-event winner without hunting.
+  // Read deeds already recorded by the actual win paths; appearances/losses
+  // alone don't count. The audience is shared, the winner's record is theirs.
+  G.broadcastRewardTier = function(who) {
+    const cfg = (this.data.rewardEconomy || {}).broadcast || {};
+    const wins = (((this.state.notability || {})[who || 'player'] || {}).contestWin || 0);
+    const favor = this.apFavor ? this.apFavor() : 0;
+    let tier = 1;
+    for (let i = 1; i < 3; i++) {
+      if (wins >= (cfg.winsForTier || [0, 3, 6])[i] || favor >= (cfg.favorForTier || [0, 40, 70])[i]) tier = i + 1;
+    }
+    return tier;
+  };
+
+  G._cxItemPrize = function(ac, contest, who) {
+    who = who || 'player';
+    const cfg = (this.data.rewardEconomy || {}).broadcast || {};
+    const wave = this.unlockedWave();
+    let tier = Math.max(Math.min(3, wave), this.broadcastRewardTier(who));
+    let chance = ac.variant === 'hardened' ? 0.75 : 0.6;
+    if (contest.risk === 'high') chance = Math.min(0.95, chance + 0.15);
+    if (contest.risk === 'extreme') chance = Math.min(0.95, chance + 0.3);
+    const wins = (((this.state.notability || {})[who] || {}).contestWin || 0);
+    const apex = wave >= 4 || wins >= (cfg.apexWins == null ? 8 : cfg.apexWins) || (this.apFavor && this.apFavor() >= (cfg.apexFavor == null ? 100 : cfg.apexFavor));
+    if (contest.risk === 'extreme' && apex && Math.random() < (cfg.apexChance == null ? 0.25 : cfg.apexChance)) tier = 4;
+    const loot = this.rollAlienLoot({ wave, loot: { chance, tier, rewardSource: 'contest' } });
+    const person = who === 'player' ? null : this.getPerson(who);
+    // Never redirect a missing/dead winner's personal reward to the bearer.
+    if (who !== 'player' && (!person || !this.isMember(who))) return false;
+    if (person) person.items = person.items || [];
+    const granted = loot ? this.alienLootGrant(loot, person) : null;
+    if (granted) {
+      const d = granted.def;
+      const name = who === 'player' ? 'your' : this.displayName(who) + "'s";
+      this.sysSay(`📺 The System presses something humming into ${name} hands: ${d.name}.${d.flavor ? ' ' + d.flavor : ''}`);
+      this.tele('broadcast_item_prize', { who, id: d.id, tier: d.lootTier || 1, contest: contest.id });
+      return true;
+    }
+    this.sysSay('📺 Prize: the System\'s favor (and a story). The vault was feeling shy tonight.');
+    return false;
+  };
 
   // === ELIGIBILITY ===
   // Visible, legible. Player can always answer "who can go, and why."
@@ -1350,6 +1394,17 @@
       this.addNotability(pid, 'showmanship');
       try { if (this.apAdjustFavor) this.apAdjustFavor(2, pname + ' shone on ' + showName, 'showbiz'); } catch (e) {}
       this._showGossip('fans', pid, showName);
+      const giftChance = ((this.data.rewardEconomy || {}).broadcast || {}).showGiftChance;
+      if (outcome === 'fans' && Math.random() < (giftChance == null ? 0.35 : giftChance)) {
+        const gift = this.apWackyGift(this.broadcastRewardTier(pid));
+        const person = this.getPerson(pid);
+        if (gift && person && this.isMember(pid)) {
+          person.items = person.items || [];
+          this.alienLootGrant(gift.id, person);
+          this.sysSay(`📺 A viewer sends ${this.displayName(pid)} a gift: ${gift.name}. It belongs to them.`);
+          this.tele('broadcast_item_prize', { who: pid, id: gift.id, tier: gift.lootTier || 1, show: ac.showId });
+        }
+      }
     }
     if (outcome === 'shame' || outcome === 'both') {
       const shameLines = [
@@ -1490,16 +1545,19 @@
     // BEANS" (350 kcal) used to be grantable here, which is dinner wearing a
     // joke label (break-it shows 2026-10-09). If the vault is shy, say so —
     // never a silent pocket.
-    if (prize && (isPlayer || isSummons)) {
+    const giftChance = ((this.data.rewardEconomy || {}).broadcast || {}).showGiftChance;
+    const earnedGift = prize || (isPlayer && !isSummons && outcome === 'won' && Math.random() < (giftChance == null ? 0.35 : giftChance));
+    if (earnedGift && (isPlayer || isSummons)) {
       try {
         // ONE HELPER, ONE RULE (code: apWackyGift; break-it shows r2
         // 2026-10-10): this used to inline the same filter apWackyGift
         // runs (alien, tier<=1, no kcalEach, not food) — a drift risk.
         // The prize is the same never-dinner curio the fan paths grant.
-        const gift = (typeof this.apWackyGift === 'function') ? this.apWackyGift(1) : null;
+        const gift = (typeof this.apWackyGift === 'function') ? this.apWackyGift(this.broadcastRewardTier('player')) : null;
         if (gift && this.apGrantItem) {
           this.apGrantItem(gift.id);
           this.sysSay(`📺 The System presses something humming into your hands: ${gift.name || gift.id}. It's wacky. It's yours.`);
+          this.tele('broadcast_item_prize', { who: 'player', id: gift.id, tier: gift.lootTier || 1, show: ac.showId });
         } else {
           this.sysSay('📺 Prize: the System\'s favor (and a story). The vault was feeling shy tonight.');
         }
@@ -4460,7 +4518,8 @@
       try { this.leadShift('unity', d.unity); } catch (e) {}
       log.push(`unity +${d.unity}`);
     }
-    if (d.notability) {
+    // Phase cues are attempts; only terminal wins award victory credit.
+    if (d.notability && d.notability !== 'contestWin') {
       this.addNotability('player', d.notability);
       log.push(`noted: ${d.notability}`);
     }
@@ -5124,6 +5183,7 @@
         if (_grantPrize) {
           ac._prizeGranted[_grantKey] = true;
           this._cxWinnerShare(pname);
+          this._cxItemPrize(ac, contest, ac.participant);
           // VILLAGER PRIZE DEED (longsim abilities r2 2026-10-11): a
           // televised win is a DEED — it feeds the deed-XP track the contest
           // belongs to (+3 XP: a full first rung for a nobody, a nudge for a
@@ -5154,46 +5214,7 @@
         if (_grantPrize) {
           ac._prizeGranted[_grantKey] = true;
           try {
-            // CONTEST PRIZE TABLE (break-it contest 2026-10-09): high risk /
-            // high reward, but tier 4 stays gated. The old call mapped
-            // monster wave straight onto loot tier ({chance:1, tier:wave}) —
-            // the forbidden wave->tier conflation — and handed a GUARANTEED
-            // apex-tier item on every wave-4 win (monsters give 12% off an
-            // actual apex kill). Now: 60% chance of alien loot, tier capped
-            // at 3, and tier 4 only at a low rate for extreme-risk wins at
-            // wave 4 — hardest challenges, on their own terms. Hardened
-            // wins roll hotter (the audience demanded it).
-            const wave = this.unlockedWave();
-            const isExtreme = contest.risk === 'extreme';
-            let prizeTier = Math.min(3, wave);
-            // FEAR HONESTY (contest-fear 2026-10-11): the contract is
-            // high-risk/high-reward — the lever raised the risk side, so the
-            // reward side moves too. High/extreme wins roll hotter on the
-            // prize table (hardened stacks). The prize is still a roll, not
-            // a guarantee — and the vault can still be shy.
-            let prizeChance = ac.variant === 'hardened' ? 0.75 : 0.6;
-            if (contest.risk === 'high') prizeChance = Math.min(0.95, prizeChance + 0.15);
-            if (contest.risk === 'extreme') prizeChance = Math.min(0.95, prizeChance + 0.3);
-            if (isExtreme && wave >= 4 && Math.random() < 0.25) prizeTier = 4;
-            const loot = this.rollAlienLoot({ wave, loot: { chance: prizeChance, tier: prizeTier } });
-            if (loot) {
-              // KNOWLEDGE-GATED (Steve 2026-10-06): the prize goes through the
-              // SAME reveal path as monster-kill loot (alienLootGrant). Diegetic
-              // announce — no raw id, no mechanics. The prize arrives named in
-              // your Pack; what it DOES, you learn by using it.
-              const granted = this.alienLootGrant(loot);
-              if (granted) {
-                const d = granted.def;
-                this.sysSay(`📺 The System presses something humming into your hands: ${d.name}.${d.flavor ? ' ' + d.flavor : ''}`);
-              } else {
-                this.sysSay('📺 Prize: the System\'s favor (and a story).');
-              }
-            } else {
-              // HONEST (break-it contest 2026-10-09): the prize table can
-              // whiff — a win with prize:true must still SAY what happened,
-              // never silently pocket the prize.
-              this.sysSay('📺 Prize: the System\'s favor (and a story). The vault was feeling shy tonight.');
-            }
+            this._cxItemPrize(ac, contest, 'player');
             // PRIZE LANES (longsim abilities r2 2026-10-11; evolution assist
             // longsim contests r5 2026-10-11): the roll above is the ITEM
             // lane. This is the System lane — ability offers, synergy hints,
@@ -6109,6 +6130,7 @@
         // WINNER'S SHARE (break-it contests r12 2026-10-10): a co-taken
         // winner's prize is real — same share the watch-verdict path grants.
         this._cxWinnerShare(pname);
+        this._cxItemPrize(ac, contest, pid);
         // VILLAGER PRIZE DEED (longsim abilities r2 2026-10-11): same
         // win-deed as the watch path — the televised win feeds the
         // contest's deed-XP track.

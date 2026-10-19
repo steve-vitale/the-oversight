@@ -65,6 +65,9 @@ const NAMES = { me: 'You', vil_a: 'Ash', vil_b: 'Bram', vil_c: 'Cleo', vil_d: 'D
 Game.state = Game.state || {};
 Game.state.scholar = { day: 40, hp: 200, maxHp: 200, inventory: [] };
 Game.state.village = { roster: ['me', 'vil_a', 'vil_b', 'vil_c', 'vil_d'], trust: {}, health: {}, cheer: 5 };
+// Explicit named-person fixtures must resolve to actual character records;
+// a display-name stub alone is not a person the combat constructor can enroll.
+Game.state.village.rosterChars = Object.fromEntries(Object.entries(NAMES).map(([id,name]) => [id,{id,name,age:30,personality:{temperament:'steady'},items:[],equipped:{}}]));
 Game.state.codex = { monsters: {} };
 Game.villagerId = 'me';
 Game.state.otherVillages = [

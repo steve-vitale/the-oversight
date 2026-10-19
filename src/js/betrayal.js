@@ -36,7 +36,10 @@
 //   - scamDaily()
 //   - playerPackKcal() / playerPackSpend(kcal)
 //   - confrontScammer(vis, s) / resolveConfront(vis, s, how)
+//   - recordMarketExchange(who, receipt, delivered) -> first paid personal food-to-goods outcome after actual settlement
 //   - hawkerOffer(vid) / hawkerBuy(vid)
+//   - goodsTradePrice(basePrice, seller?) -> current buyer quote, shared by cart/resident display and settlement; cached base price stays unchanged
+//   - creditGoodsTrade(who, consideration) -> real paid exchange social practice, same saved daily cap for buyer/seller; settles before time advances
 //   - visitorHtml()
 //   - visitorDaily()
 // rules:
@@ -696,10 +699,11 @@
       if (R() < p) {
         const nicked = R() < 0.3;
         if (nicked) {
-          const d = 3 + Math.floor(R() * 5);
-          s.health = Math.max(1, (s.health == null ? 100 : s.health) - d);
+          const hpBefore = s.health == null ? 100 : s.health;
+          this.addHealth(-(3 + Math.floor(R() * 5)), { rng: R, scene: 'ambush', minHealth: 1 });
+          const d = Math.max(0, hpBefore - s.health);
           plot.woundsTaken = (plot.woundsTaken || 0) + d;
-          this.say(`You run. Something catches your shoulder on the way out — ${d} of hurt, and proof. Then trees, and breath, and gone.`);
+          this.say(d > 0 ? `You run. Something catches your shoulder on the way out — ${d} of hurt, and proof. Then trees, and breath, and gone.` : 'You run. A desperate swipe passes through empty air. Then trees, and breath, and gone.');
         } else {
           this.say(`You run. They're shaking too hard to aim, too slow to chase. The village hears you coming a long way off.`);
         }
@@ -711,11 +715,12 @@
         const others = (plot.accomplices || []).length;
         this.say(`You bolt — and one of them just... freezes. Hands up, shaking. They can't do it.${others ? ' The others can.' : ' But the leader can.'}`);
       }
-      const d = 2 + Math.floor(R() * 5);
-      s.health = Math.max(1, (s.health == null ? 100 : s.health) - d);
+      const hpBefore = s.health == null ? 100 : s.health;
+      this.addHealth(-(2 + Math.floor(R() * 5)), { rng: R, scene: 'ambush', minHealth: 1 });
+      const d = Math.max(0, hpBefore - s.health);
       plot.woundsTaken = (plot.woundsTaken || 0) + d;
       try { this.addTrauma(6); } catch (e) {}
-      this.say(`They catch your arm, wild and clumsy. It hurts (${d}) — desperate, not skilled. You're still on your feet.`);
+      this.say(d > 0 ? `They catch your arm, wild and clumsy. It hurts (${d}) — desperate, not skilled. You're still on your feet.` : 'They reach for your arm and grasp empty air. You are still on your feet.');
       // sometimes a failed run ends badly: overwhelmed, not killed
       if (R() < 0.30) {
         this.say(`Too many hands. Something hits the side of your head and the world tilts sideways.`);
@@ -799,8 +804,9 @@
       return this.ambushAftermath(plot, 'fought_off');
     }
     // they flail back
-    const d = 2 + Math.floor(R() * 4);
-    s.health = Math.max(1, (s.health == null ? 100 : s.health) - d);
+    const hpBefore = s.health == null ? 100 : s.health;
+    this.addHealth(-(2 + Math.floor(R() * 4)), { rng: R, scene: 'ambush', minHealth: 1 });
+    const d = Math.max(0, hpBefore - s.health);
     plot.woundsTaken = (plot.woundsTaken || 0) + d;
     this.say(`Wild swings back at you (${d}). They're terrible at this. That's the only reason you're still standing.`);
     if (plot.round >= 3) return this.ambushAftermath(plot, 'escaped');
@@ -1011,8 +1017,10 @@
     if (outcome === 'knocked_out') {
       // they take some of your things and leave you
       this.say(`Darkness, then dirt. You wake up lighter — pack rifled — and hurting. But alive. They couldn't finish it.`);
-      plot.woundsTaken = (plot.woundsTaken || 0) + 10;
-      s.health = Math.max(1, (s.health == null ? 100 : s.health) - 10);
+      const hpBefore = s.health == null ? 100 : s.health;
+      this.addHealth(-10, { rng: R, scene: 'ambush', minHealth: 1 });
+      const damage = Math.max(0, hpBefore - s.health);
+      plot.woundsTaken = (plot.woundsTaken || 0) + damage;
       try { this.addTrauma(18); } catch (e) {}
     }
     if (outcome === 'talked_down') {
@@ -1099,7 +1107,7 @@
         const n = this.countPriorConvictions ? this.countPriorConvictions(a, c.charge) : 0;
         if (n > worstRecord) worstRecord = n;
       }
-    } catch (e) {}
+    } catch (e) { console.warn('[justice] prior convictions', e); }
     for (const vid of this.npcIds()) {
       if (c.accused.includes(vid)) { c.belief[vid] = 90; continue; }
       let b = 25; // first-mover: their story landed first
@@ -2230,7 +2238,10 @@
     if (r < 0.22) {
       const gain = 400 + Math.round(R() * 600);
       // BANK CAP (break-it food r3 2026-10-08): kcalCap() is the one number.
+      const room=Math.max(0,(this.kcalCap ? this.kcalCap() : 3000)-(s.kcal || 0));
       s.kcal = Math.min((s.kcal || 0) + gain, this.kcalCap ? this.kcalCap() : 3000);
+      // Mixed roots, grubs and game are an actual meal with no plant-only origin.
+      this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:gain,nourishment:Math.min(gain,room)}],'drifting');
       this.say(`Drifting: a lucky stretch — roots, grubs, a bird too slow. +${gain} kcal. The wild provides, today.`);
     } else if (r < 0.38) {
       const loss = 200 + Math.round(R() * 300);
@@ -2249,7 +2260,7 @@
       // smoke on the horizon — the road has neighbors. Discovery for exiles
       // sizing up where to petition.
       try {
-        const px = (this.map && this.map.px) || 3, py = (this.map && this.map.py) || 3;
+        const px = this.map?.px ?? 3, py = this.map?.py ?? 3;
         let best = null, bd = 99;
         for (const v of (this.state.otherVillages || [])) {
           const d = Math.abs((v.x || 0) - px) + Math.abs((v.y || 0) - py);
@@ -3404,15 +3415,74 @@
     }
     return ware;
   },
+  // A personal accomplishment follows actual payment and delivered nonfood goods.
+  recordMarketExchange(who, receipt, delivered) {
+    const s = this.state.scholar, v = this.state.village;
+    const vid = who === 'player' ? this.villagerId : who, person = vid && this.vpOf(vid);
+    if (this.over || !person || person.id !== vid || person.dead ||
+        (vid === this.villagerId ? s.health <= 0 : !(v.roster || []).includes(vid) || (v.health || {})[vid] <= 0)) return false;
+    if (!receipt || !['cart', 'resident', 'river'].includes(receipt.route) ||
+        !['buyer', 'seller'].includes(receipt.role) || !receipt.partner || receipt.partner === vid ||
+        !Number.isFinite(receipt.price) || receipt.price <= 0 ||
+        !['packKcal', 'tabKcal', 'pantryKcal'].every(k => Number.isFinite(receipt[k]) && receipt[k] >= 0) ||
+        receipt.packKcal + receipt.tabKcal + receipt.pantryKcal <= 0 ||
+        !delivered || !(s.inventory || []).includes(delivered) || !(delivered.units > 0) || delivered.kcalEach > 0) return false;
+    const known = receipt.route === 'river'
+      ? ['river:knife', 'river:salt', 'river:rope'].includes(receipt.item)
+      : delivered.itemId === receipt.item && (this.data.items || []).some(i => i.id === receipt.item && !(i.kcalEach > 0));
+    if (!known) return false;
+    if (receipt.route === 'cart') {
+      const trader = (v.visitors || []).find(x => x.id === receipt.partner);
+      if (!trader || trader.dead) return false;
+    }
+    if (receipt.route === 'resident') {
+      const other = this.vpOf(receipt.partner);
+      if (!other || other.id !== receipt.partner || other.dead || !(v.roster || []).includes(other.id) ||
+          (other.id === this.villagerId ? s.health <= 0 : (v.health || {})[other.id] <= 0)) return false;
+    }
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[vid] || (books[vid] = {});
+    if (book.market_exchange) return false;
+    book.market_exchange = { day: s.day || 0, route: receipt.route, role: receipt.role,
+      partner: receipt.partner, item: receipt.item, price: receipt.price,
+      packKcal: receipt.packKcal, tabKcal: receipt.tabKcal, pantryKcal: receipt.pantryKcal };
+    const last = (this.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { this.tele('godpath_deed', { t, who: vid, event: 'market_exchange', day: s.day || 0,
+      route: receipt.route, role: receipt.role, item: receipt.item }); }
+    catch (e) { console.warn('[godpath] goods exchange', e); }
+    return true;
+  },
+
+  // Quotes and settlement use the current buyer's power, never the seller's.
+  goodsTradePrice(basePrice, seller) {
+    if (!Number.isFinite(basePrice) || basePrice <= 0) return basePrice;
+    let price = this.modTarget ? this.modTarget('trade.price_mult', basePrice, {}) : basePrice;
+    if (seller && seller.confrontDiscount && seller.confrontDiscount < 1) price *= seller.confrontDiscount;
+    return Math.max(1, Math.round(price));
+  },
+  // Only completed paid exchanges call this; quotes, refusals and gifts cannot
+  // train a person. Settle before time can change the day or bearer identity.
+  creditGoodsTrade(who, consideration) {
+    if (!Number.isFinite(consideration) || consideration <= 0 || !this.creditDeed || this.over) return 0;
+    const vid = who === 'player' ? this.villagerId : who, v = this.state.village;
+    const person = vid && this.vpOf ? this.vpOf(vid) : null;
+    const me = vid === this.villagerId;
+    if (!person || person.id !== vid || person.dead || person.alive === false || (!me && !(v.roster || []).includes(vid))) return 0;
+    if ((me ? this.state.scholar.health : (v.health || {})[vid] ?? 100) <= 0) return 0;
+    return this.creditDeed(me ? 'player' : vid, 'trade');
+  },
   // hawkerBuy(vid): buy the villager's offered ware. Same payment rails.
   hawkerBuy(vid) {
+    const buyerId = this.villagerId;
     const v = this.state.village || {};
+    const seller = vid && this.vpOf(vid);
+    if (vid === buyerId || !seller || seller.id !== vid || seller.dead || seller.alive === false ||
+        !(v.roster || []).includes(vid) || (v.health || {})[vid] <= 0) return null;
     const ware = (v.hawkerStock || {})[vid];
     if (!ware || ware.sold) return null;
     const person = { id: vid, name: this.displayName(vid) };
     // seed their appraisal brain if needed (for future sell-side)
     // (villagers appraise via traderAppraise with traderKnows seeded lazily)
-    let price = ware.price;
+    const price = this.goodsTradePrice(ware.price);
     const pay = this.traderPay(price);
     if (!pay.ok) {
       this.say(`${this.displayName(vid)} shakes their head. "${price} kcal of finished food — and you're about ${pay.short} short. Come back with a full pack."`);
@@ -3423,13 +3493,14 @@
     if (ware.scam && !ware.scam.discovered) {
       if (ware.scam.kind === 'overprice' && savvy >= 3) {
         ware.scam.discovered = true;
-        this.say(`(You've bought enough to know: ${ware.scam.truePrice} is honest for this. They're asking ${ware.price}.)`);
+        this.say(`(You've bought enough to know: ${this.goodsTradePrice(ware.scam.truePrice)} is honest for this. They're asking ${price}.)`);
       }
       const entry = this.recordScam(this.displayName(vid), vid, ware.scam.kind, ware.name);
-      entry.paid = ware.price; entry.discovered = !!ware.scam.discovered;
+      entry.paid = price; entry.discovered = !!ware.scam.discovered;
       ware.scam.ledgerId = entry.id;
     }
     try { this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1; } catch (e) {}
+    let marketItem = null;
     if (ware.kind === 'food') {
       const day = (this.state.scholar || {}).day || 0;
       const entry = { itemId: ware.itemId, name: ware.name, units: ware.units || 1, kcalEach: ware.kcalEach || 300,
@@ -3442,13 +3513,21 @@
       (this.state.scholar.inventory = this.state.scholar.inventory || []).push(entry);
     } else {
       const def = (this.data.items || []).find(i => i.id === ware.itemId) || {};
-      (this.state.scholar.inventory = this.state.scholar.inventory || []).push({ itemId: ware.itemId, name: ware.name, units: 1, kcalEach: 0, kg: ware.kg != null ? ware.kg : (def.kg || 0.8) });
+      marketItem = { itemId: ware.itemId, name: ware.name, units: 1, kcalEach: 0, kg: ware.kg != null ? ware.kg : (def.kg || 0.8) };
+      (this.state.scholar.inventory = this.state.scholar.inventory || []).push(marketItem);
+    }
+    if (marketItem) {
+      const paid = { route: 'resident', item: ware.itemId, price, packKcal: pay.paid, tabKcal: 0, pantryKcal: 0 };
+      this.recordMarketExchange(buyerId, { ...paid, role: 'buyer', partner: vid }, marketItem);
+      this.recordMarketExchange(vid, { ...paid, role: 'seller', partner: buyerId }, marketItem);
     }
     const took = pay.taken.map(t => `${t.units}× ${t.name}`).join(', ');
     this.say(`Done — the ${ware.name} is yours for ${took}. ${this.displayName(vid)} pockets the food with a merchant's neat hands.`);
     // SOCIAL: a villager who scams YOU faces the village, not the road.
     // Discovery lands via scamDaily remarks; trust does the punishing.
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
+    this.creditGoodsTrade(buyerId, price);
+    this.creditGoodsTrade(vid, price);
     return true;
   },
   // traderSellStock(vis): pack food stacks with appraisals, for the sell view.
@@ -3459,9 +3538,10 @@
   // traderSell(visId, packIdx): sell the whole stack. The price lands on the
   // trader's tab as credit toward his wares.
   traderSell(visId, packIdx) {
+    const sellerId = this.villagerId;
     const v = this.state.village;
     const vis = (v.visitors || []).find(x => x.id === visId);
-    if (!vis || this.tradeSpirit(vis) <= 0) return null;
+    if (!vis || vis.dead || vis.alive === false || this.tradeSpirit(vis) <= 0) return null;
     const inv = this.state.scholar.inventory || [];
     const it = inv[packIdx];
     if (!it || (it.units || 0) <= 0) return null;
@@ -3474,8 +3554,10 @@
     vis.credit = (vis.credit || 0) + total;
     const name = it.name || 'it';
     inv.splice(packIdx, 1);
+    this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1;
     this.say(`${ap.line} Done — ${units}× ${name} for ${total} kcal on your tab.`);
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
+    this.creditGoodsTrade(sellerId, total);
     return true;
   },
   // ---------- 8b. THE TRADER'S CART (Steve 2026-10-06) ----------
@@ -3487,15 +3569,18 @@
   visitorWares(vis) {
     if (vis.wares && vis.wares.length) return vis.wares;
     const wares = [];
-    // 1. off-world curiosity: tier-1 only. The trader is not the System; their
-    //    best stock is small things that fell out of the sky. The name is the
-    //    System's narration (visible); what it DOES, you learn by using it.
+    // Repeat business opens a better supply route, paid in real finished
+    // food. No monster-kill gate and no apex stock on an ordinary cart.
     try {
-      const alienId = this.rollAlienLoot({ loot: { chance: 1, tier: 1 }, wave: 1 });
+      const cfg = (this.data.rewardEconomy || {}).trade || {};
+      const trades = this.state.scholar.tradesDone || 0;
+      const bars = cfg.tradesForTier || [0, 3, 8];
+      const tier = trades >= bars[2] ? 3 : trades >= bars[1] ? 2 : 1;
+      const alienId = this.rollAlienLoot({ loot: { chance: 1, tier, rewardSource: 'trade' }, wave: 1 });
       const def = (this.data.items || []).find(i => i.id === alienId) || {};
       if (alienId) wares.push({
         kind: 'alien', itemId: alienId, name: def.name || alienId, sold: false,
-        price: 1200 + Math.floor(R() * 9) * 100, kg: def.kg || 0.3,
+        price: (cfg.pricePerTier || 1200) * tier + Math.floor(R() * 9) * 100, kg: def.kg || 0.3,
         blurb: `"Came down in a care package. No idea what it does. That's the fun part."`,
       });
     } catch (e) {}
@@ -3576,9 +3661,10 @@
     return { ok: true, taken, paid: taken.reduce((t, x) => t + x.kcal, 0) };
   },
   visitorBuyWare(visId, idx) {
+    const buyerId = this.villagerId;
     const v = this.state.village;
     const vis = (v.visitors || []).find(x => x.id === visId);
-    if (!vis || this.tradeSpirit(vis) <= 0) return null;
+    if (!vis || vis.dead || vis.alive === false || this.tradeSpirit(vis) <= 0) return null;
     const w = (this.visitorWares(vis) || [])[idx];
     if (!w) return null;
     if (w.sold) { this.say('Already sold. The blanket has a bare patch where it sat.'); return null; }
@@ -3586,8 +3672,8 @@
     // before the pack does. If the pack can't cover the remainder, the tab
     // spend is rolled back — no partial purchases.
     // CONFRONTATION DISCOUNT: shamed hawkers cut prices until they leave.
-    let price = w.price;
-    if (vis.confrontDiscount && vis.confrontDiscount < 1) price = Math.max(1, Math.round(price * vis.confrontDiscount));
+    const quotedPrice = this.goodsTradePrice(w.price, vis);
+    let price = quotedPrice;
     const tabUsed = Math.min(vis.credit || 0, price);
     vis.credit = (vis.credit || 0) - tabUsed;
     price -= tabUsed;
@@ -3595,7 +3681,7 @@
     if (price > 0) pay = this.traderPay(price);
     if (!pay.ok) {
       vis.credit = (vis.credit || 0) + tabUsed; // roll back
-      this.say(`${vis.name} shakes their head. "${w.price} kcal of finished food for the ${w.name} — and you're about ${pay.short} short${tabUsed ? ` even after your ${tabUsed} tab` : ''}. The smoked stuff counts extra, if you've got any."`);
+      this.say(`${vis.name} shakes their head. "${quotedPrice} kcal of finished food for the ${w.name} — and you're about ${pay.short} short${tabUsed ? ` even after your ${tabUsed} tab` : ''}. The smoked stuff counts extra, if you've got any."`);
       return null;
     }
     w.sold = true;
@@ -3607,20 +3693,22 @@
     if (w.scam && !w.scam.discovered) {
       if (w.scam.kind === 'overprice' && savvy >= 3) {
         w.scam.discovered = true;
-        this.say(`(You've bought enough on the road to know: ${w.scam.truePrice} is the honest price for this. They're asking ${w.price}.)`);
+        this.say(`(You've bought enough on the road to know: ${this.goodsTradePrice(w.scam.truePrice, vis)} is the honest price for this. They're asking ${quotedPrice}.)`);
       } else if (w.scam.kind === 'tier_lie' && savvy >= 5) {
         w.scam.discovered = true;
         this.say(`(The "tier ${w.scam.advertisedTier}" sigil looks painted on. Your gut says tier ${w.scam.trueTier}, tops.)`);
       }
       // ledger it either way — a sharp villager may notice later
       const entry = this.recordScam(vis.name, vis.id, w.scam.kind, w.name);
-      entry.paid = w.price; entry.advertisedTier = w.scam.advertisedTier;
+      entry.paid = quotedPrice; entry.advertisedTier = w.scam.advertisedTier;
       entry.discovered = !!w.scam.discovered;
       w.scam.ledgerId = entry.id;
     }
     try { this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1; } catch (e) {}
+    let marketItem = null;
     if (w.kind === 'alien') {
       const granted = this.alienLootGrant(w.itemId);
+      marketItem = granted && granted.entry;
       // tier lie rides on the granted item — revealed at first use
       if (w.scam && w.scam.kind === 'tier_lie' && granted && granted.entry) {
         granted.entry.scamTierLie = true;
@@ -3643,7 +3731,8 @@
       this.say(`Done. The ${w.name} ${w.units > 1 ? `(${w.units} rations)` : ''} ${w.units > 1 ? 'are' : 'is'} yours —${tabNote}${took ? ' ' + took : ''} for ${w.units > 1 ? 'them' : 'it'}. "Eat well on the road."`);
     } else if (w.kind === 'tool') {
       const def = (this.data.items || []).find(i => i.id === w.itemId) || {};
-      (this.state.scholar.inventory = this.state.scholar.inventory || []).push({ itemId: w.itemId, name: w.name, units: 1, kcalEach: 0, kg: def.kg || 0.8 });
+      marketItem = { itemId: w.itemId, name: w.name, units: 1, kcalEach: 0, kg: def.kg || 0.8 };
+      (this.state.scholar.inventory = this.state.scholar.inventory || []).push(marketItem);
       this.say(`Done. The ${w.name} is yours —${tabNote}${took ? ' ' + took : ''} for it. Good steel has a way of paying for itself.`);
     } else {
       // news: real village names from the world, a road tip, word spreads
@@ -3655,6 +3744,9 @@
         ? `${vis.name} sketches a map in the dirt: "${named.join(' — ')}. Three days if the road's kind. There's orchards gone wild halfway; eat your fill, nobody's claimed them." Word of Haven travels a little further, too.`
         : `${vis.name} sketches a map in the dirt: "Two villages down the river — you'll smell their smoke before you see them. There's orchards gone wild halfway; eat your fill, nobody's claimed them." Word of Haven travels a little further, too.`);
     }
+    if (marketItem) this.recordMarketExchange(buyerId, { route: 'cart', role: 'buyer',
+      partner: vis.id, item: w.itemId, price: quotedPrice, packKcal: pay.paid, tabKcal: tabUsed, pantryKcal: 0 }, marketItem);
+    this.creditGoodsTrade(buyerId, quotedPrice);
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
     try { this.tickAction(8); } catch (e) {}
     return true;
@@ -3690,7 +3782,7 @@
           this.visitorWares(vis).map((w, i) => {
             let spr = '';
             try { const f = window.Scattering && window.Scattering.itemSpriteHtml; if (f && w.itemId) spr = f({ id: w.itemId }); } catch (e) {}
-            return `<span class="small">· ${spr}<b>${w.name}</b> — ${w.price} kcal${w.kg ? ` · ${w.kg} kg` : ''}${w.sold ? ' <i>(sold)</i>' : ` <button class="btn ghost sm" data-ware-buy="${vis.id}:${i}">Buy</button>`}<br><span style="opacity:.7">${w.blurb}</span></span>`;
+            return `<span class="small">· ${spr}<b>${w.name}</b> — ${this.goodsTradePrice(w.price, vis)} kcal${w.kg ? ` · ${w.kg} kg` : ''}${w.sold ? ' <i>(sold)</i>' : ` <button class="btn ghost sm" data-ware-buy="${vis.id}:${i}">Buy</button>`}<br><span style="opacity:.7">${w.blurb}</span></span>`;
           }).join('<br>');
       }
       if (this.tradeSpirit(vis) > 0 && vis.selling) {
@@ -4452,7 +4544,7 @@
         if (!((pc.accused || []).includes(accusedId))) continue;
         if (pc.charge === charge || (want === 'violence' && cls(pc.charge) === 'violence')) n++;
       }
-    } catch (e) {}
+    } catch (e) { console.warn('[justice] conviction ledger', e); }
     return n;
   },
   seedAccuserStory(c) {
@@ -5069,7 +5161,10 @@
           const meal = _capdraw2 ? Math.min(meal0, Math.max(0, _cap - (s.kcal || 0))) : meal0;
           ov.pantryKcal = Math.max(0, (ov.pantryKcal || 0) - meal);
           // BANK CAP (break-it food r3 2026-10-08): kcalCap() is the one number.
+          const nourishment=Math.max(0,Math.min(meal,_cap-(s.kcal || 0)));
           s.kcal = Math.min((s.kcal || 0) + meal, _cap);
+          this.queueHarvestMeal(this.captureIntakeEater(this.villagerId),{taken:meal,
+            items:[{item:{},units:1,effectiveKcal:meal}]},'guest-pantry',nourishment);
           this.say(`Village meal at ${ov.name}: +${meal} kcal. ` +
             (onProb ? `Probation portions — half shares until they vote you in (${this.pluralize(Math.max(0, s.probation.daysLeft), 'day')} left).`
                     : `New mouths eat last — earn their trust for full shares. (Trust ${Math.round(ov.trust || 0)}/15.)`));

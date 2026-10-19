@@ -24,24 +24,10 @@
 //   F. PREY-AI (data probe): every flee-capable behavior resolves a sane
 //      encPreyCfg (notice > 0) — prey that can't notice can't flee.
 //
-// Harness: mulberry32, SEED env override (default 20261009), full src/js
-// module list in index.html order minus DOM-only files and drama.js, window
-// stubbed for eval then deleted, Math.random seeded BEFORE eval.
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+// Shared harness: current browser module order, seeded RNG and frozen clock.
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '20261009', 10);
-Math.random = mulberry32(SEED);
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\"'\"'\"']*\\.js' index.html | head -80", { cwd: ROOT }).toString().split('\n')
-  .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
-global.window = global;
-global.document = { getElementById: () => null, createElement: () => ({ textContent: '', innerHTML: '', style: {}, setAttribute() {}, appendChild() {} }), head: { appendChild() {} }, body: {} };
-order.forEach(f => { try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); } catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); } });
-delete global.window; delete global.document;
-const Game = globalThis.Scattering.Game;
+let Game;
 
 const fails = [];
 function check(name, cond, detail) {
@@ -51,7 +37,9 @@ function check(name, cond, detail) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: SEED });
+  // Bear parasite expectations describe the eastern woodland food chain.
+  Game.debugRegion = 'na_eastern_woodlands';
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();

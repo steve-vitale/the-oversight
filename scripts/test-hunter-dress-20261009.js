@@ -19,29 +19,9 @@
 //   same yields/risks/parts, rotten refused at the gate (no cost), no knife
 //   needed (that is the ability's value), card text honored.
 // Usage: node scripts/test-hunter-dress-20261009.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '20261009', 10);
-Math.random = mulberry32(SEED);
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-const ORDER = ['src/js/engine/state.js','src/js/engine/modifiers.js','src/js/engine/calories.js',
- 'src/js/engine/day.js','src/js/engine/forage.js','src/js/engine/combat.js',
- 'src/js/game.js','src/js/encounters.js','src/js/conversation.js','src/js/convo-mood.js',
- 'src/js/convoTopics.js','src/js/convo-wants.js','src/js/convo-dialogue.js','src/js/convo-beats.js',
- 'src/js/convo-scene.js','src/js/examine.js','src/js/equipment.js','src/js/journal.js','src/js/party.js',
- 'src/js/party-formal.js','src/js/truth.js','src/js/contests.js','src/js/contestEngine.js',
- 'src/js/alienPlayers.js','src/js/storage.js','src/js/perceive.js','src/js/carexplore.js',
- 'src/js/justice.js','src/js/food.js','src/js/betrayal.js','src/js/corpses.js','src/js/lifeseed.js',
- 'src/js/progression.js','src/js/ledger.js','src/js/abilityActions.js','src/js/monsterBehaviors.js',
- 'src/js/statusEffects.js','src/js/villager-agency.js','src/js/fieldFights.js',
- 'src/js/villager-objectives.js','src/js/codex-people.js','src/js/membership.js',
- 'src/js/hierarchy.js','src/js/debug-scenarios.js','src/js/build.js'];
-for (const f of ORDER) eval(fs.readFileSync(path.join(ROOT, f), 'utf8'));
-delete global.window;
-const Game = globalThis.Scattering.Game;
+let Game;
 
 let pass = 0, fail = 0;
 const fails = [];
@@ -71,7 +51,9 @@ function mkCarcass(s, id, kcal, spoilOffset) {
 function dress(s) { return Game.useAbility('field_dressing', 'dress_game'); }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: SEED, narration: true });
+  // Bear parasite expectations describe the eastern woodland food chain.
+  Game.debugRegion = 'na_eastern_woodlands';
 
   console.log('== D1. ROTTEN CARCASS (spoilage bypass) ==');
   {
@@ -114,9 +96,9 @@ function dress(s) { return Game.useAbility('field_dressing', 'dress_game'); }
       // fraction, not a flat 40%. Skill earns; the gross stays 30000.
       const yf = Game.butcherYieldFrac('hunted');
       const expNet = Math.round(30000 * yf);
-      const expUnits = Math.max(1, Math.round(expNet / 500));
+      const expUnits = Math.max(1, Math.ceil(expNet / 500));
       check('bear: portion law at the honest yield fraction (' + expUnits + ' x ~500 kcal)',
-        meat.units === expUnits && Math.abs(meat.kcalEach - Math.round(expNet / expUnits)) <= 1,
+        meat.units === expUnits && meat.kcalEach <= 500 && Math.abs(meat.kcalEach - Math.round(expNet / expUnits)) <= 1,
         `units=${meat.units} kcalEach=${meat.kcalEach} (expected ${expUnits} x ~${Math.round(expNet / expUnits)})`);
       check('bear: cleaned total never exceeds the 30000 gross',
         meat.units * meat.kcalEach <= 30000, `total=${meat.units * meat.kcalEach}`);

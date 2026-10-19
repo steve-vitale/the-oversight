@@ -1,225 +1,185 @@
 #!/usr/bin/env node
-// PROOF (sharcensus arm, 2026-10-14): the per-villager meal census instrument.
-//
-// Synthetic fixture (identical in RED and GREEN): a fresh village (seed 42),
-// one direct Game.villageEats() call, with:
-//   - every villager trust=5 (low) — the trust channel under test
-//   - one villager severed (v.severed) — the exile skip path
-//   - one villager away (v.away) — the away-pack path
-//   - hunger pinned high, pantry topped full
-//
-// RED (PHASE=red, pristine engine, no instrument): the engine's raw
-//   villagerMealDay return {ate, gave, drawn, fasting} is all an observer
-//   gets. A naive classifier over raw returns can name NO engine path —
-//   attribution coverage is 0% and the diagnostic GO (>=80% of
-//   starved-villager-days attributed) is unmeasurable. The RED run asserts
-//   the gap: coverage < 80% MUST hold on pristine; if it ever doesn't, the
-//   instrument is pointless and RED fails loudly.
-// GREEN (PHASE=green, default): installShareCensus(Game) installed — every
-//   row carries a real engine path, trust/trustFactor/gave are recorded,
-//   the trust->sharing channel is measured A/B (trust 5 vs 90, same seed),
-//   and skips are recorded.
-// HONESTY (PHASE=honesty): 4 seeds x 30d leadcourt in-process A/B
-//   (instrumented vs pristine) — trajectory hashes must be byte-identical:
-//   the instrument observes without perturbing RNG or behavior.
-//
-// Usage:
-//   PHASE=red     node scripts/test-sharcensus-20261014.js   # gap proven
-//   PHASE=green   node scripts/test-sharcensus-20261014.js   # instrument works
-//   PHASE=honesty node scripts/test-sharcensus-20261014.js   # no perturbation
-//   (default PHASE=all runs red -> green -> honesty in one process)
 'use strict';
+// Prepared meal paths + independent shared-harness observer A/B proof.
+// Each child loads exactly one world. No gameplay methods are stubbed.
 const assert = require('assert');
+const { execFileSync } = require('child_process');
+const { createHash } = require('crypto');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { installShareCensus, classify } = require('./sharcensus-20261014');
 const { leadcourt } = require('./policies/leadcourt');
-
-const SEED = 42;
-const REAL_PATHS = new Set(['voluntary-fast', 'self-fed', 'pantry-fresh',
+const seed = Number(process.env.SEED || 42);
+const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+const realPaths = new Set(['voluntary-fast', 'self-fed', 'pantry-fresh',
   'desperation-spoiled', 'away-pack', 'away-pack-empty']);
-const SKIP_PATHS = new Set(['nonmember-withheld', 'dead-skipped', 'player-parity']);
-
-// Naive classifier over RAW engine returns only — what an observer gets
-// without the instrument. Honest about its blindness: it cannot see which
-// draw function ran, whether the villager was away, or what trust did.
-function classifyRaw(raw) {
-  return 'unknown'; // the engine return names no path; anything else is a guess
+let pass = 0;
+function check(name, condition) { assert(condition, name); pass++; console.log('  ok ' + name); }
+function child(kind, extra = {}) {
+  const stdout = execFileSync(process.execPath, [__filename], {
+    env: { ...process.env, CENSUS_CHILD: kind, ...extra }, encoding: 'utf8', maxBuffer: 8e6,
+  });
+  const marker = stdout.split('\n').find(line => line.startsWith('CENSUS_RESULT '));
+  assert(marker, 'child returned a result: ' + kind);
+  process.stdout.write(stdout.split('\n').filter(line => !line.startsWith('CENSUS_RESULT ')).join('\n'));
+  return JSON.parse(marker.slice('CENSUS_RESULT '.length));
 }
-
-function topUpPantry(Game, targetKcal) {
-  const v = Game.state.village;
-  v.pantry = v.pantry || [];
-  let kcal = v.pantry.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
-  if (kcal < targetKcal) Game.stockPantry(targetKcal - kcal, 'Dried meat', { foodState: 'preserved' });
-}
-
-function pinHunger(Game, val) {
-  const v = Game.state.village;
-  for (const id of (v.roster || [])) {
-    try { const n = Game.npcNeeds(id); n.hunger = val; } catch (e) {}
-  }
-}
-
-function setAllTrust(Game, t) {
-  const v = Game.state.village;
-  v.trust = v.trust || {};
-  for (const id of (v.roster || [])) v.trust[id] = t;
-}
-
-// Fixture: fresh world, trust pinned, one severed, one away, hunger high,
-// pantry full. Returns { Game, exiledVid, awayVid }.
 async function fixture(trust) {
-  const { Game } = await loadGame({ seed: SEED, mode: 'sharcensus-proof' });
+  const { Game, loadFails } = await loadGame({ seed, mode: 'sharcensus-proof' });
+  assert.equal(loadFails.length, 0, 'no module load failures');
   await setupGame(Game);
   const v = Game.state.village;
-  setAllTrust(Game, trust);
-  topUpPantry(Game, 60000);
-  pinHunger(Game, 95);
-  const npcs = (v.roster || []).filter(id => id !== Game.villagerId);
-  assert(npcs.length >= 3, 'fixture needs >=3 NPCs');
-  const exiledVid = npcs[0], awayVid = npcs[1];
-  v.severed = v.severed || {}; v.severed[exiledVid] = true; // engine-real exile flag
-  v.away = v.away || {}; v.away[awayVid] = true;
-  return { Game, exiledVid, awayVid };
-}
-
-function trajHash(Game) {
-  const v = Game.state.village || {};
-  const s = Game.state.scholar || {};
-  const pk = (v.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
-  const h = JSON.stringify({
-    day: s.day || 0,
-    pk: Math.round(pk),
-    roster: (v.roster || []).length,
-    sk: Math.round(s.kcal || 0),
-    health: v.health || {},
-    wave: (Game.progState ? (Game.progState().wave || 0) : 0),
-  });
-  let x = 0;
-  for (let i = 0; i < h.length; i++) x = ((x * 31) + h.charCodeAt(i)) >>> 0;
-  return x.toString(16);
-}
-
-let pass = 0;
-function check(name, cond, detail) {
-  if (!cond) { console.error(`  FAIL ${name}${detail ? ' — ' + detail : ''}`); throw new Error('proof failed: ' + name); }
-  pass++;
-  console.log(`  ok ${name}${detail ? ' — ' + detail : ''}`);
-}
-
-async function phaseRed() {
-  console.log('PHASE RED (pristine engine — the measurement gap must be real)');
-  const { Game, exiledVid } = await fixture(5);
-  // pristine: record ONLY the raw engine returns (what any observer gets)
-  const rawRows = [];
-  const oMealDay = Game.villagerMealDay;
-  Game.villagerMealDay = function (vid, person, v, ctx) {
-    const r = oMealDay.apply(this, arguments);
-    if (vid !== this.villagerId) rawRows.push({ ate: r.ate, gave: r.gave, drawn: r.drawn, fasting: !!r.fasting });
-    return r;
-  };
-  await quietLog(async () => { Game.villageEats(); });
-  Game.villagerMealDay = oMealDay;
-  check('raw returns observed', rawRows.length > 5, `n=${rawRows.length}`);
-  const attributed = rawRows.filter(r => classifyRaw(r) !== 'unknown').length;
-  const coverage = attributed / rawRows.length;
-  check('RED gap: raw returns attribute nothing', coverage < 0.8,
-    `coverage=${(coverage * 100).toFixed(1)}% (need <80% for the gap to be real)`);
-  check('RED gap: trust invisible in raw returns', !('trust' in rawRows[0]),
-    'no trust field — the trust->sharing channel is unmeasurable pristine');
-  check('RED gap: exile skip invisible', true, // pristine: the severed villager simply never appears
-    `severed ${String(exiledVid).slice(0, 8)} left no trace in raw returns`);
-  console.log(`RED CONFIRMED: ${rawRows.length} raw meal returns, 0 attributable — the instrument fills a real gap.`);
-}
-
-async function phaseGreen() {
-  console.log('PHASE GREEN (instrument installed — attribution must work)');
-  const { Game, exiledVid, awayVid } = await fixture(5);
-  const cen = installShareCensus(Game);
-  await quietLog(async () => { Game.villageEats(); });
-  const v = Game.state.village;
-  const npcCount = (v.roster || []).filter(id => id !== Game.villagerId).length;
-  const withheld = cen.skips.filter(s => s.path === 'nonmember-withheld').length;
-  check('one row per meal attempt (rows + withheld skips = npcs)', cen.rows.length + withheld === npcCount,
-    `rows=${cen.rows.length} withheld=${withheld} npcs=${npcCount}`);
-  const bad = cen.rows.filter(r => !REAL_PATHS.has(r.path));
-  check('every row names a real engine path', bad.length === 0,
-    bad.length ? `bad: ${JSON.stringify(bad.slice(0, 2))}` : `${cen.rows.length}/${cen.rows.length}`);
-  const skipPaths = cen.skips.map(s => s.path);
-  check('exile skip recorded as nonmember-withheld',
-    skipPaths.includes('nonmember-withheld') &&
-    cen.skips.some(s => String(s.vid) === String(exiledVid) && s.path === 'nonmember-withheld'));
-  const awayRow = cen.rows.find(r => String(r.vid) === String(awayVid));
-  check('away villager took the away-pack path', !!awayRow && awayRow.path.indexOf('away-pack') === 0,
-    awayRow ? awayRow.path : 'no row');
-  const tfBad = cen.rows.filter(r => r.trust !== 5 || r.trustFactor !== 0.2);
-  check('trust/trustFactor recorded (5 -> 0.2, pantry full, no crisis doubling)', tfBad.length === 0,
-    tfBad.length ? JSON.stringify(tfBad[0]) : 'all rows trust=5 tf=0.2');
-  // starved-day attribution coverage (the diagnostic GO shape)
-  const starved = cen.rows.filter(r => { const c = classify(r); return c.starved; });
-  const unattributed = starved.filter(r => { const c = classify(r); return !c.starvePath || c.starvePath === 'other-short'; });
-  const cov = starved.length ? 1 - unattributed.length / starved.length : 1;
-  check('starved-day attribution coverage >= 80%', cov >= 0.8,
-    `starved=${starved.length} unattributed=${unattributed.length}`);
-  // trust->sharing channel A/B: same seed, trust 5 vs 90, whole-day villageEats
-  const runTrust = async (t) => {
-    const f = await fixture(t);
-    const c2 = installShareCensus(f.Game);
-    await quietLog(async () => { f.Game.villageEats(); });
-    const gave = c2.rows.reduce((s, r) => s + (r.gave || 0), 0);
-    const tf = c2.rows.length ? c2.rows[0].trustFactor : null;
-    return { gave, tf };
-  };
-  const lo = await runTrust(5), hi = await runTrust(90);
-  check('trustFactor recorded per arm', lo.tf === 0.2 && hi.tf === 1.0, `lo=${lo.tf} hi=${hi.tf}`);
-  if (lo.gave > 0 || hi.gave > 0) {
-    check('sharing scales with trust (the #115 channel, measured)',
-      hi.gave >= lo.gave * 2, `gave lo=${Math.round(lo.gave)} hi=${Math.round(hi.gave)}`);
-  } else {
-    console.log('  note: no surplus produced on this fixture day — trust channel unmeasurable here (gave=0 both arms)');
+  const npcs = v.roster.filter(id => id !== Game.villagerId);
+  assert(npcs.length >= 5, 'fixture needs five NPCs');
+  const [exiledVid, awayVid, emptyVid, producerVid, homeVid] = npcs;
+  v.trust ||= {}; v.health ||= {}; v.away ||= {}; v.severed ||= {};
+  for (const id of npcs) { v.trust[id] = trust; Game.npcNeeds(id).hunger = 95; }
+  Game.stockPantry(60000, 'Dried meat', { foodState: 'preserved' });
+  v.severed[exiledVid] = true;
+  // Actual identity/health inputs guarantee a shortage, rather than assuming
+  // that away=true prevents self-feeding. Both packs contain real pantry food.
+  for (const id of [awayVid, emptyVid, homeVid]) {
+    const p = Game.getPerson(id);
+    p.formerOccupation = 'programmer'; p.age = 75; p.mentorBonus = 0;
+    v.health[id] = 1;
   }
-  // path distribution sanity on the fixture
-  const dist = {};
-  for (const r of cen.rows) dist[r.path] = (dist[r.path] || 0) + 1;
-  console.log('  fixture path distribution: ' + JSON.stringify(dist));
-  console.log(`GREEN: ${cen.rows.length} rows attributed, ${cen.skips.length} skips recorded.`);
-}
-
-async function phaseHonesty() {
-  console.log('PHASE HONESTY (instrument must not perturb trajectories)');
-  const seeds = [11, 22, 33, 44];
-  for (const seed of seeds) {
-    const run = async (armed) => {
-      const { Game } = await loadGame({ seed, mode: 'sharcensus-honesty' });
-      await setupGame(Game);
-      let cen = null;
-      if (armed) cen = installShareCensus(Game);
-      const hashes = [];
-      const policy = Object.assign({}, leadcourt, {
-        daily(G, ctx) {
-          try { hashes.push(trajHash(G)); } catch (e) {}
-          return leadcourt.daily(G, ctx);
-        },
-      });
-      let result;
-      await quietLog(async () => { result = await runDays(Game, policy, { days: 30, manifest: undefined, sampleEvery: 10 }); });
-      if (cen) cen.uninstall();
-      return { hashes: hashes.join('|'), days: result.days, end: result.endReason };
-    };
-    const a = await run(false), b = await run(true);
-    check(`seed ${seed}: armed trajectory byte-identical to pristine`,
-      a.hashes === b.hashes,
-      `days ${a.days}/${b.days} end ${a.end}/${b.end}${a.hashes === b.hashes ? '' : ' — DIVERGED (see #113 caveat)'}`);
+  for (const id of [awayVid, emptyVid]) {
+    v.away[id] = true;
+    const packed = Game.packKcal(id);
+    assert(packed > 100, 'actual ration was packed');
+    Game.packSpend(id, packed - (id === awayVid ? 100 : 0));
   }
-  console.log('HONESTY: instrument adds zero RNG consumption and zero behavior change.');
+  // A prepared knowledgeable farmer guarantees genuine surplus in both trust
+  // arms. This changes fixture inputs, never the production or meal function.
+  const producer = Game.getPerson(producerVid);
+  producer.formerOccupation = 'farmer'; producer.age = 35; producer.mentorBonus = 0;
+  producer.personality = { ...producer.personality, temperament: 'steady' };
+  v.health[producerVid] = 100;
+  v.taught ||= {}; v.taught[producerVid] = Game.data.plants.slice(0, 8).map(p => p.id);
+  assert(Game.villagerExpectedDaily(producer, producerVid, v) * 0.9 > (producer.kcalPerDay || 2000),
+    'farmer produces a surplus even on minimum steady grit');
+  return { Game, exiledVid, awayVid, emptyVid, producerVid, homeVid };
 }
-
+async function meal(armed, trust = 5) {
+  const f = await fixture(trust), { Game } = f;
+  const seen = [], original = Game.villagerMealDay;
+  Game.villagerMealDay = function (vid) {
+    const result = original.apply(this, arguments);
+    seen.push({ vid: String(vid), result }); return result;
+  };
+  const methods = ['villageEats', 'villagerMealDay', 'pantryDraw', 'drawSpoiled', 'packMeal'];
+  const saved = methods.map(name => Game[name]);
+  const census = armed ? installShareCensus(Game) : null;
+  // A lethal meal now removes the actual resident during villageEats. Meal
+  // attempts are denominated by people present before eating, not survivors.
+  const initialNpcIds = Game.state.village.roster.filter(id => id !== Game.villagerId);
+  try { await quietLog(async () => Game.villageEats()); }
+  finally {
+    if (census) census.uninstall();
+    methods.forEach((name, i) => assert.strictEqual(Game[name], saved[i], name + ' restored'));
+    Game.villagerMealDay = original;
+  }
+  const result = { seen, ids: Object.fromEntries(Object.entries(f).filter(([k]) => k !== 'Game')),
+    initialNpcIds,
+    rows: census ? census.rows : [], skips: census ? census.skips : [], state: digest(Game.state) };
+  assert.strictEqual(Game.villagerMealDay, original, 'meal wrapper restored');
+  return result;
+}
+async function trustStock() {
+  const { Game, producerVid } = await fixture(5), v = Game.state.village;
+  if (process.env.CENSUS_EMPTY === '1') v.pantry = [];
+  else for (const item of v.pantry) item.spoilDay = -1000;
+  const original = Game.villagerDayProduction;
+  let produced;
+  Game.villagerDayProduction = function () { produced = original.apply(this, arguments); return produced; };
+  const census = installShareCensus(Game);
+  let result;
+  try { result = Game.villagerMealDay(producerVid, Game.getPerson(producerVid), v, { cookId: null }); }
+  finally { census.uninstall(); Game.villagerDayProduction = original; }
+  const row = census.rows[0];
+  assert(produced > row.need && result.gave > 0, 'trust stock fixture has actual surplus');
+  return { row, produced, actualFactor: result.gave / (produced - row.need) };
+}
+async function campaign() {
+  const { Game, loadFails } = await loadGame({ seed, mode: 'sharcensus-honesty' });
+  assert.equal(loadFails.length, 0, 'no module load failures');
+  await setupGame(Game);
+  const armed = process.env.CENSUS_ARMED === '1';
+  const census = armed ? installShareCensus(Game) : null;
+  const hashes = [], warnings = [], warn = console.warn;
+  console.warn = (...args) => { warnings.push(args.map(String).join(' ')); warn(...args); };
+  const snapshot = () => digest({ state: Game.state, over: Game.over, won: Game.won,
+    dayPart: Game.dayPart, villagerId: Game.villagerId,
+    tbfight: Game.tbfight, pendingEncounter: Game.pendingEncounter });
+  const policy = { ...leadcourt, daily(G, ctx) { hashes.push(snapshot()); return leadcourt.daily(G, ctx); } };
+  let result;
+  try { await quietLog(async () => { result = await runDays(Game, policy, { days: 30, sampleEvery: 10 }); }); }
+  finally { if (census) census.uninstall(); console.warn = warn; }
+  hashes.push(snapshot());
+  return { seed, hashes, days: result.days, gameDays: result.gameDays, end: result.endReason,
+    randomTail: Array.from({ length: 16 }, () => Math.random()), warnings,
+    rows: census ? census.rows.length : 0 };
+}
 async function main() {
+  const task = process.env.CENSUS_CHILD;
+  if (task) {
+    // Match the harness's frozen Date with a fixed wall-clock telemetry source.
+    // Pacing reads performance.now(); actual elapsed milliseconds are not a game input.
+    Object.defineProperty(globalThis, 'performance', { configurable: true, value: { now: () => 0 } });
+    const result = task === 'campaign' ? await campaign() : task === 'trust-stock' ? await trustStock() : await meal(task === 'armed', Number(process.env.CENSUS_TRUST || 5));
+    console.log('CENSUS_RESULT ' + JSON.stringify(result)); return;
+  }
   const phase = process.env.PHASE || 'all';
-  if (phase === 'all' || phase === 'red') await phaseRed();
-  if (phase === 'all' || phase === 'green') await phaseGreen();
-  if (phase === 'all' || phase === 'honesty') await phaseHonesty();
-  console.log(`\nPROOF ${phase.toUpperCase()}: ${pass}/${pass} checks green`);
+  assert(['all', 'red', 'green', 'honesty'].includes(phase), 'known PHASE');
+  if (phase === 'all' || phase === 'red' || phase === 'green') {
+    const pristine = child('pristine');
+    const raw = pristine.seen.map(r => r.result);
+    check('raw returns observed', raw.length > 5);
+    check('raw meal returns have no path or trust fields', raw.every(r => !('path' in r) && !('trust' in r)));
+    check('severed villager has no pristine meal call', !pristine.seen.some(r => r.vid === pristine.ids.exiledVid));
+    if (phase !== 'red') {
+      const low = child('armed'), high = child('armed', { CENSUS_TRUST: '90' });
+      check('prepared fixture observer leaves full state unchanged', pristine.state === low.state);
+      const { rows, skips, ids } = low;
+      const mealIds = rows.map(r => r.vid).concat(skips.filter(r => r.path === 'nonmember-withheld').map(r => r.vid));
+      check('exactly one attempt or withheld skip per initial NPC, including real meal deaths',
+        mealIds.length === low.initialNpcIds.length && new Set(mealIds).size === mealIds.length &&
+        low.initialNpcIds.every(id => mealIds.includes(id)));
+      check('every observed meal names a real path', rows.every(r => realPaths.has(r.path)));
+      check('exile is recorded as withheld', skips.some(r => r.vid === ids.exiledVid && r.path === 'nonmember-withheld'));
+      const row = id => rows.find(r => r.vid === id);
+      check('short ration takes actual away-pack path', row(ids.awayVid)?.path === 'away-pack' && row(ids.awayVid).drew === 100);
+      check('empty ration takes actual away-pack-empty path', row(ids.emptyVid)?.path === 'away-pack-empty' && row(ids.emptyVid).drew === 0);
+      check('home shortage draws actual fresh pantry food', row(ids.homeVid)?.path === 'pantry-fresh' && row(ids.homeVid).drew > 0);
+      check('surplus producer self-feeds without a draw', row(ids.producerVid)?.path === 'self-fed' && row(ids.producerVid).drew === 0);
+      check('low trust is recorded on every meal', rows.every(r => r.trust === 5 && r.trustFactor === 0.2));
+      const starved = rows.filter(r => classify(r).starved);
+      check('attribution includes actual starvation', starved.length >= 2);
+      check('starved-day attribution coverage >=80%', starved.filter(r => classify(r).starvePath !== 'other-short').length / starved.length >= 0.8);
+      check('short and empty away starvation are distinct', classify(row(ids.awayVid)).starvePath === 'away-pack-short' && classify(row(ids.emptyVid)).starvePath === 'away-pack-empty');
+      const lo = row(ids.producerVid), hi = high.rows.find(r => r.vid === high.ids.producerVid);
+      check('trust arms have actual positive surplus', lo.gave > 0 && hi.gave > 0);
+      check('trust factors follow both arms', lo.trustFactor === 0.2 && hi.trustFactor === 1);
+      check('same farmer shares five times as much at high trust', Math.abs(hi.gave - lo.gave * 5) < 1e-6);
+      const spoiled = child('trust-stock'), empty = child('trust-stock', { CENSUS_EMPTY: '1' });
+      check('spoiled-stock trust factor matches actual sharing', Math.abs(spoiled.row.trustFactor - spoiled.actualFactor) < 1e-9);
+      check('spoiled stock is distinguished from fresh stock', spoiled.row.pantryFreshBefore === 0 && spoiled.row.pantryTotalBefore >= 5000 && spoiled.row.trustFactor === 0.2);
+      check('empty-stock crisis factor matches actual sharing', Math.abs(empty.row.trustFactor - empty.actualFactor) < 1e-9 && empty.row.trustFactor === 0.4);
+      console.log('  measured paths ' + JSON.stringify(rows.reduce((out, r) => { out[r.path] = (out[r.path] || 0) + 1; return out; }, {})));
+    }
+  }
+  if (phase === 'all' || phase === 'honesty') {
+    for (const s of [11, 22, 33, 44]) {
+      const a = child('campaign', { SEED: String(s), CENSUS_ARMED: '0' });
+      const b = child('campaign', { SEED: String(s), CENSUS_ARMED: '1' });
+      console.log('  neutrality receipt ' + JSON.stringify({ seed: s, pristine: a, observed: b }));
+      check(`seed ${s}: observer saw real meals`, b.rows > 0);
+      check(`seed ${s}: daily and final full-state hashes match`, digest(a.hashes) === digest(b.hashes));
+      check(`seed ${s}: days and ending match`, a.days === b.days && a.gameDays === b.gameDays && a.end === b.end);
+      check(`seed ${s}: RNG continuation matches`, digest(a.randomTail) === digest(b.randomTail));
+      check(`seed ${s}: no campaign warnings`, a.warnings.length === 0 && b.warnings.length === 0);
+      console.log(`  observed ${a.hashes.length} snapshots; days=${a.days}, end=${a.end}`);
+    }
+  }
+  console.log(`PROOF ${phase.toUpperCase()}: ${pass}/${pass} checks green`);
 }
-
-main().catch(e => { console.error('PROOF FAILED: ' + e.message); process.exit(1); });
+main().catch(error => { console.error(error.stack); process.exitCode = 1; });

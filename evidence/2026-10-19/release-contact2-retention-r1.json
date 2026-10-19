@@ -1,0 +1,2803 @@
+{
+  "rawJobs": 284,
+  "sourceBlobs": 246,
+  "panels": [
+    {
+      "name": "before-r1",
+      "played": 64,
+      "excluded": 0
+    },
+    {
+      "name": "after-intermediate-r1",
+      "played": 64,
+      "excluded": 0
+    },
+    {
+      "name": "after-r1",
+      "played": 64,
+      "excluded": 0
+    },
+    {
+      "name": "carpenter-before-r1",
+      "played": 0,
+      "excluded": 16
+    },
+    {
+      "name": "carpenter-after-r1",
+      "played": 0,
+      "excluded": 16
+    },
+    {
+      "name": "region-before-r2",
+      "played": 16,
+      "excluded": 0
+    },
+    {
+      "name": "region-after-r2",
+      "played": 16,
+      "excluded": 0
+    }
+  ],
+  "controllerRule": "Identical corrected Finale parser/preferences on both Game roots; old published controller is not presented as the baseline for a Game-only effect.",
+  "outcomes": [
+    {
+      "policy": "capable",
+      "beforeWins": 13,
+      "afterWins": 13,
+      "beforeDeaths": 43,
+      "afterDeaths": 48
+    },
+    {
+      "policy": "maker",
+      "beforeWins": 8,
+      "afterWins": 7,
+      "beforeDeaths": 26,
+      "afterDeaths": 32
+    },
+    {
+      "policy": "merchant",
+      "beforeWins": 5,
+      "afterWins": 5,
+      "beforeDeaths": 24,
+      "afterDeaths": 21
+    },
+    {
+      "policy": "caregiver",
+      "beforeWins": 11,
+      "afterWins": 10,
+      "beforeDeaths": 24,
+      "afterDeaths": 30
+    }
+  ],
+  "reviews": [
+    {
+      "group": "capable",
+      "policy": "capable",
+      "seed": 20007,
+      "firstObservedDifference": {
+        "day": 55,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/bearer",
+            "before": "gen_o10uar7",
+            "after": "gen_2m7dm2x"
+          },
+          {
+            "path": "/kcal",
+            "before": 1500,
+            "after": 2400
+          },
+          {
+            "path": "/godhood/hinted",
+            "before": "[absent]",
+            "after": {}
+          },
+          {
+            "path": "/godhood/capstoneUsed",
+            "before": "[absent]",
+            "after": {}
+          },
+          {
+            "path": "/roster/0",
+            "before": "gen_o10uar7",
+            "after": "gen_2m7dm2x"
+          },
+          {
+            "path": "/roster/1",
+            "before": "gen_xelsaf8",
+            "after": "gen_o10uar7"
+          },
+          {
+            "path": "/roster/2",
+            "before": "gen_06yn45v",
+            "after": "gen_xelsaf8"
+          },
+          {
+            "path": "/roster/3",
+            "before": "jorge_silva",
+            "after": "gen_06yn45v"
+          },
+          {
+            "path": "/roster/4",
+            "before": "miguel_santos",
+            "after": "jorge_silva"
+          },
+          {
+            "path": "/roster/5",
+            "before": "nathan_lee",
+            "after": "miguel_santos"
+          },
+          {
+            "path": "/roster/6",
+            "before": "app_mgpspho6199",
+            "after": "nathan_lee"
+          },
+          {
+            "path": "/roster/7",
+            "before": "[absent]",
+            "after": "app_mgpspho6199"
+          },
+          {
+            "path": "/healths/jorge_silva",
+            "before": 62,
+            "after": 78
+          },
+          {
+            "path": "/healths/miguel_santos",
+            "before": 95,
+            "after": 100
+          },
+          {
+            "path": "/healths/nathan_lee",
+            "before": 86,
+            "after": 92
+          },
+          {
+            "path": "/needs/gen_o10uar7/hunger",
+            "before": 46,
+            "after": 56
+          },
+          {
+            "path": "/needs/gen_o10uar7/fear",
+            "before": 85,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_o10uar7/social",
+            "before": 38,
+            "after": 24
+          },
+          {
+            "path": "/needs/gen_o10uar7/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/gen_xelsaf8/hunger",
+            "before": 41,
+            "after": 55
+          },
+          {
+            "path": "/needs/gen_xelsaf8/fear",
+            "before": 85,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_xelsaf8/social",
+            "before": 56,
+            "after": 42
+          },
+          {
+            "path": "/needs/gen_xelsaf8/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/gen_06yn45v/hunger",
+            "before": 50,
+            "after": 40
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/pantryKcal",
+          "before": 26541,
+          "after": 20239
+        },
+        {
+          "path": "/village/fallen/2/day",
+          "before": 55,
+          "after": 58
+        },
+        {
+          "path": "/village/fallen/3/villagerId",
+          "before": "gen_06yn45v",
+          "after": "gen_o10uar7"
+        },
+        {
+          "path": "/village/fallen/3/day",
+          "before": 59,
+          "after": 66
+        },
+        {
+          "path": "/village/fallen/3/cause",
+          "before": "monster",
+          "after": "combat"
+        },
+        {
+          "path": "/village/fallen/4/villagerId",
+          "before": "gen_o10uar7",
+          "after": "gen_06yn45v"
+        },
+        {
+          "path": "/village/fallen/4/day",
+          "before": 63,
+          "after": 66
+        },
+        {
+          "path": "/village/fallen/5/villagerId",
+          "before": "visjoin_87",
+          "after": "nathan_lee"
+        },
+        {
+          "path": "/village/fallen/5/day",
+          "before": 89,
+          "after": 74
+        },
+        {
+          "path": "/village/fallen/5/cause",
+          "before": "monster",
+          "after": "combat"
+        },
+        {
+          "path": "/village/fallen/6",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "visjoin_85",
+            "day": 86,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/pantry/0/name",
+          "before": "Tribute grain from Emberhold",
+          "after": "Foraged food"
+        },
+        {
+          "path": "/village/pantry/0/kcalEach",
+          "before": 500,
+          "after": 424
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 4,
+          "after": 1
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 105,
+          "after": 91
+        },
+        {
+          "path": "/village/pantry/0/kg",
+          "before": 0.01,
+          "after": 0.085
+        },
+        {
+          "path": "/village/pantry/0/granaryDays",
+          "before": "[absent]",
+          "after": 3
+        },
+        {
+          "path": "/village/pantry/1/name",
+          "before": "Tribute grain from Emberhold",
+          "after": "Foraged food"
+        },
+        {
+          "path": "/village/pantry/1/kcalEach",
+          "before": 313,
+          "after": 200
+        },
+        {
+          "path": "/village/pantry/1/units",
+          "before": 1,
+          "after": 31
+        },
+        {
+          "path": "/village/pantry/1/spoilDay",
+          "before": 105,
+          "after": 91
+        },
+        {
+          "path": "/village/pantry/1/kg",
+          "before": 0.01,
+          "after": 0.2
+        },
+        {
+          "path": "/village/pantry/2/name",
+          "before": "Tribute grain from Stonebridge",
+          "after": "Expedition haul"
+        },
+        {
+          "path": "/village/pantry/2/units",
+          "before": 5,
+          "after": 2
+        }
+      ]
+    },
+    {
+      "group": "capable",
+      "policy": "capable",
+      "seed": 20011,
+      "firstObservedDifference": {
+        "day": 99,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/healths/gen_7nvwxgg",
+            "before": 100,
+            "after": 97
+          },
+          {
+            "path": "/healths/gen_fonhvj5",
+            "before": 99,
+            "after": 96
+          },
+          {
+            "path": "/healths/gen_f930lhl",
+            "before": 100,
+            "after": 97
+          },
+          {
+            "path": "/healths/gen_ujta8gt",
+            "before": 100,
+            "after": 97
+          },
+          {
+            "path": "/healths/raj_patel",
+            "before": 100,
+            "after": 97
+          },
+          {
+            "path": "/healths/gen_kmurxbg",
+            "before": 56,
+            "after": 88
+          },
+          {
+            "path": "/healths/hannah_kim",
+            "before": 89,
+            "after": 86
+          },
+          {
+            "path": "/healths/aroha_ngata",
+            "before": 100,
+            "after": 97
+          },
+          {
+            "path": "/healths/app_mgpsphry861",
+            "before": 100,
+            "after": 97
+          },
+          {
+            "path": "/healths/ines_duarte",
+            "before": 94,
+            "after": 91
+          },
+          {
+            "path": "/needs/gen_kmurxbg/hunger",
+            "before": 45,
+            "after": 54
+          },
+          {
+            "path": "/needs/gen_f930lhl/hunger",
+            "before": 57,
+            "after": 58
+          },
+          {
+            "path": "/needs/gen_f930lhl/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/hannah_kim/hunger",
+            "before": 60,
+            "after": 57
+          },
+          {
+            "path": "/needs/hannah_kim/energy",
+            "before": 96,
+            "after": 100
+          },
+          {
+            "path": "/needs/aroha_ngata/hunger",
+            "before": 55,
+            "after": 45
+          },
+          {
+            "path": "/needs/aroha_ngata/energy",
+            "before": 96,
+            "after": 100
+          },
+          {
+            "path": "/needs/app_mgpsphry861/hunger",
+            "before": 58,
+            "after": 57
+          },
+          {
+            "path": "/needs/ines_duarte/hunger",
+            "before": 56,
+            "after": 54
+          },
+          {
+            "path": "/trust/hannah_kim",
+            "before": 64,
+            "after": 65
+          },
+          {
+            "path": "/trust/aroha_ngata",
+            "before": 63,
+            "after": 64
+          },
+          {
+            "path": "/pantry/31/kcalEach",
+            "before": 200,
+            "after": 277
+          },
+          {
+            "path": "/pantry/31/units",
+            "before": 44,
+            "after": 1
+          },
+          {
+            "path": "/pantry/31/spoilDay",
+            "before": 101,
+            "after": 104
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 152,
+          "after": 107
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 52088,
+          "after": 58356
+        },
+        {
+          "path": "/village/villagers/2",
+          "before": "gen_7nvwxgg",
+          "after": "gen_kmurxbg"
+        },
+        {
+          "path": "/village/villagers/3",
+          "before": "gen_kmurxbg",
+          "after": "gen_ujta8gt"
+        },
+        {
+          "path": "/village/villagers/4",
+          "before": "gen_ujta8gt",
+          "after": "gen_f930lhl"
+        },
+        {
+          "path": "/village/villagers/5",
+          "before": "gen_f930lhl",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/fallen/2/villagerId",
+          "before": "hannah_kim",
+          "after": "gen_7nvwxgg"
+        },
+        {
+          "path": "/village/fallen/2/day",
+          "before": 101,
+          "after": 107
+        },
+        {
+          "path": "/village/fallen/3",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_ujta8gt",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/4",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_kmurxbg",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/5",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_f930lhl",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/6",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "raj_patel",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/7",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_fonhvj5",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/8",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "ines_duarte",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/9",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "aroha_ngata",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/10",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "hannah_kim",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/11",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "app_mgpsphry861",
+            "day": 107,
+            "cause": "the phoenix link (ash)"
+          }
+        },
+        {
+          "path": "/village/fallen/12",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_6dwenk2",
+            "day": 107,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/pantry/0/name",
+          "before": "Foraged food",
+          "after": "Expedition haul"
+        },
+        {
+          "path": "/village/pantry/0/kcalEach",
+          "before": 342,
+          "after": 500
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 1,
+          "after": 3
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 152,
+          "after": 108
+        },
+        {
+          "path": "/village/pantry/0/kg",
+          "before": 0.068,
+          "after": 0.1
+        },
+        {
+          "path": "/village/pantry/1/name",
+          "before": "Tribute grain from Stonebridge",
+          "after": "Expedition haul"
+        }
+      ]
+    },
+    {
+      "group": "capable",
+      "policy": "capable",
+      "seed": 20015,
+      "firstObservedDifference": {
+        "day": 59,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/kcal",
+            "before": 2337,
+            "after": 2297
+          },
+          {
+            "path": "/health",
+            "before": 95.96111111111111,
+            "after": 96.57222222222222
+          },
+          {
+            "path": "/healths/omar_farouk",
+            "before": 83,
+            "after": 86
+          },
+          {
+            "path": "/healths/raj_patel",
+            "before": 89,
+            "after": 92
+          },
+          {
+            "path": "/healths/ines_duarte",
+            "before": 96,
+            "after": 99
+          },
+          {
+            "path": "/healths/gen_uz5ihs8",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/gen_bs1l33i",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/desmond_clarke",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/valeria_quispe",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/needs/gen_uz5ihs8/hunger",
+            "before": 66.5,
+            "after": 84
+          },
+          {
+            "path": "/needs/gen_uz5ihs8/fear",
+            "before": 32,
+            "after": 21
+          },
+          {
+            "path": "/needs/gen_uz5ihs8/social",
+            "before": 88,
+            "after": 84
+          },
+          {
+            "path": "/needs/gen_uz5ihs8/energy",
+            "before": 98,
+            "after": 100
+          },
+          {
+            "path": "/needs/gen_bs1l33i/hunger",
+            "before": 49,
+            "after": 57
+          },
+          {
+            "path": "/needs/gen_bs1l33i/fear",
+            "before": 32,
+            "after": 21
+          },
+          {
+            "path": "/needs/gen_bs1l33i/social",
+            "before": 96,
+            "after": 100
+          },
+          {
+            "path": "/needs/desmond_clarke/hunger",
+            "before": 49,
+            "after": 60
+          },
+          {
+            "path": "/needs/desmond_clarke/fear",
+            "before": 32,
+            "after": 21
+          },
+          {
+            "path": "/needs/desmond_clarke/social",
+            "before": 12,
+            "after": 18
+          },
+          {
+            "path": "/needs/valeria_quispe/hunger",
+            "before": 41,
+            "after": 60
+          },
+          {
+            "path": "/needs/valeria_quispe/fear",
+            "before": 32,
+            "after": 21
+          },
+          {
+            "path": "/needs/valeria_quispe/social",
+            "before": 20,
+            "after": 28
+          },
+          {
+            "path": "/needs/omar_farouk/hunger",
+            "before": 36,
+            "after": 60
+          },
+          {
+            "path": "/needs/omar_farouk/fear",
+            "before": 32,
+            "after": 21
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 91,
+          "after": 90
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 72273,
+          "after": 57289
+        },
+        {
+          "path": "/village/fallen/4/day",
+          "before": 74,
+          "after": 60
+        },
+        {
+          "path": "/village/fallen/5/villagerId",
+          "before": "maya_singh",
+          "after": "raj_patel"
+        },
+        {
+          "path": "/village/fallen/5/day",
+          "before": 82,
+          "after": 67
+        },
+        {
+          "path": "/village/fallen/5/cause",
+          "before": "monster",
+          "after": "combat"
+        },
+        {
+          "path": "/village/fallen/6/villagerId",
+          "before": "victor_lopez",
+          "after": "desmond_clarke"
+        },
+        {
+          "path": "/village/fallen/6/day",
+          "before": 84,
+          "after": 75
+        },
+        {
+          "path": "/village/fallen/6/cause",
+          "before": "monster",
+          "after": "combat"
+        },
+        {
+          "path": "/village/fallen/7/villagerId",
+          "before": "app_mgpsphdm109",
+          "after": "omar_farouk"
+        },
+        {
+          "path": "/village/fallen/7/cause",
+          "before": "monster",
+          "after": "combat"
+        },
+        {
+          "path": "/village/fallen/8",
+          "before": {
+            "villagerId": "omar_farouk",
+            "day": 91,
+            "cause": "combat"
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 25,
+          "after": 24
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 86,
+          "after": 85
+        },
+        {
+          "path": "/village/pantry/1/kcalEach",
+          "before": 313,
+          "after": 200
+        },
+        {
+          "path": "/village/pantry/1/units",
+          "before": 1,
+          "after": 2
+        },
+        {
+          "path": "/village/pantry/1/harvestShares",
+          "before": {
+            "app_mgpsphdm109": 1
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/spoilDay",
+          "before": 87,
+          "after": 86
+        },
+        {
+          "path": "/village/pantry/1/kg",
+          "before": 0.063,
+          "after": 0.2
+        },
+        {
+          "path": "/village/pantry/2/name",
+          "before": "Burdock",
+          "after": "Tribute grain from Emberhold"
+        },
+        {
+          "path": "/village/pantry/2/plantId",
+          "before": "burdock",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/kcalEach",
+          "before": 90,
+          "after": 500
+        },
+        {
+          "path": "/village/pantry/2/units",
+          "before": 10,
+          "after": 4
+        },
+        {
+          "path": "/village/pantry/2/spoilDay",
+          "before": 89,
+          "after": 105
+        }
+      ]
+    },
+    {
+      "group": "maker",
+      "policy": "maker",
+      "seed": 20003,
+      "firstObservedDifference": {
+        "day": 108,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/needs/ruby_callaghan/hunger",
+            "before": 60,
+            "after": 57
+          },
+          {
+            "path": "/needs/ruby_callaghan/energy",
+            "before": 96,
+            "after": 100
+          },
+          {
+            "path": "/needs/sofia_chen/hunger",
+            "before": 34,
+            "after": 35
+          },
+          {
+            "path": "/needs/sofia_chen/energy",
+            "before": 100,
+            "after": 96
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 152,
+          "after": 139
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 116603,
+          "after": 128443
+        },
+        {
+          "path": "/village/pantry/0/name",
+          "before": "Tribute grain from Emberhold",
+          "after": "Foraged food (dried)"
+        },
+        {
+          "path": "/village/pantry/0/kcalEach",
+          "before": 500,
+          "after": 160
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 10,
+          "after": 4
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 147,
+          "after": 134
+        },
+        {
+          "path": "/village/pantry/0/kg",
+          "before": 0.01,
+          "after": 0.2
+        },
+        {
+          "path": "/village/pantry/0/foodState",
+          "before": "[absent]",
+          "after": "preserved"
+        },
+        {
+          "path": "/village/pantry/0/diseaseRisk",
+          "before": "[absent]",
+          "after": null
+        },
+        {
+          "path": "/village/pantry/0/prep",
+          "before": "[absent]",
+          "after": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better."
+        },
+        {
+          "path": "/village/pantry/0/wellMade",
+          "before": "[absent]",
+          "after": false
+        },
+        {
+          "path": "/village/pantry/1/name",
+          "before": "Tribute grain from Stonebridge",
+          "after": "Expedition haul"
+        },
+        {
+          "path": "/village/pantry/1/units",
+          "before": 3,
+          "after": 2
+        },
+        {
+          "path": "/village/pantry/1/spoilDay",
+          "before": 147,
+          "after": 134
+        },
+        {
+          "path": "/village/pantry/1/kg",
+          "before": 0.01,
+          "after": 0.1
+        },
+        {
+          "path": "/village/pantry/1/granaryDays",
+          "before": "[absent]",
+          "after": 3
+        },
+        {
+          "path": "/village/pantry/2/kcalEach",
+          "before": 500,
+          "after": 42
+        },
+        {
+          "path": "/village/pantry/2/units",
+          "before": 6,
+          "after": 1
+        },
+        {
+          "path": "/village/pantry/2/spoilDay",
+          "before": 147,
+          "after": 134
+        },
+        {
+          "path": "/village/pantry/2/kg",
+          "before": 0.1,
+          "after": 0.05
+        },
+        {
+          "path": "/village/pantry/3/name",
+          "before": "Expedition haul",
+          "after": "Foraged food"
+        },
+        {
+          "path": "/village/pantry/3/kcalEach",
+          "before": 13,
+          "after": 100
+        },
+        {
+          "path": "/village/pantry/3/spoilDay",
+          "before": 147,
+          "after": 134
+        },
+        {
+          "path": "/village/pantry/4/units",
+          "before": 43,
+          "after": 56
+        }
+      ]
+    },
+    {
+      "group": "maker",
+      "policy": "maker",
+      "seed": 20009,
+      "firstObservedDifference": {
+        "day": 122,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/kcal",
+            "before": 2400,
+            "after": 2320
+          },
+          {
+            "path": "/healths/james_okonkwo",
+            "before": 40,
+            "after": 65
+          },
+          {
+            "path": "/healths/devon_okafor",
+            "before": 79,
+            "after": 54
+          },
+          {
+            "path": "/needs/gen_jxv21h3/hunger",
+            "before": 49,
+            "after": 61
+          },
+          {
+            "path": "/needs/gen_jxv21h3/fear",
+            "before": 3,
+            "after": 27
+          },
+          {
+            "path": "/needs/gen_jxv21h3/social",
+            "before": 12,
+            "after": 18
+          },
+          {
+            "path": "/needs/devon_okafor/hunger",
+            "before": 58,
+            "after": 64
+          },
+          {
+            "path": "/needs/devon_okafor/fear",
+            "before": 3,
+            "after": 27
+          },
+          {
+            "path": "/needs/valeria_quispe/hunger",
+            "before": 23.66666666666667,
+            "after": 38.66666666666667
+          },
+          {
+            "path": "/needs/valeria_quispe/fear",
+            "before": 3,
+            "after": 27
+          },
+          {
+            "path": "/needs/valeria_quispe/social",
+            "before": 12,
+            "after": 18
+          },
+          {
+            "path": "/needs/sari_wulandari/hunger",
+            "before": 49,
+            "after": 62
+          },
+          {
+            "path": "/needs/sari_wulandari/fear",
+            "before": 3,
+            "after": 27
+          },
+          {
+            "path": "/needs/sari_wulandari/social",
+            "before": 12,
+            "after": 34
+          },
+          {
+            "path": "/needs/james_okonkwo/hunger",
+            "before": 50,
+            "after": 65
+          },
+          {
+            "path": "/needs/james_okonkwo/fear",
+            "before": 3,
+            "after": 27
+          },
+          {
+            "path": "/needs/james_okonkwo/social",
+            "before": 12,
+            "after": 18
+          },
+          {
+            "path": "/needs/james_okonkwo/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/jorge_silva/hunger",
+            "before": 49,
+            "after": 58
+          },
+          {
+            "path": "/needs/jorge_silva/fear",
+            "before": 3,
+            "after": 27
+          },
+          {
+            "path": "/needs/jorge_silva/social",
+            "before": 12,
+            "after": 18
+          },
+          {
+            "path": "/needs/petra_novak/hunger",
+            "before": 52,
+            "after": 57
+          },
+          {
+            "path": "/needs/petra_novak/fear",
+            "before": 3,
+            "after": 27
+          },
+          {
+            "path": "/needs/petra_novak/social",
+            "before": 12,
+            "after": 18
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 122,
+          "after": 152
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 132844,
+          "after": 115605
+        },
+        {
+          "path": "/village/pantry/0/name",
+          "before": "Foraged food",
+          "after": "Foraged food (dried)"
+        },
+        {
+          "path": "/village/pantry/0/kcalEach",
+          "before": 100,
+          "after": 198
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 1,
+          "after": 20
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 121,
+          "after": 152
+        },
+        {
+          "path": "/village/pantry/0/kg",
+          "before": 0.05,
+          "after": 0.2
+        },
+        {
+          "path": "/village/pantry/0/granaryDays",
+          "before": 3,
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/0/foodState",
+          "before": "[absent]",
+          "after": "preserved"
+        },
+        {
+          "path": "/village/pantry/0/diseaseRisk",
+          "before": "[absent]",
+          "after": null
+        },
+        {
+          "path": "/village/pantry/0/prep",
+          "before": "[absent]",
+          "after": "Preserved by knowing hands. Keeps for weeks."
+        },
+        {
+          "path": "/village/pantry/0/wellMade",
+          "before": "[absent]",
+          "after": true
+        },
+        {
+          "path": "/village/pantry/1/kcalEach",
+          "before": 200,
+          "after": 500
+        },
+        {
+          "path": "/village/pantry/1/units",
+          "before": 8,
+          "after": 2
+        },
+        {
+          "path": "/village/pantry/1/spoilDay",
+          "before": 121,
+          "after": 152
+        },
+        {
+          "path": "/village/pantry/1/kg",
+          "before": 0.2,
+          "after": 0.1
+        },
+        {
+          "path": "/village/pantry/1/granaryDays",
+          "before": "[absent]",
+          "after": 3
+        },
+        {
+          "path": "/village/pantry/2/kcalEach",
+          "before": 376,
+          "after": 474
+        },
+        {
+          "path": "/village/pantry/2/harvestShares",
+          "before": {
+            "petra_novak": 1
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/spoilDay",
+          "before": 123,
+          "after": 152
+        },
+        {
+          "path": "/village/pantry/2/kg",
+          "before": 0.075,
+          "after": 0.095
+        },
+        {
+          "path": "/village/pantry/3/name",
+          "before": "Foraged food",
+          "after": "Foraged food (dried)"
+        },
+        {
+          "path": "/village/pantry/3/kcalEach",
+          "before": 500,
+          "after": 198
+        },
+        {
+          "path": "/village/pantry/3/units",
+          "before": 2,
+          "after": 20
+        }
+      ]
+    },
+    {
+      "group": "maker",
+      "policy": "maker",
+      "seed": 20011,
+      "firstObservedDifference": {
+        "day": 60,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/kcal",
+            "before": 2396,
+            "after": 2106
+          },
+          {
+            "path": "/health",
+            "before": 96.96111111111111,
+            "after": 100
+          },
+          {
+            "path": "/godhood/capstoneUsed",
+            "before": {},
+            "after": "[absent]"
+          },
+          {
+            "path": "/healths/gen_ujta8gt",
+            "before": 96,
+            "after": 99
+          },
+          {
+            "path": "/healths/mateo_alvarez",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/gen_7nvwxgg",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/gen_f930lhl",
+            "before": 94,
+            "after": 97
+          },
+          {
+            "path": "/healths/gen_kmurxbg",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/fatima_hassan",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/diana_osei",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/raj_patel",
+            "before": 95,
+            "after": 98
+          },
+          {
+            "path": "/healths/ruth_goldstein",
+            "before": 93,
+            "after": 96
+          },
+          {
+            "path": "/needs/gen_7nvwxgg/hunger",
+            "before": 42,
+            "after": 63
+          },
+          {
+            "path": "/needs/gen_7nvwxgg/fear",
+            "before": 3,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_7nvwxgg/energy",
+            "before": 93,
+            "after": 96
+          },
+          {
+            "path": "/needs/gen_kmurxbg/hunger",
+            "before": 29,
+            "after": 41
+          },
+          {
+            "path": "/needs/gen_kmurxbg/fear",
+            "before": 3,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_kmurxbg/social",
+            "before": 40,
+            "after": 46
+          },
+          {
+            "path": "/needs/gen_kmurxbg/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/gen_ujta8gt/hunger",
+            "before": 26,
+            "after": 57
+          },
+          {
+            "path": "/needs/gen_ujta8gt/fear",
+            "before": 3,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_f930lhl/hunger",
+            "before": 45,
+            "after": 57
+          },
+          {
+            "path": "/needs/gen_f930lhl/fear",
+            "before": 3,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_f930lhl/social",
+            "before": 18,
+            "after": 24
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 107,
+          "after": 152
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 24969,
+          "after": 11566
+        },
+        {
+          "path": "/village/villagers/2",
+          "before": "gen_7nvwxgg",
+          "after": "gen_kmurxbg"
+        },
+        {
+          "path": "/village/villagers/3",
+          "before": "gen_kmurxbg",
+          "after": "gen_ujta8gt"
+        },
+        {
+          "path": "/village/villagers/4",
+          "before": "gen_ujta8gt",
+          "after": "gen_f930lhl"
+        },
+        {
+          "path": "/village/villagers/5",
+          "before": "gen_f930lhl",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/fallen/2/day",
+          "before": 76,
+          "after": 61
+        },
+        {
+          "path": "/village/fallen/3/day",
+          "before": 91,
+          "after": 64
+        },
+        {
+          "path": "/village/fallen/4",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "diana_osei",
+            "day": 64,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/5",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "nora_wilson",
+            "day": 69,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/6",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "app_mgpspho2315",
+            "day": 72,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/7",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_kmurxbg",
+            "day": 75,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/8",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "app_mgpspijs631",
+            "day": 76,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/9",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "quinn_murphy",
+            "day": 76,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/10",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "mateo_alvarez",
+            "day": 77,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/11",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_ujta8gt",
+            "day": 87,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/12",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "raj_patel",
+            "day": 89,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/13",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "visjoin_94",
+            "day": 101,
+            "cause": "starvation"
+          }
+        },
+        {
+          "path": "/village/fallen/14",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "visjoin_95",
+            "day": 105,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/15",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "fatima_hassan",
+            "day": 122,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/16",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "visjoin_134",
+            "day": 141,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/17",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "ruth_goldstein",
+            "day": 143,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/18",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "visjoin_141",
+            "day": 148,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/19",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "visjoin_81",
+            "day": 151,
+            "cause": "contest"
+          }
+        }
+      ]
+    },
+    {
+      "group": "merchant",
+      "policy": "merchant",
+      "seed": 20011,
+      "firstObservedDifference": {
+        "day": 67,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/kcal",
+            "before": 2320,
+            "after": 2400
+          },
+          {
+            "path": "/healths/mateo_alvarez",
+            "before": 49,
+            "after": 41
+          },
+          {
+            "path": "/needs/gen_7nvwxgg/hunger",
+            "before": 100,
+            "after": 83
+          },
+          {
+            "path": "/needs/gen_7nvwxgg/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_ujta8gt/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/fatima_hassan/hunger",
+            "before": 55,
+            "after": 60
+          },
+          {
+            "path": "/needs/fatima_hassan/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/sam_wilson/hunger",
+            "before": 67,
+            "after": 69
+          },
+          {
+            "path": "/needs/sam_wilson/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/sam_wilson/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/diana_osei/hunger",
+            "before": 54,
+            "after": 71
+          },
+          {
+            "path": "/needs/diana_osei/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/diana_osei/social",
+            "before": 100,
+            "after": 73
+          },
+          {
+            "path": "/needs/mateo_alvarez/hunger",
+            "before": 77,
+            "after": 74
+          },
+          {
+            "path": "/needs/mateo_alvarez/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/hannah_kim/hunger",
+            "before": 65,
+            "after": 68
+          },
+          {
+            "path": "/needs/hannah_kim/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/hannah_kim/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/app_mgpspihd843/hunger",
+            "before": 44,
+            "after": 49
+          },
+          {
+            "path": "/needs/app_mgpspihd843/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/needs/amina_diallo/fear",
+            "before": 19,
+            "after": 12
+          },
+          {
+            "path": "/trust/gen_7nvwxgg",
+            "before": 76,
+            "after": 71
+          },
+          {
+            "path": "/trust/sam_wilson",
+            "before": 53,
+            "after": 51
+          },
+          {
+            "path": "/trust/diana_osei",
+            "before": 88,
+            "after": 90
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 90,
+          "after": 91
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 49365,
+          "after": 83245
+        },
+        {
+          "path": "/village/pantry/0/name",
+          "before": "Tribute grain from Stonebridge",
+          "after": "Foraged food"
+        },
+        {
+          "path": "/village/pantry/0/kcalEach",
+          "before": 500,
+          "after": 200
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 2,
+          "after": 47
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 91,
+          "after": 92
+        },
+        {
+          "path": "/village/pantry/0/kg",
+          "before": 0.01,
+          "after": 0.2
+        },
+        {
+          "path": "/village/pantry/1/name",
+          "before": "Foraged food (dried)",
+          "after": "Foraged food"
+        },
+        {
+          "path": "/village/pantry/1/kcalEach",
+          "before": 160,
+          "after": 200
+        },
+        {
+          "path": "/village/pantry/1/units",
+          "before": 19,
+          "after": 40
+        },
+        {
+          "path": "/village/pantry/1/spoilDay",
+          "before": 94,
+          "after": 93
+        },
+        {
+          "path": "/village/pantry/1/foodState",
+          "before": "preserved",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/diseaseRisk",
+          "before": null,
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/prep",
+          "before": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/wellMade",
+          "before": false,
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/name",
+          "before": "Foraged food (dried)",
+          "after": "Foraged food"
+        },
+        {
+          "path": "/village/pantry/2/kcalEach",
+          "before": 160,
+          "after": 106
+        },
+        {
+          "path": "/village/pantry/2/units",
+          "before": 20,
+          "after": 1
+        },
+        {
+          "path": "/village/pantry/2/kg",
+          "before": 0.2,
+          "after": 0.05
+        },
+        {
+          "path": "/village/pantry/2/foodState",
+          "before": "preserved",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/diseaseRisk",
+          "before": null,
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/prep",
+          "before": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/wellMade",
+          "before": false,
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/granaryDays",
+          "before": "[absent]",
+          "after": 3
+        }
+      ]
+    },
+    {
+      "group": "merchant",
+      "policy": "merchant",
+      "seed": 20014,
+      "firstObservedDifference": {
+        "day": 50,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/kcal",
+            "before": 2400,
+            "after": 2101
+          },
+          {
+            "path": "/health",
+            "before": 100,
+            "after": 48
+          },
+          {
+            "path": "/godhood/capstoneUsed",
+            "before": "[absent]",
+            "after": {}
+          },
+          {
+            "path": "/needs/gen_vzcsqh4/hunger",
+            "before": 58,
+            "after": 44
+          },
+          {
+            "path": "/needs/gen_vzcsqh4/fear",
+            "before": 12,
+            "after": 39
+          },
+          {
+            "path": "/needs/gen_vzcsqh4/social",
+            "before": 24,
+            "after": 18
+          },
+          {
+            "path": "/needs/gen_i3lkogo/hunger",
+            "before": 50,
+            "after": 30
+          },
+          {
+            "path": "/needs/gen_i3lkogo/fear",
+            "before": 12,
+            "after": 39
+          },
+          {
+            "path": "/needs/gen_i3lkogo/social",
+            "before": 32,
+            "after": 18
+          },
+          {
+            "path": "/needs/gen_lljdpg6/hunger",
+            "before": 78,
+            "after": 63
+          },
+          {
+            "path": "/needs/gen_lljdpg6/fear",
+            "before": 12,
+            "after": 39
+          },
+          {
+            "path": "/needs/gen_lljdpg6/social",
+            "before": 32,
+            "after": 18
+          },
+          {
+            "path": "/needs/dmitri_sokolov/hunger",
+            "before": 77.5,
+            "after": 63
+          },
+          {
+            "path": "/needs/dmitri_sokolov/fear",
+            "before": 12,
+            "after": 39
+          },
+          {
+            "path": "/needs/dmitri_sokolov/social",
+            "before": 100,
+            "after": 92
+          },
+          {
+            "path": "/needs/dmitri_sokolov/energy",
+            "before": 95,
+            "after": 93
+          },
+          {
+            "path": "/needs/marcus_webb/hunger",
+            "before": 49,
+            "after": 33
+          },
+          {
+            "path": "/needs/marcus_webb/fear",
+            "before": 12,
+            "after": 39
+          },
+          {
+            "path": "/needs/marcus_webb/social",
+            "before": 48,
+            "after": 42
+          },
+          {
+            "path": "/needs/owen_smith/hunger",
+            "before": 40,
+            "after": 30
+          },
+          {
+            "path": "/needs/owen_smith/fear",
+            "before": 12,
+            "after": 39
+          },
+          {
+            "path": "/needs/owen_smith/social",
+            "before": 24,
+            "after": 18
+          },
+          {
+            "path": "/needs/nikos_papadopoulos/hunger",
+            "before": 39,
+            "after": 30
+          },
+          {
+            "path": "/needs/nikos_papadopoulos/fear",
+            "before": 12,
+            "after": 39
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 92,
+          "after": 90
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 32065,
+          "after": 67692
+        },
+        {
+          "path": "/village/fallen/1/villagerId",
+          "before": "dmitri_sokolov",
+          "after": "gen_vzcsqh4"
+        },
+        {
+          "path": "/village/fallen/1/day",
+          "before": 52,
+          "after": 51
+        },
+        {
+          "path": "/village/fallen/1/cause",
+          "before": "combat",
+          "after": "monster"
+        },
+        {
+          "path": "/village/fallen/2/day",
+          "before": 52,
+          "after": 59
+        },
+        {
+          "path": "/village/fallen/3/day",
+          "before": 72,
+          "after": 61
+        },
+        {
+          "path": "/village/fallen/3/cause",
+          "before": "contest",
+          "after": "combat"
+        },
+        {
+          "path": "/village/fallen/4/villagerId",
+          "before": "gen_lljdpg6",
+          "after": "visjoin_72"
+        },
+        {
+          "path": "/village/fallen/4/day",
+          "before": 75,
+          "after": 77
+        },
+        {
+          "path": "/village/fallen/4/cause",
+          "before": "combat",
+          "after": "monster"
+        },
+        {
+          "path": "/village/fallen/5/villagerId",
+          "before": "owen_smith",
+          "after": "carlos_diaz"
+        },
+        {
+          "path": "/village/fallen/5/day",
+          "before": 78,
+          "after": 77
+        },
+        {
+          "path": "/village/fallen/5/cause",
+          "before": "combat",
+          "after": "monster"
+        },
+        {
+          "path": "/village/fallen/6",
+          "before": {
+            "villagerId": "daniyar_askarov",
+            "day": 85,
+            "cause": "combat"
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/fallen/7",
+          "before": {
+            "villagerId": "visjoin_86",
+            "day": 91,
+            "cause": "monster"
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/0/name",
+          "before": "Tribute grain from Thornfield",
+          "after": "Foraged food"
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 2,
+          "after": 3
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 91,
+          "after": 85
+        },
+        {
+          "path": "/village/pantry/0/kg",
+          "before": 0.01,
+          "after": 0.1
+        },
+        {
+          "path": "/village/pantry/0/granaryDays",
+          "before": "[absent]",
+          "after": 3
+        },
+        {
+          "path": "/village/pantry/1/kcalEach",
+          "before": 204,
+          "after": 437
+        },
+        {
+          "path": "/village/pantry/1/harvestShares",
+          "before": {
+            "carlos_diaz": 1
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/spoilDay",
+          "before": 92,
+          "after": 85
+        }
+      ]
+    },
+    {
+      "group": "caregiver",
+      "policy": "caregiver",
+      "seed": 20007,
+      "firstObservedDifference": {
+        "day": 80,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/kcal",
+            "before": 2300,
+            "after": 2190
+          },
+          {
+            "path": "/healths/jorge_silva",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/miguel_santos",
+            "before": 69,
+            "after": 79
+          },
+          {
+            "path": "/healths/gen_o10uar7",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/gen_xelsaf8",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/gen_06yn45v",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/healths/aria_thompson",
+            "before": 85,
+            "after": 100
+          },
+          {
+            "path": "/healths/nathan_lee",
+            "before": 97,
+            "after": 100
+          },
+          {
+            "path": "/needs/gen_o10uar7/hunger",
+            "before": 60,
+            "after": 57
+          },
+          {
+            "path": "/needs/gen_o10uar7/fear",
+            "before": 26,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_o10uar7/social",
+            "before": 18,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_o10uar7/energy",
+            "before": 96,
+            "after": 100
+          },
+          {
+            "path": "/needs/gen_xelsaf8/hunger",
+            "before": 57,
+            "after": 58
+          },
+          {
+            "path": "/needs/gen_xelsaf8/fear",
+            "before": 26,
+            "after": 12
+          },
+          {
+            "path": "/needs/gen_06yn45v/hunger",
+            "before": 54.5,
+            "after": 61
+          },
+          {
+            "path": "/needs/gen_06yn45v/fear",
+            "before": 26,
+            "after": 12
+          },
+          {
+            "path": "/needs/jorge_silva/fear",
+            "before": 26,
+            "after": 12
+          },
+          {
+            "path": "/needs/miguel_santos/fear",
+            "before": 26,
+            "after": 12
+          },
+          {
+            "path": "/needs/miguel_santos/social",
+            "before": 30,
+            "after": 18
+          },
+          {
+            "path": "/needs/aria_thompson/hunger",
+            "before": 57,
+            "after": 58
+          },
+          {
+            "path": "/needs/aria_thompson/fear",
+            "before": 26,
+            "after": 12
+          },
+          {
+            "path": "/needs/aria_thompson/energy",
+            "before": 100,
+            "after": 96
+          },
+          {
+            "path": "/needs/nathan_lee/hunger",
+            "before": 57,
+            "after": 58
+          },
+          {
+            "path": "/needs/nathan_lee/fear",
+            "before": 26,
+            "after": 12
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 118,
+          "after": 138
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 59793,
+          "after": 0
+        },
+        {
+          "path": "/village/fallen/1",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "hannah_kim",
+            "day": 90,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/2",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_1l9lfwh",
+            "day": 92,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/3",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "jorge_silva",
+            "day": 92,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/4",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "wanjiru_kamau",
+            "day": 103,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/5",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_o10uar7",
+            "day": 108,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/6",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "nathan_lee",
+            "day": 115,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/7",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "tariq_mahmood",
+            "day": 118,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/8",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "yuki_mori",
+            "day": 118,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/9",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "visjoin_110",
+            "day": 119,
+            "cause": "monster"
+          }
+        },
+        {
+          "path": "/village/fallen/10",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "gen_xelsaf8",
+            "day": 123,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/fallen/11",
+          "before": "[absent]",
+          "after": {
+            "villagerId": "aria_thompson",
+            "day": 132,
+            "cause": "combat"
+          }
+        },
+        {
+          "path": "/village/pantry/0",
+          "before": {
+            "name": "Tribute grain from Emberhold",
+            "kcalEach": 500,
+            "units": 1,
+            "spoilDay": 119,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1",
+          "before": {
+            "name": "Tribute grain from Emberhold",
+            "kcalEach": 250,
+            "units": 1,
+            "spoilDay": 119,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2",
+          "before": {
+            "name": "Tribute grain from Stonebridge",
+            "kcalEach": 500,
+            "units": 6,
+            "spoilDay": 119,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/3",
+          "before": {
+            "name": "Tribute grain from Emberhold",
+            "kcalEach": 500,
+            "units": 7,
+            "spoilDay": 126,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/4",
+          "before": {
+            "name": "Tribute grain from Emberhold",
+            "kcalEach": 250,
+            "units": 1,
+            "spoilDay": 126,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/5",
+          "before": {
+            "name": "Tribute grain from Stonebridge",
+            "kcalEach": 500,
+            "units": 5,
+            "spoilDay": 126,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/6",
+          "before": {
+            "name": "Tribute grain from Emberhold",
+            "kcalEach": 500,
+            "units": 7,
+            "spoilDay": 133,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/7",
+          "before": {
+            "name": "Tribute grain from Emberhold",
+            "kcalEach": 250,
+            "units": 1,
+            "spoilDay": 133,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/8",
+          "before": {
+            "name": "Tribute grain from Stonebridge",
+            "kcalEach": 500,
+            "units": 7,
+            "spoilDay": 133,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/9",
+          "before": {
+            "name": "Tribute grain from Stonebridge",
+            "kcalEach": 250,
+            "units": 1,
+            "spoilDay": 133,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/10",
+          "before": {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 500,
+            "units": 7,
+            "spoilDay": 133,
+            "safe": true,
+            "kg": 0.01
+          },
+          "after": "[absent]"
+        }
+      ]
+    },
+    {
+      "group": "region",
+      "policy": "maker",
+      "seed": 21001,
+      "firstObservedDifference": {
+        "day": 118,
+        "at": "before",
+        "ordinal": 0,
+        "differences": [
+          {
+            "path": "/kcal",
+            "before": 2400,
+            "after": 2377
+          },
+          {
+            "path": "/godhood/hinted/voice_of_the_relay",
+            "before": "[absent]",
+            "after": true
+          },
+          {
+            "path": "/healths/visjoin_73",
+            "before": 84,
+            "after": 59
+          },
+          {
+            "path": "/needs/visjoin_50/fear",
+            "before": 82,
+            "after": 62
+          },
+          {
+            "path": "/needs/visjoin_65/hunger",
+            "before": 37,
+            "after": 38
+          },
+          {
+            "path": "/needs/visjoin_65/fear",
+            "before": 82,
+            "after": 62
+          },
+          {
+            "path": "/needs/visjoin_73/hunger",
+            "before": 46,
+            "after": 44
+          },
+          {
+            "path": "/needs/visjoin_73/fear",
+            "before": 82,
+            "after": 62
+          },
+          {
+            "path": "/needs/visjoin_73/energy",
+            "before": 96,
+            "after": 100
+          },
+          {
+            "path": "/needs/visjoin_89/fear",
+            "before": 82,
+            "after": 62
+          },
+          {
+            "path": "/needs/visjoin_107/fear",
+            "before": 82,
+            "after": 62
+          },
+          {
+            "path": "/trust/visjoin_73",
+            "before": 79,
+            "after": 80
+          },
+          {
+            "path": "/npcGodhood/ines_duarte/hinted/voice_of_the_relay",
+            "before": "[absent]",
+            "after": true
+          }
+        ]
+      },
+      "finalStateDifferences": [
+        {
+          "path": "/village/day",
+          "before": 152,
+          "after": 131
+        },
+        {
+          "path": "/village/pantryKcal",
+          "before": 39345,
+          "after": 58901
+        },
+        {
+          "path": "/village/fallen/11",
+          "before": {
+            "villagerId": "visjoin_50",
+            "day": 125,
+            "cause": "monster"
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/fallen/12",
+          "before": {
+            "villagerId": "visjoin_107",
+            "day": 137,
+            "cause": "monster"
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/fallen/13",
+          "before": {
+            "villagerId": "visjoin_89",
+            "day": 139,
+            "cause": "monster"
+          },
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/0/name",
+          "before": "Winner's share (alien rations) (dried)",
+          "after": "Foraged food (dried)"
+        },
+        {
+          "path": "/village/pantry/0/kcalEach",
+          "before": 297,
+          "after": 198
+        },
+        {
+          "path": "/village/pantry/0/units",
+          "before": 2,
+          "after": 20
+        },
+        {
+          "path": "/village/pantry/0/spoilDay",
+          "before": 187,
+          "after": 131
+        },
+        {
+          "path": "/village/pantry/1/name",
+          "before": "Foraged food (dried)",
+          "after": "Winner's share (alien rations)"
+        },
+        {
+          "path": "/village/pantry/1/kcalEach",
+          "before": 99,
+          "after": 300
+        },
+        {
+          "path": "/village/pantry/1/units",
+          "before": 1,
+          "after": 2
+        },
+        {
+          "path": "/village/pantry/1/spoilDay",
+          "before": 187,
+          "after": 131
+        },
+        {
+          "path": "/village/pantry/1/kg",
+          "before": 0.05,
+          "after": 0.2
+        },
+        {
+          "path": "/village/pantry/1/foodState",
+          "before": "preserved",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/diseaseRisk",
+          "before": null,
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/prep",
+          "before": "Preserved by knowing hands. Keeps for weeks.",
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/1/wellMade",
+          "before": true,
+          "after": "[absent]"
+        },
+        {
+          "path": "/village/pantry/2/kcalEach",
+          "before": 495,
+          "after": 198
+        },
+        {
+          "path": "/village/pantry/2/units",
+          "before": 1,
+          "after": 8
+        },
+        {
+          "path": "/village/pantry/2/spoilDay",
+          "before": 187,
+          "after": 132
+        },
+        {
+          "path": "/village/pantry/2/kg",
+          "before": 0.1,
+          "after": 0.2
+        },
+        {
+          "path": "/village/pantry/3/name",
+          "before": "Foraged food (dried)",
+          "after": "Tribute grain from Emberhold"
+        },
+        {
+          "path": "/village/pantry/3/kcalEach",
+          "before": 79,
+          "after": 500
+        }
+      ]
+    },
+    {
+      "group": "persistence",
+      "policy": "capable",
+      "seed": 20011,
+      "firstObservedDifference": null,
+      "finalStateDifferences": [
+        {
+          "path": "/run/tbfight/gridSize",
+          "before": "[absent]",
+          "after": 9
+        },
+        {
+          "path": "/run/tbfight/tableTrial",
+          "before": "[absent]",
+          "after": false
+        },
+        {
+          "path": "/run/tbfight/signatureState",
+          "before": "[absent]",
+          "after": {
+            "sigW4algoCounter": null,
+            "sigW4algoHot": 1,
+            "sigHadTurn": true,
+            "sigTurnVerbs": [],
+            "spBasePhp": 6,
+            "bufBasePos": {
+              "mx": 5,
+              "my": 8
+            },
+            "cxCancelled": [],
+            "cxSilence": 0,
+            "rrMessages": [],
+            "rrTakes": 0,
+            "rrRigging": false,
+            "rrLeft": false,
+            "rrMsgBig": false,
+            "rrBigArmed": false,
+            "rrExposed": 0,
+            "sigW5Struck": false,
+            "sigW5PDmg": 0,
+            "edFloor": null,
+            "edFloorItems": [],
+            "rrBase": {
+              "php": 6,
+              "pmaxhp": 100,
+              "px": 5,
+              "py": 8,
+              "mons": {
+                "m_0": {
+                  "hp": 1089,
+                  "maxHp": 1089,
+                  "mx": 6,
+                  "my": 7
+                }
+              }
+            },
+            "niSnap": {
+              "mhp": {
+                "m_0": 1089
+              },
+              "php": 6,
+              "px": 5,
+              "py": 8
+            },
+            "tsSnap": {
+              "px": 5,
+              "py": 8
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "persistenceSameRowsMetrics": true,
+  "differentPersistenceStateHashes": 1,
+  "phone": {
+    "sizes": [
+      736,
+      844
+    ],
+    "actualGridCells": 576,
+    "coalitionFighters": 22,
+    "inspectedImages": 10
+  },
+  "decision": "Retain correctness/persistence repairs with all scorecard watches; no numeric difficulty compensation or broad balance equivalence claim.",
+  "scope": "16 matched seeds per mixed profile and 16 Eastern Woodlands maker cases. Carpenter offered-selection cohorts exclude all 16 seeds per arm; zero played carpenter cases are not a viability result. Prepared native scenes are not natural attainment or physical-device evidence."
+}

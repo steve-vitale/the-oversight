@@ -52,10 +52,14 @@
     try {
       const t = ((Game.state.village || {}).trust) || {};
       const live = new Set(((Game.state.village || {}).roster) || []);
-      const ids = Object.keys(t).filter(id => id && id !== Game.villagerId && live.has(id));
+      const ids = Object.keys(t).filter(id => {
+        if (!id || id === Game.villagerId || !live.has(id)) return false;
+        const person = Game.getPerson(id);
+        return !!(person && person.id === id && !person.dead);
+      });
       ids.sort((a, b) => (t[b] | 0) - (t[a] | 0));
       const id = ids[0];
-      const v = (Game.data.villagers || []).find(x => x.id === id) || {};
+      const v = (id && Game.getPerson(id)) || {};
       return { id, name: (v.name || 'someone').split(' ')[0] };
     } catch (e) { return { id: null, name: 'someone' }; }
   }

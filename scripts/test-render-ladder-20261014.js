@@ -114,8 +114,10 @@ async function runSeed(seed) {
   // --- 6. SPOILED FAT: never rendered ---
   const { Game: G3 } = await loadGame({ seed });
   await setupGame(G3);
+  // A spoil date of0 is not in the past on expedition day0.
+  G3.state.scholar.day = 100;
   const inv3 = G3.state.scholar.inventory;
-  const bad = rawFat(2, 1000); bad.spoilDay = 0; // long spoiled
+  const bad = rawFat(2, 1000); bad.spoilDay = 1; // long past every supported cold-storage extension
   inv3.push(bad);
   G3.renderFat();
   ok(inv3.some(i => i && i.foodState === 'raw'), 'spoiled fat is NOT rendered (rot honesty)');

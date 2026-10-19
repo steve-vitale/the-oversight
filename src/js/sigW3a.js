@@ -857,6 +857,7 @@
         rec.trickConfess = 0;
         rec.log.push('R' + opts.round + ': the verdict falls LIGHTER — ' + opts.vName + ' confessed first. But witnesses remember the confession. (' + dmg + ')');
       }
+      dmg = game.wornDamage(opts.vid, dmg, { rng: opts.RR, log: rec.log, scene: 'field-signature' });
       ctx.vHp -= dmg; rec.vTaken += dmg;
       rec.log.push('R' + opts.round + ': 🔨 THE VERDICT FALLS: "' + S.trial.crime + '" — GUILTY. ' + opts.vName + ' takes ' + dmg + '.');
       S.trial = null; S.cool = 2;
@@ -877,6 +878,7 @@
       var bonus = Math.round(dealt * 0.3);
       if (bonus > 0) member.hp = Math.max(0, member.hp - bonus);
       var counter = opts.lroll([8, 12]);
+      counter = game.wornDamage(opts.vid, counter, { rng: opts.RR, log: rec.log, scene: 'field-signature' });
       ctx.vHp -= counter; rec.vTaken += counter;
       rec.log.push('R' + opts.round + ': 📊 the murmur LOVES the violence — the System eggs ' + opts.vName + ' on (+' + bonus + '). A mouth-head answers (' + counter + ').');
     } else {

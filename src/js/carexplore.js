@@ -145,13 +145,17 @@
     const totalUnits = stacks.reduce((s, i) => s + (i.units || 0), 0);
     let units = 1;
     if (amount === 'meal') units = Math.min(3, totalUnits);
-    else if (amount === 'full') units = Math.min(totalUnits, Math.ceil(hunger / 25) + 1);
+    else if (amount === 'full') units = totalUnits;
+    const fullKcal = Math.max(0, hunger * 25);
 
     // take the food — best stacks first (lowest kcal? no: use oldest/spoiling first is complex; just take in order)
+    const intakeEater=this.captureIntakeEater(vid), portions=[];
     let taken = 0, takenName = stacks[0].name, takenKcal = 0, stolenTaken = 0;
     for (const st of stacks) {
-      if (taken >= units) break;
-      const take = Math.min(st.units, units - taken);
+      if (amount === 'full' ? (taken > 0 && takenKcal >= fullKcal) : taken >= units) break;
+      const want = amount === 'full' ? Math.max(1, Math.ceil((fullKcal - takenKcal) / st.kcalEach)) : units - taken;
+      const take = Math.min(st.units, want);
+      portions.push({item:st,kcal:take*(st.kcalEach || 0)});
       st.units -= take; taken += take; takenKcal += take * (st.kcalEach || 0);
       if (st.stolen) stolenTaken += take;
       if (!takenName) takenName = st.name;
@@ -160,8 +164,13 @@
     if (taken === 0) { this.say("You have no food to give."); return null; }
 
     // ---- the decision's consequences ----
-    const hungerRelief = amount === 'bite' ? 25 : amount === 'meal' ? 60 : 120;
+    const portionRelief = amount === 'bite' ? 25 : amount === 'meal' ? 60 : 120;
+    // Same25-kcal price as the intake receipt; portion names cannot feed
+    // someone beyond the physical food consumed or their actual hunger.
+    const hungerRelief = Math.min(Math.max(0, hunger), portionRelief, takenKcal / 25);
     n.hunger = Math.max(0, hunger - hungerRelief);
+    const useful=Math.min(takenKcal,Math.max(0,Math.min(hunger,hungerRelief))*25);
+    this.recordHarvestIntake(intakeEater,portions.map(p=>({...p,nourishment:takenKcal>0?p.kcal*useful/takenKcal:0})),'gift');
 
     // recognized theft: the generosity beats below don't apply
     if (knowsTheft && stolenTaken > 0) {
@@ -812,7 +821,7 @@
     return [
       { id: 'bite', label: '🍽️ A bite (1)', units: Math.min(1, total), desc: 'Small. Enough to notice, not enough to matter — unless they\'re starving, when it can sting.' },
       { id: 'meal', label: '🍲 A meal (3)', units: Math.min(3, total), desc: 'Solid. The honest default. Costs you real food.' },
-      { id: 'full', label: '💝 Until they\'re full', units: total, desc: 'Generous. Real cost to you. They won\'t forget this.' },
+      { id: 'full', label: '💝 Until they\'re full', units: total, desc: 'Real food until they are full. If your pack runs out, they stay hungry.' },
     ].filter(o => o.units > 0);
   };
 

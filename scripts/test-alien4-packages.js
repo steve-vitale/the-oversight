@@ -88,10 +88,12 @@ function setup(day) {
     }
     const p25 = pools[25], p50 = pools[50], p85 = pools[85];
     ok(p25.size > 0 && p50.size > 0 && p85.size > 0, `seed ${seed}: all tiers produce gifts (${p25.size}/${p50.size}/${p85.size})`);
-    // Higher favor must unlock strictly more: tier-1 pool ⊂ tier-2 pool ⊂ tier-3 pool.
-    const sub = (a, b) => [...a].every(x => b.has(x));
-    ok(sub(p25, p50) && p50.size > p25.size, `seed ${seed}: favor 50 unlocks MORE than favor 25 (${p25.size} -> ${p50.size})`);
-    ok(sub(p50, p85) && p85.size > p50.size, `seed ${seed}: favor 85 unlocks MORE than favor 50 (${p50.size} -> ${p85.size})`);
+    // Steve 2026-10-15: earned quality, rather than a bigger bag of filler.
+    // Higher favor now delivers the highest eligible tier. The sets need
+    // not contain each other; every sampled gift must match its earned tier.
+    const tiers = set => [...set].map(id => (H.Game.data.items.find(d => d.id === id) || {}).lootTier);
+    ok(tiers(p25).every(t => t === 1) && tiers(p50).includes(2) && tiers(p50).every(t => t <= 2), `seed ${seed}: favor 50 unlocks tier 2 without losing starter supplies`);
+    ok(tiers(p85).includes(3) && tiers(p85).includes(1) && tiers(p85).every(t => t === 1 || t === 3), `seed ${seed}: favor 85 delivers tier 3 plus its starter-supply lane`);
     // Tier 4 (apex) stays locked at favor 100 — Steve: apex is earned on its own terms.
     H.RNG.reset(seed);
     const s = setup(30); const G = H.Game, ap = G.apState(); ap.favor = 100;

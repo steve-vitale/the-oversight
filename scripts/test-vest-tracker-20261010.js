@@ -21,7 +21,7 @@ Math.random = mulberry32(99);
   await setupGame(Game);
   const ctx = {};
   // inline copy of the trackVests wrapper shape (structure check only)
-  const lines = require('fs').readFileSync(path.join(ROOT, 'scripts', 'winrate-iter4.js'), 'utf8').split('\n');
+  const lines = require('./lib/source-text').readFileSync(path.join(ROOT, 'scripts', 'winrate-iter4.js'), 'utf8').split('\n');
   // trackVests spans the line range starting at 'function trackVests' up to
   // the first subsequent line that is exactly '}'
   const start = lines.findIndex(l => l.indexOf('function trackVests(Game, ctx)') === 0);

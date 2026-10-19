@@ -48,6 +48,10 @@ try { POLICY_REGISTRY['oraclev2'] = require('./policies/oracleV2').oraclev2 || r
 // capable (2026-10-14, Steve "Build a bot"): the bot that uses the game —
 // real flee, combat abilities, scored choices, held talks, the Table.
 try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catch (e) { console.warn('capable policy failed to load: ' + e.message); }
+const livelihoods = require('./policies/livelihood');
+for (const id of ['maker', 'merchant', 'caregiver']) POLICY_REGISTRY[id] = livelihoods[id];
+const marketBuilds = require('./policies/market-build');
+for (const id of ['dealer', 'hoarder']) POLICY_REGISTRY['market-'+id] = marketBuilds[id];
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
 // perfsurvive pilot (flesh-out loop 2026-10-17, finding #433): the
 // pre-seat courtship policies + the companion-screen layer, for the §15
@@ -94,18 +98,32 @@ async function runComparison(opts) {
   const policyIds = opts.policies || (process.env.POLICIES || 'competent').split(',').map(s => s.trim()).filter(Boolean);
   const days = opts.days || parseInt(process.env.DAYS || '60', 10);
   const extraMetrics = opts.extraMetrics || null;
+  const region = opts.region || process.env.REGION || null;
+  const origin = opts.origin || process.env.ORIGIN || null;
+  const occupation = opts.occupation == null ? null : opts.occupation;
 
-  const runs = [];
+  const runs = [], exclusions = [];
   for (const pid of policyIds) {
     const base = POLICY_REGISTRY[pid];
     if (!base) throw new Error(`unknown policy: ${pid} (see scripts/policies/README.md)`);
     for (const seed of seeds) {
       const { Game, manifest } = await loadGame({ seed, mode: 'compare-' + pid, fullTelemetry: false });
-      await setupGame(Game);
+      if (region) {
+        if (!Game.playableRegions().some(r => r.id === region)) throw Error('Region is not playable: '+region);
+        Game.debugRegion = region;
+      }
+      const selection = await setupGame(Game, origin, undefined, occupation == null ? undefined : { occupation });
+      if (selection?.status === 'excluded') { exclusions.push({ policy: pid, seed, selection }); continue; }
+      if (region && Game.state.region !== region) throw Error('Wrong comparison region: '+Game.state.region);
       // Shallow copy: never mutate the shared policy object. Wrap daily to
       // track max scale rank / arc / table — reachability needs history,
       // not just the end state.
       const policy = Object.assign({}, base);
+      let policyContext;
+      if (typeof base.diagnostics === 'function') policy.setup = (G, ctx) => {
+        policyContext = ctx;
+        if (base.setup) return base.setup(G, ctx);
+      };
       const hist = { maxRank: 0, maxArc: 1, everTable: false, everEntered: false, maxVests: 0 };
       const origDaily = base.daily;
       policy.daily = (G, ctx) => {
@@ -150,6 +168,8 @@ async function runComparison(opts) {
           perDay: result.pacing.perDay,
         } : null,
       };
+      if (selection) row.selection = selection;
+      if (typeof base.diagnostics === 'function') row.policyDiagnostics = base.diagnostics(policyContext);
       if (extraMetrics) {
         try { row.extra = extraMetrics(Game, result) || {}; }
         catch (e) { row.extra = { _err: String(e.message).slice(0, 80) }; }
@@ -194,10 +214,15 @@ async function runComparison(opts) {
         ? +(rs.reduce((t, r) => t + (r.pacing.verbs || 0), 0) / rs.length).toFixed(1) : null,
       extra: extraMeans,
     };
+    if (occupation != null) {
+      Object.assign(byPolicy[pid], { attempted: seeds.length, excluded: exclusions.filter(r => r.policy === pid).length });
+      if (!rs.length) for (const field of ['medianDays', 'maxDays', 'maxWave', 'nationalPct', 'tablePct', 'enteredPct']) byPolicy[pid][field] = null;
+    }
   }
 
   const report = { label, seeds, policies: policyIds, days, runs, byPolicy,
     generated: new Date().toISOString() };
+  if (occupation != null) Object.assign(report, { occupation, exclusions });
   return report;
 }
 
@@ -260,3 +285,6 @@ if (require.main === module) {
 }
 
 module.exports = { runComparison, printTable, POLICY_REGISTRY, stdSnapshot, fleeExitSummary };
+
+// Explicit opt-in comparison configuration. Omission preserves the standard driver.
+module.exports.comparisonCapabilities = {schemaVersion:1,origin:true,region:true,occupation:true};

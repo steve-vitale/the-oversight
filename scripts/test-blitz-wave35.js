@@ -51,7 +51,12 @@ function muster(Game, id) {
     Game.state.titans.musters = Game.state.titans.musters || {};
     const need = { nielsen: 12, finale: 20 }[id] || 0;
     if (need && !Game.state.titans.musters[id]) {
-      const allies = []; for (let i = 0; i < need; i++) allies.push('ally' + i);
+      // Explicit named living muster fixture for signature mechanics.
+      // This is not a natural recruitment/coalition-availability claim.
+      const town = { id: 'blitz_fixture_' + id, name: 'Prepared blitz fire',
+        roster: Array.from({ length: need }, (_, i) => ({ id: id + '_blade_' + i, name: 'Blade ' + i, age: 35, alive: true, health: 100 })) };
+      Game.state.otherVillages.push(town);
+      const allies = town.roster.map(r => ({ vid: r.id, villageId: town.id, name: r.name, hp: r.health, outfitted: [], gearValue: 0 }));
       Game.state.titans.musters[id] = { allies, haven: [], day: 0, outfitted: {} };
     }
   } catch (e) {}

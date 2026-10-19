@@ -216,6 +216,7 @@
       const sa = this._cxStats(a), sb = this._cxStats(b);
       var ha = sa.hp, hb = sb.hp;
       const rec = { rounds: 0, aTaken: 0, bTaken: 0, log: [] };
+      const finish = result => this.sealDamageResult(result, [[a, result.aTaken], [b, result.bTaken]]);
       const vBreak = function(s) {
         return clamp(0.5 - Math.min(0.3, (s.bravery + bravBonus) * 0.015)
           - (s.temper === 'bold' ? 0.1 : 0) + (s.temper === 'cautious' ? 0.1 : 0), 0.15, 0.6);
@@ -227,31 +228,31 @@
         for (const side of [first, first === 'a' ? 'b' : 'a']) {
           if (ha <= 0 || hb <= 0) break;
           if (side === 'a') {
-            const d = roll([4 + sa.wb, 8 + sa.wb]);
+            const d = this.wornDamage(b, roll([4 + sa.wb, 8 + sa.wb]), { rng: R, log: rec.log, scene: 'duel' });
             hb -= d; rec.bTaken += d;
             if (hb <= 0) {
-              if (d >= sb.maxHp * 0.6) return Object.assign(rec, { outcome: 'bDied', log: rec.log.concat([`${sa.name} lands a terrible blow — ${sb.name} doesn't get up.`]) });
-              return Object.assign(rec, { outcome: 'bYield', log: rec.log.concat([`${sb.name} yields. ${sa.name} takes the duel.`]) });
+              if (d >= sb.maxHp * 0.6) return finish(Object.assign(rec, { outcome: 'bDied', log: rec.log.concat([`${sa.name} lands a terrible blow — ${sb.name} doesn't get up.`]) }));
+              return finish(Object.assign(rec, { outcome: 'bYield', log: rec.log.concat([`${sb.name} yields. ${sa.name} takes the duel.`]) }));
             }
           } else {
-            const d = roll([4 + sb.wb, 8 + sb.wb]);
+            const d = this.wornDamage(a, roll([4 + sb.wb, 8 + sb.wb]), { rng: R, log: rec.log, scene: 'duel' });
             ha -= d; rec.aTaken += d;
             if (ha <= 0) {
-              if (d >= sa.maxHp * 0.6) return Object.assign(rec, { outcome: 'aDied', log: rec.log.concat([`${sb.name} lands a terrible blow — ${sa.name} doesn't get up.`]) });
-              return Object.assign(rec, { outcome: 'aYield', log: rec.log.concat([`${sa.name} yields. ${sb.name} takes the duel.`]) });
+              if (d >= sa.maxHp * 0.6) return finish(Object.assign(rec, { outcome: 'aDied', log: rec.log.concat([`${sb.name} lands a terrible blow — ${sa.name} doesn't get up.`]) }));
+              return finish(Object.assign(rec, { outcome: 'aYield', log: rec.log.concat([`${sa.name} yields. ${sb.name} takes the duel.`]) }));
             }
           }
         }
         if (ha / sa.maxHp < ba && hb / sb.maxHp < bb)
-          return Object.assign(rec, { outcome: 'doubleYield', log: rec.log.concat(['Both yield. The audience boos the cowardice and loves it.']) });
+          return finish(Object.assign(rec, { outcome: 'doubleYield', log: rec.log.concat(['Both yield. The audience boos the cowardice and loves it.']) }));
         if (ha / sa.maxHp < ba)
-          return Object.assign(rec, { outcome: 'bWon', log: rec.log.concat([`${sa.name} breaks and yields. ${sb.name} takes the duel.`]) });
+          return finish(Object.assign(rec, { outcome: 'bWon', log: rec.log.concat([`${sa.name} breaks and yields. ${sb.name} takes the duel.`]) }));
         if (hb / sb.maxHp < bb)
-          return Object.assign(rec, { outcome: 'aWon', log: rec.log.concat([`${sb.name} breaks and yields. ${sa.name} takes the duel.`]) });
+          return finish(Object.assign(rec, { outcome: 'aWon', log: rec.log.concat([`${sb.name} breaks and yields. ${sa.name} takes the duel.`]) }));
       }
       // round cap: the less-hurt takes it
       const out = (ha / sa.maxHp) >= (hb / sb.maxHp) ? 'aWon' : 'bWon';
-      return Object.assign(rec, { outcome: out, log: rec.log.concat(['Fifteen rounds, no yield — the judges give it to the less-bloodied.']) });
+      return finish(Object.assign(rec, { outcome: out, log: rec.log.concat(['Fifteen rounds, no yield — the judges give it to the less-bloodied.']) }));
       });
     },
 
@@ -303,8 +304,8 @@
       const rec = this.duelFight(pid, partner, { braveryBonus });
       const pnm = this._cxStats(partner).name;
       // Wounds are real for both — same rule as the group path (break-it r3).
-      try { if (rec.aTaken > 0) this.hurtVillager(pid, rec.aTaken, 'contest'); } catch (e) {}
-      try { if (rec.bTaken > 0) this.hurtVillager(partner, rec.bTaken, 'contest'); } catch (e2) {}
+      try { if (rec.aTaken > 0) this.hurtVillager(pid, rec.aTaken, 'contest', rec); } catch (e) {}
+      try { if (rec.bTaken > 0) this.hurtVillager(partner, rec.bTaken, 'contest', rec); } catch (e2) {}
       const L = rec.log.slice();
       const map = {
         aWon: ['won', 'won the duel'], bWon: ['lost', 'yielded'],
@@ -377,7 +378,7 @@
         try { rec = this.fieldFight(pid, beast, null, { braveryBonus: opts.cheerBonus || 0, rng: R, noFlee: true }); }
         catch (e) { return { outcome: 'lost', detail: 'fight failed', log }; }
         log.push(`Wave ${w}: ${rec.log[rec.log.length - 1] || rec.outcome} (${rec.rounds} rounds, ${rec.vTaken} taken)`);
-        if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e) {} }
+        if (rec.rounds > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest', rec); } catch (e) { console.warn('[contest] field health settlement', e); } }
         if (rec.outcome === 'vDie') return { outcome: 'died', detail: `killed on wave ${w} by ${beast.id}`, log };
         if (rec.outcome === 'vFlee') {
           // Sealed arena: the only vFlee is the judges' call at the round
@@ -617,7 +618,7 @@
               let rec = null;
               try { rec = this.fieldFight(pid, seeker, null, { rng: R }); } catch (e) {}
               if (rec) {
-                if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e2) {} }
+                if (rec.rounds > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest', rec); } catch (e2) { console.warn('[contest] field health settlement', e2); } }
                 if (rec.outcome === 'vDie') results[pid] = { outcome: 'died', detail: 'found and killed', log };
                 else if (rec.outcome === 'vKill') {
                   // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): the
@@ -643,7 +644,7 @@
           try { rec = this.fieldFight(pid, beast, null, { rng: R }); } catch (e) {}
           const st = stats[pid];
           if (!rec) { results[pid] = { outcome: 'lost', detail: 'no fight', log: [] }; continue; }
-          if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e2) {} }
+          if (rec.rounds > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest', rec); } catch (e2) { console.warn('[contest] field health settlement', e2); } }
           if (rec.outcome === 'vDie') results[pid] = { outcome: 'died', detail: 'the beast was not impressed', log: rec.log.slice(-2) };
           else if (rec.outcome === 'vKill' || rec.outcome === 'mFlee') {
             // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): a real
@@ -780,7 +781,7 @@
             // braveryBonus, watch paths send cheerBonus. Mapped now.)
             const rec = this.duelFight(pids[0], pids[1], { braveryBonus: opts.braveryBonus || opts.cheerBonus || 0 });
             const results = {};
-            const apply = (pid, took) => { if (took > 0) { try { this.hurtVillager(pid, took, 'contest'); } catch (e) {} } };
+            const apply = (pid, took) => { if (took > 0) { try { this.hurtVillager(pid, took, 'contest', rec); } catch (e) {} } };
             // Wounds are real in EVERY duel ending (break-it 2026-10-08:
             // death/double-yield previously applied no damage — the survivor
             // of a fatal duel walked away unwounded).

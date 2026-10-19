@@ -22,6 +22,9 @@
 //   - armorTier(protection) -> light|medium|heavy render hint
 //   - headKind(def) -> pot|cap|helmet|other render hint
 //   - isAccessory(def) -> boolean (fits no main slot)
+//   - wornAvoidance(person, itemDefs) -> strongest actual worn accessory damage-avoidance effect (duplicates do not stack)
+//   - sealDamageSettlement(state, result, entries), consumeDamageSettlement(state, result, personId, amount) -> same-state, same-person, once-only resolved damage
+//   - damageSettlementHealth(state, result, personId, amount) -> sealed field health outcome, or null
 // rules:
 //   - namespace_bridge: published to window.S AND global.Scattering (code: bridge below, 2026-10-09 — game.js consumes Scattering; window.S-only publish silently disabled autoEquip everywhere).
 //   - explicit_slots: melee, ranged, head, torso, legs, hands, shoes (1 each) + acc1-4 (non-exclusive). Every equipable item has exactly one assigned slot (code: slotForItem, Steve 2026-10-07)
@@ -188,6 +191,45 @@
     return itemDefs.find(i => i.id === itemId) || null;
   }
 
+  function wornAvoidance(person, itemDefs) {
+    let best = null;
+    for (const slot of ACC_SLOTS) {
+      const item = person?.equipped?.[slot];
+      if (!item || (typeof item === 'object' && item.units != null && !(item.units > 0))) continue;
+      const id = typeof item === 'string' ? item : item.itemId || item.id;
+      const def = defOf(itemDefs, id), chance = def?.damageAvoidChance;
+      if (!Number.isFinite(chance) || !(chance > 0) || chance > 1) continue;
+      if (!best || chance > best.chance) best = { item, id, chance };
+    }
+    return best;
+  }
+
+  // A result is an ephemeral calculation, not an amount-shaped permission to
+  // skip mitigation. Save/load or a new run invalidates the original state.
+  const damageSettlements = new WeakMap();
+  function sealDamageSettlement(state, result, entries) {
+    if (!state || !result || typeof result !== 'object' || damageSettlements.has(result)) throw Error('Invalid damage settlement');
+    const people = new Map();
+    for (const [id, amount, health] of entries) {
+      if (!id || people.has(id) || !Number.isFinite(amount) || amount < 0) throw Error('Invalid damage settlement person/amount');
+      if (health && (!Number.isFinite(health.start) || health.start < 0 || !Number.isFinite(health.end) || health.end < 0)) throw Error('Invalid damage settlement health');
+      people.set(id, { amount, used: false, health: health ? Object.freeze({ start: health.start, end: health.end }) : null });
+    }
+    damageSettlements.set(result, { state, people });
+    return result;
+  }
+  function damageSettlementHealth(state, result, id, amount) {
+    const record = result && damageSettlements.get(result), person = record?.people.get(id);
+    return record?.state === state && person && !person.used && person.amount === amount ? person.health : null;
+  }
+  function consumeDamageSettlement(state, result, id, amount, currentHealth) {
+    const record = result && damageSettlements.get(result), person = record?.people.get(id);
+    if (!record || record.state !== state || !person || person.used || person.amount !== amount) return false;
+    if (person.health && person.health.start !== currentHealth) return false;
+    person.used = true;
+    return true;
+  }
+
   function itemIdOf(entry) {
     if (!entry) return null;
     if (typeof entry === 'string') return entry;
@@ -198,6 +240,7 @@
   function equipScore(itemId, slot, personality, itemDefs) {
     const def = defOf(itemDefs, itemId);
     if (!def) return -1;
+    if (BODY_SLOTS.includes(slot) && (def.slot === 'acc' || ACC_SLOTS.includes(def.slot))) return -1;
     const temp = (personality && personality.temperament) || 'steady';
     const sharing = (personality && personality.sharing) || 'balanced';
     let score = 0;
@@ -467,7 +510,7 @@
     MELEE_SLOT, RANGED_SLOT, BODY_SLOTS, ACC_SLOTS, MAIN_SLOTS, ALL_SLOTS,
     FULL_BODY_BLOCKED, SLOT_ALIASES,
     slotLabel, isFullSet, fullSetSlots, blockedSlots, isSlotBlocked,
-    slotForItem, isAccessory, isRangedWeapon,
+    slotForItem, isAccessory, isRangedWeapon, wornAvoidance, sealDamageSettlement, consumeDamageSettlement, damageSettlementHealth,
     weaponKind, armorTier, headKind,
     equipScore, coordinationBonus, armorOf, weaponBonusOf,
     meleeWeaponOf, rangedWeaponOf,

@@ -1,0 +1,32 @@
+check.js: 241 scripts, 4 parallel (quick)
+...................................................................................F...F.........................................................................................................................................................
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 1.7s)
+      FAIL a real current neutral panel supplies all six maintained collector identities
+        ok   stale Game/controller/harness proof cannot refresh the gate
+        ok   a changed observer needs a fresh real proof
+        ok   failed on/off neutrality cannot refresh the gate
+        ok   a passing seed cannot conceal a failed proof in its cohort
+        ok   a passing seed cannot conceal a warning in another proof
+        ok   every declared cohort still requires a real proof
+        ok   missing balanced metrics cannot enter the maintained proof
+        ok   validation never rewrites the retained input panel
+      
+      measurement proof refresh: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: a real current neutral panel supplies all six maintained collector identities
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 0.3s)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+        FAIL real CLI workflow completed
+      
+      occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+      failing: real CLI workflow completed
+
+check.js: 239 passed, 2 failed in 91s

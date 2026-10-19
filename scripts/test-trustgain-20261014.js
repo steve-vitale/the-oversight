@@ -25,7 +25,7 @@
 // Usage: node scripts/test-trustgain-20261014.js
 'use strict';
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
-const { installTrustCensus, rankChannels } = require('./trustgain-20261014');
+const { installTrustCensus, rankChannels, classifyWrite } = require('./trustgain-20261014');
 const { leadcourt } = require('./policies/leadcourt');
 
 let pass = 0, fail = 0;
@@ -40,6 +40,7 @@ function lastWriteFor(census, vid, caller) {
 }
 
 async function main() {
+  ok('actual haul-arrival caller has an exact physical-work channel', classifyWrite({caller:'mapmemHaulAt',delta:1}) === 'gain:haul-deed');
   const { Game } = await loadGame({ seed: 4242, mode: 'trustgain-proof' });
   await setupGame(Game);
   const v = Game.state.village;
@@ -110,6 +111,15 @@ async function main() {
   const r8 = census.writes.filter(w => w.caller === 'applyRep').pop();
   ok('R8: applyRep write, delta>0', !!r8 && r8.delta > 0, JSON.stringify(r8));
 
+  console.log('== R8b (GREEN): actual carcass butcher/carry — haul deed ==');
+  const carcass = { id: 'proof-carry-carcass', kind: 'animal', items: [
+    { foodKind: 'meat', foodState: 'carcass', plantId: 'meat_rabbit', hiddenKcal: 1000, units: 1 },
+  ] };
+  const carried = Game.mapmemButcherForCarry(other, carcass);
+  const haul = lastWriteFor(census, other, 'mapmemButcherForCarry');
+  ok('R8b: real carcass is taken and yields carried calories', !!carried && carried.kcal > 0 && carcass.items[0].units === 0);
+  ok('R8b: actual carry trust write is attributed exactly', !!haul && haul.delta === 1, JSON.stringify(haul));
+
   console.log('== R9 (GREEN): _trustGain — link currency (separate) ==');
   const testLink = { id: 'proof-link', trust: 10 };
   const applied = Game._trustGain(testLink, 5);
@@ -127,7 +137,7 @@ async function main() {
   ok('R10: every engine write classified to a named channel',
     others.length === 0, others.map(r => r.channel + ' x' + r.fires).join(', '));
   const chNames = rows.map(r => r.channel);
-  for (const want of ['gain:donate-unload', 'drain:pantry-take-sting', 'gain:grief-comfort', 'gain:food-deed', 'gain:rep-drift']) {
+  for (const want of ['gain:donate-unload', 'drain:pantry-take-sting', 'gain:grief-comfort', 'gain:food-deed', 'gain:rep-drift', 'gain:haul-deed']) {
     ok(`R10: channel present: ${want}`, chNames.includes(want));
   }
 

@@ -21,16 +21,19 @@
 //   - fight_scoped: per-fight state lives on the fight object, discarded at fight end (code: fightState)
 //   - never_silent: state changes that matter narrate via say() (code: onStrikeHit)
 //   - assembly_gated: build-arounds are weak alone — full power needs 2+ same-path abilities (code: baPathCount)
+//   - cornucopia_gathers: real plant gathers advance a canonical person's streak before yield; walking keeps the chain, failed gathering, other work, combat and dawn break it (code: onForage / forageMult)
+//   - interest_holder_parity: each living resident holder earns once per person/day from the same opening pantry, using their own build and the shared pantry cap (code: onDayTick)
 (function (global) {
   'use strict';
 
   // Count held abilities on a path (for assembly gating).
-  function baPathCount(game, path) {
+  function baPathCount(game, path, who) {
     try {
       // An evolved ability counts as its root (evolvedFrom keeps the lineage).
       // ABILITY LANES (2026-10-14): known skill-lane abilities (a human
       // haymaker, ambush...) still count toward their path — one helper.
-      const held = (typeof game.ownedAbilityIds === 'function') ? game.ownedAbilityIds()
+      const held = who && who !== game.villagerId ? game.npcOwnedIds(who)
+        : (typeof game.ownedAbilityIds === 'function') ? game.ownedAbilityIds()
         : (game.state.scholar.abilities || []).map(a => (a && (a.evolvedFrom || a.id)) || a);
       const data = game.data.abilities || [];
       return held.filter(id => {
@@ -54,6 +57,22 @@
     const s = game.state.scholar;
     s.buildaround = s.buildaround || {};
     return s.buildaround;
+  }
+
+  function forageWho(game, who) { return !who || who === 'player' ? game.villagerId || 'player' : who; }
+  function forageEntry(game, who) { return ((game.state.village || {}).cornucopia || {})[forageWho(game, who)]; }
+  function forageHeld(game, who) {
+    const id = forageWho(game, who);
+    if (id === game.villagerId || id === 'player') return !!(game.hasAbility && game.hasAbility('cornucopia'));
+    if (!game.npcHasAbility || !game.npcHasAbility(id, 'cornucopia')) return false;
+    const person = game.vpOf(id);
+    return (game.state.village.roster || []).includes(id) && !!person && !person.dead;
+  }
+  function forageCount(game, who) {
+    const entry = forageEntry(game, who);
+    // Preserve a legacy player's manually recorded streak until their next action.
+    const old = forageWho(game, who) === game.villagerId ? ((game.state.scholar.buildaround || {}).cornucopia || 0) : 0;
+    return Math.max(0, Math.min(10, entry ? entry.streak || 0 : old));
   }
 
   var BA = {
@@ -143,7 +162,8 @@
         st.trophyMark = monsterType;
         let shown = monsterType;
         try { if (game.monsterDisplayName) shown = game.monsterDisplayName(monsterType) || monsterType; } catch (e) { console.warn('[buildarounds] mark name:', e && e.message); }
-        game.say(`TROPHY ROOM: ${shown} marked. +50% damage against them today. The wall of heads grows.`);
+        const percent = baPathCount(game, 'hunter') >= 2 ? 50 : 25;
+        game.say(`Trophy Room: ${shown} marked. +${percent}% damage against this type today.`);
         try { game.audioEvent('buildaround', { path: 'hunter', id: 'trophy_room' }); } catch (e) {}
       } catch (e) {}
     },
@@ -269,6 +289,9 @@
 
     // HOARDER'S INTEREST (miser): pantry generates interest.
     onDayTick: function (game) {
+        // Rest breaks a gathering chain for every person, not just the bearer.
+        BA.onForage(game, false);
+        for (const id of Object.keys((game.state.village || {}).cornucopia || {})) BA.onForage(game, false, id);
       // Trophy Room mark resets daily — under its own guard, not only for
       // Hoarder's Interest holders.
       try {
@@ -276,45 +299,61 @@
         if (bs && game.hasAbility && game.hasAbility('trophy_room')) bs.trophyMark = null;
       } catch (e) { console.warn('[buildarounds] trophy reset:', e && e.message); }
       try {
-        if (!game.hasAbility || !game.hasAbility('hoarders_interest')) return;
-        let pantry = 0;
-        try { pantry = game.pantryKcal ? game.pantryKcal() : 0; } catch (e) {}
-        if (pantry < 1000) return;
-        const rate = baPathCount(game, 'miser') >= 2 ? 0.05 : 0.025;
-        // Real food into the real pantry (stockPantry), within the pantry cap.
-        const room = game.pantryCapKcal ? Math.max(0, game.pantryCapKcal() - pantry) : Infinity;
-        const interest = Math.min(Math.round(pantry * rate), room);
-        if (interest <= 0) {
-          game.say(`HOARDER'S INTEREST: the bins are full — nowhere to put the interest.`);
-          return;
-        }
-        game.stockPantry(interest, "Hoarder's interest");
-        game.say(`HOARDER'S INTEREST: your stores earned ${interest} kcal overnight. Patience pays.`);
-      } catch (e) {}
+          const v = game.state.village, me = game.villagerId;
+          if (!v) return;
+          const holders = new Set();
+          if (game.hasAbility && game.hasAbility('hoarders_interest')) holders.add(me || 'player');
+          for (const id of (v.roster || [])) {
+            if (id === me || !game.npcHasAbility || !game.npcHasAbility(id, 'hoarders_interest')) continue;
+            const person = game.vpOf(id);
+            if (person && !person.dead) holders.add(id);
+          }
+          if (!holders.size) return;
+          const day = game.state.scholar.day;
+          // Canonical-person receipts persist through save/load and succession.
+          // Shared opening stock avoids interest-on-interest within one dawn.
+          let ledger = v.hoarderInterest;
+          if (!ledger || ledger.day !== day) ledger = v.hoarderInterest = { day, opening: game.pantryKcal(), paid: {} };
+          if (ledger.opening < 1000) return;
+          for (const who of Array.from(holders).sort()) {
+            if (Object.prototype.hasOwnProperty.call(ledger.paid, who)) continue;
+            const rate = baPathCount(game, 'miser', who === 'player' ? null : who) >= 2 ? 0.05 : 0.025;
+            const requested = Math.round(ledger.opening * rate);
+            const room = game.pantryCapKcal ? Math.max(0, Math.floor(game.pantryCapKcal() - game.pantryKcal())) : Infinity;
+            const interest = Math.min(requested, room);
+            ledger.paid[who] = { rate, requested, kcal: interest };
+            if (interest <= 0) {
+              if (who === me || who === 'player') game.say(`HOARDER'S INTEREST: the bins are full — nowhere to put the interest.`);
+              continue;
+            }
+            game.stockPantry(interest, "Hoarder's interest");
+            if (who === me || who === 'player') game.say(`HOARDER'S INTEREST: your stores earned ${interest} kcal overnight. Patience pays.`);
+            else game.say(`${game.displayName(who)} watches the bins. The stores have grown by ${interest} kcal overnight.`);
+          }
+        } catch (e) { console.warn('[buildarounds] interest:', e && e.message); }
     },
 
     // CORNUCOPIA (forager): forage streaks → yield.
-    onForage: function (game, success) {
+    onForage: function (game, success, who) {
       try {
-        if (!game.hasAbility || !game.hasAbility('cornucopia')) return;
-        const st = dayState(game);
-        if (success) {
-          st.cornucopia = Math.min((st.cornucopia || 0) + 1, 10);
-          if (st.cornucopia >= 3) {
-            game.say(`CORNUCOPIA: ${st.cornucopia} in a row — +${st.cornucopia * 15}% yield. The land rewards devotion.`);
-            try { game.audioEvent('buildaround', { path: 'forager', id: 'cornucopia' }); } catch (e) {}
-          }
-        } else {
-          st.cornucopia = 0;
+        const id = forageWho(game, who), old = forageCount(game, who);
+        const gathered = success && forageHeld(game, who);
+        if (!gathered && !old) return;
+        const v = game.state.village;
+        v.cornucopia = v.cornucopia || {};
+        const st = v.cornucopia[id] || (v.cornucopia[id] = { streak: old, sequence: 0 });
+        st.streak = gathered ? Math.min(old + 1, 10) : 0;
+        if (gathered) st.sequence++;
+        if (gathered && st.streak >= 3 && st.streak !== old && id === game.villagerId) {
+          game.say(`CORNUCOPIA: ${st.streak} in a row — +${st.streak * 15}% yield. The land rewards devotion.`);
+          game.audioEvent('buildaround', { path: 'forager', id: 'cornucopia' });
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[buildarounds] forage streak:', e && e.message); }
     },
-    forageMult: function (game) {
+    forageMult: function (game, who) {
       try {
-        if (!game.hasAbility || !game.hasAbility('cornucopia')) return 1;
-        const st = dayState(game);
-        return 1 + ((st && st.cornucopia) || 0) * 0.15;
-      } catch (e) { return 1; }
+        return forageHeld(game, who) ? 1 + forageCount(game, who) * 0.15 : 1;
+      } catch (e) { console.warn('[buildarounds] forage multiplier:', e && e.message); return 1; }
     },
 
     // GEAR REWRITES (2026-10-14): item hooks are checked at their ability's
@@ -412,5 +451,46 @@
   // Export
   global.Scattering = global.Scattering || {};
   global.Scattering.buildarounds = BA;
+
+  // NPC actions may return through many needs/redirect branches. Only an
+  // actual gather advances sequence; walking keeps focus, other work breaks it.
+  const Game = global.Scattering.Game;
+  if (Game) {
+    for (const name of ['npcTakeAction', 'resolveOneAssignment']) {
+      const act = Game[name];
+      if (typeof act !== 'function') continue;
+      Game[name] = function (who, ...args) {
+        const serial = (forageEntry(this, who) || {}).sequence || 0;
+        const before = ((this.state.village || {}).positions || {})[who];
+        const x = before && before.mx, y = before && before.my;
+        try { return act.call(this, who, ...args); }
+        finally {
+          const after = ((this.state.village || {}).positions || {})[who];
+          const walked = name === 'npcTakeAction' && before && after && (after.mx !== x || after.my !== y);
+          if (!walked && ((forageEntry(this, who) || {}).sequence || 0) === serial) BA.onForage(this, false, who);
+        }
+      };
+    }
+    const startCombat = Game.startCombat;
+    Game.startCombat = function (...args) { BA.onForage(this, false); return startCombat.apply(this, args); };
+    const tbBeginTurn = Game.tbBeginTurn;
+    Game.tbBeginTurn = function (...args) {
+      if (this.tbfight && !this.tbfight.over) {
+        BA.onForage(this, false);
+        for (const fighter of this.tbfight.fighters || []) if (fighter.villagerId) BA.onForage(this, false, fighter.villagerId);
+      }
+      return tbBeginTurn.apply(this, args);
+    };
+    const playerDeath = Game.playerDeath;
+    Game.playerDeath = function (...args) {
+      const prior = this.villagerId, legacy = (this.state.scholar.buildaround || {}).cornucopia;
+      BA.onForage(this, false);
+      try { return playerDeath.apply(this, args); }
+      finally {
+        // Old unscoped player counters must not become a successor's history.
+        if (legacy && this.villagerId !== prior && this.state.scholar.buildaround) this.state.scholar.buildaround.cornucopia = 0;
+      }
+    };
+  }
 
 })(typeof globalThis !== 'undefined' ? globalThis : this);

@@ -13,6 +13,7 @@
 'use strict';
 const assert = require('assert');
 const { loadGame, setupGame } = require('./sim-harness');
+const { stripReadiness, prepareReadiness } = require('./lib/standing-fixture');
 const { classifyDriver, detectCrossings } = require('./sweep-standing-tune-20261013');
 
 let pass = 0;
@@ -45,7 +46,8 @@ function unitHelpers() {
 }
 
 async function liveGame() {
-  const { Game } = await loadGame({ seed: 4242, mode: 'standing-tune-proof' });
+  const { Game } = await loadGame({ seed: Number(process.env.SEED || 4242), mode: 'standing-tune-proof' });
+  Game.debugRegion = 'na_eastern_woodlands';
   await setupGame(Game);
   // shape
   const cfg = Game.standingCfg();
@@ -59,11 +61,15 @@ async function liveGame() {
   // day past the floor + 5 wave-2 ledger points (no standing from w2).
   Game.state.scholar.day = 30;
   for (const id of ['voice_mimic_radio', 'mirror_stag', 'review_drone', 'bright_idea', 'memory_projector']) Game.recordWaveKill(id);
+  stripReadiness(Game);
   // scripted war: 4 wave-3 kills of distinct types -> 100 war
   for (const id of ['redactor', 'gavel', 'focus_group', 'spool']) Game.recordWaveKill(id);
   s = Game.villageStanding();
   ok('4 distinct w3 kills = 100 war', s.war === 100 && s.warPts === 4);
-  ok('wave 4 unlocks at standing 100', Game.unlockedWave() === 4);
+  ok('standing 100 alone holds an unready village at wave 3', Game.unlockedWave() === 3);
+  const readiness = prepareReadiness(Game, 4);
+  ok('real worn gear, known counters and living veterans meet readiness', readiness.ready);
+  ok('wave 4 unlocks at standing 100 once ready', Game.unlockedWave() === 4);
   ok('wave 5 locked without w4 faced', Game.unlockedWave() !== 5);
   // per-type cap: 3 more redactor kills add at most 1 (cap is 2 pts/type)
   Game.recordWaveKill('redactor'); Game.recordWaveKill('redactor'); Game.recordWaveKill('redactor');

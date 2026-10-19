@@ -847,6 +847,7 @@
       }
       ov.pantryKcal -= serve;
       s.kcal = before + serve;
+      this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:serve,nourishment:serve}],'guest');
       var gained = serve;
       m.lastGuestMeal[villageId] = day;
       if (this._nudgeOpinion) this._nudgeOpinion(villageId, 2);

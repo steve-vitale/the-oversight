@@ -4,35 +4,8 @@
 // - Herald: omen-based tutorial (telegraphed lines/bursts, ARRIVAL theme)
 // - Nielsen: ratings game (fight boring to win, 0-100 scale)
 // - Finale: countdown to apocalypse (3-round title card, unavoidable)
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '20261012', 10);
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ a >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-Math.random = mulberry32(SEED);
-
-global.SCATTER_DATA = {};
-for (const f of fs.readdirSync(path.join(ROOT, 'src/data'))) {
-  if (!f.endsWith('.json')) continue;
-  try { global.SCATTER_DATA[f.replace(/\.json$/, '')] = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', f), 'utf8')); } catch (e) {}
-}
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const SKIP_DOM = /app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/;
-const files = [];
-for (const m of html.matchAll(/src="([^"?]+)\?v=/g)) {
-  const f = m[1];
-  if (f.endsWith('.js') && !SKIP_DOM.test(f)) files.push(f);
-}
-const gameIdx = files.indexOf('src/js/game.js');
-eval(fs.readFileSync(path.join(ROOT, files[gameIdx]), 'utf8'));
-global.Game = globalThis.Scattering.Game;
-files.forEach((f, i) => { if (i !== gameIdx) eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); });
-delete global.window;
-Game.data = global.SCATTER_DATA;
-
 let pass = 0, fail = 0;
 function check(name, cond, extra) {
   if (cond) { pass++; console.log('  PASS', name); }
@@ -40,15 +13,18 @@ function check(name, cond, extra) {
 }
 
 (async () => {
-  const H = require('./sim-harness.js');
-  const { Game: G } = await H.loadGame({ seed: SEED });
-  await H.setupGame(G);
-  G.depart();
+  const G = await K.load({ seed: SEED }); K.newRun(G);
+  // Prepared named living army: this isolates kit/grid mechanics, not natural recruitment.
+  const blades = (n, prefix) => {
+    const town = { id: 'kit_fire_' + prefix, name: 'Prepared kit fire', roster: Array.from({ length: n }, (_, i) => ({ id: prefix + i, name: 'Blade ' + prefix + i, age: 35, alive: true, health: 100 })) };
+    G.state.otherVillages.push(town);
+    return town.roster.map(r => ({ vid: r.id, villageId: town.id, name: r.name, hp: r.health, outfitted: [], gearValue: 0 }));
+  };
   const said = []; G.say = (t) => said.push(String(t)); G.audioEvent = () => {};
 
   // HERALD: omen tutorial
   console.log('-- herald --');
-  G.state.titans = { musters: { herald: { allies: Array.from({length:10}, (_,i)=>'a'+i), haven: [], day: 0, outfitted: {} } } };
+  G.state.titans = { musters: { herald: { allies: blades(10, 'a'), haven: [], day: 0, outfitted: {} } } };
   G.state.scholar.health = 9000; G.state.scholar.mx = 4; G.state.scholar.my = 4;
   G.startCombat('herald');
   const h = G.tbfight.fighters.find(f => f.kind === 'monster');
@@ -60,7 +36,7 @@ function check(name, cond, extra) {
 
   // NIELSEN: ratings game
   console.log('-- nielsen --');
-  G.state.titans.musters.nielsen = { allies: Array.from({length:12}, (_,i)=>'b'+i), haven: [], day: 0, outfitted: {} };
+  G.state.titans.musters.nielsen = { allies: blades(12, 'b'), haven: [], day: 0, outfitted: {} };
   G.state.scholar.health = 9000;
   G.startCombat('nielsen');
   const n = G.tbfight.fighters.find(f => f.kind === 'monster');
@@ -72,7 +48,7 @@ function check(name, cond, extra) {
 
   // FINALE: countdown apocalypse
   console.log('-- finale --');
-  G.state.titans.musters.finale = { allies: Array.from({length:20}, (_,i)=>'c'+i), haven: [], day: 0, outfitted: {} };
+  G.state.titans.musters.finale = { allies: blades(20, 'c'), haven: [], day: 0, outfitted: {} };
   G.state.scholar.health = 9000;
   G.startCombat('finale');
   const f = G.tbfight.fighters.find(f => f.kind === 'monster');

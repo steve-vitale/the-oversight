@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict');
+const root=path.resolve(__dirname,'../..'),common=path.resolve(root,cp.execFileSync('git',['rev-parse','--git-common-dir'],{cwd:root,encoding:'utf8'}).trim()),B=require('../../scripts/balance-panel'),S=require('../../scripts/lib/balance-scorecard'),F=require('../../scripts/balance-features');
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),panels={},raw=[],blobs={};
+for(const arm of ['before','after']){
+ const frozen=path.join(common,'release-main67-final-'+arm+'-r1'),cache=path.join(common,'release-main67-final-'+arm+'-panel-r3'),bytes=fs.readFileSync(path.join(cache,'panel.json.gz')),panel=JSON.parse(z.gunzipSync(bytes));panels[arm]=panel;
+ assert.deepEqual(B.manifest(frozen),panel.sources);assert(panel.validity.sourcesStable&&panel.validity.neutrality.every(n=>n.match&&!n.warnings));assert.equal(panel.rows.length,64);assert(panel.rows.every(r=>!r.warnings.length&&!r.observerErrors.length&&!r.gear.errors.length&&Object.keys(r.metrics).length===23));
+ for(const[rel,h]of Object.entries(panel.sources)){const text=fs.readFileSync(path.join(frozen,rel),'utf8').replace(/\r\n/g,'\n');assert.equal(sha(text),h);blobs[h]=text}
+ for(const file of fs.readdirSync(path.join(cache,'cases')).filter(x=>x.endsWith('.json')).sort()){const text=fs.readFileSync(path.join(cache,'cases',file),'utf8'),j=JSON.parse(text);assert.equal(j.key,sha(JSON.stringify(j.identity)));assert.equal(j.resultDigest,sha(JSON.stringify(j.result)));raw.push({arm,file,text})}
+ fs.writeFileSync(path.join(__dirname,'release-main67-'+arm+'-r1.json.gz'),bytes,{flag:'wx'});const features=F.summarize(panel);fs.writeFileSync(path.join(__dirname,'release-main67-'+arm+'-features-r1.json'),JSON.stringify(features,null,2)+'\n',{flag:'wx'});fs.writeFileSync(path.join(__dirname,'release-main67-'+arm+'-features-r1.md'),F.markdown(features),{flag:'wx'});
+}
+assert.deepEqual(B.manifest(root),panels.after.sources);
+for(const rel of Object.keys(panels.before.sources).filter(r=>r.startsWith('scripts/')))assert.equal(panels.before.sources[rel],panels.after.sources[rel]);
+const report=S.comparePanels(panels.before,panels.after);fs.writeFileSync(path.join(__dirname,'release-main67-scorecard-r1.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});fs.writeFileSync(path.join(__dirname,'release-main67-scorecard-r1.md'),S.markdown(report),{flag:'wx'});
+for(const[n,data]of [['raw',raw],['source-blobs',blobs]])fs.writeFileSync(path.join(__dirname,'release-main67-'+n+'-r1.json.gz'),z.gzipSync(JSON.stringify(data)+'\n'),{flag:'wx'});
+console.log(JSON.stringify({decision:report.decision,rawJobs:raw.length,sourceBlobs:Object.keys(blobs).length,policies:panels.after.options.policies.map(policy=>{const rows=p=>p.rows.filter(r=>r.row.policy===policy);return{policy,beforeWins:rows(panels.before).filter(r=>r.row.won).length,afterWins:rows(panels.after).filter(r=>r.row.won).length,changedMetrics:rows(panels.after).filter(a=>JSON.stringify(a.metrics)!==JSON.stringify(rows(panels.before).find(b=>b.row.seed===a.row.seed).metrics)).map(a=>a.row.seed)}})}));

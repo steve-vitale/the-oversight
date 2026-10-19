@@ -1,0 +1,43 @@
+check.js: 245 scripts, 2 parallel (quick)
+..................................................................................F.F..............F.................................................................................................................................................
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 0.3s)
+          at Object.validate (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\balance-proof-update.js:8:76)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.13.0
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 0.3s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 0.7s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — src/js/abilityActions.js,src/js/game.js,src/js/sigW5.js
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: src/js/abilityActions.js
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+check.js: 242 passed, 3 failed in 154s

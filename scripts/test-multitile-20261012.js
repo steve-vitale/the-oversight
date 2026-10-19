@@ -177,7 +177,9 @@ function mulberry(seed) {
   check('main.css: .multitile span rules present', () => {
     const css = fs.readFileSync(path.join(ROOT, 'src/css/main.css'), 'utf8');
     assert.ok(css.includes('.csprite.multitile'), 'multitile css missing');
-    assert.ok(css.includes('width: 200%'), 'span sizing missing');
+    assert.ok(css.includes('width: calc(var(--body-size, 2) * 100%)') && css.includes('height: calc(var(--body-size, 2) * 100%)'), 'parameterized body sizing with the old two-cell default missing');
+    const app = fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
+    assert.ok(app.includes('style="--body-size:'), 'actual renderer does not supply the occupied body size');
     assert.ok(css.includes('width: 300%'), 'mts3 sizing missing');
   });
   check('game.js: tbPlayerStrike range uses fighterDistTo', () => {

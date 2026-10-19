@@ -11,6 +11,7 @@
 // AFTER: all green.
 // Usage: node scripts/test-bal-waves-20261010.js [seed]
 'use strict';
+const { stripReadiness, prepareReadiness } = require('./lib/standing-fixture');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const { loadGame, setupGame } = require(ROOT + '/scripts/sim-harness');
@@ -23,8 +24,9 @@ function check(name, cond, detail) {
 }
 
 async function main() {
-  const seed = parseInt(process.argv[2] || '7', 10);
+  const seed = parseInt(process.argv[2] || process.env.SEED || '7', 10);
   const { Game } = await loadGame({ seed, mode: 'bal-waves-test' });
+  Game.debugRegion = 'na_eastern_woodlands';
   await setupGame(Game);
   const s = Game.state.scholar;
 
@@ -39,6 +41,7 @@ async function main() {
   // setLedger({wave: [monsterIds]}): reset the ledger, credit via the REAL
   // scorer (per-type caps enforced honestly, not hand-set points).
   const setLedger = (pts) => {
+    delete Game.state._standingPeakWave; // independent scripted gate case
     Game.state.waveLedger = null;
     Game.ledgerState();
     for (const w of Object.keys(pts)) {
@@ -93,6 +96,9 @@ async function main() {
   // (audit 2026-10-14: the standing rungs now also need the wave-3 rung —
   // 5 w2 points past the day floor — so W2 is credited too.)
   setDay(60); setLedger({ 2: W2, 3: W3 }); setFaced([]); setRank('regional');
+  stripReadiness(Game);
+  check('standing 100 does not promote an unready village', Game.unlockedWave() === 3);
+  check('prepared live village meets wave-5 capability bars', prepareReadiness(Game, 5).ready);
   check('w4 standing lane (4 w3 kills = 100) unlocks', Game.unlockedWave() >= 4, 'uw=' + Game.unlockedWave());
   // w4: engagements score nothing (unchanged)
   setDay(60); setLedger({}); setFaced(['redactor', 'gavel', 'spool']); setRank('regional');

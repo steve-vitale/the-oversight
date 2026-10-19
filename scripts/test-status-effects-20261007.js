@@ -5,16 +5,8 @@
 // per-turn and per-dayPart ticks, expiry, cure, legacy bridges (stun fields,
 // s.diseases/s.poisons), slow move mod, fear fizzle.
 
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-const { execSync } = require('child_process');
-
-function headFile(p) {
-  try { return execSync(`git show HEAD:${p}`, { cwd: ROOT, encoding: 'utf8' }); }
-  catch (e) { return fs.readFileSync(path.join(ROOT, p), 'utf8'); }
-}
-const seJson = JSON.parse(headFile('src/data/statusEffects.json'));
+const H = require('./sim-harness');
+const seJson = require('../src/data/statusEffects.json');
 const statuses = seJson.statuses;
 
 let pass = 0, fail = 0;
@@ -36,36 +28,21 @@ check('stun bridges legacy stunned', statuses.stun.bridge && statuses.stun.bridg
 check('stun_full bridges stunFull', statuses.stun_full.bridge && statuses.stun_full.bridge.legacyFullField === 'stunFull');
 check('stun immuneIf elderCalm', statuses.stun.immuneIf === 'elderCalm');
 
-// ---- 2. Engine behavior (stub Game) ----
+// ---- 2. Engine behavior (complete current shared runtime) ----
 console.log('engine:');
+(async () => {
+const { Game } = await H.loadGame({ seed: Number(process.env.SEED || 7), mode: 'status-proof', narration: true });
+require('./godpath/lib').newRun(Game);
+const body = Game.state.scholar;
+Object.assign(body, { health: 100, day: 5, kcal: 2000, diseases: [], poisons: [], statuses: [], equipped: {} });
+// Existing resistance scenarios supply their explicit modifier input; the
+// actual status engine, canonical person and worn-damage method remain live.
+Game._mods = {};
+Game.modTarget = function (name, dflt) { return this._mods && this._mods[name] != null ? this._mods[name] : dflt; };
 let sayLog = [];
-const Game = {
-  data: { statusEffects: seJson },
-  state: { scholar: { health: 100, day: 5, kcal: 2000, diseases: [], poisons: [] } },
-  say: function (msg) { sayLog.push(msg); },
-  audioEvent: function () {},
-  modTarget: function (name, dflt) { return this._mods && this._mods[name] != null ? this._mods[name] : dflt; },
-  _mods: {},
-  monsterDisplayName: function (id) { return id || 'monster'; },
-  tbEndCheck: function () { return false; },
-};
-Game.state.scholar.statuses = undefined;
+const realSay = Game.say;
+Game.say = function (msg) { sayLog.push(msg); return realSay.call(this, msg); };
 
-const _g = { Scattering: { Game: Game } };
-const src = headFile('src/js/statusEffects.js');
-// The module is an IIFE: (function (_g) {...})(typeof window !== 'undefined' ? window : global)
-// Invoke it with our stub holder as `global`.
-(function () {
-  const vm = require('vm');
-  const sandbox = { _gholder: _g, Math: Math, console: console };
-  sandbox.window = undefined;
-  const patched = src.replace(
-    /\(typeof window !== 'undefined' \? window : global\);?\s*$/,
-    '(_gholder);'
-  );
-  vm.createContext(sandbox);
-  vm.runInContext(patched, sandbox);
-})();
 if (typeof Game.applyStatus !== 'function') {
   console.log('FAIL module did not attach to Game');
   process.exit(1);
@@ -166,4 +143,5 @@ sayLog = [];
 check('cure missing -> false', Game.cureStatus('scholar', 'burn', 'x') === false);
 
 console.log(`\n${pass} passed, ${fail} failed`);
-process.exit(fail > 0 ? 1 : 0);
+process.exitCode = fail > 0 ? 1 : 0;
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

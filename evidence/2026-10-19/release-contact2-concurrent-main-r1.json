@@ -1,0 +1,178 @@
+{
+  "base": "2d58c7c5c79ebf27e3d2ddc9fc21855dc756a178",
+  "latest": "0545151a5a9ae46b2247f5b5c8525aac45e50d67",
+  "preview": "ab47a699c4f17d58a1bd2167097b9840feac87ab",
+  "commits": 67,
+  "commitSubjects": [
+    "f8abe84dd51bce20b0af82f188aa72c5a63aaf89 sim-armory: KILLED-AT-PILOT — 10th veteran-production attempt dead (companion damage-share 0.90x vs 2x bar; arming without moving doesn't get them into the fight); layer deleted zero-trace, instruments + evidence landed",
+    "e83fa3e8bc490989586dea1d518663ee2f47b0ed journey-succession r26: want-seed follow-ups name the dead bearer (inherited seed). A want-seed planted in the predecessor's conversation was stamped inh at the handoff but the follow-up opener framed the successor as the one who was asked ('About that question — ...') — fabricated shared history. The follow-up now names them once: 'I asked Kevin about X — Kevin's gone. <question>'. Favor seeds excluded (convoFavorFollowup names the predecessor itself); one-shot via inheritedSeedAcked. Proof: scripts/test-succession-seed-inherit-20261019.js RED->GREEN; pilot scripts/diag-succession-r26-20261019.js (4 seeds, M1 4/4, M2 3/4).",
+    "24c8e1364c3d487cb78d1cb94944d9312eba6500 sim-windowsurvive: DIAG-GO — window-death taxonomy (72 deaths, 0 unattributed): raids 40/72 the #1 window killer, scholars die more than villagers (42 vs 30), they die rich not starving (pantry 28k mean); 63/72 addressable by window support; instruments + evidence landed",
+    "348bad56e6231f9e13dc2ec9d714ed4d0a6b0956 sim-vetrel1: DIAG-GO — VETREL=1 re-measure (32/32): veteran channel is real (+3 villager wave-4 kills, +1 veteran leg) but buys kills with lifespan (median survival -58d, window deaths 3→7); stall classes unmoved; proof 28/28 (DET hang filed as test-infra); instruments + evidence landed",
+    "ef5940b967e18298b90ef803d125542e4ad00170 [needs-eyes] journey-scale r10: table-approach audit — first approaches in 36 journey runs (4/4 with feast layer); stranded-curious want fix + proof",
+    "fcc8a70e2c2e714a47763ab763b674b88a5f0979 journey-scale r10: appendix — stranded-curious transcript (overwritten by A/B filename collision, recovered from run read)",
+    "51e42cea9bfc99a08f99e6cd9fdc6de519d5eb7f sim-windowsurvive recovery: finish diagnostic — 3 base-faithful transcripts (death-day-exact vs measured teles) + Village assessment, Sense-testing, extended Metric review (§14 doubts), Named nexts (winsupport GO), Out-of-arm findings, Convergence, Files; instruments + evidence only, zero src/js",
+    "0d7c2eb076ca13011ce3c6237c985e33e75e9162 sim-racksanswer-b: NO-ARM documented — racks-full binding lever space exhausted (smoke prioritization proven no-op 8/8, feast-draw killed 5 ways, racks-cap game-code killed); no sims warranted, no game-code changes; instruments + evidence landed",
+    "8800426d7662de50cc4c0ba7c38236d13d01ebf0 journey-endgame r20: stand-down verb for unfillable titan musters + upkeep honesty [needs-eyes]",
+    "1ce2a05c3e2d929229c93e03f2f4ecd59f35a9d4 journey-endgame r20: add pilot seed 8991 table frames (missed in r20 commit)",
+    "9f36811543702ae01ea6f0835f8efb964f416fde sim-cookbulk-b3: PILOT GO — capacity-honest batch-cook trigger lands (24,812 kcal/side >= 20k bar; survival clean 103d vs 100d; b2's -46d signal retired as noise). Layer scripts/policies/cookbulk-b3.js (COOKBULK_B3=1, default OFF, zero src/js) + proof 28/28 + sweep/instruments + evidence.",
+    "307958ebe9bd6fd04a360e68336136a5f9daa638 journey-landing r25: leg stays green on fcc8a70e2; namebeast recency fix + resume-quote hygiene + bearer-redaction comment repairs; harness + 2 RED->GREEN proof tests",
+    "7de3bbede5174c92424dd00e5ec1cad2e925634e sim-presence: PILOT GO — 11th veteran-production attempt (presence-routing without movement) goes 7.05x on join rate",
+    "ee5802c4064aa0ebce62301a99c876bc8bdea025 journey-social r27: pilot — moots & gossip as citizen-player (M1 MISS 1/4: NPC-NPC cases don't form under law-abiding play, beloved-village gate; M2-M5 GO: gossip 27-76/run, trust +4 on the single moot, transcripts clean, all alive d142); instruments + evidence landed, no game-code changes",
+    "87670aab21e907159d4fa00a4f48475d854e2d4c journey establishment r16: slipOrigin pool 3->6 kills the verbatim echo (seed 61 Owen day19->day40 same class as r14 slipGoal fix) + EVID env override on r15/r16 harnesses; proof scripts/test-est-sliporigin-pool-r16-20261019.js RED->GREEN 5/5; regressions slipgoal-norepeat green, dialog-coherence 37/37; leg stays green on 307958ebe (M3/M4 GO; M1/M2/M5 metric-broken not behavior-broken)",
+    "ad23720f3abc64e330910cd5d5ae383a77cc88b7 sim-winsupport: PARKED with metric review — NO-GO on guardrails (table 9/16 vs 11/16, starvation death; both within noise at n=16), PRIMARY GO (+15d median survival 116 vs 101, first real window-axis signal). METRIC-BROKEN: knife-edge guardrails need tolerance band + more seeds. Layer scripts/policies/winsupport.js (WINSUPPORT=1, default OFF, zero src/js) parked; proof 27/27 + sweep/instruments + evidence",
+    "5b3237b7165ac749cf7112ddb153417fadf6262f journey-deepening r14: mood-fix holding + wave-3 faucet watch harness — 6/8 unlocks (no faucet escalation), lonely 3/28=11% on day-100 audits (M1 GO), 7 w3fights with sig mechanics, 16/16 transcripts sense-read 0 senseless, 7/8 villages alive 0 mislabels; no game-code changes",
+    "00b63e8b63f58595631702662525fa150dcac22c sim-doomrevive-b2: land doomed-only draw discipline under recalibrated engagement bar (GO: primary 0.263x, engagement 194 fires/13 of 16 runs, all guardrails green) — layer extracted byte-identical from sim-doomrevive-b; instruments + evidence",
+    "ac33c138f7c7007f811725eb178614030342912b journey-crisis r28: schism reachability proven (freeloader-vote exile fires the crisis 1/4 drain seeds); exile refrain verbatim filler loop fixed (returnToVillage variants + silence)",
+    "f53227a4dd08eab1750434e89de5104b4bba74ba sim-cookbulk-confirm-b: CONFIRM GO — 64/64 runs, PRIMARY 24,849 kcal/side >= 20k bar, all guardrails green (survival 118 vs 117, starvation 2<=2, national 11>=10, no new death modes). Landed layer 9f3681154 CONFIRMED; instruments + evidence only, zero src/js",
+    "8ef833b3eca623f3fad323fd74786b51781453c3 sim-cookbulk-confirm-b repair: full-64 verdict numbers replace the 7-seed partial; GO holds; sense-testing complete — repair instruments + evidence only, zero src/js",
+    "25094e45eba53a413555d095b4a87718805a89df beat-identity: item-aware devotion beat + speaker/day spoil mutters (narration/sense blank fill, voice-only, proof test-beatidentity-20261019.js GREEN)",
+    "94cf9552d739052be32c1f6b45449d21e47039f9 sim-presence-confirm instruments + evidence: confirm sweep (64 runs, NO-GO on +4 living-veterans bar), analyzer, panel compare, transcripts, proof test-presence-confirm.js. Layer deletion in separate commit.",
+    "993d58d13a7a2d285690850de9b48578702ff3d1 sim-presence-confirm: KILL PROTOCOL — delete scripts/policies/presence.js (confirm NO-GO: living-veterans 4 vs 3, bar +4). Mechanism proven but outcome missed; the window kills killers faster than presence makes them. Instruments + evidence landed in c807156f.",
+    "d11aa710d5b71ecbaa71afbebeacf2160a31d26b journey-scale r11: MERCY-grace re-measurement — the yoke's shadow holds (M1-M4 GO, 8 seeds, warcourt/all-mercy); r11 harness with grace-window instrument + evidence",
+    "a8e08e0c076a9e8512c54df29a36928bd923c851 journey-succession r26 (lane B): the debt the successor keeps — 5-seed succession run. M1 5/5 mantles; M2 open-book beat proven on orchestrated handoff (fires when a promise is open at death); M3 miss documented (8102: inherited re-ask fired, successor committed, poverty broke the promise honestly — no zombies); organic seeds: 0/4 open promises at death (competent players keep their word); 8101 wild-confirms the sibling r26 seed-inherit fix. Instruments + evidence only, zero src/js.",
+    "9797a7238614c7f87d7f1bad69896da8a6282924 sim-snareteach-b: land SNARETEACH teach-drive (pilot GO 5/8, median learn day 6->2) — policy-side, default OFF, zero src/js changes; proof 11/11 + pilot + panel compare",
+    "549a640cd850e1155efb9f8c553098376042310f sim-winsupport-decomp: KILLED (concept-dead) — all 4 variants miss on 160 fresh-seed runs (full -7d, triage +1d, posture -6d, gated -7d vs +10d bar). The parked +15d did NOT replicate — seed noise. Layer deleted zero-trace per kill protocol; proof 52/52 + sweep/instruments + evidence; zero src/js",
+    "e73a323ef01b247ead7e39f5cd7a03561dd0c988 loop-b 0930Z: run-level evidence sim-loopb-0930z.md (3 arms, wall numbers, metric review)",
+    "66126a96f83ed9654e73ab106df914dd11a80182 sim-cookbulk-confirm-b: CORRECT verdict numbers — recompute from full 64 per-seed files (was 7-seed partial: 24,849/118v117/2v0/11v12; now 24,654/120.5v111/8v15/24v22). Verdict unchanged GO (CONFIRMED); all bars hold",
+    "6143e6cd680f37e85174ee6114f36a5bfe6c154c loop B 0930Z run note (evidence only, from sim-loopb-0930z.md untracked file)",
+    "a68416ceecd217a4e87ccd95f95151471c24ed69 sim-winsupport-decomp finish: repair landed proof (kill-protocol skip + KILLED-VERDICT, 5/5 green), build 4x §15 panel compares from committed corpus, complete evidence write-up (Results/Village/Sense/Named-nexts/Convergence + stale-lock recovery note). Zero src/js.",
+    "d38335c3bd9b510e22db7d2850759d266295ec34 journey-landing r26: leg stays green on 6143e6cd6 (V1''-V6 + haul arc + beat-identity + r26/r28 wild all GO); harness (name-aware Mara check) + analyzer + run note",
+    "1b169cf153fbf2ab64ecf5ccca456c9430be9344 sim-presencetend: presence+tend recombination pilot NO-GO (killed at pilot) — primary -2 vs +1/8 bar, 3 guardrail fails; layer deleted zero-trace, instruments + evidence land",
+    "e675e6a45a43d8b37b690dd6d8f6cd91a9de19a3 sim-tendhalf: TEND-ONLY window support killed at pilot (primary -7d vs +10d bar, guardrails hold) — kill protocol: layer deleted zero-trace, instruments + evidence land",
+    "27834f44d47b24b49fb7d1f50bc21e4e294ae020 journey-endgame-r21: lane B endgame leg (recovery of timed-out run) — M1-M5 GO, coalition-depth findings, evidence + per-seed telemetry",
+    "276fc2afdc61447f544baecbadc32828b8422224 loop B 1030Z evidence: sim-cookbulk-exilewatch-b adjudication (from untracked file)",
+    "e61bb5c8cb5db1e42e1281427cc15d5d8fb3c730 journey-establishment r17: wild surfacing-rate harness (loss-breakdown probe for contest gossip salience)",
+    "98108038dc93c8b9c3b8dc93c41da9a95371733e sim-snareteach-gift-b2: LOWERED-BAR wins — gift bar kcal>40%+1 edible lands, fixes #632; NO-GIFT sub-arm killed, no trace",
+    "4c6c2c3fd9c84d871154bc2c861c781b983c6545 sim-snareskill-b: GO (backlog #631 already wired, no code change) — trap-success lever evidence + instruments (recovery of timed-out 1030Z run)",
+    "43e61a81c1b84ef761ad10fa91b1593bfe4ad54c sim-trapline-census-b2: event-tracked NPC trapper census instrument + evidence (loop B food-economy axis, instrument-only)",
+    "429d24039a541948b0f46dedfbc2f516a9c62eb9 sim-pitstaff-b2: NOT RE-RUN — backlog check found the 1930Z kill on master (d03ebcc1f); evidence only, no layer, no sims",
+    "9fca6babcff54923bcb8eb58df1308220ca52a7e sim-armorup: armor-donning discipline KILLED at pilot (NO-GO) — instruments + evidence land, layer deleted zero-trace",
+    "19a600fc7f4c333427059fa4bb83e14aeb60579d sim-raidwall: hold-Haven raid doctrine killed at pilot — primary -18.2% vs 30% bar, wave-4 guardrail 13 vs 16 breached; layer deleted zero-trace, instruments + evidence land",
+    "b2368e0fc0c4938268658779500e1733475b798a sim-handbookloot-b: Trapper Handbook channel starved on current master (0/24 runs) — find-rate instruments + census evidence land, 2026-10-18 fieldWeight kill stands (engagement floor fired, no lever played)",
+    "c02c281718d5d7e4e88a1327e6cd6bb9405e7fa3 journey-deepening r20: wave-3 kill-gate reachability for competent play (7/8 seeds unlock by day 80) — measurement only, no game-code changes",
+    "04effd281b8a53039fc4226ea5f259bb7c7eafbf journey-endgame r22: path breadth — all seven doors played; defiant relay-person fix (names living villager) + proof test",
+    "6b7954cfdd7341ae8f174814a53f68fd6e96d661 journey-endgame r22: driver run logs",
+    "85011fc51e49ebd11a0be5e443b8b2589438bb99 sim-wildhold: GO — wild-channel deaths 29→18 (37.9%, ≥30% bar); guardrails PASS (national 20v18, table 17v18, wave-4 22v22). Layer wildhold.js + gated vetrel.js; proof + panels + evidence (recovery of timed-out 1115Z run)",
+    "fa31b60dee811ad369b2abe2049abd5e4dd0ee97 sim-snaremech-b: finding #631 logic run — snare_wire L2/L3 trap_success pipeline proven live (bounded: L2 background-only, L3 unreachable) — proof scripts/test-snaremech-b.js 11/11 + evidence/2026-10-19/sim-snaremech-b.md",
+    "f04363e4441d2f96ba48d1d2027669fe88962f62 journey-social r28: gossip-resume beat — resuming an open gossip thread now delivers the gossip engine's next beat (was: generic echo then winddown stall, r27 blank); convoGossipBeat extracted + shared by ask:gossip topic and convoThreadBeat; proof 12/12 GREEN, 4-seed pilot 179 resumes/0 stalls, check.js --quick 96/96",
+    "afb1a8f4910e5daeba1fa6acb77a11c4a939788b journey-scale r12: Founding Council pool-answer copy honest under shortfall — 'were called to pour X kcal each, Y came in' instead of asserting full pours next to the shortfall line; proof test RED->GREEN (3 seeds)",
+    "42fd304828bd3e31d1d3efc15fa2a9485388a286 journey-scale r12: covenant-road harness (council stamp + league log + Watchers stamp) and scalecourt COVENANT_ANSWER env (default pact)",
+    "1941fdd72decc8de55556b29499d6751047deb41 journey-scale r12: covenant-road re-measurement evidence (8 pact seeds + 3 pool-arm seeds, 29 transcripts, scale-covenant baseline)",
+    "725d207fc1365bbd2a9ac3ac3386099c2c109476 journey-scale r12: villager transcripts (covenant-road people check)",
+    "dd749bfee4047de70c5ca7843bc5c938b9739768 journey-scale r12: remaining villager transcripts (12002/12003/12005/12008/12011)",
+    "aaa085576861af5b70196a4e0e0838cf851302f7 sim-huntfix-b: KILLED-AT-PILOT — hunt-detector wiring fix (metric-broken, not concept-dead). Proof test (23-check RED→GREEN, now RED: documents the ghost-occupation bug) + pilot sweep + panel builder + evidence. Primary 0.79x < 1.15x bar — task-lead lottery swamped the mean; staffing-channel effect +92% (1.92x on 11/16 clean pairs). Det-gate 16/16 byte-identical. Guardrails pass. Layer deleted zero-trace; killed diff preserved in evidence for the next run.",
+    "1e8ec9e87647778b019aabba6caf4a978bb675e2 sim-huntfix-b: add det-gate per-seed JSONs (16/16 byte-identical trajectories, fix present vs pristine control)",
+    "296b48ff5ad64055a964458e15976ae55435b09a journey-landing r27: leg stays green on dd749bfee (V1''-V6 + haul arc GO; r28 gossip-resume in-wild documented); harness + analyzer + run note",
+    "aad4ca810da8943d256a182e63b8fb35abd73cbf [needs-eyes] journey-crisis r29: moot-conviction exile route proven (3/4 murder-spree seeds); moot remembers prior convictions (-15 belief per weregild); accusation line variants — proof 12/12, check.js 96/96",
+    "10837903fd9cb3216f8305926f68aee192d9d1b4 sim-armorprod: armor-production drive KILLED at pilot (NO-GO) — instruments + evidence land, layer deleted zero-trace",
+    "1adc4b1b1a359a6908fc1abc61e1a9577f656734 sim-scholarraid: scholar-only raid hold KILLED at pilot — primary -17.0% vs 30% bar, all guardrails PASS (wave-4 16->15, the de-risked guardrail holds); layer deleted zero-trace, instruments + evidence land",
+    "929a6ae90ca65fe3c6d52527db0859739257b5a3 sim-scholargear KILLED-AT-PILOT: 21% scholar combat death reduction but guardrail fail (weight bug)",
+    "f1997f58cc390399f27f67789c3e6de62acc0c40 journey-succession r27: promisee-bearer fix — favor goes 'moot' not 'asked' when the promisee inherits the mantle (zombie ledger entry); proof 14/14, M3 close PROVEN 3/3 (recovery of timed-out lane B run)",
+    "cd8dfa0f284732d0ef4fc7613ba56a7bc2d471a3 journey-deepening r21: contact-conditioned reachability (6/8 unlocks by d80) + widened kill-source attribution + mood hold (12% lonely) — measurement only, no game-code changes",
+    "67d6252ef6a8a73d55f396447001387ba69bdb58 sim-gearday2 KILLED-AT-PILOT: weight-honest gear-day re-arm misses primary (107->86, -19.6% vs 20% bar) + 3 guardrail fails (wave-4 16->12, survival -29d, tooHeavy 1.6x); villager death shift (+29% villager combat deaths) — scholar safer, village frailer; layer deleted zero-trace, instruments + evidence + KILLED-VERDICT proof (20/20) land",
+    "0545151a5a9ae46b2247f5b5c8525aac45e50d67 Version bump 67d6252ef-20261019-175053 (batch ship)"
+  ],
+  "files": [
+    {
+      "file": "index.html",
+      "base": "f4d54c9367b84089bafa205caf85c030117122d7",
+      "latest": "51a1ff4e4176c9454319c6b94c04d8b49266d128",
+      "preview": "b72acea3cd4397f2968939792886fe8ddc87e14e"
+    },
+    {
+      "file": "src/js/betrayal.js",
+      "base": "37c88d40f5a0a211ce71ec48ce45f3867f9771c2",
+      "latest": "b61c398678cbd69b1ab4c504d97db89cc055ccb2",
+      "preview": "33902edc5e86c50f51dafe6ee85694ed31386227"
+    },
+    {
+      "file": "src/js/build.js",
+      "base": "07fc119714e080087dfee134537d742578bb55f8",
+      "latest": "ce738d0a5bdf85f02daa2b3f0a7225a62fa559f0",
+      "preview": "07fc119714e080087dfee134537d742578bb55f8"
+    },
+    {
+      "file": "src/js/conversation.js",
+      "base": "a9adf4f1c451bfc10c0daf6210b005e798ebfb96",
+      "latest": "43aa7fd99bb3f96f4aa14e3499726c487a1508da",
+      "preview": "fb16002ebeabae093bb9792a7b443b81792713b8"
+    },
+    {
+      "file": "src/js/convo-wants.js",
+      "base": "467512de96f000f3571e4ea62b7eecf90a673be9",
+      "latest": "5daef9a58c7696fe75ba901ec055bba7a34f3878",
+      "preview": "108cdd13a06ba6286f7b8ae8078476013fd09530"
+    },
+    {
+      "file": "src/js/convoTopics.js",
+      "base": "e9b79219bc5ea64b4624231472675a31781f7ca3",
+      "latest": "3958ba905741fe5d3c167e7928acccbd334c607c",
+      "preview": "e9b79219bc5ea64b4624231472675a31781f7ca3"
+    },
+    {
+      "file": "src/js/food.js",
+      "base": "8f6cb60de13e4fde52e1f2d030f624f085813961",
+      "latest": "f40f02bf151f18581c1eb64fe37dc213312867fe",
+      "preview": "e05b17b2c2eedb6a8fea9b291da9f6bfb9ad4f66"
+    },
+    {
+      "file": "src/js/game.js",
+      "base": "76464688957a9e2abf26742a80441459988e91c0",
+      "latest": "5b20489ddfc834a583751445b005fa02bdeac3bd",
+      "preview": "5abd24b5eb7edf56fbada32ae9d0bcb19bec23ff"
+    },
+    {
+      "file": "src/js/hierarchy.js",
+      "base": "fcbfe0d5b0cc1ae206a84d6b27c5613586c1a3bb",
+      "latest": "a0ab179ad4f65ad80f3727b7a1af966af8dd7046",
+      "preview": "fcbfe0d5b0cc1ae206a84d6b27c5613586c1a3bb"
+    },
+    {
+      "file": "src/js/ledger.js",
+      "base": "45f4f443738a153cf8ca85561b7857fef0d7b391",
+      "latest": "ac505379b865485c8154983d973db465d85906d1",
+      "preview": "973036b06277404e2f0d7fc14ee3daa992d0166e"
+    },
+    {
+      "file": "src/js/progression.js",
+      "base": "68748954ed4e47043052728c9f21534aa822cda6",
+      "latest": "94505f55de8e42e37f780cb88756ed032e58c105",
+      "preview": "68748954ed4e47043052728c9f21534aa822cda6"
+    },
+    {
+      "file": "src/js/table-defiant.js",
+      "base": "6e8e849d3cc824fd754357ca67ae1a00b93307d5",
+      "latest": "902337058e6eca970c8f286850b8a14fc34bc40f",
+      "preview": "6e8e849d3cc824fd754357ca67ae1a00b93307d5"
+    },
+    {
+      "file": "src/js/titans.js",
+      "base": "9f2d5c82c1a948985a6594b736ce79a616dbbfbd",
+      "latest": "8f1bbedba863e8b782ca6d1e65421177a1281230",
+      "preview": "15a5b4c4cc0b9b59c45b16069368f772afe6ef90"
+    },
+    {
+      "file": "src/js/truth.js",
+      "base": "c418cce1ce0c905408a201560a34602c1967f970",
+      "latest": "ae35304ec3ab0b234ece2c8a6d4d0ff1d0c086a0",
+      "preview": "c418cce1ce0c905408a201560a34602c1967f970"
+    },
+    {
+      "file": "sw.js",
+      "base": "e35f2344194eb471336ecbe6840ce67a1066ab27",
+      "latest": "edf595499d41b02caaf523c3cab2a49ad5845e1d",
+      "preview": "d95e6d357f1ff5498d443bc6cf88b5645d4816d8"
+    },
+    {
+      "file": "version.json",
+      "base": "9c775820c88076e4f627a4a38a76a1dfcc88b3ca",
+      "latest": "527e7412caaf73b0a110949a5fd271061d50ad40",
+      "preview": "9c775820c88076e4f627a4a38a76a1dfcc88b3ca"
+    }
+  ],
+  "directOverlapWithThisBatch": [
+    "src/js/game.js"
+  ],
+  "patchSha256": "11f65c7fdb8f2477a7468ad4fc4c14dff8def55d702113423a4520222d29b63d",
+  "scope": "Concurrent main/master batch, fetched after feature-preview publication. No task push changed main/master. Its runtime changes are preserved remotely and locally but are not integrated into this preview; review/port against the canonical candidate before release. Do not overwrite either lane or merge bulk experimental evidence blindly."
+}

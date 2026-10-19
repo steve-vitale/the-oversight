@@ -8,6 +8,11 @@
 //   - holderMagicIds(who) -> magic ability ids held by 'player' or a villager id
 //   - recognizeClass(who) -> the holder's class record or null (narrates once per change)
 //   - godpathClass(who) -> stored class record {path, subclass, since, god} or null
+//   - beginApexHunt(game, fight), observeApexHunt(game, fight, damagedKey?) -> saved original encounter evidence
+//   - finishTacticalEscape(game, fight, fighter?), finishFieldEscape(game, vid, opening, result, sealed) -> actual personal living flight
+//   - noteCareRescue(actor, patient, before, after, maxHp, via, scene) -> actual other-person rescue pending a later dawn
+//   - godpathDeedStatus(who, godId, day?) -> read-only person-owned deed qualification
+//   - godpathDeedHint(who) -> earned-class objective, hidden after recognition
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
 //   - shapeOffers(choices, pool, who, opts) -> offers with >=1 on the recognised path (else >=1 on the holder's job path within opts.jobWindow) and distinct roles where possible
@@ -15,6 +20,7 @@
 //   - holderJobPaths(who) -> god paths the holder's occupation leans to (characterGen occupations[].pathLean)
 //   - registerVerbs() -> registers a generic impl + precheck for every data action with `do` (verbs: aegis, wall, pull, push, pack, heal, blink, swap, foresee, broadcast, command, empower, guard, bribe, feed_camp)
 //   - allyWouldFall(game, t) / onAllyFell(game, t) -> Lifeline / Last Rites hooks (tbDamage)
+//   - npcDeathRefusal(game, personId, context) -> actual NPC survival outcome with canonical daily/weekly budgets and physical prices
 //   - absorbPlayerHit(game, dmg) / aegisRedirect(game, t, dmg, src) -> Coin Guard / Last Rites absorbs, Aegis Link redirect (tbDamage)
 //   - damageMult(game, target) / dodgeBonus(game) -> Misdirection / Prophecy (buildarounds damageMult / dodgeBonus)
 //   - villagerCast(game, v) -> a villager fighter casts a held subclass verb through the SAME VERBS (actor = their fighter), paying the data kcal from their belly (hunger kcal/25); true / 'free' / false (wraps tbVillagerAbility)
@@ -134,6 +140,402 @@
   function godpathClass(who) {
     try { const st = store(who); return (st && st.godpath && st.godpath.path) ? st.godpath : null; }
     catch (e) { warn('godpathClass', e); return null; }
+  }
+  // Fieldwork and a landed true lesson belong to people, not the office's
+  // Codex. These private frames follow actual callers without making an
+  // ordinary knowledge-store write into a discovery or a teaching event.
+  let knowledgeFrame = null;
+  function knowledgePerson(id) {
+    const s = Game.state.scholar, v = Game.state.village, person = id && Game.vpOf(id);
+    return !!(id && !Game.over && person && person.id === id && !person.dead &&
+      (v.roster || []).includes(id) &&
+      (id === Game.villagerId ? s.health > 0 : v.health?.[id] == null || v.health[id] > 0));
+  }
+  function noteFieldDiscovery(id, pid) {
+    const v = Game.state.village;
+    if (!knowledgePerson(id) || v.godpathDeeds?.[id]?.field_truth_shared) return;
+    const people = v.godpathFieldDiscoveries || (v.godpathFieldDiscoveries = {});
+    const own = people[id] || (people[id] = {});
+    if (!own[pid]) own[pid] = { day: Game.state.scholar.day, source: 'fieldwork' };
+  }
+  function noteFieldSharing(actor, recipient, pid, via) {
+    const v = Game.state.village, discovery = v.godpathFieldDiscoveries?.[actor]?.[pid];
+    if (!discovery || actor === recipient || !knowledgePerson(actor) || !knowledgePerson(recipient) ||
+        v.away?.[actor] || v.away?.[recipient] ||
+        (actor !== Game.villagerId && recipient !== Game.villagerId && v.wrongAbout?.[actor]?.[pid]) ||
+        (recipient !== Game.villagerId && v.wrongAbout?.[recipient]?.[pid]) ||
+        v.godpathDeeds?.[actor]?.field_truth_shared) return;
+    if (actor === Game.villagerId) {
+      const e = Game.state.codex.plants?.[pid];
+      if (!e || !(e.level >= 1) || e.wrongAs || e.wrongPid) return;
+    }
+    if (recipient === Game.villagerId) {
+      const e = Game.state.codex.plants?.[pid];
+      if (!e || !(e.level >= 1) || e.wrongAs || e.wrongPid) return;
+    }
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+    book.field_truth_shared = { day: Game.state.scholar.day, plant: pid, recipient, discoveredDay: discovery.day, discoverySource: discovery.source, via };
+    delete v.godpathFieldDiscoveries[actor];
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: actor, event: 'field_truth_shared', ...book.field_truth_shared }); }
+    catch (e) { warn('field knowledge deed', e); }
+  }
+  for (const name of ['sortBag', 'testCautiously', 'villagerExperimentBeat', 'villagerCuriousExamine', 'resolveOneAssignment', 'firesideTeaching', 'teachPlant', 'convoTurn', 'spreadPlantKnowledge']) {
+    const original = Game[name];
+    if (typeof original !== 'function') continue;
+    Game[name] = function (who, choice) {
+      if (name === 'convoTurn' && choice !== 'teach') return original.apply(this, arguments);
+      if (name === 'resolveOneAssignment' && choice?.task !== 'forage') return original.apply(this, arguments);
+      const previous = knowledgeFrame;
+      const kind = name === 'villagerExperimentBeat' ? 'experiment' : name === 'testCautiously' ? 'testing'
+        : name === 'spreadPlantKnowledge' ? 'word' : name === 'firesideTeaching' ? 'fireside' : name === 'convoTurn' ? 'conversation'
+        : name === 'villagerCuriousExamine' || name === 'resolveOneAssignment' || (name === 'sortBag' && who == null) ? 'fieldwork' : 'lesson';
+      knowledgeFrame = { kind, actor: ['fireside', 'word', 'experiment'].includes(kind) ? null : kind === 'testing' || kind === 'conversation' || (name === 'sortBag' && who == null) ? Game.villagerId : who };
+      if (name === 'resolveOneAssignment') {
+        knowledgeFrame.beforeShared = new Set(Object.keys(Game.state.village.sharedKnowledge || {}));
+        knowledgeFrame.beforeKnown = new Set(this.plantsKnownBy(who));
+      }
+      try { return original.apply(this, arguments); }
+      finally { knowledgeFrame = previous; }
+    };
+  }
+  // Assigned foragers publish their new field result before synchronising
+  // personal knowledge. The System feed can teach that person in between,
+  // making the later fieldwork write redundant. Attribute the actual new
+  // result before that feed; never reconstruct one from an old shared map.
+  const _fieldKnowledgeFlow = Game.flowVillageKnowledge;
+  if (typeof _fieldKnowledgeFlow === 'function') Game.flowVillageKnowledge = function () {
+    const frame = knowledgeFrame;
+    try {
+      if (frame?.beforeShared && frame.beforeKnown) {
+        for (const [pid, entry] of Object.entries(Game.state.village.sharedKnowledge || {})) {
+          if (!frame.beforeShared.has(pid) && !frame.beforeKnown.has(pid) && entry.discoveredBy === frame.actor)
+            noteFieldDiscovery(frame.actor, pid);
+        }
+      }
+    } catch (e) { warn('assigned field discovery', e); }
+    return _fieldKnowledgeFlow.apply(this, arguments);
+  };
+  const _knowledgeCredit = Game.creditDeed;
+  if (typeof _knowledgeCredit === 'function') Game.creditDeed = function (who, deed) {
+    if (knowledgeFrame?.kind === 'fireside' && deed === 'teaching') knowledgeFrame.actor = who;
+    if (knowledgeFrame?.kind === 'experiment' && deed === 'crafting') knowledgeFrame.actor = who;
+    return _knowledgeCredit.apply(this, arguments);
+  };
+  // The public experiment selects and credits its actual tester before
+  // naming the result for the watching player. Its later personal-store
+  // sync may be redundant if that tester was also the immediate witness.
+  const _experimentIdentify = Game.identifyPlant;
+  if (typeof _experimentIdentify === 'function') Game.identifyPlant = function (pid, source) {
+    const frame = knowledgeFrame, actor = frame?.kind === 'experiment' && frame.actor;
+    const newToTester = actor && source === 'tested' && !this.plantKnownBy(actor, pid);
+    const result = _experimentIdentify.apply(this, arguments);
+    if (result === true && newToTester) {
+      try { noteFieldDiscovery(actor, pid); noteFieldSharing(actor, Game.villagerId, pid, 'experiment'); }
+      catch (e) { warn('public experimental discovery', e); }
+    }
+    return result;
+  };
+  const _knowledgeLearn = Game.villagerLearnsPlant;
+  if (typeof _knowledgeLearn === 'function') Game.villagerLearnsPlant = function (who, pid, source, teacher) {
+    const frame = knowledgeFrame;
+    if (!frame) return _knowledgeLearn.apply(this, arguments);
+    const known = this.plantKnownBy(who, pid), result = _knowledgeLearn.apply(this, arguments);
+    if (result !== true || known || !knowledgePerson(who)) return result;
+    try {
+      if (frame.kind === 'fieldwork' && frame.actor === who && source === 'fieldwork') noteFieldDiscovery(who, pid);
+      if (frame.kind === 'testing' && frame.actor === who && ['fieldwork', 'tested'].includes(source)) noteFieldDiscovery(who, pid);
+      const channel = { fieldwork: 'observed', fireside: 'fireside', conversation: 'player-taught', lesson: 'taught', word: 'word of mouth' }[frame.kind];
+      const actor = frame.kind === 'word' ? teacher : frame.actor;
+      if (source === channel && actor && actor !== who) noteFieldSharing(actor, who, pid, source);
+    } catch (e) { warn('field knowledge outcome', e); }
+    return result;
+  };
+
+  function wardPerson(game, fighter) {
+    if (!fighter || !['player', 'villager', 'ally'].includes(fighter.kind)) return null;
+    const id = fighter.kind === 'player' ? game.villagerId : fighter.villagerId;
+    const person = id && game.vpOf(id);
+    return person && person.id === id && !person.dead ? id : null;
+  }
+  function recordApexHunt(vid, actorMaxHp, prey, scene, method) {
+    const s = Game.state.scholar, v = Game.state.village, p = Game.vpOf(vid);
+    if (Game.over || !vid || !p || p.id !== vid || p.dead ||
+        (isPlayer(vid) && !(s.health > 0)) || !prey.full ||
+        !Game.data.monsters.some(m => m.id === prey.monster) ||
+        !(Number.isFinite(actorMaxHp) && actorMaxHp > 0 && Number.isFinite(prey.hp) && prey.hp > actorMaxHp)) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[vid] || (books[vid] = {});
+    if (book.apex_hunt) return;
+    book.apex_hunt = { day: s.day || 0, monster: prey.monster, actorMaxHp, openingHp: prey.hp, scene, method };
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: vid, event: 'apex_hunt', day: s.day || 0, monster: prey.monster, scene, method }); }
+    catch (e) { warn('solo hunt deed', e); }
+  }
+  const huntSide = x => x && ['player', 'villager', 'ally'].includes(x.kind);
+  const huntPerson = (game, x) => x.kind === 'player' ? game.villagerId : x.villagerId;
+  function beginApexHunt(game, f) {
+    if (!f || f._gpApexHunt) return;
+    const side = (f.fighters || []).filter(huntSide), prey = new Map();
+    // Formal companions enter through party.js after the core constructor.
+    // Read their existing ownership now, before any turn can teach a talent;
+    // only an actual later fighter can use this saved opening evidence.
+    const village = game.state.village, openingCompanions = {};
+    for (const id of new Set(village.party || [])) {
+      if (!id || id === game.villagerId || !(village.roster || []).includes(id)) continue;
+      openingCompanions[id] = { pack: holderMagicIds(id).includes('pack_hunt'),
+        maxHp: Math.max(100, village.health?.[id] || 0) };
+    }
+    for (const m of (f.fighters || [])) {
+      if (m.kind !== 'monster' || !m.mdef || !m.alive || m.fled || !(m.hp > 0)) continue;
+      const key = game.tbSnakeLineageKey(m), old = prey.get(key);
+      if (old) { old.hp += m.hp; old.full = old.full && m.hp === m.maxHp; }
+      else prey.set(key, { key, monster: m.mdef.id, hp: m.hp, full: m.hp === m.maxHp });
+    }
+    f._gpApexHunt = { version: 1, lost: false, openingCompanions, present: side.map(x => x.key), prey: [...prey.values()],
+      actors: side.map(x => { const id = huntPerson(game, x); return { key: x.key, id,
+        // A distant human companion's legacy30HP proxy is not their body's
+        // full capacity. Field fights use the same100HP human floor.
+        maxHp: x.kind === 'player' ? x.maxHp : Math.max(100, x.maxHp || 0, game.state.village.health?.[id] || 0),
+        pack: !!(id && holderMagicIds(id).includes('pack_hunt')), usedPack: [] }; }) };
+    observeApexHunt(game, f);
+  }
+
+  function observeApexHunt(game, f, damagedKey) {
+    const h = f && f._gpApexHunt;
+    if (!h || h.version !== 1) return;
+    // Door re-entry restores wounds after startCombat returns. Check each
+    // prey again before its first actual hit; an opening template must not
+    // turn that already wounded animal into a fresh hunt. Later own damage
+    // is expected and must not revoke an otherwise qualifying encounter.
+    for (const p of h.prey) {
+      const body = (f.fighters || []).filter(x => x.kind === 'monster' && game.tbSnakeLineageKey(x) === p.key);
+      if (!p.hit && body.some(x => x.hp !== x.maxHp)) p.full = false;
+      if (body.some(x => x.key === damagedKey)) p.hit = true;
+    }
+    const side = (f.fighters || []).filter(huntSide);
+    for (const x of side) {
+      if (!h.present.includes(x.key)) {
+        h.present.push(x.key);
+        const id = huntPerson(game, x), opening = h.openingCompanions?.[id];
+        if (id && opening) h.actors.push({ key: x.key, id,
+          maxHp: Math.max(opening.maxHp, x.maxHp || 0), pack: opening.pack, usedPack: [] });
+      }
+      if (!x.alive || x.fled || !(x.hp > 0) || x._echoed) h.lost = true;
+    }
+    for (const key of h.present) if (!side.some(x => x.key === key)) h.lost = true;
+    for (const a of h.actors) {
+      const x = side.find(x => x.key === a.key);
+      if (!x || huntPerson(game, x) !== a.id) h.lost = true;
+    }
+  }
+
+  function wardPerson(game, fighter) {
+    if (!fighter || !['player', 'villager', 'ally'].includes(fighter.kind)) return null;
+    const id = fighter.kind === 'player' ? game.villagerId : fighter.villagerId;
+    const person = id && game.vpOf(id);
+    return person && person.id === id && !person.dead ? id : null;
+  }
+
+  function markApexPack(f, actor, monster) {
+    observeApexHunt(Game, f);
+    const h = f?._gpApexHunt, a = h?.actors.find(x => x.key === actor?.key);
+    if (a?.pack && monster) a.usedPack.push(Game.tbSnakeLineageKey(monster));
+  }
+  function finishApexHunt(game, f, result) {
+    observeApexHunt(game, f);
+    const h = f && f._gpApexHunt;
+    if (!h || h.lost || !['won', 'routed'].includes(result)) return;
+    for (const p of h.prey) {
+      const body = (f.fighters || []).filter(x => x.kind === 'monster' && game.tbSnakeLineageKey(x) === p.key);
+      if (body.length && body.every(x => !x.alive && !x.fled && x.hp <= 0)) {
+        for (const a of h.actors) {
+          const pack = a.pack && a.usedPack.includes(p.key);
+          if (pack || h.present.length === 1) recordApexHunt(a.id, a.maxHp, p, 'tactical', pack ? 'pack' : 'solo');
+        }
+      }
+    }
+  }
+  function finishFieldApexHunt(game, vid, opening, result, support) {
+    if (!opening || result.outcome !== 'vKill' || !(result.vHpLeft > 0) || opening.lost || !support.intact) return;
+    const pack = opening.pack && support.packUsed;
+    const alone = !opening.allies && !result.calledHelp && !result.allyVid && !(result.allyDealt > 0);
+    if (pack || alone) recordApexHunt(vid, opening.actorMaxHp, opening.prey, 'field', pack ? 'pack' : 'solo');
+  }
+
+  function recordWardRescue(actor, ally, via, scene, wound, day) {
+    const s = Game.state.scholar, v = Game.state.village;
+    const a = actor && Game.vpOf(actor), b = ally && Game.vpOf(ally);
+    if (Game.over || !a || !b || a.dead || b.dead || a.id !== actor || b.id !== ally ||
+        actor === ally || !(wound > 0)) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+    if (book.ward_rescue) return;
+    book.ward_rescue = { day, ally, ability: via, scene, wound };
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: actor, event: 'ward_rescue', day: s.day || 0, ally, scene, via }); }
+    catch (e) { warn('ward deed', e); }
+  }
+  // Observe the real damage caller, then wait for both people to leave alive.
+  // A link tap, an absorbed blow or an anonymous summon is not this outcome.
+  function noteWardCarry(game, f, actor, ally, wound, sourceKey, via) {
+    const source = f?.fighters?.find(x => x.key === sourceKey);
+    const actorId = wardPerson(game, actor), allyId = wardPerson(game, ally);
+    if (!f || !actorId || !allyId || actorId === allyId || !Number.isFinite(wound) || wound <= 0 ||
+        !source || !['monster', 'hostile'].includes(source.kind)) return;
+    const h = f._gpWardRescues || (f._gpWardRescues = { version: 1, entries: [] });
+    if (h.version !== 1 || !Array.isArray(h.entries) || h.entries.some(x => x.actorId === actorId && x.allyId === allyId)) return;
+    h.entries.push({ actorId, allyId, actorKey: actor.key, allyKey: ally.key, wound, via, day: game.state.scholar.day || 0 });
+    // A retaliation may have ended the fight inside the redirected hit.
+    if (f.over) finishWardRescues(game, f, f.result);
+  }
+  function finishWardRescues(game, f, result) {
+    const h = f?._gpWardRescues;
+    if (!h || h.version !== 1 || !Array.isArray(h.entries) || !['won', 'routed', 'fled', 'calmed'].includes(result) ||
+        (result === 'fled' && f.noFlee)) return;
+    for (const r of h.entries) {
+      const a = f.fighters.find(x => x.key === r.actorKey), b = f.fighters.find(x => x.key === r.allyKey);
+      if (a?.alive && a.hp > 0 && b?.alive && b.hp > 0 &&
+          wardPerson(game, a) === r.actorId && wardPerson(game, b) === r.allyId)
+        recordWardRescue(r.actorId, r.allyId, r.via, 'tactical', r.wound, r.day);
+    }
+  }
+  function finishFieldWardRescue(game, actor, carries, result, ally) {
+    if (!(result.vHpLeft > 0) || !['vKill', 'vFlee', 'mFlee'].includes(result.outcome) ||
+        !ally.alive || !ally.id || ally.id === game.villagerId || actor === game.villagerId || actor === 'player') return;
+    for (const r of carries || []) if (r.ally === ally.id)
+      recordWardRescue(actor, r.ally, r.via, 'field', r.wound, r.day);
+  }
+
+  function recordOutmatchedEscape(game, actor, capacity, prey, via, scene) {
+    const s = game.state.scholar, v = game.state.village, person = actor && game.vpOf(actor);
+    if (game.over || !person || person.id !== actor || person.dead || !prey?.full ||
+        !game.data.monsters.some(m => m.id === prey.monster) ||
+        !Number.isFinite(capacity) || !(capacity > 0) || !Number.isFinite(prey.hp) || !(prey.hp > capacity)) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+    if (book.outmatched_escape) return;
+    book.outmatched_escape = { day: s.day, monster: prey.monster, actorMaxHp: capacity, openingHp: prey.hp, via, scene };
+    const last = (game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { game.tele('godpath_deed', { t, who: actor, event: 'outmatched_escape', day: s.day, monster: prey.monster, via, scene }); }
+    catch (e) { warn('escape deed', e); }
+  }
+
+  function finishTacticalEscape(game, f, fighter) {
+    if (!f || f.noFlee || game.state.arenaContest) return;
+    const h = f._gpApexHunt;
+    // An old save without opening evidence cannot invent this history.
+    if (!h || h.version !== 1) return;
+    observeApexHunt(game, f);
+    for (const a of h.actors) {
+      const body = f.fighters.find(x => x.key === a.key);
+      if (!body || (fighter && body !== fighter) || !body.fled || !body.alive || !(body.hp > 0) ||
+          body._echoed || wardPerson(game, body) !== a.id) continue;
+      for (const prey of h.prey) {
+        // A defeated enemy is not an escape; pursuers that broke off may live.
+        if (!f.fighters.some(m => m.kind === 'monster' && game.tbSnakeLineageKey(m) === prey.key && m.alive && m.hp > 0)) continue;
+        recordOutmatchedEscape(game, a.id, a.maxHp, prey, 'withdrawal', 'tactical');
+      }
+    }
+  }
+
+  function finishFieldEscape(game, vid, opening, result, sealed) {
+    if (!opening || sealed || result.judges || !(result.vHpLeft > 0) || !(result.mHpLeft > 0) ||
+        !['evade', 'vFlee'].includes(result.outcome)) return;
+    recordOutmatchedEscape(game, vid, opening.actorMaxHp, opening.prey, result.outcome, 'field');
+  }
+
+  function careLiving(game, id) {
+    const person = id && game.vpOf(id);
+    if (!person || person.id !== id || person.dead) return false;
+    const body = game.tbfight?.fighters?.find(f => wardPerson(game, f) === id);
+    if (body && (!body.alive || body.fled || !(body.hp > 0))) return false;
+    return id === game.villagerId ? game.state.scholar.health > 0
+      : ((game.state.village.health || {})[id] ?? 100) > 0;
+  }
+  // Only successful real callers enqueue care. Status reads cannot settle it.
+  function noteCareRescue(game, actor, patient, before, after, maxHp, via, scene) {
+    const s = game.state.scholar, v = game.state.village;
+    const fraction = data()?.paths?.caregiver?.god?.deed?.criticalFraction;
+    if (game.over || actor === patient || !careLiving(game, actor) || !careLiving(game, patient) ||
+        !Number.isFinite(after) || !(after > 0) || !Number.isFinite(maxHp) || !(maxHp > 0)) return;
+    if (via !== 'lifeline' && !(Number.isFinite(before) && before > 0 && before <= maxHp * fraction && after > maxHp * fraction && after > before)) return;
+    if (scene === 'camp' || scene === 'haven') {
+      const present = game.campPeopleIds ? game.campPeopleIds(scene === 'haven' ? 'haven' : 'here') : [];
+      if (!present.includes(actor) || !present.includes(patient)) return;
+    }
+    if (v.godpathDeeds?.[actor]?.care_survived) return;
+    const watches = v.godpathCareWatch || (v.godpathCareWatch = {}), pending = watches[actor] || (watches[actor] = []);
+    if (!pending.some(r => r.patient === patient && r.day === s.day))
+      pending.push({ patient, day: s.day, before, after, maxHp, via, scene });
+  }
+  function finishCareWatch(game) {
+    const s = game.state.scholar, v = game.state.village, watches = v.godpathCareWatch;
+    if (!watches) return false;
+    let changed = false;
+    for (const [actor, pending] of Object.entries(watches)) {
+      const future = [];
+      for (const r of pending) {
+        if (!(s.day > r.day)) { future.push(r); continue; }
+        changed = true;
+        if (!careLiving(game, actor) || !careLiving(game, r.patient) || v.godpathDeeds?.[actor]?.care_survived) continue;
+        const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+        book.care_survived = { ...r, fulfilledDay: s.day };
+        const last = (game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+        try { game.tele('godpath_deed', { t, who: actor, event: 'care_survived', day: s.day, patient: r.patient, via: r.via, scene: r.scene }); }
+        catch (e) { warn('care deed', e); }
+      }
+      if (future.length && !v.godpathDeeds?.[actor]?.care_survived) watches[actor] = future;
+      else delete watches[actor];
+    }
+    return changed;
+  }
+  // Private outcome writer: only actual personal refusal callers reach it.
+  // Borrowed Phoenix/Lifeline rescues do not spend this person's magic.
+  function recordDeathRefusal(who, ability, scene) {
+    const s = Game.state.scholar, v = Game.state.village;
+    const vid = isPlayer(who) ? Game.villagerId : who, person = vid && Game.vpOf(vid);
+    if (!s || !v || Game.over || !person || person.id !== vid || person.dead ||
+        (isPlayer(who) && !(s.health > 0))) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[vid] || (books[vid] = {});
+    if (book.death_refused) return;
+    book.death_refused = { day: s.day || 0, ability, scene };
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: vid, event: 'death_refused', ability, scene, day: s.day || 0 }); }
+    catch (e) { warn('survival deed', e); }
+  }
+  // A deed belongs to a person, not to the bearer office. Reading a missing
+  // old-save ledger never creates one or invents accomplishments.
+  function godpathDeedStatus(who, godId, day) {
+    const D = data() || {}, s = (Game.state || {}).scholar || {}, v = (Game.state || {}).village || {};
+    const path = Object.values(D.paths || {}).find(p => p.god && p.god.id === godId);
+    const deed = path && path.god.deed;
+    if (!deed) return null;
+    const vid = isPlayer(who) ? Game.villagerId : who;
+    // Office service is a current responsibility, not an invented history:
+    // the same live holder record governs both player and NPC. Removing or
+    // transferring it revokes the deed until this person holds it again.
+    const office = deed.event === 'relay_office' && Game.state.switchboard;
+    const rec = deed.event === 'relay_office'
+      ? (office && office.holderId === vid ? { day: office.appointedDay ?? null } : null)
+      : (((v.godpathDeeds || {})[vid] || {})[deed.event]) || null;
+    const person = vid && Game.vpOf ? Game.vpOf(vid) : null;
+    const living = !!(vid && person && person.id === vid && !person.dead &&
+      (isPlayer(who) ? s.health > 0 : ((v.health || {})[vid] == null || v.health[vid] > 0)));
+    const now = day == null ? s.day || 0 : day;
+    return { complete: !!(rec && living && (!deed.afterDawn || now > rec.day)),
+      observed: !!rec, pending: deed.event === 'care_survived' ? !!(v.godpathCareWatch || {})[vid]?.length
+        : deed.event === 'field_truth_shared' && !!Object.keys(v.godpathFieldDiscoveries?.[vid] || {}).length,
+      day: rec ? rec.day : null, hint: deed.hint };
+  }
+  function godpathDeedHint(who) {
+    const cl = godpathClass(who);
+    if (!cl || cl.lapsed) return null;
+    const p = ((data() || {}).paths || {})[cl.path], god = p && p.god;
+    if (!god || !god.deed) return null;
+    const v = (Game.state || {}).village || {}, s = (Game.state || {}).scholar || {};
+    const g = isPlayer(who) ? s.godhood : (v.npcGodhood || {})[who];
+    if (g && ((g.active || []).includes(god.id) || (g.recognized || {})[god.id])) return null;
+    const status = godpathDeedStatus(who, god.id);
+    return status.complete ? 'Deed fulfilled. Your build and the day still matter.'
+      : (status.observed || status.pending) ? (god.deed.pendingHint || god.deed.hint) : god.deed.hint;
   }
   function lineFor(rec) {
     const D = data() || {};
@@ -421,7 +823,7 @@
     try { return C.isP ? !!(Game.hasAbility && Game.hasAbility(id)) : !!(Game.npcHasAbility && Game.npcHasAbility(C.vid, id)); }
     catch (e) { warn('hasC', e); return false; }
   }
-  function alliesOf(f, C) { return liveAllies(f).filter(x => x !== C.p); }
+  function alliesOf(f, C) { return Game.tbOtherAllies(C.p); }
   function say(C, pl, vl) { Game.say(C.isP ? pl : vl); }
   function syncPos(C) {
     try {
@@ -434,7 +836,7 @@
     aegis(a, ab, target, actor) {
       const C = actorCtx(actor), f = Game.tbfight, p = C.p;
       let t = target ? Game.tbFighter(target) : null;
-      const allies = alliesOf(f, C);
+      const allies = Game.tbOtherAllies(C.p);
       if (!t || allies.indexOf(t) < 0) t = allies.slice().sort((x, y) => (x.hp / (x.maxHp || 1)) - (y.hp / (y.maxHp || 1)))[0];
       if (!t) { if (C.isP) Game.say('No ally to link to. (Aegis Link needs someone beside you in the fight.)'); return false; }
       const rounds = (a.rounds || 3) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
@@ -533,6 +935,7 @@
       const rounds = birds ? (a.rounds || 3) * 2 : (a.rounds || 3);
       m._frozen = Math.max(m._frozen || 0, pin);
       m._birdStrike = (m._birdStrike || 0) + rounds;
+      if (ab.id === 'pack_hunt') markApexPack(f, p, m);
       say(C, `You whistle once. They were listening: wings, teeth, claws, all on ${nm(m)}. It's pinned for ${pin} rounds and harried for ${rounds}${birds ? ' (the birds were already on it: twice as long)' : ''}. (Pack Hunt)`,
         `${C.name} whistles once. Wings, teeth, claws, all on ${nm(m)}: pinned ${pin} rounds, harried ${rounds}. (Pack Hunt)`);
       return true;
@@ -544,8 +947,7 @@
       let base = rint(amt[0], amt[1]);
       try { if (C.isP) base = Math.round(Game.modTarget('healing.amount', base, {})); } catch (e) { warn('heal mod', e); }
       let t = target ? Game.tbFighter(target) : null;
-      const cands = alliesOf(f, C).filter(x => cheb(x, p) <= reach && x.hp < x.maxHp);
-      if (!C.isP) { const pp = Game.tbFighter('p'); if (pp && pp.alive && cheb(pp, p) <= reach && pp.hp < pp.maxHp) cands.push(pp); }
+      const cands = Game.tbOtherAllies(C.p).filter(x => cheb(x, p) <= reach && x.hp < x.maxHp);
       if (!t || (t !== p && cands.indexOf(t) < 0)) {
         const pFrac = p.hp / (p.maxHp || 100);
         const worst = cands.slice().sort((x, y) => (x.hp / x.maxHp) - (y.hp / y.maxHp))[0];
@@ -562,6 +964,7 @@
       t.hp = Math.min(t.maxHp, t.hp + base);
       if (t.kind === 'player') { try { Game.state.scholar.health = Math.max(0, t.hp); } catch (e) { warn('heal sync', e); } }
       const healed = t.hp - before;
+      noteCareRescue(Game, wardPerson(Game, p), wardPerson(Game, t), before, t.hp, t.maxHp, 'mending_hands', 'battle');
       if (C.isP) { try { const BA = S.buildarounds; if (BA && BA.onHeal) BA.onHeal(Game, t.key, healed, Math.max(0, base - healed)); } catch (e) { warn('onHeal', e); } }
       const tn = t.kind === 'player' ? 'your' : (t === p ? 'their own' : `${t.name}'s`);
       say(C, `Your hands find ${t.name}'s wound and it closes under them: +${healed} HP. (Mending Hands)`,
@@ -650,8 +1053,13 @@
         `${C.name} says one word. Everyone hears "NOW." (The Crowd Moves: ${allies.length} extra turn${allies.length === 1 ? '' : 's'}.)`);
       for (const v of allies) {
         if (!v.alive || v.fled) continue;
+        if (v.kind === 'player') {
+          Game.tbCommandPlayer(C.p, ab.name || 'The Crowd Moves');
+          if (lvlC(C, ab.id) >= 2) Game.addHealth(5);
+          continue;
+        }
         try { v._gpCommanded = true; Game.tbVillagerTurn(v); } catch (e) { warn('command turn', e); } finally { delete v._gpCommanded; }
-        if (lvlC(C, ab.id) >= 2 && v.alive) v.hp = Math.min(v.maxHp, v.hp + 5);
+        if (lvlC(C, ab.id) >= 2 && v.alive) { v.hp = Math.min(v.maxHp, v.hp + 5); Game.tbSyncHumanHealth(v); }
         if (Game.tbEndCheck && Game.tbEndCheck()) return true;
       }
       return true;
@@ -855,7 +1263,7 @@
     pull: (I) => (I.n < 1 && I.hp > 0.6 && I.mons.some(m => cheb(m, I.v) > 1 && cheb(m, I.v) <= 4) && (I.v._nextStrikes || I.mons.length >= 2) ? 5 : null),
     push: (I) => (I.mons.filter(m => cheb(m, I.v) <= 2).length >= 1 && (I.hp < 0.7 || I.mons.length >= 2) ? 7.5 : null),
     pack: (I) => (I.n < 1 && I.strong ? 6.5 : null),
-    heal: (I) => (I.hp < 0.5 || I.allies.some(a => cheb(a, I.v) <= 1 && a.hp / (a.maxHp || 1) < 0.4) ? 7 : null),
+    heal: (I) => (I.hp < 0.5 || Game.tbOtherAllies(I.v).some(a => cheb(a, I.v) <= 1 && a.hp / (a.maxHp || 1) < 0.4) ? 7 : null),
     blink: (I) => (I.hp < 0.35 && I.d <= 1 ? 8 : null),
     swap: (I) => (I.n < 1 && I.mons.some(m => m.telegraph && cheb(m, I.v) <= 3 && (Game.fighterSize ? Game.fighterSize(m) : 1) <= 1) ? 7 : null),
     foresee: (I) => (I.n < 1 && (I.hasProphecy || I.mons.some(m => m.telegraph)) ? 5.5 : null),
@@ -864,7 +1272,7 @@
     empower: (I) => (!I.v._nextStrikes && I.d <= 1 ? 6 : null),
     guard: (I) => (I.n < 1 && !I.v._absorb && I.d <= 2 && I.hp < 0.8 ? 6 : null),
     bribe: (I) => (I.n < 1 && I.near && I.d <= 2 && !isTitanish(I.near) && (I.hp < 0.6 || I.mons.length >= 2) ? 6.5 : null),
-    aegis: (I) => (I.n < 1 && I.hp > 0.6 && I.allies.some(a => a.hp / (a.maxHp || 1) < 0.5) ? 5.5 : null),
+    aegis: (I) => (I.n < 1 && I.hp > 0.6 && Game.tbOtherAllies(I.v).some(a => a.hp / (a.maxHp || 1) < 0.5) ? 5.5 : null),
   };
   // villagerCast(game, v): one subclass verb for this villager's turn, or
   // false. "No turn" verbs (cost.turn absent) return 'free' so the villager
@@ -881,7 +1289,7 @@
       if (tier === 'starving') return false;
       if (tier === 'tight' && mons.length < 2) return false;
       const near = nearest(f, v);
-      const allies = liveAllies(f).filter(a => a !== v);
+      const allies = game.tbOtherAllies(v);
       const I = {
         v, mons, allies, near, d: near ? cheb(near, v) : 99, hp: (v.hp || 0) / Math.max(1, v.maxHp || 1),
         strong: mons.slice().sort((a, b) => (b.maxHp || 0) - (a.maxHp || 0))[0], n: 0,
@@ -994,7 +1402,7 @@
   // dread, turncoat, retribution, second wind, and the data modifiers:
   // adrenaline_control strikes x1.3, adrenaline_surge +15% dodge,
   // chitin_skin +30 armor). Same numbers as the player's cards.
-  const FIELD_KIT = ['rage', 'pocket_sand', 'fear_aura', 'static_toss', 'cheese_wheel', 'bird_strike', 'turncoat', 'retribution', 'second_wind'];
+  const FIELD_KIT = ['rage', 'pocket_sand', 'fear_aura', 'static_toss', 'cheese_wheel', 'bird_strike', 'turncoat', 'retribution', 'second_wind', 'molt'];
   function modSum(ids, target) {
     try {
       const M = S.modifiers;
@@ -1207,30 +1615,95 @@
     if (G && G.aegis > 0) { G.aegis--; return 0; }
     return share;
   }
+  // Uses belong to the person across scenes and mantle changes. Read legacy
+  // counters conservatively: a period stamp without a count means one spent.
+  function survivalUses(who) {
+    const v = Game.state.village, s = Game.state.scholar, vid = isPlayer(who) ? Game.villagerId : who;
+    const out = { ...(v.godpathSurvival || {})[vid] };
+    const legacy = isPlayer(who) ? s : { secondWindDay: v.npcSecondWind?.[vid], secondWindUses: 1 };
+    for (const [period, uses] of [['secondWindDay', 'secondWindUses'], ['moltWeek', 'moltUses']]) {
+      if (!Number.isFinite(legacy[period])) continue;
+      if (!Number.isFinite(out[period]) || legacy[period] > out[period]) {
+        out[period] = legacy[period]; out[uses] = legacy[uses] || 1;
+      } else if (legacy[period] === out[period]) out[uses] = Math.max(out[uses] || 1, legacy[uses] || 1);
+    }
+    return out;
+  }
+  function saveSurvivalUses(who, rec) {
+    const v = Game.state.village, vid = isPlayer(who) ? Game.villagerId : who;
+    (v.godpathSurvival || (v.godpathSurvival = {}))[vid] = { ...rec };
+    if (isPlayer(who)) Object.assign(Game.state.scholar, rec);
+    else if (Number.isFinite(rec.secondWindDay)) (v.npcSecondWind || (v.npcSecondWind = {}))[vid] = rec.secondWindDay;
+  }
+  function syncPlayerSurvivalUses() {
+    const rec = survivalUses('player');
+    for (const key of ['secondWindDay', 'secondWindUses', 'moltWeek', 'moltUses'])
+      if (rec[key] !== undefined) Game.state.scholar[key] = rec[key];
+  }
+  function shedNpcGear(person) {
+    const lost = new Map();
+    for (const item of Object.values(person.equipped || {})) {
+      const id = typeof item === 'string' ? item : item?.itemId || item?.id;
+      if (id) lost.set(id, (lost.get(id) || 0) + 1);
+    }
+    // NPC owned items include their worn equipment. Clear exactly the worn
+    // units; unworn spares remain, but cannot restore the lost copies.
+    person.items = (person.items || []).flatMap(item => {
+      const id = typeof item === 'string' ? item : item?.itemId || item?.id, count = lost.get(id) || 0;
+      if (!count) return [item];
+      const units = typeof item === 'string' ? 1 : item.units ?? 1, take = Math.min(units, count);
+      lost.set(id, count - take);
+      return units > take ? [{ ...item, units: units - take }] : [];
+    });
+    person.equipped = {};
+  }
+  function npcDeathRefusal(game, vid, c) {
+    const person = vid && game.vpOf(vid);
+    if (!person || person.id !== vid || person.dead || isPlayer(vid) || !c || !(c.hp <= 0) ||
+        !Number.isFinite(c.maxHp) || !(c.maxHp > 0) || game.over ||
+        (c.body && (c.body._echoed || !c.body.alive || c.body.villagerId !== vid))) return null;
+    const v = game.state.village, day = game.state.scholar.day || 0, week = Math.floor(day / 7);
+    const link = game.state.phoenixLink;
+    if (link?.bearerIsPlayer === false && link.bearer === vid) return { hp: 1, held: true };
+    const has = id => game.npcHasAbility(vid, id), syn = id => (v.npcSynergies?.[vid] || []).includes(id);
+    const uses = survivalUses(vid), max = syn('refuses_death') ? 2 : 1;
+    let hp, ability, shedGear = false;
+    if (c.emberAvailable && has('ember_heart') && vCanPay(vid, 360)) {
+      vPay(vid, 600); hp = Math.max(1, Math.ceil(c.maxHp * 0.2)); ability = 'ember_heart';
+    } else if (has('molt') && (uses.moltWeek === week ? uses.moltUses || 1 : 0) < max) {
+      uses.moltUses = (uses.moltWeek === week ? uses.moltUses || 1 : 0) + 1; uses.moltWeek = week;
+      shedNpcGear(person); hp = c.maxHp; ability = 'molt'; shedGear = true; saveSurvivalUses(vid, uses);
+    } else if (has('second_wind') && (uses.secondWindDay === day ? uses.secondWindUses || 1 : 0) < max) {
+      uses.secondWindUses = (uses.secondWindDay === day ? uses.secondWindUses || 1 : 0) + 1; uses.secondWindDay = day;
+      hp = syn('undying_fury') && c.raging ? c.maxHp : 1; ability = 'second_wind';
+      if (!c.nonviolent && !['starvation', 'hunger', 'disease', 'sickness'].includes(c.cause)) {
+        const needs = game.npcNeeds(vid); needs.hunger = Math.min(needs.hunger || 0, 80);
+      }
+      saveSurvivalUses(vid, uses);
+    } else return null;
+    const name = game.displayName(vid), line = ability === 'molt'
+      ? name + ' sheds their skin and stands whole, but loses all equipped gear. (Molt)'
+      : ability === 'second_wind' ? name + ' should be down — and refuses. Second wind: ' + hp + ' HP. (Second Wind)'
+        : name + ' should be down — the furnace burns 600 kcal and stands them up at ' + hp + ' HP. (Ember Heart)';
+    if (c.log) c.log.push(line); else game.say(line);
+    if (ability === 'ember_heart') game.tele('godpath_ember', { kcal: 600, who: vid });
+    else game.tele('godpath_verb', { ability, verb: ability === 'molt' ? 'shed' : 'refuse_death', who: vid, field: c.scene === 'field' });
+    recordDeathRefusal(vid, ability, c.scene);
+    return { hp, ability, shedGear };
+  }
   // fieldCheatDeath(G, c): Ember Heart — the furnace eats the killing blow
   // (600 kcal: +24 hunger), then Back from the Brink. Returns new vHp or null.
   function fieldCheatDeath(G, c) {
     try {
-      if (!G || G.cheated) return null;
-      if (!G.held.ember_heart) {
-        // SECOND WIND (refuse_death, once a day): drop to 1 HP instead.
-        if (!G.held.second_wind) return null;
-        const vp = (Game.state.village.npcSecondWind = Game.state.village.npcSecondWind || {});
-        const day = (Game.state.scholar || {}).day || 0;
-        if (vp[G.vid] === day) return null;
-        vp[G.vid] = day; G.cheated = true;
-        c.log.push(c.vName + ' should be down — and refuses. Second wind: 1 HP. (Second Wind)');
-        try { Game.tele && Game.tele('godpath_verb', { ability: 'second_wind', verb: 'refuse_death', who: G.vid, field: true }); } catch (e) { warn('tele sw', e); }
-        return 1;
-      }
-      if (!vCanPay(G.vid, 600 * 0.6)) return null; // the body must have something to burn
+      if (!G || !(c.vHp <= 0)) return null;
+      const r = npcDeathRefusal(Game, G.vid, { hp: c.vHp, maxHp: c.vHpMax, emberAvailable: !G.used.ember_death,
+        raging: G.used.rage && G.nextMult === 2 && G.nextN > 0, scene: 'field', log: c.log });
+      if (!r) return null;
       G.cheated = true;
-      vPay(G.vid, 600);
-      const hp = Math.max(1, Math.ceil(c.vHpMax * 0.2));
-      c.log.push(c.vName + ' should be down — the furnace eats the blow and they stand back up at ' + hp + '. (Ember Heart)');
-      try { Game.tele && Game.tele('godpath_ember', { kcal: 600, who: G.vid }); } catch (e) { warn('tele ember v', e); }
-      if (G.held.back_from_the_brink) { G.nextMult = Math.max(G.nextMult || 0, 1.5); G.nextN = Math.max(G.nextN || 0, 3); c.log.push(c.vName + ' comes back ANGRY. (Back from the Brink)'); }
-      return hp;
+      if (r.ability === 'ember_heart') G.used.ember_death = 1;
+      if (r.shedGear) G.shedGear = true;
+      if (!r.held && G.held.back_from_the_brink) { G.nextMult = Math.max(G.nextMult || 0, 1.5); G.nextN = Math.max(G.nextN || 0, 3); c.log.push(c.vName + ' comes back ANGRY. (Back from the Brink)'); }
+      return r.hp;
     } catch (e) { warn('fieldCheatDeath', e); return null; }
   }
   // fieldAllyDown(G, c): Lifeline holds a falling ally at 1; Last Rites
@@ -1255,26 +1728,31 @@
   function sideHolders(game, f, id, except) {
     const out = [];
     try {
+      const seen = new Set();
+      const add = (fighter, isP) => {
+        if (!fighter || fighter === except || !fighter.alive || fighter.fled || !(fighter.hp > 0)) return;
+        const vid = isP ? game.villagerId : fighter.villagerId;
+        const person = vid && game.vpOf(vid);
+        if (!person || person.id !== vid || person.dead || seen.has(vid) || (!isP && vid === game.villagerId)) return;
+        seen.add(vid);
+        if (isP ? game.hasAbility && game.hasAbility(id) : game.npcHasAbility && game.npcHasAbility(vid, id)) out.push({ f: fighter, isP });
+      };
       const p = game.tbFighter && game.tbFighter('p');
-      if (p && p.alive && p !== except && game.hasAbility && game.hasAbility(id)) out.push({ f: p, isP: true });
-      for (const x of liveAllies(f)) {
-        if (x === except || !x.villagerId) continue;
-        if (game.npcHasAbility && game.npcHasAbility(x.villagerId, id)) out.push({ f: x, isP: false });
-      }
+      add(p, true);
+      for (const x of liveAllies(f)) add(x, false);
     } catch (e) { warn('sideHolders', e); }
     return out;
   }
   function allyWouldFall(game, t) {
     try {
-      const f = game.tbfight; if (!f) return false;
-      // EMBER HEART on a villager (parity): their own furnace eats the blow.
-      if (t.villagerId && !t._emberUsed && game.npcHasAbility && game.npcHasAbility(t.villagerId, 'ember_heart') && vCanPay(t.villagerId, 360)) {
-        t._emberUsed = true;
-        vPay(t.villagerId, 600);
-        t.hp = Math.max(1, Math.ceil((t.maxHp || 10) * 0.2));
-        game.say(`${t.name} should be down. The furnace eats the blow and they stand back up at ${t.hp} HP. (Ember Heart)`);
-        try { game.tele && game.tele('godpath_ember', { kcal: 600, who: t.villagerId }); } catch (e) { warn('tele ember v', e); }
-        if (game.npcHasAbility(t.villagerId, 'back_from_the_brink')) { t._nextStrikes = { mult: 1.5, n: 3, label: 'BACK FROM THE BRINK' }; game.say(`${t.name} comes back ANGRY. (Back from the Brink)`); }
+      const f = game.tbfight; if (!f || !(t.hp <= 0)) return false;
+      const saved = f.fighters.includes(t) && npcDeathRefusal(game, t.villagerId, { hp: t.hp, maxHp: t.maxHp || 100,
+        emberAvailable: !t._emberUsed, raging: t._vRageRounds > 0, scene: 'battle', body: t });
+      if (saved) {
+        t.hp = saved.hp;
+        if (saved.ability === 'ember_heart') t._emberUsed = true;
+        if (saved.shedGear) { t.wbonus = 0; t.varmor = 0; }
+        if (!saved.held && game.npcHasAbility(t.villagerId, 'back_from_the_brink')) t._nextStrikes = { mult: 1.5, n: 3, label: 'BACK FROM THE BRINK' };
         return true;
       }
       const hs = sideHolders(game, f, 'lifeline', t);
@@ -1283,11 +1761,15 @@
       for (const h of hs) {
         const L = h.isP ? game.abilityLevel('lifeline') : 1;
         const max = L >= 3 ? 2 : 1;
-        const k = h.f.key;
+        // Charges belong to a person, including after a body is reconstructed.
+        const k = h.isP ? game.villagerId : h.f.villagerId;
         if ((f._lifelineUsedBy[k] || 0) >= max) continue;
         f._lifelineUsedBy[k] = (f._lifelineUsedBy[k] || 0) + 1;
         f._lifelineUsed = (f._lifelineUsed || 0) + 1;
         t.hp = L >= 2 ? Math.min(10, t.maxHp || 10) : 1;
+        if (t.kind === 'player') game.state.scholar.health = t.hp;
+        t.alive = true;
+        noteCareRescue(game, h.isP ? game.villagerId : h.f.villagerId, wardPerson(game, t), 0, t.hp, t.maxHp, 'lifeline', 'battle');
         game.say(`${t.name} should be down. The thread between ${h.isP ? 'you' : h.f.name} and ${t.name} pulls taut, and holds: ${t.name} stays standing at ${t.hp} HP. (Lifeline)`);
         try { game.tele && game.tele('godpath_lifeline', { who: h.isP ? 'player' : h.f.villagerId, saved: t.villagerId || t.key }); } catch (e) { warn('tele lifeline', e); }
         return true;
@@ -1328,23 +1810,25 @@
       return final - took;
     } catch (e) { warn('absorbPlayerHit', e); return final; }
   }
-  // aegisRedirect(game, t, final): a linked ally's hit lands on the player.
-  // Returns the damage the ally still takes.
-  function aegisRedirect(game, t, final, sourceKey) {
+  // Route once through the living linker's damage pipeline, before the
+  // protected body's avoidance, armor, history and other hit effects.
+  function aegisRedirect(game, t, final, sourceKey, opts) {
     try {
       const f = game.tbfight;
       if (!f || !(final > 0) || sourceKey === 'p' || f._aegisBusy) return final;
       // the linker: the player, or any villager fighter (parity)
       const cands = [game.tbFighter && game.tbFighter('p')].concat(liveAllies(f));
       for (const p of cands) {
-        if (!p || !p.alive || p === t || !p._aegis) continue;
+        if (!p || !p.alive || p.fled || p === t || !p._aegis) continue;
         if (p._aegis.until < (f.round || 1)) { p._aegis = null; continue; }
         if (p._aegis.key !== t.key) continue;
         if (p.key === sourceKey) continue;
         const isP = p.key === 'p';
         game.say(`The light-thread snaps tight: the blow meant for ${t.name} lands on ${isP ? 'you' : p.name}. (Aegis Link)`);
         f._aegisBusy = true; // one redirect per blow: links never ping-pong
-        try { game.tbDamage(p.key, final, 'aegis link', sourceKey || null, { quiet: true, undodgeable: true }); } finally { f._aegisBusy = false; }
+        let carried = 0;
+        try { carried = game.tbDamage(p.key, final, 'aegis link', sourceKey || null, { ...opts, quiet: true, undodgeable: true }); } finally { f._aegisBusy = false; }
+        noteWardCarry(game, f, p, t, carried, sourceKey, 'aegis_link');
         return 0;
       }
       return final;
@@ -1376,6 +1860,9 @@
     abilityPaths(idOrDef) { return abilityPaths(idOrDef); },
     recognizeClass(who) { return recognizeClass(who); },
     godpathClass(who) { return godpathClass(who); },
+    noteCareRescue(actor, patient, before, after, maxHp, via, scene) { return noteCareRescue(this, actor, patient, before, after, maxHp, via, scene); },
+    godpathDeedStatus(who, godId, day) { return godpathDeedStatus(who, godId, day); },
+    godpathDeedHint(who) { return godpathDeedHint(who); },
     classLine(who) { return classLine(who); },
     pathLean(who, abilityId, opts) { return pathLean(who, abilityId, opts); },
     shapeOffers(choices, pool, who, opts) { return shapeOffers(choices, pool, who, opts); },
@@ -1406,6 +1893,7 @@
     Game.endDay = function () {
       const r = _ed.apply(this, arguments);
       try {
+        const careChanged = !this.over && this.state && finishCareWatch(this);
         if (!this.over && this.state && this.state.systemArrived) {
           this.checkPlayerGodhoodAscension();
           const v = this.state.village || {};
@@ -1415,6 +1903,8 @@
             this.checkVillagerGodhoodAscension(vid);
           }
         }
+        // Persist settlement/ceremony after the core day-end save.
+        if (careChanged) this.save();
       } catch (e) { warn('dawn check', e); }
       return r;
     };
@@ -1433,7 +1923,7 @@
           const L = h.isP ? this.abilityLevel('rally_aura') : 1;
           const rad = L >= 3 ? 5 : 3;
           const rounds = L >= 2 ? 3 : 2;
-          const near = liveAllies(f).filter(v => v !== h.f && cheb(v, h.f) <= rad);
+          const near = this.tbOtherAllies(h.f).filter(v => cheb(v, h.f) <= rad);
           for (const v of near) { v.rallyBuff = Math.max(v.rallyBuff || 0, rounds); v.rallied = Math.max(v.rallied || 0, rounds); }
           if (near.length) this.say(`People stand straighter near ${h.isP ? 'you' : h.f.name}: ${near.length} all${near.length === 1 ? 'y starts' : 'ies start'} this fight emboldened. (Rally Aura)`);
         }
@@ -1468,7 +1958,9 @@
   if (typeof _md === 'function') {
     Game.maybeCheatDeath = function (cause) {
       const s = this.state.scholar;
-      let cheated = false;
+      if (s.health <= 0) syncPlayerSurvivalUses();
+      let cheated = false, refusal = null;
+      const fatal = s.health <= 0, windBefore = [s.secondWindDay, s.secondWindUses], moltBefore = [s.moltWeek, s.moltUses];
       try {
         const f = this.tbfight;
         if (f && !f.over && s.health <= 0 && this.hasAbility('ember_heart') && !f._emberUsed) {
@@ -1479,12 +1971,19 @@
             s.health = Math.max(1, Math.ceil(this.maxHealth() * (this.abilityLevel('ember_heart') >= 2 ? 0.3 : 0.2)));
             this.say(`EMBER HEART: the blow lands, and the furnace eats it. ${cost} kcal burn in one breath and you stand back up at ${s.health} HP.`);
             try { this.tele && this.tele('godpath_ember', { kcal: cost }); } catch (e) { warn('tele ember', e); }
-            cheated = true;
+            cheated = true; refusal = 'ember_heart';
           }
         }
       } catch (e) { warn('ember heart', e); }
       if (!cheated) cheated = _md.apply(this, arguments);
       if (cheated && s.health > 0) {
+        if (!refusal && (s.secondWindDay !== windBefore[0] || s.secondWindUses !== windBefore[1])) refusal = 'second_wind';
+        if (!refusal && (s.moltWeek !== moltBefore[0] || s.moltUses !== moltBefore[1])) refusal = 'molt';
+        if (fatal && refusal) {
+          if (refusal !== 'ember_heart') saveSurvivalUses('player', survivalUses('player'));
+          const v = this.state.village; (v.health || (v.health = {}))[this.villagerId] = s.health;
+          recordDeathRefusal('player', refusal, this.tbfight && !this.tbfight.over ? 'battle' : 'world');
+        }
         try {
           if (this.hasAbility('back_from_the_brink')) {
             const L = this.abilityLevel('back_from_the_brink');
@@ -1497,10 +1996,20 @@
     };
   }
 
+  const _survivalUse = Game.useAbility;
+  Game.useAbility = function (abilityId) {
+    if (abilityId === 'molt') syncPlayerSurvivalUses();
+    const result = _survivalUse.apply(this, arguments);
+    if (result === true && abilityId === 'molt') saveSurvivalUses('player', survivalUses('player'));
+    return result;
+  };
+
   S.Godpath = {
+    noteWardCarry, finishWardRescues, finishFieldWardRescue,
+    beginApexHunt, observeApexHunt, finishApexHunt, finishFieldApexHunt, finishTacticalEscape, finishFieldEscape,
     data, abilityPaths, classify, holderMagicIds, recognizeClass, godpathClass, classLine,
     pathLean, shapeOffers, kitSheet, holderJobPaths, sheetRng, VERBS, registerVerbs, wardenWallAt,
-    allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
+    npcDeathRefusal, allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
     villagerCast, villagerStrikeMult, absorbVillagerHit,
     fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, fieldEvade, villagerPowerMult,
   };

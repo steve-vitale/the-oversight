@@ -1,0 +1,23 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('build-choice-observer'),O=require('../lib/build-choice-observer');
+(async()=>{
+  const G=await K.load({seed:7});K.newRun(G);
+  G.state.scholar.abilities=[];
+  const ids=['hoarder','haggle','loud_chewer'];
+  const before=G.buildDecide('player',ids),state=JSON.stringify(G.state);
+  const original=G.buildScore,obs=O.install(G);
+  const result=G.buildDecide('player',ids);
+  T.ok('observed real shared build decision is unchanged',JSON.stringify(before)===JSON.stringify(result));
+  T.ok('observing the prepared player decision leaves gameplay state untouched',JSON.stringify(G.state)===state);
+  T.ok('actual offered scores and chosen result are retained',obs.decisions.length===1&&obs.decisions[0].scores.length===3&&obs.decisions[0].scores.every(s=>s.onSheet)&&obs.decisions[0].result.pick===result.pick);
+  obs.restore();T.ok('restoration returns original methods',G.buildScore===original);
+  let scores=0,choices=0;
+  const fake={villagerId:'a',state:{scholar:{day:3,abilities:[],abilityChoices:ids.map(id=>({id,src:'level_up:social'}))},village:{npcAbilities:{b:['hoarder']}}},buildScore(who,id){scores++;return id==='haggle'?4:2;},buildDecide(who,offers){return {pick:offers.reduce((best,id)=>this.buildScore(who,id)>this.buildScore(who,best)?id:best,offers[0])};},chooseAbility(id){choices++;return id;},keepAbilities(){choices++;return null;}};
+  const bounded=O.install(fake,{limit:2}),pick=fake.buildScore('player','haggle',{onSheet:true});fake.chooseAbility('haggle');fake.state.scholar.day=4;fake.keepAbilities();fake.buildDecide('b',['haggle']);
+  T.ok('wrapper adds no evaluations or choice calls',scores===3&&choices===2&&pick===4);
+  T.ok('actual player score is attached to its public choice',bounded.decisions[0].scores[0].score===4&&bounded.decisions[0].result.pick==='haggle');
+  T.ok('bounded logs disclose truncation rather than silently dropping evidence',bounded.decisions.length===2&&bounded.dropped===1);
+  T.ok('real keep return is preserved',bounded.decisions[1].returned==='null');
+  T.ok('a later unscored choice does not inherit an old score',bounded.decisions[1].scores.length===0);
+  bounded.restore();T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

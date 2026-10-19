@@ -1,0 +1,23 @@
+'use strict';
+// Passive Audit opportunity census; exact replay of retained panel cases.
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib');
+const B=require('./balance-panel'),gear=require('./gear-usage-audit');
+const arg=n=>{const i=process.argv.indexOf('--'+n);return i<0?null:process.argv[i+1];};
+const read=f=>JSON.parse(z.gunzipSync(fs.readFileSync(f)));
+(async()=>{
+ const root=path.resolve(arg('root')||'.'),panel=read(arg('panel'));if(JSON.stringify(B.manifest(root))!==JSON.stringify(panel.sources))throw Error('Source drift');
+ if(process.argv.includes('--child')){
+  const policy=arg('policy'),seed=Number(arg('seed')),expected=panel.rows.find(r=>r.row.policy===policy&&r.row.seed===seed),H=require(path.join(root,'scripts/sim-harness')),C=require(path.join(root,'scripts/sweep-compare')),base=C.POLICY_REGISTRY[policy];
+  if(!expected||panel.options.occupation!=null)throw Error('Unsupported/missing case');
+  let G,o;const calls=[],samples=[],warnings=[],warn=console.warn;
+  function sample(){const s=G.state.scholar,v=G.state.village||{},people=new Map((G.data.villagers||[]).map(p=>[p.id,p]));const npc=[],unknown=[];for(const id of new Set(v.roster||[])){if(id===G.villagerId)continue;const p=people.get(id);if(!p){unknown.push(id);continue;}if(p.dead)continue;const rec=(v.npcGodhood||{})[id];if(rec?.active?.includes('market_god'))npc.push({id,debt:rec.marketDebt||0});}samples.push({day:s.day,player:s.godhood?.active?.includes('market_god')?{debt:s.godhood.marketDebt||0}:null,npc,unknown});}
+  C.POLICY_REGISTRY[policy]={...base,setup(g,ctx){G=g;o=B.install(g);const original=g.marketAuditCollect;g.marketAuditCollect=function(who){const player=who==null||who==='player'||who===this.villagerId,rec=player?this.state.scholar.godhood:this.state.village.npcGodhood?.[who];const debtBefore=rec?.marketDebt??null;const r=original.apply(this,arguments);calls.push({day:this.state.scholar.day,who:player?'player':who,debtBefore,ok:!!r?.ok,itemId:r?.itemId??null,kcalTaken:r?.kcalTaken??null});return r;};if(base.setup)return base.setup(g,ctx);},daily(g,ctx){const r=base.daily&&base.daily(g,ctx);o.sample();sample();return r;}};
+  console.warn=(...x)=>warnings.push(x.map(String).join(' '));let report;try{report=await H.quietLog(()=>C.runComparison({seeds:[seed],policies:[policy],days:panel.options.days,origin:panel.options.origin,...(panel.options.region?{region:panel.options.region}:{})}));}finally{console.warn=warn;}
+  const row=report.runs[0],obs=o.finish(row);sample();const checks={state:gear.gameplayHash(G.state)===expected.stateHash,row:JSON.stringify(row)===JSON.stringify(expected.row),metrics:JSON.stringify(obs.metrics)===JSON.stringify(expected.metrics),warnings:warnings.length===0&&obs.observerErrors.length===0};
+  console.log('@@AUDIT@@'+JSON.stringify({policy,seed,checks,calls,samples}));return;
+ }
+ const out=arg('out');if(!out||fs.existsSync(out+'.json.gz'))throw Error('--out <new prefix> required');const rows=[];
+ for(const expected of panel.rows){const r=cp.spawnSync(process.execPath,[__filename,'--child','--root',root,'--panel',arg('panel'),'--policy',expected.row.policy,'--seed',String(expected.row.seed)],{encoding:'utf8',env:process.env,timeout:120000,maxBuffer:16e6});if(r.status!==0)throw Error(r.stderr||r.stdout);const p=JSON.parse(r.stdout.split('@@AUDIT@@').pop());if(!Object.values(p.checks).every(Boolean))throw Error('Nonpassive review '+JSON.stringify({policy:p.policy,seed:p.seed,checks:p.checks}));rows.push(p);console.log('exact '+p.policy+' '+p.seed+' Audit calls '+p.calls.length);}
+ const policies=panel.options.policies.map(policy=>{const rs=rows.filter(r=>r.policy===policy);let playerHolderDays=0,npcHolderDays=0,maxDebt=0;for(const r of rs){const days=new Map(r.samples.map(s=>[s.day,s]));for(const s of days.values()){playerHolderDays+=s.player?1:0;npcHolderDays+=s.npc.length;maxDebt=Math.max(maxDebt,s.player?.debt||0,...s.npc.map(p=>p.debt));}}return {policy,runs:rs.length,playerHolderDays,npcHolderDays,maxSampledDebt:maxDebt,calls:rs.reduce((n,r)=>n+r.calls.length,0),collections:rs.reduce((n,r)=>n+r.calls.filter(c=>c.ok).length,0),unknownResidentSamples:rs.reduce((n,r)=>n+r.samples.reduce((m,s)=>m+s.unknown.length,0),0)};});
+ fs.writeFileSync(out+'.json.gz',z.gzipSync(JSON.stringify({scope:'Exact passive replay. Sampled holder-days are opportunity coverage, not continuous presence or useful effects; unknown identities excluded and retained.',sourceDigest:panel.sourceDigest,panel:arg('panel'),rows,policies})+'\n'),{flag:'wx'});fs.writeFileSync(out+'-summary.json',JSON.stringify(policies,null,2)+'\n');
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

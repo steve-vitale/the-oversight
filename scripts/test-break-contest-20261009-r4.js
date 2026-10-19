@@ -103,8 +103,8 @@ function ok(name, cond, detail) {
   else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); }
 }
 function sec(t) { console.log('\n### ' + t); }
-function freshGame(day) {
-  rng.reset(SEED);
+function freshGame(day, seed = SEED) {
+  rng.reset(seed);
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -310,8 +310,9 @@ sec('F4 — lastContestDay dead writes removed; blood deaths are real');
   // _cxBlood kills are real: fragile villagers die on camera
   let died = 0, total = 0;
   const pit = findContest('pit');
+  // Distinct predeclared starts: the old helper reset all12 to one seed.
   for (let s = 0; s < 12; s++) {
-    const [f] = freshGame(15);
+    const [f] = freshGame(15, SEED + s);
     Game.state.village.health[f] = 12;
     const r = Game.contestResolveVillager(f, pit, {});
     total++;

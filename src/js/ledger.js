@@ -632,6 +632,12 @@
       // expedition, pit trap, hunt), so non-combat deaths are no longer silent.
       try { this.audioEvent('playerDeathSting'); } catch (e) {}
       const s = this.state.scholar, v = this.state.village;
+      // The animal belongs to the place, not the office. Use the same parking
+      // rule as ordinary travel before the successor is moved into the hall.
+      // Legacy indoor aliases are invalid, so never park those inside Haven.
+      const animalTile = s.animal && this.map ? this.playerTile() : null;
+      if (s.animal && !s.insideHaven && animalTile) animalTile.animal = s.animal;
+      s.animal = null;
       const oldId = this.villagerId;
       const oldChar = (this.data.villagers || []).find(x => x.id === oldId) || {};
       const oldName = oldChar.name || 'the scholar';

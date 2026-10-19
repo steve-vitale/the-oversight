@@ -1,0 +1,88 @@
+#!/usr/bin/env node
+'use strict';
+const K = require('./lib'), T = K.reporter('trade-progression');
+(async () => {
+  const saves = new Map(); global.localStorage = { getItem: k => saves.get(String(k)) ?? null, setItem: (k, x) => saves.set(String(k), String(x)), removeItem: k => saves.delete(String(k)), key: i => [...saves.keys()][i] ?? null, get length() { return saves.size; } };
+  const G = await K.load({ seed: Number(process.env.SEED || 7) }); let s, v, npc, vis;
+  const food = () => ({ itemId: 'trade_test_food', name: 'Cooked beans', foodKind: 'plant', foodState: 'cooked', prep: 'cooked', edible: true, safe: true, units: 4, kcalEach: 500, kg: 0.1, spoilDay: 200 });
+  function fresh() {
+    G.over = false; G.tbfight = null; K.newRun(G); s = G.state.scholar; v = G.state.village;
+    s.day = 85; G.state.systemArrived = true; s.kcal = 2400; s.inventory = [food()];
+    G.playerTracks().social = { xp: 0, level: 0 };
+    npc = v.roster.find(x => x !== G.villagerId); G.npcXp(npc).social = 0; v.health = {};
+    vis = { id: 'paid_trade_fixture', name: 'Road trader', entrepreneurial: true, credit: 0, wares: [{ kind: 'tool', itemId: 'stone_knife', name: 'Stone knife', price: 800 }] };
+    v.visitors = [vis];
+  }
+  const xp = () => G.playerTracks().social.xp;
+  const practice = (who, price) => G.creditGoodsTrade ? G.creditGoodsTrade(who, price) : 0;
+  fresh();
+  T.ok('trade is a data-authored capped social deed', G.trackData().deeds.trade?.track === 'social' && G.trackData().deeds.trade.n === 1 && G.trackData().deeds.trade.perDay === 1);
+  const bought = G.visitorBuyWare(vis.id, 0);
+  T.ok('real paid cart purchase grants the item and spends food', bought && s.inventory.some(i => i.itemId === 'stone_knife') && s.inventory.find(i => i.itemId === 'trade_test_food').units === 2);
+  T.ok('that completed transaction earns one social XP', xp() === 1);
+  G.visitorBuyWare(vis.id, 0);
+  T.ok('replaying a sold ware cannot award XP', xp() === 1);
+  G.traderSell(vis.id, s.inventory.findIndex(i => i.itemId === 'trade_test_food'));
+  T.ok('buy and sale share one daily practice cap', xp() === 1 && vis.credit > 0);
+  s.day++; s.inventory = [food()]; G.traderSell(vis.id, 0);
+  T.ok('a real sale on a later day earns another credit', xp() === 2 && !s.inventory.length);
+  fresh(); s.inventory = []; const before = JSON.stringify(s.inventory);
+  T.ok('unfunded purchase fails without XP or partial payment', !G.visitorBuyWare(vis.id, 0) && xp() === 0 && JSON.stringify(s.inventory) === before && !vis.wares[0].sold && vis.credit === 0);
+  T.ok('empty sale and unknown trader cannot award practice', !G.traderSell(vis.id, 0) && !G.visitorBuyWare('absent', 0) && xp() === 0);
+  fresh(); vis.wares[0].price = 0; G.visitorBuyWare(vis.id, 0);
+  T.ok('a free cart grant is not paid trade practice', xp() === 0);
+  fresh(); v.hawkerStock = { [npc]: { kind: 'tool', itemId: 'stone_knife', name: 'Stone knife', price: 800, sold: false } };
+  T.ok('real resident hawker purchase completes', G.hawkerBuy(npc) === true);
+  T.ok('both living participants receive the same credit', xp() === 1 && G.npcXp(npc).social === 1);
+  G.hawkerBuy(npc);
+  T.ok('sold hawker replay cannot train either participant', xp() === 1 && G.npcXp(npc).social === 1);
+  v.hawkerStock[npc] = { kind: 'tool', itemId: 'stone_knife', name: 'Stone knife', price: 300, sold: false };
+  G.hawkerBuy(npc);
+  T.ok('a second paid hawker trade retains both daily caps', xp() === 1 && G.npcXp(npc).social === 1);
+  G.save(); const runKey = G.state.runKey; const loaded = G.load(runKey); s = G.state.scholar; v = G.state.village;
+  v.hawkerStock[npc] = { kind: 'tool', itemId: 'stone_knife', name: 'Stone knife', price: 300, sold: false }; s.inventory = [food()]; G.hawkerBuy(npc);
+  T.ok('real save/load preserves buyer and seller daily caps', loaded && xp() === 1 && G.npcXp(npc).social === 1);
+  fresh(); v.hawkerStock = { [npc]: { kind: 'tool', itemId: 'stone_knife', name: 'Stone knife', price: 800, sold: false } }; s.inventory = [];
+  T.ok('unfunded hawker sale trains neither actor', !G.hawkerBuy(npc) && xp() === 0 && G.npcXp(npc).social === 0);
+  fresh(); s.riverTrader = { day: s.day }; v.pantry = [];
+  T.ok('real river goods barter pays food and earns practice', G.tradeRiverTrader('salt') === true && xp() === 1 && s.inventory.some(i => /salt/i.test(i.name || '')));
+  vis.wares[0].price = 300; G.visitorBuyWare(vis.id, 0);
+  T.ok('river and cart trading use the same daily cap', xp() === 1);
+  fresh(); s.riverTrader = { day: s.day }; v.pantry = []; s.inventory = [];
+  T.ok('unfunded river barter awards no practice', !G.tradeRiverTrader('salt') && xp() === 0);
+  fresh();
+  T.ok('unknown people and invalid consideration cannot gain practice', practice('absent', 100) === 0 && practice('player', NaN) === 0 && practice(npc, -1) === 0 && xp() === 0 && G.npcXp(npc).social === 0);
+  v.health[npc] = 0;
+  T.ok('a dead resident cannot receive trade practice', practice(npc, 400) === 0 && G.npcXp(npc).social === 0);
+  fresh(); v.hawkerStock = { [npc]: { kind: 'tool', itemId: 'stone_knife', name: 'Stone knife', price: 800, sold: false } }; G.hawkerBuy(npc);
+  v.trust = { [npc]: 10000 }; G.playerDeath('prepared trade succession'); s = G.state.scholar; v = G.state.village;
+  s.inventory = [food()]; vis.wares[0].sold = false; const next = G.visitorBuyWare(vis.id, 0);
+  T.ok('real succession carries the seller XP and daily cap into the bearer role', G.villagerId === npc && next && xp() === 1);
+  fresh(); const buyer = G.villagerId, tick = G.tickAction; let changed = false;
+  v.trust = { [npc]: 10000 };
+  G.tickAction = function () { const result = tick.apply(this, arguments); if (!changed) { changed = true; this.playerDeath('prepared trade completion boundary'); } return result; };
+  try { G.visitorBuyWare(vis.id, 0); } finally { G.tickAction = tick; }
+  T.ok('a death during the real purchase time cost cannot credit the successor', G.villagerId !== buyer && G.villagerId === npc && xp() === 0);
+  fresh(); vis.dead = true; const deadCartPack = JSON.stringify(s.inventory);
+  T.ok('stale dead cart stock cannot take food or train a living buyer', !G.visitorBuyWare(vis.id, 0) && xp() === 0 && !vis.wares[0].sold && JSON.stringify(s.inventory) === deadCartPack);
+  T.ok('a dead cart cannot buy food onto a tab or grant seller practice', !G.traderSell(vis.id, 0) && vis.credit === 0 && xp() === 0 && JSON.stringify(s.inventory) === deadCartPack);
+  for (const kind of ['self','unknown','dead','departed']) {
+    fresh(); const seller = kind === 'self' ? G.villagerId : kind === 'unknown' ? 'absent' : npc;
+    if (kind === 'dead') v.health[npc] = 0;
+    if (kind === 'departed') v.roster = v.roster.filter(id => id !== npc);
+    v.hawkerStock = { [seller]: { kind: 'tool', itemId: 'stone_knife', name: 'Stale knife', price: 400 } };
+    const pack = JSON.stringify(s.inventory);
+    T.ok(kind+' resident stock cannot complete a paid exchange or train anyone', !G.hawkerBuy(seller) && xp() === 0 && JSON.stringify(s.inventory) === pack && !v.hawkerStock[seller].sold);
+  }
+  fresh(); const realLookup = G.vpOf; G.vpOf = id => id === 'absent' ? realLookup.call(G, npc) : realLookup.call(G, id);
+  try { T.ok('a fallback person cannot earn another identity practice', practice('absent', 400) === 0 && !v.npcDeedDay?.absent); } finally { G.vpOf = realLookup; }
+  fresh(); const nativeTick = G.tickAction; let boundary;
+  G.tickAction = function () { boundary = { day: this.state.scholar.day, xp: this.playerTracks().social.xp, cap: this.state.scholar.deedDay?.trade }; return nativeTick.apply(this, arguments); };
+  try { G.visitorBuyWare(vis.id, 0); } finally { G.tickAction = nativeTick; }
+  T.ok('cart practice belongs to the payment day before actual time advances', boundary?.day === 85 && boundary.xp === 1 && boundary.cap?.day === 85 && boundary.cap.n === 1);
+  fresh(); s.riverTrader = { day: s.day }; v.pantry = []; boundary = null;
+  G.tickAction = function () { boundary = { day: this.state.scholar.day, xp: this.playerTracks().social.xp, cap: this.state.scholar.deedDay?.trade }; return nativeTick.apply(this, arguments); };
+  try { G.tradeRiverTrader('salt'); } finally { G.tickAction = nativeTick; }
+  T.ok('river practice also settles with the real payer before actual time advances', boundary?.day === 85 && boundary.xp === 1 && boundary.cap?.day === 85 && boundary.cap.n === 1);
+  T.done();
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

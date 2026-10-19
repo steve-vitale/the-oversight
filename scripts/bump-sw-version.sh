@@ -61,3 +61,6 @@ assert n4 > 0, 'no asset URLs found in index.html'
 open(idx, 'w').write(ix2)
 print('index.html assets cache-busted ->', v, '(%d urls)' % n4)
 PY
+
+# Keep exact cache keys in step with the entry page's newly stamped URLs.
+node scripts/build-offline-assets.js

@@ -29,7 +29,7 @@ function mulberry32(a) {
 }
 Math.random = mulberry32(parseInt(process.env.SEED || '1313', 10));
 
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
+global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, decodeURIComponent(new URL(f, 'https://fixture.invalid/').pathname).slice(1)), 'utf8'))) });
 // Full script list (was `| head -80`: tracks.js, 2026-10-14, shifted the
 // window and silently dropped table-beloved.js — the sim-harness HEAD-80 bug).
 const order = execSync("grep -o 'src/js/[^\\\"]*\\.js' index.html", { cwd: ROOT }).toString().split('\n')

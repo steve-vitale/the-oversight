@@ -1,66 +1,56 @@
 #!/usr/bin/env node
-// test-succession-opener-coherence.js — PROOF (journey-succession 2026-10-11):
-// the resume-opener's whyLine for 'unfinished business' was "we never
-// finished", which doubled with the template's "never finished talking
-// about X" -> "Luis and I never finished talking about the water thing --
-// we never finished." (seen live on seed 4242 pre-fix). The line now reads
-// "we left it mid-thought". Checks the REAL convoResumeOpener path both
-// inherited (predecessor named) and same-bearer (no predecessor).
-// Exit 0 = green, 1 = failure.
 'use strict';
-const { loadGame, setupGame } = require('./sim-harness');
-
-let fails = 0;
-function check(id, ok, detail) {
-  console.log(`  [${ok ? 'OK' : 'FAIL'}] ${id}${detail ? ' -- ' + detail : ''}`);
-  if (!ok) fails++;
-}
-const doubled = (t) => /never finished talking about[^"]{0,200}?never finished/i.test(t);
-
-async function openerLine(Game, vid) {
-  Game.startConvo(vid);
-  const t = (Game.convoGet(vid).transcript || [])[0] || {};
-  try { Game.endConvo(vid, 'left'); } catch (e) {}
-  return t.text || '';
-}
-
-(async () => {
-  // ---- inherited case: thread planted as the OLD bearer ----
-  const { Game } = await loadGame({ seed: 4242, mode: 'test-opener-coherence' });
-  Game.say = () => {}; Game.sysSay = () => {};
-  await setupGame(Game);
-  const v = Game.state.village;
-  const oldId = Game.villagerId;
+// Prepared spoken memory -> real death/inheritance -> actual resume opener.
+// Each same-bearer/inherited arm loads one shared-harness world per child.
+const assert = require('assert');
+const { execFileSync } = require('child_process');
+const K = require('./godpath/lib');
+let pass = 0;
+function check(name, condition) { assert(condition, name); pass++; console.log('  ok ' + name); }
+const doubled = text => /never finished talking about[^\"]{0,200}?never finished/i.test(text);
+async function scenario(inherited) {
+  const Game = await K.load({ seed: Number(process.env.SEED || (inherited ? 4242 : 777)) });
+  K.newRun(Game);
+  const v = Game.state.village, oldId = Game.villagerId;
   const oldFirst = Game.displayName(oldId).split(' ')[0];
-  const npcs = (v.roster || []).filter(id => id !== oldId);
-  const heir = npcs[0], vid1 = npcs[1];
-  v.trust[heir] = 90; v.trust[vid1] = 50;
-  Game.convoThreadOpen(vid1, 'waterthread', 'the water thing', 'unfinished business');
-  Game.playerDeath('the hunt');
-  const realRandom = Math.random;
-  Math.random = () => 0; // opener gate passes; picks open thread index 0
+  const [heir, speaker] = Game.npcIds();
+  v.trust[heir] = 90; v.trust[speaker] = 50;
+  check('prepared speaker shares a language', Game.commLevel(speaker).level === 'full');
+  Game.convoThreadOpen(speaker, 'ghost', 'an unsaid conversation', 'unfinished business');
+  check('unquoted ghost thread is rejected', Game.convoOpenThreads(speaker).length === 0);
+  const quote = '"The creek is clear past the old trees. I can show you the crossing tomorrow."';
+  const spoken = Game.sayLine(speaker, quote);
+  check('prepared substantive beat reaches actual speech ledger', !!spoken && Game.convoGet(speaker).transcript.some(row => row.who === 'them' && row.text.includes('The creek is clear')));
+  Game.convoThreadOpen(speaker, 'waterthread', 'the water thing', 'unfinished business', spoken);
+  const thread = Game.convoOpenThreads(speaker)[0];
+  check('one substantive unfinished thread is stored', Game.convoOpenThreads(speaker).length === 1 && thread.tid === 'waterthread' && thread.snippet.includes('The creek is clear'));
+  if (inherited) {
+    Game.playerDeath('the hunt');
+    check('actual succession changes the bearer', Game.villagerId === heir && Game.villagerId !== oldId);
+    check('same-day thread stamped with actual predecessor', Game.inheritedName(thread) === oldFirst);
+  } else check('same-bearer thread has no inherited name', Game.inheritedName(thread) === null);
+  const random = Math.random, original = Game.convoResumeOpener;
+  let resume = null, firstLine;
+  Game.convoResumeOpener = function () { const result = original.apply(this, arguments); resume = result; return result; };
+  Math.random = () => 0; // pass the resume gate and choose the sole thread
   try {
-    const line = await openerLine(Game, vid1);
-    console.log('  inherited: ' + line.slice(0, 160));
-    check('inherited-names-predecessor', line.includes(oldFirst), oldFirst);
-    check('inherited-no-doubling', !doubled(line), 'no "never finished ... never finished"');
-  } finally { Math.random = realRandom; }
-
-  // ---- same-bearer control: no death, thread is the current bearer's ----
-  const g2 = (await loadGame({ seed: 777, mode: 'test-opener-coherence-2' })).Game;
-  g2.say = () => {}; g2.sysSay = () => {};
-  await setupGame(g2);
-  const v2 = g2.state.village;
-  const vidB = (v2.roster || []).filter(id => id !== g2.villagerId)[1];
-  v2.trust[vidB] = 50;
-  g2.convoThreadOpen(vidB, 'waterthread', 'the water thing', 'unfinished business');
-  Math.random = () => 0;
-  try {
-    const line = await openerLine(g2, vidB);
-    console.log('  same-bearer: ' + line.slice(0, 160));
-    check('same-bearer-no-doubling', !doubled(line), 'no "never finished ... never finished"');
-  } finally { Math.random = realRandom; }
-
-  console.log(fails ? `\n${fails} FAILURES` : '\nALL GREEN');
-  process.exit(fails ? 1 : 0);
-})().catch(e => { console.error('THREW:', e.stack); process.exit(1); });
+    Game.startConvo(speaker);
+    firstLine = (Game.convoGet(speaker).transcript[0] || {}).text || '';
+    Game.endConvo(speaker, 'left');
+  } finally { Math.random = random; Game.convoResumeOpener = original; }
+  check('startConvo actually selects the unfinished resume', !!resume && resume.thread === 'waterthread');
+  check('resume uses the substantive stored quote', resume.line.includes('The creek is clear'));
+  check('resume explains unfinished business without doubling', resume.line.includes('we left it mid-thought') && !doubled(resume.line));
+  if (inherited) check('spoken opener names the actual predecessor', firstLine.includes(oldFirst) && resume.line.includes(oldFirst));
+  else check('same-bearer opener owns its own conversation', /We never finished/.test(resume.line) && !/wearing .* shoes now/.test(resume.line));
+  console.log(JSON.stringify({ inherited, firstLine, fullResume: resume.line, storedQuote: thread.snippet }));
+}
+async function main() {
+  const arm = process.env.OPENER_CHILD;
+  if (arm) { assert(['inherited', 'same'].includes(arm)); await scenario(arm === 'inherited'); }
+  else for (const kind of ['inherited', 'same']) {
+    process.stdout.write(execFileSync(process.execPath, [__filename], { env: { ...process.env, OPENER_CHILD: kind }, encoding: 'utf8' }));
+  }
+  console.log('opener proof green' + (arm ? ': ' + pass + ' checks' : ': two isolated arms'));
+}
+main().catch(error => { console.error(error.stack); process.exitCode = 1; });

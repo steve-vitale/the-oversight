@@ -11,7 +11,7 @@
 // RED check: `git stash push src/js/app.js` (keep this file) and the duck
 // + setVolume assertions FAIL; the blip-over-music guard still passes on
 // old code (the blip fired before — it was just masked).
-const fs = require('fs');
+const fs = require('./lib/source-text');
 const path = require('path');
 const APP = path.resolve(__dirname, '..', 'src', 'js', 'app.js');
 

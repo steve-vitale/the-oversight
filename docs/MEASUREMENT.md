@@ -273,20 +273,43 @@ evidence file, not a license to re-score the run.
   lever applied. Compare: `node scripts/balance-panel.js compare --before
   <base-panel.json.gz> --after <lever-panel.json.gz> --out <prefix>`;
   attach the resulting `.md` to the evidence file.
-- Pass `--policies` explicitly: the panel's default policy names do not exist
-  on master (use the loop's own policies, e.g. `competent,winseek`).
+- Pass `--policies` explicitly from the current POLICY_REGISTRY. The reconciled
+  root includes capable/maker/merchant/caregiver and socialite. Older Muse
+  reports describing missing defaults apply to their historical roots only.
+  Do not substitute a different controller to make two old panels compare.
 - Validity: a panel with validity errors is not evidence — repair and rerun.
-  The ONE waivable error is `Policy/harness changed` when the lever itself
-  is a policy-side change: waive it only when the changed file is exactly
-  the lever's file, and record the waiver in the evidence file.
+  Never waive a policy/harness mismatch as if only Game changed. Overlay the
+  same current controller/harness on both Game roots, or use the dedicated
+  policy/harness revision analysis described in SIMULATING.md and retain
+  its changed-file scope and reason. An invalid panel is not a balance gate.
 - Commit the panel summary only: `panel.json.gz` + the compare `.md`/`.json`.
   NEVER commit the `cases/` cache (thousands of per-case archives) — it is
   reproducible from seeds + digests. Cache bloat is what turned one agent's
   branch into 18k committed files.
-- Confirmation sizing: the contract calls 64 seeds confirmation-sized; loop
-  pilots (8) and confirms (12–16) report "screen only" under the panel and
-  remain the loop standard. Do not burn 64-seed confirms by default.
+- Sizing follows Steve's current AGENTS instruction: start with16 matched
+  seeds per capable/maker/merchant/caregiver, adding named region/job cohorts
+  for the feature. Use64 and independent holdouts for small-effect claims.
+  Historical8/12/16 runs remain pilots/screens, regardless of their old labels.
 - The contract is versioned (`schemaVersion` + digest). Changing a metric,
   tolerance, or direction is a Steve-call; both agents adopt the same digest
   or their panels cannot be compared. The scorecard enforces this — it is
   the mechanical end of the coordination rule in docs/AGENT-LANES.md.
+
+### Reconciled workflow (2026-10-17, Muse9072f375 + Codex)
+
+Keep pre-registered questions and thresholds; never re-score a miss after
+seeing results. Review every policy's survival, community, resources,
+progression and earned gear alongside the primary question. Win changes in
+either direction require investigation. More wins cannot cancel another
+warning. See MEASUREMENT-PLAN.md and SURVIVAL-LEVERS.md. The current integration
+screen remains review_required: stronger caregiver wins coexist with maker/
+socialite gear warnings and community/resource watches. Do not tune quotas.
+
+Read docs/SIMULATING.md before reusing a legacy diagnostic. Load one harness
+per process, even for sequential comparisons: modules retain captured globals.
+The isolated Witness and gorge-drive checks are in the shared check workflow.
+Legacy multi-load diagnostics are historical evidence until isolated and
+rerun; passing them does not waive source or observer validity. Source roots
+are immutable during a sweep. Retain all raw panels, both feature censuses,
+configuration/source/contract hashes, exclusions and the tradeoff decision.
+See evidence/2026-10-17/muse-9072-audit.md for branch inventory and continuations.

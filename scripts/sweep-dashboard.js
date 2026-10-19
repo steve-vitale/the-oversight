@@ -326,6 +326,7 @@ async function all() {
   console.log('wrote ' + base + '.json/.md');
 }
 
+if (require.main === module) {
 if (process.argv.includes('--compare')) {
   const i = process.argv.indexOf('--compare');
   const A = JSON.parse(fs.readFileSync(process.argv[i + 1], 'utf8')), B = JSON.parse(fs.readFileSync(process.argv[i + 2], 'utf8'));
@@ -334,5 +335,6 @@ if (process.argv.includes('--compare')) {
   all().catch(e => { console.error('FATAL', e); process.exit(1); });
 } else {
   one().catch(e => { console.error('FATAL', e); process.exit(1); });
+}
 }
 module.exports = { summarize, seedList, markdown, compare };

@@ -1,6 +1,41 @@
 # DIRECTIVES — Steve's standing orders
 
+## Redundant phone surfaces and unreadable chat (Steve, 2026-10-19)
+
+“Still redundant as hell. Playable surfaces are now spread across roughly two phone screen lengths. Chat getting cut off and not being scrollable. Surfaces with same goals or info taking up space at several spots.”
+
+Verify the build actually served to the phone as well as local renders. Keep
+the field in one viewport; text inside its bounded message area can scroll
+when it does not fit. Reply labels must remain readable and controls reachable.
+
+## Phone space and coherent messages (Steve,2026-10-18)
+
+“Your screenshots look like my screen on my phone. It needs to be playable on
+one screen. Nobody wants to scroll back and forth to move and take actions then
+up to see. We have chats and text notices popping up in all sorts of places,
+too and bottom of screen. We need to use a coherent strategy and treat our
+phone screen real estate as precious”
+
+Current implementation and repeatable acceptance contract: PHONE-FRAME.md.
+
 Verbatim-ish record of Steve's explicit instructions. These don't expire. When in doubt, this file wins over inference. Append-only: add new directives, never rewrite old ones. If a directive is superseded, note it — don't delete it.
+
+## Repository scope correction (Steve, 2026-10-18)
+
+Steve corrected “We should have those rules on this repo” with “Shouldn’t”.
+The earlier request to reuse ChangePilot's old host rules is superseded.
+Oversight uses its own repository instructions, roadmap, agent coordination,
+Git history and simulation/playtest evidence. The imported ChangePilot workflow
+and approval statements retained below are historical; they do not establish
+Oversight prerequisites. Game design directives remain in force. See the
+repository workflow scope in `AGENTS.md`.
+
+
+## Repository scope correction (Steve, 2026-10-17)
+
+"Nah, this repo doesn’t use changepilot. Let’s keep that straight."
+
+Oversight uses its repository roadmap, agent lanes, Git history and simulation/playtest evidence for this work. Earlier ChangePilot workflow and approval statements below were imported from another project and are superseded for this repository. Retain them only as historical context; they do not establish an Oversight workflow requirement. Game design directives remain in force.
 
 ## How we work
 - "Continue all work. You keep stopping."

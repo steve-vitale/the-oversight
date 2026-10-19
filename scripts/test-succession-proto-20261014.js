@@ -38,11 +38,15 @@
 'use strict';
 process.env.FOURTHLINK = '1';
 process.env.SUCCPROTO = '1';
-const { loadGame, setupGame } = require('./sim-harness');
+const fs = require('fs');
+const path = require('path');
+const K = require('./godpath/lib');
+const { watchRenegotiation } = require('./lib/renegotiation-fixture');
+let proofGame;
 const { fourthlink } = require('./policies/fourthlink');
 let succMod = null;
 try { succMod = require('./policies/succession'); }
-catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e; }
+catch (e) { if (e.code !== 'MODULE_NOT_FOUND' || fs.existsSync(path.join(__dirname, 'policies', 'succession.js'))) throw e; }
 const layerPresent = !!succMod;
 const succession = layerPresent ? succMod.succession : null;
 const successionProtocol = layerPresent ? succMod.successionProtocol : null;
@@ -61,8 +65,8 @@ function pantryTotal(Game) {
 //        recent so the link is KEPT (the neglect snap is a different engine
 //        path — death + neglect kills, and this proof tests mourning).
 async function buildLink({ trust, linkDay, lastKeptDay }) {
-  const { Game } = await loadGame({ seed: 42, mode: 'succession-proof' });
-  await setupGame(Game);
+  if (!proofGame) proofGame = await K.load({ seed: Number(process.env.SEED || 42) });
+  const Game = proofGame; K.newRun(Game);
   Game.state.otherVillages = (Game.state.otherVillages || []).concat([
     { id: 'dryv', name: 'Dryfield', pantryKcal: 0, population: 0, day: 0, roster: [] },
   ]);
@@ -96,11 +100,11 @@ async function main() {
   // ---- RED R1: gate off = fourthlink itself (or layer absent: inert by deletion) ----
   delete process.env.SUCCPROTO;
   if (layerPresent) {
-    for (const k of Object.keys(require.cache)) if (k.endsWith('policies/succession.js')) delete require.cache[k];
+    delete require.cache[require.resolve('./policies/succession')];
     const off = require('./policies/succession').succession;
     ok('R1-gate-off-is-fourthlink', off === fourthlink, 'unset gate exports fourthlink itself');
   } else {
-    ok('R1-layer-deleted', true, 'layer absent (killed arm) — inert by deletion, nothing to gate');
+    ok('R1-layer-deleted', !fs.existsSync(path.join(__dirname, 'policies', 'succession.js')), 'layer absent (killed arm) — inert by deletion, nothing to gate');
   }
 
   // ---- RED R2: the gap — baseline lets a REAL staged beat expire ----
@@ -110,16 +114,25 @@ async function main() {
     ok('R2-beat-staged-real', ret === 'grace' && beatOf(Game) != null, `successionCrisis -> ${ret}, beat staged`);
     ok('R2-haircut-applied', trustOf(Game) === 16, `trust 24 -> ${trustOf(Game)} (-8 succession haircut)`);
     const ctx = {};
-    for (let d = 11; d <= 18; d++) {
-      Game.state.scholar.day = d;
-      pinPantry(Game, 15000);
-      fourthlink.daily(Game, ctx);
-      Game._renegotiationTick();
-    }
+    const watch = watchRenegotiation(Game);
+    try {
+      for (let d = 11; d <= 18; d++) {
+        Game.state.scholar.day = d;
+        pinPantry(Game, 15000);
+        fourthlink.daily(Game, ctx);
+        Game._renegotiationTick();
+      }
+    } finally { watch.restore(); }
     const notes = renegNotes(Game).join(' | ');
     ok('R2-baseline-lets-expire', beatOf(Game) == null && /silence answered/i.test(notes),
       'beat expired unanswered; engine said the silence answered');
-    ok('R2-expiry-costs-6', trustOf(Game) === 10, `trust 16 -> ${trustOf(Game)} (-6 expiry)`);
+    const expiries = watch.events.filter(event => event.id === 'link_testS' && event.chosen === false);
+    ok('R2-one-real-expiry', expiries.length === 1 && expiries[0].result === 'lapsed', JSON.stringify(expiries));
+    ok('R2-expiry-costs-6', expiries.length === 1 && expiries[0].delta === -6, JSON.stringify(expiries));
+    ok('R2-expiry-not-before-seven-days', expiries.length === 1 && expiries[0].age >= 7, JSON.stringify(expiries));
+    ok('R2-no-answer-attempted', !watch.answers.some(row => row.id === 'link_testS'), JSON.stringify(watch.answers));
+    console.log('   event receipt ' + JSON.stringify({ stagedTrust: 16, netTrust: trustOf(Game), expiries,
+      history: Game.mshipState().links.find(link => link.id === 'link_testS').history }));
     ok('R2-succ-window-unanswered', !(ctx.succBeatsAnswered > 0), 'baseline answered nothing');
   }
 
@@ -213,7 +226,7 @@ async function main() {
   } // end else (layer present): G1-G5
 
   delete process.env.SUCCPROTO;
-  console.log(`\nPROOF ${pass}/${pass} green — RED observed (baseline lets the beat expire -6; mourning refuses tends), the protocol answers grief honestly.`);
+  console.log(`\nPROOF ${pass}/${pass} green — ${layerPresent ? 'engine baseline and available policy arm checked' : 'engine baseline checked; deleted policy arm not evaluated'}.`);
 }
 
 main().catch(e => { console.error('FATAL', e); process.exit(1); });

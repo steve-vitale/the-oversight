@@ -3,45 +3,23 @@
 // Q1: fire at haven too simple? Q2: water too easy / dirty never drunk?
 // Q3: water weight (1L=1kg)? Q4: consumption amounts? Q5: heat/exertion scaling?
 // PLUS: creek/disease death-pipeline skips (break-it travel&map flag).
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-function mulberry32(a) {
-  return function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-const SEED = parseInt(process.env.SEED || '20261008', 10);
+const K = require('./godpath/lib');
+const SEED = Number(process.env.SEED || 20261008);
 let pass = 0, fail = 0;
-function ok(name, cond) { if (cond) pass++; else { fail++; console.log(`FAIL ${name}`); } }
-function loadAll(seed) {
-  delete globalThis.Scattering;
-  Math.random = mulberry32(seed);
-  global.window = global;
-  global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-  global.localStorage = { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); }, removeItem(k) { delete this._d[k]; } };
-  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  const files = [...html.matchAll(/<script src="([^"]+)"/g)]
-    .map(m => m[1].split('?')[0])
-    .filter(f => f.startsWith('src/js/'))
-    .filter(f => !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(f));
-  for (const f of files) eval(fs.readFileSync(path.join(ROOT, f), 'utf8'));
-  delete global.window;
-  return globalThis.Scattering.Game;
-}
+const messages = [];
+function ok(name, cond) { if (cond) pass++; else { fail++; console.log('FAIL ' + name); } }
 function freshGame(Game) {
   Game.say = () => {};
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
   Game.dayPart = 1;
+  messages.length = 0;
+  Game.say = text => messages.push(String(text));
 }
 (async () => {
-  const Game = loadAll(SEED);
-  await Game.init();
+  const Game = await K.load({ seed: SEED });
+  Game.debugRegion = 'na_eastern_woodlands';
 
   // ---- Q3: WATER WEIGHT 1L = 1kg ----
   freshGame(Game);
@@ -62,12 +40,32 @@ function freshGame(Game) {
 
   // ---- Q4: VILLAGERS DRINK ----
   freshGame(Game);
-  const v0 = Game.state.village.water.clean;
+  const village = Game.state.village;
+  const living = village.roster.filter(id => id !== Game.villagerId && !Game.vpOf(id)?.dead);
+  const npcCount = living.length;
+  if (!npcCount) throw new Error('No living NPCs for water proof');
+  const bottles = JSON.stringify(Game.state.scholar.water);
+  village.water = { clean: npcCount * 2 + 5, dirty: 0 };
+  const v0 = village.water.clean;
   Game.villageDrinks();
-  const drunk = v0 - Game.state.village.water.clean;
-  const npcCount = (Game.state.village.roster || []).filter(id => id !== Game.villagerId).length;
-  ok('villagers drink ~2L each from cistern', drunk === Math.min(npcCount * 2, v0));
-  console.log(`  INFO ${npcCount} villagers drank ${drunk}L (was 0L — cistern never moved)`);
+  ok('full supply serves exactly 2L per living NPC', v0 - village.water.clean === npcCount * 2);
+  ok('full supply is not rationed', !village.waterRationed);
+  ok('NPC water draw does not consume the bearer bottles', JSON.stringify(Game.state.scholar.water) === bottles);
+  village.water.clean = npcCount * 2 - 1;
+  messages.length = 0;
+  const rationStart = village.water.clean;
+  Game.villageDrinks();
+  ok('scarce supply serves exactly 1L per living NPC', rationStart - village.water.clean === npcCount);
+  ok('scarce supply enters the authored ration state', village.waterRationed === true);
+  ok('entering rations is announced', messages.some(text => /half rations/.test(text)));
+  const rationMessages = messages.filter(text => /half rations/.test(text)).length;
+  village.water.clean = npcCount * 2 - 1;
+  Game.villageDrinks();
+  ok('continued rationing does not repeat its transition beat', messages.filter(text => /half rations/.test(text)).length === rationMessages);
+  village.water.clean = npcCount * 2 + 5;
+  Game.villageDrinks();
+  ok('restocked supply restores full cups and announces recovery', village.waterRationed === false && messages.some(text => /full cups again/.test(text)));
+  console.log('  water-rations', JSON.stringify({ living: npcCount, fullPerHead: 2, scarcePerHead: 1 }));
 
   // dirty drinking sets the flag; sickness tick fires gut rot
   freshGame(Game);
@@ -136,10 +134,6 @@ function freshGame(Game) {
 
   // ---- Q1: FIRE — hearth is village infrastructure; field fire needs fuel ----
   freshGame(Game);
-  ok('hearth cell exists at haven (free to use, village wood boils water)', (() => {
-    // nearFire at haven via hall hearth — the hearth stays lit (Haven's heart)
-    return true; // structural: hearthBoil consumes wood, hearth itself doesn't go out
-  })());
   ok('player takeWood draws from village pile', (() => {
     Game.state.village.wood = 5;
     const before = Game.woodCount();

@@ -1,0 +1,51 @@
+'use strict';
+// Known catalog and persistent, person-owned dawn: actual public actions/callers.
+const path=require('path'),i=process.argv.indexOf('--root'),K=i<0?require('./lib'):require(path.resolve(process.argv[i+1],'scripts/godpath/lib'));
+const T=K.reporter('market-dawn-catalog');
+(async()=>{
+ const saves=new Map();globalThis.localStorage={getItem:k=>saves.get(k)??null,setItem:(k,v)=>saves.set(k,String(v)),removeItem:k=>saves.delete(k),key:i=>[...saves.keys()][i]??null,get length(){return saves.size;}};
+ const G=await K.load({seed:Number(process.env.SEED||7)}),S=globalThis.Scattering,GH=S.Godhood,GV=S.GodVerbs;let s,v,id;
+ function fresh(god='market_god'){G.over=false;G.won=false;G.tbfight=null;G.debugRegion='na_eastern_woodlands';K.newRun(G);s=G.state.scholar;v=G.state.village;G.state.systemArrived=true;s.day=85;s.health=100;s.kcal=9000;s.inventory=[];s.prepStash=[];s.equipped={};s.abilities=[];s.backgroundAbilities=[];s.godhood={active:god?[god]:[],recognized:god?{[god]:85}:{},marketDebt:0};v.npcGodhood={};v.health={};id=v.roster.find(x=>x!==G.villagerId&&G.npcAge(x)>=18);if(!id)throw Error('Adult witness missing');G.npcNeeds(id).hunger=20;v.health[id]=100;v.pantry=[];G.stockPantry(G.villageDailyNeed()*8,'Prepared actual stores');}
+ function reload(){const key=G.state.runKey;const ok=G.load(key);s=G.state.scholar;v=G.state.village;return ok;}
+ fresh();const defs=G.data.items;
+ T.ok('every actual catalog item has its authored lootTier/tier or ordinary tier1',defs.every(d=>GH.itemTier(d.id)===(d.lootTier||d.tier||1)));
+ T.ok('tier-only alien armor retains its authored tier4',GH.itemTier('alien_carapace')===4);
+ const kcal=s.kcal,used=JSON.stringify(s.godhood),inv=s.inventory.length;
+ const unknown=G.marketNamePrice('prepared_item_that_does_not_exist');
+ T.ok('unknown item refuses without food, debt, use or delivery',unknown?.ok===false&&s.kcal===kcal&&JSON.stringify(s.godhood)===used&&s.inventory.length===inv);
+ const wishCost=800+(G.godActionDef('name_price').action.cost.kcal||0);
+ T.ok('unknown public wish refuses before its activation fuel or daily use',G.useAbility('god','name_price','prepared_item_that_does_not_exist')===false&&s.kcal===kcal&&JSON.stringify(s.godhood)===used);
+ const r=G.useAbility('god','name_price','bark_armor');
+ T.ok('actual public action delivers ordinary armor and pays tier1 plus authored activation fuel',r===true&&s.kcal===kcal-wishCost&&s.inventory.some(x=>x.itemId==='bark_armor'&&x.units===1));
+ T.ok('a second same-day ordinary wish is refused without extra food',G.useAbility('god','name_price','wooden_cup')===false&&s.kcal===kcal-wishCost);
+ T.ok('ordinary catalog food cannot buy more nominal kcal than the tier1 fuel price',defs.filter(d=>d.class==='food').every(d=>(d.kcalEach||0)<=800));
+ fresh();s.inventory=[{itemId:'bark_armor',units:1}];G.equip(0,'torso');s.godhood.marketDebt=3;const food=s.kcal,protection=G.armorBonus();const paid=G.marketAuditCollect();
+ T.ok('ordinary worn armor pays a real item rather than the food fallback',paid?.took==='bark_armor'&&s.kcal===food&&!s.equipped.torso);
+ T.ok('ordinary armor loss removes its actual protection',protection>0&&G.armorBonus()===0);
+ fresh();v.npcGodhood[id]={active:['market_god'],marketDebt:3};const p=G.getPerson(id);p.items=['bark_armor'];p.stashed=[];p.equipped={torso:{itemId:'bark_armor'}};const hunger=G.npcNeeds(id).hunger;GV.godDaily(G);
+ T.ok('NPC ordinary armor pays through actual dawn without an invented belly charge',!p.items.includes('bark_armor')&&!p.equipped.torso&&G.npcNeeds(id).hunger===hunger&&v.npcGodhood[id].marketDebt===0);
+ fresh();GH.guardAbsorb(s,200);T.ok('guard fixture spends all four real coins',GH.guardCoins(s)===0);
+ G.endDay();s=G.state.scholar;v=G.state.village;
+ T.ok('player regains one coin even without ever using a daily action',GH.guardCoins(s)===1);
+ T.ok('real Continue retains the fresh coin',reload()&&GH.guardCoins(s)===1);
+ const coins=GH.guardCoins(s);GV.godDaily(G);
+ T.ok('re-entering the same dawn cannot regenerate another coin',GH.guardCoins(s)===coins);
+ fresh();s.godhood.capstoneUsed={namePrice:true};G.endDay();s=G.state.scholar;
+ T.ok('real next dawn refreshes the spent wish',s.day===86&&!s.godhood.capstoneUsed.namePrice);
+ T.ok('Continue retains the refreshed wish',reload()&&!s.godhood.capstoneUsed.namePrice);
+ const funds=s.kcal;T.ok('the refreshed public wish works after Continue with its actual price',G.useAbility('god','name_price','bark_armor')===true&&s.kcal===funds-wishCost);
+ GV.godDaily(G);T.ok('a repeated dawn cannot clear a wish used later that day',s.godhood.capstoneUsed.namePrice===true);
+ fresh(null);v.npcGodhood[id]={active:['market_god'],marketDebt:0};GH.guardAbsorb({godhood:v.npcGodhood[id]},200);G.save();GV.godDaily(G);
+ T.ok('NPC dawn restores one actual coin',GH.guardCoins({godhood:v.npcGodhood[id]})===1);
+ T.ok('Continue retains the NPC coin',reload()&&GH.guardCoins({godhood:v.npcGodhood[id]})===1);
+ GV.godDaily(G);T.ok('NPC same-day dawn re-entry cannot regenerate a second coin',GH.guardCoins({godhood:v.npcGodhood[id]})===1);
+ const old=G.villagerId;G.villagerId=id;G.mantleBecome(old,id);s=G.state.scholar;v=G.state.village;GV.godDaily(G);
+ T.ok('the spent personal dawn follows its holder into the mantle',GH.guardCoins(s)===1);
+ fresh('all_seeing');G.getPerson(id).lies={origin:{told:'prepared elsewhere',truth:'prepared home',confessed:false}};v.trust[id]=50;const initialFood=s.kcal;GV.godDaily(G);const afterFood=s.kcal,afterTrust=v.trust[id];
+ T.ok('No Lies pays its actual daily food and trust prices',afterFood===initialFood-60&&afterTrust===49);
+ T.ok('paid sight creates an actual truth-backed doubt',s._godKnown?.[id+':origin']===true&&(G.state.codex.doubts||[]).some(d=>d.vid===id&&(d.evidence||[]).some(e=>String(e).includes('prepared home'))));
+ const known=JSON.stringify(s._godKnown),doubts=JSON.stringify(G.state.codex.doubts);
+ T.ok('Continue keeps paid sight, knowledge and trust together',reload()&&s.kcal===afterFood&&v.trust[id]===afterTrust&&JSON.stringify(s._godKnown)===known&&JSON.stringify(G.state.codex.doubts)===doubts);
+ GV.godDaily(G);T.ok('same-day sight replay cannot charge food/trust or add knowledge twice',s.kcal===afterFood&&v.trust[id]===afterTrust&&JSON.stringify(s._godKnown)===known&&JSON.stringify(G.state.codex.doubts)===doubts);
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

@@ -837,7 +837,6 @@
     loquat: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" class=\"sprite\"><rect x=\"14.5\" y=\"18\" width=\"3\" height=\"10\" rx=\"1\" fill=\"#5a4326\"/><ellipse cx=\"16\" cy=\"12\" rx=\"9\" ry=\"7\" fill=\"#3d6b2f\"/><g fill=\"#4a7d3a\"><ellipse cx=\"10\" cy=\"9\" rx=\"3\" ry=\"1.8\" transform=\"rotate(-25 10 9)\"/><ellipse cx=\"22\" cy=\"10\" rx=\"3\" ry=\"1.8\" transform=\"rotate(25 22 10)\"/></g><g fill=\"#f0b83a\"><ellipse cx=\"14\" cy=\"12\" rx=\"2\" ry=\"2.5\"/><ellipse cx=\"18\" cy=\"11\" rx=\"2\" ry=\"2.5\"/><ellipse cx=\"16\" cy=\"14\" rx=\"2\" ry=\"2.5\"/></g><g fill=\"#f8d87a\" opacity=\"0.8\"><ellipse cx=\"13.6\" cy=\"11.4\" rx=\"0.7\" ry=\"0.9\"/><ellipse cx=\"17.6\" cy=\"10.4\" rx=\"0.7\" ry=\"0.9\"/></g></svg>`,
     perilla: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" class=\"sprite\"><path d=\"M16 28 L16 12\" stroke=\"#4a3a5a\" stroke-width=\"1.6\"/><g fill=\"#6a4a7a\"><path d=\"M16 20 Q10 18 8 12 Q12 10 16 14 Q20 10 24 12 Q22 18 16 20 Z\"/><path d=\"M16 14 Q12 12 11 8 Q14 7 16 10 Q18 7 21 8 Q20 12 16 14 Z\"/></g><g fill=\"#8a6a9a\" opacity=\"0.7\"><path d=\"M16 19 Q12 17.5 10.5 13.5 Q13 12.5 16 15 Z\"/></g></svg>`,
     chrysanthemum_greens: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" class=\"sprite\"><path d=\"M16 28 L16 16\" stroke=\"#3f7a33\" stroke-width=\"1.5\"/><ellipse cx=\"12\" cy=\"24\" rx=\"2.5\" ry=\"1.5\" fill=\"#4da63f\" transform=\"rotate(-25 12 24)\"/><ellipse cx=\"20\" cy=\"24\" rx=\"2.5\" ry=\"1.5\" fill=\"#4da63f\" transform=\"rotate(25 20 24)\"/><g fill=\"#f5d518\"><ellipse cx=\"16\" cy=\"12\" rx=\"2\" ry=\"5\"/><ellipse cx=\"16\" cy=\"12\" rx=\"5\" ry=\"2\"/><ellipse cx=\"16\" cy=\"12\" rx=\"3.5\" ry=\"3.5\" transform=\"rotate(45 16 12)\"/></g><circle cx=\"16\" cy=\"12\" r=\"2\" fill=\"#e8a018\"/></svg>`,
-    taro: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" class=\"sprite\"><path d=\"M16 28 Q16 20 16 16\" stroke=\"#3f7a33\" stroke-width=\"1.8\"/><path d=\"M16 16 Q10 12 8 6 Q12 4 16 8 Q20 4 24 6 Q22 12 16 16 Z\" fill=\"#4da63f\" stroke=\"#35702c\" stroke-width=\"0.8\"/><path d=\"M16 16 Q13 12 12 8\" stroke=\"#35702c\" stroke-width=\"0.6\" fill=\"none\"/><path d=\"M16 16 Q19 12 20 8\" stroke=\"#35702c\" stroke-width=\"0.6\" fill=\"none\"/><ellipse cx=\"16\" cy=\"26\" rx=\"4\" ry=\"2.5\" fill=\"#8a6a4a\"/></svg>`,
     field_mustard: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" class=\"sprite\"><path d=\"M16 28 L16 12\" stroke=\"#4a7d3a\" stroke-width=\"1.4\"/><g fill=\"#f5d518\"><circle cx=\"13\" cy=\"9\" r=\"1.8\"/><circle cx=\"19\" cy=\"9\" r=\"1.8\"/><circle cx=\"16\" cy=\"7\" r=\"1.8\"/><circle cx=\"16\" cy=\"11\" r=\"1.8\"/></g><g fill=\"#e8a018\"><circle cx=\"13\" cy=\"9\" r=\"0.6\"/><circle cx=\"19\" cy=\"9\" r=\"0.6\"/><circle cx=\"16\" cy=\"7\" r=\"0.6\"/><circle cx=\"16\" cy=\"11\" r=\"0.6\"/></g><ellipse cx=\"12\" cy=\"20\" rx=\"2.5\" ry=\"1.5\" fill=\"#5a8a3a\" transform=\"rotate(-25 12 20)\"/><ellipse cx=\"20\" cy=\"20\" rx=\"2.5\" ry=\"1.5\" fill=\"#5a8a3a\" transform=\"rotate(25 20 20)\"/></svg>`,
     daylily: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" class=\"sprite\"><path d=\"M16 28 Q15 20 16 14\" stroke=\"#3f7a33\" stroke-width=\"1.6\"/><path d=\"M16 14 Q12 10 10 6 Q14 5 16 9 Q18 5 22 6 Q20 10 16 14 Z\" fill=\"#e67e22\"/><path d=\"M16 14 Q14 11 13 8 Q15 8 16 11 Q17 8 19 8 Q18 11 16 14 Z\" fill=\"#f0a83a\"/><g stroke=\"#d35400\" stroke-width=\"0.5\"><line x1=\"14\" y1=\"9\" x2=\"12\" y2=\"7\"/><line x1=\"18\" y1=\"9\" x2=\"20\" y2=\"7\"/></g><ellipse cx=\"12\" cy=\"24\" rx=\"2.5\" ry=\"1.2\" fill=\"#4da63f\" transform=\"rotate(-20 12 24)\"/><ellipse cx=\"20\" cy=\"24\" rx=\"2.5\" ry=\"1.2\" fill=\"#4da63f\" transform=\"rotate(20 20 24)\"/></svg>`,
     houttuynia: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" class=\"sprite\"><path d=\"M16 28 L16 16\" stroke=\"#4a7d3a\" stroke-width=\"1.4\"/><g fill=\"#5a9a4a\"><path d=\"M16 22 Q11 20 10 15 Q13 13 16 16 Q19 13 22 15 Q21 20 16 22 Z\"/><path d=\"M16 18 Q13 16.5 12.5 13.5 Q14.5 12.5 16 14.5 Q17.5 12.5 19.5 13.5 Q19 16.5 16 18 Z\"/></g><rect x=\"15\" y=\"6\" width=\"2\" height=\"8\" rx=\"1\" fill=\"#fdfdf5\"/><ellipse cx=\"16\" cy=\"6\" rx=\"2.5\" ry=\"1.5\" fill=\"#ffffff\" stroke=\"#d8d2c0\" stroke-width=\"0.5\"/></svg>`,
@@ -894,6 +893,176 @@
   // Root = cell type (what you see from far away). Category = examination.
   // Specific = codex L1+ (the final form).
   // New plants: add their chain here (or in plants.json `taxon` field).
+  // Regional art is a presentation vocabulary, not the knowledge taxonomy.
+  // New data includes longer botanical/tag paths (sometimes ending "toxic").
+  // Draw only the three earned stages: root, visible form, known species.
+  const svg32 = body => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite">${body}</svg>`;
+  const LEAF_FORMS = {
+    oval: 'M0 0 Q-2 -12 9 -15 Q16 -5 0 0Z',
+    long: 'M0 0 Q0 -16 13 -22 Q10 -6 0 0Z',
+    heart: 'M0 0 C-9 -9 -2 -19 5 -13 C13 -19 18 -7 0 0Z',
+    arrow: 'M0 0 L-5 -7 L1 -6 L7 -21 L11 -6 L15 -4Z',
+    lobed: 'M0 0 Q-5 -4 0 -7 Q-5 -11 2 -11 Q-1 -17 6 -15 Q8 -23 11 -15 Q18 -14 12 -10 Q18 -6 10 -5 Q12 1 0 0Z',
+    divided: 'M0 0 L-5 -5 L1 -5 L-3 -11 L4 -9 L2 -16 L7 -13 L10 -21 L11 -10 L17 -13 L13 -6 L18 -5Z',
+    round: 'M0 0 C-13 -8 -10 -23 3 -22 C17 -21 19 -6 0 0Z',
+    fan: 'M0 0 L-12 -13 L-10 -20 L-4 -16 L0 -24 L4 -17 L11 -21 L14 -13Z'
+  };
+  function artLeaf(x,y,form='oval',rotation=0,scale=.6,color='#579448') {
+    return `<g transform="translate(${x} ${y}) rotate(${rotation}) scale(${scale})"><path d="${LEAF_FORMS[form] || LEAF_FORMS.oval}" fill="${color}" stroke="#315e35" stroke-width=".7"/><path d="M0 0 L8 -13" stroke="#86b66d" stroke-width=".7" fill="none"/></g>`;
+  }
+  function artFruit(x,y,s) {
+    const color=s.color || '#b85136',shape=s.shape || 'round';
+    let b=shape==='pod'?`<path d="M${x-3} ${y-6} Q${x+6} ${y-3} ${x+2} ${y+6} Q${x-2} ${y+8} ${x-3} ${y-6}Z" fill="${color}" stroke="#695039" stroke-width=".8"/>`:
+      shape==='acorn'?`<ellipse cx="${x}" cy="${y+1}" rx="3.4" ry="5" fill="${color}"/><path d="M${x-4} ${y-2} Q${x} ${y-7} ${x+4} ${y-2}Z" fill="#756040"/><path d="M${x} ${y-5} L${x+1} ${y-9}" stroke="#705936" stroke-width="1.2"/>`:
+      shape==='triangle'?`<path d="M${x} ${y-6} L${x+5} ${y+4} L${x-5} ${y+4}Z" fill="${color}" stroke="#6e5838" stroke-width=".9"/>`:
+      `<ellipse cx="${x}" cy="${y}" rx="${s.w || 5}" ry="${s.h || 5}" fill="${color}" stroke="#665138" stroke-width=".7"/>`;
+    if(shape==='ribbed'||shape==='spiky')for(let i=-2;i<=2;i++)b+=`<path d="M${x+i*1.5} ${y-4} Q${x+i*2} ${y} ${x+i*1.5} ${y+4}" stroke="${s.accent || '#86934a'}" stroke-width=".7" fill="none"/>`;
+    if(shape==='coconut')b+=`<g fill="#342b20"><circle cx="${x-1.5}" cy="${y-1}" r=".8"/><circle cx="${x+1.5}" cy="${y-1}" r=".8"/><circle cx="${x}" cy="${y+1.5}" r=".8"/></g>`;
+    if(s.crown)b+=`<path d="M${x-3} ${y-4} L${x-1} ${y-7} L${x+1} ${y-4} L${x+3} ${y-6}" stroke="#4e7036" stroke-width="1" fill="none"/>`;
+    return b;
+  }
+  function regionalPlantBody(s) {
+    const green=s.green || '#559048',leaf=s.leaf || 'oval',stem=`<path d="M16 29 Q14 20 17 7" stroke="#53743b" stroke-width="1.5" fill="none"/>`;
+    const leaves=artLeaf(15,27,leaf,-85,.65,green)+artLeaf(16,24,leaf,8,.65,green);
+    if(s.kind==='fruit'||s.kind==='nut')return artLeaf(17,10,leaf,-20,.5,green)+`<path d="M7 8 Q16 10 25 5" stroke="#7c633e" stroke-width="1.3" fill="none"/>`+artFruit(12,21,s)+(s.pair?`<g transform="translate(11 -8) scale(.7)">${artFruit(12,21,s)}</g>`:'');
+    if(s.kind==='berries') {
+      let b=stem+leaves;for(let i=0;i<(s.count || 5);i++){const x=10+(i%3)*5,y=8+Math.floor(i/3)*5;b+=`<circle cx="${x}" cy="${y}" r="${s.size || 2.4}" fill="${s.color}" stroke="#4d4c37" stroke-width=".6"/>`;}
+      return b;
+    }
+    if(s.kind==='grain') {
+      let b='';for(let i=0;i<3;i++){const x=9+i*7;b+=`<path d="M${x} 30 Q${x-3} 17 ${x+2} ${s.low || 6}" stroke="${green}" stroke-width="1.1" fill="none"/>`;for(let j=0;j<(s.count || 6);j++)b+=`<ellipse cx="${x+2+(j%2?2:-1)}" cy="${7+j*1.7}" rx="${s.size || 1.4}" ry="1.4" fill="${s.color}"/>`;}
+      return b+artLeaf(14,28,'long',-65,.48,green);
+    }
+    if(s.kind==='mushroom') {
+      if(s.shape==='ball')return `<circle cx="16" cy="17" r="10" fill="${s.color}" stroke="#9b957e" stroke-width="1"/><path d="M8 27 L6 30 M14 27 L13 31 M23 26 L25 30" stroke="#63834d" stroke-width="1"/>`;
+      const cap=s.shape==='trumpet'?'M4 10 Q10 18 16 10 Q23 3 28 10 Q24 21 17 20 Q9 20 4 10Z':'M3 16 Q4 3 16 3 Q28 3 29 16Z';
+      let b=`<path d="M13 13 L12 29 Q16 31 21 28 L19 13Z" fill="${s.stem || '#dfd4b5'}" stroke="#a69a7d" stroke-width=".7"/><path d="${cap}" fill="${s.color}" stroke="#7b7153" stroke-width=".8"/>`;
+      if(s.spots)b+='<g fill="#eee5d5"><circle cx="10" cy="9" r="1.4"/><circle cx="19" cy="7" r="1.6"/><circle cx="23" cy="12" r="1.2"/><circle cx="15" cy="13" r="1.2"/></g>';
+      if(s.ring)b+='<path d="M11 21 Q17 24 22 20 L20 24 L13 24Z" fill="#eee6d2"/><path d="M11 28 Q16 22 22 28 L23 31 L10 31Z" fill="#dfd6bf"/>';
+      return b;
+    }
+    if(s.kind==='palm')return `<path d="M15 30 L17 12" stroke="#8d744b" stroke-width="3"/>`+(s.leaf==='fan'?artLeaf(17,16,'fan',0,.75,green):artLeaf(17,16,'long',-105,.8,green)+artLeaf(17,16,'long',-40,.8,green)+artLeaf(17,16,'long',35,.7,green))+(s.pair?artFruit(13,22,s)+`<g transform="translate(6 -1) scale(.8)">${artFruit(13,22,s)}</g>`:artFruit(13,22,s));
+    if(s.kind==='aquatic')return `<ellipse cx="16" cy="24" rx="14" ry="5" fill="#6b9c65"/><path d="M16 24 L27 19 L26 26Z" fill="#365d56"/>`+`<path d="M16 23 L16 12" stroke="#467a45" stroke-width="1.3"/>`+Array.from({length:s.count || 6},(_,i)=>`<ellipse cx="16" cy="12" rx="2.2" ry="7" fill="${s.color}" stroke="#b58285" stroke-width=".5" transform="rotate(${i*360/(s.count || 6)} 16 12)"/>`).join('')+'<circle cx="16" cy="12" r="2" fill="#e5c75c"/>';
+    if(s.kind==='root')return leaves+`<path d="M13 18 Q8 22 13 28 Q19 32 23 24 Q19 18 13 18Z" fill="${s.color}" stroke="#886344" stroke-width="1"/><path d="M13 21 L20 24 M12 25 L18 28 M18 20 L23 22" stroke="${s.accent || '#b8956a'}" stroke-width=".9"/>`;
+    if(s.kind==='pods')return stem+leaves+`<g stroke="#5b7040" stroke-width=".7" fill="${s.color}"><path d="M9 9 Q1 16 9 24 Q13 15 9 9Z"/><path d="M22 7 Q15 16 23 25 Q29 17 22 7Z"/></g>`+(s.seeds?'<g fill="#e0c99c"><circle cx="8" cy="14" r="1.4"/><circle cx="8" cy="18" r="1.4"/><circle cx="22" cy="13" r="1.4"/><circle cx="23" cy="18" r="1.4"/></g>':'');
+    if(s.kind==='sap')return `<path d="M11 31 L11 4 L19 3 L20 31Z" fill="#e1dcd1" stroke="#a9a193" stroke-width="1"/><path d="M12 8 L17 8 M14 14 L19 14 M11 20 L16 20" stroke="#685e50" stroke-width="1"/><path d="M19 16 Q25 19 22 24 Q17 22 19 16Z" fill="#c4dfdd" stroke="#7daca9" stroke-width=".6"/>`;
+    if(s.kind==='umbel')return stem+leaves+`<path d="M16 13 L6 9 M16 13 L12 6 M16 13 L19 6 M16 13 L26 9" stroke="${s.color || '#678b50'}" stroke-width="1" fill="none"/>`+[6,12,19,26].map((x,i)=>`<circle cx="${x}" cy="${i===0||i===3?9:6}" r="3" fill="${s.accent || '#e7e8d5'}"/>`).join('')+(s.spots?'<g fill="#8d5272"><circle cx="16" cy="19" r="1"/><circle cx="15" cy="25" r=".9"/></g>':'');
+    if(s.kind==='flower') {
+      let flowers='';if(s.shape==='bells')flowers=[7,12,17].map((y,i)=>`<path d="M17 ${y} Q25 ${y-2} 26 ${y+4} L20 ${y+4} Q19 ${y+1} 17 ${y}Z" fill="${s.color}" stroke="#a9b29b" stroke-width=".6"/>`).join('');
+      else if(s.shape==='trumpet')flowers=`<path d="M16 18 L8 5 Q16 10 26 5 L19 20Z" fill="${s.color}" stroke="#ac9fa8" stroke-width=".7"/>`;
+      else flowers=Array.from({length:s.count || 6},(_,i)=>`<ellipse cx="16" cy="10" rx="2.3" ry="7" fill="${s.color}" stroke="#ad8993" stroke-width=".5" transform="rotate(${i*360/(s.count || 6)} 16 10)"/>`).join('')+'<circle cx="16" cy="10" r="2" fill="#e8ce73"/>';
+      return stem+leaves+flowers;
+    }
+    // Known leafy species: explicit leaf form/colour and visible secondary
+    // structures. Never a hidden edibility flag or an identity-coloured badge.
+    return stem+leaves+(s.plume?`<path d="M17 4 L12 11 L17 10 L13 16 L20 14 L18 9 L22 10Z" fill="${s.plume}"/>`:'')+(s.extra?artLeaf(10,25,leaf,-40,.4,green):'');
+  }
+  const plantArt=(category,kind,detail)=>({category,kind,...detail});
+  const REGIONAL_PLANTS = {
+    acorn_pedunculate_oak: plantArt('nut_tree','nut',{shape:'acorn',color:'#a5763d',leaf:'lobed',pair:true,root:'tree'}),
+    beechnut: plantArt('nut_tree','nut',{shape:'triangle',color:'#9b633b',leaf:'oval',pair:true,root:'tree'}),
+    crab_apple: plantArt('fruit_tree','fruit',{color:'#bc633e',w:5,h:4.5,pair:true,root:'tree'}),
+    bilberry: plantArt('berry_bush','berries',{color:'#435e88',count:5,size:2.5,root:'bush'}),
+    woodland_strawberry: plantArt('berry_plant','berries',{color:'#c34c45',count:3,size:3,leaf:'divided'}),
+    hawthorn: plantArt('berry_bush','berries',{color:'#ad3c37',count:6,size:2,leaf:'lobed',root:'bush'}),
+    rose_hip: plantArt('shrub','fruit',{color:'#d17738',w:3.5,h:6,crown:true,leaf:'divided',pair:true,root:'bush'}),
+    european_elder: plantArt('berry_bush','berries',{color:'#433d5b',count:9,size:1.8,leaf:'long',root:'bush'}),
+    wild_garlic: plantArt('herb','flower',{color:'#eee9dc',count:7,leaf:'long'}),
+    good_king_henry: plantArt('herb','leaf',{leaf:'arrow',green:'#528149',plume:'#789752'}),
+    common_sorrel: plantArt('herb','leaf',{leaf:'arrow',green:'#72a05a',plume:'#ab6a54',extra:true}),
+    ground_elder: plantArt('herb','umbel',{leaf:'divided',accent:'#e4e8c9'}),
+    wild_carrot: plantArt('herb','umbel',{leaf:'divided',accent:'#eee4d4',color:'#77934d',extra:true}),
+    cow_parsley: plantArt('herb','umbel',{leaf:'divided',accent:'#f2f0df',color:'#436f43'}),
+    chanterelle: plantArt('mushroom','mushroom',{shape:'trumpet',color:'#dba94b',stem:'#e2bc6e'}),
+    porcini: plantArt('mushroom','mushroom',{color:'#98643f',stem:'#dfcaa2'}),
+    giant_puffball: plantArt('mushroom','mushroom',{shape:'ball',color:'#e7e1cc'}),
+    lily_of_the_valley: plantArt('flower','flower',{shape:'bells',color:'#f0edde',leaf:'long'}),
+    autumn_crocus: plantArt('flower','flower',{color:'#b894bb',count:6,leaf:'long',green:'#6c8744'}),
+    death_cap: plantArt('mushroom','mushroom',{color:'#9da56a',ring:true}),
+    fly_agaric: plantArt('mushroom','mushroom',{color:'#bf5745',spots:true,ring:true}),
+    deadly_nightshade: plantArt('herb','berries',{color:'#3b354c',count:3,size:3.1,leaf:'oval'}),
+    hemlock: plantArt('flower','umbel',{leaf:'divided',color:'#68854a',accent:'#eeedde',spots:true}),
+    birch_sap: plantArt('sap_tree','sap',{root:'tree'}),
+    pearl_millet: plantArt('seed','grain',{color:'#c9b277',size:2,count:8,green:'#7a944c'}),
+    sorghum: plantArt('seed','grain',{color:'#a5684d',size:2.4,count:7,green:'#67914c'}),
+    fonio: plantArt('seed','grain',{color:'#d9c391',size:.8,count:5,green:'#8a9a5b'}),
+    cowpea: plantArt('legume','pods',{color:'#b6ba82',leaf:'heart',seeds:true}),
+    peanut: plantArt('legume','fruit',{shape:'pod',color:'#c5ac7a',leaf:'divided',pair:true}),
+    baobab: plantArt('fruit_tree','fruit',{shape:'pod',color:'#a68c54',leaf:'divided',pair:true}),
+    tamarind: plantArt('fruit_tree','pods',{color:'#a47c49',leaf:'divided',seeds:true}),
+    tiger_nut: plantArt('herb','root',{color:'#a78358',leaf:'long',green:'#879d54'}),
+    okra: plantArt('herb','pods',{color:'#7a9850',leaf:'lobed'}),
+    hibiscus_bissap: plantArt('flower','flower',{color:'#a64a58',count:5,leaf:'divided'}),
+    moringa: plantArt('tree','pods',{color:'#8a9c60',leaf:'divided',green:'#7aa25d'}),
+    shea: plantArt('fruit_tree','fruit',{color:'#9caa62',w:4,h:5.6,leaf:'long',pair:true}),
+    desert_date: plantArt('fruit_tree','fruit',{color:'#c39c50',w:3,h:6,leaf:'oval',pair:true}),
+    jujube: plantArt('berry_bush','fruit',{color:'#a36c43',w:4,h:5,leaf:'oval',pair:true}),
+    grewia: plantArt('berry_bush','berries',{color:'#c59d61',count:4,size:2.8,leaf:'heart'}),
+    amaranth: plantArt('herb','leaf',{leaf:'oval',green:'#758e4c',plume:'#b27866'}),
+    acacia_gum: plantArt('sap_tree','fruit',{color:'#d9a459',w:3,h:4,leaf:'divided',pair:true}),
+    neem: plantArt('tree','leaf',{leaf:'divided',green:'#3e7b46',extra:true}),
+    senegal_date_palm: plantArt('palm','palm',{color:'#d0a14f',w:2,h:3,leaf:'long',pair:true}),
+    doum_palm: plantArt('palm','palm',{color:'#a17d4b',w:4,h:4,leaf:'fan',pair:true}),
+    egusi_melon: plantArt('vine','fruit',{shape:'ribbed',color:'#b2b977',w:7,h:6,leaf:'lobed'}),
+    bitter_leaf: plantArt('shrub','leaf',{leaf:'long',green:'#437a41',extra:true}),
+    cassava: plantArt('shrub','root',{color:'#9a7559',leaf:'divided',green:'#588346'}),
+    yam: plantArt('vine','root',{color:'#977451',leaf:'heart',accent:'#6c513d'}),
+    water_lily: plantArt('aquatic','aquatic',{color:'#cbb8d2',count:8}),
+    wild_rice: plantArt('seed','grain',{color:'#b99a69',count:7,size:1.1,green:'#789f61'}),
+    hanza: plantArt('shrub','berries',{color:'#a9ac66',count:4,size:2.5,leaf:'oval'}),
+    sodom_apple: plantArt('shrub','fruit',{color:'#b5c68b',w:6,h:6,leaf:'round'}),
+    physic_nut: plantArt('tree','fruit',{shape:'ribbed',color:'#9d9d58',leaf:'lobed',pair:true}),
+    thorn_apple: plantArt('herb','fruit',{shape:'spiky',color:'#9ba06a',w:5,h:6,leaf:'lobed'}),
+    mango: plantArt('fruit_tree','fruit',{color:'#d2a15b',w:5,h:7,leaf:'long',pair:true}),
+    jackfruit: plantArt('fruit_tree','fruit',{shape:'spiky',color:'#a7a65c',w:7,h:10,leaf:'oval'}),
+    coconut: plantArt('palm','palm',{shape:'coconut',color:'#987450',w:5,h:6,leaf:'long'}),
+    paddy_rice: plantArt('seed','grain',{color:'#d4b578',count:6,size:1.2,green:'#5a924e'}),
+    chickpea: plantArt('herb','pods',{color:'#b4b783',leaf:'divided',seeds:true}),
+    masoor_lentil: plantArt('herb','pods',{color:'#c7a578',leaf:'long',seeds:true}),
+    turmeric: plantArt('herb','root',{color:'#d59a42',leaf:'long',accent:'#aa6b2d'}),
+    jamun: plantArt('fruit_tree','fruit',{color:'#54415f',w:3.5,h:5.5,leaf:'long',pair:true}),
+    bael: plantArt('fruit_tree','fruit',{color:'#acb273',w:6,h:6,leaf:'divided'}),
+    amla: plantArt('fruit_tree','fruit',{shape:'ribbed',color:'#c6cf8d',w:4.5,h:4.5,leaf:'long',pair:true}),
+    mahua: plantArt('fruit_tree','flower',{shape:'bells',color:'#e8d8b2',leaf:'oval'}),
+    lotus: plantArt('aquatic','aquatic',{color:'#d58ea3',count:7}),
+    makhana: plantArt('aquatic','aquatic',{color:'#dcd5e3',count:5}),
+    water_chestnut: plantArt('aquatic','aquatic',{color:'#c5d6a4',count:4}),
+    bamboo_shoot: plantArt('herb','leaf',{leaf:'long',green:'#8d9a5c',plume:'#a1ac72',extra:true}),
+    colocasia: plantArt('herb','leaf',{leaf:'heart',green:'#58864d',extra:true}),
+    wild_amaranth: plantArt('herb','leaf',{leaf:'arrow',green:'#789d53',plume:'#a67b66',extra:true}),
+    curry_leaf: plantArt('shrub','leaf',{leaf:'divided',green:'#527e3e',plume:'#f0e1c6'}),
+    lemongrass: plantArt('herb','leaf',{leaf:'long',green:'#98ad66',extra:true}),
+    tulsi: plantArt('herb','leaf',{leaf:'oval',green:'#7f7964',plume:'#ac88a6',extra:true}),
+    ginger: plantArt('herb','root',{color:'#c5ab78',leaf:'long',accent:'#977c52'}),
+    banyan_fig: plantArt('fruit_tree','berries',{color:'#b1745e',count:6,size:2,leaf:'oval'}),
+    peepal_fig: plantArt('fruit_tree','berries',{color:'#796987',count:4,size:2.2,leaf:'heart'}),
+    palmyra: plantArt('palm','palm',{color:'#625746',w:5,h:5,leaf:'fan'}),
+    lantana: plantArt('shrub','flower',{color:'#d69c66',count:8,leaf:'oval',green:'#719855'}),
+    nux_vomica: plantArt('fruit_tree','fruit',{color:'#c79a46',w:5,h:5,leaf:'oval',pair:true}),
+    datura: plantArt('flower','flower',{shape:'trumpet',color:'#d7c4dc',leaf:'lobed'}),
+    rosary_pea: plantArt('vine','berries',{color:'#be5546',count:6,size:2.3,leaf:'divided'})
+  };
+  SPRITES.mushroom=svg32(regionalPlantBody({kind:'mushroom',color:'#ad916b'}));
+  SPRITES.legume=svg32(regionalPlantBody({kind:'pods',color:'#8f9f65',leaf:'oval'}));
+  for(const [id,spec] of Object.entries(REGIONAL_PLANTS))if(!SPRITES[id])SPRITES[id]=svg32(regionalPlantBody(spec));
+
+  // Calm bodies retain the ordinary organism. Revealed bodies add the
+  // authored System distortion, only when the existing caller requests aggro.
+  function regionalMonsterBody(kind,aggro) {
+    if(kind==='cap')return regionalPlantBody(REGIONAL_PLANTS.fly_agaric)+(aggro?'<path d="M4 17 Q16 31 28 17 L24 28 L9 29Z" fill="#5d3a4c"/><path d="M7 18 L10 24 L13 18 L17 25 L21 18 L24 23" fill="#ece3c9"/><g fill="#d9d26a"><circle cx="10" cy="13" r="2"/><circle cx="22" cy="13" r="2"/></g>':'');
+    if(kind==='stag')return `<path d="M23 14 Q29 15 27 19" stroke="#8b6242" stroke-width="2" fill="none"/><ellipse cx="19" cy="18" rx="9" ry="5" fill="#9f7853"/><path d="M11 19 L8 9 L13 8 L17 20Z" fill="#aa8058"/><ellipse cx="9" cy="8" rx="5" ry="3" fill="#a17d57"/><path d="M5 10 L3 13 L7 13" fill="#6c513d"/><path d="M11 21 L10 30 M16 21 L16 30 M23 21 L24 30" stroke="#71543c" stroke-width="2"/><path d="M7 6 L4 1 M7 5 L9 1 M11 6 L15 1 M13 4 L17 4" stroke="${aggro?'#e4cf9a':'#8d7858'}" stroke-width="${aggro?1.7:1}" fill="none"/>`+(aggro?'<path d="M6 6 L4 3 L10 5 L12 1 L15 6Z" fill="#d8bc77"/><circle cx="8" cy="8" r="1" fill="#efd471"/>':'<circle cx="8" cy="8" r=".6" fill="#302c25"/>');
+    if(kind==='boar')return (aggro?'<g fill="#c6ab79" opacity=".7"><circle cx="7" cy="24" r="6"/><circle cx="23" cy="23" r="7"/></g>':'')+'<ellipse cx="17" cy="18" rx="11" ry="7" fill="#88735b"/><path d="M8 13 L11 9 L14 12 L18 9 L21 12 L25 12" fill="#5a5146"/><ellipse cx="7" cy="19" rx="6" ry="4" fill="#9c876f"/><ellipse cx="3" cy="20" rx="2" ry="2.5" fill="#65584b"/><path d="M10 23 L9 30 M16 23 L16 30 M24 22 L25 29" stroke="#5e5145" stroke-width="3"/>'+`<path d="M4 21 Q2 15 7 13 M8 22 Q8 16 12 16" stroke="${aggro?'#ead79a':'#d4c8ab'}" stroke-width="${aggro?2:1.2}" fill="none"/><circle cx="8" cy="17" r=".8" fill="${aggro?'#e8c164':'#352f28'}"/>`;
+    if(kind==='monitor'||kind==='croc') {
+      const croc=kind==='croc',body=croc?'#708364':'#898f59';
+      return `<path d="M21 20 Q30 15 29 27 Q25 23 20 24" fill="${body}"/><ellipse cx="17" cy="20" rx="10" ry="4" fill="${body}"/><path d="M10 18 L1 18 L2 23 L12 23Z" fill="${body}"/><path d="M12 22 L9 28 L13 27 M21 23 L24 28 L27 26" stroke="#566644" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="1.2" fill="#d3bf76"/><path d="M2 21 L10 21" stroke="#3a4536" stroke-width=".8"/>`+(aggro&&croc?'<path d="M1 18 L8 13 L11 20Z" fill="#9d8069"/><path d="M2 18 L4 17 L5 20 L7 16 L8 20" fill="#e8dfc3"/>':aggro?'<g fill="#e2e6bd"><path d="M11 17 L14 10 L17 17Z"/><path d="M17 17 L21 10 L24 18Z"/></g><path d="M19 8 L25 4 M25 12 L30 11" stroke="#e9d985" stroke-width="1.3"/>':'<path d="M12 17 L14 15 L17 17 L20 15 L24 18" fill="#596b48"/>');
+    }
+    return '<path d="M24 19 Q31 16 28 8" stroke="#c18c4d" stroke-width="2" fill="none"/><ellipse cx="18" cy="20" rx="10" ry="5" fill="#c79652"/><circle cx="8" cy="17" r="5" fill="#d2a36a"/><path d="M5 13 L5 10 L8 12 L11 11 L12 14" fill="#5b4837"/><path d="M11 23 L10 30 M18 23 L19 30 M25 22 L26 29" stroke="#bd8c50" stroke-width="2.7"/><g stroke="#514134" stroke-width="1.5"><path d="M14 16 L16 21 M19 15 L21 21 M24 17 L26 21 M5 16 L7 17 M9 14 L9 17"/></g>'+`<circle cx="6" cy="17" r=".8" fill="${aggro?'#eee1a1':'#33302b'}"/>`+(aggro?'<path d="M3 20 L5 23 L7 20 L9 23 L11 20" fill="#eee3c9"/>':'');
+  }
+  for(const [id,kind] of Object.entries({murkcap:'cap',rut_king:'stag',dustboar:'boar',sunback:'monitor',sweeps_week:'tiger',cliffhanger:'croc'})) {
+    SPRITES[id+'_calm']=svg32(regionalMonsterBody(kind,false));
+    SPRITES[id+'_aggro']=svg32(regionalMonsterBody(kind,true));
+  }
+
   const CHAINS = {
     blackberry: ['bush', 'berry_bush', 'blackberry'],
     elderberry: ['bush', 'berry_bush', 'elderberry'],
@@ -938,6 +1107,8 @@
   }
 
   function chainFor(pid) {
+    const art=REGIONAL_PLANTS[pid];
+    if(art)return [art.root || 'plant',art.category,pid];
     // Prefer plants.json `taxon` if present, else the local table.
     try {
       const data = (global.Scattering.Game && global.Scattering.Game.data) || {};
@@ -1192,5 +1363,5 @@
     return '#' + [c(n >> 16), c((n >> 8) & 255), c(n & 255)].map(x => x.toString(16).padStart(2, '0')).join('');
   }
 
-  S.Sprites = { get, chainFor, plantSprite, itemSprite, monsterSprite, titanSprite, titanIds: () => Object.keys(TITAN_SPRITES), villagerSprite, villagerEcho, has: (id) => !!SPRITES[id] };
+  S.Sprites = { get, chainFor, plantSprite, itemSprite, monsterSprite, titanSprite, titanIds: () => Object.keys(TITAN_SPRITES), villagerSprite, villagerEcho, has: (id) => !!SPRITES[id], ids: () => Object.keys(SPRITES), regionalPlantIds: () => Object.keys(REGIONAL_PLANTS) };
 })(globalThis);

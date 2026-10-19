@@ -14,8 +14,8 @@
 //     wrong-stat intellect made sharp targets easier marks).
 //   NEW code: exactly 1 hit, then misses; 6 memories (every watch leaves a trace).
 // Run: node scripts/test-detective-observe-wariness-20261008d.js (exit 0 = pass)
-const H = require('./harness-detective.js');
-const G = H.Game;
+const K = require('./godpath/lib');
+let G;
 
 const failures = [];
 const ok = (cond, label, extra) => {
@@ -26,16 +26,19 @@ const memTypes = (vid) => (((G.state.village.memory || {})[vid]) || []).map(m =>
 const observedCount = (vid) => memTypes(vid).filter(t => t === 'observed').length;
 
 (async () => {
-  await G.init();
-  H.fresh();
-
-  // find a liar with at least one unconfessed occupation/origin lie
-  const liar = G.npcIds().find(vid => {
-    const lies = G.npcLies(vid) || {};
-    return ['occupation', 'origin'].some(f => lies[f] && !lies[f].confessed);
-  });
-  ok(!!liar, 'found a liar to watch', G.npcIds().length + ' villagers');
-  if (!liar) { console.log('RESULT: 1 FAILURES'); process.exit(1); }
+  G = await K.load({ seed: Number(process.env.SEED || 20261008) }); K.newRun(G);
+  const [liar, innocent] = G.npcIds();
+  const subject = G.getPerson(liar), honest = G.getPerson(innocent);
+  subject.lies = { occupation: G.makeLie(subject, 'occupation', 'shame') };
+  honest.lies = {};
+  G.state.village.memory ||= {};
+  G.state.village.memory[liar] = []; G.state.village.memory[innocent] = [];
+  const scholar = G.state.scholar;
+  scholar.abilities = []; scholar.backgroundAbilities = []; scholar.equipped = {};
+  G.state.codex.skills = {};
+  ok(!!subject.lies.occupation && subject.lies.occupation.told !== subject.lies.occupation.truth,
+    'prepared real occupation lie');
+  ok(Math.abs(G.modTarget('social.lie_detect', 0)) < 1e-9, 'unmodified observer fixture');
   const fields = ['occupation', 'origin'].filter(f => { const l = (G.npcLies(liar) || {})[f]; return l && !l.confessed; });
   console.log('  subject:', G.displayName(liar), '| lie fields:', fields.join(','));
 
@@ -50,23 +53,22 @@ const observedCount = (vid) => memTypes(vid).filter(t => t === 'observed').lengt
   Math.random = () => base - 0.04;
 
   let hits = 0;
-  for (let i = 0; i < 6; i++) {
-    const r = G.observePerson(liar);
-    if (r && r.found) hits++;
-  }
-  Math.random = realRandom;
+  try {
+    for (let i = 0; i < 6; i++) {
+      const r = G.observePerson(liar); if (r && r.found) hits++;
+    }
+  } finally { Math.random = realRandom; }
 
   console.log('  hits in 6 watches (pinned base-0.04):', hits, '| observed memories:', observedCount(liar));
   ok(hits === 1, 'wariness penalty binds: exactly 1 hit, then misses (old code: 6 hits)', { hits });
   ok(observedCount(liar) === 6, 'every watch leaves a trace, hit or miss (old code: 1)', { n: observedCount(liar) });
 
   // an innocent watched repeatedly: misses still leave traces
-  const innocent = G.npcIds().find(vid => vid !== liar && !['occupation', 'origin'].some(f => { const l = (G.npcLies(vid) || {})[f]; return l && !l.confessed; }));
-  if (innocent) {
+  ok(!!innocent && Object.keys(G.npcLies(innocent)).length === 0, 'prepared innocent control');
+  {
     const before = observedCount(innocent);
     Math.random = () => 0.99; // force misses
-    for (let i = 0; i < 3; i++) G.observePerson(innocent);
-    Math.random = realRandom;
+    try { for (let i = 0; i < 3; i++) G.observePerson(innocent); } finally { Math.random = realRandom; }
     ok(observedCount(innocent) === before + 3, 'misses write observed memories too', { before, after: observedCount(innocent) });
   }
 

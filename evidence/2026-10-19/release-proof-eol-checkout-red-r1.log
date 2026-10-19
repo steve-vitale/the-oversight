@@ -1,0 +1,46 @@
+check.js: 239 scripts, 4 parallel (quick)
+...........................................................................F.....F.............F...............................................................................................................................................
+
+  FAIL scripts/godpath/test-measurement-comparison.js (exit 1, 0.2s)
+          at summarizeValidated (C:\Users\Steve\.codex\worktrees\phone-preview-validation\oversight\scripts\balance-windows.js:46:46)
+          at Object.summarizeHarnessRevision (C:\Users\Steve\.codex\worktrees\phone-preview-validation\oversight\scripts\balance-windows.js:40:10)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\phone-preview-validation\oversight\scripts\godpath\test-measurement-comparison.js:5:1161)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+      
+      Node.js v24.13.0
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 0.4s)
+          at Object.validate (C:\Users\Steve\.codex\worktrees\phone-preview-validation\oversight\scripts\balance-proof-update.js:10:136)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\phone-preview-validation\oversight\scripts\godpath\test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.13.0
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 1.8s)
+        ok   all current boot inputs are covered
+        FAIL retained receipt hash 736
+        ok   actual touch, frame, stable choices and Wait/escape 736
+        FAIL retained receipt hash 844
+        ok   actual touch, frame, stable choices and Wait/escape 844
+        ok   the old long scrolling layout cannot pass this gate
+        ok   a board clipped behind the message area cannot pass this gate
+        ok   stale browser code cannot pass by showing a new build label
+        ok   reply paging cannot quietly consume resources
+      
+      Phone frame proof: 9 passed, 2 failed, 0 todo (phase 0)
+      failing: retained receipt hash 736 | retained receipt hash 844
+
+check.js: 236 passed, 3 failed in 82s

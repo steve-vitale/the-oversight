@@ -117,7 +117,9 @@ async function run(seed) {
   let html = '';
   if (tpl) {
     const objs = new Function('Game', 'recipes', `return (${filterRhs});`)(Game, G.data.recipes);
-    html = new Function('Game', filterName, `return (${tpl});`)(Game, objs);
+    const button = appSrc.match(/  function craftButtonHTML\(recipe, level\) \{[\s\S]*?\r?\n  \}/)?.[0];
+    if (!button) throw Error('Actual crafting probability renderer missing');
+    html = new Function('Game', filterName, button + `\nreturn (${tpl});`)(Game, objs);
   }
   const rowFor = (nm) => (html.split('<p class="small">').find(c => c.includes(nm)) || '');
   const l1row = rowFor('Hunting spear'), l2row = rowFor('Bow'), l3row = rowFor('Snare');
@@ -127,7 +129,8 @@ async function run(seed) {
   check('B28 L1 button is honest about blindness', /blind/i.test(l1row), true);
   check('B28 L2 row shows materials (L2 text teaches them)', l2row.includes('vine'), true);
   check('B28 L2 row has an attempt button', l2row.includes('data-craft="bow"'), true);
-  check('B28 L3 row keeps its Make button (control)', l3row.includes('data-craft="snare"') && />Make</.test(l3row), true);
+  const learnedChance = Math.round(Math.max(0, Math.min(1, G.modTarget('craft.success', 0.85))) * 100);
+  check('B28 L3 row keeps Make and states the actual success chance', l3row.includes('data-craft="snare"') && l3row.includes('>Make (' + learnedChance + '%)<'), true);
 
   // ---- engine half of B28: the blind path exists and teaches L2 ----
   G.state.codex.recipes = { hunting_spear: { level: 1, learnedDay: 1, via: 'discovery' } };

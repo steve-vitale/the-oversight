@@ -10,7 +10,7 @@
 //   SOFTLOCK: S1 compact phase-graph walk (regression), S2 arena 'lost'
 //            clears the modal, S3 every terminal clears activeContest
 //   HONESTY: H1 countdown copy, H2 2/week budget over 28 dawns,
-//            H3 cheer is real (win-rate delta), H4 casting honesty
+//            H3 cheer is real (actual watch choices/performance), H4 casting honesty
 //            (whim announced; notability-weighted lead, never uniform),
 //            H5 fear honesty (blood contests really kill)
 //   DEAD-CODE: D1 index.html wires contests.js, every G.* def has a caller,
@@ -20,6 +20,7 @@
 // Run x3 seeds: SEED=424242 / 777 / 31337
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || process.argv[2] || '424242', 10);
 
@@ -527,7 +528,17 @@ sec('HONESTY H3 — cheer is real performance, not decoration');
   const moved = rows.filter(r => Math.abs(r.d) > 0.001);
   const up = rows.filter(r => r.d > 0.001);
   console.log(`  cheer changed win rate in ${moved.length}/${rows.length} contests (${up.length} improved)`);
-  ok('H3 cheer moves outcomes somewhere (it is read by the engine)', moved.length > 0);
+  // Unchanged outcomes in this sample do not prove unchanged performance.
+  // Verify authored choices through real verdicts in fresh shared worlds,
+  // including both a marginal case and a stronger case whose win stays a win.
+  const proof = execFileSync(process.execPath, [path.join(__dirname, 'test-contest-cheer-20261017.js')],
+    { cwd: ROOT, env: process.env, encoding: 'utf8', maxBuffer: 2e6 });
+  process.stdout.write(proof);
+  const arms = proof.split('\n').filter(line => line.startsWith('CHEER_RESULT '))
+    .map(line => JSON.parse(line.slice(13)));
+  ok('H3 actual watch choices lift real performance and can change a marginal verdict',
+    arms.length === 5 && ['silent', 'novice', 'veteran', 'strong-silent', 'strong-cheer'].every(kind =>
+      arms.some(row => row.kind === kind && row.checks > 0)) && /contest cheer proof green:/.test(proof));
   ok('H3 cheer never systematically hurts (no contest worse at max cheer by >20pts)',
     !rows.some(r => r.d < -0.2), rows.filter(r => r.d < -0.2).map(r => r.id).join(','));
 }

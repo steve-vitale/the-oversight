@@ -13,7 +13,8 @@
 //      too (fleeing counts).
 'use strict';
 const assert = require('assert');
-const { loadGame, setupGame } = require('./sim-harness');
+const K = require('./godpath/lib');
+const { stripReadiness, prepareReadiness } = require('./lib/standing-fixture');
 const { deathCauses } = require('./sweep-wave5-confirm-20261013');
 
 let pass = 0;
@@ -42,8 +43,9 @@ function meetWave3(G) {
 }
 
 async function liveGate() {
-  const { Game } = await loadGame({ seed: 777, mode: 'wave5-confirm-proof' });
-  await setupGame(Game);
+  const Game = await K.load({ seed: Number(process.env.SEED || 777) });
+  Game.debugRegion = 'na_eastern_woodlands';
+  K.newRun(Game);
   const cfg = Game.standingCfg();
   ok('cfg t4=100 t5=200', cfg.t4 === 100 && cfg.t5 === 200);
   ok('cfg weights 25/34/20', cfg.warPerKill === 25 && cfg.diplomacyPerLink === 34 && cfg.plentyPerFeast === 20);
@@ -59,33 +61,42 @@ async function liveGate() {
   s = Game.villageStanding();
   ok('10 major feasts = 200 plenty', s.plenty === 200 && s.feasts === 10);
   ok('standing total 200', s.total >= 200);
-  ok('T5 standing WITHOUT w4 faced -> wave 4, not 5', Game.unlockedWave() === 4);
+  stripReadiness(Game);
+  ok('plenty alone does not promote an unready village', Game.unlockedWave() === 3);
+  ok('live village meets wave-5 readiness bars', prepareReadiness(Game, 5).ready);
+  ok('ready bread-only village is held below wave 5', Game.unlockedWave() === 4);
 
   // wave-4 faced via the engine's own feed (fleeing counts — no kill needed)
   Game.recordDeedFight('congregation');
   ok('w4 faced reads the deed feed', Game.waveEngaged(4) >= 1);
-  ok('standing>=200 + w4 faced -> wave 5', Game.unlockedWave() === 5);
+  ok('facing wave 4 does not bypass the plenty cap', Game.unlockedWave() === 4);
+  for (const id of ['redactor', 'gavel', 'focus_group', 'spool']) Game.recordWaveKill(id);
+  ok('non-bread standing plus readiness and w4 faced releases wave 5', Game.unlockedWave() === 5);
 
   // a wave-4 kill also registers faced (single path integrity)
-  const { Game: G2 } = await loadGame({ seed: 778, mode: 'wave5-confirm-proof2' });
-  await setupGame(G2);
+  const G2 = Game;
+  K.newRun(G2);
+  prepareReadiness(G2, 5);
   meetWave3(G2);
   G2.state.feastLog = [];
   for (let i = 0; i < 10; i++) G2.state.feastLog.push({ quality: 1, day: 10 + i });
-  ok('G2 standing>=200, no faced -> still wave 4', G2.unlockedWave() === 4);
-  G2.recordWaveKill('congregation', 'player');
-  // recordWaveKill alone does not write the deed feed; the kill wraps it via
-  // recordDeedFight in combat. Assert the gate reads only the deed feed:
-  ok('gate reads deed feed only (kill alone != faced)',
-    (G2.waveEngaged(4) | 0) === 0 || (G2.unlockedWave() | 0) === 5);
+  for (const id of ['redactor', 'gavel', 'focus_group', 'spool']) G2.recordWaveKill(id);
+  ok('G2 qualifying standing and readiness, no faced -> still wave 4', G2.unlockedWave() === 4);
+  G2.scoreLedgerKill('congregation');
+  ok('ledger points alone do not invent a faced deed', G2.waveEngaged(4) === 0 && G2.unlockedWave() === 4);
+  // progression.js wraps the real kill recorder to feed the faced deed.
+  G2.recordWaveKill('congregation', G2.villagerId);
+  ok('actual kill recorder also records facing and releases wave 5', G2.waveEngaged(4) >= 1 && G2.unlockedWave() === 5);
 
   // below T4 the gate holds
-  const { Game: G3 } = await loadGame({ seed: 779, mode: 'wave5-confirm-proof3' });
-  await setupGame(G3);
+  const G3 = Game;
+  K.newRun(G3);
+  meetWave3(G3);
+  prepareReadiness(G3, 5);
   for (const id of ['redactor', 'gavel', 'focus_group']) G3.recordWaveKill(id);
   s = G3.villageStanding();
   ok('3 w3 kills = 75 standing (below T4)', s.total === 75);
-  ok('standing<100 -> wave 3 max', G3.unlockedWave() <= 3);
+  ok('ready village below standing 100 stays at wave 3', G3.unlockedWave() === 3);
 }
 
 (async () => {

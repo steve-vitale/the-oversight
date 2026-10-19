@@ -3,6 +3,8 @@
 // description: Real back-and-forth dialogue. Player always has response choices.
 // provides:
 //   - startConvo()
+//   - convoMenuPage(vid, choices)
+//   - convoNextMenu(vid)
 //   - convoChoices(vid)
 //   - convoBeatOf(choiceId, thread)
 //   - convoFollowups(vid, topic)
@@ -2693,7 +2695,7 @@
           if (alreadyNamed) {
             seedLine = opener.line;
           } else if (seedPred) {
-            try { _liveSeed.inheritedSeedAcked = true; } catch (e) {}
+            try { _liveSeed.inheritedSeedAcked = true; } catch (e) { console.warn('[conversation] seed acknowledgement', e); }
             const _note = want.seedNote || 'last time';
             const _head = `I asked ${seedPred} about ${_note} — ${seedPred}'s gone.`;
             const spoken = /^"([^"]+)([.?!])" ([\s\S]*)$/.exec(opener.line);
@@ -3155,8 +3157,9 @@
       const said = [];
       const origSay = this.say;
       this.say = (t) => { said.push(String(t)); };
-      try { this.askAbout(vid, 'gossip', { inConvo: true }); } catch (e) {}
-      this.say = origSay;
+      try { this.askAbout(vid, 'gossip', { inConvo: true }); }
+      catch (e) { console.warn('[conversation] gossip beat', e); }
+      finally { this.say = origSay; }
       // QUOTE HYGIENE (fix 2026-10-07): askAbout formats beats as
       // `Name: "line"` (or `Name lowers their voice. "..."`) for the
       // person-card path (app.js), which renders them raw. This path
@@ -3172,7 +3175,7 @@
       try {
         const asides = said.filter(t => /^\s*(📓|❓)/.test(t));
         const beats = said.filter(t => !/^\s*(📓|❓)/.test(t));
-        for (const a of asides) { try { this.say(a); } catch (e) {} }
+        for (const a of asides) { try { this.say(a); } catch (e) { console.warn('[conversation] gossip beat', e); } }
         line = beats.join(' ');
         const nm = String(this.displayName(vid) || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         if (nm) {
@@ -3868,7 +3871,34 @@
 
     // Thin wrapper: the additive wrappers (betrayal.js, party-formal.js,
     // truth.js) wrap convoChoices; the single builder is buildMenu.
-    convoChoices(vid) { return this.buildMenu(vid); },
+    // One budget after all live injectors; direct buildMenu callers use
+    // the same pager. Overflow is navigation, never a discarded feature.
+    convoMenuPage(vid, choices) {
+      const c=this.convoGet(vid), seen=new Set();
+      const full=(choices || []).filter(ch=>ch && ch.id && ch.id!=='menu:more' && !seen.has(ch.id) && seen.add(ch.id));
+      if (full.some(ch=>/^(ans:|gq:)/.test(ch.id))) { c.menuPage=0;c.menuPages=1;return full; }
+      const silent=full.filter(ch=>ch.id==='silence' || ch.id==='nv:listen').slice(0,1);
+      const navigation=full.filter(ch=>['leave','subject','dlg:subject'].includes(ch.id));
+      const content=full.filter(ch=>!silent.includes(ch) && !navigation.includes(ch));
+      const rank=ch=>/^(betrayal:|confront:|agency:)/.test(ch.id)?0:
+        /^(alive:|dlg:commit|dlg:cant|dlg:help|dlg:heed|dlg:stay)/.test(ch.id)?1:
+        /^(ask:goal$|offer_help$)/.test(ch.id)?2:
+        /^(teach|trade|hawker|invite_party|dlg:invite|skill_learn:|skill_teach:|ask:gossip$|ask:spread_rumor$)/.test(ch.id)?3:4;
+      if(content.length+navigation.length<=7){c.menuPage=0;c.menuPages=1;return full;}
+      content.sort((a,b)=>rank(a)-rank(b));
+      const size=Math.max(1,7-navigation.length-1),pages=Math.ceil(content.length/size);
+      const page=Number.isSafeInteger(c.menuPage)&&c.menuPage>=0?c.menuPage%pages:0;
+      c.menuPage=page;c.menuPages=pages;
+      return content.slice(page*size,(page+1)*size).concat(
+        {id:'menu:more',label:'More things to say ('+(page+1)+'/'+pages+')'},navigation,silent);
+    },
+    convoNextMenu(vid) {
+      const c=this.convoGet(vid);
+      if(!c.active || !(c.menuPages>1)) return {ignored:true,navigation:true,ended:!c.active,choices:c.active?this.convoChoices(vid):[],transcript:c.transcript.slice()};
+      c.menuPage=((c.menuPage || 0)+1)%c.menuPages;
+      return {navigation:true,ended:false,choices:this.convoChoices(vid),transcript:c.transcript.slice()};
+    },
+    convoChoices(vid) { return this.buildMenu(vid,true); },
 
     // ============ DISPOSITION (dialog rethink Phase 1, Steve 2026-10-08) ============
     // Principle 4: your character shapes your voice; your choices reshape it.
@@ -4019,8 +4049,9 @@
     // silence. Game.convoChoices is a thin wrapper (betrayal / party-formal /
     // truth wrap it additively — those wrappers are not part of the old
     // override chain and stay).
-    buildMenu(vid) {
+    buildMenu(vid, uncapped) {
       const c = this.convoGet(vid);
+      const finish=choices=>{const menu=this.finalizeMenu(vid,choices);return uncapped?menu:this.convoMenuPage(vid,menu);};
       // STICKY OPENED-UP (trust r7 2026-10-12): once they've opened up about
       // their goal (goal thread, depth 2+), that's a relationship fact, not
       // menu flicker — persist it on the convo record (survives talkTo's
@@ -4052,7 +4083,7 @@
         // so the trust cost is fair and the rudeness is legible.
         choices.push({ id: 'deflect_q', label: '(change the subject)', temper: 'cruel' });
         choices.push({ id: 'leave', label: '"I should go."', temper: 'neutral' });
-        return this.finalizeMenu(vid, choices);
+        return finish( choices);
       }
       if (c.thread === 'nonverbal') {
         // (moved from the old :4384 IIFE replacement — now part of the
@@ -4078,11 +4109,11 @@
         } catch (e) {}
         out.push({ id: 'leave', label: '(walk away)' });
         if ((c.heldBeats || []).length) out.unshift({ id: 'goon', label: this.convoGoonLabel(vid) });
-        return this.finalizeMenu(vid, out);
+        return finish( out);
       }
       // TRADE THREAD: focused. They've laid out terms; you decide.
       if (c.thread === 'trade' && c.pendingTrade) {
-        return this.finalizeMenu(vid, [
+        return finish( [
           { id: 'trade_yes', label: '"Deal."' },
           { id: 'trade_no', label: '"Another time, maybe."' },
           { id: 'leave', label: '"I should go."' },
@@ -4090,7 +4121,7 @@
       }
       // HAWKER THREAD: a villager's offer. Same shape as the trade thread.
       if (c.pendingHawk) {
-        return this.finalizeMenu(vid, [
+        return finish( [
           { id: 'hawker_yes', label: '"Deal."' },
           { id: 'hawker_no', label: '"Not today."' },
           { id: 'leave', label: '"I should go."' },
@@ -4155,7 +4186,7 @@
           for (const [ty, label] of types) rlist.push({ id: 'rumor:type:' + ty, label });
         }
         rlist.push({ id: 'leave', label: '"Never mind."' });
-        return this.finalizeMenu(vid, rlist);
+        return finish( rlist);
       }
       const suppressPivot = !!c.reactiveQ || !!c.genericQ || c.thread === 'grief' || c.thread === 'cheer';
       // MAXC: the chat view has room for a real choice list. Topic asks
@@ -4329,7 +4360,7 @@
           try { for (const ch of this.convoSkillChoices(vid)) if (!sub.some(s => s.id === ch.id)) sub.push(ch); } catch (e) { console.warn('[skill-teaching] subject menu', e); }
         }
         sub.push({ id: 'leave', label: c.exchanges === 0 ? '"Actually — never mind."' : '"I should go."' }); // BREAK-IT (socialite 2026-10-08): 'Nice talking to you' lied on a zero-exchange menu — the player said nothing. An aborted approach says never mind.
-        return this.finalizeMenu(vid, sub);
+        return finish( sub);
       }
 
       // WHAT'S ALIVE (dialog rethink Phase 2, Principle 8): the menu leads
@@ -4356,7 +4387,7 @@
       // beat matrix must not override reactive/generic answers. Answering
       // comes first; it's rude to ignore it.
       if (reactiveDef || gqActive) {
-        return this.finalizeMenu(vid, choices);
+        return finish( choices);
       }
       try {
         const beatMenu = typeof this.beatMenuResponses === 'function'
@@ -4372,22 +4403,14 @@
               if (pre.length >= 2) break;
               if (!beatMenu.some(ch => ch && ch.id === a.id)) pre.push(a);
             }
-            // ONE-SCREEN CAP (journey crisis r22 2026-10-18): this path never
-            // shared the assembly path's MAXC budget — stacked conditions
-            // (news beat + held beats + theorize + recap + teach) produced
-            // 11-choice swipe piles (r21 found-not-fixed #1). Cap the combined
-            // list at MAXC content choices, keeping the alive lead (r21) and
-            // pinning the structural 'leave' — a menu that strands the player
-            // is a dialogue-box softlock. Cuts land on the tail (discovery
-            // verbs, pool reactions); the want/goon lead is never cut.
-            // 'silence' rides after via finalizeMenu rule 4, as on every path.
+            // Preserve every offered choice for the final pager. The normal
+            // convoChoices path caps after all injectors; direct buildMenu
+            // callers use the same pager through finish(). Cutting the tail
+            // here stranded subject changes, personal topics and promises.
             const full = pre.length ? pre.concat(beatMenu) : (beatMenu || []).slice();
-            const isLeave = (ch) => ch && ch.id === 'leave';
-            const leaveCh = full.filter(isLeave).slice(0, 1);
-            const rest = full.filter(ch => !isLeave(ch));
-            return this.finalizeMenu(vid, rest.slice(0, Math.max(0, MAXC - leaveCh.length)).concat(leaveCh));
+            return finish( full);
           } catch (e) {}
-          return this.finalizeMenu(vid, beatMenu);
+          return finish( beatMenu);
         }
       } catch (e) {}
 
@@ -4519,7 +4542,9 @@
       }
       // HAWKING (Steve 2026-10-06): trading is a verb. Villagers with the
       // entrepreneurial spirit sell goods too — not a trader class.
-      if (!onThread && choices.length < MAXC) {
+      // The real menu already pages. A full first page must not erase the
+      // resident's business; focused questions/threads still come first.
+      if (!onThread) {
         try {
           if (this.tradeSpirit && this.tradeSpirit(vid) >= 1) {
             choices.push({ id: 'hawker', label: '"Got anything to trade?"' });
@@ -4575,7 +4600,7 @@
       // pivot); on openers it rides the remaining slots as before.
       if (c.thread && c.thread !== 'small' && (onThread || choices.length < MAXC)) choices.push({ id: 'subject', label: '"Can I ask you something else?"' });
       choices.push({ id: 'leave', label: c.exchanges === 0 ? '"Actually — never mind."' : '"I should go."' }); // BREAK-IT (socialite 2026-10-08): see sub.push above — the zero-exchange label must not claim a conversation happened.
-      return this.finalizeMenu(vid, choices);
+      return finish( choices);
     },
 
     startConvo(vid) {
@@ -4638,7 +4663,7 @@
       const c = this.convoGet(vid);
       c.active = true; c.exchanges = 0; c.budget = this.convoBudget(vid);
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
-      c.choosingSubject = false; c.lastBeat = null; c.followUsed = {};
+      c.choosingSubject = false; c.lastBeat = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
       c.threadLog = []; c._beatThread = null; c._resumedOnce = false;
       // PER-SITTING said-lines (journey-social r16 2026-10-15): the
       // no-repeat ledger (c.saidLines) persists across sittings by design
@@ -5710,7 +5735,8 @@
           const scamHint = ware.scam && this.tradeSavvy() >= 4
             ? (ware.scam.kind === 'overprice' ? ' (steep, for what it is)' : ' (something about this feels off)')
             : '';
-          done(`"${ware.blurb}" ${this.displayName(vid)} shows you the ${ware.name} — ${ware.price} kcal of finished food${ware.kg ? ` (${ware.kg} kg — you can feel the heft)` : ''}${scamHint}.`, '"Got anything to trade?"');
+          const price = this.goodsTradePrice ? this.goodsTradePrice(ware.price) : ware.price;
+          done(`"${ware.blurb}" ${this.displayName(vid)} shows you the ${ware.name} — ${price} kcal of finished food${ware.kg ? ` (${ware.kg} kg — you can feel the heft)` : ''}${scamHint}.`, '"Got anything to trade?"');
         }
       } else if (choiceId === 'hawker_yes') {
         c.pendingHawk = null;

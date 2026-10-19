@@ -129,7 +129,7 @@ function coalition(n) {
     if (!r) { okAll = false; break; }
     if (marched === 0) {
       const f = Game.tbfight;
-      T.ok('node fight: 12x12, the piece + its wave-5 escort + the coalition', f.gridSize === 12 &&
+      T.ok('node fight: 24x24, the piece + its wave-5 escort + the coalition', f.gridSize === 24 &&
         f.fighters.some(x => x.mdef && x.mdef.id === node.monster) && f.fighters.some(x => x.mdef && x.mdef.id === node.escorts[0]) &&
         f.fighters.filter(x => x.kind === 'ally').length === 20);
     }

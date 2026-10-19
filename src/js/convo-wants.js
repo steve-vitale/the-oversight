@@ -87,7 +87,16 @@
           `tell me you've got food to spare. I'm ${hungerWord} here.`,
         ];
         const anchors = [`My hands shake when I try to work.`, `I can't keep going like this.`];
-        const line = `"` + openers[hh % 3] + ' ' + details[(hh >>> 2) % 3] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
+        const previous = this.convoGetFavor(vid);
+        let openerIndex = hh % openers.length;
+        let line = `"` + openers[openerIndex] + ' ' + details[(hh >>> 2) % 3] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
+        // Hashing different instances can still choose identical wording.
+        // Rotate an existing segment only on an actual prior-food-ask match;
+        // no new RNG, favor identity, task, or need is introduced.
+        if (previous && previous.kind === 'food_share' && previous.line === line) {
+          openerIndex = (openerIndex + 1) % openers.length;
+          line = `"` + openers[openerIndex] + ' ' + details[(hh >>> 2) % 3] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
+        }
         const whyBits = [
           `I haven't eaten right in days.`,
           `It's been ${sev >= 2 ? 'too long' : 'days'} since a real meal.`,
@@ -98,7 +107,12 @@
           `I'm slowing down — stupid, clumsy. Help me get back on my feet.`,
           `I need food before I can't work at all.`,
         ];
-        const whyLine = '"' + whyBits[(hh >>> 1) % 3] + ' ' + whyTails[(hh >>> 5) % 3] + '"';
+        let whyIndex = (hh >>> 1) % whyBits.length;
+        let whyLine = '"' + whyBits[whyIndex] + ' ' + whyTails[(hh >>> 5) % 3] + '"';
+        if (previous && previous.kind === 'food_share' && previous.whyLine === whyLine) {
+          whyIndex = (whyIndex + 1) % whyBits.length;
+          whyLine = '"' + whyBits[whyIndex] + ' ' + whyTails[(hh >>> 5) % 3] + '"';
+        }
         return {
           task: `share food with ${ctx.name} \u2014 they're ${hungerWord}`,
           // FIRST-PERSON REGISTER (journey establishment r4 2026-10-12):

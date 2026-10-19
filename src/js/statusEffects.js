@@ -337,6 +337,7 @@
             if (isScholar) {
               var s = self.state.scholar;
               if (n > 0) {
+                n = self.wornDamage(self.villagerId, n, { scene: 'status' });
                 s.health = Math.max(0, (s.health || 0) - n);
                 var msg = self.seFill(def.tickText || '{name} {verb} hurting. (-{n} HP)', target, { n: n });
                 if (drain > 0) msg += ' (-' + drain + ' hydration)';
@@ -348,12 +349,15 @@
               if (drain > 0) s.hydration = Math.max(0, (s.hydration || 0) - drain);
               // LOCKJAW SPASM: the wire strikes at random.
               if (def.spasm && Math.random() < (def.spasm.chance || 0)) {
-                var sd = def.spasm.dmg || 0;
+                var sd = self.wornDamage(self.villagerId, def.spasm.dmg || 0, { scene: 'status-spasm' });
                 s.health = Math.max(0, (s.health || 0) - sd);
                 self.say(self.seFill(def.spasm.text || '{name} {verb} seizing. (-{n} HP)', target, { n: sd }));
               }
             } else if (target && typeof target === 'object') {
               if (n > 0) {
+                if (target.kind === 'player' || target.kind === 'villager') {
+                  n = self.wornDamage(target.kind === 'player' ? self.villagerId : target.villagerId, n, { scene: 'status', body: target });
+                }
                 target.hp = Math.max(0, (target.hp || 0) - n);
                 if (target.kind === 'player') {
                   try { self.state.scholar.health = Math.max(0, target.hp); } catch (e) {}

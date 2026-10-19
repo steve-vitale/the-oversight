@@ -1,0 +1,14 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('verb-use-persistence');
+(async()=>{
+ const saves=new Map();globalThis.localStorage={getItem:k=>saves.get(k)??null,setItem:(k,v)=>saves.set(k,String(v)),removeItem:k=>saves.delete(k),key:i=>[...saves.keys()][i]??null,get length(){return saves.size;}};
+ const G=await K.load({seed:Number(process.env.SEED||7),narration:true});let s,v,f,m,id,n;
+ function bind(){s=G.state.scholar;v=G.state.village;f=G.tbfight;m=f?.fighters.find(x=>x.kind==='monster');n=f?.fighters.find(x=>x.villagerId===id);}
+ function fresh(npc=false){G.tbfight=null;G.over=false;G.won=false;K.newRun(G);s=G.state.scholar;v=G.state.village;id=v.roster.find(x=>x!==G.villagerId&&G.npcAge(x)>=18);s.day=85;s.kcal=6000;s.health=100;s.abilities=npc?[]:[{id:'raise_earth',level:1}];s.backgroundAbilities=[];s.equipped={};G.state.systemArrived=true;v.roster=npc?[G.villagerId,id]:[];v.party=npc?[id]:[];v.followers=[];v.positions={[id]:{mx:8,my:8}};v.health={[id]:100};v.npcAbilities={[id]:npc?['pack_hunt']:[]};G.npcNeeds(id).hunger=0;v.pantry=[{name:'Prepared stores',units:100,kcalEach:500,safe:true,spoilDay:9999}];s.mx=0;s.my=0;s.monster={id:'moderator',mx:3,my:0};G.startCombat('moderator');bind();f.order=['p',m.key];f.turnIdx=0;G.tbFighter('p').acted=false;}
+ function reload(){G.save();const ok=G.load(G.state.runKey);bind();return ok;}
+ fresh();const food=s.kcal;T.ok('real player Raise Earth pays its60kcal',G.useAbility('raise_earth','raise',m.key)===true&&s.kcal===food-60);const pu=JSON.stringify(f._gpUses);T.ok('real player cast records a finite use',f._gpUses?.['raise_earth.raise']===1);T.ok('actual player Continue preserves paid use',reload()&&JSON.stringify(f._gpUses)===pu&&s.kcal===food-60);const paid=s.kcal;G.tbFighter('p').acted=false;T.ok('loaded player cannot cast the same per-fight action again',G.useAbility('raise_earth','raise',m.key)===false&&s.kcal===paid);
+ fresh(true);T.ok('real NPC planner pays for its Pack Hunt',G.tbVillagerAbility(n)===true&&G.npcNeeds(id).hunger===3);const nu=JSON.stringify(f._gpVUses),h=G.npcNeeds(id).hunger;T.ok('actual NPC Continue preserves identity-scoped use',reload()&&JSON.stringify(f._gpVUses)===nu&&G.npcNeeds(id).hunger===h);T.ok('loaded NPC cannot repeat or repay its spent action',G.tbVillagerAbility(n)===false&&G.npcNeeds(id).hunger===h);
+ fresh();G.save();const key=G.state.runKey,raw=JSON.parse(saves.get(key));delete raw.run.tbfight.godpathUses;delete raw.run.tbfight.godpathVillagerUses;saves.set(key,JSON.stringify(raw));T.ok('old saves load without inventing paid action history',G.load(key)&&!G.tbfight._gpUses&&!G.tbfight._gpVUses);bind();T.ok('a truly unspent old-save action remains usable',G.useAbility('raise_earth','raise',m.key)===true);
+ fresh();T.ok('new encounter starts with no consumed action',!f._gpUses&&!f._gpVUses);
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

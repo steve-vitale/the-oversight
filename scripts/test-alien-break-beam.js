@@ -58,6 +58,8 @@ async function main() {
     const f = startFight('vex_marlowe');
     assert(!!f, 'setup: vex fight live');
     const p = f.fighters.find(x => x.key === 'p');
+    // The prepared oversized body must exist on the actual fighter too.
+    p.maxHp = 1000; p.hp = 1000; Game.state.scholar.health = 1000;
     const hpBefore = p.hp;
     // No resistant gear: expect ~lethal (90-110% of maxHp = 900-1100).
     let dealt = 0;

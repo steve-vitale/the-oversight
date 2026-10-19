@@ -35,7 +35,7 @@ async function main() {
   // ---- renderer call sites wired (static) ----
   const appSrc = fs.readFileSync(path.join(__dirname, '..', 'src/js/app.js'), 'utf8');
   ok(appSrc.includes('Game.trapMarkerAt(cx, cy)'), 'renderDetail calls Game.trapMarkerAt');
-  ok(appSrc.includes('Game.gardenStripHtml()'), 'haven panel calls Game.gardenStripHtml()');
+  ok(appSrc.includes('Game.gardenStripHtml('), 'haven panel calls Game.gardenStripHtml()');
   ok(appSrc.includes('data-garden'), 'garden buttons wired via data-garden');
   ok(appSrc.includes('Game.bridgeBadgeHTML(x, y)'), 'renderMap calls Game.bridgeBadgeHTML');
 
@@ -71,8 +71,8 @@ async function main() {
   ok(/2 plots/.test(strip1), 'garden strip shows plot count after makePlot x2');
   ok(strip1.includes('empty'), 'garden strip shows the empty plot');
   ok(strip1.includes('data-garden="sow"'), 'garden strip surfaces Sow seeds in the haven panel');
-  ok(strip1.includes('data-garden="tend"'), 'garden strip surfaces Tend the garden in the haven panel');
-  ok(strip1.includes('data-garden="harvest"'), 'garden strip surfaces Harvest the garden in the haven panel');
+  ok(!strip1.includes('data-garden="tend"'), 'empty plots do not offer tending before sowing');
+  ok(!strip1.includes('data-garden="harvest"'), 'empty plots do not offer harvesting before growth');
 
   // ---- GARDEN: every gate names itself (no silent dead-ends) ----
   const gSow = Game.gardenGate('sow');

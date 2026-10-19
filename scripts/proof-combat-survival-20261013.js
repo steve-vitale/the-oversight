@@ -167,19 +167,31 @@ function mkMonster(Game, key, id, opts) {
     const mdef = (Game.data.monsters || []).find(m => m.id === 'hushwolf');
     check('hushwolf mdef carries fleeAt 0.25', mdef && mdef.fleeAt === 0.25,
       `fleeAt=${mdef && mdef.fleeAt}`);
-    const n12 = (Game.data.monsters || []).filter(m => m.fleeAt > 0).length;
-    check('12 monsters.json entries carry fleeAt', n12 === 12, `count=${n12}`);
+    // Preserve the original thresholds and cover the three later additions.
+    const expected = { hushwolf: 0.25, mirrormoth: 0.4, belltoad: 0.3,
+      lockpick_raccoon: 0.5, hummice: 0.3, voice_mimic_radio: 0.2,
+      memory_projector: 0.2, warranty_caller: 0.1, understudy: 0.2,
+      heckler: 0.3, union_rep: 0.2, redactor: 0.2, rut_king: 0.25,
+      sweeps_week: 0.25, cliffhanger: 0.2 };
+    const actual = Game.data.monsters.filter(m => m.fleeAt > 0);
+    check('all authored flee identities present, no unreviewed additions',
+      JSON.stringify(actual.map(m => m.id).sort()) === JSON.stringify(Object.keys(expected).sort()));
+    check('all 15 authored flee thresholds match', actual.every(m => m.fleeAt === expected[m.id]));
   }
   {
-    // Tactical: belltoad (fleeAt 0.3, no preTurnHooks) at 20% HP flees.
-    const _r = Math.random; Math.random = () => 0.5; // < 0.7, deterministic
-    try {
-      const m = mkMonster(Game, 'm0', 'belltoad', { hp: 20, maxHp: 100 });
-      const p = { key: 'p', kind: 'player', mx: 4, my: 4, hp: 100, maxHp: 100, alive: true, speed: 3 };
-      mkFight(Game, [p, m], 3);
-      Game.tbMonsterTurn(m);
-      check('wounded belltoad breaks and runs', m.fled === true, `fled=${m.fled}`);
-    } finally { Math.random = _r; }
+    // Actual tactical entry on both sides of strict HP/probability boundaries.
+    for (const [hp, roll, fled] of [[29, 0.5, true], [30, 0.5, false],
+      [31, 0.5, false], [29, 0.69, true], [29, 0.7, false], [29, 0.71, false]]) {
+      const originalRandom = Math.random; Math.random = () => roll;
+      try {
+        const m = mkMonster(Game, 'm0', 'belltoad', { hp, maxHp: 100 });
+        const player = { key: 'p', kind: 'player', mx: 4, my: 4, hp: 100,
+          maxHp: 100, alive: true, speed: 3 };
+        mkFight(Game, [player, m], 3);
+        Game.tbMonsterTurn(m);
+        check('belltoad HP=' + hp + ' roll=' + roll + ' flee=' + fled, m.fled === fled);
+      } finally { Math.random = originalRandom; }
+    }
   }
   {
     // Fallback discriminator: ad-hoc mdef with NO monsters.json fleeAt and

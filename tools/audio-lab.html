@@ -18,8 +18,8 @@
   .cov.real { color:var(--real); border-color:var(--real); }
   .cov.synth { color:var(--synth); border-color:var(--synth); }
   .cov.gap { color:var(--gap); border-color:var(--gap); }
-  .filters { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; position:sticky; top:0;
-             background:var(--bg); padding:8px 0; z-index:5; }
+  .filterbar { position:sticky; top:0; z-index:5; background:var(--bg); padding:4px 0; }
+  .filters { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; padding:4px 0; }
   .filters button { background:var(--card); color:var(--ink); border:1px solid var(--line);
                     border-radius:18px; padding:6px 12px; font-size:13px; }
   .filters button.on { border-color:var(--accent); color:var(--accent); }
@@ -54,15 +54,18 @@
 
 <p class="note"><b>Honest coverage.</b> REAL = real-world recording on disk (source + license shown).
 SYNTH = Web Audio synth kept by design — the thing has no meaningful real-world voice.
-GAP = documented gap: no usable recording was found, a synth stands in.
+GAP = a recording is missing or unregistered; a labeled synth stands in.
 Items marked "source unattributed" play fine but their origin is unverified — do not judge them as sourced recordings yet.</p>
 
+<div class="filterbar">
 <div class="filters" id="waveFilters"></div>
 <div class="filters" id="originFilters"></div>
+</div>
 
 <div id="list"></div>
 <div class="nowbar" id="nowbar"></div>
 
+<script src="../src/js/regional-audio.js"></script>
 <script src="audio-lab-data.js"></script>
 <script>
 (function(){
@@ -70,6 +73,16 @@ Items marked "source unattributed" play fine but their origin is unverified — 
   var D = window.AUDIO_LAB_DATA;
   var wave = 'all', origin = 'all';
   var player = new Audio();
+  var regional = globalThis.Scattering.regionalAudio, synthContext = null, synthBus = null, synthVoice = null, synthTimer = null, playGeneration = 0;
+  function synthPort(){
+    if (!synthContext){
+      var Context = window.AudioContext || window.webkitAudioContext;
+      if (!Context) throw new Error('Web Audio is unavailable');
+      synthContext = new Context(); synthBus = synthContext.createGain();
+      synthBus.gain.value = 0.9; synthBus.connect(synthContext.destination);
+    }
+    return synthContext.resume().then(function(){ return { ctx:synthContext, sfx:synthBus }; });
+  }
   var currentCard = null, currentBtn = null;
   var list = document.getElementById('list');
   var nowbar = document.getElementById('nowbar');
@@ -82,9 +95,9 @@ Items marked "source unattributed" play fine but their origin is unverified — 
     D.monsters.forEach(function(e){ c[e.origin] = (c[e.origin]||0)+1; });
     D.sfx.forEach(function(e){ s[e.origin] = (s[e.origin]||0)+1; });
     document.getElementById('coverage').innerHTML =
-      '<span class="cov real">🎙 Monsters real: '+c.real+'/59</span>'+
-      '<span class="cov synth">🔊 Monsters synth: '+c.synth+'/59</span>'+
-      '<span class="cov gap">⚠ Monsters gap: '+c.gap+'/59</span>'+
+      '<span class="cov real">🎙 Monsters real: '+c.real+'/'+D.monsters.length+'</span>'+
+      '<span class="cov synth">🔊 Monsters synth: '+c.synth+'/'+D.monsters.length+'</span>'+
+      '<span class="cov gap">⚠ Monsters gap: '+c.gap+'/'+D.monsters.length+'</span>'+
       '<span class="cov real">🎙 SFX real: '+s.real+'</span>'+
       '<span class="cov synth">🔊 SFX synth: '+s.synth+'</span>';
   }
@@ -112,6 +125,9 @@ Items marked "source unattributed" play fine but their origin is unverified — 
   }
 
   function stop(){
+    playGeneration++;
+    if (synthTimer) { clearTimeout(synthTimer); synthTimer = null; }
+    if (synthVoice) { synthVoice.stop(); synthVoice = null; }
     player.pause(); player.removeAttribute('src'); player.load();
     if (currentCard) currentCard.classList.remove('playing');
     if (currentBtn) currentBtn.textContent = '▶ Play';
@@ -122,13 +138,13 @@ Items marked "source unattributed" play fine but their origin is unverified — 
   function card(e, isSfx){
     var div = document.createElement('div');
     div.className = 'card';
-    var assetLine, canPlay;
+    var assetLine, canPlay, canSynth = !!regional.specs[e.synth];
     if (e.files && e.files.length){
       assetLine = '🎵 ' + e.files.join(' · ');
       canPlay = true;
     } else {
-      assetLine = '🔊 Web Audio synth — hook: <b>' + (e.synth || e.hook || '?') + '</b> (plays in-game only; nothing to preview here)';
-      canPlay = false;
+      assetLine = '🔊 Web Audio synth — hook: <b>' + esc(e.synth || e.hook || '?') + '</b>' + (canSynth ? ' (same renderer as the game)' : ' (plays in-game only; nothing to preview here)');
+      canPlay = canSynth;
     }
     div.innerHTML =
       '<div class="head"><span class="name">'+esc(e.name || e.label)+'</span>'+
@@ -145,6 +161,18 @@ Items marked "source unattributed" play fine but their origin is unverified — 
       btn.onclick = function(){
         if (currentBtn === btn){ stop(); return; }
         stop();
+        if (canSynth){
+          currentCard = div; currentBtn = btn;
+          div.classList.add('playing'); btn.textContent = '⏸ Stop';
+          nowbar.textContent = '▶ ' + (e.name || e.label) + ' — shared synth'; nowbar.classList.add('show');
+          var generation = playGeneration;
+          synthPort().then(function(port){
+            if (generation !== playGeneration || currentBtn !== btn) return;
+            synthVoice = regional.play(e.synth, port);
+            synthTimer = setTimeout(stop, (synthVoice.duration + 0.1) * 1000);
+          }).catch(function(error){ if (generation !== playGeneration) return; stop(); btn.textContent = '⚠ ' + error.message; });
+          return;
+        }
         player.src = '../' + e.files[0];
         player.play().catch(function(){ btn.textContent = '⚠ could not play'; });
         div.classList.add('playing'); btn.textContent = '⏸ Stop';

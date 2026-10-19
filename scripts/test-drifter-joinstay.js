@@ -16,22 +16,34 @@
 //     walked away (only talk/petition re-synced it). Now every approach
 //     catch-ups; the first-sight announcement still fires once.
 // Usage: node scripts/test-drifter-joinstay.js [--seed N]
-const fs = require('fs');
+const K = require('./godpath/lib');
+const { spawnSync } = require('child_process');
 const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/journal.js',
- 'src/js/party.js', 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js',
- 'src/js/food.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
- 'src/js/betrayal.js', 'src/js/justice.js', 'src/js/membership.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
-
-let seed = 7;
-const argSeed = (process.argv.find(a => a.startsWith('--seed')) || '').split('=')[1];
-if (argSeed) seed = parseInt(argSeed, 10);
+const value = flag => {
+  const exact = process.argv.indexOf(flag);
+  return exact >= 0 ? process.argv[exact + 1] : process.argv.find(a => a.startsWith(flag + '='))?.slice(flag.length + 1);
+};
+const seed = Number(value('--seed') || process.env.SEED || 7);
+const caseValue = value('--case-seed');
+if (caseValue == null) {
+  let passed = 0, failed = 0;
+  for (const caseSeed of [seed, seed + 1, seed + 2]) {
+    const result = spawnSync(process.execPath, [__filename, '--case-seed', String(caseSeed)], {
+      cwd: path.resolve(__dirname, '..'), env: process.env, encoding: 'utf8', timeout: 60000,
+    });
+    process.stdout.write(result.stdout || '');
+    process.stderr.write(result.stderr || '');
+    if (result.error) console.error(result.error);
+    const counts = (result.stdout || '').match(/test-drifter-joinstay: (\d+) passed, (\d+) failed/);
+    passed += Number(counts?.[1] || 0);
+    failed += Number(counts?.[2] || 0);
+    if (result.status !== 0 && !Number(counts?.[2])) failed++;
+  }
+  console.log(`\ntest-drifter-joinstay: ${passed} passed, ${failed} failed (three isolated seeds)`);
+  process.exit(failed ? 1 : 0);
+}
+const caseSeed = Number(caseValue);
+let Game;
 
 let pass = 0, fail = 0;
 function ok(cond, name) {
@@ -46,7 +58,6 @@ const manhattan = (ax, ay, bx, by) => Math.abs(ax - bx) + Math.abs(ay - by);
 
 async function freshGame(s) {
   reseed(s);
-  await Game.init();
   Game.say = () => {};
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -60,10 +71,10 @@ function walkTo(tx, ty) {
   while ((cx !== tx || cy !== ty) && guard++ < 40) {
     const nx = cx !== tx ? cx + Math.sign(tx - cx) : cx;
     const ny = cx === tx ? cy + Math.sign(ty - cy) : cy;
-    try { Game.reveal(nx, ny); Game.reveal(cx, cy); } catch (e) {}
-    Game.map.px = cx; Game.map.py = cy;
-    try { Game.travelTo(nx, ny, true); } catch (e) {}
-    cx = nx; cy = ny;
+    Game.reveal(nx, ny); Game.reveal(cx, cy);
+    Game.travelTo(nx, ny, true);
+    if (Game.map.px !== nx || Game.map.py !== ny) throw new Error('Travel fixture refused: ' + JSON.stringify({ nx, ny, at: [Game.map.px, Game.map.py], combat: Game.inCombat(), over: Game.over }));
+    cx = Game.map.px; cy = Game.map.py;
   }
 }
 function nearestVillage() {
@@ -72,30 +83,38 @@ function nearestVillage() {
 }
 
 (async () => {
-  for (const s of [seed, seed + 1, seed + 2]) {
+  Game = await K.load({ seed: caseSeed });
+  Game.debugRegion = process.env.TEST_REGION || 'na_eastern_woodlands';
+  for (const s of [caseSeed]) {
     // --- FIX 1: joined-elsewhere player does not feed home's pot ---
     // Snapshot/restore within ONE game: pre-fix, joinedVillage exempted the
-    // player from the away-skip, so the joined run fed home ~3600 kcal more.
+    // player from the away-skip. Compare both states and observe the live meal loop.
     {
       const sc = await freshGame(s);
       const v = nearestVillage();
       walkTo(v.x, v.y);
-      const p = Game.data.villagers.find(x => x.id === Game.villagerId) ||
-                Game.data.background_survivors.find(x => x.id === Game.villagerId);
-      if (p) p.providesPerDay = 20000; // loud labor: any double-dip is obvious
       Game.joinVillageReal(v.id);
-      const snap = JSON.stringify(Game.state.village);
-      reseed(s * 7919 + 11);
-      const p0 = Game.state.village.pantryKcal || 0;
-      Game.villageEats();
-      const dJoined = (Game.state.village.pantryKcal || 0) - p0;
-
-      Game.state.village = JSON.parse(snap);
-      sc.joinedVillage = null; // identical state, but merely away
-      reseed(s * 7919 + 11);
-      const q0 = Game.state.village.pantryKcal || 0;
-      Game.villageEats();
-      const dAway = (Game.state.village.pantryKcal || 0) - q0;
+      const snap = JSON.stringify(Game.state.village), serviced = [];
+      const meal = Game.villagerMealDay;
+      Game.villagerMealDay = function (id, ...args) {
+        serviced.push(id);
+        return meal.call(this, id, ...args);
+      };
+      let dJoined, dAway;
+      try {
+        reseed(s * 7919 + 11);
+        const p0 = Game.state.village.pantryKcal || 0;
+        Game.villageEats();
+        dJoined = (Game.state.village.pantryKcal || 0) - p0;
+        Game.state.village = JSON.parse(snap);
+        sc.joinedVillage = null; // same home state and location, merely away
+        reseed(s * 7919 + 11);
+        const q0 = Game.state.village.pantryKcal || 0;
+        Game.villageEats();
+        dAway = (Game.state.village.pantryKcal || 0) - q0;
+      } finally { Game.villagerMealDay = meal; }
+      ok(serviced.length > 0, `seed ${s}: the actual home NPC meal loop ran`);
+      ok(!serviced.includes(Game.villagerId), `seed ${s}: the away bearer is never fed or credited as a home NPC`);
 
       ok(dJoined === dAway,
         `seed ${s}: joined-away home delta === away-not-joined delta (${Math.round(dJoined)} vs ${Math.round(dAway)}) — no double-dip`);
@@ -142,25 +161,44 @@ function nearestVillage() {
       Game.joinVillageReal(v.id);
       const day0 = v.day;
       // give them a healthy turf so their foraging has something to eat
-      for (let ty = 0; ty < 7; ty++) for (let tx = 0; tx < 7; tx++) {
+      for (let ty = 0; ty < Game.map.tiles.length; ty++) for (let tx = 0; tx < Game.map.tiles[ty].length; tx++) {
         const t = Game.tileAt(tx, ty);
         if (t && Math.abs(tx - v.x) + Math.abs(ty - v.y) <= 4 && (t.maxStock || 0) > 0) {
           t.stock = t.maxStock;
           t.detailRegrow = {};
         }
       }
-      const turf0 = Game.turfKcal(v.x, v.y);
-      for (let d = 0; d < 3; d++) {
-        sc.kcal = 500; sc.hydration = 100; if (sc.health < 100) sc.health = 100;
-        Game.state.village.pantryKcal = Math.max(Game.state.village.pantryKcal || 0, 20000);
-        try { Game.endDay(); } catch (e) {}
-        if (Game.over) break;
-      }
+      const turf0 = Game.turfKcal(v.x, v.y), harvests = [];
+      const deplete = Game.depleteRandomTile;
+      Game.depleteRandomTile = function (...args) {
+        const before = this.turfKcal(v.x, v.y);
+        const result = deplete.apply(this, args);
+        if (args[3]?.byVillage === v) harvests.push({
+          day: this.state.scholar.day, requested: args[0], takes: result.takes,
+          before, after: this.turfKcal(v.x, v.y), x: args[1], y: args[2],
+        });
+        return result;
+      };
+      try {
+        for (let d = 0; d < 3; d++) {
+          sc.kcal = 500; sc.hydration = 100; if (sc.health < 100) sc.health = 100;
+          Game.state.village.pantryKcal = Math.max(Game.state.village.pantryKcal || 0, 20000);
+          Game.endDay();
+          if (Game.over) break;
+        }
+      } finally { Game.depleteRandomTile = deplete; }
       ok(v.day === day0 + 3,
         `seed ${s}: joined village day watermark advanced exactly 3 (${day0} -> ${v.day})`);
-      const turf1 = Game.turfKcal(v.x, v.y);
-      ok(turf0 > 0 && turf1 < turf0,
-        `seed ${s}: they foraged their own turf while you lived there (${Math.round(turf0)} -> ${Math.round(turf1)} kcal)`);
+      ok(turf0 > 0 && harvests.length === 3,
+        `seed ${s}: actual day resolution dispatches three joined-village harvests`);
+      ok(harvests.every(h => h.x === v.x && h.y === v.y && h.takes > 0 && h.takes <= h.requested),
+        `seed ${s}: joined villagers take real stock from their own turf`);
+      ok(harvests.every(h => h.before - h.after === h.takes * 200),
+        `seed ${s}: every visible harvest removes exactly its reported stock calories`);
+      ok(new Set(harvests.map(h => h.day)).size === 3,
+        `seed ${s}: harvests occur on three distinct actual days`);
+      console.log('joined-harvest', JSON.stringify({ seed: s, region: Game.state.region,
+        initialTurf: turf0, finalTurf: Game.turfKcal(v.x, v.y), harvests }));
       // walk away: their day must NOT advance while you're gone...
       walkTo(4, 4); // haven proper: guaranteed >=3 from every village (see above)
       const awayDay = v.day;
@@ -181,7 +219,7 @@ function nearestVillage() {
       for (let d = 0; d < 4; d++) {
         sc.kcal = 4000; sc.hydration = 100;
         Game.state.village.pantryKcal = Math.max(Game.state.village.pantryKcal || 0, 20000);
-        try { Game.endDay(); } catch (e) {}
+        Game.endDay();
       }
       const gap = sc.day - v.day;
       ok(gap === 4, `seed ${s}: village froze while you were gone (gap ${gap})`);
