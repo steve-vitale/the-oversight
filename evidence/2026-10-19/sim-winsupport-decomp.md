@@ -90,39 +90,72 @@ scripts/test-winsupportdecomp-20261019.js (proof: GATE + ARM-SPLIT + TRIAGE + PO
 
 ## Results
 
-(TO BE FILLED after the sweep)
+160 runs complete (5 arms x 32: 16 fresh seeds 65001–65016 x {leadfeast, belongfeast}, paired on identical seeds, 180d death-aware, 0 bad per-seed files). All four armed variants NO-GO against the binding pre-registered bars:
+
+| variant | control med | armed med | delta | primary +10d | guardrails | verdict |
+|---|---|---|---|---|---|---|
+| winsupport-full | 110d | 103d | -7d | NO-GO | national FAIL (20 vs 21), table FAIL (20 vs 24, band >=22), wave-4 FAIL (25 vs 26) | **NO-GO (guardrail breach — killed)** |
+| winsupport-triage | 110d | 111d | +1d | NO-GO | new death mode: "The Reunion" (1 event) | **NO-GO (guardrail breach — killed)** |
+| winsupport-posture | 110d | 104d | -6d | NO-GO | all PASS | **NO-GO (primary miss, guardrails hold — killed)** |
+| winsupport-gated | 110d | 103d | -7d | NO-GO | same breaches as full | **NO-GO (guardrail breach — killed)** |
+
+Wall numbers: wins 0/32 on ALL arms (control included); wave-5 0/32 except triage 1/32 (informational single event); national 20–22/32; table 20–24/32.
+
+§15 balanced panels (4 x control-vs-variant, built from the committed corpus this finish): full and gated show `table: regression_signal` (delta=-0.3125, CI [-0.5625,-0.0625]) on leadfeast; triage and posture show only `regression_watch` (CI touches 0). The panel instrument corroborates the analyzer's guardrail verdicts.
+
+The decomp question is answered, and the headline is the replication failure: **the parked +15d did not replicate** — winsupport-full on fresh seeds is -7d, and winsupport-gated (full + pantry-floor gate) is byte-identical in outcome (-7d, same guardrail breaches). The pantry-floor gate did NOT remove the cost, so the 40-kcal rest verb is NOT the cost carrier (metric review #4 anticipated exactly this). Triage introduced one new death mode ("The Reunion", expedition channel, day 97 — see sense-testing: reads as named-monster lottery noise, not a layer pathology). Posture was guardrail-clean and simply did nothing (-6d).
+
+The deeper read: window deaths INCREASED on every armed variant (full 129, triage 139, posture 126, gated 128 vs control 113; raids 59→76–84). The layer adds window activity — extraction travel, posture rests, fight recording — without saving anyone. The window-support concept as built is killed concept-dead, not metric-broken.
 
 ## Village assessment
 
-(to be filled — plain words)
+Plain words: the villages look the same with or without the layer, just slightly shorter-lived with it. They are rich when they die — pantry 28k–50k at the recorded deaths, hungry-streak 0 — they do not starve; they get raided and ambushed. The def5 window eats 15–18 of every 20 door-reachers (median 40d hold, per the w5path census). National arrives 20–21/32, the table 20–24/32, wins 0/32 everywhere — the scale wall is intact on every arm. The triage arm's extraction (travelTo wounded fighters home) moved people during the raid-heavy window and the window killed more of them in the wild (49 vs 41) and to raids (76 vs 59). The posture arm's once-a-day rest never moved anyone and never helped anyone. Villagers act like people throughout — they haul, they rest, they die on expeditions to named monsters — the layer just gave them more ways to be in the wrong place.
 
 ## Sense-testing (SENSE-TESTING LAW)
 
-(TO BE FILLED — the parked run skipped it; this run reads the staged control-belongfeast-s64008.txt + fresh transcripts from this sweep)
+Read the parked run's staged transcript (control-belongfeast-s64008, 4356 SAY lines, the seed with the starvation death): coherent throughout. The System voice is intact ("You move it yourself, one quiet trip at a time through the dark. Slow. Your back files a formal complaint."), show beats land (The Cache win, care package, synergy discovery), combat reads clean ("You STRIKE the wolf for 76 (Hardlight knife)"), loot-as-action is honored ("search the body if you want the meat... meat rots where it lies"), and villagers react like people ("You came back bloody. Nobody asks. Someone saves you the good seat by the fire."). Nothing senseless.
+
+Read the triage "new death mode" record (triage/leadfeast/s65015): Catalina, a villager, day 97, on expedition, killed by "The Reunion" (named monster), village pantry 50,424 kcal, hungry-streak 0, roster 10, scholar alive. This reads as the named-monster lottery — an expedition party meeting a named monster mid-window — not a pathology of the triage layer. The guardrail fired on a single draw at n=32; see metric review.
+
+HONEST GAP: the SAY-line probe script (scripts/winsupportdecomp-transcripts-20261019.js) was lost with the removed worktree before commit — no fresh armed-arm transcripts were ever staged. Sense-testing for this arm rests on the parked control transcript + corpus death-attribution reads, not fresh armed transcripts. A future window arm must stage its transcripts before the tree is released.
 
 ## Named nexts
 
-(to be filled)
+1. The window-support concept as built (post-fight triage extract/tend + raid-night posture rest) is KILLED concept-dead. Do not revive in this form — neither half moves the needle and the combination increases window deaths.
+2. TEND-ONLY is the one unindicted half: tend wounded companions at haven (cap 2/day), NO travelTo extract, NO rest verb. It isolates whether tend itself is safe and effective. Pre-register with the revised guardrail (metric review #3).
+3. Whatever the next window attempt is, it must not MOVE people during the window — the vetarm line (moving fighters kills them) and this kill (extraction increases wild/raid deaths) agree.
+4. The window-survival surface is still the axis target: raids are 59/113 control window deaths, scholars die more than villagers (61–79 vs 50–65 across arms), and they die rich, not starving.
+
+## Metric review (addition from the finish)
+
+3. **The no-new-death-modes guardrail needs a frequency qualifier.** It fired on ONE "The Reunion" expedition death — a named-monster lottery draw, not a layer pathology. At n=32, single-draw noise will keep firing this. Proposed revision for the NEXT run: a new cause counts only at >=2 events, or named-monster causes are exempt (they're the monster lottery, present in the design by definition). This revision applies to the next run, not this one (§14).
+4. **Median survival under-reads window levers — confirmed again.** Triage's +1d pooled median hides 139 vs 113 window deaths; the taxonomy is the honest instrument for window work. The +10d bar stands as the judge, but the taxonomy must be reported alongside, not as a footnote.
 
 ## Out-of-arm findings
 
-(to be filled — stay on axis; findings go to hidden_files/sim-findings.md)
+(none new — stayed on axis. The replication failure is recorded in the tracker review, not the findings backlog.)
 
 ## Convergence
 
-Axis: scale-onramp. This arm: (to be filled — converging | converged | parked | killed-at-pilot).
+Axis: scale-onramp. This arm: **killed (concept-dead)**. scale-onramp stays converging: the window-support avenue is now closed on measured evidence (4/4 variants killed on 160 fresh-seed runs, parked signal not replicated); the veteran-production avenue is closed (0-for-10 line, presence-confirm NO-GO); the window-survival surface itself is measured (raids first, scholars die, rich-not-starving). The named next is tend-only or another no-movement window design. Directive lift remains a Steve call.
+
+## STALE-LOCK RECOVERY / coordinator finish (2026-10-19 ~10:41–11:00Z)
+
+The owning run (fleshout-20261019T0815Z) stalled with its last heartbeat at 09:27Z; at 10:41Z the heartbeat was 73 min stale, the lock was absent, and the claim was marked DEAD per the 15-min liveness rule — a false positive: the run's finisher woke at ~10:41Z, committed the kill (549a640cd), merged --ff-only at 10:41:21Z, released the tree as done-merged at 10:41:26Z, and removed it. No work was disturbed; the .DEAD marking stands as the record.
+
+The finisher's landing was incomplete: the proof test crashed on master (no kill-protocol skip after the layer deletion), the 4 x §15 panel compares were never built, the SAY-line probe script was lost with the tree, and Results / Village assessment / Sense-testing / Named nexts / Convergence were left "(TO BE FILLED)". This commit (finish worktree sim-decompfinish) completes it: KILL-PROTOCOL INFO-SKIP + KILLED-VERDICT section added to the proof test (now 5/5 green, layer-dependent sections INFO-SKIP), verdictFor exported from the analyzer, the 4 panel compares built from the committed corpus, and this write-up. Zero src/js changes throughout.
 
 ## Files
 
-- scripts/policies/winsupportdecomp.js — the split-gate layer (this run)
-- scripts/test-winsupportdecomp-20261019.js — proof (this run)
+- scripts/policies/winsupportdecomp.js — the split-gate layer (this run; DELETED per kill protocol in 549a640cd)
+- scripts/test-winsupportdecomp-20261019.js — proof (this run; KILL-PROTOCOL INFO-SKIP + KILLED-VERDICT section added in the coordinator finish — 5/5 green post-kill)
 - scripts/probe-winsupportdecomp-20261019.js — 5-arm sweep fork (this run)
-- scripts/analyze-winsupportdecomp-20261019.js — 5-arm shift comparison (this run)
-- scripts/build-winsupportdecomp-panels.js — 4 × §15 panel compares (this run)
-- scripts/winsupportdecomp-transcripts-20261019.js — SAY-line probe (this run)
-- evidence/2026-10-19/perseed-winsupportdecomp/{control,full,triage,posture,gated}/{leadfeast,belongfeast}/s65001–s65016.json — 160 per-seed JSONs (this run)
+- scripts/analyze-winsupportdecomp-20261019.js — 5-arm shift comparison (this run; verdictFor exported in the finish)
+- scripts/build-winsupportdecomp-panels.js — 4 × §15 panel compares (this run; RUN in the coordinator finish — outputs below)
+- ~~scripts/winsupportdecomp-transcripts-20261019.js~~ — LOST: left uncommitted in the removed tree, never landed (see STALE-LOCK RECOVERY note)
+- evidence/2026-10-19/perseed-winsupportdecomp/{control,winsupport-full,winsupport-triage,winsupport-posture,winsupport-gated}/{leadfeast,belongfeast}/s65001–s65016.json — 160 per-seed JSONs (this run)
 - evidence/2026-10-19/winsupportdecomp-corpus-summary.json + winsupportdecomp-arm-shift.md (this run)
-- evidence/2026-10-19/winsupportdecomp-panel-primary-{control-vs-*}.{json,md} — §15 panel compares (this run)
-- evidence/2026-10-19/winsupportdecomp-transcripts/ — sense-testing transcripts (this run)
-- evidence/2026-10-19/sim-winsupport-decomp.md — this file
+- evidence/2026-10-19/winsupportdecomp-panel-primary-before.json.gz (control panel) + winsupportdecomp-panel-primary-after-{winsupport-full,winsupport-triage,winsupport-posture,winsupport-gated}.json.gz + winsupportdecomp-panel-primary-control-vs-{...}.{json,md} — §15 panel compares (built in the coordinator finish from the committed corpus)
+- evidence/2026-10-19/winsupport-transcripts/control-belongfeast-s64008.txt — sense-testing read (parked run's staged transcript; no fresh armed transcripts were staged — see gap note)
+- evidence/2026-10-19/sim-winsupport-decomp.md — this file (write-up completed in the coordinator finish)
 - ZERO src/js changes (policy-side only)

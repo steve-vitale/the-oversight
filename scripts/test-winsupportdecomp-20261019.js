@@ -98,10 +98,26 @@ function fixtureBase() {
   };
 }
 
-const WD = require('./policies/winsupportdecomp');
+const fs = require('fs');
+const path = require('path');
 
-section('GATE — WINSUPPORT unset: pure delegation for every ARM value, ctx untouched');
-(function () {
+// KILL-PROTOCOL INFO-SKIP (precedent: test-presence-confirm.js): the layer
+// scripts/policies/winsupportdecomp.js was deleted per the kill protocol —
+// all four decomp arms NO-GO on 160 fresh-seed runs (landed 549a640cd);
+// pre-deletion proof was 52/52 green. Layer-dependent sections INFO-SKIP;
+// the KILLED-VERDICT section below pins the kill verdicts on the committed
+// corpus via the analyzer's own judge function and runs with or without
+// the layer.
+const LAYER_PATH = path.join(__dirname, 'policies', 'winsupportdecomp.js');
+const LAYER_GONE = !fs.existsSync(LAYER_PATH);
+const WD = LAYER_GONE ? null : require('./policies/winsupportdecomp');
+function sectionIfLayer(name) {
+  section(name);
+  if (LAYER_GONE) console.log('  INFO-SKIP: layer deleted per kill protocol (landed 549a640cd)');
+}
+
+sectionIfLayer('GATE — WINSUPPORT unset: pure delegation for every ARM value, ctx untouched');
+if (WD) (function () {
   for (const a of ['triage', 'posture', 'gated', 'bogus', undefined]) {
     clearEnv();
     if (a !== undefined) process.env.WINSUPPORT_ARM = a; // ARM set but WINSUPPORT unset
@@ -120,8 +136,8 @@ section('GATE — WINSUPPORT unset: pure delegation for every ARM value, ctx unt
   clearEnv();
 })();
 
-section('ARM-SPLIT — each arm carries only its own half');
-(function () {
+sectionIfLayer('ARM-SPLIT — each arm carries only its own half');
+if (WD) (function () {
   // triage arm: upkeep never rests; fight records; daily tends
   setArm('triage');
   const base = fixtureBase();
@@ -181,8 +197,8 @@ section('ARM-SPLIT — each arm carries only its own half');
   clearEnv();
 })();
 
-section('TRIAGE — wave-4 fight + big HP drop sets the flag (triage arm)');
-(function () {
+sectionIfLayer('TRIAGE — wave-4 fight + big HP drop sets the flag (triage arm)');
+if (WD) (function () {
   setArm('triage');
   const base = fixtureBase();
   const p = WD.withWinSupportDecomp(base, 'wsd-test', 'test');
@@ -207,8 +223,8 @@ section('TRIAGE — wave-4 fight + big HP drop sets the flag (triage arm)');
   clearEnv();
 })();
 
-section('POSTURE — upkeep rest: once/day, haven, wounded, fed, window live (posture arm)');
-(function () {
+sectionIfLayer('POSTURE — upkeep rest: once/day, haven, wounded, fed, window live (posture arm)');
+if (WD) (function () {
   setArm('posture');
   const base = fixtureBase();
   const p = WD.withWinSupportDecomp(base, 'wsd-test', 'test');
@@ -225,8 +241,8 @@ section('POSTURE — upkeep rest: once/day, haven, wounded, fed, window live (po
   clearEnv();
 })();
 
-section('TEND — wounded party tended at haven, cap 2/day (triage arm)');
-(function () {
+sectionIfLayer('TEND — wounded party tended at haven, cap 2/day (triage arm)');
+if (WD) (function () {
   setArm('triage');
   const base = fixtureBase();
   const p = WD.withWinSupportDecomp(base, 'wsd-test', 'test');
@@ -238,8 +254,8 @@ section('TEND — wounded party tended at haven, cap 2/day (triage arm)');
   clearEnv();
 })();
 
-section('EXTRACT — triage-active + away + wounded -> travelTo(4,4), 1/day (triage arm)');
-(function () {
+sectionIfLayer('EXTRACT — triage-active + away + wounded -> travelTo(4,4), 1/day (triage arm)');
+if (WD) (function () {
   setArm('triage');
   const base = fixtureBase();
   const p = WD.withWinSupportDecomp(base, 'wsd-test', 'test');
@@ -254,8 +270,8 @@ section('EXTRACT — triage-active + away + wounded -> travelTo(4,4), 1/day (tri
   clearEnv();
 })();
 
-section('PANTRY-FLOOR — gated arm skips the 40-kcal rest below 4000 pantry kcal');
-(function () {
+sectionIfLayer('PANTRY-FLOOR — gated arm skips the 40-kcal rest below 4000 pantry kcal');
+if (WD) (function () {
   ok(WD.PANTRY_FLOOR_KCAL === 4000, 'floor is the engine\'s own 4000-kcal "stores running thin" line');
   setArm('gated');
   const base = fixtureBase();
@@ -290,6 +306,28 @@ section('PANTRY-FLOOR — gated arm skips the 40-kcal rest below 4000 pantry kca
   ok(G5._calls.travelTo.length === 1, 'triage EXTRACT ignores the floor (floor is rest-verb-only by design)');
   ok((ctx5.wsdcFloorSkips || 0) === 0, 'no floor accounting on the triage arm');
   clearEnv();
+})();
+
+section('KILLED-VERDICT — analyzer verdicts re-derived on the committed corpus (runs with or without the layer)');
+(function () {
+  // Pins the kill: the SAME judge function the arm-shift verdicts rest on,
+  // re-run against the committed per-seed corpus. All four armed variants
+  // must reproduce their pre-registered NO-GO verdicts exactly.
+  const A = require('./analyze-winsupportdecomp-20261019');
+  const W = require('./analyze-windowsurvive-20261019');
+  const { byArm, bad } = A.loadValid();
+  ok(bad.length === 0, `corpus loads clean (bad files: ${bad.length})`);
+  const C = A.summarize(byArm.control.map(W.attribute));
+  const expected = {
+    'winsupport-full': 'NO-GO (guardrail breach — killed)',
+    'winsupport-triage': 'NO-GO (guardrail breach — killed)',
+    'winsupport-posture': 'NO-GO (primary miss, guardrails hold — killed)',
+    'winsupport-gated': 'NO-GO (guardrail breach — killed)',
+  };
+  for (const arm of Object.keys(expected)) {
+    const v = A.verdictFor(C, A.summarize(byArm[arm].map(W.attribute)));
+    ok(v.verdict === expected[arm], `corpus verdict ${arm} reproduces: ${v.verdict}`);
+  }
 })();
 
 section('SMOKE — real harness, per arm, 30d');
@@ -362,8 +400,12 @@ async function det() {
 (async () => {
   const wantSmoke = process.env.SMOKE === '1';
   const wantDet = process.env.DET === '1';
-  if (wantSmoke) await smoke();
-  if (wantDet) await det();
+  if (LAYER_GONE && (wantSmoke || wantDet)) {
+    console.log('  INFO-SKIP: SMOKE/DET need the deleted layer (kill protocol)');
+  } else {
+    if (wantSmoke) await smoke();
+    if (wantDet) await det();
+  }
   if (!wantSmoke && !wantDet) console.log('  (SMOKE=1 / DET=1 to run the live sections)');
   console.log(`\nRESULT: ${pass} pass, ${fail} fail`);
   process.exit(fail ? 1 : 0);

@@ -203,4 +203,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { loadValid, summarize, median };
+module.exports = { loadValid, summarize, median, verdictFor };
