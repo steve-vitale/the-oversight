@@ -1,0 +1,69 @@
+[
+ {
+  "day": 90,
+  "frame": "the Table",
+  "phase": "paths",
+  "path": null,
+  "beat": null,
+  "prompt": "The ring of pale light. The too-many-angled faces. The trillions of eyes. The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take. ◈ the Feared — 28 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked. (standing: 100) ◇ the Indispensable — The Indispensable needs a full seat — the galaxy must actually need you, not just notice you. ◈ the Beloved — Viewership 29, fan favor 70 — the galaxy's favorite, by the numbers. (standing: 100) ◈ the Witness — 5 exposures on the record. The docket is real. (standing: 75) ◈ the Assimilated — Always open. The table takes anyone — that's what makes it a trap, and what makes it safe. (standing: 80) ◈ the Defiant — Defiance 7 on the record. The 'no' is earned. (standing: 58) ◈ the Relay — Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0) (standing: 50)",
+  "options": [
+   "path:feared :: Walk the path of the Feared",
+   "path:beloved :: Walk the path of the Beloved",
+   "path:witness :: Walk the path of the Witness",
+   "path:assimilated :: Walk the path of the Assimilated",
+   "path:defiant :: Walk the path of the Defiant",
+   "path:relay :: Walk the path of the Relay"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Indispensable",
+  "phase": "challenge",
+  "path": "indispensable",
+  "beat": 0,
+  "prompt": "CLAUSE ONE — SUPPLY. \"HOW MUCH FOOD CAN HUMANITY MOVE?\" The table's economists have a number. It is wrong — it assumes food is fuel, and food was never just fuel. Your pantry holds 0 kcal today, and they don't know what a pantry *is*. Name the number, or let them keep theirs. leverage 3 · cage 0",
+  "options": [
+   "beat:real :: Name the real number.",
+   "beat:inflate :: Inflate it. They won't check. (They will check.)",
+   "beat:lowball :: Lowball it. Stay free."
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Indispensable",
+  "phase": "challenge",
+  "path": "indispensable",
+  "beat": 1,
+  "prompt": "CLAUSE TWO — TEACHING. \"WILL YOU TEACH THE TRICK?\" This is the clause everything hinges on. Teach them, and they need you less — unless you teach it the way only you can teach it. The System leans in. It has never wanted anything this badly, and it is terrible at hiding it. ◈ YOUR BUILD — Every contract has a clause nobody else can sign. Yours is the one you actually do every day. leverage 5 · cage 0",
+  "options": [
+   "beat:free :: Teach freely.",
+   "beat:price :: Teach at a price.",
+   "beat:refuse :: Refuse. The trick stays ours.",
+   "beat:build :: Write in the clause only you can fulfil — with an exit. (needs leverage 5+)"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Indispensable",
+  "phase": "challenge",
+  "path": "indispensable",
+  "beat": 2,
+  "prompt": "CLAUSE THREE — STANDING. You insisted on an exit ramp: any party may leave the treaty with one season's notice, no penalty. The table has read it three times. \"REMOVE IT,\" the System says — not performing now, almost *asking*. \"Name your price for the ramp. Anything.\" leverage 7 · cage -1",
+  "options": [
+   "beat:keep :: Keep the ramp. (Exit-ramp)",
+   "beat:trade :: Trade the ramp for everything."
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Indispensable",
+  "phase": "finals",
+  "path": "indispensable",
+  "beat": 3,
+  "prompt": "The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:",
+  "options": [
+   "final:price :: Name your price.",
+   "final:teach :: Teach them freely."
+  ]
+ }
+]

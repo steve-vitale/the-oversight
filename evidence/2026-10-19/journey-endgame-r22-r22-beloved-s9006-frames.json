@@ -1,0 +1,70 @@
+[
+ {
+  "day": 90,
+  "frame": "the Table",
+  "phase": "paths",
+  "path": null,
+  "beat": null,
+  "prompt": "The ring of pale light. The too-many-angled faces. The trillions of eyes. The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take. ◈ the Feared — 28 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked. (standing: 100) ◇ the Indispensable — The Indispensable needs a full seat — the galaxy must actually need you, not just notice you. ◈ the Beloved — Viewership 38, fan favor 41 — the galaxy's favorite, by the numbers. (standing: 100) ◈ the Witness — 3 exposures on the record. The docket is real. (standing: 59) ◈ the Assimilated — Always open. The table takes anyone — that's what makes it a trap, and what makes it safe. (standing: 65) ◈ the Defiant — Defiance 5 on the record. The 'no' is earned. (standing: 50) ◈ the Relay — Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0) (standing: 50)",
+  "options": [
+   "path:feared :: Walk the path of the Feared",
+   "path:beloved :: Walk the path of the Beloved",
+   "path:witness :: Walk the path of the Witness",
+   "path:assimilated :: Walk the path of the Assimilated",
+   "path:defiant :: Walk the path of the Defiant",
+   "path:relay :: Walk the path of the Relay"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Beloved",
+  "phase": "challenge",
+  "path": "beloved",
+  "beat": 0,
+  "prompt": "ACT ONE — THE CAST. The show's own law: the notable get pulled. Tonight that's Stan, Lorenzo, Bhavana — your village, under the brightest light in the galaxy. The audience leans in. Choose the opener. audience 4",
+  "options": [
+   "beat:hunter :: Stan's story: the hunt.",
+   "beat:funny :: Lorenzo does the funny one.",
+   "beat:truth :: Bhavana tells the truth.",
+   "beat:callback :: Callback: redo the weakest moment."
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Beloved",
+  "phase": "challenge",
+  "path": "beloved",
+  "beat": 1,
+  "prompt": "ACT TWO — THE VILLAGE PERFORMS. The whole Haven takes the stage: the feast song, the children's game, the thing they do at the fire when they think nobody's filming. Everybody's filming. Choose the centerpiece. ◈ YOUR BUILD — Act two has a slot nobody cast. The producers penciled you in weeks ago. audience 6",
+  "options": [
+   "beat:song :: The feast song.",
+   "beat:game :: The children's game.",
+   "beat:risk :: The risky improv.",
+   "beat:build :: Do your own number. The produced one. (needs audience 5+)"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Beloved",
+  "phase": "challenge",
+  "path": "beloved",
+  "beat": 2,
+  "prompt": "ACT THREE — THE EDIT BAY. The producers slide the offer across the light: final cut on your own legend. Every bad moment — the deaths, the hunger, the things you said at the fire — gone. The audience will love the version of you that never existed. All it costs is the truth. audience 8",
+  "options": [
+   "beat:cut :: Take the edit bay. (Edit Bay)",
+   "beat:raw :: Refuse the cut. Air it raw."
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Beloved",
+  "phase": "finals",
+  "path": "beloved",
+  "beat": 3,
+  "prompt": "The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:",
+  "options": [
+   "final:audience :: Let the audience speak.",
+   "final:contract :: Take the network contract."
+  ]
+ }
+]

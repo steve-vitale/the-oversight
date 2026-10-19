@@ -43,10 +43,16 @@
     } catch (e) { return 0; }
   }
   // The relay's person: the highest-trust villager. A name, not a number.
+  // The trust table outlives the dead (journey-endgame r22 2026-10-19: the
+  // path named Robin Wu 68 days after his burial). Candidates must be on
+  // the LIVE roster — a corpse can't nod. If no one living is trusted, the
+  // id stays null and the price stalls ("there is no one left to name"),
+  // which is the designed failure, not a phantom sacrifice.
   function relayPerson() {
     try {
       const t = ((Game.state.village || {}).trust) || {};
-      const ids = Object.keys(t).filter(id => id && id !== Game.villagerId);
+      const live = new Set(((Game.state.village || {}).roster) || []);
+      const ids = Object.keys(t).filter(id => id && id !== Game.villagerId && live.has(id));
       ids.sort((a, b) => (t[b] | 0) - (t[a] | 0));
       const id = ids[0];
       const v = (Game.data.villagers || []).find(x => x.id === id) || {};
