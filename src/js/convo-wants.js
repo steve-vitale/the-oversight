@@ -451,6 +451,44 @@
     q_useful: 'the most useful thing you\'ve learned',
     q_fun: 'what you did for fun',
   };
+  // favorSettleOnSurfaced (journey-succession r28 2026-10-19): applies a
+  // pending favor settle recorded by an opener/followup. The fulfilled->
+  // 'thanked' and broken->'acknowledged' transitions used to fire INSIDE the
+  // opener as a side effect of COMPUTING the line — before the no-repeat
+  // ledger check. A ledger-blocked gratitude then fell through to another
+  // opener with the state already flipped: the ledger said 'thanked' while
+  // the NPC never spoke the line (r28/8303 Henriette — an identical heal_help
+  // gratitude from earlier sat in the 48-line run window). Openers must stay
+  // pure (seek_taken onSurfaced precedent); the settle fires here, only when
+  // the opener's line actually speaks. The opener records the pending settle
+  // on c.want._favorSettle instead of flipping.
+  function favorSettleOnSurfaced(vid) {
+    try {
+      const c = Game.convoGet(vid);
+      const settle = c && c.want && c.want._favorSettle;
+      if (!settle) return;
+      const favor = (c.want && c.want.favor) || Game.convoGetFavor(vid);
+      if (favor && settle === 'thanked' && favor.state === 'fulfilled') favor.state = 'thanked';
+      else if (favor && settle === 'acknowledged' && favor.state === 'broken') favor.state = 'acknowledged';
+      delete c.want._favorSettle;
+    } catch (e) {}
+  }
+  // favorSettleReplant (journey-succession r28 2026-10-19): the resolve-time
+  // half of settle-on-speak. If the opener computed the gratitude but the
+  // no-repeat ledger blocked it, the favor is still 'fulfilled'/'broken' at
+  // endConvo and the seed would be consumed with the thanks never spoken —
+  // a silent settle. Replant a repay seed so the NPC thanks the player next
+  // conversation instead.
+  function favorSettleReplant(vid) {
+    try {
+      const c = Game.convoGet(vid);
+      if (c && c.want && c.want._favorSettle) {
+        const favor = (c.want && c.want.favor) || Game.convoGetFavor(vid);
+        if (favor) return { wantId: 'repay', note: (favor.short || 'the promise') + ' you kept', favorId: favor.id };
+      }
+    } catch (e) {}
+    return null;
+  }
   const WANTS = {
     share_news: {
       // A reaction ("huh", "no kidding") engages news — that's the point.
@@ -736,9 +774,21 @@
         if ((want.stage || 0) >= 2) return 'stated';
         return null;
       },
+      // SETTLE-ON-SPEAK (journey-succession r28 2026-10-19): the follow-up's
+      // fulfilled->'thanked' / broken->'acknowledged' transitions fire here,
+      // only when the opener's line actually speaks — never while computing
+      // a line the no-repeat ledger may skip.
+      onSurfaced(vid) { favorSettleOnSurfaced(vid); },
       resolve(vid, resolution) {
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // SETTLE-ON-SPEAK (journey-succession r28 2026-10-19): the follow-up
+        // computed the gratitude but the no-repeat ledger blocked it — the
+        // favor is still 'fulfilled'/'broken'. Plant a repay seed (not
+        // ask_favor — the debt is kept, not open) so the thanks fires next
+        // conversation instead of settling silently.
+        const replant = favorSettleReplant(vid);
+        if (replant) return replant;
         // Settled acknowledgments (fulfilled/broken/moot follow-ups) plant
         // nothing — the business is closed.
         if (favor && (favor.state === 'thanked' || favor.state === 'acknowledged' || favor.state === 'moot')) {
@@ -797,13 +847,11 @@
           return `"About ${favor.short} — have you had a chance? ${this.convoFavorDeadlineNote(favor)}"`;
         }
         if (favor && favor.state === 'fulfilled') {
-          if (c.want) c.want.favor = favor;
-          favor.state = 'thanked';
+          if (c.want) { c.want.favor = favor; c.want._favorSettle = 'thanked'; }
           return `"You came through on ${favor.short}. I won't forget it."`;
         }
         if (favor && favor.state === 'broken') {
-          if (c.want) c.want.favor = favor;
-          favor.state = 'acknowledged';
+          if (c.want) { c.want.favor = favor; c.want._favorSettle = 'acknowledged'; }
           return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
         }
         // Legacy / no favor state — the old generic lines (defensive).
@@ -846,6 +894,7 @@
         ];
       },
       closeLine(vid, resolution) { return null; },
+      onSurfaced(vid) { favorSettleOnSurfaced(vid); },
       resolve(vid, resolution) {
         // Still open — they still remember. Otherwise the business is
         // closed: fulfilled, broken, or renounced all consume the seed.
@@ -854,6 +903,11 @@
           const favor = this.convoGetFavor(vid);
           return { wantId: 'repay', note: ((favor && favor.short) || 'the promise') + ' you made', favorId: favor && favor.id };
         }
+        // SETTLE-ON-SPEAK: the opener computed the gratitude but the
+        // no-repeat ledger blocked it — replant so the thanks fires next
+        // conversation instead of settling silently.
+        const replant = favorSettleReplant(vid);
+        if (replant) return replant;
         return null;
       },
     },
@@ -1480,11 +1534,13 @@
         return `"About ${favor.short} — have you had a chance? ${when}"`;
       }
       if (favor.state === 'fulfilled') {
-        favor.state = 'thanked';
+        const c = this.convoGet(vid);
+        if (c && c.want) { c.want.favor = favor; c.want._favorSettle = 'thanked'; }
         return `"You came through on ${favor.short}. I won't forget it."`;
       }
       if (favor.state === 'broken') {
-        favor.state = 'acknowledged';
+        const c = this.convoGet(vid);
+        if (c && c.want) { c.want.favor = favor; c.want._favorSettle = 'acknowledged'; }
         return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
       }
       if (favor.state === 'asked') {
@@ -2014,6 +2070,16 @@
         if (want.fromSeed) {
           try { delete this.state.village.convoSeeds[vid]; } catch (e) {}
         }
+        // SETTLE-ON-SPEAK (journey-succession r28 2026-10-19): the want's
+        // opener computed a favor settle (fulfilled->'thanked') but the
+        // no-repeat ledger blocked the line, so the want never surfaced.
+        // The thanks is still owed — replant the repay seed rather than
+        // dropping it silently. (The phantom-seed rule stands: only a
+        // recorded pending settle replants, never an unestablished want.)
+        try {
+          const rs = favorSettleReplant(vid);
+          if (rs) this.convoPlantSeed(vid, rs);
+        } catch (e) {}
         return;
       }
       // RESOLUTION HONESTY (convo favor system 2026-10-11): a want def may
