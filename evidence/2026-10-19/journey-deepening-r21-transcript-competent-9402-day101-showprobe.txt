@@ -1,0 +1,32 @@
+=== seed 9402 day 101 — conversation with Carlota (gen_ip542vu) ===
+occupation=Butcher temperament=warm trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "My wound needs a second pair of hands. Will you help me clean it? Seen worse."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "The Moot. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Jujube — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+YOU: [ask:fears] "What keeps you up at night?"
+THEM: "Good question." "Don't laugh. Children going quiet."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I sleep in short shifts when it gets loud in my head. Everyone's got something. That's mine."
+(want=ask_favor stage=2)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=stated

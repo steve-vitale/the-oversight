@@ -1,0 +1,32 @@
+=== seed 9404 day 93 — conversation with Amara (gen_21yukam) ===
+occupation=tattoo artist temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about that personal stuff — that was 10 days back. Still on your mind? 'Sure — what's on your mind?'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? One step at a time."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Last time things were different. They always are." "Wheel of Teeth. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "Huh. Let me think about that." "The ground giving way underfoot." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "That's where we are."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

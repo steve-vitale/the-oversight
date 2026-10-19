@@ -1,0 +1,32 @@
+=== seed 9403 day 53 — conversation with Medet (gen_fauxor3) ===
+occupation=Sailor temperament=gentle trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "If I may — Don't mind me. Today's just heavy."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Emma is gone and the world just... continues. That's the part I can't stand."
+(want=seek_comfort stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I check the treeline every hour at odd hours now. Whatever gets me to morning."
+(want=seek_comfort stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Emma's name right yet. We will. Give it a few days."
+(want=seek_comfort stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I check the treeline every hour for Emma, now. Feels right. Feels like the least I can do."
+(want=seek_comfort stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_comfort stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Emma died... I keep expecting to see Emma at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [goon] "Keep going."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=seek_comfort stage=0)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=unestablished

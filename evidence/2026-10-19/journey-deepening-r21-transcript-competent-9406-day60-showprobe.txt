@@ -1,0 +1,31 @@
+=== seed 9406 day 60 — conversation with Leo (gen_u84d02m) ===
+occupation=Veterinarian temperament=sardonic trust=90 dead=false mood=hungry
+want: repay (stage 1, fromSeed)
+
+THEM: "About the food I needed — have you had a chance? Tomorrow, then. What could go wrong."
+(turn0 choices: agency:ask_expedition, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party, confront:d_hx7obae)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different. No time to waste."
+(want=repay stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "Good. Then we're square." They look lighter for it.
+(want=repay stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Farah died... I keep expecting to see Farah at the fire. Stupid."
+(want=repay stage=2)
+YOU: [goon] "What happened next?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=repay stage=2)
+YOU: [dlg:react] "I see."
+THEM: "Well." A breath. "That's where things stand."
+(want=repay stage=2)
+YOU: [dlg:react] "Huh."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=repay stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=repay stage=2)
+YOU: [goon] "What happened next?"
+THEM: "I should get back to it."
+(want=repay stage=2)
+want final: id=repay stage=3 resolution=engaged

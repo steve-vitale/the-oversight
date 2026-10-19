@@ -1,0 +1,32 @@
+=== seed 9406 day 66 — conversation with Devon (devon_okafor) ===
+occupation=programmer temperament=anxious trust=88 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — do you have anything to eat? Anything at all? My hands shake when I try to work."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Hah. I think the asking matters more than the answer, out here."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "I haven't eaten right in days. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "They took me. Calorie Run — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same as always: we endure."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=stated

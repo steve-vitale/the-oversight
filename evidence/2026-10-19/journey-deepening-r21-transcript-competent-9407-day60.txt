@@ -1,0 +1,12 @@
+=== seed 9407 day 60 — conversation with James (gen_0148vj8) ===
+occupation=Firefighter temperament=intense trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you've hurt someone — Have you ever hurt someone? Since all this started. Give it time."
+(turn0 choices: agency:ask_expedition, ans:q_fight:a_tell, ans:q_fight:a_vague, ans:q_fight:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

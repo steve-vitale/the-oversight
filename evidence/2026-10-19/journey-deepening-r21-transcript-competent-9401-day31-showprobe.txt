@@ -1,0 +1,32 @@
+=== seed 9401 day 31 — conversation with Ray (gen_ae89dyn) ===
+occupation=musician temperament=sardonic trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: agency:ask_expedition, alive:event:show, dlg:commit, dlg:cant, dlg:subject, party_name, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took you — Beastmaster, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=2)
+YOU: [goon] "What happened next?"
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=ask_favor stage=2)
+YOU: [dlg:react] "I see."
+THEM: "Anyway." A small smile.
+(want=ask_favor stage=2)
+YOU: [dlg:react] "Huh."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "You want to know about that? Okay." "I keep a mental list of everyone who's still kind. It's longer than you'd think."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind? Not that it matters."
+(want=ask_favor stage=2)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=stated

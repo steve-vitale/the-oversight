@@ -1,0 +1,21 @@
+=== seed 9404 day 60 — conversation with Amara (gen_21yukam) ===
+occupation=tattoo artist temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "I tried the Blackberry like you showed me. Didn't poison anyone, so that's a win. Simple as that."
+(turn0 choices: alive:event:outbreak, alive:want:ask_favor, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I'm sorry — I can't shake it. I'm achy and wrung out, barely keeping food down. I need help. Please."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "Rest and clean water aren't cutting it. If this turns, I'm no good to anyone — can't haul, can't hunt, can't watch. I need someone who knows what they're doing."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "You don't know what that means to me. Thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=ask_favor stage=3 resolution=promised

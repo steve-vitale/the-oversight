@@ -1,0 +1,31 @@
+=== seed 9402 day 80 — conversation with Constanza (app_mgpsphi0679) ===
+occupation=nurse temperament=bold trust=20 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the last time you laughed — When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:a_deflect, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "Heidi is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I braid grass while listening to plans. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I'm picking up Heidi's share of the work. Someone should, and it might as well be me."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Okay — I need to move. But I'm glad we talked."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

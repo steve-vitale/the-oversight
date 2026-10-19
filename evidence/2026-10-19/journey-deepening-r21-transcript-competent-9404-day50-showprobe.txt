@@ -1,0 +1,31 @@
+=== seed 9404 day 50 — conversation with Caolan (gen_71kzomj) ===
+occupation=crossing guard temperament=stoic trust=62 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Hey — I found some American Ginseng today. You were right, it was right where you said."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, dlg:invite, dlg:more, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I'm sorry — whatever this is, it's getting worse — I'm achy and wrung out, barely keeping food down. I need help. Please."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "The fever's not breaking and I'm barely keeping food down. I need help — real help, not just water."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=3)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "They took me. The Drop — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I hum one note, over and over, when the dark comes. It passes the time. The time passes anyway."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Anyway — I should get going."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

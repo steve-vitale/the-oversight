@@ -1,0 +1,32 @@
+=== seed 9407 day 54 — conversation with Zoe (zoe_adams) ===
+occupation=journalist temperament=intense trust=78 dead=false mood=cheerful
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "You saw it too, right? The Pit. Tell me I didn't imagine the lights."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same as always: we endure."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I greet everyone by name each morning and stay ready."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [goon] "What happened next?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=2)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=stated

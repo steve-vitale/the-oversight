@@ -1,0 +1,32 @@
+=== seed 9401 day 38 — conversation with Adaeze (adaeze_nwosu) ===
+occupation=ESL teacher temperament=anxious trust=47 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Hah. I hate to ask, but do you have anything to eat? Anything at all? My hands shake when I try to work."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence, confront:d_2ncd6gq)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's been days since a real meal. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=ask_favor stage=3)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "Good question." "You're alright. I think. Ask me again in a week." "That's where we are."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Here's what it would take, if you want more than this: show up when it costs you something. That's the whole test."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I've changed my mind about people before. Usually it takes getting hurt first. You haven't hurt me yet."
+(want=ask_favor stage=3)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=promised

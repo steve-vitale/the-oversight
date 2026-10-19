@@ -1,0 +1,32 @@
+=== seed 9403 day 37 — conversation with Miles (gen_hncw4u1) ===
+occupation=locksmith temperament=restless trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Could you clean it out for me? Please."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You saw it too, right? The Blood Tithe. Tell me I didn't imagine the lights."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wake before anyone else. It passes the time. The time passes anyway."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I show up. That's my part."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=2)
+closing line: "Later! I'm already thinking about three things at once!"
+want final: id=ask_favor stage=3 resolution=stated

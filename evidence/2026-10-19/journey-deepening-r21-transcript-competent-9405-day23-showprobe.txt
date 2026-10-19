@@ -1,0 +1,32 @@
+=== seed 9405 day 23 — conversation with Marco (gen_5raw53y) ===
+occupation=hunting guide temperament=restless trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I can't shake it. I'm achy and wrung out, barely keeping food down. Will you help me?"
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Mugwort. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "Rest and clean water aren't cutting it. If this turns, I'm no good to anyone — can't haul, can't hunt, can't watch. I need someone who knows what they're doing."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "The Oath. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same weather, different day. I keep notes."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same as always: we endure."
+(want=ask_favor stage=2)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=stated

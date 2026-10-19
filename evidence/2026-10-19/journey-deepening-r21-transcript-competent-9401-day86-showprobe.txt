@@ -1,0 +1,32 @@
+=== seed 9401 day 86 — conversation with Riley (gen_3xckfpw) ===
+occupation=glazier temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your first memory — What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: agency:ask_field, ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=1)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "Mine's Columbus, Ohio, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed. — or so they tell me."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "They took you — The Vigil, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:fears] "What scares you?"
+THEM: "You want to know about that? Okay." "Waking up alone." Said flat, like something rehearsed in the dark.
+(want=curious stage=2)
+closing line: "Later! I'm already thinking about three things at once!"
+want final: id=curious stage=3 resolution=engaged

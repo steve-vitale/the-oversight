@@ -1,0 +1,32 @@
+=== seed 9402 day 62 — conversation with Yerzhan (gen_oftajwm) ===
+occupation=appliance repair tech temperament=stoic trust=54 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "He lowers the crown. That's the Rut King telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my sister, Ulzhan. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Done."
+(want=seek_taken stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Since Oliver died... I keep expecting to see Oliver at the fire. Stupid."
+(want=seek_taken stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I keep turning over the last thing Oliver said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=seek_taken stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=seek_taken stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=seek_taken stage=2)
+closing line: "Later."
+want final: id=seek_taken stage=3 resolution=engaged

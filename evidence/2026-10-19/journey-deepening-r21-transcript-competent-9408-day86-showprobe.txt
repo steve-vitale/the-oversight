@@ -1,0 +1,31 @@
+=== seed 9408 day 86 — conversation with Mara (mara_vasquez) ===
+occupation=army medic temperament=intense trust=63 dead=false mood=cheerful
+want: ask_favor (stage 0)
+
+THEM: "You told me about that kitchen — morning light, three years old. Have any other memories come back since?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. Just... be straight with me."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Makes sense to me."
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "You saw it too, right? Gauntlet. Tell me I didn't imagine the lights."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "Same as always: we endure."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=0)
+want final: id=ask_favor stage=3 resolution=unestablished

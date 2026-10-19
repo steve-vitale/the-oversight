@@ -1,0 +1,31 @@
+=== seed 9402 day 89 — conversation with Lena (lena_ruiz) ===
+occupation=ER nurse temperament=steady trust=79 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what scares you most — What scares you most about what's happening? The real answer."
+(turn0 choices: ans:q_system_fear:a_tell, ans:q_system_fear:a_vague, ans:q_system_fear:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "You saw it too, right? Hardened The Blood Tithe. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "I've got things to see to. Don't be a stranger."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

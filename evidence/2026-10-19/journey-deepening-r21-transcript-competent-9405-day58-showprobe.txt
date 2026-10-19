@@ -1,0 +1,29 @@
+=== seed 9405 day 58 — conversation with James (james_okonkwo) ===
+occupation=carpenter temperament=steady trust=76 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Marco were close. I'm sorry."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Marco said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Marco. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do push-ups at dawn for Marco, now. Feels right. Feels like the least I can do."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [goon] "What happened next?"
+THEM: "I've got things to see to. Don't be a stranger."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

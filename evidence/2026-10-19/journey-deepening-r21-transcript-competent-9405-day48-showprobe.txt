@@ -1,0 +1,18 @@
+=== seed 9405 day 48 — conversation with Carmen (gen_032jwd3) ===
+occupation=appliance repair tech temperament=dry trust=99 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about what you think happened to us — we wandered off it, 3 days back. 'That's where I keep landing too. The question is what it wants. I mean it.'"
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, invite_party, alive:event:mourning, alive:want:curious, leave, silence)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+(want=curious stage=1)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving, as it were."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Huh. I answered that once — back when the answer was simpler." "Since Joshua died... I keep expecting to see Joshua at the fire. Stupid."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Right then. Back to the business of surviving."
+want final: id=curious stage=3 resolution=engaged

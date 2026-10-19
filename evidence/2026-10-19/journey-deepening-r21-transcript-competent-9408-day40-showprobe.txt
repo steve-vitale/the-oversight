@@ -1,0 +1,29 @@
+=== seed 9408 day 40 — conversation with James (james_okonkwo) ===
+occupation=carpenter temperament=steady trust=27 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: alive:event:mourning, dlg:cant, recap, teach, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Not that it matters."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Since Rosa died... I keep expecting to see Rosa at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I keep turning over the last thing Rosa said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I sleep in short shifts for Rosa, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+YOU: [goon] "What happened next?"
+THEM: "I've got things to see to. Don't be a stranger."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

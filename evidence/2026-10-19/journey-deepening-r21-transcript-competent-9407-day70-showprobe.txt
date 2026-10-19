@@ -1,0 +1,18 @@
+=== seed 9407 day 70 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=91 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you miss most? From before. ...yeah."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. Anyway — how are YOU doing?"
+(want=curious stage=2)
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "Hot showers. Not the big things — the small, stupid, perfect things. Oslo, Norway in the morning, coffee going, nobody trying to kill me. I miss being bored."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Sorry — I asked you something there." Anyway — how are YOU doing?
+(want=curious stage=2)
+YOU: (leave)
+closing line: "This was good. We should do this more. Not the apocalypse part — the talking part."
+want final: id=curious stage=3 resolution=engaged

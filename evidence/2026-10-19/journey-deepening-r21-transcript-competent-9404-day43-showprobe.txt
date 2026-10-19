@@ -1,0 +1,29 @@
+=== seed 9404 day 43 — conversation with Somchai (somchai_prasert) ===
+occupation=bike messenger temperament=restless trust=58 dead=false mood=cold
+want: ask_favor (stage 1)
+
+THEM: "This cut — I can't clean it properly one-handed. Will you help me clean it? Anyway, that's me."
+(turn0 choices: agency:ask_expedition, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. Anyway, I should move."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=3)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "They took me. Hardened The Lottery — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I sit apart to eat. It passes the time. The time passes anyway."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Moving! But — good talk! More later!"
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,32 @@
+=== seed 9405 day 80 — conversation with Vera (gen_udz0gr5) ===
+occupation=bus driver temperament=restless trust=91 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back. We all learn."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Columbus, Ohio, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it. Gotta keep moving."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "You asked me that before. It's a different question now." "Since Carmen died... I keep expecting to see Carmen at the fire. Stupid."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Carmen were close. I'm sorry."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Has this changed you? Like, fundamentally?"
+(want=curious stage=2)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "The old you got you here. The new you keeps you here. Both count."
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

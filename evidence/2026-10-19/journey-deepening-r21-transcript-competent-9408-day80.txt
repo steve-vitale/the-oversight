@@ -1,0 +1,18 @@
+=== seed 9408 day 80 — conversation with Donnacha (gen_un30kki) ===
+occupation=Wild food forager temperament=warm trust=90 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+(turn0 choices: betrayal:accept, betrayal:decline, deflect_q, ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

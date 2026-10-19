@@ -1,0 +1,32 @@
+=== seed 9401 day 76 — conversation with Riley (gen_3xckfpw) ===
+occupation=glazier temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you left behind — Did you leave someone behind? ...Sorry. You don't have to answer that. Let's move."
+(turn0 choices: agency:ask_field, ans:q_left_behind:a_yes, ans:q_left_behind:a_unknown, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — White Mulberry. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "You saw it too, right? Who Ate It?. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I rinse the cup twice. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

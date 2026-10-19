@@ -1,0 +1,24 @@
+=== seed 9407 day 100 — conversation with Huguette (gen_zis2cdw) ===
+occupation=trail crew lead temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "I tried the Jewelweed like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: alive:event:show, alive:want:curious, dlg:invite, confront:d_cqk7k5z, dlg:more, dlg:react, leave, silence)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "When's the last time you really laughed?"
+(want=curious stage=1)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them European Hazelnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 9407 day 82 — conversation with Zoe (zoe_adams) ===
+occupation=journalist temperament=intense trust=93 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the funniest thing you've seen — Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(turn0 choices: agency:ask_field, ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Inspiration — It brightens. It hunts at night — give the dark a wide berth."
+(want=curious stage=1)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Me? I laughed yesterday and it scared me — the sound of it. Like my body remembered something my head hadn't approved. Laughter's a mutiny. A good one."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Huh. I answered that once — back when the answer was simpler." "Since Sung died... I keep expecting to see Sung at the fire. Stupid."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [goon] "What happened next?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Lemongrass — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+closing line: "We're just getting started, you and I. Remember that."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,26 @@
+=== seed 9405 day 33 — conversation with Marco (gen_5raw53y) ===
+occupation=hunting guide temperament=restless trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "We never did finish talking about that favor — that was 10 days back. Still on your mind? 'Sorry — I shouldn't load that on you. What's up?'"
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Between us — Everyone's got a take. Mine's just the one I can live with."
+(want=seek_taken stage=0)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my younger brother, Declan. Went up in the Taking. He cried when the dog died. Boring, they said. I keep his jacket. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "Okay. We'll pick this up later."
+(want=seek_taken stage=3)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=promised

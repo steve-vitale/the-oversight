@@ -1,0 +1,31 @@
+=== seed 9408 day 45 — conversation with Paul (gen_8q3aup3) ===
+occupation=Midwife temperament=earnest trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Please — I'm achy and wrung out, barely keeping food down. Will you help me? I mean it."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "I'm burning up and there's nothing left in me. Someone who knows sickness — please."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. Whatever you can do — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Sassafras — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Alright. Catch you later."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

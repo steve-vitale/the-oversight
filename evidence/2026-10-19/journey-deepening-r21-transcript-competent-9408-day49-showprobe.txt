@@ -1,0 +1,24 @@
+=== seed 9408 day 49 — conversation with Paul (gen_8q3aup3) ===
+occupation=Midwife temperament=earnest trust=91 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? At night I count the stars and name them after people. That's the whole of it."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Can I just say — Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Does anyone else know?"
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=0)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Abiu — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "I won't tell."
+THEM: "Well." A breath. "That's where things stand."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "Okay."
+THEM: "Anyway." A small smile.
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=seek_taken stage=3 resolution=unestablished

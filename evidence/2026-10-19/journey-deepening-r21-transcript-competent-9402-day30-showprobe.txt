@@ -1,0 +1,30 @@
+=== seed 9402 day 30 — conversation with Heidi (gen_oogku7j) ===
+occupation=interpreter temperament=prickly trust=69 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, dlg:subject, confront:d_c9j0sa4, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Someone should talk to Lena. Not me, though."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Someone should talk to Lena. Not me, though."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Did you hear? Ethan just walked away from Haven. Didn't look back. — anyway."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Did you hear? Ethan just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Talking helps. A little. Thank you."
+want final: id=ask_favor stage=3 resolution=stated

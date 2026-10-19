@@ -1,0 +1,32 @@
+=== seed 9404 day 26 — conversation with Amara (gen_21yukam) ===
+occupation=tattoo artist temperament=steady trust=88 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "It's quiet today. Wrong kind of quiet."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask? ...sorry."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Since Emma died... I keep expecting to see Emma at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I sleep with one ear uncovered, always at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Emma's name right yet. We will. Give it a few days."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I sleep with one ear uncovered, always for Emma, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Emma is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [goon] "What happened next?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=2)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,26 @@
+=== seed 9403 day 18 — conversation with Sarah (gen_rcyxfid) ===
+occupation=bus driver temperament=fidgety trust=23 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About what got you through the first week — What got you through the first week? The very first days. I mean it."
+(turn0 choices: agency:ask_expedition, ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Lamb's Quarters — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Yarrow — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: "Alright. Catch you later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

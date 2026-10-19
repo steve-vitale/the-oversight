@@ -1,0 +1,29 @@
+=== seed 9407 day 45 — conversation with Lucas (lucas_brown) ===
+occupation=Police officer temperament=steady trust=69 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — whatever this is, it's getting worse — I'm achy and wrung out, barely keeping food down. Will you help me? Simple as that."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. Worth considering."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "Rest and clean water aren't cutting it. If this turns, I'm no good to anyone — can't haul, can't hunt, can't watch. I need someone who knows what they're doing."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "You don't know what that means to me. Thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

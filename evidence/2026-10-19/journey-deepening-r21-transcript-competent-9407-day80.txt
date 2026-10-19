@@ -1,0 +1,32 @@
+=== seed 9407 day 80 — conversation with Huguette (gen_zis2cdw) ===
+occupation=trail crew lead temperament=steady trust=99 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "I asked Sung about needing to be alone — Sung's gone. Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: agency:ask_field, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It finds your voice in the static. Static, every time. It hunts at night — give the dark a wide berth."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Maracujá (Passion Fruit). Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Sung is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I count portions out loud before eating. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Sung. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "Thanks. I just... need some air."
+want final: id=curious stage=3 resolution=engaged

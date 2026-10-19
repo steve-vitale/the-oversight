@@ -1,0 +1,18 @@
+=== seed 9404 day 16 — conversation with Caolan (gen_71kzomj) ===
+occupation=crossing guard temperament=stoic trust=34 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the most useful thing you've learned — What's the most useful thing you've learned since we got here? Hm."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, deflect_q, leave, silence)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+(want=curious stage=2)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Here — let me show you."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 9401 day 22 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=57 dead=false mood=cheerful
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "They took me. The Informant — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same as always: we endure."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I do the small things right. The big things notice."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+YOU: [goon] "Keep going."
+THEM: "Okay. We'll pick this up later."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,21 @@
+=== seed 9408 day 77 — conversation with Mara (mara_vasquez) ===
+occupation=army medic temperament=intense trust=53 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your first memory — What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: betrayal:accept, betrayal:decline, deflect_q, ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Sassafras — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't forget what we talked about. I won't."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,30 @@
+=== seed 9401 day 47 — conversation with Adaeze (adaeze_nwosu) ===
+occupation=ESL teacher temperament=anxious trust=46 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? Before the scattering, I said something cruel. I think about it every day."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence, confront:d_2ncd6gq)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Ji is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I greet everyone by name each morning at odd hours now. Whatever gets me to morning."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Ji. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

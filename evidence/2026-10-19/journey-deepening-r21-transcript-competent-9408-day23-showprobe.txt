@@ -1,0 +1,32 @@
+=== seed 9408 day 23 — conversation with Nora (nora_wilson) ===
+occupation=tailor temperament=gentle trust=26 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your read on people here — Got a read on anyone here yet? Who should I be watching? It'll keep."
+(turn0 choices: deflect_q, ans:q_read:a_honest, ans:q_read:a_name, ans:q_read:a_none, ans:q_read:honest_pass, leave, silence)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "They took me. The Informant — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I save the best bite for last. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

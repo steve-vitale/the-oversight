@@ -1,0 +1,27 @@
+=== seed 9407 day 68 — conversation with James (gen_0148vj8) ===
+occupation=Firefighter temperament=intense trust=89 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You told me yes, once. No details. I haven't forgotten. I just don't ask."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, alive:event:show, alive:want:curious, dlg:invite, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lemongrass. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — European Hazelnut. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+(want=curious stage=1)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

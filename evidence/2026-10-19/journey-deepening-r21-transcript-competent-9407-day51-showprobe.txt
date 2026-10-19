@@ -1,0 +1,32 @@
+=== seed 9407 day 51 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=65 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "I was a veterinarian — fun was whatever I could steal between shifts. Now fun is watching the fire and not being afraid. It's a downgrade and an upgrade."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "They took me. Who Ate It? — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Listen — Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I oil boots on rest days. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

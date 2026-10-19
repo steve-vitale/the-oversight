@@ -1,0 +1,29 @@
+=== seed 9401 day 45 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=48 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you ever just need to be alone? Like, really alone? Let's move."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Ji died... I keep expecting to see Ji at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Ji said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Ji's name right yet. We will. Give it a few days."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wake before anyone else for Ji, now. Feels right. Feels like the least I can do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [goon] "What happened next?"
+THEM: "I wish we had longer. Soon, yeah?"
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,27 @@
+=== seed 9408 day 58 — conversation with Donnacha (gen_un30kki) ===
+occupation=Wild food forager temperament=warm trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Donnacha sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence, confront:d_vt80s41)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Anh were close. I'm sorry."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "Sleep's gone strange. I count portions out loud before eating at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody says Anh's name right yet. We will. Give it a few days."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm picking up Anh's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=unestablished
