@@ -1,0 +1,31 @@
+=== seed 9301 day 31 — conversation with Victor (victor_lopez) ===
+occupation=mason temperament=steady trust=54 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Mexico City, Mexico, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "You saw it too, right? Duel. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I tend the fire without being asked. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "I should go. You know where to find me."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

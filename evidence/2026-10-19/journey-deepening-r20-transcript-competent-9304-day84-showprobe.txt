@@ -1,0 +1,21 @@
+=== seed 9304 day 84 — conversation with Hassan (hassan_ali) ===
+occupation=Butcher temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're staying — Are you going to stay? With us. For real. That's where we are."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_stay:a_tell, ans:q_stay:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Lily of the Valley — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talking. We'll figure it out."
+want final: id=curious stage=3 resolution=engaged

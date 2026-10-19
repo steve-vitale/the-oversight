@@ -1,0 +1,26 @@
+=== seed 9301 day 74 — conversation with Sigrun (sigrun_eiriksdottir) ===
+occupation=night security guard temperament=withdrawn trust=73 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Hey — I found some Hickory Nuts today. You were right, it was right where you said."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, dlg:invite, dlg:more, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "This cut — I can't clean it properly one-handed. Could you take a look?"
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [goon] "And?"
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

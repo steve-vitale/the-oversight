@@ -1,0 +1,21 @@
+=== seed 9303 day 60 — conversation with DeShawn (gen_x9gcn4d) ===
+occupation=Fisherman temperament=prickly trust=88 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? Before the scattering, I said something cruel. I think about it every day."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Look. Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Why are you telling me this?"
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "...Wow."
+THEM: "Well." A breath. "That's where things stand."
+(want=seek_taken stage=0)
+YOU: [dlg:react] "I won't tell."
+THEM: "Anyway." A small smile.
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "That's enough sharing for one day. Maybe one week."
+want final: id=seek_taken stage=3 resolution=unestablished

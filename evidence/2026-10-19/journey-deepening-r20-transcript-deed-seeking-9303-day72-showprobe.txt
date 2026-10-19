@@ -1,0 +1,27 @@
+=== seed 9303 day 72 — conversation with Pavel (pavel_dubinin) ===
+occupation=bush pilot temperament=dry trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, dlg:commit, dlg:cant, teach, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "Huh. I answered that once — back when the answer was simpler." "They took me. Lie Detector — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I clean up other people's messes quietly and stay ready."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,31 @@
+=== seed 9301 day 18 — conversation with Erich (gen_ju16pgs) ===
+occupation=Rancher temperament=intense trust=48 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: Every group I've been in, someone had to be the adult. Guess it's me again.
+(turn0 choices: agency:ask_expedition, ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Leadership is mostly listening, then deciding. People forget the listening part."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Since Marisol died... I keep expecting to see Marisol at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I sleep in short shifts. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Marisol. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Marisol's share of the work. Someone should, and it might as well be me."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's enough for now. It'll percolate."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,21 @@
+=== seed 9302 day 31 — conversation with Jesse (jesse_cortez) ===
+occupation=line cook temperament=withdrawn trust=44 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_left_behind:a_yes, ans:q_left_behind:a_unknown, deflect_q, leave, silence)
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Burdock — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "...I'm going to go be quiet somewhere else now."
+want final: id=curious stage=3 resolution=engaged

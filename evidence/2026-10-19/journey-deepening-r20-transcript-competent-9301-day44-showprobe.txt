@@ -1,0 +1,32 @@
+=== seed 9301 day 44 — conversation with Addison (gen_ihr70a7) ===
+occupation=lawyer temperament=earnest trust=90 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "It's quiet today. Wrong kind of quiet. I hope that helps."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "Since Sigrun died... I keep expecting to see Sigrun at the fire. Stupid."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? I mean it."
+(want=ask_favor stage=0)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "Don't laugh. Being the last one awake."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "When it gets bad, I sleep with one ear uncovered, always. It doesn't help, exactly. It gives my hands something to do while my head catches up."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "Some fears you outgrow. This one grew up with me."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I'd survive it. I've survived everything else so far, haven't I?"
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+closing line: "Sorry. I need a minute."
+want final: id=ask_favor stage=3 resolution=unestablished

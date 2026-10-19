@@ -1,0 +1,26 @@
+=== seed 9301 day 60 — conversation with Sigrun (sigrun_eiriksdottir) ===
+occupation=night security guard temperament=withdrawn trust=52 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone? It'll pass."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "Yeah — I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Spicebush — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

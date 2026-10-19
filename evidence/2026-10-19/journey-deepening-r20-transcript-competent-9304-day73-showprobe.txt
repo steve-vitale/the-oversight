@@ -1,0 +1,31 @@
+=== seed 9304 day 73 — conversation with Boris (boris_kowalski) ===
+occupation=blacksmith temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+(turn0 choices: ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I don't distrust anyone exactly — I just haven't finished trusting most of them yet. There's a difference. A slow one."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "Last time things were different. They always are." "They took me. Duel — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=curious stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

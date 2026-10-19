@@ -1,0 +1,31 @@
+=== seed 9301 day 99 — conversation with Sigrun (sigrun_eiriksdottir) ===
+occupation=night security guard temperament=withdrawn trust=80 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you've hurt someone — Have you ever hurt someone? Since all this started. ...never mind."
+(turn0 choices: ans:q_fight:a_tell, ans:q_fight:a_vague, ans:q_fight:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "You asked me that before. It's a different question now." "You saw it too, right? Siege. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Addison is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "You want to know about that? Okay." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "People here talk. What they say about you when you're not at the fire — that's the real answer to your question."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "...I need to go be quiet for a while."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

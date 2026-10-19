@@ -1,0 +1,32 @@
+=== seed 9304 day 56 — conversation with Ivy (ivy_wang) ===
+occupation=journalist temperament=cautious trust=61 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "I haven't eaten right in days. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Since Sarah died... I keep expecting to see Sarah at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Sarah said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=stated

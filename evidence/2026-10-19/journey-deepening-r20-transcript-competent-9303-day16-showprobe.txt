@@ -1,0 +1,32 @@
+=== seed 9303 day 16 — conversation with Walt (gen_2aoni9w) ===
+occupation=sign painter temperament=warm trust=36 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "The pantry's nearly bare. Forage with me tomorrow? I know the creek bend, past the treeline."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "Another day like today and we're choosing who eats. I know the creek bend, past the treeline — come with me and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "Rebecca is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I greet everyone by name each morning. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Rebecca. The rest of us will have to be bigger."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm picking up Rebecca's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+closing line: "I should get back to it — but this was nice."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,29 @@
+=== seed 9304 day 52 — conversation with Desmond (desmond_clarke) ===
+occupation=sign painter temperament=restless trust=43 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+(turn0 choices: agency:ask_expedition, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Sarah is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I clean up other people's messes quietly at odd hours now. Whatever gets me to morning."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Sarah's name right yet. We will. Give it a few days."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Sarah's share of the work. Someone should, and it might as well be me."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [goon] "What happened next?"
+THEM: "Okay I really have to move now or I'll explode — talk soon!"
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

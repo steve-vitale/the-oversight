@@ -1,0 +1,26 @@
+=== seed 9301 day 60 — conversation with Ethan (ethan_hunt) ===
+occupation=trail crew lead temperament=bold trust=22 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the sickness I'm fighting — I hate to ask twice, but it's still open. Will you? That's the truth of it."
+(turn0 choices: alive:event:tension, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. Whatever you can do — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "And?"
+THEM: They relax, a fraction. This is going well.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=3)
+YOU: [goon] "And?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [goon] "And?"
+THEM: "Right. Action time. You know where to find me."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,29 @@
+=== seed 9301 day 80 — conversation with Sigrun (sigrun_eiriksdottir) ===
+occupation=night security guard temperament=withdrawn trust=70 dead=false mood=grieving
+want: repay (stage 1, fromSeed)
+
+THEM: "You said you'd help with this wound. ...It's done now. Forget it. Doesn't matter now."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:thread:taughtref, dlg:cant, dlg:help, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "Good. Then we're square." They look lighter for it.
+(want=repay stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Aki is gone and the world just... continues. That's the part I can't stand."
+(want=repay stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I rinse the cup twice at odd hours now. Whatever gets me to morning."
+(want=repay stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Aki. The rest of us will have to be bigger."
+(want=repay stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=repay stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=repay stage=2)
+YOU: [goon] "And then?"
+THEM: "Alright — I should get back to it."
+(want=repay stage=2)
+YOU: (leave)
+want final: id=repay stage=3 resolution=engaged

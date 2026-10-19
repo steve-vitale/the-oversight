@@ -1,0 +1,32 @@
+=== seed 9302 day 57 — conversation with Aki (aki_tanaka) ===
+occupation=Fisherman temperament=prickly trust=90 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+(turn0 choices: agency:ask_field, ans:q_read:a_honest, ans:q_read:a_name, ans:q_read:a_none, ans:q_read:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You saw it too, right? The Pit. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+closing line: "That's enough talking for me."
+want final: id=curious stage=3 resolution=engaged

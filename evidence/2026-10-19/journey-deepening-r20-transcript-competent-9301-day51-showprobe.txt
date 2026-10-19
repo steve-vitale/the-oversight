@@ -1,0 +1,32 @@
+=== seed 9301 day 51 — conversation with Victor (victor_lopez) ===
+occupation=mason temperament=steady trust=85 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "I was a mason — fun was whatever I could steal between shifts. Now fun is watching the fire and not being afraid. It's a downgrade and an upgrade."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took me. The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

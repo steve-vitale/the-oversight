@@ -1,0 +1,29 @@
+=== seed 9301 day 68 — conversation with Aki (aki_tanaka) ===
+occupation=Fisherman temperament=prickly trust=90 dead=false mood=cheerful
+want: curious (stage 0)
+
+THEM: "Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop."
+(turn0 choices: agency:ask_expedition, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party, confront:d_gsrqo9i)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Erich died... I keep expecting to see Erich at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I check the treeline every hour at odd hours now. Whatever gets me to morning."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I've got things to do. People to avoid. You know."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

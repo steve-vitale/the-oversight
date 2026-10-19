@@ -1,0 +1,24 @@
+=== seed 9302 day 88 — conversation with Vikram (gen_augdfo8) ===
+occupation=glazier temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: You told me you're from Columbus, Ohio. Do you think about it much?
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Last time things were different. They always are." "They took you — The Iron Pantry, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "File that under 'productive.' Loosely defined."
+want final: id=curious stage=3 resolution=engaged

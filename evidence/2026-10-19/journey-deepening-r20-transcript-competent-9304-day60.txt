@@ -1,0 +1,15 @@
+=== seed 9304 day 60 — conversation with Darius (gen_cvwq5zs) ===
+occupation=lifeguard temperament=anxious trust=91 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lily of the Valley. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

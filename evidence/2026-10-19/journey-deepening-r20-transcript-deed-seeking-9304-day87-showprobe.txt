@@ -1,0 +1,31 @@
+=== seed 9304 day 87 — conversation with Betty (gen_5rlcut8) ===
+occupation=Veterinarian temperament=fidgety trust=91 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. Simple as that."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, dlg:help, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my grandfather, David. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=3)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Makhana (Fox Nut) — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Doum Palm — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "Last time things were different. They always are." "Since Finn died... I keep expecting to see Finn at the fire. Stupid."
+(want=seek_taken stage=3)
+YOU: [goon] "Go on."
+THEM: "I should get back to it."
+(want=seek_taken stage=3)
+want final: id=seek_taken stage=3 resolution=promised

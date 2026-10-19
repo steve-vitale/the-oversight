@@ -1,0 +1,31 @@
+=== seed 9303 day 25 — conversation with Pavel (pavel_dubinin) ===
+occupation=bush pilot temperament=dry trust=43 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? At night I count the stars and name them after people."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "They took me. The Wrong Map — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same as always: we endure."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I clean up other people's messes quietly and stay ready."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Well. My social battery is officially dead."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

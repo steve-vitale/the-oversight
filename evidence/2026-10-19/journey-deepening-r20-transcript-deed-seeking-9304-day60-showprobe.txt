@@ -1,0 +1,32 @@
+=== seed 9304 day 60 — conversation with Darius (gen_cvwq5zs) ===
+occupation=lifeguard temperament=anxious trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: agency:ask_expedition, alive:event:show, alive:thread:you, dlg:commit, dlg:cant, dlg:help, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "Still nothing on Erich. I told you about the pods -- I keep thinking about them. The humming. Some nights I'm sure it's a dream. Other nights I'm sure it's not."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=seek_taken stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=3)
+YOU: [ask:fears] "What's the thing you don't say out loud?"
+THEM: "Huh. Let me think about that." "Being the reason someone dies." A pause. "Stupid, maybe. But there it is."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "When it gets bad, I count portions out loud before eating. It doesn't help, exactly. It gives my hands something to do while my head catches up."
+(want=seek_taken stage=3)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=seek_taken stage=3 resolution=promised

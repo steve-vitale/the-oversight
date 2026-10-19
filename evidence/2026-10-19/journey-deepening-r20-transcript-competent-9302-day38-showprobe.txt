@@ -1,0 +1,32 @@
+=== seed 9302 day 38 — conversation with Clarence (gen_rh3uqkt) ===
+occupation=Sailor temperament=mischievous trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — tell me you've got food to spare. I'm running on empty here. My hands shake when I try to work."
+(turn0 choices: agency:ask_expedition, alive:event:show, alive:want:ask_favor, dlg:help, dlg:cant, teach, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=3)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "The Box. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same as always: we endure."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=3)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,31 @@
+=== seed 9301 day 66 — conversation with Addison (gen_ihr70a7) ===
+occupation=lawyer temperament=earnest trust=84 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can we talk?" Addison sits down near you. "Just... talk. Like people used to."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Esteban is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I sleep with one ear uncovered, always at odd hours now. Whatever gets me to morning."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Esteban. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Alright — I should get back to it."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

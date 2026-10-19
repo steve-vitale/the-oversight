@@ -1,0 +1,31 @@
+=== seed 9304 day 67 — conversation with Boris (boris_kowalski) ===
+occupation=blacksmith temperament=steady trust=88 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Oh — Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Simple as that."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "They took me. The Auction — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same weather, different day. I keep notes."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "We'll see what the treeline brings. We always do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I show up. That's my part."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I've got things to see to. Don't be a stranger."
+(want=ask_favor stage=2)
+want final: id=ask_favor stage=3 resolution=stated

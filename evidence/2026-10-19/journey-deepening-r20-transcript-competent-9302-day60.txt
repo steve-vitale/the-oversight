@@ -1,0 +1,24 @@
+=== seed 9302 day 60 — conversation with Clarence (gen_rh3uqkt) ===
+occupation=Sailor temperament=mischievous trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: agency:ask_expedition, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my aunt, Jessica. Went in the Taking. She laughed like a screen door in a windstorm. Boring. Right. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them European Hazelnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=seek_taken stage=3 resolution=promised

@@ -1,0 +1,18 @@
+=== seed 9302 day 69 — conversation with Nadia (nadia_khoury) ===
+occupation=radio DJ temperament=warm trust=70 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you believe in — Do you believe in anything? Now, I mean. After everything. Simple as that."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Burdock — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

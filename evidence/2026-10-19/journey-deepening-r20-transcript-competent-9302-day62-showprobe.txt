@@ -1,0 +1,15 @@
+=== seed 9302 day 62 — conversation with Clarence (gen_rh3uqkt) ===
+occupation=Sailor temperament=mischievous trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about whether you've hurt someone — we wandered off it, 2 days back. 'Wait, wait — I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and…' It'll be fun, probably."
+(turn0 choices: agency:ask_expedition, invite_party, alive:event:show, alive:thread:lately, alive:want:curious, skill_learn:weather_read, leave, silence)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What's the kindest thing someone's done for you out here?"
+(want=curious stage=1)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "Oh! That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

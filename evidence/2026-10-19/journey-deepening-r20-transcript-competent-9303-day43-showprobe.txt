@@ -1,0 +1,32 @@
+=== seed 9303 day 43 — conversation with DeShawn (gen_x9gcn4d) ===
+occupation=Fisherman temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the kindest thing someone's done for you — What's the kindest thing someone's done for you out here?"
+(turn0 choices: agency:ask_field, ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Shea. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Someone saved me the last of the stew once. Didn't say anything, just put the bowl down and walked off. I think about that bowl more than I think about the monsters."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "They took me. Who Ate It? — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

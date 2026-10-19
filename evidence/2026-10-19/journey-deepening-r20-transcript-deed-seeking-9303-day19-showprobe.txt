@@ -1,0 +1,31 @@
+=== seed 9303 day 19 — conversation with Valentina (gen_kmpwrm1) ===
+occupation=florist temperament=gentle trust=33 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "It's quiet today. Wrong kind of quiet."
+(turn0 choices: agency:ask_expedition, dlg:invite, dlg:comfort, dlg:empathize, dlg:askwhy, recap, leave, silence)
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Hah. Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Real talk — Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "I — yeah. It helps, hearing that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Go on, then. I'll be thinking good thoughts at you."
+(want=seek_comfort stage=2)
+want final: id=seek_comfort stage=3 resolution=engaged

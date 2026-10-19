@@ -1,0 +1,32 @@
+=== seed 9301 day 63 — conversation with Addison (gen_ihr70a7) ===
+occupation=lawyer temperament=earnest trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "You said there's someone you don't trust. You never said who. Do you trust them any more now?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Permit me: Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I asked Marisol about this wound — Marisol's gone. Still need hands. Are you in?"
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=3)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "The Vigil. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=3)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=ask_favor stage=3 resolution=promised

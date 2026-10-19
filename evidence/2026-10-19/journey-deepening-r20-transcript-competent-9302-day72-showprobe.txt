@@ -1,0 +1,32 @@
+=== seed 9302 day 72 — conversation with Vikram (gen_augdfo8) ===
+occupation=glazier temperament=dry trust=90 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "I asked Eric about where you're from — Eric's gone. Where are you from — originally? Before all this."
+(turn0 choices: ans:q_origin:a_tell, ans:q_origin:a_vague, ans:q_origin:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: The conversation cools to something businesslike.
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Now then — Me? Columbus, Ohio. I still dream in its weather — rain on a tin roof, that specific smell. I wake up here and for a second I'm furious at the sky for the swap."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Since Eric died... I keep expecting to see Eric at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I pace while thinking. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody says Eric's name right yet. We will. Give it a few days."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=curious stage=3 resolution=engaged

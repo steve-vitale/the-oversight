@@ -1,0 +1,31 @@
+=== seed 9302 day 23 — conversation with Moraa (gen_6xdqh73) ===
+occupation=Baker temperament=dry trust=40 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Tell you what — Can I tell you something? I know who took the extra rations but won't say."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting. You know?"
+(want=curious stage=2)
+YOU: [dlg:more] "Why are you telling me this?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "They took me. The Tide Clock — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "And... scene. Good talk."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

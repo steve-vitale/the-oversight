@@ -1,0 +1,31 @@
+=== seed 9301 day 25 — conversation with Addison (gen_ihr70a7) ===
+occupation=lawyer temperament=earnest trust=59 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "...Hi. Sorry. I'm not good at the talking-to-strangers part."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_quiet:a_kind, ans:q_quiet:a_help, ans:q_quiet:a_leave, deflect_q, leave, silence)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Last time things were different. They always are." "Marisol is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Anyway — I should get going."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

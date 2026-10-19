@@ -1,0 +1,32 @@
+=== seed 9302 day 55 — conversation with Vikram (gen_augdfo8) ===
+occupation=glazier temperament=dry trust=90 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About your read on people here — Got a read on anyone here yet? Who should I be watching?"
+(turn0 choices: ans:q_read:a_honest, ans:q_read:a_name, ans:q_read:a_none, ans:q_read:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving…"
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: The conversation cools to something businesslike.
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters. ...sorry."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Eric is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Eric said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Eric. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I pace while thinking for Eric, now. Feels right. Feels like the least I can do."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "Thanks. I just... need some air."
+want final: id=curious stage=3 resolution=engaged

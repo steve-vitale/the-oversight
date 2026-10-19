@@ -1,0 +1,31 @@
+=== seed 9303 day 29 — conversation with Carmen (gen_ssfxb6x) ===
+occupation=Dentist temperament=earnest trust=43 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About what got you through the first week — What got you through the first week? The very first days. That's my read."
+(turn0 choices: ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "Spite, mostly. Pure, clean spite at the sky. Then someone shared food with me and the spite turned into something else. I still don't have a word for the something else."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You saw it too, right? Hardened The Wrong Map. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I should get back to it."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

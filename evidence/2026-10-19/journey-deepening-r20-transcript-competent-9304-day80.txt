@@ -1,0 +1,31 @@
+=== seed 9304 day 80 — conversation with Betty (gen_5rlcut8) ===
+occupation=Veterinarian temperament=fidgety trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Why are you telling me this?"
+THEM: "That's the whole of it. Sorry."
+(want=seek_taken stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Finn died... I keep expecting to see Finn at the fire. Stupid."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "I write everything down. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Finn. The rest of us will have to be bigger."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Finn's share of the work. Someone should, and it might as well be me."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=seek_taken stage=0)
+YOU: [goon] "Go on."
+THEM: "I should go. You know where to find me."
+(want=seek_taken stage=0)
+want final: id=seek_taken stage=3 resolution=unestablished

@@ -1,0 +1,26 @@
+=== seed 9304 day 79 — conversation with Nino (nino_kapanadze) ===
+occupation=dry cleaner temperament=prickly trust=64 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I still haven't found anyone. Any chance?"
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, dlg:commit, dlg:cant, teach, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Good — The staghorn sumac patch past the treeline, before the heat sets in. Bring your pack and your knife."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You saw it too, right? Windfall. Tell me I didn't imagine the lights."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

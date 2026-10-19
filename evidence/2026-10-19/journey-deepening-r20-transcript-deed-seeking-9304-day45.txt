@@ -1,0 +1,26 @@
+=== seed 9304 day 45 — conversation with Finn (gen_ybg0zeg) ===
+occupation=army medic temperament=prickly trust=90 dead=false mood=hungry
+want: curious (stage 0, fromSeed)
+
+THEM: Someone has to make decisions here. I'm just saying — it might as well be someone who knows how.
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "If I don't step up, someone worse will. That's not ambition, that's arithmetic."
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Leadership is mostly listening, then deciding. People forget the listening part."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I don't need to be followed. I need us to not wander in circles."
+(want=curious stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "I watch how people look at you. Some of them are waiting for an alternative. I'm just saying."
+(want=curious stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I've got things to do. People to avoid. You know."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,31 @@
+=== seed 9301 day 21 — conversation with Victor (victor_lopez) ===
+occupation=mason temperament=steady trust=36 dead=false mood=steady
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — Have you heard? No? Good, I get to tell you first."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=share_news stage=1)
+YOU: [dlg:more] "Go on."
+THEM: "Okay, so — Maeve. that stray dog — the one that bit two people — lets Maeve touch it. Don't say I told you."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's everything I've got. You know as much as I do now."
+(want=share_news stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=share_news stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You saw it too, right? The Tide Clock. Tell me I didn't imagine the lights."
+(want=share_news stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I tend the fire without being asked. It passes the time. The time passes anyway."
+(want=share_news stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Okay. We'll pick this up later."
+(want=share_news stage=2)
+want final: id=share_news stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 9303 day 89 — conversation with Ruby (ruby_callaghan) ===
+occupation=lifeguard temperament=bold trust=90 dead=false mood=grieving
+want: curious (stage 0, fromSeed)
+
+THEM: "Here's the thing: Have you — sorry. I keep thinking about them."
+(turn0 choices: agency:ask_field, ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Bulldozer — Lowers its head, paws the earth. It hunts by day — watch the open ground."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Stinging Nettle. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. ...sorry."
+(want=curious stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Why do you ask? I — yeah. It helps, hearing that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask? That's the truth of it."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "Daniel is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Daniel said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=curious stage=3 resolution=engaged

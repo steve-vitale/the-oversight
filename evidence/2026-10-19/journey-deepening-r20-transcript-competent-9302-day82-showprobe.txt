@@ -1,0 +1,32 @@
+=== seed 9302 day 82 — conversation with Nadia (nadia_khoury) ===
+occupation=radio DJ temperament=warm trust=80 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? At night I cry quietly so no one hears. You doing okay?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Tell you what — Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [dlg:more] "Does anyone else know?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Since Eric died... I keep expecting to see Eric at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Eric said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody says Eric's name right yet. We will. Give it a few days."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I taste the water before the others drink for Eric, now. Feels right. Feels like the least I can do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+closing line: "This was good. We should do this more. Not the apocalypse part — the talking part."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,24 @@
+=== seed 9303 day 80 — conversation with DeShawn (gen_x9gcn4d) ===
+occupation=Fisherman temperament=prickly trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Hey — I found some Wood Sorrel today. You were right, it was right where you said."
+(turn0 choices: alive:event:show, dlg:more, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "They took you — The Maw, on the screens. The whole fire watched. Nobody knew where to look."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Did you hear? Miguel just walked away from Haven. Didn't look back."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Later."
+want final: id=seek_taken stage=3 resolution=unestablished

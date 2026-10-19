@@ -1,0 +1,29 @@
+=== seed 9303 day 40 — conversation with Benoit (benoit_lambert) ===
+occupation=Baker temperament=prickly trust=47 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Teach me something. Anything you know that I don't. That's my read."
+(turn0 choices: ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "Okay — here's one small useful thing I know. Watch."
+THEM: They watch, intent, then try it themselves. "Huh. That actually works." A grin — student and teacher trade places for a minute.
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "Here's what I think — Here's one: making do. Watch — no, like this. See? Your hands learn faster than your head. They always do."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "You saw it too, right? Bring Us Something Interesting. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I sleep in short shifts. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Right. Done. Don't look so relieved."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

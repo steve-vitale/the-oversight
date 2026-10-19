@@ -1,0 +1,32 @@
+=== seed 9301 day 23 — conversation with Addison (gen_ihr70a7) ===
+occupation=lawyer temperament=earnest trust=48 dead=false mood=steady
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — You'll never guess what I saw by the treeline, as it were."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:want:share_news, dlg:invite, dlg:more, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+(want=share_news stage=2)
+YOU: [dlg:more] "What happened?"
+THEM: "Okay, so — Maeve. that stray dog — the one that bit two people — lets Maeve touch it. Don't say I told you."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody's saying it out loud, but everyone's thinking about Marisol. The quiet ones worst."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "2 people are going hungry and acting like it's fine. It's not fine."
+(want=share_news stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's everything I've got. You know as much as I do now."
+(want=share_news stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Marisol died... I keep expecting to see Marisol at the fire. Stupid."
+(want=share_news stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Marisol said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=share_news stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Marisol. The rest of us will have to be bigger."
+(want=share_news stage=2)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=share_news stage=3 resolution=engaged

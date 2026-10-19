@@ -1,0 +1,31 @@
+=== seed 9301 day 39 — conversation with Victor (victor_lopez) ===
+occupation=mason temperament=steady trust=57 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? I'm practicing what I would say if I ever saw my family again. I haven't told anyone."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=curious stage=2)
+YOU: [dlg:more] "Does anyone else know?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "You saw it too, right? Pantry Raid. Tell me I didn't imagine the lights."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Alright — I should get back to it."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

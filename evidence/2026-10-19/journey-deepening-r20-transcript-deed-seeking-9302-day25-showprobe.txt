@@ -1,0 +1,29 @@
+=== seed 9302 day 25 — conversation with Jesse (jesse_cortez) ===
+occupation=line cook temperament=withdrawn trust=39 dead=false mood=steady
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway. ...sorry, lost it."
+(turn0 choices: alive:event:show, alive:want:ask_favor, dlg:help, dlg:cant, recap, teach, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's handled. Really — it is. I appreciate you asking, though."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "You saw it too, right? Bring Us Something Interesting. Tell me I didn't imagine the lights."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same weather, different day. I keep notes."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

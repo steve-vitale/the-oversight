@@ -1,0 +1,26 @@
+=== seed 9304 day 21 — conversation with Desmond (desmond_clarke) ===
+occupation=sign painter temperament=restless trust=26 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: "I keep having this image — us, years from now, laughing about this. I want it to be true."
+(turn0 choices: ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "I can help — Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [dlg:more] "Mmhm."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Carmela is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Carmela said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Moving! But — good talk! More later!"
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

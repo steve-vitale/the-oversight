@@ -1,0 +1,32 @@
+=== seed 9302 day 60 — conversation with Clarence (gen_rh3uqkt) ===
+occupation=Sailor temperament=mischievous trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Have you ever hurt someone? Since all this started."
+(turn0 choices: agency:ask_expedition, ans:q_fight:a_tell, ans:q_fight:a_vague, ans:q_fight:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Wait, wait — I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Huh. I answered that once — back when the answer was simpler." "The Maw. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Just... be straight with me."
+(want=curious stage=2)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "Good question." "Losing another one." A pause. "Stupid, maybe. But there it is."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Names every tool — that's what I do when the fear gets loud. You've probably noticed."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "It's worse since the scattering. Before, losing another one was... theoretical. Now it has a schedule."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I'd survive it. I've survived everything else so far, haven't I?"
+(want=curious stage=2)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

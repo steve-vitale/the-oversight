@@ -1,0 +1,27 @@
+=== seed 9301 day 80 — conversation with Addison (gen_ihr70a7) ===
+occupation=lawyer temperament=earnest trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "You look handy. What did you do with your hands, before?"
+(turn0 choices: ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "If I may — Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Can I be honest? These hands? Lawyer hands. Clipboards, mostly. Now they hold wire and wood, and they learn fast. Hands are honest that way."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "The Long Odds. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

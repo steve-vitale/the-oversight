@@ -1,0 +1,20 @@
+=== seed 9304 day 23 — conversation with Finn (gen_ybg0zeg) ===
+occupation=army medic temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about what you miss most — we wandered off it, 4 days back. 'God. Yes. I dream about soup. Actual soup, with a spoon.'"
+(turn0 choices: betrayal:accept, betrayal:decline, invite_party, alive:event:mourning, alive:want:curious, teach, leave, silence)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What scares you most about what's happening? The real answer."
+(want=curious stage=1)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "You asked me that before. It's a different question now." "Carmela is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Alright — I should get back to it."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

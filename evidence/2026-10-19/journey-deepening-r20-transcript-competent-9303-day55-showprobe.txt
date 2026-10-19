@@ -1,0 +1,32 @@
+=== seed 9303 day 55 — conversation with DeShawn (gen_x9gcn4d) ===
+occupation=Fisherman temperament=prickly trust=90 dead=false mood=cheerful
+want: repay (stage 1, fromSeed)
+
+THEM: "You said you'd help with this wound. ...It's done now. Forget it. Just... be straight with me."
+(turn0 choices: alive:event:show, alive:want:repay, dlg:react, dlg:cant, dlg:help, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=repay stage=1)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "Huh. I answered that once — back when the answer was simpler." "The Alibi Chain. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=repay stage=1)
+YOU: [goon] "Go on."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=repay stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Something's off with Pavel. I mentioned it to the others and they went quiet, which tells you everything."
+(want=repay stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=repay stage=1)
+YOU: [ask:you] "What do you want me to know about you?"
+THEM: "Huh. Let me think about that." "You're family now. Chosen family — the kind that actually counts." "There. You wanted honest."
+(want=repay stage=1)
+YOU: [dlg:more] "Go on."
+THEM: "Here's what it would take, if you want more than this: show up when it costs you something. That's the whole test."
+(want=repay stage=1)
+closing line: "Good talk."
+want final: id=repay stage=3 resolution=unresolved
