@@ -1,0 +1,162 @@
+{
+ "seed": 9424,
+ "side": "on",
+ "policy": "leadfeast",
+ "days": 108,
+ "endReason": "village-lost",
+ "env": {
+  "feastscale": "1",
+  "seatdrive": "0",
+  "pitknowledge": "unset"
+ },
+ "day0": {
+  "scholarOcc": "butcher",
+  "scholarPit": 0,
+  "scholarPitVia": null,
+  "holders": [
+   {
+    "vid": "gen_v1ggavq",
+    "name": "A person, maybe 50s",
+    "occ": "rancher",
+    "source": "background"
+   },
+   {
+    "vid": "gen_8kvbn5j",
+    "name": "A man, maybe 60s, with thick glasses",
+    "occ": "trail_crew",
+    "source": "background"
+   }
+  ]
+ },
+ "grants": [
+  {
+   "day": 10,
+   "level": 1,
+   "via": "taught",
+   "by": "Sizwe"
+  }
+ ],
+ "scholarPitFirst": null,
+ "firings": {
+  "teaches": 1,
+  "overhears": 0,
+  "lessons": 0,
+  "catches": 4,
+  "trapReturns": 25
+ },
+ "pit": {
+  "catches": 4,
+  "kcal": 3260,
+  "kcalPer100d": 3018.5,
+  "boar": 3,
+  "boarKcal": 2277,
+  "boarShare": 75,
+  "avgBoarKcal": 759,
+  "species": {
+   "wild_boar": 3,
+   "white_tailed_deer": 1
+  }
+ },
+ "teachers": [
+  {
+   "day": 10,
+   "teacher": "Sizwe",
+   "tocc": "trail_crew",
+   "trust": 36
+  }
+ ],
+ "overhears": [],
+ "lessons": [],
+ "books": {
+  "readCalls": 0,
+  "handbookSurfaced": 0,
+  "handbookDays": []
+ },
+ "holderDeaths": [
+  {
+   "name": "A person, maybe 50s",
+   "occ": "rancher",
+   "day": 49,
+   "cause": "combat",
+   "bucket": "violence"
+  },
+  {
+   "name": "A man, maybe 60s, with thick glasses",
+   "occ": "trail_crew",
+   "day": 75,
+   "cause": "combat",
+   "bucket": "violence"
+  }
+ ],
+ "snaps": [
+  {
+   "day": 30,
+   "holders": [
+    {
+     "vid": "gen_v1ggavq",
+     "name": "Tomas",
+     "occ": "rancher",
+     "source": "background",
+     "dead": false,
+     "trust": 0
+    },
+    {
+     "vid": "gen_8kvbn5j",
+     "name": "Sizwe",
+     "occ": "trail_crew",
+     "source": "background",
+     "dead": false,
+     "trust": 60
+    }
+   ],
+   "pop": 9,
+   "handbook": 0,
+   "heldPit": 0,
+   "setPit": 0,
+   "pitL": 1
+  },
+  {
+   "day": 60,
+   "holders": [
+    {
+     "vid": "gen_8kvbn5j",
+     "name": "Sizwe",
+     "occ": "trail_crew",
+     "source": "background",
+     "dead": false,
+     "trust": 90
+    }
+   ],
+   "pop": 8,
+   "handbook": 0,
+   "heldPit": 0,
+   "setPit": 0,
+   "pitL": 1
+  },
+  {
+   "day": 90,
+   "holders": [],
+   "pop": 8,
+   "handbook": 0,
+   "heldPit": 0,
+   "setPit": 0,
+   "pitL": 1
+  }
+ ],
+ "wall": {
+  "maxScale": "global",
+  "won": false,
+  "tableWaiting": true,
+  "maxWaveUnlocked": 4,
+  "maxArc": 4
+ },
+ "deaths": {
+  "player": 0,
+  "villager": 10,
+  "buckets": {
+   "violence": 5,
+   "other:monster": 3,
+   "other:contest": 2
+  }
+ }
+}
