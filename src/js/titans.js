@@ -456,17 +456,30 @@
             hint: 'The call to arms \u2014 allied fires answer aloud, or refuse aloud. Refusals are remembered.'
           });
         }
+        // STAND-DOWN (journey-endgame r20): an unfillable muster was a
+        // permanent 1000 kcal/blade/day bleed with no exit verb — a death
+        // spiral you could watch but not stop. Breaking the muster is
+        // voiced, costs trust, and leaves the titan unanswered.
+        if (muster && !st.slain[tid]) {
+          var bladeN = (muster.allies || []).length + titanHavenBlades(muster).length;
+          acts.push({
+            id: 'titan:standdown:' + tid,
+            label: '\uD83D\uDD4A\uFE0F Stand the muster down',
+            hint: 'Break the muster (' + bladeN + ' blades). Haven\u2019s committed come home, the upkeep bleed stops, answering fires walk home thinner (trust \u22125). The titan stays unanswered \u2014 sound the call again later.'
+          });
+        }
       });
     } catch (e) {}
     return acts;
   }
 
   function titanSelfDo(id) {
-    var m = /^titan:(council|call|commit):(.+)$/.exec(id || '');
+    var m = /^titan:(council|call|commit|standdown):(.+)$/.exec(id || '');
     if (!m) return null;
     if (m[1] === 'council') return Game.titanWarCouncil(m[2]);
     if (m[1] === 'call') return Game.soundTitanCall(m[2]);
     if (m[1] === 'commit') return titanCommitOwn(m[2]);
+    if (m[1] === 'standdown') return titanStandDown(m[2]);
     return null;
   }
 
@@ -480,6 +493,56 @@
         if (v.titanCommitted[vid] === titanId) delete v.titanCommitted[vid];
       });
     } catch (e) {}
+  }
+
+  // ---------- stand down (journey-endgame r20) ----------
+
+  // An unfillable muster was a permanent 1000 kcal/blade/day bleed plus
+  // unanswered-titan escalation every 5 days, with no player verb to stop
+  // it (r19's sharpest blank — a death spiral you could watch but not
+  // stop). Standing down breaks the muster: Haven's committed come home,
+  // the upkeep bleed stops, the answering fires walk home thinner
+  // (trust -5 each, said aloud). The omen STAYS located and escalation
+  // stays unanswered — retreat is not resolution. Sound the call again
+  // later, if anyone still answers.
+  function titanStandDown(titanId) {
+    var def = titanDefs()[titanId];
+    if (!def) return null;
+    var st = titanState();
+    var muster = st.musters[titanId];
+    if (!muster) {
+      Game.say('No muster stands against ' + def.title + '. There is nothing to stand down.');
+      return null;
+    }
+    var o = st.omens[titanId];
+    if (!o || st.slain[titanId]) return null;
+    var havenN = titanHavenBlades(muster).length;
+    var byVillage = {};
+    (muster.allies || []).forEach(function (a) {
+      if (a.villageId === 'haven') return;
+      (byVillage[a.villageId] = byVillage[a.villageId] || []).push(a.name || 'a blade');
+    });
+    titanReleaseCommitted(titanId);
+    st.musters[titanId] = null;
+    Object.keys(byVillage).forEach(function (vid) {
+      var link = titanAlliedLinks().filter(function (l) { return titanLinkOther(l) === vid; })[0];
+      if (link) link.trust = Math.max(0, (link.trust || 0) - 5);
+    });
+    var answered = Object.keys(byVillage).length;
+    var line = '\uD83D\uDD4A\uFE0F THE MUSTER BREAKS \u2014 ' + def.title + ' still stands, unanswered, but the blades go home.';
+    if (havenN) line += ' ' + havenN + ' of Haven\u2019s own come' + (havenN === 1 ? 's' : '') + ' home.';
+    if (answered) {
+      line += ' ' + answered + ' allied fire' + (answered === 1 ? '' : 's') +
+        ' walk' + (answered === 1 ? 's' : '') + ' home thinner (trust \u22125 \u2014 they bled for a fight that never came).';
+    } else {
+      line += ' No one answered the call, so no one carries the cost \u2014 except the realm the titan still feeds on.';
+    }
+    line += ' The lair waits. Sound the call again when the coalition is real.';
+    Game.say(line);
+    try { if (Game.recordMoment) Game.recordMoment('The muster against ' + def.title + ' stood down \u2014 the blades went home.'); } catch (e) {}
+    try { if (Game.ledgerAdd) Game.ledgerAdd('titan', 'standdown:' + titanId); } catch (e) {}
+    try { if (Game.save) Game.save(); } catch (e) {}
+    return true;
   }
 
   // ---------- outfitting: real gear, real costs, real effectiveness ----------
@@ -651,16 +714,28 @@
     var st = titanState();
     Object.keys(st.musters).forEach(function (titanId) {
       var muster = st.musters[titanId];
-      if (!muster || st.slain[titanId] || !muster.allies.length) return;
+      if (!muster || st.slain[titanId]) return;
       if (muster.lastUpkeep === day) return;
       muster.lastUpkeep = day;
       // An army marches on its stomach: 1000 kcal/day per blade — allies AND
       // Haven's committed (2026-10-13). Your own people eat from your stores too.
-      var need = ((muster.allies || []).length + titanHavenBlades(muster).length) * 1000;
+      // (r20: the old `!muster.allies.length` early-return silently exempted
+      // haven-only musters, contradicting the commit verb's stated cost —
+      // "eat from your stores (1000 kcal/day each)". The cost is charged
+      // whenever any blades stand, allies or ours.)
+      var blades = (muster.allies || []).length + titanHavenBlades(muster).length;
+      if (!blades) return;
+      var need = blades * 1000;
       var got = 0;
       try { got = Game.playerPackSpend ? Game.playerPackSpend(need) : 0; } catch (e) {}
       if (got < need) {
-        Game.say('🍽️ The muster is hungry — ' + got.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal fed. Bellies remember who feeds them. (loyalty strains when the food runs thin.)');
+        // the loyalty line is only honest when allied fires are mustered —
+        // a haven-only muster strains no one's loyalty but its own bellies.
+        var alliedVillages = {};
+        (muster.allies || []).forEach(function (a) { alliedVillages[a.villageId] = 1; });
+        var loyaltyLine = Object.keys(alliedVillages).length ?
+          ' (loyalty strains when the food runs thin.)' : '';
+        Game.say('🍽️ The muster is hungry — ' + got.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal fed. Bellies remember who feeds them.' + loyaltyLine);
         // hunger strains loyalty: small trust erosion across mustered links
         var seen = {};
         muster.allies.forEach(function (a) {
@@ -975,6 +1050,7 @@
     titanCommitOwn: titanCommitOwn,
     titanVolunteers: titanVolunteers,
     titanReleaseCommitted: titanReleaseCommitted,
+    titanStandDown: titanStandDown,
   };
 
   // wraps must apply after game.js defines the originals
