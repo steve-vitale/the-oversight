@@ -1,0 +1,18 @@
+=== seed 9705 day 100 — conversation with Javier (gen_78lksnw) ===
+occupation=bush pilot temperament=withdrawn trust=91 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Bridget?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence, confront:d_tyz133a)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my sister, Bridget. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "I need some air. Alone air. You understand."
+want final: id=seek_taken stage=3 resolution=promised

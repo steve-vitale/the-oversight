@@ -1,0 +1,26 @@
+=== seed 9701 day 100 — conversation with Nino (nino_kapanadze) ===
+occupation=dry cleaner temperament=prickly trust=22 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "I keep expecting to see them by the fire. Then I remember."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Okay, that's my quota of socializing."
+(want=seek_comfort stage=2)
+YOU: (leave)
+want final: id=seek_comfort stage=3 resolution=engaged

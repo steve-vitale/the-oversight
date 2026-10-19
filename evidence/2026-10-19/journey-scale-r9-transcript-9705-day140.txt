@@ -1,0 +1,29 @@
+=== seed 9705 day 140 — conversation with Hannah (hannah_kim) ===
+occupation=Chef temperament=intense trust=30 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before. You know?"
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "This matters — God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Renata, Zoe and Sari this week. I keep setting out extra portions. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I rinse the cup twice. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Sari. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Sari's share of the work. Someone should, and it might as well be me."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [goon] "And then?"
+THEM: "We're done for now. Not done-done. For now."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

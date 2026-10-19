@@ -1,0 +1,24 @@
+=== seed 9706 day 120 — conversation with Autumn (gen_98z9mwq) ===
+occupation=infantry soldier temperament=cautious trust=91 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=promised

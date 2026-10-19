@@ -1,0 +1,31 @@
+=== seed 9704 day 100 — conversation with Patricia (visjoin_89) ===
+occupation=blacksmith temperament=restless trust=22 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing. Gotta keep moving."
+(turn0 choices: agency:ask_field, ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, ans:q_first_memory:a_deflect, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess. Seen worse."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Heh. Mine's Miami, Florida, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "The Long Odds. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I memorize the stars. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Okay I really have to move now or I'll explode — talk soon!"
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 9707 day 140 — conversation with Onni (onni_korhonen) ===
+occupation=chimney sweep temperament=cautious trust=91 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: deflect_q, ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Gauntlet. They just... took Luis. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I greet everyone by name each morning. It passes the time. The time passes anyway."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

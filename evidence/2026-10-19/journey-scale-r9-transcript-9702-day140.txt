@@ -1,0 +1,26 @@
+=== seed 9702 day 140 — conversation with Nikolai (nikolai_volkov) ===
+occupation=welder temperament=prickly trust=74 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did with your hands — You look handy. What did you do with your hands, before? There. Said it."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Andrei were close. I'm sorry."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I hum one note, over and over, when the dark comes at odd hours now. Whatever gets me to morning."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Andrei. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I hum one note, over and over, when the dark comes for Andrei, now. Feels right. Feels like the least I can do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

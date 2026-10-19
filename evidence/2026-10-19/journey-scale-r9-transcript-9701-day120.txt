@@ -1,0 +1,31 @@
+=== seed 9701 day 120 — conversation with Daniyar (daniyar_askarov) ===
+occupation=paramedic temperament=gentle trust=10 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "Breathe with me a second. In. Out. There. The world's still there, but so are we."
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, dlg:more, dlg:react, teach, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Yeah?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Naran is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "Sleep's gone strange. I oil boots on rest days at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Naran. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Naran's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: "Rest when you can. We'll talk again soon."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

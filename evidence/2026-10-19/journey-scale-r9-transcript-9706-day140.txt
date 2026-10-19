@@ -1,0 +1,31 @@
+=== seed 9706 day 140 — conversation with Autumn (gen_98z9mwq) ===
+occupation=infantry soldier temperament=cautious trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's the kindest thing someone's done for you out here?"
+(turn0 choices: ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You feel that? The air before a storm. That's the village right now."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I eat fast and leave early. Not hiding. Just — scheduling."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "It'll break at a moot or it'll break at midnight. I'm betting moot."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I talk to both sides. It hasn't exploded yet."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "I should go. Before I overthink this conversation too."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

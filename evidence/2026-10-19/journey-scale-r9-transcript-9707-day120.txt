@@ -1,0 +1,21 @@
+=== seed 9707 day 120 — conversation with Kofi (gen_dxaacat) ===
+occupation=hunting guide temperament=bold trust=87 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you left behind — Did you leave someone behind? ...Sorry. You don't have to answer that."
+(turn0 choices: agency:ask_expedition, deflect_q, ans:q_left_behind:a_yes, ans:q_left_behind:a_unknown, leave, silence)
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pokeweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Dandelion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to it. Things don't do themselves."
+want final: id=curious stage=3 resolution=engaged

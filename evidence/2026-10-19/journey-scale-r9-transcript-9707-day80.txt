@@ -1,0 +1,23 @@
+=== seed 9707 day 80 — conversation with Benoit (benoit_lambert) ===
+occupation=Baker temperament=prickly trust=20 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Where are you from — originally? Before all this."
+(turn0 choices: deflect_q, ans:q_origin:a_tell, ans:q_origin:a_vague, ans:q_origin:a_deflect, leave, silence)
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "They took Onni and Ines — Who Ate It?, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting. Ha. Funny."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Right. Done. Don't look so relieved."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged
