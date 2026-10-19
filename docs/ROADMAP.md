@@ -1,5 +1,14 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-19 earned-gear continuation: actual phone contest/show choices deliver
+tier3 armor and Wear changes protection. A real notebook teaches bow/ammo;
+crafting spends exact materials/time, and the ordinary trader takes actual
+food for tier3 gear. Earned saved bow/ammo and trader blade perform real Strikes
+in arranged encounters. Both phone sizes pass; eligibility is declared, not
+natural attainment. Fix the phone cart handoff: trading/purchase keeps Place
+open at its reading position rather than hiding the goods after narration.
+No Game/data/policy reward or survival tuning. See release-gear-audit-r1.md.
+
 2026-10-19 release continuation: native Wait now proves real death, succession
 and promise reconciliation at both phone sizes. Native Table success and a failed
 Feared door both reach actual endings; the failed door stays closed through the

@@ -1,5 +1,26 @@
 # Mobile playtesting before release
 
+Earned gear/cart route (2026-10-19): release-gear-phone-replay-r1.js imports
+declared non-god eligibility, then plays the contest/show, wears their real gear,
+reads the notebook, pays for bow/ammo crafting, buys an ordinary trader's ware
+and equips it. It uses real internal swipes and touch, not Game mutations. Both
+heights keep Place open at the cart reading position through purchase. Other
+goods and the sold marker remain reachable while payment feedback uses the one
+narration region. Check movement still closes tools with the ordinary frame
+recipe. Failed reward/craft rolls are expected possibilities, not automatic bugs.
+
+Final gear receipts are release-gear-final-phone-{736,844}-r4.json. Their carried
+craft/trade storage comes from real navigation/pagehide; the combat fixture
+producer loads those earned saves without granting equipment/ammo/health. Native
+Strike proves real ammo use and damage in declared encounters at both sizes.
+Repeat with fresh output names using the same loopback server/browser runner as
+the ending recipe. For a newly earned receipt, run prepare-release-gear-combat-r1.cjs
+RECEIPT craft FRESH_CRAFT_FIXTURE and again with trade FRESH_TRADE_FIXTURE. Set
+OVERSIGHT_GEAR_COMBAT_FIXTURES to a JSON object mapping craft/trade to their
+/evidence/... fixture paths before running release-gear-combat-replay-r1.js.
+Retain the actual seed/outcome; these diagnostic scenes prove functioning
+delivery/equipping/use, not natural eligibility frequency or pacifist viability.
+
 Ending/succession journey (2026-10-19): the prepared release-ending fixtures
 exercise a real enemy turn after native Wait, actual mantle transfer and two
 promised favors. The successor's self-debt must be moot; the other creditor's

@@ -1,0 +1,63 @@
+{
+  kind: 'craft',
+  health: 100,
+  ammo: 5,
+  weapon: {
+    name: 'Bow',
+    bonus: 22,
+    type: 'ranged',
+    range: 5,
+    ammo: 'arrow',
+    unarmed: false,
+    itemId: 'bow',
+    item: { itemId: 'bow', name: 'Bow' },
+    def: {
+      id: 'bow',
+      name: 'Bow',
+      class: 'weapon',
+      origin: 'crafted',
+      flavor: "Yew and sinew and patience. The arrow knows where it's going before you loose it.",
+      kg: 0.8,
+      damage: 22,
+      range: 5,
+      baseEffect: '+22 damage, range 5, uses arrows',
+      weapon: [Object],
+      materials: [Object],
+      bondThresholds: [Array]
+    }
+  }
+}
+{
+  kind: 'trade',
+  health: 100,
+  ammo: 0,
+  weapon: {
+    name: 'Phase blade',
+    bonus: 60,
+    type: 'melee',
+    range: 1,
+    ammo: null,
+    unarmed: false,
+    itemId: 'phase_blade',
+    item: {
+      itemId: 'phase_blade',
+      name: 'Phase blade',
+      alienLoot: true,
+      alienEffectHidden: true
+    },
+    def: {
+      id: 'phase_blade',
+      name: 'Phase blade',
+      class: 'weapon',
+      origin: 'alien',
+      lootTier: 3,
+      tier: 3,
+      flavor: 'Phases through armor. The blade is only sometimes here.',
+      kg: 0.3,
+      damage: 60,
+      range: 2,
+      baseEffect: '+60 damage, ignores armor',
+      weapon: [Object]
+    }
+  }
+}

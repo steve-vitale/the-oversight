@@ -2,6 +2,43 @@
 
 Status: integration in progress; not cleared for public launch.
 
+## Current delivery state (2026-10-19)
+
+The live game is https://the-oversight.vercel.app, production commit
+007c4febca00986aae5bc36bcd4d6966a08c7c04, build
+07db9d4d7-20261019-182620. It reconciles Muse/main 0545151a5's 67 commits
+with the phone/combat/Continue lane. Live HTTPS metadata and both hosted phone
+replays match the combined source. See release-main67-audit-r1.md in dated evidence.
+
+The next candidate is shared on codex/phone-preview. Read build-source.json at
+the exact reviewed commit for its source identity and input hashes. It includes
+the bounded phone ending, native death/succession and played Table success and
+failed-door fallback proofs; release-ending-audit-r1.md records 1029 full and
+257 quick checks. The phone replay/fixture commands are in MOBILE-PLAYTEST.md.
+That candidate is not a new production release or physical-device clearance.
+
+A fresh hosted preview could not be created: Vercel returned HTTP403 for this
+project, and the scoped CLI has no credentials. The login attempt was stopped.
+Do not retry unchanged or present an older protected preview as the current
+candidate. Local source-bound browser work and remaining release repairs continue.
+
+Current non-combat gear proof: release-gear-audit-r1.md records actual played
+contest/show rewards, physical Wear/Equip payoffs, notebook/crafting payment,
+ordinary cart payment and use of earned saved gear in arranged fights at both
+phone heights. The cart remains in Place with its reading position preserved.
+These are declared eligibility fixtures, not natural opportunity-rate evidence.
+
+Remaining work: complete current-source opening and installed
+update/rollback journeys; dispose of the nine rerun legacy contracts individually;
+retain all balanced-metric warnings; obtain real-device evidence and an explicit
+public-release decision. New gear flow evidence is recorded separately from
+natural campaign availability; arranged eligibility is never natural attainment.
+
+## Historical checkpoints
+
+The older URLs and incomplete-integration statements below describe their dated
+artifacts. They do not supersede the current delivery state above.
+
 Current protected phone preview:
 https://the-oversight-927l8rhw3-steven-vitales-projects.vercel.app
 is READY from ab47a699c (source1bc469e9e). Exact published Git checkout passes

@@ -13003,6 +13003,25 @@
   const fieldMessages = [];
   let fieldSeenLog = null;
 
+  function runPlaceTrade(action) {
+    const keepPlace = fieldPanel === 'place';
+    const scrollTop = keepPlace ? (document.querySelector('.field-tool-body')?.scrollTop || 0) : 0;
+    const result = action();
+    // The cart and its outcome belong to the same phone tool. Keep it open
+    // across shopping messages; movement still closes tools normally.
+    const stayPlace = keepPlace && !(Game.tbfight && !Game.tbfight.over) && !Game.pendingEncounter;
+    if (stayPlace) {
+      fieldPanel = 'place';
+      fieldFrameLog = (Game.log || []).slice(-1)[0];
+    }
+    refresh();
+    if (stayPlace) {
+      const pane = document.querySelector('.field-tool-body');
+      if (pane) pane.scrollTop = scrollTop;
+    }
+    return result;
+  }
+
   function rememberFieldMessage(text) {
     const clean = String(text || '').replace(/<[^>]*>/g, '').trim();
     if (clean) fieldMessages.push(clean);
@@ -16645,7 +16664,7 @@
     // already names the gate; the tap speaks it.)
     wireGardenControls();
     // Visitors (Haven panel). Trade opens the cart; ware buys are real exchanges.
-    document.querySelectorAll('[data-visitor-act]').forEach(b => b.onclick = () => { Game.visitorInteract(b.dataset.visitorAct, b.dataset.how); refresh(); });
+    document.querySelectorAll('[data-visitor-act]').forEach(b => b.onclick = () => runPlaceTrade(() => Game.visitorInteract(b.dataset.visitorAct, b.dataset.how)));
     // RIVER TRADER (parity 2026-10-10): the day-21 trader's feed/trade/snub
     // were engine-only. Feed and snub are direct; trade takes a good id
     // (or none — the trader sizes Haven up).
@@ -16732,8 +16751,8 @@
       }
       refresh();
     });
-    document.querySelectorAll('[data-ware-buy]').forEach(b => b.onclick = () => { const p = b.dataset.wareBuy.split(':'); Game.visitorBuyWare(p[0], +p[1]); refresh(); });
-    document.querySelectorAll('[data-ware-sell]').forEach(b => b.onclick = () => { const p = b.dataset.wareSell.split(':'); Game.traderSell(p[0], +p[1]); refresh(); });
+    document.querySelectorAll('[data-ware-buy]').forEach(b => b.onclick = () => { const p = b.dataset.wareBuy.split(':'); return runPlaceTrade(() => Game.visitorBuyWare(p[0], +p[1])); });
+    document.querySelectorAll('[data-ware-sell]').forEach(b => b.onclick = () => { const p = b.dataset.wareSell.split(':'); return runPlaceTrade(() => Game.traderSell(p[0], +p[1])); });
     // Membership: remote applications + shelter building (Haven panel).
     document.querySelectorAll('[data-mship-accept]').forEach(b => b.onclick = () => { Game.acceptApplication(b.dataset.mshipAccept); refresh(); });
     document.querySelectorAll('[data-mship-refuse]').forEach(b => b.onclick = () => { Game.refuseApplication(b.dataset.mshipRefuse); refresh(); });
