@@ -1,0 +1,766 @@
+{
+ "arms": [
+  "control",
+  "winsupport-full",
+  "winsupport-triage",
+  "winsupport-posture",
+  "winsupport-gated"
+ ],
+ "seeds": [
+  65001,
+  65002,
+  65003,
+  65004,
+  65005,
+  65006,
+  65007,
+  65008,
+  65009,
+  65010,
+  65011,
+  65012,
+  65013,
+  65014,
+  65015,
+  65016
+ ],
+ "policies": [
+  "leadfeast",
+  "belongfeast"
+ ],
+ "filesBad": [],
+ "perArm": {
+  "control": {
+   "n": 32,
+   "survival": {
+    "median": 110,
+    "days": [
+     41,
+     64,
+     67,
+     69,
+     70,
+     74,
+     79,
+     85,
+     86,
+     87,
+     89,
+     95,
+     100,
+     101,
+     104,
+     107,
+     110,
+     112,
+     116,
+     123,
+     126,
+     136,
+     143,
+     144,
+     145,
+     147,
+     150,
+     155,
+     160,
+     182,
+     182,
+     182
+    ]
+   },
+   "wall": {
+    "national": 21,
+    "table": 24,
+    "wins": 0,
+    "wave4": 26,
+    "wave5": 0,
+    "exiled": 0
+   },
+   "door": {
+    "reached": 20,
+    "diedInWindow": 15,
+    "attempts": 21,
+    "outcomes": {
+     "died": 16,
+     "regressed": 4,
+     "horizon": 1
+    }
+   },
+   "taxonomy": {
+    "windowDeaths": 113,
+    "who": {
+     "scholar": 61,
+     "villager": 52
+    },
+    "where": {
+     "wild": 41,
+     "raid": 59,
+     "expedition": 5,
+     "alien": 5,
+     "haven": 1,
+     "disease": 1,
+     "other": 1
+    },
+    "what": {
+     "w4": 68,
+     "w3": 18,
+     "w12": 19,
+     "null": 8
+    },
+    "addressable": 106
+   },
+   "causeSpace": {
+    "combat": 297,
+    "dehydration": 7,
+    "contest": 11,
+    "monster": 111,
+    "alien": 12,
+    "a wound that wouldn't close": 11,
+    "The Eater": 1,
+    "ambush": 2,
+    "The Algorithm": 1,
+    "sickness": 15,
+    "the night": 3,
+    "The Union Rep": 1,
+    "Speedbump": 2,
+    "thirst": 3,
+    "wound_fever": 1,
+    "The Static Kite": 1,
+    "Loud-Eyes": 1,
+    "starvation": 3,
+    "Choir Toad": 1
+   },
+   "perPolicy": [
+    {
+     "policy": "leadfeast",
+     "n": 16,
+     "medianSurvival": 136,
+     "national": 13,
+     "table": 14,
+     "wave4": 13,
+     "def5": 15
+    },
+    {
+     "policy": "belongfeast",
+     "n": 16,
+     "medianSurvival": 101,
+     "national": 8,
+     "table": 10,
+     "wave4": 13,
+     "def5": 5
+    }
+   ]
+  },
+  "winsupport-full": {
+   "n": 32,
+   "survival": {
+    "median": 103,
+    "days": [
+     41,
+     64,
+     67,
+     69,
+     73,
+     74,
+     74,
+     81,
+     81,
+     87,
+     89,
+     91,
+     95,
+     97,
+     101,
+     101,
+     103,
+     104,
+     104,
+     112,
+     116,
+     119,
+     126,
+     126,
+     131,
+     141,
+     144,
+     155,
+     171,
+     182,
+     182,
+     182
+    ]
+   },
+   "wall": {
+    "national": 20,
+    "table": 20,
+    "wins": 0,
+    "wave4": 25,
+    "wave5": 0,
+    "exiled": 0
+   },
+   "door": {
+    "reached": 20,
+    "diedInWindow": 18,
+    "attempts": 20,
+    "outcomes": {
+     "died": 18,
+     "horizon": 1,
+     "regressed": 1
+    }
+   },
+   "taxonomy": {
+    "windowDeaths": 129,
+    "who": {
+     "scholar": 79,
+     "villager": 50
+    },
+    "where": {
+     "wild": 28,
+     "raid": 84,
+     "other": 6,
+     "alien": 8,
+     "haven": 2,
+     "expedition": 1
+    },
+    "what": {
+     "w4": 83,
+     "w3": 15,
+     "w12": 15,
+     "null": 16
+    },
+    "addressable": 117
+   },
+   "causeSpace": {
+    "combat": 306,
+    "dehydration": 9,
+    "contest": 14,
+    "monster": 99,
+    "alien": 15,
+    "a wound that wouldn't close": 13,
+    "ambush": 2,
+    "sickness": 15,
+    "the night": 3,
+    "The Union Rep": 1,
+    "Speedbump": 2,
+    "The Static Kite": 1,
+    "Loud-Eyes": 1,
+    "thirst": 2,
+    "starvation": 3,
+    "Choir Toad": 1
+   },
+   "perPolicy": [
+    {
+     "policy": "leadfeast",
+     "n": 16,
+     "medianSurvival": 116,
+     "national": 13,
+     "table": 9,
+     "wave4": 12,
+     "def5": 15
+    },
+    {
+     "policy": "belongfeast",
+     "n": 16,
+     "medianSurvival": 97,
+     "national": 7,
+     "table": 11,
+     "wave4": 13,
+     "def5": 5
+    }
+   ]
+  },
+  "winsupport-triage": {
+   "n": 32,
+   "survival": {
+    "median": 111,
+    "days": [
+     41,
+     64,
+     67,
+     69,
+     70,
+     74,
+     74,
+     87,
+     89,
+     95,
+     100,
+     101,
+     103,
+     104,
+     105,
+     107,
+     111,
+     112,
+     113,
+     120,
+     121,
+     126,
+     131,
+     133,
+     133,
+     136,
+     146,
+     150,
+     155,
+     182,
+     182,
+     182
+    ]
+   },
+   "wall": {
+    "national": 21,
+    "table": 22,
+    "wins": 0,
+    "wave4": 26,
+    "wave5": 1,
+    "exiled": 0
+   },
+   "door": {
+    "reached": 20,
+    "diedInWindow": 15,
+    "attempts": 20,
+    "outcomes": {
+     "died": 17,
+     "released": 1,
+     "horizon": 1,
+     "regressed": 1
+    }
+   },
+   "taxonomy": {
+    "windowDeaths": 139,
+    "who": {
+     "scholar": 74,
+     "villager": 65
+    },
+    "where": {
+     "wild": 49,
+     "raid": 76,
+     "alien": 6,
+     "other": 4,
+     "expedition": 3,
+     "haven": 1
+    },
+    "what": {
+     "w4": 83,
+     "w3": 21,
+     "w12": 24,
+     "null": 11
+    },
+    "addressable": 131
+   },
+   "causeSpace": {
+    "combat": 293,
+    "dehydration": 9,
+    "contest": 12,
+    "monster": 115,
+    "alien": 13,
+    "a wound that wouldn't close": 11,
+    "starvation": 6,
+    "ambush": 2,
+    "sickness": 15,
+    "the night": 3,
+    "The Union Rep": 1,
+    "Speedbump": 2,
+    "The Reunion": 1,
+    "The Static Kite": 1,
+    "Loud-Eyes": 1,
+    "thirst": 2,
+    "Choir Toad": 1
+   },
+   "perPolicy": [
+    {
+     "policy": "leadfeast",
+     "n": 16,
+     "medianSurvival": 121,
+     "national": 13,
+     "table": 11,
+     "wave4": 13,
+     "def5": 15
+    },
+    {
+     "policy": "belongfeast",
+     "n": 16,
+     "medianSurvival": 104,
+     "national": 8,
+     "table": 11,
+     "wave4": 13,
+     "def5": 5
+    }
+   ]
+  },
+  "winsupport-posture": {
+   "n": 32,
+   "survival": {
+    "median": 104,
+    "days": [
+     41,
+     64,
+     67,
+     69,
+     74,
+     80,
+     81,
+     81,
+     87,
+     88,
+     89,
+     92,
+     95,
+     97,
+     101,
+     101,
+     104,
+     107,
+     112,
+     116,
+     119,
+     125,
+     126,
+     129,
+     131,
+     140,
+     144,
+     155,
+     156,
+     182,
+     182,
+     182
+    ]
+   },
+   "wall": {
+    "national": 22,
+    "table": 22,
+    "wins": 0,
+    "wave4": 26,
+    "wave5": 0,
+    "exiled": 0
+   },
+   "door": {
+    "reached": 20,
+    "diedInWindow": 18,
+    "attempts": 20,
+    "outcomes": {
+     "died": 18,
+     "horizon": 1,
+     "regressed": 1
+    }
+   },
+   "taxonomy": {
+    "windowDeaths": 126,
+    "who": {
+     "scholar": 66,
+     "villager": 60
+    },
+    "where": {
+     "wild": 41,
+     "raid": 64,
+     "alien": 5,
+     "other": 7,
+     "expedition": 5,
+     "haven": 3,
+     "disease": 1
+    },
+    "what": {
+     "w4": 67,
+     "w3": 21,
+     "w12": 22,
+     "null": 16
+    },
+    "addressable": 115
+   },
+   "causeSpace": {
+    "combat": 292,
+    "dehydration": 9,
+    "contest": 15,
+    "monster": 111,
+    "alien": 12,
+    "a wound that wouldn't close": 12,
+    "ambush": 2,
+    "sickness": 15,
+    "the night": 3,
+    "The Union Rep": 1,
+    "Speedbump": 2,
+    "starvation": 5,
+    "wound_fever": 1,
+    "The Static Kite": 1,
+    "Loud-Eyes": 1,
+    "thirst": 2,
+    "Choir Toad": 1
+   },
+   "perPolicy": [
+    {
+     "policy": "leadfeast",
+     "n": 16,
+     "medianSurvival": 119,
+     "national": 14,
+     "table": 11,
+     "wave4": 13,
+     "def5": 15
+    },
+    {
+     "policy": "belongfeast",
+     "n": 16,
+     "medianSurvival": 97,
+     "national": 8,
+     "table": 11,
+     "wave4": 13,
+     "def5": 5
+    }
+   ]
+  },
+  "winsupport-gated": {
+   "n": 32,
+   "survival": {
+    "median": 103,
+    "days": [
+     41,
+     64,
+     67,
+     69,
+     73,
+     74,
+     74,
+     81,
+     81,
+     87,
+     89,
+     91,
+     95,
+     97,
+     101,
+     101,
+     103,
+     104,
+     104,
+     112,
+     116,
+     119,
+     126,
+     126,
+     131,
+     146,
+     155,
+     160,
+     162,
+     182,
+     182,
+     182
+    ]
+   },
+   "wall": {
+    "national": 20,
+    "table": 20,
+    "wins": 0,
+    "wave4": 25,
+    "wave5": 0,
+    "exiled": 0
+   },
+   "door": {
+    "reached": 20,
+    "diedInWindow": 18,
+    "attempts": 20,
+    "outcomes": {
+     "died": 18,
+     "horizon": 1,
+     "regressed": 1
+    }
+   },
+   "taxonomy": {
+    "windowDeaths": 128,
+    "who": {
+     "scholar": 77,
+     "villager": 51
+    },
+    "where": {
+     "wild": 30,
+     "raid": 81,
+     "other": 6,
+     "alien": 9,
+     "haven": 1,
+     "expedition": 1
+    },
+    "what": {
+     "w4": 82,
+     "w3": 14,
+     "w12": 15,
+     "null": 17
+    },
+    "addressable": 116
+   },
+   "causeSpace": {
+    "combat": 302,
+    "dehydration": 10,
+    "contest": 13,
+    "monster": 101,
+    "alien": 16,
+    "a wound that wouldn't close": 12,
+    "ambush": 2,
+    "sickness": 15,
+    "the night": 3,
+    "The Union Rep": 1,
+    "Speedbump": 2,
+    "The Static Kite": 1,
+    "Loud-Eyes": 1,
+    "thirst": 2,
+    "starvation": 3,
+    "Choir Toad": 1
+   },
+   "perPolicy": [
+    {
+     "policy": "leadfeast",
+     "n": 16,
+     "medianSurvival": 116,
+     "national": 13,
+     "table": 9,
+     "wave4": 12,
+     "def5": 15
+    },
+    {
+     "policy": "belongfeast",
+     "n": 16,
+     "medianSurvival": 97,
+     "national": 7,
+     "table": 11,
+     "wave4": 13,
+     "def5": 5
+    }
+   ]
+  }
+ },
+ "verdicts": {
+  "winsupport-full": {
+   "primary": {
+    "metric": "median survival days",
+    "control": 110,
+    "armed": 103,
+    "delta": -7,
+    "goBar": "+10d",
+    "go": false
+   },
+   "guardrails": {
+    "noNewDeathModes": {
+     "pass": true,
+     "detail": "none"
+    },
+    "nationalNotDegraded": {
+     "pass": false,
+     "detail": "20 vs 21"
+    },
+    "tableBand": {
+     "pass": false,
+     "detail": "20 vs 24 (band >= control-2)"
+    },
+    "wave4NotDegraded": {
+     "pass": false,
+     "detail": "25 vs 26"
+    },
+    "survivalFloor": {
+     "pass": true,
+     "detail": "delta -7d (floor -10d)"
+    }
+   },
+   "verdict": "NO-GO (guardrail breach — killed)"
+  },
+  "winsupport-triage": {
+   "primary": {
+    "metric": "median survival days",
+    "control": 110,
+    "armed": 111,
+    "delta": 1,
+    "goBar": "+10d",
+    "go": false
+   },
+   "guardrails": {
+    "noNewDeathModes": {
+     "pass": false,
+     "detail": "The Reunion"
+    },
+    "nationalNotDegraded": {
+     "pass": true,
+     "detail": "21 vs 21"
+    },
+    "tableBand": {
+     "pass": true,
+     "detail": "22 vs 24 (band >= control-2)"
+    },
+    "wave4NotDegraded": {
+     "pass": true,
+     "detail": "26 vs 26"
+    },
+    "survivalFloor": {
+     "pass": true,
+     "detail": "delta 1d (floor -10d)"
+    }
+   },
+   "verdict": "NO-GO (guardrail breach — killed)"
+  },
+  "winsupport-posture": {
+   "primary": {
+    "metric": "median survival days",
+    "control": 110,
+    "armed": 104,
+    "delta": -6,
+    "goBar": "+10d",
+    "go": false
+   },
+   "guardrails": {
+    "noNewDeathModes": {
+     "pass": true,
+     "detail": "none"
+    },
+    "nationalNotDegraded": {
+     "pass": true,
+     "detail": "22 vs 21"
+    },
+    "tableBand": {
+     "pass": true,
+     "detail": "22 vs 24 (band >= control-2)"
+    },
+    "wave4NotDegraded": {
+     "pass": true,
+     "detail": "26 vs 26"
+    },
+    "survivalFloor": {
+     "pass": true,
+     "detail": "delta -6d (floor -10d)"
+    }
+   },
+   "verdict": "NO-GO (primary miss, guardrails hold — killed)"
+  },
+  "winsupport-gated": {
+   "primary": {
+    "metric": "median survival days",
+    "control": 110,
+    "armed": 103,
+    "delta": -7,
+    "goBar": "+10d",
+    "go": false
+   },
+   "guardrails": {
+    "noNewDeathModes": {
+     "pass": true,
+     "detail": "none"
+    },
+    "nationalNotDegraded": {
+     "pass": false,
+     "detail": "20 vs 21"
+    },
+    "tableBand": {
+     "pass": false,
+     "detail": "20 vs 24 (band >= control-2)"
+    },
+    "wave4NotDegraded": {
+     "pass": false,
+     "detail": "25 vs 26"
+    },
+    "survivalFloor": {
+     "pass": true,
+     "detail": "delta -7d (floor -10d)"
+    }
+   },
+   "verdict": "NO-GO (guardrail breach — killed)"
+  }
+ }
+}
