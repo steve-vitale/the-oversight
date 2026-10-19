@@ -5,6 +5,7 @@
 'use strict';
 const idle = require('./idle');
 const { vinebank } = require('./vinebank'); // materials-banking arm (VINEBANK=1, default OFF)
+const snareteach = require('./snareteach'); // teach-drive arm (SNARETEACH=1, default OFF)
 
 // DAWNREFUSE (refusal-spam fix 2026-10-15): per-dawn refusal-voice flags.
 // When the scholar's hands can't reach the pantry, every iteration of the
@@ -2643,6 +2644,10 @@ const competent = {
       }
     } catch (e) {}
     teachRound(Game, ctx);
+    // SNARETEACH (teach-drive 2026-10-19): court the trapper — gifts + the
+    // wire lesson steer the scholar toward the existing teach channel.
+    // Env-gated; gate-off returns null with no side effects.
+    snareteach.courtTrapper(Game, ctx);
     // LEARN FIRST: knowledge is the food economy. Until we know 5 plants,
     // triple the conversations — gratitude teaches, and taught plants feed.
     try {
