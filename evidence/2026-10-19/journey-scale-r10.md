@@ -72,3 +72,43 @@ Timeline on 9802 (leadfeast): foodDeeds d27 → seat lesser d94 → tableWaiting
 - Proof: `scripts/test-curious-stranded-20261019.js` (RED→GREEN, 3 seeds)
 - Fix: `src/js/convo-wants.js` (curious.canOpen + select-time guard)
 - Evidence: `evidence/2026-10-19/journey-scale-r10-leadcourt-980[1-4].json` (+9 transcripts), `evidence/2026-10-19/journey-scale-r10-leadfeast-980[1-4].json` (+4 transcripts)
+
+## Appendix: the stranded-curious transcript (Marcus, 9801-day80, leadcourt pilot)
+Recovered from the run's read (the file was overwritten by the A/B's same-name
+transcript — filename-collision lesson for future A/Bs: namespace transcripts
+by policy). This is the discovery artifact for blank #1.
+```
+=== seed 9801 day 80 — conversation with Marcus (marcus_webb) ===
+occupation=electrician temperament=bold trust=23 dead=false mood=grieving
+want: curious (stage 0)
+
+THEM: "Tell you what — They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Sure — I — yeah. It helps, hearing that."
+(want=curious stage=0)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=curious stage=0)
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=curious stage=0)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=curious stage=0)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=curious stage=0)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I'll tell you plain — Thanks. ...Thanks for saying that."
+(want=curious stage=0)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "I've got fires to light — metaphorical ones. Mostly."
+(want=curious stage=0)
+YOU: (leave)
+want final: id=curious stage=3 resolution=unestablished
+```
+Note the want never leaves stage 0 (no question was hung — no ans:* options ever
+offered), and the fallback opener ("Tell you what — They'd tell me to keep
+working...") is a grief/work line, not a question. Post-fix, this NPC draws a
+fireable want instead.
