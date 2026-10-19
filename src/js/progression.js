@@ -396,10 +396,18 @@
         // promise the true buff window (2 dawns since 2026-10-12), read from
         // the same data lever as the grant — never a stale "until dawn".
         const dawnWord = (typeof this.feastDawnWord === 'function') ? this.feastDawnWord() : 'dawn';
+        // ITEM IDENTITY (beat-identity 2026-10-19, finding 2026-10-13): the
+        // surge-arming beat used to slot only the item NAME into a fixed line
+        // — Contract Quill, Mixtape, Hard Candy, Grandma's Tin Cup all read
+        // word-identical. The def's `memory` is the holder's lived story of
+        // THIS object; threading it in makes the beat know what it holds.
+        // (Every sentimental def carries memory; flavor is the fallback.)
+        const mem = String((def.memory || def.flavor || '')).trim();
+        const knowsClause = mem ? ` ${mem}` : '';
         if (maxed >= 3) {
-          msg = armSurge(`You hold ${name}. The feast was the weapon — and they are with you. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
+          msg = armSurge(`You hold ${name}.${knowsClause} The feast was the weapon — and they are with you. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
         } else if (resonance >= RESONANCE_NEED) {
-          msg = armSurge(`You hold ${name}. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
+          msg = armSurge(`You hold ${name}.${knowsClause} Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
         } else if (unmaxed.length) {
           // FOCUSED PRACTICE: the closest-to-complete gift gets the session.
           const needFor = (a) => ((a.level || 1) === 1 ? 10 : 25) - (a.xp || 0);

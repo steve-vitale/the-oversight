@@ -2323,17 +2323,27 @@
     // knows smoking, a short mutter rotates deterministically among 3
     // variants. VOICE ONLY: the per-run ledger (v._spoilVoice) is read and
     // bumped here; no mechanic, no timing, no RNG draws.
+    // SPEAKER/DAY VARIETY (beat-identity 2026-10-19, finding 2026-10-13):
+    // the mutters were anonymous ("Someone") and the pre-prosefix teaching
+    // fired byte-identical from a different named speaker every day. The
+    // mutter now names a real villager, chosen deterministically by DAY —
+    // different speakers on different days never emit the identical string —
+    // while the variant keeps rotating on the per-run counter. Deliberately
+    // no RNG here: spoilVoiceLine keeps its exact one-_beatCast-draw-per-call
+    // discipline (findings #263/#264 det-gate).
     spoilVoiceLine(names) {
       const vv = (this.state || {}).village || {};
       const sv = (vv._spoilVoice = vv._spoilVoice || { taught: 0, mutters: 0 });
       const MUTTERS = [
-        'Someone mutters about the smoke rack going cold.',
-        'Someone kicks the ash pile. The smoke rack stays empty.',
-        'The smoke rack gets a long look. Nobody says anything this time.',
+        '{who} mutters about the smoke rack going cold.',
+        '{who} kicks the ash pile. The smoke rack stays empty.',
+        '{who} gives the smoke rack a long look, then walks off.',
       ];
       let line;
       if (this.knowsTechnique('preserve')) {
-        line = `The village threw out spoiled stores: ${names}. ${MUTTERS[sv.mutters % MUTTERS.length]} (pantry)`;
+        const day = ((this.state || {}).scholar || {}).day || 1;
+        const who = this._spoilMutterSpeaker(day);
+        line = `The village threw out spoiled stores: ${names}. ${MUTTERS[sv.mutters % MUTTERS.length].replace('{who}', who)} (pantry)`;
         sv.mutters++;
       } else if (!sv.taught) {
         const cast = (typeof this._beatCast === 'function') ? this._beatCast(1) : [];
@@ -2350,6 +2360,20 @@
         line = `The village threw out spoiled stores: ${names}. (pantry)`;
       }
       return line;
+    },
+    // _spoilMutterSpeaker (beat-identity 2026-10-19): deterministic mutterer
+    // for the knows-smoking spoil mutter. Same day -> same speaker; different
+    // days -> (usually) different speakers. Mirrors _beatCast's eligibility
+    // (living, non-player) but draws NO RNG — voice only, det-gate safe.
+    _spoilMutterSpeaker(day) {
+      try {
+        const v = (this.state || {}).village || {};
+        const pool = (v.roster || []).filter(id =>
+          id !== this.villagerId && !((this.getPerson(id) || {}).dead));
+        if (!pool.length) return 'Someone';
+        const pick = pool[Math.abs(day || 1) % pool.length];
+        return this.displayName(pick) || 'Someone';
+      } catch (e) { return 'Someone'; }
     },
     // food never counts as security. Before this, expired pantry stacks sat
     // forever and villagers ate them at full value: phantom calories.
