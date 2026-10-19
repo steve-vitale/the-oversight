@@ -940,15 +940,24 @@
         return 0.5;
       },
       opener(vid) {
+        // COMFORT POOL DEPTH (journey landing r29 2026-10-19): the pool was
+        // 2 openers / 2 engage beats — a multi-turn comfort exchange cycled
+        // verbatim (r27 observation). 4 openers now; the engage pool is 6.
         return Game.convoPickCycle(vid, 'want:comfort:open', [
           '"Do you ever — no. Never mind." They don\'t look away, though. They want you to ask.',
           '"I\'m not okay. I\'m saying it out loud so it\'s real: I\'m not okay."',
+          '"I don\'t want to be alone with my head right now. That\'s all. That\'s the whole thing."',
+          '"It\'s stupid. I\'m alive, everyone\'s alive, and I can\'t stop shaking."',
         ]);
       },
       engageBeat(vid) {
         return Game.convoPickCycle(vid, 'want:comfort:engage', [
           '"It helps. Just — saying it out loud to someone who\'s actually listening. It helps."',
           '"I keep going over it. Having someone here... it slows the spiral."',
+          '"My hands stopped shaking. That\'s — that\'s something. Thank you for sitting here."',
+          '"I can breathe all the way down again. I couldn\'t, before you sat down."',
+          '"Saying it out loud makes it smaller. Still there. Smaller."',
+          '"I keep waiting for it to get worse again. It hasn\'t. Not while you\'re here."',
         ]) || '"It helps. Just — saying it out loud. It helps."';
       },
       deflectBeat(vid) {
