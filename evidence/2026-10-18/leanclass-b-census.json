@@ -1,0 +1,766 @@
+{
+ "pairs": 16,
+ "attribution": {
+  "artifactPairs": 0,
+  "artifactBar": 0,
+  "artifactOk": true,
+  "leanWindowTrims": 1,
+  "leanWindowBar": 0,
+  "leanWindowOk": false,
+  "wouldSanityMisses": 0
+ },
+ "channels": {
+  "governor-effect": 16,
+  "artifact": 0,
+  "identical-no-trim": 0,
+  "identical-despite-trims": 0
+ },
+ "classL": {
+  "total": 10,
+  "channels": {
+   "governor-effect": 10,
+   "artifact": 0,
+   "identical-no-trim": 0,
+   "identical-despite-trims": 0
+  },
+  "governorEffectShare": 1
+ },
+ "wall": {
+  "national": "7/16",
+  "table": "12/16",
+  "wins": "0/16",
+  "wave4": "10/16",
+  "wave5": "0/16",
+  "medianSurvivalArmed": 136,
+  "medianSurvivalControl": 148,
+  "maxSurvival": 180
+ },
+ "survivalDelta": [
+  {
+   "seed": 6417,
+   "policy": "leadfeast",
+   "delta": -66
+  },
+  {
+   "seed": 6418,
+   "policy": "leadfeast",
+   "delta": 7
+  },
+  {
+   "seed": 6419,
+   "policy": "leadfeast",
+   "delta": -29
+  },
+  {
+   "seed": 6420,
+   "policy": "leadfeast",
+   "delta": 32
+  },
+  {
+   "seed": 6421,
+   "policy": "leadfeast",
+   "delta": -10
+  },
+  {
+   "seed": 6422,
+   "policy": "leadfeast",
+   "delta": -38
+  },
+  {
+   "seed": 6423,
+   "policy": "leadfeast",
+   "delta": -16
+  },
+  {
+   "seed": 6424,
+   "policy": "leadfeast",
+   "delta": 41
+  },
+  {
+   "seed": 6417,
+   "policy": "belongfeast",
+   "delta": 0
+  },
+  {
+   "seed": 6418,
+   "policy": "belongfeast",
+   "delta": -8
+  },
+  {
+   "seed": 6419,
+   "policy": "belongfeast",
+   "delta": 65
+  },
+  {
+   "seed": 6420,
+   "policy": "belongfeast",
+   "delta": -113
+  },
+  {
+   "seed": 6421,
+   "policy": "belongfeast",
+   "delta": 127
+  },
+  {
+   "seed": 6422,
+   "policy": "belongfeast",
+   "delta": 72
+  },
+  {
+   "seed": 6423,
+   "policy": "belongfeast",
+   "delta": -89
+  },
+  {
+   "seed": 6424,
+   "policy": "belongfeast",
+   "delta": -29
+  }
+ ],
+ "perPair": [
+  {
+   "seed": 6417,
+   "policy": "leadfeast",
+   "daysC": 180,
+   "daysA": 114,
+   "endC": "survived",
+   "endA": "village-lost",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 587,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 24,
+   "rotC": "289k",
+   "rotA": "13k",
+   "shareC": "646k",
+   "shareA": "269k",
+   "starveC": 30,
+   "starveA": 12,
+   "glutC": 143,
+   "glutA": 80,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "combat": 13,
+     "a wound that wouldn't close": 2,
+     "monster": 3
+    },
+    "preA": {},
+    "postA": {
+     "combat": 12,
+     "monster": 5,
+     "a wound that wouldn't close": 2,
+     "starvation": 1
+    }
+   }
+  },
+  {
+   "seed": 6418,
+   "policy": "leadfeast",
+   "daysC": 129,
+   "daysA": 136,
+   "endC": "village-lost",
+   "endA": "village-lost",
+   "classL": false,
+   "channel": "governor-effect",
+   "onsetDay": 6,
+   "firstTrimDay": 5,
+   "firstWouldDay": 5,
+   "wouldSanityOk": true,
+   "trims": 544,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 73,
+   "rotC": "104k",
+   "rotA": "0k",
+   "shareC": "430k",
+   "shareA": "205k",
+   "starveC": 30,
+   "starveA": 16,
+   "glutC": 112,
+   "glutA": 90,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "combat": 7,
+     "monster": 2,
+     "alien": 1
+    },
+    "preA": {},
+    "postA": {
+     "combat": 10,
+     "contest": 2,
+     "monster": 5
+    }
+   }
+  },
+  {
+   "seed": 6419,
+   "policy": "leadfeast",
+   "daysC": 151,
+   "daysA": 122,
+   "endC": "village-lost",
+   "endA": "village-lost",
+   "classL": false,
+   "channel": "governor-effect",
+   "onsetDay": 5,
+   "firstTrimDay": 4,
+   "firstWouldDay": 4,
+   "wouldSanityOk": true,
+   "trims": 434,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 27,
+   "rotC": "136k",
+   "rotA": "16k",
+   "shareC": "379k",
+   "shareA": "196k",
+   "starveC": 19,
+   "starveA": 31,
+   "glutC": 106,
+   "glutA": 79,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "monster": 5,
+     "combat": 16
+    },
+    "preA": {},
+    "postA": {
+     "monster": 5,
+     "dehydration": 4,
+     "combat": 6,
+     "a wound that wouldn't close": 1
+    }
+   }
+  },
+  {
+   "seed": 6420,
+   "policy": "leadfeast",
+   "daysC": 148,
+   "daysA": 180,
+   "endC": "village-lost",
+   "endA": "survived",
+   "classL": false,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 703,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 15,
+   "rotC": "203k",
+   "rotA": "44k",
+   "shareC": "513k",
+   "shareA": "319k",
+   "starveC": 25,
+   "starveA": 22,
+   "glutC": 109,
+   "glutA": 137,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "combat": 16,
+     "monster": 7,
+     "contest": 1
+    },
+    "preA": {},
+    "postA": {
+     "combat": 12,
+     "monster": 8,
+     "contest": 1
+    }
+   }
+  },
+  {
+   "seed": 6421,
+   "policy": "leadfeast",
+   "daysC": 122,
+   "daysA": 112,
+   "endC": "village-lost",
+   "endA": "village-lost",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 642,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 8,
+   "rotC": "68k",
+   "rotA": "66k",
+   "shareC": "347k",
+   "shareA": "270k",
+   "starveC": 15,
+   "starveA": 10,
+   "glutC": 107,
+   "glutA": 90,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "monster": 2,
+     "combat": 8,
+     "sickness": 3,
+     "a wound that wouldn't close": 2,
+     "dehydration": 1,
+     "big ugly": 1
+    },
+    "preA": {},
+    "postA": {
+     "monster": 3,
+     "combat": 11,
+     "contest": 2,
+     "the night": 1
+    }
+   }
+  },
+  {
+   "seed": 6422,
+   "policy": "leadfeast",
+   "daysC": 180,
+   "daysA": 142,
+   "endC": "survived",
+   "endA": "village-lost",
+   "classL": false,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 1104,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 4,
+   "rotC": "151k",
+   "rotA": "351k",
+   "shareC": "615k",
+   "shareA": "528k",
+   "starveC": 40,
+   "starveA": 27,
+   "glutC": 146,
+   "glutA": 126,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "monster": 6,
+     "combat": 11,
+     "contest": 2,
+     "dehydration": 1
+    },
+    "preA": {},
+    "postA": {
+     "monster": 4,
+     "combat": 12
+    }
+   }
+  },
+  {
+   "seed": 6423,
+   "policy": "leadfeast",
+   "daysC": 60,
+   "daysA": 44,
+   "endC": "village-lost",
+   "endA": "village-lost",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 215,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 2,
+   "rotC": "25k",
+   "rotA": "5k",
+   "shareC": "116k",
+   "shareA": "38k",
+   "starveC": 25,
+   "starveA": 17,
+   "glutC": 50,
+   "glutA": 32,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "sickness": 6,
+     "monster": 1,
+     "starvation": 2
+    },
+    "preA": {},
+    "postA": {
+     "combat": 1,
+     "sickness": 4,
+     "a wound that wouldn't close": 1,
+     "starvation": 4,
+     "monster": 1
+    }
+   }
+  },
+  {
+   "seed": 6424,
+   "policy": "leadfeast",
+   "daysC": 95,
+   "daysA": 136,
+   "endC": "village-lost",
+   "endA": "village-lost",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 4,
+   "firstTrimDay": 3,
+   "firstWouldDay": 3,
+   "wouldSanityOk": true,
+   "trims": 573,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 35,
+   "rotC": "109k",
+   "rotA": "8k",
+   "shareC": "219k",
+   "shareA": "271k",
+   "starveC": 5,
+   "starveA": 18,
+   "glutC": 76,
+   "glutA": 85,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "ambush": 1,
+     "alien": 1,
+     "dehydration": 2,
+     "combat": 3,
+     "monster": 1
+    },
+    "preA": {},
+    "postA": {
+     "monster": 5,
+     "combat": 12
+    }
+   }
+  },
+  {
+   "seed": 6417,
+   "policy": "belongfeast",
+   "daysC": 180,
+   "daysA": 180,
+   "endC": "survived",
+   "endA": "survived",
+   "classL": false,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 1213,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 3,
+   "rotC": "334k",
+   "rotA": "70k",
+   "shareC": "920k",
+   "shareA": "353k",
+   "starveC": 23,
+   "starveA": 22,
+   "glutC": 149,
+   "glutA": 175,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "combat": 11,
+     "a wound that wouldn't close": 1,
+     "the algorithm": 1,
+     "monster": 1,
+     "the audit": 1
+    },
+    "preA": {},
+    "postA": {
+     "combat": 3,
+     "monster": 3
+    }
+   }
+  },
+  {
+   "seed": 6418,
+   "policy": "belongfeast",
+   "daysC": 110,
+   "daysA": 102,
+   "endC": "village-lost",
+   "endA": "village-lost",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 6,
+   "firstTrimDay": 5,
+   "firstWouldDay": 5,
+   "wouldSanityOk": true,
+   "trims": 326,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 39,
+   "rotC": "38k",
+   "rotA": "0k",
+   "shareC": "363k",
+   "shareA": "206k",
+   "starveC": 25,
+   "starveA": 20,
+   "glutC": 73,
+   "glutA": 53,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "combat": 7,
+     "contest": 1,
+     "monster": 3
+    },
+    "preA": {},
+    "postA": {
+     "combat": 8,
+     "monster": 4,
+     "contest": 2,
+     "big loud": 1
+    }
+   }
+  },
+  {
+   "seed": 6419,
+   "policy": "belongfeast",
+   "daysC": 115,
+   "daysA": 180,
+   "endC": "village-lost",
+   "endA": "survived",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 5,
+   "firstTrimDay": 4,
+   "firstWouldDay": 4,
+   "wouldSanityOk": true,
+   "trims": 459,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 68,
+   "rotC": "10k",
+   "rotA": "10k",
+   "shareC": "302k",
+   "shareA": "486k",
+   "starveC": 12,
+   "starveA": 82,
+   "glutC": 36,
+   "glutA": 81,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "monster": 6,
+     "combat": 12,
+     "dehydration": 1,
+     "contest": 2
+    },
+    "preA": {},
+    "postA": {
+     "monster": 6,
+     "combat": 20
+    }
+   }
+  },
+  {
+   "seed": 6420,
+   "policy": "belongfeast",
+   "daysC": 170,
+   "daysA": 57,
+   "endC": "village-lost",
+   "endA": "village-lost",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 266,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 29,
+   "rotC": "169k",
+   "rotA": "1k",
+   "shareC": "584k",
+   "shareA": "113k",
+   "starveC": 89,
+   "starveA": 16,
+   "glutC": 83,
+   "glutA": 43,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "combat": 15,
+     "the paparazzo": 1,
+     "monster": 5
+    },
+    "preA": {},
+    "postA": {
+     "combat": 6,
+     "monster": 1,
+     "the focus group": 1,
+     "starvation": 1
+    }
+   }
+  },
+  {
+   "seed": 6421,
+   "policy": "belongfeast",
+   "daysC": 53,
+   "daysA": 180,
+   "endC": "village-lost",
+   "endA": "survived",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 768,
+   "leanWindowTrims": 1,
+   "intraDaySpikes": 65,
+   "rotC": "14k",
+   "rotA": "20k",
+   "shareC": "173k",
+   "shareA": "630k",
+   "starveC": 14,
+   "starveA": 38,
+   "glutC": 43,
+   "glutA": 128,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "monster": 1,
+     "sickness": 2,
+     "a wound that wouldn't close": 1,
+     "dehydration": 2,
+     "starvation": 3
+    },
+    "preA": {},
+    "postA": {
+     "combat": 11,
+     "monster": 5,
+     "the night": 1
+    }
+   }
+  },
+  {
+   "seed": 6422,
+   "policy": "belongfeast",
+   "daysC": 108,
+   "daysA": 180,
+   "endC": "village-lost",
+   "endA": "survived",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 857,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 22,
+   "rotC": "98k",
+   "rotA": "83k",
+   "shareC": "365k",
+   "shareA": "635k",
+   "starveC": 18,
+   "starveA": 36,
+   "glutC": 68,
+   "glutA": 96,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "monster": 7,
+     "combat": 12,
+     "alien": 1
+    },
+    "preA": {},
+    "postA": {
+     "combat": 11,
+     "monster": 2,
+     "the night": 1,
+     "dehydration": 1
+    }
+   }
+  },
+  {
+   "seed": 6423,
+   "policy": "belongfeast",
+   "daysC": 180,
+   "daysA": 91,
+   "endC": "survived",
+   "endA": "village-lost",
+   "classL": true,
+   "channel": "governor-effect",
+   "onsetDay": 3,
+   "firstTrimDay": 2,
+   "firstWouldDay": 2,
+   "wouldSanityOk": true,
+   "trims": 252,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 19,
+   "rotC": "39k",
+   "rotA": "5k",
+   "shareC": "576k",
+   "shareA": "99k",
+   "starveC": 16,
+   "starveA": 40,
+   "glutC": 83,
+   "glutA": 41,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "sickness": 4,
+     "monster": 6,
+     "combat": 5,
+     "contest": 3
+    },
+    "preA": {},
+    "postA": {
+     "combat": 2,
+     "monster": 1,
+     "sickness": 3,
+     "a wound that wouldn't close": 4,
+     "starvation": 3
+    }
+   }
+  },
+  {
+   "seed": 6424,
+   "policy": "belongfeast",
+   "daysC": 180,
+   "daysA": 151,
+   "endC": "survived",
+   "endA": "village-lost",
+   "classL": false,
+   "channel": "governor-effect",
+   "onsetDay": 4,
+   "firstTrimDay": 3,
+   "firstWouldDay": 3,
+   "wouldSanityOk": true,
+   "trims": 362,
+   "leanWindowTrims": 0,
+   "intraDaySpikes": 35,
+   "rotC": "352k",
+   "rotA": "1k",
+   "shareC": "709k",
+   "shareA": "311k",
+   "starveC": 16,
+   "starveA": 22,
+   "glutC": 163,
+   "glutA": 57,
+   "causeSplit": {
+    "preC": {},
+    "postC": {
+     "ambush": 1,
+     "monster": 3,
+     "combat": 6,
+     "a wound that wouldn't close": 1,
+     "contest": 1
+    },
+    "preA": {},
+    "postA": {
+     "monster": 3,
+     "combat": 6,
+     "contest": 1,
+     "a wound that wouldn't close": 1
+    }
+   }
+  }
+ ]
+}
