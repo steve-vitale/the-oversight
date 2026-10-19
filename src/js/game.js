@@ -5878,6 +5878,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
     },
 
+    // occHuntTier(vp): the hunt-detector wiring fix (sim-huntfix-b 2026-10-19;
+    // huntroster-b named fix spec option 1). The engine's hunt detectors used
+    // to match ghost occupation WORDS ('hunter','tracker','ranger','soldier',
+    // 'marine','poacher' / includes('hunter')) that exist in NEITHER person
+    // table — a literal hunting_guide scored exactly what an ER nurse scored,
+    // and villagerHuntResolve's +20% hunter bonus fired on zero persons.
+    // The tier now lives in data: characterGen.json occupations carry
+    // huntTier 1.4 | 1.2. Resolved via occupationId, with a lowercased-name
+    // fallback for unhydrated seeds / old saves (mirrors hydrateSeed's own
+    // matching). Returns 0 when the occupation carries no tier.
+    // (Spec said "14 occupations" but listed 13 ids; implemented the 13 named.
+    // Adjacent ghost-word checks at 3287/15036/24528 (teach/forage/player
+    // hunt) are intentionally NOT chased by this arm — documented only.)
+    occHuntTier(vp) {
+      try {
+        const occs = ((this.data || {}).characterGen || {}).occupations || [];
+        const oid = vp && vp.occupationId;
+        if (oid) {
+          const o = occs.find(x => x && x.id === oid);
+          if (o && (o.huntTier === 1.4 || o.huntTier === 1.2)) return o.huntTier;
+        }
+        const on = String((vp && vp.formerOccupation) || '').toLowerCase();
+        if (on) {
+          const o = occs.find(x => x &&
+            (String(x.name || '').toLowerCase() === on || String(x.id || '').toLowerCase() === on));
+          if (o && (o.huntTier === 1.4 || o.huntTier === 1.2)) return o.huntTier;
+        }
+      } catch (e) {}
+      return 0;
+    },
+
     // competence: how good is this person at this task? 0.7 / 1.0 / 1.4
     // from occupation keywords + personality. Assign wisely.
     villagerCompetence(vid, task) {
@@ -5889,8 +5920,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let mult = 1.0;
       const has = (...words) => words.some(w => occ.includes(w));
       if (task === 'hunt') {
-        if (has('hunter', 'tracker', 'ranger', 'soldier', 'marine', 'poacher')) mult = 1.4;
-        else if (has('butcher', 'farmer', 'athlete')) mult = 1.2;
+        // HUNT TIER (wiring fix 2026-10-19, sim-huntfix-b): data-driven via
+        // occupationId (occHuntTier), REPLACING the 1.4x/1.2x word lists. The
+        // old lists ('hunter','tracker','ranger','soldier','marine','poacher'
+        // / 'butcher','farmer','athlete') referenced ghost occupations with
+        // zero occurrences in either person table (verified 2026-10-19), so
+        // the replace is exact for every real occupation; the 1.4 tier now
+        // actually fires on the 8 hunter occupations. The 0.7 list is
+        // untouched (separate concern, still word-based).
+        const ht = this.occHuntTier ? this.occHuntTier(vp) : 0;
+        if (ht === 1.4) mult = 1.4;
+        else if (ht === 1.2) mult = 1.2;
         else if (has('librarian', 'accountant', 'teacher', 'programmer', 'clerk')) mult = 0.7;
       } else if (task === 'forage') {
         if (has('cook', 'chef', 'forager', 'botanist', 'farmer', 'gardener', 'herbalist')) mult = 1.4;
@@ -6261,8 +6301,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let base = animal.difficulty === 'easy' ? 0.7 : animal.difficulty === 'medium' ? 0.4 : 0.15;
       let isHunter = false;
       try {
+        // HUNT TIER (wiring fix 2026-10-19, sim-huntfix-b): the old
+        // formerOccupation.includes('hunter') fired on ZERO persons in
+        // either table ('Hunting guide' does not contain 'hunter') — dead
+        // code. The +20% now fires on the 1.4 hunt tier (the hunter
+        // occupations); the 1.2 tier (butcher/farmer-adjacent) keeps its
+        // competence bonus but not the +20%. +0.2 additive, capped at 0.95
+        // below; the injury roll is untouched.
         const vp = this.getPerson(vid) || {};
-        isHunter = String(vp.formerOccupation || '').toLowerCase().includes('hunter');
+        isHunter = (this.occHuntTier ? this.occHuntTier(vp) : 0) === 1.4;
       } catch (e) {}
       let wbonus = 0;
       try {
