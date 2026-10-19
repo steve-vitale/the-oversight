@@ -1,0 +1,6005 @@
+{
+ "seed": 64207,
+ "policyId": "belongfeast",
+ "substrate": "pre-seat-winside-novetrel",
+ "days": 149,
+ "gameDays": 150,
+ "endReason": "village-lost",
+ "won": false,
+ "endFlags": {
+  "scattered": true,
+  "extinct": false,
+  "scholarDead": false,
+  "over": true,
+  "villageLost": true
+ },
+ "endSnap": {
+  "d": 150,
+  "pantry": 0,
+  "hungryDays": 3,
+  "scattered": true,
+  "extinct": false,
+  "roster": 1,
+  "living": 1,
+  "scholarAlive": true,
+  "scholarDead": false,
+  "vid": "gen_lznvlrx",
+  "hungryStreak": 0,
+  "uw": 4
+ },
+ "maxWave": 4,
+ "successions": 10,
+ "successionDays": [
+  {
+   "day": 69,
+   "from": "gen_ublv6lc",
+   "to": "gen_608g3f7"
+  },
+  {
+   "day": 91,
+   "from": "gen_608g3f7",
+   "to": "gen_evh5t91"
+  },
+  {
+   "day": 92,
+   "from": "gen_evh5t91",
+   "to": "gen_3dg4klb"
+  },
+  {
+   "day": 99,
+   "from": "gen_3dg4klb",
+   "to": "jovan_milic"
+  },
+  {
+   "day": 101,
+   "from": "jovan_milic",
+   "to": "jorge_silva"
+  },
+  {
+   "day": 125,
+   "from": "jorge_silva",
+   "to": "katarina_novak"
+  },
+  {
+   "day": 132,
+   "from": "katarina_novak",
+   "to": "zoltan_nagy"
+  },
+  {
+   "day": 134,
+   "from": "zoltan_nagy",
+   "to": "chantal_mukendi"
+  },
+  {
+   "day": 137,
+   "from": "chantal_mukendi",
+   "to": "elijah_scott"
+  },
+  {
+   "day": 149,
+   "from": "elijah_scott",
+   "to": "gen_lznvlrx"
+  }
+ ],
+ "instrumentErrors": 0,
+ "deathsFull": [
+  {
+   "day": 69,
+   "who": "gen_ublv6lc",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:aid-crisis",
+   "killerWave": null
+  },
+  {
+   "day": 72,
+   "who": "gen_11gjttw",
+   "cause": "monster",
+   "player": false,
+   "channel": "wild",
+   "rule": "ctx:router",
+   "killerWave": null
+  },
+  {
+   "day": 82,
+   "who": "meera_reddy",
+   "cause": "monster",
+   "player": false,
+   "channel": "wild",
+   "rule": "ctx:router",
+   "killerWave": null
+  },
+  {
+   "day": 91,
+   "who": "gen_608g3f7",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 92,
+   "who": "gen_evh5t91",
+   "cause": "combat",
+   "player": true,
+   "channel": "expedition",
+   "rule": "ctx:on-expedition",
+   "killerWave": null
+  },
+  {
+   "day": 99,
+   "who": "gen_3dg4klb",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 101,
+   "who": "jovan_milic",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 119,
+   "who": "visjoin_110",
+   "cause": "monster",
+   "player": false,
+   "channel": "wild",
+   "rule": "ctx:router",
+   "killerWave": null
+  },
+  {
+   "day": 124,
+   "who": "jorge_silva",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:aid-crisis",
+   "killerWave": null
+  },
+  {
+   "day": 132,
+   "who": "katarina_novak",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 134,
+   "who": "zoltan_nagy",
+   "cause": "combat",
+   "player": true,
+   "channel": "wild",
+   "rule": "ctx:scholar-fight-in-wild",
+   "killerWave": null
+  },
+  {
+   "day": 137,
+   "who": "chantal_mukendi",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:aid-crisis",
+   "killerWave": null
+  },
+  {
+   "day": 149,
+   "who": "elijah_scott",
+   "cause": "lockjaw",
+   "player": true,
+   "channel": "disease",
+   "rule": "cause",
+   "killerWave": null
+  }
+ ],
+ "deathsSummary": {
+  "rawCount": 39,
+  "attributedCount": 13,
+  "phantomCount": 1,
+  "nullWho": 0
+ },
+ "flows": [
+  [
+   20,
+   "tribute",
+   5000
+  ],
+  [
+   21,
+   "feast",
+   1
+  ],
+  [
+   21,
+   "tribute",
+   5099
+  ],
+  [
+   28,
+   "tribute",
+   5000
+  ],
+  [
+   29,
+   "feast",
+   1
+  ],
+  [
+   35,
+   "tribute",
+   5049
+  ],
+  [
+   36,
+   "feast",
+   1
+  ],
+  [
+   42,
+   "tribute",
+   5100
+  ],
+  [
+   49,
+   "tribute",
+   5010
+  ],
+  [
+   50,
+   "feast",
+   1
+  ],
+  [
+   56,
+   "tribute",
+   5080
+  ],
+  [
+   57,
+   "tribute",
+   5026
+  ],
+  [
+   63,
+   "tribute",
+   5008
+  ],
+  [
+   64,
+   "feast",
+   1
+  ],
+  [
+   70,
+   "tribute",
+   5120
+  ],
+  [
+   71,
+   "feast",
+   1
+  ],
+  [
+   77,
+   "tribute",
+   7520
+  ],
+  [
+   78,
+   "feast",
+   1
+  ],
+  [
+   84,
+   "tribute",
+   7560
+  ],
+  [
+   85,
+   "feast",
+   1
+  ],
+  [
+   91,
+   "tribute",
+   11308
+  ],
+  [
+   92,
+   "feast",
+   1
+  ],
+  [
+   98,
+   "tribute",
+   11250
+  ],
+  [
+   99,
+   "feast",
+   1
+  ]
+ ],
+ "beats": [
+  {
+   "day": 69,
+   "tag": "bond-is-young",
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 71,
+   "tag": "oath-summons",
+   "text": "📯 Thornfield's court summons Haven's speaker. SWEAR the oath of the realm (a gift seals it), SERVE at their court (seven days of your speaker's life), or WALK — break the link and stay a free fire, refusing the scale itself with it (the offer does not return). Or REFUSE the scale itself — stay a free fire at regional, whatever that costs. The System will not offer twice."
+  },
+  {
+   "day": 76,
+   "tag": "speaker-install",
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 91,
+   "tag": "speaker-install",
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  },
+  {
+   "day": 99,
+   "tag": "speaker-install",
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 124,
+   "tag": "speaker-install",
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 132,
+   "tag": "speaker-install",
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 149,
+   "tag": "speaker-install",
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  }
+ ],
+ "sayLog": [
+  {
+   "day": 1,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 2,
+   "text": "👀 \"Wild food forager, huh?\" the person in their 40s, with thick glasses, the wild food forager nods — then, an hour later, drops a shop-talk detail no Wild food forager would ever get right. They catch themselves. Too late."
+  },
+  {
+   "day": 2,
+   "text": "🌿 A person, maybe 30s checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 3,
+   "text": "🌿 A person, maybe 30s checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 4,
+   "text": "🌿 Salvatore returns from foraging the wilds: +297 kcal to the pantry."
+  },
+  {
+   "day": 4,
+   "text": "🌿 A person, maybe 30s checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 4,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 4,
+   "text": "★ IDENTIFIED: Greenbrier Shoots. Greenbrier. Thorny vines, tender spring tips that snap like asparagus. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 5,
+   "text": "Travel 2 tiles to grove.\n— Nut trees —\nBark stripped at deer height on a young hickory — teeth, winter, hunger. Somebody winters here. Maybe you will too."
+  },
+  {
+   "day": 5,
+   "text": "Movement — a thick-bodied rattlesnake, chevron bands, the tail a blur of dry sound."
+  },
+  {
+   "day": 5,
+   "text": "You sow Muscadine Grapes — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 5,
+   "text": "You sow Muscadine Grapes — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 5,
+   "text": "🌿 A person, maybe 30s checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 5,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 6,
+   "text": "👀 the person in their 40s, with thick glasses, the wild food forager talks about wanting to belong somewhere the way people talk about weather — often, and with no plans to change it. The real wanting is somewhere they keep not looking."
+  },
+  {
+   "day": 6,
+   "text": "🌿 A person, maybe 30s checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "You sow Blackberry — 12 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 6,
+   "text": "You sow Blackberry — 12 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 6,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 6,
+   "text": "A runner from Stonebridge, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 7,
+   "text": "👀 Someone asks the person in their 40s, with thick glasses, the wild food forager a shop-talk question about Wild food forager work. The pause before the answer is long enough to hear."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A person, maybe 30s returns from foraging the wilds: +469 kcal to the pantry."
+  },
+  {
+   "day": 7,
+   "text": "⚔️ Willie stood down the stripes flowing where no wind blows and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A person, maybe 30s checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "📻 \"Why do the small humans keep putting organic matter in their FACE-HOLES? We built you a fusion pellet! ...You BURIED it. WHY did you bury the pellet?!\""
+  },
+  {
+   "day": 7,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 7,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 7,
+   "text": "A runner from Emberhold, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 7,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 8,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~17 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "◈ SYSTEM: \"RATINGS DIP. The audience wants STAKES — pointed ones. A PALISADE. Stockpile 14,000 kcal, 350 wood and 60 stone. Walls make such good television. You will thank us when the teeth come.\""
+  },
+  {
+   "day": 8,
+   "text": "🐗 RAID — 5 raiders (Cliffhanger, Nightlight, Flashbulb Moth, The Anaconda Empress, The Living Wire) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 8,
+   "text": "📖 The Codex turns a page on its own. The Living Wire is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 8,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 8,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 9,
+   "text": "Too close. The mugger's attention SNAPS to Salvatore — proximity overrules patience."
+  },
+  {
+   "day": 9,
+   "text": "📓 Codex: Ornicha proposed relief (raid), day 9."
+  },
+  {
+   "day": 9,
+   "text": "⚔️ Salvatore stood down the Cliffhanger and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 9,
+   "text": "⚔️ Cheryl stood down the Nightlight and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 9,
+   "text": "⚔️ Ndung'u stood down the Flashbulb Moth and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 9,
+   "text": "⚔️ Zoltan stood down the Anaconda Empress and kept walking — 6 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 9,
+   "text": "⚔️ Jovan killed the Living Wire alone — 3 rounds, 13 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 9,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~24 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +524 kcal to the pantry."
+  },
+  {
+   "day": 10,
+   "text": "⚔️ Tom stood down the Drum-Belly and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "text": "🐺 HOWLS in the distance. Closer than before. The System chirps: \"Oh! We made those! Are they... too many? We can make fewer?\" (New monster: hushwolf pack.)"
+  },
+  {
+   "day": 10,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 10,
+   "text": "🧵 THE THREAD HOME — Seek Lisa Wiesner — your sister, Taken at the Scattering. The Photo Album still says their name."
+  },
+  {
+   "day": 10,
+   "text": "◈ \"UNIT KNIFE ROLL — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn; camp cooking goes further. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 10,
+   "text": "◈ \"UNIT SEED PACKET — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 10,
+   "text": "◈ \"UNIT BOOT STONE — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 10,
+   "text": "◈ FLASHBACK — Boot stone\nYou carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~38 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 12,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 12,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 13,
+   "text": "🌿 Jovan returns from foraging the wilds: +300 kcal to the pantry."
+  },
+  {
+   "day": 13,
+   "text": "Travel 2 tiles to meadow.\n— Open ground —\nWind moves through the grass in waves. Seeds catch on your clothes, hitching a ride."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~38 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Salvatore returns from foraging the wilds: +292 kcal to the pantry."
+  },
+  {
+   "day": 13,
+   "text": "◈ RESONANCE HARMONICS — SYSTEM: \"HYPOTHESIS CONFIRMED. Objects with high observer-attention waveforms function as auxiliary capacitors. We call this RESONANCE HARMONICS. We do not know why the waveforms taste like grief. We have stopped asking.\" — Hold a keepsake. Think about them. The System will do the math. (It is n"
+  },
+  {
+   "day": 13,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 13,
+   "text": "The garden: your untended Blackberry drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 13,
+   "text": "The garden: your untended Blackberry drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 14,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +517 kcal to the pantry."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Jovan returns from foraging the wilds: +554 kcal to the pantry."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~42 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "👂 Overheard — Jovan: \"I say we name the monsters. Everything's less scary with a name.\""
+  },
+  {
+   "day": 16,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Katarina returns from foraging the wilds: +403 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Tom returns from foraging the wilds: +366 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "text": "⚔️ Willie stood down the Highbeam Deer and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🐗 RAID — 5 raiders (Don't-Look, Hushpuppy, Hushpuppy, Nevermore, Don't-Look) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 17,
+   "text": "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (Two survived encounters — the fire has a theory.)"
+  },
+  {
+   "day": 17,
+   "text": "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free."
+  },
+  {
+   "day": 17,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 18,
+   "text": "White meat, firm like fish. The tail is the prize cut — smoke it. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 18,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 80)"
+  },
+  {
+   "day": 18,
+   "text": "◈ TRIAL RECOGNIZED — the System has been watching. You WON a fight. Not survived — won. The audience is still standing. So are you. (Combat track +)"
+  },
+  {
+   "day": 18,
+   "text": "The Hushpuppy is on you — no warning, just teeth."
+  },
+  {
+   "day": 18,
+   "text": "Edible but lean. The old taboo itches; hunger doesn't care. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 18,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 92)"
+  },
+  {
+   "day": 18,
+   "text": "🌿 Jorge returns from foraging the wilds: +478 kcal to the pantry."
+  },
+  {
+   "day": 18,
+   "text": "⚔️ Ndung'u stood down the Nevermore and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 18,
+   "text": "⚔️ Katarina stood down the Don't-Look and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\""
+  },
+  {
+   "day": 18,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 19,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~38 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 19,
+   "text": "💛 The Photo Album has become something you can reach for. (Keepsake L2 — new combat action: Lucky Break. Your next miss this fight becomes a hit. Once per fight.)"
+  },
+  {
+   "day": 19,
+   "text": "💛 The Knife roll has become something you can reach for. (Keepsake L2 — new combat action: Lucky Break. Your next miss this fight becomes a hit. Once per fight.)"
+  },
+  {
+   "day": 19,
+   "text": "💛 The Seed packet has become something you can reach for. (Keepsake L2 — new combat action: Steady. Hold it and breathe: clear fear and stun on yourself. Once per fight.)"
+  },
+  {
+   "day": 19,
+   "text": "💛 The Boot stone has become something you can reach for. (Keepsake L2 — new combat action: Hold. Nothing moves you this fight, and your next flee through the edge cannot be cut off (the relentless still follow). Once per fight.)"
+  },
+  {
+   "day": 20,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +411 kcal to the pantry."
+  },
+  {
+   "day": 20,
+   "text": "⛓️ Salvatore brings it home: Haven bows to Stonebridge — one organization, them primary. Tribute: 5,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 20,
+   "text": "The System's overlay stretches — new edges, new names. Coordination layer: warming up. It'll be ready when the bond is."
+  },
+  {
+   "day": 20,
+   "text": "Tribute paid: 5,000 kcal walks out of the pantry toward Stonebridge. The relationship holds."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Katarina returns from foraging the wilds: +269 kcal to the pantry."
+  },
+  {
+   "day": 20,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 21,
+   "text": "🗣️ Word with the traders: Stonebridge sent another fire grain when their stores ran thin — no tribute, no ceremony, just food on the road. That's a thing villages DO now."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Willie returns from foraging the wilds: +372 kcal to the pantry."
+  },
+  {
+   "day": 21,
+   "text": "Tribute paid: 5,099 kcal walks out of the pantry toward Stonebridge. The relationship holds."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~27 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Jovan returns from foraging the wilds: +542 kcal to the pantry."
+  },
+  {
+   "day": 22,
+   "text": "⚔️ Meera stood down the Drum-Belly and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 24,
+   "text": "🌿 Katarina returns from foraging the wilds: +364 kcal to the pantry."
+  },
+  {
+   "day": 24,
+   "text": "📖 The Codex turns a page on its own. Big Ugly is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 24,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 25,
+   "text": "⚔️ Tom killed the Big Ugly alone — 3 rounds, 32 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 25,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 25,
+   "text": "🌿 Salvatore returns from foraging the wilds: +265 kcal to the pantry."
+  },
+  {
+   "day": 25,
+   "text": "🌿 Jovan returns from foraging the wilds: +567 kcal to the pantry."
+  },
+  {
+   "day": 25,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 26,
+   "text": "🌿 Tom returns from foraging the wilds: +262 kcal to the pantry."
+  },
+  {
+   "day": 26,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 26,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 27,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~34 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 28,
+   "text": "Tribute paid: 5,000 kcal walks out of the pantry toward Stonebridge. The relationship holds."
+  },
+  {
+   "day": 28,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Katarina returns from foraging the wilds: +427 kcal to the pantry."
+  },
+  {
+   "day": 29,
+   "text": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 29,
+   "text": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 29,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 151)"
+  },
+  {
+   "day": 29,
+   "text": "⚔️ Zoltan stood down the Big Beast and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Jorge returns from foraging the wilds: +245 kcal to the pantry."
+  },
+  {
+   "day": 29,
+   "text": "📓 Codex: Maya of Emberhold raids Haven's treeline — demands ~2,000 kcal."
+  },
+  {
+   "day": 29,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Salvatore returns from foraging the wilds: +502 kcal to the pantry."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Cheryl returns from foraging the wilds: +363 kcal to the pantry."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +342 kcal to the pantry."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~30 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Jovan returns from foraging the wilds: +238 kcal to the pantry."
+  },
+  {
+   "day": 31,
+   "text": "💬 Ornicha says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  },
+  {
+   "day": 31,
+   "text": "🌿 Salvatore returns from foraging the wilds: +232 kcal to the pantry."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Tom returns from foraging the wilds: +484 kcal to the pantry."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +433 kcal to the pantry."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "🌿 Tom returns from foraging the wilds: +327 kcal to the pantry."
+  },
+  {
+   "day": 32,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "💔 Emberhold is coming apart from hunger — a faction walked, looking for a fire that feeds. The Hungry Road is a new fire in the world now — 2 people under Ben."
+  },
+  {
+   "day": 32,
+   "text": "📓 Codex: Emberhold split (famine-flight). The Hungry Road formed; 2 petition at Haven's fire."
+  },
+  {
+   "day": 32,
+   "text": "📓 Codex: 2 petitioners from Emberhold (famine-flight): Omar Murphy, Priya Reyes."
+  },
+  {
+   "day": 33,
+   "text": "🌿 Salvatore returns from foraging the wilds: +379 kcal to the pantry."
+  },
+  {
+   "day": 33,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 33,
+   "text": "🐗 RAID — 5 raiders (Lockpick, Nevermore, The Big Beast, Murkcap, Hummice) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 33,
+   "text": "📖 The Codex turns a page on its own. Hummice is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 33,
+   "text": "A runner from The Hungry Road, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 34,
+   "text": "🌿 Katarina returns from foraging the wilds: +374 kcal to the pantry."
+  },
+  {
+   "day": 34,
+   "text": "🌿 Tom returns from foraging the wilds: +463 kcal to the pantry."
+  },
+  {
+   "day": 34,
+   "text": "🔥 The fire settles. Jovan has been quiet all evening, and now everyone knows why. \"Hummice — I put it down today.\" \"A low hum rises from the grass. It harmonizes with itself. Your teeth ache.\" \"Teeth in the grass, everywhere at once — a tide of small bites.\" A beat of silence, then the questions come all at once. Orni"
+  },
+  {
+   "day": 34,
+   "text": "⚔️ Salvatore stood down the Lockpick and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 34,
+   "text": "⚔️ Ndung'u stood down the Murkcap and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 34,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 34,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 35,
+   "text": "🌿 Jorge returns from foraging the wilds: +490 kcal to the pantry."
+  },
+  {
+   "day": 35,
+   "text": "Tribute paid: 5,049 kcal walks out of the pantry toward Stonebridge. The relationship holds."
+  },
+  {
+   "day": 35,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 35,
+   "text": "Word later: they walked to The Hungry Road. Another fire in the world, whether you wanted it or not."
+  },
+  {
+   "day": 35,
+   "text": "Word will travel: Haven is turned away the hungry. Other fires will remember. (Opinion -4 with every village that knows you.)"
+  },
+  {
+   "day": 36,
+   "text": "The lens steadies. You hear the shutter think about it."
+  },
+  {
+   "day": 36,
+   "text": "Paparazzo's attack hits you for 15."
+  },
+  {
+   "day": 36,
+   "text": "\"Say cheese.\" The lens steadies. (Flash incoming — freeze 1 turn. Prediction 3/4.)"
+  },
+  {
+   "day": 36,
+   "text": "\"Say cheese.\" The lens steadies. (Flash incoming — freeze 1 turn. Prediction 4/4.)"
+  },
+  {
+   "day": 36,
+   "text": "Salvatore exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 36,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 191)"
+  },
+  {
+   "day": 36,
+   "text": "You send 2,550 kcal. It hurts. That's rather the point of tribute."
+  },
+  {
+   "day": 36,
+   "text": "Jovan leans in, voice low. \"Here's what we figured out about The Paparazzo. Break line of sight before the fourth shot. Four shots is the whole fight — break line of sight before the fourth and the model starves. The EXCLUSIVE cannot be dodged, only prevented: move while the lens steadies.\""
+  },
+  {
+   "day": 36,
+   "text": "💡 COUNTER LEARNED — The Paparazzo: Break line of sight before the fourth shot. Four shots is the whole fight — break line of sight before the fourth and the model starves. The EXCLUSIVE cannot be dodged, only prevented: move while the lens steadies. (Someone at the haven knew the trick.)"
+  },
+  {
+   "day": 36,
+   "text": "📓 Codex: Counter: Break line of sight before the fourth shot — Four shots is the whole fight — break line of sight before the fourth and the model starves. The EXCLUSIVE cannot be dodged, only prevented: move while the lens steadies."
+  },
+  {
+   "day": 36,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~24 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 36,
+   "text": "🧳 A traveler says Emberhold burned — the whole fire, gone. (Wrong. It split: the hungry walked. The Hungry Road is the new fire.)"
+  },
+  {
+   "day": 37,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~23 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 37,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 38,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +371 kcal to the pantry."
+  },
+  {
+   "day": 38,
+   "text": "🌿 Tom returns from foraging the wilds: +598 kcal to the pantry."
+  },
+  {
+   "day": 38,
+   "text": "FUSION REACTOR: the pellet goes in — properly, inside you. A warm hum starts behind your ribs and settles. You will never be hungry again. One reactor per world: yours. It does not come out. (The System is DELIGHTED. That should worry you.)"
+  },
+  {
+   "day": 38,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~24 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 39,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~28 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 39,
+   "text": "🧳 The trader lowers their voice. \"And further still — FOUR fires under one head. They call it a REALM. Tribute flows uphill like a river; I saw the grain carts with my own eyes.\" They won't say more. Or can't."
+  },
+  {
+   "day": 40,
+   "text": "⚔️ Katarina stood down the Don't-Look and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 40,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 41,
+   "text": "🌿 Salvatore returns from foraging the wilds: +323 kcal to the pantry."
+  },
+  {
+   "day": 41,
+   "text": "🌿 Willie returns from foraging the wilds: +203 kcal to the pantry."
+  },
+  {
+   "day": 41,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 41,
+   "text": "🌿 Cheryl returns from foraging the wilds: +203 kcal to the pantry."
+  },
+  {
+   "day": 41,
+   "text": "◈ SYSTEM: \"One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast.\""
+  },
+  {
+   "day": 42,
+   "text": "📖 The Codex turns a page on its own. Sunback is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 42,
+   "text": "📺 Jovan killed Sunback out past the ridge — alone — and walked home. 3 rounds, 11 taken. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 42,
+   "text": "Tribute paid: 5,100 kcal walks out of the pantry toward Stonebridge. The relationship holds."
+  },
+  {
+   "day": 42,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 42,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 42,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1410 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 43,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~46 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 43,
+   "text": "🐗 RAID — 5 raiders (Murkcap, Don't-Look, Don't-Look, Big Loud, The Big Beast) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 44,
+   "text": "Salvatore exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 44,
+   "text": "Do not eat the monster mushroom. The flesh is ibotenic sponge — the spores alone are a trip you don't come back from."
+  },
+  {
+   "day": 44,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 235)"
+  },
+  {
+   "day": 44,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~59 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 44,
+   "text": "🧳 A traveler passed through yesterday, talking about a village to the northwest called The Hungry Road. The region is bigger than your fire."
+  },
+  {
+   "day": 44,
+   "text": "📖 LEARNED: Small Unit Tactics (Level 2). Bounding overwatch: one moves, one covers. Ambushes need kill zones. Retreats need rally points."
+  },
+  {
+   "day": 45,
+   "text": "🌿 Katarina returns from foraging the wilds: +390 kcal to the pantry."
+  },
+  {
+   "day": 45,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~114 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 46,
+   "text": "🌿 Willie returns from foraging the wilds: +317 kcal to the pantry."
+  },
+  {
+   "day": 46,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +318 kcal to the pantry."
+  },
+  {
+   "day": 46,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~117 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 47,
+   "text": "🌿 Tom returns from foraging the wilds: +350 kcal to the pantry."
+  },
+  {
+   "day": 47,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~110 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 47,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +554 kcal to the pantry."
+  },
+  {
+   "day": 47,
+   "text": "📖 The Codex turns a page on its own. Ugly-Eyes is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 47,
+   "text": "📺 Jovan killed Ugly-Eyes out past the ridge — alone — and walked home. 1 rounds, 8 taken. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 47,
+   "text": "📣 Jovan killed Ugly-Eyes out past the ridge — alone — and walked home. 1 rounds, 8 taken."
+  },
+  {
+   "day": 48,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~120 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 48,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 49,
+   "text": "Tribute paid: 5,010 kcal walks out of the pantry toward Stonebridge. The relationship holds."
+  },
+  {
+   "day": 49,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~118 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 49,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1375 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 50,
+   "text": "⚔️ Meera stood down the Sunbasker and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 50,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~96 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 50,
+   "text": "🌿 Katarina returns from foraging the wilds: +546 kcal to the pantry."
+  },
+  {
+   "day": 50,
+   "text": "🌿 Tom returns from foraging the wilds: +539 kcal to the pantry."
+  },
+  {
+   "day": 51,
+   "text": "Too close. The boar's attention SNAPS to Salvatore — proximity overrules patience."
+  },
+  {
+   "day": 51,
+   "text": "Salvatore exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 51,
+   "text": "Pork is pork. Smoke it; it keeps for weeks. The quills make excellent awls. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 51,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 275)"
+  },
+  {
+   "day": 51,
+   "text": "🔥 The fire settles. Salvatore has been quiet all evening, and now everyone knows why. \"Mosquito — I put it down today.\" \"Whining, closing. It circles — the sound gets closer.\" \"The whine steadies — DIVE. Telegraphed.\" A beat of silence, then the questions come all at once. Katarina mutters \"Did it look at you? Before?"
+  },
+  {
+   "day": 51,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~126 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 51,
+   "text": "🥣 Nora of The Hungry Road walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\""
+  },
+  {
+   "day": 52,
+   "text": "🌿 Jorge returns from foraging the wilds: +462 kcal to the pantry."
+  },
+  {
+   "day": 52,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~111 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 53,
+   "text": "🌿 Cheryl returns from foraging the wilds: +291 kcal to the pantry."
+  },
+  {
+   "day": 53,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~102 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 53,
+   "text": "Nora waits two days at your fire, getting thinner. Nobody answers. They walk back to The Hungry Road with nothing. They'll remember the silence."
+  },
+  {
+   "day": 54,
+   "text": "🌿 Katarina returns from foraging the wilds: +447 kcal to the pantry."
+  },
+  {
+   "day": 54,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~100 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 54,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 55,
+   "text": "🌿 Cheryl returns from foraging the wilds: +404 kcal to the pantry."
+  },
+  {
+   "day": 55,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~121 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Jovan returns from foraging the wilds: +471 kcal to the pantry."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Cheryl returns from foraging the wilds: +526 kcal to the pantry."
+  },
+  {
+   "day": 56,
+   "text": "Tribute paid: 5,080 kcal walks out of the pantry toward Stonebridge. The relationship holds."
+  },
+  {
+   "day": 56,
+   "text": "📖 The Codex turns a page on its own. Flashbulb Moth is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 56,
+   "text": "⚔️ Jovan killed the Flashbulb Moth alone — 2 rounds, 5 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~110 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +404 kcal to the pantry."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Jorge returns from foraging the wilds: +451 kcal to the pantry."
+  },
+  {
+   "day": 56,
+   "text": "★ IDENTIFIED: Feral Paddy Rice. Rice, gone feral in the old paddies. The staple of half the world. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 57,
+   "text": "🌿 Willie returns from foraging the wilds: +476 kcal to the pantry."
+  },
+  {
+   "day": 57,
+   "text": "🌿 Jovan returns from foraging the wilds: +243 kcal to the pantry."
+  },
+  {
+   "day": 57,
+   "text": "🚶 Haven walks from the table cleanly — no blades, no hard words. The bond ends where it stood, honestly."
+  },
+  {
+   "day": 57,
+   "text": "⛓️ Jovan brings it home: Haven bows to Thornfield — one organization, them primary. Tribute: 5,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 57,
+   "text": "Tribute paid: 5,026 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 57,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~98 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 58,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~110 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 58,
+   "text": "🐗 RAID — 5 raiders (Flashbulb Moth, Big Loud, The Loud Thing, Don't-Look, Don't-Look) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 59,
+   "text": "Mostly wing. Crunchy. Tastes like dust and regret. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 59,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 319)"
+  },
+  {
+   "day": 59,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +588 kcal to the pantry."
+  },
+  {
+   "day": 59,
+   "text": "◈ THE SYSTEM has been watching Salvatore — Combat 1. Three offers; they took Berserker Rage. Earned, chosen. (rage: villager level-up)"
+  },
+  {
+   "day": 59,
+   "text": "📓 Codex: Salvatore chose Berserker Rage (rage) at Combat 1."
+  },
+  {
+   "day": 59,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~109 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 60,
+   "text": "Salvatore exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 60,
+   "text": "A LOT of snake. Tough, rich, faintly fishy — and it feeds the whole village for days. The fat renders beautifully. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat ro"
+  },
+  {
+   "day": 60,
+   "text": "You clutch your Trail compass, Photo Album, Knife roll, Seed packet, Boot stone. You're still here. The resonance deepens. (bond 335)"
+  },
+  {
+   "day": 60,
+   "text": "💡 COUNTER LEARNED — Sunbasker: Never let it finish basking. Its scales go molten gold as it charges — hit it while it basks and the charge dies unspent — a stun, a shout, a thrown rock, anything that breaks its focus. Interruptible: the bask is a ritual, and rituals need quiet. Don't let it finish. Every uninterrupted"
+  },
+  {
+   "day": 60,
+   "text": "📓 Codex: Counter: Never let it finish basking — Its scales go molten gold as it charges — hit it while it basks and the charge dies unspent — a stun, a shout, a thrown rock, anything that breaks its focus. Interruptible: the bask is a ritual, and rituals need quiet. Don't let it finish. Every uninterrupted turn is a l"
+  },
+  {
+   "day": 60,
+   "text": "◈ THE SYSTEM has been watching Cheryl — Combat 1. Three offers; they took Berserker Rage. Earned, chosen. (rage: villager level-up)"
+  },
+  {
+   "day": 60,
+   "text": "📓 Codex: Cheryl chose Berserker Rage (rage) at Combat 1."
+  },
+  {
+   "day": 60,
+   "text": "◈ Something in Willie's eyes has changed. They've seen enough out there to stop being afraid of the dark."
+  },
+  {
+   "day": 60,
+   "text": "Taken: Gland sac x1, Teeth x3, The Anaconda Empress (carcass) x1."
+  },
+  {
+   "day": 60,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~103 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 60,
+   "text": "🌿 Salvatore returns from foraging the wilds: +316 kcal to the pantry."
+  },
+  {
+   "day": 60,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 61,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~95 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 61,
+   "text": "🌿 Salvatore returns from foraging the wilds: +394 kcal to the pantry."
+  },
+  {
+   "day": 61,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~975 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 62,
+   "text": "🌿 Cheryl returns from foraging the wilds: +471 kcal to the pantry."
+  },
+  {
+   "day": 62,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~93 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 63,
+   "text": "🌿 Katarina returns from foraging the wilds: +369 kcal to the pantry."
+  },
+  {
+   "day": 63,
+   "text": "🌿 Jorge returns from foraging the wilds: +373 kcal to the pantry."
+  },
+  {
+   "day": 63,
+   "text": "Tribute paid: 5,008 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 63,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~99 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 64,
+   "text": "📖 The Codex turns a page on its own. Static is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 64,
+   "text": "⚔️ Tom killed the Static alone — 2 rounds, 34 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 64,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~99 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 64,
+   "text": "◈ Jovan came back different. Quieter. Surer. The wild is writing on them."
+  },
+  {
+   "day": 65,
+   "text": "🌿 Katarina returns from foraging the wilds: +557 kcal to the pantry."
+  },
+  {
+   "day": 65,
+   "text": "🌿 Salvatore returns from foraging the wilds: +442 kcal to the pantry."
+  },
+  {
+   "day": 65,
+   "text": "◈ THE SYSTEM has been watching Jovan — Combat 1. Three offers; they took War Cry. Earned, chosen. (war_cry: villager level-up)"
+  },
+  {
+   "day": 65,
+   "text": "📓 Codex: Jovan chose War Cry (war_cry) at Combat 1."
+  },
+  {
+   "day": 65,
+   "text": "📖 The Codex turns a page on its own. tick is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 65,
+   "text": "⚔️ Jovan killed the tick alone — 2 rounds, 4 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 65,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~93 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 65,
+   "text": "🌙 Raid — The Hungry Road came in the night from the northwest. They carried off ~1179 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 66,
+   "text": "🔥 The fire settles. Jovan has been quiet all evening, and now everyone knows why. \"Tick — I put it down today.\" \"It waits. The questing legs wave — the tell.\" \"Adjacent = attached. No dodge. It's ON you.\" A beat of silence, then the questions come all at once. Ndung'u mutters \"And you're still standing.\" Meera mutters"
+  },
+  {
+   "day": 66,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~97 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 67,
+   "text": "🌿 Willie returns from foraging the wilds: +229 kcal to the pantry."
+  },
+  {
+   "day": 67,
+   "text": "💡 COUNTER LEARNED — The Redactor: Go quiet — starve the redaction. It redacts the loudest thing first, and the handles point a full round before the redaction lands. Go quiet for two turns and its attacks come thin; a third quiet turn starves it out of the fight. (Striking feeds it — every wound gets un-written.) (Mee"
+  },
+  {
+   "day": 67,
+   "text": "📓 Codex: Counter: Go quiet — starve the redaction — It redacts the loudest thing first, and the handles point a full round before the redaction lands. Go quiet for two turns and its attacks come thin; a third quiet turn starves it out of the fight. (Striking feeds it — every wound gets un-written.)"
+  },
+  {
+   "day": 67,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~108 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 67,
+   "text": "🌿 Cheryl returns from foraging the wilds: +295 kcal to the pantry."
+  },
+  {
+   "day": 68,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +311 kcal to the pantry."
+  },
+  {
+   "day": 68,
+   "text": "⚔️ Tom stood down the Big Ugly and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 68,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~99 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 68,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +212 kcal to the pantry."
+  },
+  {
+   "day": 68,
+   "text": "🐗 RAID — 5 raiders (The Redactor, The Ugly Beast, The Loud Thing, Don't-Look, Big Ugly) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 68,
+   "text": "🌙 Raid — The Hungry Road came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 69,
+   "text": "The bar thins, flickers — nothing left loud enough to redact. It is STARVING. (Its attacks weaken; starve it one more turn and it flees.)"
+  },
+  {
+   "day": 69,
+   "text": "The bar steadies — it found something loud to redact. (No longer starving.)"
+  },
+  {
+   "day": 69,
+   "text": "📖 The Codex turns a page on its own. Soo Watson is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 69,
+   "text": "🕯️ Soo is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 69,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 69,
+   "text": "🕯️ Soo Watson is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 69,
+   "text": "The Codex doesn't pause for grief. Salvatore blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 69,
+   "text": "The village's quarrel was with Soo — and Soo is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 69,
+   "text": "At the grave, Willie, Cheryl, Ndung'u and 6 more speak for Salvatore — \"Soo trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 69,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 69,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~83 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 69,
+   "text": "🌿 Willie returns from foraging the wilds: +216 kcal to the pantry."
+  },
+  {
+   "day": 69,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 70,
+   "text": "🌿 Jorge returns from foraging the wilds: +571 kcal to the pantry."
+  },
+  {
+   "day": 70,
+   "text": "Tribute paid: 5,120 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 70,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 70,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 70,
+   "text": "That night, they bring Soo home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 70,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 70,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 71,
+   "text": "🍖 FEAST 📺 — Salvatore opens the pantry wide: 8× Foraged food (dried), 4× Foraged food. Katarina, Zoltan, Meera, Tom eat until the fire burns low. The laughter stays low — somebody's seat is empty, and everybody sees it. For one evening, grief sits at the fire with them instead of standing over them. (−2,080 kcal from"
+  },
+  {
+   "day": 71,
+   "text": "Too close. The anaconda's attention SNAPS to Tom — proximity overrules patience."
+  },
+  {
+   "day": 71,
+   "text": "Too close. The anaconda's attention SNAPS to Tom — proximity overrules patience."
+  },
+  {
+   "day": 71,
+   "text": "Salvatore exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 71,
+   "text": "A LOT of snake. Tough, rich, faintly fishy — and it feeds the whole village for days. The fat renders beautifully. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat ro"
+  },
+  {
+   "day": 71,
+   "text": "You clutch your Boot stone, Spare Socks, Grandfather's Rope, Trail compass. You're still here. The resonance deepens. (bond 20)"
+  },
+  {
+   "day": 71,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 71,
+   "text": "Taken: Teeth x4, The Ugly Beast (carcass) x1."
+  },
+  {
+   "day": 71,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~24 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 71,
+   "text": "◈ SYSTEM: \"You are not the head of this. That is the point. A realm of 4 fires — and Thornfield wants Haven's oath. The audience LOVES a binding.\""
+  },
+  {
+   "day": 71,
+   "text": "📯 Thornfield's court summons Haven's speaker. SWEAR the oath of the realm (a gift seals it), SERVE at their court (seven days of your speaker's life), or WALK — break the link and stay a free fire, refusing the scale itself with it (the offer does not return). Or REFUSE the scale itself — stay a free fire at regional,"
+  },
+  {
+   "day": 71,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 72,
+   "text": "◈ WORD TRAVELS — riders from The Hungry Road bring talk of Haven. Out there they call you the Feared. The show's narration lingers on your hands."
+  },
+  {
+   "day": 72,
+   "text": "🌿 Ndung'u returns from foraging the wilds: +399 kcal to the pantry."
+  },
+  {
+   "day": 72,
+   "text": "🌿 Willie returns from foraging the wilds: +446 kcal to the pantry."
+  },
+  {
+   "day": 72,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 72,
+   "text": "Travel 3 tiles to creek.\n— Moving water —\nThe creek braids around gravel bars. Crawdads flick backward into the shadows of rocks."
+  },
+  {
+   "day": 72,
+   "text": "📖 The Codex turns a page on its own. Ndung'u is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 72,
+   "text": "◈ CRISIS — THE FIRST GRAVE. Ndung'u is dead. The village digs its first grave, and everyone understands at once: this place can kill you. It just did."
+  },
+  {
+   "day": 72,
+   "text": "Recipe: Hunting spear (Level 1). You have seen a hunting spear. Longer than a man, stone at the killing end."
+  },
+  {
+   "day": 72,
+   "text": "Taken: Vine x1, Vine x1, Vine x1, Vine x1, Vine x1, Vine x1, Medfoam canister x1, Vine x1, Gland sac x1, Teeth x3, Sinew cord x2, Gravity well x1, Fan care package (unopened) x1, Wrong bandage x1, Audience token x1, Wrong bandage x1, Hunting spear x1, Spare battery x1, Spare battery x1, Hunting spear x1, Wrong bandage "
+  },
+  {
+   "day": 72,
+   "text": "You take vine, vine, vine, vine, vine, vine, medfoam canister, vine, gland sac, teeth, sinew cord, gravity well, fan care package (unopened), wrong bandage, audience token, wrong bandage, hunting spear, spare battery, spare battery, hunting spear, wrong bandage, muscadine grapes, vine, hardlight knife, hunting spear fr"
+  },
+  {
+   "day": 72,
+   "text": "🤝 Jovan kneels at Thornfield's court and swears the oath — sealed with 3,111 kcal of Haven's harvest. The realm has its fires now, and one of them is yours. (Trust +12.)"
+  },
+  {
+   "day": 72,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~22 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 72,
+   "text": "🧳 Word from Thornfield: traders say Thornfield had a monster at the treeline — or so the traders say"
+  },
+  {
+   "day": 72,
+   "text": "📓 Codex: Word from Thornfield: traders say Thornfield had a monster at the treeline — or so the traders say"
+  },
+  {
+   "day": 72,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 73,
+   "text": "⚔️ Ndung'u stood down the Big Beast and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 73,
+   "text": "⚔️ Katarina stood down the Big Loud and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 73,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~22 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 73,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 74,
+   "text": "🌿 Katarina returns from foraging the wilds: +351 kcal to the pantry."
+  },
+  {
+   "day": 74,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~21 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 74,
+   "text": "Katarina, at the fire, not quite believing it: \"The oath's sworn. Thornfield holds the high seat and we hold our fire. That's the deal. That's the whole deal.\""
+  },
+  {
+   "day": 74,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 74,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 75,
+   "text": "🌿 Katarina returns from foraging the wilds: +310 kcal to the pantry."
+  },
+  {
+   "day": 75,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~17 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 75,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 75,
+   "text": "◈ \"UNIT BOOT STONE — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 75,
+   "text": "◈ FLASHBACK — Boot stone\nYou carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest."
+  },
+  {
+   "day": 75,
+   "text": "◈ \"UNIT SPARE SOCKS — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 75,
+   "text": "◈ \"UNIT TRAIL COMPASS — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn; harder to get truly lost. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 76,
+   "text": "🌿 Jorge returns from foraging the wilds: +260 kcal to the pantry."
+  },
+  {
+   "day": 76,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 76,
+   "text": "⚔️ Cheryl stood down the Loud Beast and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 76,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 76,
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 76,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 77,
+   "text": "Tribute paid: 7,520 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 77,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 77,
+   "text": "⚔️ Katarina stood down the Moderator and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 77,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 77,
+   "text": "🐗 RAID — 5 raiders (Big Ugly, The Understudy, Don't-Look, The Loud Beast, The Moderator) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 77,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 78,
+   "text": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 78,
+   "text": "You clutch your Boot stone, Spare Socks, Grandfather's Rope, Trail compass. You're still here. The resonance deepens. (bond 60)"
+  },
+  {
+   "day": 78,
+   "text": "Salvatore exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 78,
+   "text": "You clutch your Boot stone, Spare Socks, Grandfather's Rope, Trail compass. You're still here. The resonance deepens. (bond 72)"
+  },
+  {
+   "day": 78,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 78,
+   "text": "⚔️ Zoltan stood down the Big Beast and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 78,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 78,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 78,
+   "text": "🌙 Raid — The Hungry Road came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 79,
+   "text": "🌿 Tom returns from foraging the wilds: +362 kcal to the pantry."
+  },
+  {
+   "day": 79,
+   "text": "🌿 Willie returns from foraging the wilds: +545 kcal to the pantry."
+  },
+  {
+   "day": 79,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 79,
+   "text": "◈ THE SYSTEM has been watching Jorge — Combat 1. Three offers; they took Berserker Rage. Earned, chosen. (rage: villager level-up)"
+  },
+  {
+   "day": 79,
+   "text": "📓 Codex: Jorge chose Berserker Rage (rage) at Combat 1."
+  },
+  {
+   "day": 79,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 79,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 80,
+   "text": "📖 The Codex turns a page on its own. Big Loud is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 80,
+   "text": "📺 Cheryl killed Big Loud out past the ridge — alone — and walked home. 4 rounds, 38 taken. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 80,
+   "text": "📣 Cheryl killed Big Loud out past the ridge — alone — and walked home. 4 rounds, 38 taken."
+  },
+  {
+   "day": 80,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 80,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 80,
+   "text": "🌿 Willie returns from foraging the wilds: +430 kcal to the pantry."
+  },
+  {
+   "day": 80,
+   "text": "🌿 Katarina returns from foraging the wilds: +242 kcal to the pantry."
+  },
+  {
+   "day": 80,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 80,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 81,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 81,
+   "text": "🌿 Willie returns from foraging the wilds: +443 kcal to the pantry."
+  },
+  {
+   "day": 81,
+   "text": "🌿 Cheryl returns from foraging the wilds: +381 kcal to the pantry."
+  },
+  {
+   "day": 81,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 82,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 82,
+   "text": "📖 The Codex turns a page on its own. Meera is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 82,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 82,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 83,
+   "text": "🌿 Willie returns from foraging the wilds: +367 kcal to the pantry."
+  },
+  {
+   "day": 83,
+   "text": "🌿 Jorge returns from foraging the wilds: +429 kcal to the pantry."
+  },
+  {
+   "day": 83,
+   "text": "💀 The Loud Beast killed Meera in 1 round. The village mourns."
+  },
+  {
+   "day": 83,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 83,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 84,
+   "text": "Tribute paid: 7,560 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 84,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 84,
+   "text": "📡 The world feed: The Hungry Road — a harvest festival. The chat has opinions."
+  },
+  {
+   "day": 84,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 84,
+   "text": "💛 The Boot stone has become something you can reach for. (Keepsake L2 — new combat action: Hold. Nothing moves you this fight, and your next flee through the edge cannot be cut off (the relentless still follow). Once per fight.)"
+  },
+  {
+   "day": 84,
+   "text": "💛 The Spare Socks has become something you can reach for. (Keepsake L2 — new combat action: Steady. Hold it and breathe: clear fear and stun on yourself. Once per fight.)"
+  },
+  {
+   "day": 84,
+   "text": "💛 The Grandfather's Rope has become something you can reach for. (Keepsake L2 — new combat action: Steady. Hold it and breathe: clear fear and stun on yourself. Once per fight.)"
+  },
+  {
+   "day": 84,
+   "text": "💛 The Trail compass has become something you can reach for. (Keepsake L2 — new combat action: Hold. Nothing moves you this fight, and your next flee through the edge cannot be cut off (the relentless still follow). Once per fight.)"
+  },
+  {
+   "day": 85,
+   "text": "🌿 Cheryl returns from foraging the wilds: +389 kcal to the pantry."
+  },
+  {
+   "day": 85,
+   "text": "🌿 Katarina returns from foraging the wilds: +448 kcal to the pantry."
+  },
+  {
+   "day": 85,
+   "text": "Too close. The redactor's attention SNAPS to Salvatore — proximity overrules patience."
+  },
+  {
+   "day": 85,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 85,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 85,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 86,
+   "text": "🌿 Willie returns from foraging the wilds: +518 kcal to the pantry."
+  },
+  {
+   "day": 86,
+   "text": "🌿 Jorge returns from foraging the wilds: +279 kcal to the pantry."
+  },
+  {
+   "day": 86,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 86,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 86,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 87,
+   "text": "🌿 Tom returns from foraging the wilds: +320 kcal to the pantry."
+  },
+  {
+   "day": 87,
+   "text": "◈ THE SYSTEM has been watching Willie — Combat 1. Three offers; they took Berserker Rage. Earned, chosen. (rage: villager level-up)"
+  },
+  {
+   "day": 87,
+   "text": "📓 Codex: Willie chose Berserker Rage (rage) at Combat 1."
+  },
+  {
+   "day": 87,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 87,
+   "text": "⚔️ Jorge stood down the Loud Beast and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 87,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 87,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 87,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~699 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 87,
+   "text": "🌙 Watchers at the northwest treeline see torchlight moving in The Hungry Road's camp — and it going dark. Whatever was coming, the doubled watch turned it. The night stays quiet, and everyone at the fire understands why."
+  },
+  {
+   "day": 88,
+   "text": "🌿 Katarina returns from foraging the wilds: +536 kcal to the pantry."
+  },
+  {
+   "day": 88,
+   "text": "🌿 Cheryl returns from foraging the wilds: +434 kcal to the pantry."
+  },
+  {
+   "day": 88,
+   "text": "💛 You hold Boot stone. You carry a guilt like a stone in the boot. So you carry a stone in the boot — the scattering took the one person you were keeping alive, and this is the shape of that. It keeps you honest. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The"
+  },
+  {
+   "day": 88,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 88,
+   "text": "🌿 Katarina returns from foraging the wilds: +401 kcal to the pantry."
+  },
+  {
+   "day": 88,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 89,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 89,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~16 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 89,
+   "text": "🐗 RAID — 5 raiders (Spool, The Moderator, The Loud Thing, The Loud Beast, Don't-Look) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 89,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 90,
+   "text": "▶ REPLAY 3/3: MOVE — the tape replays your step, but there’s nowhere to go. The tug dies."
+  },
+  {
+   "day": 90,
+   "text": "Salvatore exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 90,
+   "text": "You clutch your Boot stone, Spare Socks, Grandfather's Rope, Trail compass. You're still here. The resonance deepens. (bond 132)"
+  },
+  {
+   "day": 90,
+   "text": "🌿 Tom returns from foraging the wilds: +397 kcal to the pantry."
+  },
+  {
+   "day": 90,
+   "text": "The teeth break. The door holds — with nobody's help but Haven's own."
+  },
+  {
+   "day": 90,
+   "text": "🌿 Willie checks the pantry before heading out — the shelves are full, ~16 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 90,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 91,
+   "text": "🌿 Cheryl returns from foraging the wilds: +480 kcal to the pantry."
+  },
+  {
+   "day": 91,
+   "text": "📖 The Codex turns a page on its own. Salvatore Gray is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 91,
+   "text": "🕯️ Salvatore is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 91,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  },
+  {
+   "day": 91,
+   "text": "📓 Codex: Salvatore died while mentored in your party."
+  },
+  {
+   "day": 91,
+   "text": "🕯️ Salvatore Gray is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 91,
+   "text": "The Codex doesn't pause for grief. Willie blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 91,
+   "text": "The village's quarrel was with Salvatore — and Salvatore is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 91,
+   "text": "At the grave, Cheryl, Katarina, Zoltan and 3 more speak for Willie — \"Salvatore trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 91,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 91,
+   "text": "Tribute paid: 11,308 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 91,
+   "text": "⚔️ Katarina stood down the Loud Beast and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 91,
+   "text": "🌿 Cheryl checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 91,
+   "text": "🧳 Word from Thornfield: traders say Thornfield had a monster at the treeline — or so the traders say"
+  },
+  {
+   "day": 91,
+   "text": "📡 The world feed: Thornfield — a monster sighting. The chat has opinions."
+  },
+  {
+   "day": 91,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 92,
+   "text": "🍖 FEAST 📺 — Willie opens the pantry wide: 20× Blackberry, 3× Foraged food, 1× Snared meat. Cheryl, Katarina, Zoltan, Tom eat until the fire burns low. The laughter stays low — somebody's seat is empty, and everybody sees it. For one evening, grief sits at the fire with them instead of standing over them. (−2,054 kcal"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 300 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 600 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 900 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "The Eater is on you — no warning, just teeth."
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 1200 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 1500 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 1800 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "Eater's attack hits you for 49."
+  },
+  {
+   "day": 92,
+   "text": "The Eater is on you — no warning, just teeth."
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 2100 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 2400 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 2700 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 3000 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 3300 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 3600 kcal. Poison the meal, starve the field, or end it.)"
+  },
+  {
+   "day": 92,
+   "text": "📖 The Codex turns a page on its own. Willie Ponce is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 92,
+   "text": "🕯️ Willie is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 92,
+   "text": "🕯️ Willie Ponce is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 92,
+   "text": "The Codex doesn't pause for grief. Cheryl blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 92,
+   "text": "📖 LEARNED: Tripwire (Level 1). You string a wire at ankle height. The next monster that moves eats dirt — prone, stunned, and embarrassed. (Sets up the party.)"
+  },
+  {
+   "day": 92,
+   "text": "At the grave, Katarina, Zoltan, Jovan and 2 more speak for Cheryl — \"Willie trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 92,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 92,
+   "text": "That night, they bring Salvatore home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 92,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 93,
+   "text": "That night, they bring Willie home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 93,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 94,
+   "text": "🌿 Tom returns from foraging the wilds: +428 kcal to the pantry."
+  },
+  {
+   "day": 94,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 95,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 96,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 96,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 97,
+   "text": "🧳 Word from The Hungry Road: Cole was killed — Sanne did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+  },
+  {
+   "day": 97,
+   "text": "📖 LEARNED: Shoulder Check (Level 1). You know exactly where to hit something with your shoulder so it goes where YOU want. Shove a controlled monster 2 tiles — into its friends, away from yours."
+  },
+  {
+   "day": 97,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 98,
+   "text": "Tribute paid: 11,250 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 98,
+   "text": "🥣 Nora of The Hungry Road walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\""
+  },
+  {
+   "day": 98,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 99,
+   "text": "💥 audit's attack finds you — no dodging it."
+  },
+  {
+   "day": 99,
+   "text": "Audit's attack hits you for 57."
+  },
+  {
+   "day": 99,
+   "text": "💥 audit's attack finds you — no dodging it."
+  },
+  {
+   "day": 99,
+   "text": "Audit's attack hits you for 50."
+  },
+  {
+   "day": 99,
+   "text": "📖 The Codex turns a page on its own. Cheryl Bah is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 99,
+   "text": "🕯️ Cheryl is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 99,
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 99,
+   "text": "🕯️ Cheryl Bah is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 99,
+   "text": "The Codex doesn't pause for grief. Jovan blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 99,
+   "text": "📖 LEARNED: Ritual & Meaning (Level 1). Marking the dead matters. Even without religion, ritual holds grief."
+  },
+  {
+   "day": 99,
+   "text": "The village's quarrel was with Cheryl — and Cheryl is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 99,
+   "text": "At the grave, Katarina, Zoltan, Jorge and 1 more speak for Jovan — \"Cheryl trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 99,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 100,
+   "text": "🌿 Jorge returns from foraging the wilds: +472 kcal to the pantry."
+  },
+  {
+   "day": 100,
+   "text": "🌿 Tom returns from foraging the wilds: +346 kcal to the pantry."
+  },
+  {
+   "day": 100,
+   "text": "Nora waits two days at your fire, getting thinner. Nobody answers. They walk back to The Hungry Road with nothing. They'll remember the silence."
+  },
+  {
+   "day": 100,
+   "text": "That night, they bring Cheryl home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 100,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 101,
+   "text": "Fishy. Obviously. Everything about it is fishy. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 101,
+   "text": "You clutch your Busker's harmonica. You're still here. The resonance deepens. (bond 5)"
+  },
+  {
+   "day": 101,
+   "text": "Too close. The crow's attention SNAPS to Tom — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The crow's attention SNAPS to you — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Chantal exhales. \"It's dead? It's really dead.\""
+  },
+  {
+   "day": 101,
+   "text": "Crow. Tastes like a bad decision. The feathers are too black to pluck cleanly. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 101,
+   "text": "You clutch your Busker's harmonica. You're still here. The resonance deepens. (bond 8)"
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to Tom — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to you — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to you — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to you — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to you — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to you — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to you — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "Too close. The buffering's attention SNAPS to Tom — proximity overrules patience."
+  },
+  {
+   "day": 101,
+   "text": "You carry the weight of it. They died beside you."
+  },
+  {
+   "day": 101,
+   "text": "📖 The Codex turns a page on its own. Jovan Milic is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 101,
+   "text": "🕯️ Jovan is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 101,
+   "text": "🕯️ Jovan Milic is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 101,
+   "text": "The Codex doesn't pause for grief. Jorge blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 101,
+   "text": "📖 LEARNED: Hogtie (Level 1). Rope, a dazed monster, and thirty seconds of not being eaten. Hogtie a controlled monster: rooted 3 rounds (diminishing), and it can't wind up telegraphs. It can still lash out — the rope holds position, not malice."
+  },
+  {
+   "day": 101,
+   "text": "At the grave, Katarina, Zoltan speak for Jorge — \"Jovan trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 101,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 101,
+   "text": "Taken: Sinew cord x1, Teeth x4, Nevermore (carcass) x1."
+  },
+  {
+   "day": 101,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 102,
+   "text": "🧳 Word from Stonebridge: Malik is dead, and Fatima and Marcus both claim the fire. Stonebridge is choosing — or fighting."
+  },
+  {
+   "day": 102,
+   "text": "That night, they bring Jovan home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 102,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 103,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 104,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 104,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 105,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 105,
+   "text": "📡 The world feed: The Hungry Road — a new speaker rising. The chat has opinions."
+  },
+  {
+   "day": 105,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 106,
+   "text": "You send 5,701 kcal. It hurts. That's rather the point of tribute."
+  },
+  {
+   "day": 106,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 106,
+   "text": "🌙 Watchers at the northwest treeline see torchlight moving in The Hungry Road's camp — and it going dark. Whatever was coming, the doubled watch turned it. The night stays quiet, and everyone at the fire understands why."
+  },
+  {
+   "day": 107,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 108,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 108,
+   "text": "🌙 Watchers at the northwest treeline see torchlight moving in The Hungry Road's camp — and it going dark. Whatever was coming, the doubled watch turned it. The night stays quiet, and everyone at the fire understands why."
+  },
+  {
+   "day": 109,
+   "text": "💬 Ornicha says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  },
+  {
+   "day": 109,
+   "text": "◈ OVERTIME ×1 — wave 4–5 monsters return as RERUNS (+25% HP, +12% damage). Raids come sooner. The table docks your standing −4. Take your seat from Haven to stop the clock."
+  },
+  {
+   "day": 109,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 110,
+   "text": "You see smoke on the horizon. The Hungry Road — 4 people, 110 days in. fishing folk, by the look of it. They know 11 plants — 9 new to you. They look lean — hungry, even. Food would talk here. They've been here the whole time."
+  },
+  {
+   "day": 110,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 110,
+   "text": "Fresh-cut stems on the northwest ground — someone else is working turf your crews use. (The Hungry Road's foragers, most likely. You walk the ground yourself: it's thinner than your crews alone could strip it.)"
+  },
+  {
+   "day": 111,
+   "text": "Taken: Blackberry x14, Vine x9, Teeth x4, Medfoam canister x1, Gland sac x1, Teeth x3, Sinew cord x2, Gravity well x1, Fan care package (unopened) x1, Wrong bandage x3, Audience token x1, Spare battery x2, Muscadine Grapes x3, Sling x1, Kitchen knife x1, War Horn x1, Stick x1, Vine x1, Vine x1, Sharpened stick x1, Runn"
+  },
+  {
+   "day": 111,
+   "text": "You take blackberry, vine, teeth, medfoam canister, gland sac, teeth, sinew cord, gravity well, fan care package (unopened), wrong bandage, audience token, spare battery, muscadine grapes, sling, kitchen knife, war horn, stick, vine, vine, sharpened stick, running shoes, wool socks, cache fortress kit, multitool, vine,"
+  },
+  {
+   "day": 111,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 111,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 111,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 111,
+   "text": "The northwest ground is thinning faster than your crews alone could strip it. The Hungry Road isn't slowing down — their foragers are on your turf most days now. Their speaker would probably want words. (Talk about the shared ground at their fire.)"
+  },
+  {
+   "day": 112,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 112,
+   "text": "◈ SYSTEM: \"Four waves. FOUR. The producers are — okay, I'm saying it: FINALES need a NATION. You've got a region; now make it a REALM. Bind fires under one head, or bend the knee to someone who has. The higher-ups are watching. ...Did I say higher-ups? I said NOTHING. Forget the higher-ups.\""
+  },
+  {
+   "day": 112,
+   "text": "🐗 RAID — 3 raiders (Don't-Look, The Eulogy, The Loud Beast) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 112,
+   "text": "📺 \"But finales — FINALES need a LEGEND, sweetheart. More STANDING — blood, bonds, or bread — and look the Mirror Draft in the eye. The producers are WAITING.\""
+  },
+  {
+   "day": 112,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 112,
+   "text": "🌙 Raid — The Hungry Road came in the night from the northwest. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 113,
+   "text": "💬 Ornicha says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  },
+  {
+   "day": 113,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 113,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 113,
+   "text": "🧳 Word from Emberhold: Darius is dead, and Tomás and Yuki both claim the fire. Emberhold is choosing — or fighting."
+  },
+  {
+   "day": 113,
+   "text": "🥣 Nora of The Hungry Road walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\""
+  },
+  {
+   "day": 113,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 113,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 114,
+   "text": "🌿 Kamil returns from foraging the wilds: +545 kcal to the pantry."
+  },
+  {
+   "day": 114,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 115,
+   "text": "Nora waits two days at your fire, getting thinner. Nobody answers. They walk back to The Hungry Road with nothing. They'll remember the silence."
+  },
+  {
+   "day": 115,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 115,
+   "text": "The Hungry Road's speaker sent a runner: the northwest ground feeds both villages or neither. They want to talk — properly, at their fire. Ignoring this is also an answer."
+  },
+  {
+   "day": 116,
+   "text": "◈ OVERTIME ×2 — wave 4–5 monsters return as RERUNS (+50% HP, +24% damage, +1 to every pack). Raids come sooner. The table docks your standing −8. Take your seat from Haven to stop the clock."
+  },
+  {
+   "day": 116,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 117,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 117,
+   "text": "🌙 Raid — The Hungry Road came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 118,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 119,
+   "text": "📖 The Codex turns a page on its own. Kamil is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 119,
+   "text": "⚠️ Thornfield notices the missing tribute. Arrears: 22,500 kcal. The air changes."
+  },
+  {
+   "day": 119,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 120,
+   "text": "💀 The Big Beast killed Kamil in 1 round. The village mourns."
+  },
+  {
+   "day": 120,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 120,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 121,
+   "text": "Owl. Tastes like chicken that judged you first. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 121,
+   "text": "You clutch your Photo Album. You're still here. The resonance deepens. (bond 23)"
+  },
+  {
+   "day": 121,
+   "text": "◈ THE SYSTEM has been watching Chantal — Combat 1. Three offers; they took Berserker Rage. Earned, chosen. (rage: villager level-up)"
+  },
+  {
+   "day": 121,
+   "text": "📓 Codex: Chantal chose Berserker Rage (rage) at Combat 1."
+  },
+  {
+   "day": 121,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 122,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 122,
+   "text": "💛 The Photo Album has become something you can reach for. (Keepsake L2 — new combat action: Lucky Break. Your next miss this fight becomes a hit. Once per fight.)"
+  },
+  {
+   "day": 123,
+   "text": "📻 The producers name it: the Nielsen. Ratings embodied. It fights boring — and the crowd adores it for that."
+  },
+  {
+   "day": 123,
+   "text": "💬 Ornicha says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  },
+  {
+   "day": 123,
+   "text": "◈ OVERTIME ×3 — wave 4–5 monsters return as RERUNS (+75% HP, +36% damage, +1 to every pack). Raids come sooner. The table docks your standing −15. Take your seat from Haven to stop the clock."
+  },
+  {
+   "day": 123,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 123,
+   "text": "🐗 RAID — 3 raiders (Don't-Look, The Big Beast, The Influencer) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 123,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 123,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 124,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 124,
+   "text": "💡 COUNTER LEARNED — The Influencer: Kill the followers first. The followers sharpen the Ratio — every one of them is damage. Kill the followers and it is just a person with good lighting. (Ratio-ing it is a popularity contest; starving its audience is a plan.) (Elijah lived to tell it, twice — the village pieced it to"
+  },
+  {
+   "day": 124,
+   "text": "📓 Codex: Counter: Kill the followers first — The followers sharpen the Ratio — every one of them is damage. Kill the followers and it is just a person with good lighting. (Ratio-ing it is a popularity contest; starving its audience is a plan.)"
+  },
+  {
+   "day": 124,
+   "text": "‘This Ratio is brought to you by—’ The followers glow with sponsored light. They hit harder now. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 124,
+   "text": "📖 The Codex turns a page on its own. Jorge Silva is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 124,
+   "text": "🕯️ Jorge is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 124,
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 124,
+   "text": "🕯️ Jorge Silva is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 124,
+   "text": "The Codex doesn't pause for grief. Katarina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 124,
+   "text": "The village's quarrel was with Jorge — and Jorge is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 124,
+   "text": "At the grave, Zoltan, Chantal speak for Katarina — \"Jorge trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 124,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 125,
+   "text": "★ Deeper knowledge: Greenbrier Shoots. Parts: young shoot tips only. Snap them — if it bends, it's too old. (Yield +50%). Use unlocked: food: tender spring tips, asparagus-like."
+  },
+  {
+   "day": 125,
+   "text": "That night, they bring Jorge home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 125,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 126,
+   "text": "🗺️ Scouts found its lair — 7 east of here. THE NIELSEN — ratings embodied. It is WAITING. You cannot face it alone. Sound the call."
+  },
+  {
+   "day": 126,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 127,
+   "text": "🐗 RAID — 3 raiders (Don't-Look, The Eulogy, The Loud Beast) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 128,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 129,
+   "text": "🌙 Raid — The Hungry Road came in the night from the northwest. They carried off ~1500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 130,
+   "text": "💬 Ornicha says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  },
+  {
+   "day": 130,
+   "text": "◈ OVERTIME ×4 — wave 4–5 monsters return as RERUNS (+100% HP, +48% damage, +2 to every pack). Raids come sooner. The table docks your standing −22. Take your seat from Haven to stop the clock."
+  },
+  {
+   "day": 130,
+   "text": "🧳 Word from The Red Table: Fatima is dead, and June and Kenji both claim the fire. The Red Table is choosing — or fighting."
+  },
+  {
+   "day": 131,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 131,
+   "text": "🌿 Chantal returns from foraging the wilds: +258 kcal to the pantry."
+  },
+  {
+   "day": 131,
+   "text": "🐗 RAID — 3 raiders (Don't-Look, Big Loud, The Eulogy) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 132,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 132,
+   "text": "📖 The Codex turns a page on its own. Katarina Novak is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 132,
+   "text": "🕯️ Katarina is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 132,
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 132,
+   "text": "🕯️ Katarina Novak is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 132,
+   "text": "The Codex doesn't pause for grief. Zoltan blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 132,
+   "text": "The village's quarrel was with Katarina — and Katarina is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 132,
+   "text": "At the grave, Chantal, Elijah speak for Zoltan — \"Katarina trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 132,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 132,
+   "text": "🌿 Chantal checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 132,
+   "text": "🧳 Word from The Hungry Road: Sanne was killed — Ellis did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+  },
+  {
+   "day": 133,
+   "text": "Travel 3 tiles to creek.\n— Moving water —\nThe water is cold enough to hurt your teeth. Downstream the creek bends out of sight, and you want to follow it. That's the problem with creeks."
+  },
+  {
+   "day": 133,
+   "text": "You see smoke on the horizon. Emberhold — 6 people, 133 days in. foragers, by the look of it. They know 11 plants — 6 new to you. They look lean — hungry, even. Food would talk here. They've been here the whole time."
+  },
+  {
+   "day": 133,
+   "text": "That night, they bring Katarina home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 134,
+   "text": "You don't know what that was. Everyone you've buried, standing up. Someone at the haven should hear about this."
+  },
+  {
+   "day": 134,
+   "text": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 134,
+   "text": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 134,
+   "text": "📖 The Codex turns a page on its own. Zoltan Nagy is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 134,
+   "text": "🕯️ Zoltan is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 134,
+   "text": "🕯️ Zoltan Nagy is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 134,
+   "text": "The Codex doesn't pause for grief. Chantal blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 134,
+   "text": "At the grave, Elijah speaks for Chantal — \"Zoltan trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 134,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 134,
+   "text": "Movement — a thick-bodied rattlesnake, chevron bands, the tail a blur of dry sound."
+  },
+  {
+   "day": 135,
+   "text": "That night, they bring Zoltan home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 135,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 136,
+   "text": "Travel 3 tiles to creek.\n— Moving water —\nThe creek braids around gravel bars. Crawdads flick backward into the shadows of rocks."
+  },
+  {
+   "day": 136,
+   "text": "🐗 RAID — 3 raiders (Big Loud, Mister Never, The Big Beast) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 136,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 136,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 137,
+   "text": "◈ OVERTIME ×5 — wave 4–5 monsters return as RERUNS (+125% HP, +60% damage, +2 to every pack). Raids come sooner. The table docks your standing −32. Take your seat from Haven to stop the clock."
+  },
+  {
+   "day": 137,
+   "text": "\"Say cheese.\" The lens steadies. (Flash incoming — freeze 1 turn. Prediction 1/4.)"
+  },
+  {
+   "day": 137,
+   "text": "\"Say cheese.\" The lens steadies. (Flash incoming — freeze 1 turn. Prediction 2/4.)"
+  },
+  {
+   "day": 137,
+   "text": "\"Say cheese.\" The lens steadies. (Flash incoming — freeze 1 turn. Prediction 3/4.)"
+  },
+  {
+   "day": 137,
+   "text": "\"Say cheese.\" The lens steadies. (Flash incoming — freeze 1 turn. Prediction 4/4.)"
+  },
+  {
+   "day": 137,
+   "text": "📖 The Codex turns a page on its own. Chantal Mukendi is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 137,
+   "text": "🕯️ Chantal is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 137,
+   "text": "🕯️ Chantal Mukendi is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 137,
+   "text": "The Codex doesn't pause for grief. Elijah blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 137,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 137,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1127 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 138,
+   "text": "That night, they bring Chantal home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 138,
+   "text": "No food in the pantry. The village is hungry. You still get your 1L water."
+  },
+  {
+   "day": 139,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 140,
+   "text": "⚠️ Thornfield notices the missing tribute. Arrears: 56,250 kcal. The air changes."
+  },
+  {
+   "day": 140,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 140,
+   "text": "No food in the pantry. The village is hungry. You still get your 1L water."
+  },
+  {
+   "day": 141,
+   "text": "No food in the pantry. The village is hungry. You still get your 1L water."
+  },
+  {
+   "day": 141,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 142,
+   "text": "\"Half rations for three days, voted and held — or a hard hunt now, hungry, to fill the bins before it's choosing-who-eats.\""
+  },
+  {
+   "day": 142,
+   "text": "Taken: Crude bow x1, Gland sac x1, Sinew cord x1, Teeth x4, Crossbow x1, Work Gloves x4, Flannel Shirt x1, Gravity well x3, Energy drink x1, Vine x15, Audience token x1, Stripped hide x1, Sinew cord x2, Sinew cord x2, Blackberry x14, Teeth x7, Medfoam canister x1, Gland sac x1, Sinew cord x2, Fan care package (unopened"
+  },
+  {
+   "day": 142,
+   "text": "You take crude bow, gland sac, sinew cord, teeth, crossbow, work gloves, flannel shirt, gravity well, energy drink, vine, audience token, stripped hide, sinew cord, sinew cord, blackberry, teeth, medfoam canister, gland sac, sinew cord, fan care package (unopened), wrong bandage, audience token, muscadine grapes, sling"
+  },
+  {
+   "day": 142,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 142,
+   "text": "No food in the pantry. The village is hungry. You still get your 1L water."
+  },
+  {
+   "day": 142,
+   "text": "Haven eats again. The hollow look fades."
+  },
+  {
+   "day": 143,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 143,
+   "text": "No food in the pantry. The village is hungry."
+  },
+  {
+   "day": 144,
+   "text": "◈ WORD TRAVELS — riders from The Hungry Road bring talk of Haven. Out there they call you the Feared. The show's narration lingers on your hands."
+  },
+  {
+   "day": 144,
+   "text": "◈ OVERTIME ×6 — wave 4–5 monsters return as RERUNS (+150% HP, +72% damage, +3 to every pack). Raids come sooner. The table docks your standing −39. Take your seat from Haven to stop the clock."
+  },
+  {
+   "day": 144,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 144,
+   "text": "No food in the pantry. The village is hungry."
+  },
+  {
+   "day": 144,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 145,
+   "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 145,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 146,
+   "text": "\"Half rations for three days, voted and held — or a hard hunt now, hungry, to fill the bins before it's choosing-who-eats.\""
+  },
+  {
+   "day": 146,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 146,
+   "text": "◈ \"UNIT BEAT-UP PAPERBACK — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 146,
+   "text": "No food in the pantry. The village is hungry."
+  },
+  {
+   "day": 147,
+   "text": "The spasms are locking the jaw shut — swallowing is work now, and the neck barely turns. Days, not weeks. Find real treatment (antibiotics, skilled wound care) or settle what matters. (lockjaw: ~2 days left)"
+  },
+  {
+   "day": 147,
+   "text": "The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 147,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 147,
+   "text": "No food in the pantry. The village is hungry."
+  },
+  {
+   "day": 147,
+   "text": "Haven eats again. The hollow look fades."
+  },
+  {
+   "day": 148,
+   "text": "The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 148,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 148,
+   "text": "No food in the pantry. The village is hungry."
+  },
+  {
+   "day": 148,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 149,
+   "text": "\"Half rations for three days, voted and held — or a hard hunt now, hungry, to fill the bins before it's choosing-who-eats.\""
+  },
+  {
+   "day": 149,
+   "text": "The spasms lock everything shut at once — jaw, throat, back. The body starves behind a clenched jaw, breath coming in thinner and thinner. It never opens again. (lockjaw — without real treatment, it kills)"
+  },
+  {
+   "day": 149,
+   "text": "📖 The Codex turns a page on its own. Elijah Scott is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 149,
+   "text": "🕯️ Elijah is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 149,
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 149,
+   "text": "In the chaos, the neglected link snaps — no tribute, no deeds, no one left who kept it. Nobody meant it. That's how these things go."
+  },
+  {
+   "day": 149,
+   "text": "🕯️ Elijah Scott is dead — lockjaw. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 149,
+   "text": "The Codex doesn't pause for grief. Ornicha blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 149,
+   "text": "💛 You hold Brass Locket. Brass. Two photos inside, both fading. It opens with a click you can feel in your teeth — {kin}'s click, then your mother's, now yours. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: st"
+  },
+  {
+   "day": 149,
+   "text": "No food in the pantry. The village is hungry."
+  },
+  {
+   "day": 149,
+   "text": "🌙 Raid — Stonebridge came in the night from the southeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 150,
+   "text": "💛 You hold Brass Locket. Brass. Two photos inside, both fading. It opens with a click you can feel in your teeth — {kin}'s click, then your mother's, now yours. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: st"
+  },
+  {
+   "day": 150,
+   "text": "That night, they bring Elijah home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 150,
+   "text": "The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 150,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 150,
+   "text": "No food in the pantry. The village is hungry."
+  },
+  {
+   "day": 150,
+   "text": "Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again."
+  },
+  {
+   "day": 150,
+   "text": "💬 Ornicha says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  }
+ ],
+ "vday": [
+  {
+   "d": 2,
+   "pantry": 41310,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 3,
+   "pantry": 37360,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 4,
+   "pantry": 34597,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 6,
+   "pantry": 33350,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 6,
+   "pantry": 33350,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 7,
+   "pantry": 36952,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 8,
+   "pantry": 38970,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 9,
+   "pantry": 40090,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 10,
+   "pantry": 41074,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 11,
+   "pantry": 45040,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 12,
+   "pantry": 47423,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 13,
+   "pantry": 50473,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 14,
+   "pantry": 54610,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 15,
+   "pantry": 58636,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 16,
+   "pantry": 61147,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 17,
+   "pantry": 60178,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 18,
+   "pantry": 58685,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 19,
+   "pantry": 61682,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 20,
+   "pantry": 55577,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 21,
+   "pantry": 49710,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 22,
+   "pantry": 53652,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 23,
+   "pantry": 55953,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 24,
+   "pantry": 55482,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 25,
+   "pantry": 56705,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 26,
+   "pantry": 53712,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 27,
+   "pantry": 55273,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 28,
+   "pantry": 51213,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 29,
+   "pantry": 49179,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 30,
+   "pantry": 52352,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 31,
+   "pantry": 57101,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 32,
+   "pantry": 55272,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 33,
+   "pantry": 59438,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 34,
+   "pantry": 59130,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 35,
+   "pantry": 54117,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 36,
+   "pantry": 47031,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 37,
+   "pantry": 46190,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 38,
+   "pantry": 46836,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 39,
+   "pantry": 45138,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 40,
+   "pantry": 48578,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 41,
+   "pantry": 45378,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 42,
+   "pantry": 41094,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 43,
+   "pantry": 40306,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 44,
+   "pantry": 39732,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 45,
+   "pantry": 41960,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 46,
+   "pantry": 47649,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 47,
+   "pantry": 42801,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 48,
+   "pantry": 48394,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 49,
+   "pantry": 45895,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 50,
+   "pantry": 41301,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 51,
+   "pantry": 46591,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 52,
+   "pantry": 44948,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 53,
+   "pantry": 41269,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 54,
+   "pantry": 38615,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 55,
+   "pantry": 47173,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 56,
+   "pantry": 39499,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 57,
+   "pantry": 34563,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 58,
+   "pantry": 38559,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 59,
+   "pantry": 38638,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 60,
+   "pantry": 38963,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 61,
+   "pantry": 41723,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 62,
+   "pantry": 44395,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 63,
+   "pantry": 42909,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 64,
+   "pantry": 46673,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 65,
+   "pantry": 50016,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 66,
+   "pantry": 49005,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 67,
+   "pantry": 52458,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 68,
+   "pantry": 48375,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_ublv6lc",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 69,
+   "pantry": 42124,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 70,
+   "pantry": 32682,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 71,
+   "pantry": 34263,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 72,
+   "pantry": 36576,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 73,
+   "pantry": 38123,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 74,
+   "pantry": 44154,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 75,
+   "pantry": 46491,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 76,
+   "pantry": 46824,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 77,
+   "pantry": 35641,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 78,
+   "pantry": 30146,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 79,
+   "pantry": 30381,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 80,
+   "pantry": 31325,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 81,
+   "pantry": 34901,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 82,
+   "pantry": 37188,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 83,
+   "pantry": 42831,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 84,
+   "pantry": 40285,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 85,
+   "pantry": 39095,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 86,
+   "pantry": 41660,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 87,
+   "pantry": 41960,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 88,
+   "pantry": 43839,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 89,
+   "pantry": 49222,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 90,
+   "pantry": 46550,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_608g3f7",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 91,
+   "pantry": 34588,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 8,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_evh5t91",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 92,
+   "pantry": 32689,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3dg4klb",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 93,
+   "pantry": 32742,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3dg4klb",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 94,
+   "pantry": 30331,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3dg4klb",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 95,
+   "pantry": 26806,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3dg4klb",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 96,
+   "pantry": 26806,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3dg4klb",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 97,
+   "pantry": 28806,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3dg4klb",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 98,
+   "pantry": 15848,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3dg4klb",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 99,
+   "pantry": 15094,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 6,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jovan_milic",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 100,
+   "pantry": 14094,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 6,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jovan_milic",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 101,
+   "pantry": 16000,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 102,
+   "pantry": 17146,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 103,
+   "pantry": 16731,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 104,
+   "pantry": 15331,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 105,
+   "pantry": 14140,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 106,
+   "pantry": 7520,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 107,
+   "pantry": 8190,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 108,
+   "pantry": 8127,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 109,
+   "pantry": 8437,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 110,
+   "pantry": 8667,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 111,
+   "pantry": 10980,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 112,
+   "pantry": 10785,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 113,
+   "pantry": 9485,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 114,
+   "pantry": 8333,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 115,
+   "pantry": 7174,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 116,
+   "pantry": 7301,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 117,
+   "pantry": 6769,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 118,
+   "pantry": 5000,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 119,
+   "pantry": 6530,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 120,
+   "pantry": 6250,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 121,
+   "pantry": 6514,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 122,
+   "pantry": 7402,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 123,
+   "pantry": 9656,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 124,
+   "pantry": 9630,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "jorge_silva",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 125,
+   "pantry": 8510,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "katarina_novak",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 126,
+   "pantry": 9413,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "katarina_novak",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 127,
+   "pantry": 9291,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "katarina_novak",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 128,
+   "pantry": 7521,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "katarina_novak",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 129,
+   "pantry": 7460,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "katarina_novak",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 130,
+   "pantry": 8595,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "katarina_novak",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 131,
+   "pantry": 11075,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "katarina_novak",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 132,
+   "pantry": 11206,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 4,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "zoltan_nagy",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 133,
+   "pantry": 9066,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 4,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "zoltan_nagy",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 134,
+   "pantry": 8639,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 3,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "chantal_mukendi",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 135,
+   "pantry": 7247,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 3,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "chantal_mukendi",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 136,
+   "pantry": 4985,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 3,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "chantal_mukendi",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 137,
+   "pantry": 2991,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 138,
+   "pantry": 0,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 139,
+   "pantry": 900,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 140,
+   "pantry": 0,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 141,
+   "pantry": 0,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 142,
+   "pantry": 0,
+   "hungryDays": 1,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 143,
+   "pantry": 0,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 144,
+   "pantry": 0,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 145,
+   "pantry": 540,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 146,
+   "pantry": 0,
+   "hungryDays": 1,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 147,
+   "pantry": 0,
+   "hungryDays": 2,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 148,
+   "pantry": 0,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 2,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "elijah_scott",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 149,
+   "pantry": 0,
+   "hungryDays": 1,
+   "scattered": false,
+   "extinct": false,
+   "roster": 1,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_lznvlrx",
+   "hungryStreak": 0,
+   "uw": 4
+  },
+  {
+   "d": 150,
+   "pantry": 0,
+   "hungryDays": 2,
+   "scattered": false,
+   "extinct": false,
+   "roster": 1,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_lznvlrx",
+   "hungryStreak": 0,
+   "uw": 4
+  }
+ ],
+ "linkDump": [
+  {
+   "id": "link_mgpsphps199",
+   "st": "broken",
+   "prim": "village_1",
+   "sub": "haven",
+   "kind": null,
+   "fday": 20,
+   "endTrust": 100,
+   "history": [
+    {
+     "day": 20,
+     "kind": "formed",
+     "note": "Haven joined Stonebridge as subordinate."
+    },
+    {
+     "day": 20,
+     "kind": "accord",
+     "note": "First gesture: gift of 2,000 kcal."
+    },
+    {
+     "day": 20,
+     "kind": "tribute",
+     "note": "Paid 5,000 kcal. Current."
+    },
+    {
+     "day": 21,
+     "kind": "tribute",
+     "note": "Paid 5,099 kcal. Current."
+    },
+    {
+     "day": 22,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 23,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 28,
+     "kind": "tribute",
+     "note": "Paid 5,000 kcal. Current."
+    },
+    {
+     "day": 29,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 35,
+     "kind": "tribute",
+     "note": "Paid 5,049 kcal. Current."
+    },
+    {
+     "day": 35,
+     "kind": "demand",
+     "note": "The primary called: tribute."
+    },
+    {
+     "day": 36,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 36,
+     "kind": "demand",
+     "note": "Honored the call (tribute, trust +8)."
+    },
+    {
+     "day": 42,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 10)."
+    },
+    {
+     "day": 42,
+     "kind": "tribute",
+     "note": "Paid 5,100 kcal. Current."
+    },
+    {
+     "day": 42,
+     "kind": "demand",
+     "note": "The primary called: aid."
+    },
+    {
+     "day": 43,
+     "kind": "demand",
+     "note": "Honored the call (aid, trust +8)."
+    },
+    {
+     "day": 44,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 47,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 10)."
+    },
+    {
+     "day": 49,
+     "kind": "tribute",
+     "note": "Paid 5,010 kcal. Current."
+    },
+    {
+     "day": 51,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 56,
+     "kind": "tribute",
+     "note": "Paid 5,080 kcal. Current."
+    },
+    {
+     "day": 57,
+     "kind": "broken",
+     "note": "Link broken (walked)."
+    }
+   ]
+  },
+  {
+   "id": "link_mgpspi63435",
+   "st": "broken",
+   "prim": "village_2",
+   "sub": "haven",
+   "kind": null,
+   "fday": 57,
+   "endTrust": 0,
+   "history": [
+    {
+     "day": 69,
+     "kind": "succession",
+     "note": "Young link: grief delays the verdict — a renegotiation is staged."
+    },
+    {
+     "day": 70,
+     "kind": "tribute",
+     "note": "Paid 5,120 kcal. Current."
+    },
+    {
+     "day": 71,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 72,
+     "kind": "aid",
+     "note": "Gave Thornfield 1,675 kcal aid. Credit stands."
+    },
+    {
+     "day": 72,
+     "kind": "binding",
+     "note": "Swore the oath of the realm (3,111 kcal gift)."
+    },
+    {
+     "day": 76,
+     "kind": "renegotiation",
+     "note": "Seven days of silence answered for Haven (trust -6). Tribute leverage landed: 7,500 kcal/week."
+    },
+    {
+     "day": 77,
+     "kind": "tribute",
+     "note": "Paid 7,520 kcal. Current."
+    },
+    {
+     "day": 78,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 78,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 80,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 10)."
+    },
+    {
+     "day": 84,
+     "kind": "tribute",
+     "note": "Paid 7,560 kcal. Current."
+    },
+    {
+     "day": 87,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 90,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 91,
+     "kind": "succession",
+     "note": "They installed their own speaker. Tribute up to 11,250."
+    },
+    {
+     "day": 91,
+     "kind": "tribute",
+     "note": "Paid 11,308 kcal. Current."
+    },
+    {
+     "day": 91,
+     "kind": "demand",
+     "note": "The primary called: counsel."
+    },
+    {
+     "day": 92,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 92,
+     "kind": "demand",
+     "note": "Honored the call (counsel, trust +0)."
+    },
+    {
+     "day": 98,
+     "kind": "tribute",
+     "note": "Paid 11,250 kcal. Current."
+    },
+    {
+     "day": 99,
+     "kind": "succession",
+     "note": "They installed their own speaker — but the grief card is spent. Tribute unchanged at 11,250."
+    },
+    {
+     "day": 100,
+     "kind": "aid",
+     "note": "Gave Thornfield 1,618 kcal aid. Credit stands."
+    },
+    {
+     "day": 101,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 105,
+     "kind": "demand",
+     "note": "The primary called: tribute."
+    },
+    {
+     "day": 106,
+     "kind": "demand",
+     "note": "Honored the call (tribute, trust +0)."
+    },
+    {
+     "day": 112,
+     "kind": "arrears",
+     "note": "Tribute short 0/11,250 kcal. Arrears 11,250 kcal."
+    },
+    {
+     "day": 115,
+     "kind": "aid",
+     "note": "Gave Thornfield 2,000 kcal aid. Credit stands."
+    },
+    {
+     "day": 119,
+     "kind": "arrears",
+     "note": "Tribute short 0/11,250 kcal. Arrears 22,500 kcal."
+    },
+    {
+     "day": 124,
+     "kind": "succession",
+     "note": "They installed their own speaker — but the grief card is spent. Tribute unchanged at 11,250."
+    },
+    {
+     "day": 126,
+     "kind": "arrears",
+     "note": "Tribute short 0/11,250 kcal. Arrears 33,750 kcal."
+    },
+    {
+     "day": 126,
+     "kind": "demand",
+     "note": "The primary called: tribute."
+    },
+    {
+     "day": 127,
+     "kind": "demand",
+     "note": "REFUSED the call (tribute)."
+    },
+    {
+     "day": 128,
+     "kind": "aid",
+     "note": "Gave Thornfield 1,970 kcal aid. Credit stands."
+    },
+    {
+     "day": 132,
+     "kind": "succession",
+     "note": "They installed their own speaker — but the grief card is spent. Tribute unchanged at 11,250."
+    },
+    {
+     "day": 133,
+     "kind": "arrears",
+     "note": "Tribute short 0/11,250 kcal. Arrears 45,000 kcal."
+    },
+    {
+     "day": 134,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 137,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 140,
+     "kind": "arrears",
+     "note": "Tribute short 0/11,250 kcal. Arrears 56,250 kcal."
+    },
+    {
+     "day": 147,
+     "kind": "arrears",
+     "note": "Tribute short 0/11,250 kcal. Arrears 67,500 kcal."
+    },
+    {
+     "day": 149,
+     "kind": "succession",
+     "note": "They installed their own speaker — but the grief card is spent. Tribute unchanged at 11,250."
+    },
+    {
+     "day": 149,
+     "kind": "broken",
+     "note": "Link broken (succession)."
+    }
+   ]
+  }
+ ],
+ "hashes": [
+  "2:2|97|2330|12|4|4|1|413",
+  "3:3|90|2290|12|4|4|1|374",
+  "4:4|100|1394|12|4|4|1|346",
+  "6:6|92|1190|12|4|4|1|334",
+  "6:6|94|1175|12|4|4|1|334",
+  "7:7|100|1053|12|4|4|1|370",
+  "8:8|100|946|12|4|4|1|390",
+  "9:9|74|1235|12|4|4|1|401",
+  "10:10|98|1281|12|4|4|1|411",
+  "11:11|100|1014|12|4|4|1|450",
+  "12:12|100|1849|12|4|4|1|474",
+  "13:13|100|1245|12|4|4|1|505",
+  "14:14|100|2174|12|4|4|1|546",
+  "15:15|100|2330|12|4|4|1|586",
+  "16:16|100|2267|12|4|4|1|611",
+  "17:17|100|2330|12|4|4|1|602",
+  "18:18|87|2330|12|4|4|2|587",
+  "19:19|100|2245|12|4|4|2|617",
+  "20:20|100|2320|12|4|4|2|556",
+  "21:21|100|2330|12|4|4|2|497",
+  "22:22|36|2308|12|4|4|2|537",
+  "23:23|49|2320|12|4|4|2|560",
+  "24:24|100|2320|12|4|4|2|555",
+  "25:25|100|2330|12|4|4|2|567",
+  "26:26|100|2189|12|4|4|2|537",
+  "27:27|100|2320|12|4|4|2|553",
+  "28:28|100|2400|12|4|4|2|512",
+  "29:29|59|2120|12|4|4|2|492",
+  "30:30|100|2330|12|4|4|2|524",
+  "31:31|100|2330|12|4|4|2|571",
+  "32:32|100|2330|12|4|4|2|553",
+  "33:33|100|2330|12|4|4|2|594",
+  "34:34|100|2235|12|4|4|2|591",
+  "35:35|100|2330|12|4|4|2|541",
+  "36:36|70|2320|12|4|4|2|470",
+  "37:37|100|2043|12|4|4|2|462",
+  "38:38|100|2284|12|4|4|2|468",
+  "39:39|100|2320|12|4|4|2|451",
+  "40:40|100|2330|12|4|4|2|486",
+  "41:41|100|2330|12|4|4|2|454",
+  "42:42|100|2320|12|4|4|2|411",
+  "43:43|100|2320|12|4|4|2|403",
+  "44:44|71|2390|12|4|4|2|397",
+  "45:45|100|2330|12|4|4|2|420",
+  "46:46|100|2330|12|4|4|2|476",
+  "47:47|100|2320|12|4|4|2|428",
+  "48:48|100|2330|12|4|4|2|484",
+  "49:49|100|2330|12|4|4|2|459",
+  "50:50|100|2320|12|4|4|2|413",
+  "51:51|95|2320|12|4|4|2|466",
+  "52:52|100|2320|12|4|4|2|449",
+  "53:53|58|2320|12|4|4|2|413",
+  "54:54|88|2330|12|4|4|2|386",
+  "55:55|100|2330|12|4|4|2|472",
+  "56:56|100|2320|12|4|4|2|395",
+  "57:57|100|2330|12|4|4|2|346",
+  "58:58|100|2330|12|4|4|2|386",
+  "59:59|100|2320|12|4|4|2|386",
+  "60:60|77|2330|12|4|4|2|390",
+  "61:61|100|2330|12|4|4|2|417",
+  "62:62|95|2380|12|4|4|2|444",
+  "63:63|100|2330|12|4|4|2|429",
+  "64:64|100|2320|12|4|4|3|467",
+  "65:65|100|2370|12|4|4|3|500",
+  "66:66|27|2250|12|4|4|3|490",
+  "67:67|57|2330|12|4|4|3|525",
+  "68:68|87|2380|12|4|4|3|484",
+  "69:69|100|2230|11|4|4|3|421",
+  "70:70|100|2073|11|4|4|3|327",
+  "71:71|60|2330|11|4|4|3|343",
+  "72:72|100|2400|10|4|4|3|366",
+  "73:73|100|2156|10|4|4|3|381",
+  "74:74|100|2121|10|4|4|3|442",
+  "75:75|100|2310|10|4|4|3|465",
+  "76:76|100|2079|10|4|4|3|468",
+  "77:77|100|2042|10|4|4|3|356",
+  "78:78|86|2178|10|4|4|3|301",
+  "79:79|100|2400|10|4|4|3|304",
+  "80:80|100|2050|10|4|4|3|313",
+  "81:81|43|2302|10|4|4|3|349",
+  "82:82|70|2067|9|4|4|3|372",
+  "83:83|96|2092|9|4|4|3|428",
+  "84:84|100|2390|9|4|4|3|403",
+  "85:85|51|2047|9|4|4|3|391",
+  "86:86|21|2320|9|4|4|3|417",
+  "87:87|48|2255|9|4|4|3|420",
+  "88:88|100|2400|9|4|4|3|438",
+  "89:89|100|2400|9|4|4|3|492",
+  "90:90|100|2330|9|4|4|4|466",
+  "91:91|100|2266|8|4|4|4|346",
+  "92:92|100|2290|7|4|4|4|327",
+  "93:93|100|2330|7|4|4|4|327",
+  "94:94|100|2197|7|4|4|4|303",
+  "95:95|100|2380|7|4|4|4|268",
+  "96:96|100|2184|7|4|4|4|268",
+  "97:97|100|2130|7|4|4|4|288",
+  "98:98|100|2220|7|4|4|4|158",
+  "99:99|100|2165|7|4|4|4|151",
+  "100:100|100|2190|8|4|4|4|141",
+  "101:101|100|2380|6|4|4|4|160",
+  "102:102|85|2320|6|4|4|4|171",
+  "103:103|100|2166|6|4|4|4|167",
+  "104:104|100|2190|6|4|4|4|153",
+  "105:105|100|2330|6|4|4|4|141",
+  "106:106|100|2159|6|4|4|4|75",
+  "107:107|100|2231|6|4|4|4|82",
+  "108:108|100|2330|6|4|4|4|81",
+  "109:109|100|2159|6|4|4|4|84",
+  "110:110|100|2265|6|4|4|4|87",
+  "111:111|100|2202|6|4|4|4|110",
+  "112:112|100|2131|7|4|4|4|108",
+  "113:113|97|2190|7|4|4|4|95",
+  "114:114|93|2256|7|4|4|4|83",
+  "115:115|100|2207|7|4|4|4|72",
+  "116:116|100|2122|7|4|4|4|73",
+  "117:117|100|2380|7|4|4|4|68",
+  "118:118|100|2342|7|4|4|4|50",
+  "119:119|100|2303|6|4|4|4|65",
+  "120:120|100|2380|6|4|4|4|63",
+  "121:121|93|2380|6|4|4|4|65",
+  "122:122|100|2390|6|4|4|4|74",
+  "123:123|100|2390|6|4|4|4|97",
+  "124:124|98|2180|6|4|4|4|96",
+  "125:125|100|2330|5|4|4|4|85",
+  "126:126|100|2380|5|4|4|4|94",
+  "127:127|100|2330|5|4|4|4|93",
+  "128:128|92|2390|5|4|4|4|75",
+  "129:129|100|2380|5|4|4|4|75",
+  "130:130|100|2230|5|4|4|4|86",
+  "131:131|100|2330|5|4|4|4|111",
+  "132:132|100|2310|4|4|4|4|112",
+  "133:133|100|2380|4|3|0|4|91",
+  "134:134|100|2380|3|4|4|4|86",
+  "135:135|83|2330|3|4|4|4|72",
+  "136:136|100|2308|3|4|4|4|50",
+  "137:137|100|2330|2|4|4|4|30",
+  "138:138|100|2390|2|4|4|4|0",
+  "139:139|100|2400|2|4|4|4|9",
+  "140:140|100|2245|2|4|4|4|0",
+  "141:141|100|2254|2|4|4|4|0",
+  "142:142|100|609|2|4|4|4|0",
+  "143:143|100|1328|2|4|4|4|0",
+  "144:144|100|1165|2|4|4|4|0",
+  "145:145|100|2335|2|4|4|4|5",
+  "146:146|100|1523|2|4|4|4|0",
+  "147:147|94|447|2|4|4|4|0",
+  "148:148|77|506|2|4|4|4|0",
+  "149:149|100|2400|1|4|4|4|0",
+  "150:150|52|272|1|4|4|4|0"
+ ]
+}

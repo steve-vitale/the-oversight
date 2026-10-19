@@ -1,0 +1,3979 @@
+{
+ "seed": 64201,
+ "policyId": "belongfeast",
+ "substrate": "pre-seat-winside-novetrel",
+ "days": 85,
+ "gameDays": 86,
+ "endReason": "village-lost",
+ "won": false,
+ "endFlags": {
+  "scattered": false,
+  "extinct": true,
+  "scholarDead": false,
+  "over": true,
+  "villageLost": true
+ },
+ "endSnap": {
+  "d": 86,
+  "pantry": 12699,
+  "hungryDays": 0,
+  "scattered": false,
+  "extinct": true,
+  "roster": 3,
+  "living": 0,
+  "scholarAlive": true,
+  "scholarDead": false,
+  "vid": "meera_reddy",
+  "hungryStreak": 0,
+  "uw": 3
+ },
+ "maxWave": 3,
+ "successions": 9,
+ "successionDays": [
+  {
+   "day": 17,
+   "from": "gen_4frf8rm",
+   "to": "gen_3lb6qfr"
+  },
+  {
+   "day": 26,
+   "from": "gen_3lb6qfr",
+   "to": "diana_osei"
+  },
+  {
+   "day": 45,
+   "from": "diana_osei",
+   "to": "gen_l9eoos7"
+  },
+  {
+   "day": 47,
+   "from": "gen_l9eoos7",
+   "to": "gen_bzd3gb7"
+  },
+  {
+   "day": 48,
+   "from": "gen_bzd3gb7",
+   "to": "ines_duarte"
+  },
+  {
+   "day": 50,
+   "from": "ines_duarte",
+   "to": "carlos_diaz"
+  },
+  {
+   "day": 59,
+   "from": "carlos_diaz",
+   "to": "sigrun_eiriksdottir"
+  },
+  {
+   "day": 67,
+   "from": "sigrun_eiriksdottir",
+   "to": "yara_haddad"
+  },
+  {
+   "day": 86,
+   "from": "yara_haddad",
+   "to": "meera_reddy"
+  }
+ ],
+ "instrumentErrors": 0,
+ "deathsFull": [
+  {
+   "day": 5,
+   "who": "gen_u2u8243",
+   "cause": "monster",
+   "player": false,
+   "channel": "expedition",
+   "rule": "ctx:on-expedition",
+   "killerWave": null
+  },
+  {
+   "day": 16,
+   "who": "gen_4frf8rm",
+   "cause": "dehydration",
+   "player": true,
+   "channel": "other",
+   "rule": "cause-unmapped",
+   "killerWave": null
+  },
+  {
+   "day": 18,
+   "who": "zoe_adams",
+   "cause": "Choir Toad",
+   "player": false,
+   "channel": "expedition",
+   "rule": "monster-name=expedDeath",
+   "killerWave": null
+  },
+  {
+   "day": 22,
+   "who": "gen_njidv9v",
+   "cause": "monster",
+   "player": false,
+   "channel": "wild",
+   "rule": "ctx:router",
+   "killerWave": null
+  },
+  {
+   "day": 25,
+   "who": "gen_3lb6qfr",
+   "cause": "dehydration",
+   "player": true,
+   "channel": "other",
+   "rule": "cause-unmapped",
+   "killerWave": null
+  },
+  {
+   "day": 45,
+   "who": "diana_osei",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 47,
+   "who": "gen_l9eoos7",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 47,
+   "who": "gen_bzd3gb7",
+   "cause": "combat",
+   "player": true,
+   "channel": "wild",
+   "rule": "ctx:scholar-fight-in-wild",
+   "killerWave": null
+  },
+  {
+   "day": 49,
+   "who": "ines_duarte",
+   "cause": "combat",
+   "player": true,
+   "channel": "wild",
+   "rule": "ctx:scholar-fight-in-wild",
+   "killerWave": null
+  },
+  {
+   "day": 59,
+   "who": "carlos_diaz",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 61,
+   "who": "mia_andersson",
+   "cause": "monster",
+   "player": false,
+   "channel": "wild",
+   "rule": "ctx:router",
+   "killerWave": null
+  },
+  {
+   "day": 67,
+   "who": "sigrun_eiriksdottir",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:scholar-fight-at-haven",
+   "killerWave": null
+  },
+  {
+   "day": 82,
+   "who": "visjoin_76",
+   "cause": "monster",
+   "player": false,
+   "channel": "wild",
+   "rule": "ctx:router",
+   "killerWave": null
+  },
+  {
+   "day": 83,
+   "who": "ella_johnson",
+   "cause": "monster",
+   "player": false,
+   "channel": "wild",
+   "rule": "ctx:router",
+   "killerWave": null
+  },
+  {
+   "day": 86,
+   "who": "yara_haddad",
+   "cause": "combat",
+   "player": true,
+   "channel": "raid",
+   "rule": "ctx:aid-crisis",
+   "killerWave": null
+  },
+  {
+   "day": 86,
+   "who": "catalina_reyes",
+   "cause": "combat",
+   "player": true,
+   "channel": "expedition",
+   "rule": "ctx:on-expedition",
+   "killerWave": null
+  }
+ ],
+ "deathsSummary": {
+  "rawCount": 41,
+  "attributedCount": 16,
+  "phantomCount": 0,
+  "nullWho": 0
+ },
+ "flows": [
+  [
+   20,
+   "tribute",
+   5000
+  ],
+  [
+   21,
+   "tribute",
+   5150
+  ],
+  [
+   26,
+   "feast",
+   1
+  ],
+  [
+   28,
+   "tribute",
+   5000
+  ],
+  [
+   33,
+   "feast",
+   1
+  ],
+  [
+   37,
+   "tribute",
+   7555
+  ],
+  [
+   40,
+   "feast",
+   1
+  ],
+  [
+   42,
+   "tribute",
+   7520
+  ],
+  [
+   47,
+   "feast",
+   1
+  ],
+  [
+   58,
+   "tribute",
+   5307
+  ],
+  [
+   59,
+   "feast",
+   1
+  ],
+  [
+   73,
+   "tribute",
+   7685
+  ],
+  [
+   74,
+   "feast",
+   1
+  ],
+  [
+   78,
+   "tribute",
+   11398
+  ],
+  [
+   84,
+   "tribute",
+   11275
+  ],
+  [
+   86,
+   "feast",
+   1
+  ]
+ ],
+ "beats": [
+  {
+   "day": 25,
+   "tag": "bond-is-young",
+   "text": "With Haven grieving, Emberhold installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 32,
+   "tag": "speaker-install",
+   "text": "Seven days of silence, and the silence answered for Haven. Emberhold's new speaker reads it plainly. (Trust -6.) Emberhold installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 45,
+   "tag": "speaker-install",
+   "text": "With Haven grieving, Emberhold installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  },
+  {
+   "day": 59,
+   "tag": "bond-is-young",
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 66,
+   "tag": "speaker-install",
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 67,
+   "tag": "bond-is-young",
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 74,
+   "tag": "speaker-install",
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 11,250 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 86,
+   "tag": "speaker-install",
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  }
+ ],
+ "sayLog": [
+  {
+   "day": 1,
+   "text": "A woman, maybe 30s, with a long braid heads out for water. \"The well won't fill itself.\""
+  },
+  {
+   "day": 1,
+   "text": "💧 A woman, maybe 30s, with a long braid returns with water: +3 clean."
+  },
+  {
+   "day": 1,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 2,
+   "text": "👥 A woman, maybe 30s, with a long braid walks out with A man, maybe 30s. \"Nobody walks alone today.\""
+  },
+  {
+   "day": 2,
+   "text": "🌿 A person, maybe 60s, with a shaved head checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 2,
+   "text": "🌿 Addison returns from foraging the wilds: +336 kcal to the pantry."
+  },
+  {
+   "day": 2,
+   "text": "🌿 A man, maybe 60s returns from foraging the wilds: +403 kcal to the pantry."
+  },
+  {
+   "day": 2,
+   "text": "You catch fragments by the fire — A woman, maybe 30s, with a long braid telling A person, maybe 60s, with a gap-toothed grin about A person, maybe 60s, with a shaved head. It's barely the same story now. That's what fires do."
+  },
+  {
+   "day": 2,
+   "text": "🚶 A woman, maybe 30s, with a long braid is back with Hank."
+  },
+  {
+   "day": 3,
+   "text": "A woman, maybe 30s, with a long braid heads out for water. \"The well won't fill itself.\""
+  },
+  {
+   "day": 3,
+   "text": "A man, maybe 60s sets out to find A woman, maybe 30s, with a long braid. \"Won't be long.\""
+  },
+  {
+   "day": 3,
+   "text": "You catch fragments by the fire — A woman, maybe 30s, with restless hands telling A woman, maybe 30s, with a long braid about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "day": 3,
+   "text": "💧 A woman, maybe 30s, with a long braid returns with water: +2 clean."
+  },
+  {
+   "day": 3,
+   "text": "📺 A person, maybe 30s killed a shadow moving wrong against the sun out past the ridge — alone — and walked home. 2 rounds, 18 taken. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 3,
+   "text": "📣 A person, maybe 30s killed a shadow moving wrong against the sun out past the ridge — alone — and walked home. 2 rounds, 18 taken."
+  },
+  {
+   "day": 3,
+   "text": "🔥 The fire settles. the person in their 30s has been quiet all evening, and now everyone knows why. \"A shadow moving wrong against the sun — I put it down today.\" \"A shadow crosses the ground — growing fast. Something is falling out of the sky, straight at you.\" \"It missed. It hits the dirt hard — wings splayed, vulne"
+  },
+  {
+   "day": 3,
+   "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 3,
+   "text": "🚶 Carlos is back — found A woman, maybe 30s, with a long braid."
+  },
+  {
+   "day": 3,
+   "text": "A woman, maybe 30s, with a long braid spends the afternoon with the vine with thick-skinned round fruit — look, smell, the smallest taste, then waiting. An hour passes. Then another. Nothing. The fire nods. That's dinner, maybe."
+  },
+  {
+   "day": 4,
+   "text": "You catch fragments by the fire — A woman, maybe 30s, with a long braid telling Carlos about you. The retelling is already better than the event."
+  },
+  {
+   "day": 4,
+   "text": "A woman, maybe 30s, with a long braid heads out for water. \"The well won't fill itself.\""
+  },
+  {
+   "day": 4,
+   "text": "...and then it lands: A woman, maybe 30s, with a long braid speaks 🇬🇭 Twi. You share no language at all."
+  },
+  {
+   "day": 4,
+   "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 4,
+   "text": "◈ Something in A person, maybe 30s's eyes has changed. They've seen enough out there to stop being afraid of the dark."
+  },
+  {
+   "day": 4,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 5,
+   "text": "◈ CRISIS — THE FIRST GRAVE. A person, maybe 30s is dead. The village digs its first grave, and everyone understands at once: this place can kill you. It just did."
+  },
+  {
+   "day": 5,
+   "text": "💀 The drumbeat with no drummer killed Putul in 1 round. The village mourns."
+  },
+  {
+   "day": 5,
+   "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 5,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 5,
+   "text": "A runner from Stonebridge, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 5,
+   "text": "A runner from Thornfield, dusty and direct: \"Your foragers are stripping our side of the south ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 6,
+   "text": "Movement — a thick-bodied rattlesnake, chevron bands, the tail a blur of dry sound."
+  },
+  {
+   "day": 6,
+   "text": "💡 COUNTER LEARNED — a dog-shaped silence at the treeline: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (Two survived encounters — the fire has a theory.)"
+  },
+  {
+   "day": 6,
+   "text": "📓 Journal: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free."
+  },
+  {
+   "day": 6,
+   "text": "🌿 A person, maybe 60s, with a shaved head checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 7,
+   "text": "⚔️ Oscar stood down the dog-shaped silence at the treeline and kept walking — 1 round, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A person, maybe 60s, with a shaved head checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "🐗 RAID — 5 raiders (a moth the size of a dinner plate, catching light wrong, a dog-shaped silence at the treeline, a moth the size of a dinner plate, catching light wrong, a toad like a war drum, throat swelling, a drumbeat with no drummer, getting closer) hit Haven in the night, drawn by the smell of the pantry! No w"
+  },
+  {
+   "day": 7,
+   "text": "📻 \"Why do the small humans keep putting organic matter in their FACE-HOLES? We built you a fusion pellet! ...You BURIED it. WHY did you bury the pellet?!\""
+  },
+  {
+   "day": 7,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 7,
+   "text": "A runner from Emberhold, dusty and direct: \"Your foragers are stripping our side of the east ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 7,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 8,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 8,
+   "text": "📓 Codex: Addison proposed relief (raid), day 8."
+  },
+  {
+   "day": 8,
+   "text": "⚔️ Hank stood down the moth the size of a dinner plate and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 8,
+   "text": "⚔️ Oscar stood down the moth the size of a dinner plate and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 8,
+   "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "◈ SYSTEM: \"RATINGS DIP. The audience wants STAKES — pointed ones. A PALISADE. Stockpile 14,000 kcal, 350 wood and 60 stone. Walls make such good television. You will thank us when the teeth come.\""
+  },
+  {
+   "day": 8,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 8,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 8,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1450 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 9,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 9,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~1500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 10,
+   "text": "🐺 HOWLS in the distance. Closer than before. The System chirps: \"Oh! We made those! Are they... too many? We can make fewer?\" (New monster: hushwolf pack.)"
+  },
+  {
+   "day": 10,
+   "text": "The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 10,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 10,
+   "text": "◈ \"UNIT ESTHER'S RING — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 10,
+   "text": "◈ \"UNIT SEED PACKET — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 10,
+   "text": "◈ \"UNIT BRASS LOCKET — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 10,
+   "text": "◈ FLASHBACK — Brass Locket\nBrass. Two photos inside, both fading. It opens with a click you can feel in your teeth — Halyna's click, then your mother's, now yours."
+  },
+  {
+   "day": 10,
+   "text": "◈ \"UNIT CARPENTER'S SQUARE — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn; building and repairs hold better. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 10,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1250 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 10,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 11,
+   "text": "The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 11,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 12,
+   "text": "The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 12,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 13,
+   "text": "📖 The Codex turns a page on its own. White Noise is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 13,
+   "text": "📺 Diana killed White Noise out past the ridge — alone — and walked home. 4 rounds, 28 taken. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 13,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 13,
+   "text": "The System's gifts are hungry: -60 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 13,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 14,
+   "text": "The System's gifts are hungry: -60 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 14,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 15,
+   "text": "🐗 RAID — 5 raiders (Murkcap, Big Big, Big Big, The Living Wire, Drum-Belly) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 15,
+   "text": "◈ RESONANCE HARMONICS — SYSTEM: \"HYPOTHESIS CONFIRMED. Objects with high observer-attention waveforms function as auxiliary capacitors. We call this RESONANCE HARMONICS. We do not know why the waveforms taste like grief. We have stopped asking.\" — Hold a keepsake. Think about them. The System will do the math. (It is n"
+  },
+  {
+   "day": 15,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 15,
+   "text": "The System's gifts are hungry: -60 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 15,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 16,
+   "text": "The teeth break. The door holds — with nobody's help but Haven's own."
+  },
+  {
+   "day": 16,
+   "text": "The System's gifts are hungry: -60 kcal metabolic cost. Feed the power or lose it."
+  },
+  {
+   "day": 16,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 16,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 16,
+   "text": "📖 The Codex turns a page on its own. Leonard Griffin is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 16,
+   "text": "🕯️ Leonard Griffin is dead — dehydration. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 16,
+   "text": "The Codex doesn't pause for grief. Aisling blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 16,
+   "text": "📖 LEARNED: Radios & Signals (Level 1). Continuity, batteries, and solder. Most dead electronics are just broken connections."
+  },
+  {
+   "day": 16,
+   "text": "⚔️ Hank stood down the Murkcap and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 16,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 17,
+   "text": "Too close. The tanuki's attention SNAPS to Aisling — proximity overrules patience."
+  },
+  {
+   "day": 17,
+   "text": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 17,
+   "text": "You clutch your Photo Album, Wedding ring, Home key, Search locket. You're still here. The resonance deepens. (bond 16)"
+  },
+  {
+   "day": 17,
+   "text": "◈ TRIAL RECOGNIZED — the System has been watching. You WON a fight. Not survived — won. The audience is still standing. So are you. (Combat track +)"
+  },
+  {
+   "day": 17,
+   "text": "🌿 Zoe returns from foraging the wilds: +282 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "text": "You sow Muscadine Grapes — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 17,
+   "text": "You sow Muscadine Grapes — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 17,
+   "text": "🌿 Addison checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "That night, they bring Leonard home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 17,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 18,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 18,
+   "text": "Movement — a crow watching you from a dead branch, head cocked."
+  },
+  {
+   "day": 18,
+   "text": "You sow Muscadine Grapes — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 18,
+   "text": "🌿 Addison checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "📖 The Codex turns a page on its own. Zoe Adams is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 18,
+   "text": "📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\""
+  },
+  {
+   "day": 18,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 19,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 20,
+   "text": "⛓️ Diana brings it home: Haven bows to Emberhold — one organization, them primary. Tribute: 5,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 20,
+   "text": "The System's overlay stretches — new edges, new names. Coordination layer: warming up. It'll be ready when the bond is."
+  },
+  {
+   "day": 20,
+   "text": "Tribute paid: 5,000 kcal walks out of the pantry toward Emberhold. The relationship holds."
+  },
+  {
+   "day": 20,
+   "text": "🧳 A traveler swears Emberhold, east, is feasting — a whole elk, they say. (They're wrong. Emberhold is starving.)"
+  },
+  {
+   "day": 21,
+   "text": "Tribute paid: 5,150 kcal walks out of the pantry toward Emberhold. The relationship holds."
+  },
+  {
+   "day": 21,
+   "text": "Too close. The toad's throat SNAPS wide toward Aisling — proximity overrules patience."
+  },
+  {
+   "day": 21,
+   "text": "Too close. The toad's throat SNAPS wide toward Aisling — proximity overrules patience."
+  },
+  {
+   "day": 21,
+   "text": "Too close. The toad's throat SNAPS wide toward Aisling — proximity overrules patience."
+  },
+  {
+   "day": 21,
+   "text": "Too close. The toad's throat SNAPS wide toward Aisling — proximity overrules patience."
+  },
+  {
+   "day": 21,
+   "text": "Too close. The toad's throat SNAPS wide toward Aisling — proximity overrules patience."
+  },
+  {
+   "day": 21,
+   "text": "Too close. The toad's throat SNAPS wide toward Aisling — proximity overrules patience."
+  },
+  {
+   "day": 21,
+   "text": "It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 21,
+   "text": "It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 21,
+   "text": "It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 21,
+   "text": "It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 21,
+   "text": "◈ \"UNIT WEDDING RING — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 21,
+   "text": "◈ FLASHBACK — Wedding ring\nGold band, worn thin. Inside: initials and a date. You remember the day — the rain, the borrowed suit, the laughter during the vows. Grief is just love with nowhere to go."
+  },
+  {
+   "day": 21,
+   "text": "◈ \"UNIT HOME KEY — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 21,
+   "text": "◈ \"UNIT SEARCH LOCKET — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 21,
+   "text": "You clutch your Photo Album, Wedding ring, Home key, Search locket. You're still here. The resonance deepens. (bond 44)"
+  },
+  {
+   "day": 22,
+   "text": "Travel 2 tiles to grove.\n— Nut trees —\nBark stripped at deer height on a young hickory — teeth, winter, hunger. Somebody winters here. Maybe you will too."
+  },
+  {
+   "day": 22,
+   "text": "📖 The Codex turns a page on its own. Addison is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 22,
+   "text": "Ines leans in, voice low. \"Here's what we figured out about Choir Toad. Break the chorus. The Resonant Croak needs the chorus — every throat in range joins. SHOUT and the note dies mid-croak. The hum needs the choir; scatter the choir.\""
+  },
+  {
+   "day": 22,
+   "text": "💡 COUNTER LEARNED — Choir Toad: Break the chorus. The Resonant Croak needs the chorus — every throat in range joins. SHOUT and the note dies mid-croak. The hum needs the choir; scatter the choir. (Someone at the haven knew the trick.)"
+  },
+  {
+   "day": 22,
+   "text": "📓 Codex: Counter: Break the chorus — The Resonant Croak needs the chorus — every throat in range joins. SHOUT and the note dies mid-croak. The hum needs the choir; scatter the choir."
+  },
+  {
+   "day": 22,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 23,
+   "text": "Movement — a waddling opossum, playing dead (badly)."
+  },
+  {
+   "day": 23,
+   "text": "👁 You know this one's trick: it plays dead. Don't fall for it — or do, and be ready when it wakes."
+  },
+  {
+   "day": 23,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 24,
+   "text": "The cold snap steals your warmth — breath smoking, fingers clumsy. (-20 kcal shivering. Fire, the hall, or your tent.)"
+  },
+  {
+   "day": 24,
+   "text": "The cold snap steals your warmth — breath smoking, fingers clumsy. (-20 kcal shivering. Fire, the hall, or your tent.)"
+  },
+  {
+   "day": 24,
+   "text": "The cold snap steals your warmth — breath smoking, fingers clumsy. (-20 kcal shivering. Fire, the hall, or your tent.)"
+  },
+  {
+   "day": 24,
+   "text": "You stay up through the cold snap instead of sleeping — and the cold gets in anyway. Shivering all night, no real rest. (-12 health, energy won't rise past 40 tonight.)"
+  },
+  {
+   "day": 24,
+   "text": "Sleeping rough means the cold ground — heal ~16. Cold snap — sleeping exposed will hurt you. Find shelter or build a fire. Running on empty — no water or no food means half healing and a wrung-out morning. Drink and eat before you sleep."
+  },
+  {
+   "day": 24,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 25,
+   "text": "Dawn. You wake stiff and half-frozen. (-27 health, restless night. Your sleeping body burned less — 675 kcal conserved. The cold got in — no healing, and it took its cut. (Sleeping unsheltered in a cold snap is a mistake you only make once.))"
+  },
+  {
+   "day": 25,
+   "text": "🐗 RAID — 4 raiders (Hushpuppy, Murkcap, The Moderator, tick) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 25,
+   "text": "📖 The Codex turns a page on its own. tick is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 25,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 25,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 25,
+   "text": "📖 The Codex turns a page on its own. Aisling Koffi is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 25,
+   "text": "🕯️ Aisling is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 25,
+   "text": "With Haven grieving, Emberhold installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 25,
+   "text": "📓 Codex: Aisling died while mentored in your party."
+  },
+  {
+   "day": 25,
+   "text": "🕯️ Aisling Koffi is dead — dehydration. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 25,
+   "text": "The Codex doesn't pause for grief. Diana blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 25,
+   "text": "The village's quarrel was with Aisling — and Aisling is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 25,
+   "text": "⚔️ Addison stood down the Hushpuppy and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 25,
+   "text": "💀 The Hushpuppy killed Addison in 1 round. The village mourns."
+  },
+  {
+   "day": 25,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 26,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 26,
+   "text": "🍖 FEAST 📺 — Diana opens the pantry wide: 8× Foraged food. Hank, Sigrun eat until the fire burns low. The laughter stays low — somebody's seat is empty, and everybody sees it. For one evening, grief sits at the fire with them instead of standing over them. (−1,600 kcal from the pantry) The channeled keepsake feeds the"
+  },
+  {
+   "day": 26,
+   "text": "Tough reptile meat — stew it long. The mirror-scales flake off; they're pretty and useless. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 26,
+   "text": "You clutch your Spare Socks. You're still here. The resonance deepens. (bond 4)"
+  },
+  {
+   "day": 26,
+   "text": "🔥 The fire settles. Carlos has been quiet all evening, and now everyone knows why. \"Tick — I put it down today.\" \"It waits. The questing legs wave — the tell.\" \"Adjacent = attached. No dodge. It's ON you.\" A beat of silence, then the questions come all at once. Ines says quietly \"We've been walking past those.\" Oscar "
+  },
+  {
+   "day": 26,
+   "text": "You sow Muscadine Grapes — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)"
+  },
+  {
+   "day": 26,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 26,
+   "text": "💔 Emberhold has split over blood — the hardliners walked, and they didn't walk far. The Bloodied is a new fire in the world now — 6 people under Lena."
+  },
+  {
+   "day": 26,
+   "text": "📓 Codex: Emberhold split (hardline). The Bloodied formed; 0 petition at Haven's fire."
+  },
+  {
+   "day": 26,
+   "text": "That night, they bring Aisling home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 27,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 27,
+   "text": "🧳 Emberhold has split — the hardliners walked. They call the new fire The Bloodied. Half of them were headed this way, or so the traveler says."
+  },
+  {
+   "day": 28,
+   "text": "Tribute paid: 5,000 kcal walks out of the pantry toward Emberhold. The relationship holds."
+  },
+  {
+   "day": 28,
+   "text": "🌿 Sigrun checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Sigrun checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Carlos returns from foraging the wilds: +307 kcal to the pantry."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 31,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 31,
+   "text": "◈ \"UNIT SPARE SOCKS — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 31,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~1300 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 32,
+   "text": "⚔️ Ines stood down the Night Court and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 32,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "Seven days of silence, and the silence answered for Haven. Emberhold's new speaker reads it plainly. (Trust -6.) Emberhold installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 32,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 33,
+   "text": "🌿 Carlos returns from foraging the wilds: +583 kcal to the pantry."
+  },
+  {
+   "day": 33,
+   "text": "The kite stops dead. Below it, the ground lights up in a grid."
+  },
+  {
+   "day": 33,
+   "text": "Kite's attack hits you for 12."
+  },
+  {
+   "day": 33,
+   "text": "You clutch your Spare Socks. You're still here. The resonance deepens. (bond 14)"
+  },
+  {
+   "day": 33,
+   "text": "\"BACK AGAINST THE WALL! Teeth BARE! We are cheering SO loud right now!\""
+  },
+  {
+   "day": 33,
+   "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 33,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 33,
+   "text": "A runner from The Bloodied, dusty and direct: \"Your foragers are stripping our side of the east ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 34,
+   "text": "⚔️ Carlos stood down the Anaconda Empress and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 34,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 34,
+   "text": "🐗 RAID — 4 raiders (Cliffhanger, Big Big, Murkcap, Extended Warranty) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 34,
+   "text": "📖 The Codex turns a page on its own. Extended Warranty is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 34,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 35,
+   "text": "⚔️ Hank stood down the Cliffhanger and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 35,
+   "text": "⚔️ Yara killed the Extended Warranty alone — 4 rounds, 58 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 35,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 36,
+   "text": "◈ WORD TRAVELS — riders from The Bloodied bring talk of Haven. Out there they call you the Feared. The show's narration lingers on your hands."
+  },
+  {
+   "day": 36,
+   "text": "🌿 Carlos returns from foraging the wilds: +238 kcal to the pantry."
+  },
+  {
+   "day": 36,
+   "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 36,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 37,
+   "text": "Tribute paid: 7,555 kcal walks out of the pantry toward Emberhold. The relationship holds."
+  },
+  {
+   "day": 37,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 37,
+   "text": "🌿 Carlos returns from foraging the wilds: +562 kcal to the pantry."
+  },
+  {
+   "day": 37,
+   "text": "🌙 Raid — Emberhold came in the night from the east. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 38,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 38,
+   "text": "📖 LEARNED: Keeping Morale (Level 2). Rituals matter: shared meals, stories, songs. You're not just feeding bodies."
+  },
+  {
+   "day": 39,
+   "text": "🌿 Carlos returns from foraging the wilds: +319 kcal to the pantry."
+  },
+  {
+   "day": 39,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 39,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 40,
+   "text": "The whine climbs an octave and steadies — it's lining up the dive! (it only drinks adjacent — keep your distance)"
+  },
+  {
+   "day": 40,
+   "text": "Mosquito's attack hits you for 8."
+  },
+  {
+   "day": 40,
+   "text": "📺 \"But real talk? The next act needs a BIGGER STAGE. I can't stage it with ONE fire — there's not enough of you to REFLECT, you feel me? Get me STANDING — blood, bonds, or bread. Rack up the kills, season your alliances, or feast like legends. Make it worth escalating.\""
+  },
+  {
+   "day": 40,
+   "text": "You clutch your Spare Socks. You're still here. The resonance deepens. (bond 24)"
+  },
+  {
+   "day": 40,
+   "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 40,
+   "text": "💛 The Spare Socks has become something you can reach for. (Keepsake L2 — new combat action: Steady. Hold it and breathe: clear fear and stun on yourself. Once per fight.)"
+  },
+  {
+   "day": 41,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 41,
+   "text": "◈ SYSTEM: \"One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast.\""
+  },
+  {
+   "day": 42,
+   "text": "Tribute paid: 7,520 kcal walks out of the pantry toward Emberhold. The relationship holds."
+  },
+  {
+   "day": 42,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 43,
+   "text": "💬 Hank says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  },
+  {
+   "day": 43,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 43,
+   "text": "🌿 Carlos returns from foraging the wilds: +367 kcal to the pantry."
+  },
+  {
+   "day": 43,
+   "text": "🐗 RAID — 4 raiders (The Redactor, The Anaconda Empress, Inspiration, Big Big) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 43,
+   "text": "📖 The Codex turns a page on its own. Inspiration is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 43,
+   "text": "📖 The Codex turns a page on its own. Big Big is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 43,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 43,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 44,
+   "text": "The bar thins, flickers — nothing left loud enough to redact. It is STARVING. (Its attacks weaken; starve it one more turn and it flees.)"
+  },
+  {
+   "day": 44,
+   "text": "Starved — its Redact lands weakly."
+  },
+  {
+   "day": 44,
+   "text": "The bar thins to a line, then to nothing. Nothing left loud enough to redact. It starves — and goes."
+  },
+  {
+   "day": 44,
+   "text": "◈ TRIAL RECOGNIZED — the System has been watching. You took a beating that should have ended you — and kept moving. Noted. (Combat track +)"
+  },
+  {
+   "day": 44,
+   "text": "◈ TRIAL RECOGNIZED — the System has been watching. You walked out of that fight on a quarter tank. The blood loss should have won. It didn't. (Combat track +)"
+  },
+  {
+   "day": 44,
+   "text": "💡 COUNTER LEARNED — The Redactor: Go quiet — starve the redaction. It redacts the loudest thing first, and the handles point a full round before the redaction lands. Go quiet for two turns and its attacks come thin; a third quiet turn starves it out of the fight. (Striking feeds it — every wound gets un-written.) (You"
+  },
+  {
+   "day": 44,
+   "text": "📓 Codex: Counter: Go quiet — starve the redaction — It redacts the loudest thing first, and the handles point a full round before the redaction lands. Go quiet for two turns and its attacks come thin; a third quiet turn starves it out of the fight. (Striking feeds it — every wound gets un-written.)"
+  },
+  {
+   "day": 44,
+   "text": "⚔️ Yara killed the Inspiration alone — 3 rounds, 46 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 44,
+   "text": "⚔️ Carlos killed the Big Big alone — 3 rounds, 16 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 44,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 44,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 45,
+   "text": "📖 The Codex turns a page on its own. Diana Osei is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 45,
+   "text": "🕯️ Diana is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 45,
+   "text": "With Haven grieving, Emberhold installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  },
+  {
+   "day": 45,
+   "text": "🕯️ Diana Osei is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 45,
+   "text": "The Codex doesn't pause for grief. Hank blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 45,
+   "text": "The village's quarrel was with Diana — and Diana is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 45,
+   "text": "At the grave, Oscar, Sigrun, Carlos and 1 more speak for Hank — \"Diana trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 45,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 45,
+   "text": "🌿 Carlos returns from foraging the wilds: +259 kcal to the pantry."
+  },
+  {
+   "day": 45,
+   "text": "🔥 The fire settles. Oscar has been quiet all evening, and now everyone knows why. \"Hummice — I put it down today.\" \"A low hum rises from the grass. It harmonizes with itself. Your teeth ache.\" \"Teeth in the grass, everywhere at once — a tide of small bites.\" A beat of silence, then the questions come all at once. Sigr"
+  },
+  {
+   "day": 45,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 46,
+   "text": "🌿 Oscar checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 46,
+   "text": "🧳 A traveler passed through yesterday, talking about a village to the east called The Bloodied. The region is bigger than your fire."
+  },
+  {
+   "day": 46,
+   "text": "That night, they bring Diana home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 46,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 47,
+   "text": "🍖 FEAST 📺 — Hank opens the pantry wide: 9× Foraged food, 2× Winner's share (alien rations), 2× Winner's share (alien rations). Oscar, Sigrun, Yara, Carlos and 3 more eat until the fire burns low. The laughter stays low — somebody's seat is empty, and everybody sees it. For one evening, grief sits at the fire with the"
+  },
+  {
+   "day": 47,
+   "text": "The wrongness is the telegraph. (The Callback wears the dead. Speak the funeral — or name it as NOT them.)"
+  },
+  {
+   "day": 47,
+   "text": "💥 callback's attack finds you — no dodging it."
+  },
+  {
+   "day": 47,
+   "text": "Callback's attack hits you for 29."
+  },
+  {
+   "day": 47,
+   "text": "📖 The Codex turns a page on its own. Hank Gibson is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 47,
+   "text": "🕯️ Hank is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 47,
+   "text": "🕯️ Hank Gibson is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 47,
+   "text": "The Codex doesn't pause for grief. Oscar blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 47,
+   "text": "At the grave, Sigrun, Carlos, Ines speak for Oscar — \"Hank trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 9."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 13."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 12."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 9."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 3."
+  },
+  {
+   "day": 47,
+   "text": "Tick's attack hits you for 10."
+  },
+  {
+   "day": 47,
+   "text": "📖 The Codex turns a page on its own. Oscar Fuentes is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 47,
+   "text": "🕯️ Oscar is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 47,
+   "text": "🕯️ Oscar Fuentes is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 47,
+   "text": "The Codex doesn't pause for grief. Ines blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 47,
+   "text": "At the grave, Sigrun, Carlos speak for Ines — \"Oscar trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 47,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 47,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 48,
+   "text": "🌿 Carlos returns from foraging the wilds: +266 kcal to the pantry."
+  },
+  {
+   "day": 48,
+   "text": "That night, they bring Hank home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 48,
+   "text": "That night, they bring Oscar home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 48,
+   "text": "🌙 Raid — Emberhold came in the night from the east. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 48,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 49,
+   "text": "📖 The Codex turns a page on its own. Ines Duarte is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 49,
+   "text": "🕯️ Ines is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 49,
+   "text": "Ines is gone — dead. The errand dies with them; nobody's waiting on those dandelions now."
+  },
+  {
+   "day": 49,
+   "text": "🕯️ Ines Duarte is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 49,
+   "text": "The Codex doesn't pause for grief. Carlos blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 49,
+   "text": "📖 LEARNED: Reading the Water (Level 1). You know where fish hold: seams, eddies, shade lines. The water stops being a surface and starts being a map."
+  },
+  {
+   "day": 49,
+   "text": "At the grave, Sigrun speaks for Carlos — \"Ines trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 49,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 49,
+   "text": "🧳 Word of Haven’s the televised games is doing work out there — Word comes late, through traders: The Bloodied has bound itself to Thornfield. The region's map is being redrawn — not by Haven."
+  },
+  {
+   "day": 50,
+   "text": "You see smoke on the horizon. Emberhold — 6 people, 50 days in. fishing folk, by the look of it. They know 10 plants — 7 new to you. They look lean — hungry, even. Food would talk here. They've been here the whole time."
+  },
+  {
+   "day": 50,
+   "text": "You see smoke on the horizon. The Bloodied — 6 people, 50 days in. fishing folk, by the look of it. They know 8 plants — 8 new to you. They look lean — hungry, even. Food would talk here. They've been here the whole time."
+  },
+  {
+   "day": 50,
+   "text": "Travel 2 tiles to creek.\n— Moving water —\nThe creek braids around gravel bars. Crawdads flick backward into the shadows of rocks."
+  },
+  {
+   "day": 50,
+   "text": "That night, they bring Ines home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 51,
+   "text": "Movement — a waddling opossum, playing dead (badly)."
+  },
+  {
+   "day": 51,
+   "text": "👁 You know this one's trick: it plays dead. Don't fall for it — or do, and be ready when it wakes."
+  },
+  {
+   "day": 51,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 51,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1100 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 52,
+   "text": "🌿 Mia returns from foraging the wilds: +441 kcal to the pantry."
+  },
+  {
+   "day": 52,
+   "text": "⚔️ Mia stood down the Big-Eyes and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 53,
+   "text": "🌿 Mia returns from foraging the wilds: +427 kcal to the pantry."
+  },
+  {
+   "day": 53,
+   "text": "⚔️ Sigrun stood down the Big Ugly and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 53,
+   "text": "🐗 RAID — 4 raiders (Loud-Eyes, Ad Break, Night Court, Big Ugly) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 54,
+   "text": "The teeth break. The door holds — with nobody's help but Haven's own."
+  },
+  {
+   "day": 55,
+   "text": "🌿 Meera returns from foraging the wilds: +560 kcal to the pantry."
+  },
+  {
+   "day": 55,
+   "text": "🚶 Haven walks from the table cleanly — no blades, no hard words. The bond ends where it stood, honestly."
+  },
+  {
+   "day": 55,
+   "text": "💡 COUNTER LEARNED — The Callback: Say the goodbye — properly, out loud. It wears someone you buried. Every few rounds the face shifts and borrows their swing. Speak to it AS them — say the goodbye properly, out loud — and it loses coherence; the face cannot borrow a swing from someone who has been mourned. (Mia lived "
+  },
+  {
+   "day": 55,
+   "text": "📓 Codex: Counter: Say the goodbye — properly, out loud — It wears someone you buried. Every few rounds the face shifts and borrows their swing. Speak to it AS them — say the goodbye properly, out loud — and it loses coherence; the face cannot borrow a swing from someone who has been mourned."
+  },
+  {
+   "day": 55,
+   "text": "🌿 Mia returns from foraging the wilds: +498 kcal to the pantry."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Catalina returns from foraging the wilds: +470 kcal to the pantry."
+  },
+  {
+   "day": 57,
+   "text": "🌿 Mia returns from foraging the wilds: +466 kcal to the pantry."
+  },
+  {
+   "day": 57,
+   "text": "⛓️ Sigrun brings it home: Haven bows to Thornfield — one organization, them primary. Tribute: 5,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 58,
+   "text": "Tribute paid: 5,307 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 58,
+   "text": "🌿 Mia returns from foraging the wilds: +526 kcal to the pantry."
+  },
+  {
+   "day": 58,
+   "text": "◈ \"UNIT NINA'S RING — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 58,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 59,
+   "text": "The Elder The Ugly Beast flinches — its note dies mid-croak. It hops back, throat fluttering."
+  },
+  {
+   "day": 59,
+   "text": "The Elder The Ugly Beast flinches — its note dies mid-croak. It hops back, throat fluttering."
+  },
+  {
+   "day": 59,
+   "text": "The Ugly Beast flinches — its note dies mid-croak. It hops back, throat fluttering."
+  },
+  {
+   "day": 59,
+   "text": "📖 The Codex turns a page on its own. Carlos Diaz is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 59,
+   "text": "🕯️ Carlos is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 59,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 59,
+   "text": "🕯️ Carlos Diaz is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 59,
+   "text": "The Codex doesn't pause for grief. Sigrun blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 59,
+   "text": "📖 LEARNED: Bodyguard (Level 1). In the wilds, when a blow is falling on someone beside you, you step into it. Once per fight, an attack meant for your ally lands on you instead. It hurts. That's the job."
+  },
+  {
+   "day": 59,
+   "text": "The village's quarrel was with Carlos — and Carlos is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 59,
+   "text": "At the grave, Yara speaks for Sigrun — \"Carlos trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 59,
+   "text": "Recipe: Hunting spear (Level 1). You have seen a hunting spear. Longer than a man, stone at the killing end."
+  },
+  {
+   "day": 59,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 60,
+   "text": "🏃 Lucia of Thornfield walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Thornfield has grain to spare — 1,557 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 60,
+   "text": "🌿 Catalina returns from foraging the wilds: +588 kcal to the pantry."
+  },
+  {
+   "day": 60,
+   "text": "That night, they bring Carlos home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 60,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 60,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 61,
+   "text": "📖 The Codex turns a page on its own. The Ugly Beast is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 61,
+   "text": "📖 The Codex turns a page on its own. Mia is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 61,
+   "text": "⚔️ Yara killed the Ugly Beast alone — 3 rounds, 56 taken. Word travels fast. The village cheers."
+  },
+  {
+   "day": 61,
+   "text": "💀 The Highbeam Deer killed Mia in 1 round. The village mourns."
+  },
+  {
+   "day": 61,
+   "text": "📖 LEARNED: Dead Aim (Level 1). First attack in any combat is a guaranteed critical if you waited 1 round. Patience, then thunder."
+  },
+  {
+   "day": 61,
+   "text": "◈ TRIAL COMPLETE — the audience applauds, which sounds like static. (+15 integration, gift: a lesson: Dead Aim) Quiet luck was with you."
+  },
+  {
+   "day": 62,
+   "text": "⚔️ Catalina stood down the Old Loud and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 63,
+   "text": "🥣 Alba of The Bloodied walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\""
+  },
+  {
+   "day": 63,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 64,
+   "text": "🐗 RAID — 3 raiders (Old Loud, Old Loud, The Big Beast) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 65,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 65,
+   "text": "Alba waits two days at your fire, getting thinner. Nobody answers. They walk back to The Bloodied with nothing. They'll remember the silence."
+  },
+  {
+   "day": 66,
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 67,
+   "text": "💡 COUNTER LEARNED — ducks in a row: Break the line. The line is one animal, but only while it's whole. Strike a duck that ISN'T the head and the line splits — both halves hunt on their own and the formation dies. Break the line, then thin the pieces. (You did the thing — and it worked.)"
+  },
+  {
+   "day": 67,
+   "text": "📓 Codex: Counter: Break the line — The line is one animal, but only while it's whole. Strike a duck that ISN'T the head and the line splits — both halves hunt on their own and the formation dies. Break the line, then thin the pieces."
+  },
+  {
+   "day": 67,
+   "text": "📖 The Codex turns a page on its own. Sigrun Eiriksdottir is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 67,
+   "text": "🕯️ Sigrun is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 67,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+  },
+  {
+   "day": 67,
+   "text": "🕯️ Sigrun Eiriksdottir is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 67,
+   "text": "The Codex doesn't pause for grief. Yara blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 67,
+   "text": "The village's quarrel was with Sigrun — and Sigrun is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 67,
+   "text": "At the grave, Ella, Meera speak for Yara — \"Sigrun trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 68,
+   "text": "That night, they bring Sigrun home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+  },
+  {
+   "day": 69,
+   "text": "📖 LEARNED: Grave Robber (Level 1). You can loot the dead (villagers, monsters). Good gear. -15 trust if seen."
+  },
+  {
+   "day": 69,
+   "text": "◈ TRIAL COMPLETE — the audience applauds, which sounds like static. (+15 integration, gift: a lesson: Grave Robber) Quiet luck was with you."
+  },
+  {
+   "day": 70,
+   "text": "📖 The Codex turns a page on its own. The Big Beast is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 70,
+   "text": "📺 Catalina killed The Big Beast out past the ridge — alone — and walked home. 2 rounds, 19 taken. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 70,
+   "text": "📣 Catalina killed The Big Beast out past the ridge — alone — and walked home. 2 rounds, 19 taken."
+  },
+  {
+   "day": 70,
+   "text": "🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1270 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 70,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~920 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 72,
+   "text": "◈ Something in Catalina's eyes has changed. They've seen enough out there to stop being afraid of the dark."
+  },
+  {
+   "day": 72,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 73,
+   "text": "🌿 Cameron returns from foraging the wilds: +569 kcal to the pantry."
+  },
+  {
+   "day": 73,
+   "text": "Tribute paid: 7,685 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 74,
+   "text": "Too close. It SNAPS toward you — proximity overrules patience."
+  },
+  {
+   "day": 74,
+   "text": "Pork is pork. Smoke it; it keeps for weeks. The tusks make excellent awls. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+  },
+  {
+   "day": 74,
+   "text": "Grave robber: its tooth necklace is on the body. The dead don't need it — but you'll have to take it."
+  },
+  {
+   "day": 74,
+   "text": "◈ \"UNIT BUS SCHEDULE — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\""
+  },
+  {
+   "day": 74,
+   "text": "You clutch your Bus Schedule. You're still here. The resonance deepens. (bond 10)"
+  },
+  {
+   "day": 74,
+   "text": "SYSTEM: Catalogued. The Codex grows teeth."
+  },
+  {
+   "day": 74,
+   "text": "The lens steadies. You hear the shutter think about it."
+  },
+  {
+   "day": 74,
+   "text": "You clutch your Bus Schedule. You're still here. The resonance deepens. (bond 13)"
+  },
+  {
+   "day": 74,
+   "text": "Ella leans in, voice low. \"Here's what we figured out about The Paparazzo. Break line of sight before the fourth shot. Four shots is the whole fight — break line of sight before the fourth and the model starves. The EXCLUSIVE cannot be dodged, only prevented: move while the lens steadies.\""
+  },
+  {
+   "day": 74,
+   "text": "💡 COUNTER LEARNED — The Paparazzo: Break line of sight before the fourth shot. Four shots is the whole fight — break line of sight before the fourth and the model starves. The EXCLUSIVE cannot be dodged, only prevented: move while the lens steadies. (Someone at the haven knew the trick.)"
+  },
+  {
+   "day": 74,
+   "text": "📓 Codex: Counter: Break line of sight before the fourth shot — Four shots is the whole fight — break line of sight before the fourth and the model starves. The EXCLUSIVE cannot be dodged, only prevented: move while the lens steadies."
+  },
+  {
+   "day": 74,
+   "text": "🌿 Ella checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 74,
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 11,250 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 75,
+   "text": "🌿 Ella returns from foraging the wilds: +514 kcal to the pantry."
+  },
+  {
+   "day": 75,
+   "text": "🌿 Catalina checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 75,
+   "text": "🌿 Cameron returns from foraging the wilds: +537 kcal to the pantry."
+  },
+  {
+   "day": 75,
+   "text": "📓 Codex: Tomás of Emberhold raids Haven's treeline — demands ~2,000 kcal."
+  },
+  {
+   "day": 76,
+   "text": "🌿 Ella returns from foraging the wilds: +347 kcal to the pantry."
+  },
+  {
+   "day": 76,
+   "text": "🌿 Ella checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 77,
+   "text": "🌿 Ella returns from foraging the wilds: +394 kcal to the pantry."
+  },
+  {
+   "day": 77,
+   "text": "🌙 Raid — Emberhold came in the night from the east. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 77,
+   "text": "🌙 Raid — Thornfield came in the night from the south. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 78,
+   "text": "Tribute paid: 11,398 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 79,
+   "text": "◈ THE SYSTEM has been watching Catalina — Combat 1. Three offers; they took Berserker Rage. Earned, chosen. (rage: villager level-up)"
+  },
+  {
+   "day": 79,
+   "text": "📓 Codex: Catalina chose Berserker Rage (rage) at Combat 1."
+  },
+  {
+   "day": 80,
+   "text": "FUSION REACTOR: the pellet goes in — properly, inside you. A warm hum starts behind your ribs and settles. You will never be hungry again. One reactor per world: yours. It does not come out. (The System is DELIGHTED. That should worry you.)"
+  },
+  {
+   "day": 80,
+   "text": "🌿 Ella returns from foraging the wilds: +301 kcal to the pantry."
+  },
+  {
+   "day": 81,
+   "text": "🏃 Lucia of Thornfield walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Thornfield has grain to spare — 2,221 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 82,
+   "text": "🌿 Cameron returns from foraging the wilds: +550 kcal to the pantry."
+  },
+  {
+   "day": 82,
+   "text": "📖 The Codex turns a page on its own. Rosa is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 82,
+   "text": "🌿 Catalina checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 82,
+   "text": "🌙 Night. Shouts from the treeline — Lena of The Bloodied with 4 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 kcal.)"
+  },
+  {
+   "day": 83,
+   "text": "📖 The Codex turns a page on its own. Ella is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 83,
+   "text": "⚔️ Ella stood down the Moderator and kept walking — 8 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 83,
+   "text": "🌿 Catalina checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 83,
+   "text": "🌙 You weren't at the treeline. Lena of The Bloodied didn't wait — they hit the stores and melted back into the dark with 800 kcal. The village will talk about this for a long time."
+  },
+  {
+   "day": 84,
+   "text": "◈ Something in Catalina's eyes has changed. They've seen enough out there to stop being afraid of the dark."
+  },
+  {
+   "day": 84,
+   "text": "Tribute paid: 11,275 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 84,
+   "text": "🌿 Catalina checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 84,
+   "text": "🧳 Word from The Bloodied: Dmitri is dead, and Fatima and Theo both claim the fire. The Bloodied is choosing — or fighting."
+  },
+  {
+   "day": 85,
+   "text": "💬 Ella says: \"Dreamed again. They showed me teeth. Lots of teeth. Be ready to fight soon.\""
+  },
+  {
+   "day": 85,
+   "text": "🌿 Ella returns from foraging the wilds: +321 kcal to the pantry."
+  },
+  {
+   "day": 85,
+   "text": "🌿 Catalina checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 85,
+   "text": "🐗 RAID — 4 raiders (The Focus Group, Old Loud, Spool, The Moderator) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 85,
+   "text": "💛 The Bus Schedule has become something you can reach for. (Keepsake L2 — new combat action: Hold. Nothing moves you this fight, and your next flee through the edge cannot be cut off (the relentless still follow). Once per fight.)"
+  },
+  {
+   "day": 86,
+   "text": "👥 6 heads rise out of the murmur — three all MOUTH, the rest all EYE. \"Ooh, a new one. Show us something.\" (Kill the mouth-heads — the eyes only mark you.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds."
+  },
+  {
+   "day": 86,
+   "text": "📖 The Codex turns a page on its own. Yara Haddad is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 86,
+   "text": "🕯️ Yara is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 86,
+   "text": "With Haven grieving again, Thornfield installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at 11,250 kcal/week. The link holds — it was never with one person."
+  },
+  {
+   "day": 86,
+   "text": "🕯️ Yara Haddad is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 86,
+   "text": "The Codex doesn't pause for grief. Catalina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 86,
+   "text": "The village's quarrel was with Yara — and Yara is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+  },
+  {
+   "day": 86,
+   "text": "At the grave, Meera, Cameron speak for Catalina — \"Yara trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 86,
+   "text": "Nothing to eat. The pantry of your pack is empty."
+  },
+  {
+   "day": 86,
+   "text": "🌿 Ella returns from foraging the wilds: +326 kcal to the pantry."
+  },
+  {
+   "day": 86,
+   "text": "🍖 FEAST 📺 — Catalina opens the pantry wide: 8× Foraged food. Meera, Cameron, Ella eat until the fire burns low. The laughter stays low — somebody's seat is empty, and everybody sees it. For one evening, grief sits at the fire with them instead of standing over them. (−1,600 kcal from the pantry) The channeled keepsak"
+  },
+  {
+   "day": 86,
+   "text": "The glyph unfolds mid-wind-up — the attack dies unspent, pre-empted by the break. (The ad pauses everything.)"
+  },
+  {
+   "day": 86,
+   "text": "⏸ AD BREAK. A giant glyph unfolds overhead — PROGRESS BAR: AD ░░ (0/2). During the pause it repositions and heals, and you watch. (The audience likes you — the sponsor is already nervous.) (Kill the sponsor-creature riding the glyph to shorten it — or look away: the ad's power is that you WATCH.)"
+  },
+  {
+   "day": 86,
+   "text": "The sponsor-creature waves a tiny pennant. It looks thrilled to be here."
+  },
+  {
+   "day": 86,
+   "text": "The sponsor-creature pops like a soap bubble. The ad stutters — the bar JUMPS forward. (Killing the sponsor shortens the ad.)"
+  },
+  {
+   "day": 86,
+   "text": "⏸ AD BREAK. A giant glyph unfolds overhead — PROGRESS BAR: AD ░░ (0/2). During the pause it repositions and heals, and you watch. (The audience likes you — the sponsor is already nervous.) (Kill the sponsor-creature riding the glyph to shorten it — or look away: the ad's power is that you WATCH.)"
+  },
+  {
+   "day": 86,
+   "text": "The sponsor-creature waves a tiny pennant. It looks thrilled to be here."
+  },
+  {
+   "day": 86,
+   "text": "The sponsor-creature pops like a soap bubble. The ad stutters — the bar JUMPS forward. (Killing the sponsor shortens the ad.)"
+  },
+  {
+   "day": 86,
+   "text": "The glyph unfolds mid-wind-up — the attack dies unspent, pre-empted by the break. (The ad pauses everything.)"
+  },
+  {
+   "day": 86,
+   "text": "⏸ AD BREAK. A giant glyph unfolds overhead — PROGRESS BAR: AD ░░ (0/2). During the pause it repositions and heals, and you watch. (The audience likes you — the sponsor is already nervous.) (Kill the sponsor-creature riding the glyph to shorten it — or look away: the ad's power is that you WATCH.)"
+  },
+  {
+   "day": 86,
+   "text": "The sponsor-creature waves a tiny pennant. It looks thrilled to be here."
+  },
+  {
+   "day": 86,
+   "text": "The glyph unfolds mid-wind-up — the attack dies unspent, pre-empted by the break. (The ad pauses everything.)"
+  },
+  {
+   "day": 86,
+   "text": "⏸ AD BREAK. A giant glyph unfolds overhead — PROGRESS BAR: AD ░░ (0/2). During the pause it repositions and heals, and you watch. (The audience likes you — the sponsor is already nervous.) (Kill the sponsor-creature riding the glyph to shorten it — or look away: the ad's power is that you WATCH.)"
+  },
+  {
+   "day": 86,
+   "text": "The sponsor-creature waves a tiny pennant. It looks thrilled to be here."
+  },
+  {
+   "day": 86,
+   "text": "📖 The Codex turns a page on its own. Catalina Reyes is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 86,
+   "text": "🕯️ Catalina is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 86,
+   "text": "🕯️ Catalina Reyes is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 86,
+   "text": "The Codex doesn't pause for grief. Meera blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 86,
+   "text": "At the grave, Cameron speaks for Meera — \"Catalina trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+  },
+  {
+   "day": 86,
+   "text": "👥 5 heads rise out of the murmur — three all MOUTH, the rest all EYE. \"Ooh, a new one. Show us something.\" (Kill the mouth-heads — the eyes only mark you.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The mouth-heads huddle — ‘let’s take that reaction again, bigger this time.’ The group gels. (Allied monsters +4 damage, 2 turns.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "The eye-head blinks aside — it only watches. (Eye-heads don't attack. Kill the MOUTHS.)"
+  },
+  {
+   "day": 86,
+   "text": "🌿 Cameron checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 86,
+   "text": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+  },
+  {
+   "day": 86,
+   "text": "Nobody is left. Not scattered, not gone looking for food — dead, every one, and the fire has nobody left to warm. The village ends here, the way villages end when the teeth find them first."
+  }
+ ],
+ "vday": [
+  {
+   "d": 2,
+   "pantry": 39770,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 3,
+   "pantry": 34130,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 4,
+   "pantry": 31050,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 12,
+   "living": 12,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 5,
+   "pantry": 29200,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 6,
+   "pantry": 32392,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 7,
+   "pantry": 29800,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 8,
+   "pantry": 27750,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 9,
+   "pantry": 26350,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 10,
+   "pantry": 26050,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 11,
+   "pantry": 24400,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 12,
+   "pantry": 26100,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 13,
+   "pantry": 30753,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 14,
+   "pantry": 35022,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 1,
+   "uw": 1
+  },
+  {
+   "d": 15,
+   "pantry": 34493,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 16,
+   "pantry": 29798,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 11,
+   "living": 11,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_4frf8rm",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 17,
+   "pantry": 31109,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 18,
+   "pantry": 31822,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 10,
+   "living": 10,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 19,
+   "pantry": 32729,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 20,
+   "pantry": 26377,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 21,
+   "pantry": 17506,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 9,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 1
+  },
+  {
+   "d": 22,
+   "pantry": 17067,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 8,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 23,
+   "pantry": 18390,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 8,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 24,
+   "pantry": 16140,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 8,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 25,
+   "pantry": 13400,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 8,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_3lb6qfr",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 26,
+   "pantry": 13460,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 27,
+   "pantry": 13460,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 28,
+   "pantry": 6880,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 29,
+   "pantry": 8460,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 30,
+   "pantry": 8512,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 31,
+   "pantry": 10019,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 32,
+   "pantry": 11078,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 33,
+   "pantry": 9982,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 34,
+   "pantry": 15829,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 35,
+   "pantry": 12798,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 36,
+   "pantry": 13712,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 37,
+   "pantry": 11910,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 38,
+   "pantry": 12392,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 39,
+   "pantry": 13211,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 2
+  },
+  {
+   "d": 40,
+   "pantry": 11557,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 41,
+   "pantry": 21193,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 42,
+   "pantry": 15958,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 43,
+   "pantry": 18029,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 44,
+   "pantry": 16724,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 9,
+   "living": 7,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "diana_osei",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 45,
+   "pantry": 16166,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 6,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_l9eoos7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 46,
+   "pantry": 15720,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 8,
+   "living": 6,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_l9eoos7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 47,
+   "pantry": 11710,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 5,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "gen_bzd3gb7",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 48,
+   "pantry": 11214,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "ines_duarte",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 49,
+   "pantry": 11337,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 4,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "ines_duarte",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 50,
+   "pantry": 10417,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 51,
+   "pantry": 11773,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 52,
+   "pantry": 10819,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 53,
+   "pantry": 10025,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 54,
+   "pantry": 9697,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 1,
+   "uw": 3
+  },
+  {
+   "d": 55,
+   "pantry": 9097,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 56,
+   "pantry": 9715,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 57,
+   "pantry": 13492,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 58,
+   "pantry": 6677,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 3,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "carlos_diaz",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 59,
+   "pantry": 4779,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 60,
+   "pantry": 6479,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 61,
+   "pantry": 8039,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 62,
+   "pantry": 8032,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 63,
+   "pantry": 7432,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 64,
+   "pantry": 9232,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 65,
+   "pantry": 6752,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 66,
+   "pantry": 6893,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 2,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "sigrun_eiriksdottir",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 67,
+   "pantry": 6280,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 68,
+   "pantry": 6780,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 69,
+   "pantry": 7830,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 70,
+   "pantry": 9730,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 71,
+   "pantry": 9618,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 72,
+   "pantry": 12566,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 73,
+   "pantry": 8106,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 74,
+   "pantry": 10227,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 75,
+   "pantry": 12113,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 76,
+   "pantry": 11370,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 77,
+   "pantry": 11566,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 78,
+   "pantry": 10294,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 79,
+   "pantry": 11104,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 80,
+   "pantry": 9510,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 81,
+   "pantry": 11891,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 7,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 82,
+   "pantry": 18455,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 6,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 83,
+   "pantry": 20467,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 84,
+   "pantry": 10971,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 85,
+   "pantry": 13481,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 5,
+   "living": 1,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "yara_haddad",
+   "hungryStreak": 0,
+   "uw": 3
+  },
+  {
+   "d": 86,
+   "pantry": 13189,
+   "hungryDays": 0,
+   "scattered": false,
+   "extinct": false,
+   "roster": 3,
+   "living": 0,
+   "scholarAlive": true,
+   "scholarDead": false,
+   "vid": "meera_reddy",
+   "hungryStreak": 0,
+   "uw": 3
+  }
+ ],
+ "linkDump": [
+  {
+   "id": "link_mgpsphp5909",
+   "st": "broken",
+   "prim": "village_0",
+   "sub": "haven",
+   "kind": null,
+   "fday": 20,
+   "endTrust": 70,
+   "history": [
+    {
+     "day": 20,
+     "kind": "formed",
+     "note": "Haven joined Emberhold as subordinate."
+    },
+    {
+     "day": 20,
+     "kind": "accord",
+     "note": "First gesture: gift of 2,190 kcal."
+    },
+    {
+     "day": 20,
+     "kind": "tribute",
+     "note": "Paid 5,000 kcal. Current."
+    },
+    {
+     "day": 21,
+     "kind": "tribute",
+     "note": "Paid 5,150 kcal. Current."
+    },
+    {
+     "day": 21,
+     "kind": "aid",
+     "note": "Gave Emberhold 1,600 kcal aid. Credit stands."
+    },
+    {
+     "day": 21,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 8)."
+    },
+    {
+     "day": 25,
+     "kind": "succession",
+     "note": "Young link: grief delays the verdict — a renegotiation is staged."
+    },
+    {
+     "day": 28,
+     "kind": "tribute",
+     "note": "Paid 5,000 kcal. Current."
+    },
+    {
+     "day": 28,
+     "kind": "aid",
+     "note": "Gave Emberhold 1,720 kcal aid. Credit stands."
+    },
+    {
+     "day": 28,
+     "kind": "demand",
+     "note": "The primary called: counsel."
+    },
+    {
+     "day": 29,
+     "kind": "demand",
+     "note": "Honored the call (counsel, trust +8)."
+    },
+    {
+     "day": 32,
+     "kind": "renegotiation",
+     "note": "Seven days of silence answered for Haven (trust -6). Tribute leverage landed: 7,500 kcal/week."
+    },
+    {
+     "day": 37,
+     "kind": "tribute",
+     "note": "Paid 7,555 kcal. Current."
+    },
+    {
+     "day": 42,
+     "kind": "tribute",
+     "note": "Paid 7,520 kcal. Current."
+    },
+    {
+     "day": 45,
+     "kind": "succession",
+     "note": "They installed their own speaker. Tribute up to 11,250."
+    },
+    {
+     "day": 46,
+     "kind": "aid",
+     "note": "Gave Emberhold 1,600 kcal aid. Credit stands."
+    },
+    {
+     "day": 47,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 47,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 49,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    },
+    {
+     "day": 54,
+     "kind": "aid",
+     "note": "Gave Emberhold 1,501 kcal aid. Credit stands."
+    },
+    {
+     "day": 55,
+     "kind": "broken",
+     "note": "Link broken (walked)."
+    }
+   ]
+  },
+  {
+   "id": "link_mgpspib5159",
+   "st": "active",
+   "prim": "village_2",
+   "sub": "haven",
+   "kind": null,
+   "fday": 57,
+   "endTrust": 15,
+   "history": [
+    {
+     "day": 57,
+     "kind": "formed",
+     "note": "Haven joined Thornfield as subordinate."
+    },
+    {
+     "day": 58,
+     "kind": "tribute",
+     "note": "Paid 5,307 kcal. Current."
+    },
+    {
+     "day": 59,
+     "kind": "succession",
+     "note": "Young link: grief delays the verdict — a renegotiation is staged."
+    },
+    {
+     "day": 66,
+     "kind": "renegotiation",
+     "note": "Seven days of silence answered for Haven (trust -6). Tribute leverage landed: 7,500 kcal/week."
+    },
+    {
+     "day": 67,
+     "kind": "succession",
+     "note": "Young link: grief delays the verdict — a renegotiation is staged."
+    },
+    {
+     "day": 70,
+     "kind": "worth",
+     "note": "Proved worth (deed, mag 10)."
+    },
+    {
+     "day": 70,
+     "kind": "arrears",
+     "note": "Tribute short 0/7,500 kcal. Arrears 7,500 kcal."
+    },
+    {
+     "day": 73,
+     "kind": "tribute",
+     "note": "Paid 7,685 kcal. Current."
+    },
+    {
+     "day": 74,
+     "kind": "renegotiation",
+     "note": "Seven days of silence answered for Haven (trust -6). Tribute leverage landed: 11,250 kcal/week."
+    },
+    {
+     "day": 78,
+     "kind": "tribute",
+     "note": "Paid 11,398 kcal. Current."
+    },
+    {
+     "day": 84,
+     "kind": "tribute",
+     "note": "Paid 11,275 kcal. Current."
+    },
+    {
+     "day": 86,
+     "kind": "succession",
+     "note": "They installed their own speaker — but the grief card is spent. Tribute unchanged at 11,250."
+    },
+    {
+     "day": 86,
+     "kind": "succession",
+     "note": "Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table."
+    }
+   ]
+  }
+ ],
+ "hashes": [
+  "2:2|97|2330|12|4|4|1|398",
+  "3:3|100|2237|12|4|4|1|341",
+  "4:4|100|1341|12|4|4|1|311",
+  "5:5|100|1062|11|4|4|1|292",
+  "6:6|100|1130|11|4|4|1|324",
+  "7:7|100|959|11|4|4|1|298",
+  "8:8|91|930|11|4|4|1|278",
+  "9:9|100|1030|11|5|3|1|264",
+  "10:10|100|239|11|5|3|1|261",
+  "11:11|100|2|11|5|3|1|244",
+  "12:12|100|0|11|5|3|1|261",
+  "13:13|82|0|11|5|3|1|308",
+  "14:14|63|0|11|5|3|1|350",
+  "15:15|44|0|11|5|3|1|345",
+  "16:16|25|0|11|5|3|1|298",
+  "17:17|90|2108|10|4|4|1|311",
+  "18:18|66|2087|10|4|4|1|318",
+  "19:19|94|2016|9|3|3|1|327",
+  "20:20|100|2215|9|3|3|1|264",
+  "21:21|100|2245|9|3|3|1|175",
+  "22:22|90|2239|8|3|3|2|171",
+  "23:23|77|2279|8|3|3|2|184",
+  "24:24|51|2284|8|3|3|2|161",
+  "25:25|17|2239|8|3|3|2|134",
+  "26:26|88|2272|7|4|4|2|135",
+  "27:27|45|2300|7|4|4|2|135",
+  "28:28|75|2234|8|4|4|2|69",
+  "29:29|100|2329|8|4|4|2|85",
+  "30:30|100|2352|8|4|4|2|85",
+  "31:31|100|1485|9|4|4|2|100",
+  "32:32|100|1136|9|4|4|2|111",
+  "33:33|76|2303|9|4|4|2|100",
+  "34:34|100|2128|9|4|4|2|158",
+  "35:35|59|2320|9|4|4|2|128",
+  "36:36|100|2400|9|4|4|2|137",
+  "37:37|100|2323|9|4|4|2|119",
+  "38:38|100|2330|9|4|4|2|124",
+  "39:39|100|2209|9|4|4|2|132",
+  "40:40|90|2330|9|4|4|3|116",
+  "41:41|94|2330|9|4|4|3|212",
+  "42:42|96|2330|9|4|4|3|160",
+  "43:43|81|2102|9|4|4|3|180",
+  "44:44|34|2250|9|4|4|3|167",
+  "45:45|100|2310|8|4|4|3|162",
+  "46:46|100|2157|8|4|4|3|157",
+  "47:47|100|2240|7|4|2|3|117",
+  "48:48|100|2310|6|4|4|3|112",
+  "49:49|100|2390|6|4|2|3|113",
+  "50:50|100|2330|6|4|4|3|104",
+  "51:51|100|2320|6|4|4|3|118",
+  "52:52|100|2390|6|4|4|3|108",
+  "53:53|100|2330|7|4|4|3|100",
+  "54:54|60|2380|7|4|4|3|97",
+  "55:55|90|2345|7|4|4|3|91",
+  "56:56|100|2330|7|4|4|3|97",
+  "57:57|100|2400|7|4|4|3|135",
+  "58:58|100|2390|7|4|4|3|67",
+  "59:59|100|2060|6|4|4|3|48",
+  "60:60|100|2163|6|4|4|3|65",
+  "61:61|98|2251|5|4|4|3|80",
+  "62:62|100|2390|5|4|4|3|80",
+  "63:63|100|2380|5|4|4|3|74",
+  "64:64|100|2330|6|4|4|3|92",
+  "65:65|100|2390|6|4|4|3|68",
+  "66:66|100|2380|6|4|4|3|69",
+  "67:67|100|2310|5|4|4|3|63",
+  "68:68|100|2330|5|4|4|3|68",
+  "69:69|100|2330|5|4|4|3|78",
+  "70:70|90|2390|5|4|4|3|97",
+  "71:71|100|2320|5|4|4|3|96",
+  "72:72|100|2330|5|4|4|3|126",
+  "73:73|100|2278|5|4|4|3|81",
+  "74:74|95|2380|6|4|4|3|102",
+  "75:75|100|2370|6|4|4|3|121",
+  "76:76|100|2390|6|4|4|3|114",
+  "77:77|95|2390|6|4|4|3|116",
+  "78:78|100|2330|7|4|4|3|103",
+  "79:79|100|2390|7|4|4|3|111",
+  "80:80|100|2390|7|4|4|3|95",
+  "81:81|100|2390|7|4|4|3|119",
+  "82:82|100|2320|6|4|4|3|185",
+  "83:83|100|2390|5|4|4|3|205",
+  "84:84|100|2390|5|4|4|3|110",
+  "85:85|100|2180|5|4|4|3|135",
+  "86:86|11|1430|3|4|4|3|132"
+ ]
+}
