@@ -1775,7 +1775,16 @@
             if (g && g.truth) {
               const nm = this.displayName ? this.displayName(target) : 'someone';
               mark('gossip');
-              return `"Okay, so — ${nm}. ${gossipLine(g)} Don't say I told you."`;
+              // r9: prefer the gossip's own rendered line. truth.js and the
+              // knack fallback both build complete fiction in g.line;
+              // gossipLine only knows 'occupation' and renders every other
+              // field — e.g. 'knack' — through the origin template, leaking
+              // raw ids ("they're from beast_calm"). Strip one outer quote
+              // pair so the quoted fiction reads as spoken gossip.
+              let body = g.line;
+              if (typeof body === 'string' && body.length > 1 && body[0] === '"' && body[body.length - 1] === '"') body = body.slice(1, -1);
+              if (!body) body = gossipLine(g);
+              return `"Okay, so — ${nm}. ${body} Don't say I told you."`;
             }
           }
         } catch (e) {}

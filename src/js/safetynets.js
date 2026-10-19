@@ -259,7 +259,7 @@
       try { if (this.journalNote) this.journalNote('system', 'aid', 'The System offered an aid quest (' + kind + '), day ' + day + '.'); } catch (e) {}
       this.sysSay('"HELLO. WE HAVE BEEN WATCHING YOUR... METRICS."');
       this.sysSay('"' + q.ask + '"');
-      this.sysSay('(Aid quest: ' + q.title + ' — ' + q.needText + ' Take it: answerAidQuest("accept"). Refuse it: answerAidQuest("refuse").)');
+      this.sysSay('(Aid quest: ' + q.title + ' — ' + q.needText + '. Take the quest or refuse it on the offer card.)');
       return q;
     },
 
