@@ -1,0 +1,119 @@
+{
+  "result": {
+    "candidate": "4fdc897c7f632d87f2d1279f0d8ad181229d353b",
+    "shipped": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+    "errors": [],
+    "phases": 5,
+    "scope": "Existing prepared save installed once; native update/Continue; stopped-origin cold boots and native steps; exact committed payload checks and cached input/icon hashes. Discovery explicitly invoked; real-device behavior unproven."
+  },
+  "config": {
+    "candidate": "4fdc897c7f632d87f2d1279f0d8ad181229d353b",
+    "shipped": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+    "port": 8864,
+    "fixtures": {
+      "shipped": {
+        "root": "C:\\Users\\Steve\\oversight\\.git\\release-opening-lifecycle-r2\\shipped",
+        "commit": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+        "original": "07db9d4d7-20261019-182620",
+        "tag": "07db9d4d7-20261019-182620",
+        "archiveSha256": "7a53d517f5c82523ab5efa917df134cf005fd814aab73024e44233f85552d020"
+      },
+      "candidate": {
+        "root": "C:\\Users\\Steve\\oversight\\.git\\release-opening-lifecycle-r2\\candidate",
+        "commit": "4fdc897c7f632d87f2d1279f0d8ad181229d353b",
+        "original": "07db9d4d7-20261019-182620",
+        "tag": "6c15cb72f-20261019-205801",
+        "archiveSha256": "d13ec482f4e12b4f007d4c90c5cc173f9f3e1afecb52cab5cb59892641f57f68"
+      },
+      "rollback": {
+        "root": "C:\\Users\\Steve\\oversight\\.git\\release-opening-lifecycle-r2\\rollback",
+        "commit": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+        "original": "07db9d4d7-20261019-182620",
+        "tag": "e9f8a538b-20261019-205801",
+        "archiveSha256": "7a53d517f5c82523ab5efa917df134cf005fd814aab73024e44233f85552d020"
+      }
+    },
+    "scope": "Synthetic local candidate/rollback versions on immutable archived runtime; not deployment or physical-device clearance"
+  },
+  "phases": [
+    {
+      "phase": "candidate-cold.json",
+      "build": "6c15cb72f-20261019-205801",
+      "verification": {
+        "ok": true,
+        "build": "6c15cb72f-20261019-205801",
+        "inputs": 167,
+        "errors": []
+      },
+      "payloadUnchanged": true,
+      "worker": "http://127.0.0.1:8864/sw.js?v=6c15cb72f-20261019-205801",
+      "trustedTouches": true
+    },
+    {
+      "phase": "candidate-online.json",
+      "build": "6c15cb72f-20261019-205801",
+      "verification": {
+        "ok": true,
+        "build": "6c15cb72f-20261019-205801",
+        "inputs": 167,
+        "errors": []
+      },
+      "payloadUnchanged": true,
+      "worker": "http://127.0.0.1:8864/sw.js?v=6c15cb72f-20261019-205801",
+      "trustedTouches": true
+    },
+    {
+      "phase": "rollback-cold.json",
+      "build": "e9f8a538b-20261019-205801",
+      "verification": {
+        "ok": true,
+        "build": "e9f8a538b-20261019-205801",
+        "inputs": 167,
+        "errors": []
+      },
+      "payloadUnchanged": true,
+      "worker": "http://127.0.0.1:8864/sw.js?v=e9f8a538b-20261019-205801",
+      "trustedTouches": true
+    },
+    {
+      "phase": "rollback-online.json",
+      "build": "e9f8a538b-20261019-205801",
+      "verification": {
+        "ok": true,
+        "build": "e9f8a538b-20261019-205801",
+        "inputs": 167,
+        "errors": []
+      },
+      "payloadUnchanged": true,
+      "worker": "http://127.0.0.1:8864/sw.js?v=e9f8a538b-20261019-205801",
+      "trustedTouches": true
+    },
+    {
+      "phase": "shipped-installed.json",
+      "build": "07db9d4d7-20261019-182620",
+      "verification": {
+        "ok": true,
+        "build": "07db9d4d7-20261019-182620",
+        "inputs": 167,
+        "errors": []
+      },
+      "payloadUnchanged": null,
+      "worker": "http://127.0.0.1:8864/sw.js?v=07db9d4d7-20261019-182620",
+      "trustedTouches": true
+    }
+  ],
+  "renders": [
+    {
+      "path": "evidence/2026-10-19/release-opening-lifecycle-candidate-cold-r2.png",
+      "sha256": "6869497a29827bf34541791237c4e4fd2392a2059c42f6919377d0d48dc6d414"
+    },
+    {
+      "path": "evidence/2026-10-19/release-opening-lifecycle-rollback-cold-r2.png",
+      "sha256": "d4aec016f794edfd52dea833866fc9a6960dd91364d2a3d0b9516c996f71c179"
+    },
+    {
+      "path": "evidence/2026-10-19/release-opening-lifecycle-candidate-online-r2.png",
+      "sha256": "a5979121a9d28db65d72afe759ce3d4c466cde92c32282b67675512ff9134f30"
+    }
+  ]
+}

@@ -313,3 +313,21 @@ installed-update-*-r1 evidence contains22 old JSON files despite a new cache
 name. Final repaired phone-emulation receipts are installed-data-*-r3, with
 hash verification and explicit saved-run differences retained. Physical device
 results remain a separate open gate.
+# Fresh release opening (2026-10-19)
+
+`evidence/2026-10-19/release-fresh-opening-phone-r1.js` drives a genuinely fresh
+New Expedition at seed190019, without an imported save or gameplay grants. Run
+it with `run-release-contact2-browser-r1.cjs`, the disposable no-SW UI server,
+each height736/844, fresh receipt names and scratch directories inside the
+common Git directory. It covers actual character/belongings selection, wake,
+initial ability, Haven exit, pasture forage/identification, eating, full-hydration
+water refusal, return and reload/Continue. See release-opening-audit-r1.md for
+the exact evidence and exclusions. Setup and Pack readers can scroll internally;
+field controls must stay inside one viewport. This does not test installed PWA
+behavior or substitute for real phones.
+
+The companion `release-fresh-garden-water-phone-r1.js` extends this same fresh
+run to26 stages: native plot creation, two actual gathered tubers sown, natural
+day2 thirst, clean-water consumption and planted-cell Continue. Its assertions
+use observed pre-sow stock and exact water/hydration deltas. Run at both heights
+with fresh outputs; see release-fresh-garden-water-audit-r2.md.

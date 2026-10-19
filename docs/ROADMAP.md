@@ -1,5 +1,12 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-19 fresh opening: native New Expedition through actual pasture forage,
+plant identification, starting food, full-hydration water refusal, Haven return
+and reload/Continue passes at both phone heights without imported campaign state.
+Wake-up English speech and foreign narration now share the correct quoted-speech
+boundary between display and voice. See release-opening-audit-r1.md; actual
+thirsty drinking, current installed lifecycle and physical devices remain separate.
+
 2026-10-19 mobile playtest repair: burned/depleted terrain is drawn beneath
 occupants, with ash/stumps rather than filtering people. Deer aim is one response
 round; lane repositioning cannot move an already committed charge, and antlers

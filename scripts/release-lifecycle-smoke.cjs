@@ -1,0 +1,33 @@
+'use strict';
+// Disposable loopback installation. No production writes, storage clears or
+// test-side worker/cache resets. The game's own update action owns the update.
+const fs=require('fs'),path=require('path'),cp=require('child_process'),http=require('http'),crypto=require('crypto'),assert=require('assert'),{chromium}=require('playwright');
+const root=path.resolve(__dirname,'..'),arg=n=>process.argv[process.argv.indexOf('--'+n)+1],candidate=arg('candidate'),shipped=arg('shipped'),out=path.resolve(arg('out')),port=Number(arg('port')),base='http://127.0.0.1:'+port;
+if(!/^[a-f0-9]{40}$/.test(candidate||'')||!/^[a-f0-9]{40}$/.test(shipped||'')||!Number.isInteger(port)||port<1024)throw Error('Pass exact --candidate and --shipped commits, fresh --out directory and --port');
+if(fs.existsSync(out))throw Error('Output directory must be fresh');fs.mkdirSync(out,{recursive:true});
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),write=(name,value)=>fs.writeFileSync(path.join(out,name),JSON.stringify(value,null,2)+'\n',{flag:'wx'});
+const stamped=['index.html','sw.js','version.json','src/js/build.js','manifest.json'];
+function freeze(name,commit,tag){const target=path.join(out,name),archive=target+'.tar';cp.execFileSync('git',['archive',commit,'src','assets','index.html','manifest.json','sw.js','version.json','--format=tar','--output='+archive],{cwd:root});fs.mkdirSync(target);cp.execFileSync(process.platform==='win32'?'C:/Windows/System32/tar.exe':'tar',['-xf',archive,'-C',target]);const original=JSON.parse(fs.readFileSync(path.join(target,'version.json'))).version;if(tag)for(const rel of stamped){const file=path.join(target,rel);fs.writeFileSync(file,fs.readFileSync(file,'utf8').split(original).join(tag))}return{root:target,commit,original,tag:tag||original,archiveSha256:sha(fs.readFileSync(archive))}}
+const time=new Date().toISOString().replace(/\D/g,'').slice(0,14),stamp=name=>sha(Buffer.from(name+candidate+out)).slice(0,9)+'-'+time.slice(0,8)+'-'+time.slice(8);
+const fixtures={shipped:freeze('shipped',shipped),candidate:freeze('candidate',candidate,stamp('candidate')),rollback:freeze('rollback',shipped,stamp('rollback'))};write('config.json',{candidate,shipped,port,fixtures,scope:'Synthetic local candidate/rollback versions on immutable archived runtime; not deployment or physical-device clearance'});
+let mode='shipped',server,browser;
+const mime={'.html':'text/html','.js':'text/javascript','.json':'application/json','.css':'text/css','.png':'image/png','.svg':'image/svg+xml','.webp':'image/webp','.mp3':'audio/mpeg','.ogg':'audio/ogg','.woff2':'font/woff2'};
+async function start(){server=http.createServer((req,res)=>{const url=new URL(req.url,base);let file;try{file=path.resolve(fixtures[mode].root,'.'+(url.pathname==='/'?'/index.html':decodeURIComponent(url.pathname)))}catch(e){res.writeHead(400);return res.end()}if(!file.startsWith(fixtures[mode].root+path.sep)){res.writeHead(403);return res.end()}fs.readFile(file,(err,bytes)=>{if(err){res.writeHead(404);return res.end()}res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type',mime[path.extname(file)]||'application/octet-stream');res.end(bytes)})});await new Promise((resolve,reject)=>server.once('error',reject).listen(port,'127.0.0.1',resolve));}
+async function stop(){if(!server)return;await new Promise(resolve=>{server.close(resolve);server.closeAllConnections()});server=null;let stopped=false;try{await fetch(base+'/version.json')}catch(e){stopped=true}assert(stopped,'Origin must actually stop');return{stopped:true,checkedAt:new Date().toISOString()}}
+const recipe=Function('return ('+fs.readFileSync(path.join(root,'evidence/2026-10-19/release-final-pwa-phone-r7.js'),'utf8').replaceAll('http://127.0.0.1:8851',base)+')')(),cacheCode=fs.readFileSync(path.join(root,'scripts/browser-cache-receipt.js'),'utf8'),cacheVerifier=require('./verify-installed-cache'),fixture=JSON.parse(fs.readFileSync(path.join(root,'evidence/2026-10-18/installed-update-old-save-r1.json'))),key=Object.keys(fixture.storage).find(k=>k.startsWith('scattering-save-v1-')),bearer=JSON.parse(fixture.storage[key]).scholar.villagerId;
+function verify(name,r){const f=fixtures[name],v=cacheVerifier.verify(r.cache,f.root,f.tag);assert(v.ok,JSON.stringify(v));assert.equal(new URL(r.state.worker).searchParams.get('v'),f.tag);assert.equal(Object.keys(r.cache.binaryInputs).length,2);for(const[url,input]of Object.entries(r.cache.binaryInputs))assert.equal(input.sha256,sha(fs.readFileSync(path.join(f.root,new URL(url,base).pathname))));if(r.committed){assert(r.storageComparison.fullRunPayloadsUnchanged);const saved=JSON.parse(r.committed.storage[key]),live=r.resumed||r.state;for(const k of ['inventory','equipped','health','kcal','day'])assert.deepStrictEqual(live[k],saved.scholar[k]);assert.deepStrictEqual(live.roster,saved.village.roster);assert.deepStrictEqual(live.codex,saved.codex)}assert(r.persistentTouches.length&&r.persistentTouches.every(t=>t.trusted));return v}
+(async()=>{
+ await start();browser=await chromium.launch({channel:'msedge',headless:true});const context=await browser.newContext({viewport:{width:390,height:736},isMobile:true,hasTouch:true,deviceScaleFactor:1}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));const scratch=path.join(out,'.playwright-mcp');fs.mkdirSync(scratch);process.chdir(out);
+ async function run(phase,name,label,extra={}){const r=await recipe(page,phase,{key,bearer,expected:fixtures[name].tag,oldStorage:fixture.storage,cacheCode,label,...extra});r.verification=verify(name,r);write(label+'.json',r);console.log(JSON.stringify({label,build:r.state.build,cached:r.verification.inputs}));return r}
+ await run('install','shipped','shipped-installed');
+ for(const name of ['candidate','rollback']){
+  mode=name;
+  // Explicit discovery is recorded separately from real foreground timing.
+  await page.evaluate(()=>window.__oversightUpdate.check());
+  await run('update',name,name+'-online');
+  const stopped=await stop();write(name+'-origin-stopped.json',stopped);
+  await run('cold',name,name+'-cold',{dx:name==='candidate'?1:-1});
+  await start();
+ }
+ assert.deepStrictEqual(errors,[]);write('result.json',{candidate,shipped,errors,phases:5,scope:'Existing prepared save installed once; native update/Continue; stopped-origin cold boots and native steps; exact committed payload checks and cached input/icon hashes. Discovery explicitly invoked; real-device behavior unproven.'});await context.close();
+})().catch(e=>{fs.writeFileSync(path.join(out,'failure.txt'),e.stack+'\n');console.error(e.stack);process.exitCode=1}).finally(async()=>{if(browser)await browser.close();if(server)await stop()});

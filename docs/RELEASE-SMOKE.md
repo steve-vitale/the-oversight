@@ -41,6 +41,22 @@ node scripts/godpath/test-update-cache-safety.js
 node scripts/test-offline-assets.js
 ```
 
+Repeat the installed-worker journey with the host's bundled Playwright on
+NODE_PATH (no dependency installation):
+
+```sh
+node scripts/release-lifecycle-smoke.cjs --candidate EXACT_CANDIDATE_COMMIT --shipped EXACT_SHIPPED_COMMIT --port UNUSED_LOOPBACK_PORT --out FRESH_SCRATCH_DIRECTORY
+```
+
+Use scratch inside the common Git directory. This archives both exact runtimes,
+installs a real shipped worker with one declared captured save, then uses native
+Update/Continue and stopped-origin cold launch for candidate and rollback. It
+checks complete committed save strings, all cached text inputs and both icons.
+It uses unique local test stamps and closes its own browser/server. It does not
+deploy, clear player storage, prove Home Screen installation or measure OS
+background suspension. See release-opening-lifecycle-audit-r2.md for the current
+passing five-phase receipt and explicit HTTP-cache/foreground timing limits.
+
 Quick/full validate the current source-bound phone and observer witnesses.
 When runtime inputs change, replay the browser flows and refresh real receipts;
 do not edit hashes to silence a stale-witness failure. Balanced observation

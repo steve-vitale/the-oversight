@@ -33,11 +33,30 @@ ordinary cart payment and use of earned saved gear in arranged fights at both
 phone heights. The cart remains in Place with its reading position preserved.
 These are declared eligibility fixtures, not natural opportunity-rate evidence.
 
-Remaining work: complete current-source opening and installed
-update/rollback journeys; dispose of the nine rerun legacy contracts individually;
+Fresh opening evidence: release-opening-audit-r1.md records nineteen natural
+New Expedition/forage/identify/eat/return/reload/Continue stages at both heights.
+No imported save or gameplay grants. Full-hydration drinking refusal is covered;
+actual thirsty drinking and physical-device behavior are not claimed. The wake
+renderer now preserves explicit speech versus narration for display and voice.
+
+Current-runtime lifecycle: release-opening-lifecycle-audit-r2.md proves shipped
+007c4feb upgrade to4fdc897c7, stopped-origin candidate/rollback cold launches,
+full saved payload preservation and167 cached inputs plus icons. The repeatable
+smoke command retains the same campaign throughout. Warm HTTP-cache stress and
+foreground polling timing are explicitly outside this latest run's scope.
+
+Remaining work: dispose of the nine rerun legacy contracts individually;
 retain all balanced-metric warnings; obtain real-device evidence and an explicit
 public-release decision. New gear flow evidence is recorded separately from
 natural campaign availability; arranged eligibility is never natural attainment.
+Natural opening extension: release-fresh-garden-water-audit-r2.md now records
+26 stages at both heights, including real plot creation, sowing exactly two
+gathered tubers with a changed map cell, day2 thirst, actual clean-water use and
+reload/Continue preserving the planted plot and campaign property. No grants;
+this supersedes the earlier19-stage route's garden/thirst exclusions.
+Browser runs still vary in pre-sow stock/kcal under the same seed; clock/async
+timing is unfrozen and the source is unresolved. Retained receipts and exact
+action-delta assertions are evidence of the played flow, not deterministic balance.
 
 ## Historical checkpoints
 

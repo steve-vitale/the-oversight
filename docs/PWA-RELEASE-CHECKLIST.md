@@ -1,7 +1,13 @@
 # Installed update and rollback
 
 Current lifecycle evidence is
-../evidence/2026-10-19/release-final-pwa-audit-r2.md, runtime d0c62ff99.
+../evidence/2026-10-19/release-opening-lifecycle-audit-r2.md, runtime4fdc897c7.
+The actually shipped007c4feb worker upgrades to this candidate; both candidate
+and rollback launch with the server stopped, with the same existing save.
+`scripts/release-lifecycle-smoke.cjs` repeats this on exact Git commits using
+fresh disposable output/origin and unique immutable test stamps. See that audit
+for the command, retained raw receipts and the warm HTTP-cache/foreground limits.
+The older release-final-pwa-audit-r2.md (runtime d0c62ff99) is historical.
 Candidate and compatibility rollback each verify167 text inputs, both icons,
 full saved payload and correct stopped-origin cold build. Discovery checks
 were explicitly invoked; foreground timing and physical devices remain open.
@@ -35,7 +41,8 @@ versioned together.
    stamps and included repairs. Use a disposable same-origin HTTP fixture with
    real service workers. Keep each artifact immutable. Never change bytes under
    an already used stamp. Do not serve the retained working stamp to players.
-2. Choose an actually installable historical main build. The shipped e6e0e376
+2. Choose an actually installable shipped build. Current007c4feb is verified.
+   The older shipped e6e0e376
    worker fails installation because its manifest includes three archived JSON
    files. That is failure evidence, not a valid installed-worker baseline.
    d3fab299 is the verified older main fixture. Record this historical gap.

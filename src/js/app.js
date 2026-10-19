@@ -1056,16 +1056,21 @@
     if (!q) { cb(); return; }
     let i = 0;
     const render = () => {
+      // English templates are spoken words; the foreign introduction already
+      // mixes narration with explicitly quoted speech. Preserve that boundary
+      // in both the visible line and the speech-only voice input.
+      const foreign = typeof Game.npcEnglishLevel === 'function' && Game.npcEnglishLevel(q.giver) === 0;
+      const line = foreign ? q.lines[i] : `"${q.lines[i]}"`;
       screen.innerHTML = `${bar('scattering://village', 'mara')}
         <div class="card" style="margin-top:40px">
           <h3>${q.from}</h3>
-          <p style="font-size:17px;line-height:1.6">"${q.lines[i]}"</p>
+          <p style="font-size:17px;line-height:1.6">${esc(line)}</p>
           <button class="btn" id="b-qnext">${i < q.lines.length - 1 ? '...' : 'Understood.'}</button>
         </div>`;
       // The waker's lines are SPOKEN dialogue — voice them like every other
       // NPC line (Steve 2026-10-12: the waker was silent). Fire-and-forget:
       // mute/unlock/foreign gates live inside convoSpeakLine.
-      try { if (typeof Game.convoSpeakLine === 'function') Game.convoSpeakLine(q.giver, q.lines[i], {}); } catch (e) {}
+      try { if (typeof Game.convoSpeakLine === 'function') Game.convoSpeakLine(q.giver, line, {}); } catch (e) { console.warn('Wake dialogue voice failed', e); }
       document.getElementById('b-qnext').onclick = () => {
         i++;
         if (i < q.lines.length) render(); else cb();

@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),cp=require('child_process'),path=require('path'),crypto=require('crypto'),P=require('../../scripts/phone-frame-proof-update');
+const git=(args,input,env={})=>cp.execFileSync('git',args,{encoding:'utf8',input,env:{...process.env,...env},maxBuffer:20e6}).trim();
+const common=path.resolve(git(['rev-parse','--git-common-dir'])),base='61ccb03f22f8f8e5ddbbe55310a10066b874a718',source=git(['rev-parse','HEAD']);
+if(git(['ls-remote','origin','refs/heads/codex/phone-preview']).split(/\s/)[0]!==base)throw Error('Shared candidate advanced');
+const paths=git(['diff','--name-only','39cb8f082d0264d3f9936a6db2e465cbf8bd6c27',source]).split('\n').filter(Boolean);
+const docs=['docs/MOBILE-PLAYTEST.md','docs/PWA-RELEASE-CHECKLIST.md','docs/RELEASE-CANDIDATE.md','docs/ROADMAP.md','docs/AGENT-LANES.md','docs/RELEASE-SMOKE.md'];
+if(paths.some(p=>!p.startsWith('src/')&&!p.startsWith('scripts/')&&!p.startsWith('evidence/2026-10-19/release-')&&!docs.includes(p)))throw Error('Unexpected path');
+const env={GIT_INDEX_FILE:path.join(common,'release-opening-candidate-index-r1')};if(fs.existsSync(env.GIT_INDEX_FILE))throw Error('Index already exists');
+git(['read-tree',base],undefined,env);git(['restore','--source',source,'--staged','--',...paths],undefined,env);
+const runtimeInputs=P.expectedInputs(process.cwd()),metadata={sourceCommit:source,baseProduction:'007c4febca00986aae5bc36bcd4d6966a08c7c04',runtimeInputs,runtimeInputsDigest:crypto.createHash('sha256').update(JSON.stringify(runtimeInputs)).digest('hex'),scope:'Unshipped reconciled mobile candidate, with natural opening26 stages at both heights including planting and thirsty drinking; exact-runtime shipped-worker upgrade/offline/rollback evidence; full1032/0. Retains earlier body/gear/combat/ending proofs and balanced review_required watches. No public-launch or physical-device clearance.',evidence:['evidence/2026-10-19/release-opening-audit-r1.md','evidence/2026-10-19/release-fresh-garden-water-audit-r2.md','evidence/2026-10-19/release-opening-lifecycle-audit-r2.md']};
+const blob=git(['hash-object','-w','--stdin'],JSON.stringify(metadata,null,2)+'\n');git(['update-index','--add','--cacheinfo','100644,'+blob+',build-source.json'],undefined,env);
+const tree=git(['write-tree'],undefined,env),sha=git(['commit-tree',tree,'-p',base],'Prove natural phone opening and save-safe upgrade/offline/rollback [needs-eyes]\n');git(['update-ref','refs/heads/codex/opening-lifecycle-candidate-20261019',sha,'0000000000000000000000000000000000000000']);
+fs.writeFileSync(path.join(common,'release-opening-candidate-publication-r1.json'),JSON.stringify({source,base,sha,tree,paths,metadata},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({source,base,sha,tree,paths:paths.length}));

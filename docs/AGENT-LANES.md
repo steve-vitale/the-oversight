@@ -1,5 +1,20 @@
 # Agent lanes (2026-10-15)
 
+Current delivery checkpoint (2026-10-19): remote main/master are007c4feb,
+including the reconciled Muse67 lineage. New candidate runtime4fdc897c7 keeps
+that integration and the body/carry/terrain/deer/dialogue repairs. Natural
+opening19-stage journeys pass at736/844; quick260/full1032 pass. Shipped007's
+installed worker upgrades to the candidate and rolls back, with stopped-origin
+cold boots, complete saved payload checks and167 cached inputs plus icons.
+See release-opening-audit-r1.md and release-opening-lifecycle-audit-r2.md.
+Keep the four-policy23-metric review_required watches. No new feature lane:
+nine legacy dispositions, accessible hosted candidate and real-device evidence
+remain. Read build-source.json on codex/phone-preview for the published source;
+the older checkpoints below are historical and their remote cutoffs are stale.
+The natural opening extension now also plants gathered tubers, drinks after
+actual day2 thirst and preserves the plot through Continue:26 stages per height,
+release-fresh-garden-water-audit-r2.md. No additional gameplay tuning.
+
 Trust/feast recovery(local2026-10-19): invalid trust IDs and legacy null standing
 are guarded; actual landed noncombat feast healing earns a saved use. Preserve
 Muse first-blow combat attribution. Treatment's unchanged140kcal bill is now
