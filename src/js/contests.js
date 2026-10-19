@@ -4463,6 +4463,22 @@
     if (d.notability) {
       this.addNotability('player', d.notability);
       log.push(`noted: ${d.notability}`);
+      // BROADCAST CONSEQUENCES (journey-endgame r23): challenges are fully
+      // televised (Steve 2026-10-04) — a heroic or terrible act on camera is
+      // priced immediately: village trust, audience, other villages'
+      // opinion, and the leadership vector (ledger.arenaAct). arenaAct was
+      // designed as this channel (hierarchy.js:310) but had zero callers,
+      // so the table's branch axis never saw contest heroics — beloved-light
+      // ("genuine love") was unreachable by play. Only the four notabilities
+      // whose fiction matches a priced kind are wired; the rest keep their
+      // current behavior.
+      try {
+        const bcKind = { sacrifice: 'sacrifice', gallant: 'heroics', principled: 'mercy', defiant: 'defiance' }[d.notability];
+        if (bcKind && typeof this.arenaAct === 'function') {
+          this.arenaAct(this.villagerId, bcKind, choice.label);
+          log.push(`broadcast: ${bcKind}`);
+        }
+      } catch (e) {}
     }
     // FAN CLUBS PER LANE (audit-shows 2026-10-09): do.fanLane moves a
     // specific audience club — {lane, n, why} or a bare number (showbiz).
