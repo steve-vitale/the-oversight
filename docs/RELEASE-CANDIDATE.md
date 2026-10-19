@@ -2,6 +2,20 @@
 
 Status: integration in progress; not cleared for public launch.
 
+Current protected phone preview:
+https://the-oversight-927l8rhw3-steven-vitales-projects.vercel.app
+is READY from ab47a699c (source1bc469e9e). Exact published Git checkout passes
+quick245/0 in65 seconds; canonical full1017/0 passes. A fresh anonymous phone
+context reaches Vercel login, so authenticated hosted touch and actual-device
+checks remain pending. This preview has its own origin/save storage.
+
+During publication, main/master advanced concurrently to0545151a5 from2d58c7c5.
+The 67-commit batch is fetched/preserved but its13 runtime-file changes remain
+to reconcile; it is not included in this preview. Only phone-preview was
+pushed by this task. See release-contact2-publication-r1.json and the concurrent
+main inventory/patch. Preserve both lanes; this candidate is not final
+integration or public-launch clearance.
+
 Rest/encounter checkpoint (2026-10-19): protected Haven sleep, peace action
 costs, exact Finale payment and missing fight-level Continue state are repaired.
 Native prepared Sleep/peace/crew-counter flows and recorded chat/Deer/Wait/

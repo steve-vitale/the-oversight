@@ -94,3 +94,22 @@ unchanged120-second per-test timeout, no quarantines or relaxed assertions.
 The final four focused contracts also pass again at7/42/99 after the persistence
 repair. The foreign sweep-B.log retains SHA256
 d36038616ffd73218a93637c504cd3ba5b4eefb1c82335d6842388108126b722.
+
+Published source1bc469e9e as preview snapshot ab47a699c; a real Git checkout
+at that exact SHA passes quick245/0 in65 seconds and validates current runtime,
+controller and neutral proof identities. Deployment dpl_3az5QztwUazdwrmdMFjRoWkS5Pfq
+is READY, target:null, source ab47a699c, with only the preview-branch alias.
+Its unique URL is recorded in publication-r1.json. Anonymous phone access
+reaches Vercel login; hosted touch and physical-device clearance are unproved.
+
+Final remote readback also detects a concurrent main/master advance from
+2d58c7c5 to0545151a5:67 commits,13 JavaScript files plus index/SW/version.
+These include succession, conversation, scale, stand-down and ledger repairs.
+This task's native push named only phone-preview; it did not overwrite those
+refs. Fetch and retain the complete incoming commit identities, per-file Git
+objects and narrow runtime patch. game.js overlaps this batch. The protected
+preview does not include these incoming changes. Reconcile their applicable
+runtime/proofs before final integration; do not blindly absorb millions of
+experimental-evidence lines or present this batch's green checks as proof of
+the newer integrated source. The original publication scope wording is retained
+alongside its correction in the unshipped readback receipt.

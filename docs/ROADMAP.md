@@ -1,5 +1,16 @@
 # ROADMAP: what's built, what's next, how to do it
 
+Concurrent main update detected during publication: main/master advanced from
+2d58c7c5 to0545151a5 (67 commits, 13 JavaScript files plus index/SW/version).
+It includes succession/conversation/scale/stand-down/ledger fixes and a batch
+version bump. Those refs were fetched and preserved; this task pushed only
+codex/phone-preview. Direct overlap with this encounter batch is game.js.
+The protected preview ab47a699c does not include this newer main batch. Before
+release, review its actual runtime changes/proofs and selectively reconcile
+them with the canonical candidate, preserving both lanes. See
+release-contact2-concurrent-main-r1.json and its retained patch in dated evidence.
+Do not count the current preview or test totals as that integration's proof.
+
 Rest/encounter continuation (2026-10-19): restore tier-2 Haven sleep protection,
 the spent peace-action marker and real Finale stack payment. Actual phone
 Continue exposed missing signature fight state; crew spoils, armed zones,
