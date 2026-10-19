@@ -1,0 +1,31 @@
+=== seed 13004 day 120 — conversation with Sanne (sanne_bakker) ===
+occupation=Vintner temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "Well. Don't mind me. Today's just heavy."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=ask_favor stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Can I be honest? Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=ask_favor stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Real talk — Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=ask_favor stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=ask_favor stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Funny thing: I — yeah. It helps, hearing that."
+(want=ask_favor stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=ask_favor stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "You're kind. Don't let this place change that."
+(want=ask_favor stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "And... scene. Good talk."
+(want=ask_favor stage=2)
+want final: id=ask_favor stage=3 resolution=stated

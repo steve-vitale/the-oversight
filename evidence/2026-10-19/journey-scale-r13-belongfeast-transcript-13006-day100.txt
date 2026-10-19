@@ -1,0 +1,32 @@
+=== seed 13006 day 100 — conversation with Grace (grace_obi) ===
+occupation=ESL teacher temperament=warm trust=46 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask this, but I'm feverish, a cut gone hot and angry. can you do anything? Simple as that."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's not just the cut anymore, it's in the blood, I can feel it climbing. I need someone who knows wounds."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "You don't know what that means to me. Thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Kristina were close. I'm sorry."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I write everything down. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "The fire feels smaller without Kristina. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I write everything down for Kristina, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=ask_favor stage=3 resolution=promised

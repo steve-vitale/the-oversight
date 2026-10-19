@@ -1,0 +1,29 @@
+=== seed 13001 day 80 — conversation with Carlos (carlos_diaz) ===
+occupation=Fisherman temperament=prickly trust=47 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "We gave them a good burial. Doesn't feel like enough, does it? You'd know about that."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Hah. Short version: I don't know. Long version: also that, but slower."
+(want=seek_comfort stage=0)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that. Ha. Funny."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I've got things to do. People to avoid. You know."
+(want=seek_comfort stage=2)
+YOU: (leave)
+want final: id=seek_comfort stage=3 resolution=engaged

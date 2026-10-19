@@ -1,0 +1,24 @@
+=== seed 13006 day 120 — conversation with Jorge (jorge_silva) ===
+occupation=Rancher temperament=steady trust=64 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:commit, alive:event:mourning, dlg:cant, teach, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "You asked me that before. It's a different question now." "Since Grace died... I keep expecting to see Grace at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:react] "I see."
+THEM: "Well." A breath. "That's where things stand."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [dlg:react] "Yeah."
+THEM: "Anyway." A small smile.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "...Thanks for being here. That's all."
+want final: id=ask_favor stage=3 resolution=promised

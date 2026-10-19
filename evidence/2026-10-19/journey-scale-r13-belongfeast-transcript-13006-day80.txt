@@ -1,0 +1,26 @@
+=== seed 13006 day 80 — conversation with Jorge (jorge_silva) ===
+occupation=Rancher temperament=steady trust=64 dead=false mood=grieving
+want: repay (stage 1, fromSeed)
+
+THEM: "You came through on staying close tonight. I won't forget it."
+(turn0 choices: dlg:react, alive:event:mourning, alive:memory:promise_kept, dlg:cant, dlg:help, teach, leave, silence)
+YOU: [dlg:help] "What do you need?"
+THEM: "Good. Then we're square." They look lighter for it.
+(want=repay stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "That's... yeah, that's everything I've got on that."
+(want=repay stage=2)
+YOU: [goon] "Take your time."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=repay stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=repay stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=repay stage=2)
+YOU: [goon] "Take your time."
+THEM: "I should go. You know where to find me."
+(want=repay stage=2)
+YOU: (leave)
+want final: id=repay stage=3 resolution=engaged

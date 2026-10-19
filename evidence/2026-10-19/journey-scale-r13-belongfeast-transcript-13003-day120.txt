@@ -1,0 +1,26 @@
+=== seed 13003 day 120 — conversation with Miguel (miguel_santos) ===
+occupation=dockworker temperament=intense trust=41 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. Anyway, that's me."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "Another day like today and we're choosing who eats. Meet me at where the water chestnut grows thick and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Good. Where the water chestnut grows thick, first light. Pack light — we move fast."
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you something."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Yeah?"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [goon] "Yeah?"
+THEM: "We're done for now. Not done-done. For now."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

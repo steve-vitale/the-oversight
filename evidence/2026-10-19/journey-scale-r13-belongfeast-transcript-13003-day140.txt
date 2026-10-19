@@ -1,0 +1,27 @@
+=== seed 13003 day 140 — conversation with David (david_kim) ===
+occupation=plumber temperament=cautious trust=90 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the sickness I'm fighting — I still haven't found anyone. Any chance?"
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, dlg:cant, teach, dlg:commit, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "You don't know what that means to me. Thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Benoit, Camila and Dale this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I tend the fire without being asked at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "Nobody says Dale's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Dale's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "...Thanks for being here. That's all."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,31 @@
+=== seed 13007 day 120 — conversation with Wojciech (visjoin_117) ===
+occupation=exterminator temperament=stoic trust=21 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something from your old life that's actually useful here?"
+(turn0 choices: ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, ans:q_before_skill:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Being an exterminator taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Hardened Duel. They just... took Nikita. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I count portions out loud before eating and stay ready."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "I should get back to it."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

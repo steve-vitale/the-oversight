@@ -1,0 +1,29 @@
+=== seed 13002 day 120 — conversation with Elif (elif_demir) ===
+occupation=hotel housekeeper temperament=prickly trust=69 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: I've seen what happens when nobody stands between danger and the vulnerable. Never again.
+(turn0 choices: dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "How's that going?"
+THEM: "Vulnerability isn't weakness. It's just a thing I stand in front of."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "I sleep lighter than I used to. Someone has to hear things first."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Being the shield means you take the hits. I've made my peace with that."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "If something comes through those trees, I want to be the one standing between it and everyone else."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "Someone has to watch the treeline. I've appointed myself. No term limits."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I don't need to be liked. I need the people I watch to be safe. Different job."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

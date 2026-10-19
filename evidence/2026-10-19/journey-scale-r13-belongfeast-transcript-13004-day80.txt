@@ -1,0 +1,32 @@
+=== seed 13004 day 80 — conversation with Sanne (sanne_bakker) ===
+occupation=Vintner temperament=dry trust=28 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "I asked David about your first memory — David's gone. What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, ans:q_first_memory:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [goon] "I'm here. Go on."
+THEM: The air goes tight. Their eyes narrow, just slightly.
+(want=curious stage=2)
+YOU: [goon] "I'm here. Go on."
+THEM: "Mine's Amsterdam, Netherlands, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "Since David died... I keep expecting to see David at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing David said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up David's share of the work. Someone should, and it might as well be me."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+closing line: "Thanks. I just... need some air."
+want final: id=curious stage=3 resolution=engaged
