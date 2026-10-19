@@ -1,0 +1,476 @@
+{
+  "height": 736,
+  "trace": [
+    {
+      "label": "edge body search is a primary action without tapping map",
+      "x": 0,
+      "y": 0,
+      "weight": 24,
+      "inventory": [
+        {
+          "name": "Prepared ballast",
+          "units": 1,
+          "kg": 24,
+          "kcalEach": 0
+        }
+      ],
+      "body": {
+        "id": "corpse_1_yuec10",
+        "kind": "monster",
+        "name": "Prepared carcass",
+        "villagerId": null,
+        "monsterId": null,
+        "descriptor": null,
+        "node": {
+          "x": 2,
+          "y": 4
+        },
+        "mx": 0,
+        "my": 0,
+        "dayDied": 1,
+        "cause": "combat",
+        "killerId": null,
+        "items": [
+          {
+            "name": "Small hide",
+            "material": "hide",
+            "units": 1,
+            "kg": 1,
+            "kcalEach": 0
+          },
+          {
+            "name": "Heavy bundle",
+            "material": "wood",
+            "units": 2,
+            "kg": 20,
+            "kcalEach": 0
+          }
+        ],
+        "looted": false,
+        "buried": false,
+        "deathKnown": false,
+        "respectsPaid": false,
+        "witnesses": []
+      },
+      "text": "forest floor\n☀\n☾\n512\nday 1 · dawn\nJames\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ⊙\n❤ 100\n🍽 2200/2400 kcal\n💧 100%\n🎒 24/20kg\n◈ 5%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "primary": [
+        "Search the body ⊙"
+      ]
+    },
+    {
+      "label": "body pack shows normal maximum and current walking cost",
+      "x": 0,
+      "y": 0,
+      "weight": 24,
+      "inventory": [
+        {
+          "name": "Prepared ballast",
+          "units": 1,
+          "kg": 24,
+          "kcalEach": 0
+        }
+      ],
+      "body": {
+        "id": "corpse_1_yuec10",
+        "kind": "monster",
+        "name": "Prepared carcass",
+        "villagerId": null,
+        "monsterId": null,
+        "descriptor": null,
+        "node": {
+          "x": 2,
+          "y": 4
+        },
+        "mx": 0,
+        "my": 0,
+        "dayDied": 1,
+        "cause": "combat",
+        "killerId": null,
+        "items": [
+          {
+            "name": "Small hide",
+            "material": "hide",
+            "units": 1,
+            "kg": 1,
+            "kcalEach": 0
+          },
+          {
+            "name": "Heavy bundle",
+            "material": "wood",
+            "units": 2,
+            "kg": 20,
+            "kcalEach": 0
+          }
+        ],
+        "looted": false,
+        "buried": false,
+        "deathKnown": false,
+        "respectsPaid": false,
+        "witnesses": []
+      },
+      "text": "forest floor\n☀\n☾\n512\nday 1 · dawn\nJames\n🎒 the beast — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nPack 24.0 kg · normal 20 kg · maximum 40 kg. Walking ×2.4; heavier loads burn more food.\n\nTake all\n\n?\nSmall hide x1 (0 kcal · 1.0 kg)\n\nTake\nLeave\n\n?\nHeavy bundle x2 (0 kcal · 40.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ⊙\n❤ 100\n🍽 2200/2400 kcal\n💧 100%\n🎒 24/20kg\n◈ 5%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "primary": [
+        "Search the body ⊙"
+      ]
+    },
+    {
+      "label": "native Take works above normal capacity at coordinate zero",
+      "x": 0,
+      "y": 0,
+      "weight": 25,
+      "inventory": [
+        {
+          "name": "Prepared ballast",
+          "units": 1,
+          "kg": 24,
+          "kcalEach": 0
+        },
+        {
+          "name": "Small hide",
+          "material": "hide",
+          "units": 1,
+          "kg": 1,
+          "kcalEach": 0
+        }
+      ],
+      "body": {
+        "id": "corpse_1_yuec10",
+        "kind": "monster",
+        "name": "Prepared carcass",
+        "villagerId": null,
+        "monsterId": null,
+        "descriptor": null,
+        "node": {
+          "x": 2,
+          "y": 4
+        },
+        "mx": 0,
+        "my": 0,
+        "dayDied": 1,
+        "cause": "combat",
+        "killerId": null,
+        "items": [
+          {
+            "name": "Small hide",
+            "material": "hide",
+            "units": 0,
+            "kg": 1,
+            "kcalEach": 0
+          },
+          {
+            "name": "Heavy bundle",
+            "material": "wood",
+            "units": 2,
+            "kg": 20,
+            "kcalEach": 0
+          }
+        ],
+        "looted": false,
+        "buried": false,
+        "deathKnown": false,
+        "respectsPaid": false,
+        "witnesses": [],
+        "_touched": true
+      },
+      "text": "forest floor\n☀\n☾\n504\nday 1 · dawn\nJames\n🎒 the beast — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nPack 25.0 kg · normal 20 kg · maximum 40 kg. Walking ×2.5; heavier loads burn more food.\n\nTaken.\n\nTake all\n\n?\nHeavy bundle x2 (0 kcal · 40.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ⊙\nTaken: Small hide x1.\n❤ 100\n🍽 2179/2400 kcal\n💧 100%\n🎒 25/20kg\n◈ 5%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "primary": [
+        "Search the body ⊙"
+      ]
+    },
+    {
+      "label": "refusal preserves heavy stack and never says Taken",
+      "x": 0,
+      "y": 0,
+      "weight": 25,
+      "inventory": [
+        {
+          "name": "Prepared ballast",
+          "units": 1,
+          "kg": 24,
+          "kcalEach": 0
+        },
+        {
+          "name": "Small hide",
+          "material": "hide",
+          "units": 1,
+          "kg": 1,
+          "kcalEach": 0
+        }
+      ],
+      "body": {
+        "id": "corpse_1_yuec10",
+        "kind": "monster",
+        "name": "Prepared carcass",
+        "villagerId": null,
+        "monsterId": null,
+        "descriptor": null,
+        "node": {
+          "x": 2,
+          "y": 4
+        },
+        "mx": 0,
+        "my": 0,
+        "dayDied": 1,
+        "cause": "combat",
+        "killerId": null,
+        "items": [
+          {
+            "name": "Small hide",
+            "material": "hide",
+            "units": 0,
+            "kg": 1,
+            "kcalEach": 0
+          },
+          {
+            "name": "Heavy bundle",
+            "material": "wood",
+            "units": 2,
+            "kg": 20,
+            "kcalEach": 0
+          }
+        ],
+        "looted": false,
+        "buried": false,
+        "deathKnown": false,
+        "respectsPaid": false,
+        "witnesses": [],
+        "_touched": true
+      },
+      "text": "forest floor\n☀\n☾\n504\nday 1 · dawn\nJames\n🎒 the beast — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nPack 25.0 kg · normal 20 kg · maximum 40 kg. Walking ×2.5; heavier loads burn more food.\n\nNothing taken. Check the notice and pack limit.\n\nTake all\n\n?\nHeavy bundle x2 (0 kcal · 40.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ⊙\nThis stack weighs 40.0 kg. Carrying 25.0 kg; maximum 40.0 kg (twice normal load). Leave or drop something first.\n❤ 100\n🍽 2179/2400 kcal\n💧 100%\n🎒 25/20kg\n◈ 5%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "primary": [
+        "Search the body ⊙"
+      ]
+    },
+    {
+      "label": "adjacent body still offers primary Search",
+      "x": 1,
+      "y": 0,
+      "weight": 25,
+      "inventory": [
+        {
+          "name": "Prepared ballast",
+          "units": 1,
+          "kg": 24,
+          "kcalEach": 0
+        },
+        {
+          "name": "Small hide",
+          "material": "hide",
+          "units": 1,
+          "kg": 1,
+          "kcalEach": 0
+        }
+      ],
+      "body": {
+        "id": "corpse_1_yuec10",
+        "kind": "monster",
+        "name": "Prepared carcass",
+        "villagerId": null,
+        "monsterId": null,
+        "descriptor": null,
+        "node": {
+          "x": 2,
+          "y": 4
+        },
+        "mx": 0,
+        "my": 0,
+        "dayDied": 1,
+        "cause": "combat",
+        "killerId": null,
+        "items": [
+          {
+            "name": "Small hide",
+            "material": "hide",
+            "units": 0,
+            "kg": 1,
+            "kcalEach": 0
+          },
+          {
+            "name": "Heavy bundle",
+            "material": "wood",
+            "units": 2,
+            "kg": 20,
+            "kcalEach": 0
+          }
+        ],
+        "looted": false,
+        "buried": false,
+        "deathKnown": false,
+        "respectsPaid": false,
+        "witnesses": [],
+        "_touched": true
+      },
+      "text": "forest floor\n☀\n☾\n503\nday 1 · dawn\n👹\nJames\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ←\nThis stack weighs 40.0 kg. Carrying 25.0 kg; maximum 40.0 kg (twice normal load). Leave or drop something first.\n❤ 100\n🍽 2174/2400 kcal\n💧 100%\n🎒 25/20kg\n◈ 5%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "primary": [
+        "Search the body ←"
+      ]
+    },
+    {
+      "label": "native adjacent Search opens same body",
+      "x": 1,
+      "y": 0,
+      "weight": 25,
+      "inventory": [
+        {
+          "name": "Prepared ballast",
+          "units": 1,
+          "kg": 24,
+          "kcalEach": 0
+        },
+        {
+          "name": "Small hide",
+          "material": "hide",
+          "units": 1,
+          "kg": 1,
+          "kcalEach": 0
+        }
+      ],
+      "body": {
+        "id": "corpse_1_yuec10",
+        "kind": "monster",
+        "name": "Prepared carcass",
+        "villagerId": null,
+        "monsterId": null,
+        "descriptor": null,
+        "node": {
+          "x": 2,
+          "y": 4
+        },
+        "mx": 0,
+        "my": 0,
+        "dayDied": 1,
+        "cause": "combat",
+        "killerId": null,
+        "items": [
+          {
+            "name": "Small hide",
+            "material": "hide",
+            "units": 0,
+            "kg": 1,
+            "kcalEach": 0
+          },
+          {
+            "name": "Heavy bundle",
+            "material": "wood",
+            "units": 2,
+            "kg": 20,
+            "kcalEach": 0
+          }
+        ],
+        "looted": false,
+        "buried": false,
+        "deathKnown": false,
+        "respectsPaid": false,
+        "witnesses": [],
+        "_touched": true
+      },
+      "text": "forest floor\n☀\n☾\n503\nday 1 · dawn\n👹\nJames\n🎒 the beast — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nPack 25.0 kg · normal 20 kg · maximum 40 kg. Walking ×2.5; heavier loads burn more food.\n\nTake all\n\n?\nHeavy bundle x2 (0 kcal · 40.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ←\nThis stack weighs 40.0 kg. Carrying 25.0 kg; maximum 40.0 kg (twice normal load). Leave or drop something first.\n❤ 100\n🍽 2174/2400 kcal\n💧 100%\n🎒 25/20kg\n◈ 5%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "primary": [
+        "Search the body ←"
+      ]
+    },
+    {
+      "label": "Continue preserves real pickup and unlooted remainder",
+      "x": 1,
+      "y": 0,
+      "weight": 25,
+      "inventory": [
+        {
+          "name": "Prepared ballast",
+          "units": 1,
+          "kg": 24,
+          "kcalEach": 0
+        },
+        {
+          "name": "Small hide",
+          "material": "hide",
+          "units": 1,
+          "kg": 1,
+          "kcalEach": 0
+        }
+      ],
+      "body": {
+        "id": "corpse_1_yuec10",
+        "kind": "monster",
+        "name": "Prepared carcass",
+        "villagerId": null,
+        "monsterId": null,
+        "descriptor": null,
+        "node": {
+          "x": 2,
+          "y": 4
+        },
+        "mx": 0,
+        "my": 0,
+        "dayDied": 1,
+        "cause": "combat",
+        "killerId": null,
+        "items": [
+          {
+            "name": "Small hide",
+            "material": "hide",
+            "units": 0,
+            "kg": 1,
+            "kcalEach": 0
+          },
+          {
+            "name": "Heavy bundle",
+            "material": "wood",
+            "units": 2,
+            "kg": 20,
+            "kcalEach": 0
+          }
+        ],
+        "looted": false,
+        "buried": false,
+        "deathKnown": false,
+        "respectsPaid": false,
+        "witnesses": [],
+        "_touched": true
+      },
+      "text": "forest floor\n☀\n☾\n503\nday 1 · dawn\n👹\nJames\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ←\nThis stack weighs 40.0 kg. Carrying 25.0 kg; maximum 40.0 kg (twice normal load). Leave or drop something first.\n❤ 100\n🍽 2174/2400 kcal\n💧 100%\n🎒 25/20kg\n◈ 5%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "primary": [
+        "Search the body ←"
+      ]
+    }
+  ],
+  "errors": [],
+  "networkFailures": [],
+  "scope": "Prepared edge/overloaded scene; native primary action, Take, refusal, adjacent movement and Continue. No natural acquisition claim.",
+  "driver": "Bundled Playwright with headless Microsoft Edge; native CDP touch; no interactive transport"
+}

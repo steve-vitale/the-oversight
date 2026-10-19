@@ -1,5 +1,16 @@
 # Agent lanes (2026-10-15)
 
+Active continuation2026-10-19: preserve the unshipped beam response window,
+current-wave persistent raid posts, failed Table door/weakening repairs, and
+body/carry follow-up. Native body Search is prioritized on the phone; refusal
+reports the hard limit without false "Taken" feedback. Marked predecessor
+gear/water isolation and actual overloaded pickup/Continue pass the shared
+proof. Read release-loot-audit-r1.md for exact verification and limitations.
+This work builds on the reconciled Muse67 lineage and regional candidate;
+do not replace that candidate with the older main checkout. Production007
+still lacks these candidate fixes. The five legacy dispositions and hosted/
+physical-device release gates remain open; no new content lane is claimed.
+
 Latest local continuation: four of the nine remaining contracts are recovered.
 Preserve the actual cell-popup corpse predicate fix and the two basic recipes'
 existing European species catches. Read release-contact2-dispositions-r2.json;

@@ -2815,6 +2815,7 @@
     try {
       var stance = (typeof this.apWealthStance === 'function') ? this.apWealthStance(pid, m) : 'normal';
       if (m._wantsRetreat || stance === 'retreating') {
+        delete m._beamAim;
         m.fled = true;
         this.say(mName + ' breaks off — backing away, hands raised, then GONE into the treeline.');
         try { this.audioEvent('alienRetreat'); } catch (e) {}
@@ -2822,6 +2823,13 @@
         return;
       }
     } catch (e) {}
+
+    // An aimed beam resolves before movement or heavy-strike selection. The
+    // alien cannot chase the locked tile or postpone the promised discharge.
+    if (m._beamAim) {
+      this.apMaybeBeamAttack(m);
+      endTurn(); return;
+    }
 
     // 2. PENDING HEAVY resolves: burst radius 1 around the declared tile.
     // The grid highlight was the warning; being elsewhere was the answer.

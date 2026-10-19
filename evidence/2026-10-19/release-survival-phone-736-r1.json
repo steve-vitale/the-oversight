@@ -1,0 +1,707 @@
+{
+  "height": 736,
+  "trace": [
+    {
+      "label": "Continue preserves actual alien beam aim and player response",
+      "health": 100,
+      "player": {
+        "x": 4,
+        "y": 4,
+        "hp": 100,
+        "moves": 3
+      },
+      "alien": {
+        "x": 1,
+        "y": 1,
+        "aim": {
+          "x": 4,
+          "y": 4,
+          "name": "a beam weapon"
+        },
+        "cooldown": 3
+      },
+      "table": {},
+      "text": "forest floor\n☀\n☾\n512\nday 40 · dawn\n🧑\nPedro\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\n🧑\nsomething\nYour turn · 3 move · 1 action\n⚔ Strike\n👁 Study\n⏸ Wait\nActions…\n🔆 The stranger raises a beam weapon. A bright point locks onto your tile. MOVE before their next turn.\n❤ 100\n🍽 2200/2400 kcal\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 5%\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "native paid move leaves the aimed tile",
+      "health": 100,
+      "player": {
+        "x": 4,
+        "y": 3,
+        "hp": 100,
+        "moves": 2
+      },
+      "alien": {
+        "x": 1,
+        "y": 1,
+        "aim": {
+          "x": 4,
+          "y": 4,
+          "name": "a beam weapon"
+        },
+        "cooldown": 3
+      },
+      "table": {},
+      "text": "forest floor\n☀\n☾\n512\nday 40 · dawn\n🧑\nPedro\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\n🧑\nsomething\nYour turn · 2 move · 1 action\n⚔ Strike\n👁 Study\n⏸ Wait\nActions…\n🔆 The stranger raises a beam weapon. A bright point locks onto your tile. MOVE before their next turn.\n❤ 100\n🍽 2200/2400 kcal\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 5%\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "native Wait resolves a fixed-tile beam miss",
+      "health": 100,
+      "player": {
+        "x": 4,
+        "y": 3,
+        "hp": 100,
+        "moves": 3
+      },
+      "alien": {
+        "x": 1,
+        "y": 1,
+        "cooldown": 3
+      },
+      "table": {},
+      "text": "forest floor\n☀\n☾\n512\nday 40 · dawn\n🧑\nPedro\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\n🧑\nsomething\nYour turn · 3 move · 1 action\n⚔ Strike\n👁 Study\n⏸ Wait\nActions…\n🔆 The beam burns the place you were standing. You moved in time.\n❤ 100\n🍽 2200/2400 kcal\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 5%\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "actual post-discharge Continue stays playable",
+      "health": 100,
+      "player": {
+        "x": 4,
+        "y": 3,
+        "hp": 100,
+        "moves": 3
+      },
+      "alien": {
+        "x": 1,
+        "y": 1,
+        "cooldown": 3
+      },
+      "table": {},
+      "text": "forest floor\n☀\n☾\n512\nday 40 · dawn\n🧑\nPedro\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\n🧑\nsomething\nYour turn · 3 move · 1 action\n⚔ Strike\n👁 Study\n⏸ Wait\nActions…\n🔆 The beam burns the place you were standing. You moved in time.\n❤ 100\n🍽 2200/2400 kcal\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 5%\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "prepared resistant bearer chooses to stay",
+      "health": 100,
+      "player": {
+        "x": 4,
+        "y": 4,
+        "hp": 100,
+        "moves": 3
+      },
+      "alien": {
+        "x": 1,
+        "y": 1,
+        "aim": {
+          "x": 4,
+          "y": 4,
+          "name": "a beam weapon"
+        },
+        "cooldown": 3
+      },
+      "table": {},
+      "text": "forest floor\n☀\n☾\n512\nday 40 · dawn\n🧑\nPedro\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\n🧑\nsomething\nYour turn · 3 move · 1 action\n⚔ Strike\n👁 Study\n⏸ Wait\nActions…\n🔆 The stranger raises a beam weapon. A bright point locks onto your tile. MOVE before their next turn.\n❤ 100\n🍽 2200/2400 kcal\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 5%\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "native Wait takes one resisted beam with no bonus strike",
+      "health": 83,
+      "player": {
+        "x": 4,
+        "y": 4,
+        "hp": 83,
+        "moves": 3
+      },
+      "alien": {
+        "x": 1,
+        "y": 1,
+        "cooldown": 3
+      },
+      "table": {},
+      "text": "forest floor\n☀\n☾\n512\nday 40 · dawn\n🧑\nPedro\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\n🧑\nsomething\nYour turn · 3 move · 1 action\n⚔ Strike\n👁 Study\n⏸ Wait\nActions…\n🔆 You take 17 beam damage (5 resistant pieces absorbing) — a beam weapon.\n❤ 83\n🍽 2200/2400 kcal\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 5%\nPlace\nMessages\nMenu",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "prepared actually earned Table challenge",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "challenge",
+        "path": "feared",
+        "failedDoors": [],
+        "endingKey": {
+          "tablePath": "feared",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared"
+          ]
+        },
+        "beat": 0,
+        "meters": {
+          "terror": 2,
+          "horror": 4
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 0,
+        "abils": [
+          "dreadfield",
+          "wartable",
+          "oathbound",
+          "shieldbearer"
+        ],
+        "abilMods": {}
+      },
+      "choices": {
+        "frame": "the Feared",
+        "prompt": "<p>BEAT ONE — THE FOOTAGE. The table doesn't ask what you did. It shows it: the deer, the fire, the feast-burned blade, the ones who came for you and didn't come back. A delegate with too many angles covers its face. \"Choose,\" the System says, \"what leads.\"</p><p><i>alien-terror 2 · villager-horror 4</i></p>",
+        "options": [
+          {
+            "id": "beat:kill",
+            "label": "Lead with the kill."
+          },
+          {
+            "id": "beat:mercy",
+            "label": "Lead with the mercy you showed once."
+          },
+          {
+            "id": "beat:fire",
+            "label": "Lead with the feast-fire."
+          }
+        ]
+      },
+      "text": "Haven\n☀\n☾\n512\nday 120 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\nLorenzo\n⬛\n⬛\n🛏️\nNino\nSam\n🛏️\n⬛\n⬛\nYuki\nMateo\n⬛\n⬛\nPedro\n⬛\n⬛\nSalvador\n🔥\nWilhelm\nLuis\nBilal\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\nLindiwe\n⬛\n⬛\n⬛\n⬛\nGreta\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\n◈ THE FEARED — \"Look what eating built.\" The footage plays unasked — the deer, the fire, the ones who came for you and didn't come back. Nobody at the table is comfortable. That is the point.\n❤ 100\n🍽 3000/2400 kcal (+600 banked)\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 60%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu\n🌌 The Table\n\nBEAT ONE — THE FOOTAGE. The table doesn't ask what you did. It shows it: the deer, the fire, the feast-burned blade, the ones who came for you and didn't come back. A delegate with too many angles covers its face. \"Choose,\" the System says, \"what leads.\"\n\nalien-terror 2 · villager-horror 4\n\nYOUR SEAT\n🍽️\nLead with the kill.\n🥄\nLead with the mercy you showed once.\n🍷\nLead with the feast-fire.\nthe galaxy waits. pull out a chair.",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "native failed Feared door offers remaining earned paths",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "downgrade",
+        "path": "feared",
+        "failedDoors": [
+          "feared"
+        ],
+        "endingKey": {
+          "tablePath": "feared",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared"
+          ]
+        },
+        "beat": 0,
+        "meters": {
+          "terror": 4,
+          "horror": 6,
+          "fail": 0
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 1,
+        "abils": [
+          "dreadfield",
+          "wartable",
+          "oathbound",
+          "shieldbearer"
+        ],
+        "abilMods": {}
+      },
+      "choices": {
+        "frame": "the Table",
+        "prompt": "<p>The ring dims. The faces confer. The offer changes.</p><p>The table does not punish failure with death. It punishes it with smaller doors.</p><p><b>◇ the Assimilated</b> — weakened terms (standing 5)</p>",
+        "options": [
+          {
+            "id": "downgrade:assimilated",
+            "label": "Take the weakened path of the Assimilated"
+          }
+        ]
+      },
+      "text": "Haven\n☀\n☾\n512\nday 120 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\nLorenzo\n⬛\n⬛\n🛏️\nNino\nSam\n🛏️\n⬛\n⬛\nYuki\nMateo\n⬛\n⬛\nPedro\n⬛\n⬛\nSalvador\n🔥\nWilhelm\nLuis\nBilal\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\nLindiwe\n⬛\n⬛\n⬛\n⬛\nGreta\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\n◈ THE TABLE FALTERS — the demonstration curdled — your own people flinched, visibly, where trillions watched. The ring dims. Fear, it turns out, is a wasting asset — spend it wrong and it spends you.\n❤ 100\n🍽 3000/2400 kcal (+600 banked)\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 60%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu\n🌌 The Table\n\nThe ring dims. The faces confer. The offer changes.\n\nThe table does not punish failure with death. It punishes it with smaller doors.\n\n◇ the Assimilated — weakened terms (standing 5)\n\nYOUR SEAT\n🍽️\nTake the weakened path of the Assimilated\nthe galaxy waits. pull out a chair.",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "native fallback really spends its opening advantage",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "challenge",
+        "path": "assimilated",
+        "failedDoors": [
+          "feared"
+        ],
+        "endingKey": {
+          "tablePath": "assimilated",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared",
+            "assimilated"
+          ]
+        },
+        "beat": 0,
+        "meters": {
+          "comfort": 1,
+          "self": 0
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 1,
+        "abils": [
+          "soft-landing",
+          "orientation",
+          "dead-drop",
+          "locket"
+        ],
+        "abilMods": {}
+      },
+      "choices": {
+        "frame": "the Assimilated",
+        "prompt": "<p>PLACEMENT ONE — THE BRANCH. \"WHICH ARM TAKES YOU?\" The table doesn't ask if you'll come inside. It asks *where* inside. Three branches, three lives. Choose like it matters — it's the last real choice the old you gets.</p><p><i>comfort 1 · self 0</i></p>",
+        "options": [
+          {
+            "id": "beat:kitchens",
+            "label": "The kitchens."
+          },
+          {
+            "id": "beat:archives",
+            "label": "The archives."
+          },
+          {
+            "id": "beat:nurseries",
+            "label": "The nurseries."
+          }
+        ]
+      },
+      "text": "Haven\n☀\n☾\n512\nday 120 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\nLorenzo\n⬛\n⬛\n🛏️\nNino\nSam\n🛏️\n⬛\n⬛\nYuki\nMateo\n⬛\n⬛\nPedro\n⬛\n⬛\nSalvador\n🔥\nWilhelm\nLuis\nBilal\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\nLindiwe\n⬛\n⬛\n⬛\n⬛\nGreta\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\n◈ THE ASSIMILATED — Comfort, on their terms. Warm light, no hunger, no fear. All it costs is everything that made you worth watching. It's such a gentle trap. That's what makes it a trap. But you're not walking in blind — you're negotiating the terms of the trap, room by room.\n❤ 100\n🍽 3000/2400 kcal (+600 banked)\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 60%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu\n🌌 The Table\n\nPLACEMENT ONE — THE BRANCH. \"WHICH ARM TAKES YOU?\" The table doesn't ask if you'll come inside. It asks *where* inside. Three branches, three lives. Choose like it matters — it's the last real choice the old you gets.\n\ncomfort 1 · self 0\n\nYOUR SEAT\n🍽️\nThe kitchens.\n🥄\nThe archives.\n🍷\nThe nurseries.\nthe galaxy waits. pull out a chair.\nTHE DOOR IS CHOSEN\nASSIMILATED\nlight",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "actual fallback Continue retains closure and spent advantage",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "challenge",
+        "path": "assimilated",
+        "failedDoors": [
+          "feared"
+        ],
+        "endingKey": {
+          "tablePath": "assimilated",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared",
+            "assimilated"
+          ]
+        },
+        "beat": 0,
+        "meters": {
+          "comfort": 1,
+          "self": 0
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 1,
+        "abils": [
+          "soft-landing",
+          "orientation",
+          "dead-drop",
+          "locket"
+        ],
+        "abilMods": {}
+      },
+      "choices": {
+        "frame": "the Assimilated",
+        "prompt": "<p>PLACEMENT ONE — THE BRANCH. \"WHICH ARM TAKES YOU?\" The table doesn't ask if you'll come inside. It asks *where* inside. Three branches, three lives. Choose like it matters — it's the last real choice the old you gets.</p><p><i>comfort 1 · self 0</i></p>",
+        "options": [
+          {
+            "id": "beat:kitchens",
+            "label": "The kitchens."
+          },
+          {
+            "id": "beat:archives",
+            "label": "The archives."
+          },
+          {
+            "id": "beat:nurseries",
+            "label": "The nurseries."
+          }
+        ]
+      },
+      "text": "Haven\n☀\n☾\n512\nday 120 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\nLorenzo\n⬛\n⬛\n🛏️\nNino\nSam\n🛏️\n⬛\n⬛\nYuki\nMateo\n⬛\n⬛\nPedro\n⬛\n⬛\nSalvador\n🔥\nWilhelm\nLuis\nBilal\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\nLindiwe\n⬛\n⬛\n⬛\n⬛\nGreta\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\n◈ THE ASSIMILATED — Comfort, on their terms. Warm light, no hunger, no fear. All it costs is everything that made you worth watching. It's such a gentle trap. That's what makes it a trap. But you're not walking in blind — you're negotiating the terms of the trap, room by room.\n❤ 100\n🍽 3000/2400 kcal (+600 banked)\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 60%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu\n🌌 The Table\n\nPLACEMENT ONE — THE BRANCH. \"WHICH ARM TAKES YOU?\" The table doesn't ask if you'll come inside. It asks *where* inside. Three branches, three lives. Choose like it matters — it's the last real choice the old you gets.\n\ncomfort 1 · self 0\n\nYOUR SEAT\n🍽️\nThe kitchens.\n🥄\nThe archives.\n🍷\nThe nurseries.\nthe galaxy waits. pull out a chair.",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "played weakened final answer 1",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "challenge",
+        "path": "assimilated",
+        "failedDoors": [
+          "feared"
+        ],
+        "endingKey": {
+          "tablePath": "assimilated",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared",
+            "assimilated"
+          ]
+        },
+        "beat": 1,
+        "meters": {
+          "comfort": 3,
+          "self": 0
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 1,
+        "abils": [
+          "soft-landing",
+          "orientation",
+          "dead-drop",
+          "locket"
+        ],
+        "abilMods": {}
+      },
+      "choices": {
+        "frame": "the Assimilated",
+        "prompt": "<p>PLACEMENT TWO — ACCESS TIER. Citizen, resident, or the grey list. The tier decides what you can see, what you can touch, and what can touch you.</p><p><b>◈ YOUR BUILD</b> — The intake scan is asking what you'll bring. They mean skills. You mean something else.</p><p><i>comfort 3 · self 0</i></p>",
+        "options": [
+          {
+            "id": "beat:citizen",
+            "label": "Full citizen."
+          },
+          {
+            "id": "beat:resident",
+            "label": "Resident alien."
+          },
+          {
+            "id": "beat:grey",
+            "label": "The grey list."
+          },
+          {
+            "id": "beat:build",
+            "label": "Carry the thing you're best at inside with you. (needs self 2+)"
+          }
+        ]
+      },
+      "text": "Haven\n☀\n☾\n512\nday 120 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\nLorenzo\n⬛\n⬛\n🛏️\nNino\nSam\n🛏️\n⬛\n⬛\nYuki\nMateo\n⬛\n⬛\nPedro\n⬛\n⬛\nSalvador\n🔥\nWilhelm\nLuis\nBilal\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\nLindiwe\n⬛\n⬛\n⬛\n⬛\nGreta\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\nThe kitchens. They feed everyone — even you, even now. Warm work, honest work. You'll eat well forever. You'll never be hungry again. Sit with that sentence for a while.\n❤ 100\n🍽 3000/2400 kcal (+600 banked)\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 60%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu\n🌌 The Table\n\nPLACEMENT TWO — ACCESS TIER. Citizen, resident, or the grey list. The tier decides what you can see, what you can touch, and what can touch you.\n\n◈ YOUR BUILD — The intake scan is asking what you'll bring. They mean skills. You mean something else.\n\ncomfort 3 · self 0\n\nYOUR SEAT\n🍽️\nFull citizen.\n🥄\nResident alien.\n🍷\nThe grey list.\n🕯️\nCarry the thing you're best at inside with you. (needs self 2+)\nthe galaxy waits. pull out a chair.",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "played weakened final answer 2",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "challenge",
+        "path": "assimilated",
+        "failedDoors": [
+          "feared"
+        ],
+        "endingKey": {
+          "tablePath": "assimilated",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared",
+            "assimilated"
+          ]
+        },
+        "beat": 2,
+        "meters": {
+          "comfort": 5,
+          "self": -1
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 1,
+        "abils": [
+          "soft-landing",
+          "orientation",
+          "dead-drop",
+          "locket"
+        ],
+        "abilMods": {}
+      },
+      "choices": {
+        "frame": "the Assimilated",
+        "prompt": "<p>PLACEMENT THREE — THE INTAKE SCAN. The final door. The scanner reads everything you carry — memories, grief, the food truth folded small. \"DECLARE IT,\" the System says, almost kindly. \"WHAT ARE YOU SMUGGLING?\"</p><p><i>comfort 5 · self -1</i></p>",
+        "options": [
+          {
+            "id": "beat:truth",
+            "label": "The food truth. (Dead Drop)"
+          },
+          {
+            "id": "beat:name",
+            "label": "A name."
+          },
+          {
+            "id": "beat:nothing",
+            "label": "Nothing. (Even now, you lie.)"
+          }
+        ]
+      },
+      "text": "Haven\n☀\n☾\n512\nday 120 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\nLorenzo\n⬛\n⬛\n🛏️\nNino\nSam\n🛏️\n⬛\n⬛\nYuki\nMateo\n⬛\n⬛\nPedro\n⬛\n⬛\nSalvador\n🔥\nWilhelm\nLuis\nBilal\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\nLindiwe\n⬛\n⬛\n⬛\n⬛\nGreta\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\nFull citizen. Everything open, everything watched. The warm light, all the way down. You'll never wonder what you're missing — you'll know, and it will be everything.\n❤ 100\n🍽 3000/2400 kcal (+600 banked)\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 60%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu\n🌌 The Table\n\nPLACEMENT THREE — THE INTAKE SCAN. The final door. The scanner reads everything you carry — memories, grief, the food truth folded small. \"DECLARE IT,\" the System says, almost kindly. \"WHAT ARE YOU SMUGGLING?\"\n\ncomfort 5 · self -1\n\nYOUR SEAT\n🍽️\nThe food truth. (Dead Drop)\n🥄\nA name.\n🍷\nNothing. (Even now, you lie.)\nthe galaxy waits. pull out a chair.",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "played weakened final answer 3",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "finals",
+        "path": "assimilated",
+        "failedDoors": [
+          "feared"
+        ],
+        "endingKey": {
+          "tablePath": "assimilated",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared",
+            "assimilated"
+          ]
+        },
+        "beat": 3,
+        "meters": {
+          "comfort": 5,
+          "self": 1
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 1,
+        "abils": [
+          "soft-landing",
+          "orientation",
+          "dead-drop",
+          "locket"
+        ],
+        "abilMods": {}
+      },
+      "choices": {
+        "frame": "the Assimilated",
+        "prompt": "<p>The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:</p>",
+        "options": [
+          {
+            "id": "final:comfort",
+            "label": "Accept comfort."
+          },
+          {
+            "id": "final:grief",
+            "label": "Remember the taste of grief."
+          }
+        ]
+      },
+      "text": "Haven\n☀\n☾\n512\nday 120 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\nLorenzo\n⬛\n⬛\n🛏️\nNino\nSam\n🛏️\n⬛\n⬛\nYuki\nMateo\n⬛\n⬛\nPedro\n⬛\n⬛\nSalvador\n🔥\nWilhelm\nLuis\nBilal\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\nLindiwe\n⬛\n⬛\n⬛\n⬛\nGreta\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\n◈ THE ASSIMILATED — the last choice is yours, and it's live.\n❤ 100\n🍽 3000/2400 kcal (+600 banked)\n💧 100% · 2L clean\n🎒 3.2/20kg\n◈ 60%\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu\n🌌 The Table\n\nThe ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:\n\nYOUR SEAT\n🍽️\nAccept comfort.\n🥄\nRemember the taste of grief.\nthe galaxy waits. pull out a chair.",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": false,
+      "won": false
+    },
+    {
+      "label": "played weakened final answer 4",
+      "health": 100,
+      "player": null,
+      "table": {
+        "seat": "lesser",
+        "phase": "done",
+        "path": "assimilated",
+        "failedDoors": [
+          "feared"
+        ],
+        "endingKey": {
+          "tablePath": "assimilated",
+          "moral": "light",
+          "track": "combat",
+          "godpath": null,
+          "subclass": null,
+          "god": null,
+          "titanFinale": "none",
+          "key": null,
+          "locked": 120,
+          "doors": [
+            "feared",
+            "assimilated"
+          ]
+        },
+        "beat": 3,
+        "meters": {
+          "comfort": 5,
+          "self": 1
+        },
+        "branch": "light",
+        "branchNotes": [],
+        "weakened": 1,
+        "abils": [
+          "soft-landing",
+          "orientation",
+          "dead-drop",
+          "locket"
+        ],
+        "abilMods": {},
+        "ending": {
+          "kind": "coda",
+          "level": "track",
+          "selector": "track:combat"
+        },
+        "resolution": {
+          "title": "the Assimilated",
+          "finalId": "comfort",
+          "label": "Accept comfort.",
+          "lines": [
+            "Warm, safe, dim. The dead drop sits inside you like a seed. Someday — years from now, patient as roots — the food truth will sprout in the galactic core, and no one will remember who carried it in. You will. That's enough. That's everything.",
+            "You came to the Table as the Assimilated the hard way: one fight at a time, most of them for someone else.",
+            "Before dawn, you had walked the fence again. It was a good fence. You knew it did not need walking. You had needed to make sure."
+          ]
+        }
+      },
+      "choices": null,
+      "text": "scattering://end\nsurvived\nTHE ASSIMILATED\n\nAccept comfort.\n\nAt the Table\n\nWarm, safe, dim. The dead drop sits inside you like a seed. Someday — years from now, patient as roots — the food truth will sprout in the galactic core, and no one will remember who carried it in. You will. That's enough. That's everything.\n\nYou came to the Table as the Assimilated the hard way: one fight at a time, most of them for someone else.\n\nBefore dawn, you had walked the fence again. It was a good fence. You knew it did not need walking. You had needed to make sure.\n\nExpedition record\n\nDays: 120 · Bearers: 1 · Plants learned: 3\n\nThe bearers\n\n🕯️ Pedro Fontana — 120 days\n\nBegin a new village",
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "over": true,
+      "won": true
+    }
+  ],
+  "errors": [],
+  "networkFailures": [],
+  "scope": "Prepared resistant beam and earned late-game Table scenes; native movement/Wait/choices and real reload/Continue. No browser gameplay helpers or natural attainment claim",
+  "driver": "Bundled Playwright with headless Microsoft Edge; native CDP touch; no interactive transport"
+}

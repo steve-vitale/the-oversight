@@ -7,6 +7,19 @@ verbatim.
 
 ---
 
+## 2026-10-15 (recovered instruction; restored here 2026-10-19)
+
+Context: Ability/god-path system design, interrupted Claude session
+`session_01QPzbuApDmn3auifxsV7pNN`. Retained verbatim in commit4304e5f8f,
+this file, and evidence/2026-10-15/resume-claude.md; omitted during reconciliation.
+
+"Address all gaps"
+
+"Health should scale if gear can’t carry it alone. But yes abilities and allies should do a lot of lifting. The beam is supposed to not be as lethal to sufficiently tiered gear. But with human class gear yes surprisingly lethal, just maybe not that lethal. Limit raids to current wave."
+
+Health growth is conditional. This quote does not prescribe a numeric beam
+damage range, raid rate or automatic compensation for win-rate changes.
+
 ## 2026-10-15 (balanced measurement and challenge)
 
 "Winning shouldn’t be easy. A reduction in win rate is cause for investigation and consideration not automatically assuming it’s a regression. Keep documentation on our levers that impact survival."

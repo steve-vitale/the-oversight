@@ -3028,6 +3028,18 @@
         // who fields a beam weapon — not a second hardcoded list. Old Tam
         // fights fair: no beam, ever.
         if (!this.apHasBeam(pid)) return false;
+        var shot = fighter._beamAim;
+        if (shot) {
+          delete fighter._beamAim;
+          var target = this.tbFighter('p');
+          if (target && target.alive && target.mx === shot.x && target.my === shot.y) {
+            this.apBeamHit('player', 0, shot.name, { damageType: 'alien_beam', pid: pid, sourceKey: fighter.key });
+          } else {
+            this.say('🔆 The beam burns the place you were standing. You moved in time.');
+            try { this.audioEvent('impact', { pattern: 'beam' }); } catch (e) { console.warn('[beam] miss', e); }
+          }
+          return true;
+        }
         // Cooldown ticks on the alien's own turn: max one beam per ~3 rounds.
         // (break-it 2026-10-09: the tick used to live in a tbAfterPlayerAction
         // wrap that ALSO fired the beam after the alien's normal strike — a
@@ -3059,16 +3071,18 @@
         try { _known = !!this.apKnowsAlien(pid); } catch (e0k) {}
         var _who = _known ? per.name : 'The stranger';
         var beamName = _known ? (beamNames[pid] || (per.name + '\'s beam weapon')) : 'a beam weapon';
-        this.say('🔆 ' + _who + ' raises ' + beamName + '. The air tastes like copper.');
+        this.say('🔆 ' + _who + ' raises ' + beamName + '. A bright point locks onto your tile. MOVE before their next turn.');
         // AUDIO (break-it 2026-10-09): the beam is the aliens' signature
         // weapon — the raise is the "oh shit" telegraph and it was silent.
         // Machine-beam windup (beamTechWindup via the telegraph dispatcher),
         // not the deer's beamCharge — other beams are machines.
         try { this.audioEvent('telegraph', { pattern: 'beam', urgency: 1 }); } catch (e) {}
-        // Player is the target (beam weapons are for the player)
-        this.apBeamHit('player', 0, beamName, { damageType: 'alien_beam', pid: pid });
+        // The response window owns a fixed tile; discharge happens next turn.
+        var target = this.tbFighter('p');
+        if (!target || !target.alive) return false;
+        fighter._beamAim = { x: target.mx, y: target.my, name: beamName };
         return true;
-      } catch (e) { return false; }
+      } catch (e) { console.warn('[beam] attack', e); return false; }
     },
 
   };

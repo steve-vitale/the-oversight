@@ -521,7 +521,10 @@
       if (!it || (it.units == null ? 1 : it.units) <= 0) { this.say('Nothing left of that.'); return null; }
       const units = it.units || 1;
       const kg = (it.kg || 0.3) * units;
-      if (this.canCarry && !this.canCarry(kg)) { this.say("Too heavy — your pack can't take it."); return null; }
+      if (this.canCarry && !this.canCarry(kg)) {
+        this.say(`This stack weighs ${kg.toFixed(1)} kg. Carrying ${this.packWeight().toFixed(1)} kg; maximum ${this.carryLimit().toFixed(1)} kg (twice normal load). Leave or drop something first.`);
+        return null;
+      }
       // THE WEIGHT, NAMED (journey-succession r22 2026-10-17): the per-item
       // button fired the trauma number silently, like the batch path did —
       // only the search verb named the dead. Name them once, first touch.
@@ -681,10 +684,7 @@
       if (!c || c.buried) { this.say('Nothing there.'); return null; }
       // must be close: same node, adjacent cell
       const s = this.state.scholar;
-      if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
-        this.say('Too far — get closer to the body.'); return null;
-      }
+      if (!this._corpseCheckRange(c)) return null;
       const st = this.corpseStageInfo(c);
       const remaining = c.items.filter(i => (i.units == null ? 1 : i.units) > 0);
       if (!remaining.length) { this.say('Nothing left worth taking.'); return null; }

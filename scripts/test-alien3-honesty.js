@@ -53,8 +53,10 @@ async function main() {
     let tamBeams = 0, otherBeams = 0;
     for (const pid of ['vex_marlowe', 'countess_sable', 'rax_dentist', 'pip_quindle', 'sarge', 'dr_fenwick', 'old_tam']) {
       const f = { alienPid: pid, _enraged: true };
-      Game.tbfight = { fighters: [f], _beamCooldown: 0, over: false };
+      const player={key:'p',kind:'player',mx:4,my:4,hp:100,maxHp:100,alive:true};
+      Game.tbfight = { fighters: [player,f], _beamCooldown: 0, over: false };
       for (let i = 0; i < 40; i++) {
+        player.hp=100;player.alive=true;
         RNG.reset((i * 2654435761 + pid.length * 97) >>> 0 || 1);
         H.clearLog();
         const r = Game.apMaybeBeamAttack(f);

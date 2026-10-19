@@ -212,7 +212,8 @@
         const ms = this.worldMonsters ? this.worldMonsters() : [];
         for (const m of ms) {
           if (!m || !m.lingering || (m.hp || 0) <= 0) continue;
-          m.tx = hx; m.ty = hy;
+          m.tx = m.raidPost ? m.raidPost.x : hx;
+          m.ty = m.raidPost ? m.raidPost.y : hy;
           // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the
           // raiders hold the treeline but do not gorge — the teeth can wait.
           // The crisis stays open; the player may still answer the call for
@@ -490,13 +491,16 @@
       if (day - (v.lastRaidDay || 0) < (_ot ? _ot.cooldown : 7)) return false;
       let monsters = [];
       try { monsters = this.worldMonsters ? this.worldMonsters() : []; } catch (e) { return false; }
+      // Steve's recovered instruction: "Limit raids to current wave."
+      const wave = this.unlockedWave();
+      monsters = monsters.filter(m => m && (m.hp || 0) > 0 &&
+        ((this.data.monsters || []).find(d => d.id === m.id) || {}).wave === wave);
       if (!monsters.length || monsters.length < 3) return false;
       let pantry = 0;
       try { pantry = this.pantryKcalLive(v) || 0; } catch (e) {}
       if (pantry < 3000) return false;
       if (R() < (_ot ? _ot.skip : 0.82)) return false;
       // ---- RAID ----
-      v.lastRaidDay = day;
       const palisade = this.havenTier() >= 2;
       const hx = (v.px !== undefined && v.px !== null) ? v.px : 4;
       const hy = (v.py !== undefined && v.py !== null) ? v.py : 4;
@@ -506,12 +510,22 @@
       // farther. 3 raiders base, +1 above 12k kcal and +1 above 24k, cap 5.
       // Reactive (world state), never scheduled.
       const raidN = Math.min(5, 3 + (pantry > 12000 ? 1 : 0) + (pantry > 24000 ? 1 : 0));
-      const raiders = sorted.slice(0, raidN);
+      let raiders = sorted.slice(0, raidN);
+      const others = this.worldMonsters().filter(m => !raiders.includes(m) && (m.hp || 0) > 0);
+      const posts = [];
+      for (const [dx,dy] of [[0,0],[0,-1],[1,0],[0,1],[-1,0],[1,-1],[1,1],[-1,1],[-1,-1]]) {
+        const x=hx+dx,y=hy+dy;
+        if (this.tileAt(x,y) && !others.some(m => m.tx===x && m.ty===y)) posts.push({x,y});
+      }
+      raiders = raiders.slice(0,posts.length);
+      if (!raiders.length) return false;
+      v.lastRaidDay = day;
       const mname = (m) => {
         try { return this.monsterDisplayName(m.id) || 'something'; } catch (e) { return 'something'; }
       };
-      for (const m of raiders) {
-        m.tx = hx; m.ty = hy;
+      for (const [i,m] of raiders.entries()) {
+        m.raidPost = posts[i]; m.raidHaven = {x:hx,y:hy};
+        m.tx = m.raidPost.x; m.ty = m.raidPost.y;
         if (palisade) {
           const wall = Math.round(((m.maxHp || m.hp || 20)) * 0.25);
           m.hp = Math.max(1, (m.hp || wall) - wall);
@@ -567,6 +581,7 @@
           // flag marks these fights as haven defense — resolveWildMonster-
           // Encounter plants a 'defended' memory the lately-topic reads.
           try { if (this.resolveWildMonsterEncounter) this.resolveWildMonsterEncounter(d, m, { raid: true }); } catch (e) {}
+          if (this.worldMonsters().includes(m) && m.hp > 0) m.lingering = true;
         } else {
           // nobody met this one — it doesn't gorge once and leave. It
           // LINGERS at the treeline and gorges at each dawn until driven
@@ -587,7 +602,7 @@
         let live = [];
         try {
           const wms = this.worldMonsters ? this.worldMonsters() : [];
-          live = raiders.filter(rm => rm && (rm.hp || 0) > 0 && wms.indexOf(rm) !== -1);
+          live = raiders.filter(rm => rm && rm.tx===hx && rm.ty===hy && (rm.hp || 0) > 0 && wms.indexOf(rm) !== -1);
         } catch (e) {}
         // NO SILENT CLOBBER (crisis leg r5 2026-10-12): a live pending
         // encounter is someone else's beast (the feast draw's, the

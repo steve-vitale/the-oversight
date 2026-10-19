@@ -1342,6 +1342,9 @@
         items.push({ cx: px, cy: py, label: 'Investigate the quiet woods' });
       }
     } catch (e) {}
+    // A nearby body's pack is a direct decision, even when the square also
+    // offers forage, fire and conversation. Keep it in the phone's first row.
+    items.sort((a, b) => Number(['Search the body', 'Sift the ashes'].includes(b.label)) - Number(['Search the body', 'Sift the ashes'].includes(a.label)));
     return items;
   }
 
@@ -15888,11 +15891,18 @@
       ${c.ash
         ? `<p class="small" style="opacity:.7">What they carried belongs to the village now, not to whoever's standing here. Pocket it, or bring it home. The village will remember.</p>`
         : `<p class="small" style="opacity:.7">Take what you want. What's left stays — and meat rots where it lies.</p>`}
+      <p class="small">Pack ${Game.packWeight().toFixed(1)} kg · normal ${Game.packCapacity()} kg · maximum ${Game.carryLimit()} kg. Walking ×${Game.burden().moveMult.toFixed(1)}; heavier loads burn more food.</p>
+      ${view.result ? `<p class="inline-result" role="status">${esc(view.result)}</p>` : ''}
       ${items.length ? `<p><button class="btn ghost sm" data-lootall="1">Take all</button></p>` : ''}
       ${bodyHtml}
     </div>`;
     wireInlineX(slot);
-    const rewire = (fn, ok) => (e) => { fn(e); inlineView.result = ok; refresh(); };
+    const rewire = (fn, ok) => (e) => {
+      const result = fn(e);
+      const took = result && (!Array.isArray(result.taken) || result.taken.length > 0);
+      if (inlineView === view) view.result = took ? ok : 'Nothing taken. Check the notice and pack limit.';
+      refresh();
+    };
     // TAKE-ALL (batch loot 2026-10-13): one decision clears the corpse.
     // Skips human meat (trembles — no cure) with an honest narration; the
     // per-item Take button still allows a deliberate human-meat take.
@@ -15903,7 +15913,7 @@
     slot.querySelectorAll('[data-lootleave]').forEach(b => b.onclick = rewire(() => {
       const cc = (Game.state.corpses || []).find(x => x.id === cid);
       const it = cc && (cc.items || [])[+b.dataset.lootleave];
-      if (it) it._left = true;
+      if (it) { it._left = true; return it; }
     }, 'Left.'));
   }
 

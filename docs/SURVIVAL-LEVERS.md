@@ -1,5 +1,54 @@
 # Survival levers and investigation register
 
+## Release response windows and loot access (2026-10-19)
+
+Recovered direct Steve evidence (2026-10-15, original commit4304e5f8f):
+"The beam is supposed to not be as lethal to sufficiently tiered gear. But
+with human class gear yes surprisingly lethal, just maybe not that lethal.
+Limit raids to current wave." Full quote/provenance is in STEVE-ANSWERS.md.
+Alien beams spend a turn aiming at a fixed tile, then discharge without
+chasing or adding another strike. Moving is a real response; staying takes
+the existing90–110% max-HP beam with the existing per-piece protection.
+Pending aim survives Continue and clears on retreat. No numeric damage,
+gear-resistance, food, health or win-rate compensation was made.
+
+Raids require three live monsters of the current unlocked wave. Raiders get
+distinct actual posts around Haven, retain those posts at dawn/Continue and
+keep the siege open until the remaining posted raiders are cleared. Adjacent
+raiders do not teleport into an encounter at the center. Raid probability,
+cooldown and pillage/damage values are unchanged. Fewer eligible monsters
+can prevent a raid; this is an intentional application of the explicit rule.
+
+Table failure closes that path against stale choices/direct reentry and
+spends positive opening advantages in the next offered path. Harmful meters
+are not reduced. This restores an authored consequence, without the old
+500kcal tax or two-failures whole-run deletion; TABLE.md law4 requires story
+resolution. Prepared native phone proofs cover failure, fallback and ending.
+
+Loot follow-up keeps the existing candidate2x carry limit and burden prices.
+Search gets priority among nearby phone actions; refused stacks report their
+weight and the absolute limit and cannot display a successful pickup. The
+legacy bulk verb shares the canonical reach check. Production007 still has
+the coordinate-zero fallback and normal-capacity pickup cliff; the candidate
+already repairs both. A marked predecessor's gear/water stay on the corpse;
+the successor's own matching item types are not automatic inheritance.
+New shared-harness property proof and native two-height touch receipts live
+under release-loot in evidence/2026-10-19. These are prepared checks, not a
+claim of natural acquisition or overall balance clearance.
+
+All23-metric screening decision:128 source-matched campaigns across default
+and Europe plus8 neutral controls. Loot-only follow-up has identical final
+states/all23 vectors to the preceding survival candidate in every case.
+Combined raid/beam/Table changes remain review_required: default wins
+11→13/9→10/4→5/9→6 and Europe14→12/12→5/10→6/10→7 in capable/maker/
+merchant/caregiver order. Death, hydration, community, Table/class and gear
+watches remain; see the full per-policy tables in release-loot-*-compare-r1.md.
+An exact Europe maker4 paired replay locates the first traced change at day9
+raid posts, followed by day10 policy divergence and different late beam fights.
+It does not isolate a population effect or clear the European maker decline.
+Keep these warnings open for candidate playtest; do not restore win totals by
+automatically weakening enemies. No release balance clearance is claimed.
+
 ## Existing European traps: eligible catches (2026-10-19)
 
 Release-blocker repair: the existing snare recipe can catch European hare;

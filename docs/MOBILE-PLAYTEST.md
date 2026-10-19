@@ -1,3 +1,16 @@
+Body pickup follow-up2026-10-19: prepare a disposable edge/overload save with
+`node evidence/2026-10-19/release-loot-prepare-r1.cjs <fresh-fixture-path>`.
+The retained recipe expects `/evidence/2026-10-19/release-loot-fixture-r1.json`.
+Run `release-loot-phone-r1.js` through the runner below at736/844: Search must
+be a primary action without tapping a square, Take must work above normal load,
+hard-limit refusal must preserve both inventories and say nothing was taken,
+adjacent Search and Continue must retain the same body. Inspect the rendered
+card, actual current/normal/maximum load, and internal scroll. The12-check
+`scripts/godpath/test-loot-carry-release.js` automatically joins quick/full;
+it also covers predecessor/successor property with unique gear and water.
+Repeated item names alone are not an inheritance test. Production007 lacks
+the candidate fixes: record exact source/build identity in every report.
+
 2026-10-19 corpse/terrain/dialogue replay: use the shared
 `evidence/2026-10-19/run-release-contact2-browser-r1.cjs` runner against a
 disposable loopback origin at736 and844 heights with

@@ -1,5 +1,17 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-19 body/carry follow-up: production007 still has the coordinate-zero
+corpse reach bug and normal-capacity pickup cliff. The reconciled candidate
+has nearby Search, deliberate2x overload with food/combat penalties and the
+dead bearer's own food/gear/water retained on the body. Follow-up prioritizes
+Search on the phone and removes false pickup success;12 property checks and
+7 native stages at each phone height cover these exact reports, including
+real successor/Continue isolation. Read release-loot-audit-r1.md. Loot-only
+changes preserve all128 screened final states/all23 vectors. The preceding
+raid/beam/Table repairs have mixed balanced watches, especially Europe maker;
+retain them explicitly for review without numeric compensation. Existing five
+legacy dispositions, hosted access and physical-device release gates remain.
+
 2026-10-19 remaining-contract recovery: ordinary cell taps now fall through
 the corpse API when no body is present; native fire crafting works at both
 phone heights. Existing snare/basket catch current European hare/perch/trout.

@@ -2,6 +2,20 @@
 
 Status: integration in progress; not cleared for public launch.
 
+Latest unshipped runtime: a40e8ddacc9de335583688fc1c26c2813f5e00b9.
+Nearby body Search is primary on the phone; body pickup/refusal explains normal
+and absolute carrying limits without false success. Existing candidate edge
+reach,2x overload and successor property repairs are verified by12 shared-harness
+checks and native phone controls/Continue at both sizes. Earlier interrupted
+beam/raid/Table repairs are committed separately for review. Quick268/full1040,
+current16-stage source-bound frame receipts and installed007 update/cold/rollback
+pass. The loot-only change matches128 exact campaign states/all23 metrics;
+combined survival changes retain explicit review_required warnings. Read
+release-loot-audit-r1.md and build-source.json on the shared candidate branch.
+Production007 is unchanged and does not contain these fixes; no live URL or
+public-launch clearance is claimed. Hosted access, physical-device checks and
+five legacy dispositions remain open. Earlier checkpoints below are historical.
+
 Current unshipped continuation: four remaining contracts are recovered, including
 two real defects (empty-corpse branch swallowing cell actions; European snare/
 basket missing actual prey). Region report metadata and the current Europe data

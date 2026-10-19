@@ -71,7 +71,7 @@ async function main() {
   for (const seed of SEEDS) {
     prime();
     Game.apRevealAlien('vex_marlowe', 'test');
-    const pF = { key: 'p', alive: true, hp: 100, maxHp: 100, name: 'You' };
+    const pF = { key: 'p', kind: 'player', mx:4, my:4, alive: true, hp: 100, maxHp: 100, name: 'You' };
     const aF = { key: 'ap_vex_marlowe', kind: 'hostile', alienPid: 'vex_marlowe', alive: true, fled: false, _enraged: false };
     Game.tbfight = { fighters: [pF, aF], over: false, _beamCooldown: 0 };
     H.clearLog();
@@ -86,6 +86,8 @@ async function main() {
       tries++;
     }
     assert(fired, 'seed ' + seed + ': beam fires within 60 seeded rolls');
+    assert(pF.hp === 100 && !!aF._beamAim, 'seed '+seed+': declaration leaves a full response turn');
+    Game.apMaybeBeamAttack(aF); // next alien turn resolves the fixed aimed tile
     assert(pF.hp < 100, 'seed ' + seed + ': beam damage actually lands (hp ' + pF.hp + ')');
     assert(Game.tbfight._beamCooldown === 3, 'seed ' + seed + ': cooldown set to 3 on fire');
     const again = Game.apMaybeBeamAttack(aF);
@@ -149,7 +151,11 @@ async function main() {
     H.clearLog();
     Game.tbAlienTurn(aF);
     Math.random = realR;
-    assert(pF.hp < hp0, 'seed ' + seed + ': turn 2 beam replaces the strike (hp ' + hp0 + ' -> ' + pF.hp + ')');
+    assert(pF.hp === hp0 && !!aF._beamAim, 'seed ' + seed + ': turn 2 beam aim replaces the strike');
+    Math.random = () => 0.0;
+    Game.tbAlienTurn(aF); // the following turn discharges without a heavy/extra strike
+    Math.random = realR;
+    assert(pF.hp < hp0 && !aF._beamAim, 'seed '+seed+': staying in the aimed tile takes the next-turn beam');
     assert(/🔆/.test(H.sayText()), 'seed ' + seed + ': turn-2 beam telegraph said');
     Game.tbfight = null; // dissolve the test fight
   }

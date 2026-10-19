@@ -620,6 +620,8 @@
       const def = pathDef(pathId);
       if (!def) return;
       const T = this.tableState();
+      // A stale choice must not reopen a spent door or regrant its gifts.
+      if ((T.failedDoors || []).includes(pathId)) return;
       const branch = this.tableBranch(pathId);
       T.path = pathId; T.phase = 'challenge'; T.beat = 0;
       T.meters = {}; T.branch = branch.branch; T.branchNotes = branch.notes;
@@ -660,6 +662,15 @@
         branchAbils = rl > 0 ? ab.light : rl < 0 ? ab.dark : [];
       }
       grantList(ab.shared); grantList(branchAbils);
+      if (T.weakened > 0) {
+        // Restore the authored consequence of a smaller door. Harmful meters
+        // are not opening advantages and must not improve after failure.
+        const harmful = new Set(['horror', 'cage', 'debt', 'heat']);
+        for (const key of Object.keys(T.meters)) {
+          if (T.meters[key] > 0 && !harmful.has(key)) T.meters[key] = Math.max(0, T.meters[key] - T.weakened);
+        }
+        this.say(`The previous refusal follows you in: opening advantages −${T.weakened}.`);
+      }
       const seat = this.tableSeat();
       // The show component: televised in the path's genre.
       this.tableLiveWrap(def.showLive);
@@ -850,6 +861,7 @@
       const def = pathDef(pathId);
       if (!def) return;
       const T = this.tableState();
+      if ((T.failedDoors || []).includes(pathId)) return;
       this.say(`You take the smaller door. It is still a door.`);
       this.tableStartPath(pathId);
       try { this.save(); } catch (e) {}

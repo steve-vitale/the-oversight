@@ -1,0 +1,27 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('Body access, overload and successor property');
+(async()=>{
+ const memory=new Map();global.localStorage={getItem:k=>memory.get(k)??null,setItem:(k,v)=>memory.set(k,String(v)),removeItem:k=>memory.delete(k),key:i=>[...memory.keys()][i]??null,get length(){return memory.size}};
+ const G=await K.load({seed:Number(process.env.SEED||7),narration:true});K.newRun(G);
+ let s=G.state.scholar;G.map.px=2;G.map.py=4;s.mx=s.my=0;s.insideHaven=false;s.inventory=[];s.water=[];
+ const body=G.registerDeath({kind:'monster',name:'test carcass',mx:0,my:0,items:[{name:'test hide',itemId:'test_hide',units:1,kg:1,kcalEach:0}]});
+ T.ok('zero-coordinate body is in reach',G._corpseCheckRange(body,true));
+ s.mx=1;T.ok('adjacent body exposes normal search action',G.cellActions(0,0).includes('Search the body'));
+ s.mx=2;T.ok('two squares away cannot loot',!G._corpseCheckRange(body,true)&&!G.corpseTakeItem(body.id,0));
+ s.mx=0;const cap=G.packCapacity();s.inventory=[{name:'prepared ballast',units:1,kg:cap*1.2}];
+ T.ok('normal capacity is not the pickup limit',G.canCarry(1)&&G.carryLimit()===2*cap);
+ const before=G.packWeight(),cost=G.burden();T.ok('real body pickup works while overloaded',!!G.corpseTakeItem(body.id,0)&&G.packWeight()===before+1);
+ T.ok('overload increases movement and work cost',cost.moveMult>2&&cost.workAdd>60&&cost.dodgePen>0.15);
+ const huge={name:'large stack',units:2,kg:cap};body.items.push(huge);const held=JSON.stringify(s.inventory);
+ T.ok('absolute limit rejects without destroying either inventory',G.corpseTakeItem(body.id,1)===null&&huge.units===2&&JSON.stringify(s.inventory)===held);
+ G.save();const key=G.state.runKey;T.ok('actual Continue retains overloaded pack and zero coordinates',G.load(key)&&G.state.scholar.mx===0&&G.packWeight()===before+1);
+ s=G.state.scholar;const old=G.villagerId,v=G.state.village,next=v.roster.find(id=>id!==old),person=G.getPerson(next);
+ if(!next||!person)throw Error('No real successor');v.roster=[old,next];v.trust={[next]:100};person.items=['stone_knife'];person.equipped={};person.water=[];
+ s.inventory=[{itemId:'predecessor_only',name:'Marked predecessor loot',units:3,kg:0.2,kcalEach:0}];s.water=[{quality:'clean',liters:2}];s.equipped={};
+ G.playerDeath('prepared property test');const dead=G.corpses().find(c=>c.villagerId===old);
+ T.ok('successor is the actual living resident',G.villagerId===next&&!G.over);
+ T.ok('predecessor marked gear and water remain on body',dead?.items.some(i=>i.itemId==='predecessor_only'&&i.units===3)&&dead.items.some(i=>i.water?.liters===2));
+ T.ok('successor carries their own kit without predecessor loot or water',G.state.scholar.inventory.some(i=>i.itemId==='stone_knife')&&!G.state.scholar.inventory.some(i=>i.itemId==='predecessor_only')&&G.state.scholar.water.length===0);
+ G.save();T.ok('successor property separation survives Continue',G.load(key)&&G.villagerId===next&&!G.state.scholar.inventory.some(i=>i.itemId==='predecessor_only')&&G.corpses().find(c=>c.id===dead.id).items.some(i=>i.itemId==='predecessor_only'));
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1});

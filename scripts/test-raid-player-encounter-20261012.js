@@ -13,6 +13,8 @@
 'use strict';
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { oracleV2 } = require('./policies/oracleV2');
+const {spawnSync}=require('child_process');
+const selectedCase=Number(process.argv[process.argv.indexOf('--case')+1]);
 
 let pass = 0, fail = 0;
 function ok(cond, label) {
@@ -36,9 +38,9 @@ async function freshGame(seed) {
   try { if (!Game.playerAtHaven()) Game.travelTo(hx, hy); } catch (e) {}
   // open the raid gate: 3+ monsters, 3k+ pantry (bait — the gate isn't
   // what's under test; the player-encounter logic is)
-  let mons = Game.worldMonsters().length;
-  const ids = ['hushwolf', 'bulldozer', 'choir_toad'];
-  for (let i = mons; i < 3; i++) { try { Game.spawnWorldMonster({ id: ids[i % 3] }, hx + 2, hy + 1, {}); } catch (e) {} }
+  const wave=Game.unlockedWave();
+  const ids=Game.data.monsters.filter(m=>m.wave===wave&&!m.campaignOnly).slice(0,3);
+  for(const md of ids)Game.spawnWorldMonster(md,hx+2,hy+1,{});
   try {
     const pk = Math.round(((v.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0)));
     if (pk < 3000 && Game.stockPantry) Game.stockPantry(90000, 'Bait');
@@ -54,6 +56,12 @@ function fireRaid(Game, v) {
 }
 
 async function main() {
+  if(![1,2,3].includes(selectedCase)){
+    let bad=0;
+    for(const n of [1,2,3]){const r=spawnSync(process.execPath,[__filename,'--case',String(n)],{encoding:'utf8',env:process.env,timeout:60000});process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');if(r.status!==0)bad++;}
+    process.exitCode=bad?1:0;return;
+  }
+  if(selectedCase===1){
   console.log('TEST 1: dead raiders don\'t walk (no phantom pendingEncounter)');
   {
     const { Game, v } = await freshGame(424242);
@@ -89,6 +97,8 @@ async function main() {
     Game.resolveWildMonsterEncounter = _enc;
   }
 
+  }
+  if(selectedCase===2){
   console.log('TEST 2: no silent clobber of a live pendingEncounter');
   {
     const { Game, v } = await freshGame(777);
@@ -113,9 +123,14 @@ async function main() {
     ok(lingered > 0, `${lingered} live raider(s) linger at the treeline instead of clobbering`);
   }
 
+  }
+  if(selectedCase===3){
   console.log('TEST 3: normal case — player faces a live raider');
   {
     const { Game, v } = await freshGame(99);
+    // This case isolates an on-site survivor; defender success is covered by
+    // case1. Adjacent posted raiders do not teleport to attack the player.
+    Game.resolveWildMonsterEncounter=()=>{};
     const { fired } = fireRaid(Game, v);
     ok(fired, 'raid fired');
     ok(!!Game.pendingEncounter, 'pendingEncounter set for the player at haven');
@@ -125,6 +140,7 @@ async function main() {
     ok(live, `faced raider is alive in the world (${mid})`);
   }
 
+  }
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 }

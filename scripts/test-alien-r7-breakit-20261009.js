@@ -306,7 +306,7 @@ function noAlienWord(t) { return !/alien/i.test(t); }
     G.apBeamHit = function (tk, dmg, lbl, opts) { beamTarget = tk; return origBeamHit.apply(this, arguments); };
     G.tbfight = {
       fighters: [
-        { key: 'p', kind: 'player', name: 'You', hp: 100, maxHp: 100, alive: true },
+        { key: 'p', kind: 'player', name: 'You', mx:4, my:4, hp: 100, maxHp: 100, alive: true },
         { key: 'v1', kind: 'ally', name: 'Mara', hp: 80, maxHp: 80, alive: true },
       ],
       over: false, _beamCooldown: 0,
@@ -315,6 +315,8 @@ function noAlienWord(t) { return !/alien/i.test(t); }
     const bf = { alienPid: 'vex_marlowe', _enraged: false };
     forceRoll(0.0); // 0.0 < 0.4 sadistic beam chance
     ok(G.apMaybeBeamAttack(bf) === true, `seed ${seed}: I beam fires`);
+    ok(beamTarget===null && !!bf._beamAim, `seed ${seed}: I aiming gives a response before damage`);
+    G.apMaybeBeamAttack(bf); // actual following-turn discharge
     unforce();
     ok(beamTarget === 'player', `seed ${seed}: I beam targets the player with villagers in the fight (got ${beamTarget})`);
     G.apBeamHit = origBeamHit;

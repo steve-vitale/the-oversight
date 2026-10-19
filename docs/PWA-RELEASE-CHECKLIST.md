@@ -1,6 +1,14 @@
 # Installed update and rollback
 
-Current lifecycle evidence is
+Latest tested runtime: a40e8ddacc9de335583688fc1c26c2813f5e00b9.
+`evidence/2026-10-19/release-loot-audit-r1.md` records the five-phase installed
+007→candidate→rollback proof: real stopped-origin cold launches,167 cached text
+inputs plus icons, complete saved payload preservation. Unique synthetic local
+test stamps are retained in release-loot-lifecycle-config-r1.json; they are not
+production releases. Quick268 and full1040 pass. Physical-device installation,
+OS suspension, real foreground discovery and hosted access remain open.
+
+Previous lifecycle evidence is
 ../evidence/2026-10-19/release-regional-final-audit-r1.md, runtime5df9b107f.
 The actually shipped007c4feb worker upgrades to this candidate; both candidate
 and rollback launch with the server stopped, with the same existing save.
