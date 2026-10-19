@@ -1,0 +1,246 @@
+{
+ "arms": [
+  "control",
+  "winsupport"
+ ],
+ "seeds": [
+  64001,
+  64002,
+  64003,
+  64004,
+  64005,
+  64006,
+  64007,
+  64008
+ ],
+ "policies": [
+  "leadfeast",
+  "belongfeast"
+ ],
+ "filesBad": [],
+ "control": {
+  "n": 16,
+  "survival": {
+   "median": 101,
+   "days": [
+    51,
+    66,
+    66,
+    75,
+    79,
+    82,
+    86,
+    97,
+    101,
+    118,
+    119,
+    130,
+    146,
+    164,
+    165,
+    181
+   ]
+  },
+  "wall": {
+   "national": 11,
+   "table": 11,
+   "wins": 0,
+   "wave4": 13,
+   "wave5": 0,
+   "exiled": 0
+  },
+  "door": {
+   "reached": 9,
+   "diedInWindow": 9,
+   "attempts": 9,
+   "outcomes": {
+    "died": 9
+   }
+  },
+  "taxonomy": {
+   "windowDeaths": 67,
+   "who": {
+    "scholar": 37,
+    "villager": 30
+   },
+   "where": {
+    "raid": 36,
+    "wild": 23,
+    "alien": 2,
+    "other": 5,
+    "haven": 1
+   },
+   "what": {
+    "w4": 28,
+    "w3": 13,
+    "w12": 17,
+    "null": 9
+   },
+   "addressable": 60
+  },
+  "causeSpace": {
+   "monster": 46,
+   "alien": 5,
+   "combat": 148,
+   "Extended Warranty": 1,
+   "The Mountain Lord": 2,
+   "contest": 5,
+   "the night": 1,
+   "ambush": 4,
+   "a wound that wouldn't close": 1,
+   "The Redactor": 1,
+   "Big Big": 1,
+   "The Heckler": 1,
+   "The Algorithm": 1
+  },
+  "perPolicy": [
+   {
+    "policy": "leadfeast",
+    "n": 8,
+    "medianSurvival": 101,
+    "national": 6,
+    "table": 8,
+    "wave4": 7,
+    "def5": 7
+   },
+   {
+    "policy": "belongfeast",
+    "n": 8,
+    "medianSurvival": 119,
+    "national": 5,
+    "table": 3,
+    "wave4": 6,
+    "def5": 2
+   }
+  ]
+ },
+ "winsupport": {
+  "n": 16,
+  "survival": {
+   "median": 116,
+   "days": [
+    51,
+    63,
+    66,
+    79,
+    82,
+    91,
+    97,
+    107,
+    116,
+    119,
+    122,
+    126,
+    147,
+    159,
+    181,
+    182
+   ]
+  },
+  "wall": {
+   "national": 12,
+   "table": 9,
+   "wins": 0,
+   "wave4": 13,
+   "wave5": 0,
+   "exiled": 0
+  },
+  "door": {
+   "reached": 9,
+   "diedInWindow": 8,
+   "attempts": 9,
+   "outcomes": {
+    "died": 8,
+    "horizon": 1
+   }
+  },
+  "taxonomy": {
+   "windowDeaths": 56,
+   "who": {
+    "scholar": 36,
+    "villager": 20
+   },
+   "where": {
+    "wild": 17,
+    "raid": 35,
+    "other": 4
+   },
+   "what": {
+    "w4": 32,
+    "w3": 6,
+    "w12": 14,
+    "null": 4
+   },
+   "addressable": 52
+  },
+  "causeSpace": {
+   "monster": 42,
+   "alien": 3,
+   "combat": 147,
+   "Extended Warranty": 1,
+   "The Mountain Lord": 2,
+   "contest": 6,
+   "ambush": 4,
+   "The Redactor": 1,
+   "Big Big": 1,
+   "The Heckler": 1,
+   "The Algorithm": 1,
+   "starvation": 1
+  },
+  "perPolicy": [
+   {
+    "policy": "leadfeast",
+    "n": 8,
+    "medianSurvival": 116,
+    "national": 7,
+    "table": 6,
+    "wave4": 7,
+    "def5": 7
+   },
+   {
+    "policy": "belongfeast",
+    "n": 8,
+    "medianSurvival": 119,
+    "national": 5,
+    "table": 3,
+    "wave4": 6,
+    "def5": 2
+   }
+  ]
+ },
+ "primary": {
+  "metric": "median survival days",
+  "control": 101,
+  "winsupport": 116,
+  "delta": 15,
+  "goBar": "+10d",
+  "go": true
+ },
+ "guardrails": {
+  "noNewDeathModes": {
+   "pass": false,
+   "detail": "starvation"
+  },
+  "nationalNotDegraded": {
+   "pass": true,
+   "detail": "12 vs 11"
+  },
+  "tableNotDegraded": {
+   "pass": false,
+   "detail": "9 vs 11"
+  },
+  "wave4NotDegraded": {
+   "pass": true,
+   "detail": "13 vs 13"
+  },
+  "wave5NotDegraded": {
+   "pass": true,
+   "detail": "0 vs 0"
+  },
+  "survivalFloor": {
+   "pass": true,
+   "detail": "delta 15d (floor -10d)"
+  }
+ },
+ "verdict": "NO-GO (guardrail breach)"
+}
