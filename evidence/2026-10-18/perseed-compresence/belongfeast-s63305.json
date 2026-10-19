@@ -1,0 +1,1348 @@
+{
+ "seed": 63305,
+ "policyId": "belongfeast",
+ "instrument": "compresence",
+ "substrate": "pure round-1 tribfloor (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0, NODEWITNESS=1, no vetstaff/vetblood/vetrel)",
+ "anchorCommit": "2f0dde7e3d13",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "days": 180,
+ "gameDays": 182,
+ "endReason": "survived",
+ "rosterStart": 11,
+ "w3Kills": 1,
+ "w3Fights": 8,
+ "chanCounts": {
+  "a": 0,
+  "b": 0,
+  "c": 0,
+  "d": 0,
+  "e": 0,
+  "f": 1,
+  "x": 0
+ },
+ "dmgAttached": 1,
+ "singleMonsterKills": 1,
+ "kills": [
+  {
+   "d": 138,
+   "mid": "callback",
+   "w": 3,
+   "by": "gen_cr7erbf",
+   "byName": "Aubrey",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "raid",
+   "channel": "f",
+   "channelNote": "4 companions on the scholar's node, none within the <=4 join radius (or behind the door)",
+   "channelEvidence": {
+    "sameNodeCount": 4,
+    "nearest": [
+     {
+      "vid": "gen_gvp1moq",
+      "name": "Marvin",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "fatima_hassan",
+      "name": "Fatima",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "giulia_bianchi",
+      "name": "Giulia",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "meera_reddy",
+      "name": "Meera",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     }
+    ],
+    "inRadiusNotJoined": []
+   },
+   "startScholar": {
+    "vid": "gen_cr7erbf",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 0,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 380,
+    "companion": 0,
+    "other": 0,
+    "hits": 4,
+    "byVid": {},
+    "singleMonster": true,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": {
+    "vid": "gen_gvp1moq",
+    "mid": "callback",
+    "allies": 0,
+    "allyVids": [],
+    "outcome": "vFlee",
+    "rounds": 3,
+    "allyDealt": 0,
+    "allyVid": null,
+    "mDealt": 55,
+    "vTaken": 84,
+    "intent": "engage"
+   }
+  }
+ ],
+ "fights": [
+  {
+   "day": 80,
+   "mid": "redactor",
+   "wave": 3,
+   "scholar": {
+    "vid": "gen_cr7erbf",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 0,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "fatima_hassan",
+     "name": "Fatima",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "nikos_papadopoulos",
+     "name": "Nikos",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "giulia_bianchi",
+     "name": "Giulia",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "gen_gvp1moq",
+     "name": "Marvin",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "boris_kowalski",
+     "name": "Boris",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "redactor",
+     "grid": {
+      "mx": 8,
+      "my": 2
+     }
+    }
+   ]
+  },
+  {
+   "day": 138,
+   "mid": "callback",
+   "wave": 3,
+   "scholar": {
+    "vid": "gen_cr7erbf",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 0,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 6,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "gen_gvp1moq",
+     "name": "Marvin",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "fatima_hassan",
+     "name": "Fatima",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "giulia_bianchi",
+     "name": "Giulia",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "boris_kowalski",
+     "name": "Boris",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "rosa_mendez",
+     "name": "Rosa",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 6,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "callback",
+     "grid": {
+      "mx": 7,
+      "my": 6
+     }
+    }
+   ]
+  },
+  {
+   "day": 139,
+   "mid": "suburb",
+   "wave": 4,
+   "scholar": {
+    "vid": "rosa_mendez",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 4,
+     "my": 4
+    },
+    "atHaven": true,
+    "insideHaven": true,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 5,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "fatima_hassan",
+     "name": "Fatima",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": true
+    },
+    {
+     "vid": "boris_kowalski",
+     "name": "Boris",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": false
+    },
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": true
+    },
+    {
+     "vid": "gen_gvp1moq",
+     "name": "Marvin",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "giulia_bianchi",
+     "name": "Giulia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 5,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "suburb",
+     "grid": {
+      "mx": 5,
+      "my": 3
+     }
+    }
+   ]
+  },
+  {
+   "day": 146,
+   "mid": "audit",
+   "wave": 4,
+   "scholar": {
+    "vid": "gen_gvp1moq",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 7,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "fatima_hassan",
+     "name": "Fatima",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "somchai_prasert",
+     "name": "Somchai",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "boris_kowalski",
+     "name": "Boris",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "giulia_bianchi",
+     "name": "Giulia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 6
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "raj_patel",
+     "name": "Raj",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 6
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "catalina_reyes",
+     "name": "Catalina",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 2,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "audit",
+     "grid": {
+      "mx": 7,
+      "my": 0
+     }
+    }
+   ]
+  },
+  {
+   "day": 152,
+   "mid": "eulogy",
+   "wave": 4,
+   "scholar": {
+    "vid": "boris_kowalski",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 4,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "giulia_bianchi",
+     "name": "Giulia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "raj_patel",
+     "name": "Raj",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "catalina_reyes",
+     "name": "Catalina",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 1,
+      "ny": 1
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "somchai_prasert",
+     "name": "Somchai",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "app_mgpspiqb954",
+     "name": "Marta",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "zoe_adams",
+     "name": "Zoe",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "eulogy",
+     "grid": {
+      "mx": 5,
+      "my": 0
+     }
+    }
+   ]
+  },
+  {
+   "day": 156,
+   "mid": "eater",
+   "wave": 4,
+   "scholar": {
+    "vid": "giulia_bianchi",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "raj_patel",
+     "name": "Raj",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "catalina_reyes",
+     "name": "Catalina",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "somchai_prasert",
+     "name": "Somchai",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspiqb954",
+     "name": "Marta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "zoe_adams",
+     "name": "Zoe",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspiub373",
+     "name": "Weidong",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "eater",
+     "grid": {
+      "mx": 6,
+      "my": 1
+     }
+    }
+   ]
+  },
+  {
+   "day": 165,
+   "mid": "buffering",
+   "wave": 3,
+   "scholar": {
+    "vid": "catalina_reyes",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 8,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "zoe_adams",
+     "name": "Zoe",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspiub373",
+     "name": "Weidong",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspiyn705",
+     "name": "Greisy",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "raj_patel",
+     "name": "Raj",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "somchai_prasert",
+     "name": "Somchai",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "app_mgpspiqb954",
+     "name": "Marta",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "app_mgpspixr444",
+     "name": "Ariana",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 8,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "buffering",
+     "grid": {
+      "mx": 8,
+      "my": 0
+     }
+    }
+   ]
+  },
+  {
+   "day": 168,
+   "mid": "callback",
+   "wave": 3,
+   "scholar": {
+    "vid": "raj_patel",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "somchai_prasert",
+     "name": "Somchai",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspiqb954",
+     "name": "Marta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspiub373",
+     "name": "Weidong",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspixr444",
+     "name": "Ariana",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "app_mgpspiyn705",
+     "name": "Greisy",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "meera_reddy",
+     "name": "Meera",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "zoe_adams",
+     "name": "Zoe",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "callback",
+     "grid": {
+      "mx": 8,
+      "my": 0
+     }
+    }
+   ]
+  }
+ ],
+ "fieldFights": [
+  {
+   "vid": "rosa_mendez",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 21,
+   "vTaken": 34,
+   "intent": "learn"
+  },
+  {
+   "vid": "fatima_hassan",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 24,
+   "vTaken": 29,
+   "intent": "learn"
+  },
+  {
+   "vid": "boris_kowalski",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 49,
+   "intent": "engage"
+  },
+  {
+   "vid": "nikos_papadopoulos",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 30,
+   "vTaken": 51,
+   "intent": "learn"
+  },
+  {
+   "vid": "boris_kowalski",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 57,
+   "vTaken": 39,
+   "intent": "learn"
+  },
+  {
+   "vid": "boris_kowalski",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 46,
+   "intent": "engage"
+  },
+  {
+   "vid": "rosa_mendez",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 34,
+   "intent": "engage"
+  },
+  {
+   "vid": "nikos_papadopoulos",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 4,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 30,
+   "vTaken": 101,
+   "intent": "engage"
+  },
+  {
+   "vid": "boris_kowalski",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 6,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 82,
+   "vTaken": 91,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_gvp1moq",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 55,
+   "vTaken": 84,
+   "intent": "engage"
+  },
+  {
+   "vid": "app_mgpspj2q456",
+   "mid": "herald",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 26,
+   "vTaken": 63,
+   "intent": "learn"
+  },
+  {
+   "vid": "app_mgpspj2q456",
+   "mid": "herald",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 26,
+   "vTaken": 67,
+   "intent": "learn"
+  },
+  {
+   "vid": "app_mgpspj2q456",
+   "mid": "herald",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 12,
+   "vTaken": 31,
+   "intent": "engage"
+  }
+ ],
+ "instrumentErrors": [],
+ "deathCauses": {
+  "combat": 30,
+  "ambush": 1,
+  "villager combat": 7,
+  "monster": 3,
+  "contest": 1
+ }
+}

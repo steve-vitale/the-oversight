@@ -1,0 +1,3074 @@
+{
+ "seed": 63303,
+ "policyId": "belongfeast",
+ "instrument": "compresence",
+ "substrate": "pure round-1 tribfloor (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0, NODEWITNESS=1, no vetstaff/vetblood/vetrel)",
+ "anchorCommit": "2f0dde7e3d13",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "days": 136,
+ "gameDays": 137,
+ "endReason": "village-lost",
+ "rosterStart": 11,
+ "w3Kills": 7,
+ "w3Fights": 50,
+ "chanCounts": {
+  "a": 0,
+  "b": 1,
+  "c": 0,
+  "d": 0,
+  "e": 1,
+  "f": 5,
+  "x": 0
+ },
+ "dmgAttached": 7,
+ "singleMonsterKills": 3,
+ "kills": [
+  {
+   "d": 90,
+   "mid": "chorus_line",
+   "w": 3,
+   "by": "gen_kk5ov48",
+   "byName": "Abigail",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "haven-TB",
+   "channel": "f",
+   "channelNote": "2 companions on the scholar's node, none within the <=4 join radius (or behind the door)",
+   "channelEvidence": {
+    "sameNodeCount": 2,
+    "nearest": [
+     {
+      "vid": "priya_nair",
+      "name": "Priya",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "ines_duarte",
+      "name": "Ines",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     }
+    ],
+    "inRadiusNotJoined": []
+   },
+   "startScholar": {
+    "vid": "gen_kk5ov48",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 386,
+    "companion": 0,
+    "other": 0,
+    "hits": 3,
+    "byVid": {},
+    "singleMonster": true,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": null
+  },
+  {
+   "d": 102,
+   "mid": "ad_break",
+   "w": 3,
+   "by": "gen_bz9ni8m",
+   "byName": "June",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "haven-TB",
+   "channel": "b",
+   "channelNote": "joiner(s) present but all beyond strike range",
+   "channelEvidence": {
+    "joiners": [
+     {
+      "vid": "greta_hansen",
+      "name": "Greta",
+      "ai": "brave",
+      "dist": 2,
+      "dmg": 41,
+      "fled": false
+     }
+    ]
+   },
+   "startScholar": {
+    "vid": "gen_bz9ni8m",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 412,
+    "companion": 41,
+    "other": 0,
+    "hits": 9,
+    "byVid": {
+     "greta_hansen": 41
+    },
+    "singleMonster": false,
+    "compShare": 0.091,
+    "scholarShare": 0.909
+   },
+   "field": {
+    "vid": "gen_bz9ni8m",
+    "mid": "ad_break",
+    "allies": 0,
+    "allyVids": [],
+    "outcome": "vFlee",
+    "rounds": 3,
+    "allyDealt": 0,
+    "allyVid": null,
+    "mDealt": 57,
+    "vTaken": 43,
+    "intent": "learn"
+   }
+  },
+  {
+   "d": 125,
+   "mid": "spool",
+   "w": 3,
+   "by": "ava_garcia",
+   "byName": "Ava",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "raid",
+   "channel": "f",
+   "channelNote": "4 companions on the scholar's node, none within the <=4 join radius (or behind the door)",
+   "channelEvidence": {
+    "sameNodeCount": 4,
+    "nearest": [
+     {
+      "vid": "greta_hansen",
+      "name": "Greta",
+      "gridDist": null,
+      "side": "outside",
+      "sideMatch": true
+     },
+     {
+      "vid": "adaeze_nwosu",
+      "name": "Adaeze",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "zoltan_nagy",
+      "name": "Zoltan",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "nadia_khoury",
+      "name": "Nadia",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     }
+    ],
+    "inRadiusNotJoined": []
+   },
+   "startScholar": {
+    "vid": "ava_garcia",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 307,
+    "companion": 0,
+    "other": 0,
+    "hits": 3,
+    "byVid": {},
+    "singleMonster": true,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": null
+  },
+  {
+   "d": 126,
+   "mid": "spool",
+   "w": 3,
+   "by": "priya_nair",
+   "byName": "Priya",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "haven-TB",
+   "channel": "e",
+   "channelNote": "all 6 living companions on other nodes",
+   "channelEvidence": {
+    "nodeDist": {
+     "5,3": 1,
+     "3,5": 4,
+     "3,3": 1
+    },
+    "scholarNode": {
+     "nx": 4,
+     "ny": 4
+    },
+    "scholarAtHaven": true
+   },
+   "startScholar": {
+    "vid": "priya_nair",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 420,
+    "companion": 0,
+    "other": 0,
+    "hits": 4,
+    "byVid": {},
+    "singleMonster": true,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": null
+  },
+  {
+   "d": 132,
+   "mid": "strike",
+   "w": 4,
+   "by": "greta_hansen",
+   "byName": "Greta",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "raid",
+   "channel": "f",
+   "channelNote": "2 companions on the scholar's node, none within the <=4 join radius (or behind the door)",
+   "channelEvidence": {
+    "sameNodeCount": 2,
+    "nearest": [
+     {
+      "vid": "adaeze_nwosu",
+      "name": "Adaeze",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "nikolai_volkov",
+      "name": "Nikolai",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     }
+    ],
+    "inRadiusNotJoined": []
+   },
+   "startScholar": {
+    "vid": "greta_hansen",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 7972,
+    "companion": 0,
+    "other": 0,
+    "hits": 206,
+    "byVid": {},
+    "singleMonster": false,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": null
+  },
+  {
+   "d": 132,
+   "mid": "strike",
+   "w": 4,
+   "by": "greta_hansen",
+   "byName": "Greta",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "raid",
+   "channel": "f",
+   "channelNote": "2 companions on the scholar's node, none within the <=4 join radius (or behind the door)",
+   "channelEvidence": {
+    "sameNodeCount": 2,
+    "nearest": [
+     {
+      "vid": "adaeze_nwosu",
+      "name": "Adaeze",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "nikolai_volkov",
+      "name": "Nikolai",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     }
+    ],
+    "inRadiusNotJoined": []
+   },
+   "startScholar": {
+    "vid": "greta_hansen",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 7972,
+    "companion": 0,
+    "other": 0,
+    "hits": 206,
+    "byVid": {},
+    "singleMonster": false,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": null
+  },
+  {
+   "d": 132,
+   "mid": "strike",
+   "w": 4,
+   "by": "greta_hansen",
+   "byName": "Greta",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "raid",
+   "channel": "f",
+   "channelNote": "2 companions on the scholar's node, none within the <=4 join radius (or behind the door)",
+   "channelEvidence": {
+    "sameNodeCount": 2,
+    "nearest": [
+     {
+      "vid": "adaeze_nwosu",
+      "name": "Adaeze",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     },
+     {
+      "vid": "nikolai_volkov",
+      "name": "Nikolai",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     }
+    ],
+    "inRadiusNotJoined": []
+   },
+   "startScholar": {
+    "vid": "greta_hansen",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 7972,
+    "companion": 0,
+    "other": 0,
+    "hits": 206,
+    "byVid": {},
+    "singleMonster": false,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": null
+  }
+ ],
+ "fights": [
+  {
+   "day": 76,
+   "mid": "chorus_line",
+   "wave": 3,
+   "scholar": {
+    "vid": "catalina_reyes",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "gen_kk5ov48",
+     "name": "Abigail",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ava_garcia",
+     "name": "Ava",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "omar_farouk",
+     "name": "Omar",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "yara_haddad",
+     "name": "Yara",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "gen_bz9ni8m",
+     "name": "June",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "chorus_line",
+     "grid": {
+      "mx": 6,
+      "my": 6
+     }
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "mid": "chorus_line",
+   "wave": 3,
+   "scholar": {
+    "vid": "gen_kk5ov48",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 8,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "gen_bz9ni8m",
+     "name": "June",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "ava_garcia",
+     "name": "Ava",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "omar_farouk",
+     "name": "Omar",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "yara_haddad",
+     "name": "Yara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 6,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 8,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "chorus_line",
+     "grid": {
+      "mx": 6,
+      "my": 6
+     }
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "mid": "ad_break",
+   "wave": 3,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 97,
+   "mid": "audit",
+   "wave": 4,
+   "scholar": {
+    "vid": "gen_kk5ov48",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 0,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 8,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "ava_garcia",
+     "name": "Ava",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "gen_bz9ni8m",
+     "name": "June",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "omar_farouk",
+     "name": "Omar",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "yara_haddad",
+     "name": "Yara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 8,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "audit",
+     "grid": {
+      "mx": 0,
+      "my": 8
+     }
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "mid": "ad_break",
+   "wave": 3,
+   "scholar": {
+    "vid": "gen_bz9ni8m",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "ai": "brave",
+     "weapon": 5,
+     "armor": 8,
+     "grid": {
+      "mx": 7,
+      "my": 7
+     },
+     "distToMonsters": {},
+     "hp": 95,
+     "maxHp": 100,
+     "fled": false
+    }
+   ],
+   "nonjoiners": [
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "omar_farouk",
+     "name": "Omar",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "yara_haddad",
+     "name": "Yara",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ava_garcia",
+     "name": "Ava",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 6,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "ad_break",
+     "grid": {
+      "mx": 6,
+      "my": 6
+     }
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "mid": "algorithm",
+   "wave": 4,
+   "scholar": {
+    "vid": "gen_bz9ni8m",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 0,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "ava_garcia",
+     "name": "Ava",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "omar_farouk",
+     "name": "Omar",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "yara_haddad",
+     "name": "Yara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "algorithm",
+     "grid": {
+      "mx": 1,
+      "my": 0
+     }
+    }
+   ]
+  },
+  {
+   "day": 111,
+   "mid": "audit",
+   "wave": 4,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 122,
+   "mid": "reunion",
+   "wave": 4,
+   "scholar": {
+    "vid": "omar_farouk",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 6,
+     "my": 2
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 8,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ava_garcia",
+     "name": "Ava",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 8,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "reunion",
+     "grid": {
+      "mx": 7,
+      "my": 1
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "reunion",
+     "grid": {
+      "mx": 6,
+      "my": 0
+     }
+    },
+    {
+     "key": "m_crew_2",
+     "mid": "reunion",
+     "grid": {
+      "mx": 7,
+      "my": 0
+     }
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "mid": "spool",
+   "wave": 3,
+   "scholar": {
+    "vid": "ava_garcia",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "spool",
+     "grid": {
+      "mx": 5,
+      "my": 3
+     }
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "mid": "buffering",
+   "wave": 3,
+   "scholar": {
+    "vid": "ava_garcia",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 4,
+     "my": 3
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 7,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "priya_nair",
+     "name": "Priya",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 7,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "buffering",
+     "grid": {
+      "mx": 8,
+      "my": 3
+     }
+    }
+   ]
+  },
+  {
+   "day": 126,
+   "mid": "spool",
+   "wave": 3,
+   "scholar": {
+    "vid": "priya_nair",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 6,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 6,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "spool",
+     "grid": {
+      "mx": 7,
+      "my": 1
+     }
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "mid": "eater",
+   "wave": 4,
+   "scholar": {
+    "vid": "priya_nair",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 0,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 6,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": true
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "ines_duarte",
+     "name": "Ines",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 6,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "eater",
+     "grid": {
+      "mx": 5,
+      "my": 3
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "eater",
+     "grid": {
+      "mx": 4,
+      "my": 2
+     }
+    },
+    {
+     "key": "m_crew_2",
+     "mid": "eater",
+     "grid": {
+      "mx": 5,
+      "my": 2
+     }
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "mid": "eater",
+   "wave": 4,
+   "scholar": {
+    "vid": "ines_duarte",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 4,
+     "my": 4
+    },
+    "atHaven": true,
+    "insideHaven": true,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 5,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "greta_hansen",
+     "name": "Greta",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": true
+    },
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": true
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": false
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": true
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 5,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "eater",
+     "grid": {
+      "mx": 5,
+      "my": 3
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "eater",
+     "grid": {
+      "mx": 4,
+      "my": 2
+     }
+    },
+    {
+     "key": "m_crew_2",
+     "mid": "eater",
+     "grid": {
+      "mx": 5,
+      "my": 2
+     }
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 129,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 130,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 131,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 131,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 131,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 131,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 131,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 132,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 132,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 132,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 132,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 132,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 132,
+   "mid": "nielsen",
+   "wave": 5,
+   "scholar": null,
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": []
+  },
+  {
+   "day": 132,
+   "mid": "strike",
+   "wave": 4,
+   "scholar": {
+    "vid": "greta_hansen",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 6,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "nikolai_volkov",
+     "name": "Nikolai",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "jovan_milic",
+     "name": "Jovan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 6,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "strike",
+     "grid": {
+      "mx": 5,
+      "my": 5
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "strike",
+     "grid": {
+      "mx": 4,
+      "my": 4
+     }
+    },
+    {
+     "key": "m_crew_2",
+     "mid": "strike",
+     "grid": {
+      "mx": 5,
+      "my": 4
+     }
+    }
+   ]
+  },
+  {
+   "day": 135,
+   "mid": "reunion",
+   "wave": 4,
+   "scholar": {
+    "vid": "greta_hansen",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 5,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "visjoin_106",
+     "name": "Matilda",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "jovan_milic",
+     "name": "Jovan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 1
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 5,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "reunion",
+     "grid": {
+      "mx": 2,
+      "my": 0
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "reunion",
+     "grid": {
+      "mx": 1,
+      "my": 0
+     }
+    },
+    {
+     "key": "m_crew_2",
+     "mid": "reunion",
+     "grid": {
+      "mx": 3,
+      "my": 0
+     }
+    }
+   ]
+  },
+  {
+   "day": 135,
+   "mid": "algorithm",
+   "wave": 4,
+   "scholar": {
+    "vid": "visjoin_106",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 4,
+     "my": 4
+    },
+    "atHaven": true,
+    "insideHaven": true,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 4,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": true
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "nadia_khoury",
+     "name": "Nadia",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "jovan_milic",
+     "name": "Jovan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 1
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 4,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "algorithm",
+     "grid": {
+      "mx": 5,
+      "my": 4
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "algorithm",
+     "grid": {
+      "mx": 4,
+      "my": 3
+     }
+    },
+    {
+     "key": "m_crew_2",
+     "mid": "algorithm",
+     "grid": {
+      "mx": 5,
+      "my": 3
+     }
+    }
+   ]
+  },
+  {
+   "day": 135,
+   "mid": "reunion",
+   "wave": 4,
+   "scholar": {
+    "vid": "nadia_khoury",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 4,
+     "my": 4
+    },
+    "atHaven": true,
+    "insideHaven": true,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 3,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "zoltan_nagy",
+     "name": "Zoltan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "jovan_milic",
+     "name": "Jovan",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 1
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 3,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "reunion",
+     "grid": {
+      "mx": 5,
+      "my": 3
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "reunion",
+     "grid": {
+      "mx": 4,
+      "my": 2
+     }
+    },
+    {
+     "key": "m_crew_2",
+     "mid": "reunion",
+     "grid": {
+      "mx": 5,
+      "my": 2
+     }
+    }
+   ]
+  }
+ ],
+ "fieldFights": [
+  {
+   "vid": "priya_nair",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 20,
+   "vTaken": 65,
+   "intent": "learn"
+  },
+  {
+   "vid": "ines_duarte",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 19,
+   "vTaken": 42,
+   "intent": "learn"
+  },
+  {
+   "vid": "ines_duarte",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 32,
+   "intent": "engage"
+  },
+  {
+   "vid": "rafael_torres",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 69,
+   "intent": "engage"
+  },
+  {
+   "vid": "rafael_torres",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 36,
+   "intent": "engage"
+  },
+  {
+   "vid": "priya_nair",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 38,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_bz9ni8m",
+   "mid": "ad_break",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 57,
+   "vTaken": 43,
+   "intent": "learn"
+  },
+  {
+   "vid": "sofia_chen",
+   "mid": "influencer",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 21,
+   "vTaken": 85,
+   "intent": "learn"
+  },
+  {
+   "vid": "nikolai_volkov",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 20,
+   "vTaken": 54,
+   "intent": "learn"
+  },
+  {
+   "vid": "nikolai_volkov",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 11,
+   "vTaken": 33,
+   "intent": "learn"
+  },
+  {
+   "vid": "jovan_milic",
+   "mid": "influencer",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "evade",
+   "rounds": 0,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 0,
+   "intent": "learn"
+  }
+ ],
+ "instrumentErrors": [],
+ "deathCauses": {
+  "expedition": 4,
+  "sickness": 1,
+  "combat": 43,
+  "villager combat": 4,
+  "contest": 1,
+  "monster": 3
+ }
+}
