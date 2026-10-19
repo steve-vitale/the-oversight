@@ -4038,8 +4038,16 @@
       const broke = !!pres;
       // OUTCOME-AWARE (Steve 2026-10-06): the box must not claim a crack when
       // the story held. Rotate the held box line like the narration.
+      // CRACK REPEAT (journey-social r27 2026-10-19): the broke line was a
+      // fixed string, so pressing two different cracks served it verbatim
+      // twice in a row (transcript-verified s2002 d53 Isabella — two real
+      // breaks, one parroted telling). Cycle the telling.
       return finish(
-        broke ? 'Done — their story has a crack in it now.'
+        broke ? this.convoPickCycle(vid, 'presscrack', [
+                'Done — their story has a crack in it now.',
+                'Another crack. The telling doesn\'t hold together anymore.',
+                'There — the story splits again. You mark the spot.',
+              ])
               : this.convoPickCycle(vid, 'pressheldbox', [
                   'Nothing new — their story holds. For now.',
                   'Their story holds. You file that away.',
@@ -4058,9 +4066,17 @@
       // a lie the player hears in the conversation UI (the honest narration
       // may not be visible there). No wounds -> the NPC hears the claim
       // land flat, honestly.
+      // WOUND REPEAT (journey-social r27 2026-10-19): the shown line was a
+      // fixed string, so repeat picks served it verbatim x3 back-to-back
+      // (transcript-verified s2002 d53 Isabella). Cycle variants — the
+      // outcome is real every time, but the telling never parrots.
       const shown = this.showWounds(parts[2]);
       return shown
-        ? finish('The wounds speak for themselves.', '"Look at me."')
+        ? finish(this.convoPickCycle(vid, 'woundsshow', [
+            'The wounds speak for themselves.',
+            'The wounds, again. They haven\'t changed their story.',
+            'Same wounds. The fire sees them too — they say enough.',
+          ]), '"Look at me."')
         : finish('"Nothing to show. Just my word."', '"Look at me."');
     }
     if (act === 'site') { this.examineAmbushSite(parts[2]); return finish('The ground remembers.', '(examine the site)'); }

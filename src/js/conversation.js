@@ -1848,18 +1848,37 @@
     convoRecapLine(vid) {
       const c = this.convoGet(vid);
       const log = (c.threadLog || []).filter(e => e.thread && e.thread !== 'small' && e.thread !== 'nonverbal');
-      if (!log.length) return this.voiceLine(vid, '"We were just talking. Nothing important."');
       const labelOf = (t) => this.convoTopicLabel(vid, t);
-      const last = log[log.length - 1];
       let line;
-      if (log.length >= 2) {
-        const prev = log[log.length - 2];
-        line = prev.thread === last.thread
-          ? `"Still on ${labelOf(last.thread)}."`
-          : `"We started on ${labelOf(prev.thread)}, then got onto ${labelOf(last.thread)}."`;
+      if (!log.length) {
+        line = '"We were just talking. Nothing important."';
       } else {
-        line = `"We were talking about ${labelOf(last.thread)}."`;
+        const last = log[log.length - 1];
+        if (log.length >= 2) {
+          const prev = log[log.length - 2];
+          line = prev.thread === last.thread
+            ? `"Still on ${labelOf(last.thread)}."`
+            : `"We started on ${labelOf(prev.thread)}, then got onto ${labelOf(last.thread)}."`;
+        } else {
+          line = `"We were talking about ${labelOf(last.thread)}."`;
+        }
       }
+      // RECAP REPEAT (journey-social r27 2026-10-19): back-to-back recap
+      // picks re-served the verbatim line ("Still on that personal stuff."
+      // x3, transcript-verified s2002 d34/d122 Wei). If this exact line was
+      // already said this conversation, reframe honestly — a real person
+      // being re-asked says "as I said", they don't parrot.
+      c._recapSaid = c._recapSaid || {};
+      const raw = line;
+      if (c._recapSaid[raw]) {
+        const inner = String(raw).replace(/^"|"$/g, '');
+        line = this.convoPickCycle(vid, 'recaprepeat', [
+          `"As I said — ${inner}"`,
+          `"Like I said — ${inner}"`,
+          `"${inner} That's still where we are."`,
+        ]);
+      }
+      c._recapSaid[raw] = true;
       return this.voiceLine(vid, line);
     },
 
@@ -2004,7 +2023,13 @@
         L.lapseGiven = ll.tid + ':' + day;
         L.lastLapsed = null;
         const about = this.convoThreadAbout(vid, ll.tid, ll.label);
-        return '"It\'s been a while since we left ' + about + ' hanging. Glad we circled back."';
+        // LAPSE GRAMMAR (journey-social r27 2026-10-19): the old template
+        // ("It's been a while since we left {about} hanging") assumed the
+        // label was a noun phrase — a clause label like "the last time you
+        // laughed" composed into nonsense ("...we left the last time you
+        // laughed hanging", transcript-verified s2001 Ines). The new frame
+        // takes any label shape.
+        return '"It\'s been a while. Glad we circled back to ' + about + '."';
       } catch (e) { return null; }
     },
 

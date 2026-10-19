@@ -1,0 +1,26 @@
+SMOKE: seed 2000, 10 days (self-test of L3 counters)
+SMOKE: bonds=47 cases=3 convos=9
+SMOKE SELF-TEST: PASS (bonds counter reads nonzero — instrumentation OK)
+seed 2001: days=142 alive=4 convos=139 (deep=69) gossipPicks=3 gossipConvos=0 dryRate=2.04/12
+  L2' repeats: 0
+  L3: {"bonds":39,"deepBonds":13,"betrayalCases":8,"mootsConvened":8,"mootsObserved":8,"gossipConvos":0,"avgTrust":"69.8"}
+  moots: [{"c":"case_2","day":8,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_4","day":11,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_5","day":12,"vote":null,"verdict":"weregild","err":null},{"c":"case_6","day":14,"vote":null,"verdict":"weregild","err":null},{"c":"case_8","day":18,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_10","day":19,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_11","day":19,"vote":null,"verdict":"weregild","err":null},{"c":"case_12","day":20,"vote":null,"verdict":"exile","err":null}]
+  regression: P1-streaks=2 P2-reactDry=2
+seed 2002: days=142 alive=7 convos=113 (deep=61) gossipPicks=3 gossipConvos=2 dryRate=1.49/12
+  L2' repeats: 5
+    d34 Wei t11 <recap>: "Still on that personal stuff."
+    d53 Isabella t3 <betrayal:press:case_24:gen_y48s3wr>: Done — their story has a crack in it now.
+    d53 Isabella t7 <betrayal:wounds:case_24>: The wounds speak for themselves.
+    d53 Isabella t8 <betrayal:wounds:case_24>: The wounds speak for themselves.
+    d122 Wei t11 <recap>: "Still on what they want."
+  L3: {"bonds":85,"deepBonds":32,"betrayalCases":25,"mootsConvened":25,"mootsObserved":25,"gossipConvos":2,"avgTrust":"47.1"}
+  moots: [{"c":"case_1","day":6,"vote":null,"verdict":"weregild","err":null},{"c":"case_2","day":15,"vote":null,"verdict":"weregild","err":null},{"c":"case_4","day":19,"vote":null,"verdict":"acquitted","err":null},{"c":"case_5","day":22,"vote":null,"verdict":"weregild","err":null},{"c":"case_6","day":23,"vote":null,"verdict":"exile","err":null},{"c":"case_8","day":26,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_10","day":27,"vote":null,"verdict":"acquitted","err":null},{"c":"case_11","day":31,"vote":null,"verdict":"acquitted","err":null},{"c":"case_13","day":32,"vote":null,"verdict":"acquitted","err":null},{"c":"case_14","day":35,"vote":null,"verdict":"acquitted","err":null},{"c":"case_15","day":36,"vote":null,"verdict":"acquitted","err":null},{"c":"case_16","day":37,"vote":null,"verdict":"acquitted","err":null},{"c":"case_17","day":46,"vote":null,"verdict":"acquitted","err":null},{"c":"case_18","day":47,"vote":null,"verdict":"schism","err":null},{"c":"case_19","day":48,"vote":null,"verdict":"acquitted","err":null},{"c":"case_20","day":50,"vote":null,"verdict":"acquitted","err":null},{"c":"case_21","day":51,"vote":null,"verdict":"acquitted","err":null},{"c":"case_22","day":52,"vote":null,"verdict":"schism","err":null},{"c":"case_24","day":53,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_26","day":57,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_27","day":58,"vote":null,"verdict":"exile","err":null},{"c":"case_34","day":97,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_35","day":102,"vote":null,"verdict":"cold_war","err":null},{"c":"case_36","day":106,"vote":null,"verdict":"cold_war","err":null},{"c":"case_37","day":109,"vote":null,"verdict":"schism","err":null}]
+  regression: P1-streaks=0 P2-reactDry=1
+seed 2003: days=101 alive=7 convos=82 (deep=39) gossipPicks=3 gossipConvos=1 dryRate=1.48/12
+  L2' repeats: 0
+  L3: {"bonds":80,"deepBonds":25,"betrayalCases":20,"mootsConvened":20,"mootsObserved":20,"gossipConvos":1,"avgTrust":"33.9"}
+  moots: [{"c":"case_2","day":8,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_4","day":9,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_6","day":11,"vote":"guilty","verdict":"cold_war","err":null},{"c":"case_7","day":12,"vote":null,"verdict":"acquitted","err":null},{"c":"case_8","day":14,"vote":null,"verdict":"cold_war","err":null},{"c":"case_10","day":15,"vote":null,"verdict":"schism","err":null},{"c":"case_11","day":16,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_12","day":17,"vote":null,"verdict":"weregild","err":null},{"c":"case_14","day":19,"vote":null,"verdict":"weregild","err":null},{"c":"case_15","day":21,"vote":null,"verdict":"exile","err":null},{"c":"case_16","day":23,"vote":"acquit","verdict":"acquitted","err":null},{"c":"case_17","day":32,"vote":null,"verdict":"schism","err":null},{"c":"case_18","day":33,"vote":null,"verdict":"cold_war","err":null},{"c":"case_19","day":38,"vote":null,"verdict":"acquitted","err":null},{"c":"case_20","day":43,"vote":null,"verdict":"schism","err":null},{"c":"case_21","day":57,"vote":null,"verdict":"acquitted","err":null},{"c":"case_22","day":58,"vote":null,"verdict":"cold_war","err":null},{"c":"case_23","day":59,"vote":null,"verdict":"acquitted","err":null},{"c":"case_24","day":78,"vote":null,"verdict":"acquitted","err":null},{"c":"case_25","day":79,"vote":null,"verdict":"acquitted","err":null}]
+  regression: P1-streaks=0 P2-reactDry=2
+M1 (moot stall/fail): MISS
+L2' (verbatim repeat): GO (gap REAL)
+G1 (gossip state-truth): needs sense-read of transcripts — see evidence dir
