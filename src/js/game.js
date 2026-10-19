@@ -3545,6 +3545,56 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return true;
     },
 
+    // TRAP VOICE (sim-trapvoice-b 2026-10-19, backlog #641): the dawn-check
+    // narration reflects the scholar's snare_wire rank — a skilled trapper's
+    // check reads as noticing their own craft, never a stat readout.
+    // VOICE-ONLY, ZERO RNG: rank (+ wire-snare vs other recipe family) selects
+    // a deterministic line. No say() added or removed; same cadence.
+    // L0 keeps the flat line byte-identical (no craft to notice yet).
+    _trapSnareRank() {
+      return ((((this.state.codex || {}).skills || {}).snare_wire || {}).level || 0);
+    },
+    _trapCatchLine(recipe, dir, animalName, catchKcal) {
+      const rank = this._trapSnareRank();
+      let note = '';
+      if (rank === 1) {
+        // L1: "A loop of wire on a game trail. Simple, effective, ancient." —
+        // the catch validates the ancient form. Fits every trap recipe.
+        note = ' — set it, waited, and the old way worked.';
+      } else if (rank >= 2) {
+        // Wire-craft voice must not lie on a deadfall or fish weir: the
+        // snare_wire mechanical bonus applies to ALL traps, but wire-specific
+        // craft notes only fit wire snares. Deterministic, no RNG.
+        const wire = recipe.id === 'snare' || recipe.id === 'spring_snare';
+        if (rank === 2) {
+          // L2: "Set the loop at head height... Anchor it solid. Camouflage
+          // the wire." — the trapper notices the SET.
+          note = wire
+            ? ' — head-high on the trail, anchored solid, wire near-invisible.'
+            : ' — read the sign first, set it where the trail says.';
+        } else {
+          // L3: "You read trails like a book and set snares like punctuation.
+          // Your traps rarely sit empty." — the codex's own promise, fired
+          // only at the moment it is demonstrated (a catch); never a promise
+          // of future catches. The mechanic (0.95 with eligible unshy game)
+          // backs the pattern. L3 is currently unreachable in play; the line
+          // stands ready and honest if it ever is.
+          note = wire
+            ? ' — read the trail like a book, set the snare like punctuation. They rarely sit empty.'
+            : ' — read the ground like a book; the trap was punctuation. They rarely sit empty.';
+        }
+      }
+      return `🪤 TRAP: Your ${recipe.name} ${dir} caught a ${animalName}!${note} About ${catchKcal} kcal on the bone — clean it quickly (knife). It rots fast.`;
+    },
+    _trapQuietLine(recipe, dir) {
+      // L0/L1 keep the flat line — the "Try another tile" nudge is still
+      // useful early (knowledge-gating: help fades as craft grows).
+      if (this._trapSnareRank() >= 2) {
+        return `Your ${recipe.name} ${dir} sits empty. You read the ground on the way in — no sign, no promise.`;
+      }
+      return `Your ${recipe.name} ${dir} sits empty — nothing it can catch is moving on this ground. Try another tile.`;
+    },
+
     // CHECK TRAPS: at day start, EVERY set trap may have caught something —
     // wherever it is. A trapline works while you sleep elsewhere; the dawn
     // message says where, so the catch never arrives silently.
@@ -3620,7 +3670,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // honest quiet: said once per trap, not every dawn.
             if (!trap.quietTold) {
               trap.quietTold = true;
-              this.say(`Your ${recipe.name} ${dirPhrase(x, y)} sits empty — nothing it can catch is moving on this ground. Try another tile.`);
+              this.say(this._trapQuietLine(recipe, dirPhrase(x, y)));
             }
             continue;
           }
@@ -3665,7 +3715,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // mid-dawn-log (~8 messages) — on mobile one-screen that's dinner
             // vs rot. The 🪤 TRAP: prefix makes the catch visually scannable
             // even mid-list; the rot warning is explicit, not implied.
-            this.say(`🪤 TRAP: Your ${recipe.name} ${dirPhrase(x, y)} caught a ${animal.name}! About ${catchKcal} kcal on the bone — clean it quickly (knife). It rots fast.`);
+            this.say(this._trapCatchLine(recipe, dirPhrase(x, y), animal.name, catchKcal));
             // ITEM AUDIO (Steve 2026-10-12): trap sprung — placeholder.
             try { this.audioEvent('trapSpring', {}); } catch (e) {}
             // TRAP LEARNABILITY (pacing build 2026-10-10, Steve: "Continue all
