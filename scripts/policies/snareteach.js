@@ -37,6 +37,18 @@ function on() { return process.env.SNARETEACH === '1'; }
 const TRUST_GATE = 15;
 const GIFT_UNDER = 20;
 
+// THE GIFT BAR (landed 2026-10-19, sim-snareteach-gift-b2; backlog #632):
+// the teach-drive's gift fired 0/8 pilot runs under the old bar (scholar
+// kcal > 55% cap + 2+ edible stacks) — dead code; the sitting alone moved
+// the metric. The landed bar: kcal > 40% cap + 1+ edible stack. The "never
+// the last meal" protection moved from the stack COUNT to the KCAL FLOOR:
+// at >40% the scholar is clearly fed, and the live path's handoff is a
+// meal (carexplore.js giveFood(vid) defaults to 'meal' = up to 3 units,
+// substance-scaled trust). Starvation stayed 0 vs 0 control on the
+// measuring seeds. Sitting teach-drive unchanged.
+const GIFT_KCAL_FRAC = 0.40;
+const GIFT_EDIBLES = 1;
+
 function snareLevel(Game) {
   try { return (((Game.state.codex || {}).recipes || {}).snare || {}).level || 0; }
   catch (e) { return 0; }
@@ -79,12 +91,12 @@ function canAffordGift(Game) {
   try {
     const s = Game.state.scholar;
     if (!s || Game.over) return false;
-    if ((s.kcal || 0) < Game.kcalCap() * 0.55) return false;
+    if ((s.kcal || 0) < Game.kcalCap() * GIFT_KCAL_FRAC) return false;
     let edibles = 0;
     for (const i of (s.inventory || [])) {
       if ((i.kcalEach || 0) > 0 && (i.units || 0) > 0 && !i.bonded &&
           !(Game.isSpoiled && Game.isSpoiled(i))) edibles++;
-      if (edibles >= 2) return true;
+      if (edibles >= GIFT_EDIBLES) return true;
     }
     return false;
   } catch (e) { return false; }
