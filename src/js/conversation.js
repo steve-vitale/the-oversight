@@ -3141,6 +3141,48 @@
       return false;
     },
 
+    // convoGossipBeat: one gossip beat from the gossip engine, captured
+    // into a speakable line. Shared by the ask:gossip topic and by thread
+    // resumptions/follow-ups (convoThreadBeat). Returns the raw line (may be
+    // '' when the engine said nothing); the caller voices. The gossip engine
+    // always speaks at least its honest dry admission ("Quiet lately. Too
+    // quiet, maybe."), so a resume beat is never a lie.
+    convoGossipBeat(vid) {
+      // THE SOCIALITE'S VERB: "heard anything about anyone?" The gossip
+      // engine lives in askAbout (game.js) and says its beats directly —
+      // capture them so the conversation flow can display the line.
+      // (askedTopics already gates this to once per conversation.)
+      const said = [];
+      const origSay = this.say;
+      this.say = (t) => { said.push(String(t)); };
+      try { this.askAbout(vid, 'gossip', { inConvo: true }); } catch (e) {}
+      this.say = origSay;
+      // QUOTE HYGIENE (fix 2026-10-07): askAbout formats beats as
+      // `Name: "line"` (or `Name lowers their voice. "..."`) for the
+      // person-card path (app.js), which renders them raw. This path
+      // re-wraps via voiceLine/sayLine, which adds the name itself — strip
+      // the attribution so it doesn't double
+      // (`Jamal: "Jamal: "Nothing new.""`). Journal toasts (📓) and doubt
+      // beats (❓, e.g. checkGossipClaim's identity-doubt narration) captured
+      // mid-ask are re-emitted outside the spoken line so they don't
+      // pollute it. Socialite playtest 2026-10-07. (Journey landing r9
+      // 2026-10-13: the ❓ beats used to leak INTO the spoken line — the
+      // NPC would "say" the player's own doubt narration.)
+      let line;
+      try {
+        const asides = said.filter(t => /^\s*(📓|❓)/.test(t));
+        const beats = said.filter(t => !/^\s*(📓|❓)/.test(t));
+        for (const a of asides) { try { this.say(a); } catch (e) {} }
+        line = beats.join(' ');
+        const nm = String(this.displayName(vid) || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        if (nm) {
+          line = line.replace(new RegExp('^' + nm + ':\\s*'), '')
+                     .replace(new RegExp('^' + nm + '\\s+lowers their voice\\.\\s*'), '');
+        }
+      } catch (e) { line = said.join(' '); }
+      return line;
+    },
+
     convoThreadBeat(vid) {
       // The next beat in the current thread, or null when it's honestly done.
       const c = this.convoGet(vid);
@@ -3170,6 +3212,16 @@
             l = w.def.engageBeat.call(this, vid);
           }
         } catch (e) { l = null; }
+      }
+      // GOSSIP THREAD (journey-social r28 2026-10-19): resuming an open
+      // gossip thread (or a follow-up on it) must deliver the gossip
+      // engine's next beat — the old fall-through returned null and the
+      // resume stalled: generic echo, then winddown with no content
+      // (transcript-verified r27, Christian d34). The engine honestly
+      // declines when the pool is dry ("Quiet lately. Too quiet, maybe."),
+      // so the beat is content, never a lie.
+      else if (t === 'gossip') {
+        l = this.voiceLine(vid, this.convoGossipBeat(vid)) || null;
       }
       // TOPIC PACK (Steve 2026-10-06): generated topic beats.
       else if (this.topic2Has && this.topic2Has(t)) l = this.topic2Beat(vid);
@@ -3331,38 +3383,11 @@
       }
       if (topic === 'gossip') {
         // THE SOCIALITE'S VERB: "heard anything about anyone?" The gossip
-        // engine lives in askAbout (game.js) and says its beats directly —
-        // capture them so the conversation flow can display the line.
-        // (askedTopics already gates this to once per conversation.)
-        const said = [];
-        const origSay = this.say;
-        this.say = (t) => { said.push(String(t)); };
-        try { this.askAbout(vid, 'gossip', { inConvo: true }); } catch (e) {}
-        this.say = origSay;
+        // engine lives in askAbout (game.js); convoGossipBeat captures its
+        // beats into a speakable line. (askedTopics already gates this to
+        // once per conversation.)
+        const line = this.convoGossipBeat(vid);
         c.thread = 'gossip'; c.depth = 1;
-        // QUOTE HYGIENE (fix 2026-10-07): askAbout formats beats as
-        // `Name: "line"` (or `Name lowers their voice. "..."`) for the
-        // person-card path (app.js), which renders them raw. This path
-        // re-wraps via voiceLine/sayLine, which adds the name itself — strip
-        // the attribution so it doesn't double
-        // (`Jamal: "Jamal: "Nothing new.""`). Journal toasts (📓) and doubt
-        // beats (❓, e.g. checkGossipClaim's identity-doubt narration) captured
-        // mid-ask are re-emitted outside the spoken line so they don't
-        // pollute it. Socialite playtest 2026-10-07. (Journey landing r9
-        // 2026-10-13: the ❓ beats used to leak INTO the spoken line — the
-        // NPC would "say" the player's own doubt narration.)
-        let line;
-        try {
-          const asides = said.filter(t => /^\s*(📓|❓)/.test(t));
-          const beats = said.filter(t => !/^\s*(📓|❓)/.test(t));
-          for (const a of asides) { try { this.say(a); } catch (e) {} }
-          line = beats.join(' ');
-          const nm = String(this.displayName(vid) || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          if (nm) {
-            line = line.replace(new RegExp('^' + nm + ':\\s*'), '')
-                       .replace(new RegExp('^' + nm + '\\s+lowers their voice\\.\\s*'), '');
-          }
-        } catch (e) { line = said.join(' '); }
         return this.voiceLine(vid, line) || exh();
       }
       if (topic === 'spread_rumor') {
