@@ -40,7 +40,9 @@
     if (f < 0.5) return { name: 'light', frac: f, moveMult: 1, workAdd: 0, dodgePen: 0, speedPen: 0 };
     if (f < 0.75) return { name: 'laden', frac: f, moveMult: 1.25, workAdd: 15, dodgePen: 0.03, speedPen: 0 };
     if (f < 0.95) return { name: 'heavy', frac: f, moveMult: 1.6, workAdd: 35, dodgePen: 0.08, speedPen: 1 };
-    return { name: 'straining', frac: f, moveMult: 2.0, workAdd: 60, dodgePen: 0.15, speedPen: 2 };
+    if (f <= 1) return { name: 'straining', frac: f, moveMult: 2.0, workAdd: 60, dodgePen: 0.15, speedPen: 2 };
+    const extra = Math.min(1, f - 1);
+    return { name: 'overloaded', frac: f, moveMult: 2 + 2 * extra, workAdd: 60 + 120 * extra, dodgePen: 0.15 + 0.1 * extra, speedPen: 2 + Math.floor(2 * extra) };
   }
 
   function dailyNeed(scholar) {

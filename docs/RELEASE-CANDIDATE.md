@@ -10,7 +10,12 @@ The live game is https://the-oversight.vercel.app, production commit
 with the phone/combat/Continue lane. Live HTTPS metadata and both hosted phone
 replays match the combined source. See release-main67-audit-r1.md in dated evidence.
 
-The next candidate is shared on codex/phone-preview. Read build-source.json at
+The next candidate is shared on codex/phone-preview. The current continuation
+also includes the terrain/deer/dialogue/speech and body/overburden repairs;
+body-carry-audit-r1.md records full1031/0 and112 actual native phone stages.
+The four-profile matched16 screen remains review_required with all23 metrics;
+SURVIVAL-LEVERS records costs and watches. This is a development candidate,
+not a claim that public launch or physical devices are cleared. Read build-source.json at
 the exact reviewed commit for its source identity and input hashes. It includes
 the bounded phone ending, native death/succession and played Table success and
 failed-door fallback proofs; release-ending-audit-r1.md records 1029 full and

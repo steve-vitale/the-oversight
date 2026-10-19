@@ -33,39 +33,9 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 
-// ---- seeded RNG BEFORE eval ----
-function mulberry32(a) {
-  return function () {
-    a |= 0; a = a + 0x6D2B79F5 | 0;
-    var t = Math.imul(a ^ a >>> 15, 1 | a);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
-}
-const SEED = parseInt(process.env.SEED || '11', 10);
-Math.random = mulberry32(SEED);
+(async () => {
+const { Game } = await require('./sim-harness').loadGame({seed: parseInt(process.env.SEED || '11', 10), mode: 'release-regression'});
 
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global; // equipment.js needs window at LOAD; deleted before play
-[
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/forage.js',
-  'src/js/engine/combat.js', 'src/js/engine/day.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
-  'src/js/broadcast.js', 'src/js/contestEngine.js', 'src/js/alienPlayers.js',
-  'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
-  'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js', 'src/js/corpses.js',
-  'src/js/corruption.js', 'src/js/lifeseed.js', 'src/js/progression.js',
-  'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
-  'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js', 'src/js/membership.js',
-  'src/js/hierarchy.js', 'src/js/debug-scenarios.js', 'src/js/build.js',
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-delete global.window; // sync combat path, per harness lessons
-const Game = globalThis.Scattering.Game;
 
 const says = [];
 const osay = Game.say.bind(Game);
@@ -88,7 +58,7 @@ function pantryHas(nameRe) {
 }
 
 (async () => {
-  await Game.init();
+
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   try { Game.depart(); } catch (e) {}
@@ -227,3 +197,5 @@ function pantryHas(nameRe) {
   console.log(failures === 0 ? '\nALL PASS' : `\n${failures} FAILURES`);
   process.exit(failures === 0 ? 0 : 1);
 })().catch(e => { console.error('HARNESS ERROR', e); process.exit(2); });
+
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

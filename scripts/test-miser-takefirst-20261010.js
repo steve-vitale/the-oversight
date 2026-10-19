@@ -220,7 +220,7 @@ freshGame();
 {
   const st = Game.stashState();
   st.materials.branch = 10;
-  Game.addMaterial('stone', 52); // 15.6kg + 2kg water = 17.6 of 20kg: fits 4 of 5 branches
+  Game.state.scholar.inventory.push({name:'Hard-limit ballast', units:1, kg:Game.carryLimit()-4.4}); // 15.6kg + 2kg water = 17.6 of 20kg: fits 4 of 5 branches
   const t0 = trustOf();
   Game.takeMaterial('branch', 5);
   const got = Game.materialCount('branch');

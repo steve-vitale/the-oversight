@@ -107,8 +107,16 @@
 
   // voiceCleanText: what the TTS engine may hear. Emoji and markdown never
   // reach the voice; beats are already short, but cap defensively.
-  function voiceCleanText(text) {
+  function voiceCleanText(text, speechOnly) {
     var t = String(text == null ? '' : text);
+    // Transcript beats mix spoken quotes with gestures, sights and sounds.
+    // Both Piper and the device fallback receive only complete speech spans.
+    if (speechOnly) {
+      var spans = [], quote;
+      var quoted = /"([^"]+)"|“([^”]+)”/g;
+      while ((quote = quoted.exec(t))) spans.push(quote[1] || quote[2]);
+      t = spans.join(' ');
+    }
     try { t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]/gu, ''); }
     catch (e) { t = t.replace(/[^\u0000-\uFFFF]/g, ''); }
     t = t.replace(/[*_~`#]/g, '').replace(/\s+/g, ' ').trim();
@@ -299,7 +307,7 @@
   // speaking-piper | speaking-fallback | error.
   function convoSpeakLine(vid, text, opts) {
     try {
-      var t = voiceCleanText(text);
+      var t = voiceCleanText(text, true);
       if (!t) return 'empty';
       if (!voiceEnabled()) return 'off';
       if (Game.audio && Game.audio.isMuted && Game.audio.isMuted()) return 'muted';

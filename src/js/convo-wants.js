@@ -1938,27 +1938,7 @@
       if (!rawBeat) return rawBeat;
       if (!playerSaid || !playerSaid.label) return rawBeat;
       if (playerSaid.isAnswer) return rawBeat;
-      const label = String(playerSaid.label).toLowerCase();
-      let ack = null;
-      if (/tell me more|go on|more/i.test(playerSaid.label)) {
-        return rawBeat;
-      }
-      if (playerSaid.topic) {
-        const topicAcks = [
-          '"Good question." ',
-          '"Huh. Let me think about that." ',
-          '"You want to know about that? Okay." ',
-        ];
-        ack = topicAcks[Math.floor(Math.random() * topicAcks.length)];
-      } else if (/you|your/i.test(label) && label.length < 60) {
-        ack = '"Me? Okay." ';
-      }
-      if (!ack) return rawBeat;
-      try {
-        return String(this.voiceLine ? this.voiceLine(vid, ack) : ack).replace(/\s+$/, '') + ' ' + rawBeat;
-      } catch (e) {
-        return String(ack).replace(/\s+$/, '') + ' ' + rawBeat;
-      }
+      return rawBeat;
     },
 
     // convoPlantSeed: record unfinished business for next conversation.
@@ -2087,7 +2067,7 @@
         const parts = choiceId.split(':');
         return { label: 'follow:' + parts[1], topic: parts[1], isAnswer: false };
       }
-      return { label: choiceId, isAnswer: false };
+      return { label: this.convoGet(vid).offeredReplies?.[choiceId] || choiceId, isAnswer: false };
     } catch (e) { return null; }
   };
 

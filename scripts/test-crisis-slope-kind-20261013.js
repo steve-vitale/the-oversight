@@ -21,40 +21,9 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || '20261013', 10);
 
-function mulberry32(a) {
-  return function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-Math.random = mulberry32(SEED); // seeded BEFORE eval
+(async () => {
+const { Game } = await require('./sim-harness').loadGame({seed: SEED, mode: 'release-regression'});
 
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-// Loader pattern from scripts/test-crisis-ration-famine-20261011.js.
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const order = [];
-for (const m of html.matchAll(/src="([^"?]+\.js)\?v=/g)) {
-  const f = m[1];
-  if (!/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(f)) order.push(f);
-}
-const loadFails = [];
-const gameIdx = order.indexOf('src/js/game.js');
-const evalFile = (f) => {
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { loadFails.push(f + ': ' + e.message); }
-};
-if (gameIdx >= 0) {
-  for (let i = 0; i < gameIdx; i++) evalFile(order[i]);
-  evalFile(order[gameIdx]);
-  global.Game = globalThis.Scattering.Game;
-  for (let i = gameIdx + 1; i < order.length; i++) evalFile(order[i]);
-} else { for (const f of order) evalFile(f); }
-if (loadFails.length) { console.log('LOAD FAILS:', loadFails); process.exit(2); }
-delete global.window; // sync combat path for any runtime checks
-const Game = global.Game;
 
 let pass = 0, fail = 0;
 function ok(cond, label) {
@@ -141,3 +110,5 @@ async function main() {
   process.exit(fail ? 1 : 0);
 }
 main().catch(e => { console.error('FATAL', e); process.exit(2); });
+
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

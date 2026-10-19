@@ -56,7 +56,7 @@ const K = require('./godpath/lib'), T = K.reporter('coalition-presentation');
   const previousActor = f.actingKey; f.actingKey = outer.key;
   T.ok('current ally gets the existing acting pulse during their turn', /class="[^"]*\bacting\b[^"]*" data-cx="23" data-cy="23"/.test(render(G._fullStatus.call(G))));
   f.actingKey = previousActor;
-  T.ok('outer-cell fighter is in the actual rendered cell', html.includes('data-cx="23" data-cy="23"><span class="vent" data-ent="ally:' + encodeURIComponent(outer.key)));
+  T.ok('outer-cell fighter is in the actual rendered cell', new RegExp('data-cx="23" data-cy="23"><span class="cell-ground" aria-hidden="true">[\\s\\S]*?</span><span class="vent" data-ent="ally:' + encodeURIComponent(outer.key)).test(html));
   outer.fled = true;
   const withoutFled = render(G._fullStatus.call(G));
   T.ok('actual renderer hides fled actor, rather than a stale world position', !withoutFled.includes('data-ent="ally:' + encodeURIComponent(outer.key) + '"'));

@@ -26,7 +26,7 @@ const od = gallowdeer.attacks.find(a => a.name === 'Ocular Discharge');
 
 // T1: the beam is cycled, not flat per-round. (RED on the combat-lever premise:
 // if Ocular Discharge were really 20-30/round, pattern would have no cycle.)
-ok('T1 beam has windup', (od.pattern.windup || 0) >= 2, JSON.stringify(od.pattern));
+ok('T1 deer aims for one response round before its harmless ignition beat (Steve 2026-10-19)', od.pattern.windup === 1, JSON.stringify(od.pattern));
 ok('T1 beam has fireTurns', (od.pattern.fireTurns || 0) >= 1, JSON.stringify(od.pattern));
 ok('T1 beam has cooldownTurns', (od.pattern.cooldownTurns || 0) >= 1, JSON.stringify(od.pattern));
 ok('T1 beam is sweepable (dodgeable by movement)', od.pattern.sweep === true);

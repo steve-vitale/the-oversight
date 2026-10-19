@@ -132,7 +132,7 @@ Game.buryCache('material', 'wood', 8);
 const heavyId = Game.playerCaches()[0].id;
 ok('softlock: 8 wood buried', Game.playerCaches()[0].items[0].units === 8);
 // Fill the pack to ~19kg so the 16kg dig can't fit.
-Game.state.scholar.inventory.push({ name: 'Pack ballast', units: 1, kg: 13, kcalEach: 0 });
+Game.state.scholar.inventory.push({ name: 'Pack ballast', units: 1, kg: Game.carryLimit() - 7, kcalEach: 0 });
 said = [];
 Game.digUpCache(heavyId);
 ok('softlock: heavy dig refused, cache NOT destroyed', Game.playerCaches().length === 1 &&

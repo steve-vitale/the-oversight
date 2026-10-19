@@ -1,3 +1,16 @@
+2026-10-19 corpse/terrain/dialogue replay: use the shared
+`evidence/2026-10-19/run-release-contact2-browser-r1.cjs` runner against a
+disposable loopback origin at736 and844 heights with
+`body-carry-phone-replay-r1.js` and `deer-dialogue-mobile-replay-r1.js` in the
+same evidence directory. The former plays nearby Search, real item/water take,
+hard-limit refusal, Pack cost explanation, paid movement and Continue; the latter
+plays a real conversation and checks exact speech-only Piper input, plus prepared
+burned ground/Continue. Fixtures state their prepared inputs. Run the unchanged
+16-stage `evidence/2026-10-18/phone-frame-replay-r1.js` too; it covers actual
+Deer Wait/escape. Record current network inputs before updating the proof manifest.
+Full body/deer behavior guards are automatic quick tests under scripts/godpath.
+See body-carry-audit-r1.md and SURVIVAL-LEVERS for the2x pickup limit/food tax.
+
 Settings Done regression (2026-10-19): run
 `evidence/2026-10-19/release-settings-phone-replay-r1.js` through the existing
 `run-release-contact2-browser-r1.cjs` runner at both736/844 heights on a

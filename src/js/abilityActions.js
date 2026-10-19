@@ -982,7 +982,7 @@
       if (!c || c.buried) continue;
       var n = c.node || {};
       if (n.x !== px || n.y !== py) continue;
-      if (Math.max(Math.abs((c.mx || 4) - (s.mx || 4)), Math.abs((c.my || 0) - (s.my || 4))) > 1) continue;
+      if (Math.max(Math.abs((c.mx ?? 4) - (s.mx ?? 4)), Math.abs((c.my ?? 4) - (s.my ?? 4))) > 1) continue;
       return c;
     }
     return null;
@@ -1637,7 +1637,7 @@
       var inv = s.inventory || [];
       var carryKg = inv.reduce(function (t, it) { return t + (it.kg || 0) * (it.units || 1); }, 0);
       try { carryKg += game.waterWeight(); } catch (e) {}
-      var room = game.carryCapacity() - carryKg;
+      var room = game.carryLimit() - carryKg;
       var take = 0;
       var unitKg = item.kg || 0.1;
       var want = Math.min(item.units || 1, 2);

@@ -666,7 +666,10 @@
         if (typeof Game.convoSpeakLine !== 'function') return 'no-hook';
         var rec = this.apVoiceRecord(pid);
         if (!rec) return 'no-persona';
-        return Game.convoSpeakLine('ap:' + pid, text, { persona: rec });
+        // This API accepts a spoken persona line; its renderers add quotes.
+        // Supply those same quotes at the speech-only synthesis boundary.
+        var spoken = /["“]/.test(text) ? text : '"' + text + '"';
+        return Game.convoSpeakLine('ap:' + pid, spoken, { persona: rec });
       } catch (e) { return 'error'; }
     },
 

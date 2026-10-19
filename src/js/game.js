@@ -80,6 +80,8 @@
 //   - seedVillagerMaps() (every villager gets visitedTiles: haven + nearby)
 //   - compareMaps(vid) -> {newCount} (conversation action: merge their visited into your shared knowledge; records the sharing for the codex MAPS gate)
 //   - villageMapKnown() -> {"x,y":1} (codex MAPS: your seen tiles + visited tiles of villagers who actually shared via compareMaps; unshared seed tiles are never shown)
+//   - carryLimit() -> maximum effective carried kg (twice normal capacity)
+//   - burden() -> current movement/work/combat load penalties
 //   - walkCost(n) -> kcal (the one honest price of a committed n-square walk: quoted by the "Walk here" button AND equal to the sum of the per-step charges pathStep levies as squares land; applies travel.cost_mult)
 //   - walkStepKcal() -> kcal (the honest price of ONE square of walking; microMove and pathStep both levy exactly this — one square, one price, whichever verb walks it)
 // rules:
@@ -12960,12 +12962,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // cost 5x via the button, a noob trap on the accessibility tap-to-move
     // path. One square, one price.)
     walkStepKcal() {
-      let cost = 2;
+      let cost = 2 * this.burden().moveMult;
       try {
         const mult = this.modTarget('travel.cost_mult', 1);
         if (mult !== 1) cost = Math.max(1, Math.round(cost * mult));
       } catch (e) {}
-      return cost;
+      return Math.max(1, Math.round(cost));
     },
 
     // walkCost(n): the honest price of a committed n-square walk — quoted by
@@ -13238,9 +13240,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Clamp to what fits; callers name the actual take from the return.
       let room = liters;
       try {
-        const cap = this.carryCapacity ? this.carryCapacity() : 99;
+        const cap = this.carryLimit();
         const wt = this.packWeight ? this.packWeight() : 0;
-        room = Math.max(0, Math.min(liters, Math.floor(cap - wt)));
+        room = Math.max(0, Math.min(liters, Math.floor((cap - wt) / this.modTarget('carry.weight_mult', 1))));
       } catch (e) { room = liters; }
       for (let i = 0; i < room; i++) s.water.push({ liters: 1, quality, source });
       return room;
@@ -14259,7 +14261,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     // waterWeight: 1L = 1kg. Counts toward carry limit.
     waterWeight() {
-      return (this.state.scholar.water || []).length; // 1 bottle = 1L = 1kg
+      return (this.state.scholar.water || []).reduce((kg, b) => kg + (b.liters ?? 1), 0); // 1L = 1kg
     },
     // pourWater: pour out 1L. Water is heavy, and sometimes you carried too
     // much — or the risky stuff isn't worth the weight. Risky goes first
@@ -14923,10 +14925,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // inventory/water as it goes, so rescanning mid-loop double-counts what
       // was already taken (this call) — silently blocking water after food, or
       // short-changing later food items. totalKg tracks only what THIS pack adds.
-      const baseKg = (this.state.scholar.inventory || []).reduce((t, i) => t + (i.kg || 0) * (i.units || 1), 0);
-      const baseWaterKg = this.waterWeight();
-      const max = this.carryCapacity();
-      const carryNow = () => baseKg + baseWaterKg + totalKg;
+      const baseKg = this.packWeight();
+      const carryMult = this.modTarget('carry.weight_mult', 1);
+      const max = this.carryLimit();
+      const carryNow = () => baseKg + totalKg * carryMult;
       // INDEX STABILITY: fully taking an item splices it out of the pantry,
       // which would shift the indexes of items handled later in the same pack.
       // Handle food indexes in DESCENDING order (water last) so splices never
@@ -14942,7 +14944,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const q = Math.min(qty, (v.water && v.water.clean) || 0);
           if (q <= 0) continue;
           const carry = carryNow();
-          const canTake = Math.min(q, Math.floor(max - carry)); // 1L = 1kg
+          const canTake = Math.min(q, Math.floor((max - carry) / carryMult)); // 1L = 1kg
           if (canTake <= 0) { this.say('Too heavy for more water.'); continue; }
           v.water.clean -= canTake;
           this.addWater(canTake, 'clean', 'Haven well');
@@ -14956,7 +14958,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const item = pantry[idx];
         // weight check per item (running total)
         const carry = carryNow();
-        const canTake = Math.min(q, Math.floor((max - carry) / (item.kg || 0.1)));
+        const canTake = Math.min(q, Math.floor((max - carry) / ((item.kg || 0.1) * carryMult)));
         if (canTake <= 0) { this.say(`Too heavy for more ${item.name}.`); continue; }
         item.units -= canTake;
         if (item.units <= 0) pantry.splice(pantry.indexOf(item), 1);
@@ -15070,8 +15072,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (item.units <= 0) return null;
       // weight check (includes water: 1L = 1kg)
       const carry = (this.state.scholar.inventory || []).reduce((t, i) => t + (i.kg || 0) * (i.units || 1), 0) + this.waterWeight();
-      const max = this.carryCapacity();
-      if (carry + (item.kg || 0) > max) {
+      const max = this.carryLimit();
+      if (!this.canCarry(item.kg ?? 0.1)) {
         this.say(`Too heavy. Carrying ${carry.toFixed(1)}/${max} kg.`);
         return null;
       }
@@ -18282,6 +18284,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       n = Math.max(0, Math.round(n || 1));
       if (!n) return undefined;
+      // Carrying a heavy load makes active time costly. Rest, sleep and
+      // movement have their own accounting and must not pay twice.
+      if (!this._sleeping && !(opts && (opts.resting || opts.moving))) {
+        const effort = Math.ceil(this.burden().workAdd * n / this.TIME.TICKS_PER_BATCH);
+        s.kcal = Math.max(0, (s.kcal || 0) - effort);
+      }
       if (!(opts && (opts.foraging || opts.moving)) && S.buildarounds) S.buildarounds.onForage(this, false);
       // GLASSWING TRAP: shadow grows on ANY action, not just movement
       if (s.gwTrap) this.gwTrapTick();
@@ -19864,10 +19872,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     cellActions(cx, cy) {
       const detail = this.genDetail(this.map.px, this.map.py);
       const cell = detail[cy] && detail[cy][cx];
-      if (!cell) return [];
+      const actions = [];
+      const body = (this.corpseAt ? this.corpseAt(cx, cy) : []).find(c => (c.items || []).some(i => (i.units ?? 1) > 0));
+      if (body && this._corpseCheckRange(body, true)) actions.push(body.ash ? 'Sift the ashes' : 'Search the body');
+      if (!cell) return actions;
       const t = this.playerTile();
       const sec = (t.secrets || {})[cx + ',' + cy];
-      const actions = [];
       // monster here? decision.
       const mon = this.playerMonster();
       if (mon && mon.mx === cx && mon.my === cy) actions.push('Fight');
@@ -24780,12 +24790,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     packCapacity() { return this.carryCapacity(); },
     packWeight() {
       // hollow_bones: birdlike bones — you weigh 30% less for carry calculations.
-      const raw = this.state.scholar.inventory.reduce((t, i) => t + (i.units * (i.kg || 0.1)), 0);
+      const raw = this.state.scholar.inventory.reduce((t, i) => t + ((i.units ?? 1) * (i.kg ?? 0.1)), 0);
       // water has mass: 1L = 1kg. it counts.
-      const waterKg = (this.state.scholar.water || []).reduce((t, b) => t + (b.liters || 1), 0);
+      const waterKg = (this.state.scholar.water || []).reduce((t, b) => t + (b.liters ?? 1), 0);
       return (raw + waterKg) * this.modTarget('carry.weight_mult', 1);
     },
-    canCarry(kg) { return this.packWeight() + kg <= this.packCapacity(); },
+    // Normal capacity is comfortable load; twice that is the absolute limit.
+    carryLimit() { return this.packCapacity() * 2; },
+    burden() { return S.calories.burdenTier(this.packWeight(), this.packCapacity()); },
+    canCarry(kg) {
+      return Number.isFinite(kg) && kg >= 0 && this.packWeight() + kg * this.modTarget('carry.weight_mult', 1) <= this.carryLimit() + 1e-9;
+    },
 
     // --- actions: each one consumes the day-part and advances time ---
     // bumpPlantFamiliarity: handling a plant builds RECOGNITION, never naming.
@@ -25344,7 +25359,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.checkQuest(kind);
         this.maybeOfferQuest();
         try { this.villagerTurn(); } catch (e) {}
-        const wr = this.tickAction(wticks);
+        const wr = this.tickAction(wticks, { resting: true });
         if (!this.tbfight && !this.pendingEncounter && !this.over)
           this.say('You wait. The light changes. Nothing asks anything of you.');
         return wr || this.status();
@@ -25380,7 +25395,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // EVERYONE ACTS (Steve 2026-10-07): your action is your turn —
       // each NPC on this node then takes one action, in roster order.
       try { this.villagerTurn(); } catch (e) {}
-      return this.tickAction(ticks, { foraging: kind === 'forage' }) || this.status();
+      return this.tickAction(ticks, { foraging: kind === 'forage', resting: kind === 'rest' }) || this.status();
     },
 
     checkQuest(kind) {
@@ -32134,7 +32149,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!f) return null;
       for (const m of f.fighters) {
         if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || !m.telegraph) continue;
-        if (!this.encUsesFifo(m)) continue;
+        if (!this.encUsesFifo(m) || m.telegraph.pattern?.type !== 'beam') continue;
         return m.mx + ',' + m.my;
       }
       return null;
@@ -38048,6 +38063,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return true;
     },
     tbChooseMove(m, foe) {
+      // A lane decision belongs to this selection, never a later charge.
+      m._repositionForLane = false;
       const kit = this.tbMoveKit(m);
       if (!kit.length) { m.moveAtk = null; m.moveOdds = []; return null; }
       // tick down per-move cooldowns
@@ -38066,7 +38083,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try {
             const S = globalThis.Scattering || {};
             if (!S.combat || !S.combat.patternCells) return false;
-            let cells = this.tbPatternCells(m, pat, fx.mx, fx.my);
+            let cells = pat.type === 'beam' && pat.sweep
+              ? this.tbBeamCells(m.mx, m.my, fx.mx, fx.my).cells
+              : this.tbPatternCells(m, pat, fx.mx, fx.my);
+            // A wall beyond the target does not hide that target.
+            if (pat.type === 'beam' && pat.sweep) return !cells.some(c => c.cx === fx.mx && c.cy === fx.my);
             const detail = this.genDetail(this.map.px, this.map.py);
             for (const c of cells) {
               const cell = detail[c.cy] && detail[c.cy][c.cx];
@@ -38079,9 +38100,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // If some moves have clear lanes, prefer them. If ALL are blocked,
         // the monster will reposition (handled by the tactic below).
         if (unblocked.length) legal = unblocked;
-        else {
-          // All beam/line moves blocked: trigger reposition instead of attack.
-          // Set a flag that tbMonsterTurn checks to move the monster.
+        else if (legal.length && legal.every(a => a.pattern && (a.pattern.type === 'beam' || a.pattern.type === 'line'))) {
+          // Only genuinely blocked ranged moves reposition. No legal move
+          // (for example, a close-range breather) is not a blocked beam.
           m._repositionForLane = true;
         }
       }
@@ -38363,30 +38384,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // data-driven pre-turn hooks. Migrated species run their verbatim-extracted logic from the registry.
       // mbRunPreTurn returns true if a hook consumed the turn.
       if (this.mbRunPreTurn && this.mbRunPreTurn(m)) return;
-      // BLOCKED-LANE REPOSITION (matrix r2 2026-10-12): if tbChooseMove flagged
-      // that all beam/line lanes are blocked, step to an adjacent tile instead
-      // of firing into trees. One step toward the player; the lane check runs
-      // again next turn.
-      if (m._repositionForLane) {
-        m._repositionForLane = false;
-        try {
-          const p = this.tbFighter('p');
-          if (p && p.alive) {
-            const dx = Math.sign(p.mx - m.mx), dy = Math.sign(p.my - m.my);
-            const edge = m.battleSize ? this.tbGridMax() : 8;
-            const nx = Math.max(0, Math.min(edge, m.mx + dx));
-            const ny = Math.max(0, Math.min(edge, m.my + dy));
-            const detail = this.genDetail(this.map.px, this.map.py);
-            const cell = detail[ny] && detail[ny][nx];
-            if ((nx !== m.mx || ny !== m.my) && (m.battleSize ? this.tbCanOccupy(m,nx,ny) : !(cell && this.cellProps(cell).blocks))) {
-              m.mx = nx; m.my = ny;
-              this.say(`${this.encSubject(m)} shifts, seeking a clear lane.`);
-            }
-          }
-        } catch (e) {}
-        if (this.tbEndCheck()) return;
-        return;
-      }
       // HIGHBEAM (Steve 2026-10-05; hook-migrated 2026-10-07): the antler
       // thrash runs exactly once via the preTurnHooks dispatch above
       // (monsterBehaviors.js) — the inline branch here double-fired it.
@@ -39112,6 +39109,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // every turn. Sets m.moveAtk/m.moveOdds; every declare below reads
       // encAtk. (Pending telegraphs returned above — never double-choose.)
       const atk = this.tbChooseMove(m, foe);
+      // BLOCKED-LANE REPOSITION (matrix r2 2026-10-12): if tbChooseMove flagged
+      // that all beam/line lanes are blocked, step to an adjacent tile instead
+      // of firing into trees. One step toward the player; the lane check runs
+      // again next turn.
+      if (m._repositionForLane) {
+        m._repositionForLane = false;
+        try {
+          const p = this.tbFighter('p');
+          if (p && p.alive) {
+            const dx = Math.sign(p.mx - m.mx), dy = Math.sign(p.my - m.my);
+            const edge = m.battleSize ? this.tbGridMax() : 8;
+            const nx = Math.max(0, Math.min(edge, m.mx + dx));
+            const ny = Math.max(0, Math.min(edge, m.my + dy));
+            const detail = this.genDetail(this.map.px, this.map.py);
+            const cell = detail[ny] && detail[ny][nx];
+            if ((nx !== m.mx || ny !== m.my) && (m.battleSize ? this.tbCanOccupy(m,nx,ny) : !(cell && this.cellProps(cell).blocks))) {
+              m.mx = nx; m.my = ny;
+              this.say(`${this.encSubject(m)} shifts, seeking a clear lane.`);
+            }
+          }
+        } catch (e) {}
+        if (this.tbEndCheck()) return;
+        return;
+      }
       const pat = (atk && atk.pattern) || { type: 'burst', radius: 1 };
       // TRAMPLE (boar): a missed charge ends here — grinding hooves on
       // whatever is close. This is the price of the dodge.
@@ -43501,6 +43522,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         hungryDays: this.state.village.hungryDays || 0,
         packKg: Math.round(this.packWeight() * 10) / 10,
         packCap: this.packCapacity(),
+        packLimit: this.carryLimit(),
+        burden: this.burden(),
         // DISEASE (Steve 2026-10-09): symptom-labeled until diagnosed.
         afflictions: this.afflictionChips ? this.afflictionChips() : [],
         px: this.map.px, py: this.map.py,

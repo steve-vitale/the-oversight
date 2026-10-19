@@ -1,0 +1,27 @@
+"use strict";
+const K=require('./lib'),T=K.reporter('Body reach, successor property and overload');
+(async()=>{
+ const G=await K.load({seed:31,narration:true});K.newRun(G);G.map.px=3;G.map.py=4;G.playerTile().detail=Array.from({length:9},()=>Array(9).fill('grass'));
+ let s=G.state.scholar;s.mx=0;s.my=0;s.water=[];s.inventory=[];
+ const c=G.registerDeath({kind:'monster',monsterId:'hushwolf',name:'Wolf',mx:0,my:0,items:[{itemId:'stone_knife',name:'Edge knife',units:1,kg:0.3}]});
+ T.ok('standing on coordinate zero is in corpse reach',G._corpseCheckRange(c,true));
+ T.ok('adjacent body is a contextual action without a grid tap',G.cellActions(0,0).includes('Search the body'));
+ T.ok('per-item loot at zero transfers the actual item',!!G.corpseTakeItem(c.id,0)&&s.inventory.some(i=>i.name==='Edge knife'));
+ s.mx=1;s.my=0;T.ok('adjacent reach includes an edge corpse',G._corpseCheckRange(c,true));s.mx=2;T.ok('beyond adjacency is refused',!G._corpseCheckRange(c,true));
+ s.inventory=[{itemId:'fixture_load',name:'Declared load',units:1,kg:G.packCapacity()+1}];
+ T.ok('normal capacity is not a hard pickup cliff',G.canCarry(0.1));T.ok('absolute limit is twice normal capacity',G.carryLimit()===2*G.packCapacity()&&!G.canCarry(G.packCapacity()));
+ T.ok('overload is visible and costly',G.burden().name==='overloaded'&&G.burden().moveMult>2&&G.burden().workAdd>60);
+ const lightStep=2,heavyStep=G.walkStepKcal();T.ok('real walking quote includes burden',heavyStep>lightStep&&G.walkCost(3)===heavyStep*3);
+ s.kcal=2000;s.dayTicks=0;s.actionClock=0;let before=s.kcal;G.tickAction(2);T.ok('real active time burns overload effort',s.kcal<before);
+ before=s.kcal;G.tickAction(2,{resting:true});T.ok('rest is not taxed as hauling work',s.kcal===before);
+ s.inventory=[{name:'Legacy one-unit tool',kg:0.4}];s.water=[{liters:0}];T.ok('legacy missing units and empty bottles have honest finite mass',G.packWeight()===0.4);
+ K.newRun(G);s=G.state.scholar;const old=G.villagerId,successor=G.state.village.roster.find(id=>id!==old),person=G.getPerson(successor);person.items=['stone_knife'];person.equipped={};person.water=[];G.state.village.trust[successor]=100;
+ s.inventory=[{itemId:'phase_blade',name:'Only the old bearer carried this',units:1,kg:0.5},{plantId:'meat_hushwolf',foodKind:'meat',foodState:'cooked',name:'Old cooked meal',units:3,kg:0.2,kcalEach:321,spoilDay:99,edible:true}];s.equipped={};s.water=[{liters:3,quality:'clean',source:'old-bearer-only'}];G.playerDeath('prepared succession property check');
+ T.ok('actual succession chooses a different living bearer',G.villagerId!==old&&!G.over);
+ T.ok('old unique carried gear does not auto-transfer',!s.inventory.some(i=>i.name==='Only the old bearer carried this'));
+ T.ok('old carried water does not auto-transfer',!s.water.some(b=>b.source==='old-bearer-only'));
+ const body=G.corpses().find(c=>c.villagerId===old),food=body?.items.find(i=>i.name==='Old cooked meal'),water=body?.items.find(i=>i.water?.source==='old-bearer-only');
+ T.ok('the corpse keeps actual food identity, value, quantity and spoilage',food?.plantId==='meat_hushwolf'&&food.units===3&&food.kcalEach===321&&food.spoilDay===99);
+ T.ok('the corpse keeps the old water for deliberate recovery',water?.water.liters===3&&water.kg===3);
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1});

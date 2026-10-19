@@ -604,6 +604,8 @@
         const eq = EQ();
         const defs = this.data.items || [];
         const person = this.getPerson ? this.getPerson(newId) : null;
+        s.water = ((person && person.water) || []).map(bottle => ({ ...bottle }));
+        if (person) person.water = [];
         const ids = ((person && person.items) || []).map(it => (it && (it.itemId || it.id)) || it).filter(Boolean);
         const BODY = ['melee', 'ranged', 'head', 'torso', 'legs', 'hands', 'shoes'];
         const pool = ids.slice();

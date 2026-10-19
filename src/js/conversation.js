@@ -386,20 +386,9 @@
   // Acknowledgments are human filler, tracked no-repeat per villager via
   // convoPick, like every other react pool.
   const GQ_ACK = {
-    yes: ['\"Yeah. Thought so — and I\'m glad it\'s you saying it.\"',
-          '\"Knew it. You\'ve got good instincts for this stuff.\"',
-          '\"Good. Good to know I\'m not the only one seeing it.\"',
-          '\"Right. That\'s what I figured — which is why I asked you, not them.\"',
-          'They nod, satisfied — like a piece just clicked into place.'],
-    no: ['\"Hm. Fair. I had to check — you never know who\'s actually paying attention.\"',
-         '\"Okay. Worth asking. I\'d rather hear no than guess wrong.\"',
-         '\"Right. Noted — and I mean that, I\'m keeping track of who says what.\"',
-         '\"Yeah, figured. Had to ask. The asking matters, even when the answer\'s no.\"',
-         'They take that in, turning it over like a stone.'],
-    unsure: ['\"Nobody is, these days. We\'re all guessing — some of us just guess louder.\"',
-             '\"Fair enough. I\'d rather hear that than a confident lie.\"',
-             '\"Yeah. Me neither, some days. The days I do know, I worry I\'m wrong.\"',
-             '\"Honest. I\'ll take honest over certain every time.\"'],
+    yes: ['"Okay."', '"Thanks for telling me."', 'They nod. "Alright."'],
+    no: ['"Okay. Thanks for saying so."', '"Alright."', 'They nod. "I hear you."'],
+    unsure: ['"Fair enough."', '"It is alright not to know."', '"I am not sure either."'],
     howru_bad: ['"Yeah. Me too, if I\'m honest." A small, real smile.',
                 '"Thank you for saying it straight. Most people perform."',
                 '"Okay. That\'s allowed, you know. Sit a minute?"'],
@@ -427,14 +416,9 @@
   // "What do YOU think?" — they give a take. Short, portable across
   // questions, human. Tracked no-repeat per villager.
   const GQ_TAKES = [
-    '"Honestly? I think about it more than I say."',
-    '"I go back and forth. Ask me tomorrow, I\'ll say different."',
-    '"My take? We\'re not going to like the answer, whatever it is."',
-    '"I\'ve got theories. Most of them are just fear with better lighting."',
-    '"Short version: I don\'t know. Long version: also that, but slower."',
-    '"I think the asking matters more than the answer, out here."',
-    '"Everyone\'s got a take. Mine\'s just the one I can live with."',
-    '"You really want my take? ...Yeah. Okay. I think we\'re being tested."',
+    '"I was hoping you knew. I haven’t worked it out."',
+    '"I don’t have an answer yet."',
+    '"I’m still trying to make sense of it."',
   ];
   const GQ_FOLLOWUP = '"Sorry — I asked you something there."';
   const GQ_LAPSE = '"Forget it. Wasn\'t important."';
@@ -443,7 +427,10 @@
   // { kind, q } or null. kind: 'yn' | 'howru' | 'open'.
   function classifyQuestion(line) {
     if (!line || typeof line !== 'string') return null;
-    const t = String(line).replace(/^[\s"'“”‘’]+|[\s"'“”‘’.,;:—–-]+$/g, '');
+    // Gestures before a quote must not turn a yes/no question into an
+    // unrelated open question (and its generic 'What do you think?' menu).
+    const speech = [...line.matchAll(/"([^"]+)"|“([^”]+)”/g)].map(m => m[1] || m[2]).join(' ');
+    const t = String(speech || line).replace(/^[\s"'“”‘’]+|[\s"'“”‘’.,;:—–-]+$/g, '');
     // The direct question can sit mid-line ("Are you eating enough? You
     // look thin.") — take the first question sentence, not just a trailing one.
     const m = t.match(/([^.?!]*\?)/);
@@ -4051,7 +4038,11 @@
     // override chain and stay).
     buildMenu(vid, uncapped) {
       const c = this.convoGet(vid);
-      const finish=choices=>{const menu=this.finalizeMenu(vid,choices);return uncapped?menu:this.convoMenuPage(vid,menu);};
+      const finish=choices=>{const menu=this.finalizeMenu(vid,choices);
+        // Keep the exact offered words; handlers must not invent another
+        // question after the player has selected a reply.
+        c.offeredReplies = Object.fromEntries(menu.map(ch => [ch.id, ch.label]));
+        return uncapped?menu:this.convoMenuPage(vid,menu);};
       // STICKY OPENED-UP (trust r7 2026-10-12): once they've opened up about
       // their goal (goal thread, depth 2+), that's a relationship fact, not
       // menu flicker — persist it on the convo record (survives talkTo's
@@ -5125,7 +5116,8 @@
       const temp = this.npcTemper(vid);
       const mood = this.npcMood(vid);
       let line = null, youSaid = null;
-      const done = (l, you) => { line = l; youSaid = you || null; };
+      const offeredReply = c.offeredReplies?.[choiceId];
+      const done = (l, you) => { line = l; youSaid = you ? (offeredReply || you) : null; };
       // STRUCTURAL TURN (journey-social r17 2026-10-15): resume/recap beats
       // are conversation grammar, not content — exempt from the run-ledger
       // block (see sayLine's structural flag). Set by the branch before
@@ -5388,9 +5380,11 @@
           const resumeLine = beat || (predT
             ? `"About ${label} — that was ${predT}'s thread. We never did get back to that."`
             : `"About ${label} — yeah, we never did get back to that."`);
-          // R17: the generic fallback is structural grammar (exempt from the
-          // run-ledger block); a real beat keeps full ledger protection.
-          structuralTurn = !beat;
+          // The player explicitly requested this named thread again. Its
+          // answer may recap an earlier fact; the no-repeat flavor ledger
+          // must not replace that requested information with a dry apology.
+          // convoSpendChoice above still limits this resume to once per sitting.
+          structuralTurn = true;
           done(resumeLine,
             predT ? `"About ${label} — that was ${predT}'s thread. We never finished."` : `"About ${label} — we never finished."`);
         } else if (akind === 'memory') {

@@ -522,7 +522,7 @@
       // "a visual joke about priorities"): full row, thickest bar, always.
       chip('🍽', foodVal, st.kcal / cap * 100, st.kcal < 500, 'Food (you)' + (banked > 0 ? ' — banked war chest' : ''), null, 'statc-food') +
       chip('💧', st.hydration + '%' + (st.waterCleanL ? ' · ' + st.waterCleanL + 'L clean' : ''), st.hydration, st.hydration < 30, 'Hydration') +
-      chip('🎒', st.packKg + '/' + st.packCap + 'kg', st.packKg / st.packCap * 100, st.packKg >= st.packCap, 'Pack: ' + st.invKcal + ' kcal carried', 'pack') +
+      chip('🎒', st.packKg + '/' + st.packCap + 'kg', st.packKg / st.packCap * 100, st.packKg >= st.packCap, 'Pack: ' + st.invKcal + ' kcal carried · ' + (st.burden?.name || 'light') + ' · maximum ' + (st.packLimit ?? st.packCap) + 'kg · walking ×' + (st.burden?.moveMult || 1).toFixed(1), 'pack') +
       (sys ? chip('◈', st.integration + '%', st.integration, false, 'System integration', null, 'sys-ui') : '') +
       `</div>` + contestRow + beatsRowHTML() + afflictionRow(st);
   }
@@ -1171,6 +1171,11 @@
     const mon = (typeof Game.playerMonster === 'function') ? Game.playerMonster() : Game.state.scholar.monster;
     if (label === 'Fight' && mon && mon.mx === cx && mon.my === cy) { Game.startCombat(mon.id); return; }
     if (label === 'Hunt') { Game.huntAnimal(); return; }
+    if (label === 'Search the body' || label === 'Sift the ashes') {
+      const body = Game.corpseAt(cx, cy).find(c => (c.items || []).some(i => (i.units ?? 1) > 0));
+      if (body && Game._corpseCheckRange(body, true)) inlineView = { kind: 'loot', cid: body.id, mapKey: inlineMapKey() };
+      return;
+    }
     if (label === 'Stalk') { try { Game.audioEvent('animalStalk'); } catch (e) {} Game.stalkAnimal(); return; }
     if (label === 'Talk') { talkAction(); return; }
     if (extra && extra.blockX !== undefined) {
@@ -15277,6 +15282,7 @@
 
     slot.innerHTML = `<div class="inlinecard">
       ${inlineHead('\uD83C\uDF92 Pack (' + st.invCount + ' items)')}
+      <p class="small">${st.packKg}kg · ${esc(Game.burden().name)} · normal ${st.packCap}kg, maximum ${Game.carryLimit()}kg. Walking ×${Game.burden().moveMult.toFixed(1)}; active work burns extra food.</p>
       ${view.result ? `<p class="inline-result pack-feedback">${esc(view.result)}</p>` : ''}
       <div class="inline-body">${bodyHtml}</div>
     </div>`;
@@ -16933,8 +16939,8 @@
     const st = Game.status();
     const pantry = Game.state.village.pantry || [];
     const vWater = Game.state.village.water || { clean: 0, dirty: 0 };
-    const carry = st.carryKg;
-    const maxCarry = Game.carryCapacity();
+    const carry = st.packKg;
+    const maxCarry = Game.carryLimit();
     const waterRow = vWater.clean > 0 ? `<div class="card" style="margin:6px 0;padding:8px 10px;border-left:3px solid var(--sys-cyan)">
         <p class="small"><b>\uD83D\uDCA7 Water (clean)</b> \u00D7${vWater.clean} L<br>
         <span style="opacity:.7">0 kcal/L \u00B7 1 kg/L \u00B7 from the Haven well</span></p>
@@ -16952,7 +16958,7 @@
       if (fsn) fairShareHtml = `<p class="small" style="opacity:.65">Fair share is ~${fsn.perPerson} kcal/day each. The pantry holds ~${Game.pluralize(fsn.daysLeft, 'day')} at that pace. Take what you need — people notice what you take.</p>`;
     } catch (e) {}
     const bodyHtml = `
-      <p class="small">Choose what to pack. Carrying ${carry.toFixed(1)}/${maxCarry} kg — ${(() => { try { return Game.burden().name; } catch (e) { return 'light'; } })()}.</p>
+      <p class="small">Choose what to pack. Carrying ${carry.toFixed(1)}/${maxCarry} kg — ${Game.burden().name}. Normal load ${Game.carryCapacity()}kg; maximum ${maxCarry}kg. Heavy loads cost more food to move and work.</p>
       ${fairShareHtml}
       ${(() => { try {
         // FOOD REALITY: storage has real caps. Expand them with materials + labor.
@@ -18286,10 +18292,21 @@
         // always show — wreckage, paper, craters and scorched earth are
         // physically there. (The mechanical effect is learned by touch;
         // game.js narrates first contact.) GUARDED: if absent, nothing renders.
+        let groundTerrain = null;
         try {
-          const _terr = (typeof Game.tbTerrainAt === 'function') ? Game.tbTerrainAt(cx, cy) : null;
-          if (_terr) cls += ' terr-' + _terr;
+          groundTerrain = (typeof Game.tbTerrainAt === 'function') ? Game.tbTerrainAt(cx, cy) : null;
+          if (groundTerrain) cls += ' terr-' + groundTerrain;
         } catch (e) { /* no terrain layer */ }
+        // Ground and occupants are separate layers. Fire replaces vegetation
+        // on the board; it must not recolor the person standing above it.
+        const scorched = Game.cellScorched(cx, cy);
+        const ground = (scorched || groundTerrain === 'scorch')
+          ? ((cell === 'tree' || cell === 'bigtree')
+            ? '<svg class="burnt-stump" viewBox="0 0 32 32" aria-hidden="true"><path d="M15 28V7m0 11L8 12m7 2 7-9m-7 18 10-8" fill="none" stroke="#292321" stroke-width="4"/><path d="M9 29h15" stroke="#9c8c79" stroke-width="2"/></svg>'
+            : '<span class="ground-ash">· ╱ ·</span>')
+          : groundTerrain === 'trample' || groundTerrain === 'crater'
+            ? '<span class="ground-scar">≋</span>' : g;
+        g = '';
         // ENTITIES OVERLAY: player, monster, animal, villager — always visible,
         // never overwritten by the cell underneath. People are not grass.
         // (Player was skipped here and the cell glyph overwrote the sprite —
@@ -18675,7 +18692,7 @@
         const _isEdge = (cx === 0 || cx === 8 || cy === 0 || cy === 8);
         const _sealed = _inCombat && !!((Game.state || {}).arenaContest || ((Game.tbfight || {}).noFlee));
         const _barrierCls = (_sealed && _isEdge) ? ' barrierSealed' : '';
-        html += `<div class="${cls}${targetingCells().has(_k) ? ' targetable' : ''}${Game.cellScorched && Game.cellScorched(cx, cy) ? ' scorched' : ''}${_beamCls}${_srcCls}${_haloCls}${_tgCls}${_w2aCls}${_gwCls}${_cfCls}${_barrierCls}"${(_gwStyle || _cfStyle || _w2cStyle || _wbStyle) ? ` style="${[_gwStyle, _cfStyle, _w2cStyle, _wbStyle].filter(Boolean).join(';')}"` : ''} data-cx="${cx}" data-cy="${cy}">${g}</div>`;
+        html += `<div class="${cls}${targetingCells().has(_k) ? ' targetable' : ''}${scorched ? ' scorched' : ''}${_beamCls}${_srcCls}${_haloCls}${_tgCls}${_w2aCls}${_gwCls}${_cfCls}${_barrierCls}"${(_gwStyle || _cfStyle || _w2cStyle || _wbStyle) ? ` style="${[_gwStyle, _cfStyle, _w2cStyle, _wbStyle].filter(Boolean).join(';')}"` : ''} data-cx="${cx}" data-cy="${cy}"><span class="cell-ground" aria-hidden="true">${ground}</span>${g}</div>`;
       }
       html += '</div>';
     }

@@ -1,5 +1,74 @@
 # Survival levers and investigation register
 
+## Corpse recovery and explicit overburden (2026-10-19)
+
+Steve reports an unexpected pickup cliff and recalls carrying beyond normal
+load at a food cost. Implementation decision for playtest: allow deliberate
+pickup through2x normal capacity, not3x. Normal capacity remains the existing
+20kg plus strength/ability/item bonuses; carryLimit is twice that number.
+canCarry includes the actual body weight modifier. Pantry, counter, water,
+stash tools/materials/caches and corpse pickups use that limit. Missing legacy
+item units mean one; zero water volume contributes zero mass. This is a new
+explicit choice, not a claim that the earlier hard stop already allowed it.
+
+Previously defined burden movement/work prices were not wired. Walking now
+uses the tier's moveMult, still the same shared per-step/quoted path price.
+Active ticks charge ceil(workAdd*ticks/32) additional kcal; movement, rest,
+waiting and sleep avoid that work surcharge. Normal straining load retains
+2x movement and60 work kcal/32 active ticks. Above normal capacity the price
+rises continuously to4x movement and180 work kcal/32 ticks at2x capacity;
+dodge/initiative penalties also rise. The bearer can always shed weight or
+move out of an already-over-limit old save; the limit refuses added pickups.
+The Pack explains normal/max load and the actual multiplier.
+
+Coordinate zero no longer becomes4 in corpse looting, butchery or Grave Robber
+reach. Nearby body search is now an ordinary contextual action, including an
+empty ground cell. Non-sentimental food keeps its identity/calories/spoilage on
+the dead bearer. Water also stays on the corpse instead of following the office.
+The successor receives their own kit/water. Ordinary repeated item types in
+both people's personal kits are not evidence of auto-transfer; unique old gear
+is tested separately. Water recovery restores drinkable1L portions with the
+same source/quality and total mass.
+
+Final combined screen (same observer/controller, 16 paired Columbus seeds per
+capable/maker/merchant/caregiver, 150d) remains review_required. Wins are16→11,
+11→9,6→4,10→9. Capable Table access/class/earned gear/community/early survival,
+merchant early survival, and caregiver day60/deaths remain watches; maker also
+has Table/national/contest gear watches. All23 metrics and144 raw comparison/
+neutral jobs with266 normalized source blobs are retained in body-carry evidence.
+This does not isolate the burden effect from deer/dialogue changes or establish
+an effect size. Policies can now take heavier loads; their planning still uses
+normal capacity in several places, so adaptation and human playtest are follow-up
+investigation, not a reason to silently restore the old pickup cliff or soften
+combat. No other food/HP/reward tuning compensates for these changes.
+
+
+## Deer commitment and conversation correctness (2026-10-19)
+
+Steve reports excessive charging and movement while charging. Ocular Discharge
+now has one response round of aim, followed by the existing harmless ignition
+beat. Damage, sweep rate, six firing turns, two recovery turns, antler reach
+and HP stay fixed. Blocked-lane movement is consumed on selection, before a
+telegraph exists; a committed attack cannot carry it into the next turn.
+Vegetation no longer blocks this burn-through ray, and a wall beyond the
+intended target does not hide that target. Antler Sweep no longer shows the
+beam source glow. Existing committed saves retain their remaining countdown.
+
+These are exposure/cadence levers, not a win-rate target. Dialogue corrections
+also change RNG consumption and can alter policy trajectories: selected words
+persist, inferred generic acknowledgements are removed, and requested named
+thread resumes can repeat the requested information rather than a dry fallback.
+The matched16 screen is review_required. Wins: capable16→12, maker11→8,
+merchant6→10, caregiver10→7. Capable Table entry/gear/hydration/community and
+merchant early survival/death/contest gear watches remain. Higher merchant wins
+do not cancel those. No compensating food, HP or reward softening is applied.
+All23 metrics, raw136 comparison jobs plus8 neutral jobs, source blobs and
+feature census remain in deer-dialogue dated evidence. This screen cannot
+attribute changes to a single lever or establish natural pacifist viability.
+The invalid mutable-source first candidate panel is excluded; frozen roots
+and the same current observer are used for the retained comparison.
+
+
 ## Muse/main reconciliation decision (2026-10-19)
 
 Titan stand-down releases normalized mustered workers, preserves Haven-only

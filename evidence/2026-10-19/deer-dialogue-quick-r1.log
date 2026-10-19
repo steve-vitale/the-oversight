@@ -1,0 +1,80 @@
+check.js: 257 scripts, 8 parallel (quick)
+......................................................................F.................F..F.................F..............................................................F....F...............................................................................
+
+  FAIL scripts/godpath/test-main67-gossip-resume-beat.js (exit 1, 0.6s)
+      GOSSIP LINE: "People are saying A person, maybe 40s, with thick glasses has been generous. Sharing around, no questions asked."
+        FAIL: resume carries gossip content :: "...Sorry, lost my train of thought."
+        RESUME LINE: "...Sorry, lost my train of thought."
+        FOLLOWUP BEAT: "People are saying A person, maybe 40s, with thick glasses has been generous. Sharing around, no questions asked. Probably fine. Probably."
+        DRY BEAT: "Quiet lately. Too quiet, maybe."
+      
+      13 passed, 1 failed
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 0.4s)
+          at Object.validate (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\balance-proof-update.js:8:76)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.13.0
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 0.4s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 0.6s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — src/css/main.css,src/data/monsters.json,src/js/app.js,src/js/conversation.js,src/js/convo-dialogue.js,src/js/convo-wants.js,src/js/game.js,
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: src/css/main.css
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-monster-math-premise-20261013.js (exit 1, 1.5s)
+        PASS drumbelly_tanuki Trickster's Feint moving learns the actually resolved pattern
+        PASS actual tiger first-turn rush hits immediately without a pending warning
+        PASS instant rush is unavailable after the first selected turn
+        PASS tiger followup is the authored warned Rerun
+        PASS actual UI hides the unlearned melee cell
+        PASS actual UI shows the learned adjacent melee cell
+        PASS T2 every expanded missing-windup attack has actual runtime proof
+        PASS T3 wave-2 telegraphed share >= 70%
+        PASS T4 gallowdeer HP is [150,170] (benchmark, untouched)
+        PASS T5 antler-thrash Steve-design citation present
+      
+      81 passed, 1 failed
+
+  FAIL scripts/test-coalition-presentation-20261015.js (exit 1, 0.8s)
+        ok   current ally gets the existing acting pulse during their turn
+        FAIL outer-cell fighter is in the actual rendered cell
+        ok   actual renderer hides fled actor, rather than a stale world position
+        ok   actual renderer respects prepared nine-row geometry despite titan skin
+        ok   names cannot inject markup or accessible-label attributes
+        ok   recruited full name is available to assistive readers
+        ok   unintroduced local helper does not reveal their name
+        ok   current bearer does not also render at stale NPC world position
+        ok   world still renders the current bearer once
+      
+      coalition-presentation: 21 passed, 1 failed, 0 todo (phase 0)
+      failing: outer-cell fighter is in the actual rendered cell
+
+check.js: 251 passed, 6 failed in 42s

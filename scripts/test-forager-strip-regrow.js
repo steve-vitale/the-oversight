@@ -80,7 +80,8 @@ async function main() {
     }
     presses++;
     if (dTicks !== 16) { costOk = false; note = `press ${presses}: ticks +${dTicks} (want 16)`; }
-    if (dKcal !== -60) { costOk = false; note = `press ${presses}: kcal ${dKcal} (want -60)`; }
+    const expectedCost = 60 + Math.ceil(G.burden().workAdd * 16 / G.TIME.TICKS_PER_BATCH);
+    if (dKcal !== -expectedCost) { costOk = false; note = `press ${presses}: kcal ${dKcal} (want -${expectedCost}, including actual burden)`; }
     const m = msg.match(/\(([\d,]+) kcal\)/);
     if (m) {
       const promised = parseInt(m[1].replace(/,/g, ''), 10);
@@ -89,7 +90,7 @@ async function main() {
     if (/worked out|nothing within reach/i.test(msg)) { cleanMsg = msg; break; }
   }
   check('H1 every press advanced exactly 16 ticks', costOk && presses > 0, note || `${presses} presses, ${blocked} blocked-free`);
-  check('H2 every press charged exactly 60 kcal', costOk, note || `${presses} presses, ${blocked} blocked-free`);
+  check('H2 every press charged base60 plus its actual burden effort', costOk, note || `${presses} presses, ${blocked} blocked-free`);
   check('H3 message kcal == pack kcal gained', msgKcalOk, note || `${presses} presses`);
 
   // S1: the picked-clean press charges nothing and says something honest.

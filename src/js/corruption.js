@@ -221,7 +221,7 @@
       if (c.butchered) { this.say('There\'s nothing left to take that way.'); return null; }
       const s = this.state.scholar;
       if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) > 1) {
+          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
         this.say('Too far — get closer to the body.'); return null;
       }
       if (this.hasCuttingTool && !this.hasCuttingTool()) {
@@ -541,7 +541,7 @@
           // PERSON-GATE (crisis leg r7 2026-10-13): corpseIsPerson — see corpseButcher.
           (this.corpseIsPerson ? this.corpseIsPerson(c) : c.kind === 'person') && !c.buried && !c.butchered &&
           c.node.x === this.map.px && c.node.y === this.map.py &&
-          Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) <= 1) || null;
+          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) <= 1) || null;
       } catch (e) { return null; }
     },
     // ============ PSYCHO VIOLENCE (Steve 2026-10-13) ============

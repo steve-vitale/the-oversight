@@ -143,6 +143,7 @@
   const origTurn = Game.convoTurn;
   Game.convoTurn = function (vid, choiceId) {
     const c = this.convoGet(vid);
+    const offeredReply = c.offeredReplies?.[choiceId];
 
     // SUBSTANCE (socialite break-it 2026-10-08): endConvo's mood residue
     // must only linger on a REAL conversation — agree-spam ("yeah",
@@ -168,7 +169,7 @@
       if (dlg === 'subject') {
         // Explicit subject change — open the topic menu.
         c.choosingSubject = true;
-        c.transcript.push({ who: 'you', text: '"Can I ask you something else?"' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"Can I ask you something else?"' });
         // sayLine is the single emission choke point: it pushes the
         // transcript entry, feeds, and records the beat. No manual pushes.
         const line = this.convoPickCycle(vid, 'dlg:subject:ack', [
@@ -182,7 +183,7 @@
 
       if (dlg === 'more') {
         // "Tell me more" — continue the thread.
-        c.transcript.push({ who: 'you', text: '"Tell me more."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"Tell me more."' });
         const beat = this.convoThreadBeat(vid);
         if (beat) {
           const composed = this.convoComposeDlg(vid, beat, choiceId);
@@ -225,7 +226,7 @@
         // Generic acknowledgment — small trust, thread continues loosely.
         const reacts = ['"Huh."', '"I see."', '"Yeah."'];
         const youSaid = reacts[Math.floor(Math.random() * reacts.length)];
-        c.transcript.push({ who: 'you', text: youSaid });
+        c.transcript.push({ who: 'you', text: offeredReply || youSaid });
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 0.5, temper: 'neutral', name: 'dlg:react' }); } catch (e) {}
         // They continue or wind down naturally. On a dry thread, don't fish
@@ -269,7 +270,7 @@
         // Emotional engagement — real trust, mood shift.
         const completing = dlg === 'empathize' && comfortThread(c) && c.want.stage === 2;
         const youSaid = completing ? '"I\'m here."' : dlg === 'comfort' ? '"Are you okay?"' : '"That sounds really hard."';
-        c.transcript.push({ who: 'you', text: youSaid });
+        c.transcript.push({ who: 'you', text: offeredReply || youSaid });
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, mood: 1, temper: 'kind', name: 'dlg:' + dlg }); } catch (e) {}
         // They open up a little more, or accept the comfort.
@@ -303,7 +304,7 @@
 
       if (dlg === 'askwhy') {
         // "What happened?" — they tell the story.
-        c.transcript.push({ who: 'you', text: '"What happened?"' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"What happened?"' });
         const beat = this.convoThreadBeat(vid);
         const raw = beat || this.convoPickCycle(vid, 'dlg:askwhy:dry', [
           '"Long story. ...Maybe another time."',
@@ -324,7 +325,7 @@
         // "How can I help?" — engage with their want (Steve 2026-10-06).
         // REBUILD 2026-10-11: the NPC states the favor from the WANT DEF —
         // the def owns the concrete ask (never "Here's the thing —" loops).
-        c.transcript.push({ who: 'you', text: '"How can I help?"' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"How can I help?"' });
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, temper: 'kind', name: 'dlg:help' }); } catch (e) {}
         // HONEST REPEAT (dialog-ui-fix 2026-10-11, defect 6): if the want is
@@ -394,7 +395,7 @@
         // fulfillment checks) — not just a line. If the player already
         // carries an open commitment, the commit is honestly refused: no
         // stacking, no phantom 'promised'.
-        c.transcript.push({ who: 'you', text: '"I\'ll do it."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"I\'ll do it."' });
         const w = c.want;
         const wantLive = !!(w && w.def && (w.stage || 0) < 3);
         if (!wantLive) {
@@ -442,7 +443,7 @@
         // "I can't do it. I'm sorry." — backing out of an OPEN favor
         // obligation. It breaks NOW, with the cost, honestly — not a silent
         // rot. (convo favor system 2026-10-11)
-        c.transcript.push({ who: 'you', text: '"I can\'t do it. I\'m sorry."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"I can\'t do it. I\'m sorry."' });
         let renounced = false;
         try { renounced = this.convoFavorRenounce(vid); } catch (e) {}
         const line = renounced
@@ -458,7 +459,7 @@
       if (dlg === 'heed') {
         // "I'll be careful." — heeding a warning. REBUILD 2026-10-11: new
         // handler. Engagement, not deflection — they wanted you warned.
-        c.transcript.push({ who: 'you', text: '"I\'ll be careful."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"I\'ll be careful."' });
         try { this.resolveConsequence(vid, { trust: 1, mood: 1, temper: 'kind', name: 'dlg:heed' }); } catch (e) {}
         const line = this.convoPickCycle(vid, 'dlg:heed:lines', [
           '"Good. I mean it — watch yourself out there."',
@@ -478,7 +479,7 @@
         // stage 2 with the grief never named. Now the fourth stay deepens —
         // the weight gets said out loud — and the want resolves as
         // 'comforted' instead of looping. No filler loop, no stall.
-        c.transcript.push({ who: 'you', text: '"I\'ll stay a while."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"I\'ll stay a while."' });
         try { this.resolveConsequence(vid, { trust: 1, mood: 1, temper: 'kind', name: 'dlg:stay' }); } catch (e) {}
         const stays = (c._stayCount = (c._stayCount || 0) + 1);
         let line;
@@ -521,7 +522,7 @@
 
       if (dlg === 'details') {
         // "Tell me more about it" — want details.
-        c.transcript.push({ who: 'you', text: '"Tell me more about it."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"Tell me more about it."' });
         const beat = this.convoThreadBeat(vid);
         let raw = beat;
         if (!raw) {
@@ -574,7 +575,7 @@
         // memory — the NPC mourned a refusal that never happened while the
         // resolution stayed 'promised'. A decided want is not refused by
         // small talk; only a LIVE want's deflectBeat speaks here.)
-        c.transcript.push({ who: 'you', text: '"I can\'t right now."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"I can\'t right now."' });
         const w = c.want;
         const wantLive = !!(w && w.def && (w.stage || 0) < 3);
         // SCENE (Phase 2): through the resolver — cools mood AND writes
@@ -611,7 +612,7 @@
         // mounts 'prodded' evidence on the first open doubt, which raises
         // the odds that a later hard confrontation cracks them (truth.js).
         // Distinct verb, real effect, honest fiction.
-        c.transcript.push({ who: 'you', text: '"That doesn\'t quite add up."' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"That doesn\'t quite add up."' });
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { mood: -1, temper: 'honest-hard', name: 'dlg:doubt' }); } catch (e) {}
         let prods = 0;
@@ -644,14 +645,14 @@
 
       if (dlg === 'theorize') {
         // "What do you think it means?" — route to theorize.
-        c.transcript.push({ who: 'you', text: '"What do you think it means?"' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"What do you think it means?"' });
         // Delegate to the existing theorize handler.
         return origTurn.call(this, vid, 'theorize');
       }
 
       if (dlg === 'invite') {
         // "Want to come with us?" — route to party invite.
-        c.transcript.push({ who: 'you', text: '"Want to come with us?"' });
+        c.transcript.push({ who: 'you', text: offeredReply || '"Want to come with us?"' });
         return origTurn.call(this, vid, 'invite_party');
       }
     }

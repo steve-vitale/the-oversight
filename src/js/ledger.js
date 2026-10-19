@@ -678,14 +678,21 @@
           // the object does (audit 2026-10-14).
           if (it.sentimental || def.class === 'sentimental') continue; // dies with them
           gearPack.push({
-            itemId: gid || it.name, name: it.name || def.name || gid || 'something',
-            units: it.units || 1,
+            ...it, owner: oldId, bonded: false, bond: 0, enhancements: [],
+            ...(gid ? { itemId: gid } : {}), name: it.name || def.name || gid || 'something',
+            units: it.units ?? 1,
             kg: it.kg != null ? it.kg : (def.kg != null ? def.kg : 0.3),
-            kcalEach: 0, spoilDay: 9999,
+            kcalEach: it.kcalEach ?? 0, spoilDay: it.spoilDay ?? 9999,
             prep: 'Theirs. Take it, leave it, or use it — the village watches.',
           });
         }
+        // Water is carried property too, not a resource of the bearer office.
+        for (const bottle of s.water || []) {
+          const liters = bottle.liters ?? 1;
+          if (liters > 0) gearPack.push({ name: `${bottle.quality || 'unknown'} water (${liters}L)`, units: 1, kg: liters, kcalEach: 0, spoilDay: 9999, water: { ...bottle }, owner: oldId });
+        }
         s.inventory = [];
+        s.water = [];
         s.equipped = {};
       } catch (e) {}
       // THE VILLAGE BRINGS ITS BEARER HOME (journey-succession r9

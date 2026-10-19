@@ -234,7 +234,7 @@ function mkFood(units, spoilInDays) {
     ok('H1 takes only what exists, says so', /Took 3 Wood logs/i.test(lastSay()), lastSay());
     Game.spendMaterial('wood', 3); // burn it — pack stays light for the weight test
     // weight-limited take (pack at 19/20 incl. 2L water)
-    Game.state.scholar.inventory.push({ name: 'Anvil of regrets', units: 1, kg: 17, kcalEach: 0 });
+    Game.state.scholar.inventory.push({ name: 'Anvil of regrets', units: 1, kg: Game.carryLimit() - 3, kcalEach: 0 });
     Game.stashState().materials.branch = 10;
     Game.takeMaterial('branch', 5); // carry 19/20, branch 0.5kg -> fits 2
     ok('H2 weight-limited take says the real number', /Took 2 Branches/i.test(lastSay()), lastSay());
@@ -250,8 +250,8 @@ function mkFood(units, spoilInDays) {
     Game.donateTool(0);
     eq('I1 tool donation grants +2', trustOf(), Math.min(100, t0 + 2));
     // fill the pack to capacity
-    Game.state.scholar.inventory.push({ name: 'Rocks of burden', units: 1, kg: 19.5, kcalEach: 0 });
-    const max = Game.carryCapacity();
+    Game.state.scholar.inventory.push({ name: 'Rocks of burden', units: 1, kg: Game.carryLimit() - 0.5, kcalEach: 0 });
+    const max = Game.carryLimit();
     ok('I2 pack is at/over capacity', carryKg() >= max, `${carryKg().toFixed(1)}/${max}`);
     const kgBefore = carryKg();
     Game.takeTool('hatchet'); // every other take path refuses here

@@ -1,5 +1,18 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-19 mobile playtest repair: burned/depleted terrain is drawn beneath
+occupants, with ash/stumps rather than filtering people. Deer aim is one response
+round; lane repositioning cannot move an already committed charge, and antlers
+no longer glow as a beam. Conversations retain the selected reply and classify
+quoted questions apart from stage directions; voice reads quoted speech only.
+Nearby corpse search and zero-coordinate reach work; water/food stay on the old
+body for deliberate recovery. Deliberate pickup reaches2x normal capacity with
+real movement/active-work food costs. Current 16-stage field, 4-stage terrain/
+dialogue and9-stage corpse phone routes pass at both heights. The matched16x4
+screen keeps all23 metrics and remains review_required. See body-carry audit,
+raw panels and SURVIVAL-LEVERS; no physical-device/public-launch clearance.
+
+
 2026-10-19 earned-gear continuation: actual phone contest/show choices deliver
 tier3 armor and Wear changes protection. A real notebook teaches bow/ammo;
 crafting spends exact materials/time, and the ordinary trader takes actual

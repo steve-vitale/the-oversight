@@ -230,8 +230,8 @@
         // (villager-vs-monster field fights) register where they happened,
         // not where the player stands — corpses are node-scoped (corpseAt).
         node: opts.node || { x: this.map.px, y: this.map.py },
-        mx: opts.mx != null ? opts.mx : (s.mx || 4),
-        my: opts.my != null ? opts.my : (s.my || 4),
+        mx: opts.mx != null ? opts.mx : (s.mx ?? 4),
+        my: opts.my != null ? opts.my : (s.my ?? 4),
         dayDied: s.day || 0,
         cause: opts.cause || 'combat',
         killerId: opts.killerId || null,
@@ -440,9 +440,9 @@
     },
 
     _corpseCheckRange(c, quiet) {
-      const s = this.state.scholar;
+      const s = this.tbfight && !this.tbfight.over ? (this.tbFighter('p') || this.state.scholar) : this.state.scholar;
       if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) > 1) {
+          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
         if (!quiet) this.say('Too far — get closer to the body.');
         return false;
       }
@@ -464,7 +464,10 @@
       // only into a truly identical stack; otherwise it rides separately.
       const ex = inv.find(x => x.plantId === it.plantId && !x.keepsake && !it.keepsake &&
         (!this.stacksMatch || this.stacksMatch(x, it)));
-      if (ex && !it.keepsake) ex.units = (ex.units || 1) + units;
+      if (it.water) {
+        s.water = s.water || [];
+        for (let n = 0; n < units; n++) for (let liters = it.water.liters ?? 1; liters > 0; liters -= 1) s.water.push({ ...it.water, liters: Math.min(1, liters) });
+      } else if (ex && !it.keepsake) ex.units = (ex.units || 1) + units;
       else {
         // ASH (Steve 2026-10-09): gear taken from a phoenix ash-pile carries
         // provenance -- the village knows whose ashes it came from. Bringing
@@ -679,7 +682,7 @@
       // must be close: same node, adjacent cell
       const s = this.state.scholar;
       if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
-          Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) > 1) {
+          Math.max(Math.abs(c.mx - (s.mx ?? 4)), Math.abs(c.my - (s.my ?? 4))) > 1) {
         this.say('Too far — get closer to the body.'); return null;
       }
       const st = this.corpseStageInfo(c);
@@ -698,7 +701,10 @@
         const ex = (!it.keepsake && this.stacksMatch)
           ? inv.find(x => x.plantId === it.plantId && !x.keepsake && this.stacksMatch(x, it))
           : null;
-        if (ex) ex.units = (ex.units || 1) + 1;
+        if (it.water) {
+          s.water = s.water || [];
+          for (let liters = it.water.liters ?? 1; liters > 0; liters -= 1) s.water.push({ ...it.water, liters: Math.min(1, liters) });
+        } else if (ex) ex.units = (ex.units || 1) + 1;
         else {
           const carried = Object.assign({}, it, { units: 1 });
           if (c.ash) carried.ashOf = c.ashVictim; // ASH: provenance rides along

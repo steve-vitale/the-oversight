@@ -130,7 +130,7 @@ Game.audio = { isMuted: () => false };
 Game._voiceUnlocked = false;
 ok('locked (pre-gesture) -> apSpeak returns locked', Game.apSpeak('sarge', 'Formation.') === 'locked');
 Game._voiceUnlocked = true;
-ok('foreign-skip respected', Game.convoSpeakLine('ap:sarge', 'Hola', { persona: Game.apVoiceRecord('sarge'), foreign: true }) === 'foreign-skip');
+ok('foreign-skip respected', Game.convoSpeakLine('ap:sarge', '"Hola"', { persona: Game.apVoiceRecord('sarge'), foreign: true }) === 'foreign-skip');
 const _hook = Game.convoSpeakLine;
 Game.convoSpeakLine = undefined;
 ok('no hook (module absent) -> no-hook, no crash', Game.apSpeak('sarge', 'Formation.') === 'no-hook');

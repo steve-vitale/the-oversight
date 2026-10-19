@@ -1,0 +1,35 @@
+"use strict";
+const K=require('./lib'),T=K.reporter('Deer commitment and speech contract');
+(async()=>{
+ const G=await K.load({seed:7,narration:true});K.newRun(G);
+ G.map.px=3;G.map.py=4;
+ const s=G.state.scholar,t=G.playerTile();t.detail=Array.from({length:9},()=>Array(9).fill('grass'));s.health=100;
+ const m=K.fight(G,'gallowdeer',{px:7,py:4,mx:2,my:4});const p=G.tbFighter('p');p.mx=7;p.my=4;m.mx=2;m.my=4;m.hp=m.maxHp;m.beamCooldown=0;
+ const atk=m.mdef.attacks.find(a=>a.pattern.type==='beam');
+ T.ok('primary and move-kit beam windup are one response round',m.mdef.attack.pattern.windup===1&&atk.pattern.windup===1);
+ m.telegraph={kind:'squares',pattern:atk.pattern,turnsLeft:1,firing:0,cells:[{cx:7,cy:4}],dmg:atk.damage,attackName:atk.name,aim:{x:7,y:4},aimKey:'p',angle:0};m._repositionForLane=true;
+ G.tbMonsterTurn(m);T.ok('legacy reposition intent cannot move a committed charge',m.mx===2&&m.my===4);
+ T.ok('charge ignites on its next monster turn',m.telegraph?.firing===5);
+ m.telegraph={pattern:{type:'single'}};T.ok('antlers never show the beam source glow',G.tbBeamSourceCell()===null);
+ m.telegraph=null;m.beamCooldown=0;m.beamPhase='stalk';m.beamHunting=false;m.beamHuntArmed=false;m.beamStreak=0;
+ G.genDetail(G.map.px,G.map.py)[4][4]='tree';G.tbChooseMove(m,{f:p});T.ok('sweeping beam does not seek a path around burnable trees',!m._repositionForLane);
+ G.genDetail(G.map.px,G.map.py)[4][4]='wall';G.tbMonsterTurn(m);
+ T.ok('blocked lane repositions immediately without declaring an attack',m.mx===3&&m.my===4&&!m.telegraph);
+ G.scorchCells([{cx:4,cy:4}]);T.ok('burn lives in persistent map-cell state',G.cellScorched(4,4)&&G.state.scorch[G.map.px+','+G.map.py]['4,4']===s.day+3);
+ K.newRun(G);const vid=G.state.village.roster.find(id=>id!==G.villagerId);
+ G.startConvo(vid);const c=G.convoGet(vid);c.pendingQ=null;c.reactiveQ=null;c.genericQ=null;c.want=null;c.thread='goal';c.depth=1;c.lastBeat={tag:'news',topic:'goal',line:'"I want to keep the village fed."'};
+ c.genericQ=null;const direct=G.convoGenericQ(vid,'They take a breath. \"Can you help me?\" A branch cracks.');T.ok('stage directions cannot misclassify a quoted yes/no question',direct?.kind==='yn');c.genericQ=null;
+ const choices=G.convoChoices(vid),pick=choices.find(o=>o.id==='dlg:more')||choices.find(o=>o.id==='dlg:react');T.ok('prepared real topic offers a reply',!!pick);
+ if(pick){const n=c.transcript.length;G.convoTurn(vid,pick.id);const you=c.transcript.slice(n).find(e=>e.who==='you');T.ok('actual tapped reply survives in the transcript verbatim',you?.text===pick.label,JSON.stringify({pick,you}));}
+ T.ok('authored answer is not prefixed by a guessed Me/Good question',G.convoComposeBeat(vid,'"I grow food."',{label:'"I hope you get there."',topic:'goal'})==='"I grow food."');
+ const predicted=[],fallback=[];global.speechSynthesis={cancel(){},getVoices(){return[]},speak(u){fallback.push(u.text)}};global.SpeechSynthesisUtterance=function(text){this.text=text};G.audio={isMuted:()=>false,playVoice(){}};G._voiceUnlocked=true;G.setVoiceEnabled(true);
+ G._voiceTts={stored:async()=>[],download:async()=>{throw Error('fixture offline')}};await G.refreshVoiceCache();G._voicePacksCached=true;
+ const line='They take a breath. "Stay by the fire." Leaves rustle. “I will be back.”';
+ G.convoSpeakLine(vid,line);T.ok('device voice reads only both quoted speech spans',fallback[0]==='Stay by the fire. I will be back.',JSON.stringify(fallback));
+ G._voiceTts={stored:async()=>Object.values(G.VOICE_PACKS).map(v=>v.voiceId),predict:async x=>{predicted.push(x.text);return null}};await G.refreshVoiceCache();G.convoSpeakLine(vid,line);await new Promise(r=>setImmediate(r));
+ T.ok('Piper receives the same speech-only payload',predicted[0]===fallback[0],JSON.stringify(predicted));
+ T.ok('pure gestures and sounds are silent',G.convoSpeakLine(vid,'They take a breath. A branch cracks.')==='empty');
+ T.ok('unclosed speech is not guessed as narration',G.convoSpeakLine(vid,'They say "not finished')==='empty');
+ T.ok('foreign quoted speech stays gated',G.convoSpeakLine(vid,'"Bonjour."',{foreign:'french'})==='foreign-skip');
+ T.done();
+})().catch(e=>{console.error(e);process.exitCode=1});

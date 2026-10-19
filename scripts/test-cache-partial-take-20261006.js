@@ -58,7 +58,7 @@ function buryPemmican(units) {
   // heavy pack: 18kg of rocks (inventory weight counts); empty waterskins
   // so the numbers are deterministic — waterWeight() is real and counts.
   s().water = [];
-  s().inventory = [{ name: 'Rock', units: 6, kg: 3, kcalEach: 0 }];
+  s().inventory = [{ name: 'Rock', units: 1, kg: Game.carryLimit() - 2, kcalEach: 0 }];
   Game.log.length = 0;
   const r = Game.digUpCache(c1.id); // 6kg cache + 18kg pack > 20kg capacity
   eq('full dig refused when overweight', r, null);

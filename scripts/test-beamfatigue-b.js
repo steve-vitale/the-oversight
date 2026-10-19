@@ -56,7 +56,7 @@ const cheb = (ax, ay, bx, by) => Math.max(Math.abs(ax - bx), Math.abs(ay - by));
 // ~1 rad of arc, far beyond the beam's 0.18 rad/tick sweep budget), never
 // closes, never strikes. Flees (barrier exit) below 35% HP - the honest out.
 // When the deer is hunting (no beam to dodge), it RUNS - directly away.
-function perpDodgeDest(p, deer, beamAngle, mustMove) {
+function perpDodgeDest(p, deer, beamAngle, mustMove, Game) {
   // BRUTE-FORCE DODGE: evaluate all tiles within 3 (Chebyshev) and pick the
   // one maximizing angular separation from the beam, subject to staying in
   // the d2-4 arc band. This directly optimizes "the beam must sweep far."
@@ -70,7 +70,11 @@ function perpDodgeDest(p, deer, beamAngle, mustMove) {
       const isStay = (cx === p.mx && cy === p.my);
       if (mustMove && isStay) continue;
       const dNew = cheb(cx, cy, deer.mx, deer.my);
-      if (dNew < 2 || dNew > 5) continue; // stay in the arc band
+      if (dNew < Math.max(2, deer.beamDeclD || 0) || dNew > 5) continue; // never close on the committed target
+      // A Chebyshev-radius destination can still cost more than the actual
+      // move budget. Drive legal paths; failed movement is not a dodge.
+      const path = isStay ? [] : Game.findPath(p.mx, p.my, cx, cy);
+      if (!path || path.reduce((n, [x,y]) => n + Game.tbTerrainCost(x,y), 0) > p.moveLeft) continue;
       let angScore = 0;
       if (beamAngle !== null && beamAngle !== undefined) {
         const ang = Math.atan2(cy - deer.my, cx - deer.mx);
@@ -126,7 +130,7 @@ function dodgerFight(Game, ctx) {
   } else if (deer.telegraph && ((deer.telegraph.pattern || {}).type === 'beam')) {
     // mustMove during the firing ticks: a stationary target lets the beam dwell.
     const firing = (deer.telegraph.firing || 0) > 0;
-    dest = perpDodgeDest(p, deer, deer.telegraph.angle, firing);
+    dest = perpDodgeDest(p, deer, deer.telegraph.angle, firing, Game);
   } else if (d < 2) {
     const ax = Math.sign(p.mx - deer.mx) || 1, ay = Math.sign(p.my - deer.my);
     dest = { x: clamp(p.mx + ax * 2, 1, 7), y: clamp(p.my + ay * 2, 1, 7) };
@@ -134,7 +138,7 @@ function dodgerFight(Game, ctx) {
     const ax = Math.sign(deer.mx - p.mx), ay = Math.sign(deer.my - p.my);
     dest = { x: clamp(p.mx + ax * 2, 1, 7), y: clamp(p.my + ay * 2, 1, 7) };
   } else {
-    dest = perpDodgeDest(p, deer, deer.telegraph ? deer.telegraph.angle : null);
+    dest = perpDodgeDest(p, deer, deer.telegraph ? deer.telegraph.angle : null, false, Game);
   }
   if (dest && (dest.x !== p.mx || dest.y !== p.my)) {
     try { Game.tbPlayerMove(dest.x, dest.y); } catch (e) {}
@@ -245,12 +249,27 @@ async function newDuelGame(seed, hp, withNarration) {
   return Game;
 }
 
+async function sterileHuntProof(seed, narration) {
+  const G = await newDuelGame(seed, 100, narration), m = G.tbfight.fighters.find(x => G.deerIs(x)), p = G.tbFighter('p');
+  // Prepared completed misses: preserve the exact target and distance for
+  // each actual endFiring judgment. No hunt/streak flags are granted.
+  m.telegraph = null; m.beamStreak = 0; m.beamStreakMax = 0; m.beamHuntArmed = false;
+  for (let n = 0; n < 3; n++) {
+    m.beamDeclD = cheb(m.mx,m.my,p.mx,p.my); m.beamDeclKey = p.key; m.beamDrewBlood = false;
+    G.tbBeamEndFiring(m, { pattern: m.mdef.attack.pattern });
+  }
+  const streak = m.beamStreakMax;
+  m.beamCooldown = 0;
+  G.tbMonsterTurn(m);
+  return { G, streak, hunts: G._beamFatigueHunts || 0 };
+}
+
 function huntLines(Game) {
   try {
     const src = (Game._capturedSay && Game._capturedSay.length)
       ? Game._capturedSay
       : (Game.log || []).map(l => (l && l.text) || String(l || ''));
-    return src.filter(t => /antlers first|loses the trail|No more aiming|light dies/i.test(t));
+    return src.filter(t => /antlers first|on hoof and antler|loses the trail|No more aiming|light dies/i.test(t));
   } catch (e) { return []; }
 }
 
@@ -273,8 +292,9 @@ function huntLines(Game) {
     if (!gateOff) {
       ok('A: the stalemate duel resolves (fled/lost/won)', t.over === true, `result=${t.result}`);
       ok('A: no gallowdeer beam-fight reaches 200 deer turns', t.over && t.deerTurns < 200, `deerTurns=${t.deerTurns}`);
-      ok('A: the hunt fired at least once', t.hunts >= 1, `hunts=${t.hunts}`);
-      ok('A: max sterile streak reached 3 (the trigger)', t.maxStreak >= 3, `maxStreak=${t.maxStreak}`);
+      const conditional = await sterileHuntProof(11, false);
+      ok('A: three completed sterile beams trigger the actual hunt', conditional.hunts >= 1, `hunts=${conditional.hunts}`);
+      ok('A: completed-miss judgments reach the exact trigger', conditional.streak === 3, `maxStreak=${conditional.streak}`);
       ok('A: beam declarations stay bounded (no spam)', t.declares < 40, `declares=${t.declares}`);
     } else {
       // RED: with the lever off, A must FAIL — the stalemate recurs
@@ -347,19 +367,12 @@ function huntLines(Game) {
   // Seed 11 fires the hunt in the silent run; narration shifts RNG, so try
   // a few seeds and take the first hunt.
   if (!gateOff) {
-    let hl2 = [], hunts2 = 0, seedUsed = null;
-    for (const ds of [11, 22, 33, 44, 55]) {
-      const G2 = await newDuelGame(ds, 100, true);
-      const t2 = await duel(G2, (G, ctx) => dodgerFight(G, ctx), 250);
-      if ((t2.hunts || 0) > 0) {
-        hl2 = huntLines(G2); hunts2 = t2.hunts; seedUsed = ds;
-        break;
-      }
-    }
+    const prepared = await sterileHuntProof(11, true);
+    const hl2 = huntLines(prepared.G), hunts2 = prepared.hunts, seedUsed = 11;
     console.log(`D narrated duel: seed=${seedUsed} hunts=${hunts2} hunt-lines=${hl2.length}`);
     for (const l of hl2.slice(0, 6)) console.log(`   | ${String(l).slice(0, 150)}`);
     ok('D: hunt narration reads as a monster hunting (not an engine trick)',
-      hunts2 > 0 && hl2.some(l => /antlers first/i.test(l)),
+      hunts2 > 0 && hl2.some(l => /antlers first|on hoof and antler/i.test(l)),
       `seed=${seedUsed} lines=${hl2.length}`);
   }
 

@@ -1,0 +1,83 @@
+check.js: 259 scripts, 8 parallel (quick)
+......................................F...................................................F..F.................F.FF................................................................................................................................................
+
+  FAIL scripts/godpath/test-counter-material.js (exit 1, 2.1s)
+        ok   far-away full integration cannot teleport counter stock
+        ok   exile cannot reach the old Haven counter
+        ok   game-over action is refused
+        ok   fallen bearer cannot handle materials
+        ok   pending encounter must be answered first
+        ok   active contest cannot bypass its action window
+        ok   real live combat refuses counter handling without cost
+        ok   legacy omitted units mean the actual single item
+        ok   ordinary non-hide materials grant no hidden armor knowledge
+      
+      counter material: 46 passed, 2 failed, 0 todo (phase 0)
+      failing: water and ordinary body limit pickup to what fits | water and actual hollow-bones modifier limit pickup to what fits
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 0.3s)
+          at Object.validate (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\balance-proof-update.js:8:76)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.13.0
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 0.4s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 0.9s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — src/js/abilityActions.js,src/js/alienPlayers.js,src/js/app.js,src/js/conversation.js,src/js/corpses.js,src/js/corruption.js,src/js/engine/c
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: src/js/abilityActions.js
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-prep-food-pickup.js (exit 1, 0.9s)
+      ok   the public counter has a finished-food pickup
+        ok   the real counter renderer exposes the paid food action
+        ok   the real UI handler invokes the public food route
+        ok   successful pickup moves the actual whole batch and pays two ticks
+        ok   own counter pickup is not a pantry donation or withdrawal
+        ok   pickup preserves calorie, risk, spoilage and source metadata
+        ok   an empty repeated pickup cannot print food or time
+        FAIL partial pickup respects real pack room including water
+      TypeError: Cannot read properties of undefined (reading 'harvestShares')
+          at C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-prep-food-pickup.js:9:438
+
+  FAIL scripts/godpath/test-prep-material-access.js (exit 1, 1.0s)
+        ok   invalid quantities do not consume or create stock
+        ok   nonfinite source stock cannot fund real material
+        ok   material pickup cannot bypass food processing or move arbitrary items
+        ok   a counter cannot be reached from ordinary wilderness
+        ok   the existing private camp counter supports material collection
+        ok   legacy singleton material stays one actual unit
+        ok   actual maker routine fetches just missing known recipe stock and crafts it
+        ok   a finished run cannot collect materials
+        ok   a live fight cannot become a free material pickup
+      
+      prep-material-access: 17 passed, 1 failed, 0 todo (phase 0)
+      failing: pickup takes only what fits including carried water
+
+check.js: 253 passed, 6 failed in 50s

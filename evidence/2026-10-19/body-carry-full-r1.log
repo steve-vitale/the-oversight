@@ -1,0 +1,137 @@
+check.js: 1031 scripts, 8 parallel
+..........................................................................................F...F................F............................................F....................................................................................................................................................................F.................................................................................F.......................................................F...................................................................................F..................................................................................................FF...F....F...........................F..............................................................................................................................................................................................................................................................................................................................................................
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 0.5s)
+          at Object.validate (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\balance-proof-update.js:8:76)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.13.0
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 0.5s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 1.0s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — src/js/abilityActions.js,src/js/alienPlayers.js,src/js/app.js,src/js/conversation.js,src/js/corpses.js,src/js/corruption.js,src/js/engine/c
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: src/js/abilityActions.js
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-action-clock.js (exit 2, 0.4s)
+      ERROR TypeError: Cannot read properties of undefined (reading 'wornAvoidance')
+          at Object.wornDamage (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-action-clock.js:8:101), <anonymous>:7338:34)
+          at Object.damage (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-action-clock.js:8:101), <anonymous>:29922:41)
+          at Object.resolveDay (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-action-clock.js:8:101), <anonymous>:121:42)
+          at Object.endDay (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-action-clock.js:8:101), <anonymous>:29920:30)
+          at Object.advancePart (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-action-clock.js:8:101), <anonymous>:26158:42)
+          at Object.tickAction (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-action-clock.js:8:101), <anonymous>:18325:16)
+          at C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-action-clock.js:69:8
+
+  FAIL scripts/test-cache-partial-take-20261006.js (exit 2, 0.4s)
+      FAIL full dig refused when overweight: got {"day":1,"dayPart":"dawn","dayPartHint":"The world wakes. Animals are active.","dayTicks":48,"dayTicksMax":512,"dayProgress":0.09375,"lightLevel":0.65,"isNig
+      FAIL refusal names weight
+      FAIL cache still buried
+      FAIL partial take works with heavy pack
+      FAIL took 4 into pack: got 20, want 4
+      HARNESS ERROR TypeError: Cannot read properties of undefined (reading 'items')
+          at C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-cache-partial-take-20261006.js:73:71
+
+  FAIL scripts/test-crisis-slope-kind-20261013.js (exit 2, 0.3s)
+        PASS nearButcherableCorpse finds an adjacent starvation (villager-kind) corpse
+      FATAL TypeError: Cannot read properties of null (reading 'abilities')
+          at Object.allModifiers (eval at evalFile (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:46:9), <anonymous>:26710:79)
+          at Object.mods (eval at evalFile (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:46:9), <anonymous>:27323:25)
+          at Object.modTarget (eval at evalFile (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:46:9), <anonymous>:27339:73)
+          at Object.packWeight (eval at evalFile (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:46:9), <anonymous>:24796:37)
+          at Object.burden (eval at evalFile (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:46:9), <anonymous>:24800:50)
+          at Object.tickAction (eval at evalFile (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:46:9), <anonymous>:18290:39)
+          at Object.corpseButcher (eval at evalFile (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:46:9), <anonymous>:237:12)
+          at main (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:100:21)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-crisis-slope-kind-20261013.js:143:1)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+
+  FAIL scripts/test-drifter-national-gaps-20261010.js (exit 2, 0.4s)
+      HARNESS ERROR TypeError: Cannot read properties of undefined (reading 'burdenTier')
+          at Object.burden (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:66:16), <anonymous>:24800:34)
+          at Object.status (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:66:16), <anonymous>:43526:22)
+          at Object.newGame (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:66:16), <anonymous>:2834:19)
+          at Game.newGame (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:66:16), <anonymous>:2116:27)
+          at G.newGame (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:66:16), <anonymous>:3491:27)
+          at G.newGame (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:66:16), <anonymous>:800:19)
+          at Game.newGame (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:66:16), <anonymous>:1153:37)
+          at C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\test-drifter-national-gaps-20261010.js:93:8
+
+  FAIL scripts/test-forager-strip-regrow.js (exit 1, 0.5s)
+      PASS | R0 on a wild node | tile=thicket
+      PASS | R0b species present | 15 species
+      FAIL | H1 every press advanced exactly 16 ticks | press 24: kcal -150 (want -60)
+      FAIL | H2 every press charged exactly 60 kcal | press 24: kcal -150 (want -60)
+      PASS | H3 message kcal == pack kcal gained | press 24: kcal -150 (want -60)
+      PASS | S1 picked-clean press is free and honest | greens=0 kcalΔ=0 ticksΔ=0 msg="Nothing left to take here today."
+      PASS | S2 regrow consumed the depletion ledger | ledger 51 -> 0
+      PASS | S3 green cells restored | 51 green cells
+      PASS | S4 post-regrow press yields food | pack kcal 0 -> 1960; msg="You also take some vine (crafting material). || You also take some vine (crafting material"
+      
+      2 CHECK(S) FAILED
+
+  FAIL scripts/test-miser-breakit-20261009.js (exit 1, 1.0s)
+      FAIL H2 weight-limited take says the real number: Took 5 branches from the stash.
+      FAIL H3 stash debited by actual: got 5, want 8
+      FAIL I3 takeTool at capacity: refused, pack unchanged: got 22.2, want 21.5
+      FAIL I3b refusal is honest: You take the Hatchet. In this village, people notice who takes tools.
+      FAIL I3c tool stays in the stash: got 0, want 1
+      
+      49 passed, 5 failed
+
+  FAIL scripts/test-miser-cache-honesty-20261011.js (exit 1, 0.7s)
+      FAIL softlock: heavy dig refused, cache NOT destroyed: cache len=0
+      FAIL softlock: refusal is honest, not silent
+      FAIL softlock: portion draw works with full pack: wood=8
+      FAIL softlock: cache survives the partial draw
+      
+      20 passed, 4 failed
+
+  FAIL scripts/test-miser-section-chronic-20261010.js (exit 1, 0.6s)
+      FAIL H1 partial take weighs honestly: took=5 said= 1 DAWN — The world wakes. Animals are active. | Took 5 branches from the stash.
+      FAIL H2 take says the true number, not "5": took=5 said= 1 DAWN — The world wakes. Animals are active. | Took 5 branches from the stash.
+      
+      10 passed, 2 failed (seed default)
+
+  FAIL scripts/test-miser-takefirst-20261010.js (exit 1, 1.2s)
+      FAIL heavy pack takes only what fits: got=5
+      FAIL heavy take says the true number: say="Took 5 branches from the stash."
+      
+      22 passed, 2 failed
+
+  FAIL scripts/test-pantry-bulk-weight.js (exit 1, 0.5s)
+      FAIL D: water capped at remaining 10kg
+      FAIL D: excess water left in well
+      
+      8 pass, 2 fail
+
+  slowest: scripts/test-simopt-trajectory-20261010.js 75s, scripts/test-fourthlink-20261014.js 62s, scripts/test-deterministic-clock-20261014.js 58s
+
+check.js: 1018 passed, 13 failed in 265s

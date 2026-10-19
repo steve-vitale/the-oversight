@@ -1,0 +1,736 @@
+{
+  "height": 736,
+  "trace": [
+    {
+      "label": "standing at edge beside body",
+      "pos": [
+        0,
+        0
+      ],
+      "ticks": 12,
+      "kcal": 1878,
+      "weight": 20.5,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.025,
+        "moveMult": 2.05,
+        "workAdd": 62.999999999999986,
+        "dodgePen": 0.1525,
+        "speedPen": 2
+      },
+      "quote": 4,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        }
+      ],
+      "water": [],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 1,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 1,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ]
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\nKelly\n🐾\n🐟\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body →\nActions…\nYou hold still, watching.\n❤ 100\n🍽 1878/2400 kcal\n💧 86%\n🎒 20.5/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "nearby Search body opens real loot menu without tapping grid",
+      "pos": [
+        0,
+        0
+      ],
+      "ticks": 12,
+      "kcal": 1878,
+      "weight": 20.5,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.025,
+        "moveMult": 2.05,
+        "workAdd": 62.999999999999986,
+        "dodgePen": 0.1525,
+        "speedPen": 2
+      },
+      "quote": 4,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        }
+      ],
+      "water": [],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 1,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 1,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ]
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\nKelly\n🐾\n🐟\n🎒 Prepared carcass — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nTake all\n\nEdge knife x1 (0 kcal · 0.5 kg)\n\nTake\nLeave\n\n?\nToo-heavy test block x1 (0 kcal · 25.0 kg)\n\nTake\nLeave\n\n?\nRecovered clean water (3L) x1 (0 kcal · 3.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body →\nActions…\nYou hold still, watching.\n❤ 100\n🍽 1878/2400 kcal\n💧 86%\n🎒 20.5/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "actual adjacent loot above normal capacity",
+      "pos": [
+        0,
+        0
+      ],
+      "ticks": 20,
+      "kcal": 1862,
+      "weight": 21,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.05,
+        "moveMult": 2.1,
+        "workAdd": 66,
+        "dodgePen": 0.155,
+        "speedPen": 2
+      },
+      "quote": 4,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        },
+        {
+          "itemId": "stone_knife",
+          "name": "Edge knife",
+          "units": 1,
+          "kg": 0.5
+        }
+      ],
+      "water": [],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 0,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 1,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ],
+          "_touched": true
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\nKelly\n🐾\n🐟\n🎒 Prepared carcass — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nTake all\n\n?\nToo-heavy test block x1 (0 kcal · 25.0 kg)\n\nTake\nLeave\n\n?\nRecovered clean water (3L) x1 (0 kcal · 3.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body →\nActions…\nTaken: Edge knife x1.\n❤ 100\n🍽 1862/2400 kcal\n💧 86%\n🎒 21/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "hard-limit refusal keeps item on body",
+      "pos": [
+        0,
+        0
+      ],
+      "ticks": 20,
+      "kcal": 1862,
+      "weight": 21,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.05,
+        "moveMult": 2.1,
+        "workAdd": 66,
+        "dodgePen": 0.155,
+        "speedPen": 2
+      },
+      "quote": 4,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        },
+        {
+          "itemId": "stone_knife",
+          "name": "Edge knife",
+          "units": 1,
+          "kg": 0.5
+        }
+      ],
+      "water": [],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 0,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 1,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ],
+          "_touched": true
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\nKelly\n🐾\n🐟\n🎒 Prepared carcass — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nTake all\n\n?\nToo-heavy test block x1 (0 kcal · 25.0 kg)\n\nTake\nLeave\n\n?\nRecovered clean water (3L) x1 (0 kcal · 3.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body →\nActions…\nToo heavy — your pack can't take it.\n❤ 100\n🍽 1862/2400 kcal\n💧 86%\n🎒 21/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "deliberate recovery preserves actual corpse water",
+      "pos": [
+        0,
+        0
+      ],
+      "ticks": 20,
+      "kcal": 1862,
+      "weight": 24,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.2,
+        "moveMult": 2.4,
+        "workAdd": 84,
+        "dodgePen": 0.16999999999999998,
+        "speedPen": 2
+      },
+      "quote": 5,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        },
+        {
+          "itemId": "stone_knife",
+          "name": "Edge knife",
+          "units": 1,
+          "kg": 0.5
+        }
+      ],
+      "water": [
+        {
+          "liters": 3,
+          "quality": "clean",
+          "source": "corpse-test"
+        }
+      ],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 0,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 0,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ],
+          "_touched": true
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\nKelly\n🐾\n🐟\n🎒 Prepared carcass — fresh\n✕\n\nTake what you want. What's left stays — and meat rots where it lies.\n\nTake all\n\n?\nToo-heavy test block x1 (0 kcal · 25.0 kg)\n\nTake\nLeave\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body →\nActions…\nTaken: Recovered clean water (3L) x1.\n❤ 100\n🍽 1862/2400 kcal\n💧 86% · 3L clean\n🎒 24/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "pack explains normal load hard limit and costs",
+      "pos": [
+        0,
+        0
+      ],
+      "ticks": 20,
+      "kcal": 1862,
+      "weight": 24,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.2,
+        "moveMult": 2.4,
+        "workAdd": 84,
+        "dodgePen": 0.16999999999999998,
+        "speedPen": 2
+      },
+      "quote": 5,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        },
+        {
+          "itemId": "stone_knife",
+          "name": "Edge knife",
+          "units": 1,
+          "kg": 0.5
+        }
+      ],
+      "water": [
+        {
+          "liters": 3,
+          "quality": "clean",
+          "source": "corpse-test"
+        }
+      ],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 0,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 0,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ],
+          "_touched": true
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\nKelly\n🐾\n🐟\n🎒 Pack (2 items)\n✕\n\n24kg · overloaded · normal 20kg, maximum 40kg. Walking ×2.4; active work burns extra food.\n\n💧 Water: 1L clean (1kg)\nDrink\nPour out 1L\n\n🎒 Carried (2 items)\n\n?\nDeclared 20.5kg test load x1 (0 kcal · 20.5 kg)\nLeave it\n\nEdge knife x1 (0 kcal · 0.5 kg)\nEquip\nLeave it\nStash\nArmory\n\n🍳 Prep stash — the counter\n\nYour counter is back at camp.\n\nCraft\n\nSnare — 1 vine, 1 stick\nMake (85%)\n\nWoven cloth — 3 fiber\nMake (85%)\n\nWater Filter — 1 cloth, 1 charcoal\nMake (85%)\n\nStone knife — 1 stone, 1 vine\nMake (85%)\n\nBark armor — materials unknown — bring your best guess\nTry blind (35%)\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body →\nActions…\nTaken: Recovered clean water (3L) x1.\n❤ 100\n🍽 1862/2400 kcal\n💧 86% · 3L clean\n🎒 24/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "before actual overloaded step",
+      "pos": [
+        0,
+        0
+      ],
+      "ticks": 20,
+      "kcal": 1862,
+      "weight": 24,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.2,
+        "moveMult": 2.4,
+        "workAdd": 84,
+        "dodgePen": 0.16999999999999998,
+        "speedPen": 2
+      },
+      "quote": 5,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        },
+        {
+          "itemId": "stone_knife",
+          "name": "Edge knife",
+          "units": 1,
+          "kg": 0.5
+        }
+      ],
+      "water": [
+        {
+          "liters": 3,
+          "quality": "clean",
+          "source": "corpse-test"
+        }
+      ],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 0,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 0,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ],
+          "_touched": true
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\nKelly\n🐾\n🐟\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body →\nActions…\nTaken: Recovered clean water (3L) x1.\n❤ 100\n🍽 1862/2400 kcal\n💧 86% · 3L clean\n🎒 24/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "actual overloaded movement pays quoted kcal",
+      "pos": [
+        0,
+        1
+      ],
+      "ticks": 21,
+      "kcal": 1857,
+      "weight": 24,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.2,
+        "moveMult": 2.4,
+        "workAdd": 84,
+        "dodgePen": 0.16999999999999998,
+        "speedPen": 2
+      },
+      "quote": 5,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        },
+        {
+          "itemId": "stone_knife",
+          "name": "Edge knife",
+          "units": 1,
+          "kg": 0.5
+        }
+      ],
+      "water": [
+        {
+          "liters": 3,
+          "quality": "clean",
+          "source": "corpse-test"
+        }
+      ],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 0,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 0,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ],
+          "_touched": true
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\n🐾\nKelly\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ↗\nActions…\nThe fish is no longer in sight. There is no open water here.\n❤ 100\n🍽 1857/2400 kcal\n💧 86% · 3L clean\n🎒 24/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    },
+    {
+      "label": "Continue preserves deliberately recovered items",
+      "pos": [
+        0,
+        1
+      ],
+      "ticks": 21,
+      "kcal": 1857,
+      "weight": 24,
+      "capacity": 20,
+      "limit": 40,
+      "burden": {
+        "name": "overloaded",
+        "frac": 1.2,
+        "moveMult": 2.4,
+        "workAdd": 84,
+        "dodgePen": 0.16999999999999998,
+        "speedPen": 2
+      },
+      "quote": 5,
+      "inventory": [
+        {
+          "name": "Declared 20.5kg test load",
+          "units": 1,
+          "kg": 20.5
+        },
+        {
+          "itemId": "stone_knife",
+          "name": "Edge knife",
+          "units": 1,
+          "kg": 0.5
+        }
+      ],
+      "water": [
+        {
+          "liters": 3,
+          "quality": "clean",
+          "source": "corpse-test"
+        }
+      ],
+      "corpses": [
+        {
+          "id": "release-edge-corpse",
+          "kind": "animal",
+          "name": "Prepared carcass",
+          "node": {
+            "x": 4,
+            "y": 5
+          },
+          "mx": 1,
+          "my": 0,
+          "dayDied": 2,
+          "items": [
+            {
+              "itemId": "stone_knife",
+              "name": "Edge knife",
+              "units": 0,
+              "kg": 0.5
+            },
+            {
+              "name": "Too-heavy test block",
+              "units": 1,
+              "kg": 25
+            },
+            {
+              "name": "Recovered clean water (3L)",
+              "units": 0,
+              "kg": 3,
+              "water": {
+                "liters": 3,
+                "quality": "clean",
+                "source": "corpse-test"
+              }
+            }
+          ],
+          "_touched": true
+        }
+      ],
+      "scroll": [
+        0,
+        0,
+        736
+      ],
+      "text": "creek bend\n☀️\n🌙\nday 2 · dawn\n🐾\nKelly\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nSearch the body ↗\nActions…\nThe fish is no longer in sight. There is no open water here.\n❤ 100\n🍽 1857/2400 kcal\n💧 86% · 3L clean\n🎒 24/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+    }
+  ],
+  "errors": [],
+  "networkFailures": [],
+  "scope": "Prepared edge position/load/body, actual native nearby action/pickup/refusal/water/Pack/step/pagehide/Continue; no natural generation claim",
+  "driver": "Bundled Playwright with headless Microsoft Edge; native CDP touch; no interactive transport"
+}

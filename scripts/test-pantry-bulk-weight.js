@@ -72,11 +72,11 @@ function freshGame() {
   {
     freshGame();
     Game.state.village.pantry = [{ name: 'Peanuts', kcalEach: 425, units: 40, kg: 0.25, unit: 'handful', safe: true }];
-    Game.state.village.water = { clean: 15 };
-    Game.takeFromPantryBulk({ 0: 40, water: 15 });
+    Game.state.village.water = { clean: 35 };
+    Game.takeFromPantryBulk({ 0: 40, water: 35 });
     const nuts = Game.state.scholar.inventory.find(i => i.name === 'Peanuts');
     ok('D: food packed first', nuts && nuts.units === 40);
-    ok('D: water capped at remaining 10kg', (Game.state.scholar.water || []).length === 10);
+    ok('D: water capped at remaining 30kg', (Game.state.scholar.water || []).length === 30);
     ok('D: excess water left in well', Game.state.village.water.clean === 5);
   }
 

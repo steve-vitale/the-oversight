@@ -2,11 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+(async () => {
+const { Game } = await require('./sim-harness').loadGame({seed: 20261019, mode: 'release-regression'});
+
 
 let pass = 0, fail = 0;
 function eq(name, got, want) {
@@ -15,7 +13,7 @@ function eq(name, got, want) {
 }
 
 (async () => {
-  await Game.init();
+
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -92,3 +90,5 @@ function eq(name, got, want) {
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error('ERROR', e); process.exit(2); });
+
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

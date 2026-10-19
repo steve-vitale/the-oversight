@@ -1,0 +1,18 @@
+  ok   primary and move-kit beam windup are one response round
+  ok   legacy reposition intent cannot move a committed charge
+  ok   charge ignites on its next monster turn
+  ok   antlers never show the beam source glow
+  FAIL sweeping beam does not seek a path around burnable trees
+  ok   blocked lane repositions immediately without declaring an attack
+  ok   burn lives in persistent map-cell state
+  ok   prepared real topic offers a reply
+  ok   actual tapped reply survives in the transcript verbatim
+  ok   authored answer is not prefixed by a guessed Me/Good question
+  FAIL device voice reads only both quoted speech spans — []
+  FAIL Piper receives the same speech-only payload — ["Stay by the fire. I will be back."]
+  ok   pure gestures and sounds are silent
+  ok   unclosed speech is not guessed as narration
+  ok   foreign quoted speech stays gated
+
+Deer commitment and speech contract: 12 passed, 3 failed, 0 todo (phase 0)
+failing: sweeping beam does not seek a path around burnable trees | device voice reads only both quoted speech spans | Piper receives the same speech-only payload

@@ -1,0 +1,18 @@
+  FAIL primary and move-kit beam windup are one response round
+  FAIL legacy reposition intent cannot move a committed charge
+  FAIL charge ignites on its next monster turn
+  FAIL antlers never show the beam source glow
+  FAIL sweeping beam does not seek a path around burnable trees
+  ok   blocked lane repositions immediately without declaring an attack
+  ok   burn lives in persistent map-cell state
+  ok   prepared real topic offers a reply
+  FAIL actual tapped reply survives in the transcript verbatim — {"pick":{"id":"dlg:more","label":"\"What's the hard part?\""},"you":{"who":"you","text":"\"Tell me more.\""}}
+  FAIL authored answer is not prefixed by a guessed Me/Good question
+  FAIL device voice reads only both quoted speech spans — ["They take a breath. \"Stay by the fire.\" Leaves rustle. “I will be back.”"]
+  ok   Piper receives the same speech-only payload
+  FAIL pure gestures and sounds are silent
+  FAIL unclosed speech is not guessed as narration
+  ok   foreign quoted speech stays gated
+
+Deer commitment and speech contract: 5 passed, 10 failed, 0 todo (phase 0)
+failing: primary and move-kit beam windup are one response round | legacy reposition intent cannot move a committed charge | charge ignites on its next monster turn | antlers never show the beam source glow | sweeping beam does not seek a path around burnable trees | actual tapped reply survives in the transcript verbatim | authored answer is not prefixed by a guessed Me/Good question | device voice reads only both quoted speech spans | pure gestures and sounds are silent | unclosed speech is not guessed as narration

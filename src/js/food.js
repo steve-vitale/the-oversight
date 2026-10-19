@@ -2346,7 +2346,7 @@
       const have = item.units ?? 1, requested = units === undefined ? have : units;
       if (!Number.isSafeInteger(requested) || requested <= 0) return refuse('Choose a positive whole number of materials.');
       if (!Number.isFinite(item.kg) || item.kg < 0) return refuse('You cannot judge how much of that will fit in your pack.');
-      const carry = this.packWeight(), cap = this.carryCapacity(), mult = this.modTarget('carry.weight_mult', 1);
+      const carry = this.packWeight(), cap = this.carryLimit(), mult = this.modTarget('carry.weight_mult', 1);
       if (![carry, cap, mult].every(Number.isFinite) || carry < 0 || cap < 0 || mult < 0) return refuse('You cannot judge the space in your pack.');
       const unitWeight = (item.kg || 0.1) * mult; // same rule as packWeight, including water/body modifiers
       const desired = Math.min(have, requested);
@@ -2383,7 +2383,7 @@
       if (!Number.isSafeInteger(have) || have <= 0 || !Number.isSafeInteger(requested) || requested <= 0) return refuse('Choose a positive whole number of portions.');
       const kg = item.kg == null ? 0.1 : item.kg;
       if (!Number.isFinite(kg) || kg < 0) return refuse('You cannot judge how much of that will fit in your pack.');
-      const carry = this.packWeight(), cap = this.carryCapacity(), mult = this.modTarget('carry.weight_mult', 1);
+      const carry = this.packWeight(), cap = this.carryLimit(), mult = this.modTarget('carry.weight_mult', 1);
       if (![carry, cap, mult].every(Number.isFinite) || carry < 0 || cap < 0 || mult < 0) return refuse('You cannot judge the space in your pack.');
       const unitWeight = (kg || 0.1) * mult, desired = Math.min(have, requested);
       const fits = carry > cap ? 0 : unitWeight === 0 ? desired : Math.max(0, Math.floor((cap - carry) / unitWeight + 1e-9));

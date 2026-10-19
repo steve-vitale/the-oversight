@@ -1,0 +1,117 @@
+check.js: 1030 scripts, 8 parallel
+................................................................................................................................................................F................................................F...F................F..........................................................F.....................................................................................................................F..................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................F....................F......................................................................................................
+
+  FAIL scripts/test-aggro-audio-hooks-20261008.js (exit 1, 0.8s)
+        FAIL buzz precedes the dive voice (the air screams first) — no dive slice
+        ok   sunbaskerShimmer fires within 12 turns
+        ok   shimmer shares the beat with the spoken bite cue (molten gold)
+        ok   shimmer shares the beat with the telegraph voice
+        ok   hecklerLaugh fires within 16 turns
+        ok   the first laugh shares the beat with the first-jibe words
+        ok   every laugh is coupled to a declare beat (jibe words or telegraph declare)
+        ok   no single beat double-fires the laugh
+        ok   lockpickFingers fires
+        ok   the fingers share the beat with the casing line (circles once)
+      
+      24 passed, 3 failed
+
+  FAIL scripts/test-blitz-audiolab.js (exit 1, 1.3s)
+          'PASS rut_king: actual combat start respects configured notice or silence\n' +
+          'PASS rut_king: actual turn driver emits configured declaration\n' +
+          'PASS rut_king: game and Lab share registered callable voices\n' +
+          'PASS living_wire: actual encounter starts\n' +
+          'PASS living_wire: actual combat start respects configured notice or silence\n',
+        stderr: 'AUDIO_EMISSION_DEBUG {"id":"living_wire","turns":21,"round":21,"result":null,"over":false,"telegraph":null,"m":{"mx":4,"my":4,"hp":78},"p":{"mx":4,"my":4,"hp":10000},"events":[{"name":"roun
+          'AssertionError [ERR_ASSERTION]: living_wire: actual turn driver emits configured declaration\n' +
+          '    at check (C:\\Users\\Steve\\.codex\\worktrees\\balanced-measurement\\oversight\\scripts\\test-regional-audio.js:4:42)\n' +
+          '    at C:\\Users\\Steve\\.codex\\worktrees\\balanced-measurement\\oversight\\scripts\\test-regional-audio.js:52:3\n'
+      }
+      
+      Node.js v24.13.0
+
+  FAIL scripts/test-beamfatigue-b.js (exit 1, 4.2s)
+      beam-fatigue proof — lever ON
+      A dodger duel: resolved=true result=lost deerTurns=12 declares=2 completed=1 hunts=0 maxStreak=0 fledPushes=0 php=100
+        hunt narration (0 lines):
+      FAIL A: the hunt fired at least once -- hunts=0
+      FAIL A: max sterile streak reached 3 (the trigger) -- maxStreak=0
+      C2 stander: declares=5 completed=4 maxStreak=0 hunts=0 result=lost php=100
+      C3 closer: picked=Antler Sweep streak=0 armed=false
+      D narrated duel: seed=null hunts=0 hunt-lines=0
+      FAIL D: hunt narration reads as a monster hunting (not an engine trick) -- seed=null lines=0
+      
+      8 passed, 3 failed
+
+  FAIL scripts/test-brawler-proof-20261010.js (exit 1, 0.5s)
+        ok   E2 snap-fight marks the NPC as aggressor (they swung first)
+        murder crimes for mark: 1 justified=true witnessed=false
+        ok   E3 the kill is recorded as a murder crime
+        ok   E4 flagged justified (self-defense) — reduced heat, not zero consequence
+        intimidation crimes on record for mark: 2 (the provocation is priced)
+        ok   E5 the shakedowns that drove the snap are on the record
+        E6 evidence: murderReactionLines=0 deathGrief=3 trauma=19
+        ok   E6 unwitnessed kill = unsolved murder by design (death-grief + trauma + recorded crime, no murder reaction)
+      
+      ==== 20 passed, 1 failed (seed b0a910) ====
+      FAILURES:
+       - B2 monster AI targets and kills villager allies (proxy murder is possible)
+
+  FAIL scripts/test-break-monsters2-patterncells-20261008.js (exit 1, 0.4s)
+        ok: patternCells line same-tile covers the tile
+        ok: patternCells charge same-tile covers the tile
+        ok: patternCells charge adjacent lane hits target tile
+        ok: patternCells burst same-tile still a radius-2 disc
+        FAIL: mirror_stag same-tile charge damages the player — dmg=0
+        ok: review_drone same-tile beam damages the player
+        ok: review_drone never claims "cover works" at zero range
+        ok: memory_projector same-tile beam damages the player
+        ok: white_noise_heron same-tile strike damages the player
+        ok: white_noise_heron never claims "cover works" at zero range
+      
+      patterncells proof: 10 passed, 1 failed
+
+  FAIL scripts/test-declare-audio-20261008.js (exit 1, 1.0s)
+        ok   heckler first jibe fires hecklerLaugh
+        ok   hecklerLaugh fires at most twice (one per declare)
+        ok   lockpick casing fires lockpickFingers
+        ok   bulldozer declare fires boarSnort once (not twice)
+        ok   nevermore strafe declare fires nevermoreUnfold
+        ok   statickite mark declare fires kiteUnfold
+        ok   bulldozer goes winded after a missed charge
+        FAIL winded trample turn says the winded state — says=You hold still, watching. | You hold still, watching.
+        FAIL winded trample turn cues animalPant
+        FAIL final winded turn says the wind is back — says=You hold still, watching. | You hold still, watching.
+      
+      10 passed, 5 failed
+
+  FAIL scripts/test-travel-r8.js (exit 1, 2.3s)
+        PASS T3b setup: the run is over
+        PASS AFTER: tryNodeExit reports moved:false for a wiped run
+        PASS AFTER: swim branch refuses the charge when the bearer died mid-crossing
+        PASS T5: all travel/map functions defined and called
+        [info] T6 force=true call sites: app.js:1127, debug-scenarios.js:1580
+        PASS T6: force=true only at the swim branch + debug scenario
+        PASS T6: swim offered only for creek/washed_out (never smuggles past fallen trees)
+        PASS T7: map.px/py writes are all guarded or pinned
+        PASS T7: returnToVillage PIN leaves player on a real tile with sane grid coords
+        PASS T7: the player can still move after the PIN (no phantom tile)
+      
+      24 passed, 1 failed (AFTER mode, seed 7)
+
+  FAIL scripts/test-voice-personas.js (exit 1, 0.3s)
+        FAIL voice toggle off -> apSpeak returns off, no speech
+        FAIL muted -> apSpeak returns muted
+        FAIL locked (pre-gesture) -> apSpeak returns locked
+        FAIL foreign-skip respected
+        ok   no hook (module absent) -> no-hook, no crash
+        ok   empty text -> empty
+        ok   unknown pid -> no-persona
+        ok   unrevealed: apSayCombat returns false, no voice
+        ok   pre-reveal group banter: text shown, voice silent
+        ok   all spoken persona say-sites wired to apSpeak
+      
+      82 passed, 4 failed
+
+  slowest: scripts/test-deterministic-clock-20261014.js 65s, scripts/test-simopt-trajectory-20261010.js 64s, scripts/test-fourthlink-20261014.js 57s
+
+check.js: 1022 passed, 8 failed in 244s
