@@ -257,6 +257,11 @@ function engageVisibleWave3(Game, ctx) {
 // village: same-day return, max 2 companions out, never exiled.
 function veteranHuntLeg(Game, ctx) {
   if (!vetHuntLive(Game)) return;
+  // WILDHOLD (sim-wildhold 2026-10-19, policy-side): the wildhold layer sets
+  // ctx._whHold while the def5 window is live — the deliberate wave-3 hunts
+  // stand down for the window (restraint, not support). Inert when WILDHOLD
+  // is unset (ctx._whHold undefined) — the control arm is untouched.
+  if (ctx && ctx._whHold) { ctx.whHuntsStood = (ctx.whHuntsStood || 0) + 1; return; }
   try {
     if (Game.over || Game.tbfight) return;
     const s = (Game.state || {}).scholar || {};
