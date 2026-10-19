@@ -560,13 +560,23 @@
       const _sh = (v.shielded || {});
       defenders.sort((a, b) => ((_sh[a] ? 1 : 0) - (_sh[b] ? 1 : 0)));
       let di = 0;
+      // RAID DEFENSE BEAT (journey crisis r30 2026-10-19): the village's
+      // fight used to resolve in silence — the RAID line named the raiders,
+      // the defenders' names never appeared in narrative, only in private
+      // 'defended' memories. Now the night gets one aloud beat: who met
+      // them at the door, what it cost. Knowledge-gated (monsterNoun via
+      // mname, never the true name), said aloud like the raid announcement.
+      const defenseReport = [];
+      const refName = (id) => { try { return this.firstRef ? this.firstRef(id) : this.displayName(id); } catch (e) { return 'Someone'; } };
       for (const m of raiders) {
         if (di < defenders.length) {
           const d = defenders[di++];
           // CRISIS MEMORY (journey crisis r6 2026-10-13): the {raid:true}
           // flag marks these fights as haven defense — resolveWildMonster-
           // Encounter plants a 'defended' memory the lately-topic reads.
-          try { if (this.resolveWildMonsterEncounter) this.resolveWildMonsterEncounter(d, m, { raid: true }); } catch (e) {}
+          let rec = null;
+          try { if (this.resolveWildMonsterEncounter) rec = this.resolveWildMonsterEncounter(d, m, { raid: true }); } catch (e) {}
+          if (rec && rec.outcome) defenseReport.push({ vid: d, rec, m });
         } else {
           // nobody met this one — it doesn't gorge once and leave. It
           // LINGERS at the treeline and gorges at each dawn until driven
@@ -575,6 +585,28 @@
           m.lingering = true;
           this.say(`Nobody met ${this.articlePhrase(mname(m))} — it's still out there at the treeline. It'll gorge every night until it's driven off.`);
         }
+      }
+      if (defenseReport.length) {
+        try {
+          const names = defenseReport.map(r => refName(r.vid));
+          const nameList = names.length === 1 ? names[0]
+            : names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
+          const o = defenseReport.map(r => (r.rec && r.rec.outcome) || '?');
+          const kills = o.filter(x => x === 'vKill').length;
+          const stood = o.filter(x => x === 'mFlee').length;
+          const fled = o.filter(x => x === 'vFlee').length;
+          const fallen = defenseReport.filter(r => (r.rec && r.rec.outcome) === 'vDie').map(r => refName(r.vid));
+          const bits = [];
+          if (kills) bits.push(`${kills} put down`);
+          if (stood) bits.push(`${stood} driven off`);
+          if (fled) bits.push(`${fled} barely walked away`);
+          const hurt = defenseReport.filter(r => (r.rec && (r.rec.vTaken || 0)) > 0 && (r.rec.outcome !== 'vDie'))
+            .map(r => refName(r.vid));
+          let line = `🛡️ ${nameList} met them at the door — ${bits.join(', ') || 'met them and lived'}.`;
+          if (fallen.length) line += ` ${fallen.join(', ')} didn't come back.`;
+          if (hurt.length) line += ` ${hurt.join(', ')} ${hurt.length === 1 ? 'is' : 'are'} hurt.`;
+          this.say(line);
+        } catch (e) { console.warn('raid defense beat', e); }
       }
       // the player: without a palisade, one raider can reach a sleeper.
       let playerAtHaven = false;

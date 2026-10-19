@@ -18690,6 +18690,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (how) { try { this.remember(vid, 'defended', how, { sticky: true }); } catch (e) {} }
       }
       this.syncMonsterAlias();
+      // RAID DEFENSE BEAT (journey crisis r30 2026-10-19): havenRaidTick
+      // narrates the defense aloud — it needs the fight record. Returning
+      // the record is backward-compatible (no caller used the return).
+      return rec;
     },
     // worldTick: one living-world step — population, wandering, villagers.
     // Called on tile entry (checkEncounter), so the world moves when you do.
