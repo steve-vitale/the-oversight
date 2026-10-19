@@ -1,0 +1,279 @@
+{
+ "primary": {
+  "leadfeast": {
+   "controlMean": 186.5,
+   "armedMean": 186.5,
+   "ratio": 1
+  },
+  "belongfeast": {
+   "controlMean": 28.3,
+   "armedMean": 40.9,
+   "ratio": 1.45
+  }
+ },
+ "guardrails": {
+  "leadfeast": {
+   "national": {
+    "control": 6,
+    "armed": 6,
+    "ok": true
+   },
+   "wave4": {
+    "control": 6,
+    "armed": 6,
+    "ok": true
+   },
+   "wins": {
+    "control": 0,
+    "armed": 0
+   },
+   "medianSurvival": {
+    "control": 110,
+    "armed": 110,
+    "ok": true
+   },
+   "starvation": {
+    "freshControl": 4,
+    "armed": 4,
+    "ok": true
+   },
+   "newDeathModes": {
+    "modes": [],
+    "ok": true
+   },
+   "allOk": true
+  },
+  "belongfeast": {
+   "national": {
+    "control": 4,
+    "armed": 2,
+    "ok": false
+   },
+   "wave4": {
+    "control": 5,
+    "armed": 6,
+    "ok": true
+   },
+   "wins": {
+    "control": 0,
+    "armed": 0
+   },
+   "medianSurvival": {
+    "control": 116,
+    "armed": 113.5,
+    "ok": true
+   },
+   "starvation": {
+    "freshControl": 5,
+    "armed": 5,
+    "ok": true
+   },
+   "newDeathModes": {
+    "modes": [],
+    "ok": true
+   },
+   "allOk": false
+  }
+ },
+ "perSeed": {
+  "leadfeast": [
+   {
+    "seed": 64201,
+    "controlSD": 240,
+    "armedSD": 240,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64202,
+    "controlSD": 378,
+    "armedSD": 378,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64203,
+    "controlSD": 42,
+    "armedSD": 42,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 3,
+    "armedWave": 3,
+    "armedGate": null
+   },
+   {
+    "seed": 64204,
+    "controlSD": 378,
+    "armedSD": 378,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64205,
+    "controlSD": 151,
+    "armedSD": 151,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64206,
+    "controlSD": 0,
+    "armedSD": 0,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 1,
+    "armedWave": 1,
+    "armedGate": null
+   },
+   {
+    "seed": 64207,
+    "controlSD": 141,
+    "armedSD": 141,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64208,
+    "controlSD": 162,
+    "armedSD": 162,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   }
+  ],
+  "belongfeast": [
+   {
+    "seed": 64201,
+    "controlSD": 5,
+    "armedSD": 26,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 3,
+    "armedWave": 3,
+    "armedGate": {
+     "checked": 21,
+     "allowed": 0,
+     "blocked": 21,
+     "blockedReasons": {
+      "seasoned-bond-no-5fire-rival": 21
+     }
+    }
+   },
+   {
+    "seed": 64202,
+    "controlSD": 5,
+    "armedSD": 37,
+    "controlNat": true,
+    "armedNat": false,
+    "controlWave": 3,
+    "armedWave": 4,
+    "armedGate": {
+     "checked": 42,
+     "allowed": 0,
+     "blocked": 42,
+     "blockedReasons": {
+      "seasoned-bond-no-5fire-rival": 42
+     }
+    }
+   },
+   {
+    "seed": 64203,
+    "controlSD": 7,
+    "armedSD": 21,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": {
+     "checked": 15,
+     "allowed": 1,
+     "blocked": 14,
+     "blockedReasons": {
+      "seasoned-bond-no-5fire-rival": 14
+     }
+    }
+   },
+   {
+    "seed": 64204,
+    "controlSD": 42,
+    "armedSD": 42,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": {
+     "checked": 12,
+     "allowed": 0,
+     "blocked": 12,
+     "blockedReasons": {
+      "seasoned-bond-no-5fire-rival": 12
+     }
+    }
+   },
+   {
+    "seed": 64205,
+    "controlSD": 82,
+    "armedSD": 82,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64206,
+    "controlSD": 0,
+    "armedSD": 0,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 1,
+    "armedWave": 1,
+    "armedGate": null
+   },
+   {
+    "seed": 64207,
+    "controlSD": 50,
+    "armedSD": 84,
+    "controlNat": true,
+    "armedNat": false,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": {
+     "checked": 78,
+     "allowed": 1,
+     "blocked": 77,
+     "blockedReasons": {
+      "seasoned-bond-no-5fire-rival": 77
+     }
+    }
+   },
+   {
+    "seed": 64208,
+    "controlSD": 35,
+    "armedSD": 35,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   }
+  ]
+ }
+}
