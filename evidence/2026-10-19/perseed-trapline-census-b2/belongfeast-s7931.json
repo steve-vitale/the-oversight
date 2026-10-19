@@ -1,0 +1,1752 @@
+{
+ "baseSHA": "6143e6cd680f37e85174ee6114f36a5bfe6c154c",
+ "seed": 7931,
+ "policy": "belongfeast",
+ "days": 180,
+ "endReason": "survived",
+ "env": {
+  "feastscale": "1",
+  "seatdrive": "0",
+  "pitknowledge": "unset"
+ },
+ "day0": {
+  "holders": [
+   {
+    "vid": "gen_lfvdftl",
+    "name": "A person, maybe 50s, with grey-streaked hair",
+    "occ": "trail_crew",
+    "age": 53
+   }
+  ],
+  "scholarOcc": "army_medic",
+  "scholarPitLevel": 0,
+  "scholarPitVia": null
+ },
+ "joins": [
+  {
+   "day": 137,
+   "vid": "app_mgpsphlr76",
+   "name": "Kazuya",
+   "occ": "arborist",
+   "age": 55,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 139,
+   "vid": "grace_obi",
+   "name": "Grace",
+   "occ": "esl_teacher",
+   "age": 43,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 155,
+   "vid": "mara_vasquez",
+   "name": "Mara",
+   "occ": "army_medic",
+   "age": 52,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 156,
+   "vid": "visjoin_154",
+   "name": "Thabo",
+   "occ": "bike_messenger",
+   "age": 20,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 157,
+   "vid": "owen_smith",
+   "name": "Owen",
+   "occ": "hunting_guide",
+   "age": 33,
+   "knowsPit": true,
+   "origin": "background-trapper",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 168,
+   "vid": "quinn_murphy",
+   "name": "Quinn",
+   "occ": "bartender",
+   "age": 25,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  }
+ ],
+ "firings": {
+  "teaches": 1,
+  "overhears": 0,
+  "lessons": 0,
+  "catches": 3
+ },
+ "pit": {
+  "catches": 3,
+  "kcal": 1848,
+  "kcalPer100d": 1026.7,
+  "boar": 1,
+  "boarKcal": 553,
+  "boarShare": 33.3,
+  "avgBoarKcal": 553,
+  "species": {
+   "raccoon": 2,
+   "wild_boar": 1
+  },
+  "kcalByOrigin": {
+   "background-trapper": 1848
+  },
+  "catchesByOrigin": {
+   "background-trapper": 3
+  }
+ },
+ "p612": {
+  "teachCalls": 56,
+  "pitTeacherCalls": 1,
+  "pitEligible": 1,
+  "gateNeedFail": 0,
+  "gateNeedPass": 1,
+  "gate85Fail": 1,
+  "teleNeedMismatch": 0,
+  "topicSplit": {
+   "?": 44,
+   "snare": 1
+  },
+  "mismatchRate": 0
+ },
+ "teaches": [
+  {
+   "day": 34,
+   "teacher": "Bodhi",
+   "tocc": "trail_crew",
+   "trust": 90
+  }
+ ],
+ "overhears": [],
+ "lessons": [],
+ "teachCalls": [
+  {
+   "day": 6,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 65,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 9,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 66,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 10,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_lfvdftl",
+   "lst": {
+    "hunger": 73,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": true
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 16,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 16,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 56,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 17,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 41,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 19,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 21,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 60,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 25,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 40,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 25,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 42,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 25,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 49,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 31,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 40,
+   "teacher": "gen_jybj3ps",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 40,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 44,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 45,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 46,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 52,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 26,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 52,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 45,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 53,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 9,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 61,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 62,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 69,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 22,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 69,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 46,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 69,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 58,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 72,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 44,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 75,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 14,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 75,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 41,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 75,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 52,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 78,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 86,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 87,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 91,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 47,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 95,
+   "teacher": "gen_lfvdftl",
+   "tKnowsPit": true,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 10,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": "snare",
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 97,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 19,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 97,
+   "teacher": "greta_hansen",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 25,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 101,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 102,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 103,
+   "teacher": "gen_jybj3ps",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 56,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 105,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 34,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 105,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 33,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 105,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 105,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 107,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 109,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 109,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 75,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 115,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 118,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 36,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 119,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 51,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 124,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 28,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 129,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 131,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 60,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 138,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 138,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "app_mgpsphlr76",
+   "lst": {
+    "hunger": 28,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 139,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 148,
+   "teacher": "grace_obi",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 158,
+   "teacher": "grace_obi",
+   "tKnowsPit": false,
+   "learner": "owen_smith",
+   "lst": {
+    "hunger": 73,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": true
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 181,
+   "teacher": "mara_vasquez",
+   "tKnowsPit": false,
+   "learner": "grace_obi",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  }
+ ],
+ "ledger": {
+  "gen_lfvdftl": {
+   "vid": "gen_lfvdftl",
+   "appearDay": 0,
+   "via": "day0",
+   "origin": "background-trapper",
+   "catches": [
+    {
+     "day": 44,
+     "species": "raccoon",
+     "kcal": 687
+    },
+    {
+     "day": 71,
+     "species": "raccoon",
+     "kcal": 608
+    },
+    {
+     "day": 90,
+     "species": "wild_boar",
+     "kcal": 553
+    }
+   ],
+   "teaches": [
+    {
+     "day": 34
+    }
+   ],
+   "lessonsTaught": [],
+   "lessonsLearned": [],
+   "depart": "scholar-succession",
+   "departDay": 115,
+   "departCause": "became-scholar"
+  },
+  "owen_smith": {
+   "vid": "owen_smith",
+   "appearDay": 157,
+   "via": "join",
+   "origin": "background-trapper",
+   "catches": [],
+   "teaches": [],
+   "lessonsTaught": [],
+   "lessonsLearned": [],
+   "depart": "survived",
+   "departDay": 180,
+   "departCause": null
+  }
+ },
+ "unattributed": [],
+ "holderDeaths": [],
+ "transcript": [
+  "[d1] \"You haven't earned that yet,\" A woman, maybe 40s, with a scarred cheek says. (Trust too low.)",
+  "[d1] A woman, maybe 40s, with a scarred cheek shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d1] A woman, maybe 40s, with a scarred cheek looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d1] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d2] A person, maybe 40s, with calloused knuckles is down by the firepit, nudging coals back into the middle.",
+  "[d2] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d3] 👁 It dives the second it spooks and stays down longer than your nerve holds. Corner it away from the water, or trap the den mouth at dusk.",
+  "[d3] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d3] Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d3] Caleb is showing A woman, maybe 60s how to tie a snare. Hands patient. It takes three tries.",
+  "[d4] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d4] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d4] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d4] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d4] Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d4] A runner from Ashford, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d5] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d5] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d5] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d5] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~750 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d6] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d7] You sow Burdock — 14 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d7] Village meal: +1251 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d8] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d8] ◈ THE MENTOR — Emily watches Guadalupe work, then reaches over. \"No. Like this.\" An hour later something has unlocked that no manual could teach. (Ability slots: 4)",
+  "[d8] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d8] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d9] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d9] You sow Purslane — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d9] You sow Purslane — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d9] 🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)",
+  "[d9] Karl has been turning the Burdock over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d10] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d10] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d10] You sow Burdock — 14 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d10] A runner from Emberhold, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d10] 🌙 Raid — Emberhold came in the night from the southeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d10] A runner from Thornfield, dusty and direct: \"Your foragers are stripping our side of the northeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d10] 🌙 Raid — Ashford came in the night from the northwest. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d11] Sam hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d11] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 13 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d12] 📋 SYSTEM QUEST: \"We've been thinking. You know things we don't. Teach us? Show us a plant you know COMPLETELY (Codex L3). We will watch very closely, which is our entire personality.\"",
+  "[d12] Sam is showing Lena how to tie a snare. Hands patient. It takes three tries.",
+  "[d13] Chinh is down by the firepit, nudging coals back into the middle.",
+  "[d13] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d15] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 12 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d15] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d17] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d18] 📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\"",
+  "[d20] ⛓️ Bodhi brings it home: Haven bows to Stonebridge — one organization, them primary. Tribute: 5,000 kcal/week. The relationship starts at trust 30. Everything from here is earned.",
+  "[d20] 🎁 Haven's first gesture: 2,000 kcal walks to Stonebridge's fire — a gift, no strings. They count it, and they remember who sent it. (Trust +10.)",
+  "[d20] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d21] 🐪 A trader from the downriver village walks into Haven, pack heavy, smile practiced. River-mud on their boots, river-gossip on their tongue.",
+  "[d22] You give Stonebridge 1,600 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d22] Raj sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d22] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d23] A runner from Stonebridge, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d27] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d28] You give Stonebridge 1,600 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d32] Lena is down by the firepit, nudging coals back into the middle.",
+  "[d32] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d33] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d34] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d34] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d34] Recipe: Snare (Level 1). You have seen a snare. A loop, a stick, an animal.",
+  "[d34] 🪤 Bodhi catches you watching the snares come off the line. \"...Want to actually SEE one?\" They show you — the loop, the trigger stick, where the run narrows between the roots. \"Opossum trails. Check at dawn. Always.\" Your hands don't know it yet. Your eyes do.",
+  "[d34] Recipe: Pit Trap (Level 1). A pit with stakes in the bottom. Dig it on a trail, brush it over, wait.",
+  "[d34] 🪤 Bodhi catches you watching the pit line. \"...Want to actually SEE one?\" They walk you out to it — the depth, the sharpened stakes at the bottom, where the game trail runs. \"Brush it over with leaves. And mark it well — your own pit will take you too.\" Your hands don't know it yet. Your eyes do.",
+  "[d35] 👁 It waits for YOU to come close — the stillness is the trap. Spot the shape before you're in reach, and strike first. It only gets one.",
+  "[d35] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d35] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d35] A runner from The Red Table, dusty and direct: \"Your foragers are stripping our side of the east ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d35] A runner from The Bloodied, dusty and direct: \"Your foragers are stripping our side of the west ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d36] You give Stonebridge 1,350 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d36] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d37] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d38] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d40] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d40] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d40] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d41] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d41] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1440 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d42] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d42] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d42] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d42] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d42] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d43] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d43] Greta is down by the firepit, nudging coals back into the middle.",
+  "[d43] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d44] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d44] 🪤 Bodhi is back from the pit line: Raccoon in the pit — +687 kcal to the pantry.",
+  "[d45] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d46] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 21 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d46] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d47] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d47] 🪤 Bodhi is back from the snares: +266 kcal to the pantry.",
+  "[d47] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d47] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d48] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d48] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d49] 🥣 Ellis of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d50] The village threw out spoiled stores: Foraged food, Pit meat (Raccoon). (pantry)",
+  "[d50] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d50] Lena sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d50] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d50] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d50] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d51] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d51] Sam is showing Daniyar how to tie a snare. Hands patient. It takes three tries.",
+  "[d53] The village threw out spoiled stores: Foraged food, Snared meat, Foraged food (dried). (pantry)",
+  "[d53] Sam is down by the firepit, nudging coals back into the middle.",
+  "[d53] You give Stonebridge 1,440 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d53] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d54] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d54] 🪤 Bodhi is back from the snares: +352 kcal to the pantry.",
+  "[d54] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d54] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d54] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1319 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d55] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d55] 🌙 Raid — The Red Table came in the night from the east. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d56] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d58] Lena sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d58] Chinh is showing Lena how to tie a snare. Hands patient. It takes three tries.",
+  "[d60] The village threw out spoiled stores: Foraged food, Snared meat, Foraged food (dried). (pantry)",
+  "[d60] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d61] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d62] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d62] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d64] The village threw out spoiled stores: Foraged food, Foraged food (dried), Pit meat (Raccoon) (dried). (pantry)",
+  "[d64] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d64] Daniyar sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d64] The obligation is honored. Trust with Stonebridge: 100.",
+  "[d65] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d65] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d65] Bodhi is showing Raj how to tie a snare. Hands patient. It takes three tries.",
+  "[d65] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1300 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d66] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d67] Deeper knowledge: Muscadine Grapes. Uses: sugar, resveratrol. Leaves are edible (like grape leaves). (+5 health when eaten). All uses known: food: thick-skinned wild grapes, sweet-tart; bait: fallen fruit baits traps well.",
+  "[d67] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 23 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d68] Sam sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d69] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d69] 🪤 Bodhi is back from the snares: +343 kcal to the pantry.",
+  "[d69] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d71] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d71] 🪤 Bodhi is back from the snares: +250 kcal to the pantry.",
+  "[d71] 🪤 Bodhi is back from the pit line: Raccoon in the pit — +608 kcal to the pantry.",
+  "[d71] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1280 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d72] Lena sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d72] 🤝 Daniyar kneels at Stonebridge's court and swears the oath — sealed with 3,040 kcal of Haven's harvest. The realm has its fires now, and one of them is yours. (Trust +12.)",
+  "[d73] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d74] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1043 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d74] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1250 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d76] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d76] You give Stonebridge 1,600 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d77] The village threw out spoiled stores: Foraged food, Pit meat (Raccoon), Snared meat. (pantry)",
+  "[d77] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d77] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d77] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1280 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d78] Lena is showing Raj how to tie a snare. Hands patient. It takes three tries.",
+  "[d78] 💡 KNOWLEDGE COMBINES: Wild Black Cherry — Level 2. You knew it was safe. the village knew the rest. Together, it's deeper. Parts: ripe fruit (dark purple-black). SPIT THE PITS — they contain cyanide compounds.",
+  "[d79] 📖 LEARNED: Tainted Bait (Level 1). Your bait is tainted — traps catch 50% more. (The poison’s in the bait, not your hands. Mostly.)",
+  "[d81] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d81] 🪤 Bodhi is back from the snares: +312 kcal to the pantry.",
+  "[d81] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d82] You give Stonebridge 1,440 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d82] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d82] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d82] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d82] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1235 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d83] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d84] 📯 Stonebridge calls on the obligation: Send your best for three days. \"Stonebridge needs hands it can trust.\" Honor it, or refuse — both are remembered.",
+  "[d84] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~960 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d85] The obligation is honored. Trust with Stonebridge: 100.",
+  "[d85] Lena is showing Daniyar how to tie a snare. Hands patient. It takes three tries.",
+  "[d85] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~636 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d85] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d86] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d88] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d90] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d90] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d90] 🪤 Bodhi is back from the pit line: Wild Boar in the pit — +553 kcal to the pantry.",
+  "[d91] Caleb is showing Petra how to tie a snare. Hands patient. It takes three tries.",
+  "[d94] Watch by day, watch by night. Let both shifts teach.",
+  "[d94] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d94] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d94] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d94] You give Stonebridge 1,760 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d94] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d95] 📖 Bodhi is showing Caleb the snare — the loop, the trigger stick, where the run narrows between the roots. \"Opossum trails. Check at dawn. Always.\"",
+  "[d95] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d95] 📖 LEARNED: Wire Snares (Level 2). Set the loop at head height for the target species. Anchor it solid. Camouflage the wire.",
+  "[d95] 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Wire Snares, Mediation. Your Codex overflows.",
+  "[d96] The village threw out spoiled stores: Foraged food, Pit meat (Wild Boar). (pantry)",
+  "[d96] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d96] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d96] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d96] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d97] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d97] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d97] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 29 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d98] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d98] 🪤 Bodhi is back from the snares: +133 kcal to the pantry.",
+  "[d98] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d99] The obligation is honored. Trust with Stonebridge: 100.",
+  "[d99] You've only SEEN a Snare. You'll try to copy it from memory — long odds, and the materials are at risk if it comes apart.",
+  "[d99] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d99] Recipe: Snare (Level 2). Materials: vine (muscadine or bush) + stick (tree branch). The loop goes on a game trail.",
+  "[d100] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d101] The village threw out spoiled stores: Foraged food, Foraged food (dried), Snared meat (dried). (pantry)",
+  "[d101] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d101] 🪤 Caleb is back from the snares: +105 kcal to the pantry.",
+  "[d101] You set a Snare here. Check it tomorrow.",
+  "[d101] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d101] You give Stonebridge 1,832 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d101] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d101] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d102] You set a Snare here. Check it tomorrow.",
+  "[d102] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d102] Your Snare 2 tiles north-east sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d102] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d103] Your Snare 1 tile east sits empty — the game trails bend around the hollow now. This ground has learned your trap. Rest it, or move the line.",
+  "[d104] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d104] You set a Snare here. Check it tomorrow.",
+  "[d104] 🪤 Bodhi is back from the snares: +118 kcal to the pantry.",
+  "[d104] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d104] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d104] Your Snare 1 tile east sits empty — the game trails bend around the hollow now. This ground has learned your trap. Rest it, or move the line.",
+  "[d105] Your Snare 1 tile east sits empty — the game trails bend around the hollow now. This ground has learned your trap. Rest it, or move the line.",
+  "[d106] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d106] You set a Snare here. Check it tomorrow.",
+  "[d106] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d106] Your Snare 2 tiles north-east sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d106] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d106] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d107] 🪤 Caleb is back from the snares: +195 kcal to the pantry.",
+  "[d107] You set a Snare here. Check it tomorrow.",
+  "[d107] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d107] Your Snare 1 tile east sits empty — the game trails bend around the hollow now. This ground has learned your trap. Rest it, or move the line.",
+  "[d108] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d108] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d108] Lena is down by the firepit, nudging coals back into the middle.",
+  "[d108] Lena is down by the firepit, nudging coals back into the middle.",
+  "[d108] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d108] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d109] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d109] Sam is showing Bodhi how to tie a snare. Hands patient. It takes three tries.",
+  "[d109] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d110] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d110] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d110] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d110] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d111] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d111] You set a Snare here. Check it tomorrow.",
+  "[d111] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d111] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d111] Your Snare 2 tiles south sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d111] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d111] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d112] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d112] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d112] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d112] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~640 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d113] The village threw out spoiled stores: Foraged food, Snared meat, Foraged food (dried). (pantry)",
+  "[d113] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d113] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d113] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d113] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1440 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d114] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d114] Emily was under your wing — learning, getting sharper — and now they're gone. The village doesn't say it, but you feel the trust go. (Village trust -8.)",
+  "[d114] At the grave, Sam, Chinh, Greta and 3 more speak for Bodhi — \"Emily trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d114] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d114] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d115] You set a Snare here. Check it tomorrow.",
+  "[d115] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d115] Your Snare 2 tiles north-east sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d115] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d115] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d116] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d116] 🥣 Ben of The Bloodied II walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d116] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d117] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d117] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d117] 👁 It doesn't run — the armor IS the plan. It'll hunch down and dare you. The armor turns a blow; grab the soft underbelly, or trap the grub trail at night.",
+  "[d117] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d117] Your Snare 1 tile east sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d117] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d117] A runner from The Bloodied II, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d118] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d118] You give Stonebridge 1,920 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d118] Your Snare 1 tile east sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d118] Your Snare 1 tile east sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d119] Greta is down by the firepit, nudging coals back into the middle.",
+  "[d119] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d119] 🥣 Ibrahim of Emberhold walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d120] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d120] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d120] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d120] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 35 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d120] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1065 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d120] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1291 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d121] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d121] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d122] You set a Snare here. Check it tomorrow.",
+  "[d122] Your Snare 2 tiles north-east sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d123] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d123] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d123] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d123] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d123] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1581 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d124] You give Stonebridge 1,796 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d126] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d127] 🗣️ Greta is giving you strange looks. Someone's been talking. Someone who knows how trust works here.",
+  "[d127] The obligation is honored. Trust with Stonebridge: 100.",
+  "[d128] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d128] 🌙 Raid — The Bloodied II came in the night from the southeast. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d129] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d130] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d131] You set a Snare here. Check it tomorrow.",
+  "[d131] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d131] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d131] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d131] 🌙 Raid — The Red Table came in the night from the east. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d132] Nothing edible. (unknown roots, Gray Squirrel (trapped), unknown nuts, unknown shoots, Hickory Nuts (in shell) — not food yet: identify it first — test cautiously from your pack, or sort it at camp.)",
+  "[d132] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d132] 🪤 TRAP: Your Snare 1 tile east caught a Virginia Opossum! About 1200 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d133] Took Snared meat.",
+  "[d133] You eat Snared meat (239 kcal).",
+  "[d133] Your Snare 1 tile east sits empty — the game trails bend around the hollow now. This ground has learned your trap. Rest it, or move the line.",
+  "[d133] 📖 LEARNED: Diplomatic Incident (Level 1). Trust builds 2x faster. You're TOO good though — once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+  "[d133] At the grave, Sam, Chinh, Greta and 3 more speak for Lena — \"Bodhi trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d134] At the grave, Chinh, Greta, Caleb and 2 more speak for Sam — \"Lena trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d134] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 39 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d134] 🪤 TRAP: Your Snare 4 tiles north-east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d135] ✨ Ability gained: Loud Chewer (L1). Eating is 2x louder (monsters hear you). But villagers love eating beside you: trust builds 10% faster.",
+  "[d135] Your Snare 4 tiles north-east sits empty — the game trails bend around the hollow now. This ground has learned your trap. Rest it, or move the line.",
+  "[d136] You give Stonebridge 1,328 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d136] 🚶 a weathered cook walks in — pack light, eyes wide. Haven grows by one. (8 souls.)",
+  "[d136] 📓 Codex: a weathered cook arrived and joined.",
+  "[d136] 🪤 TRAP: Your Snare 4 tiles north-east caught a Virginia Opossum! About 1200 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d138] 🚶 Grace Obi walks in — pack light, eyes wide. Haven grows by one. (9 souls.)",
+  "[d138] 🪤 TRAP: Your Snare 4 tiles north-east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d139] Kazuya sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d139] Grace sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d140] 📯 Stonebridge calls on the obligation: Send your best for three days. \"Stonebridge needs hands it can trust.\" Honor it, or refuse — both are remembered.",
+  "[d140] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1816 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d141] The obligation is honored. Trust with Stonebridge: 100.",
+  "[d142] 🪤 TRAP: Your Snare 4 tiles north-east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d144] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d144] You give Stonebridge 2,076 kcal from Haven's bins — real food, honestly counted. Ibrahim weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d144] 🪤 Caleb is back from the snares: +184 kcal to the pantry.",
+  "[d144] Grace has been turning the Loquat over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d144] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d145] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d145] 🪤 Caleb is back. \"Snares were empty. They'll keep.\"",
+  "[d145] 🪤 TRAP: Your Snare 4 tiles north-east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d145] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1559 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d146] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d146] 🪤 Caleb is back from the snares: +256 kcal to the pantry.",
+  "[d146] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d146] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d147] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d148] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d148] 🪤 Caleb is back from the snares: +386 kcal to the pantry.",
+  "[d148] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d149] Caleb heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d149] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1499 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d150] Took Snared meat.",
+  "[d150] You eat Snared meat (256 kcal).",
+  "[d150] Taken: Crossbow x1, Good Boots x1, Work Gloves x1, Hand drill x1, Pitch torch x1.",
+  "[d150] You take crossbow, good boots, work gloves, hand drill, pitch torch from Caleb. Your hands know what they did. (+21 trauma)",
+  "[d150] You refuse Stonebridge — gently, honestly, aloud. Ibrahim nods like they expected it. (Trust -5.)",
+  "[d150] 🪤 TRAP: Your Snare 1 tile east caught a Virginia Opossum! About 1200 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d151] Nothing edible. (Virginia Opossum (trapped), unknown roots — not food yet: Gut it quickly — clean with a knife. Spoils in ~2 days..)",
+  "[d151] 🪤 TRAP: Your Snare 1 tile east caught a Virginia Opossum! About 1200 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d152] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d152] At the grave, Chinh, Greta, Raj and 1 more speak for Daniyar — \"Sam trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d152] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d152] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d152] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d153] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d154] At the grave, Chinh, Greta, Kazuya speak for Raj — \"Daniyar trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d154] You set a Snare here. Check it tomorrow.",
+  "[d154] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d154] 🚶 Mara Vasquez walks in — pack light, eyes wide. Haven grows by one. (6 souls.)",
+  "[d154] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d154] 🪤 TRAP: Your Snare 4 tiles north-east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d154] The Snare broke. You'll need another.",
+  "[d154] Your Snare 2 tiles south sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d154] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d155] The obligation is honored. Trust with Stonebridge: 89.",
+  "[d155] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d155] A curious wanderer grins wide. Haven grows by one.",
+  "[d155] 🗣️ Mara to Grace, by the fire: \"It waits. We wait. Somebody should check the snares — the table doesn't fill the pantry.\"",
+  "[d156] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d156] You refuse Stonebridge — gently, honestly, aloud. Peter nods like they expected it. (Trust -5.)",
+  "[d156] 🚶 Owen Smith walks in — pack light, eyes wide. Haven grows by one. (8 souls.)",
+  "[d156] 🪤 TRAP: Your Snare 1 tile east caught a Gray Squirrel! About 350 kcal on the bone — clean it quickly (knife). It rots fast.",
+  "[d156] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d157] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d158] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d159] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d160] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d160] You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)",
+  "[d160] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1845 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d161] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d161] You set a Snare here. Check it tomorrow.",
+  "[d161] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d161] Your Snare 2 tiles south sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d162] 🪤 Owen is back from the snares: +142 kcal to the pantry.",
+  "[d162] 🪤 Owen is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d162] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d162] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d162] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d162] You give Stonebridge 1,882 kcal from Haven's bins — real food, honestly counted. Peter weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d162] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d162] 🌙 Raid — The Bloodied II came in the night from the southeast. They carried off ~1500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d163] 🪤 Owen is back. \"Snares were empty. They'll keep.\"",
+  "[d163] 🪤 Owen is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d163] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d163] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d164] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d164] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d164] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d164] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d165] At the grave, Greta speaks for Kazuya — \"Raj trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d165] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d165] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d165] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d165] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1100 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d166] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d166] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d166] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d166] 🌙 Raid — The Red Table came in the night from the east. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d167] 👁 The tail-slap ends the hunt — it dives and warns the whole creek. Strike before the tail rises, or trap the slide.",
+  "[d167] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d167] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d167] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d167] Too heavy for the rest — left where it lies: unknown roots x5, Virginia Opossum (cleaned) x2, unknown shoots x5, Branch x2, Bark strip x2, Branch x1, Bark strip x1, Crossbow x1, Good Boots x1, Work Gloves x1, Hand drill x1, Pitch torch x1, Hide x1, Bone x1, Wrong bandage x1, Wrong bandage x1, Wrong bandage x1, Hickory Nuts (in shell) x9, Hide x1, Bone x1, Fire-hardened spear x1, Adaptive Dermis x1, Hardlight knife x1.",
+  "[d167] 🚶 Quinn Murphy walks in — pack light, eyes wide. Haven grows by one. (8 souls.)",
+  "[d168] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d168] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d168] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d168] Too heavy for the rest — left where it lies: unknown roots x5, Virginia Opossum (cleaned) x2, unknown shoots x5, Branch x2, Bark strip x2, Branch x1, Bark strip x1, Crossbow x1, Good Boots x1, Work Gloves x1, Hand drill x1, Pitch torch x1, Hide x1, Bone x1, Wrong bandage x1, Wrong bandage x1, Wrong bandage x1, Hickory Nuts (in shell) x9, Hide x1, Bone x1, Fire-hardened spear x1, Adaptive Dermis x1, Hardlight knife x1.",
+  "[d169] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d169] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d169] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d169] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d170] Mara hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d170] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d170] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~750 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d172] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d172] You give Stonebridge 1,600 kcal from Haven's bins — real food, honestly counted. Peter weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d172] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d173] 🪤 Owen is back. \"Snares were empty. They'll keep.\"",
+  "[d173] 🪤 Owen is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d175] Too heavy for the rest — left where it lies: unknown roots x5, Virginia Opossum (cleaned) x2, unknown shoots x5, Branch x2, Bark strip x2, Branch x1, Bark strip x1, Crossbow x1, Good Boots x1, Work Gloves x1, Hand drill x1, Pitch torch x1, Hide x1, Bone x1, Wrong bandage x1, Wrong bandage x1, Wrong bandage x1, Hickory Nuts (in shell) x9, Hide x1, Bone x1, Fire-hardened spear x1, Adaptive Dermis x1, Hardlight knife x1.",
+  "[d175] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d176] 👁 The tail-slap ends the hunt — it dives and warns the whole creek. Strike before the tail rises, or trap the slide.",
+  "[d176] Too heavy for the rest — left where it lies: unknown roots x5, Virginia Opossum (cleaned) x2, unknown shoots x5, Branch x2, Bark strip x2, Branch x1, Bark strip x1, Crossbow x1, Good Boots x1, Work Gloves x1, Hand drill x1, Pitch torch x1, Hide x1, Bone x1, Wrong bandage x1, Wrong bandage x1, Wrong bandage x1, Hickory Nuts (in shell) x9, Hide x1, Bone x1, Fire-hardened spear x1, Adaptive Dermis x1, Hardlight knife x1.",
+  "[d176] 📖 LEARNED: Light Fingers (Level 1). Steal from pantry without trust loss (50%). If caught, -20 trust.",
+  "[d176] 🌙 Raid — The Bloodied II came in the night from the southeast. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d177] Caught red-handed! They saw you steal. Trust -20.",
+  "[d177] Caught red-handed! They saw you steal. Trust -20.",
+  "[d177] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d177] 🪤 Owen is back from the snares: +169 kcal to the pantry.",
+  "[d177] 🪤 Owen is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d178] 👥 Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d178] 🪤 Owen is back from the snares: +180 kcal to the pantry.",
+  "[d178] 🪤 Owen is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d179] 🌙 Raid — The Bloodied came in the night from the west. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d180] Mara sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d180] 🌙 Raid — The Bloodied II came in the night from the southeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d181] Owen heads out to check the snares. \"Wire doesn't lie.\""
+ ],
+ "wall": {
+  "maxScale": "regional",
+  "won": false,
+  "tableWaiting": true,
+  "maxWaveUnlocked": 3,
+  "maxArc": 4
+ },
+ "deaths": {
+  "player": 1,
+  "villager": 15,
+  "buckets": {
+   "violence": 6,
+   "age": 6,
+   "other:monster": 2,
+   "dehydration": 1,
+   "other:alien": 1
+  }
+ }
+}

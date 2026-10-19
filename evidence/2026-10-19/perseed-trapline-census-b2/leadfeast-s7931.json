@@ -1,0 +1,1603 @@
+{
+ "baseSHA": "6143e6cd680f37e85174ee6114f36a5bfe6c154c",
+ "seed": 7931,
+ "policy": "leadfeast",
+ "days": 178,
+ "endReason": "village-lost",
+ "env": {
+  "feastscale": "1",
+  "seatdrive": "0",
+  "pitknowledge": "unset"
+ },
+ "day0": {
+  "holders": [
+   {
+    "vid": "gen_lfvdftl",
+    "name": "A person, maybe 50s, with grey-streaked hair",
+    "occ": "trail_crew",
+    "age": 53
+   }
+  ],
+  "scholarOcc": "army_medic",
+  "scholarPitLevel": 0,
+  "scholarPitVia": null
+ },
+ "joins": [
+  {
+   "day": 104,
+   "vid": "app_mgpsphlr76",
+   "name": "Fahmida",
+   "occ": "tailor",
+   "age": 63,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 106,
+   "vid": "owen_smith",
+   "name": "Owen",
+   "occ": "hunting_guide",
+   "age": 33,
+   "knowsPit": true,
+   "origin": "background-trapper",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 130,
+   "vid": "zoe_adams",
+   "name": "Zoe",
+   "occ": "journalist",
+   "age": 21,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 133,
+   "vid": "yuki_mori",
+   "name": "Yuki",
+   "occ": "librarian",
+   "age": 31,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 173,
+   "vid": "visjoin_171",
+   "name": "Enrique",
+   "occ": "midwife",
+   "age": 33,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  }
+ ],
+ "firings": {
+  "teaches": 1,
+  "overhears": 0,
+  "lessons": 0,
+  "catches": 2
+ },
+ "pit": {
+  "catches": 2,
+  "kcal": 1448,
+  "kcalPer100d": 813.5,
+  "boar": 1,
+  "boarKcal": 993,
+  "boarShare": 50,
+  "avgBoarKcal": 993,
+  "species": {
+   "white_tailed_deer": 1,
+   "wild_boar": 1
+  },
+  "kcalByOrigin": {
+   "background-trapper": 1448
+  },
+  "catchesByOrigin": {
+   "background-trapper": 2
+  }
+ },
+ "p612": {
+  "teachCalls": 42,
+  "pitTeacherCalls": 1,
+  "pitEligible": 1,
+  "gateNeedFail": 0,
+  "gateNeedPass": 1,
+  "gate85Fail": 1,
+  "teleNeedMismatch": 0,
+  "topicSplit": {
+   "?": 32
+  },
+  "mismatchRate": 0
+ },
+ "teaches": [
+  {
+   "day": 43,
+   "teacher": "Bodhi",
+   "tocc": "trail_crew",
+   "trust": 90
+  }
+ ],
+ "overhears": [],
+ "lessons": [],
+ "teachCalls": [
+  {
+   "day": 6,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 65,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 9,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 66,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 10,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_lfvdftl",
+   "lst": {
+    "hunger": 73,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": true
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 16,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 16,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 56,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 17,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 41,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 19,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 26,
+   "teacher": "raj_patel",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 43,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 29,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 11,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 31,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 20,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 38,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 38,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 35,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 38,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_wo5mrrl",
+   "lst": {
+    "hunger": 30,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 38,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 47,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 41,
+   "teacher": "greta_hansen",
+   "tKnowsPit": false,
+   "learner": "gen_lfvdftl",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": true
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 43,
+   "teacher": "gen_jybj3ps",
+   "tKnowsPit": false,
+   "learner": "raj_patel",
+   "lst": {
+    "hunger": 31,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 43,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 56,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 51,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 35,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 56,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 37,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 61,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 63,
+   "teacher": "gen_jdape6a",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 26,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 64,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 21,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 64,
+   "teacher": "gen_lfvdftl",
+   "tKnowsPit": true,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 22,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 67,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_wo5mrrl",
+   "lst": {
+    "hunger": 49,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 68,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "gen_lfvdftl",
+   "lst": {
+    "hunger": 56,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": true
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 71,
+   "teacher": "greta_hansen",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 15,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 72,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 74,
+   "teacher": "gen_jybj3ps",
+   "tKnowsPit": false,
+   "learner": "lena_ruiz",
+   "lst": {
+    "hunger": 65,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 90,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 94,
+   "teacher": "gen_jybj3ps",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 18,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 94,
+   "teacher": "gen_jybj3ps",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 97,
+   "teacher": "gen_wo5mrrl",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 73,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 97,
+   "teacher": "lena_ruiz",
+   "tKnowsPit": false,
+   "learner": "daniyar_askaro",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 98,
+   "teacher": "caleb_jones",
+   "tKnowsPit": false,
+   "learner": "gen_jybj3ps",
+   "lst": {
+    "hunger": 58,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 107,
+   "teacher": "app_mgpsphlr76",
+   "tKnowsPit": false,
+   "learner": "greta_hansen",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 118,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 77,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 119,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "caleb_jones",
+   "lst": {
+    "hunger": 70,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 125,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "app_mgpsphlr76",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 125,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "gen_jdape6a",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 134,
+   "teacher": "app_mgpsphlr76",
+   "tKnowsPit": false,
+   "learner": "yuki_mori",
+   "lst": {
+    "hunger": 11,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 135,
+   "teacher": "yuki_mori",
+   "tKnowsPit": false,
+   "learner": "app_mgpsphlr76",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 145,
+   "teacher": "daniyar_askaro",
+   "tKnowsPit": false,
+   "learner": "yuki_mori",
+   "lst": {
+    "hunger": 59,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  }
+ ],
+ "ledger": {
+  "gen_lfvdftl": {
+   "vid": "gen_lfvdftl",
+   "appearDay": 0,
+   "via": "day0",
+   "origin": "background-trapper",
+   "catches": [],
+   "teaches": [
+    {
+     "day": 43
+    }
+   ],
+   "lessonsTaught": [],
+   "lessonsLearned": [],
+   "depart": "scholar-succession",
+   "departDay": 69,
+   "departCause": "became-scholar"
+  },
+  "owen_smith": {
+   "vid": "owen_smith",
+   "appearDay": 106,
+   "via": "join",
+   "origin": "background-trapper",
+   "catches": [
+    {
+     "day": 119,
+     "species": "white_tailed_deer",
+     "kcal": 455
+    },
+    {
+     "day": 125,
+     "species": "wild_boar",
+     "kcal": 993
+    }
+   ],
+   "teaches": [],
+   "lessonsTaught": [],
+   "lessonsLearned": [],
+   "depart": "death",
+   "departDay": 130,
+   "departCause": "The Eulogy"
+  }
+ },
+ "unattributed": [],
+ "holderDeaths": [
+  {
+   "name": "Owen",
+   "vid": "owen_smith",
+   "origin": "background-trapper",
+   "day": 130,
+   "cause": "The Eulogy",
+   "bucket": "monster:the eulogy"
+  }
+ ],
+ "transcript": [
+  "[d1] \"You haven't earned that yet,\" A woman, maybe 40s, with a scarred cheek says. (Trust too low.)",
+  "[d1] A woman, maybe 40s, with a scarred cheek shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d1] A woman, maybe 40s, with a scarred cheek looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d1] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d2] A person, maybe 40s, with calloused knuckles is down by the firepit, nudging coals back into the middle.",
+  "[d2] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d3] 👁 It dives the second it spooks and stays down longer than your nerve holds. Corner it away from the water, or trap the den mouth at dusk.",
+  "[d3] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d3] Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d3] Caleb is showing A woman, maybe 60s how to tie a snare. Hands patient. It takes three tries.",
+  "[d4] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d4] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d4] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d4] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d4] Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d4] A runner from Ashford, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d5] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d5] A woman, maybe 40s, with a scarred cheek hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d5] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d5] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~750 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d6] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d7] You sow Burdock — 14 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d7] Village meal: +1251 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d8] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d8] ◈ THE MENTOR — Emily watches Guadalupe work, then reaches over. \"No. Like this.\" An hour later something has unlocked that no manual could teach. (Ability slots: 4)",
+  "[d8] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d8] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d9] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d9] You sow Purslane — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d9] You sow Purslane — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d9] 🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)",
+  "[d9] Karl has been turning the Burdock over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d10] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d10] Karl hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d10] You sow Burdock — 14 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d10] A runner from Emberhold, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d10] 🌙 Raid — Emberhold came in the night from the southeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d10] A runner from Thornfield, dusty and direct: \"Your foragers are stripping our side of the northeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d10] 🌙 Raid — Ashford came in the night from the northwest. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d11] Sam hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d11] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 13 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d12] 📋 SYSTEM QUEST: \"We've been thinking. You know things we don't. Teach us? Show us a plant you know COMPLETELY (Codex L3). We will watch very closely, which is our entire personality.\"",
+  "[d12] Sam is showing Lena how to tie a snare. Hands patient. It takes three tries.",
+  "[d13] Chinh is down by the firepit, nudging coals back into the middle.",
+  "[d13] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d15] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 12 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d15] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d17] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d18] 📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\"",
+  "[d21] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d21] 🐪 A trader from the downriver village walks into Haven, pack heavy, smile practiced. River-mud on their boots, river-gossip on their tongue.",
+  "[d22] A runner from Stonebridge, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d25] ⛓️ Bodhi brings it home: Emberhold bows to Haven — one organization, us primary. Tribute: 4,000 kcal/week. The relationship starts at trust 30. Everything from here is earned.",
+  "[d26] 🎁 Haven's first gesture: 2,000 kcal walks to Emberhold's fire — a gift, no strings. They count it, and they remember who sent it. (Trust +10.)",
+  "[d26] 🌾 Haven sends 1,500 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d26] ⛓️ Bodhi brings it home: Stonebridge bows to Haven — one organization, us primary. Tribute: 4,000 kcal/week. The relationship starts at trust 30. Everything from here is earned.",
+  "[d27] 🎁 Haven's first gesture: 2,000 kcal walks to Stonebridge's fire — a gift, no strings. They count it, and they remember who sent it. (Trust +10.)",
+  "[d27] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d27] ⛓️ Bodhi brings it home: Ashford bows to Haven — one organization, us primary. Tribute: 4,000 kcal/week. The relationship starts at trust 30. Everything from here is earned.",
+  "[d27] Three fires bow to Haven. But a realm isn't leverage — it's seasons. These bonds are young; tend them, keep the trust, and the court will come.",
+  "[d28] 🎁 Haven's first gesture: 2,000 kcal walks to Ashford's fire — a gift, no strings. They count it, and they remember who sent it. (Trust +10.)",
+  "[d28] 🌾 Haven sends 1,600 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d28] 🌾 Haven sends 1,600 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d28] 🌾 Haven sends 1,600 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d28] 🌾 Nothing comes from Emberhold this week — their fields are as empty as the wagons look. Hunger isn't defiance, but the ledger doesn't know the difference. (Arrears +4,000 kcal, trust -2.)",
+  "[d28] 🌾 Nothing comes from Stonebridge this week — their fields are as empty as the wagons look. Hunger isn't defiance, but the ledger doesn't know the difference. (Arrears +4,000 kcal, trust -2.)",
+  "[d28] 🥣 June of Stonebridge walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d28] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d29] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1341 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d30] A runner from The Bloodied, dusty and direct: \"Your foragers are stripping our side of the east ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d31] Chinh sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d31] (They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)",
+  "[d31] You give Emberhold 1,600 kcal from Haven's bins — real food, honestly counted. Alba weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d34] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d35] 🌾 Haven sends 1,600 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d35] 🌾 Haven sends 1,600 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d35] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d35] 🌾 Emberhold's tribute comes up thin — 3,200 of 4,000 kcal. They sent everything the wagons could carry, and it wasn't enough. The shortfall rides as arrears (+800 kcal). (Trust -1.)",
+  "[d36] A runner from The Hungry Road, dusty and direct: \"Your foragers are stripping our side of the west ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d37] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d37] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 15 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d37] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d39] Daniyar is down by the firepit, nudging coals back into the middle.",
+  "[d39] Daniyar is down by the firepit, nudging coals back into the middle.",
+  "[d39] 🥣 Ellis of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d39] 📖 LEARNED: Wire Snares (Level 2). Set the loop at head height for the target species. Anchor it solid. Camouflage the wire.",
+  "[d39] 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Wire Snares, Field Dressing, Ant Trail. Your Codex overflows.",
+  "[d42] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d42] Daniyar is down by the firepit, nudging coals back into the middle.",
+  "[d42] 🌾 Haven sends 1,610 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d42] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d42] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d42] 🌾 Emberhold's tribute comes up thin — 1,610 of 4,000 kcal. They sent everything the wagons could carry, and it wasn't enough. The shortfall rides as arrears (+2,390 kcal). (Trust -1.)",
+  "[d43] 🪤 Bodhi is back from the snares: +186 kcal to the pantry.",
+  "[d43] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d43] Recipe: Snare (Level 1). You have seen a snare. A loop, a stick, an animal.",
+  "[d43] 🪤 Bodhi catches you watching the snares come off the line. \"...Want to actually SEE one?\" They show you — the loop, the trigger stick, where the run narrows between the roots. \"Opossum trails. Check at dawn. Always.\" Your hands don't know it yet. Your eyes do.",
+  "[d43] Recipe: Pit Trap (Level 1). A pit with stakes in the bottom. Dig it on a trail, brush it over, wait.",
+  "[d43] 🪤 Bodhi catches you watching the pit line. \"...Want to actually SEE one?\" They walk you out to it — the depth, the sharpened stakes at the bottom, where the game trail runs. \"Brush it over with leaves. And mark it well — your own pit will take you too.\" Your hands don't know it yet. Your eyes do.",
+  "[d43] Greta sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d43] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d44] You give Emberhold 1,950 kcal from Haven's bins — real food, honestly counted. Alba weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+  "[d45] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d45] 🪤 Bodhi is back from the snares: +392 kcal to the pantry.",
+  "[d45] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d45] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1334 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d46] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 15 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d47] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~880 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d47] A runner from The Hungry Road II, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d48] 🍖 FEAST 📺 — Emily opens the pantry wide: 9× Foraged food, 1× Snared meat, 1× Foraged food. Bodhi, Greta, Daniyar, Raj eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−2,129 kcal from the pantry) The channeled keepsake feeds the feast — the feast was the weapon, and the surge rides the fire until tomorrow's dawn, spent only when the blades are warmed. (FEAST SURGE ×1.5 armed)",
+  "[d49] Karl sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d49] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d49] 🌾 Haven sends 1,650 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d49] 🌾 Haven sends 1,600 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d49] 🌾 Haven sends 1,660 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d50] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d51] The village threw out spoiled stores: Foraged food, Snared meat, Foraged food (dried). (pantry)",
+  "[d51] (They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)",
+  "[d52] 🌙 Raid — The Hungry Road came in the night from the west. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d55] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d56] 🌾 Haven sends 1,500 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d56] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d56] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d57] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d57] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d57] 🌙 Raid — The Hungry Road came in the night from the west. They carried off ~883 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d58] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d58] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1520 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d59] Bodhi heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d59] 🪤 Bodhi is back. \"Snares were empty. They'll keep.\"",
+  "[d59] 🪤 Bodhi is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d59] 🥣 Ellis of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d59] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d61] Caleb is down by the firepit, nudging coals back into the middle.",
+  "[d61] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d62] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d63] 🌾 Haven sends 1,560 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d63] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d63] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d63] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1080 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d65] Bodhi is showing Sam how to tie a snare. Hands patient. It takes three tries.",
+  "[d65] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1160 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d68] Daniyar is down by the firepit, nudging coals back into the middle.",
+  "[d68] 🌙 Raid — The Hungry Road II came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d69] Emily was under your wing — learning, getting sharper — and now they're gone. The village doesn't say it, but you feel the trust go. (Village trust -8.)",
+  "[d69] At the grave, Karl, Sam, Chinh and 3 more speak for Bodhi — \"Emily trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d70] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 2,775 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d70] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d70] You accept Ashford's food — 2,775 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d70] 🌙 Raid — The Hungry Road II came in the night from the southeast. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d71] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 2,775 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d73] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d76] 🌾 Haven sends 1,500 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d76] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d76] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d77] 🍲 The shared granary opens: 5,000 kcal for every fire of the realm, no strings. Emberhold, Stonebridge, Ashford count it — and remember who fed them first. (Trust +10 with each.)",
+  "[d77] 🌾 Haven sends 1,500 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d77] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d77] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d79] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d79] 🌙 Raid — The Hungry Road II came in the night from the southeast. They carried off ~1450 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d81] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d83] 🥣 Ellis of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d83] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1440 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d84] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d84] 🌾 Haven sends 1,600 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d84] 🌾 Haven sends 1,600 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d84] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d87] Caleb sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d88] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d89] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d90] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d91] 🌾 Haven sends 1,750 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d91] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d91] 🌾 Haven sends 1,750 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d91] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d93] Sam sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d94] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d97] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d97] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d98] 🌾 Haven sends 1,750 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d98] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d98] 🌾 Haven sends 1,750 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d98] Lena sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d98] 📖 LEARNED: Grave Robber (Level 1). You can loot the dead (villagers, monsters). Good gear. -15 trust if seen.",
+  "[d98] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d98] 🌙 Raid — The Hungry Road II came in the night from the southeast. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d100] 📖 LEARNED: Diplomatic Incident (Level 1). Trust builds 2x faster. You're TOO good though — once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+  "[d100] ⚡ TECHNIQUE UNLOCKED: Deep Read! You don't just read trust — you read intent. Know what they'll do next. (Your knowledge of Reading People amplifies your open_book.)",
+  "[d100] At the grave, Sam, Chinh, Greta and 3 more speak for Karl — \"Bodhi trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d100] At the grave, Sam, Greta, Caleb and 2 more speak for Chinh — \"Karl trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d100] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d100] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d100] Deeper knowledge: Muscadine Grapes. Uses: sugar, resveratrol. Leaves are edible (like grape leaves). (+5 health when eaten). All uses known: food: thick-skinned wild grapes, sweet-tart; bait: fallen fruit baits traps well.",
+  "[d100] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d101] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 29 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d102] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 2,989 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d102] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d102] Caleb sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d102] You accept Ashford's food — 2,989 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d102] 🥣 Ellis of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d102] Sam is showing Petra how to tie a snare. Hands patient. It takes three tries.",
+  "[d103] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 2,989 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d103] 🚶 a weathered cook walks in — pack light, eyes wide. Haven grows by one. (8 souls.)",
+  "[d103] 📓 Codex: a weathered cook arrived and joined.",
+  "[d103] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d104] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d105] 🚶 Owen Smith walks in — pack light, eyes wide. Haven grows by one. (9 souls.)",
+  "[d106] Fahmida is showing Daniyar how to tie a snare. Hands patient. It takes three tries.",
+  "[d106] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1565 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d107] 👁 It is not afraid of you. It has exactly one argument and it wins every argument. Trap it at dusk holding a tarp low — or just don't.",
+  "[d107] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d107] 🌾 Haven sends 1,813 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d107] 🌾 Haven sends 1,813 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d107] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d107] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~695 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d108] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d109] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1280 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d109] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d110] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d111] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d111] 🌙 Raid — The Hungry Road came in the night from the west. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d112] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d112] 🌾 Haven sends 1,813 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d112] 🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d112] 🌾 Haven sends 1,551 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d114] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d114] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d114] 🌙 Raid — The Hungry Road came in the night from the west. They carried off ~834 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d115] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d115] 🪤 Owen is back from the snares: +123 kcal to the pantry.",
+  "[d115] 🪤 Owen is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d115] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d116] Daniyar is down by the firepit, nudging coals back into the middle.",
+  "[d116] Daniyar is down by the firepit, nudging coals back into the middle.",
+  "[d116] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d116] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d117] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 34 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d117] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d118] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d118] 🪤 Owen is back. \"Snares were empty. They'll keep.\"",
+  "[d118] 🪤 Owen is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d118] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d118] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d118] Owen is showing Petra how to tie a snare. Hands patient. It takes three tries.",
+  "[d119] 👥 Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d119] 🪤 Owen is back. \"Snares were empty. They'll keep.\"",
+  "[d119] 🪤 Owen is back from the pit line: White-tailed Deer in the pit — +455 kcal to the pantry.",
+  "[d119] 🌾 Haven sends 1,600 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d119] 🌾 Haven sends 1,613 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d119] 🌾 Haven sends 1,500 kcal of grain to Ashford's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+  "[d119] Village meal: +1048 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d119] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d120] Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d121] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d122] 🍖 FEAST 📺 — Chinh opens the pantry wide: 7× Foraged food, 1× Snared meat. Fahmida eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−1,523 kcal from the pantry) The channeled keepsake feeds the feast — the feast was the weapon, and the surge rides the fire until tomorrow's dawn, spent only when the blades are warmed. (FEAST SURGE ×1.5 armed)",
+  "[d122] At the grave, Sam, Greta, Daniyar and 1 more speak for Caleb — \"Chinh trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d122] Fahmida is down by the firepit, nudging coals back into the middle.",
+  "[d122] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d124] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 1,925 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d124] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d124] You accept Ashford's food — 1,925 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d124] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d125] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 1,925 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d125] Owen heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d125] Petra saw how close you've gotten to Sam. Old history has long eyes. (-2 trust)",
+  "[d125] 🪤 Owen is back from the snares: +196 kcal to the pantry.",
+  "[d125] 🪤 Owen is back from the pit line: Wild Boar in the pit — +993 kcal to the pantry.",
+  "[d126] At the grave, Greta, Daniyar, Lena speak for Sam — \"Caleb trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d126] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d126] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~900 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d126] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1300 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d127] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d128] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d128] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d129] At the grave, Daniyar, Lena speak for Greta — \"Sam trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d129] At the grave, Daniyar speaks for Lena — \"Greta trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d129] 🚶 Zoe Adams walks in — pack light, eyes wide. Haven grows by one. (6 souls.)",
+  "[d129] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 40 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d130] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 2,665 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d130] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d130] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d130] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d130] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d130] You accept Ashford's food — 2,665 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d130] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d130] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d131] 🌪️ THE NIELSEN struck Ashford in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d131] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 2,665 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d131] ◈ FLASHBACK — Notebook\nRoute optimizations, glitch lists, apocalypse patch notes. 'DO NOT TRUST THE CACHE BY THE RIVER.' Your magnum opus, half-finished.",
+  "[d131] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d131] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d131] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d131] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d132] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d132] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d132] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d132] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d132] 🚶 Yuki Mori walks in — pack light, eyes wide. Haven grows by one. (6 souls.)",
+  "[d132] 🌙 Raid — The Hungry Road II came in the night from the southeast. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d133] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d133] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d133] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d133] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d134] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d134] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d134] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d134] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d134] 🌙 Raid — The Hungry Road II came in the night from the southeast. They carried off ~824 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d135] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d135] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d135] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d135] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d135] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d135] 🥣 Ellis of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d136] 🌪️ THE NIELSEN struck Ashford in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d136] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d136] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d136] Daniyar sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d136] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d136] Daniyar sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d136] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d136] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d136] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d136] (They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)",
+  "[d136] Daniyar sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d137] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d137] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d137] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d137] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d137] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d137] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d138] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 2,581 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d138] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d138] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d138] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d138] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d138] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d138] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d138] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d138] You accept Ashford's food — 2,581 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d139] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d139] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 2,581 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d139] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d139] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d139] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d139] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d139] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d140] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d140] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d140] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d140] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d140] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d140] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d141] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d141] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d141] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d141] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d141] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d141] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d141] Zoe has been turning the Cattail over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d142] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d142] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d142] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d142] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d142] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d142] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d142] ✨ Ability gained: Loud Chewer (L1). Eating is 2x louder (monsters hear you). But villagers love eating beside you: trust builds 10% faster.",
+  "[d142] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d143] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d143] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d143] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d143] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d143] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d143] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d143] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d144] 🌪️ THE HERALD struck Stonebridge in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d144] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d144] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d144] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d144] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d144] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d144] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d144] Taken: Hunting spear x1, Snare wire x1.",
+  "[d144] You take hunting spear, snare wire from them. Your hands know what they did. (+4 trauma)",
+  "[d144] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d145] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d145] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d145] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d145] (The snare wire becomes the snare — improvised, 2 uses.)",
+  "[d145] You set a Snare here. Check it tomorrow.",
+  "[d145] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d145] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d145] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d145] Your Snare 1 tile north sits empty — nothing it can catch is moving on this ground. Try another tile.",
+  "[d146] 🌪️ THE NIELSEN struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d146] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 1,665 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d146] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d146] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d146] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d146] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d146] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d146] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d146] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d146] You accept Ashford's food — 1,665 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d146] 🌙 Raid — The Hungry Road came in the night from the west. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d147] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d147] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 1,665 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d147] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d147] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d147] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d147] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d147] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d148] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d148] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d148] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d148] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d148] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d148] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d148] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d149] 🌪️ THE HERALD struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d149] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d149] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d149] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d149] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d149] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d149] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d149] 🥣 Ellis of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+  "[d149] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~1326 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d150] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d150] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d150] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d150] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d150] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d150] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d151] 🌪️ THE NIELSEN struck Ashford in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d151] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d151] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d151] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d151] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d151] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d151] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d151] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~1100 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d152] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d152] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d152] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d152] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d152] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d152] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d153] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d153] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d153] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d153] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d153] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d153] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d153] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d153] 🌙 Raid — Thornfield came in the night from the northeast. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d153] 🌙 Raid — The Bloodied came in the night from the east. They carried off ~639 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d154] 🌪️ THE HERALD struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d154] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d154] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d154] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d154] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d154] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d154] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d155] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d155] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d155] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d155] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d155] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d155] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d155] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d155] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d156] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 2,411 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d156] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d156] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d156] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d156] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d156] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d156] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d156] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d156] You accept Ashford's food — 2,411 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d157] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d157] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 2,411 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d157] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d157] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d157] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d157] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d157] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d158] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d158] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d158] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d158] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d158] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d158] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d158] 🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1013 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d159] 🌪️ THE HERALD struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d159] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d159] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d159] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d159] 👁 The tail-slap ends the hunt — it dives and warns the whole creek. Strike before the tail rises, or trap the slide.",
+  "[d159] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d159] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d159] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d159] (They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)",
+  "[d160] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d160] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d160] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d160] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d160] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d160] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d160] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d161] 🌪️ THE NIELSEN struck Ashford in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d161] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d161] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d161] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d161] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d161] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d161] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d162] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 1,971 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d162] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d162] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d162] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d162] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d162] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d162] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d162] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d162] You accept Ashford's food — 1,971 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d162] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d163] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d163] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 1,971 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d163] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d163] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d163] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d163] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d163] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d163] 🌙 Raid — Stonebridge came in the night from the northwest. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d164] 🌪️ THE HERALD struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d164] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d164] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d164] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d164] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d164] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d164] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d164] 🌙 Raid — The Hungry Road II came in the night from the southeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d165] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d165] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d165] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d165] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d165] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d165] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d165] 🌙 Raid — Ashford came in the night from the northwest. They carried off ~500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d166] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d166] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d166] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d166] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d166] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d166] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d167] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d167] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d167] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d167] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d167] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d167] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d168] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d168] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d168] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d168] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d168] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d168] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d169] 🌪️ THE HERALD struck Ashford in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)",
+  "[d169] 🏃 Sanne of Ashford walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Ashford has grain to spare — 2,802 kcal, no tribute, no ceremony. Say the word.\"",
+  "[d169] (Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+  "[d169] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d169] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d169] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d169] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d169] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d169] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d169] You accept Ashford's food — 2,802 kcal on the road, 2 day-parts out. Sanne clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+  "[d170] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d170] 🎁 Sanne of Ashford walks in with pack-mules and full baskets: 2,802 kcal, into Haven's bins — real pieces, honestly counted. \"Eat. We'll settle the books when the green comes back.\"",
+  "[d170] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d170] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d170] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d170] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d170] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d171] At the grave, Fahmida speaks for Daniyar — \"Lena trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d171] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d171] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d171] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d171] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d171] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d171] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d172] \"You haven't earned that yet,\" Petra says. (Trust too low.)",
+  "[d172] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d172] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d172] Petra looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d172] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d172] Petra shakes their head. \"Ask someone who trusts you.\" (Trust too low.)"
+ ],
+ "wall": {
+  "maxScale": "global",
+  "won": false,
+  "tableWaiting": true,
+  "maxWaveUnlocked": 4,
+  "maxArc": 4
+ },
+ "deaths": {
+  "player": 1,
+  "villager": 26,
+  "buckets": {
+   "violence": 13,
+   "age": 10,
+   "other:monster": 3,
+   "monster:the eulogy": 1
+  }
+ }
+}

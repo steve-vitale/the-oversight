@@ -1,0 +1,1942 @@
+{
+ "baseSHA": "6143e6cd680f37e85174ee6114f36a5bfe6c154c",
+ "seed": 7933,
+ "policy": "belongfeast",
+ "days": 166,
+ "endReason": "village-lost",
+ "env": {
+  "feastscale": "1",
+  "seatdrive": "0",
+  "pitknowledge": "unset"
+ },
+ "day0": {
+  "holders": [
+   {
+    "vid": "leo_martin",
+    "name": "A man, maybe 20s",
+    "occ": "trail_crew",
+    "age": 16
+   }
+  ],
+  "scholarOcc": "piano_tuner",
+  "scholarPitLevel": 0,
+  "scholarPitVia": null
+ },
+ "joins": [
+  {
+   "day": 115,
+   "vid": "ruth_goldstein",
+   "name": "Ruth",
+   "occ": "librarian",
+   "age": 71,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 118,
+   "vid": "visjoin_116",
+   "name": "Einar",
+   "occ": "postal_worker",
+   "age": 59,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 123,
+   "vid": "visjoin_121",
+   "name": "Dieudonne",
+   "occ": "veterinarian",
+   "age": 57,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  },
+  {
+   "day": 144,
+   "vid": "visjoin_142",
+   "name": "Wenjie",
+   "occ": "tailor",
+   "age": 22,
+   "knowsPit": false,
+   "origin": "n/a",
+   "rejoin": false,
+   "young": false
+  }
+ ],
+ "firings": {
+  "teaches": 1,
+  "overhears": 0,
+  "lessons": 0,
+  "catches": 0
+ },
+ "pit": {
+  "catches": 0,
+  "kcal": 0,
+  "kcalPer100d": 0,
+  "boar": 0,
+  "boarKcal": 0,
+  "boarShare": 0,
+  "avgBoarKcal": 0,
+  "species": {},
+  "kcalByOrigin": {},
+  "catchesByOrigin": {}
+ },
+ "p612": {
+  "teachCalls": 76,
+  "pitTeacherCalls": 0,
+  "pitEligible": 0,
+  "gateNeedFail": 0,
+  "gateNeedPass": 0,
+  "gate85Fail": 0,
+  "teleNeedMismatch": 0,
+  "topicSplit": {
+   "?": 56
+  },
+  "mismatchRate": null
+ },
+ "teaches": [
+  {
+   "day": 12,
+   "teacher": "Leo",
+   "tocc": "trail_crew",
+   "trust": 30
+  }
+ ],
+ "overhears": [],
+ "lessons": [],
+ "teachCalls": [
+  {
+   "day": 6,
+   "teacher": "gen_hqdkrb4",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 6,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 8,
+   "teacher": "gen_hqdkrb4",
+   "tKnowsPit": false,
+   "learner": "gen_iydg8rw",
+   "lst": {
+    "hunger": 46,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 26,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 29,
+   "teacher": "gen_ufxw0by",
+   "tKnowsPit": false,
+   "learner": "gen_hqdkrb4",
+   "lst": {
+    "hunger": 8,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 32,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "gen_iydg8rw",
+   "lst": {
+    "hunger": 72,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 34,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 37,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "gen_hqdkrb4",
+   "lst": {
+    "hunger": 40,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 41,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 43,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "gen_hqdkrb4",
+   "lst": {
+    "hunger": 68,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 44,
+   "teacher": "gen_iydg8rw",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 44,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "gen_iydg8rw",
+   "lst": {
+    "hunger": 66,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 53,
+   "teacher": "gen_hqdkrb4",
+   "tKnowsPit": false,
+   "learner": "gen_iydg8rw",
+   "lst": {
+    "hunger": 47,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 55,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 43,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 61,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 61,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 67,
+   "teacher": "gen_hqdkrb4",
+   "tKnowsPit": false,
+   "learner": "gen_iydg8rw",
+   "lst": {
+    "hunger": 56,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 67,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 67,
+   "teacher": "mateo_alvarez",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 44,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 67,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 49,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 68,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 9,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 68,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 32,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 69,
+   "teacher": "gen_ufxw0by",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 70,
+   "teacher": "gen_ufxw0by",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 70,
+   "teacher": "mateo_alvarez",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 52,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 80,
+   "teacher": "gen_hqdkrb4",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 38,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 80,
+   "teacher": "gen_hqdkrb4",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 17,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 86,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 18,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 92,
+   "teacher": "gen_ufxw0by",
+   "tKnowsPit": false,
+   "learner": "gen_iydg8rw",
+   "lst": {
+    "hunger": 47,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 95,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 35,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 96,
+   "teacher": "gen_hqdkrb4",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 31,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 98,
+   "teacher": "mateo_alvarez",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 9,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 99,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "mateo_alvarez",
+   "lst": {
+    "hunger": 31,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 101,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "gen_hqdkrb4",
+   "lst": {
+    "hunger": 46,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 101,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 29,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 106,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "gen_iydg8rw",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 114,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 25,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 115,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 43,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 118,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 28,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 118,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 37,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 119,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "ruth_goldstein",
+   "lst": {
+    "hunger": 40,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 122,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 9,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 126,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 12,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 126,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 21,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 126,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 30,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 126,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 47,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 128,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 51,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 129,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "ruth_goldstein",
+   "lst": {
+    "hunger": 70,
+    "hungry": true,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 131,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "ruth_goldstein",
+   "lst": {
+    "hunger": 41,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 131,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "visjoin_121",
+   "lst": {
+    "hunger": 50,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 133,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 21,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 136,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 11,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 136,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 136,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 28,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 137,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 139,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 37,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 139,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "ruth_goldstein",
+   "lst": {
+    "hunger": 43,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 140,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 53,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 143,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 143,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 144,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "ruth_goldstein",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 144,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 48,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 144,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 57,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": true
+   }
+  },
+  {
+   "day": 146,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "gen_ufxw0by",
+   "lst": {
+    "hunger": 35,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 147,
+   "teacher": "visjoin_142",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 150,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 23,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 150,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 150,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "ella_johnson",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 150,
+   "teacher": "david_kim",
+   "tKnowsPit": false,
+   "learner": "ruth_goldstein",
+   "lst": {
+    "hunger": 64,
+    "hungry": true,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "hunger",
+    "failed": false
+   }
+  },
+  {
+   "day": 151,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 153,
+   "teacher": "ella_johnson",
+   "tKnowsPit": false,
+   "learner": "visjoin_142",
+   "lst": {
+    "hunger": 27,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 153,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 36,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 154,
+   "teacher": "gen_ufxw0by",
+   "tKnowsPit": false,
+   "learner": "visjoin_142",
+   "lst": {
+    "hunger": 33,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 154,
+   "teacher": "jovan_milic",
+   "tKnowsPit": false,
+   "learner": "david_kim",
+   "lst": {
+    "hunger": 44,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  },
+  {
+   "day": 155,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "visjoin_142",
+   "lst": {
+    "hunger": 40,
+    "hungry": false,
+    "novice": true,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": true,
+    "topic": null,
+    "need": "novice",
+    "failed": false
+   }
+  },
+  {
+   "day": 159,
+   "teacher": "ruth_goldstein",
+   "tKnowsPit": false,
+   "learner": "jovan_milic",
+   "lst": {
+    "hunger": 39,
+    "hungry": false,
+    "novice": false,
+    "pitTaught": false,
+    "knowsPit": false
+   },
+   "res": {
+    "taught": false,
+    "topic": null,
+    "need": null,
+    "failed": false
+   }
+  }
+ ],
+ "ledger": {
+  "leo_martin": {
+   "vid": "leo_martin",
+   "appearDay": 0,
+   "via": "day0",
+   "origin": "background-trapper",
+   "catches": [],
+   "teaches": [
+    {
+     "day": 12
+    }
+   ],
+   "lessonsTaught": [],
+   "lessonsLearned": [],
+   "depart": "scholar-succession",
+   "departDay": 36,
+   "departCause": "became-scholar"
+  }
+ },
+ "unattributed": [],
+ "holderDeaths": [],
+ "transcript": [
+  "[d1] A woman, maybe 40s, with a long braid looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d1] \"You haven't earned that yet,\" A woman, maybe 40s, with a long braid says. (Trust too low.)",
+  "[d1] A woman, maybe 40s, with a long braid shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d1] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d2] A person, maybe 40s, with thick glasses looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d2] A person, maybe 40s, with thick glasses shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d2] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d3] \"You haven't earned that yet,\" A woman, maybe 40s, with a long braid says. (Trust too low.)",
+  "[d3] A woman, maybe 40s, with a shaved head heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d3] A woman, maybe 40s, with a long braid looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d3] \"You haven't earned that yet,\" A woman, maybe 40s, with a long braid says. (Trust too low.)",
+  "[d3] 🪤 A woman, maybe 40s, with a shaved head is back. \"Snares were empty. They'll keep.\"",
+  "[d3] Recipe: Snare (Level 1). You have seen a snare. A loop, a stick, an animal.",
+  "[d3] 🪤 A woman, maybe 40s, with a shaved head catches you watching the snares come off the line. \"...Want to actually SEE one?\" They show you — the loop, the trigger stick, where the run narrows between the roots. \"Opossum trails. Check at dawn. Always.\" Your hands don't know it yet. Your eyes do.",
+  "[d3] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d3] A person, maybe 40s, with thick glasses shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d3] A person, maybe 40s, with thick glasses shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d3] Village meal: +1157 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d4] A woman, maybe 40s, with a long braid shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d4] A woman, maybe 40s, with a long braid looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d4] \"You haven't earned that yet,\" A woman, maybe 40s, with a long braid says. (Trust too low.)",
+  "[d4] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d4] A person, maybe 40s, with thick glasses shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d4] \"You haven't earned that yet,\" A person, maybe 40s, with thick glasses says. (Trust too low.)",
+  "[d4] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d5] A woman, maybe 40s, with a long braid looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d5] \"You haven't earned that yet,\" A woman, maybe 40s, with a long braid says. (Trust too low.)",
+  "[d5] A woman, maybe 40s, with a long braid looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d5] 👁 It waits for YOU to come close — the stillness is the trap. Spot the shape before you're in reach, and strike first. It only gets one.",
+  "[d5] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d5] A person, maybe 40s, with thick glasses looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d5] A person, maybe 40s, with thick glasses looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d5] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d6] A woman, maybe 40s, with a long braid shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d6] A person, maybe 40s, with a broad frame heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d6] A woman, maybe 40s, with a long braid shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d6] A woman, maybe 40s, with a long braid looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d6] 🪤 A person, maybe 40s, with a broad frame is back. \"Snares were empty. They'll keep.\"",
+  "[d6] 👁 It waits for YOU to come close — the stillness is the trap. Spot the shape before you're in reach, and strike first. It only gets one.",
+  "[d6] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d6] A person, maybe 40s, with thick glasses shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d6] \"You haven't earned that yet,\" A person, maybe 40s, with thick glasses says. (Trust too low.)",
+  "[d6] Village meal: +1004 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d7] A woman, maybe 40s, with a long braid shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d7] A woman, maybe 40s, with a long braid looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d7] \"You haven't earned that yet,\" A woman, maybe 40s, with a long braid says. (Trust too low.)",
+  "[d7] 👁 The tail-slap ends the hunt — it dives and warns the whole creek. Strike before the tail rises, or trap the slide.",
+  "[d7] ◈ THE MENTOR — Meera watches Ingrid work, then reaches over. \"No. Like this.\" An hour later something has unlocked that no manual could teach. (Ability slots: 3)",
+  "[d7] A runner from Emberhold, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d8] A runner from Stonebridge, dusty and direct: \"Your foragers are stripping our side of the southwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d8] A runner from Thornfield, dusty and direct: \"Your foragers are stripping our side of the south ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)",
+  "[d8] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1352 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d9] 🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)",
+  "[d10] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 15 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d10] Ella has been turning the White Oak Acorns over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d10] Zoe has been turning the White Oak Acorns over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d10] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d10] Shannon: \"It offered me something. A... gift? I said no. I don't trust gifts from the sky.\"",
+  "[d10] Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d11] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d11] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d11] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d11] ⬆️ Iron Stomach deepened to L2! You can eat things that would hospitalize others. Mostly.",
+  "[d11] You sow Muscadine Grapes — 7 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d11] Shannon shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d11] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d11] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d12] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d12] Leo heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d12] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d12] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d12] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d12] \"You haven't earned that yet,\" Shannon says. (Trust too low.)",
+  "[d12] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d12] 🪤 Leo is back from the snares: +344 kcal to the pantry.",
+  "[d12] 🪤 Leo is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d12] Recipe: Pit Trap (Level 1). A pit with stakes in the bottom. Dig it on a trail, brush it over, wait.",
+  "[d12] 🪤 Leo catches you watching the pit line. \"...Want to actually SEE one?\" They walk you out to it — the depth, the sharpened stakes at the bottom, where the game trail runs. \"Brush it over with leaves. And mark it well — your own pit will take you too.\" Your hands don't know it yet. Your eyes do.",
+  "[d12] Ashley counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"0 for guilty. 6 against.\"",
+  "[d12] 📋 SYSTEM QUEST: \"We've been thinking. You know things we don't. Teach us? Show us a plant you know COMPLETELY (Codex L3). We will watch very closely, which is our entire personality.\"",
+  "[d12] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d13] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d13] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d13] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d13] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d13] Shannon shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d13] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d13] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d14] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d14] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d14] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d14] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d14] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d14] Shannon shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d14] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d14] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d14] Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d15] The village threw out spoiled stores: Foraged food, Expedition haul, Snared meat. (pantry)",
+  "[d15] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d15] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d15] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d15] You sow Blackberry — 12 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d15] You sow Blackberry — 12 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d15] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d15] Village meal: +1042 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d16] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d16] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d16] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d16] 👁 It is not afraid of you. It has exactly one argument and it wins every argument. Trap it at dusk holding a tarp low — or just don't.",
+  "[d16] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d16] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d17] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d17] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d17] Dina heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d17] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d17] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d17] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d18] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d18] 🪤 Dina is back from the snares: +273 kcal to the pantry.",
+  "[d18] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d18] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d18] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d18] You sow Blackberry — 12 days to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)",
+  "[d18] Shannon looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d18] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d18] 📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\"",
+  "[d18] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d19] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d19] 🪤 Josefine is back from the snares: +312 kcal to the pantry.",
+  "[d19] Leo heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d19] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d19] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d19] 🪤 Leo is back from the snares: +122 kcal to the pantry.",
+  "[d19] 🪤 Leo is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d19] Shannon looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d19] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d19] Shannon counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"1 for guilty. 4 against.\"",
+  "[d19] Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d20] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d20] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d20] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d20] ⛓️ Leo brings it home: Haven bows to Stonebridge — one organization, them primary. Tribute: 5,000 kcal/week. The relationship starts at trust 30. Everything from here is earned.",
+  "[d20] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d20] 🎁 Haven's first gesture: 2,000 kcal walks to Stonebridge's fire — a gift, no strings. They count it, and they remember who sent it. (Trust +10.)",
+  "[d20] Shannon counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"2 for guilty. 4 against.\"",
+  "[d20] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d21] 📖 LEARNED: Wire Snares (Level 1). A loop of wire on a game trail. Simple, effective, ancient. Check at dawn.",
+  "[d21] Ashley looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+  "[d21] Leo heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d21] 🪤 Leo is back. \"Snares were empty. They'll keep.\"",
+  "[d21] 🪤 Leo is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d21] 🐪 A trader from the downriver village walks into Haven, pack heavy, smile practiced. River-mud on their boots, river-gossip on their tongue.",
+  "[d21] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d22] Took Snared meat (dried).",
+  "[d22] You eat Snared meat (dried) (250 kcal).",
+  "[d22] Took Snared meat (dried).",
+  "[d22] You eat Snared meat (dried) (98 kcal).",
+  "[d22] Ashley shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+  "[d22] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d23] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d23] \"You haven't earned that yet,\" Ashley says. (Trust too low.)",
+  "[d23] Leo heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d23] Village meal: +1442 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d23] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1300 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d24] 🪤 Leo is back. \"Snares were empty. They'll keep.\"",
+  "[d24] 🪤 Leo is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d24] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d25] Took Snared meat.",
+  "[d25] You eat Snared meat (273 kcal).",
+  "[d25] Josefine counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"2 for guilty. 3 against.\"",
+  "[d25] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d25] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d26] Ashley hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d26] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d27] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d28] Ashley hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)",
+  "[d28] Seven days of silence, and the silence answered for Haven. Stonebridge's new speaker reads it plainly. (Trust -6.) Stonebridge installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would.",
+  "[d28] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d29] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d30] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d30] Ashley counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"2 for guilty. 3 against.\"",
+  "[d30] Ashley counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"1 for guilty. 3 against.\"",
+  "[d30] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d30] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d31] Leo heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d31] 🪤 Leo is back. \"Snares were empty. They'll keep.\"",
+  "[d31] 🪤 Leo is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d31] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 20 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d31] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d32] Leo heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d32] 🪤 Leo is back from the snares: +271 kcal to the pantry.",
+  "[d32] 🪤 Leo is back from the pit line. \"Pit was quiet. They'll keep.\"",
+  "[d32] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d33] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d33] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d33] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d34] Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d34] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d35] Village meal: +1148 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+  "[d36] At the grave, Ashley, Shannon, Josefine and 1 more speak for Leo — \"Dina trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d36] Ashley counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"2 for guilty. 2 against.\"",
+  "[d38] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1100 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d39] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d40] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d40] David is showing Jovan how to tie a snare. Hands patient. It takes three tries.",
+  "[d41] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d41] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d43] Seven days of silence, and the silence answered for Haven. Stonebridge's new speaker reads it plainly. (Trust -6.) Stonebridge installs their own speaker at the table after all — tribute rises to 11,250 kcal/week. Grief became leverage, and they knew it would.",
+  "[d44] 📋 SYSTEM QUEST: \"Teach us? Show us a plant you know COMPLETELY (Codex L3) — 21 candidates in your notes. We will watch very closely. Reward: integration.\"",
+  "[d45] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d45] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d45] Jovan sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d45] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d49] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d49] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d50] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d51] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d52] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d52] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d53] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d54] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d55] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d55] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1120 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d56] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d56] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d56] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d57] The obligation is honored. Trust with Stonebridge: 67.",
+  "[d57] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d57] Ashley sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d60] Ella sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d61] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d61] Jovan is showing Ella how to tie a snare. Hands patient. It takes three tries.",
+  "[d61] 🌙 Raid — Thornfield came in the night from the south. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d64] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d64] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d64] David is down by the firepit, nudging coals back into the middle.",
+  "[d65] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d65] Ella is showing Mateo how to tie a snare. Hands patient. It takes three tries.",
+  "[d66] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d66] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d68] Mateo is down by the firepit, nudging coals back into the middle.",
+  "[d71] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d72] 📖 LEARNED: Grave Robber (Level 1). You can loot the dead (villagers, monsters). Good gear. -15 trust if seen.",
+  "[d75] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d75] David sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d75] David sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d75] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d76] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d77] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d78] The obligation is honored. Trust with Stonebridge: 100.",
+  "[d78] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d79] Ella sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d79] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d80] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1700 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d81] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d81] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d83] Godhood demands its price, and the price is not hidden: Knowing isolates you. Villagers with secrets fear your gaze: -1 trust/day with anyone hiding something, until they confess or leave. Knowing the punch is coming doesn't mean you can take it. You're still fragile.",
+  "[d83] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d83] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1040 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d84] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d84] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d85] 🪤 Josefine is back from the snares: +176 kcal to the pantry.",
+  "[d85] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d86] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d86] 📖 LEARNED: Light Fingers (Level 1). Steal from pantry without trust loss (50%). If caught, -20 trust.",
+  "[d87] Josefine is down by the firepit, nudging coals back into the middle.",
+  "[d89] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d89] 🪤 Josefine is back from the snares: +161 kcal to the pantry.",
+  "[d90] Jovan showed Ella the tall tree with green-orange fruit the size of an orange, hiding a spiny pit inside — \"remember it.\" Word gets around.",
+  "[d90] Ella showed Mateo the tall tree with green-orange fruit the size of an orange, hiding a spiny pit inside — \"remember it.\" Word gets around.",
+  "[d90] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d90] ★ IDENTIFIED: Piquiarana. Tasty fruit, dangerous pit. Uses unknown — harvest, taste, and learn.",
+  "[d97] Mateo is down by the firepit, nudging coals back into the middle.",
+  "[d98] 📯 Stonebridge calls on the obligation: Send your best for three days. \"Stonebridge needs hands it can trust.\" Honor it, or refuse — both are remembered.",
+  "[d98] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1398 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d99] The obligation is honored. Trust with Stonebridge: 100.",
+  "[d99] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d99] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1258 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d100] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d105] Mateo is down by the firepit, nudging coals back into the middle.",
+  "[d107] David sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d107] Mateo sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d108] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d108] 🪤 Josefine is back from the snares: +119 kcal to the pantry.",
+  "[d109] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d109] 🪤 Josefine is back from the snares: +373 kcal to the pantry.",
+  "[d110] Leo saw how close you've gotten to Jovan. Old history has long eyes. (-2 trust)",
+  "[d111] At the grave, Ashley, Josefine, David and 3 more speak for Shannon — \"Leo trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d111] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d111] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d111] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d112] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d113] Josefine heads out to check the snares. \"Wire doesn't lie.\"",
+  "[d113] 🪤 Josefine is back. \"Snares were empty. They'll keep.\"",
+  "[d113] The obligation is honored. Trust with Stonebridge: 92.",
+  "[d113] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d114] At the grave, Ashley, David, Mateo and 2 more speak for Josefine — \"Shannon trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d114] 🚶 Ruth Goldstein walks in — pack light, eyes wide. Haven grows by one. (6 souls.)",
+  "[d114] 📓 Codex: Ruth Goldstein arrived and joined.",
+  "[d114] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d115] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1400 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d117] Ruth is down by the firepit, nudging coals back into the middle.",
+  "[d117] A frightened family cries — relief, mostly. Haven grows by one.",
+  "[d122] A frightened family cries — relief, mostly. Haven grows by one.",
+  "[d125] Ella has been turning the Loquat over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d125] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d125] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d126] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1100 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d127] David is down by the firepit, nudging coals back into the middle.",
+  "[d127] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1100 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d128] Ashley is showing Dieudonne how to tie a snare. Hands patient. It takes three tries.",
+  "[d128] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d131] Dieudonne sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d133] Dieudonne is showing Ruth how to tie a snare. Hands patient. It takes three tries.",
+  "[d141] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d142] Ruth is down by the firepit, nudging coals back into the middle.",
+  "[d142] Ruth is down by the firepit, nudging coals back into the middle.",
+  "[d142] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d143] David sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d143] A curious wanderer grins wide. Haven grows by one.",
+  "[d145] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d146] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1440 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d147] 🌙 Raid — Thornfield came in the night from the south. They carried off ~1520 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d148] Ella has been turning the Serviceberry over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)",
+  "[d150] Ashley sits by the door re-lacing a strap, testing each pull before the next.",
+  "[d150] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+  "[d152] Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you.",
+  "[d156] Ashley is down by the firepit, nudging coals back into the middle.",
+  "[d157] 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~600 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d159] 📖 LEARNED: Diplomatic Incident (Level 1). Trust builds 2x faster. You're TOO good though — once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+  "[d159] ⚡ TECHNIQUE UNLOCKED: Deep Read! You don't just read trust — you read intent. Know what they'll do next. (Your knowledge of Reading People amplifies your open_book.)",
+  "[d159] 📖 LEARNED: Generous Heart (Level 1). Donating gives 2x trust.",
+  "[d159] 🪞 You wake up somebody else. Ella Johnson, 67 — an ESL teacher.",
+  "[d159] At the grave, Ashley, David, Jovan speak for Ella — \"Josefine trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+  "[d164] Caught red-handed! They saw you steal. Trust -20.",
+  "[d164] 🗣️ David to Jovan, by the fire: \"It waits. We wait. Somebody should check the snares — the table doesn't fill the pantry.\"",
+  "[d164] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d165] Caught red-handed! They saw you steal. Trust -20.",
+  "[d166] Caught red-handed! They saw you steal. Trust -20.",
+  "[d166] Caught red-handed! They saw you steal. Trust -20.",
+  "[d166] 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)",
+  "[d167] Caught red-handed! They saw you steal. Trust -20.",
+  "[d167] Caught red-handed! They saw you steal. Trust -20."
+ ],
+ "wall": {
+  "maxScale": "regional",
+  "won": false,
+  "tableWaiting": true,
+  "maxWaveUnlocked": 3,
+  "maxArc": 4
+ },
+ "deaths": {
+  "player": 1,
+  "villager": 15,
+  "buckets": {
+   "dehydration": 1,
+   "age": 6,
+   "monster:dustboar": 1,
+   "violence": 5,
+   "other:monster": 3
+  }
+ }
+}
