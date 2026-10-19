@@ -1,0 +1,32 @@
+=== seed 12011 day 120 — conversation with Mapendo (visjoin_113) ===
+occupation=musician temperament=fidgety trust=33 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're angry — Are you angry? At whoever did this. At the sky. At anything. You know?"
+(turn0 choices: ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:a_deflect, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Okay so — Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "They took Wei and Naran — Who Ate It?, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting. Good talking."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged

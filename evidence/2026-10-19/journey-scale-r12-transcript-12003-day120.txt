@@ -1,0 +1,32 @@
+=== seed 12003 day 120 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=35 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Could you take a look? Doesn't matter now."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie. Just... be straight with me."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Marianela is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I sleep with one ear uncovered, always at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody says Marianela's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=3)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=promised
