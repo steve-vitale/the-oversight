@@ -1378,7 +1378,15 @@
           for (var hui = 0; hui < hu.length; hui++) {
             var hup = hu[hui];
             var hexist = (this.stacksMatch && vv.pantry.find(function (p) { return this.stacksMatch(p, hup); }.bind(this))) || null;
-            if (hexist) hexist.units = (hexist.units || 1) + (hup.units || 1);
+            if (hexist) {
+              hexist.units = (hexist.units || 1) + (hup.units || 1);
+              // MERGE HONESTY (journey-deepening r19 2026-10-19): hiddenKcal
+              // is the value-bearing field on 0-kcal unknown flesh — the
+              // reveal distributes it over ALL units. Sum it, or the second
+              // haul's energy silently vanishes at reveal (measured: 2x1400
+              // hauls merged revealed 560, not 1120).
+              hexist.hiddenKcal = (hexist.hiddenKcal || 0) + (hup.hiddenKcal || 0);
+            }
             else vv.pantry.push(hup);
           }
           if (playerAtHaven) this.say(`🥩 ${nm} is back with strange meat: unknown flesh in the pantry. "Test it cautiously before anyone eats."`);

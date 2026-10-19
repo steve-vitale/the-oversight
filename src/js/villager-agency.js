@@ -578,7 +578,15 @@
             try {
               hexist = (this.stacksMatch && vv.pantry.find(function (p) { return this.stacksMatch(p, uitem); }.bind(this))) || null;
             } catch (e2) {}
-            if (hexist) hexist.units = (hexist.units || 1) + (uitem.units || 1);
+            if (hexist) {
+              hexist.units = (hexist.units || 1) + (uitem.units || 1);
+              // MERGE HONESTY (journey-deepening r19 2026-10-19): hiddenKcal
+              // is the value-bearing field on 0-kcal unknown flesh — the
+              // reveal distributes it over ALL units. Sum it, or the second
+              // haul's energy silently vanishes at reveal (measured: 2x1400
+              // hauls merged revealed 560, not 1120).
+              hexist.hiddenKcal = (hexist.hiddenKcal || 0) + (uitem.hiddenKcal || 0);
+            }
             else vv.pantry.push(uitem);
             meatUnknown++;
           }

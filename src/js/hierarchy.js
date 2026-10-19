@@ -1091,7 +1091,15 @@
                   if (_sov) _sov.pantryKcal = _have - _give;
                   var _amt = Math.round(_give * _mult);
                   if (_amt > 0) {
-                    _v.pantry.push({ name: 'Tribute grain from ' + self._ovName(link.subordinate), kcalEach: _amt, units: 1, spoilDay: _day + 21 });
+                    // PANTRY GRANULARITY (journey-deepening r19 2026-10-19):
+                    // tribute is external food — it arrives in ≤500-kcal
+                    // pieces via the default deposit path, never as one
+                    // master slab (measured: 3000-4000 kcal single atoms,
+                    // which the meal logic then ate whole). Same class as
+                    // the 2026-10-16 haul/donation leak closure.
+                    try {
+                      self.depositPantryPieces(_v, { name: 'Tribute grain from ' + self._ovName(link.subordinate), kcalEach: _amt, units: 1, spoilDay: _day + 21, safe: true }, 500);
+                    } catch (_e2) { /* tribute lost on the road — the outer catch narrates the week, no slab */ }
                   }
                   if (_give >= _want) {
                     self._trustGain(link, 1);

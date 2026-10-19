@@ -502,7 +502,11 @@
         var umid = corpse.monsterId || null;
         var ugross = meat.hiddenKcal || 0;
         var unet = Math.round(ugross * HAUL_YIELD);
-        var uunits = Math.max(1, Math.round(unet / 500));
+        // PANTRY ATOM LAW (journey-deepening r19 2026-10-19): ceil, not
+        // round — round() minted single-unit chunks here (gross 1400 ->
+        // unet 700 -> 1 unit) that the reveal had to rescue. Same law as
+        // mapmemButcherForCarry's r16 fix.
+        var uunits = Math.max(1, Math.ceil(unet / 500));
         var uper = Math.round(unet / uunits);
         var uitem = {
           name: 'Unknown flesh',
