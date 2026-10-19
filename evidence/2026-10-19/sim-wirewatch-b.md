@@ -318,3 +318,20 @@ The remaining trapline gaps are knower presence (seed composition),
 trust-15 timing (snareteach landed), and the materials/crafting gate
 (wirebootstrap's open ACQUIRE leg) — plus the game-code low-trust watch
 hook named above, if Steve ever wants the wire learnable below trust 15.
+
+## Recovery (2026-10-19, fleshout-loop-b-20261019T2230Z — stale-lock recovery of run 1929Z/2047Z)
+
+- The 1929Z run timed out; its worker left the kill commit unlanded (9098bdb66).
+  The 2047Z recovery run committed c6707177c ("coordinator-recovery
+  verification") but never merged it — and the commit was EMPTY (zero file
+  changes): its claimed "kill-protocol proof block (WIREWATCH_KILLED=1, 3/3
+  GREEN) + recovery note in evidence" existed nowhere. The claims were
+  dropped as unsubstantiated per the worker-integrity rule (AGENTS.md).
+- This recovery: rebased the kill commit clean onto master (edd3021d1),
+  verified scope (49 files: scripts/ + evidence/ only; zero src/js, zero
+  scripts/policies/ leftovers), and ran an honest post-kill verification —
+  scripts/test-wirewatch-killed-b.js, 5/5 GREEN:
+  V1 layer file absent; V2 no wiring in competent.js; V3 no src/js refs;
+  V4 all 9 instruments present; V5 verdict documented.
+- Note: the pre-kill proof (11/11 GREEN) ran before the layer was deleted;
+  the proof script requires the layer and cannot run post-kill by design.
