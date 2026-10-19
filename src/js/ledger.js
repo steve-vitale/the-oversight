@@ -1090,7 +1090,21 @@
           _releasedNow.push(pid);
           try {
             const fav = (v.favorLedger || {})[pid];
-            if (fav && fav.id === p.favorId && fav.state === 'promised') fav.state = 'asked';
+            if (fav && fav.id === p.favorId && fav.state === 'promised') {
+              if (pid === newId) {
+                // PROMISEE-BEARER EDGE (journey-succession r27 2026-10-19):
+                // the promisee inherited the mantle — the creditor cannot
+                // re-ask themselves. The debt died with the debtor; the
+                // favor goes moot (stamped, honest), not 'asked'. The need
+                // itself persists in the world and other villagers will ask
+                // fresh if it's still live. (Pre-fix this left an 'asked'
+                // favor the new bearer holds against themselves — a zombie
+                // ledger entry no NPC can ever re-ask.)
+                fav.state = 'moot';
+              } else {
+                fav.state = 'asked';
+              }
+            }
           } catch (e2) {}
           try {
             const sd = (v.convoSeeds || {})[pid];
