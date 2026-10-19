@@ -1,0 +1,335 @@
+{
+ "primary": {
+  "leadfeast": {
+   "controlMean": 186.5,
+   "armedMean": 186.5,
+   "ratio": 1,
+   "_rawControl": 186.5,
+   "_rawArmed": 186.5
+  },
+  "belongfeast": {
+   "controlMean": 28.3,
+   "armedMean": 28.3,
+   "ratio": 1,
+   "_rawControl": 28.25,
+   "_rawArmed": 28.25,
+   "goThreshold": 33.9,
+   "GO": false
+  }
+ },
+ "guardrails": {
+  "leadfeast": {
+   "national": {
+    "control": 6,
+    "armed": 6,
+    "ok": true
+   },
+   "wave4": {
+    "control": 6,
+    "armed": 6,
+    "ok": true
+   },
+   "wins": {
+    "control": 0,
+    "armed": 0
+   },
+   "medianSurvival": {
+    "control": 110,
+    "armed": 110,
+    "ok": true
+   },
+   "starvation": {
+    "freshControl": 4,
+    "armed": 4,
+    "ok": true
+   },
+   "newDeathModes": {
+    "modes": [],
+    "ok": true
+   },
+   "allOk": true
+  },
+  "belongfeast": {
+   "national": {
+    "control": 4,
+    "armed": 4,
+    "ok": true
+   },
+   "wave4": {
+    "control": 5,
+    "armed": 5,
+    "ok": true
+   },
+   "wins": {
+    "control": 0,
+    "armed": 0
+   },
+   "medianSurvival": {
+    "control": 116,
+    "armed": 116,
+    "ok": true
+   },
+   "starvation": {
+    "freshControl": 5,
+    "armed": 5,
+    "ok": true
+   },
+   "newDeathModes": {
+    "modes": [],
+    "ok": true
+   },
+   "allOk": true
+  }
+ },
+ "perSeed": {
+  "leadfeast": [
+   {
+    "seed": 64201,
+    "controlSD": 240,
+    "armedSD": 240,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64202,
+    "controlSD": 378,
+    "armedSD": 378,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64203,
+    "controlSD": 42,
+    "armedSD": 42,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 3,
+    "armedWave": 3,
+    "armedGate": null
+   },
+   {
+    "seed": 64204,
+    "controlSD": 378,
+    "armedSD": 378,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64205,
+    "controlSD": 151,
+    "armedSD": 151,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64206,
+    "controlSD": 0,
+    "armedSD": 0,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 1,
+    "armedWave": 1,
+    "armedGate": null
+   },
+   {
+    "seed": 64207,
+    "controlSD": 141,
+    "armedSD": 141,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64208,
+    "controlSD": 162,
+    "armedSD": 162,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   }
+  ],
+  "belongfeast": [
+   {
+    "seed": 64201,
+    "controlSD": 5,
+    "armedSD": 5,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 3,
+    "armedWave": 3,
+    "armedGate": {
+     "blocks": 0,
+     "walks": 1,
+     "reasons": {
+      "momentum-ok": 1
+     },
+     "last": {
+      "day": 55,
+      "link": "village_0",
+      "linkAge": 35,
+      "candidate": "village_2",
+      "firesNow": 4,
+      "firesBase": 3,
+      "delta": 1,
+      "windowDays": 12,
+      "reason": "momentum-ok"
+     }
+    }
+   },
+   {
+    "seed": 64202,
+    "controlSD": 5,
+    "armedSD": 5,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 3,
+    "armedWave": 3,
+    "armedGate": {
+     "blocks": 0,
+     "walks": 1,
+     "reasons": {
+      "momentum-ok": 1
+     },
+     "last": {
+      "day": 55,
+      "link": "village_2",
+      "linkAge": 35,
+      "candidate": "village_0",
+      "firesNow": 4,
+      "firesBase": 3,
+      "delta": 1,
+      "windowDays": 12,
+      "reason": "momentum-ok"
+     }
+    }
+   },
+   {
+    "seed": 64203,
+    "controlSD": 7,
+    "armedSD": 7,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": {
+     "blocks": 0,
+     "walks": 1,
+     "reasons": {
+      "momentum-ok": 1
+     },
+     "last": {
+      "day": 57,
+      "link": "village_0",
+      "linkAge": 37,
+      "candidate": "village_1",
+      "firesNow": 4,
+      "firesBase": 3,
+      "delta": 1,
+      "windowDays": 14,
+      "reason": "momentum-ok"
+     }
+    }
+   },
+   {
+    "seed": 64204,
+    "controlSD": 42,
+    "armedSD": 42,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": {
+     "blocks": 0,
+     "walks": 1,
+     "reasons": {
+      "momentum-ok": 1
+     },
+     "last": {
+      "day": 113,
+      "link": "village_0",
+      "linkAge": 93,
+      "candidate": "village_3",
+      "firesNow": 4,
+      "firesBase": 3,
+      "delta": 1,
+      "windowDays": 22,
+      "reason": "momentum-ok"
+     }
+    }
+   },
+   {
+    "seed": 64205,
+    "controlSD": 82,
+    "armedSD": 82,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   },
+   {
+    "seed": 64206,
+    "controlSD": 0,
+    "armedSD": 0,
+    "controlNat": false,
+    "armedNat": false,
+    "controlWave": 1,
+    "armedWave": 1,
+    "armedGate": null
+   },
+   {
+    "seed": 64207,
+    "controlSD": 50,
+    "armedSD": 50,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": {
+     "blocks": 0,
+     "walks": 1,
+     "reasons": {
+      "momentum-ok": 1
+     },
+     "last": {
+      "day": 57,
+      "link": "village_1",
+      "linkAge": 37,
+      "candidate": "village_2",
+      "firesNow": 4,
+      "firesBase": 3,
+      "delta": 1,
+      "windowDays": 14,
+      "reason": "momentum-ok"
+     }
+    }
+   },
+   {
+    "seed": 64208,
+    "controlSD": 35,
+    "armedSD": 35,
+    "controlNat": true,
+    "armedNat": true,
+    "controlWave": 4,
+    "armedWave": 4,
+    "armedGate": null
+   }
+  ]
+ }
+}
