@@ -2530,7 +2530,14 @@
           var _gt6 = _gr6 ? ` — ${_gr6} grieving fire(s); theirs waits` : '';
           var _hshort = _havenPoured < _frate ? ` Haven's own founding pour came up short — ${_havenPoured.toLocaleString()} of ${_frate.toLocaleString()} kcal, all the pantry held. The council counts it.` : '';
           var _tshort = _theirsPoured < _frate * covLinks.length ? ` Some fires poured short — the council's book shows every grain, and every gap.` : '';
-          this.say(`🌾 The shared granary is founded: ${vnames.join(', ')} each pour ${_frate.toLocaleString()} kcal into one pool — ${opened.toLocaleString()} kcal under no one's roof and everyone's.${_hshort}${_tshort} Draw on it in famine; every draw is written in the council's book. The war-pact is sworn beside it: any member's call gets answered, or refused aloud. (Trust +6 each${_gt6}.)`);
+          // FOUNDING-POUR HONESTY (journey scale r12 2026-10-19): the old
+          // lead clause said "each pour X kcal" even when a shortfall fired
+          // — the copy contradicted the shortfall line in the same beat.
+          // State the rate asked and the true total when someone came up short.
+          var _pourLead = (_hshort || _tshort)
+            ? `${vnames.join(', ')} were called to pour ${_frate.toLocaleString()} kcal each — ${opened.toLocaleString()} kcal came in, under no one's roof and everyone's.`
+            : `${vnames.join(', ')} each pour ${_frate.toLocaleString()} kcal into one pool — ${opened.toLocaleString()} kcal under no one's roof and everyone's.`;
+          this.say(`🌾 The shared granary is founded: ${_pourLead}${_hshort}${_tshort} Draw on it in famine; every draw is written in the council's book. The war-pact is sworn beside it: any member's call gets answered, or refused aloud. (Trust +6 each${_gt6}.)`);
         }
       } else if (pn.shape === 'trade') {
         // The Charter. The league must still hold >=3 trade bonds.
