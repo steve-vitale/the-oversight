@@ -55,3 +55,11 @@ sprite gate 1867/0. The full run enumerated before the gate was restored;
 final quick includes it. Titan wiring: 48 functions, zero unwired. Foreign
 evidence/2026-10-17/sweep-B.log remains untouched (SHA256
 d36038616ffd73218a93637c504cd3ba5b4eefb1c82335d6842388108126b722).
+
+Published: 007c4febca00986aae5bc36bcd4d6966a08c7c04 fast-forwarded
+main, master and codex/phone-preview atomically. Vercel production deployment
+dpl_3oMc1PpxufrqZe1f1okCPkkQ7gMX is READY and aliases the live game.
+Live HTTPS version and build-source metadata match exactly. Both actual hosted
+phone journeys pass all 16 stages and all 162 boot-source bindings; selected
+hosted screenshots were inspected. Post-deploy receipts are shared on the
+phone-preview branch without another production deployment.
