@@ -1,0 +1,2866 @@
+{
+ "comparison": {
+  "arms": "vetrel-off (control) -> vetrel-on (VETREL=1)",
+  "n": {
+   "off": 16,
+   "on": 16
+  },
+  "stallClassDelta": {
+   "progressed-but-stalled": {
+    "off": 5,
+    "on": 5,
+    "delta": 0
+   },
+   "engaged-but-failed": {
+    "off": 8,
+    "on": 9,
+    "delta": 1
+   },
+   "never-progressed": {
+    "off": 3,
+    "on": 2,
+    "delta": -1
+   }
+  },
+  "doorReaching": {
+   "off": 8,
+   "on": 9,
+   "delta": 1
+  },
+  "veteranLegMet": {
+   "off": 0,
+   "on": 1,
+   "delta": 1
+  },
+  "villagerW4Kills": {
+   "off": 0,
+   "on": 3,
+   "delta": 3
+  },
+  "totalW4Kills": {
+   "off": 7,
+   "on": 6,
+   "delta": -1
+  },
+  "wallDelta": {
+   "national": -2,
+   "table": 0,
+   "wins": 0,
+   "wave4": 3,
+   "wave5": 0,
+   "medianSurvival": -58,
+   "exiled": 0
+  },
+  "deathsPer100dMedian": {
+   "off": 0,
+   "on": 0,
+   "delta": 0
+  },
+  "attemptOutcomeDelta": {
+   "horizon": {
+    "off": 5,
+    "on": 2,
+    "delta": -3
+   },
+   "died": {
+    "off": 3,
+    "on": 7,
+    "delta": 4
+   },
+   "regressed": {
+    "off": 1,
+    "on": 0,
+    "delta": -1
+   }
+  }
+ },
+ "arms": {
+  "vetrel-off": {
+   "n": 16,
+   "stallClasses": {
+    "progressed-but-stalled": 5,
+    "engaged-but-failed": 8,
+    "never-progressed": 3
+   },
+   "doorReaching": 8,
+   "veteranLegMet": 0,
+   "villagerW4Kills": 0,
+   "totalW4Kills": 7,
+   "wall": {
+    "national": 13,
+    "table": 11,
+    "wins": 0,
+    "wave4": 10,
+    "wave5": 0,
+    "medianSurvival": 182,
+    "meanSurvival": 147.3,
+    "exiled": 0
+   },
+   "attempts": {
+    "total": 9,
+    "outcomes": {
+     "horizon": 5,
+     "died": 3,
+     "regressed": 1
+    },
+    "runsWithAttempts": 8
+   },
+   "deathsPer100dMedian": 0,
+   "runs": [
+    {
+     "seed": 63901,
+     "policyId": "leadfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 69,
+     "wave5Day": null,
+     "endDay": 113,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 190,
+      "termWar": 50,
+      "termDip": 0,
+      "termPlenty": 140,
+      "termCap": 150,
+      "warPts": 2,
+      "links": 0,
+      "feasts": 7,
+      "firstT4Day": 55,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 19,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 19,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 16,
+      "w2": 7,
+      "w3": 7,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63902,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 120,
+     "wave4Day": 128,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 120,
+       "end": 182,
+       "shortStart": [
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "veterans"
+       ],
+       "outcome": "horizon",
+       "len": 63
+      }
+     ],
+     "standing": {
+      "termRaw": 382,
+      "termWar": 100,
+      "termDip": 102,
+      "termPlenty": 180,
+      "termCap": 302,
+      "warPts": 4,
+      "links": 3,
+      "feasts": 9,
+      "firstT4Day": 61,
+      "firstT5Day": 120
+     },
+     "w4": {
+      "ledgerPts": 2,
+      "kills": 4,
+      "distinct": 1,
+      "killers": 1,
+      "via": {
+       "player": 4,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 2,
+      "wpn": 7,
+      "trk": 22,
+      "vet": 1,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 3,
+      "wpn": 7,
+      "trk": 22,
+      "vet": 1,
+      "short": [],
+      "rdy": true
+     },
+     "deed": {
+      "ok": false,
+      "w1": 17,
+      "w2": 7,
+      "w3": 4,
+      "w4": 3,
+      "w5": 1
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63903,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 83,
+     "wave4Day": 111,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": false,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 83,
+       "end": 182,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "horizon",
+       "len": 100
+      }
+     ],
+     "standing": {
+      "termRaw": 447,
+      "termWar": 25,
+      "termDip": 102,
+      "termPlenty": 320,
+      "termCap": 227,
+      "warPts": 1,
+      "links": 3,
+      "feasts": 16,
+      "firstT4Day": 57,
+      "firstT5Day": 83
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 0,
+      "wpn": 3,
+      "trk": 28,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 3,
+      "trk": 28,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 21,
+      "w2": 9,
+      "w3": 2,
+      "w4": 4,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63904,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 57,
+     "wave4Day": 145,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 57,
+       "end": 182,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "veterans"
+       ],
+       "outcome": "horizon",
+       "len": 126
+      }
+     ],
+     "standing": {
+      "termRaw": 412,
+      "termWar": 50,
+      "termDip": 102,
+      "termPlenty": 260,
+      "termCap": 252,
+      "warPts": 2,
+      "links": 3,
+      "feasts": 13,
+      "firstT4Day": 55,
+      "firstT5Day": 57
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 4,
+      "wpn": 7,
+      "trk": 23,
+      "vet": 0,
+      "short": [
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 5,
+      "wpn": 7,
+      "trk": 23,
+      "vet": 1,
+      "short": [],
+      "rdy": true
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 8,
+      "w3": 4,
+      "w4": 3,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63905,
+     "policyId": "leadfeast",
+     "stallClass": "never-progressed",
+     "stallSub": null,
+     "maxPeak": 0,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 66,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": false,
+     "exiled": false,
+     "maxWave": 3,
+     "attempts": [],
+     "standing": {
+      "termRaw": 20,
+      "termWar": 0,
+      "termDip": 0,
+      "termPlenty": 20,
+      "termCap": 20,
+      "warPts": 0,
+      "links": 0,
+      "feasts": 1,
+      "firstT4Day": null,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 0,
+     "r5term": {
+      "arm": 0,
+      "wpn": 2,
+      "trk": 15,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 2,
+      "trk": 15,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 12,
+      "w2": 6,
+      "w3": 0,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63906,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": "w5door-without-w4",
+     "maxPeak": 0,
+     "def5ever": true,
+     "firstDef5Day": 62,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": false,
+     "exiled": false,
+     "maxWave": 3,
+     "attempts": [
+      {
+       "start": 62,
+       "end": 182,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "veterans"
+       ],
+       "outcome": "horizon",
+       "len": 121
+      }
+     ],
+     "standing": {
+      "termRaw": 322,
+      "termWar": 0,
+      "termDip": 102,
+      "termPlenty": 220,
+      "termCap": 202,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 11,
+      "firstT4Day": 57,
+      "firstT5Day": 62
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 0,
+     "r5term": {
+      "arm": 2,
+      "wpn": 10,
+      "trk": 17,
+      "vet": 0,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 3,
+      "wpn": 10,
+      "trk": 17,
+      "vet": 0,
+      "short": [
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 19,
+      "w2": 6,
+      "w3": 2,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63907,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 62,
+     "wave4Day": 76,
+     "wave5Day": null,
+     "endDay": 155,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": false,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 62,
+       "end": 155,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 94
+      }
+     ],
+     "standing": {
+      "termRaw": 357,
+      "termWar": 75,
+      "termDip": 102,
+      "termPlenty": 180,
+      "termCap": 277,
+      "warPts": 3,
+      "links": 3,
+      "feasts": 9,
+      "firstT4Day": 57,
+      "firstT5Day": 62
+     },
+     "w4": {
+      "ledgerPts": 1,
+      "kills": 1,
+      "distinct": 1,
+      "killers": 1,
+      "via": {
+       "player": 1,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 2,
+      "wpn": 6,
+      "trk": 22,
+      "vet": 0,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 3,
+      "wpn": 6,
+      "trk": 22,
+      "vet": 1,
+      "short": [],
+      "rdy": true
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 7,
+      "w3": 1,
+      "w4": 4,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63908,
+     "policyId": "leadfeast",
+     "stallClass": "never-progressed",
+     "stallSub": null,
+     "maxPeak": 0,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 138,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 3,
+     "attempts": [],
+     "standing": {
+      "termRaw": 105,
+      "termWar": 25,
+      "termDip": 0,
+      "termPlenty": 80,
+      "termCap": 105,
+      "warPts": 1,
+      "links": 0,
+      "feasts": 4,
+      "firstT4Day": 57,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 1,
+      "wpn": 3,
+      "trk": 22,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 3,
+      "trk": 22,
+      "vet": 1,
+      "short": [
+       "armor",
+       "weapons"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 16,
+      "w2": 8,
+      "w3": 6,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63901,
+     "policyId": "belongfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": "w5door-without-w4",
+     "maxPeak": 0,
+     "def5ever": true,
+     "firstDef5Day": 133,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 183,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 3,
+     "attempts": [
+      {
+       "start": 133,
+       "end": 140,
+       "shortStart": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "regressed",
+       "len": 8
+      },
+      {
+       "start": 147,
+       "end": 183,
+       "shortStart": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "horizon",
+       "len": 37
+      }
+     ],
+     "standing": {
+      "termRaw": 340,
+      "termWar": 100,
+      "termDip": 0,
+      "termPlenty": 240,
+      "termCap": 200,
+      "warPts": 4,
+      "links": 0,
+      "feasts": 12,
+      "firstT4Day": 50,
+      "firstT5Day": 85
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 4,
+     "r5term": {
+      "arm": 0,
+      "wpn": 4,
+      "trk": 23,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 4,
+      "trk": 23,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 16,
+      "w2": 8,
+      "w3": 4,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63902,
+     "policyId": "belongfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 148,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 205,
+      "termWar": 25,
+      "termDip": 0,
+      "termPlenty": 180,
+      "termCap": 125,
+      "warPts": 1,
+      "links": 0,
+      "feasts": 9,
+      "firstT4Day": 78,
+      "firstT5Day": 148
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 2,
+      "wpn": 5,
+      "trk": 27,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 3,
+      "wpn": 5,
+      "trk": 27,
+      "vet": 0,
+      "short": [
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 19,
+      "w2": 10,
+      "w3": 4,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63903,
+     "policyId": "belongfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": "w5door-without-w4",
+     "maxPeak": 0,
+     "def5ever": true,
+     "firstDef5Day": 107,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 123,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 3,
+     "attempts": [
+      {
+       "start": 107,
+       "end": 123,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 17
+      }
+     ],
+     "standing": {
+      "termRaw": 414,
+      "termWar": 100,
+      "termDip": 34,
+      "termPlenty": 280,
+      "termCap": 234,
+      "warPts": 4,
+      "links": 1,
+      "feasts": 14,
+      "firstT4Day": 51,
+      "firstT5Day": 79
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 4,
+     "r5term": {
+      "arm": 1,
+      "wpn": 8,
+      "trk": 24,
+      "vet": 0,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 2,
+      "wpn": 8,
+      "trk": 24,
+      "vet": 1,
+      "short": [
+       "armor"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 9,
+      "w3": 7,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63904,
+     "policyId": "belongfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 120,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 205,
+      "termWar": 25,
+      "termDip": 0,
+      "termPlenty": 180,
+      "termCap": 125,
+      "warPts": 1,
+      "links": 0,
+      "feasts": 9,
+      "firstT4Day": 85,
+      "firstT5Day": 120
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 0,
+      "wpn": 5,
+      "trk": 28,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 3,
+      "wpn": 5,
+      "trk": 28,
+      "vet": 0,
+      "short": [
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 19,
+      "w2": 9,
+      "w3": 5,
+      "w4": 3,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63905,
+     "policyId": "belongfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 107,
+     "wave4Day": 87,
+     "wave5Day": null,
+     "endDay": 130,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 107,
+       "end": 130,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 24
+      }
+     ],
+     "standing": {
+      "termRaw": 280,
+      "termWar": 100,
+      "termDip": 0,
+      "termPlenty": 180,
+      "termCap": 200,
+      "warPts": 4,
+      "links": 0,
+      "feasts": 9,
+      "firstT4Day": 73,
+      "firstT5Day": 87
+     },
+     "w4": {
+      "ledgerPts": 2,
+      "kills": 2,
+      "distinct": 1,
+      "killers": 1,
+      "via": {
+       "player": 2,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 1,
+      "wpn": 1,
+      "trk": 23,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 1,
+      "trk": 23,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 17,
+      "w2": 10,
+      "w3": 6,
+      "w4": 4,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63906,
+     "policyId": "belongfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 147,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 235,
+      "termWar": 75,
+      "termDip": 0,
+      "termPlenty": 160,
+      "termCap": 175,
+      "warPts": 3,
+      "links": 0,
+      "feasts": 8,
+      "firstT4Day": 51,
+      "firstT5Day": 147
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 3,
+     "r5term": {
+      "arm": 3,
+      "wpn": 8,
+      "trk": 22,
+      "vet": 0,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 4,
+      "wpn": 8,
+      "trk": 22,
+      "vet": 1,
+      "short": [],
+      "rdy": true
+     },
+     "deed": {
+      "ok": false,
+      "w1": 20,
+      "w2": 10,
+      "w3": 6,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63907,
+     "policyId": "belongfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 77,
+     "wave5Day": null,
+     "endDay": 134,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 165,
+      "termWar": 25,
+      "termDip": 0,
+      "termPlenty": 140,
+      "termCap": 125,
+      "warPts": 1,
+      "links": 0,
+      "feasts": 7,
+      "firstT4Day": 71,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 1,
+      "wpn": 4,
+      "trk": 22,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 4,
+      "trk": 22,
+      "vet": 1,
+      "short": [
+       "armor",
+       "weapons"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 9,
+      "w3": 5,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    },
+    {
+     "seed": 63908,
+     "policyId": "belongfeast",
+     "stallClass": "never-progressed",
+     "stallSub": null,
+     "maxPeak": 0,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 40,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": false,
+     "exiled": false,
+     "maxWave": 2,
+     "attempts": [],
+     "standing": {
+      "termRaw": 40,
+      "termWar": 0,
+      "termDip": 0,
+      "termPlenty": 40,
+      "termCap": 40,
+      "warPts": 0,
+      "links": 0,
+      "feasts": 2,
+      "firstT4Day": null,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 0,
+     "r5term": {
+      "arm": 2,
+      "wpn": 7,
+      "trk": 11,
+      "vet": 0,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 3,
+      "wpn": 7,
+      "trk": 11,
+      "vet": 0,
+      "short": [
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 11,
+      "w2": 2,
+      "w3": 0,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-off"
+    }
+   ]
+  },
+  "vetrel-on": {
+   "n": 16,
+   "stallClasses": {
+    "progressed-but-stalled": 5,
+    "engaged-but-failed": 9,
+    "never-progressed": 2
+   },
+   "doorReaching": 9,
+   "veteranLegMet": 1,
+   "villagerW4Kills": 3,
+   "totalW4Kills": 6,
+   "wall": {
+    "national": 11,
+    "table": 11,
+    "wins": 0,
+    "wave4": 13,
+    "wave5": 0,
+    "medianSurvival": 124,
+    "meanSurvival": 128.1,
+    "exiled": 0
+   },
+   "attempts": {
+    "total": 9,
+    "outcomes": {
+     "died": 7,
+     "horizon": 2
+    },
+    "runsWithAttempts": 9
+   },
+   "deathsPer100dMedian": 0,
+   "runs": [
+    {
+     "seed": 63901,
+     "policyId": "leadfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 50,
+     "wave5Day": null,
+     "endDay": 65,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 175,
+      "termWar": 75,
+      "termDip": 0,
+      "termPlenty": 100,
+      "termCap": 175,
+      "warPts": 3,
+      "links": 0,
+      "feasts": 5,
+      "firstT4Day": 50,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 3,
+     "r5term": {
+      "arm": 1,
+      "wpn": 3,
+      "trk": 19,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 3,
+      "trk": 19,
+      "vet": 2,
+      "short": [
+       "armor",
+       "weapons"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 15,
+      "w2": 6,
+      "w3": 3,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63902,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 121,
+     "wave4Day": 121,
+     "wave5Day": null,
+     "endDay": 179,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 121,
+       "end": 179,
+       "shortStart": [
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 59
+      }
+     ],
+     "standing": {
+      "termRaw": 317,
+      "termWar": 75,
+      "termDip": 102,
+      "termPlenty": 140,
+      "termCap": 277,
+      "warPts": 3,
+      "links": 3,
+      "feasts": 7,
+      "firstT4Day": 61,
+      "firstT5Day": 121
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 3,
+     "r5term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 24,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 24,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 19,
+      "w2": 8,
+      "w3": 5,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63903,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 83,
+     "wave4Day": 121,
+     "wave5Day": null,
+     "endDay": 174,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 83,
+       "end": 174,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 92
+      }
+     ],
+     "standing": {
+      "termRaw": 482,
+      "termWar": 100,
+      "termDip": 102,
+      "termPlenty": 280,
+      "termCap": 302,
+      "warPts": 4,
+      "links": 3,
+      "feasts": 14,
+      "firstT4Day": 57,
+      "firstT5Day": 83
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 4,
+     "r5term": {
+      "arm": 2,
+      "wpn": 2,
+      "trk": 29,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 2,
+      "wpn": 2,
+      "trk": 29,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 20,
+      "w2": 12,
+      "w3": 4,
+      "w4": 4,
+      "w5": 1
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63904,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 57,
+     "wave4Day": 126,
+     "wave5Day": null,
+     "endDay": 181,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 57,
+       "end": 181,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "horizon",
+       "len": 125
+      }
+     ],
+     "standing": {
+      "termRaw": 437,
+      "termWar": 75,
+      "termDip": 102,
+      "termPlenty": 260,
+      "termCap": 277,
+      "warPts": 3,
+      "links": 3,
+      "feasts": 13,
+      "firstT4Day": 55,
+      "firstT5Day": 57
+     },
+     "w4": {
+      "ledgerPts": 1,
+      "kills": 1,
+      "distinct": 1,
+      "killers": 1,
+      "via": {
+       "player": 1,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 2,
+      "wpn": 4,
+      "trk": 27,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 2,
+      "wpn": 4,
+      "trk": 27,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 10,
+      "w3": 4,
+      "w4": 5,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63905,
+     "policyId": "leadfeast",
+     "stallClass": "never-progressed",
+     "stallSub": null,
+     "maxPeak": 0,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 73,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": false,
+     "exiled": false,
+     "maxWave": 3,
+     "attempts": [],
+     "standing": {
+      "termRaw": 20,
+      "termWar": 0,
+      "termDip": 0,
+      "termPlenty": 20,
+      "termCap": 20,
+      "warPts": 0,
+      "links": 0,
+      "feasts": 1,
+      "firstT4Day": null,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 0,
+     "r5term": {
+      "arm": 0,
+      "wpn": 1,
+      "trk": 15,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 1,
+      "trk": 15,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 12,
+      "w2": 6,
+      "w3": 0,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63906,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 62,
+     "wave4Day": 152,
+     "wave5Day": null,
+     "endDay": 170,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 62,
+       "end": 170,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 109
+      }
+     ],
+     "standing": {
+      "termRaw": 352,
+      "termWar": 50,
+      "termDip": 102,
+      "termPlenty": 200,
+      "termCap": 252,
+      "warPts": 2,
+      "links": 3,
+      "feasts": 10,
+      "firstT4Day": 57,
+      "firstT5Day": 62
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 19,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 19,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 7,
+      "w3": 3,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63907,
+     "policyId": "leadfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 62,
+     "wave4Day": 78,
+     "wave5Day": null,
+     "endDay": 97,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": false,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 62,
+       "end": 97,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 36
+      }
+     ],
+     "standing": {
+      "termRaw": 287,
+      "termWar": 25,
+      "termDip": 102,
+      "termPlenty": 160,
+      "termCap": 227,
+      "warPts": 1,
+      "links": 3,
+      "feasts": 8,
+      "firstT4Day": 57,
+      "firstT5Day": 62
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 19,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 19,
+      "vet": 1,
+      "short": [
+       "armor",
+       "weapons"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 19,
+      "w2": 4,
+      "w3": 2,
+      "w4": 1,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63908,
+     "policyId": "leadfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 57,
+     "wave5Day": null,
+     "endDay": 124,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": false,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 130,
+      "termWar": 50,
+      "termDip": 0,
+      "termPlenty": 80,
+      "termCap": 130,
+      "warPts": 2,
+      "links": 0,
+      "feasts": 4,
+      "firstT4Day": 57,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 1,
+      "wpn": 1,
+      "trk": 20,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 1,
+      "trk": 20,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 14,
+      "w2": 8,
+      "w3": 2,
+      "w4": 4,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63901,
+     "policyId": "belongfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 70,
+     "wave5Day": null,
+     "endDay": 86,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": false,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 244,
+      "termWar": 50,
+      "termDip": 34,
+      "termPlenty": 160,
+      "termCap": 184,
+      "warPts": 2,
+      "links": 1,
+      "feasts": 8,
+      "firstT4Day": 50,
+      "firstT5Day": 72
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 21,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 21,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 15,
+      "w2": 8,
+      "w3": 2,
+      "w4": 3,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63902,
+     "policyId": "belongfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 175,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 259,
+      "termWar": 25,
+      "termDip": 34,
+      "termPlenty": 200,
+      "termCap": 159,
+      "warPts": 1,
+      "links": 1,
+      "feasts": 10,
+      "firstT4Day": 78,
+      "firstT5Day": 146
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 5,
+      "wpn": 7,
+      "trk": 27,
+      "vet": 0,
+      "short": [
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 5,
+      "wpn": 7,
+      "trk": 27,
+      "vet": 1,
+      "short": [],
+      "rdy": true
+     },
+     "deed": {
+      "ok": false,
+      "w1": 19,
+      "w2": 10,
+      "w3": 4,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63903,
+     "policyId": "belongfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 94,
+     "wave4Day": 101,
+     "wave5Day": null,
+     "endDay": 116,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 94,
+       "end": 116,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 23
+      }
+     ],
+     "standing": {
+      "termRaw": 439,
+      "termWar": 125,
+      "termDip": 34,
+      "termPlenty": 280,
+      "termCap": 259,
+      "warPts": 5,
+      "links": 1,
+      "feasts": 14,
+      "firstT4Day": 51,
+      "firstT5Day": 79
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 5,
+     "r5term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 24,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 0,
+      "trk": 24,
+      "vet": 2,
+      "short": [
+       "armor",
+       "weapons"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 17,
+      "w2": 12,
+      "w3": 5,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63904,
+     "policyId": "belongfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 181,
+     "wave4Day": 138,
+     "wave5Day": null,
+     "endDay": 182,
+     "endReason": "survived",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 181,
+       "end": 182,
+       "shortStart": [
+        "armor",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "veterans"
+       ],
+       "outcome": "horizon",
+       "len": 2
+      }
+     ],
+     "standing": {
+      "termRaw": 329,
+      "termWar": 75,
+      "termDip": 34,
+      "termPlenty": 220,
+      "termCap": 209,
+      "warPts": 3,
+      "links": 1,
+      "feasts": 11,
+      "firstT4Day": 85,
+      "firstT5Day": 154
+     },
+     "w4": {
+      "ledgerPts": 1,
+      "kills": 1,
+      "distinct": 1,
+      "killers": 1,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 1,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 2,
+      "wpn": 7,
+      "trk": 26,
+      "vet": 1,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 4,
+      "wpn": 7,
+      "trk": 26,
+      "vet": 3,
+      "short": [],
+      "rdy": true
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 10,
+      "w3": 6,
+      "w4": 4,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63905,
+     "policyId": "belongfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": "w5door-without-w4",
+     "maxPeak": 0,
+     "def5ever": true,
+     "firstDef5Day": 95,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 113,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": true,
+     "exiled": false,
+     "maxWave": 3,
+     "attempts": [
+      {
+       "start": 95,
+       "end": 113,
+       "shortStart": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons",
+        "veterans"
+       ],
+       "outcome": "died",
+       "len": 19
+      }
+     ],
+     "standing": {
+      "termRaw": 335,
+      "termWar": 175,
+      "termDip": 0,
+      "termPlenty": 160,
+      "termCap": 275,
+      "warPts": 7,
+      "links": 0,
+      "feasts": 8,
+      "firstT4Day": 67,
+      "firstT5Day": 95
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 7,
+     "r5term": {
+      "arm": 0,
+      "wpn": 3,
+      "trk": 22,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 0,
+      "wpn": 3,
+      "trk": 22,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 16,
+      "w2": 8,
+      "w3": 7,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63906,
+     "policyId": "belongfeast",
+     "stallClass": "progressed-but-stalled",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": 80,
+     "wave5Day": null,
+     "endDay": 101,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [],
+     "standing": {
+      "termRaw": 219,
+      "termWar": 25,
+      "termDip": 34,
+      "termPlenty": 160,
+      "termCap": 159,
+      "warPts": 1,
+      "links": 1,
+      "feasts": 8,
+      "firstT4Day": 51,
+      "firstT5Day": 95
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 1,
+     "r5term": {
+      "arm": 0,
+      "wpn": 3,
+      "trk": 21,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 3,
+      "trk": 21,
+      "vet": 0,
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 18,
+      "w2": 7,
+      "w3": 4,
+      "w4": 2,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63907,
+     "policyId": "belongfeast",
+     "stallClass": "engaged-but-failed",
+     "stallSub": null,
+     "maxPeak": 4,
+     "def5ever": true,
+     "firstDef5Day": 71,
+     "wave4Day": 57,
+     "wave5Day": null,
+     "endDay": 167,
+     "endReason": "village-lost",
+     "won": false,
+     "national": true,
+     "table": true,
+     "exiled": false,
+     "maxWave": 4,
+     "attempts": [
+      {
+       "start": 71,
+       "end": 167,
+       "shortStart": [
+        "armor"
+       ],
+       "shortEnd": [
+        "armor",
+        "weapons"
+       ],
+       "outcome": "died",
+       "len": 97
+      }
+     ],
+     "standing": {
+      "termRaw": 310,
+      "termWar": 150,
+      "termDip": 0,
+      "termPlenty": 160,
+      "termCap": 250,
+      "warPts": 6,
+      "links": 0,
+      "feasts": 8,
+      "firstT4Day": 57,
+      "firstT5Day": 71
+     },
+     "w4": {
+      "ledgerPts": 4,
+      "kills": 4,
+      "distinct": 3,
+      "killers": 3,
+      "via": {
+       "player": 2,
+       "villager": 0,
+       "companion": 2,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 2,
+     "r5term": {
+      "arm": 0,
+      "wpn": 1,
+      "trk": 19,
+      "vet": 2,
+      "short": [
+       "armor",
+       "weapons"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 1,
+      "wpn": 1,
+      "trk": 19,
+      "vet": 3,
+      "short": [
+       "armor",
+       "weapons"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 17,
+      "w2": 7,
+      "w3": 4,
+      "w4": 4,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    },
+    {
+     "seed": 63908,
+     "policyId": "belongfeast",
+     "stallClass": "never-progressed",
+     "stallSub": null,
+     "maxPeak": 0,
+     "def5ever": false,
+     "firstDef5Day": null,
+     "wave4Day": null,
+     "wave5Day": null,
+     "endDay": 40,
+     "endReason": "village-lost",
+     "won": false,
+     "national": false,
+     "table": false,
+     "exiled": false,
+     "maxWave": 2,
+     "attempts": [],
+     "standing": {
+      "termRaw": 40,
+      "termWar": 0,
+      "termDip": 0,
+      "termPlenty": 40,
+      "termCap": 40,
+      "warPts": 0,
+      "links": 0,
+      "feasts": 2,
+      "firstT4Day": null,
+      "firstT5Day": null
+     },
+     "w4": {
+      "ledgerPts": 0,
+      "kills": 0,
+      "distinct": 0,
+      "killers": 0,
+      "via": {
+       "player": 0,
+       "villager": 0,
+       "companion": 0,
+       "unknown": 0,
+       "other": 0
+      }
+     },
+     "w3ledgerPts": 0,
+     "r5term": {
+      "arm": 2,
+      "wpn": 7,
+      "trk": 11,
+      "vet": 0,
+      "short": [
+       "armor",
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "r4term": {
+      "arm": 3,
+      "wpn": 7,
+      "trk": 11,
+      "vet": 0,
+      "short": [
+       "veterans"
+      ],
+      "rdy": false
+     },
+     "deed": {
+      "ok": false,
+      "w1": 11,
+      "w2": 2,
+      "w3": 0,
+      "w4": 0,
+      "w5": 0
+     },
+     "arm": "vetrel-on"
+    }
+   ]
+  }
+ }
+}
