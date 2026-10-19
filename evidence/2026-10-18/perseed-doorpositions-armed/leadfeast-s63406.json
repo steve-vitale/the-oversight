@@ -1,0 +1,1024 @@
+{
+ "seed": 63406,
+ "policyId": "leadfeast",
+ "instrument": "compresence",
+ "substrate": "pure round-1 tribfloor (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0, NODEWITNESS=1, no vetstaff/vetblood/vetrel)",
+ "anchorCommit": "44a1b8b71951",
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "days": 107,
+ "gameDays": 108,
+ "endReason": "village-lost",
+ "rosterStart": 11,
+ "w3Kills": 2,
+ "w3Fights": 7,
+ "chanCounts": {
+  "a": 1,
+  "b": 0,
+  "c": 0,
+  "d": 0,
+  "e": 0,
+  "f": 1,
+  "x": 0
+ },
+ "dmgAttached": 2,
+ "singleMonsterKills": 2,
+ "kills": [
+  {
+   "d": 94,
+   "mid": "spool",
+   "w": 3,
+   "by": "gen_v48c3m6",
+   "byName": "Divya",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "haven-TB",
+   "channel": "f",
+   "channelNote": "1 companions on the scholar's node, none within the <=4 join radius (or behind the door)",
+   "channelEvidence": {
+    "sameNodeCount": 1,
+    "nearest": [
+     {
+      "vid": "petra_novak",
+      "name": "Petra",
+      "gridDist": null,
+      "side": "inside",
+      "sideMatch": false
+     }
+    ],
+    "inRadiusNotJoined": []
+   },
+   "startScholar": {
+    "vid": "gen_v48c3m6",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 323,
+    "companion": 0,
+    "other": 0,
+    "hits": 3,
+    "byVid": {},
+    "singleMonster": true,
+    "compShare": 0,
+    "scholarShare": 1
+   },
+   "field": null
+  },
+  {
+   "d": 101,
+   "mid": "spool",
+   "w": 3,
+   "by": "gen_v48c3m6",
+   "byName": "Divya",
+   "via": "player",
+   "pyrrhic": false,
+   "shape": "raid",
+   "channel": "a",
+   "channelNote": "1/1 joiners within strike range (<=1) of the killed monster",
+   "channelEvidence": {
+    "joiners": [
+     {
+      "vid": "petra_novak",
+      "name": "Petra",
+      "ai": "helpful",
+      "dist": 1,
+      "dmg": 86,
+      "fled": false
+     }
+    ]
+   },
+   "startScholar": {
+    "vid": "gen_v48c3m6",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 7,
+     "my": 1
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "dmg": {
+    "scholar": 273,
+    "companion": 86,
+    "other": 0,
+    "hits": 5,
+    "byVid": {
+     "petra_novak": 86
+    },
+    "singleMonster": true,
+    "compShare": 0.24,
+    "scholarShare": 0.76
+   },
+   "field": null
+  }
+ ],
+ "fights": [
+  {
+   "day": 94,
+   "mid": "spool",
+   "wave": 3,
+   "scholar": {
+    "vid": "gen_v48c3m6",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 4,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "petra_novak",
+     "name": "Petra",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "elena_petrova",
+     "name": "Elena",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 3
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "mara_vasquez",
+     "name": "Mara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 0,
+      "ny": 0
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "owen_smith",
+     "name": "Owen",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 4,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "spool",
+     "grid": {
+      "mx": 7,
+      "my": 1
+     }
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "mid": "spool",
+   "wave": 3,
+   "scholar": {
+    "vid": "gen_v48c3m6",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 7,
+     "my": 1
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 4,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [
+    {
+     "vid": "petra_novak",
+     "name": "Petra",
+     "ai": "helpful",
+     "weapon": 35,
+     "armor": 10,
+     "grid": {
+      "mx": 7,
+      "my": 0
+     },
+     "distToMonsters": {},
+     "hp": 100,
+     "maxHp": 100,
+     "fled": false
+    }
+   ],
+   "nonjoiners": [
+    {
+     "vid": "owen_smith",
+     "name": "Owen",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    },
+    {
+     "vid": "elena_petrova",
+     "name": "Elena",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "mara_vasquez",
+     "name": "Mara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 0,
+      "ny": 0
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 3,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "spool",
+     "grid": {
+      "mx": 6,
+      "my": 2
+     }
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "mid": "callback",
+   "wave": 3,
+   "scholar": {
+    "vid": "gen_v48c3m6",
+    "node": {
+     "nx": 5,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 1,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 4,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "elena_petrova",
+     "name": "Elena",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 5,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "mara_vasquez",
+     "name": "Mara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 0,
+      "ny": 0
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "petra_novak",
+     "name": "Petra",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 5
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "owen_smith",
+     "name": "Owen",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "inside",
+     "sideMatch": false
+    }
+   ],
+   "nonjoinerCount": 4,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "callback",
+     "grid": {
+      "mx": 1,
+      "my": 2
+     }
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "mid": "eulogy",
+   "wave": 4,
+   "scholar": {
+    "vid": "petra_novak",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 4,
+     "my": 4
+    },
+    "atHaven": true,
+    "insideHaven": true,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 3,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "elena_petrova",
+     "name": "Elena",
+     "inParty": false,
+     "sameNode": true,
+     "node": {
+      "nx": 4,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": true,
+     "side": "outside",
+     "sideMatch": false
+    },
+    {
+     "vid": "mara_vasquez",
+     "name": "Mara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 1,
+      "ny": 0
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "owen_smith",
+     "name": "Owen",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 3,
+      "ny": 4
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 3,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "eulogy",
+     "grid": {
+      "mx": 5,
+      "my": 3
+     }
+    }
+   ]
+  },
+  {
+   "day": 103,
+   "mid": "terms_of_service",
+   "wave": 3,
+   "scholar": {
+    "vid": "elena_petrova",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 2,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "mara_vasquez",
+     "name": "Mara",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 1,
+      "ny": 1
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    },
+    {
+     "vid": "owen_smith",
+     "name": "Owen",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 2,
+      "ny": 6
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 2,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "terms_of_service",
+     "grid": {
+      "mx": 7,
+      "my": 1
+     }
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "mid": "eulogy",
+   "wave": 4,
+   "scholar": {
+    "vid": "mara_vasquez",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 0
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 1,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [
+    {
+     "vid": "owen_smith",
+     "name": "Owen",
+     "inParty": false,
+     "sameNode": false,
+     "node": {
+      "nx": 2,
+      "ny": 6
+     },
+     "gridDist": null,
+     "atHavenNode": false,
+     "side": null,
+     "sideMatch": null
+    }
+   ],
+   "nonjoinerCount": 1,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "eulogy",
+     "grid": {
+      "mx": 7,
+      "my": 1
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "eulogy",
+     "grid": {
+      "mx": 6,
+      "my": 0
+     }
+    }
+   ]
+  },
+  {
+   "day": 108,
+   "mid": "reunion",
+   "wave": 4,
+   "scholar": {
+    "vid": "visjoin_105",
+    "node": {
+     "nx": 4,
+     "ny": 4
+    },
+    "grid": {
+     "mx": 8,
+     "my": 8
+    },
+    "atHaven": true,
+    "insideHaven": false,
+    "onExped": false
+   },
+   "rosterStart": 11,
+   "rosterSize": 0,
+   "partySize": 0,
+   "partyVids": [],
+   "joiners": [],
+   "nonjoiners": [],
+   "nonjoinerCount": 0,
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "reunion",
+     "grid": {
+      "mx": 6,
+      "my": 6
+     }
+    },
+    {
+     "key": "m_crew_1",
+     "mid": "reunion",
+     "grid": {
+      "mx": 5,
+      "my": 5
+     }
+    }
+   ]
+  }
+ ],
+ "fieldFights": [
+  {
+   "vid": "elena_petrova",
+   "mid": "spool",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 4,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 29,
+   "vTaken": 32,
+   "intent": "engage"
+  },
+  {
+   "vid": "diana_osei",
+   "mid": "spool",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 4,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 142,
+   "vTaken": 24,
+   "intent": "engage"
+  },
+  {
+   "vid": "diana_osei",
+   "mid": "focus_group",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 44,
+   "vTaken": 49,
+   "intent": "learn"
+  },
+  {
+   "vid": "diana_osei",
+   "mid": "focus_group",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 19,
+   "intent": "learn"
+  },
+  {
+   "vid": "benoit_lambert",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 40,
+   "vTaken": 57,
+   "intent": "learn"
+  },
+  {
+   "vid": "gen_j064l9c",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 15,
+   "vTaken": 58,
+   "intent": "learn"
+  },
+  {
+   "vid": "benoit_lambert",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 64,
+   "intent": "engage"
+  },
+  {
+   "vid": "benoit_lambert",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 32,
+   "intent": "engage"
+  },
+  {
+   "vid": "petra_novak",
+   "mid": "focus_group",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 60,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_voc7y5e",
+   "mid": "chorus_line",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 8,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 135,
+   "vTaken": 59,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_j064l9c",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 70,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_j064l9c",
+   "mid": "redactor",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 30,
+   "intent": "engage"
+  },
+  {
+   "vid": "brian_otieno",
+   "mid": "focus_group",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 3,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 74,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_voc7y5e",
+   "mid": "chorus_line",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 5,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 50,
+   "vTaken": 33,
+   "intent": "engage"
+  },
+  {
+   "vid": "elena_petrova",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 9,
+   "vTaken": 47,
+   "intent": "learn"
+  },
+  {
+   "vid": "gen_voc7y5e",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 20,
+   "intent": "learn"
+  },
+  {
+   "vid": "diana_osei",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 31,
+   "intent": "engage"
+  },
+  {
+   "vid": "brian_otieno",
+   "mid": "chorus_line",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 0,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 0,
+   "intent": "engage"
+  },
+  {
+   "vid": "diana_osei",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 57,
+   "intent": "engage"
+  },
+  {
+   "vid": "diana_osei",
+   "mid": "chorus_line",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 0,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 0,
+   "intent": "engage"
+  },
+  {
+   "vid": "diana_osei",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 4,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 52,
+   "vTaken": 102,
+   "intent": "engage"
+  },
+  {
+   "vid": "brian_otieno",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 4,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 71,
+   "vTaken": 81,
+   "intent": "engage"
+  },
+  {
+   "vid": "brian_otieno",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vFlee",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 15,
+   "intent": "engage"
+  },
+  {
+   "vid": "brian_otieno",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 1,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 17,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_voc7y5e",
+   "mid": "spool",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 0,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 0,
+   "vTaken": 0,
+   "intent": "engage"
+  },
+  {
+   "vid": "gen_voc7y5e",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "vDie",
+   "rounds": 4,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 28,
+   "vTaken": 117,
+   "intent": "engage"
+  },
+  {
+   "vid": "petra_novak",
+   "mid": "callback",
+   "allies": 0,
+   "allyVids": [],
+   "outcome": "mFlee",
+   "rounds": 2,
+   "allyDealt": 0,
+   "allyVid": null,
+   "mDealt": 26,
+   "vTaken": 53,
+   "intent": "engage"
+  }
+ ],
+ "instrumentErrors": [],
+ "deathCauses": {
+  "combat": 15,
+  "villager combat": 9,
+  "Performance Review": 1,
+  "monster": 6,
+  "expedition": 1
+ }
+}
