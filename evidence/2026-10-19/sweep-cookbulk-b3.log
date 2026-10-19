@@ -1,0 +1,67 @@
+control leadfeast s94101: days=81 end=village-lost cooked=0 waterL=0 rationed=4 starvD=0 
+b3 leadfeast s94101: days=102 end=village-lost cooked=35700 waterL=116 rationed=20 starvD=0 
+control belongfeast s94101: days=89 end=village-lost cooked=0 waterL=0 rationed=29 starvD=0 
+b3 belongfeast s94101: days=87 end=village-lost cooked=25270 waterL=83 rationed=33 starvD=0 
+control leadfeast s94102: days=73 end=village-lost cooked=0 waterL=0 rationed=0 starvD=0 
+b3 leadfeast s94102: days=84 end=village-lost cooked=42900 waterL=96 rationed=8 starvD=0 
+control belongfeast s94102: days=70 end=village-lost cooked=0 waterL=0 rationed=0 starvD=0 
+b3 belongfeast s94102: days=178 end=village-lost cooked=32428 waterL=87 rationed=25 starvD=1 
+control leadfeast s94103: days=130 end=village-lost cooked=0 waterL=0 rationed=25 starvD=2 
+b3 leadfeast s94103: days=68 end=village-lost cooked=15128 waterL=57 rationed=32 starvD=0 
+control belongfeast s94103: days=100 end=village-lost cooked=0 waterL=0 rationed=6 starvD=2 
+b3 belongfeast s94103: days=180 end=survived cooked=14078 waterL=54 rationed=64 starvD=1 
+control leadfeast s94104: days=164 end=village-lost cooked=0 waterL=0 rationed=3 starvD=0 
+b3 leadfeast s94104: days=89 end=village-lost cooked=9480 waterL=43 rationed=15 starvD=0 
+control belongfeast s94104: days=129 end=village-lost cooked=0 waterL=0 rationed=14 starvD=0 
+b3 belongfeast s94104: days=114 end=village-lost cooked=9480 waterL=43 rationed=26 starvD=1 
+control leadfeast s94105: days=131 end=village-lost cooked=0 waterL=0 rationed=1 starvD=0 
+b3 leadfeast s94105: days=102 end=village-lost cooked=37620 waterL=124 rationed=19 starvD=0 
+control belongfeast s94105: days=106 end=village-lost cooked=0 waterL=0 rationed=2 starvD=0 
+b3 belongfeast s94105: days=154 end=village-lost cooked=37620 waterL=124 rationed=13 starvD=0 
+control leadfeast s94106: days=154 end=village-lost cooked=0 waterL=0 rationed=12 starvD=0 
+b3 leadfeast s94106: days=180 end=survived cooked=15500 waterL=49 rationed=3 starvD=0 
+control belongfeast s94106: days=165 end=village-lost cooked=0 waterL=0 rationed=49 starvD=0 
+b3 belongfeast s94106: days=180 end=survived cooked=15500 waterL=49 rationed=31 starvD=0 
+control leadfeast s94107: days=81 end=village-lost cooked=0 waterL=0 rationed=0 starvD=5 
+b3 leadfeast s94107: days=45 end=village-lost cooked=31510 waterL=131 rationed=6 starvD=2 
+control belongfeast s94107: days=79 end=village-lost cooked=0 waterL=0 rationed=3 starvD=0 
+b3 belongfeast s94107: days=115 end=village-lost cooked=31150 waterL=107 rationed=4 starvD=0 
+control leadfeast s94108: days=74 end=village-lost cooked=0 waterL=0 rationed=32 starvD=1 
+b3 leadfeast s94108: days=55 end=village-lost cooked=21815 waterL=75 rationed=4 starvD=1 
+control belongfeast s94108: days=99 end=village-lost cooked=0 waterL=0 rationed=37 starvD=0 
+b3 belongfeast s94108: days=92 end=village-lost cooked=21815 waterL=75 rationed=17 starvD=1 
+
+AGGREGATE: {
+ "control": {
+  "n": 16,
+  "meanCookedKcal": 0,
+  "meanCookDays": "0.0",
+  "meanWaterDrawnL": "0.0",
+  "meanRationedDays": "13.6",
+  "medianDays": 100,
+  "medianGameDays": 100,
+  "national": 7,
+  "table": 13,
+  "wins": 0,
+  "wave4": 8,
+  "wave5": 0,
+  "starvationDeaths": 10,
+  "starvedDays": 36
+ },
+ "b3": {
+  "n": 16,
+  "meanCookedKcal": 24812,
+  "meanCookDays": "4.6",
+  "meanWaterDrawnL": "82.1",
+  "meanRationedDays": "20.0",
+  "medianDays": 102,
+  "medianGameDays": 103,
+  "national": 8,
+  "table": 11,
+  "wins": 0,
+  "wave4": 10,
+  "wave5": 0,
+  "starvationDeaths": 7,
+  "starvedDays": 25
+ }
+}
