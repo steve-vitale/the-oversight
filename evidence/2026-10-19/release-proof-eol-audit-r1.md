@@ -64,3 +64,12 @@ validation uses the same canonical scripts and tools, with deliberate CRLF
 conversion. Unresolved test sources are also retained as
 release-proof-eol-pending-tests-r1.json.gz for a portable handoff. No failing
 previously-green assertion was removed or weakened to obtain these results.
+
+Published source b388ce7b0 as fast-forward preview snapshot 6a3560976.
+Remote readback confirms that branch and unchanged main/master 2d58c7c5.
+The real validation checkout then switched to exactly 6a3560976 and passes
+quick 241/0 in 78 seconds. Its runtime/observer identities and maintained
+neutral proof validate against the canonical source. See publication-r2.json
+and checkout-quick-r3.log under this evidence prefix. This tooling publication
+does not replace the existing protected deployment or establish hosted touch
+evidence.

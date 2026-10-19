@@ -306,6 +306,9 @@
       if (fullCost.turn && typeof COST_HANDLERS !== 'undefined' && COST_HANDLERS.turn) {
         try { COST_HANDLERS.turn(this, fullCost.turn); } catch (e) {}
       }
+      // Peace can finish combat during dispatch. Retain the declared cost on
+      // that original actor without advancing a finished fight.
+      if (fullCost.turn && _pp && !this.inCombat()) _pp.acted = true;
       if (result === false) {
         if (_said === 0) this.say('Nothing happened. (' + (def.action.name || actionId) + ' fizzled.)');
       } else {

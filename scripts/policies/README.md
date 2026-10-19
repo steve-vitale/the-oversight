@@ -4,6 +4,13 @@ A policy is a named way of playing; a module may export several. Every lever is 
 **multiple policies on identical seeds** so results show strategy-dependence,
 not just one competent player's luck.
 
+Finale counter access (2026-10-19): capable's signature parser now reads the
+same data-finale buttons as the phone. Red Pen, Leaked Script and Bad Note have
+one-use preferences and still require actual available crew spoils. This is a
+controller revision, not a Game balance lever. Use this same controller on both
+Game roots; do not compare against the old controller as a Game-only change.
+See test-finale-counter-access and the release-contact2 retained screen.
+
 ## Interface
 
 Each module exports a policy object:

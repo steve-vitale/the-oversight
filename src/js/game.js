@@ -8226,6 +8226,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // --- autosave: one writer, one format. run data lives in state.run ---
     // the phone kills background tabs; an expedition must survive a refresh.
+    // Signature encounters keep counters, floor items and armed hazards on the
+    // fight as well as on fighters. Persist their data namespaces together;
+    // never restore core fight fields or asynchronous execution tokens here.
+    tbSignatureState(f) {
+      const state = {};
+      for (const [key, value] of Object.entries(f || {})) {
+        if (!/^(?:sig|fi|cx|ed|rr|ts|ni|sp|buf)[A-Z]/.test(key) && key !== 'spawnSeq') continue;
+        if (value === undefined || typeof value === 'function') continue;
+        try { state[key] = JSON.parse(JSON.stringify(value)); }
+        catch (e) { console.warn('[save] signature fight state', key, e); }
+      }
+      return state;
+    },
     syncRun() {
       // COMBAT PERSISTENCE (Steve 2026-10-06): save active fight so it survives
       // PWA updates. Fighters are serialized minimally; reconstructed on load.
@@ -8244,6 +8257,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (f && !f.over) {
           tbSave = {
             id: f.id || null,
+            gridSize: f.gridSize,
+            tableTrial: !!f.tableTrial,
+            signatureState: this.tbSignatureState(f),
             ...(f.coalitionArena ? {gridSize:f.gridSize,coalitionArena:f.coalitionArena,worldOrigin:f.worldOrigin || null} : {}),
             fighters: (f.fighters || []).map(ft => {
               try {
@@ -8739,6 +8755,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (turnIdx >= order.length) turnIdx = 0;
           if (tbS.playerCommandReturn && order.includes('p')) turnIdx = order.indexOf('p');
           this.tbfight = {
+            ...this.tbSignatureState(tbS.signatureState),
+            gridSize: Number.isSafeInteger(tbS.gridSize) && tbS.gridSize >= 9 && tbS.gridSize <= 32 ? tbS.gridSize : undefined,
+            tableTrial: !!tbS.tableTrial,
             id: tbS.id || ('f' + Date.now().toString(36) + '_' + Math.floor(Math.random() * 1e9).toString(36)),
             ...(tbS.coalitionArena ? {gridSize:tbS.gridSize,coalitionArena:tbS.coalitionArena,worldOrigin:tbS.worldOrigin || null} : {}),
             fighters,
@@ -21463,6 +21482,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // monsters move when you do. they're in the detail grid with you.
     monsterTurn() {
       const s = this.state.scholar;
+      // The tier-2 watch protects sleep at Haven, including raiders already
+      // pinned to its tile. Awake bearers and sleepers elsewhere still engage.
+      const haven = this.state.village || {};
+      if (this._sleeping && this.map.px === (haven.px ?? 4) && this.map.py === (haven.py ?? 4) &&
+          this.havenTier && this.havenTier() >= 2) return;
       const m = this.playerMonster();
       if (!m || m.mx === undefined) return;
       const px = s.mx ?? 4, py = s.my ?? 4;

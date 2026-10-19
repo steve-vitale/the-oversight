@@ -1,5 +1,42 @@
 # Survival levers and investigation register
 
+## Protected sleep and encounter persistence (2026-10-19)
+
+Tier-2 Haven watch now prevents world-monster turns during sleep on the actual
+Haven tile, including a raider already pinned there. Awake bearers and sleepers
+without the palisade still engage. Wilderness sleep remains exposed. This
+restores the existing watch promise; it changes exposure and can change how
+much of the night is actually slept and charged. No food, HP, damage or raid
+probability is adjusted to offset the result.
+
+Peacemaker retains its declared spent action on the original actor when peace
+ends combat during dispatch. Its chance, immunity rules and food costs stay
+fixed. Finale's item counter consumes one unit from the exact finite usable
+stack; zero/negative/nonfinite or less-than-one stock cannot fund a whole item.
+Missing legacy units still mean one item. Memory remains 250 kcal and the
+encore still refuses it. Fight signature data, armed hazards, spent counters,
+grid size and Table-trial identity now survive Continue. Old saves cannot
+reconstruct resources that were already omitted; do not invent fresh spoils.
+
+The corrected Finale bot parser/preferences are a separate methodology change,
+shared identically by both Game roots. Matched 16 per mixed profile gives wins
+capable 13→13, maker 8→7, merchant 5→5, caregiver 11→10. Total bearer deaths are
+43→48, 26→32, 24→21 and 24→30 respectively. Capable/caregiver community loss
+also rises 0→1 cases. First-bearer day-30/day-60 survival is unchanged. Review
+all 23 metrics in release-contact2-screen-r1.md; wins cannot cancel deaths or
+community warnings. Eastern Woodlands maker16 gives 4→5 wins with deaths and
+community losses unchanged. All 16 requested carpenter offers are absent in
+each arm; that cohort proves no carpenter viability.
+
+Decision: retain the correctness repairs with these watches, without numerical
+difficulty compensation. Nine selected mixed-policy pairs and the regional
+ending change replay exact full states, outcomes and metrics. Their coarse
+daily divergences do not establish the complete causal chain to an ending.
+The persistence-only follow-up preserves all 64 outcome/metric vectors; its
+one changed full-state hash is exactly the newly retained /run/tbfight fields
+in capable20011. No broad balance-equivalence or public-launch claim follows.
+See release-contact2-audit-r1.md and retained raw panels in dated evidence.
+
 Counter/worksite recovery2026-10-19: explicit zero/fractional/nonfinite units
 cannot create pemmican; unitless legacy singletons remain one. Build storage
 on Haven's actual tile outside a live fight, retaining ordinary48/builder24
@@ -829,6 +866,7 @@ counts and wins; do not optimize one in isolation.
 
 | Lever family | Actual sources | Measure beside wins |
 |---|---|---|
+| Palisade sleep exposure and encounter continuity | `Game.monsterTurn`, `tbSignatureState`, `syncRun`, `load`; `abilityActions.js`, `sigW5.js` | actual interrupted/full nights, time and food charges, awake/wilderness contacts, paid counters after Continue, bearer deaths and community losses |
 | Needs and food-power costs | `food.js`, `foodPower.js`, ability data | bearer/NPC deaths, low food/water, useful intake and unknown receipts |
 | NPC food attrition settlement | `Game.villagerMealDay`, `villageEats`, `hurtFromStarvation` | actual 8/4-HP hits, nonviolent refusals, shared caps, real deaths/remaining residents, skipped meals, community/gear opportunity and legacy zeroHP ghosts |
 | Enemy pressure and current-wave readiness | monster data, `fieldFights.js`, `engine/combat.js`, progression | lethal exposure, gear tiers, retreat use, first-bearer survival |

@@ -2,6 +2,16 @@
 
 Status: integration in progress; not cleared for public launch.
 
+Rest/encounter checkpoint (2026-10-19): protected Haven sleep, peace action
+costs, exact Finale payment and missing fight-level Continue state are repaired.
+Native prepared Sleep/peace/crew-counter flows and recorded chat/Deer/Wait/
+escape pass at both phone heights; the actual coalition board has576 cells.
+Quick245/0, full1017/0 and 150 focused checks pass. The matched four-profile screen remains
+review_required: keep greater deaths/community loss and lower Table access
+visible. No numeric difficulty compensation. Nine of the additional24 legacy
+contracts remain, plus full integration/lifecycle/device/release gates. See
+release-contact2-audit-r1.md and its retained raw panels/source/replay proofs.
+
 Developer-checkout checkpoint (2026-10-19): quick 241/0 and full 1013/0 in
 a real Windows Git worktree with CRLF source. Portable observer/contract and
 phone-receipt identities retain source-edit invalidation. Compact snapshots
@@ -11,6 +21,10 @@ this is maintenance equivalence, not broader balance clearance. Fireside
 presence's corrected canonical fixture passes at seeds 7/42/99. Twelve of
 the 24 additional legacy contracts remain. See dated
 release-proof-eol-audit-r1.md; game/UI runtime and device limits below remain.
+Shared developer snapshot is codex/phone-preview 6a3560976 from source
+b388ce7b0; exact published Git checkout quick passes 241/0 in 78 seconds.
+The hosted deployment below retains the identical game runtime. This tooling
+push changes no production ref and adds no hosted-device clearance.
 
 Phone preview2026-10-19: https://the-oversight-c919zpesi-steven-vitales-projects.vercel.app
 is READY from codex/phone-preview43498d1b9, an exact runtime/scripts/docs

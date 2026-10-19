@@ -1,5 +1,33 @@
 # Mobile playtesting before release
 
+Encounter/Continue smoke (2026-10-19): sleep at a tier-2 Haven with a nearby
+raider, then verify actual dawn and usable controls. Test awake and unprotected
+contacts separately. For peace, retain unsuccessful as well as successful
+native attempts and inspect the original actor's spent action. For Finale,
+save an outdoor campaign-heart scene with declared crew spoils/armed zones;
+Continue must preserve buttons and danger, actual taps must spend the correct
+one-use counter, and a second Continue must not re-arm it. Verify rendered
+cells as well as the engine grid size: 576 cells for the 24×24 coalition arena.
+Do not put an outdoor fixture inside Haven, where field fighters are hidden.
+Internal Actions-menu swipes are allowed; verify they preserve time, food and
+outer document position. Core movement/actions must remain on one screen.
+
+Current recipes and retained native/recorded-save receipts are release-contact2-*
+in dated evidence. If the interactive browser transport is unavailable, the
+run-release-contact2-browser-r1.cjs runner repeats the same recipe using host
+bundled Playwright (NODE_PATH from load_workspace_dependencies), headless Edge,
+an explicit disposable loopback origin, phone height, fresh receipt path and
+scratch directory inside the common Git directory. No dependency install or
+gameplay helper calls are needed. Close its context/browser after completion;
+retain and inspect screenshots. This remains emulation, not physical-device
+or installed-lifecycle evidence.
+
+New signature fight state must use the registered camel-case namespaces in
+Game.tbSignatureState (or extend that registry with a real save/Continue test).
+Keep core fighters/order and asynchronous execution tokens outside its payload.
+test-signature-state-persistence automatically exercises the save boundary,
+spent-resource replay, old saves and rejection of core-field overrides.
+
 Receipt portability2026-10-19: phone proof checksums declare lf-v1 and ignore
 only CRLF/LF conversion by Git. Real content edits, stale served scripts,
 untrusted touches and clipped/offscreen controls still fail. Do not edit a

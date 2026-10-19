@@ -1,5 +1,17 @@
 # ROADMAP: what's built, what's next, how to do it
 
+Rest/encounter continuation (2026-10-19): restore tier-2 Haven sleep protection,
+the spent peace-action marker and real Finale stack payment. Actual phone
+Continue exposed missing signature fight state; crew spoils, armed zones,
+signature counters, grid size and Table-trial identity now survive. Four
+automatic contracts pass 150 checks across three seeds; prepared native Sleep,
+peace and all crew counters pass at both phone sizes, with a rendered 24×24
+coalition board and oversized monster. Quick245/0 and full1017/0 pass. The matched screen
+retains death/community/Table-access warnings; no difficulty compensation.
+See release-contact2-audit-r1.md and all-23-metric panels in dated evidence.
+Of24 additional legacy contracts,2 originally pass,13 are recovered/superseded
+and9 remain. Complete those and final integrated/lifecycle/device gates.
+
 Developer checkout checkpoint (2026-10-19): real Windows Git checkout now
 passes quick 241/0 and full 1013/0. Observer/contract/phone-receipt text
 identities agree across LF and CRLF while actual edits invalidate proofs.
