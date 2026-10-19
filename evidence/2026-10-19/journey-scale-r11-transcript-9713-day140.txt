@@ -1,0 +1,20 @@
+=== seed 9713 day 140 — conversation with Madison (gen_60r3bvi) ===
+occupation=welder temperament=restless trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I'm feverish, a cut gone hot and angry. I need help. Please."
+(turn0 choices: alive:want:ask_favor, dlg:help, alive:event:show, dlg:details, dlg:cant, teach, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's not just the cut anymore, it's in the blood, I can feel it climbing. I need someone who knows wounds."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. Whatever you can do — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Cattail — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Okay I really have to move now or I'll explode — talk soon!"
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

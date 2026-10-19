@@ -1,0 +1,32 @@
+=== seed 9715 day 80 — conversation with Daniel (gen_ojrfisf) ===
+occupation=fishing guide temperament=fidgety trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you still sing — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+(turn0 choices: agency:ask_field, ans:q_song:a_yes, ans:q_song:a_no, ans:q_song:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: The grass stops moving the way wind moves it. Sweeps Week, every time. Dawn and dusk, that's when it's out."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Piquiarana. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Death Cap. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going. I don't know, though."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "You want to know what I did in the raid? I stood down Cliffhanger at the treeline — it ran. Don't call it brave. Call it awake."
+(want=curious stage=2)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

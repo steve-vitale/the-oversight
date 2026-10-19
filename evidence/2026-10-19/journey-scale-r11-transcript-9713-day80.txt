@@ -1,0 +1,26 @@
+=== seed 9713 day 80 — conversation with Madison (gen_60r3bvi) ===
+occupation=welder temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Cooking With Teeth. They just... took Dale. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I check everyone's shoes for wear and stay ready."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Gotta run. Literally. Bye!"
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

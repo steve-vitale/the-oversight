@@ -1,0 +1,32 @@
+=== seed 9712 day 80 — conversation with Pavel (pavel_dubinin) ===
+occupation=bush pilot temperament=dry trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+(turn0 choices: agency:ask_field, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "I don't distrust anyone exactly — I just haven't finished trusting most of them yet. There's a difference. A slow one."
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Good question." "I know you and Arturo were close. I'm sorry."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Arturo said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Arturo. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I greet everyone by name each morning for Arturo, now. Feels right. Feels like the least I can do."
+(want=curious stage=2)
+closing line: "Right then. Back to the business of surviving."
+want final: id=curious stage=3 resolution=engaged

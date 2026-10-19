@@ -1,0 +1,29 @@
+=== seed 9715 day 120 — conversation with Daniel (gen_ojrfisf) ===
+occupation=fishing guide temperament=fidgety trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "I tried the Wild Black Cherry like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: agency:ask_expedition, alive:event:outbreak, dlg:invite, alive:want:ask_favor, dlg:more, dlg:react, leave, silence)
+YOU: [dlg:more] "And then?"
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "No, really, it's fine. Forget I even asked."
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Pokeweed — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Lamb's Quarters — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Anyway — I should get going."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

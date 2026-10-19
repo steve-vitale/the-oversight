@@ -1,0 +1,26 @@
+=== seed 9713 day 100 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=20 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you dream about before? Or is it all — this — now? Makes sense to me."
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "They took you — Impress Us, on the screens. The whole fire watched. Nobody knew where to look."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We'll see what the treeline brings. We always do."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Well. My social battery is officially dead."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

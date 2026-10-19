@@ -1,0 +1,23 @@
+=== seed 9713 day 120 — conversation with Madison (gen_60r3bvi) ===
+occupation=welder temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+(turn0 choices: ans:q_theory:a_aliens, ans:q_theory:a_test, ans:q_theory:a_shrug, deflect_q, leave, silence)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants. — or so they tell me."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Huh. I answered that once — back when the answer was simpler." "Gauntlet. They just... took Chantal. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Spicebush — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

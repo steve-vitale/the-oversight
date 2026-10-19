@@ -1,0 +1,18 @@
+=== seed 9714 day 120 — conversation with Ayana (gen_eogph5z) ===
+occupation=bus driver temperament=steady trust=91 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Between us — Pawpaw — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:defense, alive:want:curious, dlg:invite, dlg:more, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(want=curious stage=1)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

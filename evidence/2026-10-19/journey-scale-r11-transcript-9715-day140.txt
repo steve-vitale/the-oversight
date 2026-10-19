@@ -1,0 +1,32 @@
+=== seed 9715 day 140 — conversation with Daniel (gen_ojrfisf) ===
+occupation=fishing guide temperament=fidgety trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Every laugh out there feels wrong today. Then I feel wrong for thinking it. Doesn't matter now."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, dlg:invite, dlg:comfort, dlg:empathize, leave, silence)
+YOU: [dlg:comfort] "You alright?"
+THEM: "I — yeah. It helps, hearing that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Can I just — Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there. Sorry, what was the question."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing. — anyway."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Um — Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_comfort stage=3 resolution=engaged
