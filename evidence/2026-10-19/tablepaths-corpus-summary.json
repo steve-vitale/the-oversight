@@ -1,0 +1,752 @@
+{
+ "armed": {
+  "n": 16,
+  "complete": 16,
+  "invited": 12,
+  "sat": 10,
+  "won": 10,
+  "national": 10,
+  "table": 9,
+  "wave4": 8,
+  "wave5": 0,
+  "maxWave": 4,
+  "medianSurvival": 90,
+  "maxSurvival": 110,
+  "distinctPaths": [
+   "assimilated",
+   "beloved",
+   "defiant",
+   "feared",
+   "relay"
+  ],
+  "branchCounts": {
+   "light": 9,
+   "grey": 1
+  },
+  "walkedRuns": 10,
+  "trialFired": 3,
+  "trialResumes": [
+   {
+    "seed": 64201,
+    "policyId": "leadfeast",
+    "day": 109,
+    "result": "lost",
+    "bearerDied": true,
+    "path": "feared"
+   },
+   {
+    "seed": 64203,
+    "policyId": "belongfeast",
+    "day": 90,
+    "result": "lost",
+    "bearerDied": true,
+    "path": "feared"
+   },
+   {
+    "seed": 64208,
+    "policyId": "belongfeast",
+    "day": 90,
+    "result": "lost",
+    "bearerDied": true,
+    "path": "feared"
+   }
+  ],
+  "pathChannels": {
+   "trial-combat": 3,
+   "seated-raid": 2
+  },
+  "causeSpace": {
+   "monster": 46,
+   "dehydration": 4,
+   "Choir Toad": 2,
+   "starvation": 6,
+   "combat": 70,
+   "sickness": 8,
+   "ambush": 2,
+   "lockjaw": 2,
+   "experiment": 3,
+   "Big Loud": 1,
+   "Performance Review": 2,
+   "contest": 3,
+   "a wound that wouldn't close": 1,
+   "The Congregation": 1,
+   "thirst": 1
+  },
+  "doorFallbacks": 0
+ },
+ "control": {
+  "n": 16,
+  "complete": 16,
+  "invited": 12,
+  "sat": 10,
+  "won": 10,
+  "national": 10,
+  "table": 8,
+  "wave4": 8,
+  "wave5": 0,
+  "maxWave": 4,
+  "medianSurvival": 90,
+  "maxSurvival": 109,
+  "distinctPaths": [],
+  "branchCounts": {},
+  "walkedRuns": 0,
+  "trialFired": 0,
+  "trialResumes": [],
+  "pathChannels": {},
+  "causeSpace": {
+   "monster": 46,
+   "dehydration": 4,
+   "Choir Toad": 2,
+   "starvation": 6,
+   "combat": 65,
+   "sickness": 8,
+   "ambush": 2,
+   "lockjaw": 2,
+   "experiment": 3,
+   "Big Loud": 1,
+   "Performance Review": 2,
+   "contest": 3,
+   "a wound that wouldn't close": 1,
+   "The Congregation": 1,
+   "thirst": 1
+  },
+  "doorFallbacks": 0
+ },
+ "verdict": {
+  "primary": {
+   "distinctPaths": 5,
+   "distinctPathsGo": true,
+   "topChannel": "trial-combat",
+   "topCount": 3,
+   "secondChannel": "seated-raid",
+   "secondCount": 2,
+   "marginGo": false,
+   "go": false
+  },
+  "guardrails": {
+   "conversionArmed": 0.8333333333333334,
+   "conversionControl": 0.8333333333333334,
+   "conversionGo": true,
+   "nationalDelta": 0,
+   "tableDelta": 1,
+   "wallGo": true,
+   "newDeathModes": [],
+   "deathModeGo": true
+  }
+ },
+ "runs": [
+  {
+   "seed": 64201,
+   "policyId": "leadfeast",
+   "endReason": "over-other",
+   "gameDays": 110,
+   "won": true,
+   "national": true,
+   "table": true,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 109,
+   "seat": "lesser",
+   "assigned": "feared",
+   "walked": [
+    {
+     "day": 109,
+     "path": "feared",
+     "branch": "light",
+     "door": "path:feared",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [
+    {
+     "day": 109,
+     "result": "lost",
+     "bearerDied": true,
+     "path": "feared"
+    }
+   ],
+   "finals": [
+    {
+     "day": 110,
+     "path": "feared",
+     "branch": "light",
+     "finalId": "final:mercy"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 109,
+     "picked": "path:feared",
+     "fellBack": false,
+     "why": "assigned+feared"
+    }
+   ],
+   "seatedDeaths": [
+    {
+     "day": 109,
+     "name": "Ines",
+     "player": true,
+     "cause": "combat",
+     "channel": "raid",
+     "rule": "ctx:scholar-fight-at-haven",
+     "pathChannel": "trial-combat",
+     "tablePhase": "challenge",
+     "tablePath": "feared",
+     "tableBranch": "light",
+     "trialPending": true
+    }
+   ]
+  },
+  {
+   "seed": 64202,
+   "policyId": "leadfeast",
+   "endReason": "over-other",
+   "gameDays": 94,
+   "won": true,
+   "national": true,
+   "table": false,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 94,
+   "seat": "lesser",
+   "assigned": "defiant",
+   "walked": [
+    {
+     "day": 94,
+     "path": "defiant",
+     "branch": "light",
+     "door": "path:defiant",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [],
+   "finals": [
+    {
+     "day": 94,
+     "path": "defiant",
+     "branch": "light",
+     "finalId": "final:walk"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 94,
+     "picked": "path:defiant",
+     "fellBack": false,
+     "why": "assigned+defiant"
+    }
+   ],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64203,
+   "policyId": "leadfeast",
+   "endReason": "village-lost",
+   "gameDays": 69,
+   "won": false,
+   "national": false,
+   "table": false,
+   "invited": false,
+   "sat": false,
+   "sittingDay": null,
+   "seat": null,
+   "assigned": "assimilated",
+   "walked": [],
+   "trialResumes": [],
+   "finals": [],
+   "doorEvents": [],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64204,
+   "policyId": "leadfeast",
+   "endReason": "over-other",
+   "gameDays": 90,
+   "won": true,
+   "national": true,
+   "table": true,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 90,
+   "seat": "lesser",
+   "assigned": "beloved",
+   "walked": [
+    {
+     "day": 90,
+     "path": "beloved",
+     "branch": "light",
+     "door": "path:beloved",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [],
+   "finals": [
+    {
+     "day": 90,
+     "path": "beloved",
+     "branch": "light",
+     "finalId": "final:audience"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 90,
+     "picked": "path:beloved",
+     "fellBack": false,
+     "why": "assigned+beloved"
+    }
+   ],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64205,
+   "policyId": "leadfeast",
+   "endReason": "village-lost",
+   "gameDays": 109,
+   "won": false,
+   "national": true,
+   "table": false,
+   "invited": false,
+   "sat": false,
+   "sittingDay": null,
+   "seat": null,
+   "assigned": "relay",
+   "walked": [],
+   "trialResumes": [],
+   "finals": [],
+   "doorEvents": [],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64206,
+   "policyId": "leadfeast",
+   "endReason": "village-lost",
+   "gameDays": 22,
+   "won": false,
+   "national": false,
+   "table": false,
+   "invited": false,
+   "sat": false,
+   "sittingDay": null,
+   "seat": null,
+   "assigned": "feared",
+   "walked": [],
+   "trialResumes": [],
+   "finals": [],
+   "doorEvents": [],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64207,
+   "policyId": "leadfeast",
+   "endReason": "over-other",
+   "gameDays": 90,
+   "won": true,
+   "national": true,
+   "table": true,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 90,
+   "seat": "lesser",
+   "assigned": "defiant",
+   "walked": [
+    {
+     "day": 90,
+     "path": "defiant",
+     "branch": "light",
+     "door": "path:defiant",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [],
+   "finals": [
+    {
+     "day": 90,
+     "path": "defiant",
+     "branch": "light",
+     "finalId": "final:walk"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 90,
+     "picked": "path:defiant",
+     "fellBack": false,
+     "why": "assigned+defiant"
+    }
+   ],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64208,
+   "policyId": "leadfeast",
+   "endReason": "over-other",
+   "gameDays": 94,
+   "won": true,
+   "national": true,
+   "table": false,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 94,
+   "seat": "lesser",
+   "assigned": "assimilated",
+   "walked": [
+    {
+     "day": 94,
+     "path": "assimilated",
+     "branch": "light",
+     "door": "path:assimilated",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [],
+   "finals": [
+    {
+     "day": 94,
+     "path": "assimilated",
+     "branch": "light",
+     "finalId": "final:comfort"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 94,
+     "picked": "path:assimilated",
+     "fellBack": false,
+     "why": "assigned+assimilated"
+    }
+   ],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64201,
+   "policyId": "belongfeast",
+   "endReason": "village-lost",
+   "gameDays": 86,
+   "won": false,
+   "national": false,
+   "table": true,
+   "invited": true,
+   "sat": false,
+   "sittingDay": null,
+   "seat": null,
+   "assigned": "beloved",
+   "walked": [],
+   "trialResumes": [],
+   "finals": [],
+   "doorEvents": [],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64202,
+   "policyId": "belongfeast",
+   "endReason": "village-lost",
+   "gameDays": 83,
+   "won": false,
+   "national": true,
+   "table": true,
+   "invited": true,
+   "sat": false,
+   "sittingDay": null,
+   "seat": null,
+   "assigned": "relay",
+   "walked": [],
+   "trialResumes": [],
+   "finals": [],
+   "doorEvents": [],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64203,
+   "policyId": "belongfeast",
+   "endReason": "over-other",
+   "gameDays": 91,
+   "won": true,
+   "national": false,
+   "table": true,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 90,
+   "seat": "lesser",
+   "assigned": "feared",
+   "walked": [
+    {
+     "day": 90,
+     "path": "feared",
+     "branch": "light",
+     "door": "path:feared",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [
+    {
+     "day": 90,
+     "result": "lost",
+     "bearerDied": true,
+     "path": "feared"
+    }
+   ],
+   "finals": [
+    {
+     "day": 91,
+     "path": "feared",
+     "branch": "light",
+     "finalId": "final:mercy"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 90,
+     "picked": "path:feared",
+     "fellBack": false,
+     "why": "assigned+feared"
+    }
+   ],
+   "seatedDeaths": [
+    {
+     "day": 90,
+     "name": "Rowan",
+     "player": true,
+     "cause": "combat",
+     "channel": "raid",
+     "rule": "ctx:scholar-fight-at-haven",
+     "pathChannel": "trial-combat",
+     "tablePhase": "challenge",
+     "tablePath": "feared",
+     "tableBranch": "light",
+     "trialPending": true
+    },
+    {
+     "day": 91,
+     "name": "Olivia",
+     "player": true,
+     "cause": "combat",
+     "channel": "raid",
+     "rule": "ctx:scholar-fight-at-haven",
+     "pathChannel": "seated-raid",
+     "tablePhase": "challenge",
+     "tablePath": "feared",
+     "tableBranch": "light",
+     "trialPending": false
+    },
+    {
+     "day": 91,
+     "name": "Ekua",
+     "player": true,
+     "cause": "combat",
+     "channel": "raid",
+     "rule": "ctx:scholar-fight-at-haven",
+     "pathChannel": "seated-raid",
+     "tablePhase": "challenge",
+     "tablePath": "feared",
+     "tableBranch": "light",
+     "trialPending": false
+    }
+   ]
+  },
+  {
+   "seed": 64204,
+   "policyId": "belongfeast",
+   "endReason": "over-other",
+   "gameDays": 90,
+   "won": true,
+   "national": false,
+   "table": true,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 90,
+   "seat": "lesser",
+   "assigned": "defiant",
+   "walked": [
+    {
+     "day": 90,
+     "path": "defiant",
+     "branch": "light",
+     "door": "path:defiant",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [],
+   "finals": [
+    {
+     "day": 90,
+     "path": "defiant",
+     "branch": "light",
+     "finalId": "final:walk"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 90,
+     "picked": "path:defiant",
+     "fellBack": false,
+     "why": "assigned+defiant"
+    }
+   ],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64205,
+   "policyId": "belongfeast",
+   "endReason": "over-other",
+   "gameDays": 90,
+   "won": true,
+   "national": true,
+   "table": true,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 90,
+   "seat": "lesser",
+   "assigned": "assimilated",
+   "walked": [
+    {
+     "day": 90,
+     "path": "assimilated",
+     "branch": "light",
+     "door": "path:assimilated",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [],
+   "finals": [
+    {
+     "day": 90,
+     "path": "assimilated",
+     "branch": "light",
+     "finalId": "final:comfort"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 90,
+     "picked": "path:assimilated",
+     "fellBack": false,
+     "why": "assigned+assimilated"
+    }
+   ],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64206,
+   "policyId": "belongfeast",
+   "endReason": "village-lost",
+   "gameDays": 22,
+   "won": false,
+   "national": false,
+   "table": false,
+   "invited": false,
+   "sat": false,
+   "sittingDay": null,
+   "seat": null,
+   "assigned": "beloved",
+   "walked": [],
+   "trialResumes": [],
+   "finals": [],
+   "doorEvents": [],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64207,
+   "policyId": "belongfeast",
+   "endReason": "over-other",
+   "gameDays": 102,
+   "won": true,
+   "national": true,
+   "table": false,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 102,
+   "seat": "lesser",
+   "assigned": "relay",
+   "walked": [
+    {
+     "day": 102,
+     "path": "relay",
+     "branch": "grey",
+     "door": "path:relay",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [],
+   "finals": [
+    {
+     "day": 102,
+     "path": "relay",
+     "branch": "grey",
+     "finalId": "final:both-hands"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 102,
+     "picked": "path:relay",
+     "fellBack": false,
+     "why": "assigned+relay"
+    }
+   ],
+   "seatedDeaths": []
+  },
+  {
+   "seed": 64208,
+   "policyId": "belongfeast",
+   "endReason": "over-other",
+   "gameDays": 91,
+   "won": true,
+   "national": true,
+   "table": true,
+   "invited": true,
+   "sat": true,
+   "sittingDay": 90,
+   "seat": "lesser",
+   "assigned": "feared",
+   "walked": [
+    {
+     "day": 90,
+     "path": "feared",
+     "branch": "light",
+     "door": "path:feared",
+     "fellBack": false
+    }
+   ],
+   "trialResumes": [
+    {
+     "day": 90,
+     "result": "lost",
+     "bearerDied": true,
+     "path": "feared"
+    }
+   ],
+   "finals": [
+    {
+     "day": 91,
+     "path": "feared",
+     "branch": "light",
+     "finalId": "final:mercy"
+    }
+   ],
+   "doorEvents": [
+    {
+     "day": 90,
+     "picked": "path:feared",
+     "fellBack": false,
+     "why": "assigned+feared"
+    }
+   ],
+   "seatedDeaths": [
+    {
+     "day": 90,
+     "name": "Onni",
+     "player": true,
+     "cause": "combat",
+     "channel": "raid",
+     "rule": "ctx:scholar-fight-at-haven",
+     "pathChannel": "trial-combat",
+     "tablePhase": "challenge",
+     "tablePath": "feared",
+     "tableBranch": "light",
+     "trialPending": true
+    }
+   ]
+  }
+ ]
+}
