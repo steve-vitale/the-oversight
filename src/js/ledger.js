@@ -1467,8 +1467,10 @@
         if (o.killerId && o.killerId === this.villagerId) {
           if (o.kind === 'monster' || o.kind === 'hostile') {
             this.ledgerAdd('might', 3);
-            const party = this.state.party;
-            if (party && party.members && party.members.length) this.ledgerAdd('protected', 1);
+            // r24 blank: was reading this.state.party (never written outside
+            // debug-scenarios) — the real party is state.village.party.
+            const party = (this.state && this.state.village && this.state.village.party) || [];
+            if (party.length) this.ledgerAdd('protected', 1);
           } else if (o.kind === 'villager') {
             this.ledgerAdd('killed', 3);
           }
