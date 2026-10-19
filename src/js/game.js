@@ -29584,6 +29584,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.healerRounds(); } catch (e) {}
       this.villageLives();
       this.villageEats();
+      // EXTINCTION (journey-crisis r25 2026-10-18): the scattering is not the
+      // only death. A village ground to zero living villagers by violence or
+      // disease kept simulating a ghost village (observed: a 120-day run with
+      // 0/1 alive reporting 'survived'). Canon: the run ends when the village
+      // dies out. Lives here, not in villageEats: the membership wrap filters
+      // the roster to members-only (dead villagers aren't members), so the
+      // zero-living state is only visible against the whole roster. Fires
+      // once (v.extinct), narrated, save wiped like the scattering. Requires
+      // a non-empty roster so a never-established or already-wiped village
+      // can't trip it. Counts living via rosterChars, not vpOf: the dead are
+      // often removed from the person map (removeVillager), and a roster id
+      // with no person record is certainly not a living villager.
+      try {
+        const _v = this.state.village || {};
+        const _roster = _v.roster || [];
+        const _rc = _v.rosterChars || {};
+        const _living = _roster.filter(id => { const c = _rc[id]; return c && c.alive !== false; });
+        if (_roster.length && !_living.length && !_v.extinct && !this.over) {
+          _v.extinct = true;
+          this.over = true; this.villageLost = true;
+          this.say('Nobody is left. Not scattered, not gone looking for food — dead, every one, and the fire has nobody left to warm. The village ends here, the way villages end when the teeth find them first.');
+          this.wipe();
+        }
+      } catch (e) { console.warn('[extinction] day', e); }
       // WATER REALITY (Steve 2026-10-08): the hearth boils the day's haul,
       // then everyone drinks — villagers drink like people now.
       try { this.hearthBoil(); } catch (e) {}
