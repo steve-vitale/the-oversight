@@ -1,0 +1,51 @@
+check.js: 1029 scripts, 6 parallel
+.............................................................................................................F....................F..............................................................................................................................................................F.........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................F.........................................................................................................................
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 0.6s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — src/css/main.css,src/js/app.js
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: src/css/main.css
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-table-ending-display.js (exit 1, 0.9s)
+      ok   real final stores its exact base outcome followed by the selected build coda
+      ReferenceError: window is not defined
+          at ending (eval at <anonymous> (C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-table-ending-display.js:17:18), <anonymous>:61:5)
+          at C:\Users\Steve\.codex\worktrees\balanced-measurement\oversight\scripts\godpath\test-table-ending-display.js:18:3
+
+  FAIL scripts/test-break-monsters2-ambushzone-20261008.js (exit 1, 1.0s)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5) {
+        errno: -4094,
+        code: 'UNKNOWN',
+        syscall: 'open',
+        path: 'C:\\Users\\Steve\\.codex\\worktrees\\balanced-measurement\\oversight\\docs\\ONTOLOGY.md'
+      }
+      
+      Node.js v24.13.0
+        FAIL: validate-ontology.js passes
+      
+      ambushzone proof: 10 passed, 1 failed
+
+  FAIL scripts/test-ui-infobar-card-20261014.js (exit 1, 0.1s)
+      FAIL statrow has readable styling 
+      PASS no ledgerProgressLine call in beatsRowHTML (code, not comments)
+      PASS person card containment rule exists
+      PASS card height:100% (definite, scroll container forms)
+      PASS card margin:0 (no overflow past region)
+      PASS card scrolls internally
+      PASS card border-box (padding inside 184px)
+      PASS card header sticky top
+      PASS card action buttons sticky bottom
+      PASS narration region fixed 184px
+      
+      10 passed, 3 failed
+
+  slowest: scripts/test-simopt-trajectory-20261010.js 53s, scripts/test-fourthlink-20261014.js 45s, scripts/test-deterministic-clock-20261014.js 44s
+
+check.js: 1025 passed, 4 failed in 248s

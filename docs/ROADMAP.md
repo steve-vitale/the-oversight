@@ -1,5 +1,14 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-19 release continuation: native Wait now proves real death, succession
+and promise reconciliation at both phone sizes. Native Table success and a failed
+Feared door both reach actual endings; the failed door stays closed through the
+weakened fallback. The next candidate keeps the ending action visible while its
+complete story/lineage scroll internally. See release-ending-audit-r1.md and the
+11-stage ending plus 16-stage field receipts. No Game/data/policy tuning or new
+production release is claimed. Nine legacy contracts were rerun and remain open
+for explicit dispositions; do not count obsolete deletion expectations as canon.
+
 2026-10-19 combined development shipment: main/master 0545151a5's 67 commits
 are reconciled with the phone/combat/Continue candidate (merge 07db9d4d7).
 Twelve automatic regressions protect the reviewed ports; preserve the canonical

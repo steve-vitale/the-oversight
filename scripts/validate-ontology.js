@@ -281,8 +281,12 @@ function main() {
         `**Consumes:** ${s.consumes.length ? s.consumes.join(', ') : '—'}\n`
       ).join('\n');
       doc = doc.slice(0, idx + marker.length) + '\n\n' + table + '\n';
-      fs.writeFileSync(ontologyPath, doc);
-      console.log('Updated docs/ONTOLOGY.md with validated systems\n');
+      // Most callers only validate. Avoid concurrent Windows writers opening
+      // the same generated file when its contents already match.
+      if (fs.readFileSync(ontologyPath, 'utf8') !== doc) {
+        fs.writeFileSync(ontologyPath, doc);
+        console.log('Updated docs/ONTOLOGY.md with validated systems\n');
+      }
     }
   }
 

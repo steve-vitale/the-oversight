@@ -19486,14 +19486,21 @@
       record = `Days: ${st.day} · Plants learned: ${entries}`;
     }
     screen.innerHTML = `
+      <section class="ending-screen">
+      <header>
       ${bar('scattering://end', st.won ? 'survived' : 'fallen')}
       <h1 class="title" style="font-size:26px">${esc(endTitle)}</h1>
       <p class="small">${esc(sub)}</p>
+      </header>
+      <div class="ending-scroll" role="region" aria-label="Ending and expedition record" tabindex="0">
       ${storyHtml}
       <div class="card"><h3>Expedition record</h3>
         <p class="small">${record}</p></div>
       ${chainHtml}
-      <button class="btn" id="b-again">Begin a new village</button>`;
+      </div>
+      <button class="btn" id="b-again">Begin a new village</button>
+      </section>`;
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
     document.getElementById('b-again').onclick = () => title();
   }
 

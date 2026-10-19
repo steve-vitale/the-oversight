@@ -2058,3 +2058,17 @@ body.stage-1 .ss-here, body.stage-2 .ss-here, body.stage-3 .ss-here, body.stage-
   .field-layout #inlineslot .pantry-card > .inline-body { min-height:0; flex:1; overflow:auto; overscroll-behavior:contain; }
   .field-layout #inlineslot .pantry-card > .inline-btns { flex:none; margin:0; padding:4px 0; }
 }
+
+/* The ending keeps its next action visible while the complete story can be read. */
+@media (max-width: 899px) {
+  #app:has(.ending-screen) {
+    height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    min-height: 0;
+  }
+  #screen:has(.ending-screen) { min-height: 0; overflow: hidden; padding: 8px 12px; }
+  .ending-screen { height: 100%; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px; }
+  .ending-screen header .title { margin: 8px 0; }
+  .ending-screen header p { margin: 8px 0; }
+  .ending-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+  .ending-screen > .btn { margin: 0; }
+}

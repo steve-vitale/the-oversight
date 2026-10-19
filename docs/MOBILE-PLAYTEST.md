@@ -1,5 +1,34 @@
 # Mobile playtesting before release
 
+Ending/succession journey (2026-10-19): the prepared release-ending fixtures
+exercise a real enemy turn after native Wait, actual mantle transfer and two
+promised favors. The successor's self-debt must be moot; the other creditor's
+need stays asked. A second scene resolves a real Table final. A third overreaches
+on the Feared door, closes that door, then plays the weakened Assimilated fallback
+to its actual ending. Table failure downgrades the story under TABLE.md law 4;
+do not restore the obsolete assertion that two failed doors delete the campaign.
+
+At 390x736 and 390x844 the ending story/lineage scroll inside one reading region;
+Begin a new village stays visible and works. Reading must preserve state and
+outer document position. The fixtures are prepared, not natural late-game access.
+Late-game fixtures must mark the System introduction as already viewed; otherwise
+the real arrival cinematic correctly takes priority over the Table. Combat setup
+in node can immediately resolve a faster enemy: establish a healthy player turn
+before setting the declared one-HP death scene and verify the saved bearer.
+
+Repeat from the repository root using the bundled Playwright runtime:
+
+```powershell
+node evidence/2026-10-19/serve-release-phone-r1.cjs 8853
+# In another terminal, after setting NODE_PATH to the bundled node_modules:
+node evidence/2026-10-19/run-release-contact2-browser-r1.cjs evidence/2026-10-19/release-ending-phone-replay-r1.js http://127.0.0.1:8853 736 evidence/2026-10-19/ending-new-736.json C:/Users/Steve/oversight/.git/ending-new-736
+```
+
+Use fresh receipt/scratch names and repeat at 844. The server binds loopback,
+serves current source without caching and disables SW; it is not lifecycle proof.
+The saved fixture revision is embedded in the recipe; retain its generator,
+successful receipts, inspected screenshots and failed fixture attempts together.
+
 Encounter/Continue smoke (2026-10-19): sleep at a tier-2 Haven with a nearby
 raider, then verify actual dawn and usable controls. Test awake and unprotected
 contacts separately. For peace, retain unsuccessful as well as successful
