@@ -262,6 +262,13 @@
         `{first} was talking about home — then stopped mid-sentence, recalibrated, and said "{told}" just a fraction too deliberately. Whatever home is, it isn't where that sentence started.`,
         `{first} let a place-name slip — somewhere that isn't {told} — then covered it with "{told}" so fast the cover was louder than the slip.`,
         `Someone mentioned {told} and {first} answered to it a beat late — like responding to a name that isn't quite yours.`,
+        // r16 2026-10-19: pool was 3 lines — the per-game no-repeat recycle
+        // re-served a seen line verbatim 21 days later (seed 61 Owen echo).
+        // 6 lines keeps the echo rare. CRACK ONLY as ever: these name the
+        // cover's crack, never the true origin.
+        `When the others traded stories about {told}, {first} went quiet in a way that wasn't listening — more like realizing they had nothing true to trade.`,
+        `{first} pronounced a {told} place-name the way someone reads it off a map for the first time. Nobody from there says it that way.`,
+        `You caught {first} rehearsing — muttering details about {told} under their breath before the evening fire, like someone cramming for a part.`,
       ],
       slipGoal: [
         // same gating as origin: the wanting shows, the word for it doesn't.

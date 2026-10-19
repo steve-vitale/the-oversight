@@ -21,7 +21,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-const EVID = '/home/hatch/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-10-18';
+const EVID = process.env.EVID || '/home/hatch/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-10-18';
 const { loadGame, setupGame, driveFights, driveContests } = require('./sim-harness');
 const { competent } = require('./policies/competent');
 
