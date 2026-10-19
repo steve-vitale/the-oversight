@@ -59,7 +59,12 @@ function courtship(Game, ctx) {
     }
     if (st.pendingNational && Game.answerNationalChoice) {
       const shape = st.pendingNational.shape;
-      const pick = { lead: 'feast', conquest: 'mercy', belong: 'swear', covenant: 'pact', trade: 'sign' }[shape] || 'feast';
+      // R12 (2026-10-19): COVENANT_ANSWER env exercises the Founding
+      // Council's POOL founding-pact choice in sims (default 'pact' —
+      // no behavior change for normal runs). The pool founding pour is
+      // the covenant road's real-food moment and no current policy takes it.
+      const covPick = (process.env.COVENANT_ANSWER === 'pool' || process.env.COVENANT_ANSWER === 'walk') ? process.env.COVENANT_ANSWER : 'pact';
+      const pick = { lead: 'feast', conquest: 'mercy', belong: 'swear', covenant: covPick, trade: 'sign' }[shape] || 'feast';
       try { Game.answerNationalChoice(pick); } catch (e) {}
       ctx.courtNational = (ctx.courtNational || 0) + 1;
     }
