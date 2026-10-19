@@ -170,8 +170,9 @@ async function loadGame(opts) {
   // (the entire crisis-relief system), villageAgency.js, and memdepth.js.
   // Sims were measuring a game without its recovery mechanics. No cap: load
   // the full list in index.html order.
-  const order = execSync(`grep -o 'src/js/[^"'"'"']*\\.js' index.html`, { cwd: ROOT })
-    .toString().split('\n')
+  // Read the same ordered manifest directly; no external shell or grep.
+  const order = (fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
+    .match(/src\/js\/[^"']*\.js/g) || [])
     .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
 
   global.window = global;

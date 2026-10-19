@@ -1,5 +1,15 @@
 # First public PWA release candidate
 
+**Start with [RELEASE-HANDOFF.md](RELEASE-HANDOFF.md)** for the short current
+candidate identity, verified scope, feedback route and actual open gates.
+The remaining five additional legacy contracts now have97 assertion sites
+explicitly mapped in release-legacy-five-assertions-r3.json. Numeric proposals
+and absent optional controller APIs are exclusions/coverage gaps, not passes.
+The wider193-commit inclusion census remains open. Portable manifest loading
+and the comments/self-export wiring false-green are repaired with automatic
+guards and a same-root injected fault. No served gameplay bytes changed.
+Older counts, "five pending" notes and source cutoffs below are historical.
+
 Status: integration in progress; not cleared for public launch.
 
 Latest unshipped runtime: a40e8ddacc9de335583688fc1c26c2813f5e00b9.

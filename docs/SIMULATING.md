@@ -1,5 +1,17 @@
 # Simulating The Oversight — how to measure a change
 
+Portable bootstrap (2026-10-19): the shared harness reads index.html's ordered
+script manifest with Node; it no longer requires external grep/Bash. Keep
+`scripts/godpath/test-harness-no-grep.js` passing in quick/full. The manifest
+still excludes the documented DOM-only modules and has no80-script cap.
+The maintenance change has an explicit cross-harness bridge: eight seed7
+150-day final states/all23 metric vectors match retained default/Europe cases,
+plus eight observer-neutral controls. Only scripts/sim-harness.js differs in
+normalized inputs. See release-handoff-harness-bridge-r1.json in dated evidence.
+This is a tooling bridge, not a game balance comparison or all-seed equivalence
+claim. Prior128-case warnings keep their original harness identities; never
+silently relabel them. Current neutral proof was refreshed with real panels.
+
 Bounded Market audit (2026-10-18): completed one fixed-input 64-seed holdout
 per merchant/dealer/hoarder, three exact natural gear traces, and prepared mobile
 purchase→equip→combat→Continue/Wait. Acquisition, equipping and landed effects

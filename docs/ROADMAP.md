@@ -1,5 +1,15 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-19 verification continuation: RELEASE-HANDOFF.md is the short current
+handoff. All24 additional legacy contracts now have explicit dispositions,
+including97 assertion sites in the final five files; excluded controller/tuning
+assertions are not current passes. The wider inclusion review remains finite:
+193 divergent commits,237 original test names,50 absent current files. Retain
+the census and existing55/24 maps; no blanket behavior claim from file counts.
+Two tooling defects are fixed: shell-dependent sim loading and comments/exports
+masquerading as callers. Neither changes served gameplay. Do not reopen old
+five-contract status notes below as if they were the current work list.
+
 2026-10-19 body/carry follow-up: production007 still has the coordinate-zero
 corpse reach bug and normal-capacity pickup cliff. The reconciled candidate
 has nearby Search, deliberate2x overload with food/combat penalties and the

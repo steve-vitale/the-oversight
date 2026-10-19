@@ -1,0 +1,1174 @@
+{
+  "scope": "No historical test is declared passing by exclusion. Read individual assertion dispositions and current proof results.",
+  "files": [
+    {
+      "legacy": "scripts/test-campaigner-20261015.js",
+      "primary": "038a96b39ebf3d49cf6bf02d22377a2e1cdc8b2e",
+      "sourceSha256": "fbb53d65dd20d439df0f1a59e776af65fd0486cd4ad20a31471dfd3fbe2ff675",
+      "scope": "Static assertion call sites; templated loops may execute several checks. This inventory does not rerun the historical script.",
+      "assertions": [
+        {
+          "line": 21,
+          "source": "T.ok('hungry policy does not recruit an unfed army', !G.titanMusterState('finale') && ctx.campaignFoodBlocked === 1);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 25,
+          "source": "T.ok('policy calls and confirms a real twenty-person coalition', m && m.allies.length === 17 && m.haven.length === 3 && G.titanMusterReady('finale'));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 26,
+          "source": "T.ok('recruitment policy never grants relationships', JSON.stringify(links) === relationships);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 27,
+          "source": "T.ok('policy does not invent a monster when announcement has none', ctx.campaignMissingTarget === 1 && !G.tbfight);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 29,
+          "source": "T.ok('ready army does not spam calls', ctx.campaignCalls === calls && m.allies.length === 17);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 33,
+          "source": "T.ok('outfitting transfers real spare weapons once', s.inventory.length === before - force.length && force.every(a => a.outfitted.some(i => i.itemId === 'stone_knife')));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 36,
+          "source": "T.ok('policy never stacks a second weapon per soldier', s.inventory.length === armed);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 44,
+          "source": "T.ok('campaign travel enables the existing paid route-around behavior', routeSeen === '1');",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 45,
+          "source": "T.ok('campaign restores route-around environment even on travel error', process.env.COMPETENT_ROUTE_AROUND === '0');",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 46,
+          "source": "T.ok('travel errors remain visible to the audit', routeCtx.notes.some(n => n.includes('prepared route sentinel')));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 53,
+          "source": "T.ok('ordinary fight cannot use coalition commitment', !C.coalitionCommitted(G, ctx, f, p));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 55,
+          "source": "T.ok('real marked campaign with living army holds at full HP', C.coalitionCommitted(G, ctx, f, p));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 57,
+          "source": "T.ok('wounded bearer restores normal retreat decision', !C.coalitionCommitted(G, ctx, f, p));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 59,
+          "source": "T.ok('depleted army restores normal retreat decision', !C.coalitionCommitted(G, ctx, f, p));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 63,
+          "source": "T.ok('matched control restores environment after hook', process.env.CAPABLE_GREEDY === envBefore);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 74,
+          "source": "T.ok('provision uses real pantry transfers, conserving calories', carried > 0 && G.pantryKcal() + carried === stock);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 75,
+          "source": "T.ok('provision leaves two days of village food', G.pantryKcal() >= reserve);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 76,
+          "source": "T.ok('provision counter records actual gained food', ctx.campaignProvisionKcal - priorProvision === carried);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 77,
+          "source": "T.ok('policy errors are surfaced', !ctx.campaignErrors && ctx.notes.length === 0);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "legacy": "scripts/test-capable-death-fixes-20261015.js",
+      "primary": "038a96b39ebf3d49cf6bf02d22377a2e1cdc8b2e",
+      "sourceSha256": "7fffc535807bab4f61038ad3788f4baf825f6a3e708df47894634132b858516d",
+      "scope": "Static assertion call sites; templated loops may execute several checks. This inventory does not rerun the historical script.",
+      "assertions": [
+        {
+          "line": 115,
+          "source": "T.ok('gate off (old): holds in the hall, never moves to leave', old.capFleeHeld >= 1 && old.capFleeSteps === 0 && old.capFleeDoorExits === 0, JSON.stringify(old));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 117,
+          "source": "T.ok('fix (in the hall): flee decided at Haven', hall.capFleeFromHaven >= 1, JSON.stringify(hall));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 118,
+          "source": "T.ok('fix (in the hall): out through the door, fight over', hall.capFleeDoorExits >= 1 && hall.end !== 'live' && hall.end !== 'lost', JSON.stringify(hall));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 120,
+          "source": "T.ok('fix (on the grounds): flee decided at Haven', yard.capFleeFromHaven >= 1, JSON.stringify(yard));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 121,
+          "source": "T.ok('fix (on the grounds): walks to an edge or pushes through', yard.capFleeSteps >= 1 || yard.capFleePushes >= 1, JSON.stringify(yard));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 122,
+          "source": "T.ok('no policy errors', !hall.errors.length && !yard.errors.length, JSON.stringify([hall.errors, yard.errors]));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 142,
+          "source": "T.ok('gate off (old): a wave-5 draw is faced', old.starts === 1, JSON.stringify(old));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 144,
+          "source": "T.ok('fix: a wave-5 draw is driven off (no fight)', now.starts === 0 && !now.pending && now.ctx.capDrawDrivenOff === 1, JSON.stringify({ starts: now.starts, pending: now.pending, off: now.ctx.capDrawDrivenOff }));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 146,
+          "source": "T.ok('fix: a fair draw is still faced', fair.starts === 1 && fair.ctx.capDrawFaced === 1, JSON.stringify({ starts: fair.starts, faced: fair.ctx.capDrawFaced }));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 148,
+          "source": "T.ok('harness: a policy without pending() still faces it', nohook.starts === 1, JSON.stringify({ starts: nohook.starts }));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 155,
+          "source": "T.ok('gate off (old): at 8 HP the tithe takes \"One more measure\"', old.label === 'One more measure', old.label);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 157,
+          "source": "T.ok('fix: at 8 HP the tithe does not bleed again', now.label !== 'One more measure', now.label);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 158,
+          "source": "T.ok('fix: counted', (now.ctx.capContestLethalAvoided || 0) === 1, JSON.stringify(capableSummary(now.ctx)));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 160,
+          "source": "T.ok('at full HP the measure is still allowed (not lethal)', full.label === 'One more measure', full.label);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 172,
+          "source": "T.ok('the Maw: never \"Turn and face it\"', picked === 1, 'picked ' + picked);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 179,
+          "source": "T.ok('a beam-carrying persona exists', !!pid, String(pid));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 185,
+          "source": "T.ok('unknown Stranger, beam never felt: no flee (if you don\\'t know, it doesn\\'t show)', unknown === null, String(unknown));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 187,
+          "source": "T.ok('beam felt, no resistant gear: flee', threatFlee(Game, { notes: [] }, p, mons) === 'beam-stranger');",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 188,
+          "source": "T.ok('gate off: no flee', withGate('CAPABLE_BEAM_FLEE', '0', () => threatFlee(Game, { notes: [] }, p, mons)) === null);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 191,
+          "source": "try { T.ok('two resistant pieces: stands', threatFlee(Game, { notes: [] }, p, mons) === null); } finally { Game.apBeamResistPieces = realPieces; }",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 195,
+          "source": "T.ok('live, gate off (old): stays in the fight', old.capFleeDecisions === 0, JSON.stringify(old.why));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 197,
+          "source": "T.ok('live, fix: flee decided for the beam', now.capFleeDecisions >= 1 && now.capBeamFlee >= 1 && now.why.indexOf('beam-stranger') >= 0, JSON.stringify({ d: now.capFleeDecisions, why: now.why, notes: now.notes }));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 203,
+          "source": "T.ok('gate off (old): a full-HP bearer stays against the deer', old.capFleeDecisions === 0, JSON.stringify(old.why));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 205,
+          "source": "T.ok('fix: flee decided (highbeam)', now.capFleeDecisions >= 1 && now.why.indexOf('highbeam') >= 0, JSON.stringify({ d: now.capFleeDecisions, why: now.why, notes: now.notes }));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 207,
+          "source": "T.ok('a deer beaten under our HP: finish it', hurt.capDeerFlee === 0, JSON.stringify(hurt.why));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 222,
+          "source": "T.ok('lockjaw contracted', t0.ctx.capLockjawSeen === 1);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 224,
+          "source": "T.ok('gate off (old): pills in the bag, never taken', old.has && !old.ctx.capLockjawPills, JSON.stringify(capableSummary(old.ctx)));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 226,
+          "source": "T.ok('fix: antibiotics taken, lockjaw cured', !now.has && now.ctx.capLockjawPills === 1 && now.ctx.capLockjawCured === 1, JSON.stringify(capableSummary(now.ctx)));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 229,
+          "source": "T.ok('fix: with triage, examined and treated', tri.ctx.capLockjawExamined === 1 && tri.ctx.capLockjawTreated >= 1, JSON.stringify(capableSummary(tri.ctx)));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 230,
+          "source": "T.ok('triage cures it once named (else eases)', diag ? !tri.has : true, 'diagnosed ' + diag + ', still sick ' + tri.has);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 231,
+          "source": "T.ok('no errors', ![t0, old, now, tri].some(r => r.ctx.notes.length), JSON.stringify(now.ctx.notes.concat(tri.ctx.notes)));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 250,
+          "source": "T.ok('gate off (old): never calls', old.calls.length === 0);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 252,
+          "source": "T.ok('fix: one call for the raid', now.calls.length === 1 && now.ctx.capAidCalls === 1, JSON.stringify(now.calls));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 253,
+          "source": "T.ok('never the signal fire', now.calls.every(c => c.tier !== 'signal'), JSON.stringify(now.calls));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 255,
+          "source": "T.ok('not a raid crisis: no call', notRaid.calls.length === 0);",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 256,
+          "source": "T.ok('no errors', !now.ctx.notes.length, JSON.stringify(now.ctx.notes));",
+          "resolution": {
+            "kind": "historical_controller_contract_excluded",
+            "reason": "The old optional controller module/exports, A/B flags and counters are absent from the current four-policy registry. This is an explicit coverage limitation, not a passing claim or an assumption that current bots behave equivalently. Human coalition/escape/beam/contest actions have separate runtime/native proofs; no broad controller rewrite in this release milestone.",
+            "currentRuntime": [
+              "scripts/godpath/test-coalition-scale.js",
+              "scripts/godpath/test-coalition-body-turns.js",
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "legacy": "scripts/test-network-commit-lock-20261015.js",
+      "primary": "038a96b39ebf3d49cf6bf02d22377a2e1cdc8b2e",
+      "sourceSha256": "3b3a59df4c27802a6ed7f18b943be5536fed66fc1b2dba70e68d53d237a08102",
+      "scope": "Static assertion call sites; templated loops may execute several checks. This inventory does not rerun the historical script.",
+      "assertions": [
+        {
+          "line": 8,
+          "source": "T.ok('before marching the real commitment button is offered', G.titanSelfActions().some(a => a.id === 'titan:commit:the_network'));",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 9,
+          "source": "T.ok('pre-march first tap requests confirmation', G.titanCommitOwn('the_network') === 'confirm' && m.haven.length === 0);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 13,
+          "source": "T.ok('started march hides new Haven commitment', !G.titanSelfActions().some(a => a.id === 'titan:commit:the_network'));",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 14,
+          "source": "T.ok('starting the march invalidates the pending second tap', G.titanCommitOwn('the_network') === null && m.haven.length === 0);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 15,
+          "source": "T.ok('stale Network confirmation is cleared', !!pending && st.pendingCommit === null);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 16,
+          "source": "T.ok('rejected commitment leaves workforce and volunteers unchanged', !Object.keys(G.state.village.titanCommitted || {}).length && G.titanVolunteers().length === volunteers);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 17,
+          "source": "T.ok('public self action cannot bypass the lock', G.titanSelfDo('titan:commit:the_network') == null && m.haven.length === 0);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 18,
+          "source": "T.ok('started march also retains the foreign call lock', G.soundTitanCall('the_network') === null && m.allies.length === 0);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 20,
+          "source": "T.ok('Network refusal preserves a different campaign confirmation', st.pendingCommit === 'finale:another-confirmation');",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 24,
+          "source": "T.ok('pre-march second tap still commits three actual people', m.haven.length === 3 && m.haven.every(h => G.state.village.titanCommitted[h.vid] === 'the_network'));",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 26,
+          "source": "T.ok('repeated in-march taps never add replacements', m.haven.length === 3 && Object.keys(G.state.village.titanCommitted).length === 3);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 30,
+          "source": "T.ok('Finale retains its allowed new Haven commitments', st.musters.finale.haven.length === 3);",
+          "resolution": {
+            "kind": "recovered_runtime_contract",
+            "current": [
+              "scripts/test-network-commit-lock-runtime.js"
+            ]
+          }
+        },
+        {
+          "line": 40,
+          "source": "T.ok('later-node policy uses survivor floor instead of initial twenty-person food gate', faces.length >= 5 && road.campaignMissingTarget === 1 && !road.campaignFoodBlocked);",
+          "resolution": {
+            "kind": "historical_campaigner_controller_excluded",
+            "reason": "Depends on the absent optional campaigner module. No policy survivor-floor or recruitment behavior clearance is inferred from the runtime lock test."
+          }
+        },
+        {
+          "line": 41,
+          "source": "T.ok('later Network road never recruits fresh blades', !road.campaignCalls && !road.campaignOwnCommitments);",
+          "resolution": {
+            "kind": "historical_campaigner_controller_excluded",
+            "reason": "Depends on the absent optional campaigner module. No policy survivor-floor or recruitment behavior clearance is inferred from the runtime lock test."
+          }
+        },
+        {
+          "line": 44,
+          "source": "T.ok('heart policy still enforces the ten-survivor floor', heartRoad.campaignStrengthBlocked === 1 && !heartRoad.campaignMissingTarget);",
+          "resolution": {
+            "kind": "historical_campaigner_controller_excluded",
+            "reason": "Depends on the absent optional campaigner module. No policy survivor-floor or recruitment behavior clearance is inferred from the runtime lock test."
+          }
+        }
+      ]
+    },
+    {
+      "legacy": "scripts/test-resumed-survival-20261015.js",
+      "primary": "038a96b39ebf3d49cf6bf02d22377a2e1cdc8b2e",
+      "sourceSha256": "a9064fc1b5e7adc6b89d4b32247611f22b8ff3d53cdab87730cf3a48f3305384",
+      "scope": "Static assertion call sites; templated loops may execute several checks. This inventory does not rerun the historical script.",
+      "assertions": [
+        {
+          "line": 18,
+          "source": "T.ok('human-class maximum beam leaves a healthy bearer alive', n === 85 && p.hp === 15, `${n} / ${p.hp}`);",
+          "resolution": {
+            "kind": "old_numeric_tune_excluded",
+            "reason": "The legacy65–85% damage proposal is not a direct Steve numeric directive. Current90–110% maximum-HP damage remains deliberately lethal at the top end; fixed-tile aim supplies a real response window. Do not assert that an unprotected maximum hit is survivable."
+          }
+        },
+        {
+          "line": 21,
+          "source": "T.ok('beam reads the actual fighter max HP (not stale scholar.maxHp)', n === 156 && p.hp === 84, n);",
+          "resolution": {
+            "kind": "covered_current_protection_semantics",
+            "reason": "Actual fighter capacity and own worn slots are preserved. Current minimum216 at240HP and protected maximum18 at100HP replace old156/14 numeric expectations, without weakening damage.",
+            "current": [
+              "scripts/godpath/test-release-survival-boundaries.js",
+              "scripts/godpath/test-phase-shawl.js"
+            ]
+          }
+        },
+        {
+          "line": 23,
+          "source": "T.ok('human full-body armor supplies no beam resistance', G.apBeamResistPieces().length === 0);",
+          "resolution": {
+            "kind": "covered_current_protection_semantics",
+            "reason": "Actual fighter capacity and own worn slots are preserved. Current minimum216 at240HP and protected maximum18 at100HP replace old156/14 numeric expectations, without weakening damage.",
+            "current": [
+              "scripts/godpath/test-release-survival-boundaries.js",
+              "scripts/godpath/test-phase-shawl.js"
+            ]
+          }
+        },
+        {
+          "line": 25,
+          "source": "T.ok('advanced full-body armor covers four slots, plus hands', G.apBeamResistPieces().length === 5);",
+          "resolution": {
+            "kind": "covered_current_protection_semantics",
+            "reason": "Actual fighter capacity and own worn slots are preserved. Current minimum216 at240HP and protected maximum18 at100HP replace old156/14 numeric expectations, without weakening damage.",
+            "current": [
+              "scripts/godpath/test-release-survival-boundaries.js",
+              "scripts/godpath/test-phase-shawl.js"
+            ]
+          }
+        },
+        {
+          "line": 27,
+          "source": "T.ok('sufficient gear makes the same beam survivable repeatedly', n === 14 && p.hp === 86, n);",
+          "resolution": {
+            "kind": "covered_current_protection_semantics",
+            "reason": "Actual fighter capacity and own worn slots are preserved. Current minimum216 at240HP and protected maximum18 at100HP replace old156/14 numeric expectations, without weakening damage.",
+            "current": [
+              "scripts/godpath/test-release-survival-boundaries.js",
+              "scripts/godpath/test-phase-shawl.js"
+            ]
+          }
+        },
+        {
+          "line": 30,
+          "source": "T.ok('inventory armor supplies no resistance', G.apBeamResistPieces().length === 0);",
+          "resolution": {
+            "kind": "covered_current_protection_semantics",
+            "reason": "Actual fighter capacity and own worn slots are preserved. Current minimum216 at240HP and protected maximum18 at100HP replace old156/14 numeric expectations, without weakening damage.",
+            "current": [
+              "scripts/godpath/test-release-survival-boundaries.js",
+              "scripts/godpath/test-phase-shawl.js"
+            ]
+          }
+        },
+        {
+          "line": 35,
+          "source": "T.ok('alien spends a turn aiming', fixed(0, () => G.apMaybeBeamAttack(alien)) === true);",
+          "resolution": {
+            "kind": "recovered_response_window",
+            "current": [
+              "scripts/godpath/test-alien-beam-window-release.js"
+            ]
+          }
+        },
+        {
+          "line": 36,
+          "source": "T.ok('wind-up deals no damage and records the aimed tile', p.hp === startHP && alien._beamAim && alien._beamAim.x === p.mx);",
+          "resolution": {
+            "kind": "recovered_response_window",
+            "current": [
+              "scripts/godpath/test-alien-beam-window-release.js"
+            ]
+          }
+        },
+        {
+          "line": 39,
+          "source": "T.ok('moving off the aimed tile dodges the discharge', p.hp === startHP && !alien._beamAim);",
+          "resolution": {
+            "kind": "recovered_response_window",
+            "current": [
+              "scripts/godpath/test-alien-beam-window-release.js"
+            ]
+          }
+        },
+        {
+          "line": 43,
+          "source": "T.ok('staying on the aimed tile takes the next shot', p.hp < startHP);",
+          "resolution": {
+            "kind": "recovered_response_window",
+            "current": [
+              "scripts/godpath/test-alien-beam-window-release.js"
+            ]
+          }
+        },
+        {
+          "line": 60,
+          "source": "T.ok('a current-wave raid fires', fired === true);",
+          "resolution": {
+            "kind": "recovered_current_wave_posts",
+            "current": [
+              "scripts/godpath/test-raid-posts-release.js"
+            ]
+          }
+        },
+        {
+          "line": 62,
+          "source": "T.ok('only current-wave monsters join (neither older nor future waves)', raiders.length >= 3 && raiders.every(m => defs.find(d => d.id === m.id).wave === 3));",
+          "resolution": {
+            "kind": "recovered_current_wave_posts",
+            "current": [
+              "scripts/godpath/test-raid-posts-release.js"
+            ]
+          }
+        },
+        {
+          "line": 63,
+          "source": "T.ok('every raider has its own world tile', new Set(raiders.map(m => `${m.tx},${m.ty}`)).size === raiders.length);",
+          "resolution": {
+            "kind": "recovered_current_wave_posts",
+            "current": [
+              "scripts/godpath/test-raid-posts-release.js"
+            ]
+          }
+        },
+        {
+          "line": 66,
+          "source": "T.ok('dawn preserves separate treeline posts', raiders.every((m, i) => `${m.tx},${m.ty}` === posts[i]));",
+          "resolution": {
+            "kind": "recovered_current_wave_posts",
+            "current": [
+              "scripts/godpath/test-raid-posts-release.js"
+            ]
+          }
+        },
+        {
+          "line": 68,
+          "source": "T.ok('crisis carries the real current wave', crisis && crisis.wave === 3);",
+          "resolution": {
+            "kind": "recovered_current_wave_posts",
+            "current": [
+              "scripts/godpath/test-raid-posts-release.js"
+            ]
+          }
+        },
+        {
+          "line": 74,
+          "source": "T.ok('a raider on an adjacent post keeps the aid crisis open', G.aidCrisis() === crisis);",
+          "resolution": {
+            "kind": "recovered_current_wave_posts",
+            "current": [
+              "scripts/godpath/test-raid-posts-release.js"
+            ]
+          }
+        },
+        {
+          "line": 76,
+          "source": "T.ok('clearing the last post resolves the siege', !G.aidCrisis());",
+          "resolution": {
+            "kind": "recovered_current_wave_posts",
+            "current": [
+              "scripts/godpath/test-raid-posts-release.js"
+            ]
+          }
+        },
+        {
+          "line": 84,
+          "source": "T.ok('sleep protection follows the actual Haven location', turns === 0);",
+          "resolution": {
+            "kind": "covered_real_relocated_contact",
+            "current": [
+              "scripts/godpath/test-release-survival-boundaries.js",
+              "scripts/godpath/test-palisade-sleep.js"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "legacy": "scripts/test-resumed-table-20261015.js",
+      "primary": "038a96b39ebf3d49cf6bf02d22377a2e1cdc8b2e",
+      "sourceSha256": "c8558a8e8be4e5b73cfcb943d2d72d14e54c915230b89d8265bfdec366917ea3",
+      "scope": "Static assertion call sites; templated loops may execute several checks. This inventory does not rerun the historical script.",
+      "assertions": [
+        {
+          "line": 16,
+          "source": "T.ok('late-wave encounters satisfy the lesser-seat late-wave bar', G.tableSeat().seat === 'lesser' && G.tableSeat().detail.w3 === 3, JSON.stringify(G.tableSeat()));",
+          "resolution": {
+            "kind": "old_entry_standing_or_food_tune_excluded",
+            "reason": "Cumulative late-wave entry, unbounded standing curves and a500kcal failure tax are old balance proposals. Current TABLE.md lesser-seat bar is distinct4/4/3 wave encounters; preserve current priced paths and stated costs. No direct Steve quote prescribes those numeric replacements."
+          }
+        },
+        {
+          "line": 19,
+          "source": "T.ok(`${pid}: two strong ledgers no longer tie at 100`, a < b && b < 100, `${a}/${b}`);",
+          "resolution": {
+            "kind": "old_entry_standing_or_food_tune_excluded",
+            "reason": "Cumulative late-wave entry, unbounded standing curves and a500kcal failure tax are old balance proposals. Current TABLE.md lesser-seat bar is distinct4/4/3 wave encounters; preserve current priced paths and stated costs. No direct Steve quote prescribes those numeric replacements."
+          }
+        },
+        {
+          "line": 24,
+          "source": "T.ok('a failed door burns a real food cost', s.kcal === 2500);",
+          "resolution": {
+            "kind": "old_entry_standing_or_food_tune_excluded",
+            "reason": "Cumulative late-wave entry, unbounded standing curves and a500kcal failure tax are old balance proposals. Current TABLE.md lesser-seat bar is distinct4/4/3 wave encounters; preserve current priced paths and stated costs. No direct Steve quote prescribes those numeric replacements."
+          }
+        },
+        {
+          "line": 25,
+          "source": "T.ok('the failed path closes for this sitting', table.failedPaths.includes('feared') && table.phase === 'downgrade');",
+          "resolution": {
+            "kind": "recovered_current_failedDoors_contract",
+            "reason": "Current state uses failedDoors; stale direct and native-choice reentry cannot restart the path; opening advantages are really reduced and saved.",
+            "current": [
+              "scripts/godpath/test-table-failure-release.js"
+            ]
+          }
+        },
+        {
+          "line": 27,
+          "source": "T.ok('the closed path cannot be retried', table.path === before && table.phase === 'downgrade');",
+          "resolution": {
+            "kind": "recovered_current_failedDoors_contract",
+            "reason": "Current state uses failedDoors; stale direct and native-choice reentry cannot restart the path; opening advantages are really reduced and saved.",
+            "current": [
+              "scripts/godpath/test-table-failure-release.js"
+            ]
+          }
+        },
+        {
+          "line": 29,
+          "source": "T.ok('the fallback begins with a weaker opening advantage', table.path === 'assimilated' && table.meters.comfort === 1, JSON.stringify(table.meters));",
+          "resolution": {
+            "kind": "recovered_current_failedDoors_contract",
+            "reason": "Current state uses failedDoors; stale direct and native-choice reentry cannot restart the path; opening advantages are really reduced and saved.",
+            "current": [
+              "scripts/godpath/test-table-failure-release.js"
+            ]
+          }
+        },
+        {
+          "line": 31,
+          "source": "T.ok('two played failures end the sitting without a free win', G.over && !G.won && table.phase === 'done' && !s.tableChoices);",
+          "resolution": {
+            "kind": "excluded_in_favor_of_Table_law4",
+            "reason": "Automatic whole-run loss after two failures conflicts with TABLE.md law4: failure resolves the story. Preserve finite closed doors, played fallback and eventual honest ending; do not reinstate deletion."
+          }
+        },
+        {
+          "line": 35,
+          "source": "T.ok('insufficient closing leverage fails the door instead of granting a final', table.phase === 'downgrade');",
+          "resolution": {
+            "kind": "old_closing_threshold_tune_excluded",
+            "reason": "The historic terror4 final gate is an additional numeric proposal, not a current authored finale condition. Current Feared choices can deliberately spend terror protecting others; adding an undisclosed final threshold would reject that route. Existing horror failure and explicit build-option stakes remain. No claim the old threshold assertion passes."
+          }
+        },
+        {
+          "line": 39,
+          "source": "T.ok('carrying the declared stake reaches the final choices', table.phase === 'finals' && !!s.tableChoices);",
+          "resolution": {
+            "kind": "old_closing_threshold_tune_excluded",
+            "reason": "The historic terror4 final gate is an additional numeric proposal, not a current authored finale condition. Current Feared choices can deliberately spend terror protecting others; adding an undisclosed final threshold would reject that route. Existing horror failure and explicit build-option stakes remain. No claim the old threshold assertion passes."
+          }
+        }
+      ]
+    }
+  ]
+}

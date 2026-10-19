@@ -13,11 +13,13 @@
 // Exempt a deliberate entry point (UI-only, debug, data hook called by name)
 // by putting `// wired-exempt: <reason>` on its definition line.
 // Heuristic, not a parser: false negatives are possible (a name that also
-// appears in a comment counts as a reference). False positives are rare.
+// is shared by unrelated code can count as a reference). Comments and a
+// defining module's own export list never prove a caller. Runtime proof is
+// still required: a data reference alone does not establish useful execution.
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const ROOT = path.join(__dirname, '..');
+const ROOT = process.env.CHECK_WIRED_ROOT || path.join(__dirname, '..');
 
 const args = process.argv.slice(2);
 const strict = args.includes('--strict');
@@ -31,8 +33,19 @@ function walk(d, out) {
   }
   return out;
 }
-const srcFiles = walk(path.join(ROOT, 'src/js'), []).concat([path.join(ROOT, 'index.html')]);
-const corpus = srcFiles.map(f => ({ f, txt: fs.readFileSync(f, 'utf8') }));
+const dataDir = path.join(ROOT, 'src/data');
+const dataFiles = fs.readdirSync(dataDir).filter(f => f.endsWith('.json')).map(f => path.join(dataDir, f));
+const srcFiles = walk(path.join(ROOT, 'src/js'), []).concat([path.join(ROOT, 'index.html')], dataFiles);
+function commentless(txt) {
+  return txt.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:'"\\])\/\/[^\n]*/g, '$1');
+}
+function selfText(txt) {
+  return commentless(txt).replace(/(?:[\w$]+\.)*[\w$]+\s*=\s*\{[\s\w$,:]*\}/g, ' ');
+}
+const corpus = srcFiles.map(f => {
+  const txt = fs.readFileSync(f, 'utf8');
+  return { f, txt: commentless(txt), self: selfText(txt) };
+});
 
 // Definitions: `name: function`, `name(args) {` (method shorthand), `function name(`.
 const DEF_RES = [
@@ -58,8 +71,8 @@ for (const rel of files) {
   for (const d of found) {
     const re = new RegExp('\\b' + d.name.replace(/\$/g, '\\$') + '\\b', 'g');
     let refs = 0;
-    for (const { f, txt } of corpus) {
-      const n = (txt.match(re) || []).length;
+    for (const { f, txt, self } of corpus) {
+      const n = ((f === abs ? self : txt).match(re) || []).length;
       refs += f === abs ? n - 1 : n; // minus the definition itself
     }
     if (refs <= 0) dead.push(d);

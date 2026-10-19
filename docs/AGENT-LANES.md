@@ -1,5 +1,16 @@
 # Agent lanes (2026-10-15)
 
+Verification-only continuation2026-10-19: use RELEASE-HANDOFF.md first.
+The five remaining additional legacy contracts now have explicit97-site
+dispositions; do not count absent controller assertions or excluded tuning as
+passing. The broader193-commit/237-test census is retained, with50 missing
+original names to map through existing recoveries or scope exclusions. Portable
+harness loading no longer needs grep; check-wired no longer counts comments/
+own exports. Automatic guards plus an eight-case exact-state/all23-metric bridge
+and eight neutral controls cover those tooling changes. Game/data/CSS still
+match the a40e8ddac runtime; preserve current mobile/installed evidence.
+Hosted access and physical devices remain open. No new feature lane.
+
 Active continuation2026-10-19: preserve the unshipped beam response window,
 current-wave persistent raid posts, failed Table door/weakening repairs, and
 body/carry follow-up. Native body Search is prioritized on the phone; refusal
