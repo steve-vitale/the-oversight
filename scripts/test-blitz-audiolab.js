@@ -13,6 +13,9 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
+const { execFileSync } = require('child_process');
+const regional = require('../src/js/regional-audio');
+execFileSync(process.execPath, [path.join(__dirname, 'build-audiolab-data.js'), '--check'], { cwd: ROOT, stdio: 'pipe' });
 
 let pass = 0, fail = 0;
 function ok(cond, msg) {
@@ -60,7 +63,7 @@ for (const k of Object.keys(monsters)) byId[monsters[k].id] = monsters[k];
 const registry = loadRegistry();
 const appSrc = fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
 function synthExists(hook) {
-  return appSrc.includes('function ' + hook + '(') || appSrc.includes('\n      ' + hook + '(');
+  return typeof regional.specs[hook] === 'object' || appSrc.includes('function ' + hook + '(') || appSrc.includes('\n      ' + hook + '(');
 }
 
 for (const e of D.monsters) {
@@ -107,6 +110,13 @@ for (const e of D.sfx) {
 ok(fs.existsSync(path.join(ROOT, 'tools/audio-lab.html')), 'tools/audio-lab.html exists');
 const html = fs.readFileSync(path.join(ROOT, 'tools/audio-lab.html'), 'utf8');
 ok(html.includes('audio-lab-data.js'), 'Lab page loads the registry data');
+const offlinePlan = require('./build-offline-assets').update(ROOT, true);
+const regionalUrls = offlinePlan.scripts.filter(u => u.split('?')[0] === './src/js/regional-audio.js');
+ok(regionalUrls.length === 1 && offlinePlan.assets.includes(regionalUrls[0]), 'exact current shared game voice dependency URL is precached');
+ok(html.includes('<div class="filterbar">') && /\.filterbar\s*\{[^}]*position:sticky/.test(html) && !/\.filters\s*\{[^}]*position:sticky/.test(html), 'one sticky filter container prevents overlapping mobile filter rows');
 
+const proof = execFileSync(process.execPath, [path.join(__dirname, 'test-regional-audio.js')], { cwd: ROOT, env: process.env, encoding: 'utf8', maxBuffer: 2e6 });
+process.stdout.write(proof);
+ok(/regional-audio proof green:/.test(proof), 'shared renderer and real game audio emission proof is mandatory');
 console.log('\n' + pass + ' pass, ' + fail + ' fail');
 process.exit(fail ? 1 : 0);

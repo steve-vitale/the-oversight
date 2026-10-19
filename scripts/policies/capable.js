@@ -51,6 +51,7 @@
 // Counters on ctx (cap*) are listed in capableSummary().
 'use strict';
 const C = require('./competent');
+const {conversationDiagnostics}=require('./conversation-pages');
 const { leadfeast } = require('./feastscale');
 const { harmScore } = require('./risk-aware');
 
@@ -490,6 +491,34 @@ function chooseOffers(Game, ctx) {
     // scholar.abilities: human abilities may move to skills and still answer.
     const held = heldAbilityIds(Game);
     if (ctx._capOfferSig === JSON.stringify(ch.map(c => c.id)) && ctx._capOfferDay === day(Game)) return; // refused today (no slot): don't spin
+    // Named intent cohorts may prefer an actual offer. Ordinary policies do
+    // not set this list and retain their exact scoring/call sequence.
+    const priority = ctx.capOfferPriority;
+    const preferred = Array.isArray(priority) && priority.find(id => ch.some(o => o.id === id) && !held.includes(id));
+    if (preferred) {
+      const isLevel = String(ch[0].src || '').startsWith('level_up:');
+      const entries = (s.abilities || []).map(a => typeof a === 'string' ? {id:a,base:a} : {id:a.id,base:a.evolvedFrom || a.id});
+      const owned = entries.map(a=>a.id);
+      const full = owned.length >= (Game.abilitySlots ? Game.abilitySlots() : 6);
+      let replace;
+      if (full && isLevel && Game.keepAbilities) {
+        // Preserve higher-priority kit pieces. Replace an unrelated power
+        // first, then the lowest-priority piece; the engine owns slot locks.
+        const rank = id => {const base=entries.find(a=>a.id===id)?.base || id; return priority.includes(base) ? priority.indexOf(base) : Infinity;};
+        replace = owned.filter(id => id !== 'fusion_reactor' && rank(id) > rank(preferred))
+          .sort((a,b) => rank(b) - rank(a) || owned.indexOf(a) - owned.indexOf(b))[0];
+        if (!replace) { Game.keepAbilities(); bump(ctx,'capIntentKept'); return; }
+      }
+      // A full non-level sheet still uses the normal refusal path below.
+      if (!full || replace) {
+        Game.chooseAbility(preferred, replace);
+        const after = (Game.state.scholar.abilities || []).map(a => typeof a === 'string' ? a : a.evolvedFrom || a.id);
+        if (after.includes(preferred) && !owned.includes(preferred)) { bump(ctx,'capIntentAcquired'); bumpMap(ctx,'capIntentPicks',preferred); }
+        else bump(ctx,'capIntentRefused');
+        if (Game.state.scholar.abilityChoices === ch) { ctx._capOfferSig=JSON.stringify(ch.map(c=>c.id)); ctx._capOfferDay=day(Game); }
+        return;
+      }
+    }
     // ONE BRAIN (parity 2026-10-14): the game's build brain (villager-build.js
     // buildScore / buildDecide) scores for the bot exactly as it does for
     // villagers. The local scorer is the fallback for older code.
@@ -959,6 +988,7 @@ function finishLiveFight(Game, ctx) {
 // ---------- the policy ----------
 const capable = Object.assign({}, BASE, {
   id: 'capable',
+  diagnostics(ctx) { const d=conversationDiagnostics(ctx); return {version:1,profile:'capable',mode:'capable-mixed',blocked:{},errors:[...(ctx?.capErrors||[]),...d.errors],counters:d.counters}; },
   desc: 'leadfeast base + real fleeing, combat abilities + signature verbs, scored choices (offers/contests/table/relic), held conversations by need, relay',
   setup(Game, ctx) {
     if (BASE.setup) withEnv(() => BASE.setup(Game, ctx));
@@ -995,4 +1025,4 @@ function capableSummary(ctx) {
   return out;
 }
 
-module.exports = { capable, capableSummary, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
+module.exports = { capable, capableSummary, chooseOffers, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };

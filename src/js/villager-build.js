@@ -565,6 +565,12 @@
         s.godhood = ((v.npcGodhood || {})[newId]) || { recognized: {}, active: [] };
         // god-path class: a person's, like godhood (godpath.js recognizeClass)
         s.godpath = ((v.npcGodpath || {})[newId]) || null;
+        // Humanity belongs to the person, not the inherited office. Preserve
+        // legacy scholar grounding for the departing body; zero is real.
+        const humanity = this.state.groundingByPerson || (this.state.groundingByPerson = {});
+        humanity[oldId] = s.grounding == null ? 100 : Math.max(0, Math.min(100, s.grounding | 0));
+        s.grounding = Number.isFinite(humanity[newId]) ? Math.max(0, Math.min(100, humanity[newId] | 0)) : 100;
+        delete humanity[newId]; // the current body uses scholar.grounding
         // knowledge into the Codex (never lowers what the Codex knew)
         const know = ((v.npcKnow || {})[newId]) || {};
         const cx = this.state.codex = this.state.codex || {};
@@ -572,6 +578,25 @@
         for (const id of Object.keys(know)) {
           const cur = cx.abilities[id] || { level: 0, sources: [] };
           if ((cur.level || 0) < know[id]) { cur.level = know[id]; cur.sources = (cur.sources || []).concat(['mantle:' + newId]); cx.abilities[id] = cur; }
+        }
+        // They remember plants too. Import their actual personal union as
+        // names, without a new discovery, XP, integration or witness event.
+        // A mistaken memory cannot overrule correct written knowledge.
+        cx.plants = cx.plants || {};
+        const plants = this.plantsKnownBy ? this.plantsKnownBy(newId, v) : [];
+        for (const pid of plants) {
+          if (!(this.data.plants || []).some(p => p.id === pid)) continue;
+          const old = cx.plants[pid], wrong = v.wrongAbout?.[newId]?.[pid];
+          const mistaken = !!(wrong && wrong.wrongPid && !wrong.deliberate);
+          if (old && old.level >= 1 && (!old.wrongAs && !old.wrongPid || mistaken)) continue;
+          const entry = Object.assign({}, old || {}, { level: Math.max(1, old?.level || 0),
+            identifiedDay: old?.identifiedDay ?? s.day, by: 'mantle', rememberedBy: newId });
+          cx.plants[pid] = entry;
+          if (mistaken) {
+            const named = (this.data.plants || []).find(p => p.id === wrong.wrongPid);
+            entry.wrongAs = named?.name || wrong.wrongPid; entry.wrongPid = wrong.wrongPid;
+          } else if (entry.wrongAs) this.resolveWrongName(pid, 'their own memory');
+          else delete entry.wrongPid;
         }
         const sk = ((v.npcSkills || {})[newId]) || [];
         for (const sid of sk) { try { if (this.learnSkill) this.learnSkill(sid, 1, 'their own hands'); } catch (e) { warn('mantle skill', e); } }

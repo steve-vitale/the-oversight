@@ -19,10 +19,10 @@
 //   - driveOffFeastDraw()
 // rules:
 //   - feast_draw: on a FRESH armed grant (never a refresh — one draw per buff), the feast's smoke draws a wave-appropriate scavenger to the haven's edge as a pending encounter the player faces (faceFeastDraw -> startCombat, blow-by-blow) or declines (driveOffFeastDraw — devotion unspent); the draw dies with the buff (code: drawFeastScavenger, clearFeastBuff).
-//   - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
+//   - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to _spendFeastedPower after real combat or landed bonus healing.
 //   - timed_not_trigger: the buff is a window of durationNights dawns (data lever, feast-surge.json), never an on-strike burn (code: grantFeastBuff, feastedActive)
 //   - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
-//   - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
+//   - honest_use_marking: feastSurgeUsed marks real combat use or actually landed bonus healing; failed/base-only treatment spends no devotion (code: _spendFeastedPower)
 //   - clean_expiry: expiry is lazy-evaluated against absolute (untilDay, untilPart) — save/load mid-buff is clean, no phantom buffs (code: feastedActive)
 //   - generic_forms: feasted ability variants are data-driven (feast-surge.json twists) through generic handlers — never hand-written per-ability mechanics (code: applyFeastedForm)
 //   - telegraph_honesty: every buff label states the true effective multiplier AND the true window ("dawn"/"tomorrow's dawn" via feastDawnWord, read from the same data lever as the grant — never a stale "until dawn") (code: grantFeastBuff, feastedLine, tbDamage hook in game.js; arm message in progression.js; feast broadcast + report panel)
@@ -262,16 +262,15 @@
         // silent buffs. When the reactor carries the multiplier, say so.
         if (!b) {
           const online = (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
-          if (online) return 'REACTOR ×1.25 — the pellet hums behind your ribs · strikes & abilities uplifted · always on';
+          if (online) return 'REACTOR · damage ×1.25 · ability bonuses · always active';
           return '';
         }
         const cfg = this.feastSurgeCfg();
         const s = this.state.scholar || {};
         const parts = Math.max(0, ((b.untilDay || 0) - (s.day || 0)) * cfg.partsPerDay - this.dayPart);
         const eff = this.feastedMult();
-        const dawnWord = this.feastDawnWord();
-        const gnote = (eff < (b.mult || 1)) ? ` <i>(grounding ${((typeof this.groundingTier === 'function') ? this.groundingTier() : '')} — food conversions weaken)</i>` : '';
-        return `FEASTED ×${Math.round(eff * 100) / 100} — strikes & abilities uplifted · until ${dawnWord} (${parts} ${parts === 1 ? 'part' : 'parts'} left)${gnote}`;
+        const gnote = (eff < (b.mult || 1)) ? ` (reduced by ${((typeof this.groundingTier === 'function') ? this.groundingTier() : '')} grounding)` : '';
+        return `FEASTED · damage ×${Math.round(eff * 100) / 100} · ${parts} day ${parts === 1 ? 'part' : 'parts'} left${gnote}`;
       } catch (e) { return ''; }
     },
 
@@ -359,7 +358,8 @@
         if (landed <= 0) return;
         const line = String(tw.line || 'Feasted: +{bonus} HP.').replace('{bonus}', String(landed));
         this.say(line);
-      } catch (e) {}
+        this._spendFeastedPower('healing', landed);
+      } catch (e) { console.warn('[feastSurge] healing use', e); }
     },
 
     // _feastStatusExtend: the feasted form holds the ability's status longer.
@@ -392,7 +392,8 @@
       } catch (e) {}
     },
 
-    // noteFeastedCombatUse: the buff's first real combat use — a strike or
+    // First real combat use or landed bonus healing spends devotion once.
+    // noteFeastedCombatUse retains combat-only entry — a strike or
     // an ability resolved while feasted and in combat. Marks feastSurgeUsed
     // (Arc IV deed-gate requirement) and spends the devotion arming.
     // Idempotent. A feast that warms no blades marks nothing and spends
@@ -401,21 +402,28 @@
     // lands first — the scholar ('p') or a villager ('v:<villagerId>', set
     // via _feastUseSource by the tbDamage hook). Per-villager deed shares
     // read from prog.feastSurgeBy.
-    noteFeastedCombatUse() {
+    _spendFeastedPower(kind, bonusHp) {
       try {
-        if (!this.inCombat || !this.inCombat()) return;
+        if (!this.feastedActive()) return;
+        if (kind === 'combat') {
+          if (!this.inCombat || !this.inCombat()) return;
+        } else if (kind !== 'healing' || !(bonusHp > 0)) return;
         const s = this.state.scholar || {};
         const b = s.feastBuff;
         if (!b || b.used) return;
         b.used = true;
-        if (s.prog) {
-          s.prog.feastSurge = false;
-          s.prog.feastSurgeUsed = true;
-          try { s.prog.feastSurgeBy = this._feastUseSource || 'p'; } catch (e) {}
-        }
+        b.use = { kind, day: s.day, bonusHp: kind === 'healing' ? bonusHp : 0 };
+        s.prog = s.prog || {};
+        s.prog.feastSurge = false;
+        s.prog.feastSurgeUsed = true;
+        // Keep the actual first combat source; healing belongs to the bearer.
+        s.prog.feastSurgeBy = kind === 'combat' ? (this._feastUseSource || 'p') : 'p';
         this._feastUseSource = null;
-        try { this.save(); } catch (e) {}
-      } catch (e) {}
+        this.save();
+      } catch (e) { console.warn('[feastSurge] spending power', e); }
+    },
+    noteFeastedCombatUse() {
+      this._spendFeastedPower('combat');
     },
 
     // drawFeastScavenger: the cookfire's smoke draws something. A loud,

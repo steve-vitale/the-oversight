@@ -71,6 +71,9 @@ try {
   Game.tbAdvanceAsync(); // tick 1: the ally's turn, via the ASYNC dispatch
 } catch (e) { threw = e; }
 check('async: ally turn does not throw', !threw, threw && threw.message);
+check('async: announcement does not teleport or attack before its beat',
+  a1.mx === 1 && a1.my === 1 && !(a1._dealt || 0));
+timers.shift()(); // resolve the announced ally turn after its visible beat
 check('async: ally took a real turn (moved or dealt)',
   (a1.mx !== 1 || a1.my !== 1) || (a1._dealt || 0) > 0,
   `pos (1,1)->(${a1.mx},${a1.my}) dealt=${a1._dealt || 0}`);

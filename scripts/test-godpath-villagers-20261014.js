@@ -30,7 +30,7 @@ const T = K.reporter('test-godpath-villagers-20261014');
   K.newRun(Game);
   Game.state.systemArrived = true;
   const v = Game.state.village;
-  const roster0 = (v.roster || []).slice();
+  const roster0 = (v.roster || []).filter(id => id !== Game.villagerId);
   const vidA = roster0[0], vidB = roster0[1], vidC = roster0[2];
   T.ok('three villagers to test with', !!(vidA && vidB && vidC), roster0.length);
   Game.villageFoodTier = (() => { const o = Game.villageFoodTier; let forced = null; const f = function () { return forced || o.apply(this, arguments); }; f.force = (t) => { forced = t; }; return f; })();
@@ -156,10 +156,14 @@ const T = K.reporter('test-godpath-villagers-20261014');
     hold(vidA, ['the_crowd_moves']); hold(vidB, []); hold(vidC, []); needs(vidA);
     const { A, B, C } = arena({ b: { x: 2, y: 5 }, c: { x: 2, y: 3 } });
     const says = K.captureSays(Game);
-    const r = cast(A);
-    says.restore();
-    T.ok('The Crowd Moves: every other ally takes an extra turn now', r === true && says.some(l => /The Crowd Moves: 2 extra turns/.test(l)), says.filter(l => /Crowd/.test(l)).join(' | '));
-    void B; void C;
+    const turns = [], originalTurn = Game.tbVillagerTurn;
+    Game.tbVillagerTurn = function(actor) { turns.push(actor.key); return originalTurn.apply(this, arguments); };
+    let r;
+    try { r = cast(A); } finally { Game.tbVillagerTurn = originalTurn; says.restore(); }
+    T.ok('The Crowd Moves: both NPC allies act and the player receives a chosen extra turn',
+      r === true && turns.includes(B.key) && turns.includes(C.key) &&
+      Game.tbfight.playerCommands?.some(x => x.source === A.key) &&
+      says.some(l => /The Crowd Moves: 3 extra turns/.test(l)), says.filter(l => /Crowd/.test(l)).join(' | '));
   }
   {
     hold(vidA, ['aegis_link']); needs(vidA);
@@ -216,6 +220,10 @@ const T = K.reporter('test-godpath-villagers-20261014');
   {
     // Rally Aura: the start-of-fight hook reads every holder on our side
     hold(vidA, ['rally_aura']); hold(vidB, []);
+    // Prior prepared lethal arenas now persist real wounds. This distinct
+    // start-of-fight aura fixture requires two living, healthy NPC holders.
+    v.health = v.health || {}; v.health[vidA] = 100; v.health[vidB] = 100;
+    Game.vpOf(vidA).dead = false; Game.vpOf(vidB).dead = false;
     Game.state.village.roster = roster0.slice(0, 2);
     Game.ensureVillagerPositions && Game.ensureVillagerPositions();
     const pos = Game.state.village.positions || {};
@@ -299,7 +307,7 @@ const T = K.reporter('test-godpath-villagers-20261014');
     T.ok('tb: adrenaline_control (combat.strike_damage x1.3) on a villager\'s strike', Math.abs(GP.villagerStrikeMult(Game, t3.A, t3.m) - 1.3) < 1e-9);
   }
 
-  T.section('ascension: the lived-in deed (rules.capstone.deedClassDays)');
+  T.section('ascension: the authored Apex hunt replaces class age');
   {
     if (Game.tbfight) Game.tbfight = null;
     const GH = S.Godhood;
@@ -318,7 +326,10 @@ const T = K.reporter('test-godpath-villagers-20261014');
     const early = GH.godhoodCloseness(s, gh, 80 + n - 1);
     const late = GH.godhoodCloseness(s, gh, 80 + n);
     T.ok(`held ${n - 1} days: the deed is not yet done (no synergy)`, !early.synergy && !early.complete, JSON.stringify(early));
-    T.ok(`held ${n} days: the lived-in deed completes the god (payoff + 4 + class + day 80+)`, late.synergy && late.complete, JSON.stringify(late));
+    T.ok(`held ${n} days: class age cannot replace the actual hunt`, !late.synergy && !late.complete, JSON.stringify(late));
+    // Prepared requirement fixture; real acquisition has its own shared-kit test.
+    Game.state.village.godpathDeeds = { [Game.villagerId]: { apex_hunt: { day: 84, monster: 'moderator', scene: 'tactical', method: 'solo', actorMaxHp: 100, openingHp: 160 } } };
+    T.ok('an earned hunt completes the otherwise ready build', GH.godhoodCloseness(s, gh, 80 + n).complete);
     s.abilities = s.abilities.filter(a => (a.id || a) !== 'trophy_room');
     Game.recognizeClass('player');
     const noPay = GH.godhoodCloseness(s, gh, 80 + n + 5);

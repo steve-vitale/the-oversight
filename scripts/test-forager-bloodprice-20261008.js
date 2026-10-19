@@ -165,7 +165,7 @@ console.log('== C. HONESTY: the menu says 2/day part AND means it ==');
   const legs = Game.activatableAbilities().filter(a => a.abilityId === 'blood_magic' || a.id === 'blood_magic');
   const leg = legs[0];
   ok(!!leg, 'Blood Price appears in activatable abilities');
-  ok(/2\/day part/.test(leg.desc || ''), 'desc states the 2/day part cap', leg.desc);
+  ok(/Twice each part of the day/.test(leg.desc || ''), 'desc states the two uses per day-part cap in plain language', leg.desc);
   ok(/50/.test(leg.desc || ''), 'desc states the 50-wound refusal', leg.desc);
   Game.activateAbility('blood_magic');
   Game.activateAbility('blood_magic');

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // PROOF TEST (Worker C, dialog-layout 2026-10-11) — layout stability.
 // Steve 2026-10-11: the chat region "spawns in paragraphs" and pushes the
-// screen around. Hard rules: ONE mobile screen (390×844), NO scrolling for
-// moment-to-moment play, no layout shift.
+// screen around. Keep the outer phone page fixed. Steve's 2026-10-19 phone
+// report explicitly requires unreadable chat to scroll inside its own region.
 //
 // Asserts the CSS + render contract:
 //   1. .ord-narration has a FIXED pixel height + internal overflow
@@ -21,10 +21,9 @@
 //   7. no unmeasured content injection: the narration/feedback builders emit
 //      no inline height/min-height styles that could bypass the fixed slots
 //
-// LIMITS (honest): this VM cannot run a layout engine — headless Chromium
-// hangs here (AGENTS.md). These are CSS-contract + source-structure
-// assertions, not measured pixel heights. [needs-eyes] on a real phone at
-// 390×844 is the final gate.
+// These are CSS/source contracts, not measured pixels. The native-touch
+// journey in evidence/2026-10-19/phone-hotfix-journey-r3.js additionally
+// verifies scrolling to the final line without moving the page or game state.
 
 const fs = require('fs');
 const path = require('path');
@@ -69,9 +68,10 @@ const has = (block, prop, valRe) => {
   ok('dialogue-box flex column', has(b, 'display', /^flex$/) && has(b, 'flex-direction', /^column$/));
   ok('dialogue-box clips internally', has(b, 'overflow', /^hidden$/));
   const line = rule('.ord-narration .dialogue-box .dlg-line');
-  // (dialog-ui-fix 2026-10-11: the current beat NEVER scrolls — long lines
-  // paginate at emission into tap-advance beats. Updated from scrolls to hidden.)
-  ok('dlg-line flexes + never scrolls', has(line, 'flex', /1/) && has(line, 'overflow', /^hidden$/));
+  ok('dlg-line flexes and scrolls unreadable text internally', has(line, 'flex', /1/) && has(line, 'overflow-y', /^auto$/));
+  ok('dlg-line cannot grow sideways', has(line, 'overflow-x', /^hidden$/));
+  ok('dlg-line swipe stays inside the message', has(line, 'overscroll-behavior', /^contain$/));
+  ok('phone omits the old ability wrapper after moving its buttons', has(rule('.field-layout .ord-actions .ord-ability'), 'display', /^none$/));
   const hist = rule('.ord-narration .dialogue-box .dlg-history');
   ok('dlg-history scrolls inside box', !!hist && /overflow-y\s*:\s*(auto|scroll)/.test(hist));
   const card = rule('.ord-narration .inlinecard');

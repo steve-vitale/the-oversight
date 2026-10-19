@@ -8,7 +8,7 @@
 // minimal offline Web Audio shim and asserts non-silent output.
 //
 // RED check: `git stash` the app.js fix and this test fails (0 sources).
-const fs = require('fs');
+const fs = require('./lib/source-text');
 const path = require('path');
 const APP = path.resolve(__dirname, '..', 'src', 'js', 'app.js');
 const SR = 22050;

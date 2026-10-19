@@ -183,3 +183,19 @@ game — that's the high-risk/high-reward contract.
   display goes here.
 - Loot tie-in: contest prizes and monster loot share the alien-item pool
   (see monster loot economy work, 2026-10-05).
+
+## Release restoration: earned equipment (2026-10-18)
+
+The current candidate restores `reward-economy.json` and the primary branch's
+career reward callers. Three/six actual contest wins or40/70 shared audience
+favor open tier2/3 gifts independently of monster waves. Extreme contests have
+an earned apex opportunity; ordinary wins cap at tier3. Successful ordinary TV
+shows can send gear, and watched/resolved resident winners keep their own item.
+Terminal re-entry cannot repeat its prize. A phase marked contestWin is only an
+attempt: terminal victory owns the credit. Unknown item effects stay hidden.
+
+Ordinary traders stock higher tiers after3/8 real transactions, paid using the
+existing food/tab rails; no free stock, passive day unlock or ordinary apex cart.
+Fan gifts stay nonfood and preserve low-tier curios/fuel/medicine. See
+`SURVIVAL-LEVERS.md` for exact restored values and pending matched screening.
+These mechanic proofs do not establish natural cadence or pacifist viability.

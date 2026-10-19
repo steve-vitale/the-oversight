@@ -126,7 +126,7 @@ function decomposeSuccessions(census) {
       vouch = Math.round(setW.neu - raw);
       check = (vouch % 4 === 0 && vouch >= 0 && vouch <= 16) ? 'ok' : 'UNEXPECTED';
     }
-    out.push({ day, oldId, newId, neu: setW.neu, office, own, raw: +raw.toFixed(1), vouch, clamped, check });
+    out.push({ day, oldId, newId, neu: setW.neu, setWriteIndex: setIdx, office, own, raw: +raw.toFixed(1), vouch, clamped, check });
   }
   return out;
 }
@@ -158,8 +158,17 @@ function buildTenures(census, successions) {
   for (const su of successions) if (su.neu != null) setByDay[su.day + ':' + su.newId] = su;
   tenures.forEach((t, ti) => {
     const day0 = t.days[0].day, dayN = t.days[t.days.length - 1].day;
-    const strict = writes.filter(w => String(w.vid) === t.vid && w.day >= day0 && w.day <= dayN);
-    t.writes = strict.map(w => Object.assign({}, w, { channel: classifyDelta(w) }));
+    const first = t.days[0], last = t.days[t.days.length - 1];
+    t.sampleBoundariesKnown = t.days.every((d, i) => Number.isInteger(d.writeIndex) && d.writeIndex >= 0 && d.writeIndex <= writes.length && (i === 0 || d.writeIndex >= t.days[i - 1].writeIndex));
+    t.invalidSampleBoundaries = !t.sampleBoundariesKnown && t.days.some(d => d.writeIndex != null);
+    const inherited = setByDay[day0 + ':' + t.vid];
+    t.writes = writes.flatMap((w, k) => {
+      if (String(w.vid) !== t.vid) return [];
+      // No NPC-era gain or already-priced inheritance is a bearer-era flow.
+      const inside = t.sampleBoundariesKnown ? k >= first.writeIndex && k < last.writeIndex
+        : w.day >= day0 && w.day <= dayN && (!Number.isInteger(inherited?.setWriteIndex) || k > inherited.setWriteIndex);
+      return inside ? [{ ...w, streamIndex: k, channel: classifyDelta(w) }] : [];
+    });
     t.startTrust = t.days[0].scholarTrust;
     t.endTrust = t.days[t.days.length - 1].scholarTrust;
     t.maxTrust = Math.max.apply(null, t.days.map(s => s.scholarTrust == null ? -1 : s.scholarTrust));
@@ -193,6 +202,35 @@ function buildTenures(census, successions) {
 // removing the sting with no behavioral change. This is the in-silico twin
 // of the mealonly pilot; agreement between the two is the cross-check.
 function ablateSting(tenure) {
+  if (tenure.invalidSampleBoundaries || !Number.isFinite(tenure.startTrust)) return {
+    actualDaysAbove: null, ablatedDaysAbove: null, gained: null, replayError: null,
+    sampleBoundariesKnown: !!tenure.sampleBoundariesKnown,
+    invalidSampleBoundaries: !!tenure.invalidSampleBoundaries,
+    unknownStart: !Number.isFinite(tenure.startTrust) };
+  if (tenure.sampleBoundariesKnown) {
+    if (!Number.isFinite(tenure.startTrust)) return { actualDaysAbove: null, ablatedDaysAbove: null, gained: null, replayError: null, sampleBoundariesKnown: true, unknownStart: true };
+    let chk = tenure.startTrust, abl = chk, cursor = 0, continuityErrors = 0;
+    const actual = new Map(), counterfactual = new Map();
+    for (const sample of tenure.days) {
+      while (cursor < tenure.writes.length && tenure.writes[cursor].streamIndex < sample.writeIndex) {
+        const w = tenure.writes[cursor++];
+        if (Number.isFinite(w.old) && Math.abs(chk - w.old) > 1e-8) continuityErrors++;
+        chk = Math.max(0, Math.min(100, chk + w.delta));
+        // Hold absolute SETs fixed: a mechanical replay, not a prediction
+        // of behavior in a world whose pantry policy changed.
+        if (w.channel.startsWith('set:')) abl = w.neu;
+        else if (w.channel !== 'drain:pantry-take-sting') abl = Math.max(0, Math.min(100, abl + w.delta));
+      }
+      if (Number.isFinite(sample.scholarTrust)) { actual.set(sample.day, sample.scholarTrust); counterfactual.set(sample.day, abl); }
+    }
+    const actualDaysAbove = [...actual.values()].filter(x => x >= 30).length;
+    const ablatedDaysAbove = [...counterfactual.values()].filter(x => x >= 30).length;
+    return { actualDaysAbove, ablatedDaysAbove, gained: ablatedDaysAbove - actualDaysAbove,
+      startTrust: tenure.startTrust, stingRemoved: tenure.drainByChannel['drain:pantry-take-sting'] || 0,
+      replayError: Number.isFinite(tenure.endTrust) ? +Math.abs(chk - tenure.endTrust).toFixed(2) : null,
+      continuityErrors, sampleBoundariesKnown: true };
+  }
+
   const byDay = {};
   for (const w of tenure.writes) (byDay[w.day] || (byDay[w.day] = [])).push(w);
   // set: writes (succession inheritance) are INITIALIZATION, not flow:
@@ -218,7 +256,7 @@ function ablateSting(tenure) {
   const endT = tenure.endTrust == null ? 15 : tenure.endTrust;
   return { actualDaysAbove: actualAbove, ablatedDaysAbove: ablatedAbove, gained: ablatedAbove - actualAbove,
     startTrust: tenure.startTrust, stingRemoved: tenure.drainByChannel['drain:pantry-take-sting'] || 0,
-    replayError: +Math.abs(chk - endT).toFixed(2) };
+    replayError: +Math.abs(chk - endT).toFixed(2), sampleBoundariesKnown: false };
 }
 
 // --- periodic-drain hunt (#182's "trust decay" hypothesis) --------------

@@ -164,6 +164,10 @@ const SYSTEM_CYAN = /#4df3ff|#6ec8e6|#4ae8ff|SYSTEM/i;
   Game.tableSeat = () => ({ seat: 'full', detail: {} });
   Game.winDayFloorOk = () => true;
   pg.table = {}; pg.tableDone = false; pg.tableWaiting = true;
+  // Presentation must enter from a live, accessible Haven after earlier scenes.
+  Game.over = false; Game.won = false; s.monster = null;
+  s.insideHaven = true; Game.playerTile().type = 'haven';
+  T.ok('Table feedback fixture has a valid public entry context', Game.tableEntryBlock() === '', Game.tableEntryBlock());
   expectMoment('Table entry', 'tableEnter', 'tableEnterSting', () => Game.tableTakeSeat());
   Game.tableBranch = () => ({ branch: 'light', light: 3, dark: 0, notes: [] });
   expectMoment('Table lock-in (a door chosen)', 'tableLock', 'tableLockIn', () => Game.tableStartPath('beloved'));

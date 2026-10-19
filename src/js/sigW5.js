@@ -914,7 +914,7 @@
 
   // Suburb venue: healing halved unless you own the venue.
   var _sigW5addHealth = G.addHealth;
-  G.addHealth = function (n) {
+  G.addHealth = function (n, opts) {
     try {
       var f = this.tbfight;
       if (f && !f.over && f.tsVenue === 'suburb' && typeof n === 'number' && n > 0) {
@@ -923,7 +923,7 @@
         if (!(p && p.tsNative === 'suburb')) n = Math.ceil(n / 2);
       }
     } catch (e) {}
-    return _sigW5addHealth.call(this, n);
+    return _sigW5addHealth.call(this, n, opts);
   };
 
   // Strike observation for the spoiler (hesitate) and the nielsen (flashy).

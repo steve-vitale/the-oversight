@@ -259,6 +259,7 @@
     eatCannibal(idx) {
       const s = this.state.scholar;
       if (this.over) return false;
+      const eaterId=this.villagerId, intakeEater = this.captureIntakeEater(eaterId);
       const it = (s.inventory || [])[idx];
       if (!it || it.plantId !== 'meat_human' || (it.units || 0) <= 0) {
         this.say('Nothing edible there.'); return false;
@@ -287,6 +288,7 @@
       const cap = this.kcalCap ? this.kcalCap() : 99999;
       const kcal = Math.min(it.kcalEach || 550, Math.max(0, cap - (s.kcal || 0)));
       s.kcal = Math.min(cap, (s.kcal || 0) + (it.kcalEach || 550));
+      this.recordHarvestIntake(intakeEater, [{item:it,kcal:it.kcalEach || 550,nourishment:this.villagerId===eaterId && s.health>0?kcal:0}], 'cannibal');
       it.units -= 1; if (it.units <= 0) s.inventory.splice(idx, 1);
       s.cannibalMeals = meals + 1;
       s.lastCannibalDay = s.day || 0;
@@ -767,10 +769,10 @@
             var units = Math.max(1, Math.round(demand / 150));
             var day = this.state.scholar.day;
             var inv = this.state.scholar.inventory;
-            var tmpl = { name: 'Taken rations', kcalEach: 150, units: units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. Fear took it.' };
+            var tmpl = { name: 'Taken rations', kcalEach: 150, units: units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. Fear took it.', harvestShares: ((this.state.village.pack || {})[vid] || {}).harvestShares };
             var stack = null;
             try { stack = inv.find(function (i) { return i.stolen && !i.bonded; }); } catch (e) {}
-            if (stack) stack.units += units; else inv.push(tmpl);
+            if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; } else inv.push(tmpl);
             this.say('😶 ' + dname + ' hands it over without a word. No pleading this time — just arithmetic. It\'s worse.');
           } else {
             this.say('😶 ' + dname + ' empties their pockets. There\'s almost nothing. The look they give you isn\'t gratitude — it\'s bookkeeping.');

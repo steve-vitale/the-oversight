@@ -261,7 +261,7 @@
         const p = Game.getPerson && Game.getPerson(id);
         if (!p || p.dead) continue;
         v.health[id] = v.health[id] !== undefined ? v.health[id] : 100;
-        v.health[id] = Math.max(1, v.health[id] - 3);
+        v.health[id] = Math.max(1, v.health[id] - Game.wornDamage(id, 3, { scene: 'exposure' }));
       }
       say(`The ${t <= -5 ? 'cold' : 'heat'} works on everyone — the village wakes aching from ${why}.`);
     } catch (e) {}

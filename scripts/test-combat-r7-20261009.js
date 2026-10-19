@@ -50,7 +50,7 @@ function synthBetrayal(Game, vid) {
     stubStorage();
     const Game = await H.newCombatReadyGame();
     quiet(Game);
-    const vid = (Game.state.village.roster || [])[0];
+    const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
     synthBetrayal(Game, vid);
     const hk = 'h_' + vid;
     const h = Game.tbFighter(hk);
@@ -89,7 +89,7 @@ function synthBetrayal(Game, vid) {
     const Game = await H.newCombatReadyGame();
     quiet(Game);
     grant(Game, 'war_cry');
-    const vid = (Game.state.village.roster || [])[0];
+    const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
     synthBetrayal(Game, vid);
     const hk = 'h_' + vid;
     Game.state.scholar.kcal = 5000;
@@ -152,8 +152,8 @@ function synthBetrayal(Game, vid) {
     const said = [];
     Game.say = (x) => said.push(String(x));
     Game.audioEvent = () => {}; Game.drama = () => {}; Game.sysSay = () => {};
-    const vid = (Game.state.village.roster || [])[0];
-    const ally = (Game.state.village.roster || [])[1];
+    const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
+    const ally = (Game.state.village.roster || []).find(id => id !== Game.villagerId && id !== vid);
     // A loyal party member must be IN the fight to take the help turn.
     const ps = Game.partyState();
     ps.party = ps.party || [];
@@ -240,11 +240,12 @@ function synthBetrayal(Game, vid) {
     s.abilities = s.abilities.filter(a => ((a && a.id) || a) !== 'fake_unwired_test');
   }
 
-  // T9. BETRAYAL WOUND STASH (r6 F5) still holds: flee at 5 HP, re-engage at 5.
+  // T9. Persistent human wounds: flee at5 HP, re-engage at5. The old
+  // betrayal-only cap is now migrated into the single real health store.
   {
     const Game = await H.newCombatReadyGame();
     quiet(Game);
-    const vid = (Game.state.village.roster || [])[0];
+    const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
     synthBetrayal(Game, vid);
     const hk = 'h_' + vid;
     Game.tbFighter(hk).hp = 5;
@@ -253,7 +254,7 @@ function synthBetrayal(Game, vid) {
     Game.tbEndCheck();
     ok('T9a fight ended', !Game.tbfight, 'tbfight=' + !!Game.tbfight);
     const stashed = ((Game.state.village || {}).betrayalWounds || {})[vid];
-    ok('T9b wound stashed (5)', stashed === 5, 'stashed=' + stashed);
+    ok('T9b wound persisted in the single human health store (5)', Game.state.village.health[vid] === 5 && stashed === undefined, 'hp=' + Game.state.village.health[vid] + ', legacy=' + stashed);
     synthBetrayal(Game, vid);
     ok('T9c re-engage restores 5 HP, not flat 40', Game.tbFighter(hk).hp === 5, 'hp=' + Game.tbFighter(hk).hp);
   }

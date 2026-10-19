@@ -14,6 +14,7 @@
 // trip, never stash) -> the new assertions fail. GREEN: re-apply -> all pass.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
+const caseId=process.argv[2];
 
 let pass = 0, fail = 0;
 function ok(cond, name) {
@@ -74,7 +75,7 @@ async function convoCase(seed, bondV) {
 
 async function main() {
   // 1. CLOSE bond -> grief beat once, trauma 15
-  {
+  if (caseId === "close") {
     const r = await handoffCase(701, 55, 2);
     ok(r.choseRight, 'close: successor chosen by trust');
     ok(r.trauma === 15, `close: trauma 15 (got ${r.trauma})`);
@@ -84,7 +85,7 @@ async function main() {
     ok(/\(\+5 trauma\)/.test(r.griefBeats[0] || ''), 'close: beat names the +5 trauma');
   }
   // 2. HOSTILE bond -> hostile beat once, trauma stays 10
-  {
+  if (caseId === "hostile") {
     const r = await handoffCase(702, -45, -2);
     ok(r.choseRight, 'hostile: successor chosen by trust');
     ok(r.trauma === 10, `hostile: trauma stays 10 (got ${r.trauma})`);
@@ -92,38 +93,38 @@ async function main() {
     ok(r.griefBeats.length === 0, 'hostile: no grief beat');
   }
   // 3. NEUTRAL bond -> silence, trauma 10 (old behavior preserved)
-  {
+  if (caseId === "neutral") {
     const r = await handoffCase(703, 0, 0);
     ok(r.choseRight, 'neutral: successor chosen by trust');
     ok(r.trauma === 10, `neutral: trauma stays 10 (got ${r.trauma})`);
     ok(r.griefBeats.length === 0 && r.hostileBeats.length === 0, 'neutral: no grief/hostile beat');
   }
   // 4. DEPTH-only close (sediment of a long quiet friendship) -> grief path
-  {
+  if (caseId === "depth-close") {
     const r = await handoffCase(704, 5, 1);
     ok(r.griefBeats.length === 1, 'depth-only: grief beat fires on depth>=1');
     ok(r.trauma === 15, `depth-only: trauma 15 (got ${r.trauma})`);
   }
   // 5. DEPTH-only hostile -> hostile path
-  {
+  if (caseId === "depth-hostile") {
     const r = await handoffCase(705, -5, -1);
     ok(r.hostileBeats.length === 1, 'depth-only hostile: hostile beat fires on depth<=-1');
     ok(r.trauma === 10, `depth-only hostile: trauma stays 10 (got ${r.trauma})`);
   }
   // 6. CONVO half: close bond -> acknowledgment line offered
-  {
+  if (caseId === "convo-close") {
     const r = await convoCase(706, 55);
     ok(r.ack.length === 1, `convo close: acknowledgment line offered exactly once (got ${r.ack.length})`);
     ok(r.lines.length >= 2, 'convo close: mourning lines still present');
   }
   // 7. CONVO half: neutral bond -> no acknowledgment
-  {
+  if (caseId === "convo-neutral") {
     const r = await convoCase(707, 0);
     ok(r.ack.length === 0, 'convo neutral: no acknowledgment line');
     ok(r.lines.length >= 1, 'convo neutral: mourning lines still present');
   }
   // 8. CONVO half: hostile bond -> no acknowledgment (the village doesn't pry)
-  {
+  if (caseId === "convo-hostile") {
     const r = await convoCase(708, -45);
     ok(r.ack.length === 0, 'convo hostile: no acknowledgment line');
   }
@@ -132,4 +133,17 @@ async function main() {
   process.exit(fail ? 1 : 0);
 }
 
-main().catch(e => { console.error('FATAL', e); process.exit(1); });
+if (caseId) {
+  if (!["close","hostile","neutral","depth-close","depth-hostile","convo-close","convo-neutral","convo-hostile"].includes(caseId)) throw Error('Unknown proof case '+caseId);
+  main().catch(e => { console.error('FATAL', e); process.exit(1); });
+} else {
+  // One harness per process: module/global state survives repeated loads.
+  const cp=require('child_process');let total=0;
+  for (const id of ["close","hostile","neutral","depth-close","depth-hostile","convo-close","convo-neutral","convo-hostile"]) {
+    const r=cp.spawnSync(process.execPath,[__filename,id],{encoding:'utf8',env:process.env});
+    const counts=(r.stdout || '').match(/(\d+) passed, (\d+) failed/);
+    if(r.status!==0 || !counts || Number(counts[2])!==0){console.error(id,r.stdout,r.stderr);process.exitCode=1;break;}
+    total+=Number(counts[1]);
+  }
+  if(!process.exitCode)console.log(total+' passed, 0 failed (eight isolated cases)');
+}

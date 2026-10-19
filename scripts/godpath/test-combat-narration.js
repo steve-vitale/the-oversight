@@ -1,0 +1,16 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('combat narration');
+(async()=>{const G=await K.load({seed:181027,narration:true});K.newRun(G);G.startCombat('gallowdeer');
+ const s=G.state.scholar,m=G.tbfight.fighters.find(x=>x.kind==='monster');s.godhood={active:[]};
+ let at=G.log.length;G.tbDamage('p',1,'ocular beam',m.key);
+ T.ok('ordinary bearer never sees phantom Market coins',!G.log.slice(at).some(e=>/Gilded Guard|coins swing/.test(String(e))));
+ const single={type:'single',range:1,windup:1};
+ T.ok('pattern descriptions describe the attack without design commentary',!(/how to beat|windup tells/i.test(G.tbPatternDesc(single,m.mdef))));
+ m.telegraph={attackName:'Antler Sweep',pattern:single,turnsLeft:1};m.moveAtk=m.mdef.attacks.find(a=>a.name==='Antler Sweep');G.tbLearnPattern(m);
+ const cue=G.tbTelegraphCue(m);
+ T.ok('live cue describes the visible warning without replaying Codex coaching',!(/You know this one|windup tells|how to beat/i.test(cue)));
+ T.ok('earned pattern knowledge is retained in the Codex',G.tbPatternKnown(m.mdef.id,'Antler Sweep'));
+ const learned=G.discoverMonsterCounter('hummice','trick');
+ T.ok('real counter discovery retains knowledge without placeholder praise',learned&&G.state.monsterCounters.hummice&&!G.log.slice(-3).some(e=>/You did the thing/.test(String(e))));
+ T.done();
+})().catch(e=>{console.error(e);process.exitCode=1;});

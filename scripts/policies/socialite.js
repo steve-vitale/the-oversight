@@ -4,6 +4,7 @@
 // Built on competent (survives), with social actions layered on top.
 'use strict';
 const { competent } = require('./competent');
+const {chooseConversationChoice,conversationDiagnostics}=require('./conversation-pages');
 
 function socialDaily(Game, ctx) {
   try {
@@ -17,11 +18,9 @@ function socialDaily(Game, ctx) {
         const vid = roster[Math.floor((global.__policyRandom || Math.random)() * roster.length)];
         try {
           Game.talkTo(vid);
-          let choices = [];
-          try { choices = Game.convoChoices(vid) || []; } catch (e) {}
-          const agency = choices.find(c => c && c.id && String(c.id).indexOf('agency:') === 0);
+          const agency = chooseConversationChoice(Game,vid,choices=>choices.find(c=>c&&String(c.id).startsWith('agency:')),ctx);
           if (agency && Game.convoTurn) {
-            try { Game.convoTurn(vid, agency.id); ctx.socialLessons = (ctx.socialLessons || 0) + 1; } catch (e) {}
+            try { const r=Game.convoTurn(vid, agency.id); if(r&&!r.ignored&&!r.navigation)ctx.socialLessons = (ctx.socialLessons || 0) + 1; } catch (e) { console.warn('[policy/socialite]',e.message); }
           }
         } catch (e) {}
         try { Game.endConvo(vid, 'left'); } catch (e2) {}
@@ -71,6 +70,7 @@ function socialDaily(Game, ctx) {
 
 const socialite = Object.assign({}, competent, {
   id: 'socialite',
+  diagnostics(ctx) { return {version:1,profile:'socialite',mode:'social-mixed',blocked:{},...conversationDiagnostics(ctx)}; },
   desc: 'social player: competent survival + talks, feasts, moots, aid cries, switchboard',
   daily(Game, ctx) {
     if (competent.daily) competent.daily(Game, ctx);

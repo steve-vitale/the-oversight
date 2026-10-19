@@ -1,5 +1,6 @@
 'use strict';
 const crypto = require('crypto');
+const cohorts = require('./balance-cohorts');
 const contract = require('../balance-metrics.json');
 const contractDigest = crypto.createHash('sha256').update(require('fs').readFileSync(require('path').join(__dirname, '../balance-metrics.json'))).digest('hex');
 const mean = xs => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
@@ -40,29 +41,34 @@ function comparePanels(before, after) {
   const errors = [];
   if (before.contractDigest !== contractDigest || after.contractDigest !== contractDigest) errors.push('Metric contract does not match this comparator');
   for (const field of ['schemaVersion', 'observerDigest', 'contractDigest']) if (before[field] !== after[field]) errors.push('Different ' + field);
-  for (const field of ['days', 'policies', 'seeds', 'region', 'origin', 'flags', 'nodeVersion']) if (JSON.stringify(before.options[field]) !== JSON.stringify(after.options[field])) errors.push('Unmatched ' + field);
+  for (const field of ['days', 'policies', 'seeds', 'region', 'origin', 'occupation', 'flags', 'nodeVersion']) if (JSON.stringify(before.options[field]) !== JSON.stringify(after.options[field])) errors.push('Unmatched ' + field);
   for (const f of new Set([...Object.keys(before.sources), ...Object.keys(after.sources)])) {
     if (f.startsWith('scripts/') && before.sources[f] !== after.sources[f]) errors.push('Policy/harness changed: ' + f);
   }
   const validate = panel => {
-    const keys = panel.rows.map(caseKey);
-    const expected = new Set(panel.options.policies.flatMap(p => panel.options.seeds.map(s => p + ':' + s)));
-    if (keys.some(k => !expected.has(k))) errors.push('Case does not belong to declared panel');
-    if (new Set(keys).size !== keys.length) errors.push('Duplicate cases');
-    if (keys.length !== panel.options.seeds.length * panel.options.policies.length) errors.push('Incomplete panel');
+    errors.push(...cohorts.validate(panel));
     if (!panel.validity.sourcesStable) errors.push('Sources changed mid-panel');
-    for (const policy of panel.options.policies) if (!panel.validity.neutrality.some(p => p.policy === policy && p.match && !p.warnings)) errors.push('Missing passing neutrality proof: ' + policy);
-    for (const r of panel.rows) if (r.warnings.length || r.observerErrors.length || r.gear.errors.length) errors.push('Observer/runtime warning or error: ' + caseKey(r));
+    for (const r of panel.rows) if (r.warnings?.length || r.observerErrors?.length || r.gear?.errors?.length) errors.push('Observer/runtime warning or error: ' + caseKey(r));
   };
   validate(before); validate(after);
   const bm = new Map(before.rows.map(r => [caseKey(r), r]));
-  if (after.rows.some(r => !bm.has(caseKey(r)))) errors.push('Unmatched cases');
+  if (!after.options.occupation && after.rows.some(r => !bm.has(caseKey(r)))) errors.push('Unmatched cases');
   if (errors.length) return { decision: 'invalid', errors: [...new Set(errors)], policies: [] };
   const policies = after.options.policies.map(policy => {
-    const rs = after.rows.filter(r => r.row.policy === policy);
+    const all = after.rows.filter(r => r.row.policy === policy), rs = all.filter(r => bm.has(caseKey(r)));
     const metrics = contract.metrics.map(m => compareMetric(rs.map(r => bm.get(caseKey(r)).metrics[m.id]), rs.map(r => r.metrics[m.id]), m, policy + '/' + m.id));
     const review = metrics.filter(m => !['descriptive', 'no_material_signal'].includes(m.status));
-    return { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
+    const result = { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
+    if (after.options.occupation) {
+      const beforeRows = before.rows.filter(r => r.row.policy === policy), am = new Set(all.map(caseKey));
+      const unavailableBefore = all.filter(r => !bm.has(caseKey(r))).map(r => r.row.seed);
+      const unavailableAfter = beforeRows.filter(r => !am.has(caseKey(r))).map(r => r.row.seed);
+      const rosterChanged = rs.filter(r => r.row.selection.rosterHash !== bm.get(caseKey(r)).row.selection.rosterHash).map(r => r.row.seed);
+      result.cohort = { occupation: after.options.occupation, before: cohorts.coverage(before, policy), after: cohorts.coverage(after, policy),
+        pairedPlayed: rs.length, unavailableBefore, unavailableAfter, rosterChanged };
+      if (unavailableBefore.length || unavailableAfter.length || rosterChanged.length || !rs.length) result.decision = 'review_required';
+    }
+    return result;
   });
   return { schemaVersion: 1, decision: policies.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies,
     note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence. Win-rate movement prompts investigation in either direction, never an automatic regression or improvement judgment.' };
@@ -70,6 +76,7 @@ function comparePanels(before, after) {
 function markdown(report) {
   const lines = ['# Balanced campaign comparison', '', '**Decision: ' + report.decision + '**', '', ...(report.errors || []).map(e => '- ' + e)];
   for (const p of report.policies) {
+    if (p.cohort) lines.push('', `Occupation ${p.cohort.occupation}: before ${p.cohort.before.played}/${p.cohort.before.attempted} played (${p.cohort.before.excluded} excluded); after ${p.cohort.after.played}/${p.cohort.after.attempted} played (${p.cohort.after.excluded} excluded). Only ${p.cohort.pairedPlayed} matched played cases enter metrics. Availability/roster changes: ${JSON.stringify({ unavailableBefore: p.cohort.unavailableBefore, unavailableAfter: p.cohort.unavailableAfter, rosterChanged: p.cohort.rosterChanged })}.`);
     lines.push('', '## ' + p.policy, '', `${p.cases} paired cases; ${p.confirmationSized ? 'confirmation-sized' : 'screen only'}; ${p.decision}.`, '', '| Metric | Before | After | Paired delta | 95% exploratory interval | Pairs | Status |', '| --- | ---: | ---: | ---: | --- | ---: | --- |');
     const fmt = n => n == null ? 'unknown' : Number(n.toFixed(4)).toString();
     for (const m of p.metrics) lines.push(`| ${m.label} | ${fmt(m.before)} | ${fmt(m.after)} | ${fmt(m.delta)} | ${m.interval95.map(fmt).join(' to ')} | ${m.pairs}/${m.totalPairs} | ${m.status} |`);

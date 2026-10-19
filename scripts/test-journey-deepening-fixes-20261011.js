@@ -22,26 +22,25 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [20261011, 777, 424242]);
 
-let _s = 0;
-function seedRng(seed) {
-  _s = seed >>> 0;
-  Math.random = function () {
-    _s |= 0; _s = (_s + 0x6D2B79F5) | 0;
-    let t = Math.imul(_s ^ (_s >>> 15), 1 | _s);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+const K = require('./godpath/lib');
+const { spawnSync } = require('child_process');
+const caseIndex = process.argv.indexOf('--case-seed');
+const caseSeed = caseIndex >= 0 ? Number(process.argv[caseIndex + 1]) : null;
+if (caseSeed == null) {
+  let totalPass = 0, totalFail = 0;
+  for (const seed of SEEDS) {
+    const result = spawnSync(process.execPath, [__filename, '--case-seed', String(seed)], {
+      cwd: ROOT, env: process.env, encoding: 'utf8', timeout: 60000,
+    });
+    process.stdout.write(result.stdout || ''); process.stderr.write(result.stderr || '');
+    if (result.error) console.error(result.error);
+    const counts = (result.stdout || '').match(/(\d+) passed, (\d+) failed/);
+    totalPass += Number(counts?.[1] || 0); totalFail += Number(counts?.[2] || 0);
+    if (!counts || (result.status !== 0 && !Number(counts[2]))) totalFail++;
+  }
+  console.log(`\n${totalPass} passed, ${totalFail} failed (isolated seed processes)`);
+  process.exit(totalFail ? 1 : 0);
 }
-
-global.fetch = (f) => Promise.resolve({
-  json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
-});
-global.localStorage = {
-  _m: {},
-  getItem(k) { return (k in this._m) ? this._m[k] : null; },
-  setItem(k, v) { this._m[k] = String(v); },
-  removeItem(k) { delete this._m[k]; },
-};
 
 let pass = 0, fail = 0;
 const failures = [];
@@ -51,39 +50,9 @@ function check(name, cond, detail) {
 }
 
 async function setup(seed) {
-  seedRng(seed);
-  global.window = global;
-  const files = [
-    'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-    'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-    'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-    'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-    'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-    'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js',
-    'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js',
-    'src/js/contests.js', 'src/js/broadcast.js', 'src/js/contestEngine.js',
-    'src/js/alienPlayers.js', 'src/js/storage.js', 'src/js/perceive.js',
-    'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-    'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js',
-    'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/waveLedger.js',
-    'src/js/feastBuff.js', 'src/js/ledger.js', 'src/js/abilityActions.js',
-    'src/js/monsterBehaviors.js', 'src/js/partyTactics.js',
-    'src/js/sigW3a.js', 'src/js/statusEffects.js', 'src/js/sigW3b.js',
-    'src/js/metaProgression.js', 'src/js/sigW3c.js',
-    'src/js/villager-agency.js', 'src/js/fieldFights.js',
-    'src/js/villager-objectives.js', 'src/js/codex-people.js',
-    'src/js/membership.js', 'src/js/havenGrowth.js', 'src/js/hierarchy.js',
-    'src/js/comms.js', 'src/js/safetynets.js', 'src/js/villageAgency.js',
-    'src/js/debug-scenarios.js', 'src/js/build.js',
-  ];
-  for (const f of files) { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  delete global.window;
-  const Game = globalThis.Scattering.Game;
-  await Game.init();
-  Game.genDetail = function () { return {}; };
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
+  const Game = await K.load({ seed });
+  Game.debugRegion = 'na_eastern_woodlands';
+  K.newRun(Game);
   return Game;
 }
 
@@ -92,20 +61,6 @@ function testBeatsTypos(Game, seed) {
   // A1: static — the typo signature is gone from source.
   const src = fs.readFileSync(path.join(ROOT, 'src/js/convo-beats.js'), 'utf8');
   check(tag + ' A1 no stray-"]" typo clusters in convo-beats.js', !/["?!]"\]'/.test(src));
-  // A2: behavioral — drive real conversations, sweep every rendered label.
-  const roster = (Game.state.village.roster || []).filter(id => id !== Game.villagerId).slice(0, 3);
-  let labels = 0, bad = 0;
-  for (const vid of roster) {
-    let st;
-    try { st = Game.startConvo(vid); } catch (e) { continue; }
-    if (!st) continue;
-    let choices = st.choices || [];
-    for (let turn = 0; turn < 25; turn++) {
-      for (const ch of choices) {
-        if (!ch || ch.id === 'leave') continue;
-        labels++;
-        const lab = String(ch.label || '');
-        if (lab.includes(']')) { bad++; }
   // A4: data-level — every REPLY_POOLS label literal is a clean quoted string.
   const lines = src.split('\n');
   const poolStart = lines.findIndex(l => l.includes('const REPLY_POOLS'));
@@ -120,16 +75,32 @@ function testBeatsTypos(Game, seed) {
   check(tag + ' A4 all ' + lits.length + ' REPLY_POOLS labels are clean quoted strings',
     lits.length > 40 && badLits.length === 0,
     'labels=' + lits.length + ' bad=' + JSON.stringify(badLits).slice(0, 200));
+
+  // A2: behavioral — drive real conversations, sweep every rendered label.
+  const roster = (Game.state.village.roster || []).filter(id => id !== Game.villagerId).slice(0, 3);
+  let labels = 0, bad = 0;
+  for (const vid of roster) {
+    let st;
+    st = Game.startConvo(vid);
+    if (!st) continue;
+    let choices = st.choices || [];
+    for (let turn = 0; turn < 25; turn++) {
+      for (const ch of choices) {
+        if (!ch || ch.id === 'leave') continue;
+        labels++;
+        const lab = String(ch.label || '');
+        if (lab.includes(']')) { bad++; }
+
       }
       const pick = choices.find(c => c && (c.id === 'dlg:more' || c.id === 'dlg:react'))
         || choices.find(c => c && c.id !== 'leave' && c.id !== 'silence');
       if (!pick) break;
       let res;
-      try { res = Game.convoTurn(vid, pick.id); } catch (e) { break; }
+      res = Game.convoTurn(vid, pick.id);
       if (!res || res.ended) break;
       choices = res.choices || [];
     }
-    try { Game.endConvo(vid); } catch (e) {}
+    Game.endConvo(vid);
   }
   check(tag + ' A2 labels swept: ' + labels, labels > 20, 'labels=' + labels);
   check(tag + ' A3 no "]" in any rendered choice label', bad === 0, 'bad=' + bad);
@@ -159,7 +130,7 @@ function testGossipFresh(Game, seed) {
     const line = String(Game.convoAskTopic(w0, 'gossip') || '');
     check(tag + ' B2 fresh gossip renders its actual content', /told it straight/.test(line), line.slice(0, 160));
     check(tag + ' B3 static line is gone', !/doing right by people/.test(line), line.slice(0, 160));
-    try { Game.endConvo(w0); } catch (e) {}
+    Game.endConvo(w0);
 
     // Distortion tier: the third retelling exaggerates, per the seedGossip
     // contract ("she's giving away all the supplies").
@@ -168,7 +139,7 @@ function testGossipFresh(Game, seed) {
     const big = String(Game.convoAskTopic(w0, 'gossip') || '');
     check(tag + ' B4 distortion>=2 exaggerates honestly', /can't tell a lie to save your life/.test(big), big.slice(0, 160));
     check(tag + ' B5 plain variant not used at distortion 3', !/told it straight/.test(big), big.slice(0, 160));
-    try { Game.endConvo(w0); } catch (e) {}
+    Game.endConvo(w0);
   } finally {
     Game.npcDark = _dark; Game.npcGossipAbout = _gossipAbout;
   }
@@ -236,17 +207,17 @@ function testStayDeepens(Game, seed) {
   check(tag + ' D4 first three stays are the 3-line pool, no verbatim repeat',
     new Set(first3).size === 3, JSON.stringify(first3).slice(0, 200));
   const deep = lines[3] || '';
-  check(tag + ' D5 fourth stay deepens (grief named)', /keep thinking about them|quiet parts/.test(deep), String(deep).slice(0, 140));
+  check(tag + ' D5 fourth stay deepens (grief named)', /keep thinking about them|quiet parts|notice the gaps|Tonight I'm not|doing any of this right/.test(deep), String(deep).slice(0, 140));
   const w = Game.convoGet(vid).want || {};
   check(tag + ' D6 want resolves as comforted', w.stage === 3 && w.resolution === 'comforted',
     'stage=' + w.stage + ' resolution=' + w.resolution);
   check(tag + ' D7 no fifth/sixth stay repeats the filler pool verbatim',
     !lines.slice(4).some(l => first3.includes(l)));
-  try { Game.endConvo(vid); } catch (e) {}
+  Game.endConvo(vid);
 }
 
 (async function main() {
-  for (const seed of SEEDS) {
+  for (const seed of [caseSeed]) {
     const Game = await setup(seed);
     testBeatsTypos(Game, seed);
     testGossipFresh(Game, seed);

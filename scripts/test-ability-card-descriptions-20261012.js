@@ -80,7 +80,7 @@ ok('second_skin renamed', byId['second_skin'][0].name === 'Travel Light');
 ok('second_skin no armor-fiction', !/armor never slows|move full speed in any armor/i.test(byId['second_skin'][0].description));
 ok('poisoner renamed', byId['poisoner'][0].name === 'Tainted Bait');
 ok('poisoner no phantom verb', !/poison food\/water/i.test(byId['poisoner'][0].description));
-ok('purify canon flavor', /intention|System/i.test(byId['purify'][0].description) && !/Charcoal, clean water, time/i.test(byId['purify'][0].description));
+ok('purify describes magical poison removal', /magic/i.test(byId['purify'][0].description) && /poison/i.test(byId['purify'][0].description) && !/charcoal|clean water/i.test(byId['purify'][0].description));
 ok('lucky_rock honest scope', /on the hunt/i.test(byId['lucky_rock'][0].description) && !/to everything/i.test(byId['lucky_rock'][0].description));
 
 // ---- 4. app.js source checks ----

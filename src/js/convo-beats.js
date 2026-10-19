@@ -338,10 +338,15 @@
     // on the repay want); the generic cant after a decision is a filler
     // loop, not a choice.
     const wantDecided = !!(c.want && c.want.def && (c.want.stage || 0) >= 3);
+    const comfortThread = c.want?.id === 'seek_comfort' && (!c.thread || c.thread === 'want' || c.thread === 'small');
     for (const entry of topicPool) {
       if (seen.has(entry.id)) continue;
       if (wantEngaged && entry.id === 'dlg:help') continue;
       if (wantDecided && entry.id === 'dlg:cant') continue;
+      // The want owns its follow-through. Generic feeling replies must not
+      // re-ask the opening or pay more comfort after its actual resolution.
+      if (comfortThread && (((c.want.stage || 0) >= 2 && entry.id === 'dlg:comfort') ||
+          ((c.want.stage || 0) >= 3 && entry.id === 'dlg:empathize'))) continue;
       // Skip "tell me more" if the thread is dry. Skip the bare react once
       // it has produced two dead "Anyway."s in a row — the loop winds down
       // instead of offering the same dead acknowledgment forever (rethink

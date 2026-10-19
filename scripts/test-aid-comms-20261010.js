@@ -10,63 +10,30 @@
 // office appointment beat + candidate trade-offs + message editing +
 // confrontation + scale progression, system favor collection.
 // Usage: node scripts/test-aid-comms-20261010.js [SEED] — run x3 seeds.
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
+'use strict';
+const K = require('./godpath/lib');
+const H = require('./sim-harness');
 const SEED = parseInt(process.env.SEED || process.argv[2] || '777010', 10);
-
-const PAIRS = [
-  ['plants.json', 'plants'], ['biomes.json', 'biomes'], ['monsters.json', 'monsters'],
-  ['villagers.json', 'villagers'], ['abilities.json', 'abilities'], ['items.json', 'items'],
-  ['background_survivors.json', 'background_survivors'], ['cell_defs.json', 'cellDefs'],
-  ['animals.json', 'animals'], ['recipes.json', 'recipes'], ['books.json', 'books'],
-  ['relicEnhancements.json', 'relicEnhancements'], ['locations.json', 'locations'],
-  ['characterGen.json', 'characterGen'], ['knowledge.json', 'knowledge'],
-  ['nameCultures.json', 'nameCultures'], ['originPicker.json', 'originPicker'],
-  ['foreignSpeech.json', 'foreignSpeech'], ['lifeseeds.json', 'lifeseeds'],
-  ['arrivalText.json', 'arrivalText'], ['justiceVoice.json', 'justiceVoice'],
-  ['alienPlayers.json', 'alienPlayers'], ['regions.json', 'regions'],
-  ['monsterBehaviors.json', 'monsterBehaviors'],
-  ['contests.json', 'contests'], ['events.json', 'events'],
-  ['statusEffects.json', 'statusEffects'], ['cooking.json', 'cooking'],
-];
-global.SCATTER_DATA = {};
-for (const [f, key] of PAIRS) {
-  try { global.SCATTER_DATA[key] = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', f), 'utf8')); }
-  catch (e) { global.SCATTER_DATA[key] = key === 'contests' || key === 'items' || key === 'monsters' ? [] : {}; }
+// Modules capture Math.random during load. Keep that captured dispatcher while
+// allowing the shared harness to install its real seeded stream. Scoped tapes
+// below control only prepared probability contracts; ordinary calls use H's RNG.
+let stream = H.mulberry32(SEED), tape = null, tapeUsed = 0;
+function rng() {
+  if (tape && tape.length) { tapeUsed++; return tape.shift(); }
+  return stream();
 }
-
-function mulberry32(a) {
-  return function() {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+rng.reset = seed => { stream = H.mulberry32(seed); };
+const originalRandom = Object.getOwnPropertyDescriptor(Math, 'random');
+Object.defineProperty(Math, 'random', { configurable: true,
+  get: () => rng, set: value => { stream = value; } });
+function withRolls(values, fn) {
+  if (tape) throw new Error('nested RNG tape');
+  tape = values.slice(); tapeUsed = 0;
+  try { return { result: fn(), used: tapeUsed, remaining: tape.length }; }
+  finally { tape = null; }
 }
-let _rng = mulberry32(SEED);
-function rng() { return _rng(); }
-rng.reset = (s) => { _rng = mulberry32(s); };
-Math.random = rng;
-
-global.window = global;
-const LIST = ['engine/state.js', 'engine/modifiers.js', 'engine/calories.js', 'engine/day.js',
-  'engine/forage.js', 'engine/combat.js', 'game.js', 'encounters.js', 'conversation.js',
-  'convo-mood.js', 'convoTopics.js', 'convo-wants.js', 'convo-dialogue.js', 'convo-beats.js',
-  'convo-scene.js', 'examine.js', 'equipment.js', 'journal.js', 'party.js', 'party-formal.js',
-  'truth.js', 'contests.js', 'broadcast.js', 'contestEngine.js', 'alienPlayers.js', 'storage.js',
-  'perceive.js', 'carexplore.js', 'justice.js', 'food.js', 'betrayal.js', 'corpses.js',
-  'corruption.js', 'lifeseed.js', 'progression.js', 'ledger.js', 'abilityActions.js',
-  'monsterBehaviors.js', 'statusEffects.js', 'metaProgression.js', 'villager-agency.js',
-  'fieldFights.js', 'villager-objectives.js', 'codex-people.js', 'membership.js',
-  'hierarchy.js', 'comms.js', 'debug-scenarios.js', 'build.js'];
-for (const f of LIST) {
-  try { eval(fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8')); }
-  catch (e) { console.error('EVAL FAIL ' + f + ': ' + e.message); process.exit(2); }
-}
-delete global.window;
-const Game = globalThis.Scattering.Game;
-Game.data = global.SCATTER_DATA;
+(async () => {
+const Game = await K.load({ seed: SEED, narration: true });
 
 let pass = 0, fail = 0;
 function ok(name, cond, detail) {
@@ -76,22 +43,12 @@ function ok(name, cond, detail) {
 function sec(t) { console.log('\n### ' + t); }
 
 const said = [], sysSaid = [], leadShifts = [];
-Game.sysSay = function(t) { sysSaid.push(String(t)); };
-const _realSay = Game.say;
-Game.say = function(t) { said.push(String(t)); try { return _realSay.call(this, t); } catch (e) {} };
-Game.audioEvent = function() {};
-Game.drama = function() {};
-Game.tele = function() {};
-const _origLeadShift = Game.leadShift;
-Game.leadShift = function(dim, amount) { leadShifts.push([dim, amount]); return _origLeadShift.call(this, dim, amount); };
-Game.recordMoment = function() {};
-Game.contestLearn = function() {};
-Game.villagerGainXP = function() {};
-Game._showGossip = function() {};
-Game._cxGossip = function() {};
-Game.kcalCap = function() { return 2400; };
-Game.maxHealth = function() { return 100; };
-Game.havenViewership = function() { return (this.state.village || {}).viewership || 0; };
+const originalSysSay = Game.sysSay;
+Game.sysSay = function(t, ...args) { sysSaid.push(String(t)); return originalSysSay.call(this, t, ...args); };
+const originalSay = Game.say;
+Game.say = function(t, ...args) { said.push(String(t)); return originalSay.call(this, t, ...args); };
+const originalLeadShift = Game.leadShift;
+Game.leadShift = function(dim, amount, ...args) { leadShifts.push([dim, amount]); return originalLeadShift.call(this, dim, amount, ...args); };
 
 // Pin distinct roles: the best talker (agency + trust/5) and the weakest
 // forager (lowest agency) must be different people, or the weakest's cost
@@ -109,14 +66,12 @@ function setupAid(opts) {
   opts = opts || {};
   rng.reset(opts.seed != null ? opts.seed : SEED);
   said.length = 0; sysSaid.length = 0; leadShifts.length = 0;
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
+  K.newRun(Game);
   const s = Game.state.scholar;
   s.day = opts.day || 20;
   Game.state.systemArrived = true;
   s.integration = opts.integration != null ? opts.integration : 45;
-  s.health = 100; s.kcal = 2000; s.trauma = 0; s.exiled = false;
+  s.health = Game.maxHealth(); s.kcal = 2000; s.trauma = 0; s.exiled = false;
   s.abilities = s.abilities || [];
   Game.state.over = false;
   Game.state.networkLive = true;
@@ -134,7 +89,7 @@ function setupAid(opts) {
 }
 function raise() { return Game.raiseAidCrisis('Hushwolf', 1); }
 function joinedSaid() { return said.join('\n'); }
-function advance(n) { for (let i = 0; i < n; i++) { try { Game.advancePart(); } catch (e) {} } }
+function advance(n) { for (let i = 0; i < n; i++) Game.advancePart(); }
 
 // ================= 1. CRISIS =================
 sec('1. crisis declaration');
@@ -200,20 +155,48 @@ sec('2. tier 1 — runner');
   said.length = 0;
   ok('road hot: nobody volunteers, said aloud', Game.callForHelp('runner') === 'hot' && /road is hot/.test(joinedSaid()));
 }
-{
-  // danger is real: across many sends, mishaps happen (seeded, deterministic)
-  setupAid(); raise();
-  let mishaps = 0, deaths = 0;
-  for (let i = 0; i < 60; i++) {
-    setupAid({ seed: SEED * 7 + i }); raise();
-    said.length = 0;
-    const r = Game.callForHelp('runner');
-    if (r === 'died') { deaths++; mishaps++; }
-    else if (r === 'sent' && Game.state.aidRunners[0] && Game.state.aidRunners[0].mishap) mishaps++;
+// Pin the authored strict boundaries; binary .12+.02 is just below .14.
+const runnerCases = [
+  { wave:1, rolls:[0.13999899999999998, 0.399999], outcome:'died' },
+  { wave:1, rolls:[0.13999899999999998, 0.4], outcome:'hurt' },
+  { wave:1, rolls:[0.13999899999999998, 0.400001], outcome:'hurt' },
+  { wave:1, rolls:[0.13999999999999999], outcome:'safe' },
+  { wave:1, rolls:[0.140001], outcome:'safe' },
+  { wave:5, rolls:[0.219999, 0.399999], outcome:'died' },
+  { wave:5, rolls:[0.22], outcome:'safe' },
+  { wave:5, rolls:[0.220001], outcome:'safe' },
+];
+for (const c of runnerCases) {
+  const { v0 } = setupAid();
+  Game.raiseAidCrisis('Boundary Hushwolf', c.wave);
+  const vid = Game.aidPickRunner();
+  const parts = Game.aidPartsFor(v0.id);
+  const label = 'runner wave' + c.wave + ' rolls ' + c.rolls.join('/');
+  said.length = 0;
+  const logStart = Game.log.length;
+  const receipt = withRolls(c.rolls, () => Game.callForHelp('runner', { runnerId: vid, targetId: v0.id }));
+  const rn = Game.state.aidRunners.find(r => r.vid === vid);
+  const corpses = Game.corpses().filter(r => r.villagerId === vid && r.cause === 'aid-runner');
+  console.log('RUNNER_RECEIPT ' + JSON.stringify({ seed: SEED, wave: c.wave, rolls: c.rolls,
+    result: receipt.result, used: receipt.used, parts, partsLeft: rn && rn.partsLeft,
+    mishap: rn && rn.mishap, corpseCount: corpses.length, member: Game.isMember(vid),
+    inRoster: Game.state.village.roster.includes(vid), health: (Game.state.village.health || {})[vid],
+    fallen: (Game.state.village.fallen || []).some(f => f.villagerId === vid) }));
+  ok(label + ': prepared risk tape consumed', receipt.used === c.rolls.length && receipt.remaining === 0);
+  ok(label + ': actual outcome', receipt.result === (c.outcome === 'died' ? 'died' : 'sent'));
+  ok(label + ': crisis records actual result', Game.aidCrisis().calls.some(r => r.runner === vid && r.result === receipt.result));
+  if (c.outcome === 'died') {
+    ok(label + ': one real registered corpse and no marching runner', corpses.length === 1 && !rn);
+    const emitted = Game.log.slice(logStart).map(line => typeof line === 'string' ? line : line.text).join('\n');
+    ok(label + ': death narrated on this call', /don't make it|doesn't make it/.test(emitted), emitted);
+    ok(label + ': dead runner is no longer a member', !Game.isMember(vid));
+    ok(label + ': lethal health and fallen receipt', (Game.state.village.health || {})[vid] === 0 && (Game.state.village.fallen || []).some(f => f.villagerId === vid && f.cause === 'aid-runner'));
+    ok(label + ': dead runner cannot hold the switchboard', !Game.switchboardCandidates().some(candidate => candidate.id === vid));
+  } else {
+    ok(label + ': no corpse and real outgoing runner', corpses.length === 0 && !!rn && rn.phase === 'out');
+    ok(label + ': precise injury and extra day-part', !!rn && rn.mishap === (c.outcome === 'hurt' ? 'hurt' : null) && rn.partsLeft === parts + (c.outcome === 'hurt' ? 1 : 0));
+    ok(label + ': injury narration matches this call', /hurt on the road/.test(joinedSaid()) === (c.outcome === 'hurt'));
   }
-  ok('road danger is real (mishaps across sends)', mishaps > 0, 'mishaps=' + mishaps);
-  ok('runners can die on the road', deaths > 0, 'deaths=' + deaths);
-  ok('runner death said aloud', /don't make it|doesn't make it/.test(joinedSaid()) || deaths > 0);
 }
 
 // ================= 3. SIGNAL =================
@@ -453,4 +436,6 @@ sec('10. debug scenario');
 }
 
 console.log('\n==== aid-comms: ' + pass + ' passed, ' + fail + ' failed (seed ' + SEED + ') ====');
-process.exit(fail ? 1 : 0);
+process.exitCode = fail ? 1 : 0;
+})().catch(e => { console.error(e.stack || e); process.exitCode = 1; })
+  .finally(() => Object.defineProperty(Math, 'random', originalRandom));

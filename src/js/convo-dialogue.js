@@ -105,6 +105,10 @@
       choiceId === 'nv:nod' || choiceId === 'nv:smile' || choiceId === 'nv:pointself';
   }
 
+  function comfortThread(c) {
+    return c?.want?.id === 'seek_comfort' && (!c.thread || c.thread === 'want' || c.thread === 'small');
+  }
+
   // convoMarkSubstantive: the choke point's other half (socialite break-it
   // r8 2026-10-09). The :94 wrapper below only sees choice ids that reach
   // it — four outer wrappers intercept non-light ids with early returns
@@ -263,7 +267,8 @@
 
       if (dlg === 'comfort' || dlg === 'empathize') {
         // Emotional engagement — real trust, mood shift.
-        const youSaid = dlg === 'comfort' ? '"Are you okay?"' : '"That sounds really hard."';
+        const completing = dlg === 'empathize' && comfortThread(c) && c.want.stage === 2;
+        const youSaid = completing ? '"I\'m here."' : dlg === 'comfort' ? '"Are you okay?"' : '"That sounds really hard."';
         c.transcript.push({ who: 'you', text: youSaid });
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, mood: 1, temper: 'kind', name: 'dlg:' + dlg }); } catch (e) {}
@@ -273,7 +278,9 @@
         // verbatim (r3: Ruby d85 ≡ Wolfgang d105; r4: Kai d105 too). Seven
         // variants now, in the gritty-warm villager voice — no filler, no
         // fabricated shared history. The originals stay first (tone kept).
-        const raw = this.convoPickCycle(vid, 'dlg:comfort:lines', [
+        const raw = completing && typeof c.want.def?.engageBeat === 'function'
+          ? c.want.def.engageBeat.call(this, vid)
+          : this.convoPickCycle(vid, 'dlg:comfort:lines', [
           '"Thanks. ...Thanks for saying that."',
           '"I — yeah. It helps, hearing that."',
           '"You\'re kind. Don\'t let this place change that."',
@@ -290,7 +297,7 @@
         // engage an unrelated live want (same false-engagement class as
         // dlg:more — gap-closure 2026-10-17).
         { const cw = (c.want && c.want.id) || null;
-          if (!c.thread || c.thread === 'want' || c.thread === 'small' || cw === 'seek_comfort') this.convoWantEngage(vid, 'engage'); }
+          if (!c.thread || c.thread === 'want' || c.thread === 'small' || cw === 'seek_comfort') this.convoWantEngage(vid, completing ? 'commit' : 'engage'); }
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -709,6 +716,14 @@
   // those already.)
   const _dlgTurnCounted = Game.convoTurn;
   Game.convoTurn = function (vid, choiceId) {
+    const current = this.convoGet(vid);
+    // Retired buttons can still arrive from a stale view. Reject them before
+    // speech, consequences, substantive credit, post-turn work or exchanges.
+    if (comfortThread(current) && ['dlg:comfort', 'dlg:empathize', 'dlg:stay'].includes(choiceId) &&
+        ((current.want.stage || 0) >= 3 || (choiceId === 'dlg:comfort' && (current.want.stage || 0) >= 2))) {
+      return { line: null, choices: current.active ? this.convoChoices(vid) : [],
+        ended: !current.active, ignored: true, transcript: current.transcript.slice() };
+    }
     const r = _dlgTurnCounted.call(this, vid, choiceId);
     try {
       if (r && !r.ended && typeof choiceId === 'string' && choiceId.indexOf('dlg:') === 0) {

@@ -9,7 +9,7 @@
 //      combat strip (src/js/app.js line ~1466). Engine gate asserted here;
 //      DOM rendering verified by visual pass.
 // Also re-asserts the established gates on the fixed surfaces' siblings:
-//   3. tbTelegraphCue: dread for the ignorant, knownCue coaching once learned.
+//   3. tbTelegraphCue: physical warnings; earned patterns remain in the Codex.
 //   4. monsterDisplayName: descriptor pre-System, true name post-System.
 //   5. encAnimalCue: null until the animal is learned.
 //   6. encAttackName / encShortLabel gates unchanged.
@@ -101,7 +101,7 @@ function fighterFor(id) {
       !/if \(f\.telegraph\) status \+= ' ⚠';/.test(appSrc));
   }
 
-  // ---------- 3. tbTelegraphCue: dread for the ignorant, coaching for the learned ----------
+  // ---------- 3. tbTelegraphCue: physical warning remains concise after learning ----------
   {
     const md = mdef('hummice');
     const m = { kind: 'monster', mdef: md, telegraph: { turnsLeft: 1 }, mx: 4, my: 4 };
@@ -113,8 +113,8 @@ function fighterFor(id) {
     Game.state.codex.monsters.hummice = { patterns: {} };
     Game.state.codex.monsters.hummice.patterns[atkName] = 'desc';
     const coached = Game.tbTelegraphCue(m);
-    ok('cue known: "You know this one" appears', /You know this one/.test(coached), coached);
-    ok('cue known: knownCue coaching appended', /STACKS while you stand/.test(coached), coached);
+    ok('cue known: physical warning stays unchanged', coached === dread, coached);
+    ok('cue known: earned pattern remains available', Game.tbPatternKnown('hummice', atkName));
     delete Game.state.codex.monsters.hummice;
   }
 

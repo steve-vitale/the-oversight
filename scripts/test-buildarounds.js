@@ -150,10 +150,10 @@ for (const p of ['brawler','shieldbearer','hunter','survivalist','caregiver']) {
   ok(css.includes(`[data-path="${p}"]`), `CSS has ${p} color`);
 }
 
-// 10. Slot roles in UI
-console.log('\n10. Slot roles in UI:');
+// 10. Player-facing action clarity (Steve 2026-10-19).
+console.log('\n10. Action clarity in UI:');
 const appSrc = fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
-ok(appSrc.includes('ab-role'), 'ability bar shows slot roles');
+ok(!appSrc.includes('class="ab-role"') && appSrc.includes('esc(a.desc)'), 'ability bar explains effects without unexplained role badges');
 ok(appSrc.includes('data-path'), 'ability bar has path colors');
 
 // 11. Offer steering

@@ -78,9 +78,11 @@ function mealNeed(kcalPerDay, healthBefore, away, hearthMult) {
   return need;
 }
 
-function trustFactorOf(trust, pantryFreshKcal) {
+function trustFactorOf(trust, pantryTotalKcal) {
   let tf = trust < 30 ? 0.2 : trust < 60 ? 0.5 : trust < 80 ? 0.8 : 1.0;
-  if (pantryFreshKcal < 5000) tf = Math.min(1.0, tf * 2); // crisis sharing
+  // Match villagerMealDay's actual crisis test, which counts all pantry
+  // stock, including spoiled food. Fresh stock remains a separate measure.
+  if (pantryTotalKcal < 5000) tf = Math.min(1.0, tf * 2);
   return tf;
 }
 
@@ -147,7 +149,7 @@ function installShareCensus(Game) {
       away: !!(v.away && v.away[vid]),
       rhythm: null, kcalPerDay: (person && person.kcalPerDay) || 2000,
       hearthMult: 1,
-      pantryFreshBefore: 0, pantryFreshAfter: 0,
+      pantryFreshBefore: 0, pantryFreshAfter: 0, pantryTotalBefore: 0,
       ate: 0, drew: 0, gave: 0, fasting: false,
       pantryDrawCalled: false, spoiledCalled: false, spoiledTook: 0,
       packMealCalled: false, packTook: 0,
@@ -160,7 +162,9 @@ function installShareCensus(Game) {
     try { rec.rhythm = this.mealRhythm ? this.mealRhythm(vid) : '?'; } catch (e) { rec.rhythm = '?'; }
     try { rec.hearthMult = (this.hearthStretch ? this.hearthStretch() : 1) || 1; } catch (e) {}
     rec.pantryFreshBefore = pantryFreshKcal(this, v);
-    rec.trustFactor = trustFactorOf(rec.trust, rec.pantryFreshBefore);
+    rec.pantryTotalBefore = (v.pantry || []).reduce((total, item) =>
+      total + (item.kcalEach || 0) * (item.units || 1), 0);
+    rec.trustFactor = trustFactorOf(rec.trust, rec.pantryTotalBefore);
     rec.need = mealNeed(rec.kcalPerDay, rec.healthBefore, rec.away, rec.hearthMult);
     const prev = C.current; C.current = rec;
     let r;

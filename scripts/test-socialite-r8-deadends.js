@@ -8,29 +8,13 @@
 //     (docs/CONVERSATIONS.md) says trust is paid "on natural end"; the
 //     engine pays the stipend on ANY end. Record the behavior honestly.
 // Run: node scripts/test-socialite-r8-deadends.js (SEED=... optional)
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
+const K = require('./godpath/lib');
 const SEED = parseInt(process.env.SEED || '20261009', 10);
-function mulberry32(seed) {
-  let s = seed >>> 0;
-  const f = function () { s = (s + 0x6D2B79F5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-  f.reset = (ns) => { s = ns >>> 0; }; return f;
-}
-Math.random = mulberry32(SEED);
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const SKIP = new Set(['src/js/app.js', 'src/js/sprites.js', 'src/js/tile-scenes.js', 'src/js/move-anim.js', 'src/js/drama.js']);
-[...html.matchAll(/src\/js\/[^\/\\\"]+\.js|src\/js\/engine\/[^\/\\\"]+\.js/g)].map(m => m[0]).filter(f => !SKIP.has(f))
-  .forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-delete global.window;
-const Game = globalThis.Scattering.Game;
 const fails = [];
 const check = (name, cond, extra) => { console.log((cond ? 'PASS' : 'FAIL') + ' ' + name + (extra ? ' — ' + extra : '')); if (!cond) fails.push(name); };
 
 (async () => {
-  await Game.init(); Game.debugScenario('day1');
+  const Game = await K.load({seed:SEED}); Game.debugScenario('day1');
   Game.say = () => {}; Game.sysSay = () => {};
   const S = Game.state, v = S.village, me = Game.villagerId;
   const npcs = (v.roster || []).filter(id => id !== me);
@@ -48,6 +32,16 @@ const check = (name, cond, extra) => { console.log((cond ? 'PASS' : 'FAIL') + ' 
   const bad = Game.startConvo('no-such-villager');
   check('H1 failed open charges nothing and returns null', bad === null && S.scholar.kcal === k2, `ret=${bad} delta=${k2 - S.scholar.kcal}`);
 
+  // An offered honest decline is a real exit from a question, not a dead end.
+  Game.startConvo(A);
+  const question = Game.convoGet(A); question.pendingQ = null; question.reactiveQ = null; question.genericQ = {kind:'open'};
+  const decline = Game.buildMenu(A).find(c => c.id === 'gq:open:honest_pass');
+  check('S0 pending open question offers an honest decline', !!decline);
+  const declined = decline && Game.convoTurn(A, decline.id);
+  check('S0 actual decline clears the question and restores an exit',
+    !!declined && !Game.convoGet(A).genericQ && (!Game.convoGet(A).active || Game.buildMenu(A).some(c => c.id === 'leave' || c.id === 'goon')));
+  Game.endConvo(A, 'left');
+
   // ---------- S1: dead-end sweep ----------
   // Walk several conversations; for every menu, try every choice id once in
   // a FRESH conversation state snapshot (we only need handler robustness).
@@ -58,7 +52,11 @@ const check = (name, cond, extra) => { console.log((cond ? 'PASS' : 'FAIL') + ' 
       const menu = Game.buildMenu(A);
       if (!menu.some(c => c.id === 'leave' || c.id === 'goon')) {
         const c = Game.convoGet(A);
-        if (c.active) deadends.push('no leave/goon in menu: ' + menu.map(x => x.id).join(','));
+        const decline = menu.find(c => /^gq:[^:]+:honest_pass$/.test(c.id));
+        if (c.active && decline) {
+          const result = Game.convoTurn(A, decline.id), next = Game.buildMenu(A);
+          if (!result || Game.convoGet(A).genericQ || (Game.convoGet(A).active && !next.some(c => c.id === 'leave' || c.id === 'goon'))) deadends.push('honest decline did not restore an exit');
+        } else if (c.active) deadends.push('no leave/goon or proven decline in menu: ' + menu.map(x => x.id).join(','));
       }
       for (const ch of menu) {
         if (seen.has(ch.id)) continue;

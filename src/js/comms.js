@@ -36,6 +36,7 @@
 //   - switchboardStageTick()
 //   - confrontSwitchboard()
 // rules:
+//   - holder_lifetime: committed death or permanent departure reopens the relay at actual death/removal/load/tick boundaries; temporary travel does not evict a living holder, and the successor must explicitly claim or accept the office (code: retireVacatedSwitchboard)
 //   - four_tiers_honest_costs: runner (time in day-parts + real road danger), signal (loud/indiscriminate), system relay (garbled + favor owed), cry (build-gated, fast, honest). Help is never free and never guaranteed. (code: callForHelp)
 //   - runner_road_danger: the runner can be hurt or die on the road (registerDeath); when the beacon's attention has made the road hot (attracted >= 2) nobody volunteers — said aloud. (code: aidSendRunner)
 //   - signal_is_indiscriminate: the beacon asks every linked village, but hostile known villages see it too (opinion -5, remembered), and the smoke draws company — crisis.attracted grows, arrives as real pack members in the fight (packBonus), and fleeing is blocked while it holds. (code: aidSignalFire)
@@ -313,10 +314,11 @@
       var vn = _vname(this, targetId);
       if (R() < danger) {
         if (R() < 0.4) {
-          var fullnm = rn;
-          try { fullnm = this.displayName(vid); } catch (e) {}
           this.say(rn + ' takes the plea and the road — and the road takes ' + rn + '. They don\'t make it. The message dies with them.');
-          try { if (this.registerDeath) this.registerDeath({ kind: 'person', villagerId: vid, name: fullnm, cause: 'aid-runner' }); } catch (e) {}
+          // Use the ordinary NPC injury/death path: a corpse alone leaves
+          // the runner alive in the roster and available for village duties.
+          var health = (this.state.village.health || {})[vid];
+          this.hurtVillager(vid, health === undefined ? 100 : health, 'aid-runner');
           crisis.calls.push({ tier: 'runner', day: _day(this), part: _part(this), targetId: targetId, runner: vid, result: 'died' });
           return 'died';
         }
@@ -683,6 +685,7 @@
     // officeholder's stage rides the scale ladder, the System collects.
     // Chain-wrapped onto advancePart.
     commsTick() {
+      retireVacatedSwitchboard(this);
       var day = _day(this);
       // RUNNERS
       var runners = this.state.aidRunners || [];
@@ -1097,6 +1100,42 @@
   };
 
   for (var k in methods) { if (methods.hasOwnProperty(k)) G[k] = methods[k]; }
+
+  // The office belongs to a living person. The committed death book includes
+  // day zero; memorial/person flags recover saves from before that book.
+  function retireVacatedSwitchboard(game) {
+    var st = game.state || {}, sw = st.switchboard, v = st.village || {};
+    if (!sw || !sw.holderId) return false;
+    var id = sw.holderId;
+    var seen = Object.prototype.hasOwnProperty.call(v.deathSeen || {}, id);
+    var fallen = (v.fallen || []).some(function (p) { return p.villagerId === id; });
+    var person = game.vpOf ? game.vpOf(id) : ((game.data || {}).villagers || []).find(function (p) { return p.id === id; });
+    var dead = seen || fallen || !!(person && person.id === id && (person.dead || person.alive === false));
+    var departed = !(v.roster || []).includes(id) && (v.exiles || []).some(function (p) { return p.vid === id; });
+    if (!dead && !departed) return false;
+    return game.removeSwitchboard(dead ? 'the holder died' : 'the holder left Haven') === true;
+  }
+  // Settle at real mutation boundaries. Reading office availability stays pure.
+  var _relayDeath = G.registerDeath;
+  if (_relayDeath) G.registerDeath = function () {
+    var r = _relayDeath.apply(this, arguments);
+    try { retireVacatedSwitchboard(this); } catch (e) { console.warn('[comms] relay death cleanup', e); }
+    return r;
+  };
+  var _relayRemove = G.removeVillager;
+  if (_relayRemove) G.removeVillager = function () {
+    var r = _relayRemove.apply(this, arguments);
+    try { retireVacatedSwitchboard(this); } catch (e) { console.warn('[comms] relay departure cleanup', e); }
+    return r;
+  };
+  var _relayLoad = G.load;
+  if (_relayLoad) G.load = function () {
+    var r = _relayLoad.apply(this, arguments);
+    if (r) {
+      try { retireVacatedSwitchboard(this); } catch (e) { console.warn('[comms] relay load cleanup', e); }
+    }
+    return r;
+  };
 
   // commsTick rides advancePart — runners walk, help marches, doors rattle.
   var _advancePartC = G.advancePart;

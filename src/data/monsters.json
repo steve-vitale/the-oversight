@@ -330,7 +330,7 @@
         20,
         30
       ],
-      "telegraph": "It freezes. Like a deer in headlights. Light gathers behind its eyes. It is not frozen. It is aiming.",
+      "telegraph": "Its legs lock. White light wells behind its eyes.",
       "pattern": {
         "type": "beam",
         "length": 9,
@@ -350,7 +350,7 @@
           20,
           30
         ],
-        "telegraph": "It freezes. Like a deer in headlights. Light gathers behind its eyes. It is not frozen. It is aiming.",
+        "telegraph": "Its legs lock. White light wells behind its eyes.",
         "pattern": {
           "type": "beam",
           "length": 9,
@@ -423,7 +423,7 @@
         "It watches you with one dark eye. Ears swiveling. Not afraid yet."
       ],
       "warn": [
-        "It freezes. Like a deer in headlights. Light gathers behind its eyes. It is not frozen. It is aiming."
+        "Its legs lock. White light wells behind its eyes."
       ],
       "fearful": [
         "It startles \u2014 white tail flashing \u2014 and it's gone. Just gone."
@@ -9191,7 +9191,9 @@
         "discharge",
         "spent"
       ],
-      "shortName": "eel"
+      "shortName": "eel",
+      "noticeAudio": "wireCrackle",
+      "aggroAudio": "wireCrackle"
     },
     "fear": "fire",
     "follows": false,
@@ -9328,7 +9330,8 @@
         "squeeze",
         "spent"
       ],
-      "shortName": "anaconda"
+      "shortName": "anaconda",
+      "aggroAudio": "anacondaCoil"
     },
     "fear": "fire",
     "follows": true,
@@ -9476,7 +9479,9 @@
         "charge",
         "rake",
         "spent"
-      ]
+      ],
+      "noticeAudio": "dustboarGrunt",
+      "aggroAudio": "dustboarGrunt"
     },
     "fear": "fire",
     "follows": true,
@@ -9612,7 +9617,9 @@
         "arch",
         "lunge",
         "sweep"
-      ]
+      ],
+      "noticeAudio": "sunbackHiss",
+      "aggroAudio": "sunbackHiss"
     },
     "fear": "fire",
     "follows": true,
@@ -9739,7 +9746,8 @@
         "rush",
         "withdraw"
       ],
-      "shortName": "tiger"
+      "shortName": "tiger",
+      "aggroAudio": "tigerBreath"
     },
     "fear": "fire",
     "fleeAt": 0.25,
@@ -9870,7 +9878,9 @@
         "rush",
         "withdraw"
       ],
-      "shortName": "mugger"
+      "shortName": "mugger",
+      "noticeAudio": "crocJaw",
+      "aggroAudio": "crocJaw"
     },
     "fear": "numbers",
     "fleeAt": 0.2,
@@ -10023,7 +10033,9 @@
         "rake",
         "withdraw"
       ],
-      "shortName": "tiger"
+      "shortName": "tiger",
+      "noticeAudio": "mountainTigerGrowl",
+      "aggroAudio": "mountainTigerGrowl"
     },
     "fear": "loud noise",
     "follows": true,
@@ -10154,7 +10166,9 @@
         "thunder",
         "spent"
       ],
-      "shortName": "tanuki"
+      "shortName": "tanuki",
+      "noticeAudio": "tanukiDrum",
+      "aggroAudio": "tanukiDrum"
     },
     "fear": "silence",
     "follows": true,

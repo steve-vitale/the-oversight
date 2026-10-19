@@ -177,6 +177,8 @@ async function main() {
   console.log('F. villager prize deed');
   const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
   ok(!!vid, 'a villager exists to prize');
+  // Seed occupation XP before measuring the incremental contest award.
+  Game.npcXp(vid);
   const xpBefore = ((Game.state.village.npcXp || {})[vid] || {}).combat || 0;
   Game.villagerGainXP(vid, Game._cxContestDeedTrack({ cat: 'blood' }), 3, 'won The Blood Tithe on camera');
   const xpAfter = ((Game.state.village.npcXp || {})[vid] || {}).combat || 0;

@@ -1,0 +1,210 @@
+# Mobile playtesting before release
+
+Chat/readability smoke (2026-10-19): verify the actual hosted source before
+comparing a local screenshot with Steve's phone. The live7d27851b5 build lacked
+mountPhoneField and the bounded grid CSS; this was also a delivery gap.
+Use native touches to reach a real conversation, browse replies, swipe long
+message text to its final line, open/close history and submit an actual reply.
+Reading/paging must preserve full game state and keep the outer page fixed.
+Repeat with large text: a26px text stress makes font-dependent overflow
+explicit. Keep NPC name in the header once; preserve speaker labels in history
+and for the player's own line. Longer choices get a full-height slot; very
+long labels can scroll internally. Current candidate native receipts and
+refreshed ordinary/Deer frames are release-chat-*.json in dated evidence.
+
+Counter smoke2026-10-19: at Haven's actual fire, prepare separate saved runs
+for cooked meat and for a funded pemmican batch. Use the real Pack counter
+Smoke/mix controls; verify costs, ingredient consumption, resulting shelf
+life/yield and native reload/Continue. Do not install a second fixture into
+an active run before unload: its ordinary autosave can replace that fixture.
+Use independent fresh browser contexts. Current trusted-touch receipts and
+inspected renders at both phone sizes are release-counter-phone-r2.json and
+release-counter-frame-{736,844}-r1.json in dated evidence. Prepared stock and
+technique knowledge do not establish natural availability. Final installed
+and real-device checks still remain.
+
+Fletching smoke (local 2026-10-19): use the actual Bowyer notebook, read it,
+attempt a recipe without materials and verify its refusal. Collect real counter
+materials through Take to pack, then make and equip a bow and five arrows. Read
+the displayed success chance, including modifiers; a learned recipe can still
+fail and spend materials. Retry through ordinary actions with real supplies.
+Reload/Continue must preserve the paid kit. In a wild encounter, use Fight and
+Strike: a shot spends one real round and can wound the foe. With the action
+spent, Wait ends the turn; complete the encounter and Continue again. Keep
+the board/messages/controls in one viewport at both sizes. The prepared
+discovery/supply/encounter witnesses in dated release-fletching-phone/fight
+receipts prove use, not organic frequency or physical-device clearance.
+
+Ability wording (Steve,2026-10-19): inspect the real Actions sheet at both phone
+heights. State the effect, full price and use limit in plain language. Show an
+active bonus and a wound restriction only when relevant. Check the paid result
+against actual HP/calorie changes and reload/Continue. Do not expose internal
+modifier names or unexplained role badges. Keep damage boosts distinct from
+healing. Keep text short enough to read beside the board and controls.
+The automatic shared-kit test-ability-wording checks catalog fallback, the real
+button renderer, healing and Trophy Room's actual build-dependent multiplier.
+Update descriptions and these behavioral checks together when mechanics change;
+refresh source-bound frame and measurement proofs through their normal scripts.
+
+Relay smoke(local2026-10-19): an old dead/permanently departed officeholder
+must be vacant on Continue; explicitly claim through Place. Temporary travel
+must keep the living post. Use Menu/Wait across several parts of the same day,
+then a calendar rollover: one actual -1 grounding charge/service credit per
+person/day. Reload/Continue must preserve the role and receipt. Another same-day
+Wait must not charge or progress again. Repeat390x736/844 with real touch,
+keeping board/messages/controls in one viewport. Prepared network/legacy fixture
+and passive charge-probe details are in dated release-relay-audit-r1.md; they
+do not prove natural regional attainment or substitute for a browser battle death.
+
+Ordinary trade smoke(local2026-10-19): use real finished pack food to buy a
+cart tool, once normally and once with held Haggle. Read the visible quote,
+food taken, tab, delivered item and capped social practice. With an eligible
+resident, answer a real question, explicitly change subject if on a focused
+thread, page through “More things to say” and find their business offer.
+Accept its spoken quote, then leave through the real conversation choice.
+Trade practice and the separate conversation-completion credit must remain
+distinct. Native reload/Continue must preserve paid items, food and both saved
+caps. Interrupting the chat instead intentionally settles its conversation on
+load; inspect trade cap before calling that extra conversation XP a bug.
+Repeat river button quote/payment, all three price labels, and the ordinary
+16-stage frame/Deer journey. Prepared fixture/recipe paths are recorded in
+dated release-commerce-audit-r2.md. This is not natural arrival or T3+ proof.
+
+Food-budget smoke(local2026-10-19): from an ordinary Haven save with scarce
+identified food and a nearby hungry resident, give a meal, then test Until full
+with insufficient stock. Check physical portions and remaining hunger; reload
+and Continue. Host a paid feast from real pantry stock: verify the host reserve
+gain, actual pantry draw, guest hunger after elapsed time, the visible completed
+report and whole public guest names. No redundant text caption may cover that
+reader. Repeat at390x736/844 with trusted touch, then the16-stage frame/Deer
+journey. Prepared repeat recipe: dated release-meal-budget-phone-r4.js; keep
+fixture installation separate from normal save acquisition. Passive action
+boundary observations distinguish eating from later time-driven hunger.
+
+The primary player is using a phone. A narrow viewport with desktop clicks is
+layout evidence only. Node simulations run synchronous combat, omit app.js and
+cannot certify browser turn timing, touch input, rendering or handoffs.
+
+Current field layout: PHONE-FRAME.md. Core play must not scroll at all. Pack,
+Place, extra actions and message history open within the board area; their
+explicit management lists may scroll. The earlier center-swipe Pack repair
+below is historical failure evidence, superseded by the bounded frame.
+Quick/full now require current actual16-stage touch receipts at both phone
+heights through test-phone-frame-proof.js, not just synchronous simulations.
+
+Store controls need a separate real route: a bot can call pantry APIs while
+the phone reader is hidden. For store changes, run the retained
+`release-pantry-flow-phone-r2.js` and `release-cache-refusal-phone-r2.js` in
+evidence/2026-10-19 against the exact candidate at both heights. Generate their
+labelled fixtures with prepare-release-counter-gift-r1.cjs (normal/capped)
+and prepare-release-cache-refusal-r1.cjs, using explicit new output paths.
+Verify Put away, native Continue, All/one-more quantity choice, fixed Pack,
+gift return, settled Continue, later communal withdrawal, real cache burial/
+draw and overweight Dig refusal. Inspect actual food, trust/practice, time,
+visibility and one truthful message area. Never substitute input existence or
+an engine-only green for reachable controls. Private preview scripts are
+historical diagnostics, not the candidate build workflow.
+
+## Browser conditions
+
+Prepared finale replay: evidence/2026-10-18/table-phone-audit-r1.md documents
+the real success and failed-trial/downgrade routes at both phone heights.
+Use its fixture generator and trusted-touch recipe for rare Table scenes.
+Do not substitute forced outcomes for choices or describe these arranged
+day100 saves as natural campaign evidence. The Table reader and ending are
+explicit reading surfaces; verify all choices are reachable and browsing does
+not alter the trial. Core movement/actions continue to require zero scrolling.
+
+Use a fresh isolated origin for the exact candidate. Record commit and file/cache
+hashes; an unchanged PWA version can serve older code. Never clear real player
+storage. Start at 390×844, then a shorter phone size. Enable mobile device metrics,
+touch, coarse pointer and no hover; record them. Use trusted touch-start/end and
+real swipes. Check that controls are visible before tapping. Automatic desktop
+scroll-to-click must not stand in for discovering and reaching a phone control.
+Emulated Chromium does not prove physical iOS/Safari installation, background
+suspension, audio or safe-area behavior. Record real-device results separately.
+
+## Combat is a whole journey
+
+1. Keep the normal character's actual gear, food, HP and learned abilities.
+   Explicitly labelled rare encounters may be placed for reproduction. Do not
+   grant a winning loadout, heal between turns, force results or call player
+   action methods from the console. Separate encounter placement from play.
+2. Use movement, Strike, Study and Wait through repeated replacement controls.
+   Cover zero movement/one action; blocked movement; action before movement;
+   and the target picker when several enemies are present.
+3. Watch every enemy turn at real speed. Show the actor before acting, a visible
+   movement transition, rendered results, then one handoff to the player. Check
+   painted frames, not just events. Same-species fighters need distinct tokens.
+4. Finish fights: win, escape and deliberate loss/succession. An ended engine
+   fight alongside stale "Enemy turn" UI is a failure. Use the successor's
+   controls. Record awkward scrolling and unclear warnings rather than hiding it.
+5. Leave/reload during an enemy announcement, retaining the committed save before
+   normal Continue. The pending enemy acts once, without a repeated round wrap
+   or skipped attack; controls return. Also cover player and terminal turns.
+
+Use passive event/paint/input traces with monotonic timestamps, fighter keys,
+positions, HP, pending actor, running state, rendered controls and visible actor.
+Observers take no actions and consume no RNG. Keep failures, fixture sources,
+final traces and inspected screenshots.
+
+## Repeatable checks
+
+Run `node scripts/godpath/test-mobile-combat-cadence.js` and
+`node scripts/godpath/test-combat-narration.js`, then quick/full. These bounded
+regressions complement the actual browser journey above.
+
+`evidence/2026-10-18/mobile-touch-prepare-r2.js` is a Playwright function for the
+isolated loopback fixture. It imports a recorded ordinary save and places a Deer;
+`mobile-combat-observer-r3.js` is passive. The preparation emits actual swipe/tap
+coordinates and rejects unreachable controls. Adapt the origin to a new isolated
+source before reuse and inspect current UI/source. An intermediate pilot is not
+final-source proof.
+
+For Game changes follow SIMULATING.md and review all 23 metrics. A synchronous
+panel cannot establish the survival effect of browser-only recovery. Preserve
+that limitation; unchanged node outcomes do not clear phone playability.
+
+## Scene boundaries and the garden
+
+A normal dpad crossing must replace the location, grid, Haven panel and actions
+without a reload. Cover hall/grounds too. An engine position alone is not proof
+that the arrival rendered. Live narration must invalidate the walking scene even
+when the log ring has reached its cap.
+
+Use real swipes, wait for inertia to stop and verify the hit target before a tap.
+A tile panel covering the dpad must be dismissed; tapping through it is not a
+movement test. Do not automatically repeat an apparently missed costly action.
+
+`evidence/2026-10-18/garden-phone-replay-r3.js` is a verified prepared regression:
+it imports the unedited committed save from ordinary play, returns to Haven,
+creates plot2 and sows two of the three actually acquired Cattail units. It runs
+against a disposable loopback origin; adapt that origin and inspect current UI
+before reuse. The older r1 fixed-forage recipe found no Forage context at its fixed spot
+and r2 exposed stale arrival UI. Keep both as failures, not green smoke scripts.
+Natural forage/identification/sowing, saved plot persistence and the limits are in
+`garden-opening-audit-r1.md` alongside it. Replaying acquired seed does not prove
+that every opening has that seed opportunity.
+
+## Pack, succession and installed data
+
+Swipe through the center of narration to discover Pack. A non-scrollable child
+must not trap the whole page. Drink once while thirsty, then again while full;
+attempt a donation away from the hall, then a valid one inside. Check the actual
+message, physical bottle/food and time/pantry changes. Command wrappers returning
+true mean a command was handled, not that it succeeded. Pack feedback now uses
+the emitted outcome rather than a predetermined success label.
+
+After a deliberate combat death, check the actual successor, use their controls,
+save and Continue. A local animal must remain at its original node, with no alias
+carried into the successor's Haven hall. The repeatable prepared
+succession-phone-replay-r1.js imports the actual interrupted Deer save and uses
+touch Waits until death; it never edits health or forces succession.
+
+Follow PWA-RELEASE-CHECKLIST.md for a primed-cache installed update, cold offline
+Continue and rollback. Compare actual cached JSON contents as well as scripts,
+then confirm the boot requested the same versioned data keys. The failed
+installed-update-*-r1 evidence contains22 old JSON files despite a new cache
+name. Final repaired phone-emulation receipts are installed-data-*-r3, with
+hash verification and explicit saved-run differences retained. Physical device
+results remain a separate open gate.

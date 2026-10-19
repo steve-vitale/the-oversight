@@ -778,7 +778,7 @@
       const v = this.state.village;
       const s = this.state.scholar;
       const px = s.mx ?? 4, py = s.my ?? 4;
-      const roster = (v.roster || []).filter(rid => rid !== this.villagerId);
+      const roster = (v.roster || []).filter(rid => rid !== this.villagerId && ((v.health || {})[rid] === undefined || Number(v.health[rid]) > 0));
       if (!roster.length) return null;
       const trustOf = (id) => ((v.trust || {})[id]) || 10;
       // Attackers: lowest trust first, bold temperaments lead. Cap at 4 — a mob, not an army.
@@ -825,27 +825,18 @@
         alive: true, fled: false, moveLeft: 0, acted: false, aimed: false,
       }];
       for (const vid of attackers) {
-        const spot = freeSpotNear(px + 2, py);
         const temp = this.npcTemper(vid);
-        fighters.push({
-          key: 'h_' + vid, kind: 'hostile', villagerId: vid,
-          name: this.displayName(vid), emoji: '🔪',
-          hp: 30, maxHp: 30, speed: this.villagerSpeed(vid), mx: spot.x, my: spot.y,
-          alive: true, fled: false, moveLeft: 0, acted: false,
-          ai: temp === 'bold' ? 'brave' : 'cautious',
-          uprising: true,
+        const person = this.tbHumanFighter(vid, 'hostile', freeSpotNear(px + 2, py), {
+          ai: temp === 'bold' ? 'brave' : 'cautious', uprising: true,
         });
+        if (person) fighters.push(person);
       }
       for (const vid of defenders) {
-        const spot = freeSpotNear(px - 1, py + 1);
-        fighters.push({
-          key: 'v_' + vid, kind: 'villager', villagerId: vid,
-          name: this.displayName(vid), emoji: '🧍',
-          hp: 30, maxHp: 30, speed: this.villagerSpeed(vid), mx: spot.x, my: spot.y,
-          alive: true, fled: false,
-          ai: 'helpful', helped: false,
-        });
+        const person = this.tbHumanFighter(vid, 'villager', freeSpotNear(px - 1, py + 1), { ai: 'helpful' });
+        if (person) fighters.push(person);
       }
+      this.tbPlaceHumans(fighters, 8);
+      if (!fighters.some(p => p.kind === 'hostile')) return null;
       // FLAG HYGIENE (flesh-out loop 2026-10-07): this fight bypasses
       // startCombat — reset per-fight combat flags or the last fight's
       // rage/trade/debt would leak in for free.

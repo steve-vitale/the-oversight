@@ -67,7 +67,10 @@ const recipe = (id) => Game.data.recipes.find(r => r.id === id);
       { material: 'stick', units: 2, name: 'Stick', kg: 0.3 });
     Game.log = [];
     const before = (s.tools || []).length;
-    Game.craft('snare');
+    // Prepared favorable draw: this proof checks the successful tool's uses,
+    // not the independent85% crafting success-rate contract.
+    const random = Math.random; Math.random = () => 0;
+    try { Game.craft('snare'); } finally { Math.random = random; }
     const tool = (s.tools || [])[before];
     const r = recipe('snare');
     check('crafted snare: tool stamped with recipe uses (10)', tool && tool.uses === r.uses,

@@ -2,7 +2,7 @@
 // Standard driver, one harness per child. Observation never calls game helpers.
 'use strict';
 const fs = require('fs'), path = require('path'), cp = require('child_process'), crypto = require('crypto'), zlib = require('zlib');
-const score = require('./lib/balance-scorecard'), gear = require('./gear-usage-audit');
+const score = require('./lib/balance-scorecard'), gear = require('./gear-usage-audit'), cohorts = require('./lib/balance-cohorts');
 const arg = (name, fallback) => { const i = process.argv.indexOf('--' + name); return i < 0 ? fallback : process.argv[i + 1]; };
 const digest = x => crypto.createHash('sha256').update(x).digest('hex');
 const read = file => JSON.parse(file.endsWith('.gz') ? zlib.gunzipSync(fs.readFileSync(file)) : fs.readFileSync(file, 'utf8'));
@@ -97,9 +97,12 @@ function install(G) {
     const ratio = (n, d) => d > 0 ? n / d : null;
     const distress = (field, threshold) => { const known = sampled.filter(d => Number.isFinite(d[field])); return ratio(known.filter(d => d[field] < threshold).length, known.length); };
     const good = census.grants.filter(g => g.who === 'player' && g.gear && g.tier >= 3);
-    const kcal = food.reduce((n, d) => n + d.kcal, 0), nourishment = food.reduce((n, d) => n + d.nourishment, 0);
+    // Day receipts are an eight-day diagnostic ring. Use the versioned
+    // cumulative book for the metric so delayed sampling cannot lose meals.
+    const intakeCoverage = intakeSnapshot(G.state.village);
+    const kcal = intakeCoverage.totals?.kcal || 0, nourishment = intakeCoverage.totals?.nourishment || 0;
     const survival = day => firstDeath != null && firstDeath <= day ? 0 : G.state.scholar.day > day ? 1 : null;
-    return { gear: census, observerErrors: errors, samples: sampled, intake: food, events, endings,
+    return { gear: census, observerErrors: errors, samples: sampled, intake: food, intakeCoverage, events, endings,
       npcExposure: { schemaVersion: 1, identityRule: 'known-living-resident-not-current-bearer', sampledIdentities: [...npcIds].sort(),
         unknownIdentities: [...unknownNpcIds].sort(), classIdentities: [...npcClassIds].filter(id => npcIds.has(id)).sort(), days: [...npcDays.values()] },
       classes: Object.fromEntries(Object.entries(classes).map(([r, ids]) => [r, [...ids].sort()])), gods: Object.fromEntries(Object.entries(gods).map(([r, ids]) => [r, [...ids].sort()])),
@@ -116,9 +119,29 @@ function install(G) {
   }
   return { sample, finish, errors };
 }
+function intakeSnapshot(v) {
+  const t=v.harvestIntakeTotals;
+  if (!t) return { schemaVersion:1,status:'unknown',reason:'no-versioned-producer',totals:null };
+  const validPair=p=>p && Number.isFinite(p.kcal) && p.kcal>=0 && Number.isFinite(p.nourishment) && p.nourishment>=0;
+  if (t.version!==1 || !validPair(t) || !Number.isSafeInteger(t.records) || t.records<1 ||
+      !Number.isFinite(t.startedDay) || ['roles','actors','routes'].some(k=>!t[k] || typeof t[k]!=='object' ||
+        Object.values(t[k]).some(p=>!validPair(p))))
+    return { schemaVersion:1,status:'unknown',reason:'invalid-or-unsupported-producer',totals:null };
+  for (const field of ['roles','actors','routes']) for (const key of ['kcal','nourishment']) {
+    const sum=Object.values(t[field]).reduce((n,p)=>n+p[key],0);
+    if (Math.abs(sum-t[key])>1e-6*Math.max(1,t[key]))
+      return {schemaVersion:1,status:'unknown',reason:'inconsistent-producer-totals',totals:null};
+  }
+  return {schemaVersion:1,status:'versioned-cumulative',scope:'instrumented meal routes since first recorded meal; not prior-save history or all reserve changes',
+    totals:JSON.parse(JSON.stringify(t))};
+}
 async function child() {
   const root = path.resolve(arg('root', path.join(__dirname, '..'))), policy = arg('policy', 'capable'), observe = arg('observe', '1') !== '0';
   const H = require(path.join(root, 'scripts/sim-harness')), { runComparison, POLICY_REGISTRY: registry } = require(path.join(root, 'scripts/sweep-compare'));
+  const capabilities=require(path.join(root,'scripts/sweep-compare')).comparisonCapabilities;
+  const occupation = arg('occupation', null);
+  if (occupation != null && !capabilities?.occupation) throw Error('Target driver does not declare occupation selection support');
+  if ((arg('region',null)||arg('origin','Columbus, Ohio')!=='Columbus, Ohio') && (!capabilities||!capabilities.region||!capabilities.origin)) throw Error('Target driver does not declare explicit origin/region support');
   const base = registry[policy]; if (!base) throw new Error('Unknown policy ' + policy);
   let G, observer; const warnings = [], warn = console.warn;
   console.warn = (...xs) => { warnings.push(xs.map(String).join(' ')); return warn.apply(console, xs); };
@@ -131,8 +154,13 @@ async function child() {
     },
   });
   let report;
-  try { report = await H.quietLog(() => runComparison({ seeds: [Number(arg('seed', 7))], policies: [policy], days: Number(arg('days', 150)), ...(arg('region', null) ? { region: arg('region') } : {}), origin: arg('origin', 'Columbus, Ohio') })); }
+  try { report = await H.quietLog(() => runComparison({ seeds: [Number(arg('seed', 7))], policies: [policy], days: Number(arg('days', 150)), ...(arg('region', null) ? { region: arg('region') } : {}), ...(occupation != null ? { occupation } : {}), origin: arg('origin', 'Columbus, Ohio') })); }
   finally { registry[policy] = base; console.warn = warn; }
+  if (report.exclusions?.length) {
+    const row = report.exclusions[0];
+    process.stdout.write('@@BALANCE@@' + JSON.stringify({ row, excluded: true, stateHashKind: 'selection', stateHash: digest(JSON.stringify(row.selection)), warnings }) + '\n');
+    return;
+  }
   const row = report.runs[0], beforeSampling = gear.gameplayHash(G.state), observed = observer ? observer.finish(row) : null;
   const stateHash = gear.gameplayHash(G.state);
   if (beforeSampling !== stateHash) throw new Error('Final observation mutated gameplay state');
@@ -142,13 +170,15 @@ async function run() {
   const root = path.resolve(arg('root', path.join(__dirname, '..'))), out = arg('out', null);
   if (!out) throw new Error('--out <panel-directory> required');
   const flagNames = 'BEAM_FATIGUE BELONG_V3 CAMPAIGN_LASTDAY CAPABLE_AID_CALL CAPABLE_BEAM_FLEE CAPABLE_BEAM_RESIST_MIN CAPABLE_CONTEST_LETHAL CAPABLE_DEER_FLEE CAPABLE_DRAW_DECIDE CAPABLE_GREEDY CAPABLE_GREEDY_LASTDAY CAPABLE_GREEDY_MAXTIER CAPABLE_GREEDY_RECKLESS CAPABLE_HAVEN_FLEE CAPABLE_HUNT CAPABLE_OFF CAPABLE_READ_STAKES CAPABLE_TREAT_LOCKJAW COMPETENT_AID COMPETENT_CLEAN_CATCH COMPETENT_COOK_HAUL COMPETENT_CRAFT_ARMOR COMPETENT_DETECTIVE COMPETENT_DIRECTIONAL_FLEE COMPETENT_DPS_RACE COMPETENT_FEAST COMPETENT_FIGHT_ASSESS COMPETENT_KEEP_KNIFE COMPETENT_KITCHEN COMPETENT_ROUTE_AROUND COMPETENT_SEEK_FIGHTS COMPETENT_SURPLUS_FEAST COMPETENT_TALK COMPETENT_TALK_SKILLS COMPETENT_TRADE_RESERVE COMPETENT_TRAPLINE_SET COMPETENT_TRAUMA_RELIEF COMPETENT_TREAT_SICK COMPETENT_W2DISENGAGE COURTKILL EAT_FRAC FEASTSCALE_R13 FIFTHLINK FOCUSGROUP_CLOSE FOODLEVER_R5 FORCE_OCC FOURTHLINK GORGEDRIVE HIDE_R15 KILLROAD_COURT LOOT_ALL MEATSEEK_TEST MECHANIC POINTER_GATED SELFEED_DEBUG TALETELL_OFF TELEMETRY_FULL TRADE_POOL_GROWTH WAVE_EXTRA_CAP WHIFFGUARD WINSEEK_R8'.split(' ');
+  const sources = manifest(root);
   const options = { seeds: arg('seeds', '') ? arg('seeds').split(',').map(Number) : require('./sweep-dashboard').seedList(Number(arg('n', 16))),
-    policies: arg('policies', 'capable,maker,merchant,caregiver').split(','), days: Number(arg('days', 150)), region: arg('region', null), origin: arg('origin', 'Columbus, Ohio'),
-    nodeVersion: process.version, flags: Object.fromEntries(flagNames.map(k => [k, process.env[k] ?? null])) };
+    policies: arg('policies', 'capable,risk-aware,socialite,winseek').split(','), days: Number(arg('days', 150)), region: arg('region', null), origin: arg('origin', 'Columbus, Ohio'),
+    nodeVersion: process.version, flags: require('./lib/simulation-flags').snapshot(root,sources,flagNames) };
+  if (arg('occupation', null) != null) options.occupation = arg('occupation', null);
   if (!options.seeds.length || options.seeds.some(s => !Number.isSafeInteger(s)) || new Set(options.seeds).size !== options.seeds.length || new Set(options.policies).size !== options.policies.length || !Number.isSafeInteger(options.days) || options.days < 1) throw new Error('Invalid/duplicate cases');
   if (process.env.REGION || process.env.ORIGIN || process.env.SEEDS || process.env.POLICIES || process.env.DAYS) throw new Error('Use explicit panel options; unset legacy sweep environment overrides');
-  const observerHash = () => digest([__filename, path.join(__dirname, 'gear-usage-audit.js'), path.join(__dirname, 'lib/balance-scorecard.js')].map(f => fs.readFileSync(f)).join('\n'));
-  const sources = manifest(root), observerDigest = observerHash();
+  const observerHash = () => digest([__filename, path.join(__dirname, 'gear-usage-audit.js'), path.join(__dirname, 'lib/balance-scorecard.js'), path.join(__dirname,'lib/simulation-flags.js'), path.join(__dirname,'lib/balance-cohorts.js')].map(f => fs.readFileSync(f)).join('\n'));
+  const observerDigest = observerHash();
   const contractDigest = digest(fs.readFileSync(path.join(__dirname, 'balance-metrics.json'))), sourceDigest = digest(JSON.stringify(sources));
   const head = () => sourceHead(root);
   const sourceHeadStart = head(), proofSeeds = arg('proof-seeds', String(options.seeds[0])).split(',').map(Number);
@@ -163,6 +193,7 @@ async function run() {
       if (fs.existsSync(file)) { const value = read(file); if (value.key !== key || JSON.stringify(value.identity) !== JSON.stringify(identity) || value.resultDigest !== digest(JSON.stringify(value.result)) || value.result.row.policy !== job.policy || value.result.row.seed !== job.seed) throw new Error('Invalid cached case ' + key); results.push(value); reused++; continue; }
       const result = await new Promise((resolve, reject) => {
         const args = [__filename, '--child', '--root', root, '--policy', job.policy, '--seed', String(job.seed), '--observe', job.observe, '--days', String(options.days), '--origin', options.origin, ...(options.region ? ['--region', options.region] : [])];
+        if (options.occupation != null) args.push('--occupation', options.occupation);
         const p = cp.spawn(process.execPath, args, { cwd: root, env: process.env }); let stdout = '', stderr = '';
         p.stdout.on('data', x => { stdout += x; }); p.stderr.on('data', x => { stderr += x; }); p.on('error', reject);
         p.on('close', code => { try { if (code) throw new Error(stderr || stdout.slice(-2000)); resolve(JSON.parse(stdout.split('@@BALANCE@@').pop())); } catch (e) { reject(e); } });
@@ -172,16 +203,18 @@ async function run() {
   }
   const parallel = Number(arg('par', 4)); if (!Number.isSafeInteger(parallel) || parallel < 1 || parallel > 32) throw new Error('--par must be 1..32');
   await Promise.all(Array.from({ length: parallel }, worker));
-  const neutrality = options.policies.flatMap(policy => proofSeeds.map(seed => {
+  const proofs = options.policies.flatMap(policy => proofSeeds.map(seed => {
     const find = observe => results.find(x => x.identity.policy === policy && x.identity.seed === seed && x.identity.observe === observe).result;
-    const on = find('1'), off = find('0'); return { policy, seed, match: on.stateHash === off.stateHash && JSON.stringify(on.row) === JSON.stringify(off.row), warnings: off.warnings.length };
+    const on = find('1'), off = find('0'); return { policy, seed, match: on.excluded === off.excluded && on.stateHash === off.stateHash && JSON.stringify(on.row) === JSON.stringify(off.row), warnings: off.warnings.length, ...(on.excluded ? { kind: 'selection' } : {}) };
   }));
-  const rows = results.filter(x => x.identity.observe === '1').map(x => x.result).sort((a, b) => a.row.policy.localeCompare(b.row.policy) || a.row.seed - b.row.seed);
+  const observed = results.filter(x => x.identity.observe === '1').map(x => x.result).sort((a, b) => a.row.policy.localeCompare(b.row.policy) || a.row.seed - b.row.seed);
+  const rows = observed.filter(r => !r.excluded), exclusions = observed.filter(r => r.excluded), neutrality = proofs.filter(p => p.kind !== 'selection');
   const sourcesStable = JSON.stringify(sources) === JSON.stringify(manifest(root)) && observerDigest === observerHash() && contractDigest === digest(fs.readFileSync(path.join(__dirname, 'balance-metrics.json')));
-  const panel = { schemaVersion: 1, sourceHeadStart, sourceHeadEnd: head(), sourceDigest, observerDigest, contractDigest, sources, options, validity: { sourcesStable, neutrality }, reused, rows };
+  const panel = { schemaVersion: 1, flagCoverage:{discovered:require('./lib/simulation-flags').discover(root,sources,flagNames),rule:'Legacy flags retain explicit null defaults; additional source-declared flags enter cache inputs when set. Discovery names remain source-bound metadata, not a changed simulation setting.'}, sourceHeadStart, sourceHeadEnd: head(), sourceDigest, observerDigest, contractDigest, sources, options, validity: { sourcesStable, neutrality }, reused, rows };
+  if (options.occupation != null) { panel.exclusions = exclusions; panel.validity.selection = proofs.filter(p => p.kind === 'selection'); }
   fs.writeFileSync(path.join(out, 'panel.json.gz'), zlib.gzipSync(JSON.stringify(panel) + '\n'));
   console.log(`\nSaved ${out}; ${rows.length} cases, ${reused} cached jobs.`);
-  if (!sourcesStable || neutrality.some(p => !p.match || p.warnings) || rows.some(r => r.warnings.length || r.observerErrors.length || r.gear.errors.length)) throw new Error('Invalid panel; inspect retained results');
+  if (!sourcesStable || proofs.some(p => !p.match || p.warnings) || cohorts.validate(panel).length || rows.some(r => r.warnings.length || r.observerErrors.length || r.gear.errors.length)) throw new Error('Invalid panel; inspect retained results: ' + cohorts.validate(panel).join('; '));
 }
 async function main() {
   if (process.argv.includes('--child')) return child();
@@ -198,5 +231,5 @@ function sourceHead(root) {
   if (!fs.existsSync(path.join(root, '.git'))) return null;
   return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 }
-module.exports = { install, manifest, sourceHead };
+module.exports = { install, manifest, sourceHead, intakeSnapshot };
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });

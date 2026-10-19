@@ -21,7 +21,7 @@
 //
 // Usage: node scripts/test-ending-screen-20261012.js
 'use strict';
-const fs = require('fs');
+const fs = require('./lib/source-text');
 const path = require('path');
 const { loadGame, setupGame, runDays, mulberry32 } = require('./sim-harness');
 const { competent } = require('./policies/competent');

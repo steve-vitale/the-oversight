@@ -40,6 +40,14 @@
 // METRIC REVIEW: section printed at the end of the run.
 // SMOKE=1: PART A (RED) + PART B (GREEN census+seeding) + PART C (sense print).
 'use strict';
+// Historical RED/ARMED experiment: Part E rewrites data files while it runs.
+// Keep this out of active worktrees and concurrent checks. Standing current
+// coverage lives in godpath/test-occupation-source-parity.js. Reproduction
+// requires its declared historical anchors in a disposable checkout.
+if (process.env.SMOKE !== '1' && !process.argv.includes('--allow-historical-source-swap')) {
+  throw new Error('Historical source-swapping experiment: use a disposable checkout at its declared anchors and --allow-historical-source-swap; current read-only proof is scripts/godpath/test-occupation-source-parity.js.');
+}
+
 process.env.FEASTSCALE_R13 = '1';
 process.env.SEATDRIVE = '0';
 const fs = require('fs');

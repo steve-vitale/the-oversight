@@ -59,9 +59,19 @@ function ok(name, cond) {
     // about the topic menu, so clear the opener and look at the topics.
     const c2 = Game.convoGet(testVid2);
     c2.genericQ = null; c2.reactiveQ = null; c2.pendingQ = null; c2.thread = null;
-    const choices = Game.convoChoices(testVid2);
-    const hasPersonal = choices.some(ch => ch.id === 'ask:personal');
-    ok('personal topic in conversation choices', hasPersonal);
+    let choices = Game.convoChoices(testVid2), hasPersonal = choices.some(ch => ch.id === 'ask:personal');
+    const seenPages=new Set();
+    while(!hasPersonal && choices.some(ch=>ch.id==='menu:more')) {
+      const key=choices.map(ch=>ch.id).join(',');if(seenPages.has(key))break;seenPages.add(key);
+      Game.convoTurn(testVid2,'menu:more');choices=Game.convoChoices(testVid2);
+      hasPersonal=choices.some(ch=>ch.id==='ask:personal');
+    }
+    ok('personal topic reachable through offered conversation choices', hasPersonal);
+    if(hasPersonal) {
+      const response=Game.convoTurn(testVid2,'ask:personal');
+      ok('offered personal topic responds after page navigation', !!response && !response.ended && typeof response.line==='string' && response.line.length>0);
+      ok('personal topic selection enters its actual thread', Game.convoGet(testVid2).thread==='personal');
+    }
     if (v.convos && v.convos[testVid2]) v.convos[testVid2].active = false;
   } catch (e) { ok('personal topic in choices: no crash', false); }
 

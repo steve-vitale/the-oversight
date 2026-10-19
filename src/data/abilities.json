@@ -102,7 +102,7 @@
     "alsoPath": "explorer"
   },
   {
-    "description": "One shot. You don't take the shot unless it's the shot.",
+    "description": "Spend a combat turn aiming: your next shot deals 2.5 times normal damage and cannot miss. Enemies can hit you more easily while you aim.",
     "id": "patient_aim",
     "role": "enabler",
     "slotRole": "nuke",
@@ -212,7 +212,7 @@
     "skillId": "preserve_food"
   },
   {
-    "description": "Your gut handles what it shouldn't. A useful lie your body tells itself.",
+    "description": "Reduce your risk of food poisoning. Push Through gives temporary protection from unsafe food.",
     "id": "iron_stomach",
     "role": "support",
     "slotRole": "sustain",
@@ -322,7 +322,7 @@
       "Feast Engine: the harvest becomes the weapon."
     ],
     "name": "Green Thumb, Literally",
-    "description": "Your thumb is green. Not metaphorically. Foraging yields +50%, AND you can ask a plant what's nearby (once/day: reveals this tile's forage table).",
+    "description": "Gather 50% more food from plants. Ask the Plants reveals what grows in the area, once a day.",
     "flavor": "The plants lean toward you. They're gossiping. You're learning to listen.",
     "pool": "system",
     "tier": "utility",
@@ -345,7 +345,7 @@
           "kcal": 20
         },
         "context": "field",
-        "desc": "Ask what's growing here. Once/day: reveals this tile's forage table."
+        "desc": "Reveal which plants grow in this area. Once a day."
       }
     ],
     "lane": "magic",
@@ -701,11 +701,11 @@
         "name": "Refuse",
         "cost": {},
         "automatic": true,
-        "effect": "Once per day, when you would die: you don't. Drop to 1 HP; brought up to at least 500 kcal from sheer spite when death came violently \u2014 starvation and sickness just leave you at 1 HP, still hungry. Automatic trigger."
+        "effect": "Automatically survive a fatal injury with 1 HP, once a day. After violent injury, your food reserve rises to at least 500 kcal. Hunger and sickness give no food."
       }
     ],
     "name": "Second Wind",
-    "description": "Once per day, when you'd die, you don't. (1 HP \u2014 plus 500 kcal of sheer spite when death came violently. Starvation and sickness just leave you at 1 HP, still hungry.)",
+    "description": "Automatically survive a fatal injury with 1 HP, once a day. After violent injury, your food reserve rises to at least 500 kcal. Hunger and sickness give no food.",
     "flavor": "You were almost gone! Then you WEREN'T! How?! We want to know!",
     "pool": "system",
     "tier": "overpowered",
@@ -948,7 +948,7 @@
       "Iron Gut: waste nothing. Not even yourself."
     ],
     "name": "Blood Price",
-    "description": "Spend 10 HP to gain 500 kcal. Your body eats itself. Twice per day part. The cut is missing mass \u2014 max HP drops while it\u2019s open, knits ~10 a night, and the body refuses past 50.",
+    "description": "Trade 10 HP for 500 kcal. Each use also lowers your maximum HP until the wound heals. Recover 10 lost maximum HP each night. Up to two uses each part of the day; unavailable with 50 HP of open wounds.",
     "flavor": "You burn the red! The red becomes... lunch?! We are CONCERNED! (We checked the math twice. The math is as confused as we are.)",
     "pool": "system",
     "tier": "risky",
@@ -986,11 +986,11 @@
           "turn": true,
           "kcal": 60
         },
-        "effect": "Your next 3 strikes deal +100% damage. The red comes down \u2014 hold on."
+        "effect": "Your next three strikes deal double damage."
       }
     ],
     "name": "Berserker Rage",
-    "description": "Your next 3 strikes deal +100% damage. The red comes down \u2014 hold on.",
+    "description": "Your next three strikes deal double damage.",
     "flavor": "ANGRY! SO ANGRY! Three strikes of pure red! Hit the thing! THE THING! (You know the one. The one trying to kill you.)",
     "pool": "system",
     "tier": "risky",
@@ -1068,7 +1068,7 @@
       "Shoulder Check: shove the stunned."
     ],
     "name": "Scream Cheese",
-    "description": "You can scream so loud it curdles milk (and stuns monsters for 1 round). 1/day.",
+    "description": "Stun all monsters for one round. Once a day.",
     "flavor": "AAAAA! The milk is cheese now! The monsters are dizzy! Your throat hurts! Worth it!",
     "pool": "system",
     "tier": "wacky",
@@ -1224,11 +1224,11 @@
         "cost": {
           "time_min": 10
         },
-        "effect": "Make your point without raising a hand. They'll remember the look on your face \u2014 and not fondly. (No mechanical edge yet \u2014 the weight is social.)"
+        "effect": "Make a threatening gesture. Changes no trust or chance of success."
       }
     ],
     "name": "Dread",
-    "description": "Villagers and monsters are uneasy around you. -10 trust, but monsters hesitate (+1 round before attacking).",
+    "description": "Gain 10% less trust. Monsters hesitate for one round before attacking.",
     "flavor": "You are the scary! We are scared! The monsters are scared! Everyone is scared! ...fun!",
     "pool": "system",
     "tier": "vile",
@@ -1596,7 +1596,7 @@
     "role": "enabler",
     "slotRole": "wildcard",
     "name": "Mediator",
-    "description": "You can resolve villager disputes (drama events) with a talk check. Peace is a skill.",
+    "description": "Help resolve disputes between villagers through conversation. Your mediation skill improves the chance of success.",
     "flavor": "You make the angry people UN-angry! With WORDS! We don't understand! But WOW!",
     "pool": "system",
     "tier": "social",
@@ -1629,7 +1629,7 @@
         "cost": {
           "time_min": 30
         },
-        "effect": "Resolve a villager dispute with a talk check. Peace is a skill. Bonus from drama.resolve_bonus."
+        "effect": "Try to resolve a villager dispute through conversation, with your mediation bonus."
       }
     ],
     "deepening": {
@@ -1976,11 +1976,12 @@
   },
   {
     "id": "field_medicine",
+    "legacyCost": { "kcal": 100 },
     "role": "support",
     "slotRole": "sustain",
     "name": "Field Medicine",
     "pool": "care",
-    "description": "Clean wounds, poultice infections, set bones in the field. Heal 20 HP (once per day part). Treat wound sickness; deepened, you can work on others and read infection unnamed. Real wounds only \u2014 Blood Price cuts are missing mass and knit ~10 a night.",
+    "description": "Treat wounds to restore up to 20 HP, once each part of the day. Higher levels let you treat other people and infections.",
     "modifiers": [],
     "unlock": {
       "type": "granted"
@@ -2004,7 +2005,7 @@
     "slotRole": "sustain",
     "name": "Herbal Remedy",
     "pool": "care",
-    "description": "You know which plants draw fever out. Treat the sick \u2014 cure some sicknesses outright, ease others; the proud ones need a name first. Master it and they won't.",
+    "description": "Use herbs to cure or ease sickness. Some infections need a diagnosis first. Once a day.",
     "modifiers": [],
     "unlock": {
       "type": "granted"
@@ -2026,7 +2027,7 @@
     "slotRole": "sustain",
     "name": "Purify",
     "pool": "care",
-    "description": "The System\u2019s clean touch, borrowed: poison unravels at your gesture. Not charcoal and time \u2014 intention, from something that never needed to eat.",
+    "description": "Use magic to remove poison from yourself. Once a day.",
     "modifiers": [],
     "unlock": {
       "type": "system_offer"
@@ -2635,7 +2636,7 @@
     "role": "support",
     "slotRole": "sustain",
     "name": "Unbreakable",
-    "description": "You don't go down. Not today. Not ever, if you have anything to say about it.",
+    "description": "Brace to reduce the next hit by 60%, or Shake Off to remove stun, slow and bleeding.",
     "flavor": "The System filed a complaint about your pain receptors. You filed it under 'suggestions.'",
     "pool": "combat",
     "tier": "rare",
@@ -2682,7 +2683,7 @@
       "Crowd Favorite: the audience chants with you."
     ],
     "name": "War Cry",
-    "description": "A sound from somewhere older than language. Things that hear it reconsider.",
+    "description": "Frighten enemies in the fight, or challenge a villager to a nonlethal bout.",
     "flavor": "It's not the volume. It's the promise.",
     "pool": "combat",
     "tier": "uncommon",
@@ -2736,7 +2737,7 @@
       "Dead Aim: patience, then thunder, then THIS."
     ],
     "name": "Haymaker",
-    "description": "One big swing. Everything you have, all at once. Subtlety is for people with time.",
+    "description": "Prepare a swing for 2.5 times normal damage, with 30% less accuracy. Missing leaves you easier to hit.",
     "flavor": "The windup is the telegraph. The landing is the punctuation.",
     "pool": "combat",
     "tier": "common",
@@ -3120,7 +3121,7 @@
     "role": "enabler",
     "slotRole": "nuke",
     "name": "Static Toss",
-    "description": "You ball up the static in your palm and THROW it. It was going to go somewhere anyway. (Ranged: 3 tiles, energy damage, once per fight.)",
+    "description": "Throw energy at a monster up to three tiles away. Once per fight.",
     "flavor": "The System applauds your commitment to throwing problems at other problems.",
     "pool": "system",
     "unlock": {
@@ -3137,7 +3138,7 @@
         },
         "context": "combat",
         "target": "monster",
-        "desc": "Hurl static 3 tiles for [20,30] energy damage."
+        "desc": "Hit a monster up to three tiles away for 20–30 energy damage. Once per fight."
       }
     ],
     "deepening": {
@@ -3153,7 +3154,7 @@
     "role": "enabler",
     "slotRole": "nuke",
     "name": "Screaming Cheese Wheel",
-    "description": "You hurl a wheel of screaming cheese. It homes in on the loudest thing in the fight \u2014 usually the monster. (Ranged: can't miss, 1/day.)",
+    "description": "Throw a homing cheese wheel that cannot miss. Once a day.",
     "flavor": "The cheese screams the whole way there. It has range anxiety.",
     "pool": "system",
     "unlock": {
@@ -3170,7 +3171,7 @@
         },
         "context": "combat",
         "target": "monster",
-        "desc": "Homing cheese wheel: [25,35] damage, can't miss, 1/day."
+        "desc": "Hit a monster for 25–35 damage. Cannot miss. Once a day."
       }
     ],
     "deepening": {
@@ -3186,7 +3187,7 @@
     "role": "enabler",
     "slotRole": "nuke",
     "name": "Bird Strike",
-    "description": "You point at the sky. The birds have been waiting for this. (Ranged: birds dive-bomb a monster for 3 rounds.)",
+    "description": "Call birds to attack a monster for three rounds. Their attacks can blind it.",
     "flavor": "The birds were already circling. They just needed permission.",
     "pool": "system",
     "unlock": {
@@ -3203,7 +3204,7 @@
         },
         "context": "combat",
         "target": "monster",
-        "desc": "Birds harry a monster for 3 rounds: [8,12]/round, 20% blind chance."
+        "desc": "Birds attack a monster for three rounds: 8–12 damage each round, with a 20% chance to blind."
       }
     ],
     "deepening": {
@@ -3219,7 +3220,7 @@
     "role": "enabler",
     "slotRole": "control",
     "name": "Tripwire",
-    "description": "You string a wire at ankle height. The next monster that moves eats dirt \u2014 prone, stunned, and embarrassed. (Sets up the party.)",
+    "description": "Set a tripwire. The next monster that moves is stunned and loses its next movement.",
     "flavor": "The wire is almost invisible. The monster's dignity is not.",
     "pool": "system",
     "unlock": {
@@ -3239,7 +3240,7 @@
           "kcal": 40
         },
         "context": "combat",
-        "desc": "Next monster that moves: prone (stun 1 + no move next turn)."
+        "desc": "The next monster that moves is stunned for one round and cannot move on its next turn."
       }
     ],
     "deepening": {
@@ -3253,7 +3254,7 @@
     "role": "enabler",
     "slotRole": "control",
     "name": "Turncoat",
-    "description": "You explain to them, very reasonably, why the OTHER monster is the real problem. For 2 rounds, they believe you. (Monsters fight each other.)",
+    "description": "Make two monsters attack each other for two rounds. Requires at least two monsters.",
     "flavor": "Your argument is airtight. It helps that they're monsters.",
     "pool": "system",
     "unlock": {
@@ -3270,7 +3271,7 @@
         },
         "context": "combat",
         "target": "monster",
-        "desc": "Two monsters fight each other for 2 rounds. Needs 2+ monsters."
+        "desc": "Make two monsters attack each other for two rounds. Requires at least two monsters."
       }
     ],
     "deepening": {
@@ -3286,7 +3287,7 @@
     "role": "enabler",
     "slotRole": "control",
     "name": "Freeze Tag",
-    "description": "You touch it and yell 'YOU'RE IT!' It can't move until someone tags it back \u2014 and nobody's playing. (Root 2 rounds.)",
+    "description": "Stop a monster moving for two rounds. It can still attack adjacent targets.",
     "flavor": "The rules are clear. The monster didn't agree to them, but the rules are clear.",
     "pool": "system",
     "unlock": {
@@ -3303,7 +3304,7 @@
         },
         "context": "combat",
         "target": "monster",
-        "desc": "Root a monster in place for 2 rounds. It can still attack adjacent."
+        "desc": "Stop a monster moving for two rounds. It can still attack adjacent targets."
       }
     ],
     "deepening": {
@@ -3368,7 +3369,7 @@
       "Retribution: buy time to charge."
     ],
     "name": "Hogtie",
-    "description": "Rope, a dazed monster, and thirty seconds of not being eaten. Hogtie a controlled monster: rooted 3 rounds (diminishing), and it can't wind up telegraphs. It can still lash out \u2014 the rope holds position, not malice.",
+    "description": "Tie a disabled monster in place for three rounds and stop it preparing special attacks. Repeated binds last fewer rounds. It can still attack nearby targets. Requires rope.",
     "flavor": "The System is VERY proud of this one. It watched a rodeo. It has opinions about knots now.",
     "pool": "system",
     "tier": "combat",
@@ -3392,7 +3393,7 @@
           "turn": true,
           "kcal": 40
         },
-        "effect": "Spend 1 rope + the action on a controlled monster: rooted 3 rounds (3\u21922\u21921 per previous bind), cannot start telegraphs while bound. Uninterruptible monsters still attack \u2014 the rope holds the body, not the promise."
+        "effect": "Use one rope to bind a stunned, rooted, bound, blinded or hesitating monster. Stops movement and new special-attack wind-ups for three rounds; repeated binds last two rounds, then one. It can still attack."
       }
     ],
     "deepening": {
@@ -3495,7 +3496,7 @@
           "turn": true,
           "kcal": 30
         },
-        "effect": "The System returns your recorded pain as force \u2014 shockwave to all adjacent enemies."
+        "effect": "Release stored blocked damage at every adjacent enemy. You also take 25% of the stored amount as damage."
       }
     ],
     "synergyHints": [
@@ -3514,7 +3515,7 @@
   {
     "id": "trophy_room",
     "name": "Trophy Room",
-    "description": "Once per day, mark a monster type you have killed. +50% damage against the marked type. The hunter's memory is a weapon.",
+    "description": "Once per day, mark a monster type you have killed. Deal 25% more damage to that type, or 50% with at least two Hunter abilities.",
     "flavor": "THE WALL OF HEADS GROWS. EACH ONE TEACHES THE NEXT ONE HOW TO DIE.",
     "role": "payoff",
     "slotRole": "nuke",
@@ -3532,7 +3533,7 @@
         "cost": {
           "time_min": 10
         },
-        "effect": "Choose a slain monster type to mark for +50% damage today."
+        "effect": "Mark a monster type you have killed: deal 25% more damage to it today, or 50% with at least two Hunter abilities."
       }
     ],
     "synergyHints": [
@@ -3707,7 +3708,7 @@
   {
     "id": "cornucopia",
     "name": "Cornucopia",
-    "description": "Consecutive successful forages: +15% yield each, stacking to +150%. Fail, or do anything else, and the streak breaks. The land rewards devotion.",
+    "description": "Successful plant gathers build +15% yield each, up to +150%. Walking between patches keeps the chain; a failed gather, other work, combat or a night's rest breaks it.",
     "flavor": "THE BASKET OVERFLOWS. THE BASKET HAS ALWAYS OVERFLOWED. YOU JUST FINALLY NOTICED.",
     "role": "payoff",
     "slotRole": "wildcard",
@@ -3955,7 +3956,7 @@
     "unlock": {
       "type": "system_offer"
     },
-    "description": "Lay your hands on yourself or an adjacent ally: the System knits 12-18 HP back, paid in your own calories. Counts as a heal for everything that counts heals.",
+    "description": "Use magic to restore 12–18 HP to yourself or an adjacent ally. Healing bonuses can increase this.",
     "flavor": "Not medicine. Magic with a receipt. The receipt is lunch.",
     "modifiers": [],
     "metabolic": {
@@ -4104,7 +4105,7 @@
     "unlock": {
       "type": "system_offer"
     },
-    "description": "You are somewhere else. Teleport up to 3 tiles (to the free tile farthest from danger, or where you point). Not a turn; twice per fight. Counts as moving.",
+    "description": "Teleport up to three tiles to a clear space. Uses no combat action; twice per fight.",
     "flavor": "The cameras lost you for eleven frames. Legal is looking into it.",
     "modifiers": [],
     "metabolic": {
@@ -4214,7 +4215,7 @@
     "unlock": {
       "type": "system_offer"
     },
-    "description": "For 3 rounds you see a breath ahead: the System reads you every monster's intent each round. Not a turn; once per fight.",
+    "description": "Reveal every monster’s intended move for three rounds. Uses no combat action; once per fight.",
     "flavor": "The future is a rerun. You've just seen the episode.",
     "modifiers": [],
     "metabolic": {
@@ -4388,7 +4389,7 @@
     "unlock": {
       "type": "system_offer"
     },
-    "description": "Throw calories on the fire. Burn 150 kcal: your next 2 strikes deal +60%. Not a turn. Twice per fight.",
+    "description": "Spend 150 kcal: your next two strikes deal 60% more damage. Uses no combat action; twice per fight.",
     "flavor": "Breakfast, converted to violence at a very poor exchange rate.",
     "modifiers": [],
     "metabolic": {
@@ -4484,7 +4485,7 @@
     "unlock": {
       "type": "system_offer"
     },
-    "description": "Spend stored wealth as armor: 3 coins of hard light orbit you, each absorbing one hit (up to 15 damage each). Not a turn; once per fight.",
+    "description": "Summon three protective coins. Each absorbs one hit, up to 15 damage. Uses no combat action; once per fight.",
     "flavor": "Money can't buy happiness. It can, it turns out, stop a claw.",
     "modifiers": [],
     "metabolic": {
@@ -4558,7 +4559,7 @@
     "unlock": {
       "type": "system_offer"
     },
-    "description": "Everything has a price, even teeth. Pay 150 kcal: one monster takes the offer, backs off 2 tiles and hesitates 2 rounds. Not titans: the big ones don't haggle.",
+    "description": "Offer 150 kcal to make one monster move back two tiles and hesitate for two rounds. Does not work on titans.",
     "flavor": "You hold out the jerky. It considers its life choices.",
     "modifiers": [],
     "metabolic": {
@@ -4656,7 +4657,7 @@
     "unlock": {
       "type": "system_offer"
     },
-    "description": "Once a day at camp, share the pot: 300 kcal of your own food fills the bellies of everyone in camp (their hunger eases a lot). Your dinner, their strength.",
+    "description": "Share food with everyone in camp to reduce their hunger. Costs 300 kcal; once a day.",
     "flavor": "There was enough. There is always enough when you're the one carrying it.",
     "modifiers": [],
     "metabolic": {

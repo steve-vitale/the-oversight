@@ -16,6 +16,9 @@
 //     council, call, and commit buttons in the camp self bar (app.js)
 //   - titanOutfit(villageId, itemIds[]) -> real gear transfer; real effectiveness
 //   - titanMusterState(titanId) / titanMusterReady(titanId)
+//   - titanHavenBlades(muster)
+//   - titanPlacementTile(offset) -> a free, non-village tile inside the travel map
+//   - titanLeaveArena() -> map a large battlefield back to its world node
 //   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
@@ -88,6 +91,7 @@
 
   function titanDawnTick() {
     try {
+      titanReconcileBearer();
       var day = (Game.state.scholar || {}).day || 0;
       var cast = titanCast();
       // Herald omen: wave 4 unlocked + regional+
@@ -153,6 +157,43 @@
     }
   }
 
+  // Preserve the intended eastward march where it fits. At the edge, choose
+  // the closest legal site rather than placing an objective outside travelTargets.
+  function titanPlacementTile(offset) {
+    var map = Game.map, tiles = map && map.tiles;
+    if (!tiles) return null;
+    var px = map.px, py = map.py, targetX = px + offset, sites = [];
+    for (var y = 0; y < Math.min(9, tiles.length); y++) {
+      for (var x = 0; x < Math.min(9, (tiles[y] || []).length); x++) {
+        if (!tiles[y][x] || (x === px && y === py) || Game.isSafeTile(x, y) || Game.monsterAt(x, y)) continue;
+        sites.push({ x: x, y: y, d: Math.abs(x - targetX) + Math.abs(y - py) });
+      }
+    }
+    sites.sort(function (a, b) { return a.d - b.d || b.x - a.x || a.y - b.y; });
+    return sites.length ? { x: sites[0].x, y: sites[0].y } : null;
+  }
+
+  // Old saves may already contain an out-of-map lair. Repair only those
+  // coordinates, retaining the same monster, damage, muster and campaign.
+  function titanRepairPlacements() {
+    var defs = titanDefs(), changed = false;
+    var ids = Object.keys(defs).map(function (tid) { return defs[tid].monster; });
+    ids.push('finale_crew', 'finale_opening');
+    Game.worldMonsters().forEach(function (m) {
+      if (m.networkNode || ids.indexOf(m.id) < 0) return;
+      if (Number.isInteger(m.tx) && Number.isInteger(m.ty) && m.tx >= 0 && m.tx < 9 && m.ty >= 0 && m.ty < 9 &&
+          Game.map.tiles[m.ty] && Game.map.tiles[m.ty][m.tx]) return;
+      var site = titanPlacementTile(3);
+      if (!site) { console.warn('titan placement repair: no free map tile', m.id); return; }
+      m.tx = site.x; m.ty = site.y;
+      changed = true;
+      if (m.homeTx !== undefined) m.homeTx = site.x;
+      if (m.homeTy !== undefined) m.homeTy = site.y;
+      Game.say('🗺️ Scouts correct their map — ' + m.id.replace(/_/g, ' ') + ' is at tile ' + site.x + ',' + site.y + '.');
+    });
+    if (changed) Game.syncMonsterAlias();
+  }
+
   function titanPlace(titanId) {
     try {
       // FINALE CAMPAIGN (2026-10-12): the finale arrives as a three-node
@@ -161,11 +202,11 @@
         return Game.finaleCampaignPlace(titanId);
       }
       var def = titanDefs()[titanId];
-      var px = Game.map ? Game.map.px : 4, py = Game.map ? Game.map.py : 4;
-      // lair: 3 tiles out, clamped to the region map (tiles are region coords)
-      var tx = Math.max(0, px + 3), ty = Math.max(0, py);
+      var site = titanPlacementTile(3);
+      if (!site) { console.warn('titan placement: no free map tile', titanId); return null; }
+      var tx = site.x, ty = site.y;
       var mon = Game.spawnWorldMonster(def.monster, tx, ty, { titan: true });
-      Game.say('🗺️ Scouts found its lair — ' + tx + ' east of here. ' + def.title + ' — ' + (def.epithet || '') + '. It is WAITING. You cannot face it alone. Sound the call.');
+      Game.say('🗺️ Scouts found its lair — tile ' + tx + ',' + ty + '. ' + def.title + ' — ' + (def.epithet || '') + '. It is WAITING. You cannot face it alone. Sound the call.');
       try { if (Game.recordMoment) Game.recordMoment(def.title + ' located. The coalition must answer.'); } catch (e) {}
       return mon;
     } catch (e) { return null; }
@@ -216,20 +257,62 @@
     } catch (e) { return null; }
   }
 
-  // Named faces from an allied roster: speaker first, then other living members.
-  function titanAlliedFaces(villageId, n) {
+  // One real person, one blade. Old saves can contain repeated calls' copies.
+  function titanUniqueAllies(muster) {
+    var seen = {};
+    return ((muster && muster.allies) || []).filter(function (a) {
+      if (!a || !a.vid) return false;
+      var key = a.villageId + ':' + a.vid;
+      if (seen[key]) return false;
+      var ov = Game._otherVillage ? Game._otherVillage(a.villageId) : null;
+      var person = ov && (ov.roster || []).find(function (r) { return r.id === a.vid; });
+      if ((a.hp !== undefined && a.hp <= 0) || (person && (!person.alive || (person.health !== undefined && person.health <= 0)))) return false;
+      seen[key] = true;
+      return true;
+    });
+  }
+
+  function titanNormalizeMuster(muster) {
+    var unique = titanUniqueAllies(muster), byId = {};
+    unique.forEach(function (a) { byId[a.villageId + ':' + a.vid] = a; });
+    (muster.allies || []).forEach(function (a) {
+      if (!a) return;
+      var first = byId[a.villageId + ':' + a.vid];
+      if (!first || first === a) return;
+      // Real donations on old duplicate records still belong to this person.
+      // Keep the actual item objects instead of deleting gifted equipment.
+      first.outfitted = first.outfitted || [];
+      (a.outfitted || []).forEach(function (g) { if (first.outfitted.indexOf(g) < 0) first.outfitted.push(g); });
+      if (first.outfitted.length) {
+        var wb = 0, ar = 0;
+        first.outfitted.forEach(function (g) {
+          var d = (Game.data.items || []).find(function (x) { return x.id === (g.itemId || g.id); });
+          if (d && d.weapon) wb += d.weapon.bonus || 0;
+          if (d && d.armor) ar += typeof d.armor === 'number' ? d.armor : 10;
+        });
+        first.wbonus = wb; first.varmor = Math.min(ar, 40);
+        first.gearValue = first.outfitted.reduce(function (n, g) { return n + titanGearValue(g); }, 0);
+      }
+      first.hp = Math.min(first.hp == null ? 100 : first.hp, a.hp == null ? 100 : a.hp);
+    });
+    muster.allies = unique;
+  }
+
+  // Named faces from an allied roster: speaker first, then free living adults.
+  // Missing age is retained for old saves; generated rosters carry real ages.
+  function titanAlliedFaces(villageId, n, excluded) {
     var faces = [];
     try {
       var ov = Game._otherVillage(villageId);
       var roster = (ov && ov.roster) || [];
       var link = titanAlliedLinks().filter(function (l) { return titanLinkOther(l) === villageId; })[0];
       var speakerId = link && link.theirSpeaker ? link.theirSpeaker.id : null;
-      var ordered = roster.filter(function (r) { return r && r.alive; });
+      var ordered = roster.filter(function (r) { return r && r.alive && (r.age == null || r.age >= 18) && (r.health === undefined || r.health > 0) && !(excluded && excluded[villageId + ':' + r.id]); });
       ordered.sort(function (a, b) { return (a.id === speakerId ? -1 : 0) - (b.id === speakerId ? -1 : 0); });
       for (var i = 0; i < Math.min(n, ordered.length); i++) {
-        faces.push({ id: ordered[i].id, name: ordered[i].name || 'a fighter', villageId: villageId });
+        faces.push({ id: ordered[i].id, name: ordered[i].name || 'a fighter', villageId: villageId, hp: ordered[i].health === undefined ? 100 : ordered[i].health });
       }
-    } catch (e) {}
+    } catch (e) { console.warn('titan allied faces', villageId, e); }
     return faces;
   }
 
@@ -276,6 +359,12 @@
     if (!def) return null;
     var st = titanState();
     var muster = st.musters[titanId] = st.musters[titanId] || { allies: [], haven: [], day: (Game.state.scholar || {}).day || 0, outfitted: {} };
+    titanNormalizeMuster(muster);
+    var committed = {};
+    Object.keys(st.musters).forEach(function (tid) {
+      if (st.slain[tid]) return;
+      titanUniqueAllies(st.musters[tid]).forEach(function (a) { committed[a.villageId + ':' + a.vid] = true; });
+    });
     Game.say('📯 THE CALL GOES OUT — ' + def.title + ' must fall, and no one fire can do it.');
     var links = titanAlliedLinks();
     var answered = 0;
@@ -294,16 +383,23 @@
         Game.say('— ' + nm + ' REFUSES. ' + why + '. (trust −8 — refusals are remembered.)');
         return;
       }
-      var faces = titanAlliedFaces(vid, 2);
+      var cfg = (Game.data.titans || {})._coalition || {};
+      var quota = trust >= (cfg.trustedAt || 70) && opinion >= (cfg.trustedOpinion == null ? 10 : cfg.trustedOpinion)
+        ? (cfg.trustedBlades || 6) : (cfg.baseBlades || 2);
+      var already = muster.allies.filter(function (a) { return a.villageId === vid; }).length;
+      if (already >= quota) { Game.say('— ' + nm + '\u2019s volunteers already march. No new blades join.'); return; }
+      var faces = titanAlliedFaces(vid, quota - already, committed);
       if (!faces.length) {
-        Game.say('— ' + nm + ' has no fighters to send. Their fire is thin.');
+        Game.say('— ' + nm + ' has no free fighters to send. Their fire is thin.');
         return;
       }
       faces.forEach(function (f) {
-        muster.allies.push({ villageId: vid, vid: f.id, name: f.name, hp: 100, outfitted: [], gearValue: 0 });
+        muster.allies.push({ villageId: vid, vid: f.id, name: f.name, hp: f.hp, outfitted: [], gearValue: 0 });
+        committed[vid + ':' + f.id] = true;
       });
       answered++;
       Game.say('— ' + nm + ' answers! ' + faces.map(function (f) { return f.name; }).join(' and ') + ' will march. (trust holds — they are counting on you.)');
+      if (quota === (cfg.baseBlades || 2)) Game.say('Closer bonds with ' + nm + ' could bring more volunteers. For now, these are the people they can spare.');
     });
     // HAVEN'S OWN (2026-10-13): the call no longer auto-commits anyone from
     // Haven. Committing your own people is the player's verb now —
@@ -358,7 +454,23 @@
   }
 
   function titanHavenBlades(muster) {
-    return (muster && muster.haven) || [];
+    var roster = ((Game.state || {}).village || {}).roster || [], seen = {};
+    return ((muster && muster.haven) || []).map(function (h) { return typeof h === 'string' ? { vid: h } : h; }).filter(function (h) {
+      if (!h || !h.vid || h.vid === Game.villagerId || seen[h.vid] || roster.indexOf(h.vid) < 0) return false;
+      seen[h.vid] = true;
+      return true;
+    });
+  }
+
+  // You become that villager, not that villager plus their old NPC role.
+  // Also reconciles old saves before a dawn upkeep/injection can count it.
+  function titanReconcileBearer() {
+    var state = Game.state || {}, st = state.titans, v = state.village || {};
+    if (v.titanCommitted) delete v.titanCommitted[Game.villagerId];
+    Object.keys((st && st.musters) || {}).forEach(function (tid) {
+      var m = st.musters[tid];
+      if (m) m.haven = titanHavenBlades(m);
+    });
   }
 
   // titanCommitOwn(titanId): the player commits Haven itself to the titan.
@@ -372,6 +484,11 @@
     if (!def) return null;
     var st = titanState();
     if (st.slain[titanId]) { Game.say('It is already dead. The committed have nothing left to march against.'); return null; }
+    if (titanId === 'the_network' && st.campaigns && st.campaigns.network && st.campaigns.network.started) {
+      if (st.pendingCommit && st.pendingCommit.indexOf(titanId + ':') === 0) st.pendingCommit = null;
+      Game.say('📯 No new blades join the Network march — not even Haven\u2019s. The coalition is the one you started with.');
+      return null;
+    }
     var o = titanOmen(titanId);
     if (!o || o.stage < 2) {
       Game.say('There is nothing located to march against — the sky is quiet. You commit no one into the dark.');
@@ -422,6 +539,7 @@
     var acts = [];
     try {
       if (Game.tbfight) return acts;
+      titanRepairPlacements();
       var st = titanState();
       var defs = titanDefs();
       Object.keys(defs).forEach(function (tid) {
@@ -435,9 +553,11 @@
           hint: 'Sit the council. Faces, scout intel, the System\u2019s odds (entertainment, not truth).'
         });
         var muster = st.musters[tid];
+        var march = st.campaigns || {};
+        var networkStarted = tid === 'the_network' && march.network && march.network.started;
         var havenN = muster ? titanHavenBlades(muster).length : 0;
         var alliedN = muster ? (muster.allies || []).length : 0;
-        if (havenN < 3) {
+        if (havenN < 3 && !networkStarted) {
           var pend = st.pendingCommit && st.pendingCommit.indexOf(tid + ':') === 0;
           acts.push(pend ? {
             id: 'titan:commit:' + tid,
@@ -449,11 +569,12 @@
             hint: 'Up to 3 of ours march with the muster (' + alliedN + ' allied + ' + havenN + ' ours so far). They eat, they bleed, they can die.'
           });
         }
-        if (!alliedN) {
+        var finaleStarted = tid === 'finale' && march.finale && march.finale.started;
+        if (!networkStarted && (!alliedN || !titanMusterReady(tid))) {
           acts.push({
-            id: 'titan:call:' + tid,
-            label: '\uD83D\uDCEF Sound the call',
-            hint: 'The call to arms \u2014 allied fires answer aloud, or refuse aloud. Refusals are remembered.'
+            id: finaleStarted ? 'titan:reinforce:finale' : 'titan:call:' + tid,
+            label: finaleStarted ? '\uD83D\uDCEF Call for reinforcements' : '\uD83D\uDCEF Sound the call',
+            hint: finaleStarted ? 'New people can answer at a cost of 3 trust per answering fire. The dead stay dead.' : 'The call to arms \u2014 allied fires answer aloud, or refuse aloud. Refusals are remembered.'
           });
         }
       });
@@ -462,11 +583,12 @@
   }
 
   function titanSelfDo(id) {
-    var m = /^titan:(council|call|commit):(.+)$/.exec(id || '');
+    var m = /^titan:(council|call|commit|reinforce):(.+)$/.exec(id || '');
     if (!m) return null;
     if (m[1] === 'council') return Game.titanWarCouncil(m[2]);
     if (m[1] === 'call') return Game.soundTitanCall(m[2]);
     if (m[1] === 'commit') return titanCommitOwn(m[2]);
+    if (m[1] === 'reinforce' && m[2] === 'finale' && Game.finaleReinforce) return Game.finaleReinforce();
     return null;
   }
 
@@ -651,7 +773,9 @@
     var st = titanState();
     Object.keys(st.musters).forEach(function (titanId) {
       var muster = st.musters[titanId];
-      if (!muster || st.slain[titanId] || !muster.allies.length) return;
+      if (!muster || st.slain[titanId]) return;
+      titanNormalizeMuster(muster);
+      if (!muster.allies.length && !titanHavenBlades(muster).length) return;
       if (muster.lastUpkeep === day) return;
       muster.lastUpkeep = day;
       // An army marches on its stomach: 1000 kcal/day per blade — allies AND
@@ -682,7 +806,7 @@
     // HAVEN COUNTS (2026-10-13): committed Haven blades are allied blades —
     // the player's own commitment moves the hard gate. The coalition is
     // still mostly the many (cap 3 ours), never a solo with extra steps.
-    var alive = (muster.allies || []).length + titanHavenBlades(muster).length;
+    var alive = titanUniqueAllies(muster).length + new Set(titanHavenBlades(muster).map(function (h) { return h.vid; })).size;
     return alive >= def.minAllies;
   }
 
@@ -699,9 +823,9 @@
       // champion to the ring directly, as a single blow-by-blow fight. The
       // flag is consumed here (never leaks into open-world combat): the
       // campaign march, muster marking, and ally injection are all skipped.
-      if (mid === 'finale' && Game._tableTrialDirect) {
+      if (mid === 'finale' && (Game._tableTrialDirect || (arguments[1] && arguments[1].tableTrial))) {
         Game._tableTrialDirect = false;
-        return orig.apply(this, arguments);
+        return orig.call(this, mid, Object.assign({}, arguments[1], { tableTrial: true }));
       }
       var mdef = null;
       try { mdef = (Game.data.monsters || []).find(function (m) { return m.id === mid; }); } catch (e) {}
@@ -757,7 +881,7 @@
         var snap = null;
         try {
           var tf = Game.state.titans._fight;
-          if (tf && this.tbfight && this.tbfight.fighters) {
+          if (tf && this.tbfight && this.tbfight.fighters && !(this.tableTrialFight && this.tableTrialFight())) {
             snap = {
               titan: tf.titan,
               result: result,
@@ -781,36 +905,80 @@
     }
   }
 
+  function titanPrepareArena(muster) {
+    var f = Game.tbfight;
+    if (!f || (Game.tableTrialFight && Game.tableTrialFight())) return;
+    if (f.coalitionArena) { f.gridSize = f.coalitionArena.gridSize; return; }
+    if (muster.allies.length + titanHavenBlades(muster).length < 10) return;
+    var cfg = (Game.data.titans || {})._coalition || {};
+    var grid = cfg.arenaGrid || 24, size = cfg.titanFootprint || 10;
+    var s = Game.state.scholar;
+    f.gridSize = grid;
+    f.coalitionArena = {gridSize:grid,origin:{mx:s.mx,my:s.my,bearer:Game.villagerId,tx:Game.map.px,ty:Game.map.py},corpseIds:(Game.state.corpses || []).map(function(c){return c.id;})};
+    var lead = f.fighters.find(function(m){return m.kind === 'monster';});
+    f.fighters.forEach(function(m){
+      // Campaign venues and Network nodes are also the army's main opponent;
+      // their ordinary escorts keep their own smaller bodies.
+      if (m.kind !== 'monster') return;
+      if (m === lead || Game.isTitan(m.monsterId || (m.mdef && m.mdef.id))) m.battleSize = size;
+      var max = grid - Game.fighterSize(m), x = Math.min(max,m.mx), y = Math.min(max,m.my), spot = null;
+      for (var r = 0; !spot && r < grid; r++) for (var dy = -r; dy <= r && !spot; dy++) for (var dx = -r; dx <= r; dx++) {
+        var nx=x+dx,ny=y+dy;
+        if(nx>=0&&ny>=0&&nx<=max&&ny<=max&&Game.tbCanOccupy(m,nx,ny)){spot={x:nx,y:ny};break;}
+      }
+      if(!spot){delete m.battleSize;console.warn('No legal titan footprint in coalition arena');return;}
+      m.mx=spot.x;m.my=spot.y;
+    });
+  }
+
+  function titanLeaveArena() {
+    var f=Game.tbfight,a=f&&f.coalitionArena;
+    if(!a||a.returned)return;
+    var o=a.origin;
+    var detail=Game.genDetail(o.tx,o.ty);
+    function worldPoint(x,y){
+      var cx=Math.max(0,Math.min(8,Math.round(x*8/(a.gridSize-1)))),cy=Math.max(0,Math.min(8,Math.round(y*8/(a.gridSize-1))));
+      for(var r=0;r<9;r++)for(var dy=-r;dy<=r;dy++)for(var dx=-r;dx<=r;dx++){
+        var nx=cx+dx,ny=cy+dy;
+        if(nx>=0&&ny>=0&&nx<=8&&ny<=8&&detail[ny][nx]!=='door'&&!Game.cellProps(detail[ny][nx]).blocks)return{mx:nx,my:ny};
+      }
+      return{mx:o.mx,my:o.my};
+    }
+    f.fighters.forEach(function(p){var q=worldPoint(p.mx,p.my);p.mx=q.mx;p.my=q.my;});
+    (Game.state.corpses||[]).forEach(function(c){
+      if(a.corpseIds.indexOf(c.id)>=0||!c.node||c.node.x!==o.tx||c.node.y!==o.ty)return;
+      var q=worldPoint(c.mx,c.my);c.mx=q.mx;c.my=q.my;
+    });
+    if(Game.villagerId===o.bearer&&Game.map.px===o.tx&&Game.map.py===o.ty){Game.state.scholar.mx=o.mx;Game.state.scholar.my=o.my;}
+    a.returned=true;
+  }
+
   function titanInjectAllies(titanId) {
     var st = titanState();
     var muster = st.musters[titanId];
     if (!muster || !Game.tbfight || !Game.tbfight.fighters) return;
+    titanNormalizeMuster(muster);
+    titanPrepareArena(muster);
     var fighters = Game.tbfight.fighters;
-    // free spots near the player
-    var taken = {};
-    fighters.forEach(function (f) { taken[f.mx + ',' + f.my] = 1; });
+    // The shared placement validates terrain, doors and full enemy bodies.
     var p = null;
     try { p = Game.tbFighter('p'); } catch (e) {}
     var px = p ? p.mx : 4, py = p ? p.my : 4;
     // GRID SIZE (Steve 2026-10-11): titan fights use 12x12 — spread allies across the full grid.
     var _gmax = (Game.tbGridMax ? Game.tbGridMax() : 8);
-    var _gsize = _gmax + 1;
     var spot = 0;
     function placeBlade(o) {
-      var nx = Math.max(0, Math.min(_gmax, px - 3 + (spot % 4))), ny = Math.max(0, Math.min(_gmax, py + 1 + Math.floor(spot / 4)));
-      var k = 0;
-      while (taken[nx + ',' + ny] && k < 40) { nx = (nx + 1) % _gsize; if (nx === 0) ny = (ny + 1) % _gsize; k++; }
-      taken[nx + ',' + ny] = 1;
-      o.mx = nx; o.my = ny;
+      if (!o || !(o.hp > 0)) return;
+      // A Haven member can already be present as a nearby villager or party
+      // member. They are one person, never an additional coalition body.
+      if (fighters.some(function (f) { return f.villagerId === o.villagerId && (f.villageId || 'haven') === (o.villageId || 'haven'); })) return;
+      o.mx = Math.max(0, Math.min(_gmax, Game.tbfight.coalitionArena ? px - 4 + (spot % 6) * 2 : px - 3 + (spot % 4)));
+      o.my = Math.max(0, Math.min(_gmax, Game.tbfight.coalitionArena ? py + 2 + Math.floor(spot / 6) * 2 : py + 1 + Math.floor(spot / 4)));
       fighters.push(o);
-      // TURN ORDER (diagnosis-endgame 2026-10-15): startCombat built
-      // tbfight.order before the coalition arrived, and the turn loop walks
-      // f.order — blades pushed only into fighters never took a turn (every
-      // titan, Finale and Network blade stood still). Join the order now
-      // (as finale-campaign injectMonster does); re-sort by speed next round.
+      Game.tbPlaceHumans(fighters, _gmax);
+      if (fighters.indexOf(o) < 0) return;
       if (Array.isArray(Game.tbfight.order) && Game.tbfight.order.indexOf(o.key) < 0) {
-        Game.tbfight.order.push(o.key);
-        Game.tbfight.orderDirty = true;
+        Game.tbfight.order.push(o.key); Game.tbfight.orderDirty = true;
       }
       spot++;
     }
@@ -818,7 +986,7 @@
       placeBlade({
         key: 'a_' + a.vid, kind: 'ally', villagerId: a.vid, villageId: a.villageId,
         name: a.name, emoji: '🛡️',
-        hp: a.hp || 100, maxHp: 100, speed: (Game.villagerSpeed ? Game.villagerSpeed(a.vid) : 3), mx: 4, my: 4,
+        hp: a.hp === undefined ? 100 : a.hp, maxHp: Math.max(100, a.hp || 0), speed: (Game.villagerSpeed ? Game.villagerSpeed(a.vid) : 3), mx: 4, my: 4,
         alive: true, fled: false, ai: 'brave',
         wbonus: a.wbonus || 0, varmor: a.varmor || 0,
       });
@@ -826,22 +994,24 @@
     // HAVEN'S OWN (2026-10-13): committed blades fight too — this was the
     // vestige (muster.haven tracked, never injected). Villagers, not heroes:
     // brave AI, modest swing. Their deaths go through tbVillagerFalls.
-    // SPEED NOTE: flat speed 3 (the villager tactical speed); real per-
-    // villager combat speed (blitz-combatstats) had not landed in this tree.
-    var havenNames = [];
     titanHavenBlades(muster).forEach(function (h) {
-      var nm = titanBladeName(h.vid);
-      havenNames.push(nm);
-      placeBlade({
-        key: 'a_h_' + h.vid, kind: 'ally', villagerId: h.vid, villageId: 'haven',
-        name: nm, emoji: '🛡️',
-        hp: 100, maxHp: 100, speed: 3, mx: 4, my: 4,
-        alive: true, fled: false, ai: 'brave',
-        wbonus: 3, varmor: 0,
-      });
+      placeBlade(Game.tbHumanFighter(h.vid, 'ally', {mx:4,my:4}, {
+        key: 'a_h_' + h.vid, villageId: 'haven', emoji: '🛡️', ai: 'brave',
+      }));
     });
-    var names = muster.allies.map(function (a) { return a.name; }).join(', ');
-    Game.say('🛡️ The coalition stands with you: ' + names + (havenNames.length ? ' — and Haven\u2019s own: ' + havenNames.join(', ') : '') + '. Faces, not units. Blow by blow.');
+    var count = fighters.filter(function (f) { return f.kind === 'ally' && f.alive && !f.fled; }).length;
+    Game.say('🛡️ ' + count + ' allies join you on the field.');
+  }
+
+  function titanSyncAllyHealth(f) {
+    if (!f || f.kind !== 'ally' || !f.villageId || f.villageId === 'haven' || !Number.isFinite(f.hp)) return;
+    var hp = Math.max(0, f.hp), st = titanState();
+    Object.keys(st.musters || {}).forEach(function (tid) {
+      var m = st.musters[tid];
+      for (var a of (m && m.allies) || []) if (a.vid === f.villagerId && a.villageId === f.villageId) a.hp = hp;
+    });
+    var home = Game._otherVillage(f.villageId);
+    for (var person of (home && home.roster) || []) if (person.id === f.villagerId) person.health = hp;
   }
 
   function titanResolveFight(snap) {
@@ -950,14 +1120,29 @@
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
+    titanHavenBlades: titanHavenBlades,
+    titanPlacementTile: titanPlacementTile,
+    titanLeaveArena: titanLeaveArena,
     titanMusterState: function (titanId) { return titanState().musters[titanId] || null; },
     // exposed for the finale campaign (allied injection into campaign nodes)
     titanInjectAllies: titanInjectAllies,
+    titanSyncAllyHealth: titanSyncAllyHealth,
     // exposed for THE NETWORK (network-campaign.js): the committed come home
     titanReleaseCommitted: titanReleaseCommitted,
   };
 
   Object.assign(Game, methods);
+
+  // ledger.js sets the new bearer before calling mantleBecome. Keep role
+  // cleanup here with the muster rather than duplicating it in the ledger.
+  if (Game.mantleBecome) {
+    var become = Game.mantleBecome;
+    Game.mantleBecome = function () {
+      var result = become.apply(this, arguments);
+      titanReconcileBearer();
+      return result;
+    };
+  }
 
   // test hooks (proof tests exercise internals without faking combat)
   Game._titanTest = {

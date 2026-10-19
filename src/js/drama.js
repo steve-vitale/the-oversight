@@ -170,7 +170,9 @@
     feast(d) {
       this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%, rgba(255,140,50,0.38) 0%, rgba(160,60,20,0.16) 40%, transparent 70%);', 'dfx-fire', 2800, 'screen');
       sparks.call(this, 11, '#ff9a3a', 'dfx-ember', 'screen', 8, '88%');
-      this.fxScreenCard(warmCard('the fire, the table, all of them', esc(d.qualityName || 'a feast') + (d.showed ? ' · ' + esc(d.showed) + ' came' : '')), 'dfx-soft', 2600, '34%');
+      // Keep the fire and embers without covering a phone's paid feast report.
+      const phoneReader = typeof matchMedia === 'function' && matchMedia('(max-width: 899px)').matches && document.querySelector('.field-layout #inlineslot:not(:empty)');
+      if (!phoneReader) this.fxScreenCard(warmCard('the fire, the table, all of them', esc(d.qualityName || 'a feast') + (d.showed ? ' · ' + esc(d.showed) + ' came' : '')), 'dfx-soft', 2600, '34%');
     },
     flee(d) {
       const p = this.tileCenter(d.px != null ? d.px : 4, d.py != null ? d.py : 4);
@@ -389,12 +391,21 @@
     // the sheets — for the big moments (ascension, the Table, titans, the
     // level-up flourish) that must read even while a sheet is open.
     ensureScreen() {
-      if (this.screen && document.contains(this.screen)) return this.screen;
-      const sc = document.createElement('div');
-      sc.className = 'drama-screen drama-overlay';
-      sc.style.cssText = 'position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:10040;';
-      document.body.appendChild(sc);
-      this.screen = sc;
+      let sc = this.screen;
+      if (!sc || !document.contains(sc)) {
+        sc = document.createElement('div');
+        sc.className = 'drama-screen drama-overlay';
+        document.body.appendChild(sc);
+        this.screen = sc;
+      }
+      // On phones, spectacle belongs to the board. Keep the HUD, narration
+      // and touch controls visible even during entry/death/level-up effects.
+      const grid = typeof matchMedia === 'function' && matchMedia('(max-width: 899px)').matches &&
+        document.querySelector('.field-layout .detail');
+      const r = grid && grid.getBoundingClientRect();
+      sc.style.cssText = r ?
+        `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;pointer-events:none;overflow:hidden;z-index:50;` :
+        'position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:10040;';
       return sc;
     },
 

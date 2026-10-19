@@ -31,15 +31,18 @@ async function main() {
   // wipe background knowledge so the payment plant is the ONLY currency.
   G.state.codex.plants = {};
   const rawPool = G.traderKnowledge(vid, true);
-  const payPid = G.data.plants.map(p => p.id).find(id => !rawPool.includes(id));
-  G.identifyPlant(payPid, 'observation');
+  const alreadyKnown = new Set([...rawPool, ...G.plantsKnownBy(vid)]);
+  const payPid = G.data.plants.map(p => p.id).find(id => !alreadyKnown.has(id));
+  // Already-known private currency: identifying it in front of this trader
+  // can honestly teach the watcher before the trade starts.
+  G.state.codex.plants[payPid] = { level: 1, seen: true, source: 'prepared prior knowledge' };
   v.trust[vid] = 10; // price = 'knowledge'
   const w = G.villagerWrongAbout(vid); delete w[pid]; delete w[pid2]; // no counterfeit
 
   const before = ((G.state.codex.plants || {})[pid] || {}).level || 0;
   G.tradeKnowledge(vid, pid);
   const after = ((G.state.codex.plants || {})[pid] || {}).level || 0;
-  check('T1 first trade completes (knowledge gained)', after > before, `L${before} -> L${after}`);
+  check('T1 first trade completes (knowledge gained)', after > before, `L${before} -> L${after}; ${sayLog.slice(-4).join(' | ')}`);
 
   const taught = (v.taught[vid] || []);
   check('T2 payment collected: trader actually learned the payment plant',

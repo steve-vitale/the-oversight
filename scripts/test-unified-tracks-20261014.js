@@ -274,7 +274,7 @@ function resetPlayer(Game) {
   T.section('wired: game code calls the engine');
   {
     const src = K.readSrc('src/js/game.js') + K.readSrc('src/js/contests.js') + K.readSrc('src/js/encounters.js') + K.readSrc('src/js/conversation.js') +
-      K.readSrc('src/js/food.js') + K.readSrc('src/js/ledger.js') + K.readSrc('src/js/corpses.js') + K.readSrc('src/js/progression.js');
+      K.readSrc('src/js/food.js') + K.readSrc('src/js/ledger.js') + K.readSrc('src/js/corpses.js') + K.readSrc('src/js/progression.js') + K.readSrc('src/js/betrayal.js');
     for (const d of Object.keys(DATA.deeds)) {
       // PARITY (2026-10-14): villager sites credit through creditDeed(who, id)
       T.ok(`deed "${d}" has a game call site`, src.includes(`noteDeed('${d}')`) || src.includes(`noteDeed && this.noteDeed('${d}')`) || new RegExp(`creditDeed\\([^;]*'${d}'`).test(src));

@@ -353,6 +353,14 @@ const SFX = [
 // Merge + emit.
 // ---------------------------------------------------------------------------
 Object.assign(M, W35);
+const regional = require('../src/js/regional-audio');
+for (const [id, voice] of Object.entries(regional.monsters)) {
+  const def = byId[id], cfg = def && def.encounter;
+  if (!cfg || (cfg.noticeAudio || null) !== voice.notice || cfg.aggroAudio !== voice.aggro) throw new Error('Regional voice is not wired: ' + id);
+  M[id] = { hook: voice.aggro, synth: voice.aggro, origin: 'gap',
+    source: 'Project-authored shared Web Audio voice; no field recording registered',
+    license: 'Project source (no third-party recording)', why: voice.why };
+}
 for (const [id, hook] of Object.entries(MONSTER_SIG)) {
   if (!M[id]) { console.error('FATAL: MONSTER_SIG id not in curated table: ' + id); process.exit(1); }
   M[id].hook = hook;
@@ -369,5 +377,12 @@ const monstersArr = Object.keys(byId).map(id => {
 
 const data = { generated: new Date().toISOString(), monsters: monstersArr, sfx: SFX };
 const out = 'window.AUDIO_LAB_DATA = ' + JSON.stringify(data, null, 1) + ';\n';
-fs.writeFileSync(path.join(ROOT, 'tools/audio-lab-data.js'), out);
-console.log('wrote tools/audio-lab-data.js: ' + monstersArr.length + ' monsters, ' + SFX.length + ' sfx');
+if (process.argv.includes('--check')) {
+  const saved = {}, file = path.join(ROOT, 'tools/audio-lab-data.js');
+  new Function('window', fs.readFileSync(file, 'utf8'))(saved);
+  const previous = saved.AUDIO_LAB_DATA;
+  delete previous.generated;
+  const expected = { ...data }; delete expected.generated;
+  if (JSON.stringify(previous) !== JSON.stringify(expected)) throw new Error('Audio Lab data is stale: node scripts/build-audiolab-data.js');
+} else fs.writeFileSync(path.join(ROOT, 'tools/audio-lab-data.js'), out);
+console.log((process.argv.includes('--check') ? 'checked' : 'wrote') + ' tools/audio-lab-data.js: ' + monstersArr.length + ' monsters, ' + SFX.length + ' sfx');

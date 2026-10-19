@@ -3,17 +3,8 @@
 // when the accused is the player, "A"-subject lines from displayName splits,
 // and the juror vote the ceremony promised "everyone will remember" but the
 // code never recorded. Usage: node scripts/test-social-audit-fixes.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/codex-people.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/debug-scenarios.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const H = require('./sim-harness');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
@@ -21,11 +12,11 @@ function ok(name, cond, extra) {
   else { fail++; console.log(`FAIL ${name}` + (extra ? ' — ' + extra : '')); }
 }
 let sayLog = [];
-const _say = Game.say.bind(Game);
-Game.say = (t) => { sayLog.push(String(t)); return _say(t); };
 
 (async () => {
-  await Game.init();
+  ({ Game } = await H.loadGame({ seed: Number(process.env.SEED || 7), mode: 'social-proof', narration: true }));
+  const _say = Game.say.bind(Game);
+  Game.say = (t) => { sayLog.push(String(t)); return _say(t); };
 
   // --- 1. ambush fight: continuing exchanges always carry a spoken line ---
   Game.debugScenario('ambush');

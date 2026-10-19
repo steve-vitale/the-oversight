@@ -16,26 +16,38 @@
 //       scholar.health: +20 HP promised, nothing delivered in a fight.
 // Fix: Game.addHealth(n) routes to the fighter in combat (can end the fight);
 // useItem/drinkWater spend the combat action mid-fight.
-const H = require('./combat-break-harness.js');
+const K = require('./godpath/lib');
+// Prepared two-fighter board; gameplay methods and enemy turns remain real.
+function fight(Game, monId, opts) {
+  Game.state.scholar.mx = 4; Game.state.scholar.my = 4;
+  Game.state.scholar.health = opts.php;
+  Game.state.systemArrived = false; Game.resetPerFightFlags();
+  const mdef = Game.data.monsters.find(m => m.id === monId);
+  if (!mdef) throw new Error('missing monster ' + monId);
+  const fighters = [
+    { key: 'p', kind: 'player', name: 'You', hp: opts.php, maxHp: 100,
+      speed: 6, mx: 4, my: 4, alive: true, fled: false, moveLeft: 0, acted: false },
+    { key: 'm_test', kind: 'monster', monsterId: monId, mdef, hp: opts.mhp,
+      maxHp: opts.mhp, speed: 3, mx: 6, my: 4, alive: true, fled: false,
+      telegraph: null, hesitate: 0, blind: 0, stunned: 0 },
+  ];
+  Game.tbfight = { fighters, over: false, round: 1, order: ['p', 'm_test'], turnIdx: 0,
+    fightersByKey: Object.fromEntries(fighters.map(f => [f.key, f])) };
+}
 
 let pass = 0, fail = 0;
 function check(name, cond, extra) {
   if (cond) { pass++; console.log(`  PASS ${name}`); }
   else { fail++; console.log(`  FAIL ${name}${extra ? ' — ' + extra : ''}`); }
 }
-function holdAbility(Game, s, id, level) {
-  const def = Game.data.abilities.find(a => a.id === id) || {};
-  let e = (s.backgroundAbilities || []).find(a => a.id === id) || (s.abilities || []).find(a => a.id === id);
-  if (!e) { e = { id, name: def.name || id, desc: '', level, xp: 0 }; (s.abilities = s.abilities || []).push(e); }
-  return e;
-}
 
 (async () => {
-  const Game = await H.newCombatReadyGame();
+  const Game = await K.load({ seed: Number(process.env.SEED || 20261008) });
+  K.newRun(Game);
   const s = Game.state.scholar;
 
   console.log('--- R1. useItem heal lands on the fighter and costs the action ---');
-  H.synthFight(Game, 'bulldozer', { mhp: 60, php: 50 });
+  fight(Game, 'bulldozer', { mhp: 60, php: 50 });
   s.health = 50;
   const p = Game.tbFighter('p');
   let monsterTurns = 0;
@@ -56,7 +68,7 @@ function holdAbility(Game, s, id, level) {
   if (Game.tbfight) Game.tbEnd('fled');
 
   console.log('--- R2. drinkWater costs the action; risky water hits the fighter ---');
-  H.synthFight(Game, 'bulldozer', { mhp: 60, php: 50 });
+  fight(Game, 'bulldozer', { mhp: 60, php: 50 });
   s.health = 50;
   const p2 = Game.tbFighter('p');
   s.water = [{ quality: 'clean', source: 'test' }];
@@ -68,25 +80,24 @@ function holdAbility(Game, s, id, level) {
   Game.tbMonsterTurn = _mt2;
   check('R2 drink costs the combat action (turn advanced)', monsterTurns2 > 0, `monsterTurns=${monsterTurns2}`);
   check('R2 hydration applied', s.hydration === 50, `hydration=${s.hydration}`);
-  // risky: force the 30% sickness roll by seeding attempts (deterministic seed;
-  // try up to a few fresh fights — the seeded RNG decides)
-  let sickHit = false;
-  for (let i = 0; i < 6 && !sickHit; i++) {
+  // Exercise the actual 30% branch and its control, rather than requiring
+  // luck within six tries. The real drink still spends a combat action.
+  for (const [roll, damage] of [[0.1, 5], [0.9, 0]]) {
     if (Game.tbfight) Game.tbEnd('fled');
-    H.synthFight(Game, 'bulldozer', { mhp: 60, php: 50 });
-    s.health = 50;
-    const pp = Game.tbFighter('p');
-    s.water = [{ quality: 'risky', source: 'test' }];
-    s.hydration = 0;
-    const hpBefore = pp.hp;
-    Game.drinkWater();
-    if (pp.hp < hpBefore) { sickHit = true; check('R2 risky water damage hits the fighter', pp.hp === hpBefore - 5, `hp ${hpBefore} -> ${pp.hp} (disease rework 2026-10-09: -5 + gut rot, was flat -15)`); }
+    fight(Game, 'bulldozer', { mhp: 60, php: 50 });
+    const player = Game.tbFighter('p');
+    s.water = [{ liters: 1, quality: 'risky', source: 'prepared creek' }]; s.hydration = 0;
+    const random = Math.random;
+    Math.random = () => roll;
+    try { Game.drinkWater(); } finally { Math.random = random; }
+    check('R2 risky-water roll ' + roll + ' routes damage ' + damage,
+      player.hp === 50 - damage && s.health === player.hp);
+    check('R2 risky-water bottle consumed and hydration applied', s.water.length === 0 && s.hydration === 50);
   }
-  if (!sickHit) check('R2 risky water damage hits the fighter (seed never rolled sick)', false, 'no sickness in 6 attempts');
   if (Game.tbfight) Game.tbEnd('fled');
 
   console.log('--- R3. bad-food damage hits the fighter mid-combat ---');
-  H.synthFight(Game, 'bulldozer', { mhp: 60, php: 50 });
+  fight(Game, 'bulldozer', { mhp: 60, php: 50 });
   s.health = 50;
   const p3 = Game.tbFighter('p');
   s.inventory.push({ name: 'Sketchy bits', units: 1, kcalEach: 100, diseaseRisk: { p: 1, dmg: 7, note: 'test' } });
@@ -101,8 +112,8 @@ function holdAbility(Game, s, id, level) {
   if (Game.tbfight) Game.tbEnd('fled');
 
   console.log('--- R4. field_medicine heals the fighter ---');
-  holdAbility(Game, s, 'field_medicine', 1);
-  H.synthFight(Game, 'bulldozer', { mhp: 60, php: 50 });
+  K.giveAbility(Game, 'field_medicine', { level: 1, force: true });
+  fight(Game, 'bulldozer', { mhp: 60, php: 50 });
   s.health = 50;
   const p4 = Game.tbFighter('p');
   s.kcal = 500;
@@ -119,25 +130,35 @@ function holdAbility(Game, s, id, level) {
   check('R5 damage floors at 0 out of combat', s.health === 0, `s.health=${s.health}`);
 
   console.log('--- R6. trade_of_blows HP cost hits the fighter (sibling sweep) ---');
-  const tdef = Game.data.abilities.find(a => a.id === 'trade_of_blows') || {};
-  (s.backgroundAbilities = s.backgroundAbilities || []).push({ id: 'trade_of_blows', name: tdef.name || 'trade_of_blows', level: 1, xp: 0 });
-  H.synthFight(Game, 'bulldozer', { mhp: 60, php: 50 });
+  K.giveAbility(Game, 'trade_of_blows', { level: 1, force: true });
+  fight(Game, 'bulldozer', { mhp: 60, php: 50 });
   s.health = 50;
   const p6 = Game.tbFighter('p');
+  const hungerLines = [], previousSay = Game.say;
+  s.kcal = 400;
+  Game.say = function (message) { hungerLines.push(String(message)); return previousSay.apply(this, arguments); };
+  let hungryResult;
+  try { hungryResult = Game.useAbility('trade_of_blows', 'open_trade'); } finally { Game.say = previousSay; }
+  check('R6 underfed ability refuses without HP/food charge', hungryResult === false && p6.hp === 50 && s.health === 50 && s.kcal === 400 && hungerLines.some(line => /Eat first|eat first/.test(line)));
+  s.kcal = 1000;
+  const foodCost = Game.abilityKcalCost('trade_of_blows', 'open_trade');
   Game.useAbility('trade_of_blows', 'open_trade');
+  check('R6 funded activation pays actual food cost', foodCost > 0 && s.kcal === 1000 - foodCost);
   check('R6 HP cost deducted from the fighter', p6.hp === 40, `p.hp=${p6.hp}`);
   check('R6 scholar synced', s.health === 40, `s.health=${s.health}`);
   // would-kill block still guards (fighter at 5 HP can't pay 10)
   if (Game.tbfight) Game.tbEnd('fled');
-  H.synthFight(Game, 'bulldozer', { mhp: 60, php: 5 });
+  fight(Game, 'bulldozer', { mhp: 60, php: 5 });
   s.health = 5;
+  const foodBeforeRefusal = s.kcal;
   const msgs6 = []; const _say6 = Game.say;
   Game.say = m => { msgs6.push(String(m)); return _say6.call(Game, m); };
   Game.useAbility('trade_of_blows', 'open_trade');
   Game.say = _say6;
   check('R6 would-kill cost refused', Game.tbFighter('p').hp === 5 && msgs6.some(m => /Too weak/.test(m)),
     `hp=${Game.tbFighter('p').hp}`);
-  s.backgroundAbilities = (s.backgroundAbilities || []).filter(a => a.id !== 'trade_of_blows');
+  check('R6 lethal HP refusal also preserves food', s.kcal === foodBeforeRefusal);
+  s.abilities = s.abilities.filter(a => a.id !== 'trade_of_blows');
   if (Game.tbfight) Game.tbEnd('fled');
 
   console.log(`\n${pass} passed, ${fail} failed`);

@@ -3,34 +3,7 @@
 // about?" with no follow-up choices, and spreadRumor seeded heard: [] so
 // spreadGossip never had a teller — rumors died on arrival.
 // Usage: node scripts/test-rumor-flow.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js', 'src/js/journal.js',
- 'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
- 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js',
- 'src/js/progression.js', 'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
- 'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js'].forEach(f => {
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); }
-});
-const Game = globalThis.Scattering.Game;
-
-// Deterministic RNG for the test (mulberry32) — the conversation pacing
-// layer is heavily RNG-driven; without a seed the warm-up path varies.
-(function seed() {
-  let a = 0xC10C;
-  Math.random = function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-})();
+const { loadGame, quietLog } = require('./sim-harness');
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -39,29 +12,29 @@ function ok(name, cond) {
 }
 
 (async () => {
-  await Game.init();
+  const { Game } = await quietLog(() => loadGame({ seed: 0xC10C, mode: 'rumor-flow' }));
   Game.debugScenario('day1');
   const v = Game.state.village;
   const roster = v.roster || [];
   v.trust = v.trust || {};
 
   console.log('== 1. conversation rumor flow ==');
-  // find a listener: answer anything hanging, warm up with personal +
-  // gossip (topicCap crowds spread_rumor off the first menu — it's last in
-  // priority order), then run the rumor flow IN THE SAME conversation.
+  // Rumor topics live behind the modern explicit subject-change menu.
+  // Follow only offered choices, including direct questions/continuers.
   let listener = null, target = null;
-  for (const vid of roster) {
+  for (const vid of roster.filter(id => id !== Game.villagerId)) {
     v.trust[vid] = 60;
     Game.startConvo(vid);
-    let cc = Game.convoChoices(vid);
-    // answer a hanging direct question first (coherence: pivots wait)
-    const gq = cc.find(c => c.id.indexOf('gq:') === 0 || c.id.indexOf('react:') === 0);
-    if (gq && gq.id !== 'leave') { try { Game.convoTurn(vid, gq.id); } catch (e) {} cc = Game.convoChoices(vid); }
-    const p1 = cc.find(c => c.id === 'ask:personal');
-    if (p1) { Game.convoTurn(vid, 'ask:personal'); cc = Game.convoChoices(vid); }
-    const g1 = cc.find(c => c.id === 'ask:gossip');
-    if (g1) { Game.convoTurn(vid, 'ask:gossip'); cc = Game.convoChoices(vid); }
-    if (cc.some(c => c.id === 'ask:spread_rumor')) { listener = vid; break; }
+    for (let step = 0; step < 12; step++) {
+      const cc = Game.convoChoices(vid);
+      if (cc.some(c => c.id === 'ask:spread_rumor')) { listener = vid; break; }
+      const next = cc.find(c => c.id === 'dlg:subject') ||
+        cc.find(c => c.id.startsWith('gq:') || c.id.startsWith('react:')) ||
+        cc.find(c => c.id === 'goon');
+      if (!next) break;
+      Game.convoTurn(vid, next.id);
+    }
+    if (listener) break;
     Game.endConvo(vid, 'left');
   }
   target = roster.find(id => id !== listener && id !== Game.villagerId);
@@ -102,6 +75,9 @@ function ok(name, cond) {
   const typePick = ch.find(c => c.id === 'rumor:type:stingy');
   ok('rumor type picks offered', !!typePick && ch.filter(c => c.id.indexOf('rumor:type:') === 0).length === 5);
   const beforeGossip = (v.gossip || []).length;
+  // Isolate the rapport reward below the current words-only cap (40).
+  // The original fixture set trust60 and incorrectly demanded talk raise it.
+  v.trust[listener] = 30;
   const trustBefore = v.trust[listener];
   r = Game.convoTurn(listener, 'rumor:type:stingy');
   ok('rumor completes with reaction line', !!r && !r.ended && (r.line || '').length > 10);

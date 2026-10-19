@@ -17,6 +17,9 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
+// Seed before modules capture RNG. Reuse the shared stream; do not select a
+// lucky random world to satisfy the pantry assertion below.
+Math.random = require('./sim-harness').mulberry32(20261018);
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
 ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
@@ -152,16 +155,30 @@ function campNight() {
     walkTo(v.x, v.y);
     Game.checkVillageProximity();
     const dayFirst = v.day, pantryFirst = Math.round(v.pantryKcal || 0);
+    // A fed village can gather exactly its daily need: its pantry legitimately
+    // stays flat below the cap. Observe actual daily work instead of requiring
+    // an arbitrary stock change. Delegate every draw to the real engine.
+    const deplete = Game.depleteRandomTile;
+    let workedDays = 0;
+    Game.depleteRandomTile = function (...args) {
+      if (args[3] && args[3].byVillage === v) workedDays++;
+      return deplete.apply(this, args);
+    };
     walkTo(0, 0); // far away
     for (let i = 0; i < 5; i++) campNight();
     const dayGone = v.day; // should NOT have advanced while away (no one watching)
+    const workedWhileAway = workedDays;
     walkTo(v.x, v.y);
     Game.checkVillageProximity(); // re-approach -> catch-up
     ok('distant-village-frozen-while-away', dayGone === dayFirst, `day ${dayFirst} -> ${dayGone} while away`);
     ok('distant-village-catchup-on-return', v.day === s.day, `village.day=${v.day} scholar.day=${s.day}`);
     const pantryNow = Math.round(v.pantryKcal || 0), cap = v.population * 8000;
-    // villages don't hoard: a healthy village sits pinned at its 4-day buffer cap.
-    ok('distant-village-pantry-moved', pantryNow !== pantryFirst || pantryNow === cap, `pantry ${pantryFirst} -> ${pantryNow} (cap ${cap})`);
+    Game.depleteRandomTile = deplete;
+    ok('distant-village-no-work-while-away', workedWhileAway === 0, `workdays ${workedWhileAway}`);
+    ok('distant-village-actually-works-every-catchup-day', v.day > dayGone && workedDays === v.day - dayGone,
+      `workdays ${workedDays}, missed days ${v.day - dayGone}`);
+    ok('distant-village-pantry-respects-buffer', Number.isFinite(pantryNow) && pantryNow >= 0 && pantryNow <= cap,
+      `pantry ${pantryFirst} -> ${pantryNow} (cap ${cap})`);
   }
 
   console.log(`\n${pass} passed, ${fail} failed`);

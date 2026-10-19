@@ -221,10 +221,30 @@ const roster = () => (Game.state.village.roster || []).filter(id => id !== Game.
   let mark = null, snapped = false;
   for (const cand of cands.slice(0, 4)) {
     try {
+      // Two invented memories arm the snap but create no intimidation crimes.
+      // Use real paid threats before testing whether their consequences survive
+      // the self-defense kill. A steady preparatory temperament prevents this
+      // fixture from fleeing/snapping before both real threats have happened.
+      const vp = (Game.data.villagers || []).find(x => x.id === cand);
+      if (!vp) throw new Error('Missing prepared victim ' + cand);
+      const crimeBefore = crimesOf('intimidation', cand).length;
+      vp.personality = vp.personality || {};
+      vp.personality.temperament = 'steady';
+      // Crime records intentionally coalesce within one day part. Prepare
+      // two distinct parts, rather than pretending synthetic memories or
+      // same-part duplicate threats should create separate crime records.
+      Game.dayPart = 0;
+      Game.state.scholar.dayTicks = 0;
+      Game.state.scholar.actionClock = 0;
+      Game.intimidate(cand);
+      Game.dayPart = 1;
+      Game.state.scholar.dayTicks = Game.TIME.TICKS_PER_PART;
+      Game.state.scholar.actionClock = 0;
+      Game.intimidate(cand);
+      ok(crimesOf('intimidation', cand).length === crimeBefore + 2,
+        'E0 both preparatory threats create real crime records');
+      vp.personality.temperament = 'cautious';
       Game.npcNeeds(cand).fear = 100;
-      // seed two recent threats so the breaking-point gate is armed deterministically
-      Game.remember(cand, 'you_threatened', 'demanded their food');
-      Game.remember(cand, 'you_threatened', 'demanded their food');
     } catch (e) {}
     for (let i = 0; i < 10 && !snapped; i++) {
       if (!roster().includes(cand)) break; // fled — breaking point, try next mark

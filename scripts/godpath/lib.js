@@ -159,7 +159,23 @@ function teleEvents(Game, type) {
   return arr.filter(e => e && (e.type === type || e.t === type));
 }
 
+// Follow only offered page navigation. Finding a topic must never force its
+// handler or mistake an overflow page for an unavailable/retired action.
+function findConvoChoice(Game, vid, wanted) {
+  const match=typeof wanted==='function'?wanted:ch=>ch.id===wanted,seen=new Set();
+  for(let page=0;page<32;page++) {
+    const choices=Game.convoChoices(vid)||[],found=choices.find(match);
+    if(found)return found;
+    const key=choices.map(ch=>ch.id).join(',');
+    if(seen.has(key)||!choices.some(ch=>ch.id==='menu:more'))return null;
+    seen.add(key);const result=Game.convoTurn(vid,'menu:more');
+    if(!result?.navigation)throw Error('Offered conversation navigation did not navigate');
+    if(result.ended)return null;
+  }
+  throw Error('Conversation navigation did not wrap within32 pages');
+}
+
 module.exports = {
   ROOT, H, readJSON, readSrc, phase, reporter, load, newRun, abilityIds,
-  giveAbility, openSlots, fight, captureSays, teleEvents,
+  giveAbility, openSlots, fight, captureSays, teleEvents, findConvoChoice,
 };

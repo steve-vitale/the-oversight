@@ -379,7 +379,7 @@
       // outcome now pays the fight's real price through the hurt pipeline.)
       a.know[vid].monsters++;
       if (rec.outcome === 'vKill') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
         // WAVE GATE (break-it 2026-10-09): village-wide kill minimums —
         // see resolveWildMonsterEncounter. The expedition's kill counts too.
         try { this.recordWaveKill(m.id, vid, 'agency', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
@@ -429,7 +429,7 @@
         return;
       }
       if (rec.outcome === 'mFlee') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
         a.xp[vid].bravery += 1;
         // stood it down = real contact = teachable (gap-breadth 2026-10-10).
         // Evades are just sightings — they stay flavor, never knowledge.
@@ -440,7 +440,7 @@
       }
       if (rec.outcome === 'vDie') return this.expedDeath(vid, mName, nm, playerAtHaven);
       // vFlee: real wounds from the real fight, then the hurt pipeline
-      try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+      try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
       return this.expedHurt(vid, mName + ' (' + fightNote + ')', nm);
     },
     expedHurt(vid, mName, nm) {
@@ -889,6 +889,7 @@
         if (actuallyTaught) {
           try { this.bumpTrust(vid, 2); } catch (e) {}
           try { this.recordDeed(vid, 'taught', `${nm} taught you something from the wild.`, 1); } catch (e) {}
+          if ((taughtMid || taughtPlant) && typeof this.addGrounding === 'function') this.addGrounding(2, 'teaching', vid, { save: false });
         }
         // TRANSCRIPT (longsim agency 2026-10-11): agency turns bypassed the
         // convoTurn wrapper, so teaching conversations left no trace in the
@@ -948,6 +949,9 @@
         }
         var choices = [];
         try { choices = this.convoChoices(vid); } catch (e) {}
+        if (taughtMid || taughtPlant) {
+          try { this.save(); } catch (e) { console.warn('[grounding] settled lesson save', e); }
+        }
         return { line: spokenText, choices: choices, ended: false, transcript: c ? c.transcript.slice() : [] };
       }
       return null;
@@ -1405,54 +1409,16 @@
       var base = _convoChoices ? _convoChoices.call(this, vid) : [];
       try {
         var extra = this.agencyChoices(vid) || [];
-        // ONE-SCREEN CAP (journey crisis r22 2026-10-18): this is the
-        // outermost convoChoices injector — every inner injection
-        // (betrayal's prepend, truth's confront splice, party-formal's
-        // splice) has already landed, and none of them shares the
-        // pipeline's MAXC budget. A live betrayal case pushed a capped
-        // 8-choice beat menu to 10 (seed 3202, r21 found-not-fixed #1
-        // class). Enforce the same contract here: 7 content + silence.
-        // Injected leads (agency/betrayal) keep priority; the trim lands
-        // on the base-content tail; 'leave' stays pinned, 'silence' last.
-        // Reactive menus (ans:/gq: — the question owns the menu, answers+2
-        // contract) are exempt: prepends there add urgency, never cut.
-        var isReactive = base.some(function (ch) {
-          var id = ch && ch.id;
-          return typeof id === 'string' && (id.indexOf('ans:') === 0 || id.indexOf('gq:') === 0);
-        });
-        if (!isReactive && (extra.length || base.length > 8)) {
-          var MAXC = 7;
-          var isSil = function (ch) { return ch && (ch.id === 'silence' || ch.id === 'nv:listen'); };
-          var isLeave = function (ch) { return ch && ch.id === 'leave'; };
-          var silence = base.filter(isSil).slice(0, 1);
-          var leave = base.filter(isLeave).slice(0, 1);
-          var content = base.filter(function (ch) { return !isSil(ch) && !isLeave(ch); });
-          // TRIM PRIORITY (kill-rule scoping 2026-10-18): the first version
-          // trimmed the raw tail and starved 'teach' from every menu on a
-          // live-betrayal seed — the exact starvation the 2026-10-07/08/12
-          // fixes rescued those verbs from. The trim now cuts the
-          // expandable middle (pool reactions, recaps, topic asks) before
-          // it touches leads and earned verbs. Priority: confrontation
-          // prepends (betrayal:/confront:) > alive/event lead (r21) > want
-          // verbs (the want leads) > earned verbs (teach/trade/skills/
-          // invites — never lose the lottery) > pool + topics.
-          var PROTECTED = /^(betrayal:|confront:|alive:|dlg:commit|dlg:cant|dlg:help|dlg:heed|dlg:stay|teach|trade|offer_help|hawker|invite_party|dlg:invite|skill_learn:|skill_teach:|agency:)/;
-          var prot = [], rest = [];
-          for (var i = 0; i < content.length; i++) {
-            var cid = content[i] && content[i].id;
-            if (typeof cid === 'string' && PROTECTED.test(cid)) prot.push(content[i]);
-            else rest.push(content[i]);
-          }
-          var room = Math.max(0, MAXC - extra.length - leave.length);
-          var kept = prot.concat(rest).slice(0, room);
-          return extra.concat(kept, leave, silence);
-        }
-        if (extra.length) return extra.concat(base);
+        // Final budget after every injector. Keep overflow reachable rather
+        // than permanently deleting lower-priority topics or earned verbs.
+        return this.convoMenuPage(vid,extra.concat(base));
       } catch (e) {}
       return base;
     };
     var _convoTurn = G.convoTurn;
     G.convoTurn = function (vid, choiceId) {
+      if(choiceId==='menu:more') return this.convoNextMenu(vid);
+      const menuConvo=this.convoGet(vid);menuConvo.menuPage=0;menuConvo.menuPages=1;
       try {
         if (typeof choiceId === 'string' && choiceId.indexOf('agency:') === 0) {
           var r = this.agencyTurn(vid, choiceId);

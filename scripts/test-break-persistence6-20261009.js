@@ -47,7 +47,7 @@
 //        BEFORE=1 node scripts/test-break-persistence6-20261009.js
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const BEFORE = !!process.env.BEFORE;
 
@@ -377,34 +377,18 @@ function saveAndReloadKey() {
 }
 
 // ================= T5: WRITE-ORDERING CRASH WINDOW =================
-// localStorage writes are synchronous — no player-hittable window between the
-// data write and the index write. The hostile case that IS reachable: the
-// index write fails after the data write succeeded (quota). save() must say
-// false (never silent success) and the next save must adopt the orphan blob.
+// Delegate to one fresh shared-harness expedition per storage-failure case.
+// The former partial fixture computed saveKey before pinning startedAt, so
+// crossing a clock tick made it inspect a different blob than save() wrote.
 {
-  store._reset();
-  buildGame('v5');
-  Game.syncRun();
-  const st = Game.state;
-  const key = S.state.saveKey(st);
-  // poison ONLY the index write
-  const realSet = store.setItem;
-  store.setItem = (k, v) => { if (k === 'scattering-saves-index') throw new Error('QuotaExceededError'); return realSet(k, v); };
-  const r1 = S.state.save(st);
-  const blobExists = store.getItem(key) !== null;
-  const listedAfterFail = S.state.listSaves().some(i => i.key === key);
-  // heal and save again: the orphaned blob must be adopted into the index
-  store.setItem = realSet;
-  const r2 = S.state.save(st);
-  const listedAfterHeal = S.state.listSaves().some(i => i.key === key);
-  // R7 BEHAVIOR CHANGE (break-it persistence r7 2026-10-09): listSaves() now
-  // self-heals — the healthy orphaned blob is adopted (listed + loadable)
-  // IMMEDIATELY on the next listSaves, not only on the next save(). The old
-  // assertion (!listedAfterFail) encoded the pre-heal gap; the save() return
-  // contract (false on index-write failure) is unchanged.
-  check('T5. index-write failure: honest false, orphaned blob adopted on next save',
-    r1 === false && blobExists && listedAfterFail && r2 === true && listedAfterHeal,
-    `save1=${r1} blob=${blobExists} listed1=${listedAfterFail} save2=${r2} listed2=${listedAfterHeal}`);
+  const out = execFileSync(process.execPath, [path.join(__dirname, 'test-save-index-crash-20261017.js')],
+    { cwd: ROOT, env: process.env, encoding: 'utf8', maxBuffer: 2e6 });
+  process.stdout.write(out);
+  const cases = out.split('\n').filter(line => line.startsWith('SAVE_INDEX_RESULT '))
+    .map(line => JSON.parse(line.slice(18)));
+  check('T5. real save/Continue rejects failed writes and recovers orphaned blobs',
+    cases.length === 3 && ['index', 'data', 'corrupt-index'].every(kind =>
+      cases.some(row => row.kind === kind && row.checks > 0)) && /save-index crash proof green:/.test(out));
 }
 
 // ================= T7: ALIEN R5 FIELD ROUND-TRIP =================

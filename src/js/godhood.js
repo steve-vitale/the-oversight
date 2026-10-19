@@ -84,6 +84,7 @@
           abilitiesNeeded: rules.abilitiesNeeded || 4,
           synergies: Array.from(synIds),
           deedAlt: g.deedAlt || null,
+          deed: g.deed || null, // Authored outcomes replace legacy proxies for this god.
           // the lived-in deed (godpaths.json rules.capstone.deedClassDays):
           // the class named on this path and held this many days
           deedClassDays: rules.deedClassDays || 0,
@@ -242,6 +243,7 @@
         synergy = !!(sw.holderId && sch.villagerId && sw.holderId === sch.villagerId);
       } catch (e) { /* no switchboard: the synergy deed stands alone */ }
     }
+    if (req.deed) synergy = !!(sch.villagerId && S.Game && S.Game.godpathDeedStatus && S.Game.godpathDeedStatus(sch.villagerId, gh.id, day)?.complete);
     const dayOk = (day || 0) >= (req.minDay || 0);
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,
@@ -296,7 +298,7 @@
   }
 
   // villagerGodhoodCloseness(game, vid, gh): same requirement model as the
-  // player, read from villager stores. The relay office path is player-only.
+  // player, read from villager stores, including the actual Relay office holder.
   function villagerGodhoodCloseness(game, vid, gh) {
     if (gh.retired) return { kit: 0, needKit: 0, coreHit: false, needCore: false, synergy: false, item: true, dayOk: false, classOk: false, complete: false, close: false, readyForCapstone: false, vid };
     const abs = villagerAbilities(game, vid);
@@ -306,6 +308,7 @@
     const day = ((game.state || {}).scholar || {}).day || (game.state || {}).day || 0;
     let synergy = (req.synergies || []).some(x => syns.has(x));
     if (!synergy) { try { synergy = classDaysDeed((((game.state || {}).village || {}).npcGodpath || {})[vid], req, day); } catch (e) { synergy = false; } }
+    if (req.deed) synergy = !!(game.godpathDeedStatus && game.godpathDeedStatus(vid, gh.id, day)?.complete);
     const dayOk = day >= (req.minDay || 0);
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,
@@ -421,11 +424,14 @@
   }
   function resetDayVerbs(sch) {
     // call at dawn: once-per-day verbs refresh
-    if (!sch.godhood || !sch.godhood.capstoneUsed) return;
-    delete sch.godhood.capstoneUsed.feedMultitude;
-    delete sch.godhood.capstoneUsed.namePrice;
-    delete sch.godhood.capstoneUsed.walkHorizon;
-    try { guardRegen(sch); } catch (e) {}
+    if (!sch.godhood) return;
+    if (sch.godhood.capstoneUsed) {
+      delete sch.godhood.capstoneUsed.feedMultitude;
+      delete sch.godhood.capstoneUsed.namePrice;
+      delete sch.godhood.capstoneUsed.walkHorizon;
+    }
+    // Shattered coins return even before the holder has made a daily wish.
+    guardRegen(sch);
   }
 
   // Army: turnPain — once per fight, retaliate with total damage taken.
@@ -466,78 +472,92 @@
   function auditDue(sch) {
     return marketMarkers(sch) >= MARKET_AUDIT_AT;
   }
+  // Read-only terms shared by the quote and the actual settlement. The caller
+  // supplies the belly after activation fuel; quoting never spends anything.
+  function marketTerms(sch, itemId) {
+    const tier = itemTier(itemId);
+    if (!tier) return null;
+    const price = MARKET_PRICES[tier] || 800;
+    const paidKcal = tier < 4 && (sch.kcal || 0) >= price ? price : 0;
+    return { tier, paidKcal, markersTaken: tier >= 4 ? 2 : paidKcal ? 0 : 1 };
+  }
   // auditCollect(sch): THE AUDIT IS REAL. When 3+ markers accrue, the Audit
   // arrives and takes the single most valuable item (highest loot tier; ties
-  // broken by list order). If the scholar holds nothing worth taking, it
+  // broken by carried, worn, stashed and prep-storage order). One unit pays,
+  // never a whole stack or another person's gear. If nothing is worth taking, it
   // takes 5000 kcal instead. Markers reset to 0 — the ledger is settled.
   // (MARKET GOD 2.0 2026-10-14: the audit was a hook to nothing. Debt needs
   // teeth, or the power is free.)
-  function auditCollect(sch) {
+  function auditCollect(sch, opts) {
     const g = sch.godhood || {};
     if (!auditDue(sch)) return null;
-    const inv = sch.inventory || [];
-    let bestIdx = -1, bestTier = -1;
-    for (let i = 0; i < inv.length; i++) {
-      const id = inv[i] && (inv[i].itemId || inv[i].id);
-      const tier = id ? itemTier(id) : 0;
-      if (tier > bestTier) { bestTier = tier; bestIdx = i; }
-    }
+    opts = opts || {};
+    const idOf = item => typeof item === 'string' ? item : item && (item.itemId || item.id);
+    const unitsOf = item => typeof item === 'string' ? 1 : item && (item.units == null ? 1 : item.units);
+    const inv = sch.inventory || [], equipped = sch.equipped || {};
+    let best = null, bestTier = 0;
+    const consider = (item, source, key) => {
+      const id = idOf(item), tier = id ? itemTier(id) : 0;
+      if (!(unitsOf(item) > 0) || tier <= bestTier) return;
+      bestTier = tier; best = { item, id, source, key };
+    };
+    // Ties retain list order. NPC carried items already include worn copies;
+    // player worn items are separate physical possessions, not bag aliases.
+    inv.forEach((item, i) => consider(item, inv, i));
+    if (!opts.equippedInInventory) for (const [slot, item] of Object.entries(equipped)) consider(item, equipped, slot);
+    for (const bag of [sch.stashed, sch.prepStash]) if (Array.isArray(bag)) bag.forEach((item, i) => consider(item, bag, i));
     let taken = null;
-    if (bestIdx >= 0 && bestTier > 0) {
-      taken = inv.splice(bestIdx, 1)[0];
+    if (best) {
+      const { item, id, source, key } = best;
+      taken = { ...(typeof item === 'object' ? item : {}), itemId: id, units: 1 };
+      if (Array.isArray(source)) {
+        if (unitsOf(item) > 1) source[key] = { ...item, units: unitsOf(item) - 1 };
+        else source.splice(key, 1);
+        if (opts.equippedInInventory && source === inv) {
+          const slot = Object.keys(equipped).find(slot => idOf(equipped[slot]) === id);
+          if (slot) delete equipped[slot];
+        }
+      } else delete source[key];
     } else {
-      // Nothing worth taking — the Audit takes food instead.
-      const kcal = sch.kcal || 0;
+      const kcal = Math.max(0, Number(sch.kcal) || 0);
       const take = Math.min(5000, kcal);
       sch.kcal = kcal - take;
       taken = { itemId: null, kcalTaken: take };
     }
     g.marketDebt = 0;
     sch.godhood = g;
-    const takenId = taken && (taken.itemId || taken.id);
+    const takenId = taken.itemId;
     return {
-      verb: 'auditCollect', ok: true,
+      verb: 'auditCollect', ok: true, itemId: takenId,
+      units: takenId ? 1 : 0, kcalTaken: taken.kcalTaken || 0,
       took: takenId || `${taken.kcalTaken} kcal`,
       note: takenId
         ? `The Audit arrives. It doesn't haggle. It takes your ${takenId} — the finest thing you own — and the ledger closes. The market remembers nothing.`
         : `The Audit arrives. You own nothing worth taking, so it takes ${taken.kcalTaken} kcal of food instead. The ledger closes.`,
     };
   }
-  function namePrice(sch, itemId) {
+  function namePrice(sch, itemId, delivery) {
     const g = sch.godhood || {};
     if (!(g.active || []).includes('market_god')) return null;
     if (!itemId) return null;
     const used = (g.capstoneUsed || {});
     if (used.namePrice) return null; // once per day (reset on dawn)
-    const tier = itemTier(itemId);
-    if (!tier) return { verb: 'namePrice', ok: false, why: 'The market has never heard of that. Name something real.' };
+    const terms = marketTerms(sch, itemId);
+    if (!terms) return { verb: 'namePrice', ok: false, why: 'The market has never heard of that. Name something real.' };
+    const { tier, paidKcal, markersTaken } = terms;
     used.namePrice = true;
     sch.godhood.capstoneUsed = used;
-    let paidKcal = 0, marker = false, markersTaken = 0;
-    if (tier >= 4) {
-      // Relics are lent, never sold. Borrowing the unbuyable costs DOUBLE —
-      // the market charges for the risk. (2.0: was 1 marker; the "lent"
-      // needs teeth, and tier-4 on demand is the strongest use.)
-      markersTaken = 2;
-      marker = true;
-    } else {
-      const price = MARKET_PRICES[tier] || 800;
-      const kcal = sch.kcal || 0;
-      if (kcal >= price) {
-        sch.kcal = kcal - price;
-        paidKcal = price;
-      } else {
-        marker = true; // the market delivers anyway; the debt accrues
-        markersTaken = 1;
-      }
-    }
+    const marker = markersTaken > 0;
+    if (paidKcal) sch.kcal -= paidKcal;
     if (marker) {
       g.marketDebt = (g.marketDebt || 0) + markersTaken;
       sch.godhood = g;
     }
     // Deliver: the trader arrives with exactly what was named.
     sch.inventory = sch.inventory || [];
-    sch.inventory.push({ itemId: itemId, units: 1, marketBought: true });
+    // The Game supplies physical catalog metadata. The pure price primitive
+    // still supports synthetic tier probes without loading the whole world.
+    sch.inventory.push(delivery || { itemId: itemId, units: 1, marketBought: true });
     const due = auditDue(sch);
     return {
       verb: 'namePrice', ok: true, itemId: itemId, tier: tier,
@@ -860,7 +880,11 @@
       const parts = [];
       if (knownCores.length) parts.push(`you're missing ${knownCores.map(abilName).join(' and ')}`);
       if (unknownCores.length) parts.push(`${unknownCores.length} more you've never even heard of`);
-      if (!close.synergy) {
+      if (!close.synergy && req.deed) {
+        const status = game.godpathDeedStatus && game.godpathDeedStatus('player', gh.id);
+        parts.push((status?.observed || status?.pending) ? (req.deed.pendingHint || req.deed.hint) : req.deed.hint);
+      }
+      if (!close.synergy && !req.deed) {
         const synNames = (req.synergies || []).map(sid => {
           try {
             const d = (game.data.synergies || []).find(s => s.id === sid);
@@ -906,7 +930,7 @@
     villagerGodhoodCloseness, checkVillagerGodhood, villagerMythicId,
     itemTier, godhoodItemOk, poolProgress, buildReadyForCapstone, capstoneItemFor,
     raiseEcho, resetFightVerbs, chooseTerms, feedMultitude, resetDayVerbs,
-    turnPain, noLiesCheck, namePrice, buyOff, buyPassage, marketMarkers, auditDue, auditCollect,
+    turnPain, noLiesCheck, namePrice, buyOff, buyPassage, marketTerms, marketMarkers, auditDue, auditCollect,
     guardCoins, guardAbsorb, guardRegen,
     walkHorizon, phaseOut, takeWound,
     ceremonyBeats, recognitionCeremony, villagerRecognitionCeremony, hintBeat,

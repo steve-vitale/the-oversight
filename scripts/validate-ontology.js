@@ -263,7 +263,7 @@ function main() {
   for (const fp of files) {
     const header = validateFile(fp, globalDefs, fileDefs);
     if (header && header.system) {
-      systems.push({ file: path.relative(path.join(__dirname, '..', 'src', 'js'), fp), ...header });
+      systems.push({ file: path.relative(path.join(__dirname, '..', 'src', 'js'), fp).replace(/\\/g, '/'), ...header });
     }
   }
 

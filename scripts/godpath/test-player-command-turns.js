@@ -1,0 +1,96 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('player-command-turns');
+(async()=>{
+  const saves=new Map();global.localStorage={getItem:k=>saves.get(String(k))??null,setItem:(k,x)=>saves.set(String(k),String(x)),removeItem:k=>saves.delete(String(k)),key:i=>[...saves.keys()][i]??null,get length(){return saves.size;}};
+  const G=await K.load({seed:Number(process.env.SEED || 7)});let s,v,f,p,m,a,b,id;
+  const trace=[],vt=G.tbVillagerTurn,mt=G.tbMonsterTurn;
+  G.tbVillagerTurn=function(x){trace.push(x.key);return vt.apply(this,arguments);};
+  G.tbMonsterTurn=function(x){trace.push(x.key);return mt.apply(this,arguments);};
+  function fresh(god=true,friend=false){
+    G.tbfight=null;G.over=false;K.newRun(G);s=G.state.scholar;v=G.state.village;
+    s.day=85;s.kcal=1200;s.health=100;s.abilities=[];s.inventory=[];G.state.systemArrived=true;
+    const roster=v.roster.slice();id=roster.find(x=>x!==G.villagerId);
+    v.npcAbilities={[id]:[]};v.npcSkills={[id]:[]};v.npcGodhood=god?{[id]:{active:['voice_of_the_relay'],recognized:{voice_of_the_relay:85}}}:{};
+    v.pantry=[];G.stockPantry(G.villageDailyNeed()*5,'Prepared command stores');G.npcNeeds(id).hunger=10;
+    m=K.fight(G,'review_drone',{px:3,py:4,mx:4,my:4,hp:100});v.roster=roster;
+    f=G.tbfight;p=G.tbFighter('p');m.hp=m.maxHp=10000;p.acted=false;p.moveLeft=3;p.stunned=0;
+    a={key:'v_voice',kind:'villager',villagerId:id,name:G.displayName(id),hp:100,maxHp:100,mx:2,my:4,alive:true,fled:false,ai:'brave'};
+    b={...a,key:'v_friend',villagerId:roster.find(x=>x!==id&&x!==G.villagerId),name:'Prepared Friend',mx:2,my:3};
+    f.fighters.push(a);if(friend)f.fighters.push(b);f.order=['p',a.key,...(friend?[b.key]:[]),m.key];f.turnIdx=0;f.round=1;delete f._gv;trace.length=0;
+  }
+  function refs(){s=G.state.scholar;v=G.state.village;f=G.tbfight;p=G.tbFighter('p');a=G.tbFighter('v_voice');m=f.fighters.find(x=>x.kind==='monster');}
+  const fixed=fn=>{const r=Math.random;Math.random=()=>0.5;try{return fn();}finally{Math.random=r;}};
+  fresh();const order=f.order.slice(),kcal=s.kcal;G.tbPlayerWait();
+  T.ok('actual NPC Voice caller grants a player-controlled extra turn before the foe',G.tbCurrent()===p&&!!f.playerCommandReturn&&!p.acted&&p.moveLeft>0&&f.round===1&&!trace.includes(m.key));
+  T.ok('the handoff neither duplicates fighters nor changes the normal turn order',JSON.stringify(f.order)===JSON.stringify(order)&&f.fighters.filter(x=>x.kind==='player').length===1);
+  T.ok('NPC pays the existing120kcal-equivalent once, player pays no caster food',G.npcNeeds(id).hunger===15&&s.kcal===kcal&&f._gv?.uses[a.key+':rally_cry']===1);
+  T.ok('player was never passed to NPC AI and no attack was selected for them',!trace.includes('p')&&m.hp===10000);
+  T.ok('real player strike state receives two1.5x strikes and own-turn rally duration',s._nextStrikes?.mult===1.5&&s._nextStrikes.n===2&&p.rallyBuff===2&&!p._nextStrikes);
+  const hp=m.hp;fixed(()=>G.tbPlayerStrike(m.key));T.ok('native player Strike consumes one actual Rally Cry charge',m.hp<hp&&s._nextStrikes?.n===1&&p.acted);
+  G.tbPlayerWait();T.ok('finishing the bonus resumes after its caster and preserves the normal player turn',G.tbCurrent()===p&&!f.playerCommandReturn&&f.round===2&&!p.acted&&trace.filter(k=>k===a.key).length===1&&trace.filter(k=>k===m.key).length===1);
+  fixed(()=>G.tbPlayerStrike(m.key));T.ok('the second real player strike consumes the final charge',!s._nextStrikes);
+  G.tbPlayerWait();T.ok('a spent NPC Voice cast cannot refill the charge on its next turn',!f.playerCommandReturn&&!s._nextStrikes&&f._gv.uses[a.key+':rally_cry']===1);
+  fresh();G.npcNeeds(id).hunger=79;G.tbPlayerWait();T.ok('unfunded NPC Voice grants no bonus or strike charge',!f.playerCommandReturn&&!f.playerCommands?.length&&!s._nextStrikes);
+  fresh();a._gpCommanded=true;G.tbVillagerTurn(a);delete a._gpCommanded;
+  T.ok('an already commanded NPC cannot recursively command the player',!f.playerCommands?.length&&!s._nextStrikes);
+  fresh();const alias={...a,key:'v_self',villagerId:G.villagerId},dup={...a,key:'v_duplicate'};f.fighters.push(alias,dup);
+  T.ok('canonical recipient selector deduplicates people and excludes own aliases',G.tbOtherAllies(p).length===1&&G.tbOtherAllies(a).length===1&&G.tbOtherAllies(a)[0]===p);
+  T.ok('self aliases and detached callers cannot enqueue a player turn',!G.tbCommandPlayer(alias,'invalid')&&!G.tbCommandPlayer({...a},'detached'));
+  T.ok('a foe cannot grant an allied player command',!G.tbCommandPlayer(m,'invalid')&&G.tbOtherAllies(m).length===0);
+  fresh();p.fled=true;T.ok('fled player cannot receive a command',!G.tbCommandPlayer(a,'invalid'));p.fled=false;p.alive=false;
+  T.ok('dead player cannot receive a command',!G.tbCommandPlayer(a,'invalid'));
+  fresh(false,true);v.npcAbilities[id]=['the_crowd_moves'];G.tbPlayerWait();
+  T.ok('actual NPC Crowd Moves planner counts player among its existing two-ally threshold',G.tbCurrent()===p&&!!f.playerCommandReturn&&f.round===1&&f._gpVUses?.[a.key]?.['the_crowd_moves.command']===1,JSON.stringify({trace,uses:f._gpVUses,food:G.villageFoodTier(),hunger:G.npcNeeds(id).hunger,has:G.npcHasAbility(id,'the_crowd_moves'),allies:G.tbOtherAllies(a).map(x=>x.key)}));
+  T.ok('class command pays existing80kcal-equivalent and gives no god strike bonus',G.npcNeeds(id).hunger===13&&!s._nextStrikes);
+  T.ok('the fellow NPC still takes its actual commanded turn',trace.includes(b.key)&&!trace.includes('p'));
+  fresh(false);v.npcAbilities[id]=['the_crowd_moves'];G.tbPlayerWait();T.ok('class planner retains its two-ally preference rather than forcing a weaker cast',!f.playerCommandReturn&&!f.playerCommands?.length);
+  fresh(false);v.npcAbilities[id]=['live_broadcast'];G.tbPlayerWait();T.ok('actual NPC Live Broadcast now counts and rallies the player',p.rallyBuff>0&&f._gpVUses?.[a.key]?.['live_broadcast.go_live']===1,JSON.stringify({uses:f._gpVUses,food:G.villageFoodTier(),has:G.npcHasAbility(id,'live_broadcast'),rally:p.rallyBuff}));
+  fresh(false);v.npcAbilities[id]=['rally_aura'];v.positions[id]={mx:2,my:4};v.positions[G.villagerId]={mx:3,my:4};v.roster=[G.villagerId,id];
+  G.tbEnd('fled');m=K.fight(G,'review_drone',{px:3,py:4,mx:4,my:4,hp:100,party:true});f=G.tbfight;p=G.tbFighter('p');
+  T.ok('actual fight constructor gives nearby player the NPC Rally Aura',p.rallyBuff===2&&p.rallied===2);
+  fresh();G.tbPlayerWait();const key=G.state.runKey;T.ok('real save/load restores an in-progress bonus turn',G.save()===true&&G.load(key)===true);refs();
+  T.ok('reload retains cursor, paid gate, rally and remaining player strikes',G.tbCurrent()===p&&f.playerCommandReturn?.key===a.key&&f._gv.uses[a.key+':rally_cry']===1&&s._nextStrikes?.n===2&&p.rallyBuff===2);
+  trace.length=0;G.tbPlayerWait();T.ok('reloaded bonus resumes after caster without replaying it',G.tbCurrent()===p&&f.round===2&&!trace.includes(a.key)&&trace.filter(x=>x===m.key).length===1);
+  G.tbPlayerWait();T.ok('reload cannot re-arm the spent command',!f.playerCommandReturn&&f._gv.uses[a.key+':rally_cry']===1);
+  fresh(false,true);v.npcAbilities[id]=['the_crowd_moves'];G.tbPlayerWait();const classKey=G.state.runKey;G.save();G.load(classKey);refs();
+  T.ok('class command use limit survives the bonus-turn reload',f._gpVUses?.[a.key]?.['the_crowd_moves.command']===1&&!!f.playerCommandReturn);
+  fresh();m.speed=9;a.speed=12;f.orderDirty=true;f.order=[m.key,'p',a.key];f.turnIdx=1;G.tbPlayerWait();
+  f.fighters.push({key:'obsolete_ghost',kind:'monster',monsterId:'obsolete_command_ghost',name:'Obsolete saved fighter',hp:1,maxHp:1,mx:8,my:8,alive:true,fled:false});f.order.push('obsolete_ghost');
+  const ghostKey=G.state.runKey,knownOrder=f.order.filter(k=>k!=='obsolete_ghost');G.save();G.load(ghostKey);refs();
+  T.ok('dropping an obsolete saved fighter preserves the bonus cursor and known mid-round order',G.tbCurrent()===p&&f.turnIdx===f.order.indexOf('p')&&!!f.playerCommandReturn&&JSON.stringify(f.order)===JSON.stringify(knownOrder));
+  fresh();f.turnIdx=1;G.tbVillagerAbility(a);const pending=G.state.runKey;G.save();G.load(pending);refs();
+  T.ok('pending handoff survives save/load and is delivered once',!!f.playerCommandReturn&&G.tbCurrent()===p&&f.playerCommands.length===0&&f.round===1);
+  fresh();G.tbPlayerWait();G.tbEnd('fled');T.ok('fight end clears only its unused tagged Relay strike charge',!s._nextStrikes);
+  fresh();G.tbPlayerWait();s._nextStrikes={mult:2,n:3,label:'STOKE'};const replacement=JSON.stringify(s._nextStrikes);G.tbEnd('fled');T.ok('fight end preserves a later unrelated strike commitment',JSON.stringify(s._nextStrikes)===replacement);
+  fresh();p.stunned=p.stunFull=1;G.tbPlayerWait();T.ok('a full stun consumes the bonus turn without removing the next ordinary turn',G.tbCurrent()===p&&!p.acted&&!p.stunned&&!f.playerCommandReturn&&f.round===2);
+  fresh();G.tbCommandPlayer(a,'first');G.tbCommandPlayer(a,'second');G.tbAdvance();T.ok('separate earned commands are queued, not collapsed into one',!!f.playerCommandReturn&&f.playerCommands.length===1);
+  G.tbPlayerWait();T.ok('a queued second command is delivered before normal order advances',!!f.playerCommandReturn&&f.playerCommands.length===0&&f.round===1);
+  fresh();f.order=['p',m.key,a.key];G.tbPlayerWait();const foeTurns=trace.filter(x=>x===m.key).length;G.tbPlayerWait();
+  T.ok('a last-in-round caster grants a bonus before wrapping, then preserves the next normal turn',G.tbCurrent()===p&&!f.playerCommandReturn&&f.round===2&&trace.filter(x=>x===m.key).length===foeTurns);
+  fresh();G.tbPlayerWait();f.order=f.order.filter(k=>k!==a.key);f.fighters=f.fighters.filter(x=>x!==a);f.turnIdx=f.order.indexOf('p');trace.length=0;G.tbPlayerWait();
+  T.ok('a removed caster resumes at the next surviving actor rather than replaying or skipping it',G.tbCurrent()===p&&f.round===2&&trace.filter(x=>x===m.key).length===1);
+  fresh();G.tbPlayerWait();m.hp=0;m.alive=false;G.tbPlayerWait();T.ok('ending the fight during a bonus clears its tagged charge and leaves no live handoff',!G.inCombat()&&!s._nextStrikes);
+  fresh(false,true);K.openSlots(G,6);K.giveAbility(G,'the_crowd_moves');const ownFood=s.kcal;G.useAbility('the_crowd_moves','command');
+  T.ok('player Crowd Moves still commands NPC allies, pays80 and never commands itself',trace.includes(a.key)&&trace.includes(b.key)&&!trace.includes('p')&&!f.playerCommands?.length&&s.kcal===ownFood-80&&p.acted);
+  // Browser scheduler: real AI/turn methods, a deterministic timer queue.
+  fresh();const timers=[],events=[],oldTimer=global.setTimeout,oldWindow=global.window,oldEvent=global.CustomEvent;
+  global.window={dispatchEvent:e=>events.push(e.detail)};global.CustomEvent=class{constructor(type,o){this.detail=o.detail;}};global.setTimeout=(fn)=>{timers.push(fn);return timers.length;};
+  try{
+    G.tbAdvanceAsync();const stale=(f.asyncGen||0)-1;
+    // Browser cadence announces the ally before its real action grants the
+    // command. Drain that announcement, then demand the same clean handoff.
+    let announcing=0;while(timers.length&&!f.playerCommandReturn&&announcing++<10)timers.shift()();
+    T.ok('async scheduler hands control to player with no enemy timer running',G.tbCurrent()===p&&!!f.playerCommandReturn&&!f.asyncRunning&&timers.length===0&&events.some(e=>e.phase==='player'));
+    const snapshot=JSON.stringify({idx:f.turnIdx,round:f.round,hp:m.hp});G.tbAdvanceOneAsync(stale);
+    T.ok('stale async generation cannot advance during the bonus choice',JSON.stringify({idx:f.turnIdx,round:f.round,hp:m.hp})===snapshot);
+    fixed(()=>G.tbPlayerStrike(m.key));G.tbPlayerWait();let guard=0;while(timers.length&&guard++<20)timers.shift()();
+    T.ok('async bonus completion resumes one foe turn and the next normal player turn',G.tbCurrent()===p&&!p.acted&&!f.playerCommandReturn&&f.round===2&&trace.filter(x=>x===a.key).length===1&&trace.filter(x=>x===m.key).length===1);
+    // Reproduce a generation collision after load without replacing the real
+    // stepper: both old and loaded fights start their first chain at gen1.
+    delete global.window;fresh(false);global.window={dispatchEvent:e=>events.push(e.detail)};timers.length=0;
+    G.tbAdvanceAsync();const oldTick=timers.shift(),loadKey=G.state.runKey,oldFight=f;G.save();G.load(loadKey);refs();G.tbAdvanceAsync();
+    const cursor=JSON.stringify({idx:f.turnIdx,round:f.round,trace:trace.slice()});oldTick();
+    T.ok('an old fight callback cannot advance a loaded fight with the same generation',oldFight!==f&&JSON.stringify({idx:f.turnIdx,round:f.round,trace:trace.slice()})===cursor);
+  }finally{global.setTimeout=oldTimer;if(oldWindow===undefined)delete global.window;else global.window=oldWindow;if(oldEvent===undefined)delete global.CustomEvent;else global.CustomEvent=oldEvent;}
+  T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

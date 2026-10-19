@@ -71,6 +71,8 @@ const ids = [...reg.matchAll(/^\s+([a-z0-9_]+):\s*`/gm)].map(x => x[1]);
 check('sprite registry is non-trivial', ids.length > 250, ids.length);
 check('sprite ids are unique', new Set(ids).size === ids.length);
 for (const id of ids) { const p = svgProblem(Sp.get(id)); check('sprite ' + id, !p, p); }
+// Generated regional assets obey the same SVG contract as literal entries.
+for (const id of Sp.ids().filter(id => !ids.includes(id))) { const p = svgProblem(Sp.get(id)); check('generated sprite ' + id, !p, p); }
 for (const [id, s] of Object.entries(MYTH)) { const p = svgProblem(s); check('mythic ' + id, !p, p); }
 const unknown = Sp.itemSprite('__no_such_item__', false);
 check('UNKNOWN_ITEM parcel', !svgProblem(unknown), svgProblem(unknown));

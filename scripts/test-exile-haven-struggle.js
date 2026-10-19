@@ -8,33 +8,10 @@
 // JOIN arc: petition respects capacity (full = refused), acceptance puts you
 // on 14-day probation at their fire (half shares, trust 5), served or failed.
 // Usage: node scripts/test-exile-haven-struggle.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js', 'src/js/journal.js',
- 'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js',
- 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/food.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js',
- 'src/js/progression.js', 'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
- 'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js'].forEach(f => {
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); }
-});
-const Game = globalThis.Scattering.Game;
-
-// Deterministic RNG (mulberry32)
-(function seed() {
-  let a = 0xE411E;
-  Math.random = function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-})();
+const H = require('./sim-harness');
+let Game, forced = null, liveRandom = Math.random;
+const randomProxy = () => forced == null ? liveRandom() : forced;
+function atRandom(value, fn) { const old = forced; try { forced = value; return fn(); } finally { forced = old; } }
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -52,7 +29,10 @@ function setPack(pid, kcal) {
 }
 
 (async () => {
-  await Game.init();
+  const descriptor = Object.getOwnPropertyDescriptor(Math, 'random');
+  Object.defineProperty(Math, 'random', { configurable: true, get: () => randomProxy, set: fn => { liveRandom = fn; } });
+  try { ({ Game } = await H.loadGame({ seed: Number(process.env.SEED || 0xE411E), mode: 'exile-proof', narration: true })); }
+  finally { Object.defineProperty(Math, 'random', { ...descriptor, value: randomProxy }); }
 
   console.log('== 1. FOUND ARC: instant founding is refused ==');
   Game.debugScenario('day1');
@@ -188,11 +168,8 @@ function setPack(pid, kcal) {
 
   console.log('== 9. drift smoke discovery runs clean ==');
   s2.drifting = true;
-  // PLACEMENT IS NONDETERMINISTIC (test-robustness 2026-10-10): the init path
-  // uses unseeded RNG, so a village can sit adjacent to the drift tile — then
-  // smoke says "close enough to smell" and never sets hinted. Drift from the
-  // farthest corner so the hint path is always reachable, and loop until a
-  // hint lands (the smoke branch is ~16%/tick; 1000 ticks without one ~ 0).
+  // The shared harness seeds before modules capture RNG. Drift from the
+  // farthest legal tile so the actual distant-hint opportunity exists.
   const vs9 = Game.state.otherVillages || [];
   let bx = 0, by = 0, bd = -1;
   for (let yy = 0; yy < 9; yy++) for (let xx = 0; xx < 9; xx++) {
@@ -209,6 +186,21 @@ function setPack(pid, kcal) {
   ok('drift days tick clean (no throw)', threw === null, threw && threw.message);
   ok('drift days advance the clock', (s2.driftDays || 0) === dd0 + ticks);
   ok('smoke sightings hint villages', vs9.some(v => v.hinted));
+
+  // Zero map coordinates are real places, not missing values. Force the
+  // actual captured smoke roll, retaining the real discovery implementation.
+  const originalVillages = Game.state.otherVillages;
+  for (const [px, py, vx, vy, direction, label] of [[0, 3, 3, 3, 'east', 'x=0'], [3, 0, 3, 3, 'south', 'y=0']]) {
+    const settlement = { id: 'zero-' + label, name: 'Prepared fire', x: vx, y: vy };
+    Game.state.otherVillages = [settlement]; Game.map.px = px; Game.map.py = py;
+    Game.log.length = 0; atRandom(0.6, () => Game.driftTick());
+    const said = Game.log.map(x => x.text ?? x).join(' | ');
+    ok('actual smoke at ' + label + ' hints the correct distant direction', settlement.hinted === true && said.includes('smoke on the horizon, ' + direction));
+    settlement.x = px + (px === 0 ? 1 : 0); settlement.y = py + (py === 0 ? 1 : 0); delete settlement.hinted;
+    Game.log.length = 0; atRandom(0.6, () => Game.driftTick());
+    ok('adjacent cooking at ' + label + ' does not invent a distant hint', !settlement.hinted && Game.log.map(x => x.text ?? x).join(' | ').includes('close enough to smell'));
+  }
+  Game.state.otherVillages = originalVillages;
 
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);

@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),K=require('./lib'),T=K.reporter('controller census'),F=require('../balance-features');
+const read=name=>JSON.parse(z.gunzipSync(fs.readFileSync(path.join(__dirname,'../../evidence/2026-10-17',name))));
+const current=read('livelihood-port-r3-neutral.json.gz'),failed=read('livelihood-port-r1-neutral-failed.json.gz'),before=JSON.stringify([current,failed]);
+const rows=F.summarize(current),maker=rows.find(r=>r.policy==='maker').controllerDiagnostics;
+T.ok('real maker block coverage survives the offline feature census',maker.measuredRuns===2&&maker.blockedRuns===1&&maker.blocks.some(b=>b.name==='counterMaterials'&&b.runs===1)&&maker.counters.livelihoodCounterMaterialBlockedDays.sum===49&&maker.counters.livelihoodCounterMaterialBlockedDays.reportedRuns===1);
+const caregiver=rows.find(r=>r.policy==='caregiver').controllerDiagnostics;
+T.ok('real patient work retains reported-run coverage',caregiver.counters.livelihoodPatients.sum===105&&caregiver.counters.livelihoodPatients.reportedRuns===2);
+const bad=F.summarize(failed).find(r=>r.policy==='maker').controllerDiagnostics;
+T.ok('failed real port errors remain visible rather than being erased',bad.errorRuns===1&&bad.capturedErrorReasons['make: G.takePrepMaterial is not a function']===30&&bad.blockKnownRuns===0&&bad.blockedRuns===null);
+const capable=rows.find(r=>r.policy==='capable').controllerDiagnostics;
+T.ok('uninstrumented mixed profile stays unknown rather than apparently clean',capable.measuredRuns===0&&capable.missingRuns===2&&capable.errorRuns===null&&capable.blockedRuns===null);
+T.ok('offline census leaves both retained raw panels unchanged',before===JSON.stringify([current,failed]));
+T.done();

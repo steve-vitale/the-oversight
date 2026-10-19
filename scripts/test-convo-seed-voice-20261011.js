@@ -14,51 +14,10 @@
 // Usage: node scripts/test-convo-seed-voice-20261011.js
 //   env: SEED=20261012 (single-seed override)
 
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-const SEEDS = (process.env.SEED ? [parseInt(process.env.SEED, 10)] : [20261012, 777123, 424242, 90210]);
-
-let _s = 0;
-Math.random = function () {
-  _s |= 0; _s = (_s + 0x6D2B79F5) | 0;
-  let t = Math.imul(_s ^ (_s >>> 15), 1 | _s);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-};
-function reseed(seed) { _s = seed >>> 0; }
-
-global.fetch = (f) => Promise.resolve({
-  json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
-});
-global.window = global;
-const files = [
-  'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
-  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
-  'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js',
-  'src/js/party.js', 'src/js/party-formal.js', 'src/js/truth.js',
-  'src/js/contests.js', 'src/js/broadcast.js', 'src/js/contestEngine.js',
-  'src/js/alienPlayers.js', 'src/js/storage.js', 'src/js/perceive.js',
-  'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/corruption.js',
-  'src/js/lifeseed.js', 'src/js/progression.js', 'src/js/waveLedger.js',
-  'src/js/feastBuff.js', 'src/js/ledger.js', 'src/js/abilityActions.js',
-  'src/js/monsterBehaviors.js', 'src/js/partyTactics.js',
-  'src/js/sigW3a.js', 'src/js/statusEffects.js', 'src/js/sigW3b.js',
-  'src/js/metaProgression.js', 'src/js/sigW3c.js',
-  'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js',
-  'src/js/membership.js', 'src/js/havenGrowth.js', 'src/js/hierarchy.js',
-  'src/js/comms.js', 'src/js/safetynets.js', 'src/js/villageAgency.js',
-  'src/js/debug-scenarios.js', 'src/js/build.js',
-];
-for (const f of files) { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-delete global.window;
-const Game = globalThis.Scattering.Game;
-if (typeof Game.emit !== 'function') Game.emit = function (m) { return m; };
+'use strict';
+const K=require('./godpath/lib'),cp=require('child_process');
+const SEEDS=process.env.SEED?[Number(process.env.SEED)]:[20261012,777123,424242,90210];
+let Game;
 
 // The four wants whose seed notes referenced the speaker in 3rd person.
 const TARGETS = ['seek_comfort', 'share_news', 'ask_favor', 'seek_taken'];
@@ -71,12 +30,7 @@ function ok(name, cond, extra) {
 function vname(vid) { try { return Game.villagerName(vid) || vid; } catch (e) { return vid; } }
 
 async function oneSeed(seed) {
-  reseed(seed);
-  await Game.init();
-  Game.genDetail = function () { return {}; };
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
+  K.newRun(Game);
   Game.state.scholar.day = 20;
   const npcs = (Game.state.village.roster || []).filter(id => id !== Game.villagerId)
     .filter(id => { try { return Game.npcComm(id).level !== 'none'; } catch (e) { return true; } });
@@ -104,8 +58,8 @@ async function oneSeed(seed) {
           const r = Game.startConvo(vid);
           let rr = r;
           for (let t = 0; t < 2 && rr && !rr.ended; t++) {
-            const ch = (rr.choices || []).find(x => x && x.id === 'dlg:react') ||
-                       (rr.choices || []).find(x => x && x.id && x.id !== 'leave');
+            const ch = K.findConvoChoice(Game,vid,'dlg:react') ||
+                       (Game.convoChoices(vid) || []).find(x=>x && !['leave','menu:more'].includes(x.id));
             if (!ch || ch.id === 'leave') break;
             rr = Game.convoTurn(vid, ch.id);
           }
@@ -171,19 +125,25 @@ const PROVEN = {}; // wantId -> {note, opener} across all seeds
 // direct question ("Will you help me? — anyway." answers yourself).
 // Statements keep the closer (the mannerism still exists).
 function voiceCheck(seed) {
-  reseed(seed * 7 + 1);
   const npcs = (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
   const quick = npcs.find(id => {
     try { return Game.convoSpeechDNA(id).pace === 'quick'; } catch (e) { return false; }
   });
   if (!quick) { console.log(`(seed ${seed}: no quick-paced villager — voice check skipped)`); return; }
   const qSeen = new Set(), sSeen = new Set();
-  for (let i = 0; i < 60; i++) {
-    const q = Game.voiceLine(quick, '"Will you help me clean it?"');
-    const s = Game.voiceLine(quick, '"I can\'t clean it properly one-handed."');
-    if (q) qSeen.add(q);
-    if (s) sSeen.add(s);
-  }
+  // Exercise the real formatting branch, not a probabilistic sixty-draw
+  // quota after a long mutable campaign. Enter the marker branch, choose a
+  // closer and let the real no-repeat cycle walk its authored pools.
+  const random=Math.random;
+  try {
+    for(let i=0;i<60;i++) {
+      let call=0;Math.random=()=>call++===0?0:0.99;
+      const q=Game.voiceLine(quick,'"Will you help me clean it?"');
+      call=0;
+      const statement=Game.voiceLine(quick,'"I cannot clean it properly one-handed."');
+      if(q)qSeen.add(q);if(statement)sSeen.add(statement);
+    }
+  } finally { Math.random=random; }
   const badQ = [...qSeen].filter(l => /\? — (anyway|comedy)\."$/.test(l));
   ok(`seed ${seed}: no dismissal closer after a question`, badQ.length === 0,
     badQ.slice(0, 2).join(' | ').slice(0, 120));
@@ -196,14 +156,28 @@ function voiceCheck(seed) {
   for (const l of [...sSeen].slice(0, 3)) console.log(`  S: ${l}`);
 }
 
-async function main() {
-  for (const s of SEEDS) { await oneSeed(s); voiceCheck(s); }
-  for (const wantId of TARGETS) {
-    const p = PROVEN[wantId] || {};
-    ok(`${wantId}: proven first-person note (any seed)`, !!p.note);
-    ok(`${wantId}: proven clean seed opener (any seed)`, !!p.opener);
-  }
-  console.log(`\n=== RESULT: ${pass} pass, ${fail} fail ===`);
-  process.exit(fail ? 1 : 0);
+async function child(seed) {
+  Game=await K.load({seed,narration:true});
+  await oneSeed(seed);voiceCheck(seed);
+  console.log('@@SEEDVOICE@@'+JSON.stringify({seed,pass,fail,proven:PROVEN}));
+  process.exitCode=fail?1:0;
 }
-main().catch(e => { console.error('HARNESS ERROR:', e); process.exit(2); });
+function main() {
+  for(const seed of SEEDS) {
+    const r=cp.spawnSync(process.execPath,[__filename,'--child',String(seed)],{encoding:'utf8',env:process.env,maxBuffer:8*1024*1024});
+    const [spoken,record]=(r.stdout || '').split('@@SEEDVOICE@@');process.stdout.write(spoken);
+    if(!record){fail++;console.error('Isolated seed proof failed',seed,r.stderr);continue;}
+    const result=JSON.parse(record);pass+=result.pass;fail+=result.fail;
+    if(r.status!==0&&!result.fail){fail++;console.error('Seed harness exited unexpectedly',seed,r.stderr);}
+    for(const [id,proof]of Object.entries(result.proven)){PROVEN[id]=PROVEN[id]||{};for(const [key,value]of Object.entries(proof))if(value)PROVEN[id][key]=true;}
+  }
+  for(const wantId of TARGETS) {
+    const p=PROVEN[wantId]||{};
+    ok(wantId+': proven first-person note (any seed)',!!p.note);
+    ok(wantId+': proven clean seed opener (any seed)',!!p.opener);
+  }
+  console.log('\n=== RESULT: '+pass+' pass, '+fail+' fail (isolated shared harnesses) ===');
+  process.exitCode=fail?1:0;
+}
+if(process.argv[2]==='--child')child(Number(process.argv[3])).catch(e=>{console.error('HARNESS ERROR:',e);process.exitCode=2;});
+else main();

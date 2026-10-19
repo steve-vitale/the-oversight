@@ -54,13 +54,21 @@ function driveToMoot(others) {
   // ---------- 1. judged crimes count half heat (no double jeopardy) ----------
   {
     await boot();
+    // Isolate crime heat from randomized starting trust and material debt.
+    // Verdicts halve judged crimes; ambient distrust remains separate heat.
+    const v = Game.state.village;
+    v.trust = Object.fromEntries(v.roster.map(id => [id, 20]));
+    v.takes = {}; v.gives = {}; Game.justiceState().amendsCredit = 0;
     Game.recordCrime('theft', { victim: 'x1', caught: true });
     Game.recordCrime('attack', { victim: 'x2' });
     const heatBefore = Game.justiceHeat(); // 35
     for (const cr of Game.justiceState().crimes) cr.caseId = 'case_judged';
     const heatAfter = Game.justiceHeat();
+    ok('prepared witnessed theft and attack produce 35 crime heat', heatBefore === 35);
     ok('judged heat is half of unjudged', heatAfter === Math.round(heatBefore * 0.5));
     ok('judged heat < confrontation threshold', heatAfter < 50);
+    for (const id of v.roster) v.trust[id] = 9;
+    ok('judgment does not halve the separate 15 ambient distrust heat', Game.justiceHeat() === 33);
   }
 
   // ---------- 2. summons names the strongest witnessed charge ----------

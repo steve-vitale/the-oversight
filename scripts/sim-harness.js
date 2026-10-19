@@ -161,7 +161,8 @@ async function loadGame(opts) {
   Date.now = () => 1760400000000 + (__clockCalls++);
 
   global.fetch = (f) => Promise.resolve({
-    json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
+    ok: true, status: 200,
+    json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, decodeURIComponent(new URL(f, 'https://sim.invalid/').pathname).slice(1)), 'utf8')))
   });
 
   // HEAD-80 BUG (fix-disease 2026-10-13): the old `head -80` silently dropped
@@ -243,12 +244,32 @@ async function loadGame(opts) {
 }
 
 // Standard new-game setup shared by sims: generate roster, start, depart.
-async function setupGame(Game, place, rosterId) {
+async function setupGame(Game, place, rosterId, options) {
   place = place || 'Columbus, Ohio';
+  const occupation = options && options.occupation;
+  if (occupation != null) {
+    if (rosterId != null) throw Error('Choose occupation or rosterId, not both');
+    if (typeof occupation !== 'string' || !Game.data.characterGen.occupations.some(o => o.id === occupation)) throw Error('Unknown occupation: ' + occupation);
+    if (process.env.FORCE_OCC) throw Error('Unset FORCE_OCC; occupation cohorts select actual offered cards');
+  }
   Game.genRoster(place);
-  const rid = rosterId != null ? rosterId : Game.generatedRoster[0].id;
+  let selection;
+  if (occupation != null) {
+    const offered = Game.generatedRoster.filter(p => p.candidate !== false).map(p => ({ id: p.id, occupation: p.occupationId }));
+    const selectedOfferIndex = offered.findIndex(p => p.occupation === occupation);
+    selection = { schemaVersion: 1, requestedOccupation: occupation, origin: place, offered,
+      rosterHash: require('crypto').createHash('sha256').update(JSON.stringify(Game.generatedRoster)).digest('hex') };
+    if (selectedOfferIndex < 0) return { ...selection, status: 'excluded', reason: 'occupation_not_offered' };
+    selection = { ...selection, status: 'played', selectedOfferIndex, selectedId: offered[selectedOfferIndex].id };
+  }
+  const rid = selection ? selection.selectedId : rosterId != null ? rosterId : Game.generatedRoster[0].id;
   Game.newGame(place, null, rid);
   Game.depart();
+  if (selection) {
+    const person = Game.getPerson(Game.villagerId);
+    if (Game.villagerId !== rid || person?.occupationId !== occupation) throw Error('Started bearer does not match the offered occupation');
+    return { ...selection, startingBearer: Game.villagerId, occupation: person.occupationId, region: Game.state.region };
+  }
 }
 
 // runDays(Game, policy, opts) — the shared day loop.
@@ -731,43 +752,7 @@ function driveFightsImpl(Game, policy, ctx) {
         p.moveLeft = 0; p.acted = true;
         Game.tbAfterPlayerAction();
       } catch (e) { exitWhy = 'default-turn-threw'; break; }
-    } else if (process.env.DF_STOPGAP === '0') { exitWhy = 'not-player-turn'; break; } else {
-      // DAYFREEZE STOPGAP (2026-10-18, sim-dayfreeze-green): startCombat's
-      // opening tbAdvance can strand a LIVE fight at an AI turn — the
-      // "OPENING TURNS" contract ("run AI turns until it's your turn",
-      // game.js) is violated in 7 deterministic cases on the winseat corpus
-      // (evidence/2026-10-18/sim-dayfreeze.md). The game-code root cause is
-      // unpinned; until it lands, drive the stranded AI turns here with the
-      // sync tbAdvance so the sim's day clock doesn't freeze. HARNESS-ONLY:
-      // this branch previously just broke, so no non-stranded fight ever
-      // reaches this code — behavior is identical unless the contract is
-      // already violated. tbAdvance never acts FOR the player: it stops at
-      // the player turn (tbBeginTurn) or ends the fight.
-      // DF_STOPGAP=0 restores the old break (control arm for A/B).
-      try {
-        const st = (Game.__dfStopgap || (Game.__dfStopgap = { fires: 0, recovered: 0, stuck: 0, threw: 0 }));
-        st.fires++;
-        Game.tbAdvance();
-        const f1 = Game.tbfight;
-        if (!f1 || f1.over || Game.tbIsPlayerTurn()) { st.recovered++; }
-        else {
-          // Still live at a non-player turn after a full tbAdvance: the
-          // contract violation is state-deterministic, not transient — a
-          // second call would strand the same way. Break loudly; the
-          // no-progress guard below would only spin on it.
-          st.stuck++;
-          try { (ctx.notes || (ctx.notes = [])).push('driveFights: stopgap tbAdvance left live fight at non-player turn (stall)'); } catch (e2) {}
-          exitWhy = 'ai-turn-stall'; break;
-        }
-      } catch (e) {
-        try {
-          const st2 = (Game.__dfStopgap || (Game.__dfStopgap = { fires: 0, recovered: 0, stuck: 0, threw: 0 }));
-          st2.threw++;
-          (ctx.notes || (ctx.notes = [])).push('driveFights: stopgap tbAdvance threw: ' + (e && e.message));
-        } catch (e2) {}
-        exitWhy = 'tbAdvance-threw'; break;
-      }
-    }
+    } else { exitWhy = 'not-player-turn'; break; }
     const s = sig();
     if (s === lastSig) { if (++still > 10) { try { (ctx.notes || (ctx.notes = [])).push('driveFights: no progress for 10 rounds, breaking'); } catch (e2) {} exitWhy = 'no-progress'; break; } }
     else { still = 0; lastSig = s; }
@@ -799,6 +784,14 @@ function driveContestsImpl(Game, policy, ctx) {
     if (Game.over) break;
   }
   driveFights(Game, policy, ctx);
+  // Give an explicit bot choice the same opportunity as the phone before
+  // the historical fight fallback. Profiles without a callback are unchanged.
+  if (Game.pendingEncounter && Game.pendingMonsterId && typeof policy.pending === 'function') {
+    try {
+      const respond = () => { if (ctx && ctx._pacingBump) ctx._pacingBump('policyCalls'); return policy.pending(Game, ctx); };
+      if (ctx && ctx._withOrigin) ctx._withOrigin('policy', respond); else respond();
+    } catch (e) { console.warn('[sim-harness] policy.pending threw: ' + (e && e.message)); }
+  }
   if (Game.pendingEncounter && Game.pendingMonsterId) {
     try {
       const mid = Game.pendingMonsterId;

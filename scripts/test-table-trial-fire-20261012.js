@@ -32,7 +32,7 @@ function mulberry32(a) {
   };
 }
 Math.random = mulberry32(12012);
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
+global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, decodeURIComponent(new URL(f, 'https://fixture.invalid/').pathname).slice(1)), 'utf8'))) });
 // (2026-10-16) load the FULL index.html script list per the AGENTS.md harness
 // standard -- head -80 went stale when shelter.js landed, pushing table-feared.js
 // to #81 and hiding Game.tableTrialResume from this harness.

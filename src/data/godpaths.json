@@ -5,7 +5,7 @@
     "recognize": {
       "minAbilities": 3
     },
-    "_capstone": "Ascension: recognised class on this path + its subclass payoff held + abilitiesNeeded abilities of the path (payoff included) + the deed: day >= minDay AND a discovered synergy that uses an ability of this path (or one of god.deedSynergies; the Relay office counts for the Socialite). The capstone item is the System's gift at the ceremony, not a gate. THE LIVED-IN DEED (godpath-buff 2026-10-14): the class named on this path and held deedClassDays days also completes the deed (the build was played, not assembled on the day; 0 = off).",
+    "_capstone": "Ascension: recognised class on this path + its subclass payoff held + abilitiesNeeded abilities of the path (payoff included) + the deed: day >= minDay AND a discovered synergy that uses an ability of this path (or one of god.deedSynergies; the Relay office counts for the Socialite). An authored god.deed replaces the legacy deed proxies for that god. The capstone item is the System's gift at the ceremony, not a gate. THE LIVED-IN DEED (godpath-buff 2026-10-14): the class named on this path and held deedClassDays days also completes the deed (the build was played, not assembled on the day; 0 = off).",
     "capstone": {
       "abilitiesNeeded": 4,
       "minDay": 80,
@@ -18,12 +18,12 @@
     "offers": {
       "_doc": "A level-up or gift sheet leans to a recognised path: at least one offer is from it when the kit has one; offers prefer distinct roles.",
       "lean": true,
-    "_payoffAnyTrack": "A named class's payoff may appear on any level-up or gift sheet, not only its own track's (godpath-buff 2026-10-14): the payoff is what makes a god a build, and it often sits in another track's kit.",
-    "payoffAnyTrack": true,
-    "_window": "Class diversity (2026-10-14): a level-up sheet draws offerSize offers from the next `window` unheld kit entries, weight windowDecay^i for the i-th entry (earlier = likelier, so power order holds on average), deterministic per holder/track/level (a private hash stream, never Math.random). Before a class is recognised, jobLean puts >=1 offer on the holder's job path (characterGen occupations[].pathLean) when the window holds one. evidence/2026-10-14/class-diversity.md",
-    "window": 6,
-    "windowDecay": 0.7,
-    "jobLean": true
+      "_payoffAnyTrack": "A named class's payoff may appear on any level-up or gift sheet, not only its own track's (godpath-buff 2026-10-14): the payoff is what makes a god a build, and it often sits in another track's kit.",
+      "payoffAnyTrack": true,
+      "_window": "Class diversity (2026-10-14): a level-up sheet draws offerSize offers from the next `window` unheld kit entries, weight windowDecay^i for the i-th entry (earlier = likelier, so power order holds on average), deterministic per holder/track/level (a private hash stream, never Math.random). Before a class is recognised, jobLean puts >=1 offer on the holder's job path (characterGen occupations[].pathLean) when the window holds one. evidence/2026-10-14/class-diversity.md",
+      "window": 6,
+      "windowDecay": 0.7,
+      "jobLean": true
     }
   },
   "paths": {
@@ -70,8 +70,8 @@
         "verb": "Turn the Pain",
         "desc": "Once per fight, take every wound you've suffered this fight and give it back in a single blow. No cap. The math is simple: the more they hurt you, the more you hurt them.",
         "mechanic": "once per fight: retaliatory strike dealing total damage taken this fight, uncapped",
-        "cost": "Once per fight. You have to SURVIVE to deliver it \u2014 die first and the pain dies with you.",
-        "weakness": "Anything that doesn't bleed \u2014 beams, politics, starvation \u2014 ignores your whole build.",
+        "cost": "Once per fight. You have to SURVIVE to deliver it — die first and the pain dies with you.",
+        "weakness": "Anything that doesn't bleed — beams, politics, starvation — ignores your whole build.",
         "scale": {
           "party": "You stand in front. Allies see you bleed and fight harder for it.",
           "titan": "A titan's blows come back at once: one uncapped return per fight.",
@@ -85,7 +85,7 @@
         },
         "recognition": {
           "beat": "Your blood hits the ground and the ground flinches.",
-          "systemLine": "\"THEY'RE BLEEDING! THEY'RE LOSING! THE GAMBLERS ARE CASHING OUT! ...Why is it SMILING?! OH NO. OH NO NO NO. FOLKS, THE DAMAGE ISN'T A COST ANYMORE \u2014 IT'S A WEAPON! WE HAVE A ONE-PERSON ARMY!\""
+          "systemLine": "\"THEY'RE BLEEDING! THEY'RE LOSING! THE GAMBLERS ARE CASHING OUT! ...Why is it SMILING?! OH NO. OH NO NO NO. FOLKS, THE DAMAGE ISN'T A COST ANYMORE — IT'S A WEAPON! WE HAVE A ONE-PERSON ARMY!\""
         },
         "capstoneItems": [
           "worldbreaker_maul",
@@ -96,7 +96,27 @@
           "undying_fury",
           "crimson_circuit",
           "cornered_fury"
-        ]
+        ],
+        "play": {
+          "_doc": "THE VERB IN PLAY (src/js/godverbs.js). Turn the Pain: a combat action for whoever ascended (player or villager, same function). The pain pool is every wound taken this fight, minus what beams did (what does not bleed does not come back). PARTY: below partyRallyAt HP the allies within 3 see you bleed and fight harder (rallied). TITAN: against a titan-class foe the blow also returns what that titan did to your allies this fight.",
+          "actions": [
+            {
+              "id": "turn_the_pain",
+              "name": "Turn the Pain",
+              "context": "combat",
+              "cost": {
+                "kcal": 150,
+                "turn": 1
+              },
+              "perFight": 1,
+              "reach": 1,
+              "effect": "Every wound you took this fight, given back in one blow to an adjacent foe. No cap. Beams do not count."
+            }
+          ],
+          "partyRallyAt": 0.5,
+          "partyRallyRounds": 3,
+          "villagerCastAt": 0.35
+        }
       }
     },
     "shieldbearer": {
@@ -138,9 +158,9 @@
         "why": "Take the Wound is redirection, the bulwark verb: the shield takes the ally's hit. Its old pool was medic skills; the verb was always a shield's.",
         "fantasy": "No one dies on your watch. You take their wounds as your own and keep standing.",
         "verb": "Take the Wound",
-        "desc": "When an ally would take a wound, take it yourself instead. Redirected wounds cannot drop you below 1 HP \u2014 you keep standing. But strain accumulates: at 3 strains in one fight, you collapse (alive, but out).",
+        "desc": "When an ally would take a wound, take it yourself instead. Redirected wounds cannot drop you below 1 HP — you keep standing. But strain accumulates: at 3 strains in one fight, you collapse (alive, but out).",
         "mechanic": "redirect ally damage to self; redirected damage can't drop below 1 HP; 3 strains/fight = collapse",
-        "cost": "You take the damage \u2014 really. And every wound you carry makes you the priority target, which you already were.",
+        "cost": "You take the damage — really. And every wound you carry makes you the priority target, which you already were.",
         "weakness": "You're the priority target, and you can't heal yourself mid-fight as easily. Everyone aims at the light.",
         "scale": {
           "party": "The wall that never breaks: the party's worst hit lands on you.",
@@ -148,24 +168,41 @@
           "contest": "The audience weeps when you take the blow for someone else.",
           "army": "The army advances behind you."
         },
-        "hint": "\"You catch people, little caregiver. Falls, fevers, failures \u2014 you're always there first. Lately it looks less like catching and more like... absorbing. I have a word for it. Soon.\"",
+        "hint": "\"You catch people, little caregiver. Falls, fevers, failures — you're always there first. Lately it looks less like catching and more like... absorbing. I have a word for it. Soon.\"",
         "mythic": {
-          "desc": "A figure in white-gold light, shielding wings half-unfurled, a soft halo. Others' wounds visible as light on the skin \u2014 carried, not hidden.",
+          "desc": "A figure in white-gold light, shielding wings half-unfurled, a soft halo. Others' wounds visible as light on the skin — carried, not hidden.",
           "title": "Radiant Guardian"
         },
         "recognition": {
           "beat": "Someone else's blood is on your hands. It was never yours. It is now.",
-          "systemLine": "\"THEY'RE DOWN! THE MEDIC'S DOWN! ...Why are they STANDING? THAT WOUND WAS ON THE OTHER ONE! FOLKS, THE WOUNDS ARE MOVING! THEY'RE \u2014 THEY'RE TAKING THEM! We have an UNDYING WARD!\""
+          "systemLine": "\"THEY'RE DOWN! THE MEDIC'S DOWN! ...Why are they STANDING? THAT WOUND WAS ON THE OTHER ONE! FOLKS, THE WOUNDS ARE MOVING! THEY'RE — THEY'RE TAKING THEM! We have an UNDYING WARD!\""
         },
         "capstoneItems": [
           "surgeons_kit",
           "lifebound_vestments"
         ],
+        "deed": {
+          "event": "ward_rescue",
+          "afterDawn": false,
+          "hint": "Carry a real blow meant for someone else, then leave the fight with them alive."
+        },
         "deedSynergies": [
           "surgeons_calm",
           "field_pharmacy",
           "clean_plate"
-        ]
+        ],
+        "play": {
+          "_doc": "Take the Wound: automatic. A big hit on an ally (>= minFrac of their max HP, or lethal) lands on the Ward instead, and a redirected wound cannot drop the Ward below 1 HP. Each redirect burns kcal (villager: belly). strains per fight, then the Ward collapses (player: loses a whole turn; villager: out of the fight). WEAKNESS: the priority target (monsters aim at the light) and self-healing mid-fight is halved. PARTY/TITAN: every ally on the field counts, coalition blades included, any hit size.",
+          "passive": {
+            "id": "take_the_wound",
+            "name": "Take the Wound",
+            "kcal": 60,
+            "strains": 3,
+            "minFrac": 0.25
+          },
+          "selfHealMult": 0.5,
+          "aggro": true
+        }
       }
     },
     "hunter": {
@@ -210,7 +247,7 @@
         "verb": "Choose the Terms",
         "desc": "Before any fight begins, dictate its terms: AMBUSH (you strike first, unseen), RANGE (the fight starts at your ideal distance), or GROUND (the terrain favors you). The monster doesn't get a vote.",
         "mechanic": "pre-fight: choose ambush (first strike), range (ideal distance), or ground (terrain edge)",
-        "cost": "Once per fight \u2014 it's set before the first blow. You can't re-choose mid-fight.",
+        "cost": "Once per fight — it's set before the first blow. You can't re-choose mid-fight.",
         "weakness": "If it reaches you, you're just a person with a bow. The terms only matter until contact.",
         "scale": {
           "party": "You set the terms; the party starts every fight where you chose.",
@@ -218,21 +255,71 @@
           "contest": "Accuracy contests are yours to lose.",
           "army": "Scouts follow your marks."
         },
-        "hint": "\"You don't chase anymore. You ARRIVE. The gamblers have noticed \u2014 your fights start before the monster knows it's in one. One more step, little hunter.\"",
+        "hint": "\"You don't chase anymore. You ARRIVE. The gamblers have noticed — your fights start before the monster knows it's in one. One more step, little hunter.\"",
         "mythic": {
-          "desc": "Antlered silhouette, clawed hands, amber predator eyes that catch the light. Tawny and red \u2014 the beast you hunted, wearing you.",
+          "desc": "Antlered silhouette, clawed hands, amber predator eyes that catch the light. Tawny and red — the beast you hunted, wearing you.",
           "title": "The Hunt Made Flesh"
         },
         "recognition": {
           "beat": "Somewhere, something that hunts you decides not to.",
-          "systemLine": "\"STOP THE PRESSES! STOP ALL PRESSES! The Highbeam Deer just filed a COMPLAINT! It says \u2014 and I quote \u2014 'it fears ME now'! Ladies and gentlemen, we have an APEX PREDATOR!\""
+          "systemLine": "\"STOP THE PRESSES! STOP ALL PRESSES! The Highbeam Deer just filed a COMPLAINT! It says — and I quote — 'it fears ME now'! Ladies and gentlemen, we have an APEX PREDATOR!\""
         },
         "capstoneItems": [
           "apex_bow"
         ],
+        "deed": {
+          "event": "apex_hunt",
+          "afterDawn": false,
+          "hint": "Bring down stronger, unwounded prey: alone, or with Pack Hunt actually called on it and every ally alive and still with you. Its opening health must exceed your whole health bar.",
+          "_doc": "Person-owned real tactical/field monster kill. Solo and paid Pack Hunt routes fit Stalker and Beastmaster. Compare actual unwounded opening body HP against the hunter's opening maximum HP; no wounded-prey, routed-alive, lost ally, class-age or synergy shortcut. Fresh field bodies use their actual HP draw; persisted unknown wounds earn no receipt. Existing class/payoff/kit/day gates remain."
+        },
         "deedSynergies": [
           "apex_sense"
-        ]
+        ],
+        "play": {
+          "_doc": "Choose the Terms: three combat actions, one per fight, only before the first blow lands. AMBUSH: every foe loses its first turn and your next strike hits x ambushMult (allies x2). RANGE: every foe is driven back to rangeDist tiles and your strikes from 2+ tiles hit x rangeMult. GROUND: every foe is rooted groundRoot rounds (titans too) and you dodge +groundDodge. WEAKNESS: the moment a foe is adjacent the terms are over (range and ground bonuses end). PARTY: ambush arms the allies too. TITAN: ground roots a titan.",
+          "actions": [
+            {
+              "id": "terms_ambush",
+              "name": "Choose the Terms: Ambush",
+              "terms": "ambush",
+              "context": "combat",
+              "cost": {
+                "kcal": 120
+              },
+              "perFight": 1,
+              "effect": "Before the first blow: every foe loses its first turn; your next strike hits x3."
+            },
+            {
+              "id": "terms_range",
+              "name": "Choose the Terms: Range",
+              "terms": "range",
+              "context": "combat",
+              "cost": {
+                "kcal": 120
+              },
+              "perFight": 1,
+              "effect": "Before the first blow: every foe is driven back 4 tiles; strikes from 2+ tiles hit x1.5 until contact."
+            },
+            {
+              "id": "terms_ground",
+              "name": "Choose the Terms: Ground",
+              "terms": "ground",
+              "context": "combat",
+              "cost": {
+                "kcal": 120
+              },
+              "perFight": 1,
+              "effect": "Before the first blow: every foe is rooted 2 rounds, titans too; you dodge +25% until contact."
+            }
+          ],
+          "ambushMult": 3,
+          "allyAmbushMult": 2,
+          "rangeDist": 4,
+          "rangeMult": 1.5,
+          "groundRoot": 2,
+          "groundDodge": 0.25
+        }
       }
     },
     "caregiver": {
@@ -275,9 +362,9 @@
         "why": "Raise Echo turns the fallen into fighters: the Keeper subclass (keepsakes, the dead) is its seed, and healers keep allies standing long enough to matter.",
         "fantasy": "Your party doesn't end at death. Fallen allies fight on as echoes.",
         "verb": "Raise Echo",
-        "desc": "When an ally falls in a fight you are in, raise their echo: they fight on for 3 rounds as themselves \u2014 their stats, their weapon, their voice \u2014 then fade. The echo's death is final; they cannot be raised again.",
+        "desc": "When an ally falls in a fight you are in, raise their echo: they fight on for 3 rounds as themselves — their stats, their weapon, their voice — then fade. The echo's death is final; they cannot be raised again.",
         "mechanic": "once per fight, on ally death: echo fights 3 rounds then fades permanently",
-        "cost": "Once per fight. Each echo raised is a final death \u2014 the village remembers who you spent.",
+        "cost": "Once per fight. Each echo raised is a final death — the village remembers who you spent.",
         "weakness": "Alone, you're just a talker. No allies, no echoes, no godhood.",
         "scale": {
           "party": "No one fights alone, not even the fallen.",
@@ -287,7 +374,7 @@
         },
         "hint": "\"You're collecting people, little leader. Even the dead ones are starting to listen. I have a WORD for what you're becoming. Not yet. Soon.\"",
         "mythic": {
-          "desc": "A robed figure in deep indigo, three pale spirit-wisps orbiting \u2014 the fallen, visible, still marching.",
+          "desc": "A robed figure in deep indigo, three pale spirit-wisps orbiting — the fallen, visible, still marching.",
           "title": "Wreathed in Echoes"
         },
         "recognition": {
@@ -301,7 +388,25 @@
         "deedSynergies": [
           "peacemakers_voice",
           "delver"
-        ]
+        ],
+        "deed": {
+          "event": "care_survived",
+          "afterDawn": true,
+          "criticalFraction": 0.25,
+          "hint": "Restore someone beyond critical health or hold their fatal fall, then both reach a later dawn alive.",
+          "pendingHint": "Care given. Both of you still need to reach a later dawn alive."
+        },
+        "play": {
+          "_doc": "Raise Echo: automatic. When an ally falls in a fight the Shepherd is in (alive), the ally rises as an echo at full HP, hitting x strikeMult, for rounds rounds, then fades for good. Their death is real and final (it is already recorded). Once per fight; in a titan-class fight every fallen ally rises once (ARMY/TITAN: an army that does not stay down), each paying titanKcal. WEAKNESS: alone, no echoes.",
+          "passive": {
+            "id": "raise_echo",
+            "name": "Raise Echo",
+            "kcal": 150,
+            "titanKcal": 100,
+            "rounds": 3,
+            "strikeMult": 2
+          }
+        }
       }
     },
     "drifter": {
@@ -339,14 +444,19 @@
       },
       "god": {
         "id": "the_between",
+        "deed": {
+          "event": "outmatched_escape",
+          "afterDawn": false,
+          "hint": "Escape a fresh monster that begins with more health than your full capacity. Leave it alive, and leave alive yourself."
+        },
         "name": "The Between",
         "why": "Phase Out is the drifter's untouchable fantasy. Same pool as before (time skip, hollow bones).",
-        "fantasy": "Untethered. You exist between places \u2014 hard to hit, hard to find, impossible to pin down.",
+        "fantasy": "Untethered. You exist between places — hard to hit, hard to find, impossible to pin down.",
         "verb": "Phase Out",
-        "desc": "Once per fight, when a hit would land \u2014 you are simply not there. The blow passes through the space you were. You were never really here.",
+        "desc": "Once per fight, when a hit would land — you are simply not there. The blow passes through the space you were. You were never really here.",
         "mechanic": "once per fight: negate one hit entirely (any source, any size)",
-        "cost": "Once per fight. And phasing is a retreat, always \u2014 you cannot phase and hold ground in the same breath.",
-        "weakness": "You can't hold ground. Villages need people who stay. This weakness is permanent \u2014 godhood doesn't fix it.",
+        "cost": "Once per fight. And phasing is a retreat, always — you cannot phase and hold ground in the same breath.",
+        "weakness": "You can't hold ground. Villages need people who stay. This weakness is permanent — godhood doesn't fix it.",
         "scale": {
           "party": "You scout ahead and draw fire you never take.",
           "titan": "Untouchable for a breath: plant the charge, leave.",
@@ -355,19 +465,30 @@
         },
         "hint": "\"You're hard to find lately, little drifter. Even for me, and I see EVERYTHING. The gamblers bet on where you'll be and lose. Where ARE you, exactly?\"",
         "mythic": {
-          "desc": "A half-transparent figure, glitching between states \u2014 indigo and shadow, offset duplicates trailing. Here, and not.",
+          "desc": "A half-transparent figure, glitching between states — indigo and shadow, offset duplicates trailing. Here, and not.",
           "title": "Phased"
         },
         "recognition": {
           "beat": "For a moment, you are in two places. Then you choose the better one.",
-          "systemLine": "\"THE BLOW LANDED! IT'S OVER! ...Why is everyone staring at empty air? WHERE \u2014 OH. OH THEY'RE BEHIND IT. THEY WERE NEVER THERE! FOLKS, WE HAVE A GHOST! WE HAVE THE BETWEEN!\""
+          "systemLine": "\"THE BLOW LANDED! IT'S OVER! ...Why is everyone staring at empty air? WHERE — OH. OH THEY'RE BEHIND IT. THEY WERE NEVER THERE! FOLKS, WE HAVE A GHOST! WE HAVE THE BETWEEN!\""
         },
         "capstoneItems": [
           "phase_shawl"
         ],
         "deedSynergies": [
           "efficient_machine"
-        ]
+        ],
+        "play": {
+          "_doc": "Phase Out: automatic, once per fight. A hit that would take minFrac of max HP or kill passes through empty air; the holder reappears up to retreat tiles away (phasing is a retreat: any hold or link breaks). TITAN: against a titan-class attacker the phase covers every hit from it that round. PARTY: the Between draws fire (monsters aim at them first).",
+          "passive": {
+            "id": "phase_out",
+            "name": "Phase Out",
+            "kcal": 100,
+            "minFrac": 0.25,
+            "retreat": 3
+          },
+          "aggro": true
+        }
       }
     },
     "explorer": {
@@ -410,7 +531,7 @@
         "why": "No Lies is foresight turned on people: the Seer's apex. The Farstrider's Walk the Horizon (map folding) is folded in as the Cartographer's note (see retired.farstrider).",
         "fantasy": "You know everything. Every lie, every hidden thing, every move before it's made.",
         "verb": "No Lies",
-        "desc": "Lies mechanically fail against you. Deception checks auto-fail. Ambushes that rely on deception don't trigger. When someone lies to you in gossip or dialogue, you KNOW \u2014 the game tells you.",
+        "desc": "Lies mechanically fail against you. Deception checks auto-fail. Ambushes that rely on deception don't trigger. When someone lies to you in gossip or dialogue, you KNOW — the game tells you.",
         "mechanic": "passive: all deception vs player auto-fails; lies in dialogue/gossip flagged",
         "cost": "Knowing isolates you. Villagers with secrets fear your gaze: -1 trust/day with anyone hiding something, until they confess or leave.",
         "weakness": "Knowing the punch is coming doesn't mean you can take it. You're still fragile.",
@@ -420,9 +541,9 @@
           "contest": "Strategy contests: nobody bluffs you.",
           "army": "The coalition plans with your map."
         },
-        "hint": "\"You see too much, little detective. People are starting to notice you noticing. The gamblers stopped betting on surprises around you \u2014 there aren't any. Something's about to give.\"",
+        "hint": "\"You see too much, little detective. People are starting to notice you noticing. The gamblers stopped betting on surprises around you — there aren't any. Something's about to give.\"",
         "mythic": {
-          "desc": "A figure with eyes on the forehead, the hands, the shoulders \u2014 the third eye blazing white-violet. Nothing hidden, nothing forgotten.",
+          "desc": "A figure with eyes on the forehead, the hands, the shoulders — the third eye blazing white-violet. Nothing hidden, nothing forgotten.",
           "title": "Eyes Everywhere"
         },
         "recognition": {
@@ -436,7 +557,32 @@
         "deedSynergies": [
           "sees_the_weave",
           "polyglots_ledger"
-        ]
+        ],
+        "deed": {
+          "event": "field_truth_shared",
+          "afterDawn": false,
+          "hint": "Discover a plant through your own fieldwork, then teach its true identity to someone who did not know it.",
+          "pendingHint": "Discovery made. Share its true identity with someone who did not know it."
+        },
+        "play": {
+          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie.",
+          "actions": [
+            {
+              "id": "no_lies",
+              "name": "No Lies: Read Them Aloud",
+              "context": "combat",
+              "cost": {
+                "kcal": 100
+              },
+              "perFight": 1,
+              "effect": "Every foe's next move said aloud; allies slip telegraphed blows (50%); your strikes on a winding-up foe hit x1.5."
+            }
+          ],
+          "allyDodge": 0.5,
+          "strikeMult": 1.5,
+          "trustCostPerDay": 1,
+          "dailyKcal": 60
+        }
       }
     },
     "socialite": {
@@ -477,9 +623,9 @@
         "why": "Speak and Be Heard: the voice every ally hears at once. Showrunners broadcast, demagogues command; both end at the Relay.",
         "fantasy": "Every message in and out passes through your hands. You are the voice the world listens for.",
         "verb": "Speak and Be Heard",
-        "desc": "Your words reach any allied village instantly \u2014 no runner, no delay, no garbling. Once per day, speak a command every ally hears at once.",
+        "desc": "Your words reach any allied village instantly — no runner, no delay, no garbling. Once per day, speak a command every ally hears at once.",
         "mechanic": "once per day: instant message to all allies; once per fight: rally cry (allies +10 morale)",
-        "cost": "Each use erodes grounding by 5. At grounding 0, you are more System than human \u2014 the voice remains, the person fades.",
+        "cost": "Each use erodes grounding by 5. At grounding 0, you are more System than human — the voice remains, the person fades.",
         "weakness": "You are the single point of failure. If you fall, the network goes dark. And every word costs you humanity.",
         "scale": {
           "party": "One voice, every ally, at once.",
@@ -490,15 +636,50 @@
         "hint": "\"Little switchboard. Every word in the region passes through YOUR hands now. I have a WORD for what you're becoming. Not yet. Soon.\"",
         "mythic": {
           "title": "Wreathed in Signal",
-          "desc": "A human silhouette with screen-eyes, signal threads radiating outward \u2014 the switchboard made flesh. Still human-shaped. Barely."
+          "desc": "A human silhouette with screen-eyes, signal threads radiating outward — the switchboard made flesh. Still human-shaped. Barely."
         },
         "recognition": {
-          "beat": "The region goes quiet. Every relay, every runner, every signal fire \u2014 all waiting on your word.",
+          "beat": "The region goes quiet. Every relay, every runner, every signal fire — all waiting on your word.",
           "systemLine": "\"LADIES AND GENTLEMEN! The switchboard has a NAME and it's YOURS! Every word in the region passes through ONE pair of hands! The galaxy is LISTENING!\""
         },
         "capstoneItems": [],
         "deedSynergies": [],
-        "deedAlt": "relay_office"
+        "deedAlt": "relay_office",
+        "deed": {
+          "event": "relay_office",
+          "afterDawn": false,
+          "hint": "Hold the Relay office yourself. Claim its wires or accept the village appointment; the work and its costs must be yours."
+        },
+        "play": {
+          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, and every fight today starts rallied. Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark).",
+          "actions": [
+            {
+              "id": "rally_cry",
+              "name": "Speak and Be Heard: Rally Cry",
+              "context": "combat",
+              "cost": {
+                "kcal": 120,
+                "turn": 1
+              },
+              "perFight": 1,
+              "effect": "Every ally acts now, emboldened 3 rounds, next 2 strikes x1.5; every foe hesitates."
+            },
+            {
+              "id": "be_heard",
+              "name": "Speak and Be Heard",
+              "context": "explore",
+              "cost": {
+                "kcal": 150
+              },
+              "perDay": 1,
+              "effect": "Every Haven villager hears you: +2 trust, and every fight today starts rallied."
+            }
+          ],
+          "grounding": 5,
+          "rallyRounds": 3,
+          "strikeMult": 1.5,
+          "trust": 2
+        }
       }
     },
     "survivalist": {
@@ -540,12 +721,12 @@
         "id": "unkillable",
         "name": "The Unkillable",
         "why": "Phoenix: unkillable. Furnaces cheat death with food, the undying cheat it outright.",
-        "fantasy": "The world tries to kill you and fails. Death is a suggestion \u2014 with a name attached.",
+        "fantasy": "The world tries to kill you and fails. Death is a suggestion — with a name attached.",
         "verb": "Phoenix",
-        "desc": "When you would die, the phoenix clause burns a living villager \u2014 body and all, only ash \u2014 and you crawl out of their ashes wherever they were, at 1 HP. No villagers left, no village, and your death sticks. This was already the register; godhood names it.",
+        "desc": "When you would die, the phoenix clause burns a living villager — body and all, only ash — and you crawl out of their ashes wherever they were, at 1 HP. No villagers left, no village, and your death sticks. This was already the register; godhood names it.",
         "mechanic": "on lethal damage: burn a random living villager, respawn at their location at 1 HP",
-        "cost": "A villager's life. Every time. The village judges you \u2014 burn twice and earn their love or be exiled.",
-        "weakness": "You're a wall, not a weapon. Things you can't outlast \u2014 politics, betrayal, your own village's judgment \u2014 still hurt.",
+        "cost": "A villager's life. Every time. The village judges you — burn twice and earn their love or be exiled.",
+        "weakness": "You're a wall, not a weapon. Things you can't outlast — politics, betrayal, your own village's judgment — still hurt.",
         "scale": {
           "party": "The one who comes back; the party fights like it knows that.",
           "titan": "You outlast the titan's worst round.",
@@ -559,15 +740,29 @@
         },
         "recognition": {
           "beat": "The ash settles. It spells a name. Not yours.",
-          "systemLine": "\"AND THEY'RE DOWN! THEY'RE \u2014 wait. WAIT. That's not their ash! WHOSE ash is that?! THE AUDIENCE IS SCREAMING! The phoenix doesn't rise from ITS ash anymore, folks \u2014 it rises from YOURS! We have an UNKILLABLE!\""
+          "systemLine": "\"AND THEY'RE DOWN! THEY'RE — wait. WAIT. That's not their ash! WHOSE ash is that?! THE AUDIENCE IS SCREAMING! The phoenix doesn't rise from ITS ash anymore, folks — it rises from YOURS! We have an UNKILLABLE!\""
         },
         "capstoneItems": [
           "worldroot_plate"
         ],
+        "deed": {
+          "event": "death_refused",
+          "afterDawn": true,
+          "hint": "Refuse death through your own survival magic, then live to see another dawn.",
+          "pendingHint": "You refused death. Live to see another dawn."
+        },
         "deedSynergies": [
           "refuses_death",
           "perfect_chrysalis"
-        ]
+        ],
+        "play": {
+          "_doc": "Phoenix: automatic. On a death the holder would die, the phoenix clause fires without the ability and is never spent: a living villager burns (the existing register: volunteers, protest struggles, the broadcast, exile after the second burn), the holder rises at 1 HP. The fire needs fuel: kcal (villager: belly) or the death sticks, so it never saves you from starving.",
+          "passive": {
+            "id": "phoenix",
+            "name": "Phoenix",
+            "kcal": 500
+          }
+        }
       }
     },
     "miser": {
@@ -607,25 +802,25 @@
         "id": "market_god",
         "name": "The Market God",
         "why": "Name Your Price + Gilded Guard: wealth as power and as armor. Hoarders bank it, dealers spend it.",
-        "fantasy": "Infinite resources. The market bends to you. You don't find what you need \u2014 it finds you.",
+        "fantasy": "Infinite resources. The market bends to you. You don't find what you need — it finds you.",
         "verb": "Name Your Price",
-        "desc": "Once per day, NAME any item in the world\u2019s catalog: a trader arrives carrying exactly that item. Once per fight, BUY PASSAGE: name a price and the monster takes the coin and leaves \u2014 wealth buys the one thing strength can\u2019t: leaving. And always, the coins orbit you: the Gilded Guard intercepts harm before it reaches your flesh. Everything has a price. Even death pauses to count coin.",
-        "mechanic": "daily: name any item id \u2014 delivered, paid in food-kcal barter (t1 800 / t2 2000 / t3 5000). tier-4 relics are lent, never sold: 2 debt markers. per fight: buy safe passage (monster departs), price scales by wave (w1 1000 / w2 2500 / w3 5000 / w4 10000 / w5 marker-only). passive: Gilded Guard \u2014 4 orbiting coins, each absorbs 50 damage before HP; 1 regenerates per dawn. 3 markers \u2192 the Audit collects your most valuable item.",
-        "cost": "Name Your Price is once per day; Buy Passage is once per fight; the Guard\u2019s coins shatter and return slowly. Every transaction is taxed \u2014 the Audit takes its cut, in goods or in kind. Short on payment, or borrowing the unbuyable, and the market takes MARKERS instead of refusing. Three markers and the Audit comes to collect in person \u2014 it takes the finest thing you own.",
-        "weakness": "Wealth doesn\u2019t stop a beam you can\u2019t buy off. Bought passage is once per fight \u2014 the second monster doesn\u2019t haggle. Shattered coins don\u2019t return until dawn. Debts don\u2019t die when you do: the market remembers every marker, and the Audit collects from whoever wears your face next.",
+        "desc": "Once per day, NAME any item in the world’s catalog: a trader arrives carrying exactly that item. Once per fight, BUY PASSAGE: name a price and the monster takes the coin and leaves — wealth buys the one thing strength can’t: leaving. And always, the coins orbit you: the Gilded Guard intercepts harm before it reaches your flesh. Everything has a price. Even death pauses to count coin.",
+        "mechanic": "daily: name any item id — delivered, paid in food-kcal barter (t1 800 / t2 2000 / t3 5000). tier-4 relics are lent, never sold: 2 debt markers. per fight: buy safe passage (monster departs), price scales by wave (w1 1000 / w2 2500 / w3 5000 / w4 10000 / w5 marker-only). passive: Gilded Guard — 4 orbiting coins, each absorbs 50 damage before HP; 1 regenerates per dawn. 3 markers → the Audit collects your most valuable item.",
+        "cost": "Name Your Price is once per day; Buy Passage is once per fight; the Guard’s coins shatter and return slowly. Every transaction is taxed — the Audit takes its cut, in goods or in kind. Short on payment, or borrowing the unbuyable, and the market takes MARKERS instead of refusing. Three markers and the Audit comes to collect in person — it takes the finest thing you own.",
+        "weakness": "Wealth doesn’t stop a beam you can’t buy off. Bought passage is once per fight — the second monster doesn’t haggle. Shattered coins don’t return until dawn. Debts don’t die when you do: the market remembers every marker, and the Audit collects from whoever wears your face next.",
         "scale": {
           "party": "You equip the party: the market delivers what you name.",
           "titan": "You buy the coalition time: one monster leaves.",
           "contest": "The sponsor: money talks to judges (risky).",
           "army": "The coalition's quartermaster."
         },
-        "hint": "\"The traders have stopped haggling with you. They just... agree. Too fast. And the coins \u2014 have you noticed the coins don\u2019t fall anymore? They orbit. Slowly. Like they\u2019re waiting to be spent. Someone is keeping a ledger. You can feel the columns. Soon you\u2019ll be allowed to read it.\"",
+        "hint": "\"The traders have stopped haggling with you. They just... agree. Too fast. And the coins — have you noticed the coins don’t fall anymore? They orbit. Slowly. Like they’re waiting to be spent. Someone is keeping a ledger. You can feel the columns. Soon you’ll be allowed to read it.\"",
         "mythic": {
           "desc": "A figure in gold, coins orbiting slowly, a balance-scale motif worked into the silhouette. Wealth, given a body and a smile.",
           "title": "Gilded"
         },
         "recognition": {
-          "beat": "Coins you didn\u2019t spend are warm in your pocket. Somewhere, a ledger opens to a page with your name on it \u2014 and the ink is still wet. You understand, all at once, that you have never ONCE paid full price for anything in your life. The market was fattening you.",
+          "beat": "Coins you didn’t spend are warm in your pocket. Somewhere, a ledger opens to a page with your name on it — and the ink is still wet. You understand, all at once, that you have never ONCE paid full price for anything in your life. The market was fattening you.",
           "systemLine": "\"BREAKING FINANCIAL NEWS! A market just APPEARED in the middle of NOWHERE! Economists are FURIOUS! The invisible hand just got a VISIBLE BODY! We have a MARKET GOD!\""
         },
         "capstoneItems": [
@@ -634,7 +829,38 @@
         "deedSynergies": [
           "delver",
           "critter_network"
-        ]
+        ],
+        "deed": {
+          "event": "market_exchange",
+          "afterDawn": false,
+          "hint": "Trade food stores for delivered tools, gear or alien goods."
+        },
+        "play": {
+          "_doc": "Name Your Price + Buy Passage + Gilded Guard (godhood.js prices). Buy Passage is a combat action (once per fight, not on titans: the big ones do not haggle); Name Your Price is a daily action (no target: the market brings the best weapon you lack). The Guard coins never stop a beam. The Audit collects at dawn when 3 markers are due. Villager Market Gods carry the coins and buy passage from their belly.",
+          "actions": [
+            {
+              "id": "buy_passage",
+              "name": "Buy Passage",
+              "context": "combat",
+              "cost": {
+                "kcal": 40,
+                "turn": 1
+              },
+              "perFight": 1,
+              "effect": "Name a price (1000/2500/5000/10000 kcal by wave; wave 5 or short: a marker). The monster takes it and leaves. Not titans."
+            },
+            {
+              "id": "name_price",
+              "name": "Name Your Price",
+              "context": "explore",
+              "cost": {
+                "kcal": 40
+              },
+              "perDay": 1,
+              "effect": "A trader brings exactly what you name (default: the best weapon you lack). 800/2000/5000 kcal by tier; relics are lent for 2 markers."
+            }
+          ]
+        }
       }
     },
     "forager": {
@@ -677,9 +903,9 @@
         "why": "Feed the Multitude: the garden and the feast both end at an army that eats because you asked.",
         "fantasy": "The land provides. Scarcity is a rumor. You feed armies.",
         "verb": "Feed the Multitude",
-        "desc": "Once per day, call the harvest: enough food for an army, from your hands and the land around you. This is the titan logistics engine \u2014 coalitions march because you feed them.",
+        "desc": "Once per day, call the harvest: enough food for an army, from your hands and the land around you. This is the titan logistics engine — coalitions march because you feed them.",
         "mechanic": "once per day: produce army-scale food (feast for 50+, titan-coalition logistics)",
-        "cost": "Once per day. It costs you 200 kcal of your own \u2014 the garden gives, but through you.",
+        "cost": "Once per day. It costs you 200 kcal of your own — the garden gives, but through you.",
         "weakness": "You're not a fighter. Your garden needs guards, and everyone knows it.",
         "scale": {
           "party": "The party eats well and fights fed.",
@@ -689,7 +915,7 @@
         },
         "hint": "\"The land likes you, little gardener. A little TOO much, some say. The seeds lean toward you when you walk past. I wonder what happens when you stop walking past and start ASKING.\"",
         "mythic": {
-          "desc": "A figure half-lost in vines and blossoms \u2014 green-gold, flowers opening along the shoulders, roots at the feet. The garden, walking.",
+          "desc": "A figure half-lost in vines and blossoms — green-gold, flowers opening along the shoulders, roots at the feet. The garden, walking.",
           "title": "Blooming, Grown-Over"
         },
         "recognition": {
@@ -703,7 +929,24 @@
         "deedSynergies": [
           "sun_garden",
           "closed_loop"
-        ]
+        ],
+        "play": {
+          "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first.",
+          "actions": [
+            {
+              "id": "feed_multitude",
+              "name": "Feed the Multitude",
+              "context": "explore",
+              "cost": {
+                "kcal": 200
+              },
+              "perDay": 1,
+              "effect": "Every Haven villager eats their fill; every fight today starts with the party fed. Not you: the garden gives through you."
+            }
+          ],
+          "strikeMult": 0.8,
+          "aggro": true
+        }
       }
     }
   },
@@ -711,7 +954,7 @@
     "farstrider": {
       "build": 8,
       "capstone": {
-        "cost": "Once per day. You arrive hungry \u2014 the horizon charges 150 kcal toll, taken from your body.",
+        "cost": "Once per day. You arrive hungry — the horizon charges 150 kcal toll, taken from your body.",
         "desc": "Cross up to 3 nodes in a single step. The map folds for you. Villages you visit remember the day you simply... arrived.",
         "mechanic": "once per day: instant travel up to 3 nodes, no time cost",
         "verb": "Walk the Horizon",
@@ -721,13 +964,13 @@
       "hint": "\"You walk far, little wanderer. Lately the far seems... nearer. Villages swear you were just there. You were. The map is starting to agree with you instead of the other way around.\"",
       "id": "farstrider",
       "mythic": {
-        "desc": "A figure with a streaming cloak that never settles, a compass rose burned into the chest, horizon lines trailing. Blue-grey \u2014 the road, wearing a person.",
+        "desc": "A figure with a streaming cloak that never settles, a compass rose burned into the chest, horizon lines trailing. Blue-grey — the road, wearing a person.",
         "title": "Wind-Torn"
       },
       "name": "The Farstrider",
       "recognition": {
         "beat": "The horizon leans toward you, expectantly.",
-        "systemLine": "\"OUR CHAMPION WAS HERE! NOW THEY'RE \u2014 wait, that's THREE VILLAGES AWAY! THAT'S NOT POSSIBLE! THE MAP JUST FOLDED! FOLDED LIKE LAUNDRY! We have a FARSTRIDER!\""
+        "systemLine": "\"OUR CHAMPION WAS HERE! NOW THEY'RE — wait, that's THREE VILLAGES AWAY! THAT'S NOT POSSIBLE! THE MAP JUST FOLDED! FOLDED LIKE LAUNDRY! We have a FARSTRIDER!\""
       },
       "requires": {
         "abilityPool": [

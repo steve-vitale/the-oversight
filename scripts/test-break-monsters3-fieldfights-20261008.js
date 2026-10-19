@@ -29,6 +29,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 
 function mulberry32(a) {
@@ -90,7 +91,7 @@ function cannedRec(outcome, vTaken) {
     const m = { id: 'bulldozer', tx: 3, ty: 3, hp: 50, maxHp: 55 };
     Game.worldMonsters().push(m);
     const realFF = Game.fieldFight;
-    Game.fieldFight = () => cannedRec('vKill', 37);
+    Game.fieldFight = (who) => Game.sealDamageResult(cannedRec('vKill', 37), [[who, 37]]);
     v.health[vid] = 100;
     Game.resolveWildMonsterEncounter(vid, m);
     Game.fieldFight = realFF;
@@ -99,7 +100,7 @@ function cannedRec(outcome, vTaken) {
     // mFlee: canned drive-off, wounds must land too
     const m2 = { id: 'bulldozer', tx: 4, ty: 4, hp: 50, maxHp: 55 };
     Game.worldMonsters().push(m2);
-    Game.fieldFight = () => cannedRec('mFlee', 22);
+    Game.fieldFight = (who) => Game.sealDamageResult(cannedRec('mFlee', 22), [[who, 22]]);
     v.health[vid] = 100;
     Game.resolveWildMonsterEncounter(vid, m2);
     Game.fieldFight = realFF;
@@ -114,7 +115,7 @@ function cannedRec(outcome, vTaken) {
     const a = Game.agencyOf(vid);
     st.exped[vid] = { encounters: [], duration: 5, legs: 0, tx: 5, ty: 5 };
     const realFF = Game.fieldFight;
-    Game.fieldFight = () => cannedRec('vKill', 41);
+    Game.fieldFight = (who) => Game.sealDamageResult(cannedRec('vKill', 41), [[who, 41]]);
     v.health[vid] = 100;
     const b4 = (a.xp[vid] || {}).bravery || 0;
     Game.expeditionMonster(vid, 3, false);
@@ -124,7 +125,7 @@ function cannedRec(outcome, vTaken) {
     check('expedition vKill still counts the kill', (a.stats[vid] || {}).monsterKills >= 1, '');
     // mFlee on expedition
     st.exped[vid] = { encounters: [], duration: 5, legs: 0, tx: 5, ty: 5 };
-    Game.fieldFight = () => cannedRec('mFlee', 15);
+    Game.fieldFight = (who) => Game.sealDamageResult(cannedRec('mFlee', 15), [[who, 15]]);
     v.health[vid] = 100;
     Game.expeditionMonster(vid, 3, false);
     Game.fieldFight = realFF;
@@ -137,7 +138,7 @@ function cannedRec(outcome, vTaken) {
     const m = { id: 'bulldozer', tx: 3, ty: 3, hp: 50, maxHp: 55 };
     Game.worldMonsters().push(m);
     const realFF = Game.fieldFight;
-    Game.fieldFight = () => cannedRec('vFlee', 30);
+    Game.fieldFight = (who) => Game.sealDamageResult(cannedRec('vFlee', 30), [[who, 30]]);
     v.health[vid] = 100;
     Game.resolveWildMonsterEncounter(vid, m);
     Game.fieldFight = realFF;
@@ -188,7 +189,18 @@ function cannedRec(outcome, vTaken) {
       if (rec.outcome !== 'vKill' && m.hp <= 0) zombie++;
     }
     check('300 pack fights: no 0-HP live entities, m.hp tracks the lead', zombie === 0, 'zombies=' + zombie);
-    check('battery actually exercised mFlee persistence', mFleeSaw > 0, 'mFlee=' + mFleeSaw);
+    // Domain coverage must not depend on the random battery happening to
+    // reach a rare outcome. An already wounded, low-morale lead retreats
+    // while alive after the first exchange; the sealed flag keeps the
+    // observer from fleeing first. This is a prepared engine contrast.
+    const wounded = { id: 'hushwolf', tx: 2, ty: 2, hp: 1000, maxHp: 10000 };
+    v.health[vid] = 100;
+    const retreat = Game.fieldFight(vid, mdef, wounded, { noFlee: true, rng: () => 0.5 });
+    check('prepared wounded leader retreats alive and persists its actual health',
+      retreat.outcome === 'mFlee' && wounded.hp > 0 && wounded.hp === retreat.mHpLeft,
+      JSON.stringify({ outcome: retreat.outcome, hp: wounded.hp, recorded: retreat.mHpLeft }));
+    if (retreat.outcome === 'mFlee') mFleeSaw++;
+    check('battery plus prepared contrast exercise mFlee persistence', mFleeSaw > 0, 'mFlee=' + mFleeSaw);
   }
 
   console.log('== 6. standoff is gone (dead outcome) ==');
@@ -283,6 +295,14 @@ function cannedRec(outcome, vTaken) {
     check('Highbeam Deer: 0 solo kills in 100 (benchmark holds)', deerKills === 0, 'kills=' + deerKills);
   }
 
+  const terminal = execFileSync(process.execPath, [path.join(__dirname, 'test-fieldfight-terminal-20261017.js')],
+    { cwd: ROOT, env: process.env, encoding: 'utf8', maxBuffer: 2e6 });
+  process.stdout.write(terminal);
+  const terminalCases = terminal.split('\n').filter(line => line.startsWith('FIELD_TERMINAL_RESULT '))
+    .map(line => JSON.parse(line.slice(22)));
+  check('shared terminal HP/revival proof executes every contrast', terminalCases.length === 7 &&
+    ['replay', 'fatal', 'living', 'second-wind', 'ember', 'ember-poor', 'wild-caller'].every(kind =>
+      terminalCases.some(row => row.kind === kind && row.checks > 0)) && /field terminal proof green:/.test(terminal));
   Game.say = origSay;
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);

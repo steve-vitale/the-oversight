@@ -43,42 +43,17 @@
 //   inline in eatCannibal at the item's stated 0.15.
 //
 // Usage: node scripts/test-break-food4-20261009.js
-//        BEFORE=1 node scripts/test-break-food4-20261009.js
+// Historical controls require an identified frozen source checkout.
 //        SEED=7 node scripts/test-break-food4-20261009.js
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const K = require('./godpath/lib');
 const ROOT = path.join(__dirname, '..');
-const BEFORE = !!process.env.BEFORE;
-const SEED = parseInt(process.env.SEED || '20261009', 10);
-
-const PRE = ['src/js/corruption.js', 'src/js/game.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/food.js'];
-if (BEFORE) {
-  for (const f of PRE) {
-    execSync(`git show HEAD:${f} > /tmp/bf4-before-${path.basename(f)}`, { cwd: ROOT });
-  }
-  console.log('MODE: BEFORE (pre-fix files from git HEAD)');
-} else {
-  console.log('MODE: AFTER (fixed worktree code)');
-}
-const srcOf = (f) => BEFORE && PRE.includes(f)
-  ? fs.readFileSync(`/tmp/bf4-before-${path.basename(f)}`, 'utf8')
-  : fs.readFileSync(path.join(ROOT, f), 'utf8');
-
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 1; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-Math.random = mulberry32(SEED); // seeded BEFORE eval: modules capture Math.random at load
-
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global; // equipment.js touches window at load (browser-only in prod)
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const FILES = [...html.matchAll(/<script src="(src\/js\/[^"]+)\?/g)].map(m => m[1])
-  .filter(f => !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(f));
-for (const f of FILES) {
-  try { eval(srcOf(f)); }
-  catch (e) { console.error('EVAL FAIL ' + f + ': ' + e.message); process.exit(2); }
-}
-delete global.window; // drop the stub: runtime checks take the sync path without window
-const Game = globalThis.Scattering.Game;
+const BEFORE = false;
+if (process.env.BEFORE) throw new Error('Legacy BEFORE loader retired: run an identified frozen checkout for a historical comparison');
+const SEED = Number(process.env.SEED || 20261009);
+const srcOf = file => fs.readFileSync(path.join(ROOT, file), 'utf8');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
@@ -97,7 +72,8 @@ function freshGame() {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: SEED });
+  Game.debugRegion = 'na_eastern_woodlands';
   const osay = Game.say.bind(Game);
   Game.say = (t) => { says.push(String(t)); return osay(t); };
   Game.drama = () => {};

@@ -3,8 +3,8 @@
 //
 // INSTRUMENT ONLY — read-only telemetry wraps around the engine's lingering-
 // raider pantry gorge (src/js/havenGrowth.js: havenGrowthDaily → raidPillage,
-// the "gorges at the treeline — N kcal gone from the stores. Drive it off,
-// or call for help." beat). No game-code changes; every wrap is call-through
+// the "gorges at the treeline" beat and actual Endure/sortie responses).
+// No game-code changes; every wrap is call-through
 // with before/after observation. Byte-identicality is proven by
 // scripts/test-predation-instrument-20261014.js (PART C).
 //
@@ -59,6 +59,7 @@ function installPredation(Game) {
     fieldFights: [],    // {day, vid, isScholar, monsterId, wasLingering, hpBefore, outcome, monsterDead}
     scholarEngages: [], // {day, monsterId, wasLingering} — startCombat wraps
     helpCalls: [],      // {day, tier} — callForHelp wraps
+    lingererAnswers: [], // {day, how, pantryBefore/After, result, ok, why, paid, cleared}
     removals: [],       // {day, key, id, hp, wasLingering} — removeWorldMonster wraps
                         // (hp>0 at removal = fight start, NOT a kill: startCombat
                         // pulls the world entry "into the fight" with full hp)
@@ -67,6 +68,27 @@ function installPredation(Game) {
     instrErrors: [],
   };
   const note = (where, e) => { track.instrErrors.push(where + ': ' + (e && e.message)); };
+
+  // Observe the current beats-panel decisions, including refused sorties.
+  // A requested sortie is not a completed fight or a successful drive-off.
+  if (typeof Game.answerLingerer === 'function') {
+    const original = Game.answerLingerer;
+    Game.answerLingerer = function (how) {
+      const before = pantryKcal(this), day = gday(this);
+      const result = original.apply(this, arguments);
+      try {
+        track.lingererAnswers.push({ day, how: String(how),
+          pantryBefore: before, pantryAfter: pantryKcal(this),
+          result: typeof result === 'string' ? result : null,
+          ok: result && typeof result === 'object' ? result.ok : null,
+          why: result && typeof result === 'object' ? result.why || null : null,
+          paid: result && typeof result === 'object' ? result.paid ?? null : null,
+          cleared: result && typeof result === 'object' ? result.cleared ?? null : null,
+          broke: result && typeof result === 'object' ? result.broke ?? null : null });
+      } catch (e) { note('answerLingerer', e); }
+      return result;
+    };
+  }
 
   // --- say: capture the gorge beats verbatim (sense-test evidence) ---
   try {
@@ -402,6 +424,7 @@ function finalizePredation(Game, track) {
     scholarEngages: track.scholarEngages,
     tbOutcomes: track.tbOutcomes,
     helpCalls: track.helpCalls,
+    lingererAnswers: track.lingererAnswers,
     removals: track.removals,
     samples,
     instrErrors: errors,

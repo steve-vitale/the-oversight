@@ -64,8 +64,9 @@ async function main() {
     assert(packAfter === packBefore, 'seed ' + seed + ': dead s.pack array untouched (' + packBefore + '->' + packAfter + ')');
     const gift = (s.inventory || [])[(s.inventory || []).length - 1];
     const def = items.find(it => it.id === (gift && (gift.itemId || gift.id)));
-    assert(!!(def && def.origin === 'alien'), 'seed ' + seed + ': gifted item is an alien-origin item (' + (gift && (gift.itemId || gift.id)) + ')');
-    assert(!def || (def.tier || 1) <= 3, 'seed ' + seed + ': gifted item respects the favor tier gate (tier ' + (def && def.tier) + ')');
+    const configured = (((Game.data.rewardEconomy || {}).extraItems || {})[3] || []);
+    assert(!!(def && (def.origin === 'alien' || configured.includes(def.id))), 'seed ' + seed + ': gifted item comes from the actual broadcast reward pool (' + (gift && (gift.itemId || gift.id)) + ')');
+    assert(def && [1, 3].includes(def.lootTier || def.tier || 1), 'seed ' + seed + ': celebrity package is tier-3 gear or a preserved starter-supply lane');
   }
 
   section('cooldown still holds (no package farming)');

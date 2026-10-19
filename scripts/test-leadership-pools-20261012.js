@@ -20,11 +20,11 @@
 //   8. challenge raise: 4 raises -> no consecutive repeats.
 // All seeded (deterministic): SEED=... node scripts/test-leadership-pools-20261012.js
 'use strict';
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 
 for (const f of ['src/js/game.js']) {
-  try { execSync('node --check ' + path.join(__dirname, '..', f), { stdio: 'pipe' }); }
+  try { execFileSync(process.execPath, ['--check', path.join(__dirname, '..', f)], { stdio: 'pipe' }); }
   catch (e) { console.log('FAIL syntax ' + f); process.exit(1); }
 }
 console.log('PASS syntax (game.js)');

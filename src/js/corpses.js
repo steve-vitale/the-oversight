@@ -418,8 +418,10 @@
       const s = this.state.scholar;
       // ASH: no rot, no disease from ashes.
       if (!c.ash && Math.random() < st.diseaseP) {
-        s.health = Math.max(0, (s.health == null ? 100 : s.health) - st.diseaseDmg);
-        this.say(`Handling the ${st.id} remains was a mistake. Fever by nightfall. (-${st.diseaseDmg} health)`);
+        const hpBefore = s.health == null ? 100 : s.health;
+        this.addHealth(-st.diseaseDmg);
+        const damage = Math.max(0, hpBefore - s.health);
+        this.say(`Handling the ${st.id} remains was a mistake. Fever by nightfall. (-${damage} health)`);
       }
       // WITNESSES: looting a fresh person-corpse where others can see.
       // ASH (Steve 2026-10-09): pocketing a phoenix victim's gear is theft
@@ -482,7 +484,7 @@
       // dependency (needed L1 to craft, L1 only from having hide_armor):
       // handling the MATERIAL teaches the shape, the same way handling gear
       // teaches its recipe. Fires once, L0 only.
-      try { this.noteHideHandled(it); } catch (e) {}
+      try { this.noteHideHandled({ ...it, units }); } catch (e) { console.warn('[corpses] hide handling', e); }
       return it;
     },
 
@@ -498,7 +500,7 @@
     // material (material 'hide') — both are the same rawhide.
     noteHideHandled(it) {
       try {
-        if (!it || (it.plantId !== 'animal_hide' && it.material !== 'hide')) return;
+        if (!it || !Number.isSafeInteger(it.units ?? 1) || (it.units ?? 1) <= 0 || (it.plantId !== 'animal_hide' && it.material !== 'hide')) return;
         const rk = ((this.state.codex || {}).recipes || {})['hide_armor'] || {};
         if ((rk.level || 0) >= 1) return;
         if (this.grantKnowledge) this.grantKnowledge('recipe', 'hide_armor', 1, { type: 'witnessed' });
@@ -702,11 +704,11 @@
           if (c.ash) carried.ashOf = c.ashVictim; // ASH: provenance rides along
           inv.push(carried);
         }
-        it.units -= 1;
+        it.units = (it.units ?? 1) - 1;
         took.push(it);
         // HIDE-HANDLING BEAT (armor discovery 2026-10-13): batch looting
         // teaches the shape too — same as the per-item path. See noteHideHandled.
-        try { this.noteHideHandled(it); } catch (e) {}
+        try { this.noteHideHandled({ ...it, units: 1 }); } catch (e) { console.warn('[corpses] batch hide handling', e); }
         return true;
       };
 
@@ -727,8 +729,10 @@
       // bypassed the combat fighter — mid-fight damage was erased at tbEnd.
       // ASH: no rot, no disease from ashes.
       if (!c.ash && Math.random() < st.diseaseP) {
+        const hpBefore = s.health == null ? 100 : s.health;
         this.addHealth(-st.diseaseDmg);
-        this.say(`Handling the ${st.id} remains was a mistake. Fever by nightfall. (-${st.diseaseDmg} health)`);
+        const damage = Math.max(0, hpBefore - s.health);
+        this.say(`Handling the ${st.id} remains was a mistake. Fever by nightfall. (-${damage} health)`);
       }
 
       // voice: what it felt like
@@ -872,8 +876,10 @@
       this.addTrauma(trauma);
       if (Math.random() < st.diseaseP) {
         const s = this.state.scholar;
-        s.health = Math.max(0, (s.health == null ? 100 : s.health) - st.diseaseDmg);
-        this.say(`Burying the ${st.id} dead was honest work, and it cost you. Fever by nightfall. (-${st.diseaseDmg} health)`);
+        const hpBefore = s.health == null ? 100 : s.health;
+        this.addHealth(-st.diseaseDmg);
+        const damage = Math.max(0, hpBefore - s.health);
+        this.say(`Burying the ${st.id} dead was honest work, and it cost you. Fever by nightfall. (-${damage} health)`);
       }
       this.say(`You bury ${who}. A marker, of sorts. The village will know where. (+${trauma} trauma)`);
       // GRAVE GOODS, NAMED (journey-succession r22 2026-10-17): the unlooted

@@ -2,17 +2,8 @@
 // Covers Steve's design: corpses persist, real-time decay, looting with
 // grossness (trauma), disease from rot, death as knowledge (codex-gated
 // real-time sync), party auto-notification, witness consequences.
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/food.js',
- 'src/js/corpses.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const H = require('./sim-harness');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -44,7 +35,7 @@ function mkPersonCorpse(trust, dayDied) {
 }
 
 (async () => {
-  await Game.init();
+  ({ Game } = await H.loadGame({ seed: Number(process.env.SEED || 7), mode: 'corpse', narration: true }));
 
   // 1. registerDeath creates a persistent corpse
   freshGame();
@@ -134,7 +125,11 @@ function mkPersonCorpse(trust, dayDied) {
 
   // 9. no sync at attunement 1 without witnessing
   freshGame();
+  // As in the stage test above: a random occupation may already know 15+
+  // skills. Prepare the thin Codex this case actually claims to exercise.
+  Game.state.codex.skills = {};
   Game.state.systemArrived = true; // day 1 -> attunement 1
+  ok('no-sync fixture is actually below attunement 2', Game.codexAttunement() === 1);
   said.length = 0;
   const c9 = Game.registerDeath({ kind: 'person', villagerId: 'vnosync', name: 'No Sync', mx: 4, my: 4, witnesses: [] });
   ok('no auto-sync before attunement 2', c9.deathKnown === false);

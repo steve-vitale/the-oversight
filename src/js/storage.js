@@ -163,6 +163,7 @@
       let e = inv.find(i => i.material === mat);
       if (e) e.units = (e.units || 0) + n;
       else inv.push({ material: mat, units: n, name: def.name, kcalEach: 0, spoilDay: 9999, kg: def.kg });
+      if (mat === 'hide' && this.noteHideHandled) this.noteHideHandled({ material: mat, units: n });
       return n;
     },
     materialCount(mat) {
@@ -599,7 +600,7 @@
     // isStashableWeapon / isMedicine: section filters for the stash.
     // Armory = weapons, pharmacy = medicine. Same deposit-gated rules as tools.
     isStashableWeapon(item) {
-      if (!item || item.bonded) return false;
+      if (!item || item.bonded || (item.units ?? 1) <= 0) return false;
       // KEEPSAKE (miser break-it 2026-10-10): the armory strips items to
       // {itemId, name} — a keepsake deposited there would lose its
       // sentimental charge. Hidden in the UI; the engine (_depositStashedItem)
@@ -610,7 +611,7 @@
       return !!(def && def.class === 'weapon');
     },
     isMedicine(item) {
-      if (!item) return false;
+      if (!item || (item.units ?? 1) <= 0 || (item.doses != null && item.doses <= 0)) return false;
       const id = item.itemId || item.id || '';
       const def = (this.data.items || []).find(i => i.id === id) || {};
       return !!(def.healAmount || /bandage|poultice|medfoam|salve|antibiotic|remedy|tonic/i.test(id + ' ' + (def.name || '')));
@@ -690,14 +691,14 @@
       }
       const st = this.stashState();
       const pile = st[section] || [];
-      const i = pile.findIndex(t => t.itemId === itemId);
+      const i = pile.findIndex(t => t.itemId === itemId && (t.units ?? 1) > 0 && (section !== 'medicine' || t.doses == null || t.doses > 0));
       if (i < 0) { this.say("It's not there anymore."); return null; }
       const def = (this.data.items || []).find(x => x.id === itemId) || {};
       const inv = this.state.scholar.inventory || [];
       const carry = inv.reduce((t2, it) => t2 + (it.kg || 0) * (it.units || 1), 0) + (this.waterWeight ? this.waterWeight() : 0);
       const max = this.carryCapacity ? this.carryCapacity() : 20;
       // UNITS (miser break-it 2026-10-10): weigh the whole entry, not one.
-      const takeUnits = pile[i].units || 1;
+      const takeUnits = pile[i].units ?? 1;
       if (carry + (def.kg || 0.5) * takeUnits > max) { this.say(`Too heavy for the ${pile[i].name}. Lighten your pack first.`); return null; }
       const [entry] = pile.splice(i, 1);
       // PHARMACY IDENTITY (miser break-it 2026-10-10): restore what the
@@ -771,10 +772,10 @@
       // ARMORY + PHARMACY (Steve 2026-10-09): section filters on the same
       // stash. Weapons open armory, medicine opens pharmacy — deposit-gated,
       // takeable by any villager once deposited.
-      const weapons = (st.weapons || []).map(t =>
+      const weapons = (st.weapons || []).filter(t => (t.units ?? 1) > 0).map(t =>
         `<span class="small">⚔️ ${t.name}${(t.units || 1) > 1 ? ` ×${t.units}` : ''} <button class="btn ghost sm" data-stash-weapon="${t.itemId}">Take</button></span>`
       ).join(' · ') || '<span class="small" style="opacity:.6">no weapons</span>';
-      const medicine = (st.medicine || []).map(t =>
+      const medicine = (st.medicine || []).filter(t => (t.units ?? 1) > 0 && (t.doses == null || t.doses > 0)).map(t =>
         `<span class="small">💊 ${t.name}${(t.units || 1) > 1 ? ` ×${t.units}` : ''}${t.doses != null ? ` (${t.doses} dose${t.doses === 1 ? '' : 's'})` : ''} <button class="btn ghost sm" data-stash-med="${t.itemId}">Take</button></span>`
       ).join(' · ') || '<span class="small" style="opacity:.6">no medicine</span>';
       return `<p class="small" style="margin-top:8px"><b>📦 Village stash</b> <span style="opacity:.6">(${lvlNote})</span></p>` +

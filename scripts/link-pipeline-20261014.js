@@ -39,7 +39,7 @@ function leadcourtWindow(Game) {
       open: day >= 25 && !pending && pantryKcalOf(Game) > 12000 && cands.length > 0,
       capFires: subs >= 3,
     };
-  } catch (e) { return { day: 0, pantry: 0, subs: 0, cands: 0, pending: true, open: false, capFires: false }; }
+  } catch (e) { return { day: 0, pantry: 0, subs: 0, cands: 0, pending: true, open: false, capFires: false, error: String(e?.message ?? e) }; }
 }
 
 // belongseek's proposal predicates (single-link design: one Haven-subordinate
@@ -56,7 +56,7 @@ function belongseekWindow(Game) {
       day, pantry: pantryKcalOf(Game), hasSub: sub, pending, cands: known.length,
       open: day >= 20 && !pending && !sub && pantryKcalOf(Game) > 12000 && known.length > 0,
     };
-  } catch (e) { return { day: 0, pantry: 0, hasSub: true, pending: true, cands: 0, open: false }; }
+  } catch (e) { return { day: 0, pantry: 0, hasSub: true, pending: true, cands: 0, open: false, error: String(e?.message ?? e) }; }
 }
 
 function attachLinkPipe(Game, m) {
@@ -68,19 +68,20 @@ function attachLinkPipe(Game, m) {
     tributes: [],    // {day, linkId, paid}
     roll: [],        // daily snapshots {day, links:[{id,target,dir,age,trust,status,arrears,conquered,seasoned}]}
     win: [],         // daily proposal-window rows {day, open, capFires, subs, cands, pantry}
-    formed: {},      // linkId -> {day, target, dir}
+    formed: {},      // linkId -> {day (null if unknown), observedDay, target, dir}
+    errors: [],
   };
   const seenIds = new Set();
   const dirOf = (l) => (l.primary === 'haven' ? 'lead' : (l.subordinate === 'haven' ? 'belong' : 'other'));
 
-  const wrap = (name, fn) => {
+  const wrap = (name) => {
     const orig = Game[name];
     if (typeof orig !== 'function') return;
     Game[name] = function () {
       const d = dayOf(Game);
       let ret;
-      try { ret = orig.apply(Game, arguments); }
-      catch (e) { ret = { __threw: true }; }
+      try { ret = orig.apply(this, arguments); }
+      catch (e) { p.errors.push({ where: name, message: String(e?.message ?? e) }); throw e; }
       try {
         if (name === 'proposeLink') {
           const opts = arguments[1] || {};
@@ -94,14 +95,13 @@ function attachLinkPipe(Game, m) {
           p.counters.push({ day: d, how: arguments[0], ret: (ret && ret.id) ? 'link' : (ret == null ? 'null' : String(ret)) });
         } else if (name === 'tendLink') {
           const l = (Game.hierarchyState() || []).find(x => x && x.id === arguments[0]);
-          p.tends.push({ day: d, linkId: arguments[0], dir: l ? dirOf(l) : '?', paid: ret | 0, trustAfter: l ? (l.trust | 0) : -1, age: l ? (d - (l.day || 0)) : -1 });
+          p.tends.push({ day: d, week: typeof Game._week === 'function' ? Game._week() : null, linkId: arguments[0], dir: l ? dirOf(l) : '?', paid: ret | 0, trustAfter: l ? (l.trust | 0) : -1, age: l && Number.isFinite(l.day) ? d - l.day : null });
         } else if (name === 'breakLink') {
           p.breaks.push({ day: d, linkId: arguments[0], reason: String(arguments[1] || ''), trust: -1, age: -1 });
         } else if (name === 'payTribute') {
           p.tributes.push({ day: d, linkId: arguments[0], paid: ret | 0 });
         }
-      } catch (e) {}
-      if (ret && ret.__threw) throw new Error('wrapped ' + name + ' threw');
+      } catch (e) { p.errors.push({ where: name + ':record', message: String(e?.message ?? e) }); }
       return ret;
     };
   };
@@ -117,18 +117,19 @@ function attachLinkPipe(Game, m) {
       for (const l of links) {
         if (!l || !l.id) continue;
         const dir = dirOf(l);
-        if (!seenIds.has(l.id)) { seenIds.add(l.id); p.formed[l.id] = { day: d, target: l.primary === 'haven' ? l.subordinate : l.primary, dir }; }
+        if (!seenIds.has(l.id)) { seenIds.add(l.id); p.formed[l.id] = { day: Number.isFinite(l.day) ? l.day : null, observedDay: d, target: l.primary === 'haven' ? l.subordinate : l.primary, dir }; }
         let seasoned = false;
-        try { seasoned = (typeof Game._linkSeasoned === 'function') ? !!Game._linkSeasoned(l, !!l.conquered) : false; } catch (e) {}
+        try { seasoned = (typeof Game._linkSeasoned === 'function') ? !!Game._linkSeasoned(l, !!l.conquered) : false; } catch (e) { p.errors.push({ where: 'seasoned', message: String(e?.message ?? e) }); }
         row.links.push({
-          id: l.id, dir, age: d - (l.day || 0), trust: l.trust | 0,
+          id: l.id, dir, age: Number.isFinite(l.day) ? d - l.day : null, trust: l.trust | 0,
           status: l.status, arrears: l.arrears | 0, conquered: !!l.conquered, seasoned,
         });
       }
       p.roll.push(row);
       const w = pid === 'belongseek' ? belongseekWindow(Game) : leadcourtWindow(Game);
+      if (w.error) p.errors.push({ where: 'window', message: w.error });
       p.win.push({ day: d, pid, open: w.open, capFires: !!w.capFires, subs: w.subs | 0, hasSub: !!w.hasSub, cands: w.cands | 0, pantry: Math.round(w.pantry) });
-    } catch (e) {}
+    } catch (e) { p.errors.push({ where: 'snapshot', message: String(e?.message ?? e) }); }
   };
   return p;
 }
@@ -165,23 +166,39 @@ function finalizeLinkPipe(Game, m) {
       if (l.status !== 'active' && lf.brokeDay == null) lf.brokeDay = row.day;
     }
   }
-  // tend weeks per link
-  const tendWeeksByLink = {};
-  for (const t of p.tends) tendWeeksByLink[t.linkId] = (tendWeeksByLink[t.linkId] || 0) + 1;
+  // Attempts, successful payments and distinct paid weeks are different units.
+  const tendByLink = {};
+  for (const t of p.tends) {
+    const counts = tendByLink[t.linkId] ||= { attempts: 0, paid: 0, weeks: new Set(), unknownWeeks: 0 };
+    counts.attempts++;
+    if (t.paid > 0) {
+      counts.paid++;
+      if (Number.isFinite(t.week)) counts.weeks.add(t.week); else counts.unknownWeeks++;
+    }
+  }
   const links = Object.values(life).map(lf => Object.assign({}, lf, {
-    age: lf.lastSeen - lf.day,
-    tendWeeks: tendWeeksByLink[lf.id] || 0,
+    age: lf.day == null ? null : lf.lastSeen - lf.day,
+    tendAttempts: tendByLink[lf.id]?.attempts || 0,
+    successfulTends: tendByLink[lf.id]?.paid || 0,
+    unknownTendWeeks: tendByLink[lf.id]?.unknownWeeks || 0,
+    tendWeeks: tendByLink[lf.id]?.unknownWeeks ? null : (tendByLink[lf.id]?.weeks.size || 0),
     brokeWhy: lf.brokeDay != null ? ((p.breaks.find(b => b.linkId === lf.id) || {}).reason || 'unrecorded') : null,
   }));
   const seasoned = links.filter(l => l.seasonedDay != null);
-  const fourth = links.filter(l => l.dir === 'lead').sort((a, b) => a.day - b.day)[3] || null;
+  const leads = links.filter(l => l.dir === 'lead');
+  const formationOrderKnown = leads.every(l => l.day != null);
+  const fourth = formationOrderKnown ? (leads.sort((a, b) => a.day - b.day)[3] || null) : null;
   return {
     proposals: prop,
     counters: { total: p.counters.length, accept: n(p.counters, c => c.how === 'accept'), sweeten: n(p.counters, c => c.how === 'sweeten'), walk: n(p.counters, c => c.how === 'walk') },
     tends: p.tends.length, tributePays: p.tributes.length,
     windowOpenDays: openDays, capBlockedDays,
     winDays: wins.length,
-    linksFormed: links.length,
+    linksFormed: links.length, // historical alias: observed lifecycles, not new formation events
+    linksObserved: links.length,
+    unknownFormationDates: links.filter(l => l.day == null).length,
+    formationOrderKnown,
+    errors: (p.errors || []).slice(),
     linksSeasoned: seasoned.length,
     links,                       // full lifecycle detail for the evidence
     fourthLeadLink: fourth ? { formedDay: fourth.day, target: fourth.target, seasonedDay: fourth.seasonedDay, brokeWhy: fourth.brokeWhy, trustAt30: fourth.trustAt30, tendWeeks: fourth.tendWeeks } : null,

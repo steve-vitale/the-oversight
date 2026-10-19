@@ -882,7 +882,7 @@
  },
  {
   "id": "trail_mix_bag",
-  "name": "Trail mix",
+    "name": "Trail mix bag",
   "class": "food",
   "flavor": "Nuts, raisins, chocolate chips (melted, reformed, still good).",
   "baseEffect": "500 kcal. Morale in a bag.",
@@ -2042,7 +2042,8 @@
   "baseEffect": "+2 party size, allies within 3 tiles gain +10% damage",
   "lootTier": 4,
   "armor": {
-   "protection": 30
+   "protection": 30,
+   "beamResist": true
   },
   "kg": 1.8,
   "findable": true
@@ -2200,7 +2201,8 @@
   "baseEffect": "+60 protection, full-body (blocks head/legs/shoes)",
   "lootTier": 4,
   "armor": {
-   "protection": 60
+   "protection": 60,
+   "beamResist": true
   },
   "kg": 14.0,
   "findable": true
@@ -2271,7 +2273,8 @@
   "baseEffect": "Damage taken feeds your attacks (+1 damage per 2 HP lost this fight)",
   "lootTier": 4,
   "armor": {
-   "protection": 40
+   "protection": 40,
+   "beamResist": true
   },
   "kg": 9.0,
   "findable": true
@@ -2400,7 +2403,8 @@
   "baseEffect": "+move speed; ignore difficult terrain",
   "lootTier": 4,
   "armor": {
-   "protection": 12
+   "protection": 12,
+   "beamResist": true
   },
   "kg": 0.9,
   "findable": true
@@ -2441,6 +2445,8 @@
  },
  {
   "id": "phase_shawl",
+  "slot": "acc",
+  "damageAvoidChance": 0.25,
   "name": "Phase Shawl",
   "class": "clothing",
   "flavor": "Sometimes your shoulder isn't where the spear lands. The shawl knows. Don't ask how.",
@@ -2513,7 +2519,8 @@
   "baseEffect": "Absorb allies' damage as your own; share healing with the party",
   "lootTier": 4,
   "armor": {
-   "protection": 35
+   "protection": 35,
+   "beamResist": true
   },
   "kg": 1.4,
   "findable": true
@@ -2538,7 +2545,8 @@
   "baseEffect": "Adaptive protection (+50); hardens against what last hurt you",
   "lootTier": 4,
   "armor": {
-   "protection": 50
+   "protection": 50,
+   "beamResist": true
   },
   "kg": 3.0,
   "findable": true
@@ -2780,7 +2788,8 @@
   "baseEffect": "Gain resistance to last damage type taken (stacks to immunity)",
   "lootTier": 4,
   "armor": {
-   "protection": 35
+   "protection": 35,
+   "beamResist": true
   },
   "kg": 2.0,
   "findable": true
@@ -2863,7 +2872,8 @@
   "baseEffect": "+35 protection; enemies must pass morale or flee",
   "lootTier": 4,
   "armor": {
-   "protection": 35
+   "protection": 35,
+   "beamResist": true
   },
   "kg": 4.5,
   "findable": true

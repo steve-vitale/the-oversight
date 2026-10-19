@@ -125,6 +125,7 @@
 <script src="src/js/nomad-drive.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/temperature.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/godpath.js?v=7d27851b5-20261019-060521"></script>
+<script src="src/js/godverbs.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/endingKey.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/telemetry-hooks.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/feel.js?v=7d27851b5-20261019-060521"></script>
@@ -135,6 +136,7 @@
 <script src="src/js/presentation.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/sprites.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/tile-scenes.js?v=7d27851b5-20261019-060521"></script>
+<script src="src/js/regional-audio.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/app.js?v=7d27851b5-20261019-060521"></script>
 <script src="src/js/feel-audio.js?v=7d27851b5-20261019-060521"></script>
 <script>
@@ -143,9 +145,8 @@
    the SW install/waiting/skipWaiting handover, which stalls silently on iOS.
    On launch, on foreground resume, and every minute we fetch version.json
    with cache:'no-store' plus a cache-buster; if it differs from the running
-   BUILD_VERSION we show the banner. Tapping it unregisters all SWs, wipes all
-   caches, and navigates to a cache-busted URL — the new version loads no
-   matter what state the old SW is in. Every step reports progress; failures
+   BUILD_VERSION we show the banner. Tapping it preserves installed offline caches and
+   navigates to a cache-busted URL. Worker activation cleans obsolete versions. Every step reports progress; failures
    show retry + a manual fallback. Works even where SWs are unsupported. */
 (function () {
   var banner = document.getElementById('update-banner');
@@ -232,9 +233,8 @@
     doApply();
   }
   function doApply() {
-    // Bulletproof: every async step races a timeout, and navigation is
-    // GUARANTEED via backstop timer. iOS can hang getRegistrations() or
-    // caches.delete() forever — we never wait on them.
+    // Preserve installed offline data through navigation. The worker cleans
+    // obsolete versions on activation; the page must not race that installation.
     var navigated = false;
     function go() {
       if (navigated) return; navigated = true;
@@ -248,34 +248,6 @@
         try { window.location.reload(); } catch (e2) { fail(); }
       }
     }
-    function withTimeout(p, ms) {
-      return Promise.race([p, new Promise(function (res) { setTimeout(res, ms); })]);
-    }
-    try {
-      var cleanups = [];
-      if ('serviceWorker' in navigator) {
-        cleanups.push(withTimeout(
-          navigator.serviceWorker.getRegistrations().then(function (regs) {
-            return withTimeout(Promise.all(regs.map(function (r) {
-              return withTimeout(r.unregister().catch(function () {}), 2000);
-            })), 2500);
-          }).catch(function () {}), 3000));
-      }
-      if ('caches' in window) {
-        cleanups.push(withTimeout(
-          caches.keys().then(function (ks) {
-            return withTimeout(Promise.all(ks.map(function (k) {
-              return withTimeout(caches.delete(k).catch(function () {}), 2000);
-            })), 2500);
-          }).catch(function () {}), 3000));
-      }
-      withTimeout(Promise.all(cleanups), 7000).then(go).catch(go);
-      // Absolute backstop: navigate in 8s no matter what hangs.
-      setTimeout(go, 8000);
-    } catch (e) { go(); }
-    function withTimeout(p, ms) {
-      return Promise.race([p, new Promise(function (res) { setTimeout(res, ms); })]);
-    }
     // Steve 2026-10-06: DO NOT wipe caches before navigation - causes black screen
     // on iOS PWA. Just navigate; the new version's files are cache-busted by URL,
     // so they'll load fresh. Old caches get cleaned on next launch.
@@ -288,7 +260,7 @@
     state = 'failed';
     failCount++;
     if (failCount >= 2) {
-      show('&#9888; Auto-update failed. Delete the home-screen app and re-add it from Safari, then <b>tap to retry</b>.');
+      show('&#9888; Update failed. Keep this app and your saves. Check your connection, then <b>tap to retry</b>.');
     } else {
       show('&#9888; Update didn&rsquo;t work &mdash; <b>tap to retry</b>');
     }
@@ -345,10 +317,28 @@
   // Exposed for the build-tag tap in app.js and console debugging.
   window.__oversightUpdate = { check: check, apply: apply };
 
-  // SW registration is for offline caching only now.
+  // Offline worker follows the build already loaded by this page. Activation
+  // must finish even while an older controlled page remains in browser history.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js').catch(function () {});
+      var workerURL = new URL('sw.js', window.location.href);
+      workerURL.searchParams.set('v', window.BUILD_VERSION || '');
+      navigator.serviceWorker.register(workerURL.href, { updateViaCache: 'none' }).then(function (reg) {
+        function activateLoadedBuild(worker) {
+          if (worker && worker.scriptURL === workerURL.href && worker.state === 'installed') {
+            worker.postMessage({ type: 'SKIP_WAITING' });
+          }
+        }
+        function watchInstalling() {
+          var worker = reg.installing;
+          if (!worker) return;
+          worker.addEventListener('statechange', function () { activateLoadedBuild(worker); });
+          activateLoadedBuild(worker);
+        }
+        activateLoadedBuild(reg.waiting);
+        watchInstalling();
+        reg.addEventListener('updatefound', watchInstalling);
+      }).catch(function (error) { console.warn('Offline worker registration failed:', error); });
     });
   }
 

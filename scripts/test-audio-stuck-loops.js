@@ -94,6 +94,7 @@ const Game = {
 
 // ---- extract the CombatAudio module from app.js and eval it ----
 const repoRoot = path.resolve(__dirname, '..');
+require('../src/js/regional-audio'); // Production mixer installs these shared hooks.
 const appSrc = fs.readFileSync(path.join(repoRoot, 'src/js/app.js'), 'utf8');
 const lines = appSrc.split('\n');
 const startIdx = lines.findIndex(l => l.includes('const CombatAudio = (() => {'));

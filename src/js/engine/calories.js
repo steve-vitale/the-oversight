@@ -77,7 +77,7 @@
 
   // Apply one day's metabolic reality. Returns {ok, warnings[]}.
   // Warnings telegraph the spiral BEFORE it arrives (design rule).
-  // opts: { weather, dayTicks } — heat and exertion drink too (Steve 2026-10-08).
+  // opts: { weather, dayTicks, damage(amount, cause) } — heat and exertion drink too (Steve 2026-10-08).
   function resolveDay(scholar, village, opts) {
     const warnings = [];
     const need = dailyNeed(scholar);
@@ -115,7 +115,9 @@
     }
     if (scholar.kcal < 0) {
       const deficit = -scholar.kcal;
-      scholar.health -= Math.min(20, 2 + deficit / 180);
+      const incoming = Math.min(20, 2 + deficit / 180);
+      const damage = opts?.damage ? opts.damage(incoming, 'starvation') : incoming;
+      scholar.health -= damage;
       scholar.energy = Math.max(0, scholar.energy - 25);
       // SPIRALGATE (sim-spiralgate-b 2026-10-17, sim-findings #457): the
       // "spiral has started" framing is an alarm, not a first-tick report —
@@ -130,9 +132,9 @@
       const hungryNights = (scholar.hungerNights || 0) + 1;
       scholar.hungerNights = hungryNights;
       if (hungryNights >= 2) {
-        warnings.push('STARVING: health and energy falling. The spiral has started.');
+        warnings.push(damage > 0 ? 'STARVING: health and energy falling. The spiral has started.' : 'STARVING: energy falling. The spiral has started.');
       } else {
-        warnings.push('STARVING: health and energy falling. You went to bed on an empty stomach.');
+        warnings.push(damage > 0 ? 'STARVING: health and energy falling. You went to bed on an empty stomach.' : 'STARVING: energy falling. You went to bed on an empty stomach.');
       }
       // TRIVIAL-DEFICIT HONESTY (journey-succession r14 2026-10-15): a tiny
       // deficit on a full belly is not starvation — the day already did the
@@ -152,7 +154,7 @@
     }
     if (scholar.hydration <= 0) {
       scholar.hydration = 0;
-      scholar.health -= 12;
+      scholar.health -= opts?.damage ? opts.damage(12, 'dehydration') : 12;
       scholar.energy = Math.max(0, scholar.energy - 30);
       warnings.push('DEHYDRATED: find and treat water today.');
       if (!killedBy && scholar.health <= 0) killedBy = 'dehydration';

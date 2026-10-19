@@ -2,28 +2,33 @@
 // Asserts every new variant fires under its trigger conditions, doesn't
 // duplicate existing variants, and respects knowledge gates.
 // Usage: node scripts/test-social-pool-expansion.js  (exit 0 = all green)
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/codex-people.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/lifeseed.js', 'src/js/villager-agency.js', 'src/js/debug-scenarios.js'].forEach(f => {
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); process.exit(2); }
-});
-const Game = globalThis.Scattering.Game;
+const H = require('./sim-harness');
+let Game;
 
 let pass = 0, fail = 0;
 const ok = (cond, label) => { if (cond) { pass++; } else { fail++; console.log('FAIL:', label); } };
 const said = [];
-Game.say = function (t) { said.push(String(t)); return t; };
+// Cover the choice domain deliberately; a random sample of 40 can miss a
+// valid line. Install a stable RNG proxy before loading: some modules capture
+// Math.random at load time. Only RNG is controlled; real runtime picks remain.
+let forcedChoice = null, liveRandom = Math.random;
+const randomProxy = () => forcedChoice === null ? liveRandom() : forcedChoice;
+function sampleAt(q, action) {
+  const prior = forcedChoice;
+  try { forcedChoice = q; return action(); }
+  finally { forcedChoice = prior; }
+}
 
 (async () => {
-  await Game.init();
+  const descriptor = Object.getOwnPropertyDescriptor(Math, 'random');
+  Object.defineProperty(Math, 'random', { configurable: true, get: () => randomProxy, set: fn => { liveRandom = fn; } });
+  try {
+    ({ Game } = await H.loadGame({ seed: Number(process.env.SEED || 7), mode: 'social-pool-expansion', narration: true }));
+  } finally {
+    Object.defineProperty(Math, 'random', { ...descriptor, value: randomProxy });
+  }
+  const say = Game.say;
+  Game.say = function (t, ...args) { said.push(String(t)); return say.call(this, t, ...args); };
   const rosterOf = () => (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
 
   // ---- 1. Ambush openers: identity-conditioned variants fire ----
@@ -35,7 +40,7 @@ Game.say = function (t) { said.push(String(t)); return t; };
   const openers = new Set();
   for (let i = 0; i < 40; i++) {
     said.length = 0;
-    Game.springAmbush({ id: 't' + i, leader, inviter: leader, accomplices: acc, target: Game.villagerId, tells: [], round: 0 });
+    sampleAt((i + 0.5) / 40, () => Game.springAmbush({ id: 't' + i, leader, inviter: leader, accomplices: acc, target: Game.villagerId, tells: [], round: 0 }));
     const op = said.find(l => l.startsWith('"'));
     if (op) openers.add(op);
   }
@@ -44,13 +49,23 @@ Game.say = function (t) { said.push(String(t)); return t; };
   ok([...openers].some(l => l.includes("one of the good ones")), 'ambush opener: close-friend "good ones" line fires');
   ok([...openers].some(l => l.includes("can't carry you anymore")), 'ambush opener: new base line fires');
   ok([...openers].some(l => l.includes("You've had this coming")), 'ambush opener: original lines still present');
+  Game.state.village.trust[leader] = 0;
+  const strangers = [];
+  for (let i = 0; i < 40; i++) {
+    said.length = 0;
+    sampleAt((i + 0.5) / 40, () => Game.springAmbush({ id: 's' + i, leader, inviter: leader, accomplices: acc, target: Game.villagerId, tells: [], round: 0 }));
+    strangers.push(said.find(l => l.startsWith('"')) || '');
+  }
+  ok(!strangers.some(l => l.includes("version of this where it isn't me")), 'ambush opener: stranger cannot borrow the close-friend hurt line');
+  ok(!strangers.some(l => l.includes('one of the good ones')), 'ambush opener: stranger cannot borrow the close-friend good-ones line');
+  Game.state.village.trust[leader] = 60;
   // bold leader variant: eye-contact delivery
   const vp = Game.vpOf(leader) || {}; vp.personality = vp.personality || {};
   const realTemp = vp.personality.temperament; vp.personality.temperament = 'bold';
   let eyeContact = false;
   for (let i = 0; i < 12; i++) {
     said.length = 0;
-    Game.springAmbush({ id: 'b' + i, leader, inviter: leader, accomplices: acc, target: Game.villagerId, tells: [], round: 0 });
+    sampleAt((i + 0.5) / 12, () => Game.springAmbush({ id: 'b' + i, leader, inviter: leader, accomplices: acc, target: Game.villagerId, tells: [], round: 0 }));
     const op = said.find(l => l.startsWith('"'));
     if (op && op.includes('meets your eyes')) { eyeContact = true; break; }
   }
@@ -88,7 +103,7 @@ Game.say = function (t) { said.push(String(t)); return t; };
     const j = Game.justiceState();
     j.crimes = crimes.map(t => ({ type: t, day: 1 }));
     j.stage = 1; j.confrontedBy = null; j.pendingConfront = false;
-    for (let i = 0; i < 16; i++) { said.length = 0; Game.justiceConfront(); const l = said.find(x => x.startsWith('⚖')); if (l) seen.add(l); }
+    for (let i = 0; i < 16; i++) { said.length = 0; sampleAt((i + 0.5) / 16, () => Game.justiceConfront()); const l = said.find(x => x.startsWith('⚖')); if (l) seen.add(l); }
   };
   runJustice('murder close', ['murder'], 60, 'bold');
   runJustice('attack close cautious', ['attack'], 55, 'cautious');
