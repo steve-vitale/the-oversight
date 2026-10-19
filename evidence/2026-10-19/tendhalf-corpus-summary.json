@@ -1,0 +1,262 @@
+{
+ "arms": [
+  "control",
+  "tendhalf"
+ ],
+ "seeds": [
+  65201,
+  65202,
+  65203,
+  65204,
+  65205,
+  65206,
+  65207,
+  65208
+ ],
+ "policies": [
+  "leadfeast",
+  "belongfeast"
+ ],
+ "filesBad": [],
+ "perArm": {
+  "control": {
+   "n": 16,
+   "survival": {
+    "median": 117,
+    "days": [
+     52,
+     69,
+     75,
+     81,
+     97,
+     100,
+     108,
+     110,
+     117,
+     118,
+     118,
+     120,
+     126,
+     133,
+     140,
+     154
+    ]
+   },
+   "wall": {
+    "national": 11,
+    "table": 13,
+    "wins": 0,
+    "wave4": 14,
+    "wave5": 0,
+    "exiled": 0
+   },
+   "door": {
+    "reached": 10,
+    "diedInWindow": 8,
+    "attempts": 10,
+    "outcomes": {
+     "died": 8,
+     "regressed": 2
+    }
+   },
+   "taxonomy": {
+    "windowDeaths": 63,
+    "who": {
+     "scholar": 32,
+     "villager": 31
+    },
+    "where": {
+     "raid": 42,
+     "haven": 5,
+     "wild": 9,
+     "expedition": 3,
+     "alien": 1,
+     "other": 2,
+     "disease": 1
+    },
+    "what": {
+     "w4": 40,
+     "w3": 6,
+     "w12": 8,
+     "null": 9
+    },
+    "addressable": 59
+   },
+   "causeSpace": {
+    "something wearing a crown of bone, bellowing at the dusk": 2,
+    "combat": 150,
+    "monster": 60,
+    "The Terms of Service": 1,
+    "starvation": 8,
+    "The Loud Beast": 1,
+    "Gavel": 1,
+    "alien": 1,
+    "a wound that wouldn't close": 6,
+    "ambush": 2,
+    "contest": 4,
+    "sickness": 3,
+    "thirst": 1,
+    "Performance Review": 1,
+    "the night": 1,
+    "The Influencer": 1,
+    "The Ugly Beast": 1
+   },
+   "perPolicy": [
+    {
+     "policy": "leadfeast",
+     "n": 8,
+     "medianSurvival": 110,
+     "national": 5,
+     "table": 7,
+     "wave4": 6,
+     "def5": 6
+    },
+    {
+     "policy": "belongfeast",
+     "n": 8,
+     "medianSurvival": 120,
+     "national": 6,
+     "table": 6,
+     "wave4": 8,
+     "def5": 4
+    }
+   ]
+  },
+  "tendhalf": {
+   "n": 16,
+   "survival": {
+    "median": 110,
+    "days": [
+     52,
+     75,
+     81,
+     98,
+     99,
+     100,
+     108,
+     110,
+     110,
+     116,
+     117,
+     118,
+     120,
+     126,
+     140,
+     154
+    ]
+   },
+   "wall": {
+    "national": 12,
+    "table": 13,
+    "wins": 0,
+    "wave4": 14,
+    "wave5": 0,
+    "exiled": 0
+   },
+   "door": {
+    "reached": 10,
+    "diedInWindow": 9,
+    "attempts": 10,
+    "outcomes": {
+     "died": 9,
+     "regressed": 1
+    }
+   },
+   "taxonomy": {
+    "windowDeaths": 57,
+    "who": {
+     "scholar": 36,
+     "villager": 21
+    },
+    "where": {
+     "raid": 40,
+     "wild": 11,
+     "disease": 1,
+     "alien": 1,
+     "other": 2,
+     "expedition": 2
+    },
+    "what": {
+     "w4": 33,
+     "w3": 16,
+     "w12": 4,
+     "null": 4
+    },
+    "addressable": 54
+   },
+   "causeSpace": {
+    "something wearing a crown of bone, bellowing at the dusk": 2,
+    "combat": 153,
+    "monster": 54,
+    "The Terms of Service": 1,
+    "The Loud Beast": 1,
+    "ambush": 2,
+    "contest": 4,
+    "a wound that wouldn't close": 4,
+    "starvation": 4,
+    "sickness": 3,
+    "alien": 1,
+    "dehydration": 1,
+    "thirst": 1,
+    "Performance Review": 1,
+    "the night": 1,
+    "The Influencer": 1
+   },
+   "perPolicy": [
+    {
+     "policy": "leadfeast",
+     "n": 8,
+     "medianSurvival": 110,
+     "national": 6,
+     "table": 7,
+     "wave4": 6,
+     "def5": 6
+    },
+    {
+     "policy": "belongfeast",
+     "n": 8,
+     "medianSurvival": 117,
+     "national": 6,
+     "table": 6,
+     "wave4": 8,
+     "def5": 4
+    }
+   ]
+  }
+ },
+ "verdicts": {
+  "tendhalf": {
+   "primary": {
+    "metric": "median survival days",
+    "control": 117,
+    "armed": 110,
+    "delta": -7,
+    "goBar": "+10d",
+    "go": false
+   },
+   "guardrails": {
+    "noNewDeathModes": {
+     "pass": true,
+     "detail": "none; exempt: dehydration x1 (singleton, exempt)"
+    },
+    "nationalNotDegraded": {
+     "pass": true,
+     "detail": "12 vs 11"
+    },
+    "tableBand": {
+     "pass": true,
+     "detail": "13 vs 13 (band >= control-2)"
+    },
+    "wave4NotDegraded": {
+     "pass": true,
+     "detail": "14 vs 14"
+    },
+    "survivalFloor": {
+     "pass": true,
+     "detail": "delta -7d (floor -10d)"
+    }
+   },
+   "verdict": "NO-GO (primary miss, guardrails hold — killed)"
+  }
+ }
+}
