@@ -1415,13 +1415,24 @@
         // Injected leads (agency/betrayal) keep priority; the trim lands
         // on the base-content tail; 'leave' stays pinned, 'silence' last.
         // Reactive menus (ans:/gq: — the question owns the menu, answers+2
-        // contract) are exempt: prepends there add urgency, never cut.
-        var isReactive = base.some(function (ch) {
+        // contract): the QUESTION's answers are structural and protected,
+        // but the exemption is not a blank check for prepends. A hanging
+        // question plus a live betrayal case blew to 15 (establishment
+        // r16 2026-10-19, seed 124-d13: 3 gq:open + 9 betrayal + agency +
+        // invite). So the reactive budget is reactiveCount + 2 (the
+        // answers+2 contract from buildMenu) — the answers survive, the
+        // prepends compete for the remaining room.
+        var isReactiveItem = function (ch) {
           var id = ch && ch.id;
           return typeof id === 'string' && (id.indexOf('ans:') === 0 || id.indexOf('gq:') === 0);
-        });
-        if (!isReactive && (extra.length || base.length > 8)) {
-          var MAXC = 7;
+        };
+        var isReactive = base.some(isReactiveItem);
+        var reactiveCount = isReactive ? base.filter(isReactiveItem).length : 0;
+        var MAXC = isReactive ? reactiveCount + 2 : 7;
+        // trigger: content over budget. Non-reactive keeps the r22 trigger
+        // (base.length > 8); reactive triggers past answers+2+leave+silence.
+        var trigger = isReactive ? reactiveCount + 4 : 8;
+        if (extra.length || base.length > trigger) {
           var isSil = function (ch) { return ch && (ch.id === 'silence' || ch.id === 'nv:listen'); };
           var isLeave = function (ch) { return ch && ch.id === 'leave'; };
           var silence = base.filter(isSil).slice(0, 1);
@@ -1437,14 +1448,15 @@
           // verbs (the want leads) > earned verbs (teach/trade/skills/
           // invites — never lose the lottery) > pool + topics.
           var PROTECTED = /^(betrayal:|confront:|alive:|dlg:commit|dlg:cant|dlg:help|dlg:heed|dlg:stay|teach|trade|offer_help|hawker|invite_party|dlg:invite|skill_learn:|skill_teach:|agency:)/;
-          var prot = [], rest = [];
+          var reactive = [], prot = [], rest = [];
           for (var i = 0; i < content.length; i++) {
             var cid = content[i] && content[i].id;
-            if (typeof cid === 'string' && PROTECTED.test(cid)) prot.push(content[i]);
+            if (isReactiveItem(content[i])) reactive.push(content[i]);
+            else if (typeof cid === 'string' && PROTECTED.test(cid)) prot.push(content[i]);
             else rest.push(content[i]);
           }
           var room = Math.max(0, MAXC - extra.length - leave.length);
-          var kept = prot.concat(rest).slice(0, room);
+          var kept = reactive.concat(prot, rest).slice(0, room);
           return extra.concat(kept, leave, silence);
         }
         if (extra.length) return extra.concat(base);
