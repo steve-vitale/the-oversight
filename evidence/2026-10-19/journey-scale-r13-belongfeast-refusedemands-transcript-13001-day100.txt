@@ -1,0 +1,26 @@
+=== seed 13001 day 100 — conversation with Lena (lena_ruiz) ===
+occupation=ER nurse temperament=steady trust=19 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Well, Please — have you got anything to spare? Anything? I can't keep going like this."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. That's the whole of it."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I can't pull my weight like this. Anything you can spare, I'll make it stretch."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Yara is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Yara said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "Alright, duty calls. This was a good pause."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

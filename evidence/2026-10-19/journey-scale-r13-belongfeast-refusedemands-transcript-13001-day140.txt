@@ -1,0 +1,23 @@
+=== seed 13001 day 140 — conversation with Ruen (visjoin_132) ===
+occupation=roofer temperament=steady trust=31 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Honestly, Teach me something. Anything you know that I don't."
+(turn0 choices: betrayal:accept, betrayal:decline, ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:a_deflect, ans:q_teach_me:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "Okay — here's one small useful thing I know. Watch."
+THEM: They watch, intent, then try it themselves. "Huh. That actually works." A grin — student and teacher trade places for a minute.
+(want=curious stage=2)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Sassafras — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Here — let me show you."
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

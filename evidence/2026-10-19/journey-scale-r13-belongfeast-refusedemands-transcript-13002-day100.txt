@@ -1,0 +1,29 @@
+=== seed 13002 day 100 — conversation with Ava (ava_garcia) ===
+occupation=street artist temperament=gentle trust=39 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "I did the count twice. The count doesn't change. I know where the sorghum grows thick — come with me and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Then it’s set. Where the sorghum grows thick, at sunup. Two packs between us."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening, I promise."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Makhana (Fox Nut) — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Rest when you can. We'll talk again soon."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

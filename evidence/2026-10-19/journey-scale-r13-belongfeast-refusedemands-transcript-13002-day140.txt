@@ -1,0 +1,29 @@
+=== seed 13002 day 140 — conversation with Nikos (nikos_papadopoulos) ===
+occupation=aquarium keeper temperament=gentle trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "The pantry's nearly bare. Forage with me tomorrow? I know the east treeline."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "Another day like today and we're choosing who eats. I know the east treeline — come with me and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Then it’s set. The east treeline, first light. Pack light — we move fast."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Cattail — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening, I promise."
+THEM: "I should let you go. Be well, okay?"
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised
