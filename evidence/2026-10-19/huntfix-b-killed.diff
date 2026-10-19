@@ -1,0 +1,187 @@
+diff --git a/src/data/characterGen.json b/src/data/characterGen.json
+index cc9d024ee..3bf65cf46 100644
+--- a/src/data/characterGen.json
++++ b/src/data/characterGen.json
+@@ -458,6 +458,7 @@
+       ],
+       "trackLean": {"field": 12, "combat": 6},
+       "pathLean": ["hunter"],
++      "huntTier": 1.4,
+       "id": "hunting_guide",
+       "itemBias": {
+         "clothing": [
+@@ -703,6 +704,7 @@
+       ],
+       "trackLean": {"field": 12, "craft": 6},
+       "pathLean": ["forager"],
++      "huntTier": 1.2,
+       "id": "farmer",
+       "itemBias": {
+         "clothing": [
+@@ -821,6 +823,7 @@
+       ],
+       "trackLean": {"field": 12},
+       "pathLean": ["explorer", "drifter"],
++      "huntTier": 1.4,
+       "id": "trail_crew",
+       "itemBias": {
+         "clothing": [
+@@ -912,6 +915,7 @@
+       ],
+       "trackLean": {"field": 12},
+       "pathLean": ["explorer", "hunter"],
++      "huntTier": 1.4,
+       "id": "fishing_guide",
+       "itemBias": {
+         "clothing": [
+@@ -1120,6 +1124,7 @@
+     {
+       "trackLean": {"craft": 12, "field": 6},
+       "pathLean": ["hunter", "caregiver"],
++      "huntTier": 1.2,
+       "id": "veterinarian",
+       "name": "Veterinarian",
+       "teachTags": [
+@@ -1373,6 +1378,7 @@
+     {
+       "trackLean": {"strange": 12, "craft": 6},
+       "pathLean": ["caregiver", "survivalist"],
++      "huntTier": 1.2,
+       "id": "mortician",
+       "name": "Mortician",
+       "teachTags": [],
+@@ -1764,6 +1770,7 @@
+       ],
+       "trackLean": {"field": 12, "combat": 6},
+       "pathLean": ["hunter", "drifter"],
++      "huntTier": 1.4,
+       "id": "exterminator",
+       "itemBias": {
+         "clothing": [
+@@ -1878,6 +1885,7 @@
+     {
+       "trackLean": {"field": 6, "combat": 6, "craft": 6},
+       "pathLean": ["brawler", "forager"],
++      "huntTier": 1.2,
+       "id": "butcher",
+       "name": "Butcher",
+       "teachTags": [
+@@ -1966,6 +1974,7 @@
+     {
+       "trackLean": {"field": 12},
+       "pathLean": ["hunter", "survivalist"],
++      "huntTier": 1.2,
+       "id": "fisherman",
+       "name": "Fisherman",
+       "teachTags": [
+@@ -2010,6 +2019,7 @@
+     {
+       "trackLean": {"field": 12, "combat": 6},
+       "pathLean": ["hunter", "brawler"],
++      "huntTier": 1.4,
+       "id": "rancher",
+       "name": "Rancher",
+       "teachTags": [
+@@ -2100,6 +2110,7 @@
+     {
+       "trackLean": {"field": 12},
+       "pathLean": ["forager", "explorer"],
++      "huntTier": 1.4,
+       "id": "forager",
+       "name": "Wild food forager",
+       "teachTags": [
+@@ -2589,6 +2600,7 @@
+       ],
+       "trackLean": {"combat": 12},
+       "pathLean": ["shieldbearer", "brawler"],
++      "huntTier": 1.4,
+       "id": "soldier",
+       "itemBias": {
+         "clothing": [
+@@ -2632,6 +2644,7 @@
+       ],
+       "trackLean": {"field": 6, "strange": 6},
+       "pathLean": ["explorer", "drifter"],
++      "huntTier": 1.4,
+       "id": "pilot",
+       "itemBias": {
+         "clothing": [
+diff --git a/src/js/game.js b/src/js/game.js
+index 5b20489dd..44df64d65 100644
+--- a/src/js/game.js
++++ b/src/js/game.js
+@@ -5878,6 +5878,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       };
+     },
+ 
++    // occHuntTier(vp): the hunt-detector wiring fix (sim-huntfix-b 2026-10-19;
++    // huntroster-b named fix spec option 1). The engine's hunt detectors used
++    // to match ghost occupation WORDS ('hunter','tracker','ranger','soldier',
++    // 'marine','poacher' / includes('hunter')) that exist in NEITHER person
++    // table — a literal hunting_guide scored exactly what an ER nurse scored,
++    // and villagerHuntResolve's +20% hunter bonus fired on zero persons.
++    // The tier now lives in data: characterGen.json occupations carry
++    // huntTier 1.4 | 1.2. Resolved via occupationId, with a lowercased-name
++    // fallback for unhydrated seeds / old saves (mirrors hydrateSeed's own
++    // matching). Returns 0 when the occupation carries no tier.
++    // (Spec said "14 occupations" but listed 13 ids; implemented the 13 named.
++    // Adjacent ghost-word checks at 3287/15036/24528 (teach/forage/player
++    // hunt) are intentionally NOT chased by this arm — documented only.)
++    occHuntTier(vp) {
++      try {
++        const occs = ((this.data || {}).characterGen || {}).occupations || [];
++        const oid = vp && vp.occupationId;
++        if (oid) {
++          const o = occs.find(x => x && x.id === oid);
++          if (o && (o.huntTier === 1.4 || o.huntTier === 1.2)) return o.huntTier;
++        }
++        const on = String((vp && vp.formerOccupation) || '').toLowerCase();
++        if (on) {
++          const o = occs.find(x => x &&
++            (String(x.name || '').toLowerCase() === on || String(x.id || '').toLowerCase() === on));
++          if (o && (o.huntTier === 1.4 || o.huntTier === 1.2)) return o.huntTier;
++        }
++      } catch (e) {}
++      return 0;
++    },
++
+     // competence: how good is this person at this task? 0.7 / 1.0 / 1.4
+     // from occupation keywords + personality. Assign wisely.
+     villagerCompetence(vid, task) {
+@@ -5889,8 +5920,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       let mult = 1.0;
+       const has = (...words) => words.some(w => occ.includes(w));
+       if (task === 'hunt') {
+-        if (has('hunter', 'tracker', 'ranger', 'soldier', 'marine', 'poacher')) mult = 1.4;
+-        else if (has('butcher', 'farmer', 'athlete')) mult = 1.2;
++        // HUNT TIER (wiring fix 2026-10-19, sim-huntfix-b): data-driven via
++        // occupationId (occHuntTier), REPLACING the 1.4x/1.2x word lists. The
++        // old lists ('hunter','tracker','ranger','soldier','marine','poacher'
++        // / 'butcher','farmer','athlete') referenced ghost occupations with
++        // zero occurrences in either person table (verified 2026-10-19), so
++        // the replace is exact for every real occupation; the 1.4 tier now
++        // actually fires on the 8 hunter occupations. The 0.7 list is
++        // untouched (separate concern, still word-based).
++        const ht = this.occHuntTier ? this.occHuntTier(vp) : 0;
++        if (ht === 1.4) mult = 1.4;
++        else if (ht === 1.2) mult = 1.2;
+         else if (has('librarian', 'accountant', 'teacher', 'programmer', 'clerk')) mult = 0.7;
+       } else if (task === 'forage') {
+         if (has('cook', 'chef', 'forager', 'botanist', 'farmer', 'gardener', 'herbalist')) mult = 1.4;
+@@ -6261,8 +6301,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
+       let base = animal.difficulty === 'easy' ? 0.7 : animal.difficulty === 'medium' ? 0.4 : 0.15;
+       let isHunter = false;
+       try {
++        // HUNT TIER (wiring fix 2026-10-19, sim-huntfix-b): the old
++        // formerOccupation.includes('hunter') fired on ZERO persons in
++        // either table ('Hunting guide' does not contain 'hunter') — dead
++        // code. The +20% now fires on the 1.4 hunt tier (the hunter
++        // occupations); the 1.2 tier (butcher/farmer-adjacent) keeps its
++        // competence bonus but not the +20%. +0.2 additive, capped at 0.95
++        // below; the injury roll is untouched.
+         const vp = this.getPerson(vid) || {};
+-        isHunter = String(vp.formerOccupation || '').toLowerCase().includes('hunter');
++        isHunter = (this.occHuntTier ? this.occHuntTier(vp) : 0) === 1.4;
+       } catch (e) {}
+       let wbonus = 0;
+       try {
