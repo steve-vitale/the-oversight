@@ -1023,6 +1023,12 @@
         ]) || '"Fair enough. Some things aren\'t for sharing."';
       },
       menuOptions(vid, stage) { return []; }, // the question's answers ARE the menu
+      canOpen(vid) {
+        // STRANDED-WANT GUARD (journey scale r10 2026-10-19): the opener can
+        // only fire when an unasked question exists to hang. Pure by
+        // contract — convoPickUnaskedQuestion reads, never consumes.
+        try { return !!this.convoPickUnaskedQuestion(vid); } catch (e) { return true; }
+      },
       closeLine(vid, resolution) {
         if (resolution === 'engaged') return '"Good talk. I feel like I know you a little better now."';
         return null;
@@ -1566,6 +1572,14 @@
         // starving, sick, wounded — that's human). The want's own
         // never-twice-in-three-days gate keeps it from dominating.
         if (!firstMeeting && id === 'seek_taken' && w > 0) w = Math.max(w, 3.1);
+        // STRANDED-WANT GUARD (journey scale r10 2026-10-19): a want whose
+        // opener cannot fire must not be selected — observed: curious drawn
+        // with no unasked question left, stranded at stage 0 with a fallback
+        // opener and no ans:* menu (Marcus d80, resolution 'unestablished').
+        // Applied AFTER the floors (the first-meeting floor used to force
+        // curious to 3 even when it couldn't open). canOpen is pure by
+        // contract — it reads, never consumes.
+        try { if (def.canOpen && !def.canOpen.call(this, vid)) w = 0; } catch (e) {}
         w += Math.random() * 0.5;
         if (w > bestW) { bestW = w; best = id; }
       }

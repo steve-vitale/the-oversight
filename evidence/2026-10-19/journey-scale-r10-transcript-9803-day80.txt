@@ -1,0 +1,31 @@
+=== seed 9803 day 80 — conversation with Narumi (visjoin_78) ===
+occupation=interpreter temperament=fidgety trust=20 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "What's something you're good at that nobody here knows about?"
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:a_deflect, ans:q_skill:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "I can making do. Not well — well enough that nobody's died from it yet. That's my whole résumé now: nobody's died from it yet."
+(want=curious stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "You want to know about that? Okay." "Duel. They just... took Devon. Came back like nothing happened. It wasn't nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same as always: we endure."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I do the small things right. The big things notice."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Alright. Catch you later."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

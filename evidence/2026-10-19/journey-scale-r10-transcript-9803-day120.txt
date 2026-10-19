@@ -1,0 +1,26 @@
+=== seed 9803 day 120 — conversation with Betty (visjoin_117) ===
+occupation=infantry soldier temperament=bold trust=25 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Oh! Fair enough. I'd rather hear that than a confident lie."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's my son, Jason. Asked if the taken ones were bad. I said no. He asked if they were boring. I did not answer. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Devon died... I keep expecting to see Devon at the fire. Stupid."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I count portions out loud before eating. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I've got fires to light — metaphorical ones. Mostly."
+(want=seek_taken stage=3)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=promised

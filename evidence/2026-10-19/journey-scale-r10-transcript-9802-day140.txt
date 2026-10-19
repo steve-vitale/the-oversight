@@ -1,0 +1,32 @@
+=== seed 9802 day 140 — conversation with Ruth (ruth_goldstein) ===
+occupation=librarian temperament=dry trust=77 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is. Doesn't matter now."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Xavier died... I keep expecting to see Xavier at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I oil boots on rest days at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody says Xavier's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+closing line: "Talking helps. A little. Thank you."
+want final: id=ask_favor stage=3 resolution=promised

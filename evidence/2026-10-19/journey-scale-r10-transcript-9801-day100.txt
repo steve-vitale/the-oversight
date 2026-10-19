@@ -1,0 +1,31 @@
+=== seed 9801 day 100 — conversation with Hermann (app_mgpspics903) ===
+occupation=hunter temperament=warm trust=30 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but tell me you've got food to spare. I'm past hungry here. My hands shake when I try to work."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:want:ask_favor, dlg:help, dlg:cant, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's been too long since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Theo died... I keep expecting to see Theo at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I keep turning over the last thing Theo said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Theo's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: "I could talk all day, but — go on. We'll talk more."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

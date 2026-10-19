@@ -1,0 +1,26 @@
+=== seed 9802 day 80 — conversation with Oliver (app_mgpspiis719) ===
+occupation=teacher temperament=steady trust=14 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "You look handy. What did you do with your hands, before?"
+(turn0 choices: deflect_q, ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [ask:personal] "So — who are you, when nobody's watching?"
+THEM: "Good question." "I'm collecting skills like they're currency — finding food today, something else tomorrow. That's the whole of it."
+(want=curious stage=2)
+YOU: [dlg:more] "What else?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "That tracks."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

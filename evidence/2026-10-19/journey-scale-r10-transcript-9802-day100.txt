@@ -1,0 +1,29 @@
+=== seed 9802 day 100 — conversation with Jordan (gen_dtouj5k) ===
+occupation=chimney sweep temperament=bold trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you still sing — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+(turn0 choices: deflect_q, ans:q_song:a_yes, ans:q_song:a_no, ans:q_song:honest_pass, leave, silence)
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Here's what I think — Ha! The creek concerts. I've heard those. Keep going."
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "They say the table's coming. For us. I keep thinking about what we'd even bring to it."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I braid grass while listening to plans when I think about what it wants from us. It wants something. Everything wants something."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Someone has to answer it eventually. Everyone's doing the math on whether it'll be them."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I keep the fire lit where it sits. Somebody should tend the waiting."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Okay — I need to move. But I'm glad we talked."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

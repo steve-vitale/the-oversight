@@ -1,0 +1,26 @@
+=== seed 9801 day 80 — conversation with Elias (app_mgpspic4688) ===
+occupation=carpenter temperament=prickly trust=30 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs. Not that it matters."
+(turn0 choices: alive:event:table, alive:memory:feast, dlg:help, dlg:details, dlg:cant, teach, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "I did the count twice. The count doesn't change. Nobody's worked where the jackfruit grows thick in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Good. Where the jackfruit grows thick, before the dew dries. Pack and knife. We travel light."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: "Okay, that's my quota of socializing."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

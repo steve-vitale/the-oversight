@@ -1,0 +1,26 @@
+=== seed 9802 day 120 — conversation with Jordan (gen_dtouj5k) ===
+occupation=chimney sweep temperament=bold trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs."
+(turn0 choices: alive:event:table, dlg:details, dlg:cant, teach, alive:want:ask_favor, dlg:help, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "I did the count twice. The count doesn't change. Meet me at the east treeline and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Good. The east treeline, first light. Bring a pack."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Sassafras — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Right. Action time. You know where to find me."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised
