@@ -1,5 +1,16 @@
 # First public PWA release candidate
 
+Current playable artifact is frozen at0639a92f75054c59a160a9739699a11a435483c3;
+RELEASE-HANDOFF.md links the source-verified browser preview. At both phone
+heights19 native opening/Continue stages pass and162 HTTP inputs match; the
+two verifier scripts bring the frame witness total to164. New verification
+work is on codex/release-verification with identical served runtime bytes.
+Current quick272/full1044 pass. The193/237 source-contract map and final17
+decisions close the named inclusion queue for the frozen release scope;
+excluded experiments are not passing tests. Official-host access, physical
+device evidence and Steve's release decision remain. Older pending-queue and
+"164 served" descriptions below are historical.
+
 **Start with [RELEASE-HANDOFF.md](RELEASE-HANDOFF.md)** for the short current
 candidate identity, verified scope, feedback route and actual open gates.
 The remaining five additional legacy contracts now have97 assertion sites

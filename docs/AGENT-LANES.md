@@ -1,5 +1,15 @@
 # Agent lanes (2026-10-15)
 
+Frozen release checkpoint2026-10-19: keep playable artifact0639a92f7 stable on
+codex/phone-preview; publish verification-only updates on codex/release-verification.
+The hosted browser preview passes19 native stages at736/844 and verifies all
+162 served inputs. Game/data/CSS/assets/worker stay identical. All193 enumerated
+commits/237 original test names now have scoped decisions; the final17 queue is
+classified, with exclusions never counted as passes. Current quick272/full1044
+pass, including the original14-check gear observer proof. Read RELEASE-HANDOFF.md
+and RELEASE-INCLUSION.md first. Keep mixed-policy balance warnings open; no new
+feature/content or difficulty lane. Physical-device/official-host gates remain.
+
 Verification-only continuation2026-10-19: use RELEASE-HANDOFF.md first.
 The five remaining additional legacy contracts now have explicit97-site
 dispositions; do not count absent controller assertions or excluded tuning as

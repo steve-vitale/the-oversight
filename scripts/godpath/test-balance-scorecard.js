@@ -31,6 +31,10 @@ before = panel(); after = copy(before); after.sources['scripts/policies/maker.js
 T.ok('a policy change invalidates a game-only comparison', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.options.flags.CAPABLE_GREEDY = '1';
 T.ok('different policy flags invalidate pairing', S.comparePanels(before, after).decision === 'invalid');
+after = copy(before); after.sources['scripts/sim-harness.js'] = 'different-harness';
+T.ok('a changed harness cannot enter an ordinary game balance comparison', S.comparePanels(before, after).decision === 'invalid');
+after = copy(before); after.sources['scripts/policies/capable.js'] = 'different-controller';
+T.ok('a changed controller cannot enter an ordinary game balance comparison', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.rows.push(copy(after.rows[0]));
 T.ok('duplicate or incomplete cases are rejected', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.rows[0].row.seed = 999;

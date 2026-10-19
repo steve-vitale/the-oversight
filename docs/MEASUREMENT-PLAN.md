@@ -1,5 +1,18 @@
 # Balanced measurement on Muse's current game
 
+Release source review2026-10-19: optional named Explorer/Miser/Voice/peer/campaign
+strategies and their diagnostic/comparison wrappers are explicitly excluded from
+this milestone; see RELEASE-INCLUSION.md. Do not infer their viability from
+four mixed-policy panels. The original14-check gear observer contract is now
+automatic in scripts/godpath/test-gear-audit-contract.js. Methodology guards
+explicitly reject changed harness/controller source in ordinary Game comparison.
+The legacy dashboard's Other bucket includes unclassified person deaths;
+its villager subtotal is not all NPC casualties. Do not infer hostile/resident
+affiliation from killer identity or invent it for historical rows. Use the
+balanced collector's declared living-NPC eligibility/unknown coverage and raw
+death kinds; the old dashboard split proposal was not restored. No collector,
+metric contract, policy or Game changes accompany this documentation/test port.
+
 Bounded Market audit (2026-10-18): completed one fixed-input 64-seed holdout
 per merchant/dealer/hoarder, three exact natural gear traces, and prepared mobile
 purchase→equip→combat→Continue/Wait. Acquisition, equipping and landed effects

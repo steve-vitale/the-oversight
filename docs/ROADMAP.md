@@ -1,5 +1,15 @@
 # ROADMAP: what's built, what's next, how to do it
 
+Frozen release2026-10-19: source-reconciliation decisions for the named193/237
+inventory and final17 queue are complete for this bounded scope. Excluded
+strategies/diagnostics are explicit; no all-playstyle or whole-library claim.
+Artifact0639a92f7 has a playable, source-verified browser URL in RELEASE-HANDOFF.md;
+leave it stable for Steve's phone feedback. Current verification is shared on
+codex/release-verification: quick272/full1044 pass, with162 actual HTTP inputs
+and two verifier scripts (164 witnesses). No new served gameplay changes.
+Next gates are physical devices, official-host PWA update access and explicit
+shipping decision; do not reopen old "five/17 pending" notes as current queues.
+
 2026-10-19 verification continuation: RELEASE-HANDOFF.md is the short current
 handoff. All24 additional legacy contracts now have explicit dispositions,
 including97 assertion sites in the final five files; excluded controller/tuning
