@@ -1,0 +1,32 @@
+=== seed 9204 day 66 — conversation with Aroha (aroha_ngata) ===
+occupation=comic shop owner temperament=warm trust=91 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Could you clean it out for me? Please."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Sassafras — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Elderberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "You saw it too, right? The Exchange. Tell me I didn't imagine the lights."
+(want=ask_favor stage=3)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

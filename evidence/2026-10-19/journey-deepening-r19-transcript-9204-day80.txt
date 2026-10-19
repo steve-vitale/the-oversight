@@ -1,0 +1,26 @@
+=== seed 9204 day 80 — conversation with Nathan (nathan_lee) ===
+occupation=HVAC tech temperament=cautious trust=42 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking. Worth considering."
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "You asked me that before. It's a different question now." "Since Arturo died... I keep expecting to see Arturo at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [goon] "What happened next?"
+THEM: A neutral quiet returns, the kind where words land normally.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=3)
+YOU: [goon] "What happened next?"
+THEM: They relax, a fraction. This is going well.
+(want=ask_favor stage=3)
+YOU: [goon] "What happened next?"
+THEM: "I should go. Before I overthink this conversation too."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

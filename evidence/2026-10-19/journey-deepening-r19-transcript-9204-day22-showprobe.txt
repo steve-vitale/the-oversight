@@ -1,0 +1,29 @@
+=== seed 9204 day 22 — conversation with Frank (gen_r91uabe) ===
+occupation=Baker temperament=dry trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? But what do I know."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's new with you? Anything good, bad, or weird?"
+THEM: "Good question." "Since Wanda died... I keep expecting to see Wanda at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Wanda said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm picking up Wanda's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=2)
+YOU: [goon] "Go on."
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

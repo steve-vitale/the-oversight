@@ -1,0 +1,31 @@
+=== seed 9203 day 45 — conversation with Ella (ella_johnson) ===
+occupation=ESL teacher temperament=dry trust=30 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Ella keeps their voice low. "The stores. Have you looked at the stores? We're running thin."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. Extremely normal, all of it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Please — have you got anything to spare? Anything? My hands shake when I try to work."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Well — I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Ryan is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Ryan said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Well. My social battery is officially dead."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

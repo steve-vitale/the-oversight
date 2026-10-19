@@ -1,0 +1,31 @@
+=== seed 9203 day 45 — conversation with Adriana (app_mgpsphjh434) ===
+occupation=farmer temperament=bold trust=46 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, alive:event:mourning, dlg:commit, dlg:cant, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Good — The meadow edge, west of the creek, before the heat sets in. Bring your pack and your knife."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Maypop — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=3)
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,29 @@
+=== seed 9204 day 73 — conversation with Nathan (nathan_lee) ===
+occupation=HVAC tech temperament=cautious trust=26 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — tell me you've got food to spare. I'm running on empty here. I can't keep going like this. I mean it."
+(turn0 choices: alive:event:show, alive:want:ask_favor, dlg:help, dlg:details, dlg:cant, teach, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's been days since a real meal. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Just my read."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "They took me. Cooking With Teeth — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same weather, different day. I keep notes."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I oil boots on rest days and stay ready."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Alright — carefully, now. Both of us."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

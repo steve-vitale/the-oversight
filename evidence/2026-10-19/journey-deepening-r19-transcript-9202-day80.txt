@@ -1,0 +1,32 @@
+=== seed 9202 day 80 — conversation with Priya (gen_5g08l8r) ===
+occupation=Beekeeper temperament=fidgety trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Look — What do you make of all this? Really."
+(turn0 choices: agency:ask_field, deflect_q, ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Can I be honest? Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Bottom line: Honest. I'll take honest over certain every time."
+(want=curious stage=2)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "People here talk. What they say about you when you're not at the fire — that's the real answer to your question."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "A month ago I wouldn't have said any of this to you. That's not nothing."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "What do I want from you? Nothing fancy. Just — be the person you are when nobody's watching. Here."
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

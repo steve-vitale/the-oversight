@@ -1,0 +1,32 @@
+=== seed 9204 day 60 — conversation with Aroha (aroha_ngata) ===
+occupation=comic shop owner temperament=warm trust=91 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "This cut — I can't clean it properly one-handed. Could you take a look?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Let's move."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Since Vasyl died... I keep expecting to see Vasyl at the fire. Stupid."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Sleep's gone strange. I greet everyone by name each morning at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=stated

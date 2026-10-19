@@ -1,0 +1,32 @@
+=== seed 9203 day 17 — conversation with Amelia (gen_0451x6f) ===
+occupation=farmer temperament=intense trust=31 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: agency:ask_field, ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:a_deflect, ans:q_angry:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Ghost Pipe. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days. Just an idea."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "They took me. The Maw — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Same weather, different day. I keep notes."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The plan is the plan until it isn't. Then we make a new one."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I show up. That's my part."
+(want=curious stage=2)
+closing line: "We're done here. For now."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 9204 day 27 — conversation with Esther (gen_00f3ovh) ===
+occupation=aquarium keeper temperament=intense trust=88 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Esther doesn't wait for an answer. "We need to discuss how things are run here."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. Hm."
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Wanda is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I count portions out loud before eating. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Wanda. The rest of us will have to be bigger."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Please — I'm feverish, a cut gone hot and angry. Will you help me?"
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=1)
+closing line: "Go. Think about what I said. Really think."
+want final: id=ask_favor stage=3 resolution=unresolved

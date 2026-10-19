@@ -1,0 +1,18 @@
+=== seed 9201 day 86 — conversation with Vasyl (vasyl_shevchenko) ===
+occupation=infantry soldier temperament=withdrawn trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, dlg:help, dlg:cant, leave, silence)
+YOU: [dlg:help] "I'm listening."
+THEM: "I did the count twice. The count doesn't change. Meet me at the south slope below the meadow and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Done. The south slope below the meadow, before the heat sets in. Pack light — we move fast."
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "...I'm going to go. This was... fine. It was fine."
+want final: id=ask_favor stage=3 resolution=promised

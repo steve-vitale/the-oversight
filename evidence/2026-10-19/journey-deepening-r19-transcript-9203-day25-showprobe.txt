@@ -1,0 +1,32 @@
+=== seed 9203 day 25 — conversation with Ryan (gen_ihwedah) ===
+occupation=exterminator temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I still haven't found anyone. Any chance? Extremely normal, all of it."
+(turn0 choices: agency:ask_expedition, alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Ilker is gone and Sofia is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I sit apart to eat at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Nobody says Sofia's name right yet. We will. Give it a few days."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I sit apart to eat for Sofia, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Ilker and Sofia this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=2)
+YOU: [goon] "Keep going."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=2)
+closing line: "Talking helps. A little. Thank you."
+want final: id=ask_favor stage=3 resolution=stated

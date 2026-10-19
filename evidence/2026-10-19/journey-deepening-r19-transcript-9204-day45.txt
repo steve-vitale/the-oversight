@@ -1,0 +1,26 @@
+=== seed 9204 day 45 — conversation with Frank (gen_r91uabe) ===
+occupation=Baker temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Frank sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "All sorted. Some things just work out."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Last time things were different. They always are." "We lost Mia and Esther this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=2)
+YOU: [goon] "Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=2)
+YOU: [goon] "Go on."
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

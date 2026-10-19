@@ -1,0 +1,26 @@
+=== seed 9204 day 60 — conversation with Frank (gen_r91uabe) ===
+occupation=Baker temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask this, but I'm feverish, a cut gone hot and angry. Will you help me?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Can I be honest? Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "It's not just the cut anymore, it's in the blood, I can feel it climbing. I need someone who knows wounds."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "You asked me that before. It's a different question now." "The sickness took Vasyl. I keep washing my hands like it'll bring them back. Stupid."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

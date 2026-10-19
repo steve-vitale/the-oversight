@@ -1,0 +1,32 @@
+=== seed 9202 day 75 — conversation with Emilio (gen_g9zxi98) ===
+occupation=ESL teacher temperament=warm trust=90 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About the talking-to-strangers part — ...Hi. Sorry. I'm not good at the talking-to-strangers part. Simple as that."
+(turn0 choices: deflect_q, ans:q_quiet:a_kind, ans:q_quiet:a_help, ans:q_quiet:a_leave, leave, silence)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took me. Hardened The Pit — up there, on the screens, in front of everyone. I'm still turning it over."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind, friend?"
+(want=curious stage=2)
+YOU: [ask:you] "What do you think of me — honestly?"
+THEM: "You want to know about that? Okay." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Here's what it would take, if you want more than this: show up when it costs you something. That's the whole test."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Trust is slow out here. It's the one thing the System can't grant us."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "Stay. That's it. People leave. You keep showing up, and that starts to mean something."
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

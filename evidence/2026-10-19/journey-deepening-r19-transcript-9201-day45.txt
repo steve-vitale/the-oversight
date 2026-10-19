@@ -1,0 +1,29 @@
+=== seed 9201 day 45 — conversation with Eun-ah (gen_zeoizyh) ===
+occupation=Butcher temperament=steady trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Short version — It's quiet today. Wrong kind of quiet."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:invite, dlg:comfort, dlg:empathize, dlg:askwhy, leave, silence)
+YOU: [dlg:comfort] "You alright?"
+THEM: "We need to — You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "I — yeah. It helps, hearing that. Anyway."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Honestly, Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Look — Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Okay. We'll pick this up later."
+(want=seek_comfort stage=2)
+YOU: (leave)
+want final: id=seek_comfort stage=3 resolution=engaged

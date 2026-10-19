@@ -1,0 +1,31 @@
+=== seed 9201 day 34 — conversation with Eun-ah (gen_zeoizyh) ===
+occupation=Butcher temperament=steady trust=84 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — do you have anything to eat? Anything at all? My hands shake when I try to work."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting. I mean it."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I haven't eaten right in days. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "You want to know about that? Okay." "Salvador is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I tend the fire without being asked. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Salvador. The rest of us will have to be bigger."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I tend the fire without being asked for Salvador, now. Feels right. Feels like the least I can do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=ask_favor stage=2)
+want final: id=ask_favor stage=3 resolution=stated
