@@ -1,0 +1,42 @@
+== T1. USES: crafted vs wire snare ==
+  PASS crafted snare: tool stamped with recipe uses (10)
+  PASS craft message names the uses
+  PASS wire snare: improvised 2-use trap
+  PASS wire snare: the 2-use limit is said out loud
+== T2. CATCH CONSUMES A USE; BREAKS AT 0 ==
+  PASS a catch consumes exactly one use
+  PASS trap caught at least once in 60 dawns (not a dead mechanic)
+  PASS trap removed at 0 uses
+  PASS breakage is narrated
+== T3. EMPTY GROUND: honest quiet, no conjured catch ==
+  PASS barren tile: zero catches in 10 dawns
+  PASS barren tile: uses not consumed by nothing
+  PASS barren tile: quiet is narrated once, honestly
+== T4. TRAP SHYNESS: declining returns are real ==
+   fresh catch rate=42.7% shy3 rate=12.3% (expect ~40% vs ~11%)
+  PASS fresh ground catches near the 40% card rate
+  PASS shy-3 ground catches far less (0.65^3 curve)
+  PASS shy-3 rate near the 11% model
+== T5. RECIPE COPY vs ENGINE ==
+  PASS snare card: "catches small game" matches its catch list
+  PASS deadfall card: "once in a long while it takes a deer" — deer rare in list
+  PASS box_trap L3 teaches the skunk handling
+  PASS box_trap L3 teaches the rattlesnake pinning
+  PASS pit_trap L3 warns the boar retrieval
+  PASS pit_trap card warns your own pit takes you
+  PASS engine: box skunk catch applies scent (the "regret")
+  PASS engine: box rattlesnake catch risks the bite
+  PASS engine: pit boar catch risks the goring
+== T6. GLASSWING "MONSTER TRAP": real fight, not a roll ==
+  PASS dive resolves into startCombat(glasswing), not an outcome table
+  PASS direct hit deals the 20-30 dive damage
+  PASS trap is consumed by the dive
+  PASS dodged dive: no combat, no damage
+  PASS dodged dive: trap consumed
+== T7. PIT-OWN-TRAP: warned, 50%, death handled ==
+  PASS recipe warns the own-pit risk
+   own-pit fall rate: 21/40 (53%, expect ~50%)
+  PASS own pit takes you about half the time
+  PASS the fall is narrated as YOUR pit (no silent damage)
+
+RESULT: 31 pass, 0 fail

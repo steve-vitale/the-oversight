@@ -1778,7 +1778,7 @@
         actions.push(['Stalk', () => { try { Game.audioEvent('animalStalk'); } catch (e) {} Game.stalkAnimal(); }]);
         actions.push(walkCloser(cx, cy));
       }
-    } else if (Game.corpseAt) {
+    } else if (Game.corpseAt && Game.corpseAt(cx, cy).length) {
       // CORPSE SYSTEM: the dead stay where they fell.
       const dead = Game.corpseAt(cx, cy);
       if (dead.length) {

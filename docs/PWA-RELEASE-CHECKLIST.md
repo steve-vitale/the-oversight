@@ -1,13 +1,14 @@
 # Installed update and rollback
 
 Current lifecycle evidence is
-../evidence/2026-10-19/release-opening-lifecycle-audit-r2.md, runtime4fdc897c7.
+../evidence/2026-10-19/release-regional-final-audit-r1.md, runtime5df9b107f.
 The actually shipped007c4feb worker upgrades to this candidate; both candidate
 and rollback launch with the server stopped, with the same existing save.
 `scripts/release-lifecycle-smoke.cjs` repeats this on exact Git commits using
 fresh disposable output/origin and unique immutable test stamps. See that audit
 for the command, retained raw receipts and the warm HTTP-cache/foreground limits.
-The older release-final-pwa-audit-r2.md (runtime d0c62ff99) is historical.
+The older release-opening-lifecycle-audit-r2.md (runtime4fdc897c7) and
+release-final-pwa-audit-r2.md (runtime d0c62ff99) are historical.
 Candidate and compatibility rollback each verify167 text inputs, both icons,
 full saved payload and correct stopped-origin cold build. Discovery checks
 were explicitly invoked; foreground timing and physical devices remain open.

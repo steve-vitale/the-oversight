@@ -315,6 +315,13 @@ hash verification and explicit saved-run differences retained. Physical device
 results remain a separate open gate.
 # Fresh release opening (2026-10-19)
 
+Current cell-dispatch regression: `release-cell-dispatch-prepare-r1.cjs` creates
+a declared captured-save fixture with pemmican ingredients/knowledge. Run
+`release-cell-dispatch-phone-r1.js` via the generic native phone runner at736/844.
+Tap an actual empty-body fire square, verify terrain actions, then make food
+with exactly20 ticks and real ingredient consumption. This is prepared menu
+wiring proof, separate from the natural opening's gathering/planting/drinking.
+
 `evidence/2026-10-19/release-fresh-opening-phone-r1.js` drives a genuinely fresh
 New Expedition at seed190019, without an imported save or gameplay grants. Run
 it with `run-release-contact2-browser-r1.cjs`, the disposable no-SW UI server,

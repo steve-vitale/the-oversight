@@ -2,6 +2,18 @@
 
 Status: integration in progress; not cleared for public launch.
 
+Current unshipped continuation: four remaining contracts are recovered, including
+two real defects (empty-corpse branch swallowing cell actions; European snare/
+basket missing actual prey). Region report metadata and the current Europe data
+contract are repaired. Five legacy contracts remain explicit in
+release-contact2-dispositions-r2.json. See release-regional-contract-audit-r1.md.
+The default64-case panel matches exact states/all23 metrics; Europe retains its
+gear/Table/win-change watches and12 matched-state investigation replays. The
+runtime5df9b107f now has fresh installed-lifecycle and26-stage opening receipts;
+release-regional-final-audit-r1.md records quick264/full1036 passing and the exact
+shipped-worker update/offline/rollback proof. It supersedes4fdc897c7 lifecycle
+evidence for current source. Preview inspection still returns403.
+
 ## Current delivery state (2026-10-19)
 
 The live game is https://the-oversight.vercel.app, production commit
@@ -45,7 +57,7 @@ full saved payload preservation and167 cached inputs plus icons. The repeatable
 smoke command retains the same campaign throughout. Warm HTTP-cache stress and
 foreground polling timing are explicitly outside this latest run's scope.
 
-Remaining work: dispose of the nine rerun legacy contracts individually;
+Remaining work: dispose of the five still-pending legacy contracts individually;
 retain all balanced-metric warnings; obtain real-device evidence and an explicit
 public-release decision. New gear flow evidence is recorded separately from
 natural campaign availability; arranged eligibility is never natural attainment.

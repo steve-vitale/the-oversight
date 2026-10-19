@@ -201,7 +201,7 @@ async function child() {
   if (rec) delete rec.sample;
   const stateHash = gameplayHash(G.state);
   if (arg('dump-state', null)) fs.writeFileSync(arg('dump-state'), JSON.stringify(G.state));
-  process.stdout.write('\n@@GEAR@@' + JSON.stringify({ seed: Number(arg('seed', 7)), policy: id, region: r.region, origin: r.origin, days: r.days, endReason: r.endReason, won: !!r.won, sat: !!r.entered, invited: !!r.table, deaths: r.deaths, stateHashVersion: 2, stateHash, ...(rec || {}) }) + '\n');
+  process.stdout.write('\n@@GEAR@@' + JSON.stringify({ seed: Number(arg('seed', 7)), policy: id, region: G.state.region, origin: G.homeRegion, days: r.days, endReason: r.endReason, won: !!r.won, sat: !!r.entered, invited: !!r.table, deaths: r.deaths, stateHashVersion: 2, stateHash, ...(rec || {}) }) + '\n');
 }
 async function main() {
   if (process.argv.includes('--child')) return child();

@@ -1,0 +1,65 @@
+{
+  "config": {
+    "candidate": "5df9b107f000387f11fec5befba8cfaef40589d7",
+    "shipped": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+    "port": 8865,
+    "fixtures": {
+      "shipped": {
+        "root": "C:\\Users\\Steve\\oversight\\.git\\release-regional-lifecycle-r1\\shipped",
+        "commit": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+        "original": "07db9d4d7-20261019-182620",
+        "tag": "07db9d4d7-20261019-182620",
+        "archiveSha256": "7a53d517f5c82523ab5efa917df134cf005fd814aab73024e44233f85552d020"
+      },
+      "candidate": {
+        "root": "C:\\Users\\Steve\\oversight\\.git\\release-regional-lifecycle-r1\\candidate",
+        "commit": "5df9b107f000387f11fec5befba8cfaef40589d7",
+        "original": "07db9d4d7-20261019-182620",
+        "tag": "fc42ad3ab-20261019-213120",
+        "archiveSha256": "ce769d826421a1d2a037b8563d0fa876de02163fda479f74c9faf938e0987b8f"
+      },
+      "rollback": {
+        "root": "C:\\Users\\Steve\\oversight\\.git\\release-regional-lifecycle-r1\\rollback",
+        "commit": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+        "original": "07db9d4d7-20261019-182620",
+        "tag": "81b4b1dcf-20261019-213120",
+        "archiveSha256": "7a53d517f5c82523ab5efa917df134cf005fd814aab73024e44233f85552d020"
+      }
+    },
+    "scope": "Synthetic local candidate/rollback versions on immutable archived runtime; not deployment or physical-device clearance"
+  },
+  "result": {
+    "candidate": "5df9b107f000387f11fec5befba8cfaef40589d7",
+    "shipped": "007c4febca00986aae5bc36bcd4d6966a08c7c04",
+    "errors": [],
+    "phases": 5,
+    "scope": "Existing prepared save installed once; native update/Continue; stopped-origin cold boots and native steps; exact committed payload checks and cached input/icon hashes. Discovery explicitly invoked; real-device behavior unproven."
+  },
+  "renders": [
+    {
+      "path": "evidence/2026-10-19/release-regional-lifecycle-candidate-cold-r1.png",
+      "sha256": "6b3c291b3c3abeddedea24369229a0f9a4702628f417fd8d855566e0fbb920ed"
+    },
+    {
+      "path": "evidence/2026-10-19/release-regional-lifecycle-rollback-cold-r1.png",
+      "sha256": "001fde4b5d7d943010c310b7b2efc885bfd23d600ca1ba34f63cfb236460991a"
+    },
+    {
+      "path": "evidence/2026-10-19/release-regional-opening-reviewed-736-23-r1.png",
+      "sha256": "d06fb16a79dc502d57f8b33bb331afe2effefeacf2039fb912762a9dbee238b5"
+    },
+    {
+      "path": "evidence/2026-10-19/release-regional-opening-reviewed-736-26-r1.png",
+      "sha256": "22d9e413b58aa68c55cdcb8e008280df482209ad37e17399e57e8f40443465f3"
+    },
+    {
+      "path": "evidence/2026-10-19/release-regional-opening-reviewed-844-23-r1.png",
+      "sha256": "c44e8d596234e08282cee3ccbeaccc7a7ed6b280456076cc476d0e49c76eb416"
+    },
+    {
+      "path": "evidence/2026-10-19/release-regional-opening-reviewed-844-26-r1.png",
+      "sha256": "af3596bf0d3b9c5ea8bf7fb082399a32d1356eac3e34579b94b06bbb74660a99"
+    }
+  ],
+  "rawLifecycleReceipts": 9
+}

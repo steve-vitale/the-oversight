@@ -1,5 +1,15 @@
 # Agent lanes (2026-10-15)
 
+Latest local continuation: four of the nine remaining contracts are recovered.
+Preserve the actual cell-popup corpse predicate fix and the two basic recipes'
+existing European species catches. Read release-contact2-dispositions-r2.json;
+five contracts remain pending, including historical bot prototypes rather than
+silently declared passing. Current regional audit retains default/europe panels,
+all23 metrics and exact changed-case replays. No expansion or compensating tune.
+Runtime5df9b107f has fresh two-height opening/fire/frame evidence, installed
+shipped-worker update/cold/rollback and quick264/full1036 passing. Read
+release-regional-final-audit-r1.md; hosted/device and five contracts remain.
+
 Current delivery checkpoint (2026-10-19): remote main/master are007c4feb,
 including the reconciled Muse67 lineage. New candidate runtime4fdc897c7 keeps
 that integration and the body/carry/terrain/deer/dialogue repairs. Natural

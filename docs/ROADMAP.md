@@ -1,5 +1,14 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-19 remaining-contract recovery: ordinary cell taps now fall through
+the corpse API when no body is present; native fire crafting works at both
+phone heights. Existing snare/basket catch current European hare/perch/trout.
+Region census reports actual region/origin; the Europe data contract covers
+current34-species content rather than prototype IDs. Four of nine legacy
+contracts are recovered, five remain; see release-regional-contract-audit-r1.md.
+Default23-metric screen matches; Europe retains mixed watches and exact
+changed-case replays. No difficulty compensation or new feature/content lane.
+
 2026-10-19 fresh opening: native New Expedition through actual pasture forage,
 plant identification, starting food, full-hydration water refusal, Haven return
 and reload/Continue passes at both phone heights without imported campaign state.

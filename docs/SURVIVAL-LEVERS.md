@@ -1,5 +1,30 @@
 # Survival levers and investigation register
 
+## Existing European traps: eligible catches (2026-10-19)
+
+Release-blocker repair: the existing snare recipe can catch European hare;
+the existing fish basket can catch European perch and brown trout. These are
+already authored regional animals; no species or recipe is added. Before this
+repair, the snare could not catch the hare its own knowledge text describes.
+Finite tile population, ordinary craft/placement costs, catch odds, shyness,
+durability, carcass gross, spoilage and butchery yields are unchanged. More
+eligible encounters can consume RNG and alter later campaign choices/results.
+The current hare gives bone; the existing European boar/pit route still gives
+hide and teaches the armor lesson. Other recipes/regions are not declared fixed.
+
+Decision: retain the demonstrated wiring repair without compensation to food,
+damage, rewards or difficulty. Same observer/controller,16 matched seeds per
+capable/maker/merchant/caregiver,150d, default and explicit Europe cohorts.
+Default has identical23-metric vectors across all64 cases. Europe remains
+review_required: capable good/contest gear and maker Table/contest gear watches;
+maker wins13→12, caregiver9→10, merchant10→10 with two opposite case flips,
+capable14→14. Wins do not clear other warnings. Six changed-case pairs replay
+exact final hashes and all23 metrics; natural new hare catches and later
+different reward paths are retained. Capable3 had ghost_camo at day74 before,
+nanite_swarm (not gear) at day75 after. This is screen-level evidence, not a
+small-effect estimate or broad all-playstyle clearance. Raw272 jobs, source
+blobs, observer, panels and traces live under release-regional in dated evidence.
+
 ## Corpse recovery and explicit overburden (2026-10-19)
 
 Steve reports an unexpected pickup cliff and recalls carrying beyond normal

@@ -1,0 +1,12 @@
+'use strict';
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib'),assert=require('assert'),B=require('../../scripts/balance-panel'),gear=require('../../scripts/gear-usage-audit');
+(async()=>{
+ const [side,policy,seedArg,out]=process.argv.slice(2),seed=Number(seedArg),common=path.resolve(cp.execFileSync('git',['rev-parse','--git-common-dir'],{encoding:'utf8'}).trim()),root=path.join(common,'release-regional-'+side+'-r1');
+ if(!['before','after'].includes(side)||!out)throw Error('Pass before/after, policy, seed and fresh output');
+ const H=require(path.join(root,'scripts/sim-harness')),{runComparison,POLICY_REGISTRY:registry}=require(path.join(root,'scripts/sweep-compare')),base=registry[policy],trace=[];let G,observer;
+ registry[policy]={...base,setup(g,ctx){G=g;observer=B.install(g);const traps=G.checkTraps;G.checkTraps=function(){const before=JSON.stringify(G.state.scholar.inventory),day=G.state.scholar.day,result=traps.apply(this,arguments);const after=JSON.stringify(G.state.scholar.inventory);if(before!==after)trace.push({event:'trap inventory changed',day,before:JSON.parse(before),after:JSON.parse(after)});return result};const contest=G.contestChoose;G.contestChoose=function(i){const active=G.state.activeContest,record={event:'contest choice',day:G.state.scholar.day,id:active?.contestId,choice:i,inventoryBefore:G.state.scholar.inventory.map(x=>({...x}))};const r=contest.apply(this,arguments);record.inventoryAfter=G.state.scholar.inventory.map(x=>({...x}));trace.push(record);return r};if(base.setup)return base.setup(g,ctx)},daily(g,ctx){const r=base.daily&&base.daily(g,ctx);observer.sample();return r}};
+ const report=await H.quietLog(()=>runComparison({seeds:[seed],policies:[policy],days:150,region:'eu_temperate',origin:'Berlin, Germany'}));registry[policy]=base;
+ const row=report.runs[0],observed=observer.finish(row),stateHash=gear.gameplayHash(G.state),panel=JSON.parse(z.gunzipSync(fs.readFileSync(path.resolve(__dirname,'release-regional-eu-'+side+'-r1.json.gz')))),expected=panel.rows.find(r=>r.row.policy===policy&&r.row.seed===seed);
+ assert.equal(stateHash,expected.stateHash,'Trace changed the exact final campaign');assert.deepStrictEqual(observed.metrics,expected.metrics,'Trace changed a metric vector');
+ fs.writeFileSync(out,JSON.stringify({side,policy,seed,stateHash,metrics:observed.metrics,row,trace,matched:true})+'\n',{flag:'wx'});console.log(JSON.stringify({side,policy,seed,matched:true,events:trace.length}));
+})().catch(e=>{console.error(e.stack);process.exitCode=1});

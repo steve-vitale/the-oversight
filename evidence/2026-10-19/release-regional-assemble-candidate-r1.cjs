@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),cp=require('child_process'),path=require('path'),crypto=require('crypto'),P=require('../../scripts/phone-frame-proof-update');
+const git=(args,input,env={})=>cp.execFileSync('git',args,{encoding:'utf8',input,env:{...process.env,...env},maxBuffer:20e6}).trim();
+const common=path.resolve(git(['rev-parse','--git-common-dir'])),base='aec895e85163973898a18d30fd4ef59806d8d083',source=git(['rev-parse','HEAD']);
+if(git(['ls-remote','origin','refs/heads/codex/phone-preview']).split(/\s/)[0]!==base)throw Error('Shared candidate advanced');
+const paths=git(['diff','--name-only','2c2a9494905de8dd2e15c108cf3d0bf5b699c00b',source]).split('\n').filter(Boolean);
+const docs=['docs/MOBILE-PLAYTEST.md','docs/PWA-RELEASE-CHECKLIST.md','docs/RELEASE-CANDIDATE.md','docs/ROADMAP.md','docs/AGENT-LANES.md','docs/RELEASE-SMOKE.md','docs/SURVIVAL-LEVERS.md'];
+if(paths.some(p=>!p.startsWith('src/')&&!p.startsWith('scripts/')&&!p.startsWith('evidence/2026-10-19/release-')&&!docs.includes(p)))throw Error('Unexpected path');
+const env={GIT_INDEX_FILE:path.join(common,'release-regional-candidate-index-r1')};if(fs.existsSync(env.GIT_INDEX_FILE))throw Error('Index already exists');
+git(['read-tree',base],undefined,env);git(['restore','--source',source,'--staged','--',...paths],undefined,env);
+const runtimeInputs=P.expectedInputs(process.cwd()),metadata={sourceCommit:source,baseProduction:'007c4febca00986aae5bc36bcd4d6966a08c7c04',runtimeInputs,runtimeInputsDigest:crypto.createHash('sha256').update(JSON.stringify(runtimeInputs)).digest('hex'),scope:'Unshipped reconciled mobile candidate; ordinary terrain/person cell dispatch and existing European basic-trap catches repaired. Four legacy contracts recovered, five remain. Default/Europe16x4 screens and12 exact case replays retained; Europe remains review_required. Current native opening, fire action and installed lifecycle evidence; no public-launch or physical-device clearance.',evidence:['evidence/2026-10-19/release-regional-contract-audit-r1.md','evidence/2026-10-19/release-regional-final-audit-r1.md']};
+const blob=git(['hash-object','-w','--stdin'],JSON.stringify(metadata,null,2)+'\n');git(['update-index','--add','--cacheinfo','100644,'+blob+',build-source.json'],undefined,env);
+const tree=git(['write-tree'],undefined,env),sha=git(['commit-tree',tree,'-p',base],'Repair ordinary cell dispatch and existing regional trap catches [needs-eyes]\n');git(['update-ref','refs/heads/codex/regional-candidate-20261019',sha,'0000000000000000000000000000000000000000']);
+fs.writeFileSync(path.join(common,'release-regional-candidate-publication-r1.json'),JSON.stringify({source,base,sha,tree,paths,metadata},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({source,base,sha,tree,paths:paths.length}));
