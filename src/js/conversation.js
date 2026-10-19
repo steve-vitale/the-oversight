@@ -2664,9 +2664,39 @@
           const alreadyNamed = (typeof this.convoFavorHead === 'function')
             ? this.convoFavorHead(opener.line)
             : /^"(About |Never mind |You came through on |You said you'd help with )/.test(opener.line);
+          // INHERITED SEED (journey-succession r26 2026-10-19): the seed was
+          // planted in the predecessor's conversation (stamped inh at the
+          // handoff, ledger.js) — the follow-up must name them, never frame
+          // the new bearer was the one who was asked. Transcript-caught:
+          // "About that question — ..." addressed to the successor for a
+          // question the dead bearer walked away from. Mirrors the thread
+          // resume (convoResumeOpener) and the favor's INHERITED ASK.
+          // Favor seeds excluded: convoFavorFollowup names the predecessor
+          // itself. One-shot (inheritedSeedAcked), like the favor's
+          // inheritedAcked — the seed is consumed on resolve anyway; this
+          // covers only the blocked-opener re-fire.
+          let seedPred = null, _liveSeed = null;
+          try {
+            _liveSeed = ((this.state.village || {}).convoSeeds || {})[vid] || null;
+            if (_liveSeed && !want.seedFavorId && !_liveSeed.inheritedSeedAcked &&
+                typeof this.inheritedName === 'function') {
+              seedPred = this.inheritedName(_liveSeed);
+            }
+          } catch (e) { seedPred = null; }
           let seedLine;
           if (alreadyNamed) {
             seedLine = opener.line;
+          } else if (seedPred) {
+            try { _liveSeed.inheritedSeedAcked = true; } catch (e) {}
+            const _note = want.seedNote || 'last time';
+            const _head = `I asked ${seedPred} about ${_note} — ${seedPred}'s gone.`;
+            const spoken = /^"([^"]+)([.?!])" ([\s\S]*)$/.exec(opener.line);
+            if (spoken) {
+              seedLine = `"${_head} ${spoken[1]}${spoken[2]}" ${spoken[3]}`;
+            } else {
+              seedLine = `"${_head} ` +
+                opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
+            }
           } else {
             const spoken = /^"([^"]+)([.?!])" ([\s\S]*)$/.exec(opener.line);
             if (spoken) {
