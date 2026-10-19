@@ -2716,6 +2716,9 @@
       // Gated: PITKNOWLEDGE=0 keeps the control substrate pit-free.
       if (this.pitKnowledgeOn() && occ.knowsPit) {
         this.state.codex.recipes['pit_trap'] = { level: 3, via: 'background', learnedDay: 0 };
+        // DAY-0 BEAT (traphandbook 2026-10-18): the L3 grant was a silent
+        // ledger entry. One line so the old life lands as a learning moment.
+        this.say('🪤 Your old life comes back to your hands: the pit you dug before the Scattering — deep enough for a boar, staked at the bottom, brushed over with leaves and marked well. You never forgot the shape of it.');
       }
       // Everyone knows the sharp rock. Knapping a working edge is the oldest
       // technology there is — the recipe is universal, the stone still has to
