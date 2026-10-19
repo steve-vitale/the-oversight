@@ -1089,6 +1089,17 @@
   initBelief(c) {
     const v = this.state.village;
     const plot = (this.betrayalState().plots || []).find(p => p.id === c.plotId) || {};
+    // PRIOR CONVICTIONS (crisis leg r29): the dock's worst record sets the
+    // tone — a weregilded plotter accused again doesn't get the clean -20
+    // start. Same countPriorConvictions as the player lane.
+    let worstRecord = 0;
+    try {
+      for (const a of (c.accused || [])) {
+        if (this.isPlayer(a)) continue;
+        const n = this.countPriorConvictions ? this.countPriorConvictions(a, c.charge) : 0;
+        if (n > worstRecord) worstRecord = n;
+      }
+    } catch (e) {}
     for (const vid of this.npcIds()) {
       if (c.accused.includes(vid)) { c.belief[vid] = 90; continue; }
       let b = 25; // first-mover: their story landed first
@@ -1097,6 +1108,7 @@
       if (this.isPlayer(c.target)) b -= (t - 25) * 0.8;
       else b -= (this.pairAffinity(vid, c.target) * 0.8);
       for (const a of c.accused) b += this.pairAffinity(vid, a) * 0.5;
+      b -= worstRecord * 15; // convicted and still doing it
       c.belief[vid] = clamp(Math.round(b), -100, 100);
     }
   },
@@ -4359,15 +4371,27 @@
     this.seedAccuserStory(c);
     c.playerEvidence.push({ day: c.day, text: c.accuserStory || 'The accusation, stated in public.' });
     const aname = this.whoTag(accuser);
+    const Aname = this.capFirst(aname);
+    const cline = this.chargeLine(charge);
+    // ACCUSATION VARIANTS (crisis leg r29 2026-10-19): the single template
+    // repeated verbatim across back-to-back moots (seed 42: Dina, Xavier,
+    // Hassan, Ingrid — identical "stands up at the fire, pointing" four
+    // times). Same shape every time: accuser acts, charge said plain, the
+    // fire reacts, moot timing, "Use them."
+    const accOpen = pick([
+      `${Aname} stands up at the fire, pointing. "This one. ${cline} — and we all know it."`,
+      `${Aname} is on their feet before the talk dies down. "${cline}. In front of everyone."`,
+      `It's ${Aname} who says it first. "${cline} — don't look away, any of you."`,
+    ]);
     if (this.state.systemArrived) {
       // post-System: the accusation is CONTENT. sysSay + a case-file sheet offer.
-      this.sysSay(`🔴 LIVE BREAKING NEWS! A MOOT has been CALLED! ${aname.toUpperCase()} points at YOU — ${this.chargeLine(charge).toUpperCase()}! The gamblers are SCRAMBLING! Your CASE FILE is ready — check it before the fire decides your fate!`);
-      this.say(`${this.capFirst(aname)} stands up at the fire, pointing. "This one. ${this.chargeLine(charge)} — and we all know it." Heads turn. ${this.pluralize(c.mootIn, 'day')} until the moot. Use them.`);
+      this.sysSay(`🔴 LIVE BREAKING NEWS! A MOOT has been CALLED! ${aname.toUpperCase()} points at YOU — ${cline.toUpperCase()}! The gamblers are SCRAMBLING! Your CASE FILE is ready — check it before the fire decides your fate!`);
+      this.say(`${accOpen} Heads turn. ${this.pluralize(c.mootIn, 'day')} until the moot. Use them.`);
       try { this.state.scholar.caseDossierOffer = c.id; } catch (e) {}
     } else {
       // pre-System: diegetic. Tightened say + journal note; the case file
       // waits in the self bar (⚖️ Case file).
-      this.say(`${this.capFirst(aname)} stands up at the fire, pointing. "This one. ${this.chargeLine(charge)} — and we all know it." Heads turn. There's going to be a moot — ${this.pluralize(c.mootIn, 'day')}. Use them.`);
+      this.say(`${accOpen} Heads turn. There's going to be a moot — ${this.pluralize(c.mootIn, 'day')}. Use them.`);
     }
     try { this.journalNote && this.journalNote('village', 'trial', `Accused of ${charge} by ${this.displayName(accuser)}. Moot in ${this.pluralize(c.mootIn, 'day')}.`); } catch (e) {}
     return c;
@@ -4391,14 +4415,45 @@
         }
       }
     } catch (e) {}
+    // PRIOR CONVICTIONS (crisis leg r29): "convicted and still doing it" —
+    // computed once per case via countPriorConvictions below.
+    const priorGuilt = this.countPriorConvictions ? this.countPriorConvictions(this.villagerId, c.charge) : 0;
     for (const vid of this.npcIds()) {
       let b = -20;
       b += (this.jurorTrust(vid) - 25) * 0.8;            // they trust you → doubt it
       b -= this.pairAffinity(vid, c.accuser) * 0.5;      // they like the accuser → believe it
       b += this.pairAffinity(vid, this.villagerId) * 0.4; // personal bond with you
       if (c.charge === 'theft') b += warnedTheft ? -15 : 12;
+      b -= priorGuilt * 15;                              // convicted and still doing it
       c.belief[vid] = clamp(Math.round(b), -100, 100);
     }
+  },
+  // PRIOR CONVICTIONS WEIGH THE CASE (crisis leg r29 2026-10-19): the moot
+  // remembers its own verdicts. A weregilded killer accused of murder again
+  // doesn't start at the same skepticism as the never-convicted — seed 42's
+  // six-time murderer skated five trials because every case opened at the
+  // same -20 base. Sibling of the theft-warning wire above (mem-wire
+  // 2026-10-13; Steve: "warned and still doing it" vs "never warned").
+  // Counts RESOLVED weregild convictions only: acquittals don't count (the
+  // fire didn't hold it), schism/cold_war aren't convictions, and exile ends
+  // the arc so it can't repeat. Same charge, or same violence class
+  // (murder/assault/ambush/cannibalism) — the village remembers you were
+  // violent. A weregilded thief accused of murder starts at the same base:
+  // different crime, different ledger.
+  countPriorConvictions(accusedId, charge) {
+    const cls = (ch) => (ch === 'murder' || ch === 'assault' || ch === 'ambush' || ch === 'cannibalism')
+      ? 'violence' : 'other';
+    const want = cls(charge);
+    let n = 0;
+    try {
+      const cases = ((this.betrayalState && this.betrayalState()) || {}).cases || [];
+      for (const pc of cases) {
+        if (!pc || pc.status !== 'resolved' || pc.resolution !== 'weregild') continue;
+        if (!((pc.accused || []).includes(accusedId))) continue;
+        if (pc.charge === charge || (want === 'violence' && cls(pc.charge) === 'violence')) n++;
+      }
+    } catch (e) {}
+    return n;
   },
   seedAccuserStory(c) {
     const aname = this.whoTag(c.accuser);
