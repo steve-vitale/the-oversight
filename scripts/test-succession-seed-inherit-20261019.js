@@ -6,7 +6,7 @@
 // unanswered question, walked away from) is stamped inh=<old name> at the
 // handoff (ledger.js). But the seed follow-up opener framed it as the
 // SUCCESSOR's unfinished business: "About that question — ..." addressed to
-// a bearer <redacted> never asked — fabricated shared history.
+// a bearer who never asked — fabricated shared history.
 //
 // FIX (conversation.js seedLine composition): when the live seed resolves
 // via inheritedName() to a predecessor, the follow-up names them once:
@@ -46,7 +46,7 @@ async function main() {
   const other = roster[0];
   const ctrl = roster[1];
 
-  // plant a curious seed as the old bearer <redacted> plant path, no stamp)
+  // plant a curious seed as the old bearer did plant path, no stamp)
   Game.convoPlantSeed(other, { wantId: 'curious', note: 'the first week', qid: null });
 
   // force the mantle to the plant target

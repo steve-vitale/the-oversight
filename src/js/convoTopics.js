@@ -1165,7 +1165,7 @@
           if (ev.sickDeath && mnames.length) mlines.push(
             '"The sickness took ' + mnames[mnames.length - 1] + '. I keep washing my hands like it\'ll bring them back. Stupid."');
           // SUCCESSOR'S OWN GRIEF, convo half (journey-succession r23
-          // 2026-10-18): when the lately-mourning names a dead bearer <redacted>
+          // 2026-10-18): when the lately-mourning names a dead bearer the
           // player was personally close to (bond v>=20 or depth>=1), the
           // villager can acknowledge the PLAYER's loss — not just their own.
           // Bearer-branch only (ev.bearerId): ordinary villager deaths keep

@@ -1668,15 +1668,15 @@
     },
 
     // MANTLE HANDOFF (journey-succession 2026-10-11): conversational
-    // continuity must survive the Bearer <redacted> — the village is the
+    // continuity must survive the Bearer change — the village is the
     // protagonist — but HONESTLY. Threads, seeds, favors and memories
-    // planted with a previous Bearer <redacted> the predecessor's name; the
+    // planted with a previous Bearer keep the predecessor's name; the
     // new face never pretends they were in the room. (v.mantleOf is written
     // by playerDeath in ledger.js.)
     mantleOf() { try { return (this.state.village || {}).mantleOf || []; } catch (e) { return []; } },
-    // inheritedName(rec): first name of the Bearer <redacted> held the office
+    // inheritedName(rec): first name of the Bearer who held the office
     // when this conversational record (open thread, seed, favor, memory)
-    // was made — or null when the current Bearer <redacted> it. Prefers the
+    // was made — or null when the current Bearer is it. Prefers the
     // explicit handoff stamp written by playerDeath (precise across
     // same-day deaths); falls back to day comparison against the handoff.
     inheritedName(rec) {
@@ -1752,7 +1752,7 @@
       }[o.why] || 'we left it hanging';
       let inner;
       // INHERITED THREAD (journey-succession 2026-10-11): the thread was the
-      // predecessor's — the NPC names them. The new Bearer <redacted> pick it
+      // predecessor's — the NPC names them. The new Bearer can pick it
       // up, but never as if they were there.
       const pred = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
       if (pred) {
@@ -1761,8 +1761,8 @@
           // thread from a dead predecessor resumed as "You're not {pred}.
           // Still on your mind?" reads as a fresh realization addressed to
           // someone who was never in the conversation (transcript-caught:
-          // "You're not Colin. Still on your mind?" to the third Bearer <redacted> day 10).
-          // Name the dead, own the gap, invite — the new Bearer <redacted> pick it
+          // "You're not Colin. Still on your mind?" to the third Bearer on day 10).
+          // Name the dead, own the gap, invite — the new Bearer can pick it
           // up, never as if they were there.
           inner = `${pred} and I never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. You weren't there for that one — ${pred} was. Want to hear where it left off?`;
         } else if (ago > 1) {
@@ -1819,7 +1819,13 @@
         // presents the unfulfilled invitation as the thread's content-memory.
         // The thread still resumes (label + whyLine); only the quote drops.
         if (this.convoSnippetIsRealBeat(o.snippet) && !this.convoSnippetIsHook(o.snippet)) {
-          const sq = String(o.snippet).replace(/^"+|"+$/g, '');
+          // QUOTE HYGIENE (journey-landing r25 2026-10-19): the snippet
+          // renders inside single quotes inside the opener's double quotes —
+          // any double quotes surviving in the snippet TEXT nest unescaped
+          // (transcript-caught, seed 95: "...mid-thought. 'They go still.
+          // "So it's not just me. Good...'"). Strip them all (leading/
+          // trailing included); the memory reads clean without inner marks.
+          const sq = String(o.snippet).replace(/"/g, '');
           inner += ` '${sq}'`;
         }
       }
@@ -5318,7 +5324,7 @@
           // the identical "we never finished" line this sitting.
           this.convoSpendChoice(vid, choiceId);
           // INHERITED THREAD (journey-succession 2026-10-11): name whose
-          // thread it was — the new Bearer <redacted> resume it as their own.
+          // thread it was — the new Bearer can resume it as their own.
           const predT = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
           // THREAD-SPECIFIC RESUME (journey-social r15 2026-10-15): the old
           // generic line was identical for every thread — resuming a SECOND

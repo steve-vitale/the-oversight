@@ -4764,8 +4764,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (topic === 'namebeast') {
         // The naming argument, up close. The player weighs in — backing a
         // name counts double. Social play, not a menu.
+        // NAMING RECENCY (journey-landing r25 2026-10-19): most recently
+        // kicked debate first — "what are we calling that thing?" right after
+        // telling about beast X must open X's debate, not an older one.
         const cands = Object.entries(this.state.codex.monsters || {})
-          .filter(([id, e]) => e.namingKicked && !e.villageName);
+          .filter(([id, e]) => e.namingKicked && !e.villageName)
+          .sort((a, b) => (b[1].namingKickSeq || 0) - (a[1].namingKickSeq || 0));
         if (!cands.length) {
           this.say(`${first} shrugs. "Name what? We haven't seen anything worth naming lately."`);
           return { ok: true };
@@ -20839,6 +20843,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const e = this.ensureMonsterEntry(mid);
       if (e.namingKicked) return;
       e.namingKicked = true;
+      // NAMING RECENCY (journey-landing r25 2026-10-19): the namebeast topic
+      // opens the most recently kicked debate — after the player tells about
+      // beast X ("what are we calling that thing?"), the answer must be about
+      // X, not an older debate that happens to sort first. Monotonic per-run
+      // sequence; older saves without it sort by insertion order (seq 0).
+      const cx = (this.state.codex = this.state.codex || {});
+      e.namingKickSeq = (cx.namingKickSeq = (cx.namingKickSeq || 0) + 1);
       this.seedMonsterNames(mid);
     },
     // monsterNewsCheck: enough villagers know -> the naming debate begins.

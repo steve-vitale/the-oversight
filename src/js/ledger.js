@@ -901,9 +901,9 @@
       s.trauma = 10; // the shock of stepping up
       // STATUS EFFECTS (Steve 2026-10-07): new body, no old afflictions.
       s.statuses = []; s.diseases = []; s.poisons = [];
-      // THE SENTENCE DIES WITH THE BEARER <redacted> 2026-10-18):
+      // THE SENTENCE DIES WITH THE BEARER (journey-succession r24 2026-10-18):
       // the village's formal docket (justice stage, exile, crimes) was the
-      // case against the DEAD bearer <redacted> uprising-'lost' path already resets it
+      // case against the DEAD bearer in the uprising-'lost' path already resets it
       // ("the crimes died with the criminal" — justice.js, brawler loop
       // 2026-10-08), but the exile-then-die-in-the-wild path never did: the
       // innocent successor woke with s.exiled still true and a live docket,
@@ -991,7 +991,7 @@
       try { this.recordMoment(`${oldName} died. ${newFirst} picked up the Codex.`); } catch (e) {}
       // SUCCESSOR'S OWN GRIEF (journey-succession r23 2026-10-18): the
       // handoff never read the successor's personal bond with the dead
-      // bearer <redacted> (v.bonds, -100..100) — every successor woke up with the
+      // bearer (v.bonds, -100..100) — every successor woke up with the
       // same flat shock, whether they'd just lost their closest friend or
       // someone they couldn't stand. The bond is real measured history
       // (shared meals, deep talks, tended wounds). Close (v>=20 or depth>=1):
