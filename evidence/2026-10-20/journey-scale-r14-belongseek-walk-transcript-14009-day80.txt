@@ -1,0 +1,24 @@
+=== seed 14009 day 80 — conversation with Ji (gen_lj21k36) ===
+occupation=ER nurse temperament=gentle trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Maybe it's only me — I'm going hungry — tell me you've got food to spare. I'm going hungry here. I can't keep going like this."
+(turn0 choices: alive:event:show, alive:want:ask_favor, dlg:help, dlg:cant, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Pokeweed — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Groundnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

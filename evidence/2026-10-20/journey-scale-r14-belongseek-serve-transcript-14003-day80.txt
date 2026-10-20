@@ -1,0 +1,21 @@
+=== seed 14003 day 80 — conversation with DeAndre (gen_071mdft) ===
+occupation=interpreter temperament=cautious trust=92 dead=false mood=grateful
+want: ask_favor (stage 1)
+
+THEM: "We're eating through stores faster than we replace them. Forage with me tomorrow? I know the south slope below the meadow."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence, confront:d_7qy0xwx)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. Nobody's worked the south slope below the meadow in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Done. The south slope below the meadow, before the heat sets in. Two packs between us."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "That's the whole story. Short version, long version — same ending."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Well. We'll see how it goes."
+want final: id=ask_favor stage=3 resolution=promised

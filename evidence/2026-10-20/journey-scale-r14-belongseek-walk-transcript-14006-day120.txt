@@ -1,0 +1,27 @@
+=== seed 14006 day 120 — conversation with Pamela (gen_8chvdgi) ===
+occupation=physical therapy aide temperament=withdrawn trust=83 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "About ask favor — I keep turning it over."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, menu:more, dlg:subject, leave, silence)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. Meet me at the creek bend, past the treeline and we'll fill packs before dark."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=1)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=unresolved
+!! VERBATIM REPEATS: "I just said — did you miss it?" || "I just told you — what else is on your mind?"

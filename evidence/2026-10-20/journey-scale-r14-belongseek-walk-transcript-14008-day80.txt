@@ -1,0 +1,31 @@
+=== seed 14008 day 80 — conversation with Austin (gen_g056no3) ===
+occupation=journalist temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you miss most? From before."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Elif? A hotel housekeeper, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "People are saying things. About you. ...I'd watch how you act around the fire."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Did you hear? Nikolai just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I left. Walked back in like I'd never left, apparently."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Elijah is back. Walked in like they'd never left. Ha. Funny."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Right. Done. Don't look so relieved."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

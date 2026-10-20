@@ -1,0 +1,26 @@
+=== seed 14004 day 140 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=22 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you make of all this? Really."
+(turn0 choices: ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Real talk — Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Good question." "Gloria is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Benjamin sees in the dark. Not well — but better than you. Better than me."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Did you hear? Meera just walked away from Haven. Didn't look back. ...never mind."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Word is there's nothing you can't do out there. ...sorry, lost it."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "...I need to go be quiet for a while."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,31 @@
+=== seed 14008 day 120 — conversation with Austin (gen_g056no3) ===
+occupation=journalist temperament=prickly trust=89 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your first memory — What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Elif? A hotel housekeeper, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Dmitri is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Ivy talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "What? People are talking about Dmitri. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Did you hear? Dmitri just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,12 @@
+=== seed 14009 day 100 — conversation with Ji (gen_lj21k36) ===
+occupation=ER nurse temperament=gentle trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: alive:event:tension, dlg:commit, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Thanks for listening. I mean that."
+want final: id=ask_favor stage=3 resolution=promised

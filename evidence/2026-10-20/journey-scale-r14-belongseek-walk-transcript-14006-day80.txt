@@ -1,0 +1,31 @@
+=== seed 14006 day 80 — conversation with Pamela (gen_8chvdgi) ===
+occupation=physical therapy aide temperament=withdrawn trust=62 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "Can I tell you something? I stole medicine from the stash once and never confessed."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Did you sleep? I kept hearing things out past the treeline."
+(want=ask_favor stage=2)
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+(want=ask_favor stage=2)
+YOU: [goon] "Yeah?"
+THEM: "I sleep in shifts now — two hours, up, listen, two more. My body learned it before my head agreed. Columbus, Ohio never taught me that. The treeline did."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Why are you telling me this?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Chickweed — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [goon] "Yeah?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=ask_favor stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Okay. That's — I need a minute. A long minute."
+(want=ask_favor stage=2)
+want final: id=ask_favor stage=3 resolution=stated

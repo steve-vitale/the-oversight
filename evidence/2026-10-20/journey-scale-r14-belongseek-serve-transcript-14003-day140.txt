@@ -1,0 +1,29 @@
+=== seed 14003 day 140 — conversation with Quan (visjoin_134) ===
+occupation=Midwife temperament=stoic trust=21 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you ever just need to be alone? Like, really alone? Rest when you can."
+(turn0 choices: ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:a_deflect, ans:q_alone_time:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Jimena just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "You ever notice Elif? ...I don't know what to make of that. Nobody does."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Did you hear? Elif just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Elif? A hotel housekeeper, back before. Solid person."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Elif is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Anyway — I should get going."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

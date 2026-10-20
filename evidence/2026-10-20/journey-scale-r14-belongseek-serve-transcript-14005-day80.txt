@@ -1,0 +1,24 @@
+=== seed 14005 day 80 — conversation with Giovanni (gen_gvr1w07) ===
+occupation=glazier temperament=fidgety trust=60 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I asked Tomas about this wound — Tomas's gone. Still need hands. Are you in? ...anyway, where was I."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, betrayal:accept, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Gum Acacia. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "We need to — Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Hassan is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=unresolved

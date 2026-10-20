@@ -1,0 +1,26 @@
+=== seed 14004 day 100 — conversation with Gloria (gen_xwni90a) ===
+occupation=Baker temperament=prickly trust=88 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Did you hear? Hannah just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Did you hear? Hannah just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Word is you know what you're doing out there."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged
