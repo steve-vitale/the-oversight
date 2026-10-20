@@ -168,6 +168,28 @@ change (policy-side only, zero src/js).
 ---
 *(results below — filled after the sweep; pre-registration above is unchanged)*
 
+## Recovery note (Muse, 2026-10-20 ~02:25 CDT — run fleshout-20261020T0515Z timed out)
+
+The worker was mid-design-iteration when the run timed out. State on recovery:
+
+- **Committed (acfd1def4)**: instruments + proof 42/42 GREEN + pre-registered header. Solid.
+- **Pilot (partial)**: 4 runs completed (seeds 64201-64202 x leadfeast/belongfeast) in
+  `evidence/2026-10-20/perseed-ledgerdark/`. Key signal: belongfeast walked beloved/DARK
+  (3v2 margins) on both seeds; `betray=0` on all 4 runs — the betrayal never fired.
+- **Design issue found by worker**: the substrate walks alone (no followers/parties), so
+  the BETRAYAL step (playerAttacks on a follower) has no target. Worker began a RECRUIT
+  redesign (inviteToParty day 15-27 before BETRAYAL day 28-60).
+- **Redesign blocked**: the new proof run (proof2.log) shows 45 pass, 2 fail — both SMOKE
+  "30d completes" failing at day=28. The redesign breaks the 30-day smoke (likely the
+  day-28 betrayal killing the run). Not debugged; not shipped.
+- **No verdict**: the pilot used the old design (betrayal never fired), the redesign is
+  unproven. This arm is INCOMPLETE, not killed — the ledgerdark-road lever needs a fresh
+  run to finish the RECRUIT redesign, fix the smoke failures, and run the full pilot.
+
+Files kept: instruments + proof (committed), partial pilot data (perseed-ledgerdark/),
+sweep log, proof logs. The in-flight redesign edits were discarded (uncommitted, buggy);
+the committed instruments are the clean checkpoint.
+
 ## Results
 
 ## Village assessment
