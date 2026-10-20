@@ -36,29 +36,29 @@ const SITES = [
   // -- (a) AMBIENT routers: sanctity MUST cover (TABLE.md: no random field
   // fights, no wild encounters, no patrol contact, no new raids while the
   // table sits). All inside monsterTurn() (game.js:21640) except reengage.
-  { line: 11077, kind: 'ambient', cover: null, via: 'reengageWaitingMonsters',
-    note: 'door-fled re-engage (hall-door exit 11063: the bearer\'s own fled stash) + treeline ambush (11125: a dead bearer\'s stash when the new bearer leaves Haven). NO sanctity check.' },
-  { line: 21668, kind: 'ambient', cover: null, via: 'monsterTurn/hummice-sonar',
+  { line: 11085, kind: 'ambient', cover: '11060,11122', via: 'reengageWaitingMonsters',
+    note: 'door-fled re-engage (hall-door exit 11060: stash held mid-finale; treeline ambush 11122: returns false, stash intact). GATED by journey-scale r10.door-fled re-engage (hall-door exit 11063: the bearer\'s own fled stash) + treeline ambush (11125: a dead bearer\'s stash when the new bearer leaves Haven). NO sanctity check.' },
+  { line: 21690, kind: 'ambient', cover: '21683', via: 'monsterTurn/hummice-sonar',
     note: 'hummice hunts by ear: contact within 1 tile. monsterTurn() has NO tableActive gate (21640).' },
-  { line: 21685, kind: 'ambient', cover: null, via: 'monsterTurn/hummice-bump',
-    note: 'hummice closes to the player tile. No sanctity gate upstream.' },
-  { line: 21710, kind: 'ambient', cover: null, via: 'monsterTurn/dark-bump',
-    note: 'wander-search bump into the player in the dark. No sanctity gate upstream.' },
-  { line: 21794, kind: 'ambient', cover: null, via: 'monsterTurn/ambush',
-    note: 'ambush stance: nightlight + dist<=2. No sanctity gate upstream.' },
-  { line: 21832, kind: 'ambient', cover: null, via: 'monsterTurn/territorial',
-    note: 'territorial warn expiry (warnTurns>=2). No sanctity gate upstream.' },
-  { line: 21865, kind: 'ambient', cover: null, via: 'monsterTurn/hungry',
-    note: 'hungry stepToward reaches the player tile. No sanctity gate upstream.' },
-  { line: 21882, kind: 'ambient', cover: null, via: 'monsterTurn/cautious',
-    note: 'cautious circle lands on the player tile. No sanctity gate upstream.' },
-  { line: 21927, kind: 'ambient', cover: null, via: 'monsterTurn/default',
-    note: 'default stance stepToward reaches the player tile. No sanctity gate upstream.' },
+  { line: 21707, kind: 'ambient', cover: '21683', via: 'monsterTurn/hummice-bump',
+    note: 'hummice closes to the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
+  { line: 21732, kind: 'ambient', cover: '21683', via: 'monsterTurn/dark-bump',
+    note: 'wander-search bump into the player in the dark. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
+  { line: 21816, kind: 'ambient', cover: '21683', via: 'monsterTurn/ambush',
+    note: 'ambush stance: nightlight + dist<=2. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
+  { line: 21854, kind: 'ambient', cover: '21683', via: 'monsterTurn/territorial',
+    note: 'territorial warn expiry (warnTurns>=2). GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
+  { line: 21887, kind: 'ambient', cover: '21683', via: 'monsterTurn/hungry',
+    note: 'hungry stepToward reaches the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
+  { line: 21904, kind: 'ambient', cover: '21683', via: 'monsterTurn/cautious',
+    note: 'cautious circle lands on the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
+  { line: 21949, kind: 'ambient', cover: '21683', via: 'monsterTurn/default',
+    note: 'default stance stepToward reaches the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
   // -- (c) PLAYER-INITIATED: the player's own device/choice, not ambient
   // pressure. Sanctity N/A (can still pull the player in mid-finale).
-  { line: 21542, kind: 'player', cover: null, via: 'gwTrapTick',
+  { line: 21556, kind: 'player', cover: null, via: 'gwTrapTick',
     note: 'glasswing dive onto the PLAYER\'S OWN trap (s.gwTrap). Player-initiated; not ambient pressure.' },
-  { line: 22550, kind: 'player', cover: null, via: 'faceTentIntruder',
+  { line: 22572, kind: 'player', cover: null, via: 'faceTentIntruder',
     note: 'player clicks "Face it" on the tent intruder (app.js:16385/17857). Player-initiated.' },
 ];
 
@@ -83,10 +83,13 @@ const OTHER_SITES = [
     note: 'dev-panel fight trigger. Player-initiated.' },
 ];
 
-// The two ENGINE sanctity gates (the only tableActive checks in game.js):
+// ENGINE sanctity gates (every tableActive check in game.js):
 const GATES = [
   { line: 7307, fn: 'resolvePatrol', what: 'nearestWorldMonster nulled — patrols walk an empty perimeter' },
-  { line: 18804, fn: 'villagerMonsterTick', what: 'early return — no wild encounters target villagers' },
+  { line: 11060, fn: 'exitBuilding (hall-door)', what: 'door-fled stash HELD mid-finale (not consumed) — r10 gate' },
+  { line: 11122, fn: 'treelineAmbush', what: 'returns false mid-finale, killer stash intact — r10 gate' },
+  { line: 18818, fn: 'villagerMonsterTick', what: 'early return — no wild encounters target villagers' },
+  { line: 21683, fn: 'monsterTurn', what: 'ambient contact block gated — hummice/dark/stance sites cannot engage — r10 gate' },
 ];
 
 function findCallSites(src) {
@@ -271,7 +274,11 @@ async function runOne(seed, policyId, opts) {
     fightsDuringSanctity: C.fights.filter(f => f.active === true),
   };
   if (!opts.noWrite) {
-    const dir = path.join(__dirname, '..', 'evidence', '2026-10-19', 'perseed-sanctityaudit', policyId);
+    // SWEEP_EVIDIR (journey-scale r10): lets a gated-engine sweep write
+    // beside the audit corpus instead of overwriting it. Default preserves
+    // the audit's original path.
+    const eviRoot = process.env.SWEEP_EVIDIR || path.join('evidence', '2026-10-19', 'perseed-sanctityaudit');
+    const dir = path.join(__dirname, '..', eviRoot, policyId);
     fs.mkdirSync(dir, { recursive: true });
     writeFileRetry(path.join(dir, `s${seed}.json`), JSON.stringify(out, null, 1));
   }

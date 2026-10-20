@@ -11053,17 +11053,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // current bearer's (the old unconditional behavior).
       const waiting = this.state.doorFledMonsters;
       if (waiting && waiting.length) {
-        const me = this.villagerId;
-        const mine = waiting.filter(w => !w || w.bearer == null || w.bearer === me);
-        const theirs = waiting.filter(w => w && w.bearer != null && w.bearer !== me);
-        this.state.doorFledMonsters = theirs.length ? theirs : null;
-        if (mine.length) {
-          this.say('⚠️ They\'re still here. Waiting.');
-          // Re-engage with the first monster — they were waiting for you.
-          this.reengageWaitingMonsters(mine);
+        // TABLE SANCTITY (2026-10-12, Steve; TABLE.md; sim-sanctityaudit
+        // 2026-10-19): when the table sits, the world holds its breath — no
+        // door-fled re-engage mid-finale. The stash stays stashed; the
+        // crisis stays open. They wait; the table is the only stage.
+        if (this.tableActive && this.tableActive()) {
+          this.say('⚠️ They\'re still out there. Waiting. Even they hold their breath while the table sits.');
+        } else {
+          const me = this.villagerId;
+          const mine = waiting.filter(w => !w || w.bearer == null || w.bearer === me);
+          const theirs = waiting.filter(w => w && w.bearer != null && w.bearer !== me);
+          this.state.doorFledMonsters = theirs.length ? theirs : null;
+          if (mine.length) {
+            this.say('⚠️ They\'re still here. Waiting.');
+            // Re-engage with the first monster — they were waiting for you.
+            this.reengageWaitingMonsters(mine);
+          }
+          // theirs: the killer holds the treeline — it was named at the mantle
+          // passing (playerDeath). No hostile re-engagement inside Haven.
         }
-        // theirs: the killer holds the treeline — it was named at the mantle
-        // passing (playerDeath). No hostile re-engagement inside Haven.
       }
       return true;
     },
@@ -11106,6 +11114,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Returns true when it fired (it was the encounter — skip the roll).
     treelineAmbush(fromX, fromY) {
       try {
+        // TABLE SANCTITY (2026-10-12, Steve; TABLE.md; sim-sanctityaudit
+        // 2026-10-19): no treeline ambush mid-finale — the killer holds, the
+        // stash stays intact, the crisis stays open. Returns false (not the
+        // encounter) so the tile-entry roll proceeds as the player's own
+        // travel choice.
+        if (this.tableActive && this.tableActive()) return false;
         if (!this.isSafeTile(fromX, fromY)) return false; // not departing Haven
         if (this.isSafeTile(this.map.px, this.map.py)) return false; // onto safe ground: it holds
         const dw = this.state.doorFledMonsters;
@@ -21659,6 +21673,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return;
       }
       const oldMx = m.mx, oldMy = m.my;
+      // TABLE SANCTITY (2026-10-12, Steve; TABLE.md; sim-sanctityaudit
+      // 2026-10-19): when the table sits, the world holds its breath —
+      // ambient monster pressure is suspended for the whole sequence. The
+      // contact blocks below (hummice sonar, dark bump, the stance machine)
+      // must not walk a world monster into the player mid-finale. The
+      // glasswing trap trigger above is the player's own device and stays
+      // live. Every stake during the sequence is the table's own.
+      if (this.tableActive && this.tableActive()) return;
       // HUMMICE hunt by EAR, not eye (Steve 2026-10-04): the hum is a sonar.
       // Within 4 tiles they hear you breathing and close on the sound — dark
       // and trees don't matter. You hear the hum getting louder first. This
