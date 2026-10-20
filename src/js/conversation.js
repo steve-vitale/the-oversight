@@ -1609,7 +1609,25 @@
         // SUBJECT CHANGE: the old thread was live and we moved on. The plant
         // carries the last beat spoken on the old thread (deepening r11).
         const prev = c._beatThread;
-        if (prev && prev !== thread && prev !== 'small' && thread !== 'small') {
+        // ANSWERED-QUESTION (journey-establishment r19 2026-10-20): the
+        // want's hanging question was ANSWERED this conversation — the
+        // question-exchange is finished, so the old 'want' thread carries no
+        // "unfinished business" to plant. Without this, the next sitting
+        // offers "We never finished — <question>" and the resume re-serves
+        // the generic first-reveal engageBeat ("Huh. I wouldn't have guessed
+        // that about you") AFTER the player already answered and the NPC
+        // already acknowledged it — transcript-caught amnesia (seed 103
+        // Erin "where you're from", seed 61 Wilhelm "what got you through
+        // the first week"). The want ARC itself persists via
+        // convoResolveWant seeds, not this plant. honest_pass/declined
+        // questions stay plantable: the exchange is genuinely unresolved.
+        const wantQDone = prev === 'want' && (() => {
+          try {
+            const w = c.want;
+            return !!(w && w.qid && c.answered && (w.qid in c.answered) && c.answered[w.qid] !== 'honest_pass');
+          } catch (e) { return false; }
+        })();
+        if (prev && prev !== thread && prev !== 'small' && thread !== 'small' && !wantQDone) {
           this.convoThreadOpen(vid, prev, this.convoTopicLabel(vid, prev), 'changed the subject',
             this.convoLastThreadSnippet(vid, prev));
         }
@@ -1661,9 +1679,21 @@
         // MEMORY QUOTE (deepening r11 2026-10-15): carry the last spoken
         // beat into the plant so the resume opener can quote it.
         const _memSnip = this.convoLastThreadSnippet(vid, thread);
-        if (how === 'left') {
+        // ANSWERED-QUESTION (journey-establishment r19 2026-10-20): same
+        // class as the convoNoteBeat subject-change guard — the want's
+        // hanging question was answered this conversation, so the 'want'
+        // thread's question-exchange is finished. Planting it as "unfinished
+        // business" manufactures the amnesia resume in a later sitting.
+        // The want ARC persists via convoResolveWant seeds, not this plant.
+        const wantQDone = thread === 'want' && (() => {
+          try {
+            const w = c.want;
+            return !!(w && w.qid && c.answered && (w.qid in c.answered) && c.answered[w.qid] !== 'honest_pass');
+          } catch (e) { return false; }
+        })();
+        if (how === 'left' && !wantQDone) {
           this.convoThreadOpen(vid, thread, this.convoTopicLabel(vid, thread), 'walked away mid-thread', _memSnip);
-        } else if (unresolved) {
+        } else if (unresolved && !wantQDone) {
           this.convoThreadOpen(vid, thread, this.convoTopicLabel(vid, thread), 'unfinished business', _memSnip);
         }
       } catch (e) {}
