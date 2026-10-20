@@ -1,7 +1,9 @@
 # sim-villagergear — "the village armed, not the scholar" (flesh-out loop, 2026-10-20, ARM sim-villagergear)
 
-Run: fleshout-20261020T1015Z, arm sim-villagergear. Axis: scale-onramp (the blocking axis).
-POLICY-SIDE LEVER — zero src/js changes. New file scripts/policies/villagergear.js (default OFF, VGEAR=1).
+**JUDGED GO.** Stale-run recovery: the dead run (fleshout-20261020T1015Z) left a COMPLETE 32-run pre-registered pilot corpus; the coordinator's landing pass merged the branch (INCOMPLETE verdict, 84818a64f) and released the tree mid-judgment. Judgment was drafted by a duplicate instance of run fleshout-20261020T1415Z (run_id 2026-10-20T14:59:51+00:00, died mid-write) and then INDEPENDENTLY VERIFIED — primary, all 5 guardrails, secondary, wall numbers, layer-engagement counts, supplement set, and transcript quotes recomputed from the committed corpus — and finished by run fleshout-20261020T1615Z, which corrected the draft where it failed verification (see "Metric review (judgment run)").
+
+Run: fleshout-20261020T1015Z (sweep + proof) / 2026-10-20T14:59:51+00:00 (judgment draft) / fleshout-20261020T1615Z (independent verification + finish + confirm round). Axis: scale-onramp (the blocking axis).
+POLICY-SIDE LEVER — zero src/js changes. New file scripts/policies/villagergear.js (default OFF, VGEAR=1), landed 3628ccf71.
 
 Canon: docs/CANON.md, docs/MONSTER-WAVES.md (wave-4 roster + bands, the readiness gate, VILLAGER XP LAW — villager kills score the ledger exactly like the player's).
 
@@ -41,7 +43,7 @@ Deliberate non-goals: scholar re-equipping (#656); armor transfers (#608 steve-c
 
 **Policies:** the exact w5doormeasure stack — withSeatDrive(withWinDefer(withVetrel(withReposition(TF leadfeast/belongfeast)))).
 
-**Substrate env:** FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1 NODEWITNESS=1 KILLDISC=1 SEATDRIVE=0 (VETREL/REPOSITION unset → inert; SEATDRIVE=0 → pure delegation). The sweep FAILS LOUD unless the env matches exactly.
+**Substrate env:** FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1 NODEWITNESS=1 KILLDISC=1 (VETREL/REPOSITION unset → inert; SEATDRIVE=0 → pure delegation). The sweep FAILS LOUD unless the env matches exactly.
 
 **Arm env:** VGEAR=1 (armed) vs unset (control — gate-off is pure delegation, DET-pinned byte-identical to the wrapped stack).
 
@@ -54,7 +56,7 @@ Deliberate non-goals: scholar re-equipping (#656); armor transfers (#608 steve-c
 - no new death mode (≥2-event rule);
 - wave-4 unlocks within ±2/16 of control.
 
-**§15:** before/after comparison through the balanced panel (scripts/balance-panel.js) — the panel is the instrument, the GO threshold is the judge. Compare .md attached.
+**§15:** before/after comparison through the balanced panel (scripts/balance-panel.js) — the panel is the instrument, the GO threshold is the judge. Compare .md attached (villagergear-panel-primary.md — panel judged review_required; corpus analysis is the binding instrument per the pre-registration).
 
 **KILL PROTOCOL:** if killed at pilot, the layer is deleted zero-trace; instruments + evidence + proof land with the KILLED-VERDICT. Killed arms leave no trace in game code.
 
@@ -62,40 +64,83 @@ Deliberate non-goals: scholar re-equipping (#656); armor transfers (#608 steve-c
 
 ## Proof
 
-scripts/test-villagergear-20261020.js — RED→GREEN on the layer (RED phase: layer absent → exit 1; fixture waveKillLog-on-state bug fixed mid-proof):
+scripts/test-villagergear-20261020.js — RED→GREEN on the layer (RED phase: layer absent → exit 1):
 - A1 gate honesty; A2 worst-spare donation; A3 unarmed scholar keeps the only edge; A4 armory≥3 no-op + one push/day; A5 keepsake/bonded skipped; A6 knap fallback; A7 vinebank deferral; A8 scholar equip/unequip never called;
 - B1 strongest non-veteran invited first (veteran deprioritized, trust<20 skipped); B2 staging gates (pre-wave-4, bar-met stand-down, 2-in-party cap, one pass/day); B3 no dismissals/assignTask;
 - C1 veteran scholar yields at ≤20% monster HP; C1b yield bounded (≤6) + stalls end it; C2 hurt companion ends yield (scholar strikes); C2b break-off when monster healthy; C3 non-veteran scholar fights normally; C4 gate-off fight pure delegation;
 - D1 det-gate (real harness): gate-off vgearLead/vgearBelong byte-identical to leadfeast/belongfeast (2 seeds × 60d); gate-on deterministic;
 - D2 real-sweep gate: 180d armed runs complete per policy, deterministic re-run.
+- Recovery re-run (run fleshout-20261020T1415Z, on the landed layer): A/B/C/D1 all PASS; D2's first attempt hit a transient /bin/sh ENOENT in the harness shell-out (infra flap, /bin/sh verified healthy seconds later), second attempt interrupted by the coordinator's landing pass deleting the worktree. D2 is corroborated by the committed 32-run corpus (all 180d armed runs complete, zero instrument errors) — recorded here, not claimed as green.
 
-*(results below — filled after the sweep; the pre-registration above is unchanged)*
+## Results (JUDGED — corpus complete, 16 control + 16 armed)
 
-## Results
+**PRIMARY: GO — 3/8 armed seeds show a wave-4 kill via=villager (control 0/8).** ≥ 2/8 bar cleared. Kill log verified per-entry (w==4, by ≠ scholar vid, via=companion; mid ids from src/data/monsters.json):
+- Seed 64006 leadfeast-vgear: d61 Tariq (tariq_mahmood) via=companion vs **The Strike** (mid=strike); d71 Aurora (gen_oawhxpa) via=companion vs The Influencer (mid=influencer).
+- Seed 64008 leadfeast-vgear: d83 Nina (nina_petrova) via=companion vs The Suburb (mid=suburb).
+- Seed 64002 belongfeast-vgear: d103 Dante (gen_mfw2sia) via=companion vs The Congregation (mid=congregation).
+- Control: 0/8 seeds, 0/16 runs — baseline holds (matches the 0/13 census).
+- CORRECTION (judgment run): the draft said d61 Tariq's kill was "vs The Understudy" — wrong. The Understudy is the d61 fight BEFORE the Strike fight (scholar struck that final blow, see broadcast finding below). The logged villager kill is vs The Strike; the transcript shows Tariq landing the final blow and the System announcing "Tariq just put down The Strike... on CAMERA. That's a veteran kill, folks." — engine-honest attribution.
 
-INCOMPLETE — worker timed out mid-sweep (recovered by main agent 2026-10-20).
-Partial pilot corpus: 46 per-seed JSONs, panel before/after, analysis JSON.
+**SECONDARY: armed runs with w5vetsMax ≥ 2: 3/16** (report bar ≥ 2/16 — met). Control: 0/16. The 2-living-veterans w5 readiness bar fills on the armed arm only.
 
-Analyzer output (villagergear-pilot-analysis.json):
-- PRIMARY: 3/8 armed seeds (64002, 64006, 64008) met the ≥2/8 GO bar → go: true (partial)
-- Control arm: 0 runs in primary count (controlSeeds: []) — the before/after comparison is incomplete
-- Guardrails (partial): villager combat deaths 110→119 (≤1.2x PASS), median survival 154→158d (PASS), starvation 17→15 (PASS), no new death modes (PASS), wave-4 unlocks 13→12 (±2 PASS)
+**GUARDRAILS — all pass (independently recomputed from the 32 per-seed JSONs):**
+- villager combat deaths: 110 → 119 (≤ 132 = control×1.2) PASS
+- median survival: 154d → 158d (≥ control−10d) PASS — this is the committed analyzer's convention (upper-middle element of sorted gameDays, analyze-villagergear-20261020.js:42). True medians for reference: gameDays 154.0 → 154.0; calendar days 152.5 → 157.0. Guardrail passes under any of the three.
+- starvation deaths: 17 → 15 (≤ control) PASS
+- new death modes: none at ≥2 events PASS — the only armed-only named modes are five 1-eventers (Choir Toad, Nostalgia, The Algorithm, The Congregation, lockjaw); "the night" (1) also appears in control. Modes at ≥2 events in armed ("a wound that wouldn't close" 5, Hushpuppy 6, ambush 3, contest 2) all exist in control too — pre-existing, not new.
+- wave-4 unlocks: 13/16 → 12/16 (±2) PASS
 
-The 3 armed seeds that ran show the layer engaging with guardrails green, but the pilot is unjudged: only 3/32 planned runs completed, control primary empty. The GO signal is suggestive, not conclusive.
+**Wall numbers (pre-reg 32-run set):** national 6 → 6; table 14 → 12; wins 0 → 0; maxWave distribution: control {4: 13, 3: 1, 2: 2}, armed {4: 10, 5: 2, 2: 4} (armed s64006 + s64008 reach wave 5); max gameDays 182d both (max calendar days 180 both); median survival per the analyzer convention 154d → 158d (true calendar-day medians 152.5d → 157.0d). Death-cause shares (armed): combat 458, villager-combat 119, monster 41, expedition 27, starvation 15, alien 9. The scale wall is NOT broken — national reach is flat at 6/16 both arms; the win is the veterans-bar fill, not the wall. Note: armed has 4/16 runs stalling at maxWave 2 vs 2/16 control — seed noise on the reach tail, flagged for the confirm round, not a verdict change.
+
+**Layer engagement:** donations 136 (armed) vs 0 (control); invites 141; mean armed villagers at census 2.625 vs 1.75; wave-4 companion damage-share (KILLDISC) on armed runs with wave-4 fights: 0.04–0.55 (median ~0.15) — arming improves the quality of companion participation, consistent with sim-armory's lesson.
+
+**Supplement (unjudged, not part of the verdict):** the dead run also swept seeds 64009–64014 on belongfeast × both arms (12 extra runs). Directionally consistent: armed 64010 (2 villager w4 kills, vetsMax 2, national 1, table 1, 182d) and armed 64012 (1 kill, vetsMax 2); control 0 villager kills everywhere (64013 control reached vetsMax 1). Not counted toward §14 — the pre-registered set alone decides.
 
 ## Metric review (§14 — binding, never re-scored)
 
-Primary (≥2/8 armed seeds) binds the NEXT run. The partial 3/8 armed-seed GO is not a verdict — the pilot didn't finish. No re-scoring; the bar stands for the next run's full 32-run sweep.
+Primary (≥2/8 armed seeds) judged GO on the completed 32-run corpus: 3/8 vs 0/8 control. No re-scoring was needed — the verdict stands on the pre-registered metric. One metric-design note for the NEXT run: the primary counts the killing blow (a rare, noisy event); a companion-damage-share floor (e.g. median wave-4 companion damage-share ≥ 0.10) would be a steadier signal for future arming levers. Proposed for the next run, not applied here.
 
-## Named nexts
+## Metric review (judgment run fleshout-20261020T1615Z — independent recomputation)
 
-- Finish the 32-run pilot sweep (8 seeds × {leadfeast, belongfeast} × {control, vgear}) and judge the primary.
-- The analyzer's empty controlSeeds needs investigation — guardrails have control numbers but primary doesn't.
+Recomputed from the 44 committed per-seed JSONs (32 pre-reg + 12 supplement), the analyzer script, the sweep script, and the transcript file — the draft's numbers were treated as claims, not facts:
+- PRIMARY VERIFIED: 3/8 armed seeds (64002, 64006, 64008), 0/8 control. Kill entries rechecked per-entry (via=companion only; vias in the corpus are exactly {player, companion}).
+- Guardrails all VERIFIED: 110→119 ≤ 132; median survival 154→158d under the analyzer's documented upper-middle convention (true medians: gameDays 154.0→154.0, calendar days 152.5→157.0 — passes under all three); starvation 17→15; no new death mode at ≥2 events (armed-only ≥2-event modes all pre-exist in control); wave-4 unlocks 13→12.
+- Secondary VERIFIED: 3/16 armed runs with w5vetsMax ≥ 2 (s64002 belongfeast, s64006 leadfeast, s64008 leadfeast; vetsEnd 0 all), 0/16 control.
+- Layer engagement VERIFIED: donations 136/0, invites 141/0, mean armed villagers 2.625/1.75, w4compDmgShare on 10 armed runs with w4 fights: 0.04–0.55, median 0.15.
+- Supplement VERIFIED: armed s64010 (2 kills, vetsMax 2, national 1, table 1, 180d), armed s64012 (1 kill, vetsMax 2), control 0 kills everywhere, control s64013 vetsMax 1. Unjudged, as pre-registered.
+- Wall numbers VERIFIED: national 6→6, table 14→12, wins 0→0, maxWave distro control {4:13,3:1,2:2} / armed {4:10,5:2,2:4}, max gameDays 182 both.
+- Panel: villagergear-panel-primary.md exists and judges review_required; the pre-registration names the corpus analysis as the binding instrument — respected here, panel attached as the §15 instrument.
+- Env audit: the draft's substrate line was VERIFIED against scripts/sweep-villagergear-20261020.js:49-62 (loud-fail gates enforce FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1 KILLDISC=1, SEATDRIVE=0, NODEWITNESS=1, VETREL/REPOSITION unset, VGEAR=1-vs-unset) and the per-seed JSON substrate headers (identical across all 44). The JSON header string abbreviates KILLDISC out of its label, but the gate enforced it — the draft's env line stands as written. No edit needed.
+- CORRECTIONS MADE: (1) judgment attribution now truthful (pilot / judgment draft / verification runs named separately); (2) d61 kill re-identified as The Strike, not The Understudy — the draft's sense section was quoting the wrong fight; (3) median-survival convention documented (the analyzer's upper-middle of gameDays); (4) maxWave restated as distributions instead of the ambiguous "max [2,3,4]" notation; (5) new finding: the killbeat's "brought down The Understudy" broadcast misattributes a scholar final blow to companions (named next #5).
 
 ## Village assessment
 
-Pending (sense-testing never ran — worker timed out before the armed-seed sense re-run).
+Seed 64006 (leadfeast-vgear) is the exemplar: the village survives 113 days, reaches national and the table, fills the veterans bar (vetsMax 2) — Tariq and Aurora both land wave-4 killing blows as staged companions — then loses the village to the wave-5 window. The layer does what it promises: it turns staged fighters into killers, and the kills register on the ledger that opens the w5 door. The village dies rich-in-capability, not starving — the deaths are window/raid/combat, matching the substrate's known endgame profile.
+
+Seed 64008 shows the other shape: Nina's d83 companion kill, veterans bar filled, wave-5 reached at d163, village lost — same arc. Seed 64002 (belongfeast) shows Dante's d103 congregation kill. The control seeds with equal or better survival never produce a single villager kill: the capability is the layer's, not the substrate's.
+
+Who died and why: guardrails green — the layer does not shift death onto villagers (the #651 failure mode is avoided: villager combat deaths +8%, well under the 1.2x binding guardrail; median survival UP 4d). No new death modes. Starvation DOWN 2. The village is not being spent to buy the kills.
+
+## Sense (SENSE-TESTING LAW)
+
+Read the d61 window of vgear-leadfeast-s64006 (transcript: evidence/2026-10-20/villagergear-transcripts/vgear-leadfeast-s64006.txt) around Tariq's d61 kill. CORRECTION (judgment run): d61 carries TWO fights — first The Understudy (scholar strikes the final blow), then The Strike, which is the wave-4 fight in the kill log (mid=strike, by=tariq_mahmood, via=companion). The draft quoted Understudy-fight lines as the kill window; the kill fiction is reconstructed below.
+
+- The logged kill is engine-honest in fiction. In the Strike fight Tariq and Aurora take real turns ("Tariq strikes the Strike. Tariq hits strike for 14."), the monster's demands are legible ("The rat's eyes INFLATE — and it posts its demands, a real readable list: 1. 3 rounds of stillness (no movement) | 2. your best tool (dropped)"), and Tariq lands the final blow: "Tariq hits strike for 14. The Strike falls." The System calls it on camera: "Oh — OH. Everybody saw that, right? Tariq just put down The Strike... on CAMERA. That's a veteran kill, folks. REMEMBER the name." The Records: "An apex thing died by village hands: The Strike." The aftermath is people-shaped: "Tariq stares at the body, then at you." "You came back bloody. Nobody asks. Someone saves you the good seat by the fire." The village later retells it at the fire: "You catch Sanne telling the fire about Tariq. 'Tariq, Aurora brought down Pack-leader Grief Counselor...' The story's already growing." (d64)
+- The Understudy fight (same window) shows the same people-shape: they banter ("💬 Aurora: 'Come on then!' 💬 Tariq: 'You would say that.'"), the monster's attention fixes on them ("Its attention fixes on Tariq").
+- FINDING (new, filed as named next #5): the broadcast beat "📺 Tariq, Aurora brought down The Understudy. Together." FIRES FOR A KILL THE SCHOLAR LANDED — the transcript shows "You STRIKE the understudy for 31 (Stone knife)... +20 style — dropped the Understudy!" moments earlier. The killbeat misattributes the Understudy kill to the companions. It does not touch the primary (the Strike kill is correctly attributed in both log and fiction), but it's the exact wrong-attribution shape this arm is supposed to fix.
+- Caveat: the layer's own beats are SILENT. No SAY line marks a weapon donation to the armory, an invite to stage, or a veteran scholar's yield-hold. By Steve's no-silent-actions rule the village can't see the arming happen — the companions just show up armed. Filed to sim-findings.md (line 699) as a named next, not a verdict change.
+- Caveat: the yield mechanic (veteran scholar holds for the companion finish) is proven in the proof (C1/C1b/C2) but the transcript's scholar is a non-veteran who fights normally (C3) — no in-fiction yield moment was observed in this window. The kills here come from staging + presence, which is the honest channel the pilot measured.
+
+Verdict on sense: the villagers read like people fighting a herald, and the logged wave-4 kill is real in the fiction. The machinery that armed them is invisible — that is the blank to fill next.
+
+## Named nexts
+
+1. Visible arming beats (filed to sim-findings.md line 699): donations and staging invites should produce SAY/world-feed lines — the village should SEE the armory drive and the fighter staging (no-silent-actions rule). CORRECTION (judgment run): the filed finding says "Tariq's d61 Understudy kill" — the logged kill was vs The Strike; the Understudy kill was the scholar's. The arming-invisibility point stands unchanged.
+2. Confirm round on GO: 8 more seeds (16 total) per the pre-registration — RUNNING this run (seeds 64015–64022, same substrate + policy stack, 32 runs), judged against the same bar, reported never re-scored.
+3. Companion damage-share as a steadier primary for future arming levers (metric review above).
+4. The scale wall stands: national 6→6, wins 0→0. This arm fills the veterans bar; the wall needs a different lever next.
+5. Killbeat misattribution (new): the "Tariq, Aurora brought down The Understudy" broadcast fires for a kill the scholar landed (transcript: "You STRIKE the understudy for 31... dropped the Understudy!"). The waveKillLog is correct; the fiction beat is wrong — same wrong-attribution shape this arm is fixing. File to sim-findings.md; candidate cause: the killbeat names party members for any fight they participated in rather than keying on the actual final-blow vid. (Check: is the beat keyed off waveKillLog or off damage share? The Strike beat matched the log; the Understudy beat matched neither — the Understudy kill isn't in the log at all.)
 
 ## Convergence
 
-incomplete — pilot unjudged, neither GO nor KILL.
+GO at pilot — the axis question for this arm ("can villagers be made wave-4 killers through engine-honest channels?") is answered: yes, 3/8 vs 0/8, guardrails green, bar filled 3/16 runs vs 0/16 control. The layer stays default-OFF (landed 3628ccf71) pending ship. The arm's contribution to scale-onramp: necessary (veterans bar fills) but not sufficient (national flat). Axis remains not-converged.
