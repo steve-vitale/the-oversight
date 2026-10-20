@@ -5730,7 +5730,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (p.favorId && (!requested || requested.id !== p.favorId ||
               !((requested.kind === 'food_share' && kind === 'food' && opts?.food) ||
                 (requested.kind === 'heal_help' && kind === 'heal' && opts?.care === 'wound') ||
-                (requested.kind === 'sick_help' && kind === 'heal' && opts?.care === 'illness')))) continue;
+                (requested.kind === 'sick_help' && kind === 'heal' && opts?.care === 'illness') ||
+                (requested.kind === 'water_haul' && opts?.waterFavorId === requested.id &&
+                  requested.waterRun?.returned && requested.waterRun.deliveredLiters >= 4 &&
+                  requested.waterRun.bearer === this.villagerId)))) continue;
           p.kept = true;
           // FAVOR OBLIGATIONS (convo favor system 2026-10-11): mark the
           // favor instance fulfilled and name the task — the fiction must
@@ -6561,6 +6564,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     resolveOneAssignment(vid, a) {
+      if (this.waterFavorCompanions?.().includes(vid)) return;
       const v = this.state.village;
       const vp = (this.data.villagers || []).find(x => x.id === vid)
         /* unified: getPerson */ || {};
@@ -26554,7 +26558,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!people.length) return;
       // LEADER: assigned villagers are out working — they don't do random things.
       const asg = v.assignments || {};
-      const free = people.filter(id => !asg[id]);
+      const waterPartners = this.waterFavorCompanions?.() || [];
+      const free = people.filter(id => !asg[id] && !waterPartners.includes(id));
       if (!free.length) return;
       const n = 1 + (Math.random() < 0.4 ? 1 : 0);
       for (let i = 0; i < n; i++) {

@@ -158,14 +158,14 @@
           `Do the math with me: ${liters} liters, ${ctx.rosterN} people. That's not tomorrow's water.`,
           `I checked the cistern three times hoping I misread it. ${liters} liters.`,
         ];
-        const whyLine = '"' + whyBits[(hh >>> 1) % 3] + ` The creek's a twenty-minute walk \u2014 with two of us it's one trip, not three.` + '"';
+        const whyLine = '"' + whyBits[(hh >>> 1) % 3] + ` We walk together and each carry two liters back. Creek water still needs boiling.` + '"';
         return {
-          task: `haul water from the creek at first light with ${ctx.name}`,
+          task: `bring four liters home from the creek with ${ctx.name}; set out at dawn`,
           short: 'the creek water run',
           line, whyLine,
           commitLine: `"Dawn, then. Bring something to carry \u2014 and thank you."`,
           goodbye: `"First light. Don't sleep through it."`,
-          stakes: `The village runs out of clean water tomorrow.`,
+          stakes: `The village needs water; creek water must be boiled before it is safe.`,
         };
       },
     },
@@ -865,6 +865,10 @@
         if (want.fromSeed && want.seedFavorId) favor = this.convoGetFavor(vid);
         if (!favor || favor.id !== want.seedFavorId) favor = this.convoGetFavor(vid);
         const open = this.openFavorObligation(vid);
+        if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
+          if (c.want) c.want.favor = favor;
+          return this.waterFavorOpening(vid)?.line || '"We still have a creek trip to finish."';
+        }
         // Obligation still open — a reminder naming the task, not a new ask.
         if (open && open.favorTask && favor && favor.id === open.favorId) {
           if (c.want) c.want.favor = favor;
@@ -1500,6 +1504,10 @@
       };
       favor.state = 'promised';
       favor.promisedDay = day;
+      if (favor.kind === 'water_haul') {
+        v.promises[vid].waterHaulVersion = 1;
+        favor.meetDay = day + 1;
+      }
       try { this.remember(vid, 'promise', 'promised: ' + favor.task); } catch (e) {}
       this.journalFavorPromise?.(vid, v.promises[vid], {});
       try { this.notePlaystyle('social'); } catch (e) {}
@@ -1512,6 +1520,7 @@
       favor = favor || this.convoGetFavor(vid);
       const blocked = reason => ({ ready: false, reason });
       if (!favor || favor.vid !== vid) return blocked('There is no current request to act on.');
+      if (favor.kind === 'water_haul' && this.waterFavorAction) return this.waterFavorAction(vid, favor);
       if (!['asked', 'promised'].includes(favor.state)) return blocked('This request is already closed.');
       const unavailable = {
         water_haul: 'The joint creek trip has no playable action yet. Assigning someone a water task does not perform this trip.',
@@ -1550,10 +1559,12 @@
       if (canPromise && !status.unsupported) out.push({ id: 'dlg:commit', labels: ['"I’ll come back to help."'], temper: 'kind' });
       const promise = this.state.village.promises?.[vid];
       if (status.unsupported && promise?.favorId === favor?.id && !promise.kept) out.push({ id: 'dlg:favor_cancel', labels: ['Close this unavailable job (no penalty)'], temper: 'neutral' });
+      if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned && this.waterFavorAction(vid,favor,true).ready) out.push({ id: 'dlg:favor_cancel', labels: ['End trip and unload what we have (break unfinished promise)'], temper: 'neutral' });
       return out;
     },
 
     convoPerformFavor(vid, favor) {
+      if (favor?.kind === 'water_haul' && this.performWaterFavor) return this.performWaterFavor(vid, favor);
       const status = this.convoFavorAction(vid, favor);
       if (!status.ready) return { ok: false, line: status.reason };
       const v = this.state.village;
@@ -1625,7 +1636,7 @@
           case 'sick_help': return ((((v.sick || {})[favor.vid] || {}).daysLeft || 0) > 0);
           case 'watch_shift': return (this.npcNeeds(favor.vid).energy || 100) < 50;
           case 'stay_close': return (this.npcNeeds(favor.vid).fear || 0) > 50;
-          case 'water_haul': return ((v.water || {}).clean || 0) < 15;
+          case 'water_haul': return (favor.waterRun && !favor.waterRun.returned) || ((v.water || {}).clean || 0) < 15;
           case 'forage_help': {
             const kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : 0;
             return kcal < (((v.roster || []).length || 1) * 6000);
@@ -1718,6 +1729,8 @@
     // (urgency 4: hunger>70, health<60, sick) still lead — that's human.
     // Chronic needs (urgency <= 3) are dampened on first meetings only.
     convoSelectWant(vid) {
+      const water = this.waterFavorOpening?.(vid);
+      if (water) return { id: 'repay', def: WANTS.repay, fromSeed: false, seedFavorId: this.convoGetFavor(vid).id };
       const seed = this.convoCheckSeeds(vid);
       if (seed && WANTS[seed.wantId]) {
         return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note, seedFavorId: seed.favorId || null, seedQid: seed.qid || null };

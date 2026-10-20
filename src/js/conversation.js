@@ -2476,7 +2476,8 @@
       // Real favor instances have their own details/commit/refuse lifecycle.
       // A generic "Yes" cannot stand in for creating that obligation.
       if (c.choosingSubject || (c.thread === 'want' && (c.want?.stage || 0) < 3 &&
-          (c.want?.id === 'ask_favor' || (c.want?.id === 'repay' && this.openFavorObligation?.(vid)?.favorTask)))) return null;
+          (c.want?.id === 'ask_favor' || (c.want?.id === 'repay' && (this.openFavorObligation?.(vid)?.favorTask ||
+            (c.want.favor?.waterRun && !c.want.favor.waterRun.returned)))))) return null;
       // Never stack questions: one hanging question at a time. A response
       // line that asks something new while a question hangs is part of the
       // dodge, not a second question (it must not reset the follow-up).
@@ -4247,7 +4248,8 @@
         c.replyMenu = { key: menuKey, choices: menu.map(ch => ({ ...ch })) };
         return uncapped?menu:this.convoMenuPage(vid,menu);};
       if (c.windingDown || c.spokenBeat?.tag === 'closing') return finish([{ id: 'leave', label: '"See you."' }]);
-      if (c.thread === 'want' && c.want?.favor?.state === 'promised' && !c.choosingSubject &&
+      if (c.thread === 'want' && (c.want?.favor?.state === 'promised' ||
+          (c.want?.favor?.waterRun && !c.want.favor.waterRun.returned)) && !c.choosingSubject &&
           !c.pendingQ && !c.reactiveQ && !c.genericQ) {
         return finish(this.convoFavorActionMenu(vid, c.want.favor, false).map(o => ({ id: o.id, label: o.labels[0], temper: o.temper })).concat([
           { id: 'dlg:subject', label: '"Can I ask you something else?"' },
@@ -5027,6 +5029,14 @@
         if (want && want.def) c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed, seedNote: want.seedNote || null, seedFavorId: want.seedFavorId || null, seedQid: want.seedQid || null };
       } catch (e) { want = null; }
       const op = (() => {
+        // An outing is physical work already under way. Its current-phase
+        // opening keeps the actual collect/unload action reachable through
+        // Continue and repeat visits, instead of replacing it with small talk.
+        const jointWork = this.waterFavorOpening?.(vid);
+        if (jointWork && c.want?.id === 'repay') {
+          c.want.favor = this.convoGetFavor(vid);
+          return jointWork;
+        }
         // RESUME (Steve 2026-10-07): an unfinished thread from a previous
         // conversation resurfaces — people remember what was left hanging.
         // Never ahead of a talk request (convoOpening owns that priority).

@@ -229,7 +229,8 @@
       return rows.map(row => {
         if (!row.favorId) return row;
         const left = Number.isFinite(row.dueDay) ? row.dueDay - today : null;
-        const action = row.status === 'open' && promise?.favorId === row.favorId && favor?.id === row.favorId
+        const activeWater = favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned && favor.id === row.favorId;
+        const action = (row.status === 'open' || activeWater) && promise?.favorId === row.favorId && favor?.id === row.favorId
           ? this.convoFavorAction(vid, favor) : null;
         const unavailable = !!action?.unsupported;
         const overdue = row.status === 'open' && !unavailable && left != null && left < 0;
@@ -238,10 +239,11 @@
         const deadlineLabel = unavailable ? 'No active deadline — unavailable job, no penalty.' :
           left == null ? 'Deadline not recorded' : 'Due by the end of day ' + row.dueDay + ' · ' + time;
         let requirements = '';
-        if (row.status === 'open' && promise?.favorId === row.favorId) {
+        if ((row.status === 'open' || activeWater) && promise?.favorId === row.favorId) {
           if (favor?.id !== row.favorId) requirements = 'This save is missing the original request details. No completion action is available.';
           else {
-            requirements = unavailable ? action.reason + ' Talk to them to close this job without penalty.' :
+            requirements = activeWater ? (row.status !== 'open' || overdue ? 'The promise was missed. ' : '') + (action.ready ? 'Talk to your partner: ' + action.label + '. ' : '') + action.reason :
+              unavailable ? action.reason + ' Talk to them to close this job without penalty.' :
               overdue ? 'The deadline has passed. Helping now will not keep this promise.' :
               action.ready ? 'Talk to them to help: ' + action.label + '. ' + action.reason : action.reason;
           }

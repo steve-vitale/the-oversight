@@ -12,6 +12,37 @@ got talked at — a vending machine, not a conversation.
 
 ### Accepted favors and the People journal (2026-10-20)
 
+Water-run milestone: an accepted water favor now has a real joint outing.
+Meet the requester at Haven at dawn on the day after acceptance (or the next
+dawn within the due-day window). The requester waits at home during that dawn;
+the requirements name the correct side of the hall door. A creek must already
+be known on the player's map. Set out through the offered conversation action,
+walk normally together, and speak to the partner at the creek to fill the
+buckets: two liters each, four canonical fills,40 kcal and four action ticks.
+The player's water weighs2kg. The partner's actual cargo and both holders'
+progress survive Continue. The temporary companion cannot perform remote duty
+or another autonomous departure during the outing; permanent party membership
+does not change.
+
+Walk back to Haven and speak to the partner to unload. The handoff transfers
+the actual four liters into the cistern at their current quality; risky creek
+water is not magically clean. The normal hearth/boiling rules still apply.
+Pre-carried water, cistern withdrawals and delegated water tasks cannot keep
+this exact joint promise. Drinking the carried water means collecting its
+replacement. Late unloading still salvages real water but keeps the promise
+expired. The journal retains return instructions while cargo is outstanding.
+At home, “End trip and unload what we have” salvages partial cargo and breaks
+an unfinished promise without a completion reward. A dead partner or changed
+bearer cannot supply a free escort or fabricated delivery.
+
+Previously accepted, unplayable water promises get one persisted migration
+window: at least two days from their first new-version Continue, with a dawn
+meeting on the following day. Further Continue does not extend it. Closed
+promises stay closed. The other four joint jobs remain unavailable.
+Telemetry records actual departure, collected liters and returned clean/risky
+liters plus kept/early-end status (`favor_water_*`); water acquisition is not
+proof of drinking, successful purification or a balanced survival improvement.
+
 Hearing a request is not accepting it. “I’ll come back to help” creates a
 typed obligation with the concrete task and a due day. Menu → Journal → People
 shows that same obligation, its current requirements and Accepted, Completed,
@@ -31,7 +62,7 @@ can still help the person, but does not earn kept-promise credit or rewrite
 the expired task as completed. Deadline text uses the resolver's effective
 due day, including the existing minimum one-day window for legacy promises.
 
-The five unimplemented joint jobs remain unavailable, with no active deadline
+The four other unimplemented joint jobs remain unavailable, with no active deadline
 or broken-promise penalty. Old accepted instances explain that limitation and
 offer a no-penalty close. This journal work does not implement those jobs.
 The lifecycle regression uses the shared harness; the retained touch journey
@@ -187,16 +218,17 @@ local adjacency are checked at dispatch. Completion cannot replay the deed.
 A future promise remains distinct from performing the action; ready actions stay
 available immediately after committing and on later promise reminders.
 
-Five authored jobs still lack an executable joint activity: creek hauling,
-shared snare repair, watch handover, overnight company and joint foraging.
+Four authored jobs still lack an executable joint activity: shared snare
+repair, watch handover, overnight company and joint foraging. Creek hauling
+now uses the physical trip contract above.
 Their menus explicitly explain this and offer no new unkeepable promise. Old
 open jobs have a no-penalty close route, no completion reward, and no deadline
 penalty while the unsupported job remains open. This is a disclosed release
 blocker, not implementation of those jobs. Do not substitute any NPC assignment,
 food gift or brief conversation for those specific jobs.
 
-Typed favor promises require deed receipts: physical food, wound care or illness
-care. General non-favor promises keep their existing behavior. Words cannot keep
+Typed favor promises require deed receipts: physical food, wound care, illness
+care or the exact collected-and-returned water run. General non-favor promises keep their existing behavior. Words cannot keep
 a physical-care favor; unrelated assignments cannot keep a joint-job favor.
 Treatment with no illness benefit cannot keep the illness favor. Request and
 promise lines bypass random semantic voice additions; requirement explanations

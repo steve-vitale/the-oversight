@@ -59,7 +59,7 @@ const K=require('./lib'),T=K.reporter('Favor journal lifecycle');
    const result=G.convoPerformFavor(vid,favor);
    T.ok('care crossing nightfall does not turn an expired promise into success',v.promises[vid].kept==='broken'&&favor.state==='broken'&&/deadline/.test(result.line),JSON.stringify({promise:v.promises[vid],state:favor.state,result}));
   }
-  for(const kind of ['water_haul','snare_mend','watch_shift','stay_close','forage_help']){
+  for(const kind of ['snare_mend','watch_shift','stay_close','forage_help']){
    const {v,s,vid,favor}=scene(kind);favor.state='promised';
    v.promises[vid]={goal:favor.goal,day:s.day,kept:false,maker:G.villagerId,favorId:favor.id,favorTask:favor.task,favorDeadline:favor.deadline};s.day+=100;G.checkPromises();
    const row=G.journalPromises(vid).find(p=>p.favorId===favor.id);

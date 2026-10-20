@@ -620,6 +620,18 @@ The exposure source — the village keeps the list. Every truth dragged into the
 
 **Consumes:** —
 
+### favor-water (`favor-water.js`)
+Joint dawn creek favors: temporary companion, real bottled cargo and home cistern settlement.
+
+**Provides:** waterFavorCompanions() -> living temporary creek companions for this bearer, waterFavorWaiting(vid) -> requester waiting at home for the agreed dawn, waterFavorOpening(vid) -> structural, current-phase joint-work opening, waterFavorAction(vid, favor) -> pure readiness and progress, performWaterFavor(vid, favor) -> checked departure, canonical fills or physical handoff, migrateWaterFavors() -> give previously unplayable saved promises a fair window once
+
+**Rules:**
+- actual_joint_deed: only collected cargo delivered at home keeps the favor (code: performWaterFavor, game.js checkPromises)
+- physical_water: filling pays its costs; cargo keeps quality, mass and save identity (code: performWaterFavor, game.js fillWater)
+- temporary_companion: no permanent party membership or successor escort (code: waterFavorCompanions, travelingWith wrapper)
+
+**Consumes:** state.village, state.scholar, fillWater(), checkPromises(kind, vid, opts), travelingWith(), placePartyAtPlayer()
+
 ### feastSurge (`feastBuff.js`)
 Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build carefully"). Replaces the retired on-strike feastBurn trigger: a feast grants a buff window that decays at the durationNights-th dawn (2 dawns from 2026-10-12 — a dusk feast buys the night plus the full next day). During the window, strikes AND ability resolutions read the feasted multiplier. The devotion arming (scholar.prog.feastSurge) is the gate — the buff only grants when armed.
 

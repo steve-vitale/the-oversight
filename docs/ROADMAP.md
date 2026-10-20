@@ -1,6 +1,19 @@
 # ROADMAP: what's built, what's next, how to do it
 
-2026-10-20 current bounded Codex goal: finish accepted-favor lifecycle on the
+2026-10-20 rolling Codex release goal: complete small concrete milestones in
+serial, with real mobile play/save verification, shared checks, balanced
+measurement for gameplay changes and Muse reconciliation before publication.
+The favor-journal milestone shipped on982cb3c40. The joint dawn water-run
+milestone shipped asf19057e14: real travel, carrying and cistern delivery,
+saved progress and honest deadline/blocker handling. Other joint jobs and
+public-release gates stay open. Keep the rolling goal active between milestones.
+
+The current bounded Codex milestone is generated Haven
+entrance/exit accessibility: a tent landed on the documented doorstep during
+actual phone play. Verify placement order and sibling footprints, preserve
+existing player structures, and prove reachable entrances across seeds and UI.
+
+2026-10-20 completed bounded Codex goal: accepted-favor lifecycle on the
 shared a86496f72 history. Track concrete requirements, effective due day and
 completion/expiry in the existing People journal; preserve them through
 Continue; retain real actions on reminder conversations; keep the reader inside
