@@ -1,0 +1,29 @@
+=== seed 15001 day 120 — conversation with Iker (app_mgpspieb929) ===
+occupation=mechanic temperament=cautious trust=74 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: Give me four walls and a roof and I'll make it a home in a week. Watch me.
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:invite, dlg:more, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:more] "What would it take?"
+THEM: "I rearranged the bunks again last night. Nobody noticed. That's fine — it felt right for an hour."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I'm not running from anything. I'm running toward the feeling of arriving."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "I want a door I can close. Not to keep people out — just to know I could."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "Four walls and a roof and I'd make it a home in a week. Watch me."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "Home isn't a place. It's people who notice when you're quiet. I'm collecting those."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Every camp I make, I try to make it feel like arriving. It never quite does. Yet."
+(want=ask_favor stage=2)
+YOU: [goon] "Say more about that."
+THEM: "Alright — carefully, now. Both of us."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

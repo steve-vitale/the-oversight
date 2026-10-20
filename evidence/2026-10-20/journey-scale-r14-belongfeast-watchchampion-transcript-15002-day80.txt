@@ -1,0 +1,26 @@
+=== seed 15002 day 80 — conversation with Nino (nino_kapanadze) ===
+occupation=dry cleaner temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're staying — Are you going to stay? With us. For real."
+(turn0 choices: ans:q_stay:a_tell, ans:q_stay:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Emma just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Emma is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "People are talking about Emma. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Did you hear? Daniyar won Hardened Pantry Raid on the cameras. People are still talking about it."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "I should go. You know where to find me."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged
