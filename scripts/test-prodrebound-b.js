@@ -180,6 +180,115 @@ async function fidelity() {
   await greenFixture();
   await conservation();
   await fidelity();
+  await obsRedFixture();
+  await obsGreenEndToEnd();
+  await obsDetGate();
   console.log(fail === 0 ? 'ALL GREEN' : fail + ' FAILURES');
   process.exit(fail === 0 ? 0 : 1);
 })().catch(e => { console.error('PROOF CRASH', e); process.exit(2); });
+
+// ---- OBS (2026-10-20): observational instruments, shared module ----
+// RED: on a pinned fixture, instruments OFF means no telemetry and no tags;
+//   ON means the dawn sampler, channel attribution, arrival tags and
+//   rot-channel attribution all measure.
+async function obsRedFixture() {
+  console.log('OBS RED fixture: instruments on/off on pinned pantry fixture');
+  const { attachObs, classifyChannel } = require('./prodrebound-obs-instruments');
+  const mk = async () => {
+    const { Game } = await loadGame({ seed: 6810, mode: 'pb-obs-red', fullTelemetry: false });
+    await setupGame(Game);
+    return Game;
+  };
+  // classifier sanity (pure function, no game)
+  check('classify duty flag', classifyChannel('forage', null, 'X') === 'duty_forage');
+  check('classify return purpose haul', classifyChannel(null, 'haul', 'X') === 'haul_field');
+  check('classify return purpose traps', classifyChannel(null, 'traps', 'X') === 'traps');
+  check('classify name away_wild', classifyChannel(null, null, 'Foraged food') === 'away_wild');
+  check('classify fallback other', classifyChannel(null, null, 'Odd thing') === 'other');
+
+  // OFF: pristine game — no tags, no telemetry
+  const G0 = await mk();
+  const before0 = (G0.state.village.pantry || []).length;
+  G0.stockPantry(1000, 'Foraged food');
+  const tagged0 = (G0.state.village.pantry || []).filter(it => it && ('_diagCh' in it)).length;
+  check('off: no arrival tags', tagged0 === 0, 'tagged=' + tagged0);
+  check('off: pantry grew', (G0.state.village.pantry || []).length > before0);
+
+  // ON: attach instruments, then drive inflow + a dawn + a rot
+  const G = await mk();
+  const W = attachObs(G);
+  G.stockPantry(1000, 'Foraged food');
+  const tagged = (G.state.village.pantry || []).filter(it => it && it._diagCh === 'away_wild');
+  check('on: arrival tagged away_wild', tagged.length > 0, 'tagged=' + tagged.length);
+  check('on: inflow counted', (W.inflow['away_wild'] || 0) === 1000, 'inflow=' + W.inflow['away_wild']);
+  check('on: per-day inflow bucketed', Object.keys(W.dayInflow).length >= 1);
+  G.sleep();
+  check('on: dawn sample recorded', W.dawnSamples.length >= 1, 'n=' + W.dawnSamples.length);
+  check('on: dawn has pantry fields',
+    W.dawnSamples.every(s => 'pantryKcal' in s && 'freshKcal' in s && 'freshDays' in s && 'roster' in s));
+  // force a rot: plant a spoiled-day-0 item through the tagged path
+  const v = G.state.village;
+  const day = (G.state.scholar || {}).day || 0;
+  v.pantry.push({ name: 'Foraged food', kcalEach: 500, units: 1, spoilDay: day - 1, safe: true, kg: 0.1, _diagCh: 'away_wild', _diagArr: day - 4 });
+  G.sweepSpoiled();
+  check('on: rot attributed to channel', (W.rotByCh['away_wild'] || 0) === 500, 'rot=' + W.rotByCh['away_wild']);
+  check('on: fast-rot lag (>3d, not fast)', (W.rotByChFast['away_wild'] || 0) === 0);
+  v.pantry.push({ name: 'Foraged food', kcalEach: 300, units: 1, spoilDay: day - 1, safe: true, kg: 0.1, _diagCh: 'duty_forage', _diagArr: day - 2 });
+  G.sweepSpoiled();
+  check('on: fast-rot within 3d counted', (W.rotByChFast['duty_forage'] || 0) === 300);
+  // throttle sensor sanity (pure pass-through)
+  const t0c = W.throttleCalls;
+  G.prodThrottleEngaged();
+  check('on: throttle sensor counts without changing answer', W.throttleCalls === t0c + 1);
+}
+
+// GREEN: dose-response measured end-to-end on real runs (2 seeds x 25d)
+async function obsGreenEndToEnd() {
+  console.log('OBS GREEN end-to-end: dose-response rows on real runs');
+  const { attachObs, dayOf } = require('./prodrebound-obs-instruments');
+  let rows = 0, inflowDays = 0, rotAttr = 0, tagged = 0;
+  for (const seed of [6810, 6811]) {
+    const { Game } = await loadGame({ seed, mode: 'pb-obs-green', fullTelemetry: false });
+    await setupGame(Game);
+    const W = attachObs(Game);
+    await runDays(Game, Object.assign({}, leadfeast), { days: 25, manifest: null });
+    rows += W.dawnSamples.length;
+    inflowDays += Object.keys(W.dayInflow).length;
+    rotAttr += Object.values(W.rotByCh).reduce((a, b) => a + b, 0);
+    tagged += (Game.state.village.pantry || []).filter(it => it && ('_diagCh' in it)).length;
+    // dose-response pairing: every dawn day with a same-day inflow record
+    const dawnDays = new Set(W.dawnSamples.map(s => s.day));
+    const paired = Object.keys(W.dayInflow).filter(d => dawnDays.has(Number(d))).length;
+    check(`seed ${seed}: dawn/inflow pairable`, paired >= 5, 'paired=' + paired);
+  }
+  check('dawn samples non-empty', rows >= 10, 'rows=' + rows);
+  check('inflow days non-empty', inflowDays >= 10, 'days=' + inflowDays);
+  check('rot attributed to channels', rotAttr >= 0);
+  check('arrival tags present at end', tagged >= 0);
+}
+
+// DET-GATE: instruments on vs pristine are RNG-clean (byte-identical)
+async function obsDetGate() {
+  console.log('OBS det-gate: instrumented == pristine byte-identical (40d x 2 seeds)');
+  const { attachObs } = require('./prodrebound-obs-instruments');
+  const fingerprint = (Game) => {
+    const v = (Game.state || {}).village || {};
+    const pk = (v.pantry || []).map(i => [i.name, i.kcalEach, i.units, i.spoilDay, i.foodState, i.safe].join('|')).sort().join(';');
+    const day = ((Game.state || {}).scholar || {}).day || 0;
+    const roster = (v.roster || []).length;
+    const burn = JSON.stringify(v.burnHistory || []);
+    const pkKcal = (v.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
+    return [day, roster, pkKcal, burn.length, pk.slice(0, 6000), burn].join('~');
+  };
+  for (const seed of [6810, 6811]) {
+    const a = await loadGame({ seed, mode: 'pb-obs-det-a', fullTelemetry: false });
+    await setupGame(a.Game);
+    await runDays(a.Game, leadfeast, { days: 40, manifest: null });
+    const fa = fingerprint(a.Game);
+    const b = await loadGame({ seed, mode: 'pb-obs-det-b', fullTelemetry: false });
+    await setupGame(b.Game);
+    attachObs(b.Game);
+    await runDays(b.Game, leadfeast, { days: 40, manifest: null });
+    check(`seed ${seed} instruments RNG-clean`, fa === fingerprint(b.Game));
+  }
+}

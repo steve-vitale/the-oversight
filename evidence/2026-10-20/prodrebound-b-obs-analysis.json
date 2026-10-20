@@ -1,0 +1,224 @@
+{
+ "meta": {
+  "runs": 15,
+  "pairedDays": 2065,
+  "leanThresholdFreshDays": 4
+ },
+ "wall": {
+  "belongfeast": {
+   "n": 8,
+   "won": 0,
+   "table": 8,
+   "national": 0,
+   "w4": 8,
+   "w5": 0,
+   "surv": [
+    118,
+    119,
+    132,
+    154,
+    155,
+    167,
+    168,
+    180
+   ],
+   "ends": {
+    "village-lost": 7,
+    "survived": 1
+   },
+   "starveD": 191,
+   "deaths": {
+    "monster": 29,
+    "ambush": 2,
+    "combat": 71,
+    "a wound that wouldn't close": 5,
+    "starvation": 6,
+    "contest": 4,
+    "dehydration": 2,
+    "sweeps week": 1,
+    "the reunion": 1,
+    "the influencer": 1
+   },
+   "median": 155,
+   "max": 180
+  },
+  "leadfeast": {
+   "n": 7,
+   "won": 0,
+   "table": 6,
+   "national": 7,
+   "w4": 6,
+   "w5": 0,
+   "surv": [
+    84,
+    102,
+    116,
+    142,
+    158,
+    165,
+    180
+   ],
+   "ends": {
+    "village-lost": 6,
+    "survived": 1
+   },
+   "starveD": 174,
+   "deaths": {
+    "monster": 30,
+    "ambush": 2,
+    "the loud beast": 1,
+    "combat": 57,
+    "sickness": 3,
+    "starvation": 5,
+    "lockjaw": 1,
+    "contest": 1,
+    "the night": 1,
+    "sweeps week": 1,
+    "a wound that wouldn't close": 1
+   },
+   "median": 142,
+   "max": 180
+  }
+ },
+ "doseOverall": {
+  "leanMean": 3140,
+  "fatMean": 5158,
+  "ratio": 0.61,
+  "pearson": 0.413,
+  "leanDays": 492,
+  "fatDays": 1573
+ },
+ "channels": {
+  "share_surplus": {
+   "leanMean": 2090,
+   "fatMean": 4376,
+   "ratio": 0.48,
+   "pearson": 0.477,
+   "n": 2065
+  },
+  "duty_forage": {
+   "leanMean": 0,
+   "fatMean": 0,
+   "ratio": null,
+   "pearson": null,
+   "n": 2065
+  },
+  "duty_garden": {
+   "leanMean": 0,
+   "fatMean": 0,
+   "ratio": null,
+   "pearson": null,
+   "n": 2065
+  },
+  "duty_fish": {
+   "leanMean": 371,
+   "fatMean": 13,
+   "ratio": 28.44,
+   "pearson": -0.142,
+   "n": 2065
+  },
+  "duty_hunt": {
+   "leanMean": 0,
+   "fatMean": 0,
+   "ratio": null,
+   "pearson": null,
+   "n": 2065
+  },
+  "duty_cook": {
+   "leanMean": 0,
+   "fatMean": 0,
+   "ratio": null,
+   "pearson": null,
+   "n": 2065
+  },
+  "haul_field": {
+   "leanMean": 0,
+   "fatMean": 0,
+   "ratio": null,
+   "pearson": null,
+   "n": 2065
+  },
+  "traps": {
+   "leanMean": 12,
+   "fatMean": 28,
+   "ratio": 0.44,
+   "pearson": -0.01,
+   "n": 2065
+  },
+  "away_wild": {
+   "leanMean": 495,
+   "fatMean": 522,
+   "ratio": 0.95,
+   "pearson": 0.022,
+   "n": 2065
+  },
+  "other": {
+   "leanMean": 172,
+   "fatMean": 219,
+   "ratio": 0.78,
+   "pearson": -0.025,
+   "n": 2065
+  }
+ },
+ "marginalRot": {
+  "share_surplus": {
+   "inflowK": 8029,
+   "rotK": 2779,
+   "rotShare": 0.346,
+   "fastRotK": 1115,
+   "fastRotShare": 0.139
+  },
+  "away_wild": {
+   "inflowK": 1104,
+   "rotK": 414,
+   "rotShare": 0.375,
+   "fastRotK": 180,
+   "fastRotShare": 0.163
+  },
+  "other": {
+   "inflowK": 440,
+   "rotK": 174,
+   "rotShare": 0.395,
+   "fastRotK": 77,
+   "fastRotShare": 0.176
+  },
+  "system": {
+   "inflowK": 7,
+   "rotK": 3,
+   "rotShare": 0.373,
+   "fastRotK": 1,
+   "fastRotShare": 0.194
+  },
+  "duty_fish": {
+   "inflowK": 210,
+   "rotK": 9,
+   "rotShare": 0.044,
+   "fastRotK": 8,
+   "fastRotShare": 0.037
+  },
+  "traps": {
+   "inflowK": 51,
+   "rotK": 21,
+   "rotShare": 0.415,
+   "fastRotK": 11,
+   "fastRotShare": 0.218
+  }
+ },
+ "throttle": {
+  "lean": {
+   "calls": 370,
+   "engaged": 15,
+   "rate": 0.041
+  },
+  "fat": {
+   "calls": 3473,
+   "engaged": 3449,
+   "rate": 0.993
+  }
+ },
+ "dutySmokeDrive": {
+  "leanMean": 1707,
+  "fatMean": 2804,
+  "ratio": 0.61
+ }
+}
