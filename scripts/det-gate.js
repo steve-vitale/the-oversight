@@ -40,6 +40,7 @@ function dayHash(Game) {
 async function runOnce(seed, policy, opts) {
   opts = opts || {};
   const days = opts.days || 180;
+  const sampleEvery = opts.sampleEvery || 1; // 2026-10-20: allow cheap long-horizon gates (e.g. 181 = no sampling); default keeps old behavior
   const { Game } = await loadGame({ seed, mode: opts.mode || 'det-gate' });
   await setupGame(Game);
   const hashes = [];
@@ -49,7 +50,7 @@ async function runOnce(seed, policy, opts) {
     hashes.push(Game.state.scholar.day + ':' + dayHash(Game));
     return base ? base(G, ctx) : undefined;
   };
-  const r = await runDays(Game, wrapped, { days, sampleEvery: 1 });
+  const r = await runDays(Game, wrapped, { days, sampleEvery });
   return { hashes, days: r.days, endReason: r.endReason };
 }
 
