@@ -89,8 +89,11 @@ What was missing: nothing structural. The sick were tended, the dead were buried
 
 ## Regressions
 
-- scripts-only changes (journey-crisis-r31 scan fix + deaths record; new census-probe-crisis-r32.js). Zero src/js touched.
-- [REGRESSION RUN PENDING — check.js --quick or targeted crisis suites after census lands.]
+- scripts-only changes (journey-crisis-r31 scan fix + deaths record + census integration; run note). Zero src/js touched.
+- `scripts/test-crisis-20261009.js`: 18/18 green (re-run on rebased tip 8662462a7).
+- `scripts/test-crisis-outbreak-20261012.js`: 20/20 green.
+- `scripts/test-crisis-prior-convictions-20261019.js` (r29 proof): 12/12 green.
+- Rebased onto maintree/master 8de1b508b (sibling sim-outshone-liveness landing) — clean, no conflicts; suites re-run after rebase.
 
 ## Telemetry
 
@@ -98,8 +101,8 @@ What was missing: nothing structural. The sick were tended, the dead were buried
 
 ## Files
 
-- Instrument fix: `scripts/journey-crisis-r31-outbreak-20261020.js` (outbreak-topic scan shapes; deaths record)
-- New: `scripts/census-probe-crisis-r32.js`
-- Per-seed records: `hidden_files/evidence/2026-10-20/crisis-r32/journey-crisis-r32-seed{7,42,99,424242}.json`
-- Transcripts: `hidden_files/evidence/2026-10-20/crisis-r32/journey-crisis-r31-seed*-*.txt` (12)
+- Instrument fix: `scripts/journey-crisis-r31-outbreak-20261020.js` (outbreak-topic scan shapes; deaths record; end-state census integration)
+- Run note: `evidence/2026-10-20/journey-crisis-r32.md`
+- Per-seed records: `hidden_files/evidence/2026-10-20/crisis-r32/journey-crisis-r32-seed{7,42,99,424242}.json` (goal workspace)
+- Transcripts: `hidden_files/evidence/2026-10-20/crisis-r32/journey-crisis-r31-seed*-*.txt` (12; goal workspace)
 - Rotation: journey-rotation-b.txt 6→7 after this run.
