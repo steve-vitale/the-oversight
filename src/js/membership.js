@@ -880,12 +880,20 @@
         m.loaned = null;
         var tonm = 'them';
         try { tonm = this._ovName ? this._ovName(to) : tonm; } catch (e2) {}
+        // NAMED NON-VILLAGE POSTINGS (journey-scale r15): 'the world feed'
+        // and 'the first court' are not villages — _ovName degrades to
+        // "them" and the line read "days at them's fire". They read as
+        // places instead: "days in the light" / "days in the first court".
+        var _placeWord = { 'the world feed': 'the light', 'the first court': 'the first court' };
+        var _place = _placeWord[to] || null;
         // BREAK-IT travel r12 (sibling): same dead-class as awayParties —
         // a loaned representative killed while "abroad" (their node never
         // moves) doesn't walk back in. The death was already said aloud.
         var ldead = false;
         try { var _lvp = this.vpOf ? this.vpOf(lvid) : null; if (_lvp && _lvp.dead) ldead = true; } catch (e0) {}
-        if (ldead) this.say(`Word comes late: ${nm} never made it home from ${tonm}'s fire.`);
+        if (ldead) this.say(_place ? `Word comes late: ${nm} never made it home from ${_place}.`
+                                   : `Word comes late: ${nm} never made it home from ${tonm}'s fire.`);
+        else if (_place) this.say(`${nm} walks back in — days in ${_place}, served. Still ours; membership never needed presence.`);
         else this.say(`${nm} walks back in — days at ${tonm}'s fire, served. Still ours; membership never needed presence.`);
       } catch (e) {}
     },
