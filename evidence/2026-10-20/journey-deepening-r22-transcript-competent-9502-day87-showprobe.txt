@@ -1,0 +1,12 @@
+=== seed 9502 day 87 — conversation with Nora (nora_wilson) ===
+occupation=tailor temperament=gentle trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you still sing — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+(turn0 choices: ans:q_song:a_yes, ans:q_song:a_no, ans:q_song:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going. It'll keep."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

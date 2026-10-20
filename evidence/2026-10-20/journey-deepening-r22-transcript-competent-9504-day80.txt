@@ -1,0 +1,32 @@
+=== seed 9504 day 80 — conversation with Hudson (gen_7lvwe21) ===
+occupation=fishing guide temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about that favor — we wandered off it, 2 days back. 'Forget I said anything. What did you want?'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=0)
+YOU: [dlg:help] "How can I help?"
+THEM: "I haven't eaten right in days. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Tomas is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Tomas said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Nobody says Tomas's name right yet. We will. Give it a few days."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Tomas's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=3)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=ask_favor stage=3 resolution=promised

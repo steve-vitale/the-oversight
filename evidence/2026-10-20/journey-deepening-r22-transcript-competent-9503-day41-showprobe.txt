@@ -1,0 +1,21 @@
+=== seed 9503 day 41 — conversation with Chloe (chloe_dubois) ===
+occupation=interpreter temperament=dry trust=39 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: I dream about finding them. Then I wake up and the dreaming feels like the real part.
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that. Give it time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Did you hear? Pearl just walked away from Haven. Didn't look back. It'll pass."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

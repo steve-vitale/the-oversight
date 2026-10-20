@@ -1,0 +1,21 @@
+=== seed 9504 day 18 — conversation with Hudson (gen_7lvwe21) ===
+occupation=fishing guide temperament=anxious trust=55 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Have you heard anything? About the taken. The pods. Anything at all."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. Makes sense to me."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Ruth is back. Walked in like they'd never left."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=1)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=seek_taken stage=3 resolution=unresolved

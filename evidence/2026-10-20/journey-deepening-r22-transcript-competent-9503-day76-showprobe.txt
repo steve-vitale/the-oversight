@@ -1,0 +1,31 @@
+=== seed 9503 day 76 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you miss most? From before."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. You doing okay?"
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Chloe asked me about you. A lot of questions. Friendly ones. Too friendly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Common Plantain — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pokeweed — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

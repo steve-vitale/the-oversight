@@ -1,0 +1,32 @@
+=== seed 9504 day 35 — conversation with Hudson (gen_7lvwe21) ===
+occupation=fishing guide temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I asked Peyton about the food I needed — Peyton's gone. Still need hands. Are you in?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? You'd know about that."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Did you hear? Ruth just walked away from Haven. Didn't look back. Probably fine. Probably."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=1)
+YOU: [teach] "Watch. This matters."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=1)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=1)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Common Plantain — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=1)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=ask_favor stage=3 resolution=unresolved

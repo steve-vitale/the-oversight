@@ -1,0 +1,21 @@
+=== seed 9503 day 23 — conversation with Christian (gen_g0tit3e) ===
+occupation=taxi driver temperament=mischievous trust=27 dead=false mood=grieving
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the food I needed — we got it handled. Thanks anyway."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:want:ask_favor, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Tatsuya? A Pharmacist, back before. Solid person. You're doing fine."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? ...sorry."
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=unresolved

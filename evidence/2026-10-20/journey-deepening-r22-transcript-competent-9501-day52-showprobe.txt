@@ -1,0 +1,21 @@
+=== seed 9501 day 52 — conversation with Aria (aria_thompson) ===
+occupation=musician temperament=gentle trust=62 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: I want one day where I laugh until it hurts and it's not from nerves.
+(turn0 choices: ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses, friend."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want? No pressure, though."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "I'm not saying there's anything wrong with Mara. I'm just saying I sleep better with them on the other side of the fire."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? ...if that makes sense."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Go gently, okay?"
+want final: id=curious stage=3 resolution=engaged

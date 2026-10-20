@@ -1,0 +1,18 @@
+=== seed 9503 day 60 — conversation with Tatsuya (gen_e94c69l) ===
+occupation=Pharmacist temperament=sardonic trust=51 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. You'd know about that."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, dlg:commit, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Did you hear? Jesse just walked away from Haven. Didn't look back."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Famous last words."
+(want=seek_taken stage=1)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=seek_taken stage=3 resolution=unresolved

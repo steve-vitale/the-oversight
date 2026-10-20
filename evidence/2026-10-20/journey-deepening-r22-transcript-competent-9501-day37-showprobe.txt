@@ -1,0 +1,18 @@
+=== seed 9501 day 37 — conversation with Jada (gen_4z7ga3i) ===
+occupation=crossing guard temperament=withdrawn trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: betrayal:accept, betrayal:decline, confront:d_0qz3erc, dlg:commit, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Someone should talk to Brian. Not me, though."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? ...never mind."
+(want=seek_taken stage=1)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=seek_taken stage=3 resolution=unresolved

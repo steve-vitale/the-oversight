@@ -1,0 +1,32 @@
+=== seed 9502 day 72 — conversation with Hank (gen_533oqmq) ===
+occupation=Chef temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: I'll go alone if I have to. But I'd rather not go alone.
+(turn0 choices: dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Well — Did you hear? Giuseppe just walked away from Haven. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "Huh. Let me think about that." "Last time things were different. They always are." "The Maw. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "Good question." "You're family now. Chosen family — the kind that actually counts." "That's where we are."
+(want=ask_favor stage=2)
+closing line: "Okay! Moving! Talk later — probably while moving!"
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,21 @@
+=== seed 9504 day 60 — conversation with Hudson (gen_7lvwe21) ===
+occupation=fishing guide temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. Worth considering."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's been days since a real meal. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

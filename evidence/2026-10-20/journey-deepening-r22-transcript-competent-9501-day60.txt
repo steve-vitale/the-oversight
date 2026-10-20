@@ -1,0 +1,26 @@
+=== seed 9501 day 60 — conversation with Jada (gen_4z7ga3i) ===
+occupation=crossing guard temperament=withdrawn trust=90 dead=false mood=cheerful
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: confront:d_0qz3erc, dlg:commit, alive:event:defense, dlg:cant, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=3)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=seek_taken stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Burdock — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=3)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Alright — I should get back to it."
+(want=seek_taken stage=3)
+YOU: (leave)
+want final: id=seek_taken stage=3 resolution=promised

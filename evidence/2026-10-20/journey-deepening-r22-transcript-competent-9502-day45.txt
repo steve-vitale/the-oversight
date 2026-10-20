@@ -1,0 +1,12 @@
+=== seed 9502 day 45 — conversation with Stan (stan_kowalski) ===
+occupation=exterminator temperament=dry trust=84 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your read on people here — Got a read on anyone here yet? Who should I be watching?"
+(turn0 choices: ans:q_read:a_honest, ans:q_read:a_name, ans:q_read:a_none, ans:q_read:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Do try to stay alive. The paperwork otherwise is murder."
+want final: id=curious stage=3 resolution=engaged

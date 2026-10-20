@@ -1,0 +1,18 @@
+=== seed 9503 day 96 — conversation with Jesse (jesse_cortez) ===
+occupation=line cook temperament=withdrawn trust=90 dead=false mood=cheerful
+want: curious (stage 0)
+
+THEM: "I tried the Greenbrier Shoots like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:curious, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Did you hear? You won Hardened The Pit on the cameras. People are still talking about it."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=0)
+YOU: (leave)
+closing line: "I need some air. Alone air. You understand."
+want final: id=curious stage=3 resolution=unestablished

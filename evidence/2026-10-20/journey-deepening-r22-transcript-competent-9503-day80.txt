@@ -1,0 +1,18 @@
+=== seed 9503 day 80 — conversation with Christian (gen_g0tit3e) ===
+occupation=taxi driver temperament=mischievous trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? I can't keep going like this."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Oh — My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=ask_favor stage=3 resolution=promised

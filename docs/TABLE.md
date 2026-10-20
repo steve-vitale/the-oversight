@@ -376,7 +376,7 @@ standing. Documented honestly where proxies are used.
 
 Facilitation verbs (chosen play):
 - teach them (existing teaching — knowledge transfer is real; 2026-10-13:
-  wired for real — the villager learns plants the Bearer <redacted> via
+  wired for real — the villager learns plants the Bearer knows via
   the conversation teach path's stores, so the lesson feeds their
   ascension score)
 - hand them the relay (`appointSwitchboard` — exists; the office is the

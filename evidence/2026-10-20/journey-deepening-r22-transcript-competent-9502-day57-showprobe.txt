@@ -1,0 +1,21 @@
+=== seed 9502 day 57 — conversation with Hank (gen_533oqmq) ===
+occupation=Chef temperament=restless trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — do you have anything to eat? Anything at all? My hands shake when I try to work. Gotta keep moving."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Quick version — Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Lillian touch it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Right — things to do, always things to do."
+want final: id=ask_favor stage=3 resolution=unresolved

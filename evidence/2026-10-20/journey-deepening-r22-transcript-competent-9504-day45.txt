@@ -1,0 +1,12 @@
+=== seed 9504 day 45 — conversation with Hudson (gen_7lvwe21) ===
+occupation=fishing guide temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about that favor — that was 10 days back. Still on your mind? 'Sorry — I shouldn't load that on you. What's up? You'd know about that.' That's my read."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unestablished

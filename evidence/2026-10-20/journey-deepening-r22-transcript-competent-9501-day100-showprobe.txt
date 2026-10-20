@@ -1,0 +1,18 @@
+=== seed 9501 day 100 — conversation with Brian (brian_otieno) ===
+occupation=zookeeper temperament=gentle trust=90 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I still haven't found anyone. Any chance? No time to waste."
+(turn0 choices: dlg:commit, alive:event:mourning, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Did you hear? Jada won The Drop on the cameras. People are still talking about it, as it were."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Anyway."
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=ask_favor stage=3 resolution=stated

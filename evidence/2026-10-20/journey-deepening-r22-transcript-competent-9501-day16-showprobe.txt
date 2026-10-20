@@ -1,0 +1,32 @@
+=== seed 9501 day 16 — conversation with Brian (brian_otieno) ===
+occupation=zookeeper temperament=gentle trust=37 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "We're eating through stores faster than we replace them. Will you forage with me tomorrow? Two pairs of eyes, twice the ground. ...if that makes sense."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "I won Pantry Raid. On camera. People won't shut up about it — and honestly? Neither will I. Let's move."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Permit me: Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Burdock — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=1)
+closing line: "Thank you for listening. Really listening. That's rare."
+want final: id=ask_favor stage=3 resolution=unresolved

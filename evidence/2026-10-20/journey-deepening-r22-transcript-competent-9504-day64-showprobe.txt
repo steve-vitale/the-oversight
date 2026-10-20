@@ -1,0 +1,21 @@
+=== seed 9504 day 64 — conversation with Hudson (gen_7lvwe21) ===
+occupation=fishing guide temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Hey — I found some Blackberry today. You were right, it was right where you said. …sorry."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:memory:promise_broken, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Just thinking out loud."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Ursula? A Mortician, back before. Solid person. ...sorry, I'm spiraling."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unestablished

@@ -1,0 +1,18 @@
+=== seed 9502 day 63 — conversation with Katarina (katarina_novak) ===
+occupation=journalist temperament=bold trust=88 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about the kindest thing someone's done for you — we left it mid-thought, 4 days back. 'That's the good stuff. Quiet generosity. It's holding this whole thing together.'"
+(turn0 choices: alive:event:show, alive:want:ask_favor, dlg:help, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? That's my read."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Did you hear? Lillian just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? No point pretending otherwise."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Right. Back to it."
+want final: id=ask_favor stage=3 resolution=unestablished

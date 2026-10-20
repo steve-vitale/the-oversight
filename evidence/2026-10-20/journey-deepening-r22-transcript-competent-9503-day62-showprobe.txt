@@ -1,0 +1,21 @@
+=== seed 9503 day 62 — conversation with Christian (gen_g0tit3e) ===
+occupation=taxi driver temperament=mischievous trust=88 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but tell me you've got food to spare. I'm going hungry here. My hands shake when I try to work."
+(turn0 choices: alive:event:show, alive:memory:promise_broken, dlg:help, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Pearl? A trail crew lead, back before. Solid person."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. I'm listening."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unresolved
