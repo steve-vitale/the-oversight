@@ -1,0 +1,5346 @@
+{
+ "seed": 81310,
+ "policyId": "leadfeast",
+ "substrate": "tablepathdriver-win-side",
+ "days": 89,
+ "gameDays": 90,
+ "endReason": "over-other",
+ "won": true,
+ "wins": true,
+ "national": true,
+ "table": true,
+ "exiled": false,
+ "maxRank": 4,
+ "nationalDay": 77,
+ "maxWave": 4,
+ "wave45": 1,
+ "wave5": 0,
+ "wave4Day": 64,
+ "wave5Day": null,
+ "tableDay": 83,
+ "tableDayFloorOk": false,
+ "satEver": true,
+ "sittingDay": 90,
+ "seatAtSit": "lesser",
+ "tableDoneDay": 90,
+ "tableActiveDays": 0,
+ "phaseTrace": [
+  "done"
+ ],
+ "tpAssigned": "relay",
+ "relayAtSit": {
+  "held": false,
+  "lean": -48,
+  "band": "dark",
+  "grounding": 100,
+  "darkUses": 8,
+  "lightUses": 0,
+  "bond": 4,
+  "stage": 3,
+  "delayed": 0,
+  "routed": 0,
+  "hasRewrite": true,
+  "hasSkim": true
+ },
+ "relayAtEnd": {
+  "held": false,
+  "lean": -48,
+  "band": "dark",
+  "grounding": 100,
+  "darkUses": 8,
+  "lightUses": 0,
+  "bond": 4,
+  "stage": 3,
+  "delayed": 0,
+  "routed": 0,
+  "hasRewrite": true,
+  "hasSkim": true
+ },
+ "tpdSummary": {
+  "assigned": "relay",
+  "trial": false,
+  "answers": 7,
+  "stalls": 0,
+  "walked": [],
+  "doorEvents": [
+   {
+    "day": 90,
+    "picked": "path:relay",
+    "fellBack": false,
+    "why": "assigned+relay",
+    "missWhy": null
+   }
+  ],
+  "trialEvents": [],
+  "finalsEvents": [
+   {
+    "day": 90,
+    "path": "relay",
+    "branch": "dark",
+    "finalId": "final:voice"
+   }
+  ],
+  "branchMargins": {},
+  "drainError": 0
+ },
+ "rdSummary": {
+  "active": true,
+  "claimed": 1,
+  "claimDay": 47,
+  "claimAttempts": 1,
+  "claimFailed": 0,
+  "waitingLink": 45,
+  "held": 1,
+  "deepens": 2,
+  "efficients": 8,
+  "rewrites": 7,
+  "skims": 1,
+  "nullVerbs": 0,
+  "verbError": 0,
+  "noDarkAbil": 0,
+  "done": 1,
+  "doneDay": 65,
+  "floorStop": 0,
+  "stoppedTable": 0,
+  "lean": -48,
+  "grounding": 44,
+  "darkUses": 8,
+  "lightUses": 0,
+  "bond": 2,
+  "stage": 3,
+  "rdError": 0
+ },
+ "otierMax": 0,
+ "otierNullRecs": 0,
+ "instrumentErrors": 0,
+ "kdErrors": 0,
+ "kdKills": 23,
+ "deaths": {
+  "villager combat": 8,
+  "combat": 17,
+  "starvation": 1,
+  "ambush": 1,
+  "Big-Eyes": 1,
+  "Highbeam Deer": 1,
+  "expedition": 1,
+  "monster": 1,
+  "a wound that wouldn't close": 1
+ },
+ "deathsAttributed": {
+  "rawCount": 32,
+  "dedupedCount": 11,
+  "attributed": [
+   {
+    "who": "gen_h1pyaw8",
+    "name": "Nosipho",
+    "day": 13,
+    "cause": "starvation",
+    "kind": "villager",
+    "player": false,
+    "wave": null,
+    "channel": "haven",
+    "rule": "cause",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": false,
+     "onExped": true,
+     "aid": false
+    },
+    "stateAtDeath": {
+     "pantry": 30199,
+     "hungryStreak": 0,
+     "armored": 3,
+     "armed": 11,
+     "vets": 0,
+     "tricks": 7,
+     "short": [
+      "armor",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 0,
+     "war": 0,
+     "dip": 0,
+     "plenty": 0,
+     "cap": 0,
+     "def5": false,
+     "roster": 12,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "gen_3m5rhat",
+    "name": "Akmaral",
+    "day": 16,
+    "cause": "ambush",
+    "kind": "person",
+    "player": false,
+    "wave": null,
+    "channel": "other",
+    "rule": "cause-unmapped",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": false,
+     "onExped": false,
+     "aid": false
+    },
+    "stateAtDeath": {
+     "pantry": 30031,
+     "hungryStreak": 0,
+     "armored": 3,
+     "armed": 11,
+     "vets": 0,
+     "tricks": 9,
+     "short": [
+      "armor",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 0,
+     "war": 0,
+     "dip": 0,
+     "plenty": 0,
+     "cap": 0,
+     "def5": false,
+     "roster": 11,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "gen_dn1mqm6",
+    "name": "Peyton",
+    "day": 19,
+    "cause": "Big-Eyes",
+    "kind": "villager",
+    "player": false,
+    "wave": null,
+    "channel": "other",
+    "rule": "cause-unmapped",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": false,
+     "onExped": true,
+     "aid": true
+    },
+    "stateAtDeath": {
+     "pantry": 20206,
+     "hungryStreak": 1,
+     "armored": 3,
+     "armed": 10,
+     "vets": 0,
+     "tricks": 12,
+     "short": [
+      "armor",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 0,
+     "war": 0,
+     "dip": 0,
+     "plenty": 0,
+     "cap": 0,
+     "def5": false,
+     "roster": 10,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "gen_rovoich",
+    "name": "Carmen",
+    "day": 35,
+    "cause": "Highbeam Deer",
+    "kind": "villager",
+    "player": false,
+    "wave": null,
+    "channel": "expedition",
+    "rule": "monster-name=expedDeath",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": false,
+     "onExped": true,
+     "aid": false
+    },
+    "stateAtDeath": {
+     "pantry": 32374,
+     "hungryStreak": 1,
+     "armored": 3,
+     "armed": 9,
+     "vets": 0,
+     "tricks": 17,
+     "short": [
+      "armor",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 20,
+     "war": 0,
+     "dip": 0,
+     "plenty": 20,
+     "cap": 20,
+     "def5": false,
+     "roster": 9,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "gen_46mimrr",
+    "name": "Dante",
+    "day": 80,
+    "cause": "combat",
+    "kind": "villager",
+    "player": true,
+    "wave": null,
+    "channel": "raid",
+    "rule": "ctx:aid-crisis",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": true,
+     "onExped": false,
+     "aid": true
+    },
+    "stateAtDeath": {
+     "pantry": 23848,
+     "hungryStreak": 0,
+     "armored": 5,
+     "armed": 7,
+     "vets": 0,
+     "tricks": 19,
+     "short": [
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 192,
+     "war": 50,
+     "dip": 102,
+     "plenty": 40,
+     "cap": 192,
+     "def5": false,
+     "roster": 8,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "aki_tanaka",
+    "name": "Aki",
+    "day": 81,
+    "cause": "combat",
+    "kind": "villager",
+    "player": true,
+    "wave": null,
+    "channel": "raid",
+    "rule": "ctx:aid-crisis",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": true,
+     "onExped": false,
+     "aid": true
+    },
+    "stateAtDeath": {
+     "pantry": 18875,
+     "hungryStreak": 0,
+     "armored": 5,
+     "armed": 6,
+     "vets": 0,
+     "tricks": 19,
+     "short": [
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 192,
+     "war": 50,
+     "dip": 102,
+     "plenty": 40,
+     "cap": 192,
+     "def5": false,
+     "roster": 7,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "ruby_callaghan",
+    "name": "Ruby",
+    "day": 82,
+    "cause": "combat",
+    "kind": "villager",
+    "player": true,
+    "wave": null,
+    "channel": "raid",
+    "rule": "ctx:aid-crisis",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": true,
+     "onExped": false,
+     "aid": true
+    },
+    "stateAtDeath": {
+     "pantry": 17075,
+     "hungryStreak": 0,
+     "armored": 4,
+     "armed": 5,
+     "vets": 0,
+     "tricks": 19,
+     "short": [
+      "weapons",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 192,
+     "war": 50,
+     "dip": 102,
+     "plenty": 40,
+     "cap": 192,
+     "def5": false,
+     "roster": 6,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "naran_tumen",
+    "name": "Naran",
+    "day": 82,
+    "cause": "combat",
+    "kind": "villager",
+    "player": true,
+    "wave": null,
+    "channel": "raid",
+    "rule": "ctx:aid-crisis",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": true,
+     "onExped": false,
+     "aid": true
+    },
+    "stateAtDeath": {
+     "pantry": 14475,
+     "hungryStreak": 0,
+     "armored": 3,
+     "armed": 4,
+     "vets": 0,
+     "tricks": 19,
+     "short": [
+      "armor",
+      "weapons",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 237,
+     "war": 75,
+     "dip": 102,
+     "plenty": 60,
+     "cap": 237,
+     "def5": true,
+     "roster": 5,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": false,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "hassan_ali",
+    "name": "Hassan",
+    "day": 84,
+    "cause": "monster",
+    "kind": "villager",
+    "player": false,
+    "wave": null,
+    "channel": "wild",
+    "rule": "ctx:router",
+    "ctx": {
+     "router": "wild",
+     "atHaven": true,
+     "inTb": false,
+     "onExped": false,
+     "aid": false
+    },
+    "stateAtDeath": {
+     "pantry": 12475,
+     "hungryStreak": 0,
+     "armored": 3,
+     "armed": 6,
+     "vets": 0,
+     "tricks": 19,
+     "short": [
+      "armor",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 237,
+     "war": 75,
+     "dip": 102,
+     "plenty": 60,
+     "cap": 237,
+     "def5": true,
+     "roster": 6,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": true,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "gen_xk9wra2",
+    "name": "Hazel",
+    "day": 86,
+    "cause": "combat",
+    "kind": "villager",
+    "player": true,
+    "wave": null,
+    "channel": "raid",
+    "rule": "ctx:scholar-fight-at-haven",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": true,
+     "onExped": false,
+     "aid": false
+    },
+    "stateAtDeath": {
+     "pantry": 8330,
+     "hungryStreak": 0,
+     "armored": 4,
+     "armed": 5,
+     "vets": 0,
+     "tricks": 19,
+     "short": [
+      "weapons",
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 237,
+     "war": 75,
+     "dip": 102,
+     "plenty": 60,
+     "cap": 237,
+     "def5": true,
+     "roster": 6,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": true,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   },
+   {
+    "who": "boris_kowalski",
+    "name": "Boris",
+    "day": 89,
+    "cause": "a wound that wouldn't close",
+    "kind": "villager",
+    "player": false,
+    "wave": null,
+    "channel": "haven",
+    "rule": "cause",
+    "ctx": {
+     "router": null,
+     "atHaven": true,
+     "inTb": false,
+     "onExped": false,
+     "aid": false
+    },
+    "stateAtDeath": {
+     "pantry": 2000,
+     "hungryStreak": 0,
+     "armored": 5,
+     "armed": 6,
+     "vets": 0,
+     "tricks": 20,
+     "short": [
+      "veterans"
+     ],
+     "rdy": false,
+     "raw": 237,
+     "war": 75,
+     "dip": 102,
+     "plenty": 60,
+     "cap": 237,
+     "def5": true,
+     "roster": 6,
+     "scholarAlive": true
+    },
+    "tableAtDeath": {
+     "waiting": true,
+     "done": false,
+     "sitting": 0,
+     "phase": null,
+     "path": null,
+     "branch": null,
+     "beat": null,
+     "seat": null,
+     "winDeferred": false,
+     "floorOk": false,
+     "active": false,
+     "otier": 0
+    }
+   }
+  ],
+  "attributedCount": 11,
+  "phantoms": [],
+  "phantomCount": 0,
+  "unverifiable": [],
+  "unverifiableCount": 0,
+  "unattributed": [],
+  "unattributedCount": 0,
+  "causeSpace": {
+   "starvation": 1,
+   "ambush": 1,
+   "Big-Eyes": 1,
+   "Highbeam Deer": 1,
+   "combat": 5,
+   "monster": 1,
+   "a wound that wouldn't close": 1
+  }
+ },
+ "fightStarts": [
+  {
+   "day": 10,
+   "mid": "nevermore",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 10,
+   "mid": "belltoad",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 10,
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 10,
+   "mid": "belltoad",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 10,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 10,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 10,
+   "mid": "mirrormoth",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 11,
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 11,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 12,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 12,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 13,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 13,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 13,
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 14,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 14,
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 14,
+   "mid": "anaconda_empress",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 16,
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 16,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 16,
+   "mid": "nightlight_catfish",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 17,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 17,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 18,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 18,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 18,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 18,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 18,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 18,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 19,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 19,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 19,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 19,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 21,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 21,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 22,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 24,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 25,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 25,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 25,
+   "mid": "voice_mimic_radio",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 25,
+   "mid": "bright_idea",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 25,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 26,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 26,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 27,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 27,
+   "mid": "paparazzo",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 29,
+   "mid": "anaconda_empress",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 29,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 30,
+   "mid": "paparazzo",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 32,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 32,
+   "mid": "warranty_caller",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "paparazzo",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 34,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 34,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 34,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 35,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 35,
+   "mid": "paparazzo",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 36,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 37,
+   "mid": "paparazzo",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 38,
+   "mid": "paparazzo",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 38,
+   "mid": "heckler",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 41,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 42,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 42,
+   "mid": "anaconda_empress",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 42,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 43,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 43,
+   "mid": "mirrormoth",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 44,
+   "mid": "statickite",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 45,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 47,
+   "mid": "paparazzo",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 48,
+   "mid": "lockpick_raccoon",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 49,
+   "mid": "giant_mosquito",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 49,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 49,
+   "mid": "statickite",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 49,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 49,
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 50,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 50,
+   "mid": "nightcourt",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 50,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 53,
+   "mid": "anaconda_empress",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 53,
+   "mid": "anaconda_empress",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 54,
+   "mid": "anaconda_empress",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 55,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 55,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 55,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 56,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 56,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 57,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 57,
+   "mid": "chorus_line",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 57,
+   "mid": "chorus_line",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 59,
+   "mid": "callback",
+   "wave": 3,
+   "via": "combat_start"
+  },
+  {
+   "day": 59,
+   "mid": "terms_of_service",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 59,
+   "mid": "chorus_line",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 59,
+   "mid": "voice_mimic_radio",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 59,
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 60,
+   "mid": "terms_of_service",
+   "wave": 3,
+   "via": "combat_start"
+  },
+  {
+   "day": 60,
+   "mid": "terms_of_service",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 60,
+   "mid": "chorus_line",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 60,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 63,
+   "mid": "terms_of_service",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 63,
+   "mid": "statickite",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 64,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 67,
+   "mid": "voice_mimic_radio",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 68,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 68,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 69,
+   "mid": "chorus_line",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 70,
+   "mid": "chorus_line",
+   "wave": 3,
+   "via": "router:wild"
+  },
+  {
+   "day": 80,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 80,
+   "mid": "spool",
+   "wave": 3,
+   "via": "combat_start"
+  },
+  {
+   "day": 80,
+   "mid": "reunion",
+   "wave": 4,
+   "via": "combat_start"
+  },
+  {
+   "day": 81,
+   "mid": "suburb",
+   "wave": 4,
+   "via": "combat_start"
+  },
+  {
+   "day": 82,
+   "mid": "terms_of_service",
+   "wave": 3,
+   "via": "combat_start"
+  },
+  {
+   "day": 82,
+   "mid": "callback",
+   "wave": 3,
+   "via": "combat_start"
+  },
+  {
+   "day": 82,
+   "mid": "reunion",
+   "wave": 4,
+   "via": "combat_start"
+  },
+  {
+   "day": 84,
+   "mid": "eulogy",
+   "wave": 4,
+   "via": "router:wild"
+  },
+  {
+   "day": 84,
+   "mid": "eulogy",
+   "wave": 4,
+   "via": "router:wild"
+  },
+  {
+   "day": 86,
+   "mid": "mirrormoth",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 86,
+   "mid": "ad_break",
+   "wave": 3,
+   "via": "combat_start"
+  },
+  {
+   "day": 88,
+   "mid": "sweeps_week",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 89,
+   "mid": "spool",
+   "wave": 3,
+   "via": "router:wild"
+  }
+ ],
+ "recs": [
+  {
+   "d": 2,
+   "st": {
+    "pantry": 41310,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 3,
+   "st": {
+    "pantry": 35002,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 4,
+   "st": {
+    "pantry": 32093,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 5,
+   "st": {
+    "pantry": 30787,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 6,
+   "st": {
+    "pantry": 31494,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 7,
+   "st": {
+    "pantry": 30500,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 8,
+   "st": {
+    "pantry": 33832,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 11,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 9,
+   "st": {
+    "pantry": 34069,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 11,
+    "vets": 0,
+    "tricks": 0,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 10,
+   "st": {
+    "pantry": 34243,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 11,
+    "vets": 0,
+    "tricks": 1,
+    "short": [
+     "armor",
+     "tricks",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 1,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 11,
+   "st": {
+    "pantry": 33482,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 11,
+    "vets": 0,
+    "tricks": 4,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 12,
+   "st": {
+    "pantry": 31816,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 11,
+    "vets": 0,
+    "tricks": 6,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 13,
+   "st": {
+    "pantry": 31599,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 11,
+    "vets": 0,
+    "tricks": 7,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 12,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 14,
+   "st": {
+    "pantry": 31735,
+    "hungryStreak": 1,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 8,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 11,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 15,
+   "st": {
+    "pantry": 31129,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 8,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 11,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 16,
+   "st": {
+    "pantry": 30097,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 11,
+    "vets": 0,
+    "tricks": 9,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 11,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 17,
+   "st": {
+    "pantry": 28026,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 10,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 10,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 18,
+   "st": {
+    "pantry": 24032,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 10,
+    "vets": 0,
+    "tricks": 12,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 10,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 19,
+   "st": {
+    "pantry": 20206,
+    "hungryStreak": 1,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 12,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 20,
+   "st": {
+    "pantry": 18884,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 12,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 21,
+   "st": {
+    "pantry": 17962,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 12,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 22,
+   "st": {
+    "pantry": 18899,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 12,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 23,
+   "st": {
+    "pantry": 19853,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 12,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 24,
+   "st": {
+    "pantry": 19212,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 13,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 25,
+   "st": {
+    "pantry": 19388,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 13,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 26,
+   "st": {
+    "pantry": 18586,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 14,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 27,
+   "st": {
+    "pantry": 18636,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 14,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 0,
+    "war": 0,
+    "dip": 0,
+    "plenty": 0,
+    "cap": 0,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 28,
+   "st": {
+    "pantry": 17248,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 14,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 29,
+   "st": {
+    "pantry": 24699,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 15,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 30,
+   "st": {
+    "pantry": 27807,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 16,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 31,
+   "st": {
+    "pantry": 30683,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 16,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 32,
+   "st": {
+    "pantry": 33945,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 33,
+   "st": {
+    "pantry": 37863,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 34,
+   "st": {
+    "pantry": 41034,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 35,
+   "st": {
+    "pantry": 32374,
+    "hungryStreak": 1,
+    "armored": 3,
+    "armed": 9,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 9,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 36,
+   "st": {
+    "pantry": 44287,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 37,
+   "st": {
+    "pantry": 41947,
+    "hungryStreak": 1,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 38,
+   "st": {
+    "pantry": 41098,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 39,
+   "st": {
+    "pantry": 41806,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 40,
+   "st": {
+    "pantry": 41702,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 41,
+   "st": {
+    "pantry": 41630,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 42,
+   "st": {
+    "pantry": 35627,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 20,
+    "war": 0,
+    "dip": 0,
+    "plenty": 20,
+    "cap": 20,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 43,
+   "st": {
+    "pantry": 38235,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 44,
+   "st": {
+    "pantry": 40273,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 45,
+   "st": {
+    "pantry": 40096,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 46,
+   "st": {
+    "pantry": 38906,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 47,
+   "st": {
+    "pantry": 35243,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 48,
+   "st": {
+    "pantry": 40909,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 49,
+   "st": {
+    "pantry": 37096,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 17,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 2,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 50,
+   "st": {
+    "pantry": 48059,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 51,
+   "st": {
+    "pantry": 49598,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 52,
+   "st": {
+    "pantry": 51817,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 53,
+   "st": {
+    "pantry": 52244,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 54,
+   "st": {
+    "pantry": 52981,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 55,
+   "st": {
+    "pantry": 52158,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 56,
+   "st": {
+    "pantry": 37136,
+    "hungryStreak": 1,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 57,
+   "st": {
+    "pantry": 44700,
+    "hungryStreak": 2,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 58,
+   "st": {
+    "pantry": 46584,
+    "hungryStreak": 3,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 40,
+    "war": 0,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 40,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 59,
+   "st": {
+    "pantry": 48333,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "armor",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 65,
+    "war": 25,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 65,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 60,
+   "st": {
+    "pantry": 48039,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 65,
+    "war": 25,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 65,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 61,
+   "st": {
+    "pantry": 45234,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 65,
+    "war": 25,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 65,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 62,
+   "st": {
+    "pantry": 44686,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 65,
+    "war": 25,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 65,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 63,
+   "st": {
+    "pantry": 38827,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 65,
+    "war": 25,
+    "dip": 0,
+    "plenty": 40,
+    "cap": 65,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 3,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 64,
+   "st": {
+    "pantry": 48835,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 65,
+   "st": {
+    "pantry": 47441,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 66,
+   "st": {
+    "pantry": 45813,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 67,
+   "st": {
+    "pantry": 46525,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 68,
+   "st": {
+    "pantry": 49071,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 69,
+   "st": {
+    "pantry": 50205,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 70,
+   "st": {
+    "pantry": 39767,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 71,
+   "st": {
+    "pantry": 49663,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 72,
+   "st": {
+    "pantry": 50076,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 18,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 73,
+   "st": {
+    "pantry": 49296,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 74,
+   "st": {
+    "pantry": 46433,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 75,
+   "st": {
+    "pantry": 46258,
+    "hungryStreak": 1,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 76,
+   "st": {
+    "pantry": 45125,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 77,
+   "st": {
+    "pantry": 21762,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 78,
+   "st": {
+    "pantry": 29645,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 79,
+   "st": {
+    "pantry": 25648,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 167,
+    "war": 25,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 167,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 80,
+   "st": {
+    "pantry": 23848,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 8,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 192,
+    "war": 50,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 192,
+    "def5": false,
+    "roster": 8,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 81,
+   "st": {
+    "pantry": 17875,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 6,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 192,
+    "war": 50,
+    "dip": 102,
+    "plenty": 40,
+    "cap": 192,
+    "def5": false,
+    "roster": 6,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 82,
+   "st": {
+    "pantry": 13975,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 4,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 4,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 83,
+   "st": {
+    "pantry": 13075,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 5,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 5,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": true,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 84,
+   "st": {
+    "pantry": 7246,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 5,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 5,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": true,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 85,
+   "st": {
+    "pantry": 8530,
+    "hungryStreak": 0,
+    "armored": 3,
+    "armed": 5,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 5,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": true,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 86,
+   "st": {
+    "pantry": 7330,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 5,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "weapons",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 5,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": true,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 87,
+   "st": {
+    "pantry": 4530,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 5,
+    "vets": 0,
+    "tricks": 19,
+    "short": [
+     "weapons",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 5,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": true,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 88,
+   "st": {
+    "pantry": 4300,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 6,
+    "vets": 0,
+    "tricks": 20,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 6,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": true,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 89,
+   "st": {
+    "pantry": 3000,
+    "hungryStreak": 0,
+    "armored": 5,
+    "armed": 6,
+    "vets": 0,
+    "tricks": 20,
+    "short": [
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 6,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": true,
+    "done": false,
+    "sitting": 0,
+    "phase": null,
+    "path": null,
+    "branch": null,
+    "beat": null,
+    "seat": null,
+    "winDeferred": false,
+    "floorOk": false,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": false
+  },
+  {
+   "d": 90,
+   "st": {
+    "pantry": 3000,
+    "hungryStreak": 0,
+    "armored": 4,
+    "armed": 5,
+    "vets": 0,
+    "tricks": 20,
+    "short": [
+     "weapons",
+     "veterans"
+    ],
+    "rdy": false,
+    "raw": 237,
+    "war": 75,
+    "dip": 102,
+    "plenty": 60,
+    "cap": 237,
+    "def5": true,
+    "roster": 5,
+    "scholarAlive": true
+   },
+   "tb": {
+    "waiting": false,
+    "done": true,
+    "sitting": 1,
+    "phase": "done",
+    "path": "relay",
+    "branch": "dark",
+    "beat": 4,
+    "seat": "lesser",
+    "winDeferred": false,
+    "floorOk": true,
+    "active": false,
+    "otier": 0
+   },
+   "otier": 0,
+   "uw": 4,
+   "alive": true,
+   "won": true
+  }
+ ],
+ "endRec": {
+  "d": 90,
+  "st": {
+   "pantry": 3000,
+   "hungryStreak": 0,
+   "armored": 4,
+   "armed": 5,
+   "vets": 0,
+   "tricks": 20,
+   "short": [
+    "weapons",
+    "veterans"
+   ],
+   "rdy": false,
+   "raw": 237,
+   "war": 75,
+   "dip": 102,
+   "plenty": 60,
+   "cap": 237,
+   "def5": true,
+   "roster": 5,
+   "scholarAlive": true
+  },
+  "tb": {
+   "waiting": false,
+   "done": true,
+   "sitting": 1,
+   "phase": "done",
+   "path": "relay",
+   "branch": "dark",
+   "beat": 4,
+   "seat": "lesser",
+   "winDeferred": false,
+   "floorOk": true,
+   "active": false,
+   "otier": 0
+  },
+  "otier": 0,
+  "uw": 4,
+  "alive": true,
+  "won": true
+ },
+ "hashes": [
+  "2:2|97|2330|12|4|4|1|413",
+  "3:3|95|2310|12|4|4|1|350",
+  "4:4|100|1489|12|4|4|1|321",
+  "5:5|100|1202|12|4|4|1|308",
+  "6:6|100|1171|12|4|4|1|315",
+  "7:7|100|1130|12|4|4|1|305",
+  "8:8|100|1290|12|4|4|1|338",
+  "9:9|100|1207|12|4|4|1|341",
+  "10:10|100|1072|12|4|4|1|342",
+  "11:11|70|980|12|4|4|2|335",
+  "12:12|91|982|12|4|4|2|318",
+  "13:13|100|1140|12|4|4|2|316",
+  "14:14|100|1192|11|4|4|2|317",
+  "15:15|95|2380|11|4|4|2|311",
+  "16:16|90|2210|11|4|4|2|301",
+  "17:17|67|2285|10|4|4|2|280",
+  "18:18|97|2334|10|4|4|2|240",
+  "19:19|83|2247|9|4|4|2|202",
+  "20:20|100|2243|9|4|4|2|189",
+  "21:21|100|2390|9|4|4|2|180",
+  "22:22|90|2320|9|4|4|2|189",
+  "23:23|100|2330|9|4|4|2|199",
+  "24:24|100|2370|9|4|4|2|192",
+  "25:25|95|2267|9|4|4|2|194",
+  "26:26|82|2320|9|4|4|2|186",
+  "27:27|100|2390|9|4|4|2|186",
+  "28:28|100|2330|9|4|4|2|172",
+  "29:29|100|2330|9|4|4|2|247",
+  "30:30|100|2390|9|4|4|2|278",
+  "31:31|100|2330|9|4|4|2|307",
+  "32:32|100|2320|9|4|4|2|339",
+  "33:33|100|2390|9|4|4|2|379",
+  "34:34|100|2330|9|4|4|2|410",
+  "35:35|100|2330|9|4|4|2|324",
+  "36:36|100|2390|8|4|4|2|443",
+  "37:37|100|2330|8|4|4|2|419",
+  "38:38|100|2320|8|4|4|2|411",
+  "39:39|100|2390|8|4|4|2|418",
+  "40:40|100|2330|8|4|4|2|417",
+  "41:41|100|2320|8|4|4|2|416",
+  "42:42|93|2390|8|4|4|2|356",
+  "43:43|93|2330|8|4|4|2|382",
+  "44:44|93|2168|8|4|4|2|403",
+  "45:45|100|2330|8|4|4|2|401",
+  "46:46|100|2330|8|4|4|2|389",
+  "47:47|81|2320|8|4|4|2|352",
+  "48:48|100|2390|8|4|4|2|409",
+  "49:49|100|2330|8|4|4|2|371",
+  "50:50|93|2320|8|4|4|3|481",
+  "51:51|67|2330|8|4|4|3|496",
+  "52:52|97|2390|8|4|4|3|518",
+  "53:53|100|2320|8|4|4|3|522",
+  "54:54|100|2330|8|4|4|3|530",
+  "55:55|100|2390|8|4|4|3|522",
+  "56:56|100|2330|8|4|4|3|371",
+  "57:57|100|2320|8|4|4|3|447",
+  "58:58|100|2390|8|4|4|3|466",
+  "59:59|37|2330|8|4|4|3|483",
+  "60:60|37|2320|8|4|4|3|480",
+  "61:61|67|2390|8|4|4|3|452",
+  "62:62|67|2130|8|4|4|3|447",
+  "63:63|97|2320|8|4|4|3|388",
+  "64:64|100|2390|8|4|4|4|488",
+  "65:65|100|2330|8|4|4|4|474",
+  "66:66|100|2320|8|4|4|4|458",
+  "67:67|100|2390|8|4|4|4|465",
+  "68:68|100|2330|8|4|4|4|491",
+  "69:69|100|2320|8|4|4|4|502",
+  "70:70|58|2390|8|4|4|4|398",
+  "71:71|88|2330|8|4|4|4|497",
+  "72:72|100|2330|8|4|4|4|501",
+  "73:73|100|2370|8|4|4|4|493",
+  "74:74|100|2330|8|4|4|4|464",
+  "75:75|100|2330|8|4|4|4|463",
+  "76:76|100|2380|8|4|4|4|451",
+  "77:77|100|2330|8|4|4|4|218",
+  "78:78|100|2330|8|4|4|4|296",
+  "79:79|95|2380|8|4|4|4|256",
+  "80:80|100|2330|8|5|4|4|238",
+  "81:81|100|2330|6|4|4|4|179",
+  "82:82|100|2400|4|4|4|4|140",
+  "83:83|100|2330|5|4|4|4|131",
+  "84:84|100|2225|5|4|4|4|72",
+  "85:85|100|2355|5|4|4|4|85",
+  "86:86|100|2290|5|4|4|4|73",
+  "87:87|100|2189|5|4|4|4|45",
+  "88:88|62|2310|6|4|4|4|43",
+  "89:89|89|2385|6|4|4|4|30",
+  "90:90|100|2141|5|4|4|4|30"
+ ]
+}

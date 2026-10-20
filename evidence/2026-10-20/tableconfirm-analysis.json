@@ -1,0 +1,1773 @@
+{
+  "wall": {
+    "armed": {
+      "n": 24,
+      "national": 20,
+      "table": 12,
+      "wins": 19,
+      "wave4": 15,
+      "wave5": 0,
+      "sat": 19,
+      "invited": 12,
+      "medianSurvival": 92,
+      "maxSurvival": 182
+    },
+    "control": {
+      "n": 24,
+      "national": 20,
+      "table": 15,
+      "wins": 19,
+      "wave4": 17,
+      "wave5": 0,
+      "sat": 19,
+      "invited": 15,
+      "medianSurvival": 90,
+      "maxSurvival": 182
+    }
+  },
+  "legs": {
+    "L1": {
+      "num": 10,
+      "den": 12,
+      "go": true
+    },
+    "L2": {
+      "num": 6,
+      "den": 7,
+      "go": true
+    },
+    "L3": {
+      "num": 7,
+      "go": true
+    }
+  },
+  "guardrails": {
+    "errors": {
+      "n": 0,
+      "go": true
+    },
+    "deathModes": {
+      "new": [
+        "The Callback",
+        "sample:The Callback",
+        "The Terms of Service",
+        "sample:The Terms of Service",
+        "Murkcap",
+        "sample:Murkcap",
+        "Ugly-Eyes",
+        "sample:Ugly-Eyes",
+        "Spool",
+        "sample:Spool"
+      ],
+      "go": false
+    },
+    "conversion": {
+      "sat": 19,
+      "invited": 12,
+      "ratio": 1.5833333333333333,
+      "go": true
+    },
+    "national": {
+      "armed": 20,
+      "control": 20,
+      "go": true
+    },
+    "table": {
+      "armed": 12,
+      "control": 15,
+      "go": false
+    }
+  },
+  "verdict": "NO-GO",
+  "runs": [
+    {
+      "policyId": "leadfeast",
+      "seed": 81301,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "witness",
+      "walked": [
+        {
+          "path": "witness",
+          "branch": "light",
+          "day": 90,
+          "fellBack": false,
+          "finalId": "final:charges",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:witness",
+          "fellBack": false,
+          "why": "assigned+witness",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {
+        "feared": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "indispensable": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "beloved": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "witness": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "assimilated": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "defiant": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        }
+      },
+      "relayAtSit": {
+        "held": false,
+        "lean": 0,
+        "band": "grey",
+        "grounding": 100,
+        "darkUses": 0,
+        "lightUses": 0,
+        "bond": 0,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": false,
+        "hasSkim": false
+      },
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81302,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": false,
+      "sat": true,
+      "sittingDay": 102,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 102,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 102,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": true,
+        "lean": -100,
+        "band": "dark",
+        "grounding": 40,
+        "darkUses": 25,
+        "lightUses": 0,
+        "bond": 4,
+        "stage": 3,
+        "delayed": 8,
+        "routed": 16,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 80,
+        "doneDay": 98,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 13,
+        "skims": 12,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81303,
+      "endReason": "survived",
+      "won": false,
+      "national": true,
+      "invited": false,
+      "sat": false,
+      "sittingDay": null,
+      "assigned": "relay",
+      "walked": [],
+      "terminal": false,
+      "doorEvents": [],
+      "branchMargins": {},
+      "relayAtSit": null,
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 47,
+        "doneDay": 65,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 1,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81304,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": false,
+      "sat": true,
+      "sittingDay": 97,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 97,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 97,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": false,
+        "lean": -52,
+        "band": "dark",
+        "grounding": 100,
+        "darkUses": 9,
+        "lightUses": 0,
+        "bond": 4,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 47,
+        "doneDay": 66,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 2,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81305,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": false,
+      "sat": true,
+      "sittingDay": 146,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 146,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 146,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": false,
+        "lean": -66,
+        "band": "dark",
+        "grounding": 92,
+        "darkUses": 9,
+        "lightUses": 0,
+        "bond": 3,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 56,
+        "doneDay": 73,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 5,
+        "skims": 4,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81306,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "witness",
+      "walked": [
+        {
+          "path": "witness",
+          "branch": "light",
+          "day": 90,
+          "fellBack": false,
+          "finalId": "final:charges",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:witness",
+          "fellBack": false,
+          "why": "assigned+witness",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {
+        "feared": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "indispensable": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "beloved": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "witness": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "assimilated": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "defiant": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        }
+      },
+      "relayAtSit": {
+        "held": false,
+        "lean": 0,
+        "band": "grey",
+        "grounding": 100,
+        "darkUses": 0,
+        "lightUses": 0,
+        "bond": 0,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": false,
+        "hasSkim": false
+      },
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81307,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 93,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 93,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 93,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": false,
+        "lean": -52,
+        "band": "dark",
+        "grounding": 96,
+        "darkUses": 9,
+        "lightUses": 0,
+        "bond": 4,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 47,
+        "doneDay": 66,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 2,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81308,
+      "endReason": "village-lost",
+      "won": false,
+      "national": false,
+      "invited": false,
+      "sat": false,
+      "sittingDay": null,
+      "assigned": "relay",
+      "walked": [],
+      "terminal": false,
+      "doorEvents": [],
+      "branchMargins": {},
+      "relayAtSit": null,
+      "rdActive": true,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "claimDay": null,
+        "doneDay": null,
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81309,
+      "endReason": "village-lost",
+      "won": false,
+      "national": true,
+      "invited": false,
+      "sat": false,
+      "sittingDay": null,
+      "assigned": "relay",
+      "walked": [],
+      "terminal": false,
+      "doorEvents": [],
+      "branchMargins": {},
+      "relayAtSit": null,
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 48,
+        "doneDay": 67,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 3,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81310,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 90,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": false,
+        "lean": -48,
+        "band": "dark",
+        "grounding": 100,
+        "darkUses": 8,
+        "lightUses": 0,
+        "bond": 4,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 47,
+        "doneDay": 65,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 1,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81311,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "witness",
+      "walked": [
+        {
+          "path": "witness",
+          "branch": "light",
+          "day": 90,
+          "fellBack": false,
+          "finalId": "final:charges",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:witness",
+          "fellBack": false,
+          "why": "assigned+witness",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {
+        "feared": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "indispensable": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "beloved": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "witness": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "assimilated": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "defiant": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        }
+      },
+      "relayAtSit": {
+        "held": false,
+        "lean": 0,
+        "band": "grey",
+        "grounding": 100,
+        "darkUses": 0,
+        "lightUses": 0,
+        "bond": 0,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": false,
+        "hasSkim": false
+      },
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "leadfeast",
+      "seed": 81312,
+      "endReason": "village-lost",
+      "won": false,
+      "national": true,
+      "invited": false,
+      "sat": false,
+      "sittingDay": null,
+      "assigned": "witness",
+      "walked": [],
+      "terminal": false,
+      "doorEvents": [],
+      "branchMargins": {},
+      "relayAtSit": null,
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81301,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 99,
+      "assigned": "witness",
+      "walked": [
+        {
+          "path": "witness",
+          "branch": "light",
+          "day": 99,
+          "fellBack": false,
+          "finalId": "final:charges",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 99,
+          "picked": "path:witness",
+          "fellBack": false,
+          "why": "assigned+witness",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {
+        "feared": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "indispensable": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "beloved": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "witness": {
+          "branch": "light",
+          "dark": 0,
+          "light": 5,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "assimilated": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        },
+        "defiant": {
+          "branch": "light",
+          "dark": 0,
+          "light": 4,
+          "notes": [
+            "the protected outnumber the killed",
+            "the food truth was shared"
+          ]
+        }
+      },
+      "relayAtSit": {
+        "held": false,
+        "lean": 0,
+        "band": "grey",
+        "grounding": 100,
+        "darkUses": 0,
+        "lightUses": 0,
+        "bond": 0,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": false,
+        "hasSkim": false
+      },
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81302,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": false,
+      "sat": true,
+      "sittingDay": 156,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": null,
+          "day": 156,
+          "fellBack": false,
+          "finalId": null,
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 156,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": true,
+        "lean": -48,
+        "band": "dark",
+        "grounding": 0,
+        "darkUses": 8,
+        "lightUses": 0,
+        "bond": 2,
+        "stage": 3,
+        "delayed": 8,
+        "routed": 16,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 49,
+        "doneDay": 67,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 1,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81303,
+      "endReason": "over-other",
+      "won": true,
+      "national": false,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 93,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 93,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 93,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": true,
+        "lean": -86,
+        "band": "dark",
+        "grounding": 29,
+        "darkUses": 10,
+        "lightUses": 0,
+        "bond": 4,
+        "stage": 3,
+        "delayed": 8,
+        "routed": 16,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 59,
+        "doneDay": 77,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 5,
+        "skims": 5,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81304,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": null,
+          "day": 90,
+          "fellBack": false,
+          "finalId": null,
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": true,
+        "lean": -48,
+        "band": "dark",
+        "grounding": 14,
+        "darkUses": 8,
+        "lightUses": 0,
+        "bond": 3,
+        "stage": 3,
+        "delayed": 8,
+        "routed": 16,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 42,
+        "doneDay": 60,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 1,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81305,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "witness",
+      "walked": [
+        {
+          "path": "defiant",
+          "branch": "light",
+          "day": 90,
+          "fellBack": true,
+          "finalId": "final:walk",
+          "missWhy": "You didn't keep the list (1 exposures on record — the trial needs 3)."
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:defiant",
+          "fellBack": true,
+          "why": "fallback: assigned=witness not earned/offered; earned=[feared,beloved,assimilated,defiant,relay]",
+          "missWhy": "You didn't keep the list (1 exposures on record — the trial needs 3)."
+        }
+      ],
+      "branchMargins": {
+        "feared": {
+          "branch": "light",
+          "dark": 0,
+          "light": 2,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "indispensable": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "beloved": {
+          "branch": "dark",
+          "dark": 2,
+          "light": 1,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "witness": {
+          "branch": "light",
+          "dark": 0,
+          "light": 1,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "assimilated": {
+          "branch": "light",
+          "dark": 0,
+          "light": 1,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "defiant": {
+          "branch": "light",
+          "dark": 0,
+          "light": 2,
+          "notes": [
+            "the food truth was shared"
+          ]
+        }
+      },
+      "relayAtSit": {
+        "held": false,
+        "lean": 0,
+        "band": "grey",
+        "grounding": 100,
+        "darkUses": 0,
+        "lightUses": 0,
+        "bond": 0,
+        "stage": 2,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": false,
+        "hasSkim": false
+      },
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81306,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": false,
+      "sat": true,
+      "sittingDay": 98,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 98,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 98,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": false,
+        "lean": -52,
+        "band": "dark",
+        "grounding": 100,
+        "darkUses": 9,
+        "lightUses": 0,
+        "bond": 2,
+        "stage": 2,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 42,
+        "doneDay": 61,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 2,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81307,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 90,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": false,
+        "lean": -56,
+        "band": "dark",
+        "grounding": 96,
+        "darkUses": 10,
+        "lightUses": 0,
+        "bond": 4,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 42,
+        "doneDay": 61,
+        "floorStop": false,
+        "deepens": 1,
+        "rewrites": 7,
+        "skims": 3,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81308,
+      "endReason": "village-lost",
+      "won": false,
+      "national": false,
+      "invited": false,
+      "sat": false,
+      "sittingDay": null,
+      "assigned": "relay",
+      "walked": [],
+      "terminal": false,
+      "doorEvents": [],
+      "branchMargins": {},
+      "relayAtSit": null,
+      "rdActive": true,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "claimDay": null,
+        "doneDay": null,
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81309,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": false,
+      "sat": true,
+      "sittingDay": 114,
+      "assigned": "witness",
+      "walked": [
+        {
+          "path": "witness",
+          "branch": "light",
+          "day": 114,
+          "fellBack": false,
+          "finalId": "final:charges",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 114,
+          "picked": "path:witness",
+          "fellBack": false,
+          "why": "assigned+witness",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {
+        "feared": {
+          "branch": "light",
+          "dark": 0,
+          "light": 2,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "indispensable": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "beloved": {
+          "branch": "dark",
+          "dark": 2,
+          "light": 1,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "witness": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "assimilated": {
+          "branch": "light",
+          "dark": 0,
+          "light": 1,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "defiant": {
+          "branch": "light",
+          "dark": 0,
+          "light": 2,
+          "notes": [
+            "the food truth was shared"
+          ]
+        }
+      },
+      "relayAtSit": {
+        "held": false,
+        "lean": 0,
+        "band": "grey",
+        "grounding": 100,
+        "darkUses": 0,
+        "lightUses": 0,
+        "bond": 0,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": false,
+        "hasSkim": false
+      },
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81310,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 90,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": true,
+        "lean": -100,
+        "band": "dark",
+        "grounding": 78,
+        "darkUses": 11,
+        "lightUses": 0,
+        "bond": 5,
+        "stage": 3,
+        "delayed": 8,
+        "routed": 16,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": false,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 80,
+        "doneDay": null,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 6,
+        "skims": 5,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81311,
+      "endReason": "over-other",
+      "won": true,
+      "national": true,
+      "invited": true,
+      "sat": true,
+      "sittingDay": 90,
+      "assigned": "relay",
+      "walked": [
+        {
+          "path": "relay",
+          "branch": "dark",
+          "day": 90,
+          "fellBack": false,
+          "finalId": "final:voice",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 90,
+          "picked": "path:relay",
+          "fellBack": false,
+          "why": "assigned+relay",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {},
+      "relayAtSit": {
+        "held": false,
+        "lean": -52,
+        "band": "dark",
+        "grounding": 100,
+        "darkUses": 9,
+        "lightUses": 0,
+        "bond": 4,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": true,
+        "hasSkim": true
+      },
+      "rdActive": true,
+      "rdDone": true,
+      "rdClaimed": true,
+      "rd": {
+        "claimDay": 42,
+        "doneDay": 61,
+        "floorStop": false,
+        "deepens": 2,
+        "rewrites": 7,
+        "skims": 2,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    },
+    {
+      "policyId": "belongfeast",
+      "seed": 81312,
+      "endReason": "over-other",
+      "won": true,
+      "national": false,
+      "invited": false,
+      "sat": true,
+      "sittingDay": 91,
+      "assigned": "witness",
+      "walked": [
+        {
+          "path": "witness",
+          "branch": "light",
+          "day": 91,
+          "fellBack": false,
+          "finalId": "final:charges",
+          "missWhy": null
+        }
+      ],
+      "terminal": true,
+      "doorEvents": [
+        {
+          "day": 91,
+          "picked": "path:witness",
+          "fellBack": false,
+          "why": "assigned+witness",
+          "missWhy": null
+        }
+      ],
+      "branchMargins": {
+        "feared": {
+          "branch": "light",
+          "dark": 0,
+          "light": 2,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "indispensable": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "beloved": {
+          "branch": "dark",
+          "dark": 2,
+          "light": 1,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "witness": {
+          "branch": "light",
+          "dark": 0,
+          "light": 3,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "assimilated": {
+          "branch": "light",
+          "dark": 0,
+          "light": 1,
+          "notes": [
+            "the food truth was shared"
+          ]
+        },
+        "defiant": {
+          "branch": "light",
+          "dark": 0,
+          "light": 2,
+          "notes": [
+            "the food truth was shared"
+          ]
+        }
+      },
+      "relayAtSit": {
+        "held": false,
+        "lean": 0,
+        "band": "grey",
+        "grounding": 100,
+        "darkUses": 0,
+        "lightUses": 0,
+        "bond": 0,
+        "stage": 3,
+        "delayed": 0,
+        "routed": 0,
+        "hasRewrite": false,
+        "hasSkim": false
+      },
+      "rdActive": false,
+      "rdDone": false,
+      "rdClaimed": false,
+      "rd": {
+        "floorStop": false,
+        "deepens": 0,
+        "rewrites": 0,
+        "skims": 0,
+        "nullVerbs": 0,
+        "noDarkAbil": 0
+      },
+      "seatedDeaths": [],
+      "engineErrors": 0,
+      "complete": true
+    }
+  ]
+}
