@@ -3,12 +3,12 @@
 2026-10-20 rolling Codex release goal: complete small concrete milestones in
 serial, with real mobile play/save verification, shared checks, balanced
 measurement for gameplay changes and Muse reconciliation before publication.
-The favor-journal milestone shipped on982cb3c40. Current milestone: a complete
-joint dawn water run using real travel, carrying and cistern delivery, with
+The favor-journal milestone shipped on982cb3c40. The joint dawn water-run
+milestone shipped asf19057e14: real travel, carrying and cistern delivery,
 saved progress and honest deadline/blocker handling. Other joint jobs and
 public-release gates stay open. Keep the rolling goal active between milestones.
 
-After water publication, the next bounded Codex milestone is generated Haven
+The current bounded Codex milestone is generated Haven
 entrance/exit accessibility: a tent landed on the documented doorstep during
 actual phone play. Verify placement order and sibling footprints, preserve
 existing player structures, and prove reachable entrances across seeds and UI.

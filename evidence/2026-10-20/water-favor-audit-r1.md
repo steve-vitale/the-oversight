@@ -4,6 +4,13 @@ Candidate build: `982cb3c40-20261020-221451`; baseline shared982cb3c40.
 Publication is recorded separately in water-favor-publication-r1.json after
 remote readback. This milestone does not close the public-release checklist.
 
+Publication complete: releasef19057e14 is shared on master/main and
+codex/water-favor-20261020. Production advertises the candidate build;
+all163 deployed boot input hashes match and fresh390×736 touch boot has
+zero page errors. Primary checkout advanced by ordinary fast-forward;
+the unrelated sweep-B.log edit remains untouched. Rolling goal remains active
+with Haven entrance accessibility as its next current milestone.
+
 The actual job requires explicit acceptance, meeting at a following dawn,
 normal walking to a known creek, four canonical fill actions, real split cargo
 and a home handoff. Water quality stays risky until ordinary boiling. The

@@ -1,11 +1,17 @@
 # Muse calibration handoff — conversation/favor repair
 
-## Joint water trip candidate (2026-10-20)
+## Joint water trip shipped (2026-10-20)
 
 Build982cb3c40-20261020-221451 adds one real joint job. Merge the current
 shared master/main after publication; no port or unrelated-history workaround
 is needed. The five earlier Muse recovery fixes remain protected. Use the
 water-favor audit/publication receipt to distinguish verified source from live.
+
+Publication verified: shared releasef19057e14, build982cb3c40-20261020-221451,
+all163 live boot hashes match, fresh mobile boot zero errors. Fetch current
+master/main (including evidence-only follow-up) and merge normally. Full suite
+1,040/0 and both phone journeys/installed offline Continue pass. The retained
+scorecard stays review_required; Codex now owns Haven entrance placement.
 
 Accept explicitly; meet at Haven at a following dawn, walk with the requester
 to a known creek, collect two liters each, return and unload through Talk.

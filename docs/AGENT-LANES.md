@@ -1,6 +1,6 @@
 # Agent lanes (2026-10-15)
 
-## Rolling public-release goal — current milestone: water favor (2026-10-20)
+## Rolling public-release goal — current milestone: Haven entrance (2026-10-20)
 
 Steve asked Codex to keep small concrete goals moving in serial. The previous
 favor-journal milestone shipped on shared 982cb3c40. Codex now owns one actual
@@ -13,12 +13,22 @@ Muse retains calibration; preserve newer work and merge before publication.
 Each completed milestone records proof, shared tip and the next bounded task;
 completion of a milestone does not end the rolling goal.
 
-Next serial milestone after water publication: Haven entrance accessibility.
+Water milestone shipped asf19057e14 on shared master/main and its feature
+branch. Production build982cb3c40-20261020-221451:163 boot hashes match,
+fresh mobile boot clean, full1,040/0; source-bound mobile and installed offline
+Continue proofs retained. See water-favor-publication-r1.json. The paragraphs
+above describe the completed water lane, not a concurrent rewrite assignment.
+
+Current serial milestone: Haven entrance accessibility.
 Native play found a generated tent on the documented doorstep(4,5), despite
 the earlier clearing comment. Verify terrain placement order and reserve a
 reachable entrance/exit on new grounds; audit sibling feature footprints.
 Preserve player-built structures in existing saves. Muse retains calibration;
-Codex owns this terrain/access lane after the water release receipt is saved.
+Codex owns this terrain/access lane now that the water receipt is saved.
+Done when fresh seeded grounds preserve a usable door/exit approach, sibling
+placement cannot overwrite it, existing saved/player structures survive,
+native phone entry/exit works, required checks/measurement pass and the
+verified fix is shared/live. No general redesign of Haven is in scope.
 
 ## Completed favor lifecycle goal (2026-10-20, shipped982cb3c40)
 
