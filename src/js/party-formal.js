@@ -616,18 +616,48 @@
     // ---------- SHARED VICTORY ----------
     // the deed goes in the codex under the party's name.
 
-    partyVictoryBeat(monstersDown) {
+    partyVictoryBeat(monstersDown, deadFighters) {
       const members = this.partyMembers();
       if (!members.length) return;
       const pname = this.partyName();
       const mnames = monstersDown.join(', ');
+      // KILLBEAT ATTRIBUTION (sim-killbeat 2026-10-20, axis scale-onramp,
+      // named next #5 from evidence/2026-10-20/sim-villagergear.md): the beat
+      // used to name every party member for any fight they fought in, so a
+      // scholar's killing blow aired as "Tariq, Aurora brought down The
+      // Understudy. Together." — the fiction credited companions for the
+      // scholar's kill, and killbeat fiction could not be used as evidence
+      // for who killed what. Key the names on the actual final-blow
+      // attribution: each dying monster fighter carries _tbKilledBy
+      // ('p'/'player' = the scholar, a villager fighter key = a companion,
+      // unset = legacy — the same stamp recordWaveKill writes to
+      // waveKillLog, so the beat now matches the log). When the scholar
+      // finished every monster down, the beat names the scholar ("you" —
+      // betrayal.js disp convention) and names no companion. The
+      // companion-finished class is byte-identical to before: the loose
+      // party framing stands, and companionKillBeat gives the precise
+      // credit for wave-3+ kills. Mixed-finisher multi-monster fights keep
+      // the old party framing (rare; the beat stays honest about the fight
+      // being shared even when it can't name one finisher). Defensive: a
+      // beat bug never breaks the victory path — all of this is guarded,
+      // and a missing/unreadable stamp falls back to the old member list.
+      let scholarFinished = false;
+      try {
+        const dead = Array.isArray(deadFighters) ? deadFighters : [];
+        scholarFinished = dead.length > 0 && dead.every(m => {
+          const kb = m && m._tbKilledBy;
+          return kb == null || kb === 'p' || kb === 'player';
+        });
+      } catch (e) { scholarFinished = false; }
+      const names = scholarFinished ? 'You' : members.map(id => this.displayName(id)).join(', ');
+      const together = scholarFinished ? '' : ' Together.';
       if (pname) {
         this.say(`🏆 ${pname} did that. Not one hero — the whole shape of them, moving together. The village will hear this one with the name attached.`);
       }
       try {
         if (this.recordDeed) {
           this.recordDeed(members[0], 'party_kill',
-            `${pname ? pname + ' — ' : ''}${members.map(id => this.displayName(id)).join(', ')} brought down ${mnames}. Together.`, 8);
+            `${pname ? pname + ' — ' : ''}${names} brought down ${mnames}.${together}`, 8);
         }
       } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('might', 1); } catch (e) {}
@@ -806,6 +836,12 @@
     const monstersDown = f ? f.fighters
       .filter(x => x.kind === 'monster' && !x.alive)
       .map(x => x.name || 'the thing') : [];
+    // dead monster FIGHTER records (not just names): partyVictoryBeat keys
+    // its attribution on each fighter's _tbKilledBy final-blow stamp
+    // (sim-killbeat 2026-10-20). Captured before origTbEnd; the records are
+    // the same objects the beat's name list was built from.
+    const deadFighters = f ? f.fighters
+      .filter(x => x.kind === 'monster' && !x.alive && x.mdef) : [];
     const r = origTbEnd.call(this, result);
     try {
       const st = this.partyFormalState();
@@ -813,7 +849,7 @@
       if (f) for (const x of f.fighters) { x.order = null; x.flanking = false; x.holding = false; }
       const lost = /lost|fled|routed/i.test(result || '');
       if (!lost && monstersDown.length && st && (this.partyMembers().length || this.partyNamed())) {
-        this.partyVictoryBeat(monstersDown);
+        this.partyVictoryBeat(monstersDown, deadFighters);
       }
     } catch (e) {}
     return r;
