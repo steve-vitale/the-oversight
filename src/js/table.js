@@ -1207,13 +1207,17 @@
     },
     // tableAscended: villagers whose ascension score clears the bar at the
     // table. Each ascension stacks bargaining power (+path strength) and
-    // gets one beat of pantheon politics.
+    // gets one beat of pantheon politics. DEAD VILLAGERS ARE NOT ELIGIBLE
+    // (sim-outshone-liveness 2026-10-20): the dead flag is set on the
+    // SHARED data.villagers records at death, and the epilogue names the
+    // ascendant as the present-tense god ("The god is someone else") — a
+    // dead villager cannot be that, nor price the audit's standing.
     tableAscended(bar) {
       const out = [];
       try {
         const b = bar == null ? 45 : bar;
         for (const v of (this.data.villagers || [])) {
-          if (!v || v.id === this.villagerId) continue;
+          if (!v || v.id === this.villagerId || v.dead) continue;
           const sc = this.villagerAscensionScore(v.id);
           if (sc.score >= b) out.push({ vid: v.id, name: sc.name, score: sc.score, notes: sc.notes });
         }
