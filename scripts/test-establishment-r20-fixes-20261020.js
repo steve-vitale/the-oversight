@@ -25,7 +25,13 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const NEW_GAME = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
-const OLD_GAME = cp.execSync('git show HEAD:src/js/game.js', { cwd: ROOT, maxBuffer: 64 * 1024 * 1024 }).toString();
+// OLD reference: the merge-base with master (pre-fix). Pre-landing this is
+// master's tip without the fixes, so the OLD asserts demonstrate the RED
+// side of the RED→GREEN. (After this commit lands, merge-base includes the
+// fix and the OLD asserts describe history — the delta was captured
+// pre-landing.)
+const MERGE_BASE = cp.execSync('git merge-base HEAD master', { cwd: ROOT }).toString().trim();
+const OLD_GAME = cp.execSync(`git show ${MERGE_BASE}:src/js/game.js`, { cwd: ROOT, maxBuffer: 64 * 1024 * 1024 }).toString();
 const FOOD = fs.readFileSync(path.join(ROOT, 'src/js/food.js'), 'utf8');
 
 let failures = 0;
