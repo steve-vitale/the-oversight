@@ -13066,7 +13066,7 @@
       const content = document.createElement('div'); content.className = 'field-tool-content';
       contents[name] = content; body.appendChild(content);
     }
-    for (const selector of ['.ord-surround','.ord-compass','.ord-quest-top','.ord-panel','.ord-codex','.ord-taphint']) {
+    for (const selector of ['.ord-surround','.ord-compass','.ord-quest-top','.ord-panel','.ord-taphint']) {
       const el = frame.querySelector(selector); if (el) contents.place.appendChild(el);
     }
     const statusNotes = [...frame.querySelectorAll('.ord-status > .statrow')];
@@ -13076,6 +13076,8 @@
     nav.querySelectorAll('[data-lm]').forEach(el => {
       if (!['pack','character'].includes(el.dataset.lm)) contents.menu.appendChild(el);
     });
+    const journal = frame.querySelector('.ord-codex');
+    if (journal) contents.menu.prepend(journal);
     const choose = name => {
       fieldPanel = name;
       if (name && inlineView && inlineView.kind !== 'person') {
@@ -19227,14 +19229,18 @@
         `<p class="small">${t.sure ? '' : '<i>maybe: </i>'}${esc(t.text)} <span style="opacity:.45">· ${esc(t.via || 'noticed')}</span></p>`).join('');
       const story = (e.backstory || []).map(b => `<p class="small"><i>"${esc(b.text)}"</i></p>`).join('');
       const notes = (e.notes || []).map(n => `<p class="small">· ${esc(n.text)}</p>`).join('');
-      const promises = (e.promises || []).map(p => {
-        const mark = p.status === 'kept' ? '✓' : p.status === 'broken' ? '✗' : '○';
-        const col = p.status === 'kept' ? '#8f8' : p.status === 'broken' ? '#f88' : '#fd8';
-        return `<p class="small" style="color:${col}">${mark} ${esc(p.text)} <span style="opacity:.6">(${p.status})</span></p>`;
+      const promises = Game.journalPromises(vid, e).map(p => {
+        const failed = ['broken', 'expired', 'overdue'].includes(p.status);
+        const mark = p.status === 'kept' ? '✓' : failed ? '✗' : p.status === 'open' ? '○' : '–';
+        const col = p.status === 'kept' ? '#8f8' : failed ? '#f88' : p.status === 'open' ? '#fd8' : '#aaa';
+        const status = ({ open: 'Accepted', kept: 'Completed', expired: 'Expired', overdue: 'Overdue', broken: 'Broken', unavailable: 'Unavailable', cancelled: 'Cancelled — unavailable job', released: 'Released' })[p.status] || p.status;
+        return `<div class="small journal-promise" ${p.favorId ? `data-favor-id="${esc(p.favorId)}"` : ''} style="color:${col}">${mark} ${esc(p.text)} <span style="opacity:.8">(${esc(status)})</span>` +
+          (p.deadlineLabel ? `<p class="small">${esc(p.deadlineLabel)}</p>` : '') +
+          (p.requirements ? `<p class="small">${esc(p.requirements)}</p>` : '') + '</div>';
       }).join('');
       return `<div class="card codex"><h3>${title}${nameNote}</h3>
         <p class="small">${sys ? `<b>OCC:</b> ${occ} · <b>GOAL:</b> ${goal} · <b>LANG:</b> ${langs}` : `${occ}<br>${goal}<br><span style="opacity:.7">Speaks: ${langs}</span>`}</p>
-        ${traits}${story}${notes}${promises}
+        ${promises}${traits}${story}${notes}
         ${Game.personDepthHTML ? Game.personDepthHTML(vid, e) : ''}
         <p class="small" style="opacity:.6">${esc(rel)}</p></div>`;
     }).join('');
@@ -19344,9 +19350,12 @@
     }).filter(Boolean);
     const techniques = Game.techniqueList ? Game.techniqueList() : [];
     screen.innerHTML = `
-      ${bar('scattering://codex', entries.length + ' entries')}
-      <h1 class="title" style="font-size:22px">${Game.journalName().toUpperCase()}</h1>
+      <section class="journal-reader">
+      <header class="journal-reader-head"><h1 class="title">${esc(Game.journalName())}</h1>
+        <button class="btn ghost" id="b-back">Back</button></header>
+      <div class="journal-reader-body" tabindex="0" aria-label="Journal entries">
       <p class="small">${Game.journalName() === 'Codex' ? '<i>the village keeps what you write. the System is watching.</i>' : '<span class="journal-hand">field journal — your handwriting. what you learned, so far just yours.</span>'}</p>
+      ${peopleSection()}
       ${(() => { try { const jo = Game.journalOpening ? Game.journalOpening() : null; return jo && jo.line ? `<p class="hand note">${esc(jo.line)}</p>` : ''; } catch (e) { console.warn('[codex] journalOpening', e && e.message); return ''; } })()}
       ${villageMapSection()}
       ${entries.length ? entries.map(e => `
@@ -19364,7 +19373,6 @@
       ${skills.length ? '<h1 class="title" style="font-size:18px">SKILLS</h1><p class="small"><i>knowledge about anything — not just plants. your old life, books, strangers, hard lessons.</i></p>' + skills.map(s => `
         <div class="card codex"><h3>${esc(s.name)} <span class="small" style="opacity:.7">[L${s.level} · ${esc(s.domain)}]</span></h3>
         <p class="small"><i>${esc(s.text)}</i></p>${s.via ? `<p class="small" style="opacity:.5">via ${esc(s.via)}</p>` : ''}</div>`).join('') : ''}
-      ${peopleSection()}
       ${languagesSection()}
       ${techniques.length ? '<h1 class="title" style="font-size:18px">TECHNIQUES</h1><p class="small"><i>where knowledge meets power.</i></p>' + techniques.map(t => `
         <div class="card codex"><h3>⚡ ${esc(t.name)}</h3><p class="small">${esc(t.effect)}</p></div>`).join('') : ''}
@@ -19426,8 +19434,8 @@
         return `<div class="card codex"><h3>${esc(sp)} <span class="small" style="opacity:.7">[L${e.level || 1}]</span></h3>${e.via ? `<p class="small" style="opacity:.5">via ${esc(e.via)}</p>` : ''}</div>`;
       }).join('') : ''}
       ${codexAliensSection(Game.state.codex.aliens || {})}
-      <button class="btn ghost" id="b-back">Back</button>`;
-    document.getElementById('b-back').onclick = () => expeditionScreen();
+      </div></section>`;
+    document.getElementById('b-back').onclick = () => { fieldPanel = null; expeditionScreen(); };
   }
 
   // ---------- telemetry: the playtest flight recorder ----------

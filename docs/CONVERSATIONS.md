@@ -10,6 +10,35 @@ got talked at — a vending machine, not a conversation.
 
 ## How it works
 
+### Accepted favors and the People journal (2026-10-20)
+
+Hearing a request is not accepting it. “I’ll come back to help” creates a
+typed obligation with the concrete task and a due day. Menu → Journal → People
+shows that same obligation, its current requirements and Accepted, Completed,
+Expired or Cancelled status. Journal entries scroll inside the phone viewport;
+Back stays visible. Reading the journal does not spend time or settle promises.
+Save/Continue preserves the obligation and its history. Repeated favors with
+the same wording retain separate favor IDs rather than overwriting each other.
+
+Food sharing and wound/illness care use their existing physical actions and
+costs. Reminder conversations keep those concrete actions instead of replacing
+“Have you had a chance?” with generic yes/no answers. Requirements explain
+missing pack food, proximity or an already-resolved medical need. Food in a
+pantry must first be collected. An accepted task can be completed during its
+due day; the nightly sweep closes it at that day's end. Unrelated actions on
+the due day do not prematurely break it. A matching deed after the deadline
+can still help the person, but does not earn kept-promise credit or rewrite
+the expired task as completed. Deadline text uses the resolver's effective
+due day, including the existing minimum one-day window for legacy promises.
+
+The five unimplemented joint jobs remain unavailable, with no active deadline
+or broken-promise penalty. Old accepted instances explain that limitation and
+offer a no-penalty close. This journal work does not implement those jobs.
+The lifecycle regression uses the shared harness; the retained touch journey
+uses real conversation, Journal, care, Wait and Continue controls at
+390×736 and 390×844. Prepared needs/clock fixtures are not natural encounter
+coverage or evidence that the broader conversation corpus is finished.
+
 **Replies belong to the spoken exchange.** A question, invitation, price or
 live request owns its decision menu. Other subjects and practical actions wait
 behind an explicit subject change. A genuine queued beat can offer "Go on";

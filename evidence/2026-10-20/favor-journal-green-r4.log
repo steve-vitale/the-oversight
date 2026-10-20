@@ -1,0 +1,35 @@
+  ok   an unrelated deed on the due day does not expire a favor before nightfall
+  ok   a late matching receipt cannot earn kept-promise credit
+  ok   a matching deed during the due day still keeps the favor
+  ok   the nightly check expires an unfinished favor at the end of its due day
+  ok   a closed favor cannot be committed again
+  ok   identically worded repeat favors retain separate task identities
+  ok   the journal exposes a read-only favor projection
+  ok   a completed legacy note is projected once without duplicating the task
+  ok   late physical help still costs real food
+  ok   late physical help preserves the expired promise and honest favor state
+  ok   late help explains the missed deadline
+  ok   care crossing nightfall does not turn an expired promise into success
+  ok   water_haul remains explicitly unavailable without a misleading expired deadline
+  ok   snare_mend remains explicitly unavailable without a misleading expired deadline
+  ok   watch_shift remains explicitly unavailable without a misleading expired deadline
+  ok   stay_close remains explicitly unavailable without a misleading expired deadline
+  ok   forage_help remains explicitly unavailable without a misleading expired deadline
+  ok   food_share has a concrete task, due day and live requirements
+  ok   food_share projection does not mutate save state
+  ok   food_share ordinary save succeeds
+  ok   food_share Continue restores the task and deadline
+  ok   heal_help has a concrete task, due day and live requirements
+  ok   heal_help projection does not mutate save state
+  ok   heal_help ordinary save succeeds
+  ok   heal_help Continue restores the task and deadline
+  ok   sick_help has a concrete task, due day and live requirements
+  ok   sick_help projection does not mutate save state
+  ok   sick_help ordinary save succeeds
+  ok   sick_help Continue restores the task and deadline
+  ok   legacy late acceptance displays the resolver actual minimum day window
+  ok   spoken deadline agrees with the actual saved obligation
+  ok   an unavailable job is cancelled, not labelled broken
+  ok   an accepted favor reminder preserves real action options instead of generic yes/no
+
+Favor journal lifecycle: 33 passed, 0 failed, 0 todo (phase 0)

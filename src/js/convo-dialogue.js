@@ -174,6 +174,7 @@
         const promise = this.state.village.promises?.[vid];
         if (dlg === 'favor_cancel' && status.unsupported && promise?.favorId === favor?.id && !promise.kept) {
           promise.kept = 'unavailable';
+          this.journalFavorPromise?.(vid, promise);
           favor.state = 'moot';
           if (c.want) { c.want.stage = 3; c.want.resolution = 'moot'; }
           result = { ok: false, line: 'The unavailable job is closed. No completion reward or broken-promise penalty was applied.' };
@@ -182,7 +183,7 @@
         // Requirements are interface information, never fabricated NPC speech
         // (and therefore never spoken by the voice package).
         this.sayLine(vid, line, { diegeticAct: true });
-        if (result.ok && c.want) { c.want.stage = 3; c.want.resolution = 'fulfilled'; }
+        if (result.ok && c.want) { c.want.stage = 3; c.want.resolution = result.promiseMissed ? 'broken' : 'fulfilled'; }
         c.replyMenu = null;
         this.save();
         return { line, choices: this.convoChoices(vid), ended: !!this.over, transcript: c.transcript.slice() };

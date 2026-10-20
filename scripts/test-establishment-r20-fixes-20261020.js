@@ -13,7 +13,7 @@
 //   (FOODVOICE2 pattern); the fullness is still computed every resolution.
 //
 // Method: extract the REAL function sources from the worktree (NEW) and from
-// `git show HEAD:src/js/game.js` (OLD — HEAD predates the uncommitted fixes),
+// the immutable parent of the r20 fix (OLD),
 // eval them with controlled fixtures, and assert the before/after delta.
 // No copies of the logic: the assertions run the actual shipped code.
 //
@@ -25,13 +25,10 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const NEW_GAME = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
-// OLD reference: the merge-base with master (pre-fix). Pre-landing this is
-// master's tip without the fixes, so the OLD asserts demonstrate the RED
-// side of the RED→GREEN. (After this commit lands, merge-base includes the
-// fix and the OLD asserts describe history — the delta was captured
-// pre-landing.)
-const MERGE_BASE = cp.execSync('git merge-base HEAD master', { cwd: ROOT }).toString().trim();
-const OLD_GAME = cp.execSync(`git show ${MERGE_BASE}:src/js/game.js`, { cwd: ROOT, maxBuffer: 64 * 1024 * 1024 }).toString();
+// Keep the original RED assertions against the actual pre-fix source. A
+// moving merge-base includes the fix after landing and reverses the fixture.
+const OLD_REF = 'f60d253b74ddc2d81815655941f7def785357512';
+const OLD_GAME = cp.execFileSync('git', ['show', OLD_REF + ':src/js/game.js'], { cwd: ROOT, maxBuffer: 64 * 1024 * 1024 }).toString();
 const FOOD = fs.readFileSync(path.join(ROOT, 'src/js/food.js'), 'utf8');
 
 let failures = 0;

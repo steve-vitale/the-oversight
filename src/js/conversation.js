@@ -2475,7 +2475,8 @@
       if (c.pendingQ || c.reactiveQ || c.pendingTrade || c.pendingHawk) return null;
       // Real favor instances have their own details/commit/refuse lifecycle.
       // A generic "Yes" cannot stand in for creating that obligation.
-      if (c.choosingSubject || (c.thread === 'want' && c.want?.id === 'ask_favor' && (c.want.stage || 0) < 3)) return null;
+      if (c.choosingSubject || (c.thread === 'want' && (c.want?.stage || 0) < 3 &&
+          (c.want?.id === 'ask_favor' || (c.want?.id === 'repay' && this.openFavorObligation?.(vid)?.favorTask)))) return null;
       // Never stack questions: one hanging question at a time. A response
       // line that asks something new while a question hangs is part of the
       // dodge, not a second question (it must not reset the follow-up).

@@ -1487,12 +1487,13 @@
     convoFavorCommit(vid, favor) {
       if (!favor) return { ok: false };
       if (this.convoFavorAction(vid, favor).unsupported) return { ok: false, unsupported: true };
+      if (favor.vid !== vid || !['asked', 'promised'].includes(favor.state)) return { ok: false, closed: true };
       const v = this.state.village || {};
       v.promises = v.promises || {};
       const day = (this.state.scholar || {}).day || 0;
       const oldP = v.promises[vid];
       if (oldP && !oldP.kept) return { ok: false, blocked: true };
-      if (oldP) delete v.promises[vid];
+      if (oldP) { this.journalFavorPromise?.(vid, oldP); delete v.promises[vid]; }
       v.promises[vid] = {
         goal: favor.goal, day: day, kept: false, maker: this.villagerId,
         favorId: favor.id, favorTask: favor.task, favorDeadline: favor.deadline,
@@ -1500,7 +1501,7 @@
       favor.state = 'promised';
       favor.promisedDay = day;
       try { this.remember(vid, 'promise', 'promised: ' + favor.task); } catch (e) {}
-      try { this.journalLearn(vid, 'promise', { text: favor.task }, {}); } catch (e) {}
+      this.journalFavorPromise?.(vid, v.promises[vid], {});
       try { this.notePlaystyle('social'); } catch (e) {}
       return { ok: true };
     },
@@ -1556,21 +1557,28 @@
       const status = this.convoFavorAction(vid, favor);
       if (!status.ready) return { ok: false, line: status.reason };
       const v = this.state.village;
+      const recordHelp = () => {
+        const p = v.promises?.[vid];
+        if (p?.favorId === favor.id && p.kept === 'broken') {
+          favor.state = 'broken'; favor.helpedAfterBreakDay = this.state.scholar.day;
+          return p.closedReason === 'deadline' ? ' The deadline passed, so this does not fulfill your promise.' : ' The earlier promise remains broken.';
+        }
+        favor.state = 'fulfilled'; favor.fulfilledDay = this.state.scholar.day;
+        return '';
+      };
       if (status.action === 'food') {
         const result = this.giveFood(vid, 'meal');
         if (!result?.ok || !(result.units > 0)) return { ok: false, line: 'No food changed hands. The request is still open.' };
-        favor.state = 'fulfilled';
-        favor.fulfilledDay = this.state.scholar.day;
-        return { ok: true, line: `You give them ${result.units} portion${result.units === 1 ? '' : 's'} from your pack. They may still need more food.` };
+        const missed = recordHelp();
+        return { ok: true, promiseMissed: !!missed, line: `You give them ${result.units} portion${result.units === 1 ? '' : 's'} from your pack. They may still need more food.` + missed };
       }
       // tendVillager deliberately returns null on success. Its real care
       // operation, not return truthiness, is the receipt. Readiness was just
       // checked against the very same illness/wound thresholds.
       this.tendVillager(vid);
       if (this.over || !(v.roster || []).includes(vid)) return { ok: false, line: 'The time spent helping has ended. Check the current situation before doing anything else.' };
-      favor.state = 'fulfilled';
-      favor.fulfilledDay = this.state.scholar.day;
-      return { ok: true, line: 'You spend time tending them. This was care, not a promise of a cure.' };
+      const missed = recordHelp();
+      return { ok: true, promiseMissed: !!missed, line: 'You spend time tending them. This was care, not a promise of a cure.' + missed };
     },
 
     // convoFavorRenounce: backing out of an open favor obligation — it breaks
@@ -1580,6 +1588,7 @@
       const p = (v.promises || {})[vid];
       if (!p || p.kept || !p.favorId) return false;
       p.kept = 'broken';
+      p.closedReason = 'renounced'; p.closedDay = this.state.scholar.day;
       const favor = this.convoGetFavor(vid);
       if (favor && favor.id === p.favorId) favor.state = 'broken';
       const t = v.trust || {};
@@ -1599,7 +1608,7 @@
         tw[vid] = Math.max(0, trustAtBreakRen - 15);
       }
       try { this.remember(vid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak: trustAtBreakRen, maker: p.maker || this.villagerId }); } catch (e) {}
-      try { this.journalLearn(vid, 'promise', { text: p.favorTask || 'a promise', status: 'broken' }, {}); } catch (e) {}
+      this.journalFavorPromise?.(vid, p);
       try { this.say(`${this.displayName(vid)} goes quiet. "...Okay." The air between you cools a degree.`); } catch (e) {}
       return true;
     },
@@ -1684,10 +1693,14 @@
     // convoFavorDeadlineNote: for the repay reminder.
     convoFavorDeadlineNote(favor) {
       const day = (this.state.scholar || {}).day || 0;
-      const daysLeft = (favor.deadline || day) - day;
-      if (daysLeft <= 0) return "Today's the day.";
-      if (daysLeft === 1) return 'Tomorrow, then.';
-      return "We've got a couple days.";
+      const p = this.state.village.promises?.[favor.vid];
+      const due = p?.favorId === favor.id ? this.promiseDueDay(p) : favor.deadline;
+      if (!Number.isFinite(due)) return 'We need to agree on a deadline.';
+      const daysLeft = due - day;
+      if (daysLeft < 0) return 'The deadline has passed.';
+      if (daysLeft === 0) return 'By the end of today.';
+      if (daysLeft === 1) return 'By the end of tomorrow.';
+      return 'By the end of day ' + due + '.';
     },
 
     // convoSelectWant: pick the NPC's want for this conversation.
