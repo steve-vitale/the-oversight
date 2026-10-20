@@ -33,6 +33,8 @@ async function main() {
   // two DISTINCT stone knives: one in the pack, one equipped
   const knifeInv = { itemId: 'stone_knife', name: 'Stone knife', units: 1, kg: 0.4, kcalEach: 0 };
   const knifeWorn = { itemId: 'stone_knife', name: 'Stone knife', units: 1, kg: 0.4, kcalEach: 0 };
+  // Isolate the two prepared identities from gear earned during the lead-in.
+  s0.inventory=s0.inventory.filter(i=>(i.itemId||i.id)!=='stone_knife');
   s0.inventory.push(knifeInv);
   s0.equipped = s0.equipped || {};
   s0.equipped.melee = knifeWorn;

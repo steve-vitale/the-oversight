@@ -40,6 +40,7 @@
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const { loadGame } = require('./sim-harness');
+const P = require('./lib/conversation-playtest');
 
 let pass = 0, fail = 0;
 function ok(cond, name) {
@@ -73,20 +74,10 @@ async function main() {
   console.log(`(pre-walk departures in ledger: ${entries0.length} — ignored, re-seeded later)`);
 
   const served = [];
-  const r0 = Game.startConvo(L);
-  let r = r0;
-  for (let t = 0; t < 10; t++) {
-    const choices = (r.choices || []);
-    const gq = choices.find(c => c && c.id === 'ask:gossip');
-    if (gq) break;
-    const nx = choices.find(c => c && c.id !== 'leave' && c.id !== 'silence' && !/^dlg:/.test(c.id || ''))
-      || choices.find(c => c && c.id !== 'leave');
-    if (!nx) { console.log('menu dead-ended — probe inconclusive'); process.exit(2); }
-    r = Game.convoTurn(L, nx.id);
-    if (r.ended) { console.log('convo ended during opener — probe inconclusive'); process.exit(2); }
-  }
-  const find = (id) => ((r.choices || []).find(c => c && c.id === id));
-  let pick = find('ask:gossip');
+  Game.startConvo(L);
+  // Answer the spoken opener and use real paged choices, rather than taking
+  // the first arbitrary response (which may now correctly end this sitting).
+  const pick = P.reach(Game, L, ['ask:gossip']);
   if (!pick) { console.log('no ask:gossip — probe inconclusive'); process.exit(2); }
   Game.endConvo(L, 'done');
   // Drive the gossip engine directly (deterministic): askAbout's

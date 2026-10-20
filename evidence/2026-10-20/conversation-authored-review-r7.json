@@ -1,0 +1,296 @@
+{
+  "scope": "Manual source review of all 36 authored formal question families, their replies and recalls. Mechanical guard is limited to wh-question yes/no mismatches and identified unsupported named/lesson claims; this is not a semantic oracle.",
+  "baseCommit": "a4404566ccfee345813469a842b1994b9083cc2b",
+  "reviewedIds": [
+    "q_origin",
+    "q_plan",
+    "q_scared",
+    "q_miss",
+    "q_trust",
+    "q_think",
+    "q_hands",
+    "q_read",
+    "q_theory",
+    "q_night",
+    "q_laugh",
+    "q_quiet",
+    "q_first_memory",
+    "q_regret",
+    "q_skill",
+    "q_believe",
+    "q_someone",
+    "q_change",
+    "q_guilty",
+    "q_hope",
+    "q_alone_time",
+    "q_laugh_memory",
+    "q_teach_me",
+    "q_stay",
+    "q_system_fear",
+    "q_kindness",
+    "q_before_skill",
+    "q_fight",
+    "q_song",
+    "q_first_week",
+    "q_angry",
+    "q_dream",
+    "q_left_behind",
+    "q_name_day",
+    "q_useful",
+    "q_fun"
+  ],
+  "changed": [
+    {
+      "id": "q_read",
+      "before": {
+        "id": "q_read",
+        "minTrust": 15,
+        "q": "\"Got a read on anyone here yet? Who should I be watching?\"",
+        "voice": "social",
+        "answers": [
+          {
+            "id": "a_honest",
+            "label": "\"Still figuring everyone out.\"",
+            "react": "\"Same. But keep your eyes open — some people here are performing, not surviving.\""
+          },
+          {
+            "id": "a_name",
+            "label": "(mention someone specific)",
+            "react": "\"Interesting. I'll watch them. Thanks for trusting me with that.\""
+          },
+          {
+            "id": "a_none",
+            "label": "\"I don't gossip about people.\"",
+            "react": "A small smile. \"Fair. That's a good policy. Hard to keep, though.\""
+          }
+        ],
+        "recall": null,
+        "follow": "\"I'll keep my eyes open. Two sets are better than one.\"",
+        "deeper": "\"Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters.\"",
+        "recalls": {
+          "a_honest": "\"You said you're still figuring everyone out. Figure anything out yet? Anyone you're watching?\"",
+          "a_name": "\"You gave me a name to watch, once. I've been watching.\"",
+          "a_none": "\"You said you don't gossip about people. I've been trying to hold that line. It's hard.\""
+        }
+      },
+      "after": {
+        "id": "q_read",
+        "minTrust": 15,
+        "q": "\"Got a read on anyone here yet? Who should I be watching?\"",
+        "voice": "social",
+        "answers": [
+          {
+            "id": "a_honest",
+            "label": "\"Still figuring everyone out.\"",
+            "react": "\"Same. But keep your eyes open — some people here are performing, not surviving.\""
+          },
+          {
+            "id": "a_name",
+            "label": "\"Pay attention to who shares when supplies run low.\"",
+            "react": "\"That's worth watching. I'll pay attention.\""
+          },
+          {
+            "id": "a_none",
+            "label": "\"I don't gossip about people.\"",
+            "react": "A small smile. \"Fair. That's a good policy. Hard to keep, though.\""
+          }
+        ],
+        "recall": null,
+        "follow": "\"I'll keep my eyes open. Two sets are better than one.\"",
+        "deeper": "\"Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters.\"",
+        "recalls": {
+          "a_honest": "\"You said you're still figuring everyone out. Figure anything out yet? Anyone you're watching?\"",
+          "a_name": "\"We talked about who to watch. Still figuring people out?\"",
+          "a_none": "\"You said you don't gossip about people. I've been trying to hold that line. It's hard.\""
+        }
+      }
+    },
+    {
+      "id": "q_guilty",
+      "before": {
+        "id": "q_guilty",
+        "minTrust": 40,
+        "q": "\"What's the worst thing you've done since the sky changed?\"",
+        "answers": [
+          {
+            "id": "a_tell",
+            "label": "\"Yes. I don't want to get into what. But yes.\"",
+            "react": "No judgment in their face. \"We're all doing math that doesn't add up. You're still here. That counts.\""
+          },
+          {
+            "id": "a_vague",
+            "honest_opt_out": true,
+            "label": "\"Nothing I'm telling you. Nothing I'm telling anyone.\"",
+            "react": "\"Okay.\" They don't push. \"When you're ready. If you're ever ready.\""
+          },
+          {
+            "id": "a_deflect",
+            "label": "\"Define 'worst.'\"",
+            "temper": "cruel",
+            "react": "\"The fact that you have to ask means you're doing better than you think.\""
+          }
+        ],
+        "follow": "\"The math doesn't add up out here. Be kind to yourself about the remainders.\"",
+        "deeper": "\"I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason.\"",
+        "recalls": {
+          "a_tell": "\"You said yes — the worst thing. You didn't want to get into what. I won't ask. Just — are you carrying it any lighter?\"",
+          "a_deflect": "\"You told me to define 'worst.' I still can't. The question stands, if you ever want it.\""
+        }
+      },
+      "after": {
+        "id": "q_guilty",
+        "minTrust": 40,
+        "q": "\"What's the worst thing you've done since the sky changed?\"",
+        "answers": [
+          {
+            "id": "a_tell",
+            "label": "\"There's something I regret. I'm not ready to talk about it.\"",
+            "react": "No judgment in their face. \"We're all doing math that doesn't add up. You're still here. That counts.\""
+          },
+          {
+            "id": "a_vague",
+            "honest_opt_out": true,
+            "label": "\"Nothing I'm telling you. Nothing I'm telling anyone.\"",
+            "react": "\"Okay.\" They don't push. \"When you're ready. If you're ever ready.\""
+          },
+          {
+            "id": "a_deflect",
+            "label": "\"Define 'worst.'\"",
+            "temper": "cruel",
+            "react": "\"The fact that you have to ask means you're doing better than you think.\""
+          }
+        ],
+        "follow": "\"The math doesn't add up out here. Be kind to yourself about the remainders.\"",
+        "deeper": "\"I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason.\"",
+        "recalls": {
+          "a_tell": "\"You said there was something you regretted. You didn't want to get into it. I won't ask. Just — are you carrying it any lighter?\"",
+          "a_deflect": "\"You told me to define 'worst.' I still can't. The question stands, if you ever want it.\""
+        }
+      }
+    },
+    {
+      "id": "q_teach_me",
+      "before": {
+        "id": "q_teach_me",
+        "minTrust": 25,
+        "q": "\"Teach me something. Anything you know that I don't.\"",
+        "answers": [
+          {
+            "id": "a_tell",
+            "label": "\"Okay — here's one small useful thing I know. Watch.\"",
+            "react": "They watch, intent, then try it themselves. \"Huh. That actually works.\" A grin — student and teacher trade places for a minute."
+          },
+          {
+            "id": "a_vague",
+            "label": "\"I don't know what I know that you don't. We're all guessing out here.\"",
+            "react": "\"Then we'll guess together. Two guessers are better than one. That's just math.\""
+          },
+          {
+            "id": "a_deflect",
+            "label": "\"I'm not much of a teacher.\"",
+            "temper": "cruel",
+            "react": "\"Everyone says that. Then they show you something that saves your life. No pressure, though.\""
+          }
+        ],
+        "follow": "\"See? Everybody knows something. That's the whole village, right there.\"",
+        "deeper": "\"Here's one: {skill}. Watch — no, like this. See? Your hands learn faster than your head. They always do.\"",
+        "recalls": {
+          "a_tell": "\"You promised me one small useful thing. I'm still watching — lesson two, whenever you're ready.\"",
+          "a_vague": "\"You said we're all guessing out here — you didn't know what you knew that I didn't. Has anything surfaced since?\"",
+          "a_deflect": "\"You said you're not much of a teacher. You've been teaching all along, though. Badly, maybe. But still.\""
+        }
+      },
+      "after": {
+        "id": "q_teach_me",
+        "minTrust": 25,
+        "q": "\"Teach me something. Anything you know that I don't.\"",
+        "answers": [
+          {
+            "id": "a_tell",
+            "label": "\"I'd rather show you while we're working. It's easier that way.\"",
+            "react": "\"All right. Show me when we work together.\""
+          },
+          {
+            "id": "a_vague",
+            "label": "\"I don't know what I know that you don't. We're all guessing out here.\"",
+            "react": "\"Then we'll guess together. Two guessers are better than one. That's just math.\""
+          },
+          {
+            "id": "a_deflect",
+            "label": "\"I'm not much of a teacher.\"",
+            "temper": "cruel",
+            "react": "\"Everyone says that. Then they show you something that saves your life. No pressure, though.\""
+          }
+        ],
+        "follow": "\"It's easier to learn alongside someone than listen to an explanation.\"",
+        "deeper": "\"I'd like to learn something I can use today. Show me while you work, when you have a moment.\"",
+        "recalls": {
+          "a_tell": "\"You offered to show me while we work. I'd still like to learn, when there's time.\"",
+          "a_vague": "\"You said we're all guessing out here — you didn't know what you knew that I didn't. Has anything surfaced since?\"",
+          "a_deflect": "\"You said you're not much of a teacher. You've been teaching all along, though. Badly, maybe. But still.\""
+        }
+      }
+    },
+    {
+      "id": "q_name_day",
+      "before": {
+        "id": "q_name_day",
+        "minTrust": 0,
+        "q": "\"What day is it? ...Do you still count? I lost track days ago.\"",
+        "answers": [
+          {
+            "id": "a_count",
+            "label": "\"I count. Someone has to.\"",
+            "react": "\"Good. Keep counting. The days need witnesses.\""
+          },
+          {
+            "id": "a_lost",
+            "label": "\"Lost track too. Does it matter?\"",
+            "react": "\"Maybe not. But I like that you asked. Means part of you still keeps score.\""
+          },
+          {
+            "id": "a_guess",
+            "label": "\"It's someday. Probably.\"",
+            "react": "\"Ha. I'll take 'probably.' Close enough for out here.\""
+          }
+        ],
+        "follow": "\"Days, weeks — we'll make new names for them if we have to.\"",
+        "deeper": "\"I count meals, not days. Three meals since the rain. Two since the alarm. Days are for people with calendars. I have a stomach.\"",
+        "recalls": {
+          "a_count": "\"You said you count the days — someone has to. What's the count today? Still keeping it?\"",
+          "a_lost": "\"You'd lost track of the days too. Decided yet whether it matters?\"",
+          "a_guess": "\"You said it's someday, probably. Still someday?\""
+        }
+      },
+      "after": {
+        "id": "q_name_day",
+        "minTrust": 0,
+        "q": "\"Do you still count the days? I lost track days ago.\"",
+        "answers": [
+          {
+            "id": "a_count",
+            "label": "\"I count. Someone has to.\"",
+            "react": "\"Good. Keep counting. The days need witnesses.\""
+          },
+          {
+            "id": "a_lost",
+            "label": "\"Lost track too. Does it matter?\"",
+            "react": "\"It can be hard to keep track. We can start again.\""
+          },
+          {
+            "id": "a_guess",
+            "label": "\"It's someday. Probably.\"",
+            "react": "\"Ha. I'll take 'probably.' Close enough for out here.\""
+          }
+        ],
+        "follow": "\"Days, weeks — we'll make new names for them if we have to.\"",
+        "deeper": "\"I count meals, not days. Three meals since the rain. Two since the alarm. Days are for people with calendars. I have a stomach.\"",
+        "recalls": {
+          "a_count": "\"You said you count the days — someone has to. What's the count today? Still keeping it?\"",
+          "a_lost": "\"You'd lost track of the days too. Decided yet whether it matters?\"",
+          "a_guess": "\"You said it's someday, probably. Still someday?\""
+        }
+      }
+    }
+  ]
+}

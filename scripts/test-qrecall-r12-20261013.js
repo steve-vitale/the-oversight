@@ -54,7 +54,7 @@ const CASES = [
   ['q_believe', 'a_deflect', [/spare energy/i], []],
   ['q_stay', 'a_tell', [/still true/i], []],
   ['q_stay', 'a_deflect', [/heard something/i], []],
-  ['q_teach_me', 'a_tell', [/lesson two/i], []],
+  ['q_teach_me', 'a_tell', [/offered to show me/i], [/lesson two/i]],
   ['q_teach_me', 'a_vague', [/guessing out here/i], []],
   ['q_teach_me', 'a_deflect', [/not much of a teacher/i], []],
   ['q_name_day', 'a_count', [/count the days/i], []],

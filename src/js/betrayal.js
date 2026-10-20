@@ -3959,7 +3959,7 @@
       const spoken = (typeof this.inviteLabelFor === 'function') ? this.inviteLabelFor(vid, inv) : null;
       const def = (this.INVITE_DEFS() || []).find(d => d.id === inv.defId);
       const quoted = spoken || (def ? def.label : null);
-      out.push({ id: 'betrayal:accept', label: '"Sure. ' + (quoted ? quoted.slice(1, -1) : 'Let\'s go.') + '"' });
+      out.push({ id: 'betrayal:accept', label: '"All right. Let\'s go."' });
       out.push({ id: 'betrayal:decline', label: '"Not this time."' });
     }
     const cases = (this.betrayalState().cases || []).filter(x =>

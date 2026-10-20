@@ -30,19 +30,19 @@ const K=require('./godpath/lib'),T=K.reporter('favor-system');
  function close(vid,why='left'){G.endConvo(vid,why);}
  function obligation(vid){return G.state.village.promises?.[vid];}
  function journal(vid,status,task){return (G.state.codex.people?.[vid]?.promises||[]).some(p=>p.status===status&&p.text===task);}
- function commit(){const f=fresh();start(f.vid);choose(f.vid,'dlg:help');choose(f.vid,'dlg:commit');const p=obligation(f.vid);T.ok('commit creates concrete tracked obligation',!!p&&!p.kept&&!!p.favorTask&&Number.isFinite(p.favorDeadline));if(!p)throw Error('Missing committed obligation');return {...f,p};}
+ function commit(){const f=fresh();start(f.vid);choose(f.vid,'dlg:details');choose(f.vid,'dlg:commit');const p=obligation(f.vid);T.ok('commit creates concrete tracked obligation',!!p&&!p.kept&&!!p.favorTask&&Number.isFinite(p.favorDeadline));if(!p)throw Error('Missing committed obligation');return {...f,p};}
  let f=fresh(false);
  T.ok('no real need exists',G.convoFindFavorNeed(f.vid)===null);
  let needCount=0,favorCount=0;for(let i=0;i<40;i++){if(G.convoFindFavorNeed(f.vid))needCount++;if(G.convoSelectWant(f.vid)?.id==='ask_favor')favorCount++;}
  T.ok('no contentless favors across40 real selections',needCount===0&&favorCount===0);
- const paths=[['help then leave',['dlg:help']],['details then leave',['dlg:details']],['help then extra details unavailable',['dlg:help']],['help then decline',['dlg:help','dlg:cant']],['opening only',[]]];
+ const paths=[['help then leave',['dlg:details']],['details then leave',['dlg:details']],['help then extra details unavailable',['dlg:details']],['help then decline',['dlg:details','dlg:cant']],['opening only',[]]];
  for(const [name,moves]of paths){
   f=fresh();start(f.vid);for(const id of moves)choose(f.vid,id);if(name==='help then extra details unavailable')T.ok('stated ask offers commit instead of another details action',!K.findConvoChoice(G,f.vid,'dlg:details')&&!!K.findConvoChoice(G,f.vid,'dlg:commit'));close(f.vid);
   const resolution=G.convoGet(f.vid).want?.resolution;
   T.ok(name+': no promised/engaged resolution',['stated','deflected','abandoned','unresolved'].includes(resolution),resolution);
   T.ok(name+': no obligation without commitment',!obligation(f.vid));
  }
- f=fresh();start(f.vid);choose(f.vid,'dlg:help');close(f.vid);
+ f=fresh();start(f.vid);choose(f.vid,'dlg:details');close(f.vid);
  T.ok('heard but uncommitted is stated',G.convoGet(f.vid).want.resolution==='stated');
  T.ok('stated favor plants exact followup id',f.v.convoSeeds[f.vid]?.wantId==='ask_favor'&&f.v.convoSeeds[f.vid]?.favorId===G.convoGetFavor(f.vid)?.id);
  let c=commit();
@@ -65,7 +65,7 @@ const K=require('./godpath/lib'),T=K.reporter('favor-system');
  T.ok('deadline marks favor broken',G.convoGetFavor(c.vid)?.state==='broken');
  T.ok('broken promise reduces trust',c.v.trust[c.vid]<trustBeforeBreak);
  T.ok('journal records broken concrete favor',journal(c.vid,'broken',c.p.favorTask));
- f=fresh();start(f.vid);choose(f.vid,'dlg:help');const beforeDecline=f.v.trust[f.vid];choose(f.vid,'dlg:cant');
+ f=fresh();start(f.vid);choose(f.vid,'dlg:details');const beforeDecline=f.v.trust[f.vid];choose(f.vid,'dlg:cant');
  T.ok('decline itself costs trust',f.v.trust[f.vid]<beforeDecline);close(f.vid,'closed');
  T.ok('decline resolves deflected',G.convoGet(f.vid).want.resolution==='deflected');
  T.ok('decline plants no reask seed',!f.v.convoSeeds?.[f.vid]);
@@ -86,7 +86,7 @@ const K=require('./godpath/lib'),T=K.reporter('favor-system');
  T.ok('collision rotation preserves identity and sequence',rotated.id===candidate.id&&f.v.favorSeq===seq+1);
  T.ok('collision rotation preserves task deadline and semantics',['kind','keepKind','goal','task','short','why','stakes','deadline','state','askedDay','commitLine','goodbye'].every(k=>rotated[k]===candidate[k]));
  // Resume uses fresh natural conversation history, not the other branches.
- f=fresh();start(f.vid);choose(f.vid,'dlg:help');close(f.vid);const prior=G.convoGetFavor(f.vid);
+ f=fresh();start(f.vid);choose(f.vid,'dlg:details');close(f.vid);const prior=G.convoGetFavor(f.vid);
  T.ok('resume seed refers to real favor',f.v.convoSeeds[f.vid]?.favorId===prior.id);
  f.s.day++;G.startConvo(f.vid);const opening=G.convoGet(f.vid).transcript.filter(e=>e.who==='them').map(e=>e.text).join(' ');
  T.ok('followup names prior ask',opening.includes(prior.short)||opening.includes('still need hands'),opening);

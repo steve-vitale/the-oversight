@@ -1,0 +1,9 @@
+'use strict';
+const fs=require('fs'),K=require('../../scripts/godpath/lib');
+(async()=>{
+ const old=JSON.parse(fs.readFileSync('evidence/2026-10-18/installed-update-old-save-r1.json')),store=new Map(Object.entries(old.storage));
+ global.localStorage={getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k),key:i=>[...store.keys()][i]??null,get length(){return store.size;}};
+ const G=await K.load({seed:7,narration:true}),key=[...store.keys()].find(k=>k.startsWith('scattering-save-v1-'));
+ const cases=[['plan','"My plan? Keep everyone fed. That\'s it. That\'s the whole plan and it\'s enough."','dlg:react'],['name','"Frank? I\'d trust Frank with my pack. That\'s the highest compliment I have."','dlg:react'],['secret','"Can I tell you something? At night I talk to someone who isn\'t there anymore."','dlg:react'],['reason','"Why do you ask?"','gq:reason:understand'],['tag','"Can\'t sit still, you know?"','dlg:react'],['wellbeing','They take a breath. "You doing okay?"','gq:howru:bad']];
+ for(const[kind,line,reply]of cases){store.clear();for(const[k,v]of Object.entries(old.storage))store.set(k,v);G.load(key);const s=G.state.scholar,v=G.state.village,npc=v.roster.find(id=>id!==G.villagerId&&G.isKnowledgeTrader(id));v.talkRequests={[npc]:{line,day:s.day}};G.npcSetNode(npc,G.map.px,G.map.py);G.npcSetInside(npc,!!s.insideHaven);v.positions[npc]={mx:Math.max(0,s.mx-1),my:s.my};G.save();fs.writeFileSync('evidence/2026-10-20/conversation-structure-'+kind+'-fixture-r1.json',JSON.stringify({scope:'Retained played save; only nearby actor and authored request line prepared. No browser outcome/stat/response grants.',setup:{key,npc,name:G.vpOf(npc).name,kind,line,reply},storage:Object.fromEntries(store)},null,2)+'\n',{flag:'wx'});}
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

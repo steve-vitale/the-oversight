@@ -259,7 +259,9 @@ const vid2 = roster[1] || roster[0];
   ok('whatsAlive returns items', alive.length > 0, 'n=' + alive.length);
   ok('open thread surfaces', alive.some(a => a.kind === 'thread'));
   ok('fresh memory surfaces', alive.some(a => a.kind === 'memory'));
-  const menu = Game.buildMenu(vid);
+  require('./lib/conversation-playtest').reach(Game,vid,['dlg:subject','subject']);
+  const pivot=require('./lib/conversation-playtest').offers(Game,vid).find(x=>['dlg:subject','subject'].includes(x.id));if(pivot)Game.convoTurn(vid,pivot.id);
+  const menu = Game.buildMenu(vid,true);
   const aliveInMenu = menu.filter(ch => ch.id && ch.id.indexOf('alive:') === 0);
   ok('alive items reach the menu', aliveInMenu.length > 0, 'n=' + aliveInMenu.length);
   // Play one: thread resume must not dead-end.

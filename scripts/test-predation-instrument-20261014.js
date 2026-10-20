@@ -154,8 +154,17 @@ async function observedRun(kind) {
       else assert(fights[0].rounds >= 1 && (fights[0].vTaken > 0 || response.broke), 'full-HP raider fights back');
       hashes.push(snapshot(Game)); result = { days: 0, endReason: 'prepared-sortie' };
     } else {
-      const policy = { id: 'honesty-idle', daily(G) {
+      // Muse 699c56ba8 legitimately ends the original idle seed 7 at day 11
+      // (village-lost), identically with/without this observer. Retain idle
+      // endings as neutrality cases; prove the unchanged 30-day coverage bar
+      // separately with a real public-action player, not survival grants.
+      const capable = kind === 'campaign' ? require('./policies/capable').capable : null;
+      const policy = { ...(capable || {}), id: capable ? 'honesty-capable' : 'honesty-idle', daily(G, ctx) {
         if (track) track.sampleDay(); hashes.push(snapshot(G));
+        if (capable) {
+          try { return capable.daily(G, ctx); }
+          catch (error) { console.warn('Predation coverage policy failed: ' + error.message); throw error; }
+        }
       } };
       await quietLog(async () => { result = await runDays(Game, policy, { days: 120, sampleEvery: 10 }); });
     }
@@ -178,8 +187,8 @@ async function main() {
     console.log('PREDATION_RESULT ' + JSON.stringify(result)); return;
   }
   child('a'); child('b');
-  for (const kind of ['response', 'sortie', 'risk', 'campaign']) {
-    for (const seed of (kind === 'campaign' ? [7, 42, 44, 99] : kind === 'risk' ? [105] : [44])) {
+  for (const kind of ['response', 'sortie', 'risk', 'idle', 'campaign']) {
+    for (const seed of (kind === 'campaign' || kind === 'idle' ? [7, 42, 44, 99] : kind === 'risk' ? [105] : [44])) {
       const off = child(kind, { SEED: String(seed), PREDATION_ARMED: '0' });
       const on = child(kind, { SEED: String(seed), PREDATION_ARMED: '1' });
       console.log('  neutrality receipt ' + JSON.stringify({ kind, off, on }));
@@ -188,6 +197,7 @@ async function main() {
       check(kind + ' seed ' + seed + ': days and ending match', off.days === on.days && off.gameDays === on.gameDays && off.end === on.end);
       check(kind + ' seed ' + seed + ': no observer errors or warnings', on.errors.length === 0 && on.warnings.length === 0 && off.warnings.length === 0);
       if (kind === 'campaign') check('campaign observed at least 30 real days', on.samples >= 30);
+      else if (kind === 'idle') check('idle observer covers every played iteration, including early endings', on.samples === on.days && on.hashes.length === on.days + 2);
       else if (kind === 'sortie') {
         check('successful sortie records actual funded use', on.answers.length === 1 && on.answers[0].ok === true && on.answers[0].paid >= 6000 && on.answers[0].cleared === 1);
         check('funded response records exact pantry cost', on.answers[0].paid === on.answers[0].pantryBefore - on.answers[0].pantryAfter);

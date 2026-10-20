@@ -250,7 +250,7 @@ const adult = (ids) => ids.find(id => { try { return Game.npcAge(id) >= 15; } ca
         if (!pick) break;
         if (/^(leave|bye|goodbye)/.test(pick.id)) break;
         try { Game.convoTurn(vid, pick.id); } catch (e) { break; }
-        if (/^dlg:help/.test(pick.id)) engaged = true;
+        if (/^dlg:(help|details)/.test(pick.id)) engaged = true;
         if (/^dlg:commit/.test(pick.id)) committed = true;
         const cc = Game.convoGet(vid);
         if (!cc || !cc.active) break;
@@ -269,7 +269,7 @@ const adult = (ids) => ids.find(id => { try { return Game.npcAge(id) >= 15; } ca
         r.text.slice(0, 160));
     });
     // and the three "how can I help" answers are not verbatim-identical
-    const helps = results.map(r => (r.text.split('How can I help')[1] || '').slice(0, 120));
+    const helps = results.map(r => (r.text.split(/How can I help|Tell me why you need this/)[1] || '').slice(0, 120));
     const distinct = new Set(helps.map(h => h.slice(0, 60)));
     ok('the three engagements differ in wording', distinct.size >= 2,
       distinct.size + ' distinct of 3');

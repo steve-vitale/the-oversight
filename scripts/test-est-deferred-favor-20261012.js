@@ -111,7 +111,8 @@ async function main() {
   ok(w0.id === 'ask_favor' && (w0.stage || 0) === 0, 'want selected and waiting at stage 0');
   ok(!w0.favor && !Game.convoGetFavor(vid), 'no favor stated yet (opener was preempted)');
 
-  const hasEngage = (r0.choices || []).some(ch => ch && (ch.id === 'dlg:help' || ch.id === 'alive:want:ask_favor'));
+  const step=require('./lib/conversation-playtest').reach(Game,vid,['alive:want:ask_favor','dlg:help']);
+  const hasEngage=!!step;
   ok(hasEngage, 'menu offers a way to engage the want (dlg:help or alive:want:ask_favor)');
 
   // 1. Engage the want directly ("How can I help?") — the path the r3

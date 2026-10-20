@@ -62,13 +62,19 @@ async function main() {
   const ans1 = choices.find(c => c && /^ans:/.test(c.id)) || choices.find(c => c && c.id === 'deflect_q');
   if (ans1) Game.convoTurn(vid, ans1.id);
   choices = Game.convoChoices(vid) || [];
+  const pivot = choices.find(ch => ['dlg:subject','subject'].includes(ch.id));
+  if (pivot) Game.convoTurn(vid,pivot.id);
+  choices = Game.buildMenu(vid,true);
   const resume = choices.find(c => c && c.id === 'alive:thread:gossip');  t('alive:thread:gossip offered on resume', !!resume,
     JSON.stringify(choices.map(c => c.id).slice(0, 16)));
+  let realGossip = null; const gossipBeat = Game.convoGossipBeat;
+  Game.convoGossipBeat = function(id) { realGossip = gossipBeat.call(this,id); return realGossip; };
   const r = Game.convoTurn(vid, 'alive:thread:gossip');
+  Game.convoGossipBeat = gossipBeat;
   const rline = String((r && r.line) || '');
   t('resume speaks a line', rline.length > 10, rline.slice(0, 120));
   t('resume is NOT the generic echo', !GENERIC_RE.test(rline), rline.slice(0, 160));
-  t('resume carries gossip content', /generous|sharing|Word is/i.test(rline), rline.slice(0, 160));
+  t('resume carries gossip content', !!realGossip?.line && rline.includes(realGossip.line.replace(/^["“]|["”]$/g,'')), rline.slice(0, 160));
   console.log('  RESUME LINE: ' + rline.slice(0, 220));
 
   // --- 3. follow-up on the resumed thread keeps it alive ---
@@ -79,6 +85,9 @@ async function main() {
 
   // --- 4. dry pool: honest decline, not a stall ---
   v.gossip = [];
+  // Empty rumors alone leaves personal/dark gossip alive. Prepare a truly
+  // empty information network for the independent dry-case assertion.
+  v.roster = [vid, Game.villagerId];
   const c = Game.convoGet(vid);
   c.thread = 'gossip'; c.depth = 1;
   const dry = Game.convoThreadBeat(vid);
@@ -91,7 +100,7 @@ async function main() {
   try {
     Game.askAbout = () => { throw Error('injected gossip failure'); };
     console.warn = (...args) => errors.push(args);
-    t('failed gossip still restores the real narrator', Game.convoGossipBeat(vid) === '' && Game.say === oldSay);
+    t('failed gossip still restores the real narrator', Game.convoGossipBeat(vid).line === '' && Game.say === oldSay);
     t('failed gossip reports the fault for diagnostics', errors.length === 1 && String(errors[0][1]).includes('injected gossip failure'));
   } finally { Game.askAbout = oldAsk; Game.say = oldSay; console.warn = oldWarn; }
 

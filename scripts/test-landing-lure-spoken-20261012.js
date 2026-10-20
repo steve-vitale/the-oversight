@@ -87,7 +87,7 @@ async function main() {
   const a = roster[0];
   Game.inviteHistory(a).pending = { defId: def.id, day };
   Game.convoRunLedger().push(def.label);
-  Game.startConvo(a);
+  require('./lib/conversation-playtest').openInvite(Game,a);
   const t1 = themOf(a);
   Game.endConvo(a, 'done');
   console.log('case1 them (trimmed): ' + t1.slice(-140).replace(/\n/g, ' | '));
@@ -97,12 +97,12 @@ async function main() {
   // CASE 2: self-block — the same villager invites again in a later sitting
   const b = roster[1];
   Game.inviteHistory(b).pending = { defId: def.id, day };
-  Game.startConvo(b);
+  require('./lib/conversation-playtest').openInvite(Game,b);
   const t2a = themOf(b);
   Game.endConvo(b, 'done');
   console.log('case2a (sanity) lure spoken: ' + (t2a.indexOf(LABEL_CORE) !== -1));
   Game.inviteHistory(b).pending = { defId: def.id, day }; // new pending, same label
-  Game.startConvo(b);
+  require('./lib/conversation-playtest').openInvite(Game,b);
   const t2 = themOf(b);
   Game.endConvo(b, 'done');
   console.log('case2 them (trimmed): ' + t2.slice(-140).replace(/\n/g, ' | '));

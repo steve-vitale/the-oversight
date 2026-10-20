@@ -1,0 +1,48 @@
+check.js: 1032 scripts, 8 parallel
+.................................................................................................................................................................................................................................................................................................................................................................................................................F.......................................................................................................................................................................................................................................................................................................................FF.............................................................................................................................................................................................................................................................................................................................
+
+  FAIL scripts/test-convo-seed-voice-20261011.js (exit 1, 4.7s)
+        S: "I cannot clean it properly one-handed. It'll be fun, probably."
+        S: "I cannot clean it properly one-handed. — anyway."
+      PASS: seek_comfort: proven first-person note (any seed)
+      PASS: seek_comfort: proven clean seed opener (any seed)
+      PASS: share_news: proven first-person note (any seed)
+      PASS: share_news: proven clean seed opener (any seed)
+      FAIL: ask_favor: proven first-person note (any seed)
+      FAIL: ask_favor: proven clean seed opener (any seed)
+      PASS: seek_taken: proven first-person note (any seed)
+      PASS: seek_taken: proven clean seed opener (any seed)
+      
+      === RESULT: 37 pass, 2 fail (isolated shared harnesses) ===
+
+  FAIL scripts/test-qrecall-r11-20261013.js (exit 1, 0.8s)
+      ok: q_laugh/a_story -> ""That thing you told me — the funny one, when I was desperate for it. ..."
+      ok: q_laugh/a_dark -> ""You said the fact that we're alive is pretty funny. Gallows humor. St..."
+      ok: q_someone/a_tell -> ""You said there's someone you don't trust. You never said who. Do you ..."
+      ok: q_someone/a_vague -> ""You said you didn't know anyone well enough to distrust yet. Know us ..."
+      ok: q_someone/a_deflect -> ""You said that was a dangerous question. I've been careful who I ask s..."
+      ok: q_angry/a_yes -> ""You said you were furious. Most days. Still carrying it?"..."
+      ok: q_angry/a_tired -> ""You said you were too tired to be angry. Rested any since?"..."
+      ok: q_angry/a_deflect -> ""You said anger doesn't help. I've been testing that theory. Jury's ou..."
+      ok: optout q_laugh/a_nothing -> no recall (thread=small)
+      ok: optout q_quiet/a_leave -> no recall (thread=small)
+      ok: optout q_first_week/a_blur -> no recall (thread=small)
+      ok: optout q_night/honest_pass -> no recall (thread=small)
+
+  FAIL scripts/test-qrecall-r12-20261013.js (exit 1, 0.8s)
+      ok: q_teach_me/a_deflect -> ""You said you're not much of a teacher. You've been teaching all along..."
+      ok: q_name_day/a_count -> ""You said you count the days — someone has to. What's the count today?..."
+      ok: q_name_day/a_lost -> ""You'd lost track of the days too. Decided yet whether it matters?"..."
+      ok: q_name_day/a_guess -> ""You said it's someday, probably. Still someday?"..."
+      ok: optout q_first_memory/a_vague -> no recall (thread=small)
+      ok: optout q_useful/a_learning -> no recall (thread=small)
+      ok: optout q_dream/a_none -> no recall (thread=small)
+      ok: optout q_guilty/a_vague -> no recall (thread=small)
+      ok: optout q_regret/a_vague -> no recall (thread=small)
+      ok: optout q_before_skill/a_vague -> no recall (thread=small)
+      ok: optout q_left_behind/a_unknown -> no recall (thread=small)
+      ok: optout q_stay/a_vague -> no recall (thread=small)
+
+  slowest: scripts/test-deterministic-clock-20261014.js 75s, scripts/test-simopt-trajectory-20261010.js 74s, scripts/test-fourthlink-20261014.js 50s
+
+check.js: 1029 passed, 3 failed in 235s

@@ -3,10 +3,14 @@
 // description: Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 // provides:
 //   - convoSelectWant(vid) -> want object
-//   - convoWantOpener(vid, want) -> {line, thread}
+//   - convoWantOpener(vid, want) -> provisional {line, thread, question}
+//   - convoAcceptWantQuestion(vid, opener) -> accept only the spoken question
 //   - convoWantStaleOpener(vid, want) -> reframe line when all fresh variants are ledger-blocked
 //   - convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit')
 //   - convoWantMenu(vid) -> menu options for the live want
+//   - convoFavorAction(vid, favor) -> read-only physical action readiness
+//   - convoFavorActionMenu(vid, favor, canPromise) -> action and requirements
+//   - convoPerformFavor(vid, favor) -> execute a checked canonical care or food deed
 //   - convoWantCloseLine(vid) -> goodbye beat for the resolution
 //   - convoFavorHash(vid, ctx) -> uint (per-instance variation key: stable person key + day + seq — never the ID string, which embeds Date.now())
 //   - convoResolveWant(vid, how) -> plants seeds for unfinished business
@@ -731,6 +735,12 @@
                       favor.state === 'moot' || favor.state === 'declined')) {
           return [];
         }
+        if (favor) {
+          return this.convoFavorActionMenu(vid, favor, favor.state === 'asked').concat([
+            ...(!c.want?.favorExplained ? [{ id: 'dlg:details', labels: ['"Tell me why you need this."'], temper: 'neutral' }] : []),
+            { id: 'dlg:cant', labels: ['"I can’t right now."'], temper: 'neutral' },
+          ]);
+        }
         if ((stage || 0) >= 2 && !favor) {
           // DEFERRED OPENER (journey establishment 2026-10-12): the want was
           // engaged but its ask was never stated (resume preempted the
@@ -898,6 +908,7 @@
           // options: reaffirm it, or back out (which breaks it now, with
           // the cost — dlg:renounce).
           return [
+            ...this.convoFavorActionMenu(vid, this.convoGetFavor(vid), false),
             { id: 'dlg:react', labels: ['"I haven\'t forgotten."', '"It\'s on my mind, I swear."'], temper: 'kind' },
             { id: 'dlg:renounce', labels: ['"I can\'t do it. I\'m sorry."'], temper: 'neutral' },
           ];
@@ -1475,6 +1486,7 @@
     // deadlines, and the journal all work. One open commitment per villager.
     convoFavorCommit(vid, favor) {
       if (!favor) return { ok: false };
+      if (this.convoFavorAction(vid, favor).unsupported) return { ok: false, unsupported: true };
       const v = this.state.village || {};
       v.promises = v.promises || {};
       const day = (this.state.scholar || {}).day || 0;
@@ -1491,6 +1503,74 @@
       try { this.journalLearn(vid, 'promise', { text: favor.task }, {}); } catch (e) {}
       try { this.notePlaystyle('social'); } catch (e) {}
       return { ok: true };
+    },
+
+    // One read-only contract for menus, explanations and dispatch. A promise
+    // describes future intent; only the canonical physical action keeps it.
+    convoFavorAction(vid, favor) {
+      favor = favor || this.convoGetFavor(vid);
+      const blocked = reason => ({ ready: false, reason });
+      if (!favor || favor.vid !== vid) return blocked('There is no current request to act on.');
+      if (!['asked', 'promised'].includes(favor.state)) return blocked('This request is already closed.');
+      const unavailable = {
+        water_haul: 'The joint creek trip has no playable action yet. Assigning someone a water task does not perform this trip.',
+        snare_mend: 'There is no playable shared snare-repair job yet. An unrelated village task cannot complete this request.',
+        watch_shift: 'There is no playable watch handover yet. Waiting or assigning a patrol does not take their shift.',
+        stay_close: 'There is no playable overnight company action yet. A quick conversation does not keep an overnight promise.',
+        forage_help: 'There is no playable joint foraging outing yet. Giving food does not perform the promised outing.',
+      };
+      if (unavailable[favor.kind]) return { ...blocked(unavailable[favor.kind]), unsupported: true };
+      if (!['food_share', 'heal_help', 'sick_help'].includes(favor.kind)) return { ...blocked('This request has no playable action yet.'), unsupported: true };
+      const v = this.state.village, s = this.state.scholar;
+      if (this.over || s.dead) return blocked('This life has ended.');
+      if (this.inCombat && this.inCombat()) return blocked('Finish the fight before helping.');
+      const person = this.getPerson(vid);
+      if (!(v.roster || []).includes(vid) || vid === this.villagerId || !person || person.dead) return blocked('They are no longer available to receive help.');
+      const node = v.nodePos?.[vid] || { nx: v.px ?? 4, ny: v.py ?? 4 }, pos = v.positions?.[vid];
+      const haven = this.map.px === (v.px ?? 4) && this.map.py === (v.py ?? 4);
+      if (v.away?.[vid] || node.nx !== this.map.px || node.ny !== this.map.py ||
+          (haven && !!v.npcInside?.[vid] !== (s.insideHaven !== false)) || !pos ||
+          ![pos.mx, pos.my, s.mx, s.my].every(Number.isFinite) ||
+          Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return blocked('Move next to them, on the same side of the Haven door, to help.');
+      if (favor.kind === 'food_share') {
+        const meal = this.giveFoodOptions().find(o => o.id === 'meal' || o.amount === 'meal');
+        if (!meal) return blocked('You need edible, unspoiled food in your pack. Food in the pantry must be collected first.');
+        return { ready: true, action: 'food', label: 'Share food now (up to 3 portions)', reason: 'Give up to three edible portions from your pack. The handoff takes a short action; they may still be hungry afterward.' };
+      }
+      if (favor.kind === 'heal_help' && (v.sick?.[vid] || (v.health?.[vid] ?? 100) >= 70)) return blocked('Wound care requires an untreated wound below 70 health and no current illness.');
+      if (favor.kind === 'sick_help' && !v.sick?.[vid]) return blocked('They are no longer sick. There is no illness to tend.');
+      return { ready: true, action: 'care', label: 'Tend them now (about half an hour)', reason: 'Spend about half an hour providing basic care. No magic or medical ability is required; this is not an instant cure.' };
+    },
+
+    convoFavorActionMenu(vid, favor, canPromise) {
+      const status = this.convoFavorAction(vid, favor), out = [];
+      if (status.ready) out.push({ id: 'dlg:favor_action', labels: [status.label], temper: 'kind' });
+      out.push({ id: 'dlg:favor_requirements', labels: [status.ready ? 'What will helping involve?' : 'Why can’t I do this now?'], temper: 'neutral' });
+      if (canPromise && !status.unsupported) out.push({ id: 'dlg:commit', labels: ['"I’ll come back to help."'], temper: 'kind' });
+      const promise = this.state.village.promises?.[vid];
+      if (status.unsupported && promise?.favorId === favor?.id && !promise.kept) out.push({ id: 'dlg:favor_cancel', labels: ['Close this unavailable job (no penalty)'], temper: 'neutral' });
+      return out;
+    },
+
+    convoPerformFavor(vid, favor) {
+      const status = this.convoFavorAction(vid, favor);
+      if (!status.ready) return { ok: false, line: status.reason };
+      const v = this.state.village;
+      if (status.action === 'food') {
+        const result = this.giveFood(vid, 'meal');
+        if (!result?.ok || !(result.units > 0)) return { ok: false, line: 'No food changed hands. The request is still open.' };
+        favor.state = 'fulfilled';
+        favor.fulfilledDay = this.state.scholar.day;
+        return { ok: true, line: `You give them ${result.units} portion${result.units === 1 ? '' : 's'} from your pack. They may still need more food.` };
+      }
+      // tendVillager deliberately returns null on success. Its real care
+      // operation, not return truthiness, is the receipt. Readiness was just
+      // checked against the very same illness/wound thresholds.
+      this.tendVillager(vid);
+      if (this.over || !(v.roster || []).includes(vid)) return { ok: false, line: 'The time spent helping has ended. Check the current situation before doing anything else.' };
+      favor.state = 'fulfilled';
+      favor.fulfilledDay = this.state.scholar.day;
+      return { ok: true, line: 'You spend time tending them. This was care, not a promise of a cure.' };
     },
 
     // convoFavorRenounce: backing out of an open favor obligation — it breaks
@@ -1532,7 +1612,7 @@
         const v = this.state.village || {};
         switch (favor.kind) {
           case 'food_share': return (this.npcNeeds(favor.vid).hunger || 0) > 50;
-          case 'heal_help': return ((v.health || {})[favor.vid] || 100) < 80;
+          case 'heal_help': return ((v.health || {})[favor.vid] ?? 100) < 80;
           case 'sick_help': return ((((v.sick || {})[favor.vid] || {}).daysLeft || 0) > 0);
           case 'watch_shift': return (this.npcNeeds(favor.vid).energy || 100) < 50;
           case 'stay_close': return (this.npcNeeds(favor.vid).fear || 0) > 50;
@@ -1671,10 +1751,31 @@
     // queued, never polite-afterthought.
     convoWantOpener(vid, want) {
       if (!want || !want.def) return null;
+      const c = this.convoGet(vid), v = this.state.village;
+      const prior = { pending: c.pendingQ, count: c.qCount, dodges: c.pendingQDodges,
+        asked: (c.askedQs || []).slice(), any: (v.askedQsAny || []).slice(), qid: c.want?.qid };
       let line = null;
       try { line = want.def.opener.call(this, vid); } catch (e) { line = null; }
+      const question = c.pendingQ !== prior.pending ? c.pendingQ : null;
+      if (question) {
+        c.pendingQ = prior.pending; c.qCount = prior.count; c.pendingQDodges = prior.dodges;
+        c.askedQs = prior.asked; v.askedQsAny = prior.any;
+        if (c.want) c.want.qid = prior.qid;
+      }
       if (!line) return null;
-      return { line, thread: 'want', wantId: want.id };
+      return { line, thread: 'want', wantId: want.id, question };
+    },
+
+    // Generation is provisional. Only the accepted opener may hang an ask;
+    // a ledger-blocked candidate cannot leave answers over a later recall.
+    convoAcceptWantQuestion(vid, opener) {
+      if (!opener?.question) return;
+      const c = this.convoGet(vid), q = opener.question;
+      c.pendingQ = { ...q, q: this.convoQuestionDef(q.id)?.q };
+      c.pendingQDodges = 0; c.qCount = (c.qCount || 0) + 1;
+      if (!c.askedQs.includes(q.id)) c.askedQs.push(q.id);
+      this.noteAskedQ(q.id);
+      if (c.want) c.want.qid = q.id;
     },
 
     // convoWantStaleOpener(vid, want): last-resort reframe when every fresh

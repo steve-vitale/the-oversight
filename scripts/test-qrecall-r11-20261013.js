@@ -25,7 +25,7 @@ const CASES = [
   ['q_quiet', 'a_kind', [/not good at the talking part/i], []],
   ['q_quiet', 'a_help', [/asked what i needed/i], []],
   ['q_read', 'a_honest', [/figuring everyone out/i], []],
-  ['q_read', 'a_name', [/name to watch/i], []],
+  ['q_read', 'a_name', [/who to watch/i], [/gave me a name/i]],
   ['q_read', 'a_none', [/don't gossip/i], []],
   ['q_skill', 'a_tell', [/better with your hands/i], []],
   ['q_skill', 'a_vague', [/hidden card/i], []],

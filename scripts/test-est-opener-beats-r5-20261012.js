@@ -111,7 +111,7 @@ function check(name, cond, detail) {
   const bs = Game.betrayalState();
   bs.invites = bs.invites || {};
   bs.invites[vid] = { count: 0, accepted: 0, outcomes: [], pending: { defId: 'air', day: (Game.state.scholar || {}).day || 1 } };
-  const r = Game.startConvo(vid);
+  const r = require('./lib/conversation-playtest').openInvite(Game,vid);
   const them = (r.transcript || []).filter(e => e.who === 'them').map(e => String(e.text || ''));
   const LURE = 'Come get air with me';
   const lureEntries = them.filter(t => t.indexOf(LURE) !== -1);

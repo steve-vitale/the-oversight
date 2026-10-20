@@ -5566,8 +5566,8 @@
           },
           {
             "id": "a_name",
-            "label": "(mention someone specific)",
-            "react": "\"Interesting. I'll watch them. Thanks for trusting me with that.\""
+            "label": "\"Pay attention to who shares when supplies run low.\"",
+            "react": "\"That's worth watching. I'll pay attention.\""
           },
           {
             "id": "a_none",
@@ -5580,7 +5580,7 @@
         "deeper": "\"Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters.\"",
         "recalls": {
 "a_honest": "\"You said you're still figuring everyone out. Figure anything out yet? Anyone you're watching?\"",
-"a_name": "\"You gave me a name to watch, once. I've been watching.\"",
+"a_name": "\"We talked about who to watch. Still figuring people out?\"",
 "a_none": "\"You said you don't gossip about people. I've been trying to hold that line. It's hard.\""
         }
       },
@@ -5898,7 +5898,7 @@
         "answers": [
           {
             "id": "a_tell",
-            "label": "\"Yes. I don't want to get into what. But yes.\"",
+            "label": "\"There's something I regret. I'm not ready to talk about it.\"",
             "react": "No judgment in their face. \"We're all doing math that doesn't add up. You're still here. That counts.\""
           },
           {
@@ -5917,7 +5917,7 @@
         "follow": "\"The math doesn't add up out here. Be kind to yourself about the remainders.\"",
         "deeper": "\"I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason.\"",
         "recalls": {
-"a_tell": "\"You said yes — the worst thing. You didn't want to get into what. I won't ask. Just — are you carrying it any lighter?\"",
+"a_tell": "\"You said there was something you regretted. You didn't want to get into it. I won't ask. Just — are you carrying it any lighter?\"",
 "a_deflect": "\"You told me to define 'worst.' I still can't. The question stands, if you ever want it.\""
         }
       },
@@ -6019,8 +6019,8 @@
         "answers": [
           {
             "id": "a_tell",
-            "label": "\"Okay — here's one small useful thing I know. Watch.\"",
-            "react": "They watch, intent, then try it themselves. \"Huh. That actually works.\" A grin — student and teacher trade places for a minute."
+            "label": "\"I'd rather show you while we're working. It's easier that way.\"",
+            "react": "\"All right. Show me when we work together.\""
           },
           {
             "id": "a_vague",
@@ -6034,10 +6034,10 @@
             "react": "\"Everyone says that. Then they show you something that saves your life. No pressure, though.\""
           }
         ],
-        "follow": "\"See? Everybody knows something. That's the whole village, right there.\"",
-        "deeper": "\"Here's one: {skill}. Watch — no, like this. See? Your hands learn faster than your head. They always do.\"",
+        "follow": "\"It's easier to learn alongside someone than listen to an explanation.\"",
+        "deeper": "\"I'd like to learn something I can use today. Show me while you work, when you have a moment.\"",
         "recalls": {
-"a_tell": "\"You promised me one small useful thing. I'm still watching — lesson two, whenever you're ready.\"",
+"a_tell": "\"You offered to show me while we work. I'd still like to learn, when there's time.\"",
 "a_vague": "\"You said we're all guessing out here — you didn't know what you knew that I didn't. Has anything surfaced since?\"",
 "a_deflect": "\"You said you're not much of a teacher. You've been teaching all along, though. Badly, maybe. But still.\""
         }
@@ -6344,7 +6344,7 @@
       {
         "id": "q_name_day",
         "minTrust": 0,
-        "q": "\"What day is it? ...Do you still count? I lost track days ago.\"",
+        "q": "\"Do you still count the days? I lost track days ago.\"",
         "answers": [
           {
             "id": "a_count",
@@ -6354,7 +6354,7 @@
           {
             "id": "a_lost",
             "label": "\"Lost track too. Does it matter?\"",
-            "react": "\"Maybe not. But I like that you asked. Means part of you still keeps score.\""
+            "react": "\"It can be hard to keep track. We can start again.\""
           },
           {
             "id": "a_guess",

@@ -259,7 +259,7 @@
     // deed zeroed) must not count as keeping "nobody goes hungry on my
     // watch" — the fiction said "I won't forget this" while the promise
     // system said "you kept your word. That meant everything." Incoherent.
-    if (note !== 'stingy') { try { this.checkPromises('food', vid); } catch (e) {} }
+    if (note !== 'stingy') { try { this.checkPromises('food', vid, { food: true }); } catch (e) {} }
     // THE FOOD TRUTH, OUTWARD (journey-endgame r3 2026-10-11): a real gift
     // shares the food outward — the moral ledger records it. Stolen-food
     // returns aren't generosity (returned above); a bite the engine itself

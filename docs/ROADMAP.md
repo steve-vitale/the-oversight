@@ -1,5 +1,26 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-20 shared release reconciliation: the conversation/favor repair now
+merges Muse `699c56ba8`, preserving the common `a4404566c` history. Use the
+published master/main tip and `MUSE-CALIBRATION-HANDOFF.md`, not the old
+`codex/resume-claude` branch. The old disjoint-history note is stale; its
+149 unique commits remain preserved for separate review. No wholesale port
+is needed. Codex owns
+release integration and the pending favor-journal/deadline follow-up; Muse
+owns calibration on the shared shipped source. The five unfinished joint
+favor jobs remain unfinished; release publication does not close those gates.
+
+2026-10-20 conversation structure repair: Codex's
+`codex/conversation-structure-20261020` starts at Muse's a4404566 cutoff.
+Spoken exchanges own replies after every injector; questions are provisional
+until spoken; menus retain selected wording; explicit subject changes retain
+earned practical actions. Ambush actions bypass stale-question trimming.
+See CONVERSATIONS.md for the repeatable broad sampler and shared-menu test kit,
+and evidence/2026-10-20/conversation-structure-audit-r7.md for retained source,
+mobile, campaign and remaining-quality evidence (final r7 audit). This is a development repair;
+it does not close the public-release or physical-device gates. Resume the
+maker-to-death/later-game work after this urgent conversation repair.
+
 2026-10-19 combined development shipment: main/master 0545151a5's 67 commits
 are reconciled with the phone/combat/Continue candidate (merge 07db9d4d7).
 Twelve automatic regressions protect the reviewed ports; preserve the canonical
@@ -1730,3 +1751,20 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 | World | `docs/WORLD-REGIONS.md` |
 | Table | `docs/TABLE.md` |
 | Kin canon | `docs/KIN.md` (the Taken are off-world; scattered kin are on Earth; both exist) |
+
+2026-10-20 favor follow-through: the conversation lane now connects food and
+basic wound/illness care to their actual actions, costs and live requirements.
+Unsupported joint jobs explain the missing action and cannot create new hollow
+promises; specific favors cannot be kept by unrelated generic events. Native
+phone care and Continue are covered. Read CONVERSATIONS.md and
+`evidence/2026-10-20/favor-action-audit-r3.md` before extending this contract.
+
+Release blocker: creek hauling, shared snare repair, watch handover, overnight
+company and joint foraging still have authored requests without playable joint
+activities. The explanations disclose this gap; they do not close it. Each job
+needs an actual action, concrete target/time/resource rules, exact fulfillment,
+blocked-state explanation and native phone/Continue coverage before release.
+The final319-conversation sample also retains non-favor semantic voice closers
+and story-offer callbacks that acknowledge Yes without delivering the story
+(seed23 Petra and seed2026 Nina at stage30). Those response contracts need a
+separate repair; mechanical context checks do not clear their prose.

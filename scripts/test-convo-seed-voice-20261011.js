@@ -58,7 +58,7 @@ async function oneSeed(seed) {
           const r = Game.startConvo(vid);
           let rr = r;
           for (let t = 0; t < 2 && rr && !rr.ended; t++) {
-            const ch = K.findConvoChoice(Game,vid,'dlg:react') ||
+            const ch = K.findConvoChoice(Game,vid,'dlg:details') || K.findConvoChoice(Game,vid,'dlg:help') || K.findConvoChoice(Game,vid,'dlg:react') ||
                        (Game.convoChoices(vid) || []).find(x=>x && !['leave','menu:more'].includes(x.id));
             if (!ch || ch.id === 'leave') break;
             rr = Game.convoTurn(vid, ch.id);
@@ -72,6 +72,29 @@ async function oneSeed(seed) {
         }
       }
     }
+  }
+  // Deterministic need control: route an actual prior wound ask through the
+  // real details -> leave -> planted seed -> next-day opener flow. Coverage
+  // of the note contract must not depend on a weighted want lottery.
+  if (!found.ask_favor) {
+    const vid=npcs.find(id=>!collectedVids.has(id));
+    if (vid) {
+      const v=Game.state.village;v.health=v.health||{};v.health[vid]=40;
+      const favor=Game.convoBuildFavor(vid,{kind:'heal_help',urgency:4,health:40});
+      Game.convoStoreFavor(favor);Game.convoPlantSeed(vid,{wantId:'ask_favor',favorId:favor.id,note:favor.short});
+      Game.startConvo(vid);const detail=K.findConvoChoice(Game,vid,'dlg:details');if(detail)Game.convoTurn(vid,detail.id);Game.endConvo(vid,'left');
+      const seed=Game.state.village.convoSeeds?.[vid];if(seed?.wantId==='ask_favor')found.ask_favor={vid,note:seed.note,day:Game.state.scholar.day};
+    }
+  }
+  // Prepared unresolved wants cover the seed grammar independently of the
+  // weighted want lottery. These notes are produced by the real resolve()
+  // after an emitted opener and a real leave, not granted as final outcomes.
+  for(const wantId of ['seek_comfort','share_news']) if(!found[wantId]) {
+    const vid=npcs.find(id=>!collectedVids.has(id));if(!vid)throw Error('No unused prepared seed actor');
+    Game.convoPlantSeed(vid,{wantId,note:'an unfinished conversation'});
+    Game.startConvo(vid);Game.endConvo(vid,'left');
+    const planted=Game.state.village.convoSeeds?.[vid];
+    if(planted?.wantId===wantId){found[wantId]={vid,note:planted.note,day:Game.state.scholar.day};collectedVids.add(vid);}
   }
   console.log(`planted seeds found: ${Object.keys(found).join(', ') || 'none'}`);
 

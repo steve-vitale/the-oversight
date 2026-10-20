@@ -47,9 +47,9 @@ const ORPHANS = ['thief', 'grave_robber', 'scarecrow', 'draw_fire', 'bodyguard',
   T.ok('hogtie unknown to the player', lvl('hogtie') === 0);
   Game.startConvo(a);
   // a hanging question suppresses pivots (as it does the plant teach): answer it first
-  let menu = Game.buildMenu(a) || [];
+  let menu = Game.buildMenu(a,true) || [];
   for (let i = 0; i < 4 && !menu.some(ch => ch && String(ch.id).indexOf('skill_learn:') === 0); i++) {
-    const ans = menu.find(ch => ch && /^ans:/.test(ch.id)) || menu.find(ch => ch && ch.id === 'agree');
+    const ans = menu.find(ch => ch && /^(ans:|gq:|react:)/.test(ch.id)) || menu.find(ch => ch && ['dlg:subject','subject'].includes(ch.id));
     if (!ans) break;
     Game.convoTurn(a, ans.id);
     menu = Game.buildMenu(a) || [];

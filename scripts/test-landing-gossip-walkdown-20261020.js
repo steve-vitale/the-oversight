@@ -33,6 +33,7 @@
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const { loadGame } = require('./sim-harness');
+const P = require('./lib/conversation-playtest');
 
 let pass = 0, fail = 0;
 function ok(cond, name) {
@@ -69,34 +70,22 @@ async function main() {
   console.log('departure entries: ' + entries.length +
     ' partKeys=' + entries.map(g => g.partKey).join(','));
 
-  const r0 = Game.startConvo(L);
-  let choices = r0.choices || [];
-  let r = r0;
-  // Resolve the want-opener first: walk menus until ask:gossip appears.
-  for (let t = 0; t < 10; t++) {
-    choices = (r.choices || []);
-    const gq = choices.find(c => c && c.id === 'ask:gossip');
-    if (gq) break;
-    const nx = choices.find(c => c && c.id !== 'leave' && c.id !== 'silence' && !/^dlg:/.test(c.id || ''))
-      || choices.find(c => c && c.id !== 'leave');
-    if (!nx) { console.log('menu dead-ended — probe inconclusive'); process.exit(2); }
-    console.log(`  (opener turn ${t}: picking [${nx.id}])`);
-    r = Game.convoTurn(L, nx.id);
-    if (r.ended) { console.log('convo ended during opener — probe inconclusive'); process.exit(2); }
-  }
-  const find = (id) => ((r.choices || []).find(c => c && c.id === id));
+  Game.startConvo(L);
+  P.reach(Game, L, ['ask:gossip']);
+  let r, choices;
+  const find = (id) => P.offers(Game, L).find(c => c && c.id === id);
   const served = [];
   const sigsOverTime = [];
   // Turn 1: ask:gossip
   let pick = find('ask:gossip');
   if (!pick) { console.log('no ask:gossip in opening menu — probe inconclusive'); process.exit(2); }
-  r = Game.convoTurn(L, pick.id);
+  r = P.choose(Game, L, pick.id);
   choices = r.choices || [];
   // Turns 2..7: dlg:more while offered
   for (let t = 0; t < 6; t++) {
     pick = find('dlg:more');
     if (!pick) { console.log(`dlg:more not offered at turn ${t + 2} (thread dry/retired)`); break; }
-    r = Game.convoTurn(L, pick.id);
+    r = P.choose(Game, L, pick.id);
     const c = Game.convoGet(L);
     const line = String((r && r.line) || '');
     served.push(line);

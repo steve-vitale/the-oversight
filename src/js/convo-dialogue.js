@@ -101,6 +101,7 @@
   function convoIsLightChoice(choiceId) {
     return choiceId === 'goon' || choiceId === 'leave' || choiceId === 'recap' ||
       choiceId === 'dlg:react' || choiceId === 'dlg:more' ||
+      choiceId === 'dlg:favor_requirements' || choiceId === 'dlg:favor_cancel' ||
       choiceId === 'agree' || choiceId === 'joke' || choiceId === 'silence' ||
       choiceId === 'nv:nod' || choiceId === 'nv:smile' || choiceId === 'nv:pointself';
   }
@@ -165,6 +166,28 @@
     if (choiceId && choiceId.indexOf('dlg:') === 0) {
       const dlg = choiceId.slice(4);
 
+      if (dlg === 'favor_action' || dlg === 'favor_requirements' || dlg === 'favor_cancel') {
+        const favor = c.want?.favor || this.convoGetFavor(vid);
+        const status = this.convoFavorAction(vid, favor);
+        c.transcript.push({ who: 'you', text: c.offeredReplies?.[choiceId] || 'Check the request' });
+        let result = dlg === 'favor_action' ? this.convoPerformFavor(vid, favor) : { ok: false, line: status.reason };
+        const promise = this.state.village.promises?.[vid];
+        if (dlg === 'favor_cancel' && status.unsupported && promise?.favorId === favor?.id && !promise.kept) {
+          promise.kept = 'unavailable';
+          favor.state = 'moot';
+          if (c.want) { c.want.stage = 3; c.want.resolution = 'moot'; }
+          result = { ok: false, line: 'The unavailable job is closed. No completion reward or broken-promise penalty was applied.' };
+        }
+        const line = result.line;
+        // Requirements are interface information, never fabricated NPC speech
+        // (and therefore never spoken by the voice package).
+        this.sayLine(vid, line, { diegeticAct: true });
+        if (result.ok && c.want) { c.want.stage = 3; c.want.resolution = 'fulfilled'; }
+        c.replyMenu = null;
+        this.save();
+        return { line, choices: this.convoChoices(vid), ended: !!this.over, transcript: c.transcript.slice() };
+      }
+
       if (dlg === 'subject') {
         // Explicit subject change — open the topic menu.
         c.choosingSubject = true;
@@ -176,7 +199,7 @@
           '"Yeah? What\'s up?"',
           '"Of course. Ask."',
         ]) || '"Sure — what\'s on your mind?"';
-        this.sayLine(vid, line);
+        this.sayLine(vid, line, { tag: 'prompt' });
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -217,7 +240,7 @@
           '"I wish there was more to tell. That\'s it."',
           '"That\'s the whole of it. Sorry."',
         ]) || '"That\'s... pretty much all of it, honestly."';
-        this.sayLine(vid, line);
+        this.sayLine(vid, line, { tag: 'endtopic' });
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -325,6 +348,13 @@
         // REBUILD 2026-10-11: the NPC states the favor from the WANT DEF —
         // the def owns the concrete ask (never "Here's the thing —" loops).
         c.transcript.push({ who: 'you', text: '"How can I help?"' });
+        const settledFavor = c.want?.id === 'ask_favor' &&
+          (c.want.favor || this.convoGetFavor(vid));
+        if (settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
+          const line = '"It\'s already handled. Thank you for asking."';
+          this.sayLine(vid, line, { structural: true });
+          return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, temper: 'kind', name: 'dlg:help' }); } catch (e) {}
         // HONEST REPEAT (dialog-ui-fix 2026-10-11, defect 6): if the want is
@@ -382,6 +412,12 @@
       }
 
       if (dlg === 'commit') {
+        const favor = c.want?.favor;
+        if (favor && this.convoFavorAction(vid, favor).unsupported) {
+          const line = this.convoFavorAction(vid, favor).reason;
+          this.sayLine(vid, line, { diegeticAct: true });
+          return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         // "I'll do it." — the formal commitment. REBUILD 2026-10-11: new
         // handler. The want def speaks the commit beat; the state moves to
         // resolved with the def's resolution (promised/heeded/repaid).
@@ -429,7 +465,9 @@
           }
         } catch (e) { beat = null; }
         if (!beat) beat = '"Thank you. Seriously — thank you."';
-        this.sayLine(vid, beat);
+        // The obligation was just created: its confirmation must be spoken,
+        // even when another villager recently used the same thank-you.
+        this.sayLine(vid, beat, { diegeticAct: true });
         // 'commit' ONLY when a real commitment was made. A blocked favor
         // commit is heard ('stated' via defaultResolution), never 'promised'
         // — 'engaged'/'promised' without an obligation would be the
@@ -558,6 +596,7 @@
         }
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:details' }); } catch (e) {}
+        if (c.want?.id === 'ask_favor') c.want.favorExplained = true;
         this.convoWantEngage(vid, 'engage');
         return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
@@ -596,7 +635,7 @@
           '"Oh. ...No, I get it. Thanks for being straight with me."',
           '"No — it\'s fine. I shouldn\'t have asked."',
         ]) || '"Oh. ...No, I get it. Thanks for being straight with me."';
-        this.sayLine(vid, line);
+        this.sayLine(vid, line, { structural: wantLive });
         this.convoWantEngage(vid, 'deflect');
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }

@@ -11,7 +11,7 @@ async function child(){
  G.convoPlantSeed(vid,{wantId:'seek_comfort',note:'prepared comfort proof'});
  const want=G.convoSelectWant(vid);assert.equal(want.id,'seek_comfort');G.startConvo(vid);
  const c=G.convoGet(vid);c.want={id:want.id,def:want.def,stage:1,fromSeed:true};c.thread='want';
- c.pendingQ=null;c.reactiveQ=null;c.genericQ=null;
+ c.pendingQ=null;c.reactiveQ=null;c.genericQ=null;G.sayLine(vid,G.convoWantOpener(vid,c.want).line);
  let choices=G.convoChoices(vid),checks=0;
  const ids=()=>choices.map(o=>o.id),check=(name,fn)=>{fn();checks++;console.log('ok '+name);};
  const turn=id=>{assert(ids().includes(id),'offered '+id+' in '+ids());const r=G.convoTurn(vid,id);choices=r.choices||[];return r;};
@@ -44,13 +44,13 @@ async function child(){
   turn('dlg:cant');check('honest refusal remains deflected',()=>{assert.equal(c.want.stage,3);assert.equal(c.want.resolution,'deflected');});
   check('refused comfort is not re-offered on its thread',()=>{assert(!ids().includes('dlg:comfort'));assert(!ids().includes('dlg:empathize'));});
  }else if(scenario==='other-thread'){
-  complete();c.thread='grief';c.lastBeat={tag:'feeling',topic:'grief',line:'prepared unrelated grief beat'};choices=G.convoChoices(vid);
+  complete();c.thread='grief';G.sayLine(vid,'"I miss them."',{tag:'feeling',topic:'grief'});choices=G.convoChoices(vid);
   check('another feeling thread can still offer comfort',()=>assert(ids().includes('dlg:comfort')));
   const trust=G.state.village.trust[vid];turn('dlg:comfort');
   check('other-thread comfort still responds, without changing the completed want',()=>{assert(G.state.village.trust[vid]>trust);assert.equal(c.want.stage,3);assert.equal(c.want.resolution,'comforted');});
  }else if(scenario==='other-want'){
   G.convoPlantSeed(vid,{wantId:'warn_you',note:'prepared warning'});const w=G.convoSelectWant(vid);assert.equal(w.id,'warn_you');
-  c.want={id:w.id,def:w.def,stage:1};c.thread='grief';c.lastBeat={tag:'feeling',topic:'grief',line:'prepared unrelated grief beat'};choices=G.convoChoices(vid);
+  c.want={id:w.id,def:w.def,stage:1};c.thread='grief';G.sayLine(vid,'"I miss them."',{tag:'feeling',topic:'grief'});choices=G.convoChoices(vid);
   turn('dlg:empathize');check('comfort on a different thread does not engage an unrelated want',()=>assert.equal(c.want.stage,1));
  }else if(scenario==='cap-and-close'){
   G.state.village.trust[vid]=40;complete();G.endConvo(vid,'done');

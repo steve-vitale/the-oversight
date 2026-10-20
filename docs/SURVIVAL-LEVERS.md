@@ -1,5 +1,29 @@
 # Survival levers and investigation register
 
+## Conversation ownership and honest answers (2026-10-20)
+
+Menu ownership, stable labels, explicit subject selection and required answer
+acknowledgments change available social decisions and RNG consumption. They
+can alter trust, obligations, staffing and progression without numeric survival
+tuning. Existing costs, food supply, HP, damage and difficulty are unchanged.
+The source-frozen r7 screen against Muse a4404566 retains 16 matched seeds per
+capable/maker/merchant/caregiver, all 23 metrics, raw cases and four passing
+observer-neutrality pairs. Wins are 16->14, 9->11, 7->6, 5->12 respectively.
+These mixed policies do not establish pacifist viability.
+
+Decision remains review_required. Capable access/gear watches, maker national/
+community/hydration/class/gear watches and NPC-class signal, merchant access/
+community/class watches, and caregiver survival/death/NPC-class/contest-gear
+watches remain visible. Day-60 eligibility changes remain separate. More wins
+clear none of them. Thirty selected exact replay pairs cover every binary win
+flip and the worst adverse deaths, hungry-NPC and earned-gear case per policy;
+all replay full state/outcomes/metrics. Early trust differences are observed
+associations, not a causal explanation for the ending. No difficulty offset
+was applied to recover an old percentage. Retained evidence is in
+evidence/2026-10-20/conversation-structure-audit-r7.md and its linked scorecard.
+This r7 decision precedes Steve's additional favor-action audit; remeasure any
+subsequent fulfillment changes against the same observer and policy revision.
+
 ## Muse/main reconciliation decision (2026-10-19)
 
 Titan stand-down releases normalized mustered workers, preserves Haven-only
@@ -1326,3 +1350,41 @@ outcome changes and their warnings. No numeric lever or policy changed.
 These synchronous results do not estimate the survival benefit of reachable
 phone controls. Actual touch play at both sizes separately completes zero-move
 Wait and escape. Keep existing difficulty decisions and physical-device gates.
+
+## Conversation favor follow-through (2026-10-20)
+
+This changes access and promise semantics, not numeric difficulty parameters.
+Food and basic care can be performed from the request; they pay the existing
+pack/time costs. Concrete favors now require their own physical deed receipts.
+Generic task completions, hello/comfort and food gifts cannot substitute for
+joint outings, watch shifts or overnight presence. Unsupported old open jobs
+have an explanation and no-penalty close, without completion rewards. Request
+voice decoration no longer introduces random questions or contradictory claims.
+
+Retained 16 matched seeds per capable/maker/merchant/caregiver, 150 controller
+iterations, under the same observer/policies/harness: 64 observed plus four
+neutral controls per arm. Final r3 is source-stable and all controls match.
+Both r7-to-r3 and a440-to-r3 comparisons retain all 23 metrics; this is a screen,
+not a 64-seed/holdout confirmation. Mixed controllers do not prove pacifism.
+
+Wins r7 -> favor r3: capable 14 -> 15, maker 11 -> 7, merchant 6 -> 10,
+caregiver 12 -> 6 (each /16). Against a440: 16 -> 15, 9 -> 7, 7 -> 10,
+5 -> 6. None is automatically an improvement or regression verdict.
+
+The favor-only screen flags capable national access, first-bearer survival,
+deaths, community loss, living NPCs and eligible NPC class access; maker Table
+entry/invitation, day-30 survival and community size; merchant day-30 survival,
+NPC class access and contest/show gear; caregiver Table entry/invitation,
+first-bearer survival, community loss and player class access. Maker and merchant
+day-60 eligibility changed: keep the coverage warning and denominators. The
+combined a440 screen also retains maker earned-gear and merchant NPC-class
+warnings. A gain in wins cannot clear any of these warnings.
+
+Decision: retain the bounded correctness repair for development review and
+keep the balance decision `review_required`. Do not restore false fulfillment
+or compensate with HP/food/reward tuning to recover a win-rate target. Selected
+exact-case replays cover every binary win flip plus each policy's largest
+adverse deaths, NPC hunger and earned-gear change. See the favor-action r3 audit
+and raw panels/replays for verified counts and coarse first differences; those
+are diagnostic associations, not causal explanations of endings. Five authored
+joint jobs and remaining callback/voice prose gaps stay release blockers.

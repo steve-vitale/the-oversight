@@ -42,7 +42,7 @@
     if (c && (c.pendingQ || (c.reactiveQ && c.reactiveQ.id) || c.genericQ)) return 'question';
     if (c && ((c.thread === 'trade' && c.pendingTrade) || c.pendingHawk)) return 'offer';
     switch (thread) {
-      case 'request': return 'question';   // they asked to talk — there's a reason
+      case 'request': return 'news'; // an actual question above owns answers
       case 'secret': return 'news';
       case 'want': {
         // Distinguish by want ID (Steve 2026-10-06).
@@ -53,7 +53,7 @@
         if (wid === 'seek_comfort') return 'feeling';
         if (wid === 'share_news') return 'news';
         if (wid === 'warn_you') return 'news';
-        if (wid === 'curious') return 'question';
+        if (wid === 'curious') return 'news'; // live question state owns asks
         if (wid === 'just_company') return 'small';
         return 'offer'; // fallback for unknown wants
       }
@@ -119,6 +119,7 @@
   // wrong tag for the actual want type.
   Game.beatOf = function (vid) {
     const c = this.convoGet(vid);
+    if (c.spokenBeat) return c.spokenBeat;
     if (c.lastBeat && c.lastBeat.tag) {
       // Re-classify want threads by want ID — the cached tag may be wrong.
       if (c.lastBeat.tag === 'offer' && c.thread === 'want' && c.want && c.want.id) {
@@ -141,6 +142,15 @@
     return { tag, topic: c.thread || 'small', line: null };
   };
 
+  // Only actual emission establishes reply context. Generated or queued
+  // lines and player-move bookkeeping cannot replace the displayed beat.
+  Game.convoRecordSpokenBeat = function (vid, line, opts) {
+    const c = this.convoGet(vid);
+    const topic = opts?.topic || c.thread || 'small';
+    const tag = opts?.tag || (c.choosingSubject ? 'prompt' : threadBeatTag(c.thread, c));
+    c.spokenBeat = { tag, topic, line: String(line) };
+  };
+
   // Tag transcript entries: every 'them' line carries its beat tag.
   // Wrapped once per convo — the push stamps the entry from c.lastBeat.
   function ensureTranscriptTagged(Game, vid) {
@@ -148,9 +158,9 @@
     if (!c.transcript || c.transcript._beatTagged) return;
     const origPush = c.transcript.push.bind(c.transcript);
     c.transcript.push = function (entry) {
-      if (entry && entry.who === 'them' && !entry.beat && c.lastBeat) {
-        entry.beat = c.lastBeat.tag;
-        entry.topic = c.lastBeat.topic;
+      if (entry && entry.who === 'them' && !entry.beat && c.spokenBeat) {
+        entry.beat = c.spokenBeat.tag;
+        entry.topic = c.spokenBeat.topic;
       }
       return origPush(entry);
     };
@@ -197,35 +207,35 @@
   const REPLY_POOLS = {
     news: {
       past: [
-        { id: 'dlg:more', v: ['"What was that like?"', '"Do you ever miss it?"', '"Tell me about before."'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"Huh."', '"I can picture it."', '"That\'s a whole life."'] },
       ],
       goal: [
-        { id: 'dlg:more', v: ['"How\'s that going?"', '"What\'s the hard part?"', '"What would it take?"'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"I hope you get there."', '"That matters."', '"Yeah."'] },
       ],
       village: [
-        { id: 'dlg:more', v: ['"Who\'s struggling most?"', '"What do we do about it?"', '"How\'s everyone holding up, really?"'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"I\'ve noticed."', '"We\'ll figure it out."', '"Hm."'] },
       ],
       plans: [
-        { id: 'dlg:more', v: ['"When?"', '"Want company?"', '"What do you need for that?"'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"Good plan."', '"Be careful out there."', '"Sounds right."'] },
       ],
       gossip: [
-        { id: 'dlg:more', v: ['"Who told you?"', '"Do you believe it?"', '"What else have you heard?"'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"No kidding."', '"Huh. People talk."', '"I\'ll keep that in mind."'] },
       ],
       personal: [
-        { id: 'dlg:more', v: ['"Tell me more about that."', '"I didn\'t know that about you."', '"What else?"'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"That tracks."', '"I get that."', '"Huh."'] },
       ],
       secret: [
-        { id: 'dlg:more', v: ['"Why are you telling me this?"', '"Does anyone else know?"', '"Go on."'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"I won\'t tell."', '"...Wow."', '"Okay."'] },
       ],
       _default: [
-        { id: 'dlg:more', v: ['"Go on."', '"Tell me more."', '"And then?"'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"Huh."', '"I see."', '"Yeah."'] },
       ],
     },
@@ -236,7 +246,7 @@
         { id: 'dlg:askwhy', v: ['"What happened?"', '"Want to talk about it?"', '"Do you want to tell me?"'] },
       ],
       cheer: [
-        { id: 'dlg:more', v: ['"What\'s got you smiling?"', '"Good. We needed that."', '"Tell me the good news."'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"Nice."', '"Ha — good."', '"That\'s the spirit."'] },
       ],
       _default: [
@@ -252,7 +262,7 @@
     },
     small: {
       _default: [
-        { id: 'dlg:more', v: ['"Yeah?"', '"Mmhm."', '"Go on."'] },
+        { id: 'dlg:more', v: ['"Tell me more."', '"Go on."', '"I’m listening."'] },
         { id: 'dlg:react', v: ['"Huh."', '"Oh nice."', '"I see."'] },
       ],
     },
@@ -274,6 +284,7 @@
 
     const out = [];
     const seen = new Set();
+    const wantOwnsMenu = c.want?.def && c.want.stage > 0 && (!c.thread || c.thread === 'want' || c.thread === 'small');
 
     // THE WANT LEADS (convo rebuild 2026-10-11, Steve): the live want's
     // options come first — engage or deflect THAT want, not a grab-bag.
@@ -340,6 +351,8 @@
     const wantDecided = !!(c.want && c.want.def && (c.want.stage || 0) >= 3);
     const comfortThread = c.want?.id === 'seek_comfort' && (!c.thread || c.thread === 'want' || c.thread === 'small');
     for (const entry of topicPool) {
+      // Authored wants own the complete decision, even a settled empty menu.
+      if (wantOwnsMenu) continue;
       if (seen.has(entry.id)) continue;
       if (wantEngaged && entry.id === 'dlg:help') continue;
       if (wantDecided && entry.id === 'dlg:cant') continue;
@@ -365,7 +378,8 @@
       // is honest — the want menu's || labels[0] fallback already does this.
       // Voice-shape the label: blunt/soft/plain variants are baked into
       // the pools above as alternates; the cycle keeps them fresh.
-      out.push({ id: entry.id, label });
+      // A topic alone cannot assert agreement, shared experience or danger.
+      out.push({ id: entry.id, label: entry.id === 'dlg:react' ? '(listen)' : label });
     }
 
     // Doubt surfaces on news AND small beats when you have doubts.
@@ -426,7 +440,7 @@
     try {
       const TOPIC_THREADS = ['village', 'past', 'goal', 'plans', 'gossip', 'personal'];
       const onThread = TOPIC_THREADS.indexOf(c.thread) !== -1;
-      if (!onThread && c.thread !== 'grief' && c.thread !== 'cheer') {
+      if (!wantOwnsMenu && !onThread && c.thread !== 'grief' && c.thread !== 'cheer') {
         const youKnow = Object.keys(this.state.codex.plants || {})
             .filter(k => this.plantKnown(k)); // L1+ only: a blind taste isn't teachable knowledge
         // REBUILD 2026-10-11: the union — background familiarity counts as
@@ -467,8 +481,8 @@
         const bridge = this.bridgeLine(vid, fromTopic);
         // REBUILD 2026-10-11: sayLine is the single emission choke point —
         // it pushes the transcript entry. The manual push above is gone.
-        if (typeof this.sayLine === 'function') this.sayLine(vid, bridge, { tag: 'small' });
         c.choosingSubject = true;
+        if (typeof this.sayLine === 'function') this.sayLine(vid, bridge, { tag: 'prompt' });
         return { line: bridge, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
       return prevTurn.call(this, vid, choiceId);

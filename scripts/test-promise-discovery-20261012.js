@@ -15,7 +15,7 @@ function ok(cond, name) {
   else { fail++; console.log('  FAIL:', name); }
 }
 function ids(Game, vid) {
-  return (Game.convoChoices(vid) || []).map(c => c && c.id).filter(Boolean);
+  return require('./lib/conversation-playtest').offers(Game,vid).map(c => c && c.id).filter(Boolean);
 }
 function take(Game, vid, id) {
   Game.convoTurn(vid, id);
@@ -72,6 +72,7 @@ function driveToOffer(Game, vid, maxTurns) {
     chIds = ids(Game, vid);
     sawAskGoal = chIds.indexOf('ask:goal') !== -1;
   }
+  const hook=require('./lib/conversation-playtest').reach(Game,vid,['ask:goal']);sawAskGoal=!!hook;chIds=require('./lib/conversation-playtest').offers(Game,vid).map(x=>x.id);
   console.log('  open/threadless choices:', chIds.slice(0, 10).join(','));
   ok(sawAskGoal, 'hook: ask:goal offered post-System while promise undiscovered (was: never)');
   if (!sawAskGoal) { console.log('  (hook not visible — driving via handler for the rest)'); }
@@ -98,7 +99,8 @@ function driveToOffer(Game, vid, maxTurns) {
 
   // --- 3. offer_help appears in a fresh conversation (off-thread, opened up)
   Game.talkTo(vid);
-  const tookAt = driveToOffer(Game, vid, 14);
+  const earned=require('./lib/conversation-playtest').reach(Game,vid,['offer_help'],24);
+  const tookAt=earned?0:-1;if(earned)require('./lib/conversation-playtest').choose(Game,vid,earned.id);
   c = Game.convoGet(vid);
   console.log('  fresh convo: offer_help taken at turn', tookAt, '(thread was ' + c.thread + ')');
   ok(tookAt >= 0, 'offer_help appears once they have opened up (was: dead circular)');

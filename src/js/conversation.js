@@ -354,12 +354,15 @@
   // is always on-thread. When the thread has no more beats, the fallback
   // pools below carry the moment honestly instead of pivoting away.
   const TOPIC_FOLLOWUPS = {
-    village: ['"Who keeps things running here?"', '"How long have you been here?"', '"What\'s the hardest part of living here?"'],
-    past: ['"What was that like?"', '"Do you miss it?"', '"How did you end up here?"'],
-    goal: ['"How can I help with that?"', '"What\'s in the way?"', '"Why does that matter to you?"'],
-    plans: ['"When?"', '"Want company?"', '"What do you need for that?"'],
-    gossip: ['"Who else knows about this?"', '"What do you make of that?"', '"Tell me more about them."'],
-    personal: ['"Tell me more."', '"How do you feel about that?"', '"What happened next?"'],
+    // These handlers continue the topic; they do not answer an arbitrary
+    // specific question. Offer one honest continuation, not three aliases
+    // promising different answers from the same generator.
+    village: ['"Tell me more about the village."'],
+    past: ['"Tell me more about your life before."'],
+    goal: ['"Tell me more about what you want to do."'],
+    plans: ['"Tell me more about your plans."'],
+    gossip: ['"Tell me more about what you heard."'],
+    personal: ['"Tell me more."'],
   };
   const TOPIC_FOLLOWUP_FALLBACK = {
     village: ['"It\'s home. Wasn\'t always, but it is now."', '"We make do. Everyone pulls weight — that\'s the whole secret."', '"Ask me again in a week. It changes that fast out here."'],
@@ -386,20 +389,15 @@
   // Acknowledgments are human filler, tracked no-repeat per villager via
   // convoPick, like every other react pool.
   const GQ_ACK = {
-    yes: ['\"Yeah. Thought so — and I\'m glad it\'s you saying it.\"',
-          '\"Knew it. You\'ve got good instincts for this stuff.\"',
-          '\"Good. Good to know I\'m not the only one seeing it.\"',
-          '\"Right. That\'s what I figured — which is why I asked you, not them.\"',
-          'They nod, satisfied — like a piece just clicked into place.'],
-    no: ['\"Hm. Fair. I had to check — you never know who\'s actually paying attention.\"',
-         '\"Okay. Worth asking. I\'d rather hear no than guess wrong.\"',
-         '\"Right. Noted — and I mean that, I\'m keeping track of who says what.\"',
-         '\"Yeah, figured. Had to ask. The asking matters, even when the answer\'s no.\"',
-         'They take that in, turning it over like a stone.'],
-    unsure: ['\"Nobody is, these days. We\'re all guessing — some of us just guess louder.\"',
-             '\"Fair enough. I\'d rather hear that than a confident lie.\"',
-             '\"Yeah. Me neither, some days. The days I do know, I worry I\'m wrong.\"',
-             '\"Honest. I\'ll take honest over certain every time.\"'],
+    yes: ['"All right. Thank you for telling me."',
+          'They nod. "Okay."',
+          '"I see." They take a moment to think about your answer.'],
+    no: ['"Okay. Thank you for telling me."',
+         'They take that in without interrupting.',
+         '"All right. I wanted to ask rather than assume."'],
+    unsure: ['"It\'s all right if you don\'t know."',
+             '"Okay. You don\'t have to have an answer."',
+             'They nod, giving you room to think.'],
     howru_bad: ['"Yeah. Me too, if I\'m honest." A small, real smile.',
                 '"Thank you for saying it straight. Most people perform."',
                 '"Okay. That\'s allowed, you know. Sit a minute?"'],
@@ -443,23 +441,41 @@
   // { kind, q } or null. kind: 'yn' | 'howru' | 'open'.
   function classifyQuestion(line) {
     if (!line || typeof line !== 'string') return null;
-    const t = String(line).replace(/^[\s"'“”‘’]+|[\s"'“”‘’.,;:—–-]+$/g, '');
+    // Gestures before a quote must not turn a yes/no question into an
+    // unrelated open question (and its generic 'What do you think?' menu).
+    const speech = [...line.matchAll(/"([^"]+)"|“([^”]+)”/g)].map(m => m[1] || m[2]).join(' ');
+    let t = String(speech || line).replace(/^[\s"'“”‘’]+|[\s"'“”‘’.,;:—–-]+$/g, '');
     // The direct question can sit mid-line ("Are you eating enough? You
     // look thin.") — take the first question sentence, not just a trailing one.
-    const m = t.match(/([^.?!]*\?)/);
+    let m = t.match(/([^.?!]*\?)/);
     if (!m) return null;
-    const q = m[1].trim();
+    // A talk request has already opened the conversation. When its courtesy
+    // preface introduces a reason, answer that reason (or its real question),
+    // rather than offering Yes/No to "Can we talk?" after hearing the concern.
+    if (/^(can|could) we (talk|speak)\?$/i.test(m[1].trim()) && t.slice(m.index + m[0].length).trim().length > 6) {
+      t = t.slice(m.index + m[0].length).trim();
+      m = t.match(/([^.?!]*\?)/);
+      if (!m) return null;
+    }
+    // Voice preambles are delivery, not the grammar of the question. Match
+    // the addressed clause after a colon/dash ("About the wound — have you
+    // had a chance?") without turning a noun echo ("My plan?") into an ask.
+    let q = m[1].trim().replace(/^(?:.*[:—–]\s*)(?=(?:you|do|did|is|are|can|could|would|should|will|have|has|was|were|does|what|who|where|when|why|how)\b)/i, '');
     // Discourse markers, not questions: a bare "Honestly?" / "Really?" /
     // "Right?" is a tag, not something the player must answer.
     if (/^(honestly|really|right|yeah|huh|eh)\?$/i.test(q)) return null;
+    if (/^where (?:was|am) I\?$/i.test(q)) return null; // the speaker finding their place
     // TAG QUESTIONS: ", yeah?" / ", right?" / ", huh?" trail a statement —
     // rhetorical agreement-seeking, not a question to answer. ("Keep it
     // between us, yeah? Forget it." — socialite playtest 2026-10-06)
-    if (/,\s*(yeah|right|huh|eh|ok|okay)\?$/i.test(q)) return null;
+    if (/,\s*(yeah|right|huh|eh|ok|okay|you know)\?$/i.test(q)) return null;
     // RHETORICAL SELF-ANSWERED OPENERS: "You know what I miss? Minneapolis
     // rain." — the speaker answers themselves in the same line. Only when
     // the framing is rhetorical AND the line keeps talking after the "?".
-    const rest = t.slice(m[0].length).replace(/[\s"'“”‘’.,;:—–-]+/g, '');
+    const rest = t.slice(m.index + m[0].length).replace(/[\s"'“”‘’.,;:—–-]+/g, '');
+    if (rest.length > 6 && (/^(?:can|could) I (?:tell you|be honest)\b/i.test(q) ||
+        /^(?:when|how|why) (?:did|do|am|was|have) I\b/i.test(q) ||
+        /^(?:if I|doesn.t .*, does it)/i.test(q) || /^(?:what|honestly)\?$/i.test(q))) return null;
     // "Did you hear?" is gossip framing, never a genuine question — extracting
     // it produced the broken follow-up '"Sorry — I asked you something
     // there." Did you hear?' (journey-scale r3 2026-10-11).
@@ -467,15 +483,35 @@
     if (/isn'?t that (weird|strange|something)|rhetorical/i.test(q)) return null;
     // Rhetorical markers can trail the question ("...? Don't answer that.")
     if (/don'?t answer|never mind/i.test(t)) return null;
-    if (/how are you\b/i.test(q)) return { kind: 'howru', q };
+    if (/how are you\b/i.test(q) || /^(are )?you (doing )?(okay|ok|alright|all right)\?$/i.test(q)) return { kind: 'howru', q };
     if (/what'?s up\?|how'?s it going\?/i.test(q)) return { kind: 'greet', q };
+    if (/^why (?:do|did|are) you (?:ask|asking)\?$/i.test(q) || /^what(?:'s| is) this about\?$/i.test(q)) return { kind: 'reason', q };
+    if (/^what(?:'s| is) the count today\?$/i.test(q) || /^what day is it\?$/i.test(q)) return { kind: 'day', q };
     // Colloquial yes/no: "you ever...?", "have you ever...?"
     if (/^(do you ever|you ever|have you ever|did you ever)\b/i.test(q)) return { kind: 'yn', q };
     // Imperative-as-question: invitations and requests ("Grab an end?",
     // "Walk with me?", "Smile for me?", "Say that again?"). Yes/No fits.
     if (/^(grab|take|walk|sits?|come|join|help|look|listen|smile|race|stay|wait|tell me|say|repeat)\b/i.test(q)) return { kind: 'yn', q };
     if (/^(do|did|is|are|can|could|would|should|will|have|has|was|were|does|am|don't|can't|won't|isn't|aren't|want to|wanna|shall we)\b/i.test(q)) return { kind: 'yn', q };
-    return { kind: 'open', q };
+    if (/^(what|who|whose|which|where|when|why|how)\b.+\?/i.test(q)) return { kind: 'open', q };
+    return null; // a name/topic echoed as a question is not a player question
+  }
+
+  // A discovered introduction waits behind the current exchange, like other
+  // follow-on beats. Queuing it must not claim that the player has heard it.
+  function queueTraderIntro(c) {
+    if ((!c.traderIntroPending && !c.invitePending) || c.pendingQ || c.reactiveQ || c.genericQ || c.heldAsk || c.windingDown) return;
+    if (c.thread === 'want' && c.want && ((c.want.stage || 0) < 2 ||
+        (['ask_favor','seek_comfort','seek_taken','warn_you'].includes(c.want.id) && (c.want.stage || 0) < 3))) return;
+    c.heldBeats = c.heldBeats || [];
+    if (c.heldBeats.some(h => h.ask || h.traderIntro || h.invitation)) return;
+    if (c.invitePending) {
+      c.heldBeats.push({ text: c.invitePending, invitation: true });
+      c.invitePending = null;
+      return;
+    }
+    c.heldBeats.push({ text: c.traderIntroPending, traderIntro: true });
+    c.traderIntroPending = null;
   }
 
   // floraWords: the green world coming up in conversation. Teaching later
@@ -631,6 +667,11 @@
     voiceLine(vid, line) {
       const t = String(line == null ? '' : line);
       if (!/^".*"$/.test(t)) return line;
+      // Requests already carry a precise action and response contract.
+      // Random semantic mannerisms ("It'll be fun", "how are YOU?") can
+      // contradict an injury or introduce a second unanswered question.
+      const request = this.state.village?.conv?.[vid];
+      if (request?.active && ['ask_favor', 'repay'].includes(request.want?.id)) return line;
       const temp = String(this.npcTemper(vid) || 'steady').toLowerCase();
       const V = (this.data.characterGen || {}).voice || {};
       const prof = (V.profiles || {})[temp] || (V.profiles || {}).steady || {};
@@ -964,8 +1005,20 @@
         }
       }
       let first = null;
+      if (fellBack) {
+        // The promised ask did not reach the player. Never display answers
+        // to it over a ledger fallback such as "lost my train of thought".
+        c.pendingQ = null; c.reactiveQ = null;
+      }
+      // A generic answer belongs to the actual spoken ask, not to an earlier
+      // line replaced by a mood beat, fallback or another speaker intention.
+      if (c.genericQ && !useChunks.join(' ').includes(c.genericQ.q)) {
+        c.genericQ = null;
+        c.heldBeats = (c.heldBeats || []).filter(h => !h.genericFollowup);
+      }
       for (const chunk of useChunks) {
         const entry = { who: 'them', text: chunk };
+        if (this.convoRecordSpokenBeat) this.convoRecordSpokenBeat(vid, chunk, fellBack ? { tag: 'endtopic' } : opts);
         if (opts && opts.foreign) entry.foreign = opts.foreign;
         // (beat/topic tags are stamped by convo-beats' transcript-push wrapper
         // from c.lastBeat when present — same as before.)
@@ -1047,7 +1100,10 @@
     // unit-testable.
     convoAnswerReactLine(vid, react) {
       const voiced = (txt) => {
-        try { return this.voiceLine(vid, this.fillTalkLine(txt, this.vpOf(vid))); }
+        // These reactions acknowledge the player's answer. Filling them as
+        // NPC self-description lets a liar's origin scrub rewrite the place
+        // the PLAYER just named (Columbus became the NPC's cover, Denver).
+        try { return this.voiceLine(vid, txt); }
         catch (e) { return txt; }
       };
       const specific = voiced(react);
@@ -2416,7 +2472,10 @@
     // direct question answerless (Steve's Rule 4).
     convoGenericQ(vid, line) {
       const c = this.convoGet(vid);
-      if (c.pendingQ || c.reactiveQ) return null;
+      if (c.pendingQ || c.reactiveQ || c.pendingTrade || c.pendingHawk) return null;
+      // Real favor instances have their own details/commit/refuse lifecycle.
+      // A generic "Yes" cannot stand in for creating that obligation.
+      if (c.choosingSubject || (c.thread === 'want' && c.want?.id === 'ask_favor' && (c.want.stage || 0) < 3)) return null;
       // Never stack questions: one hanging question at a time. A response
       // line that asks something new while a question hangs is part of the
       // dodge, not a second question (it must not reset the follow-up).
@@ -2453,9 +2512,17 @@
           { id: 'gq:greet:surviving', label: '"Surviving."' },
         ];
       }
+      if (gq.kind === 'reason') return [
+        { id: 'gq:reason:understand', label: '"I want to understand you better."' },
+        { id: 'gq:reason:curious', label: '"I was curious. You don\'t have to answer."' },
+      ];
+      if (gq.kind === 'day') return [
+        { id: 'gq:day:count', label: '"It\'s day ' + this.state.scholar.day + '."' },
+        { id: 'gq:day:unsure', label: '"I\'ve lost track of the days."' },
+      ];
       return [
-        { id: 'gq:open:take', label: '"What do you think?"' },
-        { id: 'gq:open:unsure', label: '"I don\'t know yet."' },
+        { id: 'gq:open:take', label: '"I need a moment to think about that."' },
+        { id: 'gq:open:unsure', label: '"I don\'t know how to answer that yet."' },
       ];
     },
 
@@ -2793,6 +2860,7 @@
             // Blocked: fall through — seed stays planted, side effects
             // deferred, next conversation resumes it.
           } else {
+            this.convoAcceptWantQuestion(vid, opener);
             if ((c.want.stage || 0) < 1) c.want.stage = 1; // surfaced
             // SURFACED (gap-closure 2026-10-17): the want spoke — defs with
             // an onSurfaced hook (seek_taken's 3-day gate) start it here,
@@ -2954,6 +3022,7 @@
           // the next candidate — the want stays live at stage 0 and
           // resurfaces next conversation (or as a seed), never a dry line.
           if (!this.convoWouldBlock(vid, wline)) {
+            this.convoAcceptWantQuestion(vid, opener);
             c.want.stage = 1; // surfaced, in the opening beats
             try { if (want.def.onSurfaced) want.def.onSurfaced.call(this, vid); }
             catch (e) { console.warn('[convo] onSurfaced', e); }
@@ -3961,7 +4030,29 @@
     // the same pager. Overflow is navigation, never a discarded feature.
     convoMenuPage(vid, choices) {
       const c=this.convoGet(vid), seen=new Set();
+      // Run after additive injectors too: one currently spoken question or
+      // offer owns its answers. An unrelated action cannot enter that menu.
+      let owns = null;
+      if (c.thread === 'ambush') owns = id => /^(betrayal:run|betrayal:talk|betrayal:fight)$/.test(id);
+      else if (c.windingDown || c.spokenBeat?.tag === 'closing') owns = id => id === 'leave' || id === 'silence';
+      else if (c.spokenBeat?.tag === 'invitation' && this.pendingInvite?.(vid)) owns = id => /^betrayal:(accept|decline)$/.test(id) || id === 'leave' || id === 'silence';
+      else if (c.pendingQ) owns = id => id.startsWith('ans:') || ['deflect_q','leave','silence'].includes(id);
+      else if (c.reactiveQ) owns = id => id.startsWith('react:') || ['leave','silence'].includes(id);
+      else if (c.genericQ) owns = id => id.startsWith('gq:') || ['leave','silence'].includes(id);
+      else if (c.pendingTrade) owns = id => ['trade_yes','trade_no','leave','silence'].includes(id);
+      else if (c.pendingHawk) owns = id => ['hawker_yes','hawker_no','leave','silence'].includes(id);
+      else if (!c.choosingSubject && c.thread === 'want' && c.want?.stage > 0 && c.want.stage < 3 &&
+          !['curious','share_news','just_company'].includes(c.want.id)) {
+        owns = id => (id.startsWith('dlg:') && id !== 'dlg:invite') || ['goon','leave','silence'].includes(id);
+      }
+      if (owns) {
+        choices = (choices || []).filter(ch => ch && owns(ch.id));
+        if (c.thread !== 'ambush' && !choices.some(ch => ch.id === 'leave')) choices.push({ id: 'leave', label: '"I should go."' });
+      } else if (c.spokenBeat?.tag !== 'invitation') {
+        choices = (choices || []).filter(ch => !/^betrayal:(accept|decline)$/.test(ch.id));
+      }
       const full=(choices || []).filter(ch=>ch && ch.id && ch.id!=='menu:more' && !seen.has(ch.id) && seen.add(ch.id));
+      c.offeredReplies = Object.fromEntries(full.map(ch => [ch.id, ch.label]));
       if (full.some(ch=>/^(ans:|gq:)/.test(ch.id))) { c.menuPage=0;c.menuPages=1;return full; }
       const silent=full.filter(ch=>ch.id==='silence' || ch.id==='nv:listen').slice(0,1);
       const navigation=full.filter(ch=>['leave','subject','dlg:subject'].includes(ch.id));
@@ -4137,7 +4228,36 @@
     // override chain and stay).
     buildMenu(vid, uncapped) {
       const c = this.convoGet(vid);
-      const finish=choices=>{const menu=this.finalizeMenu(vid,choices);return uncapped?menu:this.convoMenuPage(vid,menu);};
+      queueTraderIntro(c);
+      const menuKey = JSON.stringify([c.spokenBeat, c.thread, c.depth, c.choosingSubject, c.windingDown,
+        c.pendingQ, c.reactiveQ, c.genericQ, c.pendingTrade, c.pendingHawk, c.heldBeats, c.spent,
+        c.want?.id, c.want?.stage, c.want?.resolution, c.want?.favorExplained, this.state.scholar.day,
+        this.state.village.trust?.[vid], c.escalated,
+        this.convoFavorAction?.(vid, c.want?.favor || this.convoGetFavor?.(vid))]);
+      if (c.replyMenu?.key === menuKey) {
+        const menu = c.replyMenu.choices.map(ch => ({ ...ch }));
+        c.offeredReplies = Object.fromEntries(menu.map(ch => [ch.id, ch.label]));
+        return uncapped ? menu : this.convoMenuPage(vid, menu);
+      }
+      const finish=choices=>{const menu=this.finalizeMenu(vid,choices);
+        // Keep the exact offered words; handlers must not invent another
+        // question after the player has selected a reply.
+        c.offeredReplies = Object.fromEntries(menu.map(ch => [ch.id, ch.label]));
+        c.replyMenu = { key: menuKey, choices: menu.map(ch => ({ ...ch })) };
+        return uncapped?menu:this.convoMenuPage(vid,menu);};
+      if (c.windingDown || c.spokenBeat?.tag === 'closing') return finish([{ id: 'leave', label: '"See you."' }]);
+      if (c.thread === 'want' && c.want?.favor?.state === 'promised' && !c.choosingSubject &&
+          !c.pendingQ && !c.reactiveQ && !c.genericQ) {
+        return finish(this.convoFavorActionMenu(vid, c.want.favor, false).map(o => ({ id: o.id, label: o.labels[0], temper: o.temper })).concat([
+          { id: 'dlg:subject', label: '"Can I ask you something else?"' },
+          { id: 'leave', label: '"I should go."' },
+        ]));
+      }
+      if (c.spokenBeat?.tag === 'endtopic' && !c.pendingQ && !c.reactiveQ && !c.genericQ && !c.choosingSubject) {
+        const out = [{ id: 'dlg:subject', label: '"Can I ask you something else?"' }, { id: 'leave', label: '"I should go."' }];
+        if (c.heldBeats?.length) out.unshift({ id: 'goon', label: this.convoGoonLabel(vid) });
+        return finish(out);
+      }
       // STICKY OPENED-UP (trust r7 2026-10-12): once they've opened up about
       // their goal (goal thread, depth 2+), that's a relationship fact, not
       // menu flicker — persist it on the convo record (survives talkTo's
@@ -4413,6 +4533,11 @@
           if (a.id === threadAsk || n >= topicCapMood) continue;
           sub.push(a); n++;
         }
+        // Memories and unfinished business are deliberate topic choices,
+        // not replies inserted over the NPC's current thought.
+        if (this.convoWhatsAlive) for (const a of this.convoWhatsAlive(vid) || []) {
+          if (!sub.some(ch => ch.id === a.id)) sub.push(a);
+        }
         // GOSSIP VERBS (fix 2026-10-07): ask:gossip / ask:spread_rumor are
         // earned verbs, not intimacy-budget topics. The topic cap (2 for
         // deflectors) permanently starved them behind t2fresh + ask:personal
@@ -4445,6 +4570,17 @@
         if (!suppressPivot && this.convoSkillChoices) {
           try { for (const ch of this.convoSkillChoices(vid)) if (!sub.some(s => s.id === ch.id)) sub.push(ch); } catch (e) { console.warn('[skill-teaching] subject menu', e); }
         }
+        // Deliberate topic changes also expose earned practical verbs.
+        // Focusing ordinary replies must not strand those features.
+        if (this.goalKnown(vid) && !c.offeredHelp && !(this.state.village.promises || {})[vid] &&
+            (this.hasDiscovered('promise') || c.goalOpenedUp)) sub.push({ id: 'offer_help', label: this.convoActionLabel(vid, 'offer_help') });
+        if (this.isKnowledgeTrader?.(vid) && this.traderKnowledge(vid)?.length &&
+            (this.hasDiscovered('trade') || c.traderMentioned)) sub.push({ id: 'trade', label: '"You know things. I know things. Shall we trade?"' });
+        if (this.tradeSpirit?.(vid) >= 1) sub.push({ id: 'hawker', label: '"Got anything to trade?"' });
+        if (effTrust >= 15 || relAge >= 3) sub.push({ id: 'compare_maps', label: this.convoActionLabel(vid, 'compare_maps') });
+        if (this.observePerson && (relAge >= 4 || this.getDoubts?.(vid)?.length)) sub.push({ id: 'observe', label: '(watch them for a while)' });
+        const mysteries = ['system','monsters','situation'].filter(t => !(c.theorized || []).includes(t) && (t !== 'system' || this.state.systemArrived));
+        if ((effTrust >= 25 || relAge >= 6) && mysteries.length) sub.push({ id: 'theorize', label: this.convoActionLabel(vid, 'theorize') });
         sub.push({ id: 'leave', label: c.exchanges === 0 ? '"Actually — never mind."' : '"I should go."' }); // BREAK-IT (socialite 2026-10-08): 'Nice talking to you' lied on a zero-exchange menu — the player said nothing. An aborted approach says never mind.
         return finish( sub);
       }
@@ -4453,7 +4589,7 @@
       // with what's alive between you — open threads, fresh memories,
       // want-driven questions, world events — not the static pool. Placed
       // before the beat matrix so lived continuity outranks the topic pool.
-      if (!onThread && !suppressPivot && !reactiveDef && !gqActive) {
+      if (c.choosingSubject && !onThread && !suppressPivot && !reactiveDef && !gqActive) {
         try {
           const alive = (typeof this.convoWhatsAlive === 'function') ? this.convoWhatsAlive(vid) : [];
           let aliveAdded = 0;
@@ -4482,7 +4618,7 @@
           // Alive items ride along: prepend them to the beat menu so the
           // conversation leads with what's alive, not just what's next.
           try {
-            const alive = (typeof this.convoWhatsAlive === 'function') && !onThread && !suppressPivot
+            const alive = (typeof this.convoWhatsAlive === 'function') && c.choosingSubject && !onThread && !suppressPivot
               ? this.convoWhatsAlive(vid) : [];
             const pre = [];
             for (const a of (alive || [])) {
@@ -4749,7 +4885,7 @@
       const c = this.convoGet(vid);
       c.active = true; c.exchanges = 0; c.budget = this.convoBudget(vid);
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
-      c.choosingSubject = false; c.lastBeat = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
+      c.choosingSubject = false; c.lastBeat = null; c.spokenBeat = null; c.replyMenu = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
       c.threadLog = []; c._beatThread = null; c._resumedOnce = false;
       // PER-SITTING said-lines (journey-social r16 2026-10-15): the
       // no-repeat ledger (c.saidLines) persists across sittings by design
@@ -4962,7 +5098,7 @@
       let inviteBeat = null;
       try {
         const inv = (this.pendingInvite && this.pendingInvite(vid)) || null;
-        if (inv && !inv.spoken) {
+        if (inv) {
           // BOND-AWARE (journey-social r23): the label is resolved through
           // inviteLabelFor so rivals speak the cold line, not the warm one.
           const label = (typeof this.inviteLabelFor === 'function') ? this.inviteLabelFor(vid, inv) : null;
@@ -4980,14 +5116,19 @@
       // when another villager used the same lure recently (or this one did
       // in an earlier sitting). The menu quotes the label verbatim, so the
       // spoken beat and the menu can never disagree.
-      if (inviteBeat) this.sayLine(vid, inviteBeat, { inviteBeat: true });
+      const openerOwnsReply = c.pendingQ || c.reactiveQ || c.genericQ || (c.thread === 'want' && c.want && (c.want.stage || 0) < 3);
+      if (inviteBeat) {
+        if (openerOwnsReply) c.invitePending = inviteBeat;
+        else this.sayLine(vid, inviteBeat, { inviteBeat: true, tag: 'invitation' });
+      }
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
       // events have visibly changed them since the last conversation, the
       // player SEES it — one short stage-direction beat, at most once a day.
       try {
         const dn = this.convoDriftNote(vid);
         if (dn) {
-          this.sayLine(vid, dn);
+          if (openerOwnsReply || inviteBeat) c.heldBeats.push({ text: dn });
+          else this.sayLine(vid, dn);
         }
       } catch (e) {}
       // BOND ENTRY BEAT (journey-social r22 2026-10-18): sedimented
@@ -5012,7 +5153,8 @@
               const bpool = bd >= 2 ? (bcg.bondBeatWarm || []) : (bcg.bondBeatCold || []);
               const beat = this.convoPickCycle(vid, 'bondbeat', bpool);
               if (beat && !this.convoWouldBlock(vid, beat)) {
-                this.sayLine(vid, beat);
+                if (openerOwnsReply || inviteBeat) c.heldBeats.push({ text: beat });
+                else this.sayLine(vid, beat);
                 c.bondBeatDay = today;
               }
             }
@@ -5024,8 +5166,13 @@
       // learned the concept, you can bring it up with any trader yourself.
       if (this.isKnowledgeTrader && this.isKnowledgeTrader(vid) && !this.hasDiscovered('trade') && Math.random() < 0.5) {
         const seed = '"...I should say, I trade in what I know. My knowledge for yours. Or food, if you\'re short on secrets."';
-        this.sayLine(vid, seed);
-        c.traderMentioned = true;
+        if (!c.pendingQ && !c.reactiveQ && !c.genericQ && opThread !== 'request' && !inviteBeat &&
+            !(opThread === 'want' && c.want && (c.want.stage || 0) < 3)) {
+          c.thread = 'trade'; c.depth = 0;
+          this.sayLine(vid, seed, { tag: 'offer', topic: 'trade' });
+          c.traderMentioned = true;
+          c.traderIntroPending = null;
+        } else c.traderIntroPending = seed;
       }
       // EXILE COLD SHOULDER: carry the break flag on the return so callers
       // (and sim drivers) can tell a broken-shoulder open from a normal one.
@@ -5125,7 +5272,15 @@
     // stuck heldAsk defeats the winddown gate (socialite 2026-10-10).
     convoDropUnspoken(vid, choiceId) {
       const c = this.convoGet(vid);
+      // Every content handler (including early-return injectors) passes this
+      // boundary. Selecting a topic leaves the topic selector; browsing does
+      // not. Otherwise a resumed event speaks but its menu stays on topics.
+      if (c && c.choosingSubject && !['subject','dlg:subject','menu:more','silence','leave'].includes(choiceId)) c.choosingSubject = false;
       if (!c || choiceId === 'goon' || !c.heldBeats || !c.heldBeats.length) return;
+      const traderIntro = c.heldBeats.find(h => h && h.traderIntro);
+      if (traderIntro && !c.traderMentioned) c.traderIntroPending = traderIntro.text;
+      const invitation = c.heldBeats.find(h => h && h.invitation);
+      if (invitation) c.invitePending = invitation.text;
       // DODGE COUNTING (socialite 2026-10-11): a queued-but-unrevealed
       // question the player moves past without tapping the continuer is being
       // dodged — by ANY choice, not just silence. r12 counted silence only;
@@ -5283,7 +5438,12 @@
           }
           const gl = this.convoGoonLabel(vid);
           c.transcript.push({ who: 'you', text: gl });
-          this.sayLine(vid, hb.text, { foreign: hb.foreign });
+          if (hb.traderIntro) {
+            c.traderMentioned = true;
+            c.thread = 'trade'; c.depth = 0;
+          }
+          this.sayLine(vid, hb.text, hb.winddown ? { tag: 'closing' } : hb.invitation ? { tag: 'invitation', inviteBeat: true } : hb.traderIntro ? { tag: 'offer', topic: 'trade' } : { foreign: hb.foreign });
+          queueTraderIntro(c);
           done(hb.text, gl);
           if (hb.winddown) {
             // The goodbye lands: one last turn of choices, then it's over.
@@ -5662,7 +5822,8 @@
           });
         } else if (kind === 'yn') {
           youLine = aid === 'yes' ? '"Yes."' : aid === 'no' ? '"No."' : '"I don\'t know."';
-          resp = this.convoPick(vid, 'gq:yn:' + aid, GQ_ACK[aid] || GQ_ACK.unsure);
+          const acknowledgments = GQ_ACK[aid] || GQ_ACK.unsure;
+          resp = this.convoPick(vid, 'gq:yn:' + aid, acknowledgments) || acknowledgments[0];
           if (aid !== 'unsure') gqTrust = 1;
         } else if (kind === 'howru') {
           youLine = aid === 'bad' ? '"Honestly? Not great."' : aid === 'fine' ? '"I\'m fine."' : '"Better when I\'m busy."';
@@ -5672,13 +5833,21 @@
           youLine = aid === 'notmuch' ? '"Not much. You?"' : '"Surviving."';
           resp = this.convoPick(vid, 'gq:greet:' + aid, GQ_ACK['greet_' + aid] || GQ_ACK.greet_notmuch);
           gqTrust = 1;
+        } else if (kind === 'day') {
+          youLine = aid === 'count' ? '"It\'s day ' + this.state.scholar.day + '."' : '"I\'ve lost track of the days."';
+          resp = aid === 'count' ? '"Thank you. I wanted to check."' : '"It\'s easy to lose count."';
+          gqTrust = 1;
+        } else if (kind === 'reason') {
+          youLine = aid === 'understand' ? '"I want to understand you better."' : '"I was curious. You don\'t have to answer."';
+          resp = aid === 'understand' ? '"All right. Thank you for asking."' : '"Fair enough. I appreciate that."';
+          gqTrust = 1;
         } else {
           if (aid === 'take') {
-            youLine = '"What do you think?"';
-            resp = this.convoPick(vid, 'gq:open:take', GQ_TAKES);
+            youLine = '"I need a moment to think about that."';
+            resp = '"Take your time."';
             gqTrust = 1;
           } else {
-            youLine = '"I don\'t know yet."';
+            youLine = '"I don\'t know how to answer that yet."';
             resp = this.convoPick(vid, 'gq:open:unsure', GQ_ACK.unsure);
           }
         }
@@ -5686,7 +5855,9 @@
         if (wasGq && wasGq.kind === 'howru' && aid === 'bad') {
           try { this.convoDeepTick(vid); } catch (e) {}
         }
-        done(this.voiceLine(vid, resp || '"Hm."'), youLine);
+        // These are complete answer reactions. Random semantic closers such
+        // as "Doesn't matter now" can contradict "Take your time."
+        done(resp || '"Okay."', youLine);
       } else if (choiceId === 'recap') {
         // RECAP (Steve 2026-10-07): long exchanges stay coherent — the
         // player can always ask what the conversation is actually about.
@@ -6201,7 +6372,9 @@
       // return a null line — the phone would show an empty beat. Trail off
       // honestly through the normal emission path below.
       if (line == null) line = '"..."';
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn }) || line;
+      // A required answer acknowledgment is dialogue grammar. Replacing it
+      // with amnesia because another NPC acknowledged a reply is misleading.
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
@@ -6302,7 +6475,7 @@
           if (!gqf.followedUp) {
             const fup = GQ_FOLLOWUP + ' ' + gqf.q;
             gqf.followedUp = true;
-            c.heldBeats.push({ text: fup });
+            c.heldBeats.push({ text: fup, genericFollowup: true });
           } else {
             c.heldBeats.push({ text: GQ_LAPSE });
             c.genericQ = null;

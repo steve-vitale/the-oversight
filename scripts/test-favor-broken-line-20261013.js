@@ -30,7 +30,7 @@ async function main() {
   // Plant a promised favor with a short form + a stale promise entry, then
   // run checkPromises with a non-matching kind so the deadline path fires.
   const favor = {
-    id: 'favor-test-1', vid, kind: 'injury',
+    id: 'favor-test-1', vid, kind: 'heal_help',
     task: 'help Testy with their injury', short: 'this wound',
     state: 'promised', askedDay: day,
   };
