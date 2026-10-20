@@ -1,0 +1,75 @@
+check.js: 257 scripts, 2 parallel (quick)
+.........................................................................F....................F.FF............FF.................................................................................................................................................
+
+  FAIL scripts/godpath/test-main67-gossip-resume-beat.js (exit 1, 7.5s)
+      GOSSIP LINE: "Huh. Let me think about that." "People are saying A person, maybe 40s, with thick glasses has been generous. Sharing around, no questions asked."
+        RESUME LINE: "People are saying A person, maybe 40s, with thick glasses has been generous. Sharing around, no questions asked."
+        FOLLOWUP BEAT: "Quiet lately. Too quiet, maybe."
+        FAIL: dry beat admits the quiet :: "the woman in her 60s, with ink-stained fingers? A HVAC tech, back before. Solid person. …if that makes sense."
+        DRY BEAT: "the woman in her 60s, with ink-stained fingers? A HVAC tech, back before. Solid person. …if that makes sense."
+        FAIL: failed gossip still restores the real narrator
+      
+      12 passed, 2 failed
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 8.4s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey-deepening/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-deepening/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.20.0
+
+  FAIL scripts/godpath/test-measurement-cache-flags.js (exit 1, 80.9s)
+      FAIL both actual CLI configurations complete valid neutral panels
+        FAIL two flags create four independent observer-on/off cache entries
+        FAIL cache identities retain each actual SIMOPT value
+        FAIL repeating the same setting reuses its two verified cases
+      
+      measurement cache flag isolation: 0 passed, 4 failed, 0 todo (phase 0)
+      failing: both actual CLI configurations complete valid neutral panels | two flags create four independent observer-on/off cache entries | cache identities retain each actual SIMOPT value | repeating t
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 8.4s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit null, 120.1s)
+      ok   real CLI retains one actual campaign and both absent offers
+        ok   played bearer retains the actual non-first occupation card
+        ok   campaign neutrality and deterministic exclusions are separate
+        ok   excluded jobs contain no synthetic loss, usage or exposure
+        ok   unchanged settings reuse only their six exact on/off cases
+        ok   changed shared cohort observer invalidates every cached case
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 9.8s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/build-notes.json,src/data/characterGen.json,src/js/betrayal.js,src/js/build.js,src/js/contests.js,src/js/conversation.j
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  slowest: scripts/godpath/test-occupation-panels.js 120s, scripts/godpath/test-trust-observer-neutrality.js 113s, scripts/test-table-endings-20261014.js 101s
+
+check.js: 251 passed, 6 failed in 1983s
+CHECK_EXIT=1

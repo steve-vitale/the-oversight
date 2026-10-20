@@ -155,5 +155,10 @@ real wave-3 trick fights). Baseline NOT rolled.
 - Per-seed JSONs: evidence/2026-10-20/journey-deepening-r24-competent-97{02..05}.json
 - Transcripts: evidence/2026-10-20/journey-deepening-r24-transcript-competent-*.txt
 - Run log: evidence/2026-10-20/journey-deepening-r24-run.log
-- check.js --quick: evidence/2026-10-20/journey-deepening-r24-checkquick.log
+- check.js --quick: evidence/2026-10-20/journey-deepening-r24-checkquick.log — 251 passed,
+  6 failed (all pre-existing, zero regressions from this run which changed no src/js):
+  4 godpath suites also failing on r23's base (gossip-resume-beat, measurement-proof-update,
+  measurement-workflow, phone-frame-proof receipt staleness) + measurement-cache-flags
+  (verified failing on pristine master 5b22f9022) + occupation-panels (120s check.js timeout;
+  passes standalone on master in 129s — timeout flake, not a code failure).
 - Pre-flight: scripts/test-w3-sig-endstates-r23.js 9/9 GREEN (unchanged from r23)
