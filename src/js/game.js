@@ -4579,9 +4579,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const skipSigs = (opts && opts.skipSigs) || [];
         const gossipSig = (g) => 'gossip:' + (g.action || '') + '|' +
           (((g.dims) || {}).who || '') + '|' + (g.partKey || ('d' + (g.day || 0)));
+        // WALK-DOWN CONTENT DEDUPE (journey landing r31 2026-10-20): sigs
+        // are per-ENTRY (action|who|partKey) but the rendered line is per
+        // (action, who) — the same news seeded on two day-parts (Rocco
+        // walks away twice; seedGossip dedupes only per action+partKey)
+        // renders verbatim-identical lines, and the walk-down served both
+        // back-to-back in one sitting (probe: seed 202 Emma d6, "Rocco
+        // just walked away from Haven" x2). Skip an entry when its exact
+        // sig OR its news-content key (action|who) was already served this
+        // sitting. skipSigs stay per-sitting (reset each sitting), so a
+        // resumed thread in a new sitting still re-delivers its headline.
+        // 'dark:'/'about:' sigs never start with 'gossip:' — untouched.
+        const gossipContentKey = (g) => 'gossip:' + (g.action || '') + '|' +
+          (((g.dims) || {}).who || '') + '|';
+        const servedAlready = (g) => {
+          if (skipSigs.indexOf(gossipSig(g)) !== -1) return true;
+          const ck = gossipContentKey(g);
+          for (const s of skipSigs) if (s.indexOf(ck) === 0) return true;
+          return false;
+        };
         const freshGossip = (arr) => {
           for (let i = arr.length - 1; i >= 0; i--)
-            if (skipSigs.indexOf(gossipSig(arr[i])) === -1) return arr[i];
+            if (!servedAlready(arr[i])) return arr[i];
           return null;
         };
         // PEOPLE TALK ABOUT EACH OTHER: before the generic gossip, NPCs share
