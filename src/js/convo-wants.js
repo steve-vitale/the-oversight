@@ -1990,8 +1990,18 @@
               // pair so the quoted fiction reads as spoken gossip.
               let body = g.line;
               if (typeof body === 'string' && body.length > 1 && body[0] === '"' && body[body.length - 1] === '"') body = body.slice(1, -1);
-              if (!body) body = gossipLine(g);
-              return `"Okay, so — ${nm}. ${body} Don't say I told you."`;
+              if (!body) {
+                // r33: the occupation/origin fallback never names the
+                // subject ("Turns out they weren't a surgeon...") — the
+                // ${nm} prefix carries the who. But truth.js and knack
+                // gossip lines already name them ({first} interpolations),
+                // so the prefix doubles the subject ("A man, maybe 40s...
+                // the man in his 40s... ate something"). Prefix only the
+                // fallback; serve complete lines as-is.
+                body = gossipLine(g);
+                return `"Okay, so — ${nm}. ${body} Don't say I told you."`;
+              }
+              return `"Okay, so — ${body} Don't say I told you."`;
             }
           }
         } catch (e) {}
