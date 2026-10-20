@@ -1,7 +1,7 @@
 {
  "meta": {
-  "runs": 15,
-  "pairedDays": 2065,
+  "runs": 16,
+  "pairedDays": 2242,
   "leanThresholdFreshDays": 4
  },
  "wall": {
@@ -43,11 +43,11 @@
    "max": 180
   },
   "leadfeast": {
-   "n": 7,
+   "n": 8,
    "won": 0,
-   "table": 6,
-   "national": 7,
-   "w4": 6,
+   "table": 7,
+   "national": 8,
+   "w4": 7,
    "w5": 0,
    "surv": [
     84,
@@ -56,145 +56,148 @@
     142,
     158,
     165,
+    180,
     180
    ],
    "ends": {
     "village-lost": 6,
-    "survived": 1
+    "survived": 2
    },
-   "starveD": 174,
+   "starveD": 216,
    "deaths": {
-    "monster": 30,
+    "monster": 35,
     "ambush": 2,
     "the loud beast": 1,
-    "combat": 57,
+    "combat": 65,
     "sickness": 3,
     "starvation": 5,
     "lockjaw": 1,
-    "contest": 1,
+    "contest": 2,
     "the night": 1,
     "sweeps week": 1,
-    "a wound that wouldn't close": 1
+    "a wound that wouldn't close": 1,
+    "the strike": 1,
+    "the expedition": 1
    },
-   "median": 142,
+   "median": 158,
    "max": 180
   }
  },
  "doseOverall": {
-  "leanMean": 3140,
-  "fatMean": 5158,
-  "ratio": 0.61,
-  "pearson": 0.413,
-  "leanDays": 492,
-  "fatDays": 1573
+  "leanMean": 3119,
+  "fatMean": 5300,
+  "ratio": 0.59,
+  "pearson": 0.49,
+  "leanDays": 504,
+  "fatDays": 1738
  },
  "channels": {
   "share_surplus": {
-   "leanMean": 2090,
-   "fatMean": 4376,
-   "ratio": 0.48,
-   "pearson": 0.477,
-   "n": 2065
+   "leanMean": 2066,
+   "fatMean": 4530,
+   "ratio": 0.46,
+   "pearson": 0.555,
+   "n": 2242
   },
   "duty_forage": {
    "leanMean": 0,
    "fatMean": 0,
    "ratio": null,
    "pearson": null,
-   "n": 2065
+   "n": 2242
   },
   "duty_garden": {
    "leanMean": 0,
    "fatMean": 0,
    "ratio": null,
    "pearson": null,
-   "n": 2065
+   "n": 2242
   },
   "duty_fish": {
    "leanMean": 371,
-   "fatMean": 13,
-   "ratio": 28.44,
-   "pearson": -0.142,
-   "n": 2065
+   "fatMean": 12,
+   "ratio": 31.46,
+   "pearson": -0.147,
+   "n": 2242
   },
   "duty_hunt": {
    "leanMean": 0,
    "fatMean": 0,
    "ratio": null,
    "pearson": null,
-   "n": 2065
+   "n": 2242
   },
   "duty_cook": {
    "leanMean": 0,
    "fatMean": 0,
    "ratio": null,
    "pearson": null,
-   "n": 2065
+   "n": 2242
   },
   "haul_field": {
    "leanMean": 0,
    "fatMean": 0,
    "ratio": null,
    "pearson": null,
-   "n": 2065
+   "n": 2242
   },
   "traps": {
    "leanMean": 12,
-   "fatMean": 28,
-   "ratio": 0.44,
-   "pearson": -0.01,
-   "n": 2065
+   "fatMean": 25,
+   "ratio": 0.47,
+   "pearson": -0.032,
+   "n": 2242
   },
   "away_wild": {
-   "leanMean": 495,
-   "fatMean": 522,
+   "leanMean": 497,
+   "fatMean": 523,
    "ratio": 0.95,
-   "pearson": 0.022,
-   "n": 2065
+   "pearson": 0.037,
+   "n": 2242
   },
   "other": {
-   "leanMean": 172,
-   "fatMean": 219,
-   "ratio": 0.78,
-   "pearson": -0.025,
-   "n": 2065
+   "leanMean": 173,
+   "fatMean": 210,
+   "ratio": 0.82,
+   "pearson": -0.039,
+   "n": 2242
   }
  },
  "marginalRot": {
   "share_surplus": {
-   "inflowK": 8029,
-   "rotK": 2779,
-   "rotShare": 0.346,
+   "inflowK": 9037,
+   "rotK": 3328,
+   "rotShare": 0.368,
    "fastRotK": 1115,
-   "fastRotShare": 0.139
+   "fastRotShare": 0.123
   },
   "away_wild": {
-   "inflowK": 1104,
-   "rotK": 414,
-   "rotShare": 0.375,
+   "inflowK": 1201,
+   "rotK": 474,
+   "rotShare": 0.394,
    "fastRotK": 180,
-   "fastRotShare": 0.163
+   "fastRotShare": 0.15
   },
   "other": {
-   "inflowK": 440,
-   "rotK": 174,
-   "rotShare": 0.395,
+   "inflowK": 464,
+   "rotK": 180,
+   "rotShare": 0.388,
    "fastRotK": 77,
-   "fastRotShare": 0.176
+   "fastRotShare": 0.167
   },
   "system": {
    "inflowK": 7,
    "rotK": 3,
-   "rotShare": 0.373,
+   "rotShare": 0.422,
    "fastRotK": 1,
-   "fastRotShare": 0.194
+   "fastRotShare": 0.176
   },
   "duty_fish": {
-   "inflowK": 210,
+   "inflowK": 214,
    "rotK": 9,
-   "rotShare": 0.044,
+   "rotShare": 0.043,
    "fastRotK": 8,
-   "fastRotShare": 0.037
+   "fastRotShare": 0.036
   },
   "traps": {
    "inflowK": 51,
@@ -206,19 +209,19 @@
  },
  "throttle": {
   "lean": {
-   "calls": 370,
+   "calls": 382,
    "engaged": 15,
-   "rate": 0.041
+   "rate": 0.039
   },
   "fat": {
-   "calls": 3473,
-   "engaged": 3449,
-   "rate": 0.993
+   "calls": 4128,
+   "engaged": 4104,
+   "rate": 0.994
   }
  },
  "dutySmokeDrive": {
   "leanMean": 1707,
-  "fatMean": 2804,
-  "ratio": 0.61
+  "fatMean": 2838,
+  "ratio": 0.6
  }
 }

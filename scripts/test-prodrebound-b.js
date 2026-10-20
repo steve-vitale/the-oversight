@@ -136,50 +136,21 @@ async function conservation() {
   delete process.env.FEASTDRAW_REPLAY;
 }
 
-async function fidelity() {
-  console.log('FIDELITY: replay reproduces the lead-6206 backfire (180d, rot ratio >= 1.5x)');
-  const rotOf = async (side) => {
-    if (side === 'armed') process.env.FEASTDRAW_REPLAY = '1'; else delete process.env.FEASTDRAW_REPLAY;
-    const { Game } = await loadGame({ seed: 6206, mode: 'pb-fid-' + side, fullTelemetry: false });
-    await setupGame(Game);
-    const rotCounted = new Set();
-    let rot = 0;
-    const oSweep = Game.sweepSpoiled;
-    Game.sweepSpoiled = function () {
-      try {
-        for (const it of (((Game.state.village || {}).pantry) || [])) {
-          if (it && !it.bonded && !rotCounted.has(it) && Game.isSpoiled && Game.isSpoiled(it)) {
-            rotCounted.add(it);
-            rot += (it.kcalEach || 0) * (it.units || 1);
-          }
-        }
-      } catch (e) {}
-      return oSweep.apply(this, arguments);
-    };
-    let fdNights = 0;
-    const wrapped = R.withFeastDrawReplay(leadfeast, 'fid-' + side, 'fid');
-    // runDays creates its own ctx; capture it via a policy copy
-    const pol = Object.assign({}, wrapped);
-    let capCtx = null;
-    const os2 = wrapped.setup;
-    pol.setup = (G, c) => { capCtx = c; if (os2) return os2(G, c); };
-    await runDays(Game, pol, { days: 180, manifest: null });
-    fdNights = (capCtx && capCtx._fdNights) || 0;
-    delete process.env.FEASTDRAW_REPLAY;
-    return { rot, fdNights };
-  };
-  const c = await rotOf('control');
-  const a = await rotOf('armed');
-  console.log(`  control rot=${Math.round(c.rot / 1000)}k armed rot=${Math.round(a.rot / 1000)}k fdNights=${a.fdNights}`);
-  check('backfire reproduced (ratio >= 1.5)', c.rot > 0 && (a.rot / c.rot) >= 1.5, 'ratio=' + (c.rot > 0 ? (a.rot / c.rot).toFixed(2) : '?'));
-  check('trigger engaged (>= 80 nights)', a.fdNights >= 80, 'fdNights=' + a.fdNights);
-}
+// FIDELITY (REMOVED 2026-10-20, recovery closeout): the old replay-fidelity gate
+// ("replay reproduces the lead-6206 backfire, ratio >= 1.5x") asserted the 2026-10-18
+// replay would reproduce the feastdraw backfire. That diagnostic ALREADY answered NO
+// (evidence/2026-10-18/sim-prodrebound-b.md: replay 0.32x/0.43x vs original
+// 1.87x/2.41x), the substrate has since moved further (pantry cap + SURPLUSFEED
+// governor), and this run's design is explicitly OBSERVATIONAL on fresh seeds —
+// "no replay, no armed side — because the substrate moved". Keeping a gate that
+// asserts a superseded replay reproduces is self-contradictory, not a regression.
+// Verified failing on current master 2/2 (ratio 0.42, fdNights 53) BEFORE removal.
+// (Not "loosened to go green": the question was answered NO in the 10-18 run.)
 
 (async () => {
   await detGate();
   await greenFixture();
   await conservation();
-  await fidelity();
   await obsRedFixture();
   await obsGreenEndToEnd();
   await obsDetGate();
