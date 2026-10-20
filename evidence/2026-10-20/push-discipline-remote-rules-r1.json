@@ -1,0 +1,38 @@
+{
+  "readAt": "2026-10-20T22:43:45.673Z",
+  "scope": "Read-only current remote enforcement; not historical configuration or a waiver of repository instructions",
+  "branches": {
+    "master": {
+      "protection": {
+        "exitCode": 1,
+        "response": {
+          "message": "Branch not protected",
+          "documentation_url": "https://docs.github.com/rest/branches/branch-protection#get-branch-protection",
+          "status": "404"
+        },
+        "diagnostic": "gh: Branch not protected (HTTP 404)"
+      },
+      "rules": {
+        "exitCode": 0,
+        "response": [],
+        "diagnostic": ""
+      }
+    },
+    "main": {
+      "protection": {
+        "exitCode": 1,
+        "response": {
+          "message": "Branch not protected",
+          "documentation_url": "https://docs.github.com/rest/branches/branch-protection#get-branch-protection",
+          "status": "404"
+        },
+        "diagnostic": "gh: Branch not protected (HTTP 404)"
+      },
+      "rules": {
+        "exitCode": 0,
+        "response": [],
+        "diagnostic": ""
+      }
+    }
+  }
+}
