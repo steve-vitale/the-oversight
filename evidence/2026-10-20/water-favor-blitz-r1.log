@@ -1,0 +1,63 @@
+(0) API surface (RED on pristine)
+  ok: titanCommitOwn exists
+  ok: titanSelfActions/titanSelfDo exist (UI path)
+  ok: tbPlayerRally exists
+  ok: tbPlayerWarCry exists
+(a) titanCommitOwn: UI path, costs, effects
+  ok: commit button reachable from the player UI path (titanSelfActions)
+  ok: council + call buttons also surfaced
+  ok: first tap asks (returns confirm), commits nothing
+  ok: first tap names the volunteers aloud
+  ok: first tap states the cost honestly (can die)
+  ok: second tap commits up to 3 named villagers
+  ok: commit said aloud with names
+  ok: committed leave the workforce (titanCommitted flag)
+  ok: committed read as engaged (out of job/loan pools)
+  ok: uncommitted villagers still free
+  ok: muster upkeep feeds haven blades too (4000 kcal)
+  ok: gate NOT ready on haven blades alone (coalition still required)
+  ok: 7 allies + 3 haven blades = 10: gate ready (herald needs 10)
+  ok: 9 blades: gate holds (not a solo with extra steps)
+  ok: haven blades injected as kind=ally fighters
+  ok: injected blades are faces (name + villagerId)
+  ok: defeat breaks the muster
+  ok: commitment released (workforce returns)
+  ok: haven dead cost cheer (the fire is quieter)
+  ok: grief said aloud
+  ok: no commit button once 3 already march
+  ok: commit refused honestly when the titan is not located
+(b) rally: regroup / morale / coordinate
+  ok: rally fires on the player turn with allies
+  ok: REGROUP: allies close on the player
+  ok: REGAIN MORALE: stun clears
+  ok: REGAIN MORALE: rallied flag set (holds the line)
+  ok: COORDINATE: focus-fire mark on the foe nearest the player
+  ok: rally is 1/fight
+  ok: rally said aloud (not silent)
+  ok: rally spends the action
+  ok: sanity: the setup is genuinely hopeless
+  ok: without rally: hopeless ally flees (honest read)
+  ok: with rally: rallied ally HOLDS (flee suppressed)
+  ok: rallied ticks down on their turn
+  ok: coordinated ally strikes the marked target
+(c) war_cry: shock + awe + the cost
+  ok: war cry fires on the player turn with allies
+  ok: SHOCK: failing foes hesitate (stunned)
+  ok: SHOCK: titans do NOT flinch (fearless)
+  ok: titan hearing you is said aloud
+  ok: AWE: allies emboldened (rallyBuff)
+  ok: war cry is 1/fight
+  ok: war cry spends the action
+  ok: the cry paints a target: nearest foe marks YOU
+  ok: war cry said aloud (not silent)
+  ok: war cry refuses honestly with no allies
+(d) no regression
+  ok: ally turn does not throw the combat loop
+  ok: ally took a real turn (moved or dealt damage)
+  ok: ally turn banner said aloud
+  ok: turnOrder: player first, ally/villager next, monster last
+  ok: test-titan-class.js still green
+  ok: test-herald-titan.js still green
+  ok: test-blitz-titan-async.js green (browser dispatch)
+
+56 passed, 0 failed (seed 20261013)

@@ -1,5 +1,34 @@
 # Muse calibration handoff — conversation/favor repair
 
+## Joint water trip candidate (2026-10-20)
+
+Build982cb3c40-20261020-221451 adds one real joint job. Merge the current
+shared master/main after publication; no port or unrelated-history workaround
+is needed. The five earlier Muse recovery fixes remain protected. Use the
+water-favor audit/publication receipt to distinguish verified source from live.
+
+Accept explicitly; meet at Haven at a following dawn, walk with the requester
+to a known creek, collect two liters each, return and unload through Talk.
+The temporary partner follows without joining the permanent party. Both
+cargoes survive Continue; actual fill costs, quality, player mass and deadline
+consequences apply. Late or partial returns salvage water without restoring
+promise credit. Four other joint jobs remain unavailable. Old unplayable open
+water promises get a one-time persisted grace window on Continue.
+
+Same-observer baseline982cb3c40 versus candidate:64 matched campaigns plus
+four neutral controls each. All23 metrics/census retained in water-favor-*.
+Wins16→16,8→9,13→13,8→8 remain review_required with death/gear/class watches;
+six diagnostic replay pairs match full state/outcomes/all metrics. None of
+these mixed bots emits favor_water_depart/collect/return. Calibrate natural
+opportunity and actual route completion, not just acceptance or generic task
+assignment. New canonical phase telemetry distinguishes actual collected
+cargo and delivered clean/risky water; acquisition is not consumption.
+Do not tune difficulty to restore win percentages or call this pacifist proof.
+
+Codex's next serial lane is Haven entrance accessibility/placement order,
+found through the phone journey. Preserve newer local work before merging;
+do not independently rewrite favor-water or overwrite the shared runtime.
+
 ## Favor lifecycle follow-up (2026-10-20)
 
 New candidate build: `4b196689c-20261020-204829`. Fetch the shared master/main

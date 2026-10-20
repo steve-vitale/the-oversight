@@ -13,7 +13,7 @@ const K=require('./lib'),P=require('../lib/conversation-playtest'),T=K.reporter(
   c.want={id:'ask_favor',def:selected.def,stage:2,favor};c.thread='want';c.pendingQ=null;c.genericQ=null;c.reactiveQ=null;c.windingDown=false;c.choosingSubject=false;G.sayLine(vid,favor.line,{diegeticAct:true});c.replyMenu=null;
   return {v,s,vid,favor,c};
  }
- for(const kind of ['water_haul','snare_mend','watch_shift','stay_close','forage_help']){
+ for(const kind of ['snare_mend','watch_shift','stay_close','forage_help']){
   const {v,vid,favor}=scene(kind),choices=P.offers(G,vid);
   T.ok(kind+' explains unavailable execution and does not offer a hollow promise',choices.some(o=>o.id==='dlg:favor_requirements')&&!choices.some(o=>['dlg:favor_action','dlg:commit'].includes(o.id)),JSON.stringify(choices));
   const r=P.choose(G,vid,'dlg:favor_requirements');T.ok(kind+' explanation names the missing action',/no playable|no playable|no.*playable/i.test(r.line),r.line);

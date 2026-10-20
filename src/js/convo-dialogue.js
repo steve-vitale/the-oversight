@@ -172,7 +172,9 @@
         c.transcript.push({ who: 'you', text: c.offeredReplies?.[choiceId] || 'Check the request' });
         let result = dlg === 'favor_action' ? this.convoPerformFavor(vid, favor) : { ok: false, line: status.reason };
         const promise = this.state.village.promises?.[vid];
-        if (dlg === 'favor_cancel' && status.unsupported && promise?.favorId === favor?.id && !promise.kept) {
+        if (dlg === 'favor_cancel' && favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
+          result = this.performWaterFavor(vid, favor, true);
+        } else if (dlg === 'favor_cancel' && status.unsupported && promise?.favorId === favor?.id && !promise.kept) {
           promise.kept = 'unavailable';
           this.journalFavorPromise?.(vid, promise);
           favor.state = 'moot';
@@ -183,7 +185,8 @@
         // Requirements are interface information, never fabricated NPC speech
         // (and therefore never spoken by the voice package).
         this.sayLine(vid, line, { diegeticAct: true });
-        if (result.ok && c.want) { c.want.stage = 3; c.want.resolution = result.promiseMissed ? 'broken' : 'fulfilled'; }
+        if (result.ok && !result.incomplete && c.want) { c.want.stage = 3; c.want.resolution = result.promiseMissed ? 'broken' : 'fulfilled'; }
+        if (result.ok && result.close) c.windingDown = true;
         c.replyMenu = null;
         this.save();
         return { line, choices: this.convoChoices(vid), ended: !!this.over, transcript: c.transcript.slice() };

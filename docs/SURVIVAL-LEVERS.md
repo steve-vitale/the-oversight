@@ -1,5 +1,45 @@
 # Survival levers and investigation register
 
+## Joint creek-run milestone (2026-10-20)
+
+Water requests move from unavailable words to a real temporary-companion trip.
+Each trip collects four liters through four existing fillWater calls:40 kcal,
+four action ticks, ordinary walking costs and2kg of carried player water.
+The partner carries the other2L and cannot simultaneously produce assignment
+stock or depart on another autonomous job. Home delivery preserves real water
+quality; risky water enters the dirty cistern and still needs ordinary boiling
+and wood. It does not become clean water merely because a favor was kept.
+
+The existing two-day favor window and normal promise consequences apply;
+departure is at a dawn after acceptance. Previously impossible saved open
+water jobs get a single persisted two-day grace window on Continue so that
+enabling the feature cannot impose a retroactive deadline penalty. This is an
+intentional compatibility lever, not a permanent extension on every load.
+Late/partial home returns salvage real water, with no kept-promise reward.
+The four sibling joint jobs retain their unavailable/no-penalty contract.
+
+Availability, willingness to promise, lost NPC production, trust outcomes,
+walking exposure, fuel use and dirty-water supply may alter every balanced
+domain. Retain the same-observer matched screen and feature census before
+publication. Do not compensate difficulty to restore a win percentage.
+Prepared trip checks establish mechanics; mixed-policy nonuse alone does not
+establish usefulness, and a collection event is not a drinking receipt.
+
+Matched 16-per-policy screen against982cb3c40 remains review_required. Wins
+are16→16,8→9,13→13,8→8 (capable/maker/merchant/caregiver). Capable deaths
+rise2.375→3.125/run and earned good gear16→15/16; merchant deaths rise
+1.5625→1.75; caregiver class access14→13/16. All four communities retain
+zero loss and first-bearer day30/day60 survival is unchanged in this sample.
+The six selected replay pairs (every changed win plus worst adverse deaths,
+NPC hunger and gear per policy, ties by seed) reproduce full state, outcome
+and all metrics. Early trust/needs differences are associations, not proof
+of the causal path to later deaths. No campaign emits a water-trip phase
+event: these policies do not establish natural trip use or payoff. Prepared
+native journeys and40 focused checks prove the physical contract separately.
+Decision: ship the bounded executable favor with these unresolved campaign
+watches retained for Muse; no food/HP/reward adjustment to recover percentages.
+See evidence/2026-10-20/water-favor-audit-r1.md and retained scorecard/replays.
+
 ## Favor clocks and legacy day-end compatibility (2026-10-20)
 
 Accepted food/wound/illness favors retain their existing costs and due-day

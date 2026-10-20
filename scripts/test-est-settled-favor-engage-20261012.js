@@ -67,12 +67,20 @@ const K=require('./godpath/lib'),T=K.reporter('settled-favor-engage');
   const f=fresh();f.v.water.clean=0;const need=G.convoFindFavorNeed(f.vid);
   T.ok('water: actual live need is water haul',need?.kind==='water_haul');
   const favor=G.convoBuildFavor(f.vid,need);G.convoStoreFavor(favor);
+  G.npcSetNode(f.vid,G.map.px,G.map.py);G.npcSetInside(f.vid,f.s.insideHaven!==false);
+  f.v.away={};f.v.positions[f.vid]={mx:f.s.mx,my:Math.min(8,f.s.my+1)};
   G.convoPlantSeed(f.vid,{wantId:'ask_favor',note:'the water I asked about',favorId:favor.id});G.startConvo(f.vid);questions(f.vid);
   const c=G.convoGet(f.vid),speech=c.transcript.filter(e=>e.who==='them').map(e=>e.text).join(' ');
   T.ok('water: actual seeded ask stays live',c.want?.id==='ask_favor'&&c.want?.fromSeed&&favor.state==='asked'&&G.convoFavorNeedLive(favor));
   T.ok('water: followup remembers exact ask',speech.includes(favor.short),speech);
-  const explanation=choices(f.vid).find(c=>c.id==='dlg:favor_requirements');T.ok('water: unavailable job explains instead of offering hollow promise',!!explanation&&!choices(f.vid).some(c=>c.id==='dlg:commit'));
-  const result=G.convoTurn(f.vid,explanation.id);T.ok('water: joint trip explicitly unavailable, no obligation',/no playable action yet/.test(result.line)&&!f.v.promises?.[f.vid]);
+  // Water is now executable; the positive physical trip contract lives in
+  // godpath/test-water-favor.js. This seeded reminder must expose acceptance
+  // and honest requirements, without claiming that the trip already happened.
+  const explanation=choices(f.vid).find(c=>c.id==='dlg:favor_requirements');T.ok('water: live job offers requirements and explicit acceptance',!!explanation&&choices(f.vid).some(c=>c.id==='dlg:commit'));
+  const result=G.convoTurn(f.vid,explanation.id);T.ok('water: requirements name acceptance and following dawn without creating an obligation',/Accept the creek request first.*dawn.*following day/.test(result.line)&&!f.v.promises?.[f.vid],result.line);
+  G.convoTurn(f.vid,'dlg:commit');
+  T.ok('water: actual acceptance saves the exact unfulfilled obligation',f.v.promises?.[f.vid]?.favorId===favor.id&&!f.v.promises[f.vid].kept&&favor.state==='promised'&&favor.meetDay===f.s.day+1);
+  T.ok('water: promise alone creates no trip or water reward',!favor.waterRun&&f.v.water.clean===0&&f.v.water.dirty===0);
  }
  const f=fresh();G.npcNeeds(f.vid).hunger=85;const food=G.convoBuildFavor(f.vid,G.convoFindFavorNeed(f.vid));
  T.ok('food explanation is quoted speech',!!food&&/^\s*"/.test(food.whyLine)&&/"\s*$/.test(food.whyLine));
