@@ -1,0 +1,747 @@
+{
+  "generated": "2026-10-20T03:27:35.173Z",
+  "variant": "bill-current-7d (trailing-7d tribute paid >= 1x weekly bill; legacy arrears may stand)",
+  "controlProvenance": "fresh paired sweep on pristine hierarchy.js (seasonblock corpus failed FIDELITY on current master — engine drifted since 8c055140a)",
+  "controlBelong": {
+    "label": "control/belongfeast",
+    "n": 8,
+    "national": 4,
+    "table": 7,
+    "wave4": 5,
+    "wave5": 0,
+    "medianSurvival": 132,
+    "maxSurvival": 182,
+    "starvation": 5,
+    "deathChannels": [
+      "alien",
+      "disease",
+      "expedition",
+      "haven",
+      "other",
+      "raid",
+      "wild"
+    ],
+    "seasonedBonds": 9,
+    "meanDipDaysHeld": 18.44,
+    "dipDaysHeld": [
+      0,
+      0,
+      63,
+      0,
+      0,
+      56,
+      0,
+      19,
+      28
+    ],
+    "bonds": [
+      {
+        "seed": 64202,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 13,
+        "lastActiveDay": 125,
+        "fate": "village-died"
+      },
+      {
+        "seed": 64203,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 79,
+        "lastActiveDay": 54,
+        "fate": "bond-broke"
+      },
+      {
+        "seed": 64203,
+        "prim": "village_spl_27_12965",
+        "seasoned": true,
+        "seasonDay": 92,
+        "dipDaysHeld": 63,
+        "currentHeldDays": 0,
+        "firstDipZero": 155,
+        "arrearsDay": 155,
+        "endTrust": 58,
+        "lastActiveDay": 171,
+        "fate": "village-died"
+      },
+      {
+        "seed": 64205,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 58,
+        "lastActiveDay": 54,
+        "fate": "bond-broke"
+      },
+      {
+        "seed": 64205,
+        "prim": "village_2",
+        "seasoned": true,
+        "seasonDay": 85,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 85,
+        "arrearsDay": null,
+        "endTrust": 0,
+        "lastActiveDay": 106,
+        "fate": "village-died"
+      },
+      {
+        "seed": 64206,
+        "prim": "village_spl_32_4888",
+        "seasoned": true,
+        "seasonDay": 85,
+        "dipDaysHeld": 56,
+        "currentHeldDays": 0,
+        "firstDipZero": 141,
+        "arrearsDay": 141,
+        "endTrust": 5,
+        "lastActiveDay": 169,
+        "fate": "bond-broke"
+      },
+      {
+        "seed": 64207,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 92,
+        "lastActiveDay": 63,
+        "fate": "bond-broke"
+      },
+      {
+        "seed": 64207,
+        "prim": "village_0",
+        "seasoned": true,
+        "seasonDay": 94,
+        "dipDaysHeld": 19,
+        "currentHeldDays": 0,
+        "firstDipZero": 113,
+        "arrearsDay": 113,
+        "endTrust": 46,
+        "lastActiveDay": 181,
+        "fate": "survived-with-bond"
+      },
+      {
+        "seed": 64208,
+        "prim": "village_0",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 28,
+        "currentHeldDays": 0,
+        "firstDipZero": 78,
+        "arrearsDay": 78,
+        "endTrust": 0,
+        "lastActiveDay": 134,
+        "fate": "village-died"
+      }
+    ],
+    "bondFates": {
+      "bond-broke": 4,
+      "village-died": 4,
+      "survived-with-bond": 1,
+      "censored": 0
+    },
+    "currentHeldDays": 0,
+    "billCurrentArrearsDays": 0,
+    "tribPaid": 548957,
+    "perSeed": [
+      {
+        "seed": 64201,
+        "gameDays": 130,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 3,
+        "successions": 7,
+        "bonds": "village_0:unseasoned | village_2:unseasoned"
+      },
+      {
+        "seed": 64202,
+        "gameDays": 126,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 4,
+        "successions": 6,
+        "bonds": "village_1:held0/village-died"
+      },
+      {
+        "seed": 64203,
+        "gameDays": 171,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 3,
+        "successions": 5,
+        "bonds": "village_1:held0/bond-broke | village_spl_27_12965:held63/village-died"
+      },
+      {
+        "seed": 64204,
+        "gameDays": 38,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 2,
+        "successions": 2,
+        "bonds": "village_1:unseasoned"
+      },
+      {
+        "seed": 64205,
+        "gameDays": 106,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 4,
+        "successions": 9,
+        "bonds": "village_1:held0/bond-broke | village_2:held0/village-died"
+      },
+      {
+        "seed": 64206,
+        "gameDays": 182,
+        "endReason": "survived",
+        "national": true,
+        "wave": 4,
+        "successions": 4,
+        "bonds": "village_1:unseasoned | village_spl_32_4888:held56/bond-broke"
+      },
+      {
+        "seed": 64207,
+        "gameDays": 182,
+        "endReason": "survived",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "village_1:held0/bond-broke | village_0:held19/survived-with-bond"
+      },
+      {
+        "seed": 64208,
+        "gameDays": 134,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "village_0:held28/village-died"
+      }
+    ]
+  },
+  "armedBelong": {
+    "label": "armed/belongfeast",
+    "n": 8,
+    "national": 4,
+    "table": 6,
+    "wave4": 4,
+    "wave5": 0,
+    "medianSurvival": 128,
+    "maxSurvival": 182,
+    "starvation": 5,
+    "deathChannels": [
+      "alien",
+      "disease",
+      "expedition",
+      "haven",
+      "other",
+      "raid",
+      "wild"
+    ],
+    "seasonedBonds": 9,
+    "meanDipDaysHeld": 10.78,
+    "dipDaysHeld": [
+      0,
+      0,
+      55,
+      0,
+      0,
+      41,
+      0,
+      0,
+      1
+    ],
+    "bonds": [
+      {
+        "seed": 64202,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 13,
+        "lastActiveDay": 125,
+        "fate": "village-died"
+      },
+      {
+        "seed": 64203,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 79,
+        "lastActiveDay": 54,
+        "fate": "bond-broke"
+      },
+      {
+        "seed": 64203,
+        "prim": "village_spl_27_12965",
+        "seasoned": true,
+        "seasonDay": 92,
+        "dipDaysHeld": 55,
+        "currentHeldDays": 0,
+        "firstDipZero": 147,
+        "arrearsDay": null,
+        "endTrust": 49,
+        "lastActiveDay": 181,
+        "fate": "survived-with-bond"
+      },
+      {
+        "seed": 64205,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 58,
+        "lastActiveDay": 54,
+        "fate": "bond-broke"
+      },
+      {
+        "seed": 64205,
+        "prim": "village_2",
+        "seasoned": true,
+        "seasonDay": 85,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 85,
+        "arrearsDay": null,
+        "endTrust": 0,
+        "lastActiveDay": 106,
+        "fate": "village-died"
+      },
+      {
+        "seed": 64206,
+        "prim": "village_spl_32_4888",
+        "seasoned": true,
+        "seasonDay": 85,
+        "dipDaysHeld": 41,
+        "currentHeldDays": 0,
+        "firstDipZero": 126,
+        "arrearsDay": null,
+        "endTrust": 6,
+        "lastActiveDay": 181,
+        "fate": "survived-with-bond"
+      },
+      {
+        "seed": 64207,
+        "prim": "village_1",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 50,
+        "arrearsDay": null,
+        "endTrust": 92,
+        "lastActiveDay": 63,
+        "fate": "bond-broke"
+      },
+      {
+        "seed": 64207,
+        "prim": "village_0",
+        "seasoned": true,
+        "seasonDay": 94,
+        "dipDaysHeld": 0,
+        "currentHeldDays": 0,
+        "firstDipZero": 94,
+        "arrearsDay": null,
+        "endTrust": 98,
+        "lastActiveDay": 105,
+        "fate": "village-died"
+      },
+      {
+        "seed": 64208,
+        "prim": "village_0",
+        "seasoned": true,
+        "seasonDay": 50,
+        "dipDaysHeld": 1,
+        "currentHeldDays": 0,
+        "firstDipZero": 51,
+        "arrearsDay": null,
+        "endTrust": 43,
+        "lastActiveDay": 132,
+        "fate": "village-died"
+      }
+    ],
+    "bondFates": {
+      "bond-broke": 3,
+      "village-died": 4,
+      "survived-with-bond": 2,
+      "censored": 0
+    },
+    "currentHeldDays": 0,
+    "billCurrentArrearsDays": 0,
+    "tribPaid": 510420,
+    "perSeed": [
+      {
+        "seed": 64201,
+        "gameDays": 130,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 3,
+        "successions": 7,
+        "bonds": "village_0:unseasoned | village_2:unseasoned"
+      },
+      {
+        "seed": 64202,
+        "gameDays": 126,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 4,
+        "successions": 6,
+        "bonds": "village_1:held0/village-died"
+      },
+      {
+        "seed": 64203,
+        "gameDays": 182,
+        "endReason": "survived",
+        "national": true,
+        "wave": 4,
+        "successions": 4,
+        "bonds": "village_1:held0/bond-broke | village_spl_27_12965:held55/survived-with-bond"
+      },
+      {
+        "seed": 64204,
+        "gameDays": 38,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 2,
+        "successions": 2,
+        "bonds": "village_1:unseasoned"
+      },
+      {
+        "seed": 64205,
+        "gameDays": 106,
+        "endReason": "village-lost",
+        "national": false,
+        "wave": 4,
+        "successions": 9,
+        "bonds": "village_1:held0/bond-broke | village_2:held0/village-died"
+      },
+      {
+        "seed": 64206,
+        "gameDays": 182,
+        "endReason": "survived",
+        "national": true,
+        "wave": 4,
+        "successions": 3,
+        "bonds": "village_1:unseasoned | village_spl_32_4888:held41/survived-with-bond"
+      },
+      {
+        "seed": 64207,
+        "gameDays": 105,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 3,
+        "successions": 3,
+        "bonds": "village_1:held0/bond-broke | village_0:held0/village-died"
+      },
+      {
+        "seed": 64208,
+        "gameDays": 132,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 3,
+        "successions": 7,
+        "bonds": "village_0:held1/village-died"
+      }
+    ]
+  },
+  "controlLead": {
+    "label": "control/leadfeast",
+    "n": 8,
+    "national": 8,
+    "table": 7,
+    "wave4": 8,
+    "wave5": 0,
+    "medianSurvival": 111.5,
+    "maxSurvival": 159,
+    "starvation": 4,
+    "deathChannels": [
+      "alien",
+      "disease",
+      "expedition",
+      "haven",
+      "other",
+      "raid",
+      "wild"
+    ],
+    "seasonedBonds": 0,
+    "meanDipDaysHeld": 0,
+    "dipDaysHeld": [],
+    "bonds": [],
+    "bondFates": {
+      "bond-broke": 0,
+      "village-died": 0,
+      "survived-with-bond": 0,
+      "censored": 0
+    },
+    "currentHeldDays": 0,
+    "billCurrentArrearsDays": 0,
+    "tribPaid": 0,
+    "perSeed": [
+      {
+        "seed": 64201,
+        "gameDays": 83,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 6,
+        "bonds": "none"
+      },
+      {
+        "seed": 64202,
+        "gameDays": 127,
+        "endReason": "village-dead",
+        "national": true,
+        "wave": 4,
+        "successions": 9,
+        "bonds": "none"
+      },
+      {
+        "seed": 64203,
+        "gameDays": 84,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 4,
+        "bonds": "none"
+      },
+      {
+        "seed": 64204,
+        "gameDays": 124,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "none"
+      },
+      {
+        "seed": 64205,
+        "gameDays": 101,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "none"
+      },
+      {
+        "seed": 64206,
+        "gameDays": 114,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "none"
+      },
+      {
+        "seed": 64207,
+        "gameDays": 109,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 11,
+        "bonds": "none"
+      },
+      {
+        "seed": 64208,
+        "gameDays": 159,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 11,
+        "bonds": "none"
+      }
+    ]
+  },
+  "armedLead": {
+    "label": "armed/leadfeast",
+    "n": 8,
+    "national": 8,
+    "table": 7,
+    "wave4": 8,
+    "wave5": 0,
+    "medianSurvival": 111.5,
+    "maxSurvival": 159,
+    "starvation": 4,
+    "deathChannels": [
+      "alien",
+      "disease",
+      "expedition",
+      "haven",
+      "other",
+      "raid",
+      "wild"
+    ],
+    "seasonedBonds": 0,
+    "meanDipDaysHeld": 0,
+    "dipDaysHeld": [],
+    "bonds": [],
+    "bondFates": {
+      "bond-broke": 0,
+      "village-died": 0,
+      "survived-with-bond": 0,
+      "censored": 0
+    },
+    "currentHeldDays": 0,
+    "billCurrentArrearsDays": 0,
+    "tribPaid": 0,
+    "perSeed": [
+      {
+        "seed": 64201,
+        "gameDays": 83,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 6,
+        "bonds": "none"
+      },
+      {
+        "seed": 64202,
+        "gameDays": 127,
+        "endReason": "village-dead",
+        "national": true,
+        "wave": 4,
+        "successions": 9,
+        "bonds": "none"
+      },
+      {
+        "seed": 64203,
+        "gameDays": 84,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 4,
+        "bonds": "none"
+      },
+      {
+        "seed": 64204,
+        "gameDays": 124,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "none"
+      },
+      {
+        "seed": 64205,
+        "gameDays": 101,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "none"
+      },
+      {
+        "seed": 64206,
+        "gameDays": 114,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 8,
+        "bonds": "none"
+      },
+      {
+        "seed": 64207,
+        "gameDays": 109,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 11,
+        "bonds": "none"
+      },
+      {
+        "seed": 64208,
+        "gameDays": 159,
+        "endReason": "village-lost",
+        "national": true,
+        "wave": 4,
+        "successions": 11,
+        "bonds": "none"
+      }
+    ]
+  },
+  "verdict": {
+    "primary": {
+      "metric": "mean dip-days-held per seasoned belong bond",
+      "control": 18.44,
+      "armed": 10.78,
+      "controlN": 9,
+      "armedN": 9,
+      "ratio": 0.585,
+      "goThreshold": ">= 1.3x control mean",
+      "go": false
+    },
+    "guardrails": {
+      "national": {
+        "armed": 12,
+        "control": 12,
+        "pass": true
+      },
+      "wave4": {
+        "armed": 12,
+        "control": 13,
+        "pass": true
+      },
+      "newDeathChannel": {
+        "armed": [
+          "alien",
+          "disease",
+          "expedition",
+          "haven",
+          "other",
+          "raid",
+          "wild"
+        ],
+        "control": [
+          "alien",
+          "disease",
+          "expedition",
+          "haven",
+          "other",
+          "raid",
+          "wild"
+        ],
+        "pass": true
+      },
+      "medianSurvival": {
+        "armed": [
+          128,
+          111.5
+        ],
+        "control": [
+          132,
+          111.5
+        ],
+        "pass": true
+      }
+    },
+    "allGuardrailsPass": true,
+    "verdict": "NO-GO"
+  }
+}
