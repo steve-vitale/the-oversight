@@ -1,0 +1,69 @@
+[
+ {
+  "day": 90,
+  "frame": "the Table",
+  "phase": "paths",
+  "path": null,
+  "beat": null,
+  "prompt": "The ring of pale light. The too-many-angled faces. The trillions of eyes. The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take. ◈ the Feared — 27 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked. (standing: 100) ◇ the Indispensable — The Indispensable needs a full seat — the galaxy must actually need you, not just notice you. ◈ the Beloved — Viewership 37, fan favor 37 — the galaxy's favorite, by the numbers. (standing: 100) ◈ the Witness — 3 exposures on the record. The docket is real. (standing: 49) ◈ the Assimilated — Always open. The table takes anyone — that's what makes it a trap, and what makes it safe. (standing: 45) ◈ the Defiant — Defiance 5 on the record. The 'no' is earned. (standing: 40) ◈ the Relay — Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0) (standing: 40)",
+  "options": [
+   "path:feared :: Walk the path of the Feared",
+   "path:beloved :: Walk the path of the Beloved",
+   "path:witness :: Walk the path of the Witness",
+   "path:assimilated :: Walk the path of the Assimilated",
+   "path:defiant :: Walk the path of the Defiant",
+   "path:relay :: Walk the path of the Relay"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Feared",
+  "phase": "challenge",
+  "path": "feared",
+  "beat": 0,
+  "prompt": "BEAT ONE — THE FOOTAGE. The table doesn't ask what you did. It shows it: the deer, the fire, the feast-burned blade, the ones who came for you and didn't come back. A delegate with too many angles covers its face. \"Choose,\" the System says, \"what leads.\" alien-terror 2 · villager-horror 0",
+  "options": [
+   "beat:kill :: Lead with the kill.",
+   "beat:mercy :: Lead with the mercy you showed once.",
+   "beat:fire :: Lead with the feast-fire."
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Feared",
+  "phase": "challenge",
+  "path": "feared",
+  "beat": 1,
+  "prompt": "BEAT TWO — CALIBRATION. A delegate leans too far over the light and flinches at its own reflection in your eyes. The System watches the flinch the way it watches ratings. \"MORE?\" it asks. \"LESS?\" Or — the oldest door — \"PROVE IT?\" ◈ YOUR BUILD — The table has the footage. It doesn't have you, in the room, choosing. alien-terror 4 · villager-horror 1",
+  "options": [
+   "beat:lean :: Lean in.",
+   "beat:hold :: Hold back.",
+   "beat:trial :: Demand the champion. (TRIAL BY COMBAT — real fight, real death)",
+   "beat:build :: Show them what you can do — and what you won't. (needs terror 4+)"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Feared",
+  "phase": "challenge",
+  "path": "feared",
+  "beat": 2,
+  "prompt": "BEAT THREE — SPEND IT. A small village's envoy — not yours, barely on any map — is being pressed by the table for tribute it cannot pay. The System watches you watch them. Terror is currency here. You could spend yours *for* them. Or keep it. alien-terror 6 · villager-horror 2",
+  "options": [
+   "beat:spend :: Spend the terror shielding them.",
+   "beat:keep :: Keep it. They're not yours."
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Feared",
+  "phase": "finals",
+  "path": "feared",
+  "beat": 3,
+  "prompt": "The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:",
+  "options": [
+   "final:mercy :: Show mercy.",
+   "final:pledge :: Pledge the terror."
+  ]
+ }
+]
