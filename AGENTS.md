@@ -269,3 +269,40 @@ Refresh with scripts/phone-frame-proof-update.js; never hand-edit proof hashes.
 The repeatable browser recipe and disposable preview server are linked in
 PHONE-FRAME.md. Browser emulation does not clear physical iOS/Android or the
 separate installed-update/offline/rollback gate.
+
+## Push discipline (ALL agents — Muse and Codex)
+
+**Never push directly to `origin/master` or `origin/main`.** No exceptions,
+no matter who you are or what Steve said about merging. The 2026-10-20
+incident proved why: a direct push to origin/master was built from a stale
+base and silently reverted five proof-tested fixes (preserver signal,
+racks-voice gate, contestgrant #698, killbeat attribution, join-request
+honesty). Live served the reverted code until a 3-way merge repaired it.
+
+The rules:
+
+1. **All work lands via branches.** Create a branch, do the work, get it
+   reviewed, merge with `--ff-only`. Never commit to master directly, never
+   push a merge to origin/master yourself.
+2. **The ship loop owns all pushes.** `oversight-ship-loop` (every 6h) is the
+   ONLY thing that pushes to origin. It bumps the version, pushes master,
+   mirrors to main, and verifies both endpoints. If your work is merged
+   locally, report "merged locally, pending ship" and stop.
+3. **Cross-agent contributions go through port + review.** If you work in
+   another agent's lane (see docs/AGENT-LANES.md), port your changes as a
+   branch, document what changed and why, attach proof tests. The owning
+   agent reviews before it merges. Never push another agent's lane directly
+   to master.
+4. **Stale bases are the killer.** Before merging anything, verify your base
+   is current: `git fetch origin master` and check your branch contains the
+   latest origin/master. A merge from a stale base silently reverts other
+   people's work — this is exactly what happened on 2026-10-20.
+5. **If you discover divergent histories, STOP.** Do not rebase, do not
+   force-push, do not "fix" it yourself. Report it loudly and wait for
+   direction. The 2026-10-20 repair was a plain 3-way merge (`git merge
+   origin/master`, never rebase/reset/force-push) specifically because both
+   sides had work worth keeping.
+
+These rules bind every agent working in this repo. Steve's "merge with their
+work" means port, review, and land through the process — not a direct push
+to the live branch.
