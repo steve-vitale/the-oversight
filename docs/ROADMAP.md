@@ -1,5 +1,15 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-20 shared release reconciliation: the conversation/favor repair now
+merges Muse `699c56ba8`, preserving the common `a4404566c` history. Use the
+published master/main tip and `MUSE-CALIBRATION-HANDOFF.md`, not the old
+`codex/resume-claude` branch. The old disjoint-history note is stale; its
+149 unique commits remain preserved for separate review. No wholesale port
+is needed. Codex owns
+release integration and the pending favor-journal/deadline follow-up; Muse
+owns calibration on the shared shipped source. The five unfinished joint
+favor jobs remain unfinished; release publication does not close those gates.
+
 2026-10-20 conversation structure repair: Codex's
 `codex/conversation-structure-20261020` starts at Muse's a4404566 cutoff.
 Spoken exchanges own replies after every injector; questions are provisional

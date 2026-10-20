@@ -287,11 +287,14 @@
       // seed two witnesses so the rumor can actually travel (was heard: [],
       // born dead — the village never learned anyone had left). Same pattern
       // as the objective-departure path in villager-objectives.js.
+      // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): a multi-day
+      // expedition is not a walk-out — mark it so the gossip render tells
+      // the truth ("set out on a long trek", not "walked away").
       try {
         var _seen = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
         var _shuf = _seen.slice();
         for (var _i = _shuf.length - 1; _i > 0; _i--) { var _j = Math.floor(R() * (_i + 1)); var _t = _shuf[_i]; _shuf[_i] = _shuf[_j]; _shuf[_j] = _t; }
-        this.seedGossip('departure', { who: vid }, _shuf.slice(0, 2));
+        this.seedGossip('departure', { who: vid, purpose: 'expedition' }, _shuf.slice(0, 2));
       } catch (e) {}
     },
     expeditionLeg(vid, hx, hy, playerAtHaven) {

@@ -1,0 +1,18 @@
+=== seed 9704 day 37 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=42 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "I mean — Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(turn0 choices: ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, deflect_q, leave, silence)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "Hm. Never mind — go on."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

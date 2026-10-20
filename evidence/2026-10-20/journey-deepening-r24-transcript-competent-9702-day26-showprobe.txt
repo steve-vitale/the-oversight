@@ -1,0 +1,12 @@
+=== seed 9702 day 26 — conversation with Maya (maya_singh) ===
+occupation=ER nurse temperament=bold trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Any regrets? The real kind, not the small stuff. Give it time."
+(turn0 choices: agency:ask_expedition, ans:q_regret:a_tell, ans:q_regret:a_vague, leave, silence)
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

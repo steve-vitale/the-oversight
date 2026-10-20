@@ -1,0 +1,29 @@
+=== seed 9702 day 78 — conversation with Nikolai (nikolai_volkov) ===
+occupation=welder temperament=prickly trust=80 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: dlg:commit, alive:event:show, dlg:cant, teach, dlg:subject, confront:d_nqv3qqh, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Look. Watch yourself around Sofia. I can't tell you why. Just... watch."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Yarrow — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: "I've got things to do. People to avoid. You know."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

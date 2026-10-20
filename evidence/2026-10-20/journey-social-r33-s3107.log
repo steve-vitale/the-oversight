@@ -1,0 +1,15 @@
+SMOKE: seed 3008, 10 days (self-test of L3 counters)
+SMOKE: bonds=29 cases=0 convos=13
+SMOKE SELF-TEST: PASS (bonds counter reads nonzero — instrumentation OK)
+seed 3107: days=66 alive=5 convos=95 (deep=63 comfort=12/63) gossipPicks=3 gossipConvos=5 dryRate=2.32/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=10 spoken=10 silent=0
+  L3: {"bonds":64,"deepBonds":25,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":5,"gossipPicks":3,"avgTrust":"37.8"}
+  moots: (none convened)
+  regression: P1-streaks=3 P2-reactDry=6
+  seed 3107: conflicts: A man, maybe 50s, with a missing fingertip vs A woman, maybe 20s [old_wound] t0=67 tmax=67@d2 motiveMax=42 ; A man, maybe 50s, with a limp vs A man, maybe 30s [old_wound] t0=63 tmax=63@d2 motiveMax=40 ; Stan vs Vasyl [old_wound] t0=64 tmax=64@d3 motiveMax=40 RESOLVED ; James vs A woman, maybe 20s [old_wound] t0=66 tmax=66@d5 motiveMax=42 ; James vs Divine [old_wound] t0=63 tmax=64@d9 motiveMax=40 RESOLVED
+    plotEvents: (none)
+    moots: (none)
+M1 (instrument, snapshot gaps): GO
+M2 (fuel: >=1 pair at tension>=70 on >=2/4 seeds): 0/4 seeds [] — NO-GO

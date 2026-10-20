@@ -1,0 +1,32 @@
+=== seed 9702 day 67 — conversation with Jorge (gen_lr41vc6) ===
+occupation=Social worker temperament=anxious trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about what's been happening — that was 10 days back. Still on your mind? 'Since Michelle died... I keep expecting to see Michelle at the fire. Stupid.' I mean it."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, more, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested. — anyway."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Probably fine. Probably."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Something's off with Sofia. I mentioned it to the others and they went quiet, which tells you everything."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Yarrow — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=0)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unestablished

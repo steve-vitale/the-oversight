@@ -765,6 +765,12 @@
         for (var i = shuf.length - 1; i > 0; i--) { var j = Math.floor(R() * (i + 1)); var t = shuf[i]; shuf[i] = shuf[j]; shuf[j] = t; }
         var dims = { who: vid };
         if (obj.companion) dims.with = obj.companion;
+        // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): the gossip
+        // render used to tell EVERY leaving as a dramatic walk-out
+        // ("walked away from Haven. Didn't look back.") — including routine
+        // forage/water/trap trips. Carry the objective purpose so the
+        // render can tell the truth per purpose.
+        if (obj.purpose) dims.purpose = obj.purpose;
         this.seedGossip('departure', dims, shuf.slice(0, 2));
       } catch (e) {}
       return true;

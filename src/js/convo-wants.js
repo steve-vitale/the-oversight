@@ -302,7 +302,7 @@
         ];
         const asks = [
           `Will you help me?`,
-          `can you do anything?`,
+          `Can you do anything?`,
           `I need help. Please.`,
         ];
         const line = '"' + openers[hh % 3] + ' ' + states[(hh >>> 2) % 3] + ' ' + asks[(hh >>> 4) % 3] + '"';

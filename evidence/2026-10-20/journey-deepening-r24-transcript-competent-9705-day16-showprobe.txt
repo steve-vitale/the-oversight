@@ -1,0 +1,32 @@
+=== seed 9705 day 16 — conversation with Javier (gen_78lksnw) ===
+occupation=bush pilot temperament=withdrawn trust=58 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "I don't know what to do with my hands today."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Wei is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Did you hear? Eun-chan just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Groundnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Water Chestnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=0)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=ask_favor stage=3 resolution=unestablished

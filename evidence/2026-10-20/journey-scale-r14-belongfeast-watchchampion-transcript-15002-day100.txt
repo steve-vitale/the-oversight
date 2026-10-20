@@ -1,0 +1,31 @@
+=== seed 15002 day 100 — conversation with Roman (app_mgpspi7a224) ===
+occupation=farmer temperament=intense trust=36 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "I don't know what to do with my hands today."
+(turn0 choices: agency:ask_field, confront:d_48cyyda, dlg:invite, dlg:comfort, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Hear me out — Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Um — You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "I — yeah. It helps, hearing that. — anyway."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "We're done for now. Not done-done. For now."
+(want=seek_comfort stage=2)
+want final: id=seek_comfort stage=3 resolution=engaged

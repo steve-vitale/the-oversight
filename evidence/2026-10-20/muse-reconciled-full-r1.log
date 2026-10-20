@@ -1,0 +1,20 @@
+check.js: 1033 scripts, 8 parallel
+..................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................F......................................................................................................................................................................................................................................................................................................................
+
+  FAIL scripts/test-predation-instrument-20261014.js (exit 1, 7.3s)
+        ok campaign seed 7: no observer errors or warnings
+      AssertionError [ERR_ASSERTION]: campaign observed at least 30 real days
+          at check (C:\Users\Steve\.codex\worktrees\conversation-structure-current\oversight\scripts\test-predation-instrument-20261014.js:11:43)
+          at main (C:\Users\Steve\.codex\worktrees\conversation-structure-current\oversight\scripts\test-predation-instrument-20261014.js:190:32)
+          at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\conversation-structure-current\oversight\scripts\test-predation-instrument-20261014.js:206:1)
+          at Module._compile (node:internal/modules/cjs/loader:1761:14)
+          at Object..js (node:internal/modules/cjs/loader:1893:10)
+          at Module.load (node:internal/modules/cjs/loader:1481:32)
+          at Module._load (node:internal/modules/cjs/loader:1300:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+  slowest: scripts/test-deterministic-clock-20261014.js 66s, scripts/test-simopt-trajectory-20261010.js 64s, scripts/test-fourthlink-20261014.js 42s
+
+check.js: 1032 passed, 1 failed in 204s

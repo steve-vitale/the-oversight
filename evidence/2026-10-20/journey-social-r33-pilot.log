@@ -1,0 +1,24 @@
+SMOKE: seed 3008, 10 days (self-test of L3 counters)
+SMOKE: bonds=29 cases=0 convos=13
+SMOKE SELF-TEST: PASS (bonds counter reads nonzero — instrumentation OK)
+seed 3104: days=142 alive=6 convos=180 (deep=123 comfort=14/84) gossipPicks=3 gossipConvos=10 dryRate=2.34/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=9 spoken=9 silent=0
+  L3: {"bonds":69,"deepBonds":32,"betrayalCases":3,"mootsConvened":3,"mootsObserved":3,"gossipConvos":10,"gossipPicks":3,"avgTrust":"70.2"}
+  moots: [{"c":"case_2","day":11,"role":"bystander","vote":"acquit","verdict":"acquitted","err":null,"unnamed":[]},{"c":"case_4","day":13,"role":"bystander","vote":"acquit","verdict":"acquitted","err":null,"unnamed":[]},{"c":"case_6","day":14,"role":"bystander","vote":"acquit","verdict":"acquitted","err":null,"unnamed":[]}]
+  regression: P1-streaks=8 P2-reactDry=14
+seed 3105: days=142 alive=8 convos=180 (deep=139 comfort=12/54) gossipPicks=3 gossipConvos=30 dryRate=2.63/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=6 spoken=6 silent=0
+  L3: {"bonds":59,"deepBonds":33,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":30,"gossipPicks":3,"avgTrust":"91.3"}
+  moots: (none convened)
+  regression: P1-streaks=11 P2-reactDry=18
+seed 3106: days=142 alive=7 convos=194 (deep=139 comfort=11/44) gossipPicks=3 gossipConvos=13 dryRate=2.46/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=6 spoken=6 silent=0
+  L3: {"bonds":61,"deepBonds":36,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":13,"gossipPicks":3,"avgTrust":"90.3"}
+  moots: (none convened)
+  regression: P1-streaks=7 P2-reactDry=42

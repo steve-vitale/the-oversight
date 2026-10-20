@@ -1,0 +1,29 @@
+=== seed 9703 day 41 — conversation with Liam (liam_davis) ===
+occupation=farmer temperament=steady trust=27 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? My hands shake when I try to work. That's where we are."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with. Worth considering."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What's the word around the fire?"
+THEM: "Good question." "People are saying things. About you. ...I'd watch how you act around the fire."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? That's my read."
+(want=ask_favor stage=1)
+YOU: [teach] "Could I show you something?"
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=1)
+YOU: [teach] "Here — let me show you."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=1)
+YOU: [teach] "Here — let me show you."
+THEM: "Alright, duty calls. This was a good pause."
+(want=ask_favor stage=1)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=unresolved

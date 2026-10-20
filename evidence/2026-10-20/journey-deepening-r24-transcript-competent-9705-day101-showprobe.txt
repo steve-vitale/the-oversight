@@ -1,0 +1,18 @@
+=== seed 9705 day 101 — conversation with Amina (amina_diallo) ===
+occupation=Midwife temperament=warm trust=91 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the sickness I'm fighting — still need hands. Are you in? That means something."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, dlg:commit, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? Javier just walked away from Haven. Didn't look back. It'll pass."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? That's the whole of it."
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Anyway. I'm glad we talked. Really."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1152,13 +1152,25 @@
             const mgone = mnames.length === 2 ? mnames[0] + ' is gone and ' + mnames[1] + ' is gone'
               : mnames.slice(0, -1).join(' is gone, ') + ' is gone, and ' + mnames[mnames.length - 1] + ' is gone';
             mlines = ['"We lost ' + mlist + ' this week. I keep setting out extra portions. Stupid."',
-              '"' + mgone + ' and the world just... continues. That\'s the part I can\'t stand."'];
+              '"' + mgone + ' and the world just... continues. That\'s the part I can\'t stand."',
+              // R34 (2026-10-20, famine sense-test): the multi-mourning pool
+              // repeated visibly (2 templates). Grief-through-routine voice.
+              '"We lost ' + mlist + '. I do the headcount without thinking. Then I think."',
+              '"' + mgone + '. The fire doesn\'t care. That\'s what gets me — the fire doesn\'t care."'];
           } else if (mnames.length === 1) {
             mlines = ['"Since ' + mnames[0] + ' died... I keep expecting to see ' + mnames[0] + ' at the fire. Stupid."',
-               '"' + mnames[0] + ' is gone and the world just... continues. That\'s the part I can\'t stand."'];
+               '"' + mnames[0] + ' is gone and the world just... continues. That\'s the part I can\'t stand."',
+               // R34 (2026-10-20): single-name pool was 2 templates, repeated
+               // across villagers. Same plainspoken grief-through-routine voice.
+               '"' + mnames[0] + ' owed me a favor. I keep thinking about collecting. Stupid."',
+               '"I dreamed ' + mnames[0] + ' was still here. Woke up angry at the dream. Stupid."',
+               '"' + mnames[0] + ' always took the burnt piece. Said someone had to. I take it now."'];
           } else {
             mlines = ['"We lost someone. I keep setting out an extra portion. Stupid."',
-               '"Grief doesn\'t schedule itself. It just shows up at dinner."'];
+               '"Grief doesn\'t schedule itself. It just shows up at dinner."',
+               // R34 (2026-10-20): anonymous pool expansion, same voice.
+               '"Another empty spot. I stopped counting the spots. That\'s worse, I think."',
+               '"Someone died. The work didn\'t. That\'s the part that feels wrong."'];
           }
           // SICKNESS DEATH (journey crisis r8 2026-10-14): the village names
           // what took them — the outbreak and the grief are one story.

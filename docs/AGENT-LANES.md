@@ -1,5 +1,34 @@
 # Agent lanes (2026-10-15)
 
+## Active release reconciliation (2026-10-20)
+
+Codex is merging Muse `699c56ba8` into `codex/favor-quest-deadlines-20261020`
+(the release/conversation worktree, currently carrying the three conversation
+and favor repair commits). Both descend from `a4404566c`; no file-port or
+unrelated-history merge is needed for this active lane. The disjoint-history
+note below is historical, not current Git evidence.
+
+Direct Git check on 2026-10-20 also finds common ancestor `7d011395d` between
+`codex/resume-claude` and current master. That older branch has 149 unique
+commits and is 876 commits behind Muse 699c56ba8, not the old 3,470/disjoint
+state described in the dated note. Preserve it for a separate review of
+unintegrated work; do not merge it wholesale or treat it as the current
+shipping checkout. Current release/calibration uses shared master/main.
+
+Codex owns this integration, release stamp/proofs and shared handoff. Muse's
+runtime changes are preserved. Codex is adapting the two r31/r32 gossip proof
+openers to the existing public-menu test kit (`test-departure-purpose-r32-20261020.js`
+and `test-landing-gossip-walkdown-20261020.js`), because their old first-choice
+walk exits the repaired conversation before reaching gossip. The gossip
+assertions and Muse's actual rendering/deduplication remain unchanged.
+The inherited predation observer test also keeps its four original idle
+cases, but now verifies the unchanged 30-day coverage bar with the real
+capable policy. Idle seed 7 already ends at day 11 on Muse 699c56ba8; the
+combined build matches every state snapshot and RNG continuation. This is
+observer-fixture repair, not a survival buff or a removed coverage gate.
+Muse should calibrate from the published shared master/main tip after this
+release, preserving local work before updating. No wholesale port is requested.
+
 Codex conversation structure lane (2026-10-20): branch
 `codex/conversation-structure-20261020`, based on Muse a4404566. Preserve Muse's
 other runtime/content changes and the r28 gossip walk-down signature object.

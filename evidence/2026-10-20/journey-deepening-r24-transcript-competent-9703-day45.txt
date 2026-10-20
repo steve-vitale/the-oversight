@@ -1,0 +1,32 @@
+=== seed 9703 day 45 — conversation with Finn (app_mgpsphli443) ===
+occupation=cook temperament=mischievous trust=31 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:a_deflect, ans:q_fun:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones. That is all."
+(want=curious stage=2)
+YOU: [ask:gossip] "Anyone saying anything interesting?"
+THEM: "Good question." "Elena? A Baker, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "What's this about? I won The Lottery. On camera. People won't shut up about it — and honestly? Neither will I."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Thabo talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Permit me: Did you hear? Emma won The Lottery on the cameras. People are still talking about it."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "People are talking about James. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "If I may — Elena talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=curious stage=3 resolution=engaged
