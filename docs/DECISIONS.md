@@ -1020,3 +1020,13 @@ own medium tier; armor is mortality-selected); (4) w4 armed 5 unchanged,
 exploit); (9) hold beats unchanged (read demands dynamically);
 (10) ratchet/plenty-cap/waves-1-3 untouched. Result: 13/16 wave-4 on named
 seeds (was 0/16); bread-road flee-through still held. Landed b4906574d.
+
+## 2026-10-19 — Moot convening for law-abiding villages (Steve's ruling)
+Steve answered the social r27 moot question ("should a law-abiding player
+ever see a moot?"): "it depends — sometimes they are the victims or could
+be falsely accused of committing crime." Ruling: a law-abiding player SHOULD
+still see moots — moot cases must not only arise from the player's own
+wrongdoing. Villagers can be victims of crimes or falsely accused of
+committing them. The beloved-village gate blocking all NPC-NPC cases under
+law-abiding play is therefore a design gap, not a feature — queued for the
+social-life rotation / findings backlog.
