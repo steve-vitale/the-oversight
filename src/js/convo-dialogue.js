@@ -181,9 +181,35 @@
           if (c.want) { c.want.stage = 3; c.want.resolution = 'moot'; }
           result = { ok: false, line: 'The unavailable job is closed. No completion reward or broken-promise penalty was applied.' };
         }
-        const line = result.line;
+        let line = result.line;
         // Requirements are interface information, never fabricated NPC speech
         // (and therefore never spoken by the voice package).
+        // FAVOR-REQUIREMENTS REPEAT (journey-establishment r21 2026-10-20):
+        // asking "why can't I do this now?" back-to-back re-served the
+        // verbatim requirements line (Angelo seed 61 / Ruth seed 82 / Erin
+        // seed 103 — the position-blocked line x6-7, transcript-verified).
+        // The recap handler already solved this class (convoRecapLine's
+        // count-aware reframe); same treatment here, keyed on the raw line
+        // so a state change (they move next to you -> ready) naturally
+        // resets the counter. Deterministic rotation (not convoPickCycle):
+        // interface info wants predictability, not flavor variety. Blocked
+        // lines only — a successful favor_action performance is untouched.
+        if (!result.ok && line) {
+          c._favorReqSaid = c._favorReqSaid || {};
+          const rawReq = String(line);
+          if (c._favorReqSaid[rawReq]) {
+            c._favorReqReframes = (c._favorReqReframes || 0) + 1;
+            const reframes = [
+              `As I said — ${rawReq}`,
+              `Like I said — ${rawReq}`,
+              `Still the same thing — ${rawReq}`,
+            ];
+            line = c._favorReqReframes <= 3
+              ? reframes[(c._favorReqReframes - 1) % reframes.length]
+              : `I've told you three times now — ${rawReq}`;
+          }
+          c._favorReqSaid[rawReq] = true;
+        }
         this.sayLine(vid, line, { diegeticAct: true });
         if (result.ok && !result.incomplete && c.want) { c.want.stage = 3; c.want.resolution = result.promiseMissed ? 'broken' : 'fulfilled'; }
         if (result.ok && result.close) c.windingDown = true;
