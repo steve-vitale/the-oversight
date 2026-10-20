@@ -121,6 +121,7 @@ async function playSeed(seed) {
     tendedAtEnd: 0, tendedByAtEnd: 0,
     sayOutbreakLines: 0, canonHits: [],   // {day, line}
     defenderRaidDeaths: [],               // r30 bar (d) instrument
+    deaths: [],                           // r32: {day, name, cause, sickLinked, player}
     griefConvos: 0, outbreakTopicSurfaced: 0,
   };
   const seen = new Set();
@@ -260,14 +261,17 @@ async function playSeed(seed) {
     try { res = await runDays(Game, policy, { days: 1, sampleEvery: 1 }); }
     catch (e) { endReason = 'threw:' + e.message; break; }
     rec.days = d;
-    // new deaths this chunk -> grief convos
+    // new deaths this chunk -> grief convos + r32 death record
     try {
       const ds = (res.samples && res.samples.deaths) || [];
       for (const de of ds.slice(seenDeaths)) {
         seenDeaths++;
-        if (de.player) continue;
         const lastSick = sickAtDeath.get(String(de.who));
         const sickLinked = lastSick != null && (day() - lastSick) <= 3;
+        try {
+          rec.deaths.push({ day: day(), name: rawName(Game, de.who), cause: String(de.cause || de.how || ''), sickLinked: !!sickLinked, player: !!de.player });
+        } catch (e) {}
+        if (de.player) continue;
         if (sickLinked && !griefPending && convosThisRun < 6) {
           griefPending = { day: day(), who: de.who };
         }
@@ -299,6 +303,38 @@ async function playSeed(seed) {
   if (inWindow) rec.outbreakWindows.push({ startDay: windowStart, endDay: day(), peakSick, open: true });
   rec.endReason = endReason;
 
+  // r32: end-state village census (read-only — no RNG consumed, trajectory unchanged)
+  try {
+    const v = Game.state.village || {};
+    const cen = { scattered: !!v.scattered, extinct: !!v.extinct, villageLost: !!Game.villageLost };
+    const roster = v.roster || [];
+    const alive = [], dead = [];
+    for (const id of roster) {
+      let p = null; try { p = Game.vpOf(id); } catch (e) {}
+      let nm = id; try { nm = Game.displayName(id) || id; } catch (e) {}
+      if (p && !p.dead) alive.push(nm); else dead.push(nm);
+    }
+    cen.aliveCount = alive.length; cen.deadCount = dead.length;
+    cen.alive = alive; cen.dead = dead;
+    try {
+      const corpses = (typeof Game.corpses === 'function') ? Game.corpses() : (Game.state.corpses || []);
+      cen.corpses = corpses.filter(c => c && ((typeof Game.corpseIsPerson === 'function' && Game.corpseIsPerson(c)) || c.kind === 'person' || c.kind === 'villager'))
+        .map(c => ({ name: c.name || c.villagerId, cause: c.cause, day: c.dayDied }));
+    } catch (e) { cen.corpses = []; }
+    try {
+      const cx = Game.state.codex || {};
+      cen.codex = { plants: Object.keys(cx.plants || {}).length, animals: Object.keys(cx.animals || {}).length, monsters: Object.keys(cx.monsters || {}).length };
+    } catch (e) {}
+    try { cen.pantryKcal = Math.round(Game.pantryKcalLive(v)); } catch (e) { cen.pantryKcal = v.pantryKcal || 0; }
+    try {
+      const trust = v.trust || {};
+      cen.trustTop = Object.entries(trust).sort((a, b) => b[1] - a[1]).slice(0, 3)
+        .map(([id, t]) => { let n = id; try { n = Game.displayName(id) || id; } catch (e) {} return n + ':' + t; });
+    } catch (e) {}
+    try { cen.sickAtEnd = Object.keys(v.sick || {}).filter(id => (v.sick[id].daysLeft || 0) > 0).length; } catch (e) {}
+    rec.census = cen;
+  } catch (e) { rec.census = { error: e.message }; }
+
   // end-of-run: tended counts + outbreak-topic surfacing + canon scan
   try {
     for (const k of seen) {
@@ -311,8 +347,13 @@ async function playSeed(seed) {
   for (const c of rec.convosDriven) {
     try {
       const txt = fs.readFileSync(path.join(EVID, c.file), 'utf8');
-      const body = txt.split('\n').slice(1).join('\n').toLowerCase(); // skip our own header (contains 'outbreak' in the tag)
-      if (/sickness going around|the sickness|outbreak/.test(body)) rec.outbreakTopicSurfaced++;
+      const body = txt.split('\n').slice(1).join('\n'); // skip our own header (contains 'outbreak' in the tag)
+      // r32: the old scan (/sickness going around|the sickness|outbreak/)
+      // matched NONE of the real 'outbreak'-case lines, which read
+      // "N of us are down with <desc>", "Have you seen the sick row?",
+      // "I'm down with it too", "It's got me as well". Scan the shapes
+      // the topic actually speaks.
+      if (/"\d+ of us are down with|"have you seen the sick row|"i'm down with it too|"it's got me as well/i.test(body)) rec.outbreakTopicSurfaced++;
     } catch (e) {}
   }
   for (const s of says) {
