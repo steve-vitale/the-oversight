@@ -1,0 +1,146 @@
+[
+ {
+  "seed": 9052,
+  "ok": true,
+  "days": 49,
+  "won": false,
+  "doorEntries": [],
+  "finalsPicks": [],
+  "wonTele": null,
+  "darkmerge": {
+   "reroutes": 0,
+   "atEnd": {
+    "lean": 0,
+    "grounding": 100,
+    "tier": "grounded",
+    "bond": 0,
+    "backfires": 0,
+    "held": false,
+    "stage": 3,
+    "merge": 0,
+    "branch": null
+   },
+   "noNet": false
+  }
+ },
+ {
+  "seed": 9053,
+  "ok": true,
+  "days": 30,
+  "won": false,
+  "doorEntries": [],
+  "finalsPicks": [],
+  "wonTele": null,
+  "darkmerge": {
+   "reroutes": 0,
+   "atEnd": {
+    "lean": 0,
+    "grounding": 100,
+    "tier": "grounded",
+    "bond": 0,
+    "backfires": 0,
+    "held": false,
+    "stage": 3,
+    "merge": 0,
+    "branch": null
+   },
+   "noNet": false
+  }
+ },
+ {
+  "seed": 9054,
+  "ok": true,
+  "days": 90,
+  "won": true,
+  "doorEntries": [
+   {
+    "day": 90,
+    "path": "relay",
+    "branch": "dark",
+    "pre": {
+     "lean": -44,
+     "grounding": 100,
+     "tier": "grounded",
+     "bond": 0,
+     "backfires": 0,
+     "held": false,
+     "stage": 3,
+     "merge": 0,
+     "branch": "dark"
+    }
+   }
+  ],
+  "finalsPicks": [
+   {
+    "day": 90,
+    "pick": "final:voice",
+    "offer": [
+     "final:voice",
+     "final:merge"
+    ],
+    "branch": "dark",
+    "pre": {
+     "lean": -44,
+     "grounding": 100,
+     "tier": "grounded",
+     "bond": 0,
+     "backfires": 0,
+     "held": false,
+     "stage": 3,
+     "merge": 8,
+     "branch": "dark"
+    }
+   }
+  ],
+  "wonTele": {
+   "day": 90,
+   "data": {
+    "track": "craft",
+    "godpath": "forager",
+    "subclass": "gardener",
+    "god": "living_garden",
+    "moral": "dark",
+    "titanFinale": "none",
+    "endingKey": null,
+    "path": "relay",
+    "branch": "dark",
+    "seat": "lesser",
+    "key": false,
+    "hosts": false,
+    "overtime": 0,
+    "ending": "god:living_garden",
+    "endingLevel": "god",
+    "endingKind": "coda",
+    "buildPlayed": null
+   }
+  },
+  "darkmerge": {
+   "reroutes": 22,
+   "claimDay": 78,
+   "targetHit": 80,
+   "atAnnounce": {
+    "lean": -44,
+    "grounding": 100,
+    "tier": "grounded",
+    "bond": 0,
+    "backfires": 0,
+    "held": false,
+    "stage": 3,
+    "merge": 0,
+    "branch": null
+   },
+   "atEnd": {
+    "lean": -44,
+    "grounding": 100,
+    "tier": "grounded",
+    "bond": 0,
+    "backfires": 0,
+    "held": false,
+    "stage": 3,
+    "merge": 8,
+    "branch": "dark"
+   },
+   "noNet": false
+  }
+ }
+]
