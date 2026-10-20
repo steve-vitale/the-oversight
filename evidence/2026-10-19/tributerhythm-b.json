@@ -1,0 +1,6085 @@
+{
+ "verdict": {
+  "primary": {
+   "control": 40,
+   "armed": 49
+  },
+  "guardrails": {
+   "medianSurvival": {
+    "control": 131,
+    "armed": 122
+   },
+   "starvation": {
+    "control": 5,
+    "armed": 7
+   },
+   "national": {
+    "control": 6,
+    "armed": 6
+   },
+   "table": {
+    "control": 8,
+    "armed": 7
+   },
+   "wins": {
+    "control": 0,
+    "armed": 0
+   },
+   "wave45": {
+    "control": 8,
+    "armed": 8
+   },
+   "laundering": 0,
+   "trBlocked": 27,
+   "trArmedFragile": 27,
+   "feasts": {
+    "control": 64,
+    "armed": 60
+   },
+   "feastKcal": {
+    "control": 127247,
+    "armed": 120857
+   },
+   "tributeKcal": {
+    "control": 360377,
+    "armed": 335301
+   },
+   "tendKcal": {
+    "control": 165006,
+    "armed": 165006
+   }
+  }
+ },
+ "rows": [
+  {
+   "side": "control",
+   "policy": "leadfeast",
+   "seed": 11,
+   "days": 93,
+   "gameDays": 94,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 9,
+    "combat": 20,
+    "monster": 3,
+    "expedition": 3,
+    "starvation": 1
+   },
+   "deaths": [
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 6,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "combat",
+     "who": "cliffhanger",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "monster",
+     "who": "oliver_moore",
+     "player": false
+    },
+    {
+     "day": 22,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 30,
+     "cause": "expedition",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "villager combat",
+     "who": "sweeps_week",
+     "player": false
+    },
+    {
+     "day": 35,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 41,
+     "cause": "combat",
+     "who": "gen_dkjljvy",
+     "player": true
+    },
+    {
+     "day": 48,
+     "cause": "combat",
+     "who": "ad_sponsor",
+     "player": false
+    },
+    {
+     "day": 48,
+     "cause": "combat",
+     "who": "ad_break",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "gen_k8y9lex",
+     "player": true
+    },
+    {
+     "day": 55,
+     "cause": "expedition",
+     "who": "bulldozer",
+     "player": false
+    },
+    {
+     "day": 55,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 55,
+     "cause": "expedition",
+     "who": "glasswing",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "gen_fmwl29h",
+     "player": true
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "who": "influencer",
+     "player": false
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "wanjiru_kamau",
+     "player": true
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "gen_cn4hqgv",
+     "player": true
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "ingrid_vik",
+     "player": true
+    },
+    {
+     "day": 79,
+     "cause": "monster",
+     "who": "caleb_jones",
+     "player": false
+    },
+    {
+     "day": 81,
+     "cause": "combat",
+     "who": "ursula_weber",
+     "player": true
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "who": "mara_vasquez",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "monster",
+     "who": "sofia_chen",
+     "player": false
+    },
+    {
+     "day": 91,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "olivia_bennett",
+     "player": true
+    },
+    {
+     "day": 93,
+     "cause": "starvation",
+     "who": "gen_549dgnc",
+     "player": false
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 3,
+   "hungryEvents": 3,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 7,
+   "feastDrawDays": 7,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 32086,
+   "feastKcal": 12287,
+   "hungrySay": [
+    {
+     "day": 92,
+     "sayWin": [
+      "[d92] 🌙 Night. The lingering The Suburb gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d92] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d92] ◈ \"UNIT BEAT-UP PAPERBACK — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\"",
+      "[d92] ◈ FLASHBACK — Beat-up Paperback\nA field guide to edible plants, ironically. Spine cracked at the mushroom chapter — you were always going to learn mushrooms, someday. Someday is now.",
+      "[d92] 📖 The memory leaves something behind: Jewelweed — the orange touch-me-not by creeks. Poison ivy’s antidote. The book taught you.",
+      "[d92] 💛 The Beat-up Paperback is starting to do something. (Keepsake L1 — quiet luck: 1 in 5 misses lands anyway, while worn.)",
+      "[d92] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d92] Manuela is showing Colton how to tie a snare. Hands patient. It takes three tries.",
+      "[d92] 🔍 Ruth has been turning over a thorny acacia; amber gum oozing from bark wounds for days — today it clicked. \"I know this one now. Look — see the leaves?\"",
+      "[d92] Ruth traded something with someone for something else. The barter economy stirs.",
+      "[d92] Devon went to sleep hungry. Nobody says anything.",
+      "[d92] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 93,
+     "sayWin": [
+      "[d93] Village meal: +984 kcal, +1L water from the communal pantry.",
+      "[d93] 🩹 You make rounds — Devon gets bound up properly. (68 → 83 HP)",
+      "[d93] Ruth is showing everyone Gum Acacia by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way.",
+      "[d93] Colton: \"Walked past a good stand of blackberry. Worth remembering where.\"",
+      "[d93] 📖 The Codex turns a page on its own. Colton is dead. You didn't ask. It knew.",
+      "[d93] Nobody's talking much. The fire feels smaller tonight.",
+      "[d93] 📖 The entry for Colton is finished. No more pages.",
+      "[d93] COLTON — GONE. 6 open questions closed unanswered.",
+      "[d93] 💀 Colton starved. Slowly. The village is 3 now.",
+      "[d93] ⚠ Haven's pantry is empty. Day 2 of hunger.",
+      "[d93] 🌿 Ground Elder, weeks in the baskets. Handling it day after day, the village has learned what it's FOR — not just what it is. The village knows its uses now.",
+      "[d93] 💡 Ground Elder: the village knows more than you do. Harvest it a few more times (0/2) and it'll click."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 94,
+     "sayWin": [
+      "[d94] 🎣 Devon worked the creek — 3 fish, +315 kcal to the pantry.",
+      "[d94] 💧 Ruth returns with water: +3 clean.",
+      "[d94] That night, they bring Olivia home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.",
+      "[d94] Rain. Steady, cold, honest rain.",
+      "[d94] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d94] Village meal: +665 kcal, +1L water from the communal pantry.",
+      "[d94] Ruth set out an extra bowl before catching themself. Nobody mentioned it.",
+      "[d94] Ruth is hurt — a fall, a thorn, a bad step. (health 72/100)",
+      "[d94] ◈ CRISIS — THE HUNGER WINTER. Three days now the village has gone to sleep hungry. The pantry is an echo. This is the part the old stories skip — the part where you find out what you’re made of.",
+      "[d94] SYSTEM: \"Organic units require fuel. Noting. Noting loudly. The audience is very quiet, which for them is screaming.\"",
+      "[d94] ⚠ Haven's pantry is empty. Day 3 of hunger.",
+      "[d94] Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "armed",
+   "policy": "leadfeast",
+   "seed": 11,
+   "days": 93,
+   "gameDays": 94,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 9,
+    "combat": 20,
+    "monster": 3,
+    "expedition": 3,
+    "starvation": 1
+   },
+   "deaths": [
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 6,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "combat",
+     "who": "cliffhanger",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "monster",
+     "who": "oliver_moore",
+     "player": false
+    },
+    {
+     "day": 22,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 30,
+     "cause": "expedition",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "villager combat",
+     "who": "sweeps_week",
+     "player": false
+    },
+    {
+     "day": 35,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 41,
+     "cause": "combat",
+     "who": "gen_dkjljvy",
+     "player": true
+    },
+    {
+     "day": 48,
+     "cause": "combat",
+     "who": "ad_sponsor",
+     "player": false
+    },
+    {
+     "day": 48,
+     "cause": "combat",
+     "who": "ad_break",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "gen_k8y9lex",
+     "player": true
+    },
+    {
+     "day": 55,
+     "cause": "expedition",
+     "who": "bulldozer",
+     "player": false
+    },
+    {
+     "day": 55,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 55,
+     "cause": "expedition",
+     "who": "glasswing",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "gen_fmwl29h",
+     "player": true
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "who": "influencer",
+     "player": false
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "wanjiru_kamau",
+     "player": true
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "gen_cn4hqgv",
+     "player": true
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "ingrid_vik",
+     "player": true
+    },
+    {
+     "day": 79,
+     "cause": "monster",
+     "who": "caleb_jones",
+     "player": false
+    },
+    {
+     "day": 81,
+     "cause": "combat",
+     "who": "ursula_weber",
+     "player": true
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "who": "mara_vasquez",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "monster",
+     "who": "sofia_chen",
+     "player": false
+    },
+    {
+     "day": 91,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "olivia_bennett",
+     "player": true
+    },
+    {
+     "day": 93,
+     "cause": "starvation",
+     "who": "gen_549dgnc",
+     "player": false
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 3,
+   "hungryEvents": 3,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 7,
+   "feastDrawDays": 7,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 32086,
+   "feastKcal": 12287,
+   "hungrySay": [
+    {
+     "day": 92,
+     "sayWin": [
+      "[d92] 🌙 Night. The lingering The Suburb gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d92] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d92] ◈ \"UNIT BEAT-UP PAPERBACK — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\"",
+      "[d92] ◈ FLASHBACK — Beat-up Paperback\nA field guide to edible plants, ironically. Spine cracked at the mushroom chapter — you were always going to learn mushrooms, someday. Someday is now.",
+      "[d92] 📖 The memory leaves something behind: Jewelweed — the orange touch-me-not by creeks. Poison ivy’s antidote. The book taught you.",
+      "[d92] 💛 The Beat-up Paperback is starting to do something. (Keepsake L1 — quiet luck: 1 in 5 misses lands anyway, while worn.)",
+      "[d92] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d92] Manuela is showing Colton how to tie a snare. Hands patient. It takes three tries.",
+      "[d92] 🔍 Ruth has been turning over a thorny acacia; amber gum oozing from bark wounds for days — today it clicked. \"I know this one now. Look — see the leaves?\"",
+      "[d92] Ruth traded something with someone for something else. The barter economy stirs.",
+      "[d92] Devon went to sleep hungry. Nobody says anything.",
+      "[d92] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 93,
+     "sayWin": [
+      "[d93] Village meal: +984 kcal, +1L water from the communal pantry.",
+      "[d93] 🩹 You make rounds — Devon gets bound up properly. (68 → 83 HP)",
+      "[d93] Ruth is showing everyone Gum Acacia by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way.",
+      "[d93] Colton: \"Walked past a good stand of blackberry. Worth remembering where.\"",
+      "[d93] 📖 The Codex turns a page on its own. Colton is dead. You didn't ask. It knew.",
+      "[d93] Nobody's talking much. The fire feels smaller tonight.",
+      "[d93] 📖 The entry for Colton is finished. No more pages.",
+      "[d93] COLTON — GONE. 6 open questions closed unanswered.",
+      "[d93] 💀 Colton starved. Slowly. The village is 3 now.",
+      "[d93] ⚠ Haven's pantry is empty. Day 2 of hunger.",
+      "[d93] 🌿 Ground Elder, weeks in the baskets. Handling it day after day, the village has learned what it's FOR — not just what it is. The village knows its uses now.",
+      "[d93] 💡 Ground Elder: the village knows more than you do. Harvest it a few more times (0/2) and it'll click."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 94,
+     "sayWin": [
+      "[d94] 🎣 Devon worked the creek — 3 fish, +315 kcal to the pantry.",
+      "[d94] 💧 Ruth returns with water: +3 clean.",
+      "[d94] That night, they bring Olivia home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.",
+      "[d94] Rain. Steady, cold, honest rain.",
+      "[d94] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d94] Village meal: +665 kcal, +1L water from the communal pantry.",
+      "[d94] Ruth set out an extra bowl before catching themself. Nobody mentioned it.",
+      "[d94] Ruth is hurt — a fall, a thorn, a bad step. (health 72/100)",
+      "[d94] ◈ CRISIS — THE HUNGER WINTER. Three days now the village has gone to sleep hungry. The pantry is an echo. This is the part the old stories skip — the part where you find out what you’re made of.",
+      "[d94] SYSTEM: \"Organic units require fuel. Noting. Noting loudly. The audience is very quiet, which for them is screaming.\"",
+      "[d94] ⚠ Haven's pantry is empty. Day 3 of hunger.",
+      "[d94] Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "control",
+   "policy": "leadfeast",
+   "seed": 22,
+   "days": 131,
+   "gameDays": 132,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 6,
+    "combat": 36,
+    "expedition": 3,
+    "Murkcap": 1,
+    "monster": 5,
+    "a wound that wouldn't close": 1
+   },
+   "deaths": [
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_nypzt1k",
+     "player": true
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_ojtutve",
+     "player": true
+    },
+    {
+     "day": 16,
+     "cause": "expedition",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "Murkcap",
+     "who": "theo_lindqvist",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_6fmreyh",
+     "player": true
+    },
+    {
+     "day": 21,
+     "cause": "monster",
+     "who": "tom_baker",
+     "player": false
+    },
+    {
+     "day": 24,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "glasswing",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "villager combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 33,
+     "cause": "a wound that wouldn't close",
+     "who": "gen_9oec7nf",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "villager combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "expedition",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "monster",
+     "who": "gen_pkbgpuo",
+     "player": false
+    },
+    {
+     "day": 45,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 46,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "bulldozer",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 64,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "villager combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 70,
+     "cause": "combat",
+     "who": "gen_kyq1vyi",
+     "player": true
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "who": "sanjun",
+     "player": false
+    },
+    {
+     "day": 85,
+     "cause": "combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 85,
+     "cause": "expedition",
+     "who": "sanjun",
+     "player": false
+    },
+    {
+     "day": 90,
+     "cause": "monster",
+     "who": "diana_osei",
+     "player": false
+    },
+    {
+     "day": 95,
+     "cause": "combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 95,
+     "cause": "combat",
+     "who": "ad_sponsor",
+     "player": false
+    },
+    {
+     "day": 95,
+     "cause": "combat",
+     "who": "ad_break",
+     "player": false
+    },
+    {
+     "day": 102,
+     "cause": "monster",
+     "who": "visjoin_97",
+     "player": false
+    },
+    {
+     "day": 103,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 104,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 105,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 106,
+     "cause": "combat",
+     "who": "mara_vasquez",
+     "player": true
+    },
+    {
+     "day": 106,
+     "cause": "combat",
+     "who": "ad_sponsor",
+     "player": false
+    },
+    {
+     "day": 106,
+     "cause": "combat",
+     "who": "mia_andersson",
+     "player": true
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ava_garcia",
+     "player": true
+    },
+    {
+     "day": 109,
+     "cause": "monster",
+     "who": "visjoin_104",
+     "player": false
+    },
+    {
+     "day": 112,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 116,
+     "cause": "combat",
+     "who": "daniyar_askarov",
+     "player": true
+    }
+   ],
+   "starveDeaths": 0,
+   "hungryDays": 5,
+   "hungryEvents": 5,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 9,
+   "feastDrawDays": 9,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 55845,
+   "feastKcal": 18236,
+   "hungrySay": [
+    {
+     "day": 125,
+     "sayWin": [
+      "[d125] You settle into the hall floor. Sleep takes you.",
+      "[d125] 🌿 Lena returns from foraging the wilds: +411 kcal to the pantry.",
+      "[d125] Lena stared at their hands for a long time today. Something is changing.",
+      "[d125] 🗣️ Somchai to Lena, by the fire: \"Why them? ...Sorry. It's just sitting there, and they're the one who has to sit in it.\"",
+      "[d125] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d125] ◈ \"UNIT UNNAMED PHOTOGRAPH — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\"",
+      "[d125] ◈ FLASHBACK — Unnamed photograph\nThere is a name you won't say out loud anymore. The photo doesn't need you to say it. Somebody you loved didn't make it to the clearing, and this is what's left of the proof they were here.",
+      "[d125] 📖 The memory leaves something behind: You carry them. That is the whole of it.",
+      "[d125] 💛 The Unnamed photograph is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)",
+      "[d125] Village meal: +2441 kcal, +1L water from the communal pantry.",
+      "[d125] Somchai paces the hall, restless, then sits. Then paces.",
+      "[d125] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 128,
+     "sayWin": [
+      "[d128] No carcasses to clean.",
+      "[d128] Butchering yields: 1 hide, 1 bone.",
+      "[d128] Cleaned 1 carcass — quick, practiced cuts. Honest portions, ~500 kcal each. (Field Dressing — less waste, kept ~52%.) (8 ticks)",
+      "[d128] You settle into the hall floor. Sleep takes you.",
+      "[d128] 💧 Lena returns with water: +2 clean.",
+      "[d128] ◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Fully identify 3 plants (knowledge level 3) within 3 days. Reward: integration, and a lesson.",
+      "[d128] A sharp-eyed peddler waits a while, then moves on down the road. Word travels about that, too.",
+      "[d128] Rain. Steady, cold, honest rain.",
+      "[d128] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d128] Village meal: +2268 kcal, +1L water from the communal pantry.",
+      "[d128] Someone told a joke by the fire. You hear Somchai laugh — a real one.",
+      "[d128] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 130,
+     "sayWin": [
+      "[d130] You eat Muscadine Grapes and Burdock (1620 kcal).",
+      "[d130] You settle into the hall floor. Sleep takes you.",
+      "[d130] ◈ THE SYSTEM has been watching Somchai — Field 1. Three offers; they took Bloodhound. Earned, chosen. (bloodhound: villager level-up)",
+      "[d130] 📓 Codex: Somchai chose Bloodhound (bloodhound) at Field 1.",
+      "[d130] A frightened family cries — relief, mostly. Haven grows by one.",
+      "[d130] 👋 The village didn't wait for you — a frightened family was taken in around the fire. Another pair of hands.",
+      "[d130] A cold snap. Breath smokes. The woods go quiet.",
+      "[d130] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d130] Village meal: +360 kcal, +1L water from the communal pantry.",
+      "[d130] Lena is staring into the fire like it owes them answers.",
+      "[d130] Mert is hurt — a fall, a thorn, a bad step. (health 77/100)",
+      "[d130] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 131,
+     "sayWin": [
+      "[d131] Butchering yields: 1 hide, 1 bone.",
+      "[d131] Cleaned 1 carcass — quick, practiced cuts. Honest portions, ~500 kcal each. (Field Dressing — less waste, kept ~52%.) (8 ticks)",
+      "[d131] 📋 Mert — 🎣 Fish. They'll report back by next part.",
+      "[d131] You are full enough.",
+      "[d131] You settle into the hall floor. Sleep takes you.",
+      "[d131] 🎣 Mert worked the creek — 2 fish, +245 kcal to the pantry.",
+      "[d131] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d131] Village meal: +245 kcal from the communal pantry.",
+      "[d131] Mert traded something with someone for something else. The barter economy stirs.",
+      "[d131] Mert is hurt — a fall, a thorn, a bad step. (health 67/100)",
+      "[d131] Mert went to sleep hungry. Nobody says anything.",
+      "[d131] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 132,
+     "sayWin": [
+      "[d132] 💧 Mert returns with water: +4 clean.",
+      "[d132] The trial window closed. The audience makes a disappointed sound, like wind.",
+      "[d132] Somchai stared at their hands for a long time today. Something is changing.",
+      "[d132] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d132] Village meal: +350 kcal, +1L water from the communal pantry.",
+      "[d132] Lena came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d132] Mert traded something with someone for something else. The barter economy stirs.",
+      "[d132] Mert: \"Walked the far treeline. Nothing new, but the ground's talking — the good stuff keeps to the damp hollows.\"",
+      "[d132] ⚠ Haven's pantry is empty. Day 3 of hunger.",
+      "[d132] Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again.",
+      "[d132] 🌿 Knotweed Shoot, weeks in the baskets. Handling it day after day, the village has learned what it's FOR — not just what it is. The village knows its uses now.",
+      "[d132] 💡 Knotweed Shoot: the village knows more than you do. Harvest it a few more times (0/2) and it'll click."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "armed",
+   "policy": "leadfeast",
+   "seed": 22,
+   "days": 131,
+   "gameDays": 132,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 6,
+    "combat": 36,
+    "expedition": 3,
+    "Murkcap": 1,
+    "monster": 5,
+    "a wound that wouldn't close": 1
+   },
+   "deaths": [
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_nypzt1k",
+     "player": true
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_ojtutve",
+     "player": true
+    },
+    {
+     "day": 16,
+     "cause": "expedition",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "Murkcap",
+     "who": "theo_lindqvist",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_6fmreyh",
+     "player": true
+    },
+    {
+     "day": 21,
+     "cause": "monster",
+     "who": "tom_baker",
+     "player": false
+    },
+    {
+     "day": 24,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "glasswing",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "villager combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 33,
+     "cause": "a wound that wouldn't close",
+     "who": "gen_9oec7nf",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "villager combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "expedition",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "monster",
+     "who": "gen_pkbgpuo",
+     "player": false
+    },
+    {
+     "day": 45,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 46,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "bulldozer",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 64,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "villager combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 70,
+     "cause": "combat",
+     "who": "gen_kyq1vyi",
+     "player": true
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "who": "sanjun",
+     "player": false
+    },
+    {
+     "day": 85,
+     "cause": "combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 85,
+     "cause": "expedition",
+     "who": "sanjun",
+     "player": false
+    },
+    {
+     "day": 90,
+     "cause": "monster",
+     "who": "diana_osei",
+     "player": false
+    },
+    {
+     "day": 95,
+     "cause": "combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 95,
+     "cause": "combat",
+     "who": "ad_sponsor",
+     "player": false
+    },
+    {
+     "day": 95,
+     "cause": "combat",
+     "who": "ad_break",
+     "player": false
+    },
+    {
+     "day": 102,
+     "cause": "monster",
+     "who": "visjoin_97",
+     "player": false
+    },
+    {
+     "day": 103,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 104,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 105,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 106,
+     "cause": "combat",
+     "who": "mara_vasquez",
+     "player": true
+    },
+    {
+     "day": 106,
+     "cause": "combat",
+     "who": "ad_sponsor",
+     "player": false
+    },
+    {
+     "day": 106,
+     "cause": "combat",
+     "who": "mia_andersson",
+     "player": true
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "ava_garcia",
+     "player": true
+    },
+    {
+     "day": 109,
+     "cause": "monster",
+     "who": "visjoin_104",
+     "player": false
+    },
+    {
+     "day": 112,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 116,
+     "cause": "combat",
+     "who": "daniyar_askarov",
+     "player": true
+    }
+   ],
+   "starveDeaths": 0,
+   "hungryDays": 5,
+   "hungryEvents": 5,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 9,
+   "feastDrawDays": 9,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 55845,
+   "feastKcal": 18236,
+   "hungrySay": [
+    {
+     "day": 125,
+     "sayWin": [
+      "[d125] You settle into the hall floor. Sleep takes you.",
+      "[d125] 🌿 Lena returns from foraging the wilds: +411 kcal to the pantry.",
+      "[d125] Lena stared at their hands for a long time today. Something is changing.",
+      "[d125] 🗣️ Somchai to Lena, by the fire: \"Why them? ...Sorry. It's just sitting there, and they're the one who has to sit in it.\"",
+      "[d125] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d125] ◈ \"UNIT UNNAMED PHOTOGRAPH — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\"",
+      "[d125] ◈ FLASHBACK — Unnamed photograph\nThere is a name you won't say out loud anymore. The photo doesn't need you to say it. Somebody you loved didn't make it to the clearing, and this is what's left of the proof they were here.",
+      "[d125] 📖 The memory leaves something behind: You carry them. That is the whole of it.",
+      "[d125] 💛 The Unnamed photograph is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)",
+      "[d125] Village meal: +2441 kcal, +1L water from the communal pantry.",
+      "[d125] Somchai paces the hall, restless, then sits. Then paces.",
+      "[d125] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 128,
+     "sayWin": [
+      "[d128] No carcasses to clean.",
+      "[d128] Butchering yields: 1 hide, 1 bone.",
+      "[d128] Cleaned 1 carcass — quick, practiced cuts. Honest portions, ~500 kcal each. (Field Dressing — less waste, kept ~52%.) (8 ticks)",
+      "[d128] You settle into the hall floor. Sleep takes you.",
+      "[d128] 💧 Lena returns with water: +2 clean.",
+      "[d128] ◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Fully identify 3 plants (knowledge level 3) within 3 days. Reward: integration, and a lesson.",
+      "[d128] A sharp-eyed peddler waits a while, then moves on down the road. Word travels about that, too.",
+      "[d128] Rain. Steady, cold, honest rain.",
+      "[d128] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d128] Village meal: +2268 kcal, +1L water from the communal pantry.",
+      "[d128] Someone told a joke by the fire. You hear Somchai laugh — a real one.",
+      "[d128] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 130,
+     "sayWin": [
+      "[d130] You eat Muscadine Grapes and Burdock (1620 kcal).",
+      "[d130] You settle into the hall floor. Sleep takes you.",
+      "[d130] ◈ THE SYSTEM has been watching Somchai — Field 1. Three offers; they took Bloodhound. Earned, chosen. (bloodhound: villager level-up)",
+      "[d130] 📓 Codex: Somchai chose Bloodhound (bloodhound) at Field 1.",
+      "[d130] A frightened family cries — relief, mostly. Haven grows by one.",
+      "[d130] 👋 The village didn't wait for you — a frightened family was taken in around the fire. Another pair of hands.",
+      "[d130] A cold snap. Breath smokes. The woods go quiet.",
+      "[d130] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d130] Village meal: +360 kcal, +1L water from the communal pantry.",
+      "[d130] Lena is staring into the fire like it owes them answers.",
+      "[d130] Mert is hurt — a fall, a thorn, a bad step. (health 77/100)",
+      "[d130] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 131,
+     "sayWin": [
+      "[d131] Butchering yields: 1 hide, 1 bone.",
+      "[d131] Cleaned 1 carcass — quick, practiced cuts. Honest portions, ~500 kcal each. (Field Dressing — less waste, kept ~52%.) (8 ticks)",
+      "[d131] 📋 Mert — 🎣 Fish. They'll report back by next part.",
+      "[d131] You are full enough.",
+      "[d131] You settle into the hall floor. Sleep takes you.",
+      "[d131] 🎣 Mert worked the creek — 2 fish, +245 kcal to the pantry.",
+      "[d131] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d131] Village meal: +245 kcal from the communal pantry.",
+      "[d131] Mert traded something with someone for something else. The barter economy stirs.",
+      "[d131] Mert is hurt — a fall, a thorn, a bad step. (health 67/100)",
+      "[d131] Mert went to sleep hungry. Nobody says anything.",
+      "[d131] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 132,
+     "sayWin": [
+      "[d132] 💧 Mert returns with water: +4 clean.",
+      "[d132] The trial window closed. The audience makes a disappointed sound, like wind.",
+      "[d132] Somchai stared at their hands for a long time today. Something is changing.",
+      "[d132] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d132] Village meal: +350 kcal, +1L water from the communal pantry.",
+      "[d132] Lena came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d132] Mert traded something with someone for something else. The barter economy stirs.",
+      "[d132] Mert: \"Walked the far treeline. Nothing new, but the ground's talking — the good stuff keeps to the damp hollows.\"",
+      "[d132] ⚠ Haven's pantry is empty. Day 3 of hunger.",
+      "[d132] Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again.",
+      "[d132] 🌿 Knotweed Shoot, weeks in the baskets. Handling it day after day, the village has learned what it's FOR — not just what it is. The village knows its uses now.",
+      "[d132] 💡 Knotweed Shoot: the village knows more than you do. Harvest it a few more times (0/2) and it'll click."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "control",
+   "policy": "leadfeast",
+   "seed": 33,
+   "days": 117,
+   "gameDays": 117,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 8,
+    "dehydration": 1,
+    "combat": 35,
+    "starvation": 1,
+    "contest": 1,
+    "expedition": 2,
+    "monster": 4
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 12,
+     "cause": "dehydration",
+     "who": "gen_9vznf80",
+     "player": true
+    },
+    {
+     "day": 15,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 16,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "starvation",
+     "who": "sam_wilson",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "caleb_jones",
+     "player": true
+    },
+    {
+     "day": 30,
+     "cause": "contest",
+     "who": "gen_x1jpqah",
+     "player": true
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "who": "gen_ecwpu9r",
+     "player": true
+    },
+    {
+     "day": 35,
+     "cause": "villager combat",
+     "who": "warranty_caller",
+     "player": false
+    },
+    {
+     "day": 42,
+     "cause": "villager combat",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 45,
+     "cause": "combat",
+     "who": "sanjun",
+     "player": false
+    },
+    {
+     "day": 48,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 52,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 52,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "landlord",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "sunback",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 63,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 63,
+     "cause": "expedition",
+     "who": "glasswing",
+     "player": false
+    },
+    {
+     "day": 65,
+     "cause": "expedition",
+     "who": "speedbump_turtle",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "greta_hansen",
+     "player": true
+    },
+    {
+     "day": 70,
+     "cause": "combat",
+     "who": "gen_sn3ws91",
+     "player": true
+    },
+    {
+     "day": 70,
+     "cause": "combat",
+     "who": "gen_2z0yiuj",
+     "player": true
+    },
+    {
+     "day": 74,
+     "cause": "monster",
+     "who": "visjoin_71",
+     "player": false
+    },
+    {
+     "day": 85,
+     "cause": "combat",
+     "who": "stan_kowalski",
+     "player": true
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "sunback",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "monster",
+     "who": "visjoin_88",
+     "player": false
+    },
+    {
+     "day": 97,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 98,
+     "cause": "monster",
+     "who": "visjoin_91",
+     "player": false
+    },
+    {
+     "day": 99,
+     "cause": "combat",
+     "who": "katarina_novak",
+     "player": true
+    },
+    {
+     "day": 101,
+     "cause": "combat",
+     "who": "lena_ruiz",
+     "player": true
+    },
+    {
+     "day": 105,
+     "cause": "monster",
+     "who": "visjoin_93",
+     "player": false
+    },
+    {
+     "day": 107,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "gen_zaf1bkt",
+     "player": true
+    },
+    {
+     "day": 109,
+     "cause": "combat",
+     "who": "sanne_bakker",
+     "player": true
+    },
+    {
+     "day": 110,
+     "cause": "combat",
+     "who": "redactor",
+     "player": false
+    },
+    {
+     "day": 110,
+     "cause": "combat",
+     "who": "oliver_moore",
+     "player": true
+    },
+    {
+     "day": 113,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 4,
+   "hungryEvents": 4,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 8,
+   "feastDrawDays": 8,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 42666,
+   "feastKcal": 15374,
+   "hungrySay": [
+    {
+     "day": 113,
+     "sayWin": [
+      "[d113] A stranger at the tree line, watching. Not hiding, exactly. Measuring. They'll be gone by dusk — but they'll remember what they saw.",
+      "[d113] Blaise came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d113] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d113] Back at the haven the argument starts: Blaise is calling it \"Ugly-Eyes.\" They'll fight it out — weigh in if you want.",
+      "[d113] Blaise came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d113] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d113] Back at the haven the argument starts: Blaise is calling it \"Ugly-Eyes.\" They'll fight it out — weigh in if you want.",
+      "[d113] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d113] Village meal: +1000 kcal from the communal pantry.",
+      "[d113] Blaise traded something with someone for something else. The barter economy stirs.",
+      "[d113] Blaise went to sleep hungry. Nobody says anything.",
+      "[d113] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 115,
+     "sayWin": [
+      "[d115] (They mime walking — pointing at themselves, then at you, then toward the cache spot. The meaning is unmistakable: come with me.)",
+      "[d115] 💡 You're starting to catch words in French. Not sentences — words.",
+      "[d115] You settle into the hall floor. Sleep takes you.",
+      "[d115] 🎣 Blaise worked the creek — 1 fish, +105 kcal to the pantry.",
+      "[d115] 🌿 Blaise returns from foraging the wilds: +410 kcal to the pantry.",
+      "[d115] 🌙 Night. The lingering The Herald gorges at the treeline — 515 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d115] Rain. Steady, cold, honest rain.",
+      "[d115] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d115] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d115] Blaise is hurt — a fall, a thorn, a bad step. (health 62/100)",
+      "[d115] Blaise went to sleep hungry. Nobody says anything.",
+      "[d115] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 116,
+     "sayWin": [
+      "[d116] ◈ \"UNIT TRAIL COMPASS — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn; harder to get truly lost. You knew it mattered before we did. Cute.\"",
+      "[d116] ◈ FLASHBACK — Trail compass\nLost above the fog line, visibility down to your boots. You didn't panic — just held the compass flat, found north, and walked out like it was nothing. It was not nothing.",
+      "[d116] 📖 The memory leaves something behind: North is north. You can find it.",
+      "[d116] 💛 The Trail compass is starting to do something. (Keepsake L1 — anchor: chasers tire faster when you flee, while worn.)",
+      "[d116] ◈ \"UNIT SEED PACKET — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\"",
+      "[d116] ◈ FLASHBACK — Seed packet\nPressed into your hand with an order: keep people fed through winter. Seeds are a plan. Plans are how you stop being helpless.",
+      "[d116] 📖 The memory leaves something behind: You know what grows. You will prove it.",
+      "[d116] 💛 The Seed packet is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)",
+      "[d116] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d116] 🩹 You make rounds — Blaise gets bound up properly. (26 → 41 HP)",
+      "[d116] Blaise is hurt — a fall, a thorn, a bad step. (health 26/100)",
+      "[d116] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 117,
+     "sayWin": [
+      "[d117] 🌙 Night. The lingering The Herald gorges at the treeline — 400 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d117] Blaise came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d117] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d117] Back at the haven the argument starts: Blaise is calling it \"Loud-Eyes.\" They'll fight it out — weigh in if you want.",
+      "[d117] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d117] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d117] 🩹 You make rounds — Blaise gets bound up properly. (14 → 29 HP)",
+      "[d117] Blaise: \"Walked the far treeline. Nothing new, but the ground's talking — the good stuff keeps to the damp hollows.\"",
+      "[d117] ◈ CRISIS — THE HUNGER WINTER. Three days now the village has gone to sleep hungry. The pantry is an echo. This is the part the old stories skip — the part where you find out what you’re made of.",
+      "[d117] SYSTEM: \"Organic units require fuel. Noting. Noting loudly. The audience is very quiet, which for them is screaming.\"",
+      "[d117] ⚠ Haven's pantry is empty. Day 3 of hunger.",
+      "[d117] Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "armed",
+   "policy": "leadfeast",
+   "seed": 33,
+   "days": 117,
+   "gameDays": 117,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 8,
+    "dehydration": 1,
+    "combat": 35,
+    "starvation": 1,
+    "contest": 1,
+    "expedition": 2,
+    "monster": 4
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 12,
+     "cause": "dehydration",
+     "who": "gen_9vznf80",
+     "player": true
+    },
+    {
+     "day": 15,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 16,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "starvation",
+     "who": "sam_wilson",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "caleb_jones",
+     "player": true
+    },
+    {
+     "day": 30,
+     "cause": "contest",
+     "who": "gen_x1jpqah",
+     "player": true
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "who": "gen_ecwpu9r",
+     "player": true
+    },
+    {
+     "day": 35,
+     "cause": "villager combat",
+     "who": "warranty_caller",
+     "player": false
+    },
+    {
+     "day": 42,
+     "cause": "villager combat",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 45,
+     "cause": "combat",
+     "who": "sanjun",
+     "player": false
+    },
+    {
+     "day": 48,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 52,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 52,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "landlord",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "sunback",
+     "player": false
+    },
+    {
+     "day": 54,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 63,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 63,
+     "cause": "expedition",
+     "who": "glasswing",
+     "player": false
+    },
+    {
+     "day": 65,
+     "cause": "expedition",
+     "who": "speedbump_turtle",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "who": "greta_hansen",
+     "player": true
+    },
+    {
+     "day": 70,
+     "cause": "combat",
+     "who": "gen_sn3ws91",
+     "player": true
+    },
+    {
+     "day": 70,
+     "cause": "combat",
+     "who": "gen_2z0yiuj",
+     "player": true
+    },
+    {
+     "day": 74,
+     "cause": "monster",
+     "who": "visjoin_71",
+     "player": false
+    },
+    {
+     "day": 85,
+     "cause": "combat",
+     "who": "stan_kowalski",
+     "player": true
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "sunback",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "monster",
+     "who": "visjoin_88",
+     "player": false
+    },
+    {
+     "day": 97,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 98,
+     "cause": "monster",
+     "who": "visjoin_91",
+     "player": false
+    },
+    {
+     "day": 99,
+     "cause": "combat",
+     "who": "katarina_novak",
+     "player": true
+    },
+    {
+     "day": 101,
+     "cause": "combat",
+     "who": "lena_ruiz",
+     "player": true
+    },
+    {
+     "day": 105,
+     "cause": "monster",
+     "who": "visjoin_93",
+     "player": false
+    },
+    {
+     "day": 107,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "gen_zaf1bkt",
+     "player": true
+    },
+    {
+     "day": 109,
+     "cause": "combat",
+     "who": "sanne_bakker",
+     "player": true
+    },
+    {
+     "day": 110,
+     "cause": "combat",
+     "who": "redactor",
+     "player": false
+    },
+    {
+     "day": 110,
+     "cause": "combat",
+     "who": "oliver_moore",
+     "player": true
+    },
+    {
+     "day": 113,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 4,
+   "hungryEvents": 4,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 8,
+   "feastDrawDays": 8,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 42666,
+   "feastKcal": 15374,
+   "hungrySay": [
+    {
+     "day": 113,
+     "sayWin": [
+      "[d113] A stranger at the tree line, watching. Not hiding, exactly. Measuring. They'll be gone by dusk — but they'll remember what they saw.",
+      "[d113] Blaise came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d113] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d113] Back at the haven the argument starts: Blaise is calling it \"Ugly-Eyes.\" They'll fight it out — weigh in if you want.",
+      "[d113] Blaise came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d113] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d113] Back at the haven the argument starts: Blaise is calling it \"Ugly-Eyes.\" They'll fight it out — weigh in if you want.",
+      "[d113] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d113] Village meal: +1000 kcal from the communal pantry.",
+      "[d113] Blaise traded something with someone for something else. The barter economy stirs.",
+      "[d113] Blaise went to sleep hungry. Nobody says anything.",
+      "[d113] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 115,
+     "sayWin": [
+      "[d115] (They mime walking — pointing at themselves, then at you, then toward the cache spot. The meaning is unmistakable: come with me.)",
+      "[d115] 💡 You're starting to catch words in French. Not sentences — words.",
+      "[d115] You settle into the hall floor. Sleep takes you.",
+      "[d115] 🎣 Blaise worked the creek — 1 fish, +105 kcal to the pantry.",
+      "[d115] 🌿 Blaise returns from foraging the wilds: +410 kcal to the pantry.",
+      "[d115] 🌙 Night. The lingering The Herald gorges at the treeline — 515 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d115] Rain. Steady, cold, honest rain.",
+      "[d115] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d115] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d115] Blaise is hurt — a fall, a thorn, a bad step. (health 62/100)",
+      "[d115] Blaise went to sleep hungry. Nobody says anything.",
+      "[d115] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 116,
+     "sayWin": [
+      "[d116] ◈ \"UNIT TRAIL COMPASS — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn; harder to get truly lost. You knew it mattered before we did. Cute.\"",
+      "[d116] ◈ FLASHBACK — Trail compass\nLost above the fog line, visibility down to your boots. You didn't panic — just held the compass flat, found north, and walked out like it was nothing. It was not nothing.",
+      "[d116] 📖 The memory leaves something behind: North is north. You can find it.",
+      "[d116] 💛 The Trail compass is starting to do something. (Keepsake L1 — anchor: chasers tire faster when you flee, while worn.)",
+      "[d116] ◈ \"UNIT SEED PACKET — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn. You knew it mattered before we did. Cute.\"",
+      "[d116] ◈ FLASHBACK — Seed packet\nPressed into your hand with an order: keep people fed through winter. Seeds are a plan. Plans are how you stop being helpless.",
+      "[d116] 📖 The memory leaves something behind: You know what grows. You will prove it.",
+      "[d116] 💛 The Seed packet is starting to do something. (Keepsake L1 — resolve: trauma lands a quarter lighter, while worn.)",
+      "[d116] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d116] 🩹 You make rounds — Blaise gets bound up properly. (26 → 41 HP)",
+      "[d116] Blaise is hurt — a fall, a thorn, a bad step. (health 26/100)",
+      "[d116] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 117,
+     "sayWin": [
+      "[d117] 🌙 Night. The lingering The Herald gorges at the treeline — 400 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d117] Blaise came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d117] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d117] Back at the haven the argument starts: Blaise is calling it \"Loud-Eyes.\" They'll fight it out — weigh in if you want.",
+      "[d117] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d117] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d117] 🩹 You make rounds — Blaise gets bound up properly. (14 → 29 HP)",
+      "[d117] Blaise: \"Walked the far treeline. Nothing new, but the ground's talking — the good stuff keeps to the damp hollows.\"",
+      "[d117] ◈ CRISIS — THE HUNGER WINTER. Three days now the village has gone to sleep hungry. The pantry is an echo. This is the part the old stories skip — the part where you find out what you’re made of.",
+      "[d117] SYSTEM: \"Organic units require fuel. Noting. Noting loudly. The audience is very quiet, which for them is screaming.\"",
+      "[d117] ⚠ Haven's pantry is empty. Day 3 of hunger.",
+      "[d117] Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "control",
+   "policy": "leadfeast",
+   "seed": 44,
+   "days": 103,
+   "gameDays": 104,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 6,
+    "combat": 29,
+    "contest": 1,
+    "monster": 4
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 10,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 14,
+     "cause": "villager combat",
+     "who": "nightlight_catfish",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_ijiop42",
+     "player": true
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 37,
+     "cause": "contest",
+     "who": "gen_s5mak4l",
+     "player": true
+    },
+    {
+     "day": 45,
+     "cause": "combat",
+     "who": "gen_8pcded9",
+     "player": true
+    },
+    {
+     "day": 45,
+     "cause": "combat",
+     "who": "speedbump_turtle",
+     "player": false
+    },
+    {
+     "day": 52,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 64,
+     "cause": "monster",
+     "who": "miguel_santos",
+     "player": false
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 67,
+     "cause": "monster",
+     "who": "brian_otieno",
+     "player": false
+    },
+    {
+     "day": 73,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "gen_32jcsav",
+     "player": true
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "white_noise_heron",
+     "player": false
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "gen_tqn1ysd",
+     "player": true
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "gen_fuyor1c",
+     "player": true
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "oliver_moore",
+     "player": true
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "review_drone",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hassan_ali",
+     "player": true
+    },
+    {
+     "day": 80,
+     "cause": "monster",
+     "who": "mia_andersson",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "yuki_mori",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 96,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 97,
+     "cause": "monster",
+     "who": "visjoin_95",
+     "player": false
+    },
+    {
+     "day": 98,
+     "cause": "combat",
+     "who": "rosa_mendez",
+     "player": true
+    },
+    {
+     "day": 101,
+     "cause": "combat",
+     "who": "onni_korhonen",
+     "player": true
+    }
+   ],
+   "starveDeaths": 0,
+   "hungryDays": 7,
+   "hungryEvents": 7,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 7,
+   "feastDrawDays": 7,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 34409,
+   "feastKcal": 19028,
+   "hungrySay": [
+    {
+     "day": 94,
+     "sayWin": [
+      "[d94] Lingling speaks only 🇨🇳 Mandarin. No shared words at all — just eyes, hands, and patience.",
+      "[d94] (They mime walking — pointing at themselves, then at you, then toward the cache spot. The meaning is unmistakable: come with me.)",
+      "[d94] You settle into the hall floor. Sleep takes you.",
+      "[d94] 🌙 Night. The lingering Big Loud gorges at the treeline — 1,000 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d94] 🌙 Night. The lingering The Heckler gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d94] 🌙 Night. The lingering The Eulogy gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d94] It's settled. The village is calling it \"Big Big.\" The Codex keeps it.",
+      "[d94] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d94] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d94] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d94] Lingling came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d94] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 95,
+     "sayWin": [
+      "[d95] You eat Purslane (210 kcal).",
+      "[d95] You settle into the hall floor. Sleep takes you.",
+      "[d95] ✅ The System watched the whole lesson twice. \"NOTED. Filing under: things that are food, which is still a confusing category.\" (+6 integration)",
+      "[d95] 🌙 Night. The lingering The Heckler gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d95] 🌙 Night. The lingering The Eulogy gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d95] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+      "[d95] It's settled. The village is calling it \"The Loud Beast.\" The Codex keeps it.",
+      "[d95] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d95] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d95] No food in the pantry. The village is hungry.",
+      "[d95] Aria is humming something. It stops when they notice you listening.",
+      "[d95] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 100,
+     "sayWin": [
+      "[d100] Lingling speaks only 🇨🇳 Mandarin. No shared words at all — just eyes, hands, and patience.",
+      "[d100] (They mime walking — pointing at themselves, then at you, then toward the hollow. The meaning is unmistakable: come with me.)",
+      "[d100] Taken: American Persimmon x3, Hand Saw x1, Flannel Shirt x1, Knit Cap x1, Nanite swarm x1, Dice set x2, Broker's Seal x1, Phase sling x2, Kitchen knife x1, Crossbow x1, Work Gloves x5, Good Boots x1, Gravity hook x1, Stone knife x3, Stripped hide x1, Fan care package (unopened) x1, Audience token x3",
+      "[d100] You take american persimmon, hand saw, flannel shirt, knit cap, nanite swarm, dice set, broker's seal, phase sling, kitchen knife, crossbow, work gloves, good boots, gravity hook, stone knife, stripped hide, fan care package (unopened), audience token, burdock, kitchen knife, wool socks, scar tissue",
+      "[d100] The body is stripped. What's left isn't worth taking.",
+      "[d100] You accept The Bloodied's food — 2,236 kcal on the road, 2 day-parts out. Mei clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+      "[d100] You settle into the hall floor. Sleep takes you.",
+      "[d100] 🗣️ Aria to Lingling, by the fire: \"It waits. We wait. Somebody should check the snares — the table doesn't fill the pantry.\"",
+      "[d100] Rain. Steady, cold, honest rain.",
+      "[d100] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d100] Village meal: +1200 kcal from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d100] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 101,
+     "sayWin": [
+      "[d101] You walk back into Haven. 57 Codex entries. The village is glad to see you.",
+      "[d101] Lingling speaks only 🇨🇳 Mandarin. No shared words at all — just eyes, hands, and patience.",
+      "[d101] (They mime walking — pointing at themselves, then at you, then toward the hollow. The meaning is unmistakable: come with me.)",
+      "[d101] You settle into the hall floor. Sleep takes you.",
+      "[d101] ◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Haul 3,000 kcal to the pantry within 3 days. Reward: integration, and a lesson.",
+      "[d101] They come fast and scared — a family, or what's left of one. \"Please. We heard you take people in.\" Behind them, something worse than weather.",
+      "[d101] Lingling came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d101] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d101] Back at the haven the argument starts: Lingling is calling it \"The Loud Beast.\" They'll fight it out — weigh in if you want.",
+      "[d101] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d101] Village meal: +1236 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d101] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 102,
+     "sayWin": [
+      "[d102] You settle into the hall floor. Sleep takes you.",
+      "[d102] A frightened family cries — relief, mostly. Haven grows by one.",
+      "[d102] 👋 The village didn't wait for you — a frightened family was taken in around the fire. Another pair of hands.",
+      "[d102] That night, they bring Onni home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.",
+      "[d102] It's settled. The village is calling it \"The Loud Beast.\" The Codex keeps it.",
+      "[d102] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d102] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d102] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d102] The fire is quiet today. Nobody's talking much.",
+      "[d102] Marcus came back with 478 kcal of something edible. The pantry breathes.",
+      "[d102] Marcus came back with 587 kcal of something edible. The pantry breathes.",
+      "[d102] ⚠ Haven's pantry is empty. Day 3 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 103,
+     "sayWin": [
+      "[d103] SYSTEM: Naming things. Very human. The audience approves.",
+      "[d103] Lingling was watching. Now they know Water Hemlock too.",
+      "[d103] 📚 Village knowledge: Marcus taught everyone about Water Hemlock. The Codex grows without you lifting a finger.",
+      "[d103] The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it.",
+      "[d103] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d103] Village meal: +385 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d103] Marcus came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d103] Marcus drew Water Hemlock in the dirt for the others. It'll wash away. The knowledge won't.",
+      "[d103] 💡 Water Hemlock: the village and The Red Table II know more than you do. Harvest it a few more times (0/3) and it'll click.",
+      "[d103] Marcus came back with 352 kcal of something edible. The pantry breathes.",
+      "[d103] ⚠ Haven's pantry is empty. Day 4 of hunger.",
+      "[d103] The granary’s reserve bins open — sealed grain from the good weeks. Two more days. Make them count."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "armed",
+   "policy": "leadfeast",
+   "seed": 44,
+   "days": 103,
+   "gameDays": 104,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 6,
+    "combat": 29,
+    "contest": 1,
+    "monster": 4
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 10,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 14,
+     "cause": "villager combat",
+     "who": "nightlight_catfish",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_ijiop42",
+     "player": true
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "combat",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 27,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 37,
+     "cause": "contest",
+     "who": "gen_s5mak4l",
+     "player": true
+    },
+    {
+     "day": 45,
+     "cause": "combat",
+     "who": "gen_8pcded9",
+     "player": true
+    },
+    {
+     "day": 45,
+     "cause": "combat",
+     "who": "speedbump_turtle",
+     "player": false
+    },
+    {
+     "day": 52,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 64,
+     "cause": "monster",
+     "who": "miguel_santos",
+     "player": false
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 67,
+     "cause": "monster",
+     "who": "brian_otieno",
+     "player": false
+    },
+    {
+     "day": 73,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "gen_32jcsav",
+     "player": true
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "white_noise_heron",
+     "player": false
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "gen_tqn1ysd",
+     "player": true
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "who": "gen_fuyor1c",
+     "player": true
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "oliver_moore",
+     "player": true
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "review_drone",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "combat",
+     "who": "hassan_ali",
+     "player": true
+    },
+    {
+     "day": 80,
+     "cause": "monster",
+     "who": "mia_andersson",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "yuki_mori",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 96,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 97,
+     "cause": "monster",
+     "who": "visjoin_95",
+     "player": false
+    },
+    {
+     "day": 98,
+     "cause": "combat",
+     "who": "rosa_mendez",
+     "player": true
+    },
+    {
+     "day": 101,
+     "cause": "combat",
+     "who": "onni_korhonen",
+     "player": true
+    }
+   ],
+   "starveDeaths": 0,
+   "hungryDays": 7,
+   "hungryEvents": 7,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 7,
+   "feastDrawDays": 7,
+   "laundering": 0,
+   "tributeKcal": 0,
+   "tendKcal": 34409,
+   "feastKcal": 19028,
+   "hungrySay": [
+    {
+     "day": 94,
+     "sayWin": [
+      "[d94] Lingling speaks only 🇨🇳 Mandarin. No shared words at all — just eyes, hands, and patience.",
+      "[d94] (They mime walking — pointing at themselves, then at you, then toward the cache spot. The meaning is unmistakable: come with me.)",
+      "[d94] You settle into the hall floor. Sleep takes you.",
+      "[d94] 🌙 Night. The lingering Big Loud gorges at the treeline — 1,000 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d94] 🌙 Night. The lingering The Heckler gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d94] 🌙 Night. The lingering The Eulogy gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d94] It's settled. The village is calling it \"Big Big.\" The Codex keeps it.",
+      "[d94] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d94] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d94] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d94] Lingling came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d94] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 95,
+     "sayWin": [
+      "[d95] You eat Purslane (210 kcal).",
+      "[d95] You settle into the hall floor. Sleep takes you.",
+      "[d95] ✅ The System watched the whole lesson twice. \"NOTED. Filing under: things that are food, which is still a confusing category.\" (+6 integration)",
+      "[d95] 🌙 Night. The lingering The Heckler gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d95] 🌙 Night. The lingering The Eulogy gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d95] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+      "[d95] It's settled. The village is calling it \"The Loud Beast.\" The Codex keeps it.",
+      "[d95] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d95] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d95] No food in the pantry. The village is hungry.",
+      "[d95] Aria is humming something. It stops when they notice you listening.",
+      "[d95] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 100,
+     "sayWin": [
+      "[d100] Lingling speaks only 🇨🇳 Mandarin. No shared words at all — just eyes, hands, and patience.",
+      "[d100] (They mime walking — pointing at themselves, then at you, then toward the hollow. The meaning is unmistakable: come with me.)",
+      "[d100] Taken: American Persimmon x3, Hand Saw x1, Flannel Shirt x1, Knit Cap x1, Nanite swarm x1, Dice set x2, Broker's Seal x1, Phase sling x2, Kitchen knife x1, Crossbow x1, Work Gloves x5, Good Boots x1, Gravity hook x1, Stone knife x3, Stripped hide x1, Fan care package (unopened) x1, Audience token x3",
+      "[d100] You take american persimmon, hand saw, flannel shirt, knit cap, nanite swarm, dice set, broker's seal, phase sling, kitchen knife, crossbow, work gloves, good boots, gravity hook, stone knife, stripped hide, fan care package (unopened), audience token, burdock, kitchen knife, wool socks, scar tissue",
+      "[d100] The body is stripped. What's left isn't worth taking.",
+      "[d100] You accept The Bloodied's food — 2,236 kcal on the road, 2 day-parts out. Mei clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+      "[d100] You settle into the hall floor. Sleep takes you.",
+      "[d100] 🗣️ Aria to Lingling, by the fire: \"It waits. We wait. Somebody should check the snares — the table doesn't fill the pantry.\"",
+      "[d100] Rain. Steady, cold, honest rain.",
+      "[d100] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d100] Village meal: +1200 kcal from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d100] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 101,
+     "sayWin": [
+      "[d101] You walk back into Haven. 57 Codex entries. The village is glad to see you.",
+      "[d101] Lingling speaks only 🇨🇳 Mandarin. No shared words at all — just eyes, hands, and patience.",
+      "[d101] (They mime walking — pointing at themselves, then at you, then toward the hollow. The meaning is unmistakable: come with me.)",
+      "[d101] You settle into the hall floor. Sleep takes you.",
+      "[d101] ◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Haul 3,000 kcal to the pantry within 3 days. Reward: integration, and a lesson.",
+      "[d101] They come fast and scared — a family, or what's left of one. \"Please. We heard you take people in.\" Behind them, something worse than weather.",
+      "[d101] Lingling came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.",
+      "[d101] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d101] Back at the haven the argument starts: Lingling is calling it \"The Loud Beast.\" They'll fight it out — weigh in if you want.",
+      "[d101] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d101] Village meal: +1236 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d101] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 102,
+     "sayWin": [
+      "[d102] You settle into the hall floor. Sleep takes you.",
+      "[d102] A frightened family cries — relief, mostly. Haven grows by one.",
+      "[d102] 👋 The village didn't wait for you — a frightened family was taken in around the fire. Another pair of hands.",
+      "[d102] That night, they bring Onni home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.",
+      "[d102] It's settled. The village is calling it \"The Loud Beast.\" The Codex keeps it.",
+      "[d102] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d102] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d102] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d102] The fire is quiet today. Nobody's talking much.",
+      "[d102] Marcus came back with 478 kcal of something edible. The pantry breathes.",
+      "[d102] Marcus came back with 587 kcal of something edible. The pantry breathes.",
+      "[d102] ⚠ Haven's pantry is empty. Day 3 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 103,
+     "sayWin": [
+      "[d103] SYSTEM: Naming things. Very human. The audience approves.",
+      "[d103] Lingling was watching. Now they know Water Hemlock too.",
+      "[d103] 📚 Village knowledge: Marcus taught everyone about Water Hemlock. The Codex grows without you lifting a finger.",
+      "[d103] The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it.",
+      "[d103] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d103] Village meal: +385 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d103] Marcus came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d103] Marcus drew Water Hemlock in the dirt for the others. It'll wash away. The knowledge won't.",
+      "[d103] 💡 Water Hemlock: the village and The Red Table II know more than you do. Harvest it a few more times (0/3) and it'll click.",
+      "[d103] Marcus came back with 352 kcal of something edible. The pantry breathes.",
+      "[d103] ⚠ Haven's pantry is empty. Day 4 of hunger.",
+      "[d103] The granary’s reserve bins open — sealed grain from the good weeks. Two more days. Make them count."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "control",
+   "policy": "belongfeast",
+   "seed": 11,
+   "days": 153,
+   "gameDays": 154,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "regional",
+   "national": 0,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 13,
+    "combat": 28,
+    "monster": 5,
+    "sickness": 1,
+    "contest": 1,
+    "expedition": 1,
+    "starvation": 1
+   },
+   "deaths": [
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 6,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "combat",
+     "who": "cliffhanger",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "monster",
+     "who": "oliver_moore",
+     "player": false
+    },
+    {
+     "day": 24,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 25,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "combat",
+     "who": "bulldozer",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "statickite",
+     "player": false
+    },
+    {
+     "day": 30,
+     "cause": "villager combat",
+     "who": "landlord",
+     "player": false
+    },
+    {
+     "day": 33,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "combat",
+     "who": "review_drone",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 37,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "sickness",
+     "who": "gen_bexhtj0",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "villager combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 51,
+     "cause": "combat",
+     "who": "gen_dkjljvy",
+     "player": true
+    },
+    {
+     "day": 55,
+     "cause": "contest",
+     "who": "gen_k8y9lex",
+     "player": true
+    },
+    {
+     "day": 56,
+     "cause": "expedition",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "wanjiru_kamau",
+     "player": true
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 61,
+     "cause": "villager combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 62,
+     "cause": "villager combat",
+     "who": "focus_group",
+     "player": false
+    },
+    {
+     "day": 64,
+     "cause": "monster",
+     "who": "gen_549dgnc",
+     "player": false
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "who": "gen_cn4hqgv",
+     "player": true
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 82,
+     "cause": "monster",
+     "who": "visjoin_80",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "nightcourt",
+     "player": false
+    },
+    {
+     "day": 85,
+     "cause": "combat",
+     "who": "gen_fmwl29h",
+     "player": true
+    },
+    {
+     "day": 88,
+     "cause": "starvation",
+     "who": "visjoin_78",
+     "player": false
+    },
+    {
+     "day": 90,
+     "cause": "monster",
+     "who": "visjoin_84",
+     "player": false
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 101,
+     "cause": "combat",
+     "who": "ursula_weber",
+     "player": true
+    },
+    {
+     "day": 110,
+     "cause": "combat",
+     "who": "cliffhanger",
+     "player": false
+    },
+    {
+     "day": 118,
+     "cause": "monster",
+     "who": "visjoin_116",
+     "player": false
+    },
+    {
+     "day": 120,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 128,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 130,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 130,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 133,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 150,
+     "cause": "combat",
+     "who": "mara_vasquez",
+     "player": true
+    },
+    {
+     "day": 150,
+     "cause": "combat",
+     "who": "olivia_bennett",
+     "player": true
+    },
+    {
+     "day": 153,
+     "cause": "combat",
+     "who": "ingrid_vik",
+     "player": true
+    },
+    {
+     "day": 154,
+     "cause": "combat",
+     "who": "sofia_chen",
+     "player": true
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 0,
+   "hungryEvents": 0,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 9,
+   "feastDrawDays": 9,
+   "laundering": 0,
+   "tributeKcal": 104832,
+   "tendKcal": 0,
+   "feastKcal": 15676,
+   "hungrySay": []
+  },
+  {
+   "side": "armed",
+   "policy": "belongfeast",
+   "seed": 11,
+   "days": 122,
+   "gameDays": 123,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "regional",
+   "national": 0,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 13,
+    "combat": 22,
+    "monster": 5,
+    "sickness": 1,
+    "contest": 1,
+    "expedition": 1,
+    "a wound that wouldn't close": 1
+   },
+   "deaths": [
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 4,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 6,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "combat",
+     "who": "cliffhanger",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 17,
+     "cause": "monster",
+     "who": "oliver_moore",
+     "player": false
+    },
+    {
+     "day": 24,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 25,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "combat",
+     "who": "bulldozer",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 28,
+     "cause": "villager combat",
+     "who": "statickite",
+     "player": false
+    },
+    {
+     "day": 30,
+     "cause": "villager combat",
+     "who": "landlord",
+     "player": false
+    },
+    {
+     "day": 33,
+     "cause": "villager combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "combat",
+     "who": "review_drone",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "villager combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 37,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "sickness",
+     "who": "gen_bexhtj0",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "villager combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 51,
+     "cause": "combat",
+     "who": "gen_dkjljvy",
+     "player": true
+    },
+    {
+     "day": 55,
+     "cause": "contest",
+     "who": "gen_k8y9lex",
+     "player": true
+    },
+    {
+     "day": 56,
+     "cause": "expedition",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "wanjiru_kamau",
+     "player": true
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 61,
+     "cause": "villager combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 62,
+     "cause": "villager combat",
+     "who": "focus_group",
+     "player": false
+    },
+    {
+     "day": 64,
+     "cause": "monster",
+     "who": "gen_549dgnc",
+     "player": false
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "who": "gen_cn4hqgv",
+     "player": true
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 90,
+     "cause": "monster",
+     "who": "visjoin_77",
+     "player": false
+    },
+    {
+     "day": 90,
+     "cause": "a wound that wouldn't close",
+     "who": "visjoin_83",
+     "player": false
+    },
+    {
+     "day": 96,
+     "cause": "combat",
+     "who": "strike",
+     "player": false
+    },
+    {
+     "day": 98,
+     "cause": "monster",
+     "who": "visjoin_93",
+     "player": false
+    },
+    {
+     "day": 111,
+     "cause": "combat",
+     "who": "cliffhanger",
+     "player": false
+    },
+    {
+     "day": 112,
+     "cause": "combat",
+     "who": "gen_fmwl29h",
+     "player": true
+    },
+    {
+     "day": 113,
+     "cause": "combat",
+     "who": "olivia_bennett",
+     "player": true
+    },
+    {
+     "day": 114,
+     "cause": "combat",
+     "who": "sanjun",
+     "player": false
+    },
+    {
+     "day": 117,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 117,
+     "cause": "combat",
+     "who": "ursula_weber",
+     "player": true
+    },
+    {
+     "day": 121,
+     "cause": "combat",
+     "who": "mara_vasquez",
+     "player": true
+    },
+    {
+     "day": 122,
+     "cause": "combat",
+     "who": "ingrid_vik",
+     "player": true
+    },
+    {
+     "day": 122,
+     "cause": "monster",
+     "who": "visjoin_118",
+     "player": false
+    },
+    {
+     "day": 123,
+     "cause": "combat",
+     "who": "sofia_chen",
+     "player": true
+    }
+   ],
+   "starveDeaths": 0,
+   "hungryDays": 1,
+   "hungryEvents": 1,
+   "trBlocked": 5,
+   "trArmedFragile": 5,
+   "fsFeasts": 8,
+   "feastDrawDays": 8,
+   "laundering": 0,
+   "tributeKcal": 74763,
+   "tendKcal": 0,
+   "feastKcal": 14476,
+   "hungrySay": [
+    {
+     "day": 122,
+     "sayWin": [
+      "[d122] Taken: Phase blade x1, Hunting spear x1, Hunting spear x1, Warden's Cloak x1, Canvas Pants x1.",
+      "[d122] The body is stripped. What's left isn't worth taking.",
+      "[d122] You chew the Dandelion deliberately — the way you were taught. Bitter, working. (+6 health)",
+      "[d122] You eat Dandelion (135 kcal).",
+      "[d122] You settle into the hall floor. Sleep takes you.",
+      "[d122] 🌙 Night. The lingering Ugly-Eyes gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d122] A curious wanderer waits a while, then moves on down the road. Word travels about that, too.",
+      "[d122] That night, they bring Mara home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.",
+      "[d122] A cold snap. Breath smokes. The woods go quiet.",
+      "[d122] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d122] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d122] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "control",
+   "policy": "belongfeast",
+   "seed": 22,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "national",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 11,
+    "combat": 25,
+    "expedition": 4,
+    "Murkcap": 1,
+    "starvation": 1,
+    "monster": 1
+   },
+   "deaths": [
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_nypzt1k",
+     "player": true
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_ojtutve",
+     "player": true
+    },
+    {
+     "day": 16,
+     "cause": "expedition",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "Murkcap",
+     "who": "theo_lindqvist",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_6fmreyh",
+     "player": true
+    },
+    {
+     "day": 21,
+     "cause": "starvation",
+     "who": "tom_baker",
+     "player": false
+    },
+    {
+     "day": 22,
+     "cause": "combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 22,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "villager combat",
+     "who": "bright_idea",
+     "player": false
+    },
+    {
+     "day": 58,
+     "cause": "villager combat",
+     "who": "statickite",
+     "player": false
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "villager combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 74,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 76,
+     "cause": "expedition",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 87,
+     "cause": "villager combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 87,
+     "cause": "villager combat",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 88,
+     "cause": "combat",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 88,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 105,
+     "cause": "monster",
+     "who": "diana_osei",
+     "player": false
+    },
+    {
+     "day": 112,
+     "cause": "villager combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 115,
+     "cause": "combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 126,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 135,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 135,
+     "cause": "villager combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 141,
+     "cause": "expedition",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 145,
+     "cause": "expedition",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 145,
+     "cause": "combat",
+     "who": "gen_kyq1vyi",
+     "player": true
+    },
+    {
+     "day": 146,
+     "cause": "combat",
+     "who": "gen_pkbgpuo",
+     "player": true
+    },
+    {
+     "day": 146,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 149,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 154,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 159,
+     "cause": "combat",
+     "who": "drumbelly_tanuki",
+     "player": false
+    },
+    {
+     "day": 160,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 164,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 169,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 171,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 175,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 180,
+     "cause": "combat",
+     "who": "mirror_stag",
+     "player": false
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 0,
+   "hungryEvents": 0,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 11,
+   "feastDrawDays": 11,
+   "laundering": 0,
+   "tributeKcal": 137158,
+   "tendKcal": 0,
+   "feastKcal": 19642,
+   "hungrySay": []
+  },
+  {
+   "side": "armed",
+   "policy": "belongfeast",
+   "seed": 22,
+   "days": 178,
+   "gameDays": 179,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 3,
+   "maxRank": "national",
+   "national": 1,
+   "table": 0,
+   "deathCauseCounts": {
+    "villager combat": 9,
+    "combat": 22,
+    "expedition": 4,
+    "Murkcap": 1,
+    "starvation": 1,
+    "monster": 2,
+    "sickness": 1
+   },
+   "deaths": [
+    {
+     "day": 7,
+     "cause": "villager combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_nypzt1k",
+     "player": true
+    },
+    {
+     "day": 13,
+     "cause": "combat",
+     "who": "gen_ojtutve",
+     "player": true
+    },
+    {
+     "day": 16,
+     "cause": "expedition",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "Murkcap",
+     "who": "theo_lindqvist",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "ducks_in_a_row",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_6fmreyh",
+     "player": true
+    },
+    {
+     "day": 21,
+     "cause": "starvation",
+     "who": "tom_baker",
+     "player": false
+    },
+    {
+     "day": 22,
+     "cause": "combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 22,
+     "cause": "combat",
+     "who": "anaconda_empress",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "villager combat",
+     "who": "bright_idea",
+     "player": false
+    },
+    {
+     "day": 58,
+     "cause": "villager combat",
+     "who": "statickite",
+     "player": false
+    },
+    {
+     "day": 59,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 69,
+     "cause": "villager combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 74,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 76,
+     "cause": "expedition",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 87,
+     "cause": "villager combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 87,
+     "cause": "villager combat",
+     "who": "alien_tick",
+     "player": false
+    },
+    {
+     "day": 88,
+     "cause": "combat",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 88,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 105,
+     "cause": "monster",
+     "who": "diana_osei",
+     "player": false
+    },
+    {
+     "day": 112,
+     "cause": "villager combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 115,
+     "cause": "combat",
+     "who": "dustboar",
+     "player": false
+    },
+    {
+     "day": 126,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 135,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 135,
+     "cause": "villager combat",
+     "who": "gallowdeer",
+     "player": false
+    },
+    {
+     "day": 141,
+     "cause": "expedition",
+     "who": "mirror_stag",
+     "player": false
+    },
+    {
+     "day": 145,
+     "cause": "expedition",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 145,
+     "cause": "combat",
+     "who": "gen_kyq1vyi",
+     "player": true
+    },
+    {
+     "day": 146,
+     "cause": "combat",
+     "who": "gen_pkbgpuo",
+     "player": true
+    },
+    {
+     "day": 146,
+     "cause": "combat",
+     "who": "understudy",
+     "player": false
+    },
+    {
+     "day": 156,
+     "cause": "monster",
+     "who": "nino_kapanadze",
+     "player": false
+    },
+    {
+     "day": 157,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 163,
+     "cause": "sickness",
+     "who": "mia_andersson",
+     "player": true
+    },
+    {
+     "day": 175,
+     "cause": "combat",
+     "who": "sunback",
+     "player": false
+    },
+    {
+     "day": 177,
+     "cause": "combat",
+     "who": "ava_garcia",
+     "player": true
+    },
+    {
+     "day": 177,
+     "cause": "combat",
+     "who": "daniyar_askarov",
+     "player": true
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 3,
+   "hungryEvents": 3,
+   "trBlocked": 11,
+   "trArmedFragile": 11,
+   "fsFeasts": 9,
+   "feastDrawDays": 9,
+   "laundering": 0,
+   "tributeKcal": 136998,
+   "tendKcal": 0,
+   "feastKcal": 16028,
+   "hungrySay": [
+    {
+     "day": 177,
+     "sayWin": [
+      "[d177] It's settled. The village is calling it \"The Big Beast.\" The Codex keeps it.",
+      "[d177] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d177] A cold snap. Breath smokes. The woods go quiet.",
+      "[d177] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d177] Village meal: +420 kcal, +1L water from the communal pantry.",
+      "[d177] Someone is crying, quietly, in one of the bunks. Ignacio goes to sit with them.",
+      "[d177] Elijah sets aside time with The Ugly Beast flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. \"NOT food,\" they gasp. \"Poison.\" The Codex notes it in grim letters. You will not make this mistake twice — Elijah already made it for you.",
+      "[d177] Mario came back with 496 kcal of something edible. The pantry breathes.",
+      "[d177] Mario went to sleep hungry. Nobody says anything.",
+      "[d177] ⚠ Haven's pantry is empty. Day 1 of hunger.",
+      "[d177] 🌿 Tucumã — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens.",
+      "[d177] 💡 Tucumã: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 178,
+     "sayWin": [
+      "[d178] It's settled. The village is calling it \"The Big Beast.\" The Codex keeps it.",
+      "[d178] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d178] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d178] Village meal: +420 kcal, +1L water from the communal pantry.",
+      "[d178] 🩹 You make rounds — Mario gets bound up properly. (63 → 78 HP)",
+      "[d178] The fire is quiet today. Nobody's talking much.",
+      "[d178] Tashi sets aside time with The Ugly Beast flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. \"NOT food,\" they gasp. \"Poison.\" The Codex notes it in grim letters. You will not make this mistake twice — Tashi already made it for you.",
+      "[d178] Mario traded something with someone for something else. The barter economy stirs.",
+      "[d178] Mario traded something with someone for something else. The barter economy stirs.",
+      "[d178] Tashi and Ignacio lingered over the fire together.",
+      "[d178] Mario and Elijah lingered over the fire together.",
+      "[d178] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 179,
+     "sayWin": [
+      "[d179] Rain. Steady, cold, honest rain.",
+      "[d179] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d179] Village meal: +280 kcal from the communal pantry.",
+      "[d179] Elijah is humming something. It stops when they notice you listening.",
+      "[d179] Tashi sets aside time with The Ugly Beast flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. \"NOT food,\" they gasp. \"Poison.\" The Codex notes it in grim letters. You will not make this mistake twice — Tashi already made it for you.",
+      "[d179] Mario traded something with someone for something else. The barter economy stirs.",
+      "[d179] ◈ CRISIS — THE HUNGER WINTER. Three days now the village has gone to sleep hungry. The pantry is an echo. This is the part the old stories skip — the part where you find out what you’re made of.",
+      "[d179] SYSTEM: \"Organic units require fuel. Noting. Noting loudly. The audience is very quiet, which for them is screaming.\"",
+      "[d179] ⚠ Haven's pantry is empty. Day 3 of hunger.",
+      "[d179] Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again.",
+      "[d179] 🌿 Serviceberry — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens.",
+      "[d179] 💡 Serviceberry: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "control",
+   "policy": "belongfeast",
+   "seed": 33,
+   "days": 117,
+   "gameDays": 118,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 4,
+    "dehydration": 1,
+    "combat": 40,
+    "starvation": 1,
+    "a wound that wouldn't close": 1,
+    "thirst": 1,
+    "monster": 1,
+    "contest": 1
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 12,
+     "cause": "dehydration",
+     "who": "gen_9vznf80",
+     "player": true
+    },
+    {
+     "day": 15,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 16,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "starvation",
+     "who": "sam_wilson",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 25,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 29,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "caleb_jones",
+     "player": true
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "greta_hansen",
+     "player": true
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "who": "callback",
+     "player": false
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "influencer",
+     "player": false
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "rut_king",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "warranty_caller",
+     "player": false
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "gen_x1jpqah",
+     "player": true
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "who": "gen_sn3ws91",
+     "player": true
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "who": "gen_ecwpu9r",
+     "player": true
+    },
+    {
+     "day": 87,
+     "cause": "combat",
+     "who": "gen_2z0yiuj",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "warranty_caller",
+     "player": false
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "gen_zaf1bkt",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "a wound that wouldn't close",
+     "who": "katarina_novak",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "stan_kowalski",
+     "player": true
+    },
+    {
+     "day": 107,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 110,
+     "cause": "thirst",
+     "who": "visjoin_101",
+     "player": false
+    },
+    {
+     "day": 111,
+     "cause": "monster",
+     "who": "visjoin_107",
+     "player": false
+    },
+    {
+     "day": 116,
+     "cause": "contest",
+     "who": "sanne_bakker",
+     "player": true
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 13,
+   "hungryEvents": 13,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 9,
+   "feastDrawDays": 9,
+   "laundering": 0,
+   "tributeKcal": 79263,
+   "tendKcal": 0,
+   "feastKcal": 19348,
+   "hungrySay": [
+    {
+     "day": 98,
+     "sayWin": [
+      "[d98] You eat Burdock (450 kcal).",
+      "[d98] You settle into the hall floor. Sleep takes you.",
+      "[d98] 🎣 Lena worked the creek — 5 fish, +1080 kcal to the pantry.",
+      "[d98] 🧳 Word from Thornfield: 💀 Cole Nakamura died of hunger on day 24.",
+      "[d98] 📡 The world feed: Thornfield — 💀 Malik Novak died of hunger on day 25.. The chat has opinions.",
+      "[d98] 📯 MUSTER — scouts report The Ugly Beast hunting near Haven, and it is beyond us. Everyone inside. No one walks the treeline alone — the garden crews double up, the hunters stand down. We outlast it.",
+      "[d98] The trial window closed. The audience makes a disappointed sound, like wind.",
+      "[d98] Riders on the ridge — no, a cart. A TRADER. Word travels: Haven has food, and where there's food there's trade.",
+      "[d98] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d98] Village meal: +1080 kcal, +1L water from the communal pantry.",
+      "[d98] Lena traded something with someone for something else. The barter economy stirs.",
+      "[d98] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 102,
+     "sayWin": [
+      "[d102] Riders on the ridge — no, a cart. A TRADER. Word travels: Haven has food, and where there's food there's trade.",
+      "[d102] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d102] ◈ \"UNIT MIXTAPE — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: +resolve when worn (morale). You knew it mattered before we did. Cute.\"",
+      "[d102] ◈ FLASHBACK — Mixtape\nHand-labeled: 'FOR THE DRIVE.' No player. The songs are in your head anyway — you hum them when you work, and the work goes faster.",
+      "[d102] 📖 The memory leaves something behind: You sing while you work. The work remembers the rhythm.",
+      "[d102] 💛 The Mixtape is starting to do something. (Keepsake L1 — quiet luck: 1 in 5 misses lands anyway, while worn.)",
+      "[d102] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d102] Kalina came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d102] Kalina: \"Walked the far treeline. Nothing new, but the ground's talking — the good stuff keeps to the damp hollows.\"",
+      "[d102] Kalina: \"Walked the far treeline. Nothing new, but the ground's talking — the good stuff keeps to the damp hollows.\"",
+      "[d102] Kalina and Lena lingered over the fire together.",
+      "[d102] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 104,
+     "sayWin": [
+      "[d104] Travel 1 tile to Haven.",
+      "[d104] The Big Big stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there.",
+      "[d104] You walk back into Haven. 45 Codex entries. The village is glad to see you.",
+      "[d104] 📋 Kalina — 🎣 Fish. They'll report back by next part.",
+      "[d104] You settle into the hall floor. Sleep takes you.",
+      "[d104] 🎣 Kalina worked the creek — 3 fish, +420 kcal to the pantry.",
+      "[d104] A cold snap. Breath smokes. The woods go quiet.",
+      "[d104] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d104] Village meal: +420 kcal from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d104] Kalina came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d104] Kalina came back with 317 kcal of something edible. The pantry breathes.",
+      "[d104] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 107,
+     "sayWin": [
+      "[d107] Too heavy. Carrying 29.7/28 kg.",
+      "[d107] Too heavy. Carrying 29.7/28 kg.",
+      "[d107] You settle into the hall floor. Sleep takes you.",
+      "[d107] 🎣 Kalina worked the creek — 3 fish, +420 kcal to the pantry.",
+      "[d107] 💧 Kalina returns with water: +2 clean.",
+      "[d107] ◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Haul 1,000 kcal to the pantry within 3 days. Reward: integration, and a lesson.",
+      "[d107] 🗣️ Kalina to Lena, by the fire: \"The table's set. The ring of pale light — it's just sitting there. Waiting on them. What do you think they'll tell it?\"",
+      "[d107] Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk.",
+      "[d107] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d107] Village meal: +1220 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d107] Kalina traded something with someone for something else. The barter economy stirs.",
+      "[d107] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 108,
+     "sayWin": [
+      "[d108] Too heavy for the rest — left where it lies: Denim Jacket x1.",
+      "[d108] Too heavy for the rest — left where it lies: Crowbar x1, Canvas Pants x1, Investigator's Coat x1.",
+      "[d108] Too heavy for the rest — left where it lies: unknown nuts x4, Hickory Nuts (in shell) x15, Gland sac x1, Stick x3, Fan care package (unopened) x1, Hunting spear x5, Audience token x2, Wrong bandage x2, Hide armor x1, Work Gloves x1, Good Boots x1, Gravity well x3, Branch x3, Bark strip x3, Plant fib",
+      "[d108] You settle into the hall floor. Sleep takes you.",
+      "[d108] 🎣 Kalina worked the creek — 2 fish, +210 kcal to the pantry.",
+      "[d108] A curious wanderer grins wide. Haven grows by one.",
+      "[d108] 👋 The village didn't wait for you — a curious wanderer was taken in around the fire. Another pair of hands.",
+      "[d108] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d108] Village meal: +210 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d108] Tarek traded something with someone for something else. The barter economy stirs.",
+      "[d108] Tarek is hurt — a fall, a thorn, a bad step. (health 73/100)",
+      "[d108] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 110,
+     "sayWin": [
+      "[d110] You eat Foraged food (40 kcal).",
+      "[d110] You settle into the hall floor. Sleep takes you.",
+      "[d110] 🎣 Kalina worked the creek — 3 fish, +350 kcal to the pantry.",
+      "[d110] 🎣 Tarek worked the creek — 2 fish, +245 kcal to the pantry.",
+      "[d110] 🌙 Night. Shouts from the treeline — Sanne of The Bloodied with 2 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 kcal.)",
+      "[d110] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d110] Village meal: +595 kcal from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d110] 🩹 You make rounds — Lena gets bound up properly. (64 → 79 HP)",
+      "[d110] Kalina is humming something. It stops when they notice you listening.",
+      "[d110] Tarek traded something with someone for something else. The barter economy stirs.",
+      "[d110] ⚠ Haven's pantry is empty. Day 1 of hunger.",
+      "[d110] 📓 Codex: Lena taught Tarek Wound Care."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "armed",
+   "policy": "belongfeast",
+   "seed": 33,
+   "days": 116,
+   "gameDays": 117,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "global",
+   "national": 1,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 4,
+    "dehydration": 1,
+    "combat": 41,
+    "starvation": 3,
+    "a wound that wouldn't close": 1
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 12,
+     "cause": "dehydration",
+     "who": "gen_9vznf80",
+     "player": true
+    },
+    {
+     "day": 15,
+     "cause": "villager combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 16,
+     "cause": "combat",
+     "who": "mirrormoth",
+     "player": false
+    },
+    {
+     "day": 18,
+     "cause": "starvation",
+     "who": "sam_wilson",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "union_rep",
+     "player": false
+    },
+    {
+     "day": 25,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 29,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 36,
+     "cause": "combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 43,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 44,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "caleb_jones",
+     "player": true
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 57,
+     "cause": "combat",
+     "who": "greta_hansen",
+     "player": true
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "who": "nevermore",
+     "player": false
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "who": "callback",
+     "player": false
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "influencer",
+     "player": false
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "rut_king",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "sunbasker",
+     "player": false
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "who": "warranty_caller",
+     "player": false
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 84,
+     "cause": "combat",
+     "who": "gen_x1jpqah",
+     "player": true
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "who": "gen_sn3ws91",
+     "player": true
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "who": "gen_ecwpu9r",
+     "player": true
+    },
+    {
+     "day": 87,
+     "cause": "combat",
+     "who": "gen_2z0yiuj",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "warranty_caller",
+     "player": false
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "who": "gen_zaf1bkt",
+     "player": true
+    },
+    {
+     "day": 89,
+     "cause": "a wound that wouldn't close",
+     "who": "katarina_novak",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 92,
+     "cause": "combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "who": "ad_sponsor",
+     "player": false
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "who": "ad_break",
+     "player": false
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "who": "stan_kowalski",
+     "player": true
+    },
+    {
+     "day": 102,
+     "cause": "starvation",
+     "who": "visjoin_99",
+     "player": false
+    },
+    {
+     "day": 115,
+     "cause": "starvation",
+     "who": "sanne_bakker",
+     "player": true
+    }
+   ],
+   "starveDeaths": 3,
+   "hungryDays": 12,
+   "hungryEvents": 12,
+   "trBlocked": 5,
+   "trArmedFragile": 5,
+   "fsFeasts": 8,
+   "feastDrawDays": 8,
+   "laundering": 0,
+   "tributeKcal": 79263,
+   "tendKcal": 0,
+   "feastKcal": 17748,
+   "hungrySay": [
+    {
+     "day": 102,
+     "sayWin": [
+      "[d102] ★ IDENTIFIED: White Oak Acorns. White oak acorn. Lobed leaves, sweet acorns. Uses unknown — harvest, taste, and learn.",
+      "[d102] 💡 White Oak Acorns. The tree with lobed leaves and oval nuts in scaly caps you've been looking at for days finally has a name, and now you'll never unsee it.",
+      "[d102] SYSTEM: Naming things. Very human. The audience approves.",
+      "[d102] Swathi was watching. Now they know White Oak Acorns too.",
+      "[d102] The Codex notes it: White Oak Acorns — cook it, or else. (Lena tested it.)",
+      "[d102] Swathi came back with 404 kcal of something edible. The pantry breathes.",
+      "[d102] Swathi traded something with someone for something else. The barter economy stirs.",
+      "[d102] 📖 The Codex turns a page on its own. Swathi is dead. You didn't ask. It knew.",
+      "[d102] Nobody's talking much. The fire feels smaller tonight.",
+      "[d102] 📖 The entry for Swathi is finished. No more pages.",
+      "[d102] 💀 Swathi starved. Slowly. The village is 2 now.",
+      "[d102] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 106,
+     "sayWin": [
+      "[d106] Too heavy. Carrying 28.3/28 kg.",
+      "[d106] Too heavy. Carrying 28.3/28 kg.",
+      "[d106] Too heavy. Carrying 28.3/28 kg.",
+      "[d106] Too heavy. Carrying 28.3/28 kg.",
+      "[d106] Too heavy. Carrying 28.3/28 kg.",
+      "[d106] Too heavy. Carrying 28.3/28 kg.",
+      "[d106] Too heavy. Carrying 28.3/28 kg.",
+      "[d106] You settle into the hall floor. Sleep takes you.",
+      "[d106] A cold snap. Breath smokes. The woods go quiet.",
+      "[d106] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d106] Village meal: +400 kcal from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d106] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 107,
+     "sayWin": [
+      "[d107] Too heavy. Carrying 28.3/28 kg.",
+      "[d107] Too heavy. Carrying 28.3/28 kg.",
+      "[d107] Too heavy. Carrying 28.3/28 kg.",
+      "[d107] Too heavy. Carrying 28.3/28 kg.",
+      "[d107] Too heavy. Carrying 28.3/28 kg.",
+      "[d107] Too heavy. Carrying 28.3/28 kg.",
+      "[d107] You settle into the hall floor. Sleep takes you.",
+      "[d107] A stranger at the tree line, watching. Not hiding, exactly. Measuring. They'll be gone by dusk — but they'll remember what they saw.",
+      "[d107] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d107] ⚠ DEHYDRATED: find and treat water today.",
+      "[d107] Village meal: +566 kcal from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d107] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 108,
+     "sayWin": [
+      "[d108] Travel 2 tiles to creek.",
+      "[d108] It followed you. The Eater is here.",
+      "[d108] Still full. (Eat, test a lump, or leave some.)",
+      "[d108] Travel 1 tile to Haven.",
+      "[d108] You walk back into Haven. 46 Codex entries. The village is glad to see you.",
+      "[d108] You settle into the hall floor. Sleep takes you.",
+      "[d108] A lean scout waits a while, then moves on down the road. Word travels about that, too.",
+      "[d108] A cold snap. Breath smokes. The woods go quiet.",
+      "[d108] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d108] ⚠ DEHYDRATED: find and treat water today.",
+      "[d108] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d108] ⚠ Haven's pantry is empty. Day 3 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 110,
+     "sayWin": [
+      "[d110] Too heavy. Carrying 29.5/28 kg.",
+      "[d110] Too heavy. Carrying 29.5/28 kg.",
+      "[d110] Too heavy. Carrying 29.5/28 kg.",
+      "[d110] Too heavy. Carrying 29.5/28 kg.",
+      "[d110] Too heavy. Carrying 29.5/28 kg.",
+      "[d110] You settle into the hall floor. Sleep takes you.",
+      "[d110] 🧳 A traveler passed through yesterday, talking about a village to the northwest called Stonebridge. The region is bigger than your fire.",
+      "[d110] The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it.",
+      "[d110] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d110] ⚠ DEHYDRATED: find and treat water today.",
+      "[d110] Village meal: +558 kcal from the communal pantry. (Half ration — they don't trust you yet.)",
+      "[d110] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 111,
+     "sayWin": [
+      "[d111] This patch is worked out — step to another green patch and forage again.",
+      "[d111] Travel 2 tiles to creek.",
+      "[d111] Your pack is full. Eat something, test a lump from your pack, or leave some for the woods.",
+      "[d111] Travel 1 tile to Haven.",
+      "[d111] You walk back into Haven. 46 Codex entries. The village is glad to see you.",
+      "[d111] You settle into the hall floor. Sleep takes you.",
+      "[d111] 💧 Lena returns with water: +2 clean.",
+      "[d111] The System's gifts are hungry: -50 kcal metabolic cost. Feed the power or lose it.",
+      "[d111] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d111] ⚠ DEHYDRATED: find and treat water today.",
+      "[d111] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d111] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "control",
+   "policy": "belongfeast",
+   "seed": 44,
+   "days": 139,
+   "gameDays": 140,
+   "endReason": "village-lost",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "regional",
+   "national": 0,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 11,
+    "combat": 14,
+    "contest": 3,
+    "monster": 4
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 10,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 14,
+     "cause": "villager combat",
+     "who": "nightlight_catfish",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_ijiop42",
+     "player": true
+    },
+    {
+     "day": 27,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 29,
+     "cause": "combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 30,
+     "cause": "villager combat",
+     "who": "bright_idea",
+     "player": false
+    },
+    {
+     "day": 31,
+     "cause": "villager combat",
+     "who": "white_noise_heron",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "contest",
+     "who": "gen_s5mak4l",
+     "player": true
+    },
+    {
+     "day": 32,
+     "cause": "villager combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 38,
+     "cause": "monster",
+     "who": "oliver_moore",
+     "player": false
+    },
+    {
+     "day": 39,
+     "cause": "monster",
+     "who": "miguel_santos",
+     "player": false
+    },
+    {
+     "day": 47,
+     "cause": "combat",
+     "who": "gen_8pcded9",
+     "player": true
+    },
+    {
+     "day": 49,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 50,
+     "cause": "combat",
+     "who": "gen_32jcsav",
+     "player": true
+    },
+    {
+     "day": 68,
+     "cause": "villager combat",
+     "who": "belltoad",
+     "player": false
+    },
+    {
+     "day": 75,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "who": "spool",
+     "player": false
+    },
+    {
+     "day": 79,
+     "cause": "contest",
+     "who": "gen_tqn1ysd",
+     "player": true
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "who": "review_drone",
+     "player": false
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "who": "murkcap",
+     "player": false
+    },
+    {
+     "day": 94,
+     "cause": "contest",
+     "who": "hassan_ali",
+     "player": false
+    },
+    {
+     "day": 104,
+     "cause": "monster",
+     "who": "visjoin_101",
+     "player": false
+    },
+    {
+     "day": 105,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 108,
+     "cause": "combat",
+     "who": "gen_fuyor1c",
+     "player": true
+    },
+    {
+     "day": 127,
+     "cause": "monster",
+     "who": "visjoin_104",
+     "player": false
+    },
+    {
+     "day": 136,
+     "cause": "combat",
+     "who": "yuki_mori",
+     "player": true
+    },
+    {
+     "day": 137,
+     "cause": "combat",
+     "who": "mia_andersson",
+     "player": true
+    },
+    {
+     "day": 137,
+     "cause": "combat",
+     "who": "brian_otieno",
+     "player": true
+    }
+   ],
+   "starveDeaths": 0,
+   "hungryDays": 8,
+   "hungryEvents": 8,
+   "trBlocked": 0,
+   "trArmedFragile": 0,
+   "fsFeasts": 4,
+   "feastDrawDays": 4,
+   "laundering": 0,
+   "tributeKcal": 39124,
+   "tendKcal": 0,
+   "feastKcal": 7656,
+   "hungrySay": [
+    {
+     "day": 120,
+     "sayWin": [
+      "[d120] \"You haven't earned that yet,\" Aria says. (Trust too low.)",
+      "[d120] Aria shakes their head. \"Ask someone who trusts you.\" (Trust too low.)",
+      "[d120] You settle into the hall floor. Sleep takes you.",
+      "[d120] 💧 Onni returns with water: +2 clean.",
+      "[d120] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d120] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d120] Quiet mending sounds from the bunks — Onni fixing something.",
+      "[d120] Onni sets aside time with Don't-Look flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. \"NOT food,\" they gasp. \"Poison.\" The Codex notes it in grim letters. You will not make this mistake twice — Onni already made it for you.",
+      "[d120] Nepia had the day of their life — 1493 kcal. Two days of food from one person.",
+      "[d120] 🔍 Aria crouches over a forked palm with fan leaves and large brown gingerbread-smelling fruits, studying it a moment before moving on. (2/3 looks)",
+      "[d120] Aria: \"The dog rose hip patch is fruiting again. Somebody should get out there.\"",
+      "[d120] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 121,
+     "sayWin": [
+      "[d121] Aria looks at you flatly. \"Why should I listen to you?\" (Trust too low.)",
+      "[d121] You eat Muscadine Grapes (270 kcal).",
+      "[d121] You settle into the hall floor. Sleep takes you.",
+      "[d121] Onni shakes their head, admiring. \"Did you hear what Mia did?\" You hadn't. Now you have.",
+      "[d121] The System's gifts are hungry: -75 kcal metabolic cost. Feed the power or lose it.",
+      "[d121] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d121] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d121] Nepia paces the hall, restless, then sits. Then paces.",
+      "[d121] Brian sets aside time with Don't-Look flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. \"NOT food,\" they gasp. \"Poison.\" The Codex notes it in grim letters. You will not make this mistake twice — Brian already made it for you.",
+      "[d121] Onni is hurt — a fall, a thorn, a bad step. (health 71/100)",
+      "[d121] Brian: \"The stinging nettle patch is fruiting again. Somebody should get out there.\"",
+      "[d121] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 122,
+     "sayWin": [
+      "[d122] You eat Purslane (300 kcal).",
+      "[d122] You settle into the hall floor. Sleep takes you.",
+      "[d122] 🗣️ Brian to Nepia, by the fire: \"Why them? ...Sorry. It's just sitting there, and they're the one who has to sit in it.\"",
+      "[d122] The System's gifts are hungry: -75 kcal metabolic cost. Feed the power or lose it.",
+      "[d122] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d122] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d122] Nepia is staring into the fire like it owes them answers.",
+      "[d122] Brian sets aside time with Don't-Look flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. \"NOT food,\" they gasp. \"Poison.\" The Codex notes it in grim letters. You will not make this mistake twice — Brian already made it for you.",
+      "[d122] Nepia came back with 482 kcal of something edible. The pantry breathes.",
+      "[d122] Nepia and Brian lingered over the fire together.",
+      "[d122] Nepia and Brian lingered over the fire together.",
+      "[d122] ⚠ Haven's pantry is empty. Day 3 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 136,
+     "sayWin": [
+      "[d136] You eat Foraged food (200 kcal).",
+      "[d136] You settle into the hall floor. Sleep takes you.",
+      "[d136] 💧 Brian returns with water: +3 clean.",
+      "[d136] 🌙 Night. The lingering The Moderator gorges at the treeline — 1,800 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d136] 🌙 Night. The lingering The Eulogy gorges at the treeline — 0 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.",
+      "[d136] Riders on the ridge — no, a cart. A TRADER. Word travels: Haven has food, and where there's food there's trade.",
+      "[d136] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d136] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d136] Brian sets aside time with Don't-Look flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. \"NOT food,\" they gasp. \"Poison.\" The Codex notes it in grim letters. You will not make this mistake twice — Brian already made it for you.",
+      "[d136] Aria traded something with someone for something else. The barter economy stirs.",
+      "[d136] Aria came back with 673 kcal of something edible. The pantry breathes.",
+      "[d136] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 137,
+     "sayWin": [
+      "[d137] Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "[d137] Back at the haven the argument starts: Aria is calling it \"Big Big.\" They'll fight it out — weigh in if you want.",
+      "[d137] It's settled. The village is calling it \"The Big Thing.\" The Codex keeps it.",
+      "[d137] ◈ The System files the name away with visible satisfaction. It has so few words for things that bleed. (+2 integration)",
+      "[d137] Rain. Steady, cold, honest rain.",
+      "[d137] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d137] No food in the pantry. The village is hungry. You still get your 1L water.",
+      "[d137] Aria is showing everyone Bracken Fiddlehead by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way.",
+      "[d137] 🔍 Aria crouches over tall white flower umbels on smooth purple-blotched stems, smelling faintly foul, studying it a moment before moving on. (2/3 looks)",
+      "[d137] Aria traded something with someone for something else. The barter economy stirs.",
+      "[d137] Aria came back with 596 kcal of something edible. The pantry breathes.",
+      "[d137] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 138,
+     "sayWin": [
+      "[d138] \"The rock! It is lucky! We checked! It's... a rock! But YOU believe! Belief is power! (We added 4%.)\"",
+      "[d138] \"Earned, not given. You did the work — we just wrote it down.\"",
+      "[d138] You settle into the hall floor. Sleep takes you.",
+      "[d138] That night, they bring Mia home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.",
+      "[d138] That night, they bring Brian home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.",
+      "[d138] The System's gifts are hungry: -10 kcal metabolic cost. Feed the power or lose it.",
+      "[d138] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d138] No food in the pantry. The village is hungry.",
+      "[d138] 🔍 Aria crouches over a huge tree with a trunk studded in conical thorns and pumpkin-shaped pods that explode, studying it a moment before moving on. (1/3 looks)",
+      "[d138] Aria traded something with someone for something else. The barter economy stirs.",
+      "[d138] Aria came back with 573 kcal of something edible. The pantry breathes.",
+      "[d138] ⚠ Haven's pantry is empty. Day 3 of hunger."
+     ],
+     "freshDays": 0
+    }
+   ]
+  },
+  {
+   "side": "armed",
+   "policy": "belongfeast",
+   "seed": 44,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "won": 0,
+   "waveReach": 4,
+   "maxArc": 4,
+   "maxRank": "regional",
+   "national": 0,
+   "table": 1,
+   "deathCauseCounts": {
+    "villager combat": 15,
+    "combat": 21,
+    "contest": 1,
+    "monster": 6,
+    "starvation": 1,
+    "a wound that wouldn't close": 2
+   },
+   "deaths": [
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "living_wire",
+     "player": false
+    },
+    {
+     "day": 8,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 10,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 14,
+     "cause": "villager combat",
+     "who": "nightlight_catfish",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "hushwolf",
+     "player": false
+    },
+    {
+     "day": 19,
+     "cause": "combat",
+     "who": "gen_ijiop42",
+     "player": true
+    },
+    {
+     "day": 27,
+     "cause": "villager combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 29,
+     "cause": "combat",
+     "who": "giant_mosquito",
+     "player": false
+    },
+    {
+     "day": 30,
+     "cause": "villager combat",
+     "who": "bright_idea",
+     "player": false
+    },
+    {
+     "day": 31,
+     "cause": "villager combat",
+     "who": "white_noise_heron",
+     "player": false
+    },
+    {
+     "day": 32,
+     "cause": "contest",
+     "who": "gen_s5mak4l",
+     "player": true
+    },
+    {
+     "day": 32,
+     "cause": "villager combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 38,
+     "cause": "monster",
+     "who": "oliver_moore",
+     "player": false
+    },
+    {
+     "day": 39,
+     "cause": "monster",
+     "who": "miguel_santos",
+     "player": false
+    },
+    {
+     "day": 47,
+     "cause": "combat",
+     "who": "gen_8pcded9",
+     "player": true
+    },
+    {
+     "day": 49,
+     "cause": "villager combat",
+     "who": "lockpick_raccoon",
+     "player": false
+    },
+    {
+     "day": 53,
+     "cause": "starvation",
+     "who": "hassan_ali",
+     "player": false
+    },
+    {
+     "day": 70,
+     "cause": "monster",
+     "who": "gen_fuyor1c",
+     "player": false
+    },
+    {
+     "day": 73,
+     "cause": "a wound that wouldn't close",
+     "who": "aria_thompson",
+     "player": false
+    },
+    {
+     "day": 74,
+     "cause": "combat",
+     "who": "white_noise_heron",
+     "player": false
+    },
+    {
+     "day": 88,
+     "cause": "monster",
+     "who": "visjoin_83",
+     "player": false
+    },
+    {
+     "day": 90,
+     "cause": "villager combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 93,
+     "cause": "combat",
+     "who": "hummice",
+     "player": false
+    },
+    {
+     "day": 101,
+     "cause": "villager combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 111,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 114,
+     "cause": "combat",
+     "who": "murkcap",
+     "player": false
+    },
+    {
+     "day": 118,
+     "cause": "villager combat",
+     "who": "nightlight_catfish",
+     "player": false
+    },
+    {
+     "day": 123,
+     "cause": "villager combat",
+     "who": "memory_projector",
+     "player": false
+    },
+    {
+     "day": 126,
+     "cause": "combat",
+     "who": "voice_mimic_radio",
+     "player": false
+    },
+    {
+     "day": 127,
+     "cause": "villager combat",
+     "who": "landlord",
+     "player": false
+    },
+    {
+     "day": 127,
+     "cause": "monster",
+     "who": "visjoin_102",
+     "player": false
+    },
+    {
+     "day": 127,
+     "cause": "villager combat",
+     "who": "bright_idea",
+     "player": false
+    },
+    {
+     "day": 132,
+     "cause": "combat",
+     "who": "heckler",
+     "player": false
+    },
+    {
+     "day": 138,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 138,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 138,
+     "cause": "a wound that wouldn't close",
+     "who": "gen_tqn1ysd",
+     "player": false
+    },
+    {
+     "day": 141,
+     "cause": "combat",
+     "who": "terms_of_service",
+     "player": false
+    },
+    {
+     "day": 142,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 153,
+     "cause": "combat",
+     "who": "chorus_line",
+     "player": false
+    },
+    {
+     "day": 156,
+     "cause": "monster",
+     "who": "visjoin_154",
+     "player": false
+    },
+    {
+     "day": 163,
+     "cause": "combat",
+     "who": "paparazzo",
+     "player": false
+    },
+    {
+     "day": 164,
+     "cause": "combat",
+     "who": "callback",
+     "player": false
+    },
+    {
+     "day": 167,
+     "cause": "combat",
+     "who": "redactor",
+     "player": false
+    }
+   ],
+   "starveDeaths": 1,
+   "hungryDays": 14,
+   "hungryEvents": 14,
+   "trBlocked": 6,
+   "trArmedFragile": 6,
+   "fsFeasts": 4,
+   "feastDrawDays": 4,
+   "laundering": 0,
+   "tributeKcal": 44277,
+   "tendKcal": 0,
+   "feastKcal": 7680,
+   "hungrySay": [
+    {
+     "day": 53,
+     "sayWin": [
+      "[d53] 🔍 Brian has been turning over a bushy riverside shrub with small round red-purple fruit, standing in the floodwater half the year for days — today it clicked. \"I know this one now. Look — see the leaves?\"",
+      "[d53] ★ IDENTIFIED: Jewelweed. Translucent stems, orange spotted flowers like tiny trumpets. Uses unknown — harvest, taste, and learn.",
+      "[d53] SYSTEM: Catalogued. The Codex grows teeth.",
+      "[d53] Brian was watching. Now they know Jewelweed too.",
+      "[d53] Brian brought you a sample. The Codex grows.",
+      "[d53] 📖 The Codex turns a page on its own. Hassan is dead. You didn't ask. It knew.",
+      "[d53] Nobody's talking much. The fire feels smaller tonight.",
+      "[d53] 📖 The entry for Hassan is finished. 1 deed recorded. No more pages.",
+      "[d53] HASSAN — GONE. 1 open question closed unanswered.",
+      "[d53] 💀 Hassan starved. Slowly. The village is 7 now.",
+      "[d53] Onni went to sleep hungry. Nobody says anything.",
+      "[d53] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 54,
+     "sayWin": [
+      "[d54] Aria stared at their hands for a long time today. Something is changing.",
+      "[d54] ★ IDENTIFIED: Camu-camu. Sour little riverbank fruit. Uses unknown — harvest, taste, and learn.",
+      "[d54] SYSTEM: Naming things. Very human. The audience approves.",
+      "[d54] 📚 Village knowledge: Brian taught everyone about Camu-camu. The Codex grows without you lifting a finger.",
+      "[d54] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d54] Village meal: +1258 kcal, +1L water from the communal pantry.",
+      "[d54] The fire is quiet today. Nobody's talking much.",
+      "[d54] Brian drew Camu-camu in the dirt for the others. It'll wash away. The knowledge won't.",
+      "[d54] Yuki is hurt — a fall, a thorn, a bad step. (health 63/100)",
+      "[d54] 🔍 Kevin has been turning over a bushy herb with serrated purple-green leaves on square stems for days — today it clicked. \"I know this one now. Look — see the leaves?\"",
+      "[d54] Kevin had the day of their life — 1146 kcal. Two days of food from one person.",
+      "[d54] ⚠ Haven's pantry is empty. Day 2 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 57,
+     "sayWin": [
+      "[d57] (They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)",
+      "[d57] You settle into the hall floor. Sleep takes you.",
+      "[d57] 🎣 Jorge worked the creek — 2 fish, +480 kcal to the pantry.",
+      "[d57] Sofia waits two days at your fire, getting thinner. Nobody answers. They walk back to Thornfield with nothing. They'll remember the silence.",
+      "[d57] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d57] Village meal: +480 kcal, +1L water from the communal pantry.",
+      "[d57] Yuki paces the hall, restless, then sits. Then paces.",
+      "[d57] 🔍 Yuki crouches over a low wiry shrub with dusty-blue berries that stain everything purple, studying it a moment before moving on. (1/3 looks)",
+      "[d57] Yuki came back with 373 kcal of something edible. The pantry breathes.",
+      "[d57] Onni and Jorge lingered over the fire together.",
+      "[d57] Onni and Jorge lingered over the fire together.",
+      "[d57] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 59,
+     "sayWin": [
+      "[d59] You settle into the hall floor. Sleep takes you.",
+      "[d59] 🎣 Jorge worked the creek — 5 fish, +1200 kcal to the pantry.",
+      "[d59] ◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Haul 3,000 kcal to the pantry within 3 days. Reward: integration, and a lesson.",
+      "[d59] ★ IDENTIFIED: Lemongrass. Tea and mosquito armor in one clump. Uses unknown — harvest, taste, and learn.",
+      "[d59] SYSTEM: Identification complete. You are 0.3% less lost.",
+      "[d59] 📚 Village knowledge: Yuki taught everyone about Lemongrass. The Codex grows without you lifting a finger.",
+      "[d59] ⚠ STARVING: health and energy falling. You went to bed on an empty stomach.",
+      "[d59] Village meal: +1200 kcal, +1L water from the communal pantry.",
+      "[d59] Onni came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d59] Fireside lesson: Yuki passes around Lemongrass. Someone asks a dumb question. Nobody minds. That's how you learn.",
+      "[d59] Jorge came back with 530 kcal of something edible. The pantry breathes.",
+      "[d59] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 61,
+     "sayWin": [
+      "[d61] 🌿 Jorge returns from foraging the wilds: +537 kcal to the pantry.",
+      "[d61] 🌿 Kevin returns from foraging the wilds: +281 kcal to the pantry.",
+      "[d61] A cold snap. Breath smokes. The woods go quiet.",
+      "[d61] ⚠ STARVING: health and energy falling. The spiral has started.",
+      "[d61] Village meal: +1658 kcal, +1L water from the communal pantry.",
+      "[d61] Onni is staring into the fire like it owes them answers.",
+      "[d61] Jorge traded something with someone for something else. The barter economy stirs.",
+      "[d61] Brian and Jorge lingered over the fire together.",
+      "[d61] Onni and Brian lingered over the fire together.",
+      "[d61] ⚠ Haven's pantry is empty. Day 1 of hunger.",
+      "[d61] ✦ Jorge has found something — Field Pharmacy. Days of field_medicine and herbal_remedy side by side, and now they move as one. (field_pharmacy: villager synergy discovered)",
+      "[d61] ✦ Jorge has found something — Fever's End. Days of field_medicine and herbal_remedy side by side, and now they move as one. (fevers_end: villager synergy discovered)"
+     ],
+     "freshDays": 0
+    },
+    {
+     "day": 67,
+     "sayWin": [
+      "[d67] 🎣 Jorge worked the creek — 2 fish, +420 kcal to the pantry.",
+      "[d67] 🌿 Jorge returns from foraging the wilds: +333 kcal to the pantry.",
+      "[d67] 🐗 RAID — 3 raiders (The Callback, tick, Gavel) hit Haven in the night, drawn by the smell of the pantry! The palisade's stakes take their toll as they come over the wall.",
+      "[d67] 🚨 The Callback, tick, Gavel is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with honest costs.",
+      "[d67] 🛡️ Jorge, Kevin and Brian met them at the door — 1 driven off, 2 barely walked away. Jorge, Kevin, Brian are hurt.",
+      "[d67] The watch holds the wall. You sleep through the worst of it — or would have, if the shouting had let you.",
+      "[d67] ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.",
+      "[d67] Village meal: +2238 kcal, +1L water from the communal pantry.",
+      "[d67] 🩹 You make rounds — Jorge gets bound up properly. (29 → 44 HP)",
+      "[d67] Aria came back with an armful of something edible, unprompted. (+100 kcal pantry)",
+      "[d67] Yuki traded something with someone for something else. The barter economy stirs.",
+      "[d67] ⚠ Haven's pantry is empty. Day 1 of hunger."
+     ],
+     "freshDays": 0
+    }
+   ]
+  }
+ ]
+}

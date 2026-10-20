@@ -1,0 +1,33 @@
+== RED R1: OFF delegation pin (TRIBUTERHYTHM unset) ==
+  PASS R1 leadrhythm==leadfeast seed 11 (40d)
+  PASS R1 leadrhythm==leadfeast seed 22 (40d)
+  PASS R1 belongrhythm==belongfeast seed 11 (40d)
+  PASS R1 belongrhythm==belongfeast seed 22 (40d)
+== RED R2: ON determinism (TRIBUTERHYTHM=1, 8 configs x 2) ==
+  PASS R2 leadrhythm seed 11 bit-identical
+  PASS R2 leadrhythm seed 22 bit-identical
+  PASS R2 leadrhythm seed 33 bit-identical
+  PASS R2 leadrhythm seed 44 bit-identical
+  PASS R2 belongrhythm seed 11 bit-identical
+  PASS R2 belongrhythm seed 22 bit-identical
+  PASS R2 belongrhythm seed 33 bit-identical
+  PASS R2 belongrhythm seed 44 bit-identical
+== GREEN G1: staged gate decisions ==
+  PASS G1a pantry staged fragile (freshDays<3)
+  PASS G1b tribute-armed+fragile -> blocked
+  PASS G1c feastPlan wrapper refuses (ok=false), trBlocked=1
+  PASS G1d donation-armed+fragile -> NOT blocked
+  PASS G1e not-fragile (freshDays>=3) -> NOT blocked
+  PASS G1f env unset -> wrapper delegates (no refusal, no throw)
+== GREEN G2: ON diverges from OFF only through blocked feasts (40d) ==
+  PASS G2 lead seed 11: no blocks -> bit-identical
+  PASS G2 lead seed 22: no blocks -> bit-identical
+  PASS G2 lead seed 33: no blocks -> bit-identical
+  PASS G2 lead seed 44: no blocks -> bit-identical
+  PASS G2 belong seed 11: no blocks -> bit-identical
+  PASS G2 belong seed 22: no blocks -> bit-identical
+  PASS G2 belong seed 33: no blocks -> bit-identical
+  PASS G2 belong seed 44: no blocks -> bit-identical
+
+26 passed, 0 failed
+EXIT=0
