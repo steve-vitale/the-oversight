@@ -1,0 +1,70 @@
+[
+ {
+  "day": 90,
+  "frame": "the Table",
+  "phase": "paths",
+  "path": null,
+  "beat": null,
+  "prompt": "The ring of pale light. The too-many-angled faces. The trillions of eyes. The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take. ◈ the Feared — 27 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked. (standing: 100) ◇ the Indispensable — The Indispensable needs a full seat — the galaxy must actually need you, not just notice you. ◈ the Beloved — Viewership 38, fan favor 15 — the galaxy's favorite, by the numbers. (standing: 100) ◈ the Witness — 6 exposures on the record. The docket is real. (standing: 73) ◈ the Assimilated — Always open. The table takes anyone — that's what makes it a trap, and what makes it safe. (standing: 50) ◈ the Defiant — Defiance 5 on the record. The 'no' is earned. (standing: 40) ◈ the Relay — Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond 0) (standing: 40)",
+  "options": [
+   "path:feared :: Walk the path of the Feared",
+   "path:beloved :: Walk the path of the Beloved",
+   "path:witness :: Walk the path of the Witness",
+   "path:assimilated :: Walk the path of the Assimilated",
+   "path:defiant :: Walk the path of the Defiant",
+   "path:relay :: Walk the path of the Relay"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Assimilated",
+  "phase": "challenge",
+  "path": "assimilated",
+  "beat": 0,
+  "prompt": "PLACEMENT ONE — THE BRANCH. \"WHICH ARM TAKES YOU?\" The table doesn't ask if you'll come inside. It asks *where* inside. Three branches, three lives. Choose like it matters — it's the last real choice the old you gets. comfort 2 · self 1",
+  "options": [
+   "beat:kitchens :: The kitchens.",
+   "beat:archives :: The archives.",
+   "beat:nurseries :: The nurseries."
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Assimilated",
+  "phase": "challenge",
+  "path": "assimilated",
+  "beat": 1,
+  "prompt": "PLACEMENT TWO — ACCESS TIER. Citizen, resident, or the grey list. The tier decides what you can see, what you can touch, and what can touch you. ◈ YOUR BUILD — The intake scan is asking what you'll bring. They mean skills. You mean something else. comfort 4 · self 1",
+  "options": [
+   "beat:citizen :: Full citizen.",
+   "beat:resident :: Resident alien.",
+   "beat:grey :: The grey list.",
+   "beat:build :: Carry the thing you're best at inside with you. (needs self 2+)"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Assimilated",
+  "phase": "challenge",
+  "path": "assimilated",
+  "beat": 2,
+  "prompt": "PLACEMENT THREE — THE INTAKE SCAN. The final door. The scanner reads everything you carry — memories, grief, the food truth folded small. \"DECLARE IT,\" the System says, almost kindly. \"WHAT ARE YOU SMUGGLING?\" comfort 6 · self 0",
+  "options": [
+   "beat:truth :: The food truth. (Dead Drop)",
+   "beat:name :: A name.",
+   "beat:nothing :: Nothing. (Even now, you lie.)"
+  ]
+ },
+ {
+  "day": 90,
+  "frame": "the Assimilated",
+  "phase": "finals",
+  "path": "assimilated",
+  "beat": 3,
+  "prompt": "The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:",
+  "options": [
+   "final:comfort :: Accept comfort.",
+   "final:grief :: Remember the taste of grief."
+  ]
+ }
+]
