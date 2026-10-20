@@ -1276,7 +1276,7 @@
             witness: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — with every charge read aloud and answered, the ledger closed and clean. The village endures, and the record stands: what was hidden is hidden no more.`,
             assimilated: `◈ ${me} does not walk out of the light — ${pro} went inside carrying the truth, and the light, unsteadily, has begun to carry it back. The village endures, with a Trojan horse in the walls of heaven.`,
             defiant: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and keeps walking, because ${pro} paid every price and said no twice. The village endures, poorer, unowned, free: the long shot of small figures leaving the light is the highest-rated thing the galaxy ever saw.`,
-            relay: `◈ ${me} walks out of the light accompanied — the System learned ${pro} name first, and it keeps saying it inside the wire while ${pro} goes home. The village endures, with a friend in the machine, and the conversation does not end.`,
+            relay: `◈ ${me} reached into the light and the light reached back — person and machine, two caretakers, holding the channel open between them both ways. The village endures, and the conversation does not end.`,
           };
           this.say(winCodas[T.path] || `◈ ${me} walks out of the light alone, which is how ${pro} walked in. The village endures. That was always the story.`);
         }

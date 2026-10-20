@@ -34,7 +34,7 @@ const IMG = {
   witness: ['ledger', 'charge', 'record'],
   assimilated: ['inside', 'trojan'],
   defiant: ['price', 'no twice', 'free', 'walking'],
-  relay: ['system', 'wire', 'machine', 'name'],
+  relay: ['machine', 'light', 'conversation', 'channel', 'caretaker'],
 };
 const SEEDS = [11, 22, 33, 44, 55, 66, 77, 88];
 
@@ -59,7 +59,7 @@ async function codaLines(Game, path) {
 }
 
 function codaOf(lines) {
-  const hits = lines.filter(l => l.startsWith('◈ ') && /walks out of the light|does not walk out/.test(l));
+  const hits = lines.filter(l => l.startsWith('◈ ') && /walks out of the light|does not walk out|reached into the light/.test(l));
   return hits;
 }
 
@@ -111,7 +111,7 @@ function codaOf(lines) {
   // The Bearer's name/pronoun are roster-RNG; across 8 seeds the set per
   // path may hold up to 8 name-variants of the same coda — normalize by
   // stripping the leading name token before distinctness checks.
-  const norm = (s) => s.replace(/^◈ .*? (?=walks out of the light|does not walk out)/, '◈ {name} ')
+  const norm = (s) => s.replace(/^◈ .*? (?=walks out of the light|does not walk out|reached into the light)/, '◈ {name} ')
     .replace(/\b(he|she|they)\b/g, '{pro}');
   const canon = {};
   for (const p of PATHS) {
