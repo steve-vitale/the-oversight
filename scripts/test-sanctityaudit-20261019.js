@@ -35,30 +35,30 @@ const GAME_JS = path.join(__dirname, '..', 'src', 'js', 'game.js');
 const SITES = [
   // -- (a) AMBIENT routers: sanctity MUST cover (TABLE.md: no random field
   // fights, no wild encounters, no patrol contact, no new raids while the
-  // table sits). All inside monsterTurn() (game.js:21640) except reengage.
-  { line: 11085, kind: 'ambient', cover: '11060,11122', via: 'reengageWaitingMonsters',
-    note: 'door-fled re-engage (hall-door exit 11060: stash held mid-finale; treeline ambush 11122: returns false, stash intact). GATED by journey-scale r10.door-fled re-engage (hall-door exit 11063: the bearer\'s own fled stash) + treeline ambush (11125: a dead bearer\'s stash when the new bearer leaves Haven). NO sanctity check.' },
-  { line: 21690, kind: 'ambient', cover: '21683', via: 'monsterTurn/hummice-sonar',
-    note: 'hummice hunts by ear: contact within 1 tile. monsterTurn() has NO tableActive gate (21640).' },
-  { line: 21707, kind: 'ambient', cover: '21683', via: 'monsterTurn/hummice-bump',
-    note: 'hummice closes to the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
-  { line: 21732, kind: 'ambient', cover: '21683', via: 'monsterTurn/dark-bump',
-    note: 'wander-search bump into the player in the dark. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
-  { line: 21816, kind: 'ambient', cover: '21683', via: 'monsterTurn/ambush',
-    note: 'ambush stance: nightlight + dist<=2. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
-  { line: 21854, kind: 'ambient', cover: '21683', via: 'monsterTurn/territorial',
-    note: 'territorial warn expiry (warnTurns>=2). GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
-  { line: 21887, kind: 'ambient', cover: '21683', via: 'monsterTurn/hungry',
-    note: 'hungry stepToward reaches the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
-  { line: 21904, kind: 'ambient', cover: '21683', via: 'monsterTurn/cautious',
-    note: 'cautious circle lands on the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
-  { line: 21949, kind: 'ambient', cover: '21683', via: 'monsterTurn/default',
-    note: 'default stance stepToward reaches the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21683, journey-scale r10).' },
+  // table sits). All inside monsterTurn() (game.js:21659) except reengage.
+  { line: 11104, kind: 'ambient', cover: '11079,11141', via: 'reengageWaitingMonsters',
+    note: 'door-fled re-engage (hall-door exit 11079: stash held mid-finale; treeline ambush 11141: returns false, stash intact). GATED by journey-scale r10.door-fled re-engage (hall-door exit 11082: the bearer\'s own fled stash) + treeline ambush (11144: a dead bearer\'s stash when the new bearer leaves Haven). NO sanctity check.' },
+  { line: 21709, kind: 'ambient', cover: '21702', via: 'monsterTurn/hummice-sonar',
+    note: 'hummice hunts by ear: contact within 1 tile. GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
+  { line: 21726, kind: 'ambient', cover: '21702', via: 'monsterTurn/hummice-bump',
+    note: 'hummice closes to the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
+  { line: 21751, kind: 'ambient', cover: '21702', via: 'monsterTurn/dark-bump',
+    note: 'wander-search bump into the player in the dark. GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
+  { line: 21835, kind: 'ambient', cover: '21702', via: 'monsterTurn/ambush',
+    note: 'ambush stance: nightlight + dist<=2. GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
+  { line: 21873, kind: 'ambient', cover: '21702', via: 'monsterTurn/territorial',
+    note: 'territorial warn expiry (warnTurns>=2). GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
+  { line: 21906, kind: 'ambient', cover: '21702', via: 'monsterTurn/hungry',
+    note: 'hungry stepToward reaches the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
+  { line: 21923, kind: 'ambient', cover: '21702', via: 'monsterTurn/cautious',
+    note: 'cautious circle lands on the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
+  { line: 21968, kind: 'ambient', cover: '21702', via: 'monsterTurn/default',
+    note: 'default stance stepToward reaches the player tile. GATED upstream by the monsterTurn sanctity gate (game.js:21702, journey-scale r10).' },
   // -- (c) PLAYER-INITIATED: the player's own device/choice, not ambient
   // pressure. Sanctity N/A (can still pull the player in mid-finale).
-  { line: 21556, kind: 'player', cover: null, via: 'gwTrapTick',
+  { line: 21575, kind: 'player', cover: null, via: 'gwTrapTick',
     note: 'glasswing dive onto the PLAYER\'S OWN trap (s.gwTrap). Player-initiated; not ambient pressure.' },
-  { line: 22572, kind: 'player', cover: null, via: 'faceTentIntruder',
+  { line: 22591, kind: 'player', cover: null, via: 'faceTentIntruder',
     note: 'player clicks "Face it" on the tent intruder (app.js:16385/17857). Player-initiated.' },
 ];
 
@@ -85,11 +85,11 @@ const OTHER_SITES = [
 
 // ENGINE sanctity gates (every tableActive check in game.js):
 const GATES = [
-  { line: 7307, fn: 'resolvePatrol', what: 'nearestWorldMonster nulled — patrols walk an empty perimeter' },
-  { line: 11060, fn: 'exitBuilding (hall-door)', what: 'door-fled stash HELD mid-finale (not consumed) — r10 gate' },
-  { line: 11122, fn: 'treelineAmbush', what: 'returns false mid-finale, killer stash intact — r10 gate' },
-  { line: 18818, fn: 'villagerMonsterTick', what: 'early return — no wild encounters target villagers' },
-  { line: 21683, fn: 'monsterTurn', what: 'ambient contact block gated — hummice/dark/stance sites cannot engage — r10 gate' },
+  { line: 7326, fn: 'resolvePatrol', what: 'nearestWorldMonster nulled — patrols walk an empty perimeter' },
+  { line: 11079, fn: 'exitBuilding (hall-door)', what: 'door-fled stash HELD mid-finale (not consumed) — r10 gate' },
+  { line: 11141, fn: 'treelineAmbush', what: 'returns false mid-finale, killer stash intact — r10 gate' },
+  { line: 18837, fn: 'villagerMonsterTick', what: 'early return — no wild encounters target villagers' },
+  { line: 21702, fn: 'monsterTurn', what: 'ambient contact block gated — hummice/dark/stance sites cannot engage — r10 gate' },
 ];
 
 function findCallSites(src) {
