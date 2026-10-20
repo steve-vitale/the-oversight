@@ -24,6 +24,9 @@
 //                            reads state BEFORE playerDeath mutates anything)
 //   Game.havenRaidTick    — raid-night ledger (day + fired) so deaths can be
 //                            joined to raid nights (empty-draft shape)
+//   Game.say              — stand-beat counter (the lever's visible beat:
+//                            "Not alone. Not this time.") — read-only line
+//                            match, zero state writes.
 //
 // Death-time ctx fields (all pure reads; every read guarded):
 //   day, cause (the playerDeath arg), who (Game.villagerId), atHaven,
@@ -147,6 +150,7 @@ function install(Game, t) {
   t.kills = [];
   t.deaths = [];
   t.raidNights = [];
+  t.standBeats = 0;
   const orig = {};
   const uninstall = () => {
     for (const name of Object.keys(orig)) {
@@ -219,6 +223,17 @@ function install(Game, t) {
       if (!pre) return;
       try { t.raidNights.push({ day: pre.day, fired: !!r }); } catch (e) { err(t, 'pushRaid', e); }
     });
+
+  // Game.say — stand-beat counter (read-only line match).
+  try {
+    const oSay = Game.say.bind(Game);
+    orig.say = Game.say;
+    Game.say = function (line) {
+      try { if (/Not alone\. Not this time/.test(String(line))) t.standBeats++; }
+      catch (e) { err(t, 'say.before', e); }
+      return oSay.apply(this, arguments);
+    };
+  } catch (e) { err(t, 'say.install', e); }
 
   return uninstall;
 }

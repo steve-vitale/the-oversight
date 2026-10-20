@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// killattr-sweep-20261020.js — CONTROL corpus for arm sim-killeraftermath
-// (flesh-out loop run fleshout-20261020T2015Z, axis scale-onramp). DIAGNOSTIC
-// PHASE: control-only, zero game-side changes, zero policy layers beyond the
-// substrate.
+// killattr-sweep-20261020.js — corpus sweep for arm sim-killeraftermath
+// (flesh-out loop run fleshout-20261020T2015Z, axis scale-onramp).
+// ARM=control: DIAGNOSTIC (control-only, zero game-side changes).
+// ARM=armed: PILOT (KILLERSTAND=1 — the village-stands-the-draw lever).
 //
 // Substrate (EXACT w5doormeasure stack, composed never edited):
 //   policyFor: withSeatDrive(withWinDefer(withVetrel(withReposition(TF base))))
@@ -50,6 +50,10 @@ for (const k of ['VETREL', 'REPOSITION', 'VETSHAPE']) {
 }
 if (!SW.policyFor) { console.error('SWEEP STOP: probe-w5path policyFor missing.'); process.exit(2); }
 if (!KA.instrumentOn()) { console.error('SWEEP STOP: KILLATTR instrument off despite KILLATTR=1.'); process.exit(2); }
+const ARM = process.env.ARM || 'control';
+if (ARM !== 'control' && ARM !== 'armed') { console.error('SWEEP STOP: ARM=control|armed is required.'); process.exit(2); }
+if (ARM === 'armed' && process.env.KILLERSTAND !== '1') { console.error('SWEEP STOP: armed requires KILLERSTAND=1.'); process.exit(2); }
+if (ARM === 'control' && process.env.KILLERSTAND === '1') { console.error('SWEEP STOP: control must run with KILLERSTAND unset.'); process.exit(2); }
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10))
   : [64001, 64002, 64003, 64004, 64005, 64006, 64007, 64008]).filter(Number.isFinite);
@@ -59,16 +63,23 @@ const ONLY = (process.env.ONLY || '').toLowerCase();
 const POLICIES = ['leadfeast', 'belongfeast'].filter(p => !ONLY || p === ONLY);
 const SMOKE = process.env.SMOKE === '1';
 const RESUME = process.env.RESUME === '1';
-const EVID = path.join(__dirname, '..', 'evidence', '2026-10-20', 'perseed-killattr', 'control');
+const EVID = path.join(__dirname, '..', 'evidence', '2026-10-20', 'perseed-killattr', ARM);
 fs.mkdirSync(EVID, { recursive: true });
 
 function gday(G) { try { return (G.state && G.state.scholar && G.state.scholar.day) | 0 || 0; } catch (e) { return 0; } }
+function readVets5(G) {
+  try {
+    const r = G.waveCombatReadiness ? G.waveCombatReadiness(5) : null;
+    return r ? (r.veterans | 0) : 0;
+  } catch (e) { return 0; }
+}
 
 async function runOne(seed, policyId) {
   const policy = SW.policyFor(policyId);
   const { Game } = await loadGame({ seed, mode: 'killattr', fullTelemetry: false });
   const t = {};
   const uninstall = KA.install(Game, t);
+  let vets5max = 0;
 
   await setupGame(Game);
   let result;
@@ -79,6 +90,7 @@ async function runOne(seed, policyId) {
     let r;
     if (wrappedDaily) { try { r = wrappedDaily(G, ctx); } catch (e) {} }
     try { hashes.push(gday(G) + ':' + dayHash(Game)); } catch (e) {}
+    try { if (readVets5(G) > vets5max) vets5max = readVets5(G); } catch (e) {}
     return r;
   };
   await quietLog(async () => { result = await runDays(Game, pol, { days: daysNow(), manifest: undefined, sampleEvery: 30 }); });
@@ -93,13 +105,15 @@ async function runOne(seed, policyId) {
   try { won = !!Game.won; } catch (e) {}
 
   const out = {
-    seed, policyId, days: daysNow(), gameDays,
+    arm: ARM, seed, policyId, days: daysNow(), gameDays,
     endReason: result.endReason || null, maxWave, maxRank, everTable, won,
     instrumentErrors: (t.instrumentErrors || []).slice(0, 20),
     instrumentErrorCount: (t.instrumentErrors || []).length,
+    standBeats: t.standBeats | 0,  // lever engagement: "Not alone. Not this time."
     kills: t.kills || [],        // wave-4+ kills with kill-time ctx
     deaths: t.deaths || [],      // player deaths with death-time ctx
     raidNights: t.raidNights || [],
+    vets5max,                    // max 2-living-veterans bar over the run (secondary)
     hashes,
   };
   const dir = path.join(EVID, policyId);
@@ -117,17 +131,17 @@ async function runOne(seed, policyId) {
     for (const seed of seeds) {
       const outFp = path.join(EVID, policyId, `s${seed}.json`);
       if (RESUME && fs.existsSync(outFp)) {
-        console.log(`[control] ${policyId} s${seed}: resumed (already complete)`);
+        console.log(`[${ARM}] ${policyId} s${seed}: resumed (already complete)`);
         done++;
         continue;
       }
       try {
         const out = await runOne(seed, policyId);
         done++;
-        console.log(`[control] ${policyId} s${seed}: days=${out.gameDays} wave=${out.maxWave} kills=${out.kills.length} deaths=${out.deaths.length} raids=${out.raidNights.length} end=${out.endReason}`);
+        console.log(`[${ARM}] ${policyId} s${seed}: days=${out.gameDays} wave=${out.maxWave} kills=${out.kills.length} deaths=${out.deaths.length} raids=${out.raidNights.length} end=${out.endReason}`);
       } catch (e) {
         errors++;
-        console.error(`[control] ${policyId} s${seed}: ERROR ${e && e.message}`);
+        console.error(`[] ${policyId} s${seed}: ERROR ${e && e.message}`);
       }
     }
   }
