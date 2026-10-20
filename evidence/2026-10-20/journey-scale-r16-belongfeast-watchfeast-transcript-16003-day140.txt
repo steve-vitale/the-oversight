@@ -1,0 +1,12 @@
+=== seed 16003 day 140 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter temperament=steady trust=25 dead=false mood=grieving
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:memory:feast, menu:more, dlg:subject, leave, silence)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Diana and Wei this week. I keep setting out extra portions. Stupid."
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Talking helps. A little. Thank you."
+want final: id=ask_favor stage=3 resolution=unresolved

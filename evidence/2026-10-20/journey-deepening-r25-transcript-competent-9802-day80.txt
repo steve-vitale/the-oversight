@@ -1,0 +1,29 @@
+=== seed 9802 day 80 — conversation with Jordan (gen_dtouj5k) ===
+occupation=chimney sweep temperament=bold trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: deflect_q, ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid. That's the truth of it."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Dieter owed me a favor. I keep thinking about collecting. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I keep turning over the last thing Dieter said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Dieter. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "I should go. You know where to find me."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,860 @@
+{
+ "generated": "sim-wintrack-audit 2026-10-20",
+ "armedDir": "/home/hatch/workspace/worktrees/sim-wintrack-audit/evidence/2026-10-20/perseed-tablepathdriver",
+ "ctrlDir": "/home/hatch/workspace/worktrees/sim-wintrack-audit/evidence/2026-10-20/perseed-tablepathdriver-control",
+ "armed": {
+  "n": 16,
+  "wins": 12,
+  "nonwins": 4,
+  "unexplained": [],
+  "completeness": 1,
+  "byDoor": {
+   "witness/light": {
+    "door": "witness",
+    "branch": "light",
+    "runs": [
+     "belongfeast-s64201",
+     "belongfeast-s64202",
+     "leadfeast-s64202"
+    ]
+   },
+   "relay/dark": {
+    "door": "relay",
+    "branch": "dark",
+    "runs": [
+     "belongfeast-s64203",
+     "leadfeast-s64203",
+     "leadfeast-s64204",
+     "leadfeast-s64206",
+     "leadfeast-s64208"
+    ]
+   },
+   "defiant/light": {
+    "door": "defiant",
+    "branch": "light",
+    "runs": [
+     "belongfeast-s64206",
+     "belongfeast-s64208",
+     "leadfeast-s64205",
+     "leadfeast-s64207"
+    ]
+   }
+  },
+  "reach": {
+   "feared": {
+    "engaged": [],
+    "walked": [],
+    "won": [],
+    "earnedEvidence": []
+   },
+   "indispensable": {
+    "engaged": [],
+    "walked": [],
+    "won": [],
+    "earnedEvidence": []
+   },
+   "beloved": {
+    "engaged": [],
+    "walked": [],
+    "won": [],
+    "earnedEvidence": []
+   },
+   "witness": {
+    "engaged": [
+     "belongfeast-s64201",
+     "belongfeast-s64202",
+     "leadfeast-s64202"
+    ],
+    "walked": [
+     "belongfeast-s64201",
+     "belongfeast-s64202",
+     "leadfeast-s64202"
+    ],
+    "won": [
+     "belongfeast-s64201",
+     "belongfeast-s64202",
+     "leadfeast-s64202"
+    ],
+    "earnedEvidence": [
+     "belongfeast-s64202: assigned-miss: The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+    ]
+   },
+   "assimilated": {
+    "engaged": [],
+    "walked": [],
+    "won": [],
+    "earnedEvidence": []
+   },
+   "defiant": {
+    "engaged": [
+     "belongfeast-s64206",
+     "belongfeast-s64208",
+     "leadfeast-s64205",
+     "leadfeast-s64207"
+    ],
+    "walked": [
+     "belongfeast-s64206",
+     "belongfeast-s64208",
+     "leadfeast-s64205",
+     "leadfeast-s64207"
+    ],
+    "won": [
+     "belongfeast-s64206",
+     "belongfeast-s64208",
+     "leadfeast-s64205",
+     "leadfeast-s64207"
+    ],
+    "earnedEvidence": []
+   },
+   "relay": {
+    "engaged": [
+     "belongfeast-s64203",
+     "leadfeast-s64203",
+     "leadfeast-s64204",
+     "leadfeast-s64206",
+     "leadfeast-s64208"
+    ],
+    "walked": [],
+    "won": [
+     "belongfeast-s64203",
+     "leadfeast-s64203",
+     "leadfeast-s64204",
+     "leadfeast-s64206",
+     "leadfeast-s64208"
+    ],
+    "earnedEvidence": []
+   }
+  },
+  "legs": {
+   "leg1_relayWalks": [
+    "belongfeast-s64203",
+    "leadfeast-s64203",
+    "leadfeast-s64204",
+    "leadfeast-s64206",
+    "leadfeast-s64208"
+   ],
+   "leg2_defiantWalks": [
+    "belongfeast-s64206",
+    "belongfeast-s64208",
+    "leadfeast-s64205",
+    "leadfeast-s64207"
+   ],
+   "leg3_indispensableWitness": [
+    {
+     "tag": "belongfeast-s64201",
+     "wonDoor": "witness"
+    },
+    {
+     "tag": "belongfeast-s64202",
+     "wonDoor": "witness"
+    },
+    {
+     "tag": "leadfeast-s64202",
+     "wonDoor": "witness"
+    }
+   ],
+   "leg4_ledgerDarkMargins": [
+    "belongfeast-s64201",
+    "belongfeast-s64202",
+    "belongfeast-s64206",
+    "belongfeast-s64208",
+    "leadfeast-s64202",
+    "leadfeast-s64205",
+    "leadfeast-s64207"
+   ],
+   "leg5_relayDarkBand": [
+    {
+     "tag": "belongfeast-s64203",
+     "rd": {
+      "active": true,
+      "claimed": 1,
+      "lean": -48,
+      "grounding": 44,
+      "darkUses": 8
+     }
+    },
+    {
+     "tag": "leadfeast-s64203",
+     "rd": {
+      "active": true,
+      "claimed": 1,
+      "lean": -96,
+      "grounding": 55,
+      "darkUses": 8
+     }
+    },
+    {
+     "tag": "leadfeast-s64204",
+     "rd": {
+      "active": true,
+      "claimed": 1,
+      "lean": -48,
+      "grounding": 44,
+      "darkUses": 8
+     }
+    },
+    {
+     "tag": "leadfeast-s64206",
+     "rd": {
+      "active": true,
+      "claimed": 1,
+      "lean": -52,
+      "grounding": 45,
+      "darkUses": 9
+     }
+    },
+    {
+     "tag": "leadfeast-s64208",
+     "rd": {
+      "active": true,
+      "claimed": 1,
+      "lean": -52,
+      "grounding": 48,
+      "darkUses": 9
+     }
+    }
+   ]
+  },
+  "runs": [
+   {
+    "tag": "belongfeast-s64201",
+    "won": true,
+    "door": "witness",
+    "branch": "light",
+    "via": "endRec.tb",
+    "mechanism": "win through witness/light — doorEvents=[witness(as)] walked=[witness/light] finals=witness/light@d100 seat=lesser beat=3 margins=recorded",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 100,
+      "picked": "witness",
+      "fellBack": false,
+      "why": "assigned+witness",
+      "missWhy": null
+     }
+    ],
+    "walked": [
+     {
+      "day": 100,
+      "path": "witness",
+      "branch": "light",
+      "fellBack": false
+     }
+    ],
+    "finals": [
+     {
+      "day": 100,
+      "path": "witness",
+      "branch": "light",
+      "finalId": "final:charges"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": true,
+    "rdAtEnd": null
+   },
+   {
+    "tag": "belongfeast-s64202",
+    "won": true,
+    "door": "witness",
+    "branch": "light",
+    "via": "endRec.tb",
+    "mechanism": "win through witness/light — doorEvents=[witness(fb)] walked=[witness/light] finals=witness/light@d90 seat=lesser beat=3 margins=recorded",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 90,
+      "picked": "witness",
+      "fellBack": true,
+      "why": "fallback: assigned=indispensable not earned/offered; earned=[feared,beloved,witness,assimilated,defiant,relay]",
+      "missWhy": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+     }
+    ],
+    "walked": [
+     {
+      "day": 90,
+      "path": "witness",
+      "branch": "light",
+      "fellBack": true
+     }
+    ],
+    "finals": [
+     {
+      "day": 90,
+      "path": "witness",
+      "branch": "light",
+      "finalId": "final:charges"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": true,
+    "rdAtEnd": null
+   },
+   {
+    "tag": "belongfeast-s64203",
+    "won": true,
+    "door": "relay",
+    "branch": "dark",
+    "via": "endRec.tb",
+    "mechanism": "win through relay/dark — doorEvents=[relay(as)] walked=[none] finals=relay/dark@d115 seat=lesser beat=4 margins=absent",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 115,
+      "picked": "relay",
+      "fellBack": false,
+      "why": "assigned+relay",
+      "missWhy": null
+     }
+    ],
+    "walked": [],
+    "finals": [
+     {
+      "day": 115,
+      "path": "relay",
+      "branch": "dark",
+      "finalId": "final:voice"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": false,
+    "rdAtEnd": {
+     "active": true,
+     "claimed": 1,
+     "lean": -48,
+     "grounding": 44,
+     "darkUses": 8
+    }
+   },
+   {
+    "tag": "belongfeast-s64204",
+    "won": false,
+    "door": null,
+    "branch": null,
+    "via": null,
+    "mechanism": "village collapsed d38 before the table was ever announced (tableDay=None) — assigned door defiant never engaged (answers=0); death channels: {\"monster\":2,\"a wound that wouldn't close\":2,\"combat\":1,\"sickness\":1,\"starvation\":1}",
+    "stallClass": "pre-table-collapse",
+    "unexplained": false,
+    "doorEvents": [],
+    "walked": [],
+    "finals": [],
+    "notes": []
+   },
+   {
+    "tag": "belongfeast-s64205",
+    "won": false,
+    "door": null,
+    "branch": null,
+    "via": null,
+    "mechanism": "table announced d45 but the village collapsed d69 before sitting — assigned door relay never engaged; death channels: {\"monster\":1,\"starvation\":1,\"combat\":5,\"The Reunion\":1}",
+    "stallClass": "invitation-window-collapse",
+    "unexplained": false,
+    "doorEvents": [],
+    "walked": [],
+    "finals": [],
+    "notes": []
+   },
+   {
+    "tag": "belongfeast-s64206",
+    "won": true,
+    "door": "defiant",
+    "branch": "light",
+    "via": "endRec.tb",
+    "mechanism": "win through defiant/light — doorEvents=[defiant(as)] walked=[defiant/light] finals=defiant/light@d90 seat=lesser beat=4 margins=recorded",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 90,
+      "picked": "defiant",
+      "fellBack": false,
+      "why": "assigned+defiant",
+      "missWhy": null
+     }
+    ],
+    "walked": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "fellBack": false
+     }
+    ],
+    "finals": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "finalId": "final:walk"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": true,
+    "rdAtEnd": null
+   },
+   {
+    "tag": "belongfeast-s64207",
+    "won": false,
+    "door": null,
+    "branch": null,
+    "via": null,
+    "mechanism": "survived to d182 but the table never announced (tableActiveDays=0, maxWave=3); relaydark road completed d60 (lean=-48, darkUses=8) — road-active stall",
+    "stallClass": "no-invitation-stall",
+    "unexplained": false,
+    "doorEvents": [],
+    "walked": [],
+    "finals": [],
+    "notes": []
+   },
+   {
+    "tag": "belongfeast-s64208",
+    "won": true,
+    "door": "defiant",
+    "branch": "light",
+    "via": "endRec.tb",
+    "mechanism": "win through defiant/light — doorEvents=[defiant(as)] walked=[defiant/light] finals=defiant/light@d90 seat=lesser beat=4 margins=recorded",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 90,
+      "picked": "defiant",
+      "fellBack": false,
+      "why": "assigned+defiant",
+      "missWhy": null
+     }
+    ],
+    "walked": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "fellBack": false
+     }
+    ],
+    "finals": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "finalId": "final:walk"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": true,
+    "rdAtEnd": null
+   },
+   {
+    "tag": "leadfeast-s64201",
+    "won": false,
+    "door": null,
+    "branch": null,
+    "via": null,
+    "mechanism": "table announced d48 but the village collapsed d83 before sitting — assigned door indispensable never engaged; death channels: {\"monster\":2,\"dehydration\":1,\"starvation\":1,\"a wound that wouldn't close\":1,\"combat\":9,\"Hummice\":1,\"thirst\":1}",
+    "stallClass": "invitation-window-collapse",
+    "unexplained": false,
+    "doorEvents": [],
+    "walked": [],
+    "finals": [],
+    "notes": []
+   },
+   {
+    "tag": "leadfeast-s64202",
+    "won": true,
+    "door": "witness",
+    "branch": "light",
+    "via": "endRec.tb",
+    "mechanism": "win through witness/light — doorEvents=[witness(as)] walked=[witness/light] finals=witness/light@d90 seat=lesser beat=3 margins=recorded",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 90,
+      "picked": "witness",
+      "fellBack": false,
+      "why": "assigned+witness",
+      "missWhy": null
+     }
+    ],
+    "walked": [
+     {
+      "day": 90,
+      "path": "witness",
+      "branch": "light",
+      "fellBack": false
+     }
+    ],
+    "finals": [
+     {
+      "day": 90,
+      "path": "witness",
+      "branch": "light",
+      "finalId": "final:charges"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": true,
+    "rdAtEnd": null
+   },
+   {
+    "tag": "leadfeast-s64203",
+    "won": true,
+    "door": "relay",
+    "branch": "dark",
+    "via": "endRec.tb",
+    "mechanism": "win through relay/dark — doorEvents=[relay(as)] walked=[none] finals=relay/dark@d95 seat=lesser beat=4 margins=absent",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 95,
+      "picked": "relay",
+      "fellBack": false,
+      "why": "assigned+relay",
+      "missWhy": null
+     }
+    ],
+    "walked": [],
+    "finals": [
+     {
+      "day": 95,
+      "path": "relay",
+      "branch": "dark",
+      "finalId": "final:voice"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": false,
+    "rdAtEnd": {
+     "active": true,
+     "claimed": 1,
+     "lean": -96,
+     "grounding": 55,
+     "darkUses": 8
+    }
+   },
+   {
+    "tag": "leadfeast-s64204",
+    "won": true,
+    "door": "relay",
+    "branch": "dark",
+    "via": "endRec.tb",
+    "mechanism": "win through relay/dark — doorEvents=[relay(as)] walked=[none] finals=relay/dark@d155 seat=lesser beat=4 margins=absent",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 155,
+      "picked": "relay",
+      "fellBack": false,
+      "why": "assigned+relay",
+      "missWhy": null
+     }
+    ],
+    "walked": [],
+    "finals": [
+     {
+      "day": 155,
+      "path": "relay",
+      "branch": "dark",
+      "finalId": "final:voice"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": false,
+    "rdAtEnd": {
+     "active": true,
+     "claimed": 1,
+     "lean": -48,
+     "grounding": 44,
+     "darkUses": 8
+    }
+   },
+   {
+    "tag": "leadfeast-s64205",
+    "won": true,
+    "door": "defiant",
+    "branch": "light",
+    "via": "endRec.tb",
+    "mechanism": "win through defiant/light — doorEvents=[defiant(as)] walked=[defiant/light] finals=defiant/light@d90 seat=lesser beat=4 margins=recorded",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 90,
+      "picked": "defiant",
+      "fellBack": false,
+      "why": "assigned+defiant",
+      "missWhy": null
+     }
+    ],
+    "walked": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "fellBack": false
+     }
+    ],
+    "finals": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "finalId": "final:walk"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": true,
+    "rdAtEnd": null
+   },
+   {
+    "tag": "leadfeast-s64206",
+    "won": true,
+    "door": "relay",
+    "branch": "dark",
+    "via": "endRec.tb",
+    "mechanism": "win through relay/dark — doorEvents=[relay(as)] walked=[none] finals=relay/dark@d91 seat=lesser beat=4 margins=absent",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 91,
+      "picked": "relay",
+      "fellBack": false,
+      "why": "assigned+relay",
+      "missWhy": null
+     }
+    ],
+    "walked": [],
+    "finals": [
+     {
+      "day": 91,
+      "path": "relay",
+      "branch": "dark",
+      "finalId": "final:voice"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": false,
+    "rdAtEnd": {
+     "active": true,
+     "claimed": 1,
+     "lean": -52,
+     "grounding": 45,
+     "darkUses": 9
+    }
+   },
+   {
+    "tag": "leadfeast-s64207",
+    "won": true,
+    "door": "defiant",
+    "branch": "light",
+    "via": "endRec.tb",
+    "mechanism": "win through defiant/light — doorEvents=[defiant(as)] walked=[defiant/light] finals=defiant/light@d90 seat=lesser beat=4 margins=recorded",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 90,
+      "picked": "defiant",
+      "fellBack": false,
+      "why": "assigned+defiant",
+      "missWhy": null
+     }
+    ],
+    "walked": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "fellBack": false
+     }
+    ],
+    "finals": [
+     {
+      "day": 90,
+      "path": "defiant",
+      "branch": "light",
+      "finalId": "final:walk"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": true,
+    "rdAtEnd": null
+   },
+   {
+    "tag": "leadfeast-s64208",
+    "won": true,
+    "door": "relay",
+    "branch": "dark",
+    "via": "endRec.tb",
+    "mechanism": "win through relay/dark — doorEvents=[relay(as)] walked=[none] finals=relay/dark@d91 seat=lesser beat=4 margins=absent",
+    "stallClass": null,
+    "unexplained": false,
+    "doorEvents": [
+     {
+      "day": 91,
+      "picked": "relay",
+      "fellBack": false,
+      "why": "assigned+relay",
+      "missWhy": null
+     }
+    ],
+    "walked": [],
+    "finals": [
+     {
+      "day": 91,
+      "path": "relay",
+      "branch": "dark",
+      "finalId": "final:voice"
+     }
+    ],
+    "notes": [],
+    "hasBranchMargins": false,
+    "rdAtEnd": {
+     "active": true,
+     "claimed": 1,
+     "lean": -52,
+     "grounding": 48,
+     "darkUses": 9
+    }
+   }
+  ]
+ },
+ "control": {
+  "n": 16,
+  "wins": 12,
+  "nonwins": [
+   {
+    "tag": "belongfeast-s64204",
+    "endReason": "village-lost",
+    "gameDays": 38,
+    "satEver": false,
+    "tableDay": null,
+    "unexplained": false,
+    "mechanism": "village-lost d38, never sat (natural track never reached the table)"
+   },
+   {
+    "tag": "leadfeast-s64201",
+    "endReason": "village-lost",
+    "gameDays": 83,
+    "satEver": false,
+    "tableDay": 48,
+    "unexplained": false,
+    "mechanism": "village-lost d83, never sat (natural track never reached the table)"
+   },
+   {
+    "tag": "leadfeast-s64203",
+    "endReason": "village-lost",
+    "gameDays": 84,
+    "satEver": false,
+    "tableDay": 80,
+    "unexplained": false,
+    "mechanism": "village-lost d84, never sat (natural track never reached the table)"
+   },
+   {
+    "tag": "leadfeast-s64206",
+    "endReason": "village-lost",
+    "gameDays": 114,
+    "satEver": false,
+    "tableDay": null,
+    "unexplained": false,
+    "mechanism": "village-lost d114, never sat (natural track never reached the table)"
+   }
+  ],
+  "dist": {
+   "feared/light": 12
+  },
+  "winDoors": [
+   {
+    "tag": "belongfeast-s64201",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "belongfeast-s64202",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "belongfeast-s64203",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "belongfeast-s64205",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "belongfeast-s64206",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "belongfeast-s64207",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "belongfeast-s64208",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "leadfeast-s64202",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "leadfeast-s64204",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "leadfeast-s64205",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "leadfeast-s64207",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   },
+   {
+    "tag": "leadfeast-s64208",
+    "door": "feared",
+    "branch": "light",
+    "seat": "lesser",
+    "unexplained": false
+   }
+  ],
+  "unexplained": []
+ }
+}

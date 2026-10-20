@@ -1,0 +1,15 @@
+=== seed 9804 day 60 — conversation with Wilhelm (gen_2ohcgv7) ===
+occupation=pottery instructor temperament=earnest trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: agency:ask_expedition, gq:open:take, gq:open:unsure, gq:open:honest_pass, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=ask_favor stage=1)
+YOU: [dlg:cant] "I can't right now."
+THEM: "No, yeah, of course. Forget I asked." They won't forget. They'll just stop asking.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talking. We'll figure it out."
+want final: id=ask_favor stage=3 resolution=deflected

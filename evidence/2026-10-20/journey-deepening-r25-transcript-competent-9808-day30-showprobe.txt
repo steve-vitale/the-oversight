@@ -1,0 +1,21 @@
+=== seed 9808 day 30 — conversation with Diana (diana_osei) ===
+occupation=paramedic temperament=bold trust=28 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you? Good talking."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:event:show, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Lisa? A fishing guide, back before. Solid person. That's the truth of it."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Let me be straight — My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Good talk. Now let's go DO something."
+want final: id=ask_favor stage=3 resolution=stated

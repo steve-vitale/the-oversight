@@ -1,0 +1,29 @@
+=== seed 9801 day 90 — conversation with Malika (visjoin_76) ===
+occupation=ER nurse temperament=earnest trust=28 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the sickness I'm fighting — the need hasn't gone anywhere. I'm still asking. I mean it."
+(turn0 choices: alive:event:mourning, alive:thread:gossip, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Renee headed out to find someone. I hope that helps."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Lamb's Quarters — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Prickly Pear — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Taro — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: "Alright. Catch you later."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

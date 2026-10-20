@@ -1,0 +1,12 @@
+=== seed 9802 day 88 — conversation with Sam (sam_wilson) ===
+occupation=bartender temperament=restless trust=84 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What day is it? ...Do you still count? I lost track days ago."
+(turn0 choices: agency:ask_expedition, ans:q_name_day:a_count, ans:q_name_day:a_lost, ans:q_name_day:a_guess, ans:q_name_day:honest_pass, leave, silence)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Right — things to do, always things to do."
+want final: id=curious stage=3 resolution=engaged

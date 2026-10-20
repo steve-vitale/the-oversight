@@ -1,0 +1,29 @@
+=== seed 16010 day 80 — conversation with Angela (app_mgpsphjk764) ===
+occupation=teacher temperament=sardonic trust=38 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Well — Don't mind me. Today's just heavy."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that. Anyway."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Anyway — I should get going."
+(want=seek_comfort stage=2)
+YOU: (leave)
+want final: id=seek_comfort stage=3 resolution=engaged

@@ -1,0 +1,31 @@
+=== seed 9805 day 45 — conversation with Jae (gen_x5kmulr) ===
+occupation=Social worker temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you left behind — Did you leave someone behind? ...Sorry. You don't have to answer that."
+(turn0 choices: ans:q_left_behind:a_yes, ans:q_left_behind:a_unknown, deflect_q, leave, silence)
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Leo headed out to forage."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Sari is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Jesse? A line cook, back before. Solid person."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Sari headed out to find someone."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Ines? A florist, back before. Solid person."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Word is you know what you're doing out there."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "...I need to go be quiet for a while."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

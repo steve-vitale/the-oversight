@@ -1,0 +1,24 @@
+=== seed 9806 day 29 — conversation with Jada (gen_446dc8c) ===
+occupation=carpenter temperament=intense trust=72 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: agency:ask_expedition, ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Héctor always took the burnt piece. Said someone had to. I take it now."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Listen to me — Dante is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 9802 day 62 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=90 dead=false mood=hungry
+want: repay (stage 1, fromSeed)
+
+THEM: "You said you'd help with the food I needed. ...It's done now. Forget it. ...sorry, I'm spiraling."
+(turn0 choices: alive:event:show, party_name, alive:thread:lately, dlg:cant, dlg:help, dlg:react, leave)
+YOU: [dlg:help] "What do you need?"
+THEM: "Good. Then we're square." They look lighter for it.
+(want=repay stage=2)
+YOU: [dlg:cant] "Don't worry about it."
+THEM: "Okay. Your call." They file it away — unpaid, and counted.
+(want=repay stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=repay stage=3)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "The Secret Deck. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=repay stage=3)
+YOU: [goon] "Keep going."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=repay stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? …if that makes sense."
+(want=repay stage=3)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Amina? A Midwife, back before. Solid person."
+(want=repay stage=3)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here."
+(want=repay stage=3)
+closing line: "Good talk."
+want final: id=repay stage=3 resolution=deflected

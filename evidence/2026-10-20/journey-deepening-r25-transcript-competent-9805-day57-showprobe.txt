@@ -1,0 +1,21 @@
+=== seed 9805 day 57 — conversation with Jae (gen_x5kmulr) ===
+occupation=Social worker temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about what's been happening — that was 10 days back. Still on your mind? 'Verónica is gone and the world just... continues. That's the part I can't stand.' No time to waste."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Daniyar headed out to find someone."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

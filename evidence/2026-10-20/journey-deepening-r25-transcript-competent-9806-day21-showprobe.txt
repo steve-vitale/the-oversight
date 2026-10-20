@@ -1,0 +1,12 @@
+=== seed 9806 day 21 — conversation with Yuki (yuki_mori) ===
+occupation=librarian temperament=cautious trust=10 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Don't mind me. Today's just heavy. That is all."
+(turn0 choices: betrayal:site:case_12, betrayal:witnesses:case_12, betrayal:investigate:case_12, betrayal:moot:case_12, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "Talking helps. A little. Thank you."
+want final: id=seek_comfort stage=3 resolution=unestablished

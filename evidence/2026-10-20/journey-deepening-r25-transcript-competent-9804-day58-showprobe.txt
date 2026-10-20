@@ -1,0 +1,32 @@
+=== seed 9804 day 58 — conversation with Yara (yara_haddad) ===
+occupation=interpreter temperament=cautious trust=50 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're angry — Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: deflect_q, ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful. ...at least, that's how it looks to me."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Common Plantain — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Grace? An ESL teacher, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Just... be straight with me."
+(want=curious stage=2)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

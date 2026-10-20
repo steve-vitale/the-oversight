@@ -1,0 +1,27 @@
+=== seed 9806 day 91 — conversation with Jada (gen_446dc8c) ===
+occupation=carpenter temperament=intense trust=89 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "My cut needs a second pair of hands. Could you clean it out for me? Please."
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, betrayal:accept, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "I won The Blood Tithe. On camera. People won't shut up about it — and honestly? Neither will I."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? I need you to hear that."
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Don't waste what we talked about."
+want final: id=ask_favor stage=3 resolution=unresolved

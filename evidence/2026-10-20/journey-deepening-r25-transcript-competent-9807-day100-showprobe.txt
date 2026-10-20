@@ -1,0 +1,12 @@
+=== seed 9807 day 100 — conversation with Yuki (yuki_mori) ===
+occupation=librarian temperament=cautious trust=75 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days, as it were."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

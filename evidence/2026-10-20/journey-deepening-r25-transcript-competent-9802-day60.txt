@@ -1,0 +1,12 @@
+=== seed 9802 day 60 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking. Probably fine. Probably."
+(turn0 choices: alive:event:show, party_name, alive:thread:lately, dlg:cant, dlg:commit, dlg:subject, leave)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=ask_favor stage=3 resolution=promised

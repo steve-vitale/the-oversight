@@ -1,0 +1,27 @@
+=== seed 9802 day 40 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter temperament=steady trust=26 dead=false mood=steady
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — Okay, so — something happened this morning. That's where we are."
+(turn0 choices: confront:d_nrt41nb, alive:event:show, alive:want:share_news, dlg:invite, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? That's the whole of it."
+(want=share_news stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "cuts close faster when Kelsey wraps them. Don't ask me how."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Not that it matters."
+(want=share_news stage=1)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Sassafras — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=share_news stage=1)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=share_news stage=1)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=share_news stage=1)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=share_news stage=3 resolution=unresolved

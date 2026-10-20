@@ -1,0 +1,24 @@
+=== seed 9806 day 80 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=69 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "You said shock got you through the first week. Just kept moving. What's carrying you now?"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence, confront:d_hx4h2ln)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? That's my read."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Erin? A paramedic, back before. Solid person."
+(want=ask_favor stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Extremely normal, all of it."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "I've had worse talks. Today, even."
+want final: id=ask_favor stage=3 resolution=unestablished

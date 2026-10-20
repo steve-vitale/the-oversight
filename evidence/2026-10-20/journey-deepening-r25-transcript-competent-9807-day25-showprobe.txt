@@ -1,0 +1,15 @@
+=== seed 9807 day 25 — conversation with Brian (brian_otieno) ===
+occupation=zookeeper temperament=gentle trust=40 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Could you clean it out for me? Please."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, betrayal:site:case_8, betrayal:witnesses:case_8, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. That is all."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Thanks for listening. I mean that."
+want final: id=ask_favor stage=3 resolution=unresolved

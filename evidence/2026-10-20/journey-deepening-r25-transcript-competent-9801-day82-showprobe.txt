@@ -1,0 +1,18 @@
+=== seed 9801 day 82 — conversation with Diana (diana_osei) ===
+occupation=paramedic temperament=bold trust=64 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I hate to ask twice, but it's still open. Will you? Anyway, that's me."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:event:mourning, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Oh! Malika headed out to find someone."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=stated

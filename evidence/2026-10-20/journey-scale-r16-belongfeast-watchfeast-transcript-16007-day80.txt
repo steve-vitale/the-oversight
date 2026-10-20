@@ -1,0 +1,32 @@
+=== seed 16007 day 80 — conversation with Camila (app_mgpspib7236) ===
+occupation=hunter temperament=cautious trust=36 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "My cut needs a second pair of hands. Could you take a look?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "I think — Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I dreamed Ingrid was still here. Woke up angry at the dream. Stupid."
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+(want=ask_favor stage=3)
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: "Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters. Thank you for asking."
+(want=ask_favor stage=3)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=promised

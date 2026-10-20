@@ -1,0 +1,32 @@
+=== seed 9802 day 70 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=90 dead=false mood=hungry
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? I've been writing letters I'll never send. I'm ashamed and I can't stop."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, party_name)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Does anyone else know?"
+THEM: "That's the whole of it. Sorry."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind? Makes sense to me."
+(want=seek_taken stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You asked me that before. It's a different question now." "They took you — The Witness, on the screens. The whole fire watched. Nobody knew where to look."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "People are paranoid. Caleb hasn't done a thing."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=0)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=seek_taken stage=3 resolution=unestablished

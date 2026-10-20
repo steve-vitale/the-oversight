@@ -1,0 +1,31 @@
+=== seed 9806 day 94 — conversation with Erin (gen_q81vded) ===
+occupation=paramedic temperament=fidgety trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Oh! Can I tell you something? I've been sneaking out at night. I'm ashamed and I can't stop."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Oh! Oh — Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind? Right. Right."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Someone should talk to Thabo. Not me, though."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=0)
+YOU: [teach] "Watch — this is useful."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=0)
+YOU: [teach] "Watch — this is useful."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=0)
+YOU: [teach] "Watch — this is useful."
+THEM: "Anyway — I should get going."
+(want=ask_favor stage=0)
+want final: id=ask_favor stage=3 resolution=unestablished

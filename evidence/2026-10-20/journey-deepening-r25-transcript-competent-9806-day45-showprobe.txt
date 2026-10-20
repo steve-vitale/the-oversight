@@ -1,0 +1,12 @@
+=== seed 9806 day 45 — conversation with Erin (gen_q81vded) ===
+occupation=paramedic temperament=fidgety trust=44 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, betrayal:accept, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Say it plain. Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

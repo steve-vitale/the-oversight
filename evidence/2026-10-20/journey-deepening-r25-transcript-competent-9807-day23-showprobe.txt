@@ -1,0 +1,15 @@
+=== seed 9807 day 23 — conversation with Andres (gen_peeiics) ===
+occupation=Pharmacist temperament=prickly trust=11 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "I asked Ethan about what got you through the first week — Ethan's gone. What got you through the first week? The very first days. That's the priority."
+(turn0 choices: ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, betrayal:accept, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "What's this about? Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Talking helps. A little. Thank you."
+want final: id=curious stage=3 resolution=engaged

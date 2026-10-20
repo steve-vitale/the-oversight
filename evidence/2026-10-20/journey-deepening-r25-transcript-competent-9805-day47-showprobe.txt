@@ -1,0 +1,32 @@
+=== seed 9805 day 47 — conversation with Jae (gen_x5kmulr) ===
+occupation=Social worker temperament=withdrawn trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Have you — sorry. I keep thinking about them."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Huh. Let me think about that." "Verónica is gone and the world just... continues. That's the part I can't stand."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Leo? A trail crew lead, back before. Solid person."
+(want=seek_comfort stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? ...sorry."
+(want=seek_comfort stage=0)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_comfort stage=0)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Purslane — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_comfort stage=0)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_comfort stage=3 resolution=unestablished

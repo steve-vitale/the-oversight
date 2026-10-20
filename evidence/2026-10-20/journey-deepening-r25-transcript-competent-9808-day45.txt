@@ -1,0 +1,12 @@
+=== seed 9808 day 45 — conversation with Bridget (gen_vnuww8k) ===
+occupation=farmer temperament=dry trust=90 dead=false mood=steady
+want: seek_taken (stage 0, fromSeed)
+
+THEM: "Can I tell you something? At night I cry quietly so no one hears."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=seek_taken stage=3 resolution=unestablished

@@ -1,0 +1,32 @@
+=== seed 9806 day 45 — conversation with Jada (gen_446dc8c) ===
+occupation=carpenter temperament=intense trust=89 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Where are you from — originally? Before all this."
+(turn0 choices: agency:ask_field, ans:q_origin:a_tell, ans:q_origin:a_vague, ans:q_origin:a_deflect, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "The water goes glass-still. That's the The Living Wire telling you it's about to move. It hunts at night — give the dark a wide berth."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "We need to — People need to stop whispering about Thabo. They've done nothing wrong."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Meera talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Erin? A paramedic, back before. Solid person."
+(want=curious stage=2)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

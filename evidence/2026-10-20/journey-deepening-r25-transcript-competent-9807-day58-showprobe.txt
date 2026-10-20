@@ -1,0 +1,32 @@
+=== seed 9807 day 58 — conversation with Yuki (yuki_mori) ===
+occupation=librarian temperament=cautious trust=56 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This cut — I can't clean it properly one-handed. Will you help me clean it?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Brian headed out to find someone."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Chickweed — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: "...Actually, forget it."
+(want=ask_favor stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Purslane — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=1)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,15 @@
+=== seed 9806 day 60 — conversation with Jada (gen_446dc8c) ===
+occupation=carpenter temperament=intense trust=89 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing. Don't look away from this."
+(turn0 choices: agency:ask_field, ans:q_song:a_yes, ans:q_song:a_no, ans:q_song:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=1)
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "We're done here. For now."
+want final: id=curious stage=3 resolution=engaged
