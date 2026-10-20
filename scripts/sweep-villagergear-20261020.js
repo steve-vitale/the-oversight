@@ -79,8 +79,16 @@ function stackFor(base, tag) {
   if (ARM === 'vgear') return VG.withVillagerGear(s, tag + '-vgear', tag + ' + villagergear');
   return s;
 }
-function policyFor(base) { return stackFor(base === 'lead' ? TF.leadfeast : TF.belongfeast, base === 'lead' ? 'leadfeast' : 'belongfeast'); }
-function policyTag(base) { return (base === 'lead' ? 'leadfeast' : 'belongfeast') + (ARM === 'vgear' ? '-vgear' : ''); }
+// Accept POLICIES in short ('lead'/'belong') or full ('leadfeast'/'belongfeast')
+// form; anything unrecognized FAILS LOUD instead of silently mapping.
+function normBase(base) {
+  if (base === 'lead' || base === 'leadfeast') return 'leadfeast';
+  if (base === 'belong' || base === 'belongfeast') return 'belongfeast';
+  console.error(`SWEEP STOP: unrecognized POLICIES entry "${base}" (want lead|belong|leadfeast|belongfeast).`);
+  process.exit(2);
+}
+function policyFor(base) { const t = normBase(base); return stackFor(t === 'leadfeast' ? TF.leadfeast : TF.belongfeast, t); }
+function policyTag(base) { return normBase(base) + (ARM === 'vgear' ? '-vgear' : ''); }
 
 // via values that mean "a villager (not the scholar) landed the blow"
 const VILLAGER_VIA = new Set(['companion', 'patrol', 'wild', 'aid-crisis', 'contest', 'agency', 'sortie']);

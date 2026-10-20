@@ -15,7 +15,7 @@ const fs = require('fs');
 const path = require('path');
 const REPO = path.join(__dirname, '..');
 const DIR = path.join(REPO, 'evidence', '2026-10-20', 'perseed-villagergear-pilot');
-const SEEDS = [64001, 64002, 64003, 64004, 64005, 64006, 64007, 64008];
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10)) : [64001, 64002, 64003, 64004, 64005, 64006, 64007, 64008]).filter(Number.isFinite);
 const POLICIES = ['leadfeast', 'belongfeast'];
 
 function load(arm) {
@@ -62,16 +62,20 @@ for (const r of control) for (const k of Object.keys(r.deathCauses || {})) cMode
 for (const r of armed) for (const k of Object.keys(r.deathCauses || {})) aModes.add(k);
 const newModes = [...aModes].filter(m => !cModes.has(m) && ((armed.reduce((n, r) => n + ((r.deathCauses || {})[m] || 0), 0)) >= 2));
 
-console.log('=== sim-villagergear PILOT ===');
-console.log(`PRIMARY seeds w/ villager wave-4 kill: control ${cSeeds.length}/8 [${cSeeds.join(',')}], armed ${aSeeds.length}/8 [${aSeeds.join(',')}] (GO bar >= 2/8 armed)`);
-console.log(`  -> ${aSeeds.length >= 2 ? 'GO' : 'NO-GO'}`);
-console.log(`SECONDARY runs w/ 2-living-veterans bar met: control ${cVetRuns}/16, armed ${aVetRuns}/16 (bar >= 2/16 armed)`);
+const nSeeds = SEEDS.length, nRuns = nSeeds * POLICIES.length;
+const goBar = Math.ceil(nSeeds / 4); // 25% rate: 2/8 pilot, 4/16 confirm
+const vetBar = Math.ceil(nRuns / 8); // 2/16
+console.log(`=== sim-villagergear ${nSeeds === 8 ? 'PILOT' : 'CONFIRM'} ===`);
+console.log(`PRIMARY seeds w/ villager wave-4 kill: control ${cSeeds.length}/${nSeeds} [${cSeeds.join(',')}], armed ${aSeeds.length}/${nSeeds} [${aSeeds.join(',')}] (GO bar >= ${goBar}/${nSeeds} armed)`);
+console.log(`  -> ${aSeeds.length >= goBar ? 'GO' : 'NO-GO'}`);
+console.log(`SECONDARY runs w/ 2-living-veterans bar met: control ${cVetRuns}/${nRuns}, armed ${aVetRuns}/${nRuns} (bar >= ${vetBar}/${nRuns} armed)`);
 console.log('GUARDRAILS:');
 console.log(`  villager combat deaths: control ${cVillD}, armed ${aVillD} (bar <= ${Math.ceil(cVillD * 1.2)}) -> ${aVillD <= Math.ceil(cVillD * 1.2) ? 'PASS' : 'MISS'}`);
 console.log(`  median survival: control ${cMed}d, armed ${aMed}d (bar >= ${cMed - 10}d) -> ${aMed >= cMed - 10 ? 'PASS' : 'MISS'}`);
 console.log(`  starvation deaths: control ${cStarv}, armed ${aStarv} (bar <= ${cStarv}) -> ${aStarv <= cStarv ? 'PASS' : 'MISS'}`);
 console.log(`  new death modes (>=2 events): ${newModes.length ? newModes.join(', ') : 'none'} -> ${newModes.length ? 'MISS' : 'PASS'}`);
-console.log(`  wave-4 unlocks: control ${cW4}/16, armed ${aW4}/16 (bar +-2) -> ${Math.abs(aW4 - cW4) <= 2 ? 'PASS' : 'MISS'}`);
+const w4tol = Math.max(2, Math.round(nRuns / 8));
+console.log(`  wave-4 unlocks: control ${cW4}/${nRuns}, armed ${aW4}/${nRuns} (bar +-${w4tol}) -> ${Math.abs(aW4 - cW4) <= w4tol ? 'PASS' : 'MISS'}`);
 console.log('MECHANISM (armed vs control):');
 const avg = (rows, f) => rows.reduce((n, r) => n + f(r), 0) / rows.length;
 console.log(`  donations/run: ${avg(control, r => r.donations).toFixed(1)} -> ${avg(armed, r => r.donations).toFixed(1)}`);
@@ -90,7 +94,8 @@ for (const r of armed) for (const k of (r.w4killsDetail || [])) {
   if (k.by && k.by !== undefined) console.log(`  ${r.policy} s${r.seed} d${k.d} ${k.mid} by=${k.byName} via=${k.via}${k.trick ? ' trick=' + k.trick : ''}`);
 }
 const out = {
-  primary: { controlSeeds: cSeeds, armedSeeds: aSeeds, go: aSeeds.length >= 2 },
+  seeds: SEEDS, nSeeds, nRuns, goBar,
+  primary: { controlSeeds: cSeeds, armedSeeds: aSeeds, go: aSeeds.length >= goBar },
   secondary: { controlRuns: cVetRuns, armedRuns: aVetRuns },
   guardrails: {
     villagerCombatDeaths: { control: cVillD, armed: aVillD, pass: aVillD <= Math.ceil(cVillD * 1.2) },

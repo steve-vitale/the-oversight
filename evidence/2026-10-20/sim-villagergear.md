@@ -73,20 +73,29 @@ scripts/test-villagergear-20261020.js — RED→GREEN on the layer (RED phase: l
 
 ## Results
 
-*(pending sweep)*
+INCOMPLETE — worker timed out mid-sweep (recovered by main agent 2026-10-20).
+Partial pilot corpus: 46 per-seed JSONs, panel before/after, analysis JSON.
+
+Analyzer output (villagergear-pilot-analysis.json):
+- PRIMARY: 3/8 armed seeds (64002, 64006, 64008) met the ≥2/8 GO bar → go: true (partial)
+- Control arm: 0 runs in primary count (controlSeeds: []) — the before/after comparison is incomplete
+- Guardrails (partial): villager combat deaths 110→119 (≤1.2x PASS), median survival 154→158d (PASS), starvation 17→15 (PASS), no new death modes (PASS), wave-4 unlocks 13→12 (±2 PASS)
+
+The 3 armed seeds that ran show the layer engaging with guardrails green, but the pilot is unjudged: only 3/32 planned runs completed, control primary empty. The GO signal is suggestive, not conclusive.
 
 ## Metric review (§14 — binding, never re-scored)
 
-*(pending)*
+Primary (≥2/8 armed seeds) binds the NEXT run. The partial 3/8 armed-seed GO is not a verdict — the pilot didn't finish. No re-scoring; the bar stands for the next run's full 32-run sweep.
 
 ## Named nexts
 
-*(pending)*
+- Finish the 32-run pilot sweep (8 seeds × {leadfeast, belongfeast} × {control, vgear}) and judge the primary.
+- The analyzer's empty controlSeeds needs investigation — guardrails have control numbers but primary doesn't.
 
 ## Village assessment
 
-*(pending sense-testing)*
+Pending (sense-testing never ran — worker timed out before the armed-seed sense re-run).
 
 ## Convergence
 
-*(pending)*
+incomplete — pilot unjudged, neither GO nor KILL.

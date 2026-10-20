@@ -19,7 +19,7 @@ const contractDigest = crypto.createHash('sha256')
   .update(fs.readFileSync(path.join(REPO, 'scripts', 'balance-metrics.json'))).digest('hex');
 const contract = require('./balance-metrics.json');
 
-const SEEDS = [64001, 64002, 64003, 64004, 64005, 64006, 64007, 64008];
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10)) : [64001, 64002, 64003, 64004, 64005, 64006, 64007, 64008]).filter(Number.isFinite);
 const POLICIES = ['leadfeast', 'belongfeast'];
 const DAYS = 180;
 

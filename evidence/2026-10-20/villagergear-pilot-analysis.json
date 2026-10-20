@@ -1,0 +1,41 @@
+{
+  "primary": {
+    "controlSeeds": [],
+    "armedSeeds": [
+      64002,
+      64006,
+      64008
+    ],
+    "go": true
+  },
+  "secondary": {
+    "controlRuns": 0,
+    "armedRuns": 3
+  },
+  "guardrails": {
+    "villagerCombatDeaths": {
+      "control": 110,
+      "armed": 119,
+      "pass": true
+    },
+    "medianSurvival": {
+      "control": 154,
+      "armed": 158,
+      "pass": true
+    },
+    "starvation": {
+      "control": 17,
+      "armed": 15,
+      "pass": true
+    },
+    "newDeathModes": {
+      "modes": [],
+      "pass": true
+    },
+    "wave4unlocks": {
+      "control": 13,
+      "armed": 12,
+      "pass": true
+    }
+  }
+}
