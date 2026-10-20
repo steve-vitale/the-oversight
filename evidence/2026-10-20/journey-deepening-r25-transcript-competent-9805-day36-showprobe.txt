@@ -1,0 +1,18 @@
+=== seed 9805 day 36 — conversation with Sari (sari_wulandari) ===
+occupation=postal worker temperament=steady trust=32 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "I don't know what to do with my hands today."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:invite, dlg:comfort, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "I walked out of Bring Us Something Interesting. Alive. That's the whole story and it's enough."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute."
+want final: id=ask_favor stage=3 resolution=stated

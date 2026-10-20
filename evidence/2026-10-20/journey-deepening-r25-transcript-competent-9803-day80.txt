@@ -1,0 +1,15 @@
+=== seed 9803 day 80 — conversation with Juan (gen_wd4qbgc) ===
+occupation=comic shop owner temperament=prickly trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+(turn0 choices: agency:ask_field, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

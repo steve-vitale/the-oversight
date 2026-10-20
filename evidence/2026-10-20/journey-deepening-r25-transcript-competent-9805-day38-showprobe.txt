@@ -1,0 +1,18 @@
+=== seed 9805 day 38 — conversation with Jesse (jesse_cortez) ===
+occupation=line cook temperament=withdrawn trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "About ask favor — I keep turning it over."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:want:ask_favor, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "You walked out of The Blood Tithe. Alive. That's the whole story and it's enough."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "I... should go."
+want final: id=ask_favor stage=3 resolution=unresolved

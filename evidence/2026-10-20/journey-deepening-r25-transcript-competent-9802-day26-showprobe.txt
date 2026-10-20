@@ -1,0 +1,32 @@
+=== seed 9802 day 26 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Kelsey sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, silence, party_name)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "Last time things were different. They always are." "They took you — Impress Us, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "I'm not saying there's anything wrong with Amina. I'm just saying I sleep better with them on the other side of the fire. Just thinking out loud."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Good question." "I've started noticing who eats first and who waits. Tells you everything about a person."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:fears] "What are you afraid of?"
+THEM: "You want to know about that? Okay." "Don't laugh. Still water that should be moving."
+(want=ask_favor stage=0)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unestablished

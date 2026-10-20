@@ -1,0 +1,12 @@
+=== seed 9808 day 60 — conversation with Bridget (gen_vnuww8k) ===
+occupation=farmer temperament=dry trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. Thank you. Really."
+(turn0 choices: confront:d_miseo44, alive:event:show, dlg:commit, dlg:cant, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=seek_taken stage=3 resolution=promised

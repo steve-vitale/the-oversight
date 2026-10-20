@@ -1,0 +1,15 @@
+=== seed 9808 day 57 — conversation with Marcus (marcus_webb) ===
+occupation=electrician temperament=bold trust=40 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: agency:ask_field, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "Let me be straight — That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright — I've got things to do and so do you. Make it count."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,18 @@
+=== seed 9803 day 23 — conversation with Juan (gen_wd4qbgc) ===
+occupation=comic shop owner temperament=prickly trust=66 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "About ask favor — I keep turning it over. Don't make me repeat it."
+(turn0 choices: betrayal:accept, betrayal:decline, confront:d_2363qtl, alive:event:show, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "That was me — headed out for water."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "I've got things to do. We all do."
+want final: id=ask_favor stage=3 resolution=unresolved

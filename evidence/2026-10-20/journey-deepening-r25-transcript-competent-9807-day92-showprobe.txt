@@ -1,0 +1,18 @@
+=== seed 9807 day 92 — conversation with Andres (gen_peeiics) ===
+occupation=Pharmacist temperament=prickly trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: The future is a rumor. Today is a fact. I deal in facts.
+(turn0 choices: betrayal:accept, betrayal:decline, confront:d_gmq3mt1, dlg:invite, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Wanjiru headed out to forage."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=stated

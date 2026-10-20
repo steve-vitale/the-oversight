@@ -1,0 +1,18 @@
+=== seed 9802 day 68 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:thread:personal, dlg:cant, menu:more, leave)
+YOU: [dlg:cant] "Actually — I can't."
+THEM: "No, yeah, of course. Forget I asked." They won't forget. They'll just stop asking.
+(want=ask_favor stage=3)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? …sorry."
+(want=ask_favor stage=3)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "They took you — Hardened The Secret Deck, on the screens. The whole fire watched. Nobody knew where to look."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=ask_favor stage=3 resolution=deflected

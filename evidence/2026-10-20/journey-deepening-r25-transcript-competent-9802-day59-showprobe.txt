@@ -1,0 +1,32 @@
+=== seed 9802 day 59 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I still haven't found anyone. Any chance?"
+(turn0 choices: alive:event:show, dlg:cant, dlg:commit, dlg:subject, leave, silence, party_name)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "You asked me that before. It's a different question now." "The Quiet Room. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=2)
+YOU: [goon] "Keep going."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Makes sense to me."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "You didn't hear it from me, but Catalina's story doesn't hold. A fishing guide, back before."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? That's my read."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Huh. Let me think about that." "You ever notice how quiet it gets out here at night? Like the world's holding its breath."
+(want=ask_favor stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Can I be honest? Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=2)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=stated

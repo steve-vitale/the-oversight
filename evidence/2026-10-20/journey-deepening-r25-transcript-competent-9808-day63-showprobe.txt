@@ -1,0 +1,27 @@
+=== seed 9808 day 63 — conversation with Daniyar (daniyar_askarov) ===
+occupation=paramedic temperament=gentle trust=72 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: "Hey — I found some Wild Black Cherry today. You were right, it was right where you said."
+(turn0 choices: ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? It'll pass."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Lisa asked me about you. A lot of questions. Friendly ones. Too friendly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "Hm. Never mind — go on."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them African Wild Rice — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I'll be here if you need. No rush, ever."
+want final: id=curious stage=3 resolution=engaged

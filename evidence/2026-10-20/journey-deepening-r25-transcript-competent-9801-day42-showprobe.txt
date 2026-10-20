@@ -1,0 +1,18 @@
+=== seed 9801 day 42 — conversation with Michelle (gen_dnga232) ===
+occupation=hotel housekeeper temperament=cautious trust=53 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "I'm not sure, but I don't know what to do with my hands today."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:invite, dlg:comfort, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "I… Vikram ate something last month that should've killed them. They're fine."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? ...at least, that's how it looks to me."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=unestablished

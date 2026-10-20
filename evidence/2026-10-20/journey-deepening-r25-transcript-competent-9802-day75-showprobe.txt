@@ -1,0 +1,32 @@
+=== seed 9802 day 75 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=97 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "Have you — sorry. I keep thinking about them. ...sorry."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:subject, leave, silence, party_name)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Good question." "You asked me that before. It's a different question now." "I dreamed Dieter was still here. Woke up angry at the dream. Stupid."
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Dieter always took the burnt piece. Said someone had to. I take it now."
+(want=ask_favor stage=2)
+YOU: [goon] "Keep going."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Doesn't matter now."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "I just — that stray dog — the one that bit two people — lets Pavel touch it."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Anyway."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Good question." "You know what I miss? Columbus, Ohio rain. Specific rain. I'm allowed to be specific."
+(want=ask_favor stage=2)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=stated

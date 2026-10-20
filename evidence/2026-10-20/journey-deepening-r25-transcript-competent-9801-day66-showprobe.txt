@@ -1,0 +1,21 @@
+=== seed 9801 day 66 — conversation with Caleb (caleb_jones) ===
+occupation=Firefighter temperament=steady trust=70 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — still need hands. Are you in?"
+(turn0 choices: betrayal:accept, betrayal:decline, confront:d_awh91ln, alive:event:mourning, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? I mean it."
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "I won The Blood Tithe. On camera. People won't shut up about it — and honestly? Neither will I."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=ask_favor stage=3 resolution=stated

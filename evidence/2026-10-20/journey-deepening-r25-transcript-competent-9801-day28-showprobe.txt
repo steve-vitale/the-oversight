@@ -1,0 +1,12 @@
+=== seed 9801 day 28 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=27 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Don't mind me. Today's just heavy."
+(turn0 choices: betrayal:press:case_8:elijah_scott, betrayal:approach:case_8, betrayal:site:case_8, betrayal:witnesses:case_8, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=unestablished

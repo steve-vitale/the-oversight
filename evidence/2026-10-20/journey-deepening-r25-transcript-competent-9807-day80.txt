@@ -1,0 +1,29 @@
+=== seed 9807 day 80 — conversation with Andres (gen_peeiics) ===
+occupation=Pharmacist temperament=prickly trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: You look like someone who survives. Stick with me and we both keep surviving.
+(turn0 choices: dlg:more, dlg:react, dlg:doubt, dlg:invite, dlg:subject, confront:d_gmq3mt1, leave, silence)
+YOU: [dlg:more] "What would it take?"
+THEM: "Survival's not a goal. It's a prerequisite for having goals."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "I'm not proud of how I survive. I'm just committed to it."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "I've stopped asking why. Why is a luxury. How is the necessity."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What would it take?"
+THEM: "I've made peace with doing what I have to. The peace is uneasy, but it's peace."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "What's the hard part?"
+THEM: "Survival isn't pretty. It's Tuesday. It's boring and relentless and I choose it."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "How's that going?"
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Right. Done. Don't look so relieved."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

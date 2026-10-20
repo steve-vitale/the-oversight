@@ -1,0 +1,29 @@
+=== seed 9802 day 16 — conversation with Kelsey (gen_gxn7f8v) ===
+occupation=blacksmith temperament=anxious trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you? …sorry."
+(turn0 choices: alive:event:show, dlg:cant, dlg:commit, dlg:subject, leave, silence, party_name)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Worth considering."
+(want=ask_favor stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "The Oath. They just... took you. Came back like nothing happened. It wasn't nothing."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "We'll see what the treeline brings. We always do."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "My part? I check everyone's shoes for wear and stay ready."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=2)
+YOU: [goon] "Keep going."
+THEM: "Anyway — I should get going."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

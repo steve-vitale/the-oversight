@@ -1,0 +1,18 @@
+=== seed 9805 day 30 — conversation with Hans (gen_ib5keri) ===
+occupation=interpreter temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I still haven't found anyone. Any chance? ...sorry."
+(turn0 choices: alive:event:mourning, alive:thread:gossip, dlg:commit, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Did you hear? You won The Iron Pantry on the cameras. People are still talking about it."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=ask_favor stage=3 resolution=stated

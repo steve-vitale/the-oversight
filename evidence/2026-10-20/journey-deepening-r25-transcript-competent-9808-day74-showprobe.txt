@@ -1,0 +1,24 @@
+=== seed 9808 day 74 — conversation with Diana (diana_osei) ===
+occupation=paramedic temperament=bold trust=59 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You said yes — the worst thing. You didn't want to get into what. I won't ask. Just — are you carrying it any lighter?"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, joke, invite_party, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Something's off with Lisa. I mentioned it to the others and they went quiet, which tells you everything. You know?"
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Just... be straight with me."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Right. Back to it."
+want final: id=curious stage=3 resolution=engaged

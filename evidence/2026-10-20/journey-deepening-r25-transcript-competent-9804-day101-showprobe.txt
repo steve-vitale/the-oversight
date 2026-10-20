@@ -1,0 +1,21 @@
+=== seed 9804 day 101 — conversation with Aroha (aroha_ngata) ===
+occupation=comic shop owner temperament=warm trust=70 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? I can't keep going like this."
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? No time to waste."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Tomas talks to the garden. The garden listens. I've seen it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up, friend?"
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=unresolved

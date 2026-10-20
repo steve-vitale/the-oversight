@@ -1,0 +1,26 @@
+=== seed 9806 day 55 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=51 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What scares you most about what's happening? The real answer."
+(turn0 choices: ans:q_system_fear:a_tell, ans:q_system_fear:a_vague, ans:q_system_fear:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Cattail — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Common Plantain — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Shepherd's Purse — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "Alright — I should get back to it."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

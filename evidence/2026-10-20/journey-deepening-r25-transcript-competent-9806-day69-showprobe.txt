@@ -1,0 +1,21 @@
+=== seed 9806 day 69 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=63 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what got you through the first week — What got you through the first week? The very first days. Worth considering."
+(turn0 choices: ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, deflect_q, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time. Makes sense to me."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Bamboo Shoot — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Groundnut — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That happened."
+want final: id=curious stage=3 resolution=engaged

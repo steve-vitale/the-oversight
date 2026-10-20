@@ -1,0 +1,15 @@
+=== seed 9804 day 50 — conversation with Wilhelm (gen_2ohcgv7) ===
+occupation=pottery instructor temperament=earnest trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "We never finished talking about the gossip — we left it mid-thought, 5 days back. 'You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. I never knew that.'"
+(turn0 choices: dlg:more, dlg:react, dlg:doubt, dlg:invite, dlg:subject, confront:d_6g33s59, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=0)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Bissap Hibiscus — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=seek_taken stage=3 resolution=unestablished
