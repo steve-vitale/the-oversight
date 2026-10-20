@@ -402,7 +402,24 @@
         // word-identical. The def's `memory` is the holder's lived story of
         // THIS object; threading it in makes the beat know what it holds.
         // (Every sentimental def carries memory; flavor is the fallback.)
-        const mem = String((def.memory || def.flavor || '')).trim();
+        // KEEPSAKE RESOLUTION (fix #697): the beat used def.memory RAW, so
+        // {kin} placeholders reached the player. lifeseed.js's rule is that
+        // no unreplaced placeholders ever reach the player — resolve through
+        // the engine's canonical resolveKeepsakeText, the same route
+        // playFlashback takes below. The holder is the player (this
+        // villagerId); the scholar object carries no name/lifeseed, so look
+        // up the villager record and ensure a seed (hydrated successors may
+        // carry only a { lived } stub — see playFlashback's guard).
+        const rawMem = String((def.memory || def.flavor || '')).trim();
+        const holderId = item.owner || this.villagerId;
+        const me = (this.data.villagers || []).find(v => v.id === holderId) || {};
+        if (me.id && !(me.lifeseed && Array.isArray(me.lifeseed.people)) && typeof this.ensurePersonLifeseed === 'function') {
+          try { this.ensurePersonLifeseed(me.id); } catch (e) {}
+        }
+        const holderOk = me && me.name && me.lifeseed && Array.isArray(me.lifeseed.people);
+        const mem = (holderOk && typeof this.resolveKeepsakeText === 'function')
+          ? String(this.resolveKeepsakeText(me, def, rawMem)).trim()
+          : rawMem;
         const knowsClause = mem ? ` ${mem}` : '';
         if (maxed >= 3) {
           msg = armSurge(`You hold ${name}.${knowsClause} The feast was the weapon — and they are with you. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
