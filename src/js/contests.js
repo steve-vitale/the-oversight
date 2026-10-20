@@ -5268,6 +5268,13 @@
       } else {
         this.sysSay(`📺 ${contest.name} — over. You survived. The audience is polite.`);
         try { this.leadShift('showmanship', 1); } catch (e) {}
+        // GOSSIP (r18 2026-10-19): surviving a loss is news too — the
+        // village talks about who came back and how they looked, same as
+        // the isWatch branch above. Symmetric with the r16 player-win
+        // seed: previously only villager losses seeded gossip, so a run
+        // of player losses left the gossip stream silent about the show
+        // (r18 wild probe: 4/4 player losses unsurfacing).
+        try { this._cxGossip('survived', 'player', contest.name); } catch (e2) {}
         // AFTERMATH TRAUMA (break-it contests r15 2026-10-11): the lose path
         // applied nothing — losing a televised contest cost less than
         // refusing one (+5 in _contestRefuse). Losing hurts more than
