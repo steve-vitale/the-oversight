@@ -1,5 +1,14 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-20 current bounded Codex goal: finish accepted-favor lifecycle on the
+shared a86496f72 history. Track concrete requirements, effective due day and
+completion/expiry in the existing People journal; preserve them through
+Continue; retain real actions on reminder conversations; keep the reader inside
+one phone viewport. Focused checks and native touch journeys precede the
+matched balanced screen and release. Muse's lane remains calibration. Five
+joint favor jobs, remaining dialogue quality and physical-device gates stay
+open; this goal does not close the public-release checklist.
+
 2026-10-20 shared release reconciliation: the conversation/favor repair now
 merges Muse `699c56ba8`, preserving the common `a4404566c` history. Use the
 published master/main tip and `MUSE-CALIBRATION-HANDOFF.md`, not the old

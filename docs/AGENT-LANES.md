@@ -1,5 +1,19 @@
 # Agent lanes (2026-10-15)
 
+## Active favor lifecycle goal (2026-10-20, after shared release a86496f72)
+
+Codex owns the bounded food/wound/illness favor lifecycle: saved task identity,
+truthful due-day and readiness display in the existing People journal,
+completion/expiry/cancellation consistency, and Continue/deadline proofs.
+Likely files: convo-wants.js, game.js promise resolver, journal.js, the People
+renderer in app.js, shared-kit tests and source-bound phone/measurement proof.
+No new joint-job implementation or reward/difficulty tuning is included.
+Muse owns calibration against the shared release; do not port or independently
+rewrite these conversation/favor/journal files while this lane is active.
+The five unavailable joint jobs remain release blockers. A deadline bug fix
+must retain the survival/community/resource/progression/gear watches rather
+than treating a win-rate change as an automatic verdict.
+
 ## Active release reconciliation (2026-10-20)
 
 Codex is merging Muse `699c56ba8` into `codex/favor-quest-deadlines-20261020`

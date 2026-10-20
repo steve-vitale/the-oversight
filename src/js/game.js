@@ -5691,6 +5691,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // kept a dozen 'belong' promises (+15 each) and one handoff kept every
     // 'feed' promise. Communal acts (fights, tasks) pass no vid and keep the
     // broadcast behavior — the whole village saw you.
+    // Existing promise windows, expressed as an absolute last playable day.
+    // Legacy late acceptance already received a minimum one-day window in
+    // checkPromises; display that same window rather than an earlier raw ask.
+    promiseDueDay(p) {
+      const start = Number(p?.day ?? 0);
+      if (!Number.isFinite(start)) return null;
+      if (p?.favorDeadline == null) return start + 7;
+      const due = Number(p.favorDeadline);
+      return Number.isFinite(due) ? Math.max(start + 1, due) : null;
+    },
+
     checkPromises(kind, vid, opts) {
       const v = this.state.village;
       const entries = Object.entries(v.promises || {});
@@ -5704,7 +5715,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const age = this.state.scholar.day - (p.day || 0);
         // BREAK-IT (social r7 2026-10-09): keep mapping is data-driven via
         // promiseKeepKind — the old inline table covered 5 of 18 goals.
-        const match = this.promiseKeepKind(p.goal) === kind;
+        const dueDay = this.promiseDueDay(p), today = this.state.scholar.day;
+        // A favor is playable throughout its due day. Only the nightly
+        // sweep ends that day; another action must not expire it at dawn.
+        // Late receipts cannot skip expiry by taking the matching branch.
+        const favorExpired = !!p.favorId && dueDay != null &&
+          (today > dueDay || (kind == null && today >= dueDay));
+        const match = this.promiseKeepKind(p.goal) === kind && !favorExpired;
         if (match) {
           // A typed favor must be kept by its own deed. Delegating any job,
           // saying hello or comforting cannot stand in for a specific outing,
@@ -5758,8 +5775,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // promise window — a water haul "at dawn" that rots for a week is
           // a lie about urgency.
           const limit = (p.favorDeadline != null) ? Math.max(1, p.favorDeadline - (p.day || 0)) : 7;
-          if (age >= limit) {
+          if (p.favorId ? favorExpired : age >= limit) {
           p.kept = 'broken';
+          if (p.favorId) { p.closedReason = 'deadline'; p.closedDay = today; }
           let favor = null;
           try { favor = (p.favorId && typeof this.convoGetFavor === 'function') ? this.convoGetFavor(pid) : null; } catch (e) {}
           if (favor && favor.id === p.favorId) favor.state = 'broken';

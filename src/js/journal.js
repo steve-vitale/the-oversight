@@ -6,6 +6,8 @@
 //   - journalLearn(vid, topic)
 //   - journalTraitWord(vid)
 //   - peopleJournal()
+//   - journalPromises(vid, entry)
+//   - journalFavorPromise(vid, promise, opts)
 //   - occupationKnown(vid)
 //   - occupationLabel(vid)
 //   - plantPartsList(pid)
@@ -188,7 +190,65 @@
     adrift: ' Not sure whose book this is anymore.',
   };
 
+  function favorPromiseStatus(p) {
+    if (p.kept === true) return 'kept';
+    if (p.kept === 'broken') return p.closedReason === 'deadline' ? 'expired' : 'broken';
+    if (p.kept === 'unavailable') return 'cancelled';
+    return p.kept ? 'released' : 'open';
+  }
+
   const methods = {
+
+    journalFavorPromise(vid, p, opts) {
+      if (!p?.favorId) return false;
+      return this.journalLearn(vid, 'promise', {
+        text: p.favorTask || 'Help with their request', favorId: p.favorId,
+        status: favorPromiseStatus(p), day: p.day,
+        dueDay: this.promiseDueDay(p), closedReason: p.closedReason || null,
+      }, opts || { quiet: true });
+    },
+
+    // Read canonical obligations without writing, expiring or rewarding them
+    // while the player reads the notebook. Legacy open notes are projected
+    // onto the saved favor identity; they are not duplicated or fabricated.
+    journalPromises(vid, entry) {
+      const rows = ((entry || this.state.codex?.people?.[vid])?.promises || []).map(p => ({ ...p }));
+      const promise = this.state.village.promises?.[vid];
+      const favor = this.state.village.favorLedger?.[vid];
+      if (promise?.favorId) {
+        let index = rows.findIndex(p => p.favorId === promise.favorId);
+        if (index < 0) index = rows.findIndex(p => !p.favorId && p.text === promise.favorTask &&
+          (p.status === 'open' || p.status === favorPromiseStatus(promise) ||
+            (favorPromiseStatus(promise) === 'released' && p.status?.startsWith('released'))));
+        const row = { ...(index < 0 ? {} : rows[index]), text: promise.favorTask || 'Help with their request',
+          favorId: promise.favorId, status: favorPromiseStatus(promise), day: promise.day,
+          dueDay: this.promiseDueDay(promise) };
+        if (index < 0) rows.push(row); else rows[index] = row;
+      }
+      const today = this.state.scholar.day || 0;
+      return rows.map(row => {
+        if (!row.favorId) return row;
+        const left = Number.isFinite(row.dueDay) ? row.dueDay - today : null;
+        const action = row.status === 'open' && promise?.favorId === row.favorId && favor?.id === row.favorId
+          ? this.convoFavorAction(vid, favor) : null;
+        const unavailable = !!action?.unsupported;
+        const overdue = row.status === 'open' && !unavailable && left != null && left < 0;
+        const status = unavailable ? 'unavailable' : overdue ? 'overdue' : row.status;
+        const time = left == null ? '' : left < 0 ? 'deadline passed' : left === 0 ? 'today' : left === 1 ? 'tomorrow' : left + ' days remaining';
+        const deadlineLabel = unavailable ? 'No active deadline — unavailable job, no penalty.' :
+          left == null ? 'Deadline not recorded' : 'Due by the end of day ' + row.dueDay + ' · ' + time;
+        let requirements = '';
+        if (row.status === 'open' && promise?.favorId === row.favorId) {
+          if (favor?.id !== row.favorId) requirements = 'This save is missing the original request details. No completion action is available.';
+          else {
+            requirements = unavailable ? action.reason + ' Talk to them to close this job without penalty.' :
+              overdue ? 'The deadline has passed. Helping now will not keep this promise.' :
+              action.ready ? 'Talk to them to help: ' + action.label + '. ' + action.reason : action.reason;
+          }
+        }
+        return { ...row, status, deadlineLabel, requirements };
+      }).sort((a, b) => Number(['open', 'overdue', 'unavailable'].includes(b.status)) - Number(['open', 'overdue', 'unavailable'].includes(a.status)) || (b.day || 0) - (a.day || 0));
+    },
 
     // journalPerson: get (or create) someone's entry.
     journalPerson(vid) {
@@ -253,13 +313,22 @@
           label = field === 'trait' ? `noticed something about them` : `jotted down what they said`;
         }
       } else if (field === 'promise') {
-        const ex = e.promises.find(p => p.text === value.text);
+        const ex = value.favorId
+          ? e.promises.find(p => p.favorId === value.favorId) ||
+            e.promises.find(p => !p.favorId && p.text === value.text &&
+              (p.status === 'open' || p.status === value.status || (value.status === 'released' && p.status?.startsWith('released'))))
+          : e.promises.find(p => p.text === value.text);
         if (!ex) {
-          e.promises.push({ text: value.text, status: 'open', day: day() });
+          e.promises.push({ text: value.text, status: value.status || 'open', day: value.day ?? day(),
+            ...(value.favorId ? { favorId: value.favorId, dueDay: value.dueDay, closedReason: value.closedReason } : {}) });
           isNew = true; label = `a promise you made`;
         } else if (value.status && ex.status !== value.status) {
           ex.status = value.status;
           isNew = true; label = value.status === 'kept' ? `a promise you kept` : `a promise you broke`;
+        }
+        if (ex && value.favorId) {
+          ex.favorId = value.favorId; ex.dueDay = value.dueDay;
+          ex.closedReason = value.closedReason;
         }
       }
 
@@ -1213,7 +1282,8 @@
           // update must match THAT text, not the generic goal want.
           const pNow = (this.state.village.promises || {})[vid];
           const text = (pNow && pNow.favorTask) || `Help them ${this.goalWant(vid) || 'something'}`;
-          this.journalLearn(vid, 'promise',
+          if (p.favorId) this.journalFavorPromise(vid, p);
+          else this.journalLearn(vid, 'promise',
             { text, status: p.kept === true ? 'kept' : (p.kept === 'released' ? 'released — they\'re gone' : 'broken') }, {});
         }
       }
