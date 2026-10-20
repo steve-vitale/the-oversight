@@ -18,6 +18,10 @@
 //       the beg sits unanswered, foodHoarded 0, no ctx._ledgerdark.
 //     * HOARD: pantry healthy + net-taker -> takeFromPantryBulk fires ->
 //       hoardFood -> foodHoarded >= 1. RED: layer OFF -> no take.
+//     * RECRUIT: day 20, alone, party gates open, a trust-40 villager ->
+//       one layer daily -> inviteToParty attempted -> classified as
+//       recruitDone or recruitRefused (the acceptance draw is the engine's
+//       seeded RNG, never the layer's). RED: trust < floor -> no attempt.
 //     * BETRAYAL: day 30, bearer healthy, a follower present -> one layer
 //       daily -> playerAttacks fires -> betrayed +1 and the betrayal
 //       combat starts (tbfight live, LD.betrayalFight=1); the layer's
@@ -285,6 +289,51 @@ async function main() {
       Game.tbfight = null;
       pol.daily(Game, ctx);
       check('BETRAYAL GREEN: one per run — no second attack', (Game.ledger().betrayed | 0) === b1, `betrayed moved ${b1} -> ${Game.ledger().betrayed}`);
+    }
+    // RECRUIT — GREEN: day 20, alone, party gates open, a trust-40 villager ->
+    // the layer attempts inviteToParty; the attempt is classified
+    // (recruitDone or recruitRefused — the acceptance draw is the engine's).
+    {
+      process.env.LEDGERDARK = '1';
+      const { Game } = await craftRoad();
+      Game.state.scholar.day = 20;
+      const v = Game.state.village;
+      v.followers = []; v.party = [];
+      v.partyUnlocked = true;
+      Game.state.systemArrived = true;
+      Game.state.scholar.codexUnlocked = true;
+      const me = Game.villagerId;
+      const cand = (v.roster || []).filter(id => id !== me)[0];
+      check('RECRUIT texture: a trust-40 villager exists', !!cand, 'no candidate in texture');
+      v.trust = v.trust || {};
+      v.trust[cand] = 40;
+      const base = { id: 'base', daily() {}, fight() { return false; } };
+      const pol = withLedgerDark(base, 't', 't');
+      const ctx = mkCtx();
+      pol.daily(Game, ctx);
+      const LDs = ctx._ledgerdark || {};
+      check('RECRUIT GREEN: invite attempted once', (LDs.recruitTried | 0) === 1, `recruitTried=${LDs.recruitTried}`);
+      check('RECRUIT GREEN: attempt classified (done or refused), no layer errors',
+        (LDs.recruitDone === 1 || LDs.recruitRefused === 1) && (LDs.recruitErr | 0) === 0,
+        JSON.stringify({ done: LDs.recruitDone, refused: LDs.recruitRefused, err: LDs.recruitErr }));
+    }
+    // RECRUIT — RED: trust below the System floor -> no attempt.
+    {
+      process.env.LEDGERDARK = '1';
+      const { Game } = await craftRoad();
+      Game.state.scholar.day = 20;
+      const v = Game.state.village;
+      v.followers = []; v.party = [];
+      v.partyUnlocked = true;
+      Game.state.systemArrived = true;
+      Game.state.scholar.codexUnlocked = true;
+      v.trust = {};
+      const base = { id: 'base', daily() {}, fight() { return false; } };
+      const pol = withLedgerDark(base, 't', 't');
+      const ctx = mkCtx();
+      pol.daily(Game, ctx);
+      const LDs = ctx._ledgerdark || {};
+      check('RECRUIT RED (low trust): no invite attempted', (LDs.recruitTried | 0) === 0, `recruitTried=${LDs.recruitTried}`);
     }
     // STOPS: table staged -> quiet; exiled -> quiet; gate off -> delegation.
     {

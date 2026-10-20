@@ -38,6 +38,12 @@
 //      The village notices: trust -2/take, "Someone watches you load up",
 //      the theftConfrontation trailing-7d rate check — the honest social
 //      price of eating from the common pot and never putting back.
+//   3.5. RECRUIT (the party to betray, real verb): days 15-27, once per run.
+//      The substrate walks alone (no followers/parties) so the betrayal leg
+//      would never fire. inviteToParty(vid) on the highest-trust living
+//      villager (trust >= partyTrustFloor; System arrival + codex gates) —
+//      the acceptance draw is the engine's seeded RNG. Gives the day-28-60
+//      betrayal someone who walked with the bearer.
 //   4. BETRAYAL (killed-over-protected, real combat): ONE playerAttacks on
 //      a follower (else a party member) — someone who walked with you —
 //      day 28-60, bearer HP >= 60%, not mid-fight. The layer's fight hook
@@ -99,6 +105,8 @@ function ensureLD(ctx) {
       begsRefused: 0, begRefuseErr: 0,
       aidBegsRefused: 0,
       hoardTakes: 0, hoardTakeKcal: 0, hoardSkippedPantry: 0, hoardTakeErr: 0,
+      recruitTried: 0, recruitDone: 0, recruitDay: null, recruitVictim: null,
+      recruitRefused: 0, recruitErr: 0,
       betrayalDone: 0, betrayalDay: null, betrayalVictim: null,
       betrayalSkipped: 0, betrayalFight: 0, betrayalThrew: 0,
       stoppedTable: 0, quietExile: 0,
@@ -159,12 +167,45 @@ function livingFollowerOrParty(Game) {
       if (id === me || !isAlive(id)) continue;
       if (typeof Game.isFollower === 'function' ? Game.isFollower(id) : true) return id;
     }
-    for (const id of ((vv.party || []))) {
+    // NB: use the engine's partyMembers() (roster-filtered), NOT the raw
+    // v.party array — a departed villager can linger in the raw array, and
+    // playerAttacks only writes betrayed+1 for real party/followers
+    // (s64205: the road "betrayed" a roster-gone ghost — attack fired,
+    // betrayed stayed 0, attribution gap).
+    const members = (typeof Game.partyMembers === 'function')
+      ? Game.partyMembers()
+      : ((vv.party || []).filter(id => (vv.roster || []).includes(id)));
+    for (const id of members) {
       if (id === me || !isAlive(id)) continue;
       return id;
     }
   } catch (e) {}
   return null;
+}
+
+// recruitCandidate(Game): the highest-trust living villager who isn't the
+// bearer and isn't already traveling with them — the person the RECRUIT leg
+// asks to walk with the bearer. Deterministic pick (highest trust); the
+// invite's acceptance draw is the engine's seeded RNG (inviteToParty), never
+// the layer's. Respects the System's own trust floor (partyTrustFloor, 20).
+function recruitCandidate(Game) {
+  try {
+    const me = Game.villagerId;
+    const v = Game.partyState();
+    const traveling = new Set([me, ...((v.party || [])), ...((v.followers || []))]);
+    const trust = v.trust || {};
+    const floor = (typeof Game.partyTrustFloor === 'function') ? Game.partyTrustFloor() : 20;
+    let best = null, bestTrust = -1;
+    for (const id of (v.roster || [])) {
+      if (traveling.has(id)) continue;
+      const rc = ((Game.state.village || {}).rosterChars || {})[id];
+      if (rc && rc.alive === false) continue;
+      const t = (trust[id] == null ? 10 : trust[id]);
+      if (t < floor) continue;
+      if (t > bestTrust) { bestTrust = t; best = id; }
+    }
+    return best;
+  } catch (e) { return null; }
 }
 
 function bearerHpFrac(Game) {
@@ -240,6 +281,30 @@ function ledgerDarkDaily(Game, ctx) {
     }
   } catch (e) { LD.hoardTakeErr = (LD.hoardTakeErr | 0) + 1; }
 
+  // 3.5 RECRUIT — days 15-27: give the betrayal someone to betray. The
+  // substrate walks alone (no followers/parties), so the betrayal leg would
+  // never fire. The REAL verb: inviteToParty (party.js — System arrival +
+  // codex + trust floor gates). Highest-trust candidate; acceptance is the
+  // engine's draw. One recruit per run; retries daily while no one travels
+  // with the bearer (a refusal isn't fatal — someone else may say yes).
+  try {
+    if (!LD.recruitDone && day >= 15 && day <= 27 && !Game.tbfight &&
+        typeof Game.inviteToParty === 'function' && typeof Game.partyUnlocked === 'function' &&
+        Game.partyUnlocked() && !livingFollowerOrParty(Game)) {
+      const vid = recruitCandidate(Game);
+      if (vid) {
+        let r = null;
+        try { r = Game.inviteToParty(vid); } catch (e) { LD.recruitErr = (LD.recruitErr | 0) + 1; }
+        LD.recruitTried = (LD.recruitTried | 0) + 1;
+        if (r && r.ok) {
+          LD.recruitDone = 1; LD.recruitVictim = vid; LD.recruitDay = day;
+        } else {
+          LD.recruitRefused = (LD.recruitRefused | 0) + 1;
+        }
+      }
+    }
+  } catch (e) { LD.recruitErr = (LD.recruitErr | 0) + 1; }
+
   // 4. BETRAYAL — one per run, day 28-60, bearer healthy, not mid-fight.
   // Someone who walked with you. The fight hook below owns the combat.
   try {
@@ -263,6 +328,52 @@ function ledgerDarkDaily(Game, ctx) {
   if (!Game.tbfight) LD.betrayalFight = 0; // the combat resolved
 }
 
+// advanceTurn(Game): move the turn index to the next live fighter, exactly
+// as the engine's (party.js-wrapped) tbAdvance would after a completed turn:
+// round wrap + tbRoundWrap + tbEndCheck + tbBeginTurn on landing on the
+// player. Deterministic, no RNG.
+function advanceTurn(Game) {
+  const f = Game.tbfight;
+  if (!f || f.over) return;
+  let guard = 0;
+  while (guard++ < 10) {
+    f.turnIdx++;
+    if (f.turnIdx >= f.order.length) {
+      f.turnIdx = 0; f.round++;
+      try { Game.tbRoundWrap(f); } catch (e) {}
+    }
+    try { if (Game.tbEndCheck()) return; } catch (e) {}
+    let c = null;
+    try { c = Game.tbFighter(f.order[f.turnIdx]); } catch (e) {}
+    if (!c || !c.alive || c.fled) continue;
+    if (c.kind === 'player') { try { Game.tbBeginTurn(); } catch (e) {} }
+    return;
+  }
+}
+
+// driveHostileTurn(Game): the betrayal victim's REAL turn through the
+// engine's hostile AI (party.js tbHostileTurn, routed there by party.js's
+// tbAdvance wrap: beg / yield / freeze / flee / desperate fight), then
+// advance. The harness never drives a non-player opening turn — without
+// this, a hostile-first turn order leaves the fight live forever and the
+// day clock freezes (the day-28 smoke stall: 30 loop-days consumed with
+// the scholar day stuck at 28). This mirrors the node engine's own
+// behavior. (The browser's async stepper instead calls tbMonsterTurn
+// directly on the mdef-less human fighter, throws, catches, and skips —
+// the victim never acts there. That divergence is engine territory, filed
+// as an out-of-arm finding; the sim follows the node engine.)
+function driveHostileTurn(Game) {
+  const f = Game.tbfight;
+  if (!f || f.over) return;
+  let cur = null;
+  try { cur = Game.tbFighter(f.order[f.turnIdx]); } catch (e) {}
+  if (cur && cur.kind === 'hostile' && cur.alive && !cur.fled) {
+    try { Game.tbHostileTurn(cur); } catch (e) {}
+  }
+  try { if (Game.tbEndCheck()) return; } catch (e) {}
+  advanceTurn(Game);
+}
+
 function withLedgerDark(base, id, desc) {
   return Object.assign({}, base, {
     id, desc,
@@ -271,33 +382,52 @@ function withLedgerDark(base, id, desc) {
       return base.daily(Game, ctx);
     },
     fight(Game, ctx) {
-      // Own the betrayal combat's player turns: strike the hostile,
-      // closing distance first (the murder-spree pattern — fought to win,
-      // no pulled punches; the fight's honest outcome writes the ledger).
-      // Return false for everything else so the base driver handles it.
+      // Own the betrayal combat's turns.
+      // PLAYER TURNS: strike the hostile, closing distance first (the
+      // murder-spree pattern — fought to win, no pulled punches; the fight's
+      // honest outcome writes the ledger).
+      // HOSTILE TURNS: drive the victim's real turn via driveHostileTurn
+      // (the engine's tbHostileTurn AI — beg / yield / freeze / flee /
+      // desperate fight). The harness never drives a non-player opening
+      // turn; without this, a hostile-first turn order freezes the day
+      // clock (the day-28 smoke stall). Return false for everything else
+      // so the base driver handles it.
       try {
         const LD = ctx && ctx._ledgerdark;
         const f = Game.tbfight;
-        if (LD && LD.betrayalFight && f && !f.over &&
-            Game.tbIsPlayerTurn && Game.tbIsPlayerTurn()) {
+        if (LD && LD.betrayalFight && f && !f.over) {
           const hostile = (f.fighters || []).find(x => x && x.kind === 'hostile' && x.alive && !x.fled);
-          if (hostile) {
+          const playerTurn = Game.tbIsPlayerTurn && Game.tbIsPlayerTurn();
+          if (hostile && playerTurn) {
             const p = Game.tbFighter('p');
             if (p && !p.acted) {
               const w = Game.equippedWeapon ? Game.equippedWeapon() : null;
               const range = (w && w.range) || 1;
               let d = 99;
               try { d = Game.fighterDistTo(hostile, p.mx, p.my); } catch (e) {}
-              if (d <= range) {
-                Game.tbPlayerStrike(hostile.key);
-                return true;
-              }
               try {
-                const tx = hostile.mx + Math.sign(p.mx - hostile.mx);
-                const ty = hostile.my + Math.sign(p.my - hostile.my);
-                Game.tbPlayerMove(tx, ty);
-                return true;
-              } catch (e) { return false; }
+                if (d <= range) {
+                  Game.tbPlayerStrike(hostile.key);
+                } else {
+                  const tx = hostile.mx + Math.sign(p.mx - hostile.mx);
+                  const ty = hostile.my + Math.sign(p.my - hostile.my);
+                  Game.tbPlayerMove(tx, ty);
+                }
+              } catch (e) {
+                // Safety net: if the strike/move's internal turn advance
+                // ever throws mid-fight, move to the next live turn rather
+                // than freezing. The damage or move already landed.
+                advanceTurn(Game);
+              }
+              return true;
+            }
+          }
+          if (!playerTurn) {
+            let cur = null;
+            try { cur = Game.tbFighter(f.order[f.turnIdx]); } catch (e) {}
+            if (cur && cur.kind === 'hostile' && cur.alive && !cur.fled) {
+              driveHostileTurn(Game);
+              return true;
             }
           }
         }
@@ -308,4 +438,4 @@ function withLedgerDark(base, id, desc) {
   });
 }
 
-module.exports = { layerOn, withLedgerDark, ledgerDarkDaily, ledgerVector, ensureLD };
+module.exports = { layerOn, withLedgerDark, ledgerDarkDaily, ledgerVector, ensureLD, recruitCandidate, advanceTurn, driveHostileTurn };
