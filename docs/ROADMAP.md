@@ -1,5 +1,16 @@
 # ROADMAP: what's built, what's next, how to do it
 
+2026-10-20 conversation structure repair: Codex's
+`codex/conversation-structure-20261020` starts at Muse's a4404566 cutoff.
+Spoken exchanges own replies after every injector; questions are provisional
+until spoken; menus retain selected wording; explicit subject changes retain
+earned practical actions. Ambush actions bypass stale-question trimming.
+See CONVERSATIONS.md for the repeatable broad sampler and shared-menu test kit,
+and evidence/2026-10-20/conversation-structure-audit-r7.md for retained source,
+mobile, campaign and remaining-quality evidence (final r7 audit). This is a development repair;
+it does not close the public-release or physical-device gates. Resume the
+maker-to-death/later-game work after this urgent conversation repair.
+
 2026-10-19 combined development shipment: main/master 0545151a5's 67 commits
 are reconciled with the phone/combat/Continue candidate (merge 07db9d4d7).
 Twelve automatic regressions protect the reviewed ports; preserve the canonical

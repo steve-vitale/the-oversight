@@ -91,7 +91,7 @@ async function main() {
   // Sitting 2: menu offers accept/decline — the NPC must speak it again.
   const a = roster[0];
   Game.inviteHistory(a).pending = { defId: def.id, day };
-  Game.startConvo(a);
+  require('./lib/conversation-playtest').openInvite(Game,a);
   const t1a = themOf(a);
   const spoken1 = t1a.indexOf(LABEL_CORE) !== -1;
   Game.endConvo(a, 'left'); // walked away — no accept, no decline
@@ -99,7 +99,7 @@ async function main() {
   console.log('case1: sitting1 spoken=' + spoken1 + ' pendingSurvives=' + !!pendingAfter);
   ok(spoken1, 'sitting 1: invitation spoken (setup)');
   ok(!!pendingAfter, 'sitting 1: undecided invite still pending (setup)');
-  Game.startConvo(a);
+  require('./lib/conversation-playtest').openInvite(Game,a);
   const t1b = themOf(a);
   const spoken2 = t1b.indexOf(LABEL_CORE) !== -1;
   const offers2 = menuOffers(a);
@@ -111,13 +111,13 @@ async function main() {
   // CASE 2: decided invite never re-fires. Accept consumes the pending.
   const b = roster[1];
   Game.inviteHistory(b).pending = { defId: def.id, day };
-  Game.startConvo(b);
+  require('./lib/conversation-playtest').openInvite(Game,b);
   const t2a = themOf(b);
   ok(t2a.indexOf(LABEL_CORE) !== -1, 'sitting 1: invitation spoken (setup)');
   try { Game.convoTurn(b, 'betrayal:accept'); } catch (e) {}
   try { Game.endConvo(b, 'done'); } catch (e) {}
   const pendingB = Game.pendingInvite(b);
-  Game.startConvo(b);
+  require('./lib/conversation-playtest').openInvite(Game,b);
   const t2b = themOf(b);
   const offersB = menuOffers(b);
   Game.endConvo(b, 'left');
@@ -131,14 +131,14 @@ async function main() {
   // re-speaks the undecided invite.
   const c = roster[2], d = roster[3];
   Game.inviteHistory(c).pending = { defId: def.id, day };
-  Game.startConvo(c);
+  require('./lib/conversation-playtest').openInvite(Game,c);
   const t3a = themOf(c);
   ok(t3a.indexOf(LABEL_CORE) !== -1, 'sitting 1: invitation spoken (setup)');
-  Game.startConvo(d); // modal cutoff force-ends c's conversation
+  require('./lib/conversation-playtest').openInvite(Game,d); // modal cutoff force-ends c's conversation
   const cActive = (() => { try { return !!(Game.convoGet(c) || {}).active; } catch (e) { return 'err'; } })();
   console.log('case3: c active after modal cutoff: ' + cActive);
   Game.endConvo(d, 'left');
-  Game.startConvo(c);
+  require('./lib/conversation-playtest').openInvite(Game,c);
   const t3b = themOf(c);
   const spoken3 = t3b.indexOf(LABEL_CORE) !== -1;
   const offers3 = menuOffers(c);

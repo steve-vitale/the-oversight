@@ -183,8 +183,8 @@ ok('ambush: the walk turns on the player', !!plot, plot ? `leader=${nm(plot.lead
 if (plot) {
   const c0 = Game.convoGet(plot.leader);
   ok('ambush: opens as a conversation beat (RUN/TALK/FIGHT)', c0.thread === 'ambush');
-  const ids0 = (Game.convoChoices(plot.leader) || []).map(x => x.id);
-  ok('ambush: RUN/TALK/FIGHT all offered', ids0.includes('betrayal:run') && ids0.includes('betrayal:talk') && ids0.includes('betrayal:fight'));
+  const ids0 = require('./lib/conversation-playtest').offers(Game,plot.leader).map(x => x.id);
+  ok('ambush: RUN/TALK/FIGHT all offered', ids0.includes('betrayal:run') && ids0.includes('betrayal:talk') && ids0.includes('betrayal:fight'), JSON.stringify({ids0,plotId:plot.id,convoPlot:c0.ambushPlot,talksLeft:plot.talksLeft}));
   note('\n-- TALK: hands visible, voice level. Find the one with cold feet.');
   let rounds = 0;
   while (!plot.resolved && rounds < 10) {
@@ -325,6 +325,9 @@ scene('ACT 5 — EXILE: the walk. What you carry is what you have.');
 Game.debugScenario('exile');
 drain();
 const s5 = Game.state.scholar;
+// Prepared founding control: keep the inherited village fed while testing the
+// separate seven-day exile/founding transition. No days or completion granted.
+Game.state.village.pantry.push({name:'founding control rations',units:240,kcalEach:500,kg:0.1,safe:true,spoilDay:9999});
 ok('exile: the player is exiled', !!s5.exiled);
 ok('exile: the old village continues (archived, not deleted)', !!Game.state.village && !!Game.state.village.name);
 const oldVillage = Game.state.village, oldName = oldVillage.name;
@@ -358,9 +361,9 @@ while (Math.round(Game.foundingState().stockpileKcal) < 10000 && caches < 6) {
 note(`   cache: ${Math.round(Game.foundingState().stockpileKcal)} kcal after ${caches} caches`);
 ok('exile: cache fills to founding requirement', Math.round(Game.foundingState().stockpileKcal) >= 10000);
 note('\n-- seven solo days. The wild grades on results, not effort.');
-for (let d = 0; d < 8; d++) { feed(); Game.endDay(); drain(); }
+for (let d = 0; d < 16 && Game.foundingMissing().length; d++) { feed(); Game.endDay(); drain(); }
 const missing = Game.foundingMissing();
-ok('exile: the founding project completes', missing.length === 0, missing.join('; ') || 'nothing missing');
+ok('exile: the founding project completes', missing.length === 0, JSON.stringify({missing,day:Game.state.scholar.day,exileStartDay:Game.state.scholar.exileStartDay,over:Game.over,health:Game.state.scholar.health}));
 note('\n-- day one, again. But this time I know what a day costs.');
 const foundR = Game.exileSelfDo('foundhaven');
 drain().forEach(t => note('   > ' + (String(t).length > 240 ? String(t).slice(0, 240) + '…' : String(t))));

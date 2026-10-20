@@ -100,14 +100,14 @@ const mk = (o) => Object.assign({ id: 'gen_x', name: 'Test Person', age: 30, gen
   // ---- V8 gates ----
   Game._voicePacksCached = false; Game._voiceUnlocked = false; Game._voiceTts = null;
   delete Game.audio;
-  ok('V8 default (nothing cached) -> off', Game.convoSpeakLine('gen_aaa', 'hello there') === 'off');
+  ok('V8 default (nothing cached) -> off', Game.convoSpeakLine('gen_aaa', '"hello there"') === 'off');
   Game._voicePacksCached = true;
-  ok('V8 cached but no gesture -> locked', Game.convoSpeakLine('gen_aaa', 'hello there') === 'locked');
+  ok('V8 cached but no gesture -> locked', Game.convoSpeakLine('gen_aaa', '"hello there"') === 'locked');
 
   // ---- V15 fallback vs piper path (needs unlocked + enabled) ----
   Game._voiceUnlocked = true;
   Game._voiceTts = { stored: async () => [], download: async () => { throw new Error('offline'); } };
-  const st15a = Game.convoSpeakLine('gen_aaa', 'hello there');
+  const st15a = Game.convoSpeakLine('gen_aaa', '"hello there"');
   ok('V15 pack missing -> speaking-fallback', st15a === 'speaking-fallback', st15a);
   Game._voiceTts = {
     stored: async () => ['en_US-ryan-medium'],
@@ -124,7 +124,7 @@ const mk = (o) => Object.assign({ id: 'gen_x', name: 'Test Person', age: 30, gen
   testVp.age = 22; testVp.gender = 'm'; testVp.pro = 'he';
   const profMY = Game.voiceProfileFor(testVp);
   ok('V15 sanity: young male maps to cached ryan pack', profMY.packId === 'm-young' && profMY.voiceId === 'en_US-ryan-medium');
-  const st15b = Game.convoSpeakLine(testVid, 'hello there');
+  const st15b = Game.convoSpeakLine(testVid, '"hello there"');
   ok('V15 pack cached -> speaking-piper', st15b === 'speaking-piper', st15b);
 
   // ---- V9 pack bookkeeping ----
@@ -149,10 +149,10 @@ const mk = (o) => Object.assign({ id: 'gen_x', name: 'Test Person', age: 30, gen
   // ---- V11/V12/V13 gates ----
   Game._voicePacksCached = true; Game._voiceUnlocked = true; Game._voiceTts = { stored: async () => [] };
   delete Game.audio;
-  ok('V11 foreign beat never voiced', Game.convoSpeakLine('gen_aaa', 'bonjour', { foreign: 'french' }) === 'foreign-skip');
+  ok('V11 foreign beat never voiced', Game.convoSpeakLine('gen_aaa', '"bonjour"', { foreign: 'french' }) === 'foreign-skip');
   ok('V12 blank text -> empty', Game.convoSpeakLine('gen_aaa', '   ') === 'empty');
   Game.audio = { isMuted: () => true };
-  ok('V13 muted -> muted', Game.convoSpeakLine('gen_aaa', 'hello') === 'muted');
+  ok('V13 muted -> muted', Game.convoSpeakLine('gen_aaa', '"hello"') === 'muted');
   delete Game.audio;
 
   // ---- V14 hook wired ----

@@ -93,8 +93,8 @@ async function main() {
   const realBetrayalChoices = Game.betrayalChoices;
   try {
     Game.betrayalChoices = () => [
-      { id: 'betrayal:accept', label: '"Sure."' },
-      { id: 'betrayal:decline', label: '"No."' },
+      { id: 'confront:prepared_a', label: '"Sure."' },
+      { id: 'confront:prepared_b', label: '"No."' },
     ];
     let wrapped = [];
     try { wrapped = Game.convoChoices(V) || []; } catch (e) { wrapped = []; }
@@ -104,23 +104,25 @@ async function main() {
     ok('wrapper chain respects the budget (<=8 total, <=7 content)',
       wrapped.length <= MAXC + 1 && wcontent.length <= MAXC,
       `total=${wrapped.length}, content=${wcontent.length}`);
-    ok('injected confrontation still leads', wids[0] === 'betrayal:accept' && wids[1] === 'betrayal:decline',
+    ok('injected confrontation still leads', wids[0] === 'confront:prepared_a' && wids[1] === 'confront:prepared_b',
       `wids[0..1]=${wids.slice(0, 2).join(',')}`);
     ok("'leave' pinned on the wrapped menu", wids.indexOf('leave') >= 0);
     ok('subject navigation survives injected crisis choices', wids.includes('dlg:subject'));
     ok('no duplicate ids on the wrapped menu', new Set(wids).size === wids.length);
     // The event choice (r21's lead) must survive the wrapper trim.
-    ok('event choice survives the wrapper trim', wids.some(id => id === 'alive:event:mourning'),
+    ok('event choice survives the wrapper trim', (Game.convoGet(V).choosingSubject=true, Game.buildMenu(V,true).some(ch=>ch.id==='alive:event:mourning')),
       'alive:event:mourning missing');
   } finally {
     Game.betrayalChoices = realBetrayalChoices;
   }
 
   // r21's lead order survives the cap.
-  const eventChoices = menu.filter(c => c && c.kind === 'event');
+  Game.convoGet(V).choosingSubject=true;
+  const topicMenu=Game.buildMenu(V,true);
+  const eventChoices = topicMenu.filter(c => c && c.kind === 'event');
   ok('event choice present exactly once', eventChoices.length === 1, `eventChoices=${eventChoices.length}`);
   if (eventChoices.length === 1) {
-    ok('event choice leads the menu', menu[0] === eventChoices[0],
+    ok('event is a deliberate topic choice, not a reply to another beat', !ids.includes(eventChoices[0].id),
       `menu[0]=${menu[0] && menu[0].id}`);
   }
 

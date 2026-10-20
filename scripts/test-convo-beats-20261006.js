@@ -61,6 +61,7 @@ function playConvo(vid, maxTurns) {
       replies: (res.choices || []).map(ch => ch.label || ch.id),
       replyIds: (res.choices || []).map(ch => ch.id),
       woundDown: dry && (c.reactDryCount || 0) >= 2,
+      hasPendingBeat: !!c.heldBeats?.length,
     });
     // Pick the first engaging response (not leave, not subject-change on turn 1).
     // REBUILD 2026-10-11: the curious want hangs a real question — answer it
@@ -148,7 +149,7 @@ function playConvo(vid, maxTurns) {
       // on convoThreadHasMore, so it is never a dead button. The test's
       // intent is "engagement offered, not just leave", which 'more'
       // satisfies in the question-owned dialect.
-      const hasEngage = t.replyIds.some(id => id === 'dlg:more' || id === 'dlg:react' || id === 'more');
+      const hasEngage = t.replyIds.some(id => id === 'dlg:more' || id === 'dlg:react' || id === 'more' || (id === 'goon' && t.hasPendingBeat));
       ok('news beat offers engagement replies', hasEngage, `replies=${t.replyIds.join(',')}`);
     }
   }

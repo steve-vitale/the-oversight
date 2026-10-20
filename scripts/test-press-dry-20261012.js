@@ -76,7 +76,7 @@ async function main() {
   check('press-rearmed', hasPressChoice(Game, B), 'press not re-offered after new inconsistency');
   let r2 = null;
   try { r2 = Game.betrayalTurn(B, pressId); } catch (e) {}
-  check('fresh-crack-lands', r2 && /crack in it now/i.test(String(r2.line || '')), String((r2 && r2.line) || '').slice(0, 110));
+  check('fresh-crack-lands', r2 && c.inconsistencies.at(-1).found && /crack|story splits/i.test(String(r2.line || '')), String((r2 && r2.line) || '').slice(0, 110));
   check('dry-count-reset', !((c.pressDry || {})[B]), `pressDry=${JSON.stringify(c.pressDry)}`);
 
   try { Game.endConvo(B, 'left'); } catch (e) {}

@@ -194,7 +194,7 @@ async function fresh() {
     c.genericQ = { kind: 'yn', q: '"Are you eating enough?"' };
     ids = Game.convoChoices(vid).map(x => x.id);
     const resolving = ids.every(id =>
-      id.indexOf('gq:') === 0 || id === 'agree' || id === 'joke' || id === 'silence');
+      id.indexOf('gq:') === 0 || id === 'agree' || id === 'joke' || id === 'silence' || id === 'leave');
     check('T4 genericQ menu has no trap (every choice resolves the question)', resolving && ids.length > 0, ids.join(','));
     const before = !!Game.convoGet(vid).genericQ;
     const rpick = ids.includes('silence') ? 'silence' : ids[0];

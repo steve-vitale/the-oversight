@@ -76,6 +76,7 @@ const Game = globalThis.Scattering.Game;
     Game.convoTurn(vid, 'dlg:subject');
     ids = Game.convoUI(vid).choices.map(c => c.id);
   }
+  ids=require('./lib/conversation-playtest').offers(Game,vid).map(x=>x.id);
   Game.endConvo(vid, 'left');
 
   // The invite must survive the subject menu — the design comment at the

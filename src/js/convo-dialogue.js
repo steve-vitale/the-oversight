@@ -176,7 +176,7 @@
           '"Yeah? What\'s up?"',
           '"Of course. Ask."',
         ]) || '"Sure — what\'s on your mind?"';
-        this.sayLine(vid, line);
+        this.sayLine(vid, line, { tag: 'prompt' });
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -217,7 +217,7 @@
           '"I wish there was more to tell. That\'s it."',
           '"That\'s the whole of it. Sorry."',
         ]) || '"That\'s... pretty much all of it, honestly."';
-        this.sayLine(vid, line);
+        this.sayLine(vid, line, { tag: 'endtopic' });
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -325,6 +325,13 @@
         // REBUILD 2026-10-11: the NPC states the favor from the WANT DEF —
         // the def owns the concrete ask (never "Here's the thing —" loops).
         c.transcript.push({ who: 'you', text: '"How can I help?"' });
+        const settledFavor = c.want?.id === 'ask_favor' &&
+          (c.want.favor || this.convoGetFavor(vid));
+        if (settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
+          const line = '"It\'s already handled. Thank you for asking."';
+          this.sayLine(vid, line, { structural: true });
+          return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, temper: 'kind', name: 'dlg:help' }); } catch (e) {}
         // HONEST REPEAT (dialog-ui-fix 2026-10-11, defect 6): if the want is
@@ -429,7 +436,9 @@
           }
         } catch (e) { beat = null; }
         if (!beat) beat = '"Thank you. Seriously — thank you."';
-        this.sayLine(vid, beat);
+        // The obligation was just created: its confirmation must be spoken,
+        // even when another villager recently used the same thank-you.
+        this.sayLine(vid, beat, { diegeticAct: true });
         // 'commit' ONLY when a real commitment was made. A blocked favor
         // commit is heard ('stated' via defaultResolution), never 'promised'
         // — 'engaged'/'promised' without an obligation would be the
@@ -596,7 +605,7 @@
           '"Oh. ...No, I get it. Thanks for being straight with me."',
           '"No — it\'s fine. I shouldn\'t have asked."',
         ]) || '"Oh. ...No, I get it. Thanks for being straight with me."';
-        this.sayLine(vid, line);
+        this.sayLine(vid, line, { structural: wantLive });
         this.convoWantEngage(vid, 'deflect');
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }

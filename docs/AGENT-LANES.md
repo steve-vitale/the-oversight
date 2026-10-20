@@ -1,5 +1,15 @@
 # Agent lanes (2026-10-15)
 
+Codex conversation structure lane (2026-10-20): branch
+`codex/conversation-structure-20261020`, based on Muse a4404566. Preserve Muse's
+other runtime/content changes and the r28 gossip walk-down signature object.
+The focused lane is spoken context, reply ownership and honest handler labels,
+not numeric survival tuning. Shared sampling/menu-navigation tools live in
+scripts/conversation-audit.js, scripts/review-conversation-audit.js and
+scripts/lib/conversation-playtest.js. Read CONVERSATIONS.md and dated
+conversation-structure-audit-r7.md before continuing. Earlier a39 and r1-r6
+candidate receipts are intermediate, not evidence for the final combined source.
+
 Trust/feast recovery(local2026-10-19): invalid trust IDs and legacy null standing
 are guarded; actual landed noncombat feast healing earns a saved use. Preserve
 Muse first-blow combat attribution. Treatment's unchanged140kcal bill is now

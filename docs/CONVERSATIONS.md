@@ -10,9 +10,10 @@ got talked at — a vending machine, not a conversation.
 
 ## How it works
 
-**Player response choices, always.** Every NPC line comes with 3–6 player
-responses: follow-ups, topic questions, reactions (agree / joke / stay silent),
-changing the subject, offering help, or leaving. Never just "continue".
+**Replies belong to the spoken exchange.** A question, invitation, price or
+live request owns its decision menu. Other subjects and practical actions wait
+behind an explicit subject change. A genuine queued beat can offer "Go on";
+an exhausted topic offers a pivot or exit, rather than filler choices.
 
 **Conversation threads.** Topics develop over multiple exchanges:
 - `goal` — what they want (uses existing goal lines + new depth-2 follow-ups per goal)
@@ -76,3 +77,66 @@ productive. NPCs fill silence in character.
 - Question probability (0.4/turn after the first-convo guarantee)
 - `minTrust` per question in characterGen.json
 - Goal-share trust thresholds by temperament in `convoOpening`
+
+## Structural contract and repeatable audit (2026-10-20)
+
+`sayLine` records `spokenBeat` only when text actually enters the transcript.
+Generated candidates and the legacy player-move `lastBeat` cannot supply reply
+context. Curious openers carry provisional questions; only accepting that
+opener attaches answers and records it as asked. Fallback speech retires its
+unspoken question. Menus keep the exact offered labels through rerenders and
+pagination, and every handler records the selected words.
+
+The final `convoMenuPage` filter runs after additive injectors. Questions,
+invitations, trading and substantive wants retain ownership there too. Adding
+a new wrapper must preserve that rule. Selecting injected topics must leave
+`choosingSubject` before producing their replies. Topic continuation labels
+must describe what their handler actually does; do not label a generic
+continuation "When?" or "Who told you?" without an answering handler.
+
+Required answer acknowledgments and commitment confirmations are dialogue
+grammar, not interchangeable flavor. The repeat ledger must not replace a
+successful promise with "lost my train of thought." Generic yes/no replies
+cannot assert shared visions, prior knowledge or events absent from the ask.
+Both voice backends receive complete quoted speech only; narration remains
+visible and silent. The persona API supplies explicitly spoken text that its
+call sites already display in quotes. Unclosed NPC quotes are not guessed as
+speech. Ambush actions take priority before the old question's budget can trim
+them, not merely at the final filter.
+
+Run `node scripts/check.js --quick` after changes; it automatically includes
+the spoken-context, answer-context and voice-boundary regressions. Use
+`scripts/lib/conversation-playtest.js` to reach real paged offers in prepared
+tests. Do not bypass an unresolved opening exchange by invoking an unoffered
+handler. Prepared scene state belongs in fixtures, never in production UI.
+
+For broader evidence, use fresh output prefixes:
+
+```text
+node scripts/conversation-audit.js --root <baseline-root> --out evidence/<date>/dialogue-before
+node scripts/conversation-audit.js --seeds 1,7,42,99,1234,2026,11,23,55,321,888,4545 --out evidence/<date>/dialogue-after
+node scripts/review-conversation-audit.js evidence/<date>/dialogue-before.json.gz evidence/<date>/dialogue-after.json.gz evidence/<date>/dialogue-review
+```
+
+The sampler retains full displayed lines, real pages, selected words and
+emitted replies, with seeded campaign stages at 0/30/90 controller iterations.
+Report actual days and terminal outcomes, not requested iterations as late-game
+coverage. It interviews living roster members directly, including remote NPCs;
+this does not prove nearby mobile availability. Interviews stop at 12 turns.
+Unknowns, still-active interviews and manual prose issues remain visible.
+The reviewer flags context/label failures; it is not a prose-quality oracle.
+Read the stratified exchanges and every flag, then replay important failures
+through the phone UI at 390x736 and 390x844. A voiced vocative can produce a
+question-stem checker false positive: inspect the actual words before fixing
+or dismissing one.
+
+These structural changes can alter bot choices, trust, promises and survival
+without changing numeric costs. Follow SIMULATING and MEASUREMENT-PLAN for a
+matched balanced panel, source-bound phone proof and survival-lever review.
+
+Authored formal questions require the same review: question, each answer,
+reaction, follow-up and answer-specific recall form one contract. Review the
+whole catalogue when a sampled pair is wrong. A callback cannot claim an
+unnamed person was identified or an unperformed lesson succeeded. Current
+source review and the four repaired families are retained in
+evidence/2026-10-20/conversation-authored-review-r7.json.

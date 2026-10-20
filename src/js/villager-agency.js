@@ -1408,6 +1408,9 @@
     G.convoChoices = function (vid) {
       var base = _convoChoices ? _convoChoices.call(this, vid) : [];
       try {
+        // An ambush replaces the old exchange. A stale question's answer
+        // budget must not trim RUN/TALK/FIGHT before the final focus filter.
+        if (this.convoGet(vid).thread === 'ambush') return this.convoMenuPage(vid, this.betrayalChoices(vid));
         var extra = this.agencyChoices(vid) || [];
         // REACTIVE BUDGET (journey-establishment r16 2026-10-19): convoMenuPage
         // deliberately returns reactive (ans:/gq:) menus whole — the question's
@@ -1464,13 +1467,24 @@
     G.convoTurn = function (vid, choiceId) {
       if(choiceId==='menu:more') return this.convoNextMenu(vid);
       const menuConvo=this.convoGet(vid);menuConvo.menuPage=0;menuConvo.menuPages=1;
+      const selectedWords = menuConvo.offeredReplies?.[choiceId];
+      const priorEntries = new Set(menuConvo.transcript || []);
       try {
-        if (typeof choiceId === 'string' && choiceId.indexOf('agency:') === 0) {
-          var r = this.agencyTurn(vid, choiceId);
-          if (r) return r;
+        try {
+          if (typeof choiceId === 'string' && choiceId.indexOf('agency:') === 0) {
+            var r = this.agencyTurn(vid, choiceId);
+            if (r) return r;
+          }
+        } catch (e) { console.warn('[conversation] agency reply', e); }
+        return _convoTurn ? _convoTurn.call(this, vid, choiceId) : undefined;
+      } finally {
+        // All handlers, including gesture, invitation and confrontation
+        // shortcuts, record exactly the choice the player actually selected.
+        if (selectedWords) {
+          const spoken = (menuConvo.transcript || []).find(e => e.who === 'you' && !priorEntries.has(e));
+          if (spoken) spoken.text = selectedWords;
         }
-      } catch (e) {}
-      return _convoTurn ? _convoTurn.call(this, vid, choiceId) : undefined;
+      }
     };
   })();
 })();

@@ -105,7 +105,8 @@ function ok(name, cond) {
   // --- 10. Confrontation choice appears ---
   Game.endConvo(A);
   const st2 = Game.startConvo(A);
-  const choices = Game.convoChoices(A);
+  require('./lib/conversation-playtest').reach(Game,A,['confront:'+d.id]);
+  const choices = require('./lib/conversation-playtest').offers(Game,A);
   const confront = choices.find(c => c.id.indexOf('confront:') === 0);
   ok('confrontation choice appears with unresolved doubt', !!confront);
 

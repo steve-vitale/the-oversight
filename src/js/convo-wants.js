@@ -3,7 +3,8 @@
 // description: Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 // provides:
 //   - convoSelectWant(vid) -> want object
-//   - convoWantOpener(vid, want) -> {line, thread}
+//   - convoWantOpener(vid, want) -> provisional {line, thread, question}
+//   - convoAcceptWantQuestion(vid, opener) -> accept only the spoken question
 //   - convoWantStaleOpener(vid, want) -> reframe line when all fresh variants are ledger-blocked
 //   - convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit')
 //   - convoWantMenu(vid) -> menu options for the live want
@@ -1671,10 +1672,31 @@
     // queued, never polite-afterthought.
     convoWantOpener(vid, want) {
       if (!want || !want.def) return null;
+      const c = this.convoGet(vid), v = this.state.village;
+      const prior = { pending: c.pendingQ, count: c.qCount, dodges: c.pendingQDodges,
+        asked: (c.askedQs || []).slice(), any: (v.askedQsAny || []).slice(), qid: c.want?.qid };
       let line = null;
       try { line = want.def.opener.call(this, vid); } catch (e) { line = null; }
+      const question = c.pendingQ !== prior.pending ? c.pendingQ : null;
+      if (question) {
+        c.pendingQ = prior.pending; c.qCount = prior.count; c.pendingQDodges = prior.dodges;
+        c.askedQs = prior.asked; v.askedQsAny = prior.any;
+        if (c.want) c.want.qid = prior.qid;
+      }
       if (!line) return null;
-      return { line, thread: 'want', wantId: want.id };
+      return { line, thread: 'want', wantId: want.id, question };
+    },
+
+    // Generation is provisional. Only the accepted opener may hang an ask;
+    // a ledger-blocked candidate cannot leave answers over a later recall.
+    convoAcceptWantQuestion(vid, opener) {
+      if (!opener?.question) return;
+      const c = this.convoGet(vid), q = opener.question;
+      c.pendingQ = { ...q, q: this.convoQuestionDef(q.id)?.q };
+      c.pendingQDodges = 0; c.qCount = (c.qCount || 0) + 1;
+      if (!c.askedQs.includes(q.id)) c.askedQs.push(q.id);
+      this.noteAskedQ(q.id);
+      if (c.want) c.want.qid = q.id;
     },
 
     // convoWantStaleOpener(vid, want): last-resort reframe when every fresh

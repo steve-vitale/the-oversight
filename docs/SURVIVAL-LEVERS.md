@@ -1,5 +1,29 @@
 # Survival levers and investigation register
 
+## Conversation ownership and honest answers (2026-10-20)
+
+Menu ownership, stable labels, explicit subject selection and required answer
+acknowledgments change available social decisions and RNG consumption. They
+can alter trust, obligations, staffing and progression without numeric survival
+tuning. Existing costs, food supply, HP, damage and difficulty are unchanged.
+The source-frozen r7 screen against Muse a4404566 retains 16 matched seeds per
+capable/maker/merchant/caregiver, all 23 metrics, raw cases and four passing
+observer-neutrality pairs. Wins are 16->14, 9->11, 7->6, 5->12 respectively.
+These mixed policies do not establish pacifist viability.
+
+Decision remains review_required. Capable access/gear watches, maker national/
+community/hydration/class/gear watches and NPC-class signal, merchant access/
+community/class watches, and caregiver survival/death/NPC-class/contest-gear
+watches remain visible. Day-60 eligibility changes remain separate. More wins
+clear none of them. Thirty selected exact replay pairs cover every binary win
+flip and the worst adverse deaths, hungry-NPC and earned-gear case per policy;
+all replay full state/outcomes/metrics. Early trust differences are observed
+associations, not a causal explanation for the ending. No difficulty offset
+was applied to recover an old percentage. Retained evidence is in
+evidence/2026-10-20/conversation-structure-audit-r7.md and its linked scorecard.
+This r7 decision precedes Steve's additional favor-action audit; remeasure any
+subsequent fulfillment changes against the same observer and policy revision.
+
 ## Muse/main reconciliation decision (2026-10-19)
 
 Titan stand-down releases normalized mustered workers, preserves Haven-only
