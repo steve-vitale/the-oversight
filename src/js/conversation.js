@@ -1870,15 +1870,31 @@
       // x3, transcript-verified s2002 d34/d122 Wei). If this exact line was
       // already said this conversation, reframe honestly — a real person
       // being re-asked says "as I said", they don't parrot.
+      // R31 (2026-10-20): the r27 reframe pool itself WRAPPED on the 4th
+      // pick (seed 2006 Olivia — the reframe became the repeat, an L2'
+      // violation). Count-aware now: the 3 reframe templates serve once
+      // each, then the NPC escalates honestly (a real person re-asked a
+      // 4th time names the repetition), then the recap choice spends out
+      // of the menu for the sitting — never a verbatim cycle.
       c._recapSaid = c._recapSaid || {};
       const raw = line;
       if (c._recapSaid[raw]) {
         const inner = String(raw).replace(/^"|"$/g, '');
-        line = this.convoPickCycle(vid, 'recaprepeat', [
-          `"As I said — ${inner}"`,
-          `"Like I said — ${inner}"`,
-          `"${inner} That's still where we are."`,
-        ]);
+        c._recapReframes = (c._recapReframes || 0) + 1;
+        if (c._recapReframes <= 3) {
+          line = this.convoPickCycle(vid, 'recaprepeat', [
+            `"As I said — ${inner}"`,
+            `"Like I said — ${inner}"`,
+            `"${inner} That's still where we are."`,
+          ]);
+        } else if (c._recapReframes === 4) {
+          line = `"I've told you three times now — ${inner}"`;
+        } else {
+          line = `"We're going in circles a bit — ${inner}"`;
+          // CAP: the choice spends out for this sitting — a real person
+          // stops answering, they don't find a sixth synonym.
+          try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
+        }
       }
       c._recapSaid[raw] = true;
       return this.voiceLine(vid, line);
@@ -4718,6 +4734,12 @@
       // per-sitting ledgers, or the cycle never restarts and the old cap
       // logic collapses to verbatim.
       c.selfRepeatLines = 0;
+      // RECAP REFRAMES (journey-social r31 2026-10-20): the count-aware
+      // recap escalation is per-sitting — a new sitting, fresh patience.
+      c._recapReframes = 0;
+      // SILENCE-EXHAUSTION (journey-social r31 2026-10-20): per-sitting,
+      // per-band silence count — a new sitting, fresh quiet.
+      c._msil = {};
       // GOSSIP WALK-DOWN (landing r28 2026-10-19): the served-gossip sigs are
       // PER-SITTING, like saidLinesConvo — a resumed gossip thread in a new
       // sitting honestly re-delivers its headline gossip (the r28 resume
@@ -6061,6 +6083,13 @@
         // SCENE (Phase 2): through the resolver.
         if (ms.shift) this.resolveConsequence(vid, { mood: ms.shift, temper: 'neutral', name: 'silence' });
         done(ms.line, '(say nothing)');
+        // SILENCE-EXHAUSTION (journey-social r31 2026-10-20): the NPC has
+        // named the repeated silence and the moment is spent — drain the
+        // energy budget so the EXISTING convoMaybeWinddown machinery closes
+        // it naturally (r18 dry-streak precedent). Guards mirror r18.
+        if (ms.spent && c.active && !c.winddownQueued && !c.windingDown) {
+          c.budget = Math.min(c.budget, c.exchanges);
+        }
         // PENDINGQ DODGE (socialite r12 2026-10-10): silence never answers a
         // hanging bespoke question — without this hook the question hung
         // forever and its !c.pendingQ winddown gate defeated the energy

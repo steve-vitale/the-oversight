@@ -1,0 +1,33 @@
+SMOKE: seed 2013, 10 days (self-test of L3 counters)
+SMOKE: bonds=39 cases=1 convos=12
+SMOKE SELF-TEST: PASS (bonds counter reads nonzero — instrumentation OK)
+seed 2010: days=41 alive=3 convos=41 (deep=11 comfort=12/59) gossipPicks=3 gossipConvos=3 dryRate=2.11/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=0 spoken=0 silent=0
+  L3: {"bonds":56,"deepBonds":10,"betrayalCases":5,"mootsConvened":4,"mootsObserved":4,"gossipConvos":3,"gossipPicks":3,"avgTrust":"26.7"}
+  moots: [{"c":"case_1","day":11,"vote":null,"verdict":"weregild","err":null},{"c":"case_2","day":13,"vote":null,"verdict":"weregild","err":null},{"c":"case_4","day":18,"vote":null,"verdict":"weregild","err":null},{"c":"case_5","day":21,"vote":null,"verdict":"exile","err":null}]
+  regression: P1-streaks=4 P2-reactDry=0
+seed 2011: days=110 alive=7 convos=189 (deep=77 comfort=6/14) gossipPicks=3 gossipConvos=8 dryRate=2.07/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=5 spoken=5 silent=0
+  L3: {"bonds":58,"deepBonds":36,"betrayalCases":31,"mootsConvened":31,"mootsObserved":31,"gossipConvos":8,"gossipPicks":3,"avgTrust":"81.0"}
+  moots: [{"c":"case_1","day":7,"vote":null,"verdict":"weregild","err":null},{"c":"case_3","day":12,"vote":null,"verdict":"weregild","err":null},{"c":"case_4","day":15,"vote":null,"verdict":"weregild","err":null},{"c":"case_5","day":17,"vote":null,"verdict":"exile","err":null},{"c":"case_6","day":23,"vote":null,"verdict":"acquitted","err":null},{"c":"case_7","day":26,"vote":null,"verdict":"acquitted","err":null},{"c":"case_8","day":27,"vote":null,"verdict":"acquitted","err":null},{"c":"case_10","day":29,"vote":null,"verdict":"acquitted","err":null},{"c":"case_11","day":31,"vote":null,"verdict":"acquitted","err":null},{"c":"case_12","day":32,"vote":null,"verdict":"acquitted","err":null},{"c":"case_13","day":39,"vote":null,"verdict":"acquitted","err":null},{"c":"case_14","day":40,"vote":null,"verdict":"acquitted","err":null},{"c":"case_15","day":41,"vote":null,"verdict":"acquitted","err":null},{"c":"case_16","day":42,"vote":null,"verdict":"acquitted","err":null},{"c":"case_17","day":50,"vote":null,"verdict":"acquitted","err":null},{"c":"case_18","day":51,"vote":null,"verdict":"cold_war","err":null},{"c":"case_19","day":52,"vote":null,"verdict":"acquitted","err":null},{"c":"case_20","day":53,"vote":null,"verdict":"acquitted","err":null},{"c":"case_21","day":57,"vote":null,"verdict":"acquitted","err":null},{"c":"case_22","day":58,"vote":null,"verdict":"acquitted","err":null},{"c":"case_23","day":62,"vote":null,"verdict":"acquitted","err":null},{"c":"case_24","day":63,"vote":null,"verdict":"acquitted","err":null},{"c":"case_25","day":73,"vote":null,"verdict":"acquitted","err":null},{"c":"case_26","day":74,"vote":null,"verdict":"acquitted","err":null},{"c":"case_27","day":78,"vote":null,"verdict":"acquitted","err":null},{"c":"case_28","day":83,"vote":null,"verdict":"acquitted","err":null},{"c":"case_29","day":99,"vote":null,"verdict":"acquitted","err":null},{"c":"case_30","day":99,"vote":null,"verdict":"acquitted","err":null},{"c":"case_31","day":100,"vote":null,"verdict":"acquitted","err":null},{"c":"case_32","day":101,"vote":null,"verdict":"acquitted","err":null},{"c":"case_33","day":107,"vote":null,"verdict":"acquitted","err":null}]
+  regression: P1-streaks=1 P2-reactDry=14
+seed 2012: days=142 alive=7 convos=77 (deep=8 comfort=11/59) gossipPicks=3 gossipConvos=2 dryRate=1.65/12
+  L2' repeats: 5
+    d16 Dale t3 <silence>: You say nothing. Neither do they, for a while — and it's fine.
+    d16 Dale t4 <silence>: A comfortable quiet settles. They smile a little, and let it be.
+    d16 Dale t5 <silence>: You say nothing. Neither do they, for a while — and it's fine.
+    d16 Dale t6 <silence>: A comfortable quiet settles. They smile a little, and let it be.
+    d16 Dale t7 <silence>: You say nothing. Neither do they, for a while — and it's fine.
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=4 spoken=4 silent=0
+  L3: {"bonds":69,"deepBonds":39,"betrayalCases":10,"mootsConvened":10,"mootsObserved":10,"gossipConvos":2,"gossipPicks":3,"avgTrust":"83.9"}
+  moots: [{"c":"case_1","day":11,"vote":null,"verdict":"weregild","err":null},{"c":"case_2","day":13,"vote":null,"verdict":"weregild","err":null},{"c":"case_3","day":15,"vote":null,"verdict":"weregild","err":null},{"c":"case_4","day":18,"vote":null,"verdict":"exile","err":null},{"c":"case_5","day":28,"vote":null,"verdict":"acquitted","err":null},{"c":"case_6","day":29,"vote":null,"verdict":"acquitted","err":null},{"c":"case_8","day":33,"vote":null,"verdict":"acquitted","err":null},{"c":"case_10","day":38,"vote":null,"verdict":"acquitted","err":null},{"c":"case_11","day":58,"vote":null,"verdict":"acquitted","err":null},{"c":"case_12","day":59,"vote":null,"verdict":"acquitted","err":null}]
+  regression: P1-streaks=1 P2-reactDry=3
+L2' (verbatim repeat): GO (gap REAL)
+COMFORT-REPEAT: MISS
+SETTLE-SPEAK (silent settle): MISS
+G1 (gossip state-truth): needs sense-read of transcripts — see evidence dir

@@ -205,32 +205,69 @@
   // convoMoodSilence: saying nothing is always an option — but it means
   // different things at different temperatures. Warm: comfortable. Cold:
   // awful. Neutral: they fill it, because someone has to.
+  // SILENCE-EXHAUSTION (journey-social r31 2026-10-20): the pools are tiny
+  // (2 lines warm/cool/tense) and convoPickCycle's reset alternates them —
+  // 3+ consecutive silences in one sitting served verbatim repeats
+  // (transcript: seed 2012 Dale d16, warm A,B,A,B,A — an L2' violation).
+  // Count-aware now: the pool serves each line once per sitting per band,
+  // then the NPC names the repeated silence honestly (said once), then the
+  // moment is spent — the caller drains the energy budget so the EXISTING
+  // convoMaybeWinddown machinery closes it naturally (r18 dry-streak
+  // precedent). Silence stays available (canon); it just stops narrating
+  // itself in circles. Past the escalation, the honest line is the bare
+  // "..." — the absence of speech, not a content beat.
   Game.convoMoodSilence = function (vid) {
+    const c = this.convoGet(vid);
     const band = this.convoMoodBand(vid);
-    if (band === 'warm') {
-      return { shift: 1, line: this.convoPickCycle(vid, 'msil:warm', [
-        'A comfortable quiet settles. They smile a little, and let it be.',
-        'You say nothing. Neither do they, for a while — and it\'s fine.',
-      ]) || 'A comfortable quiet settles.' };
+    c._msil = c._msil || {};
+    const n = (c._msil[band] || 0) + 1;
+    c._msil[band] = n;
+    const POOLS = {
+      warm: {
+        pool: [
+          'A comfortable quiet settles. They smile a little, and let it be.',
+          'You say nothing. Neither do they, for a while — and it\'s fine.',
+        ],
+        shift: 1,
+        escalate: '"This is nice, but —" They tilt their head. "Did you come to tell me something?"',
+      },
+      cool: {
+        pool: [
+          'The silence stretches a beat too long. They study their hands.',
+          'You don\'t answer. The quiet turns pointed.',
+        ],
+        shift: -1,
+        escalate: '"The quiet\'s getting pointed." They don\'t look up. "Say it or don\'t."',
+      },
+      tense: {
+        pool: [
+          '"Did you need something?" Their voice is flat.',
+          'Your silence lands wrong. They look away.',
+        ],
+        shift: 0,
+        escalate: '"If you\'re not going to talk, I have things to do."',
+      },
+      fill: {
+        pool: [
+          'They fill the quiet. "Anyway — where was I?"',
+          '"You\'re a good listener, you know that?" A tired smile.',
+          'They glance at the fire, then back. The quiet doesn\'t seem to bother them.',
+        ],
+        shift: 0,
+        escalate: '"Anyway —" They laugh a little. "The quiet\'s getting to me. What\'s on your mind?"',
+      },
+    };
+    const key = (band === 'warm' || band === 'cool' || band === 'tense') ? band : 'fill';
+    const def = POOLS[key];
+    if (n <= def.pool.length) {
+      return { shift: def.shift, line: this.convoPickCycle(vid, 'msil:' + key, def.pool) || def.pool[0] };
     }
-    if (band === 'cool') {
-      return { shift: -1, line: this.convoPickCycle(vid, 'msil:cool', [
-        'The silence stretches a beat too long. They study their hands.',
-        'You don\'t answer. The quiet turns pointed.',
-      ]) || 'The silence stretches a beat too long.' };
+    if (n === def.pool.length + 1) {
+      // The prompt gets its turn to land — the budget spends only if the
+      // player stays silent PAST it.
+      return { shift: def.shift, line: def.escalate, spent: false };
     }
-    if (band === 'tense') {
-      return { shift: 0, line: this.convoPickCycle(vid, 'msil:tense', [
-        '"Did you need something?" Their voice is flat.',
-        'Your silence lands wrong. They look away.',
-      ]) || '"Did you need something?" Their voice is flat.' };
-    }
-    // friendly / neutral: they fill it.
-    return { shift: 0, line: this.convoPickCycle(vid, 'msil:fill', [
-      'They fill the quiet. "Anyway — where was I?"',
-      '"You\'re a good listener, you know that?" A tired smile.',
-      'They glance at the fire, then back. The quiet doesn\'t seem to bother them.',
-    ]) || 'They fill the quiet.' };
+    return { shift: 0, line: '"..."', spent: true };
   };
 
   // convoMoodGoodbye: the parting beat carries the temperature out the door.
