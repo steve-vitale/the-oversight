@@ -1,0 +1,30 @@
+=== seed 9702 day 23 — conversation with Michelle (gen_i4h619v) ===
+occupation=librarian temperament=warm trust=90 dead=false mood=grieving
+want: seek_taken (stage 0)
+
+THEM: "Don't mind me. Today's just heavy."
+(turn0 choices: confront:d_g88siuj, dlg:invite, dlg:comfort, dlg:empathize, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind? We all learn."
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Well now — Did you hear? Jorge just walked away from Haven. Didn't look back."
+(want=seek_taken stage=0)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. Anyway — how are YOU doing?"
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Yarrow — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_taken stage=3 resolution=unestablished

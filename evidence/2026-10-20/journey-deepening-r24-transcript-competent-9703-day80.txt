@@ -1,0 +1,23 @@
+=== seed 9703 day 80 — conversation with Chris (visjoin_75) ===
+occupation=dockworker temperament=anxious trust=20 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+(turn0 choices: ans:q_song:a_yes, ans:q_song:a_no, ans:q_song:a_deflect, ans:q_song:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going. …if that makes sense."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's the word around the fire?"
+THEM: "Good question." "Did you hear? Turki just walked away from Haven. Didn't look back. You're doing fine."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Did you hear? Turki just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Come, sit — Finn talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [goon] "Whoa — go on."
+THEM: "I should get back to it."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

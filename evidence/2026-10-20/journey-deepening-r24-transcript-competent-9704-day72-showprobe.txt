@@ -1,0 +1,27 @@
+=== seed 9704 day 72 — conversation with Fiona (gen_feztzmi) ===
+occupation=bus driver temperament=stoic trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+(turn0 choices: ans:q_theory:a_aliens, ans:q_theory:a_test, ans:q_theory:a_shrug, betrayal:accept, leave, silence)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Anthony is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Why do you ask? Did you hear? Sari just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 9703 day 76 — conversation with James (james_okonkwo) ===
+occupation=carpenter temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your first memory — What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Mayapple — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Turki just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "I should go. You know where to find me."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

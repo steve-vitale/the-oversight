@@ -1,0 +1,24 @@
+=== seed 9703 day 65 — conversation with James (james_okonkwo) ===
+occupation=carpenter temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Will you help me clean it?"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? That's the priority."
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Look — Did you hear? Turki just walked away from Haven. Didn't look back."
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? That's the whole of it."
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Alright. Back to it."
+want final: id=ask_favor stage=3 resolution=unresolved

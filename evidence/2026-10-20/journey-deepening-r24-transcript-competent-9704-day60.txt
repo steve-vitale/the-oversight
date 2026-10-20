@@ -1,0 +1,23 @@
+=== seed 9704 day 60 — conversation with Arlo (gen_l6ubnrz) ===
+occupation=Rancher temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Can I be honest? Something's off with Maya. I mentioned it to the others and they went quiet, which tells you everything."
+(want=curious stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Did you hear? Maya just walked away from Haven. Didn't look back. Forget it."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Okay. We'll pick this up later."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

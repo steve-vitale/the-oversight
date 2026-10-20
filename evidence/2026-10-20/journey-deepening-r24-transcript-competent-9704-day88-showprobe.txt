@@ -1,0 +1,31 @@
+=== seed 9704 day 88 — conversation with Maureen (gen_xjjcxfw) ===
+occupation=Mortician temperament=withdrawn trust=91 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "Can we talk?" Maureen sits down near you. "Just... talk. Like people used to."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Maya asked me about you. A lot of questions. Friendly ones. Too friendly."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Yarrow — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_comfort stage=0)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_comfort stage=0)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "Huh. Let me think about that." "Since Remigiusz died... I keep expecting to see Remigiusz at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Just... be straight with me."
+(want=seek_comfort stage=0)
+YOU: [ask:you] "Be straight with me. What am I to you?"
+THEM: "I should go. You know where to find me."
+(want=seek_comfort stage=0)
+want final: id=seek_comfort stage=3 resolution=unestablished

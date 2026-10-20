@@ -1,0 +1,30 @@
+=== seed 9702 day 57 — conversation with Jorge (gen_lr41vc6) ===
+occupation=Social worker temperament=anxious trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Do you ever just need to be alone? Like, really alone?"
+(turn0 choices: agency:ask_field, ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Michelle died... I keep expecting to see Michelle at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Andrei? A radio DJ, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Look — I think the asking matters more than the answer, out here."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? That's the whole of it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talking. We'll figure it out."
+want final: id=curious stage=3 resolution=engaged

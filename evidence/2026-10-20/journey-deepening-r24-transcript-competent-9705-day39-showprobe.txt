@@ -1,0 +1,32 @@
+=== seed 9705 day 39 — conversation with Javier (gen_78lksnw) ===
+occupation=bush pilot temperament=withdrawn trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, dlg:help, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? ...sorry, lost it."
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Hah. Did you hear? Tashi just walked away from Haven. Didn't look back."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? No time to waste."
+(want=seek_taken stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "...Sorry, lost my train of thought."
+(want=seek_taken stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Makhana (Fox Nut) — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=seek_taken stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=1)
+YOU: [ask:lately] "What's weighing on you right now?"
+THEM: "Good question." "Last time things were different. They always are." "They took you — The Vigil, on the screens. The whole fire watched. Nobody knew where to look."
+(want=seek_taken stage=1)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=unresolved

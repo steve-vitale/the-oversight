@@ -1,0 +1,31 @@
+=== seed 9703 day 50 — conversation with Thabo (thabo_maseko) ===
+occupation=taxi driver temperament=dry trust=42 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I still haven't found anyone. Any chance?"
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Elena talks to the garden. The garden listens. I've seen it. No time to waste."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Mayapple — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=2)
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,21 @@
+=== seed 9702 day 45 — conversation with Andrei (gen_k03dv8p) ===
+occupation=radio DJ temperament=warm trust=65 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Svyatoslav?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? That's the priority."
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Jorge touch it."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? That's the whole of it."
+(want=seek_taken stage=1)
+YOU: (leave)
+closing line: "Take care of yourself, yeah? I mean it."
+want final: id=seek_taken stage=3 resolution=unresolved

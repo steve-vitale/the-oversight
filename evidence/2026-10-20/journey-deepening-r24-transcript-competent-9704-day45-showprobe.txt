@@ -1,0 +1,30 @@
+=== seed 9704 day 45 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I still haven't found anyone. Any chance? Just... be straight with me."
+(turn0 choices: alive:event:show, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Emma? A Veterinarian, back before. Solid person."
+(want=ask_favor stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Let's see — My take? We're not going to like the answer, whatever it is."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Lamb's Quarters — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Peanut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Right. Back to it."
+want final: id=ask_favor stage=3 resolution=stated

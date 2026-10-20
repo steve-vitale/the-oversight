@@ -1,0 +1,24 @@
+=== seed 9702 day 45 — conversation with Roberto (gen_of7uft4) ===
+occupation=musician temperament=cautious trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Real talk — Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it. Good talking."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Sugar Maple — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Sassafras — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 9701 day 27 — conversation with Andre (gen_7yvej8p) ===
+occupation=plumber temperament=restless trust=86 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Andre glances around first. "People are saying things. About you. Is any of it true?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, agree, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong. Funny how that works."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Please — tell me you've got food to spare. I'm running on empty here. My hands shake when I try to work."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "that stray dog — the one that bit two people — lets Naran touch it. Gotta keep moving."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=1)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Maypop — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=1)
+YOU: [teach] "Watch — this is useful."
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=1)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,31 @@
+=== seed 9702 day 60 — conversation with Ella (ella_johnson) ===
+occupation=ESL teacher temperament=dry trust=23 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "You look handy. What did you do with your hands, before?"
+(turn0 choices: ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, betrayal:accept, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Well now — Watch yourself around Sofia. I can't tell you why. Just... watch."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Did you hear? Jorge just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "Did you hear? Sofia just walked away from Haven. Didn't look back. Allegedly."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Did you hear? Victor just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Well. Tariq?" Ella lowers their voice. "Between us — they're not from Denver. They're from Lahore, Pakistan. Don't say who told you."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "Did you hear? Tariq just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "Well. My social battery is officially dead."
+(want=curious stage=2)
+want final: id=curious stage=3 resolution=engaged

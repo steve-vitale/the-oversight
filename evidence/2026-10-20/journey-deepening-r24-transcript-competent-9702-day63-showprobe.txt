@@ -1,0 +1,27 @@
+=== seed 9702 day 63 — conversation with Victor (victor_lopez) ===
+occupation=mason temperament=steady trust=68 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "I tried the Dandelion like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: alive:want:ask_favor, alive:event:mourning, dlg:invite, teach, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Sofia just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Ghost Pipe — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=0)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Mesquite — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=unestablished

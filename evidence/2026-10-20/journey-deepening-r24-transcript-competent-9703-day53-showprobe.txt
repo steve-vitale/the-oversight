@@ -1,0 +1,18 @@
+=== seed 9703 day 53 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=41 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "Hah. Black Walnut — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:mourning, alive:thread:gossip, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You'd know about that."
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Did you hear? Thabo just walked away from Haven. Didn't look back."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "...Thanks for being here. That's all."
+want final: id=ask_favor stage=3 resolution=unestablished
