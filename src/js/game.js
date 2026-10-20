@@ -4609,8 +4609,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // This is the village as an information network, not a broadcast.
         try {
           if (this.npcGossipAbout && Math.random() < 0.5) {
+            const _skipSigs = (opts && opts.skipSigs) || [];
+            // KNACK DEDUPE (journey landing r32 2026-10-20): the walk-down
+            // dedupes ledger gossip per sitting (r28/r31), but this branch
+            // re-served the same knack line 3x in one sitting (r32 pilot,
+            // seed 205 day 4: Nora's iron_stomach at turns 2, 3 and 6).
+            // Don't re-serve a knack target already served this sitting;
+            // when every target is served, fall through to the walk-down.
             const others = (this.state.village.roster || []).filter(id =>
-              id !== vid && id !== this.villagerId);
+              id !== vid && id !== this.villagerId &&
+              _skipSigs.indexOf('about:' + id) === -1);
             if (others.length) {
               // DETECTIVE BIAS: you ask about people you've actually talked
               // to. If you've heard claims about someone, they're the ones
@@ -4720,9 +4728,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           else if (g.action === 'generous') this.say(self
             ? `${first}: "People are saying I've been generous. Sharing around, no questions asked."`
             : `${first}: "People are saying ${wname} has been generous. Sharing around, no questions asked."`);
-          else if (g.action === 'departure') this.say(self
-            ? `${first}: "Yeah, that was me. I walked away from Haven once. Didn't look back."`
-            : `${first}: "Did you hear? ${wname} just walked away from Haven. Didn't look back."`);
+          else if (g.action === 'departure') {
+            // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): the
+            // 'departure' action used to render EVERY leaving as a dramatic
+            // walk-out ("walked away from Haven. Didn't look back.") —
+            // including routine forage/water/trap trips (r32 pilot, seed
+            // 205: Luz "walked away" 7 times in 14 days, every one a routine
+            // expedition). The seed sites now pass dims.purpose; the render
+            // tells the truth per purpose. No purpose (old entries) keeps
+            // the walk-out telling — the historical behavior.
+            const dpurp = ((g.dims || {}).purpose) || 'walkout';
+            const dRoutine = {
+              forage: 'to forage', water: 'for water', traps: 'to check the snares',
+              visit: 'to find someone', explore: "to see what's out there",
+              haul: 'to haul something back', guard: 'to stand watch',
+            }[dpurp];
+            if (dRoutine) this.say(self
+              ? `${first}: "That was me — headed out ${dRoutine}."`
+              : `${first}: "${wname} headed out ${dRoutine}."`);
+            else if (dpurp === 'expedition') this.say(self
+              ? `${first}: "That was me — gone a while. Don't wait up."`
+              : `${first}: "${wname} set out on a long trek. Won't be back for days."`);
+            else this.say(self
+              ? `${first}: "Yeah, that was me. I walked away from Haven once. Didn't look back."`
+              : `${first}: "Did you hear? ${wname} just walked away from Haven. Didn't look back."`);
+          }
           else if (g.action === 'return') this.say(self
             ? `${first}: "I left. Walked back in like I'd never left, apparently."`
             : `${first}: "${wname} is back. Walked in like they'd never left."`);
@@ -4758,16 +4788,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             ? `${first}: "People are talking about me. Take it for what it's worth."`
             : `${first}: "People are talking about ${wname}. Take it for what it's worth."`);
           try {
-            if (this.journalNote) this.journalNote('people', g.dims.who,
+            if (this.journalNote) {
+              // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): the
+              // journal note tells the truth per departure purpose, like
+              // the spoken render above — routine trips are not walk-outs.
+              const _dp = ((g.dims || {}).purpose) || 'walkout';
+              const _dr = {
+                forage: 'to forage', water: 'for water', traps: 'to check the snares',
+                visit: 'to find someone', explore: "to see what's out there",
+                haul: 'to haul something back', guard: 'to stand watch',
+              }[_dp];
+              const _depJournal = _dr ? `Rumor: they headed out ${_dr}.`
+                : _dp === 'expedition' ? `Rumor: they set out on a long trek — won't be back for days.`
+                : `They walked away from Haven. Nobody knows where they went.`;
+              this.journalNote('people', g.dims.who,
               g.action === 'stingy' ? `Rumor: they've been holding back, keeping the good stuff close.`
               : g.action === 'generous' ? `Rumor: they've been generous, sharing around.`
-              : g.action === 'departure' ? `They walked away from Haven. Nobody knows where they went.`
+              : g.action === 'departure' ? _depJournal
               : g.action === 'return' ? `They're back from wherever they went.`
               : g.action === 'rescue' ? `They ran into the treeline when someone screamed. Didn't hesitate.`
               : g.action === 'contest_won' ? `Won ${((g.dims || {}).contest) || 'a contest'} on the cameras.`
               : g.action === 'contest_survived' ? `Walked out of ${((g.dims || {}).contest) || 'a contest'} alive.`
               : g.action === 'contest_died' ? `Died in ${((g.dims || {}).contest) || 'a contest'}.`
               : `There's talk about them going around the fire.`);
+            }
           } catch (e2) {}
           return { ok: true, gossip: g, aboutOther: g.dims.who, gossipSig: gossipSig(g) };
           } // else: all rumors about others already said this conversation — fall through
@@ -4900,7 +4944,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           votes[name].backers.push(this.firstRef(pvid));
         }
         const opts = Object.entries(votes).map(([name, v]) => ({ name, n: v.n, backers: v.backers }));
-        this.say(`${first} leans in. "That thing — ${mdef.unknown || 'you know the one'}. We're naming it. So far: ${opts.map(o => `"${o.name}" (${o.backers.join(', ')})`).join('; ')}. What's your vote?"`);
+        // NAMEBEAST PUNCTUATION (journey landing r32 2026-10-20): some
+        // unknown-descriptors end with a period ("...duck behavior.") and
+        // the template adds its own — "behavior..". Strip the
+        // descriptor's trailing periods; the template supplies the stop.
+        const unkDesc = String(mdef.unknown || 'you know the one').replace(/\.+$/, '');
+        this.say(`${first} leans in. "That thing — ${unkDesc}. We're naming it. So far: ${opts.map(o => `"${o.name}" (${o.backers.join(', ')})`).join('; ')}. What's your vote?"`);
         this.socialTick(vid);
         return { ok: true, naming: { mid, descriptor: mdef.unknown || 'the beast', options: opts.map(o => o.name) } };
       }
@@ -5228,7 +5277,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (const wid of witnesses) {
             try { this.remember(wid, 'contender_left', d + ' walked out after losing the leadership fight'); } catch (e) {}
           }
-          try { this.seedGossip('departure', { who: cid }, witnesses); } catch (e) {}
+          // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): this IS a real
+          // walk-out (lost the leadership fight, leaves the village) — mark
+          // it so the gossip render keeps the dramatic telling.
+          try { this.seedGossip('departure', { who: cid, purpose: 'walkout' }, witnesses); } catch (e) {}
           try { this.removeVillager(cid, 'splinter'); } catch (e) {}
           return 'leave';
         }
@@ -16363,8 +16415,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // For who-gossip (e.g. {who: subj} with action 'stingy'), map the action
     // to the reputation effect. Returns {} if no reputation effect.
     gossipActionDims(action, dims) {
-      // If dims already have rep keys (not just 'who'), use them directly
-      const repKeys = Object.keys(dims).filter(k => k !== 'who');
+      // If dims already have rep keys (not just 'who'), use them directly.
+      // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): 'purpose' is
+      // render metadata, not reputation — exclude it or a routine forage
+      // trip would smuggle {purpose:'forage'} into the rep pipeline
+      // (applyRep's NaN guard happens to skip it, but the contract should
+      // be explicit, not lucky).
+      const repKeys = Object.keys(dims).filter(k => k !== 'who' && k !== 'purpose');
       if (repKeys.length) {
         const out = {};
         for (const k of repKeys) out[k] = dims[k];
