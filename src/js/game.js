@@ -19323,12 +19323,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // engagement.
         const cut = (typeof this.justiceExileCutsTalk === 'function') && this.justiceExileCutsTalk(who);
         if (!cut) {
-          this.say(`👂 ${this.displayName(who)} ${invites[Math.floor(Math.random() * invites.length)]}`);
+          const invite = invites[Math.floor(Math.random() * invites.length)];
+          this.say(`👂 ${this.displayName(who)} ${invite}`);
           // they actually want to talk: use the existing talk-request system
           // so the player sees "can we talk?" on their person card.
+          // JOIN-REQUEST HONESTY (journey-social r34 2026-10-20): the stored
+          // line used to be the generic "wants you to join the conversation",
+          // dropping the spoken invitation — so the sit-down's opener carried
+          // no actual question and the conversation had nothing to engage
+          // (seed 3201 Debbie d19: pulled in, then deflected everything).
+          // Store the spoken invitation verbatim; the opener then carries the
+          // real ask.
           try {
             v.talkRequests = v.talkRequests || {};
-            v.talkRequests[who] = { line: `__NAME__ wants you to join the conversation.`, day: this.state.scholar.day };
+            v.talkRequests[who] = { line: `__NAME__: ${invite}`, day: this.state.scholar.day };
           } catch (e) {}
         }
       }
