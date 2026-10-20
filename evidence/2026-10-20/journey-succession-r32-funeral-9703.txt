@@ -1,0 +1,14 @@
+## FUNERAL [first] — Kavya buried by Seamus (died d11)
+fullChain=true recoveryLine=true corpseFound=true recovered=true
+deathPack=[Stickx1, Stone knifex1]
+RECOVERY: That night, they bring Kavya home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.
+CORPSE: found id=corpse_11_1xy73i recovered=true buried=false deathPack=[Stickx1, Stone knifex1]
+RESPECTS: You say a few words for Kavya. Not a ceremony — just: you were here, and someone noticed you leaving. (-3 trauma)
+RESPECTS: ok=true trauma 4 -> 1 namesDead=true
+TAKE: You take stick from Kavya. Your hands know what they did. (+6 trauma)
+TAKE: ok=true item=Stick namesDead=true
+TAKE: successor trust 34 -> 34 (observe witness-gated)
+BURY: You bury Kavya. A marker, of sorts. The village will know where. (+4 trauma)
+BURY: What they carried goes into the ground with them: stone knife. The village leaves the dead their things.
+BURY: ok=true trauma 7 -> 11 corpseGone=true namesDead=true
+FALLEN-ROLL: predecessor recorded=true
