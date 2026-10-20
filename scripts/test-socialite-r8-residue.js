@@ -55,7 +55,8 @@ const LIGHT = new Set(['goon', 'leave', 'recap', 'dlg:react', 'dlg:more', 'agree
     // react:* (answering their direct question) IS substantive by design —
     // only honest_pass is excluded.
     let menu = Game.buildMenu(A).map(c => c.id);
-    const sub = menu.find(id => !LIGHT.has(id) && id !== 'leave' && id.indexOf('ans:') !== 0 && id.indexOf('honest_pass') === -1);
+    // Physical care/food and teaching are deeds, outside a words-only probe.
+    const sub = menu.find(id => !['teach','dlg:favor_action','dlg:favor_cancel'].includes(id) && !LIGHT.has(id) && id !== 'leave' && id.indexOf('ans:') !== 0 && id.indexOf('honest_pass') === -1);
     if (!sub) { farmOk = false; detail = 'no substantive choice offered at iter ' + i + ' menu=' + menu.join(','); break; }
     let r;
     try { r = Game.convoTurn(A, sub); } catch (e) { farmOk = false; detail = 'convoTurn(' + sub + ') threw: ' + e.message; break; }
@@ -70,7 +71,7 @@ const LIGHT = new Set(['goon', 'leave', 'recap', 'dlg:react', 'dlg:more', 'agree
     const c = Game.convoGet(A);
     const ex = c.exchanges, subst = !!c.substantive, mood = c.mood;
     Game.endConvo(A, 'left');
-    if (i < 3 || i % 10 === 9) trace.push(`iter${i}: trust=${v.trust[A]} ex=${ex} subst=${subst} mood=${mood} firstChoice=${sub}`);
+    if (i < 12 || i % 10 === 9) trace.push(`iter${i}: trust=${v.trust[A]} ex=${ex} subst=${subst} mood=${mood} firstChoice=${sub}`);
     if (v.trust[A] >= 90) { trace.push(`reached 90 at iter ${i}`); break; }
   }
   console.log('--- farm trace (trust starts at 40, npcMood=' + mood0 + ') ---');

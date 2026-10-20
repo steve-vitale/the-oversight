@@ -101,6 +101,7 @@
   function convoIsLightChoice(choiceId) {
     return choiceId === 'goon' || choiceId === 'leave' || choiceId === 'recap' ||
       choiceId === 'dlg:react' || choiceId === 'dlg:more' ||
+      choiceId === 'dlg:favor_requirements' || choiceId === 'dlg:favor_cancel' ||
       choiceId === 'agree' || choiceId === 'joke' || choiceId === 'silence' ||
       choiceId === 'nv:nod' || choiceId === 'nv:smile' || choiceId === 'nv:pointself';
   }
@@ -164,6 +165,28 @@
     try { if (typeof this.convoDropUnspoken === 'function') this.convoDropUnspoken(vid, choiceId); } catch (e) {}
     if (choiceId && choiceId.indexOf('dlg:') === 0) {
       const dlg = choiceId.slice(4);
+
+      if (dlg === 'favor_action' || dlg === 'favor_requirements' || dlg === 'favor_cancel') {
+        const favor = c.want?.favor || this.convoGetFavor(vid);
+        const status = this.convoFavorAction(vid, favor);
+        c.transcript.push({ who: 'you', text: c.offeredReplies?.[choiceId] || 'Check the request' });
+        let result = dlg === 'favor_action' ? this.convoPerformFavor(vid, favor) : { ok: false, line: status.reason };
+        const promise = this.state.village.promises?.[vid];
+        if (dlg === 'favor_cancel' && status.unsupported && promise?.favorId === favor?.id && !promise.kept) {
+          promise.kept = 'unavailable';
+          favor.state = 'moot';
+          if (c.want) { c.want.stage = 3; c.want.resolution = 'moot'; }
+          result = { ok: false, line: 'The unavailable job is closed. No completion reward or broken-promise penalty was applied.' };
+        }
+        const line = result.line;
+        // Requirements are interface information, never fabricated NPC speech
+        // (and therefore never spoken by the voice package).
+        this.sayLine(vid, line, { diegeticAct: true });
+        if (result.ok && c.want) { c.want.stage = 3; c.want.resolution = 'fulfilled'; }
+        c.replyMenu = null;
+        this.save();
+        return { line, choices: this.convoChoices(vid), ended: !!this.over, transcript: c.transcript.slice() };
+      }
 
       if (dlg === 'subject') {
         // Explicit subject change — open the topic menu.
@@ -389,6 +412,12 @@
       }
 
       if (dlg === 'commit') {
+        const favor = c.want?.favor;
+        if (favor && this.convoFavorAction(vid, favor).unsupported) {
+          const line = this.convoFavorAction(vid, favor).reason;
+          this.sayLine(vid, line, { diegeticAct: true });
+          return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         // "I'll do it." — the formal commitment. REBUILD 2026-10-11: new
         // handler. The want def speaks the commit beat; the state moves to
         // resolved with the def's resolution (promised/heeded/repaid).
@@ -567,6 +596,7 @@
         }
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:details' }); } catch (e) {}
+        if (c.want?.id === 'ask_favor') c.want.favorExplained = true;
         this.convoWantEngage(vid, 'engage');
         return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }

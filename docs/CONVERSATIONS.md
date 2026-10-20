@@ -140,3 +140,43 @@ whole catalogue when a sampled pair is wrong. A callback cannot claim an
 unnamed person was identified or an unperformed lesson succeeded. Current
 source review and the four repaired families are retained in
 evidence/2026-10-20/conversation-authored-review-r7.json.
+
+### Favor requests: actions and requirements (2026-10-20)
+
+A request must connect to an executable deed or explain the blocker in its
+conversation menu. `convoFavorAction` is the read-only source for readiness,
+requirements and the dispatch recheck. `convoFavorActionMenu` exposes an action
+when ready and a requirements explanation in either case. Menu identity includes
+readiness so collecting food or approaching the recipient updates the offer.
+
+Food sharing invokes `giveFood(vid, 'meal')`, removes up to three actual edible
+pack portions and spends its ordinary action. Wound and illness care invoke
+`tendVillager`: 32 ticks (roughly half an hour), ordinary time costs, no invented
+medical skill requirement and no instant-cure claim. Its null return is not a
+failure receipt. Death, combat, missing/dead recipients, map node, Haven door and
+local adjacency are checked at dispatch. Completion cannot replay the deed.
+A future promise remains distinct from performing the action; ready actions stay
+available immediately after committing and on later promise reminders.
+
+Five authored jobs still lack an executable joint activity: creek hauling,
+shared snare repair, watch handover, overnight company and joint foraging.
+Their menus explicitly explain this and offer no new unkeepable promise. Old
+open jobs have a no-penalty close route, no completion reward, and no deadline
+penalty while the unsupported job remains open. This is a disclosed release
+blocker, not implementation of those jobs. Do not substitute any NPC assignment,
+food gift or brief conversation for those specific jobs.
+
+Typed favor promises require deed receipts: physical food, wound care or illness
+care. General non-favor promises keep their existing behavior. Words cannot keep
+a physical-care favor; unrelated assignments cannot keep a joint-job favor.
+Treatment with no illness benefit cannot keep the illness favor. Request and
+promise lines bypass random semantic voice additions; requirement explanations
+are unquoted interface narration and stay silent in generated speech.
+
+Verify with `node scripts/godpath/test-favor-action-contract.js`, the full green
+list, and the prepared native-touch recipe `evidence/2026-10-20/favor-phone-r2.js`
+at both phone heights. It uses declared prepared needs in a played save, actual
+UI choices and save/Continue, with no browser outcome grants. Preserve the broad
+r7 transcript review as historical evidence, then refresh balanced and frame
+proofs whenever runtime changes. See the dated favor-action audit for final
+source hashes, limitations and tradeoffs.

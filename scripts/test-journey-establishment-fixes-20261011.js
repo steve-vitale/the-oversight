@@ -207,19 +207,12 @@ async function testCommitStageBlindness(Game, seed) {
   // Find a villager whose want is ask_favor (re-roll across passes; the
   // want draw is RNG-driven and rare on some seeds).
   const roster = (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
-  let vid = null;
-  for (let passN = 0; passN < 3 && !vid; passN++) {
-    for (const id of roster) {
-      try {
-        Game.startConvo(id);
-        const w = (Game.convoGet(id).want || {});
-        if (w.id === 'ask_favor') { vid = id; break; }
-        try { Game.endConvo(id, 'done'); } catch (e) {}
-      } catch (e) { /* skip un-conversable villagers */ }
-    }
-  }
-  check(tag + ' E0 found an ask_favor conversation', !!vid, 'no ask_favor want surfaced');
-  if (!vid) return;
+  const vid=roster[0];
+  try { Game.endConvo(vid,'done'); } catch(e) {}
+  Game.npcNeeds(vid).hunger=90;
+  const favor=Game.convoBuildFavor(vid,{kind:'food_share',hunger:90});Game.convoStoreFavor(favor);
+  Game.convoPlantSeed(vid,{wantId:'ask_favor',favorId:favor.id,note:favor.short});Game.startConvo(vid);
+  check(tag+' E0 prepared supported food favor opens',Game.convoGet(vid).want?.id==='ask_favor');
   const trustOf = () => ((Game.state.village.trust || {})[vid] === undefined ? 10 : Game.state.village.trust[vid]);
 
   // Drive to stage 2, then commit.

@@ -1438,3 +1438,9 @@ how drift compounds silently.
     disputes. Not started.
 - `codex/balanced-measurement`: measurement package ported to master
   2026-10-17 (commit e7440ed0); branch itself needs no further action.
+
+Codex favor follow-through (2026-10-20), same conversation branch: shared
+readiness/menu/dispatch contract and typed physical-deed receipts. Preserve the
+r7 reconciliation and all Muse changes. The five missing joint jobs are explicit
+release blockers in ROADMAP; explanations are not finished gameplay. Read
+`evidence/2026-10-20/favor-action-audit-r3.md` for the final bounded evidence.

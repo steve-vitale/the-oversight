@@ -5626,11 +5626,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const targets = vid ? entries.filter(([id]) => id === vid) : entries;
       for (const [pid, p] of targets) {
         if (p.kept) continue;
+        // Old saves may contain commitments to jobs without an executable
+        // action. Keep the explanation/cancel route open without a deadline
+        // penalty for a task the player cannot perform.
+        if (p.favorId && this.convoFavorAction?.(pid, this.convoGetFavor?.(pid)).unsupported) continue;
         const age = this.state.scholar.day - (p.day || 0);
         // BREAK-IT (social r7 2026-10-09): keep mapping is data-driven via
         // promiseKeepKind — the old inline table covered 5 of 18 goals.
         const match = this.promiseKeepKind(p.goal) === kind;
         if (match) {
+          // A typed favor must be kept by its own deed. Delegating any job,
+          // saying hello or comforting cannot stand in for a specific outing,
+          // watch shift, wound dressing or illness care.
+          const requested = p.favorId && this.convoGetFavor?.(pid);
+          if (p.favorId && (!requested || requested.id !== p.favorId ||
+              !((requested.kind === 'food_share' && kind === 'food' && opts?.food) ||
+                (requested.kind === 'heal_help' && kind === 'heal' && opts?.care === 'wound') ||
+                (requested.kind === 'sick_help' && kind === 'heal' && opts?.care === 'illness')))) continue;
           p.kept = true;
           // FAVOR OBLIGATIONS (convo favor system 2026-10-11): mark the
           // favor instance fulfilled and name the task — the fiction must
@@ -12406,6 +12418,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // tendVillager(vid): sit with a sick villager. Care helps; skill helps more.
     tendVillager(vid) {
+      if (this.over || (this.inCombat && this.inCombat())) return null;
       const v = this.state.village || {};
       const rec = (v.sick || {})[vid];
       // WOUND CARE (journey landing r20 2026-10-17): a wound is not a
@@ -12425,6 +12438,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       if (!rec && !wound) { this.say('They\'re not sick.'); return null; }
       this.tickAction(32);
+      if (this.over || !(v.roster || []).includes(vid) || this.getPerson(vid)?.dead) return null;
       let first = 'They';
       try { const p = this.getPerson(vid); if (p && p.name) first = String(p.name).split(' ')[0]; } catch (e) {}
       if (wound) {
@@ -12449,7 +12463,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // care -- it keeps 'heal' promises the way treatVillager does. Sitting
       // with the sick -- or cleaning a wound -- is doing something, not
       // saying something.
-      try { this.checkPromises('heal', vid); } catch (e) {}
+      try { this.checkPromises('heal', vid, { care: wound ? 'wound' : 'illness' }); } catch (e) {}
       // TENDED (2026-10-13): sitting with someone's fever is intimate --
       // the village's bond machinery never noticed. +3, same as a deep talk.
       try { if (this.bondAdd) this.bondAdd(this.villagerId, vid, 3, 'tended'); } catch (e) {}
@@ -12897,7 +12911,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { const p = this.getPerson(vid); if (p && p.name) first = String(p.name).split(' ')[0]; } catch (e) {}
       const did = this.villagerDiseaseId(rec);
       const abName = abilityId === 'herbal_remedy' ? 'Herbal remedy' : abilityId === 'field_medicine' ? 'Field medicine' : 'Triage';
+      let helpedIllness = false;
       if (!did) {
+        helpedIllness = true;
         rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 2);
         this.say(`${abName} on ${first}: you do what you can. They rest easier.`);
       } else {
@@ -12909,6 +12925,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (trueCure && eff !== 'no' && eff !== 'cure') eff = 'cure';
         if (def.cure.needsDiagnosis && !diagnosed && !(herbL3 || trueCure) && (eff === 'cure' || eff === 'support')) eff = 'ease';
         if (eff === 'cure') {
+          helpedIllness = true;
           delete v.sick[vid];
           // EVOLUTION (care__warden, 2026-10-11): treatment hardens — 3 days of ward.
           if (this.hasEvoFlag('treatment_ward')) { v.warded = v.warded || {}; v.warded[vid] = (s.day || 0) + 3; }
@@ -12917,6 +12934,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { if (this.nvTrust) this.nvTrust(vid, 4); } catch (e) {}
           this.say(`${abName} on ${first}: ${this.treatFlavor(abilityId, def, true)} ${first} is going to make it. (Cured \u2014 and the camp saw it.)`);
         } else if (eff === 'support' || eff === 'ease') {
+          helpedIllness = true;
           rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 2);
           rec.severity = Math.max(1, (rec.severity || 1) - 1);
           this.say(`${abName} on ${first}: ${this.treatFlavor(abilityId, def, false)}`);
@@ -12929,7 +12947,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // keeps 'heal' promises, including the sick_help favor. Without this,
       // a kept promise could only be closed by words (comfort), never by
       // actual medicine.
-      try { this.checkPromises('heal', vid); } catch (e) {}
+      try { this.checkPromises('heal', vid, helpedIllness ? { care: 'illness' } : {}); } catch (e) {}
       // TREATED (2026-10-13): skilled hands on someone's sickness — the
       // bond machinery never noticed. +3, same as tending.
       try { if (this.bondAdd) this.bondAdd(this.villagerId, vid, 3, 'treated'); } catch (e) {}

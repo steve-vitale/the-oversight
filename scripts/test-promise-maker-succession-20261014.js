@@ -50,7 +50,7 @@ function check(id, ok, detail) {
     `maker=${(openA && openA.maker) || '(none)'}`);
 
   // Lane B: favor commit stamps maker; rot (no death) blames the maker.
-  const favorB = { id: 'fxB', vid: vidB, goal: 'heal', task: 'the creek water run', short: 'the creek water run', deadline: 30, state: 'asked' };
+  const favorB = { id: 'fxB', kind: 'sick_help', vid: vidB, goal: 'heal', task: 'the creek water run', short: 'the creek water run', deadline: 30, state: 'asked' };
   Game.convoStoreFavor(favorB);
   Game.convoFavorCommit(vidB, favorB);
   const openB = (v.promises || {})[vidB];
@@ -64,7 +64,7 @@ function check(id, ok, detail) {
     `trustAtBreak=${rotB && rotB.trustAtBreak}`);
 
   // Lane C: renounce stamps maker + trustAtBreak.
-  const favorC = { id: 'fxC', vid: vidC, goal: 'heal', task: 'mending the fence line', short: 'the fence line', deadline: 30, state: 'asked' };
+  const favorC = { id: 'fxC', kind: 'sick_help', vid: vidC, goal: 'heal', task: 'mending the fence line', short: 'the fence line', deadline: 30, state: 'asked' };
   Game.convoStoreFavor(favorC);
   Game.convoFavorCommit(vidC, favorC);
   const ren = Game.convoFavorRenounce(vidC);

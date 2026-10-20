@@ -86,6 +86,16 @@ async function oneSeed(seed) {
       const seed=Game.state.village.convoSeeds?.[vid];if(seed?.wantId==='ask_favor')found.ask_favor={vid,note:seed.note,day:Game.state.scholar.day};
     }
   }
+  // Prepared unresolved wants cover the seed grammar independently of the
+  // weighted want lottery. These notes are produced by the real resolve()
+  // after an emitted opener and a real leave, not granted as final outcomes.
+  for(const wantId of ['seek_comfort','share_news']) if(!found[wantId]) {
+    const vid=npcs.find(id=>!collectedVids.has(id));if(!vid)throw Error('No unused prepared seed actor');
+    Game.convoPlantSeed(vid,{wantId,note:'an unfinished conversation'});
+    Game.startConvo(vid);Game.endConvo(vid,'left');
+    const planted=Game.state.village.convoSeeds?.[vid];
+    if(planted?.wantId===wantId){found[wantId]={vid,note:planted.note,day:Game.state.scholar.day};collectedVids.add(vid);}
+  }
   console.log(`planted seeds found: ${Object.keys(found).join(', ') || 'none'}`);
 
   // Next day: reopen each — read the composed seed opener (SENSE-READ).

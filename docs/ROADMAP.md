@@ -1741,3 +1741,20 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 | World | `docs/WORLD-REGIONS.md` |
 | Table | `docs/TABLE.md` |
 | Kin canon | `docs/KIN.md` (the Taken are off-world; scattered kin are on Earth; both exist) |
+
+2026-10-20 favor follow-through: the conversation lane now connects food and
+basic wound/illness care to their actual actions, costs and live requirements.
+Unsupported joint jobs explain the missing action and cannot create new hollow
+promises; specific favors cannot be kept by unrelated generic events. Native
+phone care and Continue are covered. Read CONVERSATIONS.md and
+`evidence/2026-10-20/favor-action-audit-r3.md` before extending this contract.
+
+Release blocker: creek hauling, shared snare repair, watch handover, overnight
+company and joint foraging still have authored requests without playable joint
+activities. The explanations disclose this gap; they do not close it. Each job
+needs an actual action, concrete target/time/resource rules, exact fulfillment,
+blocked-state explanation and native phone/Continue coverage before release.
+The final319-conversation sample also retains non-favor semantic voice closers
+and story-offer callbacks that acknowledge Yes without delivering the story
+(seed23 Petra and seed2026 Nina at stage30). Those response contracts need a
+separate repair; mechanical context checks do not clear their prose.

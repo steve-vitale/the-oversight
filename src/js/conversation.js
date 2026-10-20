@@ -667,6 +667,11 @@
     voiceLine(vid, line) {
       const t = String(line == null ? '' : line);
       if (!/^".*"$/.test(t)) return line;
+      // Requests already carry a precise action and response contract.
+      // Random semantic mannerisms ("It'll be fun", "how are YOU?") can
+      // contradict an injury or introduce a second unanswered question.
+      const request = this.state.village?.conv?.[vid];
+      if (request?.active && ['ask_favor', 'repay'].includes(request.want?.id)) return line;
       const temp = String(this.npcTemper(vid) || 'steady').toLowerCase();
       const V = (this.data.characterGen || {}).voice || {};
       const prof = (V.profiles || {})[temp] || (V.profiles || {}).steady || {};
@@ -4226,8 +4231,9 @@
       queueTraderIntro(c);
       const menuKey = JSON.stringify([c.spokenBeat, c.thread, c.depth, c.choosingSubject, c.windingDown,
         c.pendingQ, c.reactiveQ, c.genericQ, c.pendingTrade, c.pendingHawk, c.heldBeats, c.spent,
-        c.want?.id, c.want?.stage, c.want?.resolution, this.state.scholar.day,
-        this.state.village.trust?.[vid], c.escalated]);
+        c.want?.id, c.want?.stage, c.want?.resolution, c.want?.favorExplained, this.state.scholar.day,
+        this.state.village.trust?.[vid], c.escalated,
+        this.convoFavorAction?.(vid, c.want?.favor || this.convoGetFavor?.(vid))]);
       if (c.replyMenu?.key === menuKey) {
         const menu = c.replyMenu.choices.map(ch => ({ ...ch }));
         c.offeredReplies = Object.fromEntries(menu.map(ch => [ch.id, ch.label]));
@@ -4240,6 +4246,13 @@
         c.replyMenu = { key: menuKey, choices: menu.map(ch => ({ ...ch })) };
         return uncapped?menu:this.convoMenuPage(vid,menu);};
       if (c.windingDown || c.spokenBeat?.tag === 'closing') return finish([{ id: 'leave', label: '"See you."' }]);
+      if (c.thread === 'want' && c.want?.favor?.state === 'promised' && !c.choosingSubject &&
+          !c.pendingQ && !c.reactiveQ && !c.genericQ) {
+        return finish(this.convoFavorActionMenu(vid, c.want.favor, false).map(o => ({ id: o.id, label: o.labels[0], temper: o.temper })).concat([
+          { id: 'dlg:subject', label: '"Can I ask you something else?"' },
+          { id: 'leave', label: '"I should go."' },
+        ]));
+      }
       if (c.spokenBeat?.tag === 'endtopic' && !c.pendingQ && !c.reactiveQ && !c.genericQ && !c.choosingSubject) {
         const out = [{ id: 'dlg:subject', label: '"Can I ask you something else?"' }, { id: 'leave', label: '"I should go."' }];
         if (c.heldBeats?.length) out.unshift({ id: 'goon', label: this.convoGoonLabel(vid) });

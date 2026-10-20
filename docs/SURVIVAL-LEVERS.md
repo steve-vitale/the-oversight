@@ -1350,3 +1350,41 @@ outcome changes and their warnings. No numeric lever or policy changed.
 These synchronous results do not estimate the survival benefit of reachable
 phone controls. Actual touch play at both sizes separately completes zero-move
 Wait and escape. Keep existing difficulty decisions and physical-device gates.
+
+## Conversation favor follow-through (2026-10-20)
+
+This changes access and promise semantics, not numeric difficulty parameters.
+Food and basic care can be performed from the request; they pay the existing
+pack/time costs. Concrete favors now require their own physical deed receipts.
+Generic task completions, hello/comfort and food gifts cannot substitute for
+joint outings, watch shifts or overnight presence. Unsupported old open jobs
+have an explanation and no-penalty close, without completion rewards. Request
+voice decoration no longer introduces random questions or contradictory claims.
+
+Retained 16 matched seeds per capable/maker/merchant/caregiver, 150 controller
+iterations, under the same observer/policies/harness: 64 observed plus four
+neutral controls per arm. Final r3 is source-stable and all controls match.
+Both r7-to-r3 and a440-to-r3 comparisons retain all 23 metrics; this is a screen,
+not a 64-seed/holdout confirmation. Mixed controllers do not prove pacifism.
+
+Wins r7 -> favor r3: capable 14 -> 15, maker 11 -> 7, merchant 6 -> 10,
+caregiver 12 -> 6 (each /16). Against a440: 16 -> 15, 9 -> 7, 7 -> 10,
+5 -> 6. None is automatically an improvement or regression verdict.
+
+The favor-only screen flags capable national access, first-bearer survival,
+deaths, community loss, living NPCs and eligible NPC class access; maker Table
+entry/invitation, day-30 survival and community size; merchant day-30 survival,
+NPC class access and contest/show gear; caregiver Table entry/invitation,
+first-bearer survival, community loss and player class access. Maker and merchant
+day-60 eligibility changed: keep the coverage warning and denominators. The
+combined a440 screen also retains maker earned-gear and merchant NPC-class
+warnings. A gain in wins cannot clear any of these warnings.
+
+Decision: retain the bounded correctness repair for development review and
+keep the balance decision `review_required`. Do not restore false fulfillment
+or compensate with HP/food/reward tuning to recover a win-rate target. Selected
+exact-case replays cover every binary win flip plus each policy's largest
+adverse deaths, NPC hunger and earned-gear change. See the favor-action r3 audit
+and raw panels/replays for verified counts and coarse first differences; those
+are diagnostic associations, not causal explanations of endings. Five authored
+joint jobs and remaining callback/voice prose gaps stay release blockers.
