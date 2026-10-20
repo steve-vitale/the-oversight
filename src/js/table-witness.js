@@ -51,6 +51,31 @@
           return pool[0];
         };
         let line;
+        // OATHBREAKER (journey-endgame r28 2026-10-20): the defense argues YOU.
+        // A run that broke more promises than it kept heard "They try." here —
+        // the 'unsure' case fired on protected=0=killed and the village's
+        // memory of broken words was invisible to the witnesses. The branch
+        // math already prices broken>kept as a dark signal (table.js); the
+        // witnesses should say it too. Read from the same tally the branch
+        // uses, plus the promise records for names and tasks.
+        let brokenCt = 0, keptCt = 0;
+        const brokenDetails = [];
+        try {
+          const pt = (typeof Game.tablePromiseTally === 'function') ? Game.tablePromiseTally() : null;
+          if (pt) { brokenCt = pt.broken | 0; keptCt = pt.kept | 0; }
+        } catch (e) {}
+        try {
+          const pr = (((Game.state || {}).village || {}).promises) || {};
+          for (const k of Object.keys(pr)) {
+            const p = pr[k];
+            if (p && p.kept === 'broken') {
+              let nm = k; try { nm = (Game.displayName(k) || k).split(' ')[0]; } catch (e2) {}
+              let task = ''; try { task = String(p.favorTask || '').slice(0, 90); } catch (e2) {}
+              brokenDetails.push({ name: nm, task });
+            }
+          }
+        } catch (e) {}
+        const oathbreaker = brokenCt > keptCt && brokenDetails.length > 0;
         if ((L.protected | 0) >= (L.killed | 0) && (L.protected | 0) > 0) {
           const pool = [];
           pool._case = 'aided';
@@ -71,6 +96,18 @@
           if (deadName) pool.push(`"${deadName} isn't here to testify. I am. They followed the Bearer and they didn't come back."`);
           if (t < 30) pool.push(`"I said at the fire it was too much, too fast. Nobody listened. The graves listened."`);
           else pool.push(`"I wanted to believe. The graves are full of people who wanted to believe."`);
+          line = pick(pool);
+        } else if (oathbreaker) {
+          const pool = [];
+          pool._case = 'oathbreaker';
+          const b0 = brokenDetails[0] || {};
+          const b0n = b0.name || 'someone';
+          pool.push(`"${b0n} asked. They said yes. ${b0n}'s still waiting — you can ask them yourself."`);
+          if (brokenCt > 1) pool.push(`"${brokenCt} promises. I counted the ones they kept. Shorter list."`);
+          if (b0.task) pool.push(`"They promised ${b0n}: ${b0.task}. Still owed."`);
+          pool.push(`"The fire remembers what the court might miss: their word."`);
+          if (t < 30) pool.push(`"I stopped asking. Everybody stops asking, eventually."`);
+          else pool.push(`"I want to believe them. The list says not to."`);
           line = pick(pool);
         } else {
           const pool = [`"I don't know what they are. None of us do. That's the truth."`];
