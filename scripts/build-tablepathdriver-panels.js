@@ -27,7 +27,7 @@ const zlib = require('zlib');
 const crypto = require('crypto');
 
 const REPO = path.join(__dirname, '..');
-const BEFORE_DIR = path.join(REPO, 'evidence', '2026-10-19', 'perseed-posttable-seatdrive');
+const BEFORE_DIR = path.join(REPO, 'evidence', '2026-10-20', 'perseed-tablepathdriver-control');
 const AFTER_DIR = path.join(REPO, 'evidence', '2026-10-20', 'perseed-tablepathdriver');
 const OUT_PREFIX = (process.argv.includes('--out') ? process.argv[process.argv.indexOf('--out') + 1]
   : path.join(REPO, 'evidence', '2026-10-20', 'tablepathdriver-panel'));

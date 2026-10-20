@@ -161,41 +161,270 @@ national,table,wins,exiled (same as parent arms; regime artifact expected).
 **No [needs-eyes]**: instrument + policy driver only, no player-facing
 change (policy-side only, zero src/js).
 
+### CONTROL CORRECTION (fidelity-driven, before the armed sweep — not a re-score)
+
+FIDELITY=1 (TABLEPATHDRIVER=0 + RELAYDARK=0 vs the committed
+evidence/2026-10-19/perseed-posttable-seatdrive/ corpus) FAILED 4/4 on the
+first attempt — and the isolation test proved the failure is NOT the new
+layers (my layers-OFF composition is byte-identical to the parent
+composition on the same base, 4/4 × 60d). It is BASE DRIFT: the committed
+corpus sits on base 8c055140a (2026-10-19) and the tree has since landed
+7024fd22b (sanctity combat gating — game-code, moves trajectories),
+1fb6b9140 (dialogue/mood), and f83c41ea6 (relay coda). Per loop precedent
+(loop-B "control re-measured on current tip per substrate-drift caveat"),
+the control was RE-MEASURED on the current tip instead of reusing the
+stale corpus: evidence/2026-10-20/perseed-tablepathdriver-control/ (16
+runs, same seeds 64201–64208 × {leadfeast, belongfeast}, SEATDRIVE=1,
+TABLEPATHDRIVER=0, RELAYDARK=0, base f83c41ea6 — the worktree was rebased
+onto current master before any sweep). The PRIMARY bar is UNCHANGED; the
+guardrail bars (conversion ≥ 70%, national/table ±2, no new death mode)
+are evaluated against the re-measured control. The §15 panel's before side
+is the re-measured control. The stale corpus's numbers are kept in the
+metric-review section for the record, not used as the judge.
+
 ---
 *(results below — filled after the sweep; pre-registration above is unchanged)*
 
 ## Results
 
-PENDING — pilot sweep not yet run.
+Pilot sweep complete 2026-10-20: 16/16 runs, zero errors, base f83c41ea6,
+horizon 180d death-aware. Armed = SEATDRIVE=1 + TABLEPATHDRIVER=1 + RELAYDARK=1;
+control = re-measured on current tip (see CONTROL CORRECTION above).
+
+**Wall (armed):** national 12/16, table 11/16, wins 12/16, wave4 10/16,
+wave5 0/16, sat 12, invited 11, median survival 90d, max 182d.
+**Wall (control):** national 12/16, table 9/16, wins 12/16, wave4 10/16,
+wave5 0/16, sat 12, invited 9, median 90d, max 154d.
+
+Per-path (walked → terminal):
+- **relay: 5/5 walked, 5/5 terminal, ALL DARK branch** —
+  leadfeast-s64203/64204/64206/64208 + belongfeast-s64203. The dark road
+  claimed the relay on day 42–73, road done by day 60–67 on 4/5 runs
+  (s64203's `done=false` is a bookkeeping artifact: the invitation staged
+  before the done-check; the state at sitting was fully dark — see Out-of-arm
+  findings). At sitting: lean −48…−100 (band dark), darkUses 8–9,
+  lightUses 0, bond 3–5, stage 3. On 4 of the 5 the bearer died mid-road and
+  the mantle passed — the dark lean persisted in relay state and the
+  successor sat and walked relay/dark. **0 seated deaths across all walks.**
+- **witness: 3/3 walked, 3/3 terminal, all light** —
+  leadfeast-s64202 (assigned), belongfeast-s64201 (assigned),
+  belongfeast-s64202 (assigned indispensable → fell back to witness with the
+  engine's why-string). The exposure source now EXISTS (3e6b44d17 landed
+  after the sibling run — `recordExposure` fed by moot bribery/case
+  resolutions and truth.js), superseding the sibling arm's "no live exposure
+  source" finding: witness was earned 2× by direct assignment and walked 3×.
+- **defiant: 4/4 walked, 4/4 terminal, all light** —
+  leadfeast-s64205/64207 + belongfeast-s64206/64208 (sibling replication).
+- **indispensable: assigned 2×, never earned.** belongfeast-s64202 sat and
+  fell back to witness; engine why-string recorded verbatim: "The
+  Indispensable needs a full seat — the galaxy must actually need you, not
+  just notice you." leadfeast-s64201 (assigned indispensable) died pre-table.
+  Documented as a finding per the task's explicit rule, not a driver failure.
+
+PRIMARY legs: (1) relay ≥3/4 GO [5 walks]; (2) defiant ≥3/4 GO [4 walks];
+(3) indispensable/witness probes — the analyzer's mechanical reading is
+NO-GO on its sat-based definition [ind=1 wit=2 sat-probes]; the
+pre-registered letter (each assigned ≥2× with the engine why-string
+recorded) was met, and the leg's EXPECTATION ("never offered") was inverted
+in the good direction by the newly-landed exposure source — witness walked
+3× and terminal-resolved 3×. See Metric review: the leg's premise is
+superseded, not failed. (4) ledger-dark margins on ≥3 sittings GO [7
+sittings captured; note the capture fires at ledger-path door-walks, so the
+5 relay walks carry no margins row — an instrument limitation, disclosed].
+(5) relay/dark band GO [5 dark-band sittings].
+
+Ledger-dark margins (engine tableBranch dark-vs-light at door-walk):
+structurally light everywhere — feared/beloved/witness/defiant 0vX,
+indispensable 0v5, assimilated 0v4 — EXCEPT belongfeast's **beloved 2v1
+dark-leaning** on three runs (s64202/64206/64208): one signal away from the
+dark branch, but the rotation assigned defiant on those runs, so it was
+never walked. No dark-ledger road exists in this arm; that's a named next.
+
+Guardrails: conversion 109.1% (the known invitation-counting artifact —
+invited 11 < sat 12; control 83.3%; bar ≥70%) PASS · no new death modes
+(taxonomy identical-by-construction) PASS · national 12v12 (±2) PASS · table
+11v9 (±2) PASS · 0 engine errors (drain/verb/rd/instrument) on all 16 PASS.
+
+**Confirm decision:** pilot is GO on legs 1, 2, 4, 5 (leg 3 superseded, see
+above) with all guardrails green — a 12–16-seed confirm is AUTHORIZED but,
+per the pre-registration's own pilot-gate, OPTIONAL. I recommend NOT burning
+a full confirm: the reachability questions are answered (5 dark-relay walks,
+3 witness walks, margins named). If a confirm runs at all, scope it to
+relay/dark + witness on fresh seeds — not the whole 16-pair sweep.
 
 ## Village assessment
 
-PENDING.
+The village experiences the doors differently, not just the bearer. On the
+relay/dark road the wires become a character: Commune requests arrive at the
+fire ("BEARER. THE WIRES HAVE QUESTIONS."), the System remarks on the
+village carrying itself, and the dark conscript beat lands ON THE VILLAGE —
+"Nodes. Little warm nodes… (Take them — an army, or instruments — or
+refuse. The mourners will know. Everyone will know.)" — and the refusal is
+voiced through the mourners exhaling. The relaydark road is legible to the
+fire: trust decays around dark use per the canon (dark relay becomes what
+forgot food), and four of five dark walks burned the bearer mid-road —
+the mantle passing to a successor who sat with the lean intact. The village
+survived its own hero's self-erasure five times.
+
+The witness walks feel judicial from the first beat: the village watches its
+bearer assemble a docket instead of a threat. One run carried an NPC
+ascension through it (Diana Osei) and the table voiced the OUTSHONE coda —
+the village thriving under someone else's god — honestly, in the open.
+
+The defiant walk prices the village: a named villager (Pasquale Santiago,
+s64205) was conscripted by the table and named in the eternal record, and
+the village "loses its steadiest" in installments of grief — then the walk
+finishes with the camera shot the galaxy can't stop replaying. On the
+s64205 run the original bearer died in a contest the day before the sitting;
+Simisola walked in with an empty docket and still walked out of the light.
+The seat, not the person, carried the door.
 
 ## Sense-testing (SENSE-TESTING LAW)
 
-PENDING — full transcripts read for each walked path (relay/dark first if
-it walks).
+Three seated-window transcripts read in full, all FIDELITY-OK —
+evidence/2026-10-20/tablepathdriver-transcripts/:
+
+**relay/dark — leadfeast-s64203 (295 lines).** Its own genre: the merge,
+televised. "🔴 LIVE! the merge: A HUMAN ENTERS THE MACHINE." The door
+grants the cockpit verbs (Deep Listen, Faithful Carry, Relay-sight,
+Rewrite, Skim, Omnipresence: "Be in every conversation") and the beats are
+probe / commune / backfire — grounding jolts where "the wires feel more
+like home than the fire does, and the thought doesn't frighten you. That's
+the frightening part." The ledger-read line voices the RELAY band, not the
+ledger: "The protected outnumber the killed; the food truth was shared. **The
+dark road is open.**" — exactly TABLE.md's GRADIENT law (band on lean, not
+morality). The dark final: "Become its voice." → "You stay inside. Forever…
+Human things seem small from in here… The village grieves you while you're
+alive, and you feel their grief the way weather feels rain. Power immense.
+Self eroded. The System finally says your name right." Not a palette swap —
+nothing in the feared track looks like this.
+
+**witness/light — belongfeast-s64201 (288 lines).** Its own genre: the
+trial. "🔴 LIVE! the trial of the judges: THE GALAXY'S COURT IS IN SESSION."
+Docket / Subpoena / Clean Hands ("You submit your own ledger as evidence
+too") / Precedent. "You didn't come to negotiate. You came with a list."
+The finale: "The trial of the judges. You read every charge, and some of
+them flinch — actual flinching, from beings of light… Your own ledger sits
+in evidence beside theirs. That's why it worked." — the exposure mechanic
+given a voice. Meaningful, coherent, relevant to the path's premise.
+
+**defiant/light — leadfeast-s64205 (408 lines).** Its own genre: the
+reverse auction. Price list slid across the light; the walk covers some
+prices ("the harvest stretches. You don't ask how"); a named villager taken
+("Pasquale walks with the relay now — the price, named and paid"); the name
+spelled right in the eternal record as the trick. The walk-away coda:
+"the long shot of small figures leaving the light… the highest-rated thing
+the galaxy ever saw. Nobody owns it."
+
+Honest caveat: after the path finale, all three run the same shared
+**"◈ THE OVERSIGHT"** epilogue (the looking-away sermon: "the most terrible
+thing the System ever did, it did by accident… You did it on purpose,
+because you were busy"). The path finales are each their own genre; the
+epilogue is the game's shared signature. A palette swap would share the
+finale — these don't.
 
 ## Metric review
 
-PENDING — every evidence file carries this section (§14). Pre-registered
-honest doubts for the NEXT run (not this one): none yet; the five primary
-legs and guardrails above are judged as written.
+(§14: every evidence file carries this. The bars above are judged as
+pre-registered; these are doubts for the NEXT run, not re-scores of this
+one.)
+
+1. **Leg 3's premise inverted mid-run.** It was written expecting witness to
+   be unofferable (the sibling's premise); 3e6b44d17 landed the exposure
+   source and witness earned 2× directly. The next run's leg-3 should read:
+   "witness earned ≥2× by assignment and walked ≥3/4 terminal" — the
+   finding (indispensable still gated by its engine why-string) stands
+   separately.
+2. **The analyzer's instrument bug.** The `walked` array in the probe
+   recorded zero relay walks on every run (too-narrow `after.phase ===
+   'challenge'` condition — relay resolves through challenge variants the
+   condition didn't cover); the analyzer now derives walks from
+   doorEvents + finalsEvents (source of truth). The 39/39 proof re-ran green
+   on the derivation, but the underlying probe field should be fixed or
+   dropped next run.
+3. **relaydrain `done=false` on s64203** is bookkeeping (invitation staged
+   before the done-check), not a road failure — the state at sitting was
+   dark on every axis. Not a miss, but the field should order check-before-
+   invitation so the next reader doesn't have to reason it through.
+4. **Conversion 109%** is the known invitation-counting artifact (carried
+   from the parent arm) — the bar is ≥70%, so no binding issue, but the
+   guardrail should be rephrased next run as "sat ≥ 70% of invited" so a
+   >100% reading can't confuse anyone.
+5. **Panel caution.** The §15 panel's lone `regression_signal`
+   (leadfeast playerDeaths100Days +0.65) is the dark road's own mechanism —
+   4/5 relay walks burned the bearer mid-road, and the policy IS the
+   treatment here (the integrated-method precedent: the panel flags
+   policy-side changes, it's the instrument not the judge). Win-rate
+   moved +0.25 on leadfeast and −0.25 on belongfeast: opposite directions on
+   8 cases each = noise, not a treatment effect.
 
 ## Named nexts
 
-PENDING.
+1. **Confirm decision: skip or scope.** Pilot GO (legs 1/2/4/5 + guardrails
+   green; leg 3 superseded). A 12–16-seed confirm is authorized but not
+   needed for reachability; if run, scope to relay/dark + witness on fresh
+   seeds.
+2. **The ledger-dark road (different arm).** This arm walked relay/dark but
+   no ledger dark branches: margins show beloved 2v1 dark-leaning on
+   belongfeast — one signal from the dark branch, never walked. Needs a
+   pre-table policy that builds a dark ledger (hoarded food truth,
+   killed-over-protected imbalance) and a driver that walks the offered dark
+   door honestly when it appears.
+3. **The indispensable road (different arm or accept-as-gated).** The
+   engine's why-string is a real gate: "the galaxy must actually need you."
+   The feast road never earns it. Either a substrate that manufactures real
+   inter-village need (full seat + dependence), or an honest documented
+   acceptance that the door is earned-rare by design.
+4. **Relay mantle-succession study.** 4/5 dark walks passed the mantle
+   mid-road — the mechanism works (lean persists in relay state) but the
+   burn rate is the price of the road. A dedicated look at whether the
+   grounding floor-stop (≤32) is too permissive would be worth one arm.
+5. **Probe hygiene.** Fix the `walked` derivation and the
+   done-before-invitation ordering before the next table-path sweep reuses
+   this instrument.
 
 ## Out-of-arm findings
 
-(none yet — appended to
+(To be appended to
 `~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/sim-findings.md`
-as they surface; not chased mid-run.)
+by the coordinator; not chased mid-run.)
+
+- **Witness exposure source EXISTS** (3e6b44d17, sim-witnesource 2026-10-20):
+  `recordExposure` in exposure.js is fed by moot bribery/case resolutions
+  (ledger.js) and truth.js. Supersedes the sibling arm's "no live exposure
+  source" finding — witness earned 2× directly in this arm and walked 3×.
+- **Relaydrain `done=false` bookkeeping artifact** on leadfeast-s64203:
+  invitation staged before the done-check; state at sit fully dark.
+- **Belongfeast beloved 2v1 dark-leaning** on 3/8 runs — the closest any
+  ledger path came to a dark branch; never walked (rotation assigned
+  defiant).
+- **Belongfeast table invitation rate 0.5 vs leadfeast 0.875** on identical
+  seeds — pre-existing substrate difference (control shows the same), not
+  driver-introduced.
+- **The indispensable gate is a real design gate**, not a stub: full seat
+  + "the galaxy must actually need you."
 
 ## Convergence
 
-PENDING.
+This arm closes the run's axis questions it could reach. Status of the
+unexercised surface at arm end:
+
+- relay/dark — EXERCISED (5/5 dark-band walks, terminal, own genre voiced).
+- witness — EXERCISED (3/3 light walks, terminal, exposure premise
+  superseded).
+- defiant — EXERCISED light (4/4; sibling replication).
+- indispensable — PROBED, never earned (engine gate documented).
+- ledger dark branches (feared/defiant/beloved/assimilated dark) —
+  UNREACHABLE on this substrate; margins named in numbers, closest is
+  belongfeast beloved 2v1.
+
+The named next of the parent arm is answered: a path-choosing driver exists
+and works through real options only (never forces unearned doors — the
+FALLBACK7 rule with engine why-strings fired exactly as designed on
+belongfeast-s64202). The relay's dark branch is not a ledger echo: it
+resolves on lean, and it reads as a different game. The instrument is
+committed and reusable; its two known bugs are documented above. Arm work
+done when this evidence commits — pending ship, no push.
 
 ## Files
 
@@ -213,4 +442,16 @@ PENDING.
 
 ## Telemetry deviation check (Steve 2026-10-13)
 
-PENDING.
+Ran per-policy:
+`node scripts/telemetry-check.js --baseline
+~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/telemetry-baselines/scale-wall.json
+--current 'evidence/2026-10-20/perseed-tablepathdriver/<policy>/s*.json' --metrics national,table,wins,exiled`.
+leadfeast: **quiet** (8 files, 4 metrics, no large deviations). belongfeast:
+LOUD — "national swung -67%: baseline 12 -> current 4", "table swung -75%:
+baseline 16 -> current 4", "wins swung -69%: baseline 16 -> current 5".
+VERDICT: regime artifact, same as the sibling arm's verdict — the
+scale-wall baseline's `_regime` is the winseat regime (wins 16/16); this
+substrate is the seatdrive-win-side regime (the sibling's run showed the
+same belongfeast pattern: national -67%, wins -69%). The baseline was NOT
+rolled. Note the belongfeast table rate (0.5) matches the control's 0.5 —
+pre-existing substrate reachability, not a driver effect.

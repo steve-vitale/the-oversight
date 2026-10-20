@@ -17,7 +17,11 @@ const fs = require('fs');
 const path = require('path');
 
 const ARMED = path.join(__dirname, '..', 'evidence', '2026-10-20', 'perseed-tablepathdriver');
-const CONTROL = path.join(__dirname, '..', 'evidence', '2026-10-19', 'perseed-posttable-seatdrive');
+// The control: re-measured on the current tip (f83c41ea6) because FIDELITY=1
+// proved the committed 2026-10-19 corpus (base 8c055140a) is stale — the
+// sanctity combat gating (7024fd22b) + dialogue changes landed since and
+// move trajectories. Same composition, same seeds, current base.
+const CONTROL = path.join(__dirname, '..', 'evidence', '2026-10-20', 'perseed-tablepathdriver-control');
 const SEEDS = [64201, 64202, 64203, 64204, 64205, 64206, 64207, 64208];
 const POLICIES = ['leadfeast', 'belongfeast'];
 
@@ -55,7 +59,25 @@ function analyzeRun(x) {
   if (!r) return { missing: true };
   const tpd = r.tpdSummary || {};
   const rd = r.rdSummary || {};
-  const walked = (tpd.walked || []).map(w => ({ path: w.path, branch: w.branch, day: w.day, fellBack: !!w.fellBack }));
+  // Walks are derived from doorEvents + finalsEvents (the drain's own
+  // record). NOTE (instrument bug, this arm): the old `walked` array used
+  // a too-narrow condition (after.phase === 'challenge') which the relay
+  // path's door transition does not satisfy — its walks were recorded in
+  // doorEvents + finalsEvents but not in `walked`. Derived walks are the
+  // source of truth; the raw `walked` is kept for the record.
+  const doorEvents = tpd.doorEvents || [];
+  const finalsByPath = {};
+  for (const f of (tpd.finalsEvents || [])) finalsByPath[f.path] = f;
+  const walked = doorEvents.map(d => {
+    const pid = String(d.picked || '').replace(/^path:/, '');
+    const fin = finalsByPath[pid];
+    return {
+      path: pid, branch: fin ? fin.branch : null, day: d.day,
+      fellBack: !!d.fellBack, finalId: fin ? fin.finalId : null,
+      missWhy: d.missWhy || null,
+    };
+  });
+  const walkedRaw = (tpd.walked || []).map(w => ({ path: w.path, branch: w.branch, day: w.day, fellBack: !!w.fellBack }));
   const terminal = r.tableDoneDay != null && (r.phaseTrace || []).indexOf('done') >= 0;
   const seatedDeaths = (((r.deathsAttributed || {}).attributed) || []).filter(d => {
     const t = d.tableAtDeath || {};
@@ -66,8 +88,8 @@ function analyzeRun(x) {
     endReason: r.endReason, won: !!r.won, national: !!r.national,
     invited: r.tableDay != null, sat: !!r.satEver, sittingDay: r.sittingDay,
     assigned: r.tpAssigned || null,
-    walked, terminal,
-    doorEvents: tpd.doorEvents || [],
+    walked, walkedRaw, terminal,
+    doorEvents,
     branchMargins: tpd.branchMargins || {},
     relayAtSit: r.relayAtSit || null,
     rdActive: !!(rd && rd.active), rdDone: !!(rd && rd.done), rdClaimed: !!((rd && rd.claimed) | 0),
