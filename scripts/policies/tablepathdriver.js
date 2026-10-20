@@ -250,21 +250,32 @@ function snapTable(Game) {
   return s;
 }
 
-// branchMargins(Game): the engine's live tableBranch(pathId) signals for
-// the ledger paths, captured at door-walk time. PURE reads — the
-// instrument for the "why dark never surfaces" finding: dark vs light
-// margins in the engine's own numbers.
+// branchMargins(Game, walkedPath): the engine's live tableBranch(pathId)
+// signals for the ledger paths + the walked path, captured at door-walk
+// time. PURE reads — the instrument for the "why dark never surfaces"
+// finding: dark vs light margins in the engine's own numbers. The relay
+// resolves on the leaning band, not the binary ledger (docs/TABLE.md
+// GRADIENT law) — its band/lean are captured alongside the ledger
+// signals. Both extensions are guarded so every other door's record is
+// byte-identical to before (the det-gate in the arm evidence).
 const MARGIN_PATHS = ['feared', 'indispensable', 'beloved', 'witness', 'assimilated', 'defiant'];
-function branchMargins(Game) {
+function branchMargins(Game, walkedPath) {
   const out = {};
   try {
-    for (const pid of MARGIN_PATHS) {
+    const paths = (walkedPath && MARGIN_PATHS.indexOf(walkedPath) < 0)
+      ? MARGIN_PATHS.concat([walkedPath]) : MARGIN_PATHS;
+    for (const pid of paths) {
       if (typeof Game.tableBranch !== 'function') break;
       const s = Game.tableBranch(pid) || {};
-      out[pid] = {
+      const rec = {
         branch: s.branch || null, dark: s.dark | 0, light: s.light | 0,
         notes: (s.notes || []).slice(0, 8),
       };
+      // GRADIENT: the relay's own band/lean — present only on the relay's
+      // signal object, so no other door's record changes shape.
+      if (s.band != null) rec.band = s.band;
+      if (s.lean != null) rec.lean = s.lean | 0;
+      out[pid] = rec;
     }
   } catch (e) {}
   return out;
@@ -310,11 +321,18 @@ function drainTable(Game, ctx, params) {
       TPD.trialEvents.push({ day: rec.day, path: before.path || after.path, fired: after.trialPending });
     }
     if (before.phase === 'finals') TPD.finalsEvents.push({ day: rec.day, path: before.path, branch: before.branch, finalId: pick.id });
-    // A door walked: record the walk (phase 'paths' -> 'challenge' with a
-    // path set) + the engine's branch margins for the ledger paths.
-    if (before.phase === 'paths' && after.path && after.phase === 'challenge') {
+    // A door walked: record the walk (a 'paths'-phase door pick that sets
+    // the path and moves the modal on) + the engine's branch margins for
+    // the ledger paths and the walked path. Most doors enter via
+    // paths->challenge; the relay door (and a dark feared walk) take the
+    // dark-conscript beat first: paths->conscript (tableStartPath in
+    // src/js/table.js — 'conscript' is only ever entered from a door pick,
+    // and the modal is already past the door). The old paths->challenge-only
+    // condition never fired for the relay door — walked=[] on 5/5
+    // relay/dark wins (sim-wintrack-audit named next 1).
+    if (before.phase === 'paths' && after.path && (after.phase === 'challenge' || after.phase === 'conscript')) {
       TPD.walked.push({ day: rec.day, path: after.path, branch: after.branch, door: pick.id, fellBack: !!(pick.doorEvent && pick.doorEvent.fellBack) });
-      try { TPD.branchMargins = branchMargins(Game); } catch (e) {}
+      try { TPD.branchMargins = branchMargins(Game, after.path); } catch (e) {}
     }
     if (TPD.log.length > 400) TPD.log.splice(0, TPD.log.length - 400);
   }
