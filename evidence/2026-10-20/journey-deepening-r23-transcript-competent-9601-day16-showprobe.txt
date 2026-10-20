@@ -1,0 +1,23 @@
+=== seed 9601 day 16 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=40 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you believe in — Do you believe in anything? Now, I mean. After everything."
+(turn0 choices: ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "Now — That's not naive. That's load-bearing. Hold onto it."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Elderberry — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "Okay — I need to move. But I'm glad we talked."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

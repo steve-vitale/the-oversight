@@ -1,0 +1,12 @@
+=== seed 9601 day 72 — conversation with Dale (dale_hoffman) ===
+occupation=rail conductor temperament=dry trust=58 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. Think, then act."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged

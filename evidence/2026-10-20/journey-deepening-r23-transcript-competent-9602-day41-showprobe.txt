@@ -1,0 +1,21 @@
+=== seed 9602 day 41 — conversation with Dieter (gen_pwgbq1k) ===
+occupation=roofer temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about that favor — that was 11 days back. Still on your mind? 'Forget I said anything. What did you want?'"
+(turn0 choices: betrayal:accept, betrayal:decline, gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, invite_party)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Xavier talks to the garden. The garden listens. I've seen it."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=unestablished

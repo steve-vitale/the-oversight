@@ -1,0 +1,30 @@
+=== seed 9604 day 67 — conversation with David (david_kim) ===
+occupation=plumber temperament=cautious trust=32 dead=false mood=steady
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — Have you heard? No? Good, I get to tell you first."
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, agree, invite_party, silence, confront:d_0so9ej8)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=share_news stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Did you hear? Aki just walked away from Haven. Didn't look back."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? ...at least, that's how it looks to me."
+(want=share_news stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: "...Sorry, lost my train of thought."
+(want=share_news stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: "Hm. Never mind — go on."
+(want=share_news stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: "...Actually, forget it."
+(want=share_news stage=1)
+YOU: (leave)
+closing line: "This stays between us, right? Right."
+want final: id=share_news stage=3 resolution=unresolved

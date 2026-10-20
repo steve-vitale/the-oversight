@@ -1,0 +1,12 @@
+=== seed 9603 day 53 — conversation with Quinn (quinn_murphy) ===
+occupation=bartender temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now? Simple as that."
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, betrayal:accept, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself, yeah? I mean it."
+want final: id=curious stage=3 resolution=engaged

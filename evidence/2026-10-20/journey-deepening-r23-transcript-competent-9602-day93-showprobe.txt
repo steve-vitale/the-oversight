@@ -1,0 +1,18 @@
+=== seed 9602 day 93 — conversation with Bill (gen_y9p3ohq) ===
+occupation=Chef temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "I tried the American Hazelnut like you showed me. Didn't poison anyone, so that's a win."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:show, alive:thread:want, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Famous last words."
+(want=curious stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Aisling is back. Walked in like they'd never left."
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=0)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=unestablished

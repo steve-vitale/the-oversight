@@ -1,0 +1,15 @@
+=== seed 9602 day 60 — conversation with Dieter (gen_pwgbq1k) ===
+occupation=roofer temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:help, alive:event:show, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:help] "How can I help?"
+THEM: "I did the count twice. The count doesn't change. Nobody's worked the old burn east of camp in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Good. The old burn east of camp, at sunup. Bring your pack and your knife."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=promised

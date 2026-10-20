@@ -1,0 +1,18 @@
+=== seed 9603 day 50 — conversation with Emily (gen_863pbrc) ===
+occupation=Dentist temperament=restless trust=76 dead=false mood=steady
+want: share_news (stage 1, fromSeed)
+
+THEM: "About that news I was bursting to share — You'll never guess what I saw by the treeline."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:event:mourning, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Gotta keep moving."
+(want=share_news stage=1)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Jorge sees in the dark. Not well — but better than you. Better than me."
+(want=share_news stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? That's the priority."
+(want=share_news stage=1)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=share_news stage=3 resolution=unresolved

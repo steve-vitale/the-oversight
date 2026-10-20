@@ -1,0 +1,32 @@
+=== seed 9604 day 29 — conversation with Aidan (gen_meb6ntu) ===
+occupation=interpreter temperament=steady trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Bill?"
+(turn0 choices: agency:ask_field, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, invite_party, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_taken stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Fair enough. I'd rather hear that than a confident lie."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "David? A plumber, back before. Solid person."
+(want=seek_taken stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? It'll pass."
+(want=seek_taken stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Wild Onion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=1)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Pokeweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_taken stage=1)
+closing line: "Good talking. We'll figure it out."
+want final: id=seek_taken stage=3 resolution=unresolved

@@ -1,0 +1,30 @@
+=== seed 9604 day 45 — conversation with Hinewai (gen_21d3wjn) ===
+occupation=hunting guide temperament=earnest trust=45 dead=false mood=cheerful
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, alive:want:ask_favor, menu:more, dlg:subject, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I should get back to it."
+(want=ask_favor stage=1)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=unresolved
+!! VERBATIM REPEATS: "I just said — did you miss it?" || "I just told you — what else is on your mind?"

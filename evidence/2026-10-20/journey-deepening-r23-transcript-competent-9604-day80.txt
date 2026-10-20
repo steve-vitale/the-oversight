@@ -1,0 +1,32 @@
+=== seed 9604 day 80 — conversation with Wanjiru (wanjiru_kamau) ===
+occupation=Wild food forager temperament=warm trust=43 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask this, but I can't shake it. I'm feverish, a cut gone hot and angry. I need help. Please."
+(turn0 choices: agency:ask_expedition, betrayal:accept, betrayal:decline, alive:want:ask_favor, menu:more, dlg:subject, leave, silence)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "The cut's gone hot and it's spreading — I can feel it moving. Clean it out, wrap it tight, please. Before it turns."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Rest won't touch this. The heat's climbing and my head's full of cotton. Someone who knows what they're doing — please."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "It's not just the cut anymore, it's in the blood, I can feel it climbing. I need someone who knows wounds."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I could talk all day, but — go on. We'll talk more."
+(want=ask_favor stage=1)
+want final: id=ask_favor stage=3 resolution=unresolved
+!! VERBATIM REPEATS: "I just said — did you miss it?" || "I just told you — what else is on your mind?"

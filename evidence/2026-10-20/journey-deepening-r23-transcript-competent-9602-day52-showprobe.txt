@@ -1,0 +1,27 @@
+=== seed 9602 day 52 — conversation with Dieter (gen_pwgbq1k) ===
+occupation=roofer temperament=cautious trust=84 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "American Hazelnut — I keep thinking about what you said. I'm seeing it everywhere now."
+(turn0 choices: alive:want:curious, alive:event:show, dlg:invite, teach, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You know?"
+(want=curious stage=0)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Can I be honest? Did you hear? Aisling just walked away from Haven. Didn't look back."
+(want=curious stage=0)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Sure — Honest. I'll take honest over certain every time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Chickweed — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,29 @@
+=== seed 9602 day 45 — conversation with Dieter (gen_pwgbq1k) ===
+occupation=roofer temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Water's almost gone — 8 liters. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, invite_party)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Yeah. Me neither, some days. The days I do know, I worry I'm wrong."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "Do the math with me: 8 liters, 10 people. That's not tomorrow's water. The creek's a twenty-minute walk — with two of us it's one trip, not three."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening, I promise."
+THEM: Something in them almost softens — then doesn't. Not yet.
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Alright — I should get back to it."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

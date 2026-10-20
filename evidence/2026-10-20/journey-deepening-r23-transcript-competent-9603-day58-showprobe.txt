@@ -1,0 +1,24 @@
+=== seed 9603 day 58 — conversation with Noluthando (gen_qasva31) ===
+occupation=dry cleaner temperament=cautious trust=57 dead=false mood=cheerful
+want: curious (stage 1)
+
+THEM: "Do you ever just need to be alone? Like, really alone? Let's move."
+(turn0 choices: ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, betrayal:accept, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "…I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Marvin died... I keep expecting to see Marvin at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Sanne ate something last month that should've killed them. They're fine."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Careful out there. I mean it."
+want final: id=curious stage=3 resolution=engaged

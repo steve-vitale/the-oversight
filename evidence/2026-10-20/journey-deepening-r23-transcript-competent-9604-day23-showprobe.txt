@@ -1,0 +1,32 @@
+=== seed 9604 day 23 — conversation with David (david_kim) ===
+occupation=plumber temperament=cautious trust=12 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:commit, alive:event:show, dlg:cant, teach, dlg:subject, confront:d_0so9ej8, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Aki is back. Walked in like they'd never left. I mean it."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? …if that makes sense."
+(want=ask_favor stage=2)
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "You ever get a song stuck in your head with no way to play it? It's a special kind of torture. Seen worse."
+(want=ask_favor stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's me, I guess. What's on your mind?"
+(want=ask_favor stage=2)
+YOU: [ask:you] "How am I doing, by your lights?"
+THEM: "Huh. Let me think about that." "Honestly? I'm still making up my mind about you." "That's where we are."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+closing line: "I should get back. Stay sharp out there."
+want final: id=ask_favor stage=3 resolution=stated

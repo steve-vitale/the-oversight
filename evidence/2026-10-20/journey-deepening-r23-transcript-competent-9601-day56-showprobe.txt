@@ -1,0 +1,31 @@
+=== seed 9601 day 56 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=89 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Rosa doesn't wait for an answer. "We need to discuss how things are run here."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Please — have you got anything to spare? Anything? My hands shake when I try to work."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Priya? You're imagining things. They're perfectly pleasant."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? No point pretending otherwise."
+(want=ask_favor stage=1)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: "Right. Action time. You know where to find me."
+(want=ask_favor stage=1)
+want final: id=ask_favor stage=3 resolution=unresolved

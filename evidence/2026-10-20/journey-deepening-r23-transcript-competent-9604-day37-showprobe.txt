@@ -1,0 +1,27 @@
+=== seed 9604 day 37 — conversation with Aidan (gen_meb6ntu) ===
+occupation=interpreter temperament=steady trust=90 dead=false mood=cheerful
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: agency:ask_field, betrayal:accept, betrayal:decline, dlg:commit, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: The grass stops moving the way wind moves it. Sweeps Week, every time. Dawn and dusk, that's when it's out."
+(want=seek_taken stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=1)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Hm. Never mind — go on."
+(want=seek_taken stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=seek_taken stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=1)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=seek_taken stage=3 resolution=unresolved

@@ -1,0 +1,18 @@
+=== seed 9602 day 30 — conversation with Dieter (gen_pwgbq1k) ===
+occupation=roofer temperament=cautious trust=82 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: betrayal:accept, betrayal:decline, dlg:commit, alive:event:show, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Yeah, that was me. I walked away from Haven once. Didn't look back."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=stated

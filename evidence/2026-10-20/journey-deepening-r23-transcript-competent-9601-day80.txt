@@ -1,0 +1,29 @@
+=== seed 9601 day 80 — conversation with Ruth (ruth_goldstein) ===
+occupation=librarian temperament=dry trust=20 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you dream about — Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Nikos died... I keep expecting to see Nikos at the fire. Stupid."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "I sleep in short shifts. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "The fire feels smaller without Nikos. The rest of us will have to be bigger."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I remember them. Someone has to do it properly."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [goon] "What happened next?"
+THEM: "Well. My social battery is officially dead."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

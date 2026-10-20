@@ -1,0 +1,18 @@
+=== seed 9603 day 80 — conversation with Emily (gen_863pbrc) ===
+occupation=Dentist temperament=restless trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about their secret — that was 13 days back. Still on your mind? 'a spring that runs clear — I'll show you on the map sometime. It's real.' I mean it."
+(turn0 choices: agency:ask_field, gq:open:take, gq:open:unsure, gq:open:honest_pass, betrayal:accept, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say. — or so they tell me."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later! I'm already thinking about three things at once!"
+want final: id=curious stage=3 resolution=engaged
