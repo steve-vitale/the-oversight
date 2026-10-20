@@ -64,6 +64,12 @@ try { const p = require('./policies/perfsurvive'); POLICY_REGISTRY['perfsurvive-
 // the §15 balanced-panel before/after (gate-off vs HELPCALL=1). Additive;
 // zero behavior change to existing entries.
 try { const h = require('./policies/helpcost'); POLICY_REGISTRY['leadcost'] = h.leadCost; POLICY_REGISTRY['belongcost'] = h.belongCost; } catch (e) {}
+// spearfund instrument (flesh-out loop 2026-10-20, sim-spearfund): the
+// leadcourt courtship stack + the spear-acquisition drive layer, for the
+// §15 balanced-panel before/after (gate-off vs SPEARFUND=1). Additive;
+// zero behavior change to existing entries.
+try { const l = require('./policies/leadcourt'); POLICY_REGISTRY['leadcourt'] = l.leadcourt; } catch (e) {}
+try { const p = require('./policies/spearfund'); POLICY_REGISTRY['spearfund-lead'] = p.spearfundLead; } catch (e) {}
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
