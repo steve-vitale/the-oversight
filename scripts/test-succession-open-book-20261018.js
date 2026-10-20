@@ -20,8 +20,14 @@
 // hold — the release machinery itself is GO). GREEN: fix -> all pass.
 // (Patch-file round-trip for RED, never stash.)
 'use strict';
-const { loadGame, setupGame } = require('./sim-harness');
+const { loadGame, setupGame, runDays } = require('./sim-harness');
+const { competent } = require('./policies/competent');
 const proofCase = require('./godpath/isolated-proof-cases')(['promise','clean','two']);
+// COMMITTABLE KINDS (favor taxonomy, dedc46db7 2026-10-20): favor requests
+// connect to real playable actions now — water_haul, snare_mend,
+// watch_shift, stay_close and forage_help have no playable action and
+// convoFavorCommit rejects them as unsupported. Only these kinds commit.
+const COMMITTABLE = ['food_share', 'heal_help', 'sick_help'];
 
 let pass = 0, fail = 0;
 function ok(cond, name) {
@@ -47,19 +53,33 @@ async function handoffCase(seed, withPromise) {
   v.trust[succ] = 100;
   let asker = null, task = null;
   if (withPromise) {
-    // highest-trust non-successor NPC with a live need (mirrors r25 script)
-    const pool = others.filter(id => id !== succ);
-    for (const vid of pool) {
-      let nd = null;
-      try { nd = Game.convoFindFavorNeed(vid); } catch (e) {}
-      if (!nd) continue;
-      let f = null;
-      try { f = Game.convoBuildFavor(vid, nd); } catch (e) {}
-      if (!f || !f.task) continue;
-      try { Game.convoStoreFavor(f); } catch (e) {}
-      let cr = null;
-      try { cr = Game.convoFavorCommit(vid, f); } catch (e) {}
-      if (cr && cr.ok) { asker = vid; task = f.task; break; }
+    // COMMITTABLE NEED (favor taxonomy, dedc46db7 2026-10-20): day-1 needs
+    // are all forage_help — uncommittable by design now. Advance with honest
+    // competent play until a committable need (food_share/heal_help/
+    // sick_help) exists, then force the commit through the real machinery
+    // (the decision is forced, the mechanism stays honest — r25 precedent).
+    // Trusts are re-pinned after the advance so the successor stays chosen.
+    for (let d = 0; d < 8 && !asker && !Game.over; d++) {
+      const pool = others.filter(id => id !== succ);
+      for (const vid of pool) {
+        if (((v.promises || {})[vid] || {}).kept === false) continue;
+        let nd = null;
+        try { nd = Game.convoFindFavorNeed(vid); } catch (e) {}
+        if (!nd || !COMMITTABLE.includes(nd.kind)) continue;
+        let f = null;
+        try { f = Game.convoBuildFavor(vid, nd); } catch (e) {}
+        if (!f || !f.task) continue;
+        try { Game.convoStoreFavor(f); } catch (e) {}
+        let cr = null;
+        try { cr = Game.convoFavorCommit(vid, f); } catch (e) {}
+        if (cr && cr.ok) { asker = vid; task = f.task; break; }
+      }
+      if (!asker && !Game.over) {
+        await runDays(Game, competent, { days: 1 });
+        if (Game.villagerId !== oldId || Game.over) break; // bearer <redacted> organically — fixture invalid
+        for (const id of others) v.trust[id] = 10;
+        v.trust[succ] = 100;
+      }
     }
   }
   const said = [];
@@ -100,6 +120,18 @@ async function main() {
     ok(line.includes(c1.oldFirst), `line names the dead bearer <redacted>`);
     ok(/died with/i.test(line), 'line says the promise died with its maker (released, not broken)');
     ok(!/broken|betrayed|oathbreaker/i.test(line), 'line carries no broken-word stigma');
+    // NO-DOUBLE (journey-succession r32 2026-10-20): the task names its
+    // asker (ctx.name = displayName at build), so the line must not ALSO
+    // prefix the knowledge-gated who — "the woman in her 40s, with a wiry
+    // build — help A woman, maybe 40s, with a wiry build..." doubled the
+    // descriptor. firstRef and displayName produce DIFFERENT descriptors
+    // for unnamed villagers; the line must never contain both (when one
+    // is a substring of the other — known names — the check is vacuous).
+    const fr = (() => { try { return c1.Game.firstRef(c1.asker); } catch (e) { return ''; } })();
+    const dn = (() => { try { return c1.Game.displayName(c1.asker); } catch (e) { return ''; } })();
+    const distinctDesc = fr && dn && fr !== dn && !dn.toLowerCase().includes(fr.toLowerCase()) && !fr.toLowerCase().includes(dn.toLowerCase());
+    const doubled = distinctDesc && line.includes(fr) && line.includes(dn);
+    ok(!doubled, `asker descriptor not doubled in the line${distinctDesc ? '' : ' (n/a: names agree)'}`);
     console.log('   LINE:', line.slice(0, 220));
   }
 

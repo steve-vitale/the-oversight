@@ -1138,7 +1138,16 @@
               let who = 'someone';
               try { who = typeof this.firstRef === 'function' ? this.firstRef(pid) : (this.displayName(pid) || 'someone'); } catch (e4) {}
               const task = p.favorTask || p.goal || 'a promise';
-              bits.push(`${who} — ${task}`);
+              // NO-DOUBLE (journey-succession r32 2026-10-20): favor tasks
+              // name their asker (ctx.name = displayName at build) — so
+              // `${who} — ${task}` doubles the descriptor for unnamed
+              // villagers ("the woman in her 40s — help A woman, maybe
+              // 40s..."). When the task already carries the asker's name,
+              // the task alone is the bit.
+              let tName = '';
+              try { tName = this.displayName(pid) || ''; } catch (e5) {}
+              const namesAsker = tName && task.toLowerCase().includes(String(tName).toLowerCase());
+              bits.push(namesAsker ? task : `${who} — ${task}`);
             }
             const extra = _releasedNow.length > 3 ? ` (+${_releasedNow.length - 3} more)` : '';
             const oPro = (oldChar && oldChar.pro) || 'they';

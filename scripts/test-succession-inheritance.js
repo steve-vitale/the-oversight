@@ -42,16 +42,24 @@ function check(id, ok, detail) {
   console.log(`old bearer: ${oldName} (day ${day1}), heir: ${heir}, npc1: ${vid1}, npc2: ${vid2}`);
 
   // ---- plant conversational state as the OLD bearer ----
-  Game.convoThreadOpen(vid1, 'hardtime', 'a hard time', 'walked away mid-thread');
-  Game.convoThreadOpen(vid2, 'deepthread', 'a deep matter', 'unfinished business');
+  // THREAD SNIPPETS (journey-social r19 2026-10-16): convoThreadOpen's
+  // plant contract is no ghost threads — the 5th arg must be a real beat
+  // (>=4 words, not a deflection), or the plant is silently rejected.
+  Game.convoThreadOpen(vid1, 'hardtime', 'a hard time', 'walked away mid-thread',
+    'They told me about the winter the roof caved in and they rebuilt it alone.');
+  Game.convoThreadOpen(vid2, 'deepthread', 'a deep matter', 'unfinished business',
+    'They keep a tin of seeds from home and will not say what they are for.');
+  // FAVOR KIND (dedc46db7 2026-10-20): favor requests connect to real
+  // playable actions now — water_haul has no playable action and
+  // convoFavorCommit rejects it as unsupported. food_share commits.
   const favor1 = {
-    id: 'favor-test-1', vid: vid1, kind: 'water_haul', short: 'the water run',
-    task: 'haul water from the creek', goal: 'water',
+    id: 'favor-test-1', vid: vid1, kind: 'food_share', short: 'the food share',
+    task: 'share food from your pack', goal: 'food',
     state: 'asked', askedDay: day1, deadline: day1 + 2,
   };
   Game.convoStoreFavor(favor1);
   const cr = Game.convoFavorCommit(vid1, favor1);
-  Game.convoPlantSeed(vid1, { wantId: 'repay', note: 'the water run you promised', favorId: favor1.id });
+  Game.convoPlantSeed(vid1, { wantId: 'repay', note: 'the food share you promised', favorId: favor1.id });
   Game.remember(vid1, 'gift', 'gave them extra food');
   const favor2 = {
     id: 'favor-test-2', vid: vid2, kind: 'forage_help', short: 'the forage sweep',
@@ -70,8 +78,15 @@ function check(id, ok, detail) {
   const m = v.mantleOf || [];
   check('mantle-record', m.length === 1 && m[0].from === oldId && m[0].to === newId,
     JSON.stringify(m[0] || null));
-  check('trust-zero-stays-zero', (v.trust || {})[newId] === 0,
-    `new trust=${(v.trust || {})[newId]} (bug gave 12)`);
+  // TRUST FORMULA (blitz-succession 2026-10-13, Steve's call): the office's
+  // standing is remembered through three channels — office residue (40%),
+  // elders' vouching, and the successor's OWN record (40%). The old pin
+  // ("explicit 0 stays 0") predates the own-record channel: with office 0
+  // and the heir's own trust 90, the heir inherits round(0*0.4 + 90*0.4) =
+  // 36 (floor 10). The office term is still 0 — no free trust from a
+  // distrusted office; the 36 is the heir's own earned standing carrying.
+  check('trust-office-zero-own-carries', (v.trust || {})[newId] === 36,
+    `new trust=${(v.trust || {})[newId]} (want 36 = round(0*0.4 + 90*0.4))`);
   const p = (v.promises || {})[vid1];
   check('promise-released', p && p.kept === 'released', `kept=${p && p.kept}`);
   check('favor-reverted-to-asked', favor1.state === 'asked', `state=${favor1.state}`);
@@ -89,21 +104,38 @@ function check(id, ok, detail) {
 
   // ---- the new bearer talks to npc1: the opening names the predecessor ----
   // (startConvo fires the resume opener internally and consumes the thread)
-  Game.startConvo(vid1);
-  const opening = ((Game.convoGet(vid1).transcript || [])[0] || {}).text || '';
+  // RESUME DICE (convoResumeOpener, 65% no-fire gate): the resume is
+  // probabilistic by design (anti-spam), so the test pins the LINE's
+  // content, not the dice. Forcing Math.random -> 0 here is legitimate:
+  // conversation.js reads the global at call time, and the gate is a
+  // separate design concern from the naming honesty this check pins.
+  const _mr = Math.random;
+  Math.random = () => 0;
+  let opening = '';
+  try {
+    Game.startConvo(vid1);
+    opening = ((Game.convoGet(vid1).transcript || [])[0] || {}).text || '';
+  } finally { Math.random = _mr; }
   check('resume-opener-names-predecessor',
     opening.includes(oldFirst) && opening.indexOf('"We never finished') !== 0,
     opening.slice(0, 150));
   try { Game.endConvo(vid1, 'left'); } catch (e) {}
-  // a second conversation surfaces the memory menu item
+  // a second conversation surfaces the memory menu item — memories are
+  // deliberate topic choices (convo-scene.js): offered in the SUBJECT menu,
+  // not the opener menu
   Game.startConvo(vid1);
-  const memChoice = (Game.convoChoices(vid1) || []).find(c => c.id === 'alive:memory:gift');
-  let memResp = '(no memory choice offered)';
-  if (memChoice) {
-    const before = (Game.convoGet(vid1).transcript || []).length;
-    Game.convoTurn(vid1, memChoice.id);
-    const t = (Game.convoGet(vid1).transcript || []).slice(before);
-    memResp = t.map(e => `${e.who}: ${e.text}`).join(' | ').slice(0, 200);
+  const subj = (Game.convoChoices(vid1) || []).find(c => c.id === 'dlg:subject');
+  let memResp = '(no subject choice offered)';
+  if (subj) {
+    Game.convoTurn(vid1, 'dlg:subject');
+    const memChoice = (Game.convoChoices(vid1) || []).find(c => c.id === 'alive:memory:gift');
+    memResp = memChoice ? '' : '(no memory choice offered)';
+    if (memChoice) {
+      const before = (Game.convoGet(vid1).transcript || []).length;
+      Game.convoTurn(vid1, memChoice.id);
+      const t = (Game.convoGet(vid1).transcript || []).slice(before);
+      memResp = t.map(e => `${e.who}: ${e.text}`).join(' | ').slice(0, 200);
+    }
   }
   check('memory-names-predecessor', memResp.includes(oldFirst), memResp.slice(0, 150));
   try { Game.endConvo(vid1, 'left'); } catch (e) {}
@@ -117,7 +149,8 @@ function check(id, ok, detail) {
     `deadline=${Game.convoGetFavor(vid2).deadline} day=${Game.state.scholar.day}`);
 
   // ---- control: records planted AFTER the handoff are not inherited ----
-  Game.convoThreadOpen(vid1, 'newthread', 'a new matter', 'unfinished business');
+  Game.convoThreadOpen(vid1, 'newthread', 'a new matter', 'unfinished business',
+    'They asked whether the north field will thaw before the seed rots.');
   const openNew = Game.convoOpenThreads(vid1).find(o => o.tid === 'newthread');
   check('control-not-inherited', !!openNew && Game.inheritedName(openNew) === null,
     `inh=${openNew && (openNew.inh || '-')}`);
