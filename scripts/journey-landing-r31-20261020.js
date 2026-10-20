@@ -265,7 +265,7 @@ const RAW_WATER_RE = /Drank risky water|Stomach cramps within the hour|Boil it n
 // R15: Taking scan — KIN.md canon. System beats carry the boring-half line
 // (game.js 'watched'/'pods' beats); villager-side references to taken family
 // are the leg's question. Samples stashed per source class.
-const TAKING_RE = /boring half|\\bNAPPING\\b|your relatives were probably|stasis pods?|little ones are (\\bnapping\\b|gone)|taken (half|family|kin)|missing (family|kin|my |his |her |their )|took them|disappeared (them|at the start)|gone from (the|my|his|her)/i; // R30: \\b on NAPPING — /NAPPING/i matched 'snapping' (turtle)
+const TAKING_RE = /boring half|\bNAPPING\b|your relatives were probably|stasis pods?|little ones are (\bnapping\b|gone)|taken (half|family|kin)|missing (family|kin|my |his |her |their )|took them|disappeared (them|at the start)|gone from (my |his |her |their |the )?(family|kin|home|village|fire|people)/i; // R30: \\b on NAPPING — /NAPPING/i matched 'snapping' (turtle)
 const TAKING_SYS_MARK_RE = /\bboring half\b|\bnapping\b|your relatives were probably/i; // R30: word boundaries — /NAPPING/i matched 'snapping' (turtle)
 function takeScan(line) {
   const s = String(line || '');
