@@ -41,7 +41,11 @@ function ok(name, cond, extra) {
   ok('player gets "YOU stand accused"', !!accused && /YOU stand accused/.test(accused), accused);
   ok('no "YOU stands accused"', !sysLines.some(l => /YOU stands accused/.test(l)));
 
-  // --- 2. NPC-accused case: third person unchanged ---
+  // --- 2. NPC-accused case: all accused named (r32 moot-naming fix) ---
+  // The r8 fix's player grammar ("YOU stand accused") still holds; the NPC
+  // assertion changed ON PURPOSE in r32: the trial judges every accused, so
+  // the broadcast names them all with the plural verb ("X AND Y stand
+  // accused"), not just accused[0] with "stands".
   const plot = { id: 'plot_grammartest', leader: npcAccused, accomplices: [npcAcc2], target: accuser, weakest: npcAcc2, witnesses: [] };
   const nc = Game.openCase(plot, 'murder');
   ok('npc case opened', !!nc);
@@ -49,7 +53,10 @@ function ok(name, cond, extra) {
   try { Game.callMoot(nc.id, accuser); } catch (e) { console.log('npc callMoot threw: ' + e.message); }
   const nAccused = sysLines.find(l => /accused/i.test(l));
   ok('npc broadcast exists', !!nAccused, sysLines.join(' | ').slice(0, 200));
-  ok('npc keeps "stands accused"', !!nAccused && /stands accused/.test(nAccused) && !/YOU stand/.test(nAccused), nAccused);
+  const tagOf = (id) => { try { return String(Game.whoTag(id)).toUpperCase(); } catch (e) { return '?'; } };
+  ok('npc broadcast names the ringleader', !!nAccused && nAccused.includes(tagOf(npcAccused)), nAccused);
+  ok('npc broadcast names the accomplice', !!nAccused && nAccused.includes(tagOf(npcAcc2)), nAccused);
+  ok('plural accused take "stand accused"', !!nAccused && /stand accused/i.test(nAccused) && !/\bstands accused/i.test(nAccused) && !/YOU stand/.test(nAccused), nAccused);
 
   console.log(`\n${pass} pass, ${fail} fail`);
   process.exit(fail ? 1 : 0);

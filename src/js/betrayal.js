@@ -1346,11 +1346,22 @@
     // GRAMMAR (journey-social 2026-10-12 r8): whoTag returns 'you' for the
     // player — "YOU stands accused" was wrong. The broadcast gets the right
     // verb for the second person.
+    // MOOT-NAMING (journey-social r32 2026-10-20): the trial judges ALL the
+    // accused (sentenceCase/resolveCase apply to every accused), so the
+    // broadcast names all of them. Before this, only accused[0] aired — the
+    // r30 case_11 class (Miguel, Aroha, Ursula accused; only "MIGUEL stands
+    // accused" broadcast) left accomplices judged unnamed.
     if (this.state.systemArrived) {
-      const accusedTag = this.whoTag(c.accused[0]);
-      const standsLine = this.isPlayer(c.accused[0])
-        ? 'YOU stand accused'
-        : `${accusedTag.toUpperCase()} stands accused`;
+      const tags = (c.accused || []).map(a => { try { return this.whoTag(a); } catch (e) { return 'someone'; } });
+      const named = tags.map((t, i) => this.isPlayer(c.accused[i]) ? 'YOU' : String(t).toUpperCase());
+      let standsLine;
+      if (named.length > 1) {
+        standsLine = `${named.slice(0, -1).join(', ')} AND ${named[named.length - 1]} stand accused`;
+      } else if (this.isPlayer(c.accused[0])) {
+        standsLine = 'YOU stand accused';
+      } else {
+        standsLine = `${named[0]} stands accused`;
+      }
       this.sysSay(`🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!`);
       this.sysSay(`TONIGHT: ${standsLine} — ${this.chargeLine(c.charge).toUpperCase()}! The gamblers are FRENZIED! Place your bets, place your bets!`);
     }

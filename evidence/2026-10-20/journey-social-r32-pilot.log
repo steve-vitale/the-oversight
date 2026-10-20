@@ -1,0 +1,44 @@
+M1 STRESS PROBES (r31-hold): 3 fresh seeds, 6x convoRecapLine + 7x convoMoodSilence per sitting
+  seed 3101: recap dup=0 esc=2/2 | silence dup=0 esc=1
+  seed 3102: recap dup=0 esc=2/2 | silence dup=0 esc=1
+  seed 3103: recap dup=0 esc=2/2 | silence dup=0 esc=1
+M1 STRESS: HOLD (r31 fixes verified on 3 fresh seeds)
+SMOKE: seed 3008, 10 days (self-test of L3 counters)
+SMOKE: bonds=29 cases=0 convos=13
+SMOKE SELF-TEST: PASS (bonds counter reads nonzero — instrumentation OK)
+seed 3004: days=142 alive=7 convos=181 (deep=139 comfort=21/103) gossipPicks=3 gossipConvos=12 dryRate=2.40/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=8 spoken=8 silent=0
+  L3: {"bonds":75,"deepBonds":39,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":12,"gossipPicks":3,"avgTrust":"63.4"}
+  moots: (none convened)
+  regression: P1-streaks=8 P2-reactDry=16
+seed 3005: days=142 alive=8 convos=177 (deep=139 comfort=8/15) gossipPicks=3 gossipConvos=19 dryRate=2.45/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=6 spoken=6 silent=0
+  L3: {"bonds":65,"deepBonds":38,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":19,"gossipPicks":3,"avgTrust":"85.6"}
+  moots: (none convened)
+  regression: P1-streaks=9 P2-reactDry=26
+seed 3006: days=134 alive=3 convos=211 (deep=135 comfort=22/104) gossipPicks=3 gossipConvos=4 dryRate=2.90/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=10 spoken=10 silent=0
+  L3: {"bonds":95,"deepBonds":38,"betrayalCases":2,"mootsConvened":2,"mootsObserved":2,"gossipConvos":4,"gossipPicks":3,"avgTrust":"81.3"}
+  moots: [{"c":"case_2","day":10,"role":"bystander","vote":"acquit","verdict":"acquitted","err":null,"unnamed":["Carmela","Regina","Howard"]},{"c":"case_4","day":18,"role":"bystander","vote":"acquit","verdict":"acquitted","err":null,"unnamed":["Luis","Wei","Carmela"]}]
+  regression: P1-streaks=18 P2-reactDry=40
+seed 3007: days=142 alive=9 convos=198 (deep=139 comfort=18/82) gossipPicks=3 gossipConvos=27 dryRate=2.47/12
+  L2' repeats: 0
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=10 spoken=10 silent=0
+  L3: {"bonds":76,"deepBonds":48,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":27,"gossipPicks":3,"avgTrust":"69.6"}
+  moots: (none convened)
+  regression: P1-streaks=11 P2-reactDry=28
+M1 (r31-hold, wild L2'): HOLD
+M2 (citizen NPC-NPC cases): 1/4 seeds — NO-GO (r27 stands)
+    seed 3006: case_2[murder|bystander|acquitted] case_4[ambush|bystander|acquitted]
+M3 (moot naming): GO (gap REAL)
+    seed 3006 case_2: unnamed=[Carmela, Regina, Howard] broadcast="TONIGHT: CARMELA stands accused — MURDER. THERE — SAID PLAIN! The gamblers are FRENZIED! Place your bets, place your bets!"
+    seed 3006 case_4: unnamed=[Luis, Wei, Carmela] broadcast="TONIGHT: LUIS stands accused — CRIMES AGAINST THE VILLAGE! The gamblers are FRENZIED! Place your bets, place your bets!"
+M4 (settle-speak): HOLD
+COMFORT-REPEAT: MISS
