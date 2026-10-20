@@ -4384,6 +4384,12 @@
           // modern slots (the legacy .weapon slot is read by nothing live)
           const wslot = (globalThis.Scattering.equipment && globalThis.Scattering.equipment.isRangedWeapon(def)) ? 'ranged' : 'melee';
           s2.equipped[wslot] = { itemId: def.id, name: def.name };
+          // GEAR DISCOVERY (Steve 2026-10-09; backlog #698, 2026-10-20):
+          // equipping teaches the recipe L1 — same canonical hook as the
+          // game.js equip path. The grant is a real grant ("yours to keep,"
+          // Steve 2026-10-08), so the grant teaches. noteGearHandled is
+          // idempotent (no downgrade, no repeat).
+          try { this.noteGearHandled(def.id); } catch (e) {}
           // (longsim contests r8 2026-10-12: the bespoke do.note already
           // announces the take — the generic line doubled it.)
           if (!d.note) this.sysSay(`📺 You take the ${def.name}. It feels honest. It's yours now.`);
