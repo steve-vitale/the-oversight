@@ -6130,6 +6130,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (task === 'cook') {
         if (has('cook', 'chef', 'baker', 'butcher')) mult = 1.4;
         else if (has('farmer', 'gardener')) mult = 1.2;
+        // PRESERVER (establishment r20 2026-10-20): the cook's smoke-rack
+        // branch resolves at specialistSkill('preserver') — a fisherman or
+        // smoker is the specialist for half the duty — but the old keyword
+        // list never recognized them, so the assignment UI showed no ⭐
+        // signal and competent staffing never routed them to the racks
+        // (r20 M2: 0/61 smoke events at specialist rate across 4 seeds).
+        // A preserver-2+ earns the natural tag at 1.3, below a true cook's
+        // 1.4 (the chef still wins the full duty). Signal only: the cook
+        // branch's outputs don't scale on comp, and havenRoleCredit's
+        // 800→1040 bump tracks the real ~25% yield gain at the racks.
+        else { try { if (this.specialistSkill && this.specialistSkill(vp, 'preserver') >= 2) mult = 1.3; } catch (e) {} }
       } else if (task === 'tend') {
         if (has('nurse', 'medic', 'doctor', 'midwife', 'veterinarian', 'firefighter')) mult = 1.4;
         else if (has('teacher', 'social worker')) mult = 1.2;
@@ -6970,7 +6981,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
             try { this.creditDeed && this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
           } else if (racksFull && eligible.length) {
-            preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
+            // RACKSVOICE (establishment r20 2026-10-20): the cook resolves
+            // ~3x/day, so the identical racks-full line fired per resolution
+            // (3x "the racks are already full" in one day's stream — r20
+            // seed 61 day 25). Voice once per cook-day; the underlying
+            // fullness is still computed every resolution (FOODVOICE2
+            // pattern: the measure stays truthful, only the voice is gated).
+            var _rfv = this._racksFullVoice || (this._racksFullVoice = {});
+            if (_rfv[vid] !== day) {
+              _rfv[vid] = day;
+              preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
+            }
           }
           try { this.bumpTrust(vid, 1, 'kept the haven fed'); } catch (e) {}
         } catch (e) {}
