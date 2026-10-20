@@ -120,6 +120,14 @@ remain separate from automated graph/PCM checks.
 | `node scripts/validate-ontology.js` | After adding or renaming a `src/js` module or its `provides:` |
 | `bash scripts/bump-sw-version.sh` | Only when shipping a player-facing build (Steve's call) |
 
+“Before every push” includes documentation/evidence follow-ups and tooling-only
+pushes. Deploy exclusion is not a test exemption. Run quick/full against the
+checkout being pushed; keep the command, result and candidate identity in the
+release evidence. A prior gameplay release's green result must not be presented
+as a fresh check of a later follow-up. Do not disable hooks, skip verification,
+or waive a failing check to publish. Existing proof freshness and unchanged
+runtime identities can be verified without inventing new gameplay evidence.
+
 ## Map
 
 | Path | What |
