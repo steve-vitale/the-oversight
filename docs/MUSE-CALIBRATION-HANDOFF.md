@@ -11,6 +11,12 @@ journal, honest expired/completed history, due-day settlement and real actions
 on reminder conversations. It also fixes seven-square legacy saves throwing
 at midnight. See CONVERSATIONS.md and the favor-journal audit for reproduction.
 
+Publication verified: release d6880d7ad is shared on master/main and
+codex/favor-quest-deadlines-20261020, with all162 live boot hashes matching
+and a clean fresh mobile boot. The evidence-only follow-up retains that
+receipt; the player-facing build stays the same. Muse should merge the shared
+tip and calibrate this build, preserving any newer local work.
+
 Codex owns this follow-up and integration. Four Muse recovery proof scripts
 now run in the shared green list, covering all five fixes; the invitation probe
 establishes real daytime residents, and r20's historical RED source is pinned

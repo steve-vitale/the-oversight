@@ -45,7 +45,8 @@ HP, damage or difficulty offset was introduced.
   Viewed screenshots retain Accepted, Completed and Expired rows at736, plus
   Accepted at844. Back remains visible; reader scrolling is deliberate.
 - `favor-journal-frame-{736,844}-r2.json`:16 ordinary/combat touch checkpoints
-  each,164 current boot inputs, real zero-move Wait/escape, no page errors.
+  each,162 current boot inputs plus two verification sources, real zero-move
+  Wait/escape, no page errors.
 - `favor-journal-lifecycle-r2.json`: real installed Muse f11 build → candidate
   worker update preserves localStorage byte-for-byte; cold offline Continue
   boots the candidate. This checks update/boot; the separate favor journey
@@ -99,3 +100,14 @@ The next bounded goal is one complete water-hauling favor, with real travel,
 carry/handoff, recipient/resource effects, durable progress/deadline and mobile
 blocked/expiry choices. The other four joint jobs and public-release/physical
 device gates stay open. Handoff: docs/MUSE-CALIBRATION-HANDOFF.md.
+
+## Publication readback
+
+Shared release d6880d7ade7b7fea0953e4ef58d1f93afe88488e fast-forwarded
+origin/master, origin/main and origin/codex/favor-quest-deadlines-20261020
+atomically. Production advertises build4b196689c-20261020-204829. The retained
+publication receipt verifies all162 deployed boot inputs against local hashes
+and a clean fresh390×736 touch browser boot,0 page errors. The primary local
+master/main checkout was advanced normally; the foreign sweep-B.log edit was
+preserved. A subsequent evidence-only commit retains this readback without a
+new player-facing build stamp.
