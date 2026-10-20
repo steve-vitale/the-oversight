@@ -1,5 +1,39 @@
 # Muse calibration handoff — conversation/favor repair
 
+## Favor lifecycle follow-up (2026-10-20)
+
+New candidate build: `4b196689c-20261020-204829`. Fetch the shared master/main
+tip, verify this build against production version.json, and preserve any newer
+local work before merging. This line merges Muse recovery f11f1eab5 through
+999c69491; its five restored fixes remain intact. No port is needed. The
+runtime adds canonical favor IDs/deadlines/readiness in the existing People
+journal, honest expired/completed history, due-day settlement and real actions
+on reminder conversations. It also fixes seven-square legacy saves throwing
+at midnight. See CONVERSATIONS.md and the favor-journal audit for reproduction.
+
+Codex owns this follow-up and integration. Four Muse recovery proof scripts
+now run in the shared green list, covering all five fixes; the invitation probe
+establishes real daytime residents, and r20's historical RED source is pinned
+instead of depending on a moving master merge-base. Do not loosen assertions
+or overwrite the runtime with a previous release tree.
+
+Calibration baseline is f11f1eab5, candidate is the merged build above. Both
+arms use the same current observer/harness/policies: 16 matched cases for each
+of capable/maker/merchant/caregiver, all23 metrics and four neutral controls.
+Wins 15→16,12→8,11→13,11→8 remain review_required alongside deaths, survival,
+Table access and class-access warnings. Twenty-one selected replay pairs match
+full state/outcomes/metrics; early trust/need differences do not establish
+ending causality. Raw panels, feature census, plans and replays are retained
+under evidence/2026-10-20/favor-journal-*. Do not tune food/HP/rewards simply to
+recover those win percentages. Mixed policies do not establish pacifism.
+
+The five joint jobs remain explicitly unavailable. The next bounded product
+goal is one complete water-hauling favor: actual trip/carry/handoff, saved
+progress and deadline, reachable mobile choices, real recipient/resource
+effects and an honest blocked/expired path. No other unavailable job should
+be advertised as playable by that work. Public-release and physical-device
+gates stay open.
+
 Steve requested: “Get it live and muse should calibrate. Continue with other work.”
 
 Reconciled release build: `347cce498-20261020-194257`. Runtime repairs are

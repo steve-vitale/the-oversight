@@ -28,6 +28,18 @@ const INVITE_QS = [
   // overheard beat needs all three.
   const quiet = Object.assign({}, competent, { id: 'test-join-req-quiet' });
   await runDays(Game, quiet, { days: 4, manifest });
+  // The campaign can finish its iteration at night. This proof exercises a
+  // daytime invitation, whose production guard deliberately refuses night.
+  // Keep the played residents; establish the probe's stated opportunity.
+  Game.dayPart = 1;
+  Game.state.village.engaged = {};
+  Game.returnToVillage();
+  const residents = Game.state.village.roster.filter(id => id !== Game.villagerId && !Game.getPerson(id).dead).slice(0,2);
+  for (const id of residents) {
+    Game.npcSetNode(id, Game.map.px, Game.map.py);
+    Game.npcSetInside(id, Game.state.scholar.insideHaven !== false);
+  }
+  Game.ensureVillagerPositions();
   const beats = [];
   const origSay = Game.say;
   Game.say = function (m) { beats.push(String(m)); return origSay.call(this, m); };
@@ -50,7 +62,7 @@ const INVITE_QS = [
     if (cond) { pass++; console.log(`  ok: ${name}`); }
     else { fail++; console.log(`  FAIL: ${name}${detail ? ' — ' + detail : ''}`); }
   };
-  check('a join-request was created by overheardDiscussion', !!found, 'no request fired in 400 calls');
+  check('a join-request was created by overheardDiscussion', !!found, 'no request fired in 400 calls: '+JSON.stringify({night:Game.isNight(),sleeping:!!Game._sleeping,fight:!!Game.tbfight,positions:Object.keys(Game.state.village.positions||{}),overheard:!!Game.data.characterGen?.overheard}));
   if (found) {
     const name = (() => { try { return Game.displayName(found.vid); } catch (e) { return found.vid; } })();
     console.log(`  stored line: ${found.line.slice(0, 110)}`);

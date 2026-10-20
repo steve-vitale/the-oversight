@@ -14,7 +14,19 @@ The five unavailable joint jobs remain release blockers. A deadline bug fix
 must retain the survival/community/resource/progression/gear watches rather
 than treating a win-rate change as an automatic verdict.
 
-## Active release reconciliation (2026-10-20)
+## Completed recovery merge and current verification (2026-10-20)
+
+Muse recovery `f11f1eab5` is merged as parent of `999c69491`. This includes
+the preserver signal/racks voice, contest recipe discovery, final-blow beat
+attribution and spoken invitation storage. Those regions were inspected and
+remain intact; only generated build stamps conflicted. `4b196689c` adds the
+old-map midnight repair found by the favor phone journey. The current balanced
+baseline is f11f1eab5, not the earlier a864 snapshot. Use the final publication
+receipt/shared remote tip for calibration. The previous integration account
+below is historical. Never replace a newer shared tree with an older snapshot;
+fetch before landing and verify ancestry plus the runtime diff.
+
+## Previous release reconciliation (2026-10-20)
 
 Codex is merging Muse `699c56ba8` into `codex/favor-quest-deadlines-20261020`
 (the release/conversation worktree, currently carrying the three conversation

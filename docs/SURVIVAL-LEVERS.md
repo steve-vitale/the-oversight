@@ -1,5 +1,50 @@
 # Survival levers and investigation register
 
+## Favor clocks and legacy day-end compatibility (2026-10-20)
+
+Accepted food/wound/illness favors retain their existing costs and due-day
+windows. The resolver now permits deeds throughout the due day, closes them
+at its nightly sweep, and refuses kept-promise credit for late matching deeds.
+An unrelated action can no longer expire the job early that morning. These
+changes affect trust and obligation outcomes even though no numeric reward,
+food, health or damage parameter changed. Reading the People journal is pure;
+its requirements and effective deadline use the same canonical promise.
+
+The native expiry journey also found a critical old-save day-end failure:
+accepted historical seven-square maps crashed in regrowth and trap traversal.
+World-map scans now use actual row dimensions; tileAt returns undefined for
+an absent row just as it already did for an absent column. Weekly depletion,
+wildlife, nets/genesis, reveal, travel/forage scans and map abilities retain
+their existing nine-square order on current maps. Existing terrain is not
+regenerated. This restores the ability to survive beyond midnight on those
+saves; it is not a survival buff to compensate for a win percentage.
+
+Verification and the matched screen against Muse recovery f11f1eab5 are
+retained in the favor-journal audit. The older a864 comparison is intermediate
+history, not proof of the merged source. Keep every survival, community,
+resource, progression and earned-gear warning; five unfinished joint jobs
+remain unavailable and are not cleared by journal visibility.
+
+Final merged screen: 16 matched seeds per capable/maker/merchant/caregiver,
+150 controller iterations, 64 observed cases plus four neutral controls per
+arm. All controls match and both sources stayed fixed. Wins are respectively
+15→16, 12→8, 11→13 and 11→8. Decision: review_required. Capable deaths and
+day-60 coverage, maker Table entry/invitation and deaths, merchant day-30/60
+survival and player class access, and caregiver Table entry/invitation,
+day-30/60 survival, deaths and player class access stay under review. Higher
+wins do not clear those warnings. Craft/trade tier-3+ access is zero in both
+arms for these mixed controllers; this is an opportunity/route-usage gap to
+inspect, not proof that crafting is broken or pacifist play is viable.
+
+Twenty-one preselected exact replay pairs cover every binary win change in
+either direction plus each policy's largest adverse death, NPC-hunger and
+earned-gear change when present. Full state, outcomes and all metric vectors
+match their original panel cases. The first coarse differences are trust in
+20 pairs and NPC needs in one; this does not establish the causal path to an
+ending. Retain the correctness fixes and warnings for Muse calibration; do
+not restore false/early favor settlement or add difficulty offsets to target
+the old win percentage. This screen is not 64-seed holdout confirmation.
+
 ## Conversation ownership and honest answers (2026-10-20)
 
 Menu ownership, stable labels, explicit subject selection and required answer

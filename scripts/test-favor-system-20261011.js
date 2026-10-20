@@ -64,7 +64,7 @@ const K=require('./godpath/lib'),T=K.reporter('favor-system');
  T.ok('deadline breaks exact obligation',obligation(c.vid)?.kept==='broken');
  T.ok('deadline marks favor broken',G.convoGetFavor(c.vid)?.state==='broken');
  T.ok('broken promise reduces trust',c.v.trust[c.vid]<trustBeforeBreak);
- T.ok('journal records broken concrete favor',journal(c.vid,'broken',c.p.favorTask));
+ T.ok('journal records the expired concrete favor and original identity',journal(c.vid,'expired',c.p.favorTask)&&G.journalPromises(c.vid).some(p=>p.favorId===c.p.favorId&&p.status==='expired'));
  f=fresh();start(f.vid);choose(f.vid,'dlg:details');const beforeDecline=f.v.trust[f.vid];choose(f.vid,'dlg:cant');
  T.ok('decline itself costs trust',f.v.trust[f.vid]<beforeDecline);close(f.vid,'closed');
  T.ok('decline resolves deflected',G.convoGet(f.vid).want.resolution==='deflected');

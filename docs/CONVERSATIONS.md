@@ -35,7 +35,7 @@ The five unimplemented joint jobs remain unavailable, with no active deadline
 or broken-promise penalty. Old accepted instances explain that limitation and
 offer a no-penalty close. This journal work does not implement those jobs.
 The lifecycle regression uses the shared harness; the retained touch journey
-uses real conversation, Journal, care, Wait, Sleep and Continue controls at
+uses real conversation, Journal, care, Wait and Continue controls at
 390×736 and 390×844. Prepared needs/clock fixtures are not natural encounter
 coverage or evidence that the broader conversation corpus is finished.
 
