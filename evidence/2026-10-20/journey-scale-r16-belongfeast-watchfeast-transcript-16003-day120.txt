@@ -1,0 +1,32 @@
+=== seed 16003 day 120 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you? Give it time."
+(turn0 choices: alive:event:mourning, dlg:commit, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:commit] "Count me in."
+THEM: "Then it’s set. The east treeline, before the dew dries. Pack light — we move fast."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Mateo died... I keep expecting to see Mateo at the fire. Stupid."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: "Do you dream about before? Or is it all — this — now?"
+(want=ask_favor stage=3)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "It's just — Then it's not gone. Not really. Keep going back."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: "Chengdu, China, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it, as it were."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I clean up other people's messes quietly. It doesn't bring anyone back. It just keeps my hands from shaking."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=ask_favor stage=3)
+closing line: "I should go. Take care of yourself, okay?"
+want final: id=ask_favor stage=3 resolution=promised

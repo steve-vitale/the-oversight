@@ -1,0 +1,32 @@
+=== seed 16010 day 140 — conversation with Angela (app_mgpsphjk764) ===
+occupation=teacher temperament=sardonic trust=89 dead=false mood=grieving
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Anthony? Thank you for asking."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. Funny how that works."
+(want=seek_taken stage=1)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Siobhan owed me a favor. I keep thinking about collecting. Stupid."
+(want=seek_taken stage=3)
+YOU: [goon] "What happened next?"
+THEM: They relax, a fraction. This is going well.
+(want=seek_taken stage=3)
+YOU: [goon] "What happened next?"
+THEM: "What do you make of all this? Really."
+(want=seek_taken stage=3)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not."
+(want=seek_taken stage=3)
+YOU: [goon] "What happened next?"
+THEM: "I think we're an experiment someone forgot to label. And the unlabeled part is what scares me — it means nobody's coming to check the results."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's gone strange. I save the best bite for last at odd hours now. Whatever gets me to morning."
+(want=seek_taken stage=3)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_taken stage=3 resolution=promised

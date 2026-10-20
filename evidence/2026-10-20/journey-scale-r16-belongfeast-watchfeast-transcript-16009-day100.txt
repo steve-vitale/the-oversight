@@ -1,0 +1,21 @@
+=== seed 16009 day 100 — conversation with Valeria (valeria_quispe) ===
+occupation=pottery instructor temperament=steady trust=91 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Water's almost gone — 2 liters. I can't carry enough alone. First light, the creek, you and me?"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I checked the cistern three times hoping I misread it. 2 liters. The creek's a twenty-minute walk — with two of us it's one trip, not three."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I dreamed Ailbe was still here. Woke up angry at the dream. Stupid."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=promised

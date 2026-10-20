@@ -1,0 +1,32 @@
+=== seed 16007 day 100 — conversation with Zakariya (visjoin_90) ===
+occupation=librarian temperament=restless trust=22 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I still haven't found anyone. Any chance? Gotta keep moving."
+(turn0 choices: agency:ask_field, alive:event:mourning, alive:memory:feast, dlg:commit, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Marcus were close. I'm sorry."
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: Their voice loosens. The guardedness thins.
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: "When's the last time you really laughed?"
+(want=ask_favor stage=3)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=ask_favor stage=3)
+YOU: [goon] "And then?"
+THEM: "Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there, as it were."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I keep turning over the last thing Marcus said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+(want=ask_favor stage=3)
+closing line: "Okay! Moving! Talk later — probably while moving!"
+want final: id=ask_favor stage=3 resolution=promised

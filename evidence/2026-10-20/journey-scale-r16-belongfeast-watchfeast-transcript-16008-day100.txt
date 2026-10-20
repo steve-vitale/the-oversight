@@ -1,0 +1,21 @@
+=== seed 16008 day 100 — conversation with Gerhard (app_mgpsphhm819) ===
+occupation=farmer temperament=gentle trust=46 dead=false mood=hungry
+want: ask_favor (stage 0)
+
+THEM: "Can we talk? Have you seen anyone on the roads? Anyone at all? I'm asking everyone."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, betrayal:accept, betrayal:decline, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I'm past hungry — do you have anything to eat? Anything at all? My hands shake when I try to work."
+(want=ask_favor stage=1)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=1)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Adaeze owed me a favor. I keep thinking about collecting. Stupid."
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Thank you for listening. Really listening. That's rare."
+want final: id=ask_favor stage=3 resolution=unresolved
