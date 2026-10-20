@@ -3624,7 +3624,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const dir = [ns, ew].filter(Boolean).join('-') || 'here';
         return `${d} ${d === 1 ? 'tile' : 'tiles'} ${dir}`;
       };
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         const t = this.tileAt(x, y);
         if (!t.traps || !t.traps.length) continue;
         for (const trap of [...t.traps]) {
@@ -3856,7 +3856,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // the net fishes real fish: the region's fish (creek chub and bluegill
       // in the eastern woodlands), the tile's own stock.
       const FISH_IDS = this.regionFish();
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         const t = this.tileAt(x, y);
         if (!t.nets || !t.nets.length) continue;
         for (const net of [...t.nets]) {
@@ -3968,7 +3968,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return this.tickAction(16) || this.status();
     },
     checkGenesis() {
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         const t = this.tileAt(x, y);
         if (!t.genesis || t.genesis.daysLeft <= 0) continue;
         t.genesis.daysLeft -= 1;
@@ -7842,7 +7842,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // fewer than 3 lush, stocked tiles in the zone (stripped bare counts
         // — a zone with no stock is the strongest widen signal, not a guard).
         let lushStocked = 0, forageable = 0;
-        for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+        for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
           if (x === 4 && y === 4) continue; // haven tile
           const dist = Math.abs(x - 4) + Math.abs(y - 4);
           if (dist < min || dist > max) continue;
@@ -7872,7 +7872,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // crews keep off their turf too.
       const deals = (this.state.otherVillages || []).filter(v => v.commons && v.commons.deal === 'split');
       const candidates = [];
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         if (x === hx && y === hy) continue;
         const dist = Math.abs(x - hx) + Math.abs(y - hy);
         if (dist < zone.min || dist > zone.max) continue;
@@ -9920,7 +9920,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const adef = (this.data.animals || []).find(a => a.id === sid);
         return adef && (adef.biomes || []).some(b => b === 'creek' || b === 'wetland');
       };
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         const t = this.map.tiles[y][x];
         if (!t.wildlife) t.wildlife = {};
         // breed: logistic growth
@@ -10670,12 +10670,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     reveal(cx, cy) {
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         if (Math.abs(x - cx) + Math.abs(y - cy) <= 2) this.map.tiles[y][x].revealed = true;
       }
     },
 
-    tileAt(x, y) { return this.map.tiles[y][x]; },
+    tileAt(x, y) { return this.map.tiles[y]?.[x]; },
     playerTile() { return this.tileAt(this.map.px, this.map.py); },
 
     // MAP KNOWLEDGE (Steve 2026-10-06): the world map shows ONLY what the
@@ -10945,7 +10945,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // You don't know what's there until you arrive. Hope nothing's waiting.
     travelTargets() {
       const out = [];
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         const d = Math.abs(x - this.map.px) + Math.abs(y - this.map.py);
         const t = this.tileAt(x, y);
         // revealed within 3, OR adjacent unrevealed (walking into fog)
@@ -18875,7 +18875,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const px = this.map.px, py = this.map.py;
       const aff = (mdef && mdef.waterAffinity) || null;
       const cands = [];
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         if (x === px && y === py) continue;
         if (this.isSafeTile(x, y)) continue;
         if (this.monsterAt(x, y)) continue; // ONE MONSTER PER TILE (break-it travel r7 2026-10-09)
@@ -20335,8 +20335,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // use THAT day, not today (drifter break-it 2026-10-11).
     regrowTiles(dayIdx) {
       const day = (dayIdx !== undefined && dayIdx !== null) ? dayIdx : (((this.state || {}).scholar || {}).day || 0);
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
-        const t = this.map.tiles[y][x];
+      // Accepted legacy saves have seven-square maps. Heal the actual saved
+      // ground; a fixed nine-square traversal throws before midnight settles.
+      for (const row of this.map.tiles) for (const t of row) {
         if (t.maxStock > 0) {
           if (t.vigor == null) t.vigor = 100;
           const pressure = t.foragePressure || 0;
@@ -20430,7 +20431,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // our hands: keep off each deal partner's side
         return splitVs.some(v => Math.abs(x - v.x) + Math.abs(y - v.y) <= 3);
       };
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         const t = this.tileAt(x, y);
         if (!t || t.type === 'haven' || t.type === 'ruin' || (t.stock || 0) <= 0) continue;
         const d = (cx == null || cy == null) ? 99 : Math.abs(x - cx) + Math.abs(y - cy);
@@ -21090,7 +21091,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.gardenPlots().length >= 2) return;
       // how thin is the near ground? rings 1-2 of haven (4,4)
       let stocked = 0, thin = 0;
-      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
         if (x === 4 && y === 4) continue;
         const dist = Math.abs(x - 4) + Math.abs(y - 4);
         if (dist < 1 || dist > 2) continue;
@@ -22424,7 +22425,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (scholar.day >= 3 && scholar.day >= wNext && !this.wanderer) {
         // spawn at a random revealed-edge thicket, or near player
         const spots = [];
-        for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+        for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
           if (this.map.tiles[y][x].type === 'thicket') spots.push({ x, y });
         }
         const s = spots.length ? spots[Math.floor(Math.random() * spots.length)] : { x: 5, y: 5 };
@@ -23450,7 +23451,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (id === 'hive_mind') {
         trustAll(-10, 'You know what everyone is doing. They can feel you knowing. (hive_mind: trust -10)');
         // the map opens. Every tile revealed — you see the whole board.
-        for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) this.reveal(x, y);
+        for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) this.reveal(x, y);
         // HONESTY (break-it travel 2026-10-10): the old line said "the map
         // is open. Every tile, revealed." while the overlay stayed fogged —
         // tile.revealed never painted it. hiveSight() now renders the
@@ -23649,7 +23650,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.state.weather === 'rain') this.noteAbilityUse('rain_dancer');
         // 70%: reveal the nearest water tile. Nobody knows why it works. Including us.
         let best = null, bestD = 99;
-        for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+        for (let y = 0; y < this.map.tiles.length; y++) for (let x = 0; x < this.map.tiles[y].length; x++) {
           const t = this.tileAt(x, y);
           if (t.type === 'creek' || t.type === 'wetland') {
             const d = Math.abs(x - this.map.px) + Math.abs(y - this.map.py);
@@ -30295,8 +30296,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // takes stay possible and the clock no longer kills the forage economy
       // by itself. Harvest pressure (stripGround/vigor) does the real work.
       if (this.state.scholar.day % 7 === 0) {
-        for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
-          const t = this.tileAt(x, y);
+        for (const row of this.map.tiles) for (const t of row) {
           if (t.type !== 'haven' && t.type !== 'ruin' && t.maxStock > 2) {
             t.maxStock -= 1;
             t.stock = Math.min(t.stock, t.maxStock);
