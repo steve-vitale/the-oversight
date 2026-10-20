@@ -1260,7 +1260,25 @@
             const mv = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
             pro = mv.gender === 'm' ? 'he' : mv.gender === 'f' ? 'she' : 'they';
           } catch (e) {}
-          this.say(`◈ ${me} walks out of the light alone, which is how ${pro} walked in. The village endures. That was always the story.`);
+          // WIN CODAS (sim-wincoda 2026-10-19, findings backlog: verbatim
+          // repetition, theater class). The win coda was IDENTICAL across all
+          // five walked paths — now each walked path gets its own coda keyed
+          // on the live table-state path (T.path), written in the System's
+          // register: alien, twisted, genuinely trying; joyous RPG overlay.
+          // The coda site sits in the shared epilogue, so it fires for ALL
+          // seven paths — witness and indispensable get codas too. Unknown
+          // path → the original line, preserved verbatim. Text only: zero
+          // RNG draws, the RNG stream cannot move.
+          const winCodas = {
+            feared: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and the galaxy, which came to watch a monster, leaves afraid of the right things. The fear is a shield now, held over a village that trusts the hand that holds it.`,
+            indispensable: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — but the table keeps the contract ${pro} priced, because the galaxy still needs what ${pro} taught it. The village endures, and this time the table owes the village.`,
+            beloved: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and the audience, which came to be entertained, leaves humming the village's name. The village endures, loved and unbeholden, and the lights stay warm behind ${pro}.`,
+            witness: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — with every charge read aloud and answered, the ledger closed and clean. The village endures, and the record stands: what was hidden is hidden no more.`,
+            assimilated: `◈ ${me} does not walk out of the light — ${pro} went inside carrying the truth, and the light, unsteadily, has begun to carry it back. The village endures, with a Trojan horse in the walls of heaven.`,
+            defiant: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and keeps walking, because ${pro} paid every price and said no twice. The village endures, poorer, unowned, free: the long shot of small figures leaving the light is the highest-rated thing the galaxy ever saw.`,
+            relay: `◈ ${me} walks out of the light accompanied — the System learned ${pro} name first, and it keeps saying it inside the wire while ${pro} goes home. The village endures, with a friend in the machine, and the conversation does not end.`,
+          };
+          this.say(winCodas[T.path] || `◈ ${me} walks out of the light alone, which is how ${pro} walked in. The village endures. That was always the story.`);
         }
         // Ascensions stack bargaining power — said aloud in the audit, priced
         // into every path's standing (tableEarnedPaths); the epilogue
