@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// journey-landing-r29-analyze.js — gate verdicts from r28 census JSONs.
-// Usage: node scripts/journey-landing-r29-analyze.js <census-glob...>
+// journey-landing-r32-analyze.js — gate verdicts from r32 census JSONs.
+// Usage: node scripts/journey-landing-r32-analyze.js <census-glob...>
 const fs = require('fs');
 const files = process.argv.slice(2);
 const out = [];
@@ -31,15 +31,6 @@ for (const f of files) {
     monsterKills: (c.monsterKills || []).map(k => `${k.monsterId} d${k.day} ${k.cause}`),
     mantle: c.mantleLog || [],
     favorPromised: c.ctx.favorPromised || 0,
-    // R32 TAKING-PHRASE: villager/system taking-voice + backstory census
-    takingStream: {
-      system: ((c.takingStream || {}).system || []).length,
-      villager: ((c.takingStream || {}).villager || []).length,
-    },
-    takingBackstories: (c.takingBackstories || []).map(t => `${t.name}:${t.backstoryCount}b/${t.takingRefs}r`),
-    takenKin: (c.takenKinCensus || []).map(t => `${t.name}:${(t.kin || []).map(k => k.name + '(' + k.relation + ')').join(',')}`),
-    // R32 AGAIN: double-seeded same-subject news the r31 skip would swallow
-    againDoubles: (c.againDoubles || []).map(a => `${a.action}|${a.whoName || a.who} x${a.entries} days[${(a.days || []).join(',')}]`),
   };
   out.push(s);
 }
