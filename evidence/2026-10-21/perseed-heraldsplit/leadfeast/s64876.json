@@ -1,0 +1,99 @@
+{
+ "seed": 64876,
+ "policyId": "leadfeast",
+ "instrument": "heraldsplit-v1",
+ "substrate": "VCE.armedFor (VGEAR=1 winning stack), FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 VGEAR=1 + KILLDISC=1 (killdisc v2 + heraldsplit layer)",
+ "anchorCommit": "7554f2c6ad66",
+ "maxWave": 5,
+ "wave4": 1,
+ "wave5": 1,
+ "w4Day": 79,
+ "w5Day": 86,
+ "national": 1,
+ "table": 1,
+ "won": 1,
+ "exiled": 0,
+ "days": 90,
+ "gameDays": 90,
+ "endReason": "over-other",
+ "nUnits": 4,
+ "unexplained": 0,
+ "heraldEngagements": 0,
+ "heraldRefused": 0,
+ "units": [
+  {
+   "kind": "spawn",
+   "day": 84,
+   "mid": "reunion",
+   "cls": "wave4-monster",
+   "trigger": "other",
+   "outcome": "unmet",
+   "end": "never-engaged",
+   "actor": "none",
+   "veteran": false,
+   "src": "world",
+   "kills": 0,
+   "killers": [],
+   "resolution": "unmet-spawn",
+   "unexplained": false
+  },
+  {
+   "kind": "engagement",
+   "day": 85,
+   "mid": "influencer",
+   "cls": "wave4-monster",
+   "trigger": "other",
+   "party": 2,
+   "shape": "haven-TB",
+   "kills": 1,
+   "killers": [
+    "villager:aki_tanaka"
+   ],
+   "outcome": "entered",
+   "actor": "scholar",
+   "end": "won",
+   "resolution": "tb-outcome-join",
+   "unexplained": false
+  },
+  {
+   "kind": "engagement",
+   "day": 86,
+   "mid": "eulogy",
+   "cls": "wave4-monster",
+   "trigger": "other",
+   "party": 2,
+   "shape": "haven-TB",
+   "kills": 1,
+   "killers": [
+    "scholar:gen_ybjb54l"
+   ],
+   "outcome": "entered",
+   "actor": "scholar",
+   "end": "won",
+   "resolution": "tb-outcome-join",
+   "unexplained": false
+  },
+  {
+   "kind": "spawn",
+   "day": 89,
+   "mid": "cancellation",
+   "cls": "wave5-monster",
+   "trigger": "other",
+   "outcome": "unmet",
+   "end": "never-engaged",
+   "actor": "none",
+   "veteran": false,
+   "src": "world",
+   "kills": 0,
+   "killers": [],
+   "resolution": "unmet-spawn",
+   "unexplained": false
+  }
+ ],
+ "counts": {
+  "spawn|wave4-monster|unmet|unmet-spawn": 1,
+  "engagement|wave4-monster|entered|tb-outcome-join": 2,
+  "spawn|wave5-monster|unmet|unmet-spawn": 1
+ },
+ "instrumentErrors": []
+}
