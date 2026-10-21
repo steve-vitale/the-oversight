@@ -16992,18 +16992,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // {occ} is lowercase bare ("fisherman"), {an_occ} has the article
     // ("a fisherman"/"an ER nurse"), {Occ} is capitalized bare for appositives.
     // NOTE: {an_occ} must be replaced BEFORE {occ} — it's a superstring.
+    // {skill} (journey-scale r18 2026-10-21): the villager's own earthly human
+    // skill from their lifeseed skillOrigins, as an activity noun ("trapping",
+    // "field medicine") — never the old hardcoded "making do" stub, which
+    // rendered the ungrammatical "I can making do". The templates frame it
+    // variously ("I can do {skill}", "The trick to {skill} is confidence",
+    // "This week it's {skill}"), so the noun form is the one that fits them
+    // all. Fallback "making do".
     fillTalkLine(line, v) {
       const first = ((v && v.name) || 'Someone').split(' ')[0];
       const occRaw = String((v && v.formerOccupation) || 'survivor');
       const occ = occRaw.charAt(0).toLowerCase() + occRaw.slice(1);
       const Occ = occRaw.charAt(0).toUpperCase() + occRaw.slice(1);
       const an_occ = (/^[aeiou]/i.test(occ) ? 'an ' : 'a ') + occ;
+      let skill = 'making do';
+      try {
+        const dna = (this.convoSpeechDNA && v && v.id) ? this.convoSpeechDNA(v.id) : null;
+        const keys = Object.keys((dna && dna.skillOrigins) || {});
+        if (keys.length) {
+          skill = ({ food: 'foraging', medicinal: 'field medicine', mending: 'mending',
+            navigation: 'navigation', tracking: 'tracking', trapping: 'trapping',
+            forecast: 'weather-reading', fishing: 'fishing', butchery: 'butchery',
+            canning: 'canning', sewing: 'sewing', carpentry: 'carpentry' })[keys[0]] || keys[0];
+        }
+      } catch (e) {}
       return String(line).replaceAll('{an_occ}', an_occ)
         .replaceAll('{Occ}', Occ)
         .replaceAll('{occ}', occ)
         .replaceAll('{first}', first)
         .replaceAll('{origin}', (v && v.homeRegion) || 'somewhere')
-        .replaceAll('{skill}', 'making do');
+        .replaceAll('{skill}', skill);
     },
     // ============ LEADERSHIP COMPETITION ============
     // Contenders (goal 'lead') push back when you delegate. Heat builds;
