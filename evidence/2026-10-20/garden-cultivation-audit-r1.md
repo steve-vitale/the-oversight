@@ -145,3 +145,28 @@ unchanged and green. Full-r1 is retained; fresh quick-r5/full-r2 follow these
 fixture corrections. No runtime code or balanced-source input changed.
 
 Final publication gate: quick-r5 271/0 and full-r2 1,043/0 (319 seconds), fresh for this candidate. prepublication-r1 binds the actual source/boot hashes and log bytes. Production verification remains a separate receipt.
+
+## Verified publication
+
+Release39d5623d7 is on shared master/main. Production build
+e984314d9-20261021-014853 matches all165 expected boot input hashes;
+fresh390×736 touch browser boot has zero page errors. Read publication-r1.json
+for the exact hashes/commit/time. Primary checkout fast-forwarded normally and
+foreign sweep-B.log remains unstaged. No force push or verification bypass.
+The docs/receipt follow-up runs its own fresh quick/full before its own push.
+The rolling goal remains active; next concrete milestone is terminal caregiver
+coverage, with garden balance warnings reserved for Muse calibration.
+
+The first publication follow-up quick run exposed a legacy registry test reading
+HEAD abilities instead of the candidate on disk. Before the release commit it
+therefore missed the two new definitions. The real shared-kit cultivation and
+browser proofs exercised those actions, but that old registry check was weaker
+than reported. It now reads actual worktree data and loads the real garden
+registrations alongside godpath; all22 assertions pass, unchanged. The sibling
+search found other HEAD references, mostly explicit historical comparisons;
+it was not a completed audit of every old test. Publication-full-r1 was stopped
+after ownership verification because it had already run the known stale test.
+Fresh publication quick/full-r2 are required after this test-only correction.
+Runtime, balance panels and phone-source identities remain unchanged.
+
+Publication follow-up final gates: quick-r2 271/0, full-r2 1,043/0 (369 seconds). publication-followup-verification-r1 binds this corrected test and both log bytes. Runtime source still exactly matches the shipped candidate and measured panels.

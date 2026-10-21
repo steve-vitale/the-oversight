@@ -1,9 +1,9 @@
 # ROADMAP: what's built, what's next, how to do it
 
-## Current milestone: garden cultivation release candidate (2026-10-20)
+## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
 Codex owns this cultivation implementation; Muse retains numerical calibration.
-Candidate build e984314d9-20261021-014853 has Haven capacity2/4/6/9, authored
+Live build e984314d9-20261021-014853 has Haven capacity2/4/6/9, authored
 slow ordinary crops, paid owned garden magic, real daily caretaker orders,
 surplus maintenance and paid dead-bed recovery. Existing planted crops and
 structures are preserved. GARDENS.md contains the levers and legacy-save rule.
@@ -24,11 +24,11 @@ outcomes/metrics/RNG also match the audit, but storage index clock calls change
 state identities; do not claim the audit's full-state hash matched that save.
 Prepared phone journeys prove opportunities, not natural attainment.
 
-Publication gates: fresh quick/full, actual installed-worker update/offline
+Verified gates: quick271/0, full1,043/0, actual installed-worker update/offline
 Continue, source-bound16-stage phone frames,17-stage garden journeys and
 7-stage natural-save journeys. See garden-cultivation-audit-r1 and exact logs.
-This header names a candidate build, not a claim that production has updated.
-Use the publication receipt and production version before reporting it live.
+Release39d5623d7 is on shared master/main; production matches all165 boot files.
+Publication receipt: evidence/2026-10-20/garden-cultivation-publication-r1.json.
 
 Next concrete milestone remains terminal caregiver coverage: four retained
 seeds, faithful prefixes, actual later-game Continue/actions. Keep the rolling

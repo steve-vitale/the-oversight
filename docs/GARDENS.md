@@ -1,10 +1,12 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
 Steve's direct direction is in godpath/STEVE-ANSWERS.md (2026-10-20).
-The cultivation candidate below is implemented locally and undergoing release
-verification. It is not published yet. The earlier audit remains historical.
+Cultivation shipped in39d5623d7, live build e984314d9-20261021-014853.
+All165 deployed boot inputs match; source-bound phone/Continue/offline proofs
+and quick271/0, full1,043/0 are retained. Balance remains review_required.
+The earlier audit remains historical.
 
-## Cultivation candidate
+## Released cultivation
 
 `src/data/gardening.json` owns capacity and crop profiles. Haven tiers unlock
 2/4/6/9 beds. The original six positions keep their saved indices; the last

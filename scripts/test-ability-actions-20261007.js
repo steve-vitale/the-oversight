@@ -8,14 +8,9 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 
 // Minimal harness: load abilities.json, stub Game, load abilityActions.js.
-// Use HEAD's version if worktree is stale (check via git).
-const { execSync } = require('child_process');
-let abilitiesJson;
-try {
-  abilitiesJson = execSync('git show HEAD:src/data/abilities.json', { cwd: ROOT, encoding: 'utf8' });
-} catch (e) {
-  abilitiesJson = fs.readFileSync(path.join(ROOT, 'src/data/abilities.json'), 'utf8');
-}
+// Always test the candidate on disk. Reading HEAD silently omitted uncommitted
+// action definitions and made a pre-commit green weaker than a post-commit run.
+const abilitiesJson = fs.readFileSync(path.join(ROOT, 'src/data/abilities.json'), 'utf8');
 const abilities = JSON.parse(abilitiesJson);
 const absList = Array.isArray(abilities) ? abilities : abilities.abilities;
 
@@ -164,10 +159,14 @@ try {
   globalThis.Scattering = _g.Scattering;
   globalThis.AbilityActionImpls = _g.AbilityActionImpls;
   globalThis.AbilityActionPrechecks = _g.AbilityActionPrechecks;
-  new Function(fs.readFileSync(path.join(ROOT, 'src/js/godpath.js'), 'utf8'))();
+  // Both modules supply real registrations beyond the base action engine.
+  // Garden execution itself is covered by the shared-harness cultivation test.
+  for (const file of ['gardenCultivation.js', 'godpath.js']) {
+    new Function(fs.readFileSync(path.join(ROOT, 'src/js', file), 'utf8'))();
+  }
   globalThis.Scattering = _prevS; globalThis.AbilityActionImpls = _prevI; globalThis.AbilityActionPrechecks = _prevP;
 } catch (e) { console.log('godpath.js load failed: ' + e.message); }
-// 11. All 28 HEAD actions have implementations or honest fallback
+// 11. Every candidate action has a real registered implementation.
 var allAbs = Game.data.abilities;
 var missing = [];
 var impls = _g.AbilityActionImpls || {};
