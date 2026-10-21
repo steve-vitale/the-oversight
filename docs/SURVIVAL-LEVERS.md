@@ -1,6 +1,6 @@
 # Survival levers and investigation register
 
-## Company-favor candidate (2026-10-21)
+## Company-favor release30f630d36 (2026-10-21)
 
 `favor-rules.json` owns minimum continuous presence32 ticks, shared-fire
 radius2, partner distance1, fear relief40 and social relief20. The relief
@@ -24,8 +24,9 @@ do not erase prior garden, class, community, gear or Table warnings. No
 compensating HP, food, reward or Table tuning was added. See the dated
 company-favor audit and passive opportunity report before claiming use.
 
-Decision: this is an authored playable-job correction for development release,
-pending the remaining publication checks. Natural completed-night viability
+Decision: retain this authored playable-job correction for development release.
+Quick277/0 and full1,049/0 preceded the push; publication-r1 verifies171
+production inputs and clean phone boot. Natural completed-night viability
 is unproven; prepared touch completion is a separate boundary. Muse retains
 numerical calibration. No population equivalence or difficulty improvement is
 claimed from this screening panel.

@@ -12,7 +12,7 @@ got talked at — a vending machine, not a conversation.
 
 ### Accepted favors and the People journal (2026-10-20)
 
-Company-favor candidate (2026-10-21): `stay_close` is an exact night of
+Company-favor release30f630d36 (2026-10-21): `stay_close` is an exact night of
 presence, with Join and Keep company actions. Accepting is not attendance.
 Meet the actual requester beside the same burning fire at dusk/night, on the
 same map and side of the hall door. After Join, normal waiting or nearby Sleep
@@ -65,7 +65,7 @@ Previously accepted, unplayable water promises get one persisted migration
 window: at least two days from their first new-version Continue, with a dawn
 meeting on the following day. Further Continue does not extend it. Closed
 promises stay closed. Snare repair, watch shift and joint foraging remain
-unavailable; the company candidate above is being verified separately.
+unavailable; the company activity above has its own runtime and evidence.
 Telemetry records actual departure, collected liters and returned clean/risky
 liters plus kept/early-end status (`favor_water_*`); water acquisition is not
 proof of drinking, successful purification or a balanced survival improvement.

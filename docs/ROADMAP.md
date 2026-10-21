@@ -1,6 +1,11 @@
 # ROADMAP: what's built, what's next, how to do it
 
-## Company-favor candidate (2026-10-21, publication pending)
+## Company favor released (2026-10-21)
+
+Release30f630d36 is live as378c91373-20261021-052404. The publication-r1
+receipt verifies168 boot inputs plus worker/version/manifest (171 total) and
+a clean fresh phone-sized boot. Both shared production branches and the
+primary checkout contain this release; the foreign sweep remains untouched.
 
 The authored stay_close request is now an actual night beside the same person
 and fire. Join, paid attendance, nearby Sleep, interruption/cancellation,
@@ -17,7 +22,7 @@ night is established. Actual blockers include location and other work orders.
 Do not treat menu calls or prepared completion as natural feature viability.
 Snare repair, watch shift and joint foraging remain unavailable.
 
-After this candidate is verified live, Codex's next bounded milestone is
+Codex's next bounded milestone is
 cultivated-food provenance through actual consumption: retain crop delivery,
 spoilage/remaining stock and useful player/NPC intake separately in naturally
 attained long runs, with passive controls. Existing harvest volume does not
