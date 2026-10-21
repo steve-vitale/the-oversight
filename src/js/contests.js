@@ -2129,6 +2129,21 @@
       this.sysSay(`📺 ⚠️ HARDENED VARIANT — you've seen this before. It's worse now.`);
     }
     this.sysSay(`📺 ${this._cxTakenLine(ids)} The village holds its breath.`);
+    // RAID COLLISION (journey crisis r40 2026-10-21): contests fire on their
+    // own schedule and raids fire reactively, so they collide — a grab
+    // announced on a raid day used to land as a completely separate beat
+    // (3/3 pilot collisions, sayLog + transcript verified: zero lines
+    // acknowledged the overlap). The System watched the raid too and says
+    // so — chilling-benefactor register: the show goes on regardless.
+    try {
+      const _ccDay = (this.state.scholar || {}).day || 1;
+      const _ccV = this.state.village || {};
+      const _ccLastRaid = _ccV.lastRaidDay || -999;
+      if (_ccDay - _ccLastRaid >= 0 && _ccDay - _ccLastRaid <= 1 && _ccV._raidContestAckDay !== _ccDay) {
+        _ccV._raidContestAckDay = _ccDay;
+        this.sysSay(`📺 We watched the raid too. Fine doorway work. The show goes on regardless — the audience loves a tired hero.`);
+      }
+    } catch (e) { console.warn('raid-contest-ack', e); }
     // PILOT EPISODE (Steve 2026-10-05): the System stumbles over the names of
     // its first-ever cast — real roster names via _cxNameList, never a fixed
     // cast (the phantom-cast fix, journey-landing 2026-10-11).

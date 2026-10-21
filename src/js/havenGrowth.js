@@ -536,6 +536,19 @@
       const names = raiders.map(mname).join(', ');
       this.say(`🐗 RAID — ${raiders.length === 1 ? 'a raider' : raiders.length + ' raiders'} (${names}) hit Haven in the night, drawn by the smell of the pantry!` +
         (palisade ? " The palisade's stakes take their toll as they come over the wall." : ' No walls. No warning but the noise.'));
+      // CONTEST COLLISION (journey crisis r40 2026-10-21): the mirror of the
+      // fireContest acknowledgment above — a raid firing on (or the day after)
+      // a contest announcement gets a village-voice connective line instead
+      // of landing as an unrelated beat. Shares the same once-per-day ack
+      // flag so a two-direction collision day says it exactly once.
+      try {
+        const _rcV = this.state.village || {};
+        const _lc = _rcV.lastContest || null;
+        if (_lc && typeof _lc.day === 'number' && day - _lc.day >= 0 && day - _lc.day <= 1 && _rcV._raidContestAckDay !== day) {
+          _rcV._raidContestAckDay = day;
+          this.say(`🕯️ The treeline is still torn up from the raid when the System's light comes for them. Nobody is ready. The light doesn't wait.`);
+        }
+      } catch (e) { console.warn('raid-contest-ack', e); }
       // THE DOOR (util audit 2026-10-10): raiders at Haven are exactly the
       // "monster at your door" beat the call-for-help chain was built for —
       // but raiseAidCrisis had no organic caller, so all four tiers sat dead
