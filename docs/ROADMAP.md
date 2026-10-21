@@ -1,5 +1,28 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Atomic time-save milestone (2026-10-20 candidate)
+
+Candidate d09f47ea2-20261021-042230 defers nested time/part/day/Sleep saves
+until all synchronous hooks and waking recovery finish. Thrown settlement
+preserves the prior checkpoint and blocks partial autosave until reload.
+Actual child exits, storage/stale/tombstone tests, prepared and natural phone
+Sleep/Continue, readable failure recovery and installed offline update pass.
+See TIME-SETTLEMENT.md and overnight-save-audit-r1 for final gates/publication.
+This protects future writes; it cannot reconstruct an older partial night.
+
+Both64-case balanced arms were rerun under corrected UTF-8 report readers;
+all23 vectors match. Four terminal cases again win at118/195/270/204 with
+valid raw payload hashes and faithful prefixes. Full states differ in saveSeq
+and existing wall-clock pacing fields; no whole-state equivalence is claimed.
+Some historical terminal raw states had transport damage, now independently
+identified and superseded by overnight terminal-before-r3/terminal-r3. Keep
+their original identities. Prior garden/playstyle/gear/Table warnings remain.
+
+Next bounded Codex goal is the authored stay_close favor: actual company by
+the fire tonight, person/place/night eligibility, saved progress/deadline and
+honest interrupted/late outcomes. Generic social events cannot fulfill it.
+Muse retains numerical calibration; keep the rolling public-release goal active.
+
 ## Terminal caregiver milestone; overnight save integrity next (2026-10-20)
 
 Four fixed caregiver cases reach real engine wins on the current garden Game

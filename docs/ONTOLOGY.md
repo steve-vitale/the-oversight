@@ -1687,6 +1687,18 @@ Composes each world-map tile as a miniature auto-composed SVG scene: terrain bas
 
 **Consumes:** Game.tileAt, Game.genDetail (detail-grid generation), Game.map.px/py (player tile), Game.state.scholar (mx,my,animal), Game.state.worldMonsters (NOT rendered on map — geography only, Steve 2026-10-06), Game.state.village.positions (villager detail-grid positions)
 
+### timeSettlement (`timeSettlement.js`)
+Commit saves only after complete time/sleep/dawn settlement; preserve the last durable checkpoint after a thrown settlement.
+
+**Provides:** init() (wrap: installs after all engine initialization), installTimeSettlement(game), deferSettlementSave(state)
+
+**Rules:**
+- whole_settlement: nested save requests sync runtime normally but do not write partial payloads; the outer successful tickAction/advancePart/endDay/sleep call commits the complete result (code: installTimeSettlement)
+- failed_settlement: an exception preserves the prior durable checkpoint and prevents later saves of that partial state until reload/new run (code: installTimeSettlement)
+- honest_status: deferred work never reports durable success; ordinary quota/stale/tombstone results are retained (code: deferSettlementSave)
+
+**Consumes:** Game.init(), Game.syncRun(), state.save(state)
+
 ### titans (`titans.js`)
 The TITAN CLASS (Steve 2026-10-11) — the threat ladder that justifies the scale ladder. Three titans total, 1-2 per run: the Herald (wave 4, tutorial), one mid wave-5, the Finale (apocalypse). A titan is a FLAG (src/data/titans.json), never just HP. No solo fights — hard gate, not a stat check. Coalition warfare: allied villages commit named faces who fight blow-by-blow; they can die, and it costs. The call to arms, the war council, outfitting (real gear, real costs), and THE TURN (outfitted allies can turn — driven by real trust/opinion vs temptation, telegraphed, never random). The player's contribution is LOGISTICS: an army marches on its stomach.
 

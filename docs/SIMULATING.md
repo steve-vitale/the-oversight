@@ -1,5 +1,13 @@
 # Simulating The Oversight — how to measure a change
 
+UTF-8 report integrity (2026-10-20): balance-panel and terminal child readers now
+decode chunks continuously. The observer fingerprint changed; BOTH overnight
+screen arms and current neutrality were rerun. Metric IDs/semantics did not
+change. Terminal final/bridge raw payloads must recompute the child Game hash,
+including on cache reuse. See overnight-save-audit-r1 for historical damaged
+blobs, recollection and semantic-cache fault tests. Scalar hashes alone cannot
+certify a separately serialized state. No old source/report identity is rewritten.
+
 For faithful cap extension, actual engine endings, passive RNG/policy prefixes,
 and fingerprinted interrupted-run recovery, read [TERMINAL-CAMPAIGNS.md](TERMINAL-CAMPAIGNS.md).
 The shared combat driver now uses public Wait. Rerun BOTH balance arms under

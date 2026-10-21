@@ -1,5 +1,26 @@
 # Muse calibration handoff
 
+## Atomic time persistence and trustworthy reports (2026-10-20 candidate)
+
+Use TIME-SETTLEMENT.md and overnight-save-audit-r1. Candidate
+d09f47ea2-20261021-042230 saves completed night hooks and waking recovery;
+failed partial memory cannot overwrite the last checkpoint. Actual crash,
+phone/Continue and installed offline update evidence is retained. Final
+publication is confirmed only by overnight-save-publication-r1.json.
+
+Both report tools now retain UTF-8 across child output chunks. Terminal audits
+also recompute final/bridge payload hashes after parsing and cache reuse. Some
+prior caregiver r5/raw overnight pilot blobs fail this check; keep them as
+historical and use terminal-before-r3/r3 for exact raw reconstruction. The final
+screen reruns BOTH roots under the new observer fingerprint:64 cases/arm plus
+neutral controls, identical all23 vectors. Metric semantics/contract are unchanged.
+No source identity is rewritten and no broad balance warning is cleared.
+
+Codex next owns playable stay_close night-by-fire favors, including target,
+time/cost, persisted progress/deadline and interrupted/late behavior. Muse owns
+calibration. Shared ancestry is preserved; fetch current master/main rather
+than porting a whole tree. No direct Muse reply is claimed by this handoff.
+
 ## Terminal coverage and shared Wait method (2026-10-20)
 
 Use TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1. The current harness

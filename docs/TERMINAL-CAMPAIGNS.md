@@ -1,5 +1,13 @@
 # Terminal campaign coverage
 
+Report-integrity correction (2026-10-20): child output now uses continuous UTF-8
+decoding. Parsed/cached final states AND continued bridges must reproduce their
+child-computed canonical hashes before acceptance. Some older raw blobs fail
+this independent check even though their scalar hash strings survived transport.
+Read overnight-save-audit-r1 and its summary; current before-r3/r3 recollect both
+Game roots. Never silently edit a historical payload or claim its raw state is
+verified from a scalar hash alone. Metrics/contract semantics remain unchanged.
+
 Use `scripts/campaign-terminal-audit.js` for fixed cases that were still alive
 at an observation cap. A bot's `survived` row is not a completed campaign.
 An actual ending requires the engine's `Game.over`; retain win/death/loss and
@@ -55,7 +63,7 @@ An end-of-night announcement may save before core overnight settlement. The
 retained day266/part4 sample is an interruption fixture, not a normal Continue
 sample. Day267/part3 is the coherent replacement. Never clamp its clock or
 replay metabolism to make a test pass. Atomic overnight save handling is the
-next bounded hardening task. The existing three wall-clock pacing exclusions
+bounded hardening milestone described in TIME-SETTLEMENT.md. The existing three wall-clock pacing exclusions
 are named in the capture proof; no other Game differences are ignored.
 
 Read `evidence/2026-10-20/caregiver-terminal-audit-r1.md` for actual outcomes,

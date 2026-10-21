@@ -202,6 +202,7 @@ async function run() {
         const args = [__filename, '--child', '--root', root, '--policy', job.policy, '--seed', String(job.seed), '--observe', job.observe, '--days', String(options.days), '--origin', options.origin, ...(options.region ? ['--region', options.region] : [])];
         if (options.occupation != null) args.push('--occupation', options.occupation);
         const p = cp.spawn(process.execPath, args, { cwd: root, env: process.env }); let stdout = '', stderr = '';
+        p.stdout.setEncoding('utf8'); p.stderr.setEncoding('utf8');
         p.stdout.on('data', x => { stdout += x; }); p.stderr.on('data', x => { stderr += x; }); p.on('error', reject);
         p.on('close', code => { try { if (code) throw new Error(stderr || stdout.slice(-2000)); resolve(JSON.parse(stdout.split('@@BALANCE@@').pop())); } catch (e) { reject(e); } });
       }).catch(e => { fs.writeFileSync(file + '.error.json', JSON.stringify({ key, identity, error: e.message }) + '\n'); throw e; });

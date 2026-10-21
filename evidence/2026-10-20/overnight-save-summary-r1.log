@@ -1,0 +1,107 @@
+{
+  "pairs": 8,
+  "terminal": [
+    {
+      "seed": 10001,
+      "engineOver": true,
+      "won": true,
+      "villageLost": false,
+      "harnessEnd": "over-other",
+      "watchdogRoutes": 0,
+      "status": "won",
+      "day": 118,
+      "bearer": "ivy_wang",
+      "driverForcedTurns": 0
+    },
+    {
+      "seed": 10003,
+      "engineOver": true,
+      "won": true,
+      "villageLost": false,
+      "harnessEnd": "over-other",
+      "watchdogRoutes": 0,
+      "status": "won",
+      "day": 195,
+      "bearer": "nikos_papadopoulos",
+      "driverForcedTurns": 0
+    },
+    {
+      "seed": 10004,
+      "engineOver": true,
+      "won": true,
+      "villageLost": false,
+      "harnessEnd": "over-other",
+      "watchdogRoutes": 0,
+      "status": "won",
+      "day": 270,
+      "bearer": "gen_r06g1h5",
+      "driverForcedTurns": 0
+    },
+    {
+      "seed": 10008,
+      "engineOver": true,
+      "won": true,
+      "villageLost": false,
+      "harnessEnd": "over-other",
+      "watchdogRoutes": 0,
+      "status": "won",
+      "day": 204,
+      "bearer": "gen_3olt2xc",
+      "driverForcedTurns": 0
+    }
+  ],
+  "screen": {
+    "casesPerArm": 64,
+    "metricsPerCase": 23,
+    "identicalVectors": 64,
+    "neutralControlsPerArm": 4,
+    "observerDigest": "698e2082257a03b931e7dc11784fcab9aa17aaa912f5e34e1638518b1a874f87",
+    "seeds": [
+      7,
+      42,
+      99,
+      1234,
+      555,
+      777,
+      2026,
+      31337,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ]
+  },
+  "corruption": [
+    {
+      "report": "prior caregiver r5",
+      "badRawStates": [
+        {
+          "seed": 10003,
+          "cap": 150,
+          "trace": 1
+        }
+      ],
+      "scope": "Historical raw-state transport damage; original child scalar hashes remain unedited. Final r3 recollects both exact Game roots with UTF-8 decoding and payload hash verification."
+    },
+    {
+      "report": "overnight pilot r1",
+      "badRawStates": [
+        {
+          "seed": 10001,
+          "cap": 150,
+          "trace": 1
+        },
+        {
+          "seed": 10001,
+          "cap": 600,
+          "trace": 1
+        }
+      ],
+      "scope": "Historical raw-state transport damage; original child scalar hashes remain unedited. Final r3 recollects both exact Game roots with UTF-8 decoding and payload hash verification."
+    }
+  ]
+}

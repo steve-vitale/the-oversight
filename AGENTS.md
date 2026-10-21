@@ -43,6 +43,12 @@ its current inputs. Never rewrite source identities or waive unknowns.
 
 ## Browser boundary proof
 
+For time/save changes, read docs/TIME-SETTLEMENT.md. Keep synchronous clock,
+Sleep and all before/after-dawn hooks inside the initialized transaction chain.
+`deferred` is a save request, never durable success. Verify committed bytes
+before unload and recovery in a fresh process; do not repair partial nights by
+clamping clocks or replaying metabolism.
+
 For UI/input/layout or save/Continue changes, read `docs/BROWSER-PLAYTESTING.md`.
 Prove the changed flow with actual browser controls and inspect a rendered mobile
 screenshot as well as DOM state. Node campaigns exclude app.js and CSS: they

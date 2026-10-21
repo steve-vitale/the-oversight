@@ -1,0 +1,10 @@
+Validating 122 system files (src/js + src/js/engine)...
+
+ONTOLOGY VALIDATION FAILED:
+
+  ✗ src\js\timeSettlement.js: provides 'tickAction() (wrap: atomic time settlement)' — 'tickAction' not defined in this file
+  ✗ src\js\timeSettlement.js: provides 'advancePart() (wrap: atomic part settlement)' — 'advancePart' not defined in this file
+  ✗ src\js\timeSettlement.js: provides 'endDay() (wrap: includes before/after-core dawn hooks)' — 'endDay' not defined in this file
+  ✗ src\js\timeSettlement.js: provides 'sleep() (wrap: includes actual waking recovery)' — 'sleep' not defined in this file
+
+4 error(s). Release blocked.

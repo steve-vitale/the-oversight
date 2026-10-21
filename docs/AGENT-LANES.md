@@ -1,5 +1,24 @@
 # Agent lanes (2026-10-20)
 
+## Codex atomic time saves; next lane stay_close
+
+Read TIME-SETTLEMENT.md and overnight-save-audit-r1 before extending time or
+save code. Candidate d09f47ea2-20261021-042230 covers final clock/part/day/Sleep
+settlement, actual crash recovery, native Sleep/Continue and offline update.
+Publication requires the recorded final gates and live receipt. Old partial
+nights are preserved as evidence, not guessed into a recovered state.
+
+Report readers now decode UTF-8 continuously. Both64-case arms/current neutral
+proof were refreshed; all23 vectors match. Current terminal-before-r3/r3 retain
+valid raw final/bridge hashes and exact prefixes. Historical raw-state transport
+damage is listed explicitly in the audit; do not treat those blobs as exact
+reconstruction proof. No numerical lever or earlier balance warning is cleared.
+
+Codex next owns the authored stay_close favor's real night-by-fire activity,
+same-person/place eligibility, saved progress/deadline and interrupted/late
+outcomes. Muse retains numerical garden calibration; avoid overlapping these
+conversation/time files. Fetch shared history, preserve999c69491 and later work.
+
 ## Codex terminal coverage completed; overnight-save integrity next
 
 Read TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1 before reusing the

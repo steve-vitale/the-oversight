@@ -5,6 +5,7 @@ const fs=require('fs'),path=require('path'),cp=require('child_process'),crypto=r
 const B=require('./balance-panel'),gear=require('./gear-usage-audit'),P=require('./lib/campaign-prefix');
 const arg=(name,fallback)=>{const i=process.argv.indexOf('--'+name);return i<0?fallback:process.argv[i+1];};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
+const intact=r=>gear.gameplayHash(r.finalState)===r.stateHash&&(!r.bridge||gear.gameplayHash(r.bridge.state)===r.bridge.stateHash);
 async function child(){
  const root=path.resolve(arg('root','.')),seed=Number(arg('seed',10003)),cap=Number(arg('cap',600)),prefixCap=Number(arg('prefix-cap',150)),policy=arg('policy','caregiver'),observe=arg('trace','1')==='1';
  const sources=B.manifest(root),entropy=observe?P.entropyObserver():null,H=require(path.join(root,'scripts/sim-harness'));
@@ -54,8 +55,8 @@ async function main(){
  const text=JSON.stringify(plan,null,2)+'\n';if(fs.existsSync(out+'-plan.json')){if(fs.readFileSync(out+'-plan.json','utf8')!==text)throw Error('Resume inputs differ');}else fs.writeFileSync(out+'-plan.json',text,{flag:'wx'});
  const cache=out+'-cases';fs.mkdirSync(cache,{recursive:true});let next=0;const results=[];
  async function worker(){while(next<jobs.length){const job=jobs[next++],key=sha(JSON.stringify({plan,job})),file=path.join(cache,key+'.json.gz');
-  if(fs.existsSync(file)){const cached=JSON.parse(z.gunzipSync(fs.readFileSync(file)));if(cached.key!==key||cached.digest!==sha(JSON.stringify(cached.result))||JSON.stringify(cached.result.job)!==JSON.stringify(job))throw Error('Invalid cache');results.push(cached.result);continue;}
-  const result=await new Promise((resolve,reject)=>{const p=cp.spawn(process.execPath,[__filename,'--child','--root',root,'--seed',String(job.seed),'--cap',String(job.cap),'--prefix-cap',String(job.prefixCap),'--policy',job.policy,'--trace',String(job.trace)],{env:process.env,cwd:root});let stdout='',stderr='';p.stdout.on('data',s=>stdout+=s);p.stderr.on('data',s=>stderr+=s);p.on('error',reject);p.on('close',code=>{try{if(code)throw Error(stderr||stdout.slice(-2000));resolve({job,...JSON.parse(stdout.split('@@TERMINAL@@').pop())});}catch(e){reject(e);}});});
+  if(fs.existsSync(file)){const cached=JSON.parse(z.gunzipSync(fs.readFileSync(file)));if(cached.key!==key||cached.digest!==sha(JSON.stringify(cached.result))||JSON.stringify(cached.result.job)!==JSON.stringify(job)||!intact(cached.result))throw Error('Invalid cache');results.push(cached.result);continue;}
+  const result=await new Promise((resolve,reject)=>{const p=cp.spawn(process.execPath,[__filename,'--child','--root',root,'--seed',String(job.seed),'--cap',String(job.cap),'--prefix-cap',String(job.prefixCap),'--policy',job.policy,'--trace',String(job.trace)],{env:process.env,cwd:root});let stdout='',stderr='';p.stdout.setEncoding('utf8');p.stderr.setEncoding('utf8');p.stdout.on('data',s=>stdout+=s);p.stderr.on('data',s=>stderr+=s);p.on('error',reject);p.on('close',code=>{try{if(code)throw Error(stderr||stdout.slice(-2000));const parsed=JSON.parse(stdout.split('@@TERMINAL@@').pop());if(!intact(parsed))throw Error('Child state changed in transport');resolve({job,...parsed});}catch(e){reject(e);}});});
   fs.writeFileSync(file,z.gzipSync(JSON.stringify({key,digest:sha(JSON.stringify(result)),result})),{flag:'wx'});results.push(result);process.stdout.write('.');
  }}
  await Promise.all(Array.from({length:Math.min(4,Number(arg('par',4)))},worker));

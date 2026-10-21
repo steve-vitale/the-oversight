@@ -14649,9 +14649,11 @@
       const r = Game.save();
       if (r === true) {
         __saveFailToasted = false;
-      } else if ((r === false || r === 'tombstoned' || r === 'stale') && !__saveFailToasted) {
+      } else if ((r === false || r === 'tombstoned' || r === 'stale' || r === 'settlement_failed') && !__saveFailToasted) {
         __saveFailToasted = true;
-        toast(r === 'tombstoned'
+        toast(r === 'settlement_failed'
+          ? 'Time could not finish. Reload and Continue from your last saved checkpoint.'
+          : r === 'tombstoned'
           ? "This expedition's save was ended somewhere else (another tab?) — progress since your last save is at risk."
           : r === 'stale'
           ? 'Another tab saved this expedition more recently — this tab paused saving so it would not overwrite that progress. Close the other tab and reload here to keep playing.'

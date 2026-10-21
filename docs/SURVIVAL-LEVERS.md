@@ -1,5 +1,22 @@
 # Survival levers and investigation register
 
+## Completed time persistence (2026-10-20 candidate)
+
+Candidate d09f47ea2-20261021-042230 changes when time/Sleep writes become durable,
+not cost/healing/metabolism numbers. Completed waking recovery is now saved,
+and an actual depleted bedtime's five-HP penalty is also retained through
+Continue. These effects matter to people who reload; headless campaigns do not
+measure that advantage/cost boundary. Failed partial settlement cannot overwrite
+the prior checkpoint. Old partial nights cannot be reconstructed by a clock clamp.
+
+Current-reader matched16-per-policy screens retain identical all23 vectors,
+four neutral controls/arm and no warnings. Four exact terminal diagnostic pairs
+retain outcomes/RNG/all23, with only saveSeq and existing pacing clock differences
+in state. No win, HP, food or Table adjustment compensates for the correctness
+fix. Earlier garden/playstyle/class/gear/community/Table warnings remain open.
+Read TIME-SETTLEMENT.md and overnight-save-audit-r1, including the corrected
+report-reader identity and historical raw-state damage, before calibration.
+
 ## Terminal caregiver investigation (2026-10-20)
 
 No Game numerical lever changed. Four preselected capped cases reach actual
