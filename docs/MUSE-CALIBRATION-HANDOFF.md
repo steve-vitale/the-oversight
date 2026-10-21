@@ -1,5 +1,28 @@
 # Muse calibration handoff
 
+## Company-favor candidate and next measurement lane (2026-10-21)
+
+Codex's company-favor candidate implements actual same-person/fire company
+through dawn, normal clock/Sleep costs, saved attendance/deadline and honest
+interruption/cancellation. See CONVERSATIONS.md and company-favor-audit-r1.
+Candidate publication remains a separate gate. Numeric relief matches ordinary
+comfort; no food/HP/reward offset compensates for outcome movement.
+
+Both64-case arms use the same current collector/harness/policies; all23 remain
+review_required, with maker6→7 wins and other win totals unchanged. All three
+changed cases replay exact full states/outcomes/metrics. Passive diagnostic
+controls preserve RNG too. Two company method calls were cancellations after
+acceptance, not Join or successful nights. Location and other-order blockers
+are observed. Calibrate from actual actions/opportunities, not call totals.
+
+After this release Codex takes cultivated-food provenance/useful-consumption
+measurement in natural long campaigns. Muse retains numerical garden/ability
+calibration. Delivery, spoilage, remaining stock and actual useful player/NPC
+intake must stay separate; the existing output totals do not establish payoff.
+Do not silently change a controller between Game arms. Fetch shared history;
+the latest origin/master and main fetch was378c91373 with no newer Muse commit.
+This is a shared-source handoff, not a claim of a direct Muse response.
+
 ## Atomic time persistence and trustworthy reports (2026-10-20, released)
 
 Use TIME-SETTLEMENT.md and overnight-save-audit-r1. Candidate

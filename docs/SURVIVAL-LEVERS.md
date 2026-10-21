@@ -1,5 +1,35 @@
 # Survival levers and investigation register
 
+## Company-favor candidate (2026-10-21)
+
+`favor-rules.json` owns minimum continuous presence32 ticks, shared-fire
+radius2, partner distance1, fear relief40 and social relief20. The relief
+matches ordinary comfort and requires an actually kept company promise.
+Existing kept/renounced promise trust and bond consequences remain. New
+requests are due at the current dawn, rather than the generic next-day floor.
+Old unavailable open requests receive one pinned fair night on load.
+
+Join grants no relief, food or healing. Paid waiting uses normal metabolism;
+nearby Sleep retains its real recovery. Active attendance reserves the NPC's
+labor: garden duty and other autonomous work cannot happen simultaneously.
+Explicit orders interrupt presence. Standing roles survive the interruption.
+Fire expiry, distance, door side, danger and bearer ownership are real gates.
+
+Matched16-per-policy panels under the same collector retain review_required:
+wins capable16→16, maker6→7, merchant8→8, caregiver10→10. Every changed
+metric case (capable8, maker8, caregiver4) replays complete state/outcome/all23
+exactly. First coarse differences are trust at day74/day93 and NPC work/food
+at day100. These do not establish the causal chain to later endings. More wins
+do not erase prior garden, class, community, gear or Table warnings. No
+compensating HP, food, reward or Table tuning was added. See the dated
+company-favor audit and passive opportunity report before claiming use.
+
+Decision: this is an authored playable-job correction for development release,
+pending the remaining publication checks. Natural completed-night viability
+is unproven; prepared touch completion is a separate boundary. Muse retains
+numerical calibration. No population equivalence or difficulty improvement is
+claimed from this screening panel.
+
 ## Completed time persistence (2026-10-20 candidate)
 
 Candidate d09f47ea2-20261021-042230 changes when time/Sleep writes become durable,

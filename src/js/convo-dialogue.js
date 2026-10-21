@@ -174,6 +174,8 @@
         const promise = this.state.village.promises?.[vid];
         if (dlg === 'favor_cancel' && favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
           result = this.performWaterFavor(vid, favor, true);
+        } else if (dlg === 'favor_cancel' && favor?.kind === 'stay_close' && this.performCompanyFavor && !status.unsupported) {
+          result = this.performCompanyFavor(vid, favor, true);
         } else if (dlg === 'favor_cancel' && status.unsupported && promise?.favorId === favor?.id && !promise.kept) {
           promise.kept = 'unavailable';
           this.journalFavorPromise?.(vid, promise);
@@ -417,6 +419,10 @@
 
       if (dlg === 'commit') {
         const favor = c.want?.favor;
+        if (favor?.kind === 'stay_close' && this.companyFavorCommitGate) {
+          const gate=this.companyFavorCommitGate(vid,favor);
+          if(!gate.ok){this.sayLine(vid,gate.reason,{diegeticAct:true});return{line:gate.reason,choices:this.convoChoices(vid),ended:false,transcript:c.transcript.slice()};}
+        }
         if (favor && this.convoFavorAction(vid, favor).unsupported) {
           const line = this.convoFavorAction(vid, favor).reason;
           this.sayLine(vid, line, { diegeticAct: true });

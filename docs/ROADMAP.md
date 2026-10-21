@@ -1,5 +1,30 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Company-favor candidate (2026-10-21, publication pending)
+
+The authored stay_close request is now an actual night beside the same person
+and fire. Join, paid attendance, nearby Sleep, interruption/cancellation,
+exact-night deadline and Continue are wired through atomic time settlement.
+Shared-kit45/0, prepared phone8 stages and interruption/cancellation6 stages
+at736/844 pass. Real16-stage frames and installed update/offline Continue pass.
+Quick277/0 and full1,049/0 pass; publication status is in company-favor-audit-r1.
+
+The matched64-case screen remains review_required: wins16→16/6→7/8→8/10→10.
+All three changed metric cases replay full state/outcome/all23 exactly.
+Passive on/off diagnostic controls also retain state/outcome/all23/RNG. Both
+natural company calls were explicit cancellations; no natural Join or kept
+night is established. Actual blockers include location and other work orders.
+Do not treat menu calls or prepared completion as natural feature viability.
+Snare repair, watch shift and joint foraging remain unavailable.
+
+After this candidate is verified live, Codex's next bounded milestone is
+cultivated-food provenance through actual consumption: retain crop delivery,
+spoilage/remaining stock and useful player/NPC intake separately in naturally
+attained long runs, with passive controls. Existing harvest volume does not
+prove the garden path repays its investment. Muse retains numerical crop/
+ability calibration; this measurement lane must not silently tune those levers.
+Keep the rolling public-release goal active and preserve shared Git ancestry.
+
 ## Atomic time-save milestone (2026-10-20, released)
 
 Releasee83b78097, build d09f47ea2-20261021-042230, defers nested time/part/day/Sleep saves

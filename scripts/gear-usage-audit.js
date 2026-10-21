@@ -21,6 +21,7 @@ const METHODS = {
   _cxPrizeKnowledgeDump: 'system-prize', _cxPrizeEvolutionAssist: 'system-prize',
   maybeGrantCapstoneItem: 'capstone',
   marketNamePrice: 'market',
+  performCompanyFavor: 'company-favor',
 };
 function gameplayHash(state) {
   const comparable = JSON.parse(JSON.stringify(state));

@@ -12,6 +12,32 @@ got talked at — a vending machine, not a conversation.
 
 ### Accepted favors and the People journal (2026-10-20)
 
+Company-favor candidate (2026-10-21): `stay_close` is an exact night of
+presence, with Join and Keep company actions. Accepting is not attendance.
+Meet the actual requester beside the same burning fire at dusk/night, on the
+same map and side of the hall door. After Join, normal waiting or nearby Sleep
+counts until dawn. Sleep keeps its ordinary recovery; awake company adds none.
+Walking away, a door/map change, danger or a new work order interrupts the
+continuous stretch. Resume requires enough night left to begin again. A
+player-made fire must last through dawn. Requests too late to begin cannot
+create a new commitment or phantom acceptance reward.
+
+The current night, actual participant/fire/site, continuous paid attendance and
+interruption are saved. Continue preserves valid presence and rechecks the
+site; it cannot borrow an earlier bearer's attendance. Completion uses a private
+receipt before the normal dawn deadline sweep, inside TIME-SETTLEMENT.md's
+transaction. A generic social event cannot keep this specific promise. Breaking
+the promise is an explicit offered action with the existing renounce cost.
+The People journal uses the same exact-night deadline and live requirements.
+
+Old unavailable open company requests get one fair meeting night on their
+first load: tonight when time remains, otherwise tomorrow. Save pins that
+night; repeated Continue does not renew it. Closed promises stay closed.
+Numeric rules live in favor-rules.json; do not duplicate them in conversation
+text. Shared-kit test-company-favor.js and the dated company-favor phone,
+frame, lifecycle and balanced receipts cover the candidate. Publication status
+is recorded separately in company-favor-audit-r1.
+
 Water-run milestone: an accepted water favor now has a real joint outing.
 Meet the requester at Haven at dawn on the day after acceptance (or the next
 dawn within the due-day window). The requester waits at home during that dawn;
@@ -38,7 +64,8 @@ bearer cannot supply a free escort or fabricated delivery.
 Previously accepted, unplayable water promises get one persisted migration
 window: at least two days from their first new-version Continue, with a dawn
 meeting on the following day. Further Continue does not extend it. Closed
-promises stay closed. The other four joint jobs remain unavailable.
+promises stay closed. Snare repair, watch shift and joint foraging remain
+unavailable; the company candidate above is being verified separately.
 Telemetry records actual departure, collected liters and returned clean/risky
 liters plus kept/early-end status (`favor_water_*`); water acquisition is not
 proof of drinking, successful purification or a balanced survival improvement.
@@ -62,7 +89,7 @@ can still help the person, but does not earn kept-promise credit or rewrite
 the expired task as completed. Deadline text uses the resolver's effective
 due day, including the existing minimum one-day window for legacy promises.
 
-The four other unimplemented joint jobs remain unavailable, with no active deadline
+The three other unimplemented joint jobs remain unavailable, with no active deadline
 or broken-promise penalty. Old accepted instances explain that limitation and
 offer a no-penalty close. This journal work does not implement those jobs.
 The lifecycle regression uses the shared harness; the retained touch journey

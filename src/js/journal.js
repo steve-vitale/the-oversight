@@ -236,7 +236,7 @@
         const overdue = row.status === 'open' && !unavailable && left != null && left < 0;
         const status = unavailable ? 'unavailable' : overdue ? 'overdue' : row.status;
         const time = left == null ? '' : left < 0 ? 'deadline passed' : left === 0 ? 'today' : left === 1 ? 'tomorrow' : left + ' days remaining';
-        const deadlineLabel = unavailable ? 'No active deadline — unavailable job, no penalty.' :
+        const deadlineLabel = favor?.kind==='stay_close'&&favor.id===row.favorId&&this.companyFavorDeadline ? this.companyFavorDeadline(favor) : unavailable ? 'No active deadline — unavailable job, no penalty.' :
           left == null ? 'Deadline not recorded' : 'Due by the end of day ' + row.dueDay + ' · ' + time;
         let requirements = '';
         if ((row.status === 'open' || activeWater) && promise?.favorId === row.favorId) {

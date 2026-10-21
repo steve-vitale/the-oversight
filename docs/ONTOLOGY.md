@@ -620,6 +620,19 @@ The exposure source — the village keeps the list. Every truth dragged into the
 
 **Consumes:** —
 
+### favor-company (`favor-company.js`)
+A specific night by a shared fire, with physical attendance, saved progress and an exact promise receipt.
+
+**Provides:** companyFavorCommitGate(vid, favor), companyFavorAction(vid, favor), performCompanyFavor(vid, favor, cancel), companyFavorHolding(vid), companyFavorWaiting(vid), companyFavorReceipt(vid, favor, opts), companyFavorDeadline(favor), companyFavorOpening(vid, favor), companyMeetingStep(), migrateCompanyFavors()
+
+**Rules:**
+- physical_night: only actual paid clock intervals beside the same person and fire count; generic social events and direct day jumps cannot keep this promise (code: accrue, finish)
+- tonight: new promises expire at the agreed dawn; previously unavailable saved commitments receive one explicit fair meeting night (code: companyFavorCommitGate, migrateCompanyFavors)
+- no_teleport: the requester walks a legal grid step toward the fire and stays on their actual side of the door; work orders take priority (code: companyMeetingStep, companyFavorHolding)
+- canonical_time: normal world clock and Sleep costs remain; company adds no food or healing, and both awake presence and nearby sleep count (code: performCompanyFavor, install)
+
+**Consumes:** state.village, state.scholar, tickAction(n), checkPromises(kind, vid, opts), journalFavorPromise(vid, promise, opts)
+
 ### favor-water (`favor-water.js`)
 Joint dawn creek favors: temporary companion, real bottled cargo and home cistern settlement.
 
