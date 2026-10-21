@@ -1,0 +1,1898 @@
+{
+ "schema": "dawnstaff/1",
+ "arm": "sim-dawnstaff-b",
+ "side": "control",
+ "policy": "belongfeast",
+ "seed": 8957,
+ "rep": 2,
+ "days": 180,
+ "endReason": "survived",
+ "won": false,
+ "national": false,
+ "table": true,
+ "rank": "regional",
+ "maxWave": 4,
+ "inflow": {
+  "traps": 6953,
+  "ambient:villagelives": 62362,
+  "away_wild": 68223,
+  "share_surplus": 725200,
+  "duty:fish": 76660,
+  "events:ambient": 2100,
+  "haul:field": 700
+ },
+ "chokeTotal": 942198,
+ "unattributed": 0,
+ "unattShare": 0,
+ "rotByCh": {
+  "away_wild": 3759,
+  "share_surplus": 50160,
+  "ambient:villagelives": 4108,
+  "untagged": 1080,
+  "duty:fish": 1296
+ },
+ "rotByChFast": {
+  "away_wild": 688,
+  "share_surplus": 48400
+ },
+ "rotFresh": 54269,
+ "rotPreserved": 6134,
+ "fastRotTotal": 49088,
+ "rotTotal": 60403,
+ "starveDays": 0,
+ "starvationDeaths": 0,
+ "hunterStarvationDeaths": 0,
+ "throttleCalls": 703,
+ "throttleEngaged": 551,
+ "deaths": [
+  {
+   "day": 13,
+   "kind": "villager",
+   "cause": "sickness"
+  },
+  {
+   "day": 21,
+   "kind": "villager",
+   "cause": "monster"
+  },
+  {
+   "day": 39,
+   "kind": "villager",
+   "cause": "contest"
+  },
+  {
+   "day": 58,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 71,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 77,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 78,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 85,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 99,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 114,
+   "kind": "villager",
+   "cause": "monster"
+  },
+  {
+   "day": 116,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 121,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 129,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 135,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 140,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 164,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 165,
+   "kind": "villager",
+   "cause": "a wound that wouldn't close"
+  },
+  {
+   "day": 174,
+   "kind": "villager",
+   "cause": "monster"
+  },
+  {
+   "day": 177,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 180,
+   "kind": "villager",
+   "cause": "combat"
+  }
+ ],
+ "deathCauses": {
+  "sickness": 1,
+  "monster": 3,
+  "contest": 1,
+  "combat": 14,
+  "a wound that wouldn't close": 1
+ },
+ "vidDeaths": [
+  {
+   "day": 13,
+   "vid": "gen_n9ki6bu",
+   "name": "Divya",
+   "cause": "sickness"
+  },
+  {
+   "day": 21,
+   "vid": "gen_mf5ykaq",
+   "name": "Lucia",
+   "cause": "monster"
+  },
+  {
+   "day": 39,
+   "vid": "gen_8yxoyz5",
+   "name": "Clarence Piotrowski",
+   "cause": "contest"
+  },
+  {
+   "day": 58,
+   "vid": "gen_uh3m0xo",
+   "name": "Esther Salinas",
+   "cause": "combat"
+  },
+  {
+   "day": 71,
+   "vid": "gen_187xqof",
+   "name": "Dhrubo Mirza",
+   "cause": "combat"
+  },
+  {
+   "day": 77,
+   "vid": "zoe_adams",
+   "name": "Zoe Adams",
+   "cause": "combat"
+  },
+  {
+   "day": 78,
+   "vid": "gen_9kvcuq3",
+   "name": "Joseph Qu",
+   "cause": "combat"
+  },
+  {
+   "day": 85,
+   "vid": "xavier_dubois",
+   "name": "Xavier Dubois",
+   "cause": "combat"
+  },
+  {
+   "day": 99,
+   "vid": "ella_johnson",
+   "name": "Ella Johnson",
+   "cause": "combat"
+  },
+  {
+   "day": 114,
+   "vid": "ursula_weber",
+   "name": "Ursula",
+   "cause": "monster"
+  },
+  {
+   "day": 116,
+   "vid": "miguel_santos",
+   "name": "Miguel Santos",
+   "cause": "combat"
+  },
+  {
+   "day": 121,
+   "vid": "nino_kapanadze",
+   "name": "Nino Kapanadze",
+   "cause": "combat"
+  },
+  {
+   "day": 129,
+   "vid": "chen_wei",
+   "name": "Wei Chen",
+   "cause": "combat"
+  },
+  {
+   "day": 135,
+   "vid": "luis_fernandez",
+   "name": "Luis Fernandez",
+   "cause": "combat"
+  },
+  {
+   "day": 140,
+   "vid": "app_mgpsphku586",
+   "name": "Iván Navarro",
+   "cause": "combat"
+  },
+  {
+   "day": 164,
+   "vid": "vasyl_shevchenko",
+   "name": "Vasyl Shevchenko",
+   "cause": "combat"
+  },
+  {
+   "day": 165,
+   "vid": "visjoin_154",
+   "name": "Kebebush Worku",
+   "cause": "a wound that wouldn't close"
+  },
+  {
+   "day": 174,
+   "vid": "visjoin_165",
+   "name": "Jack",
+   "cause": "monster"
+  },
+  {
+   "day": 177,
+   "vid": "app_mgpspikn871",
+   "name": "Henry Coleman",
+   "cause": "combat"
+  },
+  {
+   "day": 180,
+   "vid": "visjoin_117",
+   "name": "Hank Keane",
+   "cause": "combat"
+  }
+ ],
+ "hunterDeaths": [],
+ "staffed": 0,
+ "hunterDays": 0,
+ "tendered": 0,
+ "staffPartHist": {},
+ "staffMatch": {
+  "resolved": 0,
+  "churned": 0,
+  "other": 0,
+  "resolvedKcal": 0
+ },
+ "gateDecisions": 0,
+ "gateOpenDays": 0,
+ "huntResolves": 0,
+ "assignLog": [],
+ "tenderLog": [],
+ "sayLines": [
+  {
+   "day": 1,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 24L left."
+  },
+  {
+   "day": 1,
+   "line": "🪤 A person, maybe 60s, with a buzz cut is back from the snares: +330 kcal to the pantry."
+  },
+  {
+   "day": 1,
+   "line": "Village meal: +1130 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 1,
+   "line": "A woman, maybe 60s, with a limp came back with 428 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 2,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 2,
+   "line": "🌿 A man, maybe 40s, with freckles checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wil"
+  },
+  {
+   "day": 2,
+   "line": "🪵 A man, maybe 40s, with freckles hauls back 6 wood. The pile grows. (16 logs now.)"
+  },
+  {
+   "day": 2,
+   "line": "Xavier heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 2,
+   "line": "🌿 Xavier returns from foraging the wilds: +581 kcal to the pantry."
+  },
+  {
+   "day": 2,
+   "line": "Village meal: +1381 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 2,
+   "line": "A person, maybe 60s, with ink-stained fingers came back with 613 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 2,
+   "line": "A runner from Emberhold, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 2,
+   "line": "A runner from Stonebridge, dusty and direct: \"Your foragers are stripping our side of the northeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 2,
+   "line": "A runner from Thornfield, dusty and direct: \"Your foragers are stripping our side of the east ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 2,
+   "line": "A runner from Ashford, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 3,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 3,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 3,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 3,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 3,
+   "line": "Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 3,
+   "line": "★ IDENTIFIED: Jewelweed. Translucent stems, orange spotted flowers like tiny trumpets. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 4,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 4,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 4,
+   "line": "🌿 A woman, maybe 20s checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep"
+  },
+  {
+   "day": 4,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 8L left."
+  },
+  {
+   "day": 4,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 4,
+   "line": "Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you."
+  },
+  {
+   "day": 4,
+   "line": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 4,
+   "line": "★ IDENTIFIED: Staghorn Sumac. Fuzzy red berry cones pointing up like torches. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 4,
+   "line": "A woman, maybe 20s came back with 405 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 4,
+   "line": "📓 Journal: Dhrubo taught the person in their 60s, with ink-stained fingers Reading Tracks."
+  },
+  {
+   "day": 5,
+   "line": "Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+  },
+  {
+   "day": 5,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 5,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 5,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 5,
+   "line": "You see smoke on the horizon. Thornfield — 8 people, 5 days in. fishing folk, by the look of it. They know 3 plants — 3 new to you. They've been here the whole time."
+  },
+  {
+   "day": 5,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 5,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 5,
+   "line": "🎣 Esther worked the creek — 2 fish, +280 kcal to the pantry."
+  },
+  {
+   "day": 5,
+   "line": "🎣 A person, maybe 60s, with ink-stained fingers worked the creek — 1 fish, +140 kcal to the pantry."
+  },
+  {
+   "day": 5,
+   "line": "Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 5,
+   "line": "★ IDENTIFIED: Water Hemlock. White umbrella flowers, hollow stems, marsh ground. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 5,
+   "line": "Miguel came back with 599 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 5,
+   "line": "Fresh-cut stems on the east ground — someone else is working turf your crews use. (Thornfield's foragers, most likely. You walk the ground yourself: it's thinner than your crews alone could strip it.)"
+  },
+  {
+   "day": 6,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 6,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 6,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 6,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 6,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 6,
+   "line": "🎣 Esther worked the creek — 1 fish, +140 kcal to the pantry."
+  },
+  {
+   "day": 6,
+   "line": "🎣 A person, maybe 60s, with ink-stained fingers worked the creek — 3 fish, +420 kcal to the pantry."
+  },
+  {
+   "day": 6,
+   "line": "Village meal: +1160 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 6,
+   "line": "The east ground is thinning faster than your crews alone could strip it. Thornfield isn't slowing down — their foragers are on your turf most days now. Their speaker would probably want words. (Talk about the shared grou"
+  },
+  {
+   "day": 7,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 7,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 7,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 25L left."
+  },
+  {
+   "day": 7,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 7,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 7,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 7,
+   "line": "🎣 Esther worked the creek — 2 fish, +280 kcal to the pantry."
+  },
+  {
+   "day": 7,
+   "line": "🎣 A person, maybe 60s, with ink-stained fingers worked the creek — 2 fish, +280 kcal to the pantry."
+  },
+  {
+   "day": 7,
+   "line": "\"So we made it OFFICIAL! The PARTY SYSTEM! Up to THREE companions! Formal! Tracked! With a UI! The audience can see your party composition now! Very important for the betting markets!\""
+  },
+  {
+   "day": 7,
+   "line": "★ IDENTIFIED: Guava. Fragrant, soft, pink inside. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 7,
+   "line": "Village meal: +1310 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 7,
+   "line": "🌙 Raid — Thornfield came in the night from the east. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 8,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 8,
+   "line": "🌿 Zoe checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "line": "🪵 Zoe hauls back 6 wood. The pile grows. (20 logs now.)"
+  },
+  {
+   "day": 8,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 8,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 8,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 8,
+   "line": "Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you."
+  },
+  {
+   "day": 8,
+   "line": "★ IDENTIFIED: Hickory Nuts. Hickory nut. Hard shell, sweet meat. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 8,
+   "line": "Village meal: +1050 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 9,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 9,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 9,
+   "line": "🌿 Zoe checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "line": "🪵 Zoe hauls back 6 wood. The pile grows. (24 logs now.)"
+  },
+  {
+   "day": 9,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 9,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 9,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 9,
+   "line": "📋 Joseph — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 9,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 9,
+   "line": "🐗 RAID — 4 raiders (The Anaconda Empress, Drum-Belly, The Living Wire, Lockpick) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 9,
+   "line": "💡 COUNTER LEARNED — The Living Wire: Get OUT of the water. When the crackling starts, step onto dry ground — the discharge cannot reach you there. On land it is just a long blind fish: slow, harmless, dinner. Never figh"
+  },
+  {
+   "day": 9,
+   "line": "📓 Codex: Counter: Get OUT of the water — When the crackling starts, step onto dry ground — the discharge cannot reach you there. On land it is just a long blind fish: slow, harmless, dinner. Never fight it standing in t"
+  },
+  {
+   "day": 9,
+   "line": "★ IDENTIFIED: White Crossberry. Grewia. Grey-green bush, small pale berries. The ripe berries are food. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 9,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 9,
+   "line": "Wei came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 9,
+   "line": "Dhrubo came back with 288 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 10,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 10,
+   "line": "◈ TRIAL RECOGNIZED — the System has been watching. You took a beating that should have ended you — and kept moving. Noted. (Combat track +)"
+  },
+  {
+   "day": 10,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 10,
+   "line": "🌿 Lucia checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "line": "🪵 Lucia hauls back 7 wood. The pile grows. (28 logs now.)"
+  },
+  {
+   "day": 10,
+   "line": "Dhrubo heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 10,
+   "line": "◈ CRISIS — THE SIEGE. They came in the night for the pantry — and the village met them at the door with blades and fire and drove them back into the dark. Wealth has a scent. So does defiance."
+  },
+  {
+   "day": 10,
+   "line": "SYSTEM: \"INTRUDER REPELLED. The pantry’s aroma is now classified as a defensive liability. The audience is chanting the defenders’ names. Fan clubs are forming. This is how it starts.\""
+  },
+  {
+   "day": 10,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 29L left."
+  },
+  {
+   "day": 10,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 10,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 10,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 10,
+   "line": "🪵 Lucia hauls back 6 wood. The pile grows. (33 logs now.)"
+  },
+  {
+   "day": 10,
+   "line": "★ IDENTIFIED: Sweet Manioc. Manioc. Tall stalks, hand-shaped leaves, thick roots. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 10,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 10,
+   "line": "Lucia came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 11,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 11,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 11,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "line": "🪵 Miguel hauls back 5 wood. The pile grows. (36 logs now.)"
+  },
+  {
+   "day": 11,
+   "line": "🌿 Dhrubo returns from foraging the wilds: +429 kcal to the pantry."
+  },
+  {
+   "day": 11,
+   "line": "Wei heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 11,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 11,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 11,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 11,
+   "line": "You lay out the haul. Lucia leans over Hickory Nuts. \"Oh — THAT one. Here, look.\""
+  },
+  {
+   "day": 11,
+   "line": "📓 Codex: Lucia taught me Poison Hemlock (haul)."
+  },
+  {
+   "day": 11,
+   "line": "Xavier looks at the pantry, then at the Codex, then at you. \"We’re going to make it.\" Haven will survive — because someone learned the land, and wrote it down. One less thing to fear."
+  },
+  {
+   "day": 11,
+   "line": "🪵 Esther hauls back 6 wood. The pile grows. (42 logs now.)"
+  },
+  {
+   "day": 11,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 11,
+   "line": "🌿 Water Hemlock — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 11,
+   "line": "💡 Water Hemlock: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 11,
+   "line": "🌿 Staghorn Sumac — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 11,
+   "line": "💡 Staghorn Sumac: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 12,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 12,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 12,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "line": "🪵 Miguel hauls back 6 wood. The pile grows. (45 logs now.)"
+  },
+  {
+   "day": 12,
+   "line": "🌿 Wei returns from foraging the wilds: +562 kcal to the pantry."
+  },
+  {
+   "day": 12,
+   "line": "🥩 Lucia is back with strange meat: unknown flesh in the pantry. \"Test it cautiously before anyone eats.\""
+  },
+  {
+   "day": 12,
+   "line": "🥩 Lucia is back empty-handed. \"Nothing worth hauling out there.\""
+  },
+  {
+   "day": 12,
+   "line": "🥩 Dhrubo is back empty-handed. \"Nothing worth hauling out there.\""
+  },
+  {
+   "day": 12,
+   "line": "Dhrubo heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 12,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 12,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 12,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 12,
+   "line": "🪵 Miguel hauls back 6 wood. The pile grows. (51 logs now.)"
+  },
+  {
+   "day": 12,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 12,
+   "line": "Divya came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 12,
+   "line": "Miguel came back with 508 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 13,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 13,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 13,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~16 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "line": "🪵 Nino hauls back 6 wood. The pile grows. (54 logs now.)"
+  },
+  {
+   "day": 13,
+   "line": "🌿 Dhrubo returns from foraging the wilds: +226 kcal to the pantry."
+  },
+  {
+   "day": 13,
+   "line": "Zoe heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 13,
+   "line": "Xavier heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 13,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 26L left."
+  },
+  {
+   "day": 13,
+   "line": "🪵 Miguel hauls back 4 wood. The pile grows. (58 logs now.)"
+  },
+  {
+   "day": 13,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 13,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 13,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 13,
+   "line": "📋 Joseph — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 13,
+   "line": "🪵 Lucia hauls back 7 wood. The pile grows. (65 logs now.)"
+  },
+  {
+   "day": 13,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 13,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 13,
+   "line": "Ella came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 13,
+   "line": "🌿 Guava — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 13,
+   "line": "💡 Guava: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 14,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 14,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 14,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "line": "Joseph heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 14,
+   "line": "🌿 Xavier returns from foraging the wilds: +469 kcal to the pantry."
+  },
+  {
+   "day": 14,
+   "line": "🌿 Zoe returns from foraging the wilds: +495 kcal to the pantry."
+  },
+  {
+   "day": 14,
+   "line": "🪵 Miguel hauls back 6 wood. The pile grows. (67 logs now.)"
+  },
+  {
+   "day": 14,
+   "line": "Lucia heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 14,
+   "line": "Zoe heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 14,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 14,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 14,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 14,
+   "line": "You lay out the haul. Esther leans over Poison Hemlock. \"Oh — THAT one. Here, look.\""
+  },
+  {
+   "day": 14,
+   "line": "🪵 Esther hauls back 8 wood. The pile grows. (75 logs now.)"
+  },
+  {
+   "day": 14,
+   "line": "Village meal: +1314 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 15,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 15,
+   "line": "🌿 Ella checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "line": "🪵 Miguel hauls back 6 wood. The pile grows. (79 logs now.)"
+  },
+  {
+   "day": 15,
+   "line": "🌿 Lucia returns from foraging the wilds: +503 kcal to the pantry."
+  },
+  {
+   "day": 15,
+   "line": "🌿 Joseph returns from foraging the wilds: +414 kcal to the pantry."
+  },
+  {
+   "day": 15,
+   "line": "👥 Dhrubo heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 15,
+   "line": "Miguel heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 15,
+   "line": "🌿 Zoe returns from foraging the wilds: +474 kcal to the pantry."
+  },
+  {
+   "day": 15,
+   "line": "🧭 Esther is back from past the south (+1351 kcal for the pantry, strange meat (unknown flesh — test it cautiously), 1 story) (Ask them what they saw.)"
+  },
+  {
+   "day": 15,
+   "line": "Xavier is working the cookpot, tasting, adjusting."
+  },
+  {
+   "day": 15,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 15,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 15,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 15,
+   "line": "📋 Joseph — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 15,
+   "line": "🪵 Miguel hauls back 4 wood. The pile grows. (83 logs now.)"
+  },
+  {
+   "day": 15,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 15,
+   "line": "🌿 Dhrubo returns from foraging the wilds: +365 kcal to the pantry."
+  },
+  {
+   "day": 15,
+   "line": "🌿 Miguel returns from foraging the wilds: +424 kcal to the pantry."
+  },
+  {
+   "day": 15,
+   "line": "🌙 Night. Shouts from the treeline — Ruth of Emberhold with 4 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 kcal.)"
+  },
+  {
+   "day": 15,
+   "line": "Village meal: +1154 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 15,
+   "line": "Miguel came back with 377 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 15,
+   "line": "📓 Codex: Dhrubo taught Joseph Reading Tracks."
+  },
+  {
+   "day": 15,
+   "line": "🌿 White Crossberry — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 15,
+   "line": "💡 White Crossberry: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 16,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 16,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 16,
+   "line": "🌿 Xavier checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "line": "🪵 Xavier hauls back 5 wood. The pile grows. (85 logs now.)"
+  },
+  {
+   "day": 16,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 35L left."
+  },
+  {
+   "day": 16,
+   "line": "🪵 Miguel hauls back 4 wood. The pile grows. (89 logs now.)"
+  },
+  {
+   "day": 16,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 16,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 16,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 16,
+   "line": "📋 Joseph — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 16,
+   "line": "🪵 Lucia hauls back 7 wood. The pile grows. (96 logs now.)"
+  },
+  {
+   "day": 16,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 16,
+   "line": "Investigate and the morning is gone — tracking them costs a full day-part. Bar the door and you learn nothing. Your call."
+  },
+  {
+   "day": 16,
+   "line": "★ IDENTIFIED: American Ginseng. Ginseng. Whorled compound leaves, red berry cluster. You've only read about this. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 16,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 16,
+   "line": "Miguel came back with 440 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 16,
+   "line": "🌿 Sweet Manioc — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 16,
+   "line": "💡 Sweet Manioc: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 17,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 17,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 17,
+   "line": "🌿 Xavier checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "line": "🪤 Dhrubo is back from the snares: +190 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "line": "🪤 Dhrubo is back from the pit line: Virginia Opossum in the pit — +509 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "line": "🪵 Miguel hauls back 6 wood. The pile grows. (99 logs now.)"
+  },
+  {
+   "day": 17,
+   "line": "Joseph heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 17,
+   "line": "👥 Dhrubo heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 17,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 17,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 17,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 17,
+   "line": "You lay out the haul. Esther leans over Lotus Root. \"Oh — THAT one. Here, look.\""
+  },
+  {
+   "day": 17,
+   "line": "📋 Joseph — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 17,
+   "line": "🪵 Esther hauls back 11 wood. The pile grows. (110 logs now.)"
+  },
+  {
+   "day": 17,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 17,
+   "line": "🌿 Joseph returns from foraging the wilds: +333 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "line": "🌿 Dhrubo returns from foraging the wilds: +574 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "line": "🐗 RAID — 4 raiders (Big-Eyes, Hushpuppy, The Living Wire, The Living Wire) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 17,
+   "line": "★ IDENTIFIED: Thorn Apple. Trumpet flowers, spiny round pods. POISON — every part. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 17,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 17,
+   "line": "★ IDENTIFIED: Common Sorrel. Sorrel. Arrow-shaped leaves with a sharp lemon tang. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 17,
+   "line": "📓 Codex: Joseph taught Miguel Reading Tracks."
+  },
+  {
+   "day": 18,
+   "line": "Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+  },
+  {
+   "day": 18,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 18,
+   "line": "◈ TRIAL RECOGNIZED — the System has been watching. You WON a fight. Not survived — won. The audience is still standing. So are you. (Combat track +)"
+  },
+  {
+   "day": 18,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 18,
+   "line": "🌿 Xavier checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "line": "🪵 Miguel hauls back 5 wood. The pile grows. (114 logs now.)"
+  },
+  {
+   "day": 18,
+   "line": "Miguel heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 18,
+   "line": "Wei heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 18,
+   "line": "🌿 Miguel returns from foraging the wilds: +484 kcal to the pantry."
+  },
+  {
+   "day": 18,
+   "line": "🔥 The fire settles. Ella has been quiet all evening, and now everyone knows why. \"The Living Wire — I put it down today.\" \"The water goes glass-still. A faint crackling, and the hairs on your arms lift.\" \"The crackling "
+  },
+  {
+   "day": 18,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 18,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 18,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 18,
+   "line": "📋 Joseph — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 18,
+   "line": "🪵 Miguel hauls back 5 wood. The pile grows. (119 logs now.)"
+  },
+  {
+   "day": 18,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 18,
+   "line": "🌿 Wei returns from foraging the wilds: +565 kcal to the pantry."
+  },
+  {
+   "day": 18,
+   "line": "🌙 Night. Shouts from the treeline — Ibrahim of Stonebridge with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 kcal.)"
+  },
+  {
+   "day": 18,
+   "line": "📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\""
+  },
+  {
+   "day": 18,
+   "line": "📺 SYSTEM: \"We have already cleared your morning. You are welcome. We require 300 kcal of tubers and your full attention. The fans love a cooking segment.\""
+  },
+  {
+   "day": 18,
+   "line": "A cold snap. Breath smokes. The woods go quiet."
+  },
+  {
+   "day": 18,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 18,
+   "line": "Xavier came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 19,
+   "line": "Snow by morning. (1°C — Cold) The ground goes iron — forage thin, walking dear."
+  },
+  {
+   "day": 19,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 19,
+   "line": "🌿 Xavier checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "line": "🪵 Xavier hauls back 4 wood. The pile grows. (120 logs now.)"
+  },
+  {
+   "day": 19,
+   "line": "Lucia heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 19,
+   "line": "🪵 Miguel hauls back 6 wood. The pile grows. (126 logs now.)"
+  },
+  {
+   "day": 19,
+   "line": "🌿 Lucia returns from foraging the wilds: +491 kcal to the pantry."
+  },
+  {
+   "day": 19,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 19,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 19,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 19,
+   "line": "📋 Joseph — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 19,
+   "line": "🪵 Lucia hauls back 8 wood. The pile grows. (134 logs now.)"
+  },
+  {
+   "day": 19,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 19,
+   "line": "🥩 Miguel is back with strange meat: unknown flesh in the pantry. \"Test it cautiously before anyone eats.\""
+  },
+  {
+   "day": 19,
+   "line": "🥩 Miguel is back empty-handed. \"Nothing worth hauling out there.\""
+  },
+  {
+   "day": 19,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 19,
+   "line": "Wei came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 19,
+   "line": "Wei came back with 660 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 19,
+   "line": "📓 Codex: Lucia taught Xavier Reading Tracks."
+  },
+  {
+   "day": 20,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 20,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 20,
+   "line": "🌿 Xavier checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "line": "Lucia heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 20,
+   "line": "Joseph heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 20,
+   "line": "Xavier heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 20,
+   "line": "🪵 Miguel hauls back 6 wood. The pile grows. (137 logs now.)"
+  },
+  {
+   "day": 20,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 29L left."
+  },
+  {
+   "day": 20,
+   "line": "🌿 Joseph returns from foraging the wilds: +445 kcal to the pantry."
+  },
+  {
+   "day": 20,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 20,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 20,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 20,
+   "line": "You lay out the haul. Esther leans over Lotus Root. \"Oh — THAT one. Here, look.\""
+  },
+  {
+   "day": 20,
+   "line": "📋 Joseph — 🍲 Cook. Joseph nods eagerly. They'll report back by next part."
+  },
+  {
+   "day": 20,
+   "line": "Tribute paid: 5,200 kcal walks out of the pantry toward Emberhold. The relationship holds."
+  },
+  {
+   "day": 20,
+   "line": "🪵 Esther hauls back 10 wood. The pile grows. (147 logs now.)"
+  },
+  {
+   "day": 20,
+   "line": "🍲 Joseph cooked for the haven — meals stretched."
+  },
+  {
+   "day": 20,
+   "line": "🌿 Lucia returns from foraging the wilds: +377 kcal to the pantry."
+  },
+  {
+   "day": 20,
+   "line": "🌿 Xavier returns from foraging the wilds: +445 kcal to the pantry."
+  },
+  {
+   "day": 20,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 20,
+   "line": "Nino came back with 458 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 21,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 21,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 21,
+   "line": "🌿 Zoe checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "line": "🪵 Miguel hauls back 4 wood. The pile grows. (148 logs now.)"
+  },
+  {
+   "day": 21,
+   "line": "Joseph heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 21,
+   "line": "Dhrubo heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 21,
+   "line": "🍖 FEAST 📺 — Clarence opens the pantry wide: 10× Foraged food. Lucia, Xavier, Miguel, Wei eat until the fire burns low. Somebody tells the story again, the one everybody already knows. For one evening, hunger feels like"
+  },
+  {
+   "day": 21,
+   "line": "Tribute paid: 5,000 kcal walks out of the pantry toward Emberhold. The relationship holds."
+  },
+  {
+   "day": 21,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 21,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 21,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 21,
+   "line": "📋 Dhrubo — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 21,
+   "line": "🪵 Miguel hauls back 4 wood. The pile grows. (152 logs now.)"
+  },
+  {
+   "day": 21,
+   "line": "🪵 Xavier hauls back 4 wood. The pile grows. (156 logs now.)"
+  },
+  {
+   "day": 21,
+   "line": "🍲 Dhrubo cooked for the haven — meals stretched. Dhrubo worked the smoke racks too — 1 batch preserved (~302 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 21,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 22,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 22,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 22,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "line": "Xavier heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 22,
+   "line": "🪵 Miguel hauls back 7 wood. The pile grows. (160 logs now.)"
+  },
+  {
+   "day": 22,
+   "line": "🌿 Joseph returns from foraging the wilds: +419 kcal to the pantry."
+  },
+  {
+   "day": 22,
+   "line": "🌿 Dhrubo returns from foraging the wilds: +262 kcal to the pantry."
+  },
+  {
+   "day": 22,
+   "line": "Miguel heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 22,
+   "line": "Joseph heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 22,
+   "line": "👥 Dhrubo heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 22,
+   "line": "🌿 Xavier returns from foraging the wilds: +552 kcal to the pantry."
+  },
+  {
+   "day": 22,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 22,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 22,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 22,
+   "line": "📋 Dhrubo — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 22,
+   "line": "🪵 Esther hauls back 6 wood. The pile grows. (166 logs now.)"
+  },
+  {
+   "day": 22,
+   "line": "🍲 Dhrubo cooked for the haven — meals stretched. Dhrubo worked the smoke racks too — 1 batch preserved (~800 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 22,
+   "line": "Village meal: +1058 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 22,
+   "line": "Zoe came back with 414 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 22,
+   "line": "🌙 Raid — Ashford came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 23,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 23,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 23,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "line": "🪵 Nino hauls back 4 wood. The pile grows. (168 logs now.)"
+  },
+  {
+   "day": 23,
+   "line": "🌿 Joseph returns from foraging the wilds: +549 kcal to the pantry."
+  },
+  {
+   "day": 23,
+   "line": "🌿 Miguel returns from foraging the wilds: +320 kcal to the pantry."
+  },
+  {
+   "day": 23,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 20L left."
+  },
+  {
+   "day": 23,
+   "line": "🪵 Miguel hauls back 5 wood. The pile grows. (173 logs now.)"
+  },
+  {
+   "day": 23,
+   "line": "🌿 Dhrubo returns from foraging the wilds: +504 kcal to the pantry."
+  },
+  {
+   "day": 23,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 23,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 23,
+   "line": "★ Deeper knowledge: Hickory Nuts. Parts: nut meat (eat), shells (smoke flavor), bark (tea). Crack carefully. (Yield +50%). Use unlocked: food: sweet nutmeats — shell first, worth the work."
+  },
+  {
+   "day": 23,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 23,
+   "line": "You lay out the haul. Esther leans over Hickory Nuts. \"Oh — THAT one. Here, look.\""
+  },
+  {
+   "day": 23,
+   "line": "📋 Dhrubo — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 23,
+   "line": "🪵 Joseph hauls back 10 wood. The pile grows. (183 logs now.)"
+  },
+  {
+   "day": 23,
+   "line": "🍲 Dhrubo cooked for the haven — meals stretched. Dhrubo worked the smoke racks too — 2 batches preserved (~541 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 23,
+   "line": "◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Haul 1,000 kcal to the pantry within 3 days. Reward: integration, and a lesson."
+  },
+  {
+   "day": 23,
+   "line": "★ IDENTIFIED: Wood Sorrel. Clover-like, tangy. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 23,
+   "line": "★ IDENTIFIED: Inajá. Yellow fruit bunches on a fat-based palm. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 23,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 23,
+   "line": "Zoe came back with 349 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 23,
+   "line": "🌿 American Ginseng — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 23,
+   "line": "💡 American Ginseng: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (302 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "🌿 Esther checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 24,
+   "line": "🪵 Miguel hauls back 5 wood. The pile grows. (184 logs now.)"
+  },
+  {
+   "day": 24,
+   "line": "Dhrubo heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 24,
+   "line": "Xavier heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 24,
+   "line": "Zoe heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 24,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 24,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 24,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 24,
+   "line": "📋 Dhrubo — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 24,
+   "line": "🪵 Miguel hauls back 8 wood. The pile grows. (192 logs now.)"
+  },
+  {
+   "day": 24,
+   "line": "🪵 Xavier hauls back 6 wood. The pile grows. (198 logs now.)"
+  },
+  {
+   "day": 24,
+   "line": "🍲 Dhrubo cooked for the haven — meals stretched. Dhrubo worked the smoke racks too — 2 batches preserved (~3200 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 24,
+   "line": "🌿 Xavier returns from foraging the wilds: +510 kcal to the pantry."
+  },
+  {
+   "day": 24,
+   "line": "🥩 Miguel is back with strange meat: unknown flesh in the pantry. \"Test it cautiously before anyone eats.\""
+  },
+  {
+   "day": 24,
+   "line": "🥩 Miguel is back empty-handed. \"Nothing worth hauling out there.\""
+  },
+  {
+   "day": 24,
+   "line": "🐗 RAID — 3 raiders (Choir Toad, Hushpuppy, The Landlord) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 24,
+   "line": "Village meal: +1319 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 24,
+   "line": "💡 Staghorn Sumac: the village knows more than you do. Harvest it a few more times (0/2) and it'll click."
+  },
+  {
+   "day": 24,
+   "line": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1359 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 25,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 25,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 25,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 25,
+   "line": "You eat Foraged food (dried) (210 kcal)."
+  },
+  {
+   "day": 25,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 25,
+   "line": "You eat Foraged food (dried) (331 kcal)."
+  },
+  {
+   "day": 25,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 25,
+   "line": "You eat Foraged food (dried) (400 kcal)."
+  },
+  {
+   "day": 25,
+   "line": "🌿 Nino checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 25,
+   "line": "🌿 Dhrubo returns from foraging the wilds: +333 kcal to the pantry."
+  }
+ ],
+ "detHash": "e66ad0fb353cc479a1ab8004b03ca75dd325491f7fa29dad5efeb36b98d8c55e",
+ "ms": 3192
+}

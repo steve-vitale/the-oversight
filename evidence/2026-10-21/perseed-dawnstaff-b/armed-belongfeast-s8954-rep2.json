@@ -1,0 +1,2327 @@
+{
+ "schema": "dawnstaff/1",
+ "arm": "sim-dawnstaff-b",
+ "side": "armed",
+ "policy": "belongfeast",
+ "seed": 8954,
+ "rep": 2,
+ "days": 116,
+ "endReason": "village-lost",
+ "won": false,
+ "national": false,
+ "table": true,
+ "rank": "regional",
+ "maxWave": 3,
+ "inflow": {
+  "ambient:villagelives": 39451,
+  "share_surplus": 370400,
+  "away_wild": 56335,
+  "events:ambient": 758,
+  "traps": 605,
+  "events:special": 300,
+  "duty:fish": 76302,
+  "duty:hunt": 4840,
+  "scholar_home": 8640
+ },
+ "chokeTotal": 557631,
+ "unattributed": 0,
+ "unattShare": 0,
+ "rotByCh": {
+  "share_surplus": 20680,
+  "traps": 242,
+  "away_wild": 5283,
+  "ambient:villagelives": 4508,
+  "duty:fish": 2180
+ },
+ "rotByChFast": {
+  "share_surplus": 19400,
+  "away_wild": 4986,
+  "ambient:villagelives": 4193,
+  "duty:fish": 1780
+ },
+ "rotFresh": 30359,
+ "rotPreserved": 2534,
+ "fastRotTotal": 30359,
+ "rotTotal": 32893,
+ "starveDays": 0,
+ "starvationDeaths": 2,
+ "hunterStarvationDeaths": 2,
+ "throttleCalls": 503,
+ "throttleEngaged": 313,
+ "deaths": [
+  {
+   "day": 25,
+   "kind": "villager",
+   "cause": "choir toad"
+  },
+  {
+   "day": 58,
+   "kind": "villager",
+   "cause": "monster"
+  },
+  {
+   "day": 60,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 69,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 71,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 78,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 82,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 93,
+   "kind": "villager",
+   "cause": "starvation"
+  },
+  {
+   "day": 95,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 99,
+   "kind": "villager",
+   "cause": "monster"
+  },
+  {
+   "day": 107,
+   "kind": "villager",
+   "cause": "monster"
+  },
+  {
+   "day": 109,
+   "kind": "villager",
+   "cause": "monster"
+  },
+  {
+   "day": 111,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 112,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 112,
+   "kind": "villager",
+   "cause": "combat"
+  },
+  {
+   "day": 114,
+   "kind": "villager",
+   "cause": "starvation"
+  }
+ ],
+ "deathCauses": {
+  "choir toad": 1,
+  "monster": 4,
+  "combat": 9,
+  "starvation": 2
+ },
+ "vidDeaths": [
+  {
+   "day": 25,
+   "vid": "gen_n3ti5g3",
+   "name": "Gianna Nair",
+   "cause": "Choir Toad"
+  },
+  {
+   "day": 58,
+   "vid": "sam_wilson",
+   "name": "Sam",
+   "cause": "monster"
+  },
+  {
+   "day": 60,
+   "vid": "gen_0mk3nsk",
+   "name": "Aubrey Shaw",
+   "cause": "combat"
+  },
+  {
+   "day": 69,
+   "vid": "gen_iuozsnm",
+   "name": "Patricia Lorenz",
+   "cause": "combat"
+  },
+  {
+   "day": 71,
+   "vid": "gen_lxbxzwh",
+   "name": "Kate Katz",
+   "cause": "combat"
+  },
+  {
+   "day": 78,
+   "vid": "gen_7g5i4ld",
+   "name": "Sabina Kozhakhmetova",
+   "cause": "combat"
+  },
+  {
+   "day": 82,
+   "vid": "gen_82k078j",
+   "name": "Roman Maksimov",
+   "cause": "combat"
+  },
+  {
+   "day": 93,
+   "vid": "diana_osei",
+   "name": "Diana",
+   "cause": "starvation"
+  },
+  {
+   "day": 95,
+   "vid": "elif_demir",
+   "name": "Elif Demir",
+   "cause": "combat"
+  },
+  {
+   "day": 99,
+   "vid": "app_mgpspinf334",
+   "name": "Bhavesh",
+   "cause": "monster"
+  },
+  {
+   "day": 107,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "cause": "monster"
+  },
+  {
+   "day": 109,
+   "vid": "benoit_lambert",
+   "name": "Benoit",
+   "cause": "monster"
+  },
+  {
+   "day": 111,
+   "vid": "brian_otieno",
+   "name": "Brian Otieno",
+   "cause": "combat"
+  },
+  {
+   "day": 112,
+   "vid": "xavier_dubois",
+   "name": "Xavier Dubois",
+   "cause": "combat"
+  },
+  {
+   "day": 112,
+   "vid": "lena_ruiz",
+   "name": "Lena Ruiz",
+   "cause": "combat"
+  },
+  {
+   "day": 114,
+   "vid": "devon_okafor",
+   "name": "Devon Okafor",
+   "cause": "starvation"
+  }
+ ],
+ "hunterDeaths": [
+  {
+   "day": 58,
+   "vid": "sam_wilson",
+   "name": "Sam",
+   "cause": "monster"
+  },
+  {
+   "day": 93,
+   "vid": "diana_osei",
+   "name": "Diana",
+   "cause": "starvation"
+  },
+  {
+   "day": 99,
+   "vid": "app_mgpspinf334",
+   "name": "Bhavesh",
+   "cause": "monster"
+  },
+  {
+   "day": 107,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "cause": "monster"
+  },
+  {
+   "day": 111,
+   "vid": "brian_otieno",
+   "name": "Brian Otieno",
+   "cause": "combat"
+  },
+  {
+   "day": 112,
+   "vid": "lena_ruiz",
+   "name": "Lena Ruiz",
+   "cause": "combat"
+  },
+  {
+   "day": 114,
+   "vid": "devon_okafor",
+   "name": "Devon Okafor",
+   "cause": "starvation"
+  }
+ ],
+ "staffed": 21,
+ "hunterDays": 21,
+ "tendered": 32,
+ "staffPartHist": {
+  "0": 21
+ },
+ "staffMatch": {
+  "resolved": 21,
+  "churned": 0,
+  "other": 0,
+  "resolvedKcal": 4840
+ },
+ "gateDecisions": 114,
+ "gateOpenDays": 42,
+ "huntResolves": 21,
+ "assignLog": [
+  {
+   "day": 43,
+   "part": 0,
+   "vid": "brian_otieno",
+   "name": "Brian Otieno",
+   "occ": "zookeeper",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 43,
+   "part": 0,
+   "vid": "sam_wilson",
+   "name": "Sam Wilson",
+   "occ": "bartender",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 73,
+   "part": 0,
+   "vid": "lena_ruiz",
+   "name": "Lena Ruiz",
+   "occ": "ER nurse",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 74,
+   "part": 0,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana Delgado",
+   "occ": "nurse",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 77,
+   "part": 0,
+   "vid": "lena_ruiz",
+   "name": "Lena Ruiz",
+   "occ": "ER nurse",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 97
+  },
+  {
+   "day": 78,
+   "part": 0,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana Delgado",
+   "occ": "nurse",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 78,
+   "part": 0,
+   "vid": "devon_okafor",
+   "name": "Devon Okafor",
+   "occ": "programmer",
+   "tier": 0,
+   "comp": 0.7,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 79,
+   "part": 0,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana Delgado",
+   "occ": "nurse",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 97
+  },
+  {
+   "day": 79,
+   "part": 0,
+   "vid": "devon_okafor",
+   "name": "Devon Okafor",
+   "occ": "programmer",
+   "tier": 0,
+   "comp": 0.7,
+   "lastDuty": "hunt",
+   "hp": 97
+  },
+  {
+   "day": 85,
+   "part": 0,
+   "vid": "devon_okafor",
+   "name": "Devon Okafor",
+   "occ": "programmer",
+   "tier": 0,
+   "comp": 0.7,
+   "lastDuty": "hunt",
+   "hp": 79
+  },
+  {
+   "day": 86,
+   "part": 0,
+   "vid": "app_mgpspinf334",
+   "name": "Bhavesh Apte",
+   "occ": "hunter",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 88,
+   "part": 0,
+   "vid": "lena_ruiz",
+   "name": "Lena Ruiz",
+   "occ": "ER nurse",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 88,
+   "part": 0,
+   "vid": "henry_zhang",
+   "name": "Henry Zhang",
+   "occ": "emergency dispatcher",
+   "tier": 0,
+   "comp": 0.9,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 89,
+   "part": 0,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana Delgado",
+   "occ": "nurse",
+   "tier": 0,
+   "comp": 1,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 90,
+   "part": 0,
+   "vid": "diana_osei",
+   "name": "Diana Osei",
+   "occ": "paramedic",
+   "tier": 0,
+   "comp": 1.15,
+   "lastDuty": "hunt",
+   "hp": 72
+  },
+  {
+   "day": 90,
+   "part": 0,
+   "vid": "henry_zhang",
+   "name": "Henry Zhang",
+   "occ": "emergency dispatcher",
+   "tier": 0,
+   "comp": 0.9,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 91,
+   "part": 0,
+   "vid": "devon_okafor",
+   "name": "Devon Okafor",
+   "occ": "programmer",
+   "tier": 0,
+   "comp": 0.7,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 92,
+   "part": 0,
+   "vid": "diana_osei",
+   "name": "Diana Osei",
+   "occ": "paramedic",
+   "tier": 0,
+   "comp": 1.15,
+   "lastDuty": "hunt",
+   "hp": 78
+  },
+  {
+   "day": 92,
+   "part": 0,
+   "vid": "devon_okafor",
+   "name": "Devon Okafor",
+   "occ": "programmer",
+   "tier": 0,
+   "comp": 0.7,
+   "lastDuty": "hunt",
+   "hp": 100
+  },
+  {
+   "day": 93,
+   "part": 0,
+   "vid": "diana_osei",
+   "name": "Diana Osei",
+   "occ": "paramedic",
+   "tier": 0,
+   "comp": 1.15,
+   "lastDuty": "hunt",
+   "hp": 78
+  },
+  {
+   "day": 93,
+   "part": 0,
+   "vid": "henry_zhang",
+   "name": "Henry Zhang",
+   "occ": "emergency dispatcher",
+   "tier": 0,
+   "comp": 0.9,
+   "lastDuty": "hunt",
+   "hp": 97
+  }
+ ],
+ "tenderLog": [
+  {
+   "day": 43,
+   "vid": "gen_82k078j",
+   "name": "Roman",
+   "skill": 0
+  },
+  {
+   "day": 73,
+   "vid": "xavier_dubois",
+   "name": "Xavier",
+   "skill": 0
+  },
+  {
+   "day": 74,
+   "vid": "lena_ruiz",
+   "name": "Lena",
+   "skill": 0
+  },
+  {
+   "day": 76,
+   "vid": "xavier_dubois",
+   "name": "Xavier",
+   "skill": 0
+  },
+  {
+   "day": 77,
+   "vid": "benoit_lambert",
+   "name": "Benoit",
+   "skill": 0
+  },
+  {
+   "day": 78,
+   "vid": "lena_ruiz",
+   "name": "Lena",
+   "skill": 0
+  },
+  {
+   "day": 79,
+   "vid": "xavier_dubois",
+   "name": "Xavier",
+   "skill": 0
+  },
+  {
+   "day": 80,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 81,
+   "vid": "lena_ruiz",
+   "name": "Lena",
+   "skill": 0
+  },
+  {
+   "day": 83,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 85,
+   "vid": "lena_ruiz",
+   "name": "Lena",
+   "skill": 0
+  },
+  {
+   "day": 86,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 87,
+   "vid": "devon_okafor",
+   "name": "Devon",
+   "skill": 0
+  },
+  {
+   "day": 88,
+   "vid": "xavier_dubois",
+   "name": "Xavier",
+   "skill": 0
+  },
+  {
+   "day": 89,
+   "vid": "lena_ruiz",
+   "name": "Lena",
+   "skill": 0
+  },
+  {
+   "day": 90,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 91,
+   "vid": "xavier_dubois",
+   "name": "Xavier",
+   "skill": 0
+  },
+  {
+   "day": 92,
+   "vid": "lena_ruiz",
+   "name": "Lena",
+   "skill": 0
+  },
+  {
+   "day": 93,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 94,
+   "vid": "devon_okafor",
+   "name": "Devon",
+   "skill": 0
+  },
+  {
+   "day": 95,
+   "vid": "lena_ruiz",
+   "name": "Lena",
+   "skill": 0
+  },
+  {
+   "day": 96,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 97,
+   "vid": "devon_okafor",
+   "name": "Devon",
+   "skill": 0
+  },
+  {
+   "day": 98,
+   "vid": "henry_zhang",
+   "name": "Henry",
+   "skill": 0
+  },
+  {
+   "day": 99,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 100,
+   "vid": "devon_okafor",
+   "name": "Devon",
+   "skill": 0
+  },
+  {
+   "day": 101,
+   "vid": "henry_zhang",
+   "name": "Henry",
+   "skill": 0
+  },
+  {
+   "day": 102,
+   "vid": "app_mgpsphk2652",
+   "name": "Daiana",
+   "skill": 0
+  },
+  {
+   "day": 103,
+   "vid": "devon_okafor",
+   "name": "Devon",
+   "skill": 0
+  },
+  {
+   "day": 104,
+   "vid": "henry_zhang",
+   "name": "Henry",
+   "skill": 0
+  },
+  {
+   "day": 106,
+   "vid": "devon_okafor",
+   "name": "Devon",
+   "skill": 0
+  },
+  {
+   "day": 107,
+   "vid": "henry_zhang",
+   "name": "Henry",
+   "skill": 0
+  }
+ ],
+ "sayLines": [
+  {
+   "day": 1,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+  },
+  {
+   "day": 1,
+   "line": "A woman, maybe 30s, with tattooed arms is at the cookpot, tasting off the spoon, frowning, adding a pinch of something."
+  },
+  {
+   "day": 1,
+   "line": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 1,
+   "line": "A woman, maybe 60s, with calloused knuckles came back with 363 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 2,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 2,
+   "line": "🌿 A woman, maybe 60s, with restless hands checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more;"
+  },
+  {
+   "day": 2,
+   "line": "🪵 A woman, maybe 60s, with restless hands hauls back 4 wood. The pile grows. (14 logs now.)"
+  },
+  {
+   "day": 2,
+   "line": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 2,
+   "line": "Sam came back with 461 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 2,
+   "line": "📓 Journal: the man in his 50s taught Lena Camp Cooking."
+  },
+  {
+   "day": 3,
+   "line": "🌿 A woman, maybe 60s, with restless hands checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more;"
+  },
+  {
+   "day": 3,
+   "line": "🪵 A woman, maybe 60s, with restless hands hauls back 5 wood. The pile grows. (17 logs now.)"
+  },
+  {
+   "day": 3,
+   "line": "Lena heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 3,
+   "line": "2 unprocessed hauls onto the counter — the clock is ticking."
+  },
+  {
+   "day": 3,
+   "line": "Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you."
+  },
+  {
+   "day": 3,
+   "line": "★ IDENTIFIED: Serviceberry. White spring flowers, clusters of red-purple berries in June. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 3,
+   "line": "Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 3,
+   "line": "★ IDENTIFIED: Sweet Manioc. Manioc. Tall stalks, hand-shaped leaves, thick roots. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 3,
+   "line": "★ IDENTIFIED: Wild Onion. Grass-like, smells like onion. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 4,
+   "line": "Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+  },
+  {
+   "day": 4,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 4,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 4,
+   "line": "🌿 A woman, maybe 60s, with restless hands checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more"
+  },
+  {
+   "day": 4,
+   "line": "🌿 Lena returns from foraging the wilds: +578 kcal to the pantry."
+  },
+  {
+   "day": 4,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+  },
+  {
+   "day": 4,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 4,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 4,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 4,
+   "line": "🪵 Gianna hauls back 5 wood. The pile grows. (20 logs now.)"
+  },
+  {
+   "day": 4,
+   "line": "Village meal: +1178 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 4,
+   "line": "Gianna came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 4,
+   "line": "A woman, maybe 60s, with restless hands came back with 366 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 5,
+   "line": "Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+  },
+  {
+   "day": 5,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 5,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 5,
+   "line": "🌿 A man, maybe 40s, with a gap-toothed grin checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take mo"
+  },
+  {
+   "day": 5,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 5,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 5,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 5,
+   "line": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 5,
+   "line": "★ IDENTIFIED: Muscadine Grapes. Muscadine. Thick-skinned wild grapes. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 5,
+   "line": "A runner from Stonebridge, dusty and direct: \"Your foragers are stripping our side of the northeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 6,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 6,
+   "line": "🌿 A man, maybe 40s, with a gap-toothed grin checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take mor"
+  },
+  {
+   "day": 6,
+   "line": "🪵 A man, maybe 40s, with a gap-toothed grin hauls back 6 wood. The pile grows. (21 logs now.)"
+  },
+  {
+   "day": 6,
+   "line": "Elif heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 6,
+   "line": "A man, maybe 40s, with a gap-toothed grin heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 6,
+   "line": "🌿 A man, maybe 40s, with a gap-toothed grin returns from foraging the wilds: +460 kcal to the pantry."
+  },
+  {
+   "day": 6,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 6,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 6,
+   "line": "1 unprocessed haul onto the counter — the clock is ticking."
+  },
+  {
+   "day": 6,
+   "line": "Nobody at the fire knows your haul any better than you do. It'll be your own hands that teach you."
+  },
+  {
+   "day": 6,
+   "line": "★ IDENTIFIED: Burdock. Huge leaves, burrs that stick to everything. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 6,
+   "line": "Village meal: +1157 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 6,
+   "line": "A runner from Emberhold, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 6,
+   "line": "A runner from Thornfield, dusty and direct: \"Your foragers are stripping our side of the east ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+  },
+  {
+   "day": 6,
+   "line": "Gianna corners you by the fire: \"Don't share your haul with A woman, maybe 60s, with calloused knuckles.\" It's not a request."
+  },
+  {
+   "day": 7,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 7,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 7,
+   "line": "🌿 A man, maybe 40s, with a gap-toothed grin checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take m"
+  },
+  {
+   "day": 7,
+   "line": "🌿 Elif returns from foraging the wilds: +581 kcal to the pantry."
+  },
+  {
+   "day": 7,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 22L left."
+  },
+  {
+   "day": 7,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 7,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 7,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 7,
+   "line": "🪵 Patricia hauls back 6 wood. The pile grows. (25 logs now.)"
+  },
+  {
+   "day": 7,
+   "line": "🐗 RAID — 5 raiders (the absence of sound, shaped like wings, something displaced a LOT of water, and it wasn't a log, a crow that watches too long and blinks too little, two knobs on glass-still water, watching, the thi"
+  },
+  {
+   "day": 7,
+   "line": "\"So we made it OFFICIAL! The PARTY SYSTEM! Up to THREE companions! Formal! Tracked! With a UI! The audience can see your party composition now! Very important for the betting markets!\""
+  },
+  {
+   "day": 7,
+   "line": "★ IDENTIFIED: Piquiarana. Tasty fruit, dangerous pit. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 7,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 7,
+   "line": "Patricia came back with 308 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 8,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 8,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 8,
+   "line": "🌿 Xavier checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "line": "🪵 Patricia hauls back 5 wood. The pile grows. (28 logs now.)"
+  },
+  {
+   "day": 8,
+   "line": "◈ CRISIS — THE SIEGE. They came in the night for the pantry — and the village met them at the door with blades and fire and drove them back into the dark. Wealth has a scent. So does defiance."
+  },
+  {
+   "day": 8,
+   "line": "SYSTEM: \"INTRUDER REPELLED. The pantry’s aroma is now classified as a defensive liability. The audience is chanting the defenders’ names. Fan clubs are forming. This is how it starts.\""
+  },
+  {
+   "day": 8,
+   "line": "Brian heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 8,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 8,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 8,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 8,
+   "line": "Kate looks at the pantry, then at the Codex, then at you. \"We’re going to make it.\" Haven will survive — because someone learned the land, and wrote it down. One less thing to fear."
+  },
+  {
+   "day": 8,
+   "line": "🪵 Patricia hauls back 6 wood. The pile grows. (34 logs now.)"
+  },
+  {
+   "day": 8,
+   "line": "★ IDENTIFIED: Crab Apple. Small hard apples on a thorny little tree. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 8,
+   "line": "★ IDENTIFIED: Patauá. Tall palm, greasy-feeling fruit. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 8,
+   "line": "Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 8,
+   "line": "🌿 Piquiarana — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 8,
+   "line": "💡 Piquiarana: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 9,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 9,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 9,
+   "line": "🌿 Gianna checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "line": "🪵 Patricia hauls back 4 wood. The pile grows. (35 logs now.)"
+  },
+  {
+   "day": 9,
+   "line": "🌿 Brian returns from foraging the wilds: +509 kcal to the pantry."
+  },
+  {
+   "day": 9,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 9,
+   "line": "You keep a day's food (270 kcal) — nothing extra for the pantry this time."
+  },
+  {
+   "day": 9,
+   "line": "You sow Burdock: 90 days to first harvest. Harvest removes the crop; sow new seed afterward. Tend daily; garden magic can accelerate growth. (2 units sown.)"
+  },
+  {
+   "day": 9,
+   "line": "🪵 Patricia hauls back 6 wood. The pile grows. (41 logs now.)"
+  },
+  {
+   "day": 9,
+   "line": "★ IDENTIFIED: Death Cap. An olive-green capped mushroom with white gills, a ring on the stem, and a cup at the base. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 9,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 9,
+   "line": "🌿 Sweet Manioc — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 9,
+   "line": "💡 Sweet Manioc: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 10,
+   "line": "Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+  },
+  {
+   "day": 10,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 10,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 10,
+   "line": "🌿 Patricia checks the pantry before heading out — the shelves are full, ~20 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "line": "🪵 Patricia hauls back 5 wood. The pile grows. (44 logs now.)"
+  },
+  {
+   "day": 10,
+   "line": "Gianna heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 10,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 30L left."
+  },
+  {
+   "day": 10,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 10,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 10,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 10,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 10,
+   "line": "🌱 Kate waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 10,
+   "line": "🪵 Gianna hauls back 7 wood. The pile grows. (51 logs now.)"
+  },
+  {
+   "day": 10,
+   "line": "🍲 Patricia cooked for the haven — meals stretched."
+  },
+  {
+   "day": 10,
+   "line": "★ IDENTIFIED: Shepherd's Purse. Tiny heart-shaped pods on wiry stems. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 10,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 10,
+   "line": "💡 Crab Apple: the village and a trader know more than you do. Harvest it a few more times (0/2) and it'll click."
+  },
+  {
+   "day": 10,
+   "line": "🌿 Wild Onion — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 10,
+   "line": "💡 Wild Onion: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 11,
+   "line": "Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+  },
+  {
+   "day": 11,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 11,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 11,
+   "line": "🌱 Kate waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 11,
+   "line": "🌿 Kate checks the pantry before heading out — the shelves are full, ~24 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "line": "🌿 Gianna returns from foraging the wilds: +569 kcal to the pantry."
+  },
+  {
+   "day": 11,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 11,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 11,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 11,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 11,
+   "line": "🪵 Gianna hauls back 5 wood. The pile grows. (54 logs now.)"
+  },
+  {
+   "day": 11,
+   "line": "🍲 Patricia cooked for the haven — meals stretched."
+  },
+  {
+   "day": 11,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 11,
+   "line": "Roman came back with an armful of something edible, unprompted. (+100 kcal pantry)"
+  },
+  {
+   "day": 11,
+   "line": "📓 Codex: Benoit taught Kate Camp Cooking."
+  },
+  {
+   "day": 11,
+   "line": "🌿 Muscadine Grapes — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 11,
+   "line": "💡 Muscadine Grapes: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 12,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 12,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 12,
+   "line": "🌱 Kate waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 12,
+   "line": "🌿 Kate checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "line": "🪤 Gianna is back from the snares: +302 kcal to the pantry."
+  },
+  {
+   "day": 12,
+   "line": "Brian heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 12,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 12,
+   "line": "You keep a day's food (360 kcal) — nothing extra for the pantry this time."
+  },
+  {
+   "day": 12,
+   "line": "You sow Burdock: 90 days to first harvest. Harvest removes the crop; sow new seed afterward. Tend daily; garden magic can accelerate growth. (2 units sown.)"
+  },
+  {
+   "day": 12,
+   "line": "You sow Burdock: 90 days to first harvest. Harvest removes the crop; sow new seed afterward. Tend daily; garden magic can accelerate growth. (2 units sown.)"
+  },
+  {
+   "day": 12,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 12,
+   "line": "🪵 Gianna hauls back 9 wood. The pile grows. (61 logs now.)"
+  },
+  {
+   "day": 12,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 1 batch preserved (~80 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 12,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 12,
+   "line": "📓 Codex: Kate taught Sabina Camp Cooking."
+  },
+  {
+   "day": 12,
+   "line": "📓 Codex: Gianna taught Sam Reading Tracks."
+  },
+  {
+   "day": 13,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 13,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 13,
+   "line": "🌱 Kate waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 13,
+   "line": "🌿 Kate checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "line": "🌿 Brian returns from foraging the wilds: +273 kcal to the pantry."
+  },
+  {
+   "day": 13,
+   "line": "Xavier heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 13,
+   "line": "Lena heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 13,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 40L left."
+  },
+  {
+   "day": 13,
+   "line": "🪵 Patricia hauls back 5 wood. The pile grows. (63 logs now.)"
+  },
+  {
+   "day": 13,
+   "line": "🌿 Xavier returns from foraging the wilds: +291 kcal to the pantry."
+  },
+  {
+   "day": 13,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 13,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 13,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 13,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 13,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 4 batches preserved (~2489 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 13,
+   "line": "Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 13,
+   "line": "📓 Codex: Gianna taught Patricia Reading Tracks."
+  },
+  {
+   "day": 14,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 14,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 14,
+   "line": "🌱 Kate waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 14,
+   "line": "🌿 Kate checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "line": "Patricia heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 14,
+   "line": "Gianna heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 14,
+   "line": "🌿 Lena returns from foraging the wilds: +399 kcal to the pantry."
+  },
+  {
+   "day": 14,
+   "line": "🌿 Patricia returns from foraging the wilds: +349 kcal to the pantry."
+  },
+  {
+   "day": 14,
+   "line": "🌿 Gianna returns from foraging the wilds: +585 kcal to the pantry."
+  },
+  {
+   "day": 14,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 14,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 14,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 14,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 14,
+   "line": "🪵 Gianna hauls back 7 wood. The pile grows. (68 logs now.)"
+  },
+  {
+   "day": 14,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 3 batches preserved (~2691 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 14,
+   "line": "★ IDENTIFIED: Water Chestnut. Spiky grass in the shallows. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 14,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 14,
+   "line": "🌿 Crab Apple — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 14,
+   "line": "💡 Crab Apple: the village and a trader know more than you do. Harvest it a few more times (0/2) and it'll click."
+  },
+  {
+   "day": 15,
+   "line": "The village threw out spoiled stores: Foraged food. Xavier mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)"
+  },
+  {
+   "day": 15,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 15,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 15,
+   "line": "🌱 Kate waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 15,
+   "line": "🌿 Kate checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "line": "Patricia heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 15,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 15,
+   "line": "You keep a day's food (360 kcal) — nothing extra for the pantry this time."
+  },
+  {
+   "day": 15,
+   "line": "You sow Burdock: 90 days to first harvest. Harvest removes the crop; sow new seed afterward. Tend daily; garden magic can accelerate growth. (2 units sown.)"
+  },
+  {
+   "day": 15,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 15,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 5 batches preserved (~1866 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 15,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 16,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 16,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 16,
+   "line": "🌱 Sam waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 16,
+   "line": "🌿 Sam checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "line": "🪵 Sam hauls back 5 wood. The pile grows. (68 logs now.)"
+  },
+  {
+   "day": 16,
+   "line": "🌿 Patricia returns from foraging the wilds: +239 kcal to the pantry."
+  },
+  {
+   "day": 16,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 32L left."
+  },
+  {
+   "day": 16,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 16,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 16,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 16,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 16,
+   "line": "🍲 Patricia cooked for the haven — meals stretched."
+  },
+  {
+   "day": 16,
+   "line": "◈ AUDIENCE TRIAL — SYSTEM: \"The audience wants an encore. A trial, then — smaller this time, but televised.\" Haul 1,000 kcal to the pantry within 3 days. Reward: integration, and a lesson."
+  },
+  {
+   "day": 16,
+   "line": "Investigate and the morning is gone — tracking them costs a full day-part. Bar the door and you learn nothing. Your call."
+  },
+  {
+   "day": 16,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 16,
+   "line": "★ IDENTIFIED: Perilla (Shiso). Perilla. Serrated leaves, square stems, strong smell when crushed. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 16,
+   "line": "Sabina came back with 380 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 16,
+   "line": "📓 Codex: Roman taught Sabina The Forager’s Eye."
+  },
+  {
+   "day": 16,
+   "line": "🌿 Patauá — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 16,
+   "line": "💡 Patauá: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 16,
+   "line": "🌿 Death Cap — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 16,
+   "line": "💡 Death Cap: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 17,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 17,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 17,
+   "line": "🌱 Sam waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 17,
+   "line": "🌿 Sam checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "line": "Patricia heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 17,
+   "line": "Roman heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 17,
+   "line": "🌿 Patricia returns from foraging the wilds: +317 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "line": "🌿 Roman returns from foraging the wilds: +514 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 17,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 17,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 17,
+   "line": "📋 Patricia — 🍲 Cook. They'll report back by next part."
+  },
+  {
+   "day": 17,
+   "line": "🪵 Gianna hauls back 6 wood. The pile grows. (71 logs now.)"
+  },
+  {
+   "day": 17,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 1 batch preserved (~3200 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 17,
+   "line": "🪤 Gianna is back from the snares: +303 kcal to the pantry."
+  },
+  {
+   "day": 17,
+   "line": "◈ AUDIENCE TRIAL — SYSTEM: \"A trial, broadcast live. The audience loves a trial.\" Haul 1,000 kcal to the pantry within 3 days. Reward: integration, and a lesson."
+  },
+  {
+   "day": 17,
+   "line": "📖 LEARNED: The Forager’s Eye (Level 1). You walk slower and see more. Food was always there; now you notice it."
+  },
+  {
+   "day": 17,
+   "line": "◈ TRIAL COMPLETE — the audience applauds, which sounds like static. (+15 integration, gift: a lesson: The Forager’s Eye)"
+  },
+  {
+   "day": 17,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 18,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 18,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 18,
+   "line": "🌿 Patricia checks the pantry before heading out — the shelves are full, ~34 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "line": "Roman heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 18,
+   "line": "Gianna heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 18,
+   "line": "Brian heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 18,
+   "line": "Elif is over the cookpot, blowing on a spoonful before it goes back in."
+  },
+  {
+   "day": 18,
+   "line": "🪵 Patricia hauls back 9 wood. The pile grows. (78 logs now.)"
+  },
+  {
+   "day": 18,
+   "line": "Xavier heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 18,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 18,
+   "line": "You keep a day's food (270 kcal) — nothing extra for the pantry this time."
+  },
+  {
+   "day": 18,
+   "line": "📋 Patricia — 🍲 Cook. Patricia nods eagerly. They'll report back by next part."
+  },
+  {
+   "day": 18,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 5 batches preserved (~2827 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 18,
+   "line": "🌿 Roman returns from foraging the wilds: +482 kcal to the pantry."
+  },
+  {
+   "day": 18,
+   "line": "📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\""
+  },
+  {
+   "day": 18,
+   "line": "📺 SYSTEM: \"We have already cleared your morning. You are welcome. We require 300 kcal of tubers and your full attention. The fans love a cooking segment.\""
+  },
+  {
+   "day": 18,
+   "line": "★ Learned: cooking. You've watched it done twice now — your hands know the motions."
+  },
+  {
+   "day": 18,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 18,
+   "line": "Roman came back with 733 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 19,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 19,
+   "line": "The pantry is in the hall. Your hands are not."
+  },
+  {
+   "day": 19,
+   "line": "🌿 Patricia checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "line": "🌿 Gianna returns from foraging the wilds: +376 kcal to the pantry."
+  },
+  {
+   "day": 19,
+   "line": "🌿 Xavier returns from foraging the wilds: +415 kcal to the pantry."
+  },
+  {
+   "day": 19,
+   "line": "🪵 Patricia hauls back 7 wood. The pile grows. (82 logs now.)"
+  },
+  {
+   "day": 19,
+   "line": "🌿 Brian returns from foraging the wilds: +588 kcal to the pantry."
+  },
+  {
+   "day": 19,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 31L left."
+  },
+  {
+   "day": 19,
+   "line": "Brian heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 19,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 19,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 19,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 19,
+   "line": "📋 Patricia — 🍲 Cook. Patricia nods eagerly. They'll report back by next part."
+  },
+  {
+   "day": 19,
+   "line": "🌱 Sabina waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 19,
+   "line": "🪵 Gianna hauls back 11 wood. The pile grows. (93 logs now.)"
+  },
+  {
+   "day": 19,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 1 batch preserved (~186 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 19,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 19,
+   "line": "★ IDENTIFIED: Kapok Seeds. Kapok. Giant tree, silky pods, dark seeds. Uses unknown — harvest, taste, and learn."
+  },
+  {
+   "day": 19,
+   "line": "📓 Codex: Patricia taught Roman Reading Tracks."
+  },
+  {
+   "day": 19,
+   "line": "🌿 Shepherd's Purse — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 19,
+   "line": "💡 Shepherd's Purse: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 20,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 20,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 20,
+   "line": "You eat Foraged food (dried) (80 kcal)."
+  },
+  {
+   "day": 20,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 20,
+   "line": "You eat Foraged food (dried) (400 kcal)."
+  },
+  {
+   "day": 20,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 20,
+   "line": "You eat Foraged food (dried) (400 kcal)."
+  },
+  {
+   "day": 20,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 20,
+   "line": "You eat Foraged food (dried) (400 kcal)."
+  },
+  {
+   "day": 20,
+   "line": "🌱 Sabina waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 20,
+   "line": "🌿 Sabina checks the pantry before heading out — the shelves are full, ~34 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "line": "🌿 Brian returns from foraging the wilds: +269 kcal to the pantry."
+  },
+  {
+   "day": 20,
+   "line": "Sam heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 20,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 20,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 20,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 20,
+   "line": "📋 Patricia — 🍲 Cook. Patricia nods eagerly. They'll report back by next part."
+  },
+  {
+   "day": 20,
+   "line": "Tribute paid: 5,000 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 20,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 5 batches preserved (~2703 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 20,
+   "line": "🐗 RAID — 5 raiders (Nevermore, Hushpuppy, Hushpuppy, Bulldozer, The Anaconda Empress) hit Haven in the night, drawn by the smell of the pantry! No walls. No warning but the noise."
+  },
+  {
+   "day": 20,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 21,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 21,
+   "line": "◈ TRIAL RECOGNIZED — the System has been watching. You WON a fight. Not survived — won. The audience is still standing. So are you. (Combat track +)"
+  },
+  {
+   "day": 21,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 21,
+   "line": "You eat Foraged food (dried) (301 kcal)."
+  },
+  {
+   "day": 21,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 21,
+   "line": "You eat Foraged food (dried) (332 kcal)."
+  },
+  {
+   "day": 21,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 21,
+   "line": "You eat Foraged food (dried) (400 kcal)."
+  },
+  {
+   "day": 21,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 21,
+   "line": "You eat Foraged food (dried) (70 kcal)."
+  },
+  {
+   "day": 21,
+   "line": "🌱 Sabina waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 21,
+   "line": "🌿 Sabina checks the pantry before heading out — the shelves are full, ~25 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "line": "🪵 Sabina hauls back 4 wood. The pile grows. (94 logs now.)"
+  },
+  {
+   "day": 21,
+   "line": "🍖 FEAST 📺 — Aubrey opens the pantry wide: 12× Foraged food. Patricia, Sabina, Brian, Benoit and 1 more eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just"
+  },
+  {
+   "day": 21,
+   "line": "🌿 Sam returns from foraging the wilds: +546 kcal to the pantry."
+  },
+  {
+   "day": 21,
+   "line": "Tribute paid: 5,100 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 21,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 21,
+   "line": "★ Deeper knowledge: Burdock. Parts: first-year roots (carrot-like). Leaves are too bitter. (Yield +50%). Use unlocked: food: first-year roots only — dig deep, peel, cook like carrots."
+  },
+  {
+   "day": 21,
+   "line": "You keep a day's food (270 kcal) — nothing extra for the pantry this time."
+  },
+  {
+   "day": 21,
+   "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+  },
+  {
+   "day": 21,
+   "line": "You sow Burdock: 90 days to first harvest. Harvest removes the crop; sow new seed afterward. Tend daily; garden magic can accelerate growth. (2 units sown.)"
+  },
+  {
+   "day": 21,
+   "line": "📋 Patricia — 🍲 Cook. Patricia nods eagerly. They'll report back by next part."
+  },
+  {
+   "day": 21,
+   "line": "🍲 Patricia cooked for the haven — meals stretched."
+  },
+  {
+   "day": 21,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 21,
+   "line": "Sabina came back with 417 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 21,
+   "line": "🌿 Water Chestnut — the foragers have handled it 8 days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens."
+  },
+  {
+   "day": 21,
+   "line": "💡 Water Chestnut: the village knows more than you do. Harvest it a few more times (0/3) and it'll click."
+  },
+  {
+   "day": 22,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 22,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 22,
+   "line": "You eat Foraged food (dried) (400 kcal)."
+  },
+  {
+   "day": 22,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 22,
+   "line": "You eat Foraged food (dried) (327 kcal)."
+  },
+  {
+   "day": 22,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 22,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 22,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 22,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 22,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 22,
+   "line": "You eat Foraged food (dried) (218 kcal)."
+  },
+  {
+   "day": 22,
+   "line": "🌱 Sabina waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 22,
+   "line": "🌿 Sabina checks the pantry before heading out — the shelves are full, ~22 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "line": "Gianna heads out to forage. \"Out for a forage. If I'm late, start without me.\""
+  },
+  {
+   "day": 22,
+   "line": "Roman heads out to forage. \"There's food out there. Going to find it.\""
+  },
+  {
+   "day": 22,
+   "line": "Brian heads out to forage. \"Back before dark. Probably.\""
+  },
+  {
+   "day": 22,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 22,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 22,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 22,
+   "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+  },
+  {
+   "day": 22,
+   "line": "📋 Patricia — 🍲 Cook. Patricia nods eagerly. They'll report back by next part."
+  },
+  {
+   "day": 22,
+   "line": "🪵 Gianna hauls back 11 wood. The pile grows. (102 logs now.)"
+  },
+  {
+   "day": 22,
+   "line": "🍲 Patricia cooked for the haven — meals stretched. Patricia worked the smoke racks too — 4 batches preserved (~2531 kcal, keeps a couple of weeks)."
+  },
+  {
+   "day": 22,
+   "line": "🌿 Gianna returns from foraging the wilds: +548 kcal to the pantry."
+  },
+  {
+   "day": 22,
+   "line": "🌿 Brian returns from foraging the wilds: +333 kcal to the pantry."
+  },
+  {
+   "day": 22,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 22,
+   "line": "Benoit came back with 340 kcal of something edible. The pantry breathes."
+  },
+  {
+   "day": 23,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 23,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 23,
+   "line": "You eat Foraged food (dried) (400 kcal)."
+  },
+  {
+   "day": 23,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 23,
+   "line": "You eat Foraged food (dried) (37 kcal)."
+  },
+  {
+   "day": 23,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 23,
+   "line": "You eat Foraged food (dried) (233 kcal)."
+  },
+  {
+   "day": 23,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 23,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 23,
+   "line": "🌿 Patricia checks the pantry before heading out — the shelves are full, ~19 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "line": "🌿 Roman returns from foraging the wilds: +579 kcal to the pantry."
+  },
+  {
+   "day": 23,
+   "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 23L left."
+  },
+  {
+   "day": 23,
+   "line": "🪵 Patricia hauls back 7 wood. The pile grows. (106 logs now.)"
+  },
+  {
+   "day": 23,
+   "line": "Brian heads out to forage. \"Bringing dinner back. One way or another.\""
+  },
+  {
+   "day": 23,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 23,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 23,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 23,
+   "line": "📋 Patricia — 🍲 Cook. Patricia nods eagerly. They'll report back by next part."
+  },
+  {
+   "day": 23,
+   "line": "🌱 Sam waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 23,
+   "line": "🪵 Gianna hauls back 6 wood. The pile grows. (112 logs now.)"
+  },
+  {
+   "day": 23,
+   "line": "🍲 Patricia cooked for the haven — meals stretched."
+  },
+  {
+   "day": 23,
+   "line": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+  },
+  {
+   "day": 23,
+   "line": "💡 Piquiarana: the village knows more than you do. Harvest it a few more times (0/2) and it'll click."
+  },
+  {
+   "day": 24,
+   "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "Took Foraged food (dried)."
+  },
+  {
+   "day": 24,
+   "line": "You eat Foraged food (dried) (160 kcal)."
+  },
+  {
+   "day": 24,
+   "line": "🌱 Sam waters and weeds the beds before taking up other work. The harvest can wait."
+  },
+  {
+   "day": 24,
+   "line": "🌿 Sam checks the pantry before heading out — the shelves are full, ~22 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 24,
+   "line": "Patricia heads out to forage. \"Gone looking. Don't wait up.\""
+  },
+  {
+   "day": 24,
+   "line": "🌿 Brian returns from foraging the wilds: +525 kcal to the pantry."
+  },
+  {
+   "day": 24,
+   "line": "🥩 Gianna is back with strange meat: unknown flesh in the pantry. \"Test it cautiously before anyone eats.\""
+  },
+  {
+   "day": 24,
+   "line": "🥩 Gianna is back empty-handed. \"Nothing worth hauling out there.\""
+  },
+  {
+   "day": 24,
+   "line": "🥩 Roman is back empty-handed. \"Nothing worth hauling out there.\""
+  },
+  {
+   "day": 24,
+   "line": "This patch is worked out — step to another green patch and forage again."
+  },
+  {
+   "day": 24,
+   "line": "You keep a day's food (720 kcal) — nothing extra for the pantry this time."
+  }
+ ],
+ "detHash": "4214e213185af85cc73625950483570776675a2627ead6a06ff49edcca5a64e1",
+ "ms": 2301
+}
