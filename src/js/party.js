@@ -691,7 +691,16 @@
         witnesses: fighters.filter(x => x.kind === 'villager' && x.alive).map(x => x.villagerId),
         betrayerDead: false, duel: duel,
       };
-      this.tbBeginTurn();
+      this.tbfight.turnIdx = -1;
+      // OPENING TURNS (same as startCombat): if the betrayer is faster than
+      // you, they open — run AI turns until it's your turn. Without this the
+      // fight soft-locks on "Not your turn" forever (r36: same stall class as
+      // the uprising, which froze the sim's day clock).
+      this.tbBeginTurn(); // no-op until a turn lands; tbAdvance calls it on arrival
+      if (!this.tbIsPlayerTurn()) {
+        if (typeof window !== 'undefined' && typeof setTimeout !== 'undefined') this.tbAdvanceAsync();
+        else this.tbAdvance();
+      }
       return this.tbfight;
     },
 

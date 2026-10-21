@@ -892,7 +892,17 @@
         reason: reason,
       };
       try { this.villageEvent('uprising'); } catch (e) {}
-      this.tbBeginTurn();
+      this.tbfight.turnIdx = -1;
+      // OPENING TURNS (same as startCombat): if a hostile is faster than you,
+      // they open — run AI turns until it's your turn. Without this the fight
+      // soft-locks on "Not your turn" forever (r36: uprisings froze the sim's
+      // day clock for 8-9 loop-days; on the phone the player would sit on the
+      // "FIGHT, FLEE, or TALK?" prompt with no turn to take).
+      this.tbBeginTurn(); // no-op until a turn lands; tbAdvance calls it on arrival
+      if (!this.tbIsPlayerTurn()) {
+        if (typeof window !== 'undefined' && typeof setTimeout !== 'undefined') this.tbAdvanceAsync();
+        else this.tbAdvance();
+      }
       return this.tbfight;
     },
     uprisingAftermath() {
