@@ -54,9 +54,41 @@ const TO = require(path.join(REPO, 'scripts', 'titanoutcome-instrument-20261021'
 const TITAN_JS = path.join(REPO, 'src', 'js', 'titans.js');
 const TITAN_JS_FIXED = '/tmp/titanoutcome-titans-fixed.js';
 
+// baseRef(): the pre-fix base for src/js/titans.js. The fix may be committed
+// one or more commits deep on this branch (worktree HEAD and its parents can
+// all carry it — the normal post-commit/landing state) or uncommitted (HEAD
+// is the pre-fix base). Walk back through commits that touched
+// src/js/titans.js and take the newest blob WITHOUT the record marker
+// (titanRecordOutcome). Never invents: the base always comes from a real
+// committed blob.
+let BASE_REF = null;
+function baseRef() {
+  if (!BASE_REF) {
+    const show = (ref) => {
+      try {
+        return execSync(`git show ${ref}:src/js/titans.js`,
+          { cwd: REPO, maxBuffer: 16 * 1024 * 1024 }).toString('utf8');
+      } catch (e) { return null; }
+    };
+    let found = null;
+    try {
+      const revs = execSync('git rev-list HEAD -- src/js/titans.js',
+        { cwd: REPO, maxBuffer: 1024 * 1024 }).toString('utf8')
+        .split('\n').map(s => s.trim()).filter(Boolean);
+      for (const rev of revs) {
+        const src = show(rev);
+        if (src && !/titanRecordOutcome/.test(src)) { found = rev; break; }
+      }
+    } catch (e) { found = null; }
+    if (!found) throw new Error('baseRef: no pre-fix src/js/titans.js found in history');
+    BASE_REF = found;
+  }
+  return BASE_REF;
+}
+
 function saveFixed() { fs.copyFileSync(TITAN_JS, TITAN_JS_FIXED); }
 function restoreFixed() { fs.copyFileSync(TITAN_JS_FIXED, TITAN_JS); }
-function restoreBase() { execSync(`git show HEAD:src/js/titans.js > "${TITAN_JS}"`, { cwd: REPO }); }
+function restoreBase() { execSync(`git show ${baseRef()}:src/js/titans.js > "${TITAN_JS}"`, { cwd: REPO }); }
 
 async function newGame(seed) {
   const { Game } = await loadGame({ seed, mode: 'titanoutcome-test', fullTelemetry: false });
@@ -157,11 +189,28 @@ function outcomesOf(Game) {
 
   console.log('== (b) STATIC AUDIT ==');
   {
-    const diff = execSync('git diff --name-only', { cwd: REPO }).toString().split('\n').filter(Boolean);
-    const srcChanged = diff.filter(f => f.startsWith('src/'));
+    // The arm's game-code footprint is exactly src/js/titans.js — whether the
+    // fix is committed (find the record-introducing commit via pickaxe) or
+    // uncommitted (worktree diff vs HEAD). Sibling master changes must not
+    // pollute the check, so never diff against an old base ref here.
+    const armSrcFiles = new Set();
+    try {
+      const intro = execSync(`git log --format=%H -S 'titanRecordOutcome' -- src/js/titans.js`,
+        { cwd: REPO, maxBuffer: 1024 * 1024 }).toString('utf8')
+        .split('\n').map(s => s.trim()).filter(Boolean)[0];
+      if (intro) {
+        execSync(`git show --name-only --format= ${intro}`, { cwd: REPO }).toString()
+          .split('\n').map(s => s.trim()).filter(f => f.startsWith('src/'))
+          .forEach(f => armSrcFiles.add(f));
+      }
+    } catch (e) { /* no introducing commit yet — fix uncommitted */ }
+    execSync('git diff --name-only HEAD', { cwd: REPO }).toString()
+      .split('\n').map(s => s.trim()).filter(f => f.startsWith('src/'))
+      .forEach(f => armSrcFiles.add(f));
+    const srcChanged = [...armSrcFiles].sort();
     check('only src/js/titans.js changed under src/', srcChanged.length === 1 && srcChanged[0] === 'src/js/titans.js',
       JSON.stringify(srcChanged));
-    const newSrc = execSync('git diff -U0 src/js/titans.js', { cwd: REPO }).toString()
+    const newSrc = execSync(`git diff -U0 ${baseRef()} -- src/js/titans.js`, { cwd: REPO }).toString()
       .split('\n').filter(l => l.startsWith('+') && !l.startsWith('+++')).join('\n');
     check('record code draws no RNG', !/Math\.random\s*\(|[^a-zA-Z]R\(/.test(newSrc.replace(/titanRecordOutcome|titanResolveOutcome|titanOutcomeLog|titanOutcomeDay/g, '')),
       'RNG call in added lines');
@@ -239,10 +288,12 @@ function outcomesOf(Game) {
     check('re-run byte-identical', b1 === b2, `len ${b1.length} vs ${b2.length}`);
   }
 
-  // tree must hold the fix when we leave
+  // tree must hold the fix when we leave (the fix is committed, so check the
+  // worktree file content for the record marker, not `git diff --stat`)
   restoreFixed();
-  const tail = execSync('git diff --stat', { cwd: REPO }).toString();
-  check('tree holds the fix (titans.js still patched)', /titans\.js/.test(tail), tail.split('\n').slice(0, 3).join(' '));
+  const treeSrc = fs.readFileSync(TITAN_JS, 'utf8');
+  check('tree holds the fix (titans.js still patched)', /titanRecordOutcome/.test(treeSrc),
+    treeSrc.length + ' bytes');
 
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
