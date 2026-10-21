@@ -88,6 +88,55 @@
     return st.omens[titanId];
   }
 
+  // ---------- engagement-outcome record (2026-10-21, backlog #784) ----------
+  // One structured record per titan muster engagement, appended to
+  // state.titans.outcomes. Outcomes: 'refused' (hard gate, no fight),
+  // 'fought' (a coalition fight started — resolved in place to 'slain' /
+  // 'fled' at tbEnd), 'stood-down' (the muster broke before the fight —
+  // the census's evaded class). Pure log writes: no game logic reads
+  // this array, no RNG is drawn, no behavior changes. The wave-4/titan
+  // census and the table audit join to it instead of guessing from
+  // omens/musters (which cannot distinguish "never mustered" from "the
+  // coalition broke and ran").
+  function titanOutcomeDay() {
+    try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; }
+  }
+  function titanOutcomeLog() {
+    var st = titanState();
+    st.outcomes = st.outcomes || [];
+    return st.outcomes;
+  }
+  function titanRecordOutcome(titanId, outcome, detail) {
+    try {
+      titanOutcomeLog().push({
+        titan: titanId,
+        day: titanOutcomeDay(),
+        outcome: outcome, // 'refused' | 'fought' | 'stood-down'
+        detail: detail || null,
+      });
+    } catch (e) {}
+  }
+  function titanResolveOutcome(titanId, outcome, result) {
+    // Terminal for the most recent open 'fought' record of this titan.
+    // Resolved in place so the census has exactly one record per
+    // encounter; a terminal with no open 'fought' record (e.g. a dissolve
+    // path that never called tbEnd) is written standalone so it never
+    // inflates 'unresolved'.
+    try {
+      var recs = titanOutcomeLog();
+      for (var i = recs.length - 1; i >= 0; i--) {
+        var r = recs[i];
+        if (r && r.titan === titanId && r.outcome === 'fought') {
+          r.outcome = outcome; // 'slain' | 'fled'
+          r.endDay = titanOutcomeDay();
+          r.result = (result === undefined || result === null) ? null : String(result);
+          return;
+        }
+      }
+      recs.push({ titan: titanId, day: titanOutcomeDay(), outcome: outcome, result: (result === undefined || result === null) ? null : String(result), orphan: true });
+    } catch (e) {}
+  }
+
   // ---------- dawn tick: omens, escalation, upkeep, the turn ----------
 
   function titanDawnTick() {
@@ -655,6 +704,7 @@
     Game.say(line);
     try { if (Game.recordMoment) Game.recordMoment('The muster against ' + def.title + ' stood down \u2014 the blades went home.'); } catch (e) { console.warn('[titan] stand down', e); }
     try { if (Game.ledgerAdd) Game.ledgerAdd('titan', 'standdown:' + titanId); } catch (e) { console.warn('[titan] stand down', e); }
+    titanRecordOutcome(titanId, 'stood-down', { haven: havenN, allied: answered });
     try { if (Game.save) Game.save(); } catch (e) { console.warn('[titan] stand down', e); }
     return true;
   }
@@ -895,6 +945,7 @@
         try { gateAns = (typeof Game.titanEntryGate === 'function') ? Game.titanEntryGate(titanId) : null; } catch (e) {}
         if (gateAns && !gateAns.ok) {
           Game.say(gateAns.reason);
+          titanRecordOutcome(titanId, 'refused', { gate: 'campaign', reason: gateAns.reason });
           return null;
         }
         // HARD GATE: no solo titans. Not a likely death — a refusal.
@@ -903,6 +954,7 @@
           var have = 0;
           try { have = (titanState().musters[titanId] || { allies: [] }).allies.length; } catch (e) {}
           Game.say('⛔ ' + def.title + ' does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster ' + def.minAllies + ' allied blades (you have ' + have + '). This is not courage. This is arithmetic.');
+          titanRecordOutcome(titanId, 'refused', { gate: 'muster', have: have, need: def.minAllies });
           return null;
         }
         // mark the fight so tbEnd can resolve it
@@ -912,6 +964,11 @@
       // inject allied fighters after the fight is built
       if (titanId && r !== null) {
         try { titanInjectAllies(titanId); } catch (e) {}
+        // the engagement began: one 'fought' record per fight, resolved in
+        // place to 'slain'/'fled' at tbEnd (titanResolveFight)
+        var blades = 0;
+        try { blades = titanUniqueAllies(titanState().musters[titanId] || { allies: [] }).length; } catch (e) {}
+        titanRecordOutcome(titanId, 'fought', { blades: blades });
       }
       return r;
     };
@@ -1113,11 +1170,13 @@
     titanReleaseCommitted(snap.titan);
     if (snap.result === 'won') {
       titanVictory(snap.titan, def);
+      titanResolveOutcome(snap.titan, 'slain', snap.result);
     } else {
       // defeat: the titan remains, the muster breaks
       Game.say('💀 ' + def.title + ' remains. The coalition breaks and runs. The muster is spent — sound the call again, if anyone still answers.');
       st.musters[snap.titan] = null;
       try { if (Game.recordMoment) Game.recordMoment(def.title + ' broke the coalition.'); } catch (e) {}
+      titanResolveOutcome(snap.titan, 'fled', snap.result);
     }
   }
 
@@ -1217,6 +1276,9 @@
     titanCommitOwn: titanCommitOwn,
     titanVolunteers: titanVolunteers,
     titanReleaseCommitted: titanReleaseCommitted,
+    titanRecordOutcome: titanRecordOutcome,
+    titanResolveOutcome: titanResolveOutcome,
+    titanOutcomeLog: titanOutcomeLog,
   };
 
   // wraps must apply after game.js defines the originals
