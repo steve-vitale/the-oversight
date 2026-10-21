@@ -1,5 +1,34 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Partial gifts playable; next earned garden-build coverage (2026-10-21)
+
+Pack now chooses a fitting whole-unit donation, retaining meals from a large
+stack. Core21 checks cover calorie conservation, identity, provenance, capacity, invalid
+amounts and take-back rewards; controller15 and existing garden23 checks pass.
+Real390×736/844 touch journeys prove cancel, selected transfer, immediate bytes,
+Continue, full/stale inventory/capacity and quota failures. Both16-stage frame
+journeys and actual previous-worker update/cold offline Continue pass;173 cached
+text inputs match. These are prepared mobile emulation, not physical-device proof.
+
+The64-case Game-only comparison preserves all23 and every Game hash. A separate
+same-Game controller comparison is review_required: wins16/7/9/8 unchanged;
+caregiver deaths/run1.375→1.5. Eighteen independent changed-case replays match
+hash/row/all23; both82-job long audits pass eight real controls each. Ten partial
+transfers occur in seven campaigns, with matching movement/credit receipts.
+Known inherited pantry issue: the0.01kg per-piece minimum inflates tiny
+high-energy food weight on storage. Old/new fixtures reproduce it; no general
+mass-conservation claim. Keep the physical weight audit separate from prices.
+No numerical crop/ability price changed. See partial-donation-audit-r1.
+
+Next bounded milestone: measure earned Gardener opportunities and upper-tier
+garden investment. Separate offered/selected/held/activated abilities, actual
+food costs, mature harvests, useful meals and capacity/affordability/storage
+opportunity. Teach deliberate garden choices only from real visible offers;
+never grant a build to call it natural. Play selected long cohorts to actual
+endings and retain all23 with the shared current controller. Muse retains crop/
+power calibration; do not price-tune from output volume or restore wins to a
+target. Keep the rolling public-release goal active. Older entries follow.
+
 ## Garden transfer receipts; next public partial donation (2026-10-21)
 
 The current controller counts real food removal plus matching gift credit,

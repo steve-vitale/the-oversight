@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('fs'),K=require('../../scripts/godpath/lib');
+(async()=>{const store=new Map();global.localStorage={getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k),key:i=>[...store.keys()][i]??null,get length(){return store.size;}};
+ const G=await K.load({seed:7002});K.newRun(G);G.chooseKnack(G.liveKnackChoices()[0].id);G.enterBuilding();
+ const s=G.state.scholar,v=G.state.village;s.day=85;s.dayTicks=0;s.actionClock=0;G.dayPart=0;s.health=100;s.energy=100;s.hydration=100;s.kcal=2400;v.assignments={};v.gives={[G.villagerId]:0};
+ G.state.codex.plants.dandelion={level:3,prepKnown:true};s.inventory=[{name:'Cooked Dandelion',units:20,kcalEach:500,kg:.1,foodState:'cooked',safe:true,edible:true,spoilDay:100,plantId:'dandelion',gardenShares:{ordinary:1},harvestShares:{[G.villagerId]:1}}];
+ v.pantry=[{name:'Stored meals',units:(G.pantryCapKcal()-1500)/500,kcalEach:500,kg:.1,foodState:'cooked',safe:true,edible:true,spoilDay:100}];
+ if(G.save()!==true)throw Error('Prepared save failed');
+ fs.writeFileSync('evidence/2026-10-21/partial-donation-phone-fixture-r2.json',JSON.stringify({scope:'Declared prepared hall scene with a20-unit cooked crop stack and1500 kcal pantry room. No donation or gift credit supplied. Native Pack actions perform the transfer.',setup:{key:G.state.runKey},storage:Object.fromEntries(store)},null,2)+'\n',{flag:'wx'});
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

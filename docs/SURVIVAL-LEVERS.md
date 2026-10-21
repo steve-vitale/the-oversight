@@ -1,5 +1,29 @@
 # Survival levers and investigation register
 
+## Partial food transfer granularity (2026-10-21)
+
+Player decision lever: whole units from a large pack stack can now be donated
+up to current pantry room while retaining the remainder. Gift rewards use only
+transferred calories under existing per-gift rules; taking gifts back still
+revokes owed rewards. No crop timing/yield, capacity, food/ability price or time
+cost changed. The UI saves completed gifts and explains failed persistence.
+
+Game-only64-case screen on the old controller preserves all23 and exact Game
+hashes. Separate same-Game controller screen keeps wins16/7/9/8; caregiver
+deaths/run1.375→1.5 is a regression_watch, not an automatic verdict. Nine cases
+change some metric;18 independent root/case replays preserve the reported hash,
+row and all23. Both82-job long audits have eight true observer controls. All ten
+extended cases per arm end through309 without watchdog recovery.
+
+Actual gifts23→15, gift kcal46,465→49,065, with ten partial transfers in seven
+campaigns and no receipt disagreement. Crop intake1,715,632→1,730,323 and
+nourishment1,671,820→1,686,773; measured spoilage7,485,137→7,392,297. These
+are exploratory coupled policy effects, not independent small-effect evidence,
+net profit or broad playstyle clearance. Retain the caregiver watch and the
+unallocated residual. Decision: ship the real player portion action and shared
+controller; measure earned Gardener and upper-tier opportunity before Muse's
+numerical calibration. Do not optimize these numbers to a win-rate target.
+
 ## Donation controller methodology (2026-10-21)
 
 No Game lever changes. The controller's contribution timing now follows actual

@@ -1,0 +1,23 @@
+  ok   partial donation preserves the actual remaining row and units
+  ok   the real pantry receives exactly the selected calories
+  ok   independent receipts recognize a transfer without removing the whole row
+  ok   the retained food keeps all non-quantity metadata
+  ok   every delivered piece preserves food state, plant and origin shares
+  ok   delivered weight matches the selected food
+  ok   giving food retains its existing free action cost
+  ok   the shared options expose actual fitting whole units
+  ok   over-capacity request leaves food and credit unchanged
+  ok   an explicit fitting part reaches capacity without losing the rest
+  ok   invalid, fractional and excessive quantities never transfer or earn credit
+  ok   an explicit empty stack cannot mint food
+  ok   unmeasurable legacy calories are not rounded into a gift
+  ok   unknown food remains blocked with no gift credit
+  ok   partial quantities cannot bypass a bond
+  ok   a refused partial rotten-food request never discards the unselected stack
+  ok   partial transfers cannot reach the hall remotely
+  ok   omitted quantity retains whole-stack donation behavior
+  ok   selecting the complete stack removes exactly that row
+  ok   taking the partial gift back revokes its owed trust/XP
+  ok   partial and whole receipts have no physical/credit discrepancies
+
+Partial pantry donation: 21 passed, 0 failed, 0 todo (phase 0)

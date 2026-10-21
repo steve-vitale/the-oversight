@@ -1,5 +1,17 @@
 # Simulating The Oversight — how to measure a change
 
+Partial gift observation (2026-10-21): donation-usage version2 measures the
+actual before/after unit difference plus matching gift credit; removal of the
+entire row is no longer necessary. requestedUnits, movedUnits and remainingUnits
+are auxiliary receipt fields. Preserve old version1 reports; recollect both arms
+with one current tool before comparing transfer counts. Real garden-longplay
+controls include native donation counters and preserve Game/row/all23/RNG.
+The partial-donation-review-r1 recipe separates a Game-only comparison from a
+same-Game controller revision. The core API defaults to whole-stack behavior;
+the shared controller uses explicit quantities when pantryDonationOptions is
+available and otherwise retains the older whole-stack route. Neither auxiliary
+version changes the balanced23 metric IDs or their thresholds.
+
 Donation receipt maintenance (2026-10-21): garden-longplay-audit uses
 scripts/lib/donation-usage.js to observe direct donateToPantry calls. It records
 actual removed rows with matching gift credit, refusals and discards without

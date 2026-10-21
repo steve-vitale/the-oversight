@@ -1,0 +1,725 @@
+{
+  "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /no longer fits/i. Input:\n\n'🎒 Pack (20 items)\\n' +\n  '✕\\n' +\n  '\\n' +\n  '💧 Water: 2L clean (2kg)\\n' +\n  'Drink\\n' +\n  'Pour out 1L\\n' +\n  '\\n' +\n  '🎒 Carried (1 item)\\n' +\n  '\\n' +\n  'Dandelion x20 (10000 kcal · 2.0 kg) cooked\\n' +\n  'Eat\\n' +\n  'Donate\\n' +\n  'Leave it\\n' +\n  '\\n' +\n  '🍳 Prep stash — the counter\\n' +\n  '\\n' +\n  'Unprocessed hauls, rotting-first. Pick your battles.\\n' +\n  '\\n' +\n  \"Counter's clear.\\n\" +\n  '\\n' +\n  'Stage unprocessed\\n' +\n  'Put away finished food\\n' +\n  '\\n' +\n  'Craft\\n' +\n  '\\n' +\n  'Woven cloth — 3 fiber\\n' +\n  'Make (85%)\\n' +\n  '\\n' +\n  'Water Filter — 1 cloth, 1 charcoal\\n' +\n  'Make (85%)\\n' +\n  '\\n' +\n  'Stone knife — 1 stone, 1 vine\\n' +\n  'Make (85%)'\n\n    at C:\\Users\\Steve\\.codex\\worktrees\\conversation-structure-current\\oversight\\evidence\\2026-10-21\\partial-donation-phone-r4.cjs:27:347",
+  "trace": [
+    {
+      "label": "native partial donation picker",
+      "state": {
+        "pack": [
+          {
+            "name": "Cooked Dandelion",
+            "units": 20,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "pantry": [
+          {
+            "name": "Stored meals",
+            "units": 237,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100
+          }
+        ],
+        "gifts": {
+          "gen_3ebrc52": 0
+        },
+        "day": 85,
+        "ticks": 0,
+        "kcal": 2400,
+        "bearer": "gen_3ebrc52",
+        "saved": {
+          "pack": [
+            {
+              "name": "Cooked Dandelion",
+              "units": 20,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "pantry": [
+            {
+              "name": "Stored meals",
+              "units": 237,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100
+            }
+          ],
+          "gifts": {
+            "gen_3ebrc52": 0
+          }
+        },
+        "touches": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "layout": {
+        "width": 390,
+        "height": 736,
+        "outer": [
+          0,
+          0,
+          736
+        ],
+        "text": "🎒 Pack (20 items)\n✕\nDonate Dandelion\n\n3 of 20 units fit in the pantry.\n\nUnits to donate\n\n500 kcal to the village. 19 units stay in your pack.\n\nFit pantry\nDonate\nCancel\n\nNo time cost.",
+        "picker": {
+          "x": 21,
+          "y": 155,
+          "width": 348,
+          "height": 241,
+          "bottom": 396
+        }
+      },
+      "screenshot": "evidence/2026-10-21/partial-donation-phone-736-stage-1-r4.png"
+    },
+    {
+      "label": "cancel leaves food and clock unchanged",
+      "state": {
+        "pack": [
+          {
+            "name": "Cooked Dandelion",
+            "units": 20,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "pantry": [
+          {
+            "name": "Stored meals",
+            "units": 237,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100
+          }
+        ],
+        "gifts": {
+          "gen_3ebrc52": 0
+        },
+        "day": 85,
+        "ticks": 0,
+        "kcal": 2400,
+        "bearer": "gen_3ebrc52",
+        "saved": {
+          "pack": [
+            {
+              "name": "Cooked Dandelion",
+              "units": 20,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "pantry": [
+            {
+              "name": "Stored meals",
+              "units": 237,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100
+            }
+          ],
+          "gifts": {
+            "gen_3ebrc52": 0
+          }
+        },
+        "touches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "layout": {
+        "width": 390,
+        "height": 736,
+        "outer": [
+          0,
+          0,
+          736
+        ],
+        "text": "🎒 Pack (20 items)\n✕\n\n💧 Water: 2L clean (2kg)\nDrink\nPour out 1L\n\n🎒 Carried (1 item)\n\nDandelion x20 (10000 kcal · 2.0 kg) cooked\nEat\nDonate\nLeave it\n\n🍳 Prep stash — the counter\n\nUnprocessed hauls, rotting-first. Pick your battles.\n\nCounter's clear.\n\nStage unprocessed\nPut away finished food\n\nCraft\n\nWoven cloth — 3 fiber\nMake (85%)\n\nWater Filter — 1 cloth, 1 charcoal\nMake (85%)\n\nStone knife — 1 stone, 1 vine\nMake (85%)",
+        "picker": null
+      },
+      "screenshot": "evidence/2026-10-21/partial-donation-phone-736-stage-2-r4.png"
+    },
+    {
+      "label": "two units preview",
+      "state": {
+        "pack": [
+          {
+            "name": "Cooked Dandelion",
+            "units": 20,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "pantry": [
+          {
+            "name": "Stored meals",
+            "units": 237,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100
+          }
+        ],
+        "gifts": {
+          "gen_3ebrc52": 0
+        },
+        "day": 85,
+        "ticks": 0,
+        "kcal": 2400,
+        "bearer": "gen_3ebrc52",
+        "saved": {
+          "pack": [
+            {
+              "name": "Cooked Dandelion",
+              "units": 20,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "pantry": [
+            {
+              "name": "Stored meals",
+              "units": 237,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100
+            }
+          ],
+          "gifts": {
+            "gen_3ebrc52": 0
+          }
+        },
+        "touches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "layout": {
+        "width": 390,
+        "height": 736,
+        "outer": [
+          0,
+          0,
+          736
+        ],
+        "text": "🎒 Pack (20 items)\n✕\nDonate Dandelion\n\n3 of 20 units fit in the pantry.\n\nUnits to donate\n\n1000 kcal to the village. 18 units stay in your pack.\n\nFit pantry\nDonate\nCancel\n\nNo time cost.",
+        "picker": {
+          "x": 21,
+          "y": 155,
+          "width": 348,
+          "height": 241,
+          "bottom": 396
+        }
+      },
+      "screenshot": "evidence/2026-10-21/partial-donation-phone-736-stage-3-r4.png"
+    },
+    {
+      "label": "two units transferred and committed before unload",
+      "state": {
+        "pack": [
+          {
+            "name": "Cooked Dandelion",
+            "units": 18,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "pantry": [
+          {
+            "name": "Stored meals",
+            "units": 237,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100
+          },
+          {
+            "name": "Cooked Dandelion",
+            "units": 2,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "gifts": {
+          "gen_3ebrc52": 1000
+        },
+        "day": 85,
+        "ticks": 0,
+        "kcal": 2400,
+        "bearer": "gen_3ebrc52",
+        "saved": {
+          "pack": [
+            {
+              "name": "Cooked Dandelion",
+              "units": 18,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "pantry": [
+            {
+              "name": "Stored meals",
+              "units": 237,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100
+            },
+            {
+              "name": "Cooked Dandelion",
+              "units": 2,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "gifts": {
+            "gen_3ebrc52": 1000
+          }
+        },
+        "touches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "layout": {
+        "width": 390,
+        "height": 736,
+        "outer": [
+          0,
+          0,
+          736
+        ],
+        "text": "🎒 Pack (18 items)\n✕\n\n💧 Water: 2L clean (2kg)\nDrink\nPour out 1L\n\n🎒 Carried (1 item)\n\nDandelion x18 (9000 kcal · 1.8 kg) cooked\nEat\nDonate\nLeave it\n\n🍳 Prep stash — the counter\n\nUnprocessed hauls, rotting-first. Pick your battles.\n\nCounter's clear.\n\nStage unprocessed\nPut away finished food\n\nCraft\n\nWoven cloth — 3 fiber\nMake (85%)\n\nWater Filter — 1 cloth, 1 charcoal\nMake (85%)\n\nStone knife — 1 stone, 1 vine\nMake (85%)",
+        "picker": null
+      },
+      "screenshot": "evidence/2026-10-21/partial-donation-phone-736-stage-4-r4.png"
+    },
+    {
+      "label": "native Continue retains partial gift",
+      "state": {
+        "pack": [
+          {
+            "name": "Cooked Dandelion",
+            "units": 18,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "pantry": [
+          {
+            "name": "Stored meals",
+            "units": 237,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100
+          },
+          {
+            "name": "Cooked Dandelion",
+            "units": 2,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "gifts": {
+          "gen_3ebrc52": 1000
+        },
+        "day": 85,
+        "ticks": 0,
+        "kcal": 2400,
+        "bearer": "gen_3ebrc52",
+        "saved": {
+          "pack": [
+            {
+              "name": "Cooked Dandelion",
+              "units": 18,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "pantry": [
+            {
+              "name": "Stored meals",
+              "units": 237,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100
+            },
+            {
+              "name": "Cooked Dandelion",
+              "units": 2,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "gifts": {
+            "gen_3ebrc52": 1000
+          }
+        },
+        "touches": [
+          true
+        ]
+      },
+      "layout": {
+        "width": 390,
+        "height": 736,
+        "outer": [
+          0,
+          0,
+          736
+        ],
+        "text": "",
+        "picker": null
+      },
+      "screenshot": "evidence/2026-10-21/partial-donation-phone-736-stage-5-r4.png"
+    },
+    {
+      "label": "full pantry is explained without consuming food",
+      "state": {
+        "pack": [
+          {
+            "name": "Cooked Dandelion",
+            "units": 17,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "pantry": [
+          {
+            "name": "Stored meals",
+            "units": 237,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100
+          },
+          {
+            "name": "Cooked Dandelion",
+            "units": 3,
+            "kcalEach": 500,
+            "kg": 0.1,
+            "foodState": "cooked",
+            "safe": true,
+            "edible": true,
+            "spoilDay": 100,
+            "plantId": "dandelion",
+            "gardenShares": {
+              "ordinary": 1
+            },
+            "harvestShares": {
+              "gen_3ebrc52": 1
+            }
+          }
+        ],
+        "gifts": {
+          "gen_3ebrc52": 1500
+        },
+        "day": 85,
+        "ticks": 0,
+        "kcal": 2400,
+        "bearer": "gen_3ebrc52",
+        "saved": {
+          "pack": [
+            {
+              "name": "Cooked Dandelion",
+              "units": 17,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "pantry": [
+            {
+              "name": "Stored meals",
+              "units": 237,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100
+            },
+            {
+              "name": "Cooked Dandelion",
+              "units": 3,
+              "kcalEach": 500,
+              "kg": 0.1,
+              "foodState": "cooked",
+              "safe": true,
+              "edible": true,
+              "spoilDay": 100,
+              "plantId": "dandelion",
+              "gardenShares": {
+                "ordinary": 1
+              },
+              "harvestShares": {
+                "gen_3ebrc52": 1
+              }
+            }
+          ],
+          "gifts": {
+            "gen_3ebrc52": 1500
+          }
+        },
+        "touches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "layout": {
+        "width": 390,
+        "height": 736,
+        "outer": [
+          0,
+          0,
+          736
+        ],
+        "text": "🎒 Pack (17 items)\n✕\nDonate Dandelion\n\nThe pantry has no room for a unit of this food. Expand storage or use what is already there.\n\nUnits to donate\n\nChoose a whole amount that fits.\n\nFit pantry\nDonate\nCancel\n\nNo time cost.",
+        "picker": {
+          "x": 21,
+          "y": 155,
+          "width": 348,
+          "height": 260.5,
+          "bottom": 415.5
+        }
+      },
+      "screenshot": "evidence/2026-10-21/partial-donation-phone-736-stage-6-r4.png"
+    }
+  ],
+  "text": "Haven\n☀️\n🌙\nday 85 · dawn\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n🛏️\n🛏️\n⬛\n⬛\n⬛\n⬛\nLeah\n⬛\n⬛\n🔥\n⬛\n⬛\n⬛\n⬛\n⬛\n🚪\n🚪\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n⬛\n🎒 Pack (20 items)\n✕\n\n💧 Water: 2L clean (2kg)\nDrink\nPour out 1L\n\n🎒 Carried (1 item)\n\nDandelion x20 (10000 kcal · 2.0 kg) cooked\nEat\nDonate\nLeave it\n\n🍳 Prep stash — the counter\n\nUnprocessed hauls, rotting-first. Pick your battles.\n\nCounter's clear.\n\nStage unprocessed\nPut away finished food\n\nCraft\n\nWoven cloth — 3 fiber\nMake (85%)\n\nWater Filter — 1 cloth, 1 charcoal\nMake (85%)\n\nStone knife — 1 stone, 1 vine\nMake (85%)\n\n↖\n↑\n↗\n←\n■\n→\n↙\n↓\n↘\nTalk ↖\nWarm hands ↙\nActions…\nThat amount no longer fits in the pantry. Your food stays in your pack.\n❤ 100\n🍽 2400/2400 kcal\n💧 100% · 2L clean\n🎒 4/20kg\n🎒 Pack\n🧬 You\nPlace\nMessages\nMenu"
+}

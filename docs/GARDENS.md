@@ -1,5 +1,40 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
+## Partial pantry gifts (2026-10-21)
+
+Pack → Donate now opens one compact amount picker. It states the fitting whole
+units, calories shared, food retained and free time cost. Cancel changes no food.
+Confirm rechecks the actual row, bearer, location and current pantry room.
+Only selected units leave the pack and earn gift credit. Retained food keeps
+its metadata; delivered pieces retain food state, species, producer/cultivated
+shares and existing granary/take-back accounting.
+Completed gifts are saved immediately through Pack feedback, with honest quota/
+stale-save notices. Unknown/bonded food and invalid quantities remain blocked.
+
+The controller uses pantryDonationOptions and the same donateToPantry(index,
+units) action, keeping its safe-food reserve. It never splits inventory itself.
+The direct-donation observer is version2: actual moved units and matching gift
+credit establish transfer even when the pack row remains. Old version1 receipts
+remain historical; both long arms are freshly observed by the current tool.
+
+Separate64-case comparisons isolate Game behavior from controller methodology.
+The new Game on the unchanged controller preserves all23 metrics and exact Game
+hashes in every case. The same-Game portion-aware controller remains
+review_required: wins unchanged, caregiver deaths/run1.375→1.5. Both82-job long
+arms pass eight real controls each; ten extended cases per arm end through309.
+Ten partial gifts occur in seven campaigns. Crop intake1,715,632→1,730,323 kcal
+is exploratory, not small-effect confirmation or Gardener viability proof.
+See partial-donation-audit-r1 and review-r1 before numerical calibration.
+
+Next: earned Gardener offer/selection/use coverage and upper-tier bed opportunity,
+without free ability grants or forcing maximum beds as an objective. The current
+four-bed policy target still limits capacity-use coverage; Game capacity2/4/6/9
+is tested separately. Earlier whole-stack limitation entries are historical.
+Known inherited limit: pantry pieces have a0.01kg minimum. Tiny high-energy units
+can gain apparent weight when divided into pieces; old/new fixtures reproduce
+this equally. This milestone does not clear general mass conservation. Track
+the physical pantry-weight correction separately from crop-price calibration.
+
 ## Truthful surplus transfers (2026-10-21)
 
 Both competent-controller donation decisions use donateSurplus: known usable

@@ -3510,23 +3510,23 @@
 
   // donateToPantry: the pantry has a real cap now.
   const origDonate = G.donateToPantry;
-  G.donateToPantry = function (idx) {
+  G.donateToPantry = function (idx, units) {
     const item = this.state.scholar.inventory[idx];
     // SPOILAGE (adversarial forager 2026-10-08): you can't donate rot to the
     // village — no trust for garbage, and the pantry never stocks it.
     if (item && this.isSpoiled(item)) {
       this.say(`The ${item.name} went bad — you can't feed the village rot. You leave it for the flies.`);
-      this.state.scholar.inventory.splice(idx, 1);
+      if (units === undefined) this.state.scholar.inventory.splice(idx, 1);
       return null;
     }
     if (item && (item.kcalEach || 0) > 0) {
       const cap = this.pantryCapKcal();
-      if (this.pantryKcal() + (item.kcalEach * (item.units || 1)) > cap) {
-        this.say(`The pantry is full (${Math.round(cap).toLocaleString()} kcal cap). Expand storage to take more.`);
+      if (this.pantryKcal() + (item.kcalEach * (units === undefined ? (item.units ?? 1) : units)) > cap) {
+        this.say(units === undefined ? `The pantry is full (${Math.round(cap).toLocaleString()} kcal cap). Expand storage to take more.` : 'That amount no longer fits in the pantry. Your food stays in your pack.');
         return null;
       }
     }
-    return origDonate.call(this, idx);
+    return origDonate.call(this, idx, units);
   };
 
   // fillWater: haven draws come from the shared cistern (see game.js fillWater).
