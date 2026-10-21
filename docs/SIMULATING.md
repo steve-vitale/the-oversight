@@ -1,5 +1,18 @@
 # Simulating The Oversight — how to measure a change
 
+Solo continuation revision (2026-10-21): current sim-harness records stop and
+communityExposure separately and does not stop a living bearer after ten empty
+community iterations. A cap remains incomplete play. Use communityLossCoverage
+to distinguish current observed history, explicit legacy coverage and unknowns;
+never infer recovery erases a previous collapse. Villager report snapshots are
+readonly; agencyObserved distinguishes existing progression from absent data.
+The community-history-2026-10-21 contract keeps all23 IDs and thresholds; both
+arms and the maintenance proof were recollected under the same current observer.
+The named old/new cutoff audit uses one archived historical policy on both
+arms, separate from the64 current-policy screen. Exact prefixes are within each
+source revision; removed diagnostic agency writes make cross-revision state
+equivalence false. Repeat recipe: solo-campaign-review-r1.cjs in dated evidence.
+
 Garden controller revision (2026-10-21): use the same corrected Game and retain
 the exact old/new policy manifests. compareHarnessRevision in
 scripts/lib/harness-comparison.js explicitly declares changed script hashes;

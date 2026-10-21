@@ -1,5 +1,18 @@
 # Survival levers and investigation register
 
+## Solo campaign methodology (2026-10-21)
+
+No Game lever, crop timing, food price, haven capacity or ability changed.
+The driver continues living solo campaigns; community history persists through
+recovery. Report snapshots no longer create NPC agency defaults. All23 metrics
+match across64 paired current-policy cases;54 Game hashes differ, so this is
+not equivalence. The named historical cutoff case loses at164 instead of being
+stopped alive at162, with communityLost1 on both arms. Preserve that loss and
+the prior garden warnings; neither longer observation nor unchanged win rate
+clears calibration. Controlled funded isolation proves continuation mechanics,
+not naturally sustainable solitary play. Decision: share this measurement fix
+before harvest/storage improvements and Muse's numerical calibration.
+
 ## Garden controller methodology (2026-10-21)
 
 No Game lever changed. Real player harvest/preparation/meal/storage behavior is

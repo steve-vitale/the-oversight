@@ -1,0 +1,337 @@
+{
+  "changed": [
+    "scripts/sim-harness.js",
+    "scripts/sweep-compare.js"
+  ],
+  "pairedCases": 64,
+  "metrics": 23,
+  "allMetricsIdentical": true,
+  "stateDifferences": 54,
+  "named": {
+    "old": {
+      "engineOver": false,
+      "won": false,
+      "villageLost": false,
+      "harnessEnd": "village-dead",
+      "watchdogRoutes": 0,
+      "status": "not_terminal",
+      "day": 162,
+      "bearer": "ivy_wang",
+      "driverForcedTurns": 0
+    },
+    "current": {
+      "engineOver": true,
+      "won": false,
+      "villageLost": true,
+      "harnessEnd": "village-lost",
+      "watchdogRoutes": 0,
+      "status": "community_lost",
+      "day": 164,
+      "bearer": "ivy_wang",
+      "driverForcedTurns": 0
+    },
+    "oldCommunityLost": 1,
+    "currentCommunityLost": 1
+  },
+  "cutoffBoundary": {
+    "crossHarnessEquivalent": false,
+    "oldHash": "0efa7f33742791bc4dfb705f91e5dc469c26548a760951643d6e852f21344a87",
+    "newHash": "d18d80a95f857ccd0d182757bab2702b8a4e89d45a431038aa67432f06c577f2",
+    "differences": [
+      {
+        "path": "/village/agency/know/gen_5t6xco7",
+        "before": {
+          "plants": 0,
+          "monsters": 0,
+          "places": [],
+          "fought": []
+        }
+      },
+      {
+        "path": "/village/agency/xp/gen_5t6xco7",
+        "before": {
+          "tracking": 0,
+          "survival": 0,
+          "bravery": 0
+        }
+      },
+      {
+        "path": "/village/agency/tier/gen_5t6xco7",
+        "before": 0
+      },
+      {
+        "path": "/village/agency/scars/gen_5t6xco7",
+        "before": []
+      },
+      {
+        "path": "/village/agency/stats/gen_5t6xco7",
+        "before": {
+          "expeditions": 0,
+          "monsterKills": 0,
+          "caches": 0,
+          "nodes": {}
+        }
+      },
+      {
+        "path": "/pacing/lastTs",
+        "before": 45138.8521,
+        "after": 30047.9641
+      },
+      {
+        "path": "/pacing/dayMinutes/2",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/3",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/4",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/13",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/14",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/16",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/18",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/20",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/21",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/24",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/25",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/27",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/28",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/30",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/31",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/32",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/33",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/36",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/37",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/39",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/40",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/41",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/42",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/43",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/44",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/45",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/46",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/47",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/48",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/49",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/50",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/51",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/53",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/57",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/dayMinutes/59",
+        "before": 0.01,
+        "after": 0
+      },
+      {
+        "path": "/pacing/totalMin",
+        "before": 0.57,
+        "after": 0.02
+      }
+    ],
+    "interpretation": "Five substantive agency-default writes removed; remaining differences are preexisting wall-clock diagnostics. No new hash exclusions. Exact continuation prefix is proved within each source revision, not across revisions."
+  },
+  "auditControls": [
+    {
+      "neutral": [
+        {
+          "seed": 10001,
+          "cap": 150,
+          "match": true
+        },
+        {
+          "seed": 10001,
+          "cap": 600,
+          "match": true
+        }
+      ],
+      "prefixes": [
+        {
+          "seed": 10001,
+          "ok": true,
+          "errors": [],
+          "boundaries": 1202,
+          "finalMatches": true,
+          "scope": "Same-source rerun prefix, including observed policy context and RNG/clock streams; no checkpoint restore or hidden closure serialization claim."
+        }
+      ]
+    },
+    {
+      "neutral": [
+        {
+          "seed": 10001,
+          "cap": 150,
+          "match": true
+        },
+        {
+          "seed": 10001,
+          "cap": 600,
+          "match": true
+        }
+      ],
+      "prefixes": [
+        {
+          "seed": 10001,
+          "ok": true,
+          "errors": [],
+          "boundaries": 1202,
+          "finalMatches": true,
+          "scope": "Same-source rerun prefix, including observed policy context and RNG/clock streams; no checkpoint restore or hidden closure serialization claim."
+        }
+      ]
+    },
+    {
+      "neutral": [
+        {
+          "seed": 10001,
+          "cap": 158,
+          "match": true
+        },
+        {
+          "seed": 10001,
+          "cap": 600,
+          "match": true
+        }
+      ],
+      "prefixes": [
+        {
+          "seed": 10001,
+          "ok": true,
+          "errors": [],
+          "boundaries": 1266,
+          "finalMatches": true,
+          "scope": "Same-source rerun prefix, including observed policy context and RNG/clock streams; no checkpoint restore or hidden closure serialization claim."
+        }
+      ]
+    }
+  ]
+}

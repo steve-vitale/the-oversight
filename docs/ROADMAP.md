@@ -1,5 +1,30 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Solo campaign continuation verified (2026-10-21)
+
+The driver now continues a living bearer after sustained community collapse.
+It records observation caps separately from engine endings and preserves the
+ten-iteration empty-community history, including subsequent recovery. Reporting
+snapshots no longer initialize NPC agency or hydrate people. The current
+community-history contract and maintenance proof were updated together.
+
+On unchanged Game/controller inputs, all23 metrics match across64 paired cases
+and eight real observation controls.54 state hashes differ: this is not state
+equivalence. A retained former-cutoff specimen isolates five removed agency
+default writes (plus existing wall-clock diagnostics). Within-source short→long
+prefixes and transported full-state hashes pass. Historical caregiver10001,
+using the explicitly archived rejected garden controller, previously stopped
+alive at day162; it now reaches an actual engine loss at164. Community loss
+remains1. Prepared funded isolation/recovery/death tests are controlled scenes,
+not proof of natural solo viability. See solo-campaign-audit-r1 and review-r1.
+
+Next bounded milestone: improve harvest/storage decisions using actual transfer
+receipts, particularly whole-stack pantry refusal and donation-attempt counters.
+Then measure earned Gardener and upper-tier cohorts before numerical calibration.
+Muse retains numerical crop/power calibration; use the shared current driver,
+observer and contract. Garden output alone does not establish usefulness. Keep
+the rolling goal active. The following garden-controller entry is historical.
+
 ## Garden controller verified; next repair actual campaign endings (2026-10-21)
 
 Final controller-r4 completes real crop harvest/preparation/meals/safe surplus

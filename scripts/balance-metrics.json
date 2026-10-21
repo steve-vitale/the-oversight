@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "market-grants-2026-10-18",
+  "revision": "community-history-2026-10-21",
   "minimumPairs": 8,
   "confirmationSeeds": 64,
   "bootstrapSamples": 1000,
@@ -13,7 +13,7 @@
     { "id": "survival60", "label": "First bearer survives through day 60", "unit": "fraction, observable cases", "direction": "higher", "tolerance": 0.02 },
     { "id": "playerDeaths", "label": "Player deaths per run", "unit": "deaths/run", "direction": "lower", "tolerance": 0.1 },
     { "id": "playerDeaths100Days", "label": "Player deaths per 100 calendar days", "unit": "deaths/100 days", "direction": "lower", "tolerance": 0.1 },
-    { "id": "communityLost", "label": "Community loss rate", "unit": "fraction", "direction": "lower", "tolerance": 0.02 },
+    { "id": "communityLost", "label": "Community loss (engine loss or sustained empty roster)", "unit": "fraction; ten consecutive completed driver iterations with no living NPCs or engine village loss; history survives recovery; unknown reads remain null unless loss is established; legacy terminal-rule coverage is explicit", "direction": "lower", "tolerance": 0.02 },
     { "id": "livingNpcs", "label": "Mean sampled living NPCs", "unit": "people", "direction": "higher", "tolerance": 0.25 },
     { "id": "lowFood", "label": "Sampled reserve below 500 kcal", "unit": "fraction of sampled days", "direction": "lower", "tolerance": 0.02 },
     { "id": "lowWater", "label": "Sampled hydration below 25%", "unit": "fraction of sampled days", "direction": "lower", "tolerance": 0.02 },

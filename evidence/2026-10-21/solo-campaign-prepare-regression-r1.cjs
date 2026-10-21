@@ -1,0 +1,9 @@
+'use strict';
+const fs=require('fs'),path=require('path'),cp=require('child_process'),assert=require('assert/strict'),B=require('../../scripts/balance-panel');
+const base=require('./solo-campaign-candidate-root-r1.json'),old=require('./garden-controller-candidate-root-r3.json'),common=path.resolve(cp.execFileSync('git',['rev-parse','--git-common-dir'],{encoding:'utf8'}).trim()),root=path.join(common,'solo-campaign-regression-candidate-r1');
+if(fs.existsSync(root))throw Error('Frozen regression root exists');
+const files=new Set(Object.keys(base.sources));function scripts(dir){for(const e of fs.readdirSync(path.join(base.root,dir),{withFileTypes:true})){const f=path.join(dir,e.name);if(e.isDirectory())scripts(f);else if(/\.(js|json)$/.test(f))files.add(f.replace(/\\/g,'/'));}}scripts('scripts');
+for(const rel of files){const dst=path.resolve(root,rel);assert(dst.startsWith(root+path.sep));fs.mkdirSync(path.dirname(dst),{recursive:true});fs.copyFileSync(path.join(base.root,rel),dst);}
+fs.copyFileSync('evidence/2026-10-21/garden-controller-rejected-r3-competent.js.txt',path.join(root,'scripts/policies/competent.js'));
+const sources=B.manifest(root);assert.equal(sources['scripts/policies/competent.js'],old.sources['scripts/policies/competent.js']);const changed=Object.keys(sources).filter(f=>sources[f]!==old.sources[f]);assert.deepEqual(changed.sort(),['scripts/sim-harness.js','scripts/sweep-compare.js']);
+fs.writeFileSync('evidence/2026-10-21/solo-campaign-regression-roots-r1.json',JSON.stringify({before:{root:old.root,sources:old.sources},after:{root,sources},scope:'Historical R3 caregiver controller held constant on both corrected-Game roots to reproduce the actual day162 living-bearer cutoff. It is a named regression fixture, not the current policy or population balance evidence. Current-policy screening is separate.'},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({before:old.root,after:root,changed}));

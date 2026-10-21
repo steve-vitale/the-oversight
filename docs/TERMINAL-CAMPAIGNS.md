@@ -1,5 +1,22 @@
 # Terminal campaign coverage
 
+Current driver correction (2026-10-21): the living-bearer village-dead cutoff
+described below is historical. Current rows expose stop.kind (engine-ending or
+observation-cap), engine flags and iteration/calendar boundaries. communityExposure
+records known zero-NPC observations, unknown reads, sustained ten-iteration
+episodes and recovery independently of the ending. Recovery never erases an
+observed sustained collapse. Unknown reads interrupt the known-zero streak.
+Readonly villager snapshots expose agencyObserved without initializing agency.
+
+The current community-history-2026-10-21 collector preserves collapse as a
+separate metric fact; legacy rows explicitly lack reconstructed population
+history. Missing/malformed current metadata is invalid, not a healthy community.
+Reobserve both roots with one current collector/contract. Historical named
+caregiver10001 now reaches real loss164 rather than an active cutoff162;
+communityLost stays1. Both-source on/off controls, full-state integrity and
+within-source prefixes pass; cross-source state equivalence is not claimed.
+See evidence/2026-10-21/solo-campaign-audit-r1.md and its review recipe.
+
 Final garden controller-r4 reaches actual endings in all ten fixed extended
 cases, through day309, with no watchdog recovery. That does not remove the
 reproduced driver limit below or establish population coverage. communityLost

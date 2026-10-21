@@ -156,6 +156,8 @@ async function runComparison(opts) {
         label, policy: pid, seed,
         days: result.days, gameDays: result.gameDays,
         endReason: result.endReason,
+        stop: result.stop,
+        communityExposure: result.communityExposure,
         won: end.won ? 1 : 0,
         waveReach: result.maxWaveUnlocked || 1,
         maxArc: hist.maxArc,

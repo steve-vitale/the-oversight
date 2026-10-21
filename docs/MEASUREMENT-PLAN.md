@@ -1,5 +1,15 @@
 # Balanced measurement on Muse's current game
 
+Current population-loss contract (2026-10-21): revision
+community-history-2026-10-21 separates a real engine ending from sustained
+community collapse (ten completed driver iterations with known zero NPCs).
+Recovery retains the loss fact. Unknown population reads remain unknown unless
+loss was already established. Legacy terminal-rule coverage is labeled rather
+than silently reconstructed; current rows missing their exposure are invalid.
+All23 metric IDs/directions/tolerances remain. Collector, contract, tests and
+fresh neutral maintenance panel change together. See solo-campaign-audit-r1;
+unchanged64-case metrics do not imply state equivalence or garden balance.
+
 Bounded Market audit (2026-10-18): completed one fixed-input 64-seed holdout
 per merchant/dealer/hoarder, three exact natural gear traces, and prepared mobile
 purchase→equip→combat→Continue/Wait. Acquisition, equipping and landed effects
