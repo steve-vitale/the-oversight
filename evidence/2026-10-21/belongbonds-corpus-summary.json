@@ -1,0 +1,270 @@
+{
+  "primary": {
+    "control": 3,
+    "armed": 5,
+    "go": false,
+    "bar": "armed >=6/8 AND armed >= control+2"
+  },
+  "mechanism": {
+    "control": {
+      "proposed": 0,
+      "maxRaw": [
+        125,
+        364,
+        454,
+        134,
+        354,
+        179,
+        134,
+        195
+      ],
+      "dipAtMax": [
+        0,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        0
+      ],
+      "linksAtMax": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "tradeSeasonedAtMax": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "league": 0
+    },
+    "armed": {
+      "proposed": 20,
+      "maxRaw": [
+        150,
+        324,
+        279,
+        282,
+        354,
+        224,
+        154,
+        100
+      ],
+      "dipAtMax": [
+        0,
+        34,
+        34,
+        102,
+        34,
+        34,
+        34,
+        0
+      ],
+      "linksAtMax": [
+        0,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
+        0
+      ],
+      "tradeSeasonedAtMax": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "league": 1
+    }
+  },
+  "guardrails": {
+    "starvation": {
+      "control": 2,
+      "armed": 3,
+      "ok": false
+    },
+    "medianSurvival": {
+      "control": 100,
+      "armed": 94,
+      "ok": true
+    },
+    "national": {
+      "control": 6,
+      "armed": 6,
+      "ok": true
+    },
+    "newDeathModes": {
+      "modes": [],
+      "ok": true
+    },
+    "allOk": false
+  },
+  "wall": {
+    "control": {
+      "national": 6,
+      "table": 7,
+      "wins": 7,
+      "wave4": 0,
+      "wave5": 0,
+      "medSurv": 100,
+      "maxSurv": 142
+    },
+    "armed": {
+      "national": 6,
+      "table": 8,
+      "wins": 7,
+      "wave4": 0,
+      "wave5": 0,
+      "medSurv": 94,
+      "maxSurv": 124
+    }
+  },
+  "perSeed": [
+    {
+      "seed": 64501,
+      "cMaxRaw": 125,
+      "aMaxRaw": 150,
+      "cReached": 0,
+      "aReached": 0,
+      "cDip": 0,
+      "aDip": 0,
+      "cLinks": 0,
+      "aLinks": 0,
+      "proposed": 3,
+      "cDays": 69,
+      "aDays": 90,
+      "cWon": false,
+      "aWon": true
+    },
+    {
+      "seed": 64502,
+      "cMaxRaw": 364,
+      "aMaxRaw": 324,
+      "cReached": 1,
+      "aReached": 1,
+      "cDip": 34,
+      "aDip": 34,
+      "cLinks": 1,
+      "aLinks": 1,
+      "proposed": 3,
+      "cDays": 142,
+      "aDays": 124,
+      "cWon": true,
+      "aWon": true
+    },
+    {
+      "seed": 64503,
+      "cMaxRaw": 454,
+      "aMaxRaw": 279,
+      "cReached": 1,
+      "aReached": 1,
+      "cDip": 34,
+      "aDip": 34,
+      "cLinks": 1,
+      "aLinks": 1,
+      "proposed": 3,
+      "cDays": 137,
+      "aDays": 94,
+      "cWon": true,
+      "aWon": true
+    },
+    {
+      "seed": 64504,
+      "cMaxRaw": 134,
+      "aMaxRaw": 282,
+      "cReached": 0,
+      "aReached": 1,
+      "cDip": 34,
+      "aDip": 102,
+      "cLinks": 1,
+      "aLinks": 3,
+      "proposed": 3,
+      "cDays": 90,
+      "aDays": 90,
+      "cWon": true,
+      "aWon": true
+    },
+    {
+      "seed": 64505,
+      "cMaxRaw": 354,
+      "aMaxRaw": 354,
+      "cReached": 1,
+      "aReached": 1,
+      "cDip": 34,
+      "aDip": 34,
+      "cLinks": 1,
+      "aLinks": 1,
+      "proposed": 0,
+      "cDays": 94,
+      "aDays": 94,
+      "cWon": true,
+      "aWon": true
+    },
+    {
+      "seed": 64506,
+      "cMaxRaw": 179,
+      "aMaxRaw": 224,
+      "cReached": 0,
+      "aReached": 1,
+      "cDip": 34,
+      "aDip": 34,
+      "cLinks": 1,
+      "aLinks": 1,
+      "proposed": 2,
+      "cDays": 106,
+      "aDays": 95,
+      "cWon": true,
+      "aWon": true
+    },
+    {
+      "seed": 64507,
+      "cMaxRaw": 134,
+      "aMaxRaw": 154,
+      "cReached": 0,
+      "aReached": 0,
+      "cDip": 34,
+      "aDip": 34,
+      "cLinks": 1,
+      "aLinks": 1,
+      "proposed": 3,
+      "cDays": 107,
+      "aDays": 95,
+      "cWon": true,
+      "aWon": true
+    },
+    {
+      "seed": 64508,
+      "cMaxRaw": 195,
+      "aMaxRaw": 100,
+      "cReached": 0,
+      "aReached": 0,
+      "cDip": 0,
+      "aDip": 0,
+      "cLinks": 0,
+      "aLinks": 0,
+      "proposed": 3,
+      "cDays": 90,
+      "aDays": 66,
+      "cWon": true,
+      "aWon": false
+    }
+  ]
+}
