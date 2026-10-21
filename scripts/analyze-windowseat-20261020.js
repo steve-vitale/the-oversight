@@ -71,19 +71,20 @@ const ATTRITION = new Set(['sickness', 'dehydration', 'thirst', 'exposure',
 const COMBAT_CAUSES = new Set(['combat', 'monster', 'raid', 'raid-defense', 'ambush',
   'expedition', 'patrol combat', 'aid-runner', 'sortie combat', 'the wild', 'hunting', 'injuries']);
 
-function isCombatish(cause, nameSet) {
+function isCombatish(cause, nameSet, folkSet) {
   const lc = String(cause || '').toLowerCase();
   if (COMBAT_CAUSES.has(cause)) return true;
   if (cause.startsWith('split-fight:')) return true;
   if (nameSet && nameSet.has(lc)) return true;
+  if (folkSet && folkSet.has(lc)) return true; // sim-folkname-map 2026-10-21: village-authored monster names
   return false;
 }
 
-function classifyWall(d, killDays, nameSet) {
+function classifyWall(d, killDays, nameSet, folkSet) {
   const cause = String(d.cause || 'unknown');
   const lc = cause.toLowerCase();
   const ctx = d.ctx || {};
-  const combatish = isCombatish(cause, nameSet);
+  const combatish = isCombatish(cause, nameSet, folkSet);
   if (ctx.arena || cause === 'contest') return ['contest', ctx.arena ? 'ctx:arenaContest' : 'cause'];
   if (ctx.inTb && ctx.noFlee) return ['sealed-fight', 'ctx:noFlee-fight'];
   if (combatish && killDays.has([d.who, d.day].join('|'))) return ['kill-fight', 'same-day-own-w4+-kill'];
@@ -100,14 +101,15 @@ function classifyWall(d, killDays, nameSet) {
 // ---------------------------------------------------------------------------
 // nameToWave — monsters.json lookup (names + ids + the 'unknown'
 // descriptors, which expedDeath stamps as the death cause).
-let NAME2WAVE = null, NAMESET = null;
+let NAME2WAVE = null, NAMESET = null, MID2WAVE = null;
 function buildNameMaps() {
-  NAME2WAVE = new Map(); NAMESET = new Set();
+  NAME2WAVE = new Map(); NAMESET = new Set(); MID2WAVE = new Map();
   try {
     const ms = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'data', 'monsters.json'), 'utf8'));
     for (const m of (ms.monsters || ms)) {
       if (!m) continue;
       const w = (m.wave | 0) || null;
+      if (m.id && w != null) MID2WAVE.set(String(m.id), w);
       for (const k of [m.name, m.id, m.id && String(m.id).replace(/_/g, ' '), m.unknown]) {
         if (!k) continue;
         const lc = String(k).toLowerCase();
@@ -121,29 +123,66 @@ function nameToWave(name) {
   if (!NAME2WAVE) buildNameMaps();
   return NAME2WAVE.get(String(name).toLowerCase()) ?? null;
 }
+function midToWave(mid) {
+  if (!MID2WAVE) buildNameMaps();
+  return MID2WAVE.get(String(mid)) ?? null;
+}
 function nameSet() {
   if (!NAMESET) buildNameMaps();
   return NAMESET;
 }
 
+// FOLK-NAME MAPS (sim-folkname-map 2026-10-21): per-seed
+// rec.folkNameMap [{mid, folkName, display}] — the village's own names
+// for monsters, recorded at run end by the probe. The folk name is the
+// run's ground truth: it takes PRECEDENCE over static lookup (a village
+// can folk-name a monster after a static roster name — the cause string
+// then means the run's monster, not the static one). Recs without the
+// map (the 2026-10-20 corpus) yield empty maps — behavior unchanged.
+function buildFolkMaps(rec) {
+  const set = new Set(); const mid = new Map();
+  try {
+    for (const r of (rec && rec.folkNameMap) || []) {
+      if (!r || !r.folkName) continue;
+      const lc = String(r.folkName).toLowerCase();
+      set.add(lc);
+      if (!mid.has(lc)) mid.set(lc, String(r.mid));
+    }
+  } catch (e) { /* honest empty */ }
+  return { set, mid };
+}
+function folkToMidWave(folkMaps, name) {
+  try {
+    const mid = folkMaps && folkMaps.mid.get(String(name).toLowerCase());
+    return mid ? { mid, wave: midToWave(mid) } : null;
+  } catch (e) { return null; }
+}
+
 // KILLER-WAVE JOIN: death tele's `wave` is null for person-kind deaths.
-// Post-hoc routes: (1) monster-name/descriptor causes -> direct lookup;
-// (2) combatish deaths -> the probe's fightStarts: latest fight-start with
-// day <= death day. Best-effort, honestly nullable.
+// Post-hoc routes, in precedence order:
+//   (1) folk-name map (per-seed, run truth — sim-folkname-map 2026-10-21)
+//   (2) monster-name/descriptor causes -> static lookup;
+//   (3) combatish deaths -> the probe's fightStarts: latest fight-start
+//       with day <= death day. Best-effort, honestly nullable.
 function joinKillerWave(rec) {
   const fights = (rec.fightStarts || []).slice().sort((a, b) => (a.day | 0) - (b.day | 0));
   const deaths = (((rec.deathsAttributed || {}).attributed) || []);
   const ns = nameSet();
+  const fm = buildFolkMaps(rec);
   for (const d of deaths) {
     let kw = (d.wave != null) ? (d.wave | 0) : null, km = null, kv = null;
-    const nm = nameToWave(d.cause);
-    if (nm != null) { kw = nm; km = d.cause; kv = 'name-lookup'; }
-    else if (isCombatish(d.cause, ns)) {
-      let best = null;
-      for (const f of fights) {
-        if ((f.day | 0) <= (d.day | 0)) best = f; else break;
+    const fk = folkToMidWave(fm, d.cause);
+    if (fk) { kw = fk.wave; km = fk.mid; kv = 'folk-name-map'; }
+    else {
+      const nm = nameToWave(d.cause);
+      if (nm != null) { kw = nm; km = d.cause; kv = 'name-lookup'; }
+      else if (isCombatish(d.cause, ns)) {
+        let best = null;
+        for (const f of fights) {
+          if ((f.day | 0) <= (d.day | 0)) best = f; else break;
+        }
+        if (best) { kw = best.wave != null ? (best.wave | 0) : null; km = best.mid; kv = best.via; }
       }
-      if (best) { kw = best.wave != null ? (best.wave | 0) : null; km = best.mid; kv = best.via; }
     }
     d.killerWave = kw; d.killerMid = km; d.killerVia = kv;
   }
@@ -213,13 +252,14 @@ function attemptsOf(rec) {
 function attribute(rec) {
   const deaths = joinKillerWave(rec); // adds killerWave/killerMid/killerVia
   const ns = nameSet();
+  const folkMaps = buildFolkMaps(rec); // sim-folkname-map 2026-10-21: folk-name causes classify combatish
   const killDays = new Set(((rec.kills || []).map(k => [String(k.by), k.day | 0].join('|'))));
   const attempts = attemptsOf(rec);
   const def5ever = attempts.length > 0;
   const firstDef5Day = def5ever ? Math.min(...attempts.map(w => w.start)) : null;
   const classified = [];
   for (const d of deaths) {
-    const [wclass, rule] = classifyWall(d, killDays, ns);
+    const [wclass, rule] = classifyWall(d, killDays, ns, folkMaps.set);
     classified.push(Object.assign({}, d, { wclass, rule }));
   }
   // Window deaths: attributed deaths inside any window.
@@ -401,4 +441,4 @@ function writeOut(fp, data) {
 }
 
 if (require.main === module) main();
-module.exports = { loadValid, attemptsOf, attribute, classifyWall, isCombatish, nameToWave, nameSet, joinKillerWave };
+module.exports = { loadValid, attemptsOf, attribute, classifyWall, isCombatish, nameToWave, midToWave, nameSet, joinKillerWave, buildFolkMaps, folkToMidWave };

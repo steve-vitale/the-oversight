@@ -30,6 +30,13 @@
 //   / aidFight router wraps — fight-start records {day, mid, wave, via}
 //     for the killer-wave join (the windowsurvive pattern, identical by
 //     construction).
+//   folkNameMap(Game, t) — NOT a wrap: an end-of-run pure read (no wrap
+//     installed, nothing call-through) returning the run's
+//     monsterDisplayName map per seed [{mid, folkName, display}] from
+//     state.codex.monsters (village-authored names — 'The Big Bastard' —
+//     live only there, never in monsters.json). The probe persists it
+//     alongside the per-seed corpus; the analyzer joins folk-name death
+//     causes through it (sim-folkname-map 2026-10-21).
 //
 // Death-time ctx fields (all pure reads; every read guarded):
 //   day, cause, who, player, arena (state.arenaContest), raidNight
@@ -280,4 +287,32 @@ function install(Game, t) {
   return uninstall;
 }
 
-module.exports = { install, instrumentOn, deathCtx, fightCtx, waveOf, monsterNameSet, isPersonDeath };
+// folkNameMap(Game, t): the per-run folk-name -> monster-id map (the
+// FOLK-NAME GAP closure, sim-folkname-map 2026-10-21). Village-authored
+// names (game.js: monsterNamingCheck — 'The Big Bastard' from the
+// generateMonsterName temperament pool, 'The Bright Bastard'/'Headlight
+// Harry' from the curated villageNames list) live ONLY in
+// state.codex.monsters[mid].villageName — never in monsters.json, so
+// static killer-wave lookups can't join them. villageName is write-once
+// and codex entries persist, so an end-of-run capture holds every name
+// the village used that run. Pure read: zero state writes, zero RNG
+// draws (the DET gate pins the trajectory byte-identical).
+function folkNameMap(Game, t) {
+  const out = [];
+  try {
+    const codex = ((Game.state || {}).codex || {}).monsters || {};
+    for (const mid of Object.keys(codex)) {
+      const e = codex[mid];
+      if (!e || typeof e !== 'object') continue;
+      if (!e.stage && !e.villageName && !e.namingKicked) continue; // never encountered or named
+      let folk = null, disp = null;
+      try { folk = e.villageName != null ? String(e.villageName) : null; } catch (er) {}
+      try { disp = (typeof Game.monsterDisplayName === 'function') ? (String(Game.monsterDisplayName(mid)) || null) : null; } catch (er) {}
+      out.push({ mid: String(mid), folkName: folk || null, display: disp });
+    }
+    out.sort((a, b) => a.mid < b.mid ? -1 : a.mid > b.mid ? 1 : 0); // deterministic order
+  } catch (er) { err(t, 'folkNameMap', er); }
+  return out;
+}
+
+module.exports = { install, instrumentOn, deathCtx, fightCtx, waveOf, monsterNameSet, isPersonDeath, folkNameMap };

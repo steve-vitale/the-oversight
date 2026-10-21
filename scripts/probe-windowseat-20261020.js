@@ -284,6 +284,14 @@ async function runOne(seed, policyId, opts) {
   const attr = bare ? null : attributeDeaths(Game, C.T);
   let endRec = null;
   try { endRec = dailyRec(Game); } catch (e) { endRec = null; }
+  // The folk-name map (sim-folkname-map 2026-10-21): a pure end-of-run
+  // read of state.codex.monsters — after the last daily hash, so it
+  // cannot perturb the DET-pinned trajectory.
+  let folkNames = [];
+  if (!bare) {
+    try { folkNames = WSI.folkNameMap(Game) || []; }
+    catch (e) { C.instrumentErrors++; folkNames = []; }
+  }
   let gameDays = 0;
   try { gameDays = (Game.state.scholar || {}).day || 0; } catch (e) {}
   let maxWave = C.maxWave;
@@ -306,6 +314,7 @@ async function runOne(seed, policyId, opts) {
     kills: bare ? [] : (C.T.kills || []),
     fightStarts: bare ? [] : (C.T.fightStarts || []),
     raidNights: bare ? [] : (C.T.raidNights || []),
+    folkNameMap: bare ? [] : folkNames, // sim-folkname-map 2026-10-21: the run's monsterDisplayName map per seed
     deathsAttributed: attr,
     recs: C.recs, endRec, hashes: C.hashes,
   };
