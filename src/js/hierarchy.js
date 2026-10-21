@@ -112,6 +112,7 @@
 //   - grief_beats_feed_the_choke: the young-link renegotiation answers route trust through _trustGain — the mourning choke stays single and every fed gesture stamps lastKeptDay. (code: hierarchy.js)
 //   - the_table_is_weekly: renegotiateLink/bidForPrimacy are one hard conversation per week (lastTableWeek) — the climb is paced in weeks, not ground out in an afternoon. (code: hierarchy.js)
 //   - diplomacy_is_knowledge_gated: proposeLink/proposeAlliance refuse villages the player never heard of or visited (knowsVillage). (code: hierarchy.js)
+//   - trust_drift_is_voiced: when a seasoned-age (30+ days) Haven link's trust crosses BELOW the trust-40 bar trending down, the village says the bond is cooling — once per crossing, re-arming only above the bar; no numbers, only what the village can know; conquered links skip it; the policy-side tend-skip is engine-invisible by design. (code: hierarchy.js)
 // consumes:
 //   - state.otherVillages
 /* INTER-VILLAGE HIERARCHY — src/js/hierarchy.js
@@ -251,6 +252,52 @@
         var tr = (forPolity && this._succPolityGate()) ? this._succTrustOf(link) : (link.trust || 0);
         return tr >= 40;
       } catch (e) { return false; }
+    },
+
+    // _trustDriftWatch: the trust-erosion warning leg (sim-trustdrift-voice
+    // 2026-10-21; backlogs #751, #753). A link's trust can erode for weeks
+    // with nothing said, then the realm dissolves at the trust-40 seasoned
+    // bar — the player learns the bond died at the funeral. This watches the
+    // bar the way a person would: when a seasoned-age (30+ days) link's
+    // trust crosses BELOW 40 trending down, someone in the village says the
+    // bond is cooling — ONCE per crossing, re-arming only when trust climbs
+    // back above the bar. No numbers, no meter-readout: the fiction is only
+    // what the village can know — the speaker's manner at the gate
+    // ("If you don't know, it doesn't show"). Conquered links skip it (their
+    // bar is the season, not the trust); young links can't drift below a bar
+    // they never crossed (state initializes silent). Deterministic: no RNG,
+    // fixed copy — paired same-seed runs differ only by these lines. Runs
+    // inside hierarchyDaily, right before _checkNational, so the warning
+    // lands the same day the link un-seasons — ahead of the realm's verdict.
+    _trustDriftWatch() {
+      try {
+        var day = (this.state.scholar || {}).day || 0;
+        var links = this.hierarchyState();
+        for (var i = 0; i < links.length; i++) {
+          var link = links[i];
+          if (!link || link.status !== 'active') continue;
+          // Haven-party links only: the lead road (primary === HOME) and
+          // peer leagues (a/b === HOME). Subordinate-Haven links answer to a
+          // different bar (BELONG's trust-50 gate) — different fiction.
+          var lead = link.primary === HOME;
+          var peer = !lead && (link.a === HOME || link.b === HOME);
+          if (!lead && !peer) continue;
+          if (link.conquered) continue;
+          if ((day - (link.day || 0)) < 30) continue;
+          var above = (link.trust || 0) >= 40;
+          if (link._trustDriftAbove === undefined) { link._trustDriftAbove = above; continue; }
+          if (link._trustDriftAbove && !above) {
+            link._trustDriftAbove = false;
+            var onm = this._ovName(this._linkOther(link, HOME));
+            if (lead) this.say(`⚠️ ${onm}'s fire is drifting from ours — their speaker doesn't linger at the gate the way they used to, and nobody over there says why. Bonds don't mend themselves; a tended fire remembers who fed it.`);
+            else this.say(`⚠️ The bond with ${onm}'s fire is cooling — their manner at the council has gone careful, all courtesy and no warmth. Leagues are kept warm or they go cold.`);
+            this._linkNote(link, 'drift', 'Trust crossed below the seasoned bar; the village noticed the cooling.');
+            try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'drift-warn:' + this._linkOther(link, HOME)); } catch (e2) {}
+          } else if (!link._trustDriftAbove && above) {
+            link._trustDriftAbove = true;
+          }
+        }
+      } catch (e) { try { console.warn('trustDriftWatch: ' + (e && e.message || e)); } catch (e2) {} }
     },
 
     // _succPolityGate: the succession-persistence lever (sim-succpolity,
@@ -3479,6 +3526,7 @@
       try { this._foreignPolitySim(); } catch (e) {}
       try { this._renegotiationTick(); } catch (e) {}
       try { this._checkRegional(); } catch (e) {}
+      try { this._trustDriftWatch(); } catch (e) {}
       try { this._checkNational(); } catch (e) {}
       try { this._checkGlobal(); } catch (e) {}
       try { this.deliverVillageRumors(); } catch (e) {}

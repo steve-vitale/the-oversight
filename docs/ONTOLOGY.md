@@ -970,6 +970,7 @@ Inter-village hierarchy. Villages have relationships, rivalries, trade.
 - grief_beats_feed_the_choke: the young-link renegotiation answers route trust through _trustGain — the mourning choke stays single and every fed gesture stamps lastKeptDay. (code: hierarchy.js)
 - the_table_is_weekly: renegotiateLink/bidForPrimacy are one hard conversation per week (lastTableWeek) — the climb is paced in weeks, not ground out in an afternoon. (code: hierarchy.js)
 - diplomacy_is_knowledge_gated: proposeLink/proposeAlliance refuse villages the player never heard of or visited (knowsVillage). (code: hierarchy.js)
+- trust_drift_is_voiced: when a seasoned-age (30+ days) Haven link's trust crosses BELOW the trust-40 bar trending down, the village says the bond is cooling — once per crossing, re-arming only above the bar; no numbers, only what the village can know; conquered links skip it; the policy-side tend-skip is engine-invisible by design. (code: hierarchy.js)
 
 **Consumes:** state.otherVillages
 
