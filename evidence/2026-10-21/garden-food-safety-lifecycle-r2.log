@@ -1,0 +1,30 @@
+404 old /favicon.ico
+404 candidate /favicon.ico
+{
+  trace: [
+    {
+      stage: 'old installed worker',
+      controller: 'http://127.0.0.1:8922/sw.js?v=dea9296f6-20261021-061958',
+      caches: [Array]
+    },
+    {
+      stage: 'old installed source',
+      version: 'dea9296f6-20261021-061958',
+      keys: [Array]
+    },
+    {
+      stage: 'native update',
+      version: '14dd8521d-20261021-074815',
+      saveUnchanged: true
+    },
+    {
+      stage: 'cold offline Continue',
+      build: '14dd8521d-20261021-074815',
+      day: 1,
+      kcal: 2200,
+      scroll: 736,
+      controller: 'http://127.0.0.1:8922/sw.js?v=14dd8521d-20261021-074815'
+    }
+  ],
+  errors: []
+}

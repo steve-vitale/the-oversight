@@ -1,5 +1,25 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Active prerequisite: safe garden food before the sim harvest controller (2026-10-21)
+
+Codex owns the bounded canonical-food repair on garden-food-safety; Muse retains
+numerical garden/ability calibration. The shared history remains master/main
+14dd8521d before this work. No new Muse commit was present at the latest fetch.
+Actual player harvest bypassed foodForageItem: six reproduced must-cook crops
+lost their raw risk, nuts lost shelling and unknown crops became named food.
+Repair the caller, prove real harvest/preparation/meal/Continue, then publish
+with fresh checks, all23 matched panels and phone/offline receipts. No crop
+profile, power price or controller change belongs in this prerequisite.
+
+Then finish the already planned controller harvest→safe process/store/eat
+loop. Its old/new comparison must use the same corrected Game and explicitly
+declare a methodology change. Current long-run zero player harvests cannot
+establish ordinary or invested garden viability. Keep the rolling goal active.
+The controller must recognize canonical needsCooking crops: its existing
+cookPack only considers foodState raw, while these plants are ready with a raw
+risk flag. Do not teach harvest without proving preparation before eating or
+donation. Preserve unknown/shelling routes and actual fire/knowledge gates.
+
 ## Garden intake released; complete the sim garden loop next (2026-10-21)
 
 Release9a83bc686 is live asdea9296f6-20261021-061958. Publication-r1 verifies

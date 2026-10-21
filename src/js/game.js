@@ -20972,25 +20972,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const ripe = plots.filter(p => this.plotRipe(p, day));
       if (!ripe.length) { this.say('Nothing ripe — the garden is growing, not giving. Check back.'); return null; }
       let totalKcal = 0;
+      let allKnown = true, needsPrep = false;
       const bits = [];
       for (const p of ripe) {
         const plant = (this.data.plants || []).find(x => x.id === p.pid) || {};
         const kcal = this.plotYieldKcal(p);
         const units = this.gardenHarvestUnits(p);
-        const entry = ((this.state.codex || {}).plants || {})[p.pid] || {};
-        this.state.scholar.inventory.push({
-          plantId: p.pid, units, kcalEach: plant.caloriesPerUnit ?? 0,
-          harvestShares: this.harvestOrigin(this.villagerId),
-          gardenShares: this.gardenHarvestOrigin(p),
-          spoilDay: day + (plant.spoilageDays || 4), name: plant.name || p.pid,
-          unit: plant.unit || 'handful', kg: 0.1,
-          prep: (entry.level || 0) >= 2 && entry.prepKnown ? 'Garden-fresh.' : 'Fresh from the garden.',
-        });
+        // Growing it does not identify it, shell it or make it safe raw.
+        // Use the same physical food contract as wild harvests.
+        const known = this.plantKnown(p.pid);
+        const item = this.foodForageItem(plant, known, units, kcal, day, this.harvestOrigin(this.villagerId));
+        item.gardenShares = this.gardenHarvestOrigin(p);
+        this.state.scholar.inventory.push(item);
+        allKnown = allKnown && known;
+        needsPrep = needsPrep || item.edible === false || !!item.needsCooking;
         totalKcal += kcal;
         this.gardenHarvestTaken(p, day);
-        bits.push(`${units}\u00d7 ${plant.name || p.pid}`);
+        bits.push(`${units}\u00d7 ${item.name}`);
       }
-      this.say(`Harvest: ${bits.join(', ')} — about ${totalKcal} kcal from the garden. (Renewable. The wild didn't pay for this.)`);
+      this.say(`Harvest: ${bits.join(', ')}.${allKnown ? ` About ${totalKcal} kcal before preparation.` : ''}${needsPrep ? ' Check Pack for identification or preparation before eating.' : ''}`);
       this.tickAction(16); this.save(); return this.status();
     },
 

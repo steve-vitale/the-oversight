@@ -1,5 +1,23 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
+## Harvest safety prerequisite (2026-10-21)
+
+The player harvest caller constructed bare calorie stacks instead of canonical
+food. Reproduced elderberry, nettle, groundnut, cassava, cushcush and bamboo
+harvests all lacked their normal must-cook risk. Nuts also lacked shelling;
+unknown guided crops revealed names and calories. Before the controller is
+taught to harvest, use foodForageItem with the bearer's actual plant knowledge.
+Keep species units, paid work, cycle reset, producer and cultivated-origin
+shares. Harvest narration uses the believed/unknown name and labels known
+calories before preparation. Pack owns the actual preparation instructions.
+Existing already-harvested save items are not retroactively rewritten.
+
+This changes player crop safety and shelf life to match the same wild species;
+it is a gameplay prerequisite, not a controller-only or passive-metadata change.
+NPC garden duty's safe-only gate remains. Prepared eight-species checks and
+phone cooking prove mechanics, not natural garden-build viability. See the
+garden-food-safety evidence and all23 screen before calibration.
+
 ## Cultivated-food accounting released (2026-10-21)
 
 Release9a83bc686, live builddea9296f6-20261021-061958, verifies171 production

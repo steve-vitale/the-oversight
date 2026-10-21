@@ -1,5 +1,24 @@
 # Survival levers and investigation register
 
+## Canonical player garden food (2026-10-21)
+
+Lever: harvesting now retains the same species' canonical raw cooking risk,
+shelling, identification, believed name and shelf life. Previously bare garden
+stacks bypassed these requirements. Prepared direct harvests reproduce six
+must-cook species plus nuts and unknown food. Growth, yield, seed/labor costs,
+power prices, NPC duty and controllers are unchanged. Existing harvested save
+items are not migrated. This may reduce available ready food or introduce real
+preparation work; inspect all23 domains and actual opportunities, not win rate
+alone. Publish the safety prerequisite separately before teaching controllers
+to harvest. Natural viability and numerical calibration remain open.
+
+Decision evidence: the frozen baseline/candidate64-case screen retains identical
+outcomes, all23 metrics and final state hashes, with four neutral observer
+controls each. No player harvest occurs in this unchanged policy, so absence
+of a screen signal does not clear preparation work or garden-path balance.
+Publish the reproduced caller/UI safety correction after release gates; then
+repair and measure the controller separately. See garden-food-safety-audit-r1.
+
 ## Cultivated-food accounting and completed meals (2026-10-21 release9a83bc686)
 
 No crop profile, food price, growth/yield, hunger/healing, duty or controller

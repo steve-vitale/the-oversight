@@ -15260,7 +15260,7 @@
                   : ` <span class="small" style="opacity:.6">(find a butcher)</span>`;
               }
             }
-            const cookable = (i.rawKcal || (i.foodKind === 'meat' && i.foodState === 'cleaned')) && Game.nearFire();
+            const cookable = (i.rawKcal || (i.foodKind === 'meat' && i.foodState === 'cleaned') || (i.needsCooking && i.diseaseRisk)) && Game.nearFire();
             if (i.foodKind === 'meat' && (i.foodState === 'cleaned' || i.foodState === 'cooked') && Game.nearFire()) {
               foodBtns += ` <button class="btn ghost sm" data-preserve="${idx}">Smoke</button>`;
             }

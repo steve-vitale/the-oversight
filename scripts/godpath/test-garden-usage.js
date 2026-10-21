@@ -6,6 +6,7 @@ const K=require('./lib'),T=K.reporter('Garden usage observation'),O=require('../
  G.harvestGarden();T.ok('a real refused harvest is a call, never delivered food',observer.report.calls.harvestGarden===1&&observer.report.playerHarvestKcal===0&&observer.report.playerHarvests===0);
  const plant=G.data.plants.find(p=>p.form==='shoots'),plot={pid:plant.id,plantedDay:1,lastTend:1,lastHarvest:0,weeds:0,dead:false};
  G.map.tiles[4][4].plots=[plot];G.state.scholar.day=1+G.gardenGrowthDays(plant.form);G.state.scholar.kcal=5000;
+ G.state.codex.plants[plant.id]={level:3,prepKnown:true}; // Prepared identified-food opportunity, not an unknown haul.
  G.harvestGarden();T.ok('actual mature crop output is observed through the public harvest method',observer.report.playerHarvests===1&&observer.report.playerHarvestKcal>0);
  T.ok('the observer has no hidden observation errors',observer.report.errors.length===0);
  observer.restore();
