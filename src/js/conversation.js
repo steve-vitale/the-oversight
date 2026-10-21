@@ -4906,6 +4906,10 @@
       // RECAP REFRAMES (journey-social r31 2026-10-20): the count-aware
       // recap escalation is per-sitting — a new sitting, fresh patience.
       c._recapReframes = 0;
+      // FAVOR-REQUIREMENTS REFRAMES (journey-social r35 2026-10-20):
+      // per-sitting like the recap/silence counters — a new sitting, fresh
+      // patience. _favorReqSaid stays persistent (they told you before).
+      c._favorReqReframes = 0; c._favorReqEscalations = 0; c._favorReqLastRaw = null;
       // SILENCE-EXHAUSTION (journey-social r31 2026-10-20): per-sitting,
       // per-band silence count — a new sitting, fresh quiet.
       c._msil = {};

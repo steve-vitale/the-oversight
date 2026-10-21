@@ -199,6 +199,23 @@
           const rawReq = String(line);
           if (c._favorReqSaid[rawReq]) {
             c._favorReqReframes = (c._favorReqReframes || 0) + 1;
+            // FAVOR-REQUIREMENTS SPEND-OUT (journey-social r35 2026-10-20):
+            // the r21 reframe pool has no cap — past the escalation the NPC
+            // parrots "I've told you three times now — ..." verbatim
+            // (transcript-caught: s3204 d49 Misky t4-t8, d132 Farid — the r31
+            // recap failure mode: the reframe became the repeat). Same
+            // per-sitting discipline as the recap/dlg:help spend-outs: once
+            // the escalation is itself re-served, the choice leaves the menu
+            // for this sitting. Keyed on the raw line so a state change (new
+            // rawReq — e.g. they moved next to you) re-arms honestly.
+            if (c._favorReqReframes > 3) {
+              if (c._favorReqLastRaw === rawReq) c._favorReqEscalations = (c._favorReqEscalations || 0) + 1;
+              else { c._favorReqLastRaw = rawReq; c._favorReqEscalations = 1; }
+              if (c._favorReqEscalations >= 2) {
+                try { this.convoSpendChoice(vid, 'dlg:favor_requirements'); } catch (e) {}
+                c._favorReqEscalations = 0;
+              }
+            }
             const reframes = [
               `As I said — ${rawReq}`,
               `Like I said — ${rawReq}`,
@@ -383,6 +400,15 @@
         if (settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
           const line = '"It\'s already handled. Thank you for asking."';
           this.sayLine(vid, line, { structural: true });
+          // HELP SPEND-OUT (journey-social r35 2026-10-20): a settled favor's
+          // help topic is exhausted after one honest answer — the menu kept
+          // re-offering "How can I help?" every turn and the NPC parroted
+          // the dead reply verbatim x5+ (transcript-caught: s3204 d39 Leo,
+          // s3205 d54 Elena, s3206 d45 Nino, s3207 d53 Hannah — the r31
+          // recap class). Same per-sitting discipline as the recap spend-out:
+          // the choice leaves the menu for this sitting (c.spent resets per
+          // sitting, so a new conversation re-arms it honestly).
+          try { this.convoSpendChoice(vid, 'dlg:help'); } catch (e) {}
           return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
         // SCENE (Phase 2): through the resolver.

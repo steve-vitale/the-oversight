@@ -1,0 +1,36 @@
+# journey-social r35 pilot log (2026-10-20, base 5ce8faf12, pre-fix corpus)
+
+SMOKE: seed 3208, 10 days (self-test of bond instrumentation)
+SMOKE: bonds=46 bondEvents=146 convos=9
+SMOKE SELF-TEST: PASS (bonds counter + bondAdd wrapper nonzero — instrumentation OK)
+
+seed 3204: days=142 alive=6 convos=172 (deep=112 comfort=18/28) gossipPicks=3 gossipConvos=13 dryRate=2.10/12
+  L2' repeats: 11  (5x Leo d39 dlg:help "already handled"; 5x Misky d49 dlg:favor_requirements escalation; 1x Farid d132)
+  COMFORT-REPEAT hits: 0
+  SETTLE-SPEAK: settles=8 spoken=8 silent=0
+  L3: bonds=94 deepBonds=36 betrayalCases=0 mootsConvened=0 gossipConvos=13 gossipPicks=3 avgTrust=38.5
+  moots: (none convened)
+seed 3205: days=142 alive=7 convos=182 (deep=139 comfort=25/42) gossipPicks=3 gossipConvos=3 dryRate=2.15/12
+  L2' repeats: 17  (14x dlg:help settled-want; 2x confront:d_fihgwhr instrument noise; 1x dlg:favor_requirements escalation)
+  SETTLE-SPEAK: settles=8 spoken=8 silent=0
+  L3: bonds=77 deepBonds=48 betrayalCases=0 mootsConvened=0 gossipConvos=3 gossipPicks=3 avgTrust=79.9
+seed 3206: days=142 alive=7 convos=176 (deep=139 comfort=5/7) gossipPicks=3 gossipConvos=10 dryRate=2.31/12
+  L2' repeats: 20  (all dlg:help settled-want: Nino d45 x5, Mateo d79 x5+)
+  SETTLE-SPEAK: settles=6 spoken=6 silent=0
+  L3: bonds=45 deepBonds=35 betrayalCases=0 mootsConvened=0 gossipConvos=10 gossipPicks=3 avgTrust=92.4
+seed 3207: days=142 alive=7 convos=171 (deep=124 comfort=9/18) gossipPicks=3 gossipConvos=10 dryRate=2.26/12
+  L2' repeats: 15  (all dlg:help settled-want: Hannah d53 x6)
+  SETTLE-SPEAK: settles=3 spoken=3 silent=0
+  L3: bonds=60 deepBonds=34 betrayalCases=2 mootsConvened=2 gossipConvos=10 gossipPicks=3 avgTrust=93.4
+  moots: case_2[acquitted] case_4[acquitted] (player bystander, vote=acquit)
+
+M1 (instrument): GO
+M2 (bonds-without-suffering, <8 deaths AND deepBonds>=8 on >=2/4): 2/4 [3206,3207] — GO
+CHANNELS (all seeds): lingering meal=+11636/5818 deep talk=+1378/689 visit=+1120/280 fought alongside=+726/242 fed them=+495/319 tended=+339/113 promise kept=+196/49 stood with you=+34/17 treated=+6/2 grievance=-16/2
+
+# Post-fix verification (seed 3204 re-run on fixed tree, both r35 fixes applied)
+
+seed 3204: days=142 alive=8 convos=177 (deep=139 comfort=5/9) gossipPicks=3 gossipConvos=12 dryRate=2.05/12
+  L2' repeats: 0   (was 11 pre-fix)
+  L3: bonds=56 deepBonds=35 deaths=3
+(post-fix JSON: journey-social-r35-pilot-s3204-postfix.json; pre-fix corpus preserved as -prefix.json + s3204.json)
