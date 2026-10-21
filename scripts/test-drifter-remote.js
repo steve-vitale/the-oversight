@@ -23,55 +23,10 @@
 //      actually advances the world (the skip charges what it claims).
 // Usage: node scripts/test-drifter-remote.js
 //        SEED=999 node scripts/test-drifter-remote.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-const PAIRS = [
-  ['plants.json', 'plants'], ['biomes.json', 'biomes'], ['monsters.json', 'monsters'],
-  ['villagers.json', 'villagers'], ['abilities.json', 'abilities'], ['items.json', 'items'],
-  ['background_survivors.json', 'background_survivors'], ['cell_defs.json', 'cellDefs'],
-  ['animals.json', 'animals'], ['recipes.json', 'recipes'], ['books.json', 'books'],
-  ['relicEnhancements.json', 'relicEnhancements'], ['locations.json', 'locations'],
-  ['characterGen.json', 'characterGen'], ['synergies.json', 'synergies'],
-  ['knowledge.json', 'knowledge'], ['nameCultures.json', 'nameCultures'],
-  ['originPicker.json', 'originPicker'], ['foreignSpeech.json', 'foreignSpeech'],
-  ['lifeseeds.json', 'lifeseeds'], ['arrivalText.json', 'arrivalText'],
-  ['justiceVoice.json', 'justiceVoice'], ['alienPlayers.json', 'alienPlayers'],
-  ['regions.json', 'regions'], 
-  ['monsterBehaviors.json', 'monsterBehaviors'], ['contests.json', 'contests'],
-  ['events.json', 'events'], ['statusEffects.json', 'statusEffects'],
-];
-global.SCATTER_DATA = {};
-for (const [f, key] of PAIRS) {
-  global.SCATTER_DATA[key] = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', f), 'utf8'));
-}
-// SEED BEFORE EVAL: modules capture Math.random at load (AGENTS.md).
-let _seed = 7;
+const H = require('./sim-harness');
 const SEED = parseInt(process.env.SEED || '7', 10);
-function rng() { _seed = (_seed * 1103515245 + 12345) % 2147483648; return _seed / 2147483648; }
-rng.reset = (s) => { _seed = (s === undefined ? SEED : s); };
-rng.reset();
-Math.random = rng;
-global.window = global;
-// FULL module list in index.html order, minus DOM-only
-// (app.js/sprites.js/tile-scenes.js/move-anim.js/drama.js).
-const LIST = ['engine/state.js', 'engine/modifiers.js', 'engine/calories.js', 'engine/day.js',
-  'engine/forage.js', 'engine/combat.js', 'game.js', 'encounters.js', 'conversation.js',
-  'convo-mood.js', 'convoTopics.js', 'convo-wants.js', 'convo-dialogue.js', 'convo-beats.js',
-  'convo-scene.js', 'examine.js', 'equipment.js', 'journal.js', 'party.js', 'party-formal.js',
-  'truth.js', 'contests.js', 'contestEngine.js', 'alienPlayers.js', 'storage.js', 'perceive.js',
-  'carexplore.js', 'justice.js', 'food.js', 'betrayal.js', 'corpses.js', 'lifeseed.js',
-  'progression.js', 'ledger.js', 'abilityActions.js', 'monsterBehaviors.js', 'statusEffects.js',
-  'villager-agency.js', 'fieldFights.js', 'villager-objectives.js', 'codex-people.js',
-  'membership.js', 'hierarchy.js', 'debug-scenarios.js', 'build.js'];
-for (const f of LIST) {
-  const src = fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8');
-  try { eval(src); }
-  catch (e) { console.error('EVAL FAIL ' + f + ': ' + e.message); process.exit(2); }
-}
-delete global.window;
-const Game = globalThis.Scattering.Game;
-Game.data = global.SCATTER_DATA;
+(async()=>{
+const {Game} = await H.loadGame({seed:SEED});
 Game.checkEncounter = () => {};
 Game.checkAnimals = () => {};
 
@@ -81,7 +36,7 @@ function ok(name, cond, detail) {
   else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); }
 }
 function setup() {
-  rng.reset();
+  // Every scenario uses the same shared seeded harness, with a fresh run.
   if (Game.tbfight) Game.tbfight = null;
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -223,3 +178,5 @@ setup();
 
 console.log(`\n${pass} passed, ${fail} failed (seed ${SEED})`);
 process.exit(fail ? 1 : 0);
+
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

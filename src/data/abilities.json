@@ -322,7 +322,7 @@
       "Feast Engine: the harvest becomes the weapon."
     ],
     "name": "Green Thumb, Literally",
-    "description": "Gather 50% more food from plants. Ask the Plants reveals what grows in the area, once a day.",
+    "description": "Gather 50% more food from plants. Ask the Plants reveals what grows in the area, once a day. Cultivate growing Haven beds: 200 kcal, once per bed each day. Higher levels accelerate growth further.",
     "flavor": "The plants lean toward you. They're gossiping. You're learning to listen.",
     "pool": "system",
     "tier": "utility",
@@ -346,6 +346,16 @@
         },
         "context": "field",
         "desc": "Reveal which plants grow in this area. Once a day."
+      },
+      {
+        "id": "cultivate",
+        "name": "Cultivate the beds",
+        "cost": {
+          "kcal": 200
+        },
+        "context": "camp",
+        "gardenOnly": true,
+        "desc": "Advance growing Haven beds by 4/8/12 days at levels 1/2/3, once per bed each day. Garden controls show the exact effect. Needs 500+ kcal before casting. Green Thumb boosts the next harvest; holding both green abilities adds growth."
       }
     ],
     "lane": "magic",
@@ -2831,14 +2841,14 @@
     "subclass": "beastmaster"
   },
   {
-    "description": "Days ago the plants started leaning toward you. You know which ones are thirsty, which are sick, which are hiding something good. You don\u2019t know how you know.",
+    "description": "Days ago the plants started leaning toward you. You know which ones are thirsty, which are sick, which are hiding something good. You don’t know how you know. Cultivate growing Haven beds: 200 kcal, once per bed each day. Higher levels accelerate growth further.",
     "id": "green_whisper",
     "role": "enabler",
     "slotRole": "wildcard",
     "knackOrigins": [
       "food"
     ],
-    "memory": "{kin} watched you press your palm to dry soil at {place} and find water underneath. \u2018How?\u2019 they asked. You didn\u2019t have an answer. You still don\u2019t.",
+    "memory": "{kin} watched you press your palm to dry soil at {place} and find water underneath. ‘How?’ they asked. You didn’t have an answer. You still don’t.",
     "modifiers": [
       {
         "op": "multiply",
@@ -2858,7 +2868,19 @@
     },
     "lane": "magic",
     "path": "forager",
-    "subclass": "gardener"
+    "subclass": "gardener",
+    "actions": [
+      {
+        "id": "cultivate",
+        "name": "Cultivate the beds",
+        "cost": {
+          "kcal": 200
+        },
+        "context": "camp",
+        "gardenOnly": true,
+        "desc": "Advance growing Haven beds by 4/8/12 days at levels 1/2/3, once per bed each day. Garden controls show the exact effect. Needs 500+ kcal before casting. Green Thumb boosts the next harvest; holding both green abilities adds growth."
+      }
+    ]
   },
   {
     "description": "Your hands stopped shaking this week. Not when you\u2019re scared, not when it matters. They just do the work now.",
@@ -3708,7 +3730,7 @@
   {
     "id": "cornucopia",
     "name": "Cornucopia",
-    "description": "Successful plant gathers build +15% yield each, up to +150%. Walking between patches keeps the chain; a failed gather, other work, combat or a night's rest breaks it.",
+    "description": "Successful plant gathers build +15% yield each, up to +150%. Walking between patches keeps the chain; a failed gather, other work, combat or a night's rest breaks it. Cultivated beds: your paid cultivation increases the next harvest by another 25%/50%/75% at levels 1/2/3.",
     "flavor": "THE BASKET OVERFLOWS. THE BASKET HAS ALWAYS OVERFLOWED. YOU JUST FINALLY NOTICED.",
     "role": "payoff",
     "slotRole": "wildcard",

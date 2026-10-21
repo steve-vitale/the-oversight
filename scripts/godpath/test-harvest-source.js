@@ -25,6 +25,7 @@ const K = require('./lib'), T = K.reporter('harvest-source');
   }
   fresh();
   const plant = G.data.plants.find(p => p.id === 'dandelion');
+  G.exitBuilding(); // this fixture proves a physical harvest on the grounds
   G.state.codex.plants[plant.id] = { level: 3, prepKnown: true };
   G.makePlot();
   Object.assign(G.gardenPlots()[0], { pid: plant.id, plantedDay: 1, lastHarvest: 1, lastTend: 85, weeds: 0, dead: false });
@@ -32,6 +33,7 @@ const K = require('./lib'), T = K.reporter('harvest-source');
   const harvest = s.inventory.find(x => x.plantId === plant.id);
   T.ok('actual player garden harvest identifies its real harvester', frac(harvest, me) === 1);
   T.ok('source tracking changes no garden yield', harvest.units === 167 && harvest.kcalEach === 45);
+  G.enterBuilding(); // carry the outdoor harvest to the indoor pantry
   G.donateToPantry(s.inventory.indexOf(harvest));
   T.ok('actual donation keeps the harvester, rather than inventing a donor source', frac(v.pantry[0], me) === 1);
   const draw = G.pantryDraw(v, 1000, { cook: true, round: 'floor1' });

@@ -1,0 +1,37 @@
+== E1: assignTask in-person from 5+ nodes away ==
+  PASS E1 remote in-person assign: no throw
+  PASS E1 no assignment lands from afar
+  PASS E1 honest refusal (face-to-face line)
+== E2: assignTask with remote via the player has no ability for ==
+  PASS E2 via='system-ping': no throw
+  PASS E2 via='system-ping': no assignment without the ability
+  PASS E2 via='system-ping': honest refusal
+  PASS E2 via='shout': no throw
+  PASS E2 via='shout': no assignment without the ability
+  PASS E2 via='shout': honest refusal
+  PASS E2 via='runner': no throw
+  PASS E2 via='runner': no assignment without the ability
+  PASS E2 via='runner': honest refusal
+== E3: remote assign must not engage the villager from afar ==
+  PASS E3 no engagement set from afar
+== E4: no pantry income for the absent drifter ==
+  PASS E4 resolveAssignments: no throw
+  PASS E4 no remote-forage income while away
+== S1: assigned villager removed mid-part, resolve must not throw ==
+  PASS S1 assignment recorded at haven (setup)
+  PASS S1 resolveAssignments after death: no throw
+== H1 (control): in-person assign at the haven works ==
+  PASS H1 at-haven assign: no throw
+  PASS H1 assignment lands
+  PASS H1 villager engaged while talking (batch freeze is legit in person)
+== H2: time_skip honesty ==
+  PASS H2 time_skip appears in available actions
+  PASS H2 first skip: no throw
+  PASS H2 part advances on skip
+  PASS H2 second skip same day: refused (1/day)
+  PASS H2 energy moved at the part boundary (the skip charges)
+== F1: fresh-game starvation must not throw (v.health init) ==
+  PASS F1 first starving endDay: no throw
+  PASS F1 health map initialized by villageEats
+
+27 passed, 0 failed (seed 7)

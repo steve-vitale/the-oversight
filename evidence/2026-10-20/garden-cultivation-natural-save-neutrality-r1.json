@@ -1,0 +1,11 @@
+{
+  "exact": true,
+  "fields": [
+    "row",
+    "stateHash",
+    "metrics",
+    "garden",
+    "rngTail"
+  ],
+  "scope": "Two separate processes with real localStorage, capture on/off; shared deterministic harness. Audit row, metrics, garden observation and RNG tail also match, but state clock identities differ from audit without storage."
+}

@@ -1,7 +1,7 @@
 'use strict';
 const K=require('./lib'),T=K.reporter('Garden usage observation'),O=require('../lib/garden-usage'),{gameplayHash}=require('../gear-usage-audit');
 (async()=>{
- const G=await K.load({seed:7002});K.newRun(G);const before=gameplayHash(G.state),observer=O.install(G);observer.sample();
+ const G=await K.load({seed:7002});K.newRun(G);G.exitBuilding();const before=gameplayHash(G.state),observer=O.install(G);observer.sample();
  T.ok('installing and sampling actual game observation leaves all saved state unchanged',before===gameplayHash(G.state));
  G.harvestGarden();T.ok('a real refused harvest is a call, never delivered food',observer.report.calls.harvestGarden===1&&observer.report.playerHarvestKcal===0&&observer.report.playerHarvests===0);
  const plant=G.data.plants.find(p=>p.form==='shoots'),plot={pid:plant.id,plantedDay:1,lastTend:1,lastHarvest:0,weeds:0,dead:false};

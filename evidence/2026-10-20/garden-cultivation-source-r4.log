@@ -1,0 +1,29 @@
+  ok   actual player garden harvest identifies its real harvester
+  ok   source tracking changes no garden yield
+  FAIL actual donation keeps the harvester, rather than inventing a donor source
+  FAIL real cooked pantry draw retains source and whole-unit rounding
+  FAIL bulk pantry withdrawal carries source through its explicit field copy
+  FAIL single pantry withdrawal carries source through its explicit field copy
+  ok   actual NPC garden duty identifies its own canonical actor
+  ok   NPC harvest remains physical portions, not a source-only credit
+  ok   actual NPC forage duty attributes its own haul
+  ok   actual player wild-forage action attributes the real harvest
+  ok   actual Light Fingers transfers the food source, not the thief identity
+  ok   legacy food reads do not invent an origin
+  ok   explicit wild-plant creation retains a source without changing fungibility
+  ok   real donation merges owners and legacy food proportionally in one stack
+  ok   taking part of a mixture preserves shares on both whole-unit sides
+  ok   donation/take-back cannot grow source fractions
+  ok   unknown mixed-species ledger preserves per-species harvester shares
+  ok   identification after staging preserves source without credit for unknown food
+  ok   staging merges the same species without overwriting either source
+  ok   actual nut processing keeps its source while reducing edible energy
+  ok   real mixed-ingredient pemmican retains only its harvested berry energy share
+  ok   source preservation leaves pemmican calories and whole bars unchanged
+  ok   finished-food shelving retains the source of a mixed recipe
+  ok   real save/load restores the source ledger on inventory and pantry food
+  ok   real mantle succession keeps the original harvest source on stored food
+  ok   no source prerequisite silently replaces the unfinished god deed
+
+harvest-source: 22 passed, 4 failed, 0 todo (phase 0)
+failing: actual donation keeps the harvester, rather than inventing a donor source | real cooked pantry draw retains source and whole-unit rounding | bulk pantry withdrawal carries source through its explicit field copy | single pantry withdrawal carries source through its explicit field copy

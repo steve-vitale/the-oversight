@@ -11,6 +11,7 @@
 //   - hurtFromStarvation(personId, damage) -> unmitigated NPC meal/famine damage, personal refusals and one death announcement
 //   - hostFeast(opts) -> feast report (feast ritual: guest list, real pantry cost, quality formula, broadcast beats, grantFeastBuff contract)
 //   - feastPlan(heads) -> planning data for the feast UI (no mutation)
+//   - advanceAbilityPractice(ab, amount)
 //   - spendCombatAction(kind)
 //   - havenDoorLanding(cells) -> nearest connected exterior landing; preserves saved structures
 //   - tbFighter(id)
@@ -156,7 +157,7 @@
   'use strict';
   const S = global.Scattering;
   // The same six reserved cells serve plot interactions and door placement.
-  const havenGardenIndex = (x, y) => x < 3 || x > 5 || y < 1 || y > 2 ? -1 : (y - 1) * 3 + x - 3;
+  const havenGardenIndex = (x, y) => x < 3 || x > 5 || y < 0 || y > 2 ? -1 : y === 0 ? 6 + x - 3 : (y - 1) * 3 + x - 3;
   const DAY_PARTS = ['dawn', 'midday', 'dusk', 'night'];
   const DAY_PART_HINT = {
     dawn: 'The world wakes. Animals are active.',
@@ -283,9 +284,9 @@
         if (r.ok === false) throw new Error('Data load failed: ' + f + ' (' + r.status + ')');
         return r.json();
       });
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json', 'gardening.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening };
       // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
       // godhood.js derives its capstones from it (godhood.json retired).
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
@@ -6377,6 +6378,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // executes. Results reported. Danger is real.
     resolveAssignments() {
       const v = this.state.village;
+      this.gardenKeeperTurn();
       // OUTDOOR CREW (Steve 2026-10-09): villagers on outdoor tasks are out in
       // the wild together this part — a patroller who gets jumped can call to
       // the crew instead of fleeing alone. Snapshot before resolution (entries
@@ -6391,6 +6393,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // That's the trade you made.
       for (const [task, leadVid] of Object.entries(v.taskLeads || {})) {
         if (leadVid === this.villagerId) continue;
+        if(task==='garden'&&leadVid===v.gardenKeeper&&v.gardenKeeperDay===(this.state.scholar.day||0))continue;
         if (!(v.roster || []).includes(leadVid)) { delete v.taskLeads[task]; continue; }
         if ((v.assignments || {})[leadVid]) continue;
         // SHELTER (2026-10-16): a mustered lead is inside, not working their domain.
@@ -6567,6 +6570,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     resolveOneAssignment(vid, a) {
+      if(a.task==='garden'&&(!(this.state.village.roster||[]).includes(vid)||!this.getPerson(vid)||this.getPerson(vid).dead))return;
       if (this.waterFavorCompanions?.().includes(vid)) return;
       const v = this.state.village;
       const vp = (this.data.villagers || []).find(x => x.id === vid)
@@ -6622,6 +6626,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Never throttles into famine: an empty pantry never engages.
       if ((a.task === 'forage' || a.task === 'garden' || a.task === 'fish') && this.prodThrottleEngaged()) {
         const from = a.task;
+        if(from === 'garden' && this.gardenMaintain(vid)>0){
+          this.say(`🌱 ${first} waters and weeds the beds before taking up other work. The harvest can wait.`);
+          this.creditDeed && this.creditDeed(vid,'gardening');
+        }
         const alt = this.prodThrottleAltTask();
         // FOODVOICE2 per-day voice gate (see header above): voice once per
         // day, count computed once; repeats stay silent.
@@ -6798,15 +6806,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // forms), seed stock comes from the pantry (2 units sown, the rest
           // stays food). Farmers/gardeners sow; others just tend.
           let sowMsg = '';
-          try { sowMsg = this.villagerSowPlot(vid) || ''; } catch (e) {}
+          if(plots.some(p=>p.dead)&&!plots.some(p=>!p.pid&&!p.dead)){this.reclaimGarden(vid);return;}
+          try { sowMsg = this.villagerSowPlot(vid) || ''; } catch (e) { console.warn('[garden] sow',e); }
           this.say(`🌱 ${first} looks over the garden: turned soil, nothing planted.${sowMsg ? ' ' + sowMsg : ' Someone has to sow first.'}`);
         } else {
-          for (const p of live) { p.lastTend = gday; p.weeds = 0; }
+          this.gardenMaintain(vid);
+          if(this.gardenMagicGate(vid).ok)this.cultivateGarden(vid);
+          const sowing=this.villagerSowPlot(vid);if(sowing)this.say(`🌱 ${sowing}`);
           let kcal = 0, n = 0;
           for (const p of live) {
-            if (this.plotRipe(p, gday)) {
+            if (this.plotRipe(p, gday) && this.data.plants.find(x=>x.id===p.pid)?.edibility === 'safe') {
               kcal += Math.round(this.plotYieldKcal(p) * 0.8 * eff);
-              p.lastHarvest = gday; n++;
+              this.gardenHarvestTaken(p, gday); n++;
             }
           }
           if (kcal > 0) this.stockPantry(kcal, 'Garden harvest', { harvestShares: this.harvestOrigin(vid) });
@@ -13811,6 +13822,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // you've got the knack (fireWise). Failures are honest and teach.
     makeFire(cx, cy) {
       if (this.over) return null;
+      if(this.gardenCellAt(cx,cy)?.plot){this.say('This is a prepared garden bed. Choose other ground.');return null;}
       this.sweepDeadFires();
       const s = this.state.scholar;
       const detail = this.genDetail(this.map.px, this.map.py);
@@ -13960,6 +13972,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // now the loop closes — carry shelter, pitch it, sleep warm.)
     pitchTent(cx, cy) {
       if (this.over) return null;
+      if(this.gardenCellAt(cx,cy)?.plot){this.say('This is a prepared garden bed. Choose other ground.');return null;}
       const s = this.state.scholar;
       const detail = this.genDetail(this.map.px, this.map.py);
       const cell = detail[cy] && detail[cy][cx];
@@ -20698,8 +20711,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // The mechanic is never gated — only which crops you can sow.
 
     // gardenGrowthDays(form): shoots are quick, roots take their time.
-    gardenGrowthDays(form) {
-      return { shoots: 7, berries: 12, roots: 14 }[form] || 10;
+    gardenGrowthDays(form, pid) {
+      return this.gardenProfile(pid, form).maturityDays;
     },
 
     // gardenPlots(): the haven tile's plots. Plots live on the haven tile —
@@ -20711,14 +20724,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return t.plots;
     },
 
-    // The six rows behind the hall. Old plots map by their existing index;
-    // no migration, terrain replacement or movement cost change is needed.
+    // Haven tiers open additional beds behind the hall. Old plot indices
+    // remain stable; preparing a bed changes its actual ground to soil.
     gardenCellAt(cx, cy) {
       const t = this.playerTile();
       if (!t || t.type !== 'haven' || this.state.scholar.insideHaven) return null;
       const index = havenGardenIndex(cx, cy);
       if (index < 0) return null;
-      return { index, plot: this.gardenPlots()[index] || null };
+      return { index, plot: this.gardenPlots()[index] || null, locked: index >= Math.max(this.gardenCapacity(), this.gardenPlots().length) };
     },
     gardenPlotLabel(plot, index) {
       if (!plot) return `Plot ${index + 1} · unbroken ground`;
@@ -20727,30 +20740,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const plant = this.data.plants.find(p => p.id === plot.pid) || {};
       const name = this.plantCalledName(plot.pid);
       const day = this.state.scholar.day || 0;
-      const left = Math.max(0, this.gardenGrowthDays(plant.form) - (day - plot.plantedDay));
+      const left = this.gardenGrowthLeft(plot, day);
       const growth = this.plotRipe(plot, day) ? 'ripe' : left ? `ripe in ${left}d` : 'growing';
       return `Plot ${index + 1} · ${name} · ${growth}${day - plot.lastTend >= 1 ? ' · needs tending' : ''}`;
     },
     gardenMarkerAt(cx, cy) {
       const cell = this.gardenCellAt(cx, cy);
-      if (!cell) return '';
+      if (!cell || cell.locked) return '';
       const title = this.gardenPlotLabel(cell.plot, cell.index).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
       const state = !cell.plot ? 'unbroken' : cell.plot.dead ? 'dead' : !cell.plot.pid ? 'empty' : this.plotRipe(cell.plot, this.state.scholar.day || 0) ? 'ripe' : 'growing';
       return `<span class="garden-marker ${state}" data-garden-plot="${cell.index}" title="${title}" aria-label="${title}">${cell.index + 1}${state === 'growing' || state === 'ripe' ? '🌱' : '▤'}</span>`;
     },
 
-    // makePlot(): break new ground. Haven tile, 64 ticks + 120 kcal, max 6.
+    // makePlot(): paid outdoor preparation, limited by Haven's current tier.
     makePlot() {
       if (this.over) return null;
       const t = this.playerTile();
       if (!t || t.type !== 'haven') { this.say('Gardens grow at home — break ground on the haven tile.'); return null; }
       const plots = this.gardenPlots();
-      if (plots.length >= 6) { this.say('Six plots is all the ground behind the hall can hold. Tend what you have.'); return null; }
+      const gate = this.gardenGate('make');
+      if (!gate.ok) { this.say(gate.reason); return null; }
+      const {x,y} = this.gardenSlot(plots.length);
+      this.genDetail(4,4)[y][x] = 'dirt';
       const scholar = this.state.scholar;
       scholar.kcal = Math.max(0, (scholar.kcal || 0) - 120);
       plots.push({ pid: null, plantedDay: 0, lastTend: 0, lastHarvest: 0, weeds: 0, dead: false });
-      this.say(`You break ground behind the hall — plot ${plots.length} of 6, turned and ready. (Sow seeds to plant. Nothing grows until you sow, and nothing lives unless you tend it daily.)`);
-      return this.tickAction(64) || this.status();
+      this.say(`You break ground behind the hall — bed ${plots.length} of ${this.gardenCapacity()}, turned and ready. Sow seed to start a crop.`);
+      this.tickAction(64); this.save(); return this.status();
     },
 
     // guideForPlant(pid): the garden-duty villager whose knowledge guides your
@@ -20766,7 +20782,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if ((this.villagerKnowsPlants(vid) || []).indexOf(pid) !== -1) return vid;
           }
         }
-      } catch (e) {}
+        const keeper=v.gardenKeeper;
+        if(keeper&&this.gardenKeeperReady(keeper)&&(this.villagerKnowsPlants(keeper)||[]).includes(pid))return keeper;
+      } catch (e) { console.warn('[garden] guide',e); }
       return null;
     },
 
@@ -20794,7 +20812,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // guidance is THEIR teaching event, with their fallibility.
         const guide = playerKnows ? null : this.guideForPlant(item.plantId);
         if (!playerKnows && !guide) continue;
-        const units = inv.filter(i => i.plantId === item.plantId).reduce((s, i) => s + (i.units || 1), 0);
+        const units = inv.filter(i => i.plantId === item.plantId).reduce((s, i) => s + Math.max(0, i.units ?? 1), 0);
         if (units < 2) continue;
         seen[item.plantId] = true;
         // GUIDED NAME HONESTY (break-it knowledge 2026-10-11 r4): a plant
@@ -20805,7 +20823,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const guided = !playerKnows;
         opts.push({ pid: item.plantId,
           name: guided ? (plant.description || 'an unfamiliar plant') : plant.name,
-          form, units, growthDays: this.gardenGrowthDays(form),
+          form, units, growthDays: this.gardenGrowthDays(form, item.plantId),
+          singleHarvest:this.gardenProfile(item.plantId).singleHarvest,
+          regrowDays:this.gardenProfile(item.plantId).regrowDays,
           kcalEach: guided ? null : plant.caloriesPerUnit,
           guided, guide });
       }
@@ -20815,6 +20835,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // sowPlot(plantId): plant the first empty plot. Costs 2 units of seed stock.
     sowPlot(plantId) {
       if (this.over) return null;
+      const gate=this.gardenWorkGate();if(!gate.ok){this.say(gate.reason);return null;}
       const plots = this.gardenPlots();
       const plot = plots.find(p => !p.pid && !p.dead);
       if (!plot) { this.say('No empty plot — make a new one first.'); return null; }
@@ -20825,15 +20846,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const inv = this.state.scholar.inventory;
       for (let i = inv.length - 1; i >= 0 && need > 0; i--) {
         if (inv[i].plantId !== plantId) continue;
-        const u = inv[i].units || 1;
+        const u = Math.max(0, inv[i].units ?? 1);
         if (u <= need) { need -= u; inv.splice(i, 1); }
         else { inv[i].units = u - need; need = 0; }
       }
       const day = (this.state.scholar || {}).day || 0;
-      plot.pid = plantId; plot.plantedDay = day; plot.lastTend = day;
-      plot.lastHarvest = 0; plot.weeds = 0; plot.dead = false;
+      this.gardenPlant(plot, plantId, day);
       const plant = (this.data.plants || []).find(p => p.id === plantId) || {};
-      this.say(`You sow ${opt.name} — ${this.pluralize(opt.growthDays, 'day')} to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)`);
+      const crop=this.gardenCropProfile(plot);
+      this.say(`You sow ${opt.name}: ${opt.growthDays} days to first harvest. ${crop.singleHarvest ? 'Harvest removes the crop; sow new seed afterward.' : `Later harvests need ${crop.regrowDays} days of regrowth.`} Tend daily; garden magic can accelerate growth. (2 units sown.)`);
       // GUIDED SOWING IS A LESSON (break-it knowledge 2026-10-11 r4): the old
       // code granted instant L1 identification ('experiment', no teacher) for
       // any guided plant — an identify-anything machine that bypassed every
@@ -20853,7 +20874,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         } catch (e) {}
       }
-      return this.tickAction(16) || this.status();
+      this.tickAction(16); this.save(); return this.status();
     },
 
     // villagerSowPlot(vid): a villager on garden duty sows an empty plot.
@@ -20868,8 +20889,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const plots = this.gardenPlots();
       const plot = plots.find(p => !p.pid && !p.dead);
       if (!plot) return null;
-      const vp = (this.data.villagers || []).find(x => x.id === vid)
-        || (this.data.background_survivors || []).find(x => x.id === vid) || {};
+      const vp = this.getPerson(vid) || {};
       const occ = (vp.formerOccupation || '').toLowerCase();
       const greenHands = ['farmer', 'gardener', 'botanist', 'herbalist', 'forager'].some(w => occ.includes(w));
       if (!greenHands) return null;
@@ -20881,12 +20901,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!plant) continue;
         if (!['shoots', 'berries', 'roots'].includes(plant.form)) continue;
         const cand = { pid, name: plant.name, kcalEach: plant.caloriesPerUnit || 0 };
-        if (!best || cand.kcalEach > best.kcalEach) best = cand;
+        if (plant.edibility !== 'safe' || cand.kcalEach <= 0) continue;
+        if (!best || cand.kcalEach / this.gardenGrowthDays(plant.form, pid) > best.kcalEach / this.gardenGrowthDays(best.form, best.pid)) best = {...cand,form:plant.form};
       }
       if (!best) return null;
       const day = (this.state.scholar || {}).day || 0;
-      plot.pid = best.pid; plot.plantedDay = day; plot.lastTend = day;
-      plot.lastHarvest = 0; plot.weeds = 0; plot.dead = false;
+      this.gardenPlant(plot, best.pid, day);
       const first = this.displayName(vid);
       try { this.creditDeed && this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
       // NAME HONESTY (break-it knowledge 2026-10-11 r4): the true name is L1
@@ -20894,18 +20914,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // believed name (wrongAs) or the honest descriptor until you've learned
       // it ("if you don't know, it doesn't show").
       const shown = this.plantCalledName ? this.plantCalledName(best.pid) : best.name;
-      return `${first} sowed ${shown} in the empty plot — seed from the village stores.`;
+      return `${first} sowed ${shown} in the empty plot — seed gathered during garden duty.`;
     },
 
-    // plotYieldKcal(plot): one harvest. Knowledge pays: L1 5000, +25%/level.
+    // Species units and actual food value; planted legacy crops keep old yields.
     // Weedy plots (3+ untended days) yield half. Dead plots yield nothing.
     plotYieldKcal(plot) {
-      if (!plot || !plot.pid || plot.dead) return 0;
-      const level = ((this.state.codex || {}).plants || {})[plot.pid];
-      const lvl = (level && level.level) || 1;
-      let kcal = Math.round(5000 * (1 + 0.25 * (lvl - 1)));
-      if ((plot.weeds || 0) >= 3) kcal = Math.round(kcal * 0.5);
-      return kcal;
+      if(!plot?.pid||plot.dead)return 0;
+      const plant = this.data.plants.find(p => p.id === plot.pid);
+      if(!plant||plant.caloriesPerUnit<=0)return 0;
+      if(this.gardenCropProfile(plot).legacy){
+        const level=Math.max(1,this.state.codex?.plants?.[plot.pid]?.level||1);
+        return Math.round(5000*(1+.25*(level-1))*((plot.weeds||0)>=3?.5:1)*(plot.magicYield||1));
+      }
+      return this.gardenHarvestUnits(plot) * Math.max(0, plant.caloriesPerUnit ?? 0);
     },
 
     // plotRipe(plot, day): mature and due (harvests every 3 days).
@@ -20913,13 +20935,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!plot || !plot.pid || plot.dead) return false;
       const plant = (this.data.plants || []).find(p => p.id === plot.pid);
       if (!plant) return false;
-      if (day - plot.plantedDay < this.gardenGrowthDays(plant.form)) return false;
-      return day - (plot.lastHarvest || 0) >= 3;
+      return this.gardenGrowthLeft(plot, day) <= 0;
     },
 
     // tendGarden(): one action tends every plot. 16 ticks + 40 kcal.
     tendGarden() {
       if (this.over) return null;
+      const gate=this.gardenGate('tend');if(!gate.ok){this.say(gate.reason);return null;}
       const plots = this.gardenPlots();
       const live = plots.filter(p => p.pid && !p.dead);
       if (!live.length) { this.say('Nothing planted — tend the soil all you like, nothing will come up. Sow first.'); return null; }
@@ -20929,12 +20951,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.say(`You work the garden — water, weeds, turned soil. ${live.length} plot${live.length > 1 ? 's' : ''} tended. (Miss days and the weeds take it back.)`);
       // PARITY (2026-10-14): the same deed a villager's garden duty credits.
       try { if (this.noteDeed) this.noteDeed('gardening'); } catch (eT) { console.warn('[tracks] garden deed', eT); }
-      return this.tickAction(16) || this.status();
+      this.tickAction(16); this.save(); return this.status();
     },
 
     // harvestGarden(): gather what's ripe into your pack.
     harvestGarden() {
       if (this.over) return null;
+      const gate=this.gardenWorkGate();if(!gate.ok){this.say(gate.reason);return null;}
       const day = (this.state.scholar || {}).day || 0;
       const plots = this.gardenPlots();
       const ripe = plots.filter(p => this.plotRipe(p, day));
@@ -20944,21 +20967,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const p of ripe) {
         const plant = (this.data.plants || []).find(x => x.id === p.pid) || {};
         const kcal = this.plotYieldKcal(p);
-        const units = Math.max(1, Math.round(kcal / (plant.caloriesPerUnit || 100)));
+        const units = this.gardenHarvestUnits(p);
         const entry = ((this.state.codex || {}).plants || {})[p.pid] || {};
         this.state.scholar.inventory.push({
-          plantId: p.pid, units, kcalEach: plant.caloriesPerUnit || 100,
+          plantId: p.pid, units, kcalEach: plant.caloriesPerUnit ?? 0,
           harvestShares: this.harvestOrigin(this.villagerId),
           spoilDay: day + (plant.spoilageDays || 4), name: plant.name || p.pid,
           unit: plant.unit || 'handful', kg: 0.1,
           prep: (entry.level || 0) >= 2 && entry.prepKnown ? 'Garden-fresh.' : 'Fresh from the garden.',
         });
         totalKcal += kcal;
-        p.lastHarvest = day;
+        this.gardenHarvestTaken(p, day);
         bits.push(`${units}\u00d7 ${plant.name || p.pid}`);
       }
       this.say(`Harvest: ${bits.join(', ')} — about ${totalKcal} kcal from the garden. (Renewable. The wild didn't pay for this.)`);
-      return this.tickAction(16) || this.status();
+      this.tickAction(16); this.save(); return this.status();
     },
 
     // gardenTick(): the daily reckoning, from endDay. Untended plots weed
@@ -21002,8 +21025,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try {
           if (this.plotRipe(p, day)) state = 'ripe';
           else {
-            const growth = this.gardenGrowthDays(plant.form);
-            const left = growth - (day - (p.plantedDay || 0));
+            const left = this.gardenGrowthLeft(p, day);
             state = left > 0 ? `ripe in ${left}d` : 'maturing';
           }
         } catch (e) {}
@@ -21015,7 +21037,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (this.plotRipe(p, day)) ripe++; } catch (e) {}
         if (day - (p.lastTend || 0) >= 1) needsTend++;
       }
-      return { count: plots.length, live: live.length, empty: empty.length,
+      return { capacity: this.gardenCapacity(), count: plots.length, live: live.length, empty: empty.length,
                dead: dead.length, ripe, needsTend, lines };
     },
 
@@ -21023,16 +21045,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Returns {ok, reason, short} — no silent dead-ends; every gate names
     // itself. The seed-stock gate stays (sowOptions), but says WHY.
     gardenGate(action) {
+      if(action==='outside')return {ok:this.state.scholar.insideHaven===true};
+      const work=this.gardenWorkGate();if(!work.ok)return work;
       const plots = this.gardenPlots();
       const day = (this.state.scholar || {}).day || 0;
       const live = plots.filter(p => p.pid && !p.dead);
       const empty = plots.filter(p => !p.pid && !p.dead);
-      if (action === 'make') {
-        if (plots.length >= 6)
-          return { ok: false, short: '6 plots max',
-                   reason: 'Six plots is all the ground behind the hall can hold. Tend what you have.' };
-        return { ok: true };
-      }
+      if (action === 'make') return this.gardenMakeGate();
+      if(action==='reclaim')return {ok:deadBedReady(),short:'no dead bed',reason:'No dead bed needs clearing.'};
+      if(action==='cultivate'){const g=this.gardenMagicGate();return {ok:g.ok,short:'not ready',reason:g.why};}
+      function deadBedReady(){return plots.some(p=>p.dead);}
       if (action === 'sow') {
         if (!empty.length)
           return { ok: false, short: 'no empty plot',
@@ -21045,6 +21067,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return { ok: true };
       }
       if (action === 'tend') {
+        if(this.state.scholar.kcal<40)return {ok:false,short:'40 kcal',reason:'Tending needs 40 kcal.'};
         if (!live.length)
           return { ok: false, short: 'nothing planted',
                    reason: 'Nothing planted — sow first.' };
@@ -21067,37 +21090,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // gardenStripHtml(): the haven panel's garden section. Buttons carry
     // data-garden attrs; app.js wires them. Gated buttons name their gate
     // in the label (short) and aloud on tap (reason) — no silent dead-ends.
-    gardenStripHtml({ sowOpen = false, feedback = null } = {}) {
+    gardenStripHtml({ sowOpen = false, keeperOpen = false, feedback = null } = {}) {
       const esc = s => String(s == null ? '' : s)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;')
         .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       let gs;
       try { gs = this.gardenStatus(); } catch (e) { return ''; }
-      const head = gs.count === 0
-        ? `<p class="small" style="margin-top:8px"><b>🌱 Garden:</b> no plots yet — break ground behind the hall.</p>`
-        : `<p class="small" style="margin-top:8px"><b>🌱 Garden:</b> ${gs.count} plot${gs.count > 1 ? 's' : ''}` +
-          (gs.lines.length ? ` · ${esc(gs.lines.join(' · '))}` : '') +
-          (gs.empty ? ` · ${gs.empty} empty` : '') +
-          (gs.dead ? ` · ${gs.dead} dead` : '') + `</p>`;
+      const head=`<p class="small"><b>${gs.count}/${gs.capacity} prepared beds</b>${gs.ripe ? ` · ${gs.ripe} ripe` : ''}${gs.empty ? ` · ${gs.empty} empty` : ''}${gs.dead ? ` · ${gs.dead} dead` : ''}</p>`;
       const btn = (action, label) => {
         let gate = { ok: true };
         try { gate = this.gardenGate(action) || gate; } catch (e) {}
         if (gate.ok) return `<button class="btn sm" data-garden="${action}">${esc(label)}</button>`;
-        return `<button class="btn sm ghost" data-garden="${action}" title="${esc(gate.reason || '')}">${esc(label)} (${esc(gate.short || 'not now')})</button>`;
+        return `<button class="btn sm ghost" data-garden="${action}" title="${esc(gate.reason || '')}">${esc(label)}</button>`;
       };
-      const btns = gs.count === 0
-        ? btn('make', 'Make a garden plot')
+      const magic=this.gardenMagicPlan();
+      const btns = this.state.scholar.insideHaven ? btn('outside','Step outside to garden') : gs.count === 0
+        ? btn('make', 'New bed · 120 kcal')
         : (gs.empty ? btn('sow', 'Sow seeds') : '') +
-          (gs.needsTend ? btn('tend', 'Tend the garden') : '') +
+          (gs.needsTend ? btn('tend', 'Tend · 40 kcal') : '') +
           (gs.ripe ? btn('harvest', 'Harvest the garden') : '') +
-          (gs.count < 6 ? `<details class="garden-expand"><summary>Add another plot</summary>${btn('make', 'Make a garden plot')}</details>` : '');
+          (gs.count < gs.capacity ? btn('make','New bed · 120 kcal') : '');
       const rows = this.gardenPlots().map((p, i) => `<li>${esc(this.gardenPlotLabel(p, i))}</li>`).join('');
       const hint = gs.empty && !feedback ? `<p class="small garden-next">Nothing grows in an empty plot. Sow 2 units of a known shoot, berry or root; keep seed stock when foraging.</p>` : '';
-      const seeds = sowOpen ? this.sowOptions().map(o => `<button class="btn" data-garden-seed="${esc(o.pid)}">Sow ${esc(o.name)}${o.guided ? ' (guided)' : ''}<small>2 of ${o.units} units · ${o.growthDays} days to mature</small></button>`).join('') : '';
-      return `<section class="garden-work">${head}<p class="small">Six plots behind the hall, north of the building. New plot: 120 kcal · 64 ticks.</p>` +
-        (rows ? `<ol class="garden-plots">${rows}</ol>` : '') + hint +
-        (feedback ? `<p class="garden-feedback" role="status">${esc(feedback)}</p>` : '') +
-        `<div class="btnrow" style="margin:4px 0">${btns}</div>${seeds}</section>`;
+      const seeds = sowOpen ? this.sowOptions().map(o => `<button class="btn" data-garden-seed="${esc(o.pid)}">Sow ${esc(o.name)}${o.guided ? ' (guided)' : ''}<small>2 of ${o.units} units · ${o.growthDays} days to first harvest · ${o.singleHarvest ? 'replant after harvest' : `${o.regrowDays} days between later harvests`}</small></button>`).join('') : '';
+      const extra = this.state.scholar.insideHaven ? '' : (gs.dead ? btn('reclaim','Clear a dead bed · 40 kcal') : '') + (magic && gs.live ? btn('cultivate',`Cultivate · ${magic.costKcal} kcal · ${magic.growth}d growth`) : '');
+      const village=this.state.village;
+      const keeper=village.gardenKeeper ? this.displayName(village.gardenKeeper) + (this.gardenKeeperReady(village.gardenKeeper) ? '' : ' (unavailable)') : 'none';
+      const caretakers=keeperOpen ? (village.roster||[]).filter(id=>this.gardenKeeperReady(id)).map(id=>`<button class="btn" data-garden-keeper="${esc(id)}">${esc(this.displayName(id))}</button>`).join('') + `<button class="btn" data-garden-keeper="">No standing caretaker</button>` : '';
+      return `<section class="garden-work">${head}<div class="garden-actions">${btns}${extra}</div>${feedback ? `<p class="garden-feedback" role="status">${esc(feedback)}</p>` : ''}${seeds}
+        <details ${keeperOpen ? 'open' : ''} class="garden-keeper"><summary data-garden-caretakers>Caretaker: ${esc(keeper)}</summary><p class="small">One daily assignment at Haven. Other orders take priority.</p>${caretakers}</details>
+        <details class="garden-details"><summary>Crop details and costs</summary><p class="small">${esc(this.gardenCapacityHint())} New bed: 120 kcal and a substantial job. Ordinary crops are slow; paid magic accelerates them.${magic ? ` Cultivation advances growing beds by ${magic.growth} days and multiplies their next harvest by ${magic.yield}.` : ''}</p>${rows ? `<ol class="garden-plots">${rows}</ol>` : ''}${hint}</details></section>`;
+
     },
 
     // trapMarkerAt(cx, cy): the grid renderer's trap badge. Your traps are
@@ -21162,7 +21185,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.gardenNudgeDay = day;
       if (!this.playerAtHaven || !this.playerAtHaven()) return;
       const first = String(this.displayName(farmer)).split(' ')[0];
-      this.say(`🌱 ${first} pulls you aside, dirt under their nails. "The near ground is thinning — I've watched this happen before. Break ground behind the hall and I'll sow it. We can't forage our way out of this one." (Make a garden plot at Haven, then sow seed.)`);
+      this.say(`🌱 ${first} pulls you aside, dirt under their nails. "The near ground is thinning. We can start beds for later, but they won't feed us soon. Break ground behind the hall and save seed." (Make a garden plot at Haven, then sow seed.)`);
     },
 
     // ============ ALIVE: monsters are animals (alien ones) ============
@@ -23844,6 +23867,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     // abilityXP: using an ability (or its related action) grants XP. Level up at thresholds.
     // L1 -> L2: 10 uses. L2 -> L3: 25 uses. L3 is max (for now — evolution coming).
+    // Shared practice arithmetic: the actor's actual ability entry, same
+    // 6/12 thresholds and reset for human and resident casts. Caller owns
+    // narration, discoveries and evolution choices for that actor.
+    advanceAbilityPractice(ab, amount) {
+      if(!ab||ab.level>=3)return false;
+      ab.xp=(ab.xp||0)+(amount||1);
+      if(ab.xp < (ab.level===1?6:12))return false;
+      ab.level++;ab.xp=0;return true;
+    },
     gainAbilityXP(abilityId, amount) {
       const s = this.state.scholar;
       // SYNERGY: every ability use is a potential resonance attempt.
@@ -23866,14 +23898,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (learnSkill at the same 6/12 thresholds), never a slot entry.
       if (!ab && this.isSkillLane(abilityId)) { this.gainSkillLaneXP(abilityId, amount); return; }
       if (!ab || ab.level >= 3) return;
-      ab.xp = (ab.xp || 0) + (amount || 1);
-      // XP THRESHOLDS (evolution build 2026-10-11, measured): L1->L2: 6,
-      // L2->L3: 12 (was 10/25 — sims measured ~0.1 xp/day, making L3 need
-      // ~280 days). A focused ability now masters ~day 70-90.
-      const need = ab.level === 1 ? 6 : 12;
-      if (ab.xp >= need) {
-        ab.level++;
-        ab.xp = 0;
+      if (this.advanceAbilityPractice(ab, amount)) {
         try {
           const pg = (typeof this.progState === 'function') ? this.progState() : (s.prog = s.prog || {});
           pg.surgeResonance = (pg.surgeResonance || 0) + 5;
