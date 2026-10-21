@@ -106,11 +106,12 @@ function giveSeeds(pid, units) {
   Game.state.scholar.inventory.push({ plantId: pid, units: units || 3 });
 }
 function makePlot() {
-  Game.playerTile = () => ({ type: 'haven' });
+  // Sowing is outdoor work: use the real Haven grounds and retain playerTile.
+  Game.exitBuilding();
   Game.state.scholar.kcal = 3000;
   Game.state.scholar.energy = 100;
   Game.makePlot();
-  delete Game.playerTile;
+
 }
 const said = [];
 const _say = Game.say.bind(Game);

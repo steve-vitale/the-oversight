@@ -1531,7 +1531,52 @@ and raw panels/replays for verified counts and coarse first differences; those
 are diagnostic associations, not causal explanations of endings. Five authored
 joint jobs and remaining callback/voice prose gaps stay release blockers.
 
-## Garden direction and measured dead spots (2026-10-20)
+## Garden cultivation candidate (2026-10-20)
+
+Register: capacity2/4/6/9 by existing Haven tier; bed preparation120 kcal;
+new crop profiles in gardening.json (shoots30/28 days, roots generally90 days
+and single harvest, slower berries/woody crops and named exceptions); species
+unit yields with real food values; existing human knowledge bonus unchanged.
+Planted legacy crops keep their cycles/yields until replanted. Reclaim costs40
+kcal. Green Thumb/Whisper cultivation costs200 kcal through useAbility, advances
+4/8/12 growth days with owned Whisper synergy2/4/8, and applies the declared
+Thumb/Cornucopia next-harvest multipliers. Per-bed daily limits persist through
+replanting. NPC casts use their own food/hunger and practice. A standing worker
+uses one garden assignment/day, subject to availability and other orders.
+Surplus diversion maintains living crops before alternate work. These change
+food, labor, time and action/RNG trajectories; none is a free survival buff.
+
+Controller revision: public outdoor sowing, truthful success counts, real
+caretaker orders/reclaim/cultivation and reserved caretaker staffing. Both
+baseline e984 and candidate use that identical controller. Its results cannot
+be compared to the preceding audit as if only Game changed.
+
+Matched16 seeds per capable/maker/merchant/caregiver,150-iteration screen,
+all23 domains, same current observer/harness/controllers, four neutral controls
+per arm: wins14→15,10→7,10→6,11→11 (each /16). Retain review_required. Capable
+flags class/earned gear/contest-show gear; maker flags Table entry/invitation,
+day30 survival, deaths, living residents and earned gear; merchant flags Table
+entry/invitation, class and contest-show gear. Caregiver has no threshold flags
+but changed cases are still replayed. No aggregate gain clears another warning.
+
+38 predeclared paired replays cover every binary win flip in either direction
+plus the worst adverse deaths, hunger, earned gear, class, community and day30
+cases. Each arm exactly matches retained full state, outcome and all metrics.
+First coarse differences occur at day2 after work, including kcal, needs and
+some rosters. They establish changed early time/work allocation, not a causal
+explanation of each later ending. No HP, food subsidy or win-rate restoration
+was added. Named offered-farmer coverage is only1/64 played per arm (63 actual
+absent offers); passing selection and campaign neutrality do not make that a
+viability sample. Small-effect confirmation/holdouts remain calibration work.
+
+Decision: retain the requested cultivation redesign for development playtests
+subject to fresh mobile/save/offline and full-check gates. Preserve the scorecard
+warnings for Muse rather than claiming balance clearance. Crop delivery is not
+useful intake. Ordinary-only and eligible-NPC-magic viability remain unproven.
+See garden-cultivation-balanced-r1, farmer-balanced-r2, raw panels and per-policy
+replay-r1 reports. Winning remains hard; lower wins alone are not a veto.
+
+## Historical garden direction and dead spots (2026-10-20)
 
 No gameplay lever changes in this audit/tooling milestone. Current capacity
 is six at every Haven tier; ordinary crop growth7/12/14 days and repeated

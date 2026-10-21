@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "capacityByTier": [2, 4, 6, 9],
+  "profiles": {
+    "shoots": {"maturityDays": 30, "regrowDays": 28, "units": 24, "singleHarvest": false},
+    "roots": {"maturityDays": 90, "regrowDays": 0, "units": 30, "singleHarvest": true},
+    "berries": {"maturityDays": 180, "regrowDays": 45, "units": 40, "singleHarvest": false},
+    "woody": {"maturityDays": 730, "regrowDays": 60, "units": 40, "singleHarvest": false}
+  },
+  "plants": {
+    "muscadine": {"maturityDays": 365, "regrowDays": 45, "units": 40, "singleHarvest": false},
+    "cattail": {"maturityDays": 90, "regrowDays": 30, "units": 24, "singleHarvest": false},
+    "wild_strawberry": {"maturityDays": 120, "regrowDays": 30, "units": 32, "singleHarvest": false},
+    "woodland_strawberry": {"maturityDays": 120, "regrowDays": 30, "units": 32, "singleHarvest": false},
+    "sweet_cassava": {"maturityDays": 270, "regrowDays": 0, "units": 20, "singleHarvest": true},
+    "bitter_cassava": {"maturityDays": 270, "regrowDays": 0, "units": 20, "singleHarvest": true},
+    "sweet_potato": {"maturityDays": 100, "regrowDays": 0, "units": 30, "singleHarvest": true},
+    "taro": {"maturityDays": 180, "regrowDays": 0, "units": 24, "singleHarvest": true},
+    "cushcush_yam": {"maturityDays": 240, "regrowDays": 0, "units": 24, "singleHarvest": true}
+  },
+  "magic": {
+    "growthByLevel": [0, 4, 8, 12],
+    "whisperSynergyByLevel": [0, 2, 4, 8],
+    "thumbYieldByLevel": [1, 1.5, 2, 2.5],
+    "cornucopiaYieldByLevel": [1, 1.25, 1.5, 1.75],
+    "npcHungerLimit": 80
+  }
+}

@@ -919,7 +919,7 @@ function workWater(Game, ctx) {
     const onTask = (t) => Object.values(asg).some(a => a && a.task === t);
     const free = (v.roster || []).filter(id => {
       if (id === Game.villagerId) return false;
-      if (asg[id]) return false;
+      if (asg[id] || v.gardenKeeper === id) return false;
       try { const p = Game.getPerson(id); return p && !p.dead; } catch (e) { return true; }
     });
     let fi = 0;
@@ -961,18 +961,46 @@ function groundsThinning(Game) {
 // items). An honest player sows from the fresh haul BEFORE donating it,
 // or the village eats the seed. Returns true when something was sown.
 function trySow(Game, ctx) {
+  if (!Game.gardenPlots || !Game.sowOptions || !Game.sowPlot || Game.map.px !== 4 || Game.map.py !== 4) return false;
+  const plots=Game.gardenPlots(),plot=plots.find(p=>!p.pid&&!p.dead);
+  if(!plot)return false;
+  const opts=(Game.sowOptions()||[]).slice().sort((a,b)=>a.growthDays-b.growthDays||(b.kcalEach||0)-(a.kcalEach||0));
+  if(!opts.length)return false;
+  const inside=Game.state.scholar.insideHaven;
   try {
-    if (!Game.gardenPlots || !Game.sowOptions || !Game.sowPlot) return false;
-    if (!Game.playerAtHaven || !Game.playerAtHaven()) return false;
-    const plots = Game.gardenPlots() || [];
-    if (!plots.some(p => !p.pid && !p.dead)) return false;
-    const opts = (Game.sowOptions() || []).slice();
-    if (!opts.length) return false;
-    // quick crops first (shoots 7d feed sooner), then richest
-    opts.sort((a, b) => (a.growthDays - b.growthDays) || ((b.kcalEach || 0) - (a.kcalEach || 0)));
-    try { Game.sowPlot(opts[0].pid); ctx.sown = (ctx.sown || 0) + 1; return true; }
-    catch (e) { return false; }
-  } catch (e) { return false; }
+    if(inside&&Game.exitBuilding()!==true)return false;
+    Game.sowPlot(opts[0].pid);
+    if(plot.pid!==opts[0].pid||plot.dead)return false;
+    ctx.sown=(ctx.sown||0)+1;return true;
+  } catch(e){console.warn('[policy] sow',e.message);return false;}
+  finally{if(inside&&!Game.state.scholar.insideHaven&&Game.map.px===4&&Game.map.py===4&&!Game.inCombat())Game.enterBuilding();}
+}
+
+// Public-action gardening. The same current controller runs against both
+// roots; absent baseline APIs remain unavailable, never simulated by edits.
+function workGarden(Game,ctx) {
+  if(Game.map.px!==4||Game.map.py!==4||Game.inCombat())return;
+  const inside=Game.state.scholar.insideHaven;
+  try{
+    if(inside&&Game.exitBuilding()!==true)return;
+    const target=Math.min(4,Game.gardenCapacity?Game.gardenCapacity():6);
+    while(Game.gardenPlots().length<target){const n=Game.gardenPlots().length;Game.makePlot();if(Game.gardenPlots().length<=n)break;}
+    const v=Game.state.village;
+    if(Game.setGardenKeeper && !Game.gardenKeeperReady(v.gardenKeeper)){
+      const candidates=(v.roster||[]).filter(id=>Game.gardenKeeperReady(id)&&!v.assignments?.[id]);
+      const score=id=>(Game.villagerKnowsPlants(id)||[]).length+(Game.gardenMagicPlan(id)?10:0);
+      candidates.sort((a,b)=>score(b)-score(a));
+      if(candidates.length)Game.setGardenKeeper(candidates[0]);
+    }
+    if(Game.reclaimGarden&&Game.gardenPlots().some(p=>p.dead)&&Game.state.scholar.kcal>=800)Game.reclaimGarden();
+    trySow(Game,ctx);
+    if(Game.cultivateGarden&&Game.state.scholar.kcal>=1000&&Game.gardenMagicGate().ok)Game.cultivateGarden();
+    if(!v.gardenKeeper){
+      const hasGarden=Object.values(v.assignments||{}).some(a=>a?.task==='garden');
+      if(!hasGarden)assignBest(Game,'garden',['farmer','gardener','botanist','herbalist','forager']);
+    }
+  }catch(e){console.warn('[policy] garden',e.message);}
+  finally{if(inside&&!Game.state.scholar.insideHaven&&Game.map.px===4&&Game.map.py===4&&!Game.inCombat())Game.enterBuilding();}
 }
 
 // THE KNIFE IN THE PACK (longsim food r6 2026-10-12): sim scholars start
@@ -1414,48 +1442,7 @@ function counterPlay(Game, ctx) {
     const day = (Game.state.scholar || {}).day || 0;
     if ((ctx._cpDay || 0) === day) return;
     ctx._cpDay = day;
-    // gardens: the answer to thinning ground. Break ground, staff it, sow.
-    // Prefer a gardener who KNOWS gardenable plants — their knowledge guides
-    // the sowing (villager-guided sowOptions). MAINTAIN the assignment: a
-    // garden untended dies, so keep a gardener on duty while plots live.
-    try {
-      const plots = Game.gardenPlots ? Game.gardenPlots() : [];
-      const livePlots = plots.filter(p => p.pid && !p.dead).length;
-      const v = Game.state.village || {};
-      const hasGardener = Object.values(v.assignments || {}).some(a => a && a.task === 'garden');
-      if (plots.length < 6 && (groundsThinning(Game) || plots.length < 2 || (livePlots > 0 && !hasGardener))) {
-        // break ground early: 4 plots by day 2-3, the garden needs scale
-        // to matter (2 plots is a hobby; 4 is a food leg). 6 was tried:
-        // the plot-making ate the gardener's tending time.
-        while ((Game.gardenPlots ? Game.gardenPlots().length : 0) < 4) {
-          const before = Game.gardenPlots ? Game.gardenPlots().length : 0;
-          try { Game.makePlot(); } catch (e) { break; }
-          // PROGRESS GUARD (competence panel 2026-10-10): makePlot() returns
-          // null without throwing when the player isn't on the haven tile
-          // (playerAtHaven is true within 1 node, but makePlot needs the
-          // haven tile itself) — a roaming policy (oracle/winseek patrols)
-          // interrupted mid-return spins this forever. Break on no progress.
-          if ((Game.gardenPlots ? Game.gardenPlots().length : 0) <= before) break;
-        }
-        if (!hasGardener) {
-          const GARDENABLE = new Set(["muscadine","elderberry","blackberry","pawpaw","persimmon","cattail","wild_onion","wood_sorrel","lambs_quarters","chickweed","dandelion","acorn","hickory_nut","walnut"]);
-          let knowerAssigned = false;
-          try {
-            for (const rid of (v.roster || [])) {
-              if ((v.assignments || {})[rid]) continue;
-              const known = Game.villagerKnowsPlants ? Game.villagerKnowsPlants(rid) : [];
-              if (known.some(k => GARDENABLE.has(k))) {
-                try { Game.delegateTask(rid, 'garden'); knowerAssigned = true; ctx.gardenStaffed = (ctx.gardenStaffed || 0) + 1; } catch (e) {}
-                break;
-              }
-            }
-          } catch (e) {}
-          if (!knowerAssigned && assignBest(Game, 'garden', ['farmer', 'gardener', 'botanist', 'herbalist', 'forager', 'cook']))
-            ctx.gardenStaffed = (ctx.gardenStaffed || 0) + 1;
-        }
-      }
-      trySow(Game, ctx); // sow from the pack whenever there's an empty plot
-    } catch (e) {}
+    workGarden(Game,ctx);
     // fishing: the creek crew. Two fishers from day one — the early deficit
     // kills before the garden matures. Three when the pantry is critical.
     // (Three from day one was tried: more exposure killed more than the
@@ -2961,3 +2948,5 @@ module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walk
 
 // The public shared gearing routine, also used by prepared policy proofs.
 module.exports.gearUp = gearUp;
+
+module.exports.workGarden = workGarden;

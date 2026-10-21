@@ -1,0 +1,16 @@
+  ok   actual player garden harvest identifies its real harvester
+  ok   source tracking changes no garden yield
+  FAIL actual donation keeps the harvester, rather than inventing a donor source
+  FAIL real cooked pantry draw retains source and whole-unit rounding
+  FAIL bulk pantry withdrawal carries source through its explicit field copy
+  FAIL single pantry withdrawal carries source through its explicit field copy
+  ok   actual NPC garden duty identifies its own canonical actor
+  ok   NPC harvest remains physical portions, not a source-only credit
+  ok   actual NPC forage duty attributes its own haul
+  ok   actual player wild-forage action attributes the real harvest
+  FAIL actual Light Fingers transfers the food source, not the thief identity — {"lifted":false,"inventory":[],"actions":[{"abilityId":"thief","actionId":"steal_pantry","id":"thief.steal_pantry","target":"none","name":"Light Fingers","desc":"Steal from the pantry. 50% chance of no trust loss. If caught: -20 trust. (120 kcal) OVERCHARGED · damage ×1.25","context":"camp","cost":{"time_min":10},"available":true,"why":null,"combat":false}]}
+  ok   legacy food reads do not invent an origin
+  ok   explicit wild-plant creation retains a source without changing fungibility
+  FAIL real donation merges owners and legacy food proportionally in one stack
+TypeError: Cannot read properties of undefined (reading 'harvestShares')
+    at C:\Users\Steve\.codex\worktrees\conversation-structure-current\oversight\scripts\godpath\test-harvest-source.js:81:31

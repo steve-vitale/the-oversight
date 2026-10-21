@@ -1231,8 +1231,7 @@
     // GARDEN (depletion 2026-10-10): the farming build. Sow opens a seed
     // chooser — seed choice is knowledge, and the player picks.
     if (label === 'Garden') {
-      gardenSowOpen = false; gardenFeedback = null;
-      inlineView = { kind: 'garden', mapKey: inlineMapKey() }; refresh(); return;
+      openGarden(); return;
     }
     // Looking is distinct from gathering: preserve its cheap knowledge gate.
     if (label === 'Examine') { Game.examineCell(cx, cy); return; }
@@ -1244,9 +1243,16 @@
   // re-checked at tap time (Game.gardenGate); a gated tap says WHY aloud —
   // no silent dead-ends. Enabled taps run the real action, same as the
   // cell-action buttons.
-  let gardenSowOpen = false, gardenFeedback = null;
+  let gardenSowOpen = false, gardenKeeperOpen = false, gardenFeedback = null;
+  function openGarden() {
+    gardenSowOpen=false;gardenKeeperOpen=false;gardenFeedback=null;
+    inlineView={kind:'garden',mapKey:inlineMapKey(),actorId:Game.villagerId};fieldPanel=null;refresh();
+  }
   function gardenRefresh() {
-    if (inlineView?.kind === 'garden') inlineView.mapKey = inlineMapKey();
+    if (inlineView?.kind === 'garden') {
+      if(Game.over || Game.inCombat() || inlineView.actorId !== Game.villagerId || Game.playerTile()?.type !== 'haven') { inlineView=null;gardenSowOpen=false;gardenKeeperOpen=false; }
+      else inlineView.mapKey = inlineMapKey();
+    }
     refresh();
   }
   function gardenTap(action) {
@@ -1258,18 +1264,24 @@
     if (action === 'make') {
       const before = Game.gardenPlots().length;
       Game.makePlot();
-      if (Game.gardenPlots().length > before) gardenFeedback = `Plot ${before + 1} is ready. Choose Sow seeds to plant it.`;
-    } else if (action === 'tend') Game.tendGarden();
+      // Game.say owns the paid result; counts and crop details show state.
+    } else if (action === 'outside') Game.exitBuilding();
+    else if (action === 'reclaim') Game.reclaimGarden();
+    else if (action === 'cultivate') Game.cultivateGarden();
+    else if (action === 'tend') Game.tendGarden();
     else if (action === 'harvest') Game.harvestGarden();
     gardenRefresh();
   }
   function wireGardenControls(root = document) {
+    root.querySelectorAll('[data-open-garden]').forEach(b=>b.onclick=openGarden);
+    root.querySelectorAll('[data-garden-caretakers]').forEach(b=>b.onclick=e=>{e.preventDefault();gardenKeeperOpen=!gardenKeeperOpen;gardenSowOpen=false;gardenRefresh();});
+    root.querySelectorAll('[data-garden-keeper]').forEach(b=>b.onclick=()=>{Game.setGardenKeeper(b.dataset.gardenKeeper||null);gardenKeeperOpen=false;gardenRefresh();});
     root.querySelectorAll('[data-garden]').forEach(b => b.onclick = () => gardenTap(b.dataset.garden));
     root.querySelectorAll('[data-garden-seed]').forEach(b => b.onclick = () => {
       const pid = b.dataset.gardenSeed, before = Game.gardenStatus().live;
       Game.sowPlot(pid);
       gardenSowOpen = false;
-      gardenFeedback = Game.gardenStatus().live > before ? 'Planted. Tend daily; the plot shows when it will be ripe.' : 'The seed could not be planted. Check the empty plot and seed stock.';
+      gardenFeedback = null;
       gardenRefresh();
     });
   }
@@ -13066,6 +13078,8 @@
       const content = document.createElement('div'); content.className = 'field-tool-content';
       contents[name] = content; body.appendChild(content);
     }
+    const gardenEntry=frame.querySelector('[data-open-garden]');
+    if(gardenEntry)contents.place.appendChild(gardenEntry);
     for (const selector of ['.ord-surround','.ord-compass','.ord-quest-top','.ord-panel','.ord-taphint']) {
       const el = frame.querySelector(selector); if (el) contents.place.appendChild(el);
     }
@@ -13212,7 +13226,7 @@
     // PERSON CARDS now render in the narration box (Steve 2026-10-05) — not here.
     if (inlineView.kind === 'person') { slot.innerHTML = ''; return; }
     else if (inlineView.kind === 'garden') {
-      target.innerHTML = `<div class="inlinecard">${inlineHead('Garden')}<div class="inline-body">${Game.gardenStripHtml({sowOpen:gardenSowOpen,feedback:gardenFeedback})}</div></div>`;
+      target.innerHTML = `<div class="inlinecard garden-card">${inlineHead('Garden')}<div class="inline-body">${Game.gardenStripHtml({sowOpen:gardenSowOpen,keeperOpen:gardenKeeperOpen,feedback:gardenFeedback})}</div></div>`;
       wireInlineX(target); wireGardenControls(target);
     }
     else if (inlineView.kind === 'assign') renderAssignInline(target, inlineView);
@@ -17248,11 +17262,9 @@
       <p class="small">Pantry: ${Game.fmtKcal(st.pantryKcal)} (${st.pantryDays >= 999 ? 'holding steady — the village feeds itself' : `about ${Game.pluralize(st.pantryDays, 'day')} at this burn`})${st.hungryDays ? ' · ⚠ HUNGRY day ' + st.hungryDays : ''}</p>
       <p class="small">💧 Water: ${st.waterClean}L clean / ${st.waterDirty}L dirty</p>
       ${(() => {
-        // GARDEN STRIP (2026-10-17): plots are tile annotations with no cell
-        // coords ("behind the hall") — they render here, in the haven panel,
-        // not on the grid. Game.gardenStripHtml owns the section; the
-        // buttons below are wired by data-garden. GUARDED: absent = nothing.
-        try { return Game.gardenStripHtml({sowOpen:gardenSowOpen,feedback:gardenFeedback}); } catch (e) { return ''; }
+        // One entry: controls live in the Garden panel, never duplicated
+        // in the long Haven management card.
+        const g=Game.gardenStatus();return `<button class="btn sm" data-open-garden>Garden · ${g.count}/${g.capacity} beds</button>`;
       })()}
       ${(() => {
         // STORES GATE (Steve 2026-10-04): the pantry and village stash are

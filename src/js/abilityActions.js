@@ -361,6 +361,7 @@
         for (var j = 0; j < ab.actions.length; j++) {
           var act = ab.actions[j];
           var ctx = act.context || 'explore';
+          if (act.gardenOnly) continue; // Garden owns these controls; one surface per task.
 
           // Context filtering: in combat, show combat actions;
           // out of combat, show non-combat actions.

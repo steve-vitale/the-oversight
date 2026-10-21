@@ -1,10 +1,63 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
 Steve's direct direction is in godpath/STEVE-ANSWERS.md (2026-10-20).
-The gameplay redesign below is pending. The usage audit/tooling does not change
-the live game's crop values, capacity or duties.
+Cultivation shipped in39d5623d7, live build e984314d9-20261021-014853.
+All165 deployed boot inputs match; source-bound phone/Continue/offline proofs
+and quick271/0, full1,043/0 are retained. Balance remains review_required.
+The earlier audit remains historical.
 
-## Actual current system
+## Released cultivation
+
+`src/data/gardening.json` owns capacity and crop profiles. Haven tiers unlock
+2/4/6/9 beds. The original six positions keep their saved indices; the last
+three occupy the northern row. Every new bed costs120 kcal and paid work,
+changes the actual ground to soil and refuses occupied structures/traps.
+Unlocked capacity does not create crops. Existing beds survive lower capacity.
+
+New ordinary shoots establish in30 days and regrow in28; roots generally
+take90 days and must be replanted. Berries and woody plants take much longer,
+with named overrides for strawberries, grapes and tropical roots. These are
+authored game abstractions, not a full seasonal/habitat agriculture model.
+Harvests produce species units and real food values rather than a universal
+5,000-kcal sack. Plant knowledge still improves husbandry yield by25%/level;
+it does not accelerate time. Planted legacy crops retain their old cycles
+and yields until replanted. No old crop loses already earned growth.
+
+Green Thumb or Green Whisper grants a Garden-only Cultivate action costing
+200 kcal through the actual ability engine. Levels advance growing beds by
+4/8/12 days. Holding both adds Whisper synergy2/4/8 days. Thumb levels multiply
+the next harvest1.5/2/2.5; Cornucopia adds1.25/1.5/1.75. One cast per bed/day
+survives harvesting, replanting and caretaker changes. Calendar time does not
+skip. Player food-power eligibility and owned ability slots still apply.
+NPCs need their own held ability and pay their own hunger equivalent; practice
+uses the same6/12-XP advancement as player actions. Foraging/water effects
+remain separate. This does not claim every Gardener power has been redesigned.
+
+A standing caretaker consumes one real daily garden assignment while a living,
+healthy resident is available at Haven. Other explicit orders take priority;
+active water-run companions cannot also promise garden work. A full pantry
+defers collection and magic but keeps living crops maintained before redirecting
+the worker. Dead beds can be reclaimed for40 kcal and replanted. A garden
+assignment may also reclaim a bed when it is actually doing garden work.
+Sowing still needs two real units and knowledge or a real teaching guide.
+NPC seed gathering remains part of the existing farming duty abstraction.
+
+All hands-on work requires Haven grounds, outside the hall. One Garden entry
+and one bounded phone panel own the controls; crop details and caretaker
+choices fold away. New sowing tells the actual first-harvest/regrowth times.
+Completed player costs, crop changes and practice are saved before unload.
+
+The matched current-controller audit has64 screen campaigns and10 extended
+campaigns per arm, plus8 separate neutral controls. Screen harvesting is0/64
+old versus4/64 candidate; extended harvesting is2/10 in each arm. Candidate
+screen delivery80,366 kcal is output, not proof of useful consumption or
+garden-build viability. The old arm was rerun with the new controller; do not
+compare these values to the earlier controller as a Game-only change.
+See garden-cultivation-natural-r1 and baseline-r1 retained raw reports.
+All23-metric panels, named offered-farmer coverage and mobile natural-save
+verification must be reviewed before publication.
+
+## Historical system audited at e984314d9
 
 - Every Haven tier allows six plots. Neither makePlot nor gardenGate reads
   havenTier. Six reserved grid cells and the panel share plot indices.
@@ -30,7 +83,7 @@ no tending/harvest. Disabling only that predicate in a separate seeded process
 tends the crop and delivers 2,800 kcal. This isolates that branch in the prepared
 scene; it does not prove the cause of every crop loss in natural campaigns.
 
-## Design contract for implementation
+## Design contract
 
 1. Haven's real growth tier unlocks more cultivable beds and visible grid
    capacity. Use one capacity/placement source for make, gates, status and map.
@@ -107,7 +160,9 @@ baseline/candidate roots; matched16-per-policy screens, distinct64-seed followup
 where needed, named naturally offered gardener cohorts, full all 23 scorecards,
 and explicit ordinary-skill versus paid-ability contrasts. Prove natural crop
 maturity/harvest/recovery and tier growth through mobile controls and Continue.
-No current usage report clears that future implementation or public release.
+The earlier usage audit alone clears neither this candidate nor public release.
+See garden-cultivation-audit-r1 for the candidate's matched panels, actual
+natural-save boundary and remaining calibration limits.
 
 Sowing events are method-completion observations. Their player actor/day
 fields must not be used as initiation-time personal deed credit when a paid

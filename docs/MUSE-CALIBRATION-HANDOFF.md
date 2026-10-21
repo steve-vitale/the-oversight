@@ -1,26 +1,42 @@
 # Muse calibration handoff
 
-## Current milestone: garden cultivation (2026-10-20)
+## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
-Steve's latest direction supersedes a flat six-bed, fast ordinary-farm model:
-Haven growth should unlock beds; ordinary cultivation is a slow supplement;
-invested food-powered gardening abilities make the strong garden path.
-See GARDENS.md and his verbatim answer in godpath/STEVE-ANSWERS.md.
+Codex owns this cultivation implementation; Muse retains numerical calibration.
+Live build e984314d9-20261021-014853 has Haven capacity2/4/6/9, authored
+slow ordinary crops, paid owned garden magic, real daily caretaker orders,
+surplus maintenance and paid dead-bed recovery. Existing planted crops and
+structures are preserved. GARDENS.md contains the levers and legacy-save rule.
 
-Codex's garden audit/tooling is ready for checked sharing. Current-source
-74 natural campaigns plus8 separate neutral controls expose planting without
-food:0/64 screen campaigns harvested;1/10 extended cases delivered14,400 kcal.
-Full-pantry redirection skips maintenance, and dead beds lack reclamation.
-These findings are scoped to current controllers, not human/gardener viability.
-The final report is evidence/2026-10-20/garden-longplay-audit-r4.md.
+Fresh matched16-per-policy all23 panels retain review_required: wins capable
+14→15, maker10→7, merchant10→6, caregiver11→11 (each /16). All38 selected
+paired replays match complete retained state, outcomes and metrics. Read
+SURVIVAL-LEVERS.md and garden-cultivation-balanced-r1 before calibrating.
+More garden output does not clear class/gear, maker survival/community or
+Table-access warnings. The naturally offered farmer cohort has only1/64
+played per arm;63 actual absent offers stay excluded. No viability claim.
 
-Next bounded gameplay milestone: Haven-scaled visible capacity, slow ordinary
-crop profiles, paid ability-driven growth, protected maintenance and paid
-reclaim/replant, preserving saves/structures and one phone viewport. Measure
-all23 domains with the same collector on both roots before shipping. Nothing
-in this audit changes live garden values. The four caregiver campaigns remain
-queued for prefix-faithfulness and natural late-game phone Continue/actions;
-the new extended garden runs alone do not complete that earlier milestone.
+Natural usage under the same updated controller: screen0/64→4/64 harvesting,
+extended2/10→2/10. A real persistent seed5 run supplies a day73 phone save
+with harvest history at day59; native Garden work/paid cast/Continue are tested
+at736/844. Capture-on/off replay matches exactly under real storage. Its
+outcomes/metrics/RNG also match the audit, but storage index clock calls change
+state identities; do not claim the audit's full-state hash matched that save.
+Prepared phone journeys prove opportunities, not natural attainment.
+
+Verified gates: quick271/0, full1,043/0, actual installed-worker update/offline
+Continue, source-bound16-stage phone frames,17-stage garden journeys and
+7-stage natural-save journeys. See garden-cultivation-audit-r1 and exact logs.
+Release39d5623d7 is on shared master/main; production matches all165 boot files.
+Publication receipt: evidence/2026-10-20/garden-cultivation-publication-r1.json.
+
+Next concrete milestone remains terminal caregiver coverage: four retained
+seeds, faithful prefixes, actual later-game Continue/actions. Keep the rolling
+goal active. Dedicated ordinary-only/ability garden calibration remains open;
+unknown eligible NPC magic use and crop-specific useful intake stay unknown.
+Fetch before changing shared code; no whole-tree port or history replacement.
+Muse recovery999c69491 remains in ancestry. Current fetch has no newer Muse
+commit. Coordination is this shared source/handoff, not a claimed direct reply.
 
 ## Haven shipped; caregiver lane queued behind gardens (2026-10-20)
 
@@ -190,3 +206,23 @@ Before every push use quick/full, fresh source-bound neutral and phone proofs,
 and update survival-lever decisions with raw panels/config/hashes. Actual phone
 interaction is distinct from node campaigns. Report actual days/endings; later
 game still needs play-until-death coverage.
+
+### Garden publication follow-up
+
+Production verification binds release39d5623d7 and all165 boot inputs, plus
+worker/version/manifest metadata. The follow-up also corrects a legacy ability
+registry test that read HEAD instead of the worktree and omitted the garden
+registration module. Its22 assertions now cover the current definitions.
+The initial publication-follow-up failure and interrupted full run are retained;
+use the fresh publication-quick/full-r2 results for this follow-up push.
+The paid garden actions were separately exercised by the39-check shared-kit
+proof and both actual phone journeys before the gameplay release.
+
+Run the shared garden-longplay-audit.js with a fresh output prefix to reproduce
+usage evidence. For a Game comparison, rebuild the e984 baseline and install
+the same current policies/collector in both roots; the retained manifests
+identify exact inputs. Do not compare against the old-controller garden audit
+as a Game-only effect. Named farmer eligibility is sparse; record absent offers
+and add naturally held gardening-ability/region cohorts before viability claims.
+Crop-specific useful intake and eligible NPC cast accounting need additional
+neutral observer evidence; existing output counts do not establish either.
