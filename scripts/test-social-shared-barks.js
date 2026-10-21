@@ -10,6 +10,17 @@ async function child(kind){
  const G=await K.load({seed,narration:true});const selections=[],turns=[],sayings=[];
  const say=G.say;G.say=function(...args){sayings.push(String(args[0]));return say.apply(this,args)};
  if(kind==='uprising'){
+  // WRAPPERS BEFORE THE SCENARIO (r37): since the r36 uprising/betrayal
+  // opening-turn softlock fix, the fight's opening AI turns run INSIDE
+  // startUprising (before the first player turn). Installing the pickFresh /
+  // tbHostileTurn wrappers after debugScenario misses those opening
+  // selections while they still consume the fight-scoped 'humanRetaliate'
+  // cycle — so the recorded 16-window starts mid-cycle and the no-repeat
+  // assertion fails on a cycle-boundary artifact, not a real repeat.
+  // Wrapping first keeps the observation window aligned with the cycle.
+  let current=null;
+  const pick=G.pickFresh;G.pickFresh=function(pool,key){const value=pick.call(this,pool,key);if(key==='humanRetaliate')selections.push({vid:current?.villagerId,key:current?.key,name:current?.name,template:value,poolSize:pool.length,at:sayings.length});return value;};
+  const hostileTurn0=G.tbHostileTurn;G.tbHostileTurn=function(h){const at=selections.length;const p0=G.tbFighter('p');const hp=p0?p0.hp:0;current=h;try{return hostileTurn0.call(this,h)}finally{const p1=G.tbFighter('p');turns.push({vid:h.villagerId,barks:selections.length-at,damage:hp-(p1?p1.hp:0)});current=null;}};
   G.debugScenario('uprising');const f=G.tbfight;
   check('real debug uprising starts live combat',!!f&&!f.over);
   check('full runtime loads status movement dependency',typeof G.seMoveMod==='function');
@@ -18,9 +29,8 @@ async function child(kind){
   // Prepared durability only: hold the same original bearer through one full
   //16-template cycle and its boundary. AI, positioning, damage and RNG stay real.
   p.hp=p.maxHp=1000;G.state.scholar.health=1000;const originalVid=G.villagerId;
-  let current=null;
-  const pick=G.pickFresh;G.pickFresh=function(pool,key){const value=pick.call(this,pool,key);if(key==='humanRetaliate')selections.push({vid:current?.villagerId,key:current?.key,name:current?.name,template:value,poolSize:pool.length,at:sayings.length});return value;};
-  const hostileTurn=G.tbHostileTurn;G.tbHostileTurn=function(h){const at=selections.length,hp=p.hp;current=h;try{return hostileTurn.call(this,h)}finally{turns.push({vid:h.villagerId,barks:selections.length-at,damage:hp-p.hp});current=null;}};
+
+
   let calls=0;
   while(selections.length<17&&G.inCombat()&&calls++<40){
    if(!G.tbIsPlayerTurn()){G.tbAdvance();check('uprising AI advances to a live player turn',!G.inCombat()||G.tbIsPlayerTurn());}
