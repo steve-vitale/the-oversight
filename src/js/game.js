@@ -2215,7 +2215,13 @@
         () => { this.say(`${fb} eats apart from the others tonight. ${fa} doesn't look up. The fire feels smaller.`); },
         () => { this.say(`You carry a message from ${fa} to ${fb}. It's not kind. You deliver it anyway. That's what neighbors do, apparently.`); this.bumpTrust(c.a, 2, 'carried their message'); this.bumpTrust(c.b, -3, 'carried an unkind message'); c.tension = Math.min(100, c.tension + 3); },
       ];
-      incidents[Math.floor(Math.random() * incidents.length)]();
+      // FEUD INCIDENT NO-REPEAT (social r38 2026-10-21): the 4-incident pool
+      // re-served the identical beat 3x in 4 days on hot pilot feuds (r38
+      // 3501/3503). Never serve the same incident twice running.
+      let ii = Math.floor(Math.random() * incidents.length);
+      if (incidents.length > 1 && ii === c._lastIncidentIdx) ii = (ii + 1) % incidents.length;
+      c._lastIncidentIdx = ii;
+      incidents[ii]();
     },
 
     newGame(homeRegionText, locationId, villagerId, pickedItems, runName) {

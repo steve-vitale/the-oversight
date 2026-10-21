@@ -1,0 +1,39 @@
+SMOKE: seed 3505, 10 days (self-test: conflict seeding + conflict snapshots + warm-competent convos)
+SMOKE: seeded=2 confSnaps=10 convos=16 feudConvos=16 avgTrust=40.1
+SMOKE SELF-TEST: PASS (conflicts seeded, snapshots complete, warm-competent convos ran)
+seed 3501: days=142 alive=7 convos=276 (feud=276) gossipPicks=3 dryRate=2.06/12
+  conflicts: seeded=2 revealed=2 scenes={"reveal":2,"favoritism-known":42,"stage1":1,"incident-cornered":2,"favoritism-unknown":11,"incident-argument":1,"incident-eatsapart":1,"incident-message":3,"stage2":1,"mediation":1,"dead-party":1}
+  L2' repeats: 1
+    d125 Elijah t10 <dlg:favor_requirements>: I've told you three times now — Move next to them, on the same side of the Haven door, to help.
+  L3: {"bonds":86,"deepBonds":42,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":20,"gossipPicks":3,"avgTrust":"85.0","confSeeded":2}
+  regression: P1-streaks=6 P2-reactDry=265
+seed 3502: days=141 alive=8 convos=276 (feud=276) gossipPicks=3 dryRate=2.46/12
+  conflicts: seeded=2 revealed=2 scenes={"favoritism-unknown":1,"reveal":2,"favoritism-known":5,"stage1":2,"stage2":1,"mediation":2,"incident-message":1}
+  L2' repeats: 2
+    d128 Hanaa t7 <dlg:favor_requirements>: I've told you three times now — Move next to them, on the same side of the Haven door, to help.
+    d130 Dmitri t8 <dlg:favor_requirements>: I've told you three times now — Move next to your partner, on the same side of the Haven door.
+  L3: {"bonds":88,"deepBonds":39,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":21,"gossipPicks":3,"avgTrust":"63.9","confSeeded":2}
+  regression: P1-streaks=13 P2-reactDry=320
+seed 3503: days=37 alive=6 convos=70 (feud=70) gossipPicks=3 dryRate=1.75/12
+  conflicts: seeded=1 revealed=1 scenes={"favoritism-unknown":3,"reveal":1,"favoritism-known":17,"stage1":1,"stage2":1,"incident-eatsapart":1,"incident-cornered":3}
+  L2' repeats: 0
+  L3: {"bonds":55,"deepBonds":13,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":11,"gossipPicks":3,"avgTrust":"60.7","confSeeded":1}
+  regression: P1-streaks=0 P2-reactDry=44
+seed 3504: days=141 alive=9 convos=276 (feud=276) gossipPicks=3 dryRate=2.29/12
+  conflicts: seeded=1 revealed=1 scenes={"reveal":1,"dead-party":1}
+  L2' repeats: 0
+  L3: {"bonds":80,"deepBonds":46,"betrayalCases":1,"mootsConvened":1,"mootsObserved":1,"gossipConvos":23,"gossipPicks":3,"avgTrust":"92.9","confSeeded":1}
+  regression: P1-streaks=7 P2-reactDry=265
+  seed 3501: seeded=2 revealed=2 incidents=7 staged=1 resolved=2 -> ALIVE
+  seed 3501: days=142 alive=7 avgTrust=85.0 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3502: seeded=2 revealed=2 incidents=1 staged=2 resolved=2 -> ALIVE
+  seed 3502: days=141 alive=8 avgTrust=63.9 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3503: seeded=1 revealed=1 incidents=4 staged=1 resolved=0 -> ALIVE
+  seed 3503: days=37 alive=6 avgTrust=60.7 end={"over":true,"villageLost":true,"scattered":true,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3504: seeded=1 revealed=1 incidents=0 staged=0 resolved=1 -> ALIVE
+  seed 3504: days=141 alive=9 avgTrust=92.9 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+M1 (instrument complete + >=1 conflict seeded on >=3/4 seeds): GO; seeded: 4/4 [3501,3502,3503,3504] — GO
+M2 (quiet feuds come alive: revealed AND (incident OR stage OR resolved) on >=3/4 seeded runs): 4/4 [3501,3502,3503,3504] — GO
+M4 (guardrail alive>=5, not scattered): 3/4 [3501,3502,3504] — GO
+F1 (NPC<->NPC bond edges, final snap): s3501:72p/34d (all 86p) s3502:70p/29d (all 85p) s3503:45p/11d (all 54p) s3504:66p/36d (all 80p)
+F2 (favoritism scenes, informational): s3501:53 (d7,d8,d8,d10,d12,d12,d13,d15,d16,d17,d18,d18,d18,d19,d19,d19,d20,d21,d22,d23,d24,d25,d26,d27,d28,d28,d29,d30,d31,d32,d32,d33,d34,d35,d36,d37,d37,d38,d39,d40,d41,d42,d43,d44,d45,d46,d47,d48,d49,d50,d51,d52,d53) s3502:6 (d5,d8,d11,d12,d14,d14) s3503:20 (d5,d6,d8,d10,d12,d14,d16,d17,d18,d20,d21,d22,d24,d26,d28,d30,d32,d34,d35,d36)

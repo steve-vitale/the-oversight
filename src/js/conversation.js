@@ -6760,14 +6760,31 @@
       // OLD WOUNDS: favoritism is noticed. If you're close to one side of a
       // conflict, the other side keeps score — even if you don't know there's
       // a score being kept.
+      const day = (this.state.scholar || {}).day || 0;
       for (const cf of (this.state.village.conflicts || [])) {
         if (cf.resolved || (cf.a !== vid && cf.b !== vid)) continue;
+        // FAVORITISM NARRATION THROTTLE (social r38 2026-10-21): the -2 cost
+        // lands on every qualifying convo end — the game keeps score — but
+        // the identical beat was wallpapering the feed (53 servings in 47
+        // days on one pilot seed). Narrate on the rising edge (first convo
+        // end at/above 50 with this side) and at most once per 7 days after:
+        // a reminder, not a loop. Per-side state, so closeness with both
+        // parties narrates for each.
+        cf._favAbove = cf._favAbove || {};
+        cf._favNarrDay = cf._favNarrDay || {};
         if (newTrust >= 50) {
           const other = cf.a === vid ? cf.b : cf.a;
           const ot = this.state.village.trust;
           ot[other] = Math.max(0, (ot[other] || 10) - 2);
-          if (cf.known) this.say(`${this.displayName(other)} saw how close you've gotten to ${this.displayName(vid)}. Old history has long eyes. (-2 trust)`);
-          else this.say(`${this.displayName(other)} has been colder to you lately. You don't know why.`);
+          const rising = !cf._favAbove[vid];
+          cf._favAbove[vid] = true;
+          if (rising || day - (cf._favNarrDay[vid] || 0) >= 7) {
+            cf._favNarrDay[vid] = day;
+            if (cf.known) this.say(`${this.displayName(other)} saw how close you've gotten to ${this.displayName(vid)}. Old history has long eyes. (-2 trust)`);
+            else this.say(`${this.displayName(other)} has been colder to you lately. You don't know why.`);
+          }
+        } else {
+          cf._favAbove[vid] = false;
         }
         // HISTORY UNFOLDS through trust — slowly, partially, maybe never fully.
         // KNOWLEDGE GATE (dialog rebuild 2026-10-11): history strings are
