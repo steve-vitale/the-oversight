@@ -124,6 +124,194 @@
       return `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0})${extra}, ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
     },
 
+    // TABLE-DEED VOICE (2026-10-21, backlog #738): the audit never voiced
+    // the village's wave-4+ deeds — villages reached the table and the
+    // fiction said nothing about the war path either way. The audit now
+    // names the real deeds from the village's own logs:
+    //   - wave-4+ kills (monster, killer, day) from state.waveKillLog
+    //   - herald/titan encounters (faced, slain) from Game.state.titans
+    //   - engagements (fought but not killed) from deeds.wavesFaced
+    //   - the readiness bars as they stand at audit time
+    // KNOWLEDGE GATE (hard): every voiced deed is JOINED to a log record.
+    // Unknown monster ids are never named and never counted — silence is
+    // always legal, invention never is. Kills land the codex 'slain' stage
+    // in recordWaveKill, so the true monsterNoun is earned, never leaked.
+    // Cosmetic selection (variant framing) never consumes Math.random —
+    // a dedicated mulberry32 seeded from stable run inputs, so the block
+    // is byte-identical with the layer on vs off except the audit beats.
+    // Test-only: Game._tableDeedVoiceOff skips the whole block.
+    tableDeedRecords() {
+      const out = { kills: [], engagements: [], titans: [], bars: [] };
+      try {
+        const mdefs = (this.data && this.data.monsters) || [];
+        const mdefOf = (mid) => { try { return mdefs.find(m => m && m.id === mid) || null; } catch (e) { return null; } };
+        // 1. kills from the kill log (def-wave is authoritative; the log's
+        // w is a fallback only — a forged w never promotes a deed).
+        const log = (this.state && this.state.waveKillLog) || [];
+        const killed = {};
+        for (const e of log) {
+          try {
+            if (!e || !e.mid) continue;
+            const md = mdefOf(e.mid);
+            if (!md) continue; // unknown mid: never voiced, never counted
+            const w = (md.wave | 0) || (e.w | 0) || 0;
+            if (w < 4) continue;
+            killed[e.mid] = true;
+            out.kills.push({ mid: e.mid, day: (e.d | 0) || 0, by: e.by || null, via: e.via || null, wave: w });
+          } catch (e2) {}
+        }
+        // 2. engagements: fought blow-by-blow (recordDeedFight) but no
+        // recorded kill — the village stood against them and lived.
+        // Pure read: deedState() would CREATE pg.deeds (a state write).
+        // Titan mids are skipped here — the titan block below already
+        // names the encounter (naming it twice reads as padding).
+        try {
+          const sch = (this.state && this.state.scholar) || {};
+          const pgr = sch.prog || {};
+          const ds = (pgr.deeds && typeof pgr.deeds.wavesFaced === 'object') ? pgr.deeds.wavesFaced : {};
+          const titanMids = {};
+          try {
+            const ts = (this.state && this.state.titans) || {};
+            const cast = (ts && typeof ts.cast === 'object') ? ts.cast : null;
+            const tids = ['herald'];
+            if (cast && cast.apocalypse) tids.push(cast.apocalypse);
+            for (const tid of tids) {
+              const def = (typeof this.titanDef === 'function') ? this.titanDef(tid) : null;
+              if (def && def.monster) titanMids[def.monster] = true;
+            }
+          } catch (e3) {}
+          for (const mid of Object.keys(ds)) {
+            try {
+              if (killed[mid]) continue;
+              if (titanMids[mid]) continue;
+              const md = mdefOf(mid);
+              if (!md) continue;
+              const w = (md.wave | 0) || (ds[mid] | 0) || 0;
+              if (w < 4) continue;
+              out.engagements.push({ mid, wave: w });
+            } catch (e2) {}
+          }
+        } catch (e2) {}
+        // 3. titans: cast omens + slain flags are the encounter record.
+        // Omen stage 1 = named, 2 = located. Pure read of state.titans —
+        // titanCast() would WRITE st.cast when null. No log records a titan
+        // retreat, so "fled" is not voiced (documented blank, not a gap
+        // papered over).
+        try {
+          const ts = (this.state && this.state.titans) || {};
+          const cast = (ts && typeof ts.cast === 'object') ? ts.cast : null;
+          const omens = ts.omens || {}, slain = ts.slain || {};
+          const tids = ['herald'];
+          if (cast && cast.apocalypse) tids.push(cast.apocalypse);
+          for (const tid of tids) {
+            try {
+              const def = (typeof this.titanDef === 'function') ? this.titanDef(tid) : null;
+              if (!def) continue;
+              const o = omens[tid] || { stage: 0, day: 0 };
+              const st = (o.stage | 0) || 0;
+              if (slain[tid]) out.titans.push({ tid, title: def.title || tid, state: 'slain', day: (o.day | 0) || 0 });
+              else if (st >= 1) out.titans.push({ tid, title: def.title || tid, state: 'faced', day: (o.day | 0) || 0, located: st >= 2 });
+            } catch (e2) {}
+          }
+        } catch (e2) {}
+        // 4. readiness bars as they stand at audit time — voiced only when
+        // unready. A ready bar is nothing to say aloud; the bar line names
+        // exactly what the village lacks, in the village's own terms.
+        try {
+          for (const w of [4, 5]) {
+            const rd = (typeof this.waveUnlockReady === 'function') ? this.waveUnlockReady(w) : null;
+            if (rd && !rd.ready && typeof this._readinessBarLine === 'function') {
+              out.bars.push({ wave: w, line: String(this._readinessBarLine(rd) || '') });
+            }
+          }
+        } catch (e2) {}
+      } catch (e) {}
+      return out;
+    },
+
+    // tableDeedLines: the voiced audit block — pure render of
+    // tableDeedRecords. [] when there is nothing war-shaped to say
+    // (silence, never padding). 4 variant framings; the pick is a
+    // dedicated stream (mulberry32 over a hash of stable inputs), never
+    // Math.random, so the pick cannot perturb the sim downstream.
+    tableDeedLines() {
+      if (this._tableDeedVoiceOff) return [];
+      let rec;
+      try { rec = this.tableDeedRecords(); } catch (e) { return []; }
+      const has = (rec.kills && rec.kills.length) || (rec.engagements && rec.engagements.length)
+        || (rec.titans && rec.titans.length) || (rec.bars && rec.bars.length);
+      if (!has) return [];
+      let R = null;
+      try {
+        const digest = (rec.kills || []).map(k => k.mid + ':' + k.day).join(',') + '|'
+          + (rec.engagements || []).map(x => x.mid).join(',') + '|'
+          + (rec.titans || []).map(t => t.tid + ':' + t.state).join(',');
+        const sch0 = (this.state && this.state.scholar) || {};
+        const sit = ((((sch0.prog || {}).tableSittingId) | 0) || 0);
+        R = this.mulberry32(this._hashStr('tabledeed|' + sit + '|' + digest));
+      } catch (e) { R = null; }
+      const framings = [
+        'The System pauses — actually pausing. It keeps a list of every tooth pulled, and for once it reads the list instead of the press release.',
+        'Footage plays. The galaxy has already watched these fights twice. The System narrates anyway — it likes the sound of its own broadcast voice.',
+        'The body count, itemized. The System is not making this up — it was filming.',
+        'A moment of respect, from something that rarely respects.',
+      ];
+      const frame = (R ? Math.floor(R() * framings.length) : 0) % framings.length;
+      const lines = [];
+      // kills: name up to 2 (most recent), then the honest remainder.
+      try {
+        const kills = (rec.kills || []).slice().sort((a, b) => (b.day - a.day) || (b.wave - a.wave));
+        if (kills.length) {
+          const nameOf = (k) => {
+            let mname = 'something';
+            try { mname = (this.monsterNoun ? this.monsterNoun(k.mid) : 'something') || 'something'; } catch (e2) {}
+            const art = (typeof this.articlePhrase === 'function') ? this.articlePhrase(mname, false) : mname;
+            let who = 'Haven'; // the log always attributes to the village; a person only when the log names one
+            try {
+              if (k.by === 'p' || k.by === 'player') who = 'you';
+              else if (k.by && typeof this.disp === 'function') who = this.disp(k.by) || 'Haven';
+            } catch (e2) { who = 'Haven'; }
+            return `On day ${k.day}, ${who} put down ${art}`;
+          };
+          let ks = `◈ THE WAR PATH — ${framings[frame]} ${nameOf(kills[0])}.`;
+          if (kills.length === 2) ks += ` ${nameOf(kills[1])}.`;
+          else if (kills.length > 2) ks += ` ${nameOf(kills[1])} — and ${kills.length - 2} more tooth${kills.length - 2 === 1 ? '' : 's'} after.`;
+          lines.push(ks);
+        }
+      } catch (e) {}
+      // titans + engagements + bars: one System aside.
+      try {
+        const bits = [];
+        for (const t of (rec.titans || [])) {
+          if (t.state === 'slain') bits.push(`${t.title} fell — the coalition's work, and the System had a camera on it.`);
+          else bits.push(`${t.title} came. ${t.located ? 'Named and located — the war council knew its face.' : 'Named, not yet located.'}`);
+        }
+        for (const g of (rec.engagements || []).slice(0, 2)) {
+          let mname = 'something';
+          try { mname = (this.monsterNoun ? this.monsterNoun(g.mid) : 'something') || 'something'; } catch (e2) {}
+          const art = (typeof this.articlePhrase === 'function') ? this.articlePhrase(mname, false) : mname;
+          bits.push(`They faced ${art} and lived to sit here.`);
+        }
+        const nEng = (rec.engagements || []).length;
+        if (nEng > 2) bits.push(`${nEng - 2} more of the later drafts faced besides.`);
+        for (const b of (rec.bars || [])) {
+          if (b.line) bits.push(`Even now the wave-${b.wave} bar reads: ${b.line}.`);
+        }
+        if (bits.length) {
+          // With kills voiced above, this is the continuing aside; with no
+          // kills it opens the beat itself (header + framing intact).
+          if (lines.length) lines.push(`"${bits.join(' ')}" — the System is still reading the list.`);
+          else lines.push(`◈ THE WAR PATH — ${framings[frame]} ${bits.join(' ')}`);
+        }
+      } catch (e) {}
+      if (!lines.length && has) {
+        // Records exist but every name failed (never happens in prod —
+        // kills earn the codex 'slain' stage). Fall back to the frame only.
+        lines.push(`◈ THE WAR PATH — ${framings[frame]}`);
+      }
+      return lines;
+    },
+
     // ============ EARNED PATHS ============
     // Each path def provides prereq() -> {earned, strength 0-100, why}.
     // Unearned paths are named and priced, never silently hidden.
@@ -508,6 +696,15 @@
       // the voicing is proof-testable; wave-4/5 deeds are named when nonzero.)
       const seatLine = this.tableSeatLine(seat);
       this.say(`◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. ${seatLine}`);
+      // TABLE-DEED VOICE (2026-10-21, backlog #738): the audit names the
+      // village's real wave-4+ deeds from its own logs (kills by name,
+      // killer and day; titan encounters; readiness bars as they stood).
+      // Silence when there is nothing war-shaped to say — never padding.
+      try {
+        if (!this._tableDeedVoiceOff && typeof this.tableDeedLines === 'function') {
+          for (const _dl of this.tableDeedLines()) this.say(_dl);
+        }
+      } catch (e) { console.warn('table deed voice', e); }
       // NPC ASCENSION PRICING (journey-endgame r7 2026-10-13): the audit
       // voices the ascension bonus that tableEarnedPaths prices into each
       // path's standing — TABLE.md canon, "said aloud, priced in".
