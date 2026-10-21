@@ -1030,3 +1030,18 @@ wrongdoing. Villagers can be victims of crimes or falsely accused of
 committing them. The beloved-village gate blocking all NPC-NPC cases under
 law-abiding play is therefore a design gap, not a feature — queued for the
 social-life rotation / findings backlog.
+
+## 2026-10-21 — SURPLUSFEED governor removed (Steve's call)
+Steve: "Yeah take it off it sounds like a bad way to control outcomes. We
+should have villagers deprioritize production and storage when food is
+plentiful." Ruling: the SURPLUSFEED trim governor (game.js
+surplusFeedGovernor, env-gated, default-OFF) is REMOVED — not merely kept
+off. Steve's objection is to the mechanism class: a post-hoc trim on the
+shared surplus is a top-down outcome control. The replacement direction is
+behavioral and bottom-up: villagers themselves deprioritize production and
+storage when food is plentiful — the control moves from the share path
+(what gets stored after production) to the production decision (whether
+villagers go out to produce at all). Design thread for the food-economy
+lane, not yet an implementation order. Note: the governor's fiction
+("villagers choose not to haul what'll rot") already gestured at this, but
+the implementation trimmed outcomes instead of changing decisions.
