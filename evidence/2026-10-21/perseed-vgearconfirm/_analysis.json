@@ -1,0 +1,120 @@
+{
+ "verdict": {
+  "GO": true,
+  "guardPass": false,
+  "killedAtConfirm": false
+ },
+ "primary": {
+  "bar": ">= 2/16 armed seeds AND armed >= control + 2",
+  "armedSeeds": [
+   64703,
+   64704
+  ],
+  "controlSeeds": [],
+  "armedRunsVetsMax2": [
+   "s64703/leadfeast-vgear",
+   "s64704/leadfeast-vgear",
+   "s64703/belongfeast-vgear"
+  ],
+  "controlRunsVetsMax2": []
+ },
+ "guardrails": [
+  {
+   "name": "villager combat deaths <= control*1.2",
+   "pass": true,
+   "detail": "241 vs 230"
+  },
+  {
+   "name": "median survival (non-winning, per-seed matched) >= control-10d",
+   "pass": true,
+   "detail": "67d vs 67d"
+  },
+  {
+   "name": "starvation deaths <= control",
+   "pass": false,
+   "detail": "19 vs 14"
+  },
+  {
+   "name": "no new death mode (>=2 events)",
+   "pass": false,
+   "detail": "Choir Toad"
+  },
+  {
+   "name": "wins within +-4/16 of control",
+   "pass": true,
+   "detail": "28/32 vs 25/32"
+  }
+ ],
+ "mechanism": {
+  "control": {
+   "w4kills": 1,
+   "villW4": 0,
+   "compW4": 0,
+   "runsWithVillW4": 0,
+   "donations": 0,
+   "invites": 0,
+   "armedV": 4.41,
+   "armP10": 3.13,
+   "armP15": 2.03
+  },
+  "armed": {
+   "w4kills": 12,
+   "villW4": 5,
+   "compW4": 5,
+   "runsWithVillW4": 5,
+   "donations": 279,
+   "invites": 128,
+   "armedV": 5.84,
+   "armP10": 3.5,
+   "armP15": 2.34
+  }
+ },
+ "mechanismSeeds": {
+  "villW4control": [],
+  "villW4armed": [
+   64703,
+   64704,
+   64707,
+   64716
+  ]
+ },
+ "wall": {
+  "control": {
+   "runs": 32,
+   "national": 22,
+   "table": 27,
+   "wins": 25,
+   "exiled": 0,
+   "wave4": 20,
+   "wave5": 0,
+   "maxWaveDist": {
+    "2": 2,
+    "3": 10,
+    "4": 20
+   },
+   "medianSurv": 90,
+   "maxSurv": 155
+  },
+  "armed": {
+   "runs": 32,
+   "national": 22,
+   "table": 29,
+   "wins": 28,
+   "exiled": 0,
+   "wave4": 21,
+   "wave5": 1,
+   "maxWaveDist": {
+    "3": 11,
+    "4": 20,
+    "5": 1
+   },
+   "medianSurv": 90,
+   "maxSurv": 172
+  }
+ },
+ "deathShares": {
+  "control": "combat:571(58%) villager combat:230(23%) monster:54(5%) expedition:53(5%) sickness:20(2%) starvation:14(1%) a wound that wouldn't close:9(1%) the phoenix link:7(1%)",
+  "armed": "combat:560(57%) villager combat:241(24%) expedition:59(6%) monster:43(4%) sickness:20(2%) starvation:19(2%) a wound that wouldn't close:10(1%) contest:8(1%)"
+ },
+ "instrumentErrors": 0
+}
