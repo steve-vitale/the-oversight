@@ -9148,6 +9148,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       return true;
     },
+    // ENDING COPY (journey-crisis r37 2026-10-21): the village-lost end screen
+    // shared one text for every villageLost — but the scattering's own beat
+    // says people walked away ALIVE, in different directions ("Haven
+    // couldn't hold... The scattering, again"), and the extinction beat
+    // explicitly distinguishes itself with "Not scattered, not gone looking
+    // for food — dead, every one". A scattered village is not a dead
+    // village; the ending must name the loss honestly. Reads only state —
+    // node-testable (app.js ending() consults it; see test-crisis-scatter-
+    // copy-20261021.js). The non-scattered strings are byte-identical to the
+    // legacy copy (test-ending-screen-20261012 pins them).
+    villageLostCopy() {
+      const vv = (this.state && this.state.village) || {};
+      if (vv.scattered) return {
+        endTitle: 'THE SCATTERING',
+        sub: 'Haven couldn\u2019t hold. People walked away in different directions \u2014 the way it happened the first time. Not dead: scattered. The village is over, but the people walk on.',
+        recordTail: 'The Codex closes. The village scattered \u2014 no one left to carry it together.',
+      };
+      return {
+        endTitle: 'THE VILLAGE DIES OUT',
+        sub: 'No one is left to pick up the Codex. The village dies out \u2014 quietly, the way villages do. The season ends here.',
+        recordTail: 'The Codex closes. Nobody will carry it.',
+      };
+    },
     wipe() {
       // remove this run's keyed save (dead/finished runs don't continue)
       // TOMBSTONE (break-it persistence r5 2026-10-09): a wiped run stays

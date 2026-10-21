@@ -375,7 +375,18 @@
           if (vp && vp.dead) continue;
           this.addNpcCorruption(id, 1, starving ? 'hunger erodes' : 'the feared set the tone');
         }
-        if (starving) this.say('Hunger is doing its slow work on everyone. The lines get thinner every hungry day.');
+        if (starving) {
+          // HUNGER POOL (journey-crisis r37 2026-10-21): this was a single
+          // line said every hungry dawn — it parroted identically for a
+          // week straight in the r37 sims. Same quiet register, four ways.
+          const hungerLines = [
+            'Hunger is doing its slow work on everyone. The lines get thinner every hungry day.',
+            'Another hungry dawn. People move a half-step slower, like the air got thicker overnight.',
+            'The fire is quieter on hungry mornings. Nobody has spare breath for talking.',
+            'Cheekbones. You start noticing cheekbones — yours in the wash bucket, theirs across the fire.',
+          ];
+          this.say(hungerLines[Math.floor(R() * hungerLines.length)]);
+        }
       } catch (e) {}
     },
     // npcCannibalTick: rarely, in a starving village, someone crosses the

@@ -1130,6 +1130,14 @@
           try { desc = this.monsterNoun(ev.mid) || this.monsterDisplayName(ev.mid); } catch (e) {}
           let props = [];
           try { props = Object.entries((this.ensureMonsterEntry(ev.mid) || {}).proposals || {}); } catch (e) {}
+          // DEAD DON'T PUSH (journey-crisis r37 2026-10-21): proposals outlive
+          // their proposers — the day after Rocco starved, the debate still
+          // said "Rocco is pushing 'Loud-Eyes'". The living debate; a dead
+          // villager's proposal stands in the vote count but isn't rendered
+          // as present-tense campaigning.
+          try {
+            props = props.filter(p => { try { const vp = this.vpOf(p[0]); return !vp || !vp.dead; } catch (e2) { return true; } });
+          } catch (e) {}
           const who = (p) => { try { return this.firstRef(p[0]); } catch (e) { return 'someone'; } };
           const p0 = props[0], p1 = props[1];
           return [

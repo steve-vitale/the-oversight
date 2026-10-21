@@ -19504,9 +19504,16 @@
       sub = (resolution && resolution.label) || 'The village endures. The Codex closes on a story the galaxy will retell.';
       record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}`;
     } else if (st.villageLost) {
-      endTitle = 'THE VILLAGE DIES OUT';
-      sub = 'No one is left to pick up the Codex. The village dies out — quietly, the way villages do. The season ends here.';
-      record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}<br>The Codex closes. Nobody will carry it.`;
+      // SCATTERING (journey-crisis r37 2026-10-21): villageLost covers both
+      // extinction and the scattering — the scattering's beat says people
+      // walked away alive, so it gets its own ending copy via
+      // Game.villageLostCopy(). The literals below are the extinction text
+      // (test-ending-screen-20261012 pins them); they also cover a stale
+      // cached game.js where villageLostCopy doesn't exist yet.
+      const vlc = (typeof Game.villageLostCopy === 'function') ? Game.villageLostCopy() : null;
+      endTitle = (vlc && vlc.endTitle) || 'THE VILLAGE DIES OUT';
+      sub = (vlc && vlc.sub) || 'No one is left to pick up the Codex. The village dies out — quietly, the way villages do. The season ends here.';
+      record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}<br>${(vlc && vlc.recordTail) || 'The Codex closes. Nobody will carry it.'}`;
     } else {
       endTitle = 'THE WOODS KEEP YOU';
       sub = 'The story ends here. The Codex keeps what was brought home.';
