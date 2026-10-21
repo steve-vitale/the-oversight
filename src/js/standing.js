@@ -422,8 +422,13 @@
               ? `📡 The next act is still waiting — ${bars}.`
               : `📡 The next act is still waiting. Stand ready to fight it — ${bars}.`));
         } else {
+          // KNOWLEDGE GATE (2026-10-21, backlog #734): the wave-5 TITLE
+          // ("The Producers") is never named in the hold — it isn't earned
+          // until wave 5 lands (_standingReleaseBeat(5)'s job; matches the
+          // defer4 discipline above and _readinessBarLine's comment:
+          // numbered drafts are fine, titles are not).
           say(first
-            ? `📡 The fifth draft stays in the wings. The Producers want a village that can fight them — ${bars}.`
+            ? `📡 The fifth draft stays in the wings. It wants a village that can fight — ${bars}.`
             : `📡 The fifth draft stays in the wings — ${bars}.`);
         }
       } catch (e) {}
