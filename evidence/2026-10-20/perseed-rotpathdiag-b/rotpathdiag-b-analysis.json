@@ -1,0 +1,49 @@
+{
+ "meta": {
+  "run": "sim-rotpathdiag-b",
+  "rows": 16
+ },
+ "diagGo": true,
+ "passN": 15,
+ "judgedN": 15,
+ "pooled": {
+  "days": 2089,
+  "inflow": {
+   "SP": 1998388,
+   "SS": 7449000,
+   "DPP": 1065871
+  },
+  "fastRot": {
+   "SP": 207953,
+   "SS": 1349600,
+   "DPP": 13945,
+   "INIT": 0,
+   "OTHER": 0
+  },
+  "fastRotPer1kInflow": {
+   "SP": 104.1,
+   "SS": 181.2
+  },
+  "spOverCap": {
+   "kcal": 0,
+   "fastRotPer1k": null
+  },
+  "spNormal": {
+   "kcal": 1998388,
+   "fastRotPer1k": 104.1
+  },
+  "ssCrisis": {
+   "kcal": 760785,
+   "fastRotPer1k": 7.4
+  },
+  "ssNonCrisis": {
+   "kcal": 6689529,
+   "fastRotPer1k": 200.9
+  },
+  "ssRefused": {
+   "kcal": 399106,
+   "events": 6250
+  },
+  "mergeMixKcal": 0
+ }
+}

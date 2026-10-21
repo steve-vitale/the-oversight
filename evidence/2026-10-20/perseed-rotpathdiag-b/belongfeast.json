@@ -1,0 +1,8943 @@
+{
+ "meta": {
+  "run": "sim-rotpathdiag-b",
+  "policy": "belongfeast",
+  "days": 180,
+  "seeds": [
+   5427,
+   5428,
+   5429,
+   5430,
+   5431,
+   5432,
+   5433,
+   5434
+  ],
+  "env": {
+   "FEASTSCALE_R13": "1",
+   "SEATDRIVE": "0",
+   "SURPLUSFEED": "unset"
+  },
+  "note": "diagnostic only — no lever, no armed side; seeds are the b4 set (deliberate reuse)"
+ },
+ "rows": [
+  {
+   "seed": 5427,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 4,
+   "days": 180,
+   "endReason": "survived",
+   "completeness": 1,
+   "inflow": {
+    "SP": 111099,
+    "SS": 695600,
+    "DPP": 3795
+   },
+   "writes": {
+    "SP": 233,
+    "SS": 900,
+    "DPP": 9
+   },
+   "pieceHist": {
+    "SP": {
+     "le100": 5468,
+     "401_500": 76302,
+     "301_400": 17118,
+     "201_300": 10807,
+     "101_200": 1404
+    },
+    "SS": {
+     "101_200": 695600
+    },
+    "DPP": {
+     "401_500": 3795
+    }
+   },
+   "ssGive": 695773,
+   "ssStored": 695600,
+   "ssRefused": 29319,
+   "ssRefusalEvents": 465,
+   "ssCrisisKcal": 298695,
+   "ssNonCrisisKcal": 397078,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 111099,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SP": 12641,
+    "SS": 23200,
+    "OTHER": 600
+   },
+   "rotByPathFast": {
+    "SP": 9141,
+    "SS": 16800
+   },
+   "rotByPathFastSub": {
+    "SP:normal": 9141,
+    "SS:noncrisis": 16800
+   },
+   "rotByName": {
+    "Expedition haul": 1000,
+    "Foraged food": 29021,
+    "Fish catch": 5820,
+    "Winner's share (alien rations)": 600
+   },
+   "rotLagMean": {
+    "SP": 3.55,
+    "SS": 3.55,
+    "OTHER": 9
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 652351,
+   "drawUrgencyDays": 8.07,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 40110,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 7.311,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 34710,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.169,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 31750,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.81,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 29650,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.952,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 29000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.784,
+     "doomedKcal": 0
+    },
+    {
+     "day": 7,
+     "pantryKcal": 28350,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.716,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 27950,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.515,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 26050,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.484,
+     "doomedKcal": 0
+    },
+    {
+     "day": 10,
+     "pantryKcal": 24450,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 15,
+     "doomedKcal": 0
+    },
+    {
+     "day": 11,
+     "pantryKcal": 23650,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 16.726,
+     "doomedKcal": 0
+    },
+    {
+     "day": 12,
+     "pantryKcal": 25647,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 21.95,
+     "doomedKcal": 200
+    },
+    {
+     "day": 13,
+     "pantryKcal": 29441,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.724,
+     "doomedKcal": 800
+    },
+    {
+     "day": 14,
+     "pantryKcal": 30698,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.836,
+     "doomedKcal": 5100
+    },
+    {
+     "day": 15,
+     "pantryKcal": 30510,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 25.045,
+     "doomedKcal": 870
+    },
+    {
+     "day": 16,
+     "pantryKcal": 31281,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.242,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 17,
+     "pantryKcal": 31060,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 25.152,
+     "doomedKcal": 0
+    },
+    {
+     "day": 18,
+     "pantryKcal": 32314,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.391,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 19,
+     "pantryKcal": 32035,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 23.781,
+     "doomedKcal": 0
+    },
+    {
+     "day": 20,
+     "pantryKcal": 32804,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 24.5,
+     "doomedKcal": 572
+    },
+    {
+     "day": 21,
+     "pantryKcal": 27489,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 18.559,
+     "doomedKcal": 600
+    },
+    {
+     "day": 22,
+     "pantryKcal": 20989,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.584,
+     "doomedKcal": 0
+    },
+    {
+     "day": 23,
+     "pantryKcal": 20229,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.424,
+     "doomedKcal": 1200
+    },
+    {
+     "day": 24,
+     "pantryKcal": 21611,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.643,
+     "doomedKcal": 400
+    },
+    {
+     "day": 25,
+     "pantryKcal": 23590,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.03,
+     "doomedKcal": 400
+    },
+    {
+     "day": 26,
+     "pantryKcal": 24817,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.331,
+     "doomedKcal": 0
+    },
+    {
+     "day": 27,
+     "pantryKcal": 27059,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.393,
+     "doomedKcal": 0
+    },
+    {
+     "day": 28,
+     "pantryKcal": 30272,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.123,
+     "doomedKcal": 3310
+    },
+    {
+     "day": 29,
+     "pantryKcal": 26830,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.761,
+     "doomedKcal": 3100
+    },
+    {
+     "day": 30,
+     "pantryKcal": 24160,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.383,
+     "doomedKcal": 5625
+    },
+    {
+     "day": 31,
+     "pantryKcal": 27512,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.473,
+     "doomedKcal": 3400
+    },
+    {
+     "day": 32,
+     "pantryKcal": 29507,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.942,
+     "doomedKcal": 7399
+    },
+    {
+     "day": 33,
+     "pantryKcal": 24976,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.394,
+     "doomedKcal": 5995
+    },
+    {
+     "day": 34,
+     "pantryKcal": 25336,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.527,
+     "doomedKcal": 3871
+    },
+    {
+     "day": 35,
+     "pantryKcal": 26436,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.335,
+     "doomedKcal": 5755
+    },
+    {
+     "day": 36,
+     "pantryKcal": 17172,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.96,
+     "doomedKcal": 5386
+    },
+    {
+     "day": 37,
+     "pantryKcal": 17895,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.278,
+     "doomedKcal": 1174
+    },
+    {
+     "day": 38,
+     "pantryKcal": 18401,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.632,
+     "doomedKcal": 2280
+    },
+    {
+     "day": 39,
+     "pantryKcal": 22149,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.531,
+     "doomedKcal": 2280
+    },
+    {
+     "day": 40,
+     "pantryKcal": 23655,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.021,
+     "doomedKcal": 4102
+    },
+    {
+     "day": 41,
+     "pantryKcal": 23953,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.073,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 42,
+     "pantryKcal": 23153,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.737,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 43,
+     "pantryKcal": 17775,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.322,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 44,
+     "pantryKcal": 19473,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.237,
+     "doomedKcal": 0
+    },
+    {
+     "day": 45,
+     "pantryKcal": 21353,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.646,
+     "doomedKcal": 0
+    },
+    {
+     "day": 46,
+     "pantryKcal": 24553,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.013,
+     "doomedKcal": 3080
+    },
+    {
+     "day": 47,
+     "pantryKcal": 25960,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.411,
+     "doomedKcal": 5800
+    },
+    {
+     "day": 47,
+     "pantryKcal": 25960,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.411,
+     "doomedKcal": 5800
+    },
+    {
+     "day": 49,
+     "pantryKcal": 27759,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.336,
+     "doomedKcal": 5846
+    },
+    {
+     "day": 50,
+     "pantryKcal": 16646,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.225,
+     "doomedKcal": 5800
+    },
+    {
+     "day": 50,
+     "pantryKcal": 14246,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.527,
+     "doomedKcal": 4200
+    },
+    {
+     "day": 52,
+     "pantryKcal": 17152,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.446,
+     "doomedKcal": 1500
+    },
+    {
+     "day": 53,
+     "pantryKcal": 19375,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.997,
+     "doomedKcal": 500
+    },
+    {
+     "day": 54,
+     "pantryKcal": 24846,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.001,
+     "doomedKcal": 500
+    },
+    {
+     "day": 55,
+     "pantryKcal": 26888,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.867,
+     "doomedKcal": 6189
+    },
+    {
+     "day": 56,
+     "pantryKcal": 25354,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.001,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 56,
+     "pantryKcal": 20323,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.001,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 58,
+     "pantryKcal": 23196,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.449,
+     "doomedKcal": 5444
+    },
+    {
+     "day": 59,
+     "pantryKcal": 22610,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.827,
+     "doomedKcal": 3500
+    },
+    {
+     "day": 60,
+     "pantryKcal": 26310,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.467,
+     "doomedKcal": 4900
+    },
+    {
+     "day": 61,
+     "pantryKcal": 29484,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.213,
+     "doomedKcal": 3900
+    },
+    {
+     "day": 61,
+     "pantryKcal": 27804,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.213,
+     "doomedKcal": 3900
+    },
+    {
+     "day": 63,
+     "pantryKcal": 25222,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.118,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 63,
+     "pantryKcal": 19927,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.982,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 65,
+     "pantryKcal": 18224,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.495,
+     "doomedKcal": 400
+    },
+    {
+     "day": 66,
+     "pantryKcal": 13854,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.663,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 67,
+     "pantryKcal": 13716,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.595,
+     "doomedKcal": 0
+    },
+    {
+     "day": 68,
+     "pantryKcal": 15903,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.837,
+     "doomedKcal": 0
+    },
+    {
+     "day": 69,
+     "pantryKcal": 18926,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.781,
+     "doomedKcal": 0
+    },
+    {
+     "day": 70,
+     "pantryKcal": 21748,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.67,
+     "doomedKcal": 0
+    },
+    {
+     "day": 71,
+     "pantryKcal": 16072,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.289,
+     "doomedKcal": 0
+    },
+    {
+     "day": 72,
+     "pantryKcal": 20769,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.321,
+     "doomedKcal": 0
+    },
+    {
+     "day": 72,
+     "pantryKcal": 19074,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.587,
+     "doomedKcal": 0
+    },
+    {
+     "day": 74,
+     "pantryKcal": 27482,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.507,
+     "doomedKcal": 5111
+    },
+    {
+     "day": 75,
+     "pantryKcal": 32888,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.121,
+     "doomedKcal": 7379
+    },
+    {
+     "day": 76,
+     "pantryKcal": 35548,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.202,
+     "doomedKcal": 7606
+    },
+    {
+     "day": 77,
+     "pantryKcal": 40128,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.238,
+     "doomedKcal": 5571
+    },
+    {
+     "day": 78,
+     "pantryKcal": 27352,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.497,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 79,
+     "pantryKcal": 25408,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.137,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 80,
+     "pantryKcal": 27838,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.807,
+     "doomedKcal": 2662
+    },
+    {
+     "day": 80,
+     "pantryKcal": 27838,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.807,
+     "doomedKcal": 2662
+    },
+    {
+     "day": 82,
+     "pantryKcal": 27376,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.032,
+     "doomedKcal": 2676
+    },
+    {
+     "day": 83,
+     "pantryKcal": 29515,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.018,
+     "doomedKcal": 4615
+    },
+    {
+     "day": 83,
+     "pantryKcal": 29871,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.175,
+     "doomedKcal": 4615
+    },
+    {
+     "day": 85,
+     "pantryKcal": 22964,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.626,
+     "doomedKcal": 6404
+    },
+    {
+     "day": 85,
+     "pantryKcal": 20379,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.862,
+     "doomedKcal": 6404
+    },
+    {
+     "day": 87,
+     "pantryKcal": 20387,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.129,
+     "doomedKcal": 6543
+    },
+    {
+     "day": 87,
+     "pantryKcal": 17498,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.205,
+     "doomedKcal": 6543
+    },
+    {
+     "day": 89,
+     "pantryKcal": 22626,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.634,
+     "doomedKcal": 4423
+    },
+    {
+     "day": 90,
+     "pantryKcal": 22105,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.964,
+     "doomedKcal": 3674
+    },
+    {
+     "day": 90,
+     "pantryKcal": 22570,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.17,
+     "doomedKcal": 3674
+    },
+    {
+     "day": 92,
+     "pantryKcal": 12519,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.071,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 92,
+     "pantryKcal": 12885,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.23,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 94,
+     "pantryKcal": 15361,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.636,
+     "doomedKcal": 4200
+    },
+    {
+     "day": 94,
+     "pantryKcal": 13761,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.945,
+     "doomedKcal": 4200
+    },
+    {
+     "day": 96,
+     "pantryKcal": 16153,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.017,
+     "doomedKcal": 3600
+    },
+    {
+     "day": 96,
+     "pantryKcal": 16153,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.017,
+     "doomedKcal": 3600
+    },
+    {
+     "day": 98,
+     "pantryKcal": 16546,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.406,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 98,
+     "pantryKcal": 5166,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.312,
+     "doomedKcal": 0
+    },
+    {
+     "day": 100,
+     "pantryKcal": 6394,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.899,
+     "doomedKcal": 0
+    },
+    {
+     "day": 100,
+     "pantryKcal": 4400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.995,
+     "doomedKcal": 0
+    },
+    {
+     "day": 102,
+     "pantryKcal": 6742,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.065,
+     "doomedKcal": 600
+    },
+    {
+     "day": 102,
+     "pantryKcal": 5062,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.301,
+     "doomedKcal": 0
+    },
+    {
+     "day": 104,
+     "pantryKcal": 4862,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.21,
+     "doomedKcal": 800
+    },
+    {
+     "day": 105,
+     "pantryKcal": 6062,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.755,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 106,
+     "pantryKcal": 6820,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.092,
+     "doomedKcal": 2800
+    },
+    {
+     "day": 107,
+     "pantryKcal": 6694,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.01,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 108,
+     "pantryKcal": 5389,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.423,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 109,
+     "pantryKcal": 2400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.153,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 3900,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.892,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 112,
+     "pantryKcal": 3800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.908,
+     "doomedKcal": 0
+    },
+    {
+     "day": 113,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.707,
+     "doomedKcal": 0
+    },
+    {
+     "day": 113,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.707,
+     "doomedKcal": 0
+    },
+    {
+     "day": 115,
+     "pantryKcal": 6289,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.594,
+     "doomedKcal": 600
+    },
+    {
+     "day": 116,
+     "pantryKcal": 4700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.241,
+     "doomedKcal": 0
+    },
+    {
+     "day": 117,
+     "pantryKcal": 4100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.955,
+     "doomedKcal": 0
+    },
+    {
+     "day": 118,
+     "pantryKcal": 3600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.717,
+     "doomedKcal": 0
+    },
+    {
+     "day": 119,
+     "pantryKcal": 3600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.717,
+     "doomedKcal": 0
+    },
+    {
+     "day": 120,
+     "pantryKcal": 4000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.321,
+     "doomedKcal": 0
+    },
+    {
+     "day": 120,
+     "pantryKcal": 3624,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.103,
+     "doomedKcal": 0
+    },
+    {
+     "day": 122,
+     "pantryKcal": 3300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.965,
+     "doomedKcal": 0
+    },
+    {
+     "day": 123,
+     "pantryKcal": 5099,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.223,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 124,
+     "pantryKcal": 3000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.896,
+     "doomedKcal": 0
+    },
+    {
+     "day": 125,
+     "pantryKcal": 2800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.77,
+     "doomedKcal": 0
+    },
+    {
+     "day": 126,
+     "pantryKcal": 3600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.275,
+     "doomedKcal": 0
+    },
+    {
+     "day": 127,
+     "pantryKcal": 4200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.24,
+     "doomedKcal": 0
+    },
+    {
+     "day": 128,
+     "pantryKcal": 3600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.636,
+     "doomedKcal": 0
+    },
+    {
+     "day": 128,
+     "pantryKcal": 2000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.909,
+     "doomedKcal": 0
+    },
+    {
+     "day": 129,
+     "pantryKcal": 3000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.364,
+     "doomedKcal": 0
+    },
+    {
+     "day": 131,
+     "pantryKcal": 4998,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.272,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 131,
+     "pantryKcal": 4998,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.272,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 133,
+     "pantryKcal": 8234,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.717,
+     "doomedKcal": 4200
+    },
+    {
+     "day": 134,
+     "pantryKcal": 7334,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.316,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 135,
+     "pantryKcal": 3600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.743,
+     "doomedKcal": 0
+    },
+    {
+     "day": 135,
+     "pantryKcal": 3690,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.786,
+     "doomedKcal": 0
+    },
+    {
+     "day": 137,
+     "pantryKcal": 4080,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.001,
+     "doomedKcal": 0
+    },
+    {
+     "day": 138,
+     "pantryKcal": 3600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.801,
+     "doomedKcal": 0
+    },
+    {
+     "day": 139,
+     "pantryKcal": 3200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.657,
+     "doomedKcal": 0
+    },
+    {
+     "day": 139,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.828,
+     "doomedKcal": 0
+    },
+    {
+     "day": 141,
+     "pantryKcal": 3800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.849,
+     "doomedKcal": 0
+    },
+    {
+     "day": 142,
+     "pantryKcal": 4300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.43,
+     "doomedKcal": 0
+    },
+    {
+     "day": 142,
+     "pantryKcal": 4300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.43,
+     "doomedKcal": 0
+    },
+    {
+     "day": 144,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.14,
+     "doomedKcal": 0
+    },
+    {
+     "day": 145,
+     "pantryKcal": 3600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.36,
+     "doomedKcal": 0
+    },
+    {
+     "day": 145,
+     "pantryKcal": 4157,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.416,
+     "doomedKcal": 0
+    },
+    {
+     "day": 147,
+     "pantryKcal": 400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.04,
+     "doomedKcal": 0
+    },
+    {
+     "day": 148,
+     "pantryKcal": 4900,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.49,
+     "doomedKcal": 0
+    },
+    {
+     "day": 149,
+     "pantryKcal": 3800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.38,
+     "doomedKcal": 0
+    },
+    {
+     "day": 150,
+     "pantryKcal": 5000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.5,
+     "doomedKcal": 0
+    },
+    {
+     "day": 151,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.16,
+     "doomedKcal": 0
+    },
+    {
+     "day": 152,
+     "pantryKcal": 2600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.26,
+     "doomedKcal": 0
+    },
+    {
+     "day": 152,
+     "pantryKcal": 3270,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.327,
+     "doomedKcal": 0
+    },
+    {
+     "day": 154,
+     "pantryKcal": 3200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.32,
+     "doomedKcal": 0
+    },
+    {
+     "day": 155,
+     "pantryKcal": 2800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.28,
+     "doomedKcal": 0
+    },
+    {
+     "day": 156,
+     "pantryKcal": 3800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.38,
+     "doomedKcal": 0
+    },
+    {
+     "day": 157,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 158,
+     "pantryKcal": 2600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.26,
+     "doomedKcal": 0
+    },
+    {
+     "day": 159,
+     "pantryKcal": 3000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.3,
+     "doomedKcal": 0
+    },
+    {
+     "day": 159,
+     "pantryKcal": 3422,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.342,
+     "doomedKcal": 0
+    },
+    {
+     "day": 161,
+     "pantryKcal": 2394,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.2,
+     "doomedKcal": 0
+    },
+    {
+     "day": 162,
+     "pantryKcal": 2600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.26,
+     "doomedKcal": 0
+    },
+    {
+     "day": 163,
+     "pantryKcal": 2800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.233,
+     "doomedKcal": 0
+    },
+    {
+     "day": 164,
+     "pantryKcal": 5000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.5,
+     "doomedKcal": 0
+    },
+    {
+     "day": 165,
+     "pantryKcal": 5200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.52,
+     "doomedKcal": 0
+    },
+    {
+     "day": 165,
+     "pantryKcal": 5200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.52,
+     "doomedKcal": 0
+    },
+    {
+     "day": 167,
+     "pantryKcal": 3000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.3,
+     "doomedKcal": 0
+    },
+    {
+     "day": 167,
+     "pantryKcal": 3000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.3,
+     "doomedKcal": 0
+    },
+    {
+     "day": 169,
+     "pantryKcal": 3666,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.305,
+     "doomedKcal": 0
+    },
+    {
+     "day": 169,
+     "pantryKcal": 3870,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.323,
+     "doomedKcal": 0
+    },
+    {
+     "day": 171,
+     "pantryKcal": 3022,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.252,
+     "doomedKcal": 0
+    },
+    {
+     "day": 172,
+     "pantryKcal": 3249,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.271,
+     "doomedKcal": 0
+    },
+    {
+     "day": 172,
+     "pantryKcal": 3293,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.274,
+     "doomedKcal": 0
+    },
+    {
+     "day": 174,
+     "pantryKcal": 1966,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.164,
+     "doomedKcal": 0
+    },
+    {
+     "day": 175,
+     "pantryKcal": 3052,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.254,
+     "doomedKcal": 0
+    },
+    {
+     "day": 176,
+     "pantryKcal": 3449,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.287,
+     "doomedKcal": 0
+    },
+    {
+     "day": 176,
+     "pantryKcal": 3922,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.327,
+     "doomedKcal": 0
+    },
+    {
+     "day": 178,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.14,
+     "doomedKcal": 0
+    },
+    {
+     "day": 179,
+     "pantryKcal": 2400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.3,
+     "doomedKcal": 0
+    },
+    {
+     "day": 180,
+     "pantryKcal": 2800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.35,
+     "doomedKcal": 0
+    },
+    {
+     "day": 181,
+     "pantryKcal": 3400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.425,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 2318
+  },
+  {
+   "seed": 5428,
+   "won": false,
+   "national": false,
+   "table": false,
+   "rank": "regional",
+   "maxWave": 2,
+   "arc": 3,
+   "rosterEnd": 7,
+   "days": 45,
+   "endReason": "village-lost",
+   "completeness": 1,
+   "inflow": {
+    "SP": 66094,
+    "SS": 57400,
+    "DPP": 0
+   },
+   "writes": {
+    "SP": 109,
+    "SS": 213,
+    "DPP": 0
+   },
+   "pieceHist": {
+    "SP": {
+     "le100": 2049,
+     "401_500": 47689,
+     "101_200": 2096,
+     "301_400": 9223,
+     "201_300": 5037
+    },
+    "SS": {
+     "101_200": 57400
+    },
+    "DPP": {}
+   },
+   "ssGive": 57485,
+   "ssStored": 57400,
+   "ssRefused": 7076,
+   "ssRefusalEvents": 117,
+   "ssCrisisKcal": 14145,
+   "ssNonCrisisKcal": 43340,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 66094,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SP": 500,
+    "SS": 1000
+   },
+   "rotByPathFast": {
+    "SP": 500,
+    "SS": 1000
+   },
+   "rotByPathFastSub": {
+    "SP:normal": 500,
+    "SS:noncrisis": 1000
+   },
+   "rotByName": {
+    "Foraged food": 1500
+   },
+   "rotLagMean": {
+    "SP": 3,
+    "SS": 3
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 157570,
+   "drawUrgencyDays": 41.77,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 40000,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 5.45,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 35220,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.628,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 30550,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.593,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 28600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.898,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 29100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.064,
+     "doomedKcal": 0
+    },
+    {
+     "day": 7,
+     "pantryKcal": 28800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.964,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 29250,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.981,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 31200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.27,
+     "doomedKcal": 0
+    },
+    {
+     "day": 10,
+     "pantryKcal": 36922,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 20.816,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 11,
+     "pantryKcal": 38786,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.385,
+     "doomedKcal": 7222
+    },
+    {
+     "day": 12,
+     "pantryKcal": 36802,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 28.633,
+     "doomedKcal": 2300
+    },
+    {
+     "day": 13,
+     "pantryKcal": 37204,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.948,
+     "doomedKcal": 800
+    },
+    {
+     "day": 14,
+     "pantryKcal": 38225,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 28.501,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 15,
+     "pantryKcal": 39581,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 29.212,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 16,
+     "pantryKcal": 39039,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.564,
+     "doomedKcal": 0
+    },
+    {
+     "day": 17,
+     "pantryKcal": 41955,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 30.201,
+     "doomedKcal": 378
+    },
+    {
+     "day": 18,
+     "pantryKcal": 39945,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 25.241,
+     "doomedKcal": 0
+    },
+    {
+     "day": 19,
+     "pantryKcal": 39146,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 24.687,
+     "doomedKcal": 0
+    },
+    {
+     "day": 20,
+     "pantryKcal": 38754,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 23.462,
+     "doomedKcal": 0
+    },
+    {
+     "day": 21,
+     "pantryKcal": 30394,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 14.924,
+     "doomedKcal": 0
+    },
+    {
+     "day": 22,
+     "pantryKcal": 18167,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.964,
+     "doomedKcal": 0
+    },
+    {
+     "day": 23,
+     "pantryKcal": 16287,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.208,
+     "doomedKcal": 0
+    },
+    {
+     "day": 24,
+     "pantryKcal": 15400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.006,
+     "doomedKcal": 0
+    },
+    {
+     "day": 25,
+     "pantryKcal": 14550,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.031,
+     "doomedKcal": 0
+    },
+    {
+     "day": 26,
+     "pantryKcal": 13000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.567,
+     "doomedKcal": 0
+    },
+    {
+     "day": 27,
+     "pantryKcal": 8150,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.568,
+     "doomedKcal": 0
+    },
+    {
+     "day": 28,
+     "pantryKcal": 5600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.374,
+     "doomedKcal": 0
+    },
+    {
+     "day": 29,
+     "pantryKcal": 5600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.626,
+     "doomedKcal": 0
+    },
+    {
+     "day": 30,
+     "pantryKcal": 4700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.122,
+     "doomedKcal": 0
+    },
+    {
+     "day": 31,
+     "pantryKcal": 3700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.694,
+     "doomedKcal": 0
+    },
+    {
+     "day": 32,
+     "pantryKcal": 2600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.166,
+     "doomedKcal": 0
+    },
+    {
+     "day": 33,
+     "pantryKcal": 3679,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.822,
+     "doomedKcal": 0
+    },
+    {
+     "day": 34,
+     "pantryKcal": 3300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.846,
+     "doomedKcal": 0
+    },
+    {
+     "day": 35,
+     "pantryKcal": 4200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.779,
+     "doomedKcal": 0
+    },
+    {
+     "day": 36,
+     "pantryKcal": 1300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.885,
+     "doomedKcal": 0
+    },
+    {
+     "day": 37,
+     "pantryKcal": 3100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.139,
+     "doomedKcal": 0
+    },
+    {
+     "day": 38,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.928,
+     "doomedKcal": 0
+    },
+    {
+     "day": 39,
+     "pantryKcal": 800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.431,
+     "doomedKcal": 0
+    },
+    {
+     "day": 40,
+     "pantryKcal": 2100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.052,
+     "doomedKcal": 0
+    },
+    {
+     "day": 41,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.659,
+     "doomedKcal": 0
+    },
+    {
+     "day": 42,
+     "pantryKcal": 2200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.027,
+     "doomedKcal": 0
+    },
+    {
+     "day": 43,
+     "pantryKcal": 1700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.744,
+     "doomedKcal": 0
+    },
+    {
+     "day": 44,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 45,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 45,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 841
+  },
+  {
+   "seed": 5429,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 1,
+   "days": 159,
+   "endReason": "village-lost",
+   "completeness": 1,
+   "inflow": {
+    "SP": 152408,
+    "SS": 573800,
+    "DPP": 4680
+   },
+   "writes": {
+    "SP": 251,
+    "SS": 828,
+    "DPP": 5
+   },
+   "pieceHist": {
+    "SP": {
+     "301_400": 18776,
+     "401_500": 112952,
+     "le100": 4017,
+     "101_200": 3549,
+     "201_300": 13114
+    },
+    "SS": {
+     "101_200": 573800
+    },
+    "DPP": {
+     "401_500": 4680
+    }
+   },
+   "ssGive": 573816,
+   "ssStored": 573800,
+   "ssRefused": 28053,
+   "ssRefusalEvents": 428,
+   "ssCrisisKcal": 109622,
+   "ssNonCrisisKcal": 464194,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 152408,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SS": 102000,
+    "SP": 31458,
+    "OTHER": 3600
+   },
+   "rotByPathFast": {
+    "SS": 102000,
+    "SP": 31458
+   },
+   "rotByPathFastSub": {
+    "SS:noncrisis": 102000,
+    "SP:normal": 31458
+   },
+   "rotByName": {
+    "Foraged food": 122515,
+    "Expedition haul": 500,
+    "Trial feast": 500,
+    "Winner's share (alien rations)": 3600,
+    "Snared meat": 596,
+    "Aid from Emberhold": 9347
+   },
+   "rotLagMean": {
+    "SS": 3,
+    "SP": 3,
+    "OTHER": 9
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 479863,
+   "drawUrgencyDays": 2.81,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 41140,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 5.949,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 37090,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.407,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 34300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.739,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 32940,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.875,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 32720,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.39,
+     "doomedKcal": 0
+    },
+    {
+     "day": 7,
+     "pantryKcal": 33420,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.994,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 33320,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 14.194,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 34373,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 22.878,
+     "doomedKcal": 0
+    },
+    {
+     "day": 10,
+     "pantryKcal": 36454,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 30.314,
+     "doomedKcal": 1253
+    },
+    {
+     "day": 11,
+     "pantryKcal": 38292,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 32.837,
+     "doomedKcal": 600
+    },
+    {
+     "day": 12,
+     "pantryKcal": 41105,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.392,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 13,
+     "pantryKcal": 43454,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.251,
+     "doomedKcal": 1200
+    },
+    {
+     "day": 14,
+     "pantryKcal": 45790,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.536,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 15,
+     "pantryKcal": 48713,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 39.357,
+     "doomedKcal": 3436
+    },
+    {
+     "day": 16,
+     "pantryKcal": 49999,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 37.636,
+     "doomedKcal": 2023
+    },
+    {
+     "day": 16,
+     "pantryKcal": 49999,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 37.636,
+     "doomedKcal": 2023
+    },
+    {
+     "day": 18,
+     "pantryKcal": 60885,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 49.882,
+     "doomedKcal": 4600
+    },
+    {
+     "day": 19,
+     "pantryKcal": 59507,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 45.304,
+     "doomedKcal": 8358
+    },
+    {
+     "day": 19,
+     "pantryKcal": 59507,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 45.304,
+     "doomedKcal": 8358
+    },
+    {
+     "day": 21,
+     "pantryKcal": 49835,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 21.969,
+     "doomedKcal": 1500
+    },
+    {
+     "day": 22,
+     "pantryKcal": 39290,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 14.781,
+     "doomedKcal": 0
+    },
+    {
+     "day": 23,
+     "pantryKcal": 38941,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.446,
+     "doomedKcal": 0
+    },
+    {
+     "day": 24,
+     "pantryKcal": 43260,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.111,
+     "doomedKcal": 800
+    },
+    {
+     "day": 25,
+     "pantryKcal": 44254,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.56,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 26,
+     "pantryKcal": 45649,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 19.978,
+     "doomedKcal": 3304
+    },
+    {
+     "day": 27,
+     "pantryKcal": 44627,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 25.414,
+     "doomedKcal": 3400
+    },
+    {
+     "day": 28,
+     "pantryKcal": 42248,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 32.901,
+     "doomedKcal": 2922
+    },
+    {
+     "day": 29,
+     "pantryKcal": 40361,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 42.085,
+     "doomedKcal": 0
+    },
+    {
+     "day": 30,
+     "pantryKcal": 38177,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 103.23,
+     "doomedKcal": 6598
+    },
+    {
+     "day": 30,
+     "pantryKcal": 37657,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 88.345,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 32,
+     "pantryKcal": 37408,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 77.549,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 33,
+     "pantryKcal": 36209,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 98.121,
+     "doomedKcal": 4299
+    },
+    {
+     "day": 33,
+     "pantryKcal": 36836,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 86.565,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 35,
+     "pantryKcal": 33463,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 79.02,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 36,
+     "pantryKcal": 30238,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 56.493,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 37,
+     "pantryKcal": 27396,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 38.574,
+     "doomedKcal": 0
+    },
+    {
+     "day": 38,
+     "pantryKcal": 29296,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 50.935,
+     "doomedKcal": 1100
+    },
+    {
+     "day": 39,
+     "pantryKcal": 29869,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 59.883,
+     "doomedKcal": 2700
+    },
+    {
+     "day": 39,
+     "pantryKcal": 29802,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 48.498,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 41,
+     "pantryKcal": 32455,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 71.949,
+     "doomedKcal": 2677
+    },
+    {
+     "day": 42,
+     "pantryKcal": 36062,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 87.442,
+     "doomedKcal": 3784
+    },
+    {
+     "day": 43,
+     "pantryKcal": 28267,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 64.436,
+     "doomedKcal": 5684
+    },
+    {
+     "day": 44,
+     "pantryKcal": 26267,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 42.528,
+     "doomedKcal": 3283
+    },
+    {
+     "day": 45,
+     "pantryKcal": 23760,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 46.277,
+     "doomedKcal": 3926
+    },
+    {
+     "day": 46,
+     "pantryKcal": 23029,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.552,
+     "doomedKcal": 735
+    },
+    {
+     "day": 47,
+     "pantryKcal": 26115,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 47.857,
+     "doomedKcal": 3454
+    },
+    {
+     "day": 48,
+     "pantryKcal": 26218,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 61.247,
+     "doomedKcal": 4500
+    },
+    {
+     "day": 49,
+     "pantryKcal": 25712,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 51.067,
+     "doomedKcal": 4077
+    },
+    {
+     "day": 50,
+     "pantryKcal": 21425,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 43.783,
+     "doomedKcal": 0
+    },
+    {
+     "day": 51,
+     "pantryKcal": 20964,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 34.496,
+     "doomedKcal": 911
+    },
+    {
+     "day": 52,
+     "pantryKcal": 21716,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 28.221,
+     "doomedKcal": 0
+    },
+    {
+     "day": 53,
+     "pantryKcal": 21858,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 16.704,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 53,
+     "pantryKcal": 21858,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 16.704,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 55,
+     "pantryKcal": 28736,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.341,
+     "doomedKcal": 3519
+    },
+    {
+     "day": 56,
+     "pantryKcal": 31417,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.937,
+     "doomedKcal": 8329
+    },
+    {
+     "day": 57,
+     "pantryKcal": 24439,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.504,
+     "doomedKcal": 6200
+    },
+    {
+     "day": 58,
+     "pantryKcal": 17011,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.514,
+     "doomedKcal": 3700
+    },
+    {
+     "day": 59,
+     "pantryKcal": 17578,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.068,
+     "doomedKcal": 2200
+    },
+    {
+     "day": 60,
+     "pantryKcal": 19769,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.522,
+     "doomedKcal": 570
+    },
+    {
+     "day": 61,
+     "pantryKcal": 24504,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.221,
+     "doomedKcal": 825
+    },
+    {
+     "day": 62,
+     "pantryKcal": 27455,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.802,
+     "doomedKcal": 7700
+    },
+    {
+     "day": 63,
+     "pantryKcal": 29888,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.781,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 64,
+     "pantryKcal": 25551,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.057,
+     "doomedKcal": 5663
+    },
+    {
+     "day": 65,
+     "pantryKcal": 21260,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.913,
+     "doomedKcal": 3598
+    },
+    {
+     "day": 66,
+     "pantryKcal": 25313,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.286,
+     "doomedKcal": 4862
+    },
+    {
+     "day": 67,
+     "pantryKcal": 28519,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.353,
+     "doomedKcal": 4936
+    },
+    {
+     "day": 67,
+     "pantryKcal": 30102,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.051,
+     "doomedKcal": 4936
+    },
+    {
+     "day": 69,
+     "pantryKcal": 32986,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.416,
+     "doomedKcal": 6983
+    },
+    {
+     "day": 69,
+     "pantryKcal": 32986,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.416,
+     "doomedKcal": 6983
+    },
+    {
+     "day": 71,
+     "pantryKcal": 21450,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.222,
+     "doomedKcal": 4730
+    },
+    {
+     "day": 71,
+     "pantryKcal": 19697,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.013,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 73,
+     "pantryKcal": 17727,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.864,
+     "doomedKcal": 2329
+    },
+    {
+     "day": 74,
+     "pantryKcal": 19994,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.04,
+     "doomedKcal": 2438
+    },
+    {
+     "day": 74,
+     "pantryKcal": 21788,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.827,
+     "doomedKcal": 2438
+    },
+    {
+     "day": 76,
+     "pantryKcal": 26077,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.164,
+     "doomedKcal": 2012
+    },
+    {
+     "day": 76,
+     "pantryKcal": 26320,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.267,
+     "doomedKcal": 2012
+    },
+    {
+     "day": 78,
+     "pantryKcal": 24854,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.586,
+     "doomedKcal": 6243
+    },
+    {
+     "day": 78,
+     "pantryKcal": 21134,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.472,
+     "doomedKcal": 3643
+    },
+    {
+     "day": 80,
+     "pantryKcal": 29458,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.444,
+     "doomedKcal": 2925
+    },
+    {
+     "day": 81,
+     "pantryKcal": 35134,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.956,
+     "doomedKcal": 8368
+    },
+    {
+     "day": 81,
+     "pantryKcal": 35134,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.956,
+     "doomedKcal": 8368
+    },
+    {
+     "day": 83,
+     "pantryKcal": 31262,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.436,
+     "doomedKcal": 7666
+    },
+    {
+     "day": 83,
+     "pantryKcal": 31262,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.436,
+     "doomedKcal": 7666
+    },
+    {
+     "day": 84,
+     "pantryKcal": 25080,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.091,
+     "doomedKcal": 6631
+    },
+    {
+     "day": 86,
+     "pantryKcal": 20818,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.755,
+     "doomedKcal": 7978
+    },
+    {
+     "day": 87,
+     "pantryKcal": 17800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.765,
+     "doomedKcal": 6949
+    },
+    {
+     "day": 87,
+     "pantryKcal": 16938,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.765,
+     "doomedKcal": 6949
+    },
+    {
+     "day": 89,
+     "pantryKcal": 22154,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.264,
+     "doomedKcal": 3800
+    },
+    {
+     "day": 90,
+     "pantryKcal": 24154,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.725,
+     "doomedKcal": 4063
+    },
+    {
+     "day": 91,
+     "pantryKcal": 30918,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.467,
+     "doomedKcal": 6862
+    },
+    {
+     "day": 92,
+     "pantryKcal": 21219,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.375,
+     "doomedKcal": 9753
+    },
+    {
+     "day": 93,
+     "pantryKcal": 18871,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.311,
+     "doomedKcal": 6826
+    },
+    {
+     "day": 94,
+     "pantryKcal": 18723,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.246,
+     "doomedKcal": 7405
+    },
+    {
+     "day": 95,
+     "pantryKcal": 21057,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.355,
+     "doomedKcal": 6678
+    },
+    {
+     "day": 96,
+     "pantryKcal": 20279,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.007,
+     "doomedKcal": 9739
+    },
+    {
+     "day": 97,
+     "pantryKcal": 15740,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.973,
+     "doomedKcal": 5900
+    },
+    {
+     "day": 98,
+     "pantryKcal": 14322,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.6,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 98,
+     "pantryKcal": 14322,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.6,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 100,
+     "pantryKcal": 4200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.897,
+     "doomedKcal": 0
+    },
+    {
+     "day": 100,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.723,
+     "doomedKcal": 0
+    },
+    {
+     "day": 102,
+     "pantryKcal": 10536,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.962,
+     "doomedKcal": 0
+    },
+    {
+     "day": 102,
+     "pantryKcal": 10476,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.084,
+     "doomedKcal": 0
+    },
+    {
+     "day": 104,
+     "pantryKcal": 17532,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.803,
+     "doomedKcal": 3273
+    },
+    {
+     "day": 105,
+     "pantryKcal": 18687,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.371,
+     "doomedKcal": 6263
+    },
+    {
+     "day": 106,
+     "pantryKcal": 8732,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.006,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 106,
+     "pantryKcal": 3732,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.712,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 108,
+     "pantryKcal": 5702,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.512,
+     "doomedKcal": 400
+    },
+    {
+     "day": 109,
+     "pantryKcal": 7033,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.106,
+     "doomedKcal": 1702
+    },
+    {
+     "day": 110,
+     "pantryKcal": 9271,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.178,
+     "doomedKcal": 931
+    },
+    {
+     "day": 111,
+     "pantryKcal": 6740,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.057,
+     "doomedKcal": 2540
+    },
+    {
+     "day": 112,
+     "pantryKcal": 5454,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.452,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 112,
+     "pantryKcal": 5454,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.452,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 114,
+     "pantryKcal": 7137,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.211,
+     "doomedKcal": 1845
+    },
+    {
+     "day": 115,
+     "pantryKcal": 5101,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.273,
+     "doomedKcal": 600
+    },
+    {
+     "day": 115,
+     "pantryKcal": 9015,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.017,
+     "doomedKcal": 600
+    },
+    {
+     "day": 117,
+     "pantryKcal": 5931,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.446,
+     "doomedKcal": 3500
+    },
+    {
+     "day": 117,
+     "pantryKcal": 5931,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.446,
+     "doomedKcal": 3500
+    },
+    {
+     "day": 119,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 120,
+     "pantryKcal": 1000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.458,
+     "doomedKcal": 0
+    },
+    {
+     "day": 121,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.827,
+     "doomedKcal": 0
+    },
+    {
+     "day": 122,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.844,
+     "doomedKcal": 0
+    },
+    {
+     "day": 123,
+     "pantryKcal": 800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.384,
+     "doomedKcal": 0
+    },
+    {
+     "day": 124,
+     "pantryKcal": 2300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.604,
+     "doomedKcal": 0
+    },
+    {
+     "day": 124,
+     "pantryKcal": 484,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.338,
+     "doomedKcal": 0
+    },
+    {
+     "day": 126,
+     "pantryKcal": 2838,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.5,
+     "doomedKcal": 0
+    },
+    {
+     "day": 127,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 128,
+     "pantryKcal": 1000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.167,
+     "doomedKcal": 0
+    },
+    {
+     "day": 129,
+     "pantryKcal": 800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.133,
+     "doomedKcal": 0
+    },
+    {
+     "day": 130,
+     "pantryKcal": 600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.075,
+     "doomedKcal": 0
+    },
+    {
+     "day": 131,
+     "pantryKcal": 2300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.287,
+     "doomedKcal": 0
+    },
+    {
+     "day": 132,
+     "pantryKcal": 1200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.15,
+     "doomedKcal": 0
+    },
+    {
+     "day": 133,
+     "pantryKcal": 2991,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.374,
+     "doomedKcal": 0
+    },
+    {
+     "day": 134,
+     "pantryKcal": 1200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.15,
+     "doomedKcal": 0
+    },
+    {
+     "day": 135,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.3,
+     "doomedKcal": 0
+    },
+    {
+     "day": 136,
+     "pantryKcal": 2200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11,
+     "doomedKcal": 0
+    },
+    {
+     "day": 137,
+     "pantryKcal": 3000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 15,
+     "doomedKcal": 0
+    },
+    {
+     "day": 138,
+     "pantryKcal": 1200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.091,
+     "doomedKcal": 0
+    },
+    {
+     "day": 139,
+     "pantryKcal": 800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.717,
+     "doomedKcal": 0
+    },
+    {
+     "day": 140,
+     "pantryKcal": 1000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.933,
+     "doomedKcal": 0
+    },
+    {
+     "day": 141,
+     "pantryKcal": 1900,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.421,
+     "doomedKcal": 0
+    },
+    {
+     "day": 142,
+     "pantryKcal": 1100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.887,
+     "doomedKcal": 0
+    },
+    {
+     "day": 143,
+     "pantryKcal": 2100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.288,
+     "doomedKcal": 0
+    },
+    {
+     "day": 144,
+     "pantryKcal": 2158,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.238,
+     "doomedKcal": 0
+    },
+    {
+     "day": 144,
+     "pantryKcal": 1658,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.951,
+     "doomedKcal": 0
+    },
+    {
+     "day": 146,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.77,
+     "doomedKcal": 0
+    },
+    {
+     "day": 147,
+     "pantryKcal": 2600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.358,
+     "doomedKcal": 0
+    },
+    {
+     "day": 148,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.861,
+     "doomedKcal": 0
+    },
+    {
+     "day": 149,
+     "pantryKcal": 2800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.457,
+     "doomedKcal": 0
+    },
+    {
+     "day": 150,
+     "pantryKcal": 1846,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.986,
+     "doomedKcal": 0
+    },
+    {
+     "day": 151,
+     "pantryKcal": 2200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.229,
+     "doomedKcal": 0
+    },
+    {
+     "day": 152,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.773,
+     "doomedKcal": 0
+    },
+    {
+     "day": 153,
+     "pantryKcal": 1000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.581,
+     "doomedKcal": 0
+    },
+    {
+     "day": 154,
+     "pantryKcal": 800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.467,
+     "doomedKcal": 0
+    },
+    {
+     "day": 155,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.08,
+     "doomedKcal": 0
+    },
+    {
+     "day": 156,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 157,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.004,
+     "doomedKcal": 0
+    },
+    {
+     "day": 158,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 159,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 159,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 2393
+  },
+  {
+   "seed": 5430,
+   "won": false,
+   "national": true,
+   "table": true,
+   "rank": "global",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 6,
+   "days": 180,
+   "endReason": "survived",
+   "completeness": 1,
+   "inflow": {
+    "SP": 126247,
+    "SS": 1216800,
+    "DPP": 9145
+   },
+   "writes": {
+    "SP": 181,
+    "SS": 1383,
+    "DPP": 34
+   },
+   "pieceHist": {
+    "SP": {
+     "401_500": 98534,
+     "201_300": 7293,
+     "le100": 4513,
+     "301_400": 12921,
+     "101_200": 2986
+    },
+    "SS": {
+     "101_200": 1216800
+    },
+    "DPP": {
+     "401_500": 9145
+    }
+   },
+   "ssGive": 1216881,
+   "ssStored": 1216800,
+   "ssRefused": 45222,
+   "ssRefusalEvents": 684,
+   "ssCrisisKcal": 35880,
+   "ssNonCrisisKcal": 1181001,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 126247,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SS": 603600,
+    "SP": 67853,
+    "OTHER": 3600,
+    "DPP": 3870
+   },
+   "rotByPathFast": {
+    "SS": 603600,
+    "SP": 67853,
+    "DPP": 3870
+   },
+   "rotByPathFastSub": {
+    "SS:noncrisis": 598000,
+    "SP:normal": 67853,
+    "SS:crisis": 5600
+   },
+   "rotByName": {
+    "Foraged food": 652345,
+    "Winner's share (alien rations)": 3600,
+    "Aid from Emberhold": 4213,
+    "System-replicated (enthusiastic) meal": 300,
+    "Garden harvest": 2500,
+    "Fish catch": 1620,
+    "Expedition haul": 10475,
+    "Blackberry": 2730,
+    "Purslane": 1140
+   },
+   "rotLagMean": {
+    "SS": 3,
+    "SP": 3,
+    "OTHER": 9,
+    "DPP": 2
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 491719,
+   "drawUrgencyDays": 5.9,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 41370,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 6.403,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 37120,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.186,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 32630,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.155,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 30300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.007,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 29850,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.137,
+     "doomedKcal": 0
+    },
+    {
+     "day": 7,
+     "pantryKcal": 30600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.531,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 29700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.278,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 27900,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.594,
+     "doomedKcal": 0
+    },
+    {
+     "day": 10,
+     "pantryKcal": 28081,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 19.079,
+     "doomedKcal": 0
+    },
+    {
+     "day": 11,
+     "pantryKcal": 29644,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.091,
+     "doomedKcal": 581
+    },
+    {
+     "day": 12,
+     "pantryKcal": 29550,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.53,
+     "doomedKcal": 400
+    },
+    {
+     "day": 13,
+     "pantryKcal": 31350,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 28.913,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 14,
+     "pantryKcal": 32721,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 29.24,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 15,
+     "pantryKcal": 34977,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 30.066,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 16,
+     "pantryKcal": 36657,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 30.092,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 17,
+     "pantryKcal": 43153,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 35.128,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 18,
+     "pantryKcal": 47877,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.613,
+     "doomedKcal": 2394
+    },
+    {
+     "day": 19,
+     "pantryKcal": 51083,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 37.432,
+     "doomedKcal": 3466
+    },
+    {
+     "day": 20,
+     "pantryKcal": 51874,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 33.286,
+     "doomedKcal": 3060
+    },
+    {
+     "day": 21,
+     "pantryKcal": 45876,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.386,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 22,
+     "pantryKcal": 38077,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.689,
+     "doomedKcal": 4500
+    },
+    {
+     "day": 23,
+     "pantryKcal": 37577,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 15.448,
+     "doomedKcal": 3263
+    },
+    {
+     "day": 24,
+     "pantryKcal": 39533,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 15.28,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 25,
+     "pantryKcal": 37441,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.667,
+     "doomedKcal": 5219
+    },
+    {
+     "day": 26,
+     "pantryKcal": 34072,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.002,
+     "doomedKcal": 3108
+    },
+    {
+     "day": 27,
+     "pantryKcal": 33764,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.355,
+     "doomedKcal": 2300
+    },
+    {
+     "day": 28,
+     "pantryKcal": 31824,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.455,
+     "doomedKcal": 2200
+    },
+    {
+     "day": 29,
+     "pantryKcal": 27757,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.029,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 30,
+     "pantryKcal": 24171,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.647,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 31,
+     "pantryKcal": 28555,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.449,
+     "doomedKcal": 600
+    },
+    {
+     "day": 32,
+     "pantryKcal": 28546,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.562,
+     "doomedKcal": 7144
+    },
+    {
+     "day": 33,
+     "pantryKcal": 25236,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.867,
+     "doomedKcal": 2791
+    },
+    {
+     "day": 34,
+     "pantryKcal": 22248,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.829,
+     "doomedKcal": 4034
+    },
+    {
+     "day": 35,
+     "pantryKcal": 22473,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.861,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 36,
+     "pantryKcal": 17076,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.18,
+     "doomedKcal": 1659
+    },
+    {
+     "day": 37,
+     "pantryKcal": 16800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.672,
+     "doomedKcal": 0
+    },
+    {
+     "day": 38,
+     "pantryKcal": 29115,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.952,
+     "doomedKcal": 0
+    },
+    {
+     "day": 39,
+     "pantryKcal": 31963,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.175,
+     "doomedKcal": 11600
+    },
+    {
+     "day": 40,
+     "pantryKcal": 28386,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.023,
+     "doomedKcal": 6648
+    },
+    {
+     "day": 41,
+     "pantryKcal": 28265,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.954,
+     "doomedKcal": 4823
+    },
+    {
+     "day": 42,
+     "pantryKcal": 31547,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.337,
+     "doomedKcal": 7032
+    },
+    {
+     "day": 43,
+     "pantryKcal": 19969,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.352,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 44,
+     "pantryKcal": 16762,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.097,
+     "doomedKcal": 1045
+    },
+    {
+     "day": 45,
+     "pantryKcal": 19361,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.835,
+     "doomedKcal": 0
+    },
+    {
+     "day": 46,
+     "pantryKcal": 22945,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.386,
+     "doomedKcal": 0
+    },
+    {
+     "day": 47,
+     "pantryKcal": 27850,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.287,
+     "doomedKcal": 477
+    },
+    {
+     "day": 47,
+     "pantryKcal": 27850,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.287,
+     "doomedKcal": 477
+    },
+    {
+     "day": 49,
+     "pantryKcal": 34824,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.503,
+     "doomedKcal": 6288
+    },
+    {
+     "day": 50,
+     "pantryKcal": 21156,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.318,
+     "doomedKcal": 7318
+    },
+    {
+     "day": 51,
+     "pantryKcal": 22424,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.514,
+     "doomedKcal": 6935
+    },
+    {
+     "day": 52,
+     "pantryKcal": 26323,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.877,
+     "doomedKcal": 7666
+    },
+    {
+     "day": 53,
+     "pantryKcal": 28457,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.357,
+     "doomedKcal": 7634
+    },
+    {
+     "day": 53,
+     "pantryKcal": 28457,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.357,
+     "doomedKcal": 7634
+    },
+    {
+     "day": 55,
+     "pantryKcal": 30995,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.15,
+     "doomedKcal": 6800
+    },
+    {
+     "day": 56,
+     "pantryKcal": 31622,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.432,
+     "doomedKcal": 6852
+    },
+    {
+     "day": 56,
+     "pantryKcal": 18684,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.694,
+     "doomedKcal": 6852
+    },
+    {
+     "day": 58,
+     "pantryKcal": 19550,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.208,
+     "doomedKcal": 9053
+    },
+    {
+     "day": 59,
+     "pantryKcal": 19558,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.766,
+     "doomedKcal": 6507
+    },
+    {
+     "day": 60,
+     "pantryKcal": 24078,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.405,
+     "doomedKcal": 6441
+    },
+    {
+     "day": 61,
+     "pantryKcal": 31855,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.543,
+     "doomedKcal": 7650
+    },
+    {
+     "day": 62,
+     "pantryKcal": 32766,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.866,
+     "doomedKcal": 11145
+    },
+    {
+     "day": 63,
+     "pantryKcal": 31101,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.455,
+     "doomedKcal": 6161
+    },
+    {
+     "day": 64,
+     "pantryKcal": 29715,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.325,
+     "doomedKcal": 7800
+    },
+    {
+     "day": 65,
+     "pantryKcal": 34524,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.479,
+     "doomedKcal": 7500
+    },
+    {
+     "day": 65,
+     "pantryKcal": 41087,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.323,
+     "doomedKcal": 7500
+    },
+    {
+     "day": 67,
+     "pantryKcal": 41552,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 30.499,
+     "doomedKcal": 14357
+    },
+    {
+     "day": 68,
+     "pantryKcal": 35664,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.611,
+     "doomedKcal": 9580
+    },
+    {
+     "day": 69,
+     "pantryKcal": 36156,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 88.29,
+     "doomedKcal": 8469
+    },
+    {
+     "day": 70,
+     "pantryKcal": 37747,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 96.898,
+     "doomedKcal": 10072
+    },
+    {
+     "day": 71,
+     "pantryKcal": 35786,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 98.686,
+     "doomedKcal": 9100
+    },
+    {
+     "day": 71,
+     "pantryKcal": 35906,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 99.305,
+     "doomedKcal": 9100
+    },
+    {
+     "day": 73,
+     "pantryKcal": 23415,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 77.315,
+     "doomedKcal": 6000
+    },
+    {
+     "day": 74,
+     "pantryKcal": 26617,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 89.427,
+     "doomedKcal": 6200
+    },
+    {
+     "day": 75,
+     "pantryKcal": 28658,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 91.914,
+     "doomedKcal": 10189
+    },
+    {
+     "day": 76,
+     "pantryKcal": 31881,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 108.222,
+     "doomedKcal": 6500
+    },
+    {
+     "day": 77,
+     "pantryKcal": 35552,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 93.91,
+     "doomedKcal": 10128
+    },
+    {
+     "day": 77,
+     "pantryKcal": 25828,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 96.64,
+     "doomedKcal": 10128
+    },
+    {
+     "day": 79,
+     "pantryKcal": 27663,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 90.864,
+     "doomedKcal": 8343
+    },
+    {
+     "day": 80,
+     "pantryKcal": 30089,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 77.143,
+     "doomedKcal": 7000
+    },
+    {
+     "day": 81,
+     "pantryKcal": 34797,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 85.128,
+     "doomedKcal": 7779
+    },
+    {
+     "day": 81,
+     "pantryKcal": 34797,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 85.128,
+     "doomedKcal": 7779
+    },
+    {
+     "day": 83,
+     "pantryKcal": 33559,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 75.426,
+     "doomedKcal": 7200
+    },
+    {
+     "day": 83,
+     "pantryKcal": 34098,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 78.136,
+     "doomedKcal": 7200
+    },
+    {
+     "day": 85,
+     "pantryKcal": 34430,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 105.188,
+     "doomedKcal": 8739
+    },
+    {
+     "day": 86,
+     "pantryKcal": 34892,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 93.182,
+     "doomedKcal": 8091
+    },
+    {
+     "day": 86,
+     "pantryKcal": 33214,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 95.349,
+     "doomedKcal": 8091
+    },
+    {
+     "day": 88,
+     "pantryKcal": 34453,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 110.389,
+     "doomedKcal": 8702
+    },
+    {
+     "day": 89,
+     "pantryKcal": 34893,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 88.798,
+     "doomedKcal": 9391
+    },
+    {
+     "day": 90,
+     "pantryKcal": 37207,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 101.258,
+     "doomedKcal": 7595
+    },
+    {
+     "day": 91,
+     "pantryKcal": 36812,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 108.294,
+     "doomedKcal": 11210
+    },
+    {
+     "day": 92,
+     "pantryKcal": 28180,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 90.696,
+     "doomedKcal": 7200
+    },
+    {
+     "day": 93,
+     "pantryKcal": 32336,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 124.549,
+     "doomedKcal": 8260
+    },
+    {
+     "day": 94,
+     "pantryKcal": 34136,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 124.239,
+     "doomedKcal": 10796
+    },
+    {
+     "day": 95,
+     "pantryKcal": 34627,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 91.839,
+     "doomedKcal": 7900
+    },
+    {
+     "day": 95,
+     "pantryKcal": 35067,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 94.19,
+     "doomedKcal": 7900
+    },
+    {
+     "day": 97,
+     "pantryKcal": 40167,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 109.34,
+     "doomedKcal": 11252
+    },
+    {
+     "day": 98,
+     "pantryKcal": 35915,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 77.673,
+     "doomedKcal": 10275
+    },
+    {
+     "day": 99,
+     "pantryKcal": 32402,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 68.486,
+     "doomedKcal": 7690
+    },
+    {
+     "day": 100,
+     "pantryKcal": 34712,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 62.388,
+     "doomedKcal": 9112
+    },
+    {
+     "day": 101,
+     "pantryKcal": 31846,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 59.805,
+     "doomedKcal": 8000
+    },
+    {
+     "day": 102,
+     "pantryKcal": 36445,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 64.747,
+     "doomedKcal": 9716
+    },
+    {
+     "day": 103,
+     "pantryKcal": 34220,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 62.972,
+     "doomedKcal": 9449
+    },
+    {
+     "day": 104,
+     "pantryKcal": 33271,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 59.482,
+     "doomedKcal": 8291
+    },
+    {
+     "day": 105,
+     "pantryKcal": 36981,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 63.192,
+     "doomedKcal": 8830
+    },
+    {
+     "day": 106,
+     "pantryKcal": 30831,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 64.538,
+     "doomedKcal": 9911
+    },
+    {
+     "day": 107,
+     "pantryKcal": 30320,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 59.722,
+     "doomedKcal": 7800
+    },
+    {
+     "day": 108,
+     "pantryKcal": 32870,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 62.28,
+     "doomedKcal": 9830
+    },
+    {
+     "day": 109,
+     "pantryKcal": 36910,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 70.113,
+     "doomedKcal": 8000
+    },
+    {
+     "day": 110,
+     "pantryKcal": 39324,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 71.506,
+     "doomedKcal": 10670
+    },
+    {
+     "day": 111,
+     "pantryKcal": 37950,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 62.289,
+     "doomedKcal": 10414
+    },
+    {
+     "day": 112,
+     "pantryKcal": 33416,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 54.028,
+     "doomedKcal": 9296
+    },
+    {
+     "day": 113,
+     "pantryKcal": 28019,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 49.993,
+     "doomedKcal": 7800
+    },
+    {
+     "day": 114,
+     "pantryKcal": 30067,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 53.568,
+     "doomedKcal": 9019
+    },
+    {
+     "day": 115,
+     "pantryKcal": 33248,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 56.404,
+     "doomedKcal": 8888
+    },
+    {
+     "day": 116,
+     "pantryKcal": 36160,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 55.043,
+     "doomedKcal": 9000
+    },
+    {
+     "day": 117,
+     "pantryKcal": 37710,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 59.679,
+     "doomedKcal": 9550
+    },
+    {
+     "day": 118,
+     "pantryKcal": 36599,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 57.586,
+     "doomedKcal": 10400
+    },
+    {
+     "day": 119,
+     "pantryKcal": 35546,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 59.57,
+     "doomedKcal": 8439
+    },
+    {
+     "day": 120,
+     "pantryKcal": 30031,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 60.927,
+     "doomedKcal": 10262
+    },
+    {
+     "day": 121,
+     "pantryKcal": 24609,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 55.027,
+     "doomedKcal": 7929
+    },
+    {
+     "day": 122,
+     "pantryKcal": 24880,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 56,
+     "doomedKcal": 7400
+    },
+    {
+     "day": 123,
+     "pantryKcal": 26940,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 60.302,
+     "doomedKcal": 8260
+    },
+    {
+     "day": 124,
+     "pantryKcal": 28230,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 69.45,
+     "doomedKcal": 9400
+    },
+    {
+     "day": 125,
+     "pantryKcal": 27730,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 65.893,
+     "doomedKcal": 9550
+    },
+    {
+     "day": 125,
+     "pantryKcal": 28000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 66.857,
+     "doomedKcal": 9550
+    },
+    {
+     "day": 127,
+     "pantryKcal": 19600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 55.192,
+     "doomedKcal": 7400
+    },
+    {
+     "day": 127,
+     "pantryKcal": 20200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 57.212,
+     "doomedKcal": 7400
+    },
+    {
+     "day": 129,
+     "pantryKcal": 20621,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 57.739,
+     "doomedKcal": 11185
+    },
+    {
+     "day": 130,
+     "pantryKcal": 19436,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 58.897,
+     "doomedKcal": 9256
+    },
+    {
+     "day": 131,
+     "pantryKcal": 20896,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 65.01,
+     "doomedKcal": 10000
+    },
+    {
+     "day": 132,
+     "pantryKcal": 20093,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 62.512,
+     "doomedKcal": 9496
+    },
+    {
+     "day": 133,
+     "pantryKcal": 21397,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 73.206,
+     "doomedKcal": 9997
+    },
+    {
+     "day": 134,
+     "pantryKcal": 15400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 51.26,
+     "doomedKcal": 6400
+    },
+    {
+     "day": 134,
+     "pantryKcal": 15580,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 51.859,
+     "doomedKcal": 6400
+    },
+    {
+     "day": 136,
+     "pantryKcal": 17500,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 58.809,
+     "doomedKcal": 8800
+    },
+    {
+     "day": 137,
+     "pantryKcal": 18733,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 57.691,
+     "doomedKcal": 8700
+    },
+    {
+     "day": 137,
+     "pantryKcal": 18733,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 57.691,
+     "doomedKcal": 8700
+    },
+    {
+     "day": 139,
+     "pantryKcal": 19759,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 55.193,
+     "doomedKcal": 9535
+    },
+    {
+     "day": 140,
+     "pantryKcal": 19774,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 50.426,
+     "doomedKcal": 9424
+    },
+    {
+     "day": 141,
+     "pantryKcal": 14150,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.496,
+     "doomedKcal": 5350
+    },
+    {
+     "day": 142,
+     "pantryKcal": 17448,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 46.724,
+     "doomedKcal": 8800
+    },
+    {
+     "day": 143,
+     "pantryKcal": 18219,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 48.418,
+     "doomedKcal": 8648
+    },
+    {
+     "day": 144,
+     "pantryKcal": 16571,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 44.038,
+     "doomedKcal": 7571
+    },
+    {
+     "day": 144,
+     "pantryKcal": 14897,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 39.59,
+     "doomedKcal": 5897
+    },
+    {
+     "day": 146,
+     "pantryKcal": 16200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 43.599,
+     "doomedKcal": 8800
+    },
+    {
+     "day": 146,
+     "pantryKcal": 16200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 43.599,
+     "doomedKcal": 8800
+    },
+    {
+     "day": 148,
+     "pantryKcal": 10468,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.139,
+     "doomedKcal": 2268
+    },
+    {
+     "day": 149,
+     "pantryKcal": 18347,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 45.867,
+     "doomedKcal": 8200
+    },
+    {
+     "day": 149,
+     "pantryKcal": 18347,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 45.867,
+     "doomedKcal": 8200
+    },
+    {
+     "day": 151,
+     "pantryKcal": 17800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 44.5,
+     "doomedKcal": 9000
+    },
+    {
+     "day": 152,
+     "pantryKcal": 17200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 43,
+     "doomedKcal": 8800
+    },
+    {
+     "day": 153,
+     "pantryKcal": 17600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 44,
+     "doomedKcal": 8400
+    },
+    {
+     "day": 154,
+     "pantryKcal": 20091,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 50.227,
+     "doomedKcal": 9200
+    },
+    {
+     "day": 155,
+     "pantryKcal": 13393,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 33.483,
+     "doomedKcal": 3291
+    },
+    {
+     "day": 156,
+     "pantryKcal": 14302,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 38.505,
+     "doomedKcal": 5902
+    },
+    {
+     "day": 157,
+     "pantryKcal": 15800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 46.083,
+     "doomedKcal": 6600
+    },
+    {
+     "day": 158,
+     "pantryKcal": 18800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 59.818,
+     "doomedKcal": 9200
+    },
+    {
+     "day": 158,
+     "pantryKcal": 16000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 50.909,
+     "doomedKcal": 6400
+    },
+    {
+     "day": 160,
+     "pantryKcal": 15800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 19.069,
+     "doomedKcal": 7800
+    },
+    {
+     "day": 160,
+     "pantryKcal": 16400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 19.793,
+     "doomedKcal": 7800
+    },
+    {
+     "day": 162,
+     "pantryKcal": 8200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.106,
+     "doomedKcal": 0
+    },
+    {
+     "day": 163,
+     "pantryKcal": 6471,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.118,
+     "doomedKcal": 0
+    },
+    {
+     "day": 164,
+     "pantryKcal": 9000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.972,
+     "doomedKcal": 0
+    },
+    {
+     "day": 165,
+     "pantryKcal": 7400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.531,
+     "doomedKcal": 200
+    },
+    {
+     "day": 166,
+     "pantryKcal": 7600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.626,
+     "doomedKcal": 200
+    },
+    {
+     "day": 166,
+     "pantryKcal": 6000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.863,
+     "doomedKcal": 200
+    },
+    {
+     "day": 168,
+     "pantryKcal": 18821,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.98,
+     "doomedKcal": 9221
+    },
+    {
+     "day": 169,
+     "pantryKcal": 8200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.912,
+     "doomedKcal": 0
+    },
+    {
+     "day": 169,
+     "pantryKcal": 9245,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.411,
+     "doomedKcal": 0
+    },
+    {
+     "day": 171,
+     "pantryKcal": 17004,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.707,
+     "doomedKcal": 8604
+    },
+    {
+     "day": 172,
+     "pantryKcal": 16000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.252,
+     "doomedKcal": 8400
+    },
+    {
+     "day": 173,
+     "pantryKcal": 17000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.705,
+     "doomedKcal": 7600
+    },
+    {
+     "day": 174,
+     "pantryKcal": 18108,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.207,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 175,
+     "pantryKcal": 14908,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.757,
+     "doomedKcal": 5908
+    },
+    {
+     "day": 175,
+     "pantryKcal": 14908,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.757,
+     "doomedKcal": 5908
+    },
+    {
+     "day": 177,
+     "pantryKcal": 13800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.273,
+     "doomedKcal": 6000
+    },
+    {
+     "day": 178,
+     "pantryKcal": 12000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.455,
+     "doomedKcal": 5800
+    },
+    {
+     "day": 179,
+     "pantryKcal": 9000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.091,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 180,
+     "pantryKcal": 9100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.136,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 181,
+     "pantryKcal": 6800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.195,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 1984
+  },
+  {
+   "seed": 5431,
+   "won": false,
+   "national": false,
+   "table": false,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 3,
+   "rosterEnd": 8,
+   "days": 78,
+   "endReason": "village-lost",
+   "completeness": 1,
+   "inflow": {
+    "SP": 125549,
+    "SS": 175000,
+    "DPP": 65
+   },
+   "writes": {
+    "SP": 229,
+    "SS": 415,
+    "DPP": 1
+   },
+   "pieceHist": {
+    "SP": {
+     "301_400": 19400,
+     "401_500": 90471,
+     "le100": 3279,
+     "101_200": 3373,
+     "201_300": 9026
+    },
+    "SS": {
+     "101_200": 175000
+    },
+    "DPP": {
+     "401_500": 65
+    }
+   },
+   "ssGive": 175124,
+   "ssStored": 175000,
+   "ssRefused": 13385,
+   "ssRefusalEvents": 230,
+   "ssCrisisKcal": 70833,
+   "ssNonCrisisKcal": 104291,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 125549,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SP": 2000
+   },
+   "rotByPathFast": {},
+   "rotByPathFastSub": {},
+   "rotByName": {
+    "Fish catch": 2000
+   },
+   "rotLagMean": {
+    "SP": 5
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 291557,
+   "drawUrgencyDays": 24.46,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 37090,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 4.389,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 30700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.83,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 25300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.495,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 20650,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.152,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 18700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.244,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 19804,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.436,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 20440,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.553,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 19894,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.76,
+     "doomedKcal": 0
+    },
+    {
+     "day": 10,
+     "pantryKcal": 19240,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.655,
+     "doomedKcal": 0
+    },
+    {
+     "day": 11,
+     "pantryKcal": 19040,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.323,
+     "doomedKcal": 0
+    },
+    {
+     "day": 12,
+     "pantryKcal": 21902,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 16.013,
+     "doomedKcal": 0
+    },
+    {
+     "day": 13,
+     "pantryKcal": 24376,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 21.442,
+     "doomedKcal": 2862
+    },
+    {
+     "day": 14,
+     "pantryKcal": 26451,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 24.015,
+     "doomedKcal": 3474
+    },
+    {
+     "day": 15,
+     "pantryKcal": 24202,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 21.968,
+     "doomedKcal": 3015
+    },
+    {
+     "day": 16,
+     "pantryKcal": 22363,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 18.106,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 17,
+     "pantryKcal": 21693,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 15.473,
+     "doomedKcal": 1095
+    },
+    {
+     "day": 18,
+     "pantryKcal": 18979,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.101,
+     "doomedKcal": 0
+    },
+    {
+     "day": 19,
+     "pantryKcal": 19500,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.287,
+     "doomedKcal": 0
+    },
+    {
+     "day": 20,
+     "pantryKcal": 19768,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.568,
+     "doomedKcal": 0
+    },
+    {
+     "day": 21,
+     "pantryKcal": 13688,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.798,
+     "doomedKcal": 268
+    },
+    {
+     "day": 22,
+     "pantryKcal": 9100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.189,
+     "doomedKcal": 0
+    },
+    {
+     "day": 23,
+     "pantryKcal": 11680,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.669,
+     "doomedKcal": 0
+    },
+    {
+     "day": 24,
+     "pantryKcal": 14516,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.949,
+     "doomedKcal": 400
+    },
+    {
+     "day": 25,
+     "pantryKcal": 14832,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.308,
+     "doomedKcal": 0
+    },
+    {
+     "day": 26,
+     "pantryKcal": 14518,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.084,
+     "doomedKcal": 0
+    },
+    {
+     "day": 26,
+     "pantryKcal": 15398,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.498,
+     "doomedKcal": 0
+    },
+    {
+     "day": 28,
+     "pantryKcal": 18098,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.021,
+     "doomedKcal": 0
+    },
+    {
+     "day": 29,
+     "pantryKcal": 14543,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.355,
+     "doomedKcal": 0
+    },
+    {
+     "day": 29,
+     "pantryKcal": 13202,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.4,
+     "doomedKcal": 0
+    },
+    {
+     "day": 31,
+     "pantryKcal": 23019,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.053,
+     "doomedKcal": 0
+    },
+    {
+     "day": 32,
+     "pantryKcal": 24295,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.144,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 33,
+     "pantryKcal": 24193,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.098,
+     "doomedKcal": 5124
+    },
+    {
+     "day": 34,
+     "pantryKcal": 27143,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.509,
+     "doomedKcal": 2398
+    },
+    {
+     "day": 35,
+     "pantryKcal": 28463,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.139,
+     "doomedKcal": 5150
+    },
+    {
+     "day": 36,
+     "pantryKcal": 22988,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.641,
+     "doomedKcal": 0
+    },
+    {
+     "day": 37,
+     "pantryKcal": 22328,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.077,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 38,
+     "pantryKcal": 25010,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.546,
+     "doomedKcal": 2398
+    },
+    {
+     "day": 39,
+     "pantryKcal": 25132,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.849,
+     "doomedKcal": 6998
+    },
+    {
+     "day": 40,
+     "pantryKcal": 24803,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.493,
+     "doomedKcal": 2602
+    },
+    {
+     "day": 41,
+     "pantryKcal": 22716,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.432,
+     "doomedKcal": 950
+    },
+    {
+     "day": 42,
+     "pantryKcal": 20418,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.444,
+     "doomedKcal": 1900
+    },
+    {
+     "day": 43,
+     "pantryKcal": 15295,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.058,
+     "doomedKcal": 0
+    },
+    {
+     "day": 44,
+     "pantryKcal": 8889,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.477,
+     "doomedKcal": 0
+    },
+    {
+     "day": 45,
+     "pantryKcal": 11505,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.222,
+     "doomedKcal": 0
+    },
+    {
+     "day": 46,
+     "pantryKcal": 14185,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.298,
+     "doomedKcal": 0
+    },
+    {
+     "day": 47,
+     "pantryKcal": 19598,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.491,
+     "doomedKcal": 0
+    },
+    {
+     "day": 47,
+     "pantryKcal": 21088,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.127,
+     "doomedKcal": 0
+    },
+    {
+     "day": 49,
+     "pantryKcal": 15612,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.352,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 49,
+     "pantryKcal": 8125,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.482,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 51,
+     "pantryKcal": 2009,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.289,
+     "doomedKcal": 0
+    },
+    {
+     "day": 52,
+     "pantryKcal": 3409,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.874,
+     "doomedKcal": 0
+    },
+    {
+     "day": 53,
+     "pantryKcal": 1300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.537,
+     "doomedKcal": 0
+    },
+    {
+     "day": 54,
+     "pantryKcal": 1517,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.631,
+     "doomedKcal": 0
+    },
+    {
+     "day": 55,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.589,
+     "doomedKcal": 0
+    },
+    {
+     "day": 55,
+     "pantryKcal": 1328,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.558,
+     "doomedKcal": 0
+    },
+    {
+     "day": 57,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.694,
+     "doomedKcal": 0
+    },
+    {
+     "day": 57,
+     "pantryKcal": 270,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.117,
+     "doomedKcal": 0
+    },
+    {
+     "day": 59,
+     "pantryKcal": 2800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.156,
+     "doomedKcal": 0
+    },
+    {
+     "day": 60,
+     "pantryKcal": 1200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.067,
+     "doomedKcal": 0
+    },
+    {
+     "day": 61,
+     "pantryKcal": 4465,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.248,
+     "doomedKcal": 0
+    },
+    {
+     "day": 62,
+     "pantryKcal": 400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.262,
+     "doomedKcal": 0
+    },
+    {
+     "day": 62,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 64,
+     "pantryKcal": 4100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.614,
+     "doomedKcal": 0
+    },
+    {
+     "day": 65,
+     "pantryKcal": 1992,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.585,
+     "doomedKcal": 0
+    },
+    {
+     "day": 66,
+     "pantryKcal": 1440,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.194,
+     "doomedKcal": 0
+    },
+    {
+     "day": 67,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 68,
+     "pantryKcal": 1200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.044,
+     "doomedKcal": 0
+    },
+    {
+     "day": 69,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 70,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 70,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 72,
+     "pantryKcal": 2900,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.933,
+     "doomedKcal": 0
+    },
+    {
+     "day": 73,
+     "pantryKcal": 1000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.023,
+     "doomedKcal": 0
+    },
+    {
+     "day": 74,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 74,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 76,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 76,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 78,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 78,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 1467
+  },
+  {
+   "seed": 5432,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 5,
+   "days": 115,
+   "endReason": "village-lost",
+   "completeness": 1,
+   "inflow": {
+    "SP": 120990,
+    "SS": 423200,
+    "DPP": 3420
+   },
+   "writes": {
+    "SP": 227,
+    "SS": 775,
+    "DPP": 8
+   },
+   "pieceHist": {
+    "SP": {
+     "401_500": 83795,
+     "301_400": 19779,
+     "le100": 3900,
+     "201_300": 11325,
+     "101_200": 2191
+    },
+    "SS": {
+     "101_200": 423200
+    },
+    "DPP": {
+     "401_500": 3420
+    }
+   },
+   "ssGive": 423326,
+   "ssStored": 423200,
+   "ssRefused": 26775,
+   "ssRefusalEvents": 385,
+   "ssCrisisKcal": 35303,
+   "ssNonCrisisKcal": 388023,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 120990,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SP": 20871,
+    "SS": 41400,
+    "DPP": 180
+   },
+   "rotByPathFast": {},
+   "rotByPathFastSub": {},
+   "rotByName": {
+    "Foraged food": 60271,
+    "Burdock": 180,
+    "Expedition haul": 2000
+   },
+   "rotLagMean": {
+    "SP": 6.52,
+    "SS": 5,
+    "DPP": 7
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 413639,
+   "drawUrgencyDays": 4.35,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 39890,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 5.49,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 35560,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.446,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 32770,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.984,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 31950,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.339,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 31500,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.589,
+     "doomedKcal": 0
+    },
+    {
+     "day": 7,
+     "pantryKcal": 31300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.716,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 32300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.205,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 34396,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 19.641,
+     "doomedKcal": 600
+    },
+    {
+     "day": 10,
+     "pantryKcal": 37174,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.107,
+     "doomedKcal": 2388
+    },
+    {
+     "day": 10,
+     "pantryKcal": 37757,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.533,
+     "doomedKcal": 2388
+    },
+    {
+     "day": 12,
+     "pantryKcal": 40570,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 37.896,
+     "doomedKcal": 5021
+    },
+    {
+     "day": 13,
+     "pantryKcal": 40043,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.431,
+     "doomedKcal": 2649
+    },
+    {
+     "day": 14,
+     "pantryKcal": 46121,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 40.789,
+     "doomedKcal": 400
+    },
+    {
+     "day": 15,
+     "pantryKcal": 44866,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 36.682,
+     "doomedKcal": 3746
+    },
+    {
+     "day": 16,
+     "pantryKcal": 44961,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 34.082,
+     "doomedKcal": 0
+    },
+    {
+     "day": 17,
+     "pantryKcal": 45427,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 33.234,
+     "doomedKcal": 2874
+    },
+    {
+     "day": 18,
+     "pantryKcal": 46590,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 34.266,
+     "doomedKcal": 2962
+    },
+    {
+     "day": 19,
+     "pantryKcal": 42109,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.471,
+     "doomedKcal": 3072
+    },
+    {
+     "day": 19,
+     "pantryKcal": 42788,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.984,
+     "doomedKcal": 3072
+    },
+    {
+     "day": 21,
+     "pantryKcal": 37854,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.457,
+     "doomedKcal": 1267
+    },
+    {
+     "day": 22,
+     "pantryKcal": 29379,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.11,
+     "doomedKcal": 0
+    },
+    {
+     "day": 23,
+     "pantryKcal": 26999,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.588,
+     "doomedKcal": 0
+    },
+    {
+     "day": 24,
+     "pantryKcal": 24984,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.139,
+     "doomedKcal": 0
+    },
+    {
+     "day": 25,
+     "pantryKcal": 24499,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.277,
+     "doomedKcal": 0
+    },
+    {
+     "day": 26,
+     "pantryKcal": 23979,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.637,
+     "doomedKcal": 0
+    },
+    {
+     "day": 26,
+     "pantryKcal": 25184,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.205,
+     "doomedKcal": 0
+    },
+    {
+     "day": 28,
+     "pantryKcal": 28327,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.545,
+     "doomedKcal": 3313
+    },
+    {
+     "day": 28,
+     "pantryKcal": 23651,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.335,
+     "doomedKcal": 3313
+    },
+    {
+     "day": 30,
+     "pantryKcal": 26771,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.101,
+     "doomedKcal": 4546
+    },
+    {
+     "day": 30,
+     "pantryKcal": 26098,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.786,
+     "doomedKcal": 4546
+    },
+    {
+     "day": 32,
+     "pantryKcal": 28576,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.363,
+     "doomedKcal": 4327
+    },
+    {
+     "day": 33,
+     "pantryKcal": 27902,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.651,
+     "doomedKcal": 4413
+    },
+    {
+     "day": 34,
+     "pantryKcal": 27000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.393,
+     "doomedKcal": 3375
+    },
+    {
+     "day": 34,
+     "pantryKcal": 26199,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.999,
+     "doomedKcal": 3375
+    },
+    {
+     "day": 36,
+     "pantryKcal": 18141,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.092,
+     "doomedKcal": 2199
+    },
+    {
+     "day": 37,
+     "pantryKcal": 18670,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.275,
+     "doomedKcal": 5932
+    },
+    {
+     "day": 38,
+     "pantryKcal": 16225,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.029,
+     "doomedKcal": 5664
+    },
+    {
+     "day": 39,
+     "pantryKcal": 18534,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.13,
+     "doomedKcal": 4129
+    },
+    {
+     "day": 40,
+     "pantryKcal": 21794,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.736,
+     "doomedKcal": 5409
+    },
+    {
+     "day": 41,
+     "pantryKcal": 21237,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.472,
+     "doomedKcal": 6592
+    },
+    {
+     "day": 41,
+     "pantryKcal": 21673,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.687,
+     "doomedKcal": 6592
+    },
+    {
+     "day": 43,
+     "pantryKcal": 13194,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.446,
+     "doomedKcal": 0
+    },
+    {
+     "day": 43,
+     "pantryKcal": 12552,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.132,
+     "doomedKcal": 0
+    },
+    {
+     "day": 45,
+     "pantryKcal": 15462,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.84,
+     "doomedKcal": 1644
+    },
+    {
+     "day": 46,
+     "pantryKcal": 15131,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.136,
+     "doomedKcal": 420
+    },
+    {
+     "day": 47,
+     "pantryKcal": 25686,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.951,
+     "doomedKcal": 0
+    },
+    {
+     "day": 48,
+     "pantryKcal": 29639,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.21,
+     "doomedKcal": 8497
+    },
+    {
+     "day": 49,
+     "pantryKcal": 32714,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.076,
+     "doomedKcal": 6953
+    },
+    {
+     "day": 50,
+     "pantryKcal": 22557,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.102,
+     "doomedKcal": 7182
+    },
+    {
+     "day": 51,
+     "pantryKcal": 23685,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.069,
+     "doomedKcal": 4900
+    },
+    {
+     "day": 52,
+     "pantryKcal": 27094,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.187,
+     "doomedKcal": 4371
+    },
+    {
+     "day": 53,
+     "pantryKcal": 29405,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.128,
+     "doomedKcal": 7189
+    },
+    {
+     "day": 54,
+     "pantryKcal": 32558,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.548,
+     "doomedKcal": 6082
+    },
+    {
+     "day": 55,
+     "pantryKcal": 35358,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.789,
+     "doomedKcal": 4787
+    },
+    {
+     "day": 55,
+     "pantryKcal": 31186,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.174,
+     "doomedKcal": 4787
+    },
+    {
+     "day": 57,
+     "pantryKcal": 20205,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.871,
+     "doomedKcal": 1390
+    },
+    {
+     "day": 57,
+     "pantryKcal": 20205,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.871,
+     "doomedKcal": 1390
+    },
+    {
+     "day": 59,
+     "pantryKcal": 23681,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.706,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 59,
+     "pantryKcal": 21992,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.738,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 61,
+     "pantryKcal": 25624,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.81,
+     "doomedKcal": 2191
+    },
+    {
+     "day": 62,
+     "pantryKcal": 28834,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.188,
+     "doomedKcal": 6335
+    },
+    {
+     "day": 63,
+     "pantryKcal": 28253,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.065,
+     "doomedKcal": 4600
+    },
+    {
+     "day": 64,
+     "pantryKcal": 24272,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.175,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 64,
+     "pantryKcal": 24823,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.416,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 66,
+     "pantryKcal": 29416,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.405,
+     "doomedKcal": 1200
+    },
+    {
+     "day": 66,
+     "pantryKcal": 28724,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.104,
+     "doomedKcal": 0
+    },
+    {
+     "day": 68,
+     "pantryKcal": 33383,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.608,
+     "doomedKcal": 4250
+    },
+    {
+     "day": 68,
+     "pantryKcal": 33473,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.66,
+     "doomedKcal": 4250
+    },
+    {
+     "day": 70,
+     "pantryKcal": 42519,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 23.294,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 70,
+     "pantryKcal": 37399,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 21.283,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 72,
+     "pantryKcal": 41025,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 39.445,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 72,
+     "pantryKcal": 38659,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 40.463,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 74,
+     "pantryKcal": 33187,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 54.723,
+     "doomedKcal": 6160
+    },
+    {
+     "day": 74,
+     "pantryKcal": 33498,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 55.514,
+     "doomedKcal": 6160
+    },
+    {
+     "day": 76,
+     "pantryKcal": 34763,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 61.75,
+     "doomedKcal": 5600
+    },
+    {
+     "day": 77,
+     "pantryKcal": 36246,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 58.718,
+     "doomedKcal": 6600
+    },
+    {
+     "day": 77,
+     "pantryKcal": 31837,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 60.744,
+     "doomedKcal": 6600
+    },
+    {
+     "day": 79,
+     "pantryKcal": 37014,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 64.308,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 79,
+     "pantryKcal": 35215,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 64.642,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 81,
+     "pantryKcal": 35641,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 65.14,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 82,
+     "pantryKcal": 35815,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 63.657,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 83,
+     "pantryKcal": 35401,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 38.373,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 84,
+     "pantryKcal": 35263,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.071,
+     "doomedKcal": 5800
+    },
+    {
+     "day": 85,
+     "pantryKcal": 24737,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.121,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 85,
+     "pantryKcal": 22897,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.121,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 87,
+     "pantryKcal": 20476,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.412,
+     "doomedKcal": 3200
+    },
+    {
+     "day": 88,
+     "pantryKcal": 20682,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.162,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 89,
+     "pantryKcal": 22271,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.76,
+     "doomedKcal": 4200
+    },
+    {
+     "day": 90,
+     "pantryKcal": 21981,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.825,
+     "doomedKcal": 5400
+    },
+    {
+     "day": 91,
+     "pantryKcal": 20278,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.064,
+     "doomedKcal": 3800
+    },
+    {
+     "day": 91,
+     "pantryKcal": 12765,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.706,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 93,
+     "pantryKcal": 11405,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.098,
+     "doomedKcal": 3600
+    },
+    {
+     "day": 93,
+     "pantryKcal": 10905,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.874,
+     "doomedKcal": 3600
+    },
+    {
+     "day": 95,
+     "pantryKcal": 12246,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.493,
+     "doomedKcal": 4450
+    },
+    {
+     "day": 95,
+     "pantryKcal": 9522,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.271,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 96,
+     "pantryKcal": 10751,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.854,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 98,
+     "pantryKcal": 16392,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.42,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 99,
+     "pantryKcal": 7372,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.337,
+     "doomedKcal": 0
+    },
+    {
+     "day": 100,
+     "pantryKcal": 9483,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.292,
+     "doomedKcal": 3800
+    },
+    {
+     "day": 100,
+     "pantryKcal": 4200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.901,
+     "doomedKcal": 3800
+    },
+    {
+     "day": 102,
+     "pantryKcal": 5964,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.711,
+     "doomedKcal": 0
+    },
+    {
+     "day": 102,
+     "pantryKcal": 4139,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.881,
+     "doomedKcal": 0
+    },
+    {
+     "day": 103,
+     "pantryKcal": 4995,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.27,
+     "doomedKcal": 400
+    },
+    {
+     "day": 105,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 105,
+     "pantryKcal": 128,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.061,
+     "doomedKcal": 0
+    },
+    {
+     "day": 106,
+     "pantryKcal": 1001,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.479,
+     "doomedKcal": 0
+    },
+    {
+     "day": 108,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.041,
+     "doomedKcal": 0
+    },
+    {
+     "day": 108,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.041,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 1400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.815,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 2021,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.176,
+     "doomedKcal": 0
+    },
+    {
+     "day": 112,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 112,
+     "pantryKcal": 460,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.236,
+     "doomedKcal": 0
+    },
+    {
+     "day": 114,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 114,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 115,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 1828
+  },
+  {
+   "seed": 5433,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 5,
+   "days": 125,
+   "endReason": "village-lost",
+   "completeness": 1,
+   "inflow": {
+    "SP": 113494,
+    "SS": 377000,
+    "DPP": 28380
+   },
+   "writes": {
+    "SP": 206,
+    "SS": 600,
+    "DPP": 50
+   },
+   "pieceHist": {
+    "SP": {
+     "le100": 3589,
+     "401_500": 80527,
+     "301_400": 21007,
+     "101_200": 2298,
+     "201_300": 6073
+    },
+    "SS": {
+     "101_200": 377000
+    },
+    "DPP": {
+     "401_500": 28380
+    }
+   },
+   "ssGive": 377072,
+   "ssStored": 377000,
+   "ssRefused": 21453,
+   "ssRefusalEvents": 301,
+   "ssCrisisKcal": 40989,
+   "ssNonCrisisKcal": 336083,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 113494,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SP": 9809,
+    "SS": 10400,
+    "OTHER": 1200
+   },
+   "rotByPathFast": {
+    "SP": 9568,
+    "SS": 8600
+   },
+   "rotByPathFastSub": {
+    "SP:normal": 9568,
+    "SS:noncrisis": 8600
+   },
+   "rotByName": {
+    "Foraged food": 15949,
+    "Garden harvest": 500,
+    "Winner's share (alien rations)": 1200,
+    "Fish catch": 3760
+   },
+   "rotLagMean": {
+    "SP": 3.05,
+    "SS": 3.35,
+    "OTHER": 9
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 463438,
+   "drawUrgencyDays": 5.83,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 39260,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 5.897,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 34030,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.302,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 30100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.679,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 31200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.248,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 29800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.124,
+     "doomedKcal": 0
+    },
+    {
+     "day": 7,
+     "pantryKcal": 30460,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.425,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 31260,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.809,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 31760,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.138,
+     "doomedKcal": 0
+    },
+    {
+     "day": 10,
+     "pantryKcal": 33027,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 23.519,
+     "doomedKcal": 0
+    },
+    {
+     "day": 11,
+     "pantryKcal": 31960,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 27.586,
+     "doomedKcal": 500
+    },
+    {
+     "day": 11,
+     "pantryKcal": 33242,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 28.693,
+     "doomedKcal": 500
+    },
+    {
+     "day": 13,
+     "pantryKcal": 34794,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 32.553,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 14,
+     "pantryKcal": 35594,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 34.216,
+     "doomedKcal": 3534
+    },
+    {
+     "day": 15,
+     "pantryKcal": 36782,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 32.409,
+     "doomedKcal": 0
+    },
+    {
+     "day": 16,
+     "pantryKcal": 38771,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 33.197,
+     "doomedKcal": 1200
+    },
+    {
+     "day": 16,
+     "pantryKcal": 39692,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 34.095,
+     "doomedKcal": 1200
+    },
+    {
+     "day": 18,
+     "pantryKcal": 37321,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 30.312,
+     "doomedKcal": 0
+    },
+    {
+     "day": 19,
+     "pantryKcal": 36681,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.947,
+     "doomedKcal": 0
+    },
+    {
+     "day": 20,
+     "pantryKcal": 36299,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 23.928,
+     "doomedKcal": 0
+    },
+    {
+     "day": 21,
+     "pantryKcal": 30666,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 17.611,
+     "doomedKcal": 0
+    },
+    {
+     "day": 22,
+     "pantryKcal": 24961,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.233,
+     "doomedKcal": 0
+    },
+    {
+     "day": 23,
+     "pantryKcal": 25750,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.686,
+     "doomedKcal": 0
+    },
+    {
+     "day": 23,
+     "pantryKcal": 26665,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.208,
+     "doomedKcal": 0
+    },
+    {
+     "day": 25,
+     "pantryKcal": 31769,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.026,
+     "doomedKcal": 0
+    },
+    {
+     "day": 26,
+     "pantryKcal": 29288,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.371,
+     "doomedKcal": 0
+    },
+    {
+     "day": 26,
+     "pantryKcal": 29891,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.668,
+     "doomedKcal": 0
+    },
+    {
+     "day": 28,
+     "pantryKcal": 32285,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.704,
+     "doomedKcal": 0
+    },
+    {
+     "day": 29,
+     "pantryKcal": 28947,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.704,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 29,
+     "pantryKcal": 25413,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.593,
+     "doomedKcal": 0
+    },
+    {
+     "day": 31,
+     "pantryKcal": 32216,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.311,
+     "doomedKcal": 0
+    },
+    {
+     "day": 32,
+     "pantryKcal": 34177,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.591,
+     "doomedKcal": 2500
+    },
+    {
+     "day": 32,
+     "pantryKcal": 34356,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.678,
+     "doomedKcal": 2500
+    },
+    {
+     "day": 34,
+     "pantryKcal": 34974,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.883,
+     "doomedKcal": 4258
+    },
+    {
+     "day": 35,
+     "pantryKcal": 36425,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.449,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 36,
+     "pantryKcal": 33925,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.34,
+     "doomedKcal": 5827
+    },
+    {
+     "day": 37,
+     "pantryKcal": 31080,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.021,
+     "doomedKcal": 5882
+    },
+    {
+     "day": 38,
+     "pantryKcal": 27998,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.829,
+     "doomedKcal": 4182
+    },
+    {
+     "day": 39,
+     "pantryKcal": 27559,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.112,
+     "doomedKcal": 2400
+    },
+    {
+     "day": 40,
+     "pantryKcal": 26631,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.976,
+     "doomedKcal": 4930
+    },
+    {
+     "day": 41,
+     "pantryKcal": 27313,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.994,
+     "doomedKcal": 1912
+    },
+    {
+     "day": 42,
+     "pantryKcal": 28655,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.939,
+     "doomedKcal": 4948
+    },
+    {
+     "day": 43,
+     "pantryKcal": 22982,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.16,
+     "doomedKcal": 3336
+    },
+    {
+     "day": 44,
+     "pantryKcal": 22256,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.454,
+     "doomedKcal": 3696
+    },
+    {
+     "day": 45,
+     "pantryKcal": 22517,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.967,
+     "doomedKcal": 5948
+    },
+    {
+     "day": 46,
+     "pantryKcal": 25966,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.436,
+     "doomedKcal": 5157
+    },
+    {
+     "day": 47,
+     "pantryKcal": 23897,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.583,
+     "doomedKcal": 6579
+    },
+    {
+     "day": 48,
+     "pantryKcal": 20318,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.079,
+     "doomedKcal": 2422
+    },
+    {
+     "day": 49,
+     "pantryKcal": 30517,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.384,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 50,
+     "pantryKcal": 19424,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.409,
+     "doomedKcal": 9521
+    },
+    {
+     "day": 51,
+     "pantryKcal": 20779,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.617,
+     "doomedKcal": 3239
+    },
+    {
+     "day": 52,
+     "pantryKcal": 21779,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.163,
+     "doomedKcal": 7676
+    },
+    {
+     "day": 52,
+     "pantryKcal": 21459,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.163,
+     "doomedKcal": 7676
+    },
+    {
+     "day": 54,
+     "pantryKcal": 23686,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.758,
+     "doomedKcal": 3924
+    },
+    {
+     "day": 54,
+     "pantryKcal": 24082,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.93,
+     "doomedKcal": 3924
+    },
+    {
+     "day": 56,
+     "pantryKcal": 27742,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.246,
+     "doomedKcal": 4896
+    },
+    {
+     "day": 57,
+     "pantryKcal": 17285,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.574,
+     "doomedKcal": 5209
+    },
+    {
+     "day": 57,
+     "pantryKcal": 14079,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.603,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 59,
+     "pantryKcal": 18754,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.999,
+     "doomedKcal": 0
+    },
+    {
+     "day": 60,
+     "pantryKcal": 23917,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.927,
+     "doomedKcal": 500
+    },
+    {
+     "day": 61,
+     "pantryKcal": 26459,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.026,
+     "doomedKcal": 5620
+    },
+    {
+     "day": 62,
+     "pantryKcal": 24939,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.332,
+     "doomedKcal": 5442
+    },
+    {
+     "day": 63,
+     "pantryKcal": 24491,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.148,
+     "doomedKcal": 5285
+    },
+    {
+     "day": 64,
+     "pantryKcal": 14658,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.043,
+     "doomedKcal": 3759
+    },
+    {
+     "day": 65,
+     "pantryKcal": 14245,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.139,
+     "doomedKcal": 4462
+    },
+    {
+     "day": 66,
+     "pantryKcal": 16534,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.152,
+     "doomedKcal": 6611
+    },
+    {
+     "day": 67,
+     "pantryKcal": 17807,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.735,
+     "doomedKcal": 5534
+    },
+    {
+     "day": 68,
+     "pantryKcal": 20847,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.136,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 68,
+     "pantryKcal": 22265,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.77,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 70,
+     "pantryKcal": 26613,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.706,
+     "doomedKcal": 6797
+    },
+    {
+     "day": 70,
+     "pantryKcal": 15083,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.558,
+     "doomedKcal": 0
+    },
+    {
+     "day": 72,
+     "pantryKcal": 11472,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.223,
+     "doomedKcal": 4660
+    },
+    {
+     "day": 73,
+     "pantryKcal": 8375,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.671,
+     "doomedKcal": 3575
+    },
+    {
+     "day": 74,
+     "pantryKcal": 8898,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.915,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 75,
+     "pantryKcal": 8898,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.915,
+     "doomedKcal": 4498
+    },
+    {
+     "day": 76,
+     "pantryKcal": 9735,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.324,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 77,
+     "pantryKcal": 11554,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.132,
+     "doomedKcal": 3835
+    },
+    {
+     "day": 78,
+     "pantryKcal": 13740,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.103,
+     "doomedKcal": 6044
+    },
+    {
+     "day": 79,
+     "pantryKcal": 14762,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.609,
+     "doomedKcal": 4901
+    },
+    {
+     "day": 80,
+     "pantryKcal": 6236,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.792,
+     "doomedKcal": 0
+    },
+    {
+     "day": 80,
+     "pantryKcal": 6535,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.926,
+     "doomedKcal": 0
+    },
+    {
+     "day": 82,
+     "pantryKcal": 8814,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.946,
+     "doomedKcal": 3474
+    },
+    {
+     "day": 82,
+     "pantryKcal": 9434,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.224,
+     "doomedKcal": 3474
+    },
+    {
+     "day": 84,
+     "pantryKcal": 9045,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.015,
+     "doomedKcal": 5216
+    },
+    {
+     "day": 85,
+     "pantryKcal": 11058,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.909,
+     "doomedKcal": 3829
+    },
+    {
+     "day": 86,
+     "pantryKcal": 12307,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.536,
+     "doomedKcal": 6013
+    },
+    {
+     "day": 86,
+     "pantryKcal": 13342,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.001,
+     "doomedKcal": 6013
+    },
+    {
+     "day": 88,
+     "pantryKcal": 13100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.892,
+     "doomedKcal": 4684
+    },
+    {
+     "day": 89,
+     "pantryKcal": 10605,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.77,
+     "doomedKcal": 5505
+    },
+    {
+     "day": 90,
+     "pantryKcal": 9515,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.299,
+     "doomedKcal": 5230
+    },
+    {
+     "day": 90,
+     "pantryKcal": 9515,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.299,
+     "doomedKcal": 5230
+    },
+    {
+     "day": 92,
+     "pantryKcal": 7669,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.431,
+     "doomedKcal": 2581
+    },
+    {
+     "day": 92,
+     "pantryKcal": 7669,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.431,
+     "doomedKcal": 2581
+    },
+    {
+     "day": 94,
+     "pantryKcal": 6600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.954,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 95,
+     "pantryKcal": 7857,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.517,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 95,
+     "pantryKcal": 7857,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.517,
+     "doomedKcal": 2600
+    },
+    {
+     "day": 97,
+     "pantryKcal": 8857,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.976,
+     "doomedKcal": 3000
+    },
+    {
+     "day": 98,
+     "pantryKcal": 8580,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.859,
+     "doomedKcal": 2400
+    },
+    {
+     "day": 99,
+     "pantryKcal": 7386,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.352,
+     "doomedKcal": 2448
+    },
+    {
+     "day": 100,
+     "pantryKcal": 2974,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.339,
+     "doomedKcal": 2280
+    },
+    {
+     "day": 101,
+     "pantryKcal": 600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.292,
+     "doomedKcal": 0
+    },
+    {
+     "day": 102,
+     "pantryKcal": 1600,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.804,
+     "doomedKcal": 0
+    },
+    {
+     "day": 103,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 104,
+     "pantryKcal": 800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.494,
+     "doomedKcal": 0
+    },
+    {
+     "day": 105,
+     "pantryKcal": 1300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.847,
+     "doomedKcal": 0
+    },
+    {
+     "day": 105,
+     "pantryKcal": 1857,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.21,
+     "doomedKcal": 0
+    },
+    {
+     "day": 107,
+     "pantryKcal": 1000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.816,
+     "doomedKcal": 0
+    },
+    {
+     "day": 108,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 108,
+     "pantryKcal": 379,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.281,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 1200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.057,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 2265,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.995,
+     "doomedKcal": 0
+    },
+    {
+     "day": 112,
+     "pantryKcal": 400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.341,
+     "doomedKcal": 0
+    },
+    {
+     "day": 113,
+     "pantryKcal": 2000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.886,
+     "doomedKcal": 0
+    },
+    {
+     "day": 114,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.39,
+     "doomedKcal": 530
+    },
+    {
+     "day": 115,
+     "pantryKcal": 200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.148,
+     "doomedKcal": 0
+    },
+    {
+     "day": 116,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 117,
+     "pantryKcal": 1501,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.883,
+     "doomedKcal": 0
+    },
+    {
+     "day": 118,
+     "pantryKcal": 1000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.703,
+     "doomedKcal": 0
+    },
+    {
+     "day": 118,
+     "pantryKcal": 1445,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.016,
+     "doomedKcal": 0
+    },
+    {
+     "day": 120,
+     "pantryKcal": 1310,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.791,
+     "doomedKcal": 0
+    },
+    {
+     "day": 120,
+     "pantryKcal": 1220,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.736,
+     "doomedKcal": 0
+    },
+    {
+     "day": 122,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 123,
+     "pantryKcal": 1408,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.307,
+     "doomedKcal": 0
+    },
+    {
+     "day": 123,
+     "pantryKcal": 3125,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.362,
+     "doomedKcal": 0
+    },
+    {
+     "day": 125,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 125,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 2082
+  },
+  {
+   "seed": 5434,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 3,
+   "days": 157,
+   "endReason": "village-lost",
+   "completeness": 1,
+   "inflow": {
+    "SP": 210626,
+    "SS": 504800,
+    "DPP": 0
+   },
+   "writes": {
+    "SP": 370,
+    "SS": 962,
+    "DPP": 0
+   },
+   "pieceHist": {
+    "SP": {
+     "401_500": 154238,
+     "101_200": 3017,
+     "le100": 6286,
+     "201_300": 18749,
+     "301_400": 28336
+    },
+    "SS": {
+     "101_200": 504800
+    },
+    "DPP": {}
+   },
+   "ssGive": 504836,
+   "ssStored": 504800,
+   "ssRefused": 30353,
+   "ssRefusalEvents": 497,
+   "ssCrisisKcal": 40412,
+   "ssNonCrisisKcal": 464424,
+   "spOverCapKcal": 0,
+   "spOverCapEvents": 0,
+   "spNormalKcal": 210626,
+   "mergeMixKcal": 0,
+   "rotByPath": {
+    "SS": 94600,
+    "SP": 41290,
+    "OTHER": 1500
+   },
+   "rotByPathFast": {
+    "SS": 94600,
+    "SP": 24542
+   },
+   "rotByPathFastSub": {
+    "SS:noncrisis": 94600,
+    "SP:normal": 24542
+   },
+   "rotByName": {
+    "Foraged food": 121570,
+    "Fish catch": 11820,
+    "Garden harvest": 2500,
+    "Winner's share (alien rations)": 1500
+   },
+   "rotLagMean": {
+    "SS": 3,
+    "SP": 4.22,
+    "OTHER": 11.4
+   },
+   "untaggedRotKcal": 0,
+   "untaggedRotN": 0,
+   "drawKcal": 431447,
+   "drawUrgencyDays": 14.15,
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 39310,
+     "cap": 120000,
+     "overCapKcal": 0,
+     "freshDays": 4.59,
+     "doomedKcal": 0
+    },
+    {
+     "day": 3,
+     "pantryKcal": 34030,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.001,
+     "doomedKcal": 0
+    },
+    {
+     "day": 4,
+     "pantryKcal": 28300,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.747,
+     "doomedKcal": 0
+    },
+    {
+     "day": 5,
+     "pantryKcal": 25000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.724,
+     "doomedKcal": 0
+    },
+    {
+     "day": 6,
+     "pantryKcal": 22500,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.704,
+     "doomedKcal": 0
+    },
+    {
+     "day": 7,
+     "pantryKcal": 22850,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.481,
+     "doomedKcal": 0
+    },
+    {
+     "day": 8,
+     "pantryKcal": 22850,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.148,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 23500,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.916,
+     "doomedKcal": 0
+    },
+    {
+     "day": 9,
+     "pantryKcal": 23500,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.916,
+     "doomedKcal": 0
+    },
+    {
+     "day": 11,
+     "pantryKcal": 23850,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 14.806,
+     "doomedKcal": 500
+    },
+    {
+     "day": 12,
+     "pantryKcal": 25313,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 19.489,
+     "doomedKcal": 1200
+    },
+    {
+     "day": 13,
+     "pantryKcal": 25160,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 23.4,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 14,
+     "pantryKcal": 26845,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 25.351,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 15,
+     "pantryKcal": 28242,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.701,
+     "doomedKcal": 2886
+    },
+    {
+     "day": 16,
+     "pantryKcal": 28445,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.897,
+     "doomedKcal": 3196
+    },
+    {
+     "day": 17,
+     "pantryKcal": 27051,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 25.798,
+     "doomedKcal": 3089
+    },
+    {
+     "day": 18,
+     "pantryKcal": 25278,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 22.129,
+     "doomedKcal": 0
+    },
+    {
+     "day": 19,
+     "pantryKcal": 24876,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 22.924,
+     "doomedKcal": 0
+    },
+    {
+     "day": 20,
+     "pantryKcal": 23810,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 22.462,
+     "doomedKcal": 0
+    },
+    {
+     "day": 21,
+     "pantryKcal": 18930,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 18.121,
+     "doomedKcal": 1270
+    },
+    {
+     "day": 22,
+     "pantryKcal": 10921,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.773,
+     "doomedKcal": 921
+    },
+    {
+     "day": 23,
+     "pantryKcal": 11460,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 11.305,
+     "doomedKcal": 0
+    },
+    {
+     "day": 24,
+     "pantryKcal": 16152,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 16.152,
+     "doomedKcal": 1700
+    },
+    {
+     "day": 25,
+     "pantryKcal": 17498,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.908,
+     "doomedKcal": 1441
+    },
+    {
+     "day": 25,
+     "pantryKcal": 16698,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.908,
+     "doomedKcal": 1441
+    },
+    {
+     "day": 27,
+     "pantryKcal": 18296,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.167,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 28,
+     "pantryKcal": 20092,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.82,
+     "doomedKcal": 600
+    },
+    {
+     "day": 29,
+     "pantryKcal": 14423,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.508,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 30,
+     "pantryKcal": 11965,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.174,
+     "doomedKcal": 0
+    },
+    {
+     "day": 31,
+     "pantryKcal": 13700,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.57,
+     "doomedKcal": 600
+    },
+    {
+     "day": 32,
+     "pantryKcal": 12615,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.057,
+     "doomedKcal": 0
+    },
+    {
+     "day": 33,
+     "pantryKcal": 22730,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 9.075,
+     "doomedKcal": 0
+    },
+    {
+     "day": 34,
+     "pantryKcal": 24180,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.97,
+     "doomedKcal": 0
+    },
+    {
+     "day": 35,
+     "pantryKcal": 28674,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.606,
+     "doomedKcal": 0
+    },
+    {
+     "day": 36,
+     "pantryKcal": 24477,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.175,
+     "doomedKcal": 420
+    },
+    {
+     "day": 37,
+     "pantryKcal": 26823,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.332,
+     "doomedKcal": 980
+    },
+    {
+     "day": 38,
+     "pantryKcal": 31214,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.117,
+     "doomedKcal": 1883
+    },
+    {
+     "day": 38,
+     "pantryKcal": 31685,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.347,
+     "doomedKcal": 1883
+    },
+    {
+     "day": 40,
+     "pantryKcal": 31158,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.091,
+     "doomedKcal": 4718
+    },
+    {
+     "day": 41,
+     "pantryKcal": 31070,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.16,
+     "doomedKcal": 5727
+    },
+    {
+     "day": 41,
+     "pantryKcal": 31070,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.16,
+     "doomedKcal": 5727
+    },
+    {
+     "day": 43,
+     "pantryKcal": 20643,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.552,
+     "doomedKcal": 0
+    },
+    {
+     "day": 44,
+     "pantryKcal": 23547,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.485,
+     "doomedKcal": 0
+    },
+    {
+     "day": 45,
+     "pantryKcal": 27838,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.389,
+     "doomedKcal": 4068
+    },
+    {
+     "day": 46,
+     "pantryKcal": 29469,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.034,
+     "doomedKcal": 5140
+    },
+    {
+     "day": 47,
+     "pantryKcal": 29097,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.671,
+     "doomedKcal": 5947
+    },
+    {
+     "day": 47,
+     "pantryKcal": 29731,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.948,
+     "doomedKcal": 5947
+    },
+    {
+     "day": 49,
+     "pantryKcal": 24169,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.012,
+     "doomedKcal": 0
+    },
+    {
+     "day": 50,
+     "pantryKcal": 17457,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.786,
+     "doomedKcal": 1160
+    },
+    {
+     "day": 51,
+     "pantryKcal": 20389,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.894,
+     "doomedKcal": 0
+    },
+    {
+     "day": 52,
+     "pantryKcal": 25230,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.181,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 53,
+     "pantryKcal": 30615,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.08,
+     "doomedKcal": 4569
+    },
+    {
+     "day": 53,
+     "pantryKcal": 27998,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.831,
+     "doomedKcal": 2700
+    },
+    {
+     "day": 55,
+     "pantryKcal": 31617,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.729,
+     "doomedKcal": 5134
+    },
+    {
+     "day": 56,
+     "pantryKcal": 31973,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.852,
+     "doomedKcal": 5638
+    },
+    {
+     "day": 56,
+     "pantryKcal": 20758,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.169,
+     "doomedKcal": 5638
+    },
+    {
+     "day": 58,
+     "pantryKcal": 24413,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.922,
+     "doomedKcal": 0
+    },
+    {
+     "day": 58,
+     "pantryKcal": 22062,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.047,
+     "doomedKcal": 0
+    },
+    {
+     "day": 60,
+     "pantryKcal": 27586,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.478,
+     "doomedKcal": 5780
+    },
+    {
+     "day": 61,
+     "pantryKcal": 27440,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.379,
+     "doomedKcal": 5876
+    },
+    {
+     "day": 62,
+     "pantryKcal": 27777,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.485,
+     "doomedKcal": 5634
+    },
+    {
+     "day": 62,
+     "pantryKcal": 27777,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.485,
+     "doomedKcal": 5634
+    },
+    {
+     "day": 64,
+     "pantryKcal": 26653,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.972,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 64,
+     "pantryKcal": 22002,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.171,
+     "doomedKcal": 4000
+    },
+    {
+     "day": 66,
+     "pantryKcal": 25325,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.004,
+     "doomedKcal": 0
+    },
+    {
+     "day": 67,
+     "pantryKcal": 31579,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 10.636,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 68,
+     "pantryKcal": 31830,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 12.808,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 68,
+     "pantryKcal": 32285,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.123,
+     "doomedKcal": 5000
+    },
+    {
+     "day": 70,
+     "pantryKcal": 31884,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 20.652,
+     "doomedKcal": 5800
+    },
+    {
+     "day": 71,
+     "pantryKcal": 25020,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 25.56,
+     "doomedKcal": 5200
+    },
+    {
+     "day": 72,
+     "pantryKcal": 24978,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 40.409,
+     "doomedKcal": 2800
+    },
+    {
+     "day": 73,
+     "pantryKcal": 27305,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 46.808,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 74,
+     "pantryKcal": 33304,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 56.679,
+     "doomedKcal": 6800
+    },
+    {
+     "day": 75,
+     "pantryKcal": 31104,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 50.459,
+     "doomedKcal": 7200
+    },
+    {
+     "day": 76,
+     "pantryKcal": 31997,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 54.299,
+     "doomedKcal": 4600
+    },
+    {
+     "day": 77,
+     "pantryKcal": 30515,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 51.41,
+     "doomedKcal": 6600
+    },
+    {
+     "day": 78,
+     "pantryKcal": 27819,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 47.04,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 79,
+     "pantryKcal": 28419,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 44.673,
+     "doomedKcal": 4800
+    },
+    {
+     "day": 79,
+     "pantryKcal": 25149,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 35.615,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 81,
+     "pantryKcal": 32665,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 47.571,
+     "doomedKcal": 4400
+    },
+    {
+     "day": 82,
+     "pantryKcal": 28380,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 42.102,
+     "doomedKcal": 5400
+    },
+    {
+     "day": 82,
+     "pantryKcal": 29536,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 45.389,
+     "doomedKcal": 5400
+    },
+    {
+     "day": 84,
+     "pantryKcal": 24722,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 24.068,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 85,
+     "pantryKcal": 19501,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 23.953,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 85,
+     "pantryKcal": 18701,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 13.435,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 87,
+     "pantryKcal": 23916,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 26.117,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 88,
+     "pantryKcal": 26573,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 35.208,
+     "doomedKcal": 3400
+    },
+    {
+     "day": 89,
+     "pantryKcal": 29164,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 41.019,
+     "doomedKcal": 6000
+    },
+    {
+     "day": 90,
+     "pantryKcal": 31247,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 45.287,
+     "doomedKcal": 5400
+    },
+    {
+     "day": 91,
+     "pantryKcal": 30006,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 42.176,
+     "doomedKcal": 6200
+    },
+    {
+     "day": 91,
+     "pantryKcal": 25200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 42.963,
+     "doomedKcal": 6200
+    },
+    {
+     "day": 93,
+     "pantryKcal": 18828,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.833,
+     "doomedKcal": 0
+    },
+    {
+     "day": 93,
+     "pantryKcal": 18828,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.833,
+     "doomedKcal": 0
+    },
+    {
+     "day": 95,
+     "pantryKcal": 24008,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 8.501,
+     "doomedKcal": 2800
+    },
+    {
+     "day": 96,
+     "pantryKcal": 20565,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.063,
+     "doomedKcal": 1400
+    },
+    {
+     "day": 97,
+     "pantryKcal": 25587,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 7.478,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 98,
+     "pantryKcal": 23774,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.067,
+     "doomedKcal": 3600
+    },
+    {
+     "day": 98,
+     "pantryKcal": 16129,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.067,
+     "doomedKcal": 3600
+    },
+    {
+     "day": 100,
+     "pantryKcal": 17518,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.618,
+     "doomedKcal": 200
+    },
+    {
+     "day": 101,
+     "pantryKcal": 16727,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.996,
+     "doomedKcal": 200
+    },
+    {
+     "day": 101,
+     "pantryKcal": 16727,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.996,
+     "doomedKcal": 200
+    },
+    {
+     "day": 103,
+     "pantryKcal": 24722,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.494,
+     "doomedKcal": 0
+    },
+    {
+     "day": 104,
+     "pantryKcal": 26122,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.105,
+     "doomedKcal": 600
+    },
+    {
+     "day": 104,
+     "pantryKcal": 26643,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 6.33,
+     "doomedKcal": 600
+    },
+    {
+     "day": 106,
+     "pantryKcal": 17997,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.796,
+     "doomedKcal": 0
+    },
+    {
+     "day": 106,
+     "pantryKcal": 15878,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.868,
+     "doomedKcal": 0
+    },
+    {
+     "day": 108,
+     "pantryKcal": 17976,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.575,
+     "doomedKcal": 0
+    },
+    {
+     "day": 109,
+     "pantryKcal": 18461,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.455,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 19037,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.365,
+     "doomedKcal": 0
+    },
+    {
+     "day": 110,
+     "pantryKcal": 19928,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.744,
+     "doomedKcal": 0
+    },
+    {
+     "day": 112,
+     "pantryKcal": 19680,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.225,
+     "doomedKcal": 0
+    },
+    {
+     "day": 112,
+     "pantryKcal": 12724,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.225,
+     "doomedKcal": 0
+    },
+    {
+     "day": 114,
+     "pantryKcal": 14980,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.361,
+     "doomedKcal": 0
+    },
+    {
+     "day": 114,
+     "pantryKcal": 12012,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.113,
+     "doomedKcal": 0
+    },
+    {
+     "day": 116,
+     "pantryKcal": 17914,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.651,
+     "doomedKcal": 0
+    },
+    {
+     "day": 116,
+     "pantryKcal": 18238,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.789,
+     "doomedKcal": 0
+    },
+    {
+     "day": 118,
+     "pantryKcal": 19504,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 4.153,
+     "doomedKcal": 0
+    },
+    {
+     "day": 119,
+     "pantryKcal": 20032,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.323,
+     "doomedKcal": 0
+    },
+    {
+     "day": 120,
+     "pantryKcal": 15415,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.269,
+     "doomedKcal": 0
+    },
+    {
+     "day": 121,
+     "pantryKcal": 16673,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.812,
+     "doomedKcal": 0
+    },
+    {
+     "day": 122,
+     "pantryKcal": 13737,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.039,
+     "doomedKcal": 0
+    },
+    {
+     "day": 123,
+     "pantryKcal": 15297,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.701,
+     "doomedKcal": 0
+    },
+    {
+     "day": 123,
+     "pantryKcal": 15297,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.701,
+     "doomedKcal": 0
+    },
+    {
+     "day": 124,
+     "pantryKcal": 15122,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.528,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 126,
+     "pantryKcal": 16998,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 5.224,
+     "doomedKcal": 2200
+    },
+    {
+     "day": 126,
+     "pantryKcal": 4060,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.716,
+     "doomedKcal": 600
+    },
+    {
+     "day": 128,
+     "pantryKcal": 5672,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.083,
+     "doomedKcal": 0
+    },
+    {
+     "day": 128,
+     "pantryKcal": 3089,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.278,
+     "doomedKcal": 0
+    },
+    {
+     "day": 130,
+     "pantryKcal": 4797,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.072,
+     "doomedKcal": 600
+    },
+    {
+     "day": 131,
+     "pantryKcal": 5636,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.435,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 132,
+     "pantryKcal": 5834,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.52,
+     "doomedKcal": 1600
+    },
+    {
+     "day": 133,
+     "pantryKcal": 7313,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.159,
+     "doomedKcal": 2400
+    },
+    {
+     "day": 134,
+     "pantryKcal": 7757,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.384,
+     "doomedKcal": 2000
+    },
+    {
+     "day": 134,
+     "pantryKcal": 400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.174,
+     "doomedKcal": 200
+    },
+    {
+     "day": 136,
+     "pantryKcal": 2000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.688,
+     "doomedKcal": 0
+    },
+    {
+     "day": 137,
+     "pantryKcal": 2100,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 2.532,
+     "doomedKcal": 0
+    },
+    {
+     "day": 138,
+     "pantryKcal": 1200,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.278,
+     "doomedKcal": 0
+    },
+    {
+     "day": 139,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 140,
+     "pantryKcal": 1800,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.917,
+     "doomedKcal": 0
+    },
+    {
+     "day": 140,
+     "pantryKcal": 356,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.379,
+     "doomedKcal": 0
+    },
+    {
+     "day": 142,
+     "pantryKcal": 2000,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 1.788,
+     "doomedKcal": 0
+    },
+    {
+     "day": 143,
+     "pantryKcal": 3400,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3,
+     "doomedKcal": 400
+    },
+    {
+     "day": 144,
+     "pantryKcal": 4265,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 3.366,
+     "doomedKcal": 1800
+    },
+    {
+     "day": 145,
+     "pantryKcal": 3312,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.331,
+     "doomedKcal": 1000
+    },
+    {
+     "day": 146,
+     "pantryKcal": 1203,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.12,
+     "doomedKcal": 0
+    },
+    {
+     "day": 146,
+     "pantryKcal": 944,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.118,
+     "doomedKcal": 0
+    },
+    {
+     "day": 148,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 149,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 149,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 151,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 152,
+     "pantryKcal": 294,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0.305,
+     "doomedKcal": 0
+    },
+    {
+     "day": 152,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 154,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 155,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 156,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    },
+    {
+     "day": 156,
+     "pantryKcal": 0,
+     "cap": 150000,
+     "overCapKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0
+    }
+   ],
+   "ms": 2508
+  }
+ ]
+}
