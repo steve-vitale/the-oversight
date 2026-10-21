@@ -979,7 +979,15 @@
           ((((this.data.characterGen || {}).occupations) || []).find(o => o.id === newChar.occupationId) || {}).name ||
           'survivor';
         const art = /^[aeiou]/i.test(occName) ? 'an' : 'a';
-        const kit = (s.backgroundAbilities || []).map(a => a.name || a.id).filter(Boolean);
+        // ORIENTATION-KIT (journey-succession r36 2026-10-21): backgroundAbilities
+        // has been [] since the 2026-10-14 ability lanes (occupations grant
+        // skills only, never slots), so this kit clause NEVER fired — the
+        // handoff named the new face but never their hands, and the build
+        // change (the fall) stayed silent in the fiction. Read the heir's
+        // real kit: s.abilities was replaced by mantleBecome above with the
+        // successor's own abilities (Steve 2026-10-14: "You become that
+        // villager").
+        const kit = (s.abilities || []).map(a => a.name || a.id).filter(Boolean);
         const kitClause = kit.length ? ` ${poss} hands know different work now: ${kit.join(', ')}.` : '';
         const ageClause = newChar.age ? `, ${newChar.age}` : '';
         this.say(`🪞 You wake up somebody else. ${newName}${ageClause} — ${art} ${occName}.${kitClause}`);

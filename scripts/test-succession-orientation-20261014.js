@@ -10,6 +10,12 @@
 // RED: no "wake up somebody else" line post-death (pristine).
 // GREEN: the line names the successor, their occupation, and their new kit.
 //
+// r36 ADDENDUM (2026-10-21): the kit source moved from backgroundAbilities
+// (always [] since the 2026-10-14 ability lanes — the clause never fired) to
+// scholar.abilities (the heir's own kit, set by mantleBecome). RED-verified
+// by patch-revert: pre-fix code never emits "hands know different work";
+// post-fix code names the heir's abilities.
+//
 // Usage: node scripts/test-succession-orientation-20261014.js
 // Exit 0 = all green, 1 = any red.
 'use strict';
@@ -46,7 +52,10 @@ async function playSeed(seed) {
   const occWord = String(newChar.formerOccupation || '').split(' ')[0].toLowerCase();
   check(`seed${seed}-names-occupation`, !!occWord && line.toLowerCase().includes(occWord),
     `names occupation "${newChar.formerOccupation}"`);
-  const kit = ((Game.state.scholar || {}).backgroundAbilities || []).map(a => a.name || a.id);
+  const kit = ((Game.state.scholar || {}).abilities || []).map(a => a.name || a.id).filter(Boolean);
+  // (r36 2026-10-21: the kit is the heir's real abilities — backgroundAbilities
+  // has been [] since the 2026-10-14 ability lanes, so the old read always
+  // took the absent branch and the clause never fired.)
   if (kit.length) {
     check(`seed${seed}-names-kit`, kit.some(k => line.includes(k)), `names kit [${kit.join(', ')}]`);
   } else {
