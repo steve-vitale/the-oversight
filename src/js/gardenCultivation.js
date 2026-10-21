@@ -113,6 +113,7 @@
       const v=this.state.village,person=this.getPerson(vid);
       if(vid===this.villagerId||!(v.roster||[]).includes(vid)||!person||person.dead)return false;
       if(this.waterFavorCompanions?.().includes(vid))return false;
+      if(this.companyFavorHolding?.(vid))return false;
       const node=this.npcNode(vid);
       return node?.nx===4&&node?.ny===4&&(v.health?.[vid]??100)>=40&&!this.isSheltered?.(vid);
     },

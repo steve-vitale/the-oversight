@@ -1,0 +1,20 @@
+'use strict';
+const fs=require('fs'),Module=require('module');
+let source=fs.readFileSync('evidence/2026-10-20/overnight-save-phone-r2.cjs','utf8');
+const start=source.indexOf(' const before=await read();'),end=source.indexOf('\n`;');
+if(start<0||end<start)throw Error('Expected retained native Sleep recipe');
+source=source.slice(0,start)+String.raw`
+ const before=await read(),prior=await page.evaluate(key=>localStorage.getItem(key),setup.key);
+ await page.evaluate(()=>{Scattering.Game.checkVillageProximity=function(){throw Error('prepared before-core mobile fault');};});
+ await tap('[data-field-panel="menu"]');await tap('[data-lm="sleep"]');await snap('declared fault interrupts native Sleep');
+ if(await page.evaluate(key=>localStorage.getItem(key),setup.key)!==prior)throw Error('Fault replaced the checkpoint');
+ const guidance=page.getByText('Time could not finish. Reload and Continue from your last saved checkpoint.',{exact:true});
+ await guidance.waitFor({state:'visible',timeout:35000});await snap('real periodic autosave shows recovery guidance');
+ if(await page.evaluate(key=>localStorage.getItem(key),setup.key)!==prior)throw Error('Periodic autosave persisted partial time');
+ await page.goto(base);await page.waitForLoadState('networkidle');await tap('[data-load="'+setup.key+'"]');await present();await snap('native reload Continue restores the last checkpoint');const continued=await read();
+ if(JSON.stringify(continued.runtime)!==JSON.stringify(before.runtime))throw Error('Recovery replayed/changed the previous checkpoint');
+ if(errors.length!==1||!errors[0].includes('prepared before-core mobile fault'))throw Error('Unexpected browser errors: '+errors.join('\n'));
+ return{height,trace,expectedErrors:errors,before,continued,scope:'Prepared thrown before-core fault through native touch Sleep. Real30-second periodic autosave refuses partial memory and shows recovery guidance; unload cannot overwrite checkpoint; native reload/Continue restores it. One touch-emulated phone size, not physical devices or general exception recovery.'};
+`+source.slice(end);
+source=source.replace('for(const height of [736,844])','for(const height of [736])').replaceAll('.playwright-mcp/overnight-save-r2-','.playwright-mcp/overnight-save-fault-r2-').replace("overnight-save-phone-'+height+'-r2.json'","overnight-save-fault-phone-'+height+'-r2.json'").replace('errors:result.errors','expectedErrors:result.expectedErrors');
+const m=new Module(__filename,module);m.filename=__filename;m.paths=module.paths;m._compile(source,__filename);

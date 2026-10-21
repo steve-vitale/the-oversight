@@ -748,9 +748,7 @@ function driveFightsImpl(Game, policy, ctx) {
     if (!Game.tbfight || Game.tbfight.over) { exitWhy = 'fight-null-or-over'; break; }
     if (Game.tbIsPlayerTurn()) {
       try {
-        const p = Game.tbFighter('p');
-        p.moveLeft = 0; p.acted = true;
-        Game.tbAfterPlayerAction();
+        Game.tbPlayerWait(); // same public end-turn action as the phone
       } catch (e) { exitWhy = 'default-turn-threw'; break; }
     } else { exitWhy = 'not-player-turn'; break; }
     const s = sig();

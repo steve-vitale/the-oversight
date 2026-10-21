@@ -1,5 +1,61 @@
 # Agent lanes (2026-10-20)
 
+## Codex company candidate, then garden consumption evidence (2026-10-21)
+
+Company-favor candidate is in its final full/publication gate; see the dated
+company-favor audit and ROADMAP top entry. Codex owns favor-company.js and its
+conversation/deadline/time hooks. Prepared touch/Continue/interruption passes;
+natural screen calls were cancellations, so no natural-completion claim.
+The matched panels retain their review_required decision and prior warnings.
+
+Next after publication: Codex owns cultivated-food provenance and useful-intake
+measurement across natural long campaigns, with actual delivery/spoilage/meal
+boundaries, honest unknowns and passive on/off controls. Muse retains numeric
+garden/ability calibration. No silent controller or numerical changes in the
+measurement lane. Fetch current master/main first; recovery999c69491 is in
+ancestry. The latest fetch found no new Muse commits, not a direct reply.
+
+## Codex atomic time saves; next lane stay_close
+
+Read TIME-SETTLEMENT.md and overnight-save-audit-r1 before extending time or
+save code. Candidate d09f47ea2-20261021-042230 covers final clock/part/day/Sleep
+settlement, actual crash recovery, native Sleep/Continue and offline update.
+Released ase83b78097 after quick276/0 and full1,048/0. The publication-r1
+receipt verifies166 boot files plus worker/version/manifest and clean phone boot.
+Old partial
+nights are preserved as evidence, not guessed into a recovered state.
+
+Report readers now decode UTF-8 continuously. Both64-case arms/current neutral
+proof were refreshed; all23 vectors match. Current terminal-before-r3/r3 retain
+valid raw final/bridge hashes and exact prefixes. Historical raw-state transport
+damage is listed explicitly in the audit; do not treat those blobs as exact
+reconstruction proof. No numerical lever or earlier balance warning is cleared.
+
+Codex next owns the authored stay_close favor's real night-by-fire activity,
+same-person/place eligibility, saved progress/deadline and interrupted/late
+outcomes. Muse retains numerical garden calibration; avoid overlapping these
+conversation/time files. Fetch shared history, preserve999c69491 and later work.
+
+## Codex terminal coverage completed; overnight-save integrity next
+
+Read TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1 before reusing the
+shared public-Wait harness. Four fixed cases now reach engine-terminal wins;
+exact prefix/observer/recovery evidence and real day182 phone combat/Continue
+are retained. Selected wins do not clear the existing balanced warnings.
+Release19b91d67f, live build ffe2259a9-20261021-033519, also prioritizes current
+phone messages and moves the existing Table entry to the top of Place.
+caregiver-terminal-publication-r1.json verifies165 boot files plus worker,
+version and manifest, with clean fresh touch-phone boot. Fresh prepush gates
+passed273/0 quick and1,045/0 full; receipt follow-up gets its own fresh checks.
+
+Codex's next bounded lane is coherent atomic overnight persistence. A nested
+pre-core announcement save can expose dayPart4 if interrupted. The normal
+completed-boundary day267 sample is coherent; do not clamp clocks or replay
+night metabolism. Audit writers and prove exactly-once overnight effects/save
+Continue at fault boundaries. Muse retains numerical garden calibration.
+Fetch current shared history;999c69491 is preserved and no newer Muse change
+was found in this milestone's fetch. No direct Muse reply is claimed.
+
 ## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
 Codex owns this cultivation implementation; Muse retains numerical calibration.

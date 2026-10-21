@@ -1,5 +1,12 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
+Late-game follow-through is retained in caregiver-terminal-audit-r1: naturally
+earned day182 Green Thumb3+Whisper3, existing cultivated crop history, real
+phone paid growth/refused repeat/Continue. This adds an earned opportunity
+check; it does not establish ordinary-only viability or useful food intake.
+The four fixed caregiver campaigns now reach actual engine endings through
+day270. Broader garden balance/calibration warnings below remain open.
+
 Steve's direct direction is in godpath/STEVE-ANSWERS.md (2026-10-20).
 Cultivation shipped in39d5623d7, live build e984314d9-20261021-014853.
 All165 deployed boot inputs match; source-bound phone/Continue/offline proofs

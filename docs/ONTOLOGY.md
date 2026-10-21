@@ -620,6 +620,19 @@ The exposure source — the village keeps the list. Every truth dragged into the
 
 **Consumes:** —
 
+### favor-company (`favor-company.js`)
+A specific night by a shared fire, with physical attendance, saved progress and an exact promise receipt.
+
+**Provides:** companyFavorCommitGate(vid, favor), companyFavorAction(vid, favor), performCompanyFavor(vid, favor, cancel), companyFavorHolding(vid), companyFavorWaiting(vid), companyFavorReceipt(vid, favor, opts), companyFavorDeadline(favor), companyFavorOpening(vid, favor), companyMeetingStep(), migrateCompanyFavors()
+
+**Rules:**
+- physical_night: only actual paid clock intervals beside the same person and fire count; generic social events and direct day jumps cannot keep this promise (code: accrue, finish)
+- tonight: new promises expire at the agreed dawn; previously unavailable saved commitments receive one explicit fair meeting night (code: companyFavorCommitGate, migrateCompanyFavors)
+- no_teleport: the requester walks a legal grid step toward the fire and stays on their actual side of the door; work orders take priority (code: companyMeetingStep, companyFavorHolding)
+- canonical_time: normal world clock and Sleep costs remain; company adds no food or healing, and both awake presence and nearby sleep count (code: performCompanyFavor, install)
+
+**Consumes:** state.village, state.scholar, tickAction(n), checkPromises(kind, vid, opts), journalFavorPromise(vid, promise, opts)
+
 ### favor-water (`favor-water.js`)
 Joint dawn creek favors: temporary companion, real bottled cargo and home cistern settlement.
 
@@ -1686,6 +1699,18 @@ Composes each world-map tile as a miniature auto-composed SVG scene: terrain bas
 - no_dom: composition is pure string building; safe to call from hot paths and off-thread tests (code: compose, Steve 2026-10-06)
 
 **Consumes:** Game.tileAt, Game.genDetail (detail-grid generation), Game.map.px/py (player tile), Game.state.scholar (mx,my,animal), Game.state.worldMonsters (NOT rendered on map — geography only, Steve 2026-10-06), Game.state.village.positions (villager detail-grid positions)
+
+### timeSettlement (`timeSettlement.js`)
+Commit saves only after complete time/sleep/dawn settlement; preserve the last durable checkpoint after a thrown settlement.
+
+**Provides:** init() (wrap: installs after all engine initialization), installTimeSettlement(game), deferSettlementSave(state)
+
+**Rules:**
+- whole_settlement: nested save requests sync runtime normally but do not write partial payloads; the outer successful tickAction/advancePart/endDay/sleep call commits the complete result (code: installTimeSettlement)
+- failed_settlement: an exception preserves the prior durable checkpoint and prevents later saves of that partial state until reload/new run (code: installTimeSettlement)
+- honest_status: deferred work never reports durable success; ordinary quota/stale/tombstone results are retained (code: deferSettlementSave)
+
+**Consumes:** Game.init(), Game.syncRun(), state.save(state)
 
 ### titans (`titans.js`)
 The TITAN CLASS (Steve 2026-10-11) — the threat ladder that justifies the scale ladder. Three titans total, 1-2 per run: the Herald (wave 4, tutorial), one mid wave-5, the Finale (apocalypse). A titan is a FLAG (src/data/titans.json), never just HP. No solo fights — hard gate, not a stat check. Coalition warfare: allied villages commit named faces who fight blow-by-blow; they can die, and it costs. The call to arms, the war council, outfitting (real gear, real costs), and THE TURN (outfitted allies can turn — driven by real trust/opinion vs temptation, telegraphed, never random). The player's contribution is LOGISTICS: an army marches on its stomach.

@@ -1,0 +1,69 @@
+{"capture":1,"terminal":{"engineOver":true,"won":true,"villageLost":false,"harnessEnd":"over-other","watchdogRoutes":0,"status":"won","day":270,"bearer":"gen_r06g1h5","driverForcedTurns":0},"warnings":[]}
+{"capture":0,"terminal":{"engineOver":true,"won":true,"villageLost":false,"harnessEnd":"over-other","watchdogRoutes":0,"status":"won","day":270,"bearer":"gen_r06g1h5","driverForcedTurns":0},"warnings":[]}
+AssertionError [ERR_ASSERTION]: Save capture changed the persistent trajectory
++ actual - expected
+... Skipped lines
+
+  {
+    bridge: {
+      day: 152,
+      state: {
+        _landRegrowDay: 152,
+...
+            0.01,
+-           0,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+...
+            0.01,
++           0.01
+          ],
++         lastTs: 50268.5122,
++         totalMin: 1.09
+-         lastTs: 49544.2231,
+-         totalMin: 1
+        },
+        pantheon: {
+          gods: {
+            'npc:gen_r06g1h5': {
+              architect: null,
+...
+          0,
++         0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+...
+          0.01,
+-         0,
+-         0,
+          0.01,
+          0,
+-         0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+...
+          0.01,
++         0.01,
++         0.01
+        ],
++       lastTs: 93956.5662,
++       totalMin: 2.2
+-       lastTs: 92830.9091,
+-       totalMin: 2.04
+      },
+      pantheon: {
+        gods: {
+          'npc:gen_r06g1h5': {
+            architect: null,
+
+    at C:\Users\Steve\.codex\worktrees\conversation-structure-current\oversight\evidence\2026-10-20\caregiver-terminal-persist-run-r1.cjs:10:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)

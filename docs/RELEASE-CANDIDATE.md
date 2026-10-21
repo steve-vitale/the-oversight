@@ -2,6 +2,26 @@
 
 Status: integration in progress; not cleared for public launch.
 
+Current shared development release (2026-10-20): e83b78097, production build
+d09f47ea2-20261021-042230. Atomic time/Sleep saves, crash recovery and current
+UTF-8 report readers are shared. Fresh prepush quick276/0 and full1,048/0 pass;
+overnight-save-publication-r1.json verifies166 boot inputs plus worker/version/
+manifest and clean fresh touch-phone boot. Actual Sleep/Continue, overnight
+penalty, recovery guidance and installed offline update are retained. Read
+TIME-SETTLEMENT.md and overnight-save-audit-r1 for precise limits. Legacy partial
+night reconstruction, other joint favors and physical-device gates remain open.
+
+Current shared development release (2026-10-20): master/main19b91d67f,
+production build ffe2259a9-20261021-033519 at https://the-oversight.vercel.app.
+Muse recovery999c69491 is preserved in this ancestry; no whole-tree port is
+needed. caregiver-terminal-publication-r1.json verifies165 boot inputs plus
+worker/version/manifest and clean fresh touch-phone boot. Fresh prepush gates
+pass273/0 quick and1,045/0 full. Naturally earned day182 combat/garden/Continue
+and settled day267 Table-entry journeys pass at736/844. This is a development
+release, not physical-device, all-playstyle or public-launch clearance.
+See ROADMAP.md and TERMINAL-CAMPAIGNS.md for current work and limits.
+The older preview/integration checkpoints below retain their historical dates.
+
 Current protected phone preview:
 https://the-oversight-927l8rhw3-steven-vitales-projects.vercel.app
 is READY from ab47a699c (source1bc469e9e). Exact published Git checkout passes

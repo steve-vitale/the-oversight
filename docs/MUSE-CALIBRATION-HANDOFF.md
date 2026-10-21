@@ -1,5 +1,75 @@
 # Muse calibration handoff
 
+## Company-favor candidate and next measurement lane (2026-10-21)
+
+Codex's company-favor candidate implements actual same-person/fire company
+through dawn, normal clock/Sleep costs, saved attendance/deadline and honest
+interruption/cancellation. See CONVERSATIONS.md and company-favor-audit-r1.
+Candidate publication remains a separate gate. Numeric relief matches ordinary
+comfort; no food/HP/reward offset compensates for outcome movement.
+
+Both64-case arms use the same current collector/harness/policies; all23 remain
+review_required, with maker6→7 wins and other win totals unchanged. All three
+changed cases replay exact full states/outcomes/metrics. Passive diagnostic
+controls preserve RNG too. Two company method calls were cancellations after
+acceptance, not Join or successful nights. Location and other-order blockers
+are observed. Calibrate from actual actions/opportunities, not call totals.
+
+After this release Codex takes cultivated-food provenance/useful-consumption
+measurement in natural long campaigns. Muse retains numerical garden/ability
+calibration. Delivery, spoilage, remaining stock and actual useful player/NPC
+intake must stay separate; the existing output totals do not establish payoff.
+Do not silently change a controller between Game arms. Fetch shared history;
+the latest origin/master and main fetch was378c91373 with no newer Muse commit.
+This is a shared-source handoff, not a claim of a direct Muse response.
+
+## Atomic time persistence and trustworthy reports (2026-10-20, released)
+
+Use TIME-SETTLEMENT.md and overnight-save-audit-r1. Candidate
+d09f47ea2-20261021-042230 saves completed night hooks and waking recovery;
+failed partial memory cannot overwrite the last checkpoint. Actual crash,
+phone/Continue and installed offline update evidence is retained. Final
+publication e83b78097 is confirmed by overnight-save-publication-r1.json:
+166 boot inputs plus worker/version/manifest, clean fresh phone boot. Fresh
+prepush quick276/0 and full1,048/0 pass. Receipt follow-up gets fresh checks too.
+
+Both report tools now retain UTF-8 across child output chunks. Terminal audits
+also recompute final/bridge payload hashes after parsing and cache reuse. Some
+prior caregiver r5/raw overnight pilot blobs fail this check; keep them as
+historical and use terminal-before-r3/r3 for exact raw reconstruction. The final
+screen reruns BOTH roots under the new observer fingerprint:64 cases/arm plus
+neutral controls, identical all23 vectors. Metric semantics/contract are unchanged.
+No source identity is rewritten and no broad balance warning is cleared.
+
+Codex next owns playable stay_close night-by-fire favors, including target,
+time/cost, persisted progress/deadline and interrupted/late behavior. Muse owns
+calibration. Shared ancestry is preserved; fetch current master/main rather
+than porting a whole tree. No direct Muse reply is claimed by this handoff.
+
+## Terminal coverage and shared Wait method (2026-10-20)
+
+Use TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1. The current harness
+ends partial turns with real public Wait rather than internal state mutation.
+Rerun both Game roots under it for calibration; standard comparisons correctly
+reject different harnesses. The64-case method control retains exact Game
+hashes/all23 vectors, with an exercised rare partial-turn case outside screen.
+The four fixed caregiver cases terminate at118/195/270/204 under current Game;
+historical150-cap losses are delayed wins, not permanent Table blocks. This
+does not clear original population warnings, garden viability or useful intake.
+
+Natural day182 phone combat/Continue, earned level3+3 garden use and settled
+day267 Table visibility are the targeted mobile evidence. Candidate build
+ffe2259a9-20261021-033519 prioritizes action feedback and the existing Table
+entry. Release19b91d67f is on shared master/main; caregiver-terminal-publication-r1.json
+verifies165 boot files plus worker/version/manifest and clean fresh phone boot.
+Fresh prepush273/0 quick and1,045/0 full checks passed. Receipt-only publication
+also gets fresh checks. The first readback still saw the old deployment;
+the retained second readback verifies the actual candidate, with no assertion
+waived. No whole-tree port or differing history is needed for this release.
+Codex next owns overnight-save integrity, especially nested pre-core saves.
+Muse retains numerical calibration. Fetch shared master/main; ancestry is
+preserved, and no wholesale port or replacement of later code is needed.
+
 ## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
 Codex owns this cultivation implementation; Muse retains numerical calibration.

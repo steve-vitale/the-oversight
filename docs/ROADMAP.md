@@ -1,5 +1,79 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Company-favor candidate (2026-10-21, publication pending)
+
+The authored stay_close request is now an actual night beside the same person
+and fire. Join, paid attendance, nearby Sleep, interruption/cancellation,
+exact-night deadline and Continue are wired through atomic time settlement.
+Shared-kit45/0, prepared phone8 stages and interruption/cancellation6 stages
+at736/844 pass. Real16-stage frames and installed update/offline Continue pass.
+Quick277/0 and full1,049/0 pass; publication status is in company-favor-audit-r1.
+
+The matched64-case screen remains review_required: wins16→16/6→7/8→8/10→10.
+All three changed metric cases replay full state/outcome/all23 exactly.
+Passive on/off diagnostic controls also retain state/outcome/all23/RNG. Both
+natural company calls were explicit cancellations; no natural Join or kept
+night is established. Actual blockers include location and other work orders.
+Do not treat menu calls or prepared completion as natural feature viability.
+Snare repair, watch shift and joint foraging remain unavailable.
+
+After this candidate is verified live, Codex's next bounded milestone is
+cultivated-food provenance through actual consumption: retain crop delivery,
+spoilage/remaining stock and useful player/NPC intake separately in naturally
+attained long runs, with passive controls. Existing harvest volume does not
+prove the garden path repays its investment. Muse retains numerical crop/
+ability calibration; this measurement lane must not silently tune those levers.
+Keep the rolling public-release goal active and preserve shared Git ancestry.
+
+## Atomic time-save milestone (2026-10-20, released)
+
+Releasee83b78097, build d09f47ea2-20261021-042230, defers nested time/part/day/Sleep saves
+until all synchronous hooks and waking recovery finish. Thrown settlement
+preserves the prior checkpoint and blocks partial autosave until reload.
+Actual child exits, storage/stale/tombstone tests, prepared and natural phone
+Sleep/Continue, readable failure recovery and installed offline update pass.
+Quick276/0 and full1,048/0 preceded the push. overnight-save-publication-r1.json
+verifies166 boot files plus worker/version/manifest and clean fresh phone boot.
+See TIME-SETTLEMENT.md and overnight-save-audit-r1 for scope and maintenance.
+This protects future writes; it cannot reconstruct an older partial night.
+
+Both64-case balanced arms were rerun under corrected UTF-8 report readers;
+all23 vectors match. Four terminal cases again win at118/195/270/204 with
+valid raw payload hashes and faithful prefixes. Full states differ in saveSeq
+and existing wall-clock pacing fields; no whole-state equivalence is claimed.
+Some historical terminal raw states had transport damage, now independently
+identified and superseded by overnight terminal-before-r3/terminal-r3. Keep
+their original identities. Prior garden/playstyle/gear/Table warnings remain.
+
+Next bounded Codex goal is the authored stay_close favor: actual company by
+the fire tonight, person/place/night eligibility, saved progress/deadline and
+honest interrupted/late outcomes. Generic social events cannot fulfill it.
+Muse retains numerical calibration; keep the rolling public-release goal active.
+
+## Terminal caregiver milestone; overnight save integrity next (2026-10-20)
+
+Four fixed caregiver cases reach real engine wins on the current garden Game
+at days118/195/270/204. Historical150-cap losses10003/10004 eventually win;
+this does not clear the broader Table-pace or garden balance warnings.
+Exact rerun prefixes, all23 measures, passive controls and recovery are shared
+in TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1. The sim harness now
+uses the actual public Wait; the matched64-case methodology control preserves
+complete Game states/all23 vectors. Future balance arms must use this harness.
+Natural day182 touch combat/Continue and coherent day267 Table entry are tested
+at736/844. The existing Table entry moves to the top of Place; world reminders
+stop covering current action feedback. Release19b91d67f is live as
+ffe2259a9-20261021-033519. caregiver-terminal-publication-r1.json verifies165
+boot inputs plus worker/version/manifest and clean fresh touch-phone boot.
+Fresh release checks passed273/0 quick and1,045/0 full before the push.
+
+Next bounded Codex milestone: atomic/coherent overnight saves. A retained
+nested pre-core day266/part4 write is an interruption fixture; coherent completed
+day267/part3 replaces it for normal playtests. Investigate actual save writers,
+preserve night effects exactly once and prove reload at interruption boundaries.
+No clamp/repeated metabolism or save corruption waiver. Muse retains garden
+numerical calibration; ordinary-only/ability viability and useful intake remain
+open. Keep the rolling release goal active; no whole-tree port is needed.
+
 ## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
 Codex owns this cultivation implementation; Muse retains numerical calibration.

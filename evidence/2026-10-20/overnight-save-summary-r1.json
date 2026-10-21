@@ -1,0 +1,358 @@
+{
+  "inputs": {
+    "overnight-save-terminal-before-r3": "777ebe640c40d44aad14d92b64f0e85d1e94728c0e79d30f070309d4a69c39a0",
+    "overnight-save-terminal-r3": "5a2d540f48daec519c1ff7ec5ecd934094141df67e4ea42c0f1714ab56baf619",
+    "overnight-save-before-r2": "f5583db8b7e6c87e4fa40dc599459ceb0c5334b72e8b61a01250456dc2d35e0a",
+    "overnight-save-after-r2": "c63cb16613151a07ec5e0189c8c773be213979fd96ee4ffe08c3e0f41e63505a",
+    "caregiver-terminal-current-ui-r5": "bf45431969beaab375408885b1ad1effd7e75553283a84051ee2fb4f461d28ad",
+    "overnight-save-terminal-r1": "e30a1e75e9968a2b550a06241a8a69b7d1e4947e83f8401de9295ffa59aee6b8"
+  },
+  "scope": "Current final-source paired time-persistence correctness study, not general balance or public-launch clearance. No whole-state equivalence claim: saveSeq legitimately changes; only three existing pacing clock fields are additionally excluded in the path audit.",
+  "paired": [
+    {
+      "seed": 10001,
+      "cap": 600,
+      "terminal": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 118,
+        "bearer": "ivy_wang",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.dayMinutes.19",
+        "state.pacing.dayMinutes.27",
+        "state.pacing.dayMinutes.31",
+        "state.pacing.dayMinutes.36",
+        "state.pacing.dayMinutes.39",
+        "state.pacing.dayMinutes.48",
+        "state.pacing.dayMinutes.51",
+        "state.pacing.dayMinutes.52",
+        "state.pacing.dayMinutes.55",
+        "state.pacing.totalMin"
+      ]
+    },
+    {
+      "seed": 10001,
+      "cap": 150,
+      "terminal": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 118,
+        "bearer": "ivy_wang",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.dayMinutes.0",
+        "state.pacing.dayMinutes.4",
+        "state.pacing.dayMinutes.5",
+        "state.pacing.dayMinutes.18",
+        "state.pacing.dayMinutes.31",
+        "state.pacing.dayMinutes.33",
+        "state.pacing.dayMinutes.35",
+        "state.pacing.dayMinutes.36",
+        "state.pacing.dayMinutes.38",
+        "state.pacing.dayMinutes.39",
+        "state.pacing.dayMinutes.41",
+        "state.pacing.dayMinutes.44",
+        "state.pacing.dayMinutes.46",
+        "state.pacing.dayMinutes.48",
+        "state.pacing.dayMinutes.49",
+        "state.pacing.dayMinutes.51",
+        "state.pacing.dayMinutes.52",
+        "state.pacing.dayMinutes.55",
+        "state.pacing.dayMinutes.57",
+        "state.pacing.totalMin"
+      ]
+    },
+    {
+      "seed": 10003,
+      "cap": 150,
+      "terminal": {
+        "engineOver": false,
+        "won": false,
+        "villageLost": false,
+        "harnessEnd": "survived",
+        "watchdogRoutes": 0,
+        "status": "not_terminal",
+        "day": 151,
+        "bearer": "nikos_papadopoulos",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.dayMinutes.1",
+        "state.pacing.dayMinutes.2",
+        "state.pacing.dayMinutes.4",
+        "state.pacing.dayMinutes.6",
+        "state.pacing.dayMinutes.8",
+        "state.pacing.dayMinutes.23",
+        "state.pacing.dayMinutes.43",
+        "state.pacing.dayMinutes.44",
+        "state.pacing.dayMinutes.45",
+        "state.pacing.dayMinutes.47",
+        "state.pacing.dayMinutes.48",
+        "state.pacing.dayMinutes.49",
+        "state.pacing.dayMinutes.50",
+        "state.pacing.dayMinutes.52",
+        "state.pacing.dayMinutes.53",
+        "state.pacing.dayMinutes.59",
+        "state.pacing.totalMin"
+      ]
+    },
+    {
+      "seed": 10003,
+      "cap": 600,
+      "terminal": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 195,
+        "bearer": "nikos_papadopoulos",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.dayMinutes.4",
+        "state.pacing.dayMinutes.6",
+        "state.pacing.dayMinutes.8",
+        "state.pacing.dayMinutes.9",
+        "state.pacing.dayMinutes.10",
+        "state.pacing.dayMinutes.13",
+        "state.pacing.dayMinutes.16",
+        "state.pacing.dayMinutes.17",
+        "state.pacing.dayMinutes.18",
+        "state.pacing.dayMinutes.24",
+        "state.pacing.dayMinutes.25",
+        "state.pacing.dayMinutes.27",
+        "state.pacing.dayMinutes.28",
+        "state.pacing.dayMinutes.30",
+        "state.pacing.dayMinutes.40",
+        "state.pacing.dayMinutes.43",
+        "state.pacing.dayMinutes.45",
+        "state.pacing.dayMinutes.46",
+        "state.pacing.dayMinutes.55",
+        "state.pacing.totalMin"
+      ]
+    },
+    {
+      "seed": 10004,
+      "cap": 150,
+      "terminal": {
+        "engineOver": false,
+        "won": false,
+        "villageLost": false,
+        "harnessEnd": "survived",
+        "watchdogRoutes": 0,
+        "status": "not_terminal",
+        "day": 152,
+        "bearer": "gen_40lvmv1",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.dayMinutes.4",
+        "state.pacing.dayMinutes.5",
+        "state.pacing.dayMinutes.8",
+        "state.pacing.dayMinutes.19",
+        "state.pacing.dayMinutes.22",
+        "state.pacing.dayMinutes.23",
+        "state.pacing.dayMinutes.27",
+        "state.pacing.dayMinutes.28",
+        "state.pacing.dayMinutes.29",
+        "state.pacing.dayMinutes.38",
+        "state.pacing.dayMinutes.43",
+        "state.pacing.dayMinutes.45",
+        "state.pacing.dayMinutes.49",
+        "state.pacing.dayMinutes.55",
+        "state.pacing.dayMinutes.59",
+        "state.pacing.totalMin"
+      ]
+    },
+    {
+      "seed": 10008,
+      "cap": 150,
+      "terminal": {
+        "engineOver": false,
+        "won": false,
+        "villageLost": false,
+        "harnessEnd": "survived",
+        "watchdogRoutes": 0,
+        "status": "not_terminal",
+        "day": 151,
+        "bearer": "ruth_goldstein",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.dayMinutes.0",
+        "state.pacing.dayMinutes.1",
+        "state.pacing.dayMinutes.3",
+        "state.pacing.dayMinutes.14",
+        "state.pacing.dayMinutes.25",
+        "state.pacing.dayMinutes.26",
+        "state.pacing.dayMinutes.27",
+        "state.pacing.dayMinutes.39",
+        "state.pacing.dayMinutes.43",
+        "state.pacing.dayMinutes.46",
+        "state.pacing.totalMin"
+      ]
+    },
+    {
+      "seed": 10004,
+      "cap": 600,
+      "terminal": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 270,
+        "bearer": "gen_r06g1h5",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.dayMinutes.2",
+        "state.pacing.dayMinutes.3",
+        "state.pacing.dayMinutes.5",
+        "state.pacing.dayMinutes.10",
+        "state.pacing.dayMinutes.12",
+        "state.pacing.dayMinutes.17",
+        "state.pacing.dayMinutes.23",
+        "state.pacing.dayMinutes.26",
+        "state.pacing.dayMinutes.27",
+        "state.pacing.dayMinutes.28",
+        "state.pacing.dayMinutes.30",
+        "state.pacing.dayMinutes.32",
+        "state.pacing.dayMinutes.33",
+        "state.pacing.dayMinutes.39",
+        "state.pacing.dayMinutes.40",
+        "state.pacing.dayMinutes.43",
+        "state.pacing.dayMinutes.44",
+        "state.pacing.dayMinutes.50",
+        "state.pacing.dayMinutes.55",
+        "state.pacing.totalMin"
+      ]
+    },
+    {
+      "seed": 10008,
+      "cap": 600,
+      "terminal": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 204,
+        "bearer": "gen_3olt2xc",
+        "driverForcedTurns": 0
+      },
+      "all23Exact": true,
+      "rngTailExact": true,
+      "fullStateHashesEqual": false,
+      "changedPaths": [
+        "state.saveSeq",
+        "state.pacing.lastTs",
+        "state.pacing.totalMin"
+      ]
+    }
+  ],
+  "panels": {
+    "casesPerArm": 64,
+    "metricsPerCase": 23,
+    "identicalVectors": 64,
+    "neutralControlsPerArm": 4,
+    "observerDigest": "698e2082257a03b931e7dc11784fcab9aa17aaa912f5e34e1638518b1a874f87",
+    "seeds": [
+      7,
+      42,
+      99,
+      1234,
+      555,
+      777,
+      2026,
+      31337,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ]
+  },
+  "corruption": [
+    {
+      "report": "prior caregiver r5",
+      "badRawStates": [
+        {
+          "seed": 10003,
+          "cap": 150,
+          "trace": 1
+        }
+      ],
+      "scope": "Historical raw-state transport damage; original child scalar hashes remain unedited. Final r3 recollects both exact Game roots with UTF-8 decoding and payload hash verification."
+    },
+    {
+      "report": "overnight pilot r1",
+      "badRawStates": [
+        {
+          "seed": 10001,
+          "cap": 150,
+          "trace": 1
+        },
+        {
+          "seed": 10001,
+          "cap": 600,
+          "trace": 1
+        }
+      ],
+      "scope": "Historical raw-state transport damage; original child scalar hashes remain unedited. Final r3 recollects both exact Game roots with UTF-8 decoding and payload hash verification."
+    }
+  ]
+}

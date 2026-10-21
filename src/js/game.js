@@ -284,9 +284,9 @@
         if (r.ok === false) throw new Error('Data load failed: ' + f + ' (' + r.status + ')');
         return r.json();
       });
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json', 'gardening.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json', 'gardening.json', 'favor-rules.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules };
       // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
       // godhood.js derives its capstones from it (godhood.json retired).
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
@@ -5699,6 +5699,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Legacy late acceptance already received a minimum one-day window in
     // checkPromises; display that same window rather than an earlier raw ask.
     promiseDueDay(p) {
+      if(p?.companyVersion===1&&Number.isInteger(p.companyNight))return p.companyNight;
       const start = Number(p?.day ?? 0);
       if (!Number.isFinite(start)) return null;
       if (p?.favorDeadline == null) return start + 7;
@@ -5737,7 +5738,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 (requested.kind === 'sick_help' && kind === 'heal' && opts?.care === 'illness') ||
                 (requested.kind === 'water_haul' && opts?.waterFavorId === requested.id &&
                   requested.waterRun?.returned && requested.waterRun.deliveredLiters >= 4 &&
-                  requested.waterRun.bearer === this.villagerId)))) continue;
+                  requested.waterRun.bearer === this.villagerId) ||
+                (requested.kind === 'stay_close' && this.companyFavorReceipt?.(pid,requested,opts))))) continue;
           p.kept = true;
           // FAVOR OBLIGATIONS (convo favor system 2026-10-11): mark the
           // favor instance fulfilled and name the task — the fiction must
@@ -5764,7 +5766,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const t = v.trust || (v.trust = {});
             t[pid] = Math.min(100, (t[pid] || 10) + 15);
           }
-          if (p.favorTask) {
+          if (requested?.kind === 'stay_close') {
+            this.say(`${this.displayName(pid)} looks steadier as dawn reaches the fire. You stayed with them through the night.`);
+          } else if (p.favorTask) {
             // Name the kept task — the fiction knows what was done, not
             // just that a promise was. (Replaces the generic line.)
             this.say(`${this.displayName(pid)} catches your eye across the fire. "${p.favorTask}" — done. You kept your word. That meant everything.`);
@@ -6572,6 +6576,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     resolveOneAssignment(vid, a) {
       if(a.task==='garden'&&(!(this.state.village.roster||[]).includes(vid)||!this.getPerson(vid)||this.getPerson(vid).dead))return;
       if (this.waterFavorCompanions?.().includes(vid)) return;
+      if (this.companyFavorHolding?.(vid)) return;
       const v = this.state.village;
       const vp = (this.data.villagers || []).find(x => x.id === vid)
         /* unified: getPerson */ || {};
@@ -26667,7 +26672,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // LEADER: assigned villagers are out working — they don't do random things.
       const asg = v.assignments || {};
       const waterPartners = this.waterFavorCompanions?.() || [];
-      const free = people.filter(id => !asg[id] && !waterPartners.includes(id));
+      const free = people.filter(id => !asg[id] && !waterPartners.includes(id) && !this.companyFavorHolding?.(id));
       if (!free.length) return;
       const n = 1 + (Math.random() < 0.4 ? 1 : 0);
       for (let i = 0; i < n; i++) {

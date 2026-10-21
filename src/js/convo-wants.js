@@ -220,7 +220,7 @@
       },
     },
     stay_close: {
-      keepKind: 'social', goal: 'belong', deadlineDays: 1,
+      keepKind: 'social', goal: 'belong', deadlineDays: 0,
       build(vid, need, ctx) {
         const sev = (need.fear || 75) > 85 ? 2 : 0;
         const hh = this.convoFavorHash(vid, ctx) + sev;
@@ -1456,7 +1456,8 @@
         whyLines: parts.whyLines || null, commitLines: parts.commitLines || null,
         commitLine: parts.commitLine || '"Thank you. Seriously — thank you."',
         goodbye: parts.goodbye || '"Thank you."',
-        deadline: day + (def.deadlineDays || 2),
+        deadline: day + (def.deadlineDays ?? 2),
+        ...(need.kind === 'stay_close' ? {companyVersion:1,companyNight:day} : {}),
         state: 'asked', askedDay: day,
       };
     },
@@ -1490,6 +1491,9 @@
     // deadlines, and the journal all work. One open commitment per villager.
     convoFavorCommit(vid, favor) {
       if (!favor) return { ok: false };
+      if (favor.kind === 'stay_close' && this.companyFavorCommitGate) {
+        const gate=this.companyFavorCommitGate(vid,favor);if(!gate.ok)return{ok:false,line:gate.reason};
+      }
       if (this.convoFavorAction(vid, favor).unsupported) return { ok: false, unsupported: true };
       if (favor.vid !== vid || !['asked', 'promised'].includes(favor.state)) return { ok: false, closed: true };
       const v = this.state.village || {};
@@ -1508,6 +1512,10 @@
         v.promises[vid].waterHaulVersion = 1;
         favor.meetDay = day + 1;
       }
+      if (favor.kind === 'stay_close') {
+        v.promises[vid].companyVersion=1;v.promises[vid].companyNight=favor.companyNight;
+        favor.company=null;
+      }
       try { this.remember(vid, 'promise', 'promised: ' + favor.task); } catch (e) {}
       this.journalFavorPromise?.(vid, v.promises[vid], {});
       try { this.notePlaystyle('social'); } catch (e) {}
@@ -1521,6 +1529,7 @@
       const blocked = reason => ({ ready: false, reason });
       if (!favor || favor.vid !== vid) return blocked('There is no current request to act on.');
       if (favor.kind === 'water_haul' && this.waterFavorAction) return this.waterFavorAction(vid, favor);
+      if (favor.kind === 'stay_close' && this.companyFavorAction) return this.companyFavorAction(vid, favor);
       if (!['asked', 'promised'].includes(favor.state)) return blocked('This request is already closed.');
       const unavailable = {
         water_haul: 'The joint creek trip has no playable action yet. Assigning someone a water task does not perform this trip.',
@@ -1556,15 +1565,17 @@
       const status = this.convoFavorAction(vid, favor), out = [];
       if (status.ready) out.push({ id: 'dlg:favor_action', labels: [status.label], temper: 'kind' });
       out.push({ id: 'dlg:favor_requirements', labels: [status.ready ? 'What will helping involve?' : 'Why can’t I do this now?'], temper: 'neutral' });
-      if (canPromise && !status.unsupported) out.push({ id: 'dlg:commit', labels: ['"I’ll come back to help."'], temper: 'kind' });
+      if (canPromise && !status.unsupported && status.canPromise !== false) out.push({ id: 'dlg:commit', labels: [favor?.kind==='stay_close'?(favor.companyNight===this.state.scholar.day?'"I’ll meet you by the fire tonight."':'"I’ll meet you by the fire on night '+favor.companyNight+'."'):'"I’ll come back to help."'], temper: 'kind' });
       const promise = this.state.village.promises?.[vid];
       if (status.unsupported && promise?.favorId === favor?.id && !promise.kept) out.push({ id: 'dlg:favor_cancel', labels: ['Close this unavailable job (no penalty)'], temper: 'neutral' });
       if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned && this.waterFavorAction(vid,favor,true).ready) out.push({ id: 'dlg:favor_cancel', labels: ['End trip and unload what we have (break unfinished promise)'], temper: 'neutral' });
+      if (favor?.kind === 'stay_close' && promise?.favorId === favor.id && !promise.kept && !status.unsupported) out.push({ id:'dlg:favor_cancel',labels:['Break tonight’s company promise'],temper:'neutral' });
       return out;
     },
 
     convoPerformFavor(vid, favor) {
       if (favor?.kind === 'water_haul' && this.performWaterFavor) return this.performWaterFavor(vid, favor);
+      if (favor?.kind === 'stay_close' && this.performCompanyFavor) return this.performCompanyFavor(vid, favor);
       const status = this.convoFavorAction(vid, favor);
       if (!status.ready) return { ok: false, line: status.reason };
       const v = this.state.village;
@@ -1649,6 +1660,7 @@
     // convoFavorFollowup: the NPC remembers the prior ask. The follow-up
     // names it — never resets it, never re-asks verbatim.
     convoFavorFollowup(vid, favor) {
+      if (favor?.kind === 'stay_close' && this.companyFavorOpening) {const line=this.companyFavorOpening(vid,favor);if(line)return line;}
       const day = (this.state.scholar || {}).day || 0;
       const open = this.openFavorObligation(vid);
       if (favor.state === 'promised' && open) {
@@ -1703,6 +1715,7 @@
 
     // convoFavorDeadlineNote: for the repay reminder.
     convoFavorDeadlineNote(favor) {
+      if (favor?.kind === 'stay_close' && this.companyFavorDeadline) return this.companyFavorDeadline(favor);
       const day = (this.state.scholar || {}).day || 0;
       const p = this.state.village.promises?.[favor.vid];
       const due = p?.favorId === favor.id ? this.promiseDueDay(p) : favor.deadline;

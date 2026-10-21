@@ -1,0 +1,43 @@
+tar: Cannot connect to C: resolve failed
+node:child_process:964
+    throw err;
+    ^
+
+Error: Command failed: tar -xf C:\Users\Steve\oversight\.git\overnight-save-installed-base-r2.tar -C C:\Users\Steve\oversight\.git\overnight-save-installed-base-r2
+tar: Cannot connect to C: resolve failed
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:925:11)
+    at Object.execFileSync (node:child_process:961:15)
+    at Object.<anonymous> (C:\Users\Steve\.codex\worktrees\conversation-structure-current\oversight\evidence\2026-10-20\overnight-save-installed-prepare-r2.cjs:8:157)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14) {
+  status: 128,
+  signal: null,
+  output: [
+    null,
+    Buffer(0) [Uint8Array] [],
+    Buffer(41) [Uint8Array] [
+      116,  97, 114,  58,  32,  67,  97, 110, 110,
+      111, 116,  32,  99, 111, 110, 110, 101,  99,
+      116,  32, 116, 111,  32,  67,  58,  32, 114,
+      101, 115, 111, 108, 118, 101,  32, 102,  97,
+      105, 108, 101, 100,  10
+    ]
+  ],
+  pid: 83344,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(41) [Uint8Array] [
+    116,  97, 114,  58,  32,  67,  97, 110, 110,
+    111, 116,  32,  99, 111, 110, 110, 101,  99,
+    116,  32, 116, 111,  32,  67,  58,  32, 114,
+    101, 115, 111, 108, 118, 101,  32, 102,  97,
+    105, 108, 101, 100,  10
+  ]
+}
+
+Node.js v24.13.0

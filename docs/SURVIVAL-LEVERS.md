@@ -1,5 +1,64 @@
 # Survival levers and investigation register
 
+## Company-favor candidate (2026-10-21)
+
+`favor-rules.json` owns minimum continuous presence32 ticks, shared-fire
+radius2, partner distance1, fear relief40 and social relief20. The relief
+matches ordinary comfort and requires an actually kept company promise.
+Existing kept/renounced promise trust and bond consequences remain. New
+requests are due at the current dawn, rather than the generic next-day floor.
+Old unavailable open requests receive one pinned fair night on load.
+
+Join grants no relief, food or healing. Paid waiting uses normal metabolism;
+nearby Sleep retains its real recovery. Active attendance reserves the NPC's
+labor: garden duty and other autonomous work cannot happen simultaneously.
+Explicit orders interrupt presence. Standing roles survive the interruption.
+Fire expiry, distance, door side, danger and bearer ownership are real gates.
+
+Matched16-per-policy panels under the same collector retain review_required:
+wins capable16→16, maker6→7, merchant8→8, caregiver10→10. Every changed
+metric case (capable8, maker8, caregiver4) replays complete state/outcome/all23
+exactly. First coarse differences are trust at day74/day93 and NPC work/food
+at day100. These do not establish the causal chain to later endings. More wins
+do not erase prior garden, class, community, gear or Table warnings. No
+compensating HP, food, reward or Table tuning was added. See the dated
+company-favor audit and passive opportunity report before claiming use.
+
+Decision: this is an authored playable-job correction for development release,
+pending the remaining publication checks. Natural completed-night viability
+is unproven; prepared touch completion is a separate boundary. Muse retains
+numerical calibration. No population equivalence or difficulty improvement is
+claimed from this screening panel.
+
+## Completed time persistence (2026-10-20 candidate)
+
+Candidate d09f47ea2-20261021-042230 changes when time/Sleep writes become durable,
+not cost/healing/metabolism numbers. Completed waking recovery is now saved,
+and an actual depleted bedtime's five-HP penalty is also retained through
+Continue. These effects matter to people who reload; headless campaigns do not
+measure that advantage/cost boundary. Failed partial settlement cannot overwrite
+the prior checkpoint. Old partial nights cannot be reconstructed by a clock clamp.
+
+Current-reader matched16-per-policy screens retain identical all23 vectors,
+four neutral controls/arm and no warnings. Four exact terminal diagnostic pairs
+retain outcomes/RNG/all23, with only saveSeq and existing pacing clock differences
+in state. No win, HP, food or Table adjustment compensates for the correctness
+fix. Earlier garden/playstyle/class/gear/community/Table warnings remain open.
+Read TIME-SETTLEMENT.md and overnight-save-audit-r1, including the corrected
+report-reader identity and historical raw-state damage, before calibration.
+
+## Terminal caregiver investigation (2026-10-20)
+
+No Game numerical lever changed. Four preselected capped cases reach actual
+engine wins after faithful extension; earlier caregiver Table-pace/population
+warnings remain open. The shared simulator now ends partial combat turns with
+real public Wait, preserving its ability hooks.64 matched methodology controls
+retain identical complete Game states and all23 vectors; rare10003 exercises
+the former shortcut. This is a harness correction, not a balance improvement.
+Current phone feedback/Table entry fixes change presentation, not Game gates.
+See TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1 for source identities,
+all measures, actual phone evidence and the next overnight-save integrity lane.
+
 ## Haven entrance shipped (2026-10-20,9026efa1d)
 
 Generated tents can no longer occupy the south doorstep(4,5). A tent that

@@ -1,0 +1,186 @@
+{
+  "checks": [
+    {
+      "arm": "haven",
+      "stable": true,
+      "neutralControls": 8,
+      "exactPrefixes": 4,
+      "engineTerminalCases": 4
+    },
+    {
+      "arm": "current",
+      "stable": true,
+      "neutralControls": 8,
+      "exactPrefixes": 4,
+      "engineTerminalCases": 4
+    },
+    {
+      "arm": "wait",
+      "stable": true,
+      "neutralControls": 8,
+      "exactPrefixes": 4,
+      "engineTerminalCases": 4
+    },
+    {
+      "arm": "final",
+      "stable": true,
+      "neutralControls": 8,
+      "exactPrefixes": 4,
+      "engineTerminalCases": 4
+    }
+  ],
+  "replays": 12,
+  "outcomes": [
+    {
+      "seed": 10001,
+      "historical": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 95,
+        "bearer": "ivy_wang",
+        "driverForcedTurns": 0
+      },
+      "releasedGarden": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 118,
+        "bearer": "ivy_wang",
+        "driverForcedTurns": 0
+      },
+      "final": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 118,
+        "bearer": "ivy_wang",
+        "driverForcedTurns": 0
+      }
+    },
+    {
+      "seed": 10003,
+      "historical": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 270,
+        "bearer": "gen_z1akfst",
+        "driverForcedTurns": 2
+      },
+      "releasedGarden": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 195,
+        "bearer": "nikos_papadopoulos",
+        "driverForcedTurns": 3
+      },
+      "final": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 195,
+        "bearer": "nikos_papadopoulos",
+        "driverForcedTurns": 0
+      }
+    },
+    {
+      "seed": 10004,
+      "historical": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 159,
+        "bearer": "omar_farouk",
+        "driverForcedTurns": 0
+      },
+      "releasedGarden": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 270,
+        "bearer": "gen_r06g1h5",
+        "driverForcedTurns": 0
+      },
+      "final": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 270,
+        "bearer": "gen_r06g1h5",
+        "driverForcedTurns": 0
+      }
+    },
+    {
+      "seed": 10008,
+      "historical": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 150,
+        "bearer": "gen_mqnb28x",
+        "driverForcedTurns": 0
+      },
+      "releasedGarden": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 204,
+        "bearer": "gen_3olt2xc",
+        "driverForcedTurns": 0
+      },
+      "final": {
+        "engineOver": true,
+        "won": true,
+        "villageLost": false,
+        "harnessEnd": "over-other",
+        "watchdogRoutes": 0,
+        "status": "won",
+        "day": 204,
+        "bearer": "gen_3olt2xc",
+        "driverForcedTurns": 0
+      }
+    }
+  ],
+  "method": {
+    "cases": 64,
+    "changedSources": [
+      "scripts/sim-harness.js"
+    ],
+    "standardComparator": "invalid"
+  }
+}

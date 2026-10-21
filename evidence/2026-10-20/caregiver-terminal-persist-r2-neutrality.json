@@ -1,0 +1,39 @@
+{
+  "canonicalExact": true,
+  "wallClockExclusions": [
+    "lastTs",
+    "dayMinutes",
+    "totalMin"
+  ],
+  "fields": [
+    "seed",
+    "cap",
+    "policy",
+    "sources",
+    "observer",
+    "row",
+    "stateHash",
+    "observation",
+    "terminal",
+    "notes",
+    "warnings",
+    "hookErrors",
+    "traceErrors",
+    "entropyErrors",
+    "trace",
+    "bridge",
+    "finalState",
+    "rngTail"
+  ],
+  "storageExact": true,
+  "opportunities": {
+    "late": 240,
+    "table": 5,
+    "fight": 0
+  },
+  "captured": [
+    "late",
+    "table"
+  ],
+  "scope": "Two separate current-source real-storage processes. Capture on/off matches complete result including state, all23 metrics, policy context and RNG/clock boundaries. Not the old no-storage trajectory."
+}

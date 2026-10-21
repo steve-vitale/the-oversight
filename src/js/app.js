@@ -13078,6 +13078,10 @@
       const content = document.createElement('div'); content.className = 'field-tool-content';
       contents[name] = content; body.appendChild(content);
     }
+    // The endgame invitation belongs at the top of Place, with its actual
+    // readiness/cost explanation. Move the existing entry; never duplicate it.
+    const tableEntry=frame.querySelector('[data-table-seat]')?.closest('p')?.parentElement;
+    if(tableEntry){tableEntry.classList.add('field-table-entry');contents.place.appendChild(tableEntry);}
     const gardenEntry=frame.querySelector('[data-open-garden]');
     if(gardenEntry)contents.place.appendChild(gardenEntry);
     for (const selector of ['.ord-surround','.ord-compass','.ord-quest-top','.ord-panel','.ord-taphint']) {
@@ -13173,7 +13177,8 @@
     }
     actions.appendChild(row);
     const notice = decorateFieldMessage();
-    if (statusNotes.length) { notice.textContent = statusNotes.map(el => el.textContent.trim()).join(' · '); notice.hidden = false; }
+    // World reminders already live in Place. Copying them here covered the
+    // actual turn, reply and action feedback as the late-game list grew.
     if (targeting) { notice.textContent = targeting.prompt; notice.hidden = false; }
     if (inlineView && inlineView.kind !== 'person') fieldPanel = null;
     if (st.pendingEncounter) fieldPanel = 'place';
@@ -14644,9 +14649,11 @@
       const r = Game.save();
       if (r === true) {
         __saveFailToasted = false;
-      } else if ((r === false || r === 'tombstoned' || r === 'stale') && !__saveFailToasted) {
+      } else if ((r === false || r === 'tombstoned' || r === 'stale' || r === 'settlement_failed') && !__saveFailToasted) {
         __saveFailToasted = true;
-        toast(r === 'tombstoned'
+        toast(r === 'settlement_failed'
+          ? 'Time could not finish. Reload and Continue from your last saved checkpoint.'
+          : r === 'tombstoned'
           ? "This expedition's save was ended somewhere else (another tab?) — progress since your last save is at risk."
           : r === 'stale'
           ? 'Another tab saved this expedition more recently — this tab paused saving so it would not overwrite that progress. Close the other tab and reload here to keep playing.'
