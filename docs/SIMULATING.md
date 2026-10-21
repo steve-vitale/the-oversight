@@ -1,5 +1,17 @@
 # Simulating The Oversight — how to measure a change
 
+Donation receipt maintenance (2026-10-21): garden-longplay-audit uses
+scripts/lib/donation-usage.js to observe direct donateToPantry calls. It records
+actual removed rows with matching gift credit, refusals and discards without
+credit separately. It calls no permission/RNG helpers. Its source hash is part
+of the audit cache fingerprint. Actual on/off controls compare Game hash, row,
+all23 metrics, RNG and native donation counters. These are auxiliary receipts,
+not new balance-scorecard metrics or coverage of all pantry production/gifts.
+Current competent donated/donatedKcal mean successful transfers; older reports
+counted attempts. Preserve historical reports and compare matching tools on
+both roots. The garden-transfer-review-r1 recipe validates the current paired
+screen, all long cohorts, natural receipt agreement and explicit baseline reuse.
+
 Solo continuation revision (2026-10-21): current sim-harness records stop and
 communityExposure separately and does not stop a living bearer after ten empty
 community iterations. A cap remains incomplete play. Use communityLossCoverage

@@ -1393,26 +1393,51 @@ function forageTripSeedFirst(Game, ctx) {
 
 // Donate the haul: identified edible inventory food goes to the pantry.
 // (The seed was already sown by trySow; the player keeps a 1-day buffer.)
-function donateHaul(Game, ctx) {
+function donationFoodReady(Game,it) {
+  return !!it&&Number.isFinite(it.kcalEach)&&it.kcalEach>0&&
+    Number.isFinite(it.units??1)&&(it.units??1)>0&&!it.bonded&&it.edible!==false&&
+    it.safe!==false&&!it.needsCooking&&it.foodState!=='in_shell'&&
+    !it.diseaseRisk&&!it.poisonRisk&&!it.parasiteRisk&&!Game.isSpoiled(it);
+}
+// Both donation decisions use physical removal AND the engine's gift ledger.
+// null is the public action's result on success as well as refusal.
+function donateSurplus(Game,ctx,options={}) {
+  let transferred=0;
   try {
-    // HALL GATE (journey landing 2026-10-15): the pantry is in the hall —
-    // donating from the wild prints one honest refusal PER ITEM (160 lines
-    // in 3 days on seed 49). A competent player learns the rule and stops
-    // trying until they're home; the game already says it once, honestly.
-    if (Game.havenStoresAccess && Game.havenStoresAccess() === 'none') return 0;
-    const s = Game.state.scholar;
-    const cap = Game.kcalCap ? Game.kcalCap() : 2400;
-    const keep = process.env.COMPETENT_TRADE_RESERVE === '1' ? cap * 3 : cap; // targeted traders retain two extra personal days as stock
-    let packKcal = (s.inventory || []).reduce((t, i) => t + (gardenFoodReady(Game,i) ? (i.kcalEach || 0) * (i.units || 1) : 0), 0);
-    const inv = s.inventory || [];
-    for (let i = inv.length - 1; i >= 0; i--) {
-      const it = inv[i];
-      if (!it || (it.kcalEach || 0) <= 0 || it.edible === false || !gardenFoodReady(Game,it)) continue;
-      const ik = it.kcalEach * (it.units || 1);
-      if (packKcal - ik < keep) continue; // keep the buffer
-      try { Game.donateToPantry(i); packKcal -= ik; ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; } catch (e) {}
+    if(Game.havenStoresAccess&&Game.havenStoresAccess()==='none')return 0;
+    const s=Game.state.scholar,inv=s.inventory||[],active=gardenActorGuard(Game,true);
+    const cap=Game.kcalCap?Game.kcalCap():2400;
+    const keep=options.keepKcal??(process.env.COMPETENT_TRADE_RESERVE==='1'?cap*3:cap);
+    const max=options.maxTransfers??Infinity;
+    if(!Number.isFinite(keep)||keep<0)return 0;
+    for(let i=inv.length-1;i>=0&&transferred<max&&active();i--){
+      const it=inv[i];if(!donationFoodReady(Game,it))continue;
+      const kcal=it.kcalEach*(it.units??1);
+      const available=inv.reduce((n,item)=>n+(donationFoodReady(Game,item)?item.kcalEach*(item.units??1):0),0);
+      if(available-kcal<keep)continue;
+      const room=Game.pantryCapKcal()-Game.pantryKcal();
+      if(!Number.isFinite(room)||room<kcal)continue; // whole-stack action only
+      const vid=Game.villagerId,before=(Game.state.village.gives||{})[vid]||0;
+      ctx.donationAttempts=(ctx.donationAttempts||0)+1;
+      Game.donateToPantry(i);
+      const credited=((Game.state.village.gives||{})[vid]||0)-before;
+      const removed=!inv.includes(it);
+      if(removed&&Math.abs(credited-kcal)<1e-6){
+        transferred++;ctx.donated=(ctx.donated||0)+1;
+        ctx.donatedKcal=(ctx.donatedKcal||0)+credited;
+        ctx._lastGiveDay=s.day||0;
+      }else if(!removed&&credited===0)ctx.donationRefusals=(ctx.donationRefusals||0)+1;
+      else throw Error('Donation removal and gift credit disagree');
     }
-  } catch (e) {}
+  }catch(e){
+    ctx.donationErrors=(ctx.donationErrors||0)+1;
+    (ctx.notes||(ctx.notes=[])).push('donateSurplus: '+e.message);
+    console.warn('[policy] donateSurplus: '+e.message);
+  }
+  return transferred;
+}
+function donateHaul(Game,ctx) {
+  return donateSurplus(Game,ctx);
 }
 
 // SORT THE HAUL (bal-survival 2026-10-10): foraging yields unknowns, period —
@@ -2706,12 +2731,7 @@ const competent = {
         const s = Game.state.scholar;
         const cap = Game.kcalCap();
         if (s.kcal > cap * 1.5) {
-          const inv = s.inventory || [];
-          for (let i = inv.length - 1; i >= 0; i--) {
-            if ((inv[i].kcalEach || 0) > 0 && inv[i].foodState !== 'raw') {
-              try { Game.donateToPantry(i); ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; break; } catch (e) {}
-            }
-          }
+          donateSurplus(Game,ctx,{keepKcal:cap*2,maxTransfers:1});
         }
       }
     } catch (e) {}
@@ -3021,3 +3041,4 @@ module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walk
 module.exports.gearUp = gearUp;
 
 module.exports.workGarden = workGarden;
+module.exports.donateSurplus = donateSurplus;

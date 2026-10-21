@@ -1,5 +1,30 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
+## Truthful surplus transfers (2026-10-21)
+
+Both competent-controller donation decisions use donateSurplus: known usable
+food only, a real safe-food reserve, current pantry room and whole-stack public
+actions. Unsafe/unknown/bonded/empty/unshelled stacks cannot pad the reserve.
+Use the engine's preservation-aware spoilage boundary. A successful call must
+remove the actual pack row and earn the matching gift credit; null alone says
+nothing. donated and donatedKcal now count these transfers; donationAttempts
+and donationRefusals remain separate. _lastGiveDay changes only on success.
+The secondary decision retains two days of pack food and one transfer per call;
+the main haul keeps its existing one-day or opt-in trading reserve.
+
+garden-longplay-audit now retains an independent passive direct-donation
+receipt stream and controller counters, with real on/off controls including
+the counters. Baseline/candidate use the same observer and Game; controller
+changes require an explicit methodology comparison. Historical attempt counters
+cannot be relabeled physical gifts. This does not change the all23 contract.
+
+Partial donation remains a player-facing gap: one huge crop stack cannot be
+partly stored through Donate. The controller skips it and tries smaller fitting
+stacks; it never rewrites inventory to simulate a public action. Address the
+real Pack flow next, with phone and Continue proof, before numerical calibration.
+The living-bearer cutoff mentioned in older entries below is already repaired;
+see TERMINAL-CAMPAIGNS.md and solo-campaign-audit-r1.
+
 ## Garden controller food loop (2026-10-21)
 
 The shared controller now harvests before new investment and after paid growth,

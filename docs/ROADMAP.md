@@ -1,5 +1,29 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Garden transfer receipts; next public partial donation (2026-10-21)
+
+The current controller counts real food removal plus matching gift credit,
+keeps safe pack reserves, skips oversized/full-pantry attempts and considers
+smaller fitting stacks. Both donation decisions share this logic. The 15 shared
+receipt checks and existing23 garden-controller checks cover real transfers,
+refusals, food risk, preservation and reserve/capacity behavior. The natural
+screen/long evidence and all23 tradeoff review live under garden-transfer-*.
+No Game crop price, timing, yield, capacity or player action changes here.
+The screen is review_required: wins15→16/6→7/9→9/8→8 with increased
+deaths/run in three policies. Claimed donations now match physical transfers,
+but actual sharing falls and spoilage rises. Fifteen receipt tests,23 existing
+controller checks,16 long observer controls,14 changed-screen replays and eight
+full-state storage probes support this scope; see garden-transfer-audit-r1.
+
+Next bounded milestone: make partial donation a real Pack action, allowing a
+player to keep meals and put a fitting portion of a large crop stack into the
+pantry. Preserve identity, food state, cultivated provenance, capacity and gift/
+take-back accounting; never credit a refused or retained portion. Prove actual
+phone controls, cancellation, paid/free behavior, committed bytes and Continue,
+then teach the shared controller that same public action. Keep Muse's numerical
+crop/power lane separate until earned Gardener/upper-tier cohorts and useful
+consumption/storage are represented. Earlier entries are historical.
+
 ## Solo campaign continuation verified (2026-10-21)
 
 The driver now continues a living bearer after sustained community collapse.

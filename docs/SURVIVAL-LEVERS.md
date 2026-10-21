@@ -1,5 +1,29 @@
 # Survival levers and investigation register
 
+## Donation controller methodology (2026-10-21)
+
+No Game lever changes. The controller's contribution timing now follows actual
+food transfers, and its safe-food reserve excludes unusable items. Capacity
+preflight avoids futile whole-stack gifts; a second donation decision now
+honors its documented two-day reserve and the same safety rules. This can
+change forage timing, survival, community trust and progression; compare all23
+per policy as a declared controller revision. Do not restore wins to a target.
+The direct-donation observer checks physical receipts independently of native
+policy counters. Partial player transfers and earned build cohorts remain
+follow-ups; retained garden-transfer evidence supplies the tradeoff decision.
+
+Current64-case screen remains review_required: wins15→16/6→7/9→9/8→8;
+deaths/run rise for capable/maker/caregiver. Fourteen independent changed-case
+replays match hashes/rows/all23. Both82-job long arms pass eight real neutral
+controls each; all ten extended cases per arm reach real endings through309.
+Claimed180 gifts versus97 physical transfers become23 matched gifts, with
+83→0 refusals. This is accounting accuracy, not increased sharing: actual
+gift calories493,516→46,465, crop intake1,719,837→1,715,632 and measured
+spoilage7,058,265→7,485,137. Named pack snapshots expose unsafe meat gifts
+but do not justify every lost safe crop gift. Decision: share the truthful
+controller with watches open, then add the real partial-transfer action;
+do not calibrate crop prices or label the storage result an improvement.
+
 ## Solo campaign methodology (2026-10-21)
 
 No Game lever, crop timing, food price, haven capacity or ability changed.
