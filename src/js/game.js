@@ -15317,9 +15317,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const vid = this.state.scholar.villagerId;
       v.takes[vid] = (v.takes[vid] || 0) + totalKcal;
       const net = (v.gives[vid] || 0) - (v.takes[vid] || 0);
-      let _pk = 8000;
-      try { _pk = Math.max(1000, this.pantryKcalLive(v)); } catch (e) {}
-      if (net < -Math.min(5000, _pk)) {
+      // FAIR-SHARE RATE (sim-thiefcooldown-b 2026-10-20): same fix as the
+      // single-take path just above — the old cumulative `net < -5000`
+      // (pantry-scaled) bar read ordinary packing-out as hoarding. The dated
+      // history is recorded BEFORE the bar so the trailing-7d rate includes
+      // this pack, mirroring takeFromPantry. Bar: 3000 kcal/day abuse bar
+      // (sim-findings #156 spec), same as the single path.
+      try { this.recordTakeHist(vid, totalKcal); } catch (e) {}
+      const netRate7b = this.takeRate7(vid) - this.giveRate7(vid);
+      if (netRate7b >= 3000) {
         // ZERO-TRUST STAYS ZERO (same doctrine as bumpTrust + the revoke
         // path below): (v.trust[vid] || 15) resurrected a 0-trust villager
         // to 13 on every take — a hated leader could never stay hated.
@@ -15334,8 +15340,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // BLATANT THEFT with witnesses present: direct confrontation.
       // Nothing stops your hand — but someone may stop your nerve.
-      // totalKcal is THIS pack (one take); the rate check inside reads takeHist.
-      try { this.recordTakeHist(vid, totalKcal); } catch (e) {}
+      // totalKcal is THIS pack (one take); the rate check inside reads
+      // takeHist (recorded above, before the trust bar).
       try { this.theftConfrontation(totalKcal); } catch (e) {}
       // TAKE-BACK (miser break-it 2026-10-08): the single-take path penalizes
       // taking back what you gave; the bulk path never did — donate 5000 /
@@ -15419,8 +15425,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.takes[vid] = (v.takes[vid] || 0) + (item.kcalEach || 0);
       try { this.recordTakeHist(vid, item.kcalEach || 0); } catch (e) {}
       const net = (v.gives[vid] || 0) - (v.takes[vid] || 0);
-      // if you're taking way more than giving, trust drops
-      if (net < -5000) {
+      // FAIR-SHARE RATE (sim-thiefcooldown-b 2026-10-20): the old cumulative
+      // `net < -5000` bar had no time dimension — ~2.5 days of ordinary
+      // communal eating crossed it for good, so every later take read as
+      // theft: a Light Fingers scholar ate ~30 "Caught red-handed!" in 10
+      // days on seed 8801 (findings backlog 2026-10-20). Same defect class
+      // the r7 theftConfrontation and r9 freeloaderTick fixes already closed:
+      // judge the trailing-7-day NET take rate against the 3000 kcal/day
+      // abuse bar (1.5x the ~2000 fair-share norm, Steve 2026-10-06) — the
+      // bar pre-registered by sim-findings #156 (2026-10-14) for exactly this
+      // judgment, same as theftConfrontation's rate bar. Eating your own
+      // day's food is never evidence — sustained over-share taking is.
+      // Genuine theft still punished: single big grabs trip
+      // theftConfrontation's this-take bar, sustained 2000+/day drains trip
+      // the freeloader clock. (takeHist for THIS take was recorded just
+      // above, so the rate includes it.)
+      const netRate7 = this.takeRate7(vid) - this.giveRate7(vid);
+      if (netRate7 >= 3000) {
         // THIEF (Light Fingers): 50% chance to steal without trust loss.
         // If caught, -20 trust (worse than the normal -2).
         if (this.hasAbility('thief')) {

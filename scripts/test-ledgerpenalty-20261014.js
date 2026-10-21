@@ -134,9 +134,14 @@ async function main() {
   resetLedger(); setDay(90);
   v.takes[vid] = 28000; v.gives[vid] = 14000; // cumulative net -14000
   seedRate(4000, 2000, 7, 90);                // net rate (28500/7)-2000 = 2071/day
+  // (sim-thiefcooldown-b 2026-10-20: the take-back -5 needs givePending (set
+  // by donateToPantry) or owed giveTrust/giveXP — bare v.gives never arms it.
+  // Arm it honestly so T6 really exercises the guard it names.)
+  v.givePending = v.givePending || {}; v.givePending[vid] = true;
   const t6 = pantryTake(500, 10);
   // fixed: per-take penalty silent (2071 < 3000), take-back -5 still fires
-  // (gave>0, net<=0 — the donate-take-back exploit guard is a separate system).
+  // (gave>0, net<=0, givePending — the donate-take-back exploit guard is a
+  // separate system, untouched by the rate-bar fix).
   ok('T6: contributor stung ONLY by the take-back guard (-5), not the penalty',
     t6 === 5, `trust 10 -> ${t6} (pristine: 3 = -2 penalty + -5 take-back)`);
 

@@ -8,6 +8,8 @@
 // The codebase already fixed this pattern in bumpTrust and in the revoke path
 // directly below ("a real 0 must stay 0"); the two take paths were missed.
 // Fix: `v.trust[vid] === undefined ? 15 : v.trust[vid]`.
+// 2026-10-20 (sim-thiefcooldown-b): the test's trip fixture updated for the
+// fair-share-rate bar (see above); the doctrine assertions are unchanged.
 // Exit 0 = green, 1 = failure. RED-verified on pristine game.js.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
@@ -36,8 +38,15 @@ function lightPack(Game) { Game.state.scholar.inventory = []; }
   v.trust = v.trust || {};
   v.takes = v.takes || {}; v.gives = v.gives || {};
 
-  // force the net < -5000 gate: heavy taker, no gives
+  // trip the "noticed" bar: heavy taker, no gives.
+  // (sim-thiefcooldown-b 2026-10-20: the bar is now the trailing-7d NET take
+  // rate vs the 3000 kcal/day abuse bar (sim-findings #156 spec), not the
+  // cumulative `net < -5000` ledger — a single 400-kcal take no longer trips
+  // it. Seed the dated take history (22000 kcal -> ~3142/day) so the bar
+  // trips under the new design; the assertions below pin the zero-trust
+  // doctrine on the -2 path itself, unchanged.)
   v.takes[vid] = 6000; v.gives[vid] = 0;
+  Game.recordTakeHist(vid, 22000);
 
   // 1. THE BUG: trust exactly 0 must stay 0 after a take
   lightPack(Game); v.trust[vid] = 0;
