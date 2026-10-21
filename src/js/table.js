@@ -79,10 +79,11 @@
         if (full && full.ok) return { seat: 'full', detail: full };
         const d = (typeof this.deedState === 'function') ? this.deedState() : {};
         const faced = (d && d.wavesFaced) || {};
-        let w1 = 0, w2 = 0, w3 = 0;
+        let w1 = 0, w2 = 0, w3 = 0, w4 = 0, w5 = 0;
         for (const mid of Object.keys(faced)) {
           const w = faced[mid] | 0;
           if (w === 1) w1++; else if (w === 2) w2++; else if (w === 3) w3++;
+          else if (w === 4) w4++; else if (w === 5) w5++;
         }
         const contestsN = (d && d.contestsSurvived) | 0;
         const pg = this.progState();
@@ -95,10 +96,32 @@
         const s = this.state.scholar || {};
         const foodDeeds = !!(pg.sentimentTaught && s.prog && s.prog.feastSurgeUsed);
         const lesser = w1 >= 4 && w2 >= 4 && w3 >= 3 && contestsN >= 2 && crisesN >= 2 && scaleOk && stage >= 2 && foodDeeds;
-        const detail = { w1, w2, w3, contestsN, crisesN, rank, stage, foodDeeds };
+        const detail = { w1, w2, w3, w4, w5, contestsN, crisesN, rank, stage, foodDeeds };
         if (lesser) return { seat: 'lesser', detail };
         return { seat: 'none', detail };
       } catch (e) { return { seat: 'none', detail: {} }; }
+    },
+
+    // tableSeatLine: the audit's seat line, extracted so the voicing is
+    // proof-testable without running the full tableScene modal flow.
+    // journey-endgame r35 (lane B, 2026-10-21): the lesser line used to
+    // hardcode "waves 1–3 faced" — villages that bled for wave-4/5 deeds
+    // heard an audit that pretended those deeds didn't exist. It now names
+    // nonzero w4/w5 counts (voicing only — pricing unchanged). With no
+    // w4/w5 deeds the line is byte-identical to the old voicing.
+    tableSeatLine(seat) {
+      const d = (seat && seat.detail) || {};
+      if (seat && seat.seat === 'full') {
+        return `A full seat. ${d.rank || 'National'} standing, every wave faced, the deeds complete. The table rises when you enter.`;
+      }
+      let extra = '';
+      try {
+        const parts = [];
+        if ((d.w4 | 0) > 0) parts.push(`${d.w4 | 0} wave-4`);
+        if ((d.w5 | 0) > 0) parts.push(`${d.w5 | 0} wave-5`);
+        if (parts.length) extra = `, with ${parts.join(' and ')} fought`;
+      } catch (e) {}
+      return `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0})${extra}, ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
     },
 
     // ============ EARNED PATHS ============
@@ -481,9 +504,9 @@
       try { this.music('scenario', 'table'); } catch (e) {}
       this.say('◈ THE TABLE — it is not a table. It\'s a ring of pale light, and around it, things with too many angles to be faces. Above it all — the audience. Trillions of eyes, and every one of them knows your name. The System speaks, and for once it isn\'t performing: "HUMANITY PRESENTS ITS CASE."');
       // THE AUDIT — the table prices the run aloud.
-      const seatLine = seat.seat === 'full'
-        ? `A full seat. ${d.rank || 'National'} standing, every wave faced, the deeds complete. The table rises when you enter.`
-        : `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0}), ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
+      // (journey-endgame r35: the seat line is built by tableSeatLine so
+      // the voicing is proof-testable; wave-4/5 deeds are named when nonzero.)
+      const seatLine = this.tableSeatLine(seat);
       this.say(`◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. ${seatLine}`);
       // NPC ASCENSION PRICING (journey-endgame r7 2026-10-13): the audit
       // voices the ascension bonus that tableEarnedPaths prices into each

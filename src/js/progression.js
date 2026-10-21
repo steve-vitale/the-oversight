@@ -778,8 +778,10 @@
           try { seat4 = (((typeof this.tableSeat === 'function') ? this.tableSeat() : null) || {}).seat || 'none'; } catch (e2) {}
           this.progState().tableWaiting = true;
           // The beat is honest about the seat: the full-seat text names all
-          // five waves; the lesser-seat text names only waves 1-3 (the ones
-          // the run actually faced). Claiming the Mirror Draft and the
+          // five waves; the lesser-seat text names only waves 1-3 in the ARC
+          // IV line itself (the ones the lesser bar checks) — wave-4/5
+          // deeds, when faced, are named in the seated audit (tableSeatLine,
+          // journey-endgame r35 2026-10-21). Claiming the Mirror Draft and
           // Producers on a lesser run would be a lie the audit would catch.
           // NO SPOILERS (Steve 2026-10-14): silent before day 90 — the
           // table is announced by tableAnnounce once the seat can be taken.
