@@ -31926,7 +31926,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15): a
       // titan or campaign piece (spawned with titan:true) remembers its map
       // object, so tbEnd can put it back when it wasn't beaten.
-      if (_origin && _origin.titan && this.tbfight) this.tbfight.worldOrigin = _origin;
+      // LINGERERS HOLD THE TREELINE (journey crisis r38 2026-10-21): a
+      // besieging raider (m.lingering) the scholar meets is lifted the same
+      // way — tbEnd puts it back when the scholar fled or lost. A flee used
+      // to delete the siege: the entity was removed at fight start and never
+      // restored, so bumping into a lingerer and running cleared it from the
+      // world and the endure/sortie choice never got its say.
+      if (_origin && (_origin.titan || _origin.lingering) && this.tbfight) this.tbfight.worldOrigin = _origin;
       const partyNames = fighters.filter(f => f.kind === 'villager').map(f => f.name);
       const dispName = this.monsterDisplayName(mdef.id);
       this.say(`⚔ ${dispName.toUpperCase()}!${count > 1 ? ` (${count} of them!)` : ''} ${partyNames.length ? partyNames.join(', ') + (partyNames.length > 1 ? ' join' : ' joins') + ' you!' : "You're on your own."}`);
@@ -42392,16 +42398,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // its tile at full strength. Before, nothing put it back: the Network
       // said "re-face it when ready" with nothing to face, and a lost titan
       // "remained" nowhere. Wild monsters still melt away (titan-only).
+      // LINGERERS HOLD THE TREELINE (journey crisis r38 2026-10-21): a
+      // besieging raider the scholar fled from or lost to goes back to the
+      // treeline — the siege continues; you ran, it didn't leave. A routed
+      // lingerer broke and ran (treeline clear of it); a slain one is gone.
+      // Restored wounded, not full: the scholar's blows landed.
       try {
         const o = f.worldOrigin;
         if (o && result !== 'won') {
-          const mine = (f.fighters || []).filter(x => x && x.kind === 'monster' && (((x.mdef || {}).id || x.monsterId || x.id) === o.id));
-          const standing = !mine.length || mine.some(x => x.alive && (x.hp || 0) > 0);
-          if (standing && this.worldMonsters().indexOf(o) < 0 && !this.monsterAt(o.tx, o.ty)) {
-            o.hp = o.maxHp || o.hp;
-            this.worldMonsters().push(o);
-            this.touchTileScene(o.tx, o.ty);
-            this.syncMonsterAlias();
+          const isLingerer = !!(o.lingering && !o.titan);
+          const lingererKeeps = isLingerer && (result === 'fled' || result === 'lost');
+          if (!isLingerer || lingererKeeps) {
+            const mine = (f.fighters || []).filter(x => x && x.kind === 'monster' && (((x.mdef || {}).id || x.monsterId || x.id) === o.id));
+            const standing = mine.filter(x => x.alive && (x.hp || 0) > 0);
+            const stillUp = !mine.length || standing.length > 0;
+            if (stillUp && this.worldMonsters().indexOf(o) < 0 && !this.monsterAt(o.tx, o.ty)) {
+              if (isLingerer) {
+                o.hp = Math.max(1, Math.min(o.maxHp || o.hp, (standing[0] && standing[0].hp) || 1));
+                try {
+                  const vv = this.state.village || {};
+                  o.tx = (vv.px !== undefined && vv.px !== null) ? vv.px : 4;
+                  o.ty = (vv.py !== undefined && vv.py !== null) ? vv.py : 4;
+                } catch (e2) {}
+                if (result === 'fled') this.say(`It didn't leave — you did. The treeline holds its shape; the siege goes on.`);
+              } else {
+                o.hp = o.maxHp || o.hp;
+              }
+              this.worldMonsters().push(o);
+              this.touchTileScene(o.tx, o.ty);
+              this.syncMonsterAlias();
+            }
           }
         }
       } catch (e) { console.warn('[titan] piece restore', e); }

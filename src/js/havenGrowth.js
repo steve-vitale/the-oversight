@@ -209,10 +209,25 @@
       try {
         const hx = (v.px !== undefined && v.px !== null) ? v.px : 4;
         const hy = (v.py !== undefined && v.py !== null) ? v.py : 4;
+        const day = (this.state.scholar || {}).day || 0;
         const ms = this.worldMonsters ? this.worldMonsters() : [];
         for (const m of ms) {
           if (!m || !m.lingering || (m.hp || 0) <= 0) continue;
           m.tx = hx; m.ty = hy;
+          // DRIFT (journey crisis r38 2026-10-21): the narration promises
+          // lingerers drift off within ~6 nights. The crisis-based moved-on
+          // valve (comms.js) only runs while a raid crisis is open — if the
+          // crisis resolved early (or never raised), the promise needs its
+          // own clock. Per-raider: ~6 nights of gorging, then it moves on.
+          // (The clock is stamped when lingering starts and is NOT reset by
+          // a fled fight — it didn't leave.)
+          if (day - (m.lingerSince || day) > 6) {
+            m.lingering = false;
+            let mn0 = 'it';
+            try { mn0 = (this.monsterDisplayName && this.monsterDisplayName(m.id)) || 'it'; } catch (e) {}
+            this.say(`🌙 The lingering ${mn0} paces the treeline one last night, then melts back into the dark. The gorge is over — the village outlasted it.`);
+            continue;
+          }
           // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the
           // raiders hold the treeline but do not gorge — the teeth can wait.
           // The crisis stays open; the player may still answer the call for
@@ -582,6 +597,10 @@
           // LINGERS at the treeline and gorges at each dawn until driven
           // off (havenGrowthDaily). The crisis threat, made persistent —
           // this is the situation the call-for-help chain exists for.
+          // DRIFT CLOCK (journey crisis r38 2026-10-21): stamp when the
+          // lingering starts; the ~6-night drift valve reads it. Never
+          // re-stamp an already-lingering raider.
+          if (!m.lingering) { try { m.lingerSince = (this.state.scholar || {}).day || 0; } catch (e) {} }
           m.lingering = true;
           this.say(`Nobody met ${this.articlePhrase(mname(m))} — it's still out there at the treeline. It'll gorge every night until it's driven off.`);
         }
@@ -626,7 +645,10 @@
         // wanderer's). Never overwrite it — the raiders hold at the
         // treeline with the rest instead.
         if (this.pendingEncounter) {
-          for (const rm of live) { rm.lingering = true; }
+          for (const rm of live) {
+            if (!rm.lingering) { try { rm.lingerSince = (this.state.scholar || {}).day || 0; } catch (e) {} }
+            rm.lingering = true;
+          }
           if (live.length) this.say(`Another shape at the treeline — but the way is already watched. It'll wait out there with the rest.`);
         } else if (live.length) {
           const m = live[0];

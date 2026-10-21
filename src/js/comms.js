@@ -745,13 +745,24 @@
       if (crisis && !crisis.resolved && crisis.raiders && (crisis.ageParts || 0) >= 3) {
         var threat = false;
         try {
-          var vv = this.state.village || {};
-          var hx2 = (vv.px !== undefined && vv.px !== null) ? vv.px : 4;
-          var hy2 = (vv.py !== undefined && vv.py !== null) ? vv.py : 4;
-          var ms2 = this.worldMonsters ? this.worldMonsters() : [];
-          for (var i = 0; i < ms2.length; i++) {
-            var mm = ms2[i];
-            if (mm && mm.lingering && mm.tx === hx2 && mm.ty === hy2 && (mm.hp || 0) > 0) { threat = true; break; }
+          // LINGERING = BESIEGING (journey crisis r38 2026-10-21): the flag
+          // is only ever set on unmet raid raiders holding the treeline
+          // (havenGrowth.js). The old check also required the haven tile,
+          // but a lingerer mid-map (chasing, or restored after a fled
+          // fight before the next dawn re-pin) is still a threat — the tile
+          // equality let the 'fought' resolution fire with a raider still
+          // out there. Any living lingerer in the world is a threat.
+          var lings = this.lingeringRaiders ? this.lingeringRaiders() : [];
+          for (var i = 0; i < lings.length; i++) {
+            if (lings[i] && (lings[i].hp || 0) > 0) { threat = true; break; }
+          }
+          // LINGERER MID-FIGHT: a lingerer lifted off the map for a scholar
+          // fight is still a threat — it comes back to the treeline if the
+          // scholar flees or loses (worldOrigin restore). Don't resolve
+          // 'fought' mid-fight.
+          if (!threat) {
+            var tf = this.tbfight;
+            if (tf && !tf.over && tf.worldOrigin && tf.worldOrigin.lingering) threat = true;
           }
         } catch (e) {}
         if (!threat) this.resolveAidCrisis('fought');
