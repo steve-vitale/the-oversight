@@ -14,7 +14,12 @@ does not clear original population warnings, garden viability or useful intake.
 Natural day182 phone combat/Continue, earned level3+3 garden use and settled
 day267 Table visibility are the targeted mobile evidence. Candidate build
 ffe2259a9-20261021-033519 prioritizes action feedback and the existing Table
-entry; see caregiver-terminal-publication-r1.json for actual live confirmation.
+entry. Release19b91d67f is on shared master/main; caregiver-terminal-publication-r1.json
+verifies165 boot files plus worker/version/manifest and clean fresh phone boot.
+Fresh prepush273/0 quick and1,045/0 full checks passed. Receipt-only publication
+also gets fresh checks. The first readback still saw the old deployment;
+the retained second readback verifies the actual candidate, with no assertion
+waived. No whole-tree port or differing history is needed for this release.
 Codex next owns overnight-save integrity, especially nested pre-core saves.
 Muse retains numerical calibration. Fetch shared master/main; ancestry is
 preserved, and no wholesale port or replacement of later code is needed.

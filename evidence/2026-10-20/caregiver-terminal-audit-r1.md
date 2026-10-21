@@ -1,7 +1,7 @@
 # Caregiver terminal coverage and late-game phone feedback
 
-Bounded milestone under Steve's rolling release goal. Candidate build
-ffe2259a9-20261021-033519; publication follows fresh quick/full checks. Muse's
+Bounded milestone under Steve's rolling release goal. Released19b91d67f, live
+build ffe2259a9-20261021-033519, after fresh quick/full checks. Muse's
 recovery999c69491 remains an ancestor; fetch finds no newer remote work.
 Codex owns this coverage/phone correction; Muse retains numerical calibration.
 No survival/food/HP/reward/Table threshold was tuned.
@@ -102,7 +102,13 @@ farming, useful food intake or population-level gardening viability.
 
 Fresh caregiver-terminal-quick-final-r2 passes273/0 in68s; full-final-r2
 passes1,045/0 in323s. Current neutral and phone-frame proofs bind the candidate.
-Publish by ordinary fast-forward shared master/main, preserving Muse ancestry
-and the unrelated unstaged sweep-B.log. Record production input hashes/fresh
-phone boot separately. A later receipt-only push still requires fresh checks.
+Published by ordinary atomic fast-forward shared master/main and this feature
+branch, preserving Muse ancestry and the unrelated unstaged sweep-B.log.
+caregiver-terminal-publication-r1.json verifies165 boot files plus worker,
+version and manifest, with clean fresh touch-phone boot. The first readback
+correctly rejected the old build while deployment was pending; live-verify-r2
+then passed all168 inputs. Neither live assertion nor source hash was waived.
+The receipt-only follow-up independently passes fresh quick273/0 in69s and
+full1,045/0 in326s (publication-quick-r1/full-r1). Its changes are retained
+readback/docs evidence; the verified player runtime is unchanged.
 The rolling goal remains active; next is bounded overnight-save integrity.

@@ -6,9 +6,11 @@ Read TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1 before reusing the
 shared public-Wait harness. Four fixed cases now reach engine-terminal wins;
 exact prefix/observer/recovery evidence and real day182 phone combat/Continue
 are retained. Selected wins do not clear the existing balanced warnings.
-Candidate ffe2259a9-20261021-033519 also prioritizes current phone messages and
-moves the existing Table entry to the top of Place. Publication is confirmed
-only by caregiver-terminal-publication-r1.json, once retained.
+Release19b91d67f, live build ffe2259a9-20261021-033519, also prioritizes current
+phone messages and moves the existing Table entry to the top of Place.
+caregiver-terminal-publication-r1.json verifies165 boot files plus worker,
+version and manifest, with clean fresh touch-phone boot. Fresh prepush gates
+passed273/0 quick and1,045/0 full; receipt follow-up gets its own fresh checks.
 
 Codex's next bounded lane is coherent atomic overnight persistence. A nested
 pre-core announcement save can expose dayPart4 if interrupted. The normal

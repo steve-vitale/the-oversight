@@ -11,8 +11,10 @@ uses the actual public Wait; the matched64-case methodology control preserves
 complete Game states/all23 vectors. Future balance arms must use this harness.
 Natural day182 touch combat/Continue and coherent day267 Table entry are tested
 at736/844. The existing Table entry moves to the top of Place; world reminders
-stop covering current action feedback. Candidate ffe2259a9-20261021-033519
-awaits its recorded publication receipt, not an assumed live deployment.
+stop covering current action feedback. Release19b91d67f is live as
+ffe2259a9-20261021-033519. caregiver-terminal-publication-r1.json verifies165
+boot inputs plus worker/version/manifest and clean fresh touch-phone boot.
+Fresh release checks passed273/0 quick and1,045/0 full before the push.
 
 Next bounded Codex milestone: atomic/coherent overnight saves. A retained
 nested pre-core day266/part4 write is an interruption fixture; coherent completed
