@@ -1,0 +1,31 @@
+  ok   256 private terrain seeds keep the south doorstep walkable after all placement
+  ok   the south approach reaches the south, east and west rims without crossing the lodge
+  ok   reservation preserves the hall, fire and a real camp shelter
+  ok   normal Step outside succeeds
+  ok   the hall door emerges south of the hall, not in the northern garden
+  ok   door transit has not invented a walking charge
+  ok   the completed exit is already saved before unload or a later action
+  ok   a real paid step takes the player from the door toward the world
+  ok   the sibling hall entry is also saved immediately
+  ok   an older player-built doorstep obstruction has a usable alternate door landing
+  ok   using that alternate landing neither deletes nor repairs player structures
+  ok   Continue retains the actual grounds and player ownership metadata
+  ok   door use after Continue still preserves those structures
+  ok   legacy single-cache grounds are adopted without terrain replacement
+  ok   a completely sealed saved exterior refuses a normal exit
+  ok   refusal preserves all saved obstruction cells
+  ok   a failed combat door transit does not grant flight or end the fight
+  ok   a real combat door crossing still escapes onto the south approach
+  ok   successful door flight retains the actual monster and bearer ownership
+  ok   combat door persistence contains the finished transition and actual pursuer
+  ok   a walkable pocket is rejected for a connected alternate landing
+  ok   landing inspection never alters the saved terrain
+  ok   a real follower crosses to the same exterior as the player
+  ok   a resident who is not following remains on their own side of the door
+  ok   the follower also crosses the sibling entry without changing world node
+  ok   a stale inside flag cannot open a Haven door on a wild tile
+  ok   canonical paid construction creates a real doorstep tent and tracked campfire
+  ok   door round-trip preserves the paid camp, actual fuel ledger and tent
+  ok   native door persistence retains the paid camp and fuel through Continue
+
+Haven entrance access: 29 passed, 0 failed, 0 todo (phase 0)

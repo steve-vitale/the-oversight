@@ -1,0 +1,16 @@
+  FAIL 256 private terrain seeds keep the south doorstep walkable after all placement — [0,2,5,6,7,10,12,13,14,15,18,19,20,21,25,26]
+  FAIL the south approach reaches the south, east and west rims without crossing the lodge — [0,2,5,6,7,10,12,13,14,15,18,19,20,21,25,26]
+  ok   reservation preserves the hall, fire and a real camp shelter
+  ok   normal Step outside succeeds
+  FAIL the hall door emerges south of the hall, not in the northern garden — {"x":4,"y":2}
+  ok   door transit has not invented a walking charge
+  FAIL a real paid step takes the player from the door toward the world
+  FAIL an older player-built doorstep obstruction has a usable alternate door landing — {"x":4,"y":2}
+  ok   using that alternate landing neither deletes nor repairs player structures
+  ok   Continue retains the actual grounds and player ownership metadata
+  ok   door use after Continue still preserves those structures
+  ok   legacy single-cache grounds are adopted without terrain replacement
+  FAIL a completely sealed saved exterior refuses a normal exit
+  ok   refusal preserves all saved obstruction cells
+TypeError: Cannot read properties of undefined (reading 'filter')
+    at C:\Users\Steve\.codex\worktrees\conversation-structure-current\oversight\scripts\godpath\test-haven-access.js:52:32

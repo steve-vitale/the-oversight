@@ -7,6 +7,14 @@ verbatim.
 
 ---
 
+## 2026-10-20 (gardens, Haven size and abilities)
+
+"It seems like garden rows/number should upgrade with haven size. Are they getting used in long playthroughs? In general, the garden path really only makes sense for the ability path. IRL things take too long to grow so we need to account for that reality. Gardens are only a little effective without a character who has invested in gardening abilities etc."
+
+See `../GARDENS.md` for the current mechanic audit, measured use and the
+implementation contract. This quote does not specify numerical growth/yield
+values or authorize describing a proposed redesign as already implemented.
+
 ## 2026-10-15 (balanced measurement and challenge)
 
 "Winning shouldn’t be easy. A reduction in win rate is cause for investigation and consideration not automatically assuming it’s a regression. Keep documentation on our levers that impact survival."

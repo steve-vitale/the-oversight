@@ -1,4 +1,57 @@
-# Muse calibration handoff — conversation/favor repair
+# Muse calibration handoff
+
+## Current milestone: garden cultivation (2026-10-20)
+
+Steve's latest direction supersedes a flat six-bed, fast ordinary-farm model:
+Haven growth should unlock beds; ordinary cultivation is a slow supplement;
+invested food-powered gardening abilities make the strong garden path.
+See GARDENS.md and his verbatim answer in godpath/STEVE-ANSWERS.md.
+
+Codex's garden audit/tooling is ready for checked sharing. Current-source
+74 natural campaigns plus8 separate neutral controls expose planting without
+food:0/64 screen campaigns harvested;1/10 extended cases delivered14,400 kcal.
+Full-pantry redirection skips maintenance, and dead beds lack reclamation.
+These findings are scoped to current controllers, not human/gardener viability.
+The final report is evidence/2026-10-20/garden-longplay-audit-r4.md.
+
+Next bounded gameplay milestone: Haven-scaled visible capacity, slow ordinary
+crop profiles, paid ability-driven growth, protected maintenance and paid
+reclaim/replant, preserving saves/structures and one phone viewport. Measure
+all23 domains with the same collector on both roots before shipping. Nothing
+in this audit changes live garden values. The four caregiver campaigns remain
+queued for prefix-faithfulness and natural late-game phone Continue/actions;
+the new extended garden runs alone do not complete that earlier milestone.
+
+## Haven shipped; caregiver lane queued behind gardens (2026-10-20)
+
+Fetch shared master/main at9026efa1d or newer. Production build
+3f09b84a1-20261020-235403 is verified against all163 boot input hashes, with
+clean mobile boot. No source port is needed: Muse recovery999c69491 remains
+an ancestor. Read haven-access-publication-r1.json and haven-access-audit-r1.md.
+The first publication probe saw the old build while deployment was pending;
+the second probe verified the new source. Both logs are retained.
+
+The entrance correction reserves new south doorsteps, preserves existing
+structures and resolves blocked preferred spots onto connected non-garden
+ground. Nine tents built through actual paid actions reproduce the old trap
+and succeed with the final fix.35 shared-kit checks,128 obstruction layouts,
+trusted-touch journeys at both heights, combat doors and installed update/
+offline Continue pass. Quick269/0 and full1041/0 preceded this gameplay push.
+
+Use final after-r2 panels/source bundle, frame-r3, Haven phone-final-r2,
+combat-r4, water haven-final-r2 and lifecycle-r2. Fresh192-case final runs
+match every retained first-candidate row field. Earlier86 replay pairs,
+ablations and eligibility probes remain explicitly historical first-candidate
+diagnostics; matching sampled endpoints do not establish universal equivalence.
+Both final scorecards remain review_required. Caregiver Table invitations
+42→30/64 and wins40→30/64 stay open; more class/survival cannot cancel them.
+No gate, food, HP, skill, cost or reward was tuned to regain wins.
+
+Codex now owns four fixed caregiver campaigns (10003,10004,10001,10008) through
+actual terminal outcomes, repairing reproduced blockers and preserving faithful
+continuation/prefix proof and naturally earned late-game phone Continue/action.
+Muse retains numerical calibration. Alive at a cap remains unknown. Public
+release and all-playstyle viability are not cleared by the Haven fix.
 
 ## Joint water trip shipped (2026-10-20)
 

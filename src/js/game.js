@@ -12,6 +12,7 @@
 //   - hostFeast(opts) -> feast report (feast ritual: guest list, real pantry cost, quality formula, broadcast beats, grantFeastBuff contract)
 //   - feastPlan(heads) -> planning data for the feast UI (no mutation)
 //   - spendCombatAction(kind)
+//   - havenDoorLanding(cells) -> nearest connected exterior landing; preserves saved structures
 //   - tbFighter(id)
 //   - tbSnakeLineageKey(m) -> 'snake:<root>' | 'body:<key>' (reward de-dupe: one spawn = one body, split-proof)
 //   - fighterSize(f), fighterTiles(f) (multi-tile occupancy)
@@ -154,6 +155,8 @@
 (function (global) {
   'use strict';
   const S = global.Scattering;
+  // The same six reserved cells serve plot interactions and door placement.
+  const havenGardenIndex = (x, y) => x < 3 || x > 5 || y < 1 || y > 2 ? -1 : (y - 1) * 3 + x - 3;
   const DAY_PARTS = ['dawn', 'midday', 'dusk', 'night'];
   const DAY_PART_HINT = {
     dawn: 'The world wakes. Animals are active.',
@@ -10338,7 +10341,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const inside = this.state.scholar ? this.state.scholar.insideHaven !== false : true;
         if (!inside) {
           // OUTSIDE: the Haven grounds. Tents, a fire pit, worn paths.
-          // The lodge (the building) sits at the north — tap it to go back in.
+          // The lodge sits in the center — its south approach faces the world.
           // Steve 2026-10-04: the grounds were a tent maze (15% random tents
           // ≈ 12 blocking tents) — it felt like a trap. Now: a small deliberate
           // camp, mostly open ground, clear paths from the door to the edges.
@@ -10382,7 +10385,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // of the lodge — homes, not a maze. Spots jitter with the seed.
           const tentSpots = [[3, 3], [4, 4], [3, 5]];
           for (const [tx, ty] of tentSpots) {
-            const jx = tx + Math.floor(ornd() * 2), jy = ty + Math.floor(ornd() * 2);
+            let jx = tx + Math.floor(ornd() * 2), jy = ty + Math.floor(ornd() * 2);
+            // Reserve the actual south door. Keep the same draws and shelter
+            // count: repeated hits on the old doorstep share one west spot.
+            // This runs only on first generation, never over saved structures.
+            if (jx === 4 && jy === 5) { jx = 2; jy = 5; }
             if (cells[jy] && cells[jy][jx] !== 'lodge') cells[jy][jx] = 'tent';
           }
           // THE GARDEN CORNER: someone tried to grow things here — a sparse
@@ -11138,6 +11145,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         : ' The gap is back: bridge it again, swim it, or go around.'));
       return true;
     },
+    havenDoorLanding(cells) {
+      // Flood the exterior from its rims. A walkable pocket behind player
+      // structures is not an exit, and the lodge itself is not open ground.
+      const open = (x, y) => !!cells[y]?.[x] && cells[y][x] !== 'lodge' && !this.cellProps(cells[y][x]).blocks;
+      const reached = new Set(), queue = [];
+      for (let n = 0; n < 9; n++) queue.push([n, 0], [n, 8], [0, n], [8, n]);
+      while (queue.length) {
+        const [x, y] = queue.shift(), key = x + ',' + y;
+        if (reached.has(key) || !open(x, y)) continue;
+        reached.add(key);
+        for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]) queue.push([x + dx, y + dy]);
+      }
+      // Prefer the south-facing door. East/west approaches support old yards
+      // with a tent or fire in front; the northern rows belong to the garden.
+      const choices = [[4,5],[5,5],[3,5],[6,4],[6,3],[2,3],[2,4]];
+      let point = choices.find(([x,y]) => reached.has(x + ',' + y));
+      if (!point) {
+        // Player-built camps can surround every preferred spot while leaving
+        // the yard open. Resolve the scene transition on the nearest connected
+        // clear ground; do not strand the bearer or delete their structures.
+        const distance = ([x,y]) => Math.abs(x - 4) + Math.abs(y - 5);
+        point = [...reached].map(key => key.split(',').map(Number))
+          .filter(([x,y]) => havenGardenIndex(x,y) < 0)
+          .sort((a,b) => distance(a) - distance(b) || b[1] - a[1] || a[0] - b[0])[0];
+      }
+      return point ? { x: point[0], y: point[1] } : null;
+    },
     // HAVEN DOORS: the building has an inside and an outside. Doors are real.
     // Step through and you're on the Haven grounds — tents, fire pit, the world beyond.
     exitBuilding(doorFlee) {
@@ -11160,12 +11194,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (4,2) even when already outside — a free teleport on the haven
       // grounds (or worse, off-haven). Refuse honestly instead.
       if (!s.insideHaven) { this.say("You're already outside."); return false; }
+      const hall = this.playerTile();
+      if (!hall || hall.type !== 'haven') { this.say('The Haven hall is not here.'); return false; }
+      const hallDetail = hall.detail;
       s.insideHaven = false;
       // invalidate the cached detail — the grounds are a different place than the hall
       const t = this.tileAt(this.map.px, this.map.py);
       if (t && t.type === 'haven') t.detail = null;
+      const landing = this.havenDoorLanding(this.genDetail(this.map.px, this.map.py));
+      if (!landing) {
+        s.insideHaven = true;
+        if (t) t.detail = t.hallDetail || hallDetail;
+        this.say('The space outside the hall is blocked. Clear an approach before using this door.');
+        return false;
+      }
       // you emerge on the grounds, south of the lodge, facing the world
-      s.mx = 4; s.my = 2; s.facing = { x: 0, y: 1 };
+      s.mx = landing.x; s.my = landing.y; s.facing = { x: 0, y: 1 };
       // THE DOOR MOVES ONLY YOU (+ party/followers). Everyone else keeps their
       // own inside/outside sub-state — nobody teleports with you.
       try {
@@ -11201,6 +11245,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // passing (playerDeath). No hostile re-engagement inside Haven.
         }
       }
+      if (!doorFlee) this.save();
       return true;
     },
     // SANCTUARY (design call 3, Steve 2026-10-16): re-engage a stash of
@@ -11306,7 +11351,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const vid of this.travelingWith()) this.npcSetInside(vid, true);
         this.placePartyAtPlayer();
       } catch (e) {}
-      this.say('Inside. The hall smells of smoke and twelve people. Home.');
+      this.say('You step into the Haven hall.');
+      if (!doorFlee) this.save();
       return true;
     },
     // edgeExit: standing on the rim of the 9x9? That's the way to the next node.
@@ -20686,8 +20732,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     gardenCellAt(cx, cy) {
       const t = this.playerTile();
       if (!t || t.type !== 'haven' || this.state.scholar.insideHaven) return null;
-      if (cx < 3 || cx > 5 || cy < 1 || cy > 2) return null;
-      const index = (cy - 1) * 3 + cx - 3;
+      const index = havenGardenIndex(cx, cy);
+      if (index < 0) return null;
       return { index, plot: this.gardenPlots()[index] || null };
     },
     gardenPlotLabel(plot, index) {
@@ -33411,32 +33457,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const monsterPositions = f.fighters
           .filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive)
           .map(m => ({ id: m.monsterId, mx: m.mx, my: m.my, hp: m.hp }));
-        if (s.insideHaven) {
-          this.say('You dive through the doors — outside! The fight is behind you.');
-          this.exitBuilding(true); // doorFlee: the sanctioned mid-combat door use
-        } else {
-          this.say('You duck through the doors — inside! The fight is behind you.');
-          this.enterBuilding(true); // doorFlee: the sanctioned mid-combat door use
+        const wasInside = s.insideHaven;
+        const crossed = wasInside ? this.exitBuilding(true) : this.enterBuilding(true);
+        // A blocked saved yard must not turn a refused door action into a
+        // successful flight. The movement already happened; its turn continues.
+        if (crossed) {
+          this.say(wasInside ? 'You dive through the doors — outside! The fight is behind you.' :
+            'You duck through the doors — inside! The fight is behind you.');
+          // Escaping through a door ends combat FOR THE PLAYER
+          const p2 = this.tbFighter('p');
+          if (p2) p2.fled = true;
+          // FLEE TRUTH (brawler loop 2026-10-08): betrayal fights bypass the
+          // party.js tbEndCheck wrapper — flag the player's flight here too.
+          if (f.betrayal) f.playerFled = true;
+          // Preserve monsters: they don't melt away, they wait outside.
+          // (Standard tbEnd despawns; we stash positions first.)
+          // SANCTUARY (design call 3, Steve 2026-10-16): the stash is the
+          // FLEEING bearer's — tag it, so a dead bearer's killer can't
+          // re-engage the successor through the fire (see exitBuilding).
+          this.state.doorFledMonsters = monsterPositions.map(m => ({ ...m, bearer: this.villagerId }));
+          this.tbEnd('fled');
+          // Restore monsters to the world — they're still out there.
+          // (They'll re-engage if you go back outside.)
+          if (monsterPositions.length) {
+            this.say(`⚠️ ${monsterPositions.length} ${monsterPositions.length === 1 ? 'thing' : 'things'} still out there. They know where you went.`);
+          }
+          this.save();
+          return true;
         }
-        // Escaping through a door ends combat FOR THE PLAYER
-        const p2 = this.tbFighter('p');
-        if (p2) p2.fled = true;
-        // FLEE TRUTH (brawler loop 2026-10-08): betrayal fights bypass the
-        // party.js tbEndCheck wrapper — flag the player's flight here too.
-        if (f.betrayal) f.playerFled = true;
-        // Preserve monsters: they don't melt away, they wait outside.
-        // (Standard tbEnd despawns; we stash positions first.)
-        // SANCTUARY (design call 3, Steve 2026-10-16): the stash is the
-        // FLEEING bearer's — tag it, so a dead bearer's killer can't
-        // re-engage the successor through the fire (see exitBuilding).
-        this.state.doorFledMonsters = monsterPositions.map(m => ({ ...m, bearer: this.villagerId }));
-        this.tbEnd('fled');
-        // Restore monsters to the world — they're still out there.
-        // (They'll re-engage if you go back outside.)
-        if (monsterPositions.length) {
-          this.say(`⚠️ ${monsterPositions.length} ${monsterPositions.length === 1 ? 'thing' : 'things'} still out there. They know where you went.`);
-        }
-        return true;
       }
       // ACTION ECONOMY: out of moves AND acted -> the turn ends on its own.
       if (p.moveLeft <= 0 && p.acted) this.tbPlayerEndTurn();

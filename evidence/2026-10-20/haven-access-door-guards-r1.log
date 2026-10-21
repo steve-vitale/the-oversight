@@ -1,0 +1,89 @@
+ok 1 - seed 20261009: setup — player starts at haven node
+ok 2 - seed 20261009: A setup — outside on the grounds
+ok 3 - setup — fight is live
+ok 4 - seed 20261009: A — raw enterBuilding() mid-combat refused (got false)
+ok 5 - seed 20261009: A — player NOT moved inside
+ok 6 - seed 20261009: A — no position teleport
+ok 7 - seed 20261009: A — fight still live and intact after refusal
+ok 8 - seed 20261009: A — refusal names the barrier (honest, like siblings)
+ok 9 - setup — fight is live
+ok 10 - seed 20261009: B — raw exitBuilding() mid-combat refused (got false)
+ok 11 - seed 20261009: B — player stays inside
+ok 12 - seed 20261009: B — fight still live after refusal
+ok 13 - setup — fight is live
+ok 14 - seed 20261009: C — enterBuilding(doorFlee) allowed mid-combat (legit path)
+ok 15 - seed 20261009: C — door-flee moves player inside
+ok 16 - setup — fight is live
+ok 17 - seed 20261009: C setup — inside, fighting
+ok 18 - seed 20261009: C — exitBuilding(doorFlee) allowed mid-combat (legit path)
+ok 19 - seed 20261009: C — door-flee moves player outside
+ok 20 - seed 20261009: D — enterBuilding() while inside refused
+ok 21 - seed 20261009: D — refusal is honest
+ok 22 - seed 20261009: D — no teleport on refused entry
+ok 23 - seed 20261009: D setup — exit works
+ok 24 - seed 20261009: D — exitBuilding() while outside refused (got false)
+ok 25 - seed 20261009: D — refusal is honest
+ok 26 - seed 20261009: D — no teleport on refused exit
+ok 27 - seed 20261009: E — exitBuilding() out of combat still works
+ok 28 - seed 20261009: E — enterBuilding() out of combat still works
+ok 29 - seed 20261009: E — exitBuilding() again still works
+ok 30 - seed 777: setup — player starts at haven node
+ok 31 - seed 777: A setup — outside on the grounds
+ok 32 - setup — fight is live
+ok 33 - seed 777: A — raw enterBuilding() mid-combat refused (got false)
+ok 34 - seed 777: A — player NOT moved inside
+ok 35 - seed 777: A — no position teleport
+ok 36 - seed 777: A — fight still live and intact after refusal
+ok 37 - seed 777: A — refusal names the barrier (honest, like siblings)
+ok 38 - setup — fight is live
+ok 39 - seed 777: B — raw exitBuilding() mid-combat refused (got false)
+ok 40 - seed 777: B — player stays inside
+ok 41 - seed 777: B — fight still live after refusal
+ok 42 - setup — fight is live
+ok 43 - seed 777: C — enterBuilding(doorFlee) allowed mid-combat (legit path)
+ok 44 - seed 777: C — door-flee moves player inside
+ok 45 - setup — fight is live
+ok 46 - seed 777: C setup — inside, fighting
+ok 47 - seed 777: C — exitBuilding(doorFlee) allowed mid-combat (legit path)
+ok 48 - seed 777: C — door-flee moves player outside
+ok 49 - seed 777: D — enterBuilding() while inside refused
+ok 50 - seed 777: D — refusal is honest
+ok 51 - seed 777: D — no teleport on refused entry
+ok 52 - seed 777: D setup — exit works
+ok 53 - seed 777: D — exitBuilding() while outside refused (got false)
+ok 54 - seed 777: D — refusal is honest
+ok 55 - seed 777: D — no teleport on refused exit
+ok 56 - seed 777: E — exitBuilding() out of combat still works
+ok 57 - seed 777: E — enterBuilding() out of combat still works
+ok 58 - seed 777: E — exitBuilding() again still works
+ok 59 - seed 4242: setup — player starts at haven node
+ok 60 - seed 4242: A setup — outside on the grounds
+ok 61 - setup — fight is live
+ok 62 - seed 4242: A — raw enterBuilding() mid-combat refused (got false)
+ok 63 - seed 4242: A — player NOT moved inside
+ok 64 - seed 4242: A — no position teleport
+ok 65 - seed 4242: A — fight still live and intact after refusal
+ok 66 - seed 4242: A — refusal names the barrier (honest, like siblings)
+ok 67 - setup — fight is live
+ok 68 - seed 4242: B — raw exitBuilding() mid-combat refused (got false)
+ok 69 - seed 4242: B — player stays inside
+ok 70 - seed 4242: B — fight still live after refusal
+ok 71 - setup — fight is live
+ok 72 - seed 4242: C — enterBuilding(doorFlee) allowed mid-combat (legit path)
+ok 73 - seed 4242: C — door-flee moves player inside
+ok 74 - setup — fight is live
+ok 75 - seed 4242: C setup — inside, fighting
+ok 76 - seed 4242: C — exitBuilding(doorFlee) allowed mid-combat (legit path)
+ok 77 - seed 4242: C — door-flee moves player outside
+ok 78 - seed 4242: D — enterBuilding() while inside refused
+ok 79 - seed 4242: D — refusal is honest
+ok 80 - seed 4242: D — no teleport on refused entry
+ok 81 - seed 4242: D setup — exit works
+ok 82 - seed 4242: D — exitBuilding() while outside refused (got false)
+ok 83 - seed 4242: D — refusal is honest
+ok 84 - seed 4242: D — no teleport on refused exit
+ok 85 - seed 4242: E — exitBuilding() out of combat still works
+ok 86 - seed 4242: E — enterBuilding() out of combat still works
+ok 87 - seed 4242: E — exitBuilding() again still works
+
+PASS: 87 assertions across 3 seeds
