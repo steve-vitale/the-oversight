@@ -51,24 +51,42 @@ const { dayHash } = require('./det-gate');
 const ROOT = path.join(__dirname, '..');
 const STANDING = path.join(ROOT, 'src', 'js', 'standing.js');
 const FIXED_SRC = fs.readFileSync(STANDING, 'utf8');
-// pristineSrc(): the PRE-FIX standing.js. The fix may be committed (worktree
-// HEAD carries it — the normal post-commit/landing state) or uncommitted
-// (HEAD is the pre-fix base). Prefer HEAD^ when it still has the old line,
-// else HEAD. Never invents: exactly one of the two real refs is used.
+// pristineSrc(): the PRE-FIX standing.js. The fix may be committed one or more
+// commits deep on this branch (worktree HEAD and its parents can all carry
+// it — the normal post-commit/landing state) or uncommitted (HEAD is the
+// pre-fix base). Walk back through commits that touched src/js/standing.js
+// and take the newest blob that still has the old line. Never invents: the
+// pristine text always comes from a real committed blob (or the worktree
+// file as a last resort).
 let PRISTINE_SRC = null;
 function pristineSrc() {
   if (!PRISTINE_SRC) {
-    const at = (ref) => {
+    const show = (ref) => {
       try {
         return execSync('git show ' + ref + ':src/js/standing.js',
           { cwd: ROOT, maxBuffer: 16 * 1024 * 1024 }).toString('utf8');
       } catch (e) { return null; }
     };
-    const head = at('HEAD');
-    const parent = at('HEAD^');
-    PRISTINE_SRC = (parent && /The Producers want a village/.test(parent)) ? parent
-      : (head && /The Producers want a village/.test(head)) ? head
-      : (parent || head);
+    const hasOld = (src) => !!src && /The Producers want a village/.test(src);
+    let found = null;
+    try {
+      const revs = execSync('git rev-list HEAD -- src/js/standing.js',
+        { cwd: ROOT, maxBuffer: 1024 * 1024 }).toString('utf8')
+        .split('\n').map(s => s.trim()).filter(Boolean);
+      for (const rev of revs) {
+        const src = show(rev);
+        if (hasOld(src)) { found = src; break; }
+      }
+    } catch (e) { found = null; }
+    if (!found) {
+      const head = show('HEAD');
+      found = hasOld(head) ? head : null;
+    }
+    if (!found) {
+      try { found = fs.readFileSync(STANDING, 'utf8'); } catch (e) { found = null; }
+    }
+    if (!found) throw new Error('pristineSrc: no pre-fix standing.js found in history');
+    PRISTINE_SRC = found;
   }
   return PRISTINE_SRC;
 }
@@ -90,7 +108,7 @@ function check(name, cond, detail) {
 // ---- sanity: we are testing what we think we are ----
 check('worktree standing.js carries the FIX (no "The Producers want a village")',
   !/The Producers want a village/.test(FIXED_SRC) && /It wants a village that can fight/.test(FIXED_SRC));
-check('HEAD standing.js is PRISTINE (has the old "The Producers want a village" line)',
+check('pristine base found in history (has the old "The Producers want a village" line)',
   /The Producers want a village/.test(pristineSrc()));
 
 function ledger(points) { return { points, perType: { x: 2, y: 2 }, perTypeX: {} }; }
