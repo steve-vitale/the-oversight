@@ -768,7 +768,7 @@
           // lethal through the real death pipeline (hurtVillager routes it)
           try { this.hurtVillager(leader, rec.vTaken, 'monster', rec); } catch (e) { console.warn('lingererSortie hurt', e); }
           this.say(`⚔️ ${refName(leader)} faced ${mPhrase} at the treeline... and didn't come back. The party carries the body home. The sortie is over.`);
-          try { this.villageEvent('death'); } catch (e) { console.warn('lingererSortie event', e); }
+          try { this.deathGriefBeat(leader); } catch (e) { console.warn('lingererSortie event', e); }
           try { this.bumpTrust(leader, -2); } catch (e) { console.warn('lingererSortie trust', e); }
           broke = true; break;
         }

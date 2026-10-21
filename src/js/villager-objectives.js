@@ -142,6 +142,17 @@
       function (nm, of) { return `🤒 ${nm} is sitting up again. Whatever ${of} was, it let go.`; },
       function (nm, of) { return `🤒 ${nm} is back on their feet — ${of} ran its course.`; },
     ],
+    // grief: the death-beat coda in game.js (starvation / wound / sickness
+    // lines). Deaths name the loss in the cause tail (the `tail` slot); the
+    // coda is the village's grief — never a headcount (the old 'The village
+    // is N now.' blank, death-liturgy 2026-10-21). Steve's voice: plain,
+    // specific, human, no purple prose. Variant 0 is the canonical line.
+    grief: [
+      function (nm, tail) { return `💀 ${nm}${tail} Somebody keeps looking at the door, like they're still going to walk in.`; },
+      function (nm, tail) { return `💀 ${nm}${tail} Nobody eats much tonight. The pot stays full and nobody touches it.`; },
+      function (nm, tail) { return `💀 ${nm}${tail} Somebody's sleeping-roll stays rolled out. Nobody puts it away.`; },
+      function (nm, tail) { return `💀 ${nm}${tail} The talk dies fast around the fire. Nobody has the words yet.`; },
+    ],
   };
 
   var DIRS8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
@@ -208,6 +219,24 @@
       var i = 0;
       try { i = this.ambientPick(vid, key, pool.length); } catch (e) {}
       try { return pool[i](nm, arg); } catch (e) { return null; }
+    },
+    // griefLine (death-liturgy 2026-10-21): render a death beat — the cause
+    // tail names the loss (nm is already knowledge-gated through displayName
+    // at the call site), the pool renders the village's grief. Never returns
+    // null: variant 0 is the canonical line, so even a broken pool keeps the
+    // beat. Rotation is the pure (vid, day) ambientPick — never R().
+    griefLine(vid, nm, causeTail) {
+      var line = `💀 ${nm}${causeTail} Somebody keeps looking at the door, like they're still going to walk in.`;
+      try {
+        var pool = null;
+        try { pool = (this.ambientBeats() || {})['grief']; } catch (e0) {}
+        if (pool && pool.length >= 3) {
+          var i = 0;
+          try { i = this.ambientPick(vid, 'grief', pool.length); } catch (e1) {}
+          line = pool[i](nm, causeTail);
+        }
+      } catch (e2) {}
+      return line;
     },
 
     // ---------- STATE ----------

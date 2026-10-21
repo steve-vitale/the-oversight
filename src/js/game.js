@@ -7545,7 +7545,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // lethal through the real death pipeline (hurtVillager routes it)
         try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
         this.say(`⚔️ ${first} faced ${mPhrase}... and didn't come back. The village mourns. (Leadership has stakes.)`);
-        this.villageEvent('death');
+        this.deathGriefBeat(vid);
         this.bumpTrust(vid, -2);
       }
     },
@@ -7562,7 +7562,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.hurtVillager(vid, damage, 'starvation',
         this.sealDamageResult({}, [[vid, damage]]), { nonviolent: true });
       if (!person.dead) return false;
-      const message = `💀 ${this.displayName(vid)} starved. Slowly. The village is ${v.roster.length} now.`;
+      // DEATH-LITURGY (2026-10-21): the coda is grief, not a headcount — the
+      // old 'The village is N now.' read like a census, not a loss.
+      const message = this.griefLine(vid, this.displayName(vid), ' starved. Slowly.');
       if (this.playerAtHaven()) this.say(message);
       else {
         const s = this.state.scholar;
@@ -17060,6 +17062,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say('You came back bloody. Nobody asks. Someone saves you the good seat by the fire.');
       }
     },
+    // deathGriefBeat (death-liturgy 2026-10-21): fire villageEvent('death')
+    // exactly once per death. registerDeath already fires it internally
+    // (corpses.js GRIEF branch), so the direct calls at the vDie sites used
+    // to double the beat — 'Nobody's talking much. The fire feels smaller
+    // tonight.' said twice for one death. deathSeen is the registry of an
+    // already-processed death (set at the top of registerDeath, before the
+    // internal fire), so the fallback below only fires when the death never
+    // registered — e.g. the pipeline threw before registering. A villager
+    // dies once; the village grieves once.
+    deathGriefBeat(vid) {
+      const v = this.state.village || {};
+      const ds = v.deathSeen || {};
+      if (!ds[vid]) { try { this.villageEvent('death'); } catch (e) {} }
+    },
     // tickNeeds: wants grow with time. called every day part.
     tickNeeds() {
       const v = this.state.village;
@@ -19087,7 +19103,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (rec.outcome === 'vDie') {
         try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
         tell(`💀 ${summary}`);
-        try { this.villageEvent('death'); } catch (e) {}
+        try { this.deathGriefBeat(vid); } catch (e) {}
       }
       // CRISIS MEMORY (journey crisis r6 2026-10-13): the raid is the
       // village's communal trauma — defenders remember the night they bled
@@ -26648,14 +26664,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { if (this.removeVillager) this.removeVillager(id, 'killed'); } catch (e) {}
             try { if (this.seedGossip) this.seedGossip('death', { who: id }, []); } catch (e) {}
             if (present) {
-              this.say(`💀 ${this.displayName(id)} is gone. The wound was too much. The village is ${v.roster.length} now.`);
+              // DEATH-LITURGY (2026-10-21): grief coda, not a headcount.
+              this.say(this.griefLine(id, this.displayName(id), ' is gone. The wound was too much.'));
             } else {
               // you weren't there to mourn. They'll tell you when you're back.
               const sch = this.state.scholar;
               sch.awayNews = sch.awayNews || [];
               if (sch.awayNews.length < 8) sch.awayNews.push(`💀 ${this.displayName(id)} died while you were gone — a wound that wouldn't close.`);
             }
-            try { this.villageEvent('death'); } catch (e) {}
+            try { this.deathGriefBeat(id); } catch (e) {}
             delete v.health[id];
           } else {
             if (present) this.say(`${first} is hurt — a fall, a thorn, a bad step. (health ${v.health[id]}/100)`);
@@ -29800,15 +29817,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) {}
         try { this.hurtVillager(vid, sickDmg, sickCause, null, { nonviolent: true }); }
         catch (e) { console.warn('[godpath] sickness damage', e); }
-        // DEAD IS DEAD (2026-10-08): hurtVillager now routes lethal sickness
-        // through the real death pipeline. Clean up the sick record — no
-        // "on the mend" for a corpse.
+        // DEATH-LITURGY DEDUPE (2026-10-21): the villager may already be
+        // dead from another cause earlier in this pass (thirst, wound, a
+        // fight) — observed: 'died of thirst' then 'succumbed to the fever'
+        // for the same death. A corpse is grieved under its real cause; the
+        // tick cleans the sick record silently and never writes a second
+        // cause line. DEAD IS DEAD (2026-10-08): hurtVillager routes lethal
+        // sickness through the real death pipeline — no "on the mend" for
+        // a corpse.
+        const _wasDead = ((this.vpOf(vid) || {}).dead) || !(v.roster || []).includes(vid);
         if ((this.vpOf(vid) || {}).dead || !(v.roster || []).includes(vid)) {
           delete v.sick[vid];
+          if (_wasDead) continue; // already mourned under another cause — say nothing
           // AWAY DEATHS QUEUE (drifter break-it 2026-10-09): same contract —
           // no real-time death bulletin for a player camped miles out.
           const deadOf = sickName(s) || 'the fever';
-          const sickMsg = `💀 ${nm(vid)} succumbed to ${deadOf}. The village is ${v.roster.length} now.`;
+          // DEATH-LITURGY (2026-10-21): grief coda, not a headcount.
+          const sickMsg = this.griefLine(vid, nm(vid), ` succumbed to ${deadOf}.`);
           if (this.playerAtHaven()) this.say(sickMsg);
           else { const sch = this.state.scholar; sch.awayNews = sch.awayNews || []; if (sch.awayNews.length < 8) sch.awayNews.push(sickMsg); }
           continue;
