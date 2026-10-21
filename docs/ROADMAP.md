@@ -1,5 +1,183 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Garden transfer receipts; next public partial donation (2026-10-21)
+
+The current controller counts real food removal plus matching gift credit,
+keeps safe pack reserves, skips oversized/full-pantry attempts and considers
+smaller fitting stacks. Both donation decisions share this logic. The 15 shared
+receipt checks and existing23 garden-controller checks cover real transfers,
+refusals, food risk, preservation and reserve/capacity behavior. The natural
+screen/long evidence and all23 tradeoff review live under garden-transfer-*.
+No Game crop price, timing, yield, capacity or player action changes here.
+The screen is review_required: wins15→16/6→7/9→9/8→8 with increased
+deaths/run in three policies. Claimed donations now match physical transfers,
+but actual sharing falls and spoilage rises. Fifteen receipt tests,23 existing
+controller checks,16 long observer controls,14 changed-screen replays and eight
+full-state storage probes support this scope; see garden-transfer-audit-r1.
+
+Next bounded milestone: make partial donation a real Pack action, allowing a
+player to keep meals and put a fitting portion of a large crop stack into the
+pantry. Preserve identity, food state, cultivated provenance, capacity and gift/
+take-back accounting; never credit a refused or retained portion. Prove actual
+phone controls, cancellation, paid/free behavior, committed bytes and Continue,
+then teach the shared controller that same public action. Keep Muse's numerical
+crop/power lane separate until earned Gardener/upper-tier cohorts and useful
+consumption/storage are represented. Earlier entries are historical.
+
+## Solo campaign continuation verified (2026-10-21)
+
+The driver now continues a living bearer after sustained community collapse.
+It records observation caps separately from engine endings and preserves the
+ten-iteration empty-community history, including subsequent recovery. Reporting
+snapshots no longer initialize NPC agency or hydrate people. The current
+community-history contract and maintenance proof were updated together.
+
+On unchanged Game/controller inputs, all23 metrics match across64 paired cases
+and eight real observation controls.54 state hashes differ: this is not state
+equivalence. A retained former-cutoff specimen isolates five removed agency
+default writes (plus existing wall-clock diagnostics). Within-source short→long
+prefixes and transported full-state hashes pass. Historical caregiver10001,
+using the explicitly archived rejected garden controller, previously stopped
+alive at day162; it now reaches an actual engine loss at164. Community loss
+remains1. Prepared funded isolation/recovery/death tests are controlled scenes,
+not proof of natural solo viability. See solo-campaign-audit-r1 and review-r1.
+
+Next bounded milestone: improve harvest/storage decisions using actual transfer
+receipts, particularly whole-stack pantry refusal and donation-attempt counters.
+Then measure earned Gardener and upper-tier cohorts before numerical calibration.
+Muse retains numerical crop/power calibration; use the shared current driver,
+observer and contract. Garden output alone does not establish usefulness. Keep
+the rolling goal active. The following garden-controller entry is historical.
+
+## Garden controller verified; next repair actual campaign endings (2026-10-21)
+
+Final controller-r4 completes real crop harvest/preparation/meals/safe surplus
+without changing Game code or the four-bed target. Shared-kit23 checks, matched
+all23 panels, two82-job long arms with eight neutral controls each and128
+matching independent screen replays pass their stated verification. Natural
+harvesting6→48/74 and crop eating5→47/74; ordinary12,310 and assisted1,707,527
+kcal are consumed. Ten extended cases reach actual endings through day309;
+22 screening cases remain capped. Quick284/0 and full1,056/0 pass. Publication
+evidence binds the final candidate and fresh checks before the shared push.
+
+The scorecard remains review_required: wins16→15/7→6/8→9/10→8, with other
+survival/community/progression/gear watches.24 selected adverse/flip diagnostics
+are retained. Rejected combat-meal suppression is corrected; no-harvest cases
+preserve their old Game hashes. See garden-controller-audit-r1, balanced-r3,
+long-review-r3 and diagnostics-r2. Huge output/spoilage, whole-stack pantry
+refusals and legacy attempt-based donation counters still limit calibration.
+Do not treat more harvested food or a win movement as balance clearance.
+
+Next bounded milestone: remove the sim driver's living-bearer village-dead
+cutoff. Prove that a declared solo scene continues beyond ten iterations and
+stops only at actual death/win/loss or an explicit observation cap; retain real
+on/off controls and faithful short→long prefixes. Compare old/new harnesses on
+one unchanged Game/controller. Audit communityLost, which currently includes
+that harness end reason, so the fix cannot silently manufacture a better
+community metric. Update its collector/contract/proof together if semantics
+change. Then address harvest/storage decisions and earned Gardener/upper-tier
+cohorts before numerical calibration. Keep the rolling goal active.
+
+Codex owns garden-controller; Muse retains numerical crop/power calibration.
+The Game stays at released864af1192 with shared history through bbece2e39.
+Use actual gated harvest before investment and after paid growth, prepare real
+food, consume safe crops and store safe surplus through ordinary public actions.
+Do not bulk-eat/donate unknown or risky crops; no fire does not make food safe.
+Stop the routine on body/map/encounter changes. Keep the existing four-bed
+investment target so this revision isolates the incomplete food loop.
+
+This is a controller/methodology change, never a Game balance comparison.
+Compare the exact old/new controllers on the same corrected Game; preserve
+all23 per-policy metrics, actual crop intake/cost/spoilage and terminal status.
+Use the shared long audit's74 observed campaigns plus8 controls per arm,
+including ten extended cases. Reuse a retained screen only after exact source,
+collector and contract identity checks. A current candidate screen supplies
+fresh maintenance proof. Do not rewrite source hashes to bypass comparison
+refusals. Current Game/browser inputs are unchanged; retain the existing real
+phone/installed receipts and verify their source match rather than stamp a new
+player build for simulation tooling.
+
+After sharing this revision, the next lane is earned gardening-build and
+upper-tier affordability/usefulness coverage. Existing mixed-policy runs and
+sampled holders do not prove an intentional ability build or six/nine-bed
+viability. Keep actual sources and food costs; neither more wins nor maximum
+planted area is the optimization objective. Keep the rolling goal active.
+
+Priority prerequisite for that later-game audit: sim-harness still stops after
+ten iterations without living NPCs even when the player is alive and Game.over
+is false. Rejected controller-r2 caregiver10001 exposes this at day162. Fix and
+verify that boundary in the next serial milestone as a separate methodology
+revision; do not label a village-dead harness stop an actual game ending or
+silently normalize final states. See TERMINAL-CAMPAIGNS.md.
+
+## Garden food safety released; complete the sim harvest controller next (2026-10-21)
+
+Release864af1192 is live as14dd8521d-20261021-074815. Publication-r1 verifies
+all171 production inputs and a clean fresh phone boot. Shared master/main and
+the primary checkout contain it; the foreign sweep remains unchanged. Fresh
+quick283/0 and full1,055/0 preceded publication. Prepared24 runtime checks,
+13-stage phone crop/cook/meal/Continue journeys and16-stage frames at both
+phone heights pass, with installed update/offline Continue. The64 matched
+screen cases retain identical all23/outcomes/state hashes, with four neutral
+controls per arm. No player harvest occurs in the unchanged policy, so these
+natural cases do not establish the repaired preparation route's usefulness.
+See garden-food-safety-audit-r1 and publication-r1 for evidence and limits.
+
+Codex owns the bounded canonical-food repair on garden-food-safety; Muse retains
+numerical garden/ability calibration. The shared history remains master/main
+14dd8521d before this work. No new Muse commit was present at the latest fetch.
+Actual player harvest bypassed foodForageItem: six reproduced must-cook crops
+lost their raw risk, nuts lost shelling and unknown crops became named food.
+Repair the caller, prove real harvest/preparation/meal/Continue, then publish
+with fresh checks, all23 matched panels and phone/offline receipts. No crop
+profile, power price or controller change belongs in this prerequisite.
+
+Then finish the already planned controller harvest→safe process/store/eat
+loop. Its old/new comparison must use the same corrected Game and explicitly
+declare a methodology change. Current long-run zero player harvests cannot
+establish ordinary or invested garden viability. Keep the rolling goal active.
+The controller must recognize canonical needsCooking crops: its existing
+cookPack only considers foodState raw, while these plants are ready with a raw
+risk flag. Do not teach harvest without proving preparation before eating or
+donation. Preserve unknown/shelling routes and actual fire/knowledge gates.
+Also measure upper-tier capacity opportunities: the current controller caps
+its target at four beds. The retained74-case garden-intake audit reached tier2
+in58 campaigns and tier3 in44 but never exceeded four beds. Do not use that
+coverage to claim six/nine-bed usefulness; evaluate affordability and actual
+crop use rather than blindly maximizing planted area.
+
+## Garden intake released; complete the sim garden loop next (2026-10-21)
+
+Release9a83bc686 is live asdea9296f6-20261021-061958. Publication-r1 verifies
+all171 checked production inputs and clean fresh phone boot. The primary
+checkout matches shared master/main; the foreign sweep is preserved unchanged.
+
+Candidate dea9296f6-20261021-061958 tracks ordinary/assisted and legacy crop
+food through actual settled meals, transfers, recipes, refunds and Continue.
+The common Pack/prep handler saves completed physical meals immediately after
+the action returns; native quota failure retains the checkpoint and says so.
+Phone10-stage journeys and16-stage frames pass at736/844, as does installed
+update/offline Continue. Quick282/0 and full1,054/0 preceded the push; details are in
+garden-intake-audit-r1. No crop/food/ability price or controller changed.
+
+Matched64-case all23 panels show no changed outcome/metric cases.82 paired
+long-audit jobs per arm (74 observed+8 controls) retain exact outcomes/all23/RNG
+and state hashes excluding only the two new metadata fields. Six campaigns
+harvest, five eat identified crop food; all such food is from assisted cycles.
+This does not establish viability. The policy never calls player harvest,
+despite2,818 paid cultivations. All output is8 NPC deliveries. Read GARDENS.md
+for residuals, costs and unknowns before using this data for calibration.
+
+Next bounded Codex milestone: make the shared garden controller finish its
+real harvest→safe storage/processing/eating loop. Keep actual gates, species,
+seed/labor/food costs and earned powers; no grants or internal state shortcuts.
+Prove a prepared ripe opportunity and natural long-campaign use, compare the
+old/new controller on the same released Game as methodology, then share the
+controller before using it for balance comparisons. Muse retains numerical
+garden/ability calibration. Crop safety and unexplained output residuals remain
+open; do not infer regression or success from wins alone. Keep the rolling
+public-release goal active after publication.
+
 ## Company favor released (2026-10-21)
 
 Release30f630d36 is live as378c91373-20261021-052404. The publication-r1

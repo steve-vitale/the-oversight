@@ -22,6 +22,29 @@ function manifest(root) {
   for (const f of ['index.html', 'scripts/sim-harness.js', 'scripts/sweep-compare.js']) out[f] = digest(fs.readFileSync(path.join(root, f), 'utf8').replace(/\r\n/g, '\n'));
   return out;
 }
+function communityLossCoverage(row,engineLost,unknownPopulation=false){
+  const terminalLoss=['village-lost','village-dead'].includes(row.endReason)||engineLost;
+  const c=row.communityExposure;
+  if(c===undefined){
+    if(row.stop?.version===1)return{status:'invalid',lost:null,error:'Current driver omitted community exposure'};
+    return{status:terminalLoss||(!unknownPopulation&&row.endReason!=='pop-zero')?'known':'unknown',
+      source:'legacy-terminal-rule',lost:terminalLoss?1:unknownPopulation||row.endReason==='pop-zero'?null:0,
+      note:'Historical stop rule only; no population history reconstructed.'};
+  }
+  const count=n=>Number.isSafeInteger(n)&&n>=0,at=x=>x&&Number.isSafeInteger(x.iteration)&&x.iteration>0&&x.iteration<=c.observations&&count(x.gameDay);
+  const valid=c.version===1&&c.thresholdIterations===10&&
+    ['observations','zeroObservations','unknownObservations','maxConsecutiveZero','sustainedEpisodes'].every(k=>count(c[k]))&&
+    c.zeroObservations+c.unknownObservations<=c.observations&&c.maxConsecutiveZero<=c.zeroObservations&&
+    typeof c.sustainedEmpty==='boolean'&&c.sustainedEmpty===(c.sustainedEpisodes>0)&&
+    c.sustainedEmpty===(c.maxConsecutiveZero>=10)&&c.sustainedEpisodes<=Math.floor(c.zeroObservations/10)&&
+    (c.zeroObservations?at(c.firstEmpty):c.firstEmpty===null)&&
+    (c.sustainedEmpty?at(c.firstSustainedEmpty)&&c.firstSustainedEmpty.iteration>=10:c.firstSustainedEmpty===null)&&
+    typeof c.recoveredAfterSustained==='boolean'&&
+    (c.recoveredAfterSustained?c.sustainedEmpty&&at(c.firstRecovery)&&c.firstRecovery.iteration>c.firstSustainedEmpty.iteration:c.firstRecovery===null);
+  if(!valid)return{status:'invalid',lost:null,error:'Invalid community exposure history'};
+  const lost=terminalLoss||c.sustainedEmpty?1:c.unknownObservations||unknownPopulation?null:0;
+  return{status:lost===null?'unknown':'known',source:'driver-history-v1',lost,history:c};
+}
 function install(G) {
   const census = gear.install(G), days = new Map(), npcDays = new Map(), intake = new Map(), bearerIds = new Set(), npcIds = new Set(), unknownNpcIds = new Set(), npcClassIds = new Set();
   census.startingTier = null; // Not sampled by this observer; starting gear is never earned.
@@ -108,13 +131,15 @@ function install(G) {
     const intakeCoverage = intakeSnapshot(G.state.village);
     const kcal = intakeCoverage.totals?.kcal || 0, nourishment = intakeCoverage.totals?.nourishment || 0;
     const survival = day => firstDeath != null && firstDeath <= day ? 0 : G.state.scholar.day > day ? 1 : null;
-    return { gear: census, observerErrors: errors, samples: sampled, intake: food, intakeCoverage, events, endings,
+    const community=communityLossCoverage(row,!!G.villageLost,unknownNpcIds.size>0);
+    if(community.status==='invalid')errors.push({at:'community exposure',message:community.error});
+    return { gear: census, observerErrors: errors, samples: sampled, intake: food, intakeCoverage, events, endings,communityLossCoverage:community,
       npcExposure: { schemaVersion: 1, identityRule: 'known-living-resident-not-current-bearer', sampledIdentities: [...npcIds].sort(),
         unknownIdentities: [...unknownNpcIds].sort(), classIdentities: [...npcClassIds].filter(id => npcIds.has(id)).sort(), days: [...npcDays.values()] },
       classes: Object.fromEntries(Object.entries(classes).map(([r, ids]) => [r, [...ids].sort()])), gods: Object.fromEntries(Object.entries(gods).map(([r, ids]) => [r, [...ids].sort()])),
       metrics: { won: row.won, entered: row.entered, table: row.table, national: row.national,
         survival30: survival(30), survival60: survival(60), playerDeaths, playerDeaths100Days: ratio(playerDeaths * 100, row.gameDays),
-        communityLost: ['village-lost', 'village-dead', 'pop-zero'].includes(row.endReason) || G.villageLost ? 1 : 0,
+        communityLost: community.lost,
         livingNpcs: sampled.some(d => d.unknownRosterPeople) ? null : score.mean(sampled.map(d => d.livingNpcs)),
         lowFood: distress('kcal', 500), lowWater: distress('hydration', 25), lowHealth: distress('health', 25),
         npcHungry: ratio(sampled.reduce((n, d) => n + d.hungryNpcs, 0), sampled.reduce((n, d) => n + d.knownNeeds, 0)),
@@ -239,5 +264,5 @@ function sourceHead(root) {
   if (!fs.existsSync(path.join(root, '.git'))) return null;
   return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 }
-module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles };
+module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles,communityLossCoverage };
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });

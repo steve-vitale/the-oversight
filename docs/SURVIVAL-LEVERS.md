@@ -1,5 +1,114 @@
 # Survival levers and investigation register
 
+## Donation controller methodology (2026-10-21)
+
+No Game lever changes. The controller's contribution timing now follows actual
+food transfers, and its safe-food reserve excludes unusable items. Capacity
+preflight avoids futile whole-stack gifts; a second donation decision now
+honors its documented two-day reserve and the same safety rules. This can
+change forage timing, survival, community trust and progression; compare all23
+per policy as a declared controller revision. Do not restore wins to a target.
+The direct-donation observer checks physical receipts independently of native
+policy counters. Partial player transfers and earned build cohorts remain
+follow-ups; retained garden-transfer evidence supplies the tradeoff decision.
+
+Current64-case screen remains review_required: wins15→16/6→7/9→9/8→8;
+deaths/run rise for capable/maker/caregiver. Fourteen independent changed-case
+replays match hashes/rows/all23. Both82-job long arms pass eight real neutral
+controls each; all ten extended cases per arm reach real endings through309.
+Claimed180 gifts versus97 physical transfers become23 matched gifts, with
+83→0 refusals. This is accounting accuracy, not increased sharing: actual
+gift calories493,516→46,465, crop intake1,719,837→1,715,632 and measured
+spoilage7,058,265→7,485,137. Named pack snapshots expose unsafe meat gifts
+but do not justify every lost safe crop gift. Decision: share the truthful
+controller with watches open, then add the real partial-transfer action;
+do not calibrate crop prices or label the storage result an improvement.
+
+## Solo campaign methodology (2026-10-21)
+
+No Game lever, crop timing, food price, haven capacity or ability changed.
+The driver continues living solo campaigns; community history persists through
+recovery. Report snapshots no longer create NPC agency defaults. All23 metrics
+match across64 paired current-policy cases;54 Game hashes differ, so this is
+not equivalence. The named historical cutoff case loses at164 instead of being
+stopped alive at162, with communityLost1 on both arms. Preserve that loss and
+the prior garden warnings; neither longer observation nor unchanged win rate
+clears calibration. Controlled funded isolation proves continuation mechanics,
+not naturally sustainable solitary play. Decision: share this measurement fix
+before harvest/storage improvements and Muse's numerical calibration.
+
+## Garden controller methodology (2026-10-21)
+
+No Game lever changed. Real player harvest/preparation/meal/storage behavior is
+added to the shared simulation policy, with original food/seed/labor/power prices.
+Same corrected Game on both arms; only competent.js changes. All23 retain the
+explicit methodology label and review_required decision. Wins16→15/7→6/8→9/10→8
+for capable/maker/merchant/caregiver; deaths/run increase across all four, with
+survival, community, eligible NPC class and contest/show warnings. The decision
+is to share the functional controller and preserve these warnings, not optimize
+win rate or declare a Game regression.24 adverse/flip diagnostics and128 matching
+independent screen replays are retained. Cases without player harvest preserve
+their old Game hashes after the rejected combat-meal guard was corrected.
+
+Cultivated primary nourishment rises to1,675,601 kcal over74 observed campaigns;
+that does not cancel other domains or establish build viability. High nominal
+spoilage, unallocated output, four-bed policy ceiling and whole-stack pantry
+limits remain explicit. Fix the actual-ending harness cutoff next; inspect the
+communityLost definition before changing stop semantics. See GARDENS.md and
+garden-controller-audit-r1 for costs, scope, evidence and decision.
+
+## Canonical player garden food (2026-10-21)
+
+Lever: harvesting now retains the same species' canonical raw cooking risk,
+shelling, identification, believed name and shelf life. Previously bare garden
+stacks bypassed these requirements. Prepared direct harvests reproduce six
+must-cook species plus nuts and unknown food. Growth, yield, seed/labor costs,
+power prices, NPC duty and controllers are unchanged. Existing harvested save
+items are not migrated. This may reduce available ready food or introduce real
+preparation work; inspect all23 domains and actual opportunities, not win rate
+alone. Publish the safety prerequisite separately before teaching controllers
+to harvest. Natural viability and numerical calibration remain open.
+
+Decision evidence: the frozen baseline/candidate64-case screen retains identical
+outcomes, all23 metrics and final state hashes, with four neutral observer
+controls each. No player harvest occurs in this unchanged policy, so absence
+of a screen signal does not clear preparation work or garden-path balance.
+Publish the reproduced caller/UI safety correction after release gates; then
+repair and measure the controller separately. See garden-food-safety-audit-r1.
+
+## Cultivated-food accounting and completed meals (2026-10-21 release9a83bc686)
+
+No crop profile, food price, growth/yield, hunger/healing, duty or controller
+lever changed. `gardenShares` and gardenIntakeTotals add source metadata only.
+The Pack/prep callback now saves an actually consumed physical meal after its
+whole callback returns, retaining completed food, reserve, action costs and
+receipts before unload. Failed storage is reported in existing feedback and
+does not replace the checkpoint. This fixes a real phone-tested gap; it is not
+a free food/healing adjustment. Core time settlement remains unchanged.
+
+Both64-case balanced arms use current observer/harness/policies and four
+neutral controls. Every outcome/all23 vector matches. Both82-job long audits
+retain exact RNG/outcomes/all23 and state hashes with only gardenShares and
+gardenIntakeTotals removed. Existing producer/intake data and all other Game
+fields remain. Browser-only saving is verified separately; node excludes app.js.
+
+The74 observed campaigns have6 harvesting and5 eating known crop food.
+Known useful crop nourishment45,981 kcal is a lower bound, not a net-profit
+claim. Direct reserve debits686,880 kcal, NPC hunger equivalents160 kcal and
+nominal seed input369,950 kcal remain separate, with normal metabolism and
+duty opportunity costs unpriced. The shared policy pays2,818 cultivation
+actions but never calls player harvest, so these economics are not a valid
+garden-build calibration. Fix and compare that controller on the same Game
+before adjusting numeric levers.33,225 nominal output kcal is unallocated;
+do not silently classify it as waste or count it as meals.
+
+Decision: retain measurement and the completed-meal persistence fix in
+development release9a83bc686. Quick282/0 and full1,054/0 preceded the push;
+publication-r1 verifies171 production inputs and clean phone boot. Preserve all earlier balance and
+garden viability warnings. Codex next owns controller completion; Muse retains
+numeric calibration. Actual NPC caution-crop preparation and dawn overshoot
+are open boundaries, not silently changed to make the report look better.
+
 ## Company-favor release30f630d36 (2026-10-21)
 
 `favor-rules.json` owns minimum continuous presence32 ticks, shared-fire

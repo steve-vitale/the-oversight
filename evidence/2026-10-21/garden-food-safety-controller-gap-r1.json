@@ -1,0 +1,34 @@
+{
+  "scope": "Historical retained natural garden-intake long audit on released14dd8521d. Capacity exposure only; not rerun on safety candidate, not food usefulness.",
+  "source": "evidence/2026-10-21/garden-intake-long-after-r2.json.gz",
+  "sha256": "f37e6c2b0fdd9f4ac3b8615222e7186f390010163fbc7ed94363bbebd7823334",
+  "observedCases": 74,
+  "tiers": {
+    "0": {
+      "sampledDays": 74,
+      "cases": 74,
+      "maxPlots": 2,
+      "plantedDays": 0
+    },
+    "1": {
+      "sampledDays": 4461,
+      "cases": 74,
+      "maxPlots": 4,
+      "plantedDays": 3403
+    },
+    "2": {
+      "sampledDays": 1132,
+      "cases": 58,
+      "maxPlots": 4,
+      "plantedDays": 973
+    },
+    "3": {
+      "sampledDays": 3411,
+      "cases": 44,
+      "maxPlots": 4,
+      "plantedDays": 2812
+    }
+  },
+  "controllerRule": "workGarden uses Math.min(4, Game.gardenCapacity()). Larger Haven tiers do not imply the bot attempts six/nine beds.",
+  "decision": "Add actual capacity/affordability opportunities to controller evaluation. Do not force maximum planting as a balance objective or infer upper-tier usefulness from these runs."
+}

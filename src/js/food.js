@@ -3,6 +3,7 @@
 // description: Food reality system. Food must be known-edible AND in edible state. Processing changes net calories.
 // provides:
 //   - blendHarvestShares(parts) / mergeHarvestShares(target, incoming, units)
+//   - blendGardenShares(parts) / recordGardenIntake(eater, portions)
 //   - harvestOrigin(id) / captureIntakeEater(id)
 //   - recordHarvestIntake(eater, portions, route) / recordHarvestDraw(eater, draw, route, nourishment, share)
 //   - queueHarvestMeal(eater, draw, route, nourishment)
@@ -234,10 +235,57 @@
       return out;
     },
     mergeHarvestShares(target, incoming, units) {
+      const garden = this.blendGardenShares([{item:target,weight:target.units || 0},
+        {item:incoming,weight:units == null ? incoming.units || 0 : units}]);
       const shares = this.blendHarvestShares([{item:target,weight:target.units || 0},
         {item:incoming,weight:units == null ? incoming.units || 0 : units}]);
       if (Object.keys(shares).length) target.harvestShares = shares;
       else delete target.harvestShares;
+      if (Object.keys(garden).length) target.gardenShares = garden;
+      else delete target.gardenShares;
+    },
+    // Cultivated origin is separate from producer identity. Unknown food keeps
+    // its weight in the denominator; names and current ability holdings cannot
+    // identify a past crop. These four classes describe the harvested cycle.
+    blendGardenShares(parts) {
+      const out = Object.create(null); let total = 0;
+      for (const p of parts || []) {
+        if (!Number.isFinite(p.weight) || p.weight <= 0) continue;
+        total += p.weight;
+        const entries = ['ordinary','assisted','legacy','legacyAssisted']
+          .map(key=>[key,p.item?.gardenShares?.[key]])
+          .filter(([,n])=>Number.isFinite(n)&&n>0&&n<=1);
+        const sum = entries.reduce((n,[,x])=>n+x,0);
+        for (const [key,n] of entries) out[key]=(out[key] || 0)+p.weight*n/Math.max(1,sum);
+      }
+      if (total>0) for (const key of Object.keys(out)) out[key]/=total;
+      return out;
+    },
+    recordGardenIntake(eater, portions) {
+      if (!eater || intakeFrames.get(eater)!==this.state) return false;
+      const accepted=(portions || []).filter(p=>Number.isFinite(p.kcal)&&p.kcal>0&&
+        (p.nourishment==null || Number.isFinite(p.nourishment)&&p.nourishment>=0));
+      if (!accepted.length) return false;
+      const v=this.state.village;
+      if (v.gardenIntakeTotals && v.gardenIntakeTotals.version!==1) {
+        console.warn('[food] unsupported garden intake totals version'); return false;
+      }
+      const bucket=()=>({kcal:0,nourishment:0,origins:{},unclassified:{kcal:0,nourishment:0}});
+      const totals=v.gardenIntakeTotals || (v.gardenIntakeTotals={version:1,startedDay:eater.day,records:0,...bucket(),roles:{}});
+      const role=totals.roles[eater.role] || (totals.roles[eater.role]=bucket());
+      for (const p of accepted) {
+        const n=p.nourishment==null?p.kcal:p.nourishment,shares=this.blendGardenShares([{item:p.item || {},weight:1}]);
+        const missing=Math.max(0,1-Object.values(shares).reduce((sum,x)=>sum+x,0));
+        for (const book of [totals,role]) {
+          book.kcal+=p.kcal;book.nourishment+=n;
+          book.unclassified.kcal+=missing*p.kcal;book.unclassified.nourishment+=missing*n;
+          for (const [key,share] of Object.entries(shares)) {
+            const origin=book.origins[key] || (book.origins[key]={kcal:0,nourishment:0});
+            origin.kcal+=share*p.kcal;origin.nourishment+=share*n;
+          }
+        }
+      }
+      totals.records++;return true;
     },
     harvestOrigin(id) {
       const person = id && knownPerson(this,id);
@@ -280,7 +328,7 @@
           rec.harvestNourishment[owner]=(rec.harvestNourishment[owner] || 0)+share*n;
         }
       }
-      totals.records++;return true;
+      totals.records++;this.recordGardenIntake(frame,accepted);return true;
     },
     recordHarvestDraw(eater, draw, route, nourishment, share=1) {
       if (!Number.isFinite(share) || share<=0 || share>1) return false;
@@ -292,7 +340,7 @@
     queueHarvestMeal(eater, draw, route, nourishment) {
       if (!this._harvestMealDeferred) return this.recordHarvestDraw(eater,draw,route,nourishment);
       this._harvestPantryMeal={eater,route,nourishment,draw:{taken:draw.taken,items:(draw.items || []).map(p=>({
-        units:p.units,effectiveKcal:p.effectiveKcal,item:{harvestShares:p.item?.harvestShares}}))}};
+        units:p.units,effectiveKcal:p.effectiveKcal,item:{harvestShares:p.item?.harvestShares,gardenShares:p.item?.gardenShares}}))}};
     },
 
     // A foraged plant, knowledge-gated. Unknown plants aren't food yet.
@@ -430,7 +478,7 @@
 
     // addUnknownToLump: the game never loses track of what is what, even
     // though the player sees one opaque stack.
-    addUnknownToLump(plant, units, day, container, harvestShares) {
+    addUnknownToLump(plant, units, day, container, harvestShares, gardenShares) {
       const cont = container || this.state.scholar.inventory;
       const form = this.lumpFormOf(plant);
       const F = LUMP_FORMS[form];
@@ -448,7 +496,7 @@
       }
       const comp = lump.lump;
       const e = comp[plant.id] || { units: 0, day };
-      this.mergeHarvestShares(e, { harvestShares }, units);
+      this.mergeHarvestShares(e, { harvestShares, gardenShares }, units);
       e.units += units;
       e.day = Math.min(e.day, day);
       comp[plant.id] = e;
@@ -477,6 +525,7 @@
       const item = {
         plantId: pid, units: e.units, kg: 0.1, unit: p.unit,
         ...(e.harvestShares ? { harvestShares: e.harvestShares } : {}),
+        ...(e.gardenShares ? { gardenShares: e.gardenShares } : {}),
         spoilDay: e.day + (p.spoilageDays || 2),
         foodKind: isNut ? 'nut' : 'plant',
         foodState: isNut ? 'in_shell' : 'ready',
@@ -529,7 +578,7 @@
         if (!p) continue;
         const ix = inv.indexOf(it);
         if (ix >= 0) inv.splice(ix, 1);
-        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv, it.harvestShares);
+        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv, it.harvestShares, it.gardenShares);
         if (it.spoilDay) lump.spoilDay = Math.min(lump.spoilDay, it.spoilDay);
       }
     },
@@ -1032,6 +1081,7 @@
         inv.push({
           itemId: 'pemmican', plantId: null, foodKind: 'meat', foodState: 'pemmican',
           harvestShares: this.blendHarvestShares(set.picks.map(p => ({ item: p.it, weight: p.kcal }))),
+          gardenShares: this.blendGardenShares(set.picks.map(p => ({ item: p.it, weight: p.kcal }))),
           edible: true, units: set.bars, unit: 'bar', kcalEach: set.kcalEach,
           spoilDay: day + 120, kg: 0.3, safe: true, // KG PER-UNIT (break-it food r4 2026-10-10): 0.3 kg per bar; the old *bars total bricked the pack.
           name: 'Pemmican',
@@ -2843,7 +2893,7 @@
         safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
         foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
         diseaseRisk: item.diseaseRisk, needsCooking: item.needsCooking,
-        wellMade: item.wellMade, harvestShares: item.harvestShares,
+        wellMade: item.wellMade, harvestShares: item.harvestShares, gardenShares: item.gardenShares,
         // FULL PROCESSING STATE (break-it food 2026-10-09): the old subset-push
         // silently stripped poisonRisk — toxin laundering: poisoned meat came
         // back from the pantry clean, and trackMealExposure saw nothing, so

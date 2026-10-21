@@ -1,0 +1,13 @@
+  ok   a real null-returning gift is counted only after removal and credit
+  ok   actual pantry food retains cultivated origin
+  ok   a refused call does not count or postpone contribution
+  ok   a known full pantry is not repeatedly attempted or counted
+  ok   an oversized stack does not hide a smaller fitting gift
+  ok   whole-stack donation never spends the personal food buffer
+  FAIL unsafe, unknown, bonded, empty and unshelled stacks neither donate nor pad reserve — {"ctx":{"donationAttempts":1,"donated":1,"donatedKcal":10000,"_lastGiveDay":85},"day":85,"bonus":6,"remaining":["Safe reserve","Unknown","Raw","Risk","Bonded","Empty","Shells"]}
+  ok   unsafe calories cannot make the only safe meal look surplus
+  ok   no remote donation attempt is invented
+  ok   the second decision uses its two-day buffer and one-transfer limit
+
+Donation receipts: 9 passed, 1 failed, 0 todo (phase 0)
+failing: unsafe, unknown, bonded, empty and unshelled stacks neither donate nor pad reserve

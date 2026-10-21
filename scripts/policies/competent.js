@@ -31,6 +31,52 @@ const _dawnRefusedDays = new WeakMap();
 // one process don't leak flags.
 const _packNothingDays = new WeakMap();
 
+// Cultivated food uses the same raw/unknown/shelling contract as wild food.
+// These guards change controller decisions only; never rewrite physical food.
+function gardenFoodReady(Game, it) {
+  if (!it?.gardenShares) return true;
+  return it.edible !== false && !it.needsCooking && it.safe !== false &&
+    !it.diseaseRisk && !it.poisonRisk && !it.parasiteRisk && !Game.isSpoiled(it);
+}
+function gardenActorGuard(Game, allowEncounter=false) {
+  const state=Game.state,scholar=state.scholar,id=Game.villagerId,x=Game.map.px,y=Game.map.py;
+  return ()=>Game.state===state&&Game.state.scholar===scholar&&Game.villagerId===id&&
+    !Game.over&&(allowEncounter||(!Game.inCombat()&&!Game.pendingEncounter))&&Game.map.px===x&&Game.map.py===y;
+}
+function prepareGardenFood(Game,ctx) {
+  const active=gardenActorGuard(Game);let prepared=0,attempts=0;
+  for(const item of (Game.state.scholar.inventory||[]).slice()) {
+    if(!active()||attempts>=6)break;
+    if(!item.gardenShares||Game.isSpoiled(item))continue;
+    const shell=item.foodKind==='nut'&&item.foodState==='in_shell';
+    const cook=item.needsCooking&&item.diseaseRisk&&Game.nearFire();
+    if(!shell&&!cook)continue; // unknown crops and unresolved risks stay unavailable
+    const index=Game.state.scholar.inventory.indexOf(item);if(index<0)continue;
+    const before=JSON.stringify(item);attempts++;
+    if(shell)Game.shellNuts(index);else Game.cookFood(index);
+    if(JSON.stringify(item)!==before)prepared++;
+  }
+  ctx.gardenPrepAttempts=(ctx.gardenPrepAttempts||0)+attempts;
+  ctx.gardenPreparations=(ctx.gardenPreparations||0)+prepared;
+  return prepared;
+}
+// Bulk Eat consumes risky ready plants too. If any such garden food is held,
+// select real safe portions instead; a lack of fire must never make it edible.
+function eatAroundUnpreparedGarden(Game) {
+  if(!(Game.state.scholar.inventory||[]).some(it=>it.gardenShares&&!gardenFoodReady(Game,it)))return false;
+  const active=gardenActorGuard(Game,true);
+  for(let n=0;n<64&&active()&&Game.state.scholar.kcal<Game.kcalCap();n++) {
+    const inv=Game.state.scholar.inventory;
+    const candidates=inv.map((it,index)=>({it,index})).filter(({it})=>it.units>0&&it.kcalEach>0&&it.edible!==false&&gardenFoodReady(Game,it)&&!Game.isSpoiled(it));
+    candidates.sort((a,b)=>(a.it.spoilDay??99999)-(b.it.spoilDay??99999));
+    if(!candidates.length)break;
+    const {it,index}=candidates[0],units=it.units,kcal=Game.state.scholar.kcal;
+    Game.eatOne(index);
+    if(active()&&it.units===units&&Game.state.scholar.kcal===kcal)break;
+  }
+  return true;
+}
+
 // Pack fingerprint: name|units|kcalEach|foodState|edible-flag per stack, in
 // pack order. Recomputed AFTER the attempt so the engine's spoil-purge is
 // part of the recorded state.
@@ -52,6 +98,7 @@ function _packHasEdibleFood(Game) {
 // unchanged, the engine's beat would be identical — skip the call. Any pack
 // change (or a new day) re-arms the attempt.
 function packEatOnce(Game) {
+  if(eatAroundUnpreparedGarden(Game))return;
   if (process.env.NOTHINGEDIBLE_GATE === '0') { try { Game.eat(); } catch (e) {} return; }
   let day = 0;
   try { day = (Game.state && Game.state.scholar && Game.state.scholar.day) || 0; } catch (e) {}
@@ -69,6 +116,7 @@ function packEatOnce(Game) {
 // never raw meat (trichinosis/gutrot). Re-scans each take since indices shift.
 function competentEat(Game) {
   const s = Game.state.scholar, vv = Game.state.village;
+  const active=gardenActorGuard(Game,true);
   // EAT_FRAC (journey landing r10 2026-10-13): policy variants can lower the
   // eat trigger (e.g. EAT_FRAC=0.10 for a distracted player who forgets to
   // eat) to probe starvation pathways. Default 0.85 = unchanged behavior.
@@ -82,6 +130,7 @@ function competentEat(Game) {
     // "nothing edible" on an unchanged pack, don't re-attempt — the engine
     // would voice the identical beat again. Game-code eat verb untouched.
     packEatOnce(Game);
+    if(!active())return;
     if (s.kcal >= Game.kcalCap() * trig) return;
     // DAWNREFUSE (2026-10-15, refusal-spam fix): VOICE ONLY. When the hands
     // can't reach the pantry (havenStoresAccess()==='none') every take in
@@ -109,7 +158,7 @@ function competentEat(Game) {
       let best = -1, bestScore = -99;
       for (let i = 0; i < pantry.length; i++) {
         const it = pantry[i];
-        if (!it || (it.kcalEach || 0) <= 0) continue;
+        if (!it || (it.kcalEach || 0) <= 0 || !gardenFoodReady(Game,it)) continue;
         if (it.plantId === 'meat_human') continue; // trembles: no cure, ever
         let score = 1;
         const fs = it.foodState || '';
@@ -119,10 +168,12 @@ function competentEat(Game) {
       }
       if (best < 0 || bestScore < 0) break;
       try { Game.takeFromPantry(best); } catch (e) { break; }
+      if(!active())break;
       // NOTHINGEDIBLE (2026-10-17): same gate — a take that added nothing to
       // the pack leaves the "nothing edible" verdict standing; a successful
       // take changes the pack key and re-arms the attempt honestly.
       try { packEatOnce(Game); } catch (e) { break; }
+      if(!active())break;
     }
   } catch (e) {}
 }
@@ -225,11 +276,14 @@ function nearFire(Game) {
 
 // Cook every raw item in the pack when a fire is near. Raw = disease risk.
 function cookPack(Game, ctx) {
+  const active=gardenActorGuard(Game,true),encounterBefore=Game.inCombat()||Game.pendingEncounter;
+  const gardenPrepared=prepareGardenFood(Game,ctx);
+  if(!active()||(!encounterBefore&&(Game.inCombat()||Game.pendingEncounter)))return gardenPrepared;
   if (!nearFire(Game)) return 0;
   let cooked = 0;
   try {
     const inv = Game.state.scholar.inventory || [];
-    for (let i = inv.length - 1; i >= 0; i--) {
+    for (let i = inv.length - 1; i >= 0&&active(); i--) {
       const it = inv[i];
       if (it && it.foodState === 'raw' && it.kcalEach > 0) {
         try { Game.cookFood(i); cooked++; } catch (e) {}
@@ -961,30 +1015,42 @@ function groundsThinning(Game) {
 // items). An honest player sows from the fresh haul BEFORE donating it,
 // or the village eats the seed. Returns true when something was sown.
 function trySow(Game, ctx) {
+  if(Game.over||Game.pendingEncounter||Game.inCombat())return false;
   if (!Game.gardenPlots || !Game.sowOptions || !Game.sowPlot || Game.map.px !== 4 || Game.map.py !== 4) return false;
   const plots=Game.gardenPlots(),plot=plots.find(p=>!p.pid&&!p.dead);
   if(!plot)return false;
   const opts=(Game.sowOptions()||[]).slice().sort((a,b)=>a.growthDays-b.growthDays||(b.kcalEach||0)-(a.kcalEach||0));
   if(!opts.length)return false;
-  const inside=Game.state.scholar.insideHaven;
+  const inside=Game.state.scholar.insideHaven,active=gardenActorGuard(Game);
   try {
     if(inside&&Game.exitBuilding()!==true)return false;
     Game.sowPlot(opts[0].pid);
-    if(plot.pid!==opts[0].pid||plot.dead)return false;
+    if(!active()||plot.pid!==opts[0].pid||plot.dead)return false;
     ctx.sown=(ctx.sown||0)+1;return true;
   } catch(e){console.warn('[policy] sow',e.message);return false;}
-  finally{if(inside&&!Game.state.scholar.insideHaven&&Game.map.px===4&&Game.map.py===4&&!Game.inCombat())Game.enterBuilding();}
+  finally{if(inside&&active()&&!Game.state.scholar.insideHaven)Game.enterBuilding();}
 }
 
 // Public-action gardening. The same current controller runs against both
 // roots; absent baseline APIs remain unavailable, never simulated by edits.
 function workGarden(Game,ctx) {
-  if(Game.map.px!==4||Game.map.py!==4||Game.inCombat())return;
-  const inside=Game.state.scholar.insideHaven;
+  if(Game.map.px!==4||Game.map.py!==4||Game.inCombat()||Game.pendingEncounter||Game.over)return;
+  const inside=Game.state.scholar.insideHaven,active=gardenActorGuard(Game);
+  let cropWork=false;
+  const harvest=()=>{
+    const collect=active()&&Game.gardenGate('harvest').ok;
+    if(collect)Game.harvestGarden();
+    const prepared=active()?prepareGardenFood(Game,ctx):0;
+    cropWork=cropWork||collect||prepared>0;
+    if(active()&&(collect||prepared))competentEat(Game);
+  };
   try{
     if(inside&&Game.exitBuilding()!==true)return;
+    if(!active())return;
+    harvest();if(!active())return;
     const target=Math.min(4,Game.gardenCapacity?Game.gardenCapacity():6);
-    while(Game.gardenPlots().length<target){const n=Game.gardenPlots().length;Game.makePlot();if(Game.gardenPlots().length<=n)break;}
+    while(active()&&Game.gardenPlots().length<target){const n=Game.gardenPlots().length;Game.makePlot();if(Game.gardenPlots().length<=n)break;}
+    if(!active())return;
     const v=Game.state.village;
     if(Game.setGardenKeeper && !Game.gardenKeeperReady(v.gardenKeeper)){
       const candidates=(v.roster||[]).filter(id=>Game.gardenKeeperReady(id)&&!v.assignments?.[id]);
@@ -993,14 +1059,19 @@ function workGarden(Game,ctx) {
       if(candidates.length)Game.setGardenKeeper(candidates[0]);
     }
     if(Game.reclaimGarden&&Game.gardenPlots().some(p=>p.dead)&&Game.state.scholar.kcal>=800)Game.reclaimGarden();
+    if(!active())return;
     trySow(Game,ctx);
+    if(!active())return;
     if(Game.cultivateGarden&&Game.state.scholar.kcal>=1000&&Game.gardenMagicGate().ok)Game.cultivateGarden();
+    if(!active())return;
+    harvest();if(!active())return;
     if(!v.gardenKeeper){
       const hasGarden=Object.values(v.assignments||{}).some(a=>a?.task==='garden');
       if(!hasGarden)assignBest(Game,'garden',['farmer','gardener','botanist','herbalist','forager']);
     }
   }catch(e){console.warn('[policy] garden',e.message);}
-  finally{if(inside&&!Game.state.scholar.insideHaven&&Game.map.px===4&&Game.map.py===4&&!Game.inCombat())Game.enterBuilding();}
+  finally{if(inside&&active()&&!Game.state.scholar.insideHaven)Game.enterBuilding();}
+  if(cropWork&&active()&&Game.state.scholar.insideHaven)donateHaul(Game,ctx);
 }
 
 // THE KNIFE IN THE PACK (longsim food r6 2026-10-12): sim scholars start
@@ -1322,26 +1393,51 @@ function forageTripSeedFirst(Game, ctx) {
 
 // Donate the haul: identified edible inventory food goes to the pantry.
 // (The seed was already sown by trySow; the player keeps a 1-day buffer.)
-function donateHaul(Game, ctx) {
+function donationFoodReady(Game,it) {
+  return !!it&&Number.isFinite(it.kcalEach)&&it.kcalEach>0&&
+    Number.isFinite(it.units??1)&&(it.units??1)>0&&!it.bonded&&it.edible!==false&&
+    it.safe!==false&&!it.needsCooking&&it.foodState!=='in_shell'&&
+    !it.diseaseRisk&&!it.poisonRisk&&!it.parasiteRisk&&!Game.isSpoiled(it);
+}
+// Both donation decisions use physical removal AND the engine's gift ledger.
+// null is the public action's result on success as well as refusal.
+function donateSurplus(Game,ctx,options={}) {
+  let transferred=0;
   try {
-    // HALL GATE (journey landing 2026-10-15): the pantry is in the hall —
-    // donating from the wild prints one honest refusal PER ITEM (160 lines
-    // in 3 days on seed 49). A competent player learns the rule and stops
-    // trying until they're home; the game already says it once, honestly.
-    if (Game.havenStoresAccess && Game.havenStoresAccess() === 'none') return 0;
-    const s = Game.state.scholar;
-    const cap = Game.kcalCap ? Game.kcalCap() : 2400;
-    const keep = process.env.COMPETENT_TRADE_RESERVE === '1' ? cap * 3 : cap; // targeted traders retain two extra personal days as stock
-    let packKcal = (s.inventory || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
-    const inv = s.inventory || [];
-    for (let i = inv.length - 1; i >= 0; i--) {
-      const it = inv[i];
-      if (!it || (it.kcalEach || 0) <= 0 || it.edible === false) continue;
-      const ik = it.kcalEach * (it.units || 1);
-      if (packKcal - ik < keep) continue; // keep the buffer
-      try { Game.donateToPantry(i); packKcal -= ik; ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; } catch (e) {}
+    if(Game.havenStoresAccess&&Game.havenStoresAccess()==='none')return 0;
+    const s=Game.state.scholar,inv=s.inventory||[],active=gardenActorGuard(Game,true);
+    const cap=Game.kcalCap?Game.kcalCap():2400;
+    const keep=options.keepKcal??(process.env.COMPETENT_TRADE_RESERVE==='1'?cap*3:cap);
+    const max=options.maxTransfers??Infinity;
+    if(!Number.isFinite(keep)||keep<0)return 0;
+    for(let i=inv.length-1;i>=0&&transferred<max&&active();i--){
+      const it=inv[i];if(!donationFoodReady(Game,it))continue;
+      const kcal=it.kcalEach*(it.units??1);
+      const available=inv.reduce((n,item)=>n+(donationFoodReady(Game,item)?item.kcalEach*(item.units??1):0),0);
+      if(available-kcal<keep)continue;
+      const room=Game.pantryCapKcal()-Game.pantryKcal();
+      if(!Number.isFinite(room)||room<kcal)continue; // whole-stack action only
+      const vid=Game.villagerId,before=(Game.state.village.gives||{})[vid]||0;
+      ctx.donationAttempts=(ctx.donationAttempts||0)+1;
+      Game.donateToPantry(i);
+      const credited=((Game.state.village.gives||{})[vid]||0)-before;
+      const removed=!inv.includes(it);
+      if(removed&&Math.abs(credited-kcal)<1e-6){
+        transferred++;ctx.donated=(ctx.donated||0)+1;
+        ctx.donatedKcal=(ctx.donatedKcal||0)+credited;
+        ctx._lastGiveDay=s.day||0;
+      }else if(!removed&&credited===0)ctx.donationRefusals=(ctx.donationRefusals||0)+1;
+      else throw Error('Donation removal and gift credit disagree');
     }
-  } catch (e) {}
+  }catch(e){
+    ctx.donationErrors=(ctx.donationErrors||0)+1;
+    (ctx.notes||(ctx.notes=[])).push('donateSurplus: '+e.message);
+    console.warn('[policy] donateSurplus: '+e.message);
+  }
+  return transferred;
+}
+function donateHaul(Game,ctx) {
+  return donateSurplus(Game,ctx);
 }
 
 // SORT THE HAUL (bal-survival 2026-10-10): foraging yields unknowns, period —
@@ -2635,12 +2731,7 @@ const competent = {
         const s = Game.state.scholar;
         const cap = Game.kcalCap();
         if (s.kcal > cap * 1.5) {
-          const inv = s.inventory || [];
-          for (let i = inv.length - 1; i >= 0; i--) {
-            if ((inv[i].kcalEach || 0) > 0 && inv[i].foodState !== 'raw') {
-              try { Game.donateToPantry(i); ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; break; } catch (e) {}
-            }
-          }
+          donateSurplus(Game,ctx,{keepKcal:cap*2,maxTransfers:1});
         }
       }
     } catch (e) {}
@@ -2950,3 +3041,4 @@ module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walk
 module.exports.gearUp = gearUp;
 
 module.exports.workGarden = workGarden;
+module.exports.donateSurplus = donateSurplus;

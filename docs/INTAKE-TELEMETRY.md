@@ -1,5 +1,50 @@
 # Food intake receipts
 
+## Cultivated origins (2026-10-21 release9a83bc686)
+
+New actual crop harvests also carry `gardenShares`, independently of producer
+identity. Classes are ordinary, assisted, legacy and legacyAssisted. Assistance
+means growth/yield magic applied to that harvested cycle; it does not identify
+an intentional build or prove the magic's incremental benefit. A legacy crop
+retains its actual old cycle. Current holdings and food labels never identify
+the origin of already stored food. Unclassified includes other food and unknown
+old origins; it must not be renamed non-garden food.
+
+Player harvest tags actual delivered species food before the plot resets.
+NPC harvest blends origins using each crop's actual rounded delivery calories.
+`mergeHarvestShares` now preserves both producer and cultivated-origin maps;
+partial transfers, processing, mixed recipes, carried rations and real returns
+retain weighted origins and their unclassified remainder. Recipe weights are
+ingredient calories, rather than item counts. Transfers are not meals.
+
+`village.gardenIntakeTotals` version1 begins at the first new recorded meal,
+without reconstructing older history. It retains cumulative physical kcal,
+primary nourishment, origin classes, unclassified amounts and player/NPC roles.
+The existing private eater frame and settled portions supply it through
+`recordHarvestIntake`; the existing all-food totals/23 metric semantics stay
+unchanged. Partial source credit follows partial consumption, refund settlement
+and real bank clipping. Failed/unsupported origin versions remain unknown.
+
+The browser's common Pack/prep action handler saves a newly completed physical
+meal after its full callback returns. This includes food units, benefits,
+clock/action costs and both receipt books. Refused actions do not get an
+invented meal receipt. Real write failures use the existing bounded feedback
+area; they do not claim durable success. Native touch tests verify stored bytes
+before unload, quota failure/recovery and Continue at both phone sizes.
+
+`scripts/lib/garden-accounting.js` reads and validates these records without
+hydrating people, invoking permission/production helpers or drawing RNG.
+It checks source/role conservation, preserves unknowns and reports nominal
+stocks separately from edible security. The shared campaign workflow is in
+GARDENS.md. Cultivated intake is a lower bound, not a whole-diet origin audit.
+Its diagnostic residual is not classified waste or a complete profit estimate.
+
+Current before/after controls strip only `**.gardenShares` and
+`village.gardenIntakeTotals`, plus the existing three wall-clock fields used by
+gameplayHash. Preserve old producer/intake data and every other state field.
+The transport proof rejects damaged payloads/cache identities. These exclusions
+do not permit hiding an unrelated game or save change.
+
 Receipts measure **physical food eaten and primary nourishment**, not diet
 quality, healing, skill knowledge, or every change to the reserve bar.
 They are an instrumentation prerequisite for the unfinished Forager deed;

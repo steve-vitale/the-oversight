@@ -1,0 +1,21 @@
+'use strict';
+const fs=require('fs'),z=require('zlib'),assert=require('assert/strict'),S=require('../../scripts/lib/balance-scorecard');
+const prefix='evidence/2026-10-21/garden-controller-',read=f=>JSON.parse(z.gunzipSync(fs.readFileSync(f))),oldPanel=read('evidence/2026-10-21/garden-food-safety-after-r3.json.gz'),newPanel=read(prefix+'after-r3.json.gz'),oldLong=read(prefix+'long-before-r1.json.gz'),newLong=read(prefix+'long-after-r3.json.gz'),key=r=>r.row.policy+':'+r.row.seed;
+const fill=read(prefix+'fill-replays-r1.json.gz'),R=require('../../scripts/garden-longplay-audit');
+for(const [arm,long]of [['before',oldLong],['after',newLong]]){assert.deepEqual(fill.plan.sources[arm],long.plan.sources);for(const r of fill.results.filter(r=>r.arm===arm)){R.validateResult(r.result,r.result.job,long.plan.sources);assert(!long.results.some(x=>JSON.stringify(x.job)===JSON.stringify(r.result.job)));long.results.push(r.result);}}
+const replay=[];
+for(const [arm,panel,long]of [['before',oldPanel,oldLong],['after',newPanel,newLong]]){
+ assert.deepEqual(panel.sources,long.plan.sources);
+ for(const p of panel.rows){const r=long.results.find(r=>r.job.observe&&r.job.days===150&&key(r)===key(p));assert(r);assert.equal(r.stateHash,p.stateHash,key(p));assert.deepEqual(r.metrics,p.metrics,key(p));for(const k of ['endReason','won','gameDays','table','entered','deaths'])assert.deepEqual(r.row[k],p.row[k],key(p)+':'+k);replay.push({arm,policy:p.row.policy,seed:p.row.seed,stateHash:r.stateHash,all23:true,outcome:true});}
+}
+const old=new Map(oldPanel.rows.map(r=>[key(r),r])),pairs=newPanel.rows.map(r=>({key:key(r),before:old.get(key(r)),after:r})),chosen=new Map();
+function choose(p,reason){const item=chosen.get(p.key)||{pair:p,reasons:[]};if(!item.reasons.includes(reason))item.reasons.push(reason);chosen.set(p.key,item);}
+for(const p of pairs){if(p.before.metrics.won!==p.after.metrics.won)choose(p,'every win flip, either direction');for(const m of S.contract.metrics)if((p.before.metrics[m.id]===null)!==(p.after.metrics[m.id]===null))choose(p,'unknown coverage changed: '+m.id);}
+for(const policy of ['capable','maker','merchant','caregiver'])for(const m of S.contract.metrics.filter(m=>m.direction!=='neutral')){
+ const worst=pairs.filter(p=>p.after.row.policy===policy&&Number.isFinite(p.before.metrics[m.id])&&Number.isFinite(p.after.metrics[m.id])).map(p=>({p,harm:(p.after.metrics[m.id]-p.before.metrics[m.id])*(m.direction==='higher'?-1:1)})).sort((a,b)=>b.harm-a.harm||a.p.after.row.seed-b.p.after.row.seed)[0];if(worst?.harm>0)choose(worst.p,'worst adverse '+m.id+' in '+policy);
+}
+function facts(long,p){const r=long.results.find(r=>r.job.observe&&r.job.days===150&&key(r)===p.key),g=r.garden;return{terminal:r.terminal,harvestCalls:g.calls.harvestGarden||0,playerHarvests:g.playerHarvests,playerOutputKcal:g.playerHarvestKcal,npcOutputKcal:g.pantryDeliveredKcal,firstPlayerHarvest:g.events.find(e=>e.type==='player-harvest')||null,intake:g.accounting.intake,costs:g.accounting.costs,spoilage:g.accounting.removedBySpoilageSweep};}
+const selected=[...chosen.values()].map(({pair:p,reasons})=>({key:p.key,reasons,metrics:{before:p.before.metrics,after:p.after.metrics},before:facts(oldLong,p),after:facts(newLong,p)}));
+const noHarvestChanged=pairs.filter(p=>p.before.stateHash!==p.after.stateHash&&!facts(newLong,p).harvestCalls).map(p=>({key:p.key,before:facts(oldLong,p),after:facts(newLong,p)}));
+const report={scope:'Independent fresh long-audit processes reproduce64 screen cases per arm using the same Game/controller identities. Reported producer Game hashes, all23 and outcomes match; no raw final-state payload reconstruction claim. Diagnostics cover every win flip in both directions plus each per-policy worst adverse metric and unknown-coverage change. Observed costs/food facts are not a complete causal explanation of later endings.',independentScreenReplays:replay,selected,noHarvestChanged};
+fs.writeFileSync(prefix+'diagnostics-r1.json',JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({independentReplays:replay.length,selected:selected.map(r=>({key:r.key,reasons:r.reasons,won:[r.metrics.before.won,r.metrics.after.won],harvests:r.after.playerHarvests,firstHarvestDay:r.after.firstPlayerHarvest?.day})),noHarvestChanged:noHarvestChanged.map(r=>r.key)}));

@@ -1,5 +1,40 @@
 # Terminal campaign coverage
 
+Current driver correction (2026-10-21): the living-bearer village-dead cutoff
+described below is historical. Current rows expose stop.kind (engine-ending or
+observation-cap), engine flags and iteration/calendar boundaries. communityExposure
+records known zero-NPC observations, unknown reads, sustained ten-iteration
+episodes and recovery independently of the ending. Recovery never erases an
+observed sustained collapse. Unknown reads interrupt the known-zero streak.
+Readonly villager snapshots expose agencyObserved without initializing agency.
+
+The current community-history-2026-10-21 collector preserves collapse as a
+separate metric fact; legacy rows explicitly lack reconstructed population
+history. Missing/malformed current metadata is invalid, not a healthy community.
+Reobserve both roots with one current collector/contract. Historical named
+caregiver10001 now reaches real loss164 rather than an active cutoff162;
+communityLost stays1. Both-source on/off controls, full-state integrity and
+within-source prefixes pass; cross-source state equivalence is not claimed.
+See evidence/2026-10-21/solo-campaign-audit-r1.md and its review recipe.
+
+Final garden controller-r4 reaches actual endings in all ten fixed extended
+cases, through day309, with no watchdog recovery. That does not remove the
+reproduced driver limit below or establish population coverage. communityLost
+currently includes the village-dead harness reason; audit/preserve the underlying
+loss facts when removing the stop so an active/recoverable solo run does not
+silently erase measured community collapse. Collector semantic changes require
+both arms under one updated collector/contract and fresh maintenance proof.
+
+Garden-controller review (2026-10-21): the driver still has a ten-iteration
+livingNPCs()==0 cutoff in sim-harness.js. It can return village-dead with a
+living bearer and Game.over false. Rejected controller-r2 caregiver10001
+demonstrates this at day162. Keep the actual not_terminal status; increasing
+the observation cap alone does not remove that early break. After the garden
+controller food-loop milestone, audit and repair this stopping boundary as a
+separate declared harness revision, with real on/off controls and unchanged
+Game/controller on both arms. Steve's request to play until death requires
+actual endings; community loss and an active solo bearer are separate facts.
+
 Report-integrity correction (2026-10-20): child output now uses continuous UTF-8
 decoding. Parsed/cached final states AND continued bridges must reproduce their
 child-computed canonical hashes before acceptance. Some older raw blobs fail

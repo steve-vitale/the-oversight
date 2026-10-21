@@ -1,5 +1,41 @@
 # Simulating The Oversight — how to measure a change
 
+Donation receipt maintenance (2026-10-21): garden-longplay-audit uses
+scripts/lib/donation-usage.js to observe direct donateToPantry calls. It records
+actual removed rows with matching gift credit, refusals and discards without
+credit separately. It calls no permission/RNG helpers. Its source hash is part
+of the audit cache fingerprint. Actual on/off controls compare Game hash, row,
+all23 metrics, RNG and native donation counters. These are auxiliary receipts,
+not new balance-scorecard metrics or coverage of all pantry production/gifts.
+Current competent donated/donatedKcal mean successful transfers; older reports
+counted attempts. Preserve historical reports and compare matching tools on
+both roots. The garden-transfer-review-r1 recipe validates the current paired
+screen, all long cohorts, natural receipt agreement and explicit baseline reuse.
+
+Solo continuation revision (2026-10-21): current sim-harness records stop and
+communityExposure separately and does not stop a living bearer after ten empty
+community iterations. A cap remains incomplete play. Use communityLossCoverage
+to distinguish current observed history, explicit legacy coverage and unknowns;
+never infer recovery erases a previous collapse. Villager report snapshots are
+readonly; agencyObserved distinguishes existing progression from absent data.
+The community-history-2026-10-21 contract keeps all23 IDs and thresholds; both
+arms and the maintenance proof were recollected under the same current observer.
+The named old/new cutoff audit uses one archived historical policy on both
+arms, separate from the64 current-policy screen. Exact prefixes are within each
+source revision; removed diagnostic agency writes make cross-revision state
+equivalence false. Repeat recipe: solo-campaign-review-r1.cjs in dated evidence.
+
+Garden controller revision (2026-10-21): use the same corrected Game and retain
+the exact old/new policy manifests. compareHarnessRevision in
+scripts/lib/harness-comparison.js explicitly declares changed script hashes;
+the ordinary comparator must still reject mixed policies. The shared
+garden-longplay-audit.js uses current accounting for each root independently.
+The dated garden-controller-review-r1 recipe validates both long reports,
+same tools/config/jobs/Game inputs and actual observer controls, then reports
+all23 and crop output/intake/costs by policy and iteration cap. No rows or
+identities are rewritten. Use actual terminal status, not the600-iteration cap,
+to claim a run ended. Share tooling before numerical garden calibration.
+
 UTF-8 report integrity (2026-10-20): balance-panel and terminal child readers now
 decode chunks continuously. The observer fingerprint changed; BOTH overnight
 screen arms and current neutrality were rerun. Metric IDs/semantics did not

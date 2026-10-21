@@ -1,0 +1,6 @@
+'use strict';
+const K=require('../../scripts/godpath/lib');
+(async()=>{const G=await K.load({seed:7002});K.newRun(G);G.state.scholar.day=85;
+ const candidates=G.data.plants.filter(p=>['shoots','berries','roots'].includes(p.form)&&p.caloriesPerUnit>0).filter(p=>{G.state.codex.plants[p.id]={level:3,prepKnown:true};const item=G.foodForageItem(p,true,1,p.caloriesPerUnit,85);return item.edible===false||item.needsCooking||item.poisonRisk;}).slice(0,8);
+ for(const plant of candidates){K.newRun(G);const s=G.state.scholar;s.day=85;s.kcal=6000;G.exitBuilding();s.inventory=[];G.state.codex.plants[plant.id]={level:3,prepKnown:true};const plot={};G.gardenPlant(plot,plant.id,-800);G.map.tiles[4][4].plots=[plot];const expected=G.foodForageItem(plant,true,G.gardenHarvestUnits(plot),0,s.day);G.harvestGarden();const actual=s.inventory.find(i=>i.plantId===plant.id);const fields=i=>Object.fromEntries(['foodKind','foodState','edible','needsCooking','kcalEach','hiddenKcal','diseaseRisk','poisonRisk'].map(k=>[k,i?.[k]??null]));console.log(JSON.stringify({pid:plant.id,preparation:plant.preparation,canonical:fields(expected),harvested:fields(actual)}));}
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

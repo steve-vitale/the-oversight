@@ -1,0 +1,11 @@
+  ok   new stock/intake/cost sampling mutates no Game state
+  ok   actual bed preparation costs are captured before overnight metabolism
+  FAIL paid world ticks are separate from the reserve debit — {"cost":{"attempts":1,"charged":1,"playerReserveKcal":120,"npcHungerEquivalentKcal":0,"seedUnits":0,"seedNominalKcal":0,"unvaluedSeedUnits":0,"playerActionTicks":32,"unknownWindows":0},"day":5,"ticks":0}
+  ok   actual spoilage removal is measured without pretending it was eaten
+  ok   nested observation restores the real original work function
+  ok   actual public cultivation records one real player ability payment, not nested dispatch twice
+  ok   a refused repeat adds no charge or paid ticks
+  ok   NPC paid garden magic records its own hunger equivalent and no player debit
+
+Garden cost observation: 7 passed, 1 failed, 0 todo (phase 0)
+failing: paid world ticks are separate from the reserve debit

@@ -1354,7 +1354,8 @@
           s.kcal = Math.max(0, (s.kcal || 0) - give);
           var meal=this._harvestPantryMeal;
           var shares=meal?this.blendHarvestShares(meal.draw.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal}))):{};
-          if (this.stockPantry) this.stockPantry(give, 'Ration returned', { pieceKcal: 400, harvestShares:shares });
+          const garden=meal?this.blendGardenShares(meal.draw.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal}))):{};
+          if (this.stockPantry) this.stockPantry(give, 'Ration returned', { pieceKcal: 400, harvestShares:shares, gardenShares:garden });
           returned=give;
           v.lastPlayerMeal = (v.lastPlayerMeal || 0) - give;
           if (v._rationSaidDay !== day) {

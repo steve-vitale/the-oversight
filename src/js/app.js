@@ -15167,13 +15167,26 @@
   // null return is not a success receipt (drinking uses null in both cases).
   function packActionFeedback(fn, fallback) {
     const before = (Game.log || []).slice(), last = before[before.length - 1];
+    const state=Game.state, eatenBefore=state.village.harvestIntakeTotals?.records || 0;
     Game.feedbackMark();
     const result = fn(), log = Game.log || [];
+    // Pack and prep-counter bites finish here, after food, benefits and the
+    // action/clock settle. Persist an actual meal now; background/unload saves
+    // must not be the only protection against a phone tab being killed.
+    let saveNote='';
+    if(Game.state===state&&!Game.over&&(state.village.harvestIntakeTotals?.records || 0)>eatenBefore){
+      const saved=Game.save();
+      if(saved===false)saveNote='The meal finished, but could not be saved. Storage may be full.';
+      else if(saved==='stale')saveNote='Another tab has a newer save. This meal was not saved over it.';
+      else if(saved==='tombstoned')saveNote='This expedition’s save ended elsewhere. This meal was not saved.';
+      else if(saved==='settlement_failed')saveNote='Time could not finish safely. Reload and Continue from the last saved checkpoint.';
+    }
     // Browser command wrappers can reset feedback marks and return true merely
     // for handling a command. Read newly emitted outcomes directly; never turn
     // that handled flag into a success claim.
     const from = last == null ? 0 : log.indexOf(last) + 1;
     const lines = log.slice(from).slice(-4).map(String);
+    if(saveNote)lines.push(saveNote);
     if (lines.length) return lines.join('\n');
     if (result?.ok === true) return fallback || null;
     if (result?.ok === false) return result.why || 'Not completed.';
@@ -15247,7 +15260,7 @@
                   : ` <span class="small" style="opacity:.6">(find a butcher)</span>`;
               }
             }
-            const cookable = (i.rawKcal || (i.foodKind === 'meat' && i.foodState === 'cleaned')) && Game.nearFire();
+            const cookable = (i.rawKcal || (i.foodKind === 'meat' && i.foodState === 'cleaned') || (i.needsCooking && i.diseaseRisk)) && Game.nearFire();
             if (i.foodKind === 'meat' && (i.foodState === 'cleaned' || i.foodState === 'cooked') && Game.nearFire()) {
               foodBtns += ` <button class="btn ghost sm" data-preserve="${idx}">Smoke</button>`;
             }

@@ -280,6 +280,16 @@ async function setupGame(Game, place, rosterId, options) {
 // Telemetry comes from Game.state.telemetry (full stream when
 // TELEMETRY_FULL=1); samples are daily [day, value] curves; pacing is the
 // always-on per-day player-verb proxy (see PACING PROXY block).
+// A diagnostic read must not hydrate people or initialize agency.
+function snapshotVillagers(Game){
+  const v=Game.state.village||{},a=v.agency||{};
+  return (v.roster||[]).map(vid=>{
+    const p=(Game.data.villagers||[]).find(p=>p.id===vid)||(Game.data.background_survivors||[]).find(p=>p.id===vid),xp=a.xp?.[vid]||{},stats=a.stats?.[vid]||{};
+    return{vid:String(vid).slice(0,12),occ:p&&(p.occupationId||p.formerOccupation)||'?',
+      profile:a.profiles?.[vid]||'?',agencyObserved:!!a.xp?.[vid],abilities:(v.npcAbilities?.[vid]||[]).slice(),
+      xp:{t:xp.tracking||0,s:xp.survival||0,b:xp.bravery||0},kills:stats.monsterKills||0,exped:stats.expeditions||0};
+  });
+}
 async function runDays(Game, policy, opts) {
   opts = opts || {};
   const days = opts.days || 365;
@@ -329,51 +339,26 @@ async function runDays(Game, policy, opts) {
   // occupation/profile, held abilities, agency XP tracks, key life stats.
   const villagerSnapshot = () => {
     try {
-      const v = Game.state.village || {};
-      const out = [];
-      for (const vid of (v.roster || [])) {
-        let person = null, ag = null;
-        try { person = Game.getPerson ? Game.getPerson(vid) : null; } catch (e) {}
-        try { ag = Game.agencyOf ? Game.agencyOf(vid) : null; } catch (e) {}
-        const axp = ((ag || {}).xp || {})[vid] || {};
-        const astats = ((ag || {}).stats || {})[vid] || {};
-        out.push({
-          vid: String(vid).slice(0, 12),
-          occ: (person && (person.occupationId || person.formerOccupation)) || '?',
-          profile: ((ag && ag.profiles && ag.profiles[vid]) || '?'),
-          abilities: ((v.npcAbilities || {})[vid] || []).slice(),
-          xp: { t: axp.tracking || 0, s: axp.survival || 0, b: axp.bravery || 0 },
-          kills: astats.monsterKills || 0, exped: astats.expeditions || 0,
-        });
-      }
-      return out;
-    } catch (e) { return []; }
+      return snapshotVillagers(Game);
+    } catch (e) { ctx.notes.push('villagerSnapshot read error: '+e.message);return []; }
   };
   const pop = () => ((Game.state.village || {}).roster || []).length;
-  // LIVING-NPC LIVENESS (harnessstop 2026-10-14): the engine-true "is the
-  // village alive" check. The engine declares a LOST village via Game.over /
-  // Game.villageLost (checked every phase of the day loop above). But a
-  // village can be effectively dead — zero living non-scholar villagers —
-  // while the game continues (the scholar survives alone; the engine is
-  // correct to continue: wanderers can join, babies can be born). For sim
-  // measurement the community is gone: no national, no table, no waves.
-  // Liveness uses the engine's own convention — roster minus the scholar
-  // minus .dead-marked person records (cf. game.js:14630, game.js:38703).
-  // NOTE: Game.state.villagers does not exist (always undefined); any
-  // "roster vs state.villagers" disagreement is a phantom — roster is the
-  // real villager list, pruned by removeVillager on every death path.
-  // Fail-open: a read error returns 1 (never stop a living village on a
-  // harness error); the error is noted in ctx.notes.
+  // Population observation is not an ending. Unknown records conservatively
+  // interrupt a known-zero streak and retain an explicit coverage count.
   const livingNPCs = () => {
     try {
       const v = Game.state.village || {};
       const sid = Game.villagerId;
-      return (v.roster || []).filter(id => {
+      let unknown = false;
+      const count = (v.roster || []).filter(id => {
         if (id === sid) return false;
-        try { if ((Game.getPerson(id) || {}).dead) return false; } catch (e) {}
+        try { const p=(Game.data.villagers||[]).find(p=>p.id===id)||
+          (Game.data.background_survivors||[]).find(p=>p.id===id);if(!p)unknown=true;else if(p.dead)return false; }
+        catch (e) { unknown=true;ctx.notes.push('livingNPCs person read error: '+e.message); }
         return true;
       }).length;
-    } catch (e) { ctx.notes.push('livingNPCs read error: ' + e.message); return 1; }
+      return {count,unknown};
+    } catch (e) { ctx.notes.push('livingNPCs read error: ' + e.message); return {count:1,unknown:true}; }
   };
   const pantryKcal = () => {
     try {
@@ -542,14 +527,14 @@ async function runDays(Game, policy, opts) {
     }
   } catch (e) {}
 
-  let day;
-  // DEAD-VILLAGE TAIL (harnessstop 2026-10-14): once livingNPCs() hits 0 the
-  // village is dead for measurement purposes. Simulate a +10d tail so
-  // death-tail telemetry (rot, succession, grief) is still captured, then
-  // stop — a dead village must never grind the full horizon. The tail
-  // resets if the roster recovers (joiners/births), so a revived village
-  // keeps its full run. deadReason feeds endReason below.
-  let deadTail = 0, deadReason = null;
+  let day,iterationsStarted=0;
+  // Preserve the historical ten-iteration community-loss observation while
+  // allowing the living bearer to continue. This is outside saved Game state.
+  let deadTail = 0;
+  const communityExposure={version:1,thresholdIterations:10,observations:0,
+    zeroObservations:0,unknownObservations:0,maxConsecutiveZero:0,
+    sustainedEmpty:false,sustainedEpisodes:0,firstEmpty:null,firstSustainedEmpty:null,
+    recoveredAfterSustained:false,firstRecovery:null};
   // TIME-FREEZE WATCHDOG (crisis leg 2026-10-11): a fight that neither side
   // can advance freezes the day clock (tickAction no-ops mid-fight) — probed
   // 160 loop-days stuck on day 22 with fight=true. Mirrors winrate-iter4's
@@ -558,7 +543,8 @@ async function runDays(Game, policy, opts) {
   let lastSday = null, frozenIters = 0;
   // SIM-OPT: silence the [SLEEP] diagnostics during the day loop only.
   await quietLog(async () => {
-  for (day = 1; day <= days; day++) {
+  for (day = 1; day <= days&&!Game.over; day++) {
+    iterationsStarted++;
     for (let p = 0; p < 3; p++) {
       if (policy.upkeep) { try { withOrigin('policy', () => { ctx._pacingBump('policyCalls'); policy.upkeep(Game, ctx); }); } catch (e) {} }
       driveFights(Game, policy, ctx);
@@ -578,6 +564,7 @@ async function runDays(Game, policy, opts) {
     }
     if (Game.over) break;
     if (policy.daily) { try { withOrigin('policy', () => { ctx._pacingBump('policyCalls'); policy.daily(Game, ctx); }); } catch (e) {} }
+    if(Game.over)break;
     // PACING PROXY: sample the consumed tick budget before sleep rolls the day.
     try {
       const pd = pacingDay(), prow = pacingDays[pd];
@@ -608,13 +595,24 @@ async function runDays(Game, policy, opts) {
       samples.trust.push([day, ts ? ts.mean : null]);
       if (day % 30 === 0) samples.villagers.push([day, villagerSnapshot()]);
     }
-    if (livingNPCs() === 0) {
-      // The old check was `if (pop() === 0) break` — roster length, which
-      // stays >0 while the scholar lives alone (and the scholar's death
-      // without successors already sets Game.over above). A scholar-alone
-      // village simulated the whole horizon for nothing.
-      if (++deadTail >= 10) { deadReason = 'village-dead'; break; }
-    } else deadTail = 0;
+    const population=livingNPCs(),at={iteration:day,gameDay:Game.state.scholar.day};
+    communityExposure.observations++;
+    if(population.unknown)communityExposure.unknownObservations++;
+    if(!population.unknown&&population.count===0){
+      deadTail++;communityExposure.zeroObservations++;
+      communityExposure.maxConsecutiveZero=Math.max(communityExposure.maxConsecutiveZero,deadTail);
+      if(!communityExposure.firstEmpty)communityExposure.firstEmpty=at;
+      if(deadTail===communityExposure.thresholdIterations){
+        communityExposure.sustainedEmpty=true;communityExposure.sustainedEpisodes++;
+        if(!communityExposure.firstSustainedEmpty)communityExposure.firstSustainedEmpty=at;
+      }
+    }else{
+      if(!population.unknown&&population.count>0&&deadTail>=communityExposure.thresholdIterations){
+        communityExposure.recoveredAfterSustained=true;
+        if(!communityExposure.firstRecovery)communityExposure.firstRecovery=at;
+      }
+      deadTail=0;
+    }
   }
   }); // end quietLog day loop
 
@@ -631,7 +629,7 @@ async function runDays(Game, policy, opts) {
 
   const endReason = Game.over
     ? (Game.villageLost ? 'village-lost' : 'over-other')
-    : (day > days ? 'survived' : (deadReason || 'pop-zero'));
+    : 'survived';
 
   // End-state learned sets (coverage 2026-10-09): unioned across runs, these
   // answer "which skills/plants were NEVER learned". Cheaper than tele events.
@@ -681,6 +679,10 @@ async function runDays(Game, policy, opts) {
     gameDays,
     maxWaveUnlocked, waveKills,
     endReason,
+    stop:{version:1,kind:Game.over?'engine-ending':'observation-cap',
+      engineOver:!!Game.over,won:!!Game.won,villageLost:!!Game.villageLost,
+      iterations:iterationsStarted,gameDay:gameDays},
+    communityExposure,
     telemetry: Game.state.telemetry || [],
     samples,
     learnedPlants, learnedSkills,
@@ -800,4 +802,4 @@ function driveContestsImpl(Game, policy, ctx) {
   }
 }
 
-module.exports = { swallowReport, instrumentCatches, mulberry32, loadGame, setupGame, runDays, manifest, driveFights, driveContests, quietLog, ROOT };
+module.exports = { swallowReport, instrumentCatches, mulberry32, loadGame, setupGame, runDays, manifest, driveFights, driveContests, quietLog, snapshotVillagers,ROOT };

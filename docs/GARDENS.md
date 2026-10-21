@@ -1,5 +1,157 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
+## Truthful surplus transfers (2026-10-21)
+
+Both competent-controller donation decisions use donateSurplus: known usable
+food only, a real safe-food reserve, current pantry room and whole-stack public
+actions. Unsafe/unknown/bonded/empty/unshelled stacks cannot pad the reserve.
+Use the engine's preservation-aware spoilage boundary. A successful call must
+remove the actual pack row and earn the matching gift credit; null alone says
+nothing. donated and donatedKcal now count these transfers; donationAttempts
+and donationRefusals remain separate. _lastGiveDay changes only on success.
+The secondary decision retains two days of pack food and one transfer per call;
+the main haul keeps its existing one-day or opt-in trading reserve.
+
+garden-longplay-audit now retains an independent passive direct-donation
+receipt stream and controller counters, with real on/off controls including
+the counters. Baseline/candidate use the same observer and Game; controller
+changes require an explicit methodology comparison. Historical attempt counters
+cannot be relabeled physical gifts. This does not change the all23 contract.
+
+Partial donation remains a player-facing gap: one huge crop stack cannot be
+partly stored through Donate. The controller skips it and tries smaller fitting
+stacks; it never rewrites inventory to simulate a public action. Address the
+real Pack flow next, with phone and Continue proof, before numerical calibration.
+The living-bearer cutoff mentioned in older entries below is already repaired;
+see TERMINAL-CAMPAIGNS.md and solo-campaign-audit-r1.
+
+## Garden controller food loop (2026-10-21)
+
+The shared controller now harvests before new investment and after paid growth,
+prepares real crop food, consumes safe portions and stores eligible safe surplus.
+It preserves unknown food, actual fire/risk gates, original Game costs and its
+four-bed target. Garden work stops for encounters/body changes; permitted combat
+meals retain their existing behavior. Unripe checks do not reschedule unrelated
+eating or donation. Game and player-facing assets are unchanged.
+
+The same-Game methodology comparison retains all23 warnings. Natural long usage
+is48/74 harvesting and47/74 eating cultivated food, versus6/74 and5/74 before.
+Actual consumed crop food1,719,837 kcal includes12,310 ordinary and1,707,527
+assisted. These are crop origins in mixed runs, not ordinary-only/Gardener build
+viability. Output10,530,075 and spoilage7,058,265 nominal kcal show that harvest
+volume alone is insufficient. Direct debits, seeds, stocks and the unallocated
+residual remain separate. See garden-controller-audit-r1 and long-review-r3.
+
+Both82-job arms have eight passing observer controls. The64-case screen gets128
+matching independent before/after Game-hash/outcome/all23 replays, with retained
+same-source baseline reuse. Ten final extended cases reach engine endings through
+day309;22 screen cases remain capped. Wins16→15/7→6/8→9/10→8 and other survival,
+community/progression/gear watches require investigation, not win-rate tuning.
+Game balance and intentional-build/upper-tier coverage remain open for Muse.
+
+Next: remove the driver's living-player/village-dead cutoff with truthful ending
+and community-loss semantics. Then audit harvest/storage decisions: whole-stack
+donation can exceed pantry capacity, and old policy donation counters count attempts.
+Use physical transfers/meals as proof. No new player release is needed for this
+tooling; the published crop-safety Game remains unchanged.
+
+## Harvest safety prerequisite (2026-10-21)
+
+Released864af1192, live build14dd8521d-20261021-074815. Publication-r1 checks
+171 production inputs and a clean fresh phone boot. Quick283/0, full1,055/0,
+prepared24 checks, both phone crop/cook/meal/Continue journeys, real16-stage
+frames and installed update/offline Continue pass. The64 matched natural
+screen cases retain exact outcomes/all23/state hashes with four observer
+controls each. The unchanged controller still never harvests for the player;
+its repair and actual garden viability/calibration remain the next lane.
+
+The retained previous74-case long audit also exposes a policy capacity limit:
+58 campaigns sample Haven tier2,44 tier3, yet the bot never makes more than
+four beds because workGarden uses a four-bed target. This is historical
+opportunity coverage, not a safety-candidate rerun or useful-food proof. See
+garden-food-safety-controller-gap-r1. The next policy audit must measure actual
+upper-tier opportunity and affordability without treating maximum planting as
+an objective. The Game's2/4/6/9 capacity is independently tested.
+
+The player harvest caller constructed bare calorie stacks instead of canonical
+food. Reproduced elderberry, nettle, groundnut, cassava, cushcush and bamboo
+harvests all lacked their normal must-cook risk. Nuts also lacked shelling;
+unknown guided crops revealed names and calories. Before the controller is
+taught to harvest, use foodForageItem with the bearer's actual plant knowledge.
+Keep species units, paid work, cycle reset, producer and cultivated-origin
+shares. Harvest narration uses the believed/unknown name and labels known
+calories before preparation. Pack owns the actual preparation instructions.
+Existing already-harvested save items are not retroactively rewritten.
+
+This changes player crop safety and shelf life to match the same wild species;
+it is a gameplay prerequisite, not a controller-only or passive-metadata change.
+NPC garden duty's safe-only gate remains. Prepared eight-species checks and
+phone cooking prove mechanics, not natural garden-build viability. See the
+garden-food-safety evidence and all23 screen before calibration.
+
+## Cultivated-food accounting released (2026-10-21)
+
+Release9a83bc686, live builddea9296f6-20261021-061958, verifies171 production
+inputs and clean fresh phone boot. Quick282/0 and full1,054/0 preceded the push;
+the publication-receipt follow-up gets its own fresh checks.
+
+See INTAKE-TELEMETRY.md for four crop-origin classes, cumulative actual meals,
+partial/refunded consumption and unknown history. Nominal output, useful
+nourishment, direct debits, seed stock, labor and spoilage remain separate.
+No crop/yield/ability price changed in this milestone. The Pack/prep handler
+also fixes a real completed-meal save gap found with actual touch controls.
+
+The current matched screen retains identical outcomes/all23 metrics. The
+natural usage audit has74 observed campaigns per arm plus8 separate passive
+controls. Current-state hashes match after removing only the two new metadata
+fields; outcomes, all23 and RNG match too. Ten extended cases reach actual
+engine endings;24 of64 screening cases remain capped, not terminal.
+
+Six campaigns harvest; five eat identified cultivated food. Output is137,196
+kcal, known consumed crop food49,955 kcal and primary nourishment45,981 kcal.
+All identified consumed crop food is from assisted cycles. That does not prove
+ordinary-only or ability-build viability. Known spoilage-sweep removal is54,016
+nominal kcal;33,225 nominal kcal remains unallocated by these measurements.
+Processing, seed use, barter/export, uncovered stock and run-end losses remain
+possible parts of that residual. Do not call it waste or silently allocate it.
+
+**Controller limitation:** the shared workGarden policy pays for growth but
+never calls the player's harvest action. The actual census records0 player
+harvest calls versus2,818 paid cultivations;8 NPC pantry deliveries supply all
+observed output. This is an incomplete player loop, not evidence that the Game
+refuses harvests. The phone journey actually grows, harvests and eats both crop
+classes. Before calibrating prices, repair and prove the controller's public
+harvest→store/process/eat loop. Compare old/new controllers on the same Game
+as an explicit methodology change, then use one controller on both Game roots.
+Do not turn zero observed ordinary food into a balance verdict.
+
+The NPC duty still collects only safe crops; caution crops such as
+lamb's-quarters remain standing. This is a source/prepared boundary, not a
+measured population explanation. Do not remove the safety gate and turn
+unprocessed crops into generic safe food. The dawn-crossing cost test also
+retains requested versus elapsed ticks: the current clock discards overshoot
+at dawn. Neither behavior was silently changed to improve the report.
+
+Repeat from the shared current tool checkout, with frozen roots and fresh paths:
+
+```powershell
+node scripts/garden-longplay-audit.js --root <game-root> --par 4 --out evidence/<date>/<fresh-prefix>
+node scripts/summarize-garden-accounting.js --before <before.json.gz> --after <after.json.gz> --out evidence/<date>/<fresh-summary>
+```
+
+Each child loads one seeded shared harness.74 campaigns use the declared
+16-per-policy seed set plus10 fixed extended cases; eight on/off controls
+check full state/outcome/all23/RNG. Iteration caps and actual terminal status
+are distinct. Both arms use one current observer, controller and harness;
+plans retain sources, tools, flags and node version. UTF-8 streams and child
+payload SHA256 are checked before accepting output and cached cases. Resume
+requires exact input fingerprints; completed reports are never overwritten.
+Quick/full run source, route, cost, conservation and transport regressions.
+
+See garden-intake-audit-r1 and long-summary-r2 in dated evidence for receipts,
+prepared/natural limits and final publication gates. The raw before arm has
+unknown cultivated-origin history, not zero garden intake.
+
 Late-game follow-through is retained in caregiver-terminal-audit-r1: naturally
 earned day182 Green Thumb3+Whisper3, existing cultivated crop history, real
 phone paid growth/refused repeat/Continue. This adds an earned opportunity

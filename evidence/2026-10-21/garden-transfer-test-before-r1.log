@@ -1,0 +1,18 @@
+  FAIL a real null-returning gift is counted only after removal and credit
+  ok   actual pantry food retains cultivated origin
+  ok   independent passive receipts count the physical gift
+  FAIL a refused call does not count or postpone contribution
+  FAIL a known full pantry is not repeatedly attempted or counted
+  FAIL an oversized stack does not hide a smaller fitting gift
+  ok   whole-stack donation never spends the personal food buffer
+  ok   declared rotten fixture is beyond the actual preservation bonus
+  FAIL unsafe, unknown, bonded, empty and unshelled stacks neither donate nor pad reserve — {"ctx":{"donated":7,"_lastGiveDay":85},"day":85,"bonus":6,"remaining":["Unknown","Bonded"]}
+  FAIL unsafe calories cannot make the only safe meal look surplus
+  FAIL preservation fixture is actually fresh under its owned modifier
+  FAIL the controller follows the real spoilage boundary rather than raw dates
+  ok   no remote donation attempt is invented
+  FAIL the second decision uses its two-day buffer and one-transfer limit
+  FAIL receipt observation reports no inconsistent physical transfers
+
+Donation receipts: 5 passed, 10 failed, 0 todo (phase 0)
+failing: a real null-returning gift is counted only after removal and credit | a refused call does not count or postpone contribution | a known full pantry is not repeatedly attempted or counted | an oversized stack does not hide a smaller fitting gift | unsafe, unknown, bonded, empty and unshelled stacks neither donate nor pad reserve | unsafe calories cannot make the only safe meal look surplus | preservation fixture is actually fresh under its owned modifier | the controller follows the real spoilage boundary rather than raw dates | the second decision uses its two-day buffer and one-transfer limit | receipt observation reports no inconsistent physical transfers

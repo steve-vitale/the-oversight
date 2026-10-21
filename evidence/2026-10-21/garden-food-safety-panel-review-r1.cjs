@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),z=require('zlib'),assert=require('assert/strict'),B=require('../../scripts/balance-panel');
+const read=arm=>JSON.parse(z.gunzipSync(fs.readFileSync('evidence/2026-10-21/garden-food-safety-'+arm+'.json.gz'))),b=read('before-r1'),a=read('after-r3');
+assert.deepEqual(a.sources,B.manifest(process.cwd()));assert(a.validity.sourcesStable&&b.validity.sourcesStable);
+assert.equal(a.observerDigest,b.observerDigest);assert.equal(a.contractDigest,b.contractDigest);assert.equal(a.rows.length,64);assert.equal(b.rows.length,64);
+const key=r=>r.row.policy+':'+r.row.seed,before=new Map(b.rows.map(r=>[key(r),r]));
+const rows=a.rows.map(r=>{const old=before.get(key(r));assert(old);return{policy:r.row.policy,seed:r.row.seed,metricsEqual:JSON.stringify(r.metrics)===JSON.stringify(old.metrics),stateHashEqual:r.stateHash===old.stateHash,outcomeEqual:['endReason','won','gameDays','table','entered','deaths'].every(k=>JSON.stringify(r.row[k])===JSON.stringify(old.row[k]))};});
+assert(rows.every(r=>r.metricsEqual&&r.stateHashEqual&&r.outcomeEqual));
+for(const p of [b,a])assert(p.validity.neutrality.length===4&&p.validity.neutrality.every(n=>n.match&&!n.warnings));
+const result={scope:'64 matched natural screen campaigns, same current observer/controller/harness, frozen Game roots; not garden path viability or holdout balance clearance.',rows,neutralControlsPerArm:4,changedGameInputs:Object.keys(a.sources).filter(k=>a.sources[k]!==b.sources[k]),note:'Player harvest remains absent in this controller. Prepared phone/runtime tests prove the repaired caller; exact natural outcomes do not prove it was exercised.'};
+fs.writeFileSync('evidence/2026-10-21/garden-food-safety-panel-review-r1.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({pairs:rows.length,all23Equal:true,stateHashesEqual:true,outcomesEqual:true,neutrality:4,changedGameInputs:result.changedGameInputs}));
