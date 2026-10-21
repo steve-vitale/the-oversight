@@ -1,0 +1,933 @@
+{
+ "meta": {
+  "policy": "leadfeast",
+  "kind": "rotdiff-b-diagnostic",
+  "days": 180,
+  "seeds": [
+   22001,
+   22002,
+   22003,
+   22004,
+   22005,
+   22006,
+   22007,
+   22008
+  ],
+  "env": {
+   "FEASTSCALE_R13": "1",
+   "SEATDRIVE": "0",
+   "SURPLUSFEED": "unset"
+  }
+ },
+ "rows": [
+  {
+   "seed": 22001,
+   "end": {
+    "seed": 22001,
+    "policy": "leadfeast",
+    "days": 123,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 3,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 122517,
+     "writeSurplusKcal": 484600,
+     "writePantryCalls": 213,
+     "writeSurplusCalls": 832,
+     "writeNames": {
+      "Foraged food": 89598,
+      "Snared meat": 1397,
+      "Expedition haul": 18774,
+      "Pit meat (Raccoon)": 531,
+      "System-replicated (enthusiastic) meal": 300,
+      "Pit meat (White-tailed Deer)": 595,
+      "Aid from Stonebridge": 11322
+     },
+     "clockMix": {
+      "pantry|3": 122517,
+      "surplus|3": 484600
+     },
+     "rotClass": {
+      "surplus-3d": 257960,
+      "pantry-coarse": 69660,
+      "other-path": 56680,
+      "pantry-base": 198
+     },
+     "rotPath": {
+      "pantry": 69858,
+      "surplus": 257960,
+      "other": 56680
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 89,
+       "meanDraws": 1.56,
+       "meanSatDays": 7.83
+      },
+      "pantry-coarse": {
+       "n": 134,
+       "meanDraws": 0,
+       "meanSatDays": 6.41
+      },
+      "other-path": {
+       "n": 23,
+       "meanDraws": 0.22,
+       "meanSatDays": 0
+      },
+      "pantry-base": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 9
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 364,
+     "drawnKcalByPath": {
+      "pantry": 11500,
+      "surplus": 154000,
+      "other": 39310
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 137,
+       "meanLagDays": 4.66
+      },
+      "surplus": {
+       "n": 137,
+       "meanLagDays": 6.18
+      }
+     }
+    },
+    "spoilLines": [
+     "d5: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d9: The village threw out spoiled stores: Foraged food. Tomas mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d10: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d11: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d12: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d13: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d14: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d15: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d16: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d17: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d18: Overnight, Staghorn Sumac went bad — beyond saving. You leave it for the flies.",
+     "d23: The village threw out spoiled stores: Foraged food. (pantry)"
+    ],
+    "ms": 2458
+   }
+  },
+  {
+   "seed": 22002,
+   "end": {
+    "seed": 22002,
+    "policy": "leadfeast",
+    "days": 134,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 4,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 106416,
+     "writeSurplusKcal": 542000,
+     "writePantryCalls": 175,
+     "writeSurplusCalls": 806,
+     "writeNames": {
+      "Foraged food": 70868,
+      "Snared meat": 1778,
+      "Expedition haul": 17306,
+      "Aid from Stonebridge": 5818,
+      "Expedition meat": 1050,
+      "Aid from Emberhold": 7441,
+      "Aid from Thornfield": 2155
+     },
+     "clockMix": {
+      "surplus|3": 542000,
+      "pantry|3": 106416
+     },
+     "rotClass": {
+      "pantry-coarse": 41397,
+      "surplus-3d": 116200,
+      "other-path": 47409,
+      "pantry-base": 91
+     },
+     "rotPath": {
+      "pantry": 41488,
+      "surplus": 116200,
+      "other": 47409
+     },
+     "rotDrawsByClass": {
+      "pantry-coarse": {
+       "n": 64,
+       "meanDraws": 0.02,
+       "meanSatDays": 7.95
+      },
+      "surplus-3d": {
+       "n": 45,
+       "meanDraws": 2.29,
+       "meanSatDays": 3
+      },
+      "other-path": {
+       "n": 36,
+       "meanDraws": 0.17,
+       "meanSatDays": 0
+      },
+      "pantry-base": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 3
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 482,
+     "drawnKcalByPath": {
+      "pantry": 9495,
+      "surplus": 306534,
+      "other": 40998
+     },
+     "firstDrawLag": {
+      "surplus": {
+       "n": 188,
+       "meanLagDays": 6.89
+      },
+      "pantry|3": {
+       "n": 156,
+       "meanLagDays": 6.15
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d5: Overnight, unknown berries; Mayapple went bad — beyond saving. You leave them for the flies.",
+     "d6: Overnight, Blackberry went bad — beyond saving. You leave it for the flies.",
+     "d8: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d11: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d13: On the carcass nearby, Night Court (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d14: On the carcass nearby, Sunback (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d27: Overnight, Blackberry went bad — beyond saving. You leave it for the flies.",
+     "d28: Overnight, Blackberry went bad — beyond saving. You leave it for the flies.",
+     "d31: The village threw out spoiled stores: Foraged food, Foraged food (dried). Liam mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d32: Overnight, Blackberry went bad — beyond saving. You leave it for the flies.",
+     "d33: Overnight, Blackberry went bad — beyond saving. You leave it for the flies."
+    ],
+    "ms": 2140
+   }
+  },
+  {
+   "seed": 22003,
+   "end": {
+    "seed": 22003,
+    "policy": "leadfeast",
+    "days": 142,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 4,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 127406,
+     "writeSurplusKcal": 332000,
+     "writePantryCalls": 206,
+     "writeSurplusCalls": 831,
+     "writeNames": {
+      "Foraged food": 80161,
+      "Expedition haul": 4873,
+      "Trial feast": 600,
+      "Aid from Emberhold": 5796,
+      "Aid from Stonebridge": 22703,
+      "Fish catch": 13273
+     },
+     "clockMix": {
+      "pantry|3": 127406,
+      "surplus|3": 332000
+     },
+     "rotClass": {
+      "surplus-3d": 31360,
+      "pantry-coarse": 12698,
+      "other-path": 13100
+     },
+     "rotPath": {
+      "pantry": 12698,
+      "surplus": 31360,
+      "other": 13100
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 21,
+       "meanDraws": 1.81,
+       "meanSatDays": 3.62
+      },
+      "pantry-coarse": {
+       "n": 23,
+       "meanDraws": 0.09,
+       "meanSatDays": 8.74
+      },
+      "other-path": {
+       "n": 8,
+       "meanDraws": 0.38,
+       "meanSatDays": 0
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 452,
+     "drawnKcalByPath": {
+      "pantry": 13900,
+      "surplus": 171360,
+      "other": 46900
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 249,
+       "meanLagDays": 2.84
+      },
+      "surplus": {
+       "n": 180,
+       "meanLagDays": 3.03
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d6: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d7: Overnight, unknown berries; unknown shoots went bad — beyond saving. You leave them for the flies.",
+     "d11: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d12: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d13: Overnight, Blackberry went bad — beyond saving. You leave it for the flies.",
+     "d14: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d15: On the carcass nearby, Cliffhanger (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d33: On the carcass nearby, Glasswing Darter (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d34: The village threw out spoiled stores: Foraged food. Yousef mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d35: Overnight, Blackberry; Muscadine Grapes went bad — beyond saving. You leave them for the flies.",
+     "d35: The village threw out spoiled stores: Foraged food. (pantry)"
+    ],
+    "ms": 2337
+   }
+  },
+  {
+   "seed": 22004,
+   "end": {
+    "seed": 22004,
+    "policy": "leadfeast",
+    "days": 121,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 5,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 88386,
+     "writeSurplusKcal": 446200,
+     "writePantryCalls": 166,
+     "writeSurplusCalls": 758,
+     "writeNames": {
+      "Foraged food": 67107,
+      "Expedition haul": 2297,
+      "Fish catch": 4805,
+      "Aid from Emberhold": 5494,
+      "Aid from Thornfield": 8683
+     },
+     "clockMix": {
+      "pantry|3": 88386,
+      "surplus|3": 446200
+     },
+     "rotClass": {
+      "pantry-coarse": 29827,
+      "surplus-3d": 110600,
+      "other-path": 52980
+     },
+     "rotPath": {
+      "pantry": 29827,
+      "surplus": 110600,
+      "other": 52980
+     },
+     "rotDrawsByClass": {
+      "pantry-coarse": {
+       "n": 58,
+       "meanDraws": 0,
+       "meanSatDays": 8.21
+      },
+      "surplus-3d": {
+       "n": 42,
+       "meanDraws": 1.93,
+       "meanSatDays": 4.86
+      },
+      "other-path": {
+       "n": 18,
+       "meanDraws": 0.11,
+       "meanSatDays": 0
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 412,
+     "drawnKcalByPath": {
+      "pantry": 8200,
+      "surplus": 271280,
+      "other": 53010
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 182,
+       "meanLagDays": 3.05
+      },
+      "surplus": {
+       "n": 163,
+       "meanLagDays": 4.44
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d5: Overnight, unknown roots went bad — beyond saving. You leave it for the flies.",
+     "d6: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d7: Overnight, Mayapple went bad — beyond saving. You leave it for the flies.",
+     "d8: Overnight, Stinging Nettle; unknown shoots went bad — beyond saving. You leave them for the flies.",
+     "d9: Overnight, Burdock went bad — beyond saving. You leave it for the flies.",
+     "d9: The village threw out spoiled stores: Foraged food. Nathan mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d10: On the carcass nearby, a soft green glow under the water (carcass), the humming in the grass (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d11: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies.",
+     "d11: On the carcass nearby, Night Court (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d12: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d14: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies."
+    ],
+    "ms": 2027
+   }
+  },
+  {
+   "seed": 22005,
+   "end": {
+    "seed": 22005,
+    "policy": "leadfeast",
+    "days": 136,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 6,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 114981,
+     "writeSurplusKcal": 412800,
+     "writePantryCalls": 214,
+     "writeSurplusCalls": 633,
+     "writeNames": {
+      "Foraged food": 74309,
+      "Snared meat": 3880,
+      "Pit meat (White-tailed Deer)": 1596,
+      "Expedition haul": 1094,
+      "Fish catch": 19838,
+      "System-replicated (enthusiastic) meal": 300,
+      "Aid from The Hungry Road": 7157,
+      "Pit meat (Virginia Opossum)": 556,
+      "Aid from Stonebridge": 6251
+     },
+     "clockMix": {
+      "pantry|3": 114981,
+      "surplus|3": 412800
+     },
+     "rotClass": {
+      "surplus-3d": 89600,
+      "pantry-coarse": 25851,
+      "other-path": 13500
+     },
+     "rotPath": {
+      "pantry": 25851,
+      "surplus": 89600,
+      "other": 13500
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 35,
+       "meanDraws": 2.03,
+       "meanSatDays": 5.91
+      },
+      "pantry-coarse": {
+       "n": 58,
+       "meanDraws": 0,
+       "meanSatDays": 7.95
+      },
+      "other-path": {
+       "n": 9,
+       "meanDraws": 0,
+       "meanSatDays": 0
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 488,
+     "drawnKcalByPath": {
+      "pantry": 12000,
+      "surplus": 211480,
+      "other": 57300
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 216,
+       "meanLagDays": 1.55
+      },
+      "surplus": {
+       "n": 159,
+       "meanLagDays": 2.24
+      }
+     }
+    },
+    "spoilLines": [
+     "d5: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d6: Overnight, Purslane; unknown berries went bad — beyond saving. You leave them for the flies.",
+     "d11: The village threw out spoiled stores: Foraged food. Chloe mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d12: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d26: The village threw out spoiled stores: Foraged food, Foraged food (dried). (pantry)",
+     "d27: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d27: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d34: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d35: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d35: On the carcass nearby, The Anaconda Empress (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d38: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d42: Overnight, Purslane; Blackberry went bad — beyond saving. You leave them for the flies."
+    ],
+    "ms": 2129
+   }
+  },
+  {
+   "seed": 22006,
+   "end": {
+    "seed": 22006,
+    "policy": "leadfeast",
+    "days": 155,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 3,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 81603,
+     "writeSurplusKcal": 583200,
+     "writePantryCalls": 158,
+     "writeSurplusCalls": 874,
+     "writeNames": {
+      "Foraged food": 67188,
+      "Expedition haul": 1052,
+      "System-replicated (enthusiastic) meal": 300,
+      "Aid from Stonebridge": 2041,
+      "Aid from Thornfield": 10322,
+      "Fish catch": 700
+     },
+     "clockMix": {
+      "pantry|3": 22825,
+      "surplus|3": 583200,
+      "pantry|6": 58778
+     },
+     "rotClass": {
+      "pantry-coarse": 9656,
+      "surplus-3d": 96040,
+      "other-path": 39135,
+      "pantry-clock6": 18073
+     },
+     "rotPath": {
+      "pantry": 27729,
+      "surplus": 96040,
+      "other": 39135
+     },
+     "rotDrawsByClass": {
+      "pantry-coarse": {
+       "n": 21,
+       "meanDraws": 0,
+       "meanSatDays": 16.62
+      },
+      "surplus-3d": {
+       "n": 43,
+       "meanDraws": 1.95,
+       "meanSatDays": 10.86
+      },
+      "other-path": {
+       "n": 22,
+       "meanDraws": 0.09,
+       "meanSatDays": 0
+      },
+      "pantry-clock6": {
+       "n": 30,
+       "meanDraws": 0,
+       "meanSatDays": 12.9
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 634,
+     "drawnKcalByPath": {
+      "pantry": 6000,
+      "surplus": 379640,
+      "other": 33817
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 55,
+       "meanLagDays": 8.93
+      },
+      "surplus": {
+       "n": 187,
+       "meanLagDays": 6.72
+      },
+      "pantry|6": {
+       "n": 104,
+       "meanLagDays": 6.8
+      }
+     }
+    },
+    "spoilLines": [
+     "d10: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d11: Overnight, Greenbrier Shoots went bad — beyond saving. You leave it for the flies.",
+     "d12: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d13: Overnight, Stinging Nettle; Muscadine Grapes went bad — beyond saving. You leave them for the flies.",
+     "d14: Nothing edible. (Sunbasker (carcass) — not food yet: A carcass. Clean it with a knife — quickly. Spoils fast..)",
+     "d16: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies.",
+     "d16: On the carcass nearby, Sunbasker (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d19: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies.",
+     "d21: Overnight, unknown shoots; Stinging Nettle went bad — beyond saving. You leave them for the flies.",
+     "d23: Overnight, Purslane went bad — beyond saving. You leave it for the flies.",
+     "d25: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies.",
+     "d28: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies."
+    ],
+    "ms": 2333
+   }
+  },
+  {
+   "seed": 22007,
+   "end": {
+    "seed": 22007,
+    "policy": "leadfeast",
+    "days": 116,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 1,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 116064,
+     "writeSurplusKcal": 253400,
+     "writePantryCalls": 189,
+     "writeSurplusCalls": 580,
+     "writeNames": {
+      "Foraged food": 72350,
+      "Expedition haul": 21183,
+      "System-replicated (enthusiastic) meal": 300,
+      "Aid from Emberhold": 1574,
+      "Aid from Stonebridge": 13691,
+      "Fish catch": 6966
+     },
+     "clockMix": {
+      "pantry|3": 116064,
+      "surplus|3": 253400
+     },
+     "rotClass": {
+      "pantry-coarse": 12386,
+      "other-path": 1100,
+      "surplus-3d": 22000
+     },
+     "rotPath": {
+      "pantry": 12386,
+      "surplus": 22000,
+      "other": 1100
+     },
+     "rotDrawsByClass": {
+      "pantry-coarse": {
+       "n": 17,
+       "meanDraws": 0.12,
+       "meanSatDays": 4.65
+      },
+      "other-path": {
+       "n": 2,
+       "meanDraws": 1.5,
+       "meanSatDays": 0
+      },
+      "surplus-3d": {
+       "n": 9,
+       "meanDraws": 2.67,
+       "meanSatDays": 5
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 450,
+     "drawnKcalByPath": {
+      "pantry": 22300,
+      "surplus": 145640,
+      "other": 72280
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 205,
+       "meanLagDays": 1.48
+      },
+      "surplus": {
+       "n": 132,
+       "meanLagDays": 1.4
+      }
+     }
+    },
+    "spoilLines": [
+     "d7: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d8: Overnight, unknown roots went bad — beyond saving. You leave it for the flies.",
+     "d10: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d11: Overnight, Burdock went bad — beyond saving. You leave it for the flies.",
+     "d13: On the carcass nearby, The Anaconda Empress (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d19: On the carcass nearby, Hummice (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d20: On the carcass nearby, The Anaconda Empress (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d21: The village threw out spoiled stores: Expedition haul. Violet mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d22: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d29: On the carcass nearby, Cliffhanger (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d50: On the carcass nearby, Big-Eyes (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d62: On the carcass nearby, The Loud Beast (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost."
+    ],
+    "ms": 1837
+   }
+  },
+  {
+   "seed": 22008,
+   "end": {
+    "seed": 22008,
+    "policy": "leadfeast",
+    "days": 137,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "nationalLive": true,
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 1,
+    "exiled": 0,
+    "pkEnd": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 110720,
+     "writeSurplusKcal": 747600,
+     "writePantryCalls": 192,
+     "writeSurplusCalls": 971,
+     "writeNames": {
+      "Foraged food": 63170,
+      "Expedition haul": 23856,
+      "Snared meat": 7192,
+      "System-replicated (enthusiastic) meal": 300,
+      "Aid from Stonebridge": 8682,
+      "Aid from Emberhold": 5560,
+      "Fish catch": 1960
+     },
+     "clockMix": {
+      "pantry|3": 32433,
+      "surplus|3": 747600,
+      "pantry|6": 78287
+     },
+     "rotClass": {
+      "pantry-coarse": 20583,
+      "surplus-3d": 412252,
+      "other-path": 69612,
+      "pantry-base": 186,
+      "pantry-clock6": 36496
+     },
+     "rotPath": {
+      "pantry": 57265,
+      "surplus": 412252,
+      "other": 69612
+     },
+     "rotDrawsByClass": {
+      "pantry-coarse": {
+       "n": 23,
+       "meanDraws": 0,
+       "meanSatDays": 12.61
+      },
+      "surplus-3d": {
+       "n": 104,
+       "meanDraws": 1.28,
+       "meanSatDays": 9
+      },
+      "other-path": {
+       "n": 25,
+       "meanDraws": 0.08,
+       "meanSatDays": 0
+      },
+      "pantry-base": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 3
+      },
+      "pantry-clock6": {
+       "n": 67,
+       "meanDraws": 0.03,
+       "meanSatDays": 6.42
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 431,
+     "drawnKcalByPath": {
+      "pantry": 2500,
+      "surplus": 252416,
+      "other": 50240
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 37,
+       "meanLagDays": 9.81
+      },
+      "surplus": {
+       "n": 155,
+       "meanLagDays": 8.61
+      },
+      "pantry|6": {
+       "n": 110,
+       "meanLagDays": 3.78
+      }
+     }
+    },
+    "spoilLines": [
+     "d11: The village threw out spoiled stores: Foraged food. Ursula mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d13: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d14: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d15: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d17: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d20: On the carcass nearby, Hushpuppy (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d23: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d24: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d25: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d26: The village threw out spoiled stores: Foraged food, Winner's share (alien rations). (pantry)",
+     "d27: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d27: On the carcass nearby, Big-Eyes (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost."
+    ],
+    "ms": 2858
+   }
+  }
+ ]
+}
