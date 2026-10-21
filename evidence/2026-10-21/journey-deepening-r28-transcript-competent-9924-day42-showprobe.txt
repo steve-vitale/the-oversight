@@ -1,0 +1,32 @@
+=== seed 9924 day 42 — conversation with Vasyl (vasyl_shevchenko) ===
+occupation=infantry soldier temperament=withdrawn trust=64 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "I walked out of Pattern Hunger. Alive. That's the whole story and it's enough."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Forget it."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Wild Ginger — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Just... be straight with me."
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Sassafras — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+closing line: "I need some air. Alone air. You understand."
+want final: id=curious stage=3 resolution=engaged
