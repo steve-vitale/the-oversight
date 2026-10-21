@@ -71,6 +71,17 @@ The flips read as the village-as-protagonist story, not artifacts: s64843 — El
 3. **#752 panel "playerDeaths" mislabel:** this arm runs no panel (§15: no before/after — measurement correction, not a lever). The mislabel is noted here per the brief; the contract is unchanged (Steve's call).
 4. **Twovets-armed re-run impossibility:** documented, not a gap — the corpus's own kill-time bearerAtKill covers the single kill; re-running would require resurrecting kill-protocol-deleted code.
 
+## Phantom-hunt confirmation (independent verification, same run)
+
+The brief authorized one re-run of s64712 with the instrument to reproduce the literal d74 ethan_hunt companion kill. The original arm concluded the trajectory existed only on a transient "rebase-window" base. An independent re-run was attempted on the twovets-r2 base itself (9c634ebac, the base named in sim-twovets.md's header), all 4 s64712 configs, scratch tree `killtime-anchor9` (released at closeout), vgearconfirm substrate env FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 KILLDISC=1 (VGEAR=1 on armed). Per-seed JSONs: evidence/2026-10-21/perseed-killtime/{control,vgear}-{leadfeast,belongfeast}-s64712-9c634ebac.json.
+
+**Result: the literal d74 ethan_hunt kill does not reproduce on 9c634ebac either.** Trajectories diverge by base (control-belongfeast won at d122 with 2 wave-4 kills; on the vgearconfirm anchor the same config had 0). The same succession-churn misattribution mechanism fires on this base, in both directions of the phantom family:
+- control-belongfeast-s64712: Benoit takes the mantle d66, kills the Influencer d97 AND d108 as the scholar; Habiba d109, Yuki d118 (end). End-of-run attribution says "villager" (end-scholar Yuki); kill-time says scholar. 2 flips, 0 unexplained, 0 errors.
+- vgear-leadfeast-vgear-s64712: Caleb takes the mantle d72, kills the Algorithm d73 as the scholar; Nandini d82 (end). End-of-run says "villager"; kill-time says scholar. 1 flip, 0 unexplained, 0 errors. (Caleb-as-bearer-at-kill echoes the phantom's shape — caleb_jones was the kill-day bearer in the original d74 report — but the killer here is Caleb himself, via=player, not ethan_hunt.)
+- control-leadfeast-s64712: village lost d55, 0 wave-4 kills. vgear-belongfeast-vgear-s64712: village lost d44, 0 wave-4 kills.
+
+**Verdict: the metric-review item 1 conclusion stands, independently confirmed on a second base.** The d74 ethan_hunt trajectory is transient (observed in the twovets-r2 rebase window, unrecoverable on 9c634ebac, 0713c9398beb, or current HEAD). The mechanism is now proven on three bases: E4 synthetic fixture, the vgearconfirm-anchor corpus (8 flips), and 9c634ebac (3 flips). The DIAG-GO letter remains satisfied on the mechanism.
+
 ## Convergence
 
 `converged` for backlog #753 (measurement correction): the instrument exists, is proven (38/38 proof gates green), both corpora are re-attributed with 0 unexplained / 0 errors, corrected numbers are filed, and no published claim flips. The veteran-channel numbers the scale-onramp axis reasons about are now kill-time honest. #753 → fixed.
