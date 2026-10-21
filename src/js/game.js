@@ -14833,32 +14833,43 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // donateToPantry: give food to the village. Builds trust.
     // Generosity is remembered. This is how you earn your place.
-    donateToPantry(idx) {
-      // PHYSICAL STORES (miser break-it 2026-10-08): the pantry is in the hall —
-      // the take paths already refuse remote hands. Donating had no gate: the
-      // pack UI's Donate button teleported food into the hall from anywhere.
-      // Same gate, same honesty. 'remote' (Full Integration) still works.
-      if (this.havenStoresAccess && this.havenStoresAccess() === 'none') {
-        this.say('The pantry is in the hall. Your hands are not.');
-        return null;
-      }
+    pantryDonationOptions(idx) {
+      const fail = why => ({ ok: false, why, maxUnits: 0 });
+      if (this.over || this.won) return fail('This expedition has ended.');
+      if (this.havenStoresAccess && this.havenStoresAccess() === 'none') return fail('The pantry is in the hall. Your hands are not.');
+      if (!Number.isSafeInteger(idx) || idx < 0) return fail('Choose food from your pack.');
       const item = this.state.scholar.inventory[idx];
-      if (!item || (item.kcalEach || 0) <= 0) { this.say('That\'s not food.'); return null; }
-      // MONSTER FOOD SAFETY: untested flesh is not a gift. The village doesn't
-      // want your mystery meat either — test it before feeding it to anyone.
-      if (item.edible === false) { this.say(`You don't know if that's food. Test it cautiously before feeding it to anyone.`); return null; }
-      // RELIC BOND: non-transferable. A bonded relic in a stranger's hands is just stuff.
-      if (item.bonded) { this.say(`That's yours. Not the village's. You can't give away your ${item.name}.`); return null; }
+      if (!item || !Number.isFinite(item.kcalEach) || item.kcalEach <= 0) return fail('That is not food.');
+      if (!Number.isSafeInteger(item.kcalEach)) return fail('This food cannot be measured into pantry portions.');
+      const units = item.units ?? 1;
+      if (!Number.isSafeInteger(units) || units <= 0) return fail('There are no whole food units to donate.');
+      if (item.edible === false) return fail('You do not know if that is food. Test it cautiously before feeding it to anyone.');
+      if (item.bonded) return fail(`You cannot give away your bonded ${item.name}.`);
+      if (this.isSpoiled && this.isSpoiled(item)) return fail('That food has spoiled. It cannot feed the village.');
+      const room = Math.max(0, this.pantryCapKcal() - this.pantryKcal());
+      const maxUnits = Math.min(units, Math.floor(room / item.kcalEach));
+      if (!maxUnits) return fail('The pantry has no room for a unit of this food. Expand storage or use what is already there.');
+      return { ok: true, units, maxUnits, kcalEach: item.kcalEach };
+    },
+    donateToPantry(idx, units) {
+      const choice = this.pantryDonationOptions(idx);
+      if (!choice.ok) { this.say(choice.why); return null; }
+      const amount = units === undefined ? choice.units : units;
+      if (!Number.isSafeInteger(amount) || amount <= 0 || amount > choice.units) {
+        this.say('Choose a positive whole number of food units from this stack.'); return null;
+      }
+      if (amount > choice.maxUnits) { this.say(`Only ${choice.maxUnits} units of this food fit in the pantry. Your food stays in your pack.`); return null; }
+      const item = this.state.scholar.inventory[idx];
       const v = this.state.village;
       // add to pantry
       v.pantry = v.pantry || [];
       // FUNGIBILITY (break-it food 2026-10-08): merge only into a truly
       // identical stack — name-only merging destroyed donated value.
-      const kcal = (item.kcalEach || 0) * (item.units || 1);
+      const kcal = item.kcalEach * amount;
       // GRANARY (haven growth 2026-10-10): cool dark bins slow spoilage for
       // newly donated food (+3d fresh, +14d preserved). Merged-into-old-stack
       // donations keep the old stack's clock (existing behavior).
-      const donated = { ...item };
+      const donated = { ...item, units: amount };
       try {
         const b = this.granarySpoilBonus ? this.granarySpoilBonus(donated.foodState) : 0;
         if (b && isFinite(donated.spoilDay)) {
@@ -14876,8 +14887,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // other deposit — the helper merges split pieces into matching stacks.
       this.depositPantryPieces(v, donated, 500);
       // remove from inventory
-      this.state.scholar.inventory.splice(idx, 1);
-      this._creditPantryGift(item, kcal);
+      if (amount === choice.units) this.state.scholar.inventory.splice(idx, 1);
+      else item.units = choice.units - amount;
+      this._creditPantryGift(donated, kcal);
       return null;
     },
     // Only an actual deliberate player transfer earns gift credit. Internal

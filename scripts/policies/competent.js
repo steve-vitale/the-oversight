@@ -1399,7 +1399,7 @@ function donationFoodReady(Game,it) {
     it.safe!==false&&!it.needsCooking&&it.foodState!=='in_shell'&&
     !it.diseaseRisk&&!it.poisonRisk&&!it.parasiteRisk&&!Game.isSpoiled(it);
 }
-// Both donation decisions use physical removal AND the engine's gift ledger.
+// Both donation decisions use physically moved units AND the gift ledger.
 // null is the public action's result on success as well as refusal.
 function donateSurplus(Game,ctx,options={}) {
   let transferred=0;
@@ -1412,21 +1412,27 @@ function donateSurplus(Game,ctx,options={}) {
     if(!Number.isFinite(keep)||keep<0)return 0;
     for(let i=inv.length-1;i>=0&&transferred<max&&active();i--){
       const it=inv[i];if(!donationFoodReady(Game,it))continue;
-      const kcal=it.kcalEach*(it.units??1);
+      const have=it.units??1;
       const available=inv.reduce((n,item)=>n+(donationFoodReady(Game,item)?item.kcalEach*(item.units??1):0),0);
-      if(available-kcal<keep)continue;
       const room=Game.pantryCapKcal()-Game.pantryKcal();
-      if(!Number.isFinite(room)||room<kcal)continue; // whole-stack action only
+      if(!Number.isFinite(room))continue;
+      let amount=have;
+      if(typeof Game.pantryDonationOptions==='function'){
+        const choice=Game.pantryDonationOptions(i);if(!choice.ok)continue;
+        amount=Math.min(have,choice.maxUnits,Math.floor(Math.max(0,available-keep)/it.kcalEach));
+        if(!Number.isSafeInteger(amount)||amount<=0)continue;
+      }else if(available-have*it.kcalEach<keep||room<have*it.kcalEach)continue;
+      const kcal=it.kcalEach*amount;
       const vid=Game.villagerId,before=(Game.state.village.gives||{})[vid]||0;
       ctx.donationAttempts=(ctx.donationAttempts||0)+1;
-      Game.donateToPantry(i);
+      Game.donateToPantry(i,amount);
       const credited=((Game.state.village.gives||{})[vid]||0)-before;
-      const removed=!inv.includes(it);
-      if(removed&&Math.abs(credited-kcal)<1e-6){
+      const moved=have-(inv.includes(it)?it.units??1:0);
+      if(moved===amount&&Math.abs(credited-kcal)<1e-6){
         transferred++;ctx.donated=(ctx.donated||0)+1;
         ctx.donatedKcal=(ctx.donatedKcal||0)+credited;
         ctx._lastGiveDay=s.day||0;
-      }else if(!removed&&credited===0)ctx.donationRefusals=(ctx.donationRefusals||0)+1;
+      }else if(moved===0&&credited===0)ctx.donationRefusals=(ctx.donationRefusals||0)+1;
       else throw Error('Donation removal and gift credit disagree');
     }
   }catch(e){

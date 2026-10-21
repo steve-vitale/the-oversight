@@ -1,0 +1,24 @@
+  FAIL partial donation preserves the actual remaining row and units
+  FAIL the real pantry receives exactly the selected calories
+  FAIL independent receipts recognize a transfer without removing the whole row
+  ok   the retained food keeps all non-quantity metadata
+  ok   every delivered piece preserves food state, plant and origin shares
+  FAIL delivered weight matches the selected food
+  ok   giving food retains its existing free action cost
+  FAIL the shared options expose actual fitting whole units
+  ok   over-capacity request leaves food and credit unchanged
+  FAIL an explicit fitting part reaches capacity without losing the rest
+  FAIL invalid, fractional and excessive quantities never transfer or earn credit
+  FAIL an explicit empty stack cannot mint food
+  FAIL unmeasurable legacy calories are not rounded into a gift
+  ok   unknown food remains blocked with no gift credit
+  ok   partial quantities cannot bypass a bond
+  FAIL a refused partial rotten-food request never discards the unselected stack
+  ok   partial transfers cannot reach the hall remotely
+  ok   omitted quantity retains whole-stack donation behavior
+  ok   selecting the complete stack removes exactly that row
+  ok   taking the partial gift back revokes its owed trust/XP
+  FAIL partial and whole receipts have no physical/credit discrepancies
+
+Partial pantry donation: 10 passed, 11 failed, 0 todo (phase 0)
+failing: partial donation preserves the actual remaining row and units | the real pantry receives exactly the selected calories | independent receipts recognize a transfer without removing the whole row | delivered weight matches the selected food | the shared options expose actual fitting whole units | an explicit fitting part reaches capacity without losing the rest | invalid, fractional and excessive quantities never transfer or earn credit | an explicit empty stack cannot mint food | unmeasurable legacy calories are not rounded into a gift | a refused partial rotten-food request never discards the unselected stack | partial and whole receipts have no physical/credit discrepancies

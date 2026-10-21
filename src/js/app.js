@@ -15168,17 +15168,20 @@
   function packActionFeedback(fn, fallback) {
     const before = (Game.log || []).slice(), last = before[before.length - 1];
     const state=Game.state, eatenBefore=state.village.harvestIntakeTotals?.records || 0;
+    const giver=Game.villagerId,giftsBefore=(state.village.gives||{})[giver]||0;
     Game.feedbackMark();
     const result = fn(), log = Game.log || [];
     // Pack and prep-counter bites finish here, after food, benefits and the
     // action/clock settle. Persist an actual meal now; background/unload saves
     // must not be the only protection against a phone tab being killed.
     let saveNote='';
-    if(Game.state===state&&!Game.over&&(state.village.harvestIntakeTotals?.records || 0)>eatenBefore){
+    const gifted=Game.state===state&&((state.village.gives||{})[giver]||0)>giftsBefore;
+    if(Game.state===state&&!Game.over&&((state.village.harvestIntakeTotals?.records || 0)>eatenBefore||gifted)){
       const saved=Game.save();
-      if(saved===false)saveNote='The meal finished, but could not be saved. Storage may be full.';
-      else if(saved==='stale')saveNote='Another tab has a newer save. This meal was not saved over it.';
-      else if(saved==='tombstoned')saveNote='This expedition’s save ended elsewhere. This meal was not saved.';
+      const action=gifted?'transfer':'meal';
+      if(saved===false)saveNote=`The ${action} finished, but could not be saved. Storage may be full.`;
+      else if(saved==='stale')saveNote=`Another tab has a newer save. This ${action} was not saved over it.`;
+      else if(saved==='tombstoned')saveNote=`This expedition’s save ended elsewhere. This ${action} was not saved.`;
       else if(saved==='settlement_failed')saveNote='Time could not finish safely. Reload and Continue from the last saved checkpoint.';
     }
     // Browser command wrappers can reset feedback marks and return true merely
@@ -15201,6 +15204,11 @@
   }
 
   function renderInvInline(slot, view) {
+    const selection=view.donation;
+    const donationCurrent=()=>selection&&Game.state===selection.state&&Game.state.scholar===selection.scholar&&
+      Game.villagerId===selection.bearer&&inlineMapKey()===selection.mapKey&&
+      Game.state.scholar.inventory[selection.index]===selection.item&&JSON.stringify(selection.item)===selection.signature;
+    if(selection&&!donationCurrent()){view.donation=null;view.result='The food or your situation changed. Choose Donate again.';view.resultLog=(Game.log||[]).slice(-1)[0];}
     // A later world event takes precedence over a previous Pack result.
     if (view.result && view.resultLog !== (Game.log || []).slice(-1)[0]) view.result = null;
     const st = Game.status();
@@ -15295,7 +15303,13 @@
     slot.innerHTML = `<div class="inlinecard">
       ${inlineHead('\uD83C\uDF92 Pack (' + st.invCount + ' items)')}
       ${view.result ? `<p class="inline-result pack-feedback">${esc(view.result)}</p>` : ''}
-      <div class="inline-body">${bodyHtml}</div>
+      <div class="inline-body">${view.donation?`<section class="donation-picker">
+        <b>Donate ${esc(Game.itemDisplayName(view.donation.item))}</b>
+        <p class="small" data-donation-room></p>
+        <label>Units to donate <input data-donation-units type="number" inputmode="numeric" min="1" step="1" value="1"></label>
+        <p class="small" data-donation-preview aria-live="polite"></p>
+        <div class="donation-actions"><button class="btn ghost" data-donation-fit>Fit pantry</button><button class="btn" data-donation-confirm>Donate</button><button class="btn ghost" data-donation-cancel>Cancel</button></div>
+        <p class="small" style="opacity:.7">No time cost.</p></section>`:bodyHtml}</div>
     </div>`;
     wireInlineX(slot);
     // obvious feedback: every action confirms, then the panel re-renders fresh.
@@ -15406,7 +15420,30 @@
       inlineView.result = worn ? 'Worn.' : 'Not worn.';
       refresh();
     });
-    slot.querySelectorAll('[data-donate]').forEach(b => b.onclick = rewire(() => Game.donateToPantry(+b.dataset.donate), 'Donated to the pantry.'));
+    slot.querySelectorAll('[data-donate]').forEach(b => b.onclick = () => {
+      const index=+b.dataset.donate,item=Game.state.scholar.inventory[index];
+      if(!item)return;
+      view.donation={index,item,state:Game.state,scholar:Game.state.scholar,bearer:Game.villagerId,mapKey:inlineMapKey(),signature:JSON.stringify(item)};
+      view.result=null;refresh();
+      slot.scrollTop=0;
+      const body=slot.querySelector('.inline-body');if(body)body.scrollTop=0;
+    });
+    if(view.donation){
+      const input=slot.querySelector('[data-donation-units]'),confirm=slot.querySelector('[data-donation-confirm]');
+      const choice=Game.pantryDonationOptions(view.donation.index);
+      input.max=String(choice.maxUnits);input.disabled=!choice.ok;confirm.disabled=!choice.ok;
+      slot.querySelector('[data-donation-fit]').disabled=!choice.ok;
+      slot.querySelector('[data-donation-room]').textContent=choice.ok?`${choice.maxUnits} of ${choice.units} units fit in the pantry.`:choice.why;
+      const preview=()=>{const n=Number(input.value);slot.querySelector('[data-donation-preview]').textContent=choice.ok&&Number.isSafeInteger(n)&&n>0&&n<=choice.maxUnits?`${n*choice.kcalEach} kcal to the village. ${choice.units-n} units stay in your pack.`:'Choose a whole amount that fits.';};
+      input.oninput=preview;preview();
+      slot.querySelector('[data-donation-fit]').onclick=()=>{if(choice.ok){input.value=String(choice.maxUnits);preview();}};
+      slot.querySelector('[data-donation-cancel]').onclick=()=>{view.donation=null;view.result=null;refresh();};
+      confirm.onclick=rewire(()=>{
+        if(!donationCurrent()){view.donation=null;Game.say('The food or your situation changed. Choose Donate again.');return null;}
+        const n=Number(input.value);view.donation=null;
+        return Game.donateToPantry(selection.index,n);
+      },null);
+    }
     // FORAGER LOOP: "leave it for the woods" — the pack-full message promises
     // this, so it exists. Anything not bonded or keepsake can be left behind.
     slot.querySelectorAll('[data-drop]').forEach(b => b.onclick = rewire(() => Game.dropItem(+b.dataset.drop), 'Left for the woods.'));
