@@ -1,0 +1,15 @@
+=== seed 19003 day 80 — conversation with Sean (gen_cex2kcu) ===
+occupation=community gardener temperament=warm trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway. I hate to ask, but tell me you've got food to spare. I'm going hungry here. I can't keep going like this."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Take care of yourself, yeah? I mean it."
+want final: id=ask_favor stage=3 resolution=promised

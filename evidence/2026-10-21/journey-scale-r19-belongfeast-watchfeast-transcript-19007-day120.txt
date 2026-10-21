@@ -1,0 +1,26 @@
+=== seed 19007 day 120 — conversation with Luis (luis_fernandez) ===
+occupation=mason temperament=steady trust=42 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: My notes are a mess. Future scholars will hate me. They'll still read them.
+(turn0 choices: dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "I’m listening."
+THEM: "I wrote down what happened today. All of it. The boring parts too — future scholars will thank me."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "If we don't write it down, it didn't happen. I'm writing it all down."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "I record the arguments too. Especially the arguments. That's the real history."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "Every name, every day, every meal. The boring stuff is the important stuff."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "My notes are a mess. Future scholars will hate me. They'll still read them."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=ask_favor stage=0)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=unestablished

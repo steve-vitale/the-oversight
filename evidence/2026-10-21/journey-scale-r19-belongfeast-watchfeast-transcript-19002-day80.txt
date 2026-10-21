@@ -1,0 +1,18 @@
+=== seed 19002 day 80 — conversation with Rosa (gen_wfmyh04) ===
+occupation=piano tuner temperament=warm trust=80 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "I asked Eleuterio about what you believe in — Eleuterio's gone. Do you believe in anything? Now, I mean. After everything. ...sorry."
+(turn0 choices: deflect_q, ans:q_believe:a_tell, ans:q_believe:a_vague, ans:q_believe:honest_pass, leave, silence)
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it. That is all."
+(want=curious stage=2)
+YOU: [goon] "I'm here. Go on."
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [goon] "I'm here. Go on."
+THEM: "I believe in breakfast. In people showing up. Small, provable things. The big beliefs all broke — the small ones held. Life's funny that way."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I should — yeah. Later."
+want final: id=curious stage=3 resolution=engaged

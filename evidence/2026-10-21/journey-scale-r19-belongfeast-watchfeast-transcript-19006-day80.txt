@@ -1,0 +1,18 @@
+=== seed 19006 day 80 — conversation with Metin (gen_bdtgzgj) ===
+occupation=bus driver temperament=gentle trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+(turn0 choices: ans:q_hope:a_tell, ans:q_hope:a_vague, ans:q_hope:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid. I'm listening."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "A full night's sleep. Not safety, not answers — just eight hours where nothing needs me. That's my whole theology now. You'd know about that."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,15 @@
+=== seed 19007 day 140 — conversation with Nino (nino_kapanadze) ===
+occupation=dry cleaner temperament=prickly trust=72 dead=false mood=grieving
+want: seek_comfort (stage 1)
+
+THEM: "About seek comfort — I keep turning it over. Doesn't matter now."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — are you alright?"
+THEM: "You know — Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Don't tell the others —" a glance sideways. "I don't know if I'm doing any of this right."
+(want=seek_comfort stage=3)
+YOU: (leave)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_comfort stage=3 resolution=comforted

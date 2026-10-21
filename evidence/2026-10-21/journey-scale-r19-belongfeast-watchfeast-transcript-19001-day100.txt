@@ -1,0 +1,18 @@
+=== seed 19001 day 100 — conversation with Patricia (app_mgpspid3504) ===
+occupation=mechanic temperament=steady trust=48 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before. Anyway."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something shutters in their face. Tread carefully.
+(want=curious stage=2)
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Right, so — Hot showers. Not the big things — the small, stupid, perfect things. Vancouver, Canada in the morning, coffee going, nobody trying to kill me. I miss being bored."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,30 @@
+=== seed 19008 day 80 — conversation with Roman (gen_k3lb26a) ===
+occupation=lawyer temperament=dry trust=90 dead=false mood=grieving
+want: ask_favor (stage 0, fromSeed)
+
+THEM: "We gave them a good burial. Doesn't feel like enough, does it?"
+(turn0 choices: confront:d_6tpm14n, dlg:invite, goon, dlg:comfort, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [goon] "I'm here. Go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(want=ask_favor stage=0)
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+(want=ask_favor stage=0)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=ask_favor stage=0)
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+(want=ask_favor stage=0)
+YOU: [dlg:comfort] "You alright?"
+THEM: "You're kind. Don't let this place change that."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=unestablished

@@ -1,0 +1,27 @@
+=== seed 19007 day 80 — conversation with Mia (mia_andersson) ===
+occupation=community gardener temperament=warm trust=16 dead=false mood=grieving
+want: curious (stage 0)
+
+THEM: "I don't know what to do with my hands today, anyway."
+(turn0 choices: agency:ask_field, confront:d_azge3kv, dlg:comfort, dlg:empathize, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that. ...sorry."
+(want=curious stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=curious stage=0)
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+(want=curious stage=0)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=curious stage=0)
+YOU: (leave)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=curious stage=3 resolution=unestablished

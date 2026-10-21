@@ -1,0 +1,27 @@
+=== seed 19005 day 120 — conversation with Pedro (app_mgpsphl5447) ===
+occupation=carpenter temperament=warm trust=90 dead=false mood=steady
+want: seek_comfort (stage 1, fromSeed)
+
+THEM: "About whatever's been weighing on me — I'm not okay. I'm saying it out loud so it's real: I'm not okay."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — are you alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing. You'd know about that."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Nice. Sit. The fire's warm."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: They pat the ground beside them. "Here. It's dry."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Mm." They don't look up from the fire, but they nod you down. "Sit."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "I keep count of who's at the fire. I don't mean to — I just notice the gaps."
+(want=seek_comfort stage=3)
+YOU: [goon] "Yeah?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(want=seek_comfort stage=3)
+YOU: (leave)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=seek_comfort stage=3 resolution=comforted
