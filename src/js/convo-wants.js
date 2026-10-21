@@ -629,6 +629,7 @@
         // Bearer about it, naming the predecessor, never pretending the
         // ask is new. Same need kind required; a changed need is a new ask
         // (the old favor goes moot, the follow-up says so honestly).
+        let mootPrefix = '';
         try {
           const oldF = this.convoGetFavor(vid);
           const predO = oldF && oldF.state === 'asked' && typeof this.inheritedName === 'function'
@@ -637,12 +638,28 @@
             if (c.want) c.want.favor = oldF;
             return this.convoFavorFollowup(vid, oldF);
           }
-          if (predO && oldF && oldF.kind !== need.kind) { try { oldF.state = 'moot'; } catch (e2) {} }
+          if (predO && oldF && oldF.kind !== need.kind) {
+            // HONEST MOOT (journey-succession r34 2026-10-21): the open book
+            // named this need to the successor — it must not evaporate. The
+            // old favor goes moot AND the NPC says so, in the same breath as
+            // the new ask. (Before: marked moot on the detached object, then
+            // the ledger overwrite buried it silently — the book's entry
+            // vanished with no honest line.)
+            try { oldF.state = 'moot'; } catch (e2) {}
+            try {
+              const sh = oldF.short || 'that';
+              mootPrefix = `Never mind ${sh} — we got it handled. Thanks anyway. `;
+            } catch (e3) { mootPrefix = ''; }
+          }
         } catch (e) {}
         const favor = this.convoBuildFavor(vid, need);
         if (!favor) return null;
         if (c.want) c.want.favor = favor;
         this.convoStoreFavor(favor);
+        if (mootPrefix && favor.line) {
+          const inner = String(favor.line).replace(/^"/, '').replace(/"$/, '');
+          return `"${mootPrefix}${inner}"`;
+        }
         return favor.line;
       },
       engageBeat(vid) {
