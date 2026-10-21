@@ -42,7 +42,13 @@ for p in "${PATHS[@]}"; do
       git update-index --add --cacheinfo "100644,$HASH,$p"
     fi
   else
-    echo "WARNING: $p does not exist, skipping"
+    # Path deleted from the worktree but tracked in HEAD: stage the deletion
+    # (#762: kill-commits came out empty because deletions were never staged).
+    if git cat-file -e "$BASE:$p" 2>/dev/null; then
+      git update-index --force-remove "$p"
+    else
+      echo "WARNING: $p does not exist and is not tracked, skipping"
+    fi
   fi
 done
 
