@@ -30,6 +30,15 @@
 // A TRUE v-vs-v combat death = kind in (villager, person) AND killerId set
 // AND killerId is not the player AND killerId is not the victim.
 // 'player'/'p' (Game.villagerId) marks the scholar.
+//
+// SPLIT (journey-establishment r23, 2026-10-21): r22's M1 zero-prong
+// conflated two mechanics — open-combat v-vs-v (the r21-claimed cell, 0
+// sightings in 12 seeds) and betrayal-ambush killing (designed, narrated,
+// 2 sightings in 12 seeds). The split helpers below separate them:
+// openCombatVV() counts ONLY kind villager/person + cause 'combat' +
+// villager killer; betrayalAmbushRecs() counts cause 'ambush' + villager
+// killer. The bare villagerVsVillager census count remains the union
+// (both are villagers killing villagers); the split is for metric binding.
 function census(deaths, opts) {
   opts = opts || {};
   const playerId = opts.playerId || 'p';
@@ -91,4 +100,42 @@ function r21Misread(deaths) {
   return n;
 }
 
-module.exports = { census, r21Misread };
+// SPLIT HELPERS (r23): separate the two villager-kills-villager mechanics.
+// Each returns the matching death records (same shape as villagerVsVillagerRecs).
+function _isVillagerKiller(d, playerId, roster) {
+  const killer = d.killerId != null ? String(d.killerId) : null;
+  if (!killer) return false;
+  const isPlayer = killer === playerId || killer === 'player' || killer === 'p';
+  if (isPlayer || killer === String(d.who) || killer === String(d.vid)) return false;
+  return !roster || roster.indexOf(killer) >= 0;
+}
+// M1a: open-combat v-vs-v — kind villager/person, cause 'combat', villager killer.
+// The r21-claimed cell. Zero sightings through r23 (12 seeds).
+function openCombatVV(deaths, opts) {
+  opts = opts || {};
+  const playerId = opts.playerId || 'p';
+  const roster = opts.roster || null;
+  return (deaths || []).filter(d => {
+    if (!d) return false;
+    const kind = String(d.kind || '?');
+    if (kind !== 'villager' && kind !== 'person') return false;
+    if (String(d.cause || '') !== 'combat') return false;
+    return _isVillagerKiller(d, playerId, roster);
+  });
+}
+// M1b: betrayal-ambush — kind villager/person, cause 'ambush', villager killer.
+// Designed, narrated, rare-by-design. A RISE is the signal, not the existence.
+function betrayalAmbushRecs(deaths, opts) {
+  opts = opts || {};
+  const playerId = opts.playerId || 'p';
+  const roster = opts.roster || null;
+  return (deaths || []).filter(d => {
+    if (!d) return false;
+    const kind = String(d.kind || '?');
+    if (kind !== 'villager' && kind !== 'person') return false;
+    if (String(d.cause || '') !== 'ambush') return false;
+    return _isVillagerKiller(d, playerId, roster);
+  });
+}
+
+module.exports = { census, r21Misread, openCombatVV, betrayalAmbushRecs };
