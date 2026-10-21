@@ -1,0 +1,31 @@
+=== seed 18003 day 120 — conversation with Zahra (app_mgpspiru211) ===
+occupation=teacher temperament=withdrawn trust=20 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "The table's here. The ring — the light — it's just sitting there. Waiting on you, as it were."
+(turn0 choices: invite_party, ask:gossip, ask:spread_rumor, teach, skill_learn:read_people, menu:more, leave, silence)
+YOU: [ask:gossip] "What's the word around the fire?"
+THEM: "Huh. Let me think about that." "Sari headed out to check the snares."
+(want=curious stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "Boris headed out for water."
+(want=curious stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "Tariq headed out for water."
+(want=curious stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "Tariq? An electrician, back before. Solid person. Makes sense to me."
+(want=curious stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "...Sorry — People are keeping to themselves."
+(want=curious stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "Victor ate something last month that should've killed them. They're fine."
+(want=curious stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "Nothing new. Which is new, if you think about it."
+(want=curious stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "They're already drifting away. "Later."
+(want=curious stage=0)
+want final: id=curious stage=3 resolution=unestablished

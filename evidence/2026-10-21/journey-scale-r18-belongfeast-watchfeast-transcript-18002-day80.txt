@@ -1,0 +1,12 @@
+=== seed 18002 day 80 — conversation with Żaneta (visjoin_74) ===
+occupation=infantry soldier temperament=prickly trust=21 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — tell me you've got food to spare. I'm going hungry here. My hands shake when I try to work."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "That's enough talking for me."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,18 @@
+=== seed 18004 day 100 — conversation with Dante (app_mgpspifl945) ===
+occupation=farmer temperament=warm trust=23 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something you're good at that nobody here knows about? Just... be straight with me."
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:a_deflect, ans:q_skill:honest_pass, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Heh. I can making do. Not well — well enough that nobody's died from it yet. That's my whole résumé now: nobody's died from it yet."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "Help me haul something back? Too much for one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I'm rooting for you. Whatever you're working on. Just so you know."
+want final: id=curious stage=3 resolution=engaged

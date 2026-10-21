@@ -1,0 +1,12 @@
+=== seed 18004 day 140 — conversation with Devon (devon_okafor) ===
+occupation=programmer temperament=anxious trust=83 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "The cistern's nearly dry — 4 liters left. I can't carry enough alone. First light, the creek, you and me?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

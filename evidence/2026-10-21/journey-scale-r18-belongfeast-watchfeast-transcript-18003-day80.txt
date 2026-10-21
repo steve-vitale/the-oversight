@@ -1,0 +1,12 @@
+=== seed 18003 day 80 — conversation with Alejandro (gen_qdtwlfi) ===
+occupation=Wild food forager temperament=withdrawn trust=89 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "About ask favor — I keep turning it over."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, goon, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Whatever you can do — thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

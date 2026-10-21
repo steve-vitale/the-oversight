@@ -1,0 +1,15 @@
+=== seed 18002 day 100 — conversation with Rodolfo (visjoin_94) ===
+occupation=barber temperament=prickly trust=25 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something from your old life that's actually useful here?"
+(turn0 choices: ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, ans:q_before_skill:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset. Good talking."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Being a barber taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Go on. I've got... things."
+want final: id=curious stage=3 resolution=engaged
