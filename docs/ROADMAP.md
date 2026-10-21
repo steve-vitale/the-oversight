@@ -1,5 +1,27 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Current milestone: garden cultivation (2026-10-20)
+
+Steve's latest direction supersedes a flat six-bed, fast ordinary-farm model:
+Haven growth should unlock beds; ordinary cultivation is a slow supplement;
+invested food-powered gardening abilities make the strong garden path.
+See GARDENS.md and his verbatim answer in godpath/STEVE-ANSWERS.md.
+
+Codex's garden audit/tooling is ready for checked sharing. Current-source
+74 natural campaigns plus8 separate neutral controls expose planting without
+food:0/64 screen campaigns harvested;1/10 extended cases delivered14,400 kcal.
+Full-pantry redirection skips maintenance, and dead beds lack reclamation.
+These findings are scoped to current controllers, not human/gardener viability.
+The final report is evidence/2026-10-20/garden-longplay-audit-r4.md.
+
+Next bounded gameplay milestone: Haven-scaled visible capacity, slow ordinary
+crop profiles, paid ability-driven growth, protected maintenance and paid
+reclaim/replant, preserving saves/structures and one phone viewport. Measure
+all23 domains with the same collector on both roots before shipping. Nothing
+in this audit changes live garden values. The four caregiver campaigns remain
+queued for prefix-faithfulness and natural late-game phone Continue/actions;
+the new extended garden runs alone do not complete that earlier milestone.
+
 2026-10-20 rolling Codex release goal: complete small concrete milestones in
 serial, with real mobile play/save verification, shared checks, balanced
 measurement for gameplay changes and Muse reconciliation before publication.
@@ -10,7 +32,7 @@ public-release gates stay open. Keep the rolling goal active between milestones.
 
 Haven entrance/exit accessibility shipped as9026efa1d, with verified live build
 3f09b84a1-20261020-235403; paid camp structures and Continue are preserved.
-Current bounded Codex milestone: four fixed caregiver campaigns through actual
+Queued bounded Codex milestone: four fixed caregiver campaigns through actual
 terminal outcomes, faithful continuation/prefix proof, and naturally earned
 late-game phone Continue/actions. See AGENT-LANES.md for seeds and done-when.
 The caregiver Table-pace warning stays open; alive at a cap is not completion.

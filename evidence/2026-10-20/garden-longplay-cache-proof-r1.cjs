@@ -1,0 +1,18 @@
+'use strict';
+const fs=require('fs'),cp=require('child_process'),z=require('zlib'),assert=require('assert/strict'),path=require('path');
+const base='evidence/2026-10-20/garden-longplay-',source=base+'r3',resume=base+'resume-r1',guard=base+'config-guard-r1';
+const read=f=>JSON.parse(z.gunzipSync(fs.readFileSync(f)));
+const original=read(source+'.json.gz');assert(original.stable&&original.controls.every(c=>c.match));
+fs.mkdirSync(resume+'-cases');
+fs.copyFileSync(source+'-plan.json',resume+'-plan.json',fs.constants.COPYFILE_EXCL);
+for(const f of fs.readdirSync(source+'-cases'))fs.copyFileSync(path.join(source+'-cases',f),path.join(resume+'-cases',f),fs.constants.COPYFILE_EXCL);
+const output=cp.execFileSync(process.execPath,['scripts/garden-longplay-audit.js','--out',resume],{encoding:'utf8'});
+assert(!output.includes('.'),'Complete valid cache should not execute new child cases');
+const repeated=read(resume+'.json.gz'),key=r=>JSON.stringify(r.job),old=new Map(original.results.map(r=>[key(r),r]));
+assert.equal(repeated.results.length,original.results.length);for(const row of repeated.results)assert.deepEqual(row,old.get(key(row)));
+fs.copyFileSync(source+'-plan.json',guard+'-plan.json',fs.constants.COPYFILE_EXCL);
+const changed={...process.env,SIMOPT:original.plan.configuration.flags.SIMOPT==='0'?'1':'0'};
+const refused=cp.spawnSync(process.execPath,['scripts/garden-longplay-audit.js','--out',guard],{encoding:'utf8',env:changed});
+assert.notEqual(refused.status,0);assert.match(refused.stderr,/Resume inputs changed/);assert(!fs.existsSync(guard+'.json.gz'));
+const result={scope:'Actual CLI cache reuse and configuration refusal; no new gameplay campaigns',source,allCachedCasesExact:repeated.results.length,childCasesExecuted:0,configurationChangeRefused:true,output,refusal:refused.stderr};
+fs.writeFileSync(base+'cache-proof-r1.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({cached:repeated.results.length,configurationChangeRefused:true}));

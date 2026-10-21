@@ -1,6 +1,28 @@
 # Agent lanes (2026-10-20)
 
-## Rolling public-release goal — current milestone: terminal caregiver coverage
+## Current milestone: garden cultivation (2026-10-20)
+
+Steve's latest direction supersedes a flat six-bed, fast ordinary-farm model:
+Haven growth should unlock beds; ordinary cultivation is a slow supplement;
+invested food-powered gardening abilities make the strong garden path.
+See GARDENS.md and his verbatim answer in godpath/STEVE-ANSWERS.md.
+
+Codex's garden audit/tooling is ready for checked sharing. Current-source
+74 natural campaigns plus8 separate neutral controls expose planting without
+food:0/64 screen campaigns harvested;1/10 extended cases delivered14,400 kcal.
+Full-pantry redirection skips maintenance, and dead beds lack reclamation.
+These findings are scoped to current controllers, not human/gardener viability.
+The final report is evidence/2026-10-20/garden-longplay-audit-r4.md.
+
+Next bounded gameplay milestone: Haven-scaled visible capacity, slow ordinary
+crop profiles, paid ability-driven growth, protected maintenance and paid
+reclaim/replant, preserving saves/structures and one phone viewport. Measure
+all23 domains with the same collector on both roots before shipping. Nothing
+in this audit changes live garden values. The four caregiver campaigns remain
+queued for prefix-faithfulness and natural late-game phone Continue/actions;
+the new extended garden runs alone do not complete that earlier milestone.
+
+## Queued milestone: terminal caregiver coverage
 
 Steve asked Codex to move through small concrete goals in serial. Keep the
 rolling goal active between milestones. Muse retains numerical calibration;
@@ -15,7 +37,7 @@ negative control are in evidence/2026-10-20/haven-access-*. The changed yard
 preserves structures and has35 shared-kit checks, including128 obstruction
 layouts. Earlier favor and water milestones remain shipped in this ancestry.
 
-Current bounded lane: caregiver seeds10003/10004 (lost capped wins) and
+Retained caregiver lane: caregiver seeds10003/10004 (lost capped wins) and
 10001/10008 (gained controls), fixed before continuation. Follow each through
 an actual terminal outcome; extend observational caps rather than marking an
 alive bearer complete. Preserve policy/RNG continuation, or prove a rerun's

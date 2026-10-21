@@ -670,3 +670,12 @@ observer-on/off children also perform real Market actions and compare complete
 Game hashes, public returns and next RNG draws. This closes an opportunity gap
 that a neutral campaign without any Market holder cannot exercise. These
 prepared scenes are not naturally earned Market cohorts or pacifist proof.
+
+### Cultivated-garden usage audit
+
+The optional scripts/garden-longplay-audit.js sidecar observes real planting,
+NPC garden duty/redirects, actual tending, crop loss and physical harvest
+delivery. See GARDENS.md for repeat/resume commands, source fingerprints,
+neutral controls, opportunity limits and the meal-after-harvest boundary.
+It retains all23 balanced metrics without changing their contract. It does
+not make the general feature census a historical garden-use measurement.

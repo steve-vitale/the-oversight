@@ -1,6 +1,28 @@
 # Muse calibration handoff
 
-## Haven shipped; terminal caregiver lane active (2026-10-20)
+## Current milestone: garden cultivation (2026-10-20)
+
+Steve's latest direction supersedes a flat six-bed, fast ordinary-farm model:
+Haven growth should unlock beds; ordinary cultivation is a slow supplement;
+invested food-powered gardening abilities make the strong garden path.
+See GARDENS.md and his verbatim answer in godpath/STEVE-ANSWERS.md.
+
+Codex's garden audit/tooling is ready for checked sharing. Current-source
+74 natural campaigns plus8 separate neutral controls expose planting without
+food:0/64 screen campaigns harvested;1/10 extended cases delivered14,400 kcal.
+Full-pantry redirection skips maintenance, and dead beds lack reclamation.
+These findings are scoped to current controllers, not human/gardener viability.
+The final report is evidence/2026-10-20/garden-longplay-audit-r4.md.
+
+Next bounded gameplay milestone: Haven-scaled visible capacity, slow ordinary
+crop profiles, paid ability-driven growth, protected maintenance and paid
+reclaim/replant, preserving saves/structures and one phone viewport. Measure
+all23 domains with the same collector on both roots before shipping. Nothing
+in this audit changes live garden values. The four caregiver campaigns remain
+queued for prefix-faithfulness and natural late-game phone Continue/actions;
+the new extended garden runs alone do not complete that earlier milestone.
+
+## Haven shipped; caregiver lane queued behind gardens (2026-10-20)
 
 Fetch shared master/main at9026efa1d or newer. Production build
 3f09b84a1-20261020-235403 is verified against all163 boot input hashes, with

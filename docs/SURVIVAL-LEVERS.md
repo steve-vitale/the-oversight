@@ -1530,3 +1530,18 @@ adverse deaths, NPC hunger and earned-gear change. See the favor-action r3 audit
 and raw panels/replays for verified counts and coarse first differences; those
 are diagnostic associations, not causal explanations of endings. Five authored
 joint jobs and remaining callback/voice prose gaps stay release blockers.
+
+## Garden direction and measured dead spots (2026-10-20)
+
+No gameplay lever changes in this audit/tooling milestone. Current capacity
+is six at every Haven tier; ordinary crop growth7/12/14 days and repeated
+5,000-kcal harvests every3 days lack invested-ability growth hooks. Current
+controllers plant in64/64 screen cases but harvest in0/64. Ten extended
+cases reach terminal outcomes by day356; one delivers14,400 garden kcal.
+Full-pantry diversion precedes tending, and dead beds cannot be reclaimed.
+Prepared predicate contrast proves that branch, not every natural death.
+The intended correction is Haven-scaled beds, modest slow ordinary farming,
+paid garden magic, maintenance separate from unwanted surplus and reclamation.
+Treat food output, useful consumption, labor/opportunity and all23 domains
+separately. NPC garden-ability use and crop-specific intake remain unknown.
+See GARDENS.md and garden-longplay-audit-r3.md; no runtime balance clearance.
