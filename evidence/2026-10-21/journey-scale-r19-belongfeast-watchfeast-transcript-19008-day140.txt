@@ -1,0 +1,15 @@
+=== seed 19008 day 140 — conversation with Roman (gen_k3lb26a) ===
+occupation=lawyer temperament=dry trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "About ask favor — I keep turning it over."
+(turn0 choices: goon, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I did the count twice. The count doesn't change. Meet me at the creek bend, past the treeline and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=deflected

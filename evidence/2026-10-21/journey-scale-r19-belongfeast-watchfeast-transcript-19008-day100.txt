@@ -1,0 +1,15 @@
+=== seed 19008 day 100 — conversation with Luis (luis_fernandez) ===
+occupation=mason temperament=steady trust=46 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "We're eating through stores faster than we replace them. Forage with me tomorrow? I know the far treeline, past the rocks."
+(turn0 choices: goon, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. I know the far treeline, past the rocks — come with me and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=ask_favor stage=3 resolution=deflected
