@@ -1,13 +1,15 @@
 # ROADMAP: what's built, what's next, how to do it
 
-## Atomic time-save milestone (2026-10-20 candidate)
+## Atomic time-save milestone (2026-10-20, released)
 
-Candidate d09f47ea2-20261021-042230 defers nested time/part/day/Sleep saves
+Releasee83b78097, build d09f47ea2-20261021-042230, defers nested time/part/day/Sleep saves
 until all synchronous hooks and waking recovery finish. Thrown settlement
 preserves the prior checkpoint and blocks partial autosave until reload.
 Actual child exits, storage/stale/tombstone tests, prepared and natural phone
 Sleep/Continue, readable failure recovery and installed offline update pass.
-See TIME-SETTLEMENT.md and overnight-save-audit-r1 for final gates/publication.
+Quick276/0 and full1,048/0 preceded the push. overnight-save-publication-r1.json
+verifies166 boot files plus worker/version/manifest and clean fresh phone boot.
+See TIME-SETTLEMENT.md and overnight-save-audit-r1 for scope and maintenance.
 This protects future writes; it cannot reconstruct an older partial night.
 
 Both64-case balanced arms were rerun under corrected UTF-8 report readers;

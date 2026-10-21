@@ -1,12 +1,14 @@
 # Muse calibration handoff
 
-## Atomic time persistence and trustworthy reports (2026-10-20 candidate)
+## Atomic time persistence and trustworthy reports (2026-10-20, released)
 
 Use TIME-SETTLEMENT.md and overnight-save-audit-r1. Candidate
 d09f47ea2-20261021-042230 saves completed night hooks and waking recovery;
 failed partial memory cannot overwrite the last checkpoint. Actual crash,
 phone/Continue and installed offline update evidence is retained. Final
-publication is confirmed only by overnight-save-publication-r1.json.
+publication e83b78097 is confirmed by overnight-save-publication-r1.json:
+166 boot inputs plus worker/version/manifest, clean fresh phone boot. Fresh
+prepush quick276/0 and full1,048/0 pass. Receipt follow-up gets fresh checks too.
 
 Both report tools now retain UTF-8 across child output chunks. Terminal audits
 also recompute final/bridge payload hashes after parsing and cache reuse. Some

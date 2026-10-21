@@ -2,6 +2,15 @@
 
 Status: integration in progress; not cleared for public launch.
 
+Current shared development release (2026-10-20): e83b78097, production build
+d09f47ea2-20261021-042230. Atomic time/Sleep saves, crash recovery and current
+UTF-8 report readers are shared. Fresh prepush quick276/0 and full1,048/0 pass;
+overnight-save-publication-r1.json verifies166 boot inputs plus worker/version/
+manifest and clean fresh touch-phone boot. Actual Sleep/Continue, overnight
+penalty, recovery guidance and installed offline update are retained. Read
+TIME-SETTLEMENT.md and overnight-save-audit-r1 for precise limits. Legacy partial
+night reconstruction, other joint favors and physical-device gates remain open.
+
 Current shared development release (2026-10-20): master/main19b91d67f,
 production build ffe2259a9-20261021-033519 at https://the-oversight.vercel.app.
 Muse recovery999c69491 is preserved in this ancestry; no whole-tree port is

@@ -1,6 +1,6 @@
 # Atomic time saves and report integrity
 
-Candidate d09f47ea2-20261021-042230, based on shared d09f47ea2. The prior goal
+Released e83b78097, build d09f47ea2-20261021-042230, based on shared d09f47ea2. The prior goal
 turn was progress: release19b91d67f and receipt d09f47ea2 were published and
 production-verified. This is the next bounded milestone, not completion of
 Steve's rolling public-release goal. Muse recovery999c69491 remains in ancestry;
@@ -126,9 +126,14 @@ hash. Untouched interrupted cache reuses every raw result without new campaigns.
 ## Release gate and next milestone
 
 Final quick-r3 passes276/0 in66s; full-r2 passes1,048/0 in327s. Current source
-proofs and ordinary shared-history publication remain required; record live
-input hashes/fresh phone boot separately. Receipt-only
-publication also requires fresh checks. Preserve the unrelated sweep-B.log.
+proofs precede ordinary atomic shared master/main/feature publication.
+overnight-save-publication-r1.json verifies all166 boot files plus worker,
+version and manifest, with a clean fresh touch-phone boot. The first readback
+correctly rejected the old build while deployment was pending; the second
+passed169 inputs. No assertion was waived. Primary fast-forward preserves the
+unrelated sweep-B.log exactly. The receipt-only follow-up independently passes
+fresh quick276/0 in70s and full1,048/0 in329s (publication-quick-r1/full-r1).
+The verified player runtime is unchanged in that documentation/evidence commit.
 
 Next bounded Codex milestone: make the authored `stay_close` favor playable by
 the fire tonight, with an actual person/place/night opportunity, saved progress/
