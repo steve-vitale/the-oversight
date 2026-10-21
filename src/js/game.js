@@ -6791,14 +6791,52 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`🪨 ${first} pries ${stone} stone loose from the creek bed. The building pile grows. (${pile} stone now.)`);
         this.bumpTrust(vid, 1, 'pried stone from the creek bed');
       } else if (a.task === 'water') {
-        const liters = Math.max(4, Math.round(R(10, 14) * eff));
+        // CISTERNCHECK (sim-cisterncheck-b 2026-10-21, backlog #732): a person
+        // checks the cistern before walking to the creek. Remaining capacity is
+        // read FIRST: a full cistern means NO water trip — the villager takes
+        // other (non-perishable) work instead (PRODTHROTTLE pattern, with a
+        // wood/stone-only alt rotation so the redirect cannot recurse into
+        // water). Partial space caps the carry: they bring only what fits. The
+        // villager KNOWS their own haven's cistern level — no gating issue.
+        // CISTERNCHECK_OFF=1 restores the old always-haul shape (sweep control
+        // arm; the browser never sets it). Telemetry ledgers (waterHauls,
+        // cisternOverflowHauls, cisternOverflowL, cisternRedirects) run in both
+        // arms — pure measurement, no RNG, no gameplay effect.
         const vw = this.state.village.water = this.state.village.water || { clean: 0, dirty: 0 };
         // CREEK WATER IS RISKY (Steve 2026-10-08): the haul goes in dirty.
         // The hearth boils it clean (6L/wood) — or the village drinks it raw.
         const cap = (typeof this.waterCapL === 'function') ? this.waterCapL() : 40;
         const room = Math.max(0, cap - ((vw.clean || 0) + (vw.dirty || 0)));
+        const _ccOff = (typeof process !== 'undefined' && process.env && process.env.CISTERNCHECK_OFF === '1');
+        if (!_ccOff && room <= 0) {
+          // Cistern full: no trip. Voice-gated once per day (FOODVOICE2
+          // pattern); the ledger counts every redirect. The alt branch draws
+          // exactly one RNG pull, same as the water branch below, so paired
+          // trajectories stay byte-identical except the avoided trip.
+          const _alt = ['wood', 'stone'][(v.cisternAltRot = ((v.cisternAltRot || 0) + 1) - 1) % 2];
+          const _ccGateOff = (typeof process !== 'undefined' && process.env && process.env.CISTERNCHECK_GATE === '0');
+          let _ccToday = 0;
+          try { _ccToday = (this.state.scholar || {}).day || 0; } catch (e) {}
+          if (_ccGateOff || this._ccRedDay !== _ccToday) {
+            if (!_ccGateOff) this._ccRedDay = _ccToday;
+            const _altName = _alt === 'wood' ? 'wood run' : 'stone pile';
+            this.say(`💧 ${first} eyes the cistern — full to the brim. No sense hauling water there's no room for; they turn to the ${_altName} instead.`);
+          }
+          v.cisternRedirects = (v.cisternRedirects || 0) + 1;
+          a.task = _alt;
+          return this.resolveOneAssignment(vid, a);
+        }
+        const liters = _ccOff ? Math.max(4, Math.round(R(10, 14) * eff))
+                              : Math.min(Math.max(4, Math.round(R(10, 14) * eff)), room);
         const added = Math.min(liters, room);
         vw.dirty += added;
+        // TELEMETRY (sim-cisterncheck-b): overflow-haul measurement — trips
+        // dispatched into less space than the carry, and the wasted liters.
+        v.waterHauls = (v.waterHauls || 0) + 1;
+        if (added < liters) {
+          v.cisternOverflowHauls = (v.cisternOverflowHauls || 0) + 1;
+          v.cisternOverflowL = (v.cisternOverflowL || 0) + (liters - added);
+        }
         this.say(added >= liters
           ? `💧 ${first} returns with ${liters}L of creek water. Risky until the hearth boils it.`
           : `💧 ${first} returns with ${liters}L, but the cistern only holds ${added}L more.`);
