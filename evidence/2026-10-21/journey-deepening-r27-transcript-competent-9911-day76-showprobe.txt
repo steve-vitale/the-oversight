@@ -1,0 +1,32 @@
+=== seed 9911 day 76 — conversation with Nina (nina_petrova) ===
+occupation=mechanic temperament=dry trust=85 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you make of all this — What do you make of all this? Really."
+(turn0 choices: ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Heh. Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Nora headed out to find someone."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? Allegedly."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "We lost Chloe and Pedro this week. I keep setting out extra portions. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Ha."
+(want=curious stage=2)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Dandelion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Funny how that works."
+(want=curious stage=2)
+closing line: "Sorry. I need a minute."
+want final: id=curious stage=3 resolution=engaged

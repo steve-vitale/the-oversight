@@ -1,0 +1,32 @@
+=== seed 9911 day 73 — conversation with Fatima (fatima_hassan) ===
+occupation=paramedic temperament=steady trust=53 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "I asked Jada about the most useful thing you've learned — Jada's gone. What's the most useful thing you've learned since we got here? ...sorry."
+(turn0 choices: ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, deflect_q, leave, silence)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Not that it matters."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Juliana ate something last month that should've killed them. They're fine. Let's move."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Chloe is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? You'd know about that."
+(want=curious stage=2)
+closing line: "Thanks. I just... need some air."
+want final: id=curious stage=3 resolution=engaged

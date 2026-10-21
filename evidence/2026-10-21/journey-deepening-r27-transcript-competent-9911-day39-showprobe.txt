@@ -1,0 +1,18 @@
+=== seed 9911 day 39 — conversation with Fatima (fatima_hassan) ===
+occupation=paramedic temperament=steady trust=36 dead=false mood=steady
+want: just_company (stage 1)
+
+THEM: "Mind if I just sit with you for a bit?"
+(turn0 choices: dlg:react, dlg:more, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? One step at a time."
+(want=just_company stage=1)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Emma headed out to forage."
+(want=just_company stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=just_company stage=1)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=just_company stage=3 resolution=unresolved

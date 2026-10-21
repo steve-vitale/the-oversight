@@ -1,0 +1,21 @@
+=== seed 9911 day 80 — conversation with David (david_kim) ===
+occupation=plumber temperament=cautious trust=20 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "I… Hot showers. Not the big things — the small, stupid, perfect things. Seoul, South Korea in the morning, coffee going, nobody trying to kill me. I miss being bored."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Help me haul something back? Too much for one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I'm glad we talked. I think. I'm still deciding."
+want final: id=curious stage=3 resolution=engaged

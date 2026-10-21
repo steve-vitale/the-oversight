@@ -1,0 +1,21 @@
+=== seed 9911 day 59 — conversation with Chloe (gen_kn4d4nl) ===
+occupation=Mushroom grower temperament=prickly trust=88 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the kindest thing someone's done for you — What's the kindest thing someone's done for you out here?"
+(turn0 choices: ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, leave, silence)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "People are talking about Emma. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "That's enough talking for me."
+want final: id=curious stage=3 resolution=engaged

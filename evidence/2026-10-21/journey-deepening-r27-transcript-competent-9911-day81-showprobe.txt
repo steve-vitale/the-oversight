@@ -1,0 +1,32 @@
+=== seed 9911 day 81 — conversation with Fatima (fatima_hassan) ===
+occupation=paramedic temperament=steady trust=56 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Here's the thing: Pedro and I never did finish talking about the gossip — that was 8 days back. You weren't there for that one — Pedro was. Want to hear where it left off? 'Take it with salt. What did you want to ask?'"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Okay. You don't have to have an answer."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "You asked me that before. It's a different question now." "Pedro owed me a favor. I keep thinking about collecting. Stupid."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Emma's story has a fresh coat of paint." Fatima taps the table. "Scrape it off and you get from Oslo, Norway. Just don't scrape it in front of them."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Blackberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

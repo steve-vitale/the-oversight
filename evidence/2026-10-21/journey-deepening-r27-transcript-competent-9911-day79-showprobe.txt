@@ -1,0 +1,32 @@
+=== seed 9911 day 79 — conversation with Nora (nora_wilson) ===
+occupation=tailor temperament=gentle trust=72 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you think happened to us — I've been turning something over. What do YOU think actually happened to us?"
+(turn0 choices: ans:q_theory:a_aliens, ans:q_theory:a_test, ans:q_theory:a_shrug, deflect_q, leave, silence)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants. No rush."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Ruby is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? It'll keep."
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Pedro were close. I'm sorry."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged
