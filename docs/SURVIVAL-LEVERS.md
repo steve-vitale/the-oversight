@@ -1,5 +1,17 @@
 # Survival levers and investigation register
 
+## Terminal caregiver investigation (2026-10-20)
+
+No Game numerical lever changed. Four preselected capped cases reach actual
+engine wins after faithful extension; earlier caregiver Table-pace/population
+warnings remain open. The shared simulator now ends partial combat turns with
+real public Wait, preserving its ability hooks.64 matched methodology controls
+retain identical complete Game states and all23 vectors; rare10003 exercises
+the former shortcut. This is a harness correction, not a balance improvement.
+Current phone feedback/Table entry fixes change presentation, not Game gates.
+See TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1 for source identities,
+all measures, actual phone evidence and the next overnight-save integrity lane.
+
 ## Haven entrance shipped (2026-10-20,9026efa1d)
 
 Generated tents can no longer occupy the south doorstep(4,5). A tent that

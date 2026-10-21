@@ -1,5 +1,27 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Terminal caregiver milestone; overnight save integrity next (2026-10-20)
+
+Four fixed caregiver cases reach real engine wins on the current garden Game
+at days118/195/270/204. Historical150-cap losses10003/10004 eventually win;
+this does not clear the broader Table-pace or garden balance warnings.
+Exact rerun prefixes, all23 measures, passive controls and recovery are shared
+in TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1. The sim harness now
+uses the actual public Wait; the matched64-case methodology control preserves
+complete Game states/all23 vectors. Future balance arms must use this harness.
+Natural day182 touch combat/Continue and coherent day267 Table entry are tested
+at736/844. The existing Table entry moves to the top of Place; world reminders
+stop covering current action feedback. Candidate ffe2259a9-20261021-033519
+awaits its recorded publication receipt, not an assumed live deployment.
+
+Next bounded Codex milestone: atomic/coherent overnight saves. A retained
+nested pre-core day266/part4 write is an interruption fixture; coherent completed
+day267/part3 replaces it for normal playtests. Investigate actual save writers,
+preserve night effects exactly once and prove reload at interruption boundaries.
+No clamp/repeated metabolism or save corruption waiver. Muse retains garden
+numerical calibration; ordinary-only/ability viability and useful intake remain
+open. Keep the rolling release goal active; no whole-tree port is needed.
+
 ## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
 Codex owns this cultivation implementation; Muse retains numerical calibration.

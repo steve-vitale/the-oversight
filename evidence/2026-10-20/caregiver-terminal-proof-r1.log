@@ -1,0 +1,22 @@
+  ok   entropy snapshots draw no game, policy or clock values
+  ok   observing full game and cyclic policy context changes neither
+  ok   real gameplay RNG and the separate policy RNG are counted without probes
+  ok   the continued checkpoint retains actual complete state
+  ok   an identical observed prefix plus its final boundary is accepted
+  ok   Game change is rejected instead of normalized away
+  ok   policy-context change is rejected instead of normalized away
+  ok   Game RNG history change is rejected instead of normalized away
+  ok   Game RNG draw count change is rejected instead of normalized away
+  ok   policy RNG history change is rejected instead of normalized away
+  ok   clock history change is rejected instead of normalized away
+  ok   missing observed phase is rejected instead of normalized away
+  ok   changed end-of-cap sampling state is rejected instead of normalized away
+  ok   a harness liveness stop cannot stand in for an engine ending
+  ok   a completed observation cap is not completion of a live campaign
+  ok   an actual engine terminal flag is required for a winning classification
+  ok   forced watchdog recovery remains explicit even when the engine later wins
+  ok   an early actual ending remains the same when the cap grows
+  ok   a simulated terminal-to-live contradiction is rejected
+  ok   observer error channels remain empty
+
+Campaign prefix evidence: 20 passed, 0 failed, 0 todo (phase 0)

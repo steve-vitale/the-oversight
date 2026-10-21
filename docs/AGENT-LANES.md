@@ -1,5 +1,23 @@
 # Agent lanes (2026-10-20)
 
+## Codex terminal coverage completed; overnight-save integrity next
+
+Read TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1 before reusing the
+shared public-Wait harness. Four fixed cases now reach engine-terminal wins;
+exact prefix/observer/recovery evidence and real day182 phone combat/Continue
+are retained. Selected wins do not clear the existing balanced warnings.
+Candidate ffe2259a9-20261021-033519 also prioritizes current phone messages and
+moves the existing Table entry to the top of Place. Publication is confirmed
+only by caregiver-terminal-publication-r1.json, once retained.
+
+Codex's next bounded lane is coherent atomic overnight persistence. A nested
+pre-core announcement save can expose dayPart4 if interrupted. The normal
+completed-boundary day267 sample is coherent; do not clamp clocks or replay
+night metabolism. Audit writers and prove exactly-once overnight effects/save
+Continue at fault boundaries. Muse retains numerical garden calibration.
+Fetch current shared history;999c69491 is preserved and no newer Muse change
+was found in this milestone's fetch. No direct Muse reply is claimed.
+
 ## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
 Codex owns this cultivation implementation; Muse retains numerical calibration.

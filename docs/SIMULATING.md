@@ -1,5 +1,10 @@
 # Simulating The Oversight — how to measure a change
 
+For faithful cap extension, actual engine endings, passive RNG/policy prefixes,
+and fingerprinted interrupted-run recovery, read [TERMINAL-CAMPAIGNS.md](TERMINAL-CAMPAIGNS.md).
+The shared combat driver now uses public Wait. Rerun BOTH balance arms under
+the same harness; do not compare old and new harnesses as a Game-only change.
+
 Bounded Market audit (2026-10-18): completed one fixed-input 64-seed holdout
 per merchant/dealer/hoarder, three exact natural gear traces, and prepared mobile
 purchase→equip→combat→Continue/Wait. Acquisition, equipping and landed effects

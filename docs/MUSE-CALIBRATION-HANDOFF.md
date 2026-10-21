@@ -1,5 +1,24 @@
 # Muse calibration handoff
 
+## Terminal coverage and shared Wait method (2026-10-20)
+
+Use TERMINAL-CAMPAIGNS.md and caregiver-terminal-audit-r1. The current harness
+ends partial turns with real public Wait rather than internal state mutation.
+Rerun both Game roots under it for calibration; standard comparisons correctly
+reject different harnesses. The64-case method control retains exact Game
+hashes/all23 vectors, with an exercised rare partial-turn case outside screen.
+The four fixed caregiver cases terminate at118/195/270/204 under current Game;
+historical150-cap losses are delayed wins, not permanent Table blocks. This
+does not clear original population warnings, garden viability or useful intake.
+
+Natural day182 phone combat/Continue, earned level3+3 garden use and settled
+day267 Table visibility are the targeted mobile evidence. Candidate build
+ffe2259a9-20261021-033519 prioritizes action feedback and the existing Table
+entry; see caregiver-terminal-publication-r1.json for actual live confirmation.
+Codex next owns overnight-save integrity, especially nested pre-core saves.
+Muse retains numerical calibration. Fetch shared master/main; ancestry is
+preserved, and no wholesale port or replacement of later code is needed.
+
 ## Garden cultivation released; terminal caregiver coverage next (2026-10-20)
 
 Codex owns this cultivation implementation; Muse retains numerical calibration.
