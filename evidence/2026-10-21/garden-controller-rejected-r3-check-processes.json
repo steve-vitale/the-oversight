@@ -1,0 +1,42 @@
+[
+  {
+    "ProcessId": 113548,
+    "ParentProcessId": 89000,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" C:\\Users\\Steve\\.changepilot\\bin\\changepilot-claude-wake.js --listen"
+  },
+  {
+    "ProcessId": 8184,
+    "ParentProcessId": 99612,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/check.js --jobs 4"
+  },
+  {
+    "ProcessId": 86384,
+    "ParentProcessId": 8184,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/test-deterministic-clock-20261014.js"
+  },
+  {
+    "ProcessId": 90604,
+    "ParentProcessId": 8184,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/test-fourthlink-20261014.js"
+  },
+  {
+    "ProcessId": 96900,
+    "ParentProcessId": 8184,
+    "CommandLine": null
+  },
+  {
+    "ProcessId": 12216,
+    "ParentProcessId": 8184,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" scripts/test-gesture-beat-20261012.js"
+  },
+  {
+    "ProcessId": 62408,
+    "ParentProcessId": 90604,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" C:\\Users\\Steve\\.codex\\worktrees\\conversation-structure-current\\oversight\\scripts\\test-fourthlink-20261014.js"
+  },
+  {
+    "ProcessId": 89000,
+    "ParentProcessId": 62408,
+    "CommandLine": null
+  }
+]

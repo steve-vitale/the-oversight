@@ -1,5 +1,16 @@
 # Simulating The Oversight — how to measure a change
 
+Garden controller revision (2026-10-21): use the same corrected Game and retain
+the exact old/new policy manifests. compareHarnessRevision in
+scripts/lib/harness-comparison.js explicitly declares changed script hashes;
+the ordinary comparator must still reject mixed policies. The shared
+garden-longplay-audit.js uses current accounting for each root independently.
+The dated garden-controller-review-r1 recipe validates both long reports,
+same tools/config/jobs/Game inputs and actual observer controls, then reports
+all23 and crop output/intake/costs by policy and iteration cap. No rows or
+identities are rewritten. Use actual terminal status, not the600-iteration cap,
+to claim a run ended. Share tooling before numerical garden calibration.
+
 UTF-8 report integrity (2026-10-20): balance-panel and terminal child readers now
 decode chunks continuously. The observer fingerprint changed; BOTH overnight
 screen arms and current neutrality were rerun. Metric IDs/semantics did not

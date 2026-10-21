@@ -1,5 +1,23 @@
 # Terminal campaign coverage
 
+Final garden controller-r4 reaches actual endings in all ten fixed extended
+cases, through day309, with no watchdog recovery. That does not remove the
+reproduced driver limit below or establish population coverage. communityLost
+currently includes the village-dead harness reason; audit/preserve the underlying
+loss facts when removing the stop so an active/recoverable solo run does not
+silently erase measured community collapse. Collector semantic changes require
+both arms under one updated collector/contract and fresh maintenance proof.
+
+Garden-controller review (2026-10-21): the driver still has a ten-iteration
+livingNPCs()==0 cutoff in sim-harness.js. It can return village-dead with a
+living bearer and Game.over false. Rejected controller-r2 caregiver10001
+demonstrates this at day162. Keep the actual not_terminal status; increasing
+the observation cap alone does not remove that early break. After the garden
+controller food-loop milestone, audit and repair this stopping boundary as a
+separate declared harness revision, with real on/off controls and unchanged
+Game/controller on both arms. Steve's request to play until death requires
+actual endings; community loss and an active solo bearer are separate facts.
+
 Report-integrity correction (2026-10-20): child output now uses continuous UTF-8
 decoding. Parsed/cached final states AND continued bridges must reproduce their
 child-computed canonical hashes before acceptance. Some older raw blobs fail

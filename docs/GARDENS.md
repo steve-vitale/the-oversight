@@ -1,5 +1,35 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
+## Garden controller food loop (2026-10-21)
+
+The shared controller now harvests before new investment and after paid growth,
+prepares real crop food, consumes safe portions and stores eligible safe surplus.
+It preserves unknown food, actual fire/risk gates, original Game costs and its
+four-bed target. Garden work stops for encounters/body changes; permitted combat
+meals retain their existing behavior. Unripe checks do not reschedule unrelated
+eating or donation. Game and player-facing assets are unchanged.
+
+The same-Game methodology comparison retains all23 warnings. Natural long usage
+is48/74 harvesting and47/74 eating cultivated food, versus6/74 and5/74 before.
+Actual consumed crop food1,719,837 kcal includes12,310 ordinary and1,707,527
+assisted. These are crop origins in mixed runs, not ordinary-only/Gardener build
+viability. Output10,530,075 and spoilage7,058,265 nominal kcal show that harvest
+volume alone is insufficient. Direct debits, seeds, stocks and the unallocated
+residual remain separate. See garden-controller-audit-r1 and long-review-r3.
+
+Both82-job arms have eight passing observer controls. The64-case screen gets128
+matching independent before/after Game-hash/outcome/all23 replays, with retained
+same-source baseline reuse. Ten final extended cases reach engine endings through
+day309;22 screen cases remain capped. Wins16→15/7→6/8→9/10→8 and other survival,
+community/progression/gear watches require investigation, not win-rate tuning.
+Game balance and intentional-build/upper-tier coverage remain open for Muse.
+
+Next: remove the driver's living-player/village-dead cutoff with truthful ending
+and community-loss semantics. Then audit harvest/storage decisions: whole-stack
+donation can exceed pantry capacity, and old policy donation counters count attempts.
+Use physical transfers/meals as proof. No new player release is needed for this
+tooling; the published crop-safety Game remains unchanged.
+
 ## Harvest safety prerequisite (2026-10-21)
 
 Released864af1192, live build14dd8521d-20261021-074815. Publication-r1 checks

@@ -1,5 +1,25 @@
 # Survival levers and investigation register
 
+## Garden controller methodology (2026-10-21)
+
+No Game lever changed. Real player harvest/preparation/meal/storage behavior is
+added to the shared simulation policy, with original food/seed/labor/power prices.
+Same corrected Game on both arms; only competent.js changes. All23 retain the
+explicit methodology label and review_required decision. Wins16→15/7→6/8→9/10→8
+for capable/maker/merchant/caregiver; deaths/run increase across all four, with
+survival, community, eligible NPC class and contest/show warnings. The decision
+is to share the functional controller and preserve these warnings, not optimize
+win rate or declare a Game regression.24 adverse/flip diagnostics and128 matching
+independent screen replays are retained. Cases without player harvest preserve
+their old Game hashes after the rejected combat-meal guard was corrected.
+
+Cultivated primary nourishment rises to1,675,601 kcal over74 observed campaigns;
+that does not cancel other domains or establish build viability. High nominal
+spoilage, unallocated output, four-bed policy ceiling and whole-stack pantry
+limits remain explicit. Fix the actual-ending harness cutoff next; inspect the
+communityLost definition before changing stop semantics. See GARDENS.md and
+garden-controller-audit-r1 for costs, scope, evidence and decision.
+
 ## Canonical player garden food (2026-10-21)
 
 Lever: harvesting now retains the same species' canonical raw cooking risk,

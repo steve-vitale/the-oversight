@@ -1,5 +1,66 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Garden controller verified; next repair actual campaign endings (2026-10-21)
+
+Final controller-r4 completes real crop harvest/preparation/meals/safe surplus
+without changing Game code or the four-bed target. Shared-kit23 checks, matched
+all23 panels, two82-job long arms with eight neutral controls each and128
+matching independent screen replays pass their stated verification. Natural
+harvesting6→48/74 and crop eating5→47/74; ordinary12,310 and assisted1,707,527
+kcal are consumed. Ten extended cases reach actual endings through day309;
+22 screening cases remain capped. Quick284/0 and full1,056/0 pass. Publication
+evidence binds the final candidate and fresh checks before the shared push.
+
+The scorecard remains review_required: wins16→15/7→6/8→9/10→8, with other
+survival/community/progression/gear watches.24 selected adverse/flip diagnostics
+are retained. Rejected combat-meal suppression is corrected; no-harvest cases
+preserve their old Game hashes. See garden-controller-audit-r1, balanced-r3,
+long-review-r3 and diagnostics-r2. Huge output/spoilage, whole-stack pantry
+refusals and legacy attempt-based donation counters still limit calibration.
+Do not treat more harvested food or a win movement as balance clearance.
+
+Next bounded milestone: remove the sim driver's living-bearer village-dead
+cutoff. Prove that a declared solo scene continues beyond ten iterations and
+stops only at actual death/win/loss or an explicit observation cap; retain real
+on/off controls and faithful short→long prefixes. Compare old/new harnesses on
+one unchanged Game/controller. Audit communityLost, which currently includes
+that harness end reason, so the fix cannot silently manufacture a better
+community metric. Update its collector/contract/proof together if semantics
+change. Then address harvest/storage decisions and earned Gardener/upper-tier
+cohorts before numerical calibration. Keep the rolling goal active.
+
+Codex owns garden-controller; Muse retains numerical crop/power calibration.
+The Game stays at released864af1192 with shared history through bbece2e39.
+Use actual gated harvest before investment and after paid growth, prepare real
+food, consume safe crops and store safe surplus through ordinary public actions.
+Do not bulk-eat/donate unknown or risky crops; no fire does not make food safe.
+Stop the routine on body/map/encounter changes. Keep the existing four-bed
+investment target so this revision isolates the incomplete food loop.
+
+This is a controller/methodology change, never a Game balance comparison.
+Compare the exact old/new controllers on the same corrected Game; preserve
+all23 per-policy metrics, actual crop intake/cost/spoilage and terminal status.
+Use the shared long audit's74 observed campaigns plus8 controls per arm,
+including ten extended cases. Reuse a retained screen only after exact source,
+collector and contract identity checks. A current candidate screen supplies
+fresh maintenance proof. Do not rewrite source hashes to bypass comparison
+refusals. Current Game/browser inputs are unchanged; retain the existing real
+phone/installed receipts and verify their source match rather than stamp a new
+player build for simulation tooling.
+
+After sharing this revision, the next lane is earned gardening-build and
+upper-tier affordability/usefulness coverage. Existing mixed-policy runs and
+sampled holders do not prove an intentional ability build or six/nine-bed
+viability. Keep actual sources and food costs; neither more wins nor maximum
+planted area is the optimization objective. Keep the rolling goal active.
+
+Priority prerequisite for that later-game audit: sim-harness still stops after
+ten iterations without living NPCs even when the player is alive and Game.over
+is false. Rejected controller-r2 caregiver10001 exposes this at day162. Fix and
+verify that boundary in the next serial milestone as a separate methodology
+revision; do not label a village-dead harness stop an actual game ending or
+silently normalize final states. See TERMINAL-CAMPAIGNS.md.
+
 ## Garden food safety released; complete the sim harvest controller next (2026-10-21)
 
 Release864af1192 is live as14dd8521d-20261021-074815. Publication-r1 verifies
