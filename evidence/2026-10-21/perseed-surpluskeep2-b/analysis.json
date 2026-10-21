@@ -1,0 +1,417 @@
+{
+ "meta": {
+  "dir": "evidence/2026-10-21/perseed-surpluskeep2-b",
+  "gate": 20000,
+  "seeds": "8801-8808 paired reuse",
+  "policies": [
+   "leadfeast",
+   "belongfeast"
+  ],
+  "days": 180,
+  "eligibility": "event counts toward the bar only with >=1 active Haven-primary link at the gate week (tending must exist to stop)"
+ },
+ "events": [
+  {
+   "seed": 8801,
+   "arm": "armed",
+   "week": 17,
+   "day": 119,
+   "beforeKcal": 34928,
+   "afterKcal": 5631,
+   "armedOthers": [
+    "village_0",
+    "village_1",
+    "village_3"
+   ],
+   "controlOthers": [],
+   "armedTrust": [
+    92,
+    90,
+    null,
+    null,
+    null
+   ],
+   "controlTrust": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "pairedFull": false,
+   "weeksUsed": 0,
+   "armedDelta": 0,
+   "controlDelta": null,
+   "pairedDelta": null,
+   "attribution": "village-died-truncated",
+   "attributionDetail": "village dead d131 (village-lost) inside the post-gate window",
+   "dissolution": null
+  },
+  {
+   "seed": 8802,
+   "arm": "armed",
+   "week": 4,
+   "day": 28,
+   "beforeKcal": 24352,
+   "afterKcal": 13900,
+   "armedOthers": [
+    "village_0",
+    "village_1",
+    "village_2"
+   ],
+   "controlOthers": [
+    "village_0",
+    "village_1",
+    "village_2"
+   ],
+   "armedTrust": [
+    35.3,
+    36.7,
+    47,
+    56,
+    65
+   ],
+   "controlTrust": [
+    44.7,
+    54,
+    65.7,
+    77,
+    64.3
+   ],
+   "pairedFull": true,
+   "weeksUsed": 4,
+   "armedDelta": 29.7,
+   "controlDelta": 19.7,
+   "pairedDelta": 10,
+   "attribution": "trust-stable-or-rising",
+   "attributionDetail": "mean polity trust 35.3 -> 65 over 4w (not eroding), realm held — mechanism disconfirmed on this event",
+   "dissolution": null
+  },
+  {
+   "seed": 8804,
+   "arm": "armed",
+   "week": 4,
+   "day": 28,
+   "beforeKcal": 20428,
+   "afterKcal": 7200,
+   "armedOthers": [
+    "village_0"
+   ],
+   "controlOthers": [
+    "village_0",
+    "village_2",
+    "village_3"
+   ],
+   "armedTrust": [
+    40,
+    null,
+    null,
+    null,
+    null
+   ],
+   "controlTrust": [
+    35,
+    33.7,
+    22,
+    19.3,
+    12.7
+   ],
+   "pairedFull": false,
+   "weeksUsed": 0,
+   "armedDelta": 0,
+   "controlDelta": 0,
+   "pairedDelta": 0,
+   "attribution": "village-died-truncated",
+   "attributionDetail": "village dead d33 (village-lost) inside the post-gate window",
+   "dissolution": null
+  },
+  {
+   "seed": 8805,
+   "arm": "armed",
+   "week": 10,
+   "day": 70,
+   "beforeKcal": 24192,
+   "afterKcal": 850,
+   "armedOthers": [
+    "village_0",
+    "village_1",
+    "village_2"
+   ],
+   "controlOthers": [],
+   "armedTrust": [
+    60,
+    60.7,
+    73,
+    null,
+    null
+   ],
+   "controlTrust": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "pairedFull": false,
+   "weeksUsed": 0,
+   "armedDelta": 0,
+   "controlDelta": null,
+   "pairedDelta": null,
+   "attribution": "trust-stable-or-rising",
+   "attributionDetail": "mean polity trust 60 -> 60 over 0w (not eroding), realm held — mechanism disconfirmed on this event",
+   "dissolution": null
+  },
+  {
+   "seed": 8806,
+   "arm": "armed",
+   "week": 4,
+   "day": 28,
+   "beforeKcal": 29362,
+   "afterKcal": 13700,
+   "armedOthers": [
+    "village_1",
+    "village_2",
+    "village_3"
+   ],
+   "controlOthers": [
+    "village_1",
+    "village_2",
+    "village_3"
+   ],
+   "armedTrust": [
+    38,
+    50.7,
+    70,
+    70,
+    71.7
+   ],
+   "controlTrust": [
+    42,
+    55,
+    56,
+    60.3,
+    69.3
+   ],
+   "pairedFull": true,
+   "weeksUsed": 4,
+   "armedDelta": 33.7,
+   "controlDelta": 27.3,
+   "pairedDelta": 6.4,
+   "attribution": "gate-recrossed-transient",
+   "attributionDetail": "pantry back above 20000 at week 6 (tending resumes)",
+   "dissolution": null
+  },
+  {
+   "seed": 8806,
+   "arm": "armed",
+   "week": 10,
+   "day": 70,
+   "beforeKcal": 21140,
+   "afterKcal": 15944,
+   "armedOthers": [
+    "village_1",
+    "village_2",
+    "village_3"
+   ],
+   "controlOthers": [
+    "village_1",
+    "village_2",
+    "village_3"
+   ],
+   "armedTrust": [
+    80.7,
+    86.7,
+    98.7,
+    100,
+    99.7
+   ],
+   "controlTrust": [
+    79.7,
+    99.7,
+    99.7,
+    91.7,
+    91.3
+   ],
+   "pairedFull": true,
+   "weeksUsed": 4,
+   "armedDelta": 19,
+   "controlDelta": 11.7,
+   "pairedDelta": 7.3,
+   "attribution": "gate-recrossed-transient",
+   "attributionDetail": "pantry back above 20000 at week 12 (tending resumes)",
+   "dissolution": null
+  },
+  {
+   "seed": 8806,
+   "arm": "armed",
+   "week": 21,
+   "day": 147,
+   "beforeKcal": 61626,
+   "afterKcal": 7113,
+   "armedOthers": [
+    "village_1",
+    "village_2",
+    "village_3"
+   ],
+   "controlOthers": [],
+   "armedTrust": [
+    86.3,
+    null,
+    null,
+    null,
+    null
+   ],
+   "controlTrust": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "pairedFull": false,
+   "weeksUsed": 0,
+   "armedDelta": 0,
+   "controlDelta": null,
+   "pairedDelta": null,
+   "attribution": "village-died-truncated",
+   "attributionDetail": "village dead d150 (village-lost) inside the post-gate window",
+   "dissolution": null
+  },
+  {
+   "seed": 8808,
+   "arm": "armed",
+   "week": 18,
+   "day": 126,
+   "beforeKcal": 31128,
+   "afterKcal": 0,
+   "armedOthers": [
+    "village_0",
+    "village_2",
+    "village_3"
+   ],
+   "controlOthers": [],
+   "armedTrust": [
+    89.7,
+    null,
+    null,
+    null,
+    null
+   ],
+   "controlTrust": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "pairedFull": false,
+   "weeksUsed": 0,
+   "armedDelta": 0,
+   "controlDelta": null,
+   "pairedDelta": null,
+   "attribution": "village-died-truncated",
+   "attributionDetail": "village dead d127 (village-lost) inside the post-gate window",
+   "dissolution": null
+  }
+ ],
+ "ineligibleEvents": [
+  {
+   "seed": 8801,
+   "week": 2,
+   "beforeKcal": 21750,
+   "afterKcal": 16500,
+   "attribution": "gate-recrossed-transient"
+  },
+  {
+   "seed": 8807,
+   "week": 1,
+   "beforeKcal": 39430,
+   "afterKcal": 17900,
+   "attribution": "no-tendable-link"
+  }
+ ],
+ "controlEvents": [
+  {
+   "seed": 8801,
+   "week": 2,
+   "beforeKcal": 22750,
+   "afterKcal": 19951
+  },
+  {
+   "seed": 8803,
+   "week": 20,
+   "beforeKcal": 43020,
+   "afterKcal": 10400
+  },
+  {
+   "seed": 8804,
+   "week": 4,
+   "beforeKcal": 22660,
+   "afterKcal": 11400
+  },
+  {
+   "seed": 8806,
+   "week": 14,
+   "beforeKcal": 23023,
+   "afterKcal": 5275
+  },
+  {
+   "seed": 8807,
+   "week": 1,
+   "beforeKcal": 39430,
+   "afterKcal": 18300
+  },
+  {
+   "seed": 8808,
+   "week": 11,
+   "beforeKcal": 38652,
+   "afterKcal": 16110
+  }
+ ],
+ "bars": {
+  "bar1_events_ge_4_all_attributed": {
+   "value": "8/8",
+   "pass": true
+  },
+  "bar2_mean_paired_4w_trust_delta_le_neg15": {
+   "value": 7.9,
+   "n": 3,
+   "pass": false
+  },
+  "bar3_postgate_dissolution_attribution_100": {
+   "value": "0/0",
+   "pass": "vacuous"
+  },
+  "bar4_zero_unexplained": {
+   "value": 0,
+   "pass": true
+  }
+ },
+ "verdict": "NO-GO",
+ "wall": {
+  "armed": {
+   "n": 16,
+   "won": 0,
+   "nationalEnd": 8,
+   "nationalEver": 13,
+   "table": 13,
+   "wave4": 14,
+   "wave5": 0,
+   "exiled": 0,
+   "medianDays": 119.5,
+   "maxDays": 180
+  },
+  "control": {
+   "n": 16,
+   "won": 0,
+   "nationalEnd": 5,
+   "nationalEver": 11,
+   "table": 14,
+   "wave4": 13,
+   "wave5": 0,
+   "exiled": 0,
+   "medianDays": 109.5,
+   "maxDays": 167
+  }
+ }
+}
