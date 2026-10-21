@@ -20,12 +20,18 @@ const K = require('./godpath/lib');
   const food = () => ({ name: 'test jerky', kcalEach: 1000, units: 10, kg: 0.1, safe: true, unit: 'item', spoilDay: 999 });
   v.pantry = [food()];
   v.gives = {}; v.takes = {}; v.takes[vid] = 20000;   // long-run net taker
+  // (sim-thiefcooldown-b 2026-10-20: the bulk hoard detector is now the
+  // trailing-7d NET take rate vs the 3000 kcal/day abuse bar, not the
+  // cumulative ledger — a single pack-out no longer reads as hoarding.
+  // Seed the dated history so the detector trips under the new bar.)
+  Game.recordTakeHist(vid, 22000);
   const h0 = L().foodHoarded | 0;
   Game.takeFromPantryBulk({ 0: 3 });
   T.ok('net taker bulk take of 3000 kcal -> foodHoarded +3', (L().foodHoarded | 0) - h0 === 3, 'delta=' + ((L().foodHoarded | 0) - h0));
 
   v.pantry = [food()];
   v.gives = {}; v.gives[vid] = 50000; v.takes = {};   // net giver
+  v.takeHist = {}; v.giveHist = {};                   // no recent take rate
   const h1 = L().foodHoarded | 0;
   Game.takeFromPantryBulk({ 0: 2 });
   T.ok('net giver bulk take -> foodHoarded unchanged', (L().foodHoarded | 0) === h1);

@@ -189,6 +189,11 @@ justice.js moot heat still uses the cumulative ledger (net < -5000/-15000)
   green — the -2 path's doctrine survives the re-barring.
 - scripts/test-ledgerpenalty-20261014.js (#156 spec): T6 fixture armed
   honestly (givePending) — see above. Now 10/10 green.
+- scripts/test-ledger-hoard-betray-20261014.js (audit 2026-10-14): the bulk
+  hoard detector now feeds the Table's foodHoarded ledger on the rate bar,
+  not the cumulative bar — a single honest pack-out no longer reads as
+  hoarding; sustained 3000+/day net taking still does. Fixture seeds the
+  rate history (and resets it for the net-giver section). 6/6 green.
 
 ## Metric review
 
