@@ -1,0 +1,24 @@
+=== seed 9914 day 27 — conversation with Lakshmi (gen_f3vouvy) ===
+occupation=physical therapy aide temperament=dry trust=30 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you miss most — What do you miss most? From before."
+(turn0 choices: ans:q_miss:a_food, ans:q_miss:a_people, ans:q_miss:a_quiet, ans:q_miss:a_home, ans:q_miss:honest_pass, leave, silence)
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "The way I read it — God. Yes. I dream about soup. Actual soup, with a spoon."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? I mean it."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Brianna?" Lakshmi lowers their voice. "Between us — they're not a paramedic. They're a Veterinarian. Don't say who told you."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? That's my read."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That was almost a conversation. We're improving."
+want final: id=curious stage=3 resolution=engaged

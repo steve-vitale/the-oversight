@@ -1,0 +1,27 @@
+=== seed 9912 day 77 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=63 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about what day it is — we left it mid-thought, 6 days back. 'Huh. I wouldn't have guessed that about you.' We still owe what they want a proper ending, too."
+(turn0 choices: dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Do you believe in anything? Now, I mean. After everything."
+(want=curious stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "It's all right if you don't know."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Wanjiru headed out to check the snares."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 9913 day 17 — conversation with Mariam (gen_qdveezu) ===
+occupation=programmer temperament=anxious trust=34 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "My wound needs a second pair of hands. Could you take a look?"
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, goon, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=ask_favor stage=3 resolution=unresolved

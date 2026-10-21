@@ -1,0 +1,32 @@
+=== seed 9912 day 80 — conversation with Noah (gen_lo6dtl2) ===
+occupation=tattoo artist temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Teach me something. Anything you know that I don't. You know?"
+(turn0 choices: ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:honest_pass, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Diana is back. Walked in like they'd never left. Simple as that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Just... be straight with me."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

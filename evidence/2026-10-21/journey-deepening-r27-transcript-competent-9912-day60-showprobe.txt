@@ -1,0 +1,18 @@
+=== seed 9912 day 60 — conversation with Noah (gen_lo6dtl2) ===
+occupation=tattoo artist temperament=steady trust=90 dead=false mood=cheerful
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Wanjiru headed out to check the snares."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,32 @@
+=== seed 9912 day 39 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=52 dead=false mood=cheerful
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about the gossip — that was 8 days back. Still on your mind? 'That's what I heard, anyway. What's up?'"
+(turn0 choices: goon, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "This wound — I can't clean it properly one-handed. Could you take a look?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Actually, forget it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Huh. That went clean out of my head."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Lost it. The thought, I mean. Go on."
+(want=ask_favor stage=1)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unresolved

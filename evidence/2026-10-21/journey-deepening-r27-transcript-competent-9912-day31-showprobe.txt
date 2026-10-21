@@ -1,0 +1,32 @@
+=== seed 9912 day 31 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=49 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "I asked Simone about what scares you most — Simone's gone. What scares you most about what's happening? The real answer. Just... be straight with me."
+(turn0 choices: ans:q_system_fear:a_tell, ans:q_system_fear:a_vague, ans:q_system_fear:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Not that it matters."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Good question." "Diana is back. Walked in like they'd never left. You know?"
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Simone always took the burnt piece. Said someone had to. I take it now."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? …if that makes sense."
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Anyway, that's me."
+(want=curious stage=2)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=curious stage=3 resolution=engaged

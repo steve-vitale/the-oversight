@@ -1,0 +1,32 @@
+=== seed 9912 day 44 — conversation with Noah (gen_lo6dtl2) ===
+occupation=tattoo artist temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Could you take a look?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Actually, forget it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Where was I? Gone. Ask me something else."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...No, it's not coming back. What were you saying?"
+(want=ask_favor stage=1)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unresolved

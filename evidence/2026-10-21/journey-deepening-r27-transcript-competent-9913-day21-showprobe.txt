@@ -1,0 +1,24 @@
+=== seed 9913 day 21 — conversation with Regina (gen_uclaxzt) ===
+occupation=crossing guard temperament=prickly trust=46 dead=false mood=grieving
+want: seek_taken (stage 0)
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: agency:ask_expedition, confront:d_iixob7e, dlg:invite, dlg:comfort, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask? Happy?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Ella? An ESL teacher, back before. Solid person."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_taken stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Angelo is gone and the world just... continues. That's the part I can't stand."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Sorry. I need a minute."
+want final: id=seek_taken stage=3 resolution=unestablished

@@ -1,0 +1,18 @@
+=== seed 9912 day 58 — conversation with Noah (gen_lo6dtl2) ===
+occupation=tattoo artist temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About this wound — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Yuki? A librarian, back before. Solid person."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=stated

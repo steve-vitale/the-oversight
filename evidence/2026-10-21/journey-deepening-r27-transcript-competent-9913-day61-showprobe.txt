@@ -1,0 +1,18 @@
+=== seed 9913 day 61 — conversation with Ella (ella_johnson) ===
+occupation=ESL teacher temperament=dry trust=51 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Watch yourself around Nathan. I can't tell you why. Just... watch."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "I'm going to go stare at something else now."
+want final: id=ask_favor stage=3 resolution=stated

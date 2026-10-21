@@ -1,0 +1,32 @@
+=== seed 9912 day 71 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=63 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: I record the arguments too. Especially the arguments. That's the real history.
+(turn0 choices: goon, dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind? Good talking."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "...Sorry, lost my train of thought."
+(want=curious stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=1)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Huh. I wouldn't have guessed that about you."
+(want=curious stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=1)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "I just said — did you miss it?"
+(want=curious stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=1)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "I just told you — what else is on your mind?"
+(want=curious stage=1)
+closing line: "I need some air. Alone air. You understand."
+want final: id=curious stage=3 resolution=unresolved

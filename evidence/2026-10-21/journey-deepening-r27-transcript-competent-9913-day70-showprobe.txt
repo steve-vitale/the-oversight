@@ -1,0 +1,12 @@
+=== seed 9913 day 70 — conversation with Mariam (gen_qdveezu) ===
+occupation=programmer temperament=anxious trust=90 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "We never did finish talking about the gossip — that was 12 days back. Still on your mind? 'Take it with salt. What did you want to ask? No rush.'"
+(turn0 choices: dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=seek_taken stage=3 resolution=unestablished
