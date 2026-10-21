@@ -7360,8 +7360,15 @@
         const wb = c.heldBeats.splice(wdi, 1)[0];
         c.windingDown = true;
         c.transcript.push({ who: 'you', text: '(gesture)' });
-        const wline = this.sayLine(vid, wb.text, { foreign: wb.foreign || c.nativeLang || this.npcNativeLang(vid) }) || wb.text;
-        c.transcript.push({ who: 'them', text: wline });
+        // R35 (journey-landing): sayLine records its own them-line in the
+        // transcript (possibly paginated into chunks) and returns null only
+        // when nothing was recorded (empty/blocked) — pushing a second copy
+        // here double-recorded the winddown beat (transcript-caught as a
+        // verbatim repeat in the wild, seed 202 day 2). Push the fallback
+        // text only when sayLine recorded nothing.
+        const said = this.sayLine(vid, wb.text, { foreign: wb.foreign || c.nativeLang || this.npcNativeLang(vid) });
+        const wline = said || wb.text;
+        if (!said) c.transcript.push({ who: 'them', text: wline });
         c.exchanges++;
         return { line: wline, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
