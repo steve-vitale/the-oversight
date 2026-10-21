@@ -14,6 +14,12 @@ fi
 SEEDS="${SEEDS:-8801,8802,8803,8804,8805,8806,8807,8808}"
 POLS="${POLICIES:-leadfeast-repairrate belongfeast-repairrate}"
 OUTDIR="evidence/2026-10-21/perseed-repairrate-b"
+# KILL PROTOCOL (sim-repairrate-b NO-GO, 2026-10-21): the policy layer was
+# deleted per kill protocol; the sweep is not applicable. Loud, never silent.
+if [ ! -f "$(dirname "$0")/policies/repairrate.js" ]; then
+  echo "INFO-SKIP: scripts/policies/repairrate.js deleted per kill protocol (sim-repairrate-b NO-GO 2026-10-21) — sweep not applicable."
+  exit 0
+fi
 mkdir -p "$OUTDIR"
 for POL in $POLS; do
   echo "=== CONTROL $POL (SURPLUSFEED=1, base policy) ==="

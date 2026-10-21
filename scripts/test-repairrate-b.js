@@ -27,6 +27,14 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
+// KILL PROTOCOL (sim-repairrate-b NO-GO, 2026-10-21): the policy layer was
+// deleted; the proof cannot run. This RED gate documents the kill — it must
+// stay loud, never silently pass.
+if (!require('fs').existsSync(path.join(__dirname, 'policies', 'repairrate.js'))) {
+  console.error('RED: scripts/policies/repairrate.js missing per kill protocol (sim-repairrate-b NO-GO 2026-10-21).');
+  process.exit(1);
+}
+
 if (process.env.FEASTSCALE_R13 !== '1' || process.env.SEATDRIVE !== '0' || process.env.SURPLUSFEED !== '1') {
   console.error('FATAL: FEASTSCALE_R13=1, SEATDRIVE=0 and SURPLUSFEED=1 must all be set explicitly (see Usage header)');
   process.exit(2);
