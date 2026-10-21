@@ -107,6 +107,27 @@ needs fresh checks, including any publication-receipt follow-up.
 After publication the next bounded Codex milestone is garden consumption
 provenance in natural long campaigns. Muse retains numeric cultivation tuning.
 
+## Verified publication
+
+Normal atomic push published30f630d3602466721a66126b2cf4a2ea0482f163 to
+master/main/codex-company branch after quick277/0 and full1,049/0. No force,
+hook bypass or imported approval queue. The first live read still saw the
+previous deployed build and correctly failed; live-verify-r2 then verifies
+all168 boot inputs plus worker/version/manifest,171 total. Publication-r1
+contains every response hash and clean fresh390×736 browser boot. This is
+actual live evidence, separate from the candidate's prepared gameplay proof.
+Primary fast-forward reaches the same commit and preserves the foreign sweep
+SHA256D36038616FFD73218A93637C504CD3BA5B4EEFB1C82335D6842388108126B722.
+The owned loopback server is closed after the completed local journeys.
+
+Publication-receipt/docs follow-up requires fresh quick/full logs before its
+own push. Runtime, observer and controller are unchanged by that follow-up;
+current source-bound balanced/frame proofs remain the same actual evidence.
+Fresh follow-up quick-r1 passes277/0 and full-r1 passes1,049/0 in318 seconds.
+Publication-followup-verification-r1 binds these logs and verifies unchanged
+runtime/observer/controller inputs, matching production bytes and preserved
+foreign sweep before the follow-up push.
+
 Final prepush gates: quick-r3 is277/0 and full-r1 is1,049/0 in335 seconds.
 Prepublication-r1 binds their bytes, current source/boot hashes, real source-bound
 frame receipts and installed lifecycle result. Final fetch still sees378c91373;

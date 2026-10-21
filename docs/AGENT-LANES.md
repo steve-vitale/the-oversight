@@ -1,14 +1,16 @@
 # Agent lanes (2026-10-20)
 
-## Codex company candidate, then garden consumption evidence (2026-10-21)
+## Codex company released; garden consumption evidence next (2026-10-21)
 
-Company-favor candidate is in its final full/publication gate; see the dated
-company-favor audit and ROADMAP top entry. Codex owns favor-company.js and its
+Company-favor release30f630d36 is live as378c91373-20261021-052404; the
+publication receipt verifies171 deployed inputs and clean fresh phone boot.
+Quick277/0 and full1,049/0 preceded the push; receipt follow-up gets fresh checks.
+See the dated company-favor audit and ROADMAP top entry. Codex owns favor-company.js and its
 conversation/deadline/time hooks. Prepared touch/Continue/interruption passes;
 natural screen calls were cancellations, so no natural-completion claim.
 The matched panels retain their review_required decision and prior warnings.
 
-Next after publication: Codex owns cultivated-food provenance and useful-intake
+Next: Codex owns cultivated-food provenance and useful-intake
 measurement across natural long campaigns, with actual delivery/spoilage/meal
 boundaries, honest unknowns and passive on/off controls. Muse retains numeric
 garden/ability calibration. No silent controller or numerical changes in the

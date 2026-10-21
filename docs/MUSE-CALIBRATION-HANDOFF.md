@@ -1,11 +1,13 @@
 # Muse calibration handoff
 
-## Company-favor candidate and next measurement lane (2026-10-21)
+## Company favor released; next measurement lane (2026-10-21)
 
-Codex's company-favor candidate implements actual same-person/fire company
+Codex's company-favor release30f630d36 implements actual same-person/fire company
 through dawn, normal clock/Sleep costs, saved attendance/deadline and honest
 interruption/cancellation. See CONVERSATIONS.md and company-favor-audit-r1.
-Candidate publication remains a separate gate. Numeric relief matches ordinary
+Build378c91373-20261021-052404 is live; publication-r1 verifies171 deployed
+inputs and clean fresh phone boot. Quick277/0 and full1,049/0 preceded the push;
+receipt follow-up gets fresh checks. Numeric relief matches ordinary
 comfort; no food/HP/reward offset compensates for outcome movement.
 
 Both64-case arms use the same current collector/harness/policies; all23 remain
@@ -20,7 +22,8 @@ measurement in natural long campaigns. Muse retains numerical garden/ability
 calibration. Delivery, spoilage, remaining stock and actual useful player/NPC
 intake must stay separate; the existing output totals do not establish payoff.
 Do not silently change a controller between Game arms. Fetch shared history;
-the latest origin/master and main fetch was378c91373 with no newer Muse commit.
+the prepublication origin/master and main fetch was378c91373 with no newer Muse commit;
+both now contain the normal fast-forward release30f630d36.
 This is a shared-source handoff, not a claim of a direct Muse response.
 
 ## Atomic time persistence and trustworthy reports (2026-10-20, released)
