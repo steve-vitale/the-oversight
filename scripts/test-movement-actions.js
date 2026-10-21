@@ -84,7 +84,11 @@ function ok(name, cond) {
   // Exit and verify
   Game.exitBuilding();
   ok('insideHaven is false after exiting', s.insideHaven === false);
-  ok('player at grounds doorstep (4,2)', s.mx === 4 && s.my === 2);
+  // The centered lodge spans rows3–4. Its south-facing doorstep is(4,5);
+  // (4,2) put the bearer behind the hall on the garden rows.
+  ok('player at south grounds doorstep (4,5)', s.mx === 4 && s.my === 5);
+  ok('the doorstep is actual walkable ground outside the garden',
+    !Game.cellProps(Game.genDetail(Game.map.px,Game.map.py)[s.my][s.mx]).blocks && Game.gardenCellAt(s.mx,s.my) === null);
 
   console.log(`\n=== RESULTS: ${pass} pass, ${fail} fail ===`);
   process.exit(fail > 0 ? 1 : 0);

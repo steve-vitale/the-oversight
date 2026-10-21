@@ -1,5 +1,57 @@
 # Survival levers and investigation register
 
+## Haven entrance candidate (2026-10-20, not yet published)
+
+Generated tents can no longer occupy the south doorstep(4,5). A tent that
+would have landed there moves to(2,5), with the same private RNG draws and
+the same distinct shelter count. An independent before/after census of256
+private terrain seeds finds115 formerly blocked doorsteps, zero afterward,
+with identical shelter/fire/hall/teaching-garden counts and only those two
+cells changed. These are layout seeds, not256 naturally played campaigns.
+Saved/player-built grounds are not regenerated or cleared.
+
+Step outside now lands south of the centered hall rather than on northern
+garden rows. Older yards can use a connected east/west approach; a sealed
+yard refuses the transition without deleting structures or granting combat
+flight. A normal door crossing still spends no ticks/food. Walking retains
+its actual per-step price, so changed starting position can change route cost,
+exposure and who is nearby. Completed transitions persist immediately; combat
+door saves happen after flight settlement, never halfway through it.
+
+The matched16-per-policy screen is review_required: maker class access14→7/16,
+caregiver first-bearer day30 survival13→9/16, and community-loss/progression/gear
+watches accompany lower player deaths in some cohorts. Win changes in either
+direction remain diagnostic. No food, HP, skill, gear or reward offset was made.
+Thirty selected exact replay pairs reproduce full state/outcomes/all metrics.
+Fixed seed1 maker/caregiver ablations restore original outcomes and all23
+metrics only when old tent placement is restored; removing new saves or
+restoring the old landing alone retains the candidate metrics in those cases.
+This isolates a layout dependency in two cases, not a population conclusion.
+
+Independent seeds10000–10063 (64 per maker/caregiver, same roots/observer)
+do not reproduce the screen's large class/survival drops. Maker class access
+is53→51/64; paired day30 survival48→48/62 has changed coverage, not64 known
+survivals. Caregiver day30 survival is47→50/64 and class access51→60/64.
+Those observations do not prove equivalence or cancel other warnings.
+Caregiver Table invitations42→30/64 and wins40→30/64 remain meaningful
+review signals; maker wins33→32/64. All23 metrics and coverage stay retained.
+
+The56 independent-panel replay pairs cover every binary win change and the
+predeclared adverse-domain cases, with exact full state/outcome/metric matches.
+Four repeated canonical eligibility probes (two lost and two gained caregiver
+wins, sorted seed) leave the final state unchanged. The losing sides lack
+third-wave breadth:1–2 distinct encounters against the existing lesser-seat
+requirement3; the winning sides have3–4. These probes explain those four
+endpoints, not all population outcomes. Several campaigns stop alive at the
+150-day observation cap; they are not proven permanently unable to progress.
+
+Decision: retain the actual entrance/saved-state correctness fix, with the
+scorecards still review_required and caregiver Table pace explicitly open.
+No gate, cost or reward is relaxed to recover wins. Public-release viability
+is not cleared. Next bounded work follows fixed caregiver campaigns to actual
+terminal endings, with later-game phone Continue/action evidence. See the
+haven-access audit for raw panels, failed pilots, controls and limitations.
+
 ## Joint creek-run milestone (2026-10-20)
 
 Water requests move from unavailable words to a real temporary-companion trip.
@@ -1473,3 +1525,7 @@ adverse deaths, NPC hunger and earned-gear change. See the favor-action r3 audit
 and raw panels/replays for verified counts and coarse first differences; those
 are diagnostic associations, not causal explanations of endings. Five authored
 joint jobs and remaining callback/voice prose gaps stay release blockers.
+
+Final fallback revision (build3f09b84a1-20261020-235403): a camp with nine tents erected through actual paid actions blocked every preferred landing while leaving connected exterior open. The final helper searches all connected non-garden exterior cells before refusing; it preserves every structure. The frozen first candidate fails the same reproduction, the final candidate exits successfully. Shared-kit coverage is35 checks including128 saved obstruction layouts. Final phone-r2 has17 trusted-touch checkpoints at each height, including the paid nine-tent yard, walking out to the world and Continue; combat-r4 has7, frame-r3 and water haven-final-r2 have16 each. Lifecycle-r2 proves old installed-worker update and cold offline Continue. Prepared fixtures do not establish naturally earned campaigns or physical-device clearance.
+
+Fresh final-source screen/holdout after-r2 panels contain192 campaigns and match EVERY retained first-candidate row field, canonical state hash, outcome and all23 metrics (equivalence-r1.json). Earlier replays, ablations and eligibility queries retain their original first-candidate source identities; they were not rerun on the final source. Their sampled endpoints match the new actual runs, not a universal equivalence claim. Both final scorecards remain review_required. The lost caregiver Table pace stays open for the next bounded terminal-campaign milestone.

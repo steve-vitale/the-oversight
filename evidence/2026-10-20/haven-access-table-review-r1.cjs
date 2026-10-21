@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),z=require('node:zlib'),assert=require('node:assert/strict');
+const prefix='evidence/2026-10-20/haven-access-',read=f=>JSON.parse(z.gunzipSync(fs.readFileSync(f))),beforeFile=prefix+'holdout-before-r1.json.gz',afterFile=prefix+'holdout-after-r1.json.gz',before=read(beforeFile),after=read(afterFile);
+let driver=fs.readFileSync('scripts/review-god-restoration.js','utf8').replace(/\r\n/g,'\n');
+for(const name of ['balance-panel','gear-usage-audit','lib/replay-boundaries'])driver=driver.replace("require('./"+name+"')","require('../../scripts/"+name+"')");
+const needle='finalState:clone(G.state)';assert.equal(driver.split(needle).length-1,1);
+driver=driver.replace(needle,needle+`,tableGate:(()=>{const measured=gear.gameplayHash(G.state),seat=G.tableSeat(),entryBlock=G.tableEntryBlock(),s=G.state.scholar;return{scope:'Canonical eligibility helpers called only AFTER exact outcome/state/metric checks and the retained final-state clone',day:s.day,seat,entryBlock,tableWaiting:!!s.prog?.tableWaiting,tableDone:!!s.prog?.tableDone,arc:s.prog?.arc,postQueryStateChanged:gear.gameplayHash(G.state)!==measured};})()`);
+driver=driver.replace('events:before.events}','events:before.events,tableGate:before.tableGate}').replace('events:after.events}','events:after.events,tableGate:after.tableGate}');
+const driverFile=prefix+'eligibility-review-r1.cjs';fs.writeFileSync(driverFile,driver,{flag:'wx'});
+const old=new Map(before.rows.filter(r=>r.row.policy==='caregiver').map(r=>[r.row.seed,r])),rows=after.rows.filter(r=>r.row.policy==='caregiver').sort((a,b)=>a.row.seed-b.row.seed),cases=[];
+for(const kind of ['lost','gained'])for(const r of rows.filter(r=>kind==='lost'?old.get(r.row.seed).row.won&&!r.row.won:!old.get(r.row.seed).row.won&&r.row.won).slice(0,2))cases.push({policy:'caregiver',seed:r.row.seed,reason:'First two sorted '+kind+' wins in independent holdout; inspect actual final Table requirements, not a new effect estimate'});
+const plan={beforeRoot:path.resolve(cp.execFileSync('git',['rev-parse','--git-common-dir'],{encoding:'utf8'}).trim(),'haven-access-baseline-3f09b84a1'),afterRoot:process.cwd(),beforePanel:path.resolve(beforeFile),afterPanel:path.resolve(afterFile),cases};
+const file=prefix+'table-gates-r1-plan.json';fs.writeFileSync(file,JSON.stringify(plan,null,2)+'\n',{flag:'wx'});const fd=fs.openSync(prefix+'table-gates-r1.log','wx');
+const run=cp.spawnSync(process.execPath,[driverFile,'--plan',file,'--out',prefix+'table-gates-r1'],{stdio:['ignore',fd,fd]});fs.closeSync(fd);if(run.status!==0)throw Error('Canonical Table diagnostic failed; inspect its retained log');console.log(JSON.stringify({cases,exact:true}));

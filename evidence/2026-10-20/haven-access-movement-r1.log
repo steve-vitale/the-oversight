@@ -1,0 +1,19 @@
+
+=== Movement costs ===
+  PASS: a walkable neighbor exists for the cost test
+  PASS: microMove stepped
+  PASS: microMove costs 2 kcal
+  PASS: microMove costs 1 tick
+  PASS: pathStep stepped
+  PASS: pathStep costs walkStepKcal() per landed step
+  PASS: pathStep costs 1 tick
+
+=== Haven re-entry ===
+  PASS: Go inside action available at lodge
+  PASS: enterBuilding succeeds on haven node
+  PASS: insideHaven is true after entering
+  PASS: insideHaven is false after exiting
+  PASS: player at south grounds doorstep (4,5)
+  PASS: the doorstep is actual walkable ground outside the garden
+
+=== RESULTS: 13 pass, 0 fail ===

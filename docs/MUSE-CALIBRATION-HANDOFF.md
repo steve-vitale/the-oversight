@@ -1,5 +1,39 @@
 # Muse calibration handoff — conversation/favor repair
 
+## Haven entrance candidate — verification (2026-10-20)
+
+Codex branch codex/haven-access-20261020, based on shared3f09b84a1;
+candidate build3f09b84a1-20261020-235403. Publication is still pending full
+checks/readback. Fetch the current shared refs before merging; preserve local
+work, and do not port an older tree over this source. No new Muse changes
+were on remote master at the last pre-push fetch.
+
+Fresh grounds reserve the south door(4,5), moving its generated tent to(2,5)
+with the same shelter count/private draws. Existing saved/player structures
+stay intact. Exit uses a connected exterior landing, never the northern garden;
+entry/exit save immediately, and a refused combat crossing cannot grant flight.
+Shared-kit35 checks, independent256-layout contrast, actual touch at both phone
+sizes, the full water journey, ordinary/Deer frames and offline update pass.
+
+The16-per-policy balanced screen remains review_required. Independent64-case
+maker/caregiver follow-up does not reproduce the large screen class/survival
+drops, but caregiver Table invitations42→30/64 and wins40→30/64 remain warnings.
+Maker class53→51/64; paired day30 survival48→48/62 is coverage_changed.
+Caregiver day30 survival47→50/64 and class51→60/64 cannot cancel Table watches.
+All23 metrics, eligibility census, raw panels/source bundle and86 unique exact
+replay pairs are retained under haven-access-*. Four repeated canonical Table
+queries leave the final states unchanged and identify missing wave-three
+breadth in selected lost seats; the same unchanged condition explains selected
+gained seats. Fixed ablations isolate a layout dependency in two screen cases.
+
+Decision: retain the actual entrance/persistence correction and these warnings;
+no cost, reward or Table gate is tuned to restore win percentages. Public-release
+viability remains open. Codex's next bounded lane after publication: four fixed
+caregiver campaigns to actual terminal outcomes, faithful continuation/prefix
+proof, and naturally earned late-game phone Continue/action evidence. Muse
+retains numerical calibration; the new later-game evidence/tooling is shared.
+Do not call alive-at150-day-cap campaigns permanent failures or completed runs.
+
 ## Joint water trip shipped (2026-10-20)
 
 Build982cb3c40-20261020-221451 adds one real joint job. Merge the current
@@ -137,3 +171,7 @@ Before every push use quick/full, fresh source-bound neutral and phone proofs,
 and update survival-lever decisions with raw panels/config/hashes. Actual phone
 interaction is distinct from node campaigns. Report actual days/endings; later
 game still needs play-until-death coverage.
+
+Final fallback revision (build3f09b84a1-20261020-235403): a camp with nine tents erected through actual paid actions blocked every preferred landing while leaving connected exterior open. The final helper searches all connected non-garden exterior cells before refusing; it preserves every structure. The frozen first candidate fails the same reproduction, the final candidate exits successfully. Shared-kit coverage is35 checks including128 saved obstruction layouts. Final phone-r2 has17 trusted-touch checkpoints at each height, including the paid nine-tent yard, walking out to the world and Continue; combat-r4 has7, frame-r3 and water haven-final-r2 have16 each. Lifecycle-r2 proves old installed-worker update and cold offline Continue. Prepared fixtures do not establish naturally earned campaigns or physical-device clearance.
+
+Fresh final-source screen/holdout after-r2 panels contain192 campaigns and match EVERY retained first-candidate row field, canonical state hash, outcome and all23 metrics (equivalence-r1.json). Earlier replays, ablations and eligibility queries retain their original first-candidate source identities; they were not rerun on the final source. Their sampled endpoints match the new actual runs, not a universal equivalence claim. Both final scorecards remain review_required. The lost caregiver Table pace stays open for the next bounded terminal-campaign milestone.

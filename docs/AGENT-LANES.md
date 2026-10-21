@@ -30,6 +30,23 @@ placement cannot overwrite it, existing saved/player structures survive,
 native phone entry/exit works, required checks/measurement pass and the
 verified fix is shared/live. No general redesign of Haven is in scope.
 
+Candidate work is on codex/haven-access-20261020, based on shared3f09b84a1.
+Code and35 shared-harness checks cover the south landing, a reserved generated
+doorstep, actual paid camp/fuel persistence, follower sub-state, blocked-door
+refusal and real combat flight. Actual touch journeys pass at both heights;
+the source-bound water trip, ordinary/Deer frames and installed offline update
+also pass. Independent64-case follow-ups do not reproduce the screen's large
+maker class/caregiver survival drops, but caregiver Table invitations42→30/64
+remain a review signal. Fixed exact eligibility probes point to missing
+third-wave breadth in selected150-day-capped campaigns. Full check/publication
+remain pending; do not call this candidate shared/live yet.
+
+After Haven publication, Codex's next bounded lane is four fixed caregiver
+journeys through actual terminal outcomes, preserving policy/RNG continuation
+or proving any rerun prefix equivalent. Keep alive-at-cap cases unknown; obtain
+a naturally earned late save for actual phone Continue/action. This adds
+repeatable later-game coverage for Muse's calibration, without numeric tuning.
+
 ## Completed favor lifecycle goal (2026-10-20, shipped982cb3c40)
 
 Codex owns the bounded food/wound/illness favor lifecycle: saved task identity,
@@ -1529,3 +1546,7 @@ readiness/menu/dispatch contract and typed physical-deed receipts. Preserve the
 r7 reconciliation and all Muse changes. The five missing joint jobs are explicit
 release blockers in ROADMAP; explanations are not finished gameplay. Read
 `evidence/2026-10-20/favor-action-audit-r3.md` for the final bounded evidence.
+
+Final fallback revision (build3f09b84a1-20261020-235403): a camp with nine tents erected through actual paid actions blocked every preferred landing while leaving connected exterior open. The final helper searches all connected non-garden exterior cells before refusing; it preserves every structure. The frozen first candidate fails the same reproduction, the final candidate exits successfully. Shared-kit coverage is35 checks including128 saved obstruction layouts. Final phone-r2 has17 trusted-touch checkpoints at each height, including the paid nine-tent yard, walking out to the world and Continue; combat-r4 has7, frame-r3 and water haven-final-r2 have16 each. Lifecycle-r2 proves old installed-worker update and cold offline Continue. Prepared fixtures do not establish naturally earned campaigns or physical-device clearance.
+
+Fresh final-source screen/holdout after-r2 panels contain192 campaigns and match EVERY retained first-candidate row field, canonical state hash, outcome and all23 metrics (equivalence-r1.json). Earlier replays, ablations and eligibility queries retain their original first-candidate source identities; they were not rerun on the final source. Their sampled endpoints match the new actual runs, not a universal equivalence claim. Both final scorecards remain review_required. The lost caregiver Table pace stays open for the next bounded terminal-campaign milestone.
