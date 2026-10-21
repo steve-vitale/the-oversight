@@ -422,18 +422,13 @@
                  'Silence. They don\'t press.',
                  'You don\'t answer. They nod slowly, like your silence confirmed something.'],
   };
-  // "What do YOU think?" — they give a take. Short, portable across
-  // questions, human. Tracked no-repeat per villager.
-  const GQ_TAKES = [
-    '"Honestly? I think about it more than I say."',
-    '"I go back and forth. Ask me tomorrow, I\'ll say different."',
-    '"My take? We\'re not going to like the answer, whatever it is."',
-    '"I\'ve got theories. Most of them are just fear with better lighting."',
-    '"Short version: I don\'t know. Long version: also that, but slower."',
-    '"I think the asking matters more than the answer, out here."',
-    '"Everyone\'s got a take. Mine\'s just the one I can live with."',
-    '"You really want my take? ...Yeah. Okay. I think we\'re being tested."',
-  ];
+  // "What do YOU think?" — the take the NPC gives is now a plain short
+  // reaction (see the 'take' answer branch): the old GQ_TAKES pool was
+  // retired (conversation intent repair 2026-10-20, 3329c74bf) after its
+  // "Short version:" self-openers kept doubling with voice openers
+  // ("Quick version — Short version: I don't know…", audit F13 2026-10-21).
+  // The pool is removed outright (sim-voicefix1 F13) so the template can't
+  // be resurrected by a future wiring — it is dead content, not live data.
   const GQ_FOLLOWUP = '"Sorry — I asked you something there."';
   const GQ_LAPSE = '"Forget it. Wasn\'t important."';
 
@@ -723,9 +718,12 @@
       let useOpen = opens.length && (!closes.length || (!isQ && Math.random() < 0.45));
       if (favorHead) useOpen = false;
       let pool = useOpen ? opens : closes;
-      // DISMISSAL CLOSERS (journey endgame 2026-10-11): " — anyway." /
-      // " — comedy." move PAST a topic — after a direct question they read
-      // as answering yourself ("Will you help me? — anyway."). Questions
+      // DISMISSAL CLOSERS (journey endgame 2026-10-11; sim-voicefix1 F9
+      // 2026-10-21: DNA's old " — anyway." / " — comedy." dash-tags are gone —
+      // they became the spoken ", anyway." and " Ha."). A dash-led closer
+      // after a direct question reads as answering yourself ("Will you help
+      // me? — or so they tell me."), so the remaining dash-led asides
+      // (wry's " — or so they tell me.") are filtered on questions; questions
       // keep trailing/address closers ("…", ", name.", "Ha. Funny.") only.
       if (!useOpen && isQ) {
         const filtered = pool.filter(b => !/^ — /.test(String(b)));
@@ -2244,10 +2242,18 @@
       const dna = this.convoSpeechDNA(vid);
       const reg = CONVO_REGISTER_MARKERS[dna.register] || CONVO_REGISTER_MARKERS.plainspoken;
       let open = reg.open.slice(), close = reg.close.slice();
-      if (dna.pace === 'quick') close.push(' — anyway.');
+      // TONE-TAG LEAK FIX (sim-voicefix1 F9 2026-10-21): ' — anyway.' /
+      // ' — comedy.' are stage directions — a person never says "comedy"
+      // inside their own quote (audit F9: "…twice the ground. — comedy.").
+      // Spoken instead: quick-pace people drop ", anyway." (the comma-fold
+      // tucks it into the clause: "…twice the ground, anyway."), dry-humor
+      // people give the flat deadpan " Ha." Both are things a person would
+      // actually SAY, not stage labels. Steve 2026-10-07: design call made,
+      // documented here for overrule.
+      if (dna.pace === 'quick') close.push(', anyway.');
       if (dna.pace === 'slow') close.push(' …');
       if (dna.humor === 'gallows') close.push(' Ha. Funny.');
-      if (dna.humor === 'dry') close.push(' — comedy.');
+      if (dna.humor === 'dry') close.push(' Ha.');
       // What they call you lands as a closer, once in a while.
       const addr = String(dna.address || '').replace(/\s*\(.*\)\s*/, '').trim().split(/\s+/)[0];
       if (addr && addr !== 'you' && addr.length <= 8) close.push(', ' + addr + '.');

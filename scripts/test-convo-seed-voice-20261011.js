@@ -143,10 +143,12 @@ async function oneSeed(seed) {
 
 const PROVEN = {}; // wantId -> {note, opener} across all seeds
 
-// DISMISSAL-CLOSER PROOF (journey endgame 2026-10-11): a 'quick'-pace
-// villager's " — anyway." / " — comedy." closers must never land after a
-// direct question ("Will you help me? — anyway." answers yourself).
-// Statements keep the closer (the mannerism still exists).
+// DISMISSAL-CLOSER PROOF (journey endgame 2026-10-11; sim-voicefix1 F9
+// 2026-10-21): the old " — anyway." / " — comedy." dash tone-tags were stage
+// directions leaking inside quotes ("…twice the ground. — comedy.") — they
+// are now spoken words (", anyway." / " Ha."). Questions still never take a
+// dash-led closer after the mark ("Will you help me? — anyway." answers
+// yourself); statements keep the mannerism in its spoken form.
 function voiceCheck(seed) {
   const npcs = (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
   const quick = npcs.find(id => {
@@ -167,11 +169,11 @@ function voiceCheck(seed) {
       if(q)qSeen.add(q);if(statement)sSeen.add(statement);
     }
   } finally { Math.random=random; }
-  const badQ = [...qSeen].filter(l => /\? — (anyway|comedy)\."$/.test(l));
-  ok(`seed ${seed}: no dismissal closer after a question`, badQ.length === 0,
+  const badQ = [...qSeen].filter(l => /— (anyway|comedy)\."$/.test(l));
+  ok(`seed ${seed}: no tone-tag leak inside a quoted question`, badQ.length === 0,
     badQ.slice(0, 2).join(' | ').slice(0, 120));
-  const stillThere = [...sSeen].some(l => / — anyway\."$/.test(l));
-  ok(`seed ${seed}: statements still get the anyway closer`, stillThere,
+  const stillThere = [...sSeen].some(l => /, anyway\."$/.test(l));
+  ok(`seed ${seed}: statements still get the anyway closer (spoken ", anyway.")`, stillThere,
     [...sSeen].join(' | ').slice(0, 120));
   // SENSE-READ: print what the quick villager actually sounds like.
   console.log(`quick-paced voice samples (${vname(quick)}):`);
