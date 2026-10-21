@@ -1,0 +1,10457 @@
+{
+ "meta": {
+  "run": "sim-prodrebuff-b",
+  "policy": "belongfeast",
+  "days": 180,
+  "seeds": [
+   8801,
+   8802,
+   8803,
+   8804
+  ],
+  "env": {
+   "FEASTSCALE_R13": "1",
+   "SEATDRIVE": "0",
+   "SURPLUSFEED": "unset",
+   "RETURNINTAKE": "unset"
+  },
+  "note": "diagnostic only — no lever"
+ },
+ "rows": [
+  {
+   "seed": 8801,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 1,
+   "days": 167,
+   "endReason": "village-lost",
+   "chokeTotal": 787906,
+   "unattributed": 0,
+   "unattShare": 0,
+   "inflow": {
+    "ambient:villagelives": 53903,
+    "share_surplus": 619400,
+    "events:ambient": 2503,
+    "away_wild": 60804,
+    "duty:fish": 9072,
+    "aid_system": 12009,
+    "scholar_home": 30215
+   },
+   "rotFresh": 207994,
+   "rotPreserved": 17664,
+   "rotByCh": {
+    "untagged": 2640,
+    "aid_system": 10726,
+    "away_wild": 19373,
+    "share_surplus": 158480,
+    "scholar_home": 15580,
+    "ambient:villagelives": 18377,
+    "duty:fish": 282,
+    "events:ambient": 200
+   },
+   "rotByChFast": {
+    "aid_system": 9676,
+    "away_wild": 13248,
+    "share_surplus": 92800,
+    "scholar_home": 15580,
+    "ambient:villagelives": 8364,
+    "events:ambient": 100
+   },
+   "dutyPreserved": 83622,
+   "laundered": 0,
+   "throttleCalls": 262,
+   "throttleEngaged": 213,
+   "rintGovCalls": 148,
+   "rintTrimCalls": 0,
+   "rintTrimKcal": 0,
+   "rintTrimDays": 0,
+   "starveDays": 0,
+   "deaths": [
+    {
+     "day": 14,
+     "who": "gen_vdppbpi",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 31,
+     "who": "gen_hdev0md",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 38,
+     "who": "gen_x2n3mjt",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 55,
+     "who": "gen_3u1g0o3",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 78,
+     "who": "gen_4x6uplq",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 81,
+     "who": "amina_diallo",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 85,
+     "who": "gen_wrm5tex",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 95,
+     "who": "app_mgpsphfe482",
+     "kind": "villager",
+     "cause": "starvation"
+    },
+    {
+     "day": 100,
+     "who": "petra_novak",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 102,
+     "who": "aria_thompson",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 114,
+     "who": "app_mgpspir9375",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 116,
+     "who": "app_mgpspijo866",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 117,
+     "who": "app_mgpspimh471",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 117,
+     "who": "app_mgpspir3333",
+     "kind": "villager",
+     "cause": "starvation"
+    },
+    {
+     "day": 123,
+     "who": "tom_baker",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 130,
+     "who": "maya_singh",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 132,
+     "who": "app_mgpspigr378",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 144,
+     "who": "ursula_weber",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 163,
+     "who": "hassan_ali",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 165,
+     "who": "visjoin_163",
+     "kind": "villager",
+     "cause": "monster"
+    }
+   ],
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 39480,
+     "freshKcal": 39480,
+     "freshDays": 5.705,
+     "doomedKcal": 0,
+     "burnAvg": 6920,
+     "roster": 12
+    },
+    {
+     "day": 3,
+     "pantryKcal": 33690,
+     "freshKcal": 33690,
+     "freshDays": 5.899,
+     "doomedKcal": 0,
+     "burnAvg": 5711,
+     "roster": 12
+    },
+    {
+     "day": 4,
+     "pantryKcal": 29050,
+     "freshKcal": 29050,
+     "freshDays": 5.85,
+     "doomedKcal": 0,
+     "burnAvg": 4966,
+     "roster": 12
+    },
+    {
+     "day": 5,
+     "pantryKcal": 25600,
+     "freshKcal": 25600,
+     "freshDays": 5.696,
+     "doomedKcal": 0,
+     "burnAvg": 4494,
+     "roster": 12
+    },
+    {
+     "day": 6,
+     "pantryKcal": 23650,
+     "freshKcal": 23650,
+     "freshDays": 6.085,
+     "doomedKcal": 0,
+     "burnAvg": 3886,
+     "roster": 12
+    },
+    {
+     "day": 7,
+     "pantryKcal": 22750,
+     "freshKcal": 22750,
+     "freshDays": 6.616,
+     "doomedKcal": 0,
+     "burnAvg": 3439,
+     "roster": 12
+    },
+    {
+     "day": 8,
+     "pantryKcal": 21700,
+     "freshKcal": 21700,
+     "freshDays": 6.852,
+     "doomedKcal": 0,
+     "burnAvg": 3167,
+     "roster": 12
+    },
+    {
+     "day": 9,
+     "pantryKcal": 20700,
+     "freshKcal": 20700,
+     "freshDays": 8.809,
+     "doomedKcal": 0,
+     "burnAvg": 2350,
+     "roster": 12
+    },
+    {
+     "day": 10,
+     "pantryKcal": 19500,
+     "freshKcal": 19500,
+     "freshDays": 10.257,
+     "doomedKcal": 0,
+     "burnAvg": 1901,
+     "roster": 12
+    },
+    {
+     "day": 11,
+     "pantryKcal": 18900,
+     "freshKcal": 18900,
+     "freshDays": 12.121,
+     "doomedKcal": 0,
+     "burnAvg": 1559,
+     "roster": 12
+    },
+    {
+     "day": 12,
+     "pantryKcal": 17300,
+     "freshKcal": 17300,
+     "freshDays": 13.485,
+     "doomedKcal": 0,
+     "burnAvg": 1283,
+     "roster": 12
+    },
+    {
+     "day": 13,
+     "pantryKcal": 18500,
+     "freshKcal": 18500,
+     "freshDays": 15.102,
+     "doomedKcal": 0,
+     "burnAvg": 1225,
+     "roster": 12
+    },
+    {
+     "day": 14,
+     "pantryKcal": 19951,
+     "freshKcal": 19951,
+     "freshDays": 16.675,
+     "doomedKcal": 200,
+     "burnAvg": 1196,
+     "roster": 12
+    },
+    {
+     "day": 15,
+     "pantryKcal": 19861,
+     "freshKcal": 19500,
+     "freshDays": 15.447,
+     "doomedKcal": 600,
+     "burnAvg": 1262,
+     "roster": 11
+    },
+    {
+     "day": 16,
+     "pantryKcal": 21501,
+     "freshKcal": 20500,
+     "freshDays": 14.891,
+     "doomedKcal": 600,
+     "burnAvg": 1377,
+     "roster": 11
+    },
+    {
+     "day": 16,
+     "pantryKcal": 22410,
+     "freshKcal": 21409,
+     "freshDays": 15.552,
+     "doomedKcal": 600,
+     "burnAvg": 1377,
+     "roster": 11
+    },
+    {
+     "day": 18,
+     "pantryKcal": 25438,
+     "freshKcal": 20600,
+     "freshDays": 12.882,
+     "doomedKcal": 0,
+     "burnAvg": 1599,
+     "roster": 11
+    },
+    {
+     "day": 19,
+     "pantryKcal": 29155,
+     "freshKcal": 23037,
+     "freshDays": 13.382,
+     "doomedKcal": 600,
+     "burnAvg": 1721,
+     "roster": 11
+    },
+    {
+     "day": 19,
+     "pantryKcal": 29155,
+     "freshKcal": 23037,
+     "freshDays": 13.382,
+     "doomedKcal": 600,
+     "burnAvg": 1721,
+     "roster": 11
+    },
+    {
+     "day": 21,
+     "pantryKcal": 26288,
+     "freshKcal": 17420,
+     "freshDays": 8.71,
+     "doomedKcal": 0,
+     "burnAvg": 2000,
+     "roster": 11
+    },
+    {
+     "day": 22,
+     "pantryKcal": 22814,
+     "freshKcal": 11369,
+     "freshDays": 5.684,
+     "doomedKcal": 800,
+     "burnAvg": 2000,
+     "roster": 11
+    },
+    {
+     "day": 22,
+     "pantryKcal": 22814,
+     "freshKcal": 11369,
+     "freshDays": 5.684,
+     "doomedKcal": 800,
+     "burnAvg": 2000,
+     "roster": 11
+    },
+    {
+     "day": 24,
+     "pantryKcal": 33670,
+     "freshKcal": 16490,
+     "freshDays": 8.245,
+     "doomedKcal": 800,
+     "burnAvg": 2000,
+     "roster": 11
+    },
+    {
+     "day": 25,
+     "pantryKcal": 37270,
+     "freshKcal": 16923,
+     "freshDays": 8.461,
+     "doomedKcal": 2811,
+     "burnAvg": 2000,
+     "roster": 11
+    },
+    {
+     "day": 25,
+     "pantryKcal": 37270,
+     "freshKcal": 16923,
+     "freshDays": 8.461,
+     "doomedKcal": 2811,
+     "burnAvg": 2000,
+     "roster": 11
+    },
+    {
+     "day": 27,
+     "pantryKcal": 37121,
+     "freshKcal": 16774,
+     "freshDays": 8.205,
+     "doomedKcal": 4400,
+     "burnAvg": 2044,
+     "roster": 11
+    },
+    {
+     "day": 28,
+     "pantryKcal": 36721,
+     "freshKcal": 16374,
+     "freshDays": 8.009,
+     "doomedKcal": 7575,
+     "burnAvg": 2044,
+     "roster": 11
+    },
+    {
+     "day": 29,
+     "pantryKcal": 29166,
+     "freshKcal": 9500,
+     "freshDays": 4.595,
+     "doomedKcal": 4000,
+     "burnAvg": 2067,
+     "roster": 11
+    },
+    {
+     "day": 30,
+     "pantryKcal": 32485,
+     "freshKcal": 13459,
+     "freshDays": 6.504,
+     "doomedKcal": 5500,
+     "burnAvg": 2069,
+     "roster": 11
+    },
+    {
+     "day": 31,
+     "pantryKcal": 30624,
+     "freshKcal": 13838,
+     "freshDays": 6.614,
+     "doomedKcal": 7959,
+     "burnAvg": 2092,
+     "roster": 11
+    },
+    {
+     "day": 31,
+     "pantryKcal": 30881,
+     "freshKcal": 14095,
+     "freshDays": 6.737,
+     "doomedKcal": 7959,
+     "burnAvg": 2092,
+     "roster": 10
+    },
+    {
+     "day": 33,
+     "pantryKcal": 28299,
+     "freshKcal": 12085,
+     "freshDays": 5.857,
+     "doomedKcal": 6157,
+     "burnAvg": 2063,
+     "roster": 10
+    },
+    {
+     "day": 34,
+     "pantryKcal": 29222,
+     "freshKcal": 12592,
+     "freshDays": 6.079,
+     "doomedKcal": 5528,
+     "burnAvg": 2071,
+     "roster": 10
+    },
+    {
+     "day": 34,
+     "pantryKcal": 32434,
+     "freshKcal": 15804,
+     "freshDays": 7.63,
+     "doomedKcal": 5528,
+     "burnAvg": 2071,
+     "roster": 10
+    },
+    {
+     "day": 36,
+     "pantryKcal": 28070,
+     "freshKcal": 12814,
+     "freshDays": 6.256,
+     "doomedKcal": 4476,
+     "burnAvg": 2048,
+     "roster": 10
+    },
+    {
+     "day": 37,
+     "pantryKcal": 27976,
+     "freshKcal": 12631,
+     "freshDays": 5.966,
+     "doomedKcal": 6334,
+     "burnAvg": 2117,
+     "roster": 10
+    },
+    {
+     "day": 37,
+     "pantryKcal": 30356,
+     "freshKcal": 12172,
+     "freshDays": 5.75,
+     "doomedKcal": 4550,
+     "burnAvg": 2117,
+     "roster": 10
+    },
+    {
+     "day": 39,
+     "pantryKcal": 25338,
+     "freshKcal": 12704,
+     "freshDays": 5.917,
+     "doomedKcal": 5800,
+     "burnAvg": 2147,
+     "roster": 9
+    },
+    {
+     "day": 40,
+     "pantryKcal": 26938,
+     "freshKcal": 11104,
+     "freshDays": 5.131,
+     "doomedKcal": 5104,
+     "burnAvg": 2164,
+     "roster": 9
+    },
+    {
+     "day": 41,
+     "pantryKcal": 27175,
+     "freshKcal": 11341,
+     "freshDays": 5.19,
+     "doomedKcal": 4800,
+     "burnAvg": 2185,
+     "roster": 9
+    },
+    {
+     "day": 42,
+     "pantryKcal": 33181,
+     "freshKcal": 17347,
+     "freshDays": 8.867,
+     "doomedKcal": 5341,
+     "burnAvg": 1956,
+     "roster": 9
+    },
+    {
+     "day": 42,
+     "pantryKcal": 28076,
+     "freshKcal": 17347,
+     "freshDays": 8.867,
+     "doomedKcal": 5341,
+     "burnAvg": 1956,
+     "roster": 9
+    },
+    {
+     "day": 44,
+     "pantryKcal": 35512,
+     "freshKcal": 18404,
+     "freshDays": 12.974,
+     "doomedKcal": 8173,
+     "burnAvg": 1419,
+     "roster": 9
+    },
+    {
+     "day": 45,
+     "pantryKcal": 34309,
+     "freshKcal": 17201,
+     "freshDays": 14.902,
+     "doomedKcal": 10231,
+     "burnAvg": 1154,
+     "roster": 9
+    },
+    {
+     "day": 46,
+     "pantryKcal": 31389,
+     "freshKcal": 14281,
+     "freshDays": 16.15,
+     "doomedKcal": 6970,
+     "burnAvg": 884,
+     "roster": 9
+    },
+    {
+     "day": 46,
+     "pantryKcal": 31389,
+     "freshKcal": 14281,
+     "freshDays": 16.15,
+     "doomedKcal": 6970,
+     "burnAvg": 884,
+     "roster": 9
+    },
+    {
+     "day": 48,
+     "pantryKcal": 32670,
+     "freshKcal": 17058,
+     "freshDays": 47.365,
+     "doomedKcal": 6837,
+     "burnAvg": 360,
+     "roster": 9
+    },
+    {
+     "day": 48,
+     "pantryKcal": 35635,
+     "freshKcal": 20023,
+     "freshDays": 55.597,
+     "doomedKcal": 9437,
+     "burnAvg": 360,
+     "roster": 9
+    },
+    {
+     "day": 50,
+     "pantryKcal": 22168,
+     "freshKcal": 14984,
+     "freshDays": 40.11,
+     "doomedKcal": 7976,
+     "burnAvg": 374,
+     "roster": 9
+    },
+    {
+     "day": 51,
+     "pantryKcal": 20858,
+     "freshKcal": 13658,
+     "freshDays": 35.607,
+     "doomedKcal": 6808,
+     "burnAvg": 384,
+     "roster": 9
+    },
+    {
+     "day": 51,
+     "pantryKcal": 22000,
+     "freshKcal": 14800,
+     "freshDays": 38.585,
+     "doomedKcal": 6808,
+     "burnAvg": 384,
+     "roster": 9
+    },
+    {
+     "day": 53,
+     "pantryKcal": 33537,
+     "freshKcal": 20822,
+     "freshDays": 51.778,
+     "doomedKcal": 8532,
+     "burnAvg": 402,
+     "roster": 9
+    },
+    {
+     "day": 54,
+     "pantryKcal": 36184,
+     "freshKcal": 20429,
+     "freshDays": 48.857,
+     "doomedKcal": 11690,
+     "burnAvg": 418,
+     "roster": 9
+    },
+    {
+     "day": 54,
+     "pantryKcal": 37411,
+     "freshKcal": 21656,
+     "freshDays": 51.791,
+     "doomedKcal": 11690,
+     "burnAvg": 418,
+     "roster": 9
+    },
+    {
+     "day": 56,
+     "pantryKcal": 29754,
+     "freshKcal": 16707,
+     "freshDays": 24.497,
+     "doomedKcal": 7427,
+     "burnAvg": 682,
+     "roster": 8
+    },
+    {
+     "day": 57,
+     "pantryKcal": 27193,
+     "freshKcal": 16226,
+     "freshDays": 17.599,
+     "doomedKcal": 6761,
+     "burnAvg": 922,
+     "roster": 8
+    },
+    {
+     "day": 58,
+     "pantryKcal": 24826,
+     "freshKcal": 10761,
+     "freshDays": 9.017,
+     "doomedKcal": 5731,
+     "burnAvg": 1193,
+     "roster": 8
+    },
+    {
+     "day": 59,
+     "pantryKcal": 28426,
+     "freshKcal": 14361,
+     "freshDays": 9.9,
+     "doomedKcal": 5030,
+     "burnAvg": 1451,
+     "roster": 8
+    },
+    {
+     "day": 60,
+     "pantryKcal": 32040,
+     "freshKcal": 17975,
+     "freshDays": 10.517,
+     "doomedKcal": 5800,
+     "burnAvg": 1709,
+     "roster": 8
+    },
+    {
+     "day": 60,
+     "pantryKcal": 32365,
+     "freshKcal": 18300,
+     "freshDays": 10.707,
+     "doomedKcal": 5800,
+     "burnAvg": 1709,
+     "roster": 8
+    },
+    {
+     "day": 62,
+     "pantryKcal": 44336,
+     "freshKcal": 30271,
+     "freshDays": 13.529,
+     "doomedKcal": 9742,
+     "burnAvg": 2238,
+     "roster": 8
+    },
+    {
+     "day": 63,
+     "pantryKcal": 43936,
+     "freshKcal": 29871,
+     "freshDays": 13.367,
+     "doomedKcal": 5860,
+     "burnAvg": 2235,
+     "roster": 8
+    },
+    {
+     "day": 64,
+     "pantryKcal": 36141,
+     "freshKcal": 23526,
+     "freshDays": 10.529,
+     "doomedKcal": 5400,
+     "burnAvg": 2234,
+     "roster": 8
+    },
+    {
+     "day": 65,
+     "pantryKcal": 32198,
+     "freshKcal": 16383,
+     "freshDays": 7.379,
+     "doomedKcal": 5784,
+     "burnAvg": 2220,
+     "roster": 8
+    },
+    {
+     "day": 66,
+     "pantryKcal": 33740,
+     "freshKcal": 21125,
+     "freshDays": 9.491,
+     "doomedKcal": 6599,
+     "burnAvg": 2226,
+     "roster": 8
+    },
+    {
+     "day": 67,
+     "pantryKcal": 35610,
+     "freshKcal": 22133,
+     "freshDays": 9.918,
+     "doomedKcal": 6742,
+     "burnAvg": 2232,
+     "roster": 8
+    },
+    {
+     "day": 68,
+     "pantryKcal": 33464,
+     "freshKcal": 22314,
+     "freshDays": 10.075,
+     "doomedKcal": 6885,
+     "burnAvg": 2215,
+     "roster": 8
+    },
+    {
+     "day": 68,
+     "pantryKcal": 33464,
+     "freshKcal": 22314,
+     "freshDays": 10.075,
+     "doomedKcal": 6885,
+     "burnAvg": 2215,
+     "roster": 8
+    },
+    {
+     "day": 70,
+     "pantryKcal": 33450,
+     "freshKcal": 23900,
+     "freshDays": 10.681,
+     "doomedKcal": 4600,
+     "burnAvg": 2238,
+     "roster": 8
+    },
+    {
+     "day": 71,
+     "pantryKcal": 27253,
+     "freshKcal": 22725,
+     "freshDays": 10.163,
+     "doomedKcal": 6450,
+     "burnAvg": 2236,
+     "roster": 8
+    },
+    {
+     "day": 72,
+     "pantryKcal": 25653,
+     "freshKcal": 23685,
+     "freshDays": 10.592,
+     "doomedKcal": 5710,
+     "burnAvg": 2236,
+     "roster": 8
+    },
+    {
+     "day": 73,
+     "pantryKcal": 23261,
+     "freshKcal": 23261,
+     "freshDays": 10.323,
+     "doomedKcal": 4125,
+     "burnAvg": 2253,
+     "roster": 8
+    },
+    {
+     "day": 73,
+     "pantryKcal": 23261,
+     "freshKcal": 23261,
+     "freshDays": 10.323,
+     "doomedKcal": 4125,
+     "burnAvg": 2253,
+     "roster": 8
+    },
+    {
+     "day": 75,
+     "pantryKcal": 25356,
+     "freshKcal": 25356,
+     "freshDays": 11.213,
+     "doomedKcal": 6400,
+     "burnAvg": 2261,
+     "roster": 8
+    },
+    {
+     "day": 76,
+     "pantryKcal": 29468,
+     "freshKcal": 29468,
+     "freshDays": 13.143,
+     "doomedKcal": 7855,
+     "burnAvg": 2242,
+     "roster": 8
+    },
+    {
+     "day": 76,
+     "pantryKcal": 29468,
+     "freshKcal": 29468,
+     "freshDays": 13.143,
+     "doomedKcal": 7855,
+     "burnAvg": 2242,
+     "roster": 8
+    },
+    {
+     "day": 78,
+     "pantryKcal": 21292,
+     "freshKcal": 21292,
+     "freshDays": 9.436,
+     "doomedKcal": 600,
+     "burnAvg": 2256,
+     "roster": 8
+    },
+    {
+     "day": 78,
+     "pantryKcal": 19192,
+     "freshKcal": 19192,
+     "freshDays": 8.505,
+     "doomedKcal": 600,
+     "burnAvg": 2256,
+     "roster": 7
+    },
+    {
+     "day": 80,
+     "pantryKcal": 14400,
+     "freshKcal": 14400,
+     "freshDays": 6.447,
+     "doomedKcal": 3800,
+     "burnAvg": 2234,
+     "roster": 7
+    },
+    {
+     "day": 81,
+     "pantryKcal": 16591,
+     "freshKcal": 16591,
+     "freshDays": 7.476,
+     "doomedKcal": 4800,
+     "burnAvg": 2219,
+     "roster": 7
+    },
+    {
+     "day": 81,
+     "pantryKcal": 14191,
+     "freshKcal": 14191,
+     "freshDays": 6.394,
+     "doomedKcal": 4800,
+     "burnAvg": 2219,
+     "roster": 6
+    },
+    {
+     "day": 83,
+     "pantryKcal": 19668,
+     "freshKcal": 19668,
+     "freshDays": 8.882,
+     "doomedKcal": 4822,
+     "burnAvg": 2214,
+     "roster": 7
+    },
+    {
+     "day": 84,
+     "pantryKcal": 19743,
+     "freshKcal": 19743,
+     "freshDays": 8.974,
+     "doomedKcal": 6855,
+     "burnAvg": 2200,
+     "roster": 9
+    },
+    {
+     "day": 85,
+     "pantryKcal": 8022,
+     "freshKcal": 8022,
+     "freshDays": 3.646,
+     "doomedKcal": 0,
+     "burnAvg": 2200,
+     "roster": 9
+    },
+    {
+     "day": 86,
+     "pantryKcal": 5600,
+     "freshKcal": 5600,
+     "freshDays": 2.542,
+     "doomedKcal": 1200,
+     "burnAvg": 2203,
+     "roster": 9
+    },
+    {
+     "day": 86,
+     "pantryKcal": 5600,
+     "freshKcal": 5600,
+     "freshDays": 2.542,
+     "doomedKcal": 1200,
+     "burnAvg": 2203,
+     "roster": 9
+    },
+    {
+     "day": 88,
+     "pantryKcal": 6313,
+     "freshKcal": 6313,
+     "freshDays": 2.865,
+     "doomedKcal": 800,
+     "burnAvg": 2203,
+     "roster": 9
+    },
+    {
+     "day": 89,
+     "pantryKcal": 3600,
+     "freshKcal": 3600,
+     "freshDays": 1.634,
+     "doomedKcal": 0,
+     "burnAvg": 2203,
+     "roster": 9
+    },
+    {
+     "day": 90,
+     "pantryKcal": 2632,
+     "freshKcal": 2632,
+     "freshDays": 1.195,
+     "doomedKcal": 0,
+     "burnAvg": 2203,
+     "roster": 9
+    },
+    {
+     "day": 91,
+     "pantryKcal": 2994,
+     "freshKcal": 2994,
+     "freshDays": 1.359,
+     "doomedKcal": 0,
+     "burnAvg": 2203,
+     "roster": 9
+    },
+    {
+     "day": 91,
+     "pantryKcal": 4034,
+     "freshKcal": 4034,
+     "freshDays": 1.831,
+     "doomedKcal": 0,
+     "burnAvg": 2203,
+     "roster": 9
+    },
+    {
+     "day": 93,
+     "pantryKcal": 2298,
+     "freshKcal": 2298,
+     "freshDays": 1.05,
+     "doomedKcal": 0,
+     "burnAvg": 2188,
+     "roster": 9
+    },
+    {
+     "day": 94,
+     "pantryKcal": 3992,
+     "freshKcal": 3992,
+     "freshDays": 1.813,
+     "doomedKcal": 0,
+     "burnAvg": 2202,
+     "roster": 9
+    },
+    {
+     "day": 95,
+     "pantryKcal": 6292,
+     "freshKcal": 6292,
+     "freshDays": 2.858,
+     "doomedKcal": 0,
+     "burnAvg": 2202,
+     "roster": 9
+    },
+    {
+     "day": 96,
+     "pantryKcal": 6768,
+     "freshKcal": 6768,
+     "freshDays": 3.074,
+     "doomedKcal": 2292,
+     "burnAvg": 2202,
+     "roster": 8
+    },
+    {
+     "day": 97,
+     "pantryKcal": 9476,
+     "freshKcal": 9476,
+     "freshDays": 4.278,
+     "doomedKcal": 4276,
+     "burnAvg": 2215,
+     "roster": 8
+    },
+    {
+     "day": 97,
+     "pantryKcal": 9675,
+     "freshKcal": 9675,
+     "freshDays": 4.368,
+     "doomedKcal": 4276,
+     "burnAvg": 2215,
+     "roster": 8
+    },
+    {
+     "day": 99,
+     "pantryKcal": 16676,
+     "freshKcal": 16676,
+     "freshDays": 7.527,
+     "doomedKcal": 6855,
+     "burnAvg": 2215,
+     "roster": 8
+    },
+    {
+     "day": 100,
+     "pantryKcal": 9955,
+     "freshKcal": 9955,
+     "freshDays": 4.469,
+     "doomedKcal": 0,
+     "burnAvg": 2228,
+     "roster": 8
+    },
+    {
+     "day": 101,
+     "pantryKcal": 2555,
+     "freshKcal": 2555,
+     "freshDays": 1.143,
+     "doomedKcal": 0,
+     "burnAvg": 2236,
+     "roster": 7
+    },
+    {
+     "day": 102,
+     "pantryKcal": 3632,
+     "freshKcal": 3632,
+     "freshDays": 1.624,
+     "doomedKcal": 0,
+     "burnAvg": 2236,
+     "roster": 7
+    },
+    {
+     "day": 102,
+     "pantryKcal": 4655,
+     "freshKcal": 4655,
+     "freshDays": 2.082,
+     "doomedKcal": 0,
+     "burnAvg": 2236,
+     "roster": 6
+    },
+    {
+     "day": 104,
+     "pantryKcal": 6569,
+     "freshKcal": 6569,
+     "freshDays": 2.955,
+     "doomedKcal": 1979,
+     "burnAvg": 2223,
+     "roster": 7
+    },
+    {
+     "day": 105,
+     "pantryKcal": 6323,
+     "freshKcal": 6323,
+     "freshDays": 2.812,
+     "doomedKcal": 1786,
+     "burnAvg": 2249,
+     "roster": 8
+    },
+    {
+     "day": 105,
+     "pantryKcal": 6323,
+     "freshKcal": 6323,
+     "freshDays": 2.812,
+     "doomedKcal": 1786,
+     "burnAvg": 2249,
+     "roster": 8
+    },
+    {
+     "day": 107,
+     "pantryKcal": 2913,
+     "freshKcal": 2913,
+     "freshDays": 1.336,
+     "doomedKcal": 0,
+     "burnAvg": 2180,
+     "roster": 9
+    },
+    {
+     "day": 108,
+     "pantryKcal": 1117,
+     "freshKcal": 1117,
+     "freshDays": 0.51,
+     "doomedKcal": 0,
+     "burnAvg": 2188,
+     "roster": 10
+    },
+    {
+     "day": 109,
+     "pantryKcal": 4145,
+     "freshKcal": 4145,
+     "freshDays": 1.909,
+     "doomedKcal": 0,
+     "burnAvg": 2172,
+     "roster": 10
+    },
+    {
+     "day": 110,
+     "pantryKcal": 4898,
+     "freshKcal": 4898,
+     "freshDays": 2.255,
+     "doomedKcal": 0,
+     "burnAvg": 2172,
+     "roster": 10
+    },
+    {
+     "day": 111,
+     "pantryKcal": 1836,
+     "freshKcal": 1836,
+     "freshDays": 0.841,
+     "doomedKcal": 0,
+     "burnAvg": 2182,
+     "roster": 10
+    },
+    {
+     "day": 112,
+     "pantryKcal": 400,
+     "freshKcal": 400,
+     "freshDays": 0.181,
+     "doomedKcal": 0,
+     "burnAvg": 2213,
+     "roster": 10
+    },
+    {
+     "day": 113,
+     "pantryKcal": 200,
+     "freshKcal": 200,
+     "freshDays": 0.089,
+     "doomedKcal": 0,
+     "burnAvg": 2237,
+     "roster": 10
+    },
+    {
+     "day": 114,
+     "pantryKcal": 2400,
+     "freshKcal": 2400,
+     "freshDays": 1.053,
+     "doomedKcal": 0,
+     "burnAvg": 2279,
+     "roster": 10
+    },
+    {
+     "day": 115,
+     "pantryKcal": 5580,
+     "freshKcal": 5580,
+     "freshDays": 2.482,
+     "doomedKcal": 0,
+     "burnAvg": 2248,
+     "roster": 9
+    },
+    {
+     "day": 116,
+     "pantryKcal": 5392,
+     "freshKcal": 5392,
+     "freshDays": 2.38,
+     "doomedKcal": 1000,
+     "burnAvg": 2265,
+     "roster": 9
+    },
+    {
+     "day": 117,
+     "pantryKcal": 5587,
+     "freshKcal": 5587,
+     "freshDays": 2.466,
+     "doomedKcal": 1587,
+     "burnAvg": 2266,
+     "roster": 8
+    },
+    {
+     "day": 118,
+     "pantryKcal": 4000,
+     "freshKcal": 4000,
+     "freshDays": 1.753,
+     "doomedKcal": 1000,
+     "burnAvg": 2282,
+     "roster": 6
+    },
+    {
+     "day": 119,
+     "pantryKcal": 4030,
+     "freshKcal": 4030,
+     "freshDays": 1.811,
+     "doomedKcal": 600,
+     "burnAvg": 2225,
+     "roster": 6
+    },
+    {
+     "day": 120,
+     "pantryKcal": 3397,
+     "freshKcal": 3397,
+     "freshDays": 1.562,
+     "doomedKcal": 0,
+     "burnAvg": 2174,
+     "roster": 6
+    },
+    {
+     "day": 121,
+     "pantryKcal": 4209,
+     "freshKcal": 4209,
+     "freshDays": 1.878,
+     "doomedKcal": 500,
+     "burnAvg": 2241,
+     "roster": 6
+    },
+    {
+     "day": 122,
+     "pantryKcal": 4221,
+     "freshKcal": 4221,
+     "freshDays": 1.87,
+     "doomedKcal": 0,
+     "burnAvg": 2257,
+     "roster": 6
+    },
+    {
+     "day": 123,
+     "pantryKcal": 3258,
+     "freshKcal": 3258,
+     "freshDays": 1.462,
+     "doomedKcal": 0,
+     "burnAvg": 2229,
+     "roster": 6
+    },
+    {
+     "day": 123,
+     "pantryKcal": 2200,
+     "freshKcal": 2200,
+     "freshDays": 0.987,
+     "doomedKcal": 0,
+     "burnAvg": 2229,
+     "roster": 5
+    },
+    {
+     "day": 125,
+     "pantryKcal": 2400,
+     "freshKcal": 2400,
+     "freshDays": 1.075,
+     "doomedKcal": 0,
+     "burnAvg": 2233,
+     "roster": 5
+    },
+    {
+     "day": 126,
+     "pantryKcal": 3968,
+     "freshKcal": 3968,
+     "freshDays": 1.754,
+     "doomedKcal": 0,
+     "burnAvg": 2262,
+     "roster": 5
+    },
+    {
+     "day": 127,
+     "pantryKcal": 6564,
+     "freshKcal": 6564,
+     "freshDays": 2.902,
+     "doomedKcal": 1000,
+     "burnAvg": 2262,
+     "roster": 5
+    },
+    {
+     "day": 128,
+     "pantryKcal": 7411,
+     "freshKcal": 7411,
+     "freshDays": 3.296,
+     "doomedKcal": 2285,
+     "burnAvg": 2248,
+     "roster": 5
+    },
+    {
+     "day": 128,
+     "pantryKcal": 7411,
+     "freshKcal": 7411,
+     "freshDays": 3.296,
+     "doomedKcal": 2285,
+     "burnAvg": 2248,
+     "roster": 5
+    },
+    {
+     "day": 130,
+     "pantryKcal": 7723,
+     "freshKcal": 7723,
+     "freshDays": 3.348,
+     "doomedKcal": 1960,
+     "burnAvg": 2307,
+     "roster": 5
+    },
+    {
+     "day": 131,
+     "pantryKcal": 5923,
+     "freshKcal": 5923,
+     "freshDays": 2.511,
+     "doomedKcal": 0,
+     "burnAvg": 2359,
+     "roster": 4
+    },
+    {
+     "day": 132,
+     "pantryKcal": 2900,
+     "freshKcal": 2900,
+     "freshDays": 1.306,
+     "doomedKcal": 0,
+     "burnAvg": 2221,
+     "roster": 4
+    },
+    {
+     "day": 133,
+     "pantryKcal": 600,
+     "freshKcal": 600,
+     "freshDays": 0.274,
+     "doomedKcal": 0,
+     "burnAvg": 2192,
+     "roster": 3
+    },
+    {
+     "day": 134,
+     "pantryKcal": 2200,
+     "freshKcal": 2200,
+     "freshDays": 1.005,
+     "doomedKcal": 0,
+     "burnAvg": 2190,
+     "roster": 3
+    },
+    {
+     "day": 135,
+     "pantryKcal": 1200,
+     "freshKcal": 1200,
+     "freshDays": 0.549,
+     "doomedKcal": 0,
+     "burnAvg": 2187,
+     "roster": 3
+    },
+    {
+     "day": 135,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2187,
+     "roster": 3
+    },
+    {
+     "day": 137,
+     "pantryKcal": 3000,
+     "freshKcal": 3000,
+     "freshDays": 1.491,
+     "doomedKcal": 0,
+     "burnAvg": 2012,
+     "roster": 3
+    },
+    {
+     "day": 138,
+     "pantryKcal": 2100,
+     "freshKcal": 2100,
+     "freshDays": 1.438,
+     "doomedKcal": 0,
+     "burnAvg": 1460,
+     "roster": 3
+    },
+    {
+     "day": 139,
+     "pantryKcal": 2600,
+     "freshKcal": 2600,
+     "freshDays": 0.433,
+     "doomedKcal": 0,
+     "burnAvg": 0,
+     "roster": 3
+    },
+    {
+     "day": 140,
+     "pantryKcal": 2200,
+     "freshKcal": 2200,
+     "freshDays": 0.367,
+     "doomedKcal": 0,
+     "burnAvg": 0,
+     "roster": 3
+    },
+    {
+     "day": 141,
+     "pantryKcal": 2000,
+     "freshKcal": 2000,
+     "freshDays": 0.333,
+     "doomedKcal": 0,
+     "burnAvg": 0,
+     "roster": 3
+    },
+    {
+     "day": 142,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 0,
+     "roster": 3
+    },
+    {
+     "day": 143,
+     "pantryKcal": 2200,
+     "freshKcal": 2200,
+     "freshDays": 0.367,
+     "doomedKcal": 0,
+     "burnAvg": 0,
+     "roster": 3
+    },
+    {
+     "day": 143,
+     "pantryKcal": 729,
+     "freshKcal": 729,
+     "freshDays": 0.121,
+     "doomedKcal": 0,
+     "burnAvg": 0,
+     "roster": 3
+    },
+    {
+     "day": 145,
+     "pantryKcal": 1000,
+     "freshKcal": 1000,
+     "freshDays": 0.616,
+     "doomedKcal": 0,
+     "burnAvg": 1623,
+     "roster": 2
+    },
+    {
+     "day": 145,
+     "pantryKcal": 1000,
+     "freshKcal": 1000,
+     "freshDays": 0.616,
+     "doomedKcal": 0,
+     "burnAvg": 1623,
+     "roster": 2
+    },
+    {
+     "day": 147,
+     "pantryKcal": 1000,
+     "freshKcal": 1000,
+     "freshDays": 0.762,
+     "doomedKcal": 0,
+     "burnAvg": 1312,
+     "roster": 2
+    },
+    {
+     "day": 148,
+     "pantryKcal": 800,
+     "freshKcal": 800,
+     "freshDays": 0.61,
+     "doomedKcal": 0,
+     "burnAvg": 1312,
+     "roster": 2
+    },
+    {
+     "day": 149,
+     "pantryKcal": 800,
+     "freshKcal": 800,
+     "freshDays": 0.61,
+     "doomedKcal": 0,
+     "burnAvg": 1312,
+     "roster": 2
+    },
+    {
+     "day": 150,
+     "pantryKcal": 1000,
+     "freshKcal": 1000,
+     "freshDays": 0.762,
+     "doomedKcal": 0,
+     "burnAvg": 1312,
+     "roster": 2
+    },
+    {
+     "day": 151,
+     "pantryKcal": 1000,
+     "freshKcal": 1000,
+     "freshDays": 0.713,
+     "doomedKcal": 0,
+     "burnAvg": 1403,
+     "roster": 2
+    },
+    {
+     "day": 152,
+     "pantryKcal": 800,
+     "freshKcal": 800,
+     "freshDays": 0.588,
+     "doomedKcal": 0,
+     "burnAvg": 1361,
+     "roster": 2
+    },
+    {
+     "day": 153,
+     "pantryKcal": 600,
+     "freshKcal": 600,
+     "freshDays": 0.427,
+     "doomedKcal": 0,
+     "burnAvg": 1405,
+     "roster": 2
+    },
+    {
+     "day": 154,
+     "pantryKcal": 600,
+     "freshKcal": 600,
+     "freshDays": 0.498,
+     "doomedKcal": 0,
+     "burnAvg": 1204,
+     "roster": 2
+    },
+    {
+     "day": 155,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 1083,
+     "roster": 2
+    },
+    {
+     "day": 156,
+     "pantryKcal": 400,
+     "freshKcal": 400,
+     "freshDays": 0.369,
+     "doomedKcal": 0,
+     "burnAvg": 1083,
+     "roster": 2
+    },
+    {
+     "day": 157,
+     "pantryKcal": 800,
+     "freshKcal": 800,
+     "freshDays": 0.765,
+     "doomedKcal": 0,
+     "burnAvg": 1045,
+     "roster": 2
+    },
+    {
+     "day": 157,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 1045,
+     "roster": 2
+    },
+    {
+     "day": 159,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 797,
+     "roster": 2
+    },
+    {
+     "day": 160,
+     "pantryKcal": 400,
+     "freshKcal": 400,
+     "freshDays": 0.584,
+     "doomedKcal": 0,
+     "burnAvg": 685,
+     "roster": 2
+    },
+    {
+     "day": 160,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 685,
+     "roster": 2
+    },
+    {
+     "day": 162,
+     "pantryKcal": 800,
+     "freshKcal": 800,
+     "freshDays": 0.936,
+     "doomedKcal": 0,
+     "burnAvg": 855,
+     "roster": 2
+    },
+    {
+     "day": 162,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 855,
+     "roster": 2
+    },
+    {
+     "day": 164,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 300,
+     "roster": 1
+    },
+    {
+     "day": 165,
+     "pantryKcal": 494,
+     "freshKcal": 494,
+     "freshDays": 1.647,
+     "doomedKcal": 0,
+     "burnAvg": 300,
+     "roster": 2
+    },
+    {
+     "day": 165,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 300,
+     "roster": 1
+    },
+    {
+     "day": 167,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 300,
+     "roster": 1
+    },
+    {
+     "day": 167,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 300,
+     "roster": 1
+    }
+   ],
+   "dayInflow": {
+    "1": {
+     "ambient:villagelives": 475
+    },
+    "2": {
+     "share_surplus": 400
+    },
+    "3": {
+     "ambient:villagelives": 399,
+     "share_surplus": 200
+    },
+    "4": {
+     "events:ambient": 100,
+     "share_surplus": 400
+    },
+    "5": {
+     "share_surplus": 800
+    },
+    "6": {
+     "ambient:villagelives": 780,
+     "share_surplus": 1200
+    },
+    "7": {
+     "share_surplus": 800
+    },
+    "8": {
+     "ambient:villagelives": 374,
+     "share_surplus": 1600
+    },
+    "9": {
+     "share_surplus": 1400
+    },
+    "10": {
+     "away_wild": 532,
+     "ambient:villagelives": 1055,
+     "share_surplus": 1400
+    },
+    "11": {
+     "away_wild": 244,
+     "events:ambient": 100,
+     "share_surplus": 1600
+    },
+    "12": {
+     "events:ambient": 100,
+     "ambient:villagelives": 628,
+     "share_surplus": 2000
+    },
+    "13": {
+     "away_wild": 251,
+     "share_surplus": 2800
+    },
+    "14": {
+     "share_surplus": 3000
+    },
+    "15": {
+     "share_surplus": 4000
+    },
+    "16": {
+     "away_wild": 797,
+     "share_surplus": 4200
+    },
+    "17": {
+     "share_surplus": 4600
+    },
+    "18": {
+     "ambient:villagelives": 637,
+     "share_surplus": 5000
+    },
+    "19": {
+     "ambient:villagelives": 1113,
+     "share_surplus": 3400
+    },
+    "20": {
+     "away_wild": 729,
+     "ambient:villagelives": 2691,
+     "share_surplus": 4200
+    },
+    "21": {
+     "away_wild": 269,
+     "share_surplus": 5600
+    },
+    "22": {
+     "share_surplus": 5000
+    },
+    "23": {
+     "duty:fish": 2352,
+     "away_wild": 817,
+     "share_surplus": 5600
+    },
+    "24": {
+     "aid_system": 2521,
+     "away_wild": 1391,
+     "share_surplus": 5800
+    },
+    "25": {
+     "share_surplus": 4400
+    },
+    "26": {
+     "away_wild": 1175,
+     "share_surplus": 6400
+    },
+    "27": {
+     "share_surplus": 4000
+    },
+    "28": {
+     "away_wild": 800,
+     "events:ambient": 100,
+     "share_surplus": 4600
+    },
+    "29": {
+     "away_wild": 993,
+     "aid_system": 2366,
+     "scholar_home": 6240,
+     "share_surplus": 4600
+    },
+    "30": {
+     "ambient:villagelives": 479,
+     "share_surplus": 5400
+    },
+    "31": {
+     "away_wild": 257,
+     "ambient:villagelives": 502,
+     "share_surplus": 6000
+    },
+    "32": {
+     "away_wild": 328,
+     "share_surplus": 5600
+    },
+    "33": {
+     "away_wild": 631,
+     "scholar_home": 6540,
+     "ambient:villagelives": 633,
+     "share_surplus": 5800
+    },
+    "34": {
+     "away_wild": 864,
+     "aid_system": 2812,
+     "share_surplus": 4200
+    },
+    "35": {
+     "away_wild": 2338,
+     "share_surplus": 6000
+    },
+    "36": {
+     "away_wild": 897,
+     "share_surplus": 5400
+    },
+    "37": {
+     "scholar_home": 2275,
+     "share_surplus": 5800
+    },
+    "38": {
+     "away_wild": 378,
+     "ambient:villagelives": 326,
+     "share_surplus": 5000
+    },
+    "39": {
+     "share_surplus": 4800
+    },
+    "40": {
+     "away_wild": 941,
+     "share_surplus": 4400
+    },
+    "41": {
+     "away_wild": 1277,
+     "aid_system": 2499,
+     "ambient:villagelives": 1430,
+     "share_surplus": 5600
+    },
+    "42": {
+     "away_wild": 596,
+     "ambient:villagelives": 387,
+     "share_surplus": 6800
+    },
+    "43": {
+     "away_wild": 920,
+     "scholar_home": 4135,
+     "ambient:villagelives": 1711,
+     "share_surplus": 6400
+    },
+    "44": {
+     "away_wild": 970,
+     "share_surplus": 6000
+    },
+    "45": {
+     "ambient:villagelives": 511,
+     "share_surplus": 6800
+    },
+    "46": {
+     "away_wild": 537,
+     "events:ambient": 100,
+     "share_surplus": 6200
+    },
+    "47": {
+     "away_wild": 1010,
+     "share_surplus": 7400
+    },
+    "48": {
+     "aid_system": 1811,
+     "away_wild": 365,
+     "scholar_home": 2600,
+     "share_surplus": 5800
+    },
+    "49": {
+     "away_wild": 993,
+     "ambient:villagelives": 1542,
+     "share_surplus": 5200
+    },
+    "50": {
+     "away_wild": 430,
+     "ambient:villagelives": 620,
+     "share_surplus": 5800
+    },
+    "51": {
+     "away_wild": 542,
+     "share_surplus": 7600
+    },
+    "52": {
+     "scholar_home": 4785,
+     "ambient:villagelives": 3890,
+     "share_surplus": 7800
+    },
+    "53": {
+     "away_wild": 520,
+     "ambient:villagelives": 819,
+     "share_surplus": 6800
+    },
+    "54": {
+     "away_wild": 1227,
+     "share_surplus": 6200
+    },
+    "55": {
+     "away_wild": 389,
+     "ambient:villagelives": 572,
+     "share_surplus": 5800
+    },
+    "56": {
+     "away_wild": 331,
+     "share_surplus": 5400
+    },
+    "57": {
+     "away_wild": 230,
+     "share_surplus": 4200
+    },
+    "58": {
+     "share_surplus": 5800
+    },
+    "59": {
+     "away_wild": 304,
+     "events:ambient": 100,
+     "ambient:villagelives": 610,
+     "share_surplus": 4800
+    },
+    "60": {
+     "away_wild": 325,
+     "events:ambient": 100,
+     "ambient:villagelives": 2132,
+     "share_surplus": 6600
+    },
+    "61": {
+     "scholar_home": 3640,
+     "away_wild": 260,
+     "share_surplus": 5600
+    },
+    "62": {
+     "share_surplus": 5400
+    },
+    "63": {
+     "events:ambient": 100,
+     "ambient:villagelives": 484,
+     "share_surplus": 5800
+    },
+    "64": {
+     "away_wild": 359,
+     "ambient:villagelives": 1040,
+     "share_surplus": 5200
+    },
+    "65": {
+     "away_wild": 641,
+     "ambient:villagelives": 701,
+     "share_surplus": 5400
+    },
+    "66": {
+     "away_wild": 285,
+     "share_surplus": 6600
+    },
+    "67": {
+     "away_wild": 365,
+     "share_surplus": 5600
+    },
+    "68": {
+     "share_surplus": 4600
+    },
+    "69": {
+     "away_wild": 350,
+     "events:ambient": 100,
+     "share_surplus": 6000
+    },
+    "70": {
+     "ambient:villagelives": 510,
+     "share_surplus": 5200
+    },
+    "71": {
+     "away_wild": 525,
+     "share_surplus": 6400
+    },
+    "72": {
+     "events:ambient": 100,
+     "ambient:villagelives": 476,
+     "share_surplus": 6400
+    },
+    "73": {
+     "share_surplus": 6400
+    },
+    "74": {
+     "ambient:villagelives": 1855,
+     "share_surplus": 6000
+    },
+    "75": {
+     "ambient:villagelives": 637,
+     "share_surplus": 7000
+    },
+    "76": {
+     "share_surplus": 5000
+    },
+    "77": {
+     "share_surplus": 5200
+    },
+    "78": {
+     "share_surplus": 3800
+    },
+    "79": {
+     "share_surplus": 4800
+    },
+    "80": {
+     "away_wild": 391,
+     "share_surplus": 4000
+    },
+    "81": {
+     "ambient:villagelives": 422,
+     "share_surplus": 4400
+    },
+    "82": {
+     "ambient:villagelives": 1055,
+     "share_surplus": 5800
+    },
+    "83": {
+     "events:ambient": 104,
+     "ambient:villagelives": 571,
+     "share_surplus": 4200
+    },
+    "84": {
+     "share_surplus": 5200
+    },
+    "85": {
+     "share_surplus": 4400
+    },
+    "86": {
+     "share_surplus": 4600
+    },
+    "87": {
+     "away_wild": 315,
+     "ambient:villagelives": 798,
+     "share_surplus": 4400
+    },
+    "88": {
+     "share_surplus": 4200
+    },
+    "89": {
+     "ambient:villagelives": 432,
+     "share_surplus": 4200
+    },
+    "90": {
+     "ambient:villagelives": 928,
+     "share_surplus": 4000
+    },
+    "91": {
+     "away_wild": 1040,
+     "share_surplus": 3200
+    },
+    "92": {
+     "away_wild": 715,
+     "events:ambient": 100,
+     "ambient:villagelives": 898,
+     "share_surplus": 4400
+    },
+    "93": {
+     "away_wild": 792,
+     "share_surplus": 5400
+    },
+    "94": {
+     "away_wild": 1375,
+     "share_surplus": 5400
+    },
+    "95": {
+     "away_wild": 473,
+     "ambient:villagelives": 203,
+     "share_surplus": 3800
+    },
+    "96": {
+     "share_surplus": 5200
+    },
+    "97": {
+     "events:ambient": 199,
+     "ambient:villagelives": 1856,
+     "share_surplus": 4800
+    },
+    "98": {
+     "away_wild": 521,
+     "events:ambient": 100,
+     "share_surplus": 5000
+    },
+    "99": {
+     "away_wild": 209,
+     "events:ambient": 100,
+     "share_surplus": 5200
+    },
+    "100": {
+     "away_wild": 355,
+     "share_surplus": 3200
+    },
+    "101": {
+     "away_wild": 532,
+     "ambient:villagelives": 620,
+     "share_surplus": 3200
+    },
+    "102": {
+     "away_wild": 1374,
+     "ambient:villagelives": 452,
+     "share_surplus": 3400
+    },
+    "103": {
+     "away_wild": 504,
+     "ambient:villagelives": 886,
+     "share_surplus": 3200
+    },
+    "104": {
+     "ambient:villagelives": 737,
+     "share_surplus": 3800
+    },
+    "105": {
+     "ambient:villagelives": 482,
+     "share_surplus": 4000
+    },
+    "106": {
+     "ambient:villagelives": 1729,
+     "share_surplus": 3600
+    },
+    "107": {
+     "away_wild": 317,
+     "share_surplus": 4400
+    },
+    "108": {
+     "away_wild": 966,
+     "ambient:villagelives": 1504,
+     "share_surplus": 4200
+    },
+    "109": {
+     "away_wild": 1250,
+     "ambient:villagelives": 448,
+     "share_surplus": 3200
+    },
+    "110": {
+     "away_wild": 236,
+     "events:ambient": 100,
+     "share_surplus": 3200
+    },
+    "111": {
+     "away_wild": 764,
+     "share_surplus": 3400
+    },
+    "112": {
+     "away_wild": 2154,
+     "events:ambient": 100,
+     "share_surplus": 3800
+    },
+    "113": {
+     "away_wild": 1628,
+     "share_surplus": 3800
+    },
+    "114": {
+     "away_wild": 2318,
+     "ambient:villagelives": 578,
+     "share_surplus": 4200
+    },
+    "115": {
+     "away_wild": 992,
+     "share_surplus": 3400
+    },
+    "116": {
+     "share_surplus": 4000
+    },
+    "117": {
+     "share_surplus": 3000
+    },
+    "118": {
+     "away_wild": 230,
+     "share_surplus": 3200
+    },
+    "119": {
+     "ambient:villagelives": 597,
+     "share_surplus": 2800
+    },
+    "120": {
+     "away_wild": 496,
+     "events:ambient": 100,
+     "ambient:villagelives": 609,
+     "share_surplus": 3000
+    },
+    "121": {
+     "events:ambient": 100,
+     "ambient:villagelives": 721,
+     "share_surplus": 3400
+    },
+    "122": {
+     "away_wild": 284,
+     "ambient:villagelives": 458,
+     "share_surplus": 3000
+    },
+    "123": {
+     "share_surplus": 2600
+    },
+    "124": {
+     "away_wild": 1123,
+     "duty:fish": 900,
+     "share_surplus": 3200
+    },
+    "125": {
+     "away_wild": 568,
+     "duty:fish": 1020,
+     "share_surplus": 3200
+    },
+    "126": {
+     "away_wild": 885,
+     "duty:fish": 900,
+     "ambient:villagelives": 579,
+     "share_surplus": 3200
+    },
+    "127": {
+     "away_wild": 829,
+     "duty:fish": 1200,
+     "ambient:villagelives": 697,
+     "share_surplus": 3600
+    },
+    "128": {
+     "duty:fish": 360,
+     "share_surplus": 3600
+    },
+    "129": {
+     "duty:fish": 900,
+     "away_wild": 364,
+     "events:ambient": 100,
+     "ambient:villagelives": 1799,
+     "share_surplus": 2600
+    },
+    "130": {
+     "duty:fish": 480,
+     "away_wild": 330,
+     "ambient:villagelives": 2713,
+     "share_surplus": 2800
+    },
+    "131": {
+     "duty:fish": 960,
+     "ambient:villagelives": 618,
+     "share_surplus": 3200
+    },
+    "132": {
+     "share_surplus": 2000
+    },
+    "133": {
+     "away_wild": 592,
+     "share_surplus": 2200
+    },
+    "134": {
+     "away_wild": 558,
+     "events:ambient": 100,
+     "share_surplus": 2600
+    },
+    "135": {
+     "away_wild": 266,
+     "share_surplus": 2800
+    },
+    "136": {
+     "away_wild": 542,
+     "share_surplus": 3000
+    },
+    "137": {
+     "away_wild": 665,
+     "events:ambient": 100,
+     "share_surplus": 2000
+    },
+    "138": {
+     "share_surplus": 2600
+    },
+    "139": {
+     "away_wild": 407,
+     "share_surplus": 2200
+    },
+    "140": {
+     "events:ambient": 100,
+     "share_surplus": 2800
+    },
+    "141": {
+     "share_surplus": 2000
+    },
+    "142": {
+     "share_surplus": 2200
+    },
+    "143": {
+     "away_wild": 729,
+     "events:ambient": 100,
+     "share_surplus": 2400
+    },
+    "144": {
+     "away_wild": 223,
+     "share_surplus": 1000
+    },
+    "145": {
+     "share_surplus": 400
+    },
+    "146": {
+     "away_wild": 411,
+     "share_surplus": 1000
+    },
+    "147": {
+     "away_wild": 245,
+     "share_surplus": 800
+    },
+    "148": {
+     "share_surplus": 800
+    },
+    "149": {
+     "share_surplus": 1000
+    },
+    "150": {
+     "away_wild": 587,
+     "share_surplus": 1000
+    },
+    "151": {
+     "away_wild": 495,
+     "share_surplus": 800
+    },
+    "152": {
+     "away_wild": 334,
+     "share_surplus": 600
+    },
+    "153": {
+     "share_surplus": 600
+    },
+    "154": {
+     "share_surplus": 600
+    },
+    "155": {
+     "share_surplus": 400
+    },
+    "156": {
+     "away_wild": 455,
+     "share_surplus": 800
+    },
+    "157": {
+     "share_surplus": 400
+    },
+    "158": {
+     "share_surplus": 600
+    },
+    "159": {
+     "away_wild": 528,
+     "share_surplus": 400
+    },
+    "160": {
+     "away_wild": 481,
+     "share_surplus": 1000
+    },
+    "161": {
+     "away_wild": 573,
+     "share_surplus": 800
+    },
+    "162": {
+     "share_surplus": 600
+    },
+    "164": {
+     "ambient:villagelives": 494
+    }
+   },
+   "dayDuty": {
+    "14": {
+     "cook": 361
+    },
+    "15": {
+     "cook": 640
+    },
+    "16": {
+     "cook": 1440
+    },
+    "17": {
+     "cook": 2397
+    },
+    "18": {
+     "cook": 1280
+    },
+    "19": {
+     "cook": 2750
+    },
+    "21": {
+     "cook": 2577
+    },
+    "22": {
+     "cook": 3095
+    },
+    "23": {
+     "cook": 2640
+    },
+    "24": {
+     "cook": 3167
+    },
+    "32": {
+     "cook": 3105
+    },
+    "33": {
+     "cook": 3166
+    },
+    "35": {
+     "cook": 6291
+    },
+    "36": {
+     "cook": 3184
+    },
+    "37": {
+     "cook": 3147
+    },
+    "39": {
+     "cook": 3200
+    },
+    "42": {
+     "cook": 3191
+    },
+    "43": {
+     "cook": 3188
+    },
+    "49": {
+     "cook": 3200
+    },
+    "50": {
+     "cook": 3200
+    },
+    "51": {
+     "cook": 3127
+    },
+    "52": {
+     "cook": 3188
+    },
+    "53": {
+     "cook": 3200
+    },
+    "55": {
+     "cook": 3200
+    },
+    "56": {
+     "cook": 3200
+    },
+    "57": {
+     "cook": 3098
+    },
+    "63": {
+     "cook": 3088
+    },
+    "64": {
+     "cook": 3200
+    },
+    "66": {
+     "cook": 3102
+    }
+   },
+   "dayThrottle": {
+    "2": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "3": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "4": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "5": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "6": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "7": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "8": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "9": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "10": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "11": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "12": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "13": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "14": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "15": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "16": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "17": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "18": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "19": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "20": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "21": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "22": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "23": {
+     "calls": 5,
+     "engaged": 4
+    },
+    "24": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "25": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "26": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "27": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "28": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "29": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "30": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "31": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "32": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "33": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "34": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "35": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "36": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "37": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "38": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "39": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "40": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "41": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "42": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "43": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "44": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "45": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "46": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "47": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "48": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "49": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "50": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "51": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "52": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "53": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "54": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "55": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "56": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "57": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "58": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "59": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "60": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "61": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "62": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "63": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "64": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "65": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "66": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "83": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "84": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "85": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "86": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "87": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "88": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "89": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "90": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "91": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "92": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "93": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "94": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "95": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "96": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "97": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "98": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "99": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "100": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "101": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "102": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "103": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "104": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "105": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "106": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "107": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "108": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "109": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "110": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "111": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "112": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "113": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "114": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "115": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "116": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "117": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "118": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "119": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "120": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "121": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "122": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "123": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "124": {
+     "calls": 2,
+     "engaged": 0
+    },
+    "125": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "126": {
+     "calls": 2,
+     "engaged": 0
+    },
+    "127": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "128": {
+     "calls": 2,
+     "engaged": 0
+    },
+    "129": {
+     "calls": 2,
+     "engaged": 0
+    },
+    "130": {
+     "calls": 2,
+     "engaged": 0
+    },
+    "131": {
+     "calls": 1,
+     "engaged": 0
+    }
+   },
+   "ms": 2508
+  },
+  {
+   "seed": 8802,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 3,
+   "arc": 4,
+   "rosterEnd": 5,
+   "days": 110,
+   "endReason": "village-lost",
+   "chokeTotal": 493616,
+   "unattributed": 0,
+   "unattShare": 0,
+   "inflow": {
+    "events:ambient": 1700,
+    "ambient:villagelives": 41120,
+    "share_surplus": 366600,
+    "away_wild": 25264,
+    "events:special": 300,
+    "duty:fish": 58632
+   },
+   "rotFresh": 15988,
+   "rotPreserved": 1740,
+   "rotByCh": {
+    "away_wild": 2056,
+    "share_surplus": 9400,
+    "ambient:villagelives": 4772,
+    "duty:fish": 1500
+   },
+   "rotByChFast": {
+    "away_wild": 1000,
+    "share_surplus": 2200
+   },
+   "dutyPreserved": 136263,
+   "laundered": 0,
+   "throttleCalls": 326,
+   "throttleEngaged": 210,
+   "rintGovCalls": 59,
+   "rintTrimCalls": 0,
+   "rintTrimKcal": 0,
+   "rintTrimDays": 0,
+   "starveDays": 0,
+   "deaths": [
+    {
+     "day": 26,
+     "who": "gen_8yozl74",
+     "kind": "villager",
+     "cause": "lockjaw"
+    },
+    {
+     "day": 36,
+     "who": "gen_utzcoat",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 49,
+     "who": "gen_sqd2zcx",
+     "kind": "villager",
+     "cause": "starvation"
+    },
+    {
+     "day": 64,
+     "who": "gen_at71z2j",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 78,
+     "who": "gen_evi3bx7",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 90,
+     "who": "david_kim",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 101,
+     "who": "omar_farouk",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 106,
+     "who": "hassan_ali",
+     "kind": "villager",
+     "cause": "a wound that wouldn't close"
+    },
+    {
+     "day": 106,
+     "who": "aroha_ngata",
+     "kind": "villager",
+     "cause": "starvation"
+    },
+    {
+     "day": 108,
+     "who": "amina_diallo",
+     "kind": "villager",
+     "cause": "starvation"
+    }
+   ],
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 37940,
+     "freshKcal": 37940,
+     "freshDays": 4.48,
+     "doomedKcal": 0,
+     "burnAvg": 8469,
+     "roster": 12
+    },
+    {
+     "day": 3,
+     "pantryKcal": 33010,
+     "freshKcal": 33010,
+     "freshDays": 5.037,
+     "doomedKcal": 0,
+     "burnAvg": 6554,
+     "roster": 12
+    },
+    {
+     "day": 4,
+     "pantryKcal": 28600,
+     "freshKcal": 28600,
+     "freshDays": 5.247,
+     "doomedKcal": 0,
+     "burnAvg": 5451,
+     "roster": 12
+    },
+    {
+     "day": 5,
+     "pantryKcal": 27750,
+     "freshKcal": 27750,
+     "freshDays": 6.261,
+     "doomedKcal": 0,
+     "burnAvg": 4433,
+     "roster": 12
+    },
+    {
+     "day": 6,
+     "pantryKcal": 26500,
+     "freshKcal": 26500,
+     "freshDays": 6.963,
+     "doomedKcal": 0,
+     "burnAvg": 3806,
+     "roster": 12
+    },
+    {
+     "day": 7,
+     "pantryKcal": 27885,
+     "freshKcal": 27885,
+     "freshDays": 8.27,
+     "doomedKcal": 0,
+     "burnAvg": 3372,
+     "roster": 12
+    },
+    {
+     "day": 8,
+     "pantryKcal": 26150,
+     "freshKcal": 26150,
+     "freshDays": 8.154,
+     "doomedKcal": 0,
+     "burnAvg": 3207,
+     "roster": 12
+    },
+    {
+     "day": 9,
+     "pantryKcal": 27550,
+     "freshKcal": 27550,
+     "freshDays": 12.873,
+     "doomedKcal": 0,
+     "burnAvg": 2140,
+     "roster": 12
+    },
+    {
+     "day": 10,
+     "pantryKcal": 27328,
+     "freshKcal": 27328,
+     "freshDays": 16.719,
+     "doomedKcal": 0,
+     "burnAvg": 1635,
+     "roster": 12
+    },
+    {
+     "day": 11,
+     "pantryKcal": 26695,
+     "freshKcal": 26695,
+     "freshDays": 20.318,
+     "doomedKcal": 0,
+     "burnAvg": 1314,
+     "roster": 12
+    },
+    {
+     "day": 12,
+     "pantryKcal": 28848,
+     "freshKcal": 28848,
+     "freshDays": 22.278,
+     "doomedKcal": 0,
+     "burnAvg": 1295,
+     "roster": 12
+    },
+    {
+     "day": 13,
+     "pantryKcal": 31088,
+     "freshKcal": 30850,
+     "freshDays": 24.362,
+     "doomedKcal": 2000,
+     "burnAvg": 1266,
+     "roster": 12
+    },
+    {
+     "day": 14,
+     "pantryKcal": 32001,
+     "freshKcal": 29843,
+     "freshDays": 24.11,
+     "doomedKcal": 1000,
+     "burnAvg": 1238,
+     "roster": 12
+    },
+    {
+     "day": 15,
+     "pantryKcal": 32977,
+     "freshKcal": 29705,
+     "freshDays": 27.929,
+     "doomedKcal": 800,
+     "burnAvg": 1064,
+     "roster": 12
+    },
+    {
+     "day": 16,
+     "pantryKcal": 34877,
+     "freshKcal": 30601,
+     "freshDays": 28.772,
+     "doomedKcal": 1200,
+     "burnAvg": 1064,
+     "roster": 12
+    },
+    {
+     "day": 17,
+     "pantryKcal": 36956,
+     "freshKcal": 30960,
+     "freshDays": 29.506,
+     "doomedKcal": 1800,
+     "burnAvg": 1049,
+     "roster": 12
+    },
+    {
+     "day": 18,
+     "pantryKcal": 36856,
+     "freshKcal": 28852,
+     "freshDays": 27.497,
+     "doomedKcal": 600,
+     "burnAvg": 1049,
+     "roster": 12
+    },
+    {
+     "day": 19,
+     "pantryKcal": 35576,
+     "freshKcal": 27250,
+     "freshDays": 26.866,
+     "doomedKcal": 0,
+     "burnAvg": 1014,
+     "roster": 12
+    },
+    {
+     "day": 20,
+     "pantryKcal": 30904,
+     "freshKcal": 25450,
+     "freshDays": 25.45,
+     "doomedKcal": 0,
+     "burnAvg": 1000,
+     "roster": 12
+    },
+    {
+     "day": 21,
+     "pantryKcal": 31462,
+     "freshKcal": 27802,
+     "freshDays": 27.333,
+     "doomedKcal": 0,
+     "burnAvg": 1017,
+     "roster": 12
+    },
+    {
+     "day": 22,
+     "pantryKcal": 31772,
+     "freshKcal": 28962,
+     "freshDays": 28.474,
+     "doomedKcal": 752,
+     "burnAvg": 1017,
+     "roster": 12
+    },
+    {
+     "day": 23,
+     "pantryKcal": 30212,
+     "freshKcal": 28610,
+     "freshDays": 27.54,
+     "doomedKcal": 0,
+     "burnAvg": 1039,
+     "roster": 12
+    },
+    {
+     "day": 24,
+     "pantryKcal": 33194,
+     "freshKcal": 32072,
+     "freshDays": 34.689,
+     "doomedKcal": 1200,
+     "burnAvg": 925,
+     "roster": 12
+    },
+    {
+     "day": 25,
+     "pantryKcal": 35391,
+     "freshKcal": 31819,
+     "freshDays": 39.269,
+     "doomedKcal": 1800,
+     "burnAvg": 810,
+     "roster": 12
+    },
+    {
+     "day": 26,
+     "pantryKcal": 36567,
+     "freshKcal": 30748,
+     "freshDays": 42.436,
+     "doomedKcal": 1200,
+     "burnAvg": 725,
+     "roster": 12
+    },
+    {
+     "day": 27,
+     "pantryKcal": 37018,
+     "freshKcal": 30449,
+     "freshDays": 35.103,
+     "doomedKcal": 800,
+     "burnAvg": 867,
+     "roster": 11
+    },
+    {
+     "day": 28,
+     "pantryKcal": 31507,
+     "freshKcal": 23627,
+     "freshDays": 23.79,
+     "doomedKcal": 0,
+     "burnAvg": 993,
+     "roster": 11
+    },
+    {
+     "day": 29,
+     "pantryKcal": 24972,
+     "freshKcal": 17443,
+     "freshDays": 15.355,
+     "doomedKcal": 0,
+     "burnAvg": 1136,
+     "roster": 11
+    },
+    {
+     "day": 30,
+     "pantryKcal": 24903,
+     "freshKcal": 16820,
+     "freshDays": 13.38,
+     "doomedKcal": 0,
+     "burnAvg": 1257,
+     "roster": 11
+    },
+    {
+     "day": 31,
+     "pantryKcal": 29754,
+     "freshKcal": 20335,
+     "freshDays": 13.429,
+     "doomedKcal": 0,
+     "burnAvg": 1514,
+     "roster": 11
+    },
+    {
+     "day": 32,
+     "pantryKcal": 31101,
+     "freshKcal": 18964,
+     "freshDays": 10.705,
+     "doomedKcal": 842,
+     "burnAvg": 1771,
+     "roster": 11
+    },
+    {
+     "day": 33,
+     "pantryKcal": 29505,
+     "freshKcal": 14350,
+     "freshDays": 7.154,
+     "doomedKcal": 0,
+     "burnAvg": 2006,
+     "roster": 11
+    },
+    {
+     "day": 34,
+     "pantryKcal": 33981,
+     "freshKcal": 18826,
+     "freshDays": 9.385,
+     "doomedKcal": 0,
+     "burnAvg": 2006,
+     "roster": 11
+    },
+    {
+     "day": 35,
+     "pantryKcal": 34470,
+     "freshKcal": 16534,
+     "freshDays": 8.242,
+     "doomedKcal": 0,
+     "burnAvg": 2006,
+     "roster": 11
+    },
+    {
+     "day": 36,
+     "pantryKcal": 29473,
+     "freshKcal": 10824,
+     "freshDays": 5.396,
+     "doomedKcal": 200,
+     "burnAvg": 2006,
+     "roster": 11
+    },
+    {
+     "day": 37,
+     "pantryKcal": 28041,
+     "freshKcal": 11379,
+     "freshDays": 5.554,
+     "doomedKcal": 0,
+     "burnAvg": 2049,
+     "roster": 10
+    },
+    {
+     "day": 38,
+     "pantryKcal": 29203,
+     "freshKcal": 12751,
+     "freshDays": 6.138,
+     "doomedKcal": 718,
+     "burnAvg": 2077,
+     "roster": 10
+    },
+    {
+     "day": 39,
+     "pantryKcal": 28337,
+     "freshKcal": 14525,
+     "freshDays": 6.827,
+     "doomedKcal": 3971,
+     "burnAvg": 2127,
+     "roster": 10
+    },
+    {
+     "day": 40,
+     "pantryKcal": 27662,
+     "freshKcal": 11150,
+     "freshDays": 5.159,
+     "doomedKcal": 0,
+     "burnAvg": 2161,
+     "roster": 10
+    },
+    {
+     "day": 41,
+     "pantryKcal": 29971,
+     "freshKcal": 15496,
+     "freshDays": 7.04,
+     "doomedKcal": 2800,
+     "burnAvg": 2201,
+     "roster": 10
+    },
+    {
+     "day": 42,
+     "pantryKcal": 29281,
+     "freshKcal": 12406,
+     "freshDays": 5.564,
+     "doomedKcal": 946,
+     "burnAvg": 2230,
+     "roster": 10
+    },
+    {
+     "day": 43,
+     "pantryKcal": 27128,
+     "freshKcal": 10413,
+     "freshDays": 4.581,
+     "doomedKcal": 2710,
+     "burnAvg": 2273,
+     "roster": 10
+    },
+    {
+     "day": 44,
+     "pantryKcal": 26707,
+     "freshKcal": 8070,
+     "freshDays": 3.572,
+     "doomedKcal": 0,
+     "burnAvg": 2259,
+     "roster": 10
+    },
+    {
+     "day": 45,
+     "pantryKcal": 32131,
+     "freshKcal": 14510,
+     "freshDays": 6.388,
+     "doomedKcal": 5100,
+     "burnAvg": 2271,
+     "roster": 10
+    },
+    {
+     "day": 46,
+     "pantryKcal": 36683,
+     "freshKcal": 19062,
+     "freshDays": 8.473,
+     "doomedKcal": 8510,
+     "burnAvg": 2250,
+     "roster": 10
+    },
+    {
+     "day": 47,
+     "pantryKcal": 36851,
+     "freshKcal": 21630,
+     "freshDays": 9.541,
+     "doomedKcal": 7352,
+     "burnAvg": 2267,
+     "roster": 10
+    },
+    {
+     "day": 48,
+     "pantryKcal": 35411,
+     "freshKcal": 19630,
+     "freshDays": 8.636,
+     "doomedKcal": 4868,
+     "burnAvg": 2273,
+     "roster": 10
+    },
+    {
+     "day": 49,
+     "pantryKcal": 32176,
+     "freshKcal": 14399,
+     "freshDays": 6.334,
+     "doomedKcal": 3600,
+     "burnAvg": 2273,
+     "roster": 10
+    },
+    {
+     "day": 50,
+     "pantryKcal": 25542,
+     "freshKcal": 12501,
+     "freshDays": 5.536,
+     "doomedKcal": 1747,
+     "burnAvg": 2258,
+     "roster": 9
+    },
+    {
+     "day": 51,
+     "pantryKcal": 24342,
+     "freshKcal": 10882,
+     "freshDays": 4.777,
+     "doomedKcal": 1554,
+     "burnAvg": 2278,
+     "roster": 9
+    },
+    {
+     "day": 52,
+     "pantryKcal": 24268,
+     "freshKcal": 7608,
+     "freshDays": 3.358,
+     "doomedKcal": 1600,
+     "burnAvg": 2266,
+     "roster": 9
+    },
+    {
+     "day": 53,
+     "pantryKcal": 26171,
+     "freshKcal": 10151,
+     "freshDays": 4.437,
+     "doomedKcal": 4454,
+     "burnAvg": 2288,
+     "roster": 9
+    },
+    {
+     "day": 54,
+     "pantryKcal": 28131,
+     "freshKcal": 14251,
+     "freshDays": 6.252,
+     "doomedKcal": 5697,
+     "burnAvg": 2279,
+     "roster": 9
+    },
+    {
+     "day": 55,
+     "pantryKcal": 31487,
+     "freshKcal": 16009,
+     "freshDays": 7.077,
+     "doomedKcal": 3800,
+     "burnAvg": 2262,
+     "roster": 9
+    },
+    {
+     "day": 56,
+     "pantryKcal": 35208,
+     "freshKcal": 20130,
+     "freshDays": 8.868,
+     "doomedKcal": 6755,
+     "burnAvg": 2270,
+     "roster": 9
+    },
+    {
+     "day": 57,
+     "pantryKcal": 25504,
+     "freshKcal": 20264,
+     "freshDays": 8.927,
+     "doomedKcal": 6975,
+     "burnAvg": 2270,
+     "roster": 9
+    },
+    {
+     "day": 58,
+     "pantryKcal": 23879,
+     "freshKcal": 16939,
+     "freshDays": 7.529,
+     "doomedKcal": 5734,
+     "burnAvg": 2250,
+     "roster": 9
+    },
+    {
+     "day": 59,
+     "pantryKcal": 26181,
+     "freshKcal": 16093,
+     "freshDays": 7.153,
+     "doomedKcal": 3800,
+     "burnAvg": 2250,
+     "roster": 9
+    },
+    {
+     "day": 60,
+     "pantryKcal": 26851,
+     "freshKcal": 14243,
+     "freshDays": 6.333,
+     "doomedKcal": 3343,
+     "burnAvg": 2249,
+     "roster": 9
+    },
+    {
+     "day": 61,
+     "pantryKcal": 29362,
+     "freshKcal": 13600,
+     "freshDays": 6.101,
+     "doomedKcal": 2200,
+     "burnAvg": 2229,
+     "roster": 9
+    },
+    {
+     "day": 62,
+     "pantryKcal": 33460,
+     "freshKcal": 17698,
+     "freshDays": 7.939,
+     "doomedKcal": 6600,
+     "burnAvg": 2229,
+     "roster": 9
+    },
+    {
+     "day": 63,
+     "pantryKcal": 36513,
+     "freshKcal": 20751,
+     "freshDays": 9.341,
+     "doomedKcal": 6498,
+     "burnAvg": 2221,
+     "roster": 9
+    },
+    {
+     "day": 64,
+     "pantryKcal": 28500,
+     "freshKcal": 20935,
+     "freshDays": 9.364,
+     "doomedKcal": 6653,
+     "burnAvg": 2236,
+     "roster": 9
+    },
+    {
+     "day": 65,
+     "pantryKcal": 23703,
+     "freshKcal": 15258,
+     "freshDays": 6.781,
+     "doomedKcal": 6315,
+     "burnAvg": 2250,
+     "roster": 8
+    },
+    {
+     "day": 66,
+     "pantryKcal": 24360,
+     "freshKcal": 12728,
+     "freshDays": 5.633,
+     "doomedKcal": 3900,
+     "burnAvg": 2260,
+     "roster": 8
+    },
+    {
+     "day": 67,
+     "pantryKcal": 26953,
+     "freshKcal": 12173,
+     "freshDays": 5.352,
+     "doomedKcal": 4339,
+     "burnAvg": 2274,
+     "roster": 8
+    },
+    {
+     "day": 68,
+     "pantryKcal": 29153,
+     "freshKcal": 14373,
+     "freshDays": 6.319,
+     "doomedKcal": 5834,
+     "burnAvg": 2274,
+     "roster": 8
+    },
+    {
+     "day": 69,
+     "pantryKcal": 32714,
+     "freshKcal": 17934,
+     "freshDays": 7.673,
+     "doomedKcal": 5400,
+     "burnAvg": 2337,
+     "roster": 8
+    },
+    {
+     "day": 70,
+     "pantryKcal": 35671,
+     "freshKcal": 20891,
+     "freshDays": 8.884,
+     "doomedKcal": 6200,
+     "burnAvg": 2351,
+     "roster": 8
+    },
+    {
+     "day": 71,
+     "pantryKcal": 25277,
+     "freshKcal": 18457,
+     "freshDays": 7.897,
+     "doomedKcal": 5057,
+     "burnAvg": 2337,
+     "roster": 8
+    },
+    {
+     "day": 72,
+     "pantryKcal": 24706,
+     "freshKcal": 14800,
+     "freshDays": 6.371,
+     "doomedKcal": 5000,
+     "burnAvg": 2323,
+     "roster": 8
+    },
+    {
+     "day": 73,
+     "pantryKcal": 26123,
+     "freshKcal": 15257,
+     "freshDays": 6.579,
+     "doomedKcal": 4600,
+     "burnAvg": 2319,
+     "roster": 8
+    },
+    {
+     "day": 74,
+     "pantryKcal": 28432,
+     "freshKcal": 15746,
+     "freshDays": 6.847,
+     "doomedKcal": 4657,
+     "burnAvg": 2300,
+     "roster": 8
+    },
+    {
+     "day": 75,
+     "pantryKcal": 31061,
+     "freshKcal": 15289,
+     "freshDays": 6.648,
+     "doomedKcal": 5289,
+     "burnAvg": 2300,
+     "roster": 8
+    },
+    {
+     "day": 76,
+     "pantryKcal": 34419,
+     "freshKcal": 19447,
+     "freshDays": 8.693,
+     "doomedKcal": 5600,
+     "burnAvg": 2237,
+     "roster": 8
+    },
+    {
+     "day": 77,
+     "pantryKcal": 39313,
+     "freshKcal": 24341,
+     "freshDays": 10.95,
+     "doomedKcal": 6358,
+     "burnAvg": 2223,
+     "roster": 8
+    },
+    {
+     "day": 78,
+     "pantryKcal": 28619,
+     "freshKcal": 21855,
+     "freshDays": 9.832,
+     "doomedKcal": 7094,
+     "burnAvg": 2223,
+     "roster": 8
+    },
+    {
+     "day": 79,
+     "pantryKcal": 24099,
+     "freshKcal": 16855,
+     "freshDays": 7.583,
+     "doomedKcal": 6200,
+     "burnAvg": 2223,
+     "roster": 7
+    },
+    {
+     "day": 80,
+     "pantryKcal": 22279,
+     "freshKcal": 14875,
+     "freshDays": 6.64,
+     "doomedKcal": 5200,
+     "burnAvg": 2240,
+     "roster": 7
+    },
+    {
+     "day": 81,
+     "pantryKcal": 23885,
+     "freshKcal": 13281,
+     "freshDays": 5.901,
+     "doomedKcal": 5481,
+     "burnAvg": 2251,
+     "roster": 7
+    },
+    {
+     "day": 82,
+     "pantryKcal": 25421,
+     "freshKcal": 11712,
+     "freshDays": 5.204,
+     "doomedKcal": 4800,
+     "burnAvg": 2251,
+     "roster": 8
+    },
+    {
+     "day": 83,
+     "pantryKcal": 26063,
+     "freshKcal": 12354,
+     "freshDays": 5.489,
+     "doomedKcal": 5012,
+     "burnAvg": 2251,
+     "roster": 8
+    },
+    {
+     "day": 84,
+     "pantryKcal": 17868,
+     "freshKcal": 6100,
+     "freshDays": 2.71,
+     "doomedKcal": 3700,
+     "burnAvg": 2251,
+     "roster": 8
+    },
+    {
+     "day": 85,
+     "pantryKcal": 5882,
+     "freshKcal": 4522,
+     "freshDays": 1.999,
+     "doomedKcal": 0,
+     "burnAvg": 2262,
+     "roster": 9
+    },
+    {
+     "day": 86,
+     "pantryKcal": 8598,
+     "freshKcal": 7718,
+     "freshDays": 3.353,
+     "doomedKcal": 0,
+     "burnAvg": 2302,
+     "roster": 9
+    },
+    {
+     "day": 87,
+     "pantryKcal": 11603,
+     "freshKcal": 7747,
+     "freshDays": 3.399,
+     "doomedKcal": 500,
+     "burnAvg": 2279,
+     "roster": 9
+    },
+    {
+     "day": 88,
+     "pantryKcal": 13699,
+     "freshKcal": 6691,
+     "freshDays": 2.972,
+     "doomedKcal": 0,
+     "burnAvg": 2251,
+     "roster": 9
+    },
+    {
+     "day": 89,
+     "pantryKcal": 14868,
+     "freshKcal": 4772,
+     "freshDays": 2.12,
+     "doomedKcal": 0,
+     "burnAvg": 2251,
+     "roster": 9
+    },
+    {
+     "day": 90,
+     "pantryKcal": 11474,
+     "freshKcal": 1400,
+     "freshDays": 0.562,
+     "doomedKcal": 0,
+     "burnAvg": 2493,
+     "roster": 9
+    },
+    {
+     "day": 91,
+     "pantryKcal": 9394,
+     "freshKcal": 200,
+     "freshDays": 0.069,
+     "doomedKcal": 0,
+     "burnAvg": 2880,
+     "roster": 8
+    },
+    {
+     "day": 92,
+     "pantryKcal": 5786,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 3109,
+     "roster": 8
+    },
+    {
+     "day": 93,
+     "pantryKcal": 5666,
+     "freshKcal": 1800,
+     "freshDays": 0.585,
+     "doomedKcal": 0,
+     "burnAvg": 3076,
+     "roster": 8
+    },
+    {
+     "day": 94,
+     "pantryKcal": 4866,
+     "freshKcal": 1800,
+     "freshDays": 0.582,
+     "doomedKcal": 0,
+     "burnAvg": 3093,
+     "roster": 8
+    },
+    {
+     "day": 95,
+     "pantryKcal": 5170,
+     "freshKcal": 2600,
+     "freshDays": 0.837,
+     "doomedKcal": 0,
+     "burnAvg": 3105,
+     "roster": 8
+    },
+    {
+     "day": 96,
+     "pantryKcal": 7050,
+     "freshKcal": 4000,
+     "freshDays": 1.282,
+     "doomedKcal": 0,
+     "burnAvg": 3120,
+     "roster": 8
+    },
+    {
+     "day": 97,
+     "pantryKcal": 6450,
+     "freshKcal": 1800,
+     "freshDays": 0.606,
+     "doomedKcal": 0,
+     "burnAvg": 2968,
+     "roster": 8
+    },
+    {
+     "day": 98,
+     "pantryKcal": 5450,
+     "freshKcal": 800,
+     "freshDays": 0.303,
+     "doomedKcal": 0,
+     "burnAvg": 2644,
+     "roster": 8
+    },
+    {
+     "day": 99,
+     "pantryKcal": 5250,
+     "freshKcal": 600,
+     "freshDays": 0.248,
+     "doomedKcal": 0,
+     "burnAvg": 2415,
+     "roster": 8
+    },
+    {
+     "day": 100,
+     "pantryKcal": 6338,
+     "freshKcal": 3000,
+     "freshDays": 1.214,
+     "doomedKcal": 0,
+     "burnAvg": 2471,
+     "roster": 8
+    },
+    {
+     "day": 101,
+     "pantryKcal": 3938,
+     "freshKcal": 600,
+     "freshDays": 0.244,
+     "doomedKcal": 0,
+     "burnAvg": 2459,
+     "roster": 8
+    },
+    {
+     "day": 102,
+     "pantryKcal": 5680,
+     "freshKcal": 3600,
+     "freshDays": 1.464,
+     "doomedKcal": 0,
+     "burnAvg": 2460,
+     "roster": 7
+    },
+    {
+     "day": 103,
+     "pantryKcal": 4400,
+     "freshKcal": 1200,
+     "freshDays": 0.491,
+     "doomedKcal": 0,
+     "burnAvg": 2445,
+     "roster": 7
+    },
+    {
+     "day": 104,
+     "pantryKcal": 3700,
+     "freshKcal": 500,
+     "freshDays": 0.197,
+     "doomedKcal": 0,
+     "burnAvg": 2532,
+     "roster": 7
+    },
+    {
+     "day": 105,
+     "pantryKcal": 1280,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2676,
+     "roster": 7
+    },
+    {
+     "day": 106,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2829,
+     "roster": 8
+    },
+    {
+     "day": 107,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2766,
+     "roster": 6
+    },
+    {
+     "day": 108,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2819,
+     "roster": 6
+    },
+    {
+     "day": 109,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2657,
+     "roster": 5
+    },
+    {
+     "day": 110,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2475,
+     "roster": 5
+    },
+    {
+     "day": 110,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2233,
+     "roster": 5
+    }
+   ],
+   "dayInflow": {
+    "1": {
+     "events:ambient": 100
+    },
+    "2": {
+     "ambient:villagelives": 440,
+     "share_surplus": 200
+    },
+    "3": {
+     "events:ambient": 100,
+     "share_surplus": 200
+    },
+    "4": {
+     "events:ambient": 100,
+     "ambient:villagelives": 382,
+     "share_surplus": 400
+    },
+    "5": {
+     "share_surplus": 800
+    },
+    "6": {
+     "ambient:villagelives": 1985,
+     "share_surplus": 1200
+    },
+    "7": {
+     "events:ambient": 100,
+     "ambient:villagelives": 494,
+     "share_surplus": 800
+    },
+    "8": {
+     "events:ambient": 100,
+     "ambient:villagelives": 1748,
+     "share_surplus": 1200
+    },
+    "9": {
+     "away_wild": 478,
+     "share_surplus": 1400
+    },
+    "10": {
+     "events:ambient": 100,
+     "ambient:villagelives": 445,
+     "share_surplus": 1800
+    },
+    "11": {
+     "away_wild": 1114,
+     "ambient:villagelives": 1987,
+     "share_surplus": 2200
+    },
+    "12": {
+     "share_surplus": 3400
+    },
+    "13": {
+     "ambient:villagelives": 593,
+     "share_surplus": 2800
+    },
+    "14": {
+     "away_wild": 655,
+     "share_surplus": 2800
+    },
+    "15": {
+     "away_wild": 1151,
+     "share_surplus": 2800
+    },
+    "16": {
+     "away_wild": 210,
+     "events:ambient": 100,
+     "share_surplus": 3400
+    },
+    "17": {
+     "away_wild": 402,
+     "share_surplus": 2400
+    },
+    "18": {
+     "share_surplus": 2000
+    },
+    "19": {
+     "away_wild": 689,
+     "share_surplus": 1600
+    },
+    "20": {
+     "away_wild": 250,
+     "ambient:villagelives": 352,
+     "share_surplus": 2800
+    },
+    "21": {
+     "share_surplus": 2200
+    },
+    "22": {
+     "share_surplus": 2800
+    },
+    "23": {
+     "events:ambient": 100,
+     "ambient:villagelives": 1762,
+     "share_surplus": 3000
+    },
+    "24": {
+     "ambient:villagelives": 409,
+     "share_surplus": 3600
+    },
+    "25": {
+     "events:special": 300,
+     "ambient:villagelives": 438,
+     "share_surplus": 2800
+    },
+    "26": {
+     "away_wild": 439,
+     "share_surplus": 3200
+    },
+    "27": {
+     "away_wild": 287,
+     "ambient:villagelives": 390,
+     "share_surplus": 4000
+    },
+    "28": {
+     "away_wild": 293,
+     "share_surplus": 3400
+    },
+    "29": {
+     "ambient:villagelives": 470,
+     "share_surplus": 4000
+    },
+    "30": {
+     "away_wild": 794,
+     "ambient:villagelives": 3659,
+     "share_surplus": 3800
+    },
+    "31": {
+     "ambient:villagelives": 1372,
+     "share_surplus": 4400
+    },
+    "32": {
+     "share_surplus": 2800
+    },
+    "33": {
+     "away_wild": 3476,
+     "share_surplus": 4200
+    },
+    "34": {
+     "duty:fish": 700,
+     "ambient:villagelives": 484,
+     "share_surplus": 4200
+    },
+    "35": {
+     "events:ambient": 100,
+     "ambient:villagelives": 574,
+     "share_surplus": 2600
+    },
+    "36": {
+     "away_wild": 1029,
+     "share_surplus": 3200
+    },
+    "37": {
+     "away_wild": 471,
+     "ambient:villagelives": 612,
+     "share_surplus": 3000
+    },
+    "38": {
+     "away_wild": 204,
+     "share_surplus": 2400
+    },
+    "39": {
+     "share_surplus": 2800
+    },
+    "40": {
+     "away_wild": 373,
+     "ambient:villagelives": 373,
+     "share_surplus": 4000
+    },
+    "41": {
+     "ambient:villagelives": 310,
+     "share_surplus": 4000
+    },
+    "42": {
+     "duty:fish": 1550,
+     "ambient:villagelives": 453,
+     "share_surplus": 4200
+    },
+    "43": {
+     "duty:fish": 1570,
+     "share_surplus": 5000
+    },
+    "44": {
+     "duty:fish": 820,
+     "ambient:villagelives": 2290,
+     "share_surplus": 5400
+    },
+    "45": {
+     "away_wild": 307,
+     "ambient:villagelives": 1045,
+     "share_surplus": 6000
+    },
+    "46": {
+     "away_wild": 268,
+     "share_surplus": 4600
+    },
+    "47": {
+     "share_surplus": 5200
+    },
+    "48": {
+     "away_wild": 519,
+     "ambient:villagelives": 428,
+     "share_surplus": 3800
+    },
+    "49": {
+     "ambient:villagelives": 554,
+     "share_surplus": 5000
+    },
+    "50": {
+     "share_surplus": 5600
+    },
+    "51": {
+     "away_wild": 254,
+     "share_surplus": 4200
+    },
+    "52": {
+     "duty:fish": 1740,
+     "away_wild": 357,
+     "share_surplus": 3600
+    },
+    "53": {
+     "events:ambient": 100,
+     "share_surplus": 4400
+    },
+    "54": {
+     "away_wild": 455,
+     "events:ambient": 100,
+     "share_surplus": 6200
+    },
+    "55": {
+     "away_wild": 325,
+     "ambient:villagelives": 650,
+     "share_surplus": 6000
+    },
+    "56": {
+     "away_wild": 432,
+     "ambient:villagelives": 302,
+     "share_surplus": 5000
+    },
+    "57": {
+     "share_surplus": 4400
+    },
+    "58": {
+     "away_wild": 543,
+     "share_surplus": 5400
+    },
+    "59": {
+     "share_surplus": 5200
+    },
+    "60": {
+     "events:ambient": 100,
+     "share_surplus": 5600
+    },
+    "61": {
+     "away_wild": 267,
+     "ambient:villagelives": 431,
+     "share_surplus": 5800
+    },
+    "62": {
+     "ambient:villagelives": 453,
+     "share_surplus": 6200
+    },
+    "63": {
+     "away_wild": 261,
+     "ambient:villagelives": 454,
+     "share_surplus": 5600
+    },
+    "64": {
+     "ambient:villagelives": 623,
+     "share_surplus": 3400
+    },
+    "65": {
+     "away_wild": 535,
+     "ambient:villagelives": 1239,
+     "share_surplus": 4600
+    },
+    "66": {
+     "ambient:villagelives": 234,
+     "share_surplus": 5600
+    },
+    "67": {
+     "share_surplus": 5400
+    },
+    "68": {
+     "share_surplus": 6200
+    },
+    "69": {
+     "ambient:villagelives": 457,
+     "share_surplus": 4800
+    },
+    "70": {
+     "share_surplus": 5800
+    },
+    "71": {
+     "share_surplus": 5600
+    },
+    "72": {
+     "ambient:villagelives": 457,
+     "share_surplus": 5600
+    },
+    "73": {
+     "away_wild": 341,
+     "ambient:villagelives": 948,
+     "share_surplus": 5200
+    },
+    "74": {
+     "share_surplus": 5600
+    },
+    "75": {
+     "away_wild": 758,
+     "share_surplus": 5600
+    },
+    "76": {
+     "events:ambient": 100,
+     "ambient:villagelives": 394,
+     "share_surplus": 6600
+    },
+    "77": {
+     "share_surplus": 6200
+    },
+    "78": {
+     "share_surplus": 4600
+    },
+    "79": {
+     "away_wild": 519,
+     "ambient:villagelives": 562,
+     "share_surplus": 5000
+    },
+    "80": {
+     "share_surplus": 5000
+    },
+    "81": {
+     "events:ambient": 100,
+     "ambient:villagelives": 2212,
+     "share_surplus": 2800
+    },
+    "82": {
+     "ambient:villagelives": 542,
+     "share_surplus": 4000
+    },
+    "83": {
+     "share_surplus": 2200
+    },
+    "84": {
+     "duty:fish": 1680,
+     "ambient:villagelives": 442,
+     "share_surplus": 2600
+    },
+    "85": {
+     "duty:fish": 1680,
+     "events:ambient": 100,
+     "ambient:villagelives": 1861,
+     "share_surplus": 4600
+    },
+    "86": {
+     "duty:fish": 1560,
+     "events:ambient": 100,
+     "ambient:villagelives": 987,
+     "share_surplus": 4600
+    },
+    "87": {
+     "duty:fish": 1260,
+     "ambient:villagelives": 431,
+     "share_surplus": 5000
+    },
+    "88": {
+     "duty:fish": 2520,
+     "away_wild": 352,
+     "share_surplus": 2800
+    },
+    "89": {
+     "duty:fish": 3420,
+     "events:ambient": 100,
+     "share_surplus": 600
+    },
+    "90": {
+     "duty:fish": 2580,
+     "ambient:villagelives": 487,
+     "share_surplus": 400
+    },
+    "91": {
+     "duty:fish": 1080,
+     "ambient:villagelives": 1183,
+     "share_surplus": 1200
+    },
+    "92": {
+     "duty:fish": 2040,
+     "share_surplus": 1800
+    },
+    "93": {
+     "duty:fish": 1860,
+     "share_surplus": 2000
+    },
+    "94": {
+     "duty:fish": 2400,
+     "share_surplus": 2800
+    },
+    "95": {
+     "away_wild": 224,
+     "duty:fish": 2460,
+     "ambient:villagelives": 324,
+     "share_surplus": 3000
+    },
+    "96": {
+     "duty:fish": 2580,
+     "ambient:villagelives": 444,
+     "share_surplus": 1200
+    },
+    "97": {
+     "duty:fish": 2340,
+     "ambient:villagelives": 360,
+     "share_surplus": 1800
+    },
+    "98": {
+     "duty:fish": 1980,
+     "ambient:villagelives": 594,
+     "share_surplus": 2400
+    },
+    "99": {
+     "duty:fish": 2040,
+     "share_surplus": 3000
+    },
+    "100": {
+     "duty:fish": 1560,
+     "share_surplus": 2400
+    },
+    "101": {
+     "away_wild": 405,
+     "duty:fish": 1920,
+     "share_surplus": 2600
+    },
+    "102": {
+     "duty:fish": 1800,
+     "share_surplus": 1200
+    },
+    "103": {
+     "duty:fish": 3000,
+     "share_surplus": 400
+    },
+    "104": {
+     "away_wild": 443,
+     "duty:fish": 2160,
+     "share_surplus": 600
+    },
+    "105": {
+     "away_wild": 833,
+     "duty:fish": 1380,
+     "share_surplus": 600
+    },
+    "106": {
+     "away_wild": 901,
+     "duty:fish": 1800,
+     "share_surplus": 800
+    },
+    "107": {
+     "away_wild": 1127,
+     "duty:fish": 1985,
+     "share_surplus": 600
+    },
+    "108": {
+     "away_wild": 446,
+     "duty:fish": 705,
+     "share_surplus": 400
+    },
+    "109": {
+     "away_wild": 688,
+     "duty:fish": 803,
+     "share_surplus": 400
+    },
+    "110": {
+     "away_wild": 1389,
+     "duty:fish": 1659
+    }
+   },
+   "dayDuty": {
+    "12": {
+     "cook": 238
+    },
+    "13": {
+     "cook": 1920
+    },
+    "14": {
+     "cook": 1114
+    },
+    "15": {
+     "cook": 1004
+    },
+    "16": {
+     "cook": 1720
+    },
+    "17": {
+     "cook": 2008
+    },
+    "18": {
+     "cook": 322
+    },
+    "24": {
+     "cook": 2450
+    },
+    "25": {
+     "cook": 2247
+    },
+    "26": {
+     "cook": 1550
+    },
+    "27": {
+     "cook": 1311
+    },
+    "29": {
+     "cook": 554
+    },
+    "30": {
+     "cook": 1336
+    },
+    "31": {
+     "cook": 3040
+    },
+    "32": {
+     "cook": 3018
+    },
+    "34": {
+     "cook": 2781
+    },
+    "35": {
+     "cook": 1107
+    },
+    "39": {
+     "cook": 3180
+    },
+    "41": {
+     "cook": 3200
+    },
+    "43": {
+     "cook": 2882
+    },
+    "47": {
+     "cook": 3120
+    },
+    "48": {
+     "cook": 3094
+    },
+    "49": {
+     "cook": 3200
+    },
+    "50": {
+     "cook": 3200
+    },
+    "51": {
+     "cook": 3200
+    },
+    "54": {
+     "cook": 3198
+    },
+    "56": {
+     "cook": 3120
+    },
+    "57": {
+     "cook": 3140
+    },
+    "58": {
+     "cook": 3148
+    },
+    "59": {
+     "cook": 3200
+    },
+    "60": {
+     "cook": 3154
+    },
+    "63": {
+     "cook": 3065
+    },
+    "64": {
+     "cook": 3200
+    },
+    "65": {
+     "cook": 3187
+    },
+    "66": {
+     "cook": 3148
+    },
+    "70": {
+     "cook": 3200
+    },
+    "71": {
+     "cook": 3086
+    },
+    "72": {
+     "cook": 3200
+    },
+    "73": {
+     "cook": 3200
+    },
+    "74": {
+     "cook": 3086
+    },
+    "77": {
+     "cook": 3198
+    },
+    "78": {
+     "cook": 3200
+    },
+    "79": {
+     "cook": 3200
+    },
+    "80": {
+     "cook": 3200
+    },
+    "81": {
+     "cook": 3105
+    },
+    "83": {
+     "cook": 3084
+    },
+    "84": {
+     "cook": 1360
+    },
+    "85": {
+     "cook": 354
+    },
+    "86": {
+     "cook": 2976
+    },
+    "87": {
+     "cook": 3152
+    },
+    "88": {
+     "cook": 3088
+    },
+    "89": {
+     "cook": 1898
+    },
+    "95": {
+     "cook": 480
+    },
+    "96": {
+     "cook": 1600
+    },
+    "100": {
+     "cook": 800
+    },
+    "102": {
+     "cook": 1440
+    }
+   },
+   "dayThrottle": {
+    "2": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "3": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "4": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "5": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "6": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "7": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "8": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "9": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "10": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "11": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "12": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "13": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "14": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "15": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "16": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "17": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "18": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "19": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "20": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "21": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "22": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "23": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "24": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "25": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "26": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "27": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "28": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "29": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "30": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "31": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "32": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "33": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "34": {
+     "calls": 2,
+     "engaged": 0
+    },
+    "35": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "36": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "37": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "38": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "39": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "40": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "41": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "42": {
+     "calls": 3,
+     "engaged": 1
+    },
+    "43": {
+     "calls": 3,
+     "engaged": 1
+    },
+    "44": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "45": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "46": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "47": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "48": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "49": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "50": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "51": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "52": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "53": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "54": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "55": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "56": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "57": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "58": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "59": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "60": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "61": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "62": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "63": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "64": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "65": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "66": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "67": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "68": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "69": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "70": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "71": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "72": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "73": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "74": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "75": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "76": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "77": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "78": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "79": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "80": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "81": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "82": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "83": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "84": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "85": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "86": {
+     "calls": 4,
+     "engaged": 1
+    },
+    "87": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "88": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "89": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "90": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "91": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "92": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "93": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "94": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "95": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "96": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "97": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "98": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "99": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "100": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "101": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "102": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "103": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "104": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "105": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "106": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "107": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "108": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "109": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "110": {
+     "calls": 4,
+     "engaged": 0
+    }
+   },
+   "ms": 1663
+  },
+  {
+   "seed": 8803,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 8,
+   "days": 180,
+   "endReason": "survived",
+   "chokeTotal": 1495650,
+   "unattributed": 0,
+   "unattShare": 0,
+   "inflow": {
+    "share_surplus": 753400,
+    "traps": 1874,
+    "ambient:villagelives": 52237,
+    "away_wild": 56971,
+    "events:ambient": 3320,
+    "scholar_home": 581310,
+    "events:special": 400,
+    "aid_system": 15534,
+    "donation": 1800,
+    "duty:fish": 28804
+   },
+   "rotFresh": 669934,
+   "rotPreserved": 68906,
+   "rotByCh": {
+    "share_surplus": 331600,
+    "ambient:villagelives": 21893,
+    "scholar_home": 338608,
+    "away_wild": 30564,
+    "untagged": 3600,
+    "events:ambient": 978,
+    "events:special": 320,
+    "aid_system": 11131,
+    "traps": 146
+   },
+   "rotByChFast": {
+    "share_surplus": 284400,
+    "ambient:villagelives": 5113,
+    "away_wild": 4066,
+    "scholar_home": 285350
+   },
+   "dutyPreserved": 207045,
+   "laundered": 0,
+   "throttleCalls": 783,
+   "throttleEngaged": 723,
+   "rintGovCalls": 92,
+   "rintTrimCalls": 0,
+   "rintTrimKcal": 0,
+   "rintTrimDays": 0,
+   "starveDays": 0,
+   "deaths": [
+    {
+     "day": 55,
+     "who": "daniyar_askarov",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 55,
+     "who": "gen_bgaf5xc",
+     "kind": "villager",
+     "cause": "starvation"
+    },
+    {
+     "day": 65,
+     "who": "ethan_hunt",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 70,
+     "who": "hassan_ali",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 99,
+     "who": "gen_8py9srv",
+     "kind": "villager",
+     "cause": "sickness"
+    },
+    {
+     "day": 101,
+     "who": "gen_m30zmb5",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 104,
+     "who": "desmond_clarke",
+     "kind": "villager",
+     "cause": "a wound that wouldn't close"
+    },
+    {
+     "day": 125,
+     "who": "gen_63oyz9p",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 135,
+     "who": "gen_21cvhc8",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 136,
+     "who": "chantal_mukendi",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 136,
+     "who": "gen_xmanqoa",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 145,
+     "who": "dmitri_sokolov",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 155,
+     "who": "app_mgpsphml404",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 162,
+     "who": "priya_nair",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 170,
+     "who": "james_okonkwo",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 172,
+     "who": "app_mgpspjjg175",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 177,
+     "who": "app_mgpspjl5184",
+     "kind": "villager",
+     "cause": "monster"
+    }
+   ],
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 38280,
+     "freshKcal": 38280,
+     "freshDays": 4.702,
+     "doomedKcal": 0,
+     "burnAvg": 8141,
+     "roster": 12
+    },
+    {
+     "day": 3,
+     "pantryKcal": 31600,
+     "freshKcal": 31600,
+     "freshDays": 4.688,
+     "doomedKcal": 0,
+     "burnAvg": 6740,
+     "roster": 12
+    },
+    {
+     "day": 4,
+     "pantryKcal": 28750,
+     "freshKcal": 28750,
+     "freshDays": 5.373,
+     "doomedKcal": 0,
+     "burnAvg": 5351,
+     "roster": 12
+    },
+    {
+     "day": 5,
+     "pantryKcal": 27950,
+     "freshKcal": 27950,
+     "freshDays": 6.48,
+     "doomedKcal": 0,
+     "burnAvg": 4313,
+     "roster": 12
+    },
+    {
+     "day": 5,
+     "pantryKcal": 27950,
+     "freshKcal": 27950,
+     "freshDays": 6.48,
+     "doomedKcal": 0,
+     "burnAvg": 4313,
+     "roster": 12
+    },
+    {
+     "day": 7,
+     "pantryKcal": 32825,
+     "freshKcal": 32825,
+     "freshDays": 10.184,
+     "doomedKcal": 0,
+     "burnAvg": 3223,
+     "roster": 12
+    },
+    {
+     "day": 7,
+     "pantryKcal": 32825,
+     "freshKcal": 32825,
+     "freshDays": 10.184,
+     "doomedKcal": 0,
+     "burnAvg": 3223,
+     "roster": 12
+    },
+    {
+     "day": 9,
+     "pantryKcal": 32549,
+     "freshKcal": 29889,
+     "freshDays": 15.733,
+     "doomedKcal": 400,
+     "burnAvg": 1900,
+     "roster": 12
+    },
+    {
+     "day": 10,
+     "pantryKcal": 36991,
+     "freshKcal": 34020,
+     "freshDays": 26.584,
+     "doomedKcal": 0,
+     "burnAvg": 1280,
+     "roster": 12
+    },
+    {
+     "day": 11,
+     "pantryKcal": 35974,
+     "freshKcal": 29883,
+     "freshDays": 27.571,
+     "doomedKcal": 0,
+     "burnAvg": 1084,
+     "roster": 12
+    },
+    {
+     "day": 12,
+     "pantryKcal": 37826,
+     "freshKcal": 31735,
+     "freshDays": 30.072,
+     "doomedKcal": 1363,
+     "burnAvg": 1055,
+     "roster": 12
+    },
+    {
+     "day": 13,
+     "pantryKcal": 38932,
+     "freshKcal": 31520,
+     "freshDays": 28.47,
+     "doomedKcal": 1200,
+     "burnAvg": 1107,
+     "roster": 12
+    },
+    {
+     "day": 14,
+     "pantryKcal": 38519,
+     "freshKcal": 31027,
+     "freshDays": 28.343,
+     "doomedKcal": 600,
+     "burnAvg": 1095,
+     "roster": 12
+    },
+    {
+     "day": 15,
+     "pantryKcal": 39048,
+     "freshKcal": 30670,
+     "freshDays": 28.016,
+     "doomedKcal": 400,
+     "burnAvg": 1095,
+     "roster": 12
+    },
+    {
+     "day": 16,
+     "pantryKcal": 38970,
+     "freshKcal": 30212,
+     "freshDays": 27.963,
+     "doomedKcal": 0,
+     "burnAvg": 1080,
+     "roster": 12
+    },
+    {
+     "day": 17,
+     "pantryKcal": 40282,
+     "freshKcal": 31970,
+     "freshDays": 29.59,
+     "doomedKcal": 800,
+     "burnAvg": 1080,
+     "roster": 12
+    },
+    {
+     "day": 17,
+     "pantryKcal": 39656,
+     "freshKcal": 30215,
+     "freshDays": 27.966,
+     "doomedKcal": 800,
+     "burnAvg": 1080,
+     "roster": 12
+    },
+    {
+     "day": 19,
+     "pantryKcal": 57817,
+     "freshKcal": 44820,
+     "freshDays": 42.61,
+     "doomedKcal": 0,
+     "burnAvg": 1052,
+     "roster": 12
+    },
+    {
+     "day": 19,
+     "pantryKcal": 57602,
+     "freshKcal": 43405,
+     "freshDays": 41.265,
+     "doomedKcal": 0,
+     "burnAvg": 1052,
+     "roster": 12
+    },
+    {
+     "day": 21,
+     "pantryKcal": 55017,
+     "freshKcal": 34484,
+     "freshDays": 34.484,
+     "doomedKcal": 6020,
+     "burnAvg": 1000,
+     "roster": 12
+    },
+    {
+     "day": 21,
+     "pantryKcal": 51800,
+     "freshKcal": 31267,
+     "freshDays": 31.267,
+     "doomedKcal": 5350,
+     "burnAvg": 1000,
+     "roster": 12
+    },
+    {
+     "day": 23,
+     "pantryKcal": 52496,
+     "freshKcal": 32763,
+     "freshDays": 32.763,
+     "doomedKcal": 11616,
+     "burnAvg": 1000,
+     "roster": 12
+    },
+    {
+     "day": 23,
+     "pantryKcal": 57239,
+     "freshKcal": 37506,
+     "freshDays": 37.506,
+     "doomedKcal": 12416,
+     "burnAvg": 1000,
+     "roster": 12
+    },
+    {
+     "day": 25,
+     "pantryKcal": 47436,
+     "freshKcal": 30023,
+     "freshDays": 32.992,
+     "doomedKcal": 5621,
+     "burnAvg": 910,
+     "roster": 12
+    },
+    {
+     "day": 25,
+     "pantryKcal": 47417,
+     "freshKcal": 26876,
+     "freshDays": 29.534,
+     "doomedKcal": 3000,
+     "burnAvg": 910,
+     "roster": 12
+    },
+    {
+     "day": 27,
+     "pantryKcal": 55756,
+     "freshKcal": 36536,
+     "freshDays": 48.53,
+     "doomedKcal": 5655,
+     "burnAvg": 753,
+     "roster": 12
+    },
+    {
+     "day": 28,
+     "pantryKcal": 57609,
+     "freshKcal": 36585,
+     "freshDays": 56.038,
+     "doomedKcal": 4471,
+     "burnAvg": 653,
+     "roster": 12
+    },
+    {
+     "day": 29,
+     "pantryKcal": 53959,
+     "freshKcal": 33821,
+     "freshDays": 58.456,
+     "doomedKcal": 15864,
+     "burnAvg": 579,
+     "roster": 12
+    },
+    {
+     "day": 30,
+     "pantryKcal": 43975,
+     "freshKcal": 24557,
+     "freshDays": 51.252,
+     "doomedKcal": 6117,
+     "burnAvg": 479,
+     "roster": 12
+    },
+    {
+     "day": 31,
+     "pantryKcal": 45281,
+     "freshKcal": 23083,
+     "freshDays": 62.531,
+     "doomedKcal": 5890,
+     "burnAvg": 369,
+     "roster": 12
+    },
+    {
+     "day": 31,
+     "pantryKcal": 46131,
+     "freshKcal": 23933,
+     "freshDays": 64.834,
+     "doomedKcal": 5890,
+     "burnAvg": 369,
+     "roster": 12
+    },
+    {
+     "day": 33,
+     "pantryKcal": 42388,
+     "freshKcal": 25506,
+     "freshDays": 73.053,
+     "doomedKcal": 7556,
+     "burnAvg": 349,
+     "roster": 12
+    },
+    {
+     "day": 33,
+     "pantryKcal": 46536,
+     "freshKcal": 26454,
+     "freshDays": 75.768,
+     "doomedKcal": 6956,
+     "burnAvg": 349,
+     "roster": 12
+    },
+    {
+     "day": 35,
+     "pantryKcal": 43787,
+     "freshKcal": 28041,
+     "freshDays": 75.379,
+     "doomedKcal": 8050,
+     "burnAvg": 372,
+     "roster": 12
+    },
+    {
+     "day": 36,
+     "pantryKcal": 41961,
+     "freshKcal": 19935,
+     "freshDays": 57.568,
+     "doomedKcal": 3600,
+     "burnAvg": 346,
+     "roster": 12
+    },
+    {
+     "day": 36,
+     "pantryKcal": 49510,
+     "freshKcal": 27484,
+     "freshDays": 79.368,
+     "doomedKcal": 10100,
+     "burnAvg": 346,
+     "roster": 12
+    },
+    {
+     "day": 38,
+     "pantryKcal": 47370,
+     "freshKcal": 25344,
+     "freshDays": 67.713,
+     "doomedKcal": 8250,
+     "burnAvg": 374,
+     "roster": 12
+    },
+    {
+     "day": 39,
+     "pantryKcal": 47257,
+     "freshKcal": 25231,
+     "freshDays": 68.991,
+     "doomedKcal": 8200,
+     "burnAvg": 366,
+     "roster": 12
+    },
+    {
+     "day": 40,
+     "pantryKcal": 41801,
+     "freshKcal": 22903,
+     "freshDays": 63.771,
+     "doomedKcal": 7470,
+     "burnAvg": 359,
+     "roster": 12
+    },
+    {
+     "day": 40,
+     "pantryKcal": 41151,
+     "freshKcal": 19053,
+     "freshDays": 53.051,
+     "doomedKcal": 3470,
+     "burnAvg": 359,
+     "roster": 12
+    },
+    {
+     "day": 42,
+     "pantryKcal": 41706,
+     "freshKcal": 22692,
+     "freshDays": 61.711,
+     "doomedKcal": 9040,
+     "burnAvg": 368,
+     "roster": 12
+    },
+    {
+     "day": 43,
+     "pantryKcal": 37497,
+     "freshKcal": 15283,
+     "freshDays": 41.562,
+     "doomedKcal": 6000,
+     "burnAvg": 368,
+     "roster": 12
+    },
+    {
+     "day": 43,
+     "pantryKcal": 36787,
+     "freshKcal": 15693,
+     "freshDays": 42.677,
+     "doomedKcal": 6000,
+     "burnAvg": 368,
+     "roster": 12
+    },
+    {
+     "day": 45,
+     "pantryKcal": 36690,
+     "freshKcal": 18730,
+     "freshDays": 48.131,
+     "doomedKcal": 9640,
+     "burnAvg": 389,
+     "roster": 12
+    },
+    {
+     "day": 45,
+     "pantryKcal": 44281,
+     "freshKcal": 23121,
+     "freshDays": 59.415,
+     "doomedKcal": 13740,
+     "burnAvg": 389,
+     "roster": 12
+    },
+    {
+     "day": 47,
+     "pantryKcal": 38089,
+     "freshKcal": 16929,
+     "freshDays": 39.607,
+     "doomedKcal": 6850,
+     "burnAvg": 427,
+     "roster": 12
+    },
+    {
+     "day": 47,
+     "pantryKcal": 42239,
+     "freshKcal": 21079,
+     "freshDays": 49.316,
+     "doomedKcal": 10100,
+     "burnAvg": 427,
+     "roster": 12
+    },
+    {
+     "day": 49,
+     "pantryKcal": 35685,
+     "freshKcal": 17725,
+     "freshDays": 42.462,
+     "doomedKcal": 7070,
+     "burnAvg": 417,
+     "roster": 12
+    },
+    {
+     "day": 50,
+     "pantryKcal": 26691,
+     "freshKcal": 11829,
+     "freshDays": 27.042,
+     "doomedKcal": 450,
+     "burnAvg": 437,
+     "roster": 12
+    },
+    {
+     "day": 51,
+     "pantryKcal": 32630,
+     "freshKcal": 13528,
+     "freshDays": 31.44,
+     "doomedKcal": 1000,
+     "burnAvg": 430,
+     "roster": 12
+    },
+    {
+     "day": 52,
+     "pantryKcal": 39970,
+     "freshKcal": 17668,
+     "freshDays": 41.061,
+     "doomedKcal": 4780,
+     "burnAvg": 430,
+     "roster": 12
+    },
+    {
+     "day": 52,
+     "pantryKcal": 41610,
+     "freshKcal": 19308,
+     "freshDays": 44.873,
+     "doomedKcal": 4780,
+     "burnAvg": 430,
+     "roster": 12
+    },
+    {
+     "day": 54,
+     "pantryKcal": 45101,
+     "freshKcal": 22799,
+     "freshDays": 51.152,
+     "doomedKcal": 9840,
+     "burnAvg": 446,
+     "roster": 12
+    },
+    {
+     "day": 55,
+     "pantryKcal": 40058,
+     "freshKcal": 20956,
+     "freshDays": 47.305,
+     "doomedKcal": 8390,
+     "burnAvg": 443,
+     "roster": 12
+    },
+    {
+     "day": 56,
+     "pantryKcal": 41444,
+     "freshKcal": 20430,
+     "freshDays": 42.677,
+     "doomedKcal": 6600,
+     "burnAvg": 479,
+     "roster": 10
+    },
+    {
+     "day": 56,
+     "pantryKcal": 46472,
+     "freshKcal": 30570,
+     "freshDays": 63.859,
+     "doomedKcal": 16200,
+     "burnAvg": 479,
+     "roster": 10
+    },
+    {
+     "day": 58,
+     "pantryKcal": 33959,
+     "freshKcal": 16937,
+     "freshDays": 36.357,
+     "doomedKcal": 7450,
+     "burnAvg": 466,
+     "roster": 10
+    },
+    {
+     "day": 59,
+     "pantryKcal": 34476,
+     "freshKcal": 17454,
+     "freshDays": 36.255,
+     "doomedKcal": 5050,
+     "burnAvg": 481,
+     "roster": 10
+    },
+    {
+     "day": 59,
+     "pantryKcal": 45766,
+     "freshKcal": 28744,
+     "freshDays": 59.706,
+     "doomedKcal": 14450,
+     "burnAvg": 481,
+     "roster": 10
+    },
+    {
+     "day": 61,
+     "pantryKcal": 36762,
+     "freshKcal": 19788,
+     "freshDays": 42.102,
+     "doomedKcal": 6930,
+     "burnAvg": 470,
+     "roster": 10
+    },
+    {
+     "day": 62,
+     "pantryKcal": 37970,
+     "freshKcal": 20996,
+     "freshDays": 43.794,
+     "doomedKcal": 7000,
+     "burnAvg": 479,
+     "roster": 10
+    },
+    {
+     "day": 63,
+     "pantryKcal": 38677,
+     "freshKcal": 22983,
+     "freshDays": 50.181,
+     "doomedKcal": 7890,
+     "burnAvg": 458,
+     "roster": 10
+    },
+    {
+     "day": 64,
+     "pantryKcal": 32859,
+     "freshKcal": 20347,
+     "freshDays": 45.13,
+     "doomedKcal": 9550,
+     "burnAvg": 451,
+     "roster": 10
+    },
+    {
+     "day": 65,
+     "pantryKcal": 35551,
+     "freshKcal": 20882,
+     "freshDays": 45.171,
+     "doomedKcal": 5600,
+     "burnAvg": 462,
+     "roster": 10
+    },
+    {
+     "day": 65,
+     "pantryKcal": 46898,
+     "freshKcal": 29080,
+     "freshDays": 62.905,
+     "doomedKcal": 12000,
+     "burnAvg": 462,
+     "roster": 9
+    },
+    {
+     "day": 67,
+     "pantryKcal": 39195,
+     "freshKcal": 21377,
+     "freshDays": 51.124,
+     "doomedKcal": 7530,
+     "burnAvg": 418,
+     "roster": 9
+    },
+    {
+     "day": 67,
+     "pantryKcal": 39587,
+     "freshKcal": 21769,
+     "freshDays": 52.061,
+     "doomedKcal": 7530,
+     "burnAvg": 418,
+     "roster": 9
+    },
+    {
+     "day": 69,
+     "pantryKcal": 39724,
+     "freshKcal": 21906,
+     "freshDays": 47.637,
+     "doomedKcal": 7230,
+     "burnAvg": 460,
+     "roster": 9
+    },
+    {
+     "day": 69,
+     "pantryKcal": 39724,
+     "freshKcal": 21906,
+     "freshDays": 47.637,
+     "doomedKcal": 7230,
+     "burnAvg": 460,
+     "roster": 9
+    },
+    {
+     "day": 71,
+     "pantryKcal": 31101,
+     "freshKcal": 18352,
+     "freshDays": 38.94,
+     "doomedKcal": 6450,
+     "burnAvg": 471,
+     "roster": 8
+    },
+    {
+     "day": 71,
+     "pantryKcal": 37046,
+     "freshKcal": 24297,
+     "freshDays": 51.555,
+     "doomedKcal": 10550,
+     "burnAvg": 471,
+     "roster": 8
+    },
+    {
+     "day": 73,
+     "pantryKcal": 35952,
+     "freshKcal": 19859,
+     "freshDays": 40.754,
+     "doomedKcal": 5840,
+     "burnAvg": 487,
+     "roster": 8
+    },
+    {
+     "day": 73,
+     "pantryKcal": 41992,
+     "freshKcal": 25899,
+     "freshDays": 53.15,
+     "doomedKcal": 9090,
+     "burnAvg": 487,
+     "roster": 8
+    },
+    {
+     "day": 75,
+     "pantryKcal": 34168,
+     "freshKcal": 19947,
+     "freshDays": 38.025,
+     "doomedKcal": 5240,
+     "burnAvg": 525,
+     "roster": 8
+    },
+    {
+     "day": 75,
+     "pantryKcal": 34168,
+     "freshKcal": 19947,
+     "freshDays": 38.025,
+     "doomedKcal": 5240,
+     "burnAvg": 525,
+     "roster": 8
+    },
+    {
+     "day": 77,
+     "pantryKcal": 29647,
+     "freshKcal": 16290,
+     "freshDays": 32.376,
+     "doomedKcal": 4800,
+     "burnAvg": 503,
+     "roster": 8
+    },
+    {
+     "day": 78,
+     "pantryKcal": 19592,
+     "freshKcal": 11915,
+     "freshDays": 23.953,
+     "doomedKcal": 3800,
+     "burnAvg": 497,
+     "roster": 8
+    },
+    {
+     "day": 79,
+     "pantryKcal": 15936,
+     "freshKcal": 9536,
+     "freshDays": 19.281,
+     "doomedKcal": 3250,
+     "burnAvg": 495,
+     "roster": 8
+    },
+    {
+     "day": 80,
+     "pantryKcal": 19188,
+     "freshKcal": 9588,
+     "freshDays": 20.525,
+     "doomedKcal": 4400,
+     "burnAvg": 467,
+     "roster": 8
+    },
+    {
+     "day": 81,
+     "pantryKcal": 19898,
+     "freshKcal": 7098,
+     "freshDays": 14.744,
+     "doomedKcal": 2320,
+     "burnAvg": 481,
+     "roster": 8
+    },
+    {
+     "day": 81,
+     "pantryKcal": 34288,
+     "freshKcal": 21488,
+     "freshDays": 44.634,
+     "doomedKcal": 2320,
+     "burnAvg": 481,
+     "roster": 8
+    },
+    {
+     "day": 83,
+     "pantryKcal": 48464,
+     "freshKcal": 32488,
+     "freshDays": 69.546,
+     "doomedKcal": 3000,
+     "burnAvg": 467,
+     "roster": 8
+    },
+    {
+     "day": 84,
+     "pantryKcal": 47848,
+     "freshKcal": 31872,
+     "freshDays": 65.121,
+     "doomedKcal": 15790,
+     "burnAvg": 489,
+     "roster": 8
+    },
+    {
+     "day": 84,
+     "pantryKcal": 42622,
+     "freshKcal": 34182,
+     "freshDays": 69.84,
+     "doomedKcal": 15790,
+     "burnAvg": 489,
+     "roster": 8
+    },
+    {
+     "day": 86,
+     "pantryKcal": 22932,
+     "freshKcal": 8147,
+     "freshDays": 11.905,
+     "doomedKcal": 600,
+     "burnAvg": 684,
+     "roster": 8
+    },
+    {
+     "day": 86,
+     "pantryKcal": 23088,
+     "freshKcal": 8712,
+     "freshDays": 12.73,
+     "doomedKcal": 600,
+     "burnAvg": 684,
+     "roster": 8
+    },
+    {
+     "day": 88,
+     "pantryKcal": 22177,
+     "freshKcal": 7801,
+     "freshDays": 11.202,
+     "doomedKcal": 2600,
+     "burnAvg": 696,
+     "roster": 8
+    },
+    {
+     "day": 89,
+     "pantryKcal": 21916,
+     "freshKcal": 7540,
+     "freshDays": 10.939,
+     "doomedKcal": 800,
+     "burnAvg": 689,
+     "roster": 8
+    },
+    {
+     "day": 89,
+     "pantryKcal": 23885,
+     "freshKcal": 9509,
+     "freshDays": 13.796,
+     "doomedKcal": 800,
+     "burnAvg": 689,
+     "roster": 8
+    },
+    {
+     "day": 91,
+     "pantryKcal": 27104,
+     "freshKcal": 12728,
+     "freshDays": 18.489,
+     "doomedKcal": 3850,
+     "burnAvg": 688,
+     "roster": 8
+    },
+    {
+     "day": 92,
+     "pantryKcal": 18350,
+     "freshKcal": 10062,
+     "freshDays": 19.201,
+     "doomedKcal": 2600,
+     "burnAvg": 524,
+     "roster": 8
+    },
+    {
+     "day": 93,
+     "pantryKcal": 15975,
+     "freshKcal": 7791,
+     "freshDays": 15.431,
+     "doomedKcal": 0,
+     "burnAvg": 505,
+     "roster": 8
+    },
+    {
+     "day": 94,
+     "pantryKcal": 21701,
+     "freshKcal": 12357,
+     "freshDays": 23.541,
+     "doomedKcal": 3050,
+     "burnAvg": 525,
+     "roster": 8
+    },
+    {
+     "day": 95,
+     "pantryKcal": 23682,
+     "freshKcal": 11138,
+     "freshDays": 23.85,
+     "doomedKcal": 4000,
+     "burnAvg": 467,
+     "roster": 8
+    },
+    {
+     "day": 96,
+     "pantryKcal": 24445,
+     "freshKcal": 8748,
+     "freshDays": 17.652,
+     "doomedKcal": 3640,
+     "burnAvg": 496,
+     "roster": 8
+    },
+    {
+     "day": 96,
+     "pantryKcal": 33944,
+     "freshKcal": 18247,
+     "freshDays": 36.82,
+     "doomedKcal": 6890,
+     "burnAvg": 496,
+     "roster": 8
+    },
+    {
+     "day": 98,
+     "pantryKcal": 30469,
+     "freshKcal": 14772,
+     "freshDays": 31.632,
+     "doomedKcal": 3000,
+     "burnAvg": 467,
+     "roster": 8
+    },
+    {
+     "day": 98,
+     "pantryKcal": 24836,
+     "freshKcal": 14772,
+     "freshDays": 31.632,
+     "doomedKcal": 3000,
+     "burnAvg": 467,
+     "roster": 8
+    },
+    {
+     "day": 100,
+     "pantryKcal": 33148,
+     "freshKcal": 17407,
+     "freshDays": 38.67,
+     "doomedKcal": 4350,
+     "burnAvg": 450,
+     "roster": 7
+    },
+    {
+     "day": 100,
+     "pantryKcal": 42185,
+     "freshKcal": 26444,
+     "freshDays": 58.746,
+     "doomedKcal": 12850,
+     "burnAvg": 450,
+     "roster": 7
+    },
+    {
+     "day": 102,
+     "pantryKcal": 28379,
+     "freshKcal": 12638,
+     "freshDays": 25.68,
+     "doomedKcal": 5630,
+     "burnAvg": 492,
+     "roster": 6
+    },
+    {
+     "day": 102,
+     "pantryKcal": 29426,
+     "freshKcal": 13685,
+     "freshDays": 27.807,
+     "doomedKcal": 5630,
+     "burnAvg": 492,
+     "roster": 6
+    },
+    {
+     "day": 104,
+     "pantryKcal": 26231,
+     "freshKcal": 10490,
+     "freshDays": 24.274,
+     "doomedKcal": 1400,
+     "burnAvg": 432,
+     "roster": 6
+    },
+    {
+     "day": 104,
+     "pantryKcal": 26231,
+     "freshKcal": 10490,
+     "freshDays": 24.274,
+     "doomedKcal": 1400,
+     "burnAvg": 432,
+     "roster": 6
+    },
+    {
+     "day": 106,
+     "pantryKcal": 14075,
+     "freshKcal": 6187,
+     "freshDays": 12.227,
+     "doomedKcal": 800,
+     "burnAvg": 506,
+     "roster": 7
+    },
+    {
+     "day": 107,
+     "pantryKcal": 12792,
+     "freshKcal": 4800,
+     "freshDays": 9.622,
+     "doomedKcal": 2200,
+     "burnAvg": 499,
+     "roster": 9
+    },
+    {
+     "day": 107,
+     "pantryKcal": 12792,
+     "freshKcal": 4800,
+     "freshDays": 9.622,
+     "doomedKcal": 2200,
+     "burnAvg": 499,
+     "roster": 9
+    },
+    {
+     "day": 109,
+     "pantryKcal": 15258,
+     "freshKcal": 3826,
+     "freshDays": 8.008,
+     "doomedKcal": 600,
+     "burnAvg": 478,
+     "roster": 9
+    },
+    {
+     "day": 110,
+     "pantryKcal": 20658,
+     "freshKcal": 6026,
+     "freshDays": 11.835,
+     "doomedKcal": 2000,
+     "burnAvg": 509,
+     "roster": 9
+    },
+    {
+     "day": 110,
+     "pantryKcal": 21677,
+     "freshKcal": 7045,
+     "freshDays": 13.836,
+     "doomedKcal": 2000,
+     "burnAvg": 509,
+     "roster": 9
+    },
+    {
+     "day": 112,
+     "pantryKcal": 22239,
+     "freshKcal": 7607,
+     "freshDays": 16.613,
+     "doomedKcal": 2400,
+     "burnAvg": 458,
+     "roster": 9
+    },
+    {
+     "day": 113,
+     "pantryKcal": 19755,
+     "freshKcal": 7563,
+     "freshDays": 16.726,
+     "doomedKcal": 2400,
+     "burnAvg": 452,
+     "roster": 9
+    },
+    {
+     "day": 114,
+     "pantryKcal": 24399,
+     "freshKcal": 9217,
+     "freshDays": 19.173,
+     "doomedKcal": 0,
+     "burnAvg": 481,
+     "roster": 9
+    },
+    {
+     "day": 115,
+     "pantryKcal": 27399,
+     "freshKcal": 12217,
+     "freshDays": 26.725,
+     "doomedKcal": 3600,
+     "burnAvg": 457,
+     "roster": 9
+    },
+    {
+     "day": 115,
+     "pantryKcal": 38849,
+     "freshKcal": 23667,
+     "freshDays": 51.772,
+     "doomedKcal": 15050,
+     "burnAvg": 457,
+     "roster": 9
+    },
+    {
+     "day": 117,
+     "pantryKcal": 27568,
+     "freshKcal": 12386,
+     "freshDays": 25.131,
+     "doomedKcal": 4450,
+     "burnAvg": 493,
+     "roster": 9
+    },
+    {
+     "day": 118,
+     "pantryKcal": 26799,
+     "freshKcal": 11617,
+     "freshDays": 24.642,
+     "doomedKcal": 3000,
+     "burnAvg": 471,
+     "roster": 9
+    },
+    {
+     "day": 119,
+     "pantryKcal": 23470,
+     "freshKcal": 8288,
+     "freshDays": 17.581,
+     "doomedKcal": 4300,
+     "burnAvg": 471,
+     "roster": 9
+    },
+    {
+     "day": 119,
+     "pantryKcal": 19880,
+     "freshKcal": 10328,
+     "freshDays": 21.908,
+     "doomedKcal": 4300,
+     "burnAvg": 471,
+     "roster": 9
+    },
+    {
+     "day": 121,
+     "pantryKcal": 18813,
+     "freshKcal": 10533,
+     "freshDays": 23.186,
+     "doomedKcal": 400,
+     "burnAvg": 454,
+     "roster": 9
+    },
+    {
+     "day": 122,
+     "pantryKcal": 22113,
+     "freshKcal": 13073,
+     "freshDays": 28.777,
+     "doomedKcal": 3830,
+     "burnAvg": 454,
+     "roster": 9
+    },
+    {
+     "day": 122,
+     "pantryKcal": 25024,
+     "freshKcal": 15984,
+     "freshDays": 35.185,
+     "doomedKcal": 3830,
+     "burnAvg": 454,
+     "roster": 9
+    },
+    {
+     "day": 123,
+     "pantryKcal": 25815,
+     "freshKcal": 13771,
+     "freshDays": 29.3,
+     "doomedKcal": 2050,
+     "burnAvg": 470,
+     "roster": 9
+    },
+    {
+     "day": 125,
+     "pantryKcal": 15934,
+     "freshKcal": 4450,
+     "freshDays": 9.933,
+     "doomedKcal": 0,
+     "burnAvg": 448,
+     "roster": 9
+    },
+    {
+     "day": 125,
+     "pantryKcal": 14334,
+     "freshKcal": 2850,
+     "freshDays": 6.362,
+     "doomedKcal": 0,
+     "burnAvg": 448,
+     "roster": 9
+    },
+    {
+     "day": 127,
+     "pantryKcal": 4000,
+     "freshKcal": 4000,
+     "freshDays": 4.367,
+     "doomedKcal": 0,
+     "burnAvg": 916,
+     "roster": 8
+    },
+    {
+     "day": 128,
+     "pantryKcal": 4400,
+     "freshKcal": 4400,
+     "freshDays": 4.663,
+     "doomedKcal": 0,
+     "burnAvg": 944,
+     "roster": 8
+    },
+    {
+     "day": 129,
+     "pantryKcal": 5069,
+     "freshKcal": 5069,
+     "freshDays": 3.724,
+     "doomedKcal": 0,
+     "burnAvg": 1361,
+     "roster": 8
+    },
+    {
+     "day": 130,
+     "pantryKcal": 4800,
+     "freshKcal": 4800,
+     "freshDays": 2.71,
+     "doomedKcal": 0,
+     "burnAvg": 1771,
+     "roster": 8
+    },
+    {
+     "day": 131,
+     "pantryKcal": 14000,
+     "freshKcal": 14000,
+     "freshDays": 7.539,
+     "doomedKcal": 4800,
+     "burnAvg": 1857,
+     "roster": 8
+    },
+    {
+     "day": 132,
+     "pantryKcal": 12209,
+     "freshKcal": 12209,
+     "freshDays": 6.378,
+     "doomedKcal": 3200,
+     "burnAvg": 1914,
+     "roster": 8
+    },
+    {
+     "day": 133,
+     "pantryKcal": 11209,
+     "freshKcal": 11209,
+     "freshDays": 5.889,
+     "doomedKcal": 3950,
+     "burnAvg": 1904,
+     "roster": 8
+    },
+    {
+     "day": 134,
+     "pantryKcal": 7400,
+     "freshKcal": 7400,
+     "freshDays": 3.803,
+     "doomedKcal": 0,
+     "burnAvg": 1946,
+     "roster": 8
+    },
+    {
+     "day": 135,
+     "pantryKcal": 4939,
+     "freshKcal": 4939,
+     "freshDays": 2.261,
+     "doomedKcal": 0,
+     "burnAvg": 2184,
+     "roster": 8
+    },
+    {
+     "day": 136,
+     "pantryKcal": 3600,
+     "freshKcal": 3600,
+     "freshDays": 1.634,
+     "doomedKcal": 0,
+     "burnAvg": 2203,
+     "roster": 7
+    },
+    {
+     "day": 137,
+     "pantryKcal": 2600,
+     "freshKcal": 2600,
+     "freshDays": 1.343,
+     "doomedKcal": 0,
+     "burnAvg": 1937,
+     "roster": 5
+    },
+    {
+     "day": 137,
+     "pantryKcal": 4732,
+     "freshKcal": 4732,
+     "freshDays": 2.443,
+     "doomedKcal": 0,
+     "burnAvg": 1937,
+     "roster": 5
+    },
+    {
+     "day": 139,
+     "pantryKcal": 7140,
+     "freshKcal": 6340,
+     "freshDays": 3.151,
+     "doomedKcal": 0,
+     "burnAvg": 2012,
+     "roster": 6
+    },
+    {
+     "day": 139,
+     "pantryKcal": 7140,
+     "freshKcal": 6340,
+     "freshDays": 3.151,
+     "doomedKcal": 0,
+     "burnAvg": 2012,
+     "roster": 6
+    },
+    {
+     "day": 141,
+     "pantryKcal": 10186,
+     "freshKcal": 9386,
+     "freshDays": 4.589,
+     "doomedKcal": 0,
+     "burnAvg": 2045,
+     "roster": 8
+    },
+    {
+     "day": 141,
+     "pantryKcal": 12386,
+     "freshKcal": 11586,
+     "freshDays": 5.665,
+     "doomedKcal": 1300,
+     "burnAvg": 2045,
+     "roster": 8
+    },
+    {
+     "day": 143,
+     "pantryKcal": 3864,
+     "freshKcal": 3864,
+     "freshDays": 2.082,
+     "doomedKcal": 0,
+     "burnAvg": 1856,
+     "roster": 8
+    },
+    {
+     "day": 144,
+     "pantryKcal": 3000,
+     "freshKcal": 3000,
+     "freshDays": 1.453,
+     "doomedKcal": 0,
+     "burnAvg": 2065,
+     "roster": 9
+    },
+    {
+     "day": 144,
+     "pantryKcal": 4294,
+     "freshKcal": 4294,
+     "freshDays": 2.079,
+     "doomedKcal": 0,
+     "burnAvg": 2065,
+     "roster": 9
+    },
+    {
+     "day": 146,
+     "pantryKcal": 3436,
+     "freshKcal": 3436,
+     "freshDays": 1.756,
+     "doomedKcal": 0,
+     "burnAvg": 1957,
+     "roster": 8
+    },
+    {
+     "day": 147,
+     "pantryKcal": 3727,
+     "freshKcal": 3727,
+     "freshDays": 1.899,
+     "doomedKcal": 0,
+     "burnAvg": 1963,
+     "roster": 8
+    },
+    {
+     "day": 147,
+     "pantryKcal": 3727,
+     "freshKcal": 3727,
+     "freshDays": 1.899,
+     "doomedKcal": 0,
+     "burnAvg": 1963,
+     "roster": 8
+    },
+    {
+     "day": 149,
+     "pantryKcal": 4922,
+     "freshKcal": 4922,
+     "freshDays": 2.513,
+     "doomedKcal": 0,
+     "burnAvg": 1959,
+     "roster": 8
+    },
+    {
+     "day": 150,
+     "pantryKcal": 7299,
+     "freshKcal": 7299,
+     "freshDays": 3.194,
+     "doomedKcal": 0,
+     "burnAvg": 2286,
+     "roster": 8
+    },
+    {
+     "day": 150,
+     "pantryKcal": 7299,
+     "freshKcal": 7299,
+     "freshDays": 3.194,
+     "doomedKcal": 0,
+     "burnAvg": 2286,
+     "roster": 8
+    },
+    {
+     "day": 152,
+     "pantryKcal": 11743,
+     "freshKcal": 9961,
+     "freshDays": 4.024,
+     "doomedKcal": 0,
+     "burnAvg": 2476,
+     "roster": 8
+    },
+    {
+     "day": 153,
+     "pantryKcal": 14250,
+     "freshKcal": 9783,
+     "freshDays": 4.089,
+     "doomedKcal": 0,
+     "burnAvg": 2393,
+     "roster": 8
+    },
+    {
+     "day": 154,
+     "pantryKcal": 16051,
+     "freshKcal": 8663,
+     "freshDays": 3.657,
+     "doomedKcal": 0,
+     "burnAvg": 2369,
+     "roster": 8
+    },
+    {
+     "day": 155,
+     "pantryKcal": 12296,
+     "freshKcal": 8364,
+     "freshDays": 3.54,
+     "doomedKcal": 0,
+     "burnAvg": 2362,
+     "roster": 8
+    },
+    {
+     "day": 155,
+     "pantryKcal": 7859,
+     "freshKcal": 7364,
+     "freshDays": 3.117,
+     "doomedKcal": 0,
+     "burnAvg": 2362,
+     "roster": 8
+    },
+    {
+     "day": 157,
+     "pantryKcal": 10222,
+     "freshKcal": 9628,
+     "freshDays": 4.139,
+     "doomedKcal": 0,
+     "burnAvg": 2326,
+     "roster": 7
+    },
+    {
+     "day": 158,
+     "pantryKcal": 13148,
+     "freshKcal": 11168,
+     "freshDays": 4.892,
+     "doomedKcal": 0,
+     "burnAvg": 2283,
+     "roster": 8
+    },
+    {
+     "day": 158,
+     "pantryKcal": 13148,
+     "freshKcal": 11168,
+     "freshDays": 4.892,
+     "doomedKcal": 0,
+     "burnAvg": 2283,
+     "roster": 8
+    },
+    {
+     "day": 160,
+     "pantryKcal": 14146,
+     "freshKcal": 13156,
+     "freshDays": 5.886,
+     "doomedKcal": 2600,
+     "burnAvg": 2235,
+     "roster": 9
+    },
+    {
+     "day": 160,
+     "pantryKcal": 14146,
+     "freshKcal": 13156,
+     "freshDays": 5.886,
+     "doomedKcal": 2600,
+     "burnAvg": 2235,
+     "roster": 9
+    },
+    {
+     "day": 162,
+     "pantryKcal": 7856,
+     "freshKcal": 7856,
+     "freshDays": 3.515,
+     "doomedKcal": 0,
+     "burnAvg": 2235,
+     "roster": 10
+    },
+    {
+     "day": 162,
+     "pantryKcal": 4747,
+     "freshKcal": 4747,
+     "freshDays": 2.124,
+     "doomedKcal": 0,
+     "burnAvg": 2235,
+     "roster": 9
+    },
+    {
+     "day": 164,
+     "pantryKcal": 7712,
+     "freshKcal": 7712,
+     "freshDays": 3.461,
+     "doomedKcal": 2000,
+     "burnAvg": 2229,
+     "roster": 9
+    },
+    {
+     "day": 165,
+     "pantryKcal": 5697,
+     "freshKcal": 5697,
+     "freshDays": 2.556,
+     "doomedKcal": 600,
+     "burnAvg": 2229,
+     "roster": 9
+    },
+    {
+     "day": 166,
+     "pantryKcal": 3100,
+     "freshKcal": 3100,
+     "freshDays": 1.561,
+     "doomedKcal": 0,
+     "burnAvg": 1986,
+     "roster": 9
+    },
+    {
+     "day": 167,
+     "pantryKcal": 4400,
+     "freshKcal": 4400,
+     "freshDays": 2.425,
+     "doomedKcal": 0,
+     "burnAvg": 1814,
+     "roster": 9
+    },
+    {
+     "day": 168,
+     "pantryKcal": 6300,
+     "freshKcal": 6300,
+     "freshDays": 3.494,
+     "doomedKcal": 0,
+     "burnAvg": 1803,
+     "roster": 9
+    },
+    {
+     "day": 169,
+     "pantryKcal": 4700,
+     "freshKcal": 4700,
+     "freshDays": 2.76,
+     "doomedKcal": 0,
+     "burnAvg": 1703,
+     "roster": 9
+    },
+    {
+     "day": 170,
+     "pantryKcal": 7848,
+     "freshKcal": 7848,
+     "freshDays": 4.894,
+     "doomedKcal": 0,
+     "burnAvg": 1604,
+     "roster": 9
+    },
+    {
+     "day": 171,
+     "pantryKcal": 5648,
+     "freshKcal": 5648,
+     "freshDays": 3.522,
+     "doomedKcal": 0,
+     "burnAvg": 1604,
+     "roster": 8
+    },
+    {
+     "day": 172,
+     "pantryKcal": 7848,
+     "freshKcal": 7848,
+     "freshDays": 4.894,
+     "doomedKcal": 1200,
+     "burnAvg": 1604,
+     "roster": 8
+    },
+    {
+     "day": 173,
+     "pantryKcal": 9379,
+     "freshKcal": 9379,
+     "freshDays": 4.97,
+     "doomedKcal": 3400,
+     "burnAvg": 1887,
+     "roster": 7
+    },
+    {
+     "day": 174,
+     "pantryKcal": 8572,
+     "freshKcal": 8572,
+     "freshDays": 4.107,
+     "doomedKcal": 0,
+     "burnAvg": 2087,
+     "roster": 7
+    },
+    {
+     "day": 175,
+     "pantryKcal": 7573,
+     "freshKcal": 7573,
+     "freshDays": 3.569,
+     "doomedKcal": 0,
+     "burnAvg": 2122,
+     "roster": 7
+    },
+    {
+     "day": 176,
+     "pantryKcal": 7032,
+     "freshKcal": 7032,
+     "freshDays": 3.109,
+     "doomedKcal": 0,
+     "burnAvg": 2262,
+     "roster": 7
+    },
+    {
+     "day": 177,
+     "pantryKcal": 6479,
+     "freshKcal": 6479,
+     "freshDays": 2.848,
+     "doomedKcal": 0,
+     "burnAvg": 2275,
+     "roster": 8
+    },
+    {
+     "day": 178,
+     "pantryKcal": 5900,
+     "freshKcal": 5900,
+     "freshDays": 2.647,
+     "doomedKcal": 0,
+     "burnAvg": 2229,
+     "roster": 8
+    },
+    {
+     "day": 179,
+     "pantryKcal": 5000,
+     "freshKcal": 5000,
+     "freshDays": 2.517,
+     "doomedKcal": 0,
+     "burnAvg": 1986,
+     "roster": 8
+    },
+    {
+     "day": 180,
+     "pantryKcal": 6297,
+     "freshKcal": 6297,
+     "freshDays": 3.17,
+     "doomedKcal": 0,
+     "burnAvg": 1986,
+     "roster": 8
+    },
+    {
+     "day": 181,
+     "pantryKcal": 6597,
+     "freshKcal": 6597,
+     "freshDays": 3.321,
+     "doomedKcal": 1600,
+     "burnAvg": 1986,
+     "roster": 8
+    }
+   ],
+   "dayInflow": {
+    "2": {
+     "share_surplus": 200
+    },
+    "3": {
+     "traps": 238,
+     "ambient:villagelives": 806,
+     "share_surplus": 600
+    },
+    "4": {
+     "share_surplus": 1200
+    },
+    "5": {
+     "share_surplus": 1400
+    },
+    "6": {
+     "away_wild": 3287,
+     "ambient:villagelives": 1998,
+     "share_surplus": 1800
+    },
+    "7": {
+     "share_surplus": 2200
+    },
+    "8": {
+     "events:ambient": 100,
+     "ambient:villagelives": 789,
+     "share_surplus": 2400
+    },
+    "9": {
+     "away_wild": 5537,
+     "events:ambient": 100,
+     "share_surplus": 1800
+    },
+    "10": {
+     "away_wild": 1052,
+     "share_surplus": 2400
+    },
+    "11": {
+     "away_wild": 419,
+     "ambient:villagelives": 433,
+     "share_surplus": 2600
+    },
+    "12": {
+     "share_surplus": 3400
+    },
+    "13": {
+     "away_wild": 307,
+     "share_surplus": 3200
+    },
+    "14": {
+     "events:ambient": 100,
+     "share_surplus": 3400
+    },
+    "15": {
+     "away_wild": 242,
+     "share_surplus": 3200
+    },
+    "16": {
+     "share_surplus": 4400
+    },
+    "17": {
+     "away_wild": 445,
+     "share_surplus": 5200
+    },
+    "18": {
+     "away_wild": 513,
+     "scholar_home": 12950,
+     "events:special": 400,
+     "share_surplus": 3600
+    },
+    "19": {
+     "events:ambient": 85,
+     "share_surplus": 2600
+    },
+    "20": {
+     "scholar_home": 4180,
+     "ambient:villagelives": 1404,
+     "share_surplus": 3600
+    },
+    "21": {
+     "away_wild": 2513,
+     "scholar_home": 1400,
+     "ambient:villagelives": 2853,
+     "share_surplus": 4000
+    },
+    "22": {
+     "away_wild": 397,
+     "share_surplus": 4600
+    },
+    "23": {
+     "away_wild": 1021,
+     "scholar_home": 4210,
+     "share_surplus": 4600
+    },
+    "24": {
+     "scholar_home": 5700,
+     "away_wild": 442,
+     "share_surplus": 4000
+    },
+    "25": {
+     "away_wild": 764,
+     "events:ambient": 100,
+     "ambient:villagelives": 391,
+     "share_surplus": 4400
+    },
+    "26": {
+     "away_wild": 471,
+     "scholar_home": 12160,
+     "share_surplus": 5200
+    },
+    "27": {
+     "scholar_home": 8200,
+     "ambient:villagelives": 504,
+     "share_surplus": 6400
+    },
+    "28": {
+     "away_wild": 517,
+     "scholar_home": 590,
+     "share_surplus": 5600
+    },
+    "29": {
+     "scholar_home": 9000,
+     "share_surplus": 6600
+    },
+    "30": {
+     "away_wild": 243,
+     "scholar_home": 7850,
+     "share_surplus": 5200
+    },
+    "31": {
+     "scholar_home": 250,
+     "ambient:villagelives": 356,
+     "share_surplus": 7200
+    },
+    "32": {
+     "scholar_home": 8150,
+     "share_surplus": 6800
+    },
+    "33": {
+     "away_wild": 260,
+     "events:ambient": 118,
+     "scholar_home": 4570,
+     "ambient:villagelives": 275,
+     "share_surplus": 7600
+    },
+    "34": {
+     "scholar_home": 740,
+     "away_wild": 528,
+     "share_surplus": 6400
+    },
+    "35": {
+     "away_wild": 387,
+     "scholar_home": 8100,
+     "ambient:villagelives": 357,
+     "share_surplus": 7000
+    },
+    "36": {
+     "away_wild": 1049,
+     "scholar_home": 8100,
+     "events:ambient": 100,
+     "share_surplus": 7600
+    },
+    "37": {
+     "scholar_home": 1070,
+     "share_surplus": 7600
+    },
+    "38": {
+     "events:ambient": 150,
+     "scholar_home": 4690,
+     "share_surplus": 7200
+    },
+    "39": {
+     "scholar_home": 7750,
+     "share_surplus": 6400
+    },
+    "40": {
+     "scholar_home": 150,
+     "share_surplus": 7600
+    },
+    "41": {
+     "scholar_home": 5190,
+     "ambient:villagelives": 512,
+     "share_surplus": 6000
+    },
+    "42": {
+     "scholar_home": 7900,
+     "ambient:villagelives": 331,
+     "share_surplus": 6400
+    },
+    "43": {
+     "scholar_home": 860,
+     "ambient:villagelives": 430,
+     "share_surplus": 8200
+    },
+    "44": {
+     "scholar_home": 4770,
+     "ambient:villagelives": 487,
+     "share_surplus": 5800
+    },
+    "45": {
+     "away_wild": 291,
+     "scholar_home": 8100,
+     "events:ambient": 100,
+     "share_surplus": 6200
+    },
+    "46": {
+     "scholar_home": 920,
+     "share_surplus": 7000
+    },
+    "47": {
+     "scholar_home": 4150,
+     "ambient:villagelives": 975,
+     "share_surplus": 6800
+    },
+    "48": {
+     "away_wild": 313,
+     "scholar_home": 7750,
+     "events:ambient": 100,
+     "ambient:villagelives": 289,
+     "share_surplus": 7200
+    },
+    "49": {
+     "scholar_home": 830,
+     "events:ambient": 100,
+     "ambient:villagelives": 531,
+     "share_surplus": 7600
+    },
+    "50": {
+     "scholar_home": 5040,
+     "share_surplus": 8600
+    },
+    "51": {
+     "away_wild": 623,
+     "scholar_home": 3600,
+     "ambient:villagelives": 517,
+     "share_surplus": 8000
+    },
+    "52": {
+     "scholar_home": 1640,
+     "ambient:villagelives": 799,
+     "share_surplus": 8400
+    },
+    "53": {
+     "scholar_home": 10840,
+     "ambient:villagelives": 559,
+     "share_surplus": 7400
+    },
+    "54": {
+     "scholar_home": 4150,
+     "away_wild": 228,
+     "share_surplus": 8400
+    },
+    "55": {
+     "away_wild": 831,
+     "scholar_home": 1100,
+     "share_surplus": 8400
+    },
+    "56": {
+     "scholar_home": 10140,
+     "away_wild": 587,
+     "share_surplus": 7000
+    },
+    "57": {
+     "aid_system": 2275,
+     "scholar_home": 4350,
+     "ambient:villagelives": 467,
+     "share_surplus": 4000
+    },
+    "58": {
+     "scholar_home": 2580,
+     "traps": 146,
+     "share_surplus": 5800
+    },
+    "59": {
+     "scholar_home": 11290,
+     "away_wild": 446,
+     "share_surplus": 5600
+    },
+    "60": {
+     "scholar_home": 4150,
+     "away_wild": 474,
+     "traps": 373,
+     "share_surplus": 6200
+    },
+    "61": {
+     "scholar_home": 2150,
+     "ambient:villagelives": 575,
+     "share_surplus": 6000
+    },
+    "62": {
+     "away_wild": 517,
+     "aid_system": 1572,
+     "scholar_home": 11040,
+     "share_surplus": 8200
+    },
+    "63": {
+     "scholar_home": 9600,
+     "share_surplus": 5400
+    },
+    "64": {
+     "away_wild": 1101,
+     "scholar_home": 2330,
+     "events:ambient": 100,
+     "share_surplus": 7600
+    },
+    "65": {
+     "away_wild": 305,
+     "scholar_home": 11830,
+     "ambient:villagelives": 447,
+     "share_surplus": 6000
+    },
+    "66": {
+     "away_wild": 277,
+     "scholar_home": 4150,
+     "ambient:villagelives": 966,
+     "share_surplus": 4600
+    },
+    "67": {
+     "aid_system": 1532,
+     "away_wild": 342,
+     "scholar_home": 50,
+     "ambient:villagelives": 465,
+     "share_surplus": 4800
+    },
+    "68": {
+     "away_wild": 1602,
+     "scholar_home": 1440,
+     "share_surplus": 6200
+    },
+    "69": {
+     "share_surplus": 5400
+    },
+    "70": {
+     "scholar_home": 7290,
+     "away_wild": 438,
+     "share_surplus": 3400
+    },
+    "71": {
+     "away_wild": 405,
+     "scholar_home": 5540,
+     "ambient:villagelives": 2445,
+     "share_surplus": 4400
+    },
+    "72": {
+     "away_wild": 248,
+     "ambient:villagelives": 1711,
+     "share_surplus": 3200
+    },
+    "73": {
+     "aid_system": 2530,
+     "scholar_home": 6040,
+     "ambient:villagelives": 556,
+     "share_surplus": 3800
+    },
+    "74": {
+     "ambient:villagelives": 334,
+     "share_surplus": 4600
+    },
+    "75": {
+     "share_surplus": 4000
+    },
+    "76": {
+     "scholar_home": 7490,
+     "away_wild": 321,
+     "events:ambient": 100,
+     "share_surplus": 3800
+    },
+    "77": {
+     "scholar_home": 810,
+     "ambient:villagelives": 435,
+     "share_surplus": 3000
+    },
+    "78": {
+     "away_wild": 307,
+     "share_surplus": 4400
+    },
+    "79": {
+     "scholar_home": 8950,
+     "ambient:villagelives": 436,
+     "share_surplus": 3200
+    },
+    "80": {
+     "share_surplus": 3600
+    },
+    "81": {
+     "scholar_home": 14390,
+     "away_wild": 335,
+     "events:ambient": 100,
+     "ambient:villagelives": 511,
+     "share_surplus": 3000
+    },
+    "82": {
+     "away_wild": 401,
+     "scholar_home": 21660,
+     "ambient:villagelives": 448,
+     "share_surplus": 2200
+    },
+    "83": {
+     "away_wild": 465,
+     "ambient:villagelives": 826,
+     "share_surplus": 1400
+    },
+    "84": {
+     "scholar_home": 2310,
+     "share_surplus": 600
+    },
+    "85": {
+     "away_wild": 1221,
+     "scholar_home": 8950,
+     "ambient:villagelives": 591,
+     "share_surplus": 1400
+    },
+    "86": {
+     "away_wild": 565,
+     "events:ambient": 100,
+     "ambient:villagelives": 351,
+     "share_surplus": 1800
+    },
+    "87": {
+     "scholar_home": 950,
+     "away_wild": 282,
+     "share_surplus": 800
+    },
+    "88": {
+     "away_wild": 1130,
+     "scholar_home": 10400,
+     "events:ambient": 100,
+     "share_surplus": 2400
+    },
+    "89": {
+     "aid_system": 1529,
+     "away_wild": 440,
+     "share_surplus": 2800
+    },
+    "90": {
+     "away_wild": 241,
+     "scholar_home": 7640,
+     "events:ambient": 100,
+     "share_surplus": 2600
+    },
+    "91": {
+     "scholar_home": 8500,
+     "share_surplus": 2200
+    },
+    "92": {
+     "away_wild": 481,
+     "share_surplus": 4000
+    },
+    "93": {
+     "scholar_home": 5940,
+     "away_wild": 214,
+     "ambient:villagelives": 412,
+     "share_surplus": 4000
+    },
+    "94": {
+     "scholar_home": 8500,
+     "share_surplus": 3800
+    },
+    "95": {
+     "away_wild": 429,
+     "ambient:villagelives": 372,
+     "share_surplus": 2000
+    },
+    "96": {
+     "aid_system": 2469,
+     "scholar_home": 7030,
+     "away_wild": 360,
+     "events:ambient": 100,
+     "ambient:villagelives": 163,
+     "share_surplus": 3000
+    },
+    "97": {
+     "away_wild": 823,
+     "scholar_home": 8500,
+     "share_surplus": 2800
+    },
+    "98": {
+     "away_wild": 224,
+     "events:ambient": 100,
+     "share_surplus": 3000
+    },
+    "99": {
+     "scholar_home": 7030,
+     "away_wild": 787,
+     "share_surplus": 3600
+    },
+    "100": {
+     "away_wild": 537,
+     "scholar_home": 8500,
+     "ambient:villagelives": 350,
+     "share_surplus": 3200
+    },
+    "101": {
+     "aid_system": 1756,
+     "away_wild": 231,
+     "share_surplus": 1000
+    },
+    "102": {
+     "away_wild": 247,
+     "scholar_home": 800,
+     "share_surplus": 1400
+    },
+    "103": {
+     "away_wild": 234,
+     "scholar_home": 15140,
+     "ambient:villagelives": 452,
+     "share_surplus": 1800
+    },
+    "104": {
+     "ambient:villagelives": 538,
+     "share_surplus": 1800
+    },
+    "105": {
+     "away_wild": 582,
+     "scholar_home": 700,
+     "share_surplus": 2200
+    },
+    "106": {
+     "scholar_home": 15650,
+     "share_surplus": 2600
+    },
+    "107": {
+     "ambient:villagelives": 389,
+     "share_surplus": 1400
+    },
+    "108": {
+     "away_wild": 535,
+     "scholar_home": 5150,
+     "ambient:villagelives": 302,
+     "share_surplus": 2000
+    },
+    "109": {
+     "scholar_home": 13750,
+     "share_surplus": 2800
+    },
+    "110": {
+     "away_wild": 1019,
+     "events:ambient": 100,
+     "share_surplus": 2400
+    },
+    "111": {
+     "scholar_home": 4600,
+     "ambient:villagelives": 462,
+     "share_surplus": 2400
+    },
+    "112": {
+     "away_wild": 345,
+     "scholar_home": 13750,
+     "share_surplus": 2400
+    },
+    "113": {
+     "away_wild": 3691,
+     "scholar_home": 500,
+     "share_surplus": 3600
+    },
+    "114": {
+     "scholar_home": 5250,
+     "share_surplus": 3000
+    },
+    "115": {
+     "scholar_home": 11450,
+     "share_surplus": 3400
+    },
+    "116": {
+     "scholar_home": 1950,
+     "share_surplus": 3000
+    },
+    "117": {
+     "away_wild": 208,
+     "ambient:villagelives": 418,
+     "share_surplus": 3400
+    },
+    "118": {
+     "scholar_home": 14850,
+     "ambient:villagelives": 362,
+     "share_surplus": 3000
+    },
+    "119": {
+     "scholar_home": 2040,
+     "ambient:villagelives": 547,
+     "share_surplus": 2800
+    },
+    "120": {
+     "scholar_home": 2070,
+     "ambient:villagelives": 1738,
+     "share_surplus": 3200
+    },
+    "121": {
+     "scholar_home": 15750,
+     "events:ambient": 100,
+     "share_surplus": 3200
+    },
+    "122": {
+     "away_wild": 401,
+     "scholar_home": 2510,
+     "share_surplus": 3400
+    },
+    "123": {
+     "away_wild": 433,
+     "donation": 360,
+     "ambient:villagelives": 251,
+     "share_surplus": 2600
+    },
+    "124": {
+     "donation": 1440,
+     "away_wild": 556,
+     "share_surplus": 4000
+    },
+    "125": {
+     "share_surplus": 5600
+    },
+    "126": {
+     "share_surplus": 4000
+    },
+    "127": {
+     "scholar_home": 12640,
+     "ambient:villagelives": 435,
+     "share_surplus": 4400
+    },
+    "128": {
+     "aid_system": 1871,
+     "ambient:villagelives": 737,
+     "share_surplus": 4600
+    },
+    "129": {
+     "share_surplus": 4800
+    },
+    "130": {
+     "scholar_home": 11450,
+     "share_surplus": 3200
+    },
+    "131": {
+     "away_wild": 209,
+     "share_surplus": 3200
+    },
+    "132": {
+     "scholar_home": 1200,
+     "share_surplus": 3200
+    },
+    "133": {
+     "scholar_home": 14650,
+     "events:ambient": 100,
+     "share_surplus": 2600
+    },
+    "134": {
+     "scholar_home": 2070,
+     "ambient:villagelives": 1539,
+     "share_surplus": 3400
+    },
+    "135": {
+     "share_surplus": 3600
+    },
+    "136": {
+     "share_surplus": 2600
+    },
+    "137": {
+     "duty:fish": 4748,
+     "ambient:villagelives": 604,
+     "share_surplus": 2800
+    },
+    "138": {
+     "duty:fish": 1440,
+     "share_surplus": 2400
+    },
+    "139": {
+     "duty:fish": 2749,
+     "events:ambient": 100,
+     "share_surplus": 2600
+    },
+    "140": {
+     "ambient:villagelives": 997,
+     "share_surplus": 1600
+    },
+    "141": {
+     "scholar_home": 2200,
+     "events:ambient": 100,
+     "share_surplus": 2400
+    },
+    "142": {
+     "away_wild": 229,
+     "ambient:villagelives": 1264,
+     "share_surplus": 3400
+    },
+    "143": {
+     "share_surplus": 3800
+    },
+    "144": {
+     "away_wild": 527,
+     "events:ambient": 167,
+     "ambient:villagelives": 1011,
+     "share_surplus": 3800
+    },
+    "145": {
+     "duty:fish": 3713,
+     "share_surplus": 1400
+    },
+    "146": {
+     "away_wild": 578,
+     "duty:fish": 1632,
+     "ambient:villagelives": 451,
+     "share_surplus": 1600
+    },
+    "147": {
+     "duty:fish": 1555,
+     "traps": 201,
+     "share_surplus": 3200
+    },
+    "148": {
+     "duty:fish": 1722,
+     "events:ambient": 100,
+     "share_surplus": 1600
+    },
+    "149": {
+     "duty:fish": 1777,
+     "share_surplus": 3200
+    },
+    "150": {
+     "duty:fish": 1696,
+     "away_wild": 276,
+     "share_surplus": 2800
+    },
+    "151": {
+     "scholar_home": 270,
+     "duty:fish": 1230,
+     "share_surplus": 3200
+    },
+    "152": {
+     "away_wild": 477,
+     "ambient:villagelives": 884,
+     "share_surplus": 3600
+    },
+    "153": {
+     "events:ambient": 100,
+     "share_surplus": 4000
+    },
+    "154": {
+     "traps": 317,
+     "duty:fish": 1676,
+     "away_wild": 419,
+     "ambient:villagelives": 1192,
+     "share_surplus": 3600
+    },
+    "155": {
+     "duty:fish": 2566,
+     "ambient:villagelives": 1238,
+     "share_surplus": 4000
+    },
+    "156": {
+     "traps": 304,
+     "duty:fish": 2300,
+     "ambient:villagelives": 309,
+     "share_surplus": 4200
+    },
+    "157": {
+     "events:ambient": 100,
+     "ambient:villagelives": 1040,
+     "share_surplus": 5200
+    },
+    "158": {
+     "away_wild": 545,
+     "events:ambient": 100,
+     "share_surplus": 5200
+    },
+    "159": {
+     "ambient:villagelives": 362,
+     "share_surplus": 4800
+    },
+    "160": {
+     "share_surplus": 5600
+    },
+    "161": {
+     "scholar_home": 2750,
+     "ambient:villagelives": 447,
+     "share_surplus": 4200
+    },
+    "162": {
+     "ambient:villagelives": 519,
+     "share_surplus": 5600
+    },
+    "163": {
+     "ambient:villagelives": 746,
+     "share_surplus": 3400
+    },
+    "164": {
+     "ambient:villagelives": 431,
+     "share_surplus": 3200
+    },
+    "165": {
+     "away_wild": 984,
+     "events:ambient": 100,
+     "share_surplus": 4800
+    },
+    "166": {
+     "share_surplus": 5400
+    },
+    "167": {
+     "away_wild": 4322,
+     "share_surplus": 4800
+    },
+    "168": {
+     "events:ambient": 100,
+     "share_surplus": 6400
+    },
+    "169": {
+     "ambient:villagelives": 648,
+     "share_surplus": 7800
+    },
+    "170": {
+     "share_surplus": 5000
+    },
+    "171": {
+     "share_surplus": 5400
+    },
+    "172": {
+     "traps": 295,
+     "ambient:villagelives": 636,
+     "share_surplus": 3800
+    },
+    "173": {
+     "away_wild": 459,
+     "ambient:villagelives": 1541,
+     "share_surplus": 5600
+    },
+    "174": {
+     "away_wild": 479,
+     "ambient:villagelives": 253,
+     "share_surplus": 6200
+    },
+    "175": {
+     "share_surplus": 6600
+    },
+    "176": {
+     "share_surplus": 7600
+    },
+    "177": {
+     "ambient:villagelives": 540,
+     "share_surplus": 6400
+    },
+    "178": {
+     "share_surplus": 6000
+    },
+    "179": {
+     "ambient:villagelives": 497,
+     "share_surplus": 6400
+    },
+    "180": {
+     "events:ambient": 100,
+     "share_surplus": 4400
+    }
+   },
+   "dayDuty": {
+    "7": {
+     "cook": 2660
+    },
+    "9": {
+     "cook": 311
+    },
+    "10": {
+     "cook": 3120
+    },
+    "12": {
+     "cook": 1321
+    },
+    "13": {
+     "cook": 1280
+    },
+    "14": {
+     "cook": 886
+    },
+    "15": {
+     "cook": 720
+    },
+    "16": {
+     "cook": 354
+    },
+    "17": {
+     "cook": 1760
+    },
+    "18": {
+     "cook": 3556
+    },
+    "19": {
+     "cook": 1200
+    },
+    "20": {
+     "cook": 6336
+    },
+    "25": {
+     "cook": 3128
+    },
+    "27": {
+     "cook": 3084
+    },
+    "30": {
+     "cook": 3134
+    },
+    "33": {
+     "cook": 3200
+    },
+    "34": {
+     "cook": 3200
+    },
+    "35": {
+     "cook": 6280
+    },
+    "40": {
+     "cook": 3200
+    },
+    "42": {
+     "cook": 3200
+    },
+    "45": {
+     "cook": 3200
+    },
+    "48": {
+     "cook": 3200
+    },
+    "49": {
+     "cook": 9566
+    },
+    "50": {
+     "cook": 5040
+    },
+    "51": {
+     "cook": 3200
+    },
+    "55": {
+     "cook": 6392
+    },
+    "56": {
+     "cook": 3200
+    },
+    "60": {
+     "cook": 3152
+    },
+    "63": {
+     "cook": 6352
+    },
+    "64": {
+     "cook": 6397
+    },
+    "65": {
+     "cook": 3149
+    },
+    "70": {
+     "cook": 3200
+    },
+    "71": {
+     "cook": 3200
+    },
+    "72": {
+     "cook": 3184
+    },
+    "77": {
+     "cook": 3200
+    },
+    "78": {
+     "cook": 3200
+    },
+    "79": {
+     "cook": 3200
+    },
+    "80": {
+     "cook": 3200
+    },
+    "81": {
+     "cook": 3176
+    },
+    "84": {
+     "cook": 3168
+    },
+    "85": {
+     "cook": 3177
+    },
+    "91": {
+     "cook": 3200
+    },
+    "92": {
+     "cook": 3096
+    },
+    "93": {
+     "cook": 3200
+    },
+    "94": {
+     "cook": 3200
+    },
+    "95": {
+     "cook": 3153
+    },
+    "98": {
+     "cook": 3133
+    },
+    "99": {
+     "cook": 3192
+    },
+    "105": {
+     "cook": 3192
+    },
+    "106": {
+     "cook": 3200
+    },
+    "107": {
+     "cook": 1920
+    },
+    "108": {
+     "cook": 3120
+    },
+    "109": {
+     "cook": 3200
+    },
+    "112": {
+     "cook": 3200
+    },
+    "113": {
+     "cook": 2990
+    },
+    "119": {
+     "cook": 3200
+    },
+    "120": {
+     "cook": 1920
+    },
+    "121": {
+     "cook": 3200
+    },
+    "122": {
+     "cook": 3164
+    },
+    "137": {
+     "cook": 160
+    },
+    "138": {
+     "cook": 640
+    },
+    "144": {
+     "cook": 594
+    },
+    "150": {
+     "cook": 1188
+    },
+    "151": {
+     "cook": 594
+    },
+    "152": {
+     "cook": 2685
+    },
+    "153": {
+     "cook": 2921
+    },
+    "154": {
+     "cook": 3932
+    },
+    "155": {
+     "cook": 1188
+    },
+    "156": {
+     "cook": 594
+    },
+    "157": {
+     "cook": 1386
+    }
+   },
+   "dayThrottle": {
+    "2": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "3": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "4": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "5": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "6": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "7": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "8": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "9": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "10": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "11": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "12": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "13": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "14": {
+     "calls": 8,
+     "engaged": 8
+    },
+    "15": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "16": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "17": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "18": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "19": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "20": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "21": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "22": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "23": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "24": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "25": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "26": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "27": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "28": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "29": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "30": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "31": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "32": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "33": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "34": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "35": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "36": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "37": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "38": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "39": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "40": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "41": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "42": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "43": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "44": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "45": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "46": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "47": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "48": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "49": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "50": {
+     "calls": 9,
+     "engaged": 9
+    },
+    "51": {
+     "calls": 11,
+     "engaged": 11
+    },
+    "52": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "53": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "54": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "55": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "56": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "57": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "58": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "59": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "60": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "61": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "62": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "63": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "64": {
+     "calls": 10,
+     "engaged": 10
+    },
+    "65": {
+     "calls": 8,
+     "engaged": 8
+    },
+    "66": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "67": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "68": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "69": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "70": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "71": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "72": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "73": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "74": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "75": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "76": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "77": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "78": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "79": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "80": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "81": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "82": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "83": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "84": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "85": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "86": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "87": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "88": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "89": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "90": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "91": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "92": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "93": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "94": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "95": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "96": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "97": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "98": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "99": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "100": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "101": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "102": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "103": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "104": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "105": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "106": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "107": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "108": {
+     "calls": 3,
+     "engaged": 2
+    },
+    "109": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "110": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "111": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "112": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "113": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "114": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "115": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "116": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "117": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "118": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "119": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "120": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "121": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "122": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "137": {
+     "calls": 6,
+     "engaged": 0
+    },
+    "138": {
+     "calls": 4,
+     "engaged": 2
+    },
+    "139": {
+     "calls": 4,
+     "engaged": 1
+    },
+    "142": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "143": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "144": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "145": {
+     "calls": 7,
+     "engaged": 0
+    },
+    "146": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "147": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "148": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "149": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "150": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "151": {
+     "calls": 4,
+     "engaged": 2
+    },
+    "152": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "153": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "154": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "155": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "156": {
+     "calls": 4,
+     "engaged": 1
+    },
+    "157": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "160": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "161": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "162": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "163": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "164": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "165": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "167": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "169": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "170": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "171": {
+     "calls": 1,
+     "engaged": 0
+    },
+    "172": {
+     "calls": 1,
+     "engaged": 1
+    }
+   },
+   "ms": 3254
+  },
+  {
+   "seed": 8804,
+   "won": false,
+   "national": false,
+   "table": true,
+   "rank": "regional",
+   "maxWave": 4,
+   "arc": 4,
+   "rosterEnd": 1,
+   "days": 98,
+   "endReason": "village-lost",
+   "chokeTotal": 415321,
+   "unattributed": 0,
+   "unattShare": 0,
+   "inflow": {
+    "ambient:villagelives": 36860,
+    "events:ambient": 1826,
+    "share_surplus": 279200,
+    "away_wild": 35979,
+    "traps": 5177,
+    "duty:fish": 33950,
+    "aid_system": 4419,
+    "events:special": 300,
+    "scholar_home": 17610
+   },
+   "rotFresh": 100273,
+   "rotPreserved": 7604,
+   "rotByCh": {
+    "away_wild": 7634,
+    "share_surplus": 86560,
+    "untagged": 2400,
+    "scholar_home": 875,
+    "events:ambient": 252,
+    "traps": 1071,
+    "ambient:villagelives": 7277,
+    "duty:fish": 1808
+   },
+   "rotByChFast": {
+    "away_wild": 946
+   },
+   "dutyPreserved": 71864,
+   "laundered": 0,
+   "throttleCalls": 280,
+   "throttleEngaged": 199,
+   "rintGovCalls": 76,
+   "rintTrimCalls": 0,
+   "rintTrimKcal": 0,
+   "rintTrimDays": 0,
+   "starveDays": 0,
+   "deaths": [
+    {
+     "day": 9,
+     "who": "gen_hl7en20",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 13,
+     "who": "gen_d9z9nju",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 25,
+     "who": "gen_2vx0hsh",
+     "kind": "villager",
+     "cause": "the night"
+    },
+    {
+     "day": 68,
+     "who": "nathan_lee",
+     "kind": "villager",
+     "cause": "monster"
+    },
+    {
+     "day": 87,
+     "who": "hannah_kim",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 87,
+     "who": "gen_h1j8076",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 89,
+     "who": "priya_nair",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 90,
+     "who": "olivia_bennett",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 90,
+     "who": "gen_3a72oeh",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 90,
+     "who": "vasyl_shevchenko",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 91,
+     "who": "gen_jv3vht4",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 95,
+     "who": "nora_wilson",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 97,
+     "who": "farid_ahmed",
+     "kind": "villager",
+     "cause": "combat"
+    },
+    {
+     "day": 97,
+     "who": "visjoin_91",
+     "kind": "villager",
+     "cause": "combat"
+    }
+   ],
+   "dawnSamples": [
+    {
+     "day": 2,
+     "pantryKcal": 40340,
+     "freshKcal": 40340,
+     "freshDays": 6.451,
+     "doomedKcal": 0,
+     "burnAvg": 6253,
+     "roster": 12
+    },
+    {
+     "day": 3,
+     "pantryKcal": 35730,
+     "freshKcal": 35730,
+     "freshDays": 7.066,
+     "doomedKcal": 0,
+     "burnAvg": 5057,
+     "roster": 12
+    },
+    {
+     "day": 4,
+     "pantryKcal": 30100,
+     "freshKcal": 30100,
+     "freshDays": 6.432,
+     "doomedKcal": 0,
+     "burnAvg": 4680,
+     "roster": 12
+    },
+    {
+     "day": 5,
+     "pantryKcal": 25750,
+     "freshKcal": 25750,
+     "freshDays": 5.787,
+     "doomedKcal": 0,
+     "burnAvg": 4450,
+     "roster": 12
+    },
+    {
+     "day": 6,
+     "pantryKcal": 25950,
+     "freshKcal": 25950,
+     "freshDays": 6.77,
+     "doomedKcal": 0,
+     "burnAvg": 3833,
+     "roster": 12
+    },
+    {
+     "day": 7,
+     "pantryKcal": 25150,
+     "freshKcal": 25150,
+     "freshDays": 7.446,
+     "doomedKcal": 0,
+     "burnAvg": 3378,
+     "roster": 12
+    },
+    {
+     "day": 8,
+     "pantryKcal": 26950,
+     "freshKcal": 26950,
+     "freshDays": 8.788,
+     "doomedKcal": 0,
+     "burnAvg": 3067,
+     "roster": 12
+    },
+    {
+     "day": 9,
+     "pantryKcal": 27416,
+     "freshKcal": 27416,
+     "freshDays": 11.837,
+     "doomedKcal": 400,
+     "burnAvg": 2316,
+     "roster": 12
+    },
+    {
+     "day": 10,
+     "pantryKcal": 24954,
+     "freshKcal": 24954,
+     "freshDays": 11.868,
+     "doomedKcal": 0,
+     "burnAvg": 2103,
+     "roster": 11
+    },
+    {
+     "day": 10,
+     "pantryKcal": 26001,
+     "freshKcal": 26001,
+     "freshDays": 12.366,
+     "doomedKcal": 0,
+     "burnAvg": 2103,
+     "roster": 11
+    },
+    {
+     "day": 12,
+     "pantryKcal": 26396,
+     "freshKcal": 26396,
+     "freshDays": 18.764,
+     "doomedKcal": 1346,
+     "burnAvg": 1407,
+     "roster": 11
+    },
+    {
+     "day": 13,
+     "pantryKcal": 27532,
+     "freshKcal": 27532,
+     "freshDays": 19.437,
+     "doomedKcal": 1400,
+     "burnAvg": 1417,
+     "roster": 11
+    },
+    {
+     "day": 13,
+     "pantryKcal": 27532,
+     "freshKcal": 27532,
+     "freshDays": 19.437,
+     "doomedKcal": 1400,
+     "burnAvg": 1417,
+     "roster": 11
+    },
+    {
+     "day": 15,
+     "pantryKcal": 30448,
+     "freshKcal": 27354,
+     "freshDays": 14.691,
+     "doomedKcal": 600,
+     "burnAvg": 1862,
+     "roster": 10
+    },
+    {
+     "day": 15,
+     "pantryKcal": 31592,
+     "freshKcal": 28498,
+     "freshDays": 15.305,
+     "doomedKcal": 600,
+     "burnAvg": 1862,
+     "roster": 10
+    },
+    {
+     "day": 17,
+     "pantryKcal": 31063,
+     "freshKcal": 24510,
+     "freshDays": 11.982,
+     "doomedKcal": 0,
+     "burnAvg": 2046,
+     "roster": 10
+    },
+    {
+     "day": 17,
+     "pantryKcal": 31063,
+     "freshKcal": 24510,
+     "freshDays": 11.982,
+     "doomedKcal": 0,
+     "burnAvg": 2046,
+     "roster": 10
+    },
+    {
+     "day": 19,
+     "pantryKcal": 27709,
+     "freshKcal": 23260,
+     "freshDays": 9.815,
+     "doomedKcal": 0,
+     "burnAvg": 2370,
+     "roster": 10
+    },
+    {
+     "day": 19,
+     "pantryKcal": 28593,
+     "freshKcal": 24144,
+     "freshDays": 10.188,
+     "doomedKcal": 0,
+     "burnAvg": 2370,
+     "roster": 10
+    },
+    {
+     "day": 21,
+     "pantryKcal": 16100,
+     "freshKcal": 16100,
+     "freshDays": 6.161,
+     "doomedKcal": 0,
+     "burnAvg": 2613,
+     "roster": 10
+    },
+    {
+     "day": 22,
+     "pantryKcal": 8400,
+     "freshKcal": 8400,
+     "freshDays": 2.983,
+     "doomedKcal": 0,
+     "burnAvg": 2816,
+     "roster": 10
+    },
+    {
+     "day": 23,
+     "pantryKcal": 8400,
+     "freshKcal": 8400,
+     "freshDays": 2.875,
+     "doomedKcal": 0,
+     "burnAvg": 2921,
+     "roster": 10
+    },
+    {
+     "day": 23,
+     "pantryKcal": 12734,
+     "freshKcal": 12734,
+     "freshDays": 4.359,
+     "doomedKcal": 0,
+     "burnAvg": 2921,
+     "roster": 10
+    },
+    {
+     "day": 25,
+     "pantryKcal": 10897,
+     "freshKcal": 10897,
+     "freshDays": 3.782,
+     "doomedKcal": 0,
+     "burnAvg": 2882,
+     "roster": 10
+    },
+    {
+     "day": 26,
+     "pantryKcal": 8116,
+     "freshKcal": 7800,
+     "freshDays": 2.916,
+     "doomedKcal": 0,
+     "burnAvg": 2675,
+     "roster": 9
+    },
+    {
+     "day": 27,
+     "pantryKcal": 10000,
+     "freshKcal": 10000,
+     "freshDays": 3.858,
+     "doomedKcal": 0,
+     "burnAvg": 2592,
+     "roster": 9
+    },
+    {
+     "day": 28,
+     "pantryKcal": 13345,
+     "freshKcal": 13345,
+     "freshDays": 5.545,
+     "doomedKcal": 0,
+     "burnAvg": 2407,
+     "roster": 9
+    },
+    {
+     "day": 29,
+     "pantryKcal": 10296,
+     "freshKcal": 10296,
+     "freshDays": 4.425,
+     "doomedKcal": 3265,
+     "burnAvg": 2327,
+     "roster": 9
+    },
+    {
+     "day": 30,
+     "pantryKcal": 10063,
+     "freshKcal": 10063,
+     "freshDays": 4.498,
+     "doomedKcal": 2551,
+     "burnAvg": 2237,
+     "roster": 9
+    },
+    {
+     "day": 31,
+     "pantryKcal": 11247,
+     "freshKcal": 8076,
+     "freshDays": 3.508,
+     "doomedKcal": 748,
+     "burnAvg": 2302,
+     "roster": 9
+    },
+    {
+     "day": 32,
+     "pantryKcal": 13221,
+     "freshKcal": 7707,
+     "freshDays": 3.277,
+     "doomedKcal": 0,
+     "burnAvg": 2352,
+     "roster": 9
+    },
+    {
+     "day": 32,
+     "pantryKcal": 14387,
+     "freshKcal": 8873,
+     "freshDays": 3.773,
+     "doomedKcal": 0,
+     "burnAvg": 2352,
+     "roster": 9
+    },
+    {
+     "day": 34,
+     "pantryKcal": 16265,
+     "freshKcal": 6170,
+     "freshDays": 2.689,
+     "doomedKcal": 0,
+     "burnAvg": 2294,
+     "roster": 9
+    },
+    {
+     "day": 35,
+     "pantryKcal": 16325,
+     "freshKcal": 5910,
+     "freshDays": 2.576,
+     "doomedKcal": 0,
+     "burnAvg": 2294,
+     "roster": 9
+    },
+    {
+     "day": 36,
+     "pantryKcal": 9070,
+     "freshKcal": 3000,
+     "freshDays": 1.288,
+     "doomedKcal": 0,
+     "burnAvg": 2329,
+     "roster": 9
+    },
+    {
+     "day": 37,
+     "pantryKcal": 8710,
+     "freshKcal": 2640,
+     "freshDays": 1.12,
+     "doomedKcal": 0,
+     "burnAvg": 2358,
+     "roster": 9
+    },
+    {
+     "day": 38,
+     "pantryKcal": 11945,
+     "freshKcal": 5875,
+     "freshDays": 2.487,
+     "doomedKcal": 0,
+     "burnAvg": 2362,
+     "roster": 9
+    },
+    {
+     "day": 39,
+     "pantryKcal": 16020,
+     "freshKcal": 7738,
+     "freshDays": 3.305,
+     "doomedKcal": 0,
+     "burnAvg": 2341,
+     "roster": 9
+    },
+    {
+     "day": 40,
+     "pantryKcal": 18271,
+     "freshKcal": 6789,
+     "freshDays": 2.858,
+     "doomedKcal": 0,
+     "burnAvg": 2375,
+     "roster": 9
+    },
+    {
+     "day": 40,
+     "pantryKcal": 19259,
+     "freshKcal": 7777,
+     "freshDays": 3.274,
+     "doomedKcal": 0,
+     "burnAvg": 2375,
+     "roster": 9
+    },
+    {
+     "day": 42,
+     "pantryKcal": 22488,
+     "freshKcal": 5946,
+     "freshDays": 2.503,
+     "doomedKcal": 0,
+     "burnAvg": 2375,
+     "roster": 9
+    },
+    {
+     "day": 42,
+     "pantryKcal": 14968,
+     "freshKcal": 5886,
+     "freshDays": 2.478,
+     "doomedKcal": 0,
+     "burnAvg": 2375,
+     "roster": 9
+    },
+    {
+     "day": 44,
+     "pantryKcal": 14371,
+     "freshKcal": 8841,
+     "freshDays": 3.864,
+     "doomedKcal": 1500,
+     "burnAvg": 2288,
+     "roster": 9
+    },
+    {
+     "day": 44,
+     "pantryKcal": 12773,
+     "freshKcal": 7723,
+     "freshDays": 3.375,
+     "doomedKcal": 0,
+     "burnAvg": 2288,
+     "roster": 9
+    },
+    {
+     "day": 46,
+     "pantryKcal": 20217,
+     "freshKcal": 9967,
+     "freshDays": 6.052,
+     "doomedKcal": 3696,
+     "burnAvg": 1647,
+     "roster": 9
+    },
+    {
+     "day": 46,
+     "pantryKcal": 20337,
+     "freshKcal": 10087,
+     "freshDays": 6.125,
+     "doomedKcal": 3696,
+     "burnAvg": 1647,
+     "roster": 9
+    },
+    {
+     "day": 48,
+     "pantryKcal": 23833,
+     "freshKcal": 8775,
+     "freshDays": 8.472,
+     "doomedKcal": 2000,
+     "burnAvg": 1036,
+     "roster": 9
+    },
+    {
+     "day": 49,
+     "pantryKcal": 24317,
+     "freshKcal": 10482,
+     "freshDays": 13.976,
+     "doomedKcal": 2568,
+     "burnAvg": 750,
+     "roster": 9
+    },
+    {
+     "day": 50,
+     "pantryKcal": 19401,
+     "freshKcal": 10306,
+     "freshDays": 20.322,
+     "doomedKcal": 0,
+     "burnAvg": 507,
+     "roster": 9
+    },
+    {
+     "day": 51,
+     "pantryKcal": 24107,
+     "freshKcal": 12691,
+     "freshDays": 57.314,
+     "doomedKcal": 2400,
+     "burnAvg": 221,
+     "roster": 9
+    },
+    {
+     "day": 51,
+     "pantryKcal": 25337,
+     "freshKcal": 13921,
+     "freshDays": 62.869,
+     "doomedKcal": 2400,
+     "burnAvg": 221,
+     "roster": 9
+    },
+    {
+     "day": 53,
+     "pantryKcal": 29410,
+     "freshKcal": 13350,
+     "freshDays": 58.333,
+     "doomedKcal": 800,
+     "burnAvg": 229,
+     "roster": 9
+    },
+    {
+     "day": 54,
+     "pantryKcal": 34388,
+     "freshKcal": 18328,
+     "freshDays": 83.744,
+     "doomedKcal": 4469,
+     "burnAvg": 219,
+     "roster": 9
+    },
+    {
+     "day": 55,
+     "pantryKcal": 38956,
+     "freshKcal": 22896,
+     "freshDays": 104.616,
+     "doomedKcal": 8178,
+     "burnAvg": 219,
+     "roster": 9
+    },
+    {
+     "day": 55,
+     "pantryKcal": 39136,
+     "freshKcal": 23076,
+     "freshDays": 105.439,
+     "doomedKcal": 8178,
+     "burnAvg": 219,
+     "roster": 9
+    },
+    {
+     "day": 57,
+     "pantryKcal": 37431,
+     "freshKcal": 25637,
+     "freshDays": 145.665,
+     "doomedKcal": 4334,
+     "burnAvg": 176,
+     "roster": 9
+    },
+    {
+     "day": 57,
+     "pantryKcal": 38419,
+     "freshKcal": 26625,
+     "freshDays": 151.278,
+     "doomedKcal": 4334,
+     "burnAvg": 176,
+     "roster": 9
+    },
+    {
+     "day": 59,
+     "pantryKcal": 46721,
+     "freshKcal": 29380,
+     "freshDays": 126.017,
+     "doomedKcal": 3482,
+     "burnAvg": 233,
+     "roster": 9
+    },
+    {
+     "day": 60,
+     "pantryKcal": 50546,
+     "freshKcal": 33205,
+     "freshDays": 137.536,
+     "doomedKcal": 5420,
+     "burnAvg": 241,
+     "roster": 9
+    },
+    {
+     "day": 61,
+     "pantryKcal": 51947,
+     "freshKcal": 34606,
+     "freshDays": 134.579,
+     "doomedKcal": 5690,
+     "burnAvg": 257,
+     "roster": 9
+    },
+    {
+     "day": 62,
+     "pantryKcal": 48853,
+     "freshKcal": 31512,
+     "freshDays": 117.959,
+     "doomedKcal": 4010,
+     "burnAvg": 267,
+     "roster": 9
+    },
+    {
+     "day": 62,
+     "pantryKcal": 49113,
+     "freshKcal": 31772,
+     "freshDays": 118.933,
+     "doomedKcal": 4010,
+     "burnAvg": 267,
+     "roster": 9
+    },
+    {
+     "day": 64,
+     "pantryKcal": 47675,
+     "freshKcal": 35166,
+     "freshDays": 123.699,
+     "doomedKcal": 4471,
+     "burnAvg": 284,
+     "roster": 9
+    },
+    {
+     "day": 65,
+     "pantryKcal": 49316,
+     "freshKcal": 36803,
+     "freshDays": 145.549,
+     "doomedKcal": 5607,
+     "burnAvg": 253,
+     "roster": 9
+    },
+    {
+     "day": 66,
+     "pantryKcal": 48737,
+     "freshKcal": 33909,
+     "freshDays": 154.433,
+     "doomedKcal": 6579,
+     "burnAvg": 220,
+     "roster": 9
+    },
+    {
+     "day": 67,
+     "pantryKcal": 51345,
+     "freshKcal": 36517,
+     "freshDays": 166.853,
+     "doomedKcal": 4650,
+     "burnAvg": 219,
+     "roster": 9
+    },
+    {
+     "day": 68,
+     "pantryKcal": 49954,
+     "freshKcal": 35126,
+     "freshDays": 162.62,
+     "doomedKcal": 6558,
+     "burnAvg": 216,
+     "roster": 9
+    },
+    {
+     "day": 69,
+     "pantryKcal": 51570,
+     "freshKcal": 36742,
+     "freshDays": 145.967,
+     "doomedKcal": 4634,
+     "burnAvg": 252,
+     "roster": 8
+    },
+    {
+     "day": 70,
+     "pantryKcal": 51230,
+     "freshKcal": 39102,
+     "freshDays": 152.572,
+     "doomedKcal": 5441,
+     "burnAvg": 256,
+     "roster": 8
+    },
+    {
+     "day": 71,
+     "pantryKcal": 47981,
+     "freshKcal": 42980,
+     "freshDays": 179.725,
+     "doomedKcal": 4400,
+     "burnAvg": 239,
+     "roster": 8
+    },
+    {
+     "day": 72,
+     "pantryKcal": 50506,
+     "freshKcal": 45505,
+     "freshDays": 188.037,
+     "doomedKcal": 6723,
+     "burnAvg": 242,
+     "roster": 8
+    },
+    {
+     "day": 73,
+     "pantryKcal": 50994,
+     "freshKcal": 45993,
+     "freshDays": 186.963,
+     "doomedKcal": 4960,
+     "burnAvg": 246,
+     "roster": 8
+    },
+    {
+     "day": 73,
+     "pantryKcal": 50004,
+     "freshKcal": 45003,
+     "freshDays": 182.939,
+     "doomedKcal": 4960,
+     "burnAvg": 246,
+     "roster": 8
+    },
+    {
+     "day": 75,
+     "pantryKcal": 49606,
+     "freshKcal": 44605,
+     "freshDays": 160.367,
+     "doomedKcal": 4130,
+     "burnAvg": 278,
+     "roster": 8
+    },
+    {
+     "day": 75,
+     "pantryKcal": 50004,
+     "freshKcal": 45003,
+     "freshDays": 161.798,
+     "doomedKcal": 4130,
+     "burnAvg": 278,
+     "roster": 8
+    },
+    {
+     "day": 77,
+     "pantryKcal": 50053,
+     "freshKcal": 47666,
+     "freshDays": 185.884,
+     "doomedKcal": 6188,
+     "burnAvg": 256,
+     "roster": 8
+    },
+    {
+     "day": 77,
+     "pantryKcal": 42485,
+     "freshKcal": 40098,
+     "freshDays": 156.371,
+     "doomedKcal": 6188,
+     "burnAvg": 256,
+     "roster": 8
+    },
+    {
+     "day": 79,
+     "pantryKcal": 37862,
+     "freshKcal": 35475,
+     "freshDays": 133.868,
+     "doomedKcal": 100,
+     "burnAvg": 265,
+     "roster": 8
+    },
+    {
+     "day": 80,
+     "pantryKcal": 37956,
+     "freshKcal": 35569,
+     "freshDays": 135.317,
+     "doomedKcal": 6800,
+     "burnAvg": 263,
+     "roster": 8
+    },
+    {
+     "day": 81,
+     "pantryKcal": 38098,
+     "freshKcal": 35711,
+     "freshDays": 131.567,
+     "doomedKcal": 4334,
+     "burnAvg": 271,
+     "roster": 8
+    },
+    {
+     "day": 82,
+     "pantryKcal": 40084,
+     "freshKcal": 37697,
+     "freshDays": 144.196,
+     "doomedKcal": 6625,
+     "burnAvg": 261,
+     "roster": 8
+    },
+    {
+     "day": 83,
+     "pantryKcal": 39978,
+     "freshKcal": 37591,
+     "freshDays": 163.439,
+     "doomedKcal": 6511,
+     "burnAvg": 230,
+     "roster": 8
+    },
+    {
+     "day": 83,
+     "pantryKcal": 40398,
+     "freshKcal": 38011,
+     "freshDays": 165.265,
+     "doomedKcal": 6511,
+     "burnAvg": 230,
+     "roster": 8
+    },
+    {
+     "day": 85,
+     "pantryKcal": 36872,
+     "freshKcal": 36872,
+     "freshDays": 137.436,
+     "doomedKcal": 500,
+     "burnAvg": 268,
+     "roster": 8
+    },
+    {
+     "day": 85,
+     "pantryKcal": 37232,
+     "freshKcal": 37232,
+     "freshDays": 138.777,
+     "doomedKcal": 500,
+     "burnAvg": 268,
+     "roster": 8
+    },
+    {
+     "day": 87,
+     "pantryKcal": 41558,
+     "freshKcal": 41558,
+     "freshDays": 142.741,
+     "doomedKcal": 5836,
+     "burnAvg": 291,
+     "roster": 8
+    },
+    {
+     "day": 87,
+     "pantryKcal": 38224,
+     "freshKcal": 38224,
+     "freshDays": 131.289,
+     "doomedKcal": 5836,
+     "burnAvg": 291,
+     "roster": 6
+    },
+    {
+     "day": 89,
+     "pantryKcal": 41872,
+     "freshKcal": 41872,
+     "freshDays": 49.907,
+     "doomedKcal": 4560,
+     "burnAvg": 839,
+     "roster": 6
+    },
+    {
+     "day": 90,
+     "pantryKcal": 38976,
+     "freshKcal": 38976,
+     "freshDays": 34.566,
+     "doomedKcal": 6473,
+     "burnAvg": 1128,
+     "roster": 5
+    },
+    {
+     "day": 90,
+     "pantryKcal": 37782,
+     "freshKcal": 37782,
+     "freshDays": 33.507,
+     "doomedKcal": 6473,
+     "burnAvg": 1128,
+     "roster": 3
+    },
+    {
+     "day": 92,
+     "pantryKcal": 18000,
+     "freshKcal": 18000,
+     "freshDays": 10.566,
+     "doomedKcal": 0,
+     "burnAvg": 1704,
+     "roster": 2
+    },
+    {
+     "day": 93,
+     "pantryKcal": 14105,
+     "freshKcal": 14105,
+     "freshDays": 6.791,
+     "doomedKcal": 0,
+     "burnAvg": 2077,
+     "roster": 3
+    },
+    {
+     "day": 93,
+     "pantryKcal": 14105,
+     "freshKcal": 14105,
+     "freshDays": 6.791,
+     "doomedKcal": 0,
+     "burnAvg": 2077,
+     "roster": 3
+    },
+    {
+     "day": 95,
+     "pantryKcal": 6529,
+     "freshKcal": 6529,
+     "freshDays": 2.474,
+     "doomedKcal": 516,
+     "burnAvg": 2639,
+     "roster": 4
+    },
+    {
+     "day": 96,
+     "pantryKcal": 2163,
+     "freshKcal": 2163,
+     "freshDays": 0.805,
+     "doomedKcal": 1109,
+     "burnAvg": 2685,
+     "roster": 3
+    },
+    {
+     "day": 97,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2897,
+     "roster": 3
+    },
+    {
+     "day": 97,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 2897,
+     "roster": 1
+    },
+    {
+     "day": 98,
+     "pantryKcal": 0,
+     "freshKcal": 0,
+     "freshDays": 0,
+     "doomedKcal": 0,
+     "burnAvg": 3116,
+     "roster": 1
+    }
+   ],
+   "dayInflow": {
+    "1": {
+     "ambient:villagelives": 573
+    },
+    "2": {
+     "events:ambient": 100,
+     "ambient:villagelives": 485,
+     "share_surplus": 400
+    },
+    "3": {
+     "ambient:villagelives": 676
+    },
+    "4": {
+     "events:ambient": 252,
+     "ambient:villagelives": 451,
+     "share_surplus": 200
+    },
+    "5": {
+     "away_wild": 575,
+     "ambient:villagelives": 539,
+     "share_surplus": 800
+    },
+    "6": {
+     "share_surplus": 1200
+    },
+    "7": {
+     "share_surplus": 2400
+    },
+    "8": {
+     "ambient:villagelives": 1266,
+     "share_surplus": 1200
+    },
+    "9": {
+     "ambient:villagelives": 304,
+     "share_surplus": 1600
+    },
+    "10": {
+     "traps": 101,
+     "away_wild": 946,
+     "share_surplus": 1400
+    },
+    "11": {
+     "share_surplus": 1400
+    },
+    "12": {
+     "away_wild": 282,
+     "share_surplus": 2200
+    },
+    "13": {
+     "ambient:villagelives": 1325,
+     "share_surplus": 2600
+    },
+    "14": {
+     "traps": 123,
+     "ambient:villagelives": 2221,
+     "share_surplus": 1600
+    },
+    "15": {
+     "away_wild": 1144,
+     "ambient:villagelives": 511,
+     "share_surplus": 3400
+    },
+    "16": {
+     "away_wild": 549,
+     "share_surplus": 1200
+    },
+    "17": {
+     "away_wild": 746,
+     "ambient:villagelives": 272,
+     "share_surplus": 1400
+    },
+    "18": {
+     "away_wild": 962,
+     "events:ambient": 100,
+     "share_surplus": 1200
+    },
+    "19": {
+     "away_wild": 884,
+     "share_surplus": 1600
+    },
+    "20": {
+     "ambient:villagelives": 345,
+     "share_surplus": 1400
+    },
+    "21": {
+     "traps": 343,
+     "duty:fish": 1900,
+     "away_wild": 280,
+     "share_surplus": 1000
+    },
+    "22": {
+     "duty:fish": 2910,
+     "share_surplus": 1200
+    },
+    "23": {
+     "duty:fish": 1800,
+     "aid_system": 1945,
+     "away_wild": 589,
+     "share_surplus": 1000
+    },
+    "24": {
+     "duty:fish": 1735,
+     "away_wild": 1134,
+     "events:ambient": 100,
+     "share_surplus": 1000
+    },
+    "25": {
+     "duty:fish": 840,
+     "events:special": 300,
+     "share_surplus": 2600
+    },
+    "26": {
+     "away_wild": 401,
+     "duty:fish": 1670,
+     "share_surplus": 2200
+    },
+    "27": {
+     "duty:fish": 1080,
+     "traps": 351,
+     "away_wild": 431,
+     "ambient:villagelives": 483,
+     "share_surplus": 3200
+    },
+    "28": {
+     "away_wild": 340,
+     "duty:fish": 1080,
+     "ambient:villagelives": 411,
+     "share_surplus": 2400
+    },
+    "29": {
+     "away_wild": 710,
+     "duty:fish": 1260,
+     "traps": 142,
+     "share_surplus": 2600
+    },
+    "30": {
+     "away_wild": 1028,
+     "events:ambient": 100,
+     "share_surplus": 3400
+    },
+    "31": {
+     "away_wild": 1407,
+     "scholar_home": 300,
+     "share_surplus": 3200
+    },
+    "32": {
+     "traps": 377,
+     "away_wild": 762,
+     "scholar_home": 260,
+     "duty:fish": 1320,
+     "share_surplus": 3000
+    },
+    "33": {
+     "away_wild": 829,
+     "scholar_home": 270,
+     "traps": 342,
+     "share_surplus": 2800
+    },
+    "34": {
+     "away_wild": 291,
+     "scholar_home": 300,
+     "duty:fish": 1080,
+     "share_surplus": 2000
+    },
+    "35": {
+     "away_wild": 449,
+     "events:ambient": 102,
+     "scholar_home": 260,
+     "duty:fish": 2260,
+     "share_surplus": 1400
+    },
+    "36": {
+     "aid_system": 2474,
+     "scholar_home": 540,
+     "duty:fish": 2010,
+     "ambient:villagelives": 497,
+     "share_surplus": 800
+    },
+    "37": {
+     "away_wild": 429,
+     "duty:fish": 1280,
+     "events:ambient": 100,
+     "ambient:villagelives": 1706,
+     "share_surplus": 3400
+    },
+    "38": {
+     "traps": 238,
+     "away_wild": 4910,
+     "scholar_home": 130,
+     "share_surplus": 2200
+    },
+    "39": {
+     "scholar_home": 630,
+     "duty:fish": 1800,
+     "away_wild": 254,
+     "ambient:villagelives": 1005,
+     "share_surplus": 2800
+    },
+    "40": {
+     "away_wild": 723,
+     "traps": 151,
+     "events:ambient": 120,
+     "scholar_home": 420,
+     "duty:fish": 660,
+     "ambient:villagelives": 611,
+     "share_surplus": 2800
+    },
+    "41": {
+     "traps": 168,
+     "away_wild": 306,
+     "duty:fish": 1320,
+     "share_surplus": 3800
+    },
+    "42": {
+     "scholar_home": 360,
+     "duty:fish": 2280,
+     "share_surplus": 1400
+    },
+    "43": {
+     "away_wild": 988,
+     "scholar_home": 240,
+     "duty:fish": 2280,
+     "ambient:villagelives": 873,
+     "share_surplus": 2600
+    },
+    "44": {
+     "away_wild": 392,
+     "scholar_home": 130,
+     "duty:fish": 1740,
+     "ambient:villagelives": 2302,
+     "share_surplus": 2600
+    },
+    "45": {
+     "away_wild": 691,
+     "scholar_home": 540,
+     "share_surplus": 2400
+    },
+    "46": {
+     "scholar_home": 120,
+     "ambient:villagelives": 470,
+     "share_surplus": 4000
+    },
+    "47": {
+     "traps": 228,
+     "share_surplus": 1800
+    },
+    "48": {
+     "away_wild": 266,
+     "scholar_home": 450,
+     "ambient:villagelives": 391,
+     "share_surplus": 2400
+    },
+    "49": {
+     "away_wild": 944,
+     "scholar_home": 120,
+     "traps": 302,
+     "share_surplus": 3600
+    },
+    "50": {
+     "away_wild": 1031,
+     "scholar_home": 455,
+     "share_surplus": 4000
+    },
+    "51": {
+     "scholar_home": 630,
+     "share_surplus": 2800
+    },
+    "52": {
+     "scholar_home": 240,
+     "away_wild": 279,
+     "share_surplus": 3800
+    },
+    "53": {
+     "events:ambient": 152,
+     "scholar_home": 390,
+     "traps": 179,
+     "ambient:villagelives": 1617,
+     "share_surplus": 5000
+    },
+    "54": {
+     "scholar_home": 540,
+     "ambient:villagelives": 628,
+     "share_surplus": 3600
+    },
+    "55": {
+     "scholar_home": 180,
+     "away_wild": 204,
+     "share_surplus": 5800
+    },
+    "56": {
+     "scholar_home": 260,
+     "traps": 196,
+     "share_surplus": 3000
+    },
+    "57": {
+     "away_wild": 718,
+     "scholar_home": 270,
+     "traps": 291,
+     "ambient:villagelives": 673,
+     "share_surplus": 5200
+    },
+    "58": {
+     "away_wild": 925,
+     "scholar_home": 300,
+     "events:ambient": 100,
+     "share_surplus": 4200
+    },
+    "59": {
+     "traps": 320,
+     "scholar_home": 195,
+     "events:ambient": 100,
+     "share_surplus": 5000
+    },
+    "60": {
+     "away_wild": 490,
+     "scholar_home": 990,
+     "share_surplus": 3400
+    },
+    "61": {
+     "traps": 524,
+     "scholar_home": 360,
+     "share_surplus": 4200
+    },
+    "62": {
+     "scholar_home": 260,
+     "away_wild": 419,
+     "ambient:villagelives": 462,
+     "share_surplus": 4000
+    },
+    "63": {
+     "scholar_home": 450,
+     "away_wild": 587,
+     "events:ambient": 100,
+     "ambient:villagelives": 1820,
+     "share_surplus": 5000
+    },
+    "64": {
+     "away_wild": 209,
+     "scholar_home": 360,
+     "events:ambient": 100,
+     "ambient:villagelives": 1475,
+     "share_surplus": 5200
+    },
+    "65": {
+     "scholar_home": 325,
+     "share_surplus": 4200
+    },
+    "66": {
+     "away_wild": 209,
+     "scholar_home": 270,
+     "ambient:villagelives": 749,
+     "share_surplus": 5600
+    },
+    "67": {
+     "scholar_home": 120,
+     "traps": 179,
+     "share_surplus": 4000
+    },
+    "68": {
+     "away_wild": 267,
+     "scholar_home": 455,
+     "traps": 104,
+     "share_surplus": 4800
+    },
+    "69": {
+     "scholar_home": 360,
+     "share_surplus": 4400
+    },
+    "70": {
+     "scholar_home": 360,
+     "ambient:villagelives": 598,
+     "share_surplus": 5800
+    },
+    "71": {
+     "scholar_home": 325,
+     "share_surplus": 4600
+    },
+    "72": {
+     "scholar_home": 630,
+     "away_wild": 560,
+     "ambient:villagelives": 477,
+     "share_surplus": 5400
+    },
+    "73": {
+     "scholar_home": 660,
+     "share_surplus": 4000
+    },
+    "74": {
+     "away_wild": 430,
+     "scholar_home": 130,
+     "share_surplus": 4600
+    },
+    "75": {
+     "away_wild": 398,
+     "ambient:villagelives": 790,
+     "share_surplus": 5000
+    },
+    "76": {
+     "scholar_home": 180,
+     "away_wild": 1851,
+     "ambient:villagelives": 517,
+     "share_surplus": 4400
+    },
+    "77": {
+     "events:ambient": 100,
+     "scholar_home": 300,
+     "share_surplus": 3600
+    },
+    "78": {
+     "share_surplus": 6800
+    },
+    "79": {
+     "scholar_home": 720,
+     "traps": 134,
+     "share_surplus": 4200
+    },
+    "80": {
+     "scholar_home": 360,
+     "events:ambient": 100,
+     "share_surplus": 6200
+    },
+    "81": {
+     "away_wild": 591,
+     "scholar_home": 325,
+     "share_surplus": 5200
+    },
+    "82": {
+     "scholar_home": 360,
+     "ambient:villagelives": 594,
+     "share_surplus": 4600
+    },
+    "83": {
+     "scholar_home": 420,
+     "ambient:villagelives": 609,
+     "share_surplus": 5200
+    },
+    "84": {
+     "traps": 194,
+     "ambient:villagelives": 2714,
+     "share_surplus": 5000
+    },
+    "85": {
+     "scholar_home": 360,
+     "ambient:villagelives": 636,
+     "share_surplus": 5200
+    },
+    "86": {
+     "traps": 190,
+     "events:ambient": 100,
+     "share_surplus": 4000
+    },
+    "87": {
+     "share_surplus": 4200
+    },
+    "88": {
+     "ambient:villagelives": 1873,
+     "share_surplus": 4600
+    },
+    "89": {
+     "away_wild": 590,
+     "ambient:villagelives": 425,
+     "share_surplus": 2600
+    },
+    "90": {
+     "ambient:villagelives": 397
+    },
+    "92": {
+     "ambient:villagelives": 555
+    },
+    "93": {
+     "ambient:villagelives": 516
+    },
+    "94": {
+     "duty:fish": 420,
+     "away_wild": 329,
+     "ambient:villagelives": 619
+    },
+    "95": {
+     "away_wild": 529,
+     "duty:fish": 525
+    },
+    "96": {
+     "duty:fish": 700,
+     "away_wild": 422,
+     "ambient:villagelives": 399
+    },
+    "97": {
+     "away_wild": 299
+    }
+   },
+   "dayDuty": {
+    "14": {
+     "cook": 3094
+    },
+    "15": {
+     "cook": 1925
+    },
+    "16": {
+     "cook": 1534
+    },
+    "25": {
+     "cook": 591
+    },
+    "30": {
+     "cook": 3171
+    },
+    "31": {
+     "cook": 2343
+    },
+    "32": {
+     "cook": 1974
+    },
+    "33": {
+     "cook": 2607
+    },
+    "34": {
+     "cook": 320
+    },
+    "35": {
+     "cook": 156
+    },
+    "38": {
+     "cook": 2212
+    },
+    "39": {
+     "cook": 3200
+    },
+    "40": {
+     "cook": 2767
+    },
+    "41": {
+     "cook": 2293
+    },
+    "42": {
+     "cook": 2261
+    },
+    "43": {
+     "cook": 1088
+    },
+    "44": {
+     "cook": 3173
+    },
+    "45": {
+     "cook": 3147
+    },
+    "46": {
+     "cook": 3152
+    },
+    "47": {
+     "cook": 1976
+    },
+    "49": {
+     "cook": 2700
+    },
+    "50": {
+     "cook": 2321
+    },
+    "51": {
+     "cook": 3200
+    },
+    "52": {
+     "cook": 1600
+    },
+    "56": {
+     "cook": 3198
+    },
+    "57": {
+     "cook": 3147
+    },
+    "58": {
+     "cook": 3200
+    },
+    "63": {
+     "cook": 3187
+    },
+    "64": {
+     "cook": 3177
+    },
+    "65": {
+     "cook": 3150
+    }
+   },
+   "dayThrottle": {
+    "2": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "3": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "4": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "5": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "6": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "7": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "8": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "9": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "10": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "11": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "12": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "13": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "14": {
+     "calls": 6,
+     "engaged": 6
+    },
+    "15": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "16": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "17": {
+     "calls": 5,
+     "engaged": 5
+    },
+    "18": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "19": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "20": {
+     "calls": 7,
+     "engaged": 7
+    },
+    "21": {
+     "calls": 8,
+     "engaged": 5
+    },
+    "22": {
+     "calls": 7,
+     "engaged": 0
+    },
+    "23": {
+     "calls": 7,
+     "engaged": 4
+    },
+    "24": {
+     "calls": 7,
+     "engaged": 1
+    },
+    "25": {
+     "calls": 7,
+     "engaged": 4
+    },
+    "26": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "27": {
+     "calls": 4,
+     "engaged": 2
+    },
+    "28": {
+     "calls": 4,
+     "engaged": 3
+    },
+    "29": {
+     "calls": 4,
+     "engaged": 2
+    },
+    "30": {
+     "calls": 4,
+     "engaged": 4
+    },
+    "31": {
+     "calls": 4,
+     "engaged": 3
+    },
+    "32": {
+     "calls": 4,
+     "engaged": 1
+    },
+    "33": {
+     "calls": 3,
+     "engaged": 2
+    },
+    "34": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "35": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "36": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "37": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "38": {
+     "calls": 3,
+     "engaged": 2
+    },
+    "39": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "40": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "41": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "42": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "43": {
+     "calls": 4,
+     "engaged": 0
+    },
+    "44": {
+     "calls": 4,
+     "engaged": 1
+    },
+    "45": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "46": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "47": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "48": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "49": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "50": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "51": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "52": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "53": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "54": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "55": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "56": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "57": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "58": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "59": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "60": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "61": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "62": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "63": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "64": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "65": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "66": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "67": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "68": {
+     "calls": 2,
+     "engaged": 2
+    },
+    "92": {
+     "calls": 1,
+     "engaged": 1
+    },
+    "93": {
+     "calls": 3,
+     "engaged": 3
+    },
+    "94": {
+     "calls": 4,
+     "engaged": 1
+    },
+    "95": {
+     "calls": 3,
+     "engaged": 0
+    },
+    "96": {
+     "calls": 3,
+     "engaged": 0
+    }
+   },
+   "ms": 1566
+  }
+ ]
+}
