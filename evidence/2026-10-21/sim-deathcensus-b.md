@@ -76,7 +76,7 @@ zero policy edits. Worker tree: ~/workspace/worktrees/sim-deathcensus-b.
 
 ## Proof results (pre-sweep)
 
-scripts/test-deathcensus-b.js under FEASTSCALE_R13=1 SEATDRIVE=0: **76 passed, 0 failed** (2026-10-21, re-verified by the adopting run). Part A fixtures (classifyDeath full taxonomy + attributeVillageLost scattering/extinction/succession/unknown) green; Part B instrument honesty 5 seeds x 60d (>=99% row completeness, 0 unexplained, 0 instrument errors, rows reconcile with the engine's own death aggregates); Part C RED-equivalent instrumented == pristine on 2 seeds; Part D det-gate paired re-run byte-identical; Part E village-lost end-to-end on 2 real 150d runs (s66109 succession d122, s66110 scattering d83/84 — trigger site named, beat verbatim from the engine's say stream).
+scripts/test-deathcensus-b.js under FEASTSCALE_R13=1 SEATDRIVE=0: **76 passed, 0 failed** (2026-10-21, pre-rebase; re-verified by the adopting run). Part A fixtures (classifyDeath full taxonomy + attributeVillageLost scattering/extinction/succession/unknown) green; Part B instrument honesty 5 seeds x 60d (>=99% row completeness, 0 unexplained, 0 instrument errors, rows reconcile with the engine's own death aggregates); Part C RED-equivalent instrumented == pristine on 2 seeds; Part D det-gate paired re-run byte-identical; Part E village-lost end-to-end on 2 real 150d runs (s66109 succession d122, s66110 scattering d83/84 — trigger site named, beat verbatim from the engine's say stream). **Post-rebase re-verification (branch rebased onto 32d62faca): 72 passed, 0 failed** — Parts A–D green; Part E INCONCLUSIVE by the test's own design (no village loss in 2x150d on the new base — the end-to-end beat path stands proven from the pre-rebase run; the rebase touched only the water-dispatch rotation and evidence, nothing in death logic).
 
 ## Sweep results
 
@@ -133,4 +133,4 @@ DIAG-GO. food-economy stays converging: the death-cause census the 1630Z run nam
 
 ## Telemetry note
 
-(pending — telemetry deviation check at closeout vs scale-wall baselines; this corpus is a food-economy DIAG substrate, SEATDRIVE=0, so wins/national are expected below the win-stack baseline — regime artifact by design.)
+Telemetry deviation check (2026-10-21, adopting run): 1 LOUD line vs scale-wall.json — "wins disappeared: baseline 16 -> current 0". Classified REGIME artifact (documented, not investigated further): the baseline is the full win-side stack (SEATDRIVE=1, wins structural); this corpus is the food-economy DIAG substrate (SEATDRIVE=0, FEASTSCALE_R13=1) where wins are structurally 0 — a single-substrate census with no treatment arm, so there is no before/after to deviate. national/table/exiled quiet. Baseline NOT rolled. Corpus wall numbers (authoritative): won 0/16, national(end) 7/16, table 12/16, wave4 14/16, wave5 0/16, exiled 0/16, median 137d.
