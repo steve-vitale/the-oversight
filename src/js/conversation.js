@@ -7331,6 +7331,23 @@
       const c = this.convoGet(vid);
       if (!c.active) return null;
       if (choiceId === 'leave') return this.endConvo(vid, 'left');
+      // NV WINDDOWN DELIVERY (journey-scale r19 2026-10-21): the budget-landing
+      // winddown beat queues in heldBeats, but the nonverbal thread offers no
+      // 'goon' continuer (convoChoices excludes it for nonverbal), so the beat
+      // sat queued forever and gesture-spam looped without end — the winddown
+      // machinery was dead on this path. Surface it here: the turn after
+      // queueing speaks the gesture beat and arms windingDown; the next
+      // gesture ends the conversation naturally. Wind-down, not a chop.
+      const wdi = (c.heldBeats || []).findIndex(h => h && h.winddown);
+      if (wdi >= 0 && !c.windingDown) {
+        const wb = c.heldBeats.splice(wdi, 1)[0];
+        c.windingDown = true;
+        c.transcript.push({ who: 'you', text: '(gesture)' });
+        const wline = this.sayLine(vid, wb.text, { foreign: wb.foreign || c.nativeLang || this.npcNativeLang(vid) }) || wb.text;
+        c.transcript.push({ who: 'them', text: wline });
+        c.exchanges++;
+        return { line: wline, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+      }
       const kind = choiceId.slice(3);
       const line = this.nvRespond(vid, kind);
       c.transcript.push({ who: 'you', text: '(gesture)' });

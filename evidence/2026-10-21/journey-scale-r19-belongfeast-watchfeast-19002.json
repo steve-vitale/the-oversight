@@ -1,0 +1,5216 @@
+{
+ "seed": 19002,
+ "policy": "belongfeast-watchfeast",
+ "maxGameDay": 109,
+ "endReason": "village-lost",
+ "nationalFirstDay": null,
+ "nationalHeldDays": 0,
+ "scaleBeatText": [
+  "⛓️ Stonebridge doesn't say no. They say: \"They'll take Haven — but the tribute is 6,000 kcal/week, not 5,000. Take it or leave it.\" The table is set — accept their terms, sweeten the offer, or walk away.",
+  "Almost nobody walks away from this one.",
+  "With Haven grieving, Stonebridge installs their own speaker at the table. Tribute rises to 9,000 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+  "🚶 Haven walks from the table cleanly — no blades, no hard words. The bond ends where it stood, honestly.",
+  "🗣️ Valeria to David, by the fire: \"The table's set. The ring of pale light — it's just sitting there. Waiting on them. What do you think they'll tell it?\"",
+  "Almost nobody walks away from this one.",
+  "With Haven grieving, Ashford installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer.",
+  "🗣️ Meera to Sofia, by the fire: \"The table's set. The ring of pale light — it's just sitting there. Waiting on them. What do you think they'll tell it?\"",
+  "Almost nobody walks away from this one.",
+  "Seven days of silence, and the silence answered for Haven. Ashford's new speaker reads it plainly. (Trust -6.) Ashford installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would.",
+  "Almost nobody walks away from this one.",
+  "◈ THE TABLE IS SET. A ring of pale light waits — take your seat from Haven when you are ready. Nothing is final until you sit.",
+  "◈ THE TABLE — it is not a table. It's a ring of pale light, and around it, things with too many angles to be faces. Above it all — the audience. Trillions of eyes, and every one of them knows your name. The System speaks, and for once it isn't performing: \"HUMANITY PRESENTS ITS CASE.\"",
+  "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — regional standing, waves 1–3 faced (15/8/3), with 3 wave-4 fought, 8 contests survived, 3 crises weathered. The table does not rise. It prices.",
+  "With Haven grieving, Stonebridge installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer.",
+  "📺 The billing says EXTREME RISK — almost nobody walks away from this one.",
+  "Almost nobody walks away from this one.",
+  "Seven days of silence, and the silence answered for Haven. Stonebridge's new speaker reads it plainly. (Trust -6.) Stonebridge installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would.",
+  "Almost nobody walks away from this one.",
+  "With Haven grieving, Stonebridge installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer."
+ ],
+ "bindingDay": null,
+ "bindingAnswer": null,
+ "bindingBeatText": [],
+ "walkResult": null,
+ "serveResult": null,
+ "bindingLog": [],
+ "watchersDay": null,
+ "watchersAnswer": null,
+ "watchersBeatText": [],
+ "watchersConseq": null,
+ "watchersLog": [],
+ "tableAnnounceDay": 91,
+ "tableAnnounceText": [],
+ "tableApproach": [
+  {
+   "day": 91,
+   "ev": "preview",
+   "seat": "lesser",
+   "doors": [
+    "the Feared",
+    "the Beloved",
+    "the Witness",
+    "the Assimilated",
+    "the Defiant",
+    "the Relay"
+   ],
+   "ready": false,
+   "why": "Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "standingCost": 0,
+   "losses": 0,
+   "key": false,
+   "pure": true,
+   "progMutated": false
+  },
+  {
+   "day": 92,
+   "ev": "preview",
+   "seat": "lesser",
+   "doors": [
+    "the Feared",
+    "the Beloved",
+    "the Witness",
+    "the Assimilated",
+    "the Defiant",
+    "the Relay"
+   ],
+   "ready": false,
+   "why": "Finish the current encounter before taking your seat.",
+   "overtime": 0,
+   "standingCost": 0,
+   "losses": 0,
+   "key": false,
+   "pure": true,
+   "progMutated": false
+  },
+  {
+   "day": 94,
+   "ev": "preview",
+   "seat": "lesser",
+   "doors": [
+    "the Feared",
+    "the Beloved",
+    "the Witness",
+    "the Assimilated",
+    "the Defiant",
+    "the Relay"
+   ],
+   "ready": false,
+   "why": "Finish the current contest before taking your seat.",
+   "overtime": 0,
+   "standingCost": 0,
+   "losses": 0,
+   "key": false,
+   "pure": true,
+   "progMutated": false
+  },
+  {
+   "day": 95,
+   "ev": "preview",
+   "seat": "lesser",
+   "doors": [
+    "the Feared",
+    "the Beloved",
+    "the Witness",
+    "the Assimilated",
+    "the Defiant",
+    "the Relay"
+   ],
+   "ready": true,
+   "why": null,
+   "overtime": 0,
+   "standingCost": 0,
+   "losses": 0,
+   "key": false,
+   "pure": true,
+   "progMutated": false
+  },
+  {
+   "day": 95,
+   "ev": "take-seat",
+   "ok": true,
+   "msg": "",
+   "takeErr": null,
+   "tableDone": true,
+   "seat": "lesser",
+   "sceneLines": [
+    "◈ THE TABLE — it is not a table. It's a ring of pale light, and around it, things with too many angles to be faces. Above it all — the audience. Trillions of eyes, and every one of them knows your name. The System speaks, and for once it isn't performing: \"HUMANITY PRESENTS ITS CASE.\"",
+    "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — regional standing, waves 1–3 faced (15/8/3), with 3 wave-4 fought, 8 contests survived, 3 crises weathered. The table does not rise. It prices.",
+    "EVERYONE. SIT. WATCH. The teeth and the weather can WAIT — nothing out there matters until this is done. ...Did I stutter? SIT."
+   ],
+   "auditLine": "◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. A lesser seat — regional standing, waves 1–3 faced (15/8/3), with 3 wave-4 fought, 8 contests survived, 3 crises weathered. The table does not rise. It prices.",
+   "overtimeAudit": null,
+   "overtimeState": {
+    "tier": 0,
+    "penalty": 0,
+    "losses": 0
+   },
+   "arm": "gambit",
+   "announceDay": 91,
+   "undockedPaths": [
+    {
+     "id": "feared",
+     "earned": true,
+     "strength": 100
+    },
+    {
+     "id": "indispensable",
+     "earned": false,
+     "strength": 0
+    },
+    {
+     "id": "beloved",
+     "earned": true,
+     "strength": 100
+    },
+    {
+     "id": "witness",
+     "earned": true,
+     "strength": 49
+    },
+    {
+     "id": "assimilated",
+     "earned": true,
+     "strength": 60
+    },
+    {
+     "id": "defiant",
+     "earned": true,
+     "strength": 36
+    },
+    {
+     "id": "relay",
+     "earned": true,
+     "strength": 40
+    }
+   ],
+   "undockedErr": null,
+   "undockedRestored": true,
+   "auditDetail": {
+    "w1": 15,
+    "w2": 8,
+    "w3": 3,
+    "w4": 3,
+    "w5": 0,
+    "contestsN": 8,
+    "crisesN": 3,
+    "rank": "regional",
+    "stage": 3,
+    "foodDeeds": true
+   },
+   "doorOffer": {
+    "phase": "paths",
+    "path": null,
+    "promptHtml": " The ring of pale light. The too-many-angled faces. The trillions of eyes. The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take. ◈ the Feared — 29 distinct monsters faced blow-by-blow. The footage exists, and it plays unasked. (standing: 100) ◇ the Indispensable — The Indispensable needs a full seat — the galaxy must actually need you, not just notice you. ◈ the Beloved — Viewership 35, fan favor 43 — the galaxy's favorite, by the numbers. (standing: 100) ◈ the Witness — 3 exposures on the record. The docket is real. (standing: 49) ◈ the Assimilated — Always open. The table takes anyone — that's what makes it a trap, and what makes it safe. (standing: 60) ◈ the Defiant — Defiance 4 on the record. The 'no' is earned. (standing: 36) ◈ the Relay —",
+    "options": [
+     {
+      "id": "path:feared",
+      "label": "Walk the path of the Feared"
+     },
+     {
+      "id": "path:beloved",
+      "label": "Walk the path of the Beloved"
+     },
+     {
+      "id": "path:witness",
+      "label": "Walk the path of the Witness"
+     },
+     {
+      "id": "path:assimilated",
+      "label": "Walk the path of the Assimilated"
+     },
+     {
+      "id": "path:defiant",
+      "label": "Walk the path of the Defiant"
+     },
+     {
+      "id": "path:relay",
+      "label": "Walk the path of the Relay"
+     }
+    ],
+    "earned": [
+     {
+      "id": "feared",
+      "name": "the Feared",
+      "strength": 100
+     },
+     {
+      "id": "beloved",
+      "name": "the Beloved",
+      "strength": 100
+     },
+     {
+      "id": "witness",
+      "name": "the Witness",
+      "strength": 49
+     },
+     {
+      "id": "assimilated",
+      "name": "the Assimilated",
+      "strength": 60
+     },
+     {
+      "id": "defiant",
+      "name": "the Defiant",
+      "strength": 36
+     },
+     {
+      "id": "relay",
+      "name": "the Relay",
+      "strength": 40
+     }
+    ],
+    "priced": [
+     {
+      "id": "indispensable",
+      "name": "the Indispensable",
+      "why": "The Indispensable needs a full seat — the galaxy must actually need you, not just notice you."
+     }
+    ]
+   }
+  }
+ ],
+ "belongLog": [
+  {
+   "day": 20,
+   "verb": "proposeLink",
+   "link": "illage_1",
+   "how": "[object Object]",
+   "res": "counter",
+   "note": "belongseek courtship verb"
+  },
+  {
+   "day": 20,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "6100",
+   "kcalPaid": 6100
+  },
+  {
+   "day": 21,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "6000",
+   "kcalPaid": 6000
+  },
+  {
+   "day": 28,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "6100",
+   "kcalPaid": 6100
+  },
+  {
+   "day": 29,
+   "verb": "answerDemand",
+   "link": "sphq9984",
+   "how": "true",
+   "res": "true"
+  },
+  {
+   "day": 35,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "6080",
+   "kcalPaid": 6080
+  },
+  {
+   "day": 42,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "6027",
+   "kcalPaid": 6027
+  },
+  {
+   "day": 49,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "9195",
+   "kcalPaid": 9195
+  },
+  {
+   "day": 56,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "9390",
+   "kcalPaid": 9390
+  },
+  {
+   "day": 63,
+   "verb": "payTribute",
+   "link": "sphq9984",
+   "how": "",
+   "res": "9056",
+   "kcalPaid": 9056
+  },
+  {
+   "day": 64,
+   "verb": "answerDemand",
+   "link": "sphq9984",
+   "how": "true",
+   "res": "true"
+  },
+  {
+   "day": 64,
+   "verb": "breakLink",
+   "link": "sphq9984",
+   "how": "walked",
+   "res": "true"
+  },
+  {
+   "day": 64,
+   "verb": "proposeLink",
+   "link": "illage_3",
+   "how": "[object Object]",
+   "res": "{\"id\":\"link_mgpspia3266\",\"primary\":\"village_3\",\"subordinate\":\"haven\",\"trust\":30,\"tributeKcalPerWeek\":5000,\"tributePaidWeek\":-1,\"arrears\":0,\"obligations\":[\"tribute\",\"aid\"],\"history\":[{\"day\":64,\"kind\":\"",
+   "note": "belongseek courtship verb"
+  },
+  {
+   "day": 64,
+   "verb": "payTribute",
+   "link": "spia3266",
+   "how": "",
+   "res": "5400",
+   "kcalPaid": 5400
+  },
+  {
+   "day": 70,
+   "verb": "payTribute",
+   "link": "spia3266",
+   "how": "",
+   "res": "5040",
+   "kcalPaid": 5040
+  },
+  {
+   "day": 77,
+   "verb": "payTribute",
+   "link": "spia3266",
+   "how": "",
+   "res": "5055",
+   "kcalPaid": 5055
+  },
+  {
+   "day": 84,
+   "verb": "payTribute",
+   "link": "spia3266",
+   "how": "",
+   "res": "5015",
+   "kcalPaid": 5015
+  },
+  {
+   "day": 91,
+   "verb": "payTribute",
+   "link": "spia3266",
+   "how": "",
+   "res": "7648",
+   "kcalPaid": 7648
+  },
+  {
+   "day": 91,
+   "verb": "breakLink",
+   "link": "spia3266",
+   "how": "gambit",
+   "res": "true"
+  },
+  {
+   "day": 91,
+   "verb": "proposeLink",
+   "link": "illage_1",
+   "how": "[object Object]",
+   "res": "{\"id\":\"link_mgpspipy885\",\"primary\":\"village_1\",\"subordinate\":\"haven\",\"trust\":30,\"tributeKcalPerWeek\":5000,\"tributePaidWeek\":-1,\"arrears\":0,\"obligations\":[\"tribute\",\"aid\"],\"history\":[{\"day\":91,\"kind\":\"",
+   "note": "belongseek courtship verb"
+  },
+  {
+   "day": 91,
+   "verb": "payTribute",
+   "link": "spipy885",
+   "how": "",
+   "res": "5120",
+   "kcalPaid": 5120
+  },
+  {
+   "day": 92,
+   "verb": "answerDemand",
+   "link": "spipy885",
+   "how": "true",
+   "res": "true"
+  },
+  {
+   "day": 98,
+   "verb": "payTribute",
+   "link": "spipy885",
+   "how": "",
+   "res": "5063",
+   "kcalPaid": 5063
+  },
+  {
+   "day": 105,
+   "verb": "payTribute",
+   "link": "spipy885",
+   "how": "",
+   "res": "5026",
+   "kcalPaid": 5026
+  }
+ ],
+ "ctxSwitches": "village_1->village_3",
+ "fsFeasts": 12,
+ "exileLog": [],
+ "exiledAtEnd": false,
+ "deathHonesty": {
+  "causes": {
+   "starvation": 1,
+   "combat": 1,
+   "the night": 1,
+   "contest": 1,
+   "sickness": 1,
+   "the expedition": 1
+  },
+  "playerDeaths": [
+   {
+    "day": 16,
+    "cause": "starvation"
+   },
+   {
+    "day": 17,
+    "cause": "combat"
+   },
+   {
+    "day": 44,
+    "cause": "the night"
+   },
+   {
+    "day": 79,
+    "cause": "contest"
+   },
+   {
+    "day": 109,
+    "cause": "sickness"
+   },
+   {
+    "day": 109,
+    "cause": "the expedition"
+   }
+  ],
+  "mislabels": []
+ },
+ "counterParity": {
+  "observedEvents": [
+   {
+    "day": 5,
+    "id": "rut_king",
+    "n": 1,
+    "vid": "valeria_quispe"
+   },
+   {
+    "day": 7,
+    "id": "rut_king",
+    "n": 2,
+    "vid": "valeria_quispe"
+   },
+   {
+    "day": 8,
+    "id": "murkcap",
+    "n": 1,
+    "vid": "gen_wfmyh04"
+   },
+   {
+    "day": 8,
+    "id": "drumbelly_tanuki",
+    "n": 1,
+    "vid": "gen_xm51pzu"
+   },
+   {
+    "day": 9,
+    "id": "murkcap",
+    "n": 2,
+    "vid": "meera_reddy"
+   },
+   {
+    "day": 9,
+    "id": "drumbelly_tanuki",
+    "n": 2,
+    "vid": "gen_6xpn72i"
+   },
+   {
+    "day": 9,
+    "id": "anaconda_empress",
+    "n": 1,
+    "vid": "gen_xm51pzu"
+   },
+   {
+    "day": 9,
+    "id": "nightcourt",
+    "n": 1,
+    "vid": "gen_nzk55fy"
+   },
+   {
+    "day": 10,
+    "id": "anaconda_empress",
+    "n": 2,
+    "vid": "gen_nzk55fy"
+   },
+   {
+    "day": 16,
+    "id": "nightcourt",
+    "n": 2,
+    "vid": "chloe_dubois"
+   },
+   {
+    "day": 20,
+    "id": "sunback",
+    "n": 1,
+    "vid": "chloe_dubois"
+   },
+   {
+    "day": 31,
+    "id": "sweeps_week",
+    "n": 1,
+    "vid": "maya_singh"
+   },
+   {
+    "day": 32,
+    "id": "dustboar",
+    "n": 1,
+    "vid": "maya_singh"
+   },
+   {
+    "day": 32,
+    "id": "sanjun",
+    "n": 1,
+    "vid": "maya_singh"
+   },
+   {
+    "day": 33,
+    "id": "dustboar",
+    "n": 2,
+    "vid": "maya_singh"
+   },
+   {
+    "day": 37,
+    "id": "sunback",
+    "n": 2,
+    "vid": "gen_wfmyh04"
+   },
+   {
+    "day": 40,
+    "id": "understudy",
+    "n": 1,
+    "vid": "sofia_chen"
+   },
+   {
+    "day": 40,
+    "id": "understudy",
+    "n": 2,
+    "vid": "sofia_chen"
+   },
+   {
+    "day": 46,
+    "id": "statickite",
+    "n": 1,
+    "vid": "gen_wfmyh04"
+   },
+   {
+    "day": 57,
+    "id": "voice_mimic_radio",
+    "n": 1,
+    "vid": "chloe_dubois"
+   },
+   {
+    "day": 58,
+    "id": "bulldozer",
+    "n": 1,
+    "vid": "player"
+   },
+   {
+    "day": 63,
+    "id": "voice_mimic_radio",
+    "n": 2,
+    "vid": "david_kim"
+   },
+   {
+    "day": 63,
+    "id": "chorus_line",
+    "n": 1,
+    "vid": "chloe_dubois"
+   },
+   {
+    "day": 67,
+    "id": "moderator",
+    "n": 1,
+    "vid": "chloe_dubois"
+   },
+   {
+    "day": 72,
+    "id": "focus_group",
+    "n": 1,
+    "vid": "player"
+   },
+   {
+    "day": 73,
+    "id": "redactor",
+    "n": 1,
+    "vid": "player"
+   },
+   {
+    "day": 79,
+    "id": "moderator",
+    "n": 2,
+    "vid": "meera_reddy"
+   },
+   {
+    "day": 79,
+    "id": "sanjun",
+    "n": 2,
+    "vid": "valeria_quispe"
+   },
+   {
+    "day": 81,
+    "id": "congregation",
+    "n": 1,
+    "vid": "player"
+   },
+   {
+    "day": 85,
+    "id": "glasswing",
+    "n": 1,
+    "vid": "app_mgpspikz7"
+   },
+   {
+    "day": 86,
+    "id": "eater",
+    "n": 1,
+    "vid": "player"
+   },
+   {
+    "day": 89,
+    "id": "sweeps_week",
+    "n": 2,
+    "vid": "player"
+   },
+   {
+    "day": 89,
+    "id": "giant_mosquito",
+    "n": 1,
+    "vid": "david_kim"
+   },
+   {
+    "day": 91,
+    "id": "chorus_line",
+    "n": 2,
+    "vid": "player"
+   },
+   {
+    "day": 93,
+    "id": "eater",
+    "n": 2,
+    "vid": "player"
+   },
+   {
+    "day": 94,
+    "id": "suburb",
+    "n": 1,
+    "vid": "player"
+   }
+  ],
+  "discoveredEvents": [
+   {
+    "day": 7,
+    "id": "rut_king",
+    "via": "observed"
+   },
+   {
+    "day": 9,
+    "id": "murkcap",
+    "via": "observed"
+   },
+   {
+    "day": 9,
+    "id": "drumbelly_tanuki",
+    "via": "observed"
+   },
+   {
+    "day": 10,
+    "id": "anaconda_empress",
+    "via": "observed"
+   },
+   {
+    "day": 16,
+    "id": "nightcourt",
+    "via": "observed"
+   },
+   {
+    "day": 17,
+    "id": "hummice",
+    "via": "taught"
+   },
+   {
+    "day": 29,
+    "id": "nevermore",
+    "via": "taught"
+   },
+   {
+    "day": 33,
+    "id": "dustboar",
+    "via": "observed"
+   },
+   {
+    "day": 36,
+    "id": "gallowdeer",
+    "via": "taught"
+   },
+   {
+    "day": 37,
+    "id": "sunback",
+    "via": "observed"
+   },
+   {
+    "day": 40,
+    "id": "understudy",
+    "via": "observed"
+   },
+   {
+    "day": 43,
+    "id": "alien_tick",
+    "via": "taught"
+   },
+   {
+    "day": 47,
+    "id": "nightlight_catfish",
+    "via": "taught"
+   },
+   {
+    "day": 48,
+    "id": "statickite",
+    "via": "taught"
+   },
+   {
+    "day": 50,
+    "id": "bright_idea",
+    "via": "taught"
+   },
+   {
+    "day": 58,
+    "id": "warranty_caller",
+    "via": "taught"
+   },
+   {
+    "day": 63,
+    "id": "voice_mimic_radio",
+    "via": "observed"
+   },
+   {
+    "day": 79,
+    "id": "moderator",
+    "via": "observed"
+   },
+   {
+    "day": 79,
+    "id": "sanjun",
+    "via": "observed"
+   },
+   {
+    "day": 89,
+    "id": "sweeps_week",
+    "via": "scholar-observed"
+   },
+   {
+    "day": 91,
+    "id": "chorus_line",
+    "via": "scholar-observed"
+   },
+   {
+    "day": 93,
+    "id": "eater",
+    "via": "scholar-observed"
+   }
+  ],
+  "obsBar": {
+   "rut_king": 2,
+   "murkcap": 2,
+   "drumbelly_tanuki": 2,
+   "anaconda_empress": 2,
+   "nightcourt": 2,
+   "sunback": 2,
+   "sweeps_week": 2,
+   "dustboar": 2,
+   "sanjun": 2,
+   "understudy": 2,
+   "statickite": 1,
+   "voice_mimic_radio": 2,
+   "bulldozer": 1,
+   "chorus_line": 2,
+   "moderator": 2,
+   "focus_group": 1,
+   "redactor": 1,
+   "congregation": 1,
+   "glasswing": 1,
+   "eater": 2,
+   "giant_mosquito": 1,
+   "suburb": 1
+  },
+  "known": [
+   "rut_king",
+   "murkcap",
+   "drumbelly_tanuki",
+   "anaconda_empress",
+   "nightcourt",
+   "hummice",
+   "nevermore",
+   "dustboar",
+   "gallowdeer",
+   "sunback",
+   "understudy",
+   "alien_tick",
+   "nightlight_catfish",
+   "statickite",
+   "bright_idea",
+   "warranty_caller",
+   "voice_mimic_radio",
+   "moderator",
+   "sanjun",
+   "sweeps_week"
+  ],
+  "villagerTricks": [
+   "chorus_line",
+   "eater"
+  ]
+ },
+ "markerCounts": {
+  "exile": 0,
+  "moot": 13,
+  "theft": 0,
+  "confrontation": 0,
+  "national": 0,
+  "tribute": 35,
+  "firstCourt": 0,
+  "ironCourt": 0,
+  "foundingCouncil": 0,
+  "theCharter": 0,
+  "theBinding": 0,
+  "binding": 2,
+  "watchers": 8,
+  "table": 14,
+  "tableApproach": 6,
+  "polityDissolve": 0,
+  "raid": 0,
+  "revolt": 0,
+  "duressTribute": 2
+ },
+ "waveLog": [
+  {
+   "day": 2,
+   "wave": 1,
+   "w2points": 0,
+   "standing": {
+    "total": 0,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 0
+   },
+   "villageSlain": {},
+   "engaged": {
+    "w1": 0,
+    "w2": 0,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  },
+  {
+   "day": 36,
+   "wave": 2,
+   "w2points": 0,
+   "standing": {
+    "total": 60,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 60,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 3
+   },
+   "villageSlain": {
+    "hummice": 1,
+    "drumbelly_tanuki": 1,
+    "nevermore": 1,
+    "gallowdeer": 1
+   },
+   "engaged": {
+    "w1": 12,
+    "w2": 0,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  },
+  {
+   "day": 58,
+   "wave": 3,
+   "w2points": 5,
+   "standing": {
+    "total": 120,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 120,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 6
+   },
+   "villageSlain": {
+    "hummice": 1,
+    "drumbelly_tanuki": 1,
+    "nevermore": 1,
+    "gallowdeer": 1,
+    "alien_tick": 1,
+    "nightlight_catfish": 1,
+    "statickite": 1,
+    "bright_idea": 2,
+    "warranty_caller": 1,
+    "sunback": 1
+   },
+   "engaged": {
+    "w1": 14,
+    "w2": 6,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  },
+  {
+   "day": 79,
+   "wave": 4,
+   "w2points": 8,
+   "standing": {
+    "total": 205,
+    "war": 25,
+    "diplomacy": 0,
+    "plenty": 180,
+    "warPts": 1,
+    "links": 0,
+    "feasts": 9
+   },
+   "villageSlain": {
+    "hummice": 1,
+    "drumbelly_tanuki": 2,
+    "nevermore": 1,
+    "gallowdeer": 1,
+    "alien_tick": 2,
+    "nightlight_catfish": 1,
+    "statickite": 2,
+    "bright_idea": 4,
+    "warranty_caller": 2,
+    "sunback": 1,
+    "chorus_line": 1
+   },
+   "engaged": {
+    "w1": 14,
+    "w2": 7,
+    "w3": 3,
+    "w4": 0,
+    "w5": 0
+   }
+  }
+ ],
+ "deedLog": [
+  {
+   "day": 100,
+   "engaged": {
+    "w1": 15,
+    "w2": 8,
+    "w3": 3,
+    "w4": 3,
+    "w5": 0
+   },
+   "wave": 4,
+   "pop": 10,
+   "pantry": 31114,
+   "w3fights": 4,
+   "exiled": false,
+   "takeRate7": 217,
+   "codexMonsters": 23,
+   "scale": "regional",
+   "nationalLive": false,
+   "globalLive": false,
+   "scaleRefused": false,
+   "viewership": 36,
+   "tableSeat": "lesser",
+   "deedGate": true,
+   "pendingNational": null,
+   "pendingGlobal": false,
+   "links": [
+    {
+     "id": "hq9984",
+     "kind": "hier",
+     "other": "village_1",
+     "dir": "subordinate",
+     "status": "broken",
+     "trust": 99,
+     "age": 80,
+     "arrears": 0,
+     "seasoned": true
+    },
+    {
+     "id": "ia3266",
+     "kind": "hier",
+     "other": "village_3",
+     "dir": "subordinate",
+     "status": "broken",
+     "trust": 44,
+     "age": 36,
+     "arrears": 0,
+     "seasoned": true
+    },
+    {
+     "id": "ipy885",
+     "kind": "hier",
+     "other": "village_1",
+     "dir": "subordinate",
+     "status": "active",
+     "trust": 50,
+     "age": 9,
+     "arrears": 0,
+     "seasoned": false
+    }
+   ]
+  }
+ ],
+ "finalWave": 4,
+ "finalScale": "regional",
+ "engaged": {
+  "w1": 15,
+  "w2": 8,
+  "w3": 3,
+  "w4": 3,
+  "w5": 0
+ },
+ "wavesFaced": {
+  "rut_king": 1,
+  "murkcap": 1,
+  "drumbelly_tanuki": 1,
+  "anaconda_empress": 1,
+  "nightcourt": 1,
+  "hummice": 1,
+  "sunback": 1,
+  "nevermore": 1,
+  "sweeps_week": 1,
+  "dustboar": 1,
+  "sanjun": 1,
+  "gallowdeer": 1,
+  "understudy": 2,
+  "alien_tick": 2,
+  "statickite": 2,
+  "nightlight_catfish": 1,
+  "bright_idea": 2,
+  "warranty_caller": 2,
+  "voice_mimic_radio": 2,
+  "bulldozer": 1,
+  "chorus_line": 3,
+  "moderator": 2,
+  "focus_group": 3,
+  "redactor": 3,
+  "congregation": 4,
+  "glasswing": 1,
+  "eater": 4,
+  "giant_mosquito": 2,
+  "suburb": 4
+ },
+ "tableTele": [
+  {
+   "day": 95,
+   "type": "table_entered"
+  }
+ ],
+ "w3fights": [
+  {
+   "day": 72,
+   "rounds": 43,
+   "result": "fled",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "focus_group",
+     "wave": 3,
+     "name": "The Focus Group",
+     "hp0": 254
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 68,
+     "fled": true
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "focus_group",
+     "hp": 254,
+     "fled": true
+    },
+    {
+     "key": "fg_eye_1",
+     "kind": "monster",
+     "mid": null,
+     "hp": 1,
+     "fled": true
+    },
+    {
+     "key": "fg_eye_2",
+     "kind": "monster",
+     "mid": null,
+     "hp": 1,
+     "fled": true
+    },
+    {
+     "key": "fg_eye_3",
+     "kind": "monster",
+     "mid": null,
+     "hp": 1,
+     "fled": true
+    },
+    {
+     "key": "fg_eye_4",
+     "kind": "monster",
+     "mid": null,
+     "hp": 1,
+     "fled": true
+    }
+   ],
+   "sigHits": {
+    "focus_group": [
+     "LOVED",
+     "HATED",
+     "murmur"
+    ]
+   },
+   "sample": [
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your WAIT, they HATE your DODGE (move). (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your STRIKE, they HATE your DODGE (move). (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "Focus group's attack hits you for 12.",
+    "📖 Codex: Cold Open — locks onto one target — moving won't dodge it. You won't forget this.",
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your STRIKE, they HATE your WAIT. (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your STRIKE, they HATE your WAIT. (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "📖 Codex: Deliberation — hits everything close around it. You won't forget this.",
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your STRIKE, they HATE your DODGE (move). (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)"
+   ]
+  },
+  {
+   "day": 73,
+   "rounds": 4,
+   "result": "routed",
+   "tileType": "grove",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "redactor",
+     "wave": 3,
+     "name": "The Redactor",
+     "hp0": 300
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 80,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "redactor",
+     "hp": 38,
+     "fled": true
+    }
+   ],
+   "sigHits": {
+    "redactor": [
+     "REDACT",
+     "redact"
+    ]
+   },
+   "sample": [
+    "You STRIKE the redactor for 126 (Hardlight knife).",
+    "The handles close around your Hardlight knife — REDACTED. For two rounds it is just a shape in your hands. (Strikes are unarmed.)",
+    "redactor's attack swipes at sand-ghosts. Missed. (pocket_sand)",
+    "📖 Codex: Redact — locks onto one target — moving won't dodge it. You won't forget this.",
+    "You STRIKE the redactor for 16.",
+    "redactor's Redact swipes at sand-ghosts. Missed. (pocket_sand)",
+    "You STRIKE the redactor for 120 (Hardlight knife).",
+    "Redactor's Redact hits you for 20.",
+    "💛 You hold Contract Quill. It has signed three leases, two loans, and one terrible contract you still regret. The penmanship was always excellent. The judgment, less so. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)"
+   ]
+  },
+  {
+   "day": 79,
+   "rounds": 14,
+   "result": "won",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "chorus_line",
+     "wave": 3,
+     "name": "Chorus Line",
+     "hp0": 337
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 50,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "chorus_line",
+     "hp": -6,
+     "fled": false
+    }
+   ],
+   "sigHits": {
+    "chorus_line": [
+     "downbeat"
+    ]
+   },
+   "sample": [
+    "PATIENT AIM: first strike, doubled.",
+    "You STRIKE the chorus line for 83.",
+    "You STRIKE the chorus line for 18.",
+    "You STRIKE the chorus line for 15.",
+    "The downbeat kick hits you for 14.",
+    "You STRIKE the chorus line for 15.",
+    "You STRIKE the chorus line for 15.",
+    "You STRIKE the chorus line for 30.",
+    "You STRIKE the chorus line for 18.",
+    "The downbeat kick hits you for 16.",
+    "You STRIKE the chorus line for 30.",
+    "You STRIKE the chorus line for 30."
+   ]
+  },
+  {
+   "day": 91,
+   "rounds": 1,
+   "result": "fled",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "chorus_line",
+     "wave": 3,
+     "name": "Chorus Line",
+     "hp0": 310
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 55,
+     "fled": true
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "chorus_line",
+     "hp": 310,
+     "fled": true
+    }
+   ],
+   "sigHits": {
+    "chorus_line": [
+     "downbeat",
+     "4/4"
+    ]
+   },
+   "sample": [
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 300 kcal. Poison the meal, starve the field, or end it.)"
+   ]
+  },
+  {
+   "day": 95,
+   "rounds": 1,
+   "result": "won",
+   "tileType": "grove",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "chorus_line",
+     "wave": 3,
+     "name": "Chorus Line",
+     "hp0": 327
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 60,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "chorus_line",
+     "hp": -98,
+     "fled": false
+    }
+   ],
+   "sigHits": {},
+   "sample": [
+    "PATIENT AIM: first strike, doubled.",
+    "You STRIKE the chorus line for 425 (Harvest Scythe).",
+    "✨ Now you understand it. The Harvest Scythe: +40 damage (range 1); harvest sweeps double radius.",
+    "📺 WAVE LEDGER — wave 3 is halfway there (2/4 kills — the ledger counts kills only, not near-misses).",
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "💛 You hold Reading Glasses. You read the fine print on medicine bottles for Lisa next door, because their hands shook. Dosages, warnings, the tiny words that matter. The apocalypse has fine print too. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities uplifted, devotion ×1.5 — richer feasts hit harder.)",
+    "🍖 FEASTED ×2.53 until tomorrow's dawn (6 parts left): a proper feast. A channeled keepsake feeds the flames (devotion ×1.5). Arc IV burns hotter. Strikes and abilities hit with the feast behind them.",
+    "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 300 kcal. Poison the meal, starve the field, or end it.)"
+   ]
+  }
+ ],
+ "w3killsByType": {
+  "chorus_line": 2
+ },
+ "sigFired": {
+  "focus_group": [
+   "LOVED",
+   "HATED",
+   "murmur"
+  ],
+  "redactor": [
+   "REDACT",
+   "redact"
+  ],
+  "chorus_line": [
+   "downbeat",
+   "downbeat",
+   "4/4"
+  ]
+ },
+ "fightsByWave": {
+  "1": 12,
+  "2": 7,
+  "3": 5,
+  "4": 5
+ },
+ "fightsTotal": 28,
+ "foughtWaves": [
+  {
+   "day": 17,
+   "waves": [
+    1
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 29,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 29,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 36,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 43,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 47,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 50,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 58,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 58,
+   "waves": [
+    1
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 58,
+   "waves": [
+    1
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 65,
+   "waves": [
+    2,
+    2
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 68,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 72,
+   "waves": [
+    3
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 73,
+   "waves": [
+    3
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 74,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 77,
+   "waves": [
+    1
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 79,
+   "waves": [
+    3
+   ],
+   "result": "won"
+  },
+  {
+   "day": 79,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 81,
+   "waves": [
+    4
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 83,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 86,
+   "waves": [
+    4
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 87,
+   "waves": [
+    1
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 89,
+   "waves": [
+    1
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 91,
+   "waves": [
+    3
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 93,
+   "waves": [
+    4
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 94,
+   "waves": [
+    4
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 95,
+   "waves": [
+    3
+   ],
+   "result": "won"
+  },
+  {
+   "day": 101,
+   "waves": [
+    4
+   ],
+   "result": "fled"
+  }
+ ],
+ "census": [],
+ "deaths": [
+  {
+   "day": 16,
+   "who": "gen_xztrw5c",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 16,
+   "who": "hummice",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 17,
+   "who": "gen_xm51pzu",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 29,
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 29,
+   "who": "nevermore",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 36,
+   "who": "gallowdeer",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 43,
+   "who": "alien_tick",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 44,
+   "who": "gen_6xpn72i",
+   "cause": "the night",
+   "kind": "villager"
+  },
+  {
+   "day": 46,
+   "who": "nightlight_catfish",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 47,
+   "who": "statickite",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 50,
+   "who": "bright_idea",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 57,
+   "who": "warranty_caller",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 57,
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 58,
+   "who": "sunback",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 58,
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 61,
+   "who": "maya_singh",
+   "cause": "alien",
+   "kind": "person"
+  },
+  {
+   "day": 61,
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 65,
+   "who": "bright_idea",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 68,
+   "who": "drumbelly_tanuki",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 73,
+   "who": "warranty_caller",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 74,
+   "who": "statickite",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 79,
+   "who": "gen_tjj66v3",
+   "cause": "contest",
+   "kind": "villager"
+  },
+  {
+   "day": 79,
+   "who": "chorus_line",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 79,
+   "who": "alien_tick",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 79,
+   "who": "nevermore",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 83,
+   "who": "rut_king",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 87,
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 95,
+   "who": "chorus_line",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 100,
+   "who": "gen_wfmyh04",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 101,
+   "who": "meera_reddy",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 101,
+   "who": "chloe_dubois",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 102,
+   "who": "david_kim",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 102,
+   "who": "sofia_chen",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 103,
+   "who": "valeria_quispe",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 104,
+   "who": "amina_diallo",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 104,
+   "who": "app_mgpspikz7",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 105,
+   "who": "elif_demir",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 106,
+   "who": "visjoin_102",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 107,
+   "who": "visjoin_103",
+   "cause": "the phoenix link",
+   "kind": "villager"
+  },
+  {
+   "day": 109,
+   "who": "gen_nzk55fy",
+   "cause": "sickness",
+   "kind": "villager"
+  }
+ ],
+ "regionalLog": [],
+ "scaleLog": [
+  {
+   "ev": "national-off",
+   "day": 2,
+   "scale": "village",
+   "nationalLive": false,
+   "globalLive": false,
+   "scaleRefused": false,
+   "viewership": 12,
+   "tableSeat": "none",
+   "deedGate": true,
+   "pendingNational": null,
+   "pendingGlobal": false,
+   "links": []
+  }
+ ],
+ "conquestEvents": [],
+ "convoFiles": [
+  "/home/hatch/workspace/worktrees/journey-scale/evidence/2026-10-21/journey-scale-r19-belongfeast-watchfeast-transcript-19002-day80.txt",
+  "/home/hatch/workspace/worktrees/journey-scale/evidence/2026-10-21/journey-scale-r19-belongfeast-watchfeast-transcript-19002-day100.txt"
+ ],
+ "contestStuck": 0,
+ "contestCalls": 46,
+ "contestNote": null,
+ "ctxSummary": {
+  "struck": 96,
+  "fled": 4580612,
+  "fledDeepening": 11,
+  "stalemateFled": 7,
+  "fightsStarted": 28,
+  "geared": 13,
+  "armored": 22,
+  "beasttricksAsked": 5,
+  "beasttricksTaught": 0
+ },
+ "counterEvents": [
+  {
+   "day": 7,
+   "mid": "rut_king",
+   "via": "observed"
+  },
+  {
+   "day": 9,
+   "mid": "murkcap",
+   "via": "observed"
+  },
+  {
+   "day": 9,
+   "mid": "drumbelly_tanuki",
+   "via": "observed"
+  },
+  {
+   "day": 10,
+   "mid": "anaconda_empress",
+   "via": "observed"
+  },
+  {
+   "day": 16,
+   "mid": "nightcourt",
+   "via": "observed"
+  },
+  {
+   "day": 17,
+   "mid": "hummice",
+   "via": "taught"
+  },
+  {
+   "day": 29,
+   "mid": "nevermore",
+   "via": "taught"
+  },
+  {
+   "day": 33,
+   "mid": "dustboar",
+   "via": "observed"
+  },
+  {
+   "day": 36,
+   "mid": "gallowdeer",
+   "via": "taught"
+  },
+  {
+   "day": 37,
+   "mid": "sunback",
+   "via": "observed"
+  },
+  {
+   "day": 40,
+   "mid": "understudy",
+   "via": "observed"
+  },
+  {
+   "day": 43,
+   "mid": "alien_tick",
+   "via": "taught"
+  },
+  {
+   "day": 47,
+   "mid": "nightlight_catfish",
+   "via": "taught"
+  },
+  {
+   "day": 48,
+   "mid": "statickite",
+   "via": "taught"
+  },
+  {
+   "day": 50,
+   "mid": "bright_idea",
+   "via": "taught"
+  },
+  {
+   "day": 58,
+   "mid": "warranty_caller",
+   "via": "taught"
+  },
+  {
+   "day": 63,
+   "mid": "voice_mimic_radio",
+   "via": "observed"
+  },
+  {
+   "day": 79,
+   "mid": "moderator",
+   "via": "observed"
+  },
+  {
+   "day": 79,
+   "mid": "sanjun",
+   "via": "observed"
+  },
+  {
+   "day": 89,
+   "mid": "sweeps_week",
+   "via": "scholar-observed"
+  }
+ ],
+ "combineFires": [
+  {
+   "day": 2,
+   "pid": "sunchoke"
+  },
+  {
+   "day": 3,
+   "pid": "jujube"
+  },
+  {
+   "day": 4,
+   "pid": "perilla"
+  },
+  {
+   "day": 5,
+   "pid": "burdock"
+  },
+  {
+   "day": 6,
+   "pid": "egusi_melon"
+  },
+  {
+   "day": 7,
+   "pid": "american_hazelnut"
+  },
+  {
+   "day": 20,
+   "pid": "chinese_water_chestnut"
+  },
+  {
+   "day": 21,
+   "pid": "plantain_leaf"
+  },
+  {
+   "day": 30,
+   "pid": "chinese_water_chestnut"
+  },
+  {
+   "day": 30,
+   "pid": "sunchoke"
+  },
+  {
+   "day": 30,
+   "pid": "egusi_melon"
+  },
+  {
+   "day": 31,
+   "pid": "plantain_leaf"
+  },
+  {
+   "day": 31,
+   "pid": "jujube"
+  },
+  {
+   "day": 32,
+   "pid": "lambs_quarters"
+  },
+  {
+   "day": 32,
+   "pid": "burdock"
+  },
+  {
+   "day": 32,
+   "pid": "curry_leaf"
+  },
+  {
+   "day": 34,
+   "pid": "perilla"
+  },
+  {
+   "day": 35,
+   "pid": "hickory_nut"
+  },
+  {
+   "day": 36,
+   "pid": "american_hazelnut"
+  },
+  {
+   "day": 36,
+   "pid": "fonio"
+  },
+  {
+   "day": 36,
+   "pid": "moso_bamboo_shoot"
+  },
+  {
+   "day": 39,
+   "pid": "cupuacu"
+  },
+  {
+   "day": 44,
+   "pid": "lambs_quarters"
+  },
+  {
+   "day": 47,
+   "pid": "daylily"
+  },
+  {
+   "day": 51,
+   "pid": "chickweed"
+  },
+  {
+   "day": 52,
+   "pid": "cupuacu"
+  },
+  {
+   "day": 55,
+   "pid": "muscadine"
+  },
+  {
+   "day": 55,
+   "pid": "chinese_water_chestnut"
+  },
+  {
+   "day": 55,
+   "pid": "plantain_leaf"
+  },
+  {
+   "day": 64,
+   "pid": "cow_parsley"
+  },
+  {
+   "day": 65,
+   "pid": "daylily"
+  },
+  {
+   "day": 67,
+   "pid": "wild_cherry"
+  },
+  {
+   "day": 69,
+   "pid": "camu_camu"
+  },
+  {
+   "day": 69,
+   "pid": "chickweed"
+  },
+  {
+   "day": 71,
+   "pid": "ginger"
+  },
+  {
+   "day": 74,
+   "pid": "muscadine"
+  },
+  {
+   "day": 83,
+   "pid": "acorn_white_oak"
+  },
+  {
+   "day": 84,
+   "pid": "maypop"
+  },
+  {
+   "day": 85,
+   "pid": "colocasia"
+  },
+  {
+   "day": 86,
+   "pid": "tiger_nut"
+  },
+  {
+   "day": 92,
+   "pid": "tea_leaf"
+  },
+  {
+   "day": 97,
+   "pid": "cupuacu"
+  },
+  {
+   "day": 98,
+   "pid": "victoria_lily"
+  },
+  {
+   "day": 98,
+   "pid": "cow_parsley"
+  },
+  {
+   "day": 101,
+   "pid": "ginger"
+  }
+ ],
+ "teachableDays": [],
+ "traderDeepSnaps": [
+  {
+   "day": 100,
+   "deep": {
+    "app_mgpspikz7": {
+     "maypop": {
+      "day": 84,
+      "via": "fireside",
+      "deep": false
+     },
+     "colocasia": {
+      "day": 85,
+      "via": "fireside",
+      "deep": false
+     },
+     "piquiarana": {
+      "day": 87,
+      "via": "word of mouth",
+      "deep": false
+     },
+     "coconut": {
+      "day": 89,
+      "via": "fireside",
+      "deep": false
+     },
+     "tea_leaf": {
+      "day": 92,
+      "via": "fireside",
+      "deep": false
+     },
+     "victoria_lily": {
+      "day": 98,
+      "via": "word of mouth",
+      "deep": false
+     }
+    }
+   }
+  }
+ ],
+ "knowCounts": {
+  "experiment": 5,
+  "traderDeep": 0,
+  "moot": 14
+ },
+ "pacing": {
+  "perDay": [
+   {
+    "day": 1,
+    "acts": {
+     "policy:fillWater": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "policy:prepStash": 1,
+     "policy:makePlot": 2,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 13,
+    "policyCalls": 4,
+    "dayTicks": 0
+   },
+   {
+    "day": 2,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:assignTask": 7,
+     "policy:talkTo": 6,
+     "policy:endConvo": 6,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 3,
+     "policy:prepStash": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 30,
+    "policyCalls": 4,
+    "dayTicks": 387
+   },
+   {
+    "day": 3,
+    "acts": {
+     "internal:prepStash": 4,
+     "policy:eat": 6,
+     "policy:takeFromPantry": 5,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:sortBag": 2,
+     "policy:prepStash": 1,
+     "policy:makePlot": 2,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 39,
+    "policyCalls": 4,
+    "dayTicks": 0
+   },
+   {
+    "day": 4,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:assignTask": 7,
+     "policy:talkTo": 2,
+     "policy:endConvo": 2,
+     "policy:eat": 9,
+     "policy:craft": 1,
+     "policy:takeFromPantry": 8,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:fillWater": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:sortBag": 1,
+     "policy:prepStash": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 50,
+    "policyCalls": 4,
+    "dayTicks": 413
+   },
+   {
+    "day": 5,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 6,
+     "policy:takeFromPantry": 5,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 6,
+     "driver:doAction:wait": 3,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 37,
+    "policyCalls": 4,
+    "dayTicks": 405
+   },
+   {
+    "day": 6,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:eat": 7,
+     "policy:takeFromPantry": 6,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 40,
+    "policyCalls": 4,
+    "dayTicks": 437
+   },
+   {
+    "day": 7,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 6,
+     "policy:takeFromPantry": 5,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 38,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 8,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 7,
+     "policy:takeFromPantry": 6,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:travelTo": 7,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 37,
+    "policyCalls": 4,
+    "dayTicks": 385
+   },
+   {
+    "day": 9,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 3,
+     "policy:travelTo": 8,
+     "policy:doAction:forage": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:channelSentiment": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 24,
+    "policyCalls": 4,
+    "dayTicks": 401
+   },
+   {
+    "day": 10,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 6,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 2
+    },
+    "verbs": 25,
+    "policyCalls": 4,
+    "dayTicks": 402
+   },
+   {
+    "day": 11,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 7,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 24,
+    "policyCalls": 4,
+    "dayTicks": 385
+   },
+   {
+    "day": 12,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 6,
+     "policy:doAction:forage": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 2,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 22,
+    "policyCalls": 4,
+    "dayTicks": 401
+   },
+   {
+    "day": 13,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 7,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 25,
+    "policyCalls": 4,
+    "dayTicks": 402
+   },
+   {
+    "day": 14,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 8,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 25,
+    "policyCalls": 4,
+    "dayTicks": 385
+   },
+   {
+    "day": 15,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 6,
+     "policy:doAction:forage": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:stockPantry": 2,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 22,
+    "policyCalls": 4,
+    "dayTicks": 401
+   },
+   {
+    "day": 16,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 7,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 2,
+     "internal:villageMeal": 2
+    },
+    "verbs": 25,
+    "policyCalls": 4,
+    "dayTicks": 402
+   },
+   {
+    "day": 17,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:contestChoose": 3,
+     "policy:tbPlayerMove": 2,
+     "policy:eat": 6,
+     "policy:takeFromPantry": 5,
+     "policy:fillWater": 4,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 6,
+     "driver:doAction:wait": 4,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 55,
+    "policyCalls": 10,
+    "dayTicks": 455
+   },
+   {
+    "day": 18,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 2,
+     "policy:fillWater": 1,
+     "policy:channelSentiment": 2,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 27,
+    "policyCalls": 4,
+    "dayTicks": 278
+   },
+   {
+    "day": 19,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 3,
+     "policy:takeFromPantry": 2,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 29,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 20,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 3,
+     "policy:fillWater": 1,
+     "policy:proposeLink": 1,
+     "policy:answerCounter": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAccord": 1,
+     "policy:payTribute": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 39,
+    "policyCalls": 4,
+    "dayTicks": 437
+   },
+   {
+    "day": 21,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 6,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:hostFeast": 1,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 31,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 22,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:proveWorth": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 26,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 23,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:contestChoose": 1,
+     "policy:eat": 3,
+     "policy:takeFromPantry": 2,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 6,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 39,
+    "policyCalls": 5,
+    "dayTicks": 407
+   },
+   {
+    "day": 24,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:stockPantry": 3,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 27,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 25,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 5,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAidBeg": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 31,
+    "policyCalls": 4,
+    "dayTicks": 390
+   },
+   {
+    "day": 26,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 3,
+     "policy:takeFromPantry": 2,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 32,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 27,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 25,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 28,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 23,
+    "policyCalls": 4,
+    "dayTicks": 406
+   },
+   {
+    "day": 29,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:tbPlayerStrike": 4,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "policy:hostFeast": 1,
+     "policy:answerDemand": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:craft": 1,
+     "internal:stockPantry": 2,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 33,
+    "policyCalls": 8,
+    "dayTicks": 407
+   },
+   {
+    "day": 30,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 27,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 31,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:proveWorth": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 26,
+    "policyCalls": 4,
+    "dayTicks": 406
+   },
+   {
+    "day": 32,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 5,
+     "internal:proveWorth": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAidBeg": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 34,
+    "policyCalls": 4,
+    "dayTicks": 421
+   },
+   {
+    "day": 33,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:proveWorth": 1,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 29,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 34,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 25,
+    "policyCalls": 4,
+    "dayTicks": 421
+   },
+   {
+    "day": 35,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "internal:teachPlant": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 28,
+    "policyCalls": 4,
+    "dayTicks": 406
+   },
+   {
+    "day": 36,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerStrike": 4,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 32,
+    "policyCalls": 8,
+    "dayTicks": 391
+   },
+   {
+    "day": 37,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 4,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 27,
+    "policyCalls": 5,
+    "dayTicks": 453
+   },
+   {
+    "day": 38,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:eat": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 26,
+    "policyCalls": 3,
+    "dayTicks": 309
+   },
+   {
+    "day": 39,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 2
+    },
+    "verbs": 30,
+    "policyCalls": 4,
+    "dayTicks": 405
+   },
+   {
+    "day": 40,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 4,
+     "internal:stockPantry": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 30,
+    "policyCalls": 5,
+    "dayTicks": 485
+   },
+   {
+    "day": 41,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 2,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 27,
+    "policyCalls": 3,
+    "dayTicks": 325
+   },
+   {
+    "day": 42,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 6,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 31,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 43,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerStrike": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 28,
+    "policyCalls": 5,
+    "dayTicks": 409
+   },
+   {
+    "day": 44,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:contestChoose": 4,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 4,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 2,
+     "internal:villageMeal": 2
+    },
+    "verbs": 37,
+    "policyCalls": 8,
+    "dayTicks": 423
+   },
+   {
+    "day": 45,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 3,
+     "policy:takeFromPantry": 2,
+     "policy:craft": 1,
+     "internal:stockPantry": 2,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 35,
+    "policyCalls": 5,
+    "dayTicks": 407
+   },
+   {
+    "day": 46,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 24,
+    "policyCalls": 4,
+    "dayTicks": 421
+   },
+   {
+    "day": 47,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:tbPlayerStrike": 4,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 33,
+    "policyCalls": 8,
+    "dayTicks": 424
+   },
+   {
+    "day": 48,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:fillWater": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 30,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 49,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 28,
+    "policyCalls": 4,
+    "dayTicks": 424
+   },
+   {
+    "day": 50,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 3,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerStrike": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 31,
+    "policyCalls": 5,
+    "dayTicks": 425
+   },
+   {
+    "day": 51,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:proveWorth": 1,
+     "policy:fillWater": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 30,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 52,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 4,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 2,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 33,
+    "policyCalls": 8,
+    "dayTicks": 424
+   },
+   {
+    "day": 53,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:contestChoose": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 29,
+    "policyCalls": 5,
+    "dayTicks": 439
+   },
+   {
+    "day": 54,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "internal:proveWorth": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 30,
+    "policyCalls": 4,
+    "dayTicks": 421
+   },
+   {
+    "day": 55,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:proveWorth": 2,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 28,
+    "policyCalls": 4,
+    "dayTicks": 438
+   },
+   {
+    "day": 56,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 4,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 2,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 31,
+    "policyCalls": 5,
+    "dayTicks": 453
+   },
+   {
+    "day": 57,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 28,
+    "policyCalls": 3,
+    "dayTicks": 310
+   },
+   {
+    "day": 58,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 4,
+     "policy:tbPlayerStrike": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 4,
+     "policy:fillWater": 1,
+     "internal:proveWorth": 2,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerMove": 12,
+     "policy:tbBarrierExit": 2,
+     "internal:travelTo": 2,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 2,
+     "policy:travelTo": 17,
+     "policy:doAction:forage": 10,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:askAbout": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 73,
+    "policyCalls": 24,
+    "dayTicks": 391
+   },
+   {
+    "day": 59,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 6,
+     "policy:takeFromPantry": 5,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:travelTo": 15,
+     "policy:doAction:forage": 8,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 47,
+    "policyCalls": 3,
+    "dayTicks": 273
+   },
+   {
+    "day": 60,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 3,
+     "policy:eat": 14,
+     "policy:takeFromPantry": 13,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 2,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 52,
+    "policyCalls": 7,
+    "dayTicks": 401
+   },
+   {
+    "day": 61,
+    "acts": {
+     "internal:prepStash": 6,
+     "policy:eat": 10,
+     "policy:takeFromPantry": 9,
+     "driver:doAction:wait": 4,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 5,
+     "policy:fillWater": 2,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:assignTask": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 53,
+    "policyCalls": 5,
+    "dayTicks": 471
+   },
+   {
+    "day": 62,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:fillWater": 2,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 28,
+    "policyCalls": 3,
+    "dayTicks": 328
+   },
+   {
+    "day": 63,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:fillWater": 1,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAidOffer": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 32,
+    "policyCalls": 4,
+    "dayTicks": 423
+   },
+   {
+    "day": 64,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:contestChoose": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 3,
+     "policy:answerDemand": 1,
+     "policy:proposeLink": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:payTribute": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 35,
+    "policyCalls": 5,
+    "dayTicks": 439
+   },
+   {
+    "day": 65,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 4,
+     "internal:proveWorth": 1,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerStrike": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 33,
+    "policyCalls": 7,
+    "dayTicks": 457
+   },
+   {
+    "day": 66,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 2,
+     "internal:stockPantry": 4,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:eat": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:proveWorth": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 34,
+    "policyCalls": 3,
+    "dayTicks": 346
+   },
+   {
+    "day": 67,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 32,
+    "policyCalls": 4,
+    "dayTicks": 439
+   },
+   {
+    "day": 68,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:tbPlayerStrike": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 4,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 29,
+    "policyCalls": 6,
+    "dayTicks": 455
+   },
+   {
+    "day": 69,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 25,
+    "policyCalls": 3,
+    "dayTicks": 327
+   },
+   {
+    "day": 70,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:fillWater": 1,
+     "internal:stockPantry": 1,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:eat": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 33,
+    "policyCalls": 4,
+    "dayTicks": 440
+   },
+   {
+    "day": 71,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 27,
+    "policyCalls": 4,
+    "dayTicks": 439
+   },
+   {
+    "day": 72,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerMove": 2,
+     "policy:tbPlayerStrike": 20,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 54,
+    "policyCalls": 30,
+    "dayTicks": 391
+   },
+   {
+    "day": 73,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "policy:travelTo": 17,
+     "policy:doAction:forage": 12,
+     "driver:doAction:wait": 4,
+     "policy:fillWater": 3,
+     "policy:channelSentiment": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "policy:tbPlayerMove": 1,
+     "policy:tbPlayerStrike": 3,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 55,
+    "policyCalls": 9,
+    "dayTicks": 389
+   },
+   {
+    "day": 74,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 14,
+     "policy:takeFromPantry": 13,
+     "policy:fillWater": 3,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 2,
+     "policy:doAction:forage": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:stockPantry": 3,
+     "policy:tbPlayerStrike": 4,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 58,
+    "policyCalls": 8,
+    "dayTicks": 277
+   },
+   {
+    "day": 75,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 12,
+     "policy:takeFromPantry": 11,
+     "policy:fillWater": 2,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 2,
+     "policy:doAction:forage": 1,
+     "policy:prepStash": 1,
+     "policy:craft": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 42,
+    "policyCalls": 3,
+    "dayTicks": 309
+   },
+   {
+    "day": 76,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 8,
+     "policy:takeFromPantry": 7,
+     "policy:fillWater": 4,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 4,
+     "internal:proveWorth": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:setTrap": 1,
+     "policy:prepStash": 1,
+     "policy:craft": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "internal:stockPantry": 2,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 46,
+    "policyCalls": 5,
+    "dayTicks": 453
+   },
+   {
+    "day": 77,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 13,
+     "policy:takeFromPantry": 12,
+     "policy:fillWater": 2,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:proveWorth": 1,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:craft": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAidOffer": 1,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 55,
+    "policyCalls": 5,
+    "dayTicks": 293
+   },
+   {
+    "day": 78,
+    "acts": {
+     "internal:prepStash": 6,
+     "internal:stockPantry": 1,
+     "policy:eat": 15,
+     "policy:takeFromPantry": 13,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:fillWater": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:doAction:forage": 2,
+     "policy:setTrap": 1,
+     "policy:sortBag": 1,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:assignTask": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 59,
+    "policyCalls": 3,
+    "dayTicks": 376
+   },
+   {
+    "day": 79,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 3,
+     "policy:eat": 6,
+     "policy:takeFromPantry": 5,
+     "policy:fillWater": 3,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 1,
+     "driver:doAction:wait": 4,
+     "internal:stockPantry": 1,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerStrike": 15,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 12,
+     "policy:clearBlockage": 1,
+     "policy:doAction:forage": 3,
+     "policy:setTrap": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 68,
+    "policyCalls": 23,
+    "dayTicks": 448
+   },
+   {
+    "day": 80,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 8,
+     "policy:takeFromPantry": 7,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 2,
+     "policy:travelTo": 2,
+     "policy:doAction:forage": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 2,
+     "policy:craft": 1,
+     "policy:askAbout": 1,
+     "policy:convoTurn": 3,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 37,
+    "policyCalls": 3,
+    "dayTicks": 275
+   },
+   {
+    "day": 81,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 1,
+     "policy:eat": 11,
+     "policy:takeFromPantry": 10,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 4,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "policy:tbBarrierExit": 2,
+     "internal:travelTo": 2,
+     "policy:tbPlayerMove": 10,
+     "policy:tbPlayerStrike": 35,
+     "internal:proveWorth": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 92,
+    "policyCalls": 53,
+    "dayTicks": 401
+   },
+   {
+    "day": 82,
+    "acts": {
+     "internal:prepStash": 8,
+     "policy:eat": 16,
+     "policy:takeFromPantry": 15,
+     "driver:doAction:wait": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 10,
+     "policy:fillWater": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:clearBlockage": 1,
+     "policy:doAction:forage": 1,
+     "policy:sortBag": 2,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:assignTask": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:corpseLootAll": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 71,
+    "policyCalls": 3,
+    "dayTicks": 399
+   },
+   {
+    "day": 83,
+    "acts": {
+     "internal:prepStash": 4,
+     "policy:fillWater": 4,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 4,
+     "policy:tbPlayerStrike": 1,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:sortBag": 1,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 41,
+    "policyCalls": 6,
+    "dayTicks": 496
+   },
+   {
+    "day": 84,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 2,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:craft": 1,
+     "internal:proveWorth": 1,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 29,
+    "policyCalls": 3,
+    "dayTicks": 344
+   },
+   {
+    "day": 85,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "policy:askAbout": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 29,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 86,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 3,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "policy:assignTask": 5,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:fillWater": 1,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerMove": 1,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 37,
+    "policyCalls": 9,
+    "dayTicks": 407
+   },
+   {
+    "day": 87,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "policy:eat": 15,
+     "policy:takeFromPantry": 14,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:travelTo": 15,
+     "policy:doAction:forage": 8,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:corpseLootAll": 2,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 71,
+    "policyCalls": 5,
+    "dayTicks": 417
+   },
+   {
+    "day": 88,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 7,
+     "policy:takeFromPantry": 6,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 31,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 89,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 2,
+     "policy:tbBarrierExit": 4580600,
+     "policy:eat": 7,
+     "policy:takeFromPantry": 6,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 27,
+     "policy:channelSentiment": 2,
+     "policy:travelTo": 20,
+     "policy:prepStash": 9,
+     "policy:talkTo": 9,
+     "policy:endConvo": 9,
+     "policy:craft": 1,
+     "policy:doAction:forage": 3,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 2
+    },
+    "verbs": 4580702,
+    "policyCalls": 4603436,
+    "dayTicks": 401
+   },
+   {
+    "day": 90,
+    "acts": {
+     "internal:prepStash": 8,
+     "policy:eat": 6,
+     "policy:takeFromPantry": 24,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 5,
+     "policy:fillWater": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:assignTask": 2,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 62,
+    "policyCalls": 4,
+    "dayTicks": 0
+   },
+   {
+    "day": 91,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:talkTo": 2,
+     "policy:endConvo": 2,
+     "policy:payTribute": 2,
+     "policy:craft": 1,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "policy:fillWater": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 2,
+     "driver:doAction:wait": 3,
+     "policy:proposeLink": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 2,
+     "policy:doAction:forage": 1,
+     "policy:setTrap": 1,
+     "policy:prepStash": 1,
+     "policy:donateToPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 30,
+    "policyCalls": 5,
+    "dayTicks": 419
+   },
+   {
+    "day": 92,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 1,
+     "policy:eat": 1,
+     "policy:fillWater": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:answerDemand": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAidOffer": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 24,
+    "policyCalls": 5,
+    "dayTicks": 417
+   },
+   {
+    "day": 93,
+    "acts": {
+     "internal:prepStash": 5,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "policy:eat": 11,
+     "policy:takeFromPantry": 10,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 5,
+     "policy:fillWater": 1,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:sowPlot": 1,
+     "policy:useAbility": 1,
+     "policy:assignTask": 3,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 53,
+    "policyCalls": 5,
+    "dayTicks": 0
+   },
+   {
+    "day": 94,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:talkTo": 2,
+     "policy:endConvo": 2,
+     "policy:craft": 1,
+     "policy:contestChoose": 1,
+     "policy:fillWater": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 4,
+     "driver:doAction:wait": 3,
+     "policy:hostFeast": 1,
+     "policy:tbPlayerMove": 4,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:donateToPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 39,
+    "policyCalls": 10,
+    "dayTicks": 407
+   },
+   {
+    "day": 95,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "policy:fillWater": 3,
+     "policy:assignTask": 4,
+     "policy:travelTo": 13,
+     "policy:doAction:forage": 9,
+     "driver:doAction:wait": 3,
+     "policy:tbPlayerStrike": 1,
+     "policy:hostFeast": 1,
+     "policy:channelSentiment": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "policy:askAbout": 1,
+     "internal:stockPantry": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 45,
+    "policyCalls": 5,
+    "dayTicks": 399
+   },
+   {
+    "day": 96,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "policy:fillWater": 3,
+     "policy:assignTask": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 19,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 97,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 11,
+     "policy:takeFromPantry": 10,
+     "policy:fillWater": 3,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 43,
+    "policyCalls": 4,
+    "dayTicks": 401
+   },
+   {
+    "day": 98,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 3,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 105,
+    "policyCalls": 4,
+    "dayTicks": 402
+   },
+   {
+    "day": 99,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 1,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 3,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 103,
+    "policyCalls": 4,
+    "dayTicks": 385
+   },
+   {
+    "day": 100,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 3,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 2,
+     "policy:craft": 1,
+     "policy:askAbout": 1,
+     "policy:convoTurn": 8,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 114,
+    "policyCalls": 4,
+    "dayTicks": 403
+   },
+   {
+    "day": 101,
+    "acts": {
+     "internal:prepStash": 4,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 4,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 4,
+     "policy:assignTask": 4,
+     "policy:hostFeast": 1,
+     "policy:tbBarrierExit": 1,
+     "internal:travelTo": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 5,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAidOffer": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 120,
+    "policyCalls": 5,
+    "dayTicks": 405
+   },
+   {
+    "day": 102,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 3,
+     "policy:fillWater": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "policy:assignTask": 3,
+     "policy:travelTo": 19,
+     "policy:doAction:forage": 12,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 2,
+     "policy:channelSentiment": 1,
+     "policy:prepStash": 1,
+     "policy:useAbility": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:eat": 1,
+     "policy:takeFromPantry": 20,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 77,
+    "policyCalls": 7,
+    "dayTicks": 437
+   },
+   {
+    "day": 103,
+    "acts": {
+     "internal:prepStash": 4,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 5,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 8,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:assignTask": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 114,
+    "policyCalls": 4,
+    "dayTicks": 405
+   },
+   {
+    "day": 104,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:contestChoose": 2,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 5,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 8,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:assignTask": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 116,
+    "policyCalls": 6,
+    "dayTicks": 413
+   },
+   {
+    "day": 105,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 5,
+     "driver:doAction:wait": 3,
+     "policy:payTribute": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 8,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:assignTask": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "policy:askAbout": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 116,
+    "policyCalls": 4,
+    "dayTicks": 397
+   },
+   {
+    "day": 106,
+    "acts": {
+     "internal:prepStash": 4,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 5,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 8,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:assignTask": 2,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:answerAidOffer": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1,
+     "internal:stockPantry": 1
+    },
+    "verbs": 116,
+    "policyCalls": 4,
+    "dayTicks": 405
+   },
+   {
+    "day": 107,
+    "acts": {
+     "internal:prepStash": 3,
+     "policy:eat": 2,
+     "policy:takeFromPantry": 80,
+     "policy:fillWater": 5,
+     "driver:doAction:wait": 3,
+     "internal:stockPantry": 1,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 8,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:assignTask": 1,
+     "policy:talkTo": 1,
+     "policy:endConvo": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 113,
+    "policyCalls": 4,
+    "dayTicks": 411
+   },
+   {
+    "day": 108,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:eat": 15,
+     "policy:takeFromPantry": 14,
+     "policy:fillWater": 3,
+     "policy:boilWater": 2,
+     "policy:doAction:drink": 2,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 4,
+     "policy:doAction:forage": 3,
+     "policy:prepStash": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 52,
+    "policyCalls": 4,
+    "dayTicks": 392
+   },
+   {
+    "day": 109,
+    "acts": {
+     "internal:prepStash": 1,
+     "policy:contestChoose": 3,
+     "policy:eat": 12,
+     "policy:takeFromPantry": 31,
+     "policy:fillWater": 3,
+     "policy:boilWater": 1,
+     "policy:doAction:drink": 1,
+     "driver:doAction:wait": 3,
+     "policy:channelSentiment": 1,
+     "policy:travelTo": 3,
+     "policy:doAction:forage": 2,
+     "policy:prepStash": 1,
+     "policy:craft": 1,
+     "internal:offerSystemQuest": 1,
+     "internal:villageMeal": 1
+    },
+    "verbs": 65,
+    "policyCalls": 7,
+    "dayTicks": 408
+   }
+  ],
+  "totalDeliberate": 4584410,
+  "totalDriver": 351,
+  "totalInternal": 595,
+  "meanDeliberatePerDay": 42058.8,
+  "medianDeliberatePerDay": 24,
+  "meanDriverPerDay": 3.2,
+  "byCategory": {
+   "water": 339,
+   "social": 725,
+   "food": 1476,
+   "field": 477,
+   "travel": 562,
+   "show": 59,
+   "combat": 4580772
+  },
+  "byCategoryDriver": {
+   "wait": 351
+  },
+  "internalByVerb": {
+   "stockPantry": 138,
+   "offerSystemQuest": 112,
+   "villageMeal": 111,
+   "prepStash": 195,
+   "teachPlant": 8,
+   "channelSentiment": 1,
+   "proveWorth": 18,
+   "travelTo": 12
+  },
+  "meanVerbsPerDayLegacy": 42067.5,
+  "meanPolicyCallsPerDay": 42239,
+  "meanTicksPerDay": 385.4,
+  "tickUtilization": 0.753
+ },
+ "ms": 2023,
+ "tableAudit": {
+  "firstDay": {
+   "stageOk": 8,
+   "w1": 10,
+   "crises": 17,
+   "foodDeeds": 29,
+   "scaleOk": 42,
+   "contests": 44,
+   "w2": 50,
+   "seatAny": 74,
+   "waiting": 74,
+   "w3": 74,
+   "announced": 91,
+   "dayFloor": 91
+  },
+  "transitions": [
+   {
+    "day": 2,
+    "from": "none",
+    "to": "none"
+   },
+   {
+    "day": 74,
+    "from": "none",
+    "to": "lesser"
+   }
+  ],
+  "snaps": [
+   {
+    "day": 100,
+    "arc": 4,
+    "tableWaiting": true,
+    "tableAnnounced": true,
+    "tableDone": true,
+    "sentimentTaught": true,
+    "crisesN": 3,
+    "crises": [
+     "the-siege",
+     "breach",
+     "first-grave"
+    ],
+    "seat": "lesser",
+    "seatDetail": {
+     "w1": 15,
+     "w2": 8,
+     "w3": 3,
+     "w4": 3,
+     "w5": 0,
+     "contestsN": 8,
+     "crisesN": 3,
+     "rank": "regional",
+     "stage": 3,
+     "foodDeeds": true
+    },
+    "deedOk": false,
+    "deedDetail": {
+     "ok": false,
+     "waves": false,
+     "contests": true,
+     "crises": true,
+     "scale": false,
+     "stageOk": true,
+     "foodDeeds": true,
+     "stage": 3,
+     "w1": 15,
+     "w2": 8,
+     "w3": 3,
+     "w4": 3,
+     "w5": 0,
+     "contestsN": 8,
+     "crisesN": 3,
+     "rank": "regional"
+    },
+    "contestsSurvived": 8,
+    "stage": 3,
+    "feastSurgeUsed": true,
+    "dayFloorOk": true,
+    "scaleRank": "regional"
+   }
+  ],
+  "final": {
+   "day": 109,
+   "arc": 4,
+   "tableWaiting": true,
+   "tableAnnounced": true,
+   "tableDone": true,
+   "sentimentTaught": true,
+   "crisesN": 3,
+   "crises": [
+    "the-siege",
+    "breach",
+    "first-grave"
+   ],
+   "seat": "lesser",
+   "seatDetail": {
+    "w1": 15,
+    "w2": 8,
+    "w3": 3,
+    "w4": 3,
+    "w5": 0,
+    "contestsN": 9,
+    "crisesN": 3,
+    "rank": "regional",
+    "stage": 3,
+    "foodDeeds": true
+   },
+   "deedOk": false,
+   "deedDetail": {
+    "ok": false,
+    "waves": false,
+    "contests": true,
+    "crises": true,
+    "scale": false,
+    "stageOk": true,
+    "foodDeeds": true,
+    "stage": 3,
+    "w1": 15,
+    "w2": 8,
+    "w3": 3,
+    "w4": 3,
+    "w5": 0,
+    "contestsN": 9,
+    "crisesN": 3,
+    "rank": "regional"
+   },
+   "contestsSurvived": 9,
+   "stage": 3,
+   "feastSurgeUsed": true,
+   "dayFloorOk": true,
+   "scaleRank": "regional"
+  },
+  "unmetAtEnd": []
+ },
+ "finalSnap": {
+  "day": 109,
+  "scale": "regional",
+  "nationalLive": false,
+  "globalLive": false,
+  "scaleRefused": false,
+  "viewership": 38,
+  "tableSeat": "lesser",
+  "deedGate": true,
+  "pendingNational": null,
+  "pendingGlobal": false,
+  "links": [
+   {
+    "id": "hq9984",
+    "kind": "hier",
+    "other": "village_1",
+    "dir": "subordinate",
+    "status": "broken",
+    "trust": 99,
+    "age": 89,
+    "arrears": 0,
+    "seasoned": true
+   },
+   {
+    "id": "ia3266",
+    "kind": "hier",
+    "other": "village_3",
+    "dir": "subordinate",
+    "status": "broken",
+    "trust": 44,
+    "age": 45,
+    "arrears": 0,
+    "seasoned": true
+   },
+   {
+    "id": "ipy885",
+    "kind": "hier",
+    "other": "village_1",
+    "dir": "subordinate",
+    "status": "active",
+    "trust": 40,
+    "age": 18,
+    "arrears": 0,
+    "seasoned": false
+   }
+  ]
+ }
+}
