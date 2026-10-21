@@ -51,11 +51,24 @@ const { dayHash } = require('./det-gate');
 const ROOT = path.join(__dirname, '..');
 const STANDING = path.join(ROOT, 'src', 'js', 'standing.js');
 const FIXED_SRC = fs.readFileSync(STANDING, 'utf8');
+// pristineSrc(): the PRE-FIX standing.js. The fix may be committed (worktree
+// HEAD carries it — the normal post-commit/landing state) or uncommitted
+// (HEAD is the pre-fix base). Prefer HEAD^ when it still has the old line,
+// else HEAD. Never invents: exactly one of the two real refs is used.
 let PRISTINE_SRC = null;
 function pristineSrc() {
   if (!PRISTINE_SRC) {
-    PRISTINE_SRC = execSync('git show HEAD:src/js/standing.js',
-      { cwd: ROOT, maxBuffer: 16 * 1024 * 1024 }).toString('utf8');
+    const at = (ref) => {
+      try {
+        return execSync('git show ' + ref + ':src/js/standing.js',
+          { cwd: ROOT, maxBuffer: 16 * 1024 * 1024 }).toString('utf8');
+      } catch (e) { return null; }
+    };
+    const head = at('HEAD');
+    const parent = at('HEAD^');
+    PRISTINE_SRC = (parent && /The Producers want a village/.test(parent)) ? parent
+      : (head && /The Producers want a village/.test(head)) ? head
+      : (parent || head);
   }
   return PRISTINE_SRC;
 }
