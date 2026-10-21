@@ -1,0 +1,32 @@
+=== seed 9901 day 32 — conversation with Farid (farid_ahmed) ===
+occupation=locksmith temperament=cautious trust=36 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "My wound needs a second pair of hands. Will you help me clean it?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Where was I? Gone. Ask me something else."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...No, it's not coming back. What were you saying?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Sorry — that one slipped away from me."
+(want=ask_favor stage=1)
+closing line: "I should — yeah. Later."
+want final: id=ask_favor stage=3 resolution=unresolved

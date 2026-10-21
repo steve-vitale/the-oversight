@@ -1,0 +1,74 @@
+check.js: 268 scripts, 2 parallel (quick)
+......................................................................................................FF.............F......................................................F...F...........................................................................................
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 1.1s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey-deepening/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-deepening/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.20.0
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 1.2s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 2.4s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — src/js/convo-dialogue.js,src/js/convo-wants.js,src/js/ledger.js,src/js/table-witness.js
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: src/js/convo-dialogue.js
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-foodpower-20261014.js (exit 1, 3.9s)
+      (a) ability kcal costs
+      (b) useAbility burns kcal, narrates
+      (c) hunger gate
+      (d) overcharge
+      (e) village food tiers gate villager casts
+      (f) ability buttons show costs + overcharge
+      (g) ontology validator
+        FAIL: ontology green Validating 120 system files (src/js + src/js/engine)...
+      
+      
+      
+      29 passed, 1 failed
+
+  FAIL scripts/test-sw-audio-cache-20261012.js (exit 1, 1.9s)
+          'PASS offline JSON ./src/data/climates.json?v=982cb3c40-20261020-221451\n' +
+          'PASS offline JSON ./src/data/contests.json?v=982cb3c40-20261020-221451\n' +
+          'PASS offline JSON ./src/data/cooking.json?v=982cb3c40-20261020-221451\n' +
+          'PASS offline JSON ./src/data/events.json?v=982cb3c40-20261020-221451\n' +
+          'PASS offline JSON ./src/data/evoluti'... 2340 more characters,
+        stderr: "Error: EPERM: operation not permitted, copyfile '/home/hatch/workspace/worktrees/journey-deepening/sw.js' -> '/tmp/oversight-offline-Cm2mGp/sw.js'\n" +
+          '    at Object.copyFileSync (node:fs:3177:11)\n' +
+          '    at /home/hatch/workspace/worktrees/journey-deepening/scripts/test-offline-assets.js:40:81\n' +
+          '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n'
+      }
+      
+      Node.js v24.20.0
+
+  slowest: scripts/godpath/test-trust-observer-neutrality.js 51s, scripts/godpath/test-occupation-panels.js 33s
+
+check.js: 263 passed, 5 failed in 518s
+check exit=1

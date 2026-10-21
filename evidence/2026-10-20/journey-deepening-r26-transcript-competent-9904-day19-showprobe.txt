@@ -1,0 +1,18 @@
+=== seed 9904 day 19 — conversation with Terry (gen_zzzj9mm) ===
+occupation=dry cleaner temperament=sardonic trust=81 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Xue headed out to find someone."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,32 @@
+=== seed 9902 day 69 — conversation with Leo (leo_martin) ===
+occupation=trail crew lead temperament=restless trust=66 dead=false mood=hungry
+want: curious (stage 1, fromSeed)
+
+THEM: "About what scares you most — What scares you most about what's happening? The real answer."
+(turn0 choices: ans:q_system_fear:a_tell, ans:q_system_fear:a_vague, ans:q_system_fear:honest_pass, leave, silence)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It doesn't move. Speedbump, every time. It hunts by day — watch the open ground."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Huckleberry. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Castor Bean. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Murumuru. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Datura. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Hanza. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+closing line: "I can't sit still anymore. But this was good. Quick, but good."
+want final: id=curious stage=3 resolution=engaged

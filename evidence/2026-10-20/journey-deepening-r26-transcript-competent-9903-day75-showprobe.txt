@@ -1,0 +1,18 @@
+=== seed 9903 day 75 — conversation with Yara (yara_haddad) ===
+occupation=interpreter temperament=cautious trust=67 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: If I understand it, I can survive it. That's the theory, anyway.
+(turn0 choices: dlg:more, dlg:react, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Ruby is back. Walked in like they'd never left."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=stated

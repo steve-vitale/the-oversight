@@ -1,0 +1,27 @@
+=== seed 9904 day 33 — conversation with Terry (gen_zzzj9mm) ===
+occupation=dry cleaner temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about that favor — that was 14 days back. Still on your mind? 'About the pantry run — I still haven't found anyone. Any chance?' You'd know about that."
+(turn0 choices: dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What scares you most about what's happening? The real answer."
+(want=curious stage=1)
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? I'm sure it'll be fine."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Xue is back. Walked in like they'd never left. Just... be straight with me."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to it."
+want final: id=curious stage=3 resolution=engaged

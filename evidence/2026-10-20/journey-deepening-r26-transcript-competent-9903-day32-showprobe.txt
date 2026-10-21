@@ -1,0 +1,32 @@
+=== seed 9903 day 32 — conversation with Hugo (gen_gpag799) ===
+occupation=Fisherman temperament=gentle trust=70 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I'm feverish, a cut gone hot and angry. Will you help me?"
+(turn0 choices: goon, dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "The cut's gone hot and it's spreading — I can feel it moving. Clean it out, wrap it tight, please. Before it turns."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "It's not just the cut anymore, it's in the blood, I can feel it climbing. I need someone who knows wounds."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Rest won't touch this. The heat's climbing and my head's full of cotton. Someone who knows what they're doing — please."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=unresolved

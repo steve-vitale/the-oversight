@@ -1,0 +1,24 @@
+=== seed 9901 day 40 — conversation with Petra (petra_novak) ===
+occupation=glazier temperament=steady trust=38 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "It's quiet today. Wrong kind of quiet."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, confront:d_gxpqczn, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask? Doesn't matter now."
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "You want to know about that? Okay." "Miguel? A dockworker, back before. Solid person."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? One step at a time."
+(want=seek_comfort stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Marcus always took the burnt piece. Said someone had to. I take it now."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? You know?"
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=seek_comfort stage=3 resolution=unestablished

@@ -1,0 +1,27 @@
+=== seed 9903 day 92 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're good at — What's something you're good at that nobody here knows about?"
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Ruby headed out to forage."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Hunter always took the burnt piece. Said someone had to. I take it now."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "A small wave. Already retreating inward."
+want final: id=curious stage=3 resolution=engaged

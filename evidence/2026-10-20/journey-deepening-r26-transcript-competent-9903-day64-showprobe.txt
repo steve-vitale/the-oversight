@@ -1,0 +1,32 @@
+=== seed 9903 day 64 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=89 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about the gossip — we left it mid-thought, 6 days back. 'Take it with salt. What did you want to ask?'"
+(turn0 choices: gq:open:take, gq:open:unsure, gq:open:honest_pass, silence, leave)
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We're eating through stores faster than we replace them. Come forage with me tomorrow — two of us can fill packs."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. Meet me at where the mahua grows thick and we'll fill packs before dark."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+closing line: "I... should go."
+want final: id=ask_favor stage=3 resolution=unresolved

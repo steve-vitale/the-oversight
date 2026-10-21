@@ -1,0 +1,18 @@
+=== seed 9902 day 34 — conversation with Fatima (fatima_hassan) ===
+occupation=paramedic temperament=steady trust=25 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "I've been taking stock. Food, water, hands. We're short on all three, but we're not out."
+(turn0 choices: confront:d_gq9zdfq, dlg:cant, dlg:invite, dlg:favor_requirements, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Deon headed out for water."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=ask_favor stage=3 resolution=stated

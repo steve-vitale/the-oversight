@@ -1,0 +1,21 @@
+=== seed 9902 day 65 — conversation with Fatima (fatima_hassan) ===
+occupation=paramedic temperament=steady trust=48 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you make of all this? Really."
+(turn0 choices: ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Ursula talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

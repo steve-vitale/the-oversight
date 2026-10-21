@@ -1,0 +1,32 @@
+=== seed 9904 day 16 — conversation with Wyatt (gen_7i4bhzb) ===
+occupation=tailor temperament=intense trust=13 dead=false mood=cheerful
+want: ask_favor (stage 0)
+
+THEM: "My tailor training covered a lot. 'Post-apocalyptic foraging' was not on the syllabus."
+(turn0 choices: agency:ask_field, dlg:more, dlg:react, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. I know the far treeline, past the rocks — come with me and we'll fill packs before dark."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+closing line: "This matters. What we just said — it matters. Don't let it fade."
+want final: id=ask_favor stage=3 resolution=unresolved

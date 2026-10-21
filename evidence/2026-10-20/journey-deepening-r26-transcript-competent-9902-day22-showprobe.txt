@@ -1,0 +1,32 @@
+=== seed 9902 day 22 — conversation with Landon (gen_8xnkc11) ===
+occupation=radio DJ temperament=intense trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Please — whatever this is, it's getting worse — I'm achy and wrung out, barely keeping food down. I need help. Please."
+(turn0 choices: goon, dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Rest and clean water aren't cutting it. If this turns, I'm no good to anyone — can't haul, can't hunt, can't watch. I need someone who knows what they're doing."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "The fever's not breaking and I'm barely keeping food down. I need help — real help, not just water."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I'm burning up and there's nothing left in me. Someone who knows sickness — please."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=unresolved

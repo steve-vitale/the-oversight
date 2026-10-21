@@ -1,0 +1,32 @@
+=== seed 9904 day 51 — conversation with Lorenzo (gen_r1trtj0) ===
+occupation=infantry soldier temperament=mischievous trust=64 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Okra. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bitter Manioc. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Taro. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Sorry, lost my train of thought."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+closing line: "Alright. Back to it."
+want final: id=ask_favor stage=3 resolution=unresolved

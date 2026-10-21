@@ -1,0 +1,32 @@
+=== seed 9904 day 43 — conversation with Jorge (jorge_silva) ===
+occupation=Rancher temperament=steady trust=71 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "It's been days since a real meal. I can't pull my weight like this. Anything you can spare, I'll make it stretch."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+closing line: "Good talking. We'll figure it out."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,24 @@
+=== seed 9901 day 27 — conversation with Marcus (marcus_webb) ===
+occupation=electrician temperament=bold trust=47 dead=false mood=grieving
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did with your hands — You look handy. What did you do with your hands, before? I mean it."
+(turn0 choices: ans:q_hands:a_tell, ans:q_hands:a_vague, ans:q_hands:a_deflect, leave, silence)
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Anyway."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "What's this about? I won The Blood Tithe. On camera. People won't shut up about it — and honestly? Neither will I."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=curious stage=3 resolution=engaged

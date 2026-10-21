@@ -1,0 +1,15 @@
+=== seed 9903 day 80 — conversation with Gilberto (visjoin_76) ===
+occupation=Sailor temperament=anxious trust=26 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:a_deflect, ans:q_fun:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "I was a sailor — fun was whatever I could steal between shifts. Now fun is watching the fire and not being afraid. It's a downgrade and an upgrade."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

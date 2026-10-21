@@ -1,0 +1,32 @@
+=== seed 9903 day 67 — conversation with Hugo (gen_gpag799) ===
+occupation=Fisherman temperament=gentle trust=90 dead=false mood=hungry
+want: ask_favor (stage 1, fromSeed)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway."
+(turn0 choices: goon, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,18 @@
+=== seed 9902 day 60 — conversation with Landon (gen_8xnkc11) ===
+occupation=radio DJ temperament=intense trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About needing to be alone — Do you ever just need to be alone? Like, really alone? I need you to hear that."
+(turn0 choices: ans:q_alone_time:a_tell, ans:q_alone_time:a_vague, ans:q_alone_time:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air."
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

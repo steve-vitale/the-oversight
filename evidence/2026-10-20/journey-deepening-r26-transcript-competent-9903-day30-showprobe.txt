@@ -1,0 +1,32 @@
+=== seed 9903 day 30 — conversation with Hunter (gen_h1qzra3) ===
+occupation=lifeguard temperament=stoic trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? My hands shake when I try to work."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I haven't eaten right in days. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unresolved

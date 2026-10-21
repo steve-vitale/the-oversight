@@ -1,0 +1,21 @@
+=== seed 9903 day 58 — conversation with Zoltan (zoltan_nagy) ===
+occupation=Mushroom grower temperament=withdrawn trust=74 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About how this changed you — Has this changed you? Like, fundamentally?"
+(turn0 choices: ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "The old you got you here. The new you keeps you here. Both count."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Hugo is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

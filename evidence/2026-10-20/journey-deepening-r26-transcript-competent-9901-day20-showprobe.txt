@@ -1,0 +1,32 @@
+=== seed 9901 day 20 — conversation with Jae (gen_m2oggbn) ===
+occupation=bush pilot temperament=intense trust=33 dead=false mood=grieving
+want: ask_favor (stage 1)
+
+THEM: "I can't reach this properly. Could you clean it out for me? Please."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just told you — what else is on your mind?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "We've covered this one. Ask me something else."
+(want=ask_favor stage=1)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=unresolved

@@ -1,0 +1,27 @@
+=== seed 9902 day 37 — conversation with Landon (gen_8xnkc11) ===
+occupation=radio DJ temperament=intense trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Can I tell you something? At night I cry quietly so no one hears…"
+(turn0 choices: dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Have you ever hurt someone? Since all this started."
+(want=curious stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Okay. You don't have to have an answer."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Not that it matters."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Tashi? An arborist, back before. Solid person. It'll keep."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Don't forget what we talked about. I won't."
+want final: id=curious stage=3 resolution=engaged

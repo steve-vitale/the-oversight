@@ -1,0 +1,18 @@
+=== seed 9904 day 60 — conversation with Terry (gen_zzzj9mm) ===
+occupation=dry cleaner temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: deflect_q, ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:honest_pass, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "I was a dry cleaner — fun was whatever I could steal between shifts. Now fun is watching the fire and not being afraid. It's a downgrade and an upgrade."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

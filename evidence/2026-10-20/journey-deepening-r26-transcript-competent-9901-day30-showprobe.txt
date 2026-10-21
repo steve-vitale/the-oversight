@@ -1,0 +1,32 @@
+=== seed 9901 day 30 — conversation with Øystein (gen_jnr930y) ===
+occupation=hotel housekeeper temperament=intense trust=61 dead=false mood=grieving
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about that favor — we left it mid-thought, 6 days back. 'There's more, but that's for another fire.'"
+(turn0 choices: dlg:help, dlg:cant, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "This cut — I can't clean it properly one-handed. Could you clean it out for me? Please."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "...Actually, forget it."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Huh. That went clean out of my head."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Lost it. The thought, I mean. Go on."
+(want=ask_favor stage=1)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=unresolved

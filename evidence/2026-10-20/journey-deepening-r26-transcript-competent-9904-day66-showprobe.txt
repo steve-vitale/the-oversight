@@ -1,0 +1,21 @@
+=== seed 9904 day 66 — conversation with Terry (gen_zzzj9mm) ===
+occupation=dry cleaner temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+(turn0 choices: deflect_q, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, leave, silence)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "That was me — headed out for water. I mean it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

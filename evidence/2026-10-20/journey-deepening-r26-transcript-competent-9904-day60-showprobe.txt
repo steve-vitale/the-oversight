@@ -1,0 +1,21 @@
+=== seed 9904 day 60 — conversation with Terry (gen_zzzj9mm) ===
+occupation=dry cleaner temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You said fun was just being around your people. Do we count? Are we trying?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Okay. You don't have to have an answer."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Famous last words."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Wyatt talks to the garden. The garden listens. I've seen it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,18 @@
+=== seed 9904 day 45 — conversation with Terry (gen_zzzj9mm) ===
+occupation=dry cleaner temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

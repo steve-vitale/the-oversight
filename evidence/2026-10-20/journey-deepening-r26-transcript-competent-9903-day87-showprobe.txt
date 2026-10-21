@@ -1,0 +1,24 @@
+=== seed 9903 day 87 — conversation with Ray (gen_o27w9ty) ===
+occupation=aquarium keeper temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "I asked Hunter about the food I needed — Hunter's gone. Still need hands. Are you in?"
+(turn0 choices: goon, dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Ruby won Windfall on the cameras. People are still talking about it."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=ask_favor stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I know you and Hunter were close. I'm sorry."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=stated
