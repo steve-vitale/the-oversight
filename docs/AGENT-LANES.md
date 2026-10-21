@@ -1,51 +1,39 @@
-# Agent lanes (2026-10-15)
+# Agent lanes (2026-10-20)
 
-## Rolling public-release goal — current milestone: Haven entrance (2026-10-20)
+## Rolling public-release goal — current milestone: terminal caregiver coverage
 
-Steve asked Codex to keep small concrete goals moving in serial. The previous
-favor-journal milestone shipped on shared 982cb3c40. Codex now owns one actual
-water-hauling favor: accept, meet at dawn at Haven, walk together to a known
-creek, collect/carry real water and return it to the cistern; persist progress,
-blockers and deadline outcomes through Continue. Likely files: favor-water.js,
-convo-wants/dialogue, party travel seams, journal and source-bound tests/proofs.
-The other four joint jobs stay unavailable. No unrelated difficulty tuning.
-Muse retains calibration; preserve newer work and merge before publication.
-Each completed milestone records proof, shared tip and the next bounded task;
-completion of a milestone does not end the rolling goal.
+Steve asked Codex to move through small concrete goals in serial. Keep the
+rolling goal active between milestones. Muse retains numerical calibration;
+Codex owns repeatable later-game coverage. Fetch shared history before working;
+never port an older source tree over newer work.
 
-Water milestone shipped asf19057e14 on shared master/main and its feature
-branch. Production build982cb3c40-20261020-221451:163 boot hashes match,
-fresh mobile boot clean, full1,040/0; source-bound mobile and installed offline
-Continue proofs retained. See water-favor-publication-r1.json. The paragraphs
-above describe the completed water lane, not a concurrent rewrite assignment.
+Haven entrance repair shipped as9026efa1d on shared master/main and
+codex/haven-access-20261020. Live build3f09b84a1-20261020-235403 matches all163
+boot inputs; fresh mobile boot is clean. Quick269/0 and full1041/0 preceded
+the release push. Source-bound phone/save/offline evidence and the paid-camp
+negative control are in evidence/2026-10-20/haven-access-*. The changed yard
+preserves structures and has35 shared-kit checks, including128 obstruction
+layouts. Earlier favor and water milestones remain shipped in this ancestry.
 
-Current serial milestone: Haven entrance accessibility.
-Native play found a generated tent on the documented doorstep(4,5), despite
-the earlier clearing comment. Verify terrain placement order and reserve a
-reachable entrance/exit on new grounds; audit sibling feature footprints.
-Preserve player-built structures in existing saves. Muse retains calibration;
-Codex owns this terrain/access lane now that the water receipt is saved.
-Done when fresh seeded grounds preserve a usable door/exit approach, sibling
-placement cannot overwrite it, existing saved/player structures survive,
-native phone entry/exit works, required checks/measurement pass and the
-verified fix is shared/live. No general redesign of Haven is in scope.
+Current bounded lane: caregiver seeds10003/10004 (lost capped wins) and
+10001/10008 (gained controls), fixed before continuation. Follow each through
+an actual terminal outcome; extend observational caps rather than marking an
+alive bearer complete. Preserve policy/RNG continuation, or prove a rerun's
+prefix equivalent before using it. Investigate reproducible livelocks instead
+of forcing death or loosening Table gates. Retain milestones, opportunities,
+all23 measures and full state/outcome provenance. Obtain naturally earned
+late-game save(s) for actual phone Continue and actions at both phone heights.
+If a blocker is reproduced, repair it and resume the affected campaign. Done
+when all four reach actual terminal outcomes, the real late-game phone journey
+is verified, checks pass and the evidence/tooling is shared. A cap is not done.
+Investigate reduced wins and record tradeoffs before changing numerical balance.
 
-Candidate work is on codex/haven-access-20261020, based on shared3f09b84a1.
-Code and35 shared-harness checks cover the south landing, a reserved generated
-doorstep, actual paid camp/fuel persistence, follower sub-state, blocked-door
-refusal and real combat flight. Actual touch journeys pass at both heights;
-the source-bound water trip, ordinary/Deer frames and installed offline update
-also pass. Independent64-case follow-ups do not reproduce the screen's large
-maker class/caregiver survival drops, but caregiver Table invitations42→30/64
-remain a review signal. Fixed exact eligibility probes point to missing
-third-wave breadth in selected150-day-capped campaigns. Full check/publication
-remain pending; do not call this candidate shared/live yet.
-
-After Haven publication, Codex's next bounded lane is four fixed caregiver
-journeys through actual terminal outcomes, preserving policy/RNG continuation
-or proving any rerun prefix equivalent. Keep alive-at-cap cases unknown; obtain
-a naturally earned late save for actual phone Continue/action. This adds
-repeatable later-game coverage for Muse's calibration, without numeric tuning.
+Final Haven panels retain review_required: caregiver Table invitations42→30/64
+and wins40→30/64. Selected lost seats lack third-wave breadth at the150-day
+cap; other progress/survival improvements cannot cancel this warning. Fresh
+final-source192-case panels match all retained first-candidate row fields.
+Historical86 exact replay pairs keep their original source identities; they
+were not rerun against the final fallback source. See the audit and handoff.
 
 ## Completed favor lifecycle goal (2026-10-20, shipped982cb3c40)
 
@@ -1546,7 +1534,3 @@ readiness/menu/dispatch contract and typed physical-deed receipts. Preserve the
 r7 reconciliation and all Muse changes. The five missing joint jobs are explicit
 release blockers in ROADMAP; explanations are not finished gameplay. Read
 `evidence/2026-10-20/favor-action-audit-r3.md` for the final bounded evidence.
-
-Final fallback revision (build3f09b84a1-20261020-235403): a camp with nine tents erected through actual paid actions blocked every preferred landing while leaving connected exterior open. The final helper searches all connected non-garden exterior cells before refusing; it preserves every structure. The frozen first candidate fails the same reproduction, the final candidate exits successfully. Shared-kit coverage is35 checks including128 saved obstruction layouts. Final phone-r2 has17 trusted-touch checkpoints at each height, including the paid nine-tent yard, walking out to the world and Continue; combat-r4 has7, frame-r3 and water haven-final-r2 have16 each. Lifecycle-r2 proves old installed-worker update and cold offline Continue. Prepared fixtures do not establish naturally earned campaigns or physical-device clearance.
-
-Fresh final-source screen/holdout after-r2 panels contain192 campaigns and match EVERY retained first-candidate row field, canonical state hash, outcome and all23 metrics (equivalence-r1.json). Earlier replays, ablations and eligibility queries retain their original first-candidate source identities; they were not rerun on the final source. Their sampled endpoints match the new actual runs, not a universal equivalence claim. Both final scorecards remain review_required. The lost caregiver Table pace stays open for the next bounded terminal-campaign milestone.

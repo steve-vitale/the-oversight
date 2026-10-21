@@ -8,10 +8,12 @@ milestone shipped asf19057e14: real travel, carrying and cistern delivery,
 saved progress and honest deadline/blocker handling. Other joint jobs and
 public-release gates stay open. Keep the rolling goal active between milestones.
 
-The current bounded Codex milestone is generated Haven
-entrance/exit accessibility: a tent landed on the documented doorstep during
-actual phone play. Verify placement order and sibling footprints, preserve
-existing player structures, and prove reachable entrances across seeds and UI.
+Haven entrance/exit accessibility shipped as9026efa1d, with verified live build
+3f09b84a1-20261020-235403; paid camp structures and Continue are preserved.
+Current bounded Codex milestone: four fixed caregiver campaigns through actual
+terminal outcomes, faithful continuation/prefix proof, and naturally earned
+late-game phone Continue/actions. See AGENT-LANES.md for seeds and done-when.
+The caregiver Table-pace warning stays open; alive at a cap is not completion.
 
 2026-10-20 completed bounded Codex goal: accepted-favor lifecycle on the
 shared a86496f72 history. Track concrete requirements, effective due day and

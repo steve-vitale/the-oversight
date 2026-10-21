@@ -1,38 +1,35 @@
-# Muse calibration handoff — conversation/favor repair
+# Muse calibration handoff
 
-## Haven entrance candidate — verification (2026-10-20)
+## Haven shipped; terminal caregiver lane active (2026-10-20)
 
-Codex branch codex/haven-access-20261020, based on shared3f09b84a1;
-candidate build3f09b84a1-20261020-235403. Publication is still pending full
-checks/readback. Fetch the current shared refs before merging; preserve local
-work, and do not port an older tree over this source. No new Muse changes
-were on remote master at the last pre-push fetch.
+Fetch shared master/main at9026efa1d or newer. Production build
+3f09b84a1-20261020-235403 is verified against all163 boot input hashes, with
+clean mobile boot. No source port is needed: Muse recovery999c69491 remains
+an ancestor. Read haven-access-publication-r1.json and haven-access-audit-r1.md.
+The first publication probe saw the old build while deployment was pending;
+the second probe verified the new source. Both logs are retained.
 
-Fresh grounds reserve the south door(4,5), moving its generated tent to(2,5)
-with the same shelter count/private draws. Existing saved/player structures
-stay intact. Exit uses a connected exterior landing, never the northern garden;
-entry/exit save immediately, and a refused combat crossing cannot grant flight.
-Shared-kit35 checks, independent256-layout contrast, actual touch at both phone
-sizes, the full water journey, ordinary/Deer frames and offline update pass.
+The entrance correction reserves new south doorsteps, preserves existing
+structures and resolves blocked preferred spots onto connected non-garden
+ground. Nine tents built through actual paid actions reproduce the old trap
+and succeed with the final fix.35 shared-kit checks,128 obstruction layouts,
+trusted-touch journeys at both heights, combat doors and installed update/
+offline Continue pass. Quick269/0 and full1041/0 preceded this gameplay push.
 
-The16-per-policy balanced screen remains review_required. Independent64-case
-maker/caregiver follow-up does not reproduce the large screen class/survival
-drops, but caregiver Table invitations42→30/64 and wins40→30/64 remain warnings.
-Maker class53→51/64; paired day30 survival48→48/62 is coverage_changed.
-Caregiver day30 survival47→50/64 and class51→60/64 cannot cancel Table watches.
-All23 metrics, eligibility census, raw panels/source bundle and86 unique exact
-replay pairs are retained under haven-access-*. Four repeated canonical Table
-queries leave the final states unchanged and identify missing wave-three
-breadth in selected lost seats; the same unchanged condition explains selected
-gained seats. Fixed ablations isolate a layout dependency in two screen cases.
+Use final after-r2 panels/source bundle, frame-r3, Haven phone-final-r2,
+combat-r4, water haven-final-r2 and lifecycle-r2. Fresh192-case final runs
+match every retained first-candidate row field. Earlier86 replay pairs,
+ablations and eligibility probes remain explicitly historical first-candidate
+diagnostics; matching sampled endpoints do not establish universal equivalence.
+Both final scorecards remain review_required. Caregiver Table invitations
+42→30/64 and wins40→30/64 stay open; more class/survival cannot cancel them.
+No gate, food, HP, skill, cost or reward was tuned to regain wins.
 
-Decision: retain the actual entrance/persistence correction and these warnings;
-no cost, reward or Table gate is tuned to restore win percentages. Public-release
-viability remains open. Codex's next bounded lane after publication: four fixed
-caregiver campaigns to actual terminal outcomes, faithful continuation/prefix
-proof, and naturally earned late-game phone Continue/action evidence. Muse
-retains numerical calibration; the new later-game evidence/tooling is shared.
-Do not call alive-at150-day-cap campaigns permanent failures or completed runs.
+Codex now owns four fixed caregiver campaigns (10003,10004,10001,10008) through
+actual terminal outcomes, repairing reproduced blockers and preserving faithful
+continuation/prefix proof and naturally earned late-game phone Continue/action.
+Muse retains numerical calibration. Alive at a cap remains unknown. Public
+release and all-playstyle viability are not cleared by the Haven fix.
 
 ## Joint water trip shipped (2026-10-20)
 
@@ -171,7 +168,3 @@ Before every push use quick/full, fresh source-bound neutral and phone proofs,
 and update survival-lever decisions with raw panels/config/hashes. Actual phone
 interaction is distinct from node campaigns. Report actual days/endings; later
 game still needs play-until-death coverage.
-
-Final fallback revision (build3f09b84a1-20261020-235403): a camp with nine tents erected through actual paid actions blocked every preferred landing while leaving connected exterior open. The final helper searches all connected non-garden exterior cells before refusing; it preserves every structure. The frozen first candidate fails the same reproduction, the final candidate exits successfully. Shared-kit coverage is35 checks including128 saved obstruction layouts. Final phone-r2 has17 trusted-touch checkpoints at each height, including the paid nine-tent yard, walking out to the world and Continue; combat-r4 has7, frame-r3 and water haven-final-r2 have16 each. Lifecycle-r2 proves old installed-worker update and cold offline Continue. Prepared fixtures do not establish naturally earned campaigns or physical-device clearance.
-
-Fresh final-source screen/holdout after-r2 panels contain192 campaigns and match EVERY retained first-candidate row field, canonical state hash, outcome and all23 metrics (equivalence-r1.json). Earlier replays, ablations and eligibility queries retain their original first-candidate source identities; they were not rerun on the final source. Their sampled endpoints match the new actual runs, not a universal equivalence claim. Both final scorecards remain review_required. The lost caregiver Table pace stays open for the next bounded terminal-campaign milestone.

@@ -1,7 +1,9 @@
-# Haven entrance milestone — verification in progress
+# Haven entrance milestone — shipped9026efa1d
 
 Baseline: shared3f09b84a1. Candidate build3f09b84a1-20261020-235403.
-No candidate publication yet. Keep the rolling goal active.
+Published as9026efa1d; all163 production boot hashes match and mobile boot is clean.
+See publication-r1 receipt. The rolling goal stays active. Earlier pending
+statements below describe the pre-publication investigation.
 
 ## Problem and behavior
 
@@ -119,3 +121,26 @@ Fresh final-source screen/holdout after-r2 panels contain192 campaigns and match
 ## Final pre-publication check
 
 Final build3f09b84a1-20261020-235403: quick269/0 (quick-r6), full1041/0 in328 seconds with four workers (full-r3). The previous full-r2 passed the intermediate candidate but did not clear the later paid-camp trap. Its old movement test required(4,2); the corrected test now strictly requires walkable non-garden(4,5), preserving price/time checks. No failed test was quarantined or weakened. Final whitespace check is clean; foreign sweep-B.log stays unstaged. Vercel read-only target receipt confirms the-oversight production/main on the shared3f parent. Publication/readback follow these checks.
+
+## Actual publication
+
+Ordinary atomic fast-forward push advanced master/main and the Haven branch
+to9026efa1dead96d75c814290dbb47a8a4fa703fe after fresh quick269/0 and
+full1041/0. The first live probe correctly refused the old production build
+while deployment was pending (live-verify-r1.log). The second verifies the
+new version, all163 boot hashes and a clean390×736 touch-browser boot
+(live-verify-r2.log and publication-r1.json); Vercel reports READY on that
+commit. Primary master/main were fast-forwarded, preserving sweep-B.log.
+The next bounded lane is recorded in AGENT-LANES. This documentation/evidence
+follow-up gets a separate fresh quick/full before its own push.
+
+Wiring inventory: full-core check-wired lists16 historical unwired exports in
+both frozen3f and final Game sources, with no added unwired names. The new
+havenDoorLanding is called by actual exitBuilding and exercised through native
+doors and the shared-kit test. Retain both wiring logs; do not describe the
+entire legacy Game as having zero unwired exports.
+Follow-up verification completed separately: quick269/0 in42s and full1041/0
+in321s (publication-quick-r1.log, publication-full-r1.log), unchanged assertions
+and four full-suite workers. No source inputs changed. Fresh remote fetch
+still shows9026efa1d; this publication-receipt/lane follow-up is checked before
+its own ordinary fast-forward push, with no evidence-only exemption.

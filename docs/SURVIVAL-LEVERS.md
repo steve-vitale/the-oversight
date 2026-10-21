@@ -1,6 +1,6 @@
 # Survival levers and investigation register
 
-## Haven entrance candidate (2026-10-20, not yet published)
+## Haven entrance shipped (2026-10-20,9026efa1d)
 
 Generated tents can no longer occupy the south doorstep(4,5). A tent that
 would have landed there moves to(2,5), with the same private RNG draws and
@@ -8,7 +8,12 @@ the same distinct shelter count. An independent before/after census of256
 private terrain seeds finds115 formerly blocked doorsteps, zero afterward,
 with identical shelter/fire/hall/teaching-garden counts and only those two
 cells changed. These are layout seeds, not256 naturally played campaigns.
-Saved/player-built grounds are not regenerated or cleared.
+Saved/player-built grounds are not regenerated or cleared. The final fallback
+also resolves nine paid tents blocking every preferred spot, using connected
+non-garden ground. The128 saved-obstruction tests preserve all structures.
+Final after-r2 panels reproduce all192 retained case endpoints; earlier
+diagnostics keep their historical source identities. Production readback is
+retained as haven-access-publication-r1.json.
 
 Step outside now lands south of the centered hall rather than on northern
 garden rows. Older yards can use a connected east/west approach; a sealed
@@ -1525,7 +1530,3 @@ adverse deaths, NPC hunger and earned-gear change. See the favor-action r3 audit
 and raw panels/replays for verified counts and coarse first differences; those
 are diagnostic associations, not causal explanations of endings. Five authored
 joint jobs and remaining callback/voice prose gaps stay release blockers.
-
-Final fallback revision (build3f09b84a1-20261020-235403): a camp with nine tents erected through actual paid actions blocked every preferred landing while leaving connected exterior open. The final helper searches all connected non-garden exterior cells before refusing; it preserves every structure. The frozen first candidate fails the same reproduction, the final candidate exits successfully. Shared-kit coverage is35 checks including128 saved obstruction layouts. Final phone-r2 has17 trusted-touch checkpoints at each height, including the paid nine-tent yard, walking out to the world and Continue; combat-r4 has7, frame-r3 and water haven-final-r2 have16 each. Lifecycle-r2 proves old installed-worker update and cold offline Continue. Prepared fixtures do not establish naturally earned campaigns or physical-device clearance.
-
-Fresh final-source screen/holdout after-r2 panels contain192 campaigns and match EVERY retained first-candidate row field, canonical state hash, outcome and all23 metrics (equivalence-r1.json). Earlier replays, ablations and eligibility queries retain their original first-candidate source identities; they were not rerun on the final source. Their sampled endpoints match the new actual runs, not a universal equivalence claim. Both final scorecards remain review_required. The lost caregiver Table pace stays open for the next bounded terminal-campaign milestone.
