@@ -252,3 +252,33 @@ Not applicable as control/armed (DIAG has no policy layer).
 - Seeds 8911–8918 freshness asserted inline per sweep; banned ranges
   (5201–5208, 5301–5308, 5401–5434, 5601–5608, 8001–8808) asserted clean.
 - Runtime: 16 runs ~37 min wall (box contention); analysis instant.
+
+## Re-verification (adoptive run 2026-10-21, loop B coordinator rewrite)
+
+The arm's coordinator died after the worker landed two commits
+(2f502d4e5 = content; a03d13e22 = EMPTY commit, zero file changes —
+message over-claims "evidence + corpus + instruments land"; content is
+entirely in the parent. Noted for the merge, harmless to --ff-only).
+
+- **Base**: branch base is 9177d477d (playtest-loop r23 pre-flight), which
+  EQUALS current master tip. No rebase needed. The evidence header's
+  "Base SHA: b76bcddd0" is stale — b76bcddd0 is an ancestor of
+  9177d477d, not the tree's base. Nothing re-scored; this note corrects
+  the record only.
+- **Proof** `FEASTSCALE_R13=1 SEATDRIVE=0 node scripts/test-rotmech-b.js`
+  on 9177d477d: **19/19 GREEN** (RED-a 8/8, RED-b 5/5, RED-c 3/3; G-1
+  instrumented trajectory byte-identical (det-gate sha256), G-2 sinks
+  bounded, G-3 computable). Same-base paired runs only — no historical
+  corpus used as a control (per the #746 finding).
+- **Analysis**: `node scripts/analyze-rotmech-b.js` re-run on the kept
+  corpus reproduces evidence/2026-10-21/perseed-rotmech-b/rotmech-b-analysis.json
+  **byte-identical**. Independent check of the verdict numbers: D table
+  16/16 within 0.15pp of the table above; 11/16 meaningful; shareA = 0 on
+  11/11 (cap REJECTED); shareB -2.72..+11.22 ill-conditioned, 6 nominal
+  >=0.60 not counted (NOT CONFIRMED, bar not re-scored per §14); shareC
+  -1.03..+0.40 and within-quartile -0.64..+0.30, 0/11 (draw order REJECTED).
+  **DIAG-NO-GO stands, bars unchanged.**
+- **Zero src/js changes confirmed**: `git diff 9177d477d..HEAD --name-only`
+  lists only scripts/ and evidence/ paths; `git status --short` clean.
+- Backlog #719 already `[closed]` with the DIAG-NO-GO recorded — no update
+  (no material change).
