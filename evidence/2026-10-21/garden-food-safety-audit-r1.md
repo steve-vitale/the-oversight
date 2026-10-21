@@ -1,5 +1,15 @@
 # Garden harvest: canonical food prerequisite
 
+Published864af119229757334f38bc24c76cb3d82794cfa9 on shared master/main and
+codex/garden-food-safety-20261021 by normal atomic fast-forward push. The
+primary checkout was fast-forwarded to that shared commit with the foreign
+sweep unchanged. Live build14dd8521d-20261021-074815 matches all171 checked
+production inputs and a fresh390x736 boot has no page errors. Publication-r1
+retains exact response hashes and screenshot. First verification saw the old
+deployment and failed; live-verify-r2 passed after deployment became ready.
+No failed release/phone/panel result was presented as a pass. The publication
+receipt follow-up runs its own fresh quick/full checks before pushing.
+
 Steve's garden direction remains the implementation target: Haven-scaled beds,
 slow modest ordinary growth and invested paid gardening powers. This milestone
 repairs the food boundary before the shared controller learns to collect crops.
@@ -87,3 +97,10 @@ foodState raw, while canonical must-cook plants carry ready+needsCooking+risk.
 Prove real preparation before the new harvest is eaten/donated; preserve actual
 fire/knowledge, unknown-food and shelling requirements. This existing policy
 limitation was not silently changed in the safety Game comparison.
+
+The passive controller-gap-r1 review reads the retained previous74-case long
+report only, preserving its hash.58 campaigns sample tier2 and44 tier3; maximum
+beds stays four. Current workGarden deliberately caps its target at four. This
+does not establish six/nine-bed viability or affordability and is not a new
+safety-candidate long replay. Include capacity opportunity in the next policy
+audit without optimizing for maximum garden size.

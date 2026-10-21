@@ -2,6 +2,22 @@
 
 ## Harvest safety prerequisite (2026-10-21)
 
+Released864af1192, live build14dd8521d-20261021-074815. Publication-r1 checks
+171 production inputs and a clean fresh phone boot. Quick283/0, full1,055/0,
+prepared24 checks, both phone crop/cook/meal/Continue journeys, real16-stage
+frames and installed update/offline Continue pass. The64 matched natural
+screen cases retain exact outcomes/all23/state hashes with four observer
+controls each. The unchanged controller still never harvests for the player;
+its repair and actual garden viability/calibration remain the next lane.
+
+The retained previous74-case long audit also exposes a policy capacity limit:
+58 campaigns sample Haven tier2,44 tier3, yet the bot never makes more than
+four beds because workGarden uses a four-bed target. This is historical
+opportunity coverage, not a safety-candidate rerun or useful-food proof. See
+garden-food-safety-controller-gap-r1. The next policy audit must measure actual
+upper-tier opportunity and affordability without treating maximum planting as
+an objective. The Game's2/4/6/9 capacity is independently tested.
+
 The player harvest caller constructed bare calorie stacks instead of canonical
 food. Reproduced elderberry, nettle, groundnut, cassava, cushcush and bamboo
 harvests all lacked their normal must-cook risk. Nuts also lacked shelling;

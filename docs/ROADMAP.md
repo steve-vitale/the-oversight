@@ -1,6 +1,17 @@
 # ROADMAP: what's built, what's next, how to do it
 
-## Active prerequisite: safe garden food before the sim harvest controller (2026-10-21)
+## Garden food safety released; complete the sim harvest controller next (2026-10-21)
+
+Release864af1192 is live as14dd8521d-20261021-074815. Publication-r1 verifies
+all171 production inputs and a clean fresh phone boot. Shared master/main and
+the primary checkout contain it; the foreign sweep remains unchanged. Fresh
+quick283/0 and full1,055/0 preceded publication. Prepared24 runtime checks,
+13-stage phone crop/cook/meal/Continue journeys and16-stage frames at both
+phone heights pass, with installed update/offline Continue. The64 matched
+screen cases retain identical all23/outcomes/state hashes, with four neutral
+controls per arm. No player harvest occurs in the unchanged policy, so these
+natural cases do not establish the repaired preparation route's usefulness.
+See garden-food-safety-audit-r1 and publication-r1 for evidence and limits.
 
 Codex owns the bounded canonical-food repair on garden-food-safety; Muse retains
 numerical garden/ability calibration. The shared history remains master/main
@@ -19,6 +30,11 @@ The controller must recognize canonical needsCooking crops: its existing
 cookPack only considers foodState raw, while these plants are ready with a raw
 risk flag. Do not teach harvest without proving preparation before eating or
 donation. Preserve unknown/shelling routes and actual fire/knowledge gates.
+Also measure upper-tier capacity opportunities: the current controller caps
+its target at four beds. The retained74-case garden-intake audit reached tier2
+in58 campaigns and tier3 in44 but never exceeded four beds. Do not use that
+coverage to claim six/nine-bed usefulness; evaluate affordability and actual
+crop use rather than blindly maximizing planted area.
 
 ## Garden intake released; complete the sim garden loop next (2026-10-21)
 
