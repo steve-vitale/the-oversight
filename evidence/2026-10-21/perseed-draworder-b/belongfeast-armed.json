@@ -1,0 +1,2842 @@
+{
+ "meta": {
+  "policy": "belongfeast",
+  "arm": "armed",
+  "kind": "draworder-b",
+  "days": 180,
+  "seeds": [
+   23001,
+   23002,
+   23003,
+   23004,
+   23005,
+   23006,
+   23007,
+   23008
+  ],
+  "env": {
+   "FEASTSCALE_R13": "1",
+   "SEATDRIVE": "0",
+   "SURPLUSFEED": "unset",
+   "DRAWCOARSE": "1"
+  }
+ },
+ "rows": [
+  {
+   "seed": 23001,
+   "end": {
+    "seed": 23001,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 110,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "regional",
+    "national": false,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 6,
+    "exiled": 0,
+    "pkEnd": 0,
+    "deaths": [
+     {
+      "day": 7,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat"
+     },
+     {
+      "day": 7,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat"
+     },
+     {
+      "day": 8,
+      "kind": "villager",
+      "who": "gen_u0875dt",
+      "cause": "combat"
+     },
+     {
+      "day": 16,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat"
+     },
+     {
+      "day": 20,
+      "kind": "villager",
+      "who": "gen_onqooa5",
+      "cause": "combat"
+     },
+     {
+      "day": 21,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 21,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 21,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 21,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat"
+     },
+     {
+      "day": 32,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 37,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 38,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "expedition"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "combat"
+     },
+     {
+      "day": 59,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "combat"
+     },
+     {
+      "day": 74,
+      "kind": "villager",
+      "who": "gen_q8228cj",
+      "cause": "combat"
+     },
+     {
+      "day": 74,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat"
+     },
+     {
+      "day": 74,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 78,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat"
+     },
+     {
+      "day": 78,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat"
+     },
+     {
+      "day": 80,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 81,
+      "kind": "villager",
+      "who": "mia_andersson",
+      "cause": "combat"
+     },
+     {
+      "day": 81,
+      "kind": "villager",
+      "who": "theo_lindqvist",
+      "cause": "combat"
+     },
+     {
+      "day": 90,
+      "kind": "villager",
+      "who": "vasyl_shevchenko",
+      "cause": "monster"
+     },
+     {
+      "day": 91,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "combat"
+     },
+     {
+      "day": 91,
+      "kind": "villager",
+      "who": "wanjiru_kamau",
+      "cause": "combat"
+     },
+     {
+      "day": 92,
+      "kind": "villager",
+      "who": "maya_singh",
+      "cause": "combat"
+     },
+     {
+      "day": 95,
+      "kind": "villager",
+      "who": "visjoin_93",
+      "cause": "monster"
+     },
+     {
+      "day": 96,
+      "kind": "villager",
+      "who": "quinn_murphy",
+      "cause": "monster"
+     },
+     {
+      "day": 100,
+      "kind": "villager",
+      "who": "visjoin_98",
+      "cause": "monster"
+     }
+    ],
+    "starvationDeaths": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 96514,
+     "writeSurplusKcal": 522800,
+     "writePantryCalls": 172,
+     "writeSurplusCalls": 697,
+     "writeNames": {
+      "Foraged food": 76492,
+      "Snared meat": 2541,
+      "Pit meat (White-tailed Deer)": 1272,
+      "Expedition haul": 8627,
+      "System-replicated (enthusiastic) meal": 300,
+      "Pit meat (Wild Boar)": 624,
+      "Aid from Ashford": 6658
+     },
+     "clockMix": {
+      "pantry|3": 25032,
+      "surplus|3": 522800,
+      "pantry|6": 71482
+     },
+     "rotClass": {
+      "surplus-3d": 202120,
+      "other-path": 1360,
+      "pantry-clock6": 100
+     },
+     "rotPath": {
+      "pantry": 100,
+      "surplus": 202120,
+      "other": 1360
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 71,
+       "meanDraws": 1.92,
+       "meanSatDays": 7.61
+      },
+      "other-path": {
+       "n": 1,
+       "meanDraws": 1,
+       "meanSatDays": 0
+      },
+      "pantry-clock6": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 8
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 386,
+     "drawnKcalByPath": {
+      "pantry": 10500,
+      "surplus": 230080,
+      "other": 16380
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 76,
+       "meanLagDays": 2.32
+      },
+      "surplus": {
+       "n": 133,
+       "meanLagDays": 5.13
+      },
+      "pantry|6": {
+       "n": 156,
+       "meanLagDays": 1.25
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown roots went bad — beyond saving. You leave it for the flies.",
+     "d5: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d5: The village threw out spoiled stores: Foraged food. Theo mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d6: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d7: Overnight, Muscadine Grapes; unknown nuts went bad — beyond saving. You leave them for the flies.",
+     "d10: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d10: On the carcass nearby, the absence of sound, shaped like wings (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d11: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d16: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d17: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d18: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d19: The village threw out spoiled stores: Foraged food. (pantry)"
+    ],
+    "ms": 1884
+   }
+  },
+  {
+   "seed": 23002,
+   "end": {
+    "seed": 23002,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 180,
+    "endReason": "survived",
+    "won": false,
+    "rank": "regional",
+    "national": false,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 4,
+    "exiled": 0,
+    "pkEnd": 0,
+    "deaths": [
+     {
+      "day": 8,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition"
+     },
+     {
+      "day": 9,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "expedition"
+     },
+     {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 18,
+      "kind": "villager",
+      "who": "gen_h8ctkk5",
+      "cause": "a wound that wouldn't close"
+     },
+     {
+      "day": 23,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "combat"
+     },
+     {
+      "day": 30,
+      "kind": "villager",
+      "who": "sam_wilson",
+      "cause": "Murkcap"
+     },
+     {
+      "day": 30,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 34,
+      "kind": "villager",
+      "who": "gen_4iza5ta",
+      "cause": "combat"
+     },
+     {
+      "day": 34,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 34,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "expedition"
+     },
+     {
+      "day": 36,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "combat"
+     },
+     {
+      "day": 46,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 47,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat"
+     },
+     {
+      "day": 48,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat"
+     },
+     {
+      "day": 56,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 56,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 64,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat"
+     },
+     {
+      "day": 71,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "combat"
+     },
+     {
+      "day": 71,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "combat"
+     },
+     {
+      "day": 75,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat"
+     },
+     {
+      "day": 78,
+      "kind": "monster",
+      "who": "buffering",
+      "cause": "combat"
+     },
+     {
+      "day": 79,
+      "kind": "villager",
+      "who": "liam_davis",
+      "cause": "contest"
+     },
+     {
+      "day": 79,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat"
+     },
+     {
+      "day": 83,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat"
+     },
+     {
+      "day": 83,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "villager combat"
+     },
+     {
+      "day": 83,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat"
+     },
+     {
+      "day": 93,
+      "kind": "villager",
+      "who": "gen_3ovw0yy",
+      "cause": "The Redactor"
+     },
+     {
+      "day": 97,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "combat"
+     },
+     {
+      "day": 98,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 101,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat"
+     },
+     {
+      "day": 104,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "combat"
+     },
+     {
+      "day": 104,
+      "kind": "villager",
+      "who": "app_mgpspitm90",
+      "cause": "monster"
+     },
+     {
+      "day": 110,
+      "kind": "villager",
+      "who": "gen_zxv12mt",
+      "cause": "combat"
+     },
+     {
+      "day": 112,
+      "kind": "villager",
+      "who": "desmond_clarke",
+      "cause": "combat"
+     },
+     {
+      "day": 113,
+      "kind": "villager",
+      "who": "elijah_scott",
+      "cause": "monster"
+     },
+     {
+      "day": 122,
+      "kind": "villager",
+      "who": "lucas_brown",
+      "cause": "starvation"
+     },
+     {
+      "day": 131,
+      "kind": "villager",
+      "who": "visjoin_119",
+      "cause": "monster"
+     },
+     {
+      "day": 138,
+      "kind": "monster",
+      "who": "eater",
+      "cause": "combat"
+     },
+     {
+      "day": 144,
+      "kind": "villager",
+      "who": "elif_demir",
+      "cause": "monster"
+     },
+     {
+      "day": 146,
+      "kind": "villager",
+      "who": "visjoin_141",
+      "cause": "a wound that wouldn't close"
+     },
+     {
+      "day": 151,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "combat"
+     },
+     {
+      "day": 151,
+      "kind": "monster",
+      "who": "eater",
+      "cause": "combat"
+     },
+     {
+      "day": 152,
+      "kind": "villager",
+      "who": "visjoin_150",
+      "cause": "monster"
+     },
+     {
+      "day": 154,
+      "kind": "villager",
+      "who": "nadia_khoury",
+      "cause": "combat"
+     },
+     {
+      "day": 157,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "combat"
+     },
+     {
+      "day": 159,
+      "kind": "villager",
+      "who": "gen_nvs610h",
+      "cause": "combat"
+     },
+     {
+      "day": 160,
+      "kind": "monster",
+      "who": "strike",
+      "cause": "combat"
+     },
+     {
+      "day": 169,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "combat"
+     },
+     {
+      "day": 170,
+      "kind": "villager",
+      "who": "visjoin_156",
+      "cause": "a wound that wouldn't close"
+     },
+     {
+      "day": 177,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "combat"
+     },
+     {
+      "day": 178,
+      "kind": "villager",
+      "who": "gen_0l9lz8w",
+      "cause": "combat"
+     }
+    ],
+    "starvationDeaths": 1,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 166758,
+     "writeSurplusKcal": 750200,
+     "writePantryCalls": 321,
+     "writeSurplusCalls": 960,
+     "writeNames": {
+      "Foraged food": 108214,
+      "Expedition haul": 8158,
+      "System-replicated stew": 400,
+      "Aid from Emberhold": 9585,
+      "Fish catch": 22216,
+      "Aid from The Red Table": 18185
+     },
+     "clockMix": {
+      "surplus|3": 750200,
+      "pantry|3": 61013,
+      "pantry|6": 105745
+     },
+     "rotClass": {
+      "pantry-base": 100,
+      "surplus-3d": 143920,
+      "other-path": 2040,
+      "pantry-clock6": 272
+     },
+     "rotPath": {
+      "pantry": 372,
+      "surplus": 143920,
+      "other": 2040
+     },
+     "rotDrawsByClass": {
+      "pantry-base": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 3
+      },
+      "surplus-3d": {
+       "n": 65,
+       "meanDraws": 1.49,
+       "meanSatDays": 6.69
+      },
+      "other-path": {
+       "n": 1,
+       "meanDraws": 3,
+       "meanSatDays": 0
+      },
+      "pantry-clock6": {
+       "n": 5,
+       "meanDraws": 0,
+       "meanSatDays": 16.4
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 659,
+     "drawnKcalByPath": {
+      "pantry": 23500,
+      "surplus": 392300,
+      "other": 19210
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 156,
+       "meanLagDays": 1.4
+      },
+      "surplus": {
+       "n": 209,
+       "meanLagDays": 3.55
+      },
+      "pantry|6": {
+       "n": 254,
+       "meanLagDays": 0.87
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d5: Overnight, Blackberry; Lamb's Quarters; unknown berries went bad — beyond saving. You leave them for the flies.",
+     "d5: The village threw out spoiled stores: Foraged food. Christian mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d6: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d7: Overnight, small understory tree, big drooping leaves, mango-sized green-yellow fruit; unknown shoots went bad — beyond saving. You leave them for the flies.",
+     "d9: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d9: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d10: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d11: Overnight, Stinging Nettle; unknown shoots went bad — beyond saving. You leave them for the flies.",
+     "d11: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d13: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d14: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies."
+    ],
+    "ms": 2778
+   }
+  },
+  {
+   "seed": 23003,
+   "end": {
+    "seed": 23003,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 134,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "global",
+    "national": true,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 0,
+    "exiled": 0,
+    "pkEnd": 12500,
+    "deaths": [
+     {
+      "day": 10,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat"
+     },
+     {
+      "day": 23,
+      "kind": "villager",
+      "who": "gen_wleblhd",
+      "cause": "combat"
+     },
+     {
+      "day": 25,
+      "kind": "villager",
+      "who": "gen_azbohns",
+      "cause": "combat"
+     },
+     {
+      "day": 27,
+      "kind": "villager",
+      "who": "gen_s0usmau",
+      "cause": "Nightlight"
+     },
+     {
+      "day": 28,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 30,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "combat"
+     },
+     {
+      "day": 35,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 36,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "combat"
+     },
+     {
+      "day": 37,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat"
+     },
+     {
+      "day": 44,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat"
+     },
+     {
+      "day": 49,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 71,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat"
+     },
+     {
+      "day": 76,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "villager combat"
+     },
+     {
+      "day": 83,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 83,
+      "kind": "villager",
+      "who": "gen_u90hoda",
+      "cause": "combat"
+     },
+     {
+      "day": 83,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat"
+     },
+     {
+      "day": 90,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "combat"
+     },
+     {
+      "day": 97,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "combat"
+     },
+     {
+      "day": 104,
+      "kind": "villager",
+      "who": "leo_martin",
+      "cause": "combat"
+     },
+     {
+      "day": 105,
+      "kind": "villager",
+      "who": "gen_sng0t0u",
+      "cause": "combat"
+     },
+     {
+      "day": 106,
+      "kind": "villager",
+      "who": "david_kim",
+      "cause": "combat"
+     },
+     {
+      "day": 107,
+      "kind": "villager",
+      "who": "gen_ed8s851",
+      "cause": "combat"
+     },
+     {
+      "day": 109,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat"
+     },
+     {
+      "day": 112,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat"
+     },
+     {
+      "day": 118,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "combat"
+     },
+     {
+      "day": 119,
+      "kind": "villager",
+      "who": "quinn_murphy",
+      "cause": "monster"
+     },
+     {
+      "day": 120,
+      "kind": "villager",
+      "who": "chantal_mukendi",
+      "cause": "combat"
+     },
+     {
+      "day": 121,
+      "kind": "villager",
+      "who": "lucas_brown",
+      "cause": "monster"
+     },
+     {
+      "day": 124,
+      "kind": "villager",
+      "who": "app_mgpsping443",
+      "cause": "monster"
+     },
+     {
+      "day": 125,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "combat"
+     },
+     {
+      "day": 127,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "combat"
+     },
+     {
+      "day": 128,
+      "kind": "villager",
+      "who": "app_mgpspimg730",
+      "cause": "monster"
+     },
+     {
+      "day": 129,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "combat"
+     },
+     {
+      "day": 129,
+      "kind": "villager",
+      "who": "app_mgpspiq4837",
+      "cause": "monster"
+     },
+     {
+      "day": 130,
+      "kind": "villager",
+      "who": "ethan_hunt",
+      "cause": "monster"
+     },
+     {
+      "day": 132,
+      "kind": "villager",
+      "who": "catalina_reyes",
+      "cause": "monster"
+     },
+     {
+      "day": 134,
+      "kind": "villager",
+      "who": "ines_duarte",
+      "cause": "starvation"
+     },
+     {
+      "day": 135,
+      "kind": "villager",
+      "who": "oliver_moore",
+      "cause": "combat"
+     },
+     {
+      "day": 135,
+      "kind": "villager",
+      "who": "tariq_mahmood",
+      "cause": "combat"
+     }
+    ],
+    "starvationDeaths": 1,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 134416,
+     "writeSurplusKcal": 552200,
+     "writePantryCalls": 222,
+     "writeSurplusCalls": 930,
+     "writeNames": {
+      "Foraged food": 76318,
+      "Expedition haul": 17551,
+      "Snared meat": 2141,
+      "Pit meat (Virginia Opossum)": 626,
+      "Fish catch": 19960,
+      "Aid from The Red Table": 17246,
+      "Pit meat (White-tailed Deer)": 574
+     },
+     "clockMix": {
+      "pantry|3": 134416,
+      "surplus|3": 552200
+     },
+     "rotClass": {
+      "surplus-3d": 188240,
+      "pantry-base": 1608,
+      "other-path": 5603
+     },
+     "rotPath": {
+      "pantry": 1608,
+      "surplus": 188240,
+      "other": 5603
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 85,
+       "meanDraws": 0.6,
+       "meanSatDays": 7.95
+      },
+      "pantry-base": {
+       "n": 22,
+       "meanDraws": 0,
+       "meanSatDays": 9.91
+      },
+      "other-path": {
+       "n": 11,
+       "meanDraws": 0.36,
+       "meanSatDays": 0
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 324,
+     "drawnKcalByPath": {
+      "pantry": 25200,
+      "surplus": 150000,
+      "other": 23842
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 273,
+       "meanLagDays": 1.03
+      },
+      "surplus": {
+       "n": 129,
+       "meanLagDays": 4.26
+      }
+     }
+    },
+    "spoilLines": [
+     "d9: Overnight, Blackberry; unknown berries went bad — beyond saving. You leave them for the flies.",
+     "d11: The village threw out spoiled stores: Foraged food. Oliver mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d12: Overnight, American Persimmon went bad — beyond saving. You leave it for the flies.",
+     "d12: The village threw out spoiled stores: Foraged food, Expedition haul. (pantry)",
+     "d13: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d15: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d17: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d21: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d22: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d23: The village threw out spoiled stores: Foraged food, Pit meat (Virginia Opossum). (pantry)",
+     "d33: On the carcass nearby, Night Court (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d34: Overnight, Blackberry; American Persimmon went bad — beyond saving. You leave them for the flies."
+    ],
+    "ms": 2120
+   }
+  },
+  {
+   "seed": 23004,
+   "end": {
+    "seed": 23004,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 117,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "regional",
+    "national": false,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 2,
+    "exiled": 0,
+    "pkEnd": 0,
+    "deaths": [
+     {
+      "day": 6,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "villager combat"
+     },
+     {
+      "day": 8,
+      "kind": "villager",
+      "who": "gen_bugdrw3",
+      "cause": "combat"
+     },
+     {
+      "day": 22,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 25,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat"
+     },
+     {
+      "day": 25,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 25,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 25,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 25,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat"
+     },
+     {
+      "day": 27,
+      "kind": "villager",
+      "who": "dmitri_sokolov",
+      "cause": "sickness"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "combat"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat"
+     },
+     {
+      "day": 32,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "expedition"
+     },
+     {
+      "day": 34,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat"
+     },
+     {
+      "day": 35,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "combat"
+     },
+     {
+      "day": 41,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 44,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "combat"
+     },
+     {
+      "day": 44,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "combat"
+     },
+     {
+      "day": 44,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat"
+     },
+     {
+      "day": 44,
+      "kind": "villager",
+      "who": "mia_andersson",
+      "cause": "monster"
+     },
+     {
+      "day": 51,
+      "kind": "villager",
+      "who": "gen_pyz9o38",
+      "cause": "combat"
+     },
+     {
+      "day": 51,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "combat"
+     },
+     {
+      "day": 58,
+      "kind": "monster",
+      "who": "strike",
+      "cause": "combat"
+     },
+     {
+      "day": 60,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 63,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition"
+     },
+     {
+      "day": 65,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 65,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "combat"
+     },
+     {
+      "day": 76,
+      "kind": "villager",
+      "who": "catalina_reyes",
+      "cause": "combat"
+     },
+     {
+      "day": 76,
+      "kind": "villager",
+      "who": "gen_n9rh7ux",
+      "cause": "combat"
+     },
+     {
+      "day": 76,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "combat"
+     },
+     {
+      "day": 86,
+      "kind": "villager",
+      "who": "gen_8g2eyua",
+      "cause": "combat"
+     },
+     {
+      "day": 90,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "combat"
+     },
+     {
+      "day": 98,
+      "kind": "villager",
+      "who": "maya_singh",
+      "cause": "combat"
+     },
+     {
+      "day": 98,
+      "kind": "villager",
+      "who": "gen_gpmpw6i",
+      "cause": "combat"
+     },
+     {
+      "day": 101,
+      "kind": "villager",
+      "who": "priya_nair",
+      "cause": "monster"
+     },
+     {
+      "day": 109,
+      "kind": "villager",
+      "who": "gen_tit5lz6",
+      "cause": "combat"
+     },
+     {
+      "day": 109,
+      "kind": "villager",
+      "who": "stan_kowalski",
+      "cause": "combat"
+     },
+     {
+      "day": 111,
+      "kind": "villager",
+      "who": "sigrun_eiriksdottir",
+      "cause": "monster"
+     }
+    ],
+    "starvationDeaths": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 109774,
+     "writeSurplusKcal": 435800,
+     "writePantryCalls": 188,
+     "writeSurplusCalls": 728,
+     "writeNames": {
+      "Foraged food": 56547,
+      "Snared meat": 3362,
+      "Expedition haul": 17976,
+      "System-replicated stew": 400,
+      "Trial feast": 600,
+      "Fish catch": 27235,
+      "Aid from Emberhold": 3654
+     },
+     "clockMix": {
+      "pantry|3": 109774,
+      "surplus|3": 435800
+     },
+     "rotClass": {
+      "surplus-3d": 150800,
+      "other-path": 650,
+      "pantry-base": 339,
+      "pantry-coarse": 500
+     },
+     "rotPath": {
+      "pantry": 839,
+      "surplus": 150800,
+      "other": 650
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 67,
+       "meanDraws": 1.22,
+       "meanSatDays": 4.81
+      },
+      "other-path": {
+       "n": 2,
+       "meanDraws": 0.5,
+       "meanSatDays": 0
+      },
+      "pantry-base": {
+       "n": 3,
+       "meanDraws": 0,
+       "meanSatDays": 12
+      },
+      "pantry-coarse": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 3
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 309,
+     "drawnKcalByPath": {
+      "pantry": 10500,
+      "surplus": 184840,
+      "other": 16950
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 265,
+       "meanLagDays": 0.72
+      },
+      "surplus": {
+       "n": 119,
+       "meanLagDays": 2.17
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: The village threw out spoiled stores: Foraged food. A person, maybe 30s, with a wiry build mutters about the smoke rack going cold. (pantry)",
+     "d6: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d7: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d8: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d9: Overnight, Mayapple; Muscadine Grapes went bad — beyond saving. You leave them for the flies.",
+     "d9: The village threw out spoiled stores: Foraged food. Mia kicks the ash pile. The smoke rack stays empty. (pantry)",
+     "d10: Overnight, American Persimmon went bad — beyond saving. You leave it for the flies.",
+     "d10: The village threw out spoiled stores: Foraged food. Arturo gives the smoke rack a long look, then walks off. (pantry)",
+     "d11: The village threw out spoiled stores: Foraged food. Aria mutters about the smoke rack going cold. (pantry)",
+     "d12: The village threw out spoiled stores: Foraged food. Donna kicks the ash pile. The smoke rack stays empty. (pantry)",
+     "d14: The village threw out spoiled stores: Foraged food. Darnell gives the smoke rack a long look, then walks off. (pantry)",
+     "d17: The village threw out spoiled stores: Foraged food. Maya mutters about the smoke rack going cold. (pantry)"
+    ],
+    "ms": 2038
+   }
+  },
+  {
+   "seed": 23005,
+   "end": {
+    "seed": 23005,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 180,
+    "endReason": "survived",
+    "won": false,
+    "rank": "regional",
+    "national": false,
+    "table": false,
+    "arc": 4,
+    "maxWave": 3,
+    "rosterEnd": 5,
+    "exiled": 0,
+    "pkEnd": 1400,
+    "deaths": [
+     {
+      "day": 6,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 8,
+      "kind": "villager",
+      "who": "gen_rzlwzux",
+      "cause": "combat"
+     },
+     {
+      "day": 8,
+      "kind": "villager",
+      "who": "gen_fyddbwr",
+      "cause": "sickness"
+     },
+     {
+      "day": 10,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat"
+     },
+     {
+      "day": 18,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat"
+     },
+     {
+      "day": 19,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 25,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "combat"
+     },
+     {
+      "day": 34,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "combat"
+     },
+     {
+      "day": 41,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat"
+     },
+     {
+      "day": 41,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat"
+     },
+     {
+      "day": 42,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 42,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 46,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "combat"
+     },
+     {
+      "day": 46,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat"
+     },
+     {
+      "day": 48,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat"
+     },
+     {
+      "day": 49,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat"
+     },
+     {
+      "day": 51,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat"
+     },
+     {
+      "day": 51,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat"
+     },
+     {
+      "day": 51,
+      "kind": "villager",
+      "who": "gen_nqedntz",
+      "cause": "combat"
+     },
+     {
+      "day": 58,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "combat"
+     },
+     {
+      "day": 58,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "combat"
+     },
+     {
+      "day": 65,
+      "kind": "villager",
+      "who": "rafael_torres",
+      "cause": "The Static Kite"
+     },
+     {
+      "day": 68,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "combat"
+     },
+     {
+      "day": 68,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "combat"
+     },
+     {
+      "day": 75,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "combat"
+     },
+     {
+      "day": 75,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "combat"
+     },
+     {
+      "day": 79,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat"
+     },
+     {
+      "day": 84,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 84,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 88,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "combat"
+     },
+     {
+      "day": 91,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat"
+     },
+     {
+      "day": 95,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat"
+     },
+     {
+      "day": 99,
+      "kind": "villager",
+      "who": "gen_pqtgtu6",
+      "cause": "combat"
+     },
+     {
+      "day": 102,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat"
+     },
+     {
+      "day": 106,
+      "kind": "monster",
+      "who": "bulldozer",
+      "cause": "combat"
+     },
+     {
+      "day": 111,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat"
+     },
+     {
+      "day": 112,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "combat"
+     },
+     {
+      "day": 117,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "combat"
+     },
+     {
+      "day": 117,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 117,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "combat"
+     },
+     {
+      "day": 119,
+      "kind": "villager",
+      "who": "gen_b2meric",
+      "cause": "monster"
+     },
+     {
+      "day": 130,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat"
+     },
+     {
+      "day": 135,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "villager combat"
+     },
+     {
+      "day": 139,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat"
+     },
+     {
+      "day": 140,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat"
+     },
+     {
+      "day": 151,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat"
+     },
+     {
+      "day": 154,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "combat"
+     },
+     {
+      "day": 154,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "combat"
+     },
+     {
+      "day": 154,
+      "kind": "villager",
+      "who": "quinn_murphy",
+      "cause": "combat"
+     },
+     {
+      "day": 160,
+      "kind": "villager",
+      "who": "gen_hc9d1n0",
+      "cause": "the expedition"
+     },
+     {
+      "day": 166,
+      "kind": "villager",
+      "who": "visjoin_162",
+      "cause": "monster"
+     },
+     {
+      "day": 177,
+      "kind": "villager",
+      "who": "boris_kowalski",
+      "cause": "starvation"
+     },
+     {
+      "day": 177,
+      "kind": "villager",
+      "who": "visjoin_167",
+      "cause": "thirst"
+     },
+     {
+      "day": 180,
+      "kind": "villager",
+      "who": "app_mgpsphqb82",
+      "cause": "combat"
+     }
+    ],
+    "starvationDeaths": 1,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 254133,
+     "writeSurplusKcal": 465400,
+     "writePantryCalls": 445,
+     "writeSurplusCalls": 921,
+     "writeNames": {
+      "Snared meat": 7201,
+      "Foraged food": 91959,
+      "Expedition haul": 7343,
+      "Fish catch": 147630
+     },
+     "clockMix": {
+      "pantry|3": 254133,
+      "surplus|3": 465400
+     },
+     "rotClass": {
+      "surplus-3d": 38040,
+      "other-path": 1437,
+      "pantry-base": 118
+     },
+     "rotPath": {
+      "pantry": 118,
+      "surplus": 38040,
+      "other": 1437
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 42,
+       "meanDraws": 1.5,
+       "meanSatDays": 3.62
+      },
+      "other-path": {
+       "n": 4,
+       "meanDraws": 0.5,
+       "meanSatDays": 0
+      },
+      "pantry-base": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 16
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 694,
+     "drawnKcalByPath": {
+      "pantry": 34840,
+      "surplus": 228920,
+      "other": 52145
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 512,
+       "meanLagDays": 0.46
+      },
+      "surplus": {
+       "n": 215,
+       "meanLagDays": 1.85
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d5: Overnight, unknown roots; thorny climbing vines everywhere, with tender coiled tips in spring went bad — beyond saving. You leave them for the flies.",
+     "d6: Overnight, Stinging Nettle went bad — beyond saving. You leave it for the flies.",
+     "d7: Overnight, unknown shoots; Muscadine Grapes went bad — beyond saving. You leave them for the flies.",
+     "d8: Overnight, Purslane; unknown berries went bad — beyond saving. You leave them for the flies.",
+     "d9: Overnight, unknown roots went bad — beyond saving. You leave it for the flies.",
+     "d11: Overnight, Stinging Nettle; Burdock; Jerusalem Artichoke went bad — beyond saving. You leave them for the flies.",
+     "d12: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d13: Overnight, Blackberry went bad — beyond saving. You leave it for the flies.",
+     "d19: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d20: Overnight, Elderberry went bad — beyond saving. You leave it for the flies.",
+     "d21: Overnight, Blackberry went bad — beyond saving. You leave it for the flies."
+    ],
+    "ms": 2289
+   }
+  },
+  {
+   "seed": 23006,
+   "end": {
+    "seed": 23006,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 67,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "regional",
+    "national": false,
+    "table": false,
+    "arc": 3,
+    "maxWave": 2,
+    "rosterEnd": 10,
+    "exiled": 0,
+    "pkEnd": 0,
+    "deaths": [
+     {
+      "day": 4,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 9,
+      "kind": "villager",
+      "who": "gen_lcx55cw",
+      "cause": "monster"
+     },
+     {
+      "day": 12,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition"
+     },
+     {
+      "day": 12,
+      "kind": "villager",
+      "who": "gen_5xk45bx",
+      "cause": "combat"
+     },
+     {
+      "day": 19,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "expedition"
+     },
+     {
+      "day": 20,
+      "kind": "villager",
+      "who": "gen_avq48o3",
+      "cause": "starvation"
+     },
+     {
+      "day": 29,
+      "kind": "villager",
+      "who": "gen_0mobs75",
+      "cause": "combat"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat"
+     },
+     {
+      "day": 31,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "combat"
+     },
+     {
+      "day": 33,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 39,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "combat"
+     },
+     {
+      "day": 42,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat"
+     },
+     {
+      "day": 45,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 53,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 58,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 62,
+      "kind": "villager",
+      "who": "hannah_kim",
+      "cause": "contest"
+     },
+     {
+      "day": 68,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat"
+     }
+    ],
+    "starvationDeaths": 1,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 55652,
+     "writeSurplusKcal": 171200,
+     "writePantryCalls": 110,
+     "writeSurplusCalls": 344,
+     "writeNames": {
+      "Foraged food": 44510,
+      "Snared meat": 1702,
+      "Expedition haul": 7914,
+      "Trial feast": 600,
+      "Pit meat (Wild Boar)": 926
+     },
+     "clockMix": {
+      "pantry|3": 55652,
+      "surplus|3": 171200
+     },
+     "rotClass": {
+      "surplus-3d": 5000
+     },
+     "rotPath": {
+      "pantry": 0,
+      "surplus": 5000,
+      "other": 0
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 4,
+       "meanDraws": 2,
+       "meanSatDays": 3
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 278,
+     "drawnKcalByPath": {
+      "pantry": 8995,
+      "surplus": 88864,
+      "other": 23832
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 148,
+       "meanLagDays": 0.19
+      },
+      "surplus": {
+       "n": 87,
+       "meanLagDays": 1.82
+      }
+     }
+    },
+    "spoilLines": [
+     "d5: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d11: The village threw out spoiled stores: Foraged food. Adaeze mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d12: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d13: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d13: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d14: Overnight, unknown roots went bad — beyond saving. You leave it for the flies.",
+     "d14: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d15: Overnight, unknown berries went bad — beyond saving. You leave it for the flies.",
+     "d16: Overnight, Blackberry went bad — beyond saving. You leave it for the flies.",
+     "d17: Overnight, Staghorn Sumac went bad — beyond saving. You leave it for the flies.",
+     "d18: Overnight, Burdock went bad — beyond saving. You leave it for the flies.",
+     "d34: On the carcass nearby, Old Gavel (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost."
+    ],
+    "ms": 1253
+   }
+  },
+  {
+   "seed": 23007,
+   "end": {
+    "seed": 23007,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 180,
+    "endReason": "survived",
+    "won": false,
+    "rank": "regional",
+    "national": false,
+    "table": false,
+    "arc": 4,
+    "maxWave": 4,
+    "rosterEnd": 3,
+    "exiled": 0,
+    "pkEnd": 0,
+    "deaths": [
+     {
+      "day": 16,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 16,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat"
+     },
+     {
+      "day": 16,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat"
+     },
+     {
+      "day": 17,
+      "kind": "villager",
+      "who": "gen_sl171bf",
+      "cause": "combat"
+     },
+     {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 21,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "combat"
+     },
+     {
+      "day": 21,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "combat"
+     },
+     {
+      "day": 23,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 35,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat"
+     },
+     {
+      "day": 36,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "combat"
+     },
+     {
+      "day": 36,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "combat"
+     },
+     {
+      "day": 44,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 50,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat"
+     },
+     {
+      "day": 64,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "combat"
+     },
+     {
+      "day": 64,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "villager combat"
+     },
+     {
+      "day": 72,
+      "kind": "monster",
+      "who": "ad_sponsor",
+      "cause": "combat"
+     },
+     {
+      "day": 72,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "combat"
+     },
+     {
+      "day": 79,
+      "kind": "villager",
+      "who": "gen_fupwnqj",
+      "cause": "combat"
+     },
+     {
+      "day": 122,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 122,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 125,
+      "kind": "villager",
+      "who": "gen_q343nn9",
+      "cause": "combat"
+     },
+     {
+      "day": 126,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "combat"
+     },
+     {
+      "day": 128,
+      "kind": "villager",
+      "who": "gen_z1gy09c",
+      "cause": "combat"
+     },
+     {
+      "day": 129,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "combat"
+     },
+     {
+      "day": 137,
+      "kind": "villager",
+      "who": "aki_tanaka",
+      "cause": "monster"
+     },
+     {
+      "day": 138,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 141,
+      "kind": "person",
+      "who": "app_mgpsphhx860",
+      "cause": "combat"
+     },
+     {
+      "day": 141,
+      "kind": "villager",
+      "who": "sigrun_eiriksdottir",
+      "cause": "combat"
+     },
+     {
+      "day": 144,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat"
+     },
+     {
+      "day": 146,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "combat"
+     },
+     {
+      "day": 166,
+      "kind": "villager",
+      "who": "visjoin_145",
+      "cause": "monster"
+     },
+     {
+      "day": 167,
+      "kind": "villager",
+      "who": "visjoin_150",
+      "cause": "monster"
+     },
+     {
+      "day": 170,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat"
+     },
+     {
+      "day": 171,
+      "kind": "villager",
+      "who": "yara_haddad",
+      "cause": "combat"
+     },
+     {
+      "day": 177,
+      "kind": "villager",
+      "who": "aria_thompson",
+      "cause": "combat"
+     },
+     {
+      "day": 178,
+      "kind": "villager",
+      "who": "benoit_lambert",
+      "cause": "combat"
+     },
+     {
+      "day": 180,
+      "kind": "villager",
+      "who": "gen_wfxunm9",
+      "cause": "combat"
+     }
+    ],
+    "starvationDeaths": 0,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 184037,
+     "writeSurplusKcal": 753400,
+     "writePantryCalls": 323,
+     "writeSurplusCalls": 1143,
+     "writeNames": {
+      "Foraged food": 113924,
+      "System-replicated stew": 400,
+      "Aid from Emberhold": 26498,
+      "Fish catch": 36960,
+      "Expedition haul": 6255
+     },
+     "clockMix": {
+      "pantry|3": 36873,
+      "surplus|3": 753400,
+      "pantry|6": 147164
+     },
+     "rotClass": {
+      "surplus-3d": 136480,
+      "pantry-clock6": 20
+     },
+     "rotPath": {
+      "pantry": 20,
+      "surplus": 136480,
+      "other": 0
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 60,
+       "meanDraws": 1.23,
+       "meanSatDays": 6.78
+      },
+      "pantry-clock6": {
+       "n": 1,
+       "meanDraws": 0,
+       "meanSatDays": 6
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 875,
+     "drawnKcalByPath": {
+      "pantry": 32000,
+      "surplus": 402920,
+      "other": 23682
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 91,
+       "meanLagDays": 1.74
+      },
+      "surplus": {
+       "n": 228,
+       "meanLagDays": 3.18
+      },
+      "pantry|6": {
+       "n": 313,
+       "meanLagDays": 0.6
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d5: Overnight, Dandelion; unknown nuts went bad — beyond saving. You leave them for the flies.",
+     "d6: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d9: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d10: Overnight, giant rhubarb-like leaves, round burrs, first-year = leaf rosette with no stalk went bad — beyond saving. You leave it for the flies.",
+     "d12: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d15: The village threw out spoiled stores: Foraged food. Nolan mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d17: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d19: Overnight, Cliffhanger (carcass) went bad — beyond saving. You leave it for the flies.",
+     "d19: On the carcass nearby, Cliffhanger (carcass), The Living Wire (carcass) went bad — maggots, smell, the whole sad story. Leaving it had a cost.",
+     "d23: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+     "d24: The village threw out spoiled stores: Foraged food. (pantry)"
+    ],
+    "ms": 2819
+   }
+  },
+  {
+   "seed": 23008,
+   "end": {
+    "seed": 23008,
+    "policy": "belongfeast",
+    "arm": "armed",
+    "days": 140,
+    "endReason": "village-lost",
+    "won": false,
+    "rank": "regional",
+    "national": false,
+    "table": false,
+    "arc": 4,
+    "maxWave": 3,
+    "rosterEnd": 7,
+    "exiled": 0,
+    "pkEnd": 0,
+    "deaths": [
+     {
+      "day": 8,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat"
+     },
+     {
+      "day": 29,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 30,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 32,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "combat"
+     },
+     {
+      "day": 36,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 36,
+      "kind": "villager",
+      "who": "gen_jqqn0dy",
+      "cause": "combat"
+     },
+     {
+      "day": 41,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat"
+     },
+     {
+      "day": 41,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat"
+     },
+     {
+      "day": 43,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat"
+     },
+     {
+      "day": 46,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat"
+     },
+     {
+      "day": 49,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "expedition"
+     },
+     {
+      "day": 50,
+      "kind": "villager",
+      "who": "gen_fm9xtbj",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 57,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat"
+     },
+     {
+      "day": 69,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat"
+     },
+     {
+      "day": 83,
+      "kind": "villager",
+      "who": "emma_larsen",
+      "cause": "Gavel"
+     },
+     {
+      "day": 103,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat"
+     },
+     {
+      "day": 113,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "villager combat"
+     },
+     {
+      "day": 116,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "expedition"
+     },
+     {
+      "day": 120,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "combat"
+     },
+     {
+      "day": 122,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition"
+     },
+     {
+      "day": 125,
+      "kind": "villager",
+      "who": "gen_f1qlo80",
+      "cause": "combat"
+     },
+     {
+      "day": 126,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat"
+     },
+     {
+      "day": 126,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat"
+     },
+     {
+      "day": 126,
+      "kind": "villager",
+      "who": "gen_s98t2at",
+      "cause": "combat"
+     },
+     {
+      "day": 127,
+      "kind": "villager",
+      "who": "gen_zmazva8",
+      "cause": "combat"
+     },
+     {
+      "day": 131,
+      "kind": "villager",
+      "who": "theo_lindqvist",
+      "cause": "dehydration"
+     },
+     {
+      "day": 139,
+      "kind": "villager",
+      "who": "nadia_khoury",
+      "cause": "starvation"
+     }
+    ],
+    "starvationDeaths": 1,
+    "wins": 0,
+    "rd": {
+     "writePantryKcal": 157612,
+     "writeSurplusKcal": 694200,
+     "writePantryCalls": 261,
+     "writeSurplusCalls": 1046,
+     "writeNames": {
+      "Snared meat": 13012,
+      "Foraged food": 85098,
+      "Expedition haul": 53298,
+      "System-replicated (enthusiastic) meal": 300,
+      "Fish catch": 2748,
+      "Pit meat (Virginia Opossum)": 2348,
+      "Pit meat (White-tailed Deer)": 808
+     },
+     "clockMix": {
+      "pantry|3": 51494,
+      "surplus|3": 694200,
+      "pantry|6": 106118
+     },
+     "rotClass": {
+      "surplus-3d": 366600,
+      "pantry-base": 314,
+      "other-path": 10692,
+      "pantry-clock6": 2571
+     },
+     "rotPath": {
+      "pantry": 2885,
+      "surplus": 366600,
+      "other": 10692
+     },
+     "rotDrawsByClass": {
+      "surplus-3d": {
+       "n": 134,
+       "meanDraws": 0.7,
+       "meanSatDays": 6.5
+      },
+      "pantry-base": {
+       "n": 6,
+       "meanDraws": 0,
+       "meanSatDays": 3
+      },
+      "other-path": {
+       "n": 12,
+       "meanDraws": 0.25,
+       "meanSatDays": 0
+      },
+      "pantry-clock6": {
+       "n": 22,
+       "meanDraws": 0,
+       "meanSatDays": 9.91
+      }
+     },
+     "unclassifiedRot": 0,
+     "desperationByPath": {
+      "pantry": 0,
+      "surplus": 0,
+      "other": 0
+     },
+     "capRefuseN": 0,
+     "capRefuseKcal": 0,
+     "capTruncateKcal": 0,
+     "overCapWriteN": 0,
+     "overCapWriteKcal": 0,
+     "dayRefMismatch": 0,
+     "drawCalls": 460,
+     "drawnKcalByPath": {
+      "pantry": 46400,
+      "surplus": 154560,
+      "other": 24368
+     },
+     "firstDrawLag": {
+      "pantry|3": {
+       "n": 74,
+       "meanLagDays": 0.74
+      },
+      "surplus": {
+       "n": 147,
+       "meanLagDays": 5.82
+      },
+      "pantry|6": {
+       "n": 244,
+       "meanLagDays": 1.48
+      }
+     }
+    },
+    "spoilLines": [
+     "d4: Overnight, unknown roots went bad — beyond saving. You leave it for the flies.",
+     "d5: Overnight, unknown shoots went bad — beyond saving. You leave it for the flies.",
+     "d6: Overnight, unknown nuts went bad — beyond saving. You leave it for the flies.",
+     "d7: Overnight, unknown roots; Muscadine Grapes went bad — beyond saving. You leave them for the flies.",
+     "d9: The village threw out spoiled stores: Foraged food. Aurora mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+     "d10: Overnight, Jerusalem Artichoke went bad — beyond saving. You leave it for the flies.",
+     "d10: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d11: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d12: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d13: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d14: The village threw out spoiled stores: Foraged food. (pantry)",
+     "d15: The village threw out spoiled stores: Foraged food. (pantry)"
+    ],
+    "ms": 2310
+   }
+  }
+ ]
+}
