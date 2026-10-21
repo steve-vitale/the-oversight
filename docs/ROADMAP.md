@@ -1,5 +1,33 @@
 # ROADMAP: what's built, what's next, how to do it
 
+## Garden intake candidate; complete the sim garden loop next (2026-10-21)
+
+Candidate dea9296f6-20261021-061958 tracks ordinary/assisted and legacy crop
+food through actual settled meals, transfers, recipes, refunds and Continue.
+The common Pack/prep handler saves completed physical meals immediately after
+the action returns; native quota failure retains the checkpoint and says so.
+Phone10-stage journeys and16-stage frames pass at736/844, as does installed
+update/offline Continue. Quick282/0 and full1,054/0 pass; live status is recorded in
+garden-intake-audit-r1. No crop/food/ability price or controller changed.
+
+Matched64-case all23 panels show no changed outcome/metric cases.82 paired
+long-audit jobs per arm (74 observed+8 controls) retain exact outcomes/all23/RNG
+and state hashes excluding only the two new metadata fields. Six campaigns
+harvest, five eat identified crop food; all such food is from assisted cycles.
+This does not establish viability. The policy never calls player harvest,
+despite2,818 paid cultivations. All output is8 NPC deliveries. Read GARDENS.md
+for residuals, costs and unknowns before using this data for calibration.
+
+Next bounded Codex milestone: make the shared garden controller finish its
+real harvest→safe storage/processing/eating loop. Keep actual gates, species,
+seed/labor/food costs and earned powers; no grants or internal state shortcuts.
+Prove a prepared ripe opportunity and natural long-campaign use, compare the
+old/new controller on the same released Game as methodology, then share the
+controller before using it for balance comparisons. Muse retains numerical
+garden/ability calibration. Crop safety and unexplained output residuals remain
+open; do not infer regression or success from wins alone. Keep the rolling
+public-release goal active after publication.
+
 ## Company favor released (2026-10-21)
 
 Release30f630d36 is live as378c91373-20261021-052404. The publication-r1

@@ -1,5 +1,21 @@
 # Agent lanes (2026-10-20)
 
+## Codex garden accounting candidate; controller completion next (2026-10-21)
+
+Codex owns the candidate cultivated-origin fields/meal books, passive
+accounting/transport tools and Pack/prep completed-meal persistence. See
+GARDENS.md, INTAKE-TELEMETRY.md and garden-intake-audit-r1. No numeric lever
+or existing controller changed. Full/publication gates are pending separately.
+
+After publication Codex owns the missing public player-harvest loop in the
+shared garden policy, with actual storage/processing/eating and honest costs.
+Current runs have0 player harvest calls but2,818 paid cultivations. Existing
+garden viability claims remain unproven. Compare controllers on one Game as
+methodology; subsequent Game arms must share the controller. Muse retains
+numeric cultivation/ability calibration. Fetch shared master/main first;
+do not overwrite or port a whole tree. Last fetched shared tip isdea9296f6;
+no new Muse commit or direct reply has been observed.
+
 ## Codex company released; garden consumption evidence next (2026-10-21)
 
 Company-favor release30f630d36 is live as378c91373-20261021-052404; the

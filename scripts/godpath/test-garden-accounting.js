@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('assert/strict'),K=require('./lib'),A=require('../lib/garden-accounting');
+(async()=>{const G=await K.load({seed:7002});K.newRun(G);const s=G.state.scholar,v=G.state.village;
+ assert.equal(A.intakeSnapshot(v).status,'unknown');assert.equal(A.intakeSnapshot({gardenIntakeTotals:{version:99}}).status,'unknown');
+ const eater=G.captureIntakeEater(G.villagerId);G.recordHarvestIntake(eater,[{kcal:100,nourishment:120,item:{gardenShares:{ordinary:.25,assisted:.5}}}],'prepared-source-contract');
+ const before=JSON.stringify(G.state),snap=A.intakeSnapshot(v);assert.equal(snap.status,'known');assert.equal(snap.totals.unclassified.kcal,25);assert.equal(snap.totals.origins.ordinary.nourishment,30);assert.equal(JSON.stringify(G.state),before);
+ v.gardenIntakeTotals.origins.ordinary.kcal++;assert.equal(snap.totals.origins.ordinary.kcal,25);assert.equal(A.intakeSnapshot(v).status,'unknown');v.gardenIntakeTotals.origins.ordinary.kcal--;
+ v.gardenIntakeTotals.roles.player.origins.ordinary.nourishment++;assert.equal(A.intakeSnapshot(v).status,'unknown');v.gardenIntakeTotals.roles.player.origins.ordinary.nourishment--;
+ s.inventory=[{units:2,kcalEach:500,gardenShares:{ordinary:.4,assisted:.2}},{units:1,kcalEach:0,gardenShares:{legacy:1}}];s.prepStash=s.inventory;v.pantry=[];v.pack={prepared:{kcal:200,gardenShares:{ordinary:.5}}};
+ const raw=JSON.stringify(G.state),stocks=A.stockSnapshot(G);assert.equal(stocks.totals.ordinary,500);assert.equal(stocks.totals.assisted,200);assert.equal(stocks.unvaluedTaggedUnits.legacy,1);assert.equal(JSON.stringify(G.state),raw);
+ console.log('garden accounting: cumulative source validation, unknowns, role conservation, detached snapshots, absorption, stock scope and pure reads pass');
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

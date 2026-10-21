@@ -1,0 +1,16 @@
+  ok   actual donation preserves crop origin without consuming it
+  ok   single pantry withdrawal preserves both crop origins
+  ok   actual carried ration retains crop origin and is not a meal
+  ok   actual away meal records its consumed crop fraction once
+  ok   actual ration theft retains the food origin without creating intake
+  ok   eating the stolen portion counts the original crop exactly once
+  ok   real clipped/refunded communal meal conserves crop intake capdraw=false ration=false
+  ok   real clipped/refunded communal meal conserves crop intake capdraw=false ration=true
+  ok   real clipped/refunded communal meal conserves crop intake capdraw=true ration=false
+  ok   real clipped/refunded communal meal conserves crop intake capdraw=true ration=true
+  ok   real mixed recipe weights cultivated origin by ingredient calories, not item count
+  ok   finished recipe shelving preserves its partial crop fraction
+  ok   actual unknown-food staging and sorting retain the known half without identifying the rest
+  ok   delayed sampling retains twenty meals beyond the eight-day diagnostic ring
+
+Garden intake routes: 14 passed, 0 failed, 0 todo (phase 0)

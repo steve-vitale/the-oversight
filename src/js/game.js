@@ -4133,6 +4133,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         p = v.pack[vid] = { day: today, kcal: Math.round(drawn.taken), risks };
         const shares=this.blendHarvestShares(drawn.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal})));
         if (Object.keys(shares).length) p.harvestShares=shares;
+        const garden=this.blendGardenShares(drawn.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal})));
+        if (Object.keys(garden).length) p.gardenShares=garden;
       }
       return p.kcal;
     },
@@ -4172,7 +4174,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const inv = this.state.scholar.inventory;
         // FUNGIBILITY (break-it food 2026-10-08): thefts on different days
         // have different clocks — merge only into an identical stack.
-        const tmpl = { name: 'Stolen rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Someone is going to miss these.', harvestShares: ((v.pack || {})[vid] || {}).harvestShares };
+        const tmpl = { name: 'Stolen rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Someone is going to miss these.', harvestShares: ((v.pack || {})[vid] || {}).harvestShares, gardenShares: ((v.pack || {})[vid] || {}).gardenShares };
         const stack = inv.find(i => i.stolen && !i.bonded && !(this.isSpoiled && this.isSpoiled(i)) && this.stacksMatch(i, tmpl));
         if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; }
         else inv.push(tmpl);
@@ -4261,7 +4263,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const inv = this.state.scholar.inventory;
         // FUNGIBILITY (break-it food 2026-10-08): same rule as theft —
         // different days, different clocks.
-        const tmpl = { name: 'Taken rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. You know the difference.', harvestShares: ((v.pack || {})[vid] || {}).harvestShares };
+        const tmpl = { name: 'Taken rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. You know the difference.', harvestShares: ((v.pack || {})[vid] || {}).harvestShares, gardenShares: ((v.pack || {})[vid] || {}).gardenShares };
         const stack = inv.find(i => i.stolen && !i.bonded && !(this.isSpoiled && this.isSpoiled(i)) && this.stacksMatch(i, tmpl));
         if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; }
         else inv.push(tmpl);
@@ -6818,14 +6820,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.gardenMaintain(vid);
           if(this.gardenMagicGate(vid).ok)this.cultivateGarden(vid);
           const sowing=this.villagerSowPlot(vid);if(sowing)this.say(`🌱 ${sowing}`);
-          let kcal = 0, n = 0;
+          let kcal = 0, n = 0;const gardenParts=[];
           for (const p of live) {
             if (this.plotRipe(p, gday) && this.data.plants.find(x=>x.id===p.pid)?.edibility === 'safe') {
-              kcal += Math.round(this.plotYieldKcal(p) * 0.8 * eff);
+              const delivered=Math.round(this.plotYieldKcal(p) * 0.8 * eff);
+              kcal += delivered;gardenParts.push({item:{gardenShares:this.gardenHarvestOrigin(p)},weight:delivered});
               this.gardenHarvestTaken(p, gday); n++;
             }
           }
-          if (kcal > 0) this.stockPantry(kcal, 'Garden harvest', { harvestShares: this.harvestOrigin(vid) });
+          if (kcal > 0) this.stockPantry(kcal, 'Garden harvest', { harvestShares: this.harvestOrigin(vid), gardenShares:this.blendGardenShares(gardenParts) });
           this.say(`🌱 ${first} works the garden — watered, weeded, turned${n ? `, and brings in a harvest (+${kcal} kcal to the pantry)` : '. Nothing ripe yet'}.`);
           try { this.creditDeed && this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
           this.bumpTrust(vid, 1, 'worked the garden');
@@ -8091,6 +8094,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const item = {
           name: name || 'Foraged food', kcalEach: pk, units: 1,
           ...(opts.harvestShares ? { harvestShares: opts.harvestShares } : {}),
+          ...(opts.gardenShares ? { gardenShares: opts.gardenShares } : {}),
           spoilDay: day + 3 + _sgb,
           safe: true, kg: Math.max(0.05, Math.round(pk / 5) / 1000),
         };
@@ -8349,7 +8353,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             needsCooking: item.needsCooking, rawKcal: item.rawKcal, cookedKcal: item.cookedKcal,
             // TRICHINOSIS (break-it food 2026-10-10): the homecoming pool
             // never washes worms — same contract as takenStack.
-            parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares }, 500);
+            parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares, gardenShares:item.gardenShares }, 500);
         }
         // first return: someone explains the pooling. after that, it's understood.
         if (!vv.pooledFoodExplained && give.length) {
@@ -8506,7 +8510,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           cookedKcal: item.cookedKcal, burnt: item.burnt, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): exile amends don't wash
           // worms either — same field contract as takenStack.
-          parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares }, 500);
+          parasiteRisk: item.parasiteRisk, harvestShares:item.harvestShares, gardenShares:item.gardenShares }, 500);
       }
       s.inventory = (s.inventory || []).filter(i => !giveSet.has(i));
       const givenKcal = Math.round(give.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 0), 0));
@@ -15305,7 +15309,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // FOOD REALITY: keep processing state — the haul stays workable.
           plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
-          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares };
+          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares, gardenShares: item.gardenShares };
         const existing = inv.find(i => this.stacksMatch(i, takenStack));
         if (existing) { this.mergeHarvestShares(existing, takenStack, canTake); existing.units += canTake; }
         else inv.push(takenStack);
@@ -15487,7 +15491,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const takenStack = { name: item.name, kcalEach: item.kcalEach, units: 1, spoilDay: this.pantryTakeSpoilDay(item), safe: item.safe, kg: item.kg, unit: item.unit || 'item', rawKcal: item.rawKcal, cookedKcal: item.cookedKcal, needsCooking: item.needsCooking,
         plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
-          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares };
+          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares, gardenShares: item.gardenShares };
       const existing = inv.find(i => this.stacksMatch(i, takenStack));
       if (existing) {
         this.mergeHarvestShares(existing, takenStack, 1);
@@ -20977,6 +20981,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state.scholar.inventory.push({
           plantId: p.pid, units, kcalEach: plant.caloriesPerUnit ?? 0,
           harvestShares: this.harvestOrigin(this.villagerId),
+          gardenShares: this.gardenHarvestOrigin(p),
           spoilDay: day + (plant.spoilageDays || 4), name: plant.name || p.pid,
           unit: plant.unit || 'handful', kg: 0.1,
           prep: (entry.level || 0) >= 2 && entry.prepKnown ? 'Garden-fresh.' : 'Fresh from the garden.',
@@ -27838,6 +27843,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         leftoverName = biggest ? biggest.name : 'food';
         this.stockPantry(excess, 'Meal leftovers', {harvestShares:this.blendHarvestShares(
+          drawn.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal}))),gardenShares:this.blendGardenShares(
           drawn.items.map(d=>({item:d.item,weight:d.units*d.effectiveKcal})))});
       }
       const nourishment=Math.max(0,Math.min(netBanked,room));

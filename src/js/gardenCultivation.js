@@ -4,6 +4,7 @@
 // provides:
 //   - gardenCapacity()
 //   - gardenCapacityHint()
+//   - gardenHarvestOrigin(plot)
 //   - gardenProfile(pid, form)
 //   - gardenCropProfile(plot)
 //   - gardenPlant(plot, pid, day)
@@ -75,6 +76,11 @@
       const level = Math.max(1, this.state.codex?.plants?.[plot.pid]?.level || 1);
       const base = profile.legacy ? (plant?.caloriesPerUnit > 0 ? 5000 / plant.caloriesPerUnit : this.gardenProfile(plot.pid).units) : profile.units;
       return Math.max(0, Math.round(base * (1 + .25 * (level - 1)) * ((plot.weeds || 0) >= 3 ? .5 : 1) * (plot.magicYield || 1)));
+    },
+    gardenHarvestOrigin(plot) {
+      if (!plot?.pid || plot.dead) return {};
+      const assisted=(plot.magicGrowth || 0)>0 || (plot.magicYield || 1)>1;
+      return {[plot.cultivation?.version===1 ? (assisted?'assisted':'ordinary') : (assisted?'legacyAssisted':'legacy')]:1};
     },
     gardenHarvestTaken(plot, harvestedDay) {
       const profile = this.gardenCropProfile(plot);

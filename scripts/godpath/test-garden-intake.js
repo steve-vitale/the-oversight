@@ -1,0 +1,52 @@
+'use strict';
+const path=require('path'),root=path.resolve(process.env.GARDEN_INTAKE_ROOT||path.join(__dirname,'../..')),K=require(path.join(root,'scripts/godpath/lib')),T=K.reporter('Garden intake');
+(async()=>{
+ const store=new Map();global.localStorage={getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k),key:i=>[...store.keys()][i]??null,get length(){return store.size;}};
+ const G=await K.load({seed:7002});let s,v,npc;
+ T.ok('real initialized Game provides cultivated origin and consumption accounting',typeof G.gardenHarvestOrigin==='function'&&typeof G.blendGardenShares==='function'&&typeof G.recordGardenIntake==='function');
+ if(typeof G.gardenHarvestOrigin!=='function'){T.done();return;}
+ const close=(a,b)=>Math.abs((a||0)-(b||0))<1e-7;
+ function fresh(){K.newRun(G);s=G.state.scholar;v=G.state.village;s.day=85;s.kcal=6000;s.inventory=[];v.pantry=[];v.trust[G.villagerId]=100;v.gives={[G.villagerId]:100000};npc=v.roster.find(id=>id!==G.villagerId);G.exitBuilding();}
+ function plot(age=30,pid='lambs_quarters'){const p={};G.gardenPlant(p,pid,s.day-age);G.map.tiles[4][4].plots=[p];G.state.codex.plants[pid]={level:3,prepKnown:true};return p;}
+ const origin=(key='ordinary')=>({[key]:1}),book=()=>v.gardenIntakeTotals,known=key=>book()?.origins[key]?.kcal||0;
+ fresh();const p=plot(),units=G.gardenHarvestUnits(p);G.harvestGarden();const food=s.inventory.find(i=>i.plantId==='lambs_quarters');
+ T.ok('actual ordinary crop output carries its cycle origin and unchanged physical units',food?.gardenShares?.ordinary===1&&food.units===units&&food.harvestShares[G.villagerId]===1);
+ T.ok('harvest is output, never an eating receipt',!book());
+ s.kcal=0;G.eatOne(s.inventory.indexOf(food));
+ T.ok('actual player meal records physical cultivated food and useful nourishment separately',book()?.kcal===50&&known('ordinary')===50&&close(book().nourishment,s.kcal)&&book().roles.player.origins.ordinary.kcal===50);
+ const saved=JSON.stringify(book());G.save();const key=G.state.runKey;G.load(key);s=G.state.scholar;v=G.state.village;
+ T.ok('actual Continue retains cumulative source intake without eating again',JSON.stringify(book())===saved);
+ fresh();const magic=plot(26);K.giveAbility(G,'green_thumb');const before=s.kcal;G.cultivateGarden();
+ T.ok('real paid growth creates an assisted cycle before harvest',s.kcal===before-200&&magic.magicGrowth===4&&G.gardenHarvestOrigin(magic).assisted===1);
+ G.harvestGarden();const boosted=s.inventory.find(i=>i.plantId==='lambs_quarters');
+ T.ok('assisted food keeps the applied benefit after the bed resets its next cycle',boosted?.gardenShares?.assisted===1&&magic.magicGrowth===0&&magic.magicYield===1&&G.gardenHarvestOrigin(magic).ordinary===1);
+ fresh();G.map.tiles[4][4].plots=[{pid:'lambs_quarters',plantedDay:1,lastHarvest:1,lastTend:85,weeds:0,dead:false}];G.harvestGarden();
+ T.ok('new harvest from a preserved legacy crop is reported separately',s.inventory.some(i=>i.gardenShares?.legacy===1)&&!book());
+ fresh();const a=plot(30,'dandelion'),b={};G.gardenPlant(b,'dandelion',s.day-30);b.magicGrowth=4;b.magicYield=1.5;G.gardenPlots().push(b);v.npcAbilities[npc]=[];
+ const eff=G.villagerCompetence(npc,'garden')*G.trustTaskMult(npc),ordinaryKcal=Math.round(G.plotYieldKcal(a)*.8*eff),assistedKcal=Math.round(G.plotYieldKcal(b)*.8*eff);G.resolveOneAssignment(npc,{task:'garden'});
+ T.ok('actual NPC duty creates physically weighted ordinary and assisted harvest shares',v.pantry.length>0&&v.pantry.every(i=>close(i.gardenShares.ordinary,ordinaryKcal/(ordinaryKcal+assistedKcal))&&close(i.gardenShares.assisted,assistedKcal/(ordinaryKcal+assistedKcal))&&i.harvestShares[npc]===1),JSON.stringify({pantry:v.pantry,plots:G.gardenPlots()}));
+ v.health={...v.health,[npc]:10};G.npcNeeds(npc).hunger=80;const meal=G.villagerMealDay(npc,G.getPerson(npc),v,{cookId:null});
+ T.ok('real NPC meal credits only consumed pantry food to gardens, not generic personal work',known('ordinary')>0&&known('assisted')>0&&close(known('ordinary')+known('assisted'),meal.drawn)&&book().unclassified.kcal>0&&book().roles.npc.kcal===book().kcal,JSON.stringify({meal,book:book()}));
+ fresh();G.enterBuilding();G.stockPantry(400,'Prepared mix',{gardenShares:origin()});G.stockPantry(400,'Prepared mix');G.stockPantry(400,'Prepared mix',{gardenShares:origin('assisted')});
+ T.ok('origin metadata does not split otherwise fungible food',v.pantry.length===1&&v.pantry[0].units===3);
+ T.ok('mixed stacks retain an explicit unclassified fraction',close(v.pantry[0].gardenShares.ordinary,1/3)&&close(v.pantry[0].gardenShares.assisted,1/3));
+ G.takeFromPantryBulk({0:3});const mixed=s.inventory.find(i=>i.name==='Prepared mix');
+ T.ok('actual bulk withdrawal preserves both origins without an intake receipt',mixed&&close(mixed.gardenShares.ordinary,1/3)&&!book());
+ s.kcal=0;G.eatOne(s.inventory.indexOf(mixed));
+ T.ok('mixed meal conserves physical and useful classified/unclassified portions',close(known('ordinary'),400/3)&&close(known('assisted'),400/3)&&close(book().unclassified.kcal,400/3)&&close(book().origins.ordinary.nourishment+book().origins.assisted.nourishment+book().unclassified.nourishment,book().nourishment));
+ fresh();s.inventory=[{name:'Garden harvest',units:1,kcalEach:500,safe:true,spoilDay:9999,prep:'Garden-fresh.'}];s.kcal=0;G.eatOne(0);
+ T.ok('old food labels cannot manufacture known cultivated origin',book()?.unclassified.kcal===500&&!Object.keys(book().origins).length);
+ fresh();const snapshot=JSON.stringify(G.state);G.recordGardenIntake({who:G.villagerId,day:85,role:'player'},[{kcal:500,nourishment:500,item:{gardenShares:origin()}}]);
+ T.ok('forged eater frames cannot write source intake',JSON.stringify(G.state)===snapshot);
+ const frame=G.captureIntakeEater(G.villagerId);K.newRun(G);s=G.state.scholar;v=G.state.village;const current=JSON.stringify(G.state);G.recordGardenIntake(frame,[{kcal:500,item:{gardenShares:origin()}}]);
+ T.ok('an earlier run cannot donate an eating receipt to a new bearer',JSON.stringify(G.state)===current);
+ fresh();const bad=G.blendGardenShares([{item:{gardenShares:{ordinary:.5,assisted:.25,imaginary:1,legacy:NaN}},weight:2},{item:{},weight:2}]);
+ T.ok('invalid origin keys and unknown portions never inflate known fractions',close(bad.ordinary,.25)&&close(bad.assisted,.125)&&!bad.imaginary&&!bad.legacy);
+ const beforeRead=JSON.stringify(G.state),reads=G.blendGardenShares([{item:{gardenShares:origin()},weight:5}]);
+ T.ok('origin reads never hydrate state or create meals',reads.ordinary===1&&JSON.stringify(G.state)===beforeRead);
+ fresh();s.inventory=[{name:'Prepared cultivated serving',units:1,kcalEach:500,safe:true,spoilDay:9999,gardenShares:origin()}];s.kcal=G.kcalCap();G.eatOne(0);
+ T.ok('full-bank meal refusal creates no food loss or eating receipt',s.inventory[0]?.units===1&&!book());
+ G.recordHarvestIntake(G.captureIntakeEater(G.villagerId),[{kcal:500,nourishment:0,item:{gardenShares:origin()}}],'prepared-zero-credit');
+ T.ok('a settled zero-credit portion cannot invent useful garden nourishment',book()?.kcal===500&&known('ordinary')===500&&book().origins.ordinary.nourishment===0);
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

@@ -1,5 +1,37 @@
 # Survival levers and investigation register
 
+## Cultivated-food accounting and completed meals (2026-10-21 candidate)
+
+No crop profile, food price, growth/yield, hunger/healing, duty or controller
+lever changed. `gardenShares` and gardenIntakeTotals add source metadata only.
+The Pack/prep callback now saves an actually consumed physical meal after its
+whole callback returns, retaining completed food, reserve, action costs and
+receipts before unload. Failed storage is reported in existing feedback and
+does not replace the checkpoint. This fixes a real phone-tested gap; it is not
+a free food/healing adjustment. Core time settlement remains unchanged.
+
+Both64-case balanced arms use current observer/harness/policies and four
+neutral controls. Every outcome/all23 vector matches. Both82-job long audits
+retain exact RNG/outcomes/all23 and state hashes with only gardenShares and
+gardenIntakeTotals removed. Existing producer/intake data and all other Game
+fields remain. Browser-only saving is verified separately; node excludes app.js.
+
+The74 observed campaigns have6 harvesting and5 eating known crop food.
+Known useful crop nourishment45,981 kcal is a lower bound, not a net-profit
+claim. Direct reserve debits686,880 kcal, NPC hunger equivalents160 kcal and
+nominal seed input369,950 kcal remain separate, with normal metabolism and
+duty opportunity costs unpriced. The shared policy pays2,818 cultivation
+actions but never calls player harvest, so these economics are not a valid
+garden-build calibration. Fix and compare that controller on the same Game
+before adjusting numeric levers.33,225 nominal output kcal is unallocated;
+do not silently classify it as waste or count it as meals.
+
+Decision: retain measurement and the completed-meal persistence fix for
+development release after remaining checks. Preserve all earlier balance and
+garden viability warnings. Codex next owns controller completion; Muse retains
+numeric calibration. Actual NPC caution-crop preparation and dawn overshoot
+are open boundaries, not silently changed to make the report look better.
+
 ## Company-favor release30f630d36 (2026-10-21)
 
 `favor-rules.json` owns minimum continuous presence32 ticks, shared-fire

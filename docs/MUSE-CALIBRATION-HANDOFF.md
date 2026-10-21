@@ -1,5 +1,31 @@
 # Muse calibration handoff
 
+## Garden accounting candidate: fix the controller before tuning (2026-10-21)
+
+Read GARDENS.md and INTAKE-TELEMETRY.md for candidate
+dea9296f6-20261021-061958. Actual crop-origin intake is separate from output,
+spoilage removal, nominal stock, reserve debits, hunger equivalents, seeds and
+requested/elapsed time. Private eater identity, refunds and unknown fractions
+are preserved. New raw before-arm origin history is unknown, not zero. The
+Pack/prep handler now persists a completed physical meal after its full action;
+actual phone quota/recovery/Continue is verified. Final publication is separate.
+
+All23/outcomes are unchanged in the matched64-case screen. Both82-job usage
+arms share one observer/harness/controller; passive controls and declared-field
+state/outcome/all23/RNG comparisons match.74 observed campaigns produce137,196
+kcal but identified crop intake is49,955 kcal/45,981 useful nourishment.
+Six harvest; five eat. Ordinary versus assisted is a cycle origin, not an
+intentional-build cohort.33,225 nominal kcal remains unallocated, not classified
+waste. All known consumed garden food is assisted-cycle food.
+
+The controller made2,818 paid cultivations and0 player harvest calls. All
+output came from8 NPC deliveries. This is a measurement/controller blind spot;
+do not tune prices from it or infer Game viability. Codex next owns the actual
+public harvest→storage/processing/eating loop with same-Game methodology controls
+and natural use evidence, then shares it. Muse retains numerical calibration.
+NPC safety/preparation restrictions and output residuals remain explicit open
+issues. No whole-tree port or history replacement is needed.
+
 ## Company favor released; next measurement lane (2026-10-21)
 
 Codex's company-favor release30f630d36 implements actual same-person/fire company

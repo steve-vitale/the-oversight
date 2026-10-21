@@ -1,0 +1,23 @@
+'use strict';
+const K=require('./lib'),T=K.reporter('Garden cost observation'),O=require('../lib/garden-usage'),{gameplayHash}=require('../gear-usage-audit');
+(async()=>{const G=await K.load({seed:7002});let s,v;
+ function fresh(){K.newRun(G);s=G.state.scholar;v=G.state.village;s.kcal=6000;s.health=100;s.hydration=100;s.energy=100;v.pantry=[];G.exitBuilding();}
+ fresh();s.day=4;s.dayTicks=480;G.dayPart=3;const original=G.makePlot,before=gameplayHash(G.state),obs=O.install(G);obs.sample();
+ T.ok('new stock/intake/cost sampling mutates no Game state',gameplayHash(G.state)===before);
+ G.makePlot();const c=obs.report.accounting.costs;
+ T.ok('actual bed preparation costs are captured before overnight metabolism',c.byAction.makePlot.playerReserveKcal===120&&c.playerReserveKcal===120&&s.day===5&&6000-s.kcal>120,JSON.stringify({cost:c,kcal:s.kcal,day:s.day}));
+ T.ok('requested work and actual elapsed clock are distinct across a real dawn',c.byAction.makePlot.playerRequestedTicks===64&&c.byAction.makePlot.playerActionTicks===G.TIME.TICKS_PER_DAY-480,JSON.stringify({cost:c.byAction.makePlot,day:s.day,ticks:s.dayTicks}));
+ s.inventory=[{name:'Prepared expired crop',units:2,kcalEach:75,spoilDay:0,gardenShares:{ordinary:1}}];G.sweepSpoiled();obs.sample();
+ T.ok('actual spoilage removal is measured without pretending it was eaten',obs.report.accounting.removedBySpoilageSweep.ordinary===150&&obs.report.accounting.stocks.totals.ordinary===0);
+ obs.restore();T.ok('nested observation restores the real original work function',G.makePlot===original);
+ fresh();
+ const p={};G.gardenPlant(p,'dandelion',s.day);G.map.tiles[4][4].plots=[p];K.giveAbility(G,'green_thumb');s.kcal=500;
+ const cast=O.install(G);G.cultivateGarden();
+ T.ok('actual public cultivation records one real player ability payment, not nested dispatch twice',cast.report.accounting.costs.byAction.cultivate.playerReserveKcal===200&&cast.report.accounting.costs.playerReserveKcal===200&&cast.report.accounting.costs.byAction.cultivate.charged===1);
+ const beforeRepeat={...cast.report.accounting.costs.byAction.cultivate};G.cultivateGarden();
+ T.ok('a refused repeat adds no charge or paid ticks',cast.report.accounting.costs.playerReserveKcal===200&&cast.report.accounting.costs.byAction.cultivate.playerActionTicks===beforeRepeat.playerActionTicks&&cast.report.accounting.costs.byAction.cultivate.charged===beforeRepeat.charged);cast.restore();
+ fresh();const npc=v.roster.find(id=>id!==G.villagerId),crop={};G.gardenPlant(crop,'dandelion',s.day);G.map.tiles[4][4].plots=[crop];v.npcAbilities[npc]=[{id:'green_thumb',level:1,xp:0}];G.npcNeeds(npc).hunger=0;
+ const npcObs=O.install(G),food=s.kcal;G.cultivateGarden(npc);
+ T.ok('NPC paid garden magic records its own hunger equivalent and no player debit',npcObs.report.accounting.costs.npcHungerEquivalentKcal===200&&npcObs.report.accounting.costs.playerReserveKcal===0&&s.kcal===food&&crop.magicGrowth===4);npcObs.restore();
+ T.done();
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});
