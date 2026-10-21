@@ -1,0 +1,12 @@
+=== seed 17003 day 80 — conversation with Onni (onni_korhonen) ===
+occupation=chimney sweep temperament=cautious trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "Please — have you got anything to spare? Anything? I can't keep going like this."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

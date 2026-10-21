@@ -1,0 +1,18 @@
+=== seed 17001 day 140 — conversation with Natalia (gen_pnf8hqm) ===
+occupation=army medic temperament=anxious trust=91 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Have you ever hurt someone? Since all this started."
+(turn0 choices: ans:q_fight:a_tell, ans:q_fight:a_vague, ans:q_fight:honest_pass, leave, silence)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Come, sit — I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Help me haul something back? Too much for one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

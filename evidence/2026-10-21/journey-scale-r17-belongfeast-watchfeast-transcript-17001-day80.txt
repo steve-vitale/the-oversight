@@ -1,0 +1,15 @@
+=== seed 17001 day 80 — conversation with Milton (visjoin_65) ===
+occupation=fishing guide temperament=prickly trust=54 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Forage with me tomorrow? I know the meadow edge, west of the creek."
+(turn0 choices: goon, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I did the count twice. The count doesn't change. Nobody's worked the meadow edge, west of the creek in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Fine. That was almost pleasant. Almost."
+want final: id=ask_favor stage=3 resolution=deflected

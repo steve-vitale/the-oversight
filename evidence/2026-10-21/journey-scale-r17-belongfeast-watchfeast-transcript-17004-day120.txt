@@ -1,0 +1,18 @@
+=== seed 17004 day 120 — conversation with Onni (onni_korhonen) ===
+occupation=chimney sweep temperament=cautious trust=8 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "We're eating through stores faster than we replace them. Forage with me tomorrow? I know the old burn east of camp."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. I know the old burn east of camp — come with me and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: "Come get air with me. I need to think out loud."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=deflected

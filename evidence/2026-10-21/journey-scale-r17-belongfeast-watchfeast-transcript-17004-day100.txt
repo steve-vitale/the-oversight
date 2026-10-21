@@ -1,0 +1,18 @@
+=== seed 17004 day 100 — conversation with Yada (app_mgpsphhw965) ===
+occupation=hunter temperament=warm trust=30 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Teach me something. Anything you know that I don't."
+(turn0 choices: ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:a_deflect, ans:q_teach_me:honest_pass, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "Look — All right. Show me when we work together."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Come see what I found. You won't believe it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "This was nice. Don't be a stranger — we're nine people, it's hard."
+want final: id=curious stage=3 resolution=engaged

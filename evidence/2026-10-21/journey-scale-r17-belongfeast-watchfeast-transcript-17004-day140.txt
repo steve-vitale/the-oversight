@@ -1,0 +1,12 @@
+=== seed 17004 day 140 — conversation with Easton (visjoin_138) ===
+occupation=line cook temperament=fidgety trust=20 dead=false mood=steady
+want: curious (stage 0, fromSeed)
+
+THEM: "Short version — The table's here. The ring — the light — it's just sitting there. Waiting on you."
+(turn0 choices: dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=unestablished

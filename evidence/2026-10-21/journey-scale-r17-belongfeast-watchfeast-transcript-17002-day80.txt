@@ -1,0 +1,18 @@
+=== seed 17002 day 80 — conversation with Ivan (visjoin_76) ===
+occupation=exterminator temperament=restless trust=21 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing."
+(turn0 choices: ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, ans:q_first_memory:a_deflect, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Mine's Omaha, Nebraska, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later! I'm already thinking about three things at once!"
+want final: id=curious stage=3 resolution=engaged
