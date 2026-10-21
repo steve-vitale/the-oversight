@@ -81,6 +81,18 @@ for (const [cause, kind, want] of cases) {
 }
 ok('monsterId wins', DC.classifyDeath(rowOf('combat', 'villager', { monsterId: 'bulldozer', monsterName: 'Bulldozer' }), MIDX).class === 'combat-bulldozer');
 ok('contest venue without monster -> contest', DC.classifyDeath(rowOf('combat', 'villager', { venue: 'contest' }), MIDX).class === 'contest');
+ok('experiment -> food-testing', DC.classifyDeath(rowOf('experiment', 'villager'), MIDX).class === 'other: experiment (food-testing)');
+ok('villageName resolves', DC.classifyDeath(rowOf('The Reverend', 'villager'), {
+  byId: { nevermore: { id: 'nevermore', name: 'Nevermore', wave: 1, unknown: null } },
+  byName: { 'the reverend': 'nevermore' },
+}).class === 'combat-nevermore');
+ok('unknown descriptor resolves + flagged', (function () {
+  var a = DC.classifyDeath(rowOf('stripes flowing where no wind blows', 'villager'), {
+    byId: { sweeps_week: { id: 'sweeps_week', name: 'Sweeps Week', wave: 1, unknown: 'stripes flowing where no wind blows' } },
+    byName: { 'stripes flowing where no wind blows': 'sweeps_week' },
+  });
+  return a.class === 'combat-sweeps_week' && /unknown descriptor/.test(a.detail);
+})());
 ok('contest venue with monster -> combat-<id> tagged',
   (function () { var a = DC.classifyDeath(rowOf('combat', 'villager', { monsterId: 'bulldozer', venue: 'contest' }), MIDX); return a.class === 'combat-bulldozer' && /contest venue/.test(a.detail); })());
 ok('wild combat-unknown stays', DC.classifyDeath(rowOf('combat', 'villager', { venue: null }), MIDX).class === 'combat-unknown');

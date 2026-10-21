@@ -492,6 +492,11 @@ function classifyDeath(row, mIdx) {
     // 8. Contest family (no call sites on current master; kept for corpus).
     if (/contest|show\b|gauntlet/i.test(c)) return { class: 'contest', detail: raw };
 
+    // 8b. The cautious food-testing protocol (game.js:17924/17961 —
+    // hurtVillager(tester, 10/15, 'experiment')): villagers dying for the
+    // village's food knowledge. A named class, not a residual.
+    if (c === 'experiment') return { class: 'other: experiment (food-testing)', detail: raw };
+
     // 9. Residual — named with the raw cause; NOT unexplained.
     return { class: 'other: ' + raw.slice(0, 80), detail: raw };
   } catch (e) {
