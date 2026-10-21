@@ -6,13 +6,14 @@
 //
 // Fixtures:
 //   A. cistern 0 space   -> (RED: overflow beat fires) / (GREEN: no dispatch,
-//      redirect beat, 0 water added, ledger cisternRedirects=1)
+//      two redirect beats, 0 water added, ledger cisternRedirects=2, the two
+//      redirects alternate stone->wood)
 //   B. cistern 4L space  -> (RED: "only holds 4L more" beat) / (GREEN: carry
 //      exactly 4L, full-delivery beat, no overflow beat)
 //   C. cistern ample     -> behavior UNCHANGED vs control (paired, same seed)
 //   D. voice gate        -> two redirects same day: ledger 2, ONE beat (gated)
 // Det-gate: paired CISTERNCHECK_OFF=1 vs armed, same seed — Math.random
-// streams byte-identical after the fixture (one draw each: R(10,14) vs
+// streams byte-identical after the fixture (two draws each: R(10,14) x2 vs
 // R(5,9)/R(1,2)); trajectories differ only in the avoided trips.
 // Sense: prints before/after beats for the assessor to read.
 //
@@ -61,6 +62,11 @@ function waterOf(Game) {
   const w = Game.state.village.water || {};
   return (w.clean || 0) + (w.dirty || 0);
 }
+function stashStoneOf(Game) {
+  // STONE task pays into the communal stash (storage.js materials), not the
+  // village object — mirror the game's own defensive read.
+  try { return (Game.stashState().materials.stone || 0); } catch (e) { return 0; }
+}
 
 async function fixtureA(seed, env) {
   // Full cistern. env: {} armed | {CISTERNCHECK_OFF:'1'} control.
@@ -72,15 +78,27 @@ async function fixtureA(seed, env) {
   setCistern(Game, 0);
   const before = waterOf(Game);
   const woodBefore = Game.state.village.wood || 0;
+  const stoneBefore = stashStoneOf(Game);
   assignWater(Game, vid);
   Game.resolveAssignments();
+  const w1 = (Game.state.village.wood || 0) - woodBefore;
+  const s1 = stashStoneOf(Game) - stoneBefore;
+  // Second redirect on the same villager: the alt rotation must alternate
+  // (rotation-repair 2026-10-21: the landed ((x||0)+1)-1)%2 never toggled).
+  assignWater(Game, vid);
+  Game.resolveAssignments();
+  const w2 = (Game.state.village.wood || 0) - woodBefore - w1;
+  const s2 = stashStoneOf(Game) - stoneBefore - s1;
+  const pick = (w, s) => (w > 0 ? 'wood' : (s > 0 ? 'stone' : 'none'));
   const v = Game.state.village;
   return {
     Game, beats,
     overflowBeat: beats.some(b => /cistern only holds/.test(b)),
     redirectBeat: beats.filter(b => /eyes the cistern/.test(b)).length,
     waterDelta: waterOf(Game) - before,
-    woodDelta: (v.wood || 0) - woodBefore,
+    woodDelta: w1 + w2,
+    stoneDelta: s1 + s2,
+    altPicks: [pick(w1, s1), pick(w2, s2)],
     redirects: v.cisternRedirects || 0,
     overflowHauls: v.cisternOverflowHauls || 0,
     rngTail: Array.from({ length: 10 }, () => Math.random()),
@@ -133,9 +151,10 @@ async function run() {
   const gA = await fixtureA(7001, {});
   ok(!gA.overflowBeat, 'A full cistern -> NO overflow beat');
   ok(gA.waterDelta === 0, 'A full cistern -> 0L added', 'delta=' + gA.waterDelta);
-  ok(gA.redirects === 1, 'A redirect ledger = 1');
-  ok(gA.redirectBeat === 1, 'A redirect beat voiced (ungated)', 'n=' + gA.redirectBeat);
-  ok(gA.woodDelta > 0, 'A labor reallocated to wood (not wasted)', 'wood+' + gA.woodDelta);
+  ok(gA.redirects === 2, 'A two redirects -> ledger = 2', 'n=' + gA.redirects);
+  ok(gA.redirectBeat === 2, 'A redirect beat voiced (ungated)', 'n=' + gA.redirectBeat);
+  ok(gA.woodDelta + gA.stoneDelta > 0, 'A labor reallocated to wood/stone (not wasted)', 'wood+' + gA.woodDelta + ' stone+' + gA.stoneDelta);
+  ok(gA.altPicks[0] !== 'none' && gA.altPicks[0] !== gA.altPicks[1], 'A alt rotation alternates across redirects', gA.altPicks.join('->'));
   ok(gA.overflowHauls === 0, 'A no overflow ledger');
   // B: 4L space -> carry exactly what fits.
   const gB = await fixtureB(7002, {});
@@ -196,7 +215,7 @@ async function run() {
   console.log('--- BEFORE (control, full cistern) ---');
   redA.beats.filter(b => /💧/.test(b)).forEach(b => console.log('  ' + b));
   console.log('--- AFTER (armed, full cistern) ---');
-  gA.beats.filter(b => /💧|🪵/.test(b)).forEach(b => console.log('  ' + b));
+  gA.beats.filter(b => /💧|🪵|🪨/.test(b)).forEach(b => console.log('  ' + b));
   console.log('--- BEFORE (control, 4L space) ---');
   redB.beats.filter(b => /💧/.test(b)).forEach(b => console.log('  ' + b));
   console.log('--- AFTER (armed, 4L space) ---');

@@ -6813,7 +6813,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // pattern); the ledger counts every redirect. The alt branch draws
           // exactly one RNG pull, same as the water branch below, so paired
           // trajectories stay byte-identical except the avoided trip.
-          const _alt = ['wood', 'stone'][(v.cisternAltRot = ((v.cisternAltRot || 0) + 1) - 1) % 2];
+          const _alt = ['wood', 'stone'][(v.cisternAltRot = ((v.cisternAltRot || 0) + 1) % 2)];
           const _ccGateOff = (typeof process !== 'undefined' && process.env && process.env.CISTERNCHECK_GATE === '0');
           let _ccToday = 0;
           try { _ccToday = (this.state.scholar || {}).day || 0; } catch (e) {}
