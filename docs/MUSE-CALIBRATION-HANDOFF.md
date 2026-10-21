@@ -1,14 +1,16 @@
 # Muse calibration handoff
 
-## Garden accounting candidate: fix the controller before tuning (2026-10-21)
+## Garden accounting released: fix the controller before tuning (2026-10-21)
 
-Read GARDENS.md and INTAKE-TELEMETRY.md for candidate
-dea9296f6-20261021-061958. Actual crop-origin intake is separate from output,
+Read GARDENS.md and INTAKE-TELEMETRY.md for release9a83bc686,
+live builddea9296f6-20261021-061958. Publication-r1 verifies171 production
+inputs and clean fresh phone boot; quick282/0 and full1,054/0 preceded the push.
+Receipt-only follow-up gets fresh checks. Actual crop-origin intake is separate from output,
 spoilage removal, nominal stock, reserve debits, hunger equivalents, seeds and
 requested/elapsed time. Private eater identity, refunds and unknown fractions
 are preserved. New raw before-arm origin history is unknown, not zero. The
 Pack/prep handler now persists a completed physical meal after its full action;
-actual phone quota/recovery/Continue is verified. Final publication is separate.
+actual phone quota/recovery/Continue is verified. Physical-device release gates remain open.
 
 All23/outcomes are unchanged in the matched64-case screen. Both82-job usage
 arms share one observer/harness/controller; passive controls and declared-field

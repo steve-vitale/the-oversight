@@ -1,13 +1,17 @@
 # ROADMAP: what's built, what's next, how to do it
 
-## Garden intake candidate; complete the sim garden loop next (2026-10-21)
+## Garden intake released; complete the sim garden loop next (2026-10-21)
+
+Release9a83bc686 is live asdea9296f6-20261021-061958. Publication-r1 verifies
+all171 checked production inputs and clean fresh phone boot. The primary
+checkout matches shared master/main; the foreign sweep is preserved unchanged.
 
 Candidate dea9296f6-20261021-061958 tracks ordinary/assisted and legacy crop
 food through actual settled meals, transfers, recipes, refunds and Continue.
 The common Pack/prep handler saves completed physical meals immediately after
 the action returns; native quota failure retains the checkpoint and says so.
 Phone10-stage journeys and16-stage frames pass at736/844, as does installed
-update/offline Continue. Quick282/0 and full1,054/0 pass; live status is recorded in
+update/offline Continue. Quick282/0 and full1,054/0 preceded the push; details are in
 garden-intake-audit-r1. No crop/food/ability price or controller changed.
 
 Matched64-case all23 panels show no changed outcome/metric cases.82 paired

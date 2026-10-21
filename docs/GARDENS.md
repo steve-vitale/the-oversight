@@ -1,6 +1,10 @@
 # Gardens: ordinary cultivation, invested magic and Haven growth
 
-## Cultivated-food accounting candidate (2026-10-21)
+## Cultivated-food accounting released (2026-10-21)
+
+Release9a83bc686, live builddea9296f6-20261021-061958, verifies171 production
+inputs and clean fresh phone boot. Quick282/0 and full1,054/0 preceded the push;
+the publication-receipt follow-up gets its own fresh checks.
 
 See INTAKE-TELEMETRY.md for four crop-origin classes, cumulative actual meals,
 partial/refunded consumption and unknown history. Nominal output, useful

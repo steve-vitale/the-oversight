@@ -1,6 +1,6 @@
 # Food intake receipts
 
-## Cultivated origins (2026-10-21 candidate)
+## Cultivated origins (2026-10-21 release9a83bc686)
 
 New actual crop harvests also carry `gardenShares`, independently of producer
 identity. Classes are ordinary, assisted, legacy and legacyAssisted. Assistance

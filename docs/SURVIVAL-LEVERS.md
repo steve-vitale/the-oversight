@@ -1,6 +1,6 @@
 # Survival levers and investigation register
 
-## Cultivated-food accounting and completed meals (2026-10-21 candidate)
+## Cultivated-food accounting and completed meals (2026-10-21 release9a83bc686)
 
 No crop profile, food price, growth/yield, hunger/healing, duty or controller
 lever changed. `gardenShares` and gardenIntakeTotals add source metadata only.
@@ -26,8 +26,9 @@ garden-build calibration. Fix and compare that controller on the same Game
 before adjusting numeric levers.33,225 nominal output kcal is unallocated;
 do not silently classify it as waste or count it as meals.
 
-Decision: retain measurement and the completed-meal persistence fix for
-development release after remaining checks. Preserve all earlier balance and
+Decision: retain measurement and the completed-meal persistence fix in
+development release9a83bc686. Quick282/0 and full1,054/0 preceded the push;
+publication-r1 verifies171 production inputs and clean phone boot. Preserve all earlier balance and
 garden viability warnings. Codex next owns controller completion; Muse retains
 numeric calibration. Actual NPC caution-crop preparation and dawn overshoot
 are open boundaries, not silently changed to make the report look better.

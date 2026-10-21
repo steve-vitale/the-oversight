@@ -145,3 +145,24 @@ The natural reports record no harness-watchdog recovery routes. Final fetch
 still sees shareddea9296f6 and preserves Muse's999c69491 ancestry. Prepublication
 binds current source/boot hashes, current neutral panel, frame/lifecycle receipts
 and the exact fresh quick/full logs before the normal Git push.
+
+## Verified publication
+
+Normal atomic push publishes9a83bc6865ab57923a1c6e63d97daa1761ec467a to
+master/main/codex-garden-intake after quick282/0 and full1,054/0. The first
+production read verifies the actual candidate: all168 boot inputs plus
+worker/version/manifest,171 total, match; fresh390×736 browser boots without
+page errors. Publication-r1 retains each response hash. Primary fast-forward
+matches and preserves the foreign sweep bytes. No force/hook bypass or
+imported queue is involved. The owned8921 source server is closed after all
+local journeys; installed-lifecycle8922 closed in its runner.
+
+The receipt/docs follow-up gets fresh quick/full before its own push. It
+changes no runtime/controller/observer inputs; those are checked against the
+retained panel and actual production bytes. This milestone does not clear
+garden viability or the missing controller harvest. Keep the rolling release
+goal active and finish that public-action loop next.
+Fresh publication-follow-up quick-r1 passes282/0 and full-r1 passes1,054/0 in
+325 seconds. Follow-up verification binds these logs and confirms unchanged
+runtime/controller/observer inputs, current production hashes and untouched
+foreign sweep before the receipt/docs push.
