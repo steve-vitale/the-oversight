@@ -206,3 +206,43 @@ Sense: scripts/sense-armorcatch-20261021.js (11 veto beats captured).
 
 Anchor: master e7393c86e. Branch sim-armorcatch. Merged locally: no —
 awaiting coordinator --ff-only merge. Do NOT push/bump.
+
+## Adoption addendum (2026-10-22, orphan-adoption run)
+
+The kill verdict above was written by a recovery pass that landed the
+sweep + analyzer + panels after the owning run died. Adopting agent
+(2026-10-22) reproduced the PRIMARY verdict independently from the
+committed corpus: `node scripts/analyze-armorcatch-20261021.js` →
+control 6/16, armed 4/16, bar = control+1 = 7/16 → **NO-GO** (exit
+non-zero), guardrails all PASS. The §15 panels, sweeps, and
+kill-protocol deletion in commit ad35b5406 were verified against the
+tree: `scripts/policies/armorcatch.js` is absent from the commit tree
+(`git ls-tree -r` shows no policy file); instruments, evidence,
+panels, and the full 32-config perseed corpus are present.
+
+### Convergence note — armor leg's policy avenue is now closed
+
+- The #735 bind's armor leg is closed as a POLICY lever:
+  KILLED-AT-PILOT (CONCEPT-DEAD). VGEAR=1's own survival/staging beat
+  already holds the armor line; an armor-discipline policy layered on
+  top can only abort fights, and fight-aborting protection trades away
+  the veteran bar's kill-yield without reducing deaths.
+- Named next avenue is GAME-DESIGN, not policy: a
+  corpse-stripping / worn-armor-return verb (armor returns to the
+  village when a bearer dies, rather than vanishing with the corpse) —
+  steve-call material, NOT implemented here.
+- A sibling DIAG arm (sim-armorsink-diag, separate worktree) is
+  quantifying the armor sink on its own leg — do not build on its
+  findings here; do not duplicate.
+- Secondary observation, report-only: s65428/leadfeast reached maxWave
+  5 on BOTH arms (armed and control) — deterministic on identical
+  seeds, not an armorcatch effect. A sibling arm is investigating this;
+  no conclusions drawn here.
+
+### Backlog measurement note (panel builders, do not re-score)
+
+The §15 panel builders compute "Player deaths per run" as TOTAL
+combat deaths (villagers + scholar), not the scholar's own deaths —
+mislabeled but consistent across arms, so the compare stays valid.
+Noted here per the backlog; the verdict was never scored on this
+field, and no re-scoring was performed.
