@@ -1,0 +1,12 @@
+=== seed 9963 day 89 — conversation with Soledad (app_mgpsphod201) ===
+occupation=farmer temperament=earnest trust=73 dead=false
+want: ask_favor (stage 2)
+
+THEM: "About this wound — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=promised

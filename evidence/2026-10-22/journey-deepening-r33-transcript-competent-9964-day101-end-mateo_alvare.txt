@@ -1,0 +1,15 @@
+=== seed 9964 day 101 — conversation with Mateo (mateo_alvarez) ===
+occupation=barber temperament=bold trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "Between us — Have you ever hurt someone? Since all this started."
+(turn0 choices: deflect_q, ans:q_fight:a_tell, ans:q_fight:a_vague, ans:q_fight:honest_pass, leave, silence)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after. Mark my words."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk. Now let's go be useful."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,27 @@
+=== seed 9963 day 89 — conversation with Jorge (jorge_silva) ===
+occupation=Rancher temperament=steady trust=68 dead=false
+want: seek_comfort (stage 0)
+
+THEM: "I keep expecting to see them by the fire. Then I remember."
+(turn0 choices: agency:ask_field, confront:d_emxuiqz, dlg:invite, dlg:comfort, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=seek_comfort stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=2)
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+(want=seek_comfort stage=2)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+(want=seek_comfort stage=2)
+YOU: (leave)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_comfort stage=3 resolution=engaged

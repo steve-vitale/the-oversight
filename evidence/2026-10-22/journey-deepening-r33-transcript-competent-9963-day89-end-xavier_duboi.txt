@@ -1,0 +1,18 @@
+=== seed 9963 day 89 — conversation with Xavier (xavier_dubois) ===
+occupation=lawyer temperament=dry trust=52 dead=false
+want: seek_comfort (stage 0)
+
+THEM: "We gave them a good burial. Doesn't feel like enough, does it?"
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the ridge. Xavier doesn't say much. Sometimes that's the whole point.
+(want=seek_comfort stage=0)
+YOU: [dlg:comfort] "You alright?"
+THEM: "If I may — You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=seek_comfort stage=2)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=seek_comfort stage=3 resolution=engaged

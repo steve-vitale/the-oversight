@@ -1,0 +1,21 @@
+=== seed 9961 day 100 — conversation with Barbara (gen_me9trba) ===
+occupation=florist temperament=withdrawn trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "About the funniest thing you've seen — Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(turn0 choices: ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, leave, silence)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Me? I laughed yesterday and it scared me — the sound of it. Like my body remembered something my head hadn't approved. Laughter's a mutiny. A good one."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Help me haul something back? Too much for one."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I need some air. Alone air. You understand."
+want final: id=curious stage=3 resolution=engaged
