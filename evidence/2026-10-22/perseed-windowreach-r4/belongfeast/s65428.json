@@ -1,0 +1,952 @@
+{
+ "seed": 65428,
+ "policyId": "belongfeast",
+ "instrument": "windowreach-r4-on-killdisc-v2+windowreach-layer+death-capture",
+ "substrate": "VCE.armedFor (withVillagerGear(withSeatDrive(withWinDefer(TF base)))) plain — no armorcatch layer",
+ "env": "FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=1 VGEAR=1 KILLDISC=1 POSTWIN=1, SUCCGRACE/RAIDDENSITY/NODEWITNESS/FULLSEAT/VETREL/VGEARBEATS/SURPLUSFEED unset",
+ "anchorCommit": "0b2e2ea3dc3f",
+ "maxWave": 2,
+ "w4Day": null,
+ "w5Day": null,
+ "barRelease": {
+  "armored": null,
+  "armed": 2,
+  "tricks": 8,
+  "veterans": null
+ },
+ "demand5": {
+  "armored": 4,
+  "armorP": 15,
+  "armed": 6,
+  "tricks": 3,
+  "veterans": 2
+ },
+ "national": 0,
+ "table": 0,
+ "won": 0,
+ "days": 66,
+ "gameDays": 66,
+ "endReason": "village-lost",
+ "endReasonFirst": "village-lost",
+ "wonFirst": false,
+ "winDay": null,
+ "winPath": null,
+ "winResumed": false,
+ "postWinDays": 0,
+ "deaths": {
+  "villager combat": 5,
+  "combat": 8,
+  "a wound that wouldn't close": 4,
+  "contest": 1,
+  "sickness": 3,
+  "starvation": 3,
+  "thirst": 1,
+  "expedition": 2
+ },
+ "nDeathRows": 27,
+ "deathRows": [
+  {
+   "day": 7,
+   "who": "rut_king",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "other",
+   "channelWhy": "cause-unmapped",
+   "wave": 1
+  },
+  {
+   "day": 7,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "other",
+   "channelWhy": "cause-unmapped",
+   "wave": 1
+  },
+  {
+   "day": 12,
+   "who": "hummice",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "wild",
+   "channelWhy": "ctx:scholar-fight-in-wild",
+   "wave": 1
+  },
+  {
+   "day": 12,
+   "who": "gen_6r69vs8",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true,
+   "playerRepaired": true,
+   "real": true,
+   "channel": "wild",
+   "channelWhy": "ctx:scholar-fight-in-wild",
+   "wave": null
+  },
+  {
+   "day": 12,
+   "who": "desmond_clarke",
+   "kind": "villager",
+   "cause": "a wound that wouldn't close",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 14,
+   "who": "hummice",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "other",
+   "channelWhy": "cause-unmapped",
+   "wave": 1
+  },
+  {
+   "day": 15,
+   "who": "dustboar",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "raid",
+   "channelWhy": "ctx:scholar-fight-at-haven",
+   "wave": 1
+  },
+  {
+   "day": 16,
+   "who": "gen_u1xrym6",
+   "kind": "villager",
+   "cause": "contest",
+   "player": true,
+   "playerRepaired": true,
+   "real": true,
+   "channel": "other",
+   "channelWhy": "cause-unmapped",
+   "wave": null
+  },
+  {
+   "day": 24,
+   "who": "cliffhanger",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "other",
+   "channelWhy": "cause-unmapped",
+   "wave": 1
+  },
+  {
+   "day": 25,
+   "who": "gen_1s4izzl",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true,
+   "playerRepaired": true,
+   "real": true,
+   "channel": "raid",
+   "channelWhy": "ctx:aid-crisis",
+   "wave": null
+  },
+  {
+   "day": 26,
+   "who": "ava_garcia",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "disease",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 26,
+   "who": "gen_lu6k6hk",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "disease",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 27,
+   "who": "benoit_lambert",
+   "kind": "villager",
+   "cause": "starvation",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 27,
+   "who": "sanne_bakker",
+   "kind": "villager",
+   "cause": "thirst",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 29,
+   "who": "gen_ta7bsz8",
+   "kind": "villager",
+   "cause": "starvation",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 29,
+   "who": "gen_zqzzud5",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "disease",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 40,
+   "who": "voice_mimic_radio",
+   "kind": "monster",
+   "cause": "expedition",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "expedition",
+   "channelWhy": "cause",
+   "wave": 2
+  },
+  {
+   "day": 40,
+   "who": "bright_idea",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "other",
+   "channelWhy": "cause-unmapped",
+   "wave": 2
+  },
+  {
+   "day": 41,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "expedition",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "expedition",
+   "channelWhy": "cause",
+   "wave": 1
+  },
+  {
+   "day": 48,
+   "who": "leo_martin",
+   "kind": "villager",
+   "cause": "a wound that wouldn't close",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 49,
+   "who": "drumbelly_tanuki",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "raid",
+   "channelWhy": "ctx:aid-crisis",
+   "wave": 1
+  },
+  {
+   "day": 53,
+   "who": "marcus_webb",
+   "kind": "villager",
+   "cause": "a wound that wouldn't close",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 60,
+   "who": "gallowdeer",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "raid",
+   "channelWhy": "ctx:aid-crisis",
+   "wave": 1
+  },
+  {
+   "day": 60,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "raid",
+   "channelWhy": "ctx:aid-crisis",
+   "wave": 1
+  },
+  {
+   "day": 60,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false,
+   "playerRepaired": false,
+   "real": false,
+   "channel": "raid",
+   "channelWhy": "ctx:aid-crisis",
+   "wave": 1
+  },
+  {
+   "day": 65,
+   "who": "visjoin_52",
+   "kind": "villager",
+   "cause": "a wound that wouldn't close",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  },
+  {
+   "day": 66,
+   "who": "grace_obi",
+   "kind": "villager",
+   "cause": "starvation",
+   "player": false,
+   "playerRepaired": false,
+   "real": true,
+   "channel": "haven",
+   "channelWhy": "cause",
+   "wave": null
+  }
+ ],
+ "nWindowTraceDays": 66,
+ "nTitansOutcomes": 0,
+ "titanOutcomes": [],
+ "gateVector": {
+  "day": 66,
+  "dayFloor": 25,
+  "w2Floor": 8,
+  "barsPerWave": {
+   "1": 5,
+   "2": 4,
+   "3": 4,
+   "4": 3,
+   "5": 2
+  },
+  "l1": 11,
+  "l2": 2,
+  "l3": 0,
+  "l4": 0,
+  "l5": 0,
+  "w3": {
+   "dayOk": true,
+   "l2Ok": false,
+   "met": false,
+   "b2need": 4
+  },
+  "raw": 20,
+  "war": 0,
+  "dip": 0,
+  "plenty": 20,
+  "warPts": 0,
+  "links": 0,
+  "feasts": 1,
+  "t4": 100,
+  "t5": 200,
+  "plentyCap": 100,
+  "demand4": {
+   "armored": 3,
+   "armorP": 10,
+   "armed": 5,
+   "tricks": 3,
+   "veterans": 1
+  },
+  "demand5": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "capped": 20,
+  "peak": 0,
+  "gated": 20,
+  "r4": {
+   "armored": 1,
+   "armed": 2,
+   "tricks": 14,
+   "veterans": 0,
+   "short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "ready": false
+  },
+  "r5": {
+   "armored": 1,
+   "armed": 2,
+   "tricks": 14,
+   "veterans": 0,
+   "short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "ready": false
+  },
+  "df4": {
+   "deferred": false,
+   "grandfathered": false,
+   "raw": 20,
+   "threshold": 100
+  },
+  "df5": {
+   "deferred": false,
+   "grandfathered": false,
+   "raw": 20,
+   "capped": 20,
+   "threshold": 200
+  },
+  "w4faced": 0,
+  "w4facedMids": [],
+  "facedPerWave": {
+   "1": 13,
+   "2": 6,
+   "3": 0,
+   "4": 0,
+   "5": 0
+  },
+  "deed": {
+   "ok": false,
+   "w1": 13,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0
+  },
+  "uw": 2,
+  "dist": {
+   "w3rung": {
+    "day": 0,
+    "l2": 2
+   },
+   "stand-raw": {
+    "standing": 180
+   },
+   "plenty-cap": {
+    "loss": 0
+   },
+   "defer4": {
+    "armor": 2,
+    "weapons": 3,
+    "tricks": 0,
+    "veterans": 1
+   },
+   "defer5": {
+    "armor": 3,
+    "weapons": 4,
+    "tricks": 0,
+    "veterans": 2
+   },
+   "w4faced": {
+    "types": 1
+   }
+  },
+  "attr": {
+   "outcome": "locked",
+   "gates": [
+    {
+     "id": "w3rung",
+     "met": false,
+     "detail": {
+      "day": 66,
+      "dayFloor": 25,
+      "l2": 2,
+      "b2need": 4,
+      "d_day": 0,
+      "d_l2": 2
+     }
+    },
+    {
+     "id": "stand-raw",
+     "met": false,
+     "detail": {
+      "raw": 20,
+      "t5": 200,
+      "d": 180
+     }
+    },
+    {
+     "id": "plenty-cap",
+     "met": true,
+     "detail": {
+      "raw": 20,
+      "capped": 20,
+      "loss": 0
+     }
+    },
+    {
+     "id": "defer4",
+     "met": true,
+     "detail": {
+      "deferred": false,
+      "grandfathered": false,
+      "bars": {
+       "armored": 1,
+       "armed": 2,
+       "tricks": 14,
+       "veterans": 0
+      },
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "deficit": {
+       "armor": 2,
+       "weapons": 3,
+       "tricks": 0,
+       "veterans": 1
+      },
+      "peak": 0
+     }
+    },
+    {
+     "id": "defer5",
+     "met": true,
+     "detail": {
+      "deferred": false,
+      "grandfathered": false,
+      "bars": {
+       "armored": 1,
+       "armed": 2,
+       "tricks": 14,
+       "veterans": 0
+      },
+      "short": [
+       "armor",
+       "weapons",
+       "veterans"
+      ],
+      "deficit": {
+       "armor": 3,
+       "weapons": 4,
+       "tricks": 0,
+       "veterans": 2
+      },
+      "peak": 0
+     }
+    },
+    {
+     "id": "w4faced",
+     "met": false,
+     "detail": {
+      "n": 0,
+      "mids": []
+     }
+    }
+   ],
+   "unmet": [
+    "w3rung",
+    "stand-raw",
+    "w4faced"
+   ],
+   "binding": "w3rung",
+   "attributed": true,
+   "why": "binding gate: w3rung (unmet: w3rung, stand-raw, w4faced)"
+  }
+ },
+ "gateErr": null,
+ "engagements": [],
+ "fieldFights": [],
+ "fieldFightsAll": [],
+ "kills": [],
+ "spawns": [],
+ "fightStarts": [
+  {
+   "day": 5,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 7,
+   "mid": "rut_king",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 7,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 8,
+   "mid": "sweeps_week",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 9,
+   "mid": "anaconda_empress",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 10,
+   "mid": "sweeps_week",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 10,
+   "mid": "sweeps_week",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 11,
+   "mid": "murkcap",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 12,
+   "mid": "hummice",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 14,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 14,
+   "mid": "dustboar",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 14,
+   "mid": "hummice",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 14,
+   "mid": "gallowdeer",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 14,
+   "mid": "murkcap",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 15,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 15,
+   "mid": "dustboar",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 21,
+   "mid": "understudy",
+   "wave": 2,
+   "via": "combat_start"
+  },
+  {
+   "day": 22,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 23,
+   "mid": "understudy",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 24,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 24,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 24,
+   "mid": "cliffhanger",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 25,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 27,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 32,
+   "mid": "murkcap",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 33,
+   "mid": "warranty_caller",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 36,
+   "mid": "understudy",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 37,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 40,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 40,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 40,
+   "mid": "bright_idea",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 41,
+   "mid": "living_wire",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 48,
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 48,
+   "mid": "moderator",
+   "wave": 2,
+   "via": "router:wild"
+  },
+  {
+   "day": 49,
+   "mid": "drumbelly_tanuki",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 49,
+   "mid": "murkcap",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 50,
+   "mid": "hummice",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 56,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 56,
+   "mid": "gallowdeer",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 56,
+   "mid": "gallowdeer",
+   "wave": 1,
+   "via": "router:wild"
+  },
+  {
+   "day": 60,
+   "mid": "gallowdeer",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 60,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "combat_start"
+  },
+  {
+   "day": 60,
+   "mid": "hushwolf",
+   "wave": 1,
+   "via": "combat_start"
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "2:2|97|2400|12|4|4|1|403",
+  "3:3|100|2400|12|4|4|1|373",
+  "4:4|97|980|12|4|4|1|329",
+  "5:5|100|1161|12|4|4|1|306",
+  "6:6|100|1200|12|4|4|1|299",
+  "7:7|100|1138|12|4|4|1|306",
+  "8:8|100|1017|12|4|4|1|309",
+  "9:9|100|1000|12|4|4|1|303",
+  "10:10|91|0|12|3|7|1|322",
+  "11:11|72|0|12|3|7|1|332",
+  "12:12|95|2400|11|4|4|1|316",
+  "13:13|100|1743|10|4|4|1|291",
+  "14:14|100|1220|10|4|4|1|295",
+  "15:15|57|1000|10|4|4|2|270",
+  "16:16|95|2400|9|4|4|2|259",
+  "17:17|100|2390|9|4|4|2|276",
+  "18:18|95|2180|9|4|4|2|276",
+  "19:19|100|2283|9|4|4|2|265",
+  "20:20|100|2400|9|4|4|2|271",
+  "21:21|100|2400|9|4|4|2|169",
+  "22:22|100|2320|9|4|4|2|114",
+  "23:23|100|2400|9|4|4|2|88",
+  "24:24|100|2400|9|4|4|2|92",
+  "25:25|90|2300|8|4|4|2|46",
+  "26:26|100|2223|8|4|4|2|16",
+  "27:27|88|2183|6|4|4|2|12",
+  "28:28|100|2113|4|4|4|2|8",
+  "29:29|100|2400|4|4|4|2|8",
+  "30:30|100|2400|2|4|4|2|7",
+  "31:31|100|2400|2|4|4|2|8",
+  "32:32|100|2296|2|4|4|2|13",
+  "33:33|92|2312|2|4|4|2|0",
+  "34:34|100|1447|3|4|4|2|0",
+  "35:35|79|1206|3|4|4|2|0",
+  "36:36|100|1700|4|4|4|2|0",
+  "37:37|100|2400|4|4|4|2|0",
+  "38:38|100|2400|4|4|4|2|1",
+  "39:39|97|2360|4|4|4|2|0",
+  "40:40|100|2390|4|4|4|2|12",
+  "41:41|98|2400|4|4|4|2|15",
+  "42:42|90|2400|4|4|4|2|11",
+  "43:43|100|2390|4|4|4|2|32",
+  "44:44|100|2400|4|4|4|2|27",
+  "45:45|100|2264|4|4|4|2|27",
+  "46:46|100|2348|4|4|4|2|52",
+  "47:47|97|2400|4|4|4|2|58",
+  "48:48|100|2300|4|4|4|2|70",
+  "49:49|100|2343|3|4|4|2|77",
+  "50:50|100|2266|3|4|4|2|72",
+  "51:51|100|2400|3|4|4|2|88",
+  "52:52|100|2390|3|4|4|2|73",
+  "53:53|100|2400|3|4|4|2|40",
+  "54:54|52|2400|3|4|4|2|38",
+  "55:55|82|2390|3|4|4|2|25",
+  "56:56|77|2400|3|4|4|2|41",
+  "57:57|100|2400|3|4|4|2|43",
+  "58:58|100|2239|3|4|4|2|39",
+  "59:59|100|2400|3|4|4|2|45",
+  "60:60|77|2400|3|4|4|2|47",
+  "61:61|100|2390|3|4|4|2|36",
+  "62:62|100|2400|3|4|4|2|34",
+  "63:63|100|2400|3|4|4|2|17",
+  "64:64|100|2400|3|4|4|2|0",
+  "65:65|100|2390|4|4|4|2|5",
+  "66:66|100|2400|3|4|4|2|0"
+ ],
+ "instrumentErrors": []
+}
