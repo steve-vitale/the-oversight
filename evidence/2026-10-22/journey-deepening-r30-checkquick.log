@@ -1,0 +1,59 @@
+check.js: 287 scripts, 2 parallel (quick)
+..................................................................................................................F..F..............F.......................................................................................................................F..................................
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 4.0s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey-deepening/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-deepening/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.20.0
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 4.7s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 6.6s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/characterGen.json,src/js/app.js,src/js/build.js,src/js/comms.js,src/js/contests.js,src/js/conversation.js,src/js/convo-
+        ok   all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 4 passed, 2 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-capable-bot-20261014.js (exit null, 120.4s)
+        ok   earned food deed persists through combat settlement
+        ok   combat spends devotion only on actual use
+        ok   food chain has no policy errors
+        ok   online reactor refuses the otherwise armed grant honestly
+        ok   reactor refusal invents neither feast buff nor food deed
+      
+      short sims: 2 seeds x 40 days
+        ok   seed 42: qualified observed feast plans receive an actual host attempt
+        ok   seed 42: host attempts return a real feast or explicit refusal
+        INFO original campaign seed=42 foodDeeds=true grants=[{"day":27,"granted":true},{"day":36,"granted":true}]
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/test-capable-bot-20261014.js 120s, scripts/test-table-endings-20261014.js 112s, scripts/godpath/test-occupation-panels.js 107s
+
+check.js: 283 passed, 4 failed in 2080s
