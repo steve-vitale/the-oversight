@@ -137,6 +137,11 @@ itself for E2b): **33 PASS, 0 FAIL** — ALL GREEN. (One operator note:
 running with STAGEMUSTER=1 pre-exported makes E2 "gate off when unset"
 fail by construction; the gate is about the unset case and must be run
 with it unset.)
+LANDING: committed as ab0b912d8 (rebased onto master cd68e6dd3 —
+base-freshness verified: 2a3fc56b9 ⊂ origin/master ⊂ local master; the
+commit carries only new files, zero conflicts). Proof re-verified
+post-rebase: **33 PASS, 0 FAIL**. Branch sim-stagemuster ready for
+coordinator --ff-only merge. Tree clean (only committed work).
 
 ## Pilot sweep
 
