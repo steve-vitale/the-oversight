@@ -1,0 +1,163 @@
+{
+ "generatedBy": "scripts/taxonomy-recalldiag-b.js woundBeats() retainer (backlog #818)",
+ "corpus": "evidence/2026-10-22/perseed-deathcause-b/ (16 per-seed JSONs)",
+ "groundTruth": [
+  "Zinaida d36 maul -12",
+  "Zihao d43 hurting 2HP",
+  "Kenneth d143 maul -85",
+  "Laura d65 hurting 11HP"
+ ],
+ "coverage": [
+  {
+   "who": "Theo",
+   "policy": "belongfeast",
+   "seed": 66050,
+   "day": 29,
+   "channel": "trail-starvation",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Somchai",
+   "policy": "belongfeast",
+   "seed": 66050,
+   "day": 135,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Ingrid",
+   "policy": "belongfeast",
+   "seed": 66050,
+   "day": 141,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Kenneth",
+   "policy": "belongfeast",
+   "seed": 66050,
+   "day": 143,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": true,
+   "beats": [
+    {
+     "d": 143,
+     "kind": "maul",
+     "dmg": 85,
+     "line": "🩸 The Big Beast mauled Kenneth (-85 health) over 2 rounds. They're lucky to be breathing."
+    }
+   ]
+  },
+  {
+   "who": "Juan",
+   "policy": "belongfeast",
+   "seed": 66053,
+   "day": 8,
+   "channel": "trail-starvation",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Irving",
+   "policy": "belongfeast",
+   "seed": 66053,
+   "day": 21,
+   "channel": "trail-starvation",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Zinaida",
+   "policy": "belongfeast",
+   "seed": 66053,
+   "day": 36,
+   "channel": "trail-starvation",
+   "retainerWoundCompounded": true,
+   "beats": [
+    {
+     "d": 36,
+     "kind": "maul",
+     "dmg": 12,
+     "line": "🩸 The Inspiration mauled Zinaida (-12 health) over 1 round. They're lucky to be breathing."
+    }
+   ]
+  },
+  {
+   "who": "Zihao",
+   "policy": "leadfeast",
+   "seed": 66050,
+   "day": 43,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": true,
+   "beats": [
+    {
+     "d": 41,
+     "kind": "hurting",
+     "hp": 2,
+     "line": "🩹 Zihao is still hurting (2 HP) — no healer at haven. They rest today instead of ranging out."
+    },
+    {
+     "d": 43,
+     "kind": "hurting",
+     "hp": 2,
+     "line": "🩹 Zihao is still hurting (2 HP) — no healer at haven. They rest today instead of ranging out."
+    }
+   ]
+  },
+  {
+   "who": "Pavel",
+   "policy": "leadfeast",
+   "seed": 66050,
+   "day": 48,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Theo",
+   "policy": "leadfeast",
+   "seed": 66050,
+   "day": 50,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Ruth",
+   "policy": "leadfeast",
+   "seed": 66050,
+   "day": 54,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": false,
+   "beats": []
+  },
+  {
+   "who": "Laura",
+   "policy": "leadfeast",
+   "seed": 66050,
+   "day": 65,
+   "channel": "inflow-failure",
+   "retainerWoundCompounded": true,
+   "beats": [
+    {
+     "d": 65,
+     "kind": "hurting",
+     "hp": 11,
+     "line": "🩹 Laura is still hurting (11 HP) — no healer at haven. They rest today instead of ranging out."
+    }
+   ]
+  },
+  {
+   "who": "Juan",
+   "policy": "leadfeast",
+   "seed": 66053,
+   "day": 8,
+   "channel": "trail-starvation",
+   "retainerWoundCompounded": false,
+   "beats": []
+  }
+ ]
+}
