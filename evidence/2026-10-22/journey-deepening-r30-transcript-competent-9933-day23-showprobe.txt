@@ -1,0 +1,32 @@
+=== seed 9933 day 23 — conversation with Maureen (gen_34eool2) ===
+occupation=plumber temperament=steady trust=80 dead=false mood=cheerful
+want: ask_favor (stage 0)
+
+THEM: "Can I tell you something? I don't actually know how to swim and I'm terrified someone will find out."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the tree line. Maureen doesn't say much. Sometimes that's the whole point.
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind?"
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Pantry's thin and getting thinner. Forage with me tomorrow? I know the north treeline by the fallen oak."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I did the count twice. The count doesn't change. I know the north treeline by the fallen oak — come with me and we'll fill packs before dark."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+closing line: "Take care of yourself."
+want final: id=ask_favor stage=3 resolution=unresolved

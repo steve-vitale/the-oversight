@@ -1,0 +1,27 @@
+=== seed 9934 day 86 — conversation with Renee (gen_jqvcbsy) ===
+occupation=bartender temperament=stoic trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You said you're staying — you didn't expect to say it, but you said it. Still true?"
+(turn0 choices: dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "You look handy. What did you do with your hands, before?"
+(want=curious stage=1)
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Sigrun? A night security guard, back before. Solid person."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

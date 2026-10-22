@@ -1,0 +1,24 @@
+=== seed 9931 day 52 — conversation with Piper (gen_aqming0) ===
+occupation=tattoo artist temperament=steady trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "We gave them a good burial. Doesn't feel like enough, does it?"
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "People are talking about Linda. Take it for what it's worth. One step at a time."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Huh. I answered that once — back when the answer was simpler." "Since Maya died... I keep expecting to see Maya at the fire. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up? Anyway."
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=seek_comfort stage=3 resolution=unestablished

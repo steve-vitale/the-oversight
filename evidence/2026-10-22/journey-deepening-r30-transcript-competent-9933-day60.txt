@@ -1,0 +1,29 @@
+=== seed 9933 day 60 — conversation with Maureen (gen_34eool2) ===
+occupation=plumber temperament=steady trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: It owes us an explanation. I'm going to collect.
+(turn0 choices: dlg:more, dlg:react, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "The not-knowing is a splinter. I'm getting it out or it'll fester."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Every 'why' I can't answer goes on the list. The list is long. It'll get longer."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Whatever did this — it had a reason. Reasons can be found. That's what I believe."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Ignorance got us here. Knowing gets us out. Or it doesn't, but I'd rather know."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I asked the sky a question this morning. It didn't answer. I'm keeping a list."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "People think I'm chasing answers. I'm chasing the right questions."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,27 @@
+=== seed 9932 day 88 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=90 dead=false mood=cheerful
+want: curious (stage 0)
+
+THEM: "Can I tell you something? Before the scattering, I ran when I should have stayed. I think about it every day."
+(turn0 choices: dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind?"
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What scares you most about what's happening? The real answer."
+(want=curious stage=1)
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Japneet asked me about you. A lot of questions. Friendly ones. Too friendly."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "This was nice. Don't be a stranger — we're nine people, it's hard."
+want final: id=curious stage=3 resolution=engaged

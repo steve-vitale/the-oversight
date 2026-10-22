@@ -1,0 +1,32 @@
+=== seed 9933 day 51 — conversation with Raj (raj_patel) ===
+occupation=Pharmacist temperament=cautious trust=56 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Raj stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+(want=ask_favor stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Pantry's thin and getting thinner. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I did the count twice. The count doesn't change. Meet me at the east treeline and we'll fill packs before dark."
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=ask_favor stage=1)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I just said — did you miss it?"
+(want=ask_favor stage=1)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=ask_favor stage=1)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=unresolved

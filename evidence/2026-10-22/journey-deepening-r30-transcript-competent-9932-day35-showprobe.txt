@@ -1,0 +1,21 @@
+=== seed 9932 day 35 — conversation with Erin (gen_pwuxi33) ===
+occupation=aquarium keeper temperament=prickly trust=88 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: I've led people before. Real people, real stakes. Watch me work and tell me I'm wrong.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Erin shows you where they go to think. "Don't tell the others. Everyone needs one place."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+(want=ask_favor stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "I won Bring Us Something Interesting. On camera. People won't shut up about it — and honestly? Neither will I."
+(want=ask_favor stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=ask_favor stage=2)
+YOU: (leave)
+closing line: "Okay. We're done. That wasn't terrible."
+want final: id=ask_favor stage=3 resolution=stated

@@ -1,0 +1,32 @@
+=== seed 9934 day 54 — conversation with Renee (gen_jqvcbsy) ===
+occupation=bartender temperament=stoic trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Has this changed you? Like, fundamentally? That's all."
+(turn0 choices: ans:q_change:a_tell, ans:q_change:a_vague, ans:q_change:honest_pass, leave, silence)
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't know."
+THEM: "Short version — The old you got you here. The new you keeps you here. Both count."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Francesca headed out for water."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: "Hm. Never mind — go on."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=curious stage=2)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

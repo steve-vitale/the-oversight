@@ -1,0 +1,32 @@
+=== seed 9932 day 48 — conversation with Terry (gen_8e2imnm) ===
+occupation=ESL teacher temperament=restless trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: ask:goal, invite_party, ask:gossip, ask:spread_rumor, teach, menu:more, leave, silence)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Fatima? A paramedic, back before. Solid person."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Let's move."
+(want=seek_comfort stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I dreamed Thabo was still here. Woke up angry at the dream. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_comfort stage=0)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind, anyway?"
+(want=seek_comfort stage=0)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_comfort stage=3 resolution=unestablished

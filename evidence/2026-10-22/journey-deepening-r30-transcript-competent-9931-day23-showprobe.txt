@@ -1,0 +1,24 @@
+=== seed 9931 day 23 — conversation with Linda (gen_q62c3s8) ===
+occupation=programmer temperament=restless trust=33 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: confront:d_bxri5ns, dlg:invite, dlg:comfort, dlg:empathize, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Did you hear? Yuri won The Cache on the cameras. People are still talking about it."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I dreamed Lorenzo was still here. Woke up angry at the dream. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "Talking helps. A little. Thank you."
+want final: id=seek_comfort stage=3 resolution=unestablished

@@ -1,0 +1,21 @@
+=== seed 9933 day 92 — conversation with Maureen (gen_34eool2) ===
+occupation=plumber temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's something you're good at that nobody here knows about?"
+(turn0 choices: deflect_q, ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Did you hear? Nathan won The Drop on the cameras. People are still talking about it."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

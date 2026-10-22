@@ -1,0 +1,27 @@
+=== seed 9933 day 72 — conversation with Maureen (gen_34eool2) ===
+occupation=plumber temperament=steady trust=90 dead=false mood=grieving
+want: seek_comfort (stage 0)
+
+THEM: "We never finished talking about the gossip — we left it mid-thought, 2 days back. 'Nathan headed out to check the snares.'"
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Halfway to the trap line, Maureen freezes. Fresh tracks — big. "We go back now. Quietly." You do. The wild, reminding you.
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=seek_comfort stage=0)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Last time things were different. They always are." "I dreamed Francisco was still here. Woke up angry at the dream. Stupid."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(want=seek_comfort stage=0)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Nathan headed out to check the snares. That's my read."
+(want=seek_comfort stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up? You'd know about that."
+(want=seek_comfort stage=0)
+YOU: (leave)
+closing line: "Thanks. I just... need some air."
+want final: id=seek_comfort stage=3 resolution=unestablished

@@ -1,0 +1,21 @@
+=== seed 9934 day 45 — conversation with Renee (gen_jqvcbsy) ===
+occupation=bartender temperament=stoic trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About teaching them something — Teach me something. Anything you know that I don't."
+(turn0 choices: ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:honest_pass, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

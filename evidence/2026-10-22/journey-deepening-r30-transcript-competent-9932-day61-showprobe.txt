@@ -1,0 +1,18 @@
+=== seed 9932 day 61 — conversation with Terry (gen_8e2imnm) ===
+occupation=ESL teacher temperament=restless trust=91 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "Kieran and I never did finish talking about trading knowledge — that was 13 days back. You weren't there for that one — Kieran was. Want to hear where it left off? '...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets.' We still owe the gossip a proper ending, too."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Okay. You don't have to have an answer."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Japneet? You're imagining things. They're perfectly pleasant."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

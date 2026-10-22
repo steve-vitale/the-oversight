@@ -1,0 +1,21 @@
+=== seed 9934 day 80 — conversation with Renee (gen_jqvcbsy) ===
+occupation=bartender temperament=stoic trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About whether you're staying — Are you going to stay? With us. For real."
+(turn0 choices: ans:q_stay:a_tell, ans:q_stay:a_vague, leave, silence)
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "I stay where I'm useful. Right now that's here. Columbus, Ohio is a direction, not a plan. Here is a plan, even if it's a hard one."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

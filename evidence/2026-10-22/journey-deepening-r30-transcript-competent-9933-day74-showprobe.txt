@@ -1,0 +1,32 @@
+=== seed 9933 day 74 — conversation with Maureen (gen_34eool2) ===
+occupation=plumber temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about what's been happening — we wandered off it, 2 days back. 'I dreamed Francisco was still here. Woke up angry at the dream. Stupid.'"
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "I buried this before the Scattering. Seemed stupid to keep it secret." Maureen digs up a wrapped bundle — food, still good. (+1072 kcal to the pantry.)
+(want=curious stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Are you going to stay? With us. For real."
+(want=curious stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "It's all right if you don't know."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Marcus headed out to see what's out there. Worth considering."
+(want=curious stage=2)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask?"
+(want=curious stage=2)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "You asked me that before. It's a different question now." "Francisco is gone and the world just... continues. That's the part I can't stand."
+(want=curious stage=2)
+closing line: "Don't be a stranger."
+want final: id=curious stage=3 resolution=engaged

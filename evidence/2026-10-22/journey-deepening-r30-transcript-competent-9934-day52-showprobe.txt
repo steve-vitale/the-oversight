@@ -1,0 +1,21 @@
+=== seed 9934 day 52 — conversation with Francesca (gen_8bi9eoa) ===
+occupation=Midwife temperament=prickly trust=88 dead=false mood=steady
+want: seek_taken (stage 0)
+
+THEM: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the hollow with Francesca. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask?"
+(want=seek_taken stage=0)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "People are talking about Lena. Take it for what it's worth."
+(want=seek_taken stage=0)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Take it with salt. What did you want to ask? Ha. Funny."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "That's enough talking for me."
+want final: id=seek_taken stage=3 resolution=unestablished
