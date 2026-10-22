@@ -1,0 +1,50 @@
+SMOKE: seed 3805, 10 days (self-test: plot+case census + warm-competent convos)
+SMOKE: plotSnaps=10 caseSnaps=10 convos=16 mootConvos=16 avgTrust=34.8 instrumentOk=true
+SMOKE SELF-TEST: PASS (plot+case census complete, warm-competent convos ran, affinity instrument live)
+seed 3801: days=137 alive=0 convos=259 (moot=259) gossipPicks=3 dryRate=2.04/12
+  pipeline: plots=4 cases=4 moots=4 (npc-npc=4)
+  L2' repeats: 1
+    d129 Ingrid t10 <dlg:favor_requirements>: I've told you three times now — Move next to your partner, on the same side of the Haven door.
+  L3: {"bonds":91,"deepBonds":37,"betrayalCases":4,"mootsConvened":4,"mootsObserved":4,"gossipConvos":14,"gossipPicks":3,"avgTrust":"n/a"}
+  regression: P1-streaks=10 P2-reactDry=230
+seed 3802: days=25 alive=6 convos=46 (moot=46) gossipPicks=3 dryRate=1.07/12
+  pipeline: plots=3 cases=1 moots=0 (npc-npc=0)
+  L2' repeats: 5
+    d10 Robin t11 <betrayal:investigate:case_2>: You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.
+    d12 Robin t9 <betrayal:investigate:case_2>: Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails.
+    d12 Robin t10 <betrayal:investigate:case_2>: You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.
+    d14 Robin t12 <betrayal:investigate:case_2>: Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails.
+    d15 Devon t8 <betrayal:investigate:case_2>: You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.
+  L3: {"bonds":44,"deepBonds":9,"betrayalCases":1,"mootsConvened":0,"mootsObserved":0,"gossipConvos":6,"gossipPicks":3,"avgTrust":"60.2"}
+  regression: P1-streaks=0 P2-reactDry=25
+seed 3803: days=141 alive=5 convos=276 (moot=276) gossipPicks=3 dryRate=2.19/12
+  pipeline: plots=2 cases=2 moots=2 (npc-npc=2)
+  L2' repeats: 5
+    d15 Ava t10 <betrayal:investigate:case_4>: Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails.
+    d16 Aroha t9 <betrayal:investigate:case_4>: You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.
+    d16 Aroha t10 <betrayal:investigate:case_4>: Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails.
+    d16 Aroha t11 <betrayal:investigate:case_4>: You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.
+    d16 Marcus t10 <betrayal:investigate:case_4>: Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails.
+  L3: {"bonds":77,"deepBonds":37,"betrayalCases":2,"mootsConvened":2,"mootsObserved":2,"gossipConvos":26,"gossipPicks":3,"avgTrust":"53.0"}
+  regression: P1-streaks=8 P2-reactDry=272
+seed 3804: days=74 alive=0 convos=142 (moot=142) gossipPicks=3 dryRate=2.13/12
+  pipeline: plots=0 cases=0 moots=0 (npc-npc=0)
+  L2' repeats: 0
+  L3: {"bonds":59,"deepBonds":33,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":14,"gossipPicks":3,"avgTrust":"n/a"}
+  regression: P1-streaks=3 P2-reactDry=136
+  seed 3801 moot case_2: voters=7 guilty-meanAff=-29.5 acquit-meanAff=2.2 verdict=acquitted -> ALIGNED
+  seed 3801 moot case_4: voters=7 guilty-meanAff=-14.0 acquit-meanAff=10.3 verdict=acquitted -> ALIGNED
+  seed 3801 moot case_6: voters=7 guilty-meanAff=-12.0 acquit-meanAff=0.0 verdict=weregild -> ALIGNED
+  seed 3801 moot case_8: voters=4 guilty-meanAff=-5.5 acquit-meanAff=n/a verdict=exile -> UNDECIDED
+  seed 3801: days=137 alive=0 avgTrust=n/a deepBonds=37 end={"over":true,"villageLost":true,"scattered":true,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3802: days=25 alive=6 avgTrust=60.2 deepBonds=9 end={"over":true,"villageLost":true,"scattered":true,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3803 moot case_2: voters=7 guilty-meanAff=-8.0 acquit-meanAff=0.0 verdict=exile -> ALIGNED
+  seed 3803 moot case_4: voters=7 guilty-meanAff=-0.6 acquit-meanAff=n/a verdict=cold_war -> UNDECIDED
+  seed 3803: days=141 alive=5 avgTrust=53.0 deepBonds=37 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3804: days=74 alive=0 avgTrust=n/a deepBonds=33 end={"over":true,"villageLost":true,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":true}
+M1 (plot+case+bond census complete, no gaps >2d): GO
+M2(a) (verdict-margin alignment on >=3/4 qualifying NPC-NPC moots): 4/6 [case_2,case_4,case_6,case_2] — MISS — DOCUMENTED BLANK
+M2 pipeline: s3801:4 s3802:0 s3803:2 s3804:0 NPC-NPC moots
+M4 (guardrail alive>=5, not scattered): 1/4 [3803] — NO-GO
+F1 (affinity-term |aff*0.4| across 39 natural votes): felt(>=5)=6 (15%), max=24.0, median=0.4
+F2 (fabricated cases): (none)

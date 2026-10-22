@@ -1726,6 +1726,33 @@
     }
     return this.finishTrial(c, guiltyVote ? 1 : 0);
   },
+  // FRIENDSHIP VOICE (journey-social r42 2026-10-22): name the friendship the
+  // vote math already used. tallyVotes weighs pairAffinity(voter, accused)
+  // ×0.4, but NPC trials never said so — only the player's own trial gets
+  // vouch lines (defendAlibi). When the accused's staunchest friend voted to
+  // acquit, the room sees who stands by whom. Pure voicing: the votes are
+  // already cast; this names the loudest friendship in the count. Idempotent
+  // per case (c.friendVoiced).
+  mootFriendVoice(c) {
+    try {
+      if (!c || c.friendVoiced) return false;
+      const accused = (c.accused || [])[0];
+      if (!accused || this.isPlayer(accused)) return false;
+      const votes = (c.trial && c.trial.votes) || [];
+      let best = null, bestAff = -Infinity;
+      for (const v of votes) {
+        if (!v || v.vote !== 'acquit' || !v.vid) continue;
+        let a = -Infinity;
+        try { a = this.pairAffinity(v.vid, accused); } catch (e) {}
+        if (a > bestAff) { bestAff = a; best = v.vid; }
+      }
+      c.friendVoiced = true;
+      if (!best || !(bestAff >= 20)) return false;
+      const fn = this.whoTag(best), an = this.whoTag(accused);
+      this.say(`${this.capFirst(fn)} doesn't look away from ${an}. "I know this one. Whatever happened — hear them out." A couple of heads turn. It matters who your friends are.`);
+      return true;
+    } catch (e) { return false; }
+  },
   finishTrial(c, playerGuiltyVotes) {
     const guilty = (c.trial.guilty || 0) + (playerGuiltyVotes || 0);
     const total = c.trial.present.length + (c.trial.playerVoter ? 1 : 0);
@@ -1745,6 +1772,11 @@
     })();
     this.say(`The fire is built high. Nobody speaks while the count is taken — you can hear the wind past the edge of the light.`);
     this.say(`${this.capFirst(counter)} counts on their fingers, twice, like they don't trust the first number. Then, to the fire: "${guilty} for guilty. ${total - guilty} against."`);
+    // FRIENDSHIP VOICE (journey-social r42 2026-10-22): the vote math already
+    // weighs pairAffinity (tallyVotes ×0.4), but NPC trials never said so —
+    // only the player's own trial gets vouch lines (defendAlibi). When the
+    // accused's staunchest friend voted to acquit, the room sees it.
+    try { this.mootFriendVoice(c); } catch (e) {}
     // DRAMA (Steve 2026-10-07, C1): the vote tally has visual weight
     try { this.drama('social', { type: 'vote', guilty, total }); } catch (e) {}
     if (convicted) {
