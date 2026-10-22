@@ -663,6 +663,11 @@
         if (vp && vp.dead) continue;
         try { if (this.isEngaged(id)) continue; } catch (e) {}
         try { if ((v.away || {})[id]) continue; } catch (e) {}
+        // SICK (crisis leg 2026-10-22): the feverish stay home — a sick
+        // villager is never asked to walk guard. Their own objMaybeDepart
+        // gates them, but the companion departs inside the LEADER's call,
+        // so without this filter the gate never sees them.
+        try { if ((v.sick || {})[id]) continue; } catch (e) {}
         var node = null;
         try { node = this.npcNode(id); } catch (e) { continue; }
         if (!node || node.nx !== hx || node.ny !== hy) continue;

@@ -249,6 +249,12 @@
           if (this.villagerHealCheck(vid, nm0)) return;
         }
       } catch (e) {}
+      // SICK (crisis leg 2026-10-22): the feverish stay home — parity with
+      // the objective departure gate (objMaybeDepart). A sick villager
+      // doesn't shoulder a pack for a multi-day expedition at any severity;
+      // the fire's care is days away. (villagerHealCheck above only sees
+      // wound HP.)
+      try { if ((this.state.village.sick || {})[vid]) return; } catch (e) {}
       var maxD = this.npcMaxDist(vid);
       if (maxD < 1) return;
       // target: a node out there, at real distance
