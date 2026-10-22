@@ -8378,7 +8378,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // village, not at your expense — the surplus feeds everyone. (Before this,
         // the vacuum took everything and the forager starved next to a full
         // pantry. That was a bug, not a design.)
-        const KEEP_KCAL = 2000;
+        // DEPOSITGATE (2026-10-22, axis food-economy): plentiful ≠ full. When
+        // the pantry reads plentiful (>4 fresh days; hungryStreak>=3 stands
+        // it down) the homecoming decision eases too — keep three days'
+        // food for the road in your pack instead of one. Behavioral at the
+        // decision, never a post-hoc trim: the food stays real, in the pack,
+        // donate-able later via donateToPantry. No RNG in this path.
+        let KEEP_KCAL = 2000;
+        let dgKeepRaised = false;
+        try {
+          if (this._depositGateEngaged()) { KEEP_KCAL = 6000; dgKeepRaised = true; }
+        } catch (eDGK) { console.warn('[depositgate] homecoming keep', eDGK); }
         let kept = 0;
         const give = [];
         // PANTRY CAP (break-it food r5): the homecoming haul is a pantry
@@ -8409,6 +8419,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } else { give.push(item); }
         }
         } // end else (pantry had room) — the keep/give split above
+        // DEPOSITGATE: say the raised keep aloud — but only when it actually
+        // changed behavior (kept > the old 2000 ceiling). Never silent when
+        // it eased, never narrated when it didn't.
+        if (dgKeepRaised && kept > 2000) {
+          try { this.say('The pantry is bursting past tomorrow — most of the haul stays in your pack. The fire can wait; the road can\'t.'); } catch (e) {}
+        }
         const giveSet = new Set(give);
         // SPOILAGE (break-it food r5 2026-10-11): the homecoming haul never
         // stocks rot — the same gate donateToPantry's wrapper and
@@ -15901,10 +15917,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               if (BAForage) BAForage.onForage(this, true, rid);
               const cornucopia = BAForage ? BAForage.forageMult(this, rid) : 1;
               const kcal = Math.round((200 + Math.floor(Math.random() * 400)) * cornucopia);
-              this.stockPantry(kcal, 'Foraged food', {harvestShares:this.harvestOrigin(rid)});
+              // DEPOSITGATE (2026-10-22, axis food-economy): the away-return
+              // decision eases when the pantry reads plentiful — half the
+              // haul still goes to the pantry, the other half is eaten at the
+              // fire by the returning party. Behavioral at the decision
+              // (the deposit itself), never a post-hoc trim; conservation
+              // holds (nothing destroyed), and the line names the true split.
+              // No RNG in this path beyond the haul roll above.
+              const dgEasedR = this._depositGateHoldback(rid, kcal, 'return');
+              const depKcalR = kcal - dgEasedR;
+              if (depKcalR > 0) this.stockPantry(depKcalR, 'Foraged food', {harvestShares:this.harvestOrigin(rid)});
               // Only announce if you're at Haven to see it.
               if (this.map.px === hx && this.map.py === hy) {
-                this.say(`🌿 ${first} returns from foraging the wilds: +${kcal} kcal to the pantry.`);
+                if (dgEasedR > 0) this.say(`🌿 ${first} returns from foraging the wilds: +${depKcalR} kcal to the pantry — the shelves are full, so ${dgEasedR} kcal is eaten at the fire instead.`);
+                else this.say(`🌿 ${first} returns from foraging the wilds: +${kcal} kcal to the pantry.`);
               }
               this.bumpTrust(rid, 1, 'foraged the wilds for the village');
             } else if (away.purpose === 'explore') {
@@ -26787,20 +26813,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // even a great day on tired ground is a smaller great day.
           const depBig = this.depleteRandomTile(Math.ceil(kcal / 200), v.px ?? 4, v.py ?? 4);
           const kcalBig = Math.round(kcal * this.vigorYieldMult(depBig.avgVigor));
-          this.stockPantry(kcalBig, 'Foraged food');
+          // DEPOSITGATE (2026-10-22, axis food-economy): the BIG DAY deposit
+          // eases when the pantry reads plentiful — half still lands in the
+          // pantry, half is eaten at the fire. Behavioral at the decision,
+          // never a post-hoc trim; the line names the true split.
+          const dgEasedBig = this._depositGateHoldback(id, kcalBig, 'bighaul');
+          const depBigKcal = kcalBig - dgEasedBig;
+          if (depBigKcal > 0) this.stockPantry(depBigKcal, 'Foraged food');
           // VILLAGER XP (Steve 2026-10-09): acting like a player earns.
           try { this.creditDeed && this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
-          if (present) this.say(`${first} had the day of their life — ${kcalBig} kcal. Two days of food from one person.${pers.sharing === 'selfish' ? ' (Kept some back, you suspect.)' : ''}`);
+          if (present) {
+            if (dgEasedBig > 0) this.say(`${first} had the day of their life — ${kcalBig} kcal. The pantry can't take it all: ${depBigKcal} kcal goes in, ${dgEasedBig} kcal is eaten at the fire.${pers.sharing === 'selfish' ? ' (Kept some back too, you suspect.)' : ''}`);
+            else this.say(`${first} had the day of their life — ${kcalBig} kcal. Two days of food from one person.${pers.sharing === 'selfish' ? ' (Kept some back, you suspect.)' : ''}`);
+          }
         } else if (r < 0.35) {
           // brings food: a real haul. from the world, not thin air.
           const kcal = Math.round((400 + Math.floor(Math.random() * 401)) * boldMult * shareMult);
           // DEPLETION 2026-10-10: tired ground, smaller haul.
           const depH = this.depleteRandomTile(Math.ceil(kcal / 200), v.px ?? 4, v.py ?? 4);
           const kcalH = Math.round(kcal * this.vigorYieldMult(depH.avgVigor));
-          this.stockPantry(kcalH, 'Foraged food');
+          // DEPOSITGATE (2026-10-22): same class as the BIG DAY — the routine
+          // haul eases when the pantry reads plentiful (half to the pantry,
+          // half eaten at the fire). The line names the true split.
+          const dgEasedH = this._depositGateHoldback(id, kcalH, 'bighaul');
+          const depHKcal = kcalH - dgEasedH;
+          if (depHKcal > 0) this.stockPantry(depHKcal, 'Foraged food');
           // VILLAGER XP (Steve 2026-10-09): acting like a player earns.
           try { this.creditDeed && this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
-          if (present) this.say(`${first} came back with ${kcalH} kcal of something edible. The pantry breathes.`);
+          if (present) {
+            if (dgEasedH > 0) this.say(`${first} came back with ${kcalH} kcal of something edible. The pantry can't take it all — ${depHKcal} kcal in, ${dgEasedH} kcal eaten at the fire.`);
+            else this.say(`${first} came back with ${kcalH} kcal of something edible. The pantry breathes.`);
+          }
           // KNOWLEDGE SPREAD (Steve 2026-10-09, tweak B): working the land
           // teaches. A forager who brings food home learned SOMETHING about
           // what grows where — and what they learn, the village can learn
@@ -28566,6 +28609,105 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) { return true; }
     },
 
+    // DEPOSITGATE gate (2026-10-22, axis food-economy): behavioral
+    // plenty-deprioritization of DEPOSITS. The prodrebound-b2 DIAG showed the
+    // dominant deposit decisions NEVER read the pantry sensor (funnel.share
+    // 56-60%, scholar.homecoming 15-25%, tribute.deposit 15%, away.return
+    // 6-7.5%, ambient.bighaul 4-5% of marginal-glut kcal). When the pantry
+    // reads plentiful — duty PRODTHROTTLE's own definition (>4 fresh days;
+    // hungryStreak>=3 stands it down, so a village never holds food back
+    // during a genuine hunger stretch) — the unconditional depositors ease:
+    // half the share stays in their own hands and is eaten at the fire
+    // instead of pouring into an already-full pantry. Behavioral AT THE
+    // DECISION, never a post-hoc trim: the food is real and conserved
+    // (eaten, or kept in the pack for homecoming), never silently destroyed.
+    // Sim control: DEPOSITGATE=0. Sim armed: DEPOSITGATE=1. Browser (no
+    // process): always ON — this is real game behavior. No RNG in this path
+    // (deterministic easing, deterministic voice), so gate-off trajectories
+    // stay byte-identical.
+    _depositGateOn() {
+      try {
+        if (typeof process === 'undefined') return true;
+        return !process.env || process.env.DEPOSITGATE !== '0';
+      } catch (e) { return true; }
+    },
+
+    // DEPOSITGATE engagement: gate armed AND the pantry reads plentiful.
+    // Short-circuits: when the gate is off, prodThrottleEngaged() is never
+    // called, so gate-off trajectories can't diverge.
+    _depositGateEngaged() {
+      try {
+        return this._depositGateOn() && this.prodThrottleEngaged();
+      } catch (e) { return false; }
+    },
+
+    // DEPOSITGATE day voice: called once per day after the meal loop, when
+    // the day's eased set is known. One line, rotating speaker, per-speaker
+    // line key — the same no-verbatim-loop discipline as _plentyDepriDayVoice.
+    // Narration only: no state beyond the voiceDay guard, no RNG.
+    _depositGateDayVoice(v) {
+      try {
+        if (!this._depositGateOn()) return;
+        const vv = v || this.state.village || {};
+        const d = (this.state.scholar || {}).day || 0;
+        const lg = vv._depositGate;
+        if (!lg || lg.voiceDay === d) return;
+        const rec = (lg.days || {})[d];
+        const vids = (rec && rec.vids) || [];
+        const nRet = (rec && rec.returnEased) || 0;
+        const nBig = (rec && rec.bigHaulEased) || 0;
+        const nTrW = (rec && rec.tributeWaived) || 0;
+        if (!vids.length && !nRet && !nBig && !nTrW) return;
+        lg.voiceDay = d;
+        const speaker = vids.length ? vids[(d * 7 + 3) % vids.length] : null;
+        let hk = 0;
+        try { const s = String(speaker || 'x'); for (let i = 0; i < s.length; i++) hk = (hk * 31 + s.charCodeAt(i)) | 0; } catch (eH) {}
+        const pool = [
+          'looks at the full shelves and waves off the day\'s share. "No more into the store — we eat at the fire, and the shelves keep."',
+          'carries the day\'s surplus to the pantry door, thinks better of it, and turns back to the fire. "It\'ll only rot in there. We eat."',
+          'sets the sharing basket down by the fire instead of the pantry. "Full shelves don\'t need my little more."',
+          'taps the pantry door — full to bursting — and keeps the day\'s share in hand. "Dinner\'s on me tonight, then."',
+          'watches another basket arrive and laughs. "We\'re feeding the shelves more than ourselves. Not today."',
+          'leaves the surplus by the fire for whoever\'s hungry. "The pantry can\'t take it. We can."',
+        ];
+        const line = pool[((d * 5 + hk) % pool.length + pool.length) % pool.length];
+        let first = 'Someone';
+        try {
+          const p = speaker && this.getPerson ? this.getPerson(speaker) : null;
+          first = String((p && p.name) || 'Someone').split(' ')[0];
+        } catch (eN) {}
+        this.say('🍽️ ' + first + ' ' + line);
+      } catch (eV) { console.warn('[depositgate] day voice', eV); }
+    },
+
+    // DEPOSITGATE holdback helper: eases ONE haul deposit at the decision.
+    // kind is 'return' (away.return) or 'bighaul' (ambient.bighaul).
+    // Returns the held-back kcal (0 when the gate is off or not engaged —
+    // the caller then takes the exact statements that were there before).
+    // The held-back share is eaten at the fire: hunger eases, intake is
+    // recorded honestly ('depositgate-eased'), and the day ledger counts it
+    // for the day voice. No RNG in this path.
+    _depositGateHoldback(vid, kcal, kind) {
+      try {
+        if (!(kcal > 0) || !this._depositGateEngaged()) return 0;
+        const held = Math.floor(kcal * 0.5);
+        if (!(held > 0)) return 0;
+        const nR = this.npcNeeds(vid);
+        const pR = (this.vpOf && this.vpOf(vid)) || {};
+        const needR = (pR.kcalPerDay || 2000);
+        nR.hunger = Math.max(0, (nR.hunger || 0) - Math.round((held / needR) * 70));
+        this.recordHarvestIntake(vid, [{ kcal: held, nourishment: held }], 'depositgate-eased');
+        const vvR = this.state.village || {};
+        const dgR = (vvR._depositGate = vvR._depositGate || { days: {} });
+        const dR = ((this.state.scholar || {}).day || 0);
+        const recR = (dgR.days[dR] = dgR.days[dR] || { shareEased: 0, returnEased: 0, bigHaulEased: 0, vids: [] });
+        if (kind === 'return') recR.returnEased++;
+        else recR.bigHaulEased++;
+        if (recR.vids.indexOf(vid) === -1) recR.vids.push(vid);
+        return held;
+      } catch (e) { console.warn('[depositgate] holdback', e); return 0; }
+    },
+
     // PLENTYDEPRI day voice: called once per day after the meal loop, when
     // the day's eased set is known. The speaker rotates across the day's
     // eased villagers (day-keyed, so consecutive plenty days name different
@@ -29019,9 +29161,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // that were here before.
       let capdoorOn = false;
       try { capdoorOn = (typeof process !== 'undefined' && process.env && process.env.CAPDOOR === '1'); } catch (e) {}
-      let gave = 0, stored = 0, refused = 0;
+      let gave = 0, stored = 0, refused = 0, dgEased = 0;
       if (produced > need) {
         gave = (produced - need) * trustFactor;
+        // DEPOSITGATE (2026-10-22, axis food-economy): the funnel.share
+        // decision eases when the pantry reads plentiful — half the trust-
+        // scaled share stays in the villager's own hands instead of pouring
+        // into an already-full pantry. Behavioral at the decision, never a
+        // post-hoc trim: the held-back share is eaten at the fire
+        // (conservation — the capdoor precedent: never destroyed, never
+        // silent), and only the share above their own meal is eased, so the
+        // meal stays sacred. Day-level ledger feeds _depositGateDayVoice.
+        // No RNG in this path.
+        try {
+          if (gave > 0 && this._depositGateEngaged()) {
+            dgEased = gave * 0.5;
+            gave -= dgEased;
+            n.hunger = Math.max(0, n.hunger - Math.round((dgEased / need) * 70));
+            const dg = (v._depositGate = v._depositGate || { days: {} });
+            const dgd = ((this.state.scholar || {}).day || 0);
+            const rec = (dg.days[dgd] = dg.days[dgd] || { shareEased: 0, returnEased: 0, bigHaulEased: 0, vids: [] });
+            rec.shareEased += Math.round(dgEased);
+            if (rec.vids.indexOf(vid) === -1) rec.vids.push(vid);
+          }
+        } catch (eDG) { console.warn('[depositgate] share ease', eDG); }
         if (gave > 0) stored = this.stockSurplus(v, gave) || 0;
         if (capdoorOn && gave > 0) {
           // the share stays theirs: refused kcal are eaten, never stored,
@@ -29065,7 +29228,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // hit and no hungry-night line for a fast they chose.
       // CAP-DOOR (sim-capdoor-b): a villager who ate their refused share is
       // not unfed — the starvation judgment reads true intake. Off: ateAll === ate.
-      const ateAll = capdoorOn ? (ate + refused) : ate;
+      const ateAll = capdoorOn ? (ate + refused + dgEased) : (ate + dgEased);
       this.recordHarvestIntake(intakeEater,[{kcal:ownEat,nourishment:ownEat}],'personal-work');
       if (!away) {
         this.recordHarvestDraw(intakeEater,{items:pile.items},'npc-pantry',Math.min(freshTaken,Math.max(0,need-ownEat)));
@@ -29074,6 +29237,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (capdoorOn) this.recordHarvestIntake(intakeEater,[{kcal:refused,
         nourishment:Math.min(refused,Math.max(0,need-ate))}],'refused-surplus');
+      // DEPOSITGATE: the eased share was eaten at the fire — record it as
+      // real intake (same honesty contract as the capdoor's refused-surplus).
+      if (dgEased > 0) this.recordHarvestIntake(intakeEater,[{kcal:dgEased,
+        nourishment:Math.min(dgEased,Math.max(0,need-ate))}],'depositgate-eased');
       if (ateAll < need * 0.6 && !fasting) {
         this.hurtFromStarvation(vid, 8);
         if (Math.random() < 0.3 && !person.dead && this.playerAtHaven()) {
@@ -29685,6 +29852,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // that the meal loop has run — one line, rotating speaker, per-speaker
       // line key. Narration only: no state, no RNG.
       try { this._plentyDepriDayVoice(v); } catch (ePV) { console.warn('[plentydepri] day voice call', ePV); }
+      // DEPOSITGATE day voice (2026-10-22): the day's eased set is known now
+      // that the meal loop (and the day's returns/hauls) has run — one line,
+      // rotating speaker, per-speaker line key. Narration only.
+      try { this._depositGateDayVoice(v); } catch (eDGV) { console.warn('[depositgate] day voice call', eDGV); }
       // HONEST BURN (2026-10-08, refined r3): the player's trust-scaled meal
       // (villageMeal) burns the pantry but the player is not in this loop
       // (parity) — count it so the pantry clock stays honest. Rolling 7 days.

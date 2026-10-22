@@ -1133,6 +1133,31 @@
                   try { if (self.state.nationalLive) _mult = 1.25; } catch (e) {}
                   var _want = link.tributeKcalPerWeek;
                   var _sov = self._otherVillage(link.subordinate);
+                  // DEPOSITGATE (2026-10-22, axis food-economy): the tribute
+                  // receipt is an UNCONDITIONAL deposit decision — and the
+                  // prodrebound-b2 DIAG showed it never reads the pantry
+                  // sensor (15% of marginal-glut kcal). When OUR pantry reads
+                  // plentiful (>4 fresh days; hungryStreak>=3 stands it
+                  // down), the wagons are waved home: their grain stays in
+                  // THEIR stores, the week counts as paid (a waiver is not a
+                  // debt — no arrears), trust deepens (+1: they rode in
+                  // ready). Behavioral at the decision, never a post-hoc
+                  // trim — the food never leaves their pantry, and the
+                  // waived contract is said aloud, never silent. No RNG here.
+                  var _dgWaive = false;
+                  try { _dgWaive = !!(self._depositGateOn && self._depositGateOn() && self.prodThrottleEngaged() && _sov); } catch (eDGW) {}
+                  if (_dgWaive) {
+                    self._trustGain(link, 1);
+                    self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' rode in ready to pay; waved home — our shelves are full past tomorrow. (Waiver: the week counts paid, no arrears.)');
+                    self.say(`🌾 Tribute wagons from ${self._ovName(link.subordinate)} turn at the gate — our shelves are full past tomorrow. "Eat well," we send back. "That IS your tribute this week." (Trust +1.)`);
+                    try {
+                      var _vv3 = self.state.village || {};
+                      var _dg3 = (_vv3._depositGate = _vv3._depositGate || { days: {} });
+                      var _d3 = ((self.state.scholar || {}).day || 0);
+                      var _rec3 = (_dg3.days[_d3] = _dg3.days[_d3] || { shareEased: 0, returnEased: 0, bigHaulEased: 0, vids: [] });
+                      _rec3.tributeWaived = (_rec3.tributeWaived || 0) + _want;
+                    } catch (eDG3) {}
+                  } else {
                   var _have = Math.max(0, Math.round((_sov && _sov.pantryKcal) || 0));
                   var _give = Math.min(_want, _have);
                   if (_sov) _sov.pantryKcal = _have - _give;
@@ -1165,6 +1190,7 @@
                     self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' paid nothing — empty fields. Arrears +' + _want.toLocaleString() + '.');
                     self.say(`🌾 Nothing comes from ${self._ovName(link.subordinate)} this week — their fields are as empty as the wagons look. Hunger isn't defiance, but the ledger doesn't know the difference. (Arrears +${_want.toLocaleString()} kcal, trust -2.)`);
                   }
+                  } // end else (no DEPOSITGATE waiver — the normal receive path)
                 } catch (e) {}
               }
               // THEIR SPEAKER LIVES OR DIES IN THE SIM (regional audit
