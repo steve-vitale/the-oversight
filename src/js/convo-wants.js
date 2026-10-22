@@ -507,6 +507,26 @@
     } catch (e) {}
     return null;
   }
+  // TAKEN POD-DREAM TAIL (journey establishment r25, 2026-10-22): the pods
+  // dream/broadcast ambiguity is the taken story's emotional core, but a
+  // single byte-identical tail across every villager reads as one voice
+  // (Ursula/James/Lillian/Erin all said it verbatim in r25). Three variants,
+  // deterministic per villager (vid hash, no RNG — a person tells their own
+  // story the same way every time). Called from seek_taken engageBeat, which
+  // runs with `this` = Game, so this lives at module scope, not on the def.
+  // The repeat-ack said-facts ledger still governs re-tellings.
+  function takenPodTailFor(vid) {
+    try {
+      let hk = 0; const s = String(vid == null ? '' : vid);
+      for (let i = 0; i < s.length; i++) hk = (hk * 31 + s.charCodeAt(i)) | 0;
+      const tails = [
+        'Some nights I dream about the pods -- rows of them, humming. I wake up and I can\'t tell if it was a dream or a broadcast.',
+        'The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn\'t there.',
+        'Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can\'t say whether it was real.',
+      ];
+      return tails[Math.abs(hk) % tails.length];
+    } catch (e) { return 'Some nights I dream about the pods -- rows of them, humming. I wake up and I can\'t tell if it was a dream or a broadcast.'; }
+  }
   const WANTS = {
     share_news: {
       // A reaction ("huh", "no kidding") engages news — that's the point.
@@ -1279,8 +1299,11 @@
           }
           if (this.convoSaidFact) this.convoSaidFact(vid, 'taken-story', first);
         } catch (e) {}
-        return `"It's my ${rel}, ${first}. ${cap}. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."`;
+        return `"It's my ${rel}, ${first}. ${cap}. ${takenPodTailFor(vid)}`;
       },
+      // def-level passthrough for tests; engageBeat calls the module fn
+      // directly (inside def methods, `this` is the Game, not the def).
+      takenPodDreamTail(vid) { return takenPodTailFor(vid); },
       deflectBeat(vid) {
         return '"Yeah. Sorry. It\'s -- never mind. Forget I said anything." They look away, embarrassed at having wanted something.';
       },
