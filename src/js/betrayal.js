@@ -525,23 +525,41 @@
     if (day < 6) return;
     const roster = this.npcIds();
     if (roster.length < 4) return;
-    // beloved village: basically never
-    try {
-      const avg = roster.reduce((s, id) => s + (((this.state.village.trust || {})[id]) || 10), 0) / roster.length;
-      const heat = this.justiceHeat();
-      if (avg > 55 && heat < 20 && R() < 0.9) return;
-    } catch (e) {}
-    // pick ringleader + target: strongest motive pair
+    // pick ringleader + target: strongest motive pair (BEFORE the beloved
+    // gate, so the gate can discriminate by target — see below).
+    // MOTIVE THRESHOLD, SPLIT (social r41 2026-10-22): 45 was set for
+    // player-targeted drama (an ambush against the protagonist should feel
+    // earned). Villager-vs-villager scheming is the village's background
+    // life — it can be pettier. NPC-targeted plots arm at motive >= 35, so a
+    // hot feud (tension 55+ -> grievance 44+ -> motive 35+) or an ambitious
+    // NPC with a real grievance can move. The 40% daily roll, 2-accomplice
+    // requirement, 4-day expiry, and 45% spring still throttle it.
     let best = null;
     const candidates = [...roster, this.villagerId];
     for (const a of roster) {
       for (const b of candidates) {
         if (a === b) continue;
         const m = this.motiveBetween(a, b);
-        if (m.score >= 45 && (!best || m.score > best.m.score)) best = { a, b, m };
+        const threshold = this.isPlayer(b) ? 45 : 35;
+        if (m.score >= threshold && (!best || m.score > best.m.score)) best = { a, b, m };
       }
     }
     if (!best) return;
+    // BELOVED GATE, SPLIT (social r41 2026-10-22; Steve 2026-10-19 ruling on
+    // the r27 moot question): the gate protects a beloved PLAYER from being
+    // plotted against — "beloved village: basically never" for
+    // player-targeted plots. But villagers scheming against EACH OTHER is the
+    // village's own life, not a referendum on the player; letting the gate
+    // block NPC-targeted plots meant a law-abiding player never saw a moot
+    // (the r27 design gap — 0 plots armed in 560 village-days of warm play).
+    // NPC-targeted plots skip the beloved gate.
+    try {
+      if (this.isPlayer(best.b)) {
+        const avg = roster.reduce((s, id) => s + (((this.state.village.trust || {})[id]) || 10), 0) / roster.length;
+        const heat = this.justiceHeat();
+        if (avg > 55 && heat < 20 && R() < 0.9) return;
+      }
+    } catch (e) {}
     if (R() > 0.4) return; // not every day
     const acc = this.recruitAccomplices(best.a, best.b);
     if (acc.length < 2) return;
@@ -5019,7 +5037,26 @@
       if (day - (c.day || 0) < (c.mootIn || 3)) continue;
       const cname = (() => { try { return this.whoTag(caller); } catch (e) { return 'Someone'; } })();
       const aname = (() => { try { return this.whoTag(acc[0]); } catch (e) { return 'the accused'; } })();
-      this.say(`${this.capFirst(cname)} has been talking at the fires. Enough voices — tonight they call a moot. ${this.capFirst(aname)} answers for what happened to ${this.disp(c.target)}.`);
+      // REPEAT-AWARE CONVENING (social r41b 2026-10-22): the same crew
+      // standing accused against the same target three moots in a row read
+      // as one copy-pasted announcement (transcript-verified: "Roman has
+      // been talking at the fires..." verbatim x3 in 5 days, seed 3701).
+      // Count convenings per accused-set + target and escalate the line so
+      // a feud's return to the fire reads as a feud, not a re-run.
+      const mcc = bs.mootConveneCounts = bs.mootConveneCounts || {};
+      const mcKey = [...acc].sort().join('+') + '>' + (c.target || '?');
+      const mcN = (mcc[mcKey] || 0) + 1;
+      mcc[mcKey] = mcN;
+      const capC = this.capFirst(cname), capA = this.capFirst(aname);
+      const tgtD = this.disp(c.target);
+      if (mcN === 1) {
+        this.say(`${capC} has been talking at the fires. Enough voices — tonight they call a moot. ${capA} answers for what happened to ${tgtD}.`);
+      } else if (mcN === 2) {
+        this.say(`${capC} is back at the fires, and the village doesn't need convincing this time. ${capA} answers for what happened to ${tgtD} — again.`);
+      } else {
+        const ord = mcN === 3 ? 'third' : mcN === 4 ? 'fourth' : mcN + 'th';
+        this.say(`${capA} doesn't wait to be called this time. The fire gets built, they step into the circle — the ${ord} time answering for what happened to ${tgtD}.`);
+      }
       this.callMoot(c.id, caller);
     }
   },
