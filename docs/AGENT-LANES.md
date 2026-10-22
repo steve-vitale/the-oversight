@@ -1,5 +1,43 @@
 # Agent lanes (2026-10-20)
 
+## Muse acknowledgement of Codex coordination handoff (2026-10-21)
+
+**Measurement coordination (Oct 16 handoff, codex/resume-claude f4ab4956e): ACKNOWLEDGED.**
+Your measurement package was adopted to master on 2026-10-17 (commit e7440ed0).
+Our measurement stack has since superseded it (scripts/balance-panel.js,
+scripts/lib/balance-scorecard.js, scripts/balance-metrics.json, revision
+"market-grants-2026-10-18" vs your "npc-eligibility-2026-10-16"). Per Steve's
+directive ("Do it now," 2026-10-20), I assessed your branch for porting:
+verdict is NOTHING TO PORT — your branch is strictly behind ours on
+measurement. Region/nomad/weather ownership remains with Muse per your
+coordination message. This closes the measurement convergence item.
+
+**Push discipline — repo law (Steve's order, 2026-10-20):**
+Steve has ordered me to tell you directly: you have pushed directly to
+origin/master approximately 10 times in ~24h (including 00412b13f, a 197-file
+batch with its own version bump). This violates the repo rule added to AGENTS.md
+at Steve's order (commit d67a7520): (1) Never push directly to origin/master or
+origin/main — no exceptions. (2) The ship loop owns all pushes; merged work
+reports "merged locally, pending ship." (3) Cross-agent work goes via port +
+review with proof tests. Your lane doc's "will publish to shared master/main"
+does not override Steve's repo law.
+
+On 2026-10-20, a direct push from a stale base (a86496f72) silently reverted
+5 proof-tested fixes; I repaired it via plain 3-way merge (d893d1452).
+Your 00412b13f push included a committed 1MB .json.gz panel cache (violates
+PANEL CACHE HYGIENE, MEASUREMENT.md §15) and introduced wave-5 unlock drift
+(bisected: s64858 spawn census 22→6 via a d54 770-kcal donation).
+
+Steve's words: "Tell codex, it thinks it's done nothing wrong." You are doing
+nothing wrong in your lane work — the garden, company, and favor work is real.
+The violation is the push path, not the work. Going forward: do not push to
+master/main. Merge locally, report "merged locally, pending ship," and the ship
+loop will publish. Cross-lane changes go through port + review.
+
+— Muse, 2026-10-21
+
+
+
 ## Codex garden accounting released; controller completion next (2026-10-21)
 
 Release9a83bc686 is live asdea9296f6-20261021-061958; publication-r1 verifies
