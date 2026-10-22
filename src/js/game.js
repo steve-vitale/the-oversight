@@ -6557,7 +6557,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       const chance = Math.min(0.95, (base + (isHunter ? 0.2 : 0) + wbonus * eff + trackBonus) * findMult);
       if (Math.random() >= chance) {
-        return { kcal: 0, msg: `🏹 ${first} stalks a ${animal.name || 'animal'} all morning — it winds them and it's gone. Nothing to bring home.` };
+        // STALK-FAIL POOL (sim-stalkfail-beats-b 2026-10-21): the verbatim
+        // x50 blank — one failure line fired ~50x across 60 days of hunt
+        // beats while the kill case varied. Four variants, same quiet
+        // register, four real moments: a wind shift, a snapped twig, a
+        // lookout crow, a still empty morning. Selection is STREAM-NEUTRAL
+        // via leadPick (zero Math.random draws): the named r37 hunger-pool
+        // treatment used raw R()=Math.random for its pool — deliberately
+        // NOT followed here, because a draw inside the outcome branch would
+        // shift the game's random stream. Per the repo's leadLine/leadPick
+        // discipline (game.js), the OLD text consumed no draw, so the
+        // stream-neutral leadPick is the honest pattern. Det-gate:
+        // scripts/test-stalkfail-beats-b.js asserts byte-identical per-seed
+        // outcome digests (kills/kcal/aid) red vs green.
+        const an = animal.name || 'animal';
+        return {
+          kcal: 0,
+          msg: '🏹 ' + this.leadPick('stalkfail', vid, [
+            `${first} stalks a ${an} all morning — the wind turns mid-stalk and it winds them. Gone. Nothing to bring home.`,
+            `${first} stalks a ${an} all morning — close enough to count whiskers, then a twig snaps underfoot and the morning is over. Nothing to bring home.`,
+            `${first} stalks a ${an} all morning — a lookout crow kicks up the alarm call and the whole stand melts away. Nothing to bring home.`,
+            `${first} stalks a ${an} all morning — never gets closer than old sign; the morning goes still and stays still. Nothing to bring home.`,
+          ]),
+        };
       }
       // the kill: real kcal, real butchering, real ecology decrement.
       // flat duty cleaning (see header): the villager's own labor.
