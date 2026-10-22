@@ -69,3 +69,13 @@ PENDING — filled after the sweep corpus completes.
 **Metric review:** The pre-registered PRIMARY (attribution >= 95%) was met. No metric revision needed — the decomposition is the deliverable and it's complete.
 
 **Convergence:** DIAG-GO. The wave-5 door decomposition is now mapped on all three substrates. The veteran-production channel is confirmed as the binding constraint.
+
+## BASE-DELTA AUDIT (adoption, run fleshout-20261022T0019Z — against master 82059af46)
+
+The 16-run corpus was swept on 596cb0c2c; the arm landed on e7393c86. Commits between the corpus base and audit master, each checked for trajectory impact on this substrate:
+
+1. **6bbc7002d (journey-succession r36):** src/js change limited to `ledger.js` — the succession-orientation handoff's kit clause now reads `s.abilities` instead of the never-firing `s.backgroundAbilities` ([] since the 2026-10-14 ability lanes). Narration text only: who becomes whom, ability transfer, and RNG all unchanged ("machinery clean" per the commit). `w5gates-lib` reads engine state; ledger `say()` draws no RNG in the harness (quietLog). VERIFIED INERT.
+2. **9f5015716 (SURPLUSFEED governor removal, Steve decision 2026-10-21):** deleted `surplusFeedGovernor` + `_surplusFeedOn` from game.js. Pre-removal code returned `give` exactly with zero writes and zero RNG draws whenever `process.env.SURPLUSFEED !== '1'` (documented inline; the off-path was the det-gate anchor). This substrate's sweep guard FAILS LOUD unless SURPLUSFEED is unset, so the governor was inert on every corpus trajectory. Grep of current game.js: zero `surplusFeed` references; sweep/lib/harness/feastscale carry no SURPLUSFEED path. VERIFIED INERT.
+3. **f8fd2e848 (journey-endgame r37) + 82059af46 (journey-establishment r24):** scripts-only; no src/js or scripts/policies changes. Cannot affect sim trajectories. VERIFIED INERT.
+
+Adoption verdict: transferred as-is, no re-sweep. Proof re-run GREEN on 82059af46 (33/33, env FEASTSCALE_R13=1 SEATDRIVE=0 — the Usage-header env): E1 synthetic attribution 26/26, E2 guard+smoke 6/6, E3 DET gate byte-identical on 4 paired runs. SENSE=1 narration-live rerun of the closest run (belongfeast/s65201, 181d) reproduces the corpus summary fields exactly (days=181 uw=4 raw=485 capped=325 gated=199 peak=4) with 26 voiced gate lines naming the same bars the instrument names — the System's voice-vs-state read is honest (plenty-cap d75, defer5 armor/weapons/veterans bars tracked d82–d180, veterans ending 1-of-2).
