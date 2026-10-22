@@ -219,24 +219,28 @@ async function main() {
       const bF = path.join(BEFORE, f);
       if (!fs.existsSync(bF)) { fail++; console.log('  FAIL no before counterpart for ' + f); continue; }
       const b = JSON.parse(fs.readFileSync(bF, 'utf8'));
-      const a = JSON.parse(fs.readFileSync(f, 'utf8'));
+      const a = JSON.parse(fs.readFileSync(path.join(AFTER, f), 'utf8'));
       pairs++;
       // outcome-level identity (everything except the death rows + anchor)
       for (const k of Object.keys(a)) {
         if (VOLATILE[k] || k === 'deaths') continue;
         if (JSON.stringify(b[k]) !== JSON.stringify(a[k])) { outcomeDrift++; if (outcomeDrift <= 3) console.log('  outcome drift in ' + f + ' field ' + k); }
       }
-      // row-level: match by (vid, day, who)
+      // row-level: match by (vid, day, who), pairing duplicates in file
+      // order (monster rows can share a null vid + name on the same day).
       const bByKey = {};
       for (const d of (b.deaths || [])) {
         beforeTot++;
         if (d.pclass === 'combat-unknown') beforeUnk++;
-        bByKey[d.vid + '|' + d.day + '|' + d.who] = d;
+        const k = d.vid + '|' + d.day + '|' + d.who;
+        (bByKey[k] = bByKey[k] || []).push(d);
       }
       for (const d of (a.deaths || [])) {
         afterTot++;
         if (d.pclass === 'combat-unknown') afterUnk++;
-        const bd = bByKey[d.vid + '|' + d.day + '|' + d.who];
+        const k = d.vid + '|' + d.day + '|' + d.who;
+        const q = bByKey[k] || [];
+        const bd = q.shift();
         if (!bd) { rowDiffs++; console.log('  after row with no before match in ' + f + ': ' + d.who + ' d' + d.day); continue; }
         for (const k of Object.keys(d)) {
           if (k === 'monsterId' || k === 'monsterName' || k === 'pclass' || k === 'detail') continue;
