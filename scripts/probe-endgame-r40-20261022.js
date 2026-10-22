@@ -42,7 +42,10 @@
 //
 // Usage:
 //   CAPABLE_GREEDY=1 CAPABLE_GREEDY_MAXTIER=6 CAPABLE_GREEDY_LASTDAY=170 \
-//     RELAYGREY=1 TELEMETRY_FULL=1 node scripts/probe-endgame-r40-20261022.js
+//     RELAYGREY=1 CAPABLE_RELAYROAD=0 TELEMETRY_FULL=1 node scripts/probe-endgame-r40-20261022.js
+//   (CAPABLE_RELAYROAD=0 also defaulted by the probe when RELAYGREY=1 — the
+//   grey experiment needs the base's relay road off; without it the two
+//   layers double-drive and the thermostat can't hold grey.)
 //   SMOKE=1 ...  # 1 seed x 120d
 //   DET=1 ...    # instrument-on twice byte-identical (2 x 120d on seed 0)
 //   FID=1 ...    # RELAYGREY unset: relaygrey-wrapped base vs pure capable,
@@ -59,6 +62,17 @@ const MODE = process.env.DET === '1' ? 'det'
   : process.env.SMOKE === '1' ? 'smoke' : 'sweep';
 
 if (process.env.CAPABLE_GREEDY !== '1') { console.error('SWEEP STOP: CAPABLE_GREEDY=1 required.'); process.exit(2); }
+
+// GREY OWNS THE RELAY (r40b fix): the grey-middle experiment requires the
+// capable base's own relay road OFF — otherwise base + grey double-drive the
+// relay (verbs 207 vs 8, lean pinned light) and the thermostat can't hold.
+// The dead 18:55Z run ran with CAPABLE_RELAYROAD=0 but its Usage line omitted
+// it; the 21:2xZ adoption sweep ran without it and produced garbage. Default
+// it here so the instrument can't be misconfigured again.
+if (process.env.RELAYGREY === '1' && process.env.CAPABLE_RELAYROAD == null) {
+  process.env.CAPABLE_RELAYROAD = '0';
+  console.log('NOTE: CAPABLE_RELAYROAD defaulted to 0 (RELAYGREY=1 — grey owns the relay)');
+}
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s.trim(), 10))
   : [82011, 82012, 82013, 82014]).filter(Number.isFinite);
@@ -94,9 +108,12 @@ function aliveOf(G) {
 }
 function pantryOf(G) { try { return Math.round((((G.state || {}).village || {}).pantryKcal) || 0); } catch (e) { return 0; } }
 
-// censusOf — FIXED (journey-endgame r40; r39's caveat resolved):
-// occupation (not role/job), village.npcAbilities[vid] (not p.abilities),
-// scholar.villagerId -> name (not scholar.name), dead filter corrected.
+// censusOf — FIXED (journey-endgame r40; r39's caveat resolved, r40b
+// correction): formerOccupation is the canonical person field (not
+// occupation/role/job — p.occupation is always null; occupationId is the
+// identity-layer disguise, not the true occupation), village.npcAbilities[vid]
+// (not p.abilities), scholar.villagerId -> name (not scholar.name), dead
+// filter corrected.
 function censusOf(Game) {
   try {
     const v = (Game.state || {}).village || {};
@@ -108,7 +125,7 @@ function censusOf(Game) {
       return {
         id, name: (p && (p.name || p.displayName)) || String(id),
         dead: !!(p && p.dead),
-        occupation: (p && (p.occupation || p.role || p.job)) || null,
+        occupation: (p && p.formerOccupation) || null,
         npcAbilities: abil,
       };
     });
