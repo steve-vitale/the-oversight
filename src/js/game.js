@@ -3718,7 +3718,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             _stagedCatch = true;
             this.say(`Your staged injury did its work — something came to look, and the ${recipe.name} did the rest. They fall for it. Every time. (Scarecrow)`);
           }
-          if (_stagedCatch || Math.random() < trapChance) {
+          // LUCK INSTRUMENTATION (rogue P0-6): record the honest trap roll.
+          // Staged catches are guaranteed ability effects, not luck — skipped.
+          let _trapCaught = false;
+          if (!_stagedCatch) {
+            _trapCaught = Math.random() < trapChance;
+            try { this.luckRoll('trap', trapChance, _trapCaught); } catch (e) {}
+          }
+          if (_stagedCatch || _trapCaught) {
             const catchId = eligible[Math.floor(Math.random() * eligible.length)];
             // the catch leaves the tile population — hunted out is hunted out.
             _wl[catchId]--; if (_wl[catchId] <= 0) delete _wl[catchId];
@@ -14797,7 +14804,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.tele('fish', { known, kcal: 0, cost: 60 });
         return this.tickAction(32) || this.status();
       }
-      if (Math.random() < chance) {
+      // LUCK INSTRUMENTATION (rogue P0-6): record the honest fishing roll.
+      const _fishRoll = Math.random();
+      try { this.luckRoll('fish', chance, _fishRoll < chance); } catch (e) {}
+      if (_fishRoll < chance) {
         const fid = fishHere[Math.floor(Math.random() * fishHere.length)];
         _wl[fid]--; if (_wl[fid] <= 0) delete _wl[fid];
         // REAL FISH, REAL KCAL: the catch keeps its species' gross — the same
@@ -44234,6 +44244,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Production (browser) keeps the 300-event ring cap — memory.
     teleFull() {
       try { return typeof process !== 'undefined' && process.env && process.env.TELEMETRY_FULL === '1'; } catch (e) { return false; }
+    },
+    // LUCK INSTRUMENTATION (rogue P0-6, 2026-10-22): sim-only roll-stream
+    // hook. Records one honest binary chance roll (stream, p, hit) into the
+    // observer's sink. No-op unless a sim observer registered __luckSink
+    // (the balanced panel observer only — never the browser, never the
+    // player). Touches no state, draws no RNG, changes no roll. This is
+    // DESCRIPTIVE instrumentation (Pagnutti: quantify luck per run), NOT a
+    // pity mechanic — nothing here can alter gameplay.
+    luckRoll(stream, p, hit) {
+      try { const f = this.__luckSink; if (typeof f === 'function') f(stream, p, hit); } catch (e) {}
     },
     tele(type, data) {
       this.state.telemetry = this.state.telemetry || [];

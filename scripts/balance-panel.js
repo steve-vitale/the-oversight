@@ -2,11 +2,11 @@
 // Standard driver, one harness per child. Observation never calls game helpers.
 'use strict';
 const fs = require('fs'), path = require('path'), cp = require('child_process'), crypto = require('crypto'), zlib = require('zlib');
-const score = require('./lib/balance-scorecard'), gear = require('./gear-usage-audit'), cohorts = require('./lib/balance-cohorts');
+const score = require('./lib/balance-scorecard'), gear = require('./gear-usage-audit'), cohorts = require('./lib/balance-cohorts'), luck = require('./lib/luck-instrument');
 const arg = (name, fallback) => { const i = process.argv.indexOf('--' + name); return i < 0 ? fallback : process.argv[i + 1]; };
 const digest = x => crypto.createHash('sha256').update(x).digest('hex');
 const { normalizeSource } = require('./lib/source-text');
-const observerFiles = Object.freeze(['scripts/balance-panel.js','scripts/gear-usage-audit.js','scripts/lib/balance-scorecard.js','scripts/lib/simulation-flags.js','scripts/lib/balance-cohorts.js','scripts/lib/source-text.js']);
+const observerFiles = Object.freeze(['scripts/balance-panel.js','scripts/gear-usage-audit.js','scripts/lib/balance-scorecard.js','scripts/lib/simulation-flags.js','scripts/lib/balance-cohorts.js','scripts/lib/source-text.js','scripts/lib/luck-instrument.js']);
 function observerIdentity(root) {
   const readText = file => normalizeSource(fs.readFileSync(path.join(root,file),'utf8'));
   return { observerDigest:digest(observerFiles.map(readText).join('\n')), contractDigest:digest(readText('scripts/balance-metrics.json')) };
@@ -52,6 +52,17 @@ function install(G) {
   const classes = { player: new Set(), npc: new Set() }, gods = { player: new Set(), npc: new Set() }, events = {}, endings = [], errors = [];
   let firstDeath = null, accepted = 0;
   const initial = G.villagerId;
+  // LUCK INSTRUMENTATION (rogue P0-6, 2026-10-22): collect the game's honest
+  // binary chance rolls (hunt/trap/snare/pit/fish) via the no-op G.luckRoll
+  // hook. The sink writes ONLY to this closure — never to game state — so the
+  // observer-neutrality proof (observe=1 vs observe=0 stateHash match) holds.
+  const luckRolls = { hunt: [], trap: [], snare: [], pit: [], fish: [] };
+  try {
+    G.__luckSink = (stream, p, hit) => {
+      const arr = luckRolls[stream];
+      if (arr && Number.isFinite(p)) arr.push({ p: Math.min(1, Math.max(0, p)), hit: !!hit });
+    };
+  } catch (e) { errors.push({ at: 'luck sink install', message: e.message }); }
   // Read canonical definitions directly. No knowledge/build/needs helpers:
   // those can initialize state or consume RNG while answering a query.
   function npcSnapshot() {
@@ -133,7 +144,18 @@ function install(G) {
     const survival = day => firstDeath != null && firstDeath <= day ? 0 : G.state.scholar.day > day ? 1 : null;
     const community=communityLossCoverage(row,!!G.villageLost,unknownNpcIds.size>0);
     if(community.status==='invalid')errors.push({at:'community exposure',message:community.error});
+    // LUCK INSTRUMENTATION (rogue P0-6): per-run binomial luck summary from
+    // the recorded roll streams. Descriptive only — the luck metric columns
+    // are direction-neutral and reviewChanges:false, so they can never move
+    // a comparison verdict. A reviewer reads luckSummary.streams.*.tercile
+    // (unlucky/neutral/lucky) next to the run's wins to see whether an arm's
+    // wins came from luck or the lever.
+    let luckSummary = null;
+    try { luckSummary = luck.summarizeRun(luckRolls); }
+    catch (e) { errors.push({ at: 'luck summary', message: e.message }); }
+    const luckMetrics = luckSummary ? luck.metricValues(luckSummary) : {};
     return { gear: census, observerErrors: errors, samples: sampled, intake: food, intakeCoverage, events, endings,communityLossCoverage:community,
+      luck: luckSummary,
       npcExposure: { schemaVersion: 1, identityRule: 'known-living-resident-not-current-bearer', sampledIdentities: [...npcIds].sort(),
         unknownIdentities: [...unknownNpcIds].sort(), classIdentities: [...npcClassIds].filter(id => npcIds.has(id)).sort(), days: [...npcDays.values()] },
       classes: Object.fromEntries(Object.entries(classes).map(([r, ids]) => [r, [...ids].sort()])), gods: Object.fromEntries(Object.entries(gods).map(([r, ids]) => [r, [...ids].sort()])),
@@ -146,7 +168,8 @@ function install(G) {
         classAccess: classes.player.size ? 1 : 0, npcClassAccess: unknownNpcIds.size ? null : ratio([...npcClassIds].filter(id => npcIds.has(id)).length, npcIds.size),
         goodGear: good.length ? 1 : 0, contestShowGear: good.some(g => ['contest', 'show'].includes(g.source)) ? 1 : 0,
         craftTradeGear: good.some(g => ['craft', 'trade'].includes(g.source)) ? 1 : 0, corpseGear: good.some(g => g.source.startsWith('corpse-')) ? 1 : 0,
-        usefulIntake: ratio(nourishment, kcal), bearerChanges: Math.max(0, bearerIds.size - 1), abilityAccepted: accepted } };
+        usefulIntake: ratio(nourishment, kcal), bearerChanges: Math.max(0, bearerIds.size - 1), abilityAccepted: accepted,
+        ...luckMetrics } };
   }
   return { sample, finish, errors };
 }

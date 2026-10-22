@@ -27,6 +27,12 @@
     { "id": "corpseGear", "label": "Player tier-3+ corpse weapon/armor", "unit": "fraction", "direction": "neutral", "tolerance": 0 },
     { "id": "usefulIntake", "label": "Primary nourishment / physical food consumed on instrumented routes", "unit": "ratio; reserve absorption or NPC route need equivalent; may exceed 1; versioned cumulative receipts only", "direction": "neutral", "tolerance": 0 },
     { "id": "bearerChanges", "label": "Bearer changes", "unit": "people/run", "direction": "neutral", "tolerance": 0 },
-    { "id": "abilityAccepted", "label": "Accepted player ability events", "unit": "events/run, not landed effects", "direction": "neutral", "tolerance": 0 }
+    { "id": "abilityAccepted", "label": "Accepted player ability events", "unit": "events/run, not landed effects", "direction": "neutral", "tolerance": 0 },
+    { "id": "luckHunt", "label": "Hunt luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
+    { "id": "luckTrap", "label": "Trap luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
+    { "id": "luckSnare", "label": "Snare luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
+    { "id": "luckPit", "label": "Pit luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
+    { "id": "luckFish", "label": "Fishing luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false },
+    { "id": "luckOverall", "label": "Combined run luck percentile", "unit": "luck percentile (0 = unlucky, 0.5 = neutral, 1 = lucky), observable cases", "direction": "neutral", "tolerance": 0.1, "reviewChanges": false }
   ]
 }

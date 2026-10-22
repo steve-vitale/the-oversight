@@ -2538,6 +2538,9 @@
       chance *= (maulMethod === 'bow' ? 0.85 : maulMethod === 'spear' ? 0.6 : 0.4);
     }
     var roll = Math.random();
+    // LUCK INSTRUMENTATION (rogue P0-6): record the honest hunt roll. The
+    // near-miss band below reuses this same roll — one roll, one record.
+    try { this.luckRoll('hunt', chance, roll < chance); } catch (e) {}
     if (roll < chance) {
       s.animal = null;
       this.encHuntPracticed('kill'); // a clean kill teaches double

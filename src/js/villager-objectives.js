@@ -1288,7 +1288,13 @@
         var _knowsSnare = !!(_vp && _vp.knowsSnare);
         var _knowsPit = !!((this.pitKnowledgeOn && this.pitKnowledgeOn()) && _vp && _vp.knowsPit);
         var _caught = false, _kcal = 0;
-        if (_knowsSnare && R() < 0.4) {
+        // LUCK INSTRUMENTATION (rogue P0-6): record the honest snare roll.
+        let _snareRoll = false;
+        if (_knowsSnare) {
+          _snareRoll = R() < 0.4;
+          try { this.luckRoll('snare', 0.4, _snareRoll); } catch (e) {}
+        }
+        if (_snareRoll) {
           _caught = true;
           _kcal = 100 + Math.floor(R() * 300);
           try { this.stockPantry(_kcal, 'Snared meat'); } catch (e) {}
@@ -1309,7 +1315,13 @@
         // that doesn't need a first pit of your own. No wound roll — they
         // know the craft (the goring beat in checkTraps is for YOUR pit).
         var _pitKcal = 0, _pitSpecies = null;
-        if (_knowsPit && R() < 0.18) {
+        // LUCK INSTRUMENTATION (rogue P0-6): record the honest pit roll.
+        let _pitRoll = false;
+        if (_knowsPit) {
+          _pitRoll = R() < 0.18;
+          try { this.luckRoll('pit', 0.18, _pitRoll); } catch (e) {}
+        }
+        if (_pitRoll) {
           var _pitTable = ['white_tailed_deer', 'white_tailed_deer', 'wild_boar', 'raccoon', 'opossum'];
           try {
             var _pitR = (this.data.recipes || []).find(function (r) { return r.id === 'pit_trap'; });
