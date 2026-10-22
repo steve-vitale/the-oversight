@@ -1,0 +1,35 @@
+THREAD-PLANT d10 with Terry (bearer Jenny), want=curious
+
+!!!!! HANDOFF force-day: Jenny -> Greta d11 (cause: dehydration)
+FORCE d11: 0 setup-eligible
+FORCE d12: 0 setup-eligible
+FORCE d13: 0 setup-eligible
+FORCE d13: 1 setup-eligible (pick: Terry:food_share trust 34)
+FORCED COMMIT d13: Terry kind=food_share trust=34 — killing same day
+PRE-DEATH d13: breadth=29 abilities=[night_eyes,lucky_rock] inv=5 openPromises=1 camp=false join=null
+
+DEATH d13 (a hushwolf): Greta -> Terry | passed=true lin=true mantleOf=true trust 21 -> 22 breadth=29
+AUDIT d+1:
+  [ledger] d+1: mantle-imported plants=2, breadth 29->31
+AUDIT d+7:
+  [ledger] d+7: mantle-imported plants=2, breadth 29->37
+  CONVO d+7 with Lorenzo (refused=false, want=curious)
+AUDIT d+7:
+  [ledger] d+7: mantle-imported plants=2, breadth 29->37
+  CONVO d+7 with Lorenzo (refused=false, want=ask_favor)
+  CONVO d+14 with Lorenzo (refused=false, want=curious)
+
+!!!!! HANDOFF post-d+14: Terry -> Lorenzo d28 (cause: lockjaw)
+  CONVO d+21 with Tyrone (refused=false, want=curious)
+POST-DEATH: ran to d35 (22 days after death); organic handoffs since: 2
+AUDIT end:
+  [LEDGER-FAIL] no-ability-transfer: dead bearer's abilities on successor: lucky_rock
+  [ledger] end: mantle-imported plants=2, breadth 29->48
+CENSUS d35: alive=8 fallen=4 breadth 29->48 over=false
+
+IDENTITY TRIPS: 1 (manual sense-read is the verdict)
+  [m5-fix] lucky_rock independently earned post-death (grant line d23) -- not a transfer
+  [m5-fix] no-ability-transfer revised to GO -- all leaked ids grant-narrated post-death
+
+METRICS: m1=true m2=true(label=d+7 openPromisesPre=1 bad=0) m3=true(label=end bad=none) m4=manual m5=true(label=end bad=no-ability-transfer; transfer-check revised: lucky_rock independently earned post-death (grant-narrated), not transferred)
+organic handoffs: 2; anomalies: 0
