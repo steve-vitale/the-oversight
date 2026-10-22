@@ -251,6 +251,64 @@ Primary decisive GO on both policies (rot 0.273x/0.365x, inflow
 was never a kill — the lever was sound, the misses were measurement
 artifacts. Layer merges to master with this evidence commit.
 
+### §15 balanced panel — first VALID instrument read for the arm (adoption worker)
+
+The b-run's pilot panels compared invalid ("Unmatched flags": the DEPOSITGATE
+env toggle enters the panel's flag snapshot, so any DEPOSITGATE=0 vs =1 pair
+fails the comparator's identity gate by construction). This run generated two
+fresh panels on the final branch state (root = this worktree, policies
+leadfeast+belongfeast, seeds 6001–6008, 180d, FEASTSCALE_R13=1/SEATDRIVE=0):
+evidence/2026-10-22/panel-b2/panel-b2-{before,after}.json.gz
+(before=DEPOSITGATE=0, after=DEPOSITGATE=1; both sourcesStable, 16 rows each).
+Repair (documented, per the comparator's "invalid comparisons must be
+repaired before interpretation"): the ONLY options difference between the
+panels was options.flags.DEPOSITGATE ("0" vs "1") — the lever under test
+itself, not a protocol mismatch — so it was normalized on both sides
+(*.repaired.json in the same dir; originals kept untouched beside them).
+Compare: node scripts/balance-panel.js compare → depositgate-b2-panel-compare.{json,md}.
+
+Decision: **review_required** — driven entirely by regression_watch rows at
+8-seed screen power (all exploratory 95% CIs cross or touch zero):
+- leadfeast: National scale access 0.625→0.5 (Δ−0.125, CI −0.5..0.25);
+  Player deaths per run 8.25→8.5 (Δ+0.25, CI −2.125..3.125).
+- belongfeast: Table invitation 0.625→0.5 (Δ−0.125, CI −0.375..0);
+  Player deaths per run 7→7.125 (Δ+0.125, CI −2.375..2.25);
+  deaths/100d +0.227 (CI −3.23..3.98); named-class access 0.75→0.625 (CI
+  −0.375..0).
+No regression_signal anywhere. Notable neutral-direction improvements on
+belongfeast: mean sampled living NPCs +1.16 (CI 0.49..1.81, zero not
+crossed), reserve-below-500kcal −0.0186 (CI −0.0367..−0.0046),
+hydration-below-25% −0.0238 (CI −0.0474..−0.0028).
+
+Per §14 the pre-registered verdict rule binds — the panel is the instrument,
+the rule is the judge. The rule's four gates hold decisively (#799 HOLD at
+64 runs, #798 REJECTED, compensation 21.1% « 50%, primary 0.273x/0.365x and
+0.627x/0.831x); the instrument's watch flags are 8-seed screen noise
+(1-run differences, zero-crossing intervals) and are recorded here as the
+landing review's watch items, not as an override of the pre-registered
+verdict. Watch items for the landing reviewer: national-scale access and
+player-death counts on larger confirms.
+
+### SENSE-TESTING (adoption worker)
+
+Captured a full 180d armed belongfeast run (seed 6005, national, 227k eased
+kcal): evidence/2026-10-22/depositgate-dayvoice-s6005.txt — 983
+depositgate-relevant say lines, 624 unique after dedupe. Read as transcript:
+the beats read as villagers choosing, not a system trimming. Named speakers
+(Howard, Nina, Hicham, Guadalupe, Grace, Nino) rotate through a 6-variant
+pool with situated actions — "waves off the day's share... we eat at the
+fire", "keeps the day's share in hand... Dinner's on me tonight", "leaves
+the surplus by the fire for whoever's hungry", returners splitting hauls
+("332 kcal in, 332 kcal eaten at the fire"), and the tribute waiver voice
+("Tribute wagons from Teston turn at the gate — our shelves are full past
+tomorrow. 'Eat well,' we send back. 'That IS your tribute this week.'
+(Trust +1.)"). Plenty-side 🌿 lines interleave consistently (landed
+plentydepri). Robotic notes: the repeated pre-existing loops are NOT this
+layer's — "[x16] The pantry is in the hall. Your hands are not.",
+"[x22] Giulia speaks only Italian...", "Village meal ... (Half ration —
+they don't trust you yet.)" — standing meal/drama lines, logged as
+pre-existing, not depositgate blanks.
+
 ### metric review
 - The #799 sweep re-run rule (§14: full 32-seed side, never a partial)
   worked as designed — the partial wrong-seed file was caught and
@@ -259,3 +317,11 @@ artifacts. Layer merges to master with this evidence commit.
   sweeps): both well under the 50% watch threshold; the ratio instrument
   stays retired. If future arms push compensation above ~35%, revisit
   whether the watch threshold should bind as a guardrail.
+- §15 repair note for future env-gated levers: the panel's flag snapshot
+  absorbs the lever's env toggle, so a literal before/after panel pair
+  ALWAYS compares invalid for toggle-gated arms. The documented repair is
+  to normalize the lever's own flag on both panels and keep the originals
+  beside the repaired copies. The 8-seed screen panel is a watch
+  instrument at this power, not a confirm — its regression_watch rows
+  (all zero-crossing) did not meet the bar to override the pre-registered
+  judge.
