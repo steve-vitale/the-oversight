@@ -2695,6 +2695,26 @@
       return line;
     },
 
+    // convoDeeperPick: the bespoke-question `deeper` beat (see the DEEPER
+    // note at the answer path). DEEPER VARIANTS (journey-deepening r32
+    // 2026-10-22): these beats were singleton strings, so every villager
+    // recited the same anecdote verbatim (q_first_week: two villagers, one
+    // run, identical "spite at the sky" story). Data may now carry an array
+    // of variants; selection goes through convoPick — a villager never
+    // repeats a line and village-fresh lines are preferred, so the same
+    // question lands differently per speaker. Plain strings keep the old
+    // path (single-variant pool). Falls back to the first variant rather
+    // than dropping the reliably-queued beat.
+    convoDeeperPick(vid, qd) {
+      const pool = Array.isArray(qd.deeper) ? qd.deeper : [qd.deeper];
+      const key = 'deeper:' + ((qd && qd.id) || 'q');
+      try {
+        const l = this.convoPick(vid, key, pool);
+        if (l) return l;
+      } catch (e) {}
+      return pool[0];
+    },
+
     // convoPickCycle: like convoPick, but generic pools (exits, "told you
     // everything") are allowed to cycle rather than collapse to one fixed
     // string — the order still varies, so it never feels like a loop.
@@ -5557,7 +5577,7 @@
         // thread continues on the continuer instead of going dry after one
         // react. When deeper exists it replaces the follow roll on this path.
         if (qd && qd.deeper) {
-          extraLine = this.voiceLine(vid, this.fillTalkLine(qd.deeper, this.vpOf(vid)));
+          extraLine = this.voiceLine(vid, this.fillTalkLine(this.convoDeeperPick(vid, qd), this.vpOf(vid)));
         } else if (qd && qd.follow && Math.random() < 0.5) {
           extraLine = this.voiceLine(vid, this.fillTalkLine(qd.follow, this.vpOf(vid)));
         }

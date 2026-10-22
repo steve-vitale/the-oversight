@@ -1,0 +1,18 @@
+=== seed 9942 day 100 — conversation with Adrian (gen_hkdf65l) ===
+occupation=Chef temperament=bold trust=89 dead=false
+want: seek_taken (stage 1)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Larry?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Okay. You don't have to have an answer."
+(want=seek_taken stage=1)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=promised

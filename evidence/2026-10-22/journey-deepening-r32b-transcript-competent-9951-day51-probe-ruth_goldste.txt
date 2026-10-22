@@ -1,0 +1,32 @@
+=== seed 9951 day 51 — conversation with Ruth (ruth_goldstein) ===
+occupation=librarian temperament=dry trust=90 dead=false
+want: ask_favor (stage 0)
+
+THEM: I've lived in five places since the sky changed. None of them were home.
+(turn0 choices: ask:goal, invite_party, ask:gossip, ask:spread_rumor, teach, menu:more, leave, silence)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Saida headed out to forage."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "Saida is back. Walked in like they'd never left."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "Pavel headed out to find someone."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "Carlos headed out to forage."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "Luis? A mason, back before. Solid person."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "that stray dog — the one that bit two people — lets Onni touch it."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "Carlos sees in the dark. Not well — but better than you. Better than me."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "I’m listening."
+THEM: "Funny you should ask." Ruth glances over their shoulder. "Vedika's been polishing that story. The unpolished version: a nurse. Keep my name out of it."
+(want=ask_favor stage=0)
+closing line: "File that under 'productive.' Loosely defined."
+want final: id=ask_favor stage=3 resolution=unestablished

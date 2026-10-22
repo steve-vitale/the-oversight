@@ -1,0 +1,18 @@
+=== seed 9943 day 47 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=90 dead=false
+want: ask_favor (stage 0)
+
+THEM: "Can we talk?" Rosa sighs. "I need some space. A corner nobody needs me in. Is that okay?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: They nod, giving you room to think.
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=0)
+YOU: [goon] "I'm here. Go on."
+THEM: "Come get air with me. I need to think out loud."
+(want=ask_favor stage=0)
+YOU: (leave)
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+want final: id=ask_favor stage=3 resolution=unestablished

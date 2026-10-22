@@ -1,0 +1,29 @@
+=== seed 9951 day 51 — conversation with Luis (luis_fernandez) ===
+occupation=mason temperament=steady trust=90 dead=false
+want: ask_favor (stage 2)
+
+THEM: Healing isn't just bodies. It's the whole thing — trust, hope, all of it.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Luis shows you where they go to think. "Don't tell the others. Everyone needs one place."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I can't save everyone. I can save the person in front of me. Start there."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "You look tired. Everyone looks tired. Sit down a minute — no, I'm serious."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Healing's slow. People want it fast. I'm learning to be patient with both."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Pain shared is pain halved. That's not science. It's better than science."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Every person I patch up is a vote for the world continuing."
+(want=ask_favor stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "Anyway — I should get back to it. Good talking, though."
+(want=ask_favor stage=2)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=stated

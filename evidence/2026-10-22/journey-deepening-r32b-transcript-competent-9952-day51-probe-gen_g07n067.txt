@@ -1,0 +1,18 @@
+=== seed 9952 day 51 — conversation with Kayden (gen_g07n067) ===
+occupation=night security guard temperament=steady trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "Have you ever hurt someone? Since all this started."
+(turn0 choices: ans:q_fight:a_tell, ans:q_fight:a_vague, ans:q_fight:honest_pass, leave, silence)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Walk with me? I want another pair of eyes on something."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,18 @@
+=== seed 9952 day 51 — conversation with Salvador (gen_s3g2cdf) ===
+occupation=Dentist temperament=gentle trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "What got you through the first week? The very first days."
+(turn0 choices: ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "If I may — Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "The way I read it — Spite, mostly. Pure, clean spite at the sky. Then someone shared food with me and the spite turned into something else. I still don't have a word for the something else."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Come see what I found. You won't believe it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Go gently, okay?"
+want final: id=curious stage=3 resolution=engaged
