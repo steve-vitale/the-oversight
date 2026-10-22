@@ -4722,6 +4722,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
         const aboutOther = heard.filter(isWho);
+        // GRAPEVINE SALIENCE (journey social r39 2026-10-22): reputation
+        // rumors (the rumor verbs — the drama the player can start) outrank
+        // routine news within "about other people". Before, aboutOther was
+        // pure recency, so a hot scandal always lost to same-day water-trip
+        // news (measured: a 5-hearer stingy rumor never won the first serve
+        // across 4 runs; even 4 "tell me more"s couldn't reach it under news
+        // churn). Freshest-first within each class; the walk-down still
+        // reaches the rest. This implements the salience comment's promise:
+        // "rumors about other people, then the freshest remaining word."
+        const RUMOR_VERBS = { stingy: 1, untrustworthy: 1, generous: 1, scheming: 1, coward: 1 };
+        // freshGossip serves from the array END, so rumor verbs sort LAST.
+        aboutOther.sort((a, b) => ((RUMOR_VERBS[a.action] ? 1 : 0) - (RUMOR_VERBS[b.action] ? 1 : 0)));
         if (aboutOther.length) {
           const g = freshGossip(aboutOther); // walk-down: next unsaid rumor, not the same one
           if (g) {

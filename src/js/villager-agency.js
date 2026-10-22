@@ -672,7 +672,23 @@
         if (type === 'cache_haul') dims.generous = 6;
         if (type === 'rescue') { dims.brave = 6; dims.generous = 6; }
         if (type === 'mapped_far') dims.brave = 4;
-        this.seedGossip('deed', dims, []);
+        // GRAPEVINE (journey social r39 2026-10-22): deed gossip was seeded
+        // heard-less and who-less — born dead on both counts. spreadGossip
+        // only iterates g.heard as tellers and askAbout only serves gossip
+        // the speaker has heard, so a heard-less entry could never travel
+        // (measured: 255 deed entries born heard-less across 4 runs, 0 ever
+        // gained a hearer). And who-less gossip is the PLAYER channel: the
+        // fallback render says "word is YOU..." and rep pays to the hearer,
+        // so an NPC's kill would credit the player. The doer tells it
+        // themself plus one witness (same pattern as departure/return
+        // gossip), and dims.who names the doer so rep and rendering
+        // attribute the deed correctly.
+        dims.who = vid;
+        var _vw = this.state.village || {};
+        var _seen = (_vw.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
+        var _wit = _seen.length ? _seen[Math.floor(R() * _seen.length)] : null;
+        var _heard = [vid].concat(_wit ? [_wit] : []);
+        this.seedGossip('deed', dims, _heard);
       } catch (e) {}
       // the show notices big plays — the audience is watching
       if (mag >= 8) { try { this.recordMoment(text); } catch (e) {} }
