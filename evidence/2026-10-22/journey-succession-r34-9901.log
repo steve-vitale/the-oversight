@@ -1,0 +1,25 @@
+
+!!!!! HANDOFF phase-A: Deirdre -> Lorenzo d9 (cause: combat)
+THREAD-PLANT d10 with Jae (bearer Lorenzo), want=ask_favor
+FORCE d10: 0 setup-eligible
+FORCE d12: 1 setup-eligible (pick: Øystein:heal_help trust 31)
+FORCED COMMIT d12: Øystein kind=heal_help trust=31 — killing same day
+PRE-DEATH d12: breadth=26 abilities=[green_whisper] inv=7 openPromises=1 camp=false join=null
+
+DEATH d12 (a hushwolf): Lorenzo -> Øystein | passed=true lin=true mantleOf=true trust 18 -> 22 breadth=26
+AUDIT d+1:
+  [ledger] d+1: mantle-imported plants=1, breadth 26->27
+AUDIT d+7:
+  [ledger] d+7: mantle-imported plants=1, breadth 26->32
+  CONVO d+7 with Carlos (refused=false, want=seek_comfort)
+  CONVO d+14 with Carlos (refused=false, want=ask_favor)
+  CONVO d+21 with Gerald (refused=false, want=seek_comfort)
+POST-DEATH: ran to d33 (21 days after death); organic handoffs since: 1
+AUDIT end:
+  [ledger] end: mantle-imported plants=1, breadth 26->49
+CENSUS d33: alive=6 fallen=6 breadth 26->49 over=false
+
+IDENTITY TRIPS: 0 (manual sense-read is the verdict)
+
+METRICS: m1=true m2=true(label=d+7 openPromisesPre=1 bad=0) m3=true(label=end bad=none) m4=manual m5=true(label=end bad=none)
+organic handoffs: 1; anomalies: 0

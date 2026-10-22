@@ -1,0 +1,24 @@
+THREAD-PLANT d10 with Hugo (bearer Carmen), want=curious
+FORCE d11: 0 setup-eligible
+
+!!!!! HANDOFF force-day: Carmen -> Hugo d12 (cause: combat)
+FORCE d12: 0 setup-eligible
+FORCE d13: 0 setup-eligible
+FORCE d14: 1 setup-eligible (pick: Ray:heal_help trust 33)
+FORCED COMMIT d14: Ray kind=heal_help trust=33 — killing same day
+PRE-DEATH d14: breadth=25 abilities=[beast_calm] inv=2 openPromises=1 camp=false join=null
+
+DEATH d14 (a hushwolf): Hugo -> Ray | passed=true lin=true mantleOf=true trust 25 -> 23 breadth=25
+AUDIT d+1:
+  [ledger] d+1: mantle-imported plants=3, breadth 25->28
+AUDIT d+7:
+  [ledger] d+7: mantle-imported plants=3, breadth 25->42
+  CONVO d+7 with Nadia (refused=false, want=ask_favor)
+  CONVO d+14 with Nadia (refused=false, want=ask_favor)
+POST-DEATH: ran to d28 (14 days after death); organic handoffs since: 1
+CENSUS d28: alive=6 fallen=7 breadth 25->45 over=true
+
+IDENTITY TRIPS: 0 (manual sense-read is the verdict)
+
+METRICS: m1=true m2=true(label=d+7 openPromisesPre=1 bad=0) m3=true(label=d+7 bad=none) m4=manual m5=true(label=d+7 bad=none)
+organic handoffs: 1; anomalies: 0

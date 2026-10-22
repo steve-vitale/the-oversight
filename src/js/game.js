@@ -26845,6 +26845,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { if (this.registerDeath) this.registerDeath({ kind: 'villager', villagerId: id, name: person.name, cause: 'a wound that wouldn\'t close', killerId: null }); } catch (e) {}
             try { if (this.removeVillager) this.removeVillager(id, 'killed'); } catch (e) {}
             try { if (this.seedGossip) this.seedGossip('death', { who: id }, []); } catch (e) {}
+            // MEMORIAL ROLL (journey-succession r34 2026-10-22): the dead mark.
+            // registerDeath makes the corpse; v.fallen is the memorial roll —
+            // without this push a wound death left no record (grief, gossip
+            // and the Codex page fired; the census undercounted). Mirrors the
+            // hurtVillager path's fallen push.
+            try { v.fallen = v.fallen || []; v.fallen.push({ villagerId: id, day: this.state.scholar.day, cause: 'a wound that wouldn\'t close' }); } catch (e) {}
             if (present) {
               // DEATH-LITURGY (2026-10-21): grief coda, not a headcount.
               this.say(this.griefLine(id, this.displayName(id), ' is gone. The wound was too much.'));
@@ -29897,6 +29903,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { if (this.registerDeath) this.registerDeath({ kind: 'villager', villagerId: id, name: this.displayName(id), cause: 'thirst', killerId: null }); } catch (e) {}
             try { if (this.removeVillager) this.removeVillager(id, 'killed'); } catch (e) {}
             try { if (this.seedGossip) this.seedGossip('death', { who: id }, []); } catch (e) {}
+            // MEMORIAL ROLL (journey-succession r34 2026-10-22): the dead mark.
+            // Same gap as the wound-death path — corpse/gossip fired, v.fallen
+            // never did. (Bearer dehydration routes through playerDeath, which
+            // pushes fallen; this is the non-bearer thirst path.)
+            try { v.fallen = v.fallen || []; v.fallen.push({ villagerId: id, day: this.state.scholar.day, cause: 'thirst' }); } catch (e) {}
             // AWAY DEATHS QUEUE (drifter break-it 2026-10-09): same contract
             // as wound/starvation deaths — no real-time bulletin from afar.
             const thirstMsg = `💀 ${this.displayName(id)} died of thirst. There was nothing to drink.`;
@@ -43902,6 +43913,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             witnesses: [this.villagerId], youWitnessed: true,
           });
           this.removeVillager(L.bearer, 'killed');
+          // MEMORIAL ROLL (journey-succession r34 2026-10-22): the dead mark.
+          // The 'ash' phoenix variant pushes v.fallen; the broken/released
+          // variants were missed — same gap class as wound/thirst.
+          try { const _v = this.state.village; _v.fallen = _v.fallen || []; _v.fallen.push({ villagerId: L.bearer, day: this.state.scholar.day, cause: 'the phoenix link (broken)' }); } catch (e2) {}
         } catch (e) {} finally { this._phoenixResolving = false; }
         try { this.seedGossip('phoenix_broken', { who: this.villagerId, strong: 6 }, (this.npcIds ? this.npcIds() : []).slice(0, 3), true); } catch (e) {}
         this.say(`The village watched you tear free. Uneasy respect -- not horror. (Gossip: you broke a phoenix link.)`);
@@ -43930,6 +43945,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             witnesses: [this.villagerId], youWitnessed: true,
           });
           this.removeVillager(L.bearer, 'killed');
+          // MEMORIAL ROLL (journey-succession r34 2026-10-22): the dead mark.
+          // The 'ash' phoenix variant pushes v.fallen; the broken/released
+          // variants were missed — same gap class as wound/thirst.
+          try { const _v = this.state.village; _v.fallen = _v.fallen || []; _v.fallen.push({ villagerId: L.bearer, day: this.state.scholar.day, cause: 'the phoenix link (released)' }); } catch (e2) {}
         } catch (e) {} finally { this._phoenixResolving = false; }
       } else {
         // player-protests: you yielded. You burn -- and the village
