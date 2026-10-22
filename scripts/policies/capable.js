@@ -790,6 +790,10 @@ function capableTalk(Game, ctx) {
 
 // ---------- 5. RELAY ----------
 function relayRoad(Game, ctx) {
+  // RELAYROAD GATE (journey-endgame r40, lane B): when the grey road owns
+  // the relay (RELAYGREY=1 + CAPABLE_RELAYROAD=0), the base stays off the
+  // wires — one player, one set of hands. Default ON: no behavior change.
+  if (process.env.CAPABLE_RELAYROAD === '0') return;
   try {
     if (Game.switchboardAvailable && Game.switchboardAvailable()) {
       const roster = ((Game.state.village || {}).roster || []).length;
