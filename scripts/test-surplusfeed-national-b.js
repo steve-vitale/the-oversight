@@ -2,22 +2,25 @@
 // test-surplusfeed-national-b.js — proof for the sim-surplusfeed-national-b diagnostic.
 //
 // Usage: FEASTSCALE_R13=1 SEATDRIVE=0 node scripts/test-surplusfeed-national-b.js
-//   (SURPLUSFEED may be unset or '1' in the shell — the script sets it per
-//   sub-proof. SEATDRIVE=0 explicit. Read the Usage header BEFORE running
-//   any proof (ENV TRAP rule: FEASTSCALE_R13=1 is REQUIRED).)
+//   (Read the Usage header BEFORE running any proof (ENV TRAP rule:
+//   FEASTSCALE_R13=1 is REQUIRED).)
+//
+// 2026-10-21 REMOVAL: the SURPLUSFEED governor was removed by Steve's own
+// decision (docs/DECISIONS.md 2026-10-21) — the governor assertions in the
+// old RED/ENGAGE/DET proofs are retired. The standing/spend instruments
+// remain and are proven below; the governor-specific wraps assert the lever
+// is GONE (no function, no telemetry, no trim state).
 //
 // RED:    pristine runs write no standing/spend instrument state on Game.
-// GREEN:  2 proof seeds x 25d ARMED instrumented: standing trajectory
-//         samples every dawn (int components, war/dip/ple present);
-//         feastEvents carry day/paid/quality; feast honesty >= 99% (engine
-//         say-lines "(-X kcal from the pantry)" match recorded paid);
-//         spend channels feast/gift/court exist; sfeed sensor present.
-// ENGAGE: 2 proof seeds x 60d ARMED: trim telemetry fires (trimKcal > 0).
-// DET:    40d x 2 proof seeds, instrumented-vs-pristine ARMED: canonical
-//         state projection byte-identical (all new wraps — pantryDraw,
+// GREEN:  2 proof seeds x 25d instrumented: standing trajectory samples
+//         every dawn (int components, war/dip/ple present); feastEvents
+//         carry day/paid/quality; feast honesty >= 99%; spend channels
+//         feast/gift/court exist; sfeed sensor present.
+// DET:    40d x 2 proof seeds, instrumented-vs-pristine: canonical state
+//         projection byte-identical (all new wraps — pantryDraw,
 //         _removePantryKcal, hostFeast, answerAccord, answerRenegotiation,
-//         answerNationalChoice, sleep, surplusFeedGovernor — are RNG-clean).
-// REPEAT: same armed seed twice in-process byte-identical.
+//         answerNationalChoice, sleep — are RNG-clean).
+// REPEAT: same seed twice in-process byte-identical.
 // RED-EQUIV (same-commit, SURPLUSFEED unset): variant driver rows (new
 //         instrument) ≡ probe-glutcurvecheck-b.js rows on the same commit,
 //         field-for-field minus volatile `ms` — the new instrument adds no
@@ -26,20 +29,14 @@
 const assert = require('assert');
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { belongfeast } = require('./policies/feastscale');
-const { attachProbe, dayOf } = require('./probe-glut-instruments');
+const { attachProbe } = require('./probe-glut-instruments');
 const { attachStandingProbe, checkFeastHonesty } = require('./probe-standnational-instruments');
 
 if (process.env.FEASTSCALE_R13 !== '1' || process.env.SEATDRIVE !== '0') {
   console.error('FATAL: FEASTSCALE_R13=1 and SEATDRIVE=0 must both be set explicitly (see Usage header)');
   process.exit(2);
 }
-if (process.env.SURPLUSFEED && process.env.SURPLUSFEED !== '1') {
-  console.error('FATAL: SURPLUSFEED must be unset or exactly "1" (see Usage header)');
-  process.exit(2);
-}
 
-// canonical projection: everything the sim's behavior depends on, minus
-// instrument-only fields.
 function canon(Game) {
   const items = (((Game.state || {}).village || {}).pantry || [])
     .map(it => [it.name, it.kcalEach, it.units, it.spoilDay, it.foodState, it.safe ? 1 : 0].join('|'))
@@ -52,32 +49,16 @@ function canon(Game) {
 function attachAll(Game) {
   const W = attachProbe(Game);
   const S = attachStandingProbe(Game);
-  const sf = { govCalls: 0, trimCalls: 0, trimKcal: 0, days: {} };
-  const o = Game.surplusFeedGovernor;
-  if (typeof o === 'function') Game.surplusFeedGovernor = function (v, give) {
-    const r = o.apply(this, arguments);
-    try {
-      sf.govCalls++;
-      if (r < give) {
-        sf.trimCalls++;
-        sf.trimKcal += (give - r);
-        const d = dayOf(Game);
-        const cell = sf.days[d] || (sf.days[d] = { trimCalls: 0, trimKcal: 0 });
-        cell.trimCalls++; cell.trimKcal += (give - r);
-      }
-    } catch (e) {}
-    return r;
-  };
-  return { W, S, sf };
+  return { W, S };
 }
 
 async function run(seed, days, instrumented) {
   const { Game } = await loadGame({ seed, mode: 'sfnb-test', fullTelemetry: false });
   await setupGame(Game);
-  let W = null, S = null, sf = null;
-  if (instrumented) { const a = attachAll(Game); W = a.W; S = a.S; sf = a.sf; }
+  let W = null, S = null;
+  if (instrumented) { const a = attachAll(Game); W = a.W; S = a.S; }
   const result = await runDays(Game, belongfeast, { days, manifest: null });
-  return { Game, W, S, sf, result };
+  return { Game, W, S, result };
 }
 
 (async () => {
@@ -88,15 +69,28 @@ async function run(seed, days, instrumented) {
   };
 
   console.log('RED: pristine runs carry no standing-instrument state');
-  for (const env of ['1', undefined]) {
-    if (env) process.env.SURPLUSFEED = env; else delete process.env.SURPLUSFEED;
+  {
     const { Game } = await run(8815, 25, false);
     const clean = !Game._standProbe && !Game._spendStack;
-    ok(`no instrument state when uninstrumented (SURPLUSFEED=${env || 'unset'})`, clean);
+    ok('no instrument state when uninstrumented', clean);
   }
 
-  console.log('GREEN: instrumented ARMED runs sample standing + attribute spend');
-  process.env.SURPLUSFEED = '1';
+  console.log('REMOVED (2026-10-21): SURPLUSFEED governor is gone from the game');
+  {
+    const { Game } = await loadGame({ seed: 8815, mode: 'sfnb-removed', fullTelemetry: false });
+    ok('Game.surplusFeedGovernor gone', typeof Game.surplusFeedGovernor === 'undefined');
+    ok('Game._surplusFeedOn gone', typeof Game._surplusFeedOn === 'undefined');
+  }
+  // 60d runs can never write trim telemetry: the engine no longer owns the
+  // _surplusFeed state shape.
+  for (const seed of [8815, 8816]) {
+    const { Game } = await run(seed, 60, true);
+    const v = (Game.state || {}).village || {};
+    ok(`seed ${seed} no _surplusFeed trim state`, v._surplusFeed === undefined,
+      '_surplusFeed=' + (v._surplusFeed === undefined ? 'absent' : 'PRESENT'));
+  }
+
+  console.log('GREEN: instrumented runs sample standing + attribute spend');
   const { leadfeast } = require('./policies/feastscale');
   // seed 8815 hosts no feasts on either policy in 60d (feastscale contribution
   // gate — policy behavior, not instrument); feast-specific checks use 8816.
@@ -112,13 +106,6 @@ async function run(seed, days, instrumented) {
     const { Game } = await loadGame({ seed: 8816, mode: 'sfnb-test', fullTelemetry: false });
     await setupGame(Game);
     const W = attachProbe(Game), S = attachStandingProbe(Game);
-    const sff = { trimKcal: 0 };
-    const o2 = Game.surplusFeedGovernor;
-    if (typeof o2 === 'function') Game.surplusFeedGovernor = function (v, give) {
-      const r = o2.apply(this, arguments);
-      try { if (r < give) sff.trimKcal += (give - r); } catch (e) {}
-      return r;
-    };
     await runDays(Game, pol, { days: 60, manifest: null });
     const honest = checkFeastHonesty(S.feastEvents, S.feastLines);
     ok(`${policyId} 8816 feasts recorded`, S.feastEvents.length > 0, 'n=' + S.feastEvents.length);
@@ -131,14 +118,7 @@ async function run(seed, days, instrumented) {
     ok(`${policyId} 8816 spend attribution complete (sum vs total)`, named <= S.spendTotal, named + ' vs ' + S.spendTotal);
   }
 
-  console.log('ENGAGE: governor trim telemetry fires on glut days (armed, 60d)');
-  for (const seed of [8815, 8816]) {
-    const { sf } = await run(seed, 60, true);
-    ok(`seed ${seed} trim telemetry fired`, sf.trimKcal > 0 && Object.keys(sf.days).length > 0,
-      `trimKcal=${Math.round(sf.trimKcal)} trimDays=${Object.keys(sf.days).length} govCalls=${sf.govCalls}`);
-  }
-
-  console.log('DET: instrumented vs pristine ARMED byte-identical (40d x 2 seeds)');
+  console.log('DET: instrumented vs pristine byte-identical (40d x 2 seeds)');
   for (const seed of [8817, 8818]) {
     const a = await run(seed, 40, true);
     const b = await run(seed, 40, false);
@@ -146,15 +126,14 @@ async function run(seed, days, instrumented) {
       canon(a.Game).length + ' vs ' + canon(b.Game).length + ' chars');
   }
 
-  console.log('REPEAT: same armed seed twice in-process byte-identical');
+  console.log('REPEAT: same seed twice in-process byte-identical');
   {
     const a = await run(8817, 40, true);
     const b = await run(8817, 40, true);
-    ok('repeat armed run identical', canon(a.Game) === canon(b.Game));
+    ok('repeat run identical', canon(a.Game) === canon(b.Game));
   }
 
   console.log('RED-EQUIVALENT (same-commit): new-instrument driver unset vs curvecheck driver unset (60d x 2 seeds, belongfeast)');
-  delete process.env.SURPLUSFEED;
   {
     // Minimal re-implementation of probe-glutcurvecheck-b.js's end-row so the
     // comparison is exact on the fields that exist in both.
@@ -164,16 +143,6 @@ async function run(seed, days, instrumented) {
       const W = attachProbe(Game);
       let S = null;
       if (withStanding) S = attachStandingProbe(Game);
-      const sf = { govCalls: 0, trimCalls: 0, trimKcal: 0, days: {} };
-      const o = Game.surplusFeedGovernor;
-      if (typeof o === 'function') Game.surplusFeedGovernor = function (v, give) {
-        const r = o.apply(this, arguments);
-        try {
-          sf.govCalls++;
-          if (r < give) { sf.trimKcal += (give - r); sf.trimCalls++; }
-        } catch (e) {}
-        return r;
-      };
       const result = await runDays(Game, belongfeast, { days: 60, manifest: null });
       const unatt = W.inflow.unattributed || 0;
       return JSON.stringify({
@@ -186,7 +155,6 @@ async function run(seed, days, instrumented) {
         unattributed: Math.round(unatt),
         inflow: Object.fromEntries(Object.entries(W.inflow).map(([k, v]) => [k, Math.round(v)])),
         rotFresh: Math.round(W.rotFresh), rotPreserved: Math.round(W.rotPreserved),
-        sfeed: { trimCalls: sf.trimCalls, trimKcal: Math.round(sf.trimKcal) },
       });
     };
     for (const seed of [8801, 8802]) {

@@ -15225,65 +15225,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return this.pantryFreshDays() > 4;
     },
 
-    // SURPLUSFEED (2026-10-18, Steve make-the-call, documented for
-    // overrule): pantry feedback for the autonomous surplus share — the
-    // mirror of PRODTHROTTLE's rationale, for the channel the throttle
-    // can't touch (share_surplus is 84-88% of inflow with no governor;
-    // sim-prodrebound-b mechanism map). When the pantry holds >4 fresh
-    // days, villagers ease off gathering the surplus — honest foraging
-    // practice by villagers, NOT a System intervention: they choose not
-    // to haul food that will rot. Villagers still produce and eat (eating
-    // is above the share block, untouched); only the SHARED SURPLUS is
-    // scaled. The trimmed kcal is never conjured, eaten, or stored — it
-    // stays standing where it grew. Hunger exemption mirrors the
-    // throttle (hungryStreak >= 3 stands the easing down). Env-gated,
-    // default OFF everywhere (browser: no process -> fix off).
-    _surplusFeedOn() {
-      try { return typeof process !== 'undefined' && process.env && process.env.SURPLUSFEED === '1'; }
-      catch (e) { return false; }
-    },
-
-    surplusFeedGovernor(v, give) {
-      // returns the governed share (<= give). OFF: returns give exactly,
-      // zero writes, zero RNG draws — the det-gate (gate-off byte-
-      // identical) reads this path.
-      let factor = 1;
-      if (this._surplusFeedOn()) {
-        try {
-          if (this.pantryFreshDays() > 4) {
-            const pg = (typeof this.progState === 'function') ? this.progState() : null;
-            if (!pg || (pg.hungryStreak || 0) < 3) factor = 0.5;
-          }
-        } catch (e) {}
-      }
-      const governed = give * factor;
-      if (factor < 1 && governed > 0) {
-        // telemetry (honest, not silent): day -> {trim events, kcal
-        // eased off}, read by the sweep. The beat fires once per glut
-        // stretch (first trim after >= 5 untrimmed days), not per villager
-        // per day. Deterministic cast: first living roster member.
-        try {
-          const vv = v || {};
-          const day = (this.state.scholar || {}).day || 0;
-          vv._surplusFeed = vv._surplusFeed || { days: {}, lastTrimDay: -99 };
-          const rec = (vv._surplusFeed.days[day] = vv._surplusFeed.days[day] || { trim: 0, kcal: 0 });
-          rec.trim++; rec.kcal += (give - governed);
-          if (day - (vv._surplusFeed.lastTrimDay || -99) > 5) {
-            let nm = 'Someone';
-            try {
-              for (const id of (vv.roster || [])) {
-                const p = this.getPerson ? this.getPerson(id) : null;
-                if (p && !p.dead) { nm = String(p.name || 'Someone').split(' ')[0]; break; }
-              }
-            } catch (e) {}
-            this.say(nm + " looks at the groaning pantry shelves and leaves the extra standing. \"No point hauling what'll rot.\"");
-          }
-          vv._surplusFeed.lastTrimDay = day;
-        } catch (e) {}
-      }
-      return governed;
-    },
-
     // THROTTLEBEAT (2026-10-14): true exactly when the production throttle
     // WOULD engage on pantry fullness but the hunger-depth exemption stands
     // it down (hungryStreak >= 3). Read-only: no state, no RNG, no behavior
@@ -28932,9 +28873,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let gave = 0, stored = 0, refused = 0;
       if (produced > need) {
         gave = (produced - need) * trustFactor;
-        // SURPLUSFEED (2026-10-18): pantry feedback on the shared surplus
-        // only. Eating (ownEat + pantry draw, above) is untouched.
-        if (gave > 0) gave = this.surplusFeedGovernor(v, gave);
         if (gave > 0) stored = this.stockSurplus(v, gave) || 0;
         if (capdoorOn && gave > 0) {
           // the share stays theirs: refused kcal are eaten, never stored,

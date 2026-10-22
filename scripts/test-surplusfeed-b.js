@@ -1,31 +1,22 @@
 #!/usr/bin/env node
-// test-surplusfeed-b.js — proof for the surplus-share governor (arm
-// sim-surplusfeed-b, run fleshout-loop-b-20261018T1930Z).
+// test-surplusfeed-b.js — removal proof (Steve 2026-10-21: SURPLUSFEED
+// governor REMOVED, not parked; see docs/DECISIONS.md 2026-10-21).
 //
-// The lever: game.js surplusFeedGovernor(v, give), env-gated SURPLUSFEED=1
-// (default OFF). At pantryFreshDays() > 4 it scales the villager's SHARED
-// SURPLUS by 0.5 — eating is untouched. Hunger exemption (hungryStreak >= 3)
-// mirrors PRODTHROTTLE.
+// Was: proof for the surplus-share governor (arm sim-surplusfeed-b).
+// Now: asserts the governor is GONE from the live game — the functions are
+// unmounted, no source references remain in src/js/, and the env flag no
+// longer changes any trajectory (gone, not parked).
 //
-// Fixtures:
-//   1. GATE-OFF INERT: SURPLUSFEED unset -> returns give exactly, zero writes.
-//   2. GLUT TRIMS SHARE: gate on + pantryFreshDays>4 -> give*0.5, telemetry
-//      recorded, one-shot beat in the log.
-//   3. LEAN NO TRIM: gate on + freshDays<=4 -> unchanged.
-//   4. HUNGER EXEMPTION: gate on + glut + hungryStreak>=3 -> unchanged.
-//   5. EATING INTACT: 30d headless run, gate on vs off, identical seed:
-//      per-person-day ate never lower armed (eating code untouched); trim
-//      events > 0 on armed (mechanism visible).
-//   --trajectory: prints sha256 of the 40d trajectory (day, pantryKcal,
-//      roster, deaths) for the bash-orchestrated det-gate (hunk-applied +
-//      gate-off vs hunk-reverted must be byte-identical).
-//
-// Kill protocol: if the pilot sweep shows zero trim events on every pair,
-// the mechanism is invisible in practice -> this test's fixture 5 becomes
-// INFO-SKIP (exit 0) rather than a failure; the game.js hunk is reverted
-// zero-trace.
+// Assertions:
+//   1. typeof Game.surplusFeedGovernor === 'undefined'
+//   2. typeof Game._surplusFeedOn === 'undefined'
+//   3. no SURPLUSFEED / surplusFeedGovernor / _surplusFeedOn matches in
+//      src/js/ (source grep).
+//   4. a 180d SURPLUSFEED=1 run and a 180d SURPLUSFEED-unset run produce
+//      byte-identical canonical trajectories (flag has no effect).
 'use strict';
-const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { leadfeast } = require('./policies/feastscale');
 
@@ -36,150 +27,54 @@ function ok(name, cond, detail) {
   if (!cond) failures++;
 }
 
-function freshKcal(Game) {
-  return (((Game.state || {}).village || {}).pantry || [])
-    .reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
+function canon(Game) {
+  const v = (Game.state || {}).village || {};
+  const items = (v.pantry || [])
+    .map(it => [it.name, it.kcalEach, it.units, it.spoilDay, it.foodState, it.safe ? 1 : 0].join('|'))
+    .sort().join(';');
+  const roster = (v.roster || []).join(',');
+  const s = (Game.state || {}).scholar || {};
+  const trimDays = Object.keys(v._surplusFeed ? (v._surplusFeed.days || {}) : {}).length;
+  return JSON.stringify({
+    d: s.day, pk: items, r: roster, hp: s.hp, hu: Math.round(s.hunger || 0),
+    trimDays, trimState: v._surplusFeed === undefined ? 'none' : 'present',
+  });
 }
 
-async function unitFixtures() {
-  // narration: true keeps say() live so the easing beat is observable
-  // (sim-harness stubs say to a no-op by default).
-  const { Game } = await loadGame({ seed: SEED, mode: 'surplusfeed-b-test', fullTelemetry: false, narration: true });
+async function trajectory(env) {
+  if (env) process.env.SURPLUSFEED = '1'; else delete process.env.SURPLUSFEED;
+  const { Game } = await loadGame({ seed: SEED, mode: 'surplusfeed-removed-check', fullTelemetry: false });
   await setupGame(Game);
-  const v = Game.state.village;
-  const day = (Game.state.scholar || {}).day || 0;
-
-  const glutPantry = () => {
-    v.pantry = [];
-    v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: 1000, spoilDay: v.day + 3, safe: true, kg: 0.2 });
-    v.burnHistory = [24000, 24000, 24000]; // 200k / 24k = 8.3 fresh days
-  };
-  const leanPantry = () => {
-    v.pantry = [];
-    v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: 1, spoilDay: v.day + 3, safe: true, kg: 0.2 });
-    v.burnHistory = [24000, 24000, 24000]; // 200 / 24k = 0.008 fresh days
-  };
-
-  // 1. GATE-OFF INERT
+  await runDays(Game, leadfeast, { days: 180, manifest: null });
   delete process.env.SURPLUSFEED;
-  glutPantry();
-  const days = Game.pantryFreshDays();
-  ok('glut fixture reads >4 fresh days', days > 4, 'freshDays=' + days.toFixed(2));
-  const r1 = Game.surplusFeedGovernor(v, 1000);
-  ok('gate-off returns give exactly', r1 === 1000, 'got ' + r1);
-  ok('gate-off writes nothing', v._surplusFeed === undefined);
-
-  // 2. GLUT TRIMS SHARE
-  process.env.SURPLUSFEED = '1';
-  glutPantry();
-  const before = String((Game.log || []).map(String).join('\n'));
-  const r2 = Game.surplusFeedGovernor(v, 1000);
-  ok('glut trims share to half', r2 === 500, 'got ' + r2);
-  const rec = v._surplusFeed && v._surplusFeed.days && v._surplusFeed.days[day];
-  ok('trim telemetry recorded', !!(rec && rec.trim === 1 && rec.kcal === 500),
-    JSON.stringify(rec || null));
-  const after = String((Game.log || []).map(String).join('\n'));
-  ok('easing beat in log', after.includes("groaning pantry shelves") && !before.includes("groaning pantry shelves"));
-
-  // second trim same day: telemetry grows, no second beat (one-shot per stretch)
-  const logLen = (Game.log || []).length;
-  Game.surplusFeedGovernor(v, 800);
-  const rec2 = v._surplusFeed.days[day];
-  ok('telemetry accumulates', rec2.trim === 2 && rec2.kcal === 900, JSON.stringify(rec2));
-  const beatLines = String((Game.log || []).map(String).join('\n')).split("groaning pantry shelves").length - 1;
-  ok('beat is one-shot per stretch', beatLines === 1, beatLines + ' beat lines');
-
-  // 3. LEAN NO TRIM
-  leanPantry();
-  const r3 = Game.surplusFeedGovernor(v, 1000);
-  ok('lean pantry: no trim', r3 === 1000, 'got ' + r3);
-
-  // 4. HUNGER EXEMPTION
-  glutPantry();
-  const oProg = Game.progState;
-  Game.progState = () => ({ hungryStreak: 5 });
-  const r4 = Game.surplusFeedGovernor(v, 1000);
-  Game.progState = oProg;
-  ok('hunger streak exempts', r4 === 1000, 'got ' + r4);
-
-  delete process.env.SURPLUSFEED;
-}
-
-async function eatingIntact() {
-  // 5. EATING INTACT + mechanism visible: 30d, identical seed, gate on vs off.
-  const runs = {};
-  for (const side of ['control', 'armed']) {
-    if (side === 'armed') process.env.SURPLUSFEED = '1'; else delete process.env.SURPLUSFEED;
-    const { Game } = await loadGame({ seed: SEED, mode: 'surplusfeed-b-eat-' + side, fullTelemetry: false });
-    await setupGame(Game);
-    let ate = 0, vdays = 0, surplus = 0;
-    const oMeal = Game.villagerMealDay;
-    Game.villagerMealDay = function () {
-      const r = oMeal.apply(this, arguments);
-      try { ate += (r && r.ate) || 0; vdays++; } catch (e) {}
-      return r;
-    };
-    const oSur = Game.stockSurplus;
-    Game.stockSurplus = function () {
-      const r = oSur.apply(this, arguments);
-      try { if (typeof r === 'number' && r > 0) surplus += r; } catch (e) {}
-      return r;
-    };
-    await runDays(Game, leadfeast, { days: 30, manifest: null });
-    let trims = 0, trimKcal = 0;
-    try {
-      const sf = (Game.state.village || {})._surplusFeed || {};
-      for (const d of Object.keys(sf.days || {})) { trims += sf.days[d].trim; trimKcal += sf.days[d].kcal; }
-    } catch (e) {}
-    runs[side] = { atePerVday: vdays ? ate / vdays : 0, vdays, surplus, trims, trimKcal };
-  }
-  delete process.env.SURPLUSFEED;
-  const c = runs.control, a = runs.armed;
-  ok('mechanism visible (trim events > 0 on armed)', a.trims > 0, 'trims=' + a.trims);
-  ok('surplus volume armed < control', a.surplus < c.surplus,
-    'armed=' + Math.round(a.surplus) + ' control=' + Math.round(c.surplus));
-  ok('eating never lower armed (per person-day)', a.atePerVday >= c.atePerVday - 1e-9,
-    'armed=' + a.atePerVday.toFixed(1) + ' control=' + c.atePerVday.toFixed(1));
-  console.log('INFO surplus trimmed kcal=' + Math.round(a.trimKcal) + ' over 30d seed ' + SEED);
-}
-
-async function trajectory() {
-  // --trajectory: sha256 of 40d trajectory for the det-gate. Gate is OFF
-  // here; the bash orchestration diffs this against the hunk-reverted tree.
-  delete process.env.SURPLUSFEED;
-  const seeds = [6401, 6402], days = 40, series = [];
-  for (const seed of seeds) {
-    const { Game } = await loadGame({ seed, mode: 'surplusfeed-b-det', fullTelemetry: false });
-    await setupGame(Game);
-    let deaths = 0;
-    const oDie = Game.registerDeath;
-    if (typeof oDie === 'function') Game.registerDeath = function () {
-      try { deaths++; } catch (e) {}
-      return oDie.apply(this, arguments);
-    };
-    const oSleep = Game.sleep;
-    Game.sleep = function () {
-      const r = oSleep.apply(this, arguments);
-      try {
-        series.push({
-          seed, day: ((Game.state || {}).scholar || {}).day || 0,
-          pk: Math.round(freshKcal(Game)),
-          roster: (((Game.state || {}).village || {}).roster || []).length,
-          deaths,
-        });
-      } catch (e) {}
-      return r;
-    };
-    await runDays(Game, leadfeast, { days, manifest: null });
-  }
-  const h = crypto.createHash('sha256').update(JSON.stringify(series)).digest('hex');
-  console.log('TRAJECTORY ' + h + ' points=' + series.length);
+  return canon(Game);
 }
 
 (async () => {
-  if (process.argv.includes('--trajectory')) { await trajectory(); return; }
-  await unitFixtures();
-  await eatingIntact();
+  const { Game } = await loadGame({ seed: SEED, mode: 'surplusfeed-gone-probe', fullTelemetry: false });
+  ok('Game.surplusFeedGovernor is gone', typeof Game.surplusFeedGovernor === 'undefined');
+  ok('Game._surplusFeedOn is gone', typeof Game._surplusFeedOn === 'undefined');
+
+  const srcDir = path.join(__dirname, '..', 'src', 'js');
+  let hits = [];
+  for (const f of fs.readdirSync(srcDir)) {
+    if (!f.endsWith('.js')) continue;
+    const t = fs.readFileSync(path.join(srcDir, f), 'utf8');
+    for (const [i, line] of t.split('\n').entries()) {
+      if (/surplusfeed|surplusFeedGovernor|_surplusFeedOn/i.test(line)) hits.push(f + ':' + (i + 1));
+    }
+  }
+  ok('no surplusfeed references in src/js/', hits.length === 0, hits.slice(0, 5).join(' | '));
+
+  // SURPLUSFEED=1 is a dead flag: trajectories must be identical.
+  const a = await trajectory(false);
+  const b = await trajectory(true);
+  const pa = JSON.parse(a), pb = JSON.parse(b);
+  ok('SURPLUSFEED=1 trajectory identical to unset', a === b);
+  ok('no trim telemetry anywhere (trimDays=0)', pa.trimDays === 0 && pb.trimDays === 0,
+    'flag-unset trimDays=' + pa.trimDays + ' flag-set trimDays=' + pb.trimDays);
+  ok('no _surplusFeed state written', pa.trimState === 'none' && pb.trimState === 'none');
+
   console.log(failures === 0 ? 'ALL GREEN' : failures + ' FAILURES');
   process.exit(failures === 0 ? 0 : 1);
 })().catch(e => { console.error('TEST CRASH', e); process.exit(2); });

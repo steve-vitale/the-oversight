@@ -1,11 +1,14 @@
 // upkeepgate — UPKEEPGATE lever variants of the feast courtship policies (sim-upkeepgate-b, 2026-10-20).
 //
 // The parent diagnostic (evidence/2026-10-20/sim-linkdissolve-b.md, landed
-// f4098b567) confirmed the SURPLUSFEED trim -> post-court realm-dissolution
-// path as a THRESHOLD effect mediated by the POLICY's own pantry gates, not
-// the trim rate: leadcourt skips tending below 20k pantry; belongseek skips
-// tribute below 2x the week's owed tribute. The named lever is the policy
-// gate level. This module lowers those gates behind UPKEEPGATE=low.
+// f4098b567) confirmed the historical SURPLUSFEED trim -> post-court
+// realm-dissolution path as a THRESHOLD effect mediated by the POLICY's own
+// pantry gates, not the trim rate (leadcourt skipped tending below 20k
+// pantry; belongseek skipped tribute below 2x the week's owed tribute).
+// NOTE 2026-10-21 (Steve's own decision, docs/DECISIONS.md): the SURPLUSFEED
+// trim governor is REMOVED from game.js — the lever is gone, not parked.
+// The named lever here is the policy gate level. This module lowers the
+// policy's own gates behind UPKEEPGATE=low.
 //
 // DEFAULT-OFF: UPKEEPGATE unset (or anything but 'low') => pure delegation to
 // leadcourt/belongseek with the ORIGINAL gates (20k / 2x-owed) — the proof
