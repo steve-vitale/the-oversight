@@ -1060,7 +1060,9 @@
                   try {
                     var _fad = (opts.foreignAllies || {})[allyVid];
                     if (_fad && this.aidAllyDown) this.aidAllyDown(_fad.villageId, _fad.face, allyName);
-                    else if (allyVid && this.hurtVillager) this.hurtVillager(allyVid, 30, 'monster', this.sealDamageResult({}, [[allyVid, 30]]));
+                    else if (allyVid && this.hurtVillager) this.hurtVillager(allyVid, 30, 'monster', this.sealDamageResult({}, [[allyVid, 30]]),
+                      // HURTID (2026-10-22, #788): the 9th 'monster' site — thread the field-fight monster through damageContext like the game.js cluster.
+                      { monsterId: (mdef && mdef.id) || null, monsterName: mName || null });
                   } catch (e) {}
                 }
               } else {

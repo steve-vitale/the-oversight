@@ -7589,7 +7589,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.removeWorldMonster(m);
         this.say(`⚔️ ${summary}`);
       } else if (rec.outcome === 'vKill') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         if (!pViaAid) { try { this.recordWaveKill(m.id, vid, 'patrol', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {} }
         // KILL LOOT (Steve 2026-10-09): the patroller loots the body.
         let lootNote = '';
@@ -7613,7 +7613,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (this.stampKillWitnesses) this.stampKillWitnesses(vid, mName, pAllyVids); } catch (e) {}
         if (this.state.systemArrived) this.sysSay(`"OH! ${first.toUpperCase()} DID THE FIGHTING! Delegated violence! The audience is CHEERING! Style points!"`);
       } else if (rec.outcome === 'mFlee') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].sort(() => Math.random() - 0.5);
         for (const d of dirs) {
           const nx = m.tx + d[0], ny = m.ty + d[1];
@@ -7626,12 +7626,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`⚔️ ${summary} It's still out there, somewhere.`);
         this.bumpTrust(vid, 3);
       } else if (rec.outcome === 'vFlee') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         this.say(`⚔️ ${summary} — barely escaped. It's still out there.`);
         this.bumpTrust(vid, -2);
       } else if (rec.outcome === 'vDie') {
         // lethal through the real death pipeline (hurtVillager routes it)
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         this.say(`⚔️ ${first} faced ${mPhrase}... and didn't come back. The village mourns. (Leadership has stakes.)`);
         this.deathGriefBeat(vid);
         this.bumpTrust(vid, -2);
@@ -7758,12 +7758,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             || (this.data.background_survivors || []).find(x => x.id === vid) || {};
           let nm = rec.name || 'Someone';
           try { nm = this.displayName ? this.displayName(vid) : nm; } catch (e) {}
-          if (this.registerDeath) this.registerDeath({ kind: 'villager', villagerId: vid, name: nm, cause: cause || 'injuries', killerId: null });
+          if (this.registerDeath) this.registerDeath({ kind: 'villager', villagerId: vid, name: nm, cause: cause || 'injuries', killerId: null,
+            // HURTID (2026-10-22, #788): thread the fight record's monster
+            // through the optional damageContext 5th arg — unthreaded paths
+            // pass nothing and land nulls (registerDeath nulls missing opts),
+            // so no existing census row drifts.
+            monsterId: (damageContext && damageContext.monsterId) || null,
+            monsterName: (damageContext && damageContext.monsterName) || null });
         } catch (e) {}
         try { if (this.removeVillager) this.removeVillager(vid, 'killed'); } catch (e) {}
         try { if (this.seedGossip) this.seedGossip('death', { who: vid }, []); } catch (e) {}
         v.fallen = v.fallen || [];
-        v.fallen.push({ villagerId: vid, day: this.state.scholar.day, cause });
+        v.fallen.push({ villagerId: vid, day: this.state.scholar.day, cause,
+          monsterId: (damageContext && damageContext.monsterId) || null,
+          monsterName: (damageContext && damageContext.monsterName) || null });
         delete (v.positions || {})[vid];
       }
     },
@@ -19183,7 +19191,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // real wounds from the real fight — the win cost blood too.
         // (2026-10-08: these were silently dropped; villagers fought for
         // free and the gossip lied about wounds that never landed.)
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         // WAVE GATE (break-it 2026-10-09): the design promises village-wide
         // kill minimums ("village-wide, not just player") — a villager's real
         // kill proves the village can handle it, same as yours.
@@ -19233,7 +19241,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (this.stampKillWitnesses) this.stampKillWitnesses(vid, mName, wAllyVids); } catch (e) {}
       } else if (rec.outcome === 'mFlee') {
         // standing it down still cost whatever the record says it cost
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].sort(() => Math.random() - 0.5);
         for (const d of dirs) {
           const nx = m.tx + d[0], ny = m.ty + d[1];
@@ -19247,10 +19255,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.bumpTrust(vid, 2, 'stood down a monster and walked home'); } catch (e) {}
       } else if (rec.outcome === 'vFlee') {
         // real wounds from the real fight — not a scaled table number
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         tell(`🩸 ${summary}`);
       } else if (rec.outcome === 'vDie') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec); } catch (e) {}
+        try { this.hurtVillager(vid, rec.vTaken, 'monster', rec, { monsterId: m.id, monsterName: mName }); } catch (e) {}
         tell(`💀 ${summary}`);
         try { this.deathGriefBeat(vid); } catch (e) {}
       }
