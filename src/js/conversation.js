@@ -4896,6 +4896,16 @@
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
       c.choosingSubject = false; c.lastBeat = null; c.spokenBeat = null; c.replyMenu = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
       c.threadLog = []; c._beatThread = null; c._resumedOnce = false;
+      // STALE INVITE HOLD (journey-social r40 2026-10-21): c.invitePending is
+      // the intra-conversation hold for "opener owns the reply, queue the
+      // invite for the continuer". It leaked across sittings — a d13 hold
+      // that was never served re-queued at d14's open via queueTraderIntro
+      // AFTER the fresh invite was already spoken, so <goon> re-served the
+      // opener verbatim (transcript-caught: David d14 "Come see what I found").
+      // The next-sitting re-speak design lives in the pendingInvite itself
+      // (endConvo resets inv.spoken), not in this hold — clearing it here
+      // preserves that design and kills the double-serve.
+      c.invitePending = null;
       // PER-SITTING said-lines (journey-social r16 2026-10-15): the
       // no-repeat ledger (c.saidLines) persists across sittings by design
       // (pool draws rely on it), but the "I just said" fallback is only
