@@ -1,0 +1,189 @@
+{
+ "evidenceDir": "evidence/2026-10-22/perseed-windowfight-r2",
+ "summary": {
+  "n": 16,
+  "w4Unlock": 14,
+  "w5Unlock": 2,
+  "national": 6,
+  "everNational": 12,
+  "table": 13,
+  "won": 8,
+  "exiled": 0,
+  "villageLost": 12,
+  "daysSurvived": [
+   56,
+   56,
+   100,
+   104,
+   105,
+   114,
+   114,
+   115,
+   115,
+   121,
+   146,
+   172,
+   181,
+   181,
+   181,
+   181
+  ],
+  "medianSurvival": 115,
+  "maxSurvival": 181
+ },
+ "attribution": {
+  "totalEngagements": 256,
+  "unexplained": 0,
+  "unexplainedDetail": [],
+  "attributedNonFight": [
+   {
+    "r": "belongfeast/s65445",
+    "e": {
+     "d": 90,
+     "mid": "finale_opening",
+     "wave": 5,
+     "shape": "haven-TB",
+     "channel": "wave-monster",
+     "party": 2,
+     "started": false,
+     "fightIdPresent": false,
+     "outcome": null,
+     "outcomeSource": "unrecorded",
+     "killJoin": false,
+     "killBy": null,
+     "killVia": null
+    },
+    "note": "finale-node-gate-refused"
+   },
+   {
+    "r": "belongfeast/s65446",
+    "e": {
+     "d": 70,
+     "mid": "suburb",
+     "wave": 4,
+     "shape": "raid",
+     "channel": "wave-monster",
+     "party": 2,
+     "started": false,
+     "fightIdPresent": false,
+     "outcome": null,
+     "outcomeSource": "unrecorded",
+     "killJoin": false,
+     "killBy": null,
+     "killVia": null
+    },
+    "note": "muster-announcement"
+   }
+  ],
+  "instrumentErrors": 0,
+  "heraldTitanChannel": {
+   "eng": 157,
+   "refused": 157
+  },
+  "waveMonsterChannel": {
+   "eng": 99
+  },
+  "w5Engagements": 9,
+  "w5Kills": 3
+ },
+ "killTimeBearer": {
+  "wave4PlusKillsByScholarAtKill": 13,
+  "wave4PlusKillsByVillagerAtKill": 7,
+  "phantomScholarKills": 1,
+  "phantomDetail": [
+   {
+    "r": "leadfeast/s65442",
+    "k": {
+     "d": 83,
+     "mid": "algorithm",
+     "wave": 4,
+     "channel": "wave-monster",
+     "by": "jorge_silva",
+     "via": "companion",
+     "pyrrhic": false,
+     "shape": "raid",
+     "bearerOnKillDay": "owen_smith",
+     "byScholarAtKill": false,
+     "becameScholarLater": true,
+     "endRunScholarVid": "jorge_silva",
+     "hasFightId": true
+    }
+   }
+  ]
+ },
+ "unlockRate": {
+  "w4": "14/16",
+  "w5": "2/16"
+ },
+ "windowDecomposition": [
+  {
+   "run": "belongfeast/s65445",
+   "w5Day": 84,
+   "winDay": 90,
+   "winPath": "feared",
+   "winResumed": true,
+   "postWinDays": 91,
+   "windowDays": 97,
+   "endReason": "survived",
+   "w5Engagements": 3,
+   "w5Fought": 2,
+   "w5Kills": 0,
+   "foughtBy": {},
+   "windowDeaths": 34,
+   "windowDeathCauses": {
+    "combat": 24,
+    "combat (player)": 5,
+    "monster": 3,
+    "dehydration (player)": 1,
+    "starvation": 1
+   },
+   "w5KillsDetail": []
+  },
+  {
+   "run": "leadfeast/s65443",
+   "w5Day": 100,
+   "winDay": 134,
+   "winPath": "feared",
+   "winResumed": true,
+   "postWinDays": 12,
+   "windowDays": 46,
+   "endReason": "village-lost",
+   "w5Engagements": 6,
+   "w5Fought": 6,
+   "w5Kills": 3,
+   "foughtBy": {
+    "villager": 2,
+    "scholar": 1
+   },
+   "windowDeaths": 4,
+   "windowDeathCauses": {
+    "thirst": 1,
+    "combat": 2,
+    "dehydration (player)": 1
+   },
+   "w5KillsDetail": [
+    {
+     "d": 117,
+     "mid": "editor",
+     "by": "boris_kowalski",
+     "via": "player",
+     "byScholarAtKill": false
+    },
+    {
+     "d": 117,
+     "mid": "editor",
+     "by": "desmond_clarke",
+     "via": "player",
+     "byScholarAtKill": true
+    },
+    {
+     "d": 129,
+     "mid": "finale_crew",
+     "by": "visjoin_127",
+     "via": "wild",
+     "byScholarAtKill": false
+    }
+   ]
+  }
+ ]
+}
