@@ -391,7 +391,14 @@
           const key = dim + ':' + i;
           if (fired[key]) continue;
           if (before < beats[i].at && after >= beats[i].at) {
-            if (this._beatGate(beats[i].kind)) this._fireBeat(dim, i);
+            // COMBAT DEFERRAL (journey establishment r26 2026-10-22): a legend
+            // beat crossing mid-fight would narrate the haven fire ("You overhear
+            // it at the fire...") while the player fights for their life. Queue
+            // it for the endDay flush instead — the fire is where the fiction
+            // says it happens. The queue + flushLedgerBeats machinery already
+            // exists for gated beats; combat just borrows it.
+            const inCombat = !!(this.tbfight && !this.tbfight.over);
+            if (this._beatGate(beats[i].kind) && !inCombat) this._fireBeat(dim, i);
             else if (!q.some(e => e.k === key)) {
               q.push({ k: key, dim, idx: i });
               if (q.length > 12) q.shift();
