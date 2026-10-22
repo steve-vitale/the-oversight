@@ -93,13 +93,21 @@
         const anchors = [`My hands shake when I try to work.`, `I can't keep going like this.`];
         const previous = this.convoGetFavor(vid);
         let openerIndex = hh % openers.length;
-        let line = `"` + openers[openerIndex] + ' ' + details[(hh >>> 2) % 3] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
+        let detailIndex = (hh >>> 2) % 3;
+        // STUTTER GUARD (journey-scale r21 2026-10-22): opener[1] and
+        // detail[2] both carry the hunger word — "I'm going hungry — tell me
+        // you've got food to spare. I'm going hungry here." Rotate the
+        // detail when both fire; no new RNG, favor identity unchanged.
+        if (openerIndex === 1 && detailIndex === 2) detailIndex = (detailIndex + 1) % 3;
+        let line = `"` + openers[openerIndex] + ' ' + details[detailIndex] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
         // Hashing different instances can still choose identical wording.
         // Rotate an existing segment only on an actual prior-food-ask match;
         // no new RNG, favor identity, task, or need is introduced.
         if (previous && previous.kind === 'food_share' && previous.line === line) {
           openerIndex = (openerIndex + 1) % openers.length;
-          line = `"` + openers[openerIndex] + ' ' + details[(hh >>> 2) % 3] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
+          // the rotation can land the opener on 1 with detail still 2 — re-guard
+          if (openerIndex === 1 && detailIndex === 2) detailIndex = (detailIndex + 1) % 3;
+          line = `"` + openers[openerIndex] + ' ' + details[detailIndex] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
         }
         const whyBits = [
           `I haven't eaten right in days.`,
