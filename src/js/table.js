@@ -286,11 +286,20 @@
           if (t.state === 'slain') bits.push(`${t.title} fell — the coalition's work, and the System had a camera on it.`);
           else bits.push(`${t.title} came. ${t.located ? 'Named and located — the war council knew its face.' : 'Named, not yet located.'}`);
         }
+        // engagements: name up to 2. The same noun twice names ONCE with a count
+        // — never the same sentence back-to-back (journey-endgame r39
+        // sense-read: "They faced Big Loud and lived to sit here. They faced
+        // Big Loud and lived to sit here.").
+        const engArts = [];
         for (const g of (rec.engagements || []).slice(0, 2)) {
           let mname = 'something';
           try { mname = (this.monsterNoun ? this.monsterNoun(g.mid) : 'something') || 'something'; } catch (e2) {}
-          const art = (typeof this.articlePhrase === 'function') ? this.articlePhrase(mname, false) : mname;
-          bits.push(`They faced ${art} and lived to sit here.`);
+          engArts.push((typeof this.articlePhrase === 'function') ? this.articlePhrase(mname, false) : mname);
+        }
+        if (engArts.length === 2 && engArts[0] === engArts[1]) {
+          bits.push(`They faced ${engArts[0]} twice and lived to sit here.`);
+        } else {
+          for (const art of engArts) bits.push(`They faced ${art} and lived to sit here.`);
         }
         const nEng = (rec.engagements || []).length;
         if (nEng > 2) bits.push(`${nEng - 2} more of the later drafts faced besides.`);
