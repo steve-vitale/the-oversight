@@ -1,0 +1,36 @@
+PASS input sweeps present, seeds 9009-9016, 180d, FEASTSCALE_R13=1/SEATDRIVE=0
+
+== leadfeast ==
+rot/100d: control 272.1k -> armed 94.8k = 0.348x
+PASS leadfeast guardrail median survival armed>=control-10d — 131.5d vs 121d
+PASS leadfeast guardrail starvation deaths <=control+2 — 3 vs 4
+PASS leadfeast guardrail national reach >=control-2 — 7 vs 8
+PASS leadfeast guardrail no new death-cause modes (kind-filtered) — armed families ⊆ control-corpus families {sickness,combat,dehydration,starvation,alien}
+PASS belongfeast guardrail no new death-cause modes (kind-filtered) — armed families ⊆ control-corpus families {sickness,combat,dehydration,starvation,alien}
+PASS leadfeast guardrail channel laundering <=2x — max ratio ambient:villagelives=0.97x, ambient:other=0.92x, away_wild=1.06x, duty=0.29x, system=0.50x
+days: control median 121 / armed median 131.5; max 180/180
+wave reach: control max 4, armed max 4; wave>=4: 8/6
+arc: control max 4, armed max 4
+won: control 0 / armed 0; exiled: control 0 / armed 0
+armed depri: runs firing 8/8, depriKcal total 2079k
+deaths by cause (control): [["lockjaw",1],["combat",95],["dehydration",3],["monster",28],["a toad like a war drum, throat s",1],["starvation",4],["drum-belly",1],["the eater",1],["alien",1],["contest",3],["choir toad",1],["sickness",7],["a wound that wouldn't close",3],["ambush",2]]
+deaths by cause (armed):   [["ambush",4],["combat",93],["monster",24],["dehydration",1],["a toad like a war drum, throat s",1],["sickness",4],["alien",1],["the night",3],["speedbump",1],["a wound that wouldn't close",3],["the expedition",1],["lockjaw",1],["the big beast",1],["contest",2],["bad belly",1],["the heckler",1],["the landlord",1],["starvation",3]]
+
+== belongfeast ==
+rot/100d: control 184.1k -> armed 93.5k = 0.508x
+PASS belongfeast guardrail median survival armed>=control-10d — 130.5d vs 105.5d
+PASS belongfeast guardrail starvation deaths <=control+2 — 1 vs 5
+PASS belongfeast guardrail national reach >=control-2 — 3 vs 5
+PASS leadfeast guardrail no new death-cause modes (kind-filtered) — armed families ⊆ control-corpus families {sickness,combat,dehydration,starvation,alien}
+PASS belongfeast guardrail no new death-cause modes (kind-filtered) — armed families ⊆ control-corpus families {sickness,combat,dehydration,starvation,alien}
+PASS belongfeast guardrail channel laundering <=2x — max ratio ambient:villagelives=1.16x, ambient:other=1.25x, away_wild=1.19x, duty=1.36x, system=0.67x
+days: control median 105.5 / armed median 130.5; max 163/170
+wave reach: control max 4, armed max 4; wave>=4: 6/8
+arc: control max 4, armed max 4
+won: control 0 / armed 0; exiled: control 0 / armed 0
+armed depri: runs firing 8/8, depriKcal total 1732k
+deaths by cause (control): [["lockjaw",1],["combat",73],["monster",29],["a toad like a war drum, throat s",1],["starvation",5],["ambush",3],["contest",2],["sickness",8],["choir toad",1],["the night",1],["a wound that wouldn't close",2],["the callback",1]]
+deaths by cause (armed):   [["ambush",4],["combat",90],["the night",2],["monster",26],["a toad like a war drum, throat s",1],["sickness",1],["a wound that wouldn't close",2],["the reunion",1],["contest",3],["the eater",1],["glasswing darter",1],["speedbump",1],["choir toad",1],["bad belly",1],["dehydration",1],["starvation",1]]
+PASS ENGAGEMENT eased kcal>0 on >=6/16 armed runs — 16/16
+
+VERDICT: GO — primary leadfeast GO (0.348x), belongfeast GO (0.508x), guardrails all hold
