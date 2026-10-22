@@ -28482,8 +28482,109 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const vv = v || this.state.village || {};
         const day = (this.state.scholar || {}).day || 0;
         if (vv.rally && vv.rally.until >= day) mult *= 1.5;
-      } catch (e) {}
-      return this.villagerExpectedDaily(person, vid, v) * mult;
+      } catch (eT) { console.warn('[plentydepri] rally block', eT); }
+      const produced0 = this.villagerExpectedDaily(person, vid, v) * mult;
+      // PLENTYDEPRI (2026-10-21, Steve's ruling — replaces the removed
+      // SURPLUSFEED post-hoc trim): behavioral, bottom-up. When the pantry
+      // is plentiful (>4 fresh days — the SAME plenty definition the duty
+      // PRODTHROTTLE reads; hungryStreak >= 3 stands it down, so a village
+      // never eases off during a genuine hunger stretch), villagers
+      // deprioritize PRODUCTION at the decision itself: they still produce
+      // their own meal first (own need is sacred — the meal loop eats the
+      // produced food before sharing, and the easing below is built so it
+      // can never shrink that meal), but they ease off the surplus push.
+      // What they do instead is named, not idle: mending, maintenance,
+      // training, sitting by the fire. Voiced once per day (FOODVOICE2
+      // pattern) — never silent. Env-gated for measurement (PLENTYDEPRI=1);
+      // default-ON when landed. No RNG in this path (deterministic line
+      // pick, ledger-only state), so gate-off trajectories stay
+      // byte-identical.
+      try {
+        if (this._plentyDepriOn() && this.prodThrottleEngaged()) {
+          const vv = v || this.state.village || {};
+          const health = (vv.health && vv.health[vid] !== undefined) ? vv.health[vid] : 100;
+          // own-need ceiling: the meal loop's need is (kcalPerDay)×
+          // (0.7+0.3×health/100), possibly hearth-stretched DOWN 10% — this
+          // estimate is always >= the real need, so the easing can never
+          // touch their own meal.
+          const needEst = (person.kcalPerDay || 2000) * (0.7 + 0.3 * health / 100);
+          const surplus = Math.max(0, produced0 - needEst);
+          if (surplus > 0) {
+            const eased = produced0 - surplus * 0.5;
+            const d = (this.state.scholar || {}).day || 0;
+            const lg = (vv._plentyDepri = vv._plentyDepri || { days: {} });
+            const rec = (lg.days[d] = lg.days[d] || { depri: 0, kcal: 0, vids: [] });
+            rec.depri++; rec.kcal += (produced0 - eased);
+            // VOICE (SENSE-TESTING 2026-10-22): the day's line is spoken once
+            // per day by _plentyDepriDayVoice, AFTER the meal loop has run —
+            // so the speaker rotates across the day's eased villagers
+            // (day-keyed) instead of always being the first name in roster
+            // order, and the line is keyed per speaker. No RNG in this path
+            // (deterministic picks, ledger-only state), so gate-off
+            // trajectories stay byte-identical.
+            if (rec.vids.indexOf(vid) === -1) rec.vids.push(vid);
+            return eased;
+          }
+        }
+      } catch (eM) { console.warn('[plentydepri] ease hook', eM); }
+      return produced0;
+    },
+
+    // PLENTYDEPRI gate: behavioral plenty-deprioritization of production.
+    // Sim control: PLENTYDEPRI=0. Sim armed: PLENTYDEPRI=1. Browser (no
+    // process): always ON — this is real game behavior per Steve's ruling.
+    _plentyDepriOn() {
+      try {
+        if (typeof process === 'undefined') return true;
+        return !process.env || process.env.PLENTYDEPRI !== '0';
+      } catch (e) { return true; }
+    },
+
+    // PLENTYDEPRI day voice: called once per day after the meal loop, when
+    // the day's eased set is known. The speaker rotates across the day's
+    // eased villagers (day-keyed, so consecutive plenty days name different
+    // people) and the line is keyed per speaker — no two villagers read the
+    // same day the same way, and no 4-day verbatim loop. The pool names real
+    // instead-of work (mending, maintenance, training, fire-sitting, water,
+    // wood, care) — never idle, never storage work (the ruling eases storage
+    // too). Deterministic: no RNG, no state writes beyond the voiceDay
+    // guard, so gate-off trajectories stay byte-identical.
+    _plentyDepriDayVoice(v) {
+      try {
+        if (!this._plentyDepriOn()) return;
+        const vv = v || this.state.village || {};
+        const d = (this.state.scholar || {}).day || 0;
+        const lg = vv._plentyDepri;
+        if (!lg || lg.voiceDay === d) return;
+        const rec = (lg.days || {})[d];
+        const vids = (rec && rec.vids) || [];
+        if (!vids.length) return;
+        lg.voiceDay = d;
+        const speaker = vids[(d * 3 + 1) % vids.length];
+        let hk = 0;
+        try { const s = String(speaker); for (let i = 0; i < s.length; i++) hk = (hk * 31 + s.charCodeAt(i)) | 0; } catch (eH) {}
+        const pool = [
+          'eyes the groaning pantry shelves and packs light today. "No point hauling what\'ll rot. Mending the nets instead."',
+          'checks the pantry before heading out, then hangs back. "Shelves are full to bursting. Patching the boots today."',
+          'leaves the foraging basket at the door. "The pantry can\'t take more — sitting with the elders instead."',
+          'takes one look at the full shelves and unshoulders the pack. "Leave the wild standing. Hauling water for the cistern."',
+          'counts the pantry jars twice, then sets down the gathering sack. "We\'re eating well. Sharpening the skinning knives instead."',
+          'lingers by the full pantry and laughs. "Full shelves, full bellies. Mending the palisade today — the fence won\'t fix itself."',
+          'peeks into the pantry, then turns the foraging party back. "Plenty for days. Teaching the kids snares instead — they\'ll need to know."',
+          'rests a hand on the pantry door, satisfied. "No one\'s going hungry this week. Sitting with the fever cases instead — someone should."',
+          'surveys the stacked shelves and nods. "The wild can rest. Splitting firewood instead — winter comes whether we like it or not."',
+          'taps the pantry\'s fullest jar. "More than we can eat before it turns. Rendering fat instead — the lamps won\'t fill themselves."',
+          'stands in the pantry doorway a moment. "Look at all this. Tending the fire today — someone ought to keep the stories."',
+          'weighs the day\'s basket against the pantry shelves and puts it down. "Enough. Carving bowls instead — we\'re down to the cracked ones."',
+        ];
+        const line = pool[((d * 5 + hk) % pool.length + pool.length) % pool.length];
+        let first = 'Someone';
+        try {
+          const p = this.getPerson ? this.getPerson(speaker) : null;
+          first = String((p && p.name) || 'Someone').split(' ')[0];
+        } catch (eN) {}
+        this.say('🍽️ ' + first + ' ' + line);
+      } catch (eV) { console.warn('[plentydepri] day voice', eV); }
     },
 
     // HAVEN ROLES (Steve 2026-10-09): "Haven contributions count." Cooking,
@@ -29554,6 +29655,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const needBase = (person.kcalPerDay || 2000) * (rationNow ? 0.5 : 1);
         if (!r.fasting && r.ate < needBase * 0.6) anyStarving = true;
       }
+      // PLENTYDEPRI day voice (2026-10-22): the day's eased set is known now
+      // that the meal loop has run — one line, rotating speaker, per-speaker
+      // line key. Narration only: no state, no RNG.
+      try { this._plentyDepriDayVoice(v); } catch (ePV) { console.warn('[plentydepri] day voice call', ePV); }
       // HONEST BURN (2026-10-08, refined r3): the player's trust-scaled meal
       // (villageMeal) burns the pantry but the player is not in this loop
       // (parity) — count it so the pantry clock stays honest. Rolling 7 days.
