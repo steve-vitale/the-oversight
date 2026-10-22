@@ -291,8 +291,21 @@ const Game = globalThis.Scattering.Game;
     // then the player moves on (non-'goon'): the ask beat is discarded and
     // heldAsk MUST clear, or the winddown gate blocks forever.
     {
-      const vhx = D;
-      Game.startConvo(vhx);
+      // PLANT ON A VERBAL THREAD (journey-scale r20 2026-10-22): this guard's
+      // subject is the verbal continuer ('goon' reveals the surviving goodbye).
+      // On the nonverbal thread there is no 'goon' in the UI — every choice is
+      // a gesture, and gestures ARE the continuer there: the r19 NV winddown
+      // delivery surfaces a queued winddown beat on the next gesture aloud
+      // (proven by scripts/test-nvwinddown-20261021.js). Planting here must
+      // use a verbal thread, or the scenario contradicts that fix.
+      let vhx = null;
+      for (const cand of [D, A, B, C, E, F]) {
+        Game.startConvo(cand);
+        const th = (Game.convoGet(cand) || {}).thread;
+        if (th === 'nonverbal') { try { Game.endConvo(cand, 'left'); } catch (e) {} continue; }
+        vhx = cand; break;
+      }
+      ok(!!vhx, 'plant scenario found a verbal-thread villager');
       const chx = (Game.convoUI(vhx).choices || []).map(c => c.id);
       const cx = Game.convoGet(vhx);
       cx.heldBeats.push({ text: '"So — what scares you?"', ask: { id: 'qtest', q: 'what scares you?', answers: [{ id: 'a1', label: '"Plenty."' }] } });

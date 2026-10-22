@@ -199,7 +199,9 @@ async function fixtureGame(opts) {
     for (const h of hunks) {
       for (const m of h.matchAll(/^[-+]\s*(table\w+|_\w+)\s*\(/gm)) touchedFns.add(m[1]);
     }
-    const auditFns = new Set(['tableDeedRecords', 'tableDeedLines', 'tableScene']);
+    // r20 (2026-10-22): tableWithdrawLine is the withdrawal-honesty voicing
+    // (pure string builder, no state writes — same class as tableSeatLine).
+    const auditFns = new Set(['tableDeedRecords', 'tableDeedLines', 'tableScene', 'tableWithdrawLine']);
     const stray = [...touchedFns].filter(f => !auditFns.has(f) && !f.startsWith('_'));
     ok(stray.length === 0, 'E3 no combat/economy/AI functions touched', JSON.stringify(stray));
   }

@@ -80,15 +80,35 @@ async function main() {
   const pg3 = Game.progState();
   if (pg3.tableWaiting !== true) fails.push(`tableWaiting not restored by re-fire: ${pg3.tableWaiting}`);
 
-  // --- honesty note: does the withdrawal copy name the failed bar? (documented, not a fail) ---
+  // --- honesty (r20, 2026-10-22): the withdrawal copy must name the failed
+  // bar — the old stock "deeds are not all done" lied when integration alone
+  // slipped (the r19 sim finding). This is a fail, not a note.
   const namesBar = /integration|neural|slip/i.test(wdText);
-  console.log(`withdrawal names the failed bar: ${namesBar}`);
+  if (!namesBar) fails.push('withdrawal copy does NOT name the failed bar; captured:\n' + sayCap.slice(0, 6).join('\n---\n'));
+
+  // --- tableWithdrawLine unit voicing (proof-testable, no modal flow) ---
+  const wl = Game.tableWithdrawLine.bind(Game);
+  const slipSeat = { seat: 'none', detail: { w1: 4, w2: 4, w3: 3, w4: 0, w5: 0, contestsN: 2, crisesN: 2, rank: 'regional', stage: 1, foodDeeds: true } };
+  const slipLine = wl(slipSeat);
+  if (!/integration too shallow \(stage 1\)/.test(slipLine)) fails.push('withdrawLine misses the integration slip: ' + slipLine.slice(0, 140));
+  if (/THE DEEDS ARE NOT ALL DONE/i.test(slipLine)) fails.push('withdrawLine blames the deeds on an integration slip: ' + slipLine.slice(0, 140));
+  const multiSeat = { seat: 'none', detail: { w1: 2, w2: 4, w3: 3, contestsN: 1, crisesN: 2, rank: 'village', stage: 1, foodDeeds: false } };
+  const multiLine = wl(multiSeat);
+  for (const bit of ['wave-blood unpaid (2/4, 4/4, 3/3)', 'fewer than two contests survived (1)', 'standing too low (village)', 'integration too shallow (stage 1)', 'the food-thesis unproven'])
+    if (!multiLine.includes(bit)) fails.push('withdrawLine drops a missing bar: ' + bit);
+  // empty detail: every bar reads unmet, so all of them are named honestly
+  const bareLine = wl({ seat: 'none', detail: {} });
+  if (!/wave-blood unpaid \(0\/4, 0\/4, 0\/3\)/.test(bareLine)) fails.push('withdrawLine hides unmet bars on empty detail: ' + bareLine.slice(0, 140));
+  // defensive fallback only: a 'none' seat whose detail passes every bar
+  // (cannot come from tableSeat — lesser would have been 'lesser')
+  const defensive = wl({ seat: 'none', detail: { w1: 4, w2: 4, w3: 3, contestsN: 2, crisesN: 2, rank: 'national', stage: 2, foodDeeds: true } });
+  if (!/the deeds are not all done/.test(defensive)) fails.push('withdrawLine loses the generic fallback: ' + defensive.slice(0, 140));
 
   if (fails.length) {
     console.log('FAILURES:');
     for (const f of fails) console.log('  ' + f);
     process.exit(1);
   }
-  console.log('GREEN: seat slips lesser->none on integration loss; the withdrawal beat fires aloud with exact state transitions; the re-fire re-extends the invitation aloud.');
+  console.log('GREEN: seat slips lesser->none on integration loss; the withdrawal beat fires aloud naming the failed bar, with exact state transitions; the re-fire re-extends the invitation aloud.');
 }
 main().catch(e => { console.error('PROOF ERROR:', e); process.exit(2); });

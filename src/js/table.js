@@ -124,6 +124,36 @@
       return `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0})${extra}, ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
     },
 
+    // tableWithdrawLine: the withdrawal beat names the failing bar aloud,
+    // extracted so the voicing is proof-testable without running the dawn flow.
+    // journey-scale r20 (2026-10-22): the old copy always blamed the deeds —
+    // but a seat can slip on integration stage while every deed stands (the
+    // r19 withdrawn-seat sim proved it live). The beat must name the real
+    // loss, never a stock excuse — the System knows exactly what slipped.
+    // With no readable detail it falls back to the old generic line.
+    tableWithdrawLine(seat) {
+      const d = (seat && seat.detail) || {};
+      const missing = [];
+      try {
+        const w1 = d.w1 | 0, w2 = d.w2 | 0, w3 = d.w3 | 0;
+        if (w1 < 4 || w2 < 4 || w3 < 3)
+          missing.push(`wave-blood unpaid (${w1}/4, ${w2}/4, ${w3}/3)`);
+        if ((d.contestsN | 0) < 2)
+          missing.push(`fewer than two contests survived (${d.contestsN | 0})`);
+        if ((d.crisesN | 0) < 2)
+          missing.push(`fewer than two crises weathered (${d.crisesN | 0})`);
+        const rank = d.rank || 'village';
+        if (rank !== 'regional' && rank !== 'national' && rank !== 'global')
+          missing.push(`standing too low (${rank})`);
+        if ((d.stage | 0) < 2)
+          missing.push(`integration too shallow (stage ${d.stage | 0})`);
+        if (!d.foodDeeds)
+          missing.push('the food-thesis unproven');
+      } catch (e) {}
+      const named = missing.length ? missing.join('; ') : 'the deeds are not all done';
+      return `◈ THE TABLE — the ring of pale light flickers... and does not come. The System is embarrassed. "YOUR CASE IS NOT COMPLETE. ${named}. WE WILL... RESCHEDULE." The table is withdrawn — for now. It will be set again when the case is complete.`;
+    },
+
     // TABLE-DEED VOICE (2026-10-21, backlog #738): the audit never voiced
     // the village's wave-4+ deeds — villages reached the table and the
     // fiction said nothing about the war path either way. The audit now
@@ -675,7 +705,7 @@
       const seat = this.tableSeat();
       if (seat.seat === 'none') {
         pg.tableWaiting = false;
-        this.say('◈ THE TABLE — the ring of pale light flickers... and does not come. The System is embarrassed. "YOUR CASE IS NOT COMPLETE. THE DEEDS ARE NOT ALL DONE. WE WILL... RESCHEDULE." The table is withdrawn — for now. It will be set again when the deeds are done.');
+        this.say(this.tableWithdrawLine(seat));
         try { this.save(); } catch (e) {}
         return;
       }
