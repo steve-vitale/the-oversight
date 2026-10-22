@@ -1,0 +1,54 @@
+SMOKE: seed 3605, 10 days (self-test: conflict seeding + conflict snapshots + cold-competent convos)
+SMOKE: seeded=1 confSnaps=10 convos=16 feudConvos=16 avgTrust=31.3
+SMOKE SELF-TEST: PASS (conflicts seeded, snapshots complete, cold-competent convos ran)
+seed 3601: days=141 alive=9 convos=276 (feud=276) gossipPicks=3 dryRate=2.36/12
+  conflicts: seeded=2 revealed=2 scenes={"reveal":2,"incident-eatsapart":2,"favoritism-known":24,"incident-message":1,"stage1":1,"incident-argument":1,"stage2":1,"incident-cornered":1,"mediation":1}
+  L2' repeats: 12
+    d14 David t1 <goon> [opener-reserve]: "Come see what I found. You won't believe it."
+    d38 David t1 <goon> [opener-reserve]: "Help me haul something back? Too much for one."
+    d53 Wei t6 <goon> [opener-reserve]: "Help me haul something back? Too much for one."
+    d56 Wei t6 <goon> [opener-reserve]: "Come see what I found. You won't believe it."
+    d69 Marcus t1 <goon> [opener-reserve]: "Come get air with me. I need to think out loud."
+    d74 Marcus t1 <goon> [opener-reserve]: "Come get air with me. I need to think out loud."
+  L3: {"bonds":90,"deepBonds":32,"betrayalCases":1,"mootsConvened":1,"mootsObserved":1,"gossipConvos":7,"gossipPicks":3,"avgTrust":"81.7","confSeeded":2}
+  regression: P1-streaks=2 P2-reactDry=261
+seed 3602: days=140 alive=8 convos=276 (feud=276) gossipPicks=3 dryRate=2.57/12
+  conflicts: seeded=2 revealed=2 scenes={"reveal":2,"incident-message":2,"incident-eatsapart":3,"favoritism-known":5,"incident-cornered":2,"stage1":1,"mediation":1,"stage2":1,"incident-argument":1}
+  L2' repeats: 1
+    d107 Grace t2 <goon> [opener-reserve]: "Walk with me? I want another pair of eyes on something."
+  L3: {"bonds":58,"deepBonds":37,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":44,"gossipPicks":3,"avgTrust":"90.1","confSeeded":2}
+  regression: P1-streaks=10 P2-reactDry=270
+seed 3603: days=141 alive=7 convos=276 (feud=276) gossipPicks=3 dryRate=2.25/12
+  conflicts: seeded=2 revealed=2 scenes={"reveal":2,"favoritism-known":20,"stage1":2,"incident-eatsapart":3,"incident-cornered":2,"stage2":2,"incident-message":1,"incident-argument":3,"mediation":2}
+  L2' repeats: 3
+    d88 Hassan t1 <goon> [opener-reserve]: "Come get air with me. I need to think out loud."
+    d127 Jonathan t1 <goon> [opener-reserve]: "Help me haul something back? Too much for one."
+    d129 Sofia t1 <goon> [opener-reserve]: "Walk with me? I want another pair of eyes on something."
+  L3: {"bonds":82,"deepBonds":43,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":38,"gossipPicks":3,"avgTrust":"78.3","confSeeded":2}
+  regression: P1-streaks=2 P2-reactDry=254
+seed 3604: days=141 alive=8 convos=276 (feud=276) gossipPicks=3 dryRate=2.39/12
+  conflicts: seeded=1 revealed=1 scenes={"favoritism-unknown":1,"reveal":1,"stage1":1,"stage2":1,"favoritism-known":3,"incident-eatsapart":1,"incident-message":1,"mediation":1}
+  L2' repeats: 6
+    d4 Hadiza t2 <goon> [opener-reserve]: "Walk my trap line with me? Extra hands, extra eyes."
+    d52 Ursula t6 <goon> [opener-reserve]: "Help me haul something back? Too much for one."
+    d54 Ursula t2 <goon> [opener-reserve]: "Come see what I found. You won't believe it."
+    d61 Hadiza t5 <goon> [opener-reserve]: "Help me haul something back? Too much for one."
+    d67 Osman t2 <goon> [opener-reserve]: "Come get air with me. I need to think out loud."
+    d100 Rosa t8 <dlg:favor_requirements>: I've told you three times now — Move next to them, on the same side of the Haven door, to help.
+  L3: {"bonds":74,"deepBonds":40,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":24,"gossipPicks":3,"avgTrust":"78.5","confSeeded":1}
+  regression: P1-streaks=3 P2-reactDry=285
+  seed 3601: seeded=2 revealed=2 incidents=5 staged=1 resolved=1 -> ALIVE
+  seed 3601: days=141 alive=9 avgTrust=81.7 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3602: seeded=2 revealed=2 incidents=8 staged=1 resolved=2 -> ALIVE
+  seed 3602: days=140 alive=8 avgTrust=90.1 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3603: seeded=2 revealed=2 incidents=9 staged=2 resolved=2 -> ALIVE
+  seed 3603: days=141 alive=7 avgTrust=78.3 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 3604: seeded=1 revealed=1 incidents=2 staged=1 resolved=1 -> ALIVE
+  seed 3604: days=141 alive=8 avgTrust=78.5 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+M1 (instrument complete + >=1 conflict seeded on >=3/4 seeds): GO; seeded: 4/4 [3601,3602,3603,3604] — GO
+M2 (quiet feuds come alive: revealed AND (incident OR stage OR resolved) on >=3/4 seeded runs): 4/4 [3601,3602,3603,3604] — GO
+M4 (guardrail alive>=5, not scattered): 4/4 [3601,3602,3603,3604] — GO
+F1 (NPC<->NPC bond edges, final snap): s3601:75p/27d (all 90p) s3602:47p/30d (all 58p) s3603:69p/32d (all 82p) s3604:60p/33d (all 74p)
+F2 (favoritism scenes, informational): s3601:24 (d11,d18,d19,d25,d26,d32,d35,d39,d40,d42,d49,d56,d63,d70,d77,d84,d91,d98,d105,d112,d119,d126,d133,d140) s3602:5 (d9,d12,d17,d25,d33) s3603:20 (d5,d11,d12,d19,d20,d26,d27,d28,d35,d36,d38,d42,d43,d50,d58,d66,d74,d81,d88,d96) s3604:4 (d8,d15,d19,d22)
+F3 (mediation-opportunity per conflict: revealDay, 55/55day, festerDays, resolution): s3601:david_kim|gen_0tlzg54 rev=7 55=41 fester=35d ->mediation-likely | s3601:gen_ho2yrqt|rosa_mendez rev=9 55=never fester=132d ->never | s3602:gen_cz3uq1m|gen_hupie31 rev=7 55=16 fester=10d ->mediation-likely | s3602:gen_xg1op4n|jesse_cortez rev=4 55=never fester=37d ->dead-party/quiet | s3603:benoit_lambert|gen_m07vgzk rev=5 55=99 fester=95d ->mediation-likely | s3603:gen_lmzfts8|gen_wfjg0yy rev=6 55=42 fester=37d ->mediation-likely | s3604:gen_363s2q2|thabo_maseko rev=10 55=21 fester=14d ->mediation-likely
+F4 (cold refusals, convos where dlg:commit/dlg:help was offered and skipped): s3601:60 s3602:29 s3603:47 s3604:60

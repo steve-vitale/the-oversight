@@ -8,6 +8,13 @@ const {chooseConversationChoice}=require('./conversation-pages');
 const { vinebank } = require('./vinebank'); // materials-banking arm (VINEBANK=1, default OFF)
 const snareteach = require('./snareteach'); // teach-drive arm (SNARETEACH=1, default OFF)
 
+// COMPETENT_WARM (journey social r39 2026-10-21): warm acts (donations,
+// promise-keeping, comfort, answering begs) are part of the competent base.
+// Setting COMPETENT_WARM=0 strips them so a driver can play a competent but
+// socially distant player. Default ON — every other consumer of this policy
+// is byte-identical.
+const COMPETENT_WARM = process.env.COMPETENT_WARM !== '0';
+
 // DAWNREFUSE (refusal-spam fix 2026-10-15): per-dawn refusal-voice flags.
 // When the scholar's hands can't reach the pantry, every iteration of the
 // guard loop in competentEat would voice the engine's honest refusal
@@ -2706,8 +2713,9 @@ const competent = {
     } catch (e) { ctx.thirstHomeErr = String(e && e.message).slice(0, 80); }
     // KEEP YOUR WORD (journey landing r20): obligations before outings —
     // a competent player handles their promises first, from the morning
-    // buffer, before the day's travel scatters everyone.
-    keepPromises(Game, ctx);
+    // buffer, before the day's travel scatters everyone. COMPETENT_WARM=0:
+    // the cold player makes no promises worth keeping and keeps none.
+    if (COMPETENT_WARM) keepPromises(Game, ctx);
     const rec = recovering(Game, ctx);
     if (rec) recoverStep(Game, ctx);
     // the honest food run: forage, sort the haul at camp, sow seed first,
@@ -2721,7 +2729,8 @@ const competent = {
     keepKnife(Game, ctx); // knap the stone knife FIRST (food r6: wins the vine race)
     cleanCatch(Game, ctx); // clean the trapline's catch before it rots (food r5)
     trySow(Game, ctx); // sow from identified pack plants when plots wait
-    donateHaul(Game, ctx); // the rest feeds the village
+    // COMPETENT_WARM=0: the cold player keeps their own haul — no donations.
+    if (COMPETENT_WARM) donateHaul(Game, ctx); // the rest feeds the village
     if (!rec) counterPlay(Game, ctx); // gardens / fishing / traps when the land thins
     // VINEBANK (materials-banking 2026-10-14): spend the bank through the
     // 2+2 blind band — one honest attempt per day, below the base 3+3 band.
@@ -2731,7 +2740,8 @@ const competent = {
     if (!rec) vinebank.blindBand(Game, ctx);
     if (!rec) workTrapline(Game, ctx); // craft + set the snare line when known (longsim combat r2)
     // donate surplus beyond a 2-day personal buffer (hall-gated: see donateHaul)
-    try {
+    // COMPETENT_WARM=0: the cold player keeps the surplus too.
+    if (COMPETENT_WARM) try {
       const hallGated = Game.havenStoresAccess && Game.havenStoresAccess() === 'none';
       if (!hallGated) {
         const s = Game.state.scholar;
@@ -2755,7 +2765,9 @@ const competent = {
     talkRound(Game, ctx);
     deepTalk(Game, ctx); // hold real conversations (blitz simpolicy 2026-10-13, COMPETENT_TALK=1)
     lootCorpses(Game, ctx); // strip the dead after fights
-    answerAidBeats(Game, ctx); // the fire network: accept offers, answer begs
+    // the fire network: accept offers, answer begs. COMPETENT_WARM=0: the
+    // cold player walks past the fire network — no answering begs.
+    if (COMPETENT_WARM) answerAidBeats(Game, ctx);
     // ASK ABOUT BEAST TRICKS (longsim combat 2026-11): a curious player asks
     // when the village knows something. counterTeachable() gates the topic.
     try {
@@ -2790,7 +2802,8 @@ const competent = {
     // idempotent: kept promises are skipped, open ones retried; the pack
     // holds the day's haul for food promises the morning buffer couldn't
     // cover, and a villager who was away all morning may be back.
-    keepPromises(Game, ctx);
+    // COMPETENT_WARM=0: the cold player keeps nothing.
+    if (COMPETENT_WARM) keepPromises(Game, ctx);
     // EAT THE DAY'S HAUL (longsim food r2 2026-10-11): daily forages AFTER
     // the last upkeep, so the upkeep's competentEat never sees the fresh
     // haul — the player was sleeping (and starving) on foraged food still
