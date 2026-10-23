@@ -303,9 +303,21 @@
             } catch (e2) { who = 'Haven'; }
             return `On day ${k.day}, ${who} put down ${art}`;
           };
-          let ks = `◈ THE WAR PATH — ${framings[frame]} ${nameOf(kills[0])}.`;
-          if (kills.length === 2) ks += ` ${nameOf(kills[1])}.`;
-          else if (kills.length > 2) ks += ` ${nameOf(kills[1])} — and ${kills.length - 2} more tooth${kills.length - 2 === 1 ? '' : 's'} after.`;
+          // The same tooth twice back-to-back (two kills, same day/killer/
+          // monster — e.g. two Big Louds in one fight) names ONCE with a
+          // count — never the same sentence twice (the r39 engagements rule;
+          // journey-endgame r43: "On day 108, Roman put down Big Loud. On day
+          // 108, Roman put down Big Loud — and 3 more tooths after.").
+          const n0 = nameOf(kills[0]);
+          let ks;
+          if (kills.length >= 2 && nameOf(kills[1]) === n0) {
+            ks = `◈ THE WAR PATH — ${framings[frame]} ${n0} twice.`;
+            if (kills.length > 2) ks += ` ${kills.length - 2} more tooth${kills.length - 2 === 1 ? '' : 's'} after that.`;
+          } else {
+            ks = `◈ THE WAR PATH — ${framings[frame]} ${n0}.`;
+            if (kills.length === 2) ks += ` ${nameOf(kills[1])}.`;
+            else if (kills.length > 2) ks += ` ${nameOf(kills[1])} — and ${kills.length - 2} more tooth${kills.length - 2 === 1 ? '' : 's'} after.`;
+          }
           lines.push(ks);
         }
       } catch (e) {}
@@ -929,8 +941,14 @@
         // the leaning band, not the binary ledger branch — a grey-band walker
         // hearing "the light road is open" / "the dark road is open" is
         // misvoiced. The middle gets its own road.
+        // DARK (journey-endgame r43 2026-10-23): the r5 patch only covered
+        // grey — a dark-band relay walker with a light ledger (protected >
+        // killed, food shared, promises kept) still heard "the light road is
+        // open" while walking the dark merge (seed 85012). The GRADIENT law
+        // says the ledger-read line voices the BAND for relay: middle for
+        // grey, the band itself otherwise.
         let road = branch.branch;
-        try { if (pathId === 'relay' && T.band === 'grey') road = 'middle'; } catch (e) {}
+        try { if (pathId === 'relay') road = T.band === 'grey' ? 'middle' : (T.band || branch.branch); } catch (e) {}
         this.say(`The table has read your ledger. ${noteStr.charAt(0).toUpperCase() + noteStr.slice(1)}. The ${road} road is open.`);
       }
       try { this.metaNoteTable && this.metaNoteTable(pathId); } catch (e) {}

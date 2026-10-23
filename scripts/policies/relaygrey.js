@@ -89,7 +89,14 @@ function backfiresOf(Game) { try { return ((((Game.state || {}).scholar || {}).r
 // NOTHERMO seed proved the meter is nearly inert (1 commune, 0 reroutes —
 // the lean sources rarely fire); FORCEDRIFT supplies real drift pressure so
 // the voicing itself (relayLeanNoticed on band crossings) gets tested.
-function forceDrift() { return process.env.RELAYGREY_FORCEDRIFT === '1'; }
+// FORCEDRIFT-DEEP (r43): RELAYGREY_FORCEDRIFT=2 forces TWO efficient reroutes
+// per day (~-4 lean/day) — tests whether the voicing keeps firing across
+// repeated crossings, not just the first. Policy-side, default-off, zero
+// src/js.
+function forceDrift() {
+  const v = process.env.RELAYGREY_FORCEDRIFT;
+  return v === '2' ? 2 : (v === '1' ? 1 : 0);
+}
 function noThermo() { return process.env.RELAYGREY_NOTHERMO === '1'; }
 
 // answerPendingScene(Game, RG): the pragmatist's answer — the choice with
@@ -194,9 +201,14 @@ function relayGreyDaily(Game, ctx) {
       if (delayed >= 2 && !floored) { Game.relayReroute('efficient'); RG.rerouteEff = (RG.rerouteEff | 0) + 1; reroutedToday = true; }
       else if (!nt && !fd && lean > 10 && !floored) { Game.relayReroute('efficient'); RG.rerouteEff = (RG.rerouteEff | 0) + 1; reroutedToday = true; }
       else if (!nt && !fd && lean < -10) { Game.relayReroute('honest'); RG.rerouteHon = (RG.rerouteHon | 0) + 1; reroutedToday = true; }
-      // FORCEDRIFT: one efficient reroute per day (-2 lean) — real drift
-      // pressure so the band-crossing voicing has something to voice.
+      // FORCEDRIFT: forced efficient reroutes per day (fd = 1 or 2) — real
+      // drift pressure so the band-crossing voicing has something to voice.
+      // fd=1 keeps r41's exact behavior (skip when real work already
+      // rerouted); fd=2 (r43 deep) adds a second forced reroute.
       if (fd && !reroutedToday && !floored) {
+        try { if (Game.relayReroute('efficient') === 'rerouted') { RG.rerouteEff = (RG.rerouteEff | 0) + 1; RG.forcedDrift = (RG.forcedDrift | 0) + 1; } } catch (e) { RG.rgError = (RG.rgError | 0) + 1; }
+      }
+      if (fd >= 2 && !floored) {
         try { if (Game.relayReroute('efficient') === 'rerouted') { RG.rerouteEff = (RG.rerouteEff | 0) + 1; RG.forcedDrift = (RG.forcedDrift | 0) + 1; } } catch (e) { RG.rgError = (RG.rgError | 0) + 1; }
       }
     }
