@@ -1,15 +1,9 @@
 === seed 60004 day 80 — conversation with Fumio (app_mgpspiht269) ===
-occupation=hunter temperament=mischievous trust=77 dead=false mood=steady
-want: curious (stage 1)
+occupation=hunter temperament=mischievous trust=85 dead=false mood=grieving
+want: seek_comfort (stage 0)
 
-THEM: "Where are you from — originally? Before all this."
-(turn0 choices: ans:q_origin:a_tell, ans:q_origin:a_vague, ans:q_origin:a_deflect, deflect_q, leave, silence)
-YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
-THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
-(want=curious stage=2)
-YOU: [goon] "Wait, what? Go on —"
-THEM: "Me? Tokyo, Japan. I still dream in its weather — rain on a tin roof, that specific smell. I wake up here and for a second I'm furious at the sky for the swap."
-(want=curious stage=2)
+THEM: "It's quiet today. Wrong kind of quiet. Doesn't matter now."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
 YOU: (leave)
-closing line: "Take care of yourself."
-want final: id=curious stage=3 resolution=engaged
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+want final: id=seek_comfort stage=3 resolution=unestablished

@@ -1,9 +1,18 @@
-=== seed 60002 day 120 — conversation with Luis (luis_fernandez) ===
-occupation=mason temperament=steady trust=90 dead=false mood=cheerful
-want: ask_favor (stage 2, fromSeed)
+=== seed 60002 day 120 — conversation with Lena (lena_ruiz) ===
+occupation=ER nurse temperament=steady trust=22 dead=false mood=steady
+want: curious (stage 1)
 
-THEM: "Can I tell you something? I'm saving a candy bar for when things get better. I haven't told anyone."
-(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+THEM: "What's something you're good at that nobody here knows about?"
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:honest_pass, ans:q_skill:a_deflect, leave, silence)
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "I can do making do. Not well — well enough that nobody's died from it yet. That's my whole résumé now: nobody's died from it yet."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(want=curious stage=2)
 YOU: (leave)
-closing line: "Alright. Back to work."
-want final: id=ask_favor stage=3 resolution=stated
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

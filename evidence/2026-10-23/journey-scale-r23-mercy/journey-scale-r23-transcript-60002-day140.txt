@@ -1,0 +1,15 @@
+=== seed 60002 day 140 — conversation with Onni (onni_korhonen) ===
+occupation=chimney sweep temperament=cautious trust=20 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's your first memory? Like, ever. The earliest thing. Just my read."
+(turn0 choices: ans:q_first_memory:a_tell, ans:q_first_memory:a_vague, ans:q_first_memory:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Now then — Mine's Helsinki, Finland, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Think about what I said. I'll be thinking about what you said."
+want final: id=curious stage=3 resolution=engaged

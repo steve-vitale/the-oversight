@@ -1,9 +1,15 @@
 === seed 60003 day 80 — conversation with Lucia (gen_d92g4s9) ===
 occupation=welder temperament=restless trust=90 dead=false mood=steady
-want: curious (stage 0, fromSeed)
+want: ask_favor (stage 2, fromSeed)
 
-THEM: Do something worth retelling. That's the whole plan.
-(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+THEM: "About the food I needed — I still haven't found anyone. Any chance?"
+(turn0 choices: goon, dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "No sound. That's the Night Court telling you it's about to move. It hunts at night — give the dark a wide berth."
+(want=ask_favor stage=3)
 YOU: (leave)
-closing line: "See you at the fire."
-want final: id=curious stage=3 resolution=unestablished
+closing line: "Okay! Moving! Talk later — probably while moving!"
+want final: id=ask_favor stage=3 resolution=promised

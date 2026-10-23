@@ -1,12 +1,21 @@
-=== seed 60003 day 120 — conversation with Elena (elena_petrova) ===
-occupation=Baker temperament=warm trust=30 dead=false mood=grieving
-want: ask_favor (stage 2, fromSeed)
+=== seed 60003 day 120 — conversation with Lucia (gen_d92g4s9) ===
+occupation=welder temperament=restless trust=97 dead=false mood=steady
+want: curious (stage 1)
 
-THEM: "I asked Weerachai about this wound — Weerachai's gone. Still need hands. Are you in?"
-(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
-YOU: [dlg:commit] "I’ll come back to help."
-THEM: "Careful with it. And — thank you."
-(want=ask_favor stage=3)
+THEM: "So what's your plan here? Just... get through it? That's the priority."
+(turn0 choices: ans:q_plan:a_survive, ans:q_plan:a_lead, ans:q_plan:a_find, ans:q_plan:a_quiet, leave, silence)
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Hah. Honest. I can work with honest."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Mine's simple: learn one useful thing a week. This week it's carpentry. A plan's just a direction you argue with."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
 YOU: (leave)
-closing line: "Thanks. I just... need some air."
-want final: id=ask_favor stage=3 resolution=promised
+closing line: "Talk later? I'm already thinking about three other things."
+want final: id=curious stage=3 resolution=engaged

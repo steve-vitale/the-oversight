@@ -1,12 +1,18 @@
-=== seed 60002 day 80 — conversation with Wei (chen_wei) ===
-occupation=Beekeeper temperament=gentle trust=40 dead=false mood=steady
-want: ask_favor (stage 1)
+=== seed 60002 day 80 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=32 dead=false mood=steady
+want: curious (stage 1, fromSeed)
 
-THEM: "I'm sorry — I'm achy and wrung out, barely keeping food down. I need help. Please."
-(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, goon, dlg:subject, leave, silence)
-YOU: [dlg:commit] "I’ll come back to help."
-THEM: "Thank you. Just — thank you. I'll be here, resting."
-(want=ask_favor stage=3)
+THEM: "About the last time you laughed — When's the last time you really laughed? Rest when you can."
+(turn0 choices: ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, ans:q_laugh_memory:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there. You're doing fine."
+(want=curious stage=2)
 YOU: (leave)
-closing line: "Go gently, okay?"
-want final: id=ask_favor stage=3 resolution=promised
+closing line: "This was nice. Don't be a stranger — we're eight people, it's hard."
+want final: id=curious stage=3 resolution=engaged

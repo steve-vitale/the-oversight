@@ -1,10 +1,15 @@
-=== seed 60004 day 100 — conversation with Kairat (gen_wdwre1a) ===
-occupation=pottery instructor temperament=mischievous trust=90 dead=false mood=grieving
-want: none (stage 0)
+=== seed 60004 day 100 — conversation with Jesse (jesse_cortez) ===
+occupation=line cook temperament=withdrawn trust=21 dead=false mood=cheerful
+want: curious (stage 1)
 
-THEM: Kairat speaks only 🇷🇺 Russian. No shared words at all — just eyes, hands, and patience.
-«Ничего не понимаю. Совсем ничего!» (I don't understand anything. Nothing at all! — you're fairly sure)
-(turn0 choices: dlg:subject, leave, silence)
+THEM: "…What do you make of all this? Really."
+(turn0 choices: ans:q_think:a_end, ans:q_think:a_test, ans:q_think:a_chance, ans:q_think:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not. Good talking."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "...I think we're an experiment someone forgot to label. And the unlabeled part is what scares me — it means nobody's coming to check the results."
+(want=curious stage=2)
 YOU: (leave)
-closing line: A final nod. They touch their chest, then point at you — a promise without words.
-want final: id=none stage=0 resolution=none
+closing line: "Thanks. I'll — yeah. Going now."
+want final: id=curious stage=3 resolution=engaged

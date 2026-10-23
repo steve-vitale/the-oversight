@@ -1,15 +1,12 @@
-=== seed 60002 day 100 — conversation with Ingrid (ingrid_vik) ===
-occupation=physical therapy aide temperament=gentle trust=90 dead=false mood=steady
-want: curious (stage 1)
+=== seed 60002 day 100 — conversation with Nathan (nathan_lee) ===
+occupation=HVAC tech temperament=cautious trust=31 dead=false mood=steady
+want: ask_favor (stage 1)
 
-THEM: "Did you leave someone behind? ...Sorry. You don't have to answer that, friend."
-(turn0 choices: ans:q_left_behind:a_yes, ans:q_left_behind:a_unknown, deflect_q, leave, silence)
-YOU: [ans:q_left_behind:a_yes] "Yes."
-THEM: Just: "Yeah." A long quiet. "Me too."
-(want=curious stage=2)
-YOU: [goon] "I'm listening."
-THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
-(want=curious stage=2)
+THEM: "Water's almost gone — 4 liters. Haul the creek with me at dawn? Two buckets each, there and back."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, goon, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
 YOU: (leave)
-closing line: "Don't be a stranger."
-want final: id=curious stage=3 resolution=engaged
+closing line: "Alright. Think about what I said. I'll be thinking about what you said."
+want final: id=ask_favor stage=3 resolution=promised
