@@ -2220,7 +2220,27 @@
       incidents[ii]();
     },
 
-    newGame(homeRegionText, locationId, villagerId, pickedItems, runName) {
+    // newGame: public entry. Optional 6th arg runSeed (shareable run seeds,
+    // rogue P1): when a seed is given — or one was staged via setWorldSeed
+    // (character select) — the whole setup runs on the seeded worldgen
+    // stream (region, landing, roster, map), so the same seed reproduces
+    // the same world. Without a seed the legacy path runs untouched:
+    // byte-identical RNG behavior to before (sims, tests and debug callers
+    // are unaffected). Combat/conversation RNG is never pinned by the seed:
+    // withWorldRng restores Math.random before newGame returns.
+    newGame(homeRegionText, locationId, villagerId, pickedItems, runName, runSeed) {
+      if (runSeed != null && String(runSeed).trim() !== '') this.setWorldSeed(runSeed);
+      if (this._pendingWorldSeed) {
+        try {
+          return this.withWorldRng(() => this._newGameInner(homeRegionText, locationId, villagerId, pickedItems, runName));
+        } finally {
+          // Consumed: the staged seed belongs to this run.
+          this._pendingWorldSeed = null;
+        }
+      }
+      return this._newGameInner(homeRegionText, locationId, villagerId, pickedItems, runName);
+    },
+    _newGameInner(homeRegionText, locationId, villagerId, pickedItems, runName) {
       // homeRegionText: free text, typed by the player. Stored raw — someday we trek home.
       const parsed = this.parseOrigin(homeRegionText);
       this.homeRegion = parsed.raw; this.villagerId = villagerId;
@@ -2237,6 +2257,10 @@
         || locPool[Math.floor(Math.random() * locPool.length)]
         || {};
       this.state = S.state.newState();
+      // WORLD SEED (rogue P1): the run's seed rides on state — saved with
+      // the run, surfaced in settings, re-enterable at new game. Null on
+      // the legacy path (no seed was given, so there is no run string).
+      this.state.worldSeed = this._pendingWorldSeed || null;
       this.state.region = (landRegion && landRegion.id) || DEFAULT_REGION_ID;
       // SYSTEM VOICE (Steve 2026-10-12): warm the ElevenLabs manifest early
       // so the text->id index is ready before the System's first line.
@@ -2768,7 +2792,7 @@
       // as earned memory AFTER. The player must care before they learn.
       this.location = 'village'; this.departed = false;
       this.wipe();
-      this.genMap();
+      this.genMap(this._pendingWorldSeed);
       this.genVillages();
       // MAP KNOWLEDGE (Steve 2026-10-06): the map starts showing only home.
       // Walk tiles or compare maps with villagers to fill it in.
@@ -10281,7 +10305,60 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
       };
     },
-    genMap() {
+    // SHAREABLE RUN SEEDS (rogue P1, audit Talk 6 T6): the world-seed is a
+    // run string the player can copy (settings) and optionally enter at new
+    // game (origin screen). WORLDGEN ONLY — landing region, map, roster.
+    // Combat, conversation and all mid-run draws keep using Math.random, so
+    // a seed can never become a solved walkthrough. No cross-run power,
+    // knowledge or items: every game is still a new village.
+    // parseRunSeed(str): canonical uint32 for a run string. All-digit
+    // strings reproduce exactly; any other text hashes (via _hashStr) so
+    // players can type words ("cursed") and still share them. Never 0.
+    parseRunSeed(str) {
+      const s = String(str == null ? '' : str).trim();
+      let n;
+      if (/^\d{1,10}$/.test(s)) n = parseInt(s, 10) >>> 0;
+      else n = (this._hashStr ? this._hashStr(s.toLowerCase()) : 0) >>> 0;
+      n = n % 2147483647;
+      return n || 1;
+    },
+    // randomSeed(): a fresh world seed for runs without a player seed.
+    randomSeed() {
+      return (Math.floor(Math.random() * 2147483646) + 1) >>> 0;
+    },
+    // setWorldSeed(seed): stage the seed for the next worldgen pass
+    // (genRoster at character select, then newGame). Accepts the run
+    // string or a uint32. Returns the staged seed.
+    setWorldSeed(seed) {
+      this._pendingWorldSeed = (typeof seed === 'number')
+        ? (((seed >>> 0) % 2147483647) || 1)
+        : this.parseRunSeed(seed);
+      return this._pendingWorldSeed;
+    },
+    // worldSeedString(): this run's seed as a copyable string. The staged
+    // _pendingWorldSeed wins: on the pre-game setup screens (before newGame
+    // has run) it holds the seed the player is about to play, while state
+    // may still hold a previous run. '' when nothing is staged (title).
+    worldSeedString() {
+      const n = ((this._pendingWorldSeed || (this.state && this.state.worldSeed)) || 0) >>> 0;
+      return n ? String(n) : '';
+    },
+    // withWorldRng(fn): run worldgen draws on the seeded stream. Re-entrant
+    // (genRoster inside newGame shares the one stream). Restores Math.random
+    // afterwards — combat/conversation RNG is never pinned by the seed.
+    // The staged _pendingWorldSeed wins over a previous run's state: staging
+    // a seed must reproduce its world even on a device with an old save.
+    withWorldRng(fn) {
+      if (this._worldRng) return fn();
+      const seed = ((this._pendingWorldSeed || (this.state && this.state.worldSeed) || 1) >>> 0) || 1;
+      const rng = this.mulberry32(seed);
+      const real = Math.random;
+      this._worldRng = rng;
+      Math.random = rng;
+      try { return fn(); }
+      finally { this._worldRng = null; Math.random = real; }
+    },
+    genMap(seed) {
       // Procedural with logic: creek flows, wetlands hug water, groves cluster,
       // thickets edge, meadows open, one ruin with a story.
       // The LANDING ZONE shapes the map: creek bottoms are wet and rich,
@@ -10289,7 +10366,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // WORLD SEED (Steve 2026-10-07): the 9x9 world is generated from a seed
       // once per game. The seed is saved with the map — the world stays put
       // when you come back. Minecraft-like: same seed, same world.
-      const worldSeed = Math.floor(Math.random() * 2147483647);
+      // SHAREABLE RUN SEEDS (rogue P1): newGame passes the run's seed;
+      // debug/legacy callers with no seed keep the old fresh roll.
+      const worldSeed = ((seed >>> 0) || Math.floor(Math.random() * 2147483647) || 1);
       const R = this.mulberry32(worldSeed);
       const P = this.locParams();
       const tiles = [];

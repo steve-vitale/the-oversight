@@ -893,6 +893,9 @@
     // WHERE ARE YOU FROM? Visual picker — tap a place. No typing.
     // Still stores the same origin string downstream (parseOrigin handles it).
     // What you know grows where you're from. It doesn't grow here.
+    // WORLD SEED (rogue P1): reset the staged seed each time this screen
+    // builds — ob persists across expeditions on one page load.
+    ob.seed = '';
     const picker = Game.data.originPicker || { regions: [] };
     const allOrigins = [];
     for (const r of picker.regions) for (const o of r.origins) allOrigins.push({ ...o, region: r.name });
@@ -925,11 +928,21 @@
       <p class="small">Tap where you're from. What you know grows there — it doesn't grow here.</p>
       <input id="ob-origin-search" type="text" placeholder="🔍 Search places..." autocomplete="off"
         style="width:100%;padding:12px;margin:12px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
+      <div style="margin:0 0 4px">
+        <label for="ob-seed" class="small" style="opacity:.7">🌱 World seed <span style="opacity:.6">(optional)</span></label>
+        <input id="ob-seed" type="text" placeholder="blank = a fresh world" autocomplete="off" autocapitalize="off" spellcheck="false"
+          style="width:100%;padding:12px;margin:6px 0 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
+        <p class="small" style="opacity:.55;margin:4px 0 0">Same seed → same region, wilds &amp; villagers. Combat and conversation stay fresh — no solved walkthroughs.</p>
+      </div>
       <div id="origin-list"></div>
       <p class="small" style="opacity:.6;margin-top:12px">Don't see it? <a href="#" id="ob-origin-custom" style="color:#8a9a8a">Type it instead</a>.</p>`;
     render('');
     const search = document.getElementById('ob-origin-search');
     search.addEventListener('input', () => render(search.value));
+    // WORLD SEED (rogue P1): optional entry, before the roster is generated —
+    // the seed pins the world (region/map/roster), never combat/conversation.
+    const seedInput = document.getElementById('ob-seed');
+    if (seedInput) seedInput.addEventListener('input', () => { ob.seed = seedInput.value.trim(); });
     // escape hatch: free text for places not listed
     document.getElementById('ob-origin-custom').onclick = (e) => {
       e.preventDefault();
@@ -940,7 +953,11 @@
   function obWho() {
     // Candidates are generated FROM your origin — the character IS you.
     // Pick the life you're about to live.
-    const vs = Game.genRoster(ob.home).filter(v => v.candidate !== false);
+    // WORLD SEED (rogue P1): the roster is worldgen — staged seed (or a
+    // fresh roll) drives the seeded stream, so the same seed grows the
+    // same villagers. newGame reuses this exact roster.
+    Game.setWorldSeed(ob.seed && ob.seed.trim() ? ob.seed : Game.randomSeed());
+    const vs = Game.withWorldRng(() => Game.genRoster(ob.home)).filter(v => v.candidate !== false);
     screen.innerHTML = `${bar('scattering://wake', 'clearing')}
       <h1 class="title" style="font-size:22px">WHICH ONE IS YOU?</h1>
       <p class="small">People from ${esc(ob.home)} are waking up in a clearing. One of them is you.</p>
@@ -1016,12 +1033,13 @@
       <p class="small">Every run gets a name. You'll see it in your saves.</p>
       <input id="ob-runname" type="text" maxlength="40" value="${esc(def)}" autocomplete="off" autocapitalize="words"
         style="width:100%;padding:12px;margin:12px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
+      <p class="small" style="opacity:.7;margin:0 0 12px">🌱 World seed <b>${esc(Game.worldSeedString() || 'fresh')}</b> — same seed, same world. Share it for a cursed-seed run.</p>
       <button class="btn" id="b-name-go">Begin</button>`;
     const input = document.getElementById('ob-runname');
     input.focus(); input.select();
     const go = () => {
       const name = input.value.trim() || def;
-      Game.newGame(ob.home, null, ob.villager, ob.picked, name);
+      Game.newGame(ob.home, null, ob.villager, ob.picked, name, Game.worldSeedString());
       obWake();
     };
     document.getElementById('b-name-go').onclick = go;
@@ -15576,12 +15594,24 @@
         + `<span id="set-dlstatus" style="display:block;font-size:12px;opacity:.55;font-weight:normal">${packs}${missingMB ? ' · ≈' + missingMB + ' MB' : ''}</span></span>`
         + `<span style="font-size:15px;color:#0a84ff">Download</span></div>`
       : '';
+    // WORLD SEED (rogue P1): the run's seed, copyable — the shareable run
+    // string for cursed-seed challenges. Shown only mid-run (no seed on the
+    // title screen). Worldgen only: same seed, same world; combat and
+    // conversation stay fresh.
+    const seedStr = Game.worldSeedString();
+    const seedHtml = seedStr
+      ? `<div style="padding:14px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Expedition</div>`
+      + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">`
+      + `<span style="font-size:15px">🌱 World seed<span style="display:block;font-size:12px;opacity:.55;font-weight:normal">Same seed → same world. Combat &amp; conversation stay fresh.</span></span>`
+      + `<span style="display:flex;align-items:center;gap:8px"><code id="set-seedval" style="font-size:15px">${esc(seedStr)}</code><button class="btn sm" id="set-seedcopy">Copy</button></span></div>`
+      : '';
     ov.innerHTML =
       `<div style="background:#1b1b1f;border-radius:16px 16px 0 0;width:100%;max-width:480px;`
       + `max-height:82vh;overflow:auto;padding-bottom:calc(20px + env(safe-area-inset-bottom))" role="dialog" aria-label="Settings">`
       + `<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px">`
       + `<span style="font-size:17px;font-weight:700">Settings</span>`
       + `<button class="btn sm" id="set-done">Done</button></div>`
+      + seedHtml
       + `<div style="padding:8px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Sound</div>`
       + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px">`
       + volRow('set-vol', 'Volume', vol, 'Master volume')
@@ -15614,6 +15644,20 @@
       + `<p class="small" style="opacity:.45;text-align:center;margin:16px 12px 0">build ${esc(window.BUILD_VERSION || 'dev')}</p>`
       + `</div>`;
     document.body.appendChild(ov);
+    // WORLD SEED (rogue P1): copy the run string. Clipboard API with a
+    // toast-the-value fallback (same pattern as shareGame).
+    const seedCopy = document.getElementById('set-seedcopy');
+    if (seedCopy) seedCopy.onclick = () => {
+      const val = document.getElementById('set-seedval');
+      const s = val ? val.textContent : '';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(s)
+          .then(() => toast('World seed copied — share it for a cursed-seed run.'))
+          .catch(() => toast('World seed: ' + s));
+      } else {
+        toast('World seed: ' + s);
+      }
+    };
     const padSide = document.getElementById('set-dpad-side');
     padSide.value = Game.dpadSide();
     padSide.onchange = (e) => { Game.setDpadSide(e.target.value); refresh(); };

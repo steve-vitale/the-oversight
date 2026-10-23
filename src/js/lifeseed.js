@@ -36,7 +36,17 @@
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
-  const R = Math.random;
+  // WORLD SEED (rogue P1): during new-game worldgen Game._worldRng is the
+  // seeded stream — R draws from it so the same seed grows the same
+  // lifeseeds, names and personal pools. Outside worldgen it falls back to
+  // live Math.random, so combat/conversation RNG is never pinned by the
+  // seed. (Late binding: the old `const R = Math.random` captured the
+  // function at load and would ignore the worldgen stream.)
+  const R = () => {
+    const G = (globalThis.Scattering || {}).Game;
+    const w = G && G._worldRng;
+    return (w || Math.random)();
+  };
   const pick = (a) => a[Math.floor(R() * a.length)];
 
   const methods = {

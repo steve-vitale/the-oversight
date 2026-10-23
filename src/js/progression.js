@@ -1169,7 +1169,10 @@
     // the opening asks the player to trust the game, and the game remembers.
     const _newGame = Game.newGame;
     Game.newGame = function (homeRegionText, locationId, villagerId, pickedItems, runName) {
-      const r = _newGame ? _newGame.call(this, homeRegionText, locationId, villagerId, pickedItems, runName) : undefined;
+      // Forward arguments (not the 5 named params): newGame takes an optional
+      // 6th runSeed (shareable run seeds, rogue P1) that must survive the
+      // wrapper chain.
+      const r = _newGame ? _newGame.apply(this, arguments) : undefined;
       try {
         const s = this.state.scholar;
         const picked = new Set(pickedItems || []);
