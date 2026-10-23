@@ -1,0 +1,12 @@
+=== seed 9972 day 87 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=58 dead=false
+want: ask_favor (stage 1)
+
+THEM: "Never mind the pantry run — we got it handled. Thanks anyway. The cistern's nearly dry — 5 liters left. Haul the creek with me at dawn? Two buckets each, there and back."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

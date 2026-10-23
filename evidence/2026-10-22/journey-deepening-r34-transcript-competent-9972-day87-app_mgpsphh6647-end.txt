@@ -1,0 +1,21 @@
+=== seed 9972 day 87 — conversation with Nicole (app_mgpsphh6647) ===
+occupation=hunter temperament=mischievous trust=51 dead=false
+want: curious (stage 1)
+
+THEM: "About how you slept — Did you sleep? I kept hearing things out past the treeline. This isn't new."
+(turn0 choices: ans:q_night:a_yes, ans:q_night:a_no, ans:q_night:a_joke, ans:q_night:honest_pass, leave, silence)
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: Whatever warmth was building cools to politeness.
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: "I sleep in shifts now — two hours, up, listen, two more. My body learned it before my head agreed. Caracas, Venezuela never taught me that. The treeline did, as it were."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

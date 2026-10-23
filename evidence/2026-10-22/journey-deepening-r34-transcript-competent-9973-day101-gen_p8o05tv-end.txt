@@ -1,0 +1,15 @@
+=== seed 9973 day 101 — conversation with Dwayne (gen_p8o05tv) ===
+occupation=sign painter temperament=stoic trust=93 dead=false
+want: curious (stage 1)
+
+THEM: "Between us — Did you leave someone behind? ...Sorry. You don't have to answer that."
+(turn0 choices: ans:q_left_behind:a_yes, ans:q_left_behind:a_unknown, deflect_q, leave, silence)
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to it."
+want final: id=curious stage=3 resolution=engaged

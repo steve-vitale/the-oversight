@@ -1,0 +1,27 @@
+=== seed 9973 day 101 — conversation with Francesca (gen_t34vo8t) ===
+occupation=dockworker temperament=earnest trust=97 dead=false
+want: curious (stage 1)
+
+THEM: "Teach me something. Anything you know that I don't."
+(turn0 choices: ans:q_teach_me:a_tell, ans:q_teach_me:a_vague, ans:q_teach_me:honest_pass, leave, silence)
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Sunbasker — Its scales go from dull brown to molten gold. It hunts by day — watch the open ground."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "It crouches low, tail lashing once, twice. That's the The Mountain Lord telling you it's about to move. Dawn and dusk, that's when it's out."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Patauá. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Come get air with me. I need to think out loud."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talking. We'll figure it out."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,18 @@
+=== seed 9971 day 101 — conversation with Stan (stan_kowalski) ===
+occupation=exterminator temperament=dry trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "What scares you most about what's happening? The real answer."
+(turn0 choices: ans:q_system_fear:a_tell, ans:q_system_fear:a_vague, ans:q_system_fear:honest_pass, leave, silence)
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I've had worse talks. Today, even."
+want final: id=curious stage=3 resolution=engaged

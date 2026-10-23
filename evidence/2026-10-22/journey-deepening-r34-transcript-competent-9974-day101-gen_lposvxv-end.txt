@@ -1,0 +1,32 @@
+=== seed 9974 day 101 — conversation with Lamar (gen_lposvxv) ===
+occupation=florist temperament=bold trust=90 dead=false
+want: seek_taken (stage 1)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+(turn0 choices: dlg:more, dlg:commit, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It doesn't move. Speedbump, every time. It hunts by day — watch the open ground."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It goes perfectly still and arches its back to the sun. Sunback, every time. It hunts by day — watch the open ground."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Cliffhanger — It goes perfectly still. It hunts at night — give the dark a wide berth."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Sunbasker — Its scales go from dull brown to molten gold. It hunts by day — watch the open ground."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Assacu (Sandbox Tree). Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bissap Hibiscus. Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=3)
+closing line: "See you at the fire."
+want final: id=seek_taken stage=3 resolution=promised
