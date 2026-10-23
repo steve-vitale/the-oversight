@@ -1,0 +1,16 @@
+# THE FRIENDSHIP EFFECT — seed 4003 (warm-competent law-abiding, 141d, 6 alive)
+
+## plots (2)
+  plot_1: Patrick -> Nora d7 active=false sprung=true resolved=true expired=false
+  plot_3: Nora -> Patrick d8 active=false sprung=true resolved=true expired=false
+
+## cases (2)
+  case_2: ambush — accused Patrick, Scarlett, Mateo — target Nora — source plot:plot_1 — role bystander — trial never — verdict none
+  case_4: murder — accused Nora, Mieczysław, Scarlett — target Patrick — source plot:plot_3 — role bystander — trial never — verdict none
+
+## moots observed (1)
+  case_4: murder via npcMootTick d12 — accused Nora, Mieczysław, Scarlett — vote guilty — verdict exile convicted=true — affinity: guilty-mean 2.0 / acquit-mean n/a [n/a]
+
+## NPC<->NPC bond edges (from bondSnap d0/70/140)
+  d70: npcPairs=72 npcDeep=16 npcAvgV=17.6 (allPairs=86 allDeep=24)
+  d140: npcPairs=89 npcDeep=31 npcAvgV=24.7 (allPairs=106 allDeep=42)

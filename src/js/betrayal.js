@@ -1761,7 +1761,20 @@
       c.friendVoiced = true;
       if (!best || !(bestAff >= 20)) return false;
       const fn = this.whoTag(best), an = this.whoTag(accused);
-      this.say(`${this.capFirst(fn)} doesn't look away from ${an}. "I know this one. Whatever happened — hear them out." A couple of heads turn. It matters who your friends are.`);
+      // FRIEND-VOICE VARIANTS (journey-social r44 2026-10-23): r43 found the
+      // identical line echoing across repeat trials (Raul for Eamon, 2 days
+      // apart). Two variants with world-level alternation — consecutive
+      // firings never echo. Both keep the ceremony tagline; it is a
+      // deliberate refrain (like the verdict beat), not an echo. The counter
+      // advances only on actual voicing and lives in saved world state.
+      const vb = (this.state.village.betrayal = this.state.village.betrayal || {});
+      const vi = (vb.friendVoiceCount || 0);
+      const variants = [
+        `${this.capFirst(fn)} doesn't look away from ${an}. "I know this one. Whatever happened — hear them out." A couple of heads turn. It matters who your friends are.`,
+        `${this.capFirst(fn)} steps forward, jaw set. "You've heard the charge. Now hear this — I know ${an}, and I stand by them." The room goes still. It matters who your friends are.`,
+      ];
+      vb.friendVoiceCount = vi + 1;
+      this.say(variants[vi % variants.length]);
       return true;
     } catch (e) { return false; }
   },

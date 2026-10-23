@@ -1,0 +1,87 @@
+check.js: 287 scripts, 2 parallel (quick)
+...............................................................................................................F..F..F....F.........F..............................................................F...........................................................................................
+
+  FAIL scripts/godpath/test-measurement-comparison.js (exit 1, 5.4s)
+          at summarizeValidated (/home/hatch/workspace/worktrees/journey2-social/scripts/balance-windows.js:46:46)
+          at Object.summarizeHarnessRevision (/home/hatch/workspace/worktrees/journey2-social/scripts/balance-windows.js:40:10)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-measurement-comparison.js:5:1161)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 1.8s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey2-social/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 1.5s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        FAIL proof declares every collector and contract input rather than silently omitting one
+        FAIL collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        FAIL every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 5 passed, 4 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs | proof declares every collector and contract input rather than silently omitting one | collector and contract have
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 0.9s)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-occupation-panels.js:17:14)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+        FAIL real CLI workflow completed
+      
+      occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+      failing: real CLI workflow completed
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 1.7s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/characterGen.json,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/codex-people.js,src/js/comms.js,src/js/contes
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-sw-audio-cache-20261012.js (exit 1, 0.5s)
+          '    at /home/hatch/workspace/worktrees/journey2-social/scripts/test-offline-assets.js:8:15\n' +
+          '    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/test-offline-assets.js:42:3)\n' +
+          '    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n' +
+          '    at Object..js (node:internal/modules/cjs/loader:2060:10)\n' +
+          '    at Module.load (node:internal/modules/cjs/loader:1651:32)\n' +
+          '    at Module._load (node:internal/modules/cjs/loader:1443:12)\n' +
+          '    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n' +
+          '    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n' +
+          '    at node:internal/main/run_main_module:33:47\n'
+      }
+      
+      Node.js v24.22.1
+
+  slowest: scripts/godpath/test-trust-observer-neutrality.js 33s
+
+check.js: 281 passed, 6 failed in 620s

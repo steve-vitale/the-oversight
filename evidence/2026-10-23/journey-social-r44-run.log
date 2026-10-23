@@ -1,0 +1,43 @@
+SMOKE: seed 4005, 10 days (self-test: plot+case census + warm-competent convos)
+SMOKE: plotSnaps=10 caseSnaps=10 convos=16 mootConvos=16 avgTrust=41.0 instrumentOk=true
+SMOKE SELF-TEST: PASS (plot+case census complete, warm-competent convos ran, affinity instrument live)
+seed 4001: days=140 alive=7 convos=276 (moot=276) gossipPicks=3 dryRate=2.42/12
+  pipeline: plots=1 cases=1 moots=1 (npc-npc=1)
+  L2' repeats: 1
+    d98 Benoit t7 <dlg:favor_requirements>: I've told you three times now — Move next to your partner, on the same side of the Haven door.
+  L3: {"bonds":62,"deepBonds":44,"betrayalCases":1,"mootsConvened":1,"mootsObserved":1,"gossipConvos":19,"gossipPicks":3,"avgTrust":"88.9"}
+  regression: P1-streaks=4 P2-reactDry=267
+seed 4002: days=141 alive=8 convos=276 (moot=276) gossipPicks=3 dryRate=1.99/12
+  pipeline: plots=14 cases=2 moots=2 (npc-npc=2)
+  L2' repeats: 1
+    d11 Olivier t9 <betrayal:investigate:case_2>: You've been over this ground twice now. Nothing you can prove — the trail is going cold. Digging further just burns daylight.
+  L3: {"bonds":82,"deepBonds":52,"betrayalCases":2,"mootsConvened":2,"mootsObserved":2,"gossipConvos":29,"gossipPicks":3,"avgTrust":"85.9"}
+  regression: P1-streaks=5 P2-reactDry=234
+seed 4003: days=141 alive=6 convos=276 (moot=276) gossipPicks=3 dryRate=2.05/12
+  pipeline: plots=2 cases=2 moots=1 (npc-npc=1)
+  L2' repeats: 0
+  L3: {"bonds":106,"deepBonds":43,"betrayalCases":2,"mootsConvened":1,"mootsObserved":1,"gossipConvos":14,"gossipPicks":3,"avgTrust":"82.8"}
+  regression: P1-streaks=3 P2-reactDry=229
+seed 4004: days=130 alive=0 convos=251 (moot=251) gossipPicks=3 dryRate=1.78/12
+  pipeline: plots=0 cases=0 moots=0 (npc-npc=0)
+  L2' repeats: 4
+    d96 Lena t7 <dlg:favor_requirements>: I've told you three times now — Move next to your partner, on the same side of the Haven door.
+    d121 Oscar t7 <dlg:favor_requirements>: I've told you three times now — Move next to them, on the same side of the Haven door, to help.
+    d123 Thabo t7 <dlg:favor_requirements>: I've told you three times now — Move next to your partner, on the same side of the Haven door.
+    d123 Farid t8 <dlg:favor_requirements>: I've told you three times now — Move next to your partner, on the same side of the Haven door.
+  L3: {"bonds":105,"deepBonds":44,"betrayalCases":0,"mootsConvened":0,"mootsObserved":0,"gossipConvos":15,"gossipPicks":3,"avgTrust":"n/a"}
+  regression: P1-streaks=7 P2-reactDry=201
+  seed 4001 moot case_2: voters=7 guilty-meanAff=-4.1 acquit-meanAff=n/a verdict=weregild -> UNDECIDED
+  seed 4001: days=140 alive=7 avgTrust=88.9 deepBonds=44 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 4002 moot case_2: voters=4 guilty-meanAff=-56.0 acquit-meanAff=16.7 verdict=acquitted -> ALIGNED
+  seed 4002 moot case_4: voters=7 guilty-meanAff=-9.2 acquit-meanAff=24.0 verdict=weregild -> ALIGNED
+  seed 4002: days=141 alive=8 avgTrust=85.9 deepBonds=52 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 4003 moot case_4: voters=5 guilty-meanAff=2.0 acquit-meanAff=n/a verdict=exile -> UNDECIDED
+  seed 4003: days=141 alive=6 avgTrust=82.8 deepBonds=43 end={"over":false,"villageLost":false,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":false}
+  seed 4004: days=130 alive=0 avgTrust=n/a deepBonds=44 end={"over":true,"villageLost":true,"scattered":false,"extinct":false,"scholarExiled":false,"scholarDead":true}
+M1 (plot+case+bond census complete, no gaps >2d): GO
+M2(a) (verdict-margin alignment on >=3/4 qualifying NPC-NPC moots): 2/4 [case_2,case_4] — MISS — DOCUMENTED BLANK
+M2 pipeline: s4001:1 s4002:2 s4003:1 s4004:0 NPC-NPC moots
+M4 (guardrail alive>=5, not scattered): 3/4 [4001,4002,4003] — GO
+F1 (affinity-term |aff*0.4| across 23 natural votes): felt(>=5)=7 (30%), max=22.4, median=0.8
+F2 (fabricated cases): (none)

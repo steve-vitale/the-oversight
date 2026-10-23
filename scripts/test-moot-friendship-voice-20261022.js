@@ -13,13 +13,21 @@
 // >= 20, the room sees it. Pure voicing (votes already cast); idempotent
 // per case.
 //
+// r44 (2026-10-23): r43 found the identical line echoing across repeat
+// trials (Raul for Eamon, 2 days apart). The voicing now has TWO variants
+// with world-level alternation (state.village.betrayal.friendVoiceCount,
+// advancing only on actual voicing) — consecutive firings never echo.
+// Both variants name friend+accused and keep the ceremony tagline.
+//
 // Proves:
 //   1. A high-affinity acquit-voter triggers the line naming friend+accused.
 //   2. Idempotent: second call fires nothing new.
 //   3. No line when no acquit-voter reaches affinity 20.
 //   4. No line when the player is the accused (player lane has defendAlibi).
 //   5. No line when the staunchest friend voted GUILTY (only stand-by counts).
-//   6. finishTrial integration: the line appears in the ceremony stream.
+//   6. finishTrial integration: the ceremony voices variant B on 2nd firing.
+//   7. Third firing cycles back to variant A.
+//   8. Consecutive firings never echo (the r43 Raul finding).
 // Usage: node scripts/test-moot-friendship-voice-20261022.js
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
@@ -80,7 +88,7 @@ function setBond(Game, a, b, v, depth) {
   ok(Game.mootFriendVoice(c5) === false, 'silent when the best friend voted guilty');
   ok(said.length === n5, 'no line spoken');
 
-  // 6: finishTrial integration — the line appears in the ceremony stream.
+  // 6: finishTrial integration — the SECOND firing voices variant B (alternation).
   // Build a QUORATE trial through the real path: everyone present except the
   // accused, the friend acquits, the rest convict.
   const voters = Game.npcIds().filter(id => id !== A);
@@ -99,9 +107,22 @@ function setBond(Game, a, b, v, depth) {
   const n6 = said.length;
   let res = null;
   try { res = Game.finishTrial(c6, 0); } catch (e) { console.log('  (finishTrial threw: ' + e.message + ')'); }
-  const stream = said.slice(n6).join('\n');
-  ok(/doesn't look away/.test(stream), 'finishTrial ceremony voices the friendship');
+  const newLines6 = said.slice(n6);
+  const line6 = newLines6.find(l => /It matters who your friends are/.test(l)) || '';
+  ok(/stand by them/.test(line6), 'finishTrial ceremony voices the SECOND variant (alternation)');
+  ok(line6.includes(Game.capFirst(fTag)) && line6.includes(aTag), 'variant B names the friend and the accused');
   ok(c6.trial.convicted === true, 'verdict follows the votes (convicted; voicing changes nothing)');
+
+  // 7: third firing cycles back to variant A (world-level counter).
+  const c7 = { id: 't7', accused: [A], trial: { votes: [{ vid: F, vote: 'acquit' }, { vid: S, vote: 'guilty' }] } };
+  const n7 = said.length;
+  ok(Game.mootFriendVoice(c7) === true, 'third firing succeeds');
+  const line7 = said.slice(n7).join(' ');
+
+  // 8: the r43 Raul finding — consecutive firings never echo.
+  ok(line !== line6, 'consecutive firings differ (variant A vs B)');
+  ok(line6 !== line7, 'consecutive firings differ (variant B vs A)');
+  ok(line7 === line, 'alternation cycles back to variant A');
 
   Game.say = origSay;
   console.log(`\nmoot-friendship-voice: ${pass} pass, ${fail} fail`);

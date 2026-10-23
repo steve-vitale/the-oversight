@@ -1,0 +1,29 @@
+# THE FRIENDSHIP EFFECT — seed 4002 (warm-competent law-abiding, 141d, 8 alive)
+
+## plots (14)
+  plot_1: Ella -> Desmond d6 active=true sprung=false resolved=false expired=false
+  plot_3: Ella -> Desmond d10 active=false sprung=true resolved=true expired=false
+  plot_5: Enzo -> Brian (PLAYER) d14 active=true sprung=false resolved=false expired=false
+  plot_6: Enzo -> Brian (PLAYER) d20 active=true sprung=false resolved=false expired=false
+  plot_7: Enzo -> Brian (PLAYER) d33 active=true sprung=false resolved=false expired=false
+  plot_8: Enzo -> Brian (PLAYER) d42 active=true sprung=false resolved=false expired=false
+  plot_9: Enzo -> Brian (PLAYER) d53 active=false sprung=true resolved=false expired=false
+  plot_10: Enzo -> Brian (PLAYER) d54 active=true sprung=false resolved=false expired=false
+  plot_11: Enzo -> Brian (PLAYER) d60 active=true sprung=false resolved=false expired=false
+  plot_12: Enzo -> Brian (PLAYER) d69 active=true sprung=false resolved=false expired=false
+  plot_13: Enzo -> Brian (PLAYER) d77 active=true sprung=false resolved=false expired=false
+  plot_14: Enzo -> Brian (PLAYER) d86 active=true sprung=false resolved=false expired=false
+  plot_15: Enzo -> Brian (PLAYER) d93 active=true sprung=false resolved=false expired=false
+  plot_16: Enzo -> Brian (PLAYER) d99 active=true sprung=false resolved=false expired=false
+
+## cases (2)
+  case_2: ambush — accused Ella, Enzo, Caleb — target Desmond — source plot:plot_1 — role bystander — trial never — verdict none
+  case_4: ambush — accused Ella, Enzo, Caleb — target Desmond — source plot:plot_3 — role bystander — trial never — verdict none
+
+## moots observed (2)
+  case_2: ambush via npcMootTick d12 — accused Ella, Enzo, Caleb — vote guilty — verdict acquitted convicted=false — affinity: guilty-mean -56.0 / acquit-mean 16.7 [ALIGNED (acquit-voters warmer)]
+  case_4: ambush via npcMootTick d14 — accused Ella, Enzo, Caleb — vote guilty — verdict weregild convicted=true — affinity: guilty-mean -9.2 / acquit-mean 24.0 [ALIGNED (acquit-voters warmer)]
+
+## NPC<->NPC bond edges (from bondSnap d0/70/140)
+  d70: npcPairs=45 npcDeep=25 npcAvgV=43.6 (allPairs=56 allDeep=33)
+  d140: npcPairs=67 npcDeep=41 npcAvgV=47.8 (allPairs=82 allDeep=52)
