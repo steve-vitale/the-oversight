@@ -31074,6 +31074,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         _st.pacing.lastTs = _now;
       } catch (e) {}
       scholar.day += 1;
+      // SEASON-TURN BEAT (rogue P1 T4, 2026-10-22): Talk 4 G2 — day, season
+      // and run-arc should mirror (fractal pedagogy); endDay had no reflection
+      // beat and season was a weather layer, not a loop. On the
+      // regionCalendar flip, one fireside beat mirrors the daily loop at
+      // seasonal scale: what the season brought, what the village learned,
+      // and the two knowledge gaps the coming season exposes. In-run only;
+      // suggests and reflects — never grants (parity rule).
+      try {
+        const seBefore = this.season(scholar.day - 1);
+        const seAfter = this.season(scholar.day);
+        if (seBefore && seAfter && seBefore.id !== 'none' && seAfter.id !== 'none' && seBefore.id !== seAfter.id) {
+          this.seasonTurnBeat(seBefore, seAfter);
+        }
+      } catch (e) { console.warn('[season] turn beat', e); }
       // BUILD-AROUND DAY TICK (2026-10-14): hoarders_interest accrues,
       // trophy_room mark and feast_engine charge reset daily.
       try {
@@ -31138,6 +31152,166 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { if (!this._standingBeatOff) this.checkWaveUnlockBeat(); } catch (e) {}
       this.save();
       return this.status();
+    },
+
+    // SEASON-TURN BEAT (rogue P1 T4, 2026-10-22): Talk 4 G2. On the
+    // regionCalendar flip, one fireside beat mirrors the daily loop at
+    // seasonal scale: a day ends at the fire, a season ends there too, only
+    // longer. Narrates (no silent actions) what the season brought, what the
+    // village learned, and who the season took — then the 2 most-relevant
+    // knowledge gaps the coming season exposes (seasonSkillGaps). In-run
+    // only. PARITY RULE: suggests and reflects — this path never grants
+    // knowledge, items, or power (no learnSkill/identifyPlant/grantKnowledge
+    // or item grants anywhere below; the proof wraps them). Season names are
+    // knowledge-gated ("if you don't know, it doesn't show" — whereAreWe.js):
+    // a season is named only through the player's believed season; at
+    // placeKnown.season 0 the beat speaks of the turning in felt terms only.
+    seasonTurnBeat(before, after) {
+      // The season the player believes it is, for an explicit season object
+      // (mirrors wawSeasonShown): truth at 2, truth±offset at 1, unnamed at 0.
+      const believed = (se) => {
+        if (!se || se.id === 'none') return null;
+        let pk = null;
+        try { pk = this.placeKnown ? this.placeKnown() : null; } catch (e) { console.warn('[season] placeKnown', e); }
+        if (!pk || !pk.season) return null;
+        if (pk.season >= 2 || !pk.seasonDelta) return se;
+        let seasons = [];
+        try { seasons = this.wawSeasons ? this.wawSeasons() : []; } catch (e) { console.warn('[season] wawSeasons', e); }
+        const i = seasons.findIndex(s => s.id === se.id);
+        if (i < 0) return se;
+        const j = (((i + pk.seasonDelta) % seasons.length) + seasons.length) % seasons.length;
+        return Object.assign({}, se, { id: seasons[j].id });
+      };
+      const seasonDef = (id) => {
+        try {
+          const r = this.activeRegion ? this.activeRegion() : {};
+          const ss = ((r.climate || {}).seasons) || (this.regionCalendar ? this.regionCalendar(r).seasons : null) || [];
+          return ss.find(s => s.id === id) || null;
+        } catch (e) { console.warn('[season] seasonDef', e); return null; }
+      };
+      const labelOf = (b) => {
+        if (!b) return null;
+        try { return this.wawSeasonLabel ? this.wawSeasonLabel(b.id) : String(b.id || ''); }
+        catch (e) { console.warn('[season] wawSeasonLabel', e); return String(b.id || ''); }
+      };
+      const bBefore = believed(before);
+      const bAfter = believed(after);
+      const oldLbl = labelOf(bBefore);
+      const newLbl = labelOf(bAfter);
+      const oldNote = bBefore ? ((seasonDef(bBefore.id) || {}).note || '') : '';
+      // 1. FIRESIDE FRAME — the fractal mirror, stated once.
+      if (newLbl) this.say(`The first night of ${newLbl}. A day ends at the fire; a season ends there too, only longer. The village sits up late.`);
+      else this.say('The air has changed — something in the light, something in the birds. A day ends at the fire; a season ends there too, only longer. The village sits up late, naming nothing yet.');
+      // 2. REFLECTION — what the season brought, what the village learned.
+      // Grounded in codex learnedDay/identifiedDay stamps: the ended season's
+      // first day is today - before.seasonDays; its last day was yesterday.
+      const today = (this.state.scholar || {}).day || 1;
+      const firstDay = today - (before.seasonDays || 0);
+      const inSeason = (d) => (d || 0) >= firstDay && (d || 0) < today;
+      const learned = [];
+      try {
+        const cx = (this.state.codex || {});
+        for (const [pid, e] of Object.entries(cx.plants || {})) {
+          if ((e.level || 0) < 1 || !inSeason(e.identifiedDay)) continue; // K0 is not knowledge
+          const p = (this.data.plants || []).find(x => x.id === pid);
+          learned.push(p ? (p.name || pid) : pid);
+        }
+        for (const [sid, e] of Object.entries(cx.skills || {})) {
+          if (e.via === 'background' || !inSeason(e.learnedDay)) continue; // starting knowledge, not learned this season
+          const k = (this.data.knowledge || []).find(x => x.id === sid);
+          learned.push(k ? (k.name || sid) : sid);
+        }
+        for (const [rid, e] of Object.entries(cx.recipes || {})) {
+          if (e.via === 'background' || !inSeason(e.learnedDay)) continue;
+          const r = (this.data.recipes || []).find(x => x.id === rid);
+          learned.push(r ? (r.name || rid) : rid);
+        }
+        for (const [aid, e] of Object.entries(cx.animals || {})) {
+          if (!inSeason(e.learnedDay)) continue;
+          const a = (this.data.animals || []).find(x => x.id === aid);
+          learned.push(a ? (a.name || aid) : aid);
+        }
+      } catch (e) { console.warn('[season] reflection learnings', e); }
+      const seasonName = oldLbl || 'the long turning';
+      const noteBit = oldNote ? ` ${oldNote}` : '';
+      if (learned.length) {
+        const ex = learned.slice(0, 3).join(', ');
+        const rest = learned.length > 3 ? ` (+${learned.length - 3} more)` : '';
+        this.say(`Behind us: ${seasonName}.${noteBit} The Codex grew this season — ${learned.length} new: ${ex}${rest}.`);
+      } else {
+        this.say(`Behind us: ${seasonName}.${noteBit} The Codex gained nothing new — the village endured, and kept what it had.`);
+      }
+      // Who the season took, from the fallen ledger — the village knows its dead.
+      try {
+        const fallen = (((this.state.village || {}).fallen) || []).filter(f => inSeason(f.day));
+        if (fallen.length) {
+          const names = fallen.slice(0, 3).map(f => String(f.name || 'someone').split(' ')[0]);
+          const rest = fallen.length > 3 ? ` and ${fallen.length - 3} more` : '';
+          this.say(`The season took ${names.join(', ')}${rest}. Their names are spoken, then the fire is quiet a while.`);
+        }
+      } catch (e) { console.warn('[season] reflection fallen', e); }
+      // 3. FORWARD LOOK — the 2 most-relevant knowledge gaps the coming
+      // season exposes. Suggests, never grants.
+      const gaps = this.seasonSkillGaps(after);
+      if (gaps.length) {
+        const gn = gaps.map(g => g.name).join(' and ');
+        if (newLbl) this.say(`${newLbl} is coming. Around the fire, the gaps show: nobody here knows ${gn} — and the season will ask.`);
+        else this.say(`Nobody names what's coming. Around the fire, the gaps show anyway: nobody here knows ${gn} — and the season will ask.`);
+      } else if (newLbl) {
+        this.say(`${newLbl} is coming, and for once the village feels ready for it.`);
+      } else {
+        this.say('Whatever comes next, the village feels ready for it.');
+      }
+    },
+
+    // seasonSkillGaps(se): the coming season's honest demands as knowledge
+    // gaps, ≤2. Candidates are keyed on the season's temp + wetness (not its
+    // id — calendars name seasons differently but the body feels the same
+    // things), priority-ordered; a candidate counts as a gap only when NO ONE
+    // in the village knows it (villageKnowsSkill: the shared Codex AND every
+    // living villager's own skills — the dead don't teach). Skills retired
+    // from data are never named. Returns [{sid, name}].
+    seasonSkillGaps(se) {
+      const cands = [];
+      const temp = (se && se.temp) || '';
+      const w = (se && se.weather) || {};
+      const wet = (w.rain || 0) + (w.storm || 0) + (w.monsoon || 0);
+      if (temp === 'cold' || temp === 'frozen') cands.push('preserve_food', 'shelter_debris', 'fire_rain', 'weather_read');
+      else if (temp === 'hot') cands.push('purify_boil', 'weather_read', 'purify_solar', 'shelter_debris');
+      else if (temp === 'cool') cands.push('preserve_food', 'snare_wire', 'fire_rain', 'weather_read');
+      else if (temp === 'warm') cands.push('purify_boil', 'fire_rain', 'weather_read', 'forage_sense');
+      else cands.push('forage_sense', 'fishing', 'weather_read', 'purify_boil'); // mild / unlisted temps
+      if (wet >= 0.4) for (const s of ['fire_rain', 'weather_read']) if (cands.indexOf(s) < 0) cands.unshift(s);
+      const out = [];
+      for (const sid of cands) {
+        if (out.length >= 2) break;
+        if (out.some(g => g.sid === sid)) continue;
+        const k = (this.data.knowledge || []).find(x => x.id === sid);
+        if (!k || !k.name) continue;
+        if (this.villageKnowsSkill(sid)) continue;
+        out.push({ sid, name: k.name });
+      }
+      return out;
+    },
+
+    // villageKnowsSkill(sid): does ANYONE living in the village know this
+    // skill — the shared Codex (codex.skills, taught and learned alike) or a
+    // living villager's own skills (v.npcSkills, incl. background seeding).
+    // The dead don't teach. Used by the season beat so "nobody here knows X"
+    // is an honest claim about the village, not just the player's Codex.
+    villageKnowsSkill(sid) {
+      try {
+        if ((((this.state.codex || {}).skills || {})[sid] || {}).level >= 1) return true;
+        const v = this.state.village || {};
+        const roster = v.roster || [];
+        for (const vid of roster) {
+          let dead = false;
+          try { dead = !!((this.getPerson ? this.getPerson(vid) : null) || {}).dead; } catch (e) { console.warn('[season] getPerson', e); }
+          if (dead) continue;
+          if ((((v.npcSkills || {})[vid]) || []).indexOf(sid) >= 0) return true;
+        }
+      } catch (e) { console.warn('[season] villageKnowsSkill', e); }
+      return false;
     },
 
     // --- combat ---
