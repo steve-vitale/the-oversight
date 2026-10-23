@@ -1,0 +1,878 @@
+{
+ "seed": 68812,
+ "base": "leadfeast",
+ "arm": "stack",
+ "policyId": "lead-vetstack",
+ "instrument": "vetstack on KILLDISC-v2 + bearer <redacted> + direct waveKillLog read + VF fight trace + VR retention trace",
+ "substrate": "armorydrive pinned substrate — non-seat long substrate + ARMORYDRIVE=1 (BOTH arms); VETFORMATION=1 + VETRETENTION=1 (stack only; retention OUTSIDE formation OUTSIDE armorydrive)",
+ "env": "FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1 VETFORMATION=1 VETRETENTION=1",
+ "retentionDependency": "scripts/policies/vetretention.js sweep-only from branch sim-vetretention (deleted before commit)",
+ "anchorCommit": "404e93e34d51",
+ "maxWave": 5,
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "exiled": 0,
+ "days": 132,
+ "gameDays": 132,
+ "endReason": "village-lost",
+ "winDay": null,
+ "winPath": null,
+ "deaths": {
+  "villager combat": 10,
+  "combat": 29,
+  "expedition": 1,
+  "alien": 4,
+  "sickness": 1,
+  "monster": 6,
+  "dehydration": 1,
+  "The Algorithm": 1
+ },
+ "starvation": 0,
+ "nDeathRows": 53,
+ "deathRows": [
+  {
+   "day": 8,
+   "who": "lockpick_raccoon",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 8,
+   "who": "mirrormoth",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 9,
+   "who": "bulldozer",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 10,
+   "who": "nightlight_catfish",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 16,
+   "who": "ducks_in_a_row",
+   "kind": "monster",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 17,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "who": "alien_tick",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "who": "alien_tick",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 22,
+   "who": "glasswing",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "who": "bright_idea",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "who": "glasswing",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 40,
+   "who": "gen_0welz1t",
+   "kind": "person",
+   "cause": "alien",
+   "player": false
+  },
+  {
+   "day": 41,
+   "who": "nightcourt",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 42,
+   "who": "gen_wa74nx0",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": true
+  },
+  {
+   "day": 44,
+   "who": "giant_mosquito",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 47,
+   "who": "gen_11got07",
+   "kind": "person",
+   "cause": "alien",
+   "player": false
+  },
+  {
+   "day": 47,
+   "who": "statickite",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 48,
+   "who": "union_rep",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 49,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 52,
+   "who": "elif_demir",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 55,
+   "who": "gen_9vkwxqd",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 55,
+   "who": "warranty_caller",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "who": "landlord",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 65,
+   "who": "landlord",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 67,
+   "who": "ad_sponsor",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 67,
+   "who": "ad_break",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 73,
+   "who": "warranty_caller",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 75,
+   "who": "eater",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 77,
+   "who": "spool",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 80,
+   "who": "eulogy",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 80,
+   "who": "gen_ue03egu",
+   "kind": "villager",
+   "cause": "dehydration",
+   "player": true
+  },
+  {
+   "day": 89,
+   "who": "reunion",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 89,
+   "who": "gen_g9xrttq",
+   "kind": "person",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 90,
+   "who": "moderator",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 92,
+   "who": "bulldozer",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 93,
+   "who": "voice_mimic_radio",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 103,
+   "who": "spool",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "who": "miguel_santos",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 109,
+   "who": "anaconda_empress",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 114,
+   "who": "sunback",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 114,
+   "who": "app_mgpsphkb307",
+   "kind": "person",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 114,
+   "who": "nino_kapanadze",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 118,
+   "who": "ursula_weber",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 121,
+   "who": "spool",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 122,
+   "who": "app_mgpspimx147",
+   "kind": "person",
+   "cause": "alien",
+   "player": false
+  },
+  {
+   "day": 122,
+   "who": "sam_wilson",
+   "kind": "villager",
+   "cause": "The Algorithm",
+   "player": false
+  },
+  {
+   "day": 123,
+   "who": "app_mgpspilf900",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 124,
+   "who": "quinn_murphy",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 124,
+   "who": "farid_ahmed",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 129,
+   "who": "desmond_clarke",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 129,
+   "who": "visjoin_127",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 130,
+   "who": "vasyl_shevchenko",
+   "kind": "person",
+   "cause": "alien",
+   "player": false
+  },
+  {
+   "day": 130,
+   "who": "pavel_dubinin",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  }
+ ],
+ "scholarVid": "omar_farouk",
+ "nWaveKillLog": 36,
+ "waveKillLogCapped": false,
+ "waveKillLog": [
+  {
+   "d": 8,
+   "mid": "lockpick_raccoon",
+   "w": 1,
+   "by": "gen_9vkwxqd",
+   "byName": "Aurora",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 8,
+   "mid": "mirrormoth",
+   "w": 1,
+   "by": "gen_11got07",
+   "byName": "Ethel",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 9,
+   "mid": "bulldozer",
+   "w": 1,
+   "by": "gen_wa74nx0",
+   "byName": "Priya",
+   "via": "player",
+   "trick": "sidestep"
+  },
+  {
+   "d": 10,
+   "mid": "nightlight_catfish",
+   "w": 1,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 16,
+   "mid": "ducks_in_a_row",
+   "w": 1,
+   "by": "gen_9vkwxqd",
+   "byName": "Aurora",
+   "via": "agency",
+   "trick": null
+  },
+  {
+   "d": 17,
+   "mid": "hushwolf",
+   "w": 1,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 21,
+   "mid": "alien_tick",
+   "w": 2,
+   "by": "gen_ue03egu",
+   "byName": "Landon",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 21,
+   "mid": "alien_tick",
+   "w": 2,
+   "by": "gen_11got07",
+   "byName": "Ethel",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 22,
+   "mid": "glasswing",
+   "w": 1,
+   "by": "gen_wa74nx0",
+   "byName": "Priya",
+   "via": "player",
+   "trick": "move_windup"
+  },
+  {
+   "d": 29,
+   "mid": "bright_idea",
+   "w": 2,
+   "by": "omar_farouk",
+   "byName": "Omar",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 33,
+   "mid": "glasswing",
+   "w": 1,
+   "by": "nino_kapanadze",
+   "byName": "Nino",
+   "via": "companion",
+   "trick": "move_windup"
+  },
+  {
+   "d": 41,
+   "mid": "nightcourt",
+   "w": 1,
+   "by": "gen_g9xrttq",
+   "byName": "Logan",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 44,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 47,
+   "mid": "statickite",
+   "w": 2,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 48,
+   "mid": "union_rep",
+   "w": 2,
+   "by": "gen_9vkwxqd",
+   "byName": "Aurora",
+   "via": "player",
+   "trick": "strike_first"
+  },
+  {
+   "d": 49,
+   "mid": "hushwolf",
+   "w": 1,
+   "by": "gen_9vkwxqd",
+   "byName": "Aurora",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 55,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "nino_kapanadze",
+   "byName": "Nino",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 55,
+   "mid": "warranty_caller",
+   "w": 2,
+   "by": "gen_ue03egu",
+   "byName": "Landon",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 65,
+   "mid": "landlord",
+   "w": 2,
+   "by": "gen_ue03egu",
+   "byName": "Landon",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 65,
+   "mid": "landlord",
+   "w": 2,
+   "by": "gen_ue03egu",
+   "byName": "Landon",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 67,
+   "mid": "ad_break",
+   "w": 3,
+   "by": "gen_ue03egu",
+   "byName": "Landon",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 73,
+   "mid": "warranty_caller",
+   "w": 2,
+   "by": "gen_ue03egu",
+   "byName": "Landon",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 75,
+   "mid": "eater",
+   "w": 4,
+   "by": "gen_g9xrttq",
+   "byName": "Logan",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 77,
+   "mid": "spool",
+   "w": 3,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 80,
+   "mid": "eulogy",
+   "w": 4,
+   "by": "gen_g9xrttq",
+   "byName": "Logan",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 89,
+   "mid": "reunion",
+   "w": 4,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 90,
+   "mid": "moderator",
+   "w": 2,
+   "by": "nino_kapanadze",
+   "byName": "Nino",
+   "via": "companion",
+   "trick": "wait"
+  },
+  {
+   "d": 92,
+   "mid": "bulldozer",
+   "w": 1,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "player",
+   "trick": "sidestep"
+  },
+  {
+   "d": 93,
+   "mid": "voice_mimic_radio",
+   "w": 2,
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 103,
+   "mid": "spool",
+   "w": 3,
+   "by": "nino_kapanadze",
+   "byName": "Nino",
+   "via": "companion",
+   "trick": null
+  },
+  {
+   "d": 109,
+   "mid": "anaconda_empress",
+   "w": 1,
+   "by": "nino_kapanadze",
+   "byName": "Nino",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 114,
+   "mid": "sunback",
+   "w": 1,
+   "by": "ursula_weber",
+   "byName": "Ursula",
+   "via": "companion",
+   "trick": "blindside,blindside"
+  },
+  {
+   "d": 114,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "omar_farouk",
+   "byName": "Omar",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 114,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "omar_farouk",
+   "byName": "Omar",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 114,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "omar_farouk",
+   "byName": "Omar",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 121,
+   "mid": "spool",
+   "w": 3,
+   "by": "quinn_murphy",
+   "byName": "Quinn",
+   "via": "player",
+   "trick": null
+  }
+ ],
+ "nW4KillRows": 3,
+ "w4killRows": [
+  {
+   "day": 75,
+   "mid": "eater",
+   "by": "gen_g9xrttq",
+   "byName": "Logan",
+   "via": "companion",
+   "bearerAtKill": "gen_ue03egu",
+   "killTimeVillager": true,
+   "dmgScholar": 317,
+   "dmgCompanion": 874,
+   "dmgOther": 0,
+   "nonScholarShare": 0.73,
+   "dmgMaj": true
+  },
+  {
+   "day": 80,
+   "mid": "eulogy",
+   "by": "gen_g9xrttq",
+   "byName": "Logan",
+   "via": "companion",
+   "bearerAtKill": "gen_ue03egu",
+   "killTimeVillager": true,
+   "dmgScholar": 286,
+   "dmgCompanion": 788,
+   "dmgOther": 0,
+   "nonScholarShare": 0.73,
+   "dmgMaj": true
+  },
+  {
+   "day": 89,
+   "mid": "reunion",
+   "by": "miguel_santos",
+   "byName": "Miguel",
+   "via": "player",
+   "bearerAtKill": "miguel_santos",
+   "killTimeVillager": false,
+   "dmgScholar": 1057,
+   "dmgCompanion": 238,
+   "dmgOther": 0,
+   "nonScholarShare": 0.18,
+   "dmgMaj": false
+  }
+ ],
+ "nBearerDays": 132,
+ "vfTele": {
+  "formationDays": 10,
+  "formationCommits": 3,
+  "formationInvitesOk": 3,
+  "skippedNoThreat": 15,
+  "skippedWindow": 91,
+  "skippedFull": 0,
+  "skippedHaven": 14,
+  "w4Fights": 5,
+  "w4FightsWithComp": 5,
+  "w4FightsFormed2": 2,
+  "softens": 24,
+  "holds": 3,
+  "bandHolds": 0,
+  "overshootHolds": 3,
+  "stallFinishes": 0,
+  "rescueStrikes": 0,
+  "feastedHolds": 3,
+  "soberHolds": 0,
+  "holdSkippedAllVets": 2,
+  "fightErrors": 0,
+  "holdErrors": 0
+ },
+ "nVfW4FightRows": 5,
+ "vfW4FightRows": [
+  {
+   "day": 75,
+   "engaged": [
+    "miguel_santos",
+    "gen_g9xrttq"
+   ],
+   "formedEngaged": [],
+   "holds": 0
+  },
+  {
+   "day": 80,
+   "engaged": [
+    "miguel_santos",
+    "gen_g9xrttq"
+   ],
+   "formedEngaged": [],
+   "holds": 0
+  },
+  {
+   "day": 89,
+   "engaged": [
+    "gen_g9xrttq",
+    "nino_kapanadze"
+   ],
+   "formedEngaged": [],
+   "holds": 0
+  },
+  {
+   "day": 114,
+   "engaged": [
+    "ursula_weber",
+    "quinn_murphy",
+    "omar_farouk"
+   ],
+   "formedEngaged": [
+    "ursula_weber",
+    "quinn_murphy",
+    "omar_farouk"
+   ],
+   "holds": 0
+  },
+  {
+   "day": 118,
+   "engaged": [
+    "quinn_murphy",
+    "omar_farouk",
+    "vasyl_shevchenko"
+   ],
+   "formedEngaged": [
+    "quinn_murphy",
+    "omar_farouk",
+    "vasyl_shevchenko"
+   ],
+   "holds": 0
+  }
+ ],
+ "nVrTrace": 2,
+ "vrTrace": [
+  {
+   "day": 75,
+   "vid": "gen_g9xrttq",
+   "action": "shield",
+   "killDay": 75
+  },
+  {
+   "day": 90,
+   "vid": "gen_g9xrttq",
+   "action": "unshield",
+   "why": "window-lapsed"
+  }
+ ],
+ "instrumentErrors": []
+}

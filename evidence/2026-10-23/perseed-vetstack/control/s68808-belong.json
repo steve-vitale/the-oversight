@@ -1,0 +1,174 @@
+{
+ "seed": 68808,
+ "base": "belongfeast",
+ "arm": "control",
+ "policyId": "belong",
+ "instrument": "vetstack on KILLDISC-v2 + bearer <redacted> + direct waveKillLog read + VF fight trace + VR retention trace",
+ "substrate": "armorydrive pinned substrate — non-seat long substrate + ARMORYDRIVE=1 (BOTH arms); VETFORMATION=1 + VETRETENTION=1 (stack only; retention OUTSIDE formation OUTSIDE armorydrive)",
+ "env": "FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1",
+ "retentionDependency": "scripts/policies/vetretention.js sweep-only from branch sim-vetretention (deleted before commit)",
+ "anchorCommit": "404e93e34d51",
+ "maxWave": 2,
+ "national": 0,
+ "table": 0,
+ "won": 0,
+ "exiled": 0,
+ "days": 34,
+ "gameDays": 34,
+ "endReason": "village-lost",
+ "winDay": null,
+ "winPath": null,
+ "deaths": {
+  "monster": 2,
+  "sickness": 1,
+  "villager combat": 4,
+  "combat": 2,
+  "the night": 1
+ },
+ "starvation": 0,
+ "nDeathRows": 10,
+ "deathRows": [
+  {
+   "day": 13,
+   "who": "mia_andersson",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 20,
+   "who": "gen_m46ssz4",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false
+  },
+  {
+   "day": 23,
+   "who": "hummice",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 23,
+   "who": "mirrormoth",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 25,
+   "who": "gen_g6aofk3",
+   "kind": "villager",
+   "cause": "monster",
+   "player": false
+  },
+  {
+   "day": 27,
+   "who": "greta_hansen",
+   "kind": "person",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 27,
+   "who": "gen_e6himjq",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 31,
+   "who": "living_wire",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 31,
+   "who": "gen_okka37v",
+   "kind": "villager",
+   "cause": "the night",
+   "player": true
+  },
+  {
+   "day": 34,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  }
+ ],
+ "scholarVid": "gen_fpg26ag",
+ "nWaveKillLog": 4,
+ "waveKillLogCapped": false,
+ "waveKillLog": [
+  {
+   "d": 23,
+   "mid": "hummice",
+   "w": 1,
+   "by": "naran_tumen",
+   "byName": "Naran",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 23,
+   "mid": "mirrormoth",
+   "w": 1,
+   "by": "naran_tumen",
+   "byName": "Naran",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 31,
+   "mid": "living_wire",
+   "w": 1,
+   "by": "app_mgpsphkq310",
+   "byName": "Busisiwe",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 34,
+   "mid": "hushwolf",
+   "w": 1,
+   "by": "naran_tumen",
+   "byName": "Naran",
+   "via": "wild",
+   "trick": null
+  }
+ ],
+ "nW4KillRows": 0,
+ "w4killRows": [],
+ "nBearerDays": 34,
+ "vfTele": {
+  "formationDays": 0,
+  "formationCommits": 0,
+  "formationInvitesOk": 0,
+  "skippedNoThreat": 0,
+  "skippedWindow": 0,
+  "skippedFull": 0,
+  "skippedHaven": 0,
+  "w4Fights": 0,
+  "w4FightsWithComp": 0,
+  "w4FightsFormed2": 0,
+  "softens": 0,
+  "holds": 0,
+  "bandHolds": 0,
+  "overshootHolds": 0,
+  "stallFinishes": 0,
+  "rescueStrikes": 0,
+  "feastedHolds": 0,
+  "soberHolds": 0,
+  "holdSkippedAllVets": 0,
+  "fightErrors": 0,
+  "holdErrors": 0
+ },
+ "nVfW4FightRows": 0,
+ "vfW4FightRows": [],
+ "nVrTrace": 0,
+ "vrTrace": [],
+ "instrumentErrors": []
+}

@@ -1,0 +1,325 @@
+{
+ "seed": 68814,
+ "base": "belongfeast",
+ "arm": "stack",
+ "policyId": "belong-vetstack",
+ "instrument": "vetstack on KILLDISC-v2 + bearer <redacted> + direct waveKillLog read + VF fight trace + VR retention trace",
+ "substrate": "armorydrive pinned substrate — non-seat long substrate + ARMORYDRIVE=1 (BOTH arms); VETFORMATION=1 + VETRETENTION=1 (stack only; retention OUTSIDE formation OUTSIDE armorydrive)",
+ "env": "FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1 VETFORMATION=1 VETRETENTION=1",
+ "retentionDependency": "scripts/policies/vetretention.js sweep-only from branch sim-vetretention (deleted before commit)",
+ "anchorCommit": "404e93e34d51",
+ "maxWave": 3,
+ "national": 0,
+ "table": 0,
+ "won": 0,
+ "exiled": 0,
+ "days": 75,
+ "gameDays": 75,
+ "endReason": "village-lost",
+ "winDay": null,
+ "winPath": null,
+ "deaths": {
+  "combat": 6,
+  "ambush": 1,
+  "villager combat": 7,
+  "Choir Toad": 1,
+  "sickness": 2,
+  "starvation": 3,
+  "contest": 1
+ },
+ "starvation": 3,
+ "nDeathRows": 21,
+ "deathRows": [
+  {
+   "day": 9,
+   "who": "gen_wh753zw",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 11,
+   "who": "daniyar_askarov",
+   "kind": "person",
+   "cause": "ambush",
+   "player": false
+  },
+  {
+   "day": 19,
+   "who": "mirrormoth",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 19,
+   "who": "rut_king",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 19,
+   "who": "hushwolf",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "who": "lockpick_raccoon",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 30,
+   "who": "anaconda_empress",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 31,
+   "who": "gen_m6iehxr",
+   "kind": "villager",
+   "cause": "Choir Toad",
+   "player": false
+  },
+  {
+   "day": 32,
+   "who": "giant_mosquito",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 36,
+   "who": "gen_dheeq2y",
+   "kind": "villager",
+   "cause": "combat",
+   "player": true
+  },
+  {
+   "day": 44,
+   "who": "white_noise_heron",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 56,
+   "who": "heckler",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 57,
+   "who": "white_noise_heron",
+   "kind": "monster",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "who": "gen_t7qsj0w",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false
+  },
+  {
+   "day": 61,
+   "who": "tashi_sherpa",
+   "kind": "villager",
+   "cause": "starvation",
+   "player": false
+  },
+  {
+   "day": 67,
+   "who": "giant_mosquito",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 67,
+   "who": "gen_6r01dgy",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false
+  },
+  {
+   "day": 68,
+   "who": "voice_mimic_radio",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 70,
+   "who": "benoit_lambert",
+   "kind": "villager",
+   "cause": "starvation",
+   "player": false
+  },
+  {
+   "day": 73,
+   "who": "gen_6c07btn",
+   "kind": "villager",
+   "cause": "contest",
+   "player": true
+  },
+  {
+   "day": 75,
+   "who": "henry_zhang",
+   "kind": "villager",
+   "cause": "starvation",
+   "player": false
+  }
+ ],
+ "scholarVid": "devon_okafor",
+ "nWaveKillLog": 12,
+ "waveKillLogCapped": false,
+ "waveKillLog": [
+  {
+   "d": 19,
+   "mid": "mirrormoth",
+   "w": 1,
+   "by": "gen_6c07btn",
+   "byName": "Cormac",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 19,
+   "mid": "rut_king",
+   "w": 1,
+   "by": "gen_6c07btn",
+   "byName": "Cormac",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 19,
+   "mid": "hushwolf",
+   "w": 1,
+   "by": "ella_johnson",
+   "byName": "Ella",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 26,
+   "mid": "lockpick_raccoon",
+   "w": 1,
+   "by": "devon_okafor",
+   "byName": "Devon",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 30,
+   "mid": "anaconda_empress",
+   "w": 1,
+   "by": "gen_dheeq2y",
+   "byName": "Emilio",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 32,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "gen_dheeq2y",
+   "byName": "Emilio",
+   "via": "player",
+   "trick": "strike_recovery"
+  },
+  {
+   "d": 42,
+   "mid": "ducks_in_a_row",
+   "w": 1,
+   "by": "benoit_lambert",
+   "byName": "Benoit",
+   "via": "contest",
+   "trick": null
+  },
+  {
+   "d": 44,
+   "mid": "white_noise_heron",
+   "w": 1,
+   "by": "gen_6c07btn",
+   "byName": "Cormac",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 56,
+   "mid": "heckler",
+   "w": 2,
+   "by": "gen_t7qsj0w",
+   "byName": "Sergio",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 57,
+   "mid": "white_noise_heron",
+   "w": 1,
+   "by": "gen_6c07btn",
+   "byName": "Cormac",
+   "via": "player",
+   "trick": null
+  },
+  {
+   "d": 67,
+   "mid": "giant_mosquito",
+   "w": 2,
+   "by": "elena_petrova",
+   "byName": "Elena",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 68,
+   "mid": "voice_mimic_radio",
+   "w": 2,
+   "by": "henry_zhang",
+   "byName": "Henry",
+   "via": "wild",
+   "trick": null
+  }
+ ],
+ "nW4KillRows": 0,
+ "w4killRows": [],
+ "nBearerDays": 75,
+ "vfTele": {
+  "formationDays": 0,
+  "formationCommits": 0,
+  "formationInvitesOk": 0,
+  "skippedNoThreat": 0,
+  "skippedWindow": 74,
+  "skippedFull": 0,
+  "skippedHaven": 0,
+  "w4Fights": 0,
+  "w4FightsWithComp": 0,
+  "w4FightsFormed2": 0,
+  "softens": 0,
+  "holds": 0,
+  "bandHolds": 0,
+  "overshootHolds": 0,
+  "stallFinishes": 0,
+  "rescueStrikes": 0,
+  "feastedHolds": 0,
+  "soberHolds": 0,
+  "holdSkippedAllVets": 0,
+  "fightErrors": 0,
+  "holdErrors": 0
+ },
+ "nVfW4FightRows": 0,
+ "vfW4FightRows": [],
+ "nVrTrace": 0,
+ "vrTrace": [],
+ "instrumentErrors": []
+}

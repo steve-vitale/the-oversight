@@ -1,0 +1,134 @@
+{
+ "seed": 68810,
+ "base": "leadfeast",
+ "arm": "stack",
+ "policyId": "lead-vetstack",
+ "instrument": "vetstack on KILLDISC-v2 + bearer <redacted> + direct waveKillLog read + VF fight trace + VR retention trace",
+ "substrate": "armorydrive pinned substrate — non-seat long substrate + ARMORYDRIVE=1 (BOTH arms); VETFORMATION=1 + VETRETENTION=1 (stack only; retention OUTSIDE formation OUTSIDE armorydrive)",
+ "env": "FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1 VETFORMATION=1 VETRETENTION=1",
+ "retentionDependency": "scripts/policies/vetretention.js sweep-only from branch sim-vetretention (deleted before commit)",
+ "anchorCommit": "404e93e34d51",
+ "maxWave": 1,
+ "national": 0,
+ "table": 0,
+ "won": 0,
+ "exiled": 0,
+ "days": 39,
+ "gameDays": 39,
+ "endReason": "village-lost",
+ "winDay": null,
+ "winPath": null,
+ "deaths": {
+  "villager combat": 2,
+  "sickness": 2,
+  "a wound that wouldn't close": 2,
+  "starvation": 1
+ },
+ "starvation": 1,
+ "nDeathRows": 7,
+ "deathRows": [
+  {
+   "day": 4,
+   "who": "nightlight_catfish",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 21,
+   "who": "gen_vt9fl8u",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false
+  },
+  {
+   "day": 26,
+   "who": "gen_kd9epiv",
+   "kind": "villager",
+   "cause": "sickness",
+   "player": false
+  },
+  {
+   "day": 33,
+   "who": "hummice",
+   "kind": "monster",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "who": "desmond_clarke",
+   "kind": "villager",
+   "cause": "a wound that wouldn't close",
+   "player": false
+  },
+  {
+   "day": 37,
+   "who": "gen_i73syzd",
+   "kind": "villager",
+   "cause": "starvation",
+   "player": false
+  },
+  {
+   "day": 39,
+   "who": "gen_d5nsr5a",
+   "kind": "villager",
+   "cause": "a wound that wouldn't close",
+   "player": false
+  }
+ ],
+ "scholarVid": "gen_7k09flw",
+ "nWaveKillLog": 2,
+ "waveKillLogCapped": false,
+ "waveKillLog": [
+  {
+   "d": 4,
+   "mid": "nightlight_catfish",
+   "w": 1,
+   "by": "jovan_milic",
+   "byName": "Jovan",
+   "via": "wild",
+   "trick": null
+  },
+  {
+   "d": 33,
+   "mid": "hummice",
+   "w": 1,
+   "by": "gen_rtw99xa",
+   "byName": "Layla",
+   "via": "wild",
+   "trick": null
+  }
+ ],
+ "nW4KillRows": 0,
+ "w4killRows": [],
+ "nBearerDays": 39,
+ "vfTele": {
+  "formationDays": 0,
+  "formationCommits": 0,
+  "formationInvitesOk": 0,
+  "skippedNoThreat": 0,
+  "skippedWindow": 39,
+  "skippedFull": 0,
+  "skippedHaven": 0,
+  "w4Fights": 0,
+  "w4FightsWithComp": 0,
+  "w4FightsFormed2": 0,
+  "softens": 0,
+  "holds": 0,
+  "bandHolds": 0,
+  "overshootHolds": 0,
+  "stallFinishes": 0,
+  "rescueStrikes": 0,
+  "feastedHolds": 0,
+  "soberHolds": 0,
+  "holdSkippedAllVets": 0,
+  "fightErrors": 0,
+  "holdErrors": 0
+ },
+ "nVfW4FightRows": 0,
+ "vfW4FightRows": [],
+ "nVrTrace": 0,
+ "vrTrace": [],
+ "instrumentErrors": []
+}
