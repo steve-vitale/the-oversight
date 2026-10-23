@@ -14844,6 +14844,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.contractDisease('gutrot', { source: 'the creek water' });
           this.state.codex = this.state.codex || {};
           this.state.codex.waterWise = true; // learned the hard way
+          // SEEK-KNOWLEDGE SIGNAL (rogue P1): count risky-water sicknesses so
+          // the learn aid quest can suggest Boiling Water. Records the event;
+          // grants nothing.
+          this.state.codex.waterSickN = (this.state.codex.waterSickN || 0) + 1;
           this.say(`Drank risky water (${b.source}). Stomach cramps within the hour — something's wrong in the gut. (-5 health. Boil it next time.)`);
         } else {
           this.say(`Drank risky water (${b.source}). Got lucky this time.`);

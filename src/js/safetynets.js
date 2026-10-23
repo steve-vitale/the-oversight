@@ -38,6 +38,7 @@
 //   - aid_standing_ge_ask: same bar as the call-for-help chain — trust >= 35, said aloud when refused (code: aidRequestable, resolveAidOut)
 //   - ingratitude_remembered: aid given/received is ledgered per village; refusing a creditor after taking their food costs double trust and travels as gossip (code: answerAidBeg, aidLedger)
 //   - antifarm_triggers_cooldowns_caps: quests bounded (3/run), requests per-village 7-day cooldown + global struggling gate (the trigger costs more than the reward), offers 5-day cooldown, neighbor pantries finite (code: offerAidQuest, requestAid, safetyNetsDayTick)
+//   - seek_knowledge_fold: the learn aid quest IS the "seek knowledge" agenda (roguelike-celebration audit T4 P4-3; Steve: fold into quest/favor, not standalone) — _pickLearnGaps derives up to 3 suggested HUMAN skills (SEEK_GAPS ids are knowledge.json only, never alien abilities) from live run state, each with how-to-close via the one teaching mechanic; the quest suggests, aidQuestCheckLearn completes when ANY suggested gap is actually learned, nothing is granted; plant-identification remains the fallback (code: SEEK_GAPS, SEEK_HOW, _pickLearnGaps, _makeAidQuest, aidQuestCheckLearn)
 // consumes:
 //   - say()
 //   - sysSay()
@@ -137,6 +138,41 @@
   var QUEST_MAX_PER_RUN = 3;
   var QUEST_OFFER_COOLDOWN = 4;   // days between offers
   var QUEST_DAY_LO = 7, QUEST_DAY_HI = 21;
+
+  // SEEK_GAPS: the "seek knowledge" suggestion table (roguelike-celebration
+  // audit T4 P4-3, folded into the aid-quest learn kind per Steve — "Seek
+  // knowledge could be part of quest or favor system?" — not a standalone
+  // agenda). Each row is a HUMAN skill id from knowledge.json — NEVER an
+  // alien ability id from abilities.json. The human≠alien boundary is
+  // load-bearing: the System may suggest what to learn and say HOW, but it
+  // never grants knowledge and never points at a System slot. signal(g)
+  // reads live run state; close is the concrete close-step (the path, never
+  // the knowledge content itself). The quest SUGGESTS up to 3 gaps and
+  // completes when ANY is actually learned through play — parity-safe.
+  var SEEK_GAPS = [
+    {
+      id: 'purify_boil',
+      signal: function (g) { try { return (((g.state || {}).codex || {}).waterSickN || 0) >= 2; } catch (e) { return false; } },
+      signalText: 'RISKY WATER HAS SICKENED YOU MORE THAN ONCE',
+      close: 'boil drinking water at a fire'
+    },
+    {
+      id: 'camp_cooking',
+      signal: function (g) { try { return (((((g.state || {}).scholar || {}).trialDeeds) || {}).hunger_trial || 0) >= 2; } catch (e) { return false; } },
+      signalText: 'YOU HAVE EATEN UNSAFE FOOD MORE THAN ONCE',
+      close: 'cook food at a fire before eating — raw is a gamble'
+    },
+    {
+      id: 'wound_care',
+      signal: function (g) { try { return (((((g.state || {}).scholar || {}).trialDeeds) || {}).blood_trial || 0) >= 1; } catch (e) { return false; } },
+      signalText: 'YOU HAVE COME OUT OF A FIGHT BADLY HURT',
+      close: 'clean and bind wounds before they fester'
+    }
+  ];
+  // SEEK_HOW: the one teaching mechanic, shared by every gap. Human skills
+  // are taught human-to-human (skill-teaching.js) — trust 15+, a shared
+  // language, one lesson a day — before the System arrives and after.
+  var SEEK_HOW = 'ask a villager who knows it — "Teach me?" in conversation (trust 15+, one lesson a day)';
 
   function _day(self) { try { return (self.state.scholar || {}).day || 0; } catch (e) { return 0; } }
   function _vname(self, villageId) {
@@ -263,6 +299,46 @@
       return q;
     },
 
+    // _pickLearnGaps: the seek-knowledge suggestions (audit T4 P4-3, folded
+    // into the quest system per Steve). Up to 3 gaps in SEEK_GAPS priority
+    // order whose signal fires, the player doesn't already know, and some
+    // living villager can actually teach — a 3-day quest must be closable,
+    // and the System is genuinely trying (canon: chilling benefactor).
+    // Returns the gap rows (possibly empty — the caller then falls back to
+    // the plant-identification ask).
+    _pickLearnGaps() {
+      var self = this;
+      function known(id) {
+        try { if (self.personKnowsSkill && self.personKnowsSkill('player', id)) return true; } catch (e) {}
+        try { return (((((self.state || {}).codex || {}).skills || {})[id] || {}).level || 0) >= 1; } catch (e2) { return false; }
+      }
+      function teachable(id) {
+        var v = self.state.village || {};
+        var roster = v.roster || [];
+        for (var i = 0; i < roster.length; i++) {
+          var vid = roster[i];
+          if (!vid || vid === self.villagerId) continue;
+          try {
+            var p = self.getPerson ? self.getPerson(vid) : null;
+            if (!p || p.dead) continue;
+            if (v.away && v.away[vid]) continue;
+            if (self.personKnowsSkill && self.personKnowsSkill(vid, id)) return true;
+          } catch (e) { /* keep looking */ }
+        }
+        return false;
+      }
+      var out = [];
+      for (var gi = 0; gi < SEEK_GAPS.length && out.length < 3; gi++) {
+        var gap = SEEK_GAPS[gi];
+        var fired = false;
+        try { fired = !!gap.signal(self); } catch (e) { fired = false; }
+        if (!fired || known(gap.id)) continue;
+        if (!teachable(gap.id)) continue;
+        out.push(gap);
+      }
+      return out;
+    },
+
     // _makeAidQuest: concrete quest objects. need is engine-checkable; the
     // ask/needText/rewardText are the honest fiction.
     _makeAidQuest(kind, weird, sg, sickIds) {
@@ -304,19 +380,60 @@
         q.needText = q.targetName + ' recovers (any means)';
         q.rewardKind = R() < 0.6 ? 'ability' : 'supply';
       } else {
-        var baseline = 0;
-        try { baseline = Object.keys((this.state.codex || {}).plants || {}).length; } catch (e) {}
-        q.baselinePlants = baseline;
-        if (weird) {
-          q.title = 'WHAT IS GREEN';
-          q.ask = 'POINT AT THE GREEN THINGS AND SAY THEIR NAMES. LOUDLY. THE NAMES ARE THE MAGIC. TEACH US TWO (2) NEW GREEN THINGS AND WE WILL... UNDERSTAND. PROBABLY.';
+        // SEEK-KNOWLEDGE (audit T4 P4-3, folded here per Steve): the learn
+        // quest names run-state-derived knowledge gaps with how to close
+        // them — suggestions, never grants. Completes when ANY suggested
+        // gap is actually learned. Falls back to the old
+        // plant-identification ask when no gap applies.
+        var gaps = this._pickLearnGaps();
+        if (gaps.length) {
+          var gnames = [];
+          try {
+            var kdefs = this.data.knowledge || [];
+            for (var gi2 = 0; gi2 < gaps.length; gi2++) {
+              var kd = null;
+              for (var ki = 0; ki < kdefs.length; ki++) {
+                if (kdefs[ki] && kdefs[ki].id === gaps[gi2].id) { kd = kdefs[ki]; break; }
+              }
+              gnames.push(kd && kd.name ? kd.name : gaps[gi2].id);
+            }
+          } catch (e) { gnames = gaps.map(function (x) { return x.id; }); }
+          q.learnGaps = [];
+          for (var gi3 = 0; gi3 < gaps.length; gi3++) {
+            var bl = 0;
+            try { bl = (((((this.state.codex || {}).skills || {})[gaps[gi3].id]) || {}).level) || 0; } catch (e3) {}
+            q.learnGaps.push({ id: gaps[gi3].id, name: gnames[gi3], baseline: bl });
+          }
+          var sigTxt = gaps.map(function (x) { return x.signalText; }).join('. ');
+          var lackTxt = [];
+          for (var gi4 = 0; gi4 < gaps.length; gi4++) {
+            lackTxt.push(gnames[gi4].toUpperCase() + ' (' + gaps[gi4].close.toUpperCase() + ')');
+          }
+          if (weird) {
+            q.title = 'LEARN BY OSMOSIS';
+            q.ask = sigTxt + '. ACQUIRE ONE OF: ' + lackTxt.join('; ') + '. METHOD: PRESS YOUR FOREHEAD AGAINST A KNOWING ONE\'S FOREHEAD UNTIL THE KNOWLEDGE TRANSFERS. (THE FOREHEAD PART IS OPTIONAL. THE REAL METHOD: ' + SEEK_HOW.toUpperCase() + '. WE DO NOT KNOW THESE ONES OURSELVES. WE ARE THE WRONG SPECIES FOR THEM.)';
+          } else {
+            q.title = 'WHAT YOU LACK';
+            q.ask = 'WE HAVE BEEN WATCHING YOUR... METRICS. ' + sigTxt + '. YOU LACK: ' + lackTxt.join('; ') + '. CLOSE ONE: ' + SEEK_HOW.toUpperCase() + '.';
+          }
+          q.need = { learnGaps: q.learnGaps.map(function (x) { return x.id; }) };
+          q.needText = 'learn one of: ' + gnames.join(', ') + ' — ' + SEEK_HOW;
+          q.rewardKind = R() < 0.6 ? 'ability' : 'supply';
         } else {
-          q.title = 'SHOW YOUR WORK';
-          q.ask = 'KNOWLEDGE IS THE ONLY CURRENCY WE RESPECT. IDENTIFY TWO (2) NEW PLANTS — NAME THEM, LEARN THEM, WRITE THEM DOWN. PROVE YOUR SPECIES PAYS ATTENTION.';
+          var baseline = 0;
+          try { baseline = Object.keys((this.state.codex || {}).plants || {}).length; } catch (e) {}
+          q.baselinePlants = baseline;
+          if (weird) {
+            q.title = 'WHAT IS GREEN';
+            q.ask = 'POINT AT THE GREEN THINGS AND SAY THEIR NAMES. LOUDLY. THE NAMES ARE THE MAGIC. TEACH US TWO (2) NEW GREEN THINGS AND WE WILL... UNDERSTAND. PROBABLY.';
+          } else {
+            q.title = 'SHOW YOUR WORK';
+            q.ask = 'KNOWLEDGE IS THE ONLY CURRENCY WE RESPECT. IDENTIFY TWO (2) NEW PLANTS — NAME THEM, LEARN THEM, WRITE THEM DOWN. PROVE YOUR SPECIES PAYS ATTENTION.';
+          }
+          q.need = { plantsGain: 2 };
+          q.needText = 'identify 2 new plants (' + baseline + ' known now)';
+          q.rewardKind = R() < 0.6 ? 'ability' : 'supply';
         }
-        q.need = { plantsGain: 2 };
-        q.needText = 'identify 2 new plants (' + baseline + ' known now)';
-        q.rewardKind = R() < 0.6 ? 'ability' : 'supply';
       }
       return q;
     },
@@ -432,10 +549,27 @@
     },
 
     // aidQuestCheckLearn: called per day-part — codex grew?
+    // Learn-gap quests complete when ANY suggested gap is actually learned
+    // (level above its offer-time baseline) — the quest suggests, never
+    // grants. Plant quests keep the old codex-grew check.
     aidQuestCheckLearn() {
       var st = this.state;
       var q = st.activeAidQuest;
       if (!q || q.kind !== 'learn') return null;
+      if (q.need && q.need.learnGaps && q.need.learnGaps.length) {
+        var learned = null;
+        for (var li = 0; li < (q.learnGaps || []).length; li++) {
+          var lg = q.learnGaps[li] || {};
+          var lvl = 0;
+          try { lvl = (((((st.codex || {}).skills || {})[lg.id]) || {}).level) || 0; } catch (e) {}
+          if (lg.id && lvl > (lg.baseline || 0)) { learned = lg; break; }
+        }
+        if (learned) {
+          this.sysSay('"' + String(learned.name || 'THE KNOWLEDGE').toUpperCase() + '. LEARNED. IT IS IN YOU NOW — THE HUMAN WAY, HAND TO HAND, NEVER SYSTEM TO SLOT. WE ARE... PROUD? IS THIS PRIDE? WE ARE KEEPING IT EITHER WAY."');
+          return this._completeAidQuest(true);
+        }
+        return null;
+      }
       var now = 0;
       try { now = Object.keys((st.codex || {}).plants || {}).length; } catch (e) {}
       if (now >= (q.baselinePlants || 0) + (q.need.plantsGain || 2)) {
