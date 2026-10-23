@@ -1,0 +1,32 @@
+=== seed 60001 day 100 — conversation with Felicia (gen_vje7trn) ===
+occupation=comic shop owner temperament=intense trust=88 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all. That's my read."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: They nod, giving you room to think.
+(want=seek_taken stage=1)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "The water goes glass-still. That's the The Living Wire telling you it's about to move. It hunts at night — give the dark a wide berth."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Taro. Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Abiu. Leaf, stem, smell. You won't forget it now."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=3)
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=seek_taken stage=3)
+closing line: "Good talk."
+want final: id=seek_taken stage=3 resolution=promised

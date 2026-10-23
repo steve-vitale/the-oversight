@@ -1,0 +1,21 @@
+=== seed 60004 day 140 — conversation with Milagros (visjoin_132) ===
+occupation=plumber temperament=withdrawn trust=20 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what got you through the first week — What got you through the first week? The very first days. …sorry."
+(turn0 choices: ans:q_first_week:a_shock, ans:q_first_week:a_person, ans:q_first_week:a_blur, leave, silence)
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time. ...never mind."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Spite, mostly. Pure, clean spite at the sky. Then someone shared food with me and the spite turned into something else. I still don't have a word for the something else."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Come see what I found. You won't believe it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I... should go."
+want final: id=curious stage=3 resolution=engaged

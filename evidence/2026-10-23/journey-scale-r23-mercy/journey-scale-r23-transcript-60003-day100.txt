@@ -1,0 +1,21 @@
+=== seed 60003 day 100 — conversation with Lucia (gen_d92g4s9) ===
+occupation=welder temperament=restless trust=91 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: goon, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "Another day like today and we're choosing who eats. Nobody's worked where the bilberry grows thick in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=ask_favor stage=3)
+YOU: [goon] "Keep going."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "I can't sit still anymore. But this was good. Quick, but good."
+want final: id=ask_favor stage=3 resolution=deflected

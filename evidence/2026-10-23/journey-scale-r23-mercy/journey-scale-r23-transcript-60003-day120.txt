@@ -1,0 +1,12 @@
+=== seed 60003 day 120 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=30 dead=false mood=grieving
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "I asked Weerachai about this wound — Weerachai's gone. Still need hands. Are you in?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Thanks. I just... need some air."
+want final: id=ask_favor stage=3 resolution=promised

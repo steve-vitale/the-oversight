@@ -1,0 +1,15 @@
+=== seed 60001 day 80 — conversation with Felicia (gen_vje7trn) ===
+occupation=comic shop owner temperament=intense trust=88 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "Nora — I keep coming back to it. The pods, humming. Do you think they're still in there? Do you understand?"
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "It's all right if you don't know."
+(want=seek_taken stage=1)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "We're done here. For now."
+want final: id=seek_taken stage=3 resolution=promised

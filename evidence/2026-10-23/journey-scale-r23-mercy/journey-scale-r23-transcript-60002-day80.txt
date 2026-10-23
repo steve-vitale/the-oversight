@@ -1,0 +1,12 @@
+=== seed 60002 day 80 — conversation with Wei (chen_wei) ===
+occupation=Beekeeper temperament=gentle trust=40 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — I'm achy and wrung out, barely keeping food down. I need help. Please."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, goon, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Go gently, okay?"
+want final: id=ask_favor stage=3 resolution=promised

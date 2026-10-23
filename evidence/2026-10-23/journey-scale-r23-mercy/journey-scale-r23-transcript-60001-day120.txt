@@ -1,0 +1,27 @@
+=== seed 60001 day 120 — conversation with Felicia (gen_vje7trn) ===
+occupation=comic shop owner temperament=intense trust=87 dead=false mood=grieving
+want: seek_taken (stage 0)
+
+THEM: "I keep expecting to see them by the fire. Then I remember."
+(turn0 choices: agency:ask_field, confront:d_mmdd0pa, dlg:invite, dlg:comfort, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Hear me out — You're kind. Don't let this place change that."
+(want=seek_taken stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=seek_taken stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=seek_taken stage=0)
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+(want=seek_taken stage=0)
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=seek_taken stage=0)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+(want=seek_taken stage=0)
+YOU: (leave)
+closing line: "...Thanks for being here. That's all."
+want final: id=seek_taken stage=3 resolution=unestablished
