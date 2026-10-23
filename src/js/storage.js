@@ -41,7 +41,7 @@
 //   - plantCacheTheftSuspicion(vid, c, village?)
 //   - villageTrustLevel()
 // rules:
-//   - ash_gear_honored: depositing ashOf-tagged gear (from a phoenix ash-pile) at Haven honors the dead -- trust +8 + honoring gossip, gear enters village circulation; armor/misc have no deposit hook (no communal armor pile, canon) (code: phoenixHonorDeposit, Steve 2026-10-09)
+//   - ash_gear_honored: depositing ashOf-tagged gear (from a phoenix ash-pile) at Haven honors the dead -- trust +8 + honoring gossip, gear enters village circulation; armor HAS a deposit hook since armorvillage (2026-10-23): the armory's armor section, deposit-is-consent (design calls #1-2 — the old "no communal armor pile, canon" note was the automatic-redistribution reading; deliberate sharing was always blessed, game.js:7272) (code: donateArmor, Steve 2026-10-09 re-read, Steve can overrule)
 //   - pharmacy_identity: stash entries keep medicine identity (medType, doses) and units -- a dosed bottle donated and returned comes back dosed and usable, never a brick; dosed medicine never merges in stacksMatch (dose pools are per-bottle) (code: _depositStashedItem, _takeStashedItem, stacksMatch, miser break-it 2026-10-10)
 //   - no_midfight_storage: bury/dig/take-from-cache and all stash donate/take paths refuse mid-fight (tickAction no-ops in combat = free actions) and after death (code: buryCache, digUpCache, takeFromCache, donateMaterial, takeMaterial, donateTool, takeTool, _depositStashedItem, _takeStashedItem, miser break-it 2026-10-10)
 //   - npc_consumes_honestly: NPC armory borrows take one unit (entry decremented); NPC pharmacy use spends one dose (entry spliced only at zero) (code: villagerGearUp, villagerHealCheck, miser break-it 2026-10-10)
@@ -247,6 +247,13 @@
       // Once deposited, any villager may take (including NPCs gearing up).
       v.stash.weapons = v.stash.weapons || [];
       v.stash.medicine = v.stash.medicine || [];
+      // ARMOR PILE (armorvillage 2026-10-23, design calls #1-2): the armory
+      // gains an armor section. Deposit-is-consent like weapons — deliberate
+      // sharing, never automatic redistribution (Steve 2026-10-09 individual
+      // ownership re-read: the canon bans automatic redistribution; gifts,
+      // trades, discards and corpse loot were always blessed). Nothing is
+      // ever taken; deposits opt in. Steve can overrule.
+      v.stash.armor = v.stash.armor || [];
       v.stash.ledger = v.stash.ledger || [];
       return v.stash;
     },
@@ -610,6 +617,16 @@
       const def = (this.data.items || []).find(i => i.id === id);
       return !!(def && def.class === 'weapon');
     },
+    // isStashableArmor (armorvillage 2026-10-23): the armor section's filter.
+    // Real armor (def.armor with protection > 0) — not clothing with no
+    // protection value, not keepsakes, not bonded gear. Same gates as weapons.
+    isStashableArmor(item) {
+      if (!item || item.bonded || (item.units ?? 1) <= 0) return false;
+      if (this.isKeepsake && this.isKeepsake(item)) return false;
+      const id = item.itemId || item.id;
+      const def = (this.data.items || []).find(i => i.id === id);
+      return !!(def && def.armor && (def.armor.protection || 0) > 0);
+    },
     isMedicine(item) {
       if (!item || (item.units ?? 1) <= 0 || (item.doses != null && item.doses <= 0)) return false;
       const id = item.itemId || item.id || '';
@@ -639,8 +656,11 @@
       // a branch went into the armory as a "weapon" and minted +2 trust,
       // with the say message lying about it ("Left your Branch in the
       // armory."). Enforce at the engine level, refuse honestly.
+      // (armorvillage 2026-10-23: the armor section's filter added here —
+      // same honest refusal.)
       const sectionOk = section === 'weapons' ? this.isStashableWeapon(item)
-        : section === 'medicine' ? this.isMedicine(item) : true;
+        : section === 'medicine' ? this.isMedicine(item)
+        : section === 'armor' ? this.isStashableArmor(item) : true;
       if (!sectionOk) {
         this.say(`The ${kindLabel} doesn't take ${item.name || 'that'}.`);
         return null;
@@ -663,7 +683,9 @@
       // ledger records the entry's real unit count, not 1×.
       this.stashLog('give', item.name || def.name || id, item.units || 1);
       const vid = this.state.scholar.villagerId;
-      const il = this._stashItemLedgers(vid, section === 'weapons' ? 'Weapon' : 'Medicine');
+      // (armorvillage 2026-10-23: 'Armor' ledger section added alongside
+      // 'Weapon'/'Medicine' — same give/take bookkeeping.)
+      const il = this._stashItemLedgers(vid, section === 'weapons' ? 'Weapon' : section === 'armor' ? 'Armor' : 'Medicine');
       // ASH GEAR HONORED (Steve 2026-10-09): bringing a phoenix victim's
       // belongings home replaces the ordinary deposit grant (+8 as said,
       // not +8 stacked on the ordinary +2).
@@ -680,6 +702,10 @@
     },
     donateWeapon(idx) { return this._depositStashedItem(idx, 'weapons', 'armory'); },
     donateMedicine(idx) { return this._depositStashedItem(idx, 'medicine', 'pharmacy'); },
+    // donateArmor (armorvillage 2026-10-23, design calls #1-2): the communal
+    // armor pile's deposit hook. Armor becomes communal ONLY on deliberate
+    // deposit — deposit is the consent (the weapons armory's pattern).
+    donateArmor(idx) { return this._depositStashedItem(idx, 'armor', 'armory'); },
     // _takeStashedItem(section, itemId, kindLabel): shared spine for takes.
     _takeStashedItem(section, itemId, kindLabel) {
       // MID-FIGHT / OVER (miser break-it 2026-10-10): see buryCache.
@@ -714,8 +740,10 @@
       // re-taking your own un-returned deposit is noticed, -5. Taking
       // someone else's gift is normal communal use. Kills the
       // deposit↔take-back +2 trust farm that printed +22 over 11 cycles.
+      // (armorvillage 2026-10-23: the armor section rides the same rule —
+      // 'Armor' ledger section.)
       const v2 = this.state.village, vid2 = this.state.scholar.villagerId;
-      const il2 = this._stashItemLedgers(vid2, section === 'weapons' ? 'Weapon' : 'Medicine');
+      const il2 = this._stashItemLedgers(vid2, section === 'weapons' ? 'Weapon' : section === 'armor' ? 'Armor' : 'Medicine');
       const gaveThis = (il2.gives[itemId] || 0) - (il2.takes[itemId] || 0);
       il2.takes[itemId] = (il2.takes[itemId] || 0) + 1;
       if (gaveThis > 0) {
@@ -737,6 +765,10 @@
     },
     takeWeapon(itemId) { return this._takeStashedItem('weapons', itemId, 'armory'); },
     takeMedicine(itemId) { return this._takeStashedItem('medicine', itemId, 'pharmacy'); },
+    // takeArmor (armorvillage 2026-10-23): take a deposited armor piece back
+    // out of the armory's armor section. Same take-back sting (-5) and chronic
+    // net-taker rule as weapons/medicine — the pile is communal, not a farm.
+    takeArmor(itemId) { return this._takeStashedItem('armor', itemId, 'armory'); },
     stashLedgerText(n) {
       const st = this.stashState();
       const rows = (st.ledger || []).slice(0, n || 5);
@@ -778,10 +810,16 @@
       const medicine = (st.medicine || []).filter(t => (t.units ?? 1) > 0 && (t.doses == null || t.doses > 0)).map(t =>
         `<span class="small">💊 ${t.name}${(t.units || 1) > 1 ? ` ×${t.units}` : ''}${t.doses != null ? ` (${t.doses} dose${t.doses === 1 ? '' : 's'})` : ''} <button class="btn ghost sm" data-stash-med="${t.itemId}">Take</button></span>`
       ).join(' · ') || '<span class="small" style="opacity:.6">no medicine</span>';
+      // ARMOR PILE (armorvillage 2026-10-23, design call #2): the armory's
+      // armor section — deposited armor, takeable by anyone who needs it.
+      const armorPile = (st.armor || []).filter(t => (t.units ?? 1) > 0).map(t =>
+        `<span class="small">🛡️ ${t.name}${(t.units || 1) > 1 ? ` ×${t.units}` : ''} <button class="btn ghost sm" data-stash-armor="${t.itemId}">Take</button></span>`
+      ).join(' · ') || '<span class="small" style="opacity:.6">no armor</span>';
       return `<p class="small" style="margin-top:8px"><b>📦 Village stash</b> <span style="opacity:.6">(${lvlNote})</span></p>` +
         rows +
         `<p class="small">🔧 Spare tools: ${tools}</p>` +
         `<p class="small">⚔️ Armory: ${weapons}</p>` +
+        `<p class="small">🛡️ Armor: ${armorPile}</p>` +
         `<p class="small">💊 Pharmacy: ${medicine}</p>` +
         `<p class="small" style="opacity:.6;white-space:pre-line">${this.stashLedgerText(3)}</p>`;
     },

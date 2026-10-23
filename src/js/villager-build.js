@@ -786,6 +786,60 @@
             try { this.tele('villager_gear', { vid: w.vid, item: w.id, via: 'armory' }); } catch (e) { warn('tele', e); }
           }
         }
+        // 3b. the armory — ARMOR (armorvillage 2026-10-23, ARMORVILLAGE=1):
+        // the pile's deposited armor, deposit-is-consent, mirrored exactly on
+        // the weapons pattern above: biggest gains first, one per villager per
+        // day; the armor they replace goes back on the pile. The ledger
+        // remembers the giver. (Gate: control = no structure.)
+        try {
+          const _avOn = (typeof process !== 'undefined' && process.env && process.env.ARMORVILLAGE === '1');
+          if (_avOn) {
+            let apile = [];
+            try { const st2 = this.stashState ? this.stashState() : null; apile = (st2 && st2.armor) || []; } catch (e2) { warn('stashStateArmor', e2); }
+            if (apile.length) {
+              const wants = [];
+              for (const { vid, p } of people) {
+                for (let i = 0; i < apile.length; i++) {
+                  const id = idOf(apile[i]);
+                  const d = defOf(id);
+                  if (!d || !d.armor) continue;
+                  const slot = eq.slotForItem(d);
+                  if (!slot) continue;
+                  const gain = (this._gearValue(d) - slotVal(p, slot)) * this.villagerGearFit(vid, id);
+                  if (gain > 0) wants.push({ vid, p, id, slot, gain });
+                }
+              }
+              wants.sort((a, b) => b.gain - a.gain);
+              const served = new Set();
+              for (const w of wants) {
+                if (served.has(w.vid)) continue;
+                const idx = apile.findIndex(e => idOf(e) === w.id && (e.units || 1) > 0);
+                if (idx < 0) continue;
+                if (this._gearValue(defOf(w.id)) <= slotVal(w.p, w.slot)) continue;
+                const ent = apile[idx];
+                ent.units = (ent.units || 1) - 1;
+                if (ent.units <= 0) apile.splice(idx, 1);
+                try { if (this.stashLog) this.stashLog('take', w.id, 1, w.vid); } catch (e2) { warn('stashLog', e2); }
+                const old = (w.p.equipped || {})[w.slot];
+                w.p.items = w.p.items || [];
+                w.p.items.push(w.id);
+                if (old && old.itemId) {
+                  const oi = w.p.items.findIndex(it => idOf(it) === old.itemId);
+                  if (oi >= 0) {
+                    w.p.items.splice(oi, 1);
+                    const back = apile.find(e => idOf(e) === old.itemId);
+                    if (back) back.units = (back.units || 1) + 1; else apile.push({ itemId: old.itemId, units: 1 });
+                    try { if (this.stashLog) this.stashLog('deposit', old.itemId, 1, w.vid); } catch (e2) { warn('stashLog', e2); }
+                  }
+                }
+                eq.autoEquip(w.p, defs);
+                served.add(w.vid);
+                moved++;
+                try { this.tele('villager_gear', { vid: w.vid, item: w.id, via: 'armor_pile' }); } catch (e2) { warn('tele', e2); }
+              }
+            }
+          }
+        } catch (e) { warn('gear armor pile', e); }
       } catch (e) { warn('villagerGearDay', e); }
       return moved;
     },
@@ -796,6 +850,9 @@
         // recruits who arrived after the first day get their first ability too
         try { if (this.grantVillagerKnacks) this.grantVillagerKnacks(); } catch (e) { warn('knacks', e); }
         this.villagerGearDay();
+        // ARMOR CRAFT (armorvillage 2026-10-23): NPC armor-craft beats —
+        // villagers who demonstrably know an armor recipe sew for themselves.
+        try { if (this.villagerArmorCraftDay) this.villagerArmorCraftDay(); } catch (e) { warn('armorcraft', e); }
         const v = this.state.village || {};
         for (const rid of (v.roster || [])) {
           if (rid === this.villagerId) continue;
@@ -805,6 +862,95 @@
         // SKILL LESSONS (skill-teaching.js): villagers teach each other human skills that fit their builds.
         if (this.villagerSkillLessonsDay) this.villagerSkillLessonsDay();
       } catch (e) { warn('villagerBuildDay', e); }
+    },
+
+    // villagerArmorCraftDay(): NPC armor-craft beats (armorvillage 2026-10-23,
+    // design calls #4-6). A villager at home who demonstrably knows an armor
+    // recipe spends downtime sewing. KNOWLEDGE = demonstrated by wearing:
+    // wearing bark_armor means bark_armor L1; wearing hide_armor means
+    // hide_armor L1 (no new knowledge system — "if you don't know, it doesn't
+    // show", and wearing it IS the showing). Materials come from the communal
+    // materials pile (bark/vine/hide already in MAT_DEFS; the
+    // whittle-from-the-woodpile precedent covers communal-materials to
+    // personal-gear). Odds mirror the player's craft() exactly: L1 35% blind
+    // (materials at risk), L2+ 85%; a successful blind craft teaches L2 (the
+    // PRACTICE rule). ≤1 attempt per villager per 3 days. The piece is THEIRS
+    // (individual ownership) — it enters their spares, and villagerGearDay's
+    // spares flow moves it to whoever gains most. Gated on ARMORVILLAGE=1
+    // (control = no structure). Returns the number of pieces crafted.
+    villagerArmorCraftDay() {
+      let made = 0;
+      try {
+        const _avOn = (typeof process !== 'undefined' && process.env && process.env.ARMORVILLAGE === '1');
+        if (!_avOn) return 0;
+        const v = this.state.village || {};
+        const day = (this.state.scholar || {}).day || 0;
+        const defs = this.data.items || [];
+        const recipes = this.data.recipes || [];
+        const eq = (typeof globalThis !== 'undefined' && globalThis.Scattering && globalThis.Scattering.equipment) || null;
+        v.avCraft = v.avCraft || {};       // vid -> { recipeId: level }
+        v.avCraftCd = v.avCraftCd || {};   // vid -> last attempt day
+        const home = (v.roster || []).filter(id =>
+          id !== this.villagerId && !((v.away || {})[id]) &&
+          !(this.getPerson ? (this.getPerson(id) || {}).dead : false));
+        for (const vid of home) {
+          try {
+            if ((v.avCraftCd[vid] || -99) > day - 3) continue; // ≤1 attempt / 3d
+            const p = this.getPerson ? this.getPerson(vid) : null;
+            if (!p) continue;
+            // knowledge: demonstrated by wearing
+            const wornIds = new Set(Object.values(p.equipped || {}).map(e => e && e.itemId).filter(Boolean));
+            const known = [];
+            if (wornIds.has('bark_armor')) known.push('bark_armor');
+            if (wornIds.has('hide_armor')) known.push('hide_armor');
+            if (!known.length) continue;
+            const lv = v.avCraft[vid] = v.avCraft[vid] || {};
+            // pick the best-known recipe with materials on hand
+            let pick = null;
+            for (const rid of known) {
+              const recipe = recipes.find(r => r.id === rid);
+              if (!recipe || !recipe.materials) continue;
+              const level = lv[rid] || 1;
+              const mats = v.stash && v.stash.materials;
+              let ok = true;
+              for (const [m, need] of Object.entries(recipe.materials)) {
+                if (((mats || {})[m] || 0) < need) { ok = false; break; }
+              }
+              if (!ok) continue;
+              const prot = ((defs.find(d => d.id === rid) || {}).armor || {}).protection || 0;
+              if (!pick || prot > pick.prot) pick = { rid, recipe, level, prot };
+            }
+            if (!pick) continue;
+            v.avCraftCd[vid] = day;
+            // honest take: communal materials, one craft's worth, narrated
+            const mats = v.stash.materials;
+            for (const [m, need] of Object.entries(pick.recipe.materials)) mats[m] -= need;
+            const rate = pick.level >= 2 ? 0.85 : 0.35;
+            const success = Math.random() < rate;
+            let nm = 'Someone';
+            try { nm = (this.firstRef ? this.firstRef(vid) : null) || p.name || 'Someone'; } catch (e) {}
+            let atHaven = false;
+            try { atHaven = this.playerAtHaven ? this.playerAtHaven() : false; } catch (e) {}
+            const cdef = defs.find(d => d.id === pick.rid) || {};
+            const pieceName = cdef.name || pick.recipe.name || pick.rid;
+            if (!success) {
+              try { if (this.tele) this.tele('armor_craft', { vid: vid, item: pick.rid, ok: false }); } catch (e) {}
+              // no silent actions: a failed craft is witnessed when you're home
+              if (atHaven) { try { this.say(`${nm} spent the afternoon sewing, and the ${pieceName} came apart in their hands. The bark strips are wasted.`); } catch (e) {} }
+              continue; // materials already consumed above — the woods keep them
+            }
+            if (pick.level < 2) lv[pick.rid] = 2; // PRACTICE: blind success teaches
+            p.items = p.items || [];
+            p.items.push({ itemId: pick.rid, name: cdef.name || pick.recipe.name || pick.rid,
+              units: 1, kcalEach: 0, kg: cdef.kg || pick.recipe.kg || 0.5 });
+            try { if (eq) eq.autoEquip(p, defs); } catch (e) {}
+            made++;
+            try { if (this.tele) this.tele('armor_craft', { vid: vid, item: pick.rid, ok: true }); } catch (e) {}
+            if (atHaven) { try { this.say(`${nm} spent the afternoon at the workbench and sewed a ${pieceName} that holds together. ${nm} wears it now.`); } catch (e) {} }
+          } catch (e) { warn('armorcraft one', e); }
+        }
+      } catch (e) { warn('villagerArmorCraftDay', e); }
+      return made;
     },
   };
 

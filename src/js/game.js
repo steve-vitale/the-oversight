@@ -12687,6 +12687,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.state.scholar.equipped = this.state.scholar.equipped || {};
       // unequip current (back to inventory, stays there)
       // equip new (remove from inventory, set slot)
+      // #806 HONEST ACCOUNTING (armorvillage 2026-10-23): the old worn piece
+      // used to VANISH on overwrite — the "unequip current (back to
+      // inventory)" comment had no code, and the ledger hook skipped
+      // oldId===nowId. Units are conserved: the displaced piece goes back to
+      // the pack, flags intact (bonded / alienLoot travel like unequip()).
+      const _displaced = this.state.scholar.equipped[slot] || null;
       // EQUIPMENT (Steve 2026-10-06): render hints for the sprite layer.
       let _hints = {};
       try {
@@ -12704,6 +12710,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         ...(item.alienLoot ? { alienLoot: true, alienEffectHidden: item.alienEffectHidden } : {}) };
       // remove from inventory (it's worn, not carried)
       this.state.scholar.inventory.splice(itemIdx, 1);
+      // #806: the displaced piece returns to the pack (units conserved —
+      // inventory loses the newly-worn piece, regains the old one).
+      if (_displaced && _displaced.itemId) {
+        const _dd = this.data.items.find(i => i.id === _displaced.itemId) || {};
+        this.state.scholar.inventory.push({ itemId: _displaced.itemId,
+          name: _displaced.name || _dd.name || _displaced.itemId, units: 1, kcalEach: 0, kg: 0.5,
+          ...(_displaced.bonded ? { bonded: true, bond: _displaced.bond || 0,
+            bondOffered: _displaced.bondOffered || [], enhancements: _displaced.enhancements || [] } : {}),
+          ...(_displaced.alienLoot ? { alienLoot: true, alienEffectHidden: _displaced.alienEffectHidden } : {}) });
+      }
       this.say(`Equipped ${def.name} (${slot}).`);
       // GEAR DISCOVERY (Steve 2026-10-09): wielding it teaches the recipe L1.
       try { this.noteGearHandled(def.id); } catch (e) {}
@@ -12742,6 +12758,55 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       delete this.state.scholar.equipped[slot];
       this.say(`Unequipped ${eq.name}.`);
       return null;
+    },
+    // GIFT ARMOR (armorvillage 2026-10-23, design call #3): the deliberate
+    // player→villager armor hand-off. A specific piece from your pack to a
+    // specific villager, in person at haven, voiced. The piece becomes THEIRS
+    // outright — individual ownership (Steve 2026-10-09): no take-back, no
+    // communal claim. +2 trust (the deliberate-generosity grant, same as a
+    // deposit). Honest units: exactly one unit moves; a stacked entry keeps
+    // the rest. Worn armor must be unequipped first (the honest unequip path).
+    giftArmor(invIdx, vid) {
+      if (this.over) return null;
+      if (this.inCombat && this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      if (this.havenStoresAccess && this.havenStoresAccess() === 'none') {
+        this.say("You're not at haven — they're not here to hand it to.");
+        return null;
+      }
+      const inv = this.state.scholar.inventory || [];
+      const item = inv[invIdx];
+      if (!item) return null;
+      const id = item.itemId || item.id;
+      const def = (this.data.items || []).find(i => i.id === id);
+      if (!def || !def.armor) { this.say("That's not armor."); return null; }
+      if (item.bonded || (this.isKeepsake && this.isKeepsake(item))) {
+        this.say("That's yours. Not theirs to take.");
+        return null;
+      }
+      let person = null;
+      try { person = this.getPerson ? this.getPerson(vid) : null; } catch (e) {}
+      if (!person || person.dead) { this.say("They're not here."); return null; }
+      let nm = 'them';
+      try { nm = (this.firstRef ? this.firstRef(vid) : null) || (person.name || 'them'); } catch (e) { nm = person.name || 'them'; }
+      // one unit moves; the entry keeps the rest (honest accounting, #807)
+      if ((item.units || 1) > 1) item.units -= 1; else inv.splice(invIdx, 1);
+      const S = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+      let before = 0;
+      try { before = (S.equipment && S.equipment.armorOf(person, this.data.items)) || 0; } catch (e) {}
+      person.items = person.items || [];
+      person.items.push({ itemId: id, name: item.name || def.name, units: 1, kcalEach: 0,
+        kg: item.kg != null ? item.kg : (def.kg || 0.5) });
+      try { if (S.equipment) S.equipment.autoEquip(person, this.data.items); } catch (e) {}
+      let after = before;
+      try { after = (S.equipment && S.equipment.armorOf(person, this.data.items)) || 0; } catch (e) {}
+      try { if (this.bumpTrust) this.bumpTrust(vid, 2, 'gave them armor outright'); } catch (e) {}
+      try { if (this.tele) this.tele('armor_gift', { vid: vid, item: id }); } catch (e) {}
+      if (after > before) {
+        this.say(`You hand ${nm} the ${def.name}. ${nm} pulls it on over their clothes, checking the straps — it fits.`);
+      } else {
+        this.say(`You hand ${nm} the ${def.name}. ${nm} hefts it, nods thanks, and stows it with their things.`);
+      }
+      return this.tickAction(2) || this.status();
     },
     armorBonus() {
       // EQUIPMENT (Steve 2026-10-06): unified slot system. Old saves migrate armor->torso.
