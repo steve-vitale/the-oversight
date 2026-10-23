@@ -112,3 +112,43 @@ channel #516 named as the steve-call resolution. Steve can overrule.
 
 ## Verdict
 (pending)
+
+## Pilot results (32/32 configs, anchor f5f19667ce19, run fleshout-20261023T0713Z)
+
+The dead 0515Z run's worker died mid-build (uncommitted src/js, no policy, no proof, no pilot). The adopting run completed the build (policy scripts/policies/armorvillage.js, proof scripts/test-armorvillage-b.js 24/24 GREEN, sweep scripts/sweep-armorvillage-b.js + analyzer), committed 0f2ae0c3, cherry-picked clean onto master as 1015519a5 (a `git rebase` attempt duplicated its pick and stalled — aborted, cherry-pick used). Pilot: seeds 67601–67608 × {leadfeast, belongfeast} × {control, armed}, 180d death-aware, ARMORYDRIVE=1 pinned both arms. Proof re-verified 24/24 GREEN post-rebase.
+
+**PRIMARY: NO-GO** (binding — one leg missed):
+- (1) pile deposits ≥2/seed: **8/8 PASS** (deposits 0–32/seed)
+- (2) villagers equipped from pile/hand-off ≥2/seed: **8/8 PASS** (pile-takes 0–36, gifts 0–10/seed)
+- (3) NPC craft beats produce ≥1/seed: **0/8 FAIL** — zero crafts across all 32 configs
+- armored15 median-of-medians: control 3 → armed 5, **PASS** (bar armed > control+0.5)
+
+Guardrails: median survival control 158d / armed 140d (median *paired* diff 0 — symmetric chaos tails, see below); starvation 12→11; no new death kinds armed-only; death-cause shares sane (no cause >2× control share: combat 365→402, villager combat 122→117, expedition 34→45).
+
+### Mechanism autopsy (kill discipline — why the craft leg missed)
+
+The craft beat is **substrate-starved, not mechanism-broken**:
+- Proof E1d: the beat fires and produces armor when materials exist (1 piece/30d at L2 odds) — mechanism sound.
+- Diagnostic (3 seeds × 120d, instrumented): villagers wear bark/hide armor on 85/120 and 30/120 days (knowledge gate fires), but the communal materials pile holds **bark:0, vine:0, hide:0 on all 360 village-days**. The beat's materials precondition is never satisfied — nobody (villager or policy) brings bark/vine/hide into the communal pile under the pinned substrate. The pile accumulates wood/branch/stone only.
+- The recipes need {bark:3, vine:2} / {hide:2, vine:1} — all absent. The pre-reg's design call #5 assumed "bark/vine/hide already in MAT_DEFS" communal flow; the flow doesn't exist. **The blank is the materials inflow channel** (who gathers bark/vine/hide communally?), a separate design question — filed to sim-findings.md.
+- Per kill discipline: the craft beat is not killed (mechanism proven, env-gated, harmless when starved); it is documented as precondition-starved. The pile/gift/draw structure — the arm's core — fires at scale and moves the wall metric.
+
+The -18d median survival dip is chaos, not lever harm: median paired diff is 0 with symmetric tails (worst -52/-47/-41 all belongfeast; best +61/+47/+32). No gift-activity correlation (gifts fire on both tails). Same deterministic-chaos signature as the scholardist-confirm diagnosis.
+
+### Sense test (SENSE-TESTING LAW)
+Targeted 60d run (seed 67602, leadfeast, say-line capture): the gift beat reads as people — "You hand Luz the Bark armor. Luz pulls it on over their clothes, checking the straps — it fits." The deposit beat is voiced — "Left your Hatchet in the armory. Anyone who needs it can take it." The pile feeds partly through corpse loot ("You take hatchet, bark armor, good boots, hand saw, snare wire from Leo. Your hands know what they did. (+6 trauma)") — the economy reads as scavenged, deliberate, and owned. **PASS**. The craft beat has no wild transcript (never fires — the starved precondition).
+
+### Metric review
+The pre-registered primary is judged as written: NO-GO (craft bar 0/8). No re-score. Metric note for the next run: the craft bar conflated two mechanisms (beat works × materials flow exists) — a future craft arm should pre-register the materials precondition separately (e.g., "communal bark+vine present ≥N days") or pair with a materials-inflow lever. The armored15 bar (+0.5) was the right wall-adjacent measure and it moved +2.
+
+### Verdict
+**NO-GO on the binding primary** (craft leg missed with teeth — root-caused to the missing materials inflow, not a broken mechanism). The structure (pile + gift + pile-draw + #806 fix) is proven, env-gated default-off, and moves armored15 3→5: it lands as a measured NO-GO layer (scholardist-confirm precedent), not a design change. The #806 equip-overwrite fix lands always-on as the bugfix it is (the code's own comment promised it). Named nexts: (1) materials-inflow design (who brings bark/vine/hide home communally?) — the craft beat's precondition; (2) confirm the armored15 move on 12–16 fresh seeds if the axis wants the wall bar sized.
+
+### Blanks filled / documented
+- Filled: #806 (Game.equip same-id overwrite vanish) — fixed with honest unit conservation, proven 24/24.
+- Filled: #646's structure (communal armor pile + player→villager hand-off) — built, proven, measured.
+- Documented: the materials-inflow blank (filed to sim-findings.md) — the craft beat's starved precondition.
+- Documented: the rebase pick-duplication incident (new AGENTS.md lesson candidate).
+
+### Wall numbers (this corpus, n=32)
+national / table / wins / wave4-5: reported via the armored15 primary; full wall rollup in the run evidence.
