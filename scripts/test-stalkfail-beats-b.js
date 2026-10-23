@@ -67,7 +67,7 @@ async function fixture(seed) {
         if (!r || !r.msg) continue;
         kcal += (r.kcal || 0);
         if ((r.kcal || 0) > 0) { kills++; if (r.aid) aids.push(r.aid); }
-        else if (/stalks a /.test(r.msg)) { fails++; if (arm === 'fail') out.beats.push(r.msg); }
+        else if (/stalks an? /.test(r.msg)) { fails++; if (arm === 'fail') out.beats.push(r.msg); } // sim-articles-b 2026-10-22: "an" is now correct for vowel-initial names
         else other++;
       }
     }
@@ -88,7 +88,7 @@ function tally(msgs) {
 // failure moment itself so verbatim-dominance is measured honestly.
 function normFail(msg) {
   return String(msg)
-    .replace(/^🏹\s+\S+\s+stalks a\s+.*?\s+all morning\s*[—–-]\s*/, '')
+    .replace(/^🏹\s+\S+\s+stalks an?\s+.*?\s+all morning\s*[—–-]\s*/, '') // sim-articles-b 2026-10-22: an? covers the article fix
     .replace(/\s*Nothing to bring home\.?\s*$/, '');
 }
 

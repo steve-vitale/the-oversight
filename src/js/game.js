@@ -3609,7 +3609,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             : ' — read the ground like a book; the trap was punctuation. They rarely sit empty.';
         }
       }
-      return `🪤 TRAP: Your ${recipe.name} ${dir} caught a ${animalName}!${note} About ${catchKcal} kcal on the bone — clean it quickly (knife). It rots fast.`;
+      return `🪤 TRAP: Your ${recipe.name} ${dir} caught ${this.indefArt(animalName)} ${animalName}!${note} About ${catchKcal} kcal on the bone — clean it quickly (knife). It rots fast.`;
     },
     _trapQuietLine(recipe, dir) {
       // L0/L1 keep the flat line — the "Try another tile" nudge is still
@@ -5284,6 +5284,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.leadLineLast[k] = idx;
       return pool[idx];
     },
+    // indefArt(word): the correct indefinite article for a content name —
+    // fiction-only. a/an is phonetic, not orthographic: "an Eastern Chipmunk",
+    // "an American Mink", but "a European Hare" / "a Eurasian Badger"
+    // (Eu- reads "yoo"). Used at the hunt-beat template sites (stalk-fail
+    // pool, kill case) and the trap catch line. Zero Math.random draws —
+    // pure string logic, stream-neutral by construction.
+    indefArt(word) {
+      const w = String(word == null ? '' : word).trim();
+      if (!w) return 'a';
+      if (/^eu/i.test(w)) return 'a'; // Eu- is a "yoo" onset
+      return /^[aeiou]/i.test(w) ? 'an' : 'a';
+    },
     // _contendArc(cid): the contender's rivalry ledger — stand-downs and
     // yields accumulate here; a resolved state ('respect'/'refocus'/'leave')
     // is terminal for that contender. Prunes dead ids (contender died/left).
@@ -6621,10 +6633,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return {
           kcal: 0,
           msg: '🏹 ' + this.leadPick('stalkfail', vid, [
-            `${first} stalks a ${an} all morning — the wind turns mid-stalk and it winds them. Gone. Nothing to bring home.`,
-            `${first} stalks a ${an} all morning — close enough to count whiskers, then a twig snaps underfoot and the morning is over. Nothing to bring home.`,
-            `${first} stalks a ${an} all morning — a lookout crow kicks up the alarm call and the whole stand melts away. Nothing to bring home.`,
-            `${first} stalks a ${an} all morning — never gets closer than old sign; the morning goes still and stays still. Nothing to bring home.`,
+            `${first} stalks ${this.indefArt(an)} ${an} all morning — the wind turns mid-stalk and it winds them. Gone. Nothing to bring home.`,
+            `${first} stalks ${this.indefArt(an)} ${an} all morning — close enough to count whiskers, then a twig snaps underfoot and the morning is over. Nothing to bring home.`,
+            `${first} stalks ${this.indefArt(an)} ${an} all morning — a lookout crow kicks up the alarm call and the whole stand melts away. Nothing to bring home.`,
+            `${first} stalks ${this.indefArt(an)} ${an} all morning — never gets closer than old sign; the morning goes still and stays still. Nothing to bring home.`,
           ]),
         };
       }
@@ -6645,7 +6657,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return {
         kcal,
         aid,
-        msg: `🏹 ${first} brings down a ${aname} — clean kill, +${kcal} kcal to the pantry.`,
+        msg: `🏹 ${first} brings down ${this.indefArt(aname)} ${aname} — clean kill, +${kcal} kcal to the pantry.`,
         note: isHunter ? 'Old hands. They\'ve done this before.' : null,
       };
     },
