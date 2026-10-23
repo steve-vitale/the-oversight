@@ -740,6 +740,35 @@
           try { this.save(); } catch (e) {}
         }
       }
+      // SEAT-WAITING HONESTY (journey-scale r24 2026-10-23): the reactor beat
+      // above covers the pellet trap, but an ordinary bearer <redacted> arc 3 past
+      // day 90 with no seat sat in the same silence — the Watchers promised
+      // "the table has your name now" and nothing ever named what was missing
+      // (r23 60001: global d94-d155, seat 'none', one wave-2 fight short).
+      // Same once-per-run shape, same miss-list, no pellet framing: a status,
+      // not a verdict — the seat can still be earned.
+      if (want >= 3 && (s.day || 0) >= 90 && seatNow === 'none' && !pg.reactorSeatTold && !pg.seatWaitingTold) {
+        let online = false;
+        try { online = (typeof this.fusionReactorOnline === 'function') && !!this.fusionReactorOnline(); } catch (e) {}
+        if (!online) {
+          pg.seatWaitingTold = true;
+          let detail = {};
+          try { detail = (((typeof this.tableSeat === 'function') ? this.tableSeat() : null) || {}).detail || {}; } catch (e) {}
+          const miss = [];
+          if ((detail.w1 | 0) < 4) miss.push('wave-1 monsters faced');
+          if ((detail.w2 | 0) < 4) miss.push('wave-2 monsters faced');
+          if ((detail.w3 | 0) < 3) miss.push('wave-3 monsters faced');
+          if ((detail.contestsN | 0) < 2) miss.push('contests survived');
+          if ((detail.crisesN | 0) < 2) miss.push('crises weathered');
+          const rk = detail.rank || 'village';
+          if (!(rk === 'regional' || rk === 'national' || rk === 'global')) miss.push('a regional standing');
+          if ((detail.stage | 0) < 2) miss.push('deeper integration');
+          if (!detail.foodDeeds) miss.push('the food-thesis deeds');
+          const missTxt = miss.length ? ' The ledger still wants: ' + miss.join('; ') + '.' : '';
+          this.say('◈ THE TABLE — the ring of pale light flickers at the edge of the sky... and does not come. Not yet. The table is being set for those whose deeds are done, and yours are not done.' + missTxt + ' The climb is not over.');
+          try { this.save(); } catch (e) {}
+        }
+      }
       if (want > pg.arc) {
         pg.arc = want;
         // ARC DAY (bal-scale 2026-10-10): the System leans in when the
