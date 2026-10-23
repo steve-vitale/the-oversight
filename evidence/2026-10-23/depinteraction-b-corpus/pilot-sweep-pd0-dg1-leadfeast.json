@@ -1,0 +1,515 @@
+{
+ "meta": {
+  "cell": "pd0-dg1",
+  "policy": "leadfeast",
+  "days": 100,
+  "seeds": [
+   9250,
+   9251,
+   9252,
+   9253,
+   9254,
+   9255,
+   9256,
+   9257
+  ],
+  "env": {
+   "FEASTSCALE_R13": "1",
+   "SEATDRIVE": "0",
+   "PLENTYDEPRI": "0",
+   "DEPOSITGATE": "1"
+  }
+ },
+ "rows": [
+  {
+   "seed": 9250,
+   "perSeed": {
+    "seed": 9250,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 100,
+    "villageDays": 987,
+    "rotFreshKcal": 166865,
+    "rotPreservedKcal": 26302,
+    "depriKcal": 0,
+    "easedKcal": 351953,
+    "glutChannels": {
+     "funnelShare": 310085,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 49080,
+     "ambientBighaul": 20579,
+     "other": 16235
+    },
+    "freshDaysMedian": 14.6,
+    "deathCauses": {
+     "ambush": 1,
+     "combat": 2
+    },
+    "national": true,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1,
+     2,
+     3
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "survived",
+    "rank": "global",
+    "maxWave": 3,
+    "arc": 4,
+    "starveDays": 6,
+    "depriDec": 0,
+    "dgDays": 99,
+    "dgShareEased": 307466,
+    "dgHoldbackKcal": 44487,
+    "plentyDays": 99,
+    "freshDaysMax": 76.76756756756757,
+    "shareKcal": 308200,
+    "chan": {
+     "ambient:villagelives": 20579,
+     "away_wild": 49080,
+     "ambient:other": 16235,
+     "duty": 1885
+    },
+    "inflowTotal": 395979,
+    "ms": 1838
+   }
+  },
+  {
+   "seed": 9251,
+   "perSeed": {
+    "seed": 9251,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 75,
+    "villageDays": 656,
+    "rotFreshKcal": 1000,
+    "rotPreservedKcal": 0,
+    "depriKcal": 0,
+    "easedKcal": 55655,
+    "glutChannels": {
+     "funnelShare": 188019,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 32233,
+     "ambientBighaul": 16990,
+     "other": 12618
+    },
+    "freshDaysMedian": 4.3,
+    "deathCauses": {
+     "ambush": 1,
+     "a wound that wouldn't close": 1,
+     "starvation": 2,
+     "combat": 1,
+     "alien": 1,
+     "dehydration": 2,
+     "sickness": 1
+    },
+    "national": false,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1,
+     2,
+     3
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "village-lost",
+    "rank": "regional",
+    "maxWave": 3,
+    "arc": 3,
+    "starveDays": 14,
+    "depriDec": 0,
+    "dgDays": 54,
+    "dgShareEased": 44665,
+    "dgHoldbackKcal": 10990,
+    "plentyDays": 50,
+    "freshDaysMax": 18.24977696055532,
+    "shareKcal": 122200,
+    "chan": {
+     "ambient:villagelives": 16990,
+     "away_wild": 32233,
+     "duty": 65819,
+     "system": 600,
+     "ambient:other": 12018
+    },
+    "inflowTotal": 249860,
+    "ms": 1446
+   }
+  },
+  {
+   "seed": 9252,
+   "perSeed": {
+    "seed": 9252,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 25,
+    "villageDays": 263,
+    "rotFreshKcal": 0,
+    "rotPreservedKcal": 0,
+    "depriKcal": 0,
+    "easedKcal": 10772,
+    "glutChannels": {
+     "funnelShare": 18600,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 3504,
+     "ambientBighaul": 7693,
+     "other": 101
+    },
+    "freshDaysMedian": 5.4,
+    "deathCauses": {
+     "combat": 1,
+     "monster": 1,
+     "ambush": 1,
+     "sickness": 1,
+     "starvation": 2
+    },
+    "national": false,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "village-lost",
+    "rank": "village",
+    "maxWave": 1,
+    "arc": 3,
+    "starveDays": 8,
+    "depriDec": 0,
+    "dgDays": 14,
+    "dgShareEased": 7672,
+    "dgHoldbackKcal": 3100,
+    "plentyDays": 15,
+    "freshDaysMax": 15.645790088552944,
+    "shareKcal": 18600,
+    "chan": {
+     "ambient:villagelives": 7693,
+     "away_wild": 3504,
+     "ambient:other": 101
+    },
+    "inflowTotal": 29898,
+    "ms": 480
+   }
+  },
+  {
+   "seed": 9253,
+   "perSeed": {
+    "seed": 9253,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 100,
+    "villageDays": 1198,
+    "rotFreshKcal": 114436,
+    "rotPreservedKcal": 28090,
+    "depriKcal": 0,
+    "easedKcal": 312954,
+    "glutChannels": {
+     "funnelShare": 286200,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 23291,
+     "ambientBighaul": 16280,
+     "other": 2240
+    },
+    "freshDaysMedian": 64.3,
+    "deathCauses": {
+     "choir toad": 1
+    },
+    "national": true,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1,
+     2
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "survived",
+    "rank": "global",
+    "maxWave": 2,
+    "arc": 3,
+    "starveDays": 7,
+    "depriDec": 0,
+    "dgDays": 99,
+    "dgShareEased": 286276,
+    "dgHoldbackKcal": 26678,
+    "plentyDays": 99,
+    "freshDaysMax": 127.33062330623306,
+    "shareKcal": 286200,
+    "chan": {
+     "ambient:villagelives": 16280,
+     "ambient:other": 2240,
+     "away_wild": 23291
+    },
+    "inflowTotal": 328011,
+    "ms": 2197
+   }
+  },
+  {
+   "seed": 9254,
+   "perSeed": {
+    "seed": 9254,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 100,
+    "villageDays": 779,
+    "rotFreshKcal": 35459,
+    "rotPreservedKcal": 400,
+    "depriKcal": 0,
+    "easedKcal": 149483,
+    "glutChannels": {
+     "funnelShare": 293354,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 21986,
+     "ambientBighaul": 20308,
+     "other": 20530
+    },
+    "freshDaysMedian": 6,
+    "deathCauses": {
+     "ambush": 2,
+     "combat": 6,
+     "sickness": 2,
+     "a wound that wouldn't close": 1,
+     "monster": 1,
+     "starvation": 1
+    },
+    "national": false,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1,
+     2,
+     3
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "survived",
+    "rank": "regional",
+    "maxWave": 3,
+    "arc": 4,
+    "starveDays": 44,
+    "depriDec": 0,
+    "dgDays": 83,
+    "dgShareEased": 132823,
+    "dgHoldbackKcal": 16660,
+    "plentyDays": 86,
+    "freshDaysMax": 95.88444444444444,
+    "shareKcal": 238400,
+    "chan": {
+     "away_wild": 21986,
+     "ambient:villagelives": 20308,
+     "ambient:other": 20230,
+     "duty": 54954,
+     "system": 300
+    },
+    "inflowTotal": 356178,
+    "ms": 1879
+   }
+  },
+  {
+   "seed": 9255,
+   "perSeed": {
+    "seed": 9255,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 95,
+    "villageDays": 962,
+    "rotFreshKcal": 438535,
+    "rotPreservedKcal": 30920,
+    "depriKcal": 0,
+    "easedKcal": 364853,
+    "glutChannels": {
+     "funnelShare": 361997,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 40555,
+     "ambientBighaul": 20055,
+     "other": 7068
+    },
+    "freshDaysMedian": 15.6,
+    "deathCauses": {
+     "combat": 14,
+     "a wound that wouldn't close": 1,
+     "the mountain lord": 1
+    },
+    "national": true,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "village-lost",
+    "rank": "global",
+    "maxWave": 4,
+    "arc": 4,
+    "starveDays": 5,
+    "depriDec": 0,
+    "dgDays": 87,
+    "dgShareEased": 331909,
+    "dgHoldbackKcal": 32944,
+    "plentyDays": 84,
+    "freshDaysMax": 40.54391552128729,
+    "shareKcal": 361600,
+    "chan": {
+     "ambient:villagelives": 20055,
+     "away_wild": 40555,
+     "system": 600,
+     "duty": 397,
+     "ambient:other": 6468
+    },
+    "inflowTotal": 429675,
+    "ms": 2009
+   }
+  },
+  {
+   "seed": 9256,
+   "perSeed": {
+    "seed": 9256,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 100,
+    "villageDays": 971,
+    "rotFreshKcal": 129211,
+    "rotPreservedKcal": 21173,
+    "depriKcal": 0,
+    "easedKcal": 249033,
+    "glutChannels": {
+     "funnelShare": 221600,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 20029,
+     "ambientBighaul": 15901,
+     "other": 12256
+    },
+    "freshDaysMedian": 31.2,
+    "deathCauses": {
+     "ambush": 1,
+     "combat": 2,
+     "a wound that wouldn't close": 1,
+     "sickness": 1
+    },
+    "national": true,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1,
+     2,
+     3
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "survived",
+    "rank": "global",
+    "maxWave": 3,
+    "arc": 3,
+    "starveDays": 12,
+    "depriDec": 0,
+    "dgDays": 99,
+    "dgShareEased": 221614,
+    "dgHoldbackKcal": 27419,
+    "plentyDays": 99,
+    "freshDaysMax": 97.76344827586207,
+    "shareKcal": 221600,
+    "chan": {
+     "ambient:villagelives": 15901,
+     "away_wild": 20029,
+     "ambient:other": 11956,
+     "system": 300
+    },
+    "inflowTotal": 269786,
+    "ms": 1534
+   }
+  },
+  {
+   "seed": 9257,
+   "perSeed": {
+    "seed": 9257,
+    "policy": "leadfeast",
+    "plentydepri": 0,
+    "depositgate": 1,
+    "daysAlive": 100,
+    "villageDays": 932,
+    "rotFreshKcal": 57629,
+    "rotPreservedKcal": 1527,
+    "depriKcal": 0,
+    "easedKcal": 204195,
+    "glutChannels": {
+     "funnelShare": 269000,
+     "scholarHomecoming": 0,
+     "tributeDeposit": 0,
+     "awayReturn": 20778,
+     "ambientBighaul": 28879,
+     "other": 21794
+    },
+    "freshDaysMedian": 6.1,
+    "deathCauses": {
+     "combat": 3,
+     "starvation": 1,
+     "highbeam deer": 1,
+     "alien": 3,
+     "contest": 1,
+     "dehydration": 1,
+     "monster": 1
+    },
+    "national": true,
+    "table": false,
+    "win": false,
+    "waveReach": [
+     1,
+     2,
+     3
+    ],
+    "medianSurvival": null
+   },
+   "diag": {
+    "endReason": "survived",
+    "rank": "global",
+    "maxWave": 3,
+    "arc": 3,
+    "starveDays": 32,
+    "depriDec": 0,
+    "dgDays": 81,
+    "dgShareEased": 181303,
+    "dgHoldbackKcal": 22892,
+    "plentyDays": 78,
+    "freshDaysMax": 26.384176182707993,
+    "shareKcal": 269000,
+    "chan": {
+     "ambient:villagelives": 28879,
+     "ambient:other": 21494,
+     "away_wild": 20778,
+     "system": 300
+    },
+    "inflowTotal": 340451,
+    "ms": 1952
+   }
+  }
+ ]
+}
