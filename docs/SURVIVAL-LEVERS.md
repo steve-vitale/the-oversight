@@ -1783,3 +1783,26 @@ paid garden magic, maintenance separate from unwanted surplus and reclamation.
 Treat food output, useful consumption, labor/opportunity and all23 domains
 separately. NPC garden-ability use and crop-specific intake remain unknown.
 See GARDENS.md and garden-longplay-audit-r3.md; no runtime balance clearance.
+
+## Linkform courtship levers — pilot survival read (2026-10-23)
+
+No gameplay lever changes. Policy-side pilot only (scripts/policies/linkform.js,
+env LINKFORM, default OFF; zero src/js), 8 identical seeds × 3 arms, 180d
+death-aware, census armed substrate. The levers spend pantry kcal on
+diplomacy (accord gifts 2,000 kcal per link, tend 1,500 kcal per link-week),
+so survival was watched.
+
+- linkform-cadence (LINKFORM=1, KILLED — wrong lever, removed): starvation
+  deaths 6 vs 2 baseline, dissolutions 4 vs 1. The extra courtship (propose
+  2/day from day 15, tend every 3 days, always sweeten) outspent the
+  trust/tend economy — pantry cost with no diplomatic gain. Killed with root
+  cause; no trace remains.
+- linkform-overcourt (LINKFORM=2, kept env-gated OFF): starvation 4 vs 2,
+  median survival 135d vs 166d baseline, on 8 seeds — noise-adjacent but a
+  watch item for the re-stage (5 links × 1.5k/week tending + 5 accord gifts
+  is real pantry load). No new death modes on any arm.
+
+Decision: neither arm lands as a change. The cadence mode is deleted; the
+overcourt instrument stays env-gated default-off pending a re-stage with the
+metric review's mean-dip primary (evidence/2026-10-23/sim-links-diag.md).
+Re-stage must carry the starvation/median-days guardrails with tighter bars.
