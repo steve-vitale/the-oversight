@@ -1,0 +1,270 @@
+{
+ "verdict": {
+  "primaryGo": false,
+  "engagementGo": false,
+  "survGo": true,
+  "starvGo": true,
+  "kindsGo": true,
+  "thin": true
+ },
+ "primary": {
+  "control": {
+   "n": 3,
+   "survivors": 3,
+   "share": 1
+  },
+  "armed": {
+   "n": 2,
+   "survivors": 2,
+   "share": 1
+  },
+  "delta": 0,
+  "bar": "armed share − control share >= +0.25 AND >=6 evaluable blooded vids per arm"
+ },
+ "chairDiagnostic": {
+  "control": {
+   "censored": 7,
+   "windowDeaths": 0,
+   "postWindowScholarDeaths": 1
+  },
+  "armed": {
+   "censored": 6,
+   "windowDeaths": 0,
+   "postWindowScholarDeaths": 1
+  }
+ },
+ "engagement": {
+  "bar": ">=6/8 seeds with a blooded vid receiving a named retention action within 14d post-kill",
+  "engagedSeeds": [
+   65514,
+   65515,
+   65517
+  ],
+  "n": 3,
+  "perSeed": {
+   "65511": {
+    "controlBlooded": 0,
+    "armedBlooded": 0,
+    "armedEngaged": false
+   },
+   "65512": {
+    "controlBlooded": 0,
+    "armedBlooded": 0,
+    "armedEngaged": false
+   },
+   "65513": {
+    "controlBlooded": 1,
+    "armedBlooded": 1,
+    "armedEngaged": false
+   },
+   "65514": {
+    "controlBlooded": 2,
+    "armedBlooded": 2,
+    "armedEngaged": true
+   },
+   "65515": {
+    "controlBlooded": 3,
+    "armedBlooded": 3,
+    "armedEngaged": true
+   },
+   "65516": {
+    "controlBlooded": 1,
+    "armedBlooded": 1,
+    "armedEngaged": false
+   },
+   "65517": {
+    "controlBlooded": 3,
+    "armedBlooded": 1,
+    "armedEngaged": true
+   },
+   "65518": {
+    "controlBlooded": 0,
+    "armedBlooded": 0,
+    "armedEngaged": false
+   }
+  }
+ },
+ "guardrails": {
+  "survivalPairedDiffMedian": 0,
+  "survivalBar": ">= -10d",
+  "survivalGo": true,
+  "starvation": {
+   "control": 23,
+   "armed": 25,
+   "bar": "armed <= control+2",
+   "go": true
+  },
+  "newDeathKinds": [],
+  "kindsGo": true,
+  "pairDiffs": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   2,
+   0,
+   0
+  ]
+ },
+ "wall": {
+  "control": {
+   "n": 16,
+   "national": 6,
+   "table": 12,
+   "won": 0,
+   "wave4": 12,
+   "wave5": 2,
+   "medianSurvival": 121
+  },
+  "armed": {
+   "n": 16,
+   "national": 6,
+   "table": 12,
+   "won": 0,
+   "wave4": 12,
+   "wave5": 1,
+   "medianSurvival": 121
+  }
+ },
+ "bloodedDetail": {
+  "control": [
+   {
+    "vid": "gen_sqspw45",
+    "seed": 65513,
+    "firstKill": 155,
+    "status": "chair-censored",
+    "deathDay": 165
+   },
+   {
+    "vid": "valeria_quispe",
+    "seed": 65514,
+    "firstKill": 112,
+    "status": "chair-censored",
+    "deathDay": 113
+   },
+   {
+    "vid": "boris_kowalski",
+    "seed": 65514,
+    "firstKill": 67,
+    "status": "survivor",
+    "deathDay": null
+   },
+   {
+    "vid": "gen_khnpw4m",
+    "seed": 65515,
+    "firstKill": 64,
+    "status": "chair-censored",
+    "deathDay": 71
+   },
+   {
+    "vid": "victor_lopez",
+    "seed": 65515,
+    "firstKill": 94,
+    "status": "chair-censored",
+    "deathDay": 100
+   },
+   {
+    "vid": "tashi_sherpa",
+    "seed": 65515,
+    "firstKill": 96,
+    "status": "chair-censored",
+    "deathDay": 102
+   },
+   {
+    "vid": "gen_w46vl95",
+    "seed": 65516,
+    "firstKill": 158,
+    "status": "chair-censored",
+    "deathDay": 169
+   },
+   {
+    "vid": "ruby_callaghan",
+    "seed": 65517,
+    "firstKill": 80,
+    "status": "survivor",
+    "deathDay": null
+   },
+   {
+    "vid": "gen_qmv4yhy",
+    "seed": 65517,
+    "firstKill": 87,
+    "status": "survivor",
+    "deathDay": 102
+   },
+   {
+    "vid": "gen_8nf1t4z",
+    "seed": 65517,
+    "firstKill": 103,
+    "status": "chair-censored",
+    "deathDay": 110
+   }
+  ],
+  "armed": [
+   {
+    "vid": "gen_sqspw45",
+    "seed": 65513,
+    "firstKill": 155,
+    "status": "chair-censored",
+    "deathDay": 165
+   },
+   {
+    "vid": "valeria_quispe",
+    "seed": 65514,
+    "firstKill": 112,
+    "status": "chair-censored",
+    "deathDay": 113
+   },
+   {
+    "vid": "boris_kowalski",
+    "seed": 65514,
+    "firstKill": 67,
+    "status": "survivor",
+    "deathDay": null
+   },
+   {
+    "vid": "gen_khnpw4m",
+    "seed": 65515,
+    "firstKill": 64,
+    "status": "chair-censored",
+    "deathDay": 71
+   },
+   {
+    "vid": "victor_lopez",
+    "seed": 65515,
+    "firstKill": 94,
+    "status": "chair-censored",
+    "deathDay": 100
+   },
+   {
+    "vid": "tashi_sherpa",
+    "seed": 65515,
+    "firstKill": 96,
+    "status": "chair-censored",
+    "deathDay": 102
+   },
+   {
+    "vid": "gen_w46vl95",
+    "seed": 65516,
+    "firstKill": 158,
+    "status": "chair-censored",
+    "deathDay": 169
+   },
+   {
+    "vid": "ruby_callaghan",
+    "seed": 65517,
+    "firstKill": 80,
+    "status": "survivor",
+    "deathDay": 97
+   }
+  ]
+ }
+}
