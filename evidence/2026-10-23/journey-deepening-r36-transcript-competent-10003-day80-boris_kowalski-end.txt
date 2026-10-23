@@ -1,0 +1,21 @@
+=== seed 10003 day 80 — conversation with Boris (boris_kowalski) ===
+occupation=blacksmith temperament=steady trust=90 dead=false
+want: curious (stage 1)
+
+THEM: "About whether they can trust you — Can I trust you? I mean really…"
+(turn0 choices: ans:q_trust:a_earn, ans:q_trust:a_actions, ans:q_trust:a_yes, ans:q_trust:honest_pass, leave, silence)
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. See you at dinner."
+want final: id=curious stage=3 resolution=engaged

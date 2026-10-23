@@ -2362,6 +2362,13 @@ function dpsRaceAssess(Game, f, ctx, p, flee) {
 // instrument stays inert unless its own gate is also set.
 //
 function dirFleeOn() { return process.env.COMPETENT_DIRECTIONAL_FLEE === '1'; }
+// CONSUMED-PUSH VERIFICATION (journey deepening r16 -> shared port r36):
+// tbBarrierExit returns TRUE for pushes CONSUMED without exiting (sealed
+// barrier holds, world edge, stasis). Gate off = legacy block, byte-identical.
+// Gate on = only count a push as a flee when it actually exits the fight;
+// on a consumed push, mark the fight unfleeable so the policy fights it
+// out instead of hammering the barrier and spamming barrier say-lines.
+function exitVerifiedFleeOn() { return process.env.COMPETENT_EXIT_VERIFIED_FLEE === '1'; }
 
 // Haven sits at the 9x9 center (game.js: hx=4, hy=4).
 const DIR_FLEE_HAVEN = { x: 4, y: 4 };
@@ -2881,6 +2888,25 @@ const competent = {
         }
         try {
           const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+          if (exitVerifiedFleeOn() && ctx._fleeBlockedFor === f.id) {
+            // This fight is already marked unfleeable (consumed push, or
+            // stuck flee-walk): a real player reads the message once and
+            // fights it out. Return false so fight() falls through to
+            // beast-trick play and strikes. Checked BEFORE the edge/pick
+            // logic so it fires mid-grid too, not just on an edge.
+            ctx.fleeBlocked = (ctx.fleeBlocked || 0) + 1;
+            return false;
+          }
+          // STUCK-FLEE SNAPSHOT (journey deepening r37, gate COMPETENT_EXIT_VERIFIED_FLEE=1):
+          // a flee turn that moves the player NOWHERE (walk path fails with
+          // "No path there.", push silently fails) is a wasted turn a real
+          // player wouldn't repeat — the d63 moderator ran 25 such rounds
+          // and the scholar died without striking. Gate off: snapshots stay
+          // null and nothing below runs (legacy byte-identical).
+          const fleeGridBefore = exitVerifiedFleeOn()
+            ? (px + ',' + py) : null;
+          const fleeMapBefore = exitVerifiedFleeOn()
+            ? (Game.map.px + ',' + Game.map.py) : null;
           let pushed = false;
           try {
             const mpx = Game.map.px, mpy = Game.map.py;
@@ -2893,9 +2919,28 @@ const competent = {
               mpx + dd[0] >= 0 && mpx + dd[0] <= 8 && mpy + dd[1] >= 0 && mpy + dd[1] <= 8);
             const pick = viable[0] || cands[0];
             if (pick && dpsRaceOn()) {
-              Game.tbBarrierExit(pick[0], pick[1]);
-              pushed = true;
-              ctx.barrierPushes = (ctx.barrierPushes || 0) + 1;
+              const mapBefore = exitVerifiedFleeOn()
+                ? (Game.map.px + ',' + Game.map.py) : null;
+              const pushResult = Game.tbBarrierExit(pick[0], pick[1]);
+              if (!exitVerifiedFleeOn()) {
+                pushed = true;
+                ctx.barrierPushes = (ctx.barrierPushes || 0) + 1;
+              } else if (pushResult) {
+                const exited = !!(!Game.tbfight || Game.tbfight.over ||
+                  (Game.map.px + ',' + Game.map.py) !== mapBefore);
+                if (exited) {
+                  pushed = true;
+                  ctx.barrierPushes = (ctx.barrierPushes || 0) + 1;
+                } else {
+                  // Truthy push consumed WITHOUT exiting (barrier holds,
+                  // world edge, stasis). Mark this fight unfleeable; the
+                  // push spent the turn (the message was said), so fall
+                  // through to endTurn below with pushed=true.
+                  ctx._fleeBlockedFor = f.id;
+                  ctx.fleeBlocked = (ctx.fleeBlocked || 0) + 1;
+                  pushed = true;
+                }
+              }
             }
           } catch (e) {}
           if (!pushed) {
@@ -2903,6 +2948,34 @@ const competent = {
             // the nearest x-edge; the push happens on a later turn.
             const tx = px <= 4 ? 0 : 8;
             try { Game.tbPlayerMove(tx, py); } catch (e) {}
+          }
+          if (exitVerifiedFleeOn()) {
+            // STUCK-FLEE RESOLUTION (journey deepening r37): the flee turn
+            // moved the player NOWHERE (walk path failed, push silently
+            // failed) and the fight didn't end. Track consecutive
+            // zero-progress flee turns on this fight; at 3, mark it
+            // unfleeable and fight it out. A real player reads the room and
+            // fights — the d63 moderator looped 25 rounds of "No path there."
+            // before the scholar went down without striking once.
+            const gridNow = ((p.mx != null ? p.mx : 4) + ',' + (p.my != null ? p.my : 4));
+            const mapNow = Game.map.px + ',' + Game.map.py;
+            const noProgress = gridNow === fleeGridBefore && mapNow === fleeMapBefore &&
+              Game.tbfight && !Game.tbfight.over && ctx._fleeBlockedFor !== f.id;
+            let fst = ctx._fleeStuck;
+            if (noProgress) {
+              if (!fst || fst.for !== f.id) fst = ctx._fleeStuck = { for: f.id, turns: 0 };
+              fst.turns += 1;
+              if (fst.turns >= 3) {
+                // Return false BEFORE endTurn: the failed walk spent nothing,
+                // so this turn is still the player's — fight() falls through
+                // to beast-trick play and strikes.
+                ctx._fleeBlockedFor = f.id;
+                ctx.fleeBlocked = (ctx.fleeBlocked || 0) + 1;
+                return false;
+              }
+            } else if (fst && fst.for === f.id) {
+              fst.turns = 0;
+            }
           }
           ctx.fled = (ctx.fled || 0) + 1;
         } catch (e) {}

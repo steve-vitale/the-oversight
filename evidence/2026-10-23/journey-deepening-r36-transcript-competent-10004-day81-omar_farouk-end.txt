@@ -1,0 +1,12 @@
+=== seed 10004 day 81 — conversation with Omar (omar_farouk) ===
+occupation=piano tuner temperament=dry trust=94 dead=false
+want: curious (stage 0)
+
+THEM: "Can I tell you something? I can't read, and I'm scared it matters now."
+(turn0 choices: dlg:more, dlg:react, dlg:invite, teach, dlg:subject, leave, silence)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: (leave)
+closing line: "Well. That was conversation."
+want final: id=curious stage=3 resolution=unestablished

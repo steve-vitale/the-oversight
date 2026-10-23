@@ -1,0 +1,12 @@
+=== seed 10001 day 81 — conversation with Colin (gen_bufccj8) ===
+occupation=bush pilot temperament=bold trust=90 dead=false
+want: ask_favor (stage 1)
+
+THEM: "I'm sorry — whatever this is, it's getting worse — I'm feverish, a cut gone hot and angry. Can you do anything?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Whatever you can do — thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talk. Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=promised
