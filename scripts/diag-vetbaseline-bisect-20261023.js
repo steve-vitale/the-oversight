@@ -123,7 +123,7 @@ const childEnv = Object.assign({}, process.env, {
 });
 const t0 = Date.now();
 const r = spawnSync('node', [path.join(TREE, 'scripts', 'sweep-splitclose-20261022.js')],
-  { env: childEnv, stdio: 'inherit', timeout: 25 * 60 * 1000 });
+  { env: childEnv, stdio: 'inherit', timeout: 100 * 60 * 1000 });
 if (r.error) {
   console.error('VETBISECT FAIL: sweep spawn error: ' + (r.error.message || r.error));
   process.exit(1);

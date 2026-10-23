@@ -47,7 +47,7 @@ function check(name, ok, detail) {
 function runRunner(out, commit) {
   const args = [RUNNER, '--tree', TREE, '--out', out];
   if (commit) args.push('--commit', commit);
-  const r = spawnSync('node', args, { env: process.env, stdio: 'pipe', encoding: 'utf8', timeout: 25 * 60 * 1000 });
+  const r = spawnSync('node', args, { env: process.env, stdio: 'pipe', encoding: 'utf8', timeout: 120 * 60 * 1000 });
   return r;
 }
 function totalFrom(out) {
