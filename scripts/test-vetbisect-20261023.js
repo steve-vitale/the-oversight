@@ -63,10 +63,8 @@ function sha256Dir(out) {
   return h;
 }
 
-// Starting branch for restore.
-let startRef = null;
-try { startRef = execSync('git rev-parse --abbrev-ref HEAD', { cwd: TREE }).toString().trim(); } catch (e) {}
-if (!startRef || startRef === 'HEAD') startRef = 'sim-vetbaseline-bisect';
+// (HEAD never moves under the pathspec method; the finally block restores
+// the game paths to HEAD.)
 
 try {
   console.log('E0: shape + env guard');
@@ -84,12 +82,12 @@ try {
   const r1 = runRunner(d1, null);
   check('det run A completes', r1.status === 0, r1.status !== 0 ? (r1.stderr || '').slice(-300) : '');
   let leg1 = null;
-  if (r1.status === 0) { leg1 = totalFrom(d1); console.log(`       run A: commit=${leg1.commit} total=${leg1.total}`); }
+  if (r1.status === 0) { leg1 = totalFrom(d1); console.log(`       run A: commit=${leg1.game12} total=${leg1.total}`); }
   const r2 = runRunner(d2, null);
   check('det run B completes', r2.status === 0, r2.status !== 0 ? (r2.stderr || '').slice(-300) : '');
   if (r1.status === 0 && r2.status === 0) {
     const leg2 = totalFrom(d2);
-    check('det: same commit', leg1.commit === leg2.commit, `${leg1.commit} vs ${leg2.commit}`);
+    check('det: same commit', leg1.game12 === leg2.game12, `${leg1.game12} vs ${leg2.game12}`);
     check('det: identical kill totals', leg1.total === leg2.total, `${leg1.total} vs ${leg2.total}`);
     const h1 = sha256Dir(d1), h2 = sha256Dir(d2);
     const keys = Object.keys(h1);
@@ -103,7 +101,7 @@ try {
   check('old-anchor corpus completes', rOld.status === 0, rOld.status !== 0 ? (rOld.stderr || '').slice(-300) : '');
   if (rOld.status === 0) {
     const leg = totalFrom(dOld);
-    console.log(`       old anchor: commit=${leg.commit} total=${leg.total} seedsWith=${leg.seedsWith}`);
+    console.log(`       old anchor: commit=${leg.game12} total=${leg.total} seedsWith=${leg.seedsWith}`);
     check('old anchor reproduces 2 kills', leg.total === 2, `total=${leg.total}`);
   }
 
@@ -113,16 +111,19 @@ try {
   check('new-anchor corpus completes', rNew.status === 0, rNew.status !== 0 ? (rNew.stderr || '').slice(-300) : '');
   if (rNew.status === 0) {
     const leg = totalFrom(dNew);
-    console.log(`       new anchor: commit=${leg.commit} total=${leg.total} seedsWith=${leg.seedsWith}`);
+    console.log(`       new anchor: commit=${leg.game12} total=${leg.total} seedsWith=${leg.seedsWith}`);
     check('new anchor reproduces 10 kills', leg.total === 10, `total=${leg.total}`);
   }
 } finally {
+  // Restore the game paths to HEAD (HEAD never moves under the pathspec
+  // method; this puts src/js+src/data+index.html back to the branch tip).
   try {
-    execSync(`git checkout ${startRef}`, { cwd: TREE, stdio: ['ignore', 'pipe', 'pipe'] });
-    const back = execSync('git rev-parse HEAD', { cwd: TREE }).toString().trim().slice(0, 12);
-    console.log(`restored tree to ${startRef} (${back})`);
+    execSync('git checkout HEAD -- src/js src/data index.html', { cwd: TREE, stdio: ['ignore', 'pipe', 'pipe'] });
+    const dirty = execSync('git diff HEAD --stat -- src/js src/data index.html', { cwd: TREE }).toString().trim();
+    if (dirty) throw new Error('game paths still differ from HEAD after restore:\n' + dirty);
+    console.log('restored game paths to HEAD');
   } catch (e) {
-    console.error('PROOF FAIL: could not restore tree to ' + startRef + ': ' + ((e && e.message) || e));
+    console.error('PROOF FAIL: could not restore game paths: ' + ((e && e.message) || e));
     FAIL++;
   }
 }

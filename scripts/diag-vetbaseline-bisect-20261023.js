@@ -12,18 +12,28 @@
 //     ARMORYDRIVE=1 KILLDISC=1 (SPLITCLOSE unset)
 //   control = SC.controlFor = AD.armedFor
 //
-// The sweep itself is scripts/sweep-splitclose-20261022.js AT THE TARGET
-// COMMIT (run with REPO=<tree>); this runner is kept OUTSIDE the tree so it
-// survives `git checkout <commit>` of the tree under test. The kill census
-// is the pre-registered rule copied VERBATIM from
+// The sweep itself is scripts/sweep-splitclose-20261022.js AT THE BRANCH TIP
+// (REPO=<tree>); this runner is kept OUTSIDE the tree so it survives worktree
+// changes. The GAME CODE under test is varied per commit via pathspec
+// checkout (src/js + src/data + index.html only — the harness builds its
+// script list by grepping index.html, so the script list must move with
+// src/js). scripts/ (sweep, instrument, policies, harness, this runner's
+// committed copy) stays at tip: the measurement is held CONSTANT across
+// the bisect and only the game varies. This is required because the sweep
+// script did not exist at the window's endpoints (added in f5a51a496,
+// after f2daadf3d) — a full-tree detached checkout cannot run it there.
+// The kill census is the pre-registered rule copied VERBATIM from
 // scripts/analyze-splitclose-20261022.js (villagerKills) — the canonical
 // killtime census; vetbisect adds no new kill semantics.
 //
 // Usage (env-trap lesson: run EXACTLY per this env):
 //   FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 \
 //   ARMORYDRIVE=1 KILLDISC=1 \
-//   node diag-vetbaseline-bisect-20261023.js --tree <repo-tree> --out <dir> [--commit <sha>]
+//   node diag-vetbaseline-bisect-20261023.js --tree <repo-tree> --out <dir> [--commit <sha>] [--restore]
 //
+//   --commit <sha>: check out src/js+src/data+index.html at <sha> (HEAD never
+//     moves; the branch is untouched).
+//   --restore: restore src/js+src/data+index.html to HEAD and exit.
 //   --out must not exist or must be empty (the sweep SKIPS existing files;
 //   a rerun into a populated dir would silently reuse stale results).
 'use strict';
@@ -50,7 +60,8 @@ function arg(name) {
 const TREE = arg('--tree');
 const OUT = arg('--out');
 const COMMIT = arg('--commit');
-if (!TREE || !OUT) usage('need --tree and --out');
+const RESTORE = process.argv.includes('--restore');
+if (!TREE || (!OUT && !RESTORE)) usage('need --tree and --out (or --restore)');
 
 // Env guard (mirrors the sweep's guard; the env-trap lesson).
 for (const k of SUBSTRATE_FLAGS) {
@@ -76,29 +87,57 @@ function appendFlap(fp, data) {
 }
 
 if (!fs.existsSync(TREE) || !fs.statSync(TREE).isDirectory()) usage('tree not a directory: ' + TREE);
+
+// --restore: put the game paths back to HEAD and exit (HEAD never moves).
+if (RESTORE) {
+  try {
+    execSync('git checkout HEAD -- src/js src/data index.html', { cwd: TREE, stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (e) {
+    console.error('VETBISECT FAIL: restore failed: ' + ((e && e.message) || e));
+    process.exit(1);
+  }
+  const dirty = execSync('git diff HEAD --stat -- src/js src/data index.html', { cwd: TREE }).toString().trim();
+  if (dirty) { console.error('VETBISECT FAIL: restore left a diff vs HEAD:\n' + dirty); process.exit(1); }
+  console.log('VETBISECT: game paths restored to HEAD');
+  process.exit(0);
+}
+
 if (fs.existsSync(OUT) && fs.readdirSync(OUT).length > 0) usage('out dir must not exist or must be empty: ' + OUT);
 fs.mkdirSync(OUT, { recursive: true });
 
-let prevHead = null;
-try { prevHead = execSync('git rev-parse HEAD', { cwd: TREE }).toString().trim(); } catch (e) {}
+const GAME_PATHS = 'src/js src/data index.html';
+let headTip = null;
+try { headTip = execSync('git rev-parse HEAD', { cwd: TREE }).toString().trim(); } catch (e) {}
 if (COMMIT) {
-  console.log(`VETBISECT: checking out ${COMMIT} in ${TREE}`);
+  console.log(`VETBISECT: checking out game paths at ${COMMIT} in ${TREE} (HEAD stays at ${(headTip || '').slice(0, 12)})`);
   try {
-    execSync(`git checkout ${COMMIT}`, { cwd: TREE, stdio: ['ignore', 'pipe', 'pipe'] });
+    execSync(`git checkout ${COMMIT} -- ${GAME_PATHS}`, { cwd: TREE, stdio: ['ignore', 'pipe', 'pipe'] });
+    // checkout -- <paths> does NOT delete files that exist at HEAD but not
+    // at <sha> (e.g. src/js/text.js added mid-window). The harness builds
+    // its script list from index.html (also checked out), so leftovers are
+    // never loaded — but remove them anyway so the worktree matches <sha>
+    // exactly for the game paths.
+    const added = execSync(`git diff --name-only --diff-filter=A ${COMMIT} HEAD -- ${GAME_PATHS}`, { cwd: TREE })
+      .toString().trim().split('\n').map(s => s.trim()).filter(Boolean);
+    for (const f of added) {
+      fs.rmSync(path.join(TREE, f), { force: true });
+    }
+    if (added.length) console.log(`VETBISECT: removed ${added.length} post-${COMMIT.slice(0, 12)} game files (${added.join(', ')})`);
   } catch (e) {
-    console.error('VETBISECT FAIL: git checkout failed: ' + ((e && e.message) || e));
+    console.error('VETBISECT FAIL: game-paths checkout failed: ' + ((e && e.message) || e));
+    process.exit(1);
+  }
+  // Verify the worktree game paths match the target commit exactly.
+  const diff = execSync(`git diff ${COMMIT} --stat -- ${GAME_PATHS}`, { cwd: TREE }).toString().trim();
+  if (diff) {
+    console.error(`VETBISECT FAIL: game paths do not match ${COMMIT} after checkout:\n` + diff);
     process.exit(1);
   }
 }
-let head = null;
-try { head = execSync('git rev-parse HEAD', { cwd: TREE }).toString().trim(); } catch (e) {}
-if (COMMIT && !head.startsWith(COMMIT)) {
-  console.error(`VETBISECT FAIL: HEAD ${head} does not start with ${COMMIT}`);
-  process.exit(1);
-}
-const HEAD12 = (head || 'unknown').slice(0, 12);
+const GAME12 = COMMIT ? COMMIT.slice(0, 12) : 'tip-' + (headTip || 'unknown').slice(0, 12);
+const HEAD12 = (headTip || 'unknown').slice(0, 12);
 
-// The sweep + its runtime inputs must exist at the target commit.
+// The sweep + its runtime inputs live at the branch tip (HEAD never moves).
 const need = [
   'scripts/sweep-splitclose-20261022.js',
   'scripts/sim-harness.js',
@@ -108,12 +147,12 @@ const need = [
 ];
 for (const f of need) {
   if (!fs.existsSync(path.join(TREE, f))) {
-    console.error(`VETBISECT FAIL: missing at ${HEAD12}: ${f}`);
+    console.error(`VETBISECT FAIL: missing at tip: ${f}`);
     process.exit(1);
   }
 }
 
-console.log(`VETBISECT: corpus at ${HEAD12} (prev ${prevHead ? prevHead.slice(0, 12) : 'n/a'}) -> ${OUT}`);
+console.log(`VETBISECT: corpus with game=${GAME12} measurement=tip-${HEAD12} -> ${OUT}`);
 const childEnv = Object.assign({}, process.env, {
   REPO: TREE,
   EVID: OUT,
@@ -190,8 +229,10 @@ console.log(`  TOTAL=${total}  seedsWith>=1=${seedsWith}/8`);
 console.log(`  WALL national=${wall.national} table=${wall.table} won=${wall.won} wave4=${wall.wave4}/16 wave5=${wall.wave5}/16 exiled=${wall.exiled} medSurv=${wall.medSurv} maxSurv=${wall.maxSurv}`);
 
 const ledgerLine = JSON.stringify({
-  ts: new Date().toISOString(), commit: HEAD12, prevCommit: prevHead ? prevHead.slice(0, 12) : null,
+  ts: new Date().toISOString(),
+  gameCommit: COMMIT || null, game12: GAME12,
+  measureCommit: HEAD12,
   out: OUT, total, seedsWith, perSeed, wall, hashes,
 }) + '\n';
 appendFlap(path.join(OUT, 'ledger.jsonl'), ledgerLine);
-console.log(`\nVETBISECT_RESULT commit=${HEAD12} total=${total} seedsWith=${seedsWith}/8 out=${OUT}`);
+console.log(`\nVETBISECT_RESULT game=${GAME12} measure=tip-${HEAD12} total=${total} seedsWith=${seedsWith}/8 out=${OUT}`);
