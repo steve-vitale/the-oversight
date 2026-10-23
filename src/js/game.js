@@ -4984,6 +4984,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.socialTick(vid);
         return { ok: true, naming: { mid, descriptor: mdef.unknown || 'the beast', options: opts.map(o => o.name) } };
       }
+      if (topic === 'usename') {
+        // NAMING RITE (rogue P0-8 2026-10-22): bestow a use-name at high
+        // trust. Player-initiated — the topic is only offered at trust 75+
+        // (useNameAvailable), and the name is typed, never picked. The
+        // reaction is generated from temperament (unique-person law).
+        if (!this.useNameAvailable || !this.useNameAvailable(vid)) {
+          this.say(`${first} tilts their head. "Call me something? You've got a name for me already — it's the one I was born with."`);
+          return { ok: true };
+        }
+        const temp = (typeof this.npcTemper === 'function') ? this.npcTemper(vid) : 'steady';
+        // firstRef, not raw v.name: the gate guarantees the name is known,
+        // but the funnel keeps it honest (knowledge-gating).
+        const tFirst = this.firstRef(vid);
+        this.say(`You say it before you can second-guess it. "Can I call you something? Not your name — a name from me."`);
+        let react;
+        if (/prickly|suspicious|cynical/.test(temp)) {
+          react = `"A nickname." ${tFirst} studies you for a long moment. "What's wrong with the name I have?" — "Nothing. It's not a replacement. It's yours, from me." A pause. "...Say it, then."`;
+        } else if (/withdrawn|cautious|guarded/.test(temp)) {
+          react = `${tFirst} looks down at their hands. "Nobody's asked me that before." Quiet. "Yeah. Okay."`;
+        } else if (/bold|intense|passionate/.test(temp)) {
+          react = `${tFirst} grins wide. "A name from the bearer? That's either an honor or a curse." A beat. "Say it. Make it good."`;
+        } else {
+          react = `"Oh." ${tFirst} goes a little pink. "I'd — yeah. I'd like that."`;
+        }
+        this.say(react);
+        this.socialTick(vid);
+        return { ok: true, useNaming: { vid } };
+      }
       return null;
     },
     // goalKnown: post-System it's displayed; pre-System it's learned via askAbout
@@ -9675,10 +9703,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             victim.cause = 'hunger';
             village.news = village.news || [];
             if (village.news.length < 20) {
-              village.news.push(`💀 ${victim.name} died of hunger on day ${village.day}.`);
+              // NAMING RITE (rogue P0-8): the victim may be an unnamed
+              // newborn (name null) — never print "null".
+              const vshort = this.distantShortName ? this.distantShortName(victim) : (victim.name ? victim.name.split(' ')[0] : 'the baby');
+              village.news.push(`💀 ${vshort} died of hunger on day ${village.day}.`);
             }
             // DRAMA (Steve 2026-10-07, Round C2): the village mourns — gray wisp, bell toll.
-            try { this.drama('villageDeath', victim.name.split(' ')[0], 'hunger'); } catch (e) {}
+            try { this.drama('villageDeath', this.distantShortName ? this.distantShortName(victim) : victim.name.split(' ')[0], 'hunger'); } catch (e) {}
           }
         }
       }
@@ -9690,10 +9721,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const couples = village.roster.filter(p => p.alive && p.partner && p.age >= 18 && p.age <= 40);
         if (couples.length >= 2) {
           const parent = couples[Math.floor(Math.random() * couples.length)];
-          const nm = this.genNameForOrigin('village', true);
+          // NAMING RITE (rogue P0-8 2026-10-22): the baby is born UNNAMED —
+          // the parents hold the name for the bearer. Sit with the village
+          // (villageTalk) and they'll ask. If the bearer never comes, the
+          // village names the child at 30 days (nameUnnamedBabies).
           const baby = {
             id: `${village.id}_p${Date.now()}_${Math.floor(Math.random()*1000)}`,
-            name: nm.name,
+            name: null,
+            unnamed: true,
+            birthDay: village.day,
             age: 0,
             alive: true,
             partner: null,
@@ -9705,12 +9741,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           village.news = village.news || [];
           if (village.news.length < 20) {
             const parentName = parent.name.split(' ')[0];
-            village.news.push(`👶 ${nm.name.split(' ')[0]} was born to ${parentName} on day ${village.day}.`);
+            village.news.push(`👶 A baby was born to ${parentName} on day ${village.day} — still unnamed. They say they're holding the name.`);
           }
           // DRAMA (Steve 2026-10-07, Round C2): rare and soft — pink glow for the new arrival.
-          try { this.drama('villageBirth', nm.name.split(' ')[0], parent.name.split(' ')[0]); } catch (e) {}
+          try { this.drama('villageBirth', 'the baby', parent.name.split(' ')[0]); } catch (e) {}
         }
       }
+      // NAMING RITE (rogue P0-8 2026-10-22): the parents' right — an unnamed
+      // baby the bearer never named gets a village name at 30 days.
+      try { if (typeof this.nameUnnamedBabies === 'function') this.nameUnnamedBabies(village); } catch (e) {}
       // AGING: everyone gets older
       if (village.roster) {
         for (const p of village.roster) {
@@ -16045,6 +16084,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // NAMELESS (blitz-fightres 2026-10-13): a person record without a name
       // (old save, corrupt seed) must not throw or render "undefined" — a
       // villager is always at least "Someone".
+      // NAMING RITE (rogue P0-8 2026-10-22): a bestowed use-name (calledName)
+      // is preferred — it ADDS identity, never replaces the generated true
+      // name, which stays on the record.
+      if (vp && vp.calledName) return String(vp.calledName).split(' ')[0];
       return (vp && vp.name) ? String(vp.name).split(' ')[0] : 'Someone';
     },
 
@@ -16317,6 +16360,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.state.systemArrived || this.nameKnown(vid)) {
           const v = (this.data.villagers || []).find(x => x.id === vid)
             /* unified: getPerson */ || {};
+          // NAMING RITE (rogue P0-8 2026-10-22): prefer the bestowed
+          // use-name, same as npcName — it adds identity, never replaces.
+          if (v.calledName) return String(v.calledName).split(' ')[0];
           return String(v.name || 'Someone').split(' ')[0];
         }
         if (typeof this.whoTag === 'function') return this.whoTag(vid);

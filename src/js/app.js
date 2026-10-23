@@ -13963,6 +13963,8 @@
     const goalKnown = Game.goalKnown(villagerId);
     const namingActive = Game.monsterNamingActive ? Game.monsterNamingActive() : false;
     const tellActive = Game.monsterTellActive ? Game.monsterTellActive() : false;
+    // NAMING RITE (rogue P0-8 2026-10-22): bestow a use-name at high trust.
+    const useNameActive = Game.useNameAvailable ? Game.useNameAvailable(villagerId) : false;
     const topics = [
       ['goal', '\u{1F3AF} "What do you want?"', goalKnown ? ' (you know: ' + (Game.goalWant(villagerId) || '?') + ')' : ''],
       ['gossip', '\u{1F442} "Heard anything?"', ''],
@@ -13970,6 +13972,7 @@
     ];
     if (tellActive) topics.push(['tellbeast', '\u{1F441}\uFE0F "You saw something out there..."', '']);
     if (namingActive) topics.push(['namebeast', '\u{1F4A1} "What are we calling that thing?"', '']);
+    if (useNameActive) topics.push(['usename', '\u{1F4AC} "Can I call you something?"', '']);
     // MONSTER COUNTERS (2026-10-10): the village teaches tricks — offer the
     // topic only when there's actually a trick to learn (counterTeachable).
     const trickTeachable = Game.counterTeachable ? Game.counterTeachable() : null;
@@ -13991,9 +13994,10 @@
     slot.querySelectorAll('[data-topic]').forEach(b => {
       b.onclick = () => {
         const r = Game.askAbout(villagerId, b.dataset.topic);
-        const labels = { goal: 'what they want', gossip: 'what they\u2019ve heard', village: 'how everyone\u2019s doing', namebeast: 'what to call the beast', tellbeast: 'what you saw out there', beasttricks: 'beast tricks' };
+        const labels = { goal: 'what they want', gossip: 'what they\u2019ve heard', village: 'how everyone\u2019s doing', namebeast: 'what to call the beast', tellbeast: 'what you saw out there', beasttricks: 'beast tricks', usename: 'for a name from you' };
         view.result = r ? `You asked about ${labels[b.dataset.topic] || 'it'}.` : null;
         view.naming = r && r.naming ? r.naming : null;
+        view.useNaming = r && r.useNaming ? r.useNaming : null;
         refresh();
       };
     });
@@ -14011,6 +14015,26 @@
           refresh();
         };
       });
+    }
+    // USE-NAME (rogue P0-8 2026-10-22): bestow a name from you. Typed, never
+    // picked — a use-name is personal, not a vote.
+    if (view.useNaming) {
+      const uz = document.createElement('div');
+      uz.className = 'inline-btns';
+      uz.innerHTML = `<p class="small" style="opacity:.7">A name from you — they'll carry it. Their true name stays theirs.</p>` +
+        `<input id="usename-input" type="text" maxlength="24" placeholder="What do you call them?" autocomplete="off" autocapitalize="words" style="width:100%;padding:10px;margin:8px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">` +
+        `<button class="btn sm" data-usego>Bestow it</button>`;
+      slot.querySelector('.inline-body').appendChild(uz);
+      const uinput = uz.querySelector('#usename-input');
+      const ugo = () => {
+        const r = Game.bestowUseName(view.useNaming.vid, uinput.value);
+        view.useNaming = null;
+        view.result = r && r.ok ? `You named them "${r.name}."` : 'No name given.';
+        refresh();
+      };
+      uz.querySelector('[data-usego]').onclick = ugo;
+      uinput.addEventListener('keydown', e => { if (e.key === 'Enter') ugo(); });
+      uinput.focus();
     }
   }
 
@@ -16651,6 +16675,23 @@
               b.onclick = () => {
                 const a = card.actions[+b.dataset.vact];
                 try { if (Game.feedbackMark) Game.feedbackMark(); } catch (e) {}
+                // NAMING RITE (rogue P0-8 2026-10-22): the baby's name is
+                // typed, not picked — swap the card for a name input.
+                if (a.id === 'namebaby') {
+                  info.innerHTML = `<div class="card"><p>👶 <b>Name the baby</b><br><span class="small">${esc(a.hint || '')}</span></p>` +
+                    `<input id="babyname-input" type="text" maxlength="24" placeholder="The name you give" autocomplete="off" autocapitalize="words" style="width:100%;padding:10px;margin:8px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">` +
+                    `<div class="actions"><button class="btn sm" id="babyname-go">Give the name</button></div></div>`;
+                  const binp = document.getElementById('babyname-input');
+                  const bgo = () => {
+                    const r = Game.nameBaby(otherV.id, a.babyId, binp.value);
+                    info.innerHTML = `<div class="card"><p>${esc(r && r.ok ? `You named the baby "${r.name}."` : 'No name given. The offer stands — for now.')}</p></div>`;
+                    refresh();
+                  };
+                  document.getElementById('babyname-go').onclick = bgo;
+                  binp.addEventListener('keydown', e => { if (e.key === 'Enter') bgo(); });
+                  binp.focus();
+                  return;
+                }
                 Game.villageCardAction(otherV.id, a.id, { giftKcal: a.giftKcal || 0 });
                 refresh();
               };

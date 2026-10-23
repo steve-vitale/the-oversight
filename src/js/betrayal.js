@@ -2373,6 +2373,15 @@
           ? 'Trade news and plant knowledge. Takes time — stories aren\'t fast.'
           : 'Trade news. They\'ll share real knowledge once they know your face — come back.';
         card.actions.push({ id: 'talk', label: '💬 Sit & talk (a while)', hint: talkHint });
+        // NAMING RITE (rogue P0-8 2026-10-22): the parents asked the bearer
+        // to name their baby (villageTalk beat). The name is typed, never
+        // automatic — the card offers it while the offer stands.
+        try {
+          const pend = (typeof this.babyNamingPending === 'function') ? this.babyNamingPending(villageId) : null;
+          if (pend) {
+            card.actions.push({ id: 'namebaby', label: '👶 Name the baby', hint: `${pend.parentName} asked you to give the newborn a name. An honor — say it like you mean it.`, babyId: pend.babyId });
+          }
+        } catch (e) {}
         // STUDY THEIR CODEX (break-it knowledge 2026-10-08): studyVillageCodex
         // was engine-only — no UI ever called it, so systemIntegrationLevel
         // could never grow past 0 while the HUD promised "study 1 more
@@ -2418,6 +2427,10 @@
   villageCardAction(villageId, actionId, opts) {
     if (actionId === 'petition') return this.petitionVillage(villageId, opts);
     if (actionId === 'talk') return this.villageTalk(villageId);
+    // NAMING RITE (rogue P0-8 2026-10-22): name the baby whose parents asked.
+    // (app.js intercepts this action for a typed input; the engine path takes
+    // the name via opts for headless/test callers.)
+    if (actionId === 'namebaby') return this.nameBaby(villageId, opts && opts.babyId, opts && opts.name);
     if (actionId === 'territory') return this.villageTerritory(villageId);
     if (actionId === 'deal_split') return this.villageDeal(villageId, 'split');
     if (actionId === 'deal_tribute') return this.villageDeal(villageId, 'tribute');
@@ -2597,6 +2610,20 @@
     }
     // showing up, sitting down, staying a while: that's how faces get known.
     ov.trust = Math.min(100, ov.trust + (trustIn === 0 ? 8 : 4));
+    // NAMING RITE (rogue P0-8 2026-10-22): an unnamed baby — the parents
+    // hold the name for the bearer. Voiced once per baby (namingAsked); the
+    // name itself is a separate player action (nameBaby, village card),
+    // never automatic.
+    try {
+      const unnamed = (ov.roster || []).find(p => p && p.alive && p.unnamed && (p.age || 0) < 3);
+      if (unnamed && !unnamed.namingAsked) {
+        unnamed.namingAsked = true;
+        ov.pendingBabyNaming = unnamed.id;
+        const parent = (ov.roster || []).find(p => p.id === ((unnamed.parents || [])[0]));
+        const parentFirst = parent && parent.name ? parent.name.split(' ')[0] : 'One of the parents';
+        this.say(`${parentFirst} finds you after the meal — the baby asleep against their shoulder. "We haven't named them yet." A pause. "We were waiting. For you, I mean. The bearer giving the name — that's... it would mean something. Would you?"`);
+      }
+    } catch (e) {}
     // talk takes a while: stories aren't fast. (Named cost, no silent drain.)
     this.tickAction(64);
     return true;

@@ -1119,6 +1119,16 @@ Movement animation. Step-by-step tile transitions.
 
 **Consumes:** (none documented)
 
+### naming-rite (`naming-rite.js`)
+The player naming rite (rogue P0-8, Vermilion/Nuzlocke talk):
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### network-campaign (`network-campaign.js`)
 THE NETWORK — the key to the best human ending (Steve 2026-10-14: "Something else on the scale of titan class but even bigger. Something that has to be fought across the entire map ... Should be almost impossible to get."). Summoned when Overtime reaches the_network.keyTier AND the herald, nielsen and finale are all slain. The broadcast given a body: one piece in each 3x3 sector of the 9x9 map (4 masts, 4 limbs, the heart in the middle), fought in data order with ONE coalition by the finale's march rules — 20 blades to start, upkeep 1000 kcal/blade/day, the dead stay dead, camp between nodes, no new blades once the march begins. A loss pauses the march if the coalition still fields the floor; below it the key is lost for the run. The heart falling sets pg.networkFallen (the key), which adds THE HOSTS to every Table path.
 
