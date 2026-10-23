@@ -278,3 +278,26 @@ leg (pristine base 8720dc2c7, no armor-drive code) also wins 0/32 — the
 arm introduced no regression. Baseline NOT rolled forward (rolling would
 drop the _regime label per the script caveat; the regime split is
 working as designed).
+
+## Adoption + rebase record (2026-10-22, adoption worker)
+
+- Adopted from dead coordinator (fleshout-20261022T1915Z): orphan had
+  completed 31/32 sweep configs + all helper scripts; missing only
+  control-leadfeast-s65558, run clean (40d, village-lost, no window).
+- Kept the orphan's uncommitted sweep-script fix (policyTag 'feast'
+  doubling) — genuine bug, all 31 orphan files use the fixed naming.
+- DET: drive-leadfeast-s65551 re-run byte-identical (cmp clean).
+- Rebased onto master e32d4e8c4 (was 8720dc2c7): arm commit
+  6341570a0 -> 5d0b935f3 (no conflicts), confirm 74ad71989 ->
+  85a7c8e31.
+- Proof re-verified GREEN post-rebase: 28/28 (exit 0).
+- Index-clobber incident: immediately after safe-commit.sh built the
+  confirm commit, the worktree INDEX showed the 41 new files as
+  staged-deleted (the 2026-10-22 AGENTS.md clobber signature, second
+  sighting same day). Commit verified byte-identical to worktree via
+  hash-object; index repaired surgically with
+  `git update-index --add --cacheinfo` from the commit (note: --add
+  required for all new-file entries, per the 2026-10-07 lesson). No
+  read-tree, no restat. Tree clean after repair.
+- Verdict stands: NO-GO per §14. Arm NOT merged to master — rebased and
+  held on this branch for the coordinator's decision.
