@@ -1,0 +1,23 @@
+# THE EMPTY MOOT — seed 3801 (warm-competent law-abiding, 137d, 0 alive)
+
+## plots (4)
+  plot_1: Moana -> Ruth d6 active=false sprung=true resolved=true expired=false
+  plot_3: Moana -> Ruth d7 active=true sprung=false resolved=false expired=false
+  plot_5: Ruth -> Moana d10 active=true sprung=false resolved=false expired=false
+  plot_7: Ruth -> Moana d18 active=true sprung=false resolved=false expired=false
+
+## cases (4)
+  case_2: ambush — accused Moana, A man, maybe 40s, with a broad frame, Ines — target Ruth — source plot:plot_1 — role bystander — trial never — verdict none
+  case_4: ambush — accused Moana, Kevin, Abigail — target Ruth — source plot:plot_3 — role bystander — trial never — verdict none
+  case_6: ambush — accused Ruth, David, Abigail — target Moana — source plot:plot_5 — role bystander — trial never — verdict none
+  case_8: ambush — accused Ruth, David, Abigail — target Moana — source plot:plot_7 — role bystander — trial never — verdict none
+
+## moots observed (4)
+  case_2: ambush via npcMootTick d10 — accused Moana, Kevin, Ines — vote acquit — verdict acquitted convicted=false — affinity: guilty-mean -29.5 / acquit-mean 2.2 [ALIGNED (acquit-voters warmer)]
+  case_4: ambush via npcMootTick d13 — accused Moana, Kevin, Abigail — vote acquit — verdict acquitted convicted=false — affinity: guilty-mean -14.0 / acquit-mean 10.3 [ALIGNED (acquit-voters warmer)]
+  case_6: ambush via npcMootTick d15 — accused Ruth, David, Abigail — vote n/a — verdict weregild convicted=true — affinity: guilty-mean -12.0 / acquit-mean 0.0 [ALIGNED (acquit-voters warmer)]
+  case_8: ambush via npcMootTick d23 — accused Ruth, David, Abigail — vote guilty — verdict exile convicted=true — affinity: guilty-mean -5.5 / acquit-mean n/a [n/a]
+
+## NPC<->NPC bond edges (from bondSnap d0/70/140)
+  d70: npcPairs=46 npcDeep=19 npcAvgV=29.6 (allPairs=56 allDeep=26)
+  d137: npcPairs=88 npcDeep=37 npcAvgV=35.9 (allPairs=91 allDeep=37)

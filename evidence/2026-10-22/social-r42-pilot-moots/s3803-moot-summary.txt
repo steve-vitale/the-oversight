@@ -1,0 +1,17 @@
+# THE EMPTY MOOT — seed 3803 (warm-competent law-abiding, 141d, 5 alive)
+
+## plots (2)
+  plot_1: Miguel -> Aroha d7 active=true sprung=false resolved=false expired=false
+  plot_3: Miguel -> Aroha d12 active=true sprung=false resolved=false expired=false
+
+## cases (2)
+  case_2: ambush — accused Miguel, Innocent, Eduardo — target Aroha — source plot:plot_1 — role bystander — trial never — verdict none
+  case_4: ambush — accused Miguel, Innocent, Xavier — target Aroha — source plot:plot_3 — role bystander — trial never — verdict none
+
+## moots observed (2)
+  case_2: ambush via npcMootTick d13 — accused Miguel, Innocent, Eduardo — vote guilty — verdict exile convicted=true — affinity: guilty-mean -8.0 / acquit-mean 0.0 [ALIGNED (acquit-voters warmer)]
+  case_4: ambush via npcMootTick d17 — accused Miguel, Innocent, Xavier — vote guilty — verdict cold_war convicted=true — affinity: guilty-mean -0.6 / acquit-mean n/a [n/a]
+
+## NPC<->NPC bond edges (from bondSnap d0/70/140)
+  d70: npcPairs=42 npcDeep=21 npcAvgV=33.3 (allPairs=53 allDeep=30)
+  d140: npcPairs=63 npcDeep=29 npcAvgV=40.8 (allPairs=77 allDeep=36)
