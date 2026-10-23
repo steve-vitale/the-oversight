@@ -1,7 +1,8 @@
 # sim-easingchannels-b — easing-channel decomposition (2×2 factorial)
 
 Run: oversight-flesh-out-loop-b-20261023T1130Z (cron), axis food-economy.
-Worker tree: ~/workspace/worktrees/sim-easingchannels-b (base master 8e4181581).
+Worker tree: ~/workspace/worktrees/sim-easingchannels-b (branch rebased onto
+master 6722215c6 during the 1130Z run; 8e4181581 is an ancestor).
 MEASUREMENT ONLY — zero src/js changes, ever. Instruments only.
 
 ## The question
@@ -30,6 +31,10 @@ FEASTSCALE_R13=1/SEATDRIVE=0.
 - PLENTYDEPRI hook region: byte-identical to landing commit df66ebaff
   (only a comment line differs — no code change). scripts/test-plentydepri-b.js
   re-ran GREEN on current master (ALL GREEN).
+  (Adoption re-verify 2026-10-23 15:30 UTC on this tree's actual base:
+  _plentyDepriOn() and _depositGateOn() bodies byte-identical between
+  8e4181581 and this tree's HEAD; the 4 intermediate commits are
+  journey-endgame/establishment, no food-economy hook changes.)
 - DEPOSITGATE hook region: scripts/test-depositgate-b.js re-ran GREEN on
   current master (ALL GREEN).
 - scripts/proof-plentydepri-confirm-b.js re-ran: its 1 "failure" is the
