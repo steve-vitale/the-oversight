@@ -1523,6 +1523,10 @@
             const mv = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
             pro = mv.gender === 'm' ? 'he' : mv.gender === 'f' ? 'she' : 'they';
           } catch (e) {}
+          // OBJECT CASE (journey-endgame r41 2026-10-22): the beloved coda
+          // puts the pronoun after a preposition ("behind he") — needs the
+          // object form, not the subject form.
+          const proObj = pro === 'he' ? 'him' : pro === 'she' ? 'her' : 'them';
           // WIN CODAS (sim-wincoda 2026-10-19, findings backlog: verbatim
           // repetition, theater class). The win coda was IDENTICAL across all
           // five walked paths — now each walked path gets its own coda keyed
@@ -1535,7 +1539,7 @@
           const winCodas = {
             feared: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and the galaxy, which came to watch a monster, leaves afraid of the right things. The fear is a shield now, held over a village that trusts the hand that holds it.`,
             indispensable: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — but the table keeps the contract ${pro} priced, because the galaxy still needs what ${pro} taught it. The village endures, and this time the table owes the village.`,
-            beloved: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and the audience, which came to be entertained, leaves humming the village's name. The village endures, loved and unbeholden, and the lights stay warm behind ${pro}.`,
+            beloved: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and the audience, which came to be entertained, leaves humming the village's name. The village endures, loved and unbeholden, and the lights stay warm behind ${proObj}.`,
             witness: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — with every charge read aloud and answered, the ledger closed and clean. The village endures, and the record stands: what was hidden is hidden no more.`,
             assimilated: `◈ ${me} does not walk out of the light — ${pro} went inside carrying the truth, and the light, unsteadily, has begun to carry it back. The village endures, with a Trojan horse in the walls of heaven.`,
             defiant: `◈ ${me} walks out of the light alone, which is how ${pro} walked in — and keeps walking, because ${pro} paid every price and said no twice. The village endures, poorer, unowned, free: the long shot of small figures leaving the light is the highest-rated thing the galaxy ever saw.`,

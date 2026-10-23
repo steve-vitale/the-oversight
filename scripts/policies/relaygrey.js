@@ -76,16 +76,34 @@ function bondOf(Game) { try { return (typeof Game.sysBond === 'function') ? Game
 function heldBy(Game) { try { return (typeof Game.relayHeldByBearer === 'function') ? !!Game.relayHeldByBearer() : false; } catch (e) { return false; } }
 function backfiresOf(Game) { try { return ((((Game.state || {}).scholar || {}).relay || {}).backfires | 0); } catch (e) { return 0; } }
 
+// NOTHERMO CONTROL (journey-endgame r41, lane B, 2026-10-22 — policy-side,
+// zero src/js, default-off): RELAYGREY_NOTHERMO=1 disables the thermostat
+// (the 3b lean>10/lean<-10 corrections) and answers commune scenes with the
+// MOST-extreme choice instead of the least-extreme one. The forced-drift
+// control: proves the System's lean-notice voicing (relayLeanNoticed) fires
+// when there IS drift to voice. r40's M4 metric was self-defeating (a held
+// run never crosses a band); this control supplies the crossing.
+// FORCEDRIFT CONTROL (r41 extension): RELAYGREY_FORCEDRIFT=1 disables the
+// thermostat AND forces one relayReroute('efficient') per day (-2 lean/day,
+// no grounding cost — grounding erodes from holding, not reroutes). The
+// NOTHERMO seed proved the meter is nearly inert (1 commune, 0 reroutes —
+// the lean sources rarely fire); FORCEDRIFT supplies real drift pressure so
+// the voicing itself (relayLeanNoticed on band crossings) gets tested.
+function forceDrift() { return process.env.RELAYGREY_FORCEDRIFT === '1'; }
+function noThermo() { return process.env.RELAYGREY_NOTHERMO === '1'; }
+
 // answerPendingScene(Game, RG): the pragmatist's answer — the choice with
 // the smallest |lean| nudge. Returns the choice id or null.
 function answerPendingScene(Game, RG) {
   try {
     const p = (typeof Game.pendingRelayScene === 'function') ? Game.pendingRelayScene() : null;
     if (!p || !p.resolved || !Array.isArray(p.resolved.choices) || !p.resolved.choices.length) return null;
-    let best = null, bestAbs = Infinity;
+    const nt = noThermo() || forceDrift();
+    let best = null, bestAbs = nt ? -Infinity : Infinity;
     for (const c of p.resolved.choices) {
       const a = Math.abs(c.lean | 0);
-      if (a < bestAbs) { bestAbs = a; best = c; }
+      // NOTHERMO/FORCEDRIFT: most-extreme — drift hard, cross bands, prove the voicing.
+      if (nt ? (a > bestAbs) : (a < bestAbs)) { bestAbs = a; best = c; }
     }
     if (!best) return null;
     const before = leanOf(Game);
@@ -170,9 +188,17 @@ function relayGreyDaily(Game, ctx) {
       const delayed = sw ? (sw.delayed | 0) : 0;
       // 3a. REAL WORK — messages are waiting: hurry them (efficient, -2).
       // 3b. THERMOSTAT — steer off the System's own lean notices.
-      if (delayed >= 2 && !floored) { Game.relayReroute('efficient'); RG.rerouteEff = (RG.rerouteEff | 0) + 1; }
-      else if (lean > 10 && !floored) { Game.relayReroute('efficient'); RG.rerouteEff = (RG.rerouteEff | 0) + 1; }
-      else if (lean < -10) { Game.relayReroute('honest'); RG.rerouteHon = (RG.rerouteHon | 0) + 1; }
+      //     NOTHERMO / FORCEDRIFT controls: skip the corrections — let it drift.
+      const nt = noThermo(), fd = forceDrift();
+      let reroutedToday = false;
+      if (delayed >= 2 && !floored) { Game.relayReroute('efficient'); RG.rerouteEff = (RG.rerouteEff | 0) + 1; reroutedToday = true; }
+      else if (!nt && !fd && lean > 10 && !floored) { Game.relayReroute('efficient'); RG.rerouteEff = (RG.rerouteEff | 0) + 1; reroutedToday = true; }
+      else if (!nt && !fd && lean < -10) { Game.relayReroute('honest'); RG.rerouteHon = (RG.rerouteHon | 0) + 1; reroutedToday = true; }
+      // FORCEDRIFT: one efficient reroute per day (-2 lean) — real drift
+      // pressure so the band-crossing voicing has something to voice.
+      if (fd && !reroutedToday && !floored) {
+        try { if (Game.relayReroute('efficient') === 'rerouted') { RG.rerouteEff = (RG.rerouteEff | 0) + 1; RG.forcedDrift = (RG.forcedDrift | 0) + 1; } } catch (e) { RG.rgError = (RG.rgError | 0) + 1; }
+      }
     }
     // 4b. COMMUNE CADENCE — the curiosity ladder (first 5) then check-ins
     // on the System's cadence. A pragmatist stays curious; the answers
