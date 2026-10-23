@@ -1,0 +1,137 @@
+#!/usr/bin/env node
+// sense-feastdisc-reconfirm-b.js — SENSE-TESTING LAW probe for the
+// sim-feastdisc-confirm INDEPENDENT RE-CONFIRM.
+//
+// Mirrors the reconfirm sweep's oneRun EXACTLY (KD instrument + feast
+// census + startCombat wrap + policy daily wrap + FD.resetTele +
+// sampleEvery 30 + 180d) and ADDS ONLY the read-only Game.say wrap.
+// Determinism is verified by re-running the chosen corpus config and
+// diffing the kill rows against the corpus JSON (args point at the
+// reconfirm corpus dir).
+//
+// Usage: FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 \
+//        KILLDISC=1 ARMORYDRIVE=1 FEASTDISC=1 \
+//        SEED=<seed> BASE=<leadfeast|belongfeast> DSTART=<d> DEND=<d> \
+//        CORPUS=<perseed dir> ARM=feastdisc \
+//        node scripts/sense-feastdisc-reconfirm-b.js
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const REPO = process.env.REPO || path.join(__dirname, '..');
+for (const k of ['FEASTSCALE_R13', 'TRIBFLOOR', 'WINPURSUIT', 'WINDEFER', 'KILLDISC', 'ARMORYDRIVE', 'FEASTDISC']) {
+  if (process.env[k] !== '1') { console.error(`STOP: ${k}=1 required.`); process.exit(2); }
+}
+if (process.env.SEATDRIVE !== '0') { console.error('STOP: SEATDRIVE=0 required.'); process.exit(2); }
+
+const SEED = parseInt(process.env.SEED, 10);
+const BASE = process.env.BASE || 'belongfeast';
+const DSTART = parseInt(process.env.DSTART || '1', 10);
+const DEND = parseInt(process.env.DEND || '180', 10);
+const CORPUS = process.env.CORPUS || path.join(REPO, 'evidence', '2026-10-23', 'perseed-feastdisc-reconfirm-b');
+const ARM = process.env.ARM || 'feastdisc';
+if (!Number.isFinite(SEED)) { console.error('STOP: SEED required.'); process.exit(2); }
+
+const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
+const AD = require(path.join(REPO, 'scripts', 'policies', 'armorydrive'));
+const FD = require(path.join(REPO, 'scripts', 'policies', 'feastdiscipline'));
+const KD = require(path.join(REPO, 'scripts', 'killdisc-instrument-20261021'));
+
+function waveOf(Game, mid) {
+  try {
+    const def = ((Game.data || {}).monsters || []).find(d => d && d.id === mid);
+    return (def && def.wave) || 0;
+  } catch (e) { return 0; }
+}
+
+(async () => {
+  const policy = FD.disciplinedFor(BASE); // mirrors the sweep's oneRun policyFor
+  const { Game } = await loadGame({ seed: SEED, mode: 'feastdisc-reconfirm-b-sense', fullTelemetry: false });
+  const t = { kills: [], engagements: [], census: [], dmg: {}, instrumentErrors: [] };
+  const uninstallKD = KD.install(Game, t);
+
+  const uninstallFeast = (() => {
+    const oHost = Game.hostFeast ? Game.hostFeast.bind(Game) : null;
+    const oGrant = Game.grantFeastBuff ? Game.grantFeastBuff.bind(Game) : null;
+    if (oHost) Game.hostFeast = function (...a) { return oHost(...a); };
+    if (oGrant) Game.grantFeastBuff = function (...a) { return oGrant(...a); };
+    return () => { try { if (oHost) Game.hostFeast = oHost; } catch (e) {} try { if (oGrant) Game.grantFeastBuff = oGrant; } catch (e) {} };
+  })();
+
+  const fightFeasted = [];
+  let uninstallFeasted = null;
+  try {
+    const oSC = Game.startCombat ? Game.startCombat.bind(Game) : null;
+    if (oSC) {
+      Game.startCombat = function (...a) {
+        const r = oSC(...a);
+        try {
+          const f = Game.tbfight;
+          if (f && !f.over) {
+            const mid = a[0] || (Game.pendingMonsterId || 'bulldozer');
+            let feasted = false;
+            try { feasted = !!(Game.feastedActive && Game.feastedActive()); } catch (e) {}
+            fightFeasted.push({ day: ((Game.state || {}).scholar || {}).day || 0, mid, wave: waveOf(Game, mid), feasted });
+          }
+        } catch (e) {}
+        return r;
+      };
+      uninstallFeasted = () => { try { Game.startCombat = oSC; } catch (e) {} };
+    }
+  } catch (e) {}
+
+  const bearerByDay = {};
+  const oDaily = policy.daily;
+  const wrappedPolicy = oDaily ? Object.assign({}, policy, { daily(G, ctx) {
+    try { bearerByDay[(G.state.scholar || {}).day || 0] = G.villagerId || null; } catch (e) {}
+    return oDaily(G, ctx);
+  } }) : policy;
+
+  // READ-ONLY say wrap (the only addition vs the sweep).
+  const lines = [];
+  const osay = Game.say.bind(Game);
+  const rx = /FEAST|feast|veteran|falls|kill|say|tell|mourn|story/i;
+  Game.say = function (x) {
+    try {
+      const d = (Game.state && Game.state.scholar && Game.state.scholar.day) | 0;
+      const s = String(x).replace(/\s+/g, ' ');
+      if (rx.test(s)) lines.push(`[d${d}] ${s.slice(0, 500)}`);
+    } catch (e) {}
+    return osay.apply(this, arguments);
+  };
+
+  FD.resetTele();
+  await setupGame(Game);
+  await quietLog(async () => { await runDays(Game, wrappedPolicy, { days: 180, manifest: undefined, sampleEvery: 30 }); });
+  try { if (uninstallFeasted) uninstallFeasted(); } catch (e) {}
+  try { uninstallFeast(); } catch (e) {}
+  try { uninstallKD(); } catch (e) {}
+
+  // Verify against the corpus: damage-majority kill rows must match.
+  const st = Game.state || {};
+  const scholarVid = Game.villagerId || null;
+  const w4killRows = [];
+  for (const k of (t.kills || [])) {
+    if ((k.wave | 0) !== 4) continue;
+    const d = k.dmg || {};
+    const sD = Math.round(d.scholar || 0), cD = Math.round(d.companion || 0), oD = Math.round(d.other || 0);
+    const tot = sD + cD + oD;
+    const nonScholarShare = tot > 0 ? (cD + oD) / tot : 0;
+    const bearerAtKill = bearerByDay[k.day] != null ? bearerByDay[k.day] : scholarVid;
+    const killTimeVillager = k.by && k.by !== bearerAtKill && k.by !== 'player';
+    w4killRows.push({ day: k.day, mid: k.mid, by: k.by, killTimeVillager: !!killTimeVillager, bearerAtKill, nonScholarShare: Math.round(nonScholarShare * 100) / 100, dmgMaj: nonScholarShare >= 0.5 });
+  }
+  const mine = JSON.stringify(w4killRows.filter(k => k.dmgMaj && k.killTimeVillager));
+  let corpus = null;
+  try {
+    const fp = path.join(CORPUS, `${ARM}-${BASE.replace('feast', '')}-s${SEED}.json`);
+    const r = JSON.parse(fs.readFileSync(fp, 'utf8'));
+    corpus = JSON.stringify((r.w4killRows || []).filter(k => k.dmgMaj && k.killTimeVillager)
+      .map(k => ({ day: k.day, mid: k.mid, by: k.by, killTimeVillager: k.killTimeVillager, bearerAtKill: k.bearerAtKill, nonScholarShare: k.nonScholarShare, dmgMaj: k.dmgMaj })));
+  } catch (e) { corpus = 'CORPUS-READ-FAIL ' + String((e && e.message) || e); }
+  console.log('VERIFY-DETERMINISM: ' + (mine === corpus ? 'MATCH (sense timeline == corpus timeline)' : 'DIVERGE'));
+  if (mine !== corpus) { console.log('  sense:  ' + mine); console.log('  corpus: ' + corpus); }
+  for (const l of lines) {
+    const m = /^\[d(\d+)\]/.exec(l);
+    if (m && +m[1] >= DSTART && +m[1] <= DEND) console.log(l);
+  }
+})().catch(e => { console.error('SENSE FATAL', e); process.exit(1); });
