@@ -72,6 +72,7 @@ Attempt counters (harvest trips/searches) are effort, not successful rewards.
 | `kind` | kind.js | competent + uniformly kind: never steals, shares surplus, comforts grieving | the warm pole; contrast with larceny-leaning |
 | `deed-seeking` | deed-seeking.js | competent + hunts notability deeds: patrols, channels, always takes cameras | deed-accumulation curves, table-bar pacing |
 | `winseek` | winseek.js | full table-gate pursuit (6 roads) | win-path reachability ceiling |
+| `shark` | shark.js | degenerate-optimal win maximizer: top-up-or-nothing fights, need-based patrols, exile-edge skimming, EV-only contests, table rush — MEASUREMENT PROBE, not shipped AI | adversary for reward-shaping: shark ≥ competent (identical seeds) = metric/lever is degenerate; wins read INVERTED, never tune the game |
 | `capable` | capable.js | leadfeast base + real flee (barrier push), combat abilities + signature verbs, scored offers/contests/Table/relics, held talks by need, relay | the game as a capable player plays it — the default bot for build/lever sims |
 
 Also present (legacy, not canonical): `idle.js` (zero/mvc/leader), `oracle.js`,
