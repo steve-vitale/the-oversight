@@ -23,6 +23,19 @@
 
 **Horizon:** DAYCAP=160 loop-days targeting ~140 game-days (r5's ~25% fight-blocked-sleep tax), death-aware stop (+10d tail max). **PILOT FIRST:** 4 seeds 60001–60004 (fresh; r22 used 40001–40004, r19 19001–19008, r7 9501–9508). **Policy:** warcourt (competent + conquest force play; raids from day 35, terms-first), WARCOURT_RAID=1, IRONCOURT_ANSWER=mercy on all seeds (IRON_FORCE env may override per seed). **Script:** scripts/journey-scale-r23-20261023.js (modeled on the r7 script; new mercyEvents + weekly mercyWatch instruments; full src/js list in index.html order, minus DOM-only; Math.random seeded before eval via sim-harness).
 
+## Post-rebase re-verification (new master 2f1649937, fleshout loop B landed)
+
+A sibling (fleshout loop B) landed mid-run: sim-storageshed-b5 + sim-scholardistsafe-b (evidence only) and **sim-armorvillage-b** (game code: armor pile structure env-gated default-off + the #806 displaced-piece-conservation fix, always-on). Per the loop body, the branch was rebased onto the new master inside the worktree (clean, 1 commit replayed) and the proof + pilot re-run:
+
+- **test-iron-court-mercy-20261018.js: ALL GREEN** on the new base.
+- **r23 pilot re-run on the new base (4 seeds, one service-restart interruption; 60004 re-run solo):** trajectories shifted under the #806 fix (expected — game-code change moves the PRNG stream), but **every binding metric still GO**:
+  - 60001: mercy d94 at trusts [55,41,24] — byte-identical to the old base; national held d94→d155 (61d).
+  - 60003: mercy d94 (was d108), national held d94→d153 (59d), survived.
+  - 60004: mercy d108 at trusts [24,24,31]; trusts climbing (25→35, 25→30, 40→53) when the village died in honest wave-4 combat d137 with national ON (29d hold; 0 death-honesty mislabels).
+  - 60002: still no staging (honest non-staging); now reached wave 4 on the war road's combat without national — the war road feeding the wave-4 gate again.
+- M1 3/4 ✓, M2 2/3 mercy seeds ≥30d hold (+1 hold-until-honest-death) ✓, M3 ✓, M4 ✓ (transcripts base-independent), M5 3/4 ✓.
+- **Leg answer unchanged: the kind answer is no longer a trap.** The old-base dissolve-and-rebound arc (60004) didn't reproduce on the new base — the new 60004 died in wave-4 combat instead — but the grace mechanic itself is proven by the proof test, the 61d/59d holds, and the old-base d139 at-expiry dissolve; the variance is trajectory churn, not mechanic churn.
+
 ## Metric review
 
 - **Harness bug found and fixed in-run (harness-only, zero gameplay effect):** the first pilot pass omitted `ctx.conquestEvents = []` initialization — the verb-record push threw (caught), silently dropping all raid/answer/tend verb logs. Gameplay calls precede the push, so trajectories are unchanged. Fixed with a one-line init + comment, then RE-RAN all 4 seeds: summary stats identical to the first pass (same days, ends, waves, w3fights, pop — deterministic reproduction), and the verb logs now record 50/7/24/11 verbs per seed. The mercy measurements below come from the re-run; the first pass's numbers matched exactly.
