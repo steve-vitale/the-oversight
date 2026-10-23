@@ -1242,7 +1242,7 @@ Declarative trigger registry for villager AI. Event names map to ordered handler
 - table_sanctity_gate: the 'table_sits' row keeps tableActive() as a hard gate — while the table sits, expeditions meet nothing (code: npc-triggers.js, villager-agency.js expeditionMonster)
 - unknown_events_noop: dispatching an unregistered event is a silent no-op returning false (chain-safe) (code: npc-triggers.js)
 
-**Consumes:** village.roster, village.gossip, village.npcViewership, codex.deeds, scholar.day, seedGossip(...), recordMoment(...), broadcastLine(...), displayName(...), say(...), agencyState(...), objVillageDanger(...), tableActive(...)
+**Consumes:** village.roster, village.gossip, village.npcViewership, codex.deeds, scholar.day, seedGossip(...), recordMoment(...), broadcastLine(...), displayName(...), say(...), agencyState(...), objVillageDanger(...), tableActive(...), objOf(...), objDanger(...) — the 'gossip' row re-runs departure danger
 
 ### overtime (`overtime.js`)
 OVERTIME — the Table's waiting cost (Steve 2026-10-14: "waiting should have a cost- but also an opportunity for the truly powerful. Waves get truly ridiculous"). Once the Table exists for the player (announced, day 90+, seat not none) and they have not sat, every 7 days raises a tier (cap 6). Each tier: wave-4/5 fights become RERUNS (HP, damage and pack size stack per tier, a "RERUN ×N" label), the world holds more monsters, raids come sooner and more often, lingering raiders gorge harder, and the live seat price drops (standing per tier and per Haven loss). The System announces each tier on air. At tier 2 the run's uncast apocalypse titan airs too; at the key tier with all three titans slain, THE NETWORK is summoned (network-campaign.js). Tuning is data: titans.json _overtime.

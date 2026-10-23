@@ -13,6 +13,8 @@
 //   - codex.deeds, scholar.day
 //   - seedGossip(...), recordMoment(...), broadcastLine(...), displayName(...), say(...)
 //   - agencyState(...), objVillageDanger(...), tableActive(...)
+//   - objOf(...), objDanger(...) — the 'gossip' row re-runs departure danger
+//     for in-flight objectives (rogue P1 mid-trip re-targeting)
 /* NPC TRIGGERS — src/js/npc-triggers.js
  *
  * Roguelike Celebration 2026 audit, Talk 2 (Savant, Modular Motivations),
@@ -46,12 +48,19 @@
  *                         down expeditionMonster (villager-agency.js)
  *   'expedition_launch'<- village-danger expedition-launch gate:
  *                         objVillageDanger() >= 4 (villager-agency.js agencyTick)
+ *   'gossip'           <- ROGUE P1 (Talk 2 G2/P2-3): seedGossip dispatches;
+ *                         the row's handler re-runs objDanger for in-flight
+ *                         objectives on high-severity gossip
+ *                         (attack/murder/death/raid); a 'defer' verdict flips
+ *                         out→returning via the existing return path, with a
+ *                         narrated cause. New row, not a P0-5 move.
  *
  * Polled conditions (objDanger's gossip/weather reads, objPick's
  * pantry/knowledge reads, the sick/heal gates inside objMaybeDepart) stay
  * where they are — they are polled, not pushed, and making them
- * event-driven is future work (P2-3 mid-trip re-targeting, P2-4 weather /
- * contest-outcome triggers). They are NOT new triggers here.
+ * event-driven is future work (P2-4 weather / contest-outcome triggers).
+ * P2-3 (mid-trip re-targeting) is event-driven now via the 'gossip' row.
+ * The P0-5 rows above are NOT new triggers here.
  *
  * Self-attaching module. Load after villager-agency.js (uses agencyState
  * at dispatch time, never at load). Handlers run at game time with
@@ -181,6 +190,99 @@
     } catch (e) {}
   }
 
+  // 'gossip' row — ROGUE P1 (mid-trip re-targeting; audit Talk 2 G2/P2-3).
+  // High-severity gossip is event-driven now, not polled: villagers mid-trip
+  // re-run objDanger and turn back when the new verdict is 'defer' — the
+  // same bar that would have kept them home. Fixed start (the gossip),
+  // flexible middle (each villager's own danger read), fixed end (the
+  // existing out→returning path: objAwayStep walks them home, the base
+  // return clock brings them in, objReturnEffect narrates the arrival).
+  //
+  // SEVERITY is read off the existing gossip fields, never invented: the
+  // set is objDanger's own danger-gossip ('attack', 'murder', 'death') plus
+  // 'raid' — a raid warning is danger, and objDanger counts it since this
+  // row. (No 'monster sighting' gossip action exists; sightings arrive as
+  // 'attack'/'death'.) No RNG, no mood rolls — the flip is a legible
+  // consequence of the news.
+  var GOSSIP_RETARGET_SEVERE = { attack: 1, murder: 1, death: 1, raid: 1 };
+
+  function gossipCauseLine(action, dims) {
+    // render the news as the fiction the turn-back cites — the narrated
+    // cause (no silent actions). Reads only existing gossip fields.
+    if (action === 'death' && dims.who) {
+      var nm = 'Someone';
+      try { nm = this.displayName(dims.who).split(' ')[0]; } catch (e) {}
+      return 'word that ' + nm + ' didn\'t come back';
+    }
+    if (action === 'murder') return 'word that someone was killed';
+    if (action === 'raid') {
+      if (dims.raiders != null) return 'word that raiders are on the move (' + dims.raiders + ' of them)';
+      return 'word of a raid';
+    }
+    return 'word of an attack out in the wilds'; // 'attack'
+  }
+
+  function gossipRetargetInFlight(vid, d) {
+    // RETARGET_GATE=0 (testing only): restore the old polled behavior —
+    // gossip never interrupts a trip. Lets the proof test show before/after.
+    if (typeof process !== 'undefined' && process.env && process.env.RETARGET_GATE === '0') return;
+    var action = (d && d.action) || '';
+    if (!GOSSIP_RETARGET_SEVERE[action]) return; // low-severity gossip: no interrupt
+    var v = (this.state || {}).village || {};
+    var roster = v.roster || [];
+    if (!roster.length) return;
+    var hx = (v.px == null ? 4 : v.px), hy = (v.py == null ? 4 : v.py);
+    var flips = [];
+    var flipped = {};
+    for (var i = 0; i < roster.length; i++) {
+      var rid = roster[i];
+      if (rid === this.villagerId) continue;
+      var o = null;
+      try { o = this.objOf(rid); } catch (e) { continue; }
+      if (!o || o.state !== 'out') continue; // in-flight objectives only
+      if (o.kind === 'LEAVE') continue; // the desperate don't do danger checks — same as departure
+      try { var ast = this.agencyState(); if (ast.exped && ast.exped[rid]) continue; } catch (e) {}
+      var dg = null;
+      try { dg = this.objDanger(rid, o.tx, o.ty, hx, hy); } catch (e) { continue; }
+      if (!dg || dg.verdict !== 'defer') continue; // the same bar that would have kept them home
+      flips.push(rid); flipped[rid] = 1;
+    }
+    // they came out together, they turn back together: one hop along the
+    // companion link (leader↔guard), no verdict needed — the pairing is the cause.
+    for (var j = 0; j < roster.length; j++) {
+      var gid = roster[j];
+      if (flipped[gid] || gid === this.villagerId) continue;
+      var go = null;
+      try { go = this.objOf(gid); } catch (e) { continue; }
+      if (!go || go.state !== 'out') continue;
+      if (go.companion && flipped[go.companion]) { flips.push(gid); flipped[gid] = 1; }
+    }
+    if (!flips.length) return;
+    var cause = 'word of trouble';
+    try { cause = gossipCauseLine.call(this, action, (d && d.dims) || {}); } catch (e) {}
+    var names = [];
+    for (var k = 0; k < flips.length; k++) {
+      var fo = null;
+      try { fo = this.objOf(flips[k]); } catch (e) { continue; }
+      if (!fo) continue;
+      fo.state = 'returning'; // the existing return path takes it from here
+      fo.retreatCause = cause; // the return stays explainable in fiction
+      var fnm = 'Someone';
+      try { fnm = this.displayName(flips[k]).split(' ')[0]; } catch (e) {}
+      names.push(fnm);
+    }
+    // narrate the cause. Presence-gated like the other objective lines: the
+    // village hears the news at the fire; the return itself narrates on arrival.
+    var playerAtHaven = false;
+    try { playerAtHaven = (this.map.px === hx && this.map.py === hy); } catch (e) {}
+    if (playerAtHaven && names.length) {
+      var who = names.length === 1 ? names[0]
+        : names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
+      var verb = names.length === 1 ? 'turns' : 'turn';
+      this.say('⚠️ ' + cause.charAt(0).toUpperCase() + cause.slice(1) + ' reaches the trail — ' + who + ' ' + verb + ' back for Haven.');
+    }
+  }
+
   // ---------- row gates: verbatim predicates, moved not rewritten ----------
 
   // 'table_sits' gate — verbatim predicate from the expeditionMonster gate
@@ -235,6 +337,12 @@
       reacts: ['expedition launch gate: village danger >= 4'],
       gate: gateExpeditionDanger,
       handlers: [],
+    },
+    'gossip': {
+      source: 'seedGossip (game.js) — any gossip source; ROGUE P1 mid-trip re-targeting (audit Talk 2 G2/P2-3)',
+      reacts: ['in-flight objectives re-run objDanger on high-severity gossip; defer verdict flips out→returning (narrated)'],
+      gate: gateTableSits, // TABLE SANCTITY: the same hard gate — while the table sits, no mid-trip re-targeting
+      handlers: [gossipRetargetInFlight],
     },
   };
 

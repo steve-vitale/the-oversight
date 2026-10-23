@@ -666,7 +666,10 @@
         var g = (this.state.village.gossip || []);
         for (var i = 0; i < g.length; i++) {
           var a = g[i].action;
-          if ((a === 'attack' || a === 'murder') && day - (g[i].day || 0) <= 3) score += 2;
+          // RAID WARNING (rogue P1 2026-10-22): a raid warning is danger —
+          // it moves departures and mid-trip re-targeting alike, same
+          // weight as an attack.
+          if ((a === 'attack' || a === 'murder' || a === 'raid') && day - (g[i].day || 0) <= 3) score += 2;
           else if (a === 'death' && day - (g[i].day || 0) <= 3) score += 1;
         }
         if (score > 4) score = 4;
@@ -696,7 +699,9 @@
         var g = (this.state.village.gossip || []);
         for (var i = 0; i < g.length; i++) {
           var a = g[i].action;
-          if ((a === 'attack' || a === 'murder') && day - (g[i].day || 0) <= 3) score += 2;
+          // RAID WARNING (rogue P1 2026-10-22): same as objDanger — a raid
+          // warning is danger, and it can stand down expedition launches.
+          if ((a === 'attack' || a === 'murder' || a === 'raid') && day - (g[i].day || 0) <= 3) score += 2;
           else if (a === 'death' && day - (g[i].day || 0) <= 3) score += 1;
         }
         if (score > 4) score = 4;

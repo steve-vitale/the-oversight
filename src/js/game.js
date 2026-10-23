@@ -16875,6 +16875,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         action, dims: { ...dims }, heard: [...(heardBy || [])],
         distortion: 0, day: this.state.scholar.day, partKey, noTrust: !!noTrust,
       });
+      // NPC TRIGGER (rogue P1, Talk 2 G2/P2-3 mid-trip re-targeting): gossip
+      // is an event source. Dispatched centrally so every current and future
+      // gossip source participates; the 'gossip' row no-ops on low-severity
+      // actions and is hard-gated on tableActive(). The dispatch is guarded
+      // so a trigger failure can never break a gossip source (combat,
+      // conversation, and other hot paths all seed gossip).
+      if (typeof this.npcTrigger === 'function') {
+        try { this.npcTrigger(dims.who || null, 'gossip', { action: action, dims: dims }); }
+        catch (e) { console.warn('[gossip-trigger] mid-trip re-target failed:', e); }
+      }
     },
     // gossipActionDims: map rumor actions to reputation dims.
     // For player-action gossip, dims already contain rep dims (e.g. {honest: -15}).
