@@ -725,7 +725,10 @@
         v.fallen.push({ villagerId: oldId, day: s.day || 0, cause: cause || 'the wild', name: this.fallenName(oldId) });
       } catch (e) {}
       try { this.removeVillager(oldId, 'killed'); } catch (e) {}
-      this.lineage().push({ name: oldName, villagerId: oldId, epithet: this.leadershipEpithet(), day: s.day || 0, cause: cause || 'the wild' });
+      // (rogue P1 2026-10-22: the dead bearer's dominant playstyle axis is
+      // filed here — the village remembers who led how. The new bearer's own
+      // record starts empty; see NEW BODY, NEW RECORD below.)
+      this.lineage().push({ name: oldName, villagerId: oldId, epithet: this.leadershipEpithet(), day: s.day || 0, cause: cause || 'the wild', playstyle: (typeof this.dominantPlaystyle === 'function' ? this.dominantPlaystyle() : null) });
       this.say(`🕯️ ${oldName} is dead — ${cause || 'the wild'}. The village stops. Somebody screams. Somebody else starts digging.`);
       // DEATH ENDS THE CAMP (break-it camps-3 2026-10-08): the mantle passes
       // the office, not the claimed patch. A camp is its keeper's claim — the
@@ -855,6 +858,28 @@
         delete s.ksGrowthV;
         if (typeof this.migrateKeepsakes === 'function') this.migrateKeepsakes();
       } catch (e) { console.warn('[mantle] successor kit', e); }
+      // NEW BODY, NEW RECORD (rogue P1 2026-10-22): the playstyle axes, the
+      // practiced stats and the earned passives are the OLD body's personal
+      // record — "the game notices who you are" was THEIR behavior, "the work
+      // is changing you" was THEIR work (Steve 2026-10-14: "You become that
+      // villager"). The successor wakes as their own person: no borrowed
+      // habits, and a body that remembers ITS trade (occupationStatBonuses),
+      // not the dead bearer's practiced body. The dead bearer's dominant axis
+      // is filed in the lineage entry above — the village remembers who led
+      // how; the new bearer <redacted> how THEY do. Office-layer playstyle readers
+      // (relic-enhancement affinity, the leadership notice) now re-segment on
+      // the new bearer <redacted> they act.
+      try {
+        s.playstyle = {};
+        s.practice = {};
+        s.passives = {};
+        s.stats = { str: 5, end: 5, per: 5, agi: 5, pre: 5 };
+        const occCat = (typeof this.occCategory === 'function')
+          ? this.occCategory(newChar.formerOccupation) : 'service';
+        const sb = (typeof this.occupationStatBonuses === 'function')
+          ? this.occupationStatBonuses(occCat) : {};
+        for (const [k, v] of Object.entries(sb)) s.stats[k] = 5 + v;
+      } catch (e) { console.warn('[mantle] new-body record', e); }
       // MANTLE IDENTITY SYNC (break-it persistence 2026-10-08): the scholar
       // record kept the DEAD bearer's id — the save index then listed the dead
       // villager as the expedition's scholar, saveKey drifted, and Light
@@ -999,7 +1024,26 @@
         const kitClause = kit.length ? ` ${poss} hands know different work now: ${kit.join(', ')}.` : '';
         const ageClause = newChar.age ? `, ${newChar.age}` : '';
         this.say(`🪞 You wake up somebody else. ${newName}${ageClause} — ${art} ${occName}.${kitClause}`);
-      } catch (e) {}
+      } catch (e) { console.warn('[mantle] orientation', e); }
+      // PATH SEGMENTATION (rogue P1 2026-10-22): the handoff names the new
+      // face's hands (kit, above) — name their path too. recognizeClass
+      // classifies from the kit mantleBecome just installed and narrates in
+      // the System's own voice when the class CHANGES. When the class was
+      // already recognized (carried from their villager record via npcGodpath
+      // — no change, no narration), name it once here: the System had a word
+      // for this one before the Codex came. Null until recognized
+      // (knowledge-gated by godpath's classLine).
+      try {
+        const before = (typeof this.godpathClass === 'function') ? this.godpathClass('player') : null;
+        const rec = (typeof this.recognizeClass === 'function') ? this.recognizeClass('player') : null;
+        // A lapsed carried class counts as changed: recognizeClass narrates
+        // its own "revises its notes" line, so the file-update line stays silent.
+        const changed = !!(rec && (!before || before.lapsed || before.path !== rec.path || before.subclass !== rec.subclass));
+        if (rec && !changed && typeof this.classLine === 'function') {
+          const line = this.classLine('player');
+          if (line) this.say(`◈ The System updates its file: the new bearer <redacted> "${line}." It had a word for this one before the Codex came.`);
+        }
+      } catch (e) { console.warn('[mantle] path line', e); }
       // THE SENTENCE DOESN'T CROSS THE GRAVE (journey-succession r24
       // 2026-10-18): when the docket was live at the death, name that the
       // sentence ended with the old body — otherwise the reset above is

@@ -2082,6 +2082,23 @@
     // Stat getters — the effects of being a better human.
     stat(stat) { return ((this.state.scholar || {}).stats || {})[stat] || 5; },
 
+    // occupationStatBonuses(occCat): the body's starting stat profile from its
+    // past — 5 base + occupation bonuses. Shared by new-game and the mantle
+    // (rogue P1 2026-10-22): a successor's body remembers ITS trade, not the
+    // dead bearer's practiced body. occCat comes from occCategory (lifeseed.js);
+    // the old `this.lifeseed` reference was never assigned, so every body used
+    // to start people-facing ('service') regardless of trade.
+    occupationStatBonuses(occCat) {
+      return {
+        medical: { per: 2, pre: 1 },   // observant, bedside manner
+        food: { end: 2, str: 1 },      // kitchen stamina, butcher's arms
+        craft: { str: 2, per: 1 },     // physical work, detail eye
+        outdoors: { end: 2, agi: 1, per: 1 }, // the survivalist
+        service: { pre: 2, per: 1 },   // people-facing
+        creative: { per: 2, pre: 1 },  // noticing, expressing
+      }[occCat] || {};
+    },
+
     // PASSIVE SKILLS (Steve 2026-10-05): six human crafts, three tiers each.
     // Earned by DOING, not allocated. Announced diegetically — you feel
     // yourself learning, not "skill point spent." Separate from alien abilities.
@@ -2639,18 +2656,13 @@
       this.state.scholar = scholar;
       // BETTER HUMAN (Steve 2026-10-05): background sets your starting stats.
       // You were someone before the scattering — that body remembers.
+      // (rogue P1 2026-10-22: `this.lifeseed` was never assigned — the guard
+      // always fell through to 'service'. occCategory is the live Game method.)
       try {
-        const occCat = this.lifeseed ? this.lifeseed.occCategory(villager.formerOccupation) : 'service';
-        const bonuses = {
-          medical: { per: 2, pre: 1 },   // observant, bedside manner
-          food: { end: 2, str: 1 },      // kitchen stamina, butcher's arms
-          craft: { str: 2, per: 1 },     // physical work, detail eye
-          outdoors: { end: 2, agi: 1, per: 1 }, // the survivalist
-          service: { pre: 2, per: 1 },   // people-facing
-          creative: { per: 2, pre: 1 },  // noticing, expressing
-        }[occCat] || {};
-        for (const [k, v] of Object.entries(bonuses)) scholar.stats[k] = 5 + v;
-      } catch (e) {}
+        const occCat = (typeof this.occCategory === 'function')
+          ? this.occCategory(villager.formerOccupation) : 'service';
+        for (const [k, v] of Object.entries(this.occupationStatBonuses(occCat))) scholar.stats[k] = 5 + v;
+      } catch (e) { console.warn('[newgame] occupation stats', e); }
       // WEEK 1 TRACKER: the System watches what you do. Your first ability
       // is based on your actions, not your stats. Play how you want to play.
       scholar.week1 = { forage: 0, hunt: 0, talk: 0, cook: 0, donate: 0, scavenge: 0 };
