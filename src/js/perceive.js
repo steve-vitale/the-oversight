@@ -194,7 +194,8 @@
               if (!sp) {
                 push(`A tree. Worth a closer look.`, 44);
               } else {
-                const art = /^[aeiou]/i.test(sp) ? 'An' : 'A';
+                // TEXT MODULE (rogue P0-2 2026-10-22): shared article.
+                const art = Text.article(sp) === 'an' ? 'An' : 'A';
                 const nutty = /oak|hickory/i.test(sp);
                 push(`${art} ${sp}.${nutty ? ' There might be nuts.' : ''}`, 44);
               }

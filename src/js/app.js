@@ -1034,7 +1034,7 @@
   function obWake() {
     const loc = (Game.data.locations || []).find(l => l.id === Game.state.startLocation) || {};
     const lines = [
-      `You wake up face-down in ${/^[aeiou]/i.test(loc.name || '') ? 'an' : 'a'} ${String(loc.name || 'unfamiliar place').toLowerCase()}.`,
+      `You wake up face-down in ${Text.anPhrase(String(loc.name || 'unfamiliar place').toLowerCase())}.`,
       `You don't remember choosing this. You didn't.`,
       `${loc.tagline || 'Nothing looks familiar.'}`,
     ];

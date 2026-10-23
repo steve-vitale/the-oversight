@@ -27,7 +27,7 @@ global.window = global;
 [
   'src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
   'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
+  'src/js/text.js', 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js',
   'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
   'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
   'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',

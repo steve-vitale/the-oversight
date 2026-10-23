@@ -56,7 +56,7 @@ Math.random = rng;
 // ---------- eval FULL script list, minus DOM-only ----------
 global.window = global;
 const LIST = ['engine/state.js', 'engine/modifiers.js', 'engine/calories.js', 'engine/day.js',
-  'engine/forage.js', 'engine/combat.js', 'game.js', 'encounters.js', 'conversation.js',
+  'engine/forage.js', 'engine/combat.js', 'text.js', 'game.js', 'encounters.js', 'conversation.js',
   'convo-mood.js', 'convoTopics.js', 'convo-wants.js', 'convo-dialogue.js', 'convo-beats.js',
   'convo-scene.js', 'examine.js', 'equipment.js', 'journal.js', 'party.js', 'party-formal.js',
   'truth.js', 'contests.js', 'contestEngine.js', 'alienPlayers.js', 'storage.js', 'perceive.js',

@@ -418,7 +418,8 @@
       const liePart = g.lie ? `weren't a ${g.lie}` : `weren't what they said`;
       let truth = String(g.truth || '');
       if (truth.length > 1 && /[a-z]/.test(truth[1])) truth = truth[0].toLowerCase() + truth.slice(1);
-      const art = /^[aeiouAEIOU]/.test(truth) ? 'an' : 'a';
+      // TEXT MODULE (rogue P0-2 2026-10-22): shared article.
+      const art = Text.article(truth);
       return `Turns out they ${liePart} — they're ${art} ${truth}.`;
     }
     return `They're not from ${g.lie || 'where they said'} — they're from ${g.truth}.`;

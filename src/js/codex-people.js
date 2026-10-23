@@ -367,7 +367,7 @@
           // apprentice"), never the vague "what Rosa did" (Steve 2026-10-06).
           if (opts.sure && (opts.via === 'confessed' || /confirm|verif/i.test(opts.via || ''))) {
             const occ = field === 'occupation' ? String((value && value.text) || value || '').trim() : '';
-            const label = occ ? `${this.personFirst(vid)} is ${/^[aeiou]/i.test(occ) ? 'an' : 'a'} ${occ}` :
+            const label = occ ? `${this.personFirst(vid)} is ${Text.anPhrase(occ)}` :
               field === 'occupation' ? `what ${this.personFirst(vid)} did` :
               field === 'goal' ? `what ${this.personFirst(vid)} wants` : String((value && value.text) || value || field);
             this.confirmField(vid, field, label);

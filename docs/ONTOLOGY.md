@@ -1707,6 +1707,19 @@ Regional temperature model + heat/cold stress + expanded weather (docs/WORLD-REG
 
 **Consumes:** Game.season, Game.rollWeather, Game.advancePart, Game.diseaseVectorTick, Game.endDay, Game.mods via S.modifiers.collectModifiers, Game.applyStatus, Game.say (game.js), Scattering.calories.hydrationBurn (src/js/engine/calories.js), Game.shelteredFromSky, Game.nearFire, Game.hasAbility, Game.playerTile (game.js)
 
+### text (`text.js`)
+Shared player-facing grammar module: article selection, pronoun bundles, slot filling with leak guard, and present-tense verb conjugation. Grammar only — word choice stays with the calling pools (no voice homogenization per Steve canon).
+
+**Provides:** Text (article, anPhrase, lowerLead, proBundle, fill, conjVerbSlots, conj, conj3s)
+
+**Rules:**
+- grammar_computed_at_render: article/pronoun/verb forms are computed from context at render time; pools choose the words (code: article, proBundle, conj3s — never a word list)
+- no_raw_slot_leaks: unfilled {slots} are stripped with a deduped console warning — braces never render verbatim (code: fill)
+- conjugation_fails_loud: conj3s warns (not silent) on malformed input and passes it through unchanged, so the game never hard-breaks on a bad verb (code: conj3s)
+- acronyms_keep_case: "ESL teacher" stays "ESL teacher" — lowerLead only lowercases standard Capitalized words, fixing the live "an eSL teacher" bug (code: lowerLead)
+
+**Consumes:** console
+
 ### tile-scenes (`tile-scenes.js`)
 Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terrain palette climbs the presentation ladder: earthy at stage 0, rich at stage 4 (Game.presentationStage). String building only (no DOM), ~64x64 viewBox readable at 40px.
 

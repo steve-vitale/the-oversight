@@ -981,11 +981,12 @@
       // lives on the char record; this is the waking-up line, not the bio.
       try {
         const pro = newChar.pro || 'they';
-        const poss = pro === 'she' ? 'Her' : pro === 'he' ? 'His' : 'Their';
+        // TEXT MODULE (rogue P0-2 2026-10-22): shared article + pronoun bundle.
+        const poss = Text.proBundle(pro).Poss;
         const occName = newChar.formerOccupation ||
           ((((this.data.characterGen || {}).occupations) || []).find(o => o.id === newChar.occupationId) || {}).name ||
           'survivor';
-        const art = /^[aeiou]/i.test(occName) ? 'an' : 'a';
+        const art = Text.article(occName);
         // ORIENTATION-KIT (journey-succession r36 2026-10-21): backgroundAbilities
         // has been [] since the 2026-10-14 ability lanes (occupations grant
         // skills only, never slots), so this kit clause NEVER fired — the

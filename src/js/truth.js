@@ -733,7 +733,7 @@
           : `INTEL: third-party account disputes ${name}'s background. Self-report not yet on file.`;
         if (!detail.claimed) {
           const w = detail.field === 'origin' ? `from ${detail.heard}`
-            : `${/^[aeiou]/i.test(String(detail.heard)) ? 'an' : 'a'} ${detail.heard}`;
+            : `${Text.anPhrase(String(detail.heard))}`;
           return `${detail.source} says ${first} isn't really ${w} — or so the village talk goes. You haven't heard ${first}'s own story yet.`;
         }
         return `${first} said "${detail.claimed}" — but ${detail.source} says "${detail.heard}". One of them is wrong.`;
@@ -913,7 +913,7 @@
       const name = this.displayName(vid);
       const first = this.firstRef(vid);
       const w = field === 'origin' ? `from ${heardValue}`
-        : `${/^[aeiou]/i.test(String(heardValue)) ? 'an' : 'a'} ${heardValue}`;
+        : `${Text.anPhrase(String(heardValue))}`;
       if (!claims.length) {
         // LEAD WITHOUT A CLAIM (the gossip-first detective): the village told
         // you someone's story doesn't hold up before you ever heard their
@@ -982,7 +982,8 @@
       const g = options[Math.floor(Math.random() * options.length)];
       const teller = this.displayName(tellerVid);
       const first = this.firstRef(targetVid);
-      const an = (w) => /^[aeiou]/i.test(w) ? 'an' : 'a';
+      // TEXT MODULE (rogue P0-2 2026-10-22): shared article (was a copy-pasted vowel test).
+      const an = (w) => Text.article(w);
       // field-aware phrasing: "were a surgeon" vs "were from Denver"
       const lieWord = g.field === 'origin' ? `from ${g.lie}` : `${an(g.lie)} ${g.lie}`;
       const truthWord = g.field === 'origin' ? `from ${g.truth}` : `${an(g.truth)} ${g.truth}`;
@@ -1170,7 +1171,7 @@
       const claimBit = (lie && lie.told)
         ? (lie.field === 'goal'
           ? (saidCover ? ` You said you wanted ${this.goalWantText(lie.told)}.` : ` Word is you wanted ${this.goalWantText(lie.told)}.`)
-          : (saidCover ? ` You said you were ${/^[aeiou]/i.test(String(lie.told)) ? 'an' : 'a'} ${lie.told}.` : ` Word is you were ${/^[aeiou]/i.test(String(lie.told)) ? 'an' : 'a'} ${lie.told}.`))
+          : (saidCover ? ` You said you were ${Text.anPhrase(String(lie.told))}.` : ` Word is you were ${Text.anPhrase(String(lie.told))}.`))
         : '';
       if (doubt.theft) {
         const t = doubt.theft;
@@ -1535,7 +1536,7 @@
             });
           } else if (this.ledgerAdd) this.ledgerAdd('exposed', 1);
         } catch (e) { console.warn('truth exposed ledger', e); }
-        const truthWord = lieField === 'occupation' ? `I wasn't ${/^[aeiou]/i.test(lie.told) ? 'an' : 'a'} ${lie.told}. I was ${/^[aeiou]/i.test(lie.truth) ? 'an' : 'a'} ${lie.truth}`
+        const truthWord = lieField === 'occupation' ? `I wasn't ${Text.anPhrase(lie.told)}. I was ${Text.anPhrase(lie.truth)}`
           : lieField === 'origin' ? `I'm not from ${lie.told}. I'm from ${lie.truth}`
           : `I don't actually want ${this.goalWantText(lie.told)}. I want ${this.goalWantText(lie.truth)}`;
         const motiveLine = this.drawTruthLine(
@@ -1718,8 +1719,8 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       // ("says they want belong" is broken English).
       const toldW = isGoal ? this.goalWantText(lie.told) : lie.told;
       const truthW = isGoal ? this.goalWantText(lie.truth) : lie.truth;
-      const anTruth = /^[aeiou]/i.test(truthW) ? 'an' : 'a';
-      const anTold = /^[aeiou]/i.test(toldW) ? 'an' : 'a';
+      const anTruth = Text.article(truthW);
+      const anTold = Text.article(toldW);
       const text = this.drawTruthLine(poolKey, vid, {
         truth: truthW, told: toldW,
         atruth: isGoal ? truthW : anTruth + ' ' + truthW,

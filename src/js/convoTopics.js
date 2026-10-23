@@ -59,10 +59,11 @@
       try { s = this.fillTalkLine(line, vp || {}); } catch (e) { s = String(line); }
       const p = this.t2pers(vp);
       const pro = this.t2pro(vp, vid);
-      const subj = pro === 'they' ? 'they' : pro;
-      const obj = pro === 'they' ? 'them' : (pro === 'she' ? 'her' : 'him');
-      const poss = pro === 'they' ? 'their' : (pro === 'she' ? 'her' : 'his');
-      const Subj = subj.charAt(0).toUpperCase() + subj.slice(1);
+      // TEXT MODULE (rogue P0-2/P0-7 2026-10-22): pronoun bundle + shared
+      // verb-conjugation pipe. No current t2 line puts a verb after {They},
+      // so the pipe is inert today and future-proof; {Their} completes the
+      // pronoun set the leak guard defers.
+      const pb = Text.proBundle(pro);
       // Habits/quirks are stored third-person ("checks the treeline"); the
       // {habitI}/{quirkI} slots convert to first-person for "I ..." frames.
       const toFirst = (x) => String(x || '')
@@ -71,7 +72,8 @@
         .replace(/^([a-z]+?)s\b/, '$1');
       const habitI = toFirst(p.habit || 'keeping busy');
       const quirkI = toFirst(p.quirk || 'a habit I don\'t talk about');
-      return s.replaceAll('{fear}', this.t2fear(vp))
+      return Text.conjVerbSlots(s, pro)
+        .replaceAll('{fear}', this.t2fear(vp))
         .replaceAll('{Fear}', this.t2cap(this.t2fear(vp)))
         .replaceAll('{hope}', p.hope || 'something better')
         .replaceAll('{quirk}', p.quirk || 'a habit I don\'t talk about')
@@ -79,8 +81,9 @@
         .replaceAll('{quirkI}', quirkI)
         .replaceAll('{habit}', p.habit || 'keeping busy')
         .replaceAll('{habitI}', habitI)
-        .replaceAll('{They}', Subj).replaceAll('{they}', subj)
-        .replaceAll('{them}', obj).replaceAll('{their}', poss);
+        .replaceAll('{They}', pb.Sub).replaceAll('{they}', pb.sub)
+        .replaceAll('{them}', pb.obj).replaceAll('{their}', pb.poss)
+        .replaceAll('{Their}', pb.Poss);
     },
     t2pick(vid, key, cands) {
       const pool = (cands || []).filter(Boolean);
@@ -928,9 +931,10 @@
       // villagers ("Camila was a police officer, before... the way they
       // handle things", transcript-caught s1902-deep-2).
       const opro = this.t2pro ? this.t2pro(ovp, oid) : 'they';
-      const ohandle = opro === 'she' ? 'she handles' : opro === 'he' ? 'he handles' : 'they handle';
+      // TEXT MODULE (rogue P0-2/P0-7 2026-10-22): pronoun bundle + verb pipe.
+      const ohandle = Text.proBundle(opro).sub + ' ' + Text.conj('handle', opro);
       const f1 = oid ? [
-        '"' + nm + ' was ' + (/^[aeiou]/i.test(oocc) ? 'an ' : 'a ') + oocc.toLowerCase() + ', before. You can still see it — the way ' + ohandle + ' things."',
+        '"' + nm + ' was ' + Text.anPhrase(oocc.toLowerCase()) + ', before. You can still see it — the way ' + ohandle + ' things."',
         '"Here\'s a story: ' + nm + ' once ' + ['shared food without being asked', 'stayed up all night on watch so someone else could sleep', 'talked someone down from leaving'][Math.floor(Math.random() * 3)] + '. That\'s who ' + nm + ' is, when it counts."',
       ] : ['"There\'s not much more to say. People are complicated; that\'s the whole story."'];
       const f2 = [

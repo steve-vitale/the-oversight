@@ -909,8 +909,9 @@
       // identical for every polyglot occupation. The occupation IS the
       // differentiator (and it's deduped per expedition).
       const _occTitleW = String((occ && occ.name) || 'survivor');
-      const _occLowW = _occTitleW.charAt(0).toLowerCase() + _occTitleW.slice(1);
-      const _anOccW = (/^[aeiou]/i.test(_occLowW) ? 'an ' : 'a ') + _occLowW;
+      // TEXT MODULE (rogue P0-2 2026-10-22): shared article; acronyms keep
+      // case ("an ER nurse", not "an eR nurse").
+      const _anOccW = Text.anPhrase(Text.lowerLead(_occTitleW));
       for (const l of ((occ && occ.polyglot) || [])) {
         if (!levels[l]) {
           levels[l] = 2;
@@ -1030,26 +1031,21 @@
       // parsed origin + short city name, up front — backstories need both.
       const parsed = this.parseOrigin(origin);
       const city = String(origin).split(',')[0].trim() || origin;
-        const their = pro === 'they' ? 'their' : pro === 'she' ? 'her' : 'his';
-        const them = pro === 'they' ? 'them' : pro === 'she' ? 'her' : 'him';
-        const They = pro === 'they' ? 'They' : pro === 'she' ? 'She' : 'He';
-        // fillPronouns: substitute {They}/{they}/{their}/{them}/{first} AND conjugate
-        // the verb that follows {They}/{they} for she/he. "They keep" but "She keeps".
-        // Only listed verbs are touched — everything else passes through unchanged.
-        const conj = { keep: 'keeps', build: 'builds', look: 'looks', know: 'knows', stare: 'stares', read: 'reads', speak: 'speaks', talk: 'talks', stay: 'stays', are: 'is', have: 'has', were: 'was', do: 'does', go: 'goes', believe: 'believes', decide: 'decides', get: 'gets', lead: 'leads', live: 'lives', measure: 'measures', move: 'moves', notice: 'notices', own: 'owns', plant: 'plants', reach: 'reaches', remember: 'remembers', remind: 'reminds', respect: 'respects', smile: 'smiles', take: 'takes', watch: 'watches' }; // extended 2026-10-11: templates use these after {They}/{they} (believe/decide/get/lead/measure/own/plant/remember/respect/...) and she/he villagers got bare forms
+        // TEXT MODULE (rogue P0-2/P0-7 2026-10-22): pronoun bundle + shared
+        // verb-conjugation pipe replace the hand-rolled ternaries and the
+        // fixed conj allowlist ("She bed down" -> "She beds down").
+        const pb = Text.proBundle(pro);
         // skill/occ/origin are substituted in backstories too — defined before
         // fillPronouns runs (was a TDZ crash: fillPronouns is called at line ~262).
         const skill = (occ.teachTags || []).includes('medicinal') ? 'patching people up'
           : (occ.teachTags || []).includes('food') ? 'finding food' : 'making do';
-        const fillPronouns = t => t
+        const fillPronouns = t => Text.conjVerbSlots(t, pro)
           .replaceAll('{first}', first)
-          .replaceAll('{their}', their)
-          .replaceAll('{Their}', their.charAt(0).toUpperCase() + their.slice(1))
-          .replaceAll('{them}', them)
-          .replace(/\{They\} ([A-Za-z]+)/g, (m, vb) => They + ' ' + (pro === 'they' ? vb : (conj[vb] || vb)))
-          .replace(/\{they\} ([A-Za-z]+)/g, (m, vb) => pro + ' ' + (pro === 'they' ? vb : (conj[vb] || vb)))
-          .replaceAll('{They}', They)
-          .replaceAll('{they}', pro)
+          .replaceAll('{their}', pb.poss)
+          .replaceAll('{Their}', pb.Poss)
+          .replaceAll('{them}', pb.obj)
+          .replaceAll('{They}', pb.Sub)
+          .replaceAll('{they}', pb.sub)
           .replaceAll('{occ}', occ.name || 'survivor')
           .replaceAll('{origin}', origin)
           .replaceAll('{city}', city)
@@ -1146,8 +1142,9 @@
           // at render, but stored-with-slots is a landmine). Resolve here,
           // mirroring fillTalkLine's article logic; {an_occ} before {occ}.
           const occRaw = String(occ.name || 'survivor');
-          const occLower = occRaw.charAt(0).toLowerCase() + occRaw.slice(1);
-          const an_occ = (/^[aeiou]/i.test(occLower) ? 'an ' : 'a ') + occLower;
+          // TEXT MODULE (rogue P0-2 2026-10-22): acronym-safe casing/article.
+          const occLower = Text.lowerLead(occRaw);
+          const an_occ = Text.anPhrase(occLower);
           const Occ = occRaw.charAt(0).toUpperCase() + occRaw.slice(1);
           return t => String(t).replaceAll('{an_occ}', an_occ).replaceAll('{Occ}', Occ)
             .replaceAll('{first}', first).replaceAll('{occ}', occLower)
@@ -1334,21 +1331,19 @@
         const ng = this.guessNameGender(first, null);
         pro = ng === 'm' ? 'he' : ng === 'f' ? 'she' : 'they';
       }
-      const their = pro === 'they' ? 'their' : pro === 'she' ? 'her' : 'his';
-      const them = pro === 'they' ? 'them' : pro === 'she' ? 'her' : 'him';
-      const They = pro === 'they' ? 'They' : pro === 'she' ? 'She' : 'He';
-      const conj = { keep: 'keeps', build: 'builds', look: 'looks', know: 'knows', stare: 'stares', read: 'reads', speak: 'speaks', talk: 'talks', stay: 'stays', are: 'is', have: 'has', were: 'was', do: 'does', go: 'goes', believe: 'believes', decide: 'decides', get: 'gets', lead: 'leads', live: 'lives', measure: 'measures', move: 'moves', notice: 'notices', own: 'owns', plant: 'plants', reach: 'reaches', remember: 'remembers', remind: 'reminds', respect: 'respects', smile: 'smiles', take: 'takes', watch: 'watches' }; // extended 2026-10-11: templates use these after {They}/{they} (believe/decide/get/lead/measure/own/plant/remember/respect/...) and she/he villagers got bare forms
+      // TEXT MODULE (rogue P0-2/P0-7 2026-10-22): pronoun bundle + shared
+      // verb-conjugation pipe replace the hand-rolled ternaries and the
+      // fixed conj allowlist.
+      const pb = Text.proBundle(pro);
       const skill = (occ.teachTags || []).includes('medicinal') ? 'patching people up'
         : (occ.teachTags || []).includes('food') ? 'finding food' : 'making do';
-      const fillPronouns = t => t
+      const fillPronouns = t => Text.conjVerbSlots(t, pro)
         .replaceAll('{first}', first)
-        .replaceAll('{their}', their)
-        .replaceAll('{Their}', their.charAt(0).toUpperCase() + their.slice(1))
-        .replaceAll('{them}', them)
-        .replace(/\{They\} ([A-Za-z]+)/g, (m, vb) => They + ' ' + (pro === 'they' ? vb : (conj[vb] || vb)))
-        .replace(/\{they\} ([A-Za-z]+)/g, (m, vb) => pro + ' ' + (pro === 'they' ? vb : (conj[vb] || vb)))
-        .replaceAll('{They}', They)
-        .replaceAll('{they}', pro)
+        .replaceAll('{their}', pb.poss)
+        .replaceAll('{Their}', pb.Poss)
+        .replaceAll('{them}', pb.obj)
+        .replaceAll('{They}', pb.Sub)
+        .replaceAll('{they}', pb.sub)
         .replaceAll('{occ}', occ.name || 'survivor')
         .replaceAll('{origin}', origin)
         .replaceAll('{city}', city)
@@ -1443,8 +1438,9 @@
         // at render, but stored-with-slots is a landmine). Resolve here,
         // mirroring fillTalkLine's article logic; {an_occ} before {occ}.
         const occRaw = String(occ.name || 'survivor');
-        const occLower = occRaw.charAt(0).toLowerCase() + occRaw.slice(1);
-        const an_occ = (/^[aeiou]/i.test(occLower) ? 'an ' : 'a ') + occLower;
+        // TEXT MODULE (rogue P0-2 2026-10-22): acronym-safe casing/article.
+        const occLower = Text.lowerLead(occRaw);
+        const an_occ = Text.anPhrase(occLower);
         const Occ = occRaw.charAt(0).toUpperCase() + occRaw.slice(1);
         return t => String(t).replaceAll('{an_occ}', an_occ).replaceAll('{Occ}', Occ)
           .replaceAll('{first}', first).replaceAll('{occ}', occLower)
@@ -6082,8 +6078,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // ARTICLE (convo rebuild 2026-10-11): wakeUpSpeeches carry "a {occ}"
         // templates ("I was a {occ}") — without the article slot they'd ship
         // "a appliance repair tech". {an_occ} fills before {occ}.
+        // TEXT MODULE (rogue P0-2 2026-10-22): shared article; acronyms keep
+        // case ("an ER nurse", not "an eR nurse").
         const _wOcc = String(occ || 'survivor');
-        const _wAnOcc = (/^[aeiou]/i.test(_wOcc) ? 'an ' : 'a ') + _wOcc.charAt(0).toLowerCase() + _wOcc.slice(1);
+        const _wAnOcc = Text.anPhrase(Text.lowerLead(_wOcc));
         lines = templates.map(t => String(t).replaceAll('{an_occ}', _wAnOcc)
           .replaceAll('{first}', first).replaceAll('{occ}', occ).replaceAll('{origin}', origin));
       }
@@ -17216,9 +17214,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     fillTalkLine(line, v) {
       const first = ((v && v.name) || 'Someone').split(' ')[0];
       const occRaw = String((v && v.formerOccupation) || 'survivor');
-      const occ = occRaw.charAt(0).toLowerCase() + occRaw.slice(1);
+      // TEXT MODULE (rogue P0-2 2026-10-22): article + acronym-safe casing.
+      // "ESL teacher" keeps its case ("an ESL teacher", not "an eSL teacher").
+      const occ = Text.lowerLead(occRaw);
       const Occ = occRaw.charAt(0).toUpperCase() + occRaw.slice(1);
-      const an_occ = (/^[aeiou]/i.test(occ) ? 'an ' : 'a ') + occ;
+      const an_occ = Text.anPhrase(occ);
       let skill = 'making do';
       try {
         const dna = (this.convoSpeechDNA && v && v.id) ? this.convoSpeechDNA(v.id) : null;
@@ -17230,12 +17230,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             canning: 'canning', sewing: 'sewing', carpentry: 'carpentry' })[keys[0]] || keys[0];
         }
       } catch (e) {}
-      return String(line).replaceAll('{an_occ}', an_occ)
-        .replaceAll('{Occ}', Occ)
-        .replaceAll('{occ}', occ)
-        .replaceAll('{first}', first)
-        .replaceAll('{origin}', (v && v.homeRegion) || 'somewhere')
-        .replaceAll('{skill}', skill);
+      // TEXT MODULE (rogue P0-2 2026-10-22): shared slot fill with leak guard.
+      // T2_SLOTS are deferred — t2fill owns them and runs after this.
+      return Text.fill(line, {
+        an_occ, Occ, occ, first,
+        origin: (v && v.homeRegion) || 'somewhere',
+        skill,
+      }, { deferred: Text.T2_SLOTS });
     },
     // ============ LEADERSHIP COMPETITION ============
     // Contenders (goal 'lead') push back when you delegate. Heat builds;
@@ -17292,21 +17293,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const v = (this.data.villagers || []).find(x => x.id === vid)
         /* unified: getPerson */ || {};
       const pro = v.pro || (['she', 'he', 'they'][this._hashStr(vid) % 3]);
-      const They = pro === 'they' ? 'They' : pro === 'she' ? 'She' : 'He';
-      const keep = pro === 'they' ? 'keep' : 'keeps';
-      const are = pro === 'they' ? 'are' : 'is';
+      // TEXT MODULE (rogue P0-2/P0-7 2026-10-22): pronoun bundle + verb pipe
+      // replace the hand-rolled ternaries.
+      const pb = Text.proBundle(pro);
       const map = {
-        fear: `${They} ${keep} glancing at the treeline.`,
-        hunger: `${They} ${keep} rubbing their stomach, trying not to show it.`,
-        loneliness: `${They} ${are} sitting a little apart from the others.`,
-        exhaustion: `${They} move${pro === 'they' ? '' : 's'} slowly, like everything costs.`,
-        grief: `${They} stare${pro === 'they' ? '' : 's'} at nothing for a long time.`,
-        gratitude: `${They} ${keep} nodding at people, smiling tiredly.`,
-        ease: `${They} look${pro === 'they' ? '' : 's'} almost relaxed. Almost.`,
-        calm: `${They} ${are} by the fire, watching it.`,
+        fear: `${pb.Sub} ${Text.conj('keep', pro)} glancing at the treeline.`,
+        hunger: `${pb.Sub} ${Text.conj('keep', pro)} rubbing their stomach, trying not to show it.`,
+        loneliness: `${pb.Sub} ${Text.conj('be', pro)} sitting a little apart from the others.`,
+        exhaustion: `${pb.Sub} ${Text.conj('move', pro)} slowly, like everything costs.`,
+        grief: `${pb.Sub} ${Text.conj('stare', pro)} at nothing for a long time.`,
+        gratitude: `${pb.Sub} ${Text.conj('keep', pro)} nodding at people, smiling tiredly.`,
+        ease: `${pb.Sub} ${Text.conj('look', pro)} almost relaxed. Almost.`,
+        calm: `${pb.Sub} ${Text.conj('be', pro)} by the fire, watching it.`,
       };
       let line = map[need] || map.calm;
-      if (mood === 'grieving' && need !== 'grief') line = `${They} went quiet a while ago. Nobody's asked.`;
+      if (mood === 'grieving' && need !== 'grief') line = `${pb.Sub} went quiet a while ago. Nobody's asked.`;
       return line;
     },
     npcMood(rid) {
