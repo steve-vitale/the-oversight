@@ -21,9 +21,13 @@
 //   E3 det-gate — ARMORVILLAGE unset: armed-policy run == control run,
 //     byte-identical digests (policy pure-delegates; engine systemic beats
 //     inert; the #806 fix applies to both arms equally).
-//   E4 mechanism-fire — 60d ARMORVILLAGE=1 run: at least one channel fires
+//   E4 mechanism-fire — 150d ARMORVILLAGE=1 run: at least one channel fires
 //     (deposit, gift, pile-draw, or craft tele event) — mechanism proof,
-//     not a wall bar.
+//     not a wall bar. Horizon note (2026-10-23): 60d was calibrated on the
+//     pre-playstyle-differentiation base's early spare pacing; on current
+//     master scholars accumulate <2 armor spares by day 60 (the policy's
+//     fire threshold), so 60d runs go quiet. 150d matches the observed
+//     firing window (channels live by d101-132 on the new base).
 //
 // Usage env (pinned substrate, matches the pilot sweep):
 //   FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 \
@@ -201,7 +205,7 @@ async function runOnce(seed, days, policy) {
   const rCtl = await runOnce(4242, 30, ctl);
   ok(rOff.digest === rCtl.digest, 'gate off: byte-identical to control (' + rCtl.digest.slice(0, 12) + ')');
 
-  console.log('E4 mechanism-fire (60d ARMORVILLAGE=1 run)');
+  console.log('E4 mechanism-fire (150d ARMORVILLAGE=1 run)');
   {
     process.env.ARMORVILLAGE = '1';
     const Game = await freshGame(4247);
@@ -216,11 +220,11 @@ async function runOnce(seed, days, policy) {
     const origDonate = Game.donateArmor.bind(Game);
     Game.donateArmor = function (idx) { seen.deposit++; return origDonate(idx); };
     const pol = AV.armedFor('leadfeast');
-    await quietLog(async () => { await runDays(Game, pol, { days: 60, manifest: undefined, sampleEvery: 30 }); });
+    await quietLog(async () => { await runDays(Game, pol, { days: 150, manifest: undefined, sampleEvery: 30 }); });
     delete process.env.ARMORVILLAGE;
     Game.tele = origTele;
     const fired = Object.entries(seen).filter(([k, n]) => n > 0).map(([k, n]) => k + '=' + n).join(', ');
-    ok(fired.length > 0, 'at least one channel fires in 60d (' + (fired || 'none') + ')');
+    ok(fired.length > 0, 'at least one channel fires in 150d (' + (fired || 'none') + ')');
     console.log('    channels: ' + JSON.stringify(seen));
   }
 
