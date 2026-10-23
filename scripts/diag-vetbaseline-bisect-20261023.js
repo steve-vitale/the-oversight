@@ -35,7 +35,9 @@
 //     moves; the branch is untouched).
 //   --restore: restore src/js+src/data+index.html to HEAD and exit.
 //   --out must not exist or must be empty (the sweep SKIPS existing files;
-//   a rerun into a populated dir would silently reuse stale results).
+//   a rerun into a populated dir would silently reuse stale results), unless
+//   --resume is passed (explicit resume of a killed run; the sweep skips
+//   existing files and completes the missing configs).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -61,6 +63,7 @@ const TREE = arg('--tree');
 const OUT = arg('--out');
 const COMMIT = arg('--commit');
 const RESTORE = process.argv.includes('--restore');
+const RESUME = process.argv.includes('--resume');
 if (!TREE || (!OUT && !RESTORE)) usage('need --tree and --out (or --restore)');
 
 // Env guard (mirrors the sweep's guard; the env-trap lesson).
@@ -102,7 +105,10 @@ if (RESTORE) {
   process.exit(0);
 }
 
-if (fs.existsSync(OUT) && fs.readdirSync(OUT).length > 0) usage('out dir must not exist or must be empty: ' + OUT);
+if (fs.existsSync(OUT) && fs.readdirSync(OUT).length > 0 && !RESUME)
+  usage('out dir must not exist or must be empty: ' + OUT + ' (or pass --resume)');
+if (RESUME && fs.existsSync(OUT) && fs.readdirSync(OUT).length > 0)
+  console.log('VETBISECT: --resume: reusing ' + fs.readdirSync(OUT).filter(f => f.endsWith('.json')).length + ' existing JSONs (sweep skips them)');
 fs.mkdirSync(OUT, { recursive: true });
 
 const GAME_PATHS = 'src/js src/data index.html';
