@@ -736,6 +736,25 @@
         } catch (e) {}
         return null; // no favor statable — the NO HOLLOW FALLBACK answers honestly
       },
+      staleOpener(vid) {
+        // STALE-OPENER HONESTY (journey deepening r16 2026-10-23): when every
+        // fresh opener variant is ledger-blocked, the generic fallback names
+        // the want id as dialogue — "About ask favor — I keep turning it
+        // over." (transcript-caught, seed 8905 d45). A favor has a real
+        // short; name the ask, never the id. No favor -> null (the generic
+        // fallback is still better than a dry line, and the ask gets
+        // re-stated honestly on the next sitting).
+        try {
+          const c = this.convoGet(vid);
+          const favor = (c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid)) || null;
+          const sh = favor && (favor.short || favor.kind);
+          if (!sh) return null;
+          return this.convoPickCycle(vid, 'favor:stale:' + (favor.kind || 'favor'), [
+            `"About ${sh} — still on my mind. I keep coming back to it."`,
+            `"${sh[0].toUpperCase() + sh.slice(1)} — I haven't stopped thinking about it."`,
+          ]);
+        } catch (e) { return null; }
+      },
       deflectBeat(vid) {
         // DEFLECT POOL (journey landing 2026-10-12): was a single hardcoded
         // line — observed verbatim-identical 3x in one run (Sofia, Emma,
