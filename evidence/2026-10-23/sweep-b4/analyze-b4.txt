@@ -1,0 +1,25 @@
+GO   PRIMARY per-plenty-day rack rate [all] <= 0.70 — control=1646/d armed=908/d ratio=0.552 (rackDaysPlenty c=638 a=869)
+GO   PRIMARY per-plenty-day rack rate [leadfeast] <= 0.70 — control=1673/d armed=980/d ratio=0.586 (rackDaysPlenty c=337 a=464)
+GO   PRIMARY per-plenty-day rack rate [belongfeast] <= 0.70 — control=1616/d armed=825/d ratio=0.511 (rackDaysPlenty c=301 a=405)
+info   SECONDARY preserved-rot/100d [all] (caveat: exposure-confounded): control=3046 armed=798 ratio=0.262
+info   SECONDARY preserved-rot/100d [leadfeast] (caveat: exposure-confounded): control=3921 armed=1039 ratio=0.265
+info   SECONDARY preserved-rot/100d [belongfeast] (caveat: exposure-confounded): control=2172 armed=557 ratio=0.256
+info   SECONDARY rack-kcal-smoked-during-plenty total [all] (caveat: exposure-confounded): control=33k armed=25k ratio=0.751
+info   SECONDARY rack-kcal-smoked-during-plenty total [leadfeast] (caveat: exposure-confounded): control=35k armed=28k ratio=0.806
+info   SECONDARY rack-kcal-smoked-during-plenty total [belongfeast] (caveat: exposure-confounded): control=30k armed=21k ratio=0.687
+GO   ENGAGEMENT shedKcal>0 >= 12/32 — 28/32 armed runs
+       shedDays total: 919, shedDec: 997, shedKcal: 1394k
+ok   WATCH rot/100d absolute (flag >1.20x) — control=31060 armed=24541 ratio=0.790
+       rot split control: fresh=26771 preserved=2996
+       rot split armed:   fresh=23670 preserved=798
+ok   WATCH fresh-rot/100d (flag >1.50x — the b2-measured trade) — control=28013 armed=23743 ratio=0.848
+GO   GUARD(a) median paired survival diff >= -10d — median(armed-control)=0d over 32 pairs; unpaired medians control=100d armed=100d
+NO-GO GUARD(b) total starvation deaths armed <= control — control=24 armed=26
+info   national(end): control=16 armed=12
+NO-GO GUARD(c) no new death modes (mechanism classes) — control=[contest/show,dehydration,monster/combat,night,other:a gold flash in the gras,other:bad belly,sickness,starvation,wound] armed-new=[expedition]
+GO   GUARD(d) no median pantry collapse (>= 0.5x) — median end pantry kcal control=2k armed=7k ratio=3.464
+GO   GUARD no inflow-channel laundering >2x — none
+WALL control: national=16 table~0 wins=0 wave4=16 wave5=0 pairedSurvMed=0d
+WALL armed:   national=12 table~0 wins=0 wave4=14 wave5=0 pairedSurvMed=0d
+
+VERDICT: NO-GO (2 checks failed)
