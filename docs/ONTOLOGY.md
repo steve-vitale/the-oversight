@@ -1114,7 +1114,7 @@ Social-memory readers (Steve 2026-10-13): previously write-only memory types get
 ### metaProgression (`metaProgression.js`)
 Persistent cross-run achievement codex ("Records"). A per-device record of knowledge and content encountered across ALL runs — the meta incentive to replay until everything has been seen. New games start completely fresh; achievements NEVER grant power, knowledge, or items.
 
-**Provides:** metaGet(), metaSave(), metaReset(), metaUnlock(id), metaList(), metaSummary(), metaNotePlant(pid), metaNoteAnimal(aid), metaNoteMonster(mid), metaNoteMonsterNamed(mid), metaNoteWaveKill(monsterId), metaNoteWaveUnlocked(wave), metaNoteArc(n), metaNoteCrisis(kind), metaNoteContest(contestId, outcome), metaNotePlayerContest(outcome, watched), metaNoteTable(frame), metaNoteTableChoice(frame, choiceId), metaNoteLegend(outcome), metaNoteSystemArrival(), metaNoteDisease(effectId), metaNoteCure(effectId)
+**Provides:** metaGet(), metaSave(), metaReset(), metaUnlock(id), metaList(), metaSummary(), metaNotePlant(pid), metaNoteAnimal(aid), metaNoteMonster(mid), metaNoteMonsterNamed(mid), metaNoteWaveKill(monsterId), metaNoteWaveUnlocked(wave), metaNoteArc(n), metaNoteCrisis(kind), metaNoteContest(contestId, outcome), metaNotePlayerContest(outcome, watched), metaNoteTable(frame), metaNoteTableChoice(frame, choiceId), metaNoteLegend(outcome), metaNoteSystemArrival(), metaNoteDisease(effectId), metaNoteCure(effectId), _es(), _esRead(), _esKills()
 
 **Rules:**
 - read_only_power: achievements write ONLY to localStorage key oversight.meta.v1. They never touch game state, save slots, knowledge, or items. A fresh game is provably unaffected (code: every metaNote* writes store-only; test-meta-progression-20261010.js)

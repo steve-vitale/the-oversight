@@ -24,6 +24,9 @@
 //   - metaNoteSystemArrival()
 //   - metaNoteDisease(effectId)
 //   - metaNoteCure(effectId)
+//   - _es()
+//   - _esRead()
+//   - _esKills()
 // rules:
 //   - read_only_power: achievements write ONLY to localStorage key oversight.meta.v1. They never touch game state, save slots, knowledge, or items. A fresh game is provably unaffected (code: every metaNote* writes store-only; test-meta-progression-20261010.js)
 //   - corrupt_safe: corrupt stored JSON resets that key; nothing ever throws out of the meta layer (code: metaGet/metaSave try/catch)
@@ -72,6 +75,7 @@
     ['table', '🌌 The Table'],
     ['sickness', '🤒 Sickness'],
     ['milestones', '⭐ Milestones'],
+    ['style', '🎭 The Way You Played'],
   ];
   const ACH = [
     // flora
@@ -129,6 +133,22 @@
     { id: 'mx-grave', cat: 'milestones', name: 'The First Grave', desc: 'Bury the village\u2019s first dead.', hint: 'Someone won\u2019t make it. Honor them.' },
     { id: 'mx-win', cat: 'milestones', name: 'A Story Worth Telling', desc: 'End a run with Haven standing.', hint: 'Finish a run. Leave a legend.' },
     { id: 'mx-death', cat: 'milestones', name: 'The Village Remembers', desc: 'End a run in death.', hint: 'Not every story ends standing.' },
+    // style — ESOTERIC (rogue P1, V6-3): story-shaped feats. HOW you played,
+    // not what you saw. Each fires from a real game event reading real
+    // state — never RNG-gated outcome tables. Recognition only: the
+    // read-only-power rule holds (store-only unlocks, zero game effects).
+    { id: 'es-quiet-week', cat: 'style', name: 'A Quiet Week', desc: 'Reach day 8 without a single kill — not by you, not by the village.', hint: 'Eight days. Nothing bled.' },
+    { id: 'es-clean-show', cat: 'style', name: 'The Clean Show', desc: 'Win a blood contest without killing a single beast.', hint: 'The arena can end with everyone walking out.' },
+    { id: 'es-clean-table', cat: 'style', name: 'The Clean Table', desc: 'Reach the galactic table with zero kills across the whole run.', hint: 'Arrive at the ring of light with clean hands.' },
+    { id: 'es-peacekeeper', cat: 'style', name: 'Three Fires Settled', desc: 'Settle three disputes with words, never with fists.', hint: 'Sit people down. Make it stick. Thrice.' },
+    { id: 'es-teacher', cat: 'style', name: 'The School of You', desc: 'Personally teach six different villagers.', hint: 'Show them. Yourself. One by one.' },
+    { id: 'es-open-pack', cat: 'style', name: 'The Open Hand', desc: 'Give until generosity is who you are.', hint: 'The pack opens more than it closes.' },
+    { id: 'es-feast', cat: 'style', name: 'The Long Table', desc: 'Host a feast for the whole village.', hint: 'Feed everyone. All at once.' },
+    { id: 'es-far-gift', cat: 'style', name: 'Bread for Strangers', desc: 'Feed another village whose pot was empty.', hint: 'Their fire was cold. You brought dinner.' },
+    { id: 'es-room-listens', cat: 'style', name: 'The Room Listens', desc: 'Lead until following you is a habit.', hint: 'Ten times you stepped up. They noticed.' },
+    { id: 'es-hearth', cat: 'style', name: 'The Hearth', desc: 'Be the person everyone talks to.', hint: 'Fifteen conversations that mattered.' },
+    { id: 'es-one-life', cat: 'style', name: 'One Life', desc: 'Carry the mantle from the first day to the legend without ever passing it on.', hint: 'No successor. Just you.' },
+    { id: 'es-clean-bowls', cat: 'style', name: 'Clean Bowls', desc: 'Reach day 30 having never eaten monster meat.', hint: 'Thirty days. Nothing with too many teeth on your plate.' },
   ];
   const ACH_BY_ID = {};
   for (const a of ACH) ACH_BY_ID[a.id] = a;
@@ -194,6 +214,33 @@
     _metaCommit() {
       // write-through so progress survives even if the tab dies mid-run
       this.metaSave(this._metaCache);
+    },
+    // _es(): the esoteric style tracker (rogue P1, V6-3). In-run only,
+    // isolated in its own state object — NO game system reads it, so it
+    // can never affect gameplay (the records.js pattern). Fresh every
+    // newGame; nothing carries across runs (no cross-run inheritance).
+    // _esRead() is the non-creating reader: read-only hook paths must use
+    // it so a mere observation never mutates state (the meta layer's
+    // byte-identical-state guarantee).
+    _es() {
+      const st = this.state || {};
+      if (!st.esStyle) st.esStyle = { mediated: 0, taught: {}, ateMonsterMeat: false, contestMark: null };
+      return st.esStyle;
+    },
+    _esRead() {
+      try { return (this.state || {}).esStyle || null; }
+      catch (e) { return null; }
+    },
+    // _esKills(): the run's real kill count, from the village's own
+    // per-wave counters (recordWaveKill is the choke point — player TB,
+    // villager field fights, and contests all score here).
+    _esKills() {
+      let n = 0;
+      try {
+        const wk = (this.state || {}).waveKills || {};
+        for (const k of Object.keys(wk)) n += (wk[k] || 0);
+      } catch (e) {}
+      return n;
     },
     // metaUnlock(id): returns the def on first unlock, null otherwise.
     // NEVER touches game state — store-only by construction.
@@ -511,6 +558,128 @@
     });
     wrapHook('cureStatus', function (args, r) {
       if (r && args[0] === 'scholar') this.metaNoteCure(args[1]);
+    });
+
+    // ============ ESOTERIC STYLE ACHIEVEMENTS (rogue P1, V6-3) ============
+    // Story-shaped feats: HOW the player played, detected from real game
+    // state at real events — never RNG-gated outcome tables. Every hook is
+    // exception-guarded (wrapHook) and store-only on unlock: recognition,
+    // never power (read-only-power rule). In-run counters live in the
+    // isolated state.esStyle tracker (_es) — no game system reads them.
+
+    // playstyle axes: the game already notices who you are ("Not stats —
+    // behavior"). The real behavioral counters, read after the increment.
+    wrapHook('notePlaystyle', function (args) {
+      const axis = args[0];
+      const n = ((((this.state || {}).scholar || {}).playstyle || {})[axis]) || 0;
+      if (axis === 'generous' && n >= 5) this.metaUnlock('es-open-pack');
+      else if (axis === 'leader' && n >= 10) this.metaUnlock('es-room-listens');
+      else if (axis === 'social' && n >= 15) this.metaUnlock('es-hearth');
+    });
+
+    // mediation: a conflict genuinely settled with words. The before-hook
+    // captures the open conflict object; the after-hook counts only when
+    // THIS call set it resolved (a failed mediation raises tension instead
+    // and must not count).
+    wrapHook('mediateConflict', function (args, r, pre) {
+      if (!r || !r.ok || !pre || !pre.resolved) return;
+      const t = this._es();
+      t.mediated = (t.mediated || 0) + 1;
+      if (t.mediated >= 3) this.metaUnlock('es-peacekeeper');
+    }, function (args) {
+      const vid = args[0];
+      const v = (this.state || {}).village || {};
+      return (v.conflicts || []).find(x => !x.resolved && x.known && (x.a === vid || x.b === vid)) || null;
+    });
+
+    // teaching: the player genuinely taught them. Only the conversation
+    // teach path writes source 'player-taught' — villagers teaching each
+    // other ('taught') and fieldwork ('fieldwork') don't count. This is
+    // YOUR school.
+    wrapHook('villagerLearnsPlant', function (args) {
+      if (args[2] !== 'player-taught') return;
+      const t = this._es();
+      t.taught = t.taught || {};
+      t.taught[args[0]] = 1;
+      if (Object.keys(t.taught).length >= 6) this.metaUnlock('es-teacher');
+    });
+
+    // monster meat on YOUR plate: maybeMonsterWeirdness is called from both
+    // player eat paths with the real inventory item. The village-cooked
+    // exposure pass (game.js, village meals) passes a SYNTHETIC
+    // {plantId, foodState, name} with no units — real items have units, so
+    // the mark fires only when the scholar actually eats. monsterMeatGated
+    // separates true monster flesh from ordinary animal meat.
+    wrapHook('maybeMonsterWeirdness', function (args) {
+      const it = args[0];
+      if (!it || !('units' in it)) return;
+      const pid = it.plantId || '';
+      if (pid.indexOf('meat_') === 0 && this.monsterMeatGated(pid.slice(5))) {
+        this._es().ateMonsterMeat = true;
+      }
+    });
+
+    // day checks: endDay is the once-per-day choke point; scholar.day has
+    // already incremented when the after-hook runs. Read-only paths use
+    // _esRead() — a quiet week must not scribble on state to notice itself.
+    wrapHook('endDay', function () {
+      const day = ((this.state || {}).scholar || {}).day || 0;
+      if (day === 8 && this._esKills() === 0) this.metaUnlock('es-quiet-week');
+      else if (day === 30) {
+        const t = this._esRead();
+        if (!t || !t.ateMonsterMeat) this.metaUnlock('es-clean-bowls');
+      }
+    });
+
+    // the clean show: a blood contest won with zero kills while the arena
+    // was live. The mark is taken when the interruption begins; contest
+    // kills score recordWaveKill like wild kills, so the per-wave village
+    // counters are the honest measure. cat 'blood' routes to real fights
+    // (_cxBlood); other cats can never produce a beast kill, so a win
+    // there would be a hollow feat.
+    wrapHook('contestInterruption', function (args) {
+      this._es().contestMark = { id: ((args[0] || {}).id) || null, kills: this._esKills() };
+    });
+    wrapHook('_contestEnd', function (args) {
+      const ac = args[0] || {};
+      if (args[1] !== 'won') return;
+      if (ac.participant && ac.participant !== 'player') return; // the player's own win
+      const t = this._esRead();
+      const mark = t && t.contestMark;
+      if (t) t.contestMark = null;
+      if (!mark) return;
+      const contest = (typeof this._cxScaledContest === 'function') ? this._cxScaledContest(ac) : null;
+      if (!contest || contest.cat !== 'blood') return;
+      if (this._esKills() === mark.kills) this.metaUnlock('es-clean-show');
+    });
+
+    // the clean table: metaNoteTable fires at the real sitting (table.js) —
+    // the after-hook reads the run's kill state. Zero kills, all run, at
+    // the ring of light.
+    wrapHook('metaNoteTable', function () {
+      if (this._esKills() === 0) this.metaUnlock('es-clean-table');
+    });
+
+    // one life: recordLegend is the run's last write. lineage() holds every
+    // PRIOR bearer <redacted> push time (playerDeath pushes the dead bearer) —
+    // empty means this scholar is the first and only. Read in the
+    // before-hook: the real recordLegend pushes before any after-hook runs.
+    wrapHook('recordLegend', function (args, r, pre) {
+      if (pre === 0) this.metaUnlock('es-one-life');
+    }, function () {
+      try { return (typeof this.lineage === 'function') ? (this.lineage() || []).length : -1; }
+      catch (e) { return -1; }
+    });
+
+    // feasts and far gifts: real food moved, real state changed.
+    wrapHook('hostFeast', function (args, r) {
+      if (r && r.ok && (r.spent || 0) > 0) this.metaUnlock('es-feast');
+    });
+    wrapHook('villageShareFood', function (args, r, pre) {
+      if (r === true && pre && pre.wasLean) this.metaUnlock('es-far-gift');
+    }, function (args) {
+      const ov = ((this.state || {}).otherVillages || []).find(x => x.id === (args[0] || null));
+      return { wasLean: ov ? (ov.pantryKcal || 0) <= 0 : false };
     });
   })();
 })();

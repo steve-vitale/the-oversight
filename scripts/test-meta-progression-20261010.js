@@ -72,12 +72,12 @@ function unlocked(id) { return !!Game._meta().unlocked[id]; }
   console.log('\n-- 1. achievement data --');
   {
     const list = Game.metaList();
-    ok('46 achievements', list.length === 46, 'got ' + list.length); // +mt-f-relay (2026-10-11)
+    ok('58 achievements', list.length === 58, 'got ' + list.length); // +12 esoteric style (rogue P1, 2026-10-22)
     const ids = list.map(a => a.id);
     ok('unique ids', new Set(ids).size === ids.length);
-    const cats = new Set(['flora', 'fauna', 'monsters', 'escalation', 'show', 'arcs', 'table', 'sickness', 'milestones']);
+    const cats = new Set(['flora', 'fauna', 'monsters', 'escalation', 'show', 'arcs', 'table', 'sickness', 'milestones', 'style']);
     ok('all fields present, valid cats', list.every(a => a.id && a.cat && cats.has(a.cat) && a.name && a.desc && a.hint));
-    ok('summary agrees', Game.metaSummary().total === 46 && Game.metaSummary().unlocked === 0);
+    ok('summary agrees', Game.metaSummary().total === 58 && Game.metaSummary().unlocked === 0);
     // hints must not leak content: no hint names a specific monster/plant/disease id
     const dataIds = new Set([
       ...(Game.data.plants || []).map(p => p.id),
@@ -249,7 +249,7 @@ function unlocked(id) { return !!Game._meta().unlocked[id]; }
     const entryA = JSON.stringify(Game.state.codex.plants[pA]);
     // unlock everything, then identify a different plant on the same run
     for (const a of Game.metaList()) Game.metaUnlock(a.id);
-    ok('all 46 unlocked', Game.metaSummary().unlocked === 46);
+    ok('all 58 unlocked', Game.metaSummary().unlocked === 58);
     const pB = Game.data.plants[3].id;
     const rB = Game.identifyPlant(pB, 'fieldwork');
     const entryB = JSON.stringify(Game.state.codex.plants[pB]);
