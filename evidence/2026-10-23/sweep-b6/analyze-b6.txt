@@ -1,0 +1,30 @@
+GO   PRIMARY per-plenty-day rack rate [all] <= 0.70 — control=1708/d armed=884/d ratio=0.518 (rackDaysPlenty c=734 a=999)
+GO   PRIMARY per-plenty-day rack rate [leadfeast] <= 0.70 — control=1848/d armed=927/d ratio=0.502 (rackDaysPlenty c=347 a=515)
+GO   PRIMARY per-plenty-day rack rate [belongfeast] <= 0.70 — control=1583/d armed=839/d ratio=0.530 (rackDaysPlenty c=387 a=484)
+info   SECONDARY preserved-rot/100d [all] (caveat: exposure-confounded): control=4708 armed=2783 ratio=0.591
+info   SECONDARY preserved-rot/100d [leadfeast] (caveat: exposure-confounded): control=4273 armed=2816 ratio=0.659
+info   SECONDARY preserved-rot/100d [belongfeast] (caveat: exposure-confounded): control=5144 armed=2750 ratio=0.535
+info   SECONDARY rack-kcal-smoked-during-plenty total [all] (caveat: exposure-confounded): control=39k armed=28k ratio=0.704
+info   SECONDARY rack-kcal-smoked-during-plenty total [leadfeast] (caveat: exposure-confounded): control=40k armed=30k ratio=0.744
+info   SECONDARY rack-kcal-smoked-during-plenty total [belongfeast] (caveat: exposure-confounded): control=38k armed=25k ratio=0.663
+GO   ENGAGEMENT shedKcal>0 >= 12/32 — 30/32 armed runs
+       shedDays total: 1060, shedDec: 1194, shedKcal: 2449k
+ok   WATCH rot/100d absolute (flag >1.20x) — control=58527 armed=59029 ratio=1.009
+       rot split control: fresh=45874 preserved=4696
+       rot split armed:   fresh=47358 preserved=2762
+ok   WATCH fresh-rot/100d (flag >1.50x — the b2-measured trade) — control=53819 armed=56247 ratio=1.045
+       paired armed-control starvation-rate diffs (/100vd) by (policy,seed):
+       leadfeast: 92801:+0.000 92802:+0.000 92803:+0.000 92804:+0.000 92805:-0.049 92806:+0.000 92807:+0.000 92808:+0.000 92809:+0.000 92810:+0.000 92811:+0.000 92812:+0.014 92813:+0.000 92814:+0.000 92815:+0.000 92816:-0.117
+       belongfeast: 92801:-0.420 92802:+0.000 92803:+0.000 92804:+0.000 92805:-0.021 92806:+0.000 92807:+0.000 92808:+0.000 92809:+0.000 92810:+0.000 92811:+0.000 92812:+0.047 92813:+0.000 92814:+0.102 92815:+0.000 92816:-0.001
+GO   GUARD(a) median paired starvation-rate diff <= 2/(armedVD/100) — median(armed-control)=0.000/100vd over 32 pairs, slack=+0.007; armed-worse pairs 3, armed-better 5
+info   corpus starvation rates (INFO ONLY, not the judge): control=18d/28344vd=0.064/100vd armed=16d/28073vd=0.057/100vd
+GO   GUARD(b) median paired survival diff >= -10d — median(armed-control)=0d over 32 pairs; unpaired medians control=100d armed=100d
+GO   GUARD(c) no pantry collapse: median endFreshDays armed >= control−2d — control=4d armed=4d
+GO   GUARD(e) national(end) armed >= control-2 — control=18 armed=22
+NO-GO GUARD(d) no new death modes (mechanism classes) — control=[contest/show,dehydration,expedition,monster/combat,other:alien,sickness,starvation,wound] armed-new=[night]
+info   median end pantry kcal: control=7k armed=8k ratio=1.137
+GO   GUARD(e) no inflow-channel laundering >2x — none
+WALL control: national=18 table~0 wins=0 wave4=19 wave5=0 pairedSurvMed=0d
+WALL armed:   national=22 table~0 wins=0 wave4=19 wave5=0 pairedSurvMed=0d
+
+VERDICT: NO-GO (1 checks failed)
