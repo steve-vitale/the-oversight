@@ -223,7 +223,10 @@
             var oo = this.objOf(rid);
             if (oo && oo.indoor && oo.state === 'indoor') continue;
           }
-          if (this.objVillageDanger && this.objVillageDanger() >= 4) continue;
+          // TRIGGER REGISTRY (rogue P0-5): the village-danger expedition
+          // gate lives in the npc-triggers.js registry row
+          // 'expedition_launch' — same predicate, same threshold.
+          if (this.npcTrigger && this.npcTrigger(rid, 'expedition_launch')) continue;
         } catch (e) {}
         var chance = prof === 'explorer' ? 0.09 : 0.045;
         if (a.potential[rid]) chance *= 1.6;
@@ -296,12 +299,9 @@
       // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): a multi-day
       // expedition is not a walk-out — mark it so the gossip render tells
       // the truth ("set out on a long trek", not "walked away").
-      try {
-        var _seen = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
-        var _shuf = _seen.slice();
-        for (var _i = _shuf.length - 1; _i > 0; _i--) { var _j = Math.floor(R() * (_i + 1)); var _t = _shuf[_i]; _shuf[_i] = _shuf[_j]; _shuf[_j] = _t; }
-        this.seedGossip('departure', { who: vid, purpose: 'expedition' }, _shuf.slice(0, 2));
-      } catch (e) {}
+      // TRIGGER REGISTRY (rogue P0-5): the witness shuffle + seeding lives
+      // in the npc-triggers.js registry row 'departure'.
+      try { if (this.npcTrigger) this.npcTrigger(vid, 'departure', { dims: { who: vid, purpose: 'expedition' } }); } catch (e) {}
     },
     expeditionLeg(vid, hx, hy, playerAtHaven) {
       var st = this.agencyState();
@@ -346,7 +346,9 @@
       // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the world
       // holds its breath — expeditions meet nothing out there. The village
       // is at the table or watching it; every stake is the table's own.
-      if (this.tableActive && this.tableActive()) return;
+      // TRIGGER REGISTRY (rogue P0-5): the hard gate lives in the
+      // npc-triggers.js registry row 'table_sits' — tableActive() unchanged.
+      if (this.npcTrigger && this.npcTrigger(null, 'table_sits')) return;
       var a = this.agencyOf(vid);
       var st = this.agencyState();
       var pool = [];
@@ -476,9 +478,10 @@
       try { this.removeVillager(vid, 'killed'); } catch (e) {}
       delete st.exped[vid];
       if (v.away) delete v.away[vid];
-      try { this.seedGossip('death', { who: vid }, []); } catch (e) {}
-      try { this.recordMoment(`${nm} didn't come back. ${mName}.`); } catch (e) {}
-      if (playerAtHaven) this.say(`🕯️ Word comes back with a torn pack and no ${nm.split(' ')[0]}. ${mName}, out past the ridge. The fire is quieter tonight.`);
+      // TRIGGER REGISTRY (rogue P0-5): death reactions (gossip + moment +
+      // grief voice) live in the npc-triggers.js registry row 'death' —
+      // same handlers, same order, same conditions.
+      try { if (this.npcTrigger) this.npcTrigger(vid, 'death', { mName: mName, nm: nm, playerAtHaven: playerAtHaven }); } catch (e) {}
     },
     expeditionCache(vid, dist) {
       var st = this.agencyState();
@@ -624,12 +627,9 @@
       v.explorerNews[vid] = { day: this.state.scholar.day, agency: true, dist: dist };
       // LONGSIM trust r2 (2026-10-11): the return is news — seed two
       // witnesses so the rumor can travel (was heard: [], born dead).
-      try {
-        var _seen2 = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
-        var _shuf2 = _seen2.slice();
-        for (var _i2 = _shuf2.length - 1; _i2 > 0; _i2--) { var _j2 = Math.floor(R() * (_i2 + 1)); var _t2 = _shuf2[_i2]; _shuf2[_i2] = _shuf2[_j2]; _shuf2[_j2] = _t2; }
-        this.seedGossip('return', { who: vid }, _shuf2.slice(0, 2));
-      } catch (e) {}
+      // TRIGGER REGISTRY (rogue P0-5): the witness shuffle + seeding lives
+      // in the npc-triggers.js registry row 'return'.
+      try { if (this.npcTrigger) this.npcTrigger(vid, 'return'); } catch (e) {}
     },
 
     // ---------- 3. DEEDS & OUTSHINING ----------
@@ -650,62 +650,14 @@
     // DIFFERENTIATION, not imitation. Deed texts celebrate distinct lanes
     // ("Mara's the one who walks far") — identity, not rank-chasing.
     recordDeed(vid, type, text, magnitude) {
-      var st = this.agencyState();
+      // TRIGGER REGISTRY (rogue P0-5): the deed surfacing (deed ledger +
+      // living Codex + contest viewership board + broadcast + gossip +
+      // moment + overheard say) lives in the npc-triggers.js registry row
+      // 'deed' — same handlers, same order, same conditions. The magnitude
+      // resolution stays here (DEED_MAG is module scope); the row receives
+      // the resolved mag. This signature is unchanged for all callers.
       var mag = magnitude || DEED_MAG[type] || 2;
-      st.ach.push({ vid: vid, type: type, text: text, mag: mag, day: this.state.scholar.day });
-      if (st.ach.length > 50) st.ach = st.ach.slice(-50);
-      var nm = '';
-      try { nm = this.displayName(vid); } catch (e) { nm = 'Someone'; }
-      // 1. codex entry — the village's memory, in the book
-      try {
-        var cx = this.state.codex = this.state.codex || {};
-        cx.deeds = cx.deeds || [];
-        cx.deeds.unshift({ vid: vid, type: type, text: text, mag: mag, day: this.state.scholar.day });
-        cx.deeds = cx.deeds.slice(0, 40);
-      } catch (e) {}
-      // 2. contest viewership — the board moves
-      try {
-        var vv = this.state.village;
-        vv.npcViewership = vv.npcViewership || {};
-        vv.npcViewership[vid] = (vv.npcViewership[vid] || 0) + Math.max(1, Math.round(mag / 2));
-      } catch (e) {}
-      // 3. broadcast — the big ones air
-      if (mag >= 8) { try { this.broadcastLine(text); } catch (e) {} }
-      // the village's respect: deeds move reputation along social lines
-      try {
-        var dims = {};
-        if (type === 'monster_kill' || type === 'stood_down') dims.brave = 8;
-        if (type === 'cache_haul') dims.generous = 6;
-        if (type === 'rescue') { dims.brave = 6; dims.generous = 6; }
-        if (type === 'mapped_far') dims.brave = 4;
-        // GRAPEVINE (journey social r39 2026-10-22): deed gossip was seeded
-        // heard-less and who-less — born dead on both counts. spreadGossip
-        // only iterates g.heard as tellers and askAbout only serves gossip
-        // the speaker has heard, so a heard-less entry could never travel
-        // (measured: 255 deed entries born heard-less across 4 runs, 0 ever
-        // gained a hearer). And who-less gossip is the PLAYER channel: the
-        // fallback render says "word is YOU..." and rep pays to the hearer,
-        // so an NPC's kill would credit the player. The doer tells it
-        // themself plus one witness (same pattern as departure/return
-        // gossip), and dims.who names the doer so rep and rendering
-        // attribute the deed correctly.
-        dims.who = vid;
-        var _vw = this.state.village || {};
-        var _seen = (_vw.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
-        var _wit = _seen.length ? _seen[Math.floor(R() * _seen.length)] : null;
-        var _heard = [vid].concat(_wit ? [_wit] : []);
-        this.seedGossip('deed', dims, _heard);
-      } catch (e) {}
-      // the show notices big plays — the audience is watching
-      if (mag >= 8) { try { this.recordMoment(text); } catch (e) {} }
-      // if you're at Haven, you hear about it. That's the outshining:
-      // not a popup saying "an NPC is better than you" — just the village
-      // talking, and you overhearing.
-      var v = this.state.village;
-      var hx = v.px ?? 4, hy = v.py ?? 4;
-      var atHaven = false;
-      try { atHaven = (this.map.px === hx && this.map.py === hy); } catch (e) {}
-      if (atHaven && mag >= 4 && R() < 0.7) this.say('📣 ' + text);
+      if (this.npcTrigger) return this.npcTrigger(vid, 'deed', { type: type, text: text, mag: mag });
     },
     // codexDeeds: the village's book of who did what. Read by the codex UI.
     codexDeeds() {

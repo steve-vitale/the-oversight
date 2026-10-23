@@ -80,6 +80,7 @@ const ASSETS = [
   "./src/js/sigW4.js?v=a09709f8f-20261022-232520",
   "./src/js/sigW5.js?v=a09709f8f-20261022-232520",
   "./src/js/villager-agency.js?v=a09709f8f-20261022-232520",
+  "./src/js/npc-triggers.js?v=a09709f8f-20261022-232520",
   "./src/js/fieldFights.js?v=a09709f8f-20261022-232520",
   "./src/js/party-wiring.js?v=a09709f8f-20261022-232520",
   "./src/js/party-bond.js?v=a09709f8f-20261022-232520",

@@ -793,20 +793,17 @@
       }
       if (playerAtHaven) this.say((obj.companion ? '👥 ' : '') + nm + ' ' + purposeLine);
       // leaving is gossip-worthy. Two witnesses so the rumor can travel.
-      try {
-        var seen = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
-        var shuf = seen.slice();
-        for (var i = shuf.length - 1; i > 0; i--) { var j = Math.floor(R() * (i + 1)); var t = shuf[i]; shuf[i] = shuf[j]; shuf[j] = t; }
-        var dims = { who: vid };
-        if (obj.companion) dims.with = obj.companion;
-        // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): the gossip
-        // render used to tell EVERY leaving as a dramatic walk-out
-        // ("walked away from Haven. Didn't look back.") — including routine
-        // forage/water/trap trips. Carry the objective purpose so the
-        // render can tell the truth per purpose.
-        if (obj.purpose) dims.purpose = obj.purpose;
-        this.seedGossip('departure', dims, shuf.slice(0, 2));
-      } catch (e) {}
+      var dims = { who: vid };
+      if (obj.companion) dims.with = obj.companion;
+      // DEPARTURE-PURPOSE (journey landing r32 2026-10-20): the gossip
+      // render used to tell EVERY leaving as a dramatic walk-out
+      // ("walked away from Haven. Didn't look back.") — including routine
+      // forage/water/trap trips. Carry the objective purpose so the
+      // render can tell the truth per purpose.
+      if (obj.purpose) dims.purpose = obj.purpose;
+      // TRIGGER REGISTRY (rogue P0-5): the witness shuffle + seeding lives
+      // in the npc-triggers.js registry row 'departure'.
+      try { if (this.npcTrigger) this.npcTrigger(vid, 'departure', { dims: dims }); } catch (e) {}
       return true;
     },
 
@@ -1404,12 +1401,9 @@
         // LONGSIM trust r2 (2026-10-11): the return is news — seed two
         // witnesses so the rumor can travel (was heard: [], born dead).
         // Same pattern as the objective-departure path above.
-        try {
-          var _seenR = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
-          var _shufR = _seenR.slice();
-          for (var _iR = _shufR.length - 1; _iR > 0; _iR--) { var _jR = Math.floor(R() * (_iR + 1)); var _tR = _shufR[_iR]; _shufR[_iR] = _shufR[_jR]; _shufR[_jR] = _tR; }
-          this.seedGossip('return', { who: vid }, _shufR.slice(0, 2));
-        } catch (e) {}
+        // TRIGGER REGISTRY (rogue P0-5): the witness shuffle + seeding lives
+        // in the npc-triggers.js registry row 'return'.
+        try { if (this.npcTrigger) this.npcTrigger(vid, 'return'); } catch (e) {}
       } else if (purpose === 'haul') {
         // HAUL return (villager-mapmem 2026-10-13): the carried meat lands
         // in the pantry as safe food (only known-safe meat was hauled), and

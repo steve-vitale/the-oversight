@@ -1215,6 +1215,19 @@ The Long Way Home — the nomad road state machine
 
 **Consumes:** —
 
+### npc-triggers (`npc-triggers.js`)
+Declarative trigger registry for villager AI. Event names map to ordered handler lists (and optional hard gates); game code dispatches through npcTrigger(vid, event, data) instead of calling transition functions directly. Day-one content is a pure mechanical move of the existing trigger sites — zero behavior change — so future triggers (feasts, contest outcomes, mid-trip interrupts) become registry rows instead of transition-function edits.
+
+**Provides:** npcTrigger(vid, event, data)
+
+**Rules:**
+- registry_is_dispatch_only: npcTrigger adds no control flow of its own — handlers and gates run with `this` = the Game object, in row order, exactly as the code they were moved from; a throwing handler propagates exactly as the original inline code did (code: npc-triggers.js)
+- zero_behavior_change_p05: the day-one rows ('death', 'deed', 'departure', 'return', 'table_sits', 'expedition_launch') are verbatim moves of the pre-existing trigger sites; no new triggers, no weight/threshold edits, no dormant-motivation wiring (code: npc-triggers.js, villager-agency.js, villager-objectives.js)
+- table_sanctity_gate: the 'table_sits' row keeps tableActive() as a hard gate — while the table sits, expeditions meet nothing (code: npc-triggers.js, villager-agency.js expeditionMonster)
+- unknown_events_noop: dispatching an unregistered event is a silent no-op returning false (chain-safe) (code: npc-triggers.js)
+
+**Consumes:** village.roster, village.gossip, village.npcViewership, codex.deeds, scholar.day, seedGossip(...), recordMoment(...), broadcastLine(...), displayName(...), say(...), agencyState(...), objVillageDanger(...), tableActive(...)
+
 ### overtime (`overtime.js`)
 OVERTIME — the Table's waiting cost (Steve 2026-10-14: "waiting should have a cost- but also an opportunity for the truly powerful. Waves get truly ridiculous"). Once the Table exists for the player (announced, day 90+, seat not none) and they have not sat, every 7 days raises a tier (cap 6). Each tier: wave-4/5 fights become RERUNS (HP, damage and pack size stack per tier, a "RERUN ×N" label), the world holds more monsters, raids come sooner and more often, lingering raiders gorge harder, and the live seat price drops (standing per tier and per Haven loss). The System announces each tier on air. At tier 2 the run's uncast apocalypse titan airs too; at the key tier with all three titans slain, THE NETWORK is summoned (network-campaign.js). Tuning is data: titans.json _overtime.
 
