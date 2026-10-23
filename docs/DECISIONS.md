@@ -1051,3 +1051,8 @@ the implementation trimmed outcomes instead of changing decisions.
 - "Seek knowledge" agenda: NOT standalone — fold into quest/favor system.
 - Hunt miss-streak pity: REJECTED. "No pity, that's why we have skills that can be improved. Knowledge is the pity system." (Standing: knowledge-gating is the luck answer, not pity timers.)
 - Founding Oath: parked — Steve needs more context/justification before deciding.
+
+## 2026-10-22 — Founding Oath REJECTED; character-level differentiation directive (Steve, verbatim in chat)
+- Founding Oath rejected: "it cuts against the design" — the oath binds a whole village, but the design is village-as-protagonist with succession (death → you are someone new). A run-level oath can't survive the bearer changing.
+- The underlying advice stands: each run must feel like it could reveal something new. Steve's intended mechanism: abilities chosen + player style preferences naturally segment people onto a path.
+- NEW DIRECTIVE: focus on making each CHARACTER feel like a completely different way to play — even one the player didn't choose (succession hands you someone new; that handoff should feel like a new playstyle, not a stat swap).
