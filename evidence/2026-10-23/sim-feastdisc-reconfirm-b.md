@@ -254,6 +254,21 @@ and replicates the kill-credit lift (13 vs 9). What failed is the
 kill-count GO bar against a noisier control base rate. The lever
 stays; the bar needs revision.
 
+## POST-REBASE RE-VERIFICATION (2026-10-23)
+
+The reconfirm commit was rebased onto master e6d843ded before landing (5
+sibling commits landed mid-run: journey-crisis r45, journey-deepening
+r36+r37, sim-homecoming-diag-b, sim-scholardist-confirm-b x2). The delta
+touches src/js/safetynets.js (cosmetic compound-crisis label only) and
+scripts/policies/competent.js (stuck-flee fix behind
+COMPETENT_EXIT_VERIFIED_FLEE=1, default-off; gate-off path verified
+byte-identical in the diff — legacy pushed/barrierPushes behavior
+preserved). Post-rebase determinism re-check on the new base: control
+60d re-run byte-identical (CTRL-DET-OK), feastdisc 60d re-run
+byte-identical (ARMED-DET-OK). The corpus verdict stands on its
+pre-registered terms (both arms on one identical substrate at sweep
+time); the new base is behavior-identical for this sweep's env.
+
 ## Convergence (scale-onramp axis)
 
 converging — the feast leg of the veterans conjunction remains
