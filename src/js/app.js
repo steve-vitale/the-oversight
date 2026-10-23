@@ -1742,6 +1742,17 @@
           if (Game.corpseIsPerson(dc) && !dc.buried && !dc.ash && !dc.butchered && Game.corpseButcher) actions.push(['🔪 Butcher the body', () => { Game.corpseButcher(dc.id); refresh(); }]);
         }
       }
+      // GRAVE MARKERS (rogue P1 T7 2026-10-22): you're standing at a grave.
+      // Grounds only — the markers are at the fire, never inside the hall.
+      if (Game.graveAt && !(Game.state.scholar && Game.state.scholar.insideHaven)) {
+        const grHere = Game.graveAt(cx, cy);
+        if (grHere.length) {
+          const gg = grHere[0];
+          desc += ' ' + Game.graveDesc(gg);
+          actions.push(['🪦 Look at the marker', () => { Game.examineGrave(gg.id); refresh(); }]);
+          if (!gg.respectsPaid) actions.push(['Say a few words', () => { Game.payGraveRespects(gg.id); refresh(); }]);
+        }
+      }
     } else if (isMon) {
       // AMBIGUITY (break-it knowledge 2026-10-09): the popup calls it what
       // the UI calls it — monsterDisplayName. Village-agreed name wins; else
@@ -1800,6 +1811,22 @@
         } else {
           desc += ' (Too far.)';
           actions.push(walkCloser(cx, cy));
+        }
+      } else if (Game.graveAt && !(Game.state.scholar && Game.state.scholar.insideHaven)) {
+        // GRAVE MARKERS (rogue P1 T7 2026-10-22): a marker at the fire.
+        // Grounds only — never inside the hall.
+        const gr = Game.graveAt(cx, cy);
+        if (gr.length) {
+          const gg = gr[0];
+          name = 'A grave marker';
+          desc = Game.graveDesc(gg);
+          if (dist <= 1) {
+            actions.push(['🪦 Look at the marker', () => { Game.examineGrave(gg.id); refresh(); }]);
+            if (!gg.respectsPaid) actions.push(['Say a few words', () => { Game.payGraveRespects(gg.id); refresh(); }]);
+          } else {
+            desc += ' (Too far.)';
+            actions.push(walkCloser(cx, cy));
+          }
         }
       }
     } else if (villagerId) {
@@ -18557,6 +18584,17 @@
               const _ckey = dc.kind + ':' + (dc.villagerId || dc.monsterId || dc.name || '?');
               g = `<span data-ent="corpse:${esc(_ckey)}">${esc(Game.corpseGlyph(dc))}</span>`;
               cls += ' corpse';
+              drawn = true;
+            }
+          }
+          // GRAVE MARKERS (rogue P1 T7 2026-10-22): the dead stay present.
+          // A cairn on the Haven grounds, at the fire — drawn like the other
+          // quiet entities. Grounds only, never inside the hall.
+          if (!drawn && !_inside && Game.graveAt) {
+            const gr = Game.graveAt(cx, cy);
+            if (gr.length) {
+              g = `<span data-ent="grave:${esc(gr[0].id)}">🪦</span>`;
+              cls += ' grave';
               drawn = true;
             }
           }

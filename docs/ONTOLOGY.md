@@ -914,6 +914,22 @@ THE GOD VERBS IN PLAY (recovered and adapted 2026-10-18 from f4ab4956). Steve: "
 
 **Consumes:** Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood, useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie, Scattering.Godpath hooks (allyWouldFall, onAllyFell, damageMult, dodgeBonus, villagerStrikeMult, absorbVillagerHit, fieldBegin/Act/Incoming/AllyShare/CheatDeath), Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs), Scattering.combat.nearestEnemy (monster aim)
 
+### graves (`graves.js`)
+Persistent grave markers at the Haven fire. Every villager burial raises a marker — name (knowledge-gated at burial), cause of death, day — that stays for the run: examinable, and payRespects available. The physical, visitable counterpart to the Codex THE FALLEN roll (fallen-memorial.js). (Roguelike Celebration 2026, Talk 7 N7-3.)
+
+**Provides:** graves(), havenNodeXY(), graveAt(cx, cy), graveFor(villagerId), graveSpot(), createGrave(corpse), graveDesc(g), examineGrave(id), payGraveRespects(id)
+
+**Rules:**
+- marker_at_the_fire_not_the_grave: every villager burial raises the marker at the Haven fire — the body rests where it was buried, the village's memory-marker is communal ("the village will know where," made literal). (code: buryCorpse → createGrave, 2026-10-22)
+- graves_knowledge_gate_names: the name is frozen knowledge-gated at burial via fallenName (the firstRef mourning-line convention): known → first name, unknown → distinguishing descriptor, never the unrevealed true name. The dead bearer is named as the village knew them (fallenName's bearer rule). (code: createGrave, 2026-10-22)
+- graves_never_the_taken: the Taken are never memorialized as dead (KIN.md). The Taken are never villager records and never produce corpses — and createGrave still gates explicitly on a real roster death: no villagerId, no grave. (code: createGrave, 2026-10-22)
+- one_grave_per_villager: a villager gets exactly one marker; a second createGrave call for the same villagerId is a no-op. (code: createGrave, 2026-10-22)
+- grave_respects_mirror_the_rite: payGraveRespects is the corpse rite relocated — -3 trauma, once per grave, and the grave inherits the corpse's respectsPaid so a body already honored doesn't pay out twice. Later visits narrate, never silently. (code: payGraveRespects, 2026-10-22)
+- graves_narrate: examining a grave always says something — no silent actions. (code: examineGrave/graveDesc, 2026-10-22)
+- graves_in_run_only: markers live on state.village and die with the run. No cross-run saga (metaProgression law, ledger.js:587-590). (code: graves, 2026-10-22)
+
+**Consumes:** state.village.graves, state.corpses (buryCorpse hands the corpse over), state.scholar.day
+
 ### havenGrowth (`havenGrowth.js`)
 Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, Steve 2026-10-10). Resource-based, System-announced, never deed-based, never calendar. Each tier visibly improves the Haven and grants real mechanics. The raid system gives the Palisade something to defend against.
 

@@ -891,6 +891,11 @@
         const names = kept.map(i => String(this.itemDisplayName ? this.itemDisplayName(i) : (i.name || 'something')).toLowerCase()).join(', ');
         this.say(`What they carried goes into the ground with them: ${names}. The village leaves the dead their things.`);
       }
+      // GRAVE MARKERS (rogue P1 T7 2026-10-22): the burial raises a
+      // persistent marker at the Haven fire — "the village will know
+      // where," made literal. createGrave owns the Taken gate, the
+      // one-per-villager rule, and the knowledge-gated name.
+      try { if (this.createGrave) this.createGrave(c); } catch (e) { console.warn('[corpses] createGrave', e && e.message); }
       try { this.observe('bury_dead', { target: c.villagerId }); } catch (e) {}
       if (this.tickAction) this.tickAction(16);
       return true;
