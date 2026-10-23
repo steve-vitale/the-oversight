@@ -273,6 +273,12 @@
       try { n = this.npcNeeds(vid); } catch (e) {}
       var goal = null;
       try { goal = this.npcGoal(vid); } catch (e) {}
+      // DORMANT MOTIVATIONS (rogue P1, audit Talk 2 P2-2): 'alone' villagers
+      // deprioritize companions — the flag rides the objective into
+      // objMaybeDepart (skips the companion ask) and objAskCompanion (never
+      // picked as someone else's guard). Reads the GENERATED npcGoal —
+      // unique-person law, no fixed-cast scripting.
+      o.solo = (goal === 'alone');
       var temp = 'steady';
       try { temp = this.npcTemper(vid); } catch (e) {}
       var prof = 'forager';
@@ -365,6 +371,35 @@
         waterDays = _wsup / _wdem;
       } catch (e) {}
       var cands = [];
+      // DORMANT MOTIVATIONS (rogue P1, audit Talk 2 P2-2): the 11 generated
+      // goals with no objPick voice now bias the lottery as visible weights
+      // — not RNG mood rolls. Mapping (audit + design):
+      //   family    -> VISIT kin (go find people, ask about kin)
+      //   belong    -> social: VISIT + hall life (HAVEN_CHORE)
+      //   remember  -> VISIT (sit with people, hear/keep stories)
+      //   joy       -> VISIT (company)
+      //   record/understand/answers -> SEEK (go learn from someone)
+      //   survive   -> caution: avoid EXPLORE/HAUL, stay near the fire
+      //   peace     -> avoid EXPLORE/HAUL, hall life
+      //   alone     -> deprioritize company: VISIT down + o.solo (above)
+      //   home      -> HAVEN_CHORE (tend the hall, make this home)
+      //   legacy    -> HAVEN_CHORE, and teach when they can (leave something)
+      // The 7 already-wired goals (feed/escape/lead/explore/prove/heal/
+      // protect) are untouched here — their reads above read exactly as
+      // before. Pure arithmetic: no new RNG draws on any path.
+      var gwVisit = 0, gwChore = 0, gwSeek = 0;
+      var gwVisitMul = 1, gwExploreMul = 1, gwHaulMul = 1;
+      var gwChoreTag = null;
+      if (goal === 'family') gwVisit += 1.5;
+      if (goal === 'belong') { gwVisit += 1.0; gwChore += 0.6; }
+      if (goal === 'remember') gwVisit += 1.0;
+      if (goal === 'joy') gwVisit += 0.8;
+      if (goal === 'alone') gwVisitMul = 0.4;
+      if (goal === 'record' || goal === 'understand' || goal === 'answers') gwSeek = 2.0;
+      if (goal === 'survive') { gwExploreMul = 0.35; gwHaulMul = 0.5; gwChore += 1.0; }
+      if (goal === 'peace') { gwExploreMul = 0.3; gwHaulMul = 0.5; gwChore += 0.8; }
+      if (goal === 'home') gwChore += 1.2;
+      if (goal === 'legacy') { gwChore += 1.0; gwChoreTag = 'teach'; }
       if (needTrack === 'field' && maxD > 0) cands.push({ kind: 'FORAGE', w: 1.5 });
       if (needTrack === 'social') cands.push({ kind: 'HAVEN_CHORE', w: 1.2, chore: 'teach' });
       if ((needTrack === 'combat' || needTrack === 'strange') && (prof === 'wanderer' || prof === 'explorer')) cands.push({ kind: 'EXPLORE', w: 1.5 });
@@ -422,6 +457,7 @@
           }
         } catch (e) {}
         var hw = 1 + Math.min(3, haulSite.estKcal / 2000) + (haulKnow ? 1.5 : 0);
+        hw *= gwHaulMul; // DORMANT MOTIVATIONS (rogue P1): survive/peace avoid the haul
         cands.push({ kind: 'HAUL', w: hw, site: haulSite });
       }
       // VISIT — go find someone specific. Social, uses real familiarity.
@@ -434,11 +470,21 @@
         var vdist = vtn ? this.objDist(vtn.nx, vtn.ny, hx, hy) : 0;
         if (vdist > Math.max(1, maxD)) visitT = null;
       }
-      if (visitT) cands.push({ kind: 'VISIT', w: 1.2 + ((n.social || 40) > 60 ? 0.8 : 0), targetVid: visitT });
+      // DORMANT MOTIVATIONS (rogue P1): family/belong/remember/joy seek people
+      // out (VISIT up); alone villagers deprioritize company (VISIT down).
+      if (visitT) cands.push({ kind: 'VISIT', w: (1.2 + ((n.social || 40) > 60 ? 0.8 : 0)) * gwVisitMul + gwVisit, targetVid: visitT });
       // EXPLORE — nomads only.
-      if ((prof === 'wanderer' || prof === 'explorer') && R() < 0.5) cands.push({ kind: 'EXPLORE', w: prof === 'explorer' ? 2 : 1.2 });
+      // DORMANT MOTIVATIONS (rogue P1): survive/peace avoid the wild.
+      if ((prof === 'wanderer' || prof === 'explorer') && R() < 0.5) cands.push({ kind: 'EXPLORE', w: (prof === 'explorer' ? 2 : 1.2) * gwExploreMul });
+      // SEEK — the knowledge-seekers. DORMANT MOTIVATIONS (rogue P1):
+      // record/understand/answers go find someone and learn. Indoor, a real
+      // target, a short clock — same shape as the build-knowledge SEEK above.
+      if (gwSeek > 0) cands.push({ kind: 'SEEK', w: gwSeek });
       // HAVEN_CHORE — indoor life. Always available; homebodies lean here.
-      cands.push({ kind: 'HAVEN_CHORE', w: prof === 'homebody' ? 3 : 1.4 });
+      // DORMANT MOTIVATIONS (rogue P1): belong/home/legacy/survive/peace lean
+      // into hall life; legacy villagers teach when they can (the honest
+      // 'teach' gate in the build below keeps the chore real).
+      cands.push({ kind: 'HAVEN_CHORE', w: (prof === 'homebody' ? 3 : 1.4) + gwChore, chore: gwChoreTag });
       var tot = 0, i;
       for (i = 0; i < cands.length; i++) tot += cands[i].w;
       var r = R() * tot, chosen = cands[cands.length - 1];
@@ -479,6 +525,17 @@
         o.partsLeft = 3 + Math.floor(R() * 4); o.tightness = dist;
       } else if (chosen.kind === 'HAUL') {
         this.objHaulFromSite(vid, hx, hy, o, chosen.site);
+        return o;
+      } else if (chosen.kind === 'SEEK') {
+        // DORMANT MOTIVATIONS (rogue P1): the knowledge-seeker's errand —
+        // go find someone who knows things and learn. Same shape as the
+        // build-knowledge SEEK above: indoor, a real target, a short clock.
+        // The target is someone they actually know (objVisitTarget scores
+        // trust/fire-group, no RNG); the beat is quiet — the seeking is the
+        // behavior, not a line.
+        o.kind = 'SEEK'; o.purpose = 'seek'; o.state = 'indoor'; o.indoor = true;
+        o.targetVid = visitT; o.companion = null;
+        o.tx = hx; o.ty = hy; o.tightness = 0; o.partsLeft = 2;
         return o;
       } else { // HAVEN_CHORE
         o.purpose = 'chore'; o.indoor = true; o.state = 'indoor';
@@ -668,6 +725,9 @@
         // gates them, but the companion departs inside the LEADER's call,
         // so without this filter the gate never sees them.
         try { if ((v.sick || {})[id]) continue; } catch (e) {}
+        // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers are never asked
+        // to walk guard — leave them be. Reads the GENERATED npcGoal.
+        try { if (this.npcGoal && this.npcGoal(id) === 'alone') continue; } catch (e) {}
         var node = null;
         try { node = this.npcNode(id); } catch (e) { continue; }
         if (!node || node.nx !== hx || node.ny !== hy) continue;
@@ -848,7 +908,10 @@
       if (dg.verdict === 'go') {
         this.objDepart(rid, o, hx, hy, playerAtHaven);
       } else if (dg.verdict === 'ask') {
-        var cid = this.objAskCompanion(rid, o, hx, hy);
+        // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers deprioritize
+        // companions (o.solo, set in objPick) — they tighten or stay rather
+        // than bring company. Same fallthrough as the no-companion case.
+        var cid = o.solo ? null : this.objAskCompanion(rid, o, hx, hy);
         if (cid) {
           // HEAL GATE (2026-10-13): gate rid first — a sat-out rid must not
           // strand a departed companion. Companion sat out -> rid tightens
