@@ -258,37 +258,59 @@ function sharkFight(Game, ctx) {
 // D4. CONTEST EV: participate while the contests-survived deed (<3) is
 // unfilled or HP affords it; refuse when the deed is filled AND hurt.
 // In-phase: min-harm (HP is the win currency).
+//
+// BLOCKED-CHOICE FALLTHROUGH (shark r6): contestChoose can refuse a choice
+// out loud without advancing the phase ({blocked:true} — e.g. the ratings
+// stunt's reqKcal gate on an empty tank). Ignoring the return and returning
+// true spins the driver to its 400-guard (measured: a summons stuck at
+// phase 0 x401). So: try choices in preference order, skip blocked ones,
+// and never return true on a no-advance. The REFUSE choice has no cost gate
+// and always advances, so putting it last guarantees termination.
+function sharkHarm(choice) {
+  try { return harmScore ? harmScore(choice) : 0; }
+  catch (e) { return 0; }
+}
 function sharkContest(Game, ctx) {
   try {
     const ac = Game.state && Game.state.activeContest;
     if (!ac || ac.phase === 'done') return false;
     if (ac.participant && ac.participant !== 'player') return false;
+    // Summons/show modals ride the contest driver without a contestId —
+    // the EV logic below applies to them the same way (a stunt is a priced
+    // beat; refusing on camera is a played sequence).
     const phases = ac.phases || [];
     const phase = phases[ac.phaseIdx || 0];
     if (!phase || !phase.choices || !phase.choices.length) return false;
     const choices = phase.choices;
     const refuseIdx = choices.findIndex(ch => ch && ch.next === 'REFUSE');
+    // Preference order.
+    let order;
     if (refuseIdx >= 0) {
       const need = contestsSurvived(Game) < 3;
       const hurt = hpFrac(Game) < SHARK_CONTEST_HURT;
       ctx.sharkContestChoices = (ctx.sharkContestChoices || 0) + 1;
       if (!need && hurt) {
-        ctx.sharkContestRefusals = (ctx.sharkContestRefusals || 0) + 1;
-        try { Game.contestChoose(refuseIdx); } catch (e) {}
-        return true;
+        order = [refuseIdx]; // EV: deed filled and hurt — refuse outright
+      } else {
+        // participate first, then other choices by harm, refuse last
+        const rest = choices.map((c, i) => i)
+          .filter(i => i !== 0 && i !== refuseIdx)
+          .sort((a, b) => sharkHarm(choices[a]) - sharkHarm(choices[b]));
+        order = [0].concat(rest, [refuseIdx]);
       }
-      try { Game.contestChoose(0); } catch (e) {}
-      ctx.sharkContestTakes = (ctx.sharkContestTakes || 0) + 1;
+    } else {
+      order = choices.map((c, i) => i)
+        .sort((a, b) => sharkHarm(choices[a]) - sharkHarm(choices[b]));
+    }
+    for (const i of order) {
+      let r = null;
+      try { r = Game.contestChoose(i); } catch (e) { r = null; }
+      if (r && r.blocked) continue; // cost gate unmet — try the next choice
+      if (i === refuseIdx) ctx.sharkContestRefusals = (ctx.sharkContestRefusals || 0) + 1;
+      else ctx.sharkContestTakes = (ctx.sharkContestTakes || 0) + 1;
       return true;
     }
-    let best = 0, bestScore = Infinity;
-    for (let i = 0; i < choices.length; i++) {
-      let sc = Infinity;
-      try { sc = harmScore ? harmScore(choices[i]) : i; } catch (e) { sc = i; }
-      if (sc < bestScore - 1e-9) { bestScore = sc; best = i; }
-    }
-    try { Game.contestChoose(best); } catch (e) {}
-    return true;
+    return false; // nothing advanced — do not spin
   } catch (e) { return false; }
 }
 
