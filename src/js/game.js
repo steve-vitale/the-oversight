@@ -4761,6 +4761,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
         const aboutOther = heard.filter(isWho);
+        // CONTEST NEWS LANE (2026-10-23): a televised contest outcome is the
+        // biggest news at the fire — the whole village watched it. It used
+        // to ride the aboutOther walk-down, where non-rumor verbs sort last:
+        // behind the 50%/45% pre-branches, every rumor verb, and each day's
+        // churn, it died on the 3-day fuse unserved (establishment r19: zero
+        // surfacing across 4 seeds — seed ✓ spread ✓ serve ✗; Steve:
+        // "gossip that never surfaces ever is an issue somewhere"). Unserved
+        // contest news jumps the queue here — after scandals about you,
+        // before the rumor walk-down. When the lane is exhausted this
+        // sitting, the routine walk-down still proceeds.
+        const isContestNews = (g) => g.action === 'contest_won' ||
+          g.action === 'contest_survived' || g.action === 'contest_died';
+        const contestNews = aboutOther.filter(isContestNews);
+        const routineOther = aboutOther.filter((g) => !isContestNews(g));
         // GRAPEVINE SALIENCE (journey social r39 2026-10-22): reputation
         // rumors (the rumor verbs — the drama the player can start) outrank
         // routine news within "about other people". Before, aboutOther was
@@ -4772,9 +4786,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // "rumors about other people, then the freshest remaining word."
         const RUMOR_VERBS = { stingy: 1, untrustworthy: 1, generous: 1, scheming: 1, coward: 1 };
         // freshGossip serves from the array END, so rumor verbs sort LAST.
-        aboutOther.sort((a, b) => ((RUMOR_VERBS[a.action] ? 1 : 0) - (RUMOR_VERBS[b.action] ? 1 : 0)));
-        if (aboutOther.length) {
-          const g = freshGossip(aboutOther); // walk-down: next unsaid rumor, not the same one
+        routineOther.sort((a, b) => ((RUMOR_VERBS[a.action] ? 1 : 0) - (RUMOR_VERBS[b.action] ? 1 : 0)));
+        if (contestNews.length || routineOther.length) {
+          // Contest news first (freshest unserved); when the lane is spent
+          // this sitting, fall back to the routine walk-down.
+          const g = freshGossip(contestNews) || freshGossip(routineOther); // walk-down: next unsaid rumor, not the same one
           if (g) {
           // r16: a gossip entry about the player's televised win names them
           // "You" — displayName('player') would give a stranger descriptor.
