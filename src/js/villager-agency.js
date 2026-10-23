@@ -807,8 +807,25 @@
         if (v.explorerNews && v.explorerNews[vid] && v.explorerNews[vid].agency) {
           return [{ id: 'agency:ask_expedition', label: '"What did you see out there?"' }];
         }
-        return [{ id: 'agency:ask_field', label: '"Teach me something from the wild."' }];
+        // LABEL HONESTY (journey-establishment r27 2026-10-23): the ask
+        // teaches monster > plant > place in priority order, but the old
+        // label always promised "from the wild" — a farmhouse or a cellar
+        // isn't the wild, and four runs of sense-reads flagged it. The
+        // label now names what's actually on offer.
+        return [{ id: 'agency:ask_field', label: this.agencyAskFieldLabel(vid) }];
       } catch (e) { return []; }
+    },
+    // agencyAskFieldLabel: topic-aware label for the field-teach ask. Shared
+    // by agencyChoices (the menu) and agencyTurn (the transcript echo) so
+    // the player line in the transcript always matches the label picked.
+    agencyAskFieldLabel(vid) {
+      try {
+        var lessons = this.npcFieldLessons(vid) || [];
+        var hasWild = lessons.some(function (l) { return l && (l.topic === 'monsters' || l.topic === 'plants'); });
+        var hasPlaces = lessons.some(function (l) { return l && l.topic === 'places'; });
+        if (!hasWild && hasPlaces) return '"What places have you found out there?"';
+      } catch (e) {}
+      return '"Teach me something from the wild."';
     },
     agencyTurn(vid, choiceId) {
       var st = this.agencyState();
@@ -820,6 +837,13 @@
       if (choiceId === 'agency:ask_expedition' || choiceId === 'agency:ask_field') {
         var v = this.state.village;
         var k = st.know[vid] || { plants: 0, monsters: 0, places: [] };
+        // LABEL TIMING (journey-establishment r27 2026-10-23): the label is
+        // computed BEFORE any lesson is consumed — the teach block below
+        // spends entries (places.pop()), and a post-teach label would always
+        // read the pool one lesson late (places-only pools echoed the wild
+        // label). The menu (agencyChoices) and the turn share agencyAskFieldLabel.
+        var youLabel = choiceId === 'agency:ask_expedition'
+          ? '"What did you see out there?"' : this.agencyAskFieldLabel(vid);
         // ONE ASK, ONE LESSON (journey-succession 2026-10-12): the old path
         // fired agencyTeachMonster AND agencyTeachPlant in the same ask —
         // each permanently spent a teachable entry — then shuffled and spoke
@@ -879,8 +903,7 @@
         // something from the wild." with no reply, repeated).
         var c = null;
         try { c = this.convoGet(vid); } catch (e) {}
-        var youLabel = choiceId === 'agency:ask_expedition'
-          ? '"What did you see out there?"' : '"Teach me something from the wild."';
+        // (youLabel computed at the top of this branch — see LABEL TIMING.)
         // The player line lands BEFORE the NPC answers (reading order), but
         // is pulled back on the noop path — an exhausted ask leaves no
         // naked player echo in the transcript.
