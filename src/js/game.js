@@ -9312,6 +9312,82 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         recordTail: 'The Codex closes. Nobody will carry it.',
       };
     },
+    // VILLAGE DEBRIEF (rogue P0-4, 2026-10-22): end-of-run "what the village
+    // learned" — the talk's signature technique (procgen as pedagogy):
+    // failure becomes curriculum. Computed ONLY from already-recorded
+    // in-run data (codex learnedDay stamps, waveKillLog, v.fallen,
+    // codexInProgress). It surfaces what happened and grants nothing — no
+    // new knowledge, no unlocks, no cross-run anything (canon: the Codex
+    // spans one contest; human-skills≠alien-abilities, so only the human
+    // codex lanes appear — System abilities never do). Returns short
+    // display lines; empty array when the run recorded nothing learnable.
+    // Node-testable: reads only state, never touches DOM.
+    villageDebrief() {
+      const lines = [];
+      try {
+        const cx = (this.state && this.state.codex) || {};
+        const learned = [];
+        const pushL = (kind, name, day, by) => { if (name && (day || 0) > 0) learned.push({ kind, name, day, by: by || null }); };
+        for (const [pid, e] of Object.entries(cx.plants || {})) {
+          if ((e.level || 0) < 1) continue; // K0 is not knowledge
+          const p = (this.data.plants || []).find(x => x.id === pid);
+          pushL('plant', p ? p.name : pid, e.identifiedDay || 0, e.taughtByName);
+        }
+        for (const [sid, e] of Object.entries(cx.skills || {})) {
+          if (e.via === 'background') continue; // starting knowledge, not learned this run
+          const k = (this.data.knowledge || []).find(x => x.id === sid);
+          pushL('skill', k ? k.name : sid, e.learnedDay || 0, null);
+        }
+        for (const [rid, e] of Object.entries(cx.recipes || {})) {
+          if (e.via === 'background') continue; // starting knowledge, not learned this run
+          const r = (this.data.recipes || []).find(x => x.id === rid);
+          pushL('recipe', r ? r.name : rid, e.learnedDay || 0, e.learnedFrom);
+        }
+        for (const [aid, e] of Object.entries(cx.animals || {})) {
+          const a = (this.data.animals || []).find(x => x.id === aid);
+          pushL('animal', a ? a.name : aid, e.learnedDay || 0, null);
+        }
+        learned.sort((a, b) => a.day - b.day);
+        if (learned.length) {
+          const kinds = {};
+          for (const l of learned) kinds[l.kind] = (kinds[l.kind] || 0) + 1;
+          const kindStr = ['plant', 'skill', 'recipe', 'animal'].filter(k => kinds[k])
+            .map(k => `${kinds[k]} ${k}${kinds[k] > 1 ? 's' : ''}`).join(', ');
+          const examples = learned.slice(0, 3).map(l => l.name).join(', ');
+          const rest = learned.length > 3 ? ` (+${learned.length - 3} more)` : '';
+          lines.push(`📖 The Codex grew by ${learned.length} (${kindStr}) — among them ${examples}${rest}.`);
+        }
+        const taught = learned.filter(l => l.by);
+        if (taught.length) {
+          const t = taught.slice(0, 2).map(l => `${l.by} taught ${l.name}`).join('; ');
+          const more = taught.length > 2 ? ` (+${taught.length - 2} more lessons)` : '';
+          lines.push(`🧑‍🏫 ${t}${more}.`);
+        }
+        const kills = ((this.state.waveKillLog || []).slice()).sort((a, b) => (a.d || 0) - (b.d || 0));
+        if (kills.length) {
+          const first = kills[0];
+          let kl = `⚔️ First blood, day ${first.d || 0}: ${this.monsterDisplayName(first.mid)}. ${kills.length} beast${kills.length > 1 ? 's' : ''} slain.`;
+          const w2 = kills.find(k => (k.w || 1) >= 2);
+          if (w2) kl += ` First wave-${w2.w} kill: ${this.monsterDisplayName(w2.mid)}, day ${w2.d || 0}.`;
+          lines.push(kl);
+        }
+        const fallen = ((this.state.village || {}).fallen || []);
+        if (fallen.length) {
+          const causes = {};
+          for (const f of fallen) { const c = f.cause || 'the wilds'; causes[c] = (causes[c] || 0) + 1; }
+          const top = Object.entries(causes).sort((a, b) => b[1] - a[1]).slice(0, 2)
+            .map(([c, n]) => n > 1 ? `${c} (×${n})` : c).join('; ');
+          lines.push(`💀 ${fallen.length} fell — ${top}.`);
+        }
+        const gaps = (typeof this.codexInProgress === 'function') ? this.codexInProgress() : [];
+        if (gaps.length) {
+          const g = gaps.slice(0, 2).map(x => x.descriptor).join('; ');
+          const more = gaps.length > 2 ? ` (+${gaps.length - 2} more)` : '';
+          lines.push(`🔍 Never learned: ${g}${more}.`);
+        }
+      } catch (e) { console.warn('[debrief] villageDebrief', e && e.message); }
+      return lines;
+    },
     wipe() {
       // remove this run's keyed save (dead/finished runs don't continue)
       // TOMBSTONE (break-it persistence r5 2026-10-09): a wiped run stays

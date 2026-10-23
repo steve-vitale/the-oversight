@@ -19610,6 +19610,13 @@
       sub = 'The story ends here. The Codex keeps what was brought home.';
       record = `Days: ${st.day} · Plants learned: ${entries}`;
     }
+    // VILLAGE DEBRIEF (rogue P0-4, 2026-10-22): "what the village learned"
+    // renders on village-lost only — failure becomes curriculum. Defensive:
+    // a missing/stale game.js simply renders no card.
+    const debrief = (st.villageLost && typeof Game.villageDebrief === 'function') ? Game.villageDebrief() : [];
+    const debriefHtml = debrief.length
+      ? `<div class="card"><h3>What the village learned</h3>${debrief.map(l => `<p class="small">${esc(l)}</p>`).join('')}</div>`
+      : '';
     screen.innerHTML = `
       ${bar('scattering://end', st.won ? 'survived' : 'fallen')}
       <h1 class="title" style="font-size:26px">${esc(endTitle)}</h1>
@@ -19617,6 +19624,7 @@
       ${storyHtml}
       <div class="card"><h3>Expedition record</h3>
         <p class="small">${record}</p></div>
+      ${debriefHtml}
       ${chainHtml}
       <button class="btn" id="b-again">Begin a new village</button>`;
     document.getElementById('b-again').onclick = () => title();
