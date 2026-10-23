@@ -1,0 +1,131 @@
+{
+ "corpus": "evidence/2026-10-23/perseed-linkdissolve",
+ "verdict": "DIAG-GO",
+ "events": [
+  {
+   "seed": 65518,
+   "arm": "armed",
+   "day": 118,
+   "dipBefore": 102,
+   "dipAfter": 0,
+   "step": -102,
+   "dipLinksBefore": 3,
+   "dipLinksAfter": 0,
+   "channel": "succession",
+   "link": "village_3",
+   "ovName": "Ashford",
+   "evidence": [
+    "succession notes d118: Ashford pressed tribute down in Haven's chaos.",
+    "trust 44->36 (funeral-hour haircut), arrears 0->0"
+   ]
+  },
+  {
+   "seed": 65518,
+   "arm": "armed",
+   "day": 163,
+   "dipBefore": 102,
+   "dipAfter": 0,
+   "step": -102,
+   "dipLinksBefore": 3,
+   "dipLinksAfter": 0,
+   "channel": "succession",
+   "link": "village_3",
+   "ovName": "Ashford",
+   "evidence": [
+    "succession notes d163: Ashford pressed tribute down in Haven's chaos.",
+    "trust 46->38 (funeral-hour haircut), arrears 0->0"
+   ]
+  },
+  {
+   "seed": 65518,
+   "arm": "armed",
+   "day": 169,
+   "dipBefore": 102,
+   "dipAfter": 0,
+   "step": -102,
+   "dipLinksBefore": 3,
+   "dipLinksAfter": 0,
+   "channel": "trust-decay",
+   "link": "village_3",
+   "ovName": "Ashford",
+   "evidence": [
+    "trust 42->37 (bar 40), status active, arrears 0",
+    "history 30d (<=D): [\"140:tribute\",\"147:tribute\",\"154:tribute\",\"161:tribute\",\"163:succession\",\"163:drift\",\"164:succession\",\"168:court\",\"168:tribute\",\"169:drift\"]"
+   ]
+  },
+  {
+   "seed": 65518,
+   "arm": "armed",
+   "day": 180,
+   "dipBefore": 102,
+   "dipAfter": 0,
+   "step": -102,
+   "dipLinksBefore": 3,
+   "dipLinksAfter": 0,
+   "channel": "succession",
+   "link": "village_2",
+   "ovName": "Thornfield",
+   "evidence": [
+    "village-wide funeral d178..d180 (succession notes on sibling link(s); this link's own copy absent from the sparse tails)",
+    "trust 49->36 (funeral-hour haircut), arrears 13892->13892",
+    "also flipped: village_3"
+   ]
+  },
+  {
+   "seed": 65519,
+   "arm": "armed",
+   "day": 143,
+   "dipBefore": 102,
+   "dipAfter": 0,
+   "step": -102,
+   "dipLinksBefore": 3,
+   "dipLinksAfter": 0,
+   "channel": "succession",
+   "link": "village_1",
+   "ovName": "Stonebridge",
+   "evidence": [
+    "succession notes d143: Stonebridge pressed tribute down in Haven's chaos.",
+    "trust 44->36 (funeral-hour haircut), arrears 0->0"
+   ]
+  },
+  {
+   "seed": 65521,
+   "arm": "armed",
+   "day": 134,
+   "dipBefore": 102,
+   "dipAfter": 0,
+   "step": -102,
+   "dipLinksBefore": 3,
+   "dipLinksAfter": 0,
+   "channel": "succession",
+   "link": "village_spl_30_96021",
+   "ovName": "The Hungry Road II",
+   "evidence": [
+    "succession notes d120,121,134: Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table.",
+    "trust 41->34 (funeral-hour haircut), arrears 0->0"
+   ]
+  },
+  {
+   "seed": 65522,
+   "arm": "control",
+   "day": 149,
+   "dipBefore": 102,
+   "dipAfter": 0,
+   "step": -102,
+   "dipLinksBefore": 3,
+   "dipLinksAfter": 0,
+   "channel": "succession",
+   "link": "village_3",
+   "ovName": "Ashford",
+   "evidence": [
+    "succession notes d142,149: Ashford pressed tribute down in Haven's chaos.",
+    "trust 43->25 (funeral-hour haircut), arrears 5638->5638",
+    "also flipped: village_spl_31_23754"
+   ]
+  }
+ ],
+ "counts": {
+  "succession": 6,
+  "trust-decay": 1
+ }
+}
