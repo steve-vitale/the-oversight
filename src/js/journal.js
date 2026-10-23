@@ -36,7 +36,7 @@
 //   - journalOpening()
 //   - noteTastings(pid, count, leveled)
 //   - noteHungerNight()
-//   - nightfallDebrief()
+//   - nightfallDebrief(dayJustEnded)
 //   - writeEpitaph(old, cause)
 //   - welcomeBearer(old, cause)
 // rules:
@@ -1119,7 +1119,7 @@
       return ok;
     },
 
-    // nightfallDebrief(): the nightfall debrief micro-beat (roguelike
+    // nightfallDebrief(dayJustEnded): the nightfall debrief micro-beat (roguelike
     // celebration P4-4, Steve 2026-10-22 — YES ruling). ONE narrated line
     // at sleep: what the village learned today, read ONLY from the
     // journal's own diary entries (plant entries + margins) stamped with
@@ -1127,13 +1127,18 @@
     // repeats what was already journaled, naming the plant by its believed
     // name (knowledge-gated via _calledName). Silent when nothing was
     // learned (no filler). Kinds that are circumstances, not lessons
-    // (hunger, epitaph, newhand), are never counted. Returns true when it
-    // narrated. Called from the endDay wrap BEFORE the overnight sim,
-    // while scholar.day is still the day just ended.
-    nightfallDebrief() {
+    // (hunger, epitaph, newhand), are never counted. Called from the
+    // endDay wrap AFTER the overnight sim (journey-landing r39: the
+    // pre-sim call missed every overnight-journaled learning — the
+    // villageBriefing → flowVillageKnowledge entries are stamped with the
+    // day just ended but written after a pre-sim debrief already ran;
+    // seed 309: 12 sightings, 0 debriefs). dayJustEnded is the pre-roll
+    // day captured by the wrap; the no-arg form reads the current
+    // scholar.day (proof-test + direct-call contract).
+    nightfallDebrief(dayJustEnded) {
       try {
         if (this.over) return false;
-        const today = (this.state.scholar || {}).day || 0;
+        const today = (dayJustEnded != null) ? dayJustEnded : ((this.state.scholar || {}).day || 0);
         if (today <= 0) return false;
         const RANK = {
           mastery: 6, triumph: 6, deeper: 5, poison: 4, part: 3,
@@ -1351,10 +1356,16 @@
   const origEndDay = Game.endDay;
   if (origEndDay) Game.endDay = function () {
     // NIGHTFALL DEBRIEF (roguelike-celebration P4-4): one narrated line at
-    // sleep — before the overnight sim, while scholar.day is still the day
-    // just ended, so the journal read stamps correctly. See nightfallDebrief.
-    try { this.nightfallDebrief(); } catch (e) { console.warn('[nightfall] debrief call', e); }
+    // sleep — AFTER the overnight sim, so village learning journaled
+    // overnight (villageBriefing → flowVillageKnowledge, stamped with the
+    // day just ended) is included. journey-landing r39: calling it BEFORE
+    // the overnight sim missed every overnight-journaled learning (seed
+    // 309: 12 sightings, 0 debriefs) — the entries are written after a
+    // pre-sim debrief already ran. Capture the pre-roll day first; the
+    // debrief reads that day's entries.
+    const endedDay = (this.state.scholar || {}).day || 0;
     const r = origEndDay.call(this);
+    try { this.nightfallDebrief(endedDay); } catch (e) { console.warn('[nightfall] debrief call', e); }
     try {
       const mem = (this.state.village.memory || {});
       for (const [vid, ms] of Object.entries(mem)) {
