@@ -163,6 +163,38 @@ warm because the play is lawful — when wrongs happen, the cold machinery
 engages (Lucia's -8 bond with Arthur). Rivalries exist as a latent
 system, not a lived one, under peaceful play.
 
+## Landing (2026-10-23T12:4xZ) — BLOCKED, FAIL LOUD
+
+Commit b371219df (50 files) → rebased clean onto master 5d18ac937 as
+c0624737b; proofs re-green post-rebase (moot-friendship 18/18, probe 9/9);
+worktree clean. The `git merge --ff-only journey2-social` in the main tree
+FAILS: `fatal: update_ref failed for ref 'ORIG_HEAD': cannot update ref
+'ORIG_HEAD': couldn't write '.../.git/ORIG_HEAD.lock'` — write() returns
+EPERM.
+
+Root-caused (not retried blindly): the EPERM is on the write(2) syscall
+itself, intermittent, scoped to `/home/hatch/workspace/the-scattering/.git/`
+— ALL git ref updates fail (ORIG_HEAD, refs/heads/*, merge); direct
+python os.open+os.write reproduces EPERM while shell `echo >` to the same
+dir flaps OK/EPERM across seconds; /tmp and repo-root writes are
+consistently fine. Started ~12:28Z, still blocked at ~12:45Z. Same
+container-EPERM class as the jest chown quirk (AGENTS.md), new surface:
+git lock-file writes.
+
+NOT forced: manual ref surgery on the sacred main tree during a
+filesystem flap risks corruption. Nothing half-done: branch
+journey2-social@c0624737b is IN the main repo, rebased on current master,
+proofs green — the ONLY remaining step is the ff-merge.
+
+Recovery (exact): when the flap clears, in ~/workspace/the-scattering:
+`git merge --ff-only journey2-social` → then
+`bash scripts/worktree-release.sh journey2-social merged` →
+`git worktree remove --force ~/workspace/worktrees/journey2-social` →
+`git branch -d journey2-social` → `bash scripts/worktree-reap.sh`.
+Worktree left registered with a FRESH heartbeat so the reaper won't touch
+it; lock file deleted per body rule. Next playtest-loop-2 run will hit the
+existing journey2-social slug at registration — read this note first.
+
 ## Reachable / fun / winnable (leg 5)
 
 - REACHABLE: yes. Conversations, gossip, moots, the friendship voicing
