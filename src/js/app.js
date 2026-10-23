@@ -19488,6 +19488,7 @@
         <div class="card codex"><h3>⚡ ${esc(t.name)}</h3><p class="small">${esc(t.effect)}</p></div>`).join('') : ''}
       ${Game.codexDeeds && Game.codexDeeds().length ? '<h1 class="title" style="font-size:18px">DEEDS</h1><p class="small"><i>the village remembers who did what. synced to the book.</i></p>' + Game.codexDeeds().slice(0, 12).map(d => `
         <div class="card codex"><h3>${esc(Game.displayName ? Game.displayName(d.vid) : 'Someone')} <span class="small" style="opacity:.6">· day ${d.day}</span></h3><p class="small">${esc(d.text)}</p></div>`).join('') : ''}
+      ${(() => { try { return Game.fallenMemorialHTML ? Game.fallenMemorialHTML() : ''; } catch (e) { console.warn('[codex] fallen memorial', e && e.message); return ''; } })()}
       ${Game.villagerBoard ? '<h1 class="title" style="font-size:18px">CONTEST</h1><p class="small"><i>the leaderboard. the show is watching.</i></p>' + Game.villagerBoard().slice(0, 6).map((r, i) => `
         <p class="small">${i + 1}. <b>${esc(r.name)}</b> — ${r.score}${r.you ? ' (you)' : ''}${r.trend ? ' ' + r.trend : ''}</p>`).join('') : ''}
       ${oversightPanel()}
@@ -19545,6 +19546,14 @@
       }).join('') : ''}
       ${codexAliensSection(Game.state.codex.aliens || {})}
       </div></section>`;
+    // THE FALLEN (rogue P0-3 2026-10-22): tapping a name with a journal
+    // epitaph toggles their last line.
+    screen.querySelectorAll('[data-fallen-epitaph]').forEach(btn => {
+      btn.onclick = () => {
+        const t = screen.querySelector('[data-fallen-epitaph-text="' + btn.getAttribute('data-fallen-epitaph') + '"]');
+        if (t) t.style.display = t.style.display === 'none' ? '' : 'none';
+      };
+    });
     document.getElementById('b-back').onclick = () => { fieldPanel = null; expeditionScreen(); };
   }
 

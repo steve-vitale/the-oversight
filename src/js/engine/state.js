@@ -45,7 +45,9 @@
       // Set properly in newGame (this is just the template).
       pantryKcal: 36000, waterL: 12, morale: 'steady',
       villagers: [], // villager ids (living)
-      fallen: [],    // {villagerId, day, cause} — remembered
+      fallen: [],    // {villagerId, name, day, cause} — remembered; name is the
+                     // knowledge-gated firstRef frozen at death ("if you don't
+                     // know, it doesn't show")
       favor: 0,
     };
   }

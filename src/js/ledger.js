@@ -722,7 +722,7 @@
       // without this push the mantle transfer left no record the scholar died.
       try {
         v.fallen = v.fallen || [];
-        v.fallen.push({ villagerId: oldId, day: s.day || 0, cause: cause || 'the wild' });
+        v.fallen.push({ villagerId: oldId, day: s.day || 0, cause: cause || 'the wild', name: this.fallenName(oldId) });
       } catch (e) {}
       try { this.removeVillager(oldId, 'killed'); } catch (e) {}
       this.lineage().push({ name: oldName, villagerId: oldId, epithet: this.leadershipEpithet(), day: s.day || 0, cause: cause || 'the wild' });

@@ -620,6 +620,19 @@ The exposure source — the village keeps the list. Every truth dragged into the
 
 **Consumes:** —
 
+### fallen-memorial (`fallen-memorial.js`)
+The village's memorial roll — v.fallen as readable fiction. Every ordinary death becomes a permanent, knowledge-gated Codex line: name (as known at death), day, cause, plus the journal epitaph when the dead held the mantle. (Roguelike Celebration 2026, Talk 7 P0-3.)
+
+**Provides:** fallenName(vid), fallenEpitaph(vid), memorialRoll(), fallenMemorialHTML()
+
+**Rules:**
+- KIN.md: the Taken are NEVER memorialized as dead. v.fallen only ever receives real roster deaths through the death pipeline — the Taken are never villager records, so the write sites are the enforcement point. (code: fallen-memorial.js memorialRoll)
+- Memorials knowledge-gate names ("if you don't know, it doesn't show"): the name is frozen via firstRef at death time — known to first name, unknown to a distinguishing descriptor, never the unrevealed true name. The dead bearer is the exception: the village knew its scholar, so the true first name is stored (never the dialogue token 'you'). (code: fallen-memorial.js fallenName)
+- In-run only: the roll lives on state.village and dies with the run. No cross-run saga (metaProgression law). (code: fallen-memorial.js memorialRoll)
+- No silent actions: the empty roll says so aloud; epitaphs are opt-in taps, never auto-shown walls of text. (code: fallen-memorial.js fallenMemorialHTML)
+
+**Consumes:** village.fallen, state.scholar.day, state.codex.mantle.marginalia (journal epitaphs)
+
 ### favor-company (`favor-company.js`)
 A specific night by a shared fire, with physical attendance, saved progress and an exact promise receipt.
 
