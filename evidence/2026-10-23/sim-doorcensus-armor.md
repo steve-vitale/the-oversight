@@ -62,6 +62,17 @@ census shut on?
 
 ## Results (24/24 configs complete, anchor db7a0456381d, completed 2026-10-23 ~12:40Z)
 
+**ANCHOR NOTE (finding #793, added post-rebase):** the 24 configs ran at
+db7a0456381d. Master moved to 18c621cd4 (3 commits: journey-deepening
+r35, sim-vetkill-autopsy, journey-establishment r28) before landing.
+The move contains ZERO src/js changes (docs + evidence + scripts-only,
+verified via name-only diff), and a post-rebase determinism spot-check
+re-ran s65515 armed + s65511 control at 18c621cd4: day-hash sequences
+byte-identical to the committed JSONs (180/180 and 78/78), same
+outcomes (w5Day=146 / null). Proof re-run green at the new anchor
+(15/15, E4=c10c2bf6f6f8). The census numbers stand at the new anchor;
+the branch was rebased onto 18c621cd4 for the ff-only merge.
+
 **Verdict: GO — the armor structure MOVES THE WAVE-5 DOOR.**
 
 PRIMARY (binding): doors opened armed vs control on identical seeds.
