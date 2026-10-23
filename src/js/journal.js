@@ -36,6 +36,7 @@
 //   - journalOpening()
 //   - noteTastings(pid, count, leveled)
 //   - noteHungerNight()
+//   - nightfallDebrief()
 //   - writeEpitaph(old, cause)
 //   - welcomeBearer(old, cause)
 // rules:
@@ -1118,6 +1119,58 @@
       return ok;
     },
 
+    // nightfallDebrief(): the nightfall debrief micro-beat (roguelike
+    // celebration P4-4, Steve 2026-10-22 — YES ruling). ONE narrated line
+    // at sleep: what the village learned today, read ONLY from the
+    // journal's own diary entries (plant entries + margins) stamped with
+    // the day just ended. Never invents, never grants knowledge — it
+    // repeats what was already journaled, naming the plant by its believed
+    // name (knowledge-gated via _calledName). Silent when nothing was
+    // learned (no filler). Kinds that are circumstances, not lessons
+    // (hunger, epitaph, newhand), are never counted. Returns true when it
+    // narrated. Called from the endDay wrap BEFORE the overnight sim,
+    // while scholar.day is still the day just ended.
+    nightfallDebrief() {
+      try {
+        if (this.over) return false;
+        const today = (this.state.scholar || {}).day || 0;
+        if (today <= 0) return false;
+        const RANK = {
+          mastery: 6, triumph: 6, deeper: 5, poison: 4, part: 3,
+          handling: 3, confirm: 2, sighting: 2, tasting: 2, thin: 1,
+        };
+        const PHRASE = {
+          sighting: 'named and noted', tasting: 'first tasted',
+          deeper: 'understood at last', part: 'a use found',
+          handling: 'handled into knowledge', confirm: 'confirmed, not hearsay',
+          thin: 'heard, unconfirmed', mastery: 'mastered',
+          poison: 'respected the hard way', triumph: 'taught the whole of it',
+        };
+        const jn = ((this.state.codex || {}).journal) || {};
+        const learned = [];
+        const plants = jn.plants || {};
+        for (const pid of Object.keys(plants)) {
+          let name = pid;
+          try { name = this._calledName(pid) || pid; } catch (e2) { console.warn('[nightfall] name', e2); }
+          for (const e of (plants[pid] || [])) {
+            if (e && e.day === today && RANK[e.kind]) learned.push({ name, kind: e.kind });
+          }
+        }
+        for (const e of (jn.margins || [])) {
+          if (e && e.day === today && RANK[e.kind]) learned.push({ name: null, kind: e.kind });
+        }
+        if (!learned.length) return false;
+        learned.sort((a, b) => RANK[b.kind] - RANK[a.kind]);
+        const top = learned[0];
+        const what = top.name ? `${top.name} — ${PHRASE[top.kind] || 'noted'}` : (PHRASE[top.kind] || 'noted');
+        const line = learned.length === 1
+          ? `The fire burns low. One new line in the journal: ${what}.`
+          : `The fire burns low. ${learned.length} new lines in the journal tonight — loudest: ${what}.`;
+        this.say(line);
+        return true;
+      } catch (e) { console.warn('[nightfall] debrief', e); return false; }
+    },
+
     // writeEpitaph(old, cause): the dying life's last margin note — written
     // WHILE they're still the bearer, in their own register. welcomeBearer:
     // the successor's first line, in the NEW hand. Called from the
@@ -1297,6 +1350,10 @@
   // Mining the village memory: gifts, rescues, teaching.
   const origEndDay = Game.endDay;
   if (origEndDay) Game.endDay = function () {
+    // NIGHTFALL DEBRIEF (roguelike-celebration P4-4): one narrated line at
+    // sleep — before the overnight sim, while scholar.day is still the day
+    // just ended, so the journal read stamps correctly. See nightfallDebrief.
+    try { this.nightfallDebrief(); } catch (e) { console.warn('[nightfall] debrief call', e); }
     const r = origEndDay.call(this);
     try {
       const mem = (this.state.village.memory || {});
