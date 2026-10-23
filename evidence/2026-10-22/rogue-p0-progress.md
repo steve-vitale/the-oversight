@@ -8,11 +8,9 @@
 | 8 | Player naming rite (T7) | `3fbe47a4e` | [needs-eyes] name babies + use-names at trust ≥75; new src/js/naming-rite.js |
 | 4 | End-of-run "What the village learned" debrief (T4) | `fef2239c7` | [needs-eyes] ~50 lines on death screen; in-run only, grants nothing |
 | 2+7 | Shared text module + verb-conjugation pipe (T5) | `c01f2e5ab` | [needs-eyes] new src/js/text.js (article/pronoun/slot/conjugation); 18 article-ternary swaps; fixes "an eSL teacher" + 3 verb breaks; sw.js regenerated |
+| 5 | Declarative npcTrigger registry (T2) | `c94951675` | pure refactor, zero behavior change (4-seed A/B byte-identical proof); unlocks P1 dormant-motivation rows |
 
-## In flight
-- P0-5 (T2): declarative npcTrigger registry — worker running; pure refactor, zero-behavior-change proof required
-
-No P0s killed.
+## Status: COMPLETE — all 8 P0s landed, zero killed.
 
 ## Merge notes (for the record)
 - index.html version-tag collisions on rebase (ship loop bumps ?v= tags): resolved by taking master's tags and re-adding the new script line with the new tag. Recurred on rogue-naming and rogue-fallen.
