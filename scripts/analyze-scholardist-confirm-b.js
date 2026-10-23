@@ -18,10 +18,16 @@
 const fs = require('fs');
 const path = require('path');
 const DIR = path.join(__dirname, '..', 'evidence', '2026-10-23', 'perseed-scholardist-confirm-b');
+// R2: SEED_LIST="92801,...,92816" restricts analysis to the r2 corpus
+// (the dir holds r1 s67501-s67516 rows too). No SEED_LIST = whole dir.
+const SEED_FILTER = process.env.SEED_LIST
+  ? new Set(process.env.SEED_LIST.split(',').map(s => +s.trim()))
+  : null;
 
 function load() {
   return fs.readdirSync(DIR).filter(f => /\.json$/.test(f))
-    .map(f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8')));
+    .map(f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8')))
+    .filter(r => !SEED_FILTER || SEED_FILTER.has(r.seed));
 }
 // Refined mechanism-class taxonomy (pre-registered for the confirm per the
 // pilot's metric-review #2). Monster-name causes (registerDeath cause =
@@ -107,7 +113,8 @@ function main() {
     if ((t.grantedKcal || 0) > 0) { engagedRuns++; engagedPairs.push(p); }
   }
   console.log(`mechanism (armed, ${pairs.length} configs): thinMeals=${thinMeals} halves=${halves} grants=${grants} grantedKcal=${grantedKcal} voices=${voices} errors=${errs}`);
-  console.log(`ENGAGEMENT kill-fast gate: grantedKcal>0 on ${engagedRuns}/${pairs.length} armed runs  bar: >= 12/${pairs.length}  => ${engagedRuns >= 12 ? 'PASS' : 'KILL'}`);
+  const engageBar = Math.ceil(0.375 * pairs.length); // the r1 bar (>=12/32) scaled
+  console.log(`ENGAGEMENT kill-fast gate: grantedKcal>0 on ${engagedRuns}/${pairs.length} armed runs  bar: >= ${engageBar}/${pairs.length}  => ${engagedRuns >= engageBar ? 'PASS' : 'KILL'}`);
   console.log('');
 
   // wall

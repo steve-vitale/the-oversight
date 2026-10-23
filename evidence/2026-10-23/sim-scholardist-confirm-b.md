@@ -298,3 +298,83 @@ next-run arms, not this-run re-scores.
 - **Telemetry deviation** (coordinator's step, run body §10): corpus is
   evidence/2026-10-23/perseed-scholardist-confirm-b/ (64 per-seed JSONs),
   anchor b47814fa7, substrate FEASTSCALE_R13=1/SEATDRIVE=0.
+
+---
+
+# Confirm r2 — fresh seeds 92801–92816 (2026-10-23)
+
+Run: oversight-flesh-out-loop-b, arm sim-scholardist-confirm-b (r2). Worker
+tree: ~/workspace/worktrees/sim-scholardist-confirm-b (base master
+30b6ad6e3, verified — main tree clean, same commit). Axis: food-economy.
+
+R1 context: the r1 confirm (seeds 67501–67516, above) landed NO-GO
+(PRIMARY 23→30; g1 32→40 FAIL; g2/g3/g4 PASS; engagement 32/32): the
+pilot's GO did not reproduce, diagnosed as deterministic-chaos dominance
+of the corpus-total instrument (pair directions 8 better / 10 worse / 14
+same), mechanism sound (312 grants / 307k kcal / 0 errors). This r2 run is
+a pre-registered replication on 16 NEW fresh seeds per the task directive
+(the r1 metric review argued "fix the metric or the lever's chaos seed
+first" rather than re-running the same bars — this r2 holds the bars and
+adds a second corpus so the r1 NO-GO is not decided by one 32-pair draw;
+the exposure-normalized form is computed as SECONDARY analysis only).
+
+## Pre-registration r2 (binding, docs/MEASUREMENT.md §§9–12, 14–15 — written BEFORE any r2 sims)
+
+- **Question**: does the scholar's-share GO (pilot) / NO-GO (r1) resolve on
+  a second fresh-seed corpus — is the r1 NO-GO a corpus artifact or a real
+  mechanism miss?
+- **Lever**: scripts/layers/scholardist-b.js (env SCHOLARDIST=1), on master
+  since 67ba0e496 — NOT recommitted by this run. Same choke points, same
+  thin gate (pantryFreshDays()<2 at the scholar's meal), same grant
+  contract (conserved half drawn as real pantry items for the hungriest
+  eligible villager, voiced, day-guard, zero src/js). Gate OFF = noop.
+- **Substrate**: FEASTSCALE_R13=1 / SEATDRIVE=0 (pilot/r1 substrate).
+- **Policies**: competent-player leadfeast + belongfeast (feastscale).
+- **Seeds**: 92801–92816 — 16 FRESH seeds (filename-criterion verified
+  pre-run 2026-10-23: no filename in the tree names any of these seeds;
+  content hits are numeric pantry-kcal values / float decimals, not seed
+  uses). Paired within-run control-vs-armed on identical seeds.
+- **Horizon**: 180d death-aware (dead villages stop simulating).
+- **PRIMARY (binding GO)**: thin-pool starvation deaths (cause-class
+  'starvation' AND death-day pantryFreshDays<2), corpus totals over the 32
+  paired configs: armed ≤ control−2 AND control ≥ 1 (same bar as pilot
+  and r1 — same bar, fresh seeds).
+- **Guardrails** (all corpus-total/paired, must all PASS):
+  1. total starvation deaths armed ≤ control;
+  2. median survival (game days) armed ≥ control−10d;
+  3. no new death modes (mechanism-class level — r1's refined taxonomy,
+     applied at analysis time from raw causes);
+  4. median per-run median daily pantryFreshDays armed ≥ 0.8 × control
+     (no median pantry collapse).
+- **Engagement kill-fast gate**: grantedKcal > 0 on ≥ 12/32 armed runs
+  (3/8 proportion, same as r1), else killed-at-pilot.
+- **Instrument**: the balanced panel (scripts/balance-panel.js) per §15 is
+  the instrument for the before/after comparison; the pre-registered
+  threshold above is the judge. Env-gated lever ⇒ automated panel compare
+  is descriptive-by-construction (sim-findings.md #796); the manual
+  paired-row comparison judges. The r2 panel compare .md is attached as
+  evidence/2026-10-23/scholardist-confirm-r2-panel-primary.md.
+- **Metric review note**: exposure-normalized thin-pool deaths per 100
+  village-days is SECONDARY analysis only — never the judge. A miss is
+  NO-GO, never re-scored (§14).
+- **Verdict classes**: GO (PRIMARY + all guardrails PASS) / NO-GO
+  (primary or any guardrail missed — a miss is NO-GO, never re-scored
+  per §14) / killed-at-pilot (engagement gate missed).
+- **Instrument proof** (scripts/test-scholardist-confirm-b.js, BEFORE the
+  r2 sweep): gate-off byte-identity (E1 det-gate on fresh seed 92801),
+  mechanism (E0 unit + E2 sim smoke), sim smoke, DET (E3). MUST be ALL
+  GREEN before sweeping.
+
+## Canon
+
+- docs/CANON.md read first. docs/PRESERVATION.md (food ladder —
+  cooked/safe; the grant uses the cook:true pantryDraw like the villagers'
+  own meals). docs/STORAGE.md, docs/DECISIONS.md 2026-10-21 SURPLUSFEED
+  ruling (behavioral draw-side choice, not a post-hoc trim). No silent
+  actions (#761: voiced by construction). d1 thin-gate artifact, the
+  harvest-ledger attribution fiction, and the trust question are the
+  carried blanks (pilot/r1 documented).
+
+## RESULTS r2
+
+(pending — sweep, analysis, panel compare, sense-test)

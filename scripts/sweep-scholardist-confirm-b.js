@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 // sweep-scholardist-confirm-b.js — CONFIRM sweep for the scholar's share.
 //
-// 16 FRESH seeds (67501-67516, verified never used before via the FILENAME
-// criterion: no filename in the tree names any of these seeds; content hits,
-// if any, are numeric-kcal-value hits reported for review, not filename
-// matches) x {leadfeast, belongfeast} x {control, armed} = 64 configs,
-// paired identical seeds, 180d death-aware horizons (runDays stops on
+// R1: 16 FRESH seeds 67501-67516 x {leadfeast, belongfeast} x {control, armed}
+//     = 64 configs (landed evidence, NO-GO).
+// R2: 16 FRESH seeds 92801-92816 (SEED_LIST env) x {leadfeast, belongfeast}
+//     x {control, armed} = 64 configs. Run with:
+//     SEED_LIST="92801,...,92816" node scripts/sweep-scholardist-confirm-b.js
+//
+// Freshness is asserted inside (FILENAME criterion: no filename in the tree
+// names any of the seeds; content hits, if any, are numeric-kcal-value hits
+// reported for review, not filename matches).
+//
+// Paired identical seeds, 180d death-aware horizons (runDays stops on
 // Game.over). Substrate: FEASTSCALE_R13=1 / SEATDRIVE=0 (the pilot substrate).
 //
 // Emits per-seed JSONs to evidence/2026-10-23/perseed-scholardist-confirm-b/
@@ -31,7 +37,13 @@ const { stdSnapshot, POLICY_REGISTRY } = require('./sweep-compare');
 const scholardist = require('./layers/scholardist-b');
 
 const SEEDS = [];
-for (let s = 67501; s <= 67516; s++) SEEDS.push(s);
+// R2 override: SEED_LIST="92801,92802,...,92816" (confirm r2 fresh corpus).
+// Default is the r1 corpus 67501-67516.
+if (process.env.SEED_LIST) {
+  for (const s of process.env.SEED_LIST.split(',')) SEEDS.push(+s.trim());
+} else {
+  for (let s = 67501; s <= 67516; s++) SEEDS.push(s);
+}
 const POLICIES = ['leadfeast', 'belongfeast'];
 // Parallel-split support: SEED_FILTER="67501,67502" and/or
 // POLICY_FILTER="leadfeast" restrict the sweep to a disjoint subset (two
@@ -56,7 +68,10 @@ const OUTDIR = path.join(ROOT, 'evidence', '2026-10-23', 'perseed-scholardist-co
 function assertFreshSeeds() {
   const own = new Set(['sweep-scholardist-confirm-b.js', 'analyze-scholardist-confirm-b.js',
     'build-scholardist-confirm-panel.js', 'sense-scholardist-b.js',
-    'sim-scholardist-confirm-b.md', 'scholardist-confirm-panel-primary.md']);
+    'sense-scholardist-confirm-b.js', 'test-scholardist-b.js',
+    'test-scholardist-confirm-b.js',
+    'sim-scholardist-confirm-b.md', 'scholardist-confirm-panel-primary.md',
+    'scholardist-confirm-r2-panel-primary.md']);
   const filenameHits = [];
   const seedContextHits = [];
   const kcalLikeHits = [];
@@ -91,7 +106,7 @@ function assertFreshSeeds() {
   if (kcalLikeHits.length) console.log('note: numeric-value content hits (kcal-like, not seed uses):\n  ' + kcalLikeHits.slice(0, 8).join('\n  '));
   if (filenameHits.length) throw new Error('SEED FRESHNESS FAIL — seed named in filenames: ' + filenameHits.join(', '));
   if (seedContextHits.length) throw new Error('SEED FRESHNESS FAIL — seeds used in seed context: ' + seedContextHits.join(', '));
-  console.log('seed freshness: 16/16 fresh (FILENAME criterion: no filename names any seed; no seed-context content hits)');
+  console.log(`seed freshness: ${RUN_SEEDS.length}/${RUN_SEEDS.length} fresh (FILENAME criterion: no filename names any seed; no seed-context content hits)`);
 }
 
 function anchor() {

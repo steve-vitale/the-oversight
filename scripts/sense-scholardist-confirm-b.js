@@ -7,7 +7,8 @@
 // runs 150d of belongfeast, and prints every scholar's-share beat with the
 // 10 preceding and 4 following narration lines — the actual transcript in
 // context, so a human can judge meaning/coherence (SENSE-TESTING LAW), not
-// just beat counts. Seed 67501 is a fresh confirm seed (never used before).
+// just beat counts. Seed via SENSE_SEED (default 67501, the r1 fresh seed;
+// r2 uses 92801) — must be a fresh seed, never used before.
 'use strict';
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
@@ -19,7 +20,7 @@ const scholardist = require('./layers/scholardist-b');
   process.env.SCHOLARDIST = '1';
   process.env.FEASTSCALE_R13 = '1';
   process.env.SEATDRIVE = '0';
-  const seed = 67501;
+  const seed = process.env.SENSE_SEED ? +process.env.SENSE_SEED : 67501;
   const { Game, manifest } = await loadGame({ seed, mode: 'scholardist-confirm-sense' });
   await setupGame(Game, 'Columbus, Ohio');
   const { tele, uninstall } = scholardist.install(Game);

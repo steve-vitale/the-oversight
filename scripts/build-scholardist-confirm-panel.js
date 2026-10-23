@@ -17,11 +17,19 @@ const { execSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
 const DIR = path.join(ROOT, 'evidence', '2026-10-23', 'perseed-scholardist-confirm-b');
-const OUT = path.join(ROOT, 'evidence', '2026-10-23', 'scholardist-confirm-panel-primary');
+// R2: SEED_LIST="92801,...,92816" restricts to the r2 corpus (default r1);
+// OUT env overrides the output stem (r2: scholardist-confirm-r2-panel-primary)
+// so the r1 panel files are not clobbered.
+const OUT = path.join(ROOT, 'evidence', '2026-10-23', process.env.OUT || 'scholardist-confirm-panel-primary');
 const score = require('./lib/balance-scorecard');
 const contract = require('./balance-metrics.json');
 
-const SEEDS = []; for (let s = 67501; s <= 67516; s++) SEEDS.push(s);
+const SEEDS = [];
+if (process.env.SEED_LIST) {
+  for (const s of process.env.SEED_LIST.split(',')) SEEDS.push(+s.trim());
+} else {
+  for (let s = 67501; s <= 67516; s++) SEEDS.push(s);
+}
 const POLICIES = ['leadfeast', 'belongfeast'];
 
 function rowMetrics(r) {
