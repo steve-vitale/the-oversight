@@ -1045,3 +1045,9 @@ villagers go out to produce at all). Design thread for the food-economy
 lane, not yet an implementation order. Note: the governor's fiction
 ("villagers choose not to haul what'll rot") already gestured at this, but
 the implementation trimmed outcomes instead of changing decisions.
+
+## 2026-10-22 — Roguelike Celebration P1 rulings (Steve, verbatim in chat)
+- YES to most P1s: shark adversary probe, 11 dormant motivations → objPick, shareable run seeds, season-turn beat, nightfall debrief, persistent grave markers, per-archetype reward specs, mid-trip re-targeting, esoteric achievements.
+- "Seek knowledge" agenda: NOT standalone — fold into quest/favor system.
+- Hunt miss-streak pity: REJECTED. "No pity, that's why we have skills that can be improved. Knowledge is the pity system." (Standing: knowledge-gating is the luck answer, not pity timers.)
+- Founding Oath: parked — Steve needs more context/justification before deciding.
