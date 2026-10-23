@@ -673,7 +673,12 @@
         // — the "on top of it all" line spamming back and forth. The first
         // compounding stands; later different-kind raises ride silently.
         if (!st.relief.compounded) {
-          var kindLabel = kind === 'hunger' ? 'hunger' : kind === 'sickness' ? 'sickness' : 'this';
+          // COMPOUND LABELS (crisis leg r45 2026-10-23): name every kind. The
+          // r44 label only knew hunger/sickness — raid and storm compounds
+          // read "And now this, on top of it all" in natural play (r45
+          // panel: 4/6 firings). The beat names the NEW crisis landing on
+          // the open relief.
+          var kindLabel = { hunger: 'hunger', sickness: 'sickness', raid: 'a raid', storm: 'the storm' }[kind] || 'this';
           st.relief.kind = kind;
           st.relief.compounded = true;
           st.relief.partsLeft = Math.max(st.relief.partsLeft || 0, 6);
