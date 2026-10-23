@@ -1,0 +1,18 @@
+=== seed 9984 day 81 — conversation with Liam (liam_davis) ===
+occupation=farmer temperament=steady trust=86 dead=false
+want: ask_favor (stage 1)
+
+THEM: "Never mind this wound — we got it handled. Thanks anyway. Stay near tonight? Please. I don't want to be alone when the light goes."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I keep hearing things past the treeline. I know it's probably nothing. I just — don't want to be alone with it tonight."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+(want=ask_favor stage=3)
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Okay. Okay. Back to it."
+want final: id=ask_favor stage=3 resolution=deflected

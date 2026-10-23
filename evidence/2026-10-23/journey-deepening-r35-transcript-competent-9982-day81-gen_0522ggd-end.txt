@@ -1,0 +1,15 @@
+=== seed 9982 day 81 — conversation with June (gen_0522ggd) ===
+occupation=mechanic temperament=withdrawn trust=85 dead=false
+want: curious (stage 1)
+
+THEM: "Can I be honest? Are you angry? At whoever did this. At the sky. At anything."
+(turn0 choices: deflect_q, ans:q_angry:a_yes, ans:q_angry:a_tired, ans:q_angry:honest_pass, leave, silence)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "...I'm going to go be quiet somewhere else now."
+want final: id=curious stage=3 resolution=engaged

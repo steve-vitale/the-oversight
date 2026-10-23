@@ -264,9 +264,17 @@ siege is survivable-in-principle, never a scripted wipe.
 Steve 2026-10-06: "I loved undertale — reward players for learning and
 thinking outside the box." Every wave 1–2 monster def carries a `counter`
 field: the lateral trick that trivializes its fight (a move you make, not a
-stat you stack). Waves 3–5 are deliberately counter-less for now — the
-signature-mechanics workers own that space (their counterplay is already
-engine-real; wiring it to the ledger convention is their call).
+stat you stack). Waves 3–5 carry no `counter` data field — the signature-
+mechanics workers own that space (their counterplay is already engine-real).
+The signature counterplay IS learnable, through a separate channel from the
+ledger convention: `noteVillagerTrickObservation` (game.js) — a villager who
+survives an encounter with a signature mechanic (fled, drove it off, saw it
+in time) brings home an observation, and two observations teach the village
+the trick (`state.villagerTricks`), announced with the same "COUNTER LEARNED"
+beat. Observed live 2026-10-23 (deepening r35): a Spool wanderer was never
+fought, but the village pieced together "feed it nothing" from survived
+encounters. So "counter-less" means "no `counter` field / no ledger points",
+not "no learnable counterplay".
 
 Discovery channels (all reachable):
 1. **Perform the trick** — the Undertale moment. `counter.kind` names a player

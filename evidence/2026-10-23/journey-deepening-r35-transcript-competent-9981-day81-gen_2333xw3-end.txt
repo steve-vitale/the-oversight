@@ -1,0 +1,15 @@
+=== seed 9981 day 81 — conversation with Nia (gen_2333xw3) ===
+occupation=lawyer temperament=gentle trust=90 dead=false
+want: ask_favor (stage 1)
+
+THEM: "Never mind the creek water run — we got it handled. Thanks anyway. We're eating through stores faster than we replace them. Forage with me tomorrow? I know where the coconut grows thick."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "The stores won't stretch past tomorrow, and I'm not choosing who eats. Nobody's worked where the coconut grows thick in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "I should go. Take care of yourself, okay?"
+want final: id=ask_favor stage=3 resolution=deflected

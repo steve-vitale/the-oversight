@@ -1,0 +1,12 @@
+=== seed 9981 day 81 — conversation with Franz (gen_ghdbghb) ===
+occupation=aquarium keeper temperament=fidgety trust=78 dead=false
+want: ask_favor (stage 1)
+
+THEM: "Never mind the creek water run — we got it handled. Thanks anyway. I can't reach this properly. Will you help me clean it?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,15 @@
+=== seed 9984 day 81 — conversation with David (david_kim) ===
+occupation=plumber temperament=cautious trust=90 dead=false
+want: ask_favor (stage 2)
+
+THEM: "About the pantry run — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I did the count twice. The count doesn't change. Meet me at where the bissap hibiscus grows thick and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Careful out there. I mean it."
+want final: id=ask_favor stage=3 resolution=deflected

@@ -1,0 +1,12 @@
+=== seed 9983 day 36 — conversation with Aaron (gen_7cclmvb) ===
+occupation=postal worker temperament=stoic trust=90 dead=false
+want: ask_favor (stage 2)
+
+THEM: "About this wound — still need hands. Are you in?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+want final: id=ask_favor stage=3 resolution=promised
