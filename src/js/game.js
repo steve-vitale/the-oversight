@@ -28278,9 +28278,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // your share: 2000 kcal (a day's food), scaled by trust
       // trust < 30: half ration (they're watching you). 30+: full. 60+: full + bonus.
+      // NEW-VILLAGER GATE (Steve 2026-10-23): the half-ration is for NEW
+      // villagers the village doesn't know yet — the original body, or a
+      // recent arrival. A taken-over EXISTING villager eats like the villager
+      // they are: the village fed them full yesterday, and the driver changing
+      // doesn't change the person. No bearer special-casing — it's about the
+      // village, not the villager. (lineage() gains an entry at every mantle
+      // pass in ledger.js playerDeath, so a non-empty lineage means this body
+      // was taken over; isNewcomer covers mid-game arrivals via arrivedDay.)
       const pantry = v.pantry || [];
       const trust = v.trust && v.trust[scholar.villagerId] !== undefined ? v.trust[scholar.villagerId] : 10;
-      const share = trust < 30 ? 1000 : trust < 60 ? 2000 : 2200;
+      let bodyIsNew = true;
+      try {
+        const lin = (typeof this.lineage === 'function') ? (this.lineage() || []) : [];
+        const newcomer = (typeof this.isNewcomer === 'function') ? !!this.isNewcomer(this.villagerId) : false;
+        bodyIsNew = lin.length === 0 || newcomer;
+      } catch (e) { bodyIsNew = true; }
+      const share = (trust < 30 && bodyIsNew) ? 1000 : trust < 60 ? 2000 : 2200;
       // don't take more than you can hold — food doesn't vanish into the cap.
       // BANK CAP (break-it food r3 2026-10-08): kcalCap() is the one number —
       // the old 3000 literal let the meal overfill a 2400-cap bank.
