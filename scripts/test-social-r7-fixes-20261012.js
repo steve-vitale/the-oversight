@@ -61,13 +61,21 @@ function ok(cond, name) {
   const tail2 = (c2.transcript || []).filter(e => e.who !== 'you').map(e => String(e.text || ''));
   ok(tail2.some(t => leftexits.some(l => t.includes(l))), 'abrupt leave still gets a normal exit line');
 
-  // ---------- 2. dig-miss rotation ----------
+  // ---------- 2. dig-miss pool (r7 rotation; r43 no-wrap + cold-trail) ----------
+  // r43 (journey-social, THE VOICING THRESHOLD): L2' showed digs run 6+ deep
+  // and the 4-line pool wrapped mid-convo — verbatim repeats after a full
+  // cycle, the same filler-loop shape r7 fixed. Now 8 distinct lines with NO
+  // wrap; past exhaustion the narrator admits the trail is cold.
   const fake = {};
-  const digs = [0, 1, 2, 3, 4].map(() => Game.bribeDigMissLine(fake));
-  ok(new Set(digs.slice(0, 4)).size === 4, 'dig-miss: 4 distinct lines per cycle');
-  ok(digs[4] === digs[0], 'dig-miss: cycle wraps');
-  ok(digs.every(d => /prove|solid|innocent|trails/.test(d)), 'dig-miss: all lines read as investigation');
-  // per-case independence: a second case starts its own cycle
+  const digs = Array.from({ length: 9 }, () => Game.bribeDigMissLine(fake));
+  ok(new Set(digs.slice(0, 8)).size === 8, 'dig-miss: 8 distinct lines before exhaustion');
+  ok(digs.slice(0, 8).every(d => !/burns daylight/.test(d)), 'dig-miss: pool lines are investigation, not the cold-trail line');
+  ok(/burns daylight/.test(digs[8]), 'dig-miss: dig 9 speaks the honest cold-trail line (no wrap)');
+  const fake3 = {};
+  const deep = Array.from({ length: 12 }, () => Game.bribeDigMissLine(fake3));
+  ok(new Set(deep.slice(0, 8)).size === 8 && deep.slice(8).every(d => /burns daylight/.test(d)),
+    'dig-miss: no verbatim pool repeat across 12 digs');
+  // per-case independence: a second case starts its own pool
   const fake2 = {};
   ok(Game.bribeDigMissLine(fake2) === digs[0], 'dig-miss: rotation is per-case');
   // end-to-end: investigateBribery with no bribes says a pool line

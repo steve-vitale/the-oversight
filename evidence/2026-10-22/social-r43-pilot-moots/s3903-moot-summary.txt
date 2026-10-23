@@ -1,0 +1,20 @@
+# THE FRIENDSHIP EFFECT — seed 3903 (warm-competent law-abiding, 111d, 0 alive)
+
+## plots (3)
+  plot_1: Vikram -> Wei d7 active=true sprung=false resolved=false expired=false
+  plot_3: Eamon -> Ines d12 active=true sprung=false resolved=false expired=false
+  plot_5: Eamon -> Ines d18 active=false sprung=true resolved=true expired=false
+
+## cases (3)
+  case_2: ambush — accused Vikram, Ruby, Somchai — target Wei — source plot:plot_1 — role bystander — trial never — verdict none
+  case_4: ambush — accused Eamon, Ruby, Somchai — target Ines — source plot:plot_3 — role bystander — trial never — verdict none
+  case_6: murder — accused Eamon, Ruby, Somchai — target Ines — source plot:plot_5 — role bystander — trial never — verdict none
+
+## moots observed (3)
+  case_2: ambush via npcMootTick d14 — accused Vikram, Ruby, Somchai — vote acquit — verdict acquitted convicted=false — affinity: guilty-mean -26.0 / acquit-mean 15.0 [ALIGNED (acquit-voters warmer)]
+  case_4: ambush via npcMootTick d20 — accused Eamon, Ruby, Somchai — vote acquit — verdict acquitted convicted=false — affinity: guilty-mean 4.0 / acquit-mean 14.2 [ALIGNED (acquit-voters warmer)]
+  case_6: murder via npcMootTick d22 — accused Eamon, Ruby, Somchai — vote guilty — verdict acquitted convicted=false — affinity: guilty-mean n/a / acquit-mean 14.6 [n/a]
+
+## NPC<->NPC bond edges (from bondSnap d0/70/140)
+  d70: npcPairs=51 npcDeep=23 npcAvgV=32.9 (allPairs=61 allDeep=26)
+  d110: npcPairs=75 npcDeep=25 npcAvgV=27.3 (allPairs=90 allDeep=30)

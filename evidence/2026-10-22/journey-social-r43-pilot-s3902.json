@@ -1,0 +1,6803 @@
+{
+ "seed": 3902,
+ "days": 136,
+ "deaths": [
+  {
+   "name": "Ruth Lim",
+   "day": 20
+  },
+  {
+   "name": "Ha-neul Jae",
+   "day": 26
+  },
+  {
+   "name": "Caleb",
+   "day": 63
+  },
+  {
+   "name": "Catalina",
+   "day": 75
+  },
+  {
+   "name": "Priya Garcia",
+   "day": 80
+  },
+  {
+   "name": "Katiuska",
+   "day": 89
+  },
+  {
+   "name": "Giulia",
+   "day": 93
+  },
+  {
+   "name": "Zoltan",
+   "day": 95
+  },
+  {
+   "name": "Onni Korhonen",
+   "day": 119
+  },
+  {
+   "name": "LaToya Adams",
+   "day": 121
+  },
+  {
+   "name": "Ghada Al-Shalawi",
+   "day": 122
+  },
+  {
+   "name": "Petra Novak",
+   "day": 122
+  },
+  {
+   "name": "Jian Smith",
+   "day": 132
+  }
+ ],
+ "alive": 0,
+ "instrumentOk": true,
+ "convos": 264,
+ "deepConvos": 264,
+ "comfortConvos": 28,
+ "comfortPicksTotal": 37,
+ "gossipPicks": 3,
+ "gossipConvos": 11,
+ "l2prime": {
+  "repeats": [
+   {
+    "day": 11,
+    "name": "Ha-neul",
+    "turn": 11,
+    "pickId": "betrayal:investigate:case_2",
+    "line": "Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails."
+   },
+   {
+    "day": 12,
+    "name": "Giulia",
+    "turn": 8,
+    "pickId": "betrayal:investigate:case_2",
+    "line": "Another pass over the same ground. Somebody's being careful. Careful people leave cleaner trails — and cleaner trails are still trails."
+   }
+  ],
+  "count": 2
+ },
+ "comfortRepeat": {
+  "hits": [],
+  "count": 0
+ },
+ "settleSpeak": {
+  "settlesObserved": 11,
+  "spokenGratitude": 11,
+  "silentSettles": [],
+  "silentCount": 0
+ },
+ "p2carry": {
+  "reactDry": 191
+ },
+ "p1carry": {
+  "streaks": 2
+ },
+ "dryRate": "1.92",
+ "l3": {
+  "bonds": 101,
+  "deepBonds": 42,
+  "betrayalCases": 1,
+  "mootsConvened": 1,
+  "mootsObserved": 1,
+  "gossipConvos": 11,
+  "gossipPicks": 3,
+  "avgTrust": "n/a"
+ },
+ "moots": [
+  {
+   "caseId": "case_2",
+   "charge": "ambush",
+   "source": "plot:plot_1",
+   "fabricated": false,
+   "convenedDay": 13,
+   "convenePath": "npcMootTick",
+   "conveneLine": "Jian has been talking at the fires. Enough voices — tonight they call a moot. Werner answers for what happened to Jian.",
+   "trialDay": 12,
+   "playerVote": "guilty",
+   "playerVoteHistory": [
+    {
+     "caseId": "case_2",
+     "vote": "guilty",
+     "day": 13,
+     "via": "convo"
+    }
+   ],
+   "verdict": "exile",
+   "convicted": true,
+   "file": "s3902-moot-case_2.txt",
+   "playerAccused": false,
+   "playerRole": "juror",
+   "accuser": null,
+   "accused": "Werner, Ava, Priya",
+   "accusedProfile": {
+    "vid": "gen_wojwpp5",
+    "name": "Werner",
+    "npcBondPairs": 7,
+    "deepNpcBonds": 0,
+    "meanV": 3.4
+   },
+   "affinity": [
+    {
+     "name": "LaToya",
+     "vote": "guilty",
+     "affAcc": 2,
+     "affAccu": null,
+     "bondV": 4,
+     "bondDepth": 0,
+     "score": -50
+    },
+    {
+     "name": "Jian",
+     "vote": "guilty",
+     "affAcc": -60,
+     "affAccu": null,
+     "bondV": -8,
+     "bondDepth": 0,
+     "score": -50
+    },
+    {
+     "name": "Zoltan",
+     "vote": "guilty",
+     "affAcc": 1,
+     "affAccu": null,
+     "bondV": 2,
+     "bondDepth": 0,
+     "score": -25
+    },
+    {
+     "name": "Petra",
+     "vote": "guilty",
+     "affAcc": 1,
+     "affAccu": null,
+     "bondV": 2,
+     "bondDepth": 0,
+     "score": -30
+    },
+    {
+     "name": "Onni",
+     "vote": "guilty",
+     "affAcc": 0,
+     "affAccu": null,
+     "bondV": null,
+     "bondDepth": null,
+     "score": -25
+    },
+    {
+     "name": "Caleb",
+     "vote": "guilty",
+     "affAcc": 0,
+     "affAccu": null,
+     "bondV": null,
+     "bondDepth": null,
+     "score": -31
+    },
+    {
+     "name": "Giulia",
+     "vote": "guilty",
+     "affAcc": 1,
+     "affAccu": null,
+     "bondV": 2,
+     "bondDepth": 0,
+     "score": -30
+    }
+   ]
+  }
+ ],
+ "conflicts": null,
+ "plotEvents": null,
+ "bondSnap": [
+  {
+   "day": 2,
+   "pairs": 17,
+   "deepCount": 0,
+   "avgV": "2.5",
+   "npcPairs": 17,
+   "npcDeep": 0,
+   "npcAvgV": "2.5"
+  },
+  {
+   "day": 2,
+   "pairs": 17,
+   "deepCount": 0,
+   "avgV": "2.7",
+   "npcPairs": 17,
+   "npcDeep": 0,
+   "npcAvgV": "2.7"
+  },
+  {
+   "day": 4,
+   "pairs": 27,
+   "deepCount": 0,
+   "avgV": "4.1",
+   "npcPairs": 25,
+   "npcDeep": 0,
+   "npcAvgV": "4.3"
+  },
+  {
+   "day": 5,
+   "pairs": 33,
+   "deepCount": 0,
+   "avgV": "4.5",
+   "npcPairs": 29,
+   "npcDeep": 0,
+   "npcAvgV": "4.8"
+  },
+  {
+   "day": 6,
+   "pairs": 36,
+   "deepCount": 0,
+   "avgV": "5.4",
+   "npcPairs": 30,
+   "npcDeep": 0,
+   "npcAvgV": "6.1"
+  },
+  {
+   "day": 7,
+   "pairs": 39,
+   "deepCount": 0,
+   "avgV": "5.8",
+   "npcPairs": 31,
+   "npcDeep": 0,
+   "npcAvgV": "6.8"
+  },
+  {
+   "day": 8,
+   "pairs": 47,
+   "deepCount": 0,
+   "avgV": "5.7",
+   "npcPairs": 38,
+   "npcDeep": 0,
+   "npcAvgV": "6.4"
+  },
+  {
+   "day": 9,
+   "pairs": 51,
+   "deepCount": 1,
+   "avgV": "6.0",
+   "npcPairs": 41,
+   "npcDeep": 1,
+   "npcAvgV": "6.8"
+  },
+  {
+   "day": 10,
+   "pairs": 53,
+   "deepCount": 1,
+   "avgV": "6.1",
+   "npcPairs": 43,
+   "npcDeep": 1,
+   "npcAvgV": "6.7"
+  },
+  {
+   "day": 11,
+   "pairs": 56,
+   "deepCount": 1,
+   "avgV": "6.3",
+   "npcPairs": 46,
+   "npcDeep": 1,
+   "npcAvgV": "6.9"
+  },
+  {
+   "day": 12,
+   "pairs": 58,
+   "deepCount": 1,
+   "avgV": "6.5",
+   "npcPairs": 47,
+   "npcDeep": 1,
+   "npcAvgV": "7.1"
+  },
+  {
+   "day": 13,
+   "pairs": 59,
+   "deepCount": 2,
+   "avgV": "6.3",
+   "npcPairs": 48,
+   "npcDeep": 2,
+   "npcAvgV": "7.5"
+  },
+  {
+   "day": 14,
+   "pairs": 59,
+   "deepCount": 6,
+   "avgV": "6.8",
+   "npcPairs": 48,
+   "npcDeep": 6,
+   "npcAvgV": "8.0"
+  },
+  {
+   "day": 15,
+   "pairs": 60,
+   "deepCount": 6,
+   "avgV": "7.3",
+   "npcPairs": 49,
+   "npcDeep": 6,
+   "npcAvgV": "8.5"
+  },
+  {
+   "day": 16,
+   "pairs": 60,
+   "deepCount": 6,
+   "avgV": "8.0",
+   "npcPairs": 49,
+   "npcDeep": 6,
+   "npcAvgV": "9.2"
+  },
+  {
+   "day": 17,
+   "pairs": 60,
+   "deepCount": 6,
+   "avgV": "8.4",
+   "npcPairs": 49,
+   "npcDeep": 6,
+   "npcAvgV": "9.7"
+  },
+  {
+   "day": 18,
+   "pairs": 60,
+   "deepCount": 8,
+   "avgV": "8.9",
+   "npcPairs": 49,
+   "npcDeep": 8,
+   "npcAvgV": "10.2"
+  },
+  {
+   "day": 19,
+   "pairs": 60,
+   "deepCount": 8,
+   "avgV": "9.4",
+   "npcPairs": 49,
+   "npcDeep": 8,
+   "npcAvgV": "10.7"
+  },
+  {
+   "day": 20,
+   "pairs": 60,
+   "deepCount": 9,
+   "avgV": "9.8",
+   "npcPairs": 50,
+   "npcDeep": 8,
+   "npcAvgV": "9.7"
+  },
+  {
+   "day": 21,
+   "pairs": 60,
+   "deepCount": 9,
+   "avgV": "10.5",
+   "npcPairs": 50,
+   "npcDeep": 8,
+   "npcAvgV": "10.3"
+  },
+  {
+   "day": 22,
+   "pairs": 60,
+   "deepCount": 9,
+   "avgV": "11.2",
+   "npcPairs": 50,
+   "npcDeep": 8,
+   "npcAvgV": "10.9"
+  },
+  {
+   "day": 23,
+   "pairs": 61,
+   "deepCount": 9,
+   "avgV": "11.5",
+   "npcPairs": 51,
+   "npcDeep": 8,
+   "npcAvgV": "11.2"
+  },
+  {
+   "day": 24,
+   "pairs": 61,
+   "deepCount": 10,
+   "avgV": "12.1",
+   "npcPairs": 51,
+   "npcDeep": 9,
+   "npcAvgV": "11.6"
+  },
+  {
+   "day": 25,
+   "pairs": 62,
+   "deepCount": 10,
+   "avgV": "12.3",
+   "npcPairs": 51,
+   "npcDeep": 9,
+   "npcAvgV": "12.1"
+  },
+  {
+   "day": 26,
+   "pairs": 62,
+   "deepCount": 10,
+   "avgV": "12.8",
+   "npcPairs": 51,
+   "npcDeep": 1,
+   "npcAvgV": "7.3"
+  },
+  {
+   "day": 27,
+   "pairs": 62,
+   "deepCount": 10,
+   "avgV": "13.2",
+   "npcPairs": 51,
+   "npcDeep": 1,
+   "npcAvgV": "7.7"
+  },
+  {
+   "day": 28,
+   "pairs": 62,
+   "deepCount": 10,
+   "avgV": "13.6",
+   "npcPairs": 51,
+   "npcDeep": 1,
+   "npcAvgV": "8.1"
+  },
+  {
+   "day": 29,
+   "pairs": 63,
+   "deepCount": 11,
+   "avgV": "13.7",
+   "npcPairs": 52,
+   "npcDeep": 2,
+   "npcAvgV": "8.3"
+  },
+  {
+   "day": 30,
+   "pairs": 63,
+   "deepCount": 11,
+   "avgV": "14.1",
+   "npcPairs": 52,
+   "npcDeep": 2,
+   "npcAvgV": "8.7"
+  },
+  {
+   "day": 31,
+   "pairs": 63,
+   "deepCount": 11,
+   "avgV": "14.6",
+   "npcPairs": 52,
+   "npcDeep": 2,
+   "npcAvgV": "9.1"
+  },
+  {
+   "day": 32,
+   "pairs": 63,
+   "deepCount": 11,
+   "avgV": "14.9",
+   "npcPairs": 52,
+   "npcDeep": 2,
+   "npcAvgV": "9.4"
+  },
+  {
+   "day": 33,
+   "pairs": 63,
+   "deepCount": 12,
+   "avgV": "15.3",
+   "npcPairs": 52,
+   "npcDeep": 3,
+   "npcAvgV": "9.9"
+  },
+  {
+   "day": 34,
+   "pairs": 63,
+   "deepCount": 13,
+   "avgV": "15.8",
+   "npcPairs": 52,
+   "npcDeep": 4,
+   "npcAvgV": "10.3"
+  },
+  {
+   "day": 35,
+   "pairs": 63,
+   "deepCount": 14,
+   "avgV": "16.1",
+   "npcPairs": 52,
+   "npcDeep": 5,
+   "npcAvgV": "10.6"
+  },
+  {
+   "day": 36,
+   "pairs": 63,
+   "deepCount": 14,
+   "avgV": "16.5",
+   "npcPairs": 52,
+   "npcDeep": 5,
+   "npcAvgV": "10.9"
+  },
+  {
+   "day": 37,
+   "pairs": 63,
+   "deepCount": 14,
+   "avgV": "16.9",
+   "npcPairs": 52,
+   "npcDeep": 5,
+   "npcAvgV": "11.3"
+  },
+  {
+   "day": 38,
+   "pairs": 63,
+   "deepCount": 14,
+   "avgV": "17.3",
+   "npcPairs": 52,
+   "npcDeep": 5,
+   "npcAvgV": "11.8"
+  },
+  {
+   "day": 39,
+   "pairs": 63,
+   "deepCount": 15,
+   "avgV": "17.7",
+   "npcPairs": 52,
+   "npcDeep": 6,
+   "npcAvgV": "12.2"
+  },
+  {
+   "day": 40,
+   "pairs": 63,
+   "deepCount": 18,
+   "avgV": "18.1",
+   "npcPairs": 52,
+   "npcDeep": 9,
+   "npcAvgV": "12.5"
+  },
+  {
+   "day": 41,
+   "pairs": 63,
+   "deepCount": 20,
+   "avgV": "18.5",
+   "npcPairs": 52,
+   "npcDeep": 11,
+   "npcAvgV": "12.9"
+  },
+  {
+   "day": 42,
+   "pairs": 63,
+   "deepCount": 20,
+   "avgV": "18.8",
+   "npcPairs": 52,
+   "npcDeep": 11,
+   "npcAvgV": "13.2"
+  },
+  {
+   "day": 43,
+   "pairs": 63,
+   "deepCount": 20,
+   "avgV": "19.3",
+   "npcPairs": 52,
+   "npcDeep": 11,
+   "npcAvgV": "13.6"
+  },
+  {
+   "day": 44,
+   "pairs": 63,
+   "deepCount": 22,
+   "avgV": "19.8",
+   "npcPairs": 52,
+   "npcDeep": 13,
+   "npcAvgV": "14.2"
+  },
+  {
+   "day": 45,
+   "pairs": 63,
+   "deepCount": 22,
+   "avgV": "20.2",
+   "npcPairs": 52,
+   "npcDeep": 13,
+   "npcAvgV": "14.6"
+  },
+  {
+   "day": 46,
+   "pairs": 63,
+   "deepCount": 24,
+   "avgV": "20.7",
+   "npcPairs": 52,
+   "npcDeep": 15,
+   "npcAvgV": "15.1"
+  },
+  {
+   "day": 47,
+   "pairs": 63,
+   "deepCount": 25,
+   "avgV": "21.1",
+   "npcPairs": 52,
+   "npcDeep": 16,
+   "npcAvgV": "15.6"
+  },
+  {
+   "day": 48,
+   "pairs": 63,
+   "deepCount": 25,
+   "avgV": "21.5",
+   "npcPairs": 52,
+   "npcDeep": 16,
+   "npcAvgV": "16.0"
+  },
+  {
+   "day": 49,
+   "pairs": 63,
+   "deepCount": 25,
+   "avgV": "22.0",
+   "npcPairs": 52,
+   "npcDeep": 16,
+   "npcAvgV": "16.4"
+  },
+  {
+   "day": 50,
+   "pairs": 63,
+   "deepCount": 25,
+   "avgV": "22.4",
+   "npcPairs": 52,
+   "npcDeep": 16,
+   "npcAvgV": "16.8"
+  },
+  {
+   "day": 51,
+   "pairs": 63,
+   "deepCount": 25,
+   "avgV": "22.7",
+   "npcPairs": 52,
+   "npcDeep": 16,
+   "npcAvgV": "17.2"
+  },
+  {
+   "day": 52,
+   "pairs": 63,
+   "deepCount": 25,
+   "avgV": "22.9",
+   "npcPairs": 52,
+   "npcDeep": 16,
+   "npcAvgV": "17.4"
+  },
+  {
+   "day": 53,
+   "pairs": 63,
+   "deepCount": 26,
+   "avgV": "23.5",
+   "npcPairs": 52,
+   "npcDeep": 17,
+   "npcAvgV": "17.9"
+  },
+  {
+   "day": 54,
+   "pairs": 63,
+   "deepCount": 27,
+   "avgV": "23.9",
+   "npcPairs": 52,
+   "npcDeep": 18,
+   "npcAvgV": "18.4"
+  },
+  {
+   "day": 55,
+   "pairs": 63,
+   "deepCount": 27,
+   "avgV": "24.2",
+   "npcPairs": 52,
+   "npcDeep": 18,
+   "npcAvgV": "18.7"
+  },
+  {
+   "day": 56,
+   "pairs": 63,
+   "deepCount": 27,
+   "avgV": "24.6",
+   "npcPairs": 52,
+   "npcDeep": 18,
+   "npcAvgV": "19.1"
+  },
+  {
+   "day": 57,
+   "pairs": 63,
+   "deepCount": 27,
+   "avgV": "25.0",
+   "npcPairs": 52,
+   "npcDeep": 18,
+   "npcAvgV": "19.5"
+  },
+  {
+   "day": 58,
+   "pairs": 63,
+   "deepCount": 27,
+   "avgV": "25.5",
+   "npcPairs": 52,
+   "npcDeep": 18,
+   "npcAvgV": "19.9"
+  },
+  {
+   "day": 59,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "25.9",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "20.3"
+  },
+  {
+   "day": 60,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "26.3",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "20.8"
+  },
+  {
+   "day": 61,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "26.7",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "21.1"
+  },
+  {
+   "day": 62,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "27.0",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "21.5"
+  },
+  {
+   "day": 63,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "27.6",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "21.9"
+  },
+  {
+   "day": 64,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "27.9",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "22.2"
+  },
+  {
+   "day": 65,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "28.1",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "22.4"
+  },
+  {
+   "day": 66,
+   "pairs": 63,
+   "deepCount": 28,
+   "avgV": "28.5",
+   "npcPairs": 52,
+   "npcDeep": 19,
+   "npcAvgV": "22.8"
+  },
+  {
+   "day": 67,
+   "pairs": 64,
+   "deepCount": 28,
+   "avgV": "28.4",
+   "npcPairs": 53,
+   "npcDeep": 19,
+   "npcAvgV": "22.8"
+  },
+  {
+   "day": 68,
+   "pairs": 67,
+   "deepCount": 28,
+   "avgV": "27.5",
+   "npcPairs": 55,
+   "npcDeep": 19,
+   "npcAvgV": "22.3"
+  },
+  {
+   "day": 69,
+   "pairs": 70,
+   "deepCount": 28,
+   "avgV": "26.8",
+   "npcPairs": 58,
+   "npcDeep": 19,
+   "npcAvgV": "21.5"
+  },
+  {
+   "day": 70,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "26.4",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "21.4"
+  },
+  {
+   "day": 71,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "26.8",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "21.8"
+  },
+  {
+   "day": 72,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "27.2",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "22.2"
+  },
+  {
+   "day": 73,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "27.6",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "22.6"
+  },
+  {
+   "day": 74,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "28.0",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "23.0"
+  },
+  {
+   "day": 75,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "28.4",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "23.4"
+  },
+  {
+   "day": 76,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "29.0",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "23.9"
+  },
+  {
+   "day": 77,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "29.3",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "24.2"
+  },
+  {
+   "day": 78,
+   "pairs": 73,
+   "deepCount": 28,
+   "avgV": "29.7",
+   "npcPairs": 60,
+   "npcDeep": 19,
+   "npcAvgV": "24.7"
+  },
+  {
+   "day": 79,
+   "pairs": 73,
+   "deepCount": 29,
+   "avgV": "30.0",
+   "npcPairs": 60,
+   "npcDeep": 20,
+   "npcAvgV": "25.0"
+  },
+  {
+   "day": 80,
+   "pairs": 73,
+   "deepCount": 30,
+   "avgV": "30.4",
+   "npcPairs": 62,
+   "npcDeep": 23,
+   "npcAvgV": "29.1"
+  },
+  {
+   "day": 81,
+   "pairs": 73,
+   "deepCount": 30,
+   "avgV": "30.7",
+   "npcPairs": 62,
+   "npcDeep": 23,
+   "npcAvgV": "29.3"
+  },
+  {
+   "day": 82,
+   "pairs": 73,
+   "deepCount": 30,
+   "avgV": "30.9",
+   "npcPairs": 62,
+   "npcDeep": 23,
+   "npcAvgV": "29.5"
+  },
+  {
+   "day": 83,
+   "pairs": 73,
+   "deepCount": 30,
+   "avgV": "31.2",
+   "npcPairs": 62,
+   "npcDeep": 23,
+   "npcAvgV": "29.8"
+  },
+  {
+   "day": 84,
+   "pairs": 76,
+   "deepCount": 30,
+   "avgV": "30.2",
+   "npcPairs": 64,
+   "npcDeep": 23,
+   "npcAvgV": "29.1"
+  },
+  {
+   "day": 85,
+   "pairs": 76,
+   "deepCount": 30,
+   "avgV": "30.5",
+   "npcPairs": 64,
+   "npcDeep": 23,
+   "npcAvgV": "29.3"
+  },
+  {
+   "day": 86,
+   "pairs": 76,
+   "deepCount": 30,
+   "avgV": "30.8",
+   "npcPairs": 64,
+   "npcDeep": 23,
+   "npcAvgV": "29.5"
+  },
+  {
+   "day": 87,
+   "pairs": 78,
+   "deepCount": 30,
+   "avgV": "30.3",
+   "npcPairs": 66,
+   "npcDeep": 23,
+   "npcAvgV": "29.0"
+  },
+  {
+   "day": 88,
+   "pairs": 78,
+   "deepCount": 31,
+   "avgV": "30.4",
+   "npcPairs": 66,
+   "npcDeep": 24,
+   "npcAvgV": "29.1"
+  },
+  {
+   "day": 89,
+   "pairs": 78,
+   "deepCount": 31,
+   "avgV": "30.6",
+   "npcPairs": 66,
+   "npcDeep": 24,
+   "npcAvgV": "29.3"
+  },
+  {
+   "day": 90,
+   "pairs": 78,
+   "deepCount": 31,
+   "avgV": "30.9",
+   "npcPairs": 66,
+   "npcDeep": 24,
+   "npcAvgV": "29.5"
+  },
+  {
+   "day": 91,
+   "pairs": 78,
+   "deepCount": 32,
+   "avgV": "31.1",
+   "npcPairs": 66,
+   "npcDeep": 25,
+   "npcAvgV": "29.6"
+  },
+  {
+   "day": 93,
+   "pairs": 78,
+   "deepCount": 32,
+   "avgV": "31.2",
+   "npcPairs": 66,
+   "npcDeep": 25,
+   "npcAvgV": "29.7"
+  },
+  {
+   "day": 93,
+   "pairs": 78,
+   "deepCount": 32,
+   "avgV": "31.3",
+   "npcPairs": 66,
+   "npcDeep": 25,
+   "npcAvgV": "29.8"
+  },
+  {
+   "day": 94,
+   "pairs": 78,
+   "deepCount": 32,
+   "avgV": "31.4",
+   "npcPairs": 66,
+   "npcDeep": 25,
+   "npcAvgV": "29.9"
+  },
+  {
+   "day": 95,
+   "pairs": 78,
+   "deepCount": 32,
+   "avgV": "31.6",
+   "npcPairs": 66,
+   "npcDeep": 25,
+   "npcAvgV": "30.0"
+  },
+  {
+   "day": 96,
+   "pairs": 78,
+   "deepCount": 32,
+   "avgV": "31.7",
+   "npcPairs": 66,
+   "npcDeep": 25,
+   "npcAvgV": "30.1"
+  },
+  {
+   "day": 97,
+   "pairs": 78,
+   "deepCount": 33,
+   "avgV": "31.8",
+   "npcPairs": 66,
+   "npcDeep": 25,
+   "npcAvgV": "30.2"
+  },
+  {
+   "day": 98,
+   "pairs": 81,
+   "deepCount": 33,
+   "avgV": "30.9",
+   "npcPairs": 68,
+   "npcDeep": 25,
+   "npcAvgV": "29.5"
+  },
+  {
+   "day": 99,
+   "pairs": 82,
+   "deepCount": 33,
+   "avgV": "30.7",
+   "npcPairs": 69,
+   "npcDeep": 25,
+   "npcAvgV": "29.2"
+  },
+  {
+   "day": 100,
+   "pairs": 83,
+   "deepCount": 33,
+   "avgV": "30.5",
+   "npcPairs": 70,
+   "npcDeep": 25,
+   "npcAvgV": "29.0"
+  },
+  {
+   "day": 101,
+   "pairs": 85,
+   "deepCount": 33,
+   "avgV": "30.1",
+   "npcPairs": 71,
+   "npcDeep": 25,
+   "npcAvgV": "28.8"
+  },
+  {
+   "day": 102,
+   "pairs": 88,
+   "deepCount": 33,
+   "avgV": "29.2",
+   "npcPairs": 74,
+   "npcDeep": 25,
+   "npcAvgV": "27.9"
+  },
+  {
+   "day": 103,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "29.1",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "27.7"
+  },
+  {
+   "day": 104,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "29.3",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "27.8"
+  },
+  {
+   "day": 105,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "29.5",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "28.0"
+  },
+  {
+   "day": 106,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "29.7",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "28.1"
+  },
+  {
+   "day": 107,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "29.9",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "28.3"
+  },
+  {
+   "day": 108,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "30.1",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "28.6"
+  },
+  {
+   "day": 109,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "30.3",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "28.7"
+  },
+  {
+   "day": 110,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "30.4",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "28.8"
+  },
+  {
+   "day": 111,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "30.6",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "28.9"
+  },
+  {
+   "day": 112,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "30.9",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "29.1"
+  },
+  {
+   "day": 113,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "31.1",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "29.3"
+  },
+  {
+   "day": 114,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "31.3",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "29.3"
+  },
+  {
+   "day": 115,
+   "pairs": 89,
+   "deepCount": 34,
+   "avgV": "31.4",
+   "npcPairs": 75,
+   "npcDeep": 26,
+   "npcAvgV": "29.5"
+  },
+  {
+   "day": 116,
+   "pairs": 90,
+   "deepCount": 35,
+   "avgV": "31.3",
+   "npcPairs": 76,
+   "npcDeep": 27,
+   "npcAvgV": "29.2"
+  },
+  {
+   "day": 117,
+   "pairs": 90,
+   "deepCount": 36,
+   "avgV": "31.4",
+   "npcPairs": 76,
+   "npcDeep": 28,
+   "npcAvgV": "29.3"
+  },
+  {
+   "day": 118,
+   "pairs": 90,
+   "deepCount": 37,
+   "avgV": "31.6",
+   "npcPairs": 76,
+   "npcDeep": 28,
+   "npcAvgV": "29.4"
+  },
+  {
+   "day": 119,
+   "pairs": 90,
+   "deepCount": 38,
+   "avgV": "31.9",
+   "npcPairs": 74,
+   "npcDeep": 29,
+   "npcAvgV": "28.5"
+  },
+  {
+   "day": 120,
+   "pairs": 91,
+   "deepCount": 38,
+   "avgV": "31.7",
+   "npcPairs": 75,
+   "npcDeep": 29,
+   "npcAvgV": "28.3"
+  },
+  {
+   "day": 121,
+   "pairs": 92,
+   "deepCount": 38,
+   "avgV": "31.7",
+   "npcPairs": 86,
+   "npcDeep": 37,
+   "npcAvgV": "32.9"
+  },
+  {
+   "day": 122,
+   "pairs": 92,
+   "deepCount": 38,
+   "avgV": "31.8",
+   "npcPairs": 76,
+   "npcDeep": 29,
+   "npcAvgV": "27.6"
+  },
+  {
+   "day": 123,
+   "pairs": 96,
+   "deepCount": 38,
+   "avgV": "30.7",
+   "npcPairs": 79,
+   "npcDeep": 29,
+   "npcAvgV": "26.7"
+  },
+  {
+   "day": 124,
+   "pairs": 96,
+   "deepCount": 38,
+   "avgV": "30.8",
+   "npcPairs": 79,
+   "npcDeep": 29,
+   "npcAvgV": "26.8"
+  },
+  {
+   "day": 125,
+   "pairs": 96,
+   "deepCount": 38,
+   "avgV": "30.9",
+   "npcPairs": 79,
+   "npcDeep": 29,
+   "npcAvgV": "26.9"
+  },
+  {
+   "day": 127,
+   "pairs": 99,
+   "deepCount": 39,
+   "avgV": "30.4",
+   "npcPairs": 81,
+   "npcDeep": 30,
+   "npcAvgV": "26.5"
+  },
+  {
+   "day": 127,
+   "pairs": 99,
+   "deepCount": 39,
+   "avgV": "30.6",
+   "npcPairs": 81,
+   "npcDeep": 30,
+   "npcAvgV": "26.5"
+  },
+  {
+   "day": 128,
+   "pairs": 100,
+   "deepCount": 39,
+   "avgV": "30.5",
+   "npcPairs": 82,
+   "npcDeep": 30,
+   "npcAvgV": "26.3"
+  },
+  {
+   "day": 129,
+   "pairs": 100,
+   "deepCount": 40,
+   "avgV": "30.6",
+   "npcPairs": 82,
+   "npcDeep": 31,
+   "npcAvgV": "26.4"
+  },
+  {
+   "day": 130,
+   "pairs": 100,
+   "deepCount": 40,
+   "avgV": "30.8",
+   "npcPairs": 82,
+   "npcDeep": 31,
+   "npcAvgV": "26.5"
+  },
+  {
+   "day": 131,
+   "pairs": 100,
+   "deepCount": 40,
+   "avgV": "31.0",
+   "npcPairs": 82,
+   "npcDeep": 31,
+   "npcAvgV": "26.7"
+  },
+  {
+   "day": 132,
+   "pairs": 101,
+   "deepCount": 40,
+   "avgV": "30.9",
+   "npcPairs": 88,
+   "npcDeep": 33,
+   "npcAvgV": "30.5"
+  },
+  {
+   "day": 133,
+   "pairs": 101,
+   "deepCount": 40,
+   "avgV": "31.1",
+   "npcPairs": 88,
+   "npcDeep": 33,
+   "npcAvgV": "30.6"
+  },
+  {
+   "day": 134,
+   "pairs": 101,
+   "deepCount": 40,
+   "avgV": "31.3",
+   "npcPairs": 88,
+   "npcDeep": 33,
+   "npcAvgV": "30.6"
+  },
+  {
+   "day": 135,
+   "pairs": 101,
+   "deepCount": 42,
+   "avgV": "31.4",
+   "npcPairs": 88,
+   "npcDeep": 33,
+   "npcAvgV": "30.6"
+  }
+ ],
+ "bondEventsCount": 1665,
+ "meName": "Juni",
+ "bondChannels": {
+  "visit": {
+   "sum": 680,
+   "n": 170
+  },
+  "lingering meal": {
+   "sum": 2208,
+   "n": 1104
+  },
+  "deep talk": {
+   "sum": 516,
+   "n": 258
+  },
+  "promise kept": {
+   "sum": 52,
+   "n": 13
+  },
+  "treated": {
+   "sum": 12,
+   "n": 4
+  },
+  "grievance": {
+   "sum": -45,
+   "n": 4
+  },
+  "fought alongside": {
+   "sum": 162,
+   "n": 54
+  },
+  "tended": {
+   "sum": 24,
+   "n": 8
+  },
+  "fed them": {
+   "sum": 7,
+   "n": 4
+  },
+  "feast": {
+   "sum": 18,
+   "n": 18
+  },
+  "hosted feast": {
+   "sum": 28,
+   "n": 14
+  },
+  "stood with you": {
+   "sum": 28,
+   "n": 14
+  }
+ },
+ "firstDeep": {
+  "gen_3mmzukc|gen_cfh2xj6": {
+   "day": 9,
+   "a": "gen_3mmzukc",
+   "b": "gen_cfh2xj6",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "ava_garcia|gen_3mmzukc": {
+   "day": 13,
+   "a": "ava_garcia",
+   "b": "gen_3mmzukc",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_3mmzukc|gen_hq22a2l": {
+   "day": 14,
+   "a": "gen_3mmzukc",
+   "b": "gen_hq22a2l",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_3mmzukc|zoltan_nagy": {
+   "day": 14,
+   "a": "gen_3mmzukc",
+   "b": "zoltan_nagy",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_3mmzukc|petra_novak": {
+   "day": 14,
+   "a": "gen_3mmzukc",
+   "b": "petra_novak",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_3mmzukc|onni_korhonen": {
+   "day": 14,
+   "a": "gen_3mmzukc",
+   "b": "onni_korhonen",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_1pu4vli|gen_3mmzukc": {
+   "day": 18,
+   "a": "gen_1pu4vli",
+   "b": "gen_3mmzukc",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "caleb_jones|gen_3mmzukc": {
+   "day": 18,
+   "a": "caleb_jones",
+   "b": "gen_3mmzukc",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_3mmzukc|giulia_bianchi": {
+   "day": 20,
+   "a": "gen_3mmzukc",
+   "b": "giulia_bianchi",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "giulia_bianchi|zoltan_nagy": {
+   "day": 24,
+   "a": "giulia_bianchi",
+   "b": "zoltan_nagy",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_1pu4vli|gen_hq22a2l": {
+   "day": 29,
+   "a": "gen_1pu4vli",
+   "b": "gen_hq22a2l",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "caleb_jones|petra_novak": {
+   "day": 33,
+   "a": "caleb_jones",
+   "b": "petra_novak",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_hq22a2l|zoltan_nagy": {
+   "day": 34,
+   "a": "gen_hq22a2l",
+   "b": "zoltan_nagy",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_1pu4vli|onni_korhonen": {
+   "day": 35,
+   "a": "gen_1pu4vli",
+   "b": "onni_korhonen",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_hq22a2l|petra_novak": {
+   "day": 39,
+   "a": "gen_hq22a2l",
+   "b": "petra_novak",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_1pu4vli|zoltan_nagy": {
+   "day": 40,
+   "a": "gen_1pu4vli",
+   "b": "zoltan_nagy",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "onni_korhonen|zoltan_nagy": {
+   "day": 40,
+   "a": "onni_korhonen",
+   "b": "zoltan_nagy",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "giulia_bianchi|petra_novak": {
+   "day": 40,
+   "a": "giulia_bianchi",
+   "b": "petra_novak",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "caleb_jones|onni_korhonen": {
+   "day": 41,
+   "a": "caleb_jones",
+   "b": "onni_korhonen",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "caleb_jones|gen_hq22a2l": {
+   "day": 41,
+   "a": "caleb_jones",
+   "b": "gen_hq22a2l",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "petra_novak|zoltan_nagy": {
+   "day": 44,
+   "a": "petra_novak",
+   "b": "zoltan_nagy",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_hq22a2l|onni_korhonen": {
+   "day": 44,
+   "a": "gen_hq22a2l",
+   "b": "onni_korhonen",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_hq22a2l|giulia_bianchi": {
+   "day": 46,
+   "a": "gen_hq22a2l",
+   "b": "giulia_bianchi",
+   "v": 30,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "caleb_jones|zoltan_nagy": {
+   "day": 46,
+   "a": "caleb_jones",
+   "b": "zoltan_nagy",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_1pu4vli|petra_novak": {
+   "day": 47,
+   "a": "gen_1pu4vli",
+   "b": "petra_novak",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "caleb_jones|gen_1pu4vli": {
+   "day": 53,
+   "a": "caleb_jones",
+   "b": "gen_1pu4vli",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_1pu4vli|giulia_bianchi": {
+   "day": 54,
+   "a": "gen_1pu4vli",
+   "b": "giulia_bianchi",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "onni_korhonen|petra_novak": {
+   "day": 59,
+   "a": "onni_korhonen",
+   "b": "petra_novak",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "giulia_bianchi|onni_korhonen": {
+   "day": 79,
+   "a": "giulia_bianchi",
+   "b": "onni_korhonen",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "devon_okafor|gen_1pu4vli": {
+   "day": 80,
+   "a": "devon_okafor",
+   "b": "gen_1pu4vli",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "devon_okafor|gen_hq22a2l": {
+   "day": 88,
+   "a": "devon_okafor",
+   "b": "gen_hq22a2l",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "devon_okafor|zoltan_nagy": {
+   "day": 91,
+   "a": "devon_okafor",
+   "b": "zoltan_nagy",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "devon_okafor|onni_korhonen": {
+   "day": 97,
+   "a": "devon_okafor",
+   "b": "onni_korhonen",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "devon_okafor|petra_novak": {
+   "day": 103,
+   "a": "devon_okafor",
+   "b": "petra_novak",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_1pu4vli|visjoin_96": {
+   "day": 116,
+   "a": "gen_1pu4vli",
+   "b": "visjoin_96",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_hq22a2l|visjoin_96": {
+   "day": 117,
+   "a": "gen_hq22a2l",
+   "b": "visjoin_96",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "onni_korhonen|visjoin_96": {
+   "day": 118,
+   "a": "onni_korhonen",
+   "b": "visjoin_96",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "onni_korhonen|visjoin_98": {
+   "day": 119,
+   "a": "onni_korhonen",
+   "b": "visjoin_98",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "devon_okafor|visjoin_96": {
+   "day": 127,
+   "a": "devon_okafor",
+   "b": "visjoin_96",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "devon_okafor|visjoin_121": {
+   "day": 129,
+   "a": "devon_okafor",
+   "b": "visjoin_121",
+   "v": 30,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "devon_okafor|visjoin_114": {
+   "day": 135,
+   "a": "devon_okafor",
+   "b": "visjoin_114",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "devon_okafor|visjoin_124": {
+   "day": 135,
+   "a": "devon_okafor",
+   "b": "visjoin_124",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": false
+  }
+ },
+ "plotSnap": [
+  {
+   "day": 2,
+   "plots": []
+  },
+  {
+   "day": 2,
+   "plots": []
+  },
+  {
+   "day": 4,
+   "plots": []
+  },
+  {
+   "day": 5,
+   "plots": []
+  },
+  {
+   "day": 6,
+   "plots": []
+  },
+  {
+   "day": 7,
+   "plots": []
+  },
+  {
+   "day": 8,
+   "plots": []
+  },
+  {
+   "day": 9,
+   "plots": []
+  },
+  {
+   "day": 10,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 69,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 72,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 73,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 74,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 75,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 76,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 78,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 79,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 82,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 83,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 85,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 86,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 87,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 91,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 94,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 95,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 96,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 97,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 98,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 99,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 100,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 103,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 105,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 106,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 107,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 108,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 110,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 111,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 112,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 113,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 114,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 115,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 116,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 117,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 118,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 119,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 120,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 121,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 122,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 123,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 124,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 127,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 127,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 129,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 130,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 131,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 132,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 133,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 134,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 135,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Werner",
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  }
+ ],
+ "caseSnap": [
+  {
+   "day": 2,
+   "cases": []
+  },
+  {
+   "day": 2,
+   "cases": []
+  },
+  {
+   "day": 4,
+   "cases": []
+  },
+  {
+   "day": 5,
+   "cases": []
+  },
+  {
+   "day": 6,
+   "cases": []
+  },
+  {
+   "day": 7,
+   "cases": []
+  },
+  {
+   "day": 8,
+   "cases": []
+  },
+  {
+   "day": 9,
+   "cases": []
+  },
+  {
+   "day": 10,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "bystander",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "open",
+     "hasTrial": false,
+     "trialDay": null,
+     "resolution": null,
+     "convicted": null
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "open",
+     "hasTrial": false,
+     "trialDay": null,
+     "resolution": null,
+     "convicted": null
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "open",
+     "hasTrial": false,
+     "trialDay": null,
+     "resolution": null,
+     "convicted": null
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 34,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 61,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 69,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 72,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 73,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 74,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 75,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 76,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 78,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 79,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": true,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 82,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 83,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 85,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 86,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 87,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 91,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 94,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 95,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 96,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 97,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 98,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 99,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 100,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 103,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 105,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 106,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 107,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 108,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 110,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 111,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 112,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 113,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 114,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 115,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 116,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 117,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 118,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 119,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 120,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 121,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 122,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 123,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 124,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 127,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 127,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 128,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 129,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 130,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 131,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": true,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 132,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 133,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 134,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  },
+  {
+   "day": 135,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Werner, Ava, Priya",
+     "accusedIsPlayer": false,
+     "target": "Jian",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "resolved",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "exile",
+     "convicted": true
+    }
+   ]
+  }
+ ],
+ "mootConvos": 264,
+ "endState": {
+  "over": true,
+  "villageLost": true,
+  "scattered": false,
+  "extinct": false,
+  "scholarExiled": false,
+  "scholarDead": true
+ }
+}

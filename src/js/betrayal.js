@@ -1501,18 +1501,30 @@
   // (journey-social 2026-10-12 r7): this was one template — "Nothing you
   // can prove — yet. Dig again; the trail is still warm." — repeated
   // verbatim 6-8× in a row, the exact filler-loop shape Steve called out.
-  // Now a per-case rotation: consecutive digs on the same case never parrot.
+  // Then a per-case 4-line rotation — but r42/r43's L2' standing check showed
+  // digs run 6+ deep in one conversation, and the 4-line pool wrapped
+  // mid-convo (verbatim repeats after a full cycle). Now: an 8-line pool
+  // with NO wrap — past the pool the narrator is honest that the trail is
+  // cold instead of cycling (a dead end should say so, not loop).
   bribeDigMissLine(c) {
     const pool = [
       'You follow the food, the gifts, the sudden friendliness. Nothing you can prove — yet. Dig again; the trail is still warm.',
       'You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.',
       'You turn the gift-giving over, the favors, the timing. Innocent from every angle. It isn\'t — but you can\'t prove that yet.',
       'Another pass over the same ground. Somebody\'s being careful. Careful people leave cleaner trails — and cleaner trails are still trails.',
+      'You ask around the edges — who was carrying what, who stopped meeting whose eyes. Everyone suddenly has somewhere to be.',
+      'The ledger in your head doesn\'t balance: the favors went out, but nobody\'s living richer. Either nobody was bought — or the price was paid somewhere you can\'t see.',
+      'You watch the fire-circle that night. Laughter a beat too quick, a look that cuts away. Something\'s there. It isn\'t proof.',
+      'You retrace the whole day the deal would have been struck. Every story checks out. Either they\'re innocent, or they rehearsed.',
     ];
+    const cold = 'You\'ve been over this ground twice now. Nothing you can prove — the trail is going cold. Digging further just burns daylight.';
     try {
       const n = (c.digMisses || 0);
       c.digMisses = n + 1;
-      return pool[n % pool.length];
+      // no wrap: past the pool the narrator admits the dead end instead of
+      // parroting (the honest dead-end beats a filler loop).
+      if (n >= pool.length) return cold;
+      return pool[n];
     } catch (e) { return pool[0]; }
   },
   investigateBribery(caseId) {

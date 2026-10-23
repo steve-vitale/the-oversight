@@ -1,0 +1,6223 @@
+{
+ "seed": 3904,
+ "days": 125,
+ "deaths": [
+  {
+   "name": "Jae Wan",
+   "day": 8
+  },
+  {
+   "name": "Tarek",
+   "day": 23
+  },
+  {
+   "name": "Erin Kraemer",
+   "day": 35
+  },
+  {
+   "name": "Chantal",
+   "day": 67
+  },
+  {
+   "name": "Caleb",
+   "day": 72
+  },
+  {
+   "name": "Devon Liang",
+   "day": 109
+  },
+  {
+   "name": "Dale Hoffman",
+   "day": 113
+  },
+  {
+   "name": "Xinyi Jiao",
+   "day": 114
+  },
+  {
+   "name": "Valeria Quispe",
+   "day": 114
+  },
+  {
+   "name": "Victor Lopez",
+   "day": 115
+  },
+  {
+   "name": "Ranajoy Warrier",
+   "day": 116
+  },
+  {
+   "name": "Brayden Friedrich",
+   "day": 117
+  },
+  {
+   "name": "Sigrun",
+   "day": 121
+  },
+  {
+   "name": "Benoit Lambert",
+   "day": 122
+  },
+  {
+   "name": "Owen",
+   "day": 124
+  }
+ ],
+ "alive": 1,
+ "instrumentOk": true,
+ "convos": 243,
+ "deepConvos": 243,
+ "comfortConvos": 19,
+ "comfortPicksTotal": 26,
+ "gossipPicks": 3,
+ "gossipConvos": 23,
+ "l2prime": {
+  "repeats": [],
+  "count": 0
+ },
+ "comfortRepeat": {
+  "hits": [],
+  "count": 0
+ },
+ "settleSpeak": {
+  "settlesObserved": 2,
+  "spokenGratitude": 2,
+  "silentSettles": [],
+  "silentCount": 0
+ },
+ "p2carry": {
+  "reactDry": 189
+ },
+ "p1carry": {
+  "streaks": 6
+ },
+ "dryRate": "2.18",
+ "l3": {
+  "bonds": 66,
+  "deepBonds": 31,
+  "betrayalCases": 1,
+  "mootsConvened": 1,
+  "mootsObserved": 1,
+  "gossipConvos": 23,
+  "gossipPicks": 3,
+  "avgTrust": "70.0"
+ },
+ "moots": [
+  {
+   "caseId": "case_2",
+   "charge": "ambush",
+   "source": "plot:plot_1",
+   "fabricated": false,
+   "convenedDay": 13,
+   "convenePath": "npcMootTick",
+   "conveneLine": "Valeria has been talking at the fires. Enough voices — tonight they call a moot. Devon answers for what happened to Valeria.",
+   "trialDay": 12,
+   "playerVote": "guilty",
+   "playerVoteHistory": [
+    {
+     "caseId": "case_2",
+     "vote": "guilty",
+     "day": 13,
+     "via": "convo"
+    }
+   ],
+   "verdict": "acquitted",
+   "convicted": false,
+   "file": "s3904-moot-case_2.txt",
+   "playerAccused": false,
+   "playerRole": "juror",
+   "accuser": null,
+   "accused": "Devon, Benoit, Brayden",
+   "accusedProfile": {
+    "vid": "gen_c7w0kde",
+    "name": "Devon",
+    "npcBondPairs": 7,
+    "deepNpcBonds": 0,
+    "meanV": 11.7
+   },
+   "affinity": [
+    {
+     "name": "Xinyi",
+     "vote": "acquit",
+     "affAcc": 8,
+     "affAccu": null,
+     "bondV": 16,
+     "bondDepth": 0,
+     "score": 20
+    },
+    {
+     "name": "Tarek",
+     "vote": "acquit",
+     "affAcc": 0,
+     "affAccu": null,
+     "bondV": null,
+     "bondDepth": null,
+     "score": 7
+    },
+    {
+     "name": "Victor",
+     "vote": "acquit",
+     "affAcc": 8,
+     "affAccu": null,
+     "bondV": 16,
+     "bondDepth": 0,
+     "score": 18
+    },
+    {
+     "name": "Valeria",
+     "vote": "guilty",
+     "affAcc": -60,
+     "affAccu": null,
+     "bondV": 2,
+     "bondDepth": 0,
+     "score": -65
+    },
+    {
+     "name": "Dale",
+     "vote": "acquit",
+     "affAcc": 4,
+     "affAccu": null,
+     "bondV": 8,
+     "bondDepth": 0,
+     "score": 10
+    }
+   ]
+  }
+ ],
+ "conflicts": null,
+ "plotEvents": null,
+ "bondSnap": [
+  {
+   "day": 2,
+   "pairs": 12,
+   "deepCount": 0,
+   "avgV": "2.3",
+   "npcPairs": 12,
+   "npcDeep": 0,
+   "npcAvgV": "2.3"
+  },
+  {
+   "day": 2,
+   "pairs": 13,
+   "deepCount": 0,
+   "avgV": "2.5",
+   "npcPairs": 13,
+   "npcDeep": 0,
+   "npcAvgV": "2.5"
+  },
+  {
+   "day": 4,
+   "pairs": 21,
+   "deepCount": 0,
+   "avgV": "3.9",
+   "npcPairs": 19,
+   "npcDeep": 0,
+   "npcAvgV": "4.1"
+  },
+  {
+   "day": 4,
+   "pairs": 21,
+   "deepCount": 0,
+   "avgV": "4.3",
+   "npcPairs": 19,
+   "npcDeep": 0,
+   "npcAvgV": "4.3"
+  },
+  {
+   "day": 5,
+   "pairs": 25,
+   "deepCount": 0,
+   "avgV": "4.6",
+   "npcPairs": 21,
+   "npcDeep": 0,
+   "npcAvgV": "5.0"
+  },
+  {
+   "day": 6,
+   "pairs": 29,
+   "deepCount": 0,
+   "avgV": "5.1",
+   "npcPairs": 23,
+   "npcDeep": 0,
+   "npcAvgV": "5.7"
+  },
+  {
+   "day": 7,
+   "pairs": 33,
+   "deepCount": 0,
+   "avgV": "5.1",
+   "npcPairs": 25,
+   "npcDeep": 0,
+   "npcAvgV": "5.9"
+  },
+  {
+   "day": 8,
+   "pairs": 36,
+   "deepCount": 0,
+   "avgV": "5.2",
+   "npcPairs": 28,
+   "npcDeep": 0,
+   "npcAvgV": "5.1"
+  },
+  {
+   "day": 9,
+   "pairs": 37,
+   "deepCount": 0,
+   "avgV": "5.6",
+   "npcPairs": 28,
+   "npcDeep": 0,
+   "npcAvgV": "5.8"
+  },
+  {
+   "day": 10,
+   "pairs": 37,
+   "deepCount": 0,
+   "avgV": "5.8",
+   "npcPairs": 28,
+   "npcDeep": 0,
+   "npcAvgV": "5.8"
+  },
+  {
+   "day": 11,
+   "pairs": 39,
+   "deepCount": 0,
+   "avgV": "6.3",
+   "npcPairs": 29,
+   "npcDeep": 0,
+   "npcAvgV": "6.3"
+  },
+  {
+   "day": 12,
+   "pairs": 40,
+   "deepCount": 0,
+   "avgV": "6.8",
+   "npcPairs": 29,
+   "npcDeep": 0,
+   "npcAvgV": "7.2"
+  },
+  {
+   "day": 13,
+   "pairs": 40,
+   "deepCount": 0,
+   "avgV": "6.5",
+   "npcPairs": 29,
+   "npcDeep": 0,
+   "npcAvgV": "7.7"
+  },
+  {
+   "day": 14,
+   "pairs": 43,
+   "deepCount": 1,
+   "avgV": "6.8",
+   "npcPairs": 32,
+   "npcDeep": 1,
+   "npcAvgV": "7.8"
+  },
+  {
+   "day": 15,
+   "pairs": 43,
+   "deepCount": 1,
+   "avgV": "7.6",
+   "npcPairs": 32,
+   "npcDeep": 1,
+   "npcAvgV": "8.4"
+  },
+  {
+   "day": 16,
+   "pairs": 43,
+   "deepCount": 2,
+   "avgV": "8.0",
+   "npcPairs": 32,
+   "npcDeep": 2,
+   "npcAvgV": "8.8"
+  },
+  {
+   "day": 17,
+   "pairs": 43,
+   "deepCount": 2,
+   "avgV": "8.7",
+   "npcPairs": 32,
+   "npcDeep": 2,
+   "npcAvgV": "9.6"
+  },
+  {
+   "day": 18,
+   "pairs": 43,
+   "deepCount": 3,
+   "avgV": "9.5",
+   "npcPairs": 32,
+   "npcDeep": 3,
+   "npcAvgV": "10.4"
+  },
+  {
+   "day": 19,
+   "pairs": 43,
+   "deepCount": 5,
+   "avgV": "10.1",
+   "npcPairs": 32,
+   "npcDeep": 5,
+   "npcAvgV": "11.0"
+  },
+  {
+   "day": 20,
+   "pairs": 43,
+   "deepCount": 5,
+   "avgV": "10.7",
+   "npcPairs": 32,
+   "npcDeep": 5,
+   "npcAvgV": "11.6"
+  },
+  {
+   "day": 21,
+   "pairs": 43,
+   "deepCount": 7,
+   "avgV": "11.4",
+   "npcPairs": 32,
+   "npcDeep": 7,
+   "npcAvgV": "12.3"
+  },
+  {
+   "day": 22,
+   "pairs": 43,
+   "deepCount": 7,
+   "avgV": "12.1",
+   "npcPairs": 32,
+   "npcDeep": 7,
+   "npcAvgV": "13.0"
+  },
+  {
+   "day": 23,
+   "pairs": 44,
+   "deepCount": 7,
+   "avgV": "12.3",
+   "npcPairs": 33,
+   "npcDeep": 7,
+   "npcAvgV": "13.2"
+  },
+  {
+   "day": 24,
+   "pairs": 44,
+   "deepCount": 7,
+   "avgV": "12.8",
+   "npcPairs": 33,
+   "npcDeep": 7,
+   "npcAvgV": "13.7"
+  },
+  {
+   "day": 25,
+   "pairs": 44,
+   "deepCount": 7,
+   "avgV": "13.3",
+   "npcPairs": 33,
+   "npcDeep": 7,
+   "npcAvgV": "14.3"
+  },
+  {
+   "day": 26,
+   "pairs": 44,
+   "deepCount": 7,
+   "avgV": "14.1",
+   "npcPairs": 33,
+   "npcDeep": 7,
+   "npcAvgV": "15.1"
+  },
+  {
+   "day": 27,
+   "pairs": 44,
+   "deepCount": 8,
+   "avgV": "14.8",
+   "npcPairs": 33,
+   "npcDeep": 8,
+   "npcAvgV": "15.9"
+  },
+  {
+   "day": 28,
+   "pairs": 44,
+   "deepCount": 8,
+   "avgV": "15.8",
+   "npcPairs": 33,
+   "npcDeep": 8,
+   "npcAvgV": "16.7"
+  },
+  {
+   "day": 29,
+   "pairs": 46,
+   "deepCount": 10,
+   "avgV": "17.1",
+   "npcPairs": 35,
+   "npcDeep": 10,
+   "npcAvgV": "17.4"
+  },
+  {
+   "day": 30,
+   "pairs": 46,
+   "deepCount": 11,
+   "avgV": "17.8",
+   "npcPairs": 35,
+   "npcDeep": 10,
+   "npcAvgV": "18.1"
+  },
+  {
+   "day": 31,
+   "pairs": 46,
+   "deepCount": 12,
+   "avgV": "18.4",
+   "npcPairs": 35,
+   "npcDeep": 10,
+   "npcAvgV": "18.8"
+  },
+  {
+   "day": 32,
+   "pairs": 46,
+   "deepCount": 12,
+   "avgV": "19.0",
+   "npcPairs": 35,
+   "npcDeep": 10,
+   "npcAvgV": "19.5"
+  },
+  {
+   "day": 33,
+   "pairs": 46,
+   "deepCount": 13,
+   "avgV": "19.8",
+   "npcPairs": 35,
+   "npcDeep": 11,
+   "npcAvgV": "20.5"
+  },
+  {
+   "day": 35,
+   "pairs": 47,
+   "deepCount": 13,
+   "avgV": "20.7",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "19.9"
+  },
+  {
+   "day": 35,
+   "pairs": 47,
+   "deepCount": 13,
+   "avgV": "20.9",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "19.9"
+  },
+  {
+   "day": 36,
+   "pairs": 47,
+   "deepCount": 13,
+   "avgV": "21.3",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "20.4"
+  },
+  {
+   "day": 37,
+   "pairs": 47,
+   "deepCount": 13,
+   "avgV": "21.9",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "20.9"
+  },
+  {
+   "day": 38,
+   "pairs": 47,
+   "deepCount": 14,
+   "avgV": "22.5",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "21.5"
+  },
+  {
+   "day": 39,
+   "pairs": 47,
+   "deepCount": 14,
+   "avgV": "23.0",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "22.0"
+  },
+  {
+   "day": 40,
+   "pairs": 47,
+   "deepCount": 14,
+   "avgV": "23.5",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "22.5"
+  },
+  {
+   "day": 41,
+   "pairs": 47,
+   "deepCount": 15,
+   "avgV": "24.2",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "23.1"
+  },
+  {
+   "day": 42,
+   "pairs": 47,
+   "deepCount": 15,
+   "avgV": "24.7",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "23.6"
+  },
+  {
+   "day": 43,
+   "pairs": 47,
+   "deepCount": 15,
+   "avgV": "25.3",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "24.2"
+  },
+  {
+   "day": 44,
+   "pairs": 47,
+   "deepCount": 15,
+   "avgV": "25.8",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "24.6"
+  },
+  {
+   "day": 45,
+   "pairs": 47,
+   "deepCount": 15,
+   "avgV": "26.5",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "25.2"
+  },
+  {
+   "day": 46,
+   "pairs": 47,
+   "deepCount": 15,
+   "avgV": "27.0",
+   "npcPairs": 37,
+   "npcDeep": 9,
+   "npcAvgV": "25.6"
+  },
+  {
+   "day": 47,
+   "pairs": 47,
+   "deepCount": 16,
+   "avgV": "27.5",
+   "npcPairs": 37,
+   "npcDeep": 10,
+   "npcAvgV": "26.0"
+  },
+  {
+   "day": 48,
+   "pairs": 47,
+   "deepCount": 16,
+   "avgV": "28.1",
+   "npcPairs": 37,
+   "npcDeep": 10,
+   "npcAvgV": "26.5"
+  },
+  {
+   "day": 49,
+   "pairs": 47,
+   "deepCount": 17,
+   "avgV": "28.6",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "26.9"
+  },
+  {
+   "day": 50,
+   "pairs": 47,
+   "deepCount": 18,
+   "avgV": "29.1",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "27.4"
+  },
+  {
+   "day": 51,
+   "pairs": 47,
+   "deepCount": 18,
+   "avgV": "29.6",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "27.9"
+  },
+  {
+   "day": 52,
+   "pairs": 47,
+   "deepCount": 18,
+   "avgV": "30.1",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "28.2"
+  },
+  {
+   "day": 53,
+   "pairs": 47,
+   "deepCount": 18,
+   "avgV": "30.6",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "28.7"
+  },
+  {
+   "day": 54,
+   "pairs": 47,
+   "deepCount": 19,
+   "avgV": "31.9",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "29.5"
+  },
+  {
+   "day": 55,
+   "pairs": 47,
+   "deepCount": 19,
+   "avgV": "32.1",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "29.7"
+  },
+  {
+   "day": 56,
+   "pairs": 47,
+   "deepCount": 19,
+   "avgV": "32.6",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "30.1"
+  },
+  {
+   "day": 57,
+   "pairs": 47,
+   "deepCount": 19,
+   "avgV": "33.0",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "30.6"
+  },
+  {
+   "day": 58,
+   "pairs": 47,
+   "deepCount": 19,
+   "avgV": "33.5",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "30.9"
+  },
+  {
+   "day": 59,
+   "pairs": 47,
+   "deepCount": 19,
+   "avgV": "33.7",
+   "npcPairs": 37,
+   "npcDeep": 11,
+   "npcAvgV": "31.0"
+  },
+  {
+   "day": 60,
+   "pairs": 47,
+   "deepCount": 20,
+   "avgV": "34.2",
+   "npcPairs": 37,
+   "npcDeep": 12,
+   "npcAvgV": "31.4"
+  },
+  {
+   "day": 62,
+   "pairs": 47,
+   "deepCount": 22,
+   "avgV": "35.1",
+   "npcPairs": 37,
+   "npcDeep": 14,
+   "npcAvgV": "31.9"
+  },
+  {
+   "day": 62,
+   "pairs": 47,
+   "deepCount": 22,
+   "avgV": "35.3",
+   "npcPairs": 37,
+   "npcDeep": 14,
+   "npcAvgV": "32.0"
+  },
+  {
+   "day": 63,
+   "pairs": 47,
+   "deepCount": 22,
+   "avgV": "35.5",
+   "npcPairs": 37,
+   "npcDeep": 14,
+   "npcAvgV": "32.2"
+  },
+  {
+   "day": 64,
+   "pairs": 47,
+   "deepCount": 23,
+   "avgV": "36.0",
+   "npcPairs": 37,
+   "npcDeep": 15,
+   "npcAvgV": "32.6"
+  },
+  {
+   "day": 65,
+   "pairs": 47,
+   "deepCount": 24,
+   "avgV": "36.3",
+   "npcPairs": 37,
+   "npcDeep": 16,
+   "npcAvgV": "32.9"
+  },
+  {
+   "day": 66,
+   "pairs": 47,
+   "deepCount": 24,
+   "avgV": "36.6",
+   "npcPairs": 37,
+   "npcDeep": 16,
+   "npcAvgV": "33.1"
+  },
+  {
+   "day": 67,
+   "pairs": 47,
+   "deepCount": 24,
+   "avgV": "37.5",
+   "npcPairs": 37,
+   "npcDeep": 16,
+   "npcAvgV": "33.2"
+  },
+  {
+   "day": 68,
+   "pairs": 47,
+   "deepCount": 24,
+   "avgV": "37.7",
+   "npcPairs": 37,
+   "npcDeep": 16,
+   "npcAvgV": "33.4"
+  },
+  {
+   "day": 70,
+   "pairs": 47,
+   "deepCount": 24,
+   "avgV": "38.2",
+   "npcPairs": 37,
+   "npcDeep": 16,
+   "npcAvgV": "33.8"
+  },
+  {
+   "day": 70,
+   "pairs": 47,
+   "deepCount": 24,
+   "avgV": "38.3",
+   "npcPairs": 37,
+   "npcDeep": 16,
+   "npcAvgV": "33.8"
+  },
+  {
+   "day": 71,
+   "pairs": 47,
+   "deepCount": 24,
+   "avgV": "38.5",
+   "npcPairs": 37,
+   "npcDeep": 16,
+   "npcAvgV": "33.9"
+  },
+  {
+   "day": 72,
+   "pairs": 47,
+   "deepCount": 25,
+   "avgV": "38.9",
+   "npcPairs": 37,
+   "npcDeep": 17,
+   "npcAvgV": "34.2"
+  },
+  {
+   "day": 73,
+   "pairs": 47,
+   "deepCount": 25,
+   "avgV": "39.1",
+   "npcPairs": 37,
+   "npcDeep": 17,
+   "npcAvgV": "34.3"
+  },
+  {
+   "day": 74,
+   "pairs": 47,
+   "deepCount": 25,
+   "avgV": "39.7",
+   "npcPairs": 37,
+   "npcDeep": 17,
+   "npcAvgV": "34.6"
+  },
+  {
+   "day": 75,
+   "pairs": 48,
+   "deepCount": 25,
+   "avgV": "39.2",
+   "npcPairs": 38,
+   "npcDeep": 17,
+   "npcAvgV": "34.0"
+  },
+  {
+   "day": 77,
+   "pairs": 48,
+   "deepCount": 25,
+   "avgV": "40.0",
+   "npcPairs": 38,
+   "npcDeep": 17,
+   "npcAvgV": "34.6"
+  },
+  {
+   "day": 77,
+   "pairs": 48,
+   "deepCount": 25,
+   "avgV": "40.0",
+   "npcPairs": 38,
+   "npcDeep": 17,
+   "npcAvgV": "34.6"
+  },
+  {
+   "day": 78,
+   "pairs": 52,
+   "deepCount": 25,
+   "avgV": "37.3",
+   "npcPairs": 41,
+   "npcDeep": 17,
+   "npcAvgV": "32.4"
+  },
+  {
+   "day": 79,
+   "pairs": 52,
+   "deepCount": 26,
+   "avgV": "37.7",
+   "npcPairs": 41,
+   "npcDeep": 18,
+   "npcAvgV": "32.7"
+  },
+  {
+   "day": 80,
+   "pairs": 52,
+   "deepCount": 26,
+   "avgV": "37.9",
+   "npcPairs": 41,
+   "npcDeep": 18,
+   "npcAvgV": "32.8"
+  },
+  {
+   "day": 81,
+   "pairs": 53,
+   "deepCount": 26,
+   "avgV": "37.5",
+   "npcPairs": 41,
+   "npcDeep": 18,
+   "npcAvgV": "33.0"
+  },
+  {
+   "day": 82,
+   "pairs": 53,
+   "deepCount": 26,
+   "avgV": "37.8",
+   "npcPairs": 41,
+   "npcDeep": 18,
+   "npcAvgV": "33.4"
+  },
+  {
+   "day": 83,
+   "pairs": 55,
+   "deepCount": 26,
+   "avgV": "36.8",
+   "npcPairs": 43,
+   "npcDeep": 18,
+   "npcAvgV": "32.2"
+  },
+  {
+   "day": 84,
+   "pairs": 55,
+   "deepCount": 27,
+   "avgV": "37.3",
+   "npcPairs": 43,
+   "npcDeep": 19,
+   "npcAvgV": "32.5"
+  },
+  {
+   "day": 85,
+   "pairs": 56,
+   "deepCount": 27,
+   "avgV": "37.1",
+   "npcPairs": 44,
+   "npcDeep": 19,
+   "npcAvgV": "32.3"
+  },
+  {
+   "day": 86,
+   "pairs": 56,
+   "deepCount": 28,
+   "avgV": "37.3",
+   "npcPairs": 44,
+   "npcDeep": 20,
+   "npcAvgV": "32.4"
+  },
+  {
+   "day": 88,
+   "pairs": 56,
+   "deepCount": 29,
+   "avgV": "37.7",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "32.6"
+  },
+  {
+   "day": 88,
+   "pairs": 56,
+   "deepCount": 29,
+   "avgV": "37.7",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "32.6"
+  },
+  {
+   "day": 89,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "37.9",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "32.6"
+  },
+  {
+   "day": 90,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "38.1",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "32.8"
+  },
+  {
+   "day": 91,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "38.3",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "32.9"
+  },
+  {
+   "day": 92,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "38.6",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "33.2"
+  },
+  {
+   "day": 93,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "39.1",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "33.4"
+  },
+  {
+   "day": 94,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "39.3",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "33.6"
+  },
+  {
+   "day": 95,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "39.5",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "33.8"
+  },
+  {
+   "day": 96,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "39.8",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "34.1"
+  },
+  {
+   "day": 97,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "39.9",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "34.2"
+  },
+  {
+   "day": 98,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "40.1",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "34.4"
+  },
+  {
+   "day": 99,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "40.5",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "34.9"
+  },
+  {
+   "day": 100,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "41.2",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "35.5"
+  },
+  {
+   "day": 101,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "41.4",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "35.7"
+  },
+  {
+   "day": 102,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "41.6",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "35.9"
+  },
+  {
+   "day": 103,
+   "pairs": 56,
+   "deepCount": 30,
+   "avgV": "41.8",
+   "npcPairs": 44,
+   "npcDeep": 21,
+   "npcAvgV": "36.2"
+  },
+  {
+   "day": 104,
+   "pairs": 57,
+   "deepCount": 30,
+   "avgV": "41.5",
+   "npcPairs": 45,
+   "npcDeep": 21,
+   "npcAvgV": "35.8"
+  },
+  {
+   "day": 105,
+   "pairs": 57,
+   "deepCount": 30,
+   "avgV": "41.8",
+   "npcPairs": 45,
+   "npcDeep": 21,
+   "npcAvgV": "36.1"
+  },
+  {
+   "day": 106,
+   "pairs": 57,
+   "deepCount": 30,
+   "avgV": "42.0",
+   "npcPairs": 45,
+   "npcDeep": 21,
+   "npcAvgV": "36.4"
+  },
+  {
+   "day": 107,
+   "pairs": 57,
+   "deepCount": 30,
+   "avgV": "42.1",
+   "npcPairs": 45,
+   "npcDeep": 21,
+   "npcAvgV": "36.5"
+  },
+  {
+   "day": 109,
+   "pairs": 58,
+   "deepCount": 30,
+   "avgV": "41.7",
+   "npcPairs": 47,
+   "npcDeep": 24,
+   "npcAvgV": "41.1"
+  },
+  {
+   "day": 109,
+   "pairs": 58,
+   "deepCount": 30,
+   "avgV": "41.7",
+   "npcPairs": 47,
+   "npcDeep": 24,
+   "npcAvgV": "41.1"
+  },
+  {
+   "day": 110,
+   "pairs": 58,
+   "deepCount": 30,
+   "avgV": "41.8",
+   "npcPairs": 47,
+   "npcDeep": 24,
+   "npcAvgV": "41.3"
+  },
+  {
+   "day": 111,
+   "pairs": 58,
+   "deepCount": 30,
+   "avgV": "42.1",
+   "npcPairs": 47,
+   "npcDeep": 24,
+   "npcAvgV": "41.4"
+  },
+  {
+   "day": 112,
+   "pairs": 58,
+   "deepCount": 30,
+   "avgV": "42.3",
+   "npcPairs": 47,
+   "npcDeep": 24,
+   "npcAvgV": "41.5"
+  },
+  {
+   "day": 113,
+   "pairs": 58,
+   "deepCount": 30,
+   "avgV": "42.8",
+   "npcPairs": 47,
+   "npcDeep": 23,
+   "npcAvgV": "39.0"
+  },
+  {
+   "day": 114,
+   "pairs": 59,
+   "deepCount": 30,
+   "avgV": "42.3",
+   "npcPairs": 48,
+   "npcDeep": 23,
+   "npcAvgV": "41.6"
+  },
+  {
+   "day": 115,
+   "pairs": 59,
+   "deepCount": 30,
+   "avgV": "42.4",
+   "npcPairs": 52,
+   "npcDeep": 28,
+   "npcAvgV": "43.8"
+  },
+  {
+   "day": 116,
+   "pairs": 59,
+   "deepCount": 30,
+   "avgV": "42.5",
+   "npcPairs": 49,
+   "npcDeep": 22,
+   "npcAvgV": "34.9"
+  },
+  {
+   "day": 117,
+   "pairs": 60,
+   "deepCount": 30,
+   "avgV": "41.8",
+   "npcPairs": 49,
+   "npcDeep": 24,
+   "npcAvgV": "42.8"
+  },
+  {
+   "day": 118,
+   "pairs": 63,
+   "deepCount": 30,
+   "avgV": "40.0",
+   "npcPairs": 50,
+   "npcDeep": 24,
+   "npcAvgV": "42.0"
+  },
+  {
+   "day": 119,
+   "pairs": 64,
+   "deepCount": 30,
+   "avgV": "39.5",
+   "npcPairs": 51,
+   "npcDeep": 24,
+   "npcAvgV": "41.4"
+  },
+  {
+   "day": 120,
+   "pairs": 65,
+   "deepCount": 30,
+   "avgV": "39.1",
+   "npcPairs": 51,
+   "npcDeep": 24,
+   "npcAvgV": "41.5"
+  },
+  {
+   "day": 121,
+   "pairs": 65,
+   "deepCount": 30,
+   "avgV": "39.2",
+   "npcPairs": 51,
+   "npcDeep": 24,
+   "npcAvgV": "41.5"
+  },
+  {
+   "day": 122,
+   "pairs": 66,
+   "deepCount": 30,
+   "avgV": "38.8",
+   "npcPairs": 63,
+   "npcDeep": 30,
+   "npcAvgV": "40.1"
+  },
+  {
+   "day": 123,
+   "pairs": 66,
+   "deepCount": 30,
+   "avgV": "39.0",
+   "npcPairs": 63,
+   "npcDeep": 30,
+   "npcAvgV": "40.1"
+  },
+  {
+   "day": 124,
+   "pairs": 66,
+   "deepCount": 30,
+   "avgV": "39.1",
+   "npcPairs": 63,
+   "npcDeep": 30,
+   "npcAvgV": "40.2"
+  },
+  {
+   "day": 125,
+   "pairs": 66,
+   "deepCount": 31,
+   "avgV": "39.2",
+   "npcPairs": 63,
+   "npcDeep": 30,
+   "npcAvgV": "40.2"
+  }
+ ],
+ "bondEventsCount": 1571,
+ "meName": "Vasyl",
+ "bondChannels": {
+  "visit": {
+   "sum": 628,
+   "n": 157
+  },
+  "lingering meal": {
+   "sum": 1884,
+   "n": 942
+  },
+  "deep talk": {
+   "sum": 476,
+   "n": 238
+  },
+  "grievance": {
+   "sum": -45,
+   "n": 4
+  },
+  "promise kept": {
+   "sum": 28,
+   "n": 7
+  },
+  "tended": {
+   "sum": 12,
+   "n": 4
+  },
+  "fought alongside": {
+   "sum": 258,
+   "n": 86
+  },
+  "fed them": {
+   "sum": 10,
+   "n": 6
+  },
+  "feast": {
+   "sum": 75,
+   "n": 75
+  },
+  "hosted feast": {
+   "sum": 72,
+   "n": 36
+  },
+  "stood with you": {
+   "sum": 32,
+   "n": 16
+  }
+ },
+ "firstDeep": {
+  "gen_c7w0kde|gen_gowk9cx": {
+   "day": 14,
+   "a": "gen_c7w0kde",
+   "b": "gen_gowk9cx",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "chantal_mukendi|gen_gowk9cx": {
+   "day": 16,
+   "a": "chantal_mukendi",
+   "b": "gen_gowk9cx",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_7s0scw4|gen_gowk9cx": {
+   "day": 18,
+   "a": "gen_7s0scw4",
+   "b": "gen_gowk9cx",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_gowk9cx|victor_lopez": {
+   "day": 19,
+   "a": "gen_gowk9cx",
+   "b": "victor_lopez",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_gowk9cx|valeria_quispe": {
+   "day": 19,
+   "a": "gen_gowk9cx",
+   "b": "valeria_quispe",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "dale_hoffman|gen_gowk9cx": {
+   "day": 21,
+   "a": "dale_hoffman",
+   "b": "gen_gowk9cx",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "chantal_mukendi|gen_7s0scw4": {
+   "day": 21,
+   "a": "chantal_mukendi",
+   "b": "gen_7s0scw4",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_7s0scw4|gen_c7w0kde": {
+   "day": 27,
+   "a": "gen_7s0scw4",
+   "b": "gen_c7w0kde",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_c7w0kde|victor_lopez": {
+   "day": 29,
+   "a": "gen_c7w0kde",
+   "b": "victor_lopez",
+   "v": 27,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "benoit_lambert|gen_gowk9cx": {
+   "day": 29,
+   "a": "benoit_lambert",
+   "b": "gen_gowk9cx",
+   "v": 29,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "caleb_jones|gen_pce1mna": {
+   "day": 30,
+   "a": "caleb_jones",
+   "b": "gen_pce1mna",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "gen_c7w0kde|gen_pce1mna": {
+   "day": 31,
+   "a": "gen_c7w0kde",
+   "b": "gen_pce1mna",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "dale_hoffman|gen_7s0scw4": {
+   "day": 33,
+   "a": "dale_hoffman",
+   "b": "gen_7s0scw4",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "dale_hoffman|gen_c7w0kde": {
+   "day": 38,
+   "a": "dale_hoffman",
+   "b": "gen_c7w0kde",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "benoit_lambert|gen_c7w0kde": {
+   "day": 41,
+   "a": "benoit_lambert",
+   "b": "gen_c7w0kde",
+   "v": 27,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "gen_7s0scw4|victor_lopez": {
+   "day": 47,
+   "a": "gen_7s0scw4",
+   "b": "victor_lopez",
+   "v": 27,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_7s0scw4|valeria_quispe": {
+   "day": 49,
+   "a": "gen_7s0scw4",
+   "b": "valeria_quispe",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "gen_c7w0kde|valeria_quispe": {
+   "day": 50,
+   "a": "gen_c7w0kde",
+   "b": "valeria_quispe",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "chantal_mukendi|gen_c7w0kde": {
+   "day": 54,
+   "a": "chantal_mukendi",
+   "b": "gen_c7w0kde",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "chantal_mukendi|victor_lopez": {
+   "day": 60,
+   "a": "chantal_mukendi",
+   "b": "victor_lopez",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "benoit_lambert|gen_7s0scw4": {
+   "day": 62,
+   "a": "benoit_lambert",
+   "b": "gen_7s0scw4",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "chantal_mukendi|valeria_quispe": {
+   "day": 62,
+   "a": "chantal_mukendi",
+   "b": "valeria_quispe",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "valeria_quispe|victor_lopez": {
+   "day": 64,
+   "a": "valeria_quispe",
+   "b": "victor_lopez",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "dale_hoffman|valeria_quispe": {
+   "day": 65,
+   "a": "dale_hoffman",
+   "b": "valeria_quispe",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "dale_hoffman|victor_lopez": {
+   "day": 72,
+   "a": "dale_hoffman",
+   "b": "victor_lopez",
+   "v": 26,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "benoit_lambert|valeria_quispe": {
+   "day": 79,
+   "a": "benoit_lambert",
+   "b": "valeria_quispe",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "benoit_lambert|dale_hoffman": {
+   "day": 84,
+   "a": "benoit_lambert",
+   "b": "dale_hoffman",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "benoit_lambert|victor_lopez": {
+   "day": 86,
+   "a": "benoit_lambert",
+   "b": "victor_lopez",
+   "v": 25,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "app_mgpsphj8397|gen_gowk9cx": {
+   "day": 88,
+   "a": "app_mgpsphj8397",
+   "b": "gen_gowk9cx",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": true
+  },
+  "app_mgpsphj8397|gen_c7w0kde": {
+   "day": 89,
+   "a": "app_mgpsphj8397",
+   "b": "gen_c7w0kde",
+   "v": 30,
+   "depth": 1,
+   "bothNpc": false
+  },
+  "vasyl_shevchenko|yuki_mori": {
+   "day": 125,
+   "a": "vasyl_shevchenko",
+   "b": "yuki_mori",
+   "v": 28,
+   "depth": 1,
+   "bothNpc": false
+  }
+ },
+ "plotSnap": [
+  {
+   "day": 2,
+   "plots": []
+  },
+  {
+   "day": 2,
+   "plots": []
+  },
+  {
+   "day": 4,
+   "plots": []
+  },
+  {
+   "day": 4,
+   "plots": []
+  },
+  {
+   "day": 5,
+   "plots": []
+  },
+  {
+   "day": 6,
+   "plots": []
+  },
+  {
+   "day": 7,
+   "plots": []
+  },
+  {
+   "day": 8,
+   "plots": []
+  },
+  {
+   "day": 9,
+   "plots": []
+  },
+  {
+   "day": 10,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 72,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 73,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 74,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 75,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 78,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 79,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 82,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 83,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 85,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 86,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 91,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 92,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 94,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 95,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 96,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 97,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 98,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 99,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 100,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 103,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 105,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 106,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 107,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 110,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 111,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 112,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 113,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 114,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 115,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 116,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 117,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 118,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 119,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 120,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 121,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 122,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 123,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 124,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "plots": [
+    {
+     "id": "plot_1",
+     "day": 9,
+     "leader": "Devon",
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "active": false,
+     "sprung": true,
+     "resolved": true,
+     "expired": false
+    }
+   ]
+  }
+ ],
+ "caseSnap": [
+  {
+   "day": 2,
+   "cases": []
+  },
+  {
+   "day": 2,
+   "cases": []
+  },
+  {
+   "day": 4,
+   "cases": []
+  },
+  {
+   "day": 4,
+   "cases": []
+  },
+  {
+   "day": 5,
+   "cases": []
+  },
+  {
+   "day": 6,
+   "cases": []
+  },
+  {
+   "day": 7,
+   "cases": []
+  },
+  {
+   "day": 8,
+   "cases": []
+  },
+  {
+   "day": 9,
+   "cases": []
+  },
+  {
+   "day": 10,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "bystander",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "open",
+     "hasTrial": false,
+     "trialDay": null,
+     "resolution": null,
+     "convicted": null
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "bystander",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "open",
+     "hasTrial": false,
+     "trialDay": null,
+     "resolution": null,
+     "convicted": null
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "open",
+     "hasTrial": false,
+     "trialDay": null,
+     "resolution": null,
+     "convicted": null
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 15,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 16,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 19,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 20,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 21,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 22,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 23,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 24,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 25,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 26,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 27,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 28,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 29,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 30,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 31,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 32,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 33,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 35,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 37,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 39,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 40,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 41,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 42,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 43,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 44,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 45,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 46,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 48,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 49,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 50,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 51,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 52,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 53,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 55,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 56,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 57,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 58,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 59,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 60,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 63,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 64,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 65,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 66,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 67,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 68,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 71,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 72,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 73,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 74,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 75,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 78,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 79,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 82,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 83,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 85,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 86,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 91,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 92,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 94,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 95,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 96,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 97,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 98,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 99,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 100,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 101,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 102,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 103,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 105,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 106,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 107,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 109,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 110,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 111,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 112,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 113,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 114,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 115,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 116,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 117,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 118,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 119,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 120,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 121,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": true,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 122,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 123,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 124,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "cases": [
+    {
+     "id": "case_2",
+     "charge": "ambush",
+     "day": 9,
+     "accused": "Devon, Benoit, Brayden",
+     "accusedIsPlayer": false,
+     "target": "Valeria",
+     "targetIsPlayer": false,
+     "accuser": null,
+     "playerRole": "juror",
+     "fabricated": false,
+     "source": "plot:plot_1",
+     "status": "acquitted",
+     "hasTrial": true,
+     "trialDay": 12,
+     "resolution": "acquitted",
+     "convicted": false
+    }
+   ]
+  }
+ ],
+ "mootConvos": 243,
+ "endState": {
+  "over": true,
+  "villageLost": true,
+  "scattered": true,
+  "extinct": false,
+  "scholarExiled": false,
+  "scholarDead": false
+ }
+}
