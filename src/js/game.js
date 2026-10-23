@@ -28311,6 +28311,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         bodyIsNew = lin.length === 0 || newcomer;
       } catch (e) { bodyIsNew = true; }
       const share = (trust < 30 && bodyIsNew) ? 1000 : trust < 60 ? 2000 : 2200;
+      // R41: the beat must voice the same gate as the share -- a taken-over
+      // established body at trust<30 banks 2000/2200, so the beat may not
+      // claim "Half ration" (voice==share, never keyed on trust alone).
+      const halfRation = (trust < 30 && bodyIsNew);
       // don't take more than you can hold — food doesn't vanish into the cap.
       // BANK CAP (break-it food r3 2026-10-08): kcalCap() is the one number —
       // the old 3000 literal let the meal overfill a 2400-cap bank.
@@ -28398,7 +28402,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // CAPDRAW2: the beat reports the NET banked and names the return —
         // pristine's "+{taken} kcal" claimed kcal the body never banked.
         // Gate OFF: excess is 0 and the string is the pristine one.
-        this.say(`Village meal: +${Math.round(netBanked)} kcal${gotWater ? ', +1L water' : ''} from the communal pantry.${trust < 30 ? ' (Half ration — they don\'t trust you yet.)' : ''}${excess > 0 ? ` (You couldn't hold the whole ${leftoverName} — ${Math.round(excess).toLocaleString('en-US')} kcal went back in the bins as leftovers.)` : ''}`);
+        this.say(`Village meal: +${Math.round(netBanked)} kcal${gotWater ? ', +1L water' : ''} from the communal pantry.${halfRation ? ' (Half ration — they don\'t trust you yet.)' : ''}${excess > 0 ? ` (You couldn't hold the whole ${leftoverName} — ${Math.round(excess).toLocaleString('en-US')} kcal went back in the bins as leftovers.)` : ''}`);
       } else {
         this.say(`No food in the pantry. The village is hungry.${gotWater ? ' You still get your 1L water.' : ''}`);
       }
