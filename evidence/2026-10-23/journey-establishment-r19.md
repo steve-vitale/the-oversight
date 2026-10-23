@@ -2,9 +2,11 @@
 
 **Run provenance:** clean scheduled run (no lock at start; rotation read 1).
 Leg 1 = establishment; rotation advances to 2 at landing. Worktree
-`journey-establishment` on master 806a71bed (pull: already up to date).
-Env gates at landed defaults (PLENTYDEPRI/DEPOSITGATE unset = ON) — this
-run measures the live game.
+`journey-establishment`; base 806a71bed at pilot, **rebased to 85f37fbf2**
+(sibling landings: endgame relay voicing, succession meal) with a clean
+4-seed re-pilot on the new base — verdicts below are the rebased pilot
+unless noted. Env gates at landed defaults (PLENTYDEPRI/DEPOSITGATE unset
+= ON) — this run measures the live game.
 
 Canon read: CANON.md (manifest + standing rules), CONTESTS.md (the show:
 contests are its teeth, TV is its gossip), CONVERSATIONS.md (dialogue bar).
@@ -36,19 +38,17 @@ docs/DECISIONS.md 2026-10-21 (Steve's ruling). No new canon invented.
 
 ## METRIC VERDICT
 
-- M1a win surfacing — **METRIC-REVIEW: 2/11 = 18.2%** (10–25% band) on the
-  pre-registered 42-day pilot. Per-seed: 61: 0/2, 82: 0/3, 103: 2/4,
-  124: 0/2. Below r18's 6/20 (30%) but inside the review band — recorded,
-  not re-scored. The two surfaced wins named the show and the winner
-  ("Did you hear? You won Duel on the cameras"; "Wei walked out of The
-  Informant. Alive."). Note: the 46-day seed-103 extension (run for the
-  M1b window, below) aired one more win (The Echo, day 46) which also
-  surfaced — 3/12 = 25.0% pooled with the extension. Recorded as an
-  observation, NOT a re-score of the binding pilot metric.
-- M1b defeat surfacing — **NO-GO: 0/1** (n=1: The Witness, lost, seed
-  103 day 42). The competent policy rarely loses; one defeat in 4 seeds.
-  The r18 seed fix VERIFIED working in the wild (see headline) — the
-  miss is surfacing weight, not seeding.
+- M1a win surfacing — **METRIC-REVIEW: 2/12 = 16.7%** (10–25% band) on the
+  rebased 42-day pilot (61: 0/2, 82: 0/4, 103: 2/4, 124: 0/2). Below r18's
+  6/20 (30%) but inside the review band — recorded, not re-scored. The
+  two surfaced wins named the show and the winner ("Did you hear? You
+  won Duel on the cameras"; "Wei walked out of The Informant. Alive.").
+- M1b defeat surfacing — **NO-GO: 0/3** (rebased pilot: The Witness d42
+  on 103; The Blood Tithe d29 + Hardened The Blood Tithe d40 on 124).
+  The competent policy loses more on the new base; all three seeded
+  entries with living hearers (cxCalls instrumentation) and none
+  surfaced. The r18 seed fix VERIFIED working in the wild — the miss is
+  surfacing weight, not seeding.
 - M2 food economy — **GO.** 0 starvation deaths (4 seeds); atom 250–500
   all seeds; pantry never negative; 4/4 villages alive at d42–43.
 - M3 people — **GO.** 12 transcripts sense-read (below), 0 senseless.
@@ -56,12 +56,16 @@ docs/DECISIONS.md 2026-10-21 (Steve's ruling). No new canon invented.
 
 ## HEADLINE: the loss gossip seeds, spreads, and still never surfaces — root-caused to branch priority (Steve's call)
 
-The r19 driver instruments `_cxGossip` calls directly. Seed 103's The
-Witness loss (day 42, extended to day 47 for a full probe window):
+The r19 driver instruments `_cxGossip` calls directly (first verified on
+the pre-rebase base with a 46-day seed-103 extension for a full probe
+window, then re-verified on the rebased pilot). Seed 103's The Witness
+loss (day 42):
 
 1. **Seeding works (r18 fix holds):** `('survived','player','The Witness')`
-   seeded day 42, hearer alive. The r18 proof test's RED->GREEN is confirmed
-   live, not just in the harness.
+   seeded day 42, hearer alive — on both bases. The r18 proof test's
+   RED->GREEN is confirmed live, not just in the harness. Rebased pilot:
+   all 3 player losses seeded with living hearers (Witness d42,
+   Blood Tithe d29, Hardened Blood Tithe d40).
 2. **Spread works:** the entry's heard-list grew 1 -> 7 villagers within
    2 days (day-43 probes: 2 tellers entry-available; day-44: 7). The
    village's secondhand-gossip propagation carries contest news.
@@ -102,23 +106,24 @@ ended 7.9k. 3 contests, all won (Duel, Pattern Hunger, The Quiet Room).
 James the truck driver needs hands at the Haven door; Lillian the
 blacksmith tests whether she can trust you about her taken spouse Arlo;
 Ruth the zookeeper confesses she sneaks out at night.
-**Seed 103 — the winning streak.** 11 alive d47 (extended to 46d for the
-Witness probe window), 6 deaths, pantry 33–49k. 6 contests: 5 wins + the
-run's only loss (The Witness, d42). Mateo the dispatcher dreams of eight
-un-afraid hours; Erin the PT aide is sick and asking for help; Ruth the
-plumber's sister Sofia was taken.
-**Seed 124 — the lean survivor.** 9 alive d43, 17 deaths, pantry ran
-27k -> 5k -> 12.6k -> 3.6k -> 7k, ended 4.6k. A village living
-hand-to-mouth for 30 days with zero starvation deaths. 2 contests, both
-won (Duel, Windfall). Valentina and Peyton both run the water math with
-you (9 liters, 7 liters — two favors, two days); Peyton: "Do the math
-with me: 7 liters, 9 people. That's not tomorrow's water."
+**Seed 103 — the winning streak.** 11 alive d42, 5 deaths, pantry 33–48k.
+4 contests, all won (Secret Deck, Duel, Informant, Pit), plus the run's
+Witness loss d42. Mateo the dispatcher dreams of eight un-afraid hours;
+Erin the PT aide is sick and asking for help; Ruth the plumber's sister
+Sofia was taken.
+**Seed 124 — the lean survivor.** 10 alive d42, 16 deaths, pantry ran
+27k -> 5k -> 12.6k -> 3.6k, ended 26k. A village living hand-to-mouth
+with zero starvation deaths — and the run's two Blood Tithe losses
+(d29, hardened d40), both seeded into gossip, neither surfaced.
+Valentina and Peyton both run the water math with you (9 liters,
+7 liters — two favors, two days); Peyton: "Do the math with me:
+7 liters, 9 people. That's not tomorrow's water."
 
 **Who leads:** trust-60+ tiers on every seed (r16 pattern holds).
 **Who is miserable:** nobody at trust 0 flagged; Erin's sickness and
 Hermann's sickness are needs, not misery.
-**What is missing:** the show's defeats in the fire's talk — the one
-defeat this run seeded and spread but never surfaced (headline).
+**What is missing:** the show's defeats in the fire's talk — three
+defeats this run seeded and spread but never surfaced (headline).
 
 ## FOOD ECONOMY (the active target)
 
@@ -143,32 +148,38 @@ defeat this run seeded and spread but never surfaced (headline).
   smaller stockpiles + eat-at-the-fire is the intended behavioral
   outcome, confirmed by the ledgers, the voice lines, and the
   sim-plentydepri-confirm-b run (rot down, guardrails hold). Baseline
-  rolled forward with provenance note. deaths 46->44, popAlive 38->40,
-  pilotAired 4->4: all quiet.
+  rolled forward with provenance note. Rebased pilot re-check vs the new
+  baseline {44, 40, 79935, 4}: {deaths 45, popAlive 41, pantryKcal
+  101914, pilotAired 4} — all quiet, no further roll-forward. deaths
+  46->44, popAlive 38->40, pilotAired 4->4: quiet throughout.
 
-## PEOPLE CHECK (12 transcripts sense-read, 0 senseless)
+## PEOPLE CHECK (12 transcripts sense-read, 0 senseless — re-verified on the rebased pilot)
 
-61: Wilhelm (vintner) — creek concerts, Columbus songs, tunes outlast
-everything. Kate (dry cleaner) — pods dream, taken nephew Joseph,
-"I do not know what cozy means at that scale" (KIN.md voice); the
-commit-to-ask-the-System beat lands ("Even asking is more than the
-silence"). Angelo (street artist) — "Have you ever hurt someone?...
-I don't keep score on that. Score-keeping is how you stop sleeping."
-82: James (truck driver) — Haven-door favor with escalating pushback
-when the same question is spammed ("I've told you three times now").
-Lillian (blacksmith) — trust test: "The wrong one would've been 'yes'
-too fast." Ruth (zookeeper) — night-sneaking confession; gossip chain
-serves ambient (departures, "People are talking about Maya") — the M1a
-finding from the player's seat.
+61: Wilhelm (vintner) — creek concerts, Columbus songs, "Tunes outlast
+everything." Kate (dry cleaner) — pods dream, taken nephew Joseph, "I
+do not know what cozy means at that scale" (KIN.md voice); the
+commit-to-ask-the-System beat lands. Angelo (street artist) — "I don't
+keep score on that. Score-keeping is how you stop sleeping."
+82: James (truck driver) — medicine-theft confession, then layered
+confrontation confessions: "I don't actually want to belong somewhere.
+I want to be in charge" / "I'm not from Denver. I'm from Columbus, Ohio.
+I wanted an edge... I'm not proud of that." A person whose secrets come
+out under pressure. Lillian (blacksmith) — pods dream, taken spouse
+Arlo; "I believe in breakfast. In people showing up. Small, provable
+things." Ruth (zookeeper) — taken grandfather Roman: "He survived two
+wars and a famine. Not interesting enough, apparently."
 103: Mateo (dispatcher) — hope beat ("Eight hours of not being afraid").
-Erin (PT aide) — sick-row favor ("achy and wrung out"). Ruth
-(plumber) — taken sister Sofia; expedition cue yields a real learned
-cue ("Flashbulb Moth — It lands. It hunts at night").
-124: Valentina (tattoo artist) — cistern favor; decline lands a real
-social close ("They won't raise it again"). Hermann (hunting guide) —
-sick; dodges "tell me why" ("Gotta run. Literally. Bye!" — reads as a
-deflect, noted not flagged). Peyton (musician) — the water math,
-"They won't ask twice."
+Erin (PT aide) — sick-row favor. Ruth (plumber) — taken sister Sofia;
+expedition cue yields a real learned cue ("Flashbulb Moth — It lands.
+It hunts at night").
+124: Valentina (tattoo artist) — bare-pantry favor; the requirements ask
+answers with dev-honesty ("There is no playable joint foraging outing
+yet") and the decline lands a real social close ("They won't forget.
+They'll just stop asking"). Hermann (hunting guide) — "I know who took
+the extra rations but won't say" (plants, owes); field teachings with
+teeth ("Peyton talks to the garden. The garden listens. I've seen it").
+Peyton (musician) — unsent letters; "Thank you for listening. Really
+listening. That's rare."
 Hard-flag scan: 0 fallback lines, 0 phantom names, 0 verbatim repeats,
 0 null renders in 12 held convos. Menus within the r16 cap.
 
@@ -206,9 +217,8 @@ Hard-flag scan: 0 fallback lines, 0 phantom names, 0 verbatim repeats,
   exhaustive-walk-down instrument (does the entry surface with repeated
   "tell me more" inside its 3-day life?) to separate weighting from
   availability.
-- M1b n=1 is a sample-size artifact of competent play (losses are rare).
-  The r18 seed fix is verified live; the metric's binding threshold
-  stands for the next run.
+- M1b n=3 (all seeded, none surfaced). The metric's binding threshold
+  stands for the next run; the finding is now weight, not sample size.
 - M2's <=1-starvation bind held with 0; the seed-124 lean stretch suggests
   keeping it (not loosening) — the mechanism earned the margin.
 
@@ -220,7 +230,7 @@ Hard-flag scan: 0 fallback lines, 0 phantom names, 0 verbatim repeats,
   ledgers + _cxGossip call instrumentation; seeds 61/82/103/124)
 - Per-seed JSON + contest-window transcripts + held convos (4 seeds):
   `~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-10-23/journey-establishment-r19-*`
-  (seed 103's JSON is the 46-day extension run; seeds 61/82/124 are the
-  42-day pilot)
+  (rebased 42-day pilot; the pre-rebase 46-day seed-103 extension was
+  superseded)
 - Telemetry baseline rolled forward:
   `~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/telemetry-baselines/establishment.json`
