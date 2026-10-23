@@ -387,15 +387,21 @@
         var key = (scope === 'dayPart') ? 'dayPartsLeft' : 'turnsLeft';
         if (st[key] != null) {
           st[key] -= 1;
+          // DISEASE-NAME KNOWLEDGE GATE (crisis leg r44 2026-10-23): docs/DISEASES.md
+          // -- diseases never announce their names, only symptoms; diagnosis
+          // unlocks the true name. The villager pipeline already gates on it
+          // (game.js DEATH-CAUSE HONESTY); the scholar pipeline named lockjaw /
+          // the trembles unconditionally in warnings and death lines. Same gate.
+          var _knowsDisease = function (id) { try { return !!(self.villageKnowsDisease && self.villageKnowsDisease(id)); } catch (e) { return false; } };
           // TREMBLES LATE WARNING (break-it disease r10): ~2 days left.
           // Agency: settle what matters — the mantle is about to pass.
           if (isScholar && st.id === 'trembles' && st[key] === 8) {
-            self.say('The tremor is moving inward now \u2014 hands, arms, the throat. Days, not weeks. Settle what matters. (the trembles: ~2 days left)');
+            self.say('The tremor is moving inward now \u2014 hands, arms, the throat. Days, not weeks. Settle what matters. ' + (_knowsDisease('trembles') ? '(the trembles: ~2 days left)' : '(the tremor: ~2 days left)'));
           }
           // LOCKJAW LATE WARNING (longsim disease 2026-10-11): same agency —
           // the clock is real and the cure direction was named at diagnosis.
           if (isScholar && st.id === 'lockjaw' && st[key] === 8) {
-            self.say('The spasms are locking the jaw shut \u2014 swallowing is work now, and the neck barely turns. Days, not weeks. Find real treatment (antibiotics, skilled wound care) or settle what matters. (lockjaw: ~2 days left)');
+            self.say('The spasms are locking the jaw shut \u2014 swallowing is work now, and the neck barely turns. Days, not weeks. Find real treatment (antibiotics, skilled wound care) or settle what matters. ' + (_knowsDisease('lockjaw') ? '(lockjaw: ~2 days left)' : '(the spasms: ~2 days left)'));
           }
           if (st[key] <= 0) {
             // TREMBLES CERTAINTY (Steve 2026-10-09, break-it disease r10):
@@ -408,11 +414,11 @@
             if (isScholar && st.id === 'trembles') {
               try {
                 self.seRemove(target, st);
-                self.say('The tremor reaches all the way in and does not come back out. Your hands still first. Then everything else. It never lets go \u2014 it was never going to. (the trembles)');
+                self.say('The tremor reaches all the way in and does not come back out. Your hands still first. Then everything else. It never lets go \u2014 it was never going to. ' + (_knowsDisease('trembles') ? '(the trembles)' : '(the tremor \u2014 it never lets go)'));
                 // BREAK-IT abilities 2026-10-10: a disease death is not a violent
                 // one -- second_wind's spite-ration (+500 kcal) must not fire.
-                if (self.maybeCheatDeath && !self.maybeCheatDeath('disease')) self.playerDeath('the trembles');
-                else if (!self.maybeCheatDeath) self.playerDeath('the trembles');
+                if (self.maybeCheatDeath && !self.maybeCheatDeath('disease')) self.playerDeath(_knowsDisease('trembles') ? 'the trembles' : 'sickness');
+                else if (!self.maybeCheatDeath) self.playerDeath(_knowsDisease('trembles') ? 'the trembles' : 'sickness');
               } catch (e) {}
               return;
             }
@@ -429,9 +435,9 @@
             if (isScholar && st.id === 'lockjaw') {
               try {
                 self.seRemove(target, st);
-                self.say('The spasms lock everything shut at once \u2014 jaw, throat, back. The body starves behind a clenched jaw, breath coming in thinner and thinner. It never opens again. (lockjaw \u2014 without real treatment, it kills)');
-                if (self.maybeCheatDeath && !self.maybeCheatDeath('disease')) self.playerDeath('lockjaw');
-                else if (!self.maybeCheatDeath) self.playerDeath('lockjaw');
+                self.say('The spasms lock everything shut at once \u2014 jaw, throat, back. The body starves behind a clenched jaw, breath coming in thinner and thinner. It never opens again. ' + (_knowsDisease('lockjaw') ? '(lockjaw \u2014 without real treatment, it kills)' : '(the spasms \u2014 without real treatment, they kill)'));
+                if (self.maybeCheatDeath && !self.maybeCheatDeath('disease')) self.playerDeath(_knowsDisease('lockjaw') ? 'lockjaw' : 'sickness');
+                else if (!self.maybeCheatDeath) self.playerDeath(_knowsDisease('lockjaw') ? 'lockjaw' : 'sickness');
               } catch (e) {}
               return;
             }

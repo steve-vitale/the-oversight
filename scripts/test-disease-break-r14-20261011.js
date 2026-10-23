@@ -70,7 +70,7 @@ rng.reset();
 Math.random = rng;
 global.window = global;
 const LIST = ['engine/state.js', 'engine/modifiers.js', 'engine/calories.js', 'engine/day.js',
-  'engine/forage.js', 'engine/combat.js', 'game.js', 'encounters.js', 'conversation.js',
+  'engine/forage.js', 'engine/combat.js', 'game.js', 'text.js', 'encounters.js', 'conversation.js',
   'convo-mood.js', 'convoTopics.js', 'convo-wants.js', 'convo-dialogue.js', 'convo-beats.js',
   'convo-scene.js', 'examine.js', 'equipment.js', 'journal.js', 'party.js', 'party-formal.js',
   'truth.js', 'contests.js', 'broadcast.js', 'contestEngine.js', 'alienPlayers.js', 'storage.js',
@@ -286,15 +286,32 @@ function stripMedical() {
   setup();
   Game.applyStatus('scholar', 'lockjaw', { source: 'test', silent: true });
   Game.state.scholar.health = 100;
-  let lockDied = false, lockWarned = false;
+  let lockDied = false, lockWarned = false, lockSaid = [];
   const _pd2 = Game.playerDeath.bind(Game);
   Game.playerDeath = (cause) => { lockDied = cause; Game.playerDeath = _pd2; };
   const _say = Game.say.bind(Game);
-  Game.say = (msg) => { if (/lockjaw: ~2 days left/.test(String(msg))) lockWarned = true; };
+  Game.say = (msg) => { lockSaid.push(String(msg)); if (/(the spasms|lockjaw): ~2 days left/.test(String(msg))) lockWarned = true; };
   for (let i = 0; i < 25 && !lockDied; i++) { Game.state.scholar.health = 100; Game.tickStatuses('scholar', 'dayPart'); }
   Game.playerDeath = _pd2; Game.say = _say;
-  ok('untreated lockjaw kills at 16 day-parts (certain, narrated, cause lockjaw)', lockDied === 'lockjaw', `cause=${lockDied}`);
-  ok('lockjaw late warning fires at 8 parts left (~2 days)', lockWarned === true);
+  // CRISIS LEG r44 2026-10-23: the scholar disease-death now obeys the same
+  // knowledge gate as villagers (DISEASES.md: symptoms until diagnosed).
+  // Undiagnosed -> cause 'sickness', narration symptom-honest.
+  ok('untreated lockjaw kills at 16 day-parts (certain, narrated, cause sickness undiagnosed)', lockDied === 'sickness', `cause=${lockDied}`);
+  ok('undiagnosed lockjaw death names no true disease', !/lockjaw/i.test(lockSaid.join('\n')),
+    lockSaid.filter(l => /spasm|lockjaw/i.test(l)).slice(0, 2).join(' | ').slice(0, 200));
+  ok('lockjaw late warning fires at 8 parts left (~2 days), symptom-honest', lockWarned === true);
+  // Diagnosed control: the village knows it -> the true name is used.
+  setup();
+  Game.applyStatus('scholar', 'lockjaw', { source: 'test', silent: true });
+  Game.diagnoseDisease('scholar', 'lockjaw', { silent: true });
+  Game.markDiseaseKnown('lockjaw');
+  Game.state.scholar.health = 100;
+  let lockDiedKnown = false;
+  const _pd2b = Game.playerDeath.bind(Game);
+  Game.playerDeath = (cause) => { lockDiedKnown = cause; Game.playerDeath = _pd2b; };
+  for (let i = 0; i < 25 && !lockDiedKnown; i++) { Game.state.scholar.health = 100; Game.tickStatuses('scholar', 'dayPart'); }
+  Game.playerDeath = _pd2b;
+  ok('diagnosed lockjaw death names the disease (knowledge gate)', lockDiedKnown === 'lockjaw', `cause=${lockDiedKnown}`);
   // Cured lockjaw does NOT kill: diagnosed + antibiotics before the clock.
   setup();
   Game.applyStatus('scholar', 'lockjaw', { source: 'test', silent: true });

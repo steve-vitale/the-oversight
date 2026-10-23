@@ -667,11 +667,19 @@
       var st = this.state;
       if (this.over) return null;
       if (st.relief && st.relief.kind !== kind) {
-        var kindLabel = kind === 'hunger' ? 'hunger' : kind === 'sickness' ? 'sickness' : 'this';
-        st.relief.kind = kind;
-        st.relief.partsLeft = Math.max(st.relief.partsLeft || 0, 6);
-        this.say('🛟 ' + st.relief.speaker + ' looks up from the fire. "And now ' + kindLabel + ', on top of it all. The options stand — pick, before we lose the chance."');
-        try { if (this.journalNote) this.journalNote('village', 'relief', 'Crisis compounded: ' + kind + ', day ' + _day(this) + '.'); } catch (e) {}
+        // COMPOUND-ONCE (crisis leg r44 2026-10-23): the escalation beat fires
+        // once per relief. Without this, a sickness relief open while hunger
+        // persists would re-compound every sickness tick and every hungry day
+        // — the "on top of it all" line spamming back and forth. The first
+        // compounding stands; later different-kind raises ride silently.
+        if (!st.relief.compounded) {
+          var kindLabel = kind === 'hunger' ? 'hunger' : kind === 'sickness' ? 'sickness' : 'this';
+          st.relief.kind = kind;
+          st.relief.compounded = true;
+          st.relief.partsLeft = Math.max(st.relief.partsLeft || 0, 6);
+          this.say('🛟 ' + st.relief.speaker + ' looks up from the fire. "And now ' + kindLabel + ', on top of it all. The options stand — pick, before we lose the chance."');
+          try { if (this.journalNote) this.journalNote('village', 'relief', 'Crisis compounded: ' + kind + ', day ' + _day(this) + '.'); } catch (e) {}
+        }
         return st.relief;
       }
       if (st.relief) return null;
@@ -1192,7 +1200,11 @@
       try {
         var vv = this.state.village || {};
         if ((vv.hungryDays || 0) === 0) vv._hungerReliefEpisode = false;
-        if (!st.relief && (vv.hungryDays || 0) >= 1 && !vv._hungerReliefEpisode) {
+        // HUNGER RELIEF, EARLY — compound-aware (crisis leg r44 2026-10-23):
+        // hunger compounding onto an open non-hunger relief escalates the
+        // framing ("And now hunger, on top of it all") instead of being
+        // swallowed by the !st.relief guard. Same-kind re-raise still blocked.
+        if ((!st.relief || st.relief.kind !== 'hunger') && (vv.hungryDays || 0) >= 1 && !vv._hungerReliefEpisode) {
           var opened = this.raiseRelief('hunger', { early: true });
           if (opened) vv._hungerReliefEpisode = true;
         }
@@ -1407,7 +1419,9 @@
     try {
       var v = this.state.village || {};
       var sickN = Object.keys(v.sick || {}).length;
-      if (sickN >= 2 && !this.state.relief && !this.over) this.raiseRelief('sickness', { sickN: sickN });
+      // Compound-aware (crisis leg r44 2026-10-23): sickness compounding onto
+      // an open non-sickness relief escalates instead of being swallowed.
+      if (sickN >= 2 && (!this.state.relief || this.state.relief.kind !== 'sickness') && !this.over) this.raiseRelief('sickness', { sickN: sickN });
     } catch (e) {}
     return r;
   };
@@ -1419,7 +1433,7 @@
     try { crisis = this.aidCrisis(); } catch (e) {}
     var r = _racS.apply(this, arguments);
     try {
-      if (r === 'fought' && crisis && crisis.raiders && !this.state.relief && !this.over) this.raiseRelief('raid', {});
+      if (r === 'fought' && crisis && crisis.raiders && (!this.state.relief || this.state.relief.kind !== 'raid') && !this.over) this.raiseRelief('raid', {});
     } catch (e) {}
     return r;
   };
@@ -1434,7 +1448,7 @@
     } catch (e) {}
     var r = _rsfS.apply(this, arguments);
     try {
-      if (had && !sheltered && !this.state.relief && !this.over) this.raiseRelief('storm', {});
+      if (had && !sheltered && (!this.state.relief || this.state.relief.kind !== 'storm') && !this.over) this.raiseRelief('storm', {});
     } catch (e) {}
     return r;
   };
@@ -1444,7 +1458,7 @@
   if (_fcS) G.fireCrisis = function (kind, ctx) {
     var r = _fcS.apply(this, arguments);
     try {
-      if (r === true && kind === 'hunger-winter' && !this.state.relief && !this.over) this.raiseRelief('hunger', {});
+      if (r === true && kind === 'hunger-winter' && (!this.state.relief || this.state.relief.kind !== 'hunger') && !this.over) this.raiseRelief('hunger', {});
     } catch (e) {}
     return r;
   };

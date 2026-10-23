@@ -266,8 +266,19 @@ function resetScholar() {
     Game.maybeCheatDeath = () => false;
     Game.state.scholar.health = 50;
     Game.tickStatuses('scholar', 'dayPart');
-    ok(died === 'the trembles', 'trembles expiry kills the bearer (certain)');
+    ok(died === 'sickness', 'trembles expiry kills the bearer (certain); undiagnosed death stays symptom-honest (crisis leg r44 2026-10-23: knowledge gate)');
     ok(!Game.hasStatus('scholar', 'trembles'), 'trembles entry removed at death (no phantom)');
+    // diagnosed control: the village knows it -> the true name is used
+    resetScholar();
+    Game.contractDisease('trembles', { source: 'test meat' });
+    Game.diagnoseDisease('scholar', 'trembles', { silent: true });
+    Game.markDiseaseKnown('trembles');
+    Game.seList('scholar').find(e => e.id === 'trembles').dayPartsLeft = 1;
+    died = null;
+    Game.playerDeath = (cause) => { died = cause; };
+    Game.state.scholar.health = 50;
+    Game.tickStatuses('scholar', 'dayPart');
+    ok(died === 'the trembles', 'diagnosed trembles death names the disease (knowledge gate)');
     resetScholar();
     Game.contractDisease('trembles', { source: 'test meat' });
     Game.seList('scholar').find(e => e.id === 'trembles').dayPartsLeft = 1;
