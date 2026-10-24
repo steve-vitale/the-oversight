@@ -1,0 +1,738 @@
+{
+ "seed": 70316,
+ "base": "belongfeast",
+ "mode": "baseline",
+ "policyId": "belong-armorvillage",
+ "instrument": "vetaidcrisis + sim-foreignhelp-b comms-chain recorder (callForHelp/aidAskVillage/aidHelpArrived/raise+resolve snapshots, first-crisis say transcript)",
+ "substrate": "pinned: FEASTSCALE_R13=1 TRIBFLOOR=1 WINPURSUIT=1 WINDEFER=1 SEATDRIVE=0 KILLDISC=1 ARMORYDRIVE=1 ARMORVILLAGE=1",
+ "anchorCommit": "73d344a8769b",
+ "maxWave": 1,
+ "national": 0,
+ "table": 0,
+ "won": 0,
+ "exiled": 0,
+ "days": 20,
+ "gameDays": 20,
+ "endReason": "village-lost",
+ "initialScholarVid": null,
+ "finalScholarVid": "gen_qbi8ozu",
+ "finalRoster": [
+  "gen_qbi8ozu",
+  "zoe_adams",
+  "sari_wulandari"
+ ],
+ "nCrisisEvents": 2,
+ "crisisEvents": [
+  {
+   "day": 8,
+   "event": "raised",
+   "name": "Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court",
+   "kind": "monster",
+   "wave": 1,
+   "how": null,
+   "raisedOk": true
+  },
+  {
+   "day": 9,
+   "event": "resolved",
+   "name": "Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court",
+   "kind": "raid",
+   "wave": 1,
+   "how": "fought",
+   "attracted": 0,
+   "helpAtDoor": 0,
+   "crisisDays": 1
+  }
+ ],
+ "nFights": 1,
+ "fights": [
+  {
+   "seq": 1,
+   "day": 9,
+   "mid": "gallowdeer",
+   "wave": 1,
+   "via": "combat_start",
+   "party": [],
+   "scholarIn": true,
+   "crisisActive": true,
+   "crisisName": "Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court",
+   "crisisKind": "raid",
+   "crisisWave": 1,
+   "crisisRaiders": true,
+   "crisisSinceDay": 8,
+   "atHaven": true,
+   "inTb": true,
+   "router": null,
+   "onExped": true
+  }
+ ],
+ "nFightEnds": 1,
+ "fightEnds": [
+  {
+   "seq": 2,
+   "day": 9,
+   "result": "lost",
+   "php": -6,
+   "mid": "gallowdeer",
+   "wave": 1,
+   "via": "combat_start",
+   "scholarIn": true,
+   "party": [],
+   "crisisActive": true,
+   "crisisName": "Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court",
+   "crisisKind": "raid",
+   "crisisWave": 1,
+   "crisisRaiders": true,
+   "crisisSinceDay": 8,
+   "atHaven": true,
+   "inTb": true,
+   "router": null,
+   "onExped": true
+  }
+ ],
+ "nDeaths": 9,
+ "deaths": [
+  {
+   "seq": 0,
+   "day": 7,
+   "who": "gen_21hmwfw",
+   "whoName": "Chester",
+   "isScholar": false,
+   "cause": "ambush",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 3,
+   "day": 9,
+   "who": "gen_18okj40",
+   "whoName": "Esteban",
+   "isScholar": true,
+   "cause": "combat",
+   "combatCause": true,
+   "oppMid": "gallowdeer",
+   "oppWave": 1,
+   "fightBasis": "same-day:combat_start",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": true,
+   "crisisName": "Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court",
+   "crisisKind": "raid",
+   "crisisWave": 1,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 4,
+   "day": 16,
+   "who": "gen_3xqk7u7",
+   "whoName": "Imani",
+   "isScholar": false,
+   "cause": "starvation",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 5,
+   "day": 16,
+   "who": "priya_nair",
+   "whoName": "Priya",
+   "isScholar": false,
+   "cause": "sickness",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 6,
+   "day": 16,
+   "who": "hassan_ali",
+   "whoName": "Hassan",
+   "isScholar": false,
+   "cause": "sickness",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 7,
+   "day": 17,
+   "who": "gen_juftt8f",
+   "whoName": "Fiona",
+   "isScholar": false,
+   "cause": "starvation",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 8,
+   "day": 17,
+   "who": "nikos_papadopoulos",
+   "whoName": "Nikos",
+   "isScholar": false,
+   "cause": "sickness",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 9,
+   "day": 20,
+   "who": "gen_qxuzlo6",
+   "whoName": "Jalen",
+   "isScholar": false,
+   "cause": "monster",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  },
+  {
+   "seq": 10,
+   "day": 20,
+   "who": "sanne_bakker",
+   "whoName": "Sanne",
+   "isScholar": false,
+   "cause": "starvation",
+   "combatCause": false,
+   "oppMid": null,
+   "oppWave": null,
+   "fightBasis": "none",
+   "scholarInFight": false,
+   "fightParty": [],
+   "crisisActive": false,
+   "crisisName": null,
+   "crisisKind": null,
+   "crisisWave": null,
+   "atHaven": true,
+   "tenureDays": null,
+   "bloodTenure": null
+  }
+ ],
+ "nSuccessions": 1,
+ "successions": [
+  {
+   "day": 9,
+   "oldId": "gen_18okj40",
+   "newId": "gen_qbi8ozu"
+  }
+ ],
+ "fh": {
+  "calls": [],
+  "asks": [],
+  "arrivals": [],
+  "raiseSnaps": [
+   {
+    "links": [],
+    "knownVillages": 3,
+    "integrationStage": 1,
+    "cryAbilities": [],
+    "day": 8,
+    "name": "Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court",
+    "wave": 1
+   }
+  ],
+  "resolveSnaps": [
+   {
+    "day": 9,
+    "how": "fought",
+    "ret": "fought",
+    "calls": [],
+    "helpAtDoor": 0,
+    "attracted": 0,
+    "pendingHelpLeft": 0,
+    "crisisDays": 1
+   }
+  ],
+  "errors": [],
+  "firstTranscript": {
+   "raiseDay": 8,
+   "name": "Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court",
+   "wave": 1,
+   "lines": [
+    {
+     "day": 8,
+     "text": "🚨 Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with honest costs."
+    },
+    {
+     "day": 8,
+     "text": "📓 Codex: Highbeam Deer, Highbeam Deer, Cliffhanger, Rut King, Night Court at the door, day 8."
+    },
+    {
+     "day": 8,
+     "text": "💡 COUNTER LEARNED — Cliffhanger: Go for the eyes. When it lunges, strike the EYES or the soft palate inside the mouth — the armored hide shrugs off everything else. Never fight it in the water; that's its studio. On land, get beside it: it turns like a bus. (Two survived encounters — the fire has a theory.)"
+    },
+    {
+     "day": 8,
+     "text": "📓 Codex: Counter: Go for the eyes — When it lunges, strike the EYES or the soft palate inside the mouth — the armored hide shrugs off everything else. Never fight it in the water; that's its studio. On land, get beside it: it turns like a bus."
+    },
+    {
+     "day": 8,
+     "text": "🛡️ Fiona, Imani, Jalen, Nikos and Zoe met them at the door — 4 driven off, 1 barely walked away. Fiona, Imani, Nikos, Zoe are hurt."
+    },
+    {
+     "day": 8,
+     "text": "One of them is coming for YOU — Highbeam Deer, inside the haven, eyes on your bedroll."
+    },
+    {
+     "day": 8,
+     "text": "A stranger at the tree line, watching. Not hiding, exactly. Measuring. They'll be gone by dusk — but they'll remember what they saw."
+    },
+    {
+     "day": 8,
+     "text": "📓 Codex: a lean scout arrived (scout)."
+    },
+    {
+     "day": 8,
+     "text": "Word reaches you, days late: Imani stands accused over what happened to Chester. There's going to be a moot. People are choosing sides."
+    },
+    {
+     "day": 8,
+     "text": "📓 Codex: Heard about the case against Imani."
+    },
+    {
+     "day": 8,
+     "text": "📢 SYSTEM CHALLENGE: \"Catch something! Anything! We want to see how you do it!\" (Hunt an animal today for a reward.)"
+    },
+    {
+     "day": 8,
+     "text": "⚠ STARVING: health and energy falling. The spiral has started."
+    },
+    {
+     "day": 8,
+     "text": "Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+    },
+    {
+     "day": 8,
+     "text": "Someone is crying, quietly, in one of the bunks. Sanne goes to sit with them."
+    },
+    {
+     "day": 8,
+     "text": "Fireside lesson: Imani passes around Shea. Someone asks a dumb question. Nobody minds. That's how you learn."
+    },
+    {
+     "day": 8,
+     "text": "Fiona is hurt — a fall, a thorn, a bad step. (health 16/100)"
+    },
+    {
+     "day": 8,
+     "text": "Imani is hurt — a fall, a thorn, a bad step. (health 15/100)"
+    },
+    {
+     "day": 8,
+     "text": "Zoe and Fiona lingered over the fire together."
+    },
+    {
+     "day": 8,
+     "text": "🍽️ Aisha rests a hand on the pantry door, satisfied. \"No one's going hungry this week. Sitting with the fever cases instead — someone should.\""
+    },
+    {
+     "day": 8,
+     "text": "🍽️ Priya looks at the full shelves and waves off the day's share. \"No more into the store — we eat at the fire, and the shelves keep.\""
+    },
+    {
+     "day": 8,
+     "text": "📓 Codex: Imani taught Fiona Food Preservation."
+    },
+    {
+     "day": 9,
+     "text": "— DAY 9 DAWN — The world wakes. Animals are active."
+    },
+    {
+     "day": 9,
+     "text": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+     "day": 9,
+     "text": "You wake with a start — something is wrong."
+    },
+    {
+     "day": 9,
+     "text": "◈ CRISIS — THE BREACH. It got INSIDE. The haven was supposed to be the safe place — the one place. It isn’t."
+    },
+    {
+     "day": 9,
+     "text": "SYSTEM: \"Perimeter violated! This is unprecedented! ...Is this unprecedented? Checking. Yes. Unprecedented.\""
+    },
+    {
+     "day": 9,
+     "text": "The village is rattled. Everyone's jumpy — eyes on the treeline."
+    },
+    {
+     "day": 9,
+     "text": "You don't know what that was. The thing with headlights for eyes, standing too still. Someone at the haven should hear about this."
+    },
+    {
+     "day": 9,
+     "text": "⚔ HIGHBEAM DEER! You're on your own."
+    },
+    {
+     "day": 9,
+     "text": "Turn-based now. Tap a tile to move — speed is squares. Then act."
+    },
+    {
+     "day": 9,
+     "text": "It BELLOWS — wrong, too deep, like a foghorn heard through water. The sound sits in your teeth."
+    },
+    {
+     "day": 9,
+     "text": "(The game is telling you something: this is bigger than one person. Talk to your companions — \"We should name this. Us.\")"
+    },
+    {
+     "day": 9,
+     "text": "The deer's head swings toward you. Another light in its eyes. You're all on the list now."
+    },
+    {
+     "day": 9,
+     "text": "The light behind its eyes swells to a painful glare. The whine climbs past hearing. It is done aiming — now it is only waiting to loose."
+    },
+    {
+     "day": 9,
+     "text": "The Highbeam Deer thrashes its antlers at you — getting close has a price."
+    },
+    {
+     "day": 9,
+     "text": "Highbeam Deer's antlers hits you for 13."
+    },
+    {
+     "day": 9,
+     "text": "💥 A ray of light lances FROM ITS EYES — and it's swinging toward you. MOVE."
+    },
+    {
+     "day": 9,
+     "text": "The light touches the ground where you were standing. It has not found you yet."
+    },
+    {
+     "day": 9,
+     "text": "The beam swings wide, scorching the earth where you were."
+    },
+    {
+     "day": 9,
+     "text": "The Highbeam Deer thrashes its antlers at you — getting close has a price."
+    },
+    {
+     "day": 9,
+     "text": "Highbeam Deer's antlers hits you for 16."
+    },
+    {
+     "day": 9,
+     "text": "You STRIKE the Highbeam Deer for 13."
+    },
+    {
+     "day": 9,
+     "text": "📺 +5 style — solid hit"
+    },
+    {
+     "day": 9,
+     "text": "The beam swings wide, scorching the earth where you were."
+    },
+    {
+     "day": 9,
+     "text": "The beam carves a bright arc across the ground, swinging after its target. It does not blink. It does not hurry."
+    },
+    {
+     "day": 9,
+     "text": "The beam swings wide, scorching the earth where you were."
+    },
+    {
+     "day": 9,
+     "text": "Highbeam Deer's attack hits you for 58."
+    },
+    {
+     "day": 9,
+     "text": "🔥 the beam SITS on you! (58)"
+    },
+    {
+     "day": 9,
+     "text": "The Highbeam Deer thrashes its antlers at you — getting close has a price."
+    },
+    {
+     "day": 9,
+     "text": "Highbeam Deer's antlers hits you for 11."
+    },
+    {
+     "day": 9,
+     "text": "You go down."
+    },
+    {
+     "day": 9,
+     "text": "Nobody's talking much. The fire feels smaller tonight."
+    },
+    {
+     "day": 9,
+     "text": "🕯️ Esteban Fernandez is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+     "day": 9,
+     "text": "The Codex doesn't pause for grief. Aisha blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+    },
+    {
+     "day": 9,
+     "text": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+    },
+    {
+     "day": 9,
+     "text": "📖 LEARNED: Patient Aim (Level 1). One shot. You don't take the shot unless it's the shot."
+    },
+    {
+     "day": 9,
+     "text": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+    },
+    {
+     "day": 9,
+     "text": "📖 The Codex turns a page: Esteban Fernandez, 9 days. The mantle passes to Aisha Szymanski."
+    },
+    {
+     "day": 9,
+     "text": "🪞 You wake up somebody else. Aisha Szymanski, 58 — a fishing guide. Her hands know different work now: Night Eyes."
+    },
+    {
+     "day": 9,
+     "text": "Nothing to eat. The pantry of your pack is empty."
+    },
+    {
+     "day": 9,
+     "text": "Took Dried beans."
+    },
+    {
+     "day": 9,
+     "text": "You eat Dried beans (150 kcal)."
+    },
+    {
+     "day": 9,
+     "text": "Your chewing echoes off the trees. Something out there heard. (encounters more likely tomorrow)"
+    },
+    {
+     "day": 9,
+     "text": "Took Dried beans."
+    },
+    {
+     "day": 9,
+     "text": "You eat Dried beans (150 kcal)."
+    },
+    {
+     "day": 9,
+     "text": "Took Dried beans."
+    },
+    {
+     "day": 9,
+     "text": "You eat Dried beans (150 kcal)."
+    },
+    {
+     "day": 9,
+     "text": "Took Dried beans."
+    },
+    {
+     "day": 9,
+     "text": "You eat Dried beans (150 kcal)."
+    },
+    {
+     "day": 9,
+     "text": "Took Dried beans."
+    },
+    {
+     "day": 9,
+     "text": "The Dried beans was off. Your stomach knots. (-5 health)"
+    },
+    {
+     "day": 9,
+     "text": "You eat Dried beans (150 kcal)."
+    },
+    {
+     "day": 9,
+     "text": "Took Dried beans."
+    },
+    {
+     "day": 9,
+     "text": "You eat Dried beans (150 kcal)."
+    },
+    {
+     "day": 9,
+     "text": "No risky water to boil."
+    },
+    {
+     "day": 9,
+     "text": "Drank clean water."
+    },
+    {
+     "day": 9,
+     "text": "Fiona shakes their head. \"Ask someone who trusts you.\" (Trust too low.)"
+    },
+    {
+     "day": 9,
+     "text": "You catch fragments by the fire — Fiona telling Zoe about Sari. The story's getting bigger than what happened."
+    },
+    {
+     "day": 9,
+     "text": "🩹 Imani is still hurting (15 HP) — no healer at haven. They rest today instead of ranging out."
+    },
+    {
+     "day": 9,
+     "text": "💬 Jalen has been asking Fiona about Green Whisper — what it does, what it goes with. Planning something."
+    },
+    {
+     "day": 9,
+     "text": "💧 Sari returns with water: +3 clean."
+    },
+    {
+     "day": 9,
+     "text": "🩹 Hassan is still hurting (65 HP) — no healer at haven. They rest today instead of ranging out."
+    },
+    {
+     "day": 9,
+     "text": "👥 Sanne heads out for water. \"The well won't fill itself.\""
+    },
+    {
+     "day": 9,
+     "text": "Iron cold. Even the ticks are shelved."
+    },
+    {
+     "day": 9,
+     "text": "— MIDDAY — Honest work hours. Heat builds."
+    },
+    {
+     "day": 9,
+     "text": "You wait. The light changes. Nothing asks anything of you."
+    },
+    {
+     "day": 9,
+     "text": "\"You haven't earned that yet,\" Fiona says. (Trust too low.)"
+    },
+    {
+     "day": 9,
+     "text": "You catch fragments by the fire — Priya telling Jalen about Sari. Someone's added a flourish that wasn't there this morning."
+    },
+    {
+     "day": 9,
+     "text": "You catch fragments by the fire — Imani telling Nikos about Sari. The details have shifted. Nobody seems to mind."
+    },
+    {
+     "day": 9,
+     "text": "— DUSK — Animals stir again. Shadows lengthen."
+    },
+    {
+     "day": 9,
+     "text": "The door is quiet. Haven breathes."
+    },
+    {
+     "day": 9,
+     "text": "◈ CRISIS — THE SIEGE. They came in the night for the pantry — and the village met them at the door with blades and fire and drove them back into the dark. Wealth has a scent. So does defiance."
+    },
+    {
+     "day": 9,
+     "text": "SYSTEM: \"INTRUDER REPELLED. The pantry’s aroma is now classified as a defensive liability. The audience is chanting the defenders’ names. Fan clubs are forming. This is how it starts.\""
+    },
+    {
+     "day": 9,
+     "text": "🛟 Priya stands up by the fire. \"We can't just watch this happen. Here's what we CAN do — pick one, maybe two, but everything costs something.\""
+    },
+    {
+     "day": 9,
+     "text": "\"We can bind the wounds, or go lean, or hunt hard to replace what we lost. Say which — standing here isn't an answer.\""
+    },
+    {
+     "day": 9,
+     "text": "\"Or we rally,\" Priya adds. \"Second shift, everybody. We work, we eat, we live — and we pay for it.\""
+    },
+    {
+     "day": 9,
+     "text": "(Relief is open — triage, rations, hunt, or rally, from the beats row. Each option works once; the moment passes in ~3 days.)"
+    },
+    {
+     "day": 9,
+     "text": "You wait. The light changes. Nothing asks anything of you."
+    },
+    {
+     "day": 9,
+     "text": "\"You haven't earned that yet,\" Fiona says. (Trust too low.)"
+    },
+    {
+     "day": 9,
+     "text": "👥 Zoe heads out to forage. \"Gone looking. Don't wait up.\""
+    },
+    {
+     "day": 9,
+     "text": "💧 Sanne returns with water: +2 clean."
+    },
+    {
+     "day": 9,
+     "text": "Sari is tending the fire, coaxing it steady."
+    }
+   ]
+  }
+ },
+ "instrumentErrors": []
+}
