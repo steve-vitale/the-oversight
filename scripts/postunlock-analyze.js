@@ -85,9 +85,40 @@ const drift = CONFIGS.map(driftRow);
 const doorLanded = drift.filter(d => d.landed.w5Day != null).length;
 const doorCurrent = drift.filter(d => d.current.w5Day != null).length;
 
+// PRIMARY (pre-registered, MEASUREMENT.md §14): 8/8 post-unlock village
+// deaths attributed. A post-unlock death = a config that opened wave 5
+// (w5Day != null) AND ended village-lost. Doors without deaths do NOT
+// count: a village that opens the door and survives to the 180d cap has
+// no killing window to attribute. Failure mode is reported explicitly:
+//   doors 0/8 -> "no doors" mode (old base 6add5c9a0);
+//   doors >0, deaths 0 -> "doors open, villages survive to cap" mode
+//   (new base be55cfc2c: s70204 x2 open at d167, survive to d180).
+const postUnlockDeathConfigs = CONFIGS.filter(c => c.cur.unlock.w5Day != null && c.cur.endReason === 'village-lost');
+const postUnlockWindows = CONFIGS.filter(c => c.cur.unlock.w5Day != null).map(c => {
+  const w5 = c.cur.unlock.w5Day;
+  const rows = (c.cur.postunlockDeaths || []).filter(r => r.day >= w5);
+  const fights = (c.cur.postunlockFights || []).filter(f => f.day >= w5);
+  const doorFight = fights.find(f => f.wave === 5) || null;
+  const villagerDeaths = rows.filter(r => r.person === true);
+  const lastRow = rows[rows.length - 1];
+  return {
+    config: `s${c.seed}-${c.base === 'leadfeast' ? 'lead' : 'belong'}`,
+    w5Day: w5, endDay: c.cur.days, endReason: c.cur.endReason,
+    doorFight: doorFight ? { day: doorFight.day, mid: doorFight.mid, wave: doorFight.wave, tier: doorFight.overtimeTier, rerun: doorFight.rerun } : null,
+    windowFights: fights.length, windowDeathRows: rows.length, windowVillagerDeaths: villagerDeaths.length,
+    windowVillagerDeathList: villagerDeaths.map(r => ({ day: r.day, who: r.whoName || r.who, cause: r.cause, opp: r.oppMid || null })),
+    rosterAtEnd: lastRow && lastRow.village ? lastRow.village.roster : null,
+  };
+});
 const primary = {
-  unlocksAttributed: 0, unlocksTotal: 8,
-  note: 'No wave-5 unlock on the current substrate — killing-window attribution has no population.',
+  postUnlockDeathsAttributed: postUnlockDeathConfigs.length,
+  postUnlockDeathsTotal: 8,
+  unlocks: doorCurrent,
+  note: doorCurrent === 0
+    ? 'No wave-5 unlock on the current substrate — the 8-death population does not exist (no doors).'
+    : (postUnlockDeathConfigs.length === 0
+      ? `Doors open (${doorCurrent}/8) but no post-unlock village deaths within the 180d cap — the 8-death population does not exist (villages survive).`
+      : `${postUnlockDeathConfigs.length} post-unlock village death(s) in the corpus; 8 required.`),
 };
 
 const currentDeaths = [];
@@ -111,10 +142,13 @@ const out = {
   drift,
   doorSummary: { landed: doorLanded + '/8', current: doorCurrent + '/8' },
   primary,
-  verdict: doorCurrent === 8 ? 'DIAG-GO' : 'DIAG-NO-GO',
-  verdictReason: doorCurrent === 0
-    ? 'Substrate drift: 0/8 identical configs open wave 5 on the current substrate (8/8 on the wallseg anchor). The pre-registered 8/8 post-unlock death population does not exist on current master; attribution is unmeasurable. See metric review in sim-postunlock-b.md.'
-    : 'Partial: ' + doorCurrent + '/8 unlocks attributed (see primary).',
+  postUnlockWindows,
+  verdict: primary.postUnlockDeathsAttributed === 8 ? 'DIAG-GO' : 'DIAG-NO-GO',
+  verdictReason: primary.postUnlockDeathsAttributed === 8
+    ? '8/8 post-unlock village deaths attributed (lever check in sim-postunlock-b.md).'
+    : (doorCurrent === 0
+      ? 'Substrate drift: 0/8 identical configs open wave 5 on the current substrate (8/8 on the wallseg anchor). The pre-registered 8/8 post-unlock death population does not exist on current master; attribution is unmeasurable. See metric review in sim-postunlock-b.md.'
+      : `Doors open on ${doorCurrent}/8 configs but only ${primary.postUnlockDeathsAttributed}/8 post-unlock village deaths exist within the 180d cap (the rest survive to cap). The pre-registered 8/8 post-unlock death population does not exist on current master; attribution is unmeasurable. See metric review in sim-postunlock-b.md.`),
   currentSubstrateDeaths: currentDeaths,
 };
 const fn = path.join(EVID, 'postunlock-attribution.json');

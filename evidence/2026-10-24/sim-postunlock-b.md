@@ -1,10 +1,58 @@
 # sim-postunlock-b — POST-UNLOCK RETENTION autopsy (backlog #861)
 
 **Run:** fleshout-20261024T0615Z · **Arm:** sim-postunlock-b2 · **Axis:** scale-onramp (standing directive)
-**Type:** DIAG (instrument-only, zero src/js) · **Verdict: DIAG-NO-GO** (pre-registered primary unmeasurable — see metric review)
-**Anchor:** `6add5c9a07e2` (worktree) · **Wallseg anchor:** `c76a52480b09`
+**Type:** DIAG (instrument-only, zero src/js) · **Verdict: DIAG-NO-GO** (pre-registered primary unmeasurable — see metric review; failure mode flipped on rebase, see addendum)
+**Anchor:** `071b00b26727` (rebased branch tip; src/js byte-identical to master `be55cfc2c`) · **Prior anchor (first measurement):** `6add5c9a07e2` — its results are preserved below, not overwritten · **Wallseg anchor:** `c76a52480b09`
 **Evidence:** `evidence/2026-10-24/sim-postunlock-b.md` · **Corpus:** `evidence/2026-10-24/perseed-postunlock/` (8 configs) + `postunlock-attribution.json`
 **Instruments:** `scripts/postunlock-{instrument,sweep,analyze,sense}.js` · **Proof:** `scripts/test-postunlock-b.js`
+
+## REBASE ADDENDUM (2026-10-24, coordinator heads-up — read first)
+
+Master moved `6add5c9a0` → `be55cfc2c` (6 commits: journey-establishment r31 — `src/js/food.js` SPECIALTIES.preserver widened to the real occupation pool, a real food-economy behavior change; journey-crisis r47 — `src/js/havenGrowth.js` dead-raider draft filter; journey-social r47 gossip variants; plus the depositrelief/homecoming-tax-b evidence commits). Branch `sim-postunlock-b2` rebased **inside the worktree** onto `be55cfc2c` (clean, 1/1, new tip `071b00b26`); the full 8-config census re-swept on the new base (anchor `071b00b26727`); the analyzer's PRIMARY computation fixed (it hardcoded the old "no doors" note — now mode-aware) and the proof re-run. **The verdict stays DIAG-NO-GO, but the failure mode flipped.**
+
+### New-base census (identical seeds, policies, env, horizon; only the substrate changed)
+
+| config | wallseg (c76a52480b09) | old base (6add5c9a07e2) | **new base (be55cfc2c)** |
+|---|---|---|---|
+| s70201 ×2 | w4 60, w5 84, lost d115 | w4 147, lost d176 | **survived d180, maxWave 3, table 0** |
+| s70202 ×2 | w4 41, w5 104, lost d134 | w4 54, lost d74 | **identical: w4 54, lost d74** |
+| s70204 ×2 | w4 75, w5 104, lost d121 | w4 180, survived d180 | **w4 79, w5 167, survived d180, maxWave 5** |
+| s70209 ×2 | w4 67, w5 94, lost d159 | w4 65, lost d156 | **w4 65, lost d151** (shape changed, see below) |
+
+New-base totals: national 6/8, table 6/8, wins 0/8, exiled 0/8, wave4 6/8, **wave5 2/8**, village-lost 4/8, survived 4/8.
+
+### The flip: doors open, villages survive
+
+- **Old base failure mode:** 0/8 doors — the population didn't exist because the door never opened.
+- **New base failure mode:** **2/8 doors** (s70204 ×2, both policies identical) — but **0 post-unlock village deaths** within the 180d cap. Both villages survive to d180, 13 days post-unlock. The pre-registered PRIMARY (8/8 post-unlock deaths attributed) is still unmet, now because villages *don't die* after unlocking rather than because they *can't unlock*. The 180d cap is the absolute maximum run length (pacing law) — it cannot be extended to chase the deaths.
+- **Seed-dependence of drift:** s70202 is byte-stable across the rebase (identical w4/lost days); s70201 moves from lost-d176 to survived-d180-maxWave-3; s70204 moves from never-unlocking to unlocking at d167. One food.js change re-rolls some seeds and leaves others untouched — the shared-RNG fragility finding, confirmed again.
+
+### The s70204 post-unlock window (days 167–180, the first post-unlock population on current master)
+
+- **Door fight, d167: The Rerun** (wave-5 monster, confirmed `wave: 5` in `src/data/monsters.json`, 1200–1500 HP, "Take Twelve") — overtime tier 1, flagged rerun. Yuki (villager) dies in it (same-day combat_start linkage).
+- **Then 6 more fights in 13 days:** wave-3 terms_of_service (tier 2), wave-3 spool ×3 (tier 3), wave-4 strike RERUN (tier 3, party 2), wave-4 algorithm RERUN (tier 3, party 1). Only ONE wave-5 fight in the whole run — the door fight itself; no further wave-5 fights by d180.
+- **Window villager deaths (4):** Yuki d167 (combat vs Rerun), Luis d170 ("the night", veteran4+), Vito d178 (combat vs algorithm), Zoltan d180 (monster, wave 4, armored+armed). **Roster holds at 7–8 through the window** (8 at cap) — this is not a village collapsing; it's a village holding the door. No village-lost, so no killing window to attribute.
+- **Sense note (from the rows, not a transcript):** the window reads as a village that earned the door and is *holding* it — deaths are individual (one per fight, spread across days), not a cascade. The retention-trap question sharpens: what kills a village that *holds* for 13 days? The cap cuts the answer off.
+
+### Changed current-substrate deaths (bonus attribution, new base)
+
+- **s70202 ×2: UNCHANGED** — d74, Stan + Miguel killed by wave-4 Influencer, tier 0 (non-rerun), 0/0/0 bars at end. The one stable death across both bases.
+- **s70209 ×2: SHAPE CHANGED** — old base: d156, Revathi + Leroy killed by wave-4 Reunion RERUN ×6, 0/0/0 bars. New base: d151, last death Jae-chan (wave-4 monster, unlinked fight — `fightBasis: none`, no linked combat row), overtime tier 6, village **3 armored / 3 armed / roster 3 at end**. The harness reports village-lost at d151 with roster 3 remaining — the instrument records the harness verdict and the last-death row but does not independently determine the loss trigger (scholar death? village-state check?). **Blank for the next round:** what the harness's village-lost condition is when roster > 0. Not a gap in the death attribution — Jae-chan's row is complete (cause, wave, tier, bars) — but the *loss trigger* is undocumented.
+- **s70201 ×2: no deaths to attribute** — survived d180 at maxWave 3 (never reached wave 4).
+
+### Proof on the new base (scripts/test-postunlock-b.js)
+
+- E1 determinism: **PASS** — byte-identical (sha `82f31945453b` both; sha changed from `50cbd2029f9e` on the old base, confirming the substrate shift), instrumentErrors=[].
+- E2 behavior-neutrality: **PASS** — instr 180/survived/w3 vs plain 180/survived/w3, deaths match.
+- E3 PRIMARY 8/8: **FAIL** (honest) — unlocks=2/8, killingWindows=2/8. Note the E3 nuance: its killingWindows=2 counts s70204's last-day person deaths (Zoltan d180), which are NOT village-killing deaths (both villages survived to cap). The analyzer's stricter PRIMARY — post-unlock village-lost events — is **0/8**. Both framings fail; the stricter one is the pre-registered metric.
+- E4 row-schema: **PASS** — 124 death rows checked, bad=0.
+- E5 sayRing mechanism: **PASS** — narration:true ring=240 sayLive=true; false empty by design.
+- **Proof state: E1/E2/E4/E5 green, E3 failing as the DIAG-NO-GO.** E3 was NOT weakened or dropped to force green — per §14 the miss stays a miss.
+
+### Updated metric review + next round
+
+The original metric-review prescription ("re-measure the door census on current master FIRST") is now partially satisfied: the door census on the new base is 2/8, and the post-unlock population exists but doesn't die within cap. **Recommended next round (coordinator call):** a wider door census on the new base (fresh seed band, same substrate+policies) to find villages that unlock *early enough* (e.g. ≤d130) for a 17–65d post-unlock death window to fit inside the 180d cap — the wallseg band's death lags (17–65d) are the template. The postunlock instrument is proven on both bases (E1/E2/E4/E5 green twice) and the analyzer now reports the post-unlock window (door fight, window deaths, roster at end) for any config that opens.
+**Telemetry (new base):** 2 LOUD lines, both regime artifacts — wins 16→0 and table 16→6 vs the winseat baseline (SEATDRIVE=1 suite; this corpus is deliberately SEATDRIVE=0). Baseline NOT rolled. New-base totals: national 6/8, table 6/8, wins 0/8, exiled 0/8.
 
 ## Pre-registration (binding, MEASUREMENT.md §14)
 
