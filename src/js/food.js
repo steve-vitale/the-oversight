@@ -106,8 +106,17 @@
       { m: 'cafeteria manager', s: 2 }, { m: 'cook', s: 2 }, { m: 'baker', s: 2 },
     ],
     preserver: [ // smoking/drying/salting: keeps longer
-      { m: 'chef', s: 2 }, { m: 'fisherman', s: 3 }, { m: 'farmer', s: 2 },
-      { m: 'park ranger', s: 1 },
+      // (establishment r31 2026-10-24: the old table matched almost nobody in
+      // the real 79-occupation pool — 'park ranger' never existed, and the
+      // food occupations 'hunting guide'/'fishing guide'/'sailor'/'butcher'/
+      // 'line cook'/'rancher'/'beekeeper'/'mushroom grower' were unmapped, so
+      // 47/48 villagers across 4 seeds read preserver 0 and every rack ran
+      // blind. Jerky is the hunter tradition; salt fish the sailor's.)
+      { m: 'fisherman', s: 3 },
+      { m: 'fishing guide', s: 2 }, { m: 'hunting guide', s: 2 },
+      { m: 'sailor', s: 2 }, { m: 'chef', s: 2 }, { m: 'line cook', s: 2 },
+      { m: 'butcher', s: 2 }, { m: 'farmer', s: 2 }, { m: 'rancher', s: 2 },
+      { m: 'beekeeper', s: 1 }, { m: 'mushroom grower', s: 1 },
     ],
     spotter: [ // plant identification help (future: faster ID)
       { m: 'botanist', s: 3 }, { m: 'gardener', s: 2 }, { m: 'farmer', s: 2 },
@@ -123,7 +132,10 @@
   const TECHNIQUE_GRANTS = {
     clean: ['hunter', 'line cook / hunter', 'veterinary tech', 'veterinarian', 'fisherman', 'chef', 'sushi chef', 'farmer', 'park ranger', 'butcher'],
     cook: ['chef', 'sushi chef', 'line cook / hunter', 'cafeteria manager', 'cook', 'baker', 'camper', 'scout', 'hiker'],
-    preserve: ['chef', 'fisherman', 'farmer', 'smoker'],
+    preserve: ['chef', 'fisherman', 'fishing guide', 'hunting guide', 'sailor', 'line cook', 'butcher', 'farmer', 'rancher', 'beekeeper'],
+    // (r31 2026-10-24: 'smoker' matched no real occupation; aligned with the
+    // widened SPECIALTIES.preserver — a sailor-player and a sailor-villager
+    // now agree on who knows preservation.)
     shell: null, // everyone knows: crack and pick. Obvious.
   };
 
