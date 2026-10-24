@@ -2783,6 +2783,20 @@
     // the same _pendingPack clear — a belltoad pack left over from a previous
     // fight must not answer the call in an alien duel's round 2.
     this._pendingPack = null;
+    // COMBAT INSTRUMENT (gap-phase2 W1, line 346): alien-player fights
+    // bypassed startCombat, so they never emitted the 'combat_start'
+    // telemetry monster fights emit — fight censuses undercounted them.
+    // Same event, alien-flagged; wave null (alien players aren't wave
+    // monsters). Zero gameplay effect.
+    try {
+      const _csP = this.tbFighter ? this.tbFighter('p') : null;
+      this.tele('combat_start', {
+        vs: (fighter && (fighter.alienPid || fighter.name)) || 'alien-player',
+        wave: null, pack: 1, alien: true,
+        php: _csP ? Math.round(_csP.hp || 0) : null,
+        maxhp: _csP ? Math.round(_csP.maxHp || _csP.hp || 0) : null,
+      });
+    } catch (e) {}
     var partyNames = fighters.filter(function (x) { return x.kind === 'villager'; }).map(function (x) { return x.name; });
     var dispName = fighter.name || 'The stranger';
     // FACE TO FACE (Steve 2026-10-04 rule, person edition): the ambiguity

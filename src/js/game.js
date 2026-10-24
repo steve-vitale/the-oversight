@@ -32076,7 +32076,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         if (this._attrKills !== false) {
           const _log = this.state.waveKillLog || (this.state.waveKillLog = []);
-          if (_log.length < 1000) {
+          // WAVEKILLLOG DEDUPE (gap-phase2 W1, line 844): the same kill
+          // reached this choke point twice in the vetformation run
+          // (byte-identical entries). One body = one log entry: an exact
+          // (day, monster, killer, via, trick) repeat is a double-write,
+          // not a second kill. Log-only: counters/ledger above still count
+          // the call, so no unlock bar moves on this change.
+          const _dup = _log.some(e => e && e.d === ((this.state.scholar || {}).day || 0)
+            && e.mid === monsterId && (e.by || null) === (killerVid || null)
+            && (e.via || 'unknown') === (via || 'unknown')
+            && (e.trick || null) === (detail || null));
+          if (!_dup && _log.length < 1000) {
             _log.push({
               d: (this.state.scholar || {}).day || 0,
               mid: monsterId, w: wave,
@@ -32219,10 +32229,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // KILL ATTRIBUTION — the waveKillLog entry, mirroring recordWaveKill's
       // telemetry block (same _attrKills gate, same 1000-entry cap, same
       // per-channel counters) so pyrrhic kills join the same census.
+      // Same (d, mid, by, via, trick) dedupe as recordWaveKill (gap-phase2
+      // W1, line 844) — a pyrrhic kill double-written by two paths logs once.
       try {
         if (this._attrKills !== false) {
           const _log = this.state.waveKillLog || (this.state.waveKillLog = []);
-          if (_log.length < 1000) {
+          const _dup = _log.some(e => e && e.d === ((this.state.scholar || {}).day || 0)
+            && e.mid === monsterId && (e.by || null) === (killerVid || null)
+            && (e.via || 'unknown') === (via || 'unknown')
+            && (e.trick || null) === (detail || null));
+          if (!_dup && _log.length < 1000) {
             _log.push({
               d: (this.state.scholar || {}).day || 0,
               mid: monsterId, w: wave,

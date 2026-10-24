@@ -52,6 +52,22 @@
     if (g.won && !seen(g).tableWon) { seen(g).tableWon = true; const pg0 = g.progState ? g.progState() : {}; g.teleMilestone('table_won', Object.assign(keyFields(g), { path: T.path, branch: T.branch, seat: T.seat, key: !!pg0.networkFallen, hosts: T.final === 'hosts', overtime: pg0.overtime | 0, ending: (T.ending && T.ending.selector) || 'path', endingLevel: (T.ending && T.ending.level) || 'path', endingKind: (T.ending && T.ending.kind) || 'path', buildPlayed: (T.buildPlayed && T.buildPlayed.selector) || null })); }
   });
   wrap('useAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: a[1], ok: r !== false && r != null }));
+  // WAVE UNLOCK (gap-phase2 W1, line 361): no engine telemetry event fired
+  // on wave unlock, so sweeps had to sample unlockedWave() daily. The beat
+  // itself (checkWaveUnlockBeat) is idempotent via _waveAnnounced; this wrap
+  // mirrors it in telemetry only: first observation adopts silently (an
+  // in-flight save may already sit at wave 2+), later rises emit
+  // 'wave_unlock' {from, to, day}. Never changes behaviour or returns.
+  wrap('checkWaveUnlockBeat', (g) => {
+    const sn = seen(g);
+    let w = 1;
+    try { w = (typeof g.unlockedWave === 'function' ? g.unlockedWave() : 1) | 0; } catch (e) { return; }
+    if (sn.waveUnlock == null) { sn.waveUnlock = w; return; }
+    if (w > sn.waveUnlock) {
+      const from = sn.waveUnlock; sn.waveUnlock = w;
+      g.teleMilestone('wave_unlock', { from, to: w, day: (g.state.scholar || {}).day || 0 });
+    }
+  });
   wrap('activateAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: 'activate', ok: r !== false && r != null }));
   wrap('checkArc', (g) => {
     const arc = (g.progState() || {}).arc || 1; const sn = seen(g);
