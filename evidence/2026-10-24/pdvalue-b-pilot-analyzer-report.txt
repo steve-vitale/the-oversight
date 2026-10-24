@@ -1,0 +1,110 @@
+# sim-pdvalue-b LEVER verdict analyzer — 2026-10-24T09:14:24.734Z
+substrate: FEASTSCALE_R13=1, SEATDRIVE=0, 100d death-aware, policies {leadfeast,belongfeast}, cells {pd0,pd1}x{dg0,dg1}, DG FATAL-explicit
+seeds: 94001,94002,94003,94004,94005,94006,94007,94008 (8 seeds)
+PRE-REG: primary rot/100d <=0.85 on >=3/4 cells; guardrails starvation <=control+0.02/100vd, national >=control-2, no new death modes; GO iff primary+guardrails pass.
+PASS C1 freshness: no seed in taken blocks (9250-9265, 92801-92816, 92831-92846) — 8 seeds clear
+PASS C1 freshness: no seed in the pdtradeoff corpus (per-seed seed fields) — pdtradeoff corpus holds 16 distinct seeds, none reused
+PASS input sweeps present: 4 cells x 2 policies, 8 seeds, 100d, R13=1/SEATDRIVE=0, both gates explicit
+PASS glutChannels partition conserved (sum ~= total inflow) on all runs
+
+== medianSurvival patch ==
+patched pd0-dg0|leadfeast: medianSurvival=100 (8 files)
+patched pd0-dg0|belongfeast: medianSurvival=100 (8 files)
+patched pd1-dg0|leadfeast: medianSurvival=100 (8 files)
+patched pd1-dg0|belongfeast: medianSurvival=100 (8 files)
+patched pd0-dg1|leadfeast: medianSurvival=100 (8 files)
+patched pd0-dg1|belongfeast: medianSurvival=100 (8 files)
+patched pd1-dg1|leadfeast: medianSurvival=100 (8 files)
+patched pd1-dg1|belongfeast: medianSurvival=100 (8 files)
+PASS per-seed corpus JSONs patched with cell medianSurvival
+
+== PRIMARY (binding): PD=1/PD=0 rot/100d ratio per cell (bar <=0.85) ==
+leadfeast dg0: control 304.4k -> pd1 241.4k = 0.793x PASS (bar <=0.85)
+leadfeast dg1: control 38.6k -> pd1 16.2k = 0.421x PASS (bar <=0.85)
+belongfeast dg0: control 180.9k -> pd1 60.9k = 0.337x PASS (bar <=0.85)
+belongfeast dg1: control 27.5k -> pd1 22.5k = 0.817x PASS (bar <=0.85)
+PRIMARY: 4/4 cells at bar — need >=3 to pass.
+(pdtradeoff anchor on 9250-9265: 0.773x / 0.913x / 0.979x / 1.197x — the fresh-seed question is whether the pilot/full corpus reproduces that thinness.)
+
+== GUARDRAILS (binding, per cell) ==
+leadfeast dg0: starvation 0.041->0.041/100vd (delta 0.000, bar +0.02) PASS | national 8->6 (bar >=6) PASS | new modes: none PASS
+leadfeast dg1: starvation 0.084->0.102/100vd (delta 0.019, bar +0.02) PASS | national 8->6 (bar >=6) PASS | new modes: none PASS
+belongfeast dg0: starvation 0.076->0.097/100vd (delta 0.020, bar +0.02) FAIL | national 6->6 (bar >=4) PASS | new modes: dehydration FAIL
+belongfeast dg1: starvation 0.054->0.106/100vd (delta 0.053, bar +0.02) FAIL | national 4->6 (bar >=2) PASS | new modes: alien FAIL
+GUARDRAILS: 2 cell(s) fail.
+
+== VERDICT ==
+PRIMARY 4/4 (need >=3): PASS
+GUARDRAILS: FAIL
+VERDICT: NO-GO — PD=1 does NOT earn its costs on fresh seeds; see evidence file for the rank implication (KEEPCEIL volume knob? rack-rescue? stay / re-price / park).
+PILOT VERDICT (8 seeds): NO-GO — KILLED-AT-PILOT: no confirm spend.
+
+== TRADEOFF TABLE (PD=1 vs PD=0 per cell) ==
+cell | rot/100d ratio | starvation/100vd c->a | national(end) c->a | table c->a
+leadfeast dg0 | 0.793x | 0.041->0.041 (3/3 deaths) | 8->6 | 0->0
+leadfeast dg1 | 0.421x | 0.084->0.102 (6/7 deaths) | 8->6 | 0->0
+belongfeast dg0 | 0.337x | 0.076->0.097 (5/7 deaths) | 6->6 | 0->0
+belongfeast dg1 | 0.817x | 0.054->0.106 (4/7 deaths) | 4->6 | 0->0
+
+== SCALE WALL per cell (national / table+wins / wave>=4 / wave>=5 / survival median / max) ==
+pd0-dg0 leadfeast: 8 / 0 / 5 / 0 / 100d / 100d
+pd0-dg0 belongfeast: 6 / 0 / 5 / 0 / 100d / 100d
+pd1-dg0 leadfeast: 6 / 0 / 2 / 0 / 100d / 100d
+pd1-dg0 belongfeast: 6 / 0 / 5 / 0 / 100d / 100d
+pd0-dg1 leadfeast: 8 / 0 / 3 / 0 / 100d / 100d
+pd0-dg1 belongfeast: 4 / 0 / 6 / 0 / 100d / 100d
+pd1-dg1 leadfeast: 6 / 0 / 5 / 0 / 100d / 100d
+pd1-dg1 belongfeast: 6 / 0 / 3 / 0 / 100d / 100d
+(SEATDRIVE=0 pre-seat substrate: wins are structurally 0 — regime artifact, not a finding.)
+
+== DEATH-CAUSE SHARES (pooled, kind-mapped) ==
+  combat: 76.6% (407)
+  sickness: 13.2% (70)
+  starvation: 7.9% (42)
+  dehydration: 1.3% (7)
+  alien: 0.9% (5)
+
+== MANUAL PAIRED ROWS (§15 fallback; automated panel invalid by construction — see panel compare .md) ==
+policy dg seed | c_days a_days d_days | c_rot100 a_rot100 | c_starve a_starve | c_nat a_nat
+leadfeast dg0 s94001 | 100 100 +0 | 288098 165800 | 0 0 | 1 1
+leadfeast dg0 s94002 | 100 100 +0 | 360499 368403 | 0 0 | 1 1
+leadfeast dg0 s94003 | 100 100 +0 | 235515 46148 | 0 0 | 1 1
+leadfeast dg0 s94004 | 100 100 +0 | 316538 137312 | 0 0 | 1 1
+leadfeast dg0 s94005 | 100 100 +0 | 566123 443678 | 0 0 | 1 1
+leadfeast dg0 s94006 | 100 62 -38 | 302862 4516 | 1 2 | 1 0
+leadfeast dg0 s94007 | 100 100 +0 | 0 20629 | 2 0 | 1 0
+leadfeast dg0 s94008 | 100 100 +0 | 365354 655045 | 0 1 | 1 1
+leadfeast dg1 s94001 | 100 100 +0 | 52362 35532 | 0 0 | 1 1
+leadfeast dg1 s94002 | 100 82 -18 | 106866 976 | 0 4 | 1 1
+leadfeast dg1 s94003 | 100 100 +0 | 33245 3409 | 0 0 | 1 1
+leadfeast dg1 s94004 | 100 100 +0 | 15671 32968 | 1 0 | 1 1
+leadfeast dg1 s94005 | 100 94 -6 | 87056 24523 | 0 0 | 1 1
+leadfeast dg1 s94006 | 100 100 +0 | 4600 0 | 2 0 | 1 0
+leadfeast dg1 s94007 | 100 77 -23 | 0 0 | 1 3 | 1 0
+leadfeast dg1 s94008 | 100 100 +0 | 9301 26584 | 2 0 | 1 1
+belongfeast dg0 s94001 | 100 100 +0 | 213175 102070 | 1 0 | 1 1
+belongfeast dg0 s94002 | 100 100 +0 | 129905 52739 | 0 0 | 1 1
+belongfeast dg0 s94003 | 100 100 +0 | 277145 11175 | 0 0 | 1 0
+belongfeast dg0 s94004 | 100 100 +0 | 156805 80809 | 0 0 | 0 1
+belongfeast dg0 s94005 | 73 100 +27 | 213041 83638 | 0 1 | 1 1
+belongfeast dg0 s94006 | 100 81 -19 | 192579 4381 | 0 6 | 1 0
+belongfeast dg0 s94007 | 33 100 +67 | 0 26304 | 4 0 | 0 1
+belongfeast dg0 s94008 | 100 100 +0 | 152006 115238 | 0 0 | 1 1
+belongfeast dg1 s94001 | 100 100 +0 | 3217 29092 | 0 0 | 0 1
+belongfeast dg1 s94002 | 100 93 -7 | 58253 13168 | 0 1 | 0 1
+belongfeast dg1 s94003 | 100 100 +0 | 7497 34734 | 0 0 | 0 1
+belongfeast dg1 s94004 | 100 100 +0 | 6582 25796 | 1 0 | 1 1
+belongfeast dg1 s94005 | 100 100 +0 | 113731 47727 | 0 0 | 1 1
+belongfeast dg1 s94006 | 100 38 -62 | 6193 0 | 1 3 | 0 0
+belongfeast dg1 s94007 | 100 77 -23 | 0 0 | 1 3 | 1 0
+belongfeast dg1 s94008 | 100 100 +0 | 24557 9575 | 1 0 | 1 1
+
+== SUMMARY ==
+checks: 0 FAIL
+primary leadfeast/dg0: 0.793x
+primary leadfeast/dg1: 0.421x
+primary belongfeast/dg0: 0.337x
+primary belongfeast/dg1: 0.817x
+VERDICT: NO-GO
+metric review: see the evidence file (a miss here is NO-GO, never re-scored; doubts go to the NEXT run).
+analyzer exit 0 — LEVER verdict complete.
