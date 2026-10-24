@@ -109,7 +109,7 @@ function livingFirsts(Game) {
       assert.strictEqual(Game.state._scalePtrW4, true, 'flag set');
       assert.ok(ptr.length >= 1, 'pointer beat fired');
       assert.ok(said.some(s => /CLEARED THE BOARD/.test(s)), 'cleared-board opener fired');
-      assert.ok(said.some(s => /Get me a NETWORK/.test(s)), 'network ask fired');
+      assert.ok(said.some(s => /Get me STANDING/.test(s)), 'standing ask fired (2026-10-13: waves 4-5 unlock on Standing, not network — text names the real lever)');
     });
     t('beat 4: knowledge gate — never names Mirror Draft', () =>
       assert.strictEqual(said.filter(s => /mirror draft/i.test(s)).length, 0));

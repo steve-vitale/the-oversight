@@ -229,6 +229,16 @@
       if (!this._sdSystemUp()) return;
       if (this.state.scaleRefused) return;
       if (this._sdWave() < 3) return;
+      // DEDUP (journey-deepening r39 2026-10-23): game.js scalePointerW4 (Beat 4,
+      // SCALE-DISCOVERY.md 2026-10-12) owns the wave-3-landed-one-fire moment —
+      // the kill that unlocks wave 3 synchronously runs checkWaveUnlockBeat, so
+      // Beat 4 always lands before the next daily tick. Without this gate the
+      // player hears "the next act needs a BIGGER STAGE" twice within a day:
+      // the producers' pitch (standing ask) and this one (network ask). Beat 4's
+      // text already names the current lever (standing, 2026-10-13); this beat
+      // keeps the cases Beat 4 never covers (e.g. wave 3 landed while the daily
+      // tick runs before any unlock check).
+      if (this.state && this.state._scalePtrW4) return;
       try {
         if (typeof this.scaleAtLeast === 'function' && this.scaleAtLeast(this._sdRank(), 'regional')) return;
       } catch (e) {}
