@@ -1,0 +1,40 @@
+== 1. depinteraction-b corpus (READ-ONLY) ==
+depinteraction: 128 configs, 8 cells x 16 seeds. scholarHomecoming=0 on 128/128 (blind).
+
+== 2. easingchannels-b corpus (READ-ONLY, honest instrument) ==
+easingchannels: 128 configs, 8 cells x 16 seeds. scholarHomecoming>0 on 88/128 (honest).
+
+== 3. substrate identity check (seed-level transfer validity) ==
+trajectory fingerprints identical on 0/128 configs; diverged on 128/128.
+SEED-LEVEL TRANSFER REJECTED: the game base moved between the two sweeps' run times
+(33 src/js commits on 2026-10-23; chaos-dominated substrate). Cell-level attribution is the honest unit:
+corrected partitions are built per 16-seed cell from the honest instrument, ratios within one substrate.
+
+== 4. corrected channel partitions (honest instrument, per-cell sums, 16 seeds) ==
+pd0dg0/belongfeast: funnelShare=6012k scholarHomecoming=1591k tributeDeposit=0k awayReturn=512k ambientBighaul=483k other=655k | total=9254k named=92.9%
+pd0dg0/leadfeast: funnelShare=6639k scholarHomecoming=2062k tributeDeposit=1675k awayReturn=499k ambientBighaul=527k other=266k | total=11667k named=97.7%
+pd0dg1/belongfeast: funnelShare=3064k scholarHomecoming=696k tributeDeposit=0k awayReturn=382k ambientBighaul=281k other=1352k | total=5774k named=76.6% | DG withholds retE=148k bigE=136k fsE=1928k
+pd0dg1/leadfeast: funnelShare=2937k scholarHomecoming=743k tributeDeposit=174k awayReturn=408k ambientBighaul=282k other=1082k | total=5626k named=80.8% | DG withholds retE=177k bigE=157k fsE=2086k
+pd1dg0/belongfeast: funnelShare=3545k scholarHomecoming=985k tributeDeposit=0k awayReturn=447k ambientBighaul=453k other=637k | total=6067k named=89.5%
+pd1dg0/leadfeast: funnelShare=3047k scholarHomecoming=693k tributeDeposit=1163k awayReturn=507k ambientBighaul=455k other=375k | total=6239k named=94.0%
+pd1dg1/belongfeast: funnelShare=2556k scholarHomecoming=436k tributeDeposit=0k awayReturn=384k ambientBighaul=315k other=846k | total=4536k named=81.4% | DG withholds retE=92k bigE=96k fsE=756k
+pd1dg1/leadfeast: funnelShare=2197k scholarHomecoming=441k tributeDeposit=141k awayReturn=384k ambientBighaul=271k other=845k | total=4279k named=80.2% | DG withholds retE=149k bigE=123k fsE=1241k
+
+== 5. CORRECTED CHANNEL TABLE: claimed (blind) vs corrected PD=1-PD=0, per-cell sums ==
+leadfeast/dg0: CLAIMED fs=-2267k hc=+0k away=+20k other=-17k | CORRECTED fs=-3591k hc=-1369k tb=-512k away=+8k amb=-72k other=+109k | hc/fs: claimed-substrate 0.60 / honest-substrate 0.38
+leadfeast/dg1: CLAIMED fs=-965k hc=+0k away=+50k other=-10k | CORRECTED fs=-740k hc=-302k tb=-33k away=-24k amb=-12k other=-236k | hc/fs: claimed-substrate 0.31 / honest-substrate 0.41
+belongfeast/dg0: CLAIMED fs=-2361k hc=+0k away=-127k other=+13k | CORRECTED fs=-2467k hc=-606k tb=+0k away=-65k amb=-30k other=-18k | hc/fs: claimed-substrate 0.26 / honest-substrate 0.25
+belongfeast/dg1: CLAIMED fs=-1297k hc=+0k away=-71k other=-57k | CORRECTED fs=-508k hc=-260k tb=+0k away=+2k amb=+34k other=-506k | hc/fs: claimed-substrate 0.20 / honest-substrate 0.51
+
+== 6. the homecoming tax (keep-raise + holdback) under DEPOSITGATE ==
+leadfeast: homecoming volume dg0->dg1 (pd0): -1320k; DG holdback on away.return+bighaul: 334k (retE=177k bigE=157k); funnel.share eased: 2086k. keep-raise beat: dg0 arms keepRaise=0 (never raised, never narrated); dg1 arms keepRaise>0 (homecoming-diag-b ledger, 928 block: 120-304 kcal/glut-day, 6.5-14.5 events/run) — fires exactly when the keep raised.
+belongfeast: homecoming volume dg0->dg1 (pd0): -895k; DG holdback on away.return+bighaul: 284k (retE=148k bigE=136k); funnel.share eased: 1928k. keep-raise beat: dg0 arms keepRaise=0 (never raised, never narrated); dg1 arms keepRaise>0 (homecoming-diag-b ledger, 928 block: 120-304 kcal/glut-day, 6.5-14.5 events/run) — fires exactly when the keep raised.
+
+== 7. unseen vs absent ==
+belongfeast/dg0: homecoming PDd is 25% of funnelShare PDd (honest substrate) -> UNSEEN (real second channel)
+belongfeast/dg1: homecoming PDd is 51% of funnelShare PDd (honest substrate) -> UNSEEN (real second channel)
+leadfeast/dg0: homecoming PDd is 38% of funnelShare PDd (honest substrate) -> UNSEEN (real second channel)
+leadfeast/dg1: homecoming PDd is 41% of funnelShare PDd (honest substrate) -> UNSEEN (real second channel)
+largest named-residual ('other') on dg1 cells: 23.4% of inflow — named bucket, composition not persisted in corpus (honest gap, not a hidden channel).
+
+DIAG VERDICT: DIAG-GO (0 check fails; 4/4 legs homecoming = UNSEEN second channel)

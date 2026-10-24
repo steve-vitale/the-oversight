@@ -1,0 +1,37 @@
+== 1. depinteraction-b corpus (READ-ONLY) ==
+depinteraction: 128 configs, 8 cells x 16 seeds. scholarHomecoming=0 on 128/128 (blind).
+
+== 2. easingchannels-b corpus (READ-ONLY, honest instrument) ==
+easingchannels: 128 configs, 8 cells x 16 seeds. scholarHomecoming>0 on 128/128 (honest).
+
+== 3. substrate identity check (seed-level transfer validity) ==
+trajectory fingerprints identical on 128/128 configs; diverged on 0/128.
+
+== 4. corrected channel partitions (honest instrument, per-cell sums, 16 seeds) ==
+pd0dg0/belongfeast: funnelShare=160k scholarHomecoming=16k tributeDeposit=3k awayReturn=8k ambientBighaul=5k other=2k | total=194k named=99.2%
+pd0dg0/leadfeast: funnelShare=160k scholarHomecoming=16k tributeDeposit=3k awayReturn=8k ambientBighaul=5k other=2k | total=194k named=99.2%
+pd0dg1/belongfeast: funnelShare=144k scholarHomecoming=8k tributeDeposit=3k awayReturn=8k ambientBighaul=5k other=2k | total=170k named=99.1% | DG withholds retE=0k bigE=0k fsE=0k
+pd0dg1/leadfeast: funnelShare=144k scholarHomecoming=8k tributeDeposit=3k awayReturn=8k ambientBighaul=5k other=2k | total=170k named=99.1% | DG withholds retE=0k bigE=0k fsE=0k
+pd1dg0/belongfeast: funnelShare=128k scholarHomecoming=10k tributeDeposit=3k awayReturn=6k ambientBighaul=5k other=2k | total=154k named=99.0%
+pd1dg0/leadfeast: funnelShare=128k scholarHomecoming=10k tributeDeposit=3k awayReturn=6k ambientBighaul=5k other=2k | total=154k named=99.0%
+pd1dg1/belongfeast: funnelShare=112k scholarHomecoming=5k tributeDeposit=3k awayReturn=6k ambientBighaul=5k other=2k | total=133k named=98.8% | DG withholds retE=0k bigE=0k fsE=0k
+pd1dg1/leadfeast: funnelShare=112k scholarHomecoming=5k tributeDeposit=3k awayReturn=6k ambientBighaul=5k other=2k | total=133k named=98.8% | DG withholds retE=0k bigE=0k fsE=0k
+
+== 5. CORRECTED CHANNEL TABLE: claimed (blind) vs corrected PD=1-PD=0, per-cell sums ==
+leadfeast/dg0: CLAIMED fs=-32k hc=+0k away=-8k other=+0k | CORRECTED fs=-32k hc=-6k tb=+0k away=-2k amb=+0k other=+0k | hc/fs: claimed-substrate 0.20 / honest-substrate 0.20
+leadfeast/dg1: CLAIMED fs=-32k hc=+0k away=-5k other=+0k | CORRECTED fs=-32k hc=-3k tb=+0k away=-2k amb=+0k other=+0k | hc/fs: claimed-substrate 0.10 / honest-substrate 0.10
+belongfeast/dg0: CLAIMED fs=-32k hc=+0k away=-8k other=+0k | CORRECTED fs=-32k hc=-6k tb=+0k away=-2k amb=+0k other=+0k | hc/fs: claimed-substrate 0.20 / honest-substrate 0.20
+belongfeast/dg1: CLAIMED fs=-32k hc=+0k away=-5k other=+0k | CORRECTED fs=-32k hc=-3k tb=+0k away=-2k amb=+0k other=+0k | hc/fs: claimed-substrate 0.10 / honest-substrate 0.10
+
+== 6. the homecoming tax (keep-raise + holdback) under DEPOSITGATE ==
+leadfeast: homecoming volume dg0->dg1 (pd0): -8k; DG holdback on away.return+bighaul: 0k (retE=0k bigE=0k); funnel.share eased: 0k. keep-raise beat: dg0 arms keepRaise=0 (never raised, never narrated); dg1 arms keepRaise>0 (homecoming-diag-b ledger, 928 block: 120-304 kcal/glut-day, 6.5-14.5 events/run) — fires exactly when the keep raised.
+belongfeast: homecoming volume dg0->dg1 (pd0): -8k; DG holdback on away.return+bighaul: 0k (retE=0k bigE=0k); funnel.share eased: 0k. keep-raise beat: dg0 arms keepRaise=0 (never raised, never narrated); dg1 arms keepRaise>0 (homecoming-diag-b ledger, 928 block: 120-304 kcal/glut-day, 6.5-14.5 events/run) — fires exactly when the keep raised.
+
+== 7. unseen vs absent ==
+belongfeast/dg0: homecoming PDd is 20% of funnelShare PDd (honest substrate) -> UNSEEN (real second channel)
+belongfeast/dg1: homecoming PDd is 10% of funnelShare PDd (honest substrate) -> absent-level
+leadfeast/dg0: homecoming PDd is 20% of funnelShare PDd (honest substrate) -> UNSEEN (real second channel)
+leadfeast/dg1: homecoming PDd is 10% of funnelShare PDd (honest substrate) -> absent-level
+largest named-residual ('other') on dg1 cells: 1.2% of inflow — named bucket, composition not persisted in corpus (honest gap, not a hidden channel).
+
+DIAG VERDICT: DIAG-GO (0 check fails; 2/4 legs homecoming = UNSEEN second channel)
