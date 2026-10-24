@@ -1,0 +1,200 @@
+{
+ "verdict": {
+  "primaryGo": false,
+  "secondaryCoincGo": false,
+  "survGo": true,
+  "starvGo": true,
+  "kindsGo": true,
+  "deadlockGo": true
+ },
+ "primary": {
+  "bar": "formation-conditional: control >= 3 window-mantle-deaths AND armed <= control - 2",
+  "control": 3,
+  "armed": 3,
+  "formationOk": true,
+  "go": false,
+  "verdict": "NO-GO"
+ },
+ "pickedSuccessorSurvival": [
+  {
+   "seed": 65517,
+   "policy": "leadfeast",
+   "picked": "amina_diallo",
+   "held": "gen_y1ietd2",
+   "pickDay": 131,
+   "livedDays": 1,
+   "died": true
+  }
+ ],
+ "secondary": {
+  "coincidenceDays": {
+   "control": 3,
+   "armed": 3,
+   "go": false
+  },
+  "distinctLivingVeterans": {
+   "control": 2,
+   "armed": 3
+  }
+ },
+ "engagement": {
+  "brEventsControl": 0,
+  "brEventsArmed": 1,
+  "armedSeeds": [
+   "leadfeast-s65517"
+  ]
+ },
+ "guardrails": {
+  "survivalPairedDiffMedian": 0,
+  "survivalBar": ">= -10d",
+  "survivalGo": true,
+  "starvation": {
+   "control": 20,
+   "armed": 20,
+   "bar": "armed <= control+2",
+   "go": true
+  },
+  "newDeathKinds": [],
+  "kindsGo": true,
+  "deadlock": {
+   "brRowsAllPicked": true,
+   "armedPairLosses": [],
+   "deadlockGo": true
+  },
+  "pairDiffs": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "wall": {
+  "control": {
+   "n": 16,
+   "national": 7,
+   "table": 13,
+   "won": 0,
+   "wave4": 13,
+   "wave5": 1,
+   "medianSurvival": 141
+  },
+  "armed": {
+   "n": 16,
+   "national": 7,
+   "table": 13,
+   "won": 0,
+   "wave4": 13,
+   "wave5": 1,
+   "medianSurvival": 141
+  }
+ },
+ "bloodedDetail": {
+  "control": [
+   {
+    "vid": "gen_8mdijoz",
+    "seed": 65513,
+    "firstKill": 108,
+    "status": "window-mantle-death",
+    "deathDay": 121
+   },
+   {
+    "vid": "chantal_mukendi",
+    "seed": 65513,
+    "firstKill": 152,
+    "status": "incomplete-window",
+    "deathDay": null
+   },
+   {
+    "vid": "sofia_chen",
+    "seed": 65514,
+    "firstKill": 170,
+    "status": "window-mantle-death",
+    "deathDay": 180
+   },
+   {
+    "vid": "visjoin_82",
+    "seed": 65514,
+    "firstKill": 100,
+    "status": "post-window-death",
+    "deathDay": 121
+   },
+   {
+    "vid": "gen_mcowb5v",
+    "seed": 65517,
+    "firstKill": 126,
+    "status": "window-mantle-death",
+    "deathDay": 129
+   },
+   {
+    "vid": "gen_8nf1t4z",
+    "seed": 65517,
+    "firstKill": 130,
+    "status": "post-window-death",
+    "deathDay": 162
+   }
+  ],
+  "armed": [
+   {
+    "vid": "gen_8mdijoz",
+    "seed": 65513,
+    "firstKill": 108,
+    "status": "window-mantle-death",
+    "deathDay": 121
+   },
+   {
+    "vid": "chantal_mukendi",
+    "seed": 65513,
+    "firstKill": 152,
+    "status": "incomplete-window",
+    "deathDay": null
+   },
+   {
+    "vid": "sofia_chen",
+    "seed": 65514,
+    "firstKill": 170,
+    "status": "window-mantle-death",
+    "deathDay": 180
+   },
+   {
+    "vid": "visjoin_82",
+    "seed": 65514,
+    "firstKill": 100,
+    "status": "post-window-death",
+    "deathDay": 121
+   },
+   {
+    "vid": "gen_mcowb5v",
+    "seed": 65517,
+    "firstKill": 126,
+    "status": "window-mantle-death",
+    "deathDay": 129
+   },
+   {
+    "vid": "gen_y1ietd2",
+    "seed": 65517,
+    "firstKill": 126,
+    "status": "incomplete-window",
+    "deathDay": null
+   },
+   {
+    "vid": "gen_8nf1t4z",
+    "seed": 65517,
+    "firstKill": 130,
+    "status": "post-window-death",
+    "deathDay": 162
+   }
+  ]
+ }
+}
