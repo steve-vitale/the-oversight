@@ -1,0 +1,52 @@
+=== cell pd0-dg0 policy leadfeast ===
+done seed=9264 days=100 end=survived rank=global wave=4 rot=368k depriK=0 easedK=0 freshMed=23.6 won=false (2304ms)
+done seed=9265 days=76 end=village-lost rank=regional wave=2 rot=0k depriK=0 easedK=0 freshMed=6.3 won=false (1167ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd0-dg0-leadfeast.json (16 rows)
+VERIFY OK pd0-dg0-leadfeast
+=== cell pd1-dg0 policy leadfeast ===
+SKIP pd0-dg0-leadfeast (already verified)
+=== cell pd1-dg0 policy leadfeast ===
+done seed=9253 days=100 end=survived rank=national wave=2 rot=335k depriK=221 easedK=0 freshMed=53.6 won=false (1738ms)
+done seed=9254 days=100 end=survived rank=national wave=4 rot=188k depriK=333 easedK=0 freshMed=22.4 won=false (2064ms)
+WRITE FAIL LOUDLY /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/pdtradeoff-b-pd1-dg0-leadfeast-s9255.json EPERM
+VERIFY FAIL pd1-dg0-leadfeast (attempt 1) — re-invoking node for a fresh merge (finding #864)
+=== RESTART 2026-10-24T06:25:32Z ===
+SKIP pd0-dg0-leadfeast (already verified)
+=== cell pd1-dg0 policy leadfeast ===
+SKIP pd0-dg0-leadfeast (already verified)
+=== cell pd1-dg0 policy leadfeast ===
+done seed=9264 days=100 end=survived rank=national wave=3 rot=174k depriK=285 easedK=0 freshMed=74.3 won=false (1775ms)
+done seed=9265 days=46 end=village-lost rank=regional wave=2 rot=0k depriK=63 easedK=0 freshMed=5.9 won=false (860ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd1-dg0-leadfeast.json (16 rows)
+VERIFY OK pd1-dg0-leadfeast
+=== cell pd0-dg1 policy leadfeast ===
+done seed=9264 days=100 end=survived rank=national wave=3 rot=131k depriK=0 easedK=309 freshMed=19.2 won=false (1920ms)
+done seed=9265 days=100 end=survived rank=regional wave=4 rot=8k depriK=0 easedK=50 freshMed=3.8 won=false (1205ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd0-dg1-leadfeast.json (16 rows)
+VERIFY OK pd0-dg1-leadfeast
+=== cell pd1-dg1 policy leadfeast ===
+done seed=9264 days=100 end=survived rank=national wave=3 rot=14k depriK=212 easedK=122 freshMed=5 won=false (2058ms)
+done seed=9265 days=100 end=survived rank=village wave=3 rot=6k depriK=167 easedK=62 freshMed=4.7 won=false (1365ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd1-dg1-leadfeast.json (16 rows)
+VERIFY OK pd1-dg1-leadfeast
+=== cell pd0-dg0 policy belongfeast ===
+done seed=9264 days=100 end=survived rank=national wave=4 rot=418k depriK=0 easedK=0 freshMed=13.7 won=false (2265ms)
+done seed=9265 days=91 end=village-lost rank=regional wave=2 rot=0k depriK=0 easedK=0 freshMed=3.4 won=false (1042ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd0-dg0-belongfeast.json (16 rows)
+VERIFY OK pd0-dg0-belongfeast
+=== cell pd1-dg0 policy belongfeast ===
+done seed=9264 days=100 end=survived rank=global wave=4 rot=54k depriK=214 easedK=0 freshMed=8.7 won=false (1733ms)
+done seed=9265 days=100 end=survived rank=national wave=4 rot=15k depriK=175 easedK=0 freshMed=4.5 won=false (1616ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd1-dg0-belongfeast.json (16 rows)
+VERIFY OK pd1-dg0-belongfeast
+=== cell pd0-dg1 policy belongfeast ===
+done seed=9264 days=100 end=survived rank=global wave=4 rot=59k depriK=0 easedK=333 freshMed=9.9 won=false (1813ms)
+done seed=9265 days=100 end=survived rank=regional wave=3 rot=7k depriK=0 easedK=93 freshMed=4.7 won=false (1130ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd0-dg1-belongfeast.json (16 rows)
+VERIFY OK pd0-dg1-belongfeast
+=== cell pd1-dg1 policy belongfeast ===
+done seed=9264 days=100 end=survived rank=national wave=4 rot=24k depriK=269 easedK=141 freshMed=5 won=false (2201ms)
+done seed=9265 days=100 end=survived rank=national wave=4 rot=6k depriK=189 easedK=53 freshMed=4.1 won=false (1614ms)
+wrote /home/hatch/workspace/worktrees/sim-pdtradeoff-b/evidence/2026-10-24/pdtradeoff-b-corpus/sweep-pd1-dg1-belongfeast.json (16 rows)
+VERIFY OK pd1-dg1-belongfeast
+ALL CELLS VERIFIED
