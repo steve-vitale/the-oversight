@@ -1,0 +1,21 @@
+PASS P1a FATAL FEASTSCALE/SEATDRIVE asserts
+PASS P1b FATAL ANCHOR assert
+PASS P1c FATAL PLENTYDEPRI + DEPOSITGATE=1 asserts
+PASS P1d anchorCommit tagging + anchor in filename
+PASS P1e dg1-only (no dg0 path)
+PASS P2a ms+medianSurvival normalized to IDENTICAL
+PASS P2b real rot difference still DIFFER
+PASS P3a smoke run exits 0
+PASS P3b per-seed JSON written
+PASS P3c schema + anchorCommit tag
+PASS P3d anchor in filename
+PASS P4a extracted old-anchor run exits 0
+PASS P4b old-anchor per-seed JSON written to worktree proof dir
+PASS P4c old-anchor row tagged c76a5248
+PASS P5 analyzer exits 2 on empty corpus
+PASS P6a synthetic ratios computed
+PASS P6b families OLD/NEW shown
+PASS P7 proof scratch cleaned
+
+test-pddrift-b: 18 PASS, 0 FAIL
+PROOF_EXIT=0

@@ -1,0 +1,20 @@
+pddrift-b analyzer: per-anchor PD=1/PD=0 rot/100d (leadfeast/dg1 reduced contrast unless policy says otherwise)
+anchor(policy) | pd0 rot/100d | pd1 rot/100d | ratio | family | n | medSurv c->a | national c->a | table c->a | maxWave
+1a4c9b696978ac2a099cd6b40bdfb010c9de0137|leadfeast | 240166 | 130924 | 0.545x | OLD | 8/8 | 100->100 | 7->8 | 0->0 | 4/4
+6722215c6263fc0a4a364b2981cab56883e29523|leadfeast | 151302 | 90584 | 0.599x | OLD | 8/8 | 100->100 | 5->4 | 0->0 | 4/4
+795156dcd052bd9578009ca3a5ba64a2875d0524|leadfeast | 116215 | 142969 | 1.230x | NEW | 8/8 | 100->100 | 5->4 | 0->0 | 4/4
+7d6f735c9dc9da5af54da7c0adc842e5ca5c22c2|leadfeast | 170017 | 164999 | 0.970x | NEW | 8/8 | 100->100 | 6->7 | 0->0 | 4/3
+85e42a22a7e011b9a756dd201f7e205a0adb1661|leadfeast | 170017 | 164999 | 0.970x | NEW | 8/8 | 100->100 | 6->7 | 0->0 | 4/3
+ac8cbe37b3cd4948608583ff4daa6318a9eaaead|leadfeast | 170017 | 164999 | 0.970x | NEW | 8/8 | 100->100 | 6->7 | 0->0 | 4/3
+c76a52480b092102f123216f889600c2ee5cefd6|leadfeast | 187143 | 179013 | 0.957x | NEW | 8/8 | 100->100 | 5->5 | 0->0 | 4/4
+d581d6cf2783262d7d17835c38f16136189565f6|leadfeast | 170017 | 164999 | 0.970x | NEW | 8/8 | 100->100 | 6->7 | 0->0 | 4/3
+db7c5f211a4f1bb54881c4ecc9c3dbdb713b0f2f|leadfeast | 170017 | 164999 | 0.970x | NEW | 8/8 | 100->100 | 6->7 | 0->0 | 4/3
+efc180aa634a66acfc859d8f09c974bfcdcb995b|leadfeast | 170017 | 164999 | 0.970x | NEW | 8/8 | 100->100 | 6->7 | 0->0 | 4/3
+f8097b37b62bf3c6e519f398747e2c5083333e1b|leadfeast | 170017 | 164999 | 0.970x | NEW | 8/8 | 100->100 | 6->7 | 0->0 | 4/3
+
+candidate pairs (parent -> commit, same policy leadfeast):
+  r42 conversation fizzle/grief/winddown: c76a52480b092102f123216f889600c2ee5cefd6 0.957x (NEW) -> d581d6cf2783262d7d17835c38f16136189565f6 0.970x (NEW) : EXONERATED
+  r30 convoThreadAbout: ac8cbe37b3cd4948608583ff4daa6318a9eaaead 0.970x (NEW) -> 7d6f735c9dc9da5af54da7c0adc842e5ca5c22c2 0.970x (NEW) : EXONERATED
+  bloodrestraint (default-off): f8097b37b62bf3c6e519f398747e2c5083333e1b 0.970x (NEW) -> db7c5f211a4f1bb54881c4ecc9c3dbdb713b0f2f 0.970x (NEW) : EXONERATED
+  r39 _sdNextAct dedup: efc180aa634a66acfc859d8f09c974bfcdcb995b 0.970x (NEW) -> 85e42a22a7e011b9a756dd201f7e205a0adb1661 0.970x (NEW) : EXONERATED
+
