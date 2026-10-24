@@ -1,0 +1,29 @@
+GO   PRIMARY per-plenty-day rack rate [all] <= 0.70 — control=1654/d armed=927/d ratio=0.561 (rackDaysPlenty c=400 a=627)
+GO   PRIMARY per-plenty-day rack rate [leadfeast] <= 0.70 — control=1366/d armed=873/d ratio=0.639 (rackDaysPlenty c=173 a=268)
+GO   PRIMARY per-plenty-day rack rate [belongfeast] <= 0.70 — control=1874/d armed=968/d ratio=0.517 (rackDaysPlenty c=227 a=359)
+info   SECONDARY preserved-rot/100d [all] (caveat: exposure-confounded): control=4778 armed=2695 ratio=0.564
+info   SECONDARY preserved-rot/100d [leadfeast] (caveat: exposure-confounded): control=836 armed=2675 ratio=3.198
+info   SECONDARY preserved-rot/100d [belongfeast] (caveat: exposure-confounded): control=8721 armed=2716 ratio=0.311
+info   SECONDARY rack-kcal-smoked-during-plenty total [all] (caveat: exposure-confounded): control=41k armed=36k ratio=0.879
+info   SECONDARY rack-kcal-smoked-during-plenty total [leadfeast] (caveat: exposure-confounded): control=30k armed=29k ratio=0.990
+info   SECONDARY rack-kcal-smoked-during-plenty total [belongfeast] (caveat: exposure-confounded): control=53k armed=43k ratio=0.817
+GO   ENGAGEMENT shedKcal>0 >= 6/16 — 15/16 armed runs
+       shedDays total: 538, shedDec: 624, shedKcal: 1205k
+FLAG WATCH rot/100d absolute (flag >1.20x) — control=29596 armed=69513 ratio=2.349
+       rot split control: fresh=24503 preserved=4778
+       rot split armed:   fresh=65626 preserved=2665
+FLAG WATCH fresh-rot/100d (flag >1.50x — the b2-measured trade) — control=24818 armed=66818 ratio=2.692
+GO   GUARD(b) exposure-normalized starvation armed <= control x 1.10 [all] — control=0.091/100vd (12d/13247vd) armed=0.082/100vd (11d/13448vd) ratio=0.903
+GO   GUARD(b) exposure-normalized starvation armed <= control x 1.10 [leadfeast] — control=0.075/100vd (5d/6623vd) armed=0.074/100vd (5d/6777vd) ratio=0.977
+GO   GUARD(b) exposure-normalized starvation armed <= control x 1.10 [belongfeast] — control=0.106/100vd (7d/6624vd) armed=0.090/100vd (6d/6671vd) ratio=0.851
+info   paired-direction starvation (b6's (a), INFO ONLY): median(armed-control)=0.000/100vd over 16 pairs; armed-worse pairs 3, armed-better 2
+GO   GUARD(c) median paired survival diff >= -10d — median(armed-control)=0d over 16 pairs; unpaired medians control=100d armed=100d
+GO   GUARD(d) no new death kinds (>=2 events, pre-existing content whitelisted) — armed-new(>=2)=[none]; armed-new(1-event, noise)=[none]; whitelisted seen: night(c:3,a:1)
+GO   GUARD(e) national(end) armed >= control-2 — control=8 armed=9
+GO   GUARD(e) no inflow-channel laundering >2x — none
+info   median end pantry kcal (report-only): control=17k armed=9k ratio=0.520
+info   median endFreshDays (report-only): control=3d armed=5d
+WALL control: national=8 table~0 wins=0 wave4=4 wave5=0 pairedSurvMed=0d
+WALL armed:   national=9 table~0 wins=0 wave4=4 wave5=0 pairedSurvMed=0d
+
+VERDICT: GO
