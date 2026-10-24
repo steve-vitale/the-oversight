@@ -1,0 +1,136 @@
+PASS input sweeps present: 6 cells x 2 policies, 16 seeds, 100d, R13=1/SEATDRIVE=0, both gates explicit
+PASS glutChannels partition conserved (sum ~= total inflow) on all 192 runs
+
+== SANITY: PD=1/PD=0 rot/100d replication (depinteraction: 0.647/0.558 leadfeast, 0.523/0.339 belongfeast) ==
+leadfeast dg0: control 274.5k -> pd1 183.7k = 0.669x
+leadfeast dg1: control 76.3k -> pd1 78.8k = 1.033x
+belongfeast dg0: control 230.7k -> pd1 111.3k = 0.482x
+belongfeast dg1: control 92.8k -> pd1 72.4k = 0.781x
+
+== PRIMARY: rot/100d PD=2/PD=0 ratio (per feast-side, per DEPOSITGATE) ==
+leadfeast dg0: control 274.5k -> pd2 205.5k = 0.749x
+FAIL PRIMARY leadfeast dg0 PD=2/PD=0 <= 0.50 — 0.749x
+leadfeast dg1: control 76.3k -> pd2 53.8k = 0.705x
+FAIL PRIMARY leadfeast dg1 PD=2/PD=0 <= 0.50 — 0.705x
+belongfeast dg0: control 230.7k -> pd2 147.9k = 0.641x
+FAIL PRIMARY belongfeast dg0 PD=2/PD=0 <= 0.50 — 0.641x
+belongfeast dg1: control 92.8k -> pd2 90.7k = 0.978x
+FAIL PRIMARY belongfeast dg1 PD=2/PD=0 <= 0.50 — 0.978x
+
+== STAND-DOWN LEDGER (pd2 cells) + ENGAGEMENT ==
+leadfeast dg0: depriKcal=3293k standDownKcal=35k standDownDec=108 configs-eased=16/16
+PASS ENGAGEMENT leadfeast dg0 depriKcal>0 on >=12/32 pd2 configs — 16/32
+leadfeast dg1: depriKcal=2367k standDownKcal=130k standDownDec=392 configs-eased=16/16
+PASS ENGAGEMENT leadfeast dg1 depriKcal>0 on >=12/32 pd2 configs — 16/32
+belongfeast dg0: depriKcal=2728k standDownKcal=45k standDownDec=129 configs-eased=16/16
+PASS ENGAGEMENT belongfeast dg0 depriKcal>0 on >=12/32 pd2 configs — 16/32
+belongfeast dg1: depriKcal=2157k standDownKcal=167k standDownDec=458 configs-eased=16/16
+PASS ENGAGEMENT belongfeast dg1 depriKcal>0 on >=12/32 pd2 configs — 16/32
+
+== GUARDRAILS: PD=2 vs PD=0 per cell ==
+PASS (c) leadfeast dg0 median paired survival-diff >= -10d — 0d (n=16)
+PASS (a) leadfeast dg0 starvation/100vd armed <= control — armed 0.085 (12/14047d) vs control 0.105 (15/14283d); depinteraction-bar 0.119
+PASS (b) leadfeast dg0 national(end) >= control-2 — 12 vs 11
+PASS (c) leadfeast dg1 median paired survival-diff >= -10d — 0d (n=16)
+FAIL (a) leadfeast dg1 starvation/100vd armed <= control — armed 0.118 (15/12662d) vs control 0.052 (7/13400d); depinteraction-bar 0.068
+PASS (b) leadfeast dg1 national(end) >= control-2 — 8 vs 10
+PASS (c) belongfeast dg0 median paired survival-diff >= -10d — 0d (n=16)
+FAIL (a) belongfeast dg0 starvation/100vd armed <= control — armed 0.066 (9/13694d) vs control 0.043 (6/14062d); depinteraction-bar 0.057
+PASS (b) belongfeast dg0 national(end) >= control-2 — 6 vs 6
+PASS (c) belongfeast dg1 median paired survival-diff >= -10d — 0d (n=16)
+FAIL (a) belongfeast dg1 starvation/100vd armed <= control — armed 0.111 (14/12559d) vs control 0.035 (5/14277d); depinteraction-bar 0.051
+PASS (b) belongfeast dg1 national(end) >= control-2 — 10 vs 10
+PASS (d) no new death modes (pd2 families ⊆ pooled pd0 corpus) — pd2 {combat,dehydration,sickness,starvation} ⊆ pd0 {alien,combat,dehydration,sickness,starvation}
+
+== REPAIR: PD=2 vs PD=1 (rot/100d ratio, starvation rate, national) ==
+leadfeast dg0: rot/100d pd1 183.7k pd2 205.5k (pd2/pd1 1.119x) | starve/100vd pd1 0.093 pd2 0.085 | national pd1 11 pd2 12
+leadfeast dg1: rot/100d pd1 78.8k pd2 53.8k (pd2/pd1 0.683x) | starve/100vd pd1 0.108 pd2 0.118 | national pd1 8 pd2 8
+belongfeast dg0: rot/100d pd1 111.3k pd2 147.9k (pd2/pd1 1.329x) | starve/100vd pd1 0.116 pd2 0.066 | national pd1 9 pd2 6
+belongfeast dg1: rot/100d pd1 72.4k pd2 90.7k (pd2/pd1 1.252x) | starve/100vd pd1 0.105 pd2 0.111 | national pd1 9 pd2 10
+
+== WALL NUMBERS per cell (national / table / wins, wave 4-5, median/max survival) ==
+pd0-dg0 leadfeast: national 11/16 table/wins 0/16 wave>=4 11/16 wave>=5 0/16 survival median 100d max 100d
+pd0-dg0 belongfeast: national 6/16 table/wins 0/16 wave>=4 10/16 wave>=5 0/16 survival median 100d max 100d
+pd1-dg0 leadfeast: national 11/16 table/wins 0/16 wave>=4 6/16 wave>=5 0/16 survival median 100d max 100d
+pd1-dg0 belongfeast: national 9/16 table/wins 0/16 wave>=4 8/16 wave>=5 0/16 survival median 100d max 100d
+pd2-dg0 leadfeast: national 12/16 table/wins 0/16 wave>=4 5/16 wave>=5 0/16 survival median 100d max 100d
+pd2-dg0 belongfeast: national 6/16 table/wins 0/16 wave>=4 9/16 wave>=5 0/16 survival median 100d max 100d
+pd0-dg1 leadfeast: national 10/16 table/wins 0/16 wave>=4 5/16 wave>=5 0/16 survival median 100d max 100d
+pd0-dg1 belongfeast: national 10/16 table/wins 0/16 wave>=4 5/16 wave>=5 0/16 survival median 100d max 100d
+pd1-dg1 leadfeast: national 8/16 table/wins 0/16 wave>=4 7/16 wave>=5 0/16 survival median 100d max 100d
+pd1-dg1 belongfeast: national 9/16 table/wins 0/16 wave>=4 9/16 wave>=5 0/16 survival median 100d max 100d
+pd2-dg1 leadfeast: national 8/16 table/wins 0/16 wave>=4 6/16 wave>=5 0/16 survival median 100d max 100d
+pd2-dg1 belongfeast: national 10/16 table/wins 0/16 wave>=4 6/16 wave>=5 0/16 survival median 100d max 100d
+
+== DEATH-CAUSE SHARES (pooled, kind-mapped) ==
+combat 72.9% sickness 16.0% starvation 9.0% dehydration 1.9% alien 0.3%
+PASS per-seed corpus JSONs patched with cell medianSurvival
+
+== MANUAL PAIRED ROWS (#797 fallback; pd2 vs pd0 per cell) ==
+policy dg seed | c_days a_days d | c_rot100 a_rot100 | c_starve a_starve | c_nat a_nat | a_depriK a_sdK | a_fresh/c_fresh
+leadfeast dg0 9250 | 100 100 +0 | 544979 581835 | 0 1 | 1 1 | 420868 0 | 157.1/40.6
+leadfeast dg0 9251 | 100 32 -68 | 18287 0 | 0 0 | 1 0 | 74977 4751 | 12/11.4
+leadfeast dg0 9252 | 100 96 -4 | 117704 4732 | 2 3 | 0 0 | 21800 1799 | 1.9/5.4
+leadfeast dg0 9253 | 100 100 +0 | 503660 475565 | 0 0 | 1 1 | 226713 1014 | 95.4/35.9
+leadfeast dg0 9254 | 100 100 +0 | 77988 9815 | 0 0 | 1 1 | 104605 491 | 7.5/12.7
+leadfeast dg0 9255 | 100 100 +0 | 523003 853899 | 1 1 | 1 1 | 450265 0 | 133.6/33.2
+leadfeast dg0 9256 | 100 85 -15 | 503678 208425 | 0 0 | 1 1 | 132287 568 | 26.8/29.6
+leadfeast dg0 9257 | 100 95 -5 | 173995 94273 | 1 0 | 1 1 | 234915 0 | 23.9/19.6
+leadfeast dg0 9258 | 100 100 +0 | 433863 157731 | 1 1 | 1 1 | 245828 0 | 56/116.9
+leadfeast dg0 9259 | 97 100 +3 | 43333 42962 | 1 1 | 0 1 | 174904 8488 | 19.3/14.5
+leadfeast dg0 9260 | 47 100 +53 | 0 37168 | 5 1 | 0 0 | 197180 5080 | 12/4.9
+leadfeast dg0 9261 | 75 100 +25 | 520 255559 | 3 0 | 0 1 | 316458 2093 | 25.4/5.9
+leadfeast dg0 9262 | 100 100 +0 | 492914 50522 | 0 0 | 1 1 | 150577 3918 | 8.2/28.5
+leadfeast dg0 9263 | 100 100 +0 | 140729 45699 | 0 0 | 1 1 | 263085 4268 | 11.1/18.3
+leadfeast dg0 9264 | 100 100 +0 | 251056 187049 | 0 2 | 1 1 | 225662 0 | 23.3/23.4
+leadfeast dg0 9265 | 100 37 -63 | 345023 0 | 1 2 | 0 0 | 52551 2037 | 6.9/116.9
+leadfeast dg1 9250 | 100 100 +0 | 193167 24252 | 0 0 | 1 1 | 187427 815 | 5.3/14.6
+leadfeast dg1 9251 | 100 100 +0 | 1200 6927 | 1 1 | 1 1 | 43197 11730 | 4.1/4.1
+leadfeast dg1 9252 | 25 100 +75 | 0 16345 | 2 0 | 0 0 | 133913 10657 | 5.5/5.4
+leadfeast dg1 9253 | 100 100 +0 | 142526 4436 | 0 0 | 1 1 | 160709 1922 | 6/64.3
+leadfeast dg1 9254 | 100 30 -70 | 35859 0 | 1 1 | 0 0 | 52602 1304 | 5.3/6
+leadfeast dg1 9255 | 61 100 +39 | 352366 504136 | 0 0 | 0 1 | 440745 0 | 28.5/6.9
+leadfeast dg1 9256 | 100 27 -73 | 150384 0 | 0 1 | 1 0 | 24807 1621 | 5.3/31.2
+leadfeast dg1 9257 | 100 100 +0 | 59156 13379 | 1 1 | 1 1 | 182472 13381 | 4.8/6.1
+leadfeast dg1 9258 | 100 100 +0 | 34127 54341 | 0 0 | 1 0 | 280281 16955 | 12.4/5.1
+leadfeast dg1 9259 | 100 100 +0 | 0 5579 | 0 0 | 0 0 | 159763 20915 | 5.2/4.5
+leadfeast dg1 9260 | 100 44 -56 | 0 0 | 1 3 | 0 0 | 22146 12124 | 4.8/4.7
+leadfeast dg1 9261 | 34 27 -7 | 0 0 | 1 3 | 0 0 | 18580 1763 | 5.4/7
+leadfeast dg1 9262 | 100 100 +0 | 30460 11538 | 0 0 | 1 1 | 130590 11253 | 4.6/5.2
+leadfeast dg1 9263 | 100 100 +0 | 68380 29519 | 0 0 | 1 1 | 161000 11178 | 5.8/8.9
+leadfeast dg1 9264 | 100 100 +0 | 110136 34376 | 0 0 | 1 1 | 273277 8503 | 8.2/21.5
+leadfeast dg1 9265 | 100 82 -18 | 43395 0 | 0 5 | 1 0 | 95552 5544 | 3.8/4.5
+belongfeast dg0 9250 | 100 100 +0 | 918895 564880 | 0 0 | 1 1 | 422635 0 | 36.9/39.8
+belongfeast dg0 9251 | 100 100 +0 | 87571 19626 | 0 1 | 0 0 | 180178 5083 | 8.1/6.9
+belongfeast dg0 9252 | 100 100 +0 | 102256 5997 | 2 0 | 0 0 | 24401 2914 | 2.5/4.9
+belongfeast dg0 9253 | 100 100 +0 | 358668 43342 | 0 0 | 0 1 | 134471 2172 | 5.9/23.4
+belongfeast dg0 9254 | 100 100 +0 | 314219 86458 | 0 0 | 0 0 | 293743 0 | 16.3/14.4
+belongfeast dg0 9255 | 100 80 -20 | 424201 514408 | 0 1 | 1 1 | 316199 0 | 19.8/16.2
+belongfeast dg0 9256 | 100 100 +0 | 379301 530380 | 0 0 | 1 0 | 199573 568 | 42.5/51.4
+belongfeast dg0 9257 | 100 82 -18 | 21782 100985 | 1 0 | 0 1 | 190622 0 | 19.4/2.3
+belongfeast dg0 9258 | 58 99 +41 | 152909 40286 | 0 2 | 0 0 | 137094 10093 | 4.6/14.8
+belongfeast dg0 9259 | 100 100 +0 | 7687 6910 | 0 1 | 0 0 | 53640 5923 | 3.8/5.1
+belongfeast dg0 9260 | 56 100 +44 | 0 8200 | 2 1 | 0 0 | 88325 5080 | 4.2/5.1
+belongfeast dg0 9261 | 100 100 +0 | 92793 167633 | 1 0 | 1 1 | 197834 225 | 8.5/5.2
+belongfeast dg0 9262 | 100 59 -41 | 285237 9275 | 0 0 | 1 0 | 47448 4959 | 3.3/21.1
+belongfeast dg0 9263 | 100 100 +0 | 200700 122246 | 0 0 | 0 1 | 262358 5999 | 7.9/12.2
+belongfeast dg0 9264 | 75 100 +25 | 93949 54043 | 0 1 | 0 0 | 127018 526 | 5/11.4
+belongfeast dg0 9265 | 100 33 -67 | 83386 0 | 0 2 | 1 0 | 52215 1034 | 7.4/9.4
+belongfeast dg1 9250 | 100 100 +0 | 273974 56849 | 0 0 | 1 1 | 334089 0 | 6.7/21.8
+belongfeast dg1 9251 | 100 100 +0 | 2865 13191 | 1 2 | 1 1 | 24871 11730 | 3.5/3.8
+belongfeast dg1 9252 | 25 100 +75 | 0 16345 | 2 0 | 0 0 | 133913 10657 | 5.5/5.4
+belongfeast dg1 9253 | 100 100 +0 | 234319 267020 | 0 0 | 1 1 | 224424 6047 | 25/42.3
+belongfeast dg1 9254 | 100 30 -70 | 8433 0 | 0 1 | 0 0 | 52602 1304 | 5.3/6.6
+belongfeast dg1 9255 | 100 100 +0 | 115154 593583 | 0 0 | 0 1 | 421797 0 | 47/6.5
+belongfeast dg1 9256 | 100 27 -73 | 316040 0 | 0 1 | 1 0 | 24807 1621 | 5.3/18.3
+belongfeast dg1 9257 | 100 100 +0 | 110372 85880 | 0 1 | 1 1 | 91260 3815 | 3/5.7
+belongfeast dg1 9258 | 92 76 -16 | 76883 4238 | 0 0 | 1 1 | 90645 42146 | 4.7/4.7
+belongfeast dg1 9259 | 100 100 +0 | 3840 0 | 0 0 | 1 1 | 69944 26966 | 4.4/7.1
+belongfeast dg1 9260 | 100 44 -56 | 24563 0 | 1 3 | 0 0 | 22146 12124 | 4.8/5.3
+belongfeast dg1 9261 | 100 27 -73 | 104438 0 | 0 3 | 1 0 | 18580 1763 | 5.4/7.7
+belongfeast dg1 9262 | 100 100 +0 | 66306 51851 | 0 0 | 0 1 | 113490 7438 | 4.2/5.1
+belongfeast dg1 9263 | 100 100 +0 | 51721 62875 | 0 0 | 1 1 | 233519 236 | 13.8/21.9
+belongfeast dg1 9264 | 100 100 +0 | 15496 10115 | 1 0 | 0 1 | 207514 38894 | 5.1/4.8
+belongfeast dg1 9265 | 100 81 -19 | 9065 5498 | 0 3 | 1 0 | 93426 2705 | 2.5/3.7
+
+LEVER VERDICT: NO-GO — see 7 FAIL above (judged as pre-registered; classify per §14a)

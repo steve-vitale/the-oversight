@@ -28933,6 +28933,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const d = (this.state.scholar || {}).day || 0;
             const lg = (vv._plentyDepri = vv._plentyDepri || { days: {} });
             const rec = (lg.days[d] = lg.days[d] || { depri: 0, kcal: 0, vids: [] });
+            // PLENTYDEPRI=2 BUFFER STAND-DOWN (2026-10-23): the ease stands
+            // down when the pantry buffer is thin — plentiful fresh, but the
+            // deep reserve behind it is thin. Unreachable unless
+            // PLENTYDEPRI=2: _plentyDepriBufferClear() is always true
+            // otherwise, so PD=1 behavior stays byte-identical. The
+            // stand-down is recorded in the ledger (for measurement) and
+            // voiced once per day by _plentyDepriDayVoice — never silent.
+            // No RNG in this path (deterministic, ledger-only state).
+            if (!this._plentyDepriBufferClear()) {
+              rec.standDown = (rec.standDown || 0) + 1;
+              rec.standDownKcal = (rec.standDownKcal || 0) + (produced0 - eased);
+              rec.standDownVids = rec.standDownVids || [];
+              if (rec.standDownVids.indexOf(vid) === -1) rec.standDownVids.push(vid);
+              return produced0;
+            }
             rec.depri++; rec.kcal += (produced0 - eased);
             // VOICE (SENSE-TESTING 2026-10-22): the day's line is spoken once
             // per day by _plentyDepriDayVoice, AFTER the meal loop has run —
@@ -28956,6 +28971,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         if (typeof process === 'undefined') return true;
         return !process.env || process.env.PLENTYDEPRI !== '0';
+      } catch (e) { return true; }
+    },
+
+    // PLENTYDEPRI=2 buffer gate (2026-10-23, axis food-economy): buffer-aware
+    // easing. The ease STANDS DOWN when the pantry buffer is thin, even
+    // though the fresh pantry reads plentiful. The engine's plenty definition
+    // (duty-PRODTHROTTLE's ">4 fresh days") is binary — it has no thin/thick
+    // concept — so the buffer is read from the engine's OWN deep-reserve
+    // sensor: pantryDaysEstimate() (whole pantry: fresh+preserved+rendered+
+    // pemmican, at the measured burn rate), against the SAME >4 line. No new
+    // threshold: the design question (whether "thin" should instead mean a
+    // fresh-days margin above 4) is documented in the evidence file, not a
+    // constant. Returns true whenever PLENTYDEPRI is not '2' (unset, '0',
+    // '1', browser): PD=1 and gate-off behavior stay byte-identical.
+    // Read-only: pantryDaysEstimate() writes no state and rolls no RNG, so
+    // trajectories can only diverge via the stand-down decision itself.
+    _plentyDepriBufferClear() {
+      try {
+        if (typeof process === 'undefined') return true;
+        if (!process.env || process.env.PLENTYDEPRI !== '2') return true;
+        if (typeof this.pantryDaysEstimate !== 'function') return true;
+        return this.pantryDaysEstimate() > 4;
       } catch (e) { return true; }
     },
 
@@ -29073,10 +29110,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const vv = v || this.state.village || {};
         const d = (this.state.scholar || {}).day || 0;
         const lg = vv._plentyDepri;
-        if (!lg || lg.voiceDay === d) return;
+        if (!lg) return;
         const rec = (lg.days || {})[d];
         const vids = (rec && rec.vids) || [];
-        if (!vids.length) return;
+        const sdVids = (rec && rec.standDownVids) || [];
+        if (!vids.length && !sdVids.length) return;
+        if (vids.length && lg.voiceDay !== d) {
         lg.voiceDay = d;
         const speaker = vids[(d * 3 + 1) % vids.length];
         let hk = 0;
@@ -29102,6 +29141,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           first = String((p && p.name) || 'Someone').split(' ')[0];
         } catch (eN) {}
         this.say('🍽️ ' + first + ' ' + line);
+        } // end eased voice (voiceDay-guarded above)
+        // PLENTYDEPRI=2 BUFFER STAND-DOWN VOICE (2026-10-23): when the ease
+        // stood down on a thin buffer, the village hears why — the villager
+        // read the pantry, saw fresh plenty over a thin deep reserve, and
+        // kept hauling. Same once-per-day discipline (own day guard,
+        // rotating speaker, per-speaker line key, deterministic, narration
+        // only — never silent). Unreachable unless PLENTYDEPRI=2 stood
+        // someone down today; PD=1 and gate-off days never reach here.
+        if (sdVids.length && lg.standDownVoiceDay !== d) {
+          lg.standDownVoiceDay = d;
+          const sdSpeaker = sdVids[(d * 3 + 5) % sdVids.length];
+          let sdHk = 0;
+          try { const s = String(sdSpeaker); for (let i = 0; i < s.length; i++) sdHk = (sdHk * 31 + s.charCodeAt(i)) | 0; } catch (eH2) {}
+          const sdPool = [
+            'counts the deep jars behind the fresh shelves and shakes their head. "Looks plenty up front, but the stores behind are thin. We keep hauling — no rest while the buffer\'s thin."',
+            'taps the pantry\'s back wall — hollow where the jars should be. "Fresh today, thin tomorrow. The wild doesn\'t rest, so neither do we."',
+            'weighs the fresh pile against the deep stores and keeps the basket on their shoulder. "Plenty to eat, nothing to spare. We haul until the back shelves fill."',
+            'looks past the full front shelves at the thin racks behind. "The fresh won\'t carry us far. Keep bringing it in — the deep pantry needs feeding."',
+          ];
+          const sdLine = sdPool[((d * 5 + sdHk) % sdPool.length + sdPool.length) % sdPool.length];
+          let sdFirst = 'Someone';
+          try {
+            const p2 = sdSpeaker && this.getPerson ? this.getPerson(sdSpeaker) : null;
+            sdFirst = String((p2 && p2.name) || 'Someone').split(' ')[0];
+          } catch (eN2) {}
+          this.say('🍽️ ' + sdFirst + ' ' + sdLine);
+        }
       } catch (eV) { console.warn('[plentydepri] day voice', eV); }
     },
 
