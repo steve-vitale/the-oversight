@@ -1,0 +1,103 @@
+PASS input sweeps present: 2 cells x 2 policies, 16 seeds, 100d, R13=1/SEATDRIVE=0, PD=0/DG=1/DR explicit
+
+=== PRE-REGISTERED VERDICT ===
+FAIL PRIMARY leadfeast: armed starvation 0.095/100vd (n=13/13621vd) <= control 0.071 + 2/(armedVD/100)=0.085
+PASS ENGAGEMENT leadfeast: stand-down ledger >0 on 12/32 configs (>=12)
+PASS GUARDRAIL(a) leadfeast: rot/100d ratio 0.843 <= 1.10
+PASS GUARDRAIL(b) leadfeast: national(end) 11 >= control-2 (7)
+PASS GUARDRAIL(c) leadfeast: median paired survival-diff 0.0d >= -10d
+PASS GUARDRAIL(d) leadfeast: no new death modes (none)
+FAIL PRIMARY belongfeast: armed starvation 0.130/100vd (n=17/13090vd) <= control 0.078 + 2/(armedVD/100)=0.093
+FAIL ENGAGEMENT belongfeast: stand-down ledger >0 on 11/32 configs (>=12)
+PASS GUARDRAIL(a) belongfeast: rot/100d ratio 0.980 <= 1.10
+PASS GUARDRAIL(b) belongfeast: national(end) 8 >= control-2 (7)
+PASS GUARDRAIL(c) belongfeast: median paired survival-diff 0.0d >= -10d
+PASS GUARDRAIL(d) belongfeast: no new death modes (none)
+
+=== MANUAL PAIRED ROWS (#797 fallback) ===
+seed | policy | dr | daysAlive | villageDays | starveDeaths | starveRate/100vd | rotK | easedK | reliefDec | national | maxWave | endReason
+9250 | leadfeast | dr0 | 100 | 792 | 0 | 0.000 | 67 | 219 | 0 | 1 | 4 | survived
+9250 | leadfeast | dr1 | 100 | 813 | 0 | 0.000 | 67 | 217 | 21 | 1 | 4 | survived
+9251 | leadfeast | dr0 | 100 | 830 | 1 | 0.120 | 0 | 53 | 0 | 1 | 2 | survived
+9251 | leadfeast | dr1 | 100 | 945 | 1 | 0.106 | 0 | 46 | 26 | 1 | 3 | survived
+9252 | leadfeast | dr0 | 34 | 324 | 1 | 0.309 | 0 | 11 | 0 | 0 | 2 | village-lost
+9252 | leadfeast | dr1 | 30 | 279 | 3 | 1.075 | 0 | 3 | 16 | 0 | 1 | village-lost
+9253 | leadfeast | dr0 | 100 | 1200 | 0 | 0.000 | 163 | 314 | 0 | 1 | 2 | survived
+9253 | leadfeast | dr1 | 100 | 1051 | 0 | 0.000 | 44 | 231 | 40 | 1 | 4 | survived
+9254 | leadfeast | dr0 | 83 | 515 | 3 | 0.583 | 97 | 30 | 0 | 0 | 3 | village-lost
+9254 | leadfeast | dr1 | 83 | 515 | 3 | 0.583 | 97 | 30 | 3 | 0 | 3 | village-lost
+9255 | leadfeast | dr0 | 100 | 1105 | 0 | 0.000 | 628 | 444 | 0 | 1 | 2 | survived
+9255 | leadfeast | dr1 | 100 | 1105 | 0 | 0.000 | 628 | 444 | 0 | 1 | 2 | survived
+9256 | leadfeast | dr0 | 100 | 966 | 0 | 0.000 | 176 | 258 | 0 | 1 | 4 | survived
+9256 | leadfeast | dr1 | 100 | 846 | 0 | 0.000 | 111 | 92 | 4 | 1 | 4 | survived
+9257 | leadfeast | dr0 | 100 | 939 | 1 | 0.106 | 88 | 250 | 0 | 1 | 3 | survived
+9257 | leadfeast | dr1 | 100 | 939 | 1 | 0.106 | 88 | 250 | 0 | 1 | 3 | survived
+9258 | leadfeast | dr0 | 80 | 727 | 1 | 0.138 | 23 | 174 | 0 | 1 | 4 | village-lost
+9258 | leadfeast | dr1 | 80 | 727 | 1 | 0.138 | 23 | 174 | 0 | 1 | 4 | village-lost
+9259 | leadfeast | dr0 | 100 | 887 | 0 | 0.000 | 0 | 66 | 0 | 0 | 3 | survived
+9259 | leadfeast | dr1 | 100 | 1061 | 0 | 0.000 | 0 | 106 | 30 | 0 | 3 | survived
+9260 | leadfeast | dr0 | 30 | 295 | 1 | 0.339 | 0 | 9 | 0 | 0 | 1 | village-lost
+9260 | leadfeast | dr1 | 100 | 795 | 1 | 0.126 | 0 | 122 | 31 | 0 | 3 | survived
+9261 | leadfeast | dr0 | 73 | 608 | 0 | 0.000 | 22 | 57 | 0 | 0 | 4 | village-lost
+9261 | leadfeast | dr1 | 100 | 911 | 1 | 0.110 | 90 | 114 | 42 | 1 | 3 | survived
+9262 | leadfeast | dr0 | 100 | 1016 | 0 | 0.000 | 87 | 180 | 0 | 0 | 3 | survived
+9262 | leadfeast | dr1 | 100 | 931 | 0 | 0.000 | 64 | 159 | 10 | 1 | 4 | survived
+9263 | leadfeast | dr0 | 85 | 751 | 1 | 0.133 | 32 | 141 | 0 | 1 | 4 | village-lost
+9263 | leadfeast | dr1 | 100 | 878 | 1 | 0.114 | 39 | 149 | 63 | 1 | 4 | survived
+9264 | leadfeast | dr0 | 100 | 1049 | 0 | 0.000 | 131 | 309 | 0 | 1 | 3 | survived
+9264 | leadfeast | dr1 | 100 | 1049 | 0 | 0.000 | 131 | 309 | 0 | 1 | 3 | survived
+9265 | leadfeast | dr0 | 100 | 753 | 0 | 0.000 | 8 | 50 | 0 | 0 | 4 | survived
+9265 | leadfeast | dr1 | 100 | 776 | 1 | 0.129 | 1 | 57 | 7 | 0 | 4 | survived
+9250 | belongfeast | dr0 | 100 | 850 | 1 | 0.118 | 37 | 143 | 0 | 0 | 4 | survived
+9250 | belongfeast | dr1 | 69 | 657 | 0 | 0.000 | 35 | 139 | 11 | 0 | 4 | village-lost
+9251 | belongfeast | dr0 | 100 | 898 | 1 | 0.111 | 115 | 209 | 0 | 1 | 2 | survived
+9251 | belongfeast | dr1 | 100 | 961 | 1 | 0.104 | 0 | 102 | 25 | 0 | 3 | survived
+9252 | belongfeast | dr0 | 34 | 324 | 1 | 0.309 | 0 | 11 | 0 | 0 | 2 | village-lost
+9252 | belongfeast | dr1 | 30 | 279 | 3 | 1.075 | 0 | 3 | 16 | 0 | 1 | village-lost
+9253 | belongfeast | dr0 | 100 | 1072 | 0 | 0.000 | 34 | 186 | 0 | 1 | 4 | survived
+9253 | belongfeast | dr1 | 100 | 1198 | 0 | 0.000 | 80 | 309 | 14 | 1 | 4 | survived
+9254 | belongfeast | dr0 | 25 | 275 | 4 | 1.455 | 0 | 19 | 0 | 0 | 1 | village-lost
+9254 | belongfeast | dr1 | 25 | 275 | 4 | 1.455 | 0 | 19 | 0 | 0 | 1 | village-lost
+9255 | belongfeast | dr0 | 100 | 1105 | 0 | 0.000 | 626 | 442 | 0 | 1 | 2 | survived
+9255 | belongfeast | dr1 | 100 | 1105 | 0 | 0.000 | 626 | 442 | 0 | 1 | 2 | survived
+9256 | belongfeast | dr0 | 57 | 618 | 0 | 0.000 | 31 | 160 | 0 | 0 | 4 | village-lost
+9256 | belongfeast | dr1 | 93 | 784 | 2 | 0.255 | 80 | 38 | 8 | 0 | 2 | village-lost
+9257 | belongfeast | dr0 | 100 | 1062 | 0 | 0.000 | 48 | 225 | 0 | 1 | 4 | village-lost
+9257 | belongfeast | dr1 | 100 | 1071 | 0 | 0.000 | 48 | 223 | 4 | 1 | 4 | survived
+9258 | belongfeast | dr0 | 100 | 923 | 1 | 0.108 | 48 | 244 | 0 | 1 | 4 | survived
+9258 | belongfeast | dr1 | 100 | 923 | 1 | 0.108 | 48 | 244 | 0 | 1 | 4 | survived
+9259 | belongfeast | dr0 | 95 | 841 | 0 | 0.000 | 0 | 33 | 0 | 0 | 4 | village-lost
+9259 | belongfeast | dr1 | 100 | 1055 | 0 | 0.000 | 0 | 104 | 32 | 0 | 3 | survived
+9260 | belongfeast | dr0 | 30 | 295 | 1 | 0.339 | 0 | 9 | 0 | 0 | 1 | village-lost
+9260 | belongfeast | dr1 | 100 | 821 | 1 | 0.122 | 22 | 155 | 19 | 1 | 2 | survived
+9261 | belongfeast | dr0 | 100 | 862 | 0 | 0.000 | 35 | 152 | 0 | 1 | 2 | survived
+9261 | belongfeast | dr1 | 34 | 339 | 3 | 0.885 | 0 | 8 | 39 | 0 | 1 | village-lost
+9262 | belongfeast | dr0 | 100 | 967 | 0 | 0.000 | 40 | 111 | 0 | 1 | 3 | survived
+9262 | belongfeast | dr1 | 100 | 927 | 1 | 0.108 | 41 | 170 | 27 | 1 | 3 | survived
+9263 | belongfeast | dr0 | 100 | 899 | 1 | 0.111 | 116 | 261 | 0 | 1 | 4 | survived
+9263 | belongfeast | dr1 | 100 | 899 | 1 | 0.111 | 116 | 261 | 0 | 1 | 4 | survived
+9264 | belongfeast | dr0 | 100 | 982 | 0 | 0.000 | 59 | 333 | 0 | 1 | 4 | survived
+9264 | belongfeast | dr1 | 100 | 982 | 0 | 0.000 | 59 | 333 | 0 | 1 | 4 | survived
+9265 | belongfeast | dr0 | 100 | 878 | 0 | 0.000 | 7 | 93 | 0 | 0 | 3 | survived
+9265 | belongfeast | dr1 | 100 | 814 | 0 | 0.000 | 27 | 69 | 6 | 0 | 4 | survived
+
+=== SCALE WALL (per cell) ===
+cell | policy | national | table/wins | wave>=4 | wave>=5 | survival median/max | scholarDeaths | trapsK(of inflow)
+dr0 | leadfeast | 9/16 | 0/16 | 6/16 | 0/16 | 100d / 100d | 15 | 0k/4222k
+dr0 | belongfeast | 9/16 | 0/16 | 8/16 | 0/16 | 100d / 100d | 15 | 0k/4358k
+dr1 | leadfeast | 11/16 | 0/16 | 7/16 | 0/16 | 100d / 100d | 16 | 0k/4564k
+dr1 | belongfeast | 8/16 | 0/16 | 7/16 | 0/16 | 100d / 100d | 15 | 0k/4508k
+
+=== DEATH-CAUSE SHARES (pooled, kind-mapped) ===
+  combat: 65.4% (323)
+  starvation: 9.9% (49)
+  sickness: 8.9% (44)
+  other:ambush: 5.1% (25)
+  dehydration: 4.7% (23)
+  other:contest: 4.3% (21)
+  other:a line of ducks, walking: 0.8% (4)
+  other:lockjaw: 0.4% (2)
+  other:big loud: 0.4% (2)
+  other:big-eyes: 0.2% (1)
+
+VERDICT: NO-GO (3 misses)
