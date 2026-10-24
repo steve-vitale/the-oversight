@@ -26,6 +26,12 @@
 //   4. Output paths/names: evidence/2026-10-24/pdvalue-b-corpus/,
 //      pdvalue-b-<SIDE>-<DG>-<POLICY>-s<seed>.json; mode 'pdvalue-b-*'.
 //   5. Comments reworded for the DIAG context.
+//   6. (post-pilot, 2026-10-24) writeRobust retry backoff uses
+//      performance.now(), NOT Date.now(): the harness replaces Date.now
+//      with a +1-per-call deterministic clock after loadGame, so the
+//      inherited Date.now() wait completed instantly and 60 retries
+//      burned in milliseconds during the EPERM flap, killing the
+//      confirm run. performance.now() is real monotonic time. Proof P8.
 // Everything else — rot capture, inflow channels, DG ledger, death
 // capture, policy.daily exposure hooks, FATAL env asserts, death-aware
 // horizons, merge semantics, EPERM-resilient writes — is byte-identical.
@@ -151,8 +157,17 @@ function writeRobust(filePath, data) {
       return;
     } catch (e) {
       if (i === 59) { console.error('WRITE FAIL LOUDLY', filePath, e.code || e.message); process.exit(2); }
-      // 2s backoff; the flap recovers on a minutes timescale
-      const t0 = Date.now(); while (Date.now() - t0 < 2000) {}
+      // REAL 2s backoff on performance.now() — the flap recovers on a
+      // minutes timescale, so retries must actually WAIT. Date.now() is
+      // REPLACED by the harness's deterministic clock after loadGame
+      // (sim-harness.js: Date.now = () => BASE + callCount), so a
+      // Date.now()-based wait completes in ~2000 instant iterations
+      // and all 60 retries burn in milliseconds instead of riding out
+      // the flap — found 2026-10-24 when the pdvalue confirm run died
+      // on EPERM with instant WRITE FAILs. performance.now() is real
+      // monotonic time and is never replaced (harness comment confirms
+      // pacing telemetry uses it). Proof leg P8 in test-pdvalue-b.js.
+      const t0 = performance.now(); while (performance.now() - t0 < 2000) {}
     }
   }
 }

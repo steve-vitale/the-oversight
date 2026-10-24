@@ -26,8 +26,15 @@
 //      ratios 0.50/0.60/0.70/0.90 and clean guardrails yields GO; flipping
 //      one more ratio above 0.85 yields NO-GO (primary 2/4). Proves the
 //      judge, not just the instrument.
+//   P8 retry-wait clock (post-pilot instrument fix): under the harness's
+//      fake Date.now (BASE + call count), a Date.now()-based 2s wait
+//      completes in ~2000 instant iterations (the confirm-killing bug),
+//      while a performance.now()-based 2s wait takes real ~2000ms.
+//      Proves the fix and the bug in one leg.
 //
-// ALL GREEN (P1-P7 PASS) before the sweep.
+// ALL GREEN (P1-P8 PASS) before the sweep (P8 added post-pilot, before
+// the confirm resume — the fix changes retry timing only, never sim
+// trajectories; P2 re-runs after the fix).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -70,9 +77,12 @@ const ok = (name, cond, detail) => {
     } else changed.push('S:' + l);
   }
   const markers = [/pdvalue/i, /pdtradeoff/i, /9400/i, /9401/i, /9250/i, /LEVER/i, /value/i,
-    /871/, /CORPUS/i, /mode:/, /SIDE/, /PERSEED_DIR/, /OUT\b/];
+    /871/, /CORPUS/i, /mode:/, /SIDE/, /PERSEED_DIR/, /OUT\b/, /performance/, /Date\.now/];
   // /9250/ covers the source instrument's default seed list line, replaced
   // by the pdvalue default (94001-94008) — a declared delta (seed list).
+  // /performance/ covers the writeRobust retry-wait fix (performance.now()
+  // instead of Date.now() — the harness fake clock makes Date.now() waits
+  // instant; see P8 and the sweep header). Declared delta, post-pilot.
   const unaccounted = changed.filter(l => !markers.some(m => m.test(l)));
   ok('P1 instrument derivation: non-comment diff confined to declared deltas',
     unaccounted.length === 0, `${changed.length} changed non-comment lines, ${unaccounted.length} unaccounted` +
@@ -178,6 +188,23 @@ function runSweep(seeds, dir) {
   const verdictNO = !(passes2 >= 3);
   ok('P7 verdict logic: 3/4 at bar -> GO; 2/4 at bar -> NO-GO',
     verdictGO && verdictNO && passes === 3 && passes2 === 2, `case1 ${passes}/4 GO=${verdictGO}, case2 ${passes2}/4 NO-GO=${verdictNO}`);
+}
+
+// ---------- P8: retry-wait clock under the harness fake clock ----------
+{
+  let c = 0;
+  const realNow = Date.now;
+  Date.now = () => 1760400000000 + (c++);
+  const t0 = Date.now();
+  let n = 0;
+  while (Date.now() - t0 < 2000) { n++; if (n > 100000) break; }
+  const bugRepro = n >= 1999; // fake-clock wait burns instantly, not in 2s
+  Date.now = realNow;
+  const p0 = performance.now();
+  while (performance.now() - p0 < 2000) {}
+  const fixReal = (performance.now() - p0) >= 1900;
+  ok('P8 retry-wait clock: Date.now() wait instant under fake clock, performance.now() wait real ~2s',
+    bugRepro && fixReal, `fake-clock wait iterations=${n} (bug), performance wait=${Math.round(performance.now() - p0)}ms (fix)`);
 }
 
 console.log(`\nproof: ${pass} PASS, ${fail} FAIL`);
