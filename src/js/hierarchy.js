@@ -2219,7 +2219,7 @@
             try { _poolLeft = this.leaguePool(); } catch (e) {}
             this.say(`📜 The realm came apart — and the league's machinery dies with it: no more pool weeks, no more tariff routes, no more calls. The bonds remain, but the charter's ink is dry.${_poolLeft > 0 ? ` What the shared granary still holds (${_poolLeft.toLocaleString()} kcal) stays Haven's to draw — real food, already poured.` : ''}`);
           }
-          this.say('◈ The realm came apart — no polity answers to Haven now, and Haven is a free fire again. National' + (hadGlobal ? ' and global' : '') + ' no longer describe this village. The climb starts over.');
+          this.say('◈ The realm came apart — no polity answers to Haven now, and Haven is a free fire again. National' + (hadGlobal ? ' and global' : '') + ' no longer ' + (hadGlobal ? 'describe' : 'describes') + ' this village. The climb starts over.');
           try { if (this.journalNote) this.journalNote('village', 'national', 'The realm came apart — Haven is no longer national.'); } catch (e) {}
           try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'national-lost'); } catch (e) {}
           return;

@@ -3409,11 +3409,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // materials are at real risk. L0: you've never seen one — no button.
       const rlevel = (known && known.level) || 0;
       if (rlevel < 1) {
-        this.say(`You don\'t know how to make a ${recipe.name} yet.`);
+        this.say(`You don\'t know how to make ${this.indefArt(recipe.name)} ${recipe.name} yet.`);
         return null;
       }
       const blind = rlevel < 2;
-      if (blind) this.say(`You've only SEEN a ${recipe.name}. You'll try to copy it from memory — long odds, and the materials are at risk if it comes apart.`);
+      if (blind) this.say(`You've only SEEN ${this.indefArt(recipe.name)} ${recipe.name}. You'll try to copy it from memory — long odds, and the materials are at risk if it comes apart.`);
       // check materials
       const inv = this.state.scholar.inventory;
       // BAIT is not a material — it's food. Any edible item (berries, nuts,
@@ -3431,7 +3431,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // any cost: no ticks, no consumption). A blind attempt stays blind.
           // At L2+ the materials are known, so the detailed line is honest.
           if (blind) {
-            this.say(`You don't know what a ${recipe.name} is made of — not really. Bring your best guess and try.`);
+            this.say(`You don't know what ${this.indefArt(recipe.name)} ${recipe.name} is made of — not really. Bring your best guess and try.`);
             return null;
           }
           this.say(mat === 'bait'
@@ -3478,7 +3478,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const realDef = (this.data.items || []).find(i => i.id === recipe.id);
         if (realDef) { made.itemId = realDef.id; made.name = realDef.name; }
         this.state.scholar.inventory.push(made);
-        this.say(`You make a ${recipe.name}. ${recipe.description}`);
+        this.say(`You make ${this.indefArt(recipe.name)} ${recipe.name}. ${recipe.description}`);
         // PRACTICE (Steve 2026-10-09): a successful blind (L1) craft teaches
         // L2 — your hands learn what your eyes only guessed at. The 35% was
         // the tuition; the success is the lesson.
@@ -3486,7 +3486,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else {
         this.state.scholar.tools = this.state.scholar.tools || [];
         this.state.scholar.tools.push({ recipeId, uses: recipe.uses, name: recipe.name });
-        this.say(`You make a ${recipe.name}. ${recipe.description} (${recipe.uses} uses)`);
+        this.say(`You make ${this.indefArt(recipe.name)} ${recipe.name}. ${recipe.description} (${recipe.uses} uses)`);
         // PRACTICE (structural 2026-10-10): the blind→L2 lesson lived only in
         // the durable branch above — a trap built blind (35%) never taught the
         // hands, so hunter-taught trappers were stuck at blind odds forever.
@@ -3596,7 +3596,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`You dig the pit — hard labor, most of a day-part, stakes at the bottom, brushed over with leaves. Mark it well. Check it tomorrow.`);
         this.tickAction(96);
       } else {
-        this.say(`You set a ${recipe.name} here. Check it tomorrow.`);
+        this.say(`You set ${this.indefArt(recipe.name)} ${recipe.name} here. Check it tomorrow.`);
         this.tickAction(16);
       }
       return true;
@@ -44898,7 +44898,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!pl) {
         pl = (/[^aeiou]y$/i.test(singular) ? singular.slice(0, -1) + 'ies' : singular + 's');
       }
-      return `${n} ${num === 1 ? singular : pl}`;
+      // GAP-W4-NARR #334: a toFixed(1) count ("1.0") must not render as
+      // "1.0 days" — trim the dead fraction, and agree on the numeric
+      // value (1.0 is one day, not days).
+      const shown = Number.isFinite(num) ? String(num) : String(n);
+      return `${shown} ${num === 1 ? singular : pl}`;
     },
     status() {
       const s = this.state.scholar;

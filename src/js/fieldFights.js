@@ -609,6 +609,14 @@
       var vAlive = vHp > 0;
       var mName = 'something';
       try { mName = this.monsterNoun ? this.monsterNoun(mdef.id) : (mdef.id || 'something'); } catch (e) {}
+      // GAP-W4-NARR #424: monsterNoun returns the proper name bare
+      // ("The Redactor") once the System has arrived, so blindly
+      // prefixing "the " prints "the The Redactor". articlePhrase
+      // composes the article correctly for both cases.
+      var mPhrase = 'something';
+      try { mPhrase = this.articlePhrase ? this.articlePhrase(mName) : ('the ' + mName); } catch (e) { mPhrase = 'the ' + mName; }
+      var mPhraseCap = 'Something';
+      try { mPhraseCap = this.articlePhrase ? this.articlePhrase(mName, true) : ('The ' + mName); } catch (e) { mPhraseCap = 'The ' + mName; }
       var vName = 'Someone';
       // NAME-AWARE (villager-depth 2026-10-12): displayName().split(' ')[0]
       // collapses an unknown villager's "A woman, maybe 30s" to bare "A" in
@@ -631,7 +639,7 @@
         rec.outcome = 'alreadyDead';
         rec.rounds = 0; rec.vTaken = 0; rec.mDealt = 0;
         rec.vHpLeft = vHp; rec.mHpLeft = 0;
-        rec.log.push(vName + ' finds the ' + mName + ' already dead — nothing to fight.');
+        rec.log.push(vName + ' finds ' + mPhrase + ' already dead — nothing to fight.');
         return rec;
       }
 
@@ -667,10 +675,10 @@
           rec.outcome = 'evade';
           rec.vHpLeft = vHp; rec.mHpLeft = members[0].hp;
           try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field evasion', e); }
-          rec.log.push(vName + ' saw the ' + mName + ' in time and gave it room.');
+          rec.log.push(vName + ' saw ' + mPhrase + ' in time and gave it room.');
           return rec;
         }
-        rec.log.push(vName + ' walks straight into the ' + mName + '. No avoiding it.');
+        rec.log.push(vName + ' walks straight into ' + mPhrase + '. No avoiding it.');
         // ABILITY — AMBUSH (lay_wait): they were waiting too. Contact was
         // made, but the monster didn't see THEM first: one free opening
         // strike before round 1, the tactical formula, verbatim.
@@ -746,7 +754,7 @@
             try { _tracking = (((this.agencyOf(vid) || {}).xp || {})[vid] || {}).tracking || 0; } catch (e) {}
             _hitP += Math.min(0.15, _tracking * 0.005);
             var _vh = 0, _vdmg = 0;
-            rec.log.push(vName + ' sees the ' + mName + ' coming and nocks an arrow — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
+            rec.log.push(vName + ' sees ' + mPhrase + ' coming and nocks an arrow — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
             for (var _s = 0; _s < _shots; _s++) {
               // spend one ammo, honestly — the quiver empties
               var _spent = false;
@@ -764,14 +772,14 @@
                 var _vd = lroll([4 + _wbR, 8 + _wbR]);
                 members[0].hp -= _vd; rec.mDealt += _vd; _vh++; _vdmg += _vd;
                 if (members[0].hp <= 0) members[0].alive = false;
-                rec.log.push('  loosed — it takes the ' + mName + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
+                rec.log.push('  loosed — it takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
               } else {
                 rec.log.push('  loosed wide — the arrow buries itself in the dirt. (spent)');
               }
               if (members[0].hp <= 0) break;
             }
             rec.volley = { shots: _shots, hits: _vh, dmg: _vdmg, ammoLeft: Math.max(0, _ammoN) };
-            rec.log.push(vName + ' lowers the bow — the ' + mName + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
+            rec.log.push(vName + ' lowers the bow — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
           }
         }
       } catch (e) { /* no ranged kit, no volley — the fight starts as before */ }
@@ -786,7 +794,7 @@
         rec.log.push('The lead never reached ' + vName + ' — it fell to the volley, and the pack\'s coordination shatters with it.');
       } else if ((members[0].hp / members[0].maxHp) < mBreak) {
         rec.outcome = 'mFlee';
-        rec.log.push(vName + ' drove the ' + mName + ' off with the bow — it broke before it ever closed.');
+        rec.log.push(vName + ' drove ' + mPhrase + ' off with the bow — it broke before it ever closed.');
       }
 
       // ---- rounds ----
@@ -858,7 +866,7 @@
         var mStunnedThisRound = false;
         if (abStun > 0) {
           abStun--; mStunnedThisRound = true;
-          rec.log.push('R' + round + ': the ' + mName + ' hesitates — ' + vName + ' bought a breath.');
+          rec.log.push('R' + round + ': ' + mPhrase + ' hesitates — ' + vName + ' bought a breath.');
         }
         // SIGNATURE MECHANICS, WAVE 3 BATCH C (sigW3c 2026-10-10): the same
         // hook path as the tactical engine (MonsterBehaviorHooks), translated
@@ -973,7 +981,7 @@
                 if (mdef.id === 'redactor' && (rec.redactorQuiet | 0) >= 2 && total > 0) {
                   var _preR = total;
                   total = Math.floor(total / 2);
-                  rec.log.push(vName + '\u2019s quiet starves the redaction — the ' + mName + '\u2019s attacks come thin. ' + _preR + ' \u2192 ' + total + '.');
+                  rec.log.push(vName + '\u2019s quiet starves the redaction — ' + mPhrase + '\u2019s attacks come thin. ' + _preR + ' \u2192 ' + total + '.');
                 }
               } catch (e) {}
               // COUNTER EXECUTION (2026-10-13): the villager's trick disrupts.
@@ -988,13 +996,13 @@
                   var _preT = total;
                   total = Math.floor(total / 2);
                   rec.trickDisrupt = 0;
-                  rec.log.push(vName + "'s bellow broke the chorus — the " + mName + "'s note dies mid-croak. " + _preT + ' → ' + total + '.');
+                  rec.log.push(vName + "'s bellow broke the chorus — " + mPhrase + "'s note dies mid-croak. " + _preT + ' → ' + total + '.');
                 }
                 if (rec.trickStill && total > 0) {
                   var _preS = total;
                   total = 0;
                   rec.trickStill = 0;
-                  rec.log.push(vName + ' stands perfectly still — the ' + mName + ' strikes where they were going to be. Whiff. (' + _preS + ' avoided)');
+                  rec.log.push(vName + ' stands perfectly still — ' + mPhrase + ' strikes where they were going to be. Whiff. (' + _preS + ' avoided)');
                 }
                 if (rec.trickDance && mdef.id === 'chorus_line' && total > 0) {
                   var _preD = total;
@@ -1524,7 +1532,7 @@
           } else if (!abWarCried && vHasAb('war_cry') && !opts.noFlee) {
             abWarCried = true; abStun = 1;
             fleeAt = Math.max(0.05, fleeAt - 0.15);
-            rec.log.push(vName + ' BELLOWS — not volume, a promise. The ' + mName + ' falters. They hold the line a little longer. (War Cry)');
+            rec.log.push(vName + ' BELLOWS — not volume, a promise. ' + mPhraseCap + ' falters. They hold the line a little longer. (War Cry)');
           } else if (opts.noFlee) {
             if (!rec.gateShut) { rec.gateShut = true; rec.log.push(vName + ' sees how this ends — but the gate is shut. No running.'); }
           } else {
@@ -1541,7 +1549,7 @@
           // hurts. Worth it.
           if (!abScreamed && vHasAb('scream_cheese')) {
             abScreamed = true; abStun = 1;
-            rec.log.push(vName + ' SCREAMS — the milk is cheese now! The ' + mName + ' reels, dizzy. (Scream Cheese)');
+            rec.log.push(vName + ' SCREAMS — the milk is cheese now! ' + mPhraseCap + ' reels, dizzy. (Scream Cheese)');
           }
           // ARENA PROTOCOL: sealed — past the sane line, still in. The
           // crowd leans in. (Logged once; the log feeds gossip.)
