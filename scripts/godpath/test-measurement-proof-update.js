@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path'),z=require('zlib'),K=require('./lib'),T=K.reporter('measurement proof refresh'),U=require('../balance-proof-update'),root=path.resolve(__dirname,'../..'),proof=require('../balance-proof.json'),p=JSON.parse(z.gunzipSync(fs.readFileSync(path.join(root,proof.panel)))),clone=x=>JSON.parse(JSON.stringify(x));
 function refuses(x,pattern){try{U.validate(root,x);return false;}catch(e){return pattern.test(e.message);}}
 const saved=JSON.stringify(p),inputs=U.validate(root,p);
-T.ok('a real current neutral panel supplies all seven maintained identities',Object.keys(inputs).length===7&&Object.hasOwn(inputs,'scripts/lib/balance-cohorts.js')&&Object.hasOwn(inputs,'scripts/lib/source-text.js'));
+T.ok('a real current neutral panel supplies all eight maintained identities',Object.keys(inputs).length===8&&Object.hasOwn(inputs,'scripts/lib/balance-cohorts.js')&&Object.hasOwn(inputs,'scripts/lib/source-text.js'));
 const stale=clone(p);stale.sources['scripts/sim-harness.js']='stale';T.ok('stale Game/controller/harness proof cannot refresh the gate',refuses(stale,/source inputs|manifest digest/));
 const observer=clone(p);observer.observerDigest='stale';T.ok('a changed observer needs a fresh real proof',refuses(observer,/observer\/contract/));
 const neutral=clone(p);neutral.validity.neutrality[0].match=false;T.ok('failed on/off neutrality cannot refresh the gate',refuses(neutral,/observer-neutral/));
