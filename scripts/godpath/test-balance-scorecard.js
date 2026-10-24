@@ -31,6 +31,15 @@ before = panel(); after = copy(before); after.sources['scripts/policies/maker.js
 T.ok('a policy change invalidates a game-only comparison', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.options.flags.CAPABLE_GREEDY = '1';
 T.ok('different policy flags invalidate pairing', S.comparePanels(before, after).decision === 'invalid');
+after = copy(before); after.options.flags.CAPABLE_GREEDY = '1';
+const exempt = S.comparePanels(before, after, { interventionFlags: ['CAPABLE_GREEDY'] });
+T.ok('a declared intervention flag is exempted from the flags match and recorded', exempt.decision !== 'invalid' && exempt.interventionFlags && exempt.interventionFlags.declared.includes('CAPABLE_GREEDY') && exempt.interventionFlags.before.CAPABLE_GREEDY === null && exempt.interventionFlags.after.CAPABLE_GREEDY === '1');
+T.ok('the compare markdown names the exempted flag', S.markdown(exempt).includes('CAPABLE_GREEDY'));
+after = copy(before); after.options.flags.CAPABLE_GREEDY = '1'; after.options.flags.OTHER_FLAG = 'x';
+T.ok('a declared exemption does not excuse an undeclared flag difference', S.comparePanels(before, after, { interventionFlags: ['CAPABLE_GREEDY'] }).decision === 'invalid');
+after = copy(before); after.options.flags.CAPABLE_GREEDY = '1';
+T.ok('declaring an absent flag does not excuse a real flag difference', S.comparePanels(before, after, { interventionFlags: ['SOME_OTHER_FLAG'] }).decision === 'invalid');
+T.ok('a malformed intervention declaration invalidates instead of silently passing', S.comparePanels(before, after, { interventionFlags: 'CAPABLE_GREEDY' }).decision === 'invalid');
 after = copy(before); after.rows.push(copy(after.rows[0]));
 T.ok('duplicate or incomplete cases are rejected', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.rows[0].row.seed = 999;

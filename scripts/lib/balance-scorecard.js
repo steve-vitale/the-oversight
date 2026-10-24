@@ -126,16 +126,33 @@ function isPanelShape(p) {
     && !!p.sources && typeof p.sources === 'object'
     && !!p.validity && Array.isArray(p.validity.neutrality);
 }
-function comparePanels(before, after) {
+function comparePanels(before, after, options) {
   if (isSweepCorpus(before) || isSweepCorpus(after)) {
     if (!isSweepCorpus(before) || !isSweepCorpus(after)) return { decision: 'invalid', errors: ['Cannot compare a sweep corpus against a balanced panel; convert both sides to the same shape'], policies: [] };
     return compareSweepCorpora(before, after);
   }
   if (!isPanelShape(before) || !isPanelShape(after)) return { decision: 'invalid', errors: ['Not a balanced panel (missing options/rows/sources/validity); per-seed sweep corpora are compared via the sweep-corpus path'], policies: [] };
   const errors = [];
+  options = options || {};
+  // 797 (Steve 2026-10-24): a run may DECLARE flags as its intervention (e.g.
+  // an env-gated lever's own flag differing before/after). Declared flags are
+  // exempted from the flags match — never inferred: only flags listed here
+  // are exempted, and the exemption is recorded on the report. Any other
+  // differing flag still invalidates the comparison.
+  const rawFlags = Array.isArray(options.interventionFlags) ? options.interventionFlags : (options.interventionFlags == null ? [] : null);
+  if (rawFlags === null || rawFlags.some(f => typeof f !== 'string' || !f)) errors.push('Invalid intervention flag declaration');
+  const declared = [...new Set((rawFlags || []).filter(f => typeof f === 'string' && f))];
+  const flagVal = (panel, f) => (panel.options.flags && Object.hasOwn(panel.options.flags, f)) ? panel.options.flags[f] : null;
+  const intervention = declared.length ? { declared, before: Object.fromEntries(declared.map(f => [f, flagVal(before, f)])), after: Object.fromEntries(declared.map(f => [f, flagVal(after, f)])) } : null;
+  const withIntervention = report => intervention ? { ...report, interventionFlags: intervention } : report;
   if (before.contractDigest !== contractDigest || after.contractDigest !== contractDigest) errors.push('Metric contract does not match this comparator');
   for (const field of ['schemaVersion', 'observerDigest', 'contractDigest']) if (before[field] !== after[field]) errors.push('Different ' + field);
-  for (const field of ['days', 'policies', 'seeds', 'region', 'origin', 'occupation', 'flags', 'nodeVersion']) if (JSON.stringify(before.options[field]) !== JSON.stringify(after.options[field])) errors.push('Unmatched ' + field);
+  for (const field of ['days', 'policies', 'seeds', 'region', 'origin', 'occupation', 'flags', 'nodeVersion']) {
+    if (field === 'flags' && declared.length) {
+      const strip = o => Object.fromEntries(Object.entries(o || {}).filter(([k]) => !declared.includes(k)));
+      if (JSON.stringify(strip(before.options.flags)) !== JSON.stringify(strip(after.options.flags))) errors.push('Unmatched flags');
+    } else if (JSON.stringify(before.options[field]) !== JSON.stringify(after.options[field])) errors.push('Unmatched ' + field);
+  }
   for (const f of new Set([...Object.keys(before.sources), ...Object.keys(after.sources)])) {
     if (f.startsWith('scripts/') && before.sources[f] !== after.sources[f]) errors.push('Policy/harness changed: ' + f);
   }
@@ -147,7 +164,7 @@ function comparePanels(before, after) {
   validate(before); validate(after);
   const bm = new Map(before.rows.map(r => [caseKey(r), r]));
   if (!after.options.occupation && after.rows.some(r => !bm.has(caseKey(r)))) errors.push('Unmatched cases');
-  if (errors.length) return { decision: 'invalid', errors: [...new Set(errors)], policies: [] };
+  if (errors.length) return withIntervention({ decision: 'invalid', errors: [...new Set(errors)], policies: [] });
   const policies = after.options.policies.map(policy => {
     const all = after.rows.filter(r => r.row.policy === policy), rs = all.filter(r => bm.has(caseKey(r)));
     const metrics = contract.metrics.map(m => compareMetric(rs.map(r => bm.get(caseKey(r)).metrics[m.id]), rs.map(r => r.metrics[m.id]), m, policy + '/' + m.id));
@@ -164,11 +181,12 @@ function comparePanels(before, after) {
     }
     return result;
   });
-  return { schemaVersion: 1, decision: policies.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies,
-    note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence. Win-rate movement prompts investigation in either direction, never an automatic regression or improvement judgment.' };
+  return withIntervention({ schemaVersion: 1, decision: policies.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies,
+    note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence. Win-rate movement prompts investigation in either direction, never an automatic regression or improvement judgment.' });
 }
 function markdown(report) {
   const lines = [(report.source === 'sweep-corpus' ? '# Sweep-corpus comparison (not a balanced-panel verdict)' : '# Balanced campaign comparison'), '', '**Decision: ' + report.decision + '**', '', ...(report.errors || []).map(e => '- ' + e)];
+  if (report.interventionFlags) lines.push('', `Declared intervention flags exempted from the flags match: ${report.interventionFlags.declared.join(', ')} (before ${JSON.stringify(report.interventionFlags.before)}; after ${JSON.stringify(report.interventionFlags.after)}).`);
   for (const p of report.policies) {
     if (p.cohort) lines.push('', `Occupation ${p.cohort.occupation}: before ${p.cohort.before.played}/${p.cohort.before.attempted} played (${p.cohort.before.excluded} excluded); after ${p.cohort.after.played}/${p.cohort.after.attempted} played (${p.cohort.after.excluded} excluded). Only ${p.cohort.pairedPlayed} matched played cases enter metrics. Availability/roster changes: ${JSON.stringify({ unavailableBefore: p.cohort.unavailableBefore, unavailableAfter: p.cohort.unavailableAfter, rosterChanged: p.cohort.rosterChanged })}.`);
     lines.push('', '## ' + p.policy, '', `${p.cases} paired cases; ${p.confirmationSized ? 'confirmation-sized' : 'screen only'}; ${p.decision}.`, '', '| Metric | Before | After | Paired delta | 95% exploratory interval | Pairs | Status |', '| --- | ---: | ---: | ---: | --- | ---: | --- |');

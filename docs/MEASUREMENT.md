@@ -313,3 +313,30 @@ rerun; passing them does not waive source or observer validity. Source roots
 are immutable during a sweep. Retain all raw panels, both feature censuses,
 configuration/source/contract hashes, exclusions and the tradeoff decision.
 See evidence/2026-10-17/muse-9072-audit.md for branch inventory and continuations.
+
+### Panel contract rulings (Steve 2026-10-24)
+
+Three contract changes, all Steve's call under the rule above. The contract
+digest changes with them, so panels built under an older digest are
+mechanically incomparable — cross-era reading is manual, never a compare run.
+
+- **665 — `table` counts sittings, not invitations.** A run counts when the
+  seat is taken (`row.entered`), whether or not a waiting invitation was ever
+  observed. Prompt-seat substrates skip waiting, and counting invitations
+  printed a fake regression there. Consequence, stated plainly: `table` and
+  `entered` now agree by construction (both count the sitting) until a future
+  ruling separates them.
+- **753 — village deaths and player deaths are tracked separately.**
+  `villageDeaths` counts every death recorded in the run; `playerDeaths`
+  counts only deaths of the player-flagged character. Comparability map, by
+  builder: old per-arm panels computed `playerDeaths` as total deaths — read
+  those columns as `villageDeaths` now. Old shared panels already computed
+  `playerDeaths` from player-flagged deaths only — read those columns as the
+  new `playerDeaths`. The new narrow `playerDeaths` is never comparable to an
+  old per-arm `playerDeaths`.
+- **797 — declared-intervention-flag exemption.** The compare accepts
+  `--intervention-flags <csv>`: a flag declared there is exempted from the
+  flags match and recorded on the report (declared flags plus their
+  before/after values). The exemption is never inferred — an undeclared
+  differing flag still invalidates the comparison, and a malformed
+  declaration invalidates it too.

@@ -45,6 +45,25 @@ function communityLossCoverage(row,engineLost,unknownPopulation=false){
   const lost=terminalLoss||c.sustainedEmpty?1:c.unknownObservations||unknownPopulation?null:0;
   return{status:lost===null?'unknown':'known',source:'driver-history-v1',lost,history:c};
 }
+// PANEL CONTRACT RULINGS (Steve 2026-10-24) — pure metric mappings, unit-tested
+// in scripts/godpath/test-panel-contract-rulings.js:
+// - 665: the `table` metric counts SITTINGS (the seat taken), not invitations.
+//   A run counts when it sat (row.entered), whether or not a waiting
+//   invitation was ever observed — prompt-seat substrates skip waiting, and
+//   counting invitations printed a fake regression there.
+// - 753: deaths are tracked twice. `playerDeaths` = deaths of the
+//   player-flagged character only (row.deaths 'player:' keys, set only by
+//   ledger.js playerDeath for the scholar). `villageDeaths` = every death
+//   recorded in the run (all row.deaths values). The old per-arm
+//   `playerDeaths` series meant total deaths, so it lives on as
+//   `villageDeaths`; the new narrow `playerDeaths` is not comparable to it.
+function deathMetrics(deaths) {
+  const entries = Object.entries(deaths || {});
+  const finite = v => Number.isFinite(v) ? v : 0;
+  return { playerDeaths: entries.filter(([k]) => k.startsWith('player:')).reduce((n, [, v]) => n + finite(v), 0),
+    villageDeaths: entries.reduce((n, [, v]) => n + finite(v), 0) };
+}
+function tableSitting(row) { return row && row.entered ? 1 : 0; }
 function install(G) {
   const census = gear.install(G), days = new Map(), npcDays = new Map(), intake = new Map(), bearerIds = new Set(), npcIds = new Set(), unknownNpcIds = new Set(), npcClassIds = new Set();
   census.startingTier = null; // Not sampled by this observer; starting gear is never earned.
@@ -133,7 +152,7 @@ function install(G) {
   };
   function finish(row) {
     sample(); delete census.sample;
-    const sampled = [...days.values()], food = [...intake.values()], playerDeaths = Object.entries(row.deaths).filter(([k]) => k.startsWith('player:')).reduce((n, [, v]) => n + v, 0);
+    const sampled = [...days.values()], food = [...intake.values()], { playerDeaths, villageDeaths } = deathMetrics(row.deaths);
     const ratio = (n, d) => d > 0 ? n / d : null;
     const distress = (field, threshold) => { const known = sampled.filter(d => Number.isFinite(d[field])); return ratio(known.filter(d => d[field] < threshold).length, known.length); };
     const good = census.grants.filter(g => g.who === 'player' && g.gear && g.tier >= 3);
@@ -159,8 +178,9 @@ function install(G) {
       npcExposure: { schemaVersion: 1, identityRule: 'known-living-resident-not-current-bearer', sampledIdentities: [...npcIds].sort(),
         unknownIdentities: [...unknownNpcIds].sort(), classIdentities: [...npcClassIds].filter(id => npcIds.has(id)).sort(), days: [...npcDays.values()] },
       classes: Object.fromEntries(Object.entries(classes).map(([r, ids]) => [r, [...ids].sort()])), gods: Object.fromEntries(Object.entries(gods).map(([r, ids]) => [r, [...ids].sort()])),
-      metrics: { won: row.won, entered: row.entered, table: row.table, national: row.national,
+      metrics: { won: row.won, entered: row.entered, table: tableSitting(row), national: row.national,
         survival30: survival(30), survival60: survival(60), playerDeaths, playerDeaths100Days: ratio(playerDeaths * 100, row.gameDays),
+        villageDeaths, villageDeaths100Days: ratio(villageDeaths * 100, row.gameDays),
         communityLost: community.lost,
         livingNpcs: sampled.some(d => d.unknownRosterPeople) ? null : score.mean(sampled.map(d => d.livingNpcs)),
         lowFood: distress('kcal', 500), lowWater: distress('hydration', 25), lowHealth: distress('health', 25),
@@ -276,7 +296,12 @@ async function main() {
   if (process.argv.includes('--child')) return child();
   if (process.argv[2] === 'compare') {
     if (!arg('before', null) || !arg('after', null) || !arg('out', null)) throw new Error('compare --before <panel.json.gz> --after <panel.json.gz> --out <prefix>');
-    const report = score.comparePanels(read(arg('before')), read(arg('after'))), out = arg('out');
+    // 797 (Steve 2026-10-24): --intervention-flags <csv> declares flags that
+    // ARE the intervention (e.g. an env-gated lever's own flag). Declared flags
+    // are exempted from the flags match and recorded on the report; the
+    // exemption is never inferred from the panels themselves.
+    const interventionFlags = arg('intervention-flags', null) ? arg('intervention-flags', null).split(',').map(s => s.trim()).filter(Boolean) : [];
+    const report = score.comparePanels(read(arg('before')), read(arg('after')), { interventionFlags }), out = arg('out');
     fs.writeFileSync(out + '.json', JSON.stringify(report, null, 2) + '\n'); fs.writeFileSync(out + '.md', score.markdown(report));
     console.log(report.decision); if (report.decision !== 'no_material_signal') process.exitCode = 2; return;
   }
@@ -287,5 +312,5 @@ function sourceHead(root) {
   if (!fs.existsSync(path.join(root, '.git'))) return null;
   return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 }
-module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles,communityLossCoverage };
+module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles, communityLossCoverage, deathMetrics, tableSitting };
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });
