@@ -604,25 +604,33 @@
         const eq = EQ();
         const defs = this.data.items || [];
         const person = this.getPerson ? this.getPerson(newId) : null;
-        const ids = ((person && person.items) || []).map(it => (it && (it.itemId || it.id)) || it).filter(Boolean);
+        const personItems = ((person && person.items) || []).slice();
         const BODY = ['melee', 'ranged', 'head', 'torso', 'legs', 'hands', 'shoes'];
-        const pool = ids.slice();
+        // Pool carries the source OBJECTS (not bare ids) so the inventory
+        // map below keeps each copy's own units/kcalEach — duplicate ids
+        // (two stone knives) must not collapse onto the first copy.
+        const pool = personItems.slice();
         s.equipped = {};
         for (const sl of BODY) {
           const e = ((person && person.equipped) || {})[sl];
           if (!e || !e.itemId) continue;
-          const i = pool.indexOf(e.itemId);
+          const i = pool.findIndex(it => (it && (it.itemId || it.id)) === e.itemId);
           if (i < 0) continue;
           pool.splice(i, 1);
           s.equipped[sl] = Object.assign({}, e);
         }
-        s.inventory = pool.map(id => {
+        // GAP-W4-NARR #807: the old map collapsed every item object
+        // to its id and rebuilt units:1/kcalEach:0 — a 6-strip dried-meat
+        // stack became one 0-kcal strip on succession. Carry the source
+        // object's own units and kcalEach (def as fallback).
+        s.inventory = pool.map(srcIt => {
+          const id = (srcIt && (srcIt.itemId || srcIt.id)) || srcIt;
           const def = defs.find(d => d.id === id) || {};
           const personal = ((person && person.itemPersonal) || {})[id];
           return {
-            itemId: id, units: 1, kcalEach: 0,
-            kg: def.kg != null ? def.kg : 0.2,
-            name: personal ? personal.name : (def.name || id),
+            itemId: id, units: (srcIt && srcIt.units) || 1, kcalEach: (srcIt && srcIt.kcalEach != null) ? srcIt.kcalEach : (def.kcalEach || 0),
+            kg: (srcIt && srcIt.kg != null) ? srcIt.kg : (def.kg != null ? def.kg : 0.2),
+            name: personal ? personal.name : ((srcIt && srcIt.name) || def.name || id),
             flavor: personal ? personal.flavor : def.flavor, owner: newId,
             bonded: true, bond: 0, bondOffered: [], enhancements: [],
           };

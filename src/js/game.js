@@ -19341,6 +19341,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const mon = {
         id, tx, ty,
+        // GAP-W4-NARR #161: world monsters carry their wave — the raid
+        // path reads m.wave and fell back to 1 for every world spawn.
+        // A bare {id} object carries no wave itself, so consult the data
+        // def as well (string ids already resolve through full).
+        wave: (opts.wave !== undefined) ? opts.wave : (full.wave || (((this.data.monsters || []).find(m => m.id === id) || {}).wave) || 1),
         mx, my,
         size: msize, // MULTI-TILE (Steve 2026-10-12): fighterTiles reads f.size
         hp: (opts.hp !== undefined) ? opts.hp : baseHp,
@@ -43633,7 +43638,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               try { this._contestResolveOthers(contest); }
               catch (e) { console.warn('[arena] co-taken fates', e); }
             }
-            try { this.playerDeath('combat'); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} }
+            // GAP-W4-NARR #107: this is the arena loss path (Blood
+            // pit/gauntlet/siege) — report it as such, not generic
+            // 'combat', so succession sweeps can split arena deaths out.
+            try { this.playerDeath('the arena'); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} }
           }
         }
       }
