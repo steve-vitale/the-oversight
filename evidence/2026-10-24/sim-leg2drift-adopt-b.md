@@ -295,3 +295,17 @@ not chased):
 
 - [open] 2026-10-24 — aggregate/median metric contest on rot ratios — leg-2 bisection: aggregate localizes the OLD rot regime to preserver widening 75fdd9258 (0.881→0.545x), per-seed median refuses it (1.029→0.979x NEW→NEW); 7/12 anchors DISAGREE incl. master + era-NEW ref; next run must pre-register one deciding metric (skew-robust aggregate or 16+ seeds) before re-running — do NOT re-judge this corpus (sim-leg2drift-adopt-b).
 - [open] 2026-10-24 — analyzer pair labels overstate verdicts — analyze-leg2drift-b.js prints aggregate-only EXONERATED/STEP while the pre-reg's median-dispute rule makes preserver + social disputed; print the pre-reg-adjusted verdict alongside (sim-leg2drift-adopt-b).
+
+## Coordinator landing note (run fleshout-loop-b-20261024T1630Z)
+
+Adoption path: the dead 1330Z run's adopt branch was already
+corpus-complete (192/192 valid per-seed files) when its run died;
+the coordinator verified completeness, ran the analyzer, wrote
+this evidence file, and committed the arm. The branch was rebased
+onto master d3217bcc8 (loop A panel-contract rulings landed
+mid-run) with zero conflicts, and the instrument proof was re-run
+on the rebased tree: 19/19 PASS (second green run; first green
+run pre-rebase). No new sims were run for the verdict itself —
+the verdict rests on the dead adopt worker's corpus, judged
+against the dead arm's pre-registration. Merged locally, pending
+ship; the ship loop owns version bumps, pushes, and live checks.
