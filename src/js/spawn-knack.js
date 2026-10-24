@@ -207,21 +207,63 @@
     // they've SEEN — the effect, never the mechanic name. Falls back to null
     // when there's nothing to say (the wrapper only calls us when the real
     // gossip came back empty).
+    //
+    // KNACK VARIANTS (journey-social r47 2026-10-24): each knack was a
+    // singleton string, so two villagers with the same knack got the
+    // identical anecdote in one sitting ("Vasyl/Pavel found a lost knife by
+    // smell" — lane A r26 blank). Data now carries 3 witnessed-effect
+    // variants per knack; selection goes through convoPick (per-teller text
+    // ledger + village-fresh preference — the r32 convoDeeperPick pattern),
+    // so a teller never repeats the same anecdote about two targets.
     knackGossipLine(tellerVid, targetVid) {
       const knackId = this.npcKnack(targetVid);
       if (!knackId) return null;
       if (Math.random() > 0.35) return null; // quiet — not everyone mentions it
-      const first = this.firstRef ? this.firstRef(targetVid) : targetVid;
       const seen = {
-        bloodhound: `${first} found a lost knife by smell last week. By SMELL.`,
-        the_touch: `cuts close faster when ${first} wraps them. Don't ask me how.`,
-        green_whisper: `${first} talks to the garden. The garden listens. I've seen it.`,
-        beast_calm: `that stray dog — the one that bit two people — lets ${first} touch it.`,
-        iron_stomach: `${first} ate something last month that should've killed them. They're fine.`,
-        night_eyes: `${first} sees in the dark. Not well — but better than you. Better than me.`,
+        bloodhound: [
+          '{first} found a lost knife by smell last week. By SMELL.',
+          '{first} tracked a snare thief by scent alone. Came back with the trap and the thief\'s boot.',
+          'Lost my waterskin in the treeline. {first} sniffed it out in an hour. An HOUR.',
+        ],
+        the_touch: [
+          'cuts close faster when {first} wraps them. Don\'t ask me how.',
+          '{first} put hands on a fever yesterday. Fever broke by dusk. I\'m just saying what I saw.',
+          'Seen {first} press a palm to a wound and the bleeding just... slows. Nobody taught that.',
+        ],
+        green_whisper: [
+          '{first} talks to the garden. The garden listens. I\'ve seen it.',
+          'The seedlings {first} touched are twice the size of mine. Same soil. Same water.',
+          '{first} hums at the beans and they climb faster. Laugh if you want. I\'ve watched.',
+        ],
+        beast_calm: [
+          'that stray dog — the one that bit two people — lets {first} touch it.',
+          '{first} walked right up to that snarling stray. It went quiet. QUIET.',
+          'The geese chase everyone but {first}. They part for {first} like water.',
+        ],
+        iron_stomach: [
+          '{first} ate something last month that should\'ve killed them. They\'re fine.',
+          'I watched {first} eat grey meat raw and walk away whistling. Don\'t try it.',
+          '{first} drank the creek water straight. No boiling. Nothing happened. Nothing.',
+        ],
+        night_eyes: [
+          '{first} sees in the dark. Not well — but better than you. Better than me.',
+          '{first} found the path back at full dark. No torch. Didn\'t even slow down.',
+          'Watch {first} after dusk. They move like it\'s noon. It\'s not noon.',
+        ],
       };
-      const line = seen[knackId];
-      if (!line) return null;
+      const pool = seen[knackId];
+      if (!pool || !pool.length) return null;
+      // per-teller ledger: the same teller never serves the same template
+      // twice (about any target); the run ledger prefers village-fresh.
+      let template = null;
+      try {
+        template = (typeof this.convoPick === 'function')
+          ? this.convoPick(tellerVid, 'knackgossip:' + knackId, pool)
+          : pool[Math.floor(Math.random() * pool.length)];
+      } catch (e) { template = pool[Math.floor(Math.random() * pool.length)]; }
+      if (!template) return null;
+      const first = this.firstRef ? this.firstRef(targetVid) : targetVid;
+      const line = String(template).split('{first}').join(first);
       // VILLAGER KNOWLEDGE (parity 2026-10-14): the teller has seen it work —
       // they know what it does (L2), the same way the player hears of it.
       try { if (this.npcLearnAbility) this.npcLearnAbility(tellerVid, knackId, 2, 'gossip:' + targetVid); } catch (e) { console.warn('[spawn-knack] gossip know', e); }

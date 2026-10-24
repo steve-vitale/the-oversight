@@ -851,6 +851,29 @@
         }
       } catch (e) {}
       try {
+        // LEDGER-AWARE CLOSE (journey-social r47 2026-10-24): friendships
+        // form mid-run via the bond ledger (v.bonds, depth >= 2), but this
+        // read only ever named frozen day-1 group mates — 31/34 served
+        // close-reads in r47 named pairs at ledger depth <= 0 (fossils),
+        // while 66 formed friendships were never nameable. Prefer the
+        // deepest live bond; fall back to groups when none exists. The
+        // 'close' lines name no shared events (the ledger stores none), so
+        // no fabricated memories.
+        const bonds = v.bonds || {};
+        let best = null;
+        for (const k of Object.keys(bonds)) {
+          const bnd = bonds[k] || {};
+          if ((bnd.depth || 0) < 2) continue;
+          const parts = String(k).split('|');
+          const oid = parts[0] === vid ? parts[1] : parts[1] === vid ? parts[0] : null;
+          if (!oid || roster.indexOf(oid) === -1) continue;
+          // no bonds with the dead (bondAdd refuses them; the read must too)
+          try { if ((this.getPerson(oid) || {}).dead) continue; } catch (e) {}
+          if (!best || (bnd.depth || 0) > best.depth || ((bnd.depth || 0) === best.depth && (bnd.v || 0) > best.v)) {
+            best = { id: oid, depth: bnd.depth || 0, v: bnd.v || 0 };
+          }
+        }
+        if (best) return { id: best.id, why: 'close' };
         const groups = v.groups || [];
         for (const g of groups) {
           const mates = (g.members || []).filter(id => id !== vid && roster.indexOf(id) !== -1);
