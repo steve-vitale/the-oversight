@@ -1,0 +1,852 @@
+{
+ "instrument": "postunlock-analyze",
+ "runId": "fleshout-20261024T0615Z",
+ "arm": "sim-postunlock-b2",
+ "anchor": "6add5c9a07e2",
+ "wallsegAnchor": "c76a52480b09",
+ "drift": [
+  {
+   "config": "s70201-lead",
+   "landed": {
+    "w4Day": 60,
+    "w5Day": 84,
+    "endDay": 115,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 147,
+    "w5Day": null,
+    "endDay": 176,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  },
+  {
+   "config": "s70201-belong",
+   "landed": {
+    "w4Day": 60,
+    "w5Day": 84,
+    "endDay": 115,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 147,
+    "w5Day": null,
+    "endDay": 176,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  },
+  {
+   "config": "s70202-lead",
+   "landed": {
+    "w4Day": 41,
+    "w5Day": 104,
+    "endDay": 134,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 54,
+    "w5Day": null,
+    "endDay": 74,
+    "endReason": "village-lost",
+    "national": 0,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  },
+  {
+   "config": "s70202-belong",
+   "landed": {
+    "w4Day": 41,
+    "w5Day": 104,
+    "endDay": 134,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 54,
+    "w5Day": null,
+    "endDay": 74,
+    "endReason": "village-lost",
+    "national": 0,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  },
+  {
+   "config": "s70204-lead",
+   "landed": {
+    "w4Day": 75,
+    "w5Day": 104,
+    "endDay": 121,
+    "endReason": "village-lost",
+    "national": 0,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 180,
+    "w5Day": null,
+    "endDay": 180,
+    "endReason": "survived",
+    "national": 1,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  },
+  {
+   "config": "s70204-belong",
+   "landed": {
+    "w4Day": 75,
+    "w5Day": 104,
+    "endDay": 121,
+    "endReason": "village-lost",
+    "national": 0,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 180,
+    "w5Day": null,
+    "endDay": 180,
+    "endReason": "survived",
+    "national": 1,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  },
+  {
+   "config": "s70209-lead",
+   "landed": {
+    "w4Day": 67,
+    "w5Day": 94,
+    "endDay": 159,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 65,
+    "w5Day": null,
+    "endDay": 156,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  },
+  {
+   "config": "s70209-belong",
+   "landed": {
+    "w4Day": 67,
+    "w5Day": 94,
+    "endDay": 159,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 5
+   },
+   "current": {
+    "w4Day": 65,
+    "w5Day": null,
+    "endDay": 156,
+    "endReason": "village-lost",
+    "national": 1,
+    "table": 1,
+    "maxWave": 4
+   },
+   "doorKept": false
+  }
+ ],
+ "doorSummary": {
+  "landed": "8/8",
+  "current": "0/8"
+ },
+ "primary": {
+  "unlocksAttributed": 0,
+  "unlocksTotal": 8,
+  "note": "No wave-5 unlock on the current substrate — killing-window attribution has no population."
+ },
+ "verdict": "DIAG-NO-GO",
+ "verdictReason": "Substrate drift: 0/8 identical configs open wave 5 on the current substrate (8/8 on the wallseg anchor). The pre-registered 8/8 post-unlock death population does not exist on current master; attribution is unmeasurable. See metric review in sim-postunlock-b.md.",
+ "currentSubstrateDeaths": [
+  {
+   "config": "s70201-lead",
+   "maxWave": 4,
+   "w4Day": 147,
+   "attribution": {
+    "lastDeathDay": 176,
+    "endReason": "village-lost",
+    "daysRelUnlock": null,
+    "nWindowDeaths": 2,
+    "deaths": [
+     {
+      "day": 176,
+      "who": "Antonia",
+      "cause": "combat",
+      "kind": "person",
+      "wave": null,
+      "oppMid": "eater",
+      "oppWave": 4,
+      "fightBasis": "live-tbfight",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 48,
+      "armored": true,
+      "armed": true,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "eater"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 1,
+       "armed": 1,
+       "tricks": 20,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     },
+     {
+      "day": 176,
+      "who": "Victor",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "eater",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "eater"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 20,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     }
+    ]
+   },
+   "shortBarsAtEnd": {
+    "day": 176,
+    "bars": {
+     "armored": 0,
+     "armed": 0,
+     "tricks": 20,
+     "veterans": 0,
+     "roster": 1
+    }
+   }
+  },
+  {
+   "config": "s70201-belong",
+   "maxWave": 4,
+   "w4Day": 147,
+   "attribution": {
+    "lastDeathDay": 176,
+    "endReason": "village-lost",
+    "daysRelUnlock": null,
+    "nWindowDeaths": 2,
+    "deaths": [
+     {
+      "day": 176,
+      "who": "Antonia",
+      "cause": "combat",
+      "kind": "person",
+      "wave": null,
+      "oppMid": "eater",
+      "oppWave": 4,
+      "fightBasis": "live-tbfight",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 48,
+      "armored": true,
+      "armed": true,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "eater"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 1,
+       "armed": 1,
+       "tricks": 20,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     },
+     {
+      "day": 176,
+      "who": "Victor",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "eater",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "eater"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 20,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     }
+    ]
+   },
+   "shortBarsAtEnd": {
+    "day": 176,
+    "bars": {
+     "armored": 0,
+     "armed": 0,
+     "tricks": 20,
+     "veterans": 0,
+     "roster": 1
+    }
+   }
+  },
+  {
+   "config": "s70202-lead",
+   "maxWave": 4,
+   "w4Day": 54,
+   "attribution": {
+    "lastDeathDay": 74,
+    "endReason": "village-lost",
+    "daysRelUnlock": null,
+    "nWindowDeaths": 2,
+    "deaths": [
+     {
+      "day": 74,
+      "who": "Stan",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "influencer",
+      "oppWave": 4,
+      "fightBasis": "prior3d:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "influencer"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 0,
+       "rerun": false
+      },
+      "village": {
+       "armored": 1,
+       "armed": 1,
+       "tricks": 19,
+       "veterans": 0,
+       "roster": 2
+      },
+      "overtime": {
+       "active": false,
+       "tier": 0,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     },
+     {
+      "day": 74,
+      "who": "Miguel",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "influencer",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "influencer"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 0,
+       "rerun": false
+      },
+      "village": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 19,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": false,
+       "tier": 0,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     }
+    ]
+   },
+   "shortBarsAtEnd": {
+    "day": 74,
+    "bars": {
+     "armored": 0,
+     "armed": 0,
+     "tricks": 19,
+     "veterans": 0,
+     "roster": 1
+    }
+   }
+  },
+  {
+   "config": "s70202-belong",
+   "maxWave": 4,
+   "w4Day": 54,
+   "attribution": {
+    "lastDeathDay": 74,
+    "endReason": "village-lost",
+    "daysRelUnlock": null,
+    "nWindowDeaths": 2,
+    "deaths": [
+     {
+      "day": 74,
+      "who": "Stan",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "influencer",
+      "oppWave": 4,
+      "fightBasis": "prior3d:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "influencer"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 0,
+       "rerun": false
+      },
+      "village": {
+       "armored": 1,
+       "armed": 1,
+       "tricks": 19,
+       "veterans": 0,
+       "roster": 2
+      },
+      "overtime": {
+       "active": false,
+       "tier": 0,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     },
+     {
+      "day": 74,
+      "who": "Miguel",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "influencer",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "influencer"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 0,
+       "rerun": false
+      },
+      "village": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 19,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": false,
+       "tier": 0,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     }
+    ]
+   },
+   "shortBarsAtEnd": {
+    "day": 74,
+    "bars": {
+     "armored": 0,
+     "armed": 0,
+     "tricks": 19,
+     "veterans": 0,
+     "roster": 1
+    }
+   }
+  },
+  {
+   "config": "s70209-lead",
+   "maxWave": 4,
+   "w4Day": 65,
+   "attribution": {
+    "lastDeathDay": 156,
+    "endReason": "village-lost",
+    "daysRelUnlock": null,
+    "nWindowDeaths": 2,
+    "deaths": [
+     {
+      "day": 156,
+      "who": "Revathi",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "reunion",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "reunion"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 0,
+       "armed": 1,
+       "tricks": 31,
+       "veterans": 0,
+       "roster": 2
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     },
+     {
+      "day": 156,
+      "who": "Leroy",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "reunion",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "reunion"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 31,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     }
+    ]
+   },
+   "shortBarsAtEnd": {
+    "day": 156,
+    "bars": {
+     "armored": 0,
+     "armed": 0,
+     "tricks": 31,
+     "veterans": 0,
+     "roster": 1
+    }
+   }
+  },
+  {
+   "config": "s70209-belong",
+   "maxWave": 4,
+   "w4Day": 65,
+   "attribution": {
+    "lastDeathDay": 156,
+    "endReason": "village-lost",
+    "daysRelUnlock": null,
+    "nWindowDeaths": 2,
+    "deaths": [
+     {
+      "day": 156,
+      "who": "Revathi",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "reunion",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "reunion"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 0,
+       "armed": 1,
+       "tricks": 31,
+       "veterans": 0,
+       "roster": 2
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     },
+     {
+      "day": 156,
+      "who": "Leroy",
+      "cause": "combat",
+      "kind": "villager",
+      "wave": null,
+      "oppMid": "reunion",
+      "oppWave": 4,
+      "fightBasis": "same-day:combat_start",
+      "combatCause": true,
+      "disease": false,
+      "diseasePool": null,
+      "hp": 0,
+      "armored": false,
+      "armed": false,
+      "veteran4plus": false,
+      "fight": {
+       "monsterIds": [
+        "reunion"
+       ],
+       "monsterWaves": [
+        4
+       ],
+       "partySize": 0,
+       "scholarIn": true,
+       "overtimeTier": 6,
+       "rerun": true
+      },
+      "village": {
+       "armored": 0,
+       "armed": 0,
+       "tricks": 31,
+       "veterans": 0,
+       "roster": 1
+      },
+      "overtime": {
+       "active": true,
+       "tier": 6,
+       "tableWaiting": true,
+       "tableDone": false,
+       "seat": "lesser"
+      }
+     }
+    ]
+   },
+   "shortBarsAtEnd": {
+    "day": 156,
+    "bars": {
+     "armored": 0,
+     "armed": 0,
+     "tricks": 31,
+     "veterans": 0,
+     "roster": 1
+    }
+   }
+  }
+ ]
+}
