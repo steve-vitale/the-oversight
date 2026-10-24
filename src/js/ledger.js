@@ -14,6 +14,7 @@
 //   - shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design)
 //   - hoardFood(kcal)         (wired 2026-10-14: takeFromPantryBulk hoard detector, game.js)
 //   - hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers)
+//   - bloodrestraintBlooded(day) (wired 2026-10-24: succession candidacy in playerDeath reads the held-back set)
 //   - exposeFallout(caseId, voterId) (named consequences when a truth goes public)
 //   - flushLedgerBeats()      (fires queued beats whose knowledge gates now pass)
 //   - hearsAboutSelf()        (knowledge gate: has the player heard their own legend?)
@@ -620,6 +621,28 @@
       } catch (e) {}
     },
 
+    // BLOODRESTRAINT (sim-bloodrestraint 2026-10-23, axis scale-onramp):
+    // the vids the village holds back from the office while they recover —
+    // villagers with a wave-4+ kill in the last 14 days (the blooded
+    // window). Reads the same state.waveKillLog the defer5 veterans bar
+    // reads (standing.js waveCombatReadiness), so the restraint and the
+    // bar agree on who is blooded. Deterministic: no RNG, no narration.
+    bloodrestraintBlooded(nowDay) {
+      const out = new Set();
+      try {
+        const now = (nowDay | 0) || 0;
+        const log = (this.state && this.state.waveKillLog) || [];
+        for (const e of log) {
+          if (!e || !e.by || ((e.w | 0) < 4)) continue;
+          const kd = (e.d | 0) || 0;
+          if (kd <= now && kd >= now - 14) out.add(e.by);
+        }
+      } catch (e) {
+        if (typeof console !== 'undefined' && console.warn) console.warn('[bloodrestraint] waveKillLog read failed:', e && e.message);
+      }
+      return out;
+    },
+
     // ---------- THE MANTLE PASSES ----------
     // The village is the protagonist. When the bearer dies, the story does
     // NOT reset: the village mourns, someone steps up, the Codex notes the
@@ -813,10 +836,56 @@
       }
       const trust = (v.trust || {});
       candidates.sort((a, b) => (trust[b] || 0) - (trust[a] || 0));
+      // BLOODRESTRAINT (sim-bloodrestraint 2026-10-23, axis scale-onramp):
+      // the village holds its blooded back from the office while they
+      // recover. The defer5 bar needs 2 LIVING wave-4+ killers; the
+      // vetretention-restage census measured 13/18 blooded vids dying as
+      // mantle-holders within 14d of their first kill — the chair, not the
+      // fight, eats the veterans. Env-gated BLOODRESTRAINT=1, default OFF:
+      // OFF leaves candidacy byte-identical (the trust sort above is the
+      // whole behavior). ON: succession skips vids who scored a wave-4+
+      // kill in the last 14 days. If every candidate is in-window, the
+      // fallback is the normal list — a scholar is ALWAYS picked; the
+      // mantle never deadlocks. Feel change -> the beat below is voiced
+      // only when the restraint changes the pick (the trust-favorite is
+      // held back). People-plausible, knowledge-gated: the village saw
+      // the kill, and it names what it's doing.
+      let brHeldBack = null;
+      try {
+        if ((typeof process !== 'undefined' && process.env && process.env.BLOODRESTRAINT) === '1') {
+          const brTop = candidates[0];
+          const brHeld = this.bloodrestraintBlooded((s.day || 0));
+          if (brHeld.size) {
+            const brOpen = candidates.filter(id => !brHeld.has(id));
+            if (brOpen.length) {
+              if (brHeld.has(brTop)) brHeldBack = brTop;
+              candidates = brOpen;
+            }
+            // else: every candidate is in-window — fall back to the normal
+            // list, always a pick, never a deadlock.
+          }
+        }
+      } catch (e) {
+        if (typeof console !== 'undefined' && console.warn) console.warn('[bloodrestraint] candidacy filter failed, using normal list:', e && e.message);
+      }
       const newId = candidates[0];
       const newChar = (this.data.villagers || []).find(x => x.id === newId) || {};
       const newName = newChar.name || 'someone';
       const newFirst = newName.split(' ')[0];
+      if (brHeldBack) {
+        const brChar = (this.data.villagers || []).find(x => x.id === brHeldBack) || {};
+        const brFirst = (brChar.name || 'the blooded').split(' ')[0];
+        this.say(`The village looks to ${brFirst} — but ${brFirst} is still blood-warm from the kill. "Not the office," somebody says. "Not yet. Let them come home first." ${newFirst} takes the journal instead.`);
+        // Census record (sim-bloodrestraint): the engagement instrument —
+        // the sweep counts these rows. Env-gated by construction (this
+        // block only runs when the restraint fired).
+        try {
+          v.bloodrestraintEvents = v.bloodrestraintEvents || [];
+          v.bloodrestraintEvents.push({ day: s.day || 0, held: brHeldBack, picked: newId });
+        } catch (e) {
+          if (typeof console !== 'undefined' && console.warn) console.warn('[bloodrestraint] event record failed:', e && e.message);
+        }
+      }
       // "you're not her." — the village reacts to the change.
       // DEAD NEVER SPEAK (weirdness hunt 2026-10-10): the old pick read the
       // unpruned trust map, so a corpse could deliver the "you're not her"
