@@ -496,3 +496,37 @@ game as a whole, not to this lever.
 - [open] 2026-10-24 — DIAG C4 window-match weakness — analyzer counts any alien/monster word in an 8-line window as contact for the deceased; Nikolai d60's C4 rests on Hannah's monster trust line; future DIAGs must bind the line to the deceased's id/name or carry an alien-killer context field (sim-belongcost-adopt-b).
 - [open] 2026-10-24 — "new death mode" guardrail wording — a mode absent from the paired PD=0 cell but present in another policy's control arm on the same seed (alien ×2 leadfeast pd0 dg1 s94108 vs 0 belongfeast pd0 dg1) is seed noise, not a new mode; guardrail should require absence from all control arms on that seed (sim-belongcost-adopt-b).
 - [open] 2026-10-24 — alien cause label vs narration divergence — alien deaths narrate as unnamed "that thing"/"Big Big" with no alien contact named; attribution must trust windows over cause labels (sim-belongcost-adopt-b).
+
+## Coordinator landing addendum (run fleshout-loop-b-20261024T1630Z, stale-lock recovery of dead 1330Z run)
+
+Adoption path: the dead 1330Z run's adopt branch (def6e387e) was rebased onto
+master 34101b3cd (loop A landed sim-rerunclock-wallseg mid-run) with zero
+conflicts, then its proof (scripts/test-belongcost-adopt-b.js) was re-run
+twice on the rebased tree: 16/18 both times. Legs A–E and G pass; legs F2
+(determinism vs adopted corpus) and F3 (daySeries length) fail
+reproducibly — fresh pd0-dg0-belongfeast-s94101 gives 11 death rows /
+100d alive vs the adopted file's 8 rows / 87d, diverging from day 29
+(fresh deaths carry "the arena" causes; adopted carries combat/monster).
+
+ROOT CAUSE (verified, not assumed): the F-leg's config file is one of 18
+files COPIED verbatim from the dead 1130Z tree (base 9ad6ef81f); the other
+30 corpus files were freshly swept in the adopt tree (base 78caf60fe).
+Between those bases src/js DID change (gap W4-narr arena cause-split,
+fieldFights, game.js) — so a cross-base live comparison must diverge, and
+the proof's 18/18 claim at commit time cannot have held for this leg
+against the copied file. Between the adopt base and current master there
+are ZERO src/js / index.html / data changes (174 files, all evidence +
+scripts), so the rebase itself did not move the substrate.
+
+VERDICT UNAFFECTED — substrate map of the 48-file corpus (byte-identity
+checked against the dead tree): copied old-base = pd0-dg0-belongfeast ×8,
+pd1-dg0-belongfeast ×8, pd0-dg1-leadfeast s94101–94102; freshly swept
+adopt-base = all dg1 belongfeast ×16 + remaining leadfeast ×14. Every
+belongfeast PD1-vs-PD0 comparison is therefore WITHIN one substrate
+(dg0 pairs both old-base, dg1 pairs both adopt-base); the only mixed
+cell is the leadfeast control's pd0 side, whose excess is 0 in every
+kind. The DIAG-NO-GO (attributed 1/2 = 0.500 < 0.80 bar) stands exactly
+as committed; no re-sweep was run (the adopt runner refuses post-verdict
+re-runs, and a re-measurement would be a new run's decision, not an
+adoption repair). The F-leg's cross-base sensitivity for copied files
+is recorded here as a known proof limitation for future adoption runs.
