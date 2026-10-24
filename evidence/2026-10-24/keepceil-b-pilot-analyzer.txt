@@ -1,0 +1,96 @@
+PASS input sweeps present: 3 cells x 2 policies, seeds as expected, 100d, R13=1/SEATDRIVE=0, PD=0/DG=1/KEEPCEIL explicit
+
+== leadfeast ==
+  kc4000: deposit/gd mean=134.0 median=82.7 kept/gd mean=947.5 keepRaise/gd mean=173.0 rotFresh/100d=103348 rotTot/100d=121056 national=7/8 table=3 win=0 wave4=4 wave5=0 medSurv=100 freshDaysMed=17.6
+    PAIRED seed=9250 kc4000 dep/gd=0 kept/gd=910 keepRaiseEv=4 dec=81 days=100 rotFresh100d=280821 national=1 wave=3
+    PAIRED seed=9251 kc4000 dep/gd=217.1 kept/gd=644 keepRaiseEv=7 dec=49 days=100 rotFresh100d=27901 national=1 wave=4
+    PAIRED seed=9252 kc4000 dep/gd=24.8 kept/gd=1191 keepRaiseEv=14 dec=62 days=81 rotFresh100d=1284 national=0 wave=2
+    PAIRED seed=9253 kc4000 dep/gd=510.7 kept/gd=1004.7 keepRaiseEv=25 dec=41 days=100 rotFresh100d=327173 national=1 wave=2
+    PAIRED seed=9254 kc4000 dep/gd=65 kept/gd=1273.5 keepRaiseEv=25 dec=83 days=100 rotFresh100d=50205 national=1 wave=4
+    PAIRED seed=9255 kc4000 dep/gd=100.3 kept/gd=474.6 keepRaiseEv=2 dec=48 days=88 rotFresh100d=36506 national=1 wave=4
+    PAIRED seed=9256 kc4000 dep/gd=152.4 kept/gd=838.5 keepRaiseEv=17 dec=49 days=100 rotFresh100d=198023 national=1 wave=4
+    PAIRED seed=9257 kc4000 dep/gd=1.9 kept/gd=1243.3 keepRaiseEv=25 dec=74 days=100 rotFresh100d=13634 national=1 wave=3
+  kc6000: deposit/gd mean=140.8 median=22.3 kept/gd mean=1040.1 keepRaise/gd mean=213.4 rotFresh/100d=97612 rotTot/100d=116359 national=7/8 table=3 win=0 wave4=2 wave5=0 medSurv=100 freshDaysMed=17.85
+    PAIRED seed=9250 kc6000 dep/gd=0 kept/gd=910 keepRaiseEv=4 dec=81 days=100 rotFresh100d=280821 national=1 wave=3
+    PAIRED seed=9251 kc6000 dep/gd=0 kept/gd=843.6 keepRaiseEv=6 dec=79 days=100 rotFresh100d=9444 national=1 wave=3
+    PAIRED seed=9252 kc6000 dep/gd=0 kept/gd=1287.1 keepRaiseEv=18 dec=82 days=100 rotFresh100d=13982 national=0 wave=2
+    PAIRED seed=9253 kc6000 dep/gd=871.4 kept/gd=1397.5 keepRaiseEv=30 dec=41 days=100 rotFresh100d=269385 national=1 wave=1
+    PAIRED seed=9254 kc6000 dep/gd=44.6 kept/gd=1294.2 keepRaiseEv=25 dec=83 days=100 rotFresh100d=46008 national=1 wave=4
+    PAIRED seed=9255 kc6000 dep/gd=135.4 kept/gd=627.4 keepRaiseEv=6 dec=43 days=89 rotFresh100d=11035 national=1 wave=4
+    PAIRED seed=9256 kc6000 dep/gd=74.7 kept/gd=715.9 keepRaiseEv=13 dec=45 days=100 rotFresh100d=274980 national=1 wave=3
+    PAIRED seed=9257 kc6000 dep/gd=0 kept/gd=1245.2 keepRaiseEv=25 dec=74 days=100 rotFresh100d=13634 national=1 wave=3
+  kc8000: deposit/gd mean=138.1 median=12.2 kept/gd mean=1169.1 keepRaise/gd mean=297.8 rotFresh/100d=84541 rotTot/100d=102717 national=7/8 table=3 win=0 wave4=2 wave5=0 medSurv=100 freshDaysMed=15.6
+    PAIRED seed=9250 kc8000 dep/gd=0 kept/gd=910 keepRaiseEv=4 dec=81 days=100 rotFresh100d=280821 national=1 wave=3
+    PAIRED seed=9251 kc8000 dep/gd=0 kept/gd=843.6 keepRaiseEv=6 dec=79 days=100 rotFresh100d=9444 national=1 wave=3
+    PAIRED seed=9252 kc8000 dep/gd=0 kept/gd=1287.1 keepRaiseEv=18 dec=82 days=100 rotFresh100d=13982 national=0 wave=2
+    PAIRED seed=9253 kc8000 dep/gd=947.7 kept/gd=1740.6 keepRaiseEv=34 dec=46 days=100 rotFresh100d=244119 national=1 wave=1
+    PAIRED seed=9254 kc8000 dep/gd=24.3 kept/gd=1314.5 keepRaiseEv=25 dec=83 days=100 rotFresh100d=45770 national=1 wave=4
+    PAIRED seed=9255 kc8000 dep/gd=80.6 kept/gd=682.3 keepRaiseEv=6 dec=42 days=84 rotFresh100d=11692 national=1 wave=4
+    PAIRED seed=9256 kc8000 dep/gd=52.2 kept/gd=1329.5 keepRaiseEv=24 dec=56 days=100 rotFresh100d=187707 national=1 wave=3
+    PAIRED seed=9257 kc8000 dep/gd=0 kept/gd=1245.2 keepRaiseEv=25 dec=74 days=100 rotFresh100d=13634 national=1 wave=3
+FAIL PRIMARY leadfeast: deposit/gd strictly decreasing in KEEPCEIL — 134.0 > 140.8 > 138.1
+FAIL ROT leadfeast kc4000: fresh-rot/100d <= control — 103348 <= 97612
+PASS GUARD (a) leadfeast kc4000: paired survival diff median >= -10d — median=0
+PASS GUARD (b) leadfeast kc4000: starvation rate <= control+2/(armedVD/100) — 0.040 <= 0.065 (deaths 3/7564 VD vs control 3/7713 VD)
+FAIL GUARD (c) leadfeast kc4000: no new death modes — new: alien
+PASS GUARD (d) leadfeast kc4000: national >= control-2 — 7 vs control 7
+PASS GUARD (e) leadfeast kc4000: freshDays median >= 0.5x control — 17.6 vs 0.5x17.85=8.9
+PASS ENGAGEMENT leadfeast kc4000: keepRaiseEvents>0 on >=7/8 seeds — 8/8
+PASS ROT leadfeast kc8000: fresh-rot/100d <= control — 84541 <= 97612
+PASS GUARD (a) leadfeast kc8000: paired survival diff median >= -10d — median=0
+PASS GUARD (b) leadfeast kc8000: starvation rate <= control+2/(armedVD/100) — 0.039 <= 0.065 (deaths 3/7676 VD vs control 3/7713 VD)
+PASS GUARD (c) leadfeast kc8000: no new death modes — families ⊆ control
+PASS GUARD (d) leadfeast kc8000: national >= control-2 — 7 vs control 7
+PASS GUARD (e) leadfeast kc8000: freshDays median >= 0.5x control — 15.6 vs 0.5x17.85=8.9
+PASS ENGAGEMENT leadfeast kc8000: keepRaiseEvents>0 on >=7/8 seeds — 8/8
+PASS ENGAGEMENT leadfeast kc6000: keepRaiseEvents>0 on >=7/8 seeds — 8/8
+  DIAG leadfeast: max hc channel-identity gap = 0 kcal
+
+== belongfeast ==
+  kc4000: deposit/gd mean=565.7 median=193.3 kept/gd mean=824.7 keepRaise/gd mean=204.9 rotFresh/100d=119174 rotTot/100d=132199 national=4/8 table=2 win=0 wave4=3 wave5=0 medSurv=100 freshDaysMed=8
+    PAIRED seed=9250 kc4000 dep/gd=0 kept/gd=431.7 keepRaiseEv=0 dec=34 days=64 rotFresh100d=25148 national=0 wave=4
+    PAIRED seed=9251 kc4000 dep/gd=361.9 kept/gd=1035.2 keepRaiseEv=22 dec=58 days=100 rotFresh100d=173413 national=1 wave=3
+    PAIRED seed=9252 kc4000 dep/gd=24.8 kept/gd=1191 keepRaiseEv=14 dec=62 days=81 rotFresh100d=1284 national=0 wave=2
+    PAIRED seed=9253 kc4000 dep/gd=1222.1 kept/gd=1339.6 keepRaiseEv=36 dec=49 days=100 rotFresh100d=282014 national=1 wave=2
+    PAIRED seed=9254 kc4000 dep/gd=1598 kept/gd=887.5 keepRaiseEv=15 dec=52 days=100 rotFresh100d=229963 national=1 wave=3
+    PAIRED seed=9255 kc4000 dep/gd=0 kept/gd=249.5 keepRaiseEv=0 dec=42 days=100 rotFresh100d=92184 national=1 wave=4
+    PAIRED seed=9256 kc4000 dep/gd=1318.9 kept/gd=1086.3 keepRaiseEv=16 dec=70 days=100 rotFresh100d=147678 national=0 wave=4
+    PAIRED seed=9257 kc4000 dep/gd=0 kept/gd=377.1 keepRaiseEv=0 dec=58 days=100 rotFresh100d=42492 national=0 wave=3
+  kc6000: deposit/gd mean=463.1 median=109.2 kept/gd mean=884.3 keepRaise/gd mean=301.5 rotFresh/100d=113772 rotTot/100d=128424 national=3/8 table=2 win=0 wave4=2 wave5=0 medSurv=100 freshDaysMed=9.9
+    PAIRED seed=9250 kc6000 dep/gd=0 kept/gd=431.7 keepRaiseEv=0 dec=34 days=64 rotFresh100d=25148 national=0 wave=4
+    PAIRED seed=9251 kc6000 dep/gd=218.4 kept/gd=1053.9 keepRaiseEv=21 dec=44 days=100 rotFresh100d=107852 national=1 wave=2
+    PAIRED seed=9252 kc6000 dep/gd=0 kept/gd=1204.6 keepRaiseEv=14 dec=82 days=100 rotFresh100d=4830 national=0 wave=2
+    PAIRED seed=9253 kc6000 dep/gd=835.5 kept/gd=1230.8 keepRaiseEv=23 dec=44 days=100 rotFresh100d=315466 national=1 wave=2
+    PAIRED seed=9254 kc6000 dep/gd=1854.6 kept/gd=1196.7 keepRaiseEv=18 dec=43 days=100 rotFresh100d=317306 national=0 wave=2
+    PAIRED seed=9255 kc6000 dep/gd=0 kept/gd=249.5 keepRaiseEv=0 dec=42 days=100 rotFresh100d=92184 national=1 wave=4
+    PAIRED seed=9256 kc6000 dep/gd=796.7 kept/gd=1329.7 keepRaiseEv=20 dec=60 days=100 rotFresh100d=84936 national=0 wave=3
+    PAIRED seed=9257 kc6000 dep/gd=0 kept/gd=377.1 keepRaiseEv=0 dec=58 days=100 rotFresh100d=42492 national=0 wave=3
+  kc8000: deposit/gd mean=336.6 median=31.6 kept/gd mean=1022.8 keepRaise/gd mean=385.3 rotFresh/100d=122758 rotTot/100d=138842 national=3/8 table=2 win=0 wave4=3 wave5=0 medSurv=100 freshDaysMed=5.8
+    PAIRED seed=9250 kc8000 dep/gd=0 kept/gd=431.7 keepRaiseEv=0 dec=34 days=64 rotFresh100d=25148 national=0 wave=4
+    PAIRED seed=9251 kc8000 dep/gd=63.3 kept/gd=1344.1 keepRaiseEv=32 dec=60 days=100 rotFresh100d=101744 national=1 wave=2
+    PAIRED seed=9252 kc8000 dep/gd=0 kept/gd=1204.6 keepRaiseEv=14 dec=82 days=100 rotFresh100d=4830 national=0 wave=2
+    PAIRED seed=9253 kc8000 dep/gd=362.5 kept/gd=1577.2 keepRaiseEv=30 dec=46 days=100 rotFresh100d=162398 national=1 wave=1
+    PAIRED seed=9254 kc8000 dep/gd=1590.2 kept/gd=1248.2 keepRaiseEv=15 dec=39 days=100 rotFresh100d=638231 national=0 wave=3
+    PAIRED seed=9255 kc8000 dep/gd=0 kept/gd=249.5 keepRaiseEv=0 dec=42 days=100 rotFresh100d=92184 national=1 wave=4
+    PAIRED seed=9256 kc8000 dep/gd=676.4 kept/gd=1749.6 keepRaiseEv=12 dec=72 days=98 rotFresh100d=0 national=0 wave=4
+    PAIRED seed=9257 kc8000 dep/gd=0 kept/gd=377.1 keepRaiseEv=0 dec=58 days=100 rotFresh100d=42492 national=0 wave=3
+PASS PRIMARY belongfeast: deposit/gd strictly decreasing in KEEPCEIL — 565.7 > 463.1 > 336.6
+FAIL ROT belongfeast kc4000: fresh-rot/100d <= control — 119174 <= 113772
+PASS GUARD (a) belongfeast kc4000: paired survival diff median >= -10d — median=0
+PASS GUARD (b) belongfeast kc4000: starvation rate <= control+2/(armedVD/100) — 0.055 <= 0.067 (deaths 4/7323 VD vs control 3/7534 VD)
+PASS GUARD (c) belongfeast kc4000: no new death modes — families ⊆ control
+PASS GUARD (d) belongfeast kc4000: national >= control-2 — 4 vs control 3
+PASS GUARD (e) belongfeast kc4000: freshDays median >= 0.5x control — 8 vs 0.5x9.9=5.0
+FAIL ENGAGEMENT belongfeast kc4000: keepRaiseEvents>0 on >=7/8 seeds — 5/8
+FAIL ROT belongfeast kc8000: fresh-rot/100d <= control — 122758 <= 113772
+PASS GUARD (a) belongfeast kc8000: paired survival diff median >= -10d — median=0
+PASS GUARD (b) belongfeast kc8000: starvation rate <= control+2/(armedVD/100) — 0.066 <= 0.066 (deaths 5/7576 VD vs control 3/7534 VD)
+PASS GUARD (c) belongfeast kc8000: no new death modes — families ⊆ control
+PASS GUARD (d) belongfeast kc8000: national >= control-2 — 3 vs control 3
+PASS GUARD (e) belongfeast kc8000: freshDays median >= 0.5x control — 5.8 vs 0.5x9.9=5.0
+FAIL ENGAGEMENT belongfeast kc8000: keepRaiseEvents>0 on >=7/8 seeds — 5/8
+FAIL ENGAGEMENT belongfeast kc6000: keepRaiseEvents>0 on >=7/8 seeds — 5/8
+  DIAG belongfeast: max hc channel-identity gap = 0 kcal
+PASS OFF-IDENTITY leadfeast: kcoff per-seed JSON == kc6000 per-seed JSON (minus medianSurvival) — all 8 seeds identical
+
+VERDICT: NO-GO (8 failed checks)
