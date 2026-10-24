@@ -1825,7 +1825,7 @@
       // (Old saves may hold taughtref threads planted before the gate.)
       if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) return null;
       c._resumedOnce = true;
-      const label = o.label || o.tid;
+      const label = this.convoThreadAbout(vid, o.tid, o.label || o.tid);
       // COHERENCE (Steve 2026-10-07): the resume must not contradict the
       // timeline — a thread left hanging 12 days ago is not "last time".
       const day = (this.state.scholar || {}).day || 1;
@@ -1934,7 +1934,7 @@
     convoRecapLine(vid) {
       const c = this.convoGet(vid);
       const log = (c.threadLog || []).filter(e => e.thread && e.thread !== 'small' && e.thread !== 'nonverbal');
-      const labelOf = (t) => this.convoTopicLabel(vid, t);
+      const labelOf = (t) => this.convoThreadAbout(vid, t);
       let line;
       if (!log.length) {
         line = '"We were just talking. Nothing important."';
