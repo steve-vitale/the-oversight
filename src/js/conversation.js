@@ -3374,6 +3374,29 @@
       } else if (t === 'plans') {
         l = this.convoPick(vid, 'plansdeep', cg.plansFollow || []);
       }
+      // VILLAGE THREAD (journey-landing r42 2026-10-23): same fizzle class
+      // as the request thread — the village topic plants thread='village'
+      // with real follow-up content (the regenerated state line walks to
+      // the idle-variant pool on repeat), but convoThreadBeat had no
+      // branch, so "tell me more" fell to the dry admission. Serve the
+      // next village line via the shared generator.
+      else if (t === 'village') {
+        try {
+          l = this.convoVillageLine(vid);
+        } catch (e) { l = null; }
+      }
+      // PERSONAL THREAD (journey-landing r42 2026-10-23): the personal
+      // topic's talkLines pool was equally unserved. Same shape as the
+      // goal/past/plans branches; voiced here like the topic path (the
+      // tail only slot-fills).
+      else if (t === 'personal') {
+        try {
+          const vp2 = this.vpOf(vid) || {};
+          const talkLines = vp2.talk || [];
+          const pl = talkLines.length ? this.convoPick(vid, 'personal', this.voicePool(vid, talkLines)) : null;
+          l = pl ? this.voiceLine(vid, pl) : null;
+        } catch (e) { l = null; }
+      }
       // WANT THREAD (dialog-ui-fix 2026-10-11, defect 8): "tell me more" on a
       // want-driven conversation must deliver the want's content — not fizzle
       // to "that's all of it." The want def owns the concrete beat (the news,
@@ -3385,6 +3408,44 @@
         try {
           const w = c.want;
           if (w && w.def && typeof w.def.engageBeat === 'function') {
+            l = w.def.engageBeat.call(this, vid);
+          }
+        } catch (e) { l = null; }
+      }
+      // REQUEST THREAD (journey-landing r42 2026-10-23): a talk-request
+      // opener sets thread='request' — a want-driven one-shot, never a
+      // planted thread (convoThreadOpen refuses it by design). The request
+      // opener pre-empts the want opener ("THEY asked to talk — their
+      // reason leads"), so "tell me more" on it must deliver the want's
+      // DEFERRED opener content — not fizzle to the dry admission with the
+      // NPC's reason for coming to talk still unstated (seed 505 Nora:
+      // curious want, "I'm listening" -> "That's... pretty much all of it,
+      // honestly.", want stranded at stage 0, resolution 'unestablished').
+      // Mirrors the plain want-opener flow (convoWantOpener provisional +
+      // convoAcceptWantQuestion + ledger check + onSurfaced); the thread
+      // flips to 'want' so the deferred want now drives. Falls back to the
+      // defect-8 engageBeat contract, then null (honest dry admission).
+      else if (t === 'request') {
+        try {
+          const w = c.want;
+          if (w && w.def && typeof w.def.opener === 'function' &&
+              typeof this.convoWantOpener === 'function') {
+            const opener = this.convoWantOpener(vid, w);
+            if (opener && opener.line) {
+              const wline = this.voiceLine(vid, opener.line);
+              if (!this.convoWouldBlock(vid, wline)) {
+                if (opener.question && typeof this.convoAcceptWantQuestion === 'function') {
+                  this.convoAcceptWantQuestion(vid, opener);
+                }
+                if ((w.stage || 0) < 1) w.stage = 1; // surfaced, deferred
+                try { if (w.def.onSurfaced) w.def.onSurfaced.call(this, vid); }
+                catch (e) { console.warn('[convo] request-thread onSurfaced', e); }
+                l = wline;
+                c.thread = 'want'; // the deferred want now drives the thread
+              }
+            }
+          }
+          if (!l && w && w.def && typeof w.def.engageBeat === 'function') {
             l = w.def.engageBeat.call(this, vid);
           }
         } catch (e) { l = null; }
@@ -3415,6 +3476,102 @@
       // count restarts (wind-down fix, Steve 2026-10-08).
       c.reactDryCount = 0;
       return this.fillTalkLine(l, vp);
+    },
+
+    // convoVillageLine(vid): the current "how's the village" line, generated
+    // from live village state with temperament-specific idle fallback.
+    // Extracted (journey-landing r42 2026-10-23) from convoAskTopic so the
+    // 'village' thread's "tell me more" follow-up serves the next line instead
+    // of fizzling to the dry admission — same root cause as the request
+    // thread (convoThreadBeat served goal/past/plans/want/gossip but not
+    // village). Repeat calls walk the idle-variant pool, never verbatim.
+    convoVillageLine(vid) {
+      const c = this.convoGet(vid);
+      const vp = this.vpOf(vid) || {};
+      const vg = this.state.village;
+      const bits = [];
+      if ((vg.grief || 0) > 0) bits.push("everyone's quiet since the loss");
+      if ((vg.cheer || 0) > 0) bits.push('people are in good spirits');
+      const hungry = (vg.roster || []).filter(id => id !== this.villagerId && (this.npcNeeds(id).hunger || 0) > 70).length;
+      if (hungry > 2) bits.push(hungry + ' people are going hungry');
+      const scared = (vg.roster || []).filter(id => id !== this.villagerId && (this.npcNeeds(id).fear || 0) > 70).length;
+      if (scared > 2) bits.push('people are scared');
+      const heat = Object.values(vg.heat || {}).filter(h => h > 0).length;
+      if (heat) bits.push("there's tension about who's in charge");
+      // TEMPERAMENT-SPECIFIC (Steve 2026-10-05): the same generic pool made
+      // every villager sound identical ("better than yesterday" x3). Now the
+      // idle lines reflect who's talking.
+      const temp = ((vp.personality || {}).temperament || 'steady').toLowerCase();
+      const idleByTemp = {
+        bold: [
+          'holding. Because we hold — that\'s the job.',
+          'fine. We decide it\'s fine, then we make it true.',
+          'better than it looks. I refuse to read it any other way.',
+        ],
+        cautious: [
+          '...okay, I think. Nothing\'s broken that I can see.',
+          'stable, probably. I\'m watching for the crack.',
+          'alright. For now. I keep checking.',
+        ],
+        warm: [
+          'holding together, somehow. People are good, you know?',
+          'tired, but nobody\'s giving up. That counts for a lot.',
+          'we\'re alright. We look out for each other.',
+        ],
+        prickly: [
+          'fine. Nobody died. High bar, cleared.',
+          'whatever "okay" means out here. We\'re it.',
+          'people are people. Still here.',
+        ],
+        steady: [
+          'quiet. People keeping to themselves, mostly.',
+          'stable. No crises today, which is its own kind of good.',
+          'same as yesterday. I\'ll take boring.',
+        ],
+        restless: [
+          'everyone\'s itchy. Too much sitting, not enough doing.',
+          'fine, I guess. I need to move, though. You?',
+          'okay. But okay feels like waiting for something.',
+        ],
+        dry: [
+          'oh, thriving. Absolutely thriving. (We are not.)',
+          'fine, in the technical sense.',
+          'nobody\'s on fire. Today.',
+        ],
+        gentle: [
+          'we\'re... okay. Being gentle with each other, mostly.',
+          'tired, but kind. That\'s something.',
+          'holding each other up. Quietly.',
+        ],
+        intense: [
+          'everyone\'s awake now. Good. Awake is alive.',
+          'focused. Finally. Fear sharpens.',
+          'we\'re here. That\'s not nothing — that\'s everything.',
+        ],
+        withdrawn: [
+          '...fine. I think. Haven\'t really... yeah. Fine.',
+          'quiet. I like quiet. Mostly.',
+          'okay. Don\'t ask me for details.',
+        ],
+      };
+      const idlePool = idleByTemp[temp] || idleByTemp.steady;
+      const line = bits.length ? bits.join('; ') + '.' : this.convoPickCycle(vid, 'villageidle', idlePool);
+      // Repeat-check on the raw line — voiceLine is probabilistic, so the
+      // voiced output can't be the dedupe key.
+      const rawLine = '"Honestly? ' + line + '"';
+      // Village news can repeat when nothing changed — say it differently.
+      c.said.villagelines = c.said.villagelines || [];
+      if (c.said.villagelines.indexOf(rawLine) !== -1) {
+        c.thread = 'village'; c.depth = 1;
+        return this.voiceLine(vid, '"Honestly? ' + this.convoPickCycle(vid, 'villageidle', [
+          'same as before, mostly.',
+          'no big changes. That\'s good news, out here.',
+          'still standing. Ask me tomorrow.',
+        ]) + '"');
+      }
+      c.said.villagelines.push(rawLine);
+      c.thread = 'village'; c.depth = 1;
+      return this.voiceLine(vid, rawLine);
     },
 
     convoAskTopic(vid, topic) {
@@ -3475,90 +3632,7 @@
         return l ? this.voiceLine(vid, this.fillTalkLine(l, vp)) : exh();
       }
       if (topic === 'village') {
-        const vg = this.state.village;
-        const bits = [];
-        if ((vg.grief || 0) > 0) bits.push("everyone's quiet since the loss");
-        if ((vg.cheer || 0) > 0) bits.push('people are in good spirits');
-        const hungry = (vg.roster || []).filter(id => id !== this.villagerId && (this.npcNeeds(id).hunger || 0) > 70).length;
-        if (hungry > 2) bits.push(hungry + ' people are going hungry');
-        const scared = (vg.roster || []).filter(id => id !== this.villagerId && (this.npcNeeds(id).fear || 0) > 70).length;
-        if (scared > 2) bits.push('people are scared');
-        const heat = Object.values(vg.heat || {}).filter(h => h > 0).length;
-        if (heat) bits.push("there's tension about who's in charge");
-        // TEMPERAMENT-SPECIFIC (Steve 2026-10-05): the same generic pool made
-        // every villager sound identical ("better than yesterday" x3). Now the
-        // idle lines reflect who's talking.
-        const temp = ((vp.personality || {}).temperament || 'steady').toLowerCase();
-        const idleByTemp = {
-          bold: [
-            'holding. Because we hold — that\'s the job.',
-            'fine. We decide it\'s fine, then we make it true.',
-            'better than it looks. I refuse to read it any other way.',
-          ],
-          cautious: [
-            '...okay, I think. Nothing\'s broken that I can see.',
-            'stable, probably. I\'m watching for the crack.',
-            'alright. For now. I keep checking.',
-          ],
-          warm: [
-            'holding together, somehow. People are good, you know?',
-            'tired, but nobody\'s giving up. That counts for a lot.',
-            'we\'re alright. We look out for each other.',
-          ],
-          prickly: [
-            'fine. Nobody died. High bar, cleared.',
-            'whatever "okay" means out here. We\'re it.',
-            'people are people. Still here.',
-          ],
-          steady: [
-            'quiet. People keeping to themselves, mostly.',
-            'stable. No crises today, which is its own kind of good.',
-            'same as yesterday. I\'ll take boring.',
-          ],
-          restless: [
-            'everyone\'s itchy. Too much sitting, not enough doing.',
-            'fine, I guess. I need to move, though. You?',
-            'okay. But okay feels like waiting for something.',
-          ],
-          dry: [
-            'oh, thriving. Absolutely thriving. (We are not.)',
-            'fine, in the technical sense.',
-            'nobody\'s on fire. Today.',
-          ],
-          gentle: [
-            'we\'re... okay. Being gentle with each other, mostly.',
-            'tired, but kind. That\'s something.',
-            'holding each other up. Quietly.',
-          ],
-          intense: [
-            'everyone\'s awake now. Good. Awake is alive.',
-            'focused. Finally. Fear sharpens.',
-            'we\'re here. That\'s not nothing — that\'s everything.',
-          ],
-          withdrawn: [
-            '...fine. I think. Haven\'t really... yeah. Fine.',
-            'quiet. I like quiet. Mostly.',
-            'okay. Don\'t ask me for details.',
-          ],
-        };
-        const idlePool = idleByTemp[temp] || idleByTemp.steady;
-        const line = bits.length ? bits.join('; ') + '.' : this.convoPickCycle(vid, 'villageidle', idlePool);
-        // Repeat-check on the raw line — voiceLine is probabilistic, so the
-        // voiced output can't be the dedupe key.
-        const rawLine = '"Honestly? ' + line + '"';
-        // Village news can repeat when nothing changed — say it differently.
-        c.said.villagelines = c.said.villagelines || [];
-        if (c.said.villagelines.indexOf(rawLine) !== -1) {
-          c.thread = 'village'; c.depth = 1;
-          return this.voiceLine(vid, '"Honestly? ' + this.convoPickCycle(vid, 'villageidle', [
-            'same as before, mostly.',
-            'no big changes. That\'s good news, out here.',
-            'still standing. Ask me tomorrow.',
-          ]) + '"');
-        }
-        c.said.villagelines.push(rawLine);
-        c.thread = 'village'; c.depth = 1;
-        return this.voiceLine(vid, rawLine);
+        return this.convoVillageLine(vid);
       }
       if (topic === 'plans') {
         const l = this.convoPick(vid, 'plansdeep', cg.plansFollow || []);

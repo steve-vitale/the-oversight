@@ -325,7 +325,30 @@
         }
       }
     } catch (e) {}
-    const isDry = threadDry || wantMoreDry;
+    // FOLLOWUP-LESS THREADS (journey-landing r42 2026-10-23): the reply-pool
+    // "tell me more" is honest only while the thread has beats to give
+    // (thread_dry_collapse, Steve 2026-10-06). convoThreadBeat serves
+    // goal/past/plans/village/personal/want/gossip/topic2/request;
+    // grief/cheer/recall/secret/table/spooked/small/nonverbal have no
+    // follow-up machinery — offering "I'm listening" on them always
+    // fizzles to the dry admission (seed 505 Lounes, grief thread:
+    // "That's... pretty much all of it, honestly."). Treat them as dry
+    // for the offer gate; the thread winds down instead of looping the
+    // admission. Null/small-talk threads keep current behavior (no
+    // observed fizzle; highest-traffic menu path, not redesigned here).
+    // GRIEF EXCEPTION (r42 fix 2026-10-23): the grief thread's winddown
+    // runs through the comfort handler (convo-dialogue.js sets
+    // choosingSubject after the comfort exchange, routing to the subject
+    // menu where alive:event:mourning lives) — the gate alone stranded it
+    // looping the comfort pool and broke test-mourning-name-r8.
+    let threadNoFollowups = false;
+    try {
+      const t = c.thread;
+      if (t && t !== 'goal' && t !== 'past' && t !== 'plans' && t !== 'village' &&
+          t !== 'personal' && t !== 'want' && t !== 'gossip' && t !== 'request' &&
+          !(this.topic2Has && this.topic2Has(t))) threadNoFollowups = true;
+    } catch (e) {}
+    const isDry = threadDry || wantMoreDry || threadNoFollowups;
 
     // Doubts unlock confrontation — contextual, not menued.
     let hasDoubts = false;

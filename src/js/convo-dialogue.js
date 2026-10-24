@@ -363,6 +363,18 @@
         ]) || '"Thanks. ...Thanks for saying that."';
         const line = this.voiceLine ? this.voiceLine(vid, raw) : raw;
         this.sayLine(vid, line, { tag: 'comfort' });
+        // GRIEF WINDDOWN (journey-landing r42 2026-10-23): the grief thread
+        // is a two-beat exchange (opener + comfort) with no follow-up
+        // machinery. Its only winddown was the dlg:more -> dry-admission
+        // fizzle, which funneled to the subject menu where
+        // alive:event:mourning lives (the r8 proof-test path). The r42 menu
+        // gate removed the fizzle offer but left the thread looping on the
+        // comfort pool, stranding the structured mourning beat behind a
+        // non-obvious manual subject change. Resolve honestly instead: the
+        // comforted grief moment is complete, so the next menu IS the
+        // subject menu — with the mourning beat front and center. No fizzle,
+        // no loop, same destination the old funnel reached.
+        if (c.thread === 'grief') { try { c.choosingSubject = true; } catch (e) {} }
         // Comforting them engages their want (seek_comfort -> comforted) —
         // but only when the comfort is FOR the want: the want's own thread,
         // or a comfort-kind want. Comforting a goal-thread NPC must not
