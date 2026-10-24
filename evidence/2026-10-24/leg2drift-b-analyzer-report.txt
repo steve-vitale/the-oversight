@@ -1,0 +1,38 @@
+leg2drift-b analyzer: per-anchor PD=1/PD=0 rot/100d (leadfeast/dg1 reduced contrast unless policy says otherwise)
+anchor(policy) | pd0 rot/100d | pd1 rot/100d | aggRatio | aggFamily | medRatio | medFamily | agree? | n | medSurv c->a | national c->a | table c->a | wins c->a | maxWave
+07a3ede32d8c0eb38588994ddcd61baca1c92889|leadfeast | 170017 | 164999 | 0.970x | NEW | 0.501x | OLD | DISAGREE | 8/8 | 100->100 | 6->7 | 0->0 | 0->0 | 4/3
+0b151e0e163b21f07606f9cd06dd9d675e6225d2|leadfeast | 170017 | 164999 | 0.970x | NEW | 0.501x | OLD | DISAGREE | 8/8 | 100->100 | 6->7 | 0->0 | 0->0 | 4/3
+141126b07eb55ef6e0993f8edbf3ecfb7b0dd232|leadfeast | 240166 | 130924 | 0.545x | OLD | 0.979x | NEW | DISAGREE | 8/8 | 100->100 | 7->8 | 0->0 | 0->0 | 4/4
+1a4c9b696978ac2a099cd6b40bdfb010c9de0137|leadfeast | 240166 | 130924 | 0.545x | OLD | 0.979x | NEW | DISAGREE | 8/8 | 100->100 | 7->8 | 0->0 | 0->0 | 4/4
+1f24a4ef04a857d33138fd0845cfa83df688285c|leadfeast | 207983 | 183284 | 0.881x | NEW | 1.029x | NEW | agree | 8/8 | 100->100 | 7->8 | 0->0 | 0->0 | 4/3
+2c2336dd9e254406dd3db9e39cac319068c357ff|leadfeast | 207983 | 183284 | 0.881x | NEW | 1.029x | NEW | agree | 8/8 | 100->100 | 7->8 | 0->0 | 0->0 | 4/3
+6722215c6263fc0a4a364b2981cab56883e29523|leadfeast | 151302 | 90584 | 0.599x | OLD | 0.364x | OLD | agree | 8/8 | 100->100 | 5->4 | 0->0 | 0->0 | 4/4
+75fdd92587ad9d83bb12f05da535cdfb49255835|leadfeast | 240166 | 130924 | 0.545x | OLD | 0.979x | NEW | DISAGREE | 8/8 | 100->100 | 7->8 | 0->0 | 0->0 | 4/4
+795156dcd052bd9578009ca3a5ba64a2875d0524|leadfeast | 116215 | 142969 | 1.230x | NEW | 0.403x | OLD | DISAGREE | 8/8 | 100->100 | 5->4 | 0->0 | 0->0 | 4/4
+9ad6ef81fc9550fb6edd1f93567e32ad3d0c572e|leadfeast | 240166 | 130924 | 0.545x | OLD | 0.979x | NEW | DISAGREE | 8/8 | 100->100 | 7->8 | 0->0 | 0->0 | 4/4
+be55cfc2c927d77a0099264019ea299c86488c6c|leadfeast | 240166 | 130924 | 0.545x | OLD | 0.979x | NEW | DISAGREE | 8/8 | 100->100 | 7->8 | 0->0 | 0->0 | 4/4
+fa10e1ca8870096936f1007ad86076ae5dc2fa02|leadfeast | 170017 | 164999 | 0.970x | NEW | 0.501x | OLD | DISAGREE | 8/8 | 100->100 | 6->7 | 0->0 | 0->0 | 4/3
+
+candidate pairs (parent -> commit, same policy leadfeast; leg-2 step direction is NEW->OLD):
+  ledger revert: 07a3ede32d8c0eb38588994ddcd61baca1c92889 0.970x (NEW) -> fa10e1ca8870096936f1007ad86076ae5dc2fa02 0.970x (NEW) : EXONERATED
+  social (invisible friendship): 0b151e0e163b21f07606f9cd06dd9d675e6225d2 0.970x (NEW) -> 2c2336dd9e254406dd3db9e39cac319068c357ff 0.881x (NEW) : EXONERATED
+  preserver widening: 1f24a4ef04a857d33138fd0845cfa83df688285c 0.881x (NEW) -> 75fdd92587ad9d83bb12f05da535cdfb49255835 0.545x (OLD) : STEP NEW->OLD
+  havenGrowth (siege composed; parent IS preserver commit): 75fdd92587ad9d83bb12f05da535cdfb49255835 0.545x (OLD) -> be55cfc2c927d77a0099264019ea299c86488c6c 0.545x (OLD) : EXONERATED
+
+WALL (all anchors, both sides): configs 192, national 162, table 0, wins 0, deaths 1097
+death-cause shares (top 15):
+  combat: 571 (52.1%)
+  monster: 145 (13.2%)
+  ambush: 76 (6.9%)
+  starvation: 73 (6.7%)
+  a wound that wouldn't close: 60 (5.5%)
+  sickness: 60 (5.5%)
+  dehydration: 42 (3.8%)
+  contest: 27 (2.5%)
+  alien: 17 (1.5%)
+  big-eyes: 6 (0.5%)
+  the focus group: 5 (0.5%)
+  sweeps week: 3 (0.3%)
+  choir toad: 2 (0.2%)
+  highbeam deer: 2 (0.2%)
+  the suburb: 2 (0.2%)
