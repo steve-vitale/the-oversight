@@ -345,6 +345,10 @@
         const vid = pick(roster);
         const hist = this.inviteHistory(vid);
         if (hist.pending) continue;
+        // SICK (journey-crisis r46 2026-10-24): the feverish stay home (r42
+        // gates) — a sick villager resting by the fire doesn't get the itch
+        // to walk the trap line. No new invite ideas while sick.
+        try { if ((this.state.village.sick || {})[vid]) continue; } catch (e) {}
         // don't invite if they barely know you (gate relaxes once warm)
         const t = ((this.state.village.trust || {})[vid]) || 10;
         if (t < 12 && R() < (warm ? 0.3 : 0.7)) continue;
@@ -393,6 +397,18 @@
       const bs = this.betrayalState();
       const plot = bs.plots.find(p => p.active && !p.sprung && p.inviter === vid && p.target === this.villagerId);
       if (plot) return this.springAmbush(plot);
+      // SICK (journey-crisis r46 2026-10-24): a pending invite issued before
+      // the fever hit still resolves — but the walk doesn't happen. The
+      // inviter's body vetoes the plan, honestly, at accept time (the r42
+      // gates covered expedition departure and guard duty, not this path —
+      // transcript-verified: a feverish villager walked the trap line).
+      // Plot ambushes above are unaffected (a lure is a lure, fever or not).
+      try {
+        if ((this.state.village.sick || {})[vid]) {
+          const first = (typeof this.whoTag === 'function') ? this.whoTag(vid) : 'They';
+          return { outcome: 'sick', line: `"All right \u2014" ${first} starts to stand, then sinks back down. "Maybe not today. The fire's got me."` };
+        }
+      } catch (e) {}
       return this.resolveInvite(vid, inv.defId);
     },
     declineInvite(vid) {
@@ -613,6 +629,12 @@
     plot.inviter = bi || leader;
     bs.plots.push(plot);
     // the invite goes out through the normal invite channel — indistinguishable
+    // SICK (journey-crisis r46 2026-10-24): plot lures are EXEMPT from the
+    // sick-invite gates by design — an armed scheme doesn't pause for fever,
+    // and the cruelest cut (most-trusted inviter) is load-bearing betrayal
+    // design; the fever is the perfect cover. The accept-time sick guard in
+    // acceptInvite preserves ambushes ("a lure is a lure"). The walk is a
+    // short lure-walk in the ambush fiction, not an expedition departure.
     const hist = this.inviteHistory(plot.inviter);
     hist.pending = { defId: pick(this.INVITE_DEFS()).id, day: this.state.scholar.day, plotId: plot.id };
     plot.tells = this.ambushTells(plot);
