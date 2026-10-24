@@ -26,10 +26,18 @@ let body = '';
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', c => { body += c; });
 process.stdin.on('end', () => {
+  // Chunk by UTF-8 BYTES, not UTF-16 units: slicing a JS string at a
+  // 1024-unit boundary can split an emoji surrogate pair, and each half
+  // then encodes to U+FFFD on write — corrupting the file and failing
+  // the read-back hash deterministically (found 2026-10-24: control
+  // sense bodies with emoji-dense lines failed every writer attempt
+  // with 'hash mismatch' while smaller bodies passed). Byte chunks
+  // never split a code point.
+  const buf = Buffer.from(body, 'utf8');
   const tmp = target + '.tmp-' + process.pid;
   try {
-    for (let off = 0; off < body.length; off += CHUNK) {
-      const piece = body.slice(off, off + CHUNK);
+    for (let off = 0; off < buf.length; off += CHUNK) {
+      const piece = buf.subarray(off, off + CHUNK);
       let ok = false, lastErr = null;
       for (let a = 0; a < CHUNK_RETRIES && !ok; a++) {
         try {
