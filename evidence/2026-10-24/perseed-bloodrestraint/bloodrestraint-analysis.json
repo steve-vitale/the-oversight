@@ -1,0 +1,166 @@
+{
+ "verdict": {
+  "primaryGo": false,
+  "secondaryCoincGo": false,
+  "survGo": true,
+  "starvGo": true,
+  "kindsGo": true,
+  "deadlockGo": true
+ },
+ "primary": {
+  "bar": "armed window-mantle-deaths <= control - 2 (summed over configs)",
+  "control": 1,
+  "armed": 0,
+  "go": false
+ },
+ "secondary": {
+  "coincidenceDays": {
+   "control": 14,
+   "armed": 14,
+   "go": false
+  },
+  "distinctLivingVeterans": {
+   "control": 1,
+   "armed": 1
+  }
+ },
+ "engagement": {
+  "brEventsControl": 0,
+  "brEventsArmed": 2,
+  "armedSeeds": [
+   "belongfeast-s65513"
+  ]
+ },
+ "guardrails": {
+  "survivalPairedDiffMedian": 0,
+  "survivalBar": ">= -10d",
+  "survivalGo": true,
+  "starvation": {
+   "control": 21,
+   "armed": 21,
+   "bar": "armed <= control+2",
+   "go": true
+  },
+  "newDeathKinds": [],
+  "kindsGo": true,
+  "deadlock": {
+   "brRowsAllPicked": true,
+   "armedPairLosses": [],
+   "deadlockGo": true
+  },
+  "pairDiffs": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   21,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "wall": {
+  "control": {
+   "n": 16,
+   "national": 6,
+   "table": 13,
+   "won": 0,
+   "wave4": 13,
+   "wave5": 1,
+   "medianSurvival": 127.5
+  },
+  "armed": {
+   "n": 16,
+   "national": 5,
+   "table": 13,
+   "won": 0,
+   "wave4": 13,
+   "wave5": 1,
+   "medianSurvival": 127.5
+  }
+ },
+ "bloodedDetail": {
+  "control": [
+   {
+    "vid": "mateo_alvarez",
+    "seed": 65513,
+    "firstKill": 117,
+    "status": "post-window-death",
+    "deathDay": 149
+   },
+   {
+    "vid": "elif_demir",
+    "seed": 65513,
+    "firstKill": 134,
+    "status": "window-mantle-death",
+    "deathDay": 148
+   },
+   {
+    "vid": "ruth_goldstein",
+    "seed": 65514,
+    "firstKill": 93,
+    "status": "post-window-death",
+    "deathDay": 167
+   },
+   {
+    "vid": "ruth_goldstein",
+    "seed": 65514,
+    "firstKill": 67,
+    "status": "post-window-death",
+    "deathDay": 87
+   },
+   {
+    "vid": "aroha_ngata",
+    "seed": 65517,
+    "firstKill": 80,
+    "status": "post-window-death",
+    "deathDay": 150
+   }
+  ],
+  "armed": [
+   {
+    "vid": "mateo_alvarez",
+    "seed": 65513,
+    "firstKill": 117,
+    "status": "post-window-death",
+    "deathDay": 148
+   },
+   {
+    "vid": "elif_demir",
+    "seed": 65513,
+    "firstKill": 134,
+    "status": "post-window-death",
+    "deathDay": 161
+   },
+   {
+    "vid": "ruth_goldstein",
+    "seed": 65514,
+    "firstKill": 93,
+    "status": "post-window-death",
+    "deathDay": 167
+   },
+   {
+    "vid": "ruth_goldstein",
+    "seed": 65514,
+    "firstKill": 67,
+    "status": "post-window-death",
+    "deathDay": 87
+   },
+   {
+    "vid": "aroha_ngata",
+    "seed": 65517,
+    "firstKill": 80,
+    "status": "post-window-death",
+    "deathDay": 150
+   }
+  ]
+ }
+}
