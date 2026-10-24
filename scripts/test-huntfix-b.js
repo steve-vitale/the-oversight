@@ -10,7 +10,7 @@
 //   - villagerHuntResolve's +20% (formerOccupation.includes('hunter'))
 //     fired on ZERO persons in either table ('Hunting guide' does not
 //     contain 'hunter') — dead code.
-// The fix (spec §1, data-driven): huntTier 1.4|1.2 on the 14 hunt-relevant
+// The fix (spec §1, data-driven): huntTier 1.4|1.2 on the 13 hunt-relevant (spec said 14, data lists 13 — gap-closure 2026-10-24, findings #644; no 14th invented)
 // characterGen.json occupations, read via occupationId in both detectors.
 //
 // PART A — REAL RED→GREEN fixtures (fast, harness-loaded Game):
