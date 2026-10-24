@@ -1,0 +1,27 @@
+SIM-LEANLINKRESCUE-SWEEP-START anchor=34101b3cde24 arm=armed sense=false seeds=73503,73504,73505,73506,73507,73508 days=180 evid=evidence/2026-10-24/perseed-leanlinkrescue
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=1 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=2 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=3 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=4 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=5 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=6 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=7 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+WRITER-FAIL: EPERM: operation not permitted, write
+WRITE-RETRY s73503-armed.json attempt=8 err=Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-a
+SWEEP FAILED: Error: Command failed: node /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-postunlock2-b-writer.js evidence/2026-10-24/perseed-leanlinkrescue/s73503-armed.json
+WRITER-FAIL: EPERM: operation not permitted, write
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at checkExecSyncError (node:child_process:943:11)
+    at execFileSync (node:child_process:979:15)
+    at writeViaWriter (/home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-leanlink-rescue-sweep.js:75:19)
+    at oneRun (/home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-leanlink-rescue-sweep.js:265:15)
+    at async /home/hatch/workspace/worktrees/sim-leanlink-rescue/scripts/sim-leanlink-rescue-sweep.js:275:15
