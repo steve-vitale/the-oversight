@@ -2742,6 +2742,9 @@
     });
     // party: villagers within 4 squares join (nearest 4 — no zerg).
     // Same shape as a monster fight; villagers fight people too.
+    // Fresh positions first (gap-phase2 W1, lines 592/628 — same stale-map
+    // join blindness as startCombat; see game.js).
+    try { this.ensureVillagerPositions(); } catch (e) {}
     try {
       var vpos = (this.state.village && this.state.village.positions) || {};
       var roster = (this.state.village && this.state.village.roster) || [];

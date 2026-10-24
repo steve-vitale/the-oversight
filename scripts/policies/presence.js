@@ -85,6 +85,13 @@ function presenceBeat(Game, ctx) {
     if (Game.over) return;
     const threat = threatAtHaven(Game);
     if (!threat) return; // no wave-3+ threat: the scholar's routine is their own
+    // ONCE-PER-THREAT COOLDOWN (gap-phase2 W1, line 630): the beat fired
+    // up to 40x/run — daily + upkeep re-fired it every tick while the same
+    // threat lingered at Haven. Standing with the village for a threat is
+    // one act, not one per tick: skip when this exact threat already drew
+    // the beat. A new threat (new monster id / aid-crisis) fires fresh.
+    // Only set on success below, so a failed entry retries next tick.
+    if (ctx._presenceBeatFor === threat) return;
     // Go inside (scholar self-movement; no villager touched).
     // The engine verb is enterBuilding (game.js) — "goInside" was a misname.
     const enterFn = (typeof Game.enterBuilding === 'function') ? Game.enterBuilding.bind(Game)
@@ -93,6 +100,7 @@ function presenceBeat(Game, ctx) {
     let ok = false;
     try { ok = !!enterFn(); } catch (e) { return; }
     if (!ok) return;
+    ctx._presenceBeatFor = threat;
     ctx.presenceGoInside = (ctx.presenceGoInside || 0) + 1;
     ctx.presenceThreat = threat;
     // A step inside triggers the engine's ensureVillagerPositions (game.js),

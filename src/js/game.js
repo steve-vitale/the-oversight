@@ -32490,6 +32490,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         speed: this.playerSpeed(), mx: px, my: py,
         alive: true, fled: false, moveLeft: 0, acted: false, aimed: false,
       });
+      // FRESH POSITIONS AT FIGHT START (gap-phase2 W1, lines 592/628):
+      // the join rule reads grid positions, but positions go stale between
+      // moves (villagers travel node-to-node without re-positioning, and
+      // the Haven door split deletes cross-door positions). A fight that
+      // starts on a stale map joins nobody — the 22/26 door-split fights
+      // with zero villagers positioned. Re-position for THIS node and THIS
+      // side of the door before selecting joiners: same-node, same-side
+      // villagers get a fresh square; cross-door villagers still correctly
+      // stay out (the door is real). No villager is moved across nodes.
+      try { this.ensureVillagerPositions(); } catch (e) {}
       // party: villagers within 4 squares join the fight (nearest 4 — no zerg)
       const vpos = (this.state.village && this.state.village.positions) || {};
       const roster = (this.state.village && this.state.village.roster) || [];
