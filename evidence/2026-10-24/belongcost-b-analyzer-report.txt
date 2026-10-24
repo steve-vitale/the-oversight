@@ -1,0 +1,70 @@
+# sim-belongcost-b DIAG attribution analyzer — 2026-10-24T14:31:03.050Z
+substrate: FEASTSCALE_R13=1, SEATDRIVE=0, 100d death-aware, policies {belongfeast, leadfeast-dg1-control}, cells belongfeast {pd0,pd1}x{dg0,dg1} + leadfeast {pd0,pd1}x{dg1}
+PRE-REG: DIAG-GO iff attributed/excess >= 0.80 AND excess > 0 (belongfeast cost kinds starvation/dehydration/alien); else DIAG-NO-GO.
+PASS C1 freshness: all 48 per-seed files in pilot band 94101-94108, none in taken blocks
+PASS death-row retention: deathRows present on all 48 configs (corpus NOT blind)
+
+== EXCESS (belongfeast, PD1-PD0 on identical seeds, cost kinds only) ==
+belongfeast dg0 starvation: PD0 7 -> PD1 3 | excess 0 | chain-matched PD1 deaths 1 | attributed (capped) 0
+belongfeast dg0 dehydration: PD0 1 -> PD1 1 | excess 0 | chain-matched PD1 deaths 1 | attributed (capped) 0
+belongfeast dg0 alien: PD0 1 -> PD1 0 | excess 0 | chain-matched PD1 deaths 0 | attributed (capped) 0
+belongfeast dg1 starvation: PD0 5 -> PD1 2 | excess 0 | chain-matched PD1 deaths 1 | attributed (capped) 0
+belongfeast dg1 dehydration: PD0 1 -> PD1 0 | excess 0 | chain-matched PD1 deaths 0 | attributed (capped) 0
+belongfeast dg1 alien: PD0 0 -> PD1 2 | excess 2 | chain-matched PD1 deaths 1 | attributed (capped) 1
+TOTAL excess E=2, attributed A=1, rate=0.500
+
+== CONTROL CONTRAST (leadfeast dg1, same buckets) ==
+leadfeast dg1 starvation: PD0 4 -> PD1 2 | excess 0
+leadfeast dg1 dehydration: PD0 0 -> PD1 0 | excess 0
+leadfeast dg1 alien: PD0 2 -> PD1 1 | excess 0
+
+== SCALE WALL per cell (national / table+wins / wave>=4 / wave>=5 / survival median / max, out of 8) ==
+pd0-dg0 belongfeast: 4 / 0 / 4 / 0 / 92d / 100d
+pd1-dg0 belongfeast: 4 / 0 / 2 / 0 / 98.5d / 100d
+pd0-dg1 belongfeast: 4 / 0 / 4 / 0 / 100d / 100d
+pd1-dg1 belongfeast: 5 / 0 / 4 / 0 / 100d / 100d
+pd0-dg1 leadfeast: 5 / 0 / 3 / 0 / 100d / 100d
+pd1-dg1 leadfeast: 6 / 0 / 7 / 0 / 100d / 100d
+
+== DEATH-CAUSE SHARES (pooled, all cells, raw cause strings) ==
+  combat: 53.1% (241)
+  sickness: 12.8% (58)
+  monster: 10.4% (47)
+  a wound that wouldn't close: 5.3% (24)
+  starvation: 5.1% (23)
+  contest: 3.7% (17)
+  ambush: 3.3% (15)
+  alien: 1.3% (6)
+  dehydration: 0.7% (3)
+  choir toad: 0.4% (2)
+  murkcap: 0.4% (2)
+  the expedition: 0.4% (2)
+  sunback: 0.4% (2)
+  big-eyes: 0.2% (1)
+  big loud: 0.2% (1)
+  the static kite: 0.2% (1)
+  grief counselor: 0.2% (1)
+  highbeam deer: 0.2% (1)
+  the mountain lord: 0.2% (1)
+  judge hoot: 0.2% (1)
+  flashbulb moth: 0.2% (1)
+  bulldozer: 0.2% (1)
+  buffering: 0.2% (1)
+  bad belly: 0.2% (1)
+  static: 0.2% (1)
+  total deaths (counts): 454
+
+== PER-DEATH ATTRIBUTION TABLE (belongfeast PD1, cost kinds only) ==
+seed | dg | day | who | cause | chain | freshDays | pantryKcal | pop | hungry | depriDec7d | window quote (first matching line or first line)
+94104 | dg0 | d31 | Pavel | starvation | U | 17 | 23881 | 11 | 0 | 7 | d31 🛡️ Marisol, Luna, Ernesto and Delfina met them at the door — 4 driven off. Marisol, Luna are hurt.
+94107 | dg0 | d13 | Sidney | starvation | U | 12.1 | 21200 | 12 | 0 | 7 | d13 ✦ Lillian has found something — Everybody's Friend. Days of silver_tongue and gossip_network side by side, and now they move as one. (everybodys_friend: villager synergy 
+94107 | dg0 | d29 | Ciro | starvation | C1 | 0 | 0 | 8 | 1 | 0 | d29 ◈ FLASHBACK — Yuqing's Drawing
+Kitchen table, burnt pancakes. You told her the sun needed holding, and she took you literally — drew you carrying it with both hands. She 
+94104 | dg0 | d52 | Norman | dehydration | C3 | 1.5 | 39464 | 9 | 0 | 4 | d52 ⚠ DEHYDRATED: find and treat water today.
+94105 | dg1 | d87 | Theo | starvation | C2 | 3.1 | 14589 | 10 | 0 | 1 | d87 💧 Divya returns with water: +4 clean.
+94108 | dg1 | d19 | Luna | starvation | U | 11.6 | 23490 | 9 | 0 | 7 | d19 Cramps double you over. (-2 HP) (-8 hydration)
+94108 | dg1 | d60 | Nikolai | alien | C4 | 2.1 | 5200 | 6 | 0 | 0 | d59 ⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins.
+94108 | dg1 | d68 | Hannah | alien | U | 3.4 | 7246 | 4 | 0 | 0 | d67 Sleeping rough means the cold ground — heal ~16.
+
+== VERDICT ==
+VERDICT: DIAG-NO-GO — attributed 1/2 = 0.500 (bar >= 0.80, E > 0 required).
