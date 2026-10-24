@@ -22,6 +22,11 @@
 //      forced from the aggregate alone.
 //   4. Wall section: per anchor national/table/wins, maxWave, median
 //      survival, plus corpus-wide death-cause shares (report-only).
+//   5. Pre-reg-adjusted pair verdicts (backlog #909, sim-leg2decide-b):
+//      every pair line prints the aggregate-only label AND the
+//      median-dispute-adjusted verdict (DISPUTED when the median
+//      disagrees on family at either anchor or on the step); the
+//      aggregate label alone must never be read as the verdict.
 //
 // Family bands (pre-registered): OLD <= 0.75, NEW >= 0.85,
 // 0.75-0.85 = AMBIG (no forced verdict).
@@ -147,12 +152,30 @@ const pairs = [
 for (const [parent, commit, label] of pairs) {
   const rp = [...ratios.entries()].find(([k]) => k.split('|')[0].startsWith(parent) && k.endsWith('|leadfeast'));
   const rc = [...ratios.entries()].find(([k]) => k.split('|')[0].startsWith(commit) && k.endsWith('|leadfeast'));
+  const mp = [...medRatios.entries()].find(([k]) => k.split('|')[0].startsWith(parent) && k.endsWith('|leadfeast'));
+  const mc = [...medRatios.entries()].find(([k]) => k.split('|')[0].startsWith(commit) && k.endsWith('|leadfeast'));
   if (!rp || !rc) { lines.push(`  ${label}: MISSING anchor data (${parent} or ${commit})`); continue; }
   const [pk, pv] = rp, [ck, cv] = rc;
   const step = family(pv) !== family(cv) && family(pv) !== 'AMBIG' && family(cv) !== 'AMBIG';
   const ex = family(pv) === family(cv) || Math.abs(cv - pv) < 0.10;
   const verdict = step ? `STEP ${family(pv)}->${family(cv)}` : (ex ? 'EXONERATED' : 'NO STEP SHOWN');
-  lines.push(`  ${label}: ${pk.split('|')[0]} ${pv.toFixed(3)}x (${family(pv)}) -> ${ck.split('|')[0]} ${cv.toFixed(3)}x (${family(cv)}) : ${verdict}`);
+  // PRE-REG-ADJUSTED VERDICT (backlog #909, sim-leg2decide-b): the
+  // aggregate-only label above OVERSTATES verdicts when the median
+  // disputes it (1630Z: preserver STEP + social EXONERATED were both
+  // disputed). The adjusted verdict is DISPUTED whenever the median
+  // disagrees with the aggregate on family at either anchor, or on
+  // the step (present/absent/direction); otherwise it repeats the
+  // aggregate label. Both labels are always printed; neither hides.
+  let adjusted = verdict;
+  if (mp && mc) {
+    const [, mpv] = mp, [, mcv] = mc;
+    const medStep = family(mpv) !== family(mcv) && family(mpv) !== 'AMBIG' && family(mcv) !== 'AMBIG';
+    const medDir = medStep ? `${family(mpv)}->${family(mcv)}` : 'no-step';
+    const aggDir = step ? `${family(pv)}->${family(cv)}` : 'no-step';
+    const disputed = family(pv) !== family(mpv) || family(cv) !== family(mcv) || aggDir !== medDir;
+    if (disputed) adjusted = `DISPUTED (aggregate: ${verdict}; median: ${medStep ? 'STEP ' + medDir : 'no-step'})`;
+  }
+  lines.push(`  ${label}: ${pk.split('|')[0]} ${pv.toFixed(3)}x (${family(pv)}) -> ${ck.split('|')[0]} ${cv.toFixed(3)}x (${family(cv)}) : ${verdict} | pre-reg-adjusted: ${adjusted}`);
 }
 lines.push('');
 lines.push(`WALL (all anchors, both sides): configs ${totalConfigs}, national ${totalNational}, table ${totalTable}, wins ${totalWins}, deaths ${totalDeaths}`);
