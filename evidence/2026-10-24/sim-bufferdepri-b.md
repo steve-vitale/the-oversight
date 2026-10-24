@@ -183,8 +183,9 @@ GUARDRAILS (PD=2 vs PD=0):
   deposit-gate holdback, outside this lever's coverage).
 - (b) national(end) >= control-2: 12>=9, 8>=8, 6>=4, 10>=8 — PASS all.
 - (c) median paired survival-diff >= -10d: 0.0d on all four — PASS all.
-- (d) no new death modes: pd2 kind-families ⊆ pooled pd0 corpus —
-  (analyzer, TBD on re-run).
+- (d) no new death modes: pd2 kind-families {combat,dehydration,sickness,
+  starvation} ⊆ pooled pd0 corpus {alien,combat,dehydration,sickness,
+  starvation} — PASS (analyzer).
 
 Stand-down ledger (PD=2 cells): stand-down diverted 1.0–7.2% of ease
 volume back to hauling (leadfeast dg0 1.0%, dg1 5.2%; belongfeast dg0
