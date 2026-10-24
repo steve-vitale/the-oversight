@@ -75,6 +75,21 @@ function fp(Game) {
   let fail = 0;
   const check = (name, cond) => { console.log((cond ? 'PASS' : 'FAIL') + ' ' + name); if (!cond) fail++; };
 
+  // ---------- KILL-STATE (landed): the DEPOSITRELIEF layer was killed
+  // concept-dead (29cf6ae20) with zero game-code trace. The 40 mechanism
+  // checks below ran 40/40 GREEN in-branch pre-kill (evidence §hook proof);
+  // on master the honest assertions are the zero-trace ones.
+  if (typeof (await (async () => { const { Game } = await fixture(0); return Game._depositReliefOn; })()) !== 'function') {
+    const { Game } = await fixture(0);
+    check('KILL zero game-code trace: _depositReliefOn absent', Game._depositReliefOn === undefined);
+    check('KILL zero game-code trace: _depositReliefBufferClear absent', Game._depositReliefBufferClear === undefined);
+    check('KILL zero game-code trace: _depositReliefDayVoice absent', Game._depositReliefDayVoice === undefined);
+    check('KILL zero game-code trace: _depositGateEngaged still landed', typeof Game._depositGateEngaged === 'function');
+    check('KILL zero game-code trace: _depositGateHoldback still landed', typeof Game._depositGateHoldback === 'function');
+    console.log(fail === 0 ? '\nALL GREEN (kill-state)' : `\n${fail} FAILURES (kill-state)`);
+    process.exit(fail === 0 ? 0 : 1);
+  }
+
   // ---------- RED: DR=0 — relief unreachable, gate eases as landed ----------
   {
     process.env.DEPOSITRELIEF = '0';
