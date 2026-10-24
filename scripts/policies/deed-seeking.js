@@ -81,4 +81,7 @@ const deedSeeking = Object.assign({}, competent, {
   // still applies — deed-seeking isn't suicide.
 });
 
-module.exports = { deedSeeking };
+module.exports = { deedSeeking, deedPatrol, surgeUpkeep };
+// deedPatrol/surgeUpkeep exported (additive, 2026-10-23 r45) so other
+// instruments can compose the deed-hunt layers onto different bases
+// (e.g. capable) without duplicating the patrol logic.
